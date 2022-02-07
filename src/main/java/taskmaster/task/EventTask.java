@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class EventTask extends Task {
     /** Time and Date of Event. **/
-    private LocalDateTime eventDate;
+    private final LocalDateTime EVENT_DATE;
 
     /**
      * Constructor for an EventTask.
@@ -19,7 +19,7 @@ public class EventTask extends Task {
      */
     public EventTask(String taskName, LocalDateTime eventDate) {
         super(taskName);
-        this.eventDate = eventDate;
+        this.EVENT_DATE = eventDate;
 
     }
 
@@ -30,8 +30,9 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
+        //Formats the date and time based on the pattern specified.
         DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
-        return "[E]" + super.toString() + " (at: " + this.eventDate.format(newFormat) + ")";
+        return "[E]" + super.toString() + " (at: " + this.EVENT_DATE.format(newFormat) + ")";
     }
 
     /**
@@ -46,6 +47,6 @@ public class EventTask extends Task {
         String result = "E";
         String mark = this.isCompleted ? "1" : "0";
         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        return result + " | " + mark + " | " + taskName + " | " + eventDate.format(oldFormat);
+        return result + " | " + mark + " | " + taskName + " | " + EVENT_DATE.format(oldFormat);
     }
 }

@@ -47,8 +47,8 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String isCompletedOrNah = this.isCompleted ? "X" : "";
-        return "[" + isCompletedOrNah + "] " + taskName;
+        String markOrUnmark = this.isCompleted ? "X" : "";
+        return "[" + markOrUnmark + "] " + taskName;
     }
 
     /**

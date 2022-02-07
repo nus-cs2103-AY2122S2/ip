@@ -21,8 +21,11 @@ public class Parser {
      * @param input Input the user entered.
      */
     public static Commands parse(String input) {
+        //Split the strings based on the whitespace to make identifying the command easier.
         String[] stringIntoParts = input.split(" ");
+        //The firstWord variable will store the command.
         String firstWord = stringIntoParts[0];
+        //Switch determines which command it is and create a command object accordingly.
         switch (firstWord) {
         case "list":
             return new ListCommands();

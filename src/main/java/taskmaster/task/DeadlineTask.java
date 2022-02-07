@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
     /** Time and Date of Deadline. **/
-    private LocalDateTime deadline;
+    private final LocalDateTime DEADLINE;
 
     /**
      *  Constructor for a DeadlineTask.
@@ -21,7 +21,7 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String taskName, LocalDateTime deadline) {
         super(taskName);
-        this.deadline = deadline;
+        this.DEADLINE = deadline;
     }
 
     /**
@@ -32,8 +32,9 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
+        //Formats the date and time based on the pattern specified.
         DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
-        return "[D]" + super.toString() + " (by: " + this.deadline.format(newFormat) + ")";
+        return "[D]" + super.toString() + " (by: " + this.DEADLINE.format(newFormat) + ")";
     }
 
     /**
@@ -49,7 +50,7 @@ public class DeadlineTask extends Task {
         String result = "D";
         String mark = this.isCompleted ? "1" : "0";
         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        return result + " | " + mark + " | " + taskName + " | " + deadline.format(oldFormat);
+        return result + " | " + mark + " | " + taskName + " | " + DEADLINE.format(oldFormat);
     }
 }
 

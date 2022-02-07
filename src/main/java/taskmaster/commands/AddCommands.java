@@ -37,6 +37,7 @@ public class AddCommands extends Commands {
      */
 
     private String parseCommand(TaskList taskList) throws TaskmasterExceptions {
+        //Split the string using the whitespace delimiter to make identifying each component easier.
         String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
         //Handle the case of having no second input
@@ -61,18 +62,23 @@ public class AddCommands extends Commands {
      */
 
     private String parseDeadlineEventTasks(TaskList taskList) throws TaskmasterExceptions {
+        //Split the string using the whitespace delimiter to make identifying each component easier.
         String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
         String taskName = command.substring(command.indexOf(" "));
 
+        //If task name do not contain "/".
         if (!taskName.contains("/")) {
             throw new TaskmasterExceptions("Deadline and event tasks require /by and "
                     + "/at to specify the deadline or time of occurrence.\n"
                     + " Eg Deadline eat food /by 12pm, event concert /at 8pm");
         }
 
+        //Retrieves the substring before and after the "/" delimiter.
         String temp = taskName.substring(taskName.indexOf("/"));
-        String taskNameWithoutBack = taskName.substring(0, taskName.indexOf("/"));
+        //taskNameOnly contains the task description/name only.
+        String taskNameOnly = taskName.substring(0, taskName.indexOf("/"));
+        //oldDateTime contains the time of occurrence.
         String oldDateTime = temp.substring(temp.indexOf(" ") + 1);
 
         try {
@@ -87,7 +93,7 @@ public class AddCommands extends Commands {
                             + "Eg deadline eat food /by 12pm\n");
                 }
 
-                return addDeadlineTask(taskNameWithoutBack, dateTime, taskList);
+                return addDeadlineTask(taskNameOnly, dateTime, taskList);
 
             } else {
                 //Handle the case of event task having no /at
@@ -95,7 +101,7 @@ public class AddCommands extends Commands {
                     throw new TaskmasterExceptions("Event tasks require /at specify the time of occurrence."
                             + "music concert /at 8pm\n");
                 }
-                return addEventTask(taskNameWithoutBack, dateTime, taskList);
+                return addEventTask(taskNameOnly, dateTime, taskList);
 
             }
         } catch (NumberFormatException nfe) {
@@ -180,8 +186,6 @@ public class AddCommands extends Commands {
      * @return the confirmation of the execution of the task in
      * String format.
      */
-
-
     private String printTask(Task newTask, TaskList taskList) {
         return "Quit ordering me around!\n"
                 + "I've added this task to our list:"

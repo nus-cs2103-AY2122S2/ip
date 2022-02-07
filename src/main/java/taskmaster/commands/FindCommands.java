@@ -12,7 +12,7 @@ import taskmaster.util.TaskList;
  */
 public class FindCommands extends Commands {
     /** The user input. **/
-    private String input;
+    private final String INPUT;
 
     /**
      * Constructor for FindCommands.
@@ -20,7 +20,7 @@ public class FindCommands extends Commands {
      */
     public FindCommands(String input) {
         super(input);
-        this.input = input;
+        this.INPUT = input;
     }
 
     /**
@@ -37,12 +37,13 @@ public class FindCommands extends Commands {
 
     @Override
     public String execute(TaskList tasklist, UserInterface ui, Storage storage) throws TaskmasterExceptions {
-        String[] stringIntoParts = input.split(" ");
+        //Splits string based on the whitespace delimiter to retrieve the keyword to find.
+        String[] stringIntoParts = INPUT.split(" ");
         if (stringIntoParts.length == 1) {
             throw new TaskmasterExceptions("ERROR: find command requires a parameter to specify"
                     + " what keyword to find");
         }
-        String toFind = input.substring(input.indexOf(" ") + 1);
+        String toFind = INPUT.substring(INPUT.indexOf(" ") + 1);
         return tasklist.find(toFind);
     }
 }

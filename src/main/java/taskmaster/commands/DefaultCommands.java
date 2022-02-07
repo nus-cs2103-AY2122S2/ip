@@ -11,7 +11,7 @@ import taskmaster.util.TaskList;
  */
 public class DefaultCommands extends Commands {
     /** The user input. **/
-    private String userInput;
+    private final String USER_INPUT;
 
     /**
      * The constructor for DefaultCommands.
@@ -19,7 +19,7 @@ public class DefaultCommands extends Commands {
      */
     public DefaultCommands(String userInput) {
         super(userInput);
-        this.userInput = userInput;
+        this.USER_INPUT = userInput;
     }
     /**
      * Execute the command.
@@ -35,6 +35,6 @@ public class DefaultCommands extends Commands {
      */
     @Override
     public String execute(TaskList tasklist, UserInterface ui, Storage storage) throws TaskmasterExceptions {
-        return ui.displayInvalidCommand(this.userInput);
+        return ui.displayInvalidCommand(this.USER_INPUT);
     }
 }

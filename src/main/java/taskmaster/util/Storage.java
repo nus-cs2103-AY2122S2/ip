@@ -6,10 +6,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import taskmaster.Taskmaster;
 import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.Task;
-
-
 
 /**
  * This class encapsulates Storage which handles
@@ -19,17 +18,17 @@ import taskmaster.task.Task;
 
 public class Storage {
     /** The file storing the task data. **/
-    private File dataFile;
+    private final File DATA_FILE;
     /** The path in data file is located **/
-    private String filePath;
+    private final String FILE_PATH;
 
     /**
      * Constructor of Storage.
      * @param filePath The path for the data file.
      */
     public Storage(String filePath) {
-        dataFile = new File(filePath);
-        this.filePath = filePath;
+        this.DATA_FILE = new File(filePath);
+        this.FILE_PATH = filePath;
     }
 
     /**
@@ -41,29 +40,20 @@ public class Storage {
     private void createDirectory() {
         String path = Paths.get("").toAbsolutePath() + "/data/";
         File dir = new File(path);
-
-        if (dir.mkdir()) {
-            System.out.println("\nI've created the directory " + dir.getName());
-            System.out.println("\nYou better be grateful, kid");
-
-        } else {
-            System.out.println("\nERROR! What? I'm unable to create directory");
-        }
+        //Create Directory.
+        dir.mkdir();
     }
 
     /**
      * Helper function to create file if the file does not exist
      */
 
-    private void createFile() {
+    private void createFile() throws TaskmasterExceptions {
         try {
-            if (dataFile.createNewFile()) {
-                System.out.println("\nI've created the file " + dataFile.getName());
-                System.out.println("You better be grateful, kid");
-            }
-
+            //Create new file.
+            DATA_FILE.createNewFile();
         } catch (IOException e) {
-            System.out.println("\nWhat's this? An error occurred when I tried to create the file");
+            throw new TaskmasterExceptions("Unable to create new file.");
         }
     }
 
@@ -79,18 +69,18 @@ public class Storage {
     public void loadFile(TaskList taskList) throws TaskmasterExceptions {
         String dir = Paths.get("").toAbsolutePath() + "/data/";
         File directory = new File(dir);
-
-        if (!directory.exists()) {
-            System.out.println("\nHUH? The directory doesn't exist?!");
+        boolean doesDirExist = directory.exists();
+        boolean doesDataFileExist = DATA_FILE.exists();
+        if (doesDirExist) {
             createDirectory();
         }
-        if (!dataFile.exists()) {
-            System.out.println("HUH? The file doesn't exist?!");
-            createFile();
-        }
         try {
-            Scanner reader = new Scanner(dataFile);
+            if (doesDataFileExist) {
+                createFile();
+            }
+            Scanner reader = new Scanner(DATA_FILE);
             ParseFiles parser = new ParseFiles();
+            //Read File line by line using Scanner.
             while (reader.hasNextLine()) {
                 Task currentTask = parser.parseTask(reader.nextLine());
                 taskList.add(currentTask);
@@ -111,9 +101,9 @@ public class Storage {
         try {
             String filename = Paths.get("").toAbsolutePath() + "/data/Duke.txt";
             FileWriter writer = new FileWriter(filename);
+            //Write the task list's tasks to the data file.
             writer.write(taskList.listTasksInTextFormat());
             writer.close();
-
         } catch (IOException e) {
             System.out.println("ERROR: Writing task lists to file");
         }

@@ -31,17 +31,15 @@ public class MarkCommands extends Commands {
      */
 
     private String parseCommand(TaskList taskList) throws TaskmasterExceptions {
+        //Split the string based on the whitespace delimiter.
         String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
         String result = "";
 
-        if (stringIntoParts.length == 1) {
-            throw new TaskmasterExceptions("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
-        } else if (stringIntoParts.length > 2) {
-            //Handle the case of having more than 2 inputs
+        //Handle the case of having only 1 input and having more than 2 inputs
+        if (stringIntoParts.length == 1 || stringIntoParts.length > 2) {
             throw new TaskmasterExceptions("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
         }
-
         //Handle error if the second input is not an integer
         //Gets the index of the task in the task list
         try {

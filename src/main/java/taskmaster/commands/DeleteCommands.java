@@ -30,12 +30,11 @@ public class DeleteCommands extends Commands {
      */
 
     private String parseCommand(TaskList taskList) throws TaskmasterExceptions {
+        //Split the string using the whitespace delimiter to make identifying each component easier.
         String[] stringIntoParts = this.command.split(" ");
 
-        if (stringIntoParts.length == 1) {
-            throw new TaskmasterExceptions("What?! You are to enter only 2 inputs. Eg delete 1\n");
-        } else if (stringIntoParts.length > 2) {
-            //Handle the case of having more than 2 inputs
+        //Handle the case of having only 1 input & the case of having more than 2 inputs.
+        if (stringIntoParts.length == 1 || stringIntoParts.length > 2) {
             throw new TaskmasterExceptions("What?! You are to enter only 2 inputs. Eg delete 3\n");
         }
 

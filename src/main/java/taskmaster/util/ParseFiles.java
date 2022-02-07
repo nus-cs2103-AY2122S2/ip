@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import taskmaster.Taskmaster;
 import taskmaster.exception.TaskmasterExceptions;
 import taskmaster.task.DeadlineTask;
 import taskmaster.task.EventTask;
@@ -27,11 +28,24 @@ public class ParseFiles {
      */
 
     private String[] splitStringIntoParts(String str) {
+        //Split the string based on the delimiter which is "|" to make identifying each component easier.
         String[] splitBasedOnDelimiter = str.split("\\|");
         for (int i = 0; i < splitBasedOnDelimiter.length; i++) {
             splitBasedOnDelimiter[i] = splitBasedOnDelimiter[i].trim();
         }
         return splitBasedOnDelimiter;
+    }
+
+    /**
+     * Returns true if mark number is 1 and false otherwise.
+     *
+     * @param markNumber the mark number based on file read.
+     *
+     * @return true if mark number is 1.
+     */
+
+    private boolean isMark(int markNumber) {
+        return (markNumber == 1);
     }
 
     /**
@@ -48,9 +62,9 @@ public class ParseFiles {
      * @return the newly created event task.
      */
 
-    private Task handlesEventTasks(int isMark, String description, LocalDateTime eventAt) {
+    private Task handlesEventTasks(boolean isMark, String description, LocalDateTime eventAt) {
         EventTask eventTask = new EventTask(description, eventAt);
-        if (isMark == 1) {
+        if (isMark) {
             eventTask.markTask();
         }
         return eventTask;
@@ -70,9 +84,9 @@ public class ParseFiles {
      * @return the newly created deadline task.
      */
 
-    private Task handlesDeadlineTasks(int isMark, String description, LocalDateTime deadlineBy) {
+    private Task handlesDeadlineTasks(boolean isMark, String description, LocalDateTime deadlineBy) {
         DeadlineTask deadlineTask = new DeadlineTask(description, deadlineBy);
-        if (isMark == 1) {
+        if (isMark) {
             deadlineTask.markTask();
         }
         return deadlineTask;
@@ -90,14 +104,13 @@ public class ParseFiles {
      * @return the newly created Todo task.
      */
 
-    private Task handlesTodoTasks(int isMark, String description) {
+    private Task handlesTodoTasks(boolean isMark, String description) {
         TodoTask todoTask = new TodoTask(description);
-        if (isMark == 1) {
+        if (isMark) {
             todoTask.markTask();
         }
         return todoTask;
     }
-
 
 
     /**
@@ -108,10 +121,12 @@ public class ParseFiles {
      *
      * @return Newly created Task.
      */
-    public Task parseTask(String str) {
+    public Task parseTask(String str) throws TaskmasterExceptions {
         //Container file for returning Task
         Task taskToBeReturned = null;
+        //Identify the type of task.
         char taskType = str.charAt(0);
+        //Function to help separate the strings into their respective components.
         String[] stringIntoParts = splitStringIntoParts(str);
         try {
             if (taskType == 'T' || taskType == 'D' || taskType == 'E') {
@@ -141,7 +156,6 @@ public class ParseFiles {
                 if (taskType == 'D' || taskType == 'E') {
                     //Case 4: Assume that the 3rd input is the description of the task
                     // and the user is missing the deadline by/time of event.
-
                     if (stringIntoParts.length != 4) {
                         throw new TaskmasterExceptions("ERROR! Deadline and Event tasks is missing the date "
                                                     + "which the event occur on/deadline");
@@ -150,29 +164,26 @@ public class ParseFiles {
                         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
                         LocalDateTime dateTime = LocalDateTime.parse(timeAndDate, oldFormat);
                         if (taskType == 'D') {
-                            taskToBeReturned = handlesDeadlineTasks(index, stringIntoParts[2], dateTime);
+                            taskToBeReturned = handlesDeadlineTasks(isMark(index), stringIntoParts[2], dateTime);
                         } else {
-                            taskToBeReturned = handlesEventTasks(index, stringIntoParts[2], dateTime);
+                            taskToBeReturned = handlesEventTasks(isMark(index), stringIntoParts[2], dateTime);
                         }
                     }
                 } else {
                     //Todo Task
-                    taskToBeReturned = handlesTodoTasks(index, stringIntoParts[2]);
+                    taskToBeReturned = handlesTodoTasks(isMark(index), stringIntoParts[2]);
                 }
             } else {
                 //If Task type is not T/D/E
                 throw new TaskmasterExceptions("ERROR! I do not recognise that task type!");
             }
 
-        } catch (TaskmasterExceptions e) {
-            System.out.println(e.getMessage());
-
         } catch (NumberFormatException nfe) {
-            System.out.println("What? Second input has to be an integer! Eg T | 1 | read book,"
+            throw new TaskmasterExceptions("What? Second input has to be an integer! Eg T | 1 | read book,"
                                 + " D | 0 | return book | 27/02/1998 1800 \n");
 
         } catch (DateTimeParseException e) {
-            System.out.println("ERROR: Date and time is entered in the wrong format eg 27/02/1998 1800");
+            throw new TaskmasterExceptions("ERROR: Date and time is entered in the wrong format eg 27/02/1998 1800");
         }
 
         return taskToBeReturned;

@@ -124,19 +124,18 @@ public class TaskList {
 
     public String find(String strToFind) {
         StringBuilder sb = new StringBuilder();
-        int count = 1;
+        //If count remains 1 at the end of the loop, no tasks are found with the keyword.
+        int keywordCount = 1;
         sb.append("Finding Tasks with keyword " + strToFind + " \n");
         for (Task task:taskList) {
             if (task.containsKeyword(strToFind)) {
-                sb.append("     " + count + ". " + task + "\n");
-                count++;
+                sb.append("     " + keywordCount + ". " + task + "\n");
+                keywordCount++;
             }
         }
-
-        if (count == 1) {
+        if (keywordCount == 1) {
             sb.append("No task with that keyword\n");
         }
-
         return sb.toString();
     }
 
