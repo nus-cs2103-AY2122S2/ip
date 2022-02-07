@@ -8,7 +8,6 @@ import karen.Ui;
  * To indicate invalid user inputs.
  */
 public class InvalidCommand extends Command {
-    public static final String DEFAULT_MESSAGE = "I don't understand anything - I want to speak with your manager";
     private String invalidMessage;
 
     /**
@@ -24,7 +23,7 @@ public class InvalidCommand extends Command {
      * Constructor function to create InvalidCommand objects with DEFAULT_MESSAGE
      */
     public InvalidCommand() {
-        invalidMessage = DEFAULT_MESSAGE;
+        invalidMessage = InvalidMessage.INVALID_DEFAULT.toString();
     }
 
     /**

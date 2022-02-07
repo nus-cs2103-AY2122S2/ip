@@ -7,11 +7,6 @@ import karen.Ui;
  * To feedback Karen to exit and close the application.
  */
 public class ByeCommand extends Command {
-    @Override
-    public boolean isExit() {
-        return true;
-    }
-
     /**
      * Returns Goodbye message.
      *
