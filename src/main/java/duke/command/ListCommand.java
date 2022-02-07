@@ -19,13 +19,11 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         StringBuilder tasksToList = new StringBuilder();
-        //String tasks = "";
         if (taskList.getTaskList().size() == 0) {
             return ui.noTaskLeft();
         } else {
             for (int i = 0; i < taskList.getTaskList().size(); i++) {
                 Task task = taskList.getTaskList().get(i);
-                //tasks += ui.listed(i + 1, task);
                 tasksToList.append(ui.listed(i + 1, task)).append("\n");
             }
             return tasksToList.toString();

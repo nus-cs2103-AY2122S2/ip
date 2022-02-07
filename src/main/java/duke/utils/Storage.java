@@ -73,6 +73,7 @@ public class Storage {
             Scanner scanner = new Scanner(fileInputStream);
             while (scanner.hasNextLine()) {
                 Task taskToAdd = fileToTask(scanner.nextLine());
+                assert taskToAdd instanceof Deadline || taskToAdd instanceof Event || taskToAdd instanceof Todo;
                 tasksArrayList.add(taskToAdd);
             }
         } catch (FileNotFoundException e) {
@@ -91,6 +92,7 @@ public class Storage {
         FileOutputStream fileOutputStream = new FileOutputStream(taskFile, false);
         for (Task task: tasks.getTaskList()) {
             String taskToWrite = task.toString() + '\n';
+            assert !taskToWrite.isEmpty();
             fileOutputStream.write(taskToWrite.getBytes(StandardCharsets.UTF_8));
         }
     }
@@ -123,7 +125,6 @@ public class Storage {
                     formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy hhmma", Locale.ENGLISH);
                     localDateTime = LocalDateTime.parse(by, formatter); //convert from hhmmaa to HHmm
                 } else {
-                    System.out.println(by);
                     formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy", Locale.ENGLISH);
                     localDate = LocalDate.parse(by, formatter);
                     localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
