@@ -16,7 +16,7 @@ public class Storage {
      * Instantiates a new Storage.
      *
      * @param directoryPath The path of the directory containing the save file.
-     * @param fileName      The name of the save file.
+     * @param fileName The name of the save file.
      */
     public Storage(String directoryPath, String fileName) {
         File dir = new File(directoryPath);
@@ -34,7 +34,7 @@ public class Storage {
     }
 
     /**
-     * Save changes.
+     * Save changes made to tasks in the task list.
      *
      * @param taskList The task list to save in the save file.
      * @throws ChatBotException If I/O issues occur when writing to save file.
@@ -44,9 +44,9 @@ public class Storage {
     }
 
     /**
-     * Load data.
+     * Load tasks from save file.
      *
-     * @param taskList The task list to load the save file data into.
+     * @param taskList The task list to load the tasks in the save file into.
      * @throws ChatBotException If I/O issues occur when reading the save file
      * or if data in the save file is corrupted.
      */

@@ -116,7 +116,7 @@ public class TaskList {
                     set.add(title);
                     break;
                 default:
-                    System.out.println("error");
+                    throw new ChatBotException();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -268,16 +268,15 @@ public class TaskList {
             throw new ChatBotException(
                     "This todo is already in your task list traveller!"
             );
-        } else {
-            ToDo todo = new ToDo(title);
-            list.add(todo);
-            set.add(title);
-            return String.format(
-                    "This todo has been added to your task list!%n             %d. %s",
-                    getNumTasks(),
-                    todo
-            );
         }
+        ToDo todo = new ToDo(title);
+        list.add(todo);
+        set.add(title);
+        return String.format(
+                "This todo has been added to your task list!%n             %d. %s",
+                getNumTasks(),
+                todo
+        );
     }
 
     /**
@@ -323,9 +322,8 @@ public class TaskList {
     public String summary() {
         if (isEmpty()) {
             return "Your task list is empty traveller! Add some tasks first!";
-        } else {
-            return listAsString(list);
         }
+        return listAsString(list);
     }
 
     /**
@@ -338,9 +336,8 @@ public class TaskList {
         List<Task> filtered = filter(t -> date.equals(t.getTimestamp()));
         if (filtered.isEmpty()) {
             return "You have no tasks on this date traveller!";
-        } else {
-            return listAsString(filtered);
         }
+        return listAsString(filtered);
     }
 
     /**
@@ -359,9 +356,8 @@ public class TaskList {
                 || t.getTitle().contains(keyword));
         if (filtered.isEmpty()) {
             return "I couldn't find any tasks matching your keyword traveller!";
-        } else {
-            return listAsString(filtered);
         }
+        return listAsString(filtered);
     }
 
     private List<Task> filter(Predicate<Task> condition) {
@@ -394,14 +390,13 @@ public class TaskList {
         Task task = list.get(index);
         if (task.getDone().equals("X")) {
             return "This task was already completed! No need to mark it again.";
-        } else {
-            task.mark();
-            return String.format(
-                    "This task has been marked as completed in your task list!%n             %d. %s",
-                    index + 1,
-                    task
-            );
         }
+        task.mark();
+        return String.format(
+                "This task has been marked as completed in your task list!%n             %d. %s",
+                index + 1,
+                task
+        );
     }
 
     /**
@@ -414,14 +409,13 @@ public class TaskList {
         Task task = list.get(index);
         if (!task.getDone().equals("X")) {
             return "This task has not been completed yet! No need to unmark it.";
-        } else {
-            task.unmark();
-            return String.format(
-                    "This task has been unmarked in your task list!%n             %d. %s",
-                    index + 1,
-                    task
-            );
         }
+        task.unmark();
+        return String.format(
+                "This task has been unmarked in your task list!%n             %d. %s",
+                index + 1,
+                task
+        );
     }
 }
 

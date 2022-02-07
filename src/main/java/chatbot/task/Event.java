@@ -14,7 +14,7 @@ public class Event extends Task {
      * Instantiates a new Event.
      *
      * @param title The title of the event.
-     * @param timestamp  The timestamp of the event.
+     * @param timestamp The timestamp of the event.
      */
     public Event(String title, Timestamp timestamp) {
         super(title, "E", timestamp);
@@ -25,8 +25,8 @@ public class Event extends Task {
      * Instantiates a new Event.
      *
      * @param title The title of the event.
-     * @param done  The completion status of the event.
-     * @param timestamp  The timestamp of the event.
+     * @param done The completion status of the event.
+     * @param timestamp The timestamp of the event.
      */
     public Event(String title, String done, Timestamp timestamp) {
         super(title, "E", done, timestamp);

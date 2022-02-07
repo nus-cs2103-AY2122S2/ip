@@ -9,6 +9,7 @@ import java.time.format.ResolverStyle;
 
 import chatbot.exception.ChatBotException;
 
+//TODO break this up
 
 /**
  * Represents a date or a combination of date and time.
@@ -85,37 +86,33 @@ public class Timestamp {
      * @return The formatted save string.
      */
     public String toSaveString() {
-        if (date != null) {
-            String dateString = date.format(DATE_FORMATTER);
-            if (time != null) {
-                return String.format("%s %s", dateString, time.format(TIME_FORMATTER));
-            } else {
-                return dateString;
-            }
-        } else {
+        if (date == null) {
             return "";
         }
+        String saveString = date.format(DATE_FORMATTER);
+        if (time != null) {
+            saveString = String.format("%s %s", saveString, time.format(TIME_FORMATTER));
+        }
+        return saveString;
     }
 
     @Override
     public String toString() {
-        if (date != null) {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(
-                    "dd MMMM uuuu"
-            );
-            String dateString = date.format(dateFormatter);
-            if (time != null) {
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(
-                        FormatStyle.SHORT
-                );
-                String timeString = time.format(timeFormatter);
-                return String.format("%s, %s", dateString, timeString);
-            } else {
-                return dateString;
-            }
-        } else {
+        if (date == null) {
             return "";
         }
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(
+                    "dd MMMM uuuu"
+            );
+        String res = date.format(dateFormatter);
+        if (time != null) {
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(
+                    FormatStyle.SHORT
+            );
+            String timeString = time.format(timeFormatter);
+            res = String.format("%s, %s", res, timeString);
+        }
+        return res;
     }
 
     @Override
