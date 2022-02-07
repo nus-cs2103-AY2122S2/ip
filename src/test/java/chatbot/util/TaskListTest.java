@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import chatbot.datetime.Timestamp;
 import chatbot.exception.ChatBotException;
+import chatbot.list.TaskList;
 
 public class TaskListTest {
 
@@ -22,25 +23,30 @@ public class TaskListTest {
     public void testAddTodo() throws ChatBotException {
         TaskList taskList = taskListWithJustOneTodo();
 
-        assertEquals(1, taskList.getNumTasks());
-        assertEquals("sometodo", taskList.getTask(0).getTitle());
-        assertEquals("T", taskList.getTask(0).getType());
-        assertNull(taskList.getTask(0).getTimestamp());
+        assertEquals(1, taskList.getNumItems());
+        assertEquals("sometodo", taskList.get(0).getTitle());
+        assertEquals("T", taskList.get(0).getType());
+        assertNull(taskList.get(0).getTimestamp());
 
         ChatBotException thrown = assertThrows(ChatBotException.class, () ->
             taskList.addToDo(new String[]{"todo"})
         );
         assertEquals("You need to key in the title of your todo traveller!", thrown.getMessage());
+
+        thrown = assertThrows(ChatBotException.class, () ->
+                taskList.addToDo(todoTitleArgs)
+        );
+        assertEquals("This task is already in your task list traveller!", thrown.getMessage());
     }
 
     @Test
     public void testAddDeadline() throws ChatBotException {
         TaskList taskList = taskListWithJustOneDeadline();
 
-        assertEquals(1, taskList.getNumTasks());
-        assertEquals("somedeadline", taskList.getTask(0).getTitle());
-        assertEquals("D", taskList.getTask(0).getType());
-        assertEquals(new Timestamp("24/04/2024"), taskList.getTask(0).getTimestamp());
+        assertEquals(1, taskList.getNumItems());
+        assertEquals("somedeadline", taskList.get(0).getTitle());
+        assertEquals("D", taskList.get(0).getType());
+        assertEquals(new Timestamp("24/04/2024"), taskList.get(0).getTimestamp());
 
         ChatBotException thrown;
         thrown = assertThrows(ChatBotException.class, () ->
@@ -66,10 +72,10 @@ public class TaskListTest {
     public void testAddEvent() throws ChatBotException {
         TaskList taskList = taskListWithJustOneEvent();
 
-        assertEquals(1, taskList.getNumTasks());
-        assertEquals("someevent", taskList.getTask(0).getTitle());
-        assertEquals("E", taskList.getTask(0).getType());
-        assertEquals(new Timestamp("23/03/2023 1800"), taskList.getTask(0).getTimestamp());
+        assertEquals(1, taskList.getNumItems());
+        assertEquals("someevent", taskList.get(0).getTitle());
+        assertEquals("E", taskList.get(0).getType());
+        assertEquals(new Timestamp("23/03/2023 1800"), taskList.get(0).getTimestamp());
 
         ChatBotException thrown;
         thrown = assertThrows(ChatBotException.class, () ->
@@ -85,8 +91,10 @@ public class TaskListTest {
         thrown = assertThrows(ChatBotException.class, () ->
             taskList.add(new String[]{"event", "someevent2"}, new String[]{"by", "23/03/2023 1800"})
         );
-        assertEquals("The correct format for adding an event is event <name of task> /at <date or timestamp of task>",
-                thrown.getMessage());
+        assertEquals(
+                "The correct format for adding an event is event <name of task> /at <date or timestamp of task>",
+                thrown.getMessage()
+        );
     }
 
     @Test
@@ -98,16 +106,16 @@ public class TaskListTest {
     }
 
     @Test
-    public void testGetTasksOnDate() throws ChatBotException {
+    public void testgetTasksOnDate() throws ChatBotException {
         TaskList taskList = fullTaskList();
 
         String deadlineActual = taskList.getTasksOnDate(new Timestamp("24/04/2024"));
         String deadlineExpected =
-                "             1. [D][ ] somedeadline (by: 24 April 2024)".concat(System.lineSeparator());
+                "1. [D][ ] somedeadline (by: 24 April 2024)";
 
         String eventActual = taskList.getTasksOnDate(new Timestamp("23/03/2023"));
         String eventExpected =
-                "             1. [E][ ] someevent (at: 23 March 2023, 6:00 PM)".concat(System.lineSeparator());
+                "1. [E][ ] someevent (at: 23 March 2023, 6:00 PM)";
 
         String falseActual = taskList.getTasksOnDate(new Timestamp("01/01/2021"));
         String falseExpected = "You have no tasks on this date traveller!";
@@ -121,9 +129,9 @@ public class TaskListTest {
     public void testMarkAndUnmark() throws ChatBotException {
         TaskList taskList = taskListWithJustOneTodo();
         taskList.mark(0);
-        assertEquals("X", taskList.getTask(0).getDone());
+        assertEquals("X", taskList.get(0).getDone());
         taskList.unmark(0);
-        assertEquals(" ", taskList.getTask(0).getDone());
+        assertEquals(" ", taskList.get(0).getDone());
     }
 
     @Test
@@ -136,10 +144,10 @@ public class TaskListTest {
         assertTrue(taskList.isEmpty());
 
         storage.loadData(taskList);
-        assertEquals(1, taskList.getNumTasks());
-        assertEquals("sometodo", taskList.getTask(0).getTitle());
-        assertEquals("T", taskList.getTask(0).getType());
-        assertNull(taskList.getTask(0).getTimestamp());
+        assertEquals(1, taskList.getNumItems());
+        assertEquals("sometodo", taskList.get(0).getTitle());
+        assertEquals("T", taskList.get(0).getType());
+        assertNull(taskList.get(0).getTimestamp());
     }
 
 

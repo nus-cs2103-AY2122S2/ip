@@ -2,6 +2,8 @@ package chatbot.util;
 
 import java.util.Random;
 
+import chatbot.list.ChatBotList;
+
 
 /**
  * Represents a user interaction handler.
@@ -15,16 +17,19 @@ public class Ui {
         "Don't be scared. Come in, have a seat!",
     };
     private static final String[] GUIDE = {
-        "list\n     -- View your task list",
-        "get <date*>\n     -- View the tasks that you have on the specified date",
+        "list <tasks or contacts>\n     -- View your task list or contact list",
+        "contact <name of contact> <phone number> <birthday*>\n     -- Add a contact to your contact list",
         "todo <name of task>\n     -- Add a todo to your task list",
         "deadline <name of task> /by <date* or timestamp* of task>\n     -- Add a deadline to your task list",
         "event <name of task> /at <date* or timestamp* of task>\n     -- Add an event to your task list",
+        "delete <task or contact> <index>\n     -- Delete a task or contact by its index",
+        "get <date*>\n     -- View the tasks that you have on the specified date",
+        "find <keyword>\n     -- View the tasks that you match the specified keyword",
         "mark <index of task>\n     -- Mark a task as completed in your task list",
         "unmark <index of task>\n     -- Unmark a task in your task list",
         "clear\n     -- Clear the screen",
         "bye\n     -- Exit the program",
-        "* date format is d/M/YYYY\n     -- eg; 24/4/2022",
+        "* date and birthday format is d/M/YYYY\n     -- eg; 24/4/2022",
         "* timestamp format is d/M/YYYY HHmm\n     -- eg; 23/3/2022 1800",
     };
 
@@ -77,16 +82,19 @@ public class Ui {
     }
 
     /**
-     * Prints the number of tasks in the user's task list.
+     * Prints the number of items in a list
      *
-     * @param numTasks The number tasks in the user's task list.
-     * @return A message indicating the number of tasks in the user's task list.
+     * @param list The desired list.
+     * @return A message indicating the number of items in the list.
      */
-    public String printNumTasks(int numTasks) {
+    public String printNumItems(ChatBotList list) {
+        String type = list.getType();
+        int numItems = list.getNumItems();
         return String.format(
-                        "You now have %d %s!",
-                        numTasks,
-                        numTasks == 1 ? "task" : "tasks"
+                        "You now have %d %s%s!",
+                        numItems,
+                        type,
+                        numItems == 1 ? "" : "s"
                 );
     }
 

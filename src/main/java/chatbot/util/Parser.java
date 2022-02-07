@@ -2,6 +2,8 @@ package chatbot.util;
 
 import chatbot.datetime.Timestamp;
 import chatbot.exception.ChatBotException;
+import chatbot.list.ContactList;
+import chatbot.list.TaskList;
 
 
 /**
@@ -10,20 +12,24 @@ import chatbot.exception.ChatBotException;
 public class Parser {
 
     private final Ui ui;
-    private final Storage storage;
+    private final Storage tasksStorage;
+    private final Storage contactsStorage;
     private final TaskList taskList;
+    private final ContactList contactList;
 
     /**
      * Instantiates a new Parser.
      *
      * @param ui The ChatBot UI handler.
-     * @param storage The handler for loading tasks from and saving tasks to the save file.
+     * @param tasksStorage The handler for loading tasks from and saving tasks to the save file.
      * @param taskList user's The task list.
      */
-    public Parser(Ui ui, Storage storage, TaskList taskList) {
+    public Parser(Ui ui, Storage tasksStorage, Storage contactsStorage, TaskList taskList, ContactList contactList) {
         this.ui = ui;
-        this.storage = storage;
+        this.tasksStorage = tasksStorage;
+        this.contactsStorage = contactsStorage;
         this.taskList = taskList;
+        this.contactList = contactList;
     }
 
     /**
@@ -39,8 +45,11 @@ public class Parser {
         case "bye":
             return ui.bye();
         case "list":
-            response = taskList.summary();
-            return response;
+            try {
+                return list(input, taskList, contactList);
+            } catch (ChatBotException e) {
+                return ui.error(e.getMessage());
+            }
         case "get":
             try {
                 if (input.length > 2) {
@@ -82,39 +91,52 @@ public class Parser {
             }
         case "todo":
             try {
-                response = taskList.addToDo(input);
-                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
-                storage.saveChanges(taskList);
+                response = createTaskResponse(taskList.addToDo(input));
+                tasksStorage.saveChanges(taskList);
+                return response;
+            } catch (ChatBotException e) {
+                return ui.error(e.getMessage());
+            }
+        case "contact":
+            try {
+                response = createContactResponse(contactList.add(input));
+                contactsStorage.saveChanges(contactList);
                 return response;
             } catch (ChatBotException e) {
                 return ui.error(e.getMessage());
             }
         case "delete":
             try {
-                if (taskList.isEmpty()) {
-                    return "Your task list is empty traveller! "
-                            + "Add some tasks first before attempting to delete!";
-                } else if (input.length > 2) {
+                String type = input[1];
+                if (input.length > 3) {
                     throw new ChatBotException(
-                            "That's too many inputs traveller! "
-                                    + "You only need to key in the index of the task you wish to delete!"
+                            "That's too many inputs traveller! You only need to key in the index of the"
+                                    + String.format("%s you wish to delete!", type)
                     );
                 }
-                response = taskList.delete(
-                        Integer.parseInt(input[1]) - 1
-                );
-                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
-                storage.saveChanges(taskList);
+                if (type.equals("task")) {
+                    response = createTaskResponse(
+                            taskList.delete(Integer.parseInt(input[2]) - 1)
+                    );
+                    tasksStorage.saveChanges(taskList);
+                } else if (type.equals("contact")) {
+                    response = createContactResponse(
+                            contactList.delete(Integer.parseInt(input[2]) - 1)
+                    );
+                    contactsStorage.saveChanges(contactList);
+                } else {
+                    throw new ChatBotException("You can only delete a task or contact traveller!");
+                }
                 return response;
             } catch (ChatBotException e) {
                 return ui.error(e.getMessage());
             } catch (NumberFormatException e) {
                 return ui.error(
-                        "You should delete tasks using their index rather than title traveller!"
+                        "You should delete items using their index traveller!"
                 );
             } catch (ArrayIndexOutOfBoundsException e) {
                 return ui.error(
-                        "You need to key in the index of the task you wish to delete traveller!"
+                        "You need to specify which list to delete from and the index of the item traveller!"
                 );
             }
         case "guide":
@@ -153,12 +175,13 @@ public class Parser {
                     }
                     throw new ChatBotException();
                 }
-                response = taskList.add(
-                    temp[0].split(" "),
-                    temp[1].split(" ")
+                response = createTaskResponse(
+                        taskList.add(
+                                temp[0].split(" "),
+                                temp[1].split(" ")
+                        )
                 );
-                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
-                storage.saveChanges(taskList);
+                tasksStorage.saveChanges(taskList);
                 return response;
             } catch (ChatBotException e) {
                 return ui.error(e.getMessage());
@@ -166,18 +189,24 @@ public class Parser {
         }
     }
 
-    /**
-     * Either marks or unmarks a task in the task list.
-     * Both commands involve similar code, which is why they have been combined into this function.
-     *
-     * @param index The index of the task in the task list.
-     * @param mark If true, mark the task. Else, unmark the task.
-     * @return The response to be outputted via the UI.
-     * @throws ChatBotException If the task index is invalid.
-     */
-    public String markOrUnmark(int index, boolean mark)
+    private String list(String[] input, TaskList taskList, ContactList contactList) throws ChatBotException {
+        if (input.length == 1) {
+            throw new ChatBotException("You need to choose whether you want to list tasks or contacts traveller!");
+        }
+
+        switch(input[1]) {
+        case "tasks":
+            return taskList.summary();
+        case "contacts":
+            return contactList.summary();
+        default:
+            throw new ChatBotException();
+        }
+    }
+
+    private String markOrUnmark(int index, boolean mark)
             throws ChatBotException {
-        if (!taskList.isValidIndex(index)) {
+        if (taskList.isInvalidIndex(index)) {
             throw new ChatBotException(
                     "This is an invalid task index traveller! You can type list to check all task indexes!"
             );
@@ -188,7 +217,15 @@ public class Parser {
         } else {
             response = taskList.unmark(index);
         }
-        storage.saveChanges(taskList);
+        tasksStorage.saveChanges(taskList);
         return response;
+    }
+
+    private String createTaskResponse(String message) {
+        return message.concat("\n").concat(ui.printNumItems(taskList));
+    }
+
+    private String createContactResponse(String message) {
+        return message.concat("\n").concat(ui.printNumItems(contactList));
     }
 }

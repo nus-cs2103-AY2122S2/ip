@@ -3,6 +3,7 @@ package chatbot.util;
 import java.io.File;
 
 import chatbot.exception.ChatBotException;
+import chatbot.list.ChatBotList;
 
 
 /**
@@ -39,7 +40,7 @@ public class Storage {
      * @param taskList The task list to save in the save file.
      * @throws ChatBotException If I/O issues occur when writing to save file.
      */
-    public void saveChanges(TaskList taskList) throws ChatBotException {
+    public void saveChanges(ChatBotList taskList) throws ChatBotException {
         taskList.save(file);
     }
 
@@ -50,7 +51,7 @@ public class Storage {
      * @throws ChatBotException If I/O issues occur when reading the save file
      * or if data in the save file is corrupted.
      */
-    public void loadData(TaskList taskList) throws ChatBotException {
+    public void loadData(ChatBotList taskList) throws ChatBotException {
         taskList.load(file);
     }
 }

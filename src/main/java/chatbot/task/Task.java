@@ -4,7 +4,7 @@ import chatbot.datetime.Timestamp;
 
 
 /**
- * Represents the type Task.
+ * Represents a task that the user wants or needs to complete.
  */
 public class Task {
 
@@ -101,12 +101,11 @@ public class Task {
     public boolean equals(Object other) {
         if (other instanceof Task) {
             Task t = (Task) other;
-            return (
-                t.getTitle().equals(title)
-                        && t.getType().equals(type)
-                        && t.getTimestamp().equals(timestamp)
-                        && t.getDone().equals(done)
-                );
+            boolean res = t.getTitle().equals(title) && t.getType().equals(type) && t.getDone().equals(done);
+            if (t.getTimestamp() != null) {
+                res = res && t.getTimestamp().equals(timestamp);
+            }
+            return res;
         } else {
             return false;
         }
