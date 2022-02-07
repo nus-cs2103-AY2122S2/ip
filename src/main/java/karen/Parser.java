@@ -72,22 +72,30 @@ public class Parser {
     private Command prepareAdd(String keyWord, String fullInput) {
         final Matcher matcher;
         try {
-            if (keyWord.equals("todo")) {
+            Command cmd;
+
+            switch (keyWord) {
+            case "todo":
                 matcher = TODO_FORMAT.matcher(fullInput);
                 matcher.find();
-                return new AddCommand(new ToDo(matcher.group("description")));
-            } else if (keyWord.equals("deadline")) {
+                cmd = new AddCommand(new ToDo(matcher.group("description")));
+                break;
+            case "deadline":
                 matcher = DEADLINE_FORMAT.matcher(fullInput);
                 matcher.find();
-                return new AddCommand(new Deadline(matcher.group("description"),
+                cmd = new AddCommand(new Deadline(matcher.group("description"),
                         validateDateFormat(matcher.group("time"))));
-            } else if (keyWord.equals("event")) {
+                break;
+            case "event":
                 matcher = EVENT_FORMAT.matcher(fullInput);
                 matcher.find();
-                return new AddCommand(new Event(matcher.group("description"),
+                cmd =  new AddCommand(new Event(matcher.group("description"),
                         validateDateFormat(matcher.group("time"))));
+                break;
+            default:
+                cmd = new InvalidCommand();
             }
-            return new InvalidCommand("How did you invoke this.");
+            return cmd;
         } catch (IllegalStateException err) {
             // indicates that the format isn't valid - can't parse it
             return prepareInvalid(keyWord, fullInput);
