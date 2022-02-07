@@ -17,6 +17,7 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.ShowAllTasksOnSameDateCommand;
 import duke.command.UnmarkCommand;
+import duke.command.ViewSchedulesCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -47,6 +48,8 @@ public class Parser {
         boolean isShowAllOnSameDate = input.toLowerCase()
                 .matches("^show all( )?(\\d{4} ?.?/?-?\\d{1,2} ?.?/?-?\\d{1,2})?( )?(\\d{4})?");
         boolean isFindCommand = input.toLowerCase().matches("^find( )? .*");
+        boolean isViewSchedules = input.toLowerCase()
+                .matches("^view schedules( )?(\\d{4} ?.?/?-?\\d{1,2} ?.?/?-?\\d{1,2})?");
         boolean isEmptyDeadline = input.toLowerCase().replaceAll("[ |\\t]", "").equals("deadline");
         boolean isEmptyEvent = input.toLowerCase().replaceAll("[ |\\t]", "").equals("event");
         boolean isEmptyTodo = input.toLowerCase().replaceAll("[ |\\t]", "").equals("todo");
@@ -93,6 +96,16 @@ public class Parser {
             }
         }
 
+        if (isViewSchedules) {
+            boolean isWithoutDateTime = input.replaceAll(" ", "").matches("viewschedules");
+            if (isWithoutDateTime) {
+                /* user did not specify time */
+                throw new CortanaException("Please specify the date time you are looking for!");
+            }
+            String dateTimeString = input.replaceAll("view schedules ", "");
+            return new ViewSchedulesCommand(parseLocalDateTime(dateTimeString).toLocalDate(), dateTimeString);
+        }
+
         if (isEmptyDeadline || isEmptyEvent || isEmptyTodo) {
             /* user does not specify task description*/
             String aOrAn = isEmptyEvent ? "an " : "a ";
@@ -108,7 +121,7 @@ public class Parser {
 
         if (isDeadlineWithDescription && hasBy) {
             /* valid deadline command */
-            String[] actualTask = input.replaceAll("deadline ", "")
+            String[] actualTask = input.replaceAll("^deadline ", "")
                     .split("/by ");
             description = actualTask[0];
             time = actualTask[1];
@@ -116,14 +129,14 @@ public class Parser {
             return new AddCommand(deadline);
         } else if (isEventWithDescription && hasAt) {
             /* valid event command */
-            String[] actualTask = input.replaceAll("event ", "").split("/at ");
+            String[] actualTask = input.replaceAll("^event ", "").split("/at ");
             description = actualTask[0];
             time = actualTask[1];
             Event event = new Event(description, parseLocalDateTime(time));
             return new AddCommand(event);
         } else if (isTodoWithDescription) {
             /* valid todo command */
-            description = input.replaceAll("todo ", "");
+            description = input.replaceAll("^todo ", "");
             Todo todo = new Todo(description);
             return new AddCommand(todo);
         } else if (isDeadlineWithDescription) {

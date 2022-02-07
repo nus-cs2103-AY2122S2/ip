@@ -97,7 +97,7 @@ public class Ui {
      */
     public String foundTaskOnSameDate(int numberOfTasksOnSameDate, String time) {
         String taskOrTasks = numberOfTasksOnSameDate <= 1 ? "task" : "tasks";
-        return String.format("Found %d %s with date/time %s.\n", numberOfTasksOnSameDate, taskOrTasks, time);
+        return String.format("Found %d %s with date/time %s:\n\n", numberOfTasksOnSameDate, taskOrTasks, time);
     }
 
     /**
@@ -108,7 +108,14 @@ public class Ui {
      */
     public String foundTasksMatchKeyword(int numberOfTasksMatchKeyword, String keyword) {
         String taskOrTasks = numberOfTasksMatchKeyword <= 1 ? "task" : "tasks";
-        return String.format("Found %d %s containing keyword \"%s\".\n",
+        return String.format("Found %d %s containing keyword \"%s\":\n\n",
                 numberOfTasksMatchKeyword, taskOrTasks, keyword);
+    }
+
+    public String viewSchedulesOnDate(int numberOfTasksMatchKeyword, String time) {
+        String taskOrTasks = numberOfTasksMatchKeyword <= 1 ? "task" : "tasks";
+        return String.format("You have %d %s on %s:\n" +
+                "(Tasks on this date without time will be placed at the end of the list)\n\n",
+                numberOfTasksMatchKeyword, taskOrTasks, time);
     }
 }

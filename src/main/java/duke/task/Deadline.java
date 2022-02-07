@@ -15,7 +15,7 @@ import duke.utils.Ui;
 /**
  * The task type Deadline.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Task> {
     private final LocalDateTime by;
     /**
      * Instantiates a new Deadline.
@@ -77,5 +77,16 @@ public class Deadline extends Task {
     @Override
     public int hashCode() {
         return Objects.hash(super.getDescription(), by);
+    }
+
+    @Override
+        public int compareTo(Task task) {
+        assert task instanceof Deadline || task instanceof Event;
+        if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            return getBy().equals(deadline.getBy()) ? 0 : getBy().isAfter(deadline.getBy()) ? 1 : -1;
+        }
+        Event event = (Event) task;
+        return getBy().equals(event.getAt()) ? 0 : getBy().isAfter(((Event) task).getAt()) ? 1 : -1;
     }
 }

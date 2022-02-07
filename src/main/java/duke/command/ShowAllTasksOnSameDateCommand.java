@@ -55,7 +55,7 @@ public class ShowAllTasksOnSameDateCommand extends Command {
             /* no tasks found */
             throw new CortanaException("No task found on " + dateTimeString + "!");
         }
-        tasksOnSameDate.append(ui.foundTaskOnSameDate(numberOfTasksOnSameDate, dateTimeString));
+        tasksOnSameDate.insert(0, ui.foundTaskOnSameDate(numberOfTasksOnSameDate, dateTimeString));
         return tasksOnSameDate.toString();
     }
 

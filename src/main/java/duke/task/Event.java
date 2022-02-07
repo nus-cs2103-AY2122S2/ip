@@ -79,4 +79,15 @@ public class Event extends Task {
     public int hashCode() {
         return Objects.hash(super.getDescription(), at);
     }
+
+    @Override
+    public int compareTo(Task task) {
+        assert task instanceof Deadline || task instanceof Event;
+        if (task instanceof Event) {
+            Event event = (Event) task;
+            return getAt().equals(event.getAt()) ? 0 : getAt().isAfter(event.getAt()) ? 1 : -1;
+        }
+        Deadline deadline = (Deadline) task;
+        return getAt().equals(deadline.getBy()) ? 0 : getAt().isAfter(deadline.getBy()) ? 1 : -1;
+    }
 }

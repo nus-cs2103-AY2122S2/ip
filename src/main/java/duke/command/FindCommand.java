@@ -45,7 +45,7 @@ public class FindCommand extends Command {
         if (numberOfTasksMatchKeyword == 0) {
             throw new CortanaException("No task found with keyword " + keyWord + "!");
         } else {
-            tasksWithSameKeyword.append(ui.foundTasksMatchKeyword(numberOfTasksMatchKeyword, keyWord));
+            tasksWithSameKeyword.insert(0, ui.foundTasksMatchKeyword(numberOfTasksMatchKeyword, keyWord));
             return tasksWithSameKeyword.toString();
         }
     }

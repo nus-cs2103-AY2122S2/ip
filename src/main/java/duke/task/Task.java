@@ -3,7 +3,7 @@ package duke.task;
 /**
  * The type Task.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     /**
      * The Description of the task.
      */
@@ -59,5 +59,10 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        return 0;
     }
 }
