@@ -21,11 +21,7 @@ text-ui-test/EXPECTED-UNIX.TXT
 # Binary files
 *.class
 
-# Configuration files for formatter
-.editorconfig
-
-# save files
-/data
+# Save directories
 /tasks
 /contacts
 
