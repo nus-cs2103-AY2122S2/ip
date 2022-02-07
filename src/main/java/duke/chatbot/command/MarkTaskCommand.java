@@ -46,12 +46,7 @@ public class MarkTaskCommand extends TaskListCommand {
     @Override
     public ArrayList<String> execute() throws IllegalArgumentException {
         // Args for this command represents index of task to mark
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(super.getArgs()) - 1;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Non-number passed to mark/unmark task");
-        }
+        int taskIndex = getTaskIndex();
 
         TaskList taskList = this.getTaskList();
         String feedback;
@@ -81,12 +76,7 @@ public class MarkTaskCommand extends TaskListCommand {
     @Override
     public void undo() throws IllegalArgumentException {
         TaskList taskList = super.getTaskList();
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(super.getArgs()) - 1;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Non-number passed to mark/unmark task");
-        }
+        int taskIndex = this.getTaskIndex();
 
         if (this.markType == MarkType.DONE) {
             // Reverses previously marking of task as done

@@ -29,12 +29,7 @@ public class DeleteTaskCommand extends TaskListCommand {
     @Override
     public ArrayList<String> execute() throws IllegalArgumentException {
         // Args for this command represents index of task to delete
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(super.getArgs()) - 1;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Non-number passed to delete task");
-        }
+        int taskIndex = this.getTaskIndex();
 
         TaskList taskList = this.getTaskList();
         Task deletedTask = taskList.deleteTask(taskIndex);
