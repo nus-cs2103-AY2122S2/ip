@@ -8,6 +8,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
+import duke.command.HelpCommand;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +34,10 @@ public class Parser {
         }
         if (userInput.equals("bye")) {
             return new ExitCommand();
+        }
+
+        if (userInput.equals("help")) {
+            return new HelpCommand();
         }
         //Checks for user inputs that are empty
         //or are todo/deadline/event commands

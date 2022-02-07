@@ -1,21 +1,34 @@
 package duke.gui;
 
 import duke.command.Command;
+
 import duke.ui.Duke;
 import duke.ui.DukeException;
 import duke.ui.Parser;
 
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+
 import javafx.scene.image.Image;
+
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.awt.Desktop;
+
+import java.io.IOException;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -49,11 +62,14 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws URISyntaxException, IOException {
         String input = userInput.getText();
         try {
             Command c = Parser.parse(input);
             String response = c.execute(duke.getTasks(), duke.getUi(), duke.getStorage());
+            if (response.equals("Help has arrived!")) {
+                provideAboutFunctionality();
+            }
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
@@ -74,8 +90,7 @@ public class MainWindow extends AnchorPane {
      * @param event Event on "About" menu item.
      */
     @FXML
-    private void handleAboutAction(final ActionEvent event)
-    {
+    private void handleAboutAction(final ActionEvent event) throws URISyntaxException, IOException {
         provideAboutFunctionality();
     }
 
@@ -86,13 +101,10 @@ public class MainWindow extends AnchorPane {
      * @param event Input event.
      */
     @FXML
-    private void handleKeyInput(final InputEvent event)
-    {
-        if (event instanceof KeyEvent)
-        {
+    private void handleKeyInput(final InputEvent event) throws URISyntaxException, IOException {
+        if (event instanceof KeyEvent) {
             final KeyEvent keyEvent = (KeyEvent) event;
-            if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.A)
-            {
+            if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.A) {
                 provideAboutFunctionality();
             }
         }
@@ -101,8 +113,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Perform functionality associated with "About" menu selection or CTRL-A.
      */
-    private void provideAboutFunctionality()
-    {
-        System.out.println("You clicked on About!");
+    private void provideAboutFunctionality() throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://nicksunwork.wixsite.com/dukeguide"));
     }
 }
