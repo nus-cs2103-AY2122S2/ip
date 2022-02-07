@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+/**
+ * Represents a list of {@link Task}s.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
     /** list of handlers to be invoked when a change occurs. */

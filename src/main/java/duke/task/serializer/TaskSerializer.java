@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import duke.exception.DukeIoException;
 import duke.task.Task;
+import duke.task.TaskFactory;
 import duke.task.TaskType;
 
 /**
@@ -33,7 +34,7 @@ public class TaskSerializer {
             if (taskType == null) {
                 throw new DukeIoException("Encountered unknown format in database");
             }
-            return Task.inflate(taskType, dataStream);
+            return TaskFactory.inflate(taskType, dataStream);
         } catch (IOException ex) {
             throw new DukeIoException("Failed to inflate Task");
         }

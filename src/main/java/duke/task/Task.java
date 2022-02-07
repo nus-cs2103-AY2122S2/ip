@@ -8,6 +8,9 @@ import java.util.Optional;
 
 import duke.util.Serializable;
 
+/**
+ * Represents a generic Task with only a basic description and a completion marker.
+ */
 public abstract class Task implements Serializable {
     protected static final String FORMAT_DATETIME = "d MMM yyyy '-' hh:mm a";
 
@@ -112,33 +115,5 @@ public abstract class Task implements Serializable {
         this.isDone = dIn.readBoolean();
 
         return this;
-    }
-
-    /**
-     * Creates subtypes of <code>Task</code> depending on the {@link TaskType} supplied.
-     * Depends on the {@link #readSerializedData(DataInputStream)} method for actual population of object
-     * attributes.
-     *
-     * @param type Type of task to be created.
-     * @param dIn Input stream to read attribute data from.
-     * @return Task created, or null if an invalid {@link TaskType} is supplied.
-     * @throws IOException If an error occurs during any read operation.
-     */
-    public static Task inflate(TaskType type, DataInputStream dIn) throws IOException {
-        Task task;
-        switch (type) {
-        case TODO:
-            task = new Todo();
-            break;
-        case EVENT:
-            task = new Event();
-            break;
-        case DEADLINE:
-            task = new Deadline();
-            break;
-        default:
-            return null;
-        }
-        return task.readSerializedData(dIn);
     }
 }
