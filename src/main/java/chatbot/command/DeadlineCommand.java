@@ -20,6 +20,8 @@ public class DeadlineCommand extends Command {
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
+        validateTrigger(input);
+
         // Parse input.
         String desc = "";
         LocalDate date = null;

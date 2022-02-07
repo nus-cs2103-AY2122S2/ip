@@ -13,6 +13,8 @@ public class ResetCommand extends Command {
 
     @Override
     public CommandOutput execute(String[] input, TaskList taskList) {
+        validateTrigger(input);
+
         if (input.length > 1) {
             return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_ARGS);
         }

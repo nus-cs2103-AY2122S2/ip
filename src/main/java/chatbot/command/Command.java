@@ -21,6 +21,11 @@ public abstract class Command {
         return this.trigger;
     }
 
+    public void validateTrigger(String[] input) {
+        assert input.length > 0 : "Assert: Empty";
+        assert input[0].equals(getTrigger()) : "Assert: Invalid trigger";
+    }
+
     /**
      * Executes the command with the specified arguments onto the specified task list.
      *

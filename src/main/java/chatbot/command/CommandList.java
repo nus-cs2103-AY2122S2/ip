@@ -17,7 +17,7 @@ public class CommandList {
      */
     public CommandList() {
         this.commands = new Hashtable<>();
-        this.unrecognizedCommand = new Command("bye") {
+        this.unrecognizedCommand = new Command("") {
             @Override
             public CommandOutput execute(String[] input, TaskList taskList) {
                 return new CommandOutput("Unrecognised command.\nType \"help\" for a list of commands.",
