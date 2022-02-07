@@ -54,24 +54,22 @@ public class Storage {
             if (current.equals("")) {
                 break;
             }
-            System.out.println(current);
             String descriptionWithTime = current.substring(9);
-            System.out.println(descriptionWithTime);
             int descriptionWithTimeIndex = descriptionWithTime.length() - 1;
             Task taskToAdd;
             String taskLetter = Character.toString(current.charAt(3));
             boolean isDone = (current.charAt(6) == 'X');
             DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
 
-            if (taskLetter == "E") {
+            if (taskLetter.equals("E")) {
                 int eventAtIndex = descriptionWithTime.indexOf(" (at:");
                 String eventDesc = descriptionWithTime.substring(0, eventAtIndex);
                 int eventDateIndex = eventAtIndex + 5;
                 String eventDate = descriptionWithTime.substring(eventDateIndex, descriptionWithTimeIndex).trim();
                 LocalDateTime eventTime = LocalDateTime.parse(eventDate, displayFormat);
                 taskToAdd = new Event(eventDesc, eventTime.format(inputFormat));
-            } else if (taskLetter == "=D") {
+            } else if (taskLetter.equals("D")) {
                 int deadlineAtIndex = descriptionWithTime.indexOf(" (by:");
                 String deadlineDesc = descriptionWithTime.substring(0, deadlineAtIndex);
                 int deadlineDateIndex = deadlineAtIndex + 4;

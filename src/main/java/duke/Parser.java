@@ -2,6 +2,8 @@ package duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Parser class that contain the parsing logic for the Chat Bot.
@@ -130,9 +132,22 @@ public class Parser {
             Ui.printDelete(numToDelete, taskList);
             Storage.saveToFile(taskList);
             break;
+        case("find"):
+            String toFind = array[1];
+            Pattern pattern = Pattern.compile("\\b" + toFind + "\\b");
+            StringBuilder listString = new StringBuilder();
+            for (int i = 0; i < taskList.getSize(); i++) {
+                Task currentTask = taskList.get(i);
+                Matcher matcher = pattern.matcher(toFind);
+                if (matcher.find()) {
+                    listString.append(i + 1).append(".").append(currentTask).append("\n").append("     ");
+                }
+            }
+            Ui.printFind(listString);
+            break;
         default:
             throw new UnknownCommandException("\n" + Ui.BLANK_LINE
                     + "    I'm sorry, but I don't know what that means :-(\n" + Ui.BLANK_LINE);
-    }
+        }
     }
 }
