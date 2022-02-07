@@ -25,8 +25,8 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.isEmpty()) {
             return ui.showEmptyList();
-        } else {
-            return ui.showList(tasks.toString());
         }
+
+        return ui.showList(tasks.toString());
     }
 }

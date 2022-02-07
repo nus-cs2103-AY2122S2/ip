@@ -49,7 +49,8 @@ public class Task {
      * @return String representation of task for saving.
      */
     public String saveFormat() {
-        return String.format("%s | %s", isDone ? 1 : 0, DESCRIPTION);
+        int isDoneInt = isDone ? 1 : 0;
+        return String.format("%s | %s", isDoneInt, DESCRIPTION);
     }
 
     /**

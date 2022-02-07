@@ -16,7 +16,6 @@ import echo.task.TaskList;
 import echo.task.TodoTask;
 import echo.utils.EchoException;
 
-
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.
  */
@@ -52,13 +51,10 @@ public class Storage {
      * @throws EchoException If file at FILE_PATH is not formatted properly.
      */
     public TaskList load() throws FileNotFoundException, EchoException {
-        // Create a File using FILE_PATH.
         File file = new File(FILE_PATH);
 
-        // Create a Scanner using the File as the source.
         Scanner s = new Scanner(file);
 
-        // TaskList to contain tasks loaded from file.
         TaskList tasks = new TaskList();
 
         // Directory that the file is located in.
@@ -69,20 +65,12 @@ public class Storage {
             directory.mkdir();
         }
 
-        // Loads line by line.
         while (s.hasNext()) {
             String line = s.nextLine();
             try {
-                String[] split = line.split(Pattern.quote(" | "));
-
-                // Type of task.
-                String type = split[0];
-
-                // Description of task.
-                String desc = split[2];
-
-                // Local Date Time for DeadlineTask and EventTask.
-                LocalDateTime localDateTime;
+                String[] splitVerticalBar = line.split(Pattern.quote(" | "));
+                String type = splitVerticalBar[0];
+                String desc = splitVerticalBar[2];
 
                 // Add task to tasks based on type.
                 switch (type) {
@@ -92,15 +80,15 @@ public class Storage {
                     if (type.equals("T")) {
                         tasks.add(new TodoTask(desc));
                     } else {
-                        localDateTime = LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
                         if (type.equals("D")) {
-                            tasks.add(new DeadlineTask(desc, localDateTime));
+                            tasks.add(new DeadlineTask(desc, getLocalDateTime(splitVerticalBar)));
                         } else {
-                            tasks.add(new EventTask(desc, localDateTime));
+                            tasks.add(new EventTask(desc, getLocalDateTime(splitVerticalBar)));
                         }
                     }
+
                     // Marks tasks based on second input, 0 or 1.
-                    if (Integer.parseInt(split[1]) == 1) {
+                    if (Integer.parseInt(splitVerticalBar[1]) == 1) {
                         tasks.mark(tasks.size() - 1);
                     }
                     break;
@@ -118,6 +106,17 @@ public class Storage {
         }
         s.close();
         return tasks;
+    }
+
+    /**
+     * Returns local date time.
+     *
+     * @param splitVerticalBar Input from user, split based on "|".
+     *
+     * @return LocalDateTime.
+     */
+    private LocalDateTime getLocalDateTime(String[] splitVerticalBar) {
+        return LocalDateTime.parse(splitVerticalBar[3], DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
     }
 
     /**
