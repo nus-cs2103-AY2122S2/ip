@@ -7,19 +7,30 @@ public abstract class Task {
 
     protected String description;
     protected boolean isDone;
+    protected RecursiveTag recursiveTag;
 
-    Task(String description) {
+    Task(String description, RecursiveTag recursiveTag) {
         this.description = description;
+        this.recursiveTag = recursiveTag;
         this.isDone = false;
     }
 
-    Task(String description, boolean isDone) {
+    Task(String description, boolean isDone, RecursiveTag recursiveTag) {
         this.description = description;
+        this.recursiveTag = recursiveTag;
         this.isDone = isDone;
     }
 
     protected String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    protected String getRecursiveFrequency() {
+        if (recursiveTag != null) {
+            return recursiveTag.getLabel();
+        } else {
+            return " ";
+        }
     }
 
     public void markAsDone() {
@@ -34,6 +45,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return String.format("[%s][%s] %s", this.getStatusIcon(), this.getRecursiveFrequency(),
+                this.description);
     }
 }

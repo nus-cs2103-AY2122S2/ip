@@ -1,1 +1,4 @@
-D 0 cs2103t /by 20/12/2022 20:00
+D 0 -- CS2103T /by 20/12/2022 20:22
+T 0 --rd Sleep
+E 0 --rw CS2103T Lecture /at Home
+D 0 --rw CS2106 Tutorial /by 12/12/1998 20:22

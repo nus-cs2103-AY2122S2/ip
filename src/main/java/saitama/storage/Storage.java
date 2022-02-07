@@ -12,6 +12,7 @@ import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
 import saitama.tasks.Deadline;
 import saitama.tasks.Event;
+import saitama.tasks.RecursiveTag;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
@@ -51,9 +52,9 @@ public class Storage {
                 String[] splitCommandArguments;
 
                 //split each line in text file into [task type, isDone, task description]
-                String[] data = sc.nextLine().split(" ", 3);
+                String[] data = sc.nextLine().split(" ", 4);
 
-                if (data.length < 3) {
+                if (data.length < 4) {
                     throw new FileCorruptException();
                 }
 
@@ -69,23 +70,34 @@ public class Storage {
                     throw new FileCorruptException();
                 }
 
+                //assign recursiveTag
+                RecursiveTag recursiveTag = RecursiveTag.get(data[2]);
+
                 //add task to array list
                 switch(data[0]) {
                 case "T":
-                    taskList.add(new ToDo(data[2], isDone));
+                    taskList.add(new ToDo(data[3], isDone, recursiveTag));
                     break;
                 case "D":
-                    splitCommandArguments = data[2].split(" /by ", 2);
+                    splitCommandArguments = data[3].split(" /by ", 2);
+                    if (splitCommandArguments.length < 2) {
+                        throw new FileCorruptException();
+                    }
                     try {
-                        newTask = new Deadline(splitCommandArguments[0], splitCommandArguments[1], isDone);
+                        newTask = new Deadline(splitCommandArguments[0],
+                                splitCommandArguments[1], isDone, recursiveTag);
                         taskList.add(newTask);
                     } catch (InvalidFormatException | InvalidDateTimeException e) {
                         throw new FileCorruptException();
                     }
                     break;
                 case "E":
-                    splitCommandArguments = data[2].split(" /at ", 2);
-                    newTask = new Event(splitCommandArguments[0], splitCommandArguments[1], isDone);
+                    splitCommandArguments = data[3].split(" /at ", 2);
+                    if (splitCommandArguments.length < 2) {
+                        throw new FileCorruptException();
+                    }
+                    newTask = new Event(splitCommandArguments[0],
+                            splitCommandArguments[1], isDone, recursiveTag);
                     taskList.add(newTask);
                     break;
                 default:

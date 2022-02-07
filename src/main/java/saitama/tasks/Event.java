@@ -15,8 +15,8 @@ public class Event extends Task {
      * @param description The details of the event task.
      * @param at The event location.
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, RecursiveTag recursiveTag) {
+        super(description, recursiveTag);
         this.at = at;
     }
 
@@ -27,8 +27,8 @@ public class Event extends Task {
      * @param at The event location.
      * @param isDone Whether the task is done.
      */
-    public Event(String description, String at, boolean isDone) {
-        super(description, isDone);
+    public Event(String description, String at, boolean isDone, RecursiveTag recursiveTag) {
+        super(description, isDone, recursiveTag);
         this.at = at;
     }
 
@@ -40,7 +40,8 @@ public class Event extends Task {
      */
     public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        fw.write("E " + isDone + " " + this.description + " /at " + this.at + "\n");
+        String recursiveTag = this.recursiveTag == null ? "--" : this.recursiveTag.toString();
+        fw.write(String.format("E %s %s %s /at %s\n", isDone, recursiveTag, description, at));
     }
 
     /**

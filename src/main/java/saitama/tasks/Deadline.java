@@ -22,8 +22,9 @@ public class Deadline extends Task {
      * @param by The deadline of the task in dd/mm/yyyy format.
      * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
      */
-    public Deadline(String description, String by) throws InvalidFormatException, InvalidDateTimeException {
-        super(description);
+    public Deadline(String description, String by, RecursiveTag recursiveTag) throws
+            InvalidFormatException, InvalidDateTimeException {
+        super(description, recursiveTag);
         this.deadline = processDateTime(by);
     }
 
@@ -35,9 +36,9 @@ public class Deadline extends Task {
      * @param isDone Whether the task is done.
      * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
      */
-    public Deadline(String description, String by, boolean isDone) throws
+    public Deadline(String description, String by, boolean isDone, RecursiveTag recursiveTag) throws
             InvalidFormatException, InvalidDateTimeException {
-        super(description, isDone);
+        super(description, isDone, recursiveTag);
         this.deadline = processDateTime(by);
     }
 
@@ -86,8 +87,9 @@ public class Deadline extends Task {
      */
     public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        fw.write("D " + isDone + " " + this.description
-                + " /by " + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "\n");
+        String recursiveTag = this.recursiveTag == null ? "--" : this.recursiveTag.toString();
+        fw.write(String.format("D %s %s %s /by %s\n", isDone, recursiveTag, description,
+                deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))));
     }
 
     /**

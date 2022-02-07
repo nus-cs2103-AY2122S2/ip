@@ -1,5 +1,7 @@
 package saitama.parser;
 
+import java.util.ArrayList;
+
 import saitama.commands.AddCommand;
 import saitama.commands.Command;
 import saitama.commands.DeleteCommand;
@@ -16,6 +18,7 @@ import saitama.exceptions.InvalidTaskNumberException;
 import saitama.exceptions.MissingQueryException;
 import saitama.tasks.Deadline;
 import saitama.tasks.Event;
+import saitama.tasks.RecursiveTag;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
@@ -35,9 +38,17 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws InvalidFormatException, EmptyDescriptionException,
             InvalidCommandException, InvalidTaskNumberException, MissingQueryException, InvalidDateTimeException {
+
         String[] splitCommand = fullCommand.split(" ", 2); //split the command into [command_word, command_arguments]
         splitCommand[0] = splitCommand[0].toUpperCase(); //convert the command word to uppercase
         String command = splitCommand[0];
+
+        ArrayList<RecursiveTag> tags = new ArrayList<>();
+        if (splitCommand.length >= 2) { //if command has arguments
+            String commandArguments = splitCommand[1];
+            tags = getTags(commandArguments); //check for tags
+            splitCommand[1] = removeTags(commandArguments);
+        }
 
         switch (command) {
         case "BYE":
@@ -57,8 +68,7 @@ public class Parser {
         case "DEADLINE":
             //Fallthrough
         case "EVENT":
-            //Fallthrough
-            return prepareAdd(splitCommand);
+            return prepareAdd(splitCommand, tags);
         default:
             throw new InvalidCommandException();
         }
@@ -132,21 +142,25 @@ public class Parser {
      * @throws EmptyDescriptionException if no details of the task are given.
      * @throws InvalidCommandException if command does not exist.
      */
-    private static Command prepareAdd(String[] splitCommand) throws
+    private static Command prepareAdd(String[] splitCommand, ArrayList<RecursiveTag> tags) throws
             InvalidFormatException, EmptyDescriptionException, InvalidCommandException, InvalidDateTimeException {
-        if (splitCommand.length < 2) {
+        if (splitCommand.length < 2 || splitCommand[1].equals("")) {
             throw new EmptyDescriptionException();
         }
-
         String taskType = splitCommand[0];
         String taskArguments = splitCommand[1];
+
+        RecursiveTag recursiveTag = null;
+        if (tags.size() > 0) {
+            recursiveTag = tags.get(0);
+        }
 
         assert taskType.equals("TODO") || taskType.equals("DEADLINE") || taskType.equals("EVENT")
                 : "Parser detected invalid task type to add!";
 
         switch (taskType) {
         case "TODO":
-            Task newTask = new ToDo(taskArguments);
+            Task newTask = new ToDo(taskArguments, recursiveTag);
             return new AddCommand(newTask);
         case "DEADLINE":
             String[] taskArgumentsList = taskArguments.split(" /by ", 2);
@@ -156,7 +170,7 @@ public class Parser {
             }
             String taskDescription = taskArgumentsList[0];
             String deadline = taskArgumentsList[1];
-            newTask = new Deadline(taskDescription, deadline);
+            newTask = new Deadline(taskDescription, deadline, recursiveTag);
             return new AddCommand(newTask);
         case "EVENT":
             taskArgumentsList = taskArguments.split(" /at ", 2);
@@ -166,12 +180,37 @@ public class Parser {
             }
             taskDescription = taskArgumentsList[0];
             String location = taskArgumentsList[1];
-            newTask = new Event(taskDescription, location);
+            newTask = new Event(taskDescription, location, recursiveTag);
             return new AddCommand(newTask);
         default:
             //Should never happen since we asserted that the task type is valid
             throw new InvalidCommandException();
         }
+    }
+
+    private static ArrayList<RecursiveTag> getTags(String commandArguments) {
+        ArrayList<RecursiveTag> tags = new ArrayList<>();
+        String[] arguments = commandArguments.split(" ");
+        for (String argument : arguments) {
+            if (argument.startsWith("--")) {
+                RecursiveTag r = RecursiveTag.get(argument);
+                if (r != null) {
+                    tags.add(r);
+                }
+            }
+        }
+        return tags;
+    }
+
+    private static String removeTags(String commandArguments) {
+        String[] arguments = commandArguments.split(" ");
+        String taglessCommandArguments = commandArguments + " ";
+        for (String argument : arguments) {
+            if (argument.startsWith("--")) {
+                taglessCommandArguments = taglessCommandArguments.replace(argument + " ", "");
+            }
+        }
+        return taglessCommandArguments.substring(0, taglessCommandArguments.length() - 1);
     }
 
     /**

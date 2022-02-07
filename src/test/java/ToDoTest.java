@@ -7,7 +7,7 @@ import saitama.tasks.ToDo;
 
 class ToDoTest {
 
-    private Task task = new ToDo("Eat");
+    private Task task = new ToDo("Eat", null);
 
     @Test
     void testToString() {
