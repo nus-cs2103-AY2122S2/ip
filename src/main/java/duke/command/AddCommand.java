@@ -54,8 +54,8 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        //storage must save
         taskList.add(action);
+        //storage must save
         storage.save(taskList);
         return new StringBuilder().append("Got it. I have added this task:\n  ")
                 .append(action).append("\nNow you have ").append(taskList.size())
