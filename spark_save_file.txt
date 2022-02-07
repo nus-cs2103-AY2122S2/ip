@@ -1,2 +1,1 @@
 E @@@ true @@@ buy milk @@@ 2-22-2022 500
-T @@@ false @@@ buy milk

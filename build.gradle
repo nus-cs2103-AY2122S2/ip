@@ -17,7 +17,7 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
     // Use JavaFX
-    String javaFxVersion = '14'
+    String javaFxVersion = '17'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -30,9 +30,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
-
-    // Use Natty to parse natural language dates e.g., today
-    implementation group: 'com.joestelmach', name: 'natty', version: '0.6'
 }
 
 test {
@@ -50,7 +47,7 @@ test {
 }
 
 // Define the main class for the application.
-mainClassName = "spark.Spark"
+mainClassName = "spark.Main"
 
 shadowJar {
     archiveBaseName = "spark"

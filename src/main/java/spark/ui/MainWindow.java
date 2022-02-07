@@ -2,6 +2,8 @@ package spark.ui;
 
 import java.util.List;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import spark.Spark;
 import spark.commandresponse.CommandResponse;
 
@@ -72,7 +75,7 @@ public class MainWindow extends AnchorPane {
         // close the program if the user has given a command
         // for the program to exit
         if (programShouldExit(responses)) {
-            System.exit(0);
+            waitBeforeExiting();
         }
     }
 
@@ -117,6 +120,12 @@ public class MainWindow extends AnchorPane {
             }
         }
         return false;
+    }
+
+    private void waitBeforeExiting() {
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
+        pauseTransition.setOnFinished(event -> Platform.exit());
+        pauseTransition.play();
     }
 
     private String getUserInput() {
