@@ -1,11 +1,14 @@
 package duke.main;
 
-import duke.task.Task;
 import duke.exception.DukeException;
+import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,9 +54,8 @@ public class Storage {
                     tasks.add(task);
                 }
                 return tasks;
-            } else {
-                return new ArrayList<>();
             }
+            return new ArrayList<>();
         } catch (IOException e) {
             throw new DukeException("OOPS!!! An I0Exception occurred.");
         }

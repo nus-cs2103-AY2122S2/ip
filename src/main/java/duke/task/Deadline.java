@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private String by;
-    private LocalDate date;
 
     public Deadline(String description, String by) {
         super(description);
@@ -18,7 +17,6 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate date) {
         super(description);
         this.by = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        this.date = date;
     }
 
     /**

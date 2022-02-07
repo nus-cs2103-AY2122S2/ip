@@ -26,9 +26,13 @@ public class Ui {
      * @param tasks list of tasks
      */
     public void showList(ArrayList<Task> tasks) {
-        output = "Here are the tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            output += String.format("%d. %s\n", i + 1, tasks.get(i));
+        if (tasks.size() > 0) {
+            output = "Here are the tasks in your list:\n";
+            for (int i = 0; i < tasks.size(); i++) {
+                output += String.format("%d. %s\n", i + 1, tasks.get(i));
+            }
+        } else {
+            output = "There are no tasks in your list YAY!";
         }
     }
 
@@ -57,7 +61,7 @@ public class Ui {
      * @param tasks current list of tasks
      */
     public void showAddTask(Task task, ArrayList<Task> tasks) {
-        output = "Got it. I've added this task:\n" + task + "\n";
+        output = "Gotcha back! I've added this task:\n" + task + "\n";
         if (tasks.size() <= 1) {
             output += String.format("Now you have %d task in the list.\n", tasks.size());
         } else {
@@ -72,8 +76,8 @@ public class Ui {
      * @param tasks current list of tasks
      */
     public void showDeleteTask(Task task, ArrayList<Task> tasks) {
-        output = "Noted. I've removed this task:\n" + task + "\n" +
-                String.format("Now you have %d tasks in the list.\n", tasks.size());
+        output = "Noted. I've removed this task:\n" + task + "\n"
+                + String.format("Now you have %d tasks in the list.\n", tasks.size());
     }
 
     /**
@@ -82,9 +86,13 @@ public class Ui {
      * @param tasks list of matching tasks
      */
     public void showMatchingTasks(ArrayList<Task> tasks) {
-        output = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            output += String.format("%d.%s\n", i + 1, tasks.get(i));
+        if (tasks.size() > 0) {
+            output = "Here are the matching tasks in your list:\n";
+            for (int i = 0; i < tasks.size(); i++) {
+                output += String.format("%d. %s\n", i + 1, tasks.get(i));
+            }
+        } else {
+            output = "There are no matching tasks in your list :(";
         }
     }
 

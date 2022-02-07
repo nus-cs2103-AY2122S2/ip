@@ -34,29 +34,40 @@ public class Parser {
         } else if (fullCommand.startsWith("delete")) {
             String remainingCommand = fullCommand.split(" ", 2)[1];
             return new DeleteCommand(Integer.parseInt(remainingCommand));
-        } else if (fullCommand.startsWith("todo") || fullCommand.startsWith("deadline") ||fullCommand.startsWith("event")) {
-            if (fullCommand.split(" ").length == 1) {
-                throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", fullCommand.split(" ")[0]));
-            }
-            String command = fullCommand.split(" ", 2)[0];
-            String remainingCommand = fullCommand.split(" ", 2)[1];
-            if (command.equals("todo")) {
-                return new AddTodoCommand(remainingCommand);
-            } else if (command.equals("deadline")) {
-                String[] splitDescription = remainingCommand.split(" /by ");
-                if (!isDate(splitDescription[1])) {
-                    return new AddDeadlineCommand(splitDescription[0], splitDescription[1]);
-                }
-                return new AddDeadlineCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
-            } else {
-                String[] splitDescription = remainingCommand.split(" /at ");
-                if (!isDate(splitDescription[1])) {
-                    return new AddEventCommand(splitDescription[0], splitDescription[1]);
-                }
-                return new AddEventCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
-            }
+        } else if (fullCommand.startsWith("todo") || fullCommand.startsWith("deadline") || fullCommand.startsWith("event")) {
+            return splitCommand(fullCommand);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
+        }
+    }
+
+    /**
+     * Splits command into further parts if it starts with "todo", "deadline" or "event
+     *
+     * @param fullCommand input command typed by user
+     * @return command to be carried out
+     * @throws DukeException if description of input command is empty
+     */
+    static public Command splitCommand(String fullCommand) throws DukeException {
+        if (fullCommand.split(" ").length == 1) {
+            throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", fullCommand.split(" ")[0]));
+        }
+        String command = fullCommand.split(" ", 2)[0];
+        String remainingCommand = fullCommand.split(" ", 2)[1];
+        if (command.equals("todo")) {
+            return new AddTodoCommand(remainingCommand);
+        } else if (command.equals("deadline")) {
+            String[] splitDescription = remainingCommand.split(" /by ");
+            if (!isDate(splitDescription[1])) {
+                return new AddDeadlineCommand(splitDescription[0], splitDescription[1]);
+            }
+            return new AddDeadlineCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
+        } else {
+            String[] splitDescription = remainingCommand.split(" /at ");
+            if (!isDate(splitDescription[1])) {
+                return new AddEventCommand(splitDescription[0], splitDescription[1]);
+            }
+            return new AddEventCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
         }
     }
 
