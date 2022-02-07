@@ -10,4 +10,9 @@ public class ByeCommand extends Command {
     public void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
         ui.print("Buai Buai! Ciao for now!");
     }
+    
+    @Override
+    public boolean equals(Object object) {
+        return object instanceof ByeCommand;
+    }
 }

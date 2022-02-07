@@ -17,7 +17,8 @@ public class TaskArrayList {
         return tasks.get(i);
     }
 
-    public Task remove(int i) {
+    public Task delete(int i) {
+        System.out.println("");
         return tasks.remove(i);
     }
 

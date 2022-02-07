@@ -40,7 +40,7 @@ public class EditCommand extends Command {
                 }
                 case DELETE: {
                     int index = taskNum - 1;
-                    taskArrayList.remove(index);
+                    taskArrayList.delete(index);
                     storage.saveFile(taskArrayList.getTasks());
                     break;
                 }
