@@ -13,8 +13,9 @@ public abstract class InvalidCommandException extends DukeExceptions {
      *
      * @param cmd The user input. Can be Empty.
      * @return An Invalid command.
-     * @throws InvalidCommandException Either MissingCommandException Exception representing no command is entered or IncorrectCommand
-     *                        representing commands other than specified in the Command class is entered.
+     * @throws InvalidCommandException Either MissingCommandException Exception representing no command is entered or
+     *                                 IncorrectCommand representing commands other than specified in the Command class
+     *                                 is entered.
      */
     public static InvalidCommandException createInvalidCommand(String cmd) throws InvalidCommandException {
         throw cmd.isBlank() ? new MissingCommandException() : new IncorrectCommandException();

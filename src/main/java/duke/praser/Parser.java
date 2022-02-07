@@ -7,6 +7,13 @@ import duke.dukeexceptions.InvalidCommandException;
  * The parser object make sures that the command entered by the user is correct.
  */
 public class Parser {
+    /**
+     * Prase the user input and returns the corresponding command.
+     *
+     * @param userInput The input entered by the user.
+     * @return The Command as typed by the user.
+     * @throws InvalidCommandException If the user inputs an invalid command.
+     */
     public static Command parse(String userInput) throws InvalidCommandException {
         String command;
         String parameter = "";

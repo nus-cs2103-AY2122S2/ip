@@ -1,14 +1,18 @@
 package duke.command;
 
+import java.io.IOException;
 
-import duke.dukeexceptions.*;
+import duke.dukeexceptions.DukeExceptions;
 import duke.dukeexceptions.EmptyDateException;
+import duke.dukeexceptions.EmptyKeywordException;
+import duke.dukeexceptions.EmptyNumberException;
+import duke.dukeexceptions.EmptyTaskException;
+import duke.dukeexceptions.InvalidCommandException;
+import duke.dukeexceptions.InvalidNumberException;
+import duke.dukeexceptions.ListIndexOutOfBoundException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * The Command object that represents the different commands of Duke.
@@ -29,11 +33,11 @@ public abstract class Command {
      * Runs the various commands based on the type of command it is.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
+     * @return The string that will be shown on the duke dialogue.
      * @throws DukeExceptions The exception from Duke if there are errors encountered.
      */
-    public abstract void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions;
+    public abstract String run(TaskList taskList, Storage storage) throws DukeExceptions;
 
     /**
      * Creates the command based on the user's input in the command line.
@@ -83,17 +87,16 @@ class ByeCommand extends Command {
      * Causes the Duke application to exit.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
      * @throws DukeExceptions Should not have an exception unless it is an unexpected error.
+     * @return
      */
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
-        // Shows the exit screen.
-        ui.showExitScreen();
-
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
         // Exits duke.
         System.exit(0);
+
+        return "";
     }
 }
 
@@ -110,14 +113,14 @@ class ListCommand extends Command {
      * Shows all the tasks in the task list.
      *
      * @param taskList The TaskList which the command will act on.
-     * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
      * @throws DukeExceptions Should not have an exception unless it is an unexpected error.
+     * @return
      */
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
         // Shows the screen with all the task in task list.
-        ui.taskListDisplay.run(taskList);
+        return "Here you go:\n" + taskList.printTasks();
     }
 }
 
@@ -137,9 +140,12 @@ class MarkCommand extends Command {
      * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
      * @throws DukeExceptions Occurs if the user did not enter a number or the number is out of range from the index.
+     * @return
      */
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
+        String result = "";
+
         // Checks if the user did not enter a number, then throw an exception.
         if (parameter.isBlank()) {
             throw EmptyNumberException.createEmptyNumber("Mark");
@@ -148,8 +154,8 @@ class MarkCommand extends Command {
         // Marks the task as indicated in the index of the task list.
         try {
             String task = taskList.markTask(Integer.parseInt(parameter));
-            ui.showMarkedTaskDisplay(task);
             storage.updateData(taskList);
+            result += "Marked the following task to the list:\n" + task + "\nGood job by the way";
         } catch (IndexOutOfBoundsException e) {
             // If the user enters a number that is out of bound of the task list.
             throw new ListIndexOutOfBoundException();
@@ -159,6 +165,7 @@ class MarkCommand extends Command {
             // If the user enters a parameter that is not a number.
             throw new InvalidNumberException();
         }
+        return result;
     }
 }
 
@@ -178,9 +185,12 @@ class UnmarkCommand extends Command {
      * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
      * @throws DukeExceptions Occurs if the user did not enter a number or the number is out of range from the index.
+     * @return
      */
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
+        String result = "";
+
         // Checks if the user did not enter a number, then throw an EmptyNumberException exception.
         if (parameter.isBlank()) {
             throw EmptyNumberException.createEmptyNumber("Unmark");
@@ -189,8 +199,8 @@ class UnmarkCommand extends Command {
         // Unmarks the task as indicated in the index of the task list.
         try {
             String task = taskList.unmarkTask(Integer.parseInt(parameter));
-            ui.showUnmarkedTaskDisplay(task);
             storage.updateData(taskList);
+            result += "Unmarked the following task to the list:\n" + task + "\nHope you get it done soon!";
         } catch (IndexOutOfBoundsException e) {
             // If the user enters a number that is out of bound of the task list.
             throw new ListIndexOutOfBoundException();
@@ -200,6 +210,8 @@ class UnmarkCommand extends Command {
             // If the user enters a parameter that is not a number.
             throw new InvalidNumberException();
         }
+
+        return result;
     }
 }
 
@@ -219,9 +231,10 @@ class TodoCommand extends Command {
      * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
      * @throws DukeExceptions If the user did not indicate a name of the task.
+     * @return
      */
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
         // Checks if the user enters an empty parameter.
         if (parameter.isBlank()) {
             throw EmptyTaskException.createEmptyTask("todo");
@@ -231,15 +244,14 @@ class TodoCommand extends Command {
         Task todo = Task.createTask("TODO", false, parameter, null);
         taskList.addTask(todo);
 
-        // Shows the screen with the new task that was recently created.
-        ui.newTaskDisplay(todo, taskList);
-
         // Updates the task list in the file.
         try {
             storage.updateData(taskList);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return "Added the following todo into the list:\n" + todo;
     }
 }
 
@@ -259,41 +271,39 @@ class DeadlineCommand extends Command {
      * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
      * @throws DukeExceptions If the users enters no parameter, no date or invalid date.
+     * @return
      */
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
         // Check if the user did not enter a task name and date, then throw Empty Task parameter.
         if (parameter.isBlank()) {
-            throw EmptyTaskException.createEmptyTask("dateline");
+            throw EmptyTaskException.createEmptyTask("deadline");
         }
 
         // Get the index "/by" from the parameter.
-        int index = parameter.indexOf("/by ");
+        int index = parameter.indexOf(" /by ");
         // If the user did not enter /by, then throw the EmptyDateException exception.
         if (index < 0) {
-            throw EmptyDateException.createEmptyDate("dateline");
+            throw EmptyDateException.createEmptyDate("deadline");
         }
 
         // Gets the task name form the parameter.
         String task = parameter.substring(0, index);
         // If the user did not enter a task name, then throw empty task exception.
         if (task.isBlank()) {
-            throw EmptyTaskException.createEmptyTask("dateline");
+            throw EmptyTaskException.createEmptyTask("deadline");
         }
 
         // Get the date from the parameter.
-        String date = parameter.substring(index + 4, parameter.length());
+        String date = parameter.substring(index + 5, parameter.length());
         // If the user did not enter a date after "/by".
         if (date.isBlank()) {
-            throw EmptyDateException.createEmptyDate("dateline");
+            throw EmptyDateException.createEmptyDate("deadline");
         }
 
         // Creates a new deadline task, then add it to the task list.
         Task deadline = Task.createTask("DEADLINE", false, task, date);
         taskList.addTask(deadline);
-
-        // Shows the recently created deadline task.
-        ui.newTaskDisplay(deadline, taskList);
 
         // Updates the task list in the file.
         try {
@@ -301,6 +311,8 @@ class DeadlineCommand extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return "Added the following deadline into the list:\n" + deadline;
     }
 }
 
@@ -320,16 +332,17 @@ class EventCommand extends Command {
      * @param ui The UI on which the command will act on.
      * @param storage The Storage on which the command will act on.
      * @throws DukeExceptions If the users enters no parameter, no date or invalid date.
+     * @return
      */
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
         // Check if the user did not enter a task name and date, then throw Empty Task parameter.
         if (parameter.isBlank()) {
             throw EmptyTaskException.createEmptyTask("event");
         }
 
         // Get the index "/at" from the parameter.
-        int index = parameter.indexOf("/at ");
+        int index = parameter.indexOf(" /at ");
         if (index < 0) {
             throw EmptyDateException.createEmptyDate("event");
         }
@@ -342,7 +355,7 @@ class EventCommand extends Command {
         }
 
         // Get the date from the parameter.
-        String date = parameter.substring(index + 4, parameter.length());
+        String date = parameter.substring(index + 5, parameter.length());
         // If the user did not enter a date after "/at".
         if (date.isBlank()) {
             throw EmptyDateException.createEmptyDate("event");
@@ -352,22 +365,21 @@ class EventCommand extends Command {
         Task event = Task.createTask("EVENT", false, task, date);
         taskList.addTask(event);
 
-        // Shows the recently created event task.
-        ui.newTaskDisplay(event, taskList);
-
         // Updates the task list in the file.
         try {
             storage.updateData(taskList);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return "Added the following event into the list:\n" + event;
     }
 }
 
 /**
  * The delete command deletes a task in the task list.
  */
-class DeleteCommand extends Command{
+class DeleteCommand extends Command {
     /**
      * Constructs the delete command with index number of the item in the task list as the parameter.
      */
@@ -382,9 +394,12 @@ class DeleteCommand extends Command{
      * @param ui       The UI on which the command will act on.
      * @param storage  The Storage on which the command will act on.
      * @throws DukeExceptions If the user did not enter a number.
+     * @return
      */
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
+        String result = "";
+
         // If the user did not enter a number, returns an empty number parameter.
         if (parameter.isBlank()) {
             throw EmptyNumberException.createEmptyNumber("Delete");
@@ -393,8 +408,8 @@ class DeleteCommand extends Command{
         // Deletes the task from the task list based on the index. Then update the file.
         try {
             String deletedTask = taskList.deleteFromIndex(Integer.parseInt(parameter));
-            ui.showDeleteTaskDisplay(deletedTask, taskList);
             storage.updateData(taskList);
+            result += "Deleted the following task:\n" + deletedTask;
         } catch (IndexOutOfBoundsException e) {
             // If the user enters a number that is out of bound of the task list.
             throw new ListIndexOutOfBoundException();
@@ -404,6 +419,8 @@ class DeleteCommand extends Command{
             // If the user enters a parameter that is not a number.
             throw new InvalidNumberException();
         }
+
+        return result;
     }
 }
 
@@ -421,7 +438,7 @@ class FindCommand extends Command {
     }
 
     @Override
-    public void run(TaskList taskList, Ui ui, Storage storage) throws DukeExceptions {
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
         // Check if the user did not enter a keyword, then throw the EmptyKeywordException exception.
         if (parameter.isBlank()) {
             throw new EmptyKeywordException();
@@ -430,7 +447,6 @@ class FindCommand extends Command {
         // Gets a new task list which the tasks that contains the keyword.
         TaskList filteredTaskList = taskList.findTasksFromKeyword(parameter);
 
-        // Gets the UI to show the filtered task list.
-        ui.showFilteredTaskListDisplay(parameter, filteredTaskList);
+        return "These are the tasks that have the keyword \"" + parameter + "\"\n" + filteredTaskList.printTasks();
     }
 }

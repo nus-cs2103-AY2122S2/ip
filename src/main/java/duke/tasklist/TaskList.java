@@ -1,10 +1,10 @@
 package duke.tasklist;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.task.Task;
 
 /**
  * The task list which contains all the tasks.
@@ -70,10 +70,12 @@ public class TaskList {
     /**
      * Shows all the tasks in the task list.
      */
-    public void printTasks() {
+    public String printTasks() {
+        String result = "";
         for (int index = 0; index < this.taskList.size(); index++) {
-            System.out.println(Integer.toString(index + 1) + ". " + taskList.get(index).toString());
+            result += Integer.toString(index + 1) + ". " + taskList.get(index).toString() + "\n";
         }
+        return result;
     }
 
     /**

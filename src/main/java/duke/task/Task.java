@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.dukeexceptions.InvalidDateException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.dukeexceptions.InvalidDateException;
 
 /**
  * The task object represents the tasks stored by duke.
@@ -152,7 +152,7 @@ final class Deadline extends Task {
     public String toString() {
         String tag = "[D]";
         String doneIndicator = "[" + (isMarked ? "X" : " ") + "]";
-        String deadline = "(by: " + this.deadline.format(formatter) + ")";
+        String deadline = " (by: " + this.deadline.format(formatter) + ")";
         return tag + doneIndicator + " " + taskName + deadline;
     }
 
@@ -200,7 +200,7 @@ final class Event extends Task {
     public String toString() {
         String tag = "[E]";
         String doneIndicator = "[" + (isMarked ? "X" : " ") + "]";
-        String eventDate = "(at: " + this.eventDate.format(formatter) + ")";
+        String eventDate = " (at: " + this.eventDate.format(formatter) + ")";
         return tag + doneIndicator + " " + taskName + eventDate;
     }
 

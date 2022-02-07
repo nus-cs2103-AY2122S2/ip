@@ -13,7 +13,8 @@ public final class EmptyNumberException extends DukeExceptions {
      *
      * @param cmd The type of command.
      * @return The Empty Number exception.
-     * @throws EmptyNumberException The Exception when the user did not enter the index number when the command requires it.
+     * @throws EmptyNumberException The Exception when the user did not enter the index number when the
+     *                              command requires it.
      */
     public static EmptyNumberException createEmptyNumber(String cmd) throws EmptyNumberException {
         throw new EmptyNumberException(cmd.substring(0, 1).toUpperCase() + cmd.substring(1) + " needs a number");

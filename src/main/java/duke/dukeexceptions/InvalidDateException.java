@@ -5,6 +5,6 @@ package duke.dukeexceptions;
  */
 public final class InvalidDateException extends DukeExceptions {
     public InvalidDateException() {
-        super("Sorry! You have entered the wrong date!");
+        super("Please enter the date for the following format: dd/mm/yyyy HHmm.");
     }
 }
