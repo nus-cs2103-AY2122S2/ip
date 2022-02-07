@@ -18,8 +18,8 @@ import java.nio.file.StandardOpenOption;
 public class Storage {
     private ArrayList<Task> tasks;
 
-    Path dirPath = Paths.get("../data/");
-    static Path filePath = Paths.get("../data/data.txt");
+    Path dirPath = Paths.get("./data/");
+    static Path filePath = Paths.get("./data/data.txt");
 
     /**
      * Default constructor
