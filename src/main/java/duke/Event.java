@@ -19,13 +19,15 @@ public class Event extends Task {
     public String toString() {
         assert time.isPresent() : "time of event not available";
 
-        String tempStr = " ";
-
+        String doneIndicator;
         if (isDone) {
-            tempStr = "X";
+            doneIndicator = "X";
+        } else {
+            doneIndicator = " ";
         }
 
-        return "[E][" + tempStr + "] " 
+        return "[E]["
+                + doneIndicator + "] "
                 + description + "(" 
                 + time.get().format(DATE_FORMATTER) + ")";
     }

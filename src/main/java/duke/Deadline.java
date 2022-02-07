@@ -20,13 +20,14 @@ public class Deadline extends Task {
     public String toString() {
         assert time.isPresent() : "time of deadline not available";
 
-        String tempStr = " ";
-
+        String doneIndicator;
         if (isDone) {
-            tempStr = "X";
+            doneIndicator = "X";
+        } else {
+            doneIndicator = " ";
         }
 
-        return "[D][" + tempStr + "] " 
+        return "[D][" + doneIndicator + "] "
                 + description 
                 + "(" + time.get().format(DATE_FORMATTER) + ")";
     }

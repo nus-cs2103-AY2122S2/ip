@@ -161,4 +161,8 @@ public class TaskList {
         return "Bye bye. BMO will see you again soon ' v '";
     }
 
+    public String greet() {
+        return "Hello :D";
+    }
+
 }
