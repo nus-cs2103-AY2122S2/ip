@@ -22,15 +22,11 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
   
-//    /**
-//     * Initializes Ui to output to the specfied Vbox, with the specfied image. 
-//     * @param v The VBox to be displayed on
-//     * @param d The image for duke
-//     */
-//    public Ui(VBox v, Image d) {
-//        this.v = v;
-//        this.d = d;
-//    }
+    /**
+     * Initializes Ui to output to the specfied Vbox, with the specfied image.
+     * @param v The VBox to be displayed on
+     * @param d The image for duke
+     */
     public static void init(VBox v, Image d) {
         vbox = v;
         image = d;
