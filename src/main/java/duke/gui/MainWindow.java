@@ -6,11 +6,8 @@ import duke.ui.Duke;
 import duke.ui.DukeException;
 import duke.ui.Parser;
 
-import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 
@@ -40,8 +37,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -87,10 +82,9 @@ public class MainWindow extends AnchorPane {
     /**
      * Handle action related to "About" menu item.
      *
-     * @param event Event on "About" menu item.
      */
     @FXML
-    private void handleAboutAction(final ActionEvent event) throws URISyntaxException, IOException {
+    private void handleAboutAction() throws URISyntaxException, IOException {
         provideAboutFunctionality();
     }
 
@@ -111,7 +105,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Perform functionality associated with "About" menu selection or CTRL-A.
+     * Leads the user away to the help page
      */
     private void provideAboutFunctionality() throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://nicksunwork.wixsite.com/dukeguide"));

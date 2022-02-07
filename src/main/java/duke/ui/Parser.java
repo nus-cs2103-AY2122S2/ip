@@ -28,44 +28,39 @@ public class Parser {
      * todo or if the input contains unacceptable commands
      */
     public static Command parse(String userInput) throws DukeException {
-
         if (userInput.equals("list")) {
             return new ListCommand();
         }
         if (userInput.equals("bye")) {
             return new ExitCommand();
         }
-
         if (userInput.equals("help")) {
             return new HelpCommand();
         }
-        //Checks for user inputs that are empty
-        //or are todo/deadline/event commands
-        //without a specified task.
-        checkForEmptyCommands(userInput);
-
+        checkForEmptyOrIncompleteCommands(userInput);
         String[] twoWords = userInput.split(" ", 2);
         String firstWord = twoWords[0];
         if (firstWord.equals("delete") || firstWord.contains("mark")) {
             int number = Integer.parseInt(twoWords[1]);
             return commandsWithNumbers(firstWord, number);
         }
-        //Checks for commands not known to the
-        //parser.
-        checkForUnknownCommand(firstWord);
-
-        String task = twoWords[1];
         if (firstWord.equals("find")) {
+            String task = twoWords[1];
             return new FindCommand(task);
         }
-        //Checks for date inputs of the wrong format
-        String date = task;
+        checkForUnknownCommand(firstWord);
+        String date = twoWords[1];
         checkForWrongDateInput(firstWord, date);
-
         return new AddCommand(firstWord, date);
     }
 
-    public static void checkForEmptyCommands(String command) throws DukeException {
+    /**
+     * Checks for inputs that are either empty or are missing details.
+     * Incomplete commands only applies to todo/deadline/event commands.
+     * @param command user input
+     * @throws DukeException throws "Empty Command" or "XXX cannot be empty"
+     */
+    public static void checkForEmptyOrIncompleteCommands(String command) throws DukeException {
         if (command.equals("")) {
             throw new DukeException("Empty Command");
         }
@@ -80,12 +75,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for inputs that are not coded for.
+     * @param command User input
+     * @throws DukeException throws "Unknown Command"
+     */
     public static void checkForUnknownCommand(String command) throws DukeException {
         if (!command.equals("deadline") && !command.equals("todo") && !command.equals("event")) {
             throw new DukeException("Unknown Command");
         }
     }
 
+    /**
+     * Checks for incorrect date formats especially for event and deadline commands.
+     * @param command event or deadline commands
+     * @param details date
+     * @throws DukeException throws "Wrong date format: Please re-enter using yyyy-mm-dd format"
+     */
     public static void checkForWrongDateInput(String command, String details) throws DukeException {
         if (command.equals("deadline")) {
             try {
@@ -109,6 +115,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a 'Delete','Mark' or 'Unmark' command depending on
+     * the given input
+     * @param command user input
+     * @param number number input beside the command
+     * @return Delete/Mark/Unmark command
+     * @throws DukeException throws 'Command has no number'
+     */
     public static Command commandsWithNumbers(String command, int number) throws DukeException {
         switch (command) {
             case "delete":
