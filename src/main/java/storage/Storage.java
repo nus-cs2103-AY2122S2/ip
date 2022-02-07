@@ -13,18 +13,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private final File save;
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final File saveFile;
+    private final ArrayList<Task> TASKS = new ArrayList<>();
 
     public Storage() {
         Path pathName = Paths.get("./data/Duke.txt");
-        this.save = new File(pathName.toString());
+        this.saveFile = new File(pathName.toString());
         try {
-            if (save.getParentFile().mkdir()) {
-                save.createNewFile();
+            if (saveFile.getParentFile().mkdir()) {
+                saveFile.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println(new DukeException("Failed to create directory " + save.getParent()));
+            System.out.println(new DukeException("Failed to create directory " + saveFile.getParent()));
         }
     }
 
@@ -35,24 +35,24 @@ public class Storage {
     public ArrayList<Task> loadList() {
         FileDecoder decoder = new FileDecoder();
         try {
-            Scanner s = new Scanner(save);
+            Scanner s = new Scanner(saveFile);
             while (s.hasNextLine()) {
-                tasks.add(decoder.decode(s.nextLine()));
+                TASKS.add(decoder.decode(s.nextLine()));
             }
             s.close();
         } catch (Exception e) {
             System.out.println(e);
         }
-        return tasks;
+        return TASKS;
     }
 
     /**
      * updates the data/duke.txt file after changes are made to the tasklist
      * @param currentTasks updated tasklist
      */
-    public void updateTasks(ArrayList<Task> currentTasks) {
+    public void updateSavedTasks(ArrayList<Task> currentTasks) {
         try {
-            FileWriter fileWriter = new FileWriter(save);
+            FileWriter fileWriter = new FileWriter(saveFile);
             String allItems = "";
             for (int i = 0; i < currentTasks.size(); i++) {
                 allItems = allItems + currentTasks.get(i).toString() + "\n";

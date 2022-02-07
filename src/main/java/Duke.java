@@ -1,11 +1,8 @@
-import java.util.Scanner;
 import java.util.ArrayList;
-
 import javafx.application.Application;
-import tasks.*;
+import tasks.Task;
 import backend.InputDecoder;
 import backend.TaskList;
-import exception.DukeException;
 import storage.Storage;
 
 
@@ -26,7 +23,7 @@ public class Duke {
 
     public String getResponse(String input) {
         String output = inputDecoder.decode(input);
-        storage.updateTasks(TaskList.getTasks());
+        storage.updateSavedTasks(TaskList.getTasks());
         return output;
     }
 }

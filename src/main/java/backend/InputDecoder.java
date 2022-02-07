@@ -1,13 +1,18 @@
 package backend;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class InputDecoder {
     private Commands currentCommand = null;
 
     public InputDecoder() {
     }
 
+    /**
+     * Seperates the task command from the rest of the user input, and sets it to currentCommand
+     *
+     * @param input User String
+     * @return String array
+     * @throws IllegalArgumentException if command is invalid
+     */
     private String[] parseInput(String input) throws IllegalArgumentException {
         String[] commandSections = input.split(" ", 2);
         currentCommand = Commands.valueOf(commandSections[0].toUpperCase());
@@ -15,10 +20,11 @@ public class InputDecoder {
     }
 
     /**
-     * Returns the task equivalent from a task generating string input supplied by user
+     * Calls on the logic in tasklist to perform actions based on user input and
+     * return an output string to show to the user.
      *
      * @param input task generating string that follows standard format
-     * @return Task object containing information from input string
+     * @return String to be returned to user
      * @throws ArrayIndexOutOfBoundsException if only command and no input behind is given
      */
     public String decode(String input) {
