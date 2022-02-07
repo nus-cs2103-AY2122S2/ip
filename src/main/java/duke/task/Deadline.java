@@ -19,6 +19,7 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime time) {
         super(description, Task.Type.DEADLINE);
         this.by = time;
+        assert this.by != null : "LocalDateTime should be assigned";
     }
 
     /**

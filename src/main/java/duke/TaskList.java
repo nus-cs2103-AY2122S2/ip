@@ -92,6 +92,7 @@ public class TaskList {
      */
     public void markTask(int taskId) throws DukeException {
         Task task = this.tasks.get(taskId - 1);
+        assert task != null : "task must not be null";
         if (task.getStatusIcon().equals("X")) {
             throw new DukeException.DukeMarkedException();
         } else {
@@ -110,6 +111,7 @@ public class TaskList {
      */
     public void unmarkTask(int taskId) throws DukeException {
         Task task = this.tasks.get(taskId - 1);
+        assert task != null : "task must not be null";
         if (!task.getStatusIcon().equals("X")) {
             throw new DukeException.DukeUnMarkException();
         } else {
@@ -123,6 +125,7 @@ public class TaskList {
      * @param taskId index of the task on the list.
      */
     public void delete(int taskId) {
+        assert tasks.get(taskId - 1) != null : "task must not be null";
         this.tasks.remove(taskId - 1);
     }
 
@@ -140,6 +143,7 @@ public class TaskList {
             String[] textArray = text.split("\\s+");
             for (String toMatch : textArray) {
                 if (toMatch.equals(description)) {
+                    assert task != null : "task must not be null";
                     results.add(task);
                 }
             }
@@ -153,8 +157,10 @@ public class TaskList {
     }
 
     private String formatTaskList(ArrayList<Task> tasks) {
+        assert tasks.size() > 0: "list should not be empty";
         String str = "";
         for (int i = 1; i <= tasks.size(); i++) {
+            assert tasks.get(i - 1) != null : "task must not be null";
             str += i + "." + tasks.get(i - 1) + "\n";
         }
         return str;
