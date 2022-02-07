@@ -28,7 +28,7 @@ public class Parser {
     /**
      * Parses user command and determines action to perform.
      *
-     * @param input Input command from user.
+     * @param input Input from user.
      * @return Command to be executed.
      *
      * @throws EchoException If input is invalid.
@@ -48,10 +48,7 @@ public class Parser {
             case EventCommand.COMMAND:
                 String[] splitSlash = input.split("/");
 
-                String desc = splitSlash[0].substring(command.length() + 1).trim();
-
-                String dateTimeString;
-                LocalDateTime localDateTime;
+                String desc = getDescription(splitSlash[0], command);
 
                 // If second input (description) is not specified.
                 if (splitSpace.length == 1) {
@@ -60,26 +57,22 @@ public class Parser {
 
                 if (command.equals(TodoCommand.COMMAND)) {
                     return prepareTodoCommand(desc);
-                } else {
-                    if (!input.contains("/")) {
-                        throw new EchoException("Please specify the time of the task: \n"
-                                + "<command> <description> /by <yyyy-mm-dd> <24hr time>");
-                    }
+                }
 
-                    try {
-                        dateTimeString = splitSlash[1].substring(splitSlash[1].indexOf(" ") + 1);
-                        localDateTime = LocalDateTime.parse(dateTimeString,
-                                DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+                if (!input.contains("/")) {
+                    throw new EchoException("Please specify the time of the task: \n"
+                            + "<command> <description> /by <yyyy-mm-dd> <24hr time>");
+                }
 
-                        if (command.equals(DeadlineCommand.COMMAND)) {
-                            return prepareDeadlineCommand(input, desc, localDateTime);
-                        } else {
-                            return prepareEventCommand(input, desc, localDateTime);
-                        }
-                    } catch (DateTimeParseException e) {
-                        throw new EchoException("Invalid format. Follow the <yyyy-mm-dd> <24hr time> format."
-                                + "\n" + "E.g. 2019-10-15 1800");
+                try {
+                    if (command.equals(DeadlineCommand.COMMAND)) {
+                        return prepareDeadlineCommand(input, desc, getLocalDateTime(splitSlash));
+                    } else {
+                        return prepareEventCommand(input, desc, getLocalDateTime(splitSlash));
                     }
+                } catch (DateTimeParseException e) {
+                    throw new EchoException("Invalid format. Follow the <yyyy-mm-dd> <24hr time> format."
+                            + "\n" + "E.g. 2019-10-15 1800");
                 }
             case MarkCommand.COMMAND:
                 // Fallthrough
@@ -110,7 +103,7 @@ public class Parser {
                 if (splitSpace.length == 1) {
                     throw new EchoException("Please specify the description to find!");
                 }
-                return prepareFindCommand(input.substring(command.length() + 1).trim());
+                return prepareFindCommand(getDescription(input, command));
             case ByeCommand.COMMAND:
                 return prepareByeCommand();
             default:
@@ -120,6 +113,31 @@ public class Parser {
             // Deals with input that is just white space.
             throw new EchoException("Invalid input!!!");
         }
+    }
+
+    /**
+     * Returns description.
+     *
+     * @param commandAndDescription String containing command and description.
+     * @param command Command string.
+     *
+     * @return String representation of description.
+     */
+    private static String getDescription(String commandAndDescription, String command) {
+        return commandAndDescription.substring(command.length() + 1).trim();
+    }
+
+    /**
+     * Returns local date time.
+     *
+     * @param splitSlash Input from user, split based on "/".
+     *
+     * @return LocalDateTime.
+     */
+    private static LocalDateTime getLocalDateTime(String[] splitSlash) {
+        String dateTimeString = splitSlash[1].substring(splitSlash[1].indexOf(" ") + 1);
+        return LocalDateTime.parse(dateTimeString,
+                DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
     }
 
     /**
@@ -144,6 +162,7 @@ public class Parser {
      * Prepares Todo command.
      *
      * @param desc Description of todo command.
+     *
      * @return TodoCommand.
      */
     private static Command prepareTodoCommand(String desc) {
@@ -164,10 +183,12 @@ public class Parser {
     private static Command prepareDeadlineCommand(String input, String desc, LocalDateTime localDateTime)
             throws EchoException {
         assert localDateTime != null : "LocalDateTime for Deadline command is initialized incorrectly";
+
         if (!input.contains("/by")) {
             throw new EchoException("Invalid input. Make sure to include '/by'\n"
                     + "    E.g. deadline return book /by 2019-10-15 1800");
         }
+
         return new DeadlineCommand(desc, localDateTime);
     }
 
@@ -185,10 +206,12 @@ public class Parser {
     private static Command prepareEventCommand(String input, String desc, LocalDateTime localDateTime)
             throws EchoException {
         assert localDateTime != null : "LocalDateTime for Event command is initialized incorrectly";
+
         if (!input.contains("/at")) {
             throw new EchoException("Invalid input. Make sure to include '/at' \n."
                     + "    E.g. event meeting /at 2019-10-15 1800");
         }
+
         return new EventCommand(desc, localDateTime);
     }
 
@@ -229,6 +252,7 @@ public class Parser {
      * Prepares find command.
      *
      * @param desc Description to find.
+     *
      * @return FindCommand.
      */
     private static Command prepareFindCommand(String desc) {

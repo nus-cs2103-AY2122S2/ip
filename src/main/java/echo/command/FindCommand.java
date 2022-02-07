@@ -36,10 +36,12 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String find = tasks.find(DESCRIPTION);
+
         if (find.length() == 0) {
             return ui.showCantFind();
-        } else {
-            return ui.showFind(find);
         }
+
+        return ui.showFind(find);
+
     }
 }
