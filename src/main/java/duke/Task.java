@@ -4,9 +4,6 @@ package duke;
  * Represents a task that is created by an user.
  */
 class Task {
-    enum Type {
-        E, T, D
-    }
 
     protected String description;
     protected boolean hasCompleted;

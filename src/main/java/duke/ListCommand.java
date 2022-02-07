@@ -6,7 +6,7 @@ import java.io.IOException;
  * Runs the command for user to show the list of tasks the user has on hand.
  */
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Executes the command and prints the list of tasks for the user.

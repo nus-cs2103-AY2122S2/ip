@@ -48,5 +48,4 @@ public class MarkCommand extends Command {
         ui.outputMessage(message);
         return message;
     }
-
 }
