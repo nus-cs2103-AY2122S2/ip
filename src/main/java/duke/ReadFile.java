@@ -2,8 +2,16 @@ package duke;
 
 import java.util.ArrayList;
 
-//class to read file and process file into a string format
+/**
+ * Class to read file and process file into a string format.
+ */
 public class ReadFile {
+    /**
+     * Reads the data file for loading into the current iteration of the program.
+     * 
+     * @param list  current iteration of the empty list.
+     * @return list containing all the tasks in String format.
+     */
     public static String readFile(ArrayList<Task> list) {
         int n = list.size() - 1;
         String s = "";

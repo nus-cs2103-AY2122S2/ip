@@ -8,15 +8,24 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.io.File;
 
+/**
+ * Loads the data stored in the disk into the current run of the application.
+ */
 public class LoadFile {
-    public static boolean loaded = false;
+    public static boolean hasLoaded = false;
 
+    /**
+     * Method that loads the data stored in the .txt data file into the current iteration of the program.
+     * 
+     * @return ArrayList<Task> containing the loaded data.
+     * @throws FileNotFoundException if the .txt data file cannot be found in the disk.
+     */
     public static ArrayList<Task> load() throws FileNotFoundException {
         File file = new File("data/duke.txt");
         ArrayList<Task> list = new ArrayList<>();
 
         if (file.exists()) {
-            loaded = true;
+            hasLoaded = true;
             try {
                 Scanner s = new Scanner(file);
                 while (s.hasNextLine()) {
@@ -26,15 +35,11 @@ public class LoadFile {
 
                     if (str.contains("[T]")) {
                         task = new Todo(str.substring(7));
-                    }
-
-                    else if (str.contains("[E]")) {
+                    } else if (str.contains("[E]")) {
                         int startIndex = str.indexOf(" (at: ");
-
                         task = new Event(str.substring(18, startIndex), LocalDate.parse(str.substring(0, 10)));
                     } else {
                         int startIndex = str.indexOf(" (by: ");
-
                         task = new Deadline(str.substring(18, startIndex), LocalDate.parse(str.substring(0, 10)));
                     }
 

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Parses through the user input to determine what command the user intends to call and invoke the command.
+ */
 public class Parser {
     enum Commands {
         LIST("list"),
@@ -23,6 +26,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses through the user input to process the command called. Starts the main functionalities of Duke.
+     * 
+     * @throws DukeException
+     * @throws IOException
+     */
     protected static void start() throws DukeException, IOException {
         //to read user input
         Scanner scanned = new Scanner(System.in);
@@ -30,7 +39,7 @@ public class Parser {
         String input = scanned.nextLine();
 
         while (!input.equals(Commands.BYE.command)) {
-            System.out.println("=======================================================================");
+            System.out.println(Ui.banner);
 
             //prints the list of items when user inputs list
             if (input.equals(Commands.LIST.command)) {
@@ -83,14 +92,18 @@ public class Parser {
 
             //to continue reading user input
             scanned = new Scanner(System.in);
-            System.out.println("");
+            System.out.println("\n");
             input = scanned.nextLine();
         }
 
         Ui.bye();
     }
     
-        //to print the current list of items
+        /**
+         * To print the current list of items.
+         * 
+         * @param arraylist the list containing all the tasks.
+         */
         private static void printList(ArrayList<Task> arraylist) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < arraylist.size(); i++) {
@@ -100,7 +113,11 @@ public class Parser {
         }
 
         
-    //save file to the hard disk
+    /**
+     * Save file to the hard disk.
+     * 
+     * @throws IOException
+     */
     private static void saveFile() throws IOException {
         String str = ReadFile.readFile(Duke.list);
         WriteFile.writeToFile(str);

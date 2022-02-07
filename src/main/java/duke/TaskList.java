@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * TaskList contains all the types of taskscommands in the application.
+ */
 public class TaskList {
     /**
      * Marks a task as done.
@@ -55,6 +58,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a deadline object to be added into the task list.
+     * 
+     * @param input user command.
+     * @throws DukeException
+     */
     protected static void deadline(String input) throws DukeException {
         if (stripDescription(input)[0] == "") {
             throw new DukeException(
@@ -63,9 +72,7 @@ public class TaskList {
         }
 
         if (stripDescription(input)[1] == "") {
-            throw new DukeException(
-                    "Oops, please tell me when is this due!"
-            );
+            throw new DukeException("Oops, please tell me when is this due!");
         }
 
         LocalDate date = LocalDate.parse(stripDescription(input)[1]);
@@ -124,10 +131,6 @@ public class TaskList {
         System.out.println("Now you have " + Duke.list.size() + " in the list.");
     }
 
-    protected static void list() {
-
-    }
-
     /**
      * Deletes a task from the list.
      * 
@@ -158,6 +161,7 @@ public class TaskList {
 
     /**
      * To process the input string and separate the description and date (if applicable).
+     * 
      * @param s
      * @return a string array [description, date] where date="" if not applicable.
      * @throws DukeException
