@@ -24,7 +24,9 @@ public class TaskMaster {
      * @param t Task t to be added
      */
     public void addTask(Task t) {
+        int sizeBefore = this.tasks.size();
         this.tasks.add(t);
+        assert this.tasks.size() == sizeBefore + 1;
     }
 
     /**
@@ -33,7 +35,10 @@ public class TaskMaster {
      * @return the deleted task
      */
     public Task deleteTask(int i) {
-        return this.tasks.remove(i - 1); //-1 because arr index starts frm 0
+        int sizeBefore = this.tasks.size();
+        Task removedTask = this.tasks.remove(i - 1);
+        assert this.tasks.size() == sizeBefore - 1;
+        return removedTask;//-1 because arr index starts frm 0
     }
 
     /**
