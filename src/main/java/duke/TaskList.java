@@ -63,7 +63,12 @@ public class TaskList {
 
         String output = "    Noted. I've removed this task:\n";
         String taskRemove = "        " + taskLists.get(num - 1).toString() + "\n";
+
+        int initialTaskListsLength = taskLists.size();
         taskLists.remove(num - 1);
+        assert taskLists.size() == initialTaskListsLength - 1 : "length of current tasklist should " +
+                "decrease by one";
+
         TaskList tempTaskList = new TaskList(taskLists);
         storage.save(tempTaskList);
         String taskRemainingString = String.format("    Now you have %d tasks in the list.", taskLists.size());
@@ -77,10 +82,7 @@ public class TaskList {
      * @param task a Task to be added.
      */
     public String addTask(Task task) {
-//        taskLists.add(task);
-
         String displayTaskAmount = String.format("Now you have %d tasks in the list.", taskLists.size());
-
 
         // display to do task
         String output = "    Got it. I've added this task:\n";
@@ -88,7 +90,6 @@ public class TaskList {
         String taskAmount =  "    " + displayTaskAmount;
 
         return output + addOn + taskAmount;
-
     }
 
     /**
@@ -112,7 +113,6 @@ public class TaskList {
 
         String taskMarkString = String.format("%s", taskLists.get(taskToMark - 1).toString());
         return output + "    " + taskMarkString;
-
     }
 
     /**
@@ -126,6 +126,5 @@ public class TaskList {
 
         String taskString = String.format("%s", taskLists.get(taskToUnmark - 1).toString());
         return output + "    " + taskString;
-
     }
 }
