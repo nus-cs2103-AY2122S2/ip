@@ -1,15 +1,19 @@
 package task;
 
 public class Todo extends Task {
-    public Todo (String description, boolean isDone) {
-        super(description, isDone);
+    public Todo (String description, boolean isDone, Integer priorityLevel) {
+        super(description, isDone, priorityLevel);
     }
+
+    @Override
     public String fileFormat() {
-        return String.format("T | %s | %s", getTaskStatus() ? "X" : " ", getDescription());
+        String priorityString = getPriorityLevel() == null ? "" : "| P" + getPriorityLevel();
+        return String.format("T | %s | %s %s", getTaskStatus() ? "X" : " ", getDescription(), priorityString);
     }
 
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", getTaskStatus() ? "X" : " ", getDescription());
+        String priorityString = getPriorityLevel() == null ? "" : " Priority " + getPriorityLevel() + ": ";
+        return String.format("[T][%s]%s %s", getTaskStatus() ? "X" : " ", priorityString, getDescription());
     }
 }

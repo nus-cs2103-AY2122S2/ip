@@ -7,10 +7,14 @@ import task.Todo;
 
 public class TodoCommand extends Command {
     private final String message;
+    private final Integer priorityLevel;
 
-    public TodoCommand(String message) {
+    /** Constructor for TodoCommand */
+    public TodoCommand(String message, Integer priorityLevel) {
         this.message = message;
+        this.priorityLevel = priorityLevel;
     }
+
     /**
      * Add Todo Task to TaskList.
      * Also overwrite Storage.
@@ -21,7 +25,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList) throws DukeException {
-        taskList.add(new Todo(this.message, false));
+        taskList.add(new Todo(this.message, false, priorityLevel));
         storage.writeToFile(taskList);
         return "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1)
