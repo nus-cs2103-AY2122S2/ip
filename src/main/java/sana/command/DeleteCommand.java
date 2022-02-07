@@ -5,11 +5,21 @@ import sana.exception.OutOfBoundsTaskException;
 import sana.task.Task;
 
 public class DeleteCommand extends Command {
+
+    /**
+     * Supports the delete command
+     *
+     * @param args  the arguments in the command
+     * @param taskList  sana's tasklist
+     *
+     * @return  sana's response to the command
+     */
     @Override
     public String executeCommand (String[] args, TaskList taskList) {
         try {
-            Integer deleteIndex = Integer.parseInt(args[1]) - 1;
-            if (deleteIndex < 0 || deleteIndex >= taskList.taskAmt()) {
+            int deleteIndex = Integer.parseInt(args[1]) - 1;
+            boolean indexOutOfTaskListBounds = deleteIndex < 0 || deleteIndex >= taskList.taskAmt();
+            if (indexOutOfTaskListBounds) {
                 throw new OutOfBoundsTaskException();
             }
             Task taskToDelete = taskList.getTask(deleteIndex);

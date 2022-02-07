@@ -14,6 +14,11 @@ public class IncompleteCommandException extends Exception {
         super(IncompleteCommandException.MESSAGE);
     }
 
+    /**
+     * The message Sana says when she receives an incomplete command
+     *
+     * @return  message
+     */
     public String getMessage() {
         return IncompleteCommandException.MESSAGE;
     }
