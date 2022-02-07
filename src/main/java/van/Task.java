@@ -56,7 +56,7 @@ public class Task {
     /**
      * changes the status of the task to be incomplete
      */
-    public void setunDone() {
+    public void setUnDone() {
         this.done = false;
     }
 

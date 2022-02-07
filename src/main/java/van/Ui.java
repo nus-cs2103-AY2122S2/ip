@@ -25,6 +25,11 @@ public class Ui {
         builder.append(count + " tasks pending\n");
     }
 
+    public void markMessage() {
+        builder.setLength(0);
+        builder.append("Changed task status");
+    }
+
     public void printList(ArrayList<Task> taskList) {
         builder.append("Pending tasks:\n");
         for (int i = 0; i < taskList.size(); i++) {
