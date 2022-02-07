@@ -55,7 +55,6 @@ public class StorageTest {
         assertTrue(filename.exists());
     }
 
-
     @Test
     @DisplayName("Able to write to file")
     public void testWriteFile() {
