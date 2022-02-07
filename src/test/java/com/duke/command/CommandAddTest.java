@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.duke.modules.Storage;
@@ -51,6 +52,7 @@ public class CommandAddTest {
                 "OOPS!!! The description/location of a event cannot be empty.");
     }
 
+    @BeforeAll
     @AfterAll
     public static void deleteFile() {
         Storage testStorage = Storage.getInstance();

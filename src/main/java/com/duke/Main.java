@@ -3,14 +3,12 @@ package com.duke;
 import java.io.IOException;
 
 import com.duke.gui.MainTabPaneWindow;
-import com.duke.gui.MainWindow;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;

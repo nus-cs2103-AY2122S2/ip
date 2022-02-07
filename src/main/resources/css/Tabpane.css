@@ -3,6 +3,7 @@
     -fx-background-color: black;
 }
 
+
 .tab-pane .tab-header-area {
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0 0 0 0;
@@ -10,9 +11,13 @@
 
 .tab-pane
 {
-    -fx-tab-min-width:90px;
     -fx-background-image: url("file:C:/CS2103T/ip/src/main/resources/images/backgroundhd2.jpg");
     -fx-background-size: cover;
+
+    -fx-tab-min-width:90px;
+    -fx-tab-max-width:120px;
+    -fx-tab-min-height:200px;
+    -fx-tab-max-height:50px;
 }
 
 .tab{
@@ -33,8 +38,10 @@
 .tab .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: #828282;
-    -fx-font-size: 12px;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
+    -fx-rotate: 90; 
+    -fx-padding: 0 0 0 0;
 }
 
 .tab:selected .tab-label { 

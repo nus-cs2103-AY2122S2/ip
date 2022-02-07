@@ -25,9 +25,9 @@ public class DialogBox extends HBox {
         try {
             FXMLLoader fxmlLoader;
             if (user.matches("user")) {
-                fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBoxUser.fxml"));
+                fxmlLoader = new FXMLLoader(MainTabPaneWindow.class.getResource("/view/DialogBoxUser.fxml"));
             } else {
-                fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBoxBot.fxml"));
+                fxmlLoader = new FXMLLoader(MainTabPaneWindow.class.getResource("/view/DialogBoxBot.fxml"));
             }
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
