@@ -36,7 +36,7 @@ public class ScheduleCommandTest {
 
         linePrinter.clear();
         new ScheduleCommand("25/12/2022").execute(linePrinter, list);
-        assertEquals(1, linePrinter.lineCount());
+        assertEquals("You have no tasks on 25/12/2022!", linePrinter.getLines().get(0));
     }
 
     @Test
