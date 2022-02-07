@@ -65,13 +65,13 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
-            return 0;
+            return;
         } catch (DukeException e) {
             AlertUi.makeErrorAlert("DukeException", e.getMessage());
-            return 0;
+            return;
         } finally {
             userInput.clear();
-            return 0;
+            return;
         }
     }
 }
