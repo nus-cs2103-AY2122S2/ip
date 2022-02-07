@@ -18,6 +18,13 @@ public class TaskArrayList {
     }
 
     /**
+     * Constructs the empty TaskArrayList object.
+     */
+    public TaskArrayList() {
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
      * Adds a Task to the current TaskArrayList.
      * @param task task to be added.
      */
@@ -65,12 +72,12 @@ public class TaskArrayList {
      * @return the Tasks in TaskArrayList in the String format.
      */
     public String getTaskList() {
-        String list = "Konnichiwassup! Look at how much work you have to do!\n";
+        StringBuilder list = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); i++) {
-            list += (i + 1) + ". " + tasks.get(i).toString() + "\n";
+            list.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }
-        return list;
+        return list.toString();
     }
 
     /**
@@ -83,5 +90,9 @@ public class TaskArrayList {
         } else {
             return String.format("You currently have %d tasks on the list >.< Jiayous", tasks.size());
         }
+    }
+
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
     }
 }

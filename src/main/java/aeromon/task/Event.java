@@ -16,8 +16,8 @@ public class Event extends Task {
      * @param description the task name.
      * @param at the duration in which the event takes place.
      */
-    public Event(String description, LocalDate at) {
-        super(description);
+    public Event(String description, boolean isDone, LocalDate at) {
+        super(description, isDone);
         this.at = at;
     }
 

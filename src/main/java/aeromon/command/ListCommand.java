@@ -12,6 +12,7 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
+        ui.print("Konnichiwassup! Look at how much work you have to do!");
         ui.print(taskArrayList.getTaskList() + taskArrayList.getTasksStatus());
     }
 }

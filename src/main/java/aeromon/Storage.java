@@ -34,7 +34,7 @@ public class Storage {
      * @throws AeromonException when an error occurs when reading the file.
      */
     public ArrayList<Task> getFile() throws AeromonException {
-        
+
         try {
             if (localTasks.createNewFile()) {
                 return new ArrayList<>();
@@ -49,17 +49,38 @@ public class Storage {
 
                     switch (tokens[0]) { //tokens[0] indicates the task type
                     case "T":
-                        ToDo toDo = new ToDo(tokens[2]);
+                        ToDo toDo;
+
+                        if (tokens[1].equals("1")) {
+                            toDo = new ToDo(tokens[2], true);
+                        } else {
+                            toDo = new ToDo(tokens[2], false);
+                        }
+
                         tasks.add(toDo);
                         break;
 
                     case "D":
-                        Deadline deadline = new Deadline(tokens[2], LocalDate.parse(tokens[3], dateTimeFormatter));
+                        Deadline deadline;
+
+                        if (tokens[1].equals("1")) {
+                            deadline = new Deadline(tokens[2], true, LocalDate.parse(tokens[3], dateTimeFormatter));
+                        } else {
+                            deadline = new Deadline(tokens[2], false, LocalDate.parse(tokens[3], dateTimeFormatter));
+                        }
+
                         tasks.add(deadline);
                         break;
 
                     case "E":
-                        Event event = new Event(tokens[2], LocalDate.parse(tokens[3], dateTimeFormatter));
+                        Event event;
+
+                        if (tokens[1].equals("1")) {
+                            event = new Event(tokens[2], true, LocalDate.parse(tokens[3], dateTimeFormatter));
+                        } else {
+                            event = new Event(tokens[2], false, LocalDate.parse(tokens[3], dateTimeFormatter));
+                        }
+
                         tasks.add(event);
                         break;
 

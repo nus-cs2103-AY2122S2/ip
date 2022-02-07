@@ -42,7 +42,7 @@ public class CommandManager {
         }
 
         case "todo": {
-            return new AddCommand(AddCommand.TaskType.TODO, new String[] { checkDescription("Todo",arr[1]) });
+            return new AddCommand(AddCommand.TaskType.TODO, new String[] { checkDescription("Todo", arr[1]) });
         }
 
         case "deadline": {
@@ -55,6 +55,10 @@ public class CommandManager {
             String description = checkDescription("Event", arr[1]);
             String[] tokens = description.split(" /at ");
             return new AddCommand(AddCommand.TaskType.EVENT, tokens);
+        }
+
+        case "find": {
+            return new FindCommand(arr[1]);
         }
 
         default:

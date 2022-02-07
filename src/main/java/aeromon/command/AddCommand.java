@@ -32,25 +32,25 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
-        System.out.println("Nicely! I've added for you:");
+        ui.print("Nicely! I've added for you:");
 
         switch(taskType) {
         case TODO:
-            ToDo toDo = new ToDo(tokens[0]);
+            ToDo toDo = new ToDo(tokens[0], false);
             taskArrayList.add(toDo);
             ui.print(toDo.toString());
             ui.print(taskArrayList.getTasksStatus());
             break;
 
         case DEADLINE:
-            Deadline deadline = new Deadline(tokens[0].trim(), LocalDate.parse(tokens[1]));
+            Deadline deadline = new Deadline(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
             taskArrayList.add(deadline);
             ui.print(deadline.toString());
             ui.print(taskArrayList.getTasksStatus());
             break;
 
         case EVENT:
-            Event event = new Event(tokens[0].trim(), LocalDate.parse(tokens[1]));
+            Event event = new Event(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
             taskArrayList.add(event);
             ui.print(event.toString());
             ui.print(taskArrayList.getTasksStatus());

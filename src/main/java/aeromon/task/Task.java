@@ -12,9 +12,9 @@ public class Task {
      * Constructs the Task object.
      * @param description the task name.
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -39,6 +39,14 @@ public class Task {
     public void markAsNotDone() {
         isDone = false;
         System.out.println("OI! What happened to completing: \n" + this);
+    }
+
+    /**
+     * Gets the description of the task.
+     * @return the description.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     @Override
