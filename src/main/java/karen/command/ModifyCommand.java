@@ -15,7 +15,7 @@ public class ModifyCommand extends Command {
     protected ModifyType modifyAction;
     private int taskIndex;
 
-    public ModifyCommand (int inputIndex, ModifyType inputAction) {
+    public ModifyCommand(int inputIndex, ModifyType inputAction) {
         taskIndex = inputIndex;
         modifyAction = inputAction;
     }
@@ -46,6 +46,11 @@ public class ModifyCommand extends Command {
                 outputResult = ui.displayUserInput(String.format(UNDONE_FORMAT, getTask));
                 break;
             }
+
+            // outputResult should not plausibly be null. Constructing ModifyCommand objects should
+            // only be done based on enums available in modifyAction.
+            assert outputResult != null;
+
             return outputResult;
         } catch (IndexOutOfBoundsException err) {
             throw new KarenException(
