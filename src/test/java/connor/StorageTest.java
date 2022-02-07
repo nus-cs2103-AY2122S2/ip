@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
-import connor.exception.ConnorException;
 import org.junit.jupiter.api.Test;
 
+import connor.exception.ConnorException;
 import connor.exception.InvalidTaskFileException;
 import connor.task.Deadline;
 import connor.task.Event;
