@@ -2,6 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.ui.Ui;
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
 
 /**
  * Represents Duke.
@@ -29,8 +33,8 @@ public class Duke {
      *
      * @return The welcome message.
      */
-    public String getWelcome() {
-        return ui.welcome();
+    public String welcome() {
+        return ui.welcome(tasks);
     }
 
     /**

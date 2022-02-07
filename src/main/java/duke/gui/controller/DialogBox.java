@@ -1,4 +1,4 @@
-package duke.gui;
+package duke.gui.controller;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -61,7 +61,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getDukeWelcomeDialog(String text, Image img) {
+    public static DialogBox getWelcomeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

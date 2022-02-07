@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+
 
 /**
  * Represents the command to add a to-do item.

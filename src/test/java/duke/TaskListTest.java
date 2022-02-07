@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import duke.task.ToDo;
+import duke.util.TaskList;
 
 public class TaskListTest {
     private TaskList tasks = new TaskList();

@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.util.ArrayList;
 
@@ -20,6 +20,10 @@ public class TaskList {
 
     public Task get(int i) {
         return tasks.get(i);
+    }
+
+    public boolean isEmpty() {
+        return tasks.isEmpty();
     }
 
     public int size() {

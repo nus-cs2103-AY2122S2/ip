@@ -1,4 +1,4 @@
-package duke.gui;
+package duke.gui.controller;
 
 import duke.Duke;
 import javafx.fxml.FXML;
@@ -34,6 +34,15 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    /**
+     * Creates a dialog box on start to welcome the user.
+     */
+    public void welcome(String text) {
+        dialogContainer.getChildren().add(
+                DialogBox.getWelcomeDialog(text, dukeImage)
+        );
     }
 
     /**

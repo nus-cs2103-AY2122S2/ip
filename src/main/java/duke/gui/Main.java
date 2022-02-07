@@ -1,8 +1,9 @@
-package duke;
+package duke.gui;
 
 import java.io.IOException;
 
-import duke.gui.MainWindow;
+import duke.Duke;
+import duke.gui.controller.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,6 +29,7 @@ public class Main extends Application {
             scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().welcome(duke.welcome());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

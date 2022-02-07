@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import duke.command.Command;
+import duke.util.DukeException;
+import duke.util.Parser;
 
 public class ParserTest {
     @Test

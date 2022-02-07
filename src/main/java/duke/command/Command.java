@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
 import duke.ui.Ui;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
 
 /**
  * Represents a command.

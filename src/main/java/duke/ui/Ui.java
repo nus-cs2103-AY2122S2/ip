@@ -2,10 +2,10 @@ package duke.ui;
 
 import java.util.Scanner;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
 import duke.task.Task;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
 
 /**
  * Represents the user interface.
@@ -31,17 +31,16 @@ public class Ui {
 
     /**
      * Displays welcome message.
+     *
+     * @params isEmpty Whether there are saved tasks.
      * @return Welcome message.
      */
-    public String welcome() {
-        return "Hello! I'm Duke, what can I do for you?";
-    }
-
-    /**
-     * Displays error.
-     */
-    public String displayError(String message) {
-        return message;
+    public String welcome(TaskList tasks) {
+        String greeting = "Hello! I'm Duke.";
+        if (!tasks.isEmpty()) {
+            return greeting + "\n" + listTasks(tasks);
+        }
+        return greeting + " What can I do for you?";
     }
 
     /**
