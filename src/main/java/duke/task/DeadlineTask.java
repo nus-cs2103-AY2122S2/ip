@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A task that should be completed before the specified date.
  */
 public class DeadlineTask extends Task {
-    private LocalDate d;
+    private LocalDate deadlineDate;
 
     /**
      * Constructor for DeadlineTask.
@@ -18,16 +18,25 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String taskName, boolean isDone, LocalDate date) {
         this.taskName = taskName;
         this.isDone = isDone;
-        this.d = date;
+        this.deadlineDate = date;
     }
 
     public LocalDate getDueDate() {
-        return this.d;
+        return this.deadlineDate;
+    }
+
+    @Override
+    public String toFileString() {
+        return String.format("%s,%s,%s,%s",
+                "D",
+                this.isDone ? "T" : "F",
+                this.taskName,
+                this.deadlineDate.format(DateTimeFormatter.ofPattern("dd/M/yyyy")));
     }
 
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by:%s)", this.isDone ? "X" : " ", this.taskName,
-                this.d.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

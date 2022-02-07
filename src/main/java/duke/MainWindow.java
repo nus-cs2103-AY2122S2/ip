@@ -6,7 +6,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -25,10 +24,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Ui ui;
     private TaskList taskList;
-    private Parser parser;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tom.png"));
 
     @FXML
@@ -36,21 +32,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-
     public VBox getDialogContainer() {
         return this.dialogContainer;
     }
 
-    public void setUi(Ui ui) {
-        this.ui = ui;
-    }
-
     public void setTaskList(TaskList taskList) {
         this.taskList = taskList;
-    }
-
-    public void setParser(Parser parser) {
-        this.parser = parser;
     }
 
     /**
@@ -59,16 +46,14 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-
-        String input = userInput.getText();;
+        String input = userInput.getText();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, (userImage))
         );
-        int runResult = parser.run(userInput.getText(), ui, taskList);
+        int runResult = Parser.run(userInput.getText(), taskList);
         if (runResult == 1) {
-            Storage.saveFile("data", "duke.txt", taskList.getList());
+            Storage.saveFile("data", "duke.txt", taskList);
         }
         userInput.clear();
-
     }
 }
