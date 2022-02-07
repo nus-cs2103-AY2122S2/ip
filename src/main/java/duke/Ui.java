@@ -40,7 +40,7 @@ public class Ui {
         printContent(MESSAGE_INTRO);
     }
 
-    public String getWelcomeMessage(){
+    public String getWelcomeMessage() {
         return MESSAGE_INTRO;
     }
 

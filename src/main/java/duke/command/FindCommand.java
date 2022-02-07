@@ -47,7 +47,7 @@ public class FindCommand extends Command {
         }
         String foundList = MESSAGE_FIND + "\n     ";
         for (int i = 0; i < foundIndexes.size(); i++) {
-        Task thisTask = tasks.get(foundIndexes.get(i));
+            Task thisTask = tasks.get(foundIndexes.get(i));
             foundList += (i + 1) + ". " + "[" + thisTask.getType() + "]"
                     + "[" + thisTask.getStatusIcon() + "] " + thisTask;
             if (i != foundIndexes.size() - 1) {
