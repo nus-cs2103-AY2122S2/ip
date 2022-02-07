@@ -101,7 +101,7 @@ public abstract class Result {
         private static final JukeException EMPTY_EXCEPTION = new JukeException("Result is empty.");
     
         private Empty() {
-            super(null);
+            super((String[]) null);
         }
     
         /**
