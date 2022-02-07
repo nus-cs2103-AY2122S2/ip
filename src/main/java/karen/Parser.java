@@ -29,8 +29,6 @@ public class Parser {
     public static final Pattern EVENT_FORMAT = Pattern.compile("^event (?<description>.*) \\/at (?<time>.*)$");
     public static final Pattern FIND_FORMAT = Pattern.compile("^find (?<keyTerm>.*)$");
 
-    public static final String NA_MESSAGE = "I don't understand anything - I want to speak with your manager";
-
     /**
      * Validates if dateString parameter follows yyyy-mm-dd format.
      *
@@ -181,7 +179,7 @@ public class Parser {
         // extract first word
         final Matcher matcher = KEYWORD_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
-            return new InvalidCommand(NA_MESSAGE);
+            return new InvalidCommand();
         }
 
         String keyWord = matcher.group("keyWord");
@@ -210,7 +208,7 @@ public class Parser {
             getCommand = prepareFind(keyWord, fullInput);
             break;
         default:
-            getCommand = new InvalidCommand(NA_MESSAGE);
+            getCommand = new InvalidCommand();
             break;
         };
         return getCommand;
