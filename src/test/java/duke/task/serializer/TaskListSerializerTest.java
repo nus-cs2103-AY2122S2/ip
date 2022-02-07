@@ -1,6 +1,9 @@
 package duke.task.serializer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,16 +18,19 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.testutil.StreamUtils;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 public class TaskListSerializerTest {
     @Test
     public void testInflate_valid_success() throws IOException, DukeIoException {
-        byte[] taskData = StreamUtils.buildOutputStream((dOut) -> {
+        /* byte[] taskData = StreamUtils.buildOutputStream((dOut) -> {
             dOut.writeShort(1);
             dOut.writeUTF("Test Description 1");
             dOut.writeBoolean(true);
-        });
+        }); */
 
+        byte[] taskData = new byte[]{ 1, 2, 3, 4, 5 };
         byte[] data = StreamUtils.buildOutputStream((dOut) -> {
             dOut.writeInt(4);
             for (int i = 0; i < 4; i++) {
@@ -33,8 +39,13 @@ public class TaskListSerializerTest {
             }
         });
 
-        TaskList list = TaskListSerializer.inflate(new ByteArrayInputStream(data));
-        assertEquals(4, list.getTaskCount());
+        try (MockedStatic<TaskSerializer> theMock = Mockito.mockStatic(TaskSerializer.class)) {
+            theMock.when(() -> TaskSerializer.inflate(any())).thenReturn(new Todo(""));
+
+            TaskList list = TaskListSerializer.inflate(new ByteArrayInputStream(data));
+            assertEquals(4, list.getTaskCount());
+        }
+
     }
 
     @Test

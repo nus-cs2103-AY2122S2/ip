@@ -2,9 +2,9 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,15 +18,11 @@ import duke.exception.DukeIoException;
 import duke.testutil.PrinterStub;
 import duke.ui.Ui;
 import duke.util.Printable;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 public class UiTest {
     private Ui initMockUi() throws DukeIoException {
-        Ui ui = mock(Ui.class);
-        Stage stage = mock(Stage.class);
-        doNothing().when(stage).setScene(any(Scene.class));
-        ui.buildStage(stage, (input) -> {});
+        Ui ui = spy(Ui.class);
+        doNothing().when(ui).buildStage(any(), any());
         return ui;
     }
 
@@ -34,14 +30,14 @@ public class UiTest {
     public void testGreet() throws DukeIoException {
         Ui ui = initMockUi();
         ArrayList<String> lines = new ArrayList<>();
-        when(ui.printCommand(any())).thenAnswer((invocation) -> {
+        doAnswer((invocation) -> {
             invocation.<Function<Printable, Boolean>>getArgument(0)
                     .apply((message) -> {
                         lines.add(message);
                     });
             return true;
-        });
-        when(ui.greet()).thenCallRealMethod();
+        }).when(ui).printCommand(any());
+
         ui.greet();
         String actual = lines.stream().reduce((x, y) -> x + "\n" + y).orElse("");
         assertEquals("Hi! I'm Megumin\n"
@@ -52,13 +48,13 @@ public class UiTest {
     public void testPrintCommand() throws DukeIoException {
         Ui ui = initMockUi();
         ArrayList<String> lines = new ArrayList<>();
-        when(ui.printCommand(any())).thenAnswer((invocation) -> {
+        doAnswer((invocation) -> {
             invocation.<Function<Printable, Boolean>>getArgument(0)
                     .apply((message) -> {
                         lines.add(message);
                     });
             return true;
-        });
+        }).when(ui).printCommand(any());
 
         ui.printCommand((linePrinter) -> {
             linePrinter.print("test line");
