@@ -23,6 +23,8 @@ public class Contact implements Comparable<Contact> {
         this.name = name;
         this.birthday = birthday;
 
+        assert isNumeric(phoneNumber) : "Phone number should be a number";
+        assert phoneNumber.length() == 8 : "Phone number should have 8 digits";
         if (phoneNumber.length() != 8 || !isNumeric(phoneNumber)) {
             throw new ChatBotException("Phone number should be a 8 digit number traveller!");
         }
