@@ -11,7 +11,7 @@ public class Event extends Task {
      * Starting time.
      */
     private DateTimeHandler date;
-    
+
     /**
      * Constructor to initialize task with a description and a starting time.
      *
@@ -22,7 +22,7 @@ public class Event extends Task {
         super(description);
         this.date = new DateTimeHandler(time);
     }
-    
+
     /**
      * Get the starting time.
      *
@@ -31,7 +31,7 @@ public class Event extends Task {
     public String getTime() {
         return this.date.getDateTime();
     }
-    
+
     /**
      * Returns the task icon.
      *
@@ -41,7 +41,7 @@ public class Event extends Task {
     String getTaskIcon() {
         return TaskType.EVENT.getTaskIcon();
     }
-    
+
     /**
      * Returns info about the task including its starting time.
      *

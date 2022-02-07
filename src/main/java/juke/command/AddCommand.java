@@ -10,19 +10,17 @@ import juke.task.Todo;
 
 public class AddCommand extends Command {
     private TaskType type;
-    
+
     public AddCommand(TaskType type) {
         this.type = type;
     }
-    
+
     @Override
     public Command checkParametersAndArguments() {
         switch (this.type) {
         case EVENT:
             if (this.hasParameter("at")) {
-                if (this.hasArgument("at")) {
-                
-                } else {
+                if (!this.hasArgument("at")) {
                     this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
                     return this;
                 }
@@ -33,9 +31,7 @@ public class AddCommand extends Command {
             break;
         case DEADLINE:
             if (this.hasParameter("by")) {
-                if (this.hasArgument("by")) {
-            
-                } else {
+                if (!this.hasArgument("by")) {
                     this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
                     return this;
                 }
@@ -44,6 +40,7 @@ public class AddCommand extends Command {
                 return this;
             }
             break;
+        default:
         }
         for (String param : this.paramArgs.keySet()) {
             if (!this.isDefaultParameter(param)) {
@@ -72,7 +69,7 @@ public class AddCommand extends Command {
         }
         return this;
     }
-    
+
     @Override
     public Command execute() {
         if (this.isSuccessful()) {
@@ -95,6 +92,7 @@ public class AddCommand extends Command {
                 this.juke.getTaskList().add(new Deadline(this.getDefaultArgument(),
                         this.getArgument("by")));
                 break;
+            default:
             }
             this.result = Result.success(String.format("New %s added: %s.",
                     this.type.getCommandName(), this.getDefaultArgument()));
@@ -105,7 +103,7 @@ public class AddCommand extends Command {
         this.juke.getStorage().saveTasks();
         return this;
     }
-    
+
     public TaskType getType() {
         return this.type;
     }

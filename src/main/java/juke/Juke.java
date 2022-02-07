@@ -10,12 +10,12 @@ import juke.common.Ui;
  */
 public class Juke {
     private static final Juke INSTANCE = new Juke();
-    
+
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
     private boolean hasExited;
-    
+
     /**
      * Constructor that initializes the application.
      */
@@ -26,7 +26,7 @@ public class Juke {
         this.hasExited = false;
         CommandHandler.registerCommands();
     }
-    
+
     private void run() {
         this.ui.greet();
         this.storage.loadTasks();
@@ -34,14 +34,14 @@ public class Juke {
             this.ui.runUiLoop();
         }
     }
-    
+
     /**
      * Begins the process of exiting Juke.
      */
     public void exit() {
         this.hasExited = true;
     }
-    
+
     /**
      * Returns the list used to store tasks.
      *
@@ -50,7 +50,7 @@ public class Juke {
     public TaskList getTaskList() {
         return this.taskList;
     }
-    
+
     /**
      * Returns the UI class used to handle inputs and outputs.
      *
@@ -59,7 +59,7 @@ public class Juke {
     public Ui getUi() {
         return this.ui;
     }
-    
+
     /**
      * Returns the storage class used to handle file storage.
      *
@@ -68,7 +68,7 @@ public class Juke {
     public Storage getStorage() {
         return this.storage;
     }
-    
+
     /**
      * Returns the singleton instance of Juke.
      *
@@ -77,7 +77,7 @@ public class Juke {
     public static Juke getInstance() {
         return INSTANCE;
     }
-    
+
     /**
      * Main class for the Juke application.
      *

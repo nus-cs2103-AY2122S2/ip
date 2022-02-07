@@ -1,11 +1,11 @@
 package juke.command;
 
+import java.util.List;
+
 import juke.exception.JukeEmptyTaskListException;
 import juke.exception.JukeInvalidParameterException;
 import juke.exception.JukeMissingArgumentException;
 import juke.task.Task;
-
-import java.util.List;
 
 public class FindCommand extends Command {
     @Override
@@ -22,7 +22,7 @@ public class FindCommand extends Command {
         }
         return this;
     }
-    
+
     @Override
     public Command execute() {
         if (this.isSuccessful()) {

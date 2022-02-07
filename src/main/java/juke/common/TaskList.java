@@ -1,26 +1,26 @@
 package juke.common;
 
-import juke.exception.JukeEmptyTaskListException;
-import juke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import juke.exception.JukeEmptyTaskListException;
+import juke.task.Task;
 
 /**
  * Abstraction for list of tasks.
  */
 public class TaskList implements Iterable<Task> {
     private final ArrayList<Task> taskList;
-    
+
     /**
      * Constructor to initialize empty internal list.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
-    
+
     /**
      * Constructor to initialize internal list with elements of a collection.
      *
@@ -30,7 +30,7 @@ public class TaskList implements Iterable<Task> {
         this.taskList = new ArrayList<>();
         this.taskList.addAll(tasks);
     }
-    
+
     /**
      * Adds a task to the end of the list.
      *
@@ -40,7 +40,7 @@ public class TaskList implements Iterable<Task> {
     public boolean add(Task task) {
         return this.taskList.add(task);
     }
-    
+
     /**
      * Removes the task at a specific index.
      * Returns null if index out of bounds.
@@ -55,7 +55,7 @@ public class TaskList implements Iterable<Task> {
             return null;
         }
     }
-    
+
     /**
      * Returns the task at a specific index.
      * Returns null if index out of bounds.
@@ -70,7 +70,7 @@ public class TaskList implements Iterable<Task> {
             return null;
         }
     }
-    
+
     /**
      * Returns the number of tasks in the list.
      *
@@ -79,7 +79,7 @@ public class TaskList implements Iterable<Task> {
     public int size() {
         return this.taskList.size();
     }
-    
+
     public String[] list() throws JukeEmptyTaskListException {
         if (this.taskList.size() == 0) {
             throw new JukeEmptyTaskListException();
@@ -90,7 +90,7 @@ public class TaskList implements Iterable<Task> {
         }
         return strs;
     }
-    
+
     /**
      * Marks the task at the given index.
      * Returns false if the index is invalid.
@@ -106,7 +106,7 @@ public class TaskList implements Iterable<Task> {
             return false;
         }
     }
-    
+
     /**
      * Unmarks the task at the given index.
      * Returns false if the index is invalid.
@@ -122,7 +122,7 @@ public class TaskList implements Iterable<Task> {
             return false;
         }
     }
-    
+
     /**
      * Queries for all tasks containing the given string.
      *

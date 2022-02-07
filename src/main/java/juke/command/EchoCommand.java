@@ -8,7 +8,7 @@ import juke.exception.JukeMissingArgumentException;
  */
 public class EchoCommand extends Command {
     private String message;
-    
+
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -23,7 +23,7 @@ public class EchoCommand extends Command {
         }
         return this;
     }
-    
+
     @Override
     public Command execute() {
         if (this.isSuccessful()) {

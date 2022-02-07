@@ -8,12 +8,12 @@ public abstract class Task {
      * Task description.
      */
     protected String description;
-    
+
     /**
      * Task status.
      */
     protected TaskStatus status;
-    
+
     /**
      * Constructor to initialize a task with a description.
      *
@@ -23,21 +23,21 @@ public abstract class Task {
         this.description = description;
         this.status = TaskStatus.NOT_DONE;
     }
-    
+
     /**
      * Marks the task as done.
      */
     public void markAsDone() {
         this.status = TaskStatus.DONE;
     }
-    
+
     /**
      * Marks the task as not done.
      */
     public void markAsNotDone() {
         this.status = TaskStatus.NOT_DONE;
     }
-    
+
     /**
      * Returns the status of the task.
      *
@@ -46,7 +46,7 @@ public abstract class Task {
     public TaskStatus getStatus() {
         return this.status;
     }
-    
+
     /**
      * Returns the icon associated with the status of the task.
      *
@@ -55,7 +55,7 @@ public abstract class Task {
     public String getStatusIcon() {
         return this.status.getStatusIcon();
     }
-    
+
     /**
      * Returns the description of the task.
      *
@@ -64,14 +64,14 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
-    
+
     /**
      * Returns the icon associated with the type of task.
      *
      * @return Task icon.
      */
     abstract String getTaskIcon();
-    
+
     /**
      * Returns the string containing the task icon, status icon and task description.
      *

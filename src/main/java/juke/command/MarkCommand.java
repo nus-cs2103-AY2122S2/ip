@@ -7,11 +7,11 @@ import juke.task.TaskStatus;
 
 public class MarkCommand extends Command {
     private TaskStatus status;
-    
+
     public MarkCommand(TaskStatus status) {
         this.status = status;
     }
-    
+
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -26,7 +26,7 @@ public class MarkCommand extends Command {
         }
         return this;
     }
-    
+
     @Override
     public Command execute() {
         if (this.isSuccessful()) {
@@ -57,6 +57,7 @@ public class MarkCommand extends Command {
                     return this;
                 }
                 break;
+            default:
             }
         } catch (NumberFormatException e) {
             this.result = Result.error(e);
@@ -65,7 +66,7 @@ public class MarkCommand extends Command {
         this.juke.getStorage().saveTasks();
         return this;
     }
-    
+
     public TaskStatus getStatus() {
         return this.status;
     }

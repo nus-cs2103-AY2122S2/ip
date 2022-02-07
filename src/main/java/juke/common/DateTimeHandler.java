@@ -1,19 +1,19 @@
 package juke.common;
 
-import juke.exception.JukeParseException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
+import juke.exception.JukeParseException;
+
 public class DateTimeHandler {
     private LocalDateTime dateTime;
-    
+
     public DateTimeHandler(String string) throws JukeParseException {
         this.parse(string);
     }
-    
+
     private void parse(String string) throws JukeParseException {
         if (string == null || string.isEmpty()) {
             throw new JukeParseException("date and time");
@@ -29,7 +29,7 @@ public class DateTimeHandler {
             }
         }
     }
-    
+
     public String getDateTime() {
         String dt = "";
         if (this.dateTime != null) {

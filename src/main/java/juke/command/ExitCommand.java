@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
         }
         return this;
     }
-    
+
     @Override
     public Command execute() {
         if (this.isSuccessful()) {
