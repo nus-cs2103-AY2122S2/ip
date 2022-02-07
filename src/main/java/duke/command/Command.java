@@ -19,14 +19,15 @@ public interface Command {
     boolean isExit();
 
     /**
-     * Executes the command.
+     * Executes the command and then returns the response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws DukeException If the List of tasks in the task list is
      * empty or if there are any errors when retrieving the tasks
      * @throws IOException If the tasks cannot be saved to the data file
      */
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
 }

@@ -27,15 +27,17 @@ public class ListCommand implements Command {
     }
 
     /**
-     * Executes the command of listing all the tasks in the task list.
+     * Executes the command of listing all the tasks in the task list, and
+     * then returns the response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws DukeException If the List of tasks in the task list is empty
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getNumOfTasks() == 0) {
             throw new DukeException(ErrorMessage.ERROR_NO_TASKS_IN_LIST.toString());
         }
@@ -44,7 +46,6 @@ public class ListCommand implements Command {
         // This will clear the List of filteredTasks
         taskList.resetFilteredTasks();
 
-        String response = ui.tasksInListMessage(taskList);
-        ui.displayResponse(response);
+        return ui.tasksInListMessage(taskList);
     }
 }

@@ -19,7 +19,7 @@ public enum CommandType {
 
     /**
      * Constructor to initialize an instance of CommandType enumeration
-     * with command field.
+     * with label field.
      *
      * @param label Label of the command type
      */

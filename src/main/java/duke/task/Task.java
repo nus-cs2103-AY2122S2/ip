@@ -37,10 +37,10 @@ public abstract class Task {
     /**
      * Returns the status icon based on whether the task is done.
      *
-     * @return ✔ if the task is done, empty otherwise
+     * @return Check mark if the task is done, empty otherwise
      */
     public String getStatusIcon() {
-        return (isDone ? "[✔]" : "[ ]"); // mark done task with ✔
+        return isDone ? "[\u2713]" : "[  ]";
     }
 
     /**

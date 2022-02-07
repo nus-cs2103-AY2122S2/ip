@@ -4,54 +4,55 @@ package duke.exception;
  * An enumeration that defines different error messages.
  */
 public enum ErrorMessage {
-    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DATETIME_EMPTY("INCOMPLETE COMMAND"
+    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DATETIME_EMPTY("INCOMPLETE COMMAND:"
             + System.lineSeparator() + "\t"
             + "The date/time of a deadline cannot be empty!"
             + System.lineSeparator() + "\t"
             + "[Note: Enter /by before specifying the date/time]"),
 
-    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY("INCOMPLETE COMMAND"
+    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY("INCOMPLETE COMMAND:"
             + System.lineSeparator() + "\t"
             + "The description and date/time of a deadline cannot be empty!"
             + System.lineSeparator() + "\t"
             + "[Note: Enter /by before specifying the date/time]"),
 
-    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_EMPTY("INCOMPLETE COMMAND"
+    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_EMPTY("INCOMPLETE COMMAND:"
             + System.lineSeparator() + "\t"
             + "The description of a deadline cannot be empty!"),
 
-    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME("INCOMPLETE & WRONG COMMAND"
+    ERROR_ADD_DEADLINE_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME("INCOMPLETE & WRONG COMMAND:"
             + System.lineSeparator() + "\t"
             + "The description of a deadline cannot be empty!"
             + System.lineSeparator() + "\t"
             + "Enter /by before specifying the date/time!"),
 
-    ERROR_ADD_DEADLINE_WRONG_COMMAND_DATETIME("WRONG COMMAND"
+    ERROR_ADD_DEADLINE_WRONG_COMMAND_DATETIME("WRONG COMMAND:"
             + System.lineSeparator() + "\t"
             + "Enter /by before specifying the date/time!"),
 
-    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DATETIME_EMPTY("INCOMPLETE COMMAND"
+    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DATETIME_EMPTY("INCOMPLETE COMMAND:"
             + System.lineSeparator() + "\t"
             + "The date/time of an event cannot be empty!"
             + System.lineSeparator() + "\t"
             + "[Note: Enter /at before specifying the date/time]"),
 
-    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY("INCOMPLETE COMMAND"
+    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_AND_DATETIME_EMPTY("INCOMPLETE COMMAND:"
             + System.lineSeparator() + "\t"
             + "The description and date/time of an event cannot be empty!"
             + System.lineSeparator() + "\t"
             + "[Note: Enter /at before specifying the date/time]"),
 
-    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY("INCOMPLETE COMMAND"
+    ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY("INCOMPLETE COMMAND:"
             + System.lineSeparator() + "\t"
             + "The description of an event cannot be empty!"),
+
     ERROR_ADD_EVENT_INCOMPLETE_COMMAND_DESC_EMPTY_AND_WRONG_COMMAND_DATETIME("INCOMPLETE & WRONG COMMAND"
             + System.lineSeparator() + "\t"
             + "The description of an event cannot be empty!"
             + System.lineSeparator() + "\t"
             + "Enter /at before specifying the date/time!"),
 
-    ERROR_ADD_EVENT_WRONG_COMMAND_DATETIME("WRONG COMMAND"
+    ERROR_ADD_EVENT_WRONG_COMMAND_DATETIME("WRONG COMMAND:"
             + System.lineSeparator() + "\t"
             + "Enter /at before specifying the date/time!"),
 
@@ -63,7 +64,7 @@ public enum ErrorMessage {
 
     ERROR_FIND_KEYWORD_EMPTY("Please enter the keyword to search for matching tasks!"),
 
-    ERROR_INVALID_COMMAND("INVALID COMMAND. Please try again!"),
+    ERROR_INVALID_COMMAND("Invalid command. Please try again!"),
 
     ERROR_INVALID_TYPE_OF_TASK("INVALID TYPE OF TASK FOUND"),
 
@@ -77,17 +78,17 @@ public enum ErrorMessage {
 
     ERROR_NO_TASKS_ON_DATE("There are no tasks on this date!"),
 
-    ERROR_PRINT_INCOMPLETE_COMMAND("INCOMPLETE COMMAND"
+    ERROR_PRINT_INCOMPLETE_COMMAND("INCOMPLETE COMMAND:"
             + System.lineSeparator() + "\t"
             + "Enter /on before specifying the date!"),
 
-    ERROR_PRINT_INCOMPLETE_COMMAND_DATE_EMPTY("INCOMPLETE COMMAND"
+    ERROR_PRINT_INCOMPLETE_COMMAND_DATE_EMPTY("INCOMPLETE COMMAND:"
             + System.lineSeparator() + "\t"
             + "The date is not specified!"
             + System.lineSeparator() + "\t"
             + "[Note: Enter /on before specifying the date]"),
 
-    ERROR_PRINT_WRONG_COMMAND_DATE("WRONG COMMAND"
+    ERROR_PRINT_WRONG_COMMAND_DATE("WRONG COMMAND:"
             + System.lineSeparator() + "\t"
             + "Enter /on before specifying the date!"),
 

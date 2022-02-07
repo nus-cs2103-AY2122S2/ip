@@ -2,7 +2,6 @@ package duke.ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 import duke.task.Task;
 import duke.task.TaskList;
@@ -11,90 +10,30 @@ import duke.task.TaskList;
  * A class that handles the interactions with the user.
  */
 public class Ui {
+    public static final String SMILEY_EMOJI = "\u2282(  \u0361\u2022  \u035c  \u2022\u0361  )\u2283";
+
+    public static final String GREET_NEW_USER_MESSAGE = "Hello! I'm Duke, your Personal Assistant ChatBot. "
+            + SMILEY_EMOJI
+            + System.lineSeparator()
+            + "Nice to meet you! ^_^"
+            + System.lineSeparator()
+            + "What can I do for you?";
+
+    public static final String GREET_OLD_USER_MESSAGE = "Hello! I'm Duke, your Personal Assistant ChatBot. "
+            + SMILEY_EMOJI
+            + System.lineSeparator()
+            + "Welcome back! ^_^"
+            + System.lineSeparator()
+            + "Enter 'list' command to see your task list.";
+
+    public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon! ^_^"
+            + System.lineSeparator()
+            + "The program will exit in 10 seconds!";
+
     /**
      * Constructor to initialize an instance of Ui class.
      */
     public Ui() {
-    }
-
-    /**
-     * Reads the command line input from the user.
-     *
-     * @return The command line that was entered
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("ENTER COMMAND:");
-        System.out.print("\t");
-        return sc.nextLine().trim();
-    }
-
-    /**
-     * Displays the welcome message.
-     */
-    public void displayWelcome() {
-        String logo = "\t" + " ____        _        " + System.lineSeparator()
-                + "\t" + "|  _ \\ _   _| | _____" + System.lineSeparator()
-                + "\t" + "| | | | | | | |/ / _" + System.lineSeparator()
-                + "\t" + "| |_| | |_| |   <  __/" + System.lineSeparator()
-                + "\t" + "|____/ \\__,_|_|\\_\\___|" + System.lineSeparator();
-
-        String welcomeMessage = "\t" + "Hello! I'm Duke, your Personal Assistant ChatBot."
-                /* + System.lineSeparator()
-                + logo */
-                + System.lineSeparator()
-                + "\t" + "What can I do for you?";
-
-        displayResponse(welcomeMessage);
-        displayLine();
-    }
-
-    /**
-     * Displays the goodbye message on exiting.
-     */
-    public void displayExit() {
-        String exitMessage = "\t" + "Bye. Hope to see you again soon!";
-        displayResponse(exitMessage);
-    }
-
-    /**
-     * Displays the response message with proper formatting.
-     *
-     * @param message Response message to be displayed
-     */
-    public void displayResponse(String message) {
-        displayLine();
-        System.out.println(message);
-    }
-
-    /**
-     * Displays the error message with proper formatting.
-     *
-     * @param message Error message to be displayed
-     */
-    public void displayError(String message) {
-        displayLine();
-        System.out.println("ERROR MESSAGE:");
-        System.out.println("\t" + "☹ " + message);
-    }
-
-    /**
-     * Displays the filtered tasks message with proper formatting.
-     *
-     * @param message Filtered tasks message to be displayed
-     */
-    public void displayFilteredTasks(String message) {
-        displayLine();
-        System.out.println("[FILTERED TASKS]" + System.lineSeparator());
-        System.out.println(message);
-    }
-
-    /**
-     * Displays a line to separate different parts of a message.
-     */
-    public void displayLine() {
-        String horizontalLine = "____________________________________________________________";
-        System.out.println(horizontalLine);
     }
 
     /**
@@ -104,8 +43,8 @@ public class Ui {
      * @return The string representation of the message
      */
     public String taskAddedMessage(Task task) {
-        return "\t" + "Got it. I've added this task:"
-                + System.lineSeparator() + "\t\t" + task;
+        return "Got it. I've added this task:"
+                + System.lineSeparator() + "\t" + task;
     }
 
     /**
@@ -115,10 +54,9 @@ public class Ui {
      * @return The string representation of the message
      */
     public String taskDoneMessage(Task task) {
-        return "\t" + "Nice! I've marked this task as done:"
-                + System.lineSeparator() + "\t\t" + task;
+        return "Nice! I've marked this task as done:"
+                + System.lineSeparator() + "\t" + task;
     }
-
 
     /**
      * Returns the message when the task is marked as not done yet.
@@ -127,8 +65,8 @@ public class Ui {
      * @return The string representation of the message
      */
     public String taskNotDoneMessage(Task task) {
-        return "\t" + "OK, I've marked this task as not done yet:"
-                + System.lineSeparator() + "\t\t" + task;
+        return "OK, I've marked this task as not done yet:"
+                + System.lineSeparator() + "\t" + task;
     }
 
     /**
@@ -138,8 +76,8 @@ public class Ui {
      * @return The string representation of the message
      */
     public String taskDeletedMessage(Task task) {
-        return "\t" + "Noted. I've removed this task:"
-                + System.lineSeparator() + "\t\t" + task;
+        return "Noted. I've removed this task:"
+                + System.lineSeparator() + "\t" + task;
     }
 
     /**
@@ -149,7 +87,7 @@ public class Ui {
      * @return The string representation of the message
      */
     public String numOfTasksInListMessage(TaskList taskList) {
-        return "\t" + "Now you have " + taskList.getNumOfTasks()
+        return "Now you have " + taskList.getNumOfTasks()
                 + (taskList.getNumOfTasks() > 1 ? " tasks" : " task")
                 + " in the list.";
     }
@@ -161,11 +99,11 @@ public class Ui {
      * @return The string representation of the message
      */
     public String tasksInListMessage(TaskList taskList) {
-        return "\t" + "Here"
+        return "Here"
                 + (taskList.getNumOfTasks() > 1 ? " are the tasks " : " is the task ")
                 + "in your list:"
                 + System.lineSeparator()
-                + "\t" + "[Legend: T = todo, D = deadline, E = event]"
+                + "[Legend: T = todo, D = deadline, E = event]"
                 + System.lineSeparator()
                 + System.lineSeparator()
                 + taskList;
@@ -180,11 +118,11 @@ public class Ui {
      * @return The string representation of the message
      */
     public String tasksOnDateMessage(TaskList taskList, String dateStr) {
-        return "\t" + "Here"
+        return "Here"
                 + (taskList.getNumOfFilteredTasks() > 1 ? " are the tasks " : " is the task ")
                 + "on this date (" + processDateStr(dateStr) + "):"
                 + System.lineSeparator()
-                + "\t" + "[Legend: T = todo, D = deadline, E = event]"
+                + "[Legend: T = todo, D = deadline, E = event]"
                 + System.lineSeparator()
                 + System.lineSeparator()
                 + taskList;
@@ -223,15 +161,28 @@ public class Ui {
      * @return The string representation of the message
      */
     public String tasksWithKeywordMessage(TaskList taskList, String keyword) {
-        return "\t" + "Here"
+        return "Here"
                 + (taskList.getNumOfFilteredTasks() > 1 ? " are the matching tasks " : " is the matching task ")
                 + "in your list:"
                 + System.lineSeparator()
-                + "\t" + "[Keyword Search: " + keyword + "]"
+                + "[Keyword Search: " + keyword + "]"
                 + System.lineSeparator()
-                + "\t" + "[Legend: T = todo, D = deadline, E = event]"
+                + "[Legend: T = todo, D = deadline, E = event]"
                 + System.lineSeparator()
                 + System.lineSeparator()
                 + taskList;
+    }
+
+    /**
+     * Returns the reminder message of the existing filtered tasks.
+     *
+     * @param filteredTasksMessage Filtered tasks message
+     * @return The string representation of the reminder message
+     */
+    public String filteredTasksReminderMessage(String filteredTasksMessage) {
+        return "[FILTERED TASKS]"
+                + System.lineSeparator()
+                + System.lineSeparator()
+                + filteredTasksMessage;
     }
 }

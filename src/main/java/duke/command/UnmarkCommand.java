@@ -37,24 +37,25 @@ public class UnmarkCommand implements Command {
 
     /**
      * Executes the command of marking the task in the task list as not
-     * done yet and saving the updated list to the data file.
+     * done yet and saving the updated list to the data file, and then
+     * returns the response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws DukeException If the task is not found
      * @throws IOException If the tasks cannot be saved to the data file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         Task taskNotDone = !taskList.hasFilter()
                 ? markTaskNotDoneBasedOnAllTasks(taskList)
                 : markTaskNotDoneBasedOnFilteredTasks(taskList);
 
-        String response = ui.taskNotDoneMessage(taskNotDone);
-        ui.displayResponse(response);
-
         storage.saveTasksToFile(taskList);
+
+        return ui.taskNotDoneMessage(taskNotDone);
     }
 
     /**

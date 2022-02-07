@@ -35,17 +35,19 @@ public class PrintCommand implements Command {
 
     /**
      * Executes the command of printing deadlines/events in the task
-     * list that occurs on the specified date.
+     * list that occurs on the specified date, and then returns the
+     * response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws DukeException If the List of tasks in the task list
      * is empty or if there are no deadlines/events that occurs on
      * the specified date
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getNumOfTasks() == 0) {
             throw new DukeException(ErrorMessage.ERROR_NO_TASKS_IN_LIST.toString());
         }
@@ -61,7 +63,6 @@ public class PrintCommand implements Command {
             throw new DukeException(ErrorMessage.ERROR_NO_TASKS_ON_DATE.toString());
         }
 
-        String response = ui.tasksOnDateMessage(taskList, dateStr);
-        ui.displayResponse(response);
+        return ui.tasksOnDateMessage(taskList, dateStr);
     }
 }

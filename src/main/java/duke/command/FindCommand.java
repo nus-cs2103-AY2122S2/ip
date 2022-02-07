@@ -35,17 +35,19 @@ public class FindCommand implements Command {
 
     /**
      * Executes the command of finding tasks in the task list that
-     * contains the keyword in the description.
+     * contains the keyword in the description, and then returns
+     * the response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws DukeException If the List of tasks in the task list
      * is empty or if there are no tasks that contains the keyword
      * in the description
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getNumOfTasks() == 0) {
             throw new DukeException(ErrorMessage.ERROR_NO_TASKS_IN_LIST.toString());
         }
@@ -61,7 +63,6 @@ public class FindCommand implements Command {
             throw new DukeException(ErrorMessage.ERROR_NO_MATCHING_TASKS_IN_LIST.toString());
         }
 
-        String response = ui.tasksWithKeywordMessage(taskList, keyword);
-        ui.displayResponse(response);
+        return ui.tasksWithKeywordMessage(taskList, keyword);
     }
 }

@@ -37,24 +37,25 @@ public class MarkCommand implements Command {
 
     /**
      * Executes the command of marking the task in the task list as done
-     * and saving the updated list to the data file.
+     * and saving the updated list to the data file, and then returns the
+     * response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws DukeException If the task is not found
      * @throws IOException If the tasks cannot be saved to the data file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         Task taskDone = !taskList.hasFilter()
                 ? markTaskDoneBasedOnAllTasks(taskList)
                 : markTaskDoneBasedOnFilteredTasks(taskList);
 
-        String response = ui.taskDoneMessage(taskDone);
-        ui.displayResponse(response);
-
         storage.saveTasksToFile(taskList);
+
+        return ui.taskDoneMessage(taskDone);
     }
 
     /**

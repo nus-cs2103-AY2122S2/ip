@@ -131,7 +131,7 @@ public class TaskList {
      * the keyword in the description, filterCommandType as Find CommandType
      * and filterInfo as the keyword.
      *
-     * @param keyword Keyword in the description
+     * @param keyword Keyword
      */
     public void setFilteredTasksByKeyword(String keyword) {
         filteredTasks = tasks.stream()
@@ -269,7 +269,7 @@ public class TaskList {
                 listBuilder.append(System.lineSeparator());
             }
 
-            listBuilder.append("\t").append(listItem);
+            listBuilder.append(listItem);
         }
 
         return listBuilder.toString();
@@ -290,7 +290,7 @@ public class TaskList {
                 listBuilder.append(System.lineSeparator());
             }
 
-            listBuilder.append("\t").append(listItem);
+            listBuilder.append(listItem);
         }
 
         return listBuilder.toString();
