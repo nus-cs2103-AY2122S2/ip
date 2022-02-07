@@ -28,7 +28,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(saveData);
             for (int i = 0; i < Task.totalTask; i++) {
-                fw.write(taskList.tasklist.get(i).getDataRepresentation());
+                fw.write(taskList.get().get(i).getDataRepresentation());
             }
             fw.close();
         }
@@ -86,7 +86,7 @@ public class Storage {
     public static void readSavedData(TaskList taskList) throws FileNotFoundException {
         Scanner s = new Scanner(saveData);
         while (s.hasNext()) {
-            taskList.tasklist.add(parser.parseFileData(s.nextLine()));
+            taskList.get().add(parser.parseFileData(s.nextLine()));
         }
     }
 

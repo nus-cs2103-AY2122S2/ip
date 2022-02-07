@@ -33,7 +33,7 @@ public class Task {
     public Task(String name, int number, String time, String type, boolean isReading) {
         try {
             if (name.equals("")) {
-                throw new EmptyDescriptorExceptions();
+                throw new EmptyDescriptorException();
             }
             this.name = name;
             this.number = number;
@@ -55,7 +55,7 @@ public class Task {
                 totalTask++;
             }
         }
-        catch (EmptyDescriptorExceptions e){
+        catch (EmptyDescriptorException e){
             Ui.printEmptyDescriptionException();
         }
         catch (IOException e) {
@@ -84,8 +84,9 @@ public class Task {
             return true;
         }
         catch (DateTimeParseException e){
-            if (!isReading)
+            if (!isReading) {
                 System.out.println("Note that dates should be in <<YYYY-MM-DD HHMM>> format");
+            }
             this.time = input;
             return false;
         }

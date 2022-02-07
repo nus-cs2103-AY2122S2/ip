@@ -11,13 +11,17 @@ public class Duke {
     static TaskList tasklist;
 
     public Duke() {
-        Parser parser = new Parser();
-        Storage storage = new Storage();
-        tasklist = storage.tasklist;
+        initialise();
     }
 
     public String getResponse(String input){
         return Parser.parseIsBye(input, tasklist);
+    }
+
+    public void initialise() {
+        Parser parser = new Parser();
+        Storage storage = new Storage();
+        tasklist = storage.tasklist;
     }
 
 }
