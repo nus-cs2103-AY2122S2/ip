@@ -11,6 +11,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Stores user tasks data.
+ */
 public class Storage {
 
     // initializing saver to save todoList tasks to relativePath

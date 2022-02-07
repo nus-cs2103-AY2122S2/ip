@@ -50,7 +50,8 @@ public class Deadline extends Task {
                 + this.month + " "
                 + this.day + " "
                 + this.year + " "
-                + this.time + ")";
+                + this.time + ")"
+                + "\n";
     }
 
 }

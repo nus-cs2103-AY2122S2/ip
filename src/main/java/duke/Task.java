@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents user task object.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

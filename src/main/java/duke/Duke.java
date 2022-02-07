@@ -6,15 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,6 +16,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -307,7 +302,11 @@ public class Duke extends Application {
                     try {
                         Parser.parserDeleteValidator(taskLists, userInputTask);
                     } catch (DukeException e) {
-                        break;
+                        if (e.getMessage().equals("Delete command must have a specified task number to be deleted.")) {
+                            return "Delete command must have a specified task number to be deleted.";
+                        } else {
+                            return "Invalid task number to be deleted.";
+                        }
                     }
                     return Parser.parserDelete(taskLists, userInputArr, storage);
                 case "find":

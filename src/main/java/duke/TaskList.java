@@ -3,6 +3,9 @@ package duke;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents list of user tasks.
+ */
 public class TaskList {
     protected ArrayList<Task> taskLists;
 
@@ -43,7 +46,7 @@ public class TaskList {
      * @return string of tasks.
      */
     public String list() {
-        String output = "    Here are the tasks in your list: /n";
+        String output = "    Here are the tasks in your list: \n";
         for (int i = 0; i < taskLists.size(); i++) {
             String display = String.format("    %d.%s", i + 1, taskLists.get(i).toString());
             output += display;
@@ -58,8 +61,8 @@ public class TaskList {
      */
     public String removeTask(int num, Storage storage) throws IOException {
 
-        String output = "    Noted. I've removed this task:/n";
-        String taskRemove = "        " + taskLists.get(num - 1).toString() + "/n";
+        String output = "    Noted. I've removed this task:\n";
+        String taskRemove = "        " + taskLists.get(num - 1).toString() + "\n";
         taskLists.remove(num - 1);
         TaskList tempTaskList = new TaskList(taskLists);
         storage.save(tempTaskList);
@@ -80,8 +83,8 @@ public class TaskList {
 
 
         // display to do task
-        String output = "    Got it. I've added this task:/n";
-        String addOn = "        " + task.toString() + "/n";
+        String output = "    Got it. I've added this task:\n";
+        String addOn = "        " + task.toString() + "\n";
         String taskAmount =  "    " + displayTaskAmount;
 
         return output + addOn + taskAmount;
@@ -105,7 +108,7 @@ public class TaskList {
     public String setTaskAsDone(int taskToMark) {
         taskLists.get(taskToMark - 1).markAsDone();
 
-        String output = "    Nice! I've marked this task as done:/n";
+        String output = "    Nice! I've marked this task as done:\n";
 
         String taskMarkString = String.format("%s", taskLists.get(taskToMark - 1).toString());
         return output + "    " + taskMarkString;
@@ -119,7 +122,7 @@ public class TaskList {
      */
     public String setTaskAsUnDone(int taskToUnmark) {
         taskLists.get(taskToUnmark - 1).markAsNotDone();
-        String output = "    OK, I've marked this task as not done yet:/n";
+        String output = "    OK, I've marked this task as not done yet:\n";
 
         String taskString = String.format("%s", taskLists.get(taskToUnmark - 1).toString());
         return output + "    " + taskString;

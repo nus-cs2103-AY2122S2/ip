@@ -6,6 +6,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Manages user command.
+ */
 public class Parser {
     private static final ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event",
             "deadline", "mark", "unmark", "list", "bye", "delete", "find"));
