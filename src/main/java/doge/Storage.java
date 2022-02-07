@@ -40,6 +40,8 @@ public class Storage {
      * @throws DogeException if writing to local storage fails
      */
     public void save(ArrayList<Task> tasks) throws DogeException {
+        assert tasks != null : "ArrayList of tasks is null";
+
         try {
             FileWriter fw = new FileWriter("./data/doge.txt");
             for (Task curr : tasks) {

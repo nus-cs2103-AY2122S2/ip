@@ -30,6 +30,10 @@ public class TodoCommand extends Command {
      * @throws DogeException if it fails to add the "todo" task into the TaskList
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         if (this.task.getDescription().isEmpty()) {
             throw new TodoException("So doing NOTHING is a task? doge.task.Task details cannot be left empty!");
         } else {

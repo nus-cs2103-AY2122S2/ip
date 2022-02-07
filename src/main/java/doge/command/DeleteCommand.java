@@ -28,6 +28,10 @@ public class DeleteCommand extends Command {
      * @throws DogeException if it fails to delete the specified task or user failed to provide the task number
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         if (this.details.isEmpty()) {
             throw new DogeException("How am I suppose to delete something without knowing which task?");
         }

@@ -50,6 +50,7 @@ public class Ui {
      * @return the error message as a String
      */
     public String showError(String message) {
+        assert message != null : "error message should not be null!";
         String output = "<ERROR> " + message;
         System.out.println(output);
         return output;
@@ -62,6 +63,7 @@ public class Ui {
      * @return Doge's response as a String
      */
     public String respond(Command c) {
+        assert c != null : "command should not be null";
         StringBuilder output = new StringBuilder();
         output.append(c.toString());
         if (c.haveTask()) {

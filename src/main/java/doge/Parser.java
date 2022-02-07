@@ -30,6 +30,7 @@ public class Parser {
      * @throws DogeException if user gives an invalid/unrecognisable command
      */
     public static Command parse(String input) throws DogeException {
+        assert input != null : "User input is null";
         String curr = input.toLowerCase().trim();
         String c = curr.split(" ")[0].trim();
 

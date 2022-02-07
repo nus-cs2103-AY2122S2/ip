@@ -37,6 +37,10 @@ public class ListCommand extends Command {
      * @throws DogeException if it fails to list the tasks
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         if (this.details.isEmpty()) {
             for (int i = 0; i < tasks.size(); i++) {

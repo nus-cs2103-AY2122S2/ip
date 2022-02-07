@@ -19,6 +19,7 @@ public class DateTime {
      * @throws DogeException if date/time given does not exist or is of an incorrect format
      */
     public static LocalDateTime getDateTime(String input) throws DogeException {
+        assert input != null : "input for date/time should not be null";
         LocalDateTime currDateTime = LocalDateTime.now();
 
         try {
