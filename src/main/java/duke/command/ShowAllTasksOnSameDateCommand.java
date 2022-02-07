@@ -33,7 +33,7 @@ public class ShowAllTasksOnSameDateCommand extends Command {
     }
 
     /**
-     * Execute show all tasks on the same date/time operation.
+     * List all the tasks in the given date/time.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

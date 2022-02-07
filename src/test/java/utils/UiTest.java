@@ -90,15 +90,23 @@ public class UiTest {
     @Test
     @DisplayName("Tasks on same date message should be shown")
     public void showTasksOnSameDateMessage() {
-        String tasksOnSameDate = String.format("Found 2 tasks with date/time %s.", "2022-01-24");
+        String tasksOnSameDate = String.format("Found 2 tasks with date/time %s:", "2022-01-24");
         assertEquals(tasksOnSameDate, ui.foundTaskOnSameDate(2, "2022-01-24").trim());
     }
 
     @Test
     @DisplayName("Tasks with search keyword should be shown")
     public void showFoundTaskMessage() {
-        String tasksOnSameDate = "Found 1 task containing keyword \"book\".";
+        String tasksOnSameDate = "Found 1 task containing keyword \"book\":";
         assertEquals(tasksOnSameDate, ui.foundTasksMatchKeyword(1, "book").trim());
+    }
+
+    @Test
+    @DisplayName("Tasks scheduled in same date should be shown chronologically")
+    public void showViewSchedulesMessage() {
+        String tasksOnSameDate = "You have 2 tasks on 2022-01-24:\n"
+                + "(Tasks on this date without time will be placed at the end of the list)";
+        assertEquals(tasksOnSameDate, ui.viewSchedulesOnDate(2, "2022-01-24").trim());
     }
 
     @Test

@@ -13,7 +13,7 @@ import duke.utils.Ui;
 public class DeleteAllCommand extends Command {
 
     /**
-     * Execute delete all task operation.
+     * Delete all tasks in the task list.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

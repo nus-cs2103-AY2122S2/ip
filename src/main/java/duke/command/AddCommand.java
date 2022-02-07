@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute the add task operation.
+     * Add a task to the task list.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Execute delete task operation.
+     * Delete a specific task in the task list.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

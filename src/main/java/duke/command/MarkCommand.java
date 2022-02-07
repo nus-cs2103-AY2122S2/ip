@@ -24,7 +24,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Execute mark task as done operation.
+     * Mark a specific task as done.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

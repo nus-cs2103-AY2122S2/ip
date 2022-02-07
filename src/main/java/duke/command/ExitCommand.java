@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
     public ExitCommand() {}
 
     /**
-     * Execute exit operation.
+     * Show exit message.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on
