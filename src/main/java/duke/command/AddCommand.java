@@ -62,7 +62,8 @@ public class AddCommand implements Command {
             Event eventTask = new Event(taskDescription, eventDate);
             return tasks.addToList(eventTask, ui, storage);
         default:
-            throw new DukeException("Task of type ADD_COMMAND does not exist");
+            assert false : taskType;
+            return ("ERROR");
         }
     }
 }

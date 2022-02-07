@@ -57,7 +57,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private int handleUserInput() {
+    private void handleUserInput() {
         String input = userInput.getText();
         try {
             String response = duke.getResponse(input);
