@@ -1,5 +1,7 @@
 package duke.exception;
 
+import duke.Duke;
+
 /**
  * Represents an exception which is thrown by Ekud.
  */
