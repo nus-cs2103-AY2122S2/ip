@@ -7,7 +7,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
- *
+ * Responsible for deleting a task from the list of tasks in storage
  */
 public class DeleteCommand extends Command {
 
@@ -15,7 +15,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor DeleteCommand.
-     *
      * @param i the id of the task that is to be deleted from the list
      * @throws DukeException
      */
@@ -30,9 +29,8 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the requested task from the existing list of tasks, notifies the user
      * of the completion of the task, and updates the user's file.
-     *
-     * @param tasks   holds all the tasks that the user has recorded down.
-     * @param ui      used to notify the user of task completion.
+     * @param tasks holds all the tasks that the user has recorded down.
+     * @param ui used to notify the user of task completion.
      * @param storage saves the tasks to file if there were any edits to it.
      * @throws DukeException
      */

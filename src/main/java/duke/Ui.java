@@ -9,8 +9,6 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private Scanner sc = new Scanner(System.in);
-
     /**
      * Ui constructor.
      */
@@ -18,20 +16,9 @@ public class Ui {
     }
 
     /**
-     * Take in the next line of input from the user and split it into Strings of first word and all other words.
-     * @return an array of the two strings
-     */
-    public String[] readCommand() {
-        String command = sc.next();
-        String details = sc.nextLine().trim();
-        return new String[]{command, details};
-    }
-
-    /**
      * Greets the user as the app starts up.
      */
     public String greet() {
-        //printDoubleLine();
         return "Hello! I'm Duke\n" + "What do you need me to note down for you? Type it below!\n" +
                 "Feel free to identify the status of your tasks by entering 'marked' or 'unmarked' along with the " +
                 "task number!";
@@ -42,14 +29,6 @@ public class Ui {
      */
     public String goodbye() {
         return "Bye. Have a great day!";
-    }
-
-    public void printSingleLine() {
-        System.out.println("------------------------------------------------------");
-    }
-
-    public void printDoubleLine() {
-        System.out.println("======================================================");
     }
 
     /**
@@ -85,9 +64,9 @@ public class Ui {
     }
 
     /**
-     * used wehn a task was successully marked as incomplete or complete.
+     * used when a task was successfully marked as incomplete or complete.
      * @param t task that was marked
-     * @param isComplete boolean flag for wehether the task was marked complete or not complete.
+     * @param isComplete boolean flag for whether the task was marked complete or not complete.
      */
     public String notifyMarkedTaskMessage(Task t, boolean isComplete) {
         if (isComplete) {

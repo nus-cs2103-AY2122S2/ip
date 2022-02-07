@@ -33,39 +33,13 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         String dir = System.getProperty("user.dir");
         java.nio.file.Path path = java.nio.file.Paths.get(dir, this.FILE_PATH);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
         try {
             File myObj = new File(path.toString());
             Scanner myReader = new Scanner(myObj);
             System.out.println("I see you have an existing list.");
             while (myReader.hasNextLine()) {
-                String line = myReader.nextLine();
-                String[] data = line.split("\\s*\\|\\s*");
-                String task = data[0];
-                switch (task) {
-                case "T":
-                    ToDo td = new ToDo(data[2]);
-                    if (data[1].equals("1")) {
-                        td.mark();
-                    }
-                    tasks.add(td);
-                    break;
-                case "D":
-                    Deadline deadline = new Deadline(data[2], LocalDate.parse(data[3], formatter));
-                    tasks.add(deadline);
-                    if (data[1].equals("1")) {
-                        deadline.mark();
-                    }
-                    break;
-                case "E":
-                    Event event = new Event(data[2], LocalDate.parse(data[3], formatter));
-                    tasks.add(event);
-                    if (data[1].equals("1")) {
-                        event.mark();
-                    }
-                    break;
-                }
+                readLine(tasks, myReader);
             } myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("It seems you do not have an existing list, I will create it now.");
@@ -79,6 +53,41 @@ public class Storage {
             }
         }
         return tasks;
+    }
+
+    /**
+     * Reads a single line from the input file and takes in the given task
+     * @param tasks the arraylist of tasks to be saved
+     * @param sc scanner to read input
+     */
+    public void readLine(ArrayList<Task> tasks, Scanner sc) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+        String line = sc.nextLine();
+        String[] data = line.split("\\s*\\|\\s*");
+        String task = data[0];
+        switch (task) {
+        case "T":
+            ToDo td = new ToDo(data[2]);
+            if (data[1].equals("1")) {
+                td.mark();
+            }
+            tasks.add(td);
+            break;
+        case "D":
+            Deadline deadline = new Deadline(data[2], LocalDate.parse(data[3], formatter));
+            tasks.add(deadline);
+            if (data[1].equals("1")) {
+                deadline.mark();
+            }
+            break;
+        case "E":
+            Event event = new Event(data[2], LocalDate.parse(data[3], formatter));
+            tasks.add(event);
+            if (data[1].equals("1")) {
+                event.mark();
+            }
+            break;
+        }
     }
 
     /**

@@ -14,7 +14,6 @@ public abstract class Command {
 
     /**
      * Command constructor
-     *
      * @throws DukeException as the user might leave out crtiical information or input wrong commands.
      */
     public Command() throws DukeException {
@@ -22,16 +21,15 @@ public abstract class Command {
 
     /**
      * Kickstarts the actions to execute in order to carry out the command.
-     *
-     * @param tasks   holds all the tasks that the user has recorded down.
-     * @param ui      used to notify the user of task completion.
+     * @param tasks holds all the tasks that the user has recorded down.
+     * @param ui used to notify the user of task completion.
      * @param storage saves the tasks to file if there were any edits to it.
      * @throws DukeException
      */
     public abstract String execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
-     * checks whether the the command was an exit command.
+     * checks whether the command was an exit command.
      * @return boolean flag
      */
     public boolean isExit() {

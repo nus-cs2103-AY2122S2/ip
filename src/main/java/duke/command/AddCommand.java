@@ -46,8 +46,8 @@ public class AddCommand extends Command {
                     "Use /at and type the date with the format yyyy-mm-dd after it");
         }
         try {
-            String[] d_deets = details.split("/");
-            String givenDate = d_deets[1].trim().substring(3); //ignore the words at or by + the space that follows
+            String[] detailsArray = details.split("/");
+            String givenDate = detailsArray[1].trim().substring(3); //ignore the words at or by + the space that follows
             LocalDate parsedDate = LocalDate.parse(givenDate);
             if (cmd .equals("event")) {
                 this.task = new Event(details, parsedDate);
