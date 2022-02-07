@@ -42,24 +42,22 @@ public class AddCommand implements Command {
     public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
         boolean isAddCommand = DukeCommand.getTaskTypeMap().get(taskType).equals("ADD_COMMAND");
         assert isAddCommand : taskType;
-        String taskDescription = fullCommand.split(taskType, 2)[1];
+        String[] taskInformation = fullCommand.split(taskType + " ", 2);
         switch (taskType) {
         case "todo":
-            ToDo toDoTask = new ToDo(taskDescription);
+            ToDo toDoTask = new ToDo(taskInformation[1]);
             return tasks.addToList(toDoTask, ui, storage);
         case "deadline":
-            String by = fullCommand.split("deadline ",
-                    2)[1].split("/by ")[1];
+            String by = taskInformation[1].split("/at ", 2)[1];
             LocalDate deadlineDate = LocalDate.parse(by,
                     Task.getInputDateFormat());
-            Deadline deadlineTask = new Deadline(taskDescription, deadlineDate);
+            Deadline deadlineTask = new Deadline(taskInformation[1].split("/by ")[0], deadlineDate);
             return tasks.addToList(deadlineTask, ui, storage);
         case "event":
-            String at = fullCommand.split("event ",
-                    2)[1].split("/at ")[1];
+            String at = taskInformation[1].split("/at ", 2)[1];
             LocalDate eventDate = LocalDate.parse(at,
                     Task.getInputDateFormat());
-            Event eventTask = new Event(taskDescription, eventDate);
+            Event eventTask = new Event(taskInformation[1].split("/at ")[0], eventDate);
             return tasks.addToList(eventTask, ui, storage);
         default:
             assert false : taskType;

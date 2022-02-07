@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -13,6 +14,7 @@ public class Task {
             DateTimeFormatter.ofPattern("d/M/uuuu");
     protected String description;
     protected boolean isDone;
+    private String type;
 
     /**
      * Contructor for the Task class.
@@ -21,6 +23,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.type = "task";
     }
 
     public String getStatusIcon() {
@@ -66,5 +69,12 @@ public class Task {
 
     public static DateTimeFormatter getInputDateFormat() {
         return INPUT_DATE_FORMAT;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setDate(LocalDate localDate) {
     }
 }

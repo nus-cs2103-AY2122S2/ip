@@ -5,8 +5,11 @@ package duke.task;
  */
 public class ToDo extends Task {
 
+    private String type;
+
     public ToDo(String description) {
         super(description);
+        this.type = "todo";
     }
 
     /**
@@ -23,5 +26,10 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 }

@@ -11,12 +11,12 @@ import java.util.HashMap;
 public class DukeCommand {
 
     private enum DukeCommands {
-        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE, FIND, CLEAR
+        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE, FIND, CLEAR, POSTPONE
 
     }
 
     private enum DescriptiveDukeCommands {
-        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND
+        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND, POSTPONE
     }
 
     /**
@@ -63,6 +63,7 @@ public class DukeCommand {
         h.put("bye", "EXIT_COMMAND");
         h.put("find", "FIND_COMMAND");
         h.put("clear", "CLEAR_COMMAND");
+        h.put("postpone", "POSTPONE_COMMAND");
         return h;
     }
 }

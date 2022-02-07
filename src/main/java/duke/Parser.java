@@ -4,16 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
-import duke.command.AddCommand;
-import duke.command.ClearCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DukeCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.MarkCommand;
-import duke.command.OutputCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -96,12 +87,26 @@ public class Parser {
             try {
                 Integer.parseInt(splitInput[1]);
             } catch (NumberFormatException err) {
-                throw new DukeException("☹ OOPS!!! Please make sure to input "
+                throw new DukeException("OOPS!!! Please make sure to input "
+                        + "only one integer following the "
+                        + splitInput[0] + " command");
+            }
+        } else if (splitInput[0].equals("postpone")) {
+            if (input.split(" ").length != 3) {
+                throw new DukeException("Invalid Ekud command format");
+            }
+            try {
+                Integer.parseInt(input.split(" ")[1]);
+                String postponeDate = input.split(" ")[2];
+                LocalDate.parse(postponeDate, Task.getInputDateFormat());
+            } catch (DateTimeParseException err) {
+                throw new DukeException("Please enter a valid date! [dd/mm/yyyy]");
+            } catch (NumberFormatException err) {
+                throw new DukeException("OOPS!!! Please make sure to input "
                         + "only one integer following the "
                         + splitInput[0] + " command");
             }
         }
-
         assert DukeCommand.isDukeCommand(splitInput[0]);
         // Get the respective command type and return its corresponding type
         HashMap<String, String> commandTypeMap = DukeCommand.getTaskTypeMap();
@@ -123,9 +128,14 @@ public class Parser {
             return new FindCommand(input);
         case "CLEAR_COMMAND":
             return new ClearCommand();
+        case "POSTPONE_COMMAND":
+            return new PostponeCommand(input);
         default:
             assert false : type;
             return null;
         }
     }
 }
+
+
+

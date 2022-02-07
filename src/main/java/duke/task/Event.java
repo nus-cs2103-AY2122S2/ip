@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class Event extends Task {
 
     protected LocalDate at;
+    private String type;
 
     /**
      * Constructor for this class.
@@ -17,6 +18,7 @@ public class Event extends Task {
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
+        this.type = "event";
     }
 
     /**
@@ -35,5 +37,15 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString()
                 + " (at: " + at.format(super.getOutputDateFormat()) + ")";
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void setDate(LocalDate localDate) {
+        this.at = localDate;
     }
 }

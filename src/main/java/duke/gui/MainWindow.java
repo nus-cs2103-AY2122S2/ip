@@ -68,7 +68,6 @@ public class MainWindow extends AnchorPane {
             return;
         } catch (DukeException e) {
             AlertUi.makeErrorAlert("DukeException", e.getMessage());
-            return;
         } finally {
             userInput.clear();
             return;

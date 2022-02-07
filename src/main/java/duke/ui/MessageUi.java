@@ -71,6 +71,10 @@ public class MessageUi {
         return "OK, I've marked this task as not done yet: \n" + task.toString();
     }
 
+    public String showPostponeMessage(Task task) {
+        return "Nice! I've postponed this task: \n" + task.toString();
+    }
+
     /**
      * Outputs a message when the user delete a task.
      * @return Task delete message.

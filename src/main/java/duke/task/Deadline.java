@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class Deadline extends Task {
 
     protected LocalDate by;
+    private String type;
 
     /**
      * Constructor for this class.
@@ -17,6 +18,7 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
+        this.type = "deadline";
     }
 
     /**
@@ -35,5 +37,15 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: " + by.format(super.getOutputDateFormat()) + ")";
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void setDate(LocalDate localDate) {
+        this.by = localDate;
     }
 }
