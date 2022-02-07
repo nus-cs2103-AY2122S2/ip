@@ -2,8 +2,11 @@ package duke.common;
 
 import java.time.format.DateTimeFormatter;
 
-public final class Const {
-    private Const() {
+/**
+ * Represents common constants used by other classes.
+ */
+public final class Constant {
+    private Constant() {
     }
 
     public static final String INPUT_DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";

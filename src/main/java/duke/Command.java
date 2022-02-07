@@ -36,10 +36,7 @@ public enum Command {
      * @return Command if exist else null.
      */
     public static Command getCommand(String c) {
-        // return null if command not in hashmap.
-        return commands.containsKey(c)
-                ? commands.get(c)
-                : null;
+        return commands.getOrDefault(c, null);
     }
 
     /**

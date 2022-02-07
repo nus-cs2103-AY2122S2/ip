@@ -15,7 +15,7 @@ public class Duke {
     private static final String DEFAULT_PATH = "data/duke.txt";
 
     /**
-     * Create an instance of Duke
+     * Creates an instance of Duke
      *
      * @param filePath path of text file to store data
      */

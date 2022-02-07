@@ -1,6 +1,6 @@
 package duke;
 
-import duke.common.Const;
+import duke.common.Constant;
 
 /**
  * This class handles errors in Duke.
@@ -31,7 +31,7 @@ public class DukeException extends Exception {
     public static class DukeDateTimeFormatException extends DukeException {
         @Override
         public String toString() {
-            return "Please use this format " + Const.INPUT_DATE_TIME_FORMAT;
+            return "Please use this format " + Constant.INPUT_DATE_TIME_FORMAT;
         }
     }
 
@@ -45,14 +45,14 @@ public class DukeException extends Exception {
     public static class DukeTaskNotFoundException extends DukeException {
         @Override
         public String toString() {
-            return "please enter a task index from the LIST.";
+            return "please enter a task index from the list.";
         }
     }
 
     public static class DukeNotAValidNumberException extends DukeException {
         @Override
         public String toString() {
-            return "Stop trying to be funny, enter a valid task number from LIST only.";
+            return "Stop trying to be funny, enter a valid task number from the list only.";
         }
     }
 

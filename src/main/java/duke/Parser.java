@@ -1,6 +1,6 @@
 package duke;
 
-import duke.common.Const;
+import duke.common.Constant;
 import duke.task.Task;
 
 import java.util.regex.Pattern;
@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 
 /**
- * Parser class handles and process user's inputs with commands
+ * Parser class handles and process user's inputs with commands.
  */
 public class Parser {
 
@@ -17,10 +17,10 @@ public class Parser {
     private boolean isExit;
 
     /**
-     * Create an instance of Parser
+     * Creates an instance of Parser.
      *
-     * @param taskList taskList to get information of tasks
-     * @param ui       to interact with the users after processing the input
+     * @param taskList taskList to get information of tasks.
+     * @param ui       to interact with the users after processing the input.
      */
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
@@ -49,7 +49,7 @@ public class Parser {
                 output = ui.endMessage();
                 break;
             case LIST:
-                parseList(commandLine);
+                validateList(commandLine);
                 output = ui.listMessage();
                 break;
             case MARK:
@@ -57,7 +57,7 @@ public class Parser {
                 output = ui.markMessage(Integer.parseInt(commandLine[1]));
                 break;
             case UNMARK:
-                parseUnMark(commandLine);
+                parseUnmark(commandLine);
                 output = ui.unMarkMessage(Integer.parseInt(commandLine[1]));
                 break;
             case ADD:
@@ -76,8 +76,8 @@ public class Parser {
                 throw new DukeException.DukeInvalidCommandException();
             }
 
-            // save after every command.
             taskList.save();
+
             return output;
         } catch (DukeException e) {
             throw e;
@@ -93,59 +93,48 @@ public class Parser {
 
     private void parseAdd(String[] commandLine) throws DukeException {
         String commandType = commandLine[0];
-
         if (commandLine.length == 1) {
             if ((commandType.equals("todo")) || commandType.equals("deadline")
                     || commandType.equals("event")) {
                 throw new DukeException.DukeNoDescriptionFoundException();
             }
         }
-
+        String commandInfo = commandLine[1];
         if (commandLine.length == 2 && !commandType.equals("todo")) {
-            String commandInfo = commandLine[1];
-            String[] essentialInfo;
-
+            Task.Type taskType = null;
+            String separator = "";
             if (commandType.equals("deadline")) {
-                if (!commandInfo.contains("/by")) {
-                    throw new DukeException.DukeInvalidCommandException();
-                }
-                // check if there is a description
-                if (commandInfo.substring(0, commandInfo.indexOf("/by")).length() == 0) {
-                    throw new DukeException.DukeNoDescriptionFoundException();
-                }
-                // check if there is a time
-                if (commandInfo.substring(commandInfo.indexOf("/by") + 3).length() == 0) {
-                    throw new DukeException.DukeTimeNotFoundException();
-                }
-                essentialInfo = commandInfo.split("/by");
-                taskList.addTask(essentialInfo[0], parseGetTime(essentialInfo[1].trim()), Task.Type.DEADLINE);
-                return;
+                taskType = Task.Type.DEADLINE;
+                separator = "/by";
+            }
+            if (commandType.equals("event")) {
+                taskType = Task.Type.EVENT;
+                separator = "/at";
+            }
+            // check if instruction contains valid /by or /at keyword.
+            if (!commandInfo.contains(separator)) {
+                throw new DukeException.DukeInvalidCommandException();
+            }
+            // check if there is a description
+            if (commandInfo.substring(0, commandInfo.indexOf(separator)).length() == 0) {
+                throw new DukeException.DukeNoDescriptionFoundException();
+            }
+            // check if there is a time
+            if (commandInfo.substring(commandInfo.indexOf(separator) + 3).length() == 0) {
+                throw new DukeException.DukeTimeNotFoundException();
             }
 
-            if (commandType.equals("event")) {
-                if (!commandInfo.contains("/at")) {
-                    throw new DukeException.DukeInvalidCommandException();
-                }
-                // check if there is a description
-                if (commandInfo.substring(0, commandInfo.indexOf("/at")).length() == 0) {
-                    throw new DukeException.DukeNoDescriptionFoundException();
-                }
-                // check if there is a time
-                if (commandInfo.substring(commandInfo.indexOf("/at") + 3).length() == 0) {
-                    throw new DukeException.DukeTimeNotFoundException();
-                }
-                essentialInfo = commandInfo.split("/at");
-                taskList.addTask(essentialInfo[0], parseGetTime(essentialInfo[1].trim()), Task.Type.EVENT);
-                return;
-            }
+            String[] essentialInfo = commandInfo.split(separator);
+            taskList.addTask(essentialInfo[0], parseGetTime(essentialInfo[1].trim()), taskType);
+            return;
         }
-        taskList.addTask(commandLine[1], Task.Type.TODO);
+        taskList.addTask(commandInfo, Task.Type.TODO);
     }
 
     private LocalDateTime parseGetTime(String time) throws DukeException {
         try {
             LocalDateTime now = LocalDateTime.now();
-            LocalDateTime future = LocalDateTime.parse(time, Const.IN_TIME_FORMATTER);
+            LocalDateTime future = LocalDateTime.parse(time, Constant.IN_TIME_FORMATTER);
 
             if (!now.isBefore(future)) {
                 throw new DukeException.DukePastTimeException();
@@ -156,7 +145,7 @@ public class Parser {
         }
     }
 
-    private void parseList(String[] commandLine) throws DukeException {
+    private void validateList(String[] commandLine) throws DukeException {
         if (commandLine.length != 1) {
             throw new DukeException.DukeInvalidCommandException();
         }
@@ -180,7 +169,7 @@ public class Parser {
         taskList.markTask(stringToIndex(commandLine[1]));
     }
 
-    private void parseUnMark(String[] commandLine) throws DukeException {
+    private void parseUnmark(String[] commandLine) throws DukeException {
         if (commandLine.length == 1) {
             throw new DukeException.DukeTaskNotFoundException();
         }
@@ -213,7 +202,6 @@ public class Parser {
     private String[] parseCommandLine(String input) throws DukeException {
         String[] commandLine = input.trim().split("\\s+", 2);
         String commandType = commandLine[0];
-        // check if command exist.
         if (!Command.isValid(commandType)) {
             throw new DukeException.DukeInvalidCommandException();
         }

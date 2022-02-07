@@ -1,6 +1,6 @@
 import duke.Storage;
 import duke.TaskList;
-import duke.common.Const;
+import duke.common.Constant;
 import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
@@ -16,11 +16,11 @@ public class TaskListTest {
         assertEquals("[T][ ] test", taskList.getTaskDescription(1));
 
         taskList.addTask("test",
-                LocalDateTime.parse("May 5 2022 23:59", Const.OUT_TIME_FORMATTER),Task.Type.EVENT);
+                LocalDateTime.parse("May 5 2022 23:59", Constant.OUT_TIME_FORMATTER),Task.Type.EVENT);
         assertEquals("[E][ ] test(at: May 5 2022 23:59)", taskList.getTaskDescription(2));
 
         taskList.addTask("test",
-                LocalDateTime.parse("May 5 2022 23:59", Const.OUT_TIME_FORMATTER),Task.Type.DEADLINE);
+                LocalDateTime.parse("May 5 2022 23:59", Constant.OUT_TIME_FORMATTER),Task.Type.DEADLINE);
         assertEquals("[D][ ] test(by: May 5 2022 23:59)", taskList.getTaskDescription(3));
     }
 

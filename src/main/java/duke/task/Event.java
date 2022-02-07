@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.common.Const;
+import duke.common.Constant;
 
 import java.time.LocalDateTime;
 
@@ -28,11 +28,11 @@ public class Event extends Task {
      * @return time due of event.
      */
     public String getAt() {
-        return this.at.format(Const.OUT_TIME_FORMATTER);
+        return this.at.format(Constant.OUT_TIME_FORMATTER);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.at.format(Const.OUT_TIME_FORMATTER) + ")";
+        return "[E]" + super.toString() + "(at: " + this.at.format(Constant.OUT_TIME_FORMATTER) + ")";
     }
 }

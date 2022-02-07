@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * Create task based on task's type.
+     * Creates task based on task's type.
      *
      * @param description of the task.
      * @param time        of the task for Deadline and Event.
@@ -72,7 +72,7 @@ public class TaskList {
     }
 
     /**
-     * Create task for Todo.
+     * Creates task for Todo.
      *
      * @param description of the task.
      * @param t           the type of the task.
@@ -86,7 +86,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task as done.
+     * Marks a task as done.
      *
      * @param taskId index of the task on the list.
      */
@@ -105,7 +105,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark a task as not done.
+     * Unmarks a task as not done.
      *
      * @param taskId index of the task on the list.
      */
@@ -120,7 +120,7 @@ public class TaskList {
     }
 
     /**
-     * Delete a task on the list.
+     * Deletes a task on the list.
      *
      * @param taskId index of the task on the list.
      */

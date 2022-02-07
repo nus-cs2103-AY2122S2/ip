@@ -1,10 +1,9 @@
 package duke;
 
-import duke.common.Const;
+import duke.common.Constant;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,7 +40,7 @@ public class Storage {
 
         for (Task task : tasks) {
             Task.Type t = task.getType();
-            assert task != null: "task must not be null";
+            assert task != null : "task must not be null";
 
             switch (t) {
             case TODO:
@@ -101,14 +100,13 @@ public class Storage {
             } else if (taskType.equals("D")) {
                 assert taskArr.length == 4 : "There should be a dateTime string";
                 String dateTimeStr = taskArr[3];
-
                 taskList.addTask(description,
-                        LocalDateTime.parse(dateTimeStr, Const.OUT_TIME_FORMATTER), Task.Type.DEADLINE);
+                        LocalDateTime.parse(dateTimeStr, Constant.OUT_TIME_FORMATTER), Task.Type.DEADLINE);
             } else if (taskType.equals("E")) {
                 assert taskArr.length == 4 : "There should be a dateTime string";
                 String dateTimeStr = taskArr[3];
                 taskList.addTask(description,
-                        LocalDateTime.parse(dateTimeStr, Const.OUT_TIME_FORMATTER), Task.Type.EVENT);
+                        LocalDateTime.parse(dateTimeStr, Constant.OUT_TIME_FORMATTER), Task.Type.EVENT);
             }
             if (isDone) {
                 taskList.markTask(idx);

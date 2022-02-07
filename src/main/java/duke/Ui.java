@@ -34,7 +34,7 @@ public class Ui {
     }
 
     /**
-     * returns the list of tasks.
+     * Returns the list of tasks.
      *
      * @return string of a list of tasks.
      */

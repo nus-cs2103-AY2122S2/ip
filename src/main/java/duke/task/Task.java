@@ -28,7 +28,7 @@ public abstract class Task {
     }
 
     /**
-     * Get the description of the task.
+     * Gets the description of the task.
      *
      * @return the description of the task.
      */
@@ -37,7 +37,7 @@ public abstract class Task {
     }
 
     /**
-     * Get the type of the task.
+     * Gets the type of the task.
      *
      * @return the type of the task.
      */
@@ -46,7 +46,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      */
     public void mark() {
         this.isDone = true;

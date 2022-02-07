@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.common.Const;
+import duke.common.Constant;
 
 import java.time.LocalDateTime;
 
@@ -28,11 +28,11 @@ public class Deadline extends Task {
      * @return time due of deadline.
      */
     public String getBy() {
-        return this.by.format(Const.OUT_TIME_FORMATTER);
+        return this.by.format(Constant.OUT_TIME_FORMATTER);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.by.format(Const.OUT_TIME_FORMATTER) + ")";
+        return "[D]" + super.toString() + "(by: " + this.by.format(Constant.OUT_TIME_FORMATTER) + ")";
     }
 }
