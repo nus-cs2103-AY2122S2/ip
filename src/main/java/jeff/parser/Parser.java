@@ -69,7 +69,7 @@ public class Parser {
                 throw new JeffException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
             }
 
-            String[] splitBody = body.split("/by ", 2);
+            String[] splitBody = body.split(" /by ", 2);
             String description = splitBody[0];
 
             // To prevent NullPointerException for when body does not exist.
@@ -92,7 +92,7 @@ public class Parser {
             if (len == 1) {
                 throw new JeffException(" ☹ OOPS!!! The description of a event cannot be empty.");
             }
-            splitBody = body.split("/at ", 2);
+            splitBody = body.split(" /at ", 2);
             description = splitBody[0];
 
             // To prevent NullPointerException for when body does not exist.
