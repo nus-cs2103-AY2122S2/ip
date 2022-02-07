@@ -18,6 +18,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        assert time.isPresent() : "time of deadline not available";
+
         String tempStr = " ";
 
         if (isDone) {

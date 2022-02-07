@@ -17,6 +17,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
+        assert time.isPresent() : "time of event not available";
+
         String tempStr = " ";
 
         if (isDone) {
