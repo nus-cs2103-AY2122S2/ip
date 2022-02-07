@@ -8,6 +8,7 @@ import command.DeleteCommand;
 import command.EventCommand;
 import command.ExitCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.IncorrectCommand;
 import command.ListCommand;
 import command.MarkCommand;
@@ -28,6 +29,7 @@ public class Parser {
         UNMARK,
         DELETE,
         BYE,
+        HELP,
         FIND;
     }
 
@@ -54,14 +56,12 @@ public class Parser {
         if (responseArray.length > 0) {
             try {
                 command = Commands.valueOf(responseArray[0].toUpperCase());
-                String textContent = removeSubString(response.toLowerCase(), responseArray[0].toLowerCase() + " ");
+                String textContent = removeSubString(response, responseArray[0] + " ");
                 // if a command is creating a task, get the priority
-                if (responseArray.length > 1) {
+                if (responseArray.length > 1 && containsPriority(responseArray[1])) {
                     priority = getPriority(responseArray[1]);
                     // remove the priority number from the content of the task message
-                    if (priority != DEFAULT_PRIORITY) {
-                        textContent = removeSubString(textContent, responseArray[1]);
-                    }
+                    textContent = removeSubString(textContent, responseArray[1]);
                 }
                 switch (command) {
                 case FIND:
@@ -92,6 +92,8 @@ public class Parser {
                     return new ExitCommand();
                 case LIST:
                     return new ListCommand();
+                case HELP:
+                    return new HelpCommand();
                 default:
                     break;
                 }
@@ -131,7 +133,26 @@ public class Parser {
     }
 
     /**
-     * Check if a string is a number.
+     * Check if a string contains a priority attribute.
+     *
+     * @param strNum String to compare with
+     * @return Boolean -> false = does not contain
+     */
+    public static boolean containsPriority(String strNum) {
+        if (strNum == null || strNum.equals("")) {
+            return false;
+        } else {
+            try {
+                Priorities priority = Priorities.valueOf(strNum.toUpperCase());
+            } catch (IllegalArgumentException nfe) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Get the priority enum.
      *
      * @param strNum String to compare with
      * @return Integer -> -1 = not convertible. Otherwise, the value
