@@ -76,39 +76,13 @@ public class Parser {
             return new DeleteAllCommand();
         }
         if (isShowAllOnSameDate) {
-            try {
-                if (input.replaceAll(" ", "").matches("showall")) {
-                    /* user did not specify time */
-                    throw new CortanaException("Please specify the date time you are looking for!");
-                } else {
-                    String dateTimeString = input.replaceAll("show all ", "");
-                    boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?")
-                            .matcher(dateTimeString).find();
-                    if (correctTimeFormat) {
-                        LocalDateTime localDateTime;
-                        boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")
-                                .matcher(dateTimeString).find();
-                        if (hasTime) {
-                            /* user specifies time */
-                            localDateTime = LocalDateTime.parse(dateTimeString,
-                                    DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
-                        } else {
-                            /* user does not specify time, only date */
-                            LocalDate localDate = LocalDate.parse(dateTimeString,
-                                    DateTimeFormatter.ofPattern("yyyy-M-d"));
-                            localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
-                        }
-                        return new ShowAllTasksOnSameDateCommand(localDateTime, dateTimeString);
-                    } else {
-                        /* user input format is invalid */
-                        throw new CortanaException("Invalid date time format! "
-                                + "Please follow the format yyyy-M-d HHmm!");
-                    }
-                }
-            } catch (DateTimeParseException e) {
-                /* unable to parse user input date/time */
-                throw new CortanaException("Invalid date/time!");
+            boolean isWithoutDateTime = input.replaceAll(" ", "").matches("showall");
+            if (isWithoutDateTime) {
+                /* user did not specify time */
+                throw new CortanaException("Please specify the date time you are looking for!");
             }
+            String dateTimeString = input.replaceAll("show all ", "");
+            return new ShowAllTasksOnSameDateCommand(parseLocalDateTime(dateTimeString), dateTimeString);
         }
         if (isFindCommand) {
             String keyWord = input.replaceAll("find ", "");
@@ -118,81 +92,79 @@ public class Parser {
                 return new FindCommand(keyWord);
             }
         }
+
+        if (isEmptyDeadline || isEmptyEvent || isEmptyTodo) {
+            /* user does not specify task description*/
+            String aOrAn = isEmptyEvent ? "an " : "a ";
+            TaskType taskType = isEmptyDeadline ? TaskType.DEADLINE : isEmptyEvent ? TaskType.EVENT : TaskType.TODO;
+            throw new CortanaException("OOPS!!! The description of " + aOrAn + taskType
+                    + " cannot be empty!");
+        }
+
+        boolean hasBy = Pattern.compile("/by .*").matcher(input).find();
+        boolean hasAt = Pattern.compile("/at .*").matcher(input).find();
+        String description;
+        String time;
+
+        if (isDeadlineWithDescription && hasBy) {
+            /* valid deadline command */
+            String[] actualTask = input.replaceAll("deadline ", "")
+                    .split("/by ");
+            description = actualTask[0];
+            time = actualTask[1];
+            Deadline deadline = new Deadline(description, parseLocalDateTime(time));
+            return new AddCommand(deadline);
+        } else if (isEventWithDescription && hasAt) {
+            /* valid event command */
+            String[] actualTask = input.replaceAll("event ", "").split("/at ");
+            description = actualTask[0];
+            time = actualTask[1];
+            Event event = new Event(description, parseLocalDateTime(time));
+            return new AddCommand(event);
+        } else if (isTodoWithDescription) {
+            /* valid todo command */
+            description = input.replaceAll("todo ", "");
+            Todo todo = new Todo(description);
+            return new AddCommand(todo);
+        } else if (isDeadlineWithDescription) {
+            /* deadline without specifying time with /by */
+            throw new CortanaException("Please specify the deadline time with the /by keyword!");
+        } else if (isEventWithDescription) {
+            /* event without specifying time with /at */
+            throw new CortanaException("Please specify the event time with the /at keyword!");
+        } else {
+            /* invalid command */
+            throw new CortanaException("I don't know what that means :(");
+        }
+    }
+
+    /**
+     * Parse the user input date/time to LocalDateTime
+     *
+     * @param dateTime the input date/time
+     * @return the actual date/time in LocalDateTime
+     * @throws CortanaException the cortana exception
+     */
+    public static LocalDateTime parseLocalDateTime(String dateTime) throws CortanaException {
+        boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?")
+                .matcher(dateTime).find();
+        boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}").matcher(dateTime).find();
+        LocalDateTime localDateTime;
+
+        if (!correctTimeFormat) {
+            throw new CortanaException("Invalid date time format!" + " Please follow the format yyyy-M-d HHmm!");
+        }
         try {
-            String taskType = isEmptyDeadline ? "deadline" : isEmptyEvent ? "event" : "todo";
-            if (isEmptyDeadline || isEmptyEvent || isEmptyTodo) {
-                /* user does not specify task description*/
-                String aOrAn = isEmptyEvent ? "an " : "a ";
-                throw new CortanaException("OOPS!!! The description of " + aOrAn + taskType
-                        + " cannot be empty!");
+            if (hasTime) {
+                localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
             } else {
-                boolean hasBy = Pattern.compile("/by .*").matcher(input).find();
-                boolean hasAt = Pattern.compile("/at .*").matcher(input).find();
-                if (isDeadlineWithDescription && hasBy) {
-                    /* valid deadline command */
-                    String[] actualTask = input.replaceAll("deadline ", "")
-                            .split("/by ");
-                    String description = actualTask[0];
-                    String by = actualTask[1];
-                    boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?")
-                            .matcher(by).find();
-                    if (correctTimeFormat) {
-                        boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}").matcher(by).find();
-                        Deadline deadline;
-                        if (hasTime) {
-                            LocalDateTime localDateTime = LocalDateTime.parse(by,
-                                    DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
-                            deadline = new Deadline(description, localDateTime);
-                        } else {
-                            LocalDate localDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-M-d"));
-                            deadline = new Deadline(description, LocalDateTime.of(localDate, LocalTime.MAX));
-                        }
-                        return new AddCommand(deadline);
-                    } else {
-                        throw new CortanaException("Invalid date time format!"
-                                + "Please follow the format yyyy-M-d HHmm!");
-                    }
-                } else if (isEventWithDescription && hasAt) {
-                    /* valid event command */
-                    String[] actualTask = input.replaceAll("event ", "").split("/at ");
-                    String description = actualTask[0];
-                    String at = actualTask[1];
-                    boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?")
-                            .matcher(at).find();
-                    if (correctTimeFormat) {
-                        boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}").matcher(at).find();
-                        Event event;
-                        if (hasTime) {
-                            LocalDateTime localDateTime = LocalDateTime.parse(at,
-                                    DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
-                            event = new Event(description, localDateTime);
-                        } else {
-                            LocalDate localDate = LocalDate.parse(at,
-                                    DateTimeFormatter.ofPattern("yyyy-M-d"));
-                            event = new Event(description, LocalDateTime.of(localDate, LocalTime.MAX));
-                        }
-                        return new AddCommand(event);
-                    } else {
-                        throw new CortanaException("Invalid date time format!"
-                                + "Please follow the format yyyy-M-d HHmm!");
-                    }
-                } else if (isTodoWithDescription) {
-                    /* valid todo command */
-                    String description = input.replaceAll("todo ", "");
-                    Todo todo = new Todo(description);
-                    return new AddCommand(todo);
-                } else if (isDeadlineWithDescription) {
-                    /* deadline without specifying time with /by */
-                    throw new CortanaException("Please specify the deadline time with the /by keyword!");
-                } else if (isEventWithDescription) {
-                    /* event without specifying time with /at */
-                    throw new CortanaException("Please specify the event time with the /at keyword!");
-                } else {
-                    /* invalid command */
-                    throw new CortanaException("I don't know what that means :(");
-                }
+                LocalDate localDate = LocalDate.parse(dateTime,
+                        DateTimeFormatter.ofPattern("yyyy-M-d"));
+                localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
             }
+            return localDateTime;
         } catch (DateTimeParseException e) {
+            /* unable to parse user input date/time */
             throw new CortanaException("Invalid date/time!");
         }
     }

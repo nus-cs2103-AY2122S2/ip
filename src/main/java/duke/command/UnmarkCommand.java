@@ -37,6 +37,7 @@ public class UnmarkCommand extends Command {
             storage.writeFile(taskList);
             return ui.unmarked(task);
         } catch (Exception e) {
+            assert index <= 0 : "Index is greater than 0";
             throw new CortanaException("No such task!");
         }
     }

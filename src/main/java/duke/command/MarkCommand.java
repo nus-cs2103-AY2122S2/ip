@@ -37,6 +37,7 @@ public class MarkCommand extends Command {
             storage.writeFile(taskList);
             return ui.marked(task);
         } catch (Exception e) {
+            assert index <= 0 : "Index is greater than 0";
             throw new CortanaException("No such task!");
         }
     }

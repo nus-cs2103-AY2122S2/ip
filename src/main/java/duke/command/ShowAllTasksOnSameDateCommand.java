@@ -46,12 +46,15 @@ public class ShowAllTasksOnSameDateCommand extends Command {
                 .count();
 
         StringBuilder tasksOnSameDate = new StringBuilder();
-
         taskList.getTaskList()
                 .stream()
                 .filter(task -> !(task instanceof Todo) && isMatchingDateTime(task, dateTime))
                 .forEach(task -> tasksOnSameDate.append(task).append("\n"));
 
+        if (numberOfTasksOnSameDate == 0) {
+            /* no tasks found */
+            throw new CortanaException("No task found on " + dateTimeString + "!");
+        }
         tasksOnSameDate.append(ui.foundTaskOnSameDate(numberOfTasksOnSameDate, dateTimeString));
         return tasksOnSameDate.toString();
     }

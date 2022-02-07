@@ -17,7 +17,6 @@ import duke.utils.Ui;
  */
 public class Deadline extends Task {
     private final LocalDateTime by;
-
     /**
      * Instantiates a new Deadline.
      *
