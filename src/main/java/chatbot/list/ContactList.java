@@ -33,9 +33,9 @@ public class ContactList extends ChatBotList<Contact> {
      */
     public String add(String[] args) throws ChatBotException {
         try {
-            String name = args[0];
-            String phoneNumber = args[1];
-            String birthdayString = args[2];
+            String name = args[1];
+            String phoneNumber = args[2];
+            String birthdayString = args[3];
             Timestamp birthday = new Timestamp(birthdayString);
             Contact contact = new Contact(name, phoneNumber, birthday);
             insert(contact);

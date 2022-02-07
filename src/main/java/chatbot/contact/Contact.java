@@ -23,8 +23,8 @@ public class Contact implements Comparable<Contact> {
         this.name = name;
         this.birthday = birthday;
 
-        if (phoneNumber.length() != 9 || !isNumeric(phoneNumber)) {
-            throw new ChatBotException("Phone number should be a 9 digit number traveller!");
+        if (phoneNumber.length() != 8 || !isNumeric(phoneNumber)) {
+            throw new ChatBotException("Phone number should be a 8 digit number traveller!");
         }
         this.phoneNumber = phoneNumber;
     }
@@ -70,7 +70,7 @@ public class Contact implements Comparable<Contact> {
 
     @Override
     public String toString() {
-        return String.format("%s (%s)", name, phoneNumber);
+        return String.format("%s, %s (birthday: %s)", name, phoneNumber, birthday);
     }
 
     @Override

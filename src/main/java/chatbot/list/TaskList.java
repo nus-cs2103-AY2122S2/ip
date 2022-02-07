@@ -127,9 +127,6 @@ public class TaskList extends ChatBotList<Task> {
      * @throws ChatBotException If the arguments are formatted incorrectly.
      */
     public String addToDo(String[] args) throws ChatBotException {
-        if (!validTypes.contains(args[0])) {
-            throw new ChatBotException();
-        }
         if (args.length <= 1) {
             throw new ChatBotException(
                     "You need to key in the title of your todo traveller!"
@@ -144,18 +141,6 @@ public class TaskList extends ChatBotList<Task> {
                 getNumItems(),
                 todo
         );
-    }
-
-    private String combineArgs(String[] args) {
-        String title = "";
-        for (int i = 1; i < args.length; i++) {
-            if (i != args.length - 1) {
-                title = title.concat(args[i]).concat(" ");
-            } else {
-                title = title.concat(args[i]);
-            }
-        }
-        return title;
     }
 
     /**
@@ -190,6 +175,18 @@ public class TaskList extends ChatBotList<Task> {
             return "I couldn't find any tasks matching your keyword traveller!";
         }
         return new TaskList(filtered).toString();
+    }
+
+    private String combineArgs(String[] args) {
+        String title = "";
+        for (int i = 1; i < args.length; i++) {
+            if (i != args.length - 1) {
+                title = title.concat(args[i]).concat(" ");
+            } else {
+                title = title.concat(args[i]);
+            }
+        }
+        return title;
     }
 
     /**

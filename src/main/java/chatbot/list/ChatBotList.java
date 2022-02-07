@@ -93,6 +93,15 @@ public abstract class ChatBotList<T> {
     }
 
     /**
+     * Get the type of the list.
+     *
+     * @return "task" if TaskList, else "contact" if ContactList.
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
      * Get whether the list is empty or not.
      *
      * @return True if list is empty, else false.
