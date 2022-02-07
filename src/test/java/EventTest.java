@@ -1,5 +1,4 @@
 import duke.common.Const;
-import duke.task.Deadline;
 import duke.task.Event;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,7 @@ public class EventTest {
         Event event = new Event("party", dateTime);
         event.mark();
         assertEquals("X", event.getStatusIcon());
-        event.unMark();
+        event.unmark();
         assertEquals(" ", event.getStatusIcon());
     }
 }

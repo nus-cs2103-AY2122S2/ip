@@ -38,14 +38,11 @@ public class Parser {
      * @return response after processing the input.
      */
     public String parseInput(String input) throws DukeException {
+        String output;
         try {
             String[] commandLine = parseCommandLine(input);
             Command command = Command.getCommand(commandLine[0]);
-            if (command == null) {
-                throw new DukeException.DukeInvalidCommandException();
-            }
 
-            String output;
             switch (command) {
             case BYE:
                 parseBye(commandLine);
@@ -76,8 +73,7 @@ public class Parser {
                 output = ui.findMessage(found);
                 break;
             default:
-                output = "Opps! something went wrong";
-                break;
+                throw new DukeException.DukeInvalidCommandException();
             }
 
             // save after every command.
@@ -125,7 +121,6 @@ public class Parser {
                 taskList.addTask(essentialInfo[0], parseGetTime(essentialInfo[1].trim()), Task.Type.DEADLINE);
                 return;
             }
-
 
             if (commandType.equals("event")) {
                 if (!commandInfo.contains("/at")) {
@@ -189,7 +184,7 @@ public class Parser {
         if (commandLine.length == 1) {
             throw new DukeException.DukeTaskNotFoundException();
         }
-        taskList.unMarkTask(stringToIndex(commandLine[1]));
+        taskList.unmarkTask(stringToIndex(commandLine[1]));
     }
 
     private String parseDelete(String[] commandLine) throws DukeException {

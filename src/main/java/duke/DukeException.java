@@ -69,4 +69,18 @@ public class DukeException extends Exception {
             return "There is an error processing the data :(";
         }
     }
+
+    public static class DukeMarkedException extends DukeException {
+        @Override
+        public String toString() {
+            return "You have already marked this task. ;/";
+        }
+    }
+
+    public static class DukeUnMarkException extends DukeException {
+        @Override
+        public String toString() {
+            return "This task is already not marked. ;/";
+        }
+    }
 }

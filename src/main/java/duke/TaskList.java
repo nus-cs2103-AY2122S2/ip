@@ -90,8 +90,13 @@ public class TaskList {
      *
      * @param taskId index of the task on the list.
      */
-    public void markTask(int taskId) {
-        this.tasks.get(taskId - 1).mark();
+    public void markTask(int taskId) throws DukeException {
+        Task task = this.tasks.get(taskId - 1);
+        if (task.getStatusIcon().equals("X")) {
+            throw new DukeException.DukeMarkedException();
+        } else {
+            task.mark();
+        }
     }
 
     public int size() {
@@ -99,12 +104,17 @@ public class TaskList {
     }
 
     /**
-     * UnMark a task as not done.
+     * Unmark a task as not done.
      *
      * @param taskId index of the task on the list.
      */
-    public void unMarkTask(int taskId) {
-        this.tasks.get(taskId - 1).unMark();
+    public void unmarkTask(int taskId) throws DukeException {
+        Task task = this.tasks.get(taskId - 1);
+        if (!task.getStatusIcon().equals("X")) {
+            throw new DukeException.DukeUnMarkException();
+        } else {
+            task.unmark();
+        }
     }
 
     /**

@@ -73,7 +73,7 @@ public class Storage {
      *
      * @param taskList used create tasks from text file.
      */
-    public void load(TaskList taskList) throws FileNotFoundException {
+    public void load(TaskList taskList) throws FileNotFoundException, DukeException {
         File dir = new File("data");
         if (!dir.exists()) {
             dir.mkdirs();
