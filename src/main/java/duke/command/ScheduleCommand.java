@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 import duke.exception.DukeIllegalArgumentException;
@@ -27,15 +28,16 @@ public class ScheduleCommand extends Command {
         assert dayStart != null;
         final LocalDateTime dayEnd = dayStart.plusDays(1);
 
-        List<Task> filteredTasks = taskList.filter(task -> task.getDate()
+        List<Task> tasksOnDay = taskList.filter(task -> task.getDate()
                 .map(date -> date.isBefore(dayEnd) && date.isAfter(dayStart))
                 .orElse(false));
 
-        if (filteredTasks.size() == 0) {
+        if (tasksOnDay.size() == 0) {
             linePrinter.print(String.format("You have no tasks on %s!", this.args));
         } else {
             linePrinter.print(String.format("Here are your tasks on %s:", this.args));
-            filteredTasks.forEach(task -> {
+            tasksOnDay.sort(Comparator.comparing(x -> x.getDate().orElse(LocalDateTime.MAX)));
+            tasksOnDay.forEach(task -> {
                 linePrinter.print(task.getReadableString());
             });
         }
