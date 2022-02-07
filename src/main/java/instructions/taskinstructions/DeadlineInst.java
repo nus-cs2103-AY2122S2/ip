@@ -10,7 +10,7 @@ import tasks.TaskList;
 
 /**
  * This class represents an instruction for a new Deadline task.
- * Format: "deadline P /by Q",
+ * Format: {@code deadline P /by Q},
  *         where P is the task description, and Q is the deadline, in yyyy-mm-dd hh:mm.
  *
  * @author Ong Han Yang
