@@ -13,8 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.time.format.DateTimeParseException;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -30,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/Images/Red.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/Green.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/Images/red.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/green.png"));
 
     @FXML
     public void initialize() {
