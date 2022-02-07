@@ -33,6 +33,7 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
         String result = "";
+        assert ui != null : "ui should not be null";
         if ((index - 1) > taskList.getSize() || (index - 1) < 0) {
             throw new FunBoxExceptions("Wrong index!");
         } else {

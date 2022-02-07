@@ -32,6 +32,7 @@ public class FilterCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+        assert ui != null : "ui should not be null";
         return taskList.filterTasks(this.description, taskList, ui);
     }
 }
