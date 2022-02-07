@@ -85,6 +85,12 @@ public class Ui {
         System.out.println(BLANK_LINE + "     Noted. I've removed this task: " + "\n" + "     " + deleteTask
                 + "\n" + "     Now you have " + taskList.getTaskListSize() + " task(s) in the list.\n" + BLANK_LINE);
     }
+
+    public static void printFind(StringBuilder listString) {
+        String temp = "\n" + BLANK_LINE + "     Here are the matching tasks in your list: " + "\n" + "     "
+                + listString + "\n" + BLANK_LINE;
+        System.out.println(temp);
+    }
 }
 
 
