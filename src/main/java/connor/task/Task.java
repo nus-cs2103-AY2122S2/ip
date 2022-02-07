@@ -23,6 +23,10 @@ public class Task {
         return isDone ? "[X]" : "[ ]";
     }
 
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
     public String getType() {
         switch (this.taskType) {
         case TODO:

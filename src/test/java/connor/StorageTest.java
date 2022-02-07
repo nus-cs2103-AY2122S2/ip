@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
+import connor.exception.ConnorException;
 import org.junit.jupiter.api.Test;
 
 import connor.exception.InvalidTaskFileException;
@@ -16,22 +17,22 @@ import connor.task.ToDo;
 public class StorageTest {
     @Test
     public void testStorageStaticMethods() {
-        ToDo t = new ToDo("Test");
-        assertEquals("[ ] T | Test\n", Storage.taskToString(t));
-        t.mark();
-        assertEquals("[#] T | Test\n", Storage.taskToString(t));
-
-        Deadline d = new Deadline("Test", "Monday");
-        assertEquals("[ ] D | Test | By: Monday\n", Storage.taskToString(d));
-        d.mark();
-        assertEquals("[#] D | Test | By: Monday\n", Storage.taskToString(d));
-
-        Event e = new Event("Test", "Tuesday");
-        assertEquals("[ ] E | Test | At: Tuesday\n", Storage.taskToString(e));
-        e.mark();
-        assertEquals("[#] E | Test | At: Tuesday\n", Storage.taskToString(e));
-
         try {
+            ToDo t = new ToDo("Test");
+            assertEquals("[ ] T | Test\n", Storage.taskToString(t));
+            t.mark();
+            assertEquals("[#] T | Test\n", Storage.taskToString(t));
+
+            Deadline d = new Deadline("Test", "Monday");
+            assertEquals("[ ] D | Test | By: Monday\n", Storage.taskToString(d));
+            d.mark();
+            assertEquals("[#] D | Test | By: Monday\n", Storage.taskToString(d));
+
+            Event e = new Event("Test", "Tuesday");
+            assertEquals("[ ] E | Test | At: Tuesday\n", Storage.taskToString(e));
+            e.mark();
+            assertEquals("[#] E | Test | At: Tuesday\n", Storage.taskToString(e));
+
             ToDo t2 = new ToDo("Things");
             String s = "[ ] T | Things";
             assertEquals(t2, Storage.stringToTask(s));
@@ -44,6 +45,8 @@ public class StorageTest {
             String s3 = "[ ] D | Stuff | By: 2022-10-31\n";
             assertEquals(s3, Storage.taskToString(d2));
         } catch (InvalidTaskFileException err) {
+            fail();
+        } catch (ConnorException err) {
             fail();
         }
 
