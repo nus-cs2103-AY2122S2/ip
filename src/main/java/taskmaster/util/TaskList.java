@@ -150,6 +150,12 @@ public class TaskList {
         return "Now you have " + this.currentSize + " tasks in the list.\n";
     }
 
+    /**
+     * Returns the current size of the task list.
+     *
+     * @return the current size of task list in integer form.
+     */
+
     public int getCurrentSize() {
         return this.currentSize;
     }

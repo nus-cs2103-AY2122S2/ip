@@ -40,6 +40,11 @@ public class Taskmaster {
     public String getOpeningMessage() {
         return ui.getOpeningMessage();
     }
+    /**
+     * Returns a message whether the loading of data file has been successful.
+     *
+     * @return message whether the loading of data file has been successful.
+     */
 
     public String loadFile() {
         String result = "";

@@ -61,14 +61,16 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Method to print out a dialog box that informs the user whether
+     * the loading of data file from the /data/ folder has been successful.
+     */
     @FXML
     public void loadFile() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getTaskmasterDialog(taskmaster.loadFile(), taskMasterImage)
         );
     }
-
-
 
 
     /**
