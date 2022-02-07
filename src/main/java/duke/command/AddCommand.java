@@ -42,14 +42,15 @@ public abstract class AddCommand implements Command {
     }
 
     /**
-     * An abstract method to execute the command.
-     * The method will be implemented in the extended classes.
+     * Executes the command and then returns the response message.
+     * This abstract method will be implemented by its subclasses.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws IOException If the tasks cannot be saved to the data file
      */
     @Override
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 }

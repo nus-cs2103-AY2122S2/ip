@@ -16,12 +16,12 @@ import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
 
 /**
- * A class that handles the logic of parsing the user command.
+ * A class that handles the logic of parsing a user command.
  */
 public class Parser {
-    static final String DATETIME_COMMAND_FOR_DEADLINE = "by";
-    static final String DATETIME_COMMAND_FOR_EVENT = "at";
-    static final String DATE_COMMAND_FOR_PRINT = "/on";
+    private static final String DATETIME_COMMAND_FOR_DEADLINE = "by";
+    private static final String DATETIME_COMMAND_FOR_EVENT = "at";
+    private static final String DATE_COMMAND_FOR_PRINT = "/on";
 
     /**
      * Parses the command line input, validates the command type and
@@ -61,7 +61,7 @@ public class Parser {
     /**
      * Validates the command type to check if it is a valid command.
      *
-     * @param commandType Command type in String
+     * @param commandType String command type
      * @return The command type in CommandType object if it is a
      * valid command, null otherwise
      */
@@ -144,7 +144,7 @@ public class Parser {
     }
 
     /**
-     * Gets the task number from Mark command.
+     * Returns the task number from Mark command.
      *
      * @param commandInfo Command information
      * @return The task number
@@ -160,7 +160,7 @@ public class Parser {
     }
 
     /**
-     * Gets the task number from Unmark command.
+     * Returns the task number from Unmark command.
      *
      * @param commandInfo Command information
      * @return The task number
@@ -176,7 +176,7 @@ public class Parser {
     }
 
     /**
-     * Gets the task number from Delete command.
+     * Returns the task number from Delete command.
      *
      * @param commandInfo Command information
      * @return The task number
@@ -192,7 +192,7 @@ public class Parser {
     }
 
     /**
-     * Gets the task number from command information
+     * Returns the task number from command information
      *
      * @param commandInfo Command information
      * @param errorMessageTaskNumEmpty Error message if the task number is empty
@@ -214,7 +214,7 @@ public class Parser {
     }
 
     /**
-     * Gets the task description from ToDo command.
+     * Returns the task description from ToDo command.
      *
      * @param commandInfo Command information
      * @return The task description
@@ -230,7 +230,7 @@ public class Parser {
     }
 
     /**
-     * Gets the task information from Deadline command.
+     * Returns the task information from Deadline command.
      *
      * @param commandInfo Command information
      * @return The task information
@@ -285,7 +285,7 @@ public class Parser {
     }
 
     /**
-     * Gets the task information from Event command.
+     * Returns the task information from Event command.
      *
      * @param commandInfo Command information
      * @return The task information
@@ -340,7 +340,7 @@ public class Parser {
     }
 
     /**
-     * Gets the date from Print command.
+     * Returns the date from Print command.
      *
      * @param commandInfo Command information
      * @return The date
@@ -369,7 +369,7 @@ public class Parser {
     }
 
     /**
-     * Gets the keyword from Find command.
+     * Returns the keyword from Find command.
      *
      * @param commandInfo Command information
      * @return The keyword

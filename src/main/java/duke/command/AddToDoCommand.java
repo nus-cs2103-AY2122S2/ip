@@ -23,21 +23,22 @@ public class AddToDoCommand extends AddCommand {
 
     /**
      * Executes the command of adding the new ToDo task to the task list
-     * and saving the updated task list to the data file.
+     * and saving the updated task list to the data file, and then returns
+     * the response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws IOException If the tasks cannot be saved to the data file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task newToDoTask = taskList.addToDoTask(super.getTaskDescription());
 
-        String response = ui.taskAddedMessage(newToDoTask)
-                + System.lineSeparator() + ui.numOfTasksInListMessage(taskList);
-        ui.displayResponse(response);
-
         storage.saveTasksToFile(taskList);
+
+        return ui.taskAddedMessage(newToDoTask) + System.lineSeparator()
+                + ui.numOfTasksInListMessage(taskList);
     }
 }

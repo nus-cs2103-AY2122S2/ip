@@ -37,16 +37,18 @@ public class DeleteCommand implements Command {
 
     /**
      * Executes the command of deleting the task from the task list and
-     * saving the updated list to the data file.
+     * saving the updated list to the data file, and then returns the
+     * response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
+     * @return The response message
      * @throws DukeException If the task is not found
      * @throws IOException If the tasks cannot be saved to the data file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         Task taskDeleted = !taskList.hasFilter()
                 ? deleteTaskBasedOnAllTasks(taskList)
                 : deleteTaskBasedOnFilteredTasks(taskList);
@@ -57,12 +59,10 @@ public class DeleteCommand implements Command {
             taskList.resetFilteredTasks();
         }
 
-        String response = ui.taskDeletedMessage(taskDeleted)
-                + System.lineSeparator()
-                + ui.numOfTasksInListMessage(taskList);
-        ui.displayResponse(response);
-
         storage.saveTasksToFile(taskList);
+
+        return ui.taskDeletedMessage(taskDeleted) + System.lineSeparator()
+                + ui.numOfTasksInListMessage(taskList);
     }
 
     /**

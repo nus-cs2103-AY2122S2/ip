@@ -25,18 +25,19 @@ public class ExitCommand implements Command {
     }
 
     /**
-     * Executes the command of exiting the program.
+     * Executes the command of exiting the program, and then returns
+     * the response message.
      *
      * @param taskList Task list
      * @param ui An object to handle I/O operations
      * @param storage An object to handle file operations
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         // Reset the List of filteredTasks when ExitCommand is executed
         // This will clear the List of filteredTasks
         taskList.resetFilteredTasks();
 
-        ui.displayExit();
+        return Ui.EXIT_MESSAGE;
     }
 }

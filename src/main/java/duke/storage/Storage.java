@@ -20,7 +20,6 @@ import duke.task.ToDo;
  * A class that handles create, read and write file operations.
  */
 public class Storage {
-    private final File directory;
     private final File dataFile;
 
     /**
@@ -33,7 +32,7 @@ public class Storage {
      * @throws IOException If the storage file cannot be initialised
      */
     public Storage(String folderName, String fileName) throws DukeException, IOException {
-        directory = initialiseDirectory(folderName);
+        File directory = initialiseDirectory(folderName);
         dataFile = initialiseFile(directory, fileName);
     }
 
@@ -54,7 +53,7 @@ public class Storage {
         }
 
         if (!hasDirectory) {
-            throw new DukeException("\t" + ErrorMessage.ERROR_UNABLE_INITIALISE_DIRECTORY);
+            throw new DukeException(ErrorMessage.ERROR_UNABLE_INITIALISE_DIRECTORY.toString());
         }
 
         return directory;
@@ -78,19 +77,10 @@ public class Storage {
         }
 
         if (!hasFile) {
-            throw new IOException("\t" + ErrorMessage.ERROR_UNABLE_INITIALISE_FILE);
+            throw new IOException(ErrorMessage.ERROR_UNABLE_INITIALISE_FILE.toString());
         }
 
         return file;
-    }
-
-    /**
-     * Returns the relative pathname of the directory.
-     *
-     * @return The relative pathname of the directory
-     */
-    public File getDirectory() {
-        return directory;
     }
 
     /**

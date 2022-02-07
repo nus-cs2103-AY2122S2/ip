@@ -36,65 +36,62 @@ public class Duke {
             storage = new Storage(folderName, fileName);
             taskList = storage.loadTasksFromFile();
         } catch (DukeException | IOException e) {
-            ui.displayError(e.getMessage());
+            System.err.println(e.getMessage());
             taskList = new TaskList();
         }
     }
 
     /**
-     * Executes the program.
+     * Returns the task list.
+     *
+     * @return The task list
      */
-    public void run() {
-        ui.displayWelcome();
-        boolean isExit = false;
-
-        Command command = null;
-
-        while (!isExit) {
-            try {
-                String commandLine = ui.readCommand();
-                command = parser.parse(commandLine);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException | IOException e) {
-                ui.displayError(e.getMessage());
-            } finally {
-                checkAndDisplayFilteredTasks(command);
-                ui.displayLine();
-            }
-        }
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     /**
-     * Checks if the task list has filtered tasks.
-     * Displays the filtered tasks message if there are filtered tasks.
+     * Returns the command after parsing the input.
      *
-     * @param command Executed command
+     * @param input The input from the user
+     * @return The command
+     * @throws DukeException If there are errors when parsing the input
      */
-    public void checkAndDisplayFilteredTasks(Command command) {
-        if (taskList.hasFilter()) {
-            String filteredTasksMessage;
-
-            if (taskList.getFilterCommandType() == CommandType.PRINT && !(command instanceof PrintCommand)) {
-                filteredTasksMessage = ui.tasksOnDateMessage(taskList, taskList.getFilterInfo());
-            } else if (taskList.getFilterCommandType() == CommandType.FIND && !(command instanceof FindCommand)) {
-                filteredTasksMessage = ui.tasksWithKeywordMessage(taskList, taskList.getFilterInfo());
-            } else {
-                filteredTasksMessage = "";
-            }
-
-            if (!filteredTasksMessage.isEmpty()) {
-                ui.displayFilteredTasks(filteredTasksMessage);
-            }
-        }
+    public Command getCommand(String input) throws DukeException {
+        return parser.parse(input);
     }
 
     /**
-     * Starts the execution of the program.
+     * Returns the response message after executing the command.
      *
-     * @param args Command line arguments
+     * @param command The command to execute
+     * @return The response message
+     * @throws DukeException If the List of tasks in the task list is
+     * empty or if there are any errors when retrieving the tasks
+     * @throws IOException If the tasks cannot be saved to the data file
      */
-    public static void main(String[] args) {
-        new Duke("data", "tasks.txt").run();
+    public String getResponse(Command command) throws DukeException, IOException {
+        return command.execute(taskList, ui, storage);
+    }
+
+    /**
+     * Returns the filtered tasks reminder message after parsing the
+     * input and executing the command.
+     *
+     * @param command The command
+     * @return The filtered tasks reminder message
+     */
+    public String getFilteredTasksReminderMessage(Command command) {
+        if (!taskList.hasFilter()) {
+            return "";
+        }
+
+        if (taskList.getFilterCommandType() == CommandType.PRINT && !(command instanceof PrintCommand)) {
+            return ui.filteredTasksReminderMessage(ui.tasksOnDateMessage(taskList, taskList.getFilterInfo()));
+        } else if (taskList.getFilterCommandType() == CommandType.FIND && !(command instanceof FindCommand)) {
+            return ui.filteredTasksReminderMessage(ui.tasksWithKeywordMessage(taskList, taskList.getFilterInfo()));
+        } else {
+            return "";
+        }
     }
 }
