@@ -10,7 +10,7 @@ public class InfoCommand extends Command {
      * @return response from the execution.
      */
     public String execute() {
-        String response = super.taskList.listTasks();
-        return response;
+        String infoResponse = super.taskList.listTasks();
+        return infoResponse;
     }
 }

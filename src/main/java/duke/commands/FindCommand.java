@@ -11,6 +11,7 @@ public class FindCommand extends Command {
     }
 
     public String execute() {
-        return super.taskList.findTasks(this.keyword);
+        String findResult = super.taskList.findTasks(this.keyword);
+        return findResult;
     }
 }

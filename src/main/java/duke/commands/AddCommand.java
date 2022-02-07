@@ -48,6 +48,8 @@ public class AddCommand extends Command {
     public String execute() throws InvalidParameterException, IOException {
         Task task;
         String taskToString;
+
+
         if (type.getCommand() == "todo") {
             if (this.description == "") {
                 throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
@@ -72,11 +74,11 @@ public class AddCommand extends Command {
             throw new InvalidParameterException("Invalid parameter provided");
         }
 
-        // persist changes
         super.storage.appendToFile(taskToString);
 
-        // response
-        return String.format("Got it. I've added this task:%n%s%n"
+        String additionResponse = String.format("Got it. I've added this task:%n%s%n"
                 + "Now you have %d tasks in the list.%n", task, super.taskList.getSize());
+
+        return additionResponse;
     }
 }

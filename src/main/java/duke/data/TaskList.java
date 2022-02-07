@@ -110,13 +110,13 @@ public class TaskList {
      * @return the list of tasks as a string.
      */
     public String listTasks() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your list:\n");
+        StringBuilder result = new StringBuilder();
+        result.append("Here are the tasks in your list:\n");
         for (int i = 1; i < taskList.size() + 1; i++) {
             String str = String.format("%d. %s%n", i, taskList.get(i - 1));
-            sb.append(str);
+            result.append(str);
         }
-        return String.valueOf(sb);
+        return String.valueOf(result);
     }
 
     /**
@@ -125,15 +125,15 @@ public class TaskList {
      * @return the list of all matched tasks as a string.
      */
     public String findTasks(String keyword) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n");
+        StringBuilder result = new StringBuilder();
+        result.append("Here are the matching tasks in your list:\n");
         for (int i = 1; i < taskList.size() + 1; i++) {
             if (taskList.get(i - 1).getDescription().contains(keyword)) {
                 String str = String.format("%d. %s%n", i, taskList.get(i - 1));
-                sb.append(str);
+                result.append(str);
             }
         }
-        return String.valueOf(sb);
+        return String.valueOf(result);
     }
 
     /**

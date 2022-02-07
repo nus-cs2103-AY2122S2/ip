@@ -58,22 +58,22 @@ public class Storage {
         ArrayList<Task> taskListFromStore = new ArrayList<>();
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
-            String line = s.nextLine();
-            String[] scanned = line.split("\\|");
-            String id = scanned[0];
-            String type = scanned[1];
-            int done = Integer.parseInt(scanned[2]);
-            String description = scanned[3];
+            String currentLine = s.nextLine();
+            String[] currentLineSplit = currentLine.split("\\|");
+            String id = currentLineSplit[0];
+            String type = currentLineSplit[1];
+            int done = Integer.parseInt(currentLineSplit[2]);
+            String description = currentLineSplit[3];
 
             if (type.equals("T")) {
                 TodoTask task = new TodoTask(description, done == 1, id);
                 taskListFromStore.add(task);
             } else if (type.equals("D")) {
-                String deadline = scanned[4];
+                String deadline = currentLineSplit[4];
                 DeadlineTask task = new DeadlineTask(description, deadline, done == 1, id);
                 taskListFromStore.add(task);
             } else if (type.equals("E")) {
-                String deadline = scanned[4];
+                String deadline = currentLineSplit[4];
                 EventTask task = new EventTask(description, deadline, done == 1, id);
                 taskListFromStore.add(task);
             }
@@ -104,12 +104,13 @@ public class Storage {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get("data/duke.txt"),
                 StandardCharsets.UTF_8));
         for (int i = 0; i < fileContent.size(); i++) {
-            String line = fileContent.get(i);
-            String[] a = line.split("\\|");
+            String currentLine = fileContent.get(i);
+            String[] currentLineSplit = currentLine.split("\\|");
+            String taskIdFromFile = currentLineSplit[0];
             char d = done ? '1' : '0';
 
-            if (a[0].equals(id)) {
-                StringBuilder updatedLine = new StringBuilder(line);
+            if (taskIdFromFile.equals(id)) {
+                StringBuilder updatedLine = new StringBuilder(currentLine);
                 updatedLine.setCharAt(39, d);
                 fileContent.set(i, String.valueOf(updatedLine));
                 break;
@@ -129,10 +130,11 @@ public class Storage {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get("data/duke.txt"),
                 StandardCharsets.UTF_8));
         for (int i = 0; i < fileContent.size(); i++) {
-            String line = fileContent.get(i);
-            String[] a = line.split("\\|");
+            String currentLine = fileContent.get(i);
+            String[] currentLineSplit = currentLine.split("\\|");
+            String taskIdFromFile = currentLineSplit[0];
 
-            if (a[0].equals(id)) {
+            if (taskIdFromFile.equals(id)) {
                 fileContent.remove(i);
                 break;
             }

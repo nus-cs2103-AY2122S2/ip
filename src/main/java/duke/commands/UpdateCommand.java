@@ -42,14 +42,16 @@ public class UpdateCommand extends Command {
             throw new InvalidParameterException("☹ OOPS!!! The index provided is invalid.");
         }
 
+        String updateResponse;
         if (toComplete) {
             Task task = super.taskList.completeTask(index);
             storage.updateTask(task.getId(), true);
-            return String.format("Nice! I've marked this task as done:\n%s", task.toString());
+            updateResponse = String.format("Nice! I've marked this task as done:\n%s", task.toString());
         } else {
             Task task = super.taskList.undoTask(index);
             storage.updateTask(task.getId(), false);
-            return String.format("OK, I've marked this task as not done yet:\n%s", task.toString());
+            updateResponse = String.format("OK, I've marked this task as not done yet:\n%s", task.toString());
         }
+        return updateResponse;
     }
 }
