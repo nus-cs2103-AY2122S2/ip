@@ -60,7 +60,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private int handleUserInput() {
+    private void handleUserInput() {
         String input = userInput.getText();
         if (input.equals("bye")) {
             Alert alert = AlertUi.makeConfirmationAlert("Exit Ekud?", "Kill me?");
@@ -69,14 +69,14 @@ public class MainWindow extends AnchorPane {
                 System.exit(0);
             }
             userInput.clear();
-            return 0;
+            return;
         } else {
             if (input.equals("clear")) {
                 Alert alert = AlertUi.makeConfirmationAlert("Clear task list?",
                         "Do you want Ekud to clear your task list??");
                 if (alert.showAndWait().get() == ButtonType.CANCEL) {
                     userInput.clear();
-                    return 0;
+                    return;
                 }
             }
             try {
@@ -85,13 +85,13 @@ public class MainWindow extends AnchorPane {
                         DialogBox.getUserDialog(input, userImage),
                         DialogBox.getDukeDialog(response, dukeImage)
                 );
-                return 0;
+                return;
             } catch (DukeException e) {
                 AlertUi.makeErrorAlert("DukeException", e.getMessage());
-                return 0;
+                return;
             } finally {
                 userInput.clear();
-                return 0;
+                return;
             }
         }
     }
