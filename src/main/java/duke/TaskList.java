@@ -1,6 +1,6 @@
 package duke;
 
-import gui.Output;
+import gui.Ui;
 
 import java.util.ArrayList;
 
@@ -25,13 +25,13 @@ public class TaskList {
     public String deleteTask(int num) {
         if (num > 0 && num <= Task.totalTask) {
             num--;
-            String s = Output.printRemovedThisTask(num, this);
+            String s = Ui.printRemovedThisTask(num, this);
             this.tasklist.remove(num);
             Task.totalTask--;
             for(int i = num; i <Task.totalTask; i++) {
                 this.tasklist.get(i).decrementNum();
             }
-            s += Output.printTotalTasks();
+            s += Ui.printTotalTasks();
             Storage.writeAllToFile(this);
             return s;
         } else {
@@ -53,10 +53,10 @@ public class TaskList {
         Task curr = tasklist.get(taskNum);
         if (input.startsWith("mark")) {
             curr.mark();
-            s += Output.printMarkTaskDone(curr);
+            s += Ui.printMarkTaskDone(curr);
         } else {
             curr.unmark();
-            s += Output.printMarkTaskNotDone(curr);
+            s += Ui.printMarkTaskNotDone(curr);
         }
         Storage.writeAllToFile(this);
         return s;
@@ -75,7 +75,7 @@ public class TaskList {
                 matchTasks.tasklist.add(tasklist.get(i));
             }
         }
-        return Output.printMatchTasks(matchTasks.tasklist);
+        return Ui.printMatchTasks(matchTasks.tasklist);
     }
 
 }

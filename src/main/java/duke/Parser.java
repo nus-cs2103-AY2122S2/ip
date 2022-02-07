@@ -1,6 +1,6 @@
 package duke;
 
-import gui.Output;
+import gui.Ui;
 import javafx.application.Platform;
 
 /**
@@ -20,7 +20,7 @@ public class Parser {
     public static String parseIsBye(String input, TaskList tasklist){
         if (input.equals("bye")){
             Platform.exit();
-            return Output.printBye();
+            return Ui.printBye();
         } else {
             return parseInput(input, tasklist);
         }
@@ -35,7 +35,7 @@ public class Parser {
     public static String parseInput(String input, TaskList taskList) {
         String s;
         if (input.equals("list")) {
-            s = Output.printAllTasks(taskList);
+            s = Ui.printAllTasks(taskList);
         } else if (input.startsWith("delete")) {
             s =  taskList.deleteTask(Integer.parseInt(input.substring(7)));
         } else if (input.startsWith("mark") || input.startsWith("unmark")) {
@@ -46,12 +46,12 @@ public class Parser {
                 taskList.tasklist.add(task);
                 s = task.printFirstAddition;
             } else {
-                s = Output.printEmptyDescriptionException();
+                s = Ui.printEmptyDescriptionException();
             }
         } else if (input.startsWith("find ")){
             s = taskList.findTask(input.substring(6));
         } else {
-            s = Output.printWhatDoesThatMean();
+            s = Ui.printWhatDoesThatMean();
         }
         return s;
     }
@@ -80,7 +80,7 @@ public class Parser {
                 task = new Event(inputArr[0].substring(5), Task.totalTask, inputArr[1], false);
             }
         } catch (EmptyDescriptorExceptions e) {
-            Output.printEmptyDescriptionException();
+            Ui.printEmptyDescriptionException();
         }
 
         return task;

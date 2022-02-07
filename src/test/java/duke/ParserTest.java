@@ -1,6 +1,6 @@
 package duke;
 
-import gui.Output;
+import gui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +13,7 @@ public class ParserTest {
 
     @Test
     public void parseIsByeTest_success(){
-        assertEquals(Output.printWhatDoesThatMean(), Parser.parseIsBye("Bye", null));
+        assertEquals(Ui.printWhatDoesThatMean(), Parser.parseIsBye("Bye", null));
     }
 
     @Test

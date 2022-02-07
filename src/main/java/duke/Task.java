@@ -1,6 +1,6 @@
 package duke;
 
-import gui.Output;
+import gui.Ui;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -41,22 +41,22 @@ public class Task {
             isCorrectDateFormat = setDate(time, isReading);
 
             if (!isCorrectDateFormat) {
-                printFirstAddition += Output.WRONG_DATE_FORMAT;
+                printFirstAddition += Ui.WRONG_DATE_FORMAT;
             }
 
             this.type = type;
             if (!isReading) {
-                printFirstAddition += Output.printAddThisTask(this);
+                printFirstAddition += Ui.printAddThisTask(this);
                 Storage.addLineToFile(this.getDataRepresentation());
                 totalTask++;
-                printFirstAddition += Output.printTotalTasks();
+                printFirstAddition += Ui.printTotalTasks();
             }
             else {
                 totalTask++;
             }
         }
         catch (EmptyDescriptorExceptions e){
-            Output.printEmptyDescriptionException();
+            Ui.printEmptyDescriptionException();
         }
         catch (IOException e) {
             e.printStackTrace();
