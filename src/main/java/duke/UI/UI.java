@@ -68,7 +68,8 @@ public class UI {
     public static String printCommands() {
         String result;
         result = ("The available commands are:\ncommands: See list of commands\n"
-                + "list: See list of current tasks\n");
+                + "list: See list of current tasks. Syntax: list\n");
+        result += ("sort: Sorts list of current tasks by chronological order. Syntax: sort\n");
         result += ("mark: Mark a task as completed. Syntax: mark <index of task>\n");
         result += ("unmark: Mark a task as not completed. Syntax: unmark <index of task>\n");
         result += ("delete: Delete a task. Syntax: delete <index of task>\n");

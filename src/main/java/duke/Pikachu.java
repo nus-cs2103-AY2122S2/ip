@@ -1,7 +1,8 @@
 package duke;
-import java.io.*;
-import java.time.*;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 import duke.UI.UI;
 import duke.tasks.*;
@@ -45,7 +46,22 @@ public class Pikachu {
         //Syntax: list
         if (str.toLowerCase().equals("list")) {
             //System.out.println("list command reached!");
-
+            String result;
+            result = "Here are the tasks in your list:\n";
+            int count = 1;
+            for (Task t : inputList) {
+                result += ("   " + count + ". " + t + "\n");
+                count += 1;
+            }
+            count -= 1;
+            result += "Now you have " + count + " task(s) in the list.";
+            return result;
+        }
+        
+        //"sort"
+        //Sorts current list of tasks in tasklist.
+        //Syntax: sort
+        if (str.toLowerCase().equals("sort")) {
             //Sorting chronologically, with todo's at the end
             PriorityQueue<Task> taskPrioQueue = new PriorityQueue<Task>(new TaskComparator());
             ArrayList<ToDo> toDos = new ArrayList<ToDo>();
@@ -231,13 +247,12 @@ public class Pikachu {
 }
 
 class TaskComparator implements Comparator<Task> {
-    
     /**
      * Overriden compare function, used by parser for sorting of tasks by chronological order.
-     * 
+     *
      * @param int t1: First task to be compared.
      * @param int t2: Second task to be compared.
-     * @return int Returns -1 if t1 is earlier than t2, and 1 if vice versa. If equal, return 0. 
+     * @return int Returns -1 if t1 is earlier than t2, and 1 if vice versa. If equal, return 0.
      */
     public int compare(Task t1, Task t2) {
         LocalDateTime t1Val, t2Val;

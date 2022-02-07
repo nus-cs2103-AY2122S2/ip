@@ -3,11 +3,12 @@ package duke;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
-//import java.beans.Transient;
 
 public class PikachuTest {
     /**
@@ -69,5 +70,4 @@ public class PikachuTest {
         //Restores output stream
         System.setOut(System.out);
     }
-    
 }
