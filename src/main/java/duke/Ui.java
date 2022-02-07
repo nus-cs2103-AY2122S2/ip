@@ -53,6 +53,8 @@ public class Ui {
                 return notes.checkNotes();
             case DELETENOTE:
                 return notes.delete(Parser.getDescription(input));
+            case HELP:
+                return getHelpMessage();
             default:
                 return OUTPUT_ERROR_MSG;
             }
@@ -64,5 +66,18 @@ public class Ui {
 
     public String getStartOutput() {
         return START_MSG;
+    }
+
+    public String getHelpMessage() {
+        return "BMO is happy to help! Here are a list of commands that BMO is able to interpret: \n"
+                + "$ todo [description] -- adds a simple todo task\n"
+                + "$ deadline [description] /[yyyy-mm-dd] -- adds a deadline\n"
+                + "$ event [description] /[yyyy-mm-dd] -- adds an event\n"
+                + "$ mark [index] -- marks the task in your list\n"
+                + "$ unmark [index] -- unmarks the task in your list\n"
+                + "$ delete [index] -- deletes the task from your list\n"
+                + "$ note [label]: [description] -- adds a new note\n"
+                + "$ checknote -- check your notes\n"
+                + "$ deletenote [label] -- delete the note with that label";
     }
 }

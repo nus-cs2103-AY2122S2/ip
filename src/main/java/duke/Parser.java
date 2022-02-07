@@ -1,5 +1,6 @@
 package duke;
 import java.time.LocalDate;
+import java.util.Locale;
 
 /**
  * Parser for the <code>Duke</code> that includes static methods to interpret user inputs.
@@ -15,7 +16,7 @@ public class Parser {
      * @throws DukeException When String input doesn't match any type of command
      */
     public static Command getCommand(String input) throws DukeException {
-        String str = input.split(" ", 2)[0];
+        String str = input.split(" ", 2)[0].toLowerCase();
 
         switch (str) {
         case "list":
@@ -44,6 +45,8 @@ public class Parser {
             return Command.CHECKNOTE;
         case "deletenote":
             return Command.DELETENOTE;
+        case "help":
+            return Command.HELP;
         default:
             throw new DukeException("Hmm BMO doesn't understand what that means...");
         }
