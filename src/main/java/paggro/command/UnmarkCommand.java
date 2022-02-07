@@ -38,9 +38,11 @@ public class UnmarkCommand extends Command {
         } catch (NumberFormatException e) { // parameter was not a number
             throw new PaggroException("    Really? Can you input an actual number this time... =.=");
         }
+
         if (index > lister.getTasks().size()) {
             throw new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
         }
+
         lister.unmark(index);
         Task task = lister.getTasks().get(index - 1);
 

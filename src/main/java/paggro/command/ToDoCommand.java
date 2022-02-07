@@ -35,6 +35,7 @@ public class ToDoCommand extends Command {
     public String execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
         Task task = new ToDo(this.getParameters());
         lister.add(task);
+        assert lister.getTasks().size() > 0 : "Tasks should have at least one item";
 
         try {
             storage.addToStorage(task);

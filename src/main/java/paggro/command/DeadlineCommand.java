@@ -68,6 +68,7 @@ public class DeadlineCommand extends Command {
                     + "      YYYY-MM-DD"));
         }
         lister.add(task);
+        assert lister.getTasks().size() > 0 : "Tasks should have at least one item";
 
         try {
             storage.addToStorage(task);
