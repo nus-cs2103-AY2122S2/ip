@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
@@ -7,9 +10,6 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
-
-import java.time.format.DateTimeParseException;
-import java.util.List;
 
 public class UpdateCommand extends Command {
     private static final String MESSAGE_UPDATE = "Nice! I have updated your task as follows:";
@@ -27,6 +27,13 @@ public class UpdateCommand extends Command {
     private int taskNumber;
     private String[] editParams;
 
+    /**
+     * Constructor for the update command
+     * Ensures that a valid number is passed through
+     *
+     * @param editParams String with taskNumber and command params
+     * @throws DukeException If params are empty or is not a valid number
+     */
     public UpdateCommand(String editParams) throws DukeException {
         String[] command = editParams.split(" ");
         String taskNumber = command[0];
@@ -35,9 +42,9 @@ public class UpdateCommand extends Command {
         }
         try {
             this.taskNumber = Integer.parseInt(taskNumber);
-            String filter[] = new String[command.length - 1];
-            for(int i = 1; i < command.length; i++) {
-                filter[i-1] = command[i];
+            String[] filter = new String[command.length - 1];
+            for (int i = 1; i < command.length; i++) {
+                filter[i - 1] = command[i];
             }
             this.editParams = filter;
         } catch (NumberFormatException e) {
@@ -50,7 +57,7 @@ public class UpdateCommand extends Command {
         if (this.taskNumber > tasks.size() || this.taskNumber <= 0) {
             throw new DukeException(ERROR_INVALID_TASK_NUMBER);
         }
-        Task thisTask = tasks.get(taskNumber-1);
+        Task thisTask = tasks.get(taskNumber - 1);
         String message = "";
         if (editParams.length < 2) {
             throw new DukeException(ERROR_INVALID_FORMAT);
@@ -71,10 +78,12 @@ public class UpdateCommand extends Command {
             if (editParams[0].equals("/date")) {
                 try {
                     if (thisTask instanceof EventTask) {
-                        ((EventTask) thisTask).setEventDate(editParams[1]);
+                        EventTask event = (EventTask) thisTask;
+                        event.setEventDate(editParams[1]);
                     }
                     if (thisTask instanceof DeadlineTask) {
-                        ((DeadlineTask) thisTask).setDeadlineDate(editParams[1]);
+                        DeadlineTask deadlineTask = (DeadlineTask) thisTask;
+                        deadlineTask.setDeadlineDate(editParams[1]);
                     }
                     message = MESSAGE_UPDATE;
                 } catch (DateTimeParseException e) {
@@ -83,10 +92,12 @@ public class UpdateCommand extends Command {
             } else if (editParams[0].equals("/time")) {
                 try {
                     if (thisTask instanceof EventTask) {
-                        ((EventTask) thisTask).setEventTime(editParams[1]);
+                        EventTask event = (EventTask) thisTask;
+                        event.setEventTime(editParams[1]);
                     }
                     if (thisTask instanceof DeadlineTask) {
-                        ((DeadlineTask) thisTask).setDeadlineTime(editParams[1]);
+                        DeadlineTask deadlineTask = (DeadlineTask) thisTask;
+                        deadlineTask.setDeadlineTime(editParams[1]);
                     }
                     message = MESSAGE_UPDATE;
                 } catch (DateTimeParseException e) {
