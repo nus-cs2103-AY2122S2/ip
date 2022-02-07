@@ -11,42 +11,34 @@ public class EventTask extends Task {
     protected LocalTime eventTime;
 
     /**
-     * Constructor for event with date only.
+     * Constructor for event with date and/or time
      *
      * @param title Title of event
-     * @param eventDate Date of event
+     * @param eventDateTime Date of event
      */
-    public EventTask(String title, String eventDate) {
+    public EventTask(String title, String... eventDateTime) {
         super(title);
         this.type = TaskType.EVENT;
-        this.eventDate = LocalDate.parse(eventDate);
-        this.eventTime = null;
+        assert(eventDateTime.length > 0 && eventDateTime.length <= 2);
+        if (eventDateTime.length >= 1) {
+            this.eventDate = LocalDate.parse(eventDateTime[0]);
+        }
+        if (eventDateTime.length == 2) {
+            this.eventTime = LocalTime.parse(eventDateTime[1]);
+        }
     }
 
     /**
-     * Constructor for event with date and time.
-     *
-     * @param title Title of event
-     * @param eventDate Date of event
-     * @param eventTime Time of event
-     */
-    public EventTask(String title, String eventDate, String eventTime) {
-        super(title);
-        this.type = TaskType.EVENT;
-        this.eventDate = LocalDate.parse(eventDate);
-        this.eventTime = LocalTime.parse(eventTime);
-    }
-
-    /**
-     * Constructor for event with specified done state and date.
+     * Constructor for event with specified done state, date and/or time.
      *
      * @param title Title of event
      * @param isDone Done state
-     * @param eventDate Date of event
+     * @param eventDateTime Date of event
      */
     public EventTask(String title, Boolean isDone, String... eventDateTime) {
         super(title, isDone);
         this.type = TaskType.EVENT;
+        assert(eventDateTime.length > 0 && eventDateTime.length <= 2);
         if (eventDateTime.length >= 1) {
             this.eventDate = LocalDate.parse(eventDateTime[0]);
         }

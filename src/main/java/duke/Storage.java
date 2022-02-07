@@ -67,17 +67,20 @@ public class Storage {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] splitReadLine = line.split(" \\| ");
+                assert(splitReadLine.length > 0);
                 Task newTask = null;
                 boolean marked = splitReadLine[1].equals("1");
                 if (splitReadLine[0].equals("T")) {
                     newTask = new TodoTask(splitReadLine[2], marked);
                 } else if (splitReadLine[0].equals("D")) {
+                    assert(splitReadLine.length == 4 || splitReadLine.length == 5);
                     if (splitReadLine.length == 4) {
                         newTask = new DeadlineTask(splitReadLine[2], marked, splitReadLine[3]);
                     } else if (splitReadLine.length == 5) {
                         newTask = new DeadlineTask(splitReadLine[2], marked, splitReadLine[3], splitReadLine[4]);
                     }
                 } else if (splitReadLine[0].equals("E")) {
+                    assert(splitReadLine.length == 4 || splitReadLine.length == 5);
                     if (splitReadLine.length == 4) {
                         newTask = new EventTask(splitReadLine[2], marked, splitReadLine[3]);
                     } else if (splitReadLine.length == 5) {

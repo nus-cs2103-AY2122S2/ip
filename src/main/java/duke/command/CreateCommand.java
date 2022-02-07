@@ -90,6 +90,7 @@ public class CreateCommand extends Command {
                 throw new DukeException(ERROR_EMPTY_EVENT_TIME);
             }
             String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
+            assert (dateTimeSplit.length == 1 || dateTimeSplit.length == 2);
             try {
                 if (dateTimeSplit.length == 1) {
                     newTask = new EventTask(subSplit[0].trim(), dateTimeSplit[0]);

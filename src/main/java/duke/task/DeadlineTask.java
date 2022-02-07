@@ -20,6 +20,7 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String title, String... taskDateTime) {
         super(title);
         this.type = TaskType.DEADLINE;
+        assert(taskDateTime.length > 0 && taskDateTime.length <= 2);
         if (taskDateTime.length >= 1) {
             this.taskDate = LocalDate.parse(taskDateTime[0]);
         }
@@ -29,32 +30,23 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Constructor for deadline task, specified done state and date.
+     * Constructor for deadline task and specified done state with date and time using varargs.
+     * Depending on the length of the taskDateTime, determine whether to accommodate
      *
      * @param title Title of task
      * @param isDone Done state deadline
-     * @param taskDate Date of Task deadline
+     * @param taskDateTime Date of Task deadline
      */
-    public DeadlineTask(String title, Boolean isDone, String taskDate) {
+    public DeadlineTask(String title, Boolean isDone, String... taskDateTime) {
         super(title, isDone);
         this.type = TaskType.DEADLINE;
-        this.taskDate = LocalDate.parse(taskDate);
-        this.taskTime = null;
-    }
-
-    /**
-     * Constructor for deadline task, specified done state, date and time.
-     *
-     * @param title Title of task
-     * @param isDone Done state
-     * @param taskDate Date of task deadline
-     * @param taskTime Time of task deadline
-     */
-    public DeadlineTask(String title, Boolean isDone, String taskDate, String taskTime) {
-        super(title, isDone);
-        this.type = TaskType.DEADLINE;
-        this.taskDate = LocalDate.parse(taskDate);
-        this.taskTime = LocalTime.parse(taskTime);
+        assert(taskDateTime.length > 0 && taskDateTime.length <= 2);
+        if (taskDateTime.length >= 1) {
+            this.taskDate = LocalDate.parse(taskDateTime[0]);
+        }
+        if (taskDateTime.length == 2) {
+            this.taskTime = LocalTime.parse(taskDateTime[1]);
+        }
     }
 
     /**
