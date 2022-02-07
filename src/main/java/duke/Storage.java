@@ -25,7 +25,7 @@ public class Storage {
             boolean isComplete = completion.equals("[X]");
 
             // Getting description string (already formatted)
-            String description = currentLine.substring(6);
+            String description = currentLine.substring(7);
 
             CustomTask task = new CustomTask(taskType, isComplete, description);
             TaskList.taskList.add(task);
