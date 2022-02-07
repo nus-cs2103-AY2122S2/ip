@@ -52,11 +52,12 @@ public class Task {
 
     /**
      * Task description that is formatted to be written into the file.
+     * This method is to be overridden by the children method
      *
      * @return Task description format for file input.
      */
     public String taskDescriptionForFile() {
-        return null;
+        return this.description;
     }
 
     public DateTimeFormatter getOutputDateFormat() {

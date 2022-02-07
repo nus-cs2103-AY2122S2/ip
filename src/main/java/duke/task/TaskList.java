@@ -9,21 +9,22 @@ import duke.Storage;
 import duke.exception.DukeException;
 import duke.ui.MessageUi;
 
+/**
+ * A class that manages the functions of the task list. This class contains
+ * two constructor, one for when the file exist in the file path of which
+ * will be loaded to this class' tasklist, else creates a new file in the
+ * file path.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
 
     /**
-     * Contructor for the TaskList class.
+     * Constructor for the TaskList class.
      * @throws DukeException
      */
-    public TaskList() throws DukeException {
-        try {
-            Storage.createNewFolderAndTextFile();
+    public TaskList() {
             tasks = new ArrayList<>();
-        } catch (IOException err) {
-            throw new DukeException("Could not create file for you!");
-        }
     }
 
     /**
@@ -105,16 +106,12 @@ public class TaskList {
      * @throws DukeException If text file cannot be found.
      */
     public String addToList(Task task, MessageUi ui, Storage storage) throws DukeException {
-        try {
             tasks.add(task);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(task.taskDescriptionForFile()
                     + System.lineSeparator());
             storage.appendToFile(stringBuilder.toString());
             return ui.showAddTaskMessage(this, task);
-        } catch (IOException e) {
-            throw new DukeException(e.getMessage());
-        }
     }
 }
 

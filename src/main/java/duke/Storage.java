@@ -19,28 +19,31 @@ import duke.ui.MessageUi;
  */
 public class Storage {
 
-    private MessageUi ui;
-    private String filePath;
+    private Path dirPath;
+    private Path filePath;
 
     /**
      * Coonstructor for the Storage class.
      * @param path Directory of the text file.
      */
     public Storage(String path) {
-        this.filePath = path;
-        this.ui = new MessageUi();
+        this.dirPath = Paths.get(path.split("/")[0]);
+        this.filePath = Paths.get(path);
     }
 
     /**
      * Creates a folder in a directory and then a file in it.
      *
-     * @throws IOException If directory cannot be found.
+     * @throws DukeException If directory cannot be found.
      */
-    public static void createNewFolderAndTextFile() throws IOException {
-        File directory = new File("data");
-        directory.mkdir();
-        File file = new File(directory, "ekud.txt");
-        file.createNewFile();
+    public void createNewFolderAndTextFile() throws DukeException {
+        try {
+            Files.createDirectories(dirPath);
+            Files.createFile(filePath);
+        } catch (IOException error) {
+            throw new DukeException("File at " + error.getMessage() +
+                    " could not be created");
+        }
     }
 
     /**
@@ -49,10 +52,15 @@ public class Storage {
      * @param textToAdd Information of the task to be added to the file.
      * @throws IOException If the directory or file cannot be found.
      */
-    public void appendToFile(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAdd);
-        fw.close();
+    public void appendToFile(String textToAdd) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath.toString(), true);
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException error) {
+            throw new DukeException("File at " + error.getMessage() +
+                    " could not be appended");
+        }
     }
 
     /**
@@ -65,12 +73,12 @@ public class Storage {
      */
     public void setInFile(int lineNumber, String data) throws DukeException {
         try {
-            Path path = Paths.get(filePath);
-            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
             lines.set(lineNumber - 1, data);
-            Files.write(path, lines, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            Files.write(filePath, lines, StandardCharsets.UTF_8);
+        } catch (IOException error) {
+            throw new DukeException("File at " + error.getMessage() +
+                    " could not be found");
         }
     }
 
@@ -88,11 +96,12 @@ public class Storage {
                 stringBuilder.append(task.taskDescriptionForFile()
                         + System.lineSeparator());
             }
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(filePath.toString());
             fw.write(stringBuilder.toString());
             fw.close();
-        } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+        } catch (IOException err) {
+            throw new DukeException("File at " + err.getMessage() +
+                    " could not be written to");
         }
     }
 
@@ -104,15 +113,14 @@ public class Storage {
      * @throws IOException   If there is an error reading the file.
      */
     public List<String> loadFileContents() throws DukeException {
-        boolean gotError = false;
-        List<String> data = null;
+        List<String> data;
         try {
-            Path path = Paths.get(filePath);
-            Files.readAllLines(path, StandardCharsets.UTF_8);
-            data = Files.readAllLines(path, StandardCharsets.UTF_8);
+            Files.readAllLines(filePath, StandardCharsets.UTF_8);
+            data = Files.readAllLines(filePath, StandardCharsets.UTF_8);
+            return data;
         } catch (IOException err) {
-            throw new DukeException("Error loading file!");
+            throw new DukeException("File at " + err.getMessage() +
+                    " could not be loaded");
         }
-        return data;
     }
 }

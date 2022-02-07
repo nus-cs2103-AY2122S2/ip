@@ -3,7 +3,10 @@ package duke.command;
 import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.AlertUi;
 import duke.ui.MessageUi;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * Represents commands which clears the task list. A ClearCommand
@@ -14,14 +17,15 @@ public class ClearCommand implements Command {
     @Override
     public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
         try {
-            ui.showClearListConfirmationMessage();
-            String response = "y";
-            if (response.equals("y")) {
+            Alert alert = AlertUi.makeConfirmationAlert("Clear task list?",
+                    ui.showClearListConfirmationMessage());
+            if (alert.showAndWait().get() == ButtonType.OK) {
                 tasks.clearTaskList(tasks, storage);
             }
-            return ui.showClearListMessage(response);
-        } catch (DukeException e) {
-            throw new DukeException(e.getMessage());
+            AlertUi.makeInformationAlert("Task list cleared", ui.showClearListMessage());
+            return ui.showClearListMessage();
+        } catch (DukeException error) {
+            throw new DukeException(error.getMessage());
         }
     }
 }

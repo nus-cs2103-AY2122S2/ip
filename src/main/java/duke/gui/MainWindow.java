@@ -5,9 +5,7 @@ import duke.exception.DukeException;
 import duke.ui.AlertUi;
 import duke.ui.MessageUi;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -26,8 +24,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private VBox dialogContainer;
     @FXML
-    private VBox bannerPane;
-    @FXML
     private TextField userInput;
     @FXML
     private Button sendButton;
@@ -37,6 +33,7 @@ public class MainWindow extends AnchorPane {
     private Label welcomeMessage;
 
     private Duke duke;
+    private MessageUi messageUi = new MessageUi();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Ekud.png"));
@@ -62,39 +59,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     private int handleUserInput() {
         String input = userInput.getText();
-        if (input.equals("bye")) {
-            Alert alert = AlertUi.makeConfirmationAlert("Exit Ekud?", "Kill me?");
-            if (alert.showAndWait().get() == ButtonType.OK) {
-                AlertUi.makeInformationAlert("BYE!", new MessageUi().showExitMessage());
-                System.exit(0);
-            }
+        try {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            return 0;
+        } catch (DukeException e) {
+            AlertUi.makeErrorAlert("DukeException", e.getMessage());
+            return 0;
+        } finally {
             userInput.clear();
             return 0;
-        } else {
-            if (input.equals("clear")) {
-                Alert alert = AlertUi.makeConfirmationAlert("Clear task list?",
-                        "Do you want Ekud to clear your task list??");
-                if (alert.showAndWait().get() == ButtonType.CANCEL) {
-                    userInput.clear();
-                    return 0;
-                }
-            }
-            try {
-                String response = duke.getResponse(input);
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(response, dukeImage)
-                );
-                return 0;
-            } catch (DukeException e) {
-                AlertUi.makeErrorAlert("DukeException", e.getMessage());
-                return 0;
-            } finally {
-                userInput.clear();
-                return 0;
-            }
         }
     }
 }
+
 
 
