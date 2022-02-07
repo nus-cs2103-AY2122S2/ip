@@ -33,7 +33,7 @@ public class Parser {
     }
 
     /**
-     * Main logic in handling user input based on commands entered.
+     * Main logic in handling user inputs based on commands entered.
      *
      * @return response after processing the input.
      */
