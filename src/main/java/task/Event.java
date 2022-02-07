@@ -1,5 +1,7 @@
 package task;
 
+import parser.Priorities;
+
 /**
  * Represents a type of Task - Event.
  * Allows for venues to be specified which distinguishes
@@ -14,8 +16,8 @@ public class Event extends Task {
      * @param description Description of event
      * @param at location of the event
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, Priorities priority) {
+        super(description, priority);
         this.at = at.trim();
     }
 

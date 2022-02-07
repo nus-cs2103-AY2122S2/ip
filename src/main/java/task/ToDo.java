@@ -1,5 +1,7 @@
 package task;
 
+import parser.Priorities;
+
 /**
  * Represents a type of Task - Todo.
  * A generic task that supports any type of text as a description.
@@ -12,8 +14,8 @@ public class ToDo extends Task {
      *
      * @param description Description of todo
      */
-    public ToDo(String description) {
-        super(description);
+    public ToDo(String description, Priorities priority) {
+        super(description, priority);
     }
 
     /**

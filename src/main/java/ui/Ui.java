@@ -63,15 +63,18 @@ public class Ui {
      * Displays the list of commands.
      */
     public String getCommands() {
-        StringBuilder welcome = new StringBuilder(
-                "1. todo [task]\n");
-        welcome.append("2. deadline [task] /by [date]\n");
-        welcome.append("3. event [task] /at [location]\n");
+        StringBuilder welcome = new StringBuilder("1. todo [priority] [task]\n");
+        welcome.append("2. deadline [priority] [task] /by [date time]\n");
+        welcome.append("3. event [priority] [task] /at [location]\n");
+        welcome.append("[priority] = URGENT, IMPORTANT, NORMAL\n");
+        welcome.append("-----i.e. deadline URGENT read my star-wars book"
+                + " /by 2022-03-12 1800 -----\n");
         welcome.append("4. list\n");
         welcome.append("5. mark X (mark X task as done)\n");
         welcome.append("6. unmark X (mark X task as undone)\n");
         welcome.append("7. delete X (delete X task from the list)\n");
-        welcome.append("8. bye - exit Duke bot\n");
+        welcome.append("8. help - display command list\n");
+        welcome.append("9. bye - exit Duke bot\n");
         return welcome.toString();
     }
 
@@ -185,7 +188,7 @@ public class Ui {
      * @return String message of a task
      */
     public String getTaskMessage(Task task) {
-        return task.toString();
+        return task.toString() + "\n";
     }
 
     /**

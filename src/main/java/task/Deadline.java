@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import parser.Priorities;
 
 /**
  * Represents a type of Task - Deadline.
@@ -30,8 +31,8 @@ public class Deadline extends Task {
      * @param description Description of deadline
      * @param by Date/Time of the deadline
      */
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String by, Priorities priority) {
+        super(description, priority);
         this.by = by;
         convertToDate(by);
     }

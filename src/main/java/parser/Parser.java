@@ -8,6 +8,7 @@ import command.DeleteCommand;
 import command.EventCommand;
 import command.ExitCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.IncorrectCommand;
 import command.ListCommand;
 import command.MarkCommand;
@@ -28,8 +29,11 @@ public class Parser {
         UNMARK,
         DELETE,
         BYE,
+        HELP,
         FIND;
     }
+
+    public static final Priorities DEFAULT_PRIORITY = Priorities.NORMAL;
 
     /**
      * Processes a raw String command and decides the command.
@@ -40,34 +44,41 @@ public class Parser {
      * @throws DukeException If an error occurs when processing a command
      */
     public static Command parse(String fullCommand) throws DukeException {
+        Commands command;
         String response = fullCommand.trim();
+        String[] responseArray;
+        String[] secondSplit;
+        Priorities priority = DEFAULT_PRIORITY;
         if (response.equals("")) {
             return new IncorrectCommand();
         }
-        String[] responseArray;
         responseArray = response.split("\\s+");
-        String[] secondSplit;
-        Commands command;
         if (responseArray.length > 0) {
             try {
                 command = Commands.valueOf(responseArray[0].toUpperCase());
-                String textContent = removeSubString(response.toLowerCase(), responseArray[0].toLowerCase() + " ");
+                String textContent = removeSubString(response, responseArray[0] + " ");
+                // if a command is creating a task, get the priority
+                if (responseArray.length > 1 && containsPriority(responseArray[1])) {
+                    priority = getPriority(responseArray[1]);
+                    // remove the priority number from the content of the task message
+                    textContent = removeSubString(textContent, responseArray[1]);
+                }
                 switch (command) {
                 case FIND:
                     return new FindCommand(textContent);
                 case TODO:
-                    return new TodoCommand(textContent);
+                    return new TodoCommand(textContent, priority);
                 case DEADLINE:
                     try {
                         secondSplit = textContent.split(" /by ");
-                        return new DeadlineCommand(secondSplit[0], secondSplit[1]);
+                        return new DeadlineCommand(secondSplit[0], secondSplit[1], priority);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("date or time was not specified! Try again.");
                     }
                 case EVENT:
                     try {
                         secondSplit = textContent.split(" /at ");
-                        return new EventCommand(secondSplit[0], secondSplit[1]);
+                        return new EventCommand(secondSplit[0], secondSplit[1], priority);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("location was not specified! Try again.");
                     }
@@ -81,6 +92,8 @@ public class Parser {
                     return new ExitCommand();
                 case LIST:
                     return new ListCommand();
+                case HELP:
+                    return new HelpCommand();
                 default:
                     break;
                 }
@@ -117,5 +130,44 @@ public class Parser {
             sb.append(con);
         }
         return sb.toString();
+    }
+
+    /**
+     * Check if a string contains a priority attribute.
+     *
+     * @param strNum String to compare with
+     * @return Boolean -> false = does not contain
+     */
+    public static boolean containsPriority(String strNum) {
+        if (strNum == null || strNum.equals("")) {
+            return false;
+        } else {
+            try {
+                Priorities priority = Priorities.valueOf(strNum.toUpperCase());
+            } catch (IllegalArgumentException nfe) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Get the priority enum.
+     *
+     * @param strNum String to compare with
+     * @return Integer -> -1 = not convertible. Otherwise, the value
+     */
+    public static Priorities getPriority(String strNum) {
+        Priorities priority = DEFAULT_PRIORITY;
+        if (strNum == null || strNum.equals("")) {
+            return priority;
+        } else {
+            try {
+                priority = Priorities.valueOf(strNum.toUpperCase());
+            } catch (IllegalArgumentException nfe) {
+                return priority;
+            }
+        }
+        return priority;
     }
 }

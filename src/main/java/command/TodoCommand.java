@@ -1,6 +1,7 @@
 package command;
 
 import exception.DukeException;
+import parser.Priorities;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
@@ -22,8 +23,8 @@ public class TodoCommand extends Command {
      *
      * @param description Description of todo
      */
-    public TodoCommand(String description) {
-        this.toDo = new ToDo(description);
+    public TodoCommand(String description, Priorities priority) {
+        this.toDo = new ToDo(description, priority);
     }
 
     /**

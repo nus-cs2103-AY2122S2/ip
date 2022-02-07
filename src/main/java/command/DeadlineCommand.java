@@ -3,6 +3,7 @@ package command;
 import java.time.format.DateTimeParseException;
 
 import exception.DukeException;
+import parser.Priorities;
 import storage.Storage;
 import task.Deadline;
 import task.Task;
@@ -25,9 +26,9 @@ public class DeadlineCommand extends Command {
      * @param by Date/Time of the deadline
      * @throws DukeException If by param fails to parse
      */
-    public DeadlineCommand(String description, String by) throws DukeException {
+    public DeadlineCommand(String description, String by, Priorities priority) throws DukeException {
         try {
-            this.deadline = new Deadline(description, by);
+            this.deadline = new Deadline(description, by, priority);
         } catch (DateTimeParseException e) {
             throw new DukeException("date or time was not formatted correctly. Make sure it is yyyy-MM-dd");
         }
