@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Tasks that are classified as events.
@@ -55,6 +56,14 @@ public class EventTask extends Task {
      */
     public String getEventTime() {
         return "(at: " + eventDate + (eventTime != null ? " " + eventTime.toString() : "") + ")";
+    }
+
+    public void setEventDate(String date) throws DateTimeParseException {
+        this.eventDate = LocalDate.parse(date);
+    }
+
+    public void setEventTime(String time) throws DateTimeParseException {
+        this.eventTime = LocalTime.parse(time);
     }
 
     /**

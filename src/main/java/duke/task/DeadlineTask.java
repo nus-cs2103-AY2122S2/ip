@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Tasks that are set with a deadline.
@@ -56,6 +57,14 @@ public class DeadlineTask extends Task {
      */
     public String getByTime() {
         return "(by: " + taskDate + (taskTime != null ? " " + taskTime.toString() : "") + ")";
+    }
+
+    public void setDeadlineDate(String date) throws DateTimeParseException {
+        this.taskDate = LocalDate.parse(date);
+    }
+
+    public void setDeadlineTime(String time) throws DateTimeParseException {
+        this.taskTime = LocalTime.parse(time);
     }
 
     /**
