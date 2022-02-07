@@ -78,6 +78,7 @@ public class UI {
         result += ("event: Create an event. Syntax: event <taskname> "
                 + "/<yyyy-mm-dd hhmm of start> <yymmdd hhmm of end>\n");
         result += ("find: Search for tasks containing a given keyword. Syntax: find <keyword>\n");
+        result += ("bye: Exits the application. Syntax: bye\n");
 
         //Prints commands in terminal
         System.out.println(result);
