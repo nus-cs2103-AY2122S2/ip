@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Stores a list of task as well as an associated set of operations.
@@ -39,22 +40,16 @@ public class TaskList {
     }
 
     public List<Task> getObjectives(String keyword) {
-        List<Task> matches = new ArrayList<>();
-        for (int i = 0; i < objectives.size(); i++) {
-            if (objectives.get(i).contains(keyword)) {
-                matches.add(objectives.get(i));
-            }
-        }
+        List<Task> matches = this.objectives.stream()
+                .filter((x) -> x.contains(keyword))
+                .collect(Collectors.toList());
         return matches;
     }
 
     public List<Task> getObjectives(LocalDate keyword) {
-        List<Task> matches = new ArrayList<>();
-        for (int i = 0; i < objectives.size(); i++) {
-            if (objectives.get(i).sameTime(keyword)) {
-                matches.add(objectives.get(i));
-            }
-        }
+        List<Task> matches = this.objectives.stream()
+                .filter((x) -> x.sameTime(keyword))
+                .collect(Collectors.toList());
         return matches;
     }
 
@@ -110,6 +105,7 @@ public class TaskList {
         for (Task task : objectives) {
             encodedList.add(task.serialize());
         }
+        assert encodedList.size() == objectives.size();
         return encodedList;
     }
 

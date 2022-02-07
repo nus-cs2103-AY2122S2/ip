@@ -68,6 +68,9 @@ public class DeadLine extends Task {
 
     @Override
     public String serialize() {
+        assert this.bydate != null;
+        assert this.bytime != null;
+        assert this.objective != null;
         return "D|" + (this.done ? "1|" : "0|") + this.objective
                 + "|" + bydate.toString() + "|" + bytime.toString() + "\n";
     };

@@ -80,11 +80,17 @@ public abstract class Task implements Comparable<Task> {
         String[] arr = encoded.split("\\|");
         boolean completed = arr[1].equals("1");
         if (arr[0].equals("T")) {
+            assert arr.length == 3;
             return new ToDos(arr[2], completed);
         } else if (arr[0].equals("D")) {
+            assert arr.length == 5;
             return new DeadLine(arr[2], completed, arr[3], arr[4]);
-        } else {
+        } else if (arr[0].equals("E")) {
+            assert arr.length == 6;
             return new Events(arr[2], completed, arr[3], arr[4], arr[5]);
+        } else {
+            assert false;
+            return null;
         }
     }
 }

@@ -8,9 +8,11 @@ import duke.task.TaskList;
  *
  */
 public class ExitCommand extends Command {
+    private static final String REPLY = "Ok honey.\n";
+
     @Override
     public String execute(TaskList task, Storage storage) {
-        return "Ok honey.";
+        return REPLY;
     }
 
     @Override
