@@ -27,7 +27,7 @@ public class Parser {
         } else if (fullCommand.equals("list")) {
             return new ListCommand();
         } else if (fullCommand.equals("todo")) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("The description of a todo cannot be empty.");
         } else {
             String[] commandArr = fullCommand.split(" ");
             if (commandArr.length > 1) {
