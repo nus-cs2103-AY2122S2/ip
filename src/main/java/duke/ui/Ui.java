@@ -75,6 +75,8 @@ public class Ui {
      * @param taskList TaskList to be printed out.
      */
     public String showUiForTaskList(TaskList taskList) {
+        assert taskList != null;
+        assert taskList.size() != 0;
         String result = "";
         ArrayList<Task> tasks = taskList.getTasks();
         for (int index = 0; index < tasks.size(); index++) {
@@ -97,6 +99,7 @@ public class Ui {
      * @param listLength int Length of the task list.
      */
     public String showUiForAdd(Task taskObj, int listLength) {
+        assert taskObj != null;
         String result = "Adding a task: ";
         result += taskObj.toString() + "\n";
         result += "Now you got " + (listLength) + " tasks in the list!";
@@ -111,6 +114,7 @@ public class Ui {
      * @param listLength int Length of the task list.
      */
     public String showUiForDelete(Task taskObj, int listLength) {
+        assert taskObj != null;
         String result = "Ok, removing a task: \n";
         result += taskObj.toString() + "\n";
         result += "Now you got " + (listLength) + " tasks in the list!";
@@ -125,6 +129,8 @@ public class Ui {
      * @param sortType Type of sorting based on the enum.
      */
     public String showUiForSort(ArrayList<Task> tasks, TaskList.SortType sortType) {
+        assert tasks != null;
+        assert tasks.size() != 0;
         String result = "Sorting your tasks by" + sortType.toString() + ":\n";
         for (Task task : tasks) {
             result += "" + task.toString() + "\n";

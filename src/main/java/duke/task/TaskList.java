@@ -43,6 +43,15 @@ public class TaskList {
         this.ui = ui;
     }
 
+    /**
+     * Returns the size of the task arraylist.
+     *
+     * @return int Size of the arrayList of tasks
+     */
+    public int size() {
+        return tasks.size();
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }
