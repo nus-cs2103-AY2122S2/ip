@@ -88,7 +88,6 @@ public class TaskList {
      */
     public void addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
         assert !taskName.equals("") : "taskName must be specified";
-        assert date != null : "date must be specified";
         assert taskType > -1 && taskType < 3 : "taskType must be between 0 and 2";
 
         switch (taskType) {

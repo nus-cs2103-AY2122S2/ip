@@ -24,7 +24,6 @@ public class Parser {
      * <li>1 : Indicates command ran successfully, with changes to the task list</li>
      *
      * @param inputString The input that is entered by the user
-     * @param ui The Ui object that used to output the appropriate messages to the user
      * @param taskList The taskList that is used to maintain list of tasks in Duke
      * @return: Returns an integer that indicate the result of the run.
      */
@@ -36,12 +35,14 @@ public class Parser {
         try {
             validate(inputString, action, args, taskList);
         } catch (DukeException de) {
-            assert !de.getMessage().equals(null);   // Ensures that the DukeException that is thrown has been assigned a message
+            // Ensures that the DukeException that is thrown has been assigned a message
+            assert !de.getMessage().equals(null);
             Ui.print(de.getMessage());
             return 1;
         }
 
-        assert args.length != 0;    // Ensures that the argument list is not empty
+        // Ensures that the argument list is not empty
+        assert args.length != 0;
 
         switch(action) {
         case "bye":

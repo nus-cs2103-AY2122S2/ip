@@ -21,7 +21,7 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-  
+
     /**
      * Initializes Ui to output to the specfied Vbox, with the specfied image.
      * @param v The VBox to be displayed on

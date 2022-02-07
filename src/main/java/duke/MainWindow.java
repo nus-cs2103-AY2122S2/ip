@@ -3,7 +3,6 @@ package duke;
 import duke.command.Parser;
 import duke.io.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
