@@ -33,6 +33,15 @@ public class Event extends Task {
     }
 
     /**
+     * Retrieves the date in which the event will be happenning on.
+     *
+     * @return the date of event.
+     */
+    public LocalDate getDate() {
+        return eventDate;
+    }
+
+    /**
      * Prepends a checkbox "[E]" to the front of the task, which indicates the type of task.
      *
      * @return String containing a type icon that is prepended in front of the task description.

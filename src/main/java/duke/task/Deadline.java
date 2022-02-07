@@ -29,6 +29,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Retrieves the due date of the task.
+     *
+     * @return the due date of the task.
+     */
+    public LocalDate getDate() {
+        return dueDate;
+    }
+
+    /**
      * Prepends a checkbox "[D]" to the front of the task, which indicates the type of task.
      *
      * @return String containing a type icon that is prepended in front of the task description.
