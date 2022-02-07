@@ -26,3 +26,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # lib files
 /lib/
+
+# META INF
+/META-INF/
