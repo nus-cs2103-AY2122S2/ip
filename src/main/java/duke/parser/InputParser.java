@@ -27,8 +27,7 @@ public class InputParser extends Parser {
             int index = Integer.parseInt(input.substring(7)) - 1;
             if (index >= tasks.size() || index < 0) {
                 throw new IndexOutOfStoreException();
-            }
-            if (!tasks.get(index).getIsDone()) {
+            } else if (!tasks.get(index).getIsDone()) {
                 throw new ToggleException(false);
             }
             tasks.get(index).toggleStatus();
@@ -38,8 +37,7 @@ public class InputParser extends Parser {
             int index = Integer.parseInt(input.substring(5)) - 1;
             if (index >= tasks.size() || index < 0) {
                 throw new IndexOutOfStoreException();
-            }
-            if (tasks.get(index).getIsDone()) {
+            } else if (tasks.get(index).getIsDone()) {
                 throw new ToggleException(true);
             }
             tasks.get(index).toggleStatus();
@@ -62,32 +60,36 @@ public class InputParser extends Parser {
                 return "The tasks on your list are as follows:\n" + tasks.printTasks();
             }
         } else if (input.contains("todo")) {
-            if (input.replace("todo", "").trim().length() == 0) {
+            boolean emptyDescription = input.replace("todo", "").trim().length() == 0;
+            if (emptyDescription) {
                 throw new EmptyDescriptionException("todo");
             }
             Task task = new Todo(input);
             tasks.add(task);
             return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("deadline")) {
-            if (input.replace("deadline", "").trim().length() == 0) {
+            boolean emptyDescription = input.replace("deadline", "").trim().length() == 0;
+            boolean missingDate = trimmedText.charAt(trimmedText.length() - 1) == "/".charAt(0);
+            boolean wrongSyntax = !input.contains("/");
+            if (emptyDescription) {
                 throw new EmptyDescriptionException("deadline");
-            } else if (trimmedText.charAt(trimmedText.length() - 1) == "/".charAt(0)) {
+            } else if (missingDate) {
                 throw new MissingDateException();
-            } else if (!input.contains("/")) {
+            } else if (wrongSyntax) {
                 throw new WrongDateSyntaxException();
             }
             Task task = new Deadline(input);
-            if (task.getDescription().trim().length() == 0) {
-                throw new EmptyDescriptionException("deadline");
-            }
             tasks.add(task);
             return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("event")) {
-            if (input.replace("event", "").trim().length() == 0) {
+            boolean emptyDescription = input.replace("event", "").trim().length() == 0;
+            boolean missingDate = trimmedText.charAt(trimmedText.length() - 1) == "/".charAt(0);
+            boolean wrongSyntax = !input.contains("/");
+            if (emptyDescription) {
                 throw new EmptyDescriptionException("event");
-            } else if (trimmedText.charAt(trimmedText.length() - 1) == "/".charAt(0)) {
+            } else if (missingDate) {
                 throw new MissingDateException();
-            } else if (!input.contains("/")) {
+            } else if (wrongSyntax) {
                 throw new WrongDateSyntaxException();
             }
             Task task = new Event(input);
@@ -95,7 +97,8 @@ public class InputParser extends Parser {
             return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("find")) {
             assert tasks.size() > 0 : "Task list is empty";
-            if (input.replace("find", "").trim().length() == 0) {
+            boolean emptyDescription = input.replace("find", "").trim().length() == 0;
+            if (emptyDescription) {
                 throw new EmptyDescriptionException("find");
             }
             return "Here are some tasks that match your request:\n" + tasks.findTasks(input.substring(5));
