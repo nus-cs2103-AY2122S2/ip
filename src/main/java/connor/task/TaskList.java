@@ -186,6 +186,7 @@ public class TaskList {
      * @return Message containing confirmation that a task was deleted or an error.
      */
     public static String deleteTask(int index) {
+        assert tasks != null;
         try {
             Task t = tasks.get(index);
             tasks.remove(index);
@@ -203,6 +204,7 @@ public class TaskList {
      * @return Message containing confirmation that all tasks were cleared.
      */
     public static String clearTasks() {
+        assert tasks != null;
         tasks.clear();
         print(CLEAR_TASKS_CONFIRMED);
         return CLEAR_TASKS_CONFIRMED;
@@ -216,6 +218,7 @@ public class TaskList {
      * @return Message containing confirmation that a task was marked/unmarked or an error.
      */
     public static String markStatus(TaskStatus ts, int index) {
+        assert tasks != null;
         switch (ts) {
         case MARK: {
             try {
@@ -296,12 +299,14 @@ public class TaskList {
      * @return Number of tasks in the task list.
      */
     public static int getNumberOfTasks() {
+        assert tasks != null;
         String plurality = tasks.size() == 1 ? "" : "s";
         print("You have " + tasks.size() + " task" + plurality + ".");
         return tasks.size();
     }
 
     public static String getNumberOfTasksString() {
+        assert tasks != null;
         String plurality = tasks.size() == 1 ? "" : "s";
         return "You have " + tasks.size() + " task" + plurality + ".";
     }
