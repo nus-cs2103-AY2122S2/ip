@@ -26,6 +26,7 @@ public class Ui {
         if (n == 1) {
             return " ";
         }
+        assert n != 1 : "n should not be 1";
         return "s ";
     }
 
@@ -37,10 +38,11 @@ public class Ui {
      */
     public String welcome(TaskList tasks) {
         String greeting = "Hello! I'm Duke.";
-        if (!tasks.isEmpty()) {
-            return greeting + "\n" + listTasks(tasks);
+        if (tasks.isEmpty()) {
+            return greeting + " What can I do for you?";
         }
-        return greeting + " What can I do for you?";
+        assert !tasks.isEmpty() : "There should be saved tasks";
+        return greeting + "\n" + listTasks(tasks);
     }
 
     /**
@@ -48,11 +50,11 @@ public class Ui {
      * @param tasks Tasks.
      */
     public String listTasks(TaskList tasks) {
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             return "You have no tasks in your list.";
-        } else {
-            return "Here are the tasks in your list:\n" + tasks;
         }
+        assert !tasks.isEmpty() : "There should be at least one task";
+        return "Here are the tasks in your list:\n" + tasks;
     }
 
     /**
