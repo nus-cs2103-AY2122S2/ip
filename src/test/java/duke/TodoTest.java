@@ -8,6 +8,6 @@ public class TodoTest {
     @Test
     public void testStringOutput_descDateTime() {
         Todo deadline = new Todo("cook");
-        assertEquals("[T][ ]cook", deadline.toString());
+        assertEquals("[T][ ] cook", deadline.toString());
     }
 }
