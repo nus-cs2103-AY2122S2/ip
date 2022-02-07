@@ -16,7 +16,7 @@ public class Karen {
     public Karen() {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage(ui);
+        storage = new Storage();
     }
 
     /**

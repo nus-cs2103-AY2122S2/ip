@@ -30,15 +30,12 @@ public class Storage {
     public static final String ERR_FILE_MESSAGE = "Something went wrong with reading the previous session..";
 
     private ArrayList<Task> taskList;
-    private Ui ui;
 
     /**
      * Constructor for Storage object
-     * @param ui For parsing out messages related to the managing of Storage-related objects
      */
-    public Storage(Ui ui) {
-        this.ui = ui;
-        this.taskList = this.loadTasks();
+    public Storage() {
+        taskList = loadTasks();
     }
 
     /**
@@ -46,7 +43,7 @@ public class Storage {
      * @return Number of tasks in taskList
      */
     public int getTaskCount() {
-        return this.taskList.size();
+        return taskList.size();
     }
 
     /**
@@ -73,19 +70,21 @@ public class Storage {
             }
             in.close();
         } catch (FileNotFoundException err) {
-            this.ui.displayWarning(NO_FILE_MESSAGE);
+            // There is no directory named `DATA_DIR` found
             File dir = new File(DATA_DIR);
+
+            // Create if no directory
             if (!dir.exists()) {
                 dir.mkdirs();
             }
             return taskList;
         } catch (IOException err) {
-            this.ui.displayWarning(ERR_FILE_MESSAGE);
+            // Error thrown when reading data
             return taskList;
         } finally {
             try {
                 br.close();
-            } catch (Exception err) {
+            } catch (IOException err) {
                 // do nothing
             }
         }
@@ -98,7 +97,7 @@ public class Storage {
     public void saveTasks() {
         // formatting data for writing
         String data = "";
-        for (Task item: this.taskList) {
+        for (Task item: taskList) {
             data = data.concat(String.format("%s\n", item.toSaveData()));
         }
 
@@ -110,16 +109,13 @@ public class Storage {
             writer = new BufferedWriter(out);
             writer.write(data);
         } catch (FileNotFoundException err) {
-            // deprecated
-            this.ui.displayWarning(
-                    String.format("Improper access for file writing.\n\tCheck if %s exists.", DATA_DIR));
+            // Directory indicated in variable `DATA_PATH` not found
         } catch (IOException err) {
-            // deprecated
-            this.ui.displayWarning("Something went wrong with writing to file");
+            // Error thrown when writing to file
         } finally {
             try {
                 writer.close();
-            } catch (Exception err) {
+            } catch (IOException err) {
                 // do nothing
             }
         }
@@ -160,7 +156,7 @@ public class Storage {
      * @throws IndexOutOfBoundsException if index is not within range of taskList
      */
     public Task getTask(int index) throws IndexOutOfBoundsException {
-        return this.taskList.get(index);
+        return taskList.get(index);
     }
 
     /**
@@ -169,7 +165,7 @@ public class Storage {
      * @return list of Task objects
      */
     public ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return taskList;
     }
 
     /**
@@ -178,7 +174,7 @@ public class Storage {
      * @param item Task object to be added to taskList
      */
     public void addTask(Task item) {
-        this.taskList.add(item);
+        taskList.add(item);
     }
 
     /**
@@ -187,7 +183,7 @@ public class Storage {
      * @param index of Task Object inside of taskList
      */
     public void deleteTask(int index) throws IndexOutOfBoundsException {
-        this.taskList.remove(index);
+        taskList.remove(index);
     }
 
 }

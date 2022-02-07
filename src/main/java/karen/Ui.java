@@ -49,15 +49,6 @@ public class Ui {
     }
 
     /**
-     * Prints warning messages for user during runtime resulting from missing configurations etc.
-     *
-     * @param message Message generated
-     */
-    public String displayWarning(String message) {
-        return String.format("%s", message);
-    }
-
-    /**
      * Formats String representation of Task object(s) in taskList in 1-based index formatting.
      *
      * @param taskList input ArrayList of Task objects
