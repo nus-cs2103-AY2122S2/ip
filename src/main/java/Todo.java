@@ -5,6 +5,10 @@ public class Todo extends WordListItem{
         super(description);
     }
 
+    static public String getSymbol() {
+        return SYMBOL;
+    }
+
     @Override
     public String toString() {
         return SYMBOL + super.toString();

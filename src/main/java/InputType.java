@@ -6,6 +6,7 @@ public enum InputType {
     TODO("todo"),
     MARK("mark"),
     UNMARK("unmark"),
+    DELETE("delete"),
     NONE("none");
 
     public final String label;

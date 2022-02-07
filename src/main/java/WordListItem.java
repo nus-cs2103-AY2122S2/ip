@@ -1,4 +1,4 @@
-public class WordListItem {
+public abstract class WordListItem {
     private String description;
     private boolean isDone;
 
@@ -13,6 +13,18 @@ public class WordListItem {
 
     public void unmarkItem() {
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    static public String getSymbol() {
+        return null;
     }
 
     @Override

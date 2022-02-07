@@ -7,6 +7,14 @@ public class Deadline extends WordListItem{
         this.datetime = datetime;
     }
 
+    public String getDatetime() {
+        return this.datetime;
+    }
+
+    static public String getSymbol() {
+        return SYMBOL;
+    }
+
     @Override
     public String toString() {
         return SYMBOL + super.toString() + " (by: " + this.datetime + ")";

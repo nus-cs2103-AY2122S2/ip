@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Duke {
     static WordList wordList;
@@ -7,13 +9,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         wordList = new WordList();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
 
+        JSONFileManager.setUpSaveSystem();
+        wordList = JSONFileManager.loadListFromJSONFile();
         replyWelcomeMessage();
         String input;
         while (true) {
@@ -28,6 +32,7 @@ public class Duke {
                 if (inputType == InputType.BYE) {
                     break;
                 }
+                JSONFileManager.saveListToJSONFile(wordList);
             } catch (EmptyInputException e) {
                 System.out.println(e);
                 continue;
@@ -53,17 +58,19 @@ public class Duke {
                 wordList.unmarkItem(Integer.parseInt(value[0]));
                 break;
             case TODO:
-                wordList.storeTodo(value[0]);
+                wordList.storeTodo(value[0], false, true);
                 break;
             case DEADLINE:
-                wordList.storeDeadline(value[0], value[1]);
+                wordList.storeDeadline(value[0], value[1], false, true);
                 break;
             case EVENT:
-                wordList.storeEvent(value[0], value[1]);
+                wordList.storeEvent(value[0], value[1], false, true);
                 break;
             case BYE:
                 replyBye();
                 break;
+            case DELETE:
+                wordList.removeItem(Integer.parseInt(value[0]));
             case NONE:
                 break;
         }
