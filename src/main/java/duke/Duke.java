@@ -25,6 +25,15 @@ public class Duke {
     }
 
     /**
+     * Produces the welcome message.
+     *
+     * @return The welcome message.
+     */
+    public String getWelcome() {
+        return ui.welcome();
+    }
+
+    /**
      * Parses the user's input and generates the proper response.
      *
      * @param input The user's input.

@@ -52,11 +52,11 @@ public class Parser {
                     } else if (type.equals("delete")) {
                         return new DeleteCommand(index);
                     } else {
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("Sorry, but I don't know what that means :-(");
                     }
                 }
             } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("Sorry, but I don't know what that means :-(");
             }
         }
     }
