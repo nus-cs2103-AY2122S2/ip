@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * TaskList manages the usage of Task.
@@ -136,18 +137,18 @@ public class TaskList {
      * @return string of tasks if found else null.
      */
     public String find(String description) {
-        ArrayList<Task> results = new ArrayList<>();
-
-        for (Task task : this.tasks) {
-            String text = task.getDescription();
-            String[] textArray = text.split("\\s+");
-            for (String toMatch : textArray) {
-                if (toMatch.equals(description)) {
+        ArrayList<Task> results = tasks.stream()
+                .filter(task -> {
                     assert task != null : "task must not be null";
-                    results.add(task);
-                }
-            }
-        }
+                    String text = task.getDescription();
+                    String[] textArray = text.split("\\s+");
+                    for (String toMatch : textArray) {
+                        if (toMatch.equals(description)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }).collect(Collectors.toCollection(ArrayList::new));
         return (results.size() == 0) ? null : formatTaskList(results);
     }
 
@@ -157,7 +158,7 @@ public class TaskList {
     }
 
     private String formatTaskList(ArrayList<Task> tasks) {
-        assert tasks.size() > 0: "list should not be empty";
+        assert tasks.size() > 0 : "list should not be empty";
         String str = "";
         for (int i = 1; i <= tasks.size(); i++) {
             assert tasks.get(i - 1) != null : "task must not be null";

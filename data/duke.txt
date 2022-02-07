@@ -1,5 +1,7 @@
 E | 1 | project meeting | May 5 2022 23:59
 D | 0 | homework | May 5 2022 23:59
 E | 1 | party | May 5 2022 23:59
-T | 0 | me
 D | 0 | interview | May 5 2022 05:00
+T | 0 | hello world
+T | 1 | hello hello
+T | 0 | me me hello wee
