@@ -79,6 +79,9 @@ public class Duke {
                 case "delete":
                     tasks.handleDelete(inputArray);
                     break;
+                case "find":
+                    tasks.handleFind(inputArray);
+                    break;
                 default:
                     Ui.printDontKnowCommand();
                     break;

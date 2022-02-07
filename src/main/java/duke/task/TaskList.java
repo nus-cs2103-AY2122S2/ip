@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.util.Ui;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,7 +75,7 @@ public class TaskList {
     }
 
     /**
-     * @param inputArray String[] containing the original user input but split by words
+     * @param inputArray    String[] containing the original user input but split by words
      * @param originalInput Original user input captured as a String
      */
     public void handleTodo(String[] inputArray, String originalInput) {
@@ -142,5 +143,25 @@ public class TaskList {
         tasks.remove(curr);
 
         Ui.printFeedbackFooter("Noted. I've removed this task:", curr, tasks);
+    }
+
+    /**
+     * @param inputArray String[] containing the original user input but split by words
+     */
+    public void handleFind(String[] inputArray) {
+        String key = inputArray[1];
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : this.tasks) {
+            int index = task.getDescription().indexOf(key);
+            if (index != -1) {
+                foundTasks.add(task);
+            }
+        }
+
+        if (foundTasks.isEmpty()) {
+            Ui.printMessage("No tasks found matching \"" + key + "\" :-(");
+        } else {
+            Ui.printFoundList(foundTasks, key);
+        }
     }
 }

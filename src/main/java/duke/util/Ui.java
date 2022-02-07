@@ -61,9 +61,26 @@ public final class Ui {
         System.out.println(BAR);
     }
 
+    /**
+     * @param tasks List of tasks to be printed
+     */
     public static void printList(List<Task> tasks) {
         System.out.println(BAR);
         System.out.println("Here are the tasks in your list:");
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task curr = tasks.get(i - 1);
+            System.out.print(i + ".");
+            printTask(curr);
+        }
+        System.out.println(BAR);
+    }
+
+    /**
+     * @param tasks List of tasks to be printed
+     */
+    public static void printFoundList(List<Task> tasks, String key) {
+        System.out.println(BAR);
+        System.out.println("Here are the tasks I have found matching \"" + key + "\":");
         for (int i = 1; i <= tasks.size(); i++) {
             Task curr = tasks.get(i - 1);
             System.out.print(i + ".");
