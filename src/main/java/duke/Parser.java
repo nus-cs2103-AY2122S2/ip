@@ -38,6 +38,12 @@ public class Parser {
             return Command.BYE;
         case "hello":
             return Command.HELLO;
+        case "note":
+            return Command.NOTE;
+        case "checknote":
+            return Command.CHECKNOTE;
+        case "deletenote":
+            return Command.DELETENOTE;
         default:
             throw new DukeException("Hmm BMO doesn't understand what that means...");
         }
@@ -115,6 +121,18 @@ public class Parser {
 
         }
         
+    }
+
+    public static Note getNote(String input) throws DukeException {
+
+        String[] stringArr = input.split(": ");
+
+        if (stringArr.length < 2) {
+            throw new DukeAbsentInfoException("Please provide notes in the following format: " +
+                    "note [keyword]: [description]");
+        }
+
+        return new Note(stringArr[0], stringArr[1]);
     }
     
 }

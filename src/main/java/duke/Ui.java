@@ -22,7 +22,7 @@ public class Ui {
      * @param input User input
      * @param tasks Current TaskList in the Duke program
      */
-    public String getDukeOutput(String input, TaskList tasks) {
+    public String getDukeOutput(String input, TaskList tasks, NoteList notes) {
         try {
             Command cmd = Parser.getCommand(input);
 
@@ -47,6 +47,12 @@ public class Ui {
                 return tasks.exit();
             case HELLO:
                 return tasks.greet();
+            case NOTE:
+                return notes.add(Parser.getNote(Parser.getDescription(input)));
+            case CHECKNOTE:
+                return notes.checkNotes();
+            case DELETENOTE:
+                return notes.delete(Parser.getDescription(input));
             default:
                 return OUTPUT_ERROR_MSG;
             }

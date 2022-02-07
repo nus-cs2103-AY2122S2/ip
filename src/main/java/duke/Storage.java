@@ -23,7 +23,7 @@ public class Storage {
      * @return ArrayList<Task> that represents the save file.
      * @throws DukeException If the duke.txt file doesn't exist.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> loadTaskList() throws DukeException {
         try {
             File f = new File(this.filepath);
             Scanner sc = new Scanner(f);
@@ -44,13 +44,33 @@ public class Storage {
         }
     }
 
+    public ArrayList<Note> loadNoteList() throws DukeException {
+        try {
+            File f = new File(this.filepath);
+            Scanner sc = new Scanner(f);
+            ArrayList<Note> notes = new ArrayList<>();
+
+            while(sc.hasNext()) {
+                notes.add(Parser.getNote(sc.nextLine()));
+            }
+
+            sc.close();
+
+            return notes;
+        } catch (FileNotFoundException e) {
+
+            throw new DukeException("Problem loading data");
+
+        }
+    }
+
     /**
      * Takes in a list of tasks and save them in a duke.txt file.
      * If duke.txt file already exists, the new save will overwrite the existing one.
      *
      * @param tasks List of tasks
      */
-    public void save(TaskList tasks) {
+    public void saveTasks(TaskList tasks) {
 
         String saveFormat = "";
 
@@ -85,5 +105,21 @@ public class Storage {
             System.out.println("Error while saving file.\n" + e);
         }
     }
-    
+
+    public void saveNotes(NoteList notes) {
+
+        String saveFormattedNotes = "";
+
+        for (Note n : notes.getNotes()) {
+            saveFormattedNotes += n + "\n";
+        }
+
+        try {
+            FileWriter fw = new FileWriter(filepath);
+            fw.write(saveFormattedNotes);
+            fw.close();
+        } catch (Exception e) {
+            System.out.println("Error while saving file.\n" + e);
+        }
+    }
 }

@@ -6,26 +6,34 @@ package duke;
 
 public class Duke {
 
-    private final Storage storage;
-    private TaskList tasks;
-    private final Ui ui;
 
-    public Duke(String filePath) {
+    private Storage taskStorage;
+    private Storage noteStorage;
+    private TaskList tasks;
+    private NoteList notes;
+    private Ui ui;
+
+
+    public Duke(String taskListFilePath, String notesFilePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        taskStorage = new Storage(taskListFilePath);
+        noteStorage = new Storage(notesFilePath);
 
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(taskStorage.loadTaskList());
+            notes = new NoteList(noteStorage.loadNoteList());
         } catch (Exception e) {
             ui.showLoadingError();
             System.out.println(e);
             tasks = new TaskList();
+            notes = new NoteList();
         }
 
     }
 
     public void saveDuke() {
-        storage.save(tasks);
+        taskStorage.saveTasks(tasks);
+        noteStorage.saveNotes(notes);
     }
 
     public String startDuke() {
@@ -33,7 +41,7 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return ui.getDukeOutput(input, tasks);
+        return ui.getDukeOutput(input, tasks, notes);
     }
 
 }
