@@ -30,6 +30,7 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.setUnDone(taskNo);
+        assert taskList.getAction(taskNo).getStatus().equals(" ") : "task status should be blank";
         String statement = "Ok, I have marked this task as not done yet:\n  ";
         return statement + taskList.getAction(taskNo);
     }

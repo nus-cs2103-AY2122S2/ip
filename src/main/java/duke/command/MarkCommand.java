@@ -32,6 +32,7 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.setDone(taskNo);
+        assert taskList.getAction(taskNo).getStatus().equals("X") : "task status should be X";
         String statement = "Nice! I have marked this task as done:\n  ";
         return statement + taskList.getAction(taskNo);
     }
