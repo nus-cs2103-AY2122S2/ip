@@ -63,6 +63,7 @@ public class TaskList {
                     this.tasks.add(event);
                     break;
                 default:
+                    assert false : splitData[0];
                 }
             }
         }
