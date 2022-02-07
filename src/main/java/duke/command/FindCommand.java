@@ -13,6 +13,11 @@ import duke.utils.Ui;
 public class FindCommand extends Command {
     private final String keyWord;
 
+    /**
+     * Instantiates a new Find command.
+     *
+     * @param keyWord the word to search for
+     */
     public FindCommand(String keyWord) {
         assert !keyWord.isEmpty();
         this.keyWord = keyWord;
