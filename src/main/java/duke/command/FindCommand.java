@@ -40,10 +40,6 @@ public class FindCommand extends Command {
         }
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj != null && obj.getClass() == getClass()) {

@@ -32,13 +32,6 @@ public class DeleteAllCommand extends Command {
         }
     }
 
-    /**
-     * The program is not yet exited.
-     */
-    public boolean isExit() {
-        return false;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj != null) {

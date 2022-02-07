@@ -27,13 +27,6 @@ public class ExitCommand extends Command {
         return ui.exited();
     }
 
-    /**
-     * The user inputs an exit command.
-     */
-    public boolean isExit() {
-        return true;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj != null) {
