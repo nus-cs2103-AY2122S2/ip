@@ -24,8 +24,8 @@ public class FindCommand extends Command{
 
     /**
      * Calls TaskMaster method to search for the given keyword and passes the list to storage to print.
-     * @param tasks   holds all the tasks that the user has recorded down and searches for relevant tasks.
-     * @param ui      used to notify the user of tasks found.
+     * @param tasks holds all the tasks that the user has recorded down and searches for relevant tasks.
+     * @param ui used to notify the user of tasks found.
      * @param storage saves the tasks to file if there were any edits to it.
      */
     @Override

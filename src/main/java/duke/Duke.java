@@ -21,27 +21,10 @@ public class Duke {
         this.taskMaster = new TaskMaster(storage.loadTasks());
     }
 
-//    /**
-//     * Kickstarts the Duke bot to begin taking in and reacting to user input.
-//     */
-//    public void run() {
-//        ui.greet();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String[] userCommand = ui.readCommand();
-//                Command command = Parser.parse(userCommand[0], userCommand[1]);
-//                command.execute(this.taskMaster, this.ui, this.storage);
-//                isExit = command.isExit();
-//            } catch (DukeException e) {
-//                System.out.println(e);
-//            }
-//        }
-//    }
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     * @param input that the user gave to the GUI
+     * @return String to respond to the user's request
      */
     public String getResponse(String input) {
         String response = "";
