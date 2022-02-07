@@ -460,5 +460,57 @@ public class ParserTest {
             assertEquals("The search field cannot be empty :(", e.getMessage());
         }
     }
+
+    @Test
+    public void testParse_scheduleSuccess() {
+        try {
+            TaskList listOfTasks = new TaskList(100);
+            Storage.initFileFolder();
+            parse("event x /at 2111-11-11", listOfTasks);
+            parse("deadline y /by 2111-11-11", listOfTasks);
+            parse("schedule 2111-11-11", listOfTasks);
+            assertEquals("[[E][ ] x (at: Nov 11 2111), [D][ ] y (by: Nov 11 2111)]",
+                    listOfTasks.getListOfTasks().toString());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testParse_scheduleExceptionThrown() {
+        try {
+            TaskList listOfTasks = new TaskList(100);
+            Storage.initFileFolder();
+            parse("event x /at 2111-11-11", listOfTasks);
+            parse("deadline y /by 2111-11-11", listOfTasks);
+            parse("schedule xyz xxxx", listOfTasks);
+            fail();
+        } catch (Exception e) {
+            assertEquals("The argument MUST contain a single date.", e.getMessage());
+        }
+
+        try {
+            TaskList listOfTasks = new TaskList(100);
+            Storage.initFileFolder();
+            parse("event x /at 2111-11-11", listOfTasks);
+            parse("deadline y /by 2111-11-11", listOfTasks);
+            parse("schedule", listOfTasks);
+            fail();
+        } catch (Exception e) {
+            assertEquals("The argument MUST contain a single date.", e.getMessage());
+        }
+
+        try {
+            TaskList listOfTasks = new TaskList(100);
+            Storage.initFileFolder();
+            parse("event x /at 2111-11-11", listOfTasks);
+            parse("deadline y /by 2111-11-11", listOfTasks);
+            parse("schedule 11-11-2111", listOfTasks);
+            fail();
+        } catch (Exception e) {
+            assertEquals("Please enter date in this format: <yyyy-MM-dd>", e.getMessage());
+        }
+    }
+
 }
 

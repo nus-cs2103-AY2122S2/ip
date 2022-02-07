@@ -4,8 +4,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.exception.InvalidDateTime;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -70,10 +73,10 @@ public class TaskList {
      */
     public String display() {
         String result = "";
-        result += "     Here are the tasks in your list:\n";
+        result += "Here are the tasks in your list:\n";
         for (int i = 1; i <= numberOfTasks; i++) {
             Task currTask = listOfTasks.get(i - 1);
-            String output = "     " + i + "." + currTask + "\n";
+            String output = i + ". " + currTask + "\n";
             result += output;
         }
         return result;
@@ -180,7 +183,7 @@ public class TaskList {
             Task currTask = listOfTasks.get(i);
             String currTaskDesc = currTask.getDescription().toString();
             if (currTaskDesc.contains(searchTarget)) {
-                String currString = "     " + count + "." + currTask;
+                String currString = count + ". " + currTask;
                 res.append(currString).append("\n");
                 count++;
             }
@@ -220,6 +223,56 @@ public class TaskList {
             System.out.println("An error has occurred when writing to data file!\n"
                     + "Please try again later.");
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Search for and print all tasks that happens on the specified date.
+     *
+     * @param date Date specified by the user.
+     */
+    public String schedule(String date) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate convertedDate;
+
+        try {
+            convertedDate = LocalDate.parse(date, format);
+        } catch (DateTimeParseException | NullPointerException e) {
+            throw new InvalidDateTime("Please enter date in this format: <yyyy-MM-dd>");
+        }
+
+        StringBuilder listOfEvent = new StringBuilder();
+        listOfEvent.append("You have the following events on ").append(date).append(" :\n");
+        int eventCount = 1;
+
+        StringBuilder listOfDeadline = new StringBuilder();
+        listOfDeadline.append("Here are the list of tasks that are due on ").append(date).append(" :\n");
+        int deadlineCount = 1;
+
+        for (Task currTask : listOfTasks) {
+            if (currTask instanceof Event) {
+                if (((Event) currTask).getDate().isEqual(convertedDate)) {
+                    String currString = eventCount + ". " + currTask;
+                    listOfEvent.append(currString).append("\n");
+                    eventCount++;
+                }
+            } else if (currTask instanceof Deadline) {
+                if (((Deadline) currTask).getDate().isEqual(convertedDate)) {
+                    String currString = deadlineCount + ". " + currTask;
+                    listOfDeadline.append(currString).append("\n");
+                    deadlineCount++;
+                }
+            }
+        }
+
+        if (eventCount == 1 && deadlineCount == 1) {
+            return "No results found :(";
+        } else if (eventCount == 1) {
+            return listOfDeadline.toString();
+        } else if (deadlineCount == 1) {
+            return listOfEvent.toString();
+        } else {
+            return listOfEvent.toString() + "\n" + listOfDeadline.toString();
         }
     }
 }

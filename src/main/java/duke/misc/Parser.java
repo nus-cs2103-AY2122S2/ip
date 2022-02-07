@@ -111,6 +111,12 @@ public class Parser {
             } else {
                 throw new InvalidCommand("The search field cannot be empty :(");
             }
+        case ("schedule"):
+            if (wordsList.size() == 2) {
+                return listOfTasks.schedule(wordsList.get(1));
+            } else {
+                throw new InvalidCommand("The argument MUST contain a single date.");
+            }
         case ("bye"):
             return "See you again!";
         default:
