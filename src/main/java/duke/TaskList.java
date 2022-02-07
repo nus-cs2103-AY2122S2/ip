@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import duke.exception.LoadException;
 import duke.exception.RonException;
@@ -77,31 +78,21 @@ public class TaskList {
     }
 
     public String printTasks() {
-        String string = "";
-        int index = 1;
-        for (Task task : this.store) {
-            string += index + "." + task + "\n";
-            index++;
-        }
-        return string;
+        AtomicInteger count = new AtomicInteger(0);
+        String returnString = this.store.stream()
+                .map(task -> count.incrementAndGet() + "." + task.toString() + "\n")
+                .reduce("", (x, y) -> x + y);
+        return returnString;
     }
 
     public String findTasks(String substring) {
-        List<Task> tempList = new ArrayList<>();
-        for (Task task : this.store) {
-            if (task.getDescription().contains(substring)) {
-                tempList.add(task);
-            }
-        }
+        List<Task> tempList = new ArrayList<>(this.store);
+        AtomicInteger count = new AtomicInteger(0);
+        String returnString = tempList.stream().filter(task -> task.getDescription().contains(substring))
+                .map(task -> count.incrementAndGet() + "." + task.toString() + "\n")
+                .reduce("", (x, y) -> x + y);
 
-        String string = "";
-
-        int index = 1;
-        for (Task task : tempList) {
-            string += index + "." + task + "\n";
-            index++;
-        }
-        return string;
+        return returnString;
     }
 
     /**
