@@ -3,14 +3,17 @@ package aeromon.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class handles the Event Task type.
+ */
 public class Event extends Task {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate at;
 
     /**
-     * Public constructor for the Event object.
-     * @param description the task name
-     * @param at the duration in which the event takes place
+     * Constructs the Event object.
+     * @param description the task name.
+     * @param at the duration in which the event takes place.
      */
     public Event(String description, LocalDate at) {
         super(description);

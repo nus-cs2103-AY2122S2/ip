@@ -13,13 +13,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class handles the loading and saving tasks in the file.
+ */
 public class Storage {
     private File localTasks;
 
+    /**
+     * Constructs the Storage object.
+     * @param fileLocation the path of the file.
+     */
     public Storage(String fileLocation) {
         this.localTasks = new File(fileLocation);
     }
 
+    /**
+     * Scans and returns the list of Tasks retrieved from the file.
+     * @return the ArrayList of Tasks in the file.
+     * @throws AeromonException when an error occurs when reading the file.
+     */
     public ArrayList<Task> getFile() throws AeromonException {
         try {
             if (localTasks.createNewFile()) {
@@ -54,10 +66,14 @@ public class Storage {
                 return tasks;
             }
         } catch (IOException e) {
-            throw new AeromonException("Ohnoz! Something went terribly wrong!");
+            throw new AeromonException("The file had some error and I wasn't able to read it properly >.<");
         }
     }
 
+    /**
+     * Saves the Tasks into the file.
+     * @param tasks the tasks to be saved.
+     */
     public void saveFile(ArrayList<Task> tasks) {
         String content = "";
         for (int i = 0; i < tasks.size(); i++) {

@@ -5,12 +5,16 @@ import aeromon.Storage;
 import aeromon.Ui;
 import aeromon.task.TaskArrayList;
 
+/**
+ * ByeCommand class handles the exit commands.
+ */
 public class ByeCommand extends Command {
+
     @Override
     public void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
         ui.print("Buai Buai! Ciao for now!");
     }
-    
+
     @Override
     public boolean equals(Object object) {
         return object instanceof ByeCommand;

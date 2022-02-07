@@ -4,7 +4,17 @@ import aeromon.AeromonException;
 
 import java.time.LocalDate;
 
+/**
+ * CommandManager class that manages the command input.
+ */
 public class CommandManager {
+
+    /**
+     * Reads the command input and returns the relevant Command object.
+     * @param fullCommand the unprocessed command input.
+     * @return command object to be executed.
+     * @throws AeromonException when an error occurs during the reading process.
+     */
     public static Command read(String fullCommand) throws AeromonException {
         String[] arr = fullCommand.split(" ", 2);
         String command = arr[0];
@@ -52,6 +62,14 @@ public class CommandManager {
         }
     }
 
+    /**
+     * Checks if the description of the task is valid.
+     * @param taskType the type of the Task object.
+     * @param description the description of the Task object, for Deadline and Event Tasks,
+     *                    the method also checks if the date format is valid.
+     * @return the description of the Task.
+     * @throws AeromonException if the description or date is empty, or if the date format is wrong.
+     */
     public static String checkDescription(String taskType, String description) throws AeromonException {
         String s = description.trim();
         if (s.isEmpty()) {
@@ -76,7 +94,13 @@ public class CommandManager {
         return description;
     }
 
-    private static int getTaskNum(String s) throws AeromonException {
+    /**
+     * Gets the task number from the command.
+     * @param s The command to read from.
+     * @return The task number.
+     * @throws AeromonException when the task number is an invalid number.
+     */
+    public static int getTaskNum(String s) throws AeromonException {
         String taskNum = s.trim();
         if (taskNum.isEmpty()) {
             throw new AeromonException("Why is the task number empty?");

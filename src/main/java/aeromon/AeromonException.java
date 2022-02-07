@@ -1,9 +1,13 @@
 package aeromon;
 
+/**
+ * AeromonException class handles the exceptions specific to Aeromon.
+ */
 public class AeromonException extends Exception {
+
     /**
-     * Public constructor, which only takes in the message.
-     * @param message the message to be printed
+     * Constructs the AeromonException object.
+     * @param message the error messgae.
      */
     public AeromonException(String message) {
         super(message);

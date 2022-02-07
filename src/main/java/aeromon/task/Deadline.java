@@ -3,14 +3,17 @@ package aeromon.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class handles the Deadline Task type.
+ */
 public class Deadline extends Task {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate by;
 
     /**
-     * Public constructor for the Deadline object.
-     * @param description the task name
-     * @param by the deadline which the task needs to be completed by
+     * Constructs the Deadline object.
+     * @param description the task description.
+     * @param by the deadline which the task needs to be completed by.
      */
     public Deadline(String description, LocalDate by) {
         super(description);

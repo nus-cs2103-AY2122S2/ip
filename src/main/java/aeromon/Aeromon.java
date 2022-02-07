@@ -6,12 +6,19 @@ import aeromon.task.TaskArrayList;
 
 import java.util.ArrayList;
 
+/**
+ * Aeromon class that runs the Aeromon bot.
+ */
 public class Aeromon {
 
     private TaskArrayList taskList;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Constructs the Aeromon object.
+     * @param fileLocation the path of storage file for Aeromon.
+     */
     public Aeromon(String fileLocation) {
         ui = new Ui();
         storage = new Storage(fileLocation);
@@ -24,6 +31,9 @@ public class Aeromon {
         }
     }
 
+    /**
+     * Starts and runs the Aeromon bot.
+     */
     public void start() {
         ui.greet();
         boolean isBye = false;

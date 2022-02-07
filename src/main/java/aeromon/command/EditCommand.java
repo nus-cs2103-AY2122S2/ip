@@ -6,6 +6,9 @@ import aeromon.Ui;
 import aeromon.task.Task;
 import aeromon.task.TaskArrayList;
 
+/**
+ * EditCommand handles the commands which edit the tasks in the TaskArrayList.
+ */
 public class EditCommand extends Command {
 
     private EditType editType;
@@ -13,6 +16,11 @@ public class EditCommand extends Command {
 
     public enum EditType { MARK, UNMARK, DELETE}
 
+    /**
+     * Constructs the EditCommand object.
+     * @param editType the type of the Edit command, which is provided by the EditType enum.
+     * @param taskNum the task number to be edited.
+     */
     public EditCommand(EditType editType, int taskNum) {
         this.editType = editType;
         this.taskNum = taskNum;

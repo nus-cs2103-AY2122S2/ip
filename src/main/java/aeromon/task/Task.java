@@ -1,12 +1,15 @@
 package aeromon.task;
 
+/**
+ * Task class handles the different type of tasks.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Public constructor for the Task object.
-     * @param description the task name
+     * Constructs the Task object.
+     * @param description the task name.
      */
     public Task(String description) {
         this.description = description;
@@ -14,7 +17,7 @@ public class Task {
     }
 
     /**
-     * Public method which returns the status icon of the respective task.
+     * Returns the status icon of the respective task.
      * @return "X" if the task is done, " " otherwise
      */
     public String getStatusIcon() {
@@ -22,7 +25,7 @@ public class Task {
     }
 
     /**
-     * Public void method that marks the task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
         isDone = true;
@@ -30,7 +33,7 @@ public class Task {
     }
 
     /**
-     * Public void method that marks the task as not done.
+     * Marks the task as not done.
      */
     public void markAsNotDone() {
         isDone = false;
@@ -42,6 +45,10 @@ public class Task {
         return String.format("[%1$s] %2$s", getStatusIcon(), description);
     }
 
+    /**
+     * Converts the Task object to the output format that is saved in the file.
+     * @return the output String.
+     */
     public String toOutputFormat() {
         int status = this.isDone ? 1 : 0;
         return String.format("%d / %s", status, this.description);
