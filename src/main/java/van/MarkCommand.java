@@ -16,6 +16,7 @@ public class MarkCommand implements Command {
     public MarkCommand(boolean isDone, int index) {
         this.isDone = isDone;
         this.index = index;
+        assert index >= 0;
     }
 
     /**

@@ -9,6 +9,7 @@ public class TaskList {
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
         this.counter = this.tasks.size();
+        assert counter >= 0;
     }
 
     public void addTask(Task newTask) {
@@ -20,7 +21,7 @@ public class TaskList {
     }
 
     public void markUndone(int taskNumber) {
-        this.tasks.get(taskNumber - 1).setunDone();
+        this.tasks.get(taskNumber - 1).setUnDone();
     }
 
     public void deleteTask(int taskNumber) {

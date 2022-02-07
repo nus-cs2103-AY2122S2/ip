@@ -102,6 +102,7 @@ public class Parser {
         } catch (VanException ex) {
             output = new InvalidCommand(ex.getError());
         }
+        assert output != null : "Problem with parsing command";
         return output;
     }
 
