@@ -65,16 +65,17 @@ public class MarkCommand extends Command {
                 throw new DukeException(ERROR_INVALID_UNMARK);
             }
         }
+        String message;
         Task thisTask = tasks.get(this.taskNumber - 1);
         if (toMark) {
             thisTask.markAsDone();
-            Storage.saveToFile(tasks);
-            return ui.getTaskLine(thisTask, MESSAGE_MARK);
+            message = MESSAGE_MARK;
         } else {
             thisTask.markAsUndone();
-            Storage.saveToFile(tasks);
-            return ui.getTaskLine(thisTask, MESSAGE_UNMARK);
+            message = MESSAGE_UNMARK;
         }
+        Storage.saveToFile(tasks);
+        return ui.getTaskLine(thisTask, message);
     }
 
 }
