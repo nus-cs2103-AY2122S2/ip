@@ -29,6 +29,8 @@ And it is **FREE!**
 
 ![](https://static.wikia.nocookie.net/gensin-impact/images/7/74/Icon_Emoji_066_Hu_Tao_Reciting_poetry.png/revision/latest/scale-to-width-down/250?cb=20210906044059)
 
+![07 02 2022_03 06 34_REC](https://user-images.githubusercontent.com/77195251/152697291-0432af2a-b5b1-4c8c-8b77-c2a2aa42505a.png)
+
 If you are familiar with CSS and JavaFX, you can further customize the UI to suit your needs. Here is a snippet of the GUI code:
 ```java
 private DialogBox(String text, Image img, String user) {
