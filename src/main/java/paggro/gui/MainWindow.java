@@ -15,8 +15,6 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
     @FXML
-    private ImageView displayPicture;
-    @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
@@ -27,6 +25,10 @@ public class MainWindow extends AnchorPane {
 
     private PaggroBot paggro;
 
+    private static final String WELCOME_MESSAGE = "    What do you want... =.=";
+    private static final String WINDOW_CLOSING = "    Window closing in 3 seconds...";
+
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image paggroImage = new Image(this.getClass().getResourceAsStream("/images/unamused.png"));
 
@@ -36,7 +38,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        displayPicture.setImage(paggroImage);
     }
 
     public void setPaggro(PaggroBot p) {
@@ -57,8 +58,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (paggro.isExit) {
-            String goodBye = "    Window closing in 3 seconds...";
-            dialogContainer.getChildren().addAll(DialogBox.getPaggroDialog(goodBye, paggroImage));
+            dialogContainer.getChildren().addAll(DialogBox.getPaggroDialog(WINDOW_CLOSING, paggroImage));
 
             new Thread(() -> {
                 try {
@@ -70,5 +70,12 @@ public class MainWindow extends AnchorPane {
                 System.exit(0);
             }).start();
         }
+    }
+
+    @FXML
+    void greet() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getPaggroDialog(WELCOME_MESSAGE, paggroImage)
+        );
     }
 }

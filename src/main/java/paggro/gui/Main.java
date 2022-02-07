@@ -23,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<paggro.gui.MainWindow>getController().setPaggro(paggro);
+            fxmlLoader.<paggro.gui.MainWindow>getController().greet();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

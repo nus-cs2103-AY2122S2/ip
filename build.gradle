@@ -5,6 +5,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+mainClassName = "paggro.gui.Launcher"
+
 repositories {
     mavenCentral()
 }
@@ -44,12 +46,13 @@ test {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = "paggro.gui.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "paggro"
     archiveClassifier = null
+    mainClassName = "paggro.gui.Launcher"
 }
 
 checkstyle {
