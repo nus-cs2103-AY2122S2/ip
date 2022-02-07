@@ -17,6 +17,11 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+    /**
+     * Tasks in a file and loads up the tasks already present inside
+     *
+     * @param tasks current Tasklist to add new tasks to
+     */
 
     public void load(TaskList tasks) throws DukeException {
         File previous = new File(this.filePath);
@@ -56,6 +61,11 @@ public class Storage {
             }
         }   
     }
+    /**
+     * Writes to a file the new tasks after the end of the Duke session
+     *
+     * @param tasks the current Tasklist that contains the final state of all tasks
+     */
 
     public void write(TaskList tasks) throws DukeException {
         try {

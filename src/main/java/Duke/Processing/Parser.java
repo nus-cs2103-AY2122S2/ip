@@ -5,7 +5,12 @@ import java.util.Date;
 import Duke.Exception.DukeException;
 
 public class Parser {
-    
+    /**
+     * Converts the String for a new task to a date
+     *
+     * @param  date the String the user inputs
+     * @return      the String in a date format the system can recognise
+     */
     static Date convert1(String date) throws DukeException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         //System.out.println(date);
@@ -16,7 +21,12 @@ public class Parser {
             throw  new DukeException("what is wrong" + e);
         }
     }
-
+    /**
+     * Converts the String for a preexisting task to a date
+     *
+     * @param  date the String the user inputs
+     * @return      the String in a date format the system can recognise
+     */
     static Date convert2(String date) throws DukeException {
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
         //System.out.println(date);
@@ -27,6 +37,12 @@ public class Parser {
             throw  new DukeException("What is wrong " + e);
         }
     }
+    /**
+     * Takes in the input command and the Tasklist to modify it accordingly.
+     *
+     * @param  input the type of command the user has input
+     * @param  tasklist the current Tasklist that contains tasks.
+     */
 
     public static void use(String input, TaskList tasklist) throws DukeException{
         try {

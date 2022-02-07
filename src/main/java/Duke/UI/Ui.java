@@ -21,15 +21,23 @@ public class Ui {
         return this.sc.nextLine();
     }
 
+    /**
+     * Outputs a welcome message to the user at the start of Duke
+     */
     public void startmessage() {
         String message = logo + intro + seperator;
         System.out.println(message);
     }
-
+    /**
+     * Outputs an end message to the user at the end of Duke
+     */
     public void endmessage() {
         System.out.println(bye);
     }
 
+    /**
+     * Outputs an error message to the user in the event of a caught exception
+     */
     public void errorMessage(DukeException error) {
         System.out.println(error.getMessage());
     }
