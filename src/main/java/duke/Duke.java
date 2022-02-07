@@ -16,7 +16,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -181,13 +180,8 @@ public class Duke extends Application {
         }
 
         while (!isBye) {
-            // A string to display the remaining task number
-            String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoLists.size() + 1);
-
             if (userInput.equals("bye")) {
-                isBye = true;
                 return "    Bye. See you again next time! Have a nice day 😊!";
-
             } else {
                 // storing input task in todoLists
                 String[] userInputArr = userInput.split(" ");
@@ -198,9 +192,7 @@ public class Duke extends Application {
                 try {
                     Parser.userCommandValidator(userCommand);
                 } catch (DukeException e) {
-
                    return "    OOPS!!! I'm sorry, but I don't know what that means.";
-
                 }
 
                 switch (userCommand) {
@@ -232,8 +224,11 @@ public class Duke extends Application {
                     String[] byAndTime = deadlineTaskArr[1].split(" ");
                     String by = byAndTime[0];
 
+                    String time = byAndTime[1];
+                    assert !time.isEmpty() : "Deadline time is required";
+
                     try {
-                        String deadlineTime = byAndTime[1];
+                        String deadlineTaskTime = byAndTime[1];
                     } catch (ArrayIndexOutOfBoundsException e) {
                         return "    Deadline time is required";
                     }

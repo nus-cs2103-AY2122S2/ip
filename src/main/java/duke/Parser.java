@@ -32,6 +32,7 @@ public class Parser {
      * @throws DukeException
      */
     static String parserTodo(TaskList taskLists, String userInputTask, Storage storage) throws DukeException, IOException {
+
         Parser.taskDescriptionValidator("todo", userInputTask);
 
         // adding task to todoList
@@ -185,6 +186,8 @@ public class Parser {
      */
     static String parserUnmark(TaskList taskLists, String[] userInputs, Storage storage) throws IOException {
         int taskToUnmark = Integer.parseInt(userInputs[1]);
+        assert taskToUnmark - 1 < taskLists.size() : "task index must be less than task length";
+
         taskLists.get(taskToUnmark - 1).markAsNotDone();
         storage.save(taskLists);
         return taskLists.setTaskAsUnDone(taskToUnmark);
