@@ -6,6 +6,12 @@ public class Task {
     protected String type;
     protected String description = ""; // Display format for Duke
 
+    /**
+     * Constructor for a Task.
+     * Should not be used directly; construct one of the child classes instead
+     *
+     * @param input User input
+     */
     public Task(String input) {
         this.input = input;
     }
