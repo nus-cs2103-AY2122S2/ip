@@ -23,6 +23,7 @@ public class InputParser extends Parser {
     public String parseInput(String input, TaskList tasks) throws RonException {
         String trimmedText = input.trim();
         if (input.contains("unmark")) {
+            assert tasks.size() > 0 : "Task list is empty";
             int index = Integer.parseInt(input.substring(7)) - 1;
             if (index >= tasks.size() || index < 0) {
                 throw new IndexOutOfStoreException();
@@ -33,6 +34,7 @@ public class InputParser extends Parser {
             tasks.get(index).toggleStatus();
             return "No problem! The following task is marked as not done yet:\n" + tasks.get(index);
         } else if (input.contains("mark")) {
+            assert tasks.size() > 0 : "Task list is empty";
             int index = Integer.parseInt(input.substring(5)) - 1;
             if (index >= tasks.size() || index < 0) {
                 throw new IndexOutOfStoreException();
@@ -43,6 +45,7 @@ public class InputParser extends Parser {
             tasks.get(index).toggleStatus();
             return "Good job! The following task is marked as done:\n" + tasks.get(index);
         } else if (input.contains("delete")) {
+            assert tasks.size() > 0 : "Task list is empty";
             if (trimmedText.length() == "delete".length()) {
                 throw new DeleteIndexException();
             }
@@ -91,6 +94,7 @@ public class InputParser extends Parser {
             tasks.add(task);
             return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("find")) {
+            assert tasks.size() > 0 : "Task list is empty";
             if (input.replace("find", "").trim().length() == 0) {
                 throw new EmptyDescriptionException("find");
             }
