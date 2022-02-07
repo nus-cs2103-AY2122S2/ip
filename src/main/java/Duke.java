@@ -7,7 +7,10 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
-
+    /**
+     *
+     * @param path
+     */
     public Duke(String path) {
         ui = new Ui();
         try {
@@ -22,6 +25,7 @@ public class Duke {
         }
 
     }
+
 
     public void run() {
         ui.printIntroduction();

@@ -13,7 +13,12 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
-   
+    /**
+     *
+     * @param name
+     * @param at
+     * @param done
+     */
     public Event(String name, LocalDate at, boolean done) {
         super(name, done);
         this.at = at;

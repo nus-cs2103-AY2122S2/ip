@@ -2,12 +2,21 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     *
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
 
     }
 
+    /**
+     *
+     * @param description
+     * @param done
+     */
     public Task(String description, boolean done) {
         this.description = description;
         this.isDone = done; 

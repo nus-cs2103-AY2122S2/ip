@@ -9,6 +9,12 @@ import java.util.Scanner;
 class Storage {
    private final File file;
 
+    /**
+     *
+     * @param path
+     * @throws IOException
+     * @throws DukeException
+     */
    public Storage(String path) throws IOException, DukeException {
        String[] splits = path.split("/");
        File dir = new File(splits[0]);
@@ -27,6 +33,11 @@ class Storage {
        this.file = savedTasks;
    }
 
+    /**
+     *
+     * @param taskList
+     * @throws IOException
+     */
     public void writeTasks(TaskList taskList ) throws IOException {
 
         StringBuilder textToAdd = new StringBuilder();
@@ -59,7 +70,11 @@ class Storage {
     }
 
 
-
+    /**
+     *
+     * @return
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> readTasks( ) throws FileNotFoundException {
       ArrayList<Task> tasks = new ArrayList<>();
 

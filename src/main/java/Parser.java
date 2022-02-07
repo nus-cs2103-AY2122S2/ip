@@ -1,6 +1,12 @@
 import java.time.LocalDate;
 
 public class Parser {
+    /**
+     *
+     * @param fullCommand
+     * @return
+     * @throws DukeException
+     */
     public static Command parseCommand(String fullCommand) throws DukeException {
         String[] first = fullCommand.split(" ", 2);
         switch (first[0]) {

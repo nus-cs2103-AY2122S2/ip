@@ -18,16 +18,28 @@ class TaskList {
         return this.tasks;
     }
 
+    /**
+     *
+     * @param e
+     */
     public void addTask(Task e){
         tasks.add(e);
     }
-    
-    public void deleteTask(Task task) {
+
+    /**
+     *
+     * @param taskNum
+     */
+    public void deleteTask(int taskNum) {
         System.out.println(" Noted. I've removed this task:");
-        tasks.remove(task);
+        tasks.remove(taskNum);
         System.out.println("Now you have" + tasks.size() + "tasks in the list.");
     }
 
+    /**
+     *
+     * @param taskNo
+     */
     public void markDone(int taskNo) {
         tasks.get(taskNo).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
@@ -35,6 +47,10 @@ class TaskList {
 
     }
 
+    /**
+     *
+     * @param taskNo
+     */
     public void unmark(int taskNo) {
         tasks.get(taskNo).unmark();
         System.out.println("OK, I've marked this task as not done yet:");

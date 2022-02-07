@@ -3,10 +3,22 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
     private final int taskNum;
 
+    /**
+     *
+     * @param taskNum
+     */
     public DeleteCommand(int taskNum) {
+
         this.taskNum = taskNum;
     }
 
+    /**
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws IOException
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task toDelete = taskList.getTasks().get(this.taskNum - 1);
         taskList.deleteTask(this.taskNum - 1);

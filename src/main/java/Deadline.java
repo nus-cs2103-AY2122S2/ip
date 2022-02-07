@@ -5,6 +5,11 @@ class Deadline extends Task {
 
     private final LocalDate by;
 
+    /**
+     *
+     * @param name
+     * @param by
+     */
     public Deadline(String name, String by) {
         super(name);
         by = by.trim();
@@ -22,6 +27,10 @@ class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalDate getBy() {
         return this.by;
     }
