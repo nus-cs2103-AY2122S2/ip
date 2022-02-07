@@ -147,8 +147,12 @@ public class TaskList {
      * @return returns the current size of the task list.
      */
 
-    public String returnCurrentSize() {
+    public String printCurrentSize() {
         return "Now you have " + this.currentSize + " tasks in the list.\n";
+    }
+
+    public int getCurrentSize() {
+        return this.currentSize;
     }
 
     /**
