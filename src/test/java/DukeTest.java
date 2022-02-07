@@ -17,7 +17,7 @@ public class DukeTest {
     @Test
     public void testTask() {
         Task deadline = new Deadline("deadline return book /by 20/12/2022 1800");
-        assertEquals(deadline.toString(), "[D][ ] return book (by: Dec 20 2022 6.00 pm)");
+        assertEquals(deadline.toString(), "[D][ ] return book (by: Dec 20 2022 6.00 PM)");
 
         Task event = new Event("event return book /at 20/12/2022");
         assertEquals(event.toString(), "[E][ ] return book (at: Dec 20 2022)");
