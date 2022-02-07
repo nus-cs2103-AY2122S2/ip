@@ -45,7 +45,7 @@ public class Parser {
      * @return InvalidCommand with default or custom message.
      */
     private Command prepareInvalid(String keyWord, String fullInput) {
-        Command cmd = new InvalidCommand();
+        Command cmd = null;
 
         switch (keyWord) {
         case "deadline":
@@ -57,7 +57,13 @@ public class Parser {
             if (fullInput.matches("^((?!\\/at).)*$")) {
                 cmd = new InvalidCommand(InvalidMessage.MISSING_AT.toString());
             }
+        default:
+            cmd = new InvalidCommand();
         }
+
+        // default case should be a catch-all for initialising InvalidCommand with a default message
+        assert cmd != null;
+
         return cmd;
     }
 
@@ -129,6 +135,10 @@ public class Parser {
         default:
             return new InvalidCommand();
         }
+
+        // default case should be a catch-all for initialising InvalidCommand with a default message
+        assert cmd != null;
+
         return cmd;
     }
 

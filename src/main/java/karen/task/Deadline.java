@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        byDate = this.parseDate(by);
+        byDate = parseDate(by);
     }
 
     /**
@@ -19,7 +19,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveData() {
-        return String.format("D|%s|%s|%s", isDone, this.getDescription(), byDate);
+        return String.format("D|%s|%s|%s", isDone, getDescription(), byDate);
     }
 
     /**
