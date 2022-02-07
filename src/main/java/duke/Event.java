@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDateTime time;
 
-
     public Event(String taskName, String time) {
         super(taskName);
         DateTimeFormatter format = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");

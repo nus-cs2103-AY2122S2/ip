@@ -15,7 +15,7 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public int getTaskListSize() {
+    public int getSize() {
         return taskList.size();
     }
 
