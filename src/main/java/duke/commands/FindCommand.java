@@ -45,6 +45,7 @@ public class FindCommand extends Command {
 
             sb.append("Here are the matching tasks in your list:\n");
 
+            /* Existing stream, previously added */
             List<Task> filteredTasks =
                     allTasks
                     .stream()
