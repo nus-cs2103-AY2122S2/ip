@@ -12,6 +12,7 @@ public abstract class Command {
     protected enum Dialogue {
         GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, DELETE, NUMLEFT, LINE, LOADERROR, FIND, FINDDATE
     }
+
     /**
      * Execute the action of the command.
      *
@@ -20,6 +21,7 @@ public abstract class Command {
      * @throws IOException If error in IO operation with Duke storage.
      */
     public abstract String execute(TaskList task, Storage storage) throws IOException;
+
 
     /**
      * Returns whether Duke should exit after the command is executed.

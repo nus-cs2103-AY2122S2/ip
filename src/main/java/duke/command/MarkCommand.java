@@ -27,7 +27,15 @@ public class MarkCommand extends Command {
     public String execute(TaskList task, Storage storage) throws IOException {
         task.mark(this.index, this.isMark);
         storage.overWriteFile(task);
+        return getReply(task);
+    }
 
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    private String getReply(TaskList task) {
         StringBuilder reply = new StringBuilder();
         if (this.isMark) {
             reply.append(this.speak(Dialogue.MARK));
@@ -37,10 +45,5 @@ public class MarkCommand extends Command {
         reply.append("\n");
         reply.append(task.getTask(this.index).toString());
         return reply.toString();
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }
