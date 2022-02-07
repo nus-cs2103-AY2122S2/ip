@@ -13,6 +13,8 @@ import paggro.ui.Ui;
  * This class encapsulates a listOnDate command which lists out the tasks on a specific date.
  */
 public class ListOnDateCommand extends Command {
+    private static final String FOUR_SPACE = "    ";
+
     /**
      * Constructor of ListOnDateCommand
      *
@@ -42,8 +44,9 @@ public class ListOnDateCommand extends Command {
                 return ui.showList(nDate.getTasks());
             }
         } catch (DateTimeParseException e) {
-            throw new PaggroException(("    Really? =.= Date inputs must be in this format:\n"
-                    + "      YYYY-MM-DD"));
+            final String dateInputError = "Really? =.= Date inputs must be in this format:\n"
+                    + "      YYYY-MM-DD";
+            throw new PaggroException((FOUR_SPACE + dateInputError));
         }
     }
 }

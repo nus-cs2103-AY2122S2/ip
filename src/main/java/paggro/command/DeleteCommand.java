@@ -15,6 +15,8 @@ import paggro.ui.Ui;
  * This class encapsulates a delete command which removes a task entry from the list.
  */
 public class DeleteCommand extends Command {
+    private static final String FOUR_SPACE = "    ";
+
     /**
      * Constructor of DeleteCommand.
      *
@@ -39,10 +41,12 @@ public class DeleteCommand extends Command {
         try {
             index = Integer.parseInt(this.getParameters());
         } catch (NumberFormatException e) { // parameter was not a number
-            throw new PaggroException("    Really? Can you input an actual number this time... =.=");
+            final String invalidInputError = "Really? Can you input an actual number this time... =.=";
+            throw new PaggroException(FOUR_SPACE + invalidInputError);
         }
         if (index > lister.getTasks().size()) {
-            throw new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
+            final String invalidIndexError = "Really? There is no item indexed at " + index + "... =.=";
+            throw new PaggroException(FOUR_SPACE + invalidIndexError);
         }
 
         Task task = lister.getTasks().get(index - 1);
@@ -69,7 +73,7 @@ public class DeleteCommand extends Command {
         try {
             storage.deleteFromStorage(index);
         } catch (IOException e) {
-            throw new PaggroException("    Could not delete in paggro.txt =.=");
+            throw new PaggroException(FOUR_SPACE + "Could not delete in paggro.txt =.=");
         }
 
         return ui.showDeleted(task) + "\n" + ui.showNumber(lister.getTasks().size());

@@ -17,6 +17,8 @@ import paggro.ui.Ui;
  * This class encapsulates a deadline command which creates a new deadline entry.
  */
 public class DeadlineCommand extends Command {
+    private static final String FOUR_SPACE = "    ";
+
     /**
      * Constructor of DeadlineCommand object.
      *
@@ -53,19 +55,22 @@ public class DeadlineCommand extends Command {
                     LocalTime time = LocalTime.parse(timeString);
                     task = (new Deadline(des, nDate, time, false));
                 } catch (DateTimeParseException e) {
-                    throw new PaggroException("    Really? =.= Time inputs must be in this format:\n"
-                            + "      HH:MM");
+                    final String timeInputError = "Really? =.= Time inputs must be in this format:\n"
+                            + "      HH:MM";
+                    throw new PaggroException(FOUR_SPACE + timeInputError);
                 }
             } else {
                 task = new Deadline(des, nDate, false);
             }
             nDate.addTask(task);
         } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
-            throw new PaggroException("    Really? =.= The use of the deadline command must be as follows:\n"
-                    + "      deadline <DESCRIPTION> /<DATE AND/OR TIME>");
+            final String deadlineFormatError = "Really? =.= The use of the deadline command must be as follows:\n"
+                    + "      deadline <DESCRIPTION> /<DATE AND/OR TIME>";
+            throw new PaggroException(FOUR_SPACE + deadlineFormatError);
         } catch (DateTimeParseException e) {
-            throw new PaggroException(("    Really? =.= Date inputs must be in this format:\n"
-                    + "      YYYY-MM-DD"));
+            final String dateInputError = "Really? =.= Date inputs must be in this format:\n"
+                    + "      YYYY-MM-DD";
+            throw new PaggroException(FOUR_SPACE + dateInputError);
         }
         lister.add(task);
         assert lister.getTasks().size() > 0 : "Tasks should have at least one item";
@@ -73,7 +78,7 @@ public class DeadlineCommand extends Command {
         try {
             storage.addToStorage(task);
         } catch (IOException e) {
-            throw new PaggroException("    Could not add to paggro.txt =.=");
+            throw new PaggroException(FOUR_SPACE + "Could not add to paggro.txt =.=");
         }
 
         return ui.showAdded(task) + "\n" + ui.showNumber(lister.getTasks().size());

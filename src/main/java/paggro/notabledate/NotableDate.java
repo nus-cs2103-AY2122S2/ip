@@ -10,6 +10,8 @@ import paggro.task.Task;
  * This class encapsulates a NotableDate object which contains a list of all the tasks on a given date.
  */
 public class NotableDate {
+    private static final String DATE_FORMAT = "d MMM yyyy";
+
     /** The date of the NotableDate object. */
     private LocalDate localDate;
     /** The list of tasks on the NotableDate. */
@@ -59,6 +61,6 @@ public class NotableDate {
      */
     @Override
     public String toString() {
-        return localDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        return localDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 }

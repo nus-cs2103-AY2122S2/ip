@@ -12,6 +12,8 @@ import paggro.ui.Ui;
  * This class encapsulates a mark command which marks a given task as done.
  */
 public class MarkCommand extends Command {
+    private static final String FOUR_SPACE = "    ";
+
     /**
      * Constructor of MarkCommand
      *
@@ -36,11 +38,13 @@ public class MarkCommand extends Command {
         try {
             index = Integer.parseInt(this.getParameters());
         } catch (NumberFormatException e) { // parameter was not a number
-            throw new PaggroException("    Really? Can you input an actual number this time... =.=");
+            final String invalidInputError = "Really? Can you input an actual number this time... =.=";
+            throw new PaggroException(FOUR_SPACE + invalidInputError);
         }
 
         if (index > lister.getTasks().size()) {
-            throw new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
+            final String invalidIndexError = "Really? There is no item indexed at " + index + "... =.=";
+            throw new PaggroException(FOUR_SPACE + invalidIndexError);
         }
 
         lister.mark(index);
@@ -49,7 +53,7 @@ public class MarkCommand extends Command {
         try {
             storage.markInStorage(index, task);
         } catch (IOException e) {
-            throw new PaggroException("    Could not mark in paggro.txt =.=");
+            throw new PaggroException(FOUR_SPACE + "Could not mark in paggro.txt =.=");
         }
 
         return ui.showMarked(task);

@@ -57,13 +57,16 @@ public class Deadline extends Task {
     public String parseTask() {
         DateTimeFormatter dFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter tFormat = DateTimeFormatter.ofPattern("HH:mm");
-        if (time == null) {
-            return "D | " + Boolean.toString(isDone()) + " | " + getDescription() + " | "
-                    + date.getLocalDate().format(dFormat);
-        } else {
-            return "D | " + Boolean.toString(isDone()) + " | " + getDescription() + " | "
-                    + date.getLocalDate().format(dFormat) + " | " + time.format(tFormat);
+        final String separator = " | ";
+
+        String parseStr = "D" + separator + isDone() + separator + getDescription() + separator
+                + date.getLocalDate().format(dFormat);
+
+        if (time != null) {
+            parseStr += time.format(tFormat);
         }
+
+        return parseStr;
     }
 
     /**
@@ -75,14 +78,18 @@ public class Deadline extends Task {
     public String toString() {
         String str;
         if (isDone()) {
-            str = "[D][X] " + getDescription() + " (by: " + date;
+            str = "[D][X] ";
         } else {
-            str = "[D][ ] " + getDescription() + " (by: " + date;
+            str = "[D][ ] ";
         }
+
+        final String dateString = " (by: " + date;
+        str += getDescription() + dateString;
 
         if (time != null) {
             str += " " + time.format(DateTimeFormatter.ofPattern("h:mma"));
         }
+
         str += ")";
         return str;
     }
