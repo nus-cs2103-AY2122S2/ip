@@ -101,10 +101,9 @@ public class TaskList {
      * @return List of serialized string.
      */
     public List<String> serializedList() {
-        List<String> encodedList = new ArrayList<>();
-        for (Task task : objectives) {
-            encodedList.add(task.serialize());
-        }
+        List<String> encodedList = objectives.stream()
+                .map(Task::serialize)
+                .collect(Collectors.toList());
         assert encodedList.size() == objectives.size();
         return encodedList;
     }
