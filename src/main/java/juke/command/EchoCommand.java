@@ -30,7 +30,7 @@ public class EchoCommand extends Command {
             return this;
         }
         this.checkParametersAndArguments();
-        if (this.isErranous()) {
+        if (this.isErroneous()) {
             return this;
         }
         this.message = this.getDefaultArgument();

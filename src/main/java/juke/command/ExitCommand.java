@@ -25,7 +25,7 @@ public class ExitCommand extends Command {
             return this;
         }
         this.checkParametersAndArguments();
-        if (this.isErranous()) {
+        if (this.isErroneous()) {
             return this;
         }
         this.juke.exit();

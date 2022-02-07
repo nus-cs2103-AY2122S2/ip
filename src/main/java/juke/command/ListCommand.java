@@ -27,7 +27,7 @@ public class ListCommand extends Command {
             return this;
         }
         this.checkParametersAndArguments();
-        if (this.isErranous()) {
+        if (this.isErroneous()) {
             return this;
         }
         try {

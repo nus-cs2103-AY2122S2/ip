@@ -79,7 +79,7 @@ public class AddCommand extends Command {
             return this;
         }
         this.checkParametersAndArguments();
-        if (this.isErranous()) {
+        if (this.isErroneous()) {
             return this;
         }
         try {

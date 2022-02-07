@@ -29,7 +29,7 @@ public class FindCommand extends Command {
             return this;
         }
         this.checkParametersAndArguments();
-        if (this.isErranous()) {
+        if (this.isErroneous()) {
             return this;
         }
         List<Task> tasks = this.juke.getTaskList().search(this.getDefaultArgument());

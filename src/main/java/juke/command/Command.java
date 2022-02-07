@@ -188,7 +188,7 @@ public abstract class Command {
      *
      * @return Boolean result.
      */
-    public boolean isErranous() {
+    public boolean isErroneous() {
         return this.result instanceof Result.Error;
     }
     
