@@ -14,8 +14,7 @@ public class MessageUi {
      * @return Welcome message.
      */
     public String showWelcomeMessage() {
-        return ("Ello, my name is Ekud, "
-                + "your personal task tracking bot.");
+        return "Ello, my name is Ekud, your personal task tracking bot.";
     }
 
     /**
@@ -24,8 +23,8 @@ public class MessageUi {
      * @return Cannot find file message.
      */
     public String showFileNotFoundMessage() {
-        return ("Oh no, looks like I have some trouble finding your task list.\n"
-                + "Fred not, Ekud has created the file for you!");
+        return "Oh no, looks like I have some trouble finding your task list.\n"
+                + "Fred not, Ekud has created the file for you!";
     }
 
     /**
@@ -34,9 +33,8 @@ public class MessageUi {
      * @return Can find file message.
      */
     public String showFileFoundMessage(TaskList tasks) {
-        return ("Task list successfully loaded\n"
-                + "You currently have " + tasks.getTaskSize()
-                + " task(s) in your list.");
+        return "Task list successfully loaded\n"
+                + "You currently have " + tasks.getTaskSize() + " task(s) in your list.";
     }
 
     /**
@@ -44,7 +42,7 @@ public class MessageUi {
      * @return Exit message.
      */
     public String showExitMessage() {
-        return ("Goodbye, feel free to use Ekud anytime!");
+        return "Goodbye, feel free to use Ekud anytime!";
     }
 
     /**
@@ -52,9 +50,9 @@ public class MessageUi {
      * @return Task added message.
      */
     public String showAddTaskMessage(TaskList taskList, Task task) {
-        return ("Got it. I've added this task: \n"
+        return "Got it. I've added this task: \n"
                 + task.toString() + "\nNow you have "
-                + taskList.getTaskSize() + " tasks in the list.");
+                + taskList.getTaskSize() + " tasks in the list.";
     }
 
     /**
@@ -62,8 +60,7 @@ public class MessageUi {
      * @return Task mark message.
      */
     public String showMarkMessage(Task task) {
-        return ("Nice! I've marked this task as done: \n"
-                + task.toString());
+        return "Nice! I've marked this task as done: \n" + task.toString();
     }
 
     /**
@@ -71,8 +68,7 @@ public class MessageUi {
      * @return Task unmark message.
      */
     public String showUnMarkMessage(Task task) {
-        return ("OK, I've marked this task as not done yet: \n"
-                + task.toString());
+        return "OK, I've marked this task as not done yet: \n" + task.toString();
     }
 
     /**
@@ -80,9 +76,9 @@ public class MessageUi {
      * @return Task delete message.
      */
     public String showDeleteMessage(Task task, int taskSize) {
-        return ("Noted. I've removed this task:\n"
+        return "Noted. I've removed this task:\n"
                 + task.toString() + "\nNow you have "
-                + taskSize + " tasks in the list.");
+                + taskSize + " tasks in the list.";
     }
 
     /**
@@ -90,7 +86,7 @@ public class MessageUi {
      * @return Empty task list message.
      */
     public String showEmptyListMessage() {
-        return ("You do not have any tasks in your list!");
+        return "You do not have any tasks in your list!";
     }
 
     /**
@@ -110,22 +106,15 @@ public class MessageUi {
      * @return Clear task list confirmation message.
      */
     public String showClearListConfirmationMessage() {
-        return ("Are you sure you want Ekud to clear your task list?\n"
-                + "Enter \"y\" if you would like to clear your task list, enter any other "
-                + "characters if you would like to cancel this command");
+        return "Are you sure you want Ekud to clear your task list?";
     }
 
     /**
      * Outputs a message when user confirms to clear task list.
-     * @param response User's input.
      * @return Task list cleared message.
      */
-    public String showClearListMessage(String response) {
-        if (response.equals("y")) {
-            return ("Got it, Ekud has cleared your task list");
-        } else {
-            return ("Very well");
-        }
+    public String showClearListMessage() {
+            return "Got it, Ekud has cleared your task list";
     }
 }
 

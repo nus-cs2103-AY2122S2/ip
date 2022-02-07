@@ -10,12 +10,12 @@ import java.util.HashMap;
  */
 public class DukeCommand {
 
-    public enum DukeCommands {
+    private enum DukeCommands {
         TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE, FIND, CLEAR
 
     }
 
-    public enum DescriptiveDukeCommands {
+    private enum DescriptiveDukeCommands {
         TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND
     }
 

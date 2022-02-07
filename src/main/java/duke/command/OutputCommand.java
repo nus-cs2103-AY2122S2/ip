@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.Duke;
 import duke.Storage;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.MessageUi;
 
@@ -34,9 +36,9 @@ public class OutputCommand implements Command {
      * @param ui      Ui object.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage, MessageUi ui) {
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
         if (tasks.getTaskSize() == 0) {
-            return ui.showEmptyListMessage();
+            throw new DukeException(ui.showEmptyListMessage());
         } else {
             return ui.showListMessage(tasks);
         }
