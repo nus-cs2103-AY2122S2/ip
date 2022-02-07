@@ -25,6 +25,7 @@ public class Storage {
      * @param taskList tasklist to write all data to file to
      */
     public static void writeAllToFile(TaskList taskList) {
+        assert taskList.tasklist != null : "Invalid: tasklist is null! (function called - writeAllToFile())";
         try {
             FileWriter fw = new FileWriter(saveData);
             for (int i = 0; i < Task.totalTask; i++) {

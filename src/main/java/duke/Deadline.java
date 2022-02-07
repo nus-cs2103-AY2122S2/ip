@@ -25,6 +25,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert (name != "" || name != null) : "Invalid: Deadline has no name";
+        assert (time != "" || time != null) : "Invalid: Deadline has no time";
         String s = String.format("%d. [D][%s] %s (by: %s)\n", number + 1, getStatus(), name, time);
         return s;
     }
