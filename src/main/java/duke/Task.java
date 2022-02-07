@@ -20,7 +20,7 @@ public class Task {
     /**
      * Returns a String of task description.
      *
-     * @return
+     * @return String of task description.
      */
     public String getDescription() {
         return this.description;
@@ -39,7 +39,7 @@ public class Task {
     /**
      * Returns a String when save.
      *
-     * @return
+     * @return String to save to disk.
      */
     public String toStringForSave() {
         return (isDone ? "# 1 # " : "# 0 # ") + this.description;
@@ -48,11 +48,10 @@ public class Task {
     /**
      * Returns a String representation of Task.
      *
-     * @return
+     * @return String that represent the task.
      */
     @Override
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + this.description;
     }
-
 }
