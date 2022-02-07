@@ -68,7 +68,7 @@ public class UiTest {
     @Test
     @DisplayName("Marked task message should be shown")
     public void showMarkedMessage() {
-        String marked = "Nice! I've marked the following task as done:\n\n ";
+        String marked = "Nice! I've marked the following task as done:\n\n";
         assertEquals(marked, ui.marked(1));
     }
 
