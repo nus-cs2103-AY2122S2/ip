@@ -10,6 +10,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline
+     *
      * @param d for task
      * @param due deadline
      */
@@ -21,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline
+     *
      * @param d for task
      * @param done check for done task
      * @param due deadline
@@ -33,6 +35,7 @@ public class Deadline extends Task {
 
     /**
      * return deadline
+     *
      * @return a string which represents the time
      */
     public String getDue() {
@@ -41,6 +44,7 @@ public class Deadline extends Task {
 
     /**
      * Overriding ToString method
+     *
      * @return
      */
     @Override

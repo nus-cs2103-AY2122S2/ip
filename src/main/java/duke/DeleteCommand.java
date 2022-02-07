@@ -10,6 +10,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand
+     *
      * @param index index of the task in the task list
      */
     public DeleteCommand(int index) {
@@ -18,6 +19,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Execute this delete command
+     *
      * @param taskList a list to store the tasks
      * @param ui to display output
      * @param storage to store tasks
@@ -38,6 +40,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Method to check for exit command
+     *
      * @return A boolean to check if an exit command is entered
      */
     public static boolean isExit() {

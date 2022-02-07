@@ -10,6 +10,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for DoneCommand
+     *
      * @param index of the task in the task list
      */
     public DoneCommand(int index) {
@@ -18,6 +19,7 @@ public class DoneCommand extends Command {
 
     /**
      * execute delete command
+     *
      * @param taskList a list to add all the tasks
      * @param ui to display output
      * @param storage to store task
@@ -37,6 +39,7 @@ public class DoneCommand extends Command {
 
     /**
      * Method to check for exit command
+     *
      * @return A boolean to check if an exit command is entered
      */
     public static boolean isExit() {

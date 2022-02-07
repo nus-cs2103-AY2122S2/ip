@@ -6,6 +6,7 @@ package duke;
 public class ExitCommand extends Command {
     /**
      * Execute exit command
+     *
      * @param taskList list to store all tasks
      * @param ui display output
      * @param storage store tasks
@@ -18,6 +19,7 @@ public class ExitCommand extends Command {
 
     /**
      * Method to check for exit command
+     *
      * @return A boolean to check if an exit command is entered
      */
     public static boolean isExit() {

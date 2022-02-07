@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * method to load tasks from file
+     *
      * @return a list of tasks loaded from files
      */
     public List<Task> load() {
@@ -57,6 +58,7 @@ public class Storage {
 
     /**
      * method to write to file
+     *
      * @param tasks tasks to be written to the file
      * @throws IOException
      */

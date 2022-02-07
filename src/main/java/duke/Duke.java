@@ -30,6 +30,7 @@ public class Duke extends Application {
 
     /**
      * constructor for Duke
+     *
      * @param filePath path to source file
      */
     public Duke(String filePath) {
@@ -129,6 +130,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
