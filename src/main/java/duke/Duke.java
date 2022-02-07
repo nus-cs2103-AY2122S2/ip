@@ -23,7 +23,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage("Data/tasks.txt");
         try {
-            taskList = new TaskList(storage.load());
+            taskList = new TaskList(storage, storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
             taskList = new TaskList();
@@ -42,7 +42,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            taskList = new TaskList(storage.load());
+            taskList = new TaskList(storage, storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
             taskList = new TaskList();
@@ -70,20 +70,11 @@ public class Duke {
                     int taskNumber = Integer.parseInt(temp[1]);
                     switch (temp[0]) {
                     case "mark":
-                        Task currTask = tasks.get(taskNumber - 1);
-                        currTask.setDone();
-                        storage.save(taskList);
-                        return "Nice! I've marked this task as done: \n" + "  " + currTask;
+                        return taskList.mark(taskNumber);
                     case "unmark":
-                        Task t = tasks.get(taskNumber - 1);
-                        t.setNotDone();
-                        storage.save(taskList);
-                        return "OK, I've marked this task as not done yet:: \n" + "  " + t;
+                        return taskList.unmark(taskNumber);
                     case "delete":
-                        Task task = tasks.get(taskNumber - 1);
-                        tasks.remove(taskNumber - 1);
-                        storage.save(taskList);
-                        return "Okay, I have deleted " + task;
+                        return taskList.delete(taskNumber);
                     default:
                         return "Invallid command!";
                     }
@@ -91,19 +82,13 @@ public class Duke {
                     switch (temp[0]) {
                     case "todo":
                         ToDo todo = new ToDo(str.substring(5));
-                        taskList.addTask(todo);
-                        storage.save(taskList);
-                        return "Added: " + todo;
+                        return taskList.addTask(todo);
                     case "event":
                         Event event = new Event(str.substring(6));
-                        taskList.addTask(event);
-                        storage.save(taskList);
-                        return "Added: " + event;
+                        return taskList.addTask(event);
                     case "deadline":
                         Deadline deadline = new Deadline(str.substring(9));
-                        taskList.addTask(deadline);
-                        storage.save(taskList);
-                        return "Added: " + deadline;
+                        return taskList.addTask(deadline);
                     case "find":
                         return taskList.find(str.substring(5));
                     default:

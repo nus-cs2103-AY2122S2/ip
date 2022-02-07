@@ -2,23 +2,27 @@ package tasks;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import duke.DukeException;
+import duke.Storage;
 
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();
+    private Storage storage;
 
     /**
      * Constructor for TaskList.
-     * @param f The file to load the saved lists of tasks from.
+     * @param file The file to load the saved lists of tasks from.
      * @throws DukeException
      */
-    public TaskList(File f) throws DukeException {
+    public TaskList(Storage storage, File file) throws DukeException {
+        this.storage = storage;
         try {
-            Scanner s = new Scanner(f);
+            Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 String str = s.nextLine();
                 String[] strings = str.split(",");
@@ -69,10 +73,12 @@ public class TaskList {
     /**
      * Adds a task to the current list of tasks.
      *
-     * @param t The task to be added.
+     * @param task The task to be added.
      */
-    public void addTask(Task t) {
-        tasks.add(t);
+    public String addTask(Task task) throws IOException {
+        tasks.add(task);
+        storage.save(this);
+        return "Added: " + task;
     }
 
     /**
@@ -86,6 +92,29 @@ public class TaskList {
         }
         return list;
     }
+
+    public String mark(int taskNumber) throws IOException {
+        Task currTask = tasks.get(taskNumber - 1);
+        currTask.setDone();
+        storage.save(this);
+        return "Nice! I've marked this task as done: \n" + "  " + currTask;
+    }
+
+    public String unmark(int taskNumber) throws IOException {
+        Task currTask = tasks.get(taskNumber - 1);
+        currTask.setNotDone();
+        storage.save(this);
+        return "OK, I've marked this task as not done yet:: \n" + "  " + currTask;
+    }
+
+    public String delete(int taskNumber) throws IOException {
+        Task currTask = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
+        storage.save(this);
+        return "Okay, I have deleted " + currTask;
+    }
+
+
 
     /**
      * Finds all the tasks containing the keyword(s) from user input.
