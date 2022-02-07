@@ -4,8 +4,19 @@ import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Represents a class that parses the users' commands.
+ */
 public class Parser {
 
+    /**
+     * Returns the command that needed to be executed.
+     *
+     * @param fullCommand the user's full input to the chatbot.
+     * @param taskList a list of the tasks that the user have.
+     * @return the command to be executed.
+     * @throws DukeException if there is an error in the command.
+     */
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
         String[] commandAndDetails = fullCommand.split(" ", 2);
         String command = commandAndDetails[0];

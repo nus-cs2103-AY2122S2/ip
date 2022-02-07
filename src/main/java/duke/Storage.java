@@ -4,16 +4,26 @@ import duke.task.*;
 
 import java.io.*;
 
+/**
+ * Represents a storage for data to be saved.
+ */
 public class Storage {
     private String dataPath;
     private File file;
 
-
+    /**
+     * Constructor for a Storage object
+     * @param dataPath
+     */
     public Storage(String dataPath) {
         this.dataPath = dataPath;
         checkFolderAndFile();
     }
 
+    /**
+     * Checks if a data directory and file specified by data path exist.
+     * If not, create a new one.
+     */
     public void checkFolderAndFile() {
         try {
             File directory = new File("data");
@@ -29,6 +39,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks of the user into a file.
+     *
+     * @param taskList a list of the user's tasks.
+     */
     public void writeToFile(TaskList taskList) {
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(this.file, false));
@@ -51,6 +66,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the tasks that the user has from the saved file.
+     *
+     * @return a list of the user's tasks.
+     */
     public TaskList readFromFile() {
         TaskList taskList = new TaskList();
         try {
