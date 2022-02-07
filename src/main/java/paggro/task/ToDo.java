@@ -30,7 +30,8 @@ public class ToDo extends Task {
      */
     @Override
     public String parseTask() {
-        return "T | " + Boolean.toString(isDone()) + " | " + getDescription();
+        final String separator = " | ";
+        return "T" + separator + Boolean.toString(isDone()) + separator + getDescription();
     }
 
     /**

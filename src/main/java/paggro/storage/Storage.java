@@ -24,9 +24,15 @@ import paggro.task.ToDo;
  * This class encapsulates a Storage object that stores previously input tasks.
  */
 public class Storage {
-    /** The file in which the task data is stored. */
+    private static final String FOUR_SPACE = "    ";
+
+    /**
+     * The file in which the task data is stored.
+     */
     private File paggroData;
-    /** The path in which the file is stored */
+    /**
+     * The path in which the file is stored
+     */
     private String filePath;
 
     /**
@@ -51,15 +57,16 @@ public class Storage {
                 new File(Paths.get("").toAbsolutePath() + "/data/").mkdir();
                 paggroData.createNewFile();
             } catch (IOException e) {
-                throw new PaggroException("    Could not create paggro.txt");
+                throw new PaggroException(FOUR_SPACE + "Could not create paggro.txt");
             }
-            throw new PaggroException("    paggro.txt not found. Initializing new file... =.=");
+            final String missingDataFile = "paggro.txt not found. Initializing new file... =.=";
+            throw new PaggroException(FOUR_SPACE + missingDataFile);
         } else {
             Scanner sc;
             try {
                 sc = new Scanner(paggroData);
             } catch (FileNotFoundException e) {
-                throw new PaggroException("    Could not find paggro.txt");
+                throw new PaggroException(FOUR_SPACE + "Could not find paggro.txt");
             }
             ArrayList<Task> tasks = new ArrayList<>();
             HashMap<LocalDate, NotableDate> dateMap = new HashMap<>();
@@ -74,54 +81,54 @@ public class Storage {
                 NotableDate nDate;
                 Task t;
                 switch (type) {
-                case 'T':
-                    details = taskString.split(" \\| ", 3);
-                    isDone = Boolean.parseBoolean(details[1]);
-                    des = details[2];
-                    tasks.add(new ToDo(des, isDone));
-                    break;
-                case 'E':
-                    details = taskString.split(" \\| ");
-                    isDone = Boolean.parseBoolean(details[1]);
-                    des = details[2];
-                    lDate = LocalDate.parse(details[3]);
-                    if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
-                        nDate = new NotableDate(lDate);
-                        dateMap.put(lDate, nDate);
-                    } else {
-                        nDate = dateMap.get(lDate);
-                    }
-                    if (details.length > 4) {
-                        lTime = LocalTime.parse(details[4]);
-                        t = new Event(des, nDate, lTime, isDone);
-                    } else {
-                        t = new Event(des, nDate, isDone);
-                    }
-                    tasks.add(t);
-                    nDate.addTask(t);
-                    break;
-                case 'D':
-                    details = taskString.split(" \\| ");
-                    isDone = Boolean.parseBoolean(details[1]);
-                    des = details[2];
-                    lDate = LocalDate.parse(details[3]);
-                    if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
-                        nDate = new NotableDate(lDate);
-                        dateMap.put(lDate, nDate);
-                    } else {
-                        nDate = dateMap.get(lDate);
-                    }
-                    if (details.length > 4) {
-                        lTime = LocalTime.parse(details[4]);
-                        t = new Deadline(des, nDate, lTime, isDone);
-                    } else {
-                        t = new Deadline(des, nDate, isDone);
-                    }
-                    tasks.add(t);
-                    nDate.addTask(t);
-                    break;
-                default:
-                    throw new PaggroException("    File format error!");
+                    case 'T':
+                        details = taskString.split(" \\| ", 3);
+                        isDone = Boolean.parseBoolean(details[1]);
+                        des = details[2];
+                        tasks.add(new ToDo(des, isDone));
+                        break;
+                    case 'E':
+                        details = taskString.split(" \\| ");
+                        isDone = Boolean.parseBoolean(details[1]);
+                        des = details[2];
+                        lDate = LocalDate.parse(details[3]);
+                        if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
+                            nDate = new NotableDate(lDate);
+                            dateMap.put(lDate, nDate);
+                        } else {
+                            nDate = dateMap.get(lDate);
+                        }
+                        if (details.length > 4) {
+                            lTime = LocalTime.parse(details[4]);
+                            t = new Event(des, nDate, lTime, isDone);
+                        } else {
+                            t = new Event(des, nDate, isDone);
+                        }
+                        tasks.add(t);
+                        nDate.addTask(t);
+                        break;
+                    case 'D':
+                        details = taskString.split(" \\| ");
+                        isDone = Boolean.parseBoolean(details[1]);
+                        des = details[2];
+                        lDate = LocalDate.parse(details[3]);
+                        if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
+                            nDate = new NotableDate(lDate);
+                            dateMap.put(lDate, nDate);
+                        } else {
+                            nDate = dateMap.get(lDate);
+                        }
+                        if (details.length > 4) {
+                            lTime = LocalTime.parse(details[4]);
+                            t = new Deadline(des, nDate, lTime, isDone);
+                        } else {
+                            t = new Deadline(des, nDate, isDone);
+                        }
+                        tasks.add(t);
+                        nDate.addTask(t);
+                        break;
+                    default:
+                        throw new PaggroException(FOUR_SPACE + "File format error!");
                 }
             }
             return new Lister(tasks, dateMap);
@@ -151,10 +158,11 @@ public class Storage {
      * @throws IOException
      */
     public void deleteFromStorage(int lineNum) throws IOException {
-        File updated = new File("./data/updated_paggro.txt");
+        final String updatedFilePath = "./data/updated_paggro.txt";
+        File updatedFile = new File(updatedFilePath);
         Scanner sc = new Scanner(paggroData);
-        updated.createNewFile();
-        FileWriter fw = new FileWriter(updated);
+        updatedFile.createNewFile();
+        FileWriter fw = new FileWriter(updatedFile);
         int j = 1;
         while (sc.hasNext()) {
             String currLine = sc.nextLine();
@@ -165,22 +173,23 @@ public class Storage {
         }
         fw.close();
         Files.delete(Paths.get(filePath));
-        Files.copy(Paths.get("./data/updated_paggro.txt"), Paths.get(filePath));
-        Files.delete(Paths.get("./data/updated_paggro.txt"));
+        Files.copy(Paths.get(updatedFilePath), Paths.get(filePath));
+        Files.delete(Paths.get(updatedFilePath));
     }
 
     /**
      * Marks the task at a given line of the file as done in storage.
      *
      * @param lineNum The line number containing the task to be marked.
-     * @param task The task to be marked as done.
+     * @param task    The task to be marked as done.
      * @throws IOException
      */
     public void markInStorage(int lineNum, Task task) throws IOException {
-        File updated = new File("./data/updated_paggro.txt");
+        final String updatedFilePath = "./data/updated_paggro.txt";
+        File updatedFile = new File(updatedFilePath);
         Scanner sc = new Scanner(paggroData);
-        updated.createNewFile();
-        FileWriter fw = new FileWriter(updated);
+        updatedFile.createNewFile();
+        FileWriter fw = new FileWriter(updatedFile);
         int j = 1;
         while (sc.hasNext()) {
             String currLine = sc.nextLine();
@@ -193,22 +202,22 @@ public class Storage {
         }
         fw.close();
         Files.delete(Paths.get(filePath));
-        Files.copy(Paths.get("./data/updated_paggro.txt"), Paths.get(filePath));
-        Files.delete(Paths.get("./data/updated_paggro.txt"));
+        Files.copy(Paths.get(updatedFilePath), Paths.get(filePath));
+        Files.delete(Paths.get(updatedFilePath));
     }
 
     /**
      * Unmarks the task at a given line of the file as not done in storage.
      *
      * @param lineNum The line number containing the task to be unmarked.
-     * @param task The task to be unmarked as done.
+     * @param task    The task to be unmarked as done.
      * @throws IOException
      */
     public void unmarkInStorage(int lineNum, Task task) throws IOException {
-        File updated = new File("./data/updated_paggro.txt");
+        File updatedFile = new File("./data/updated_paggro.txt");
         Scanner sc = new Scanner(paggroData);
-        updated.createNewFile();
-        FileWriter fw = new FileWriter(updated);
+        updatedFile.createNewFile();
+        FileWriter fw = new FileWriter(updatedFile);
         int j = 1;
         while (sc.hasNext()) {
             String currLine = sc.nextLine();

@@ -12,6 +12,8 @@ import paggro.ui.Ui;
  * This class encapsulates a unmark command which unmarks a given task as not done.
  */
 public class UnmarkCommand extends Command {
+    private static final String FOUR_SPACE = "    ";
+
     /**
      * Constructor of UnmarkCommand
      *
@@ -36,11 +38,13 @@ public class UnmarkCommand extends Command {
         try {
             index = Integer.parseInt(this.getParameters());
         } catch (NumberFormatException e) { // parameter was not a number
-            throw new PaggroException("    Really? Can you input an actual number this time... =.=");
+            final String invalidInputError = "Really? Can you input an actual number this time... =.=";
+            throw new PaggroException(FOUR_SPACE + invalidInputError);
         }
 
         if (index > lister.getTasks().size()) {
-            throw new PaggroException("    Really? There is no item indexed at " + index + "... =.=");
+            final String invalidIndexError = "Really? There is no item indexed at " + index + "... =.=";
+            throw new PaggroException(FOUR_SPACE + invalidIndexError);
         }
 
         lister.unmark(index);

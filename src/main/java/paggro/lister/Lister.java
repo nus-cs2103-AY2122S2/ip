@@ -46,6 +46,7 @@ public class Lister {
 
     /**
      * Returns the dateMap of the Lister object.
+     *
      * @return HashMap of the dateMap.
      */
     public HashMap<LocalDate, NotableDate> getDateMap() {

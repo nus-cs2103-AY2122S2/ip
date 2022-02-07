@@ -72,6 +72,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Displays welcome message.
+     */
     @FXML
     void greet() {
         dialogContainer.getChildren().addAll(

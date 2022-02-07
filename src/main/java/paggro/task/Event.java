@@ -57,13 +57,16 @@ public class Event extends Task {
     public String parseTask() {
         DateTimeFormatter dFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter tFormat = DateTimeFormatter.ofPattern("HH:mm");
-        if (time == null) {
-            return "E | " + Boolean.toString(isDone()) + " | " + getDescription() + " | "
-                    + date.getLocalDate().format(dFormat);
-        } else {
-            return "E | " + Boolean.toString(isDone()) + " | " + getDescription() + " | "
-                    + date.getLocalDate().format(dFormat) + " | " + time.format(tFormat);
+        final String separator = " | ";
+
+        String parseStr = "E" + separator + isDone() + separator + getDescription() + separator
+                + date.getLocalDate().format(dFormat);
+
+        if (time != null) {
+            parseStr += time.format(tFormat);
         }
+
+        return parseStr;
     }
 
     /**
@@ -75,15 +78,20 @@ public class Event extends Task {
     public String toString() {
         String str;
         if (isDone()) {
-            str = "[E][X] " + getDescription() + " (at: " + date;
+            str = "[E][X] ";
         } else {
-            str = "[E][ ] " + getDescription() + " (at: " + date;
+            str = "[E][ ] ";
         }
+
+        final String dateString = " (at: " + date;
+        str += getDescription() + dateString;
 
         if (time != null) {
             str += " " + time.format(DateTimeFormatter.ofPattern("h:mma"));
         }
+
         str += ")";
         return str;
     }
 }
+
