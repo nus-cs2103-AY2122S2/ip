@@ -149,6 +149,11 @@ public class Storage {
             initTask = null;
             break;
         }
+
+        // Default case should plausibly be never used, as Task objects are stored as defined by toSaveData()
+        // method. Assertion should be triggered when new subclasses of Task are implemented but not tracked by Storage.
+        assert initTask != null;
+
         return initTask;
     }
 

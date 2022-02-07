@@ -71,10 +71,14 @@ public class Ui {
             index++;
         }
 
-        // If the taskList is empty, return with default message
+        // if the taskList is empty, return with default message
         if (taskList.size() == 0) {
             formatString.append(NO_TASKS);
         }
+
+        // formatString must contain informative text to display to user
+        assert !formatString.toString().equals("");
+
         return formatString.toString();
     }
 
