@@ -29,7 +29,7 @@ public abstract class Task {
         if (recursiveTag != null) {
             return recursiveTag.getLabel();
         } else {
-            return " ";
+            return "";
         }
     }
 
@@ -45,7 +45,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.getStatusIcon(), this.getRecursiveFrequency(),
+        return String.format("[%s]%s %s", this.getStatusIcon(), this.getRecursiveFrequency(),
                 this.description);
     }
 }

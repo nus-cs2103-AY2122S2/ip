@@ -32,15 +32,15 @@ public enum RecursiveTag {
     public String getLabel() {
         switch (this) {
         case DAILY:
-            return "Daily";
+            return "[Daily]";
         case WEEKLY:
-            return "Weekly";
+            return "[Weekly]";
         case MONTHLY:
-            return "Monthly";
+            return "[Monthly]";
         case BIWEEKLY:
-            return "Biweekly";
+            return "[Biweekly]";
         default:
-            return "??";
+            return "[??]";
         }
     }
 }
