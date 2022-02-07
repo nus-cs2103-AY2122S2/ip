@@ -12,6 +12,8 @@ public class TaskList {
     static final String UNMARK = "The covenant have reclaimed these locations\n";
     static final String ADDED = "Just one more thing to do\n";
     static final String DELETED = "It's wiped off the map\n";
+    static final String FOUND = "Here are the tasks that match your request\n";
+    static final String NOTHING = "I couldn't find anything that matched\n";
 
     private final ArrayList<Task> tasklist;
 
@@ -114,6 +116,28 @@ public class TaskList {
             System.out.println(DELETED + "1 item");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No such item exists");
+        }
+    }
+    /**
+     * Allows the user to find a list of tasks that contain a fixed String
+     *
+     * @param name Does smth
+     */
+    public void find(String name) {
+        int size = tasklist.size();
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            Task checking = tasklist.get(i);
+            String testname = checking.getDescription();
+            if (testname.contains(name)) {
+                System.out.println(checking);
+                counter++;
+            }
+        }
+        if (counter == 0) {
+            System.out.println(NOTHING);
+        } else {
+            System.out.println(FOUND);
         }
     }
 }
