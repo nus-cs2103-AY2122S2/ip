@@ -40,15 +40,17 @@ public class ShowAllTasksOnSameDateCommand extends Command {
      * @param storage the storage to operate on
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
-        StringBuilder tasksOnSameDate = new StringBuilder();
-        int numberOfTasksOnSameDate = 0;
+        int numberOfTasksOnSameDate = (int) taskList.getTaskList()
+                .stream()
+                .filter(task -> !(task instanceof Todo) && isMatchingDateTime(task, dateTime))
+                .count();
 
-        for (Task task: taskList.getTaskList()) {
-            if (!(task instanceof Todo) && isMatchingDateTime(task, dateTime)) {
-                numberOfTasksOnSameDate++;
-                tasksOnSameDate.append(task).append("\n");
-            }
-        }
+        StringBuilder tasksOnSameDate = new StringBuilder();
+        taskList.getTaskList()
+                .stream()
+                .filter(task -> !(task instanceof Todo) && isMatchingDateTime(task, dateTime))
+                .forEach(task -> tasksOnSameDate.append(task).append("\n"));
+
         if (numberOfTasksOnSameDate == 0) {
             /* no tasks found */
             throw new CortanaException("No task found on " + dateTimeString + "!");

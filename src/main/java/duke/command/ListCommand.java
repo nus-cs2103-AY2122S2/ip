@@ -28,12 +28,6 @@ public class ListCommand extends Command {
             }
             return tasksToList.toString();
         }
-        for (int i = 0; i < taskList.getTaskList().size(); i++) {
-            Task task = taskList.getTaskList().get(i);
-            //tasks += ui.listed(i + 1, task);
-            tasksToList.append(ui.listed(i + 1, task)).append("\n");
-        }
-        return tasksToList.toString();
     }
 
     @Override

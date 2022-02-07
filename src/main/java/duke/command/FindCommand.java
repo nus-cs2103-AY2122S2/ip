@@ -2,7 +2,6 @@ package duke.command;
 
 import java.util.Objects;
 
-import duke.task.Task;
 import duke.utils.CortanaException;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -24,14 +23,17 @@ public class FindCommand extends Command {
      * @param storage the storage to operate on
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
-        int numberOfTasksMatchKeyword = 0;
+        int numberOfTasksMatchKeyword = (int) taskList.getTaskList()
+                .stream()
+                .filter(task -> task.getDescription().contains(keyWord))
+                .count();
+
         StringBuilder tasksWithSameKeyword = new StringBuilder();
-        for (Task task: taskList.getTaskList()) {
-            if (task.getDescription().contains(keyWord)) {
-                numberOfTasksMatchKeyword++;
-                tasksWithSameKeyword.append(task).append("\n");
-            }
-        }
+        taskList.getTaskList()
+                .stream()
+                .filter(task -> task.getDescription().contains(keyWord))
+                .forEach(task -> tasksWithSameKeyword.append(task).append("\n"));
+
         if (numberOfTasksMatchKeyword == 0) {
             throw new CortanaException("No task found with keyword " + keyWord + "!");
         } else {
