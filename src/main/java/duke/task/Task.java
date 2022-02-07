@@ -66,6 +66,14 @@ public abstract class Task {
     }
 
     /**
+     * Setter for title
+     * @param newTitle New title to replace with
+     */
+    public void setTitle(String newTitle) {
+        this.title = newTitle;
+    }
+
+    /**
      * Concatenate task to general format for saving to file.
      *
      * @return Stirng for file saving
