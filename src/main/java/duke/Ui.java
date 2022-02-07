@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -107,4 +108,21 @@ public class Ui {
         System.out.println(Ui.line());
     }
 
+    /**
+     * Formatted output for tasks found by a search term
+     *
+     * @param taskList List of found tasks
+     */
+
+    public static void printFindTask(ArrayList<Task> taskList) {
+        String FOUND = "Matching tasks:";
+        System.out.println(Ui.line());
+        System.out.println(FOUND);
+
+        for (Task t : taskList) {
+            System.out.println(t.toString());
+        }
+
+        System.out.println(Ui.line());
+    }
 }

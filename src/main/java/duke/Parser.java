@@ -61,6 +61,8 @@ public class Parser {
                 return new AddTaskCommand(commandParameters, "event");
             } else if (commandWord.equals("delete")) {
                 return new DeleteCommand(commandParameters);
+            } else if (commandWord.equals("find")) {
+                return new FindCommand(commandParameters);
             } else {
                 throw new DukeException();
             }
