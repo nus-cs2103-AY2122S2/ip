@@ -4,16 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import chatbot.datetime.Timestamp;
 import chatbot.exception.ChatBotException;
+import chatbot.list.ChatBotList;
 import chatbot.task.Deadline;
 import chatbot.task.Event;
 import chatbot.task.Task;
@@ -23,65 +23,30 @@ import chatbot.task.ToDo;
 /**
  * Represents a list of Tasks managed by ChatBot for the user.
  */
-public class TaskList {
+public class TaskList extends ChatBotList<Task> {
 
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
 
-    private final List<Task> list;
     private final Set<String> set;
-    private final Set<String> validTypes;
+    private final Set<String> validTypes =
+            Stream.of(TODO, DEADLINE, EVENT).collect(Collectors.toCollection(HashSet::new));
 
     /**
      * Instantiates a new Task list.
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        super();
         this.set = new HashSet<>();
-
-        this.validTypes = new HashSet<>();
-        this.validTypes.add(TODO);
-        this.validTypes.add(DEADLINE);
-        this.validTypes.add(EVENT);
     }
 
     /**
-     * Gets the task at the specified index.
-     *
-     * @param index The index of the task
-     * @return The task
+     * Instantiates a new Task list with a given list of tasks.
      */
-    public Task getTask(int index) {
-        return list.get(index);
-    }
-
-    /**
-     * Gets the number of tasks currently in this TaskList.
-     *
-     * @return The size of the TaskList.
-     */
-    public int getNumTasks() {
-        return list.size();
-    }
-
-    /**
-     * Determines whether this TaskList is empty or not.
-     *
-     * @return True if this TaskList is empty. Else, return false.
-     */
-    public boolean isEmpty() {
-        return list.isEmpty();
-    }
-
-    /**
-     * Determines whether the given index is valid or not.
-     *
-     * @param index The index input by the user.
-     * @return True if 0 < index < size of TaskList. Else, return false.
-     */
-    public Boolean isValidIndex(int index) {
-        return index >= 0 && index < list.size();
+    public TaskList(List<Task> list) {
+        super(list);
+        this.set = new HashSet<>();
     }
 
     /**
@@ -100,17 +65,17 @@ public class TaskList {
                 String datetime = data.length == 4 ? data[3] : "";
                 switch (type) {
                 case "T":
-                    list.add(new ToDo(title, done));
+                    insert(new ToDo(title, done));
                     set.add(title);
                     break;
                 case "D":
-                    list.add(
+                    insert(
                             new Deadline(title, done, new Timestamp(datetime))
                     );
                     set.add(title);
                     break;
                 case "E":
-                    list.add(
+                    insert(
                             new Event(title, done, new Timestamp(datetime))
                     );
                     set.add(title);
@@ -138,6 +103,7 @@ public class TaskList {
      * @throws ChatBotException If I/O error occurs while writing to the save file.
      */
     public void save(File saveFile) throws ChatBotException {
+        List<Task> list = getList();
         try (FileWriter fw = new FileWriter(saveFile)) {
             for (Task t : list) {
                 String type = t.getType();
@@ -215,11 +181,11 @@ public class TaskList {
                 } else {
                     Timestamp by = new Timestamp(other);
                     Deadline deadline = new Deadline(title, by);
-                    list.add(deadline);
+                    insert(deadline);
                     set.add(title);
                     return String.format(
                         "This deadline has been added to your task list!%n             %d. %s",
-                        getNumTasks(),
+                        getNumItems(),
                         deadline
                     );
                 }
@@ -232,11 +198,11 @@ public class TaskList {
                 } else {
                     Timestamp at = new Timestamp(other);
                     Event event = new Event(title, at);
-                    list.add(event);
+                    insert(event);
                     set.add(title);
                     return String.format(
                         "This event has been added to your task list!%n             %d. %s",
-                        getNumTasks(),
+                        getNumItems(),
                         event
                     );
                 }
@@ -270,11 +236,11 @@ public class TaskList {
             );
         }
         ToDo todo = new ToDo(title);
-        list.add(todo);
+        insert(todo);
         set.add(title);
         return String.format(
                 "This todo has been added to your task list!%n             %d. %s",
-                getNumTasks(),
+                getNumItems(),
                 todo
         );
     }
@@ -287,14 +253,14 @@ public class TaskList {
      * @throws ChatBotException If the task index is invalid.
      */
     public String delete(int index) throws ChatBotException {
-        if (!isValidIndex(index).equals(true)) {
+        if (isInvalidIndex(index)) {
             throw new ChatBotException(
                     "This is an invalid task index traveller! You can type list to check all task indexes!"
             );
         }
 
-        set.remove(getTask(index).getTitle());
-        Task removedTask = list.remove(index);
+        Task removedTask = remove(index);
+        set.remove(removedTask.getTitle());
         return String.format(
                 "This task has successfully been removed from your task list!%n             %d. %s",
                 index + 1,
@@ -323,7 +289,7 @@ public class TaskList {
         if (isEmpty()) {
             return "Your task list is empty traveller! Add some tasks first!";
         }
-        return listAsString(list);
+        return toString();
     }
 
     /**
@@ -337,7 +303,7 @@ public class TaskList {
         if (filtered.isEmpty()) {
             return "You have no tasks on this date traveller!";
         }
-        return listAsString(filtered);
+        return new TaskList(filtered).toString();
     }
 
     /**
@@ -357,27 +323,7 @@ public class TaskList {
         if (filtered.isEmpty()) {
             return "I couldn't find any tasks matching your keyword traveller!";
         }
-        return listAsString(filtered);
-    }
-
-    private List<Task> filter(Predicate<Task> condition) {
-        return list
-                .stream()
-                .filter(condition)
-                .collect(Collectors.toList());
-    }
-
-    private String listAsString(List<Task> tasks) {
-        String res = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            String taskString = String.format(
-                    "             %d. %s%n",
-                    i + 1,
-                    tasks.get(i)
-            );
-            res = res.concat(taskString);
-        }
-        return res;
+        return new TaskList(filtered).toString();
     }
 
     /**
@@ -387,7 +333,7 @@ public class TaskList {
      * @return The response to be outputted by the UI.
      */
     public String mark(int index) {
-        Task task = list.get(index);
+        Task task = get(index);
         if (task.getDone().equals("X")) {
             return "This task was already completed! No need to mark it again.";
         }
@@ -406,7 +352,7 @@ public class TaskList {
      * @return The response to be outputted by the UI.
      */
     public String unmark(int index) {
-        Task task = list.get(index);
+        Task task = get(index);
         if (!task.getDone().equals("X")) {
             return "This task has not been completed yet! No need to unmark it.";
         }

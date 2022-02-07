@@ -83,7 +83,7 @@ public class Parser {
         case "todo":
             try {
                 response = taskList.addToDo(input);
-                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
+                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumItems()));
                 storage.saveChanges(taskList);
                 return response;
             } catch (ChatBotException e) {
@@ -103,7 +103,7 @@ public class Parser {
                 response = taskList.delete(
                         Integer.parseInt(input[1]) - 1
                 );
-                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
+                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumItems()));
                 storage.saveChanges(taskList);
                 return response;
             } catch (ChatBotException e) {
@@ -157,7 +157,7 @@ public class Parser {
                     temp[0].split(" "),
                     temp[1].split(" ")
                 );
-                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
+                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumItems()));
                 storage.saveChanges(taskList);
                 return response;
             } catch (ChatBotException e) {
@@ -177,7 +177,7 @@ public class Parser {
      */
     public String markOrUnmark(int index, boolean mark)
             throws ChatBotException {
-        if (!taskList.isValidIndex(index)) {
+        if (taskList.isInvalidIndex(index)) {
             throw new ChatBotException(
                     "This is an invalid task index traveller! You can type list to check all task indexes!"
             );
