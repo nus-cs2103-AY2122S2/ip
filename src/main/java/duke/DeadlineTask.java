@@ -7,6 +7,11 @@ public class DeadlineTask extends Task {
 
     LocalDate date;
 
+    /**
+     * Constructor for DeadlineTask
+     *
+     * @param input User input
+     */
     public DeadlineTask(String input) {
         super(input);
         this.type = "deadline";

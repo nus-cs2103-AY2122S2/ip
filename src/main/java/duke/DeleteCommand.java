@@ -10,6 +10,11 @@ public class DeleteCommand extends Command {
     public ArrayList<Task> Storage = TaskList.taskList;
     private int index; // Index of target task
 
+    /**
+     * Constructor for DeleteCommand
+     *
+     * @param i Index of task in the tasklist array to delete
+     */
     public DeleteCommand(String i) {
         this.input = i;
         index = Integer.parseInt(input) - 1; // -1 because list starts at 1 while indexes start at 0

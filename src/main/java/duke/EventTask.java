@@ -1,6 +1,11 @@
 package duke;
 
 public class EventTask extends Task {
+    /**
+     * Constructor for EventTask
+     *
+     * @param input User input
+     */
     public EventTask(String input) {
         super(input);
         this.type = "event";

@@ -16,11 +16,24 @@ public class AddTaskCommand extends Command {
     private String type; // Type of task
     private boolean isComplete = false;
 
+    /**
+     * Constructor for AddTaskCommand, without isComplete flag
+     *
+     * @param input User input
+     * @param type  Type of command
+     */
     public AddTaskCommand(String input, String type) {
         this.input = input;
         this.type = type;
     }
 
+    /**
+     * Constructor for AddTaskCommand, with isComplete flag
+     *
+     * @param input      User input
+     * @param type       Type of command
+     * @param isComplete Whether the task should be created with the task marked as done already
+     */
     public AddTaskCommand(String input, String type, boolean isComplete) {
         this.input = input;
         this.type = type;
