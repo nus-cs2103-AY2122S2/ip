@@ -10,6 +10,11 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the find command.
+     *
+     * @return response from the find command.
+     */
     public String execute() {
         String findResult = super.taskList.findTasks(this.keyword);
         return findResult;

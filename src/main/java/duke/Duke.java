@@ -86,7 +86,7 @@ public class Duke {
                 Platform.exit();
                 System.exit(0);
             }
-            return(response);
+            return response;
         } catch (Exception exception) {
             return "ERROR: " + exception.getMessage();
         }
