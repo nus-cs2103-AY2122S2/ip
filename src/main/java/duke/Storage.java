@@ -1,17 +1,29 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file.
  *
  * @author sibinhho99-nus
  */
 public class Storage {
-    public TaskList taskList = new TaskList();
+    private TaskList taskList = new TaskList();
 
     /**
-     * Loads the task list from storage
+     * Returns the current task list.
+     * @return the current task list.
+     */
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
+
+    /**
+     * Loads the task list from storage.
      */
     public void load() throws IOException {
         FileReader fr = new FileReader("storage.txt");
@@ -46,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Saves the current task list to storage
+     * Saves the current task list to storage.
      */
     public void save() throws IOException {
         FileWriter fw = new FileWriter("storage.txt", false);
@@ -58,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Returns String representation of the duke.TaskList
+     * Returns String representation of the duke.TaskList.
      */
     @Override
     public String toString() {

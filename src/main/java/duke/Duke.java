@@ -5,19 +5,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Main class
+ * Main class.
  *
  * @author sibinhho99-nus
  */
 public class Duke {
     /**
-     * Main method
+     * Main method.
      */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 
         Storage storage = new Storage();
-        TaskList pastTasks = storage.taskList;
+        TaskList pastTasks = storage.getTaskList();
 
         Ui ui = new Ui();
         Parser parser = new Parser();
@@ -29,8 +29,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         ui.println("Hello from\n" + logo);
 
-        ui.printMessage("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        ui.printMessage("Hello! I'm Duke\n"
+                + "What can I do for you?");
 
         storage.load();
 
@@ -45,24 +45,26 @@ public class Duke {
                     ui.printMessage(pastTasks.toString());
                 } else if (parser.getType(command).equals("find")) {
                     TaskList results = new TaskList();
-                    for (Task t: pastTasks.taskList) {
-                        String taskToFind = Parser.getTaskToFindName(command);
-                        if (t.name.contains(taskToFind)) {
-                            results.add(t);
+                    String nameOfTaskToFind = Parser.getTaskToFindName(command);
+
+                    for (int i = 0; i < pastTasks.size(); i++) {
+                        Task currentTask = pastTasks.get(i);
+                        if (currentTask.getName().contains(nameOfTaskToFind)) {
+                            results.add(currentTask);
                         }
                     }
 
                     ui.printMessage(results.toString());
                 } else if (parser.getType(command).equals("mark")) {
                     int index = Integer.parseInt(command.split(" ")[1]) - 1;
-                    pastTasks.get(index).isDone = true;
+                    pastTasks.get(index).mark(true);
 
                     ui.printMessage("OK, I've marked this task as done:\n  "
                             + pastTasks.get(index)
                     );
                 } else if (parser.getType(command).equals("unmark")) {
                     int index = Integer.parseInt(command.split(" ")[1]) - 1;
-                    pastTasks.get(index).isDone = false;
+                    pastTasks.get(index).mark(false);
 
                     ui.printMessage("OK, I've marked this task as not done yet:\n  "
                             + pastTasks.get(index)
@@ -76,9 +78,9 @@ public class Duke {
                     pastTasks.add(parser.parseTodos(command));
                     storage.save();
 
-                    ui.printMessage(String.format("Got it. I've added this task:\n" +
-                            "%s\n" +
-                            "Now you have %d %s in the list.",
+                    ui.printMessage(String.format("Got it. I've added this task:\n"
+                                    + "%s\n"
+                                    + "Now you have %d %s in the list.",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
@@ -87,9 +89,9 @@ public class Duke {
                     pastTasks.add(parser.parseDeadlines(command));
                     storage.save();
 
-                    ui.printMessage(String.format("Got it. I've added this task:\n" +
-                            "%s\n" +
-                            "Now you have %d %s in the list.",
+                    ui.printMessage(String.format("Got it. I've added this task:\n"
+                                    + "%s\n"
+                                    + "Now you have %d %s in the list.",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
@@ -98,9 +100,9 @@ public class Duke {
                     pastTasks.add(parser.parseEvent(command));
                     storage.save();
 
-                    ui.printMessage(String.format("Got it. I've added this task:\n" +
-                            "%s\n" +
-                            "Now you have %d %s in the list.",
+                    ui.printMessage(String.format("Got it. I've added this task:\n"
+                                    + "%s\n"
+                                    + "Now you have %d %s in the list.",
                             pastTasks.get(pastTasks.size() - 1),
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"
@@ -110,9 +112,9 @@ public class Duke {
 
                     storage.save();
 
-                    ui.printMessage(String.format("Noted. I've removed this task:\n" +
-                            "%s\n" +
-                            "Now you have %d %s in the list.",
+                    ui.printMessage(String.format("Noted. I've removed this task:\n"
+                                    + "%s\n"
+                                    + "Now you have %d %s in the list.",
                             removedTask,
                             pastTasks.size(),
                             pastTasks.size() == 1 ? "task" : "tasks"

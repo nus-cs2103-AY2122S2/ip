@@ -1,13 +1,13 @@
 package duke;
 
 /**
- * Deals with making sense of the user command
+ * Deals with making sense of the user command.
  *
  * @author sibinhho99-nus
  */
 public class Parser {
     /**
-     * Returns index to delete from delete command
+     * Returns index to delete from delete command.
      */
     public static int getDeleteIndex(String command) {
         // Extract name from todo command, eg. todo borrow book
@@ -15,21 +15,21 @@ public class Parser {
     }
 
     /**
-     * Returns task name to find from find command
+     * Returns task name to find from find command.
      */
     public static String getTaskToFindName(String command) {
         return command.substring(5);
     }
 
     /**
-     * Returns the type of the command (bye delete etc)
+     * Returns the type of the command (bye delete etc).
      */
     public String getType(String command) {
         return command.split(" ")[0];
     }
 
     /**
-     * Returns event Task object from command
+     * Returns event Task object from command.
      */
     public Task parseEvent(String command) {
         // Extracts name and time to be done by from event command,
@@ -41,7 +41,7 @@ public class Parser {
     }
 
     /**
-     * Returns deadline Task object from command
+     * Returns deadline Task object from command.
      */
     public Task parseDeadlines(String command) {
         // Extract name and time to be done by from deadline command,
@@ -53,7 +53,7 @@ public class Parser {
     }
 
     /**
-     * Returns todo Task object from command
+     * Returns todo Task object from command.
      */
     public Task parseTodos(String command) {
         // Extract name from todo command, eg. todo borrow book

@@ -4,15 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents task of deadline type
+ * Represents task of deadline type.
  *
  * @author sibinhho99-nus
  */
 public class TaskDeadlines extends Task {
-    LocalDate doneBy;
+    private LocalDate doneBy;
 
     /**
-     * Constructor
+     * Constructor for task of deadline type.
+     * @param isDone whether the task is done.
+     * @param name the name of the task.
+     * @param doneBy the deadline of the task.
      */
     public TaskDeadlines(boolean isDone, String name, String doneBy) throws DateTimeParseException {
         super(isDone, name);
@@ -20,10 +23,18 @@ public class TaskDeadlines extends Task {
     }
 
     /**
-     * Returns String representation of the Task
+     * Returns deadline of current task.
+     * @return deadline of the current task.
+     */
+    public LocalDate getDoneBy() {
+        return this.doneBy;
+    }
+
+    /**
+     * Returns String representation of the Task.
      */
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", isDone ? "X" : " ", name, doneBy.toString());
+        return String.format("[D][%s] %s (by: %s)", this.isDone() ? "X" : " ", this.getName(), doneBy.toString());
     }
 }

@@ -4,40 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a list of tasks
+ * Represents a list of tasks.
  *
  * @author sibinhho99-nus
  */
 public class TaskList {
-    List<Task> taskList;
+    private List<Task> taskList;
 
     /**
-     * Constructor
+     * Constructor for TaskList.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the TaskList.
+     * @param e the task to be added.
+     */
     public boolean add(Task e) {
         return taskList.add(e);
     }
 
     /**
-     * Returns element at index
+     * Returns element at index.
      */
     public Task get(int index) {
         return taskList.get(index);
     }
 
     /**
-     * Returns size of taskList
+     * Returns size of taskList.
      */
     public int size() {
         return taskList.size();
     }
 
     /**
-     * Removes element at index
+     * Removes element at index.
+     * @param index the index of the task to be removed.
      */
     public Task remove(int index) {
         return taskList.remove(index);
