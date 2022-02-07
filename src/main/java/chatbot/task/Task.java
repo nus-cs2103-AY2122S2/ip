@@ -16,8 +16,8 @@ public class Task {
     /**
      * Instantiates a new Task.
      *
-     * @param title    The title of the task.
-     * @param type     The type of the task.
+     * @param title The title of the task.
+     * @param type The type of the task.
      * @param timestamp The timestamp of the task.
      */
     public Task(String title, String type, Timestamp timestamp) {
@@ -30,9 +30,9 @@ public class Task {
     /**
      * Instantiates a new Task.
      *
-     * @param title    The title of the task.
-     * @param type     The type of the task.
-     * @param done     The completion status of the task.
+     * @param title The title of the task.
+     * @param type The type of the task.
+     * @param done The completion status of the task.
      * @param timestamp The timestamp of the task.
      */
     public Task(String title, String type, String done, Timestamp timestamp) {

@@ -16,9 +16,9 @@ public class Parser {
     /**
      * Instantiates a new Parser.
      *
-     * @param ui The UI.
-     * @param storage   The storage.
-     * @param taskList  The task list.
+     * @param ui The ChatBot UI handler.
+     * @param storage The handler for loading tasks from and saving tasks to the save file.
+     * @param taskList user's The task list.
      */
     public Parser(Ui ui, Storage storage, TaskList taskList) {
         this.ui = ui;
@@ -46,17 +46,14 @@ public class Parser {
                 if (input.length > 2) {
                     return "That's too many inputs traveller! You only need to key in the "
                                     + "date or timestamp for which you want to view your tasks!";
-                } else {
-                    Timestamp date = new Timestamp(input[1]);
-                    response = taskList.getTasksOnDate(date);
-                    return response;
                 }
+                Timestamp date = new Timestamp(input[1]);
+                return taskList.getTasksOnDate(date);
             } catch (ChatBotException e) {
                 return ui.error(e.getMessage());
             }
         case "find":
-            response = taskList.getTasksByKeyword(input);
-            return response;
+            return taskList.getTasksByKeyword(input);
         case "mark":
         case "unmark":
             try {
@@ -66,13 +63,12 @@ public class Parser {
                 } else if (input.length > 2) {
                     return "That's too many inputs traveller! "
                             + "You only need to key in the index of the task you wish to mark or unmark!";
-                } else {
-                    response = markOrUnmark(
-                            Integer.parseInt(input[1]) - 1,
-                            input[0].equals("mark")
-                    );
-                    return response;
                 }
+                response = markOrUnmark(
+                        Integer.parseInt(input[1]) - 1,
+                        input[0].equals("mark")
+                );
+                return response;
             } catch (ChatBotException e) {
                 return ui.error(e.getMessage());
             } catch (NumberFormatException e) {
@@ -103,14 +99,13 @@ public class Parser {
                             "That's too many inputs traveller! "
                                     + "You only need to key in the index of the task you wish to delete!"
                     );
-                } else {
-                    response = taskList.delete(
-                            Integer.parseInt(input[1]) - 1
-                    );
-                    response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
-                    storage.saveChanges(taskList);
-                    return response;
                 }
+                response = taskList.delete(
+                        Integer.parseInt(input[1]) - 1
+                );
+                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
+                storage.saveChanges(taskList);
+                return response;
             } catch (ChatBotException e) {
                 return ui.error(e.getMessage());
             } catch (NumberFormatException e) {
@@ -157,15 +152,14 @@ public class Parser {
                         }
                     }
                     throw new ChatBotException();
-                } else {
-                    response = taskList.add(
-                        temp[0].split(" "),
-                        temp[1].split(" ")
-                    );
-                    response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
-                    storage.saveChanges(taskList);
-                    return response;
                 }
+                response = taskList.add(
+                    temp[0].split(" "),
+                    temp[1].split(" ")
+                );
+                response = response.concat("\n").concat(ui.printNumTasks(taskList.getNumTasks()));
+                storage.saveChanges(taskList);
+                return response;
             } catch (ChatBotException e) {
                 return ui.error(e.getMessage());
             }
@@ -177,25 +171,24 @@ public class Parser {
      * Both commands involve similar code, which is why they have been combined into this function.
      *
      * @param index The index of the task in the task list.
-     * @param mark  If true, mark the task. Else, unmark the task.
+     * @param mark If true, mark the task. Else, unmark the task.
      * @return The response to be outputted via the UI.
      * @throws ChatBotException If the task index is invalid.
      */
     public String markOrUnmark(int index, boolean mark)
             throws ChatBotException {
-        if (taskList.isValidIndex(index).equals(true)) {
-            String response;
-            if (mark) {
-                response = taskList.mark(index);
-            } else {
-                response = taskList.unmark(index);
-            }
-            storage.saveChanges(taskList);
-            return response;
-        } else {
+        if (!taskList.isValidIndex(index)) {
             throw new ChatBotException(
                     "This is an invalid task index traveller! You can type list to check all task indexes!"
             );
         }
+        String response;
+        if (mark) {
+            response = taskList.mark(index);
+        } else {
+            response = taskList.unmark(index);
+        }
+        storage.saveChanges(taskList);
+        return response;
     }
 }
