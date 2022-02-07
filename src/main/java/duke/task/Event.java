@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Task type: Event
+ *
+ * Date input format: eg. "/at 2/12/2019"
  */
 public class Event extends Task {
     private LocalDate date;

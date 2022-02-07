@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Task type: Deadline
+ *
+ * Date and Time input format: eg. "/by 2/12/2019 1800"
  */
 public class Deadline extends Task {
     private LocalDate date;

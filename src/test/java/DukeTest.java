@@ -1,12 +1,12 @@
-import duke.parser.StorageParser;
-import duke.task.Event;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.task.Task;
+import org.junit.jupiter.api.Test;
+
+import duke.parser.StorageParser;
 import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class DukeTest {
     @Test
