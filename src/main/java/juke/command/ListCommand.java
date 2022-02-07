@@ -5,7 +5,7 @@ import juke.exception.JukeException;
 import juke.exception.JukeInvalidParameterException;
 
 public class ListCommand extends Command {
-    
+
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -20,7 +20,7 @@ public class ListCommand extends Command {
         }
         return this;
     }
-    
+
     @Override
     public Command execute() {
         if (this.isSuccessful()) {

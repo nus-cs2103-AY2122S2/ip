@@ -6,17 +6,17 @@ package juke.task;
 public enum TaskStatus {
     NOT_DONE("unmark", "\u2610"),
     DONE("mark", "\u2612");
-    
+
     /**
      * String for command use.
      */
     private final String commandName;
-    
+
     /**
      * Status icon.
      */
     private final String statusIcon;
-    
+
     /**
      * Constructor to initialize the task statuses.
      *
@@ -27,7 +27,7 @@ public enum TaskStatus {
         this.commandName = commandName;
         this.statusIcon = statusIcon;
     }
-    
+
     /**
      * Returns the command name.
      *
@@ -36,7 +36,7 @@ public enum TaskStatus {
     public String getCommandName() {
         return this.commandName;
     }
-    
+
     /**
      * Returns the status icon of the task.
      *

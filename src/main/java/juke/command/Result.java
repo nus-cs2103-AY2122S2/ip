@@ -7,11 +7,11 @@ import juke.exception.JukeException;
  */
 public abstract class Result {
     private String[] messages;
-    
+
     private Result(String... messages) {
         this.messages = messages;
     }
-    
+
     /**
      * Creates a new success result.
      *
@@ -21,7 +21,7 @@ public abstract class Result {
     public static Result success(String... messages) {
         return new Result.Success(messages);
     }
-    
+
     /**
      * Creates a new error result.
      *
@@ -31,7 +31,7 @@ public abstract class Result {
     public static Result error(Exception exception) {
         return new Result.Error(exception);
     }
-    
+
     /**
      * Creates a new empty result.
      *
@@ -40,7 +40,7 @@ public abstract class Result {
     public static Result empty() {
         return Empty.EMPTY_INSTANCE;
     }
-    
+
     /**
      * Returns the stored string.
      *
@@ -49,7 +49,7 @@ public abstract class Result {
     public String[] get() {
         return this.messages;
     }
-    
+
     /**
      * Returns the stored string, or throws an exception.
      *
@@ -59,7 +59,7 @@ public abstract class Result {
     public String[] getOrThrow() throws Exception {
         return this.messages;
     }
-    
+
     /**
      * A successful execution of a command.
      */
@@ -68,18 +68,18 @@ public abstract class Result {
             super(messages);
         }
     }
-    
+
     /**
      * A command execution with an error.
      */
     public static class Error extends Result {
         private Exception exception;
-        
+
         private Error(Exception exception) {
             super(exception.getMessage());
             this.exception = exception;
         }
-    
+
         /**
          * Throws the exception.
          *
@@ -91,19 +91,19 @@ public abstract class Result {
             throw this.exception;
         }
     }
-    
+
     /**
      * A result before command execution.
      */
     public static class Empty extends Result {
         private static final Result EMPTY_INSTANCE = new Empty();
-        
+
         private static final JukeException EMPTY_EXCEPTION = new JukeException("Result is empty.");
-    
+
         private Empty() {
             super((String[]) null);
         }
-    
+
         /**
          * Throws an exception for an empty result.
          *

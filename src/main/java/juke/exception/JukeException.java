@@ -4,7 +4,7 @@ package juke.exception;
  * Class for Juke related exceptions.
  */
 public class JukeException extends Exception {
-    
+
     /**
      * Constructor to initialize exception with a message.
      *
@@ -13,7 +13,7 @@ public class JukeException extends Exception {
     public JukeException(String msg) {
         super(msg);
     }
-    
+
     /**
      * Returns exception message.
      *

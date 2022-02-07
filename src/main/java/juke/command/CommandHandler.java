@@ -1,11 +1,11 @@
 package juke.command;
 
-import juke.task.TaskStatus;
-import juke.task.TaskType;
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.function.Supplier;
+
+import juke.task.TaskStatus;
+import juke.task.TaskType;
 
 /**
  * Handles command initialization and an interface for interacting with commands.
@@ -15,7 +15,7 @@ public class CommandHandler {
      * Collection of command objects mapped to its command name.
      */
     public static final HashMap<String, Supplier<Command>> COMMANDS = new HashMap<>();
-    
+
     /**
      * Initializes the commands.
      */

@@ -1,57 +1,57 @@
 package juke.command;
 
+import java.util.HashMap;
+import java.util.Optional;
+
 import juke.Juke;
 import juke.exception.JukeException;
 import juke.exception.JukeInvalidParameterException;
-
-import java.util.HashMap;
-import java.util.Optional;
 
 /**
  * Abstraction for a command.
  */
 public abstract class Command {
     /**
-     * Reference to the Juke instance.
-     */
-    protected final Juke juke = Juke.getInstance();
-    
-    /**
      * Mapping for the first argument in a command.
      */
     protected static final String DEFAULT_PARAMETER = "";
-    
+
+    /**
+     * Reference to the Juke instance.
+     */
+    protected final Juke juke = Juke.getInstance();
+
     /**
      * Mapping of command arguments to its parameters.
      */
     protected HashMap<String, Optional<String>> paramArgs = new HashMap<>();
-    
+
     /**
      * Result of the command execution.
      */
     protected Result result = Result.empty();
-    
+
     /**
      * Constructor that initializes the command.
      */
     public Command() {
         this.paramArgs.put("", Optional.empty());
     }
-    
+
     /**
      * Checks if the parameters and arguments are valid.
      *
      * @return This command.
      */
     public abstract Command checkParametersAndArguments();
-    
+
     /**
      * Tries to execute the command, updating the result.
      *
      * @return This command.
      */
     public abstract Command execute();
-    
+
     /**
      * Checks if the command has the given parameter.
      * Returns true if it exists, false otherwise.
@@ -62,7 +62,7 @@ public abstract class Command {
     public boolean hasParameter(String param) {
         return this.paramArgs.containsKey(param);
     }
-    
+
     /**
      * Checks if the command has an argument to a given parameter.
      * Returns true if it exists, false otherwise.
@@ -74,7 +74,7 @@ public abstract class Command {
         //TODO Currently does not handle missing parameter case.
         return this.paramArgs.get(param).isPresent();
     }
-    
+
     /**
      * Returns the argument associated with a given parameter.
      * Updates the result to an error if the argument or parameter is missing and returns an empty string.
@@ -93,7 +93,7 @@ public abstract class Command {
             return "";
         }
     }
-    
+
     /**
      * Checks if the given parameter is the default parameter.
      * Returns true if it is, false otherwise.
@@ -104,7 +104,7 @@ public abstract class Command {
     public boolean isDefaultParameter(String param) {
         return param.equals(DEFAULT_PARAMETER);
     }
-    
+
     /**
      * Checks if the default argument exists.
      * Returns true if it exists, false otherwise.
@@ -114,7 +114,7 @@ public abstract class Command {
     public boolean hasDefaultArgument() {
         return this.hasArgument(DEFAULT_PARAMETER);
     }
-    
+
     /**
      * Returns the default argument.
      * Updates the result to an error if it does not exist and returns an empty string.
@@ -127,7 +127,7 @@ public abstract class Command {
             return "";
         });
     }
-    
+
     /**
      * Adds or replaces a parameter with optional argument into the command.
      *
@@ -147,7 +147,7 @@ public abstract class Command {
         }
         return this;
     }
-    
+
     /**
      * Removes a parameter and argument from the command.
      *
@@ -162,7 +162,7 @@ public abstract class Command {
         }
         return this;
     }
-    
+
     /**
      * Returns the result of this command.
      *
@@ -171,7 +171,7 @@ public abstract class Command {
     public Result getResult() {
         return this.result;
     }
-    
+
     /**
      * Checks if the result is a success.
      * Returns true if it is, false otherwise.
@@ -181,7 +181,7 @@ public abstract class Command {
     public boolean isSuccessful() {
         return this.result instanceof Result.Success;
     }
-    
+
     /**
      * Checks if the result is an error.
      * Returns true if it is, false otherwise.
@@ -191,7 +191,7 @@ public abstract class Command {
     public boolean isErroneous() {
         return this.result instanceof Result.Error;
     }
-    
+
     /**
      * Checks if the result is empty.
      * Returns true if it is, false otherwise.

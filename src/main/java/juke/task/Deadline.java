@@ -11,7 +11,7 @@ public class Deadline extends Task {
      * Deadline.
      */
     private DateTimeHandler date;
-    
+
     /**
      * Constructor to initialize a task with a description and a deadline.
      *
@@ -22,7 +22,7 @@ public class Deadline extends Task {
         super(description);
         this.date = new DateTimeHandler(time);
     }
-    
+
     /**
      * Returns the deadline.
      *
@@ -31,7 +31,7 @@ public class Deadline extends Task {
     public String getTime() {
         return this.date.getDateTime();
     }
-    
+
     /**
      * Returns the task icon.
      *
@@ -41,7 +41,7 @@ public class Deadline extends Task {
     public String getTaskIcon() {
         return TaskType.DEADLINE.getTaskIcon();
     }
-    
+
     /**
      * Returns info about the task including the deadline.
      *

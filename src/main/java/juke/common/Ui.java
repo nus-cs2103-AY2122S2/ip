@@ -1,13 +1,13 @@
 package juke.common;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.function.Supplier;
+
 import juke.command.Command;
 import juke.command.CommandHandler;
 import juke.command.Result;
 import juke.exception.JukeInvalidCommandException;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.function.Supplier;
 
 /**
  * Manages the user interface involving user input and console output.
@@ -29,16 +29,16 @@ public class Ui {
         + " |\\_____\\      | /   \\ |    |/___/||     | / |    | || |    |____/|  \n"
         + " | |     |_____|/     \\|____|   | ||_____|/  |____|/  \\|____|   | |  \n"
         + "  \\|_____|                  |___|/                          |___|/   \n";
-    
+
     private Scanner in;
-    
+
     /**
      * Constructor that initializes the scanner for user input.
      */
     public Ui() {
         this.in = new Scanner(System.in);
     }
-    
+
     public void runUiLoop() {
         this.printPrefix();
         try {
@@ -50,11 +50,11 @@ public class Ui {
             this.formattedPrint(e.getMessage());
         }
     }
-    
+
     public String getInput() {
         return this.in.nextLine();
     }
-    
+
     public Command getCommand(String input) throws JukeInvalidCommandException {
         ArrayList<String[]> paramSplit = Parser.parseInput(input);
         if (paramSplit.get(0)[0].isBlank()) {
@@ -70,12 +70,12 @@ public class Ui {
         }
         return cmd;
     }
-    
+
     public void executeAndPrint(Command command) {
         command.execute();
         this.displayResult(command.getResult());
     }
-    
+
     /**
      * Prints the welcome message.
      */
@@ -83,18 +83,18 @@ public class Ui {
         this.printLogo();
         this.formattedPrint("Greetings Executor!");
     }
-    
+
     /**
      * Prints the Juke logo.
      */
     public void printLogo() {
         System.out.println(LOGO);
     }
-    
+
     public void printPrefix() {
         System.out.print(LINE_PREFIX);
     }
-    
+
     /**
      * Prints the message associated with a success, or the error message otherwise.
      *
@@ -108,7 +108,7 @@ public class Ui {
             this.formattedPrint(e.getMessage());
         }
     }
-    
+
     /**
      * Prints a string with decorative formatting.
      *

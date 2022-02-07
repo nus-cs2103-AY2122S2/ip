@@ -1,5 +1,12 @@
 package juke.common;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import juke.Juke;
 import juke.exception.JukeException;
 import juke.task.Deadline;
@@ -8,29 +15,22 @@ import juke.task.Task;
 import juke.task.TaskStatus;
 import juke.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Storage {
-    
+
+    private static final String PATH_NAME = "data/juke.txt";
+
     /**
      * Reference to the Juke instance.
      */
     private final Juke juke;
-    
-    private static final String PATH_NAME = "data/juke.txt";
-    
+
     private File file = new File(PATH_NAME);;
-    
+
     public Storage(Juke instance) {
         this.juke = instance;
         this.initializeFile();
     }
-    
+
     private void initializeFile() {
         try {
             if (this.file.getParentFile().mkdirs()) {
@@ -43,7 +43,7 @@ public class Storage {
             this.juke.getUi().formattedPrint(e.getMessage());
         }
     }
-    
+
     public void loadTasks() {
         ArrayList<String[]> parseArr = this.parse();
         for (String[] args : parseArr) {
@@ -60,7 +60,7 @@ public class Storage {
             }
         }
     }
-    
+
     public void saveTasks() {
         ArrayList<String[]> writeArr = new ArrayList<>();
         for (Task task : this.juke.getTaskList()) {
@@ -71,7 +71,7 @@ public class Storage {
         }
         this.write(writeArr);
     }
-    
+
     public ArrayList<String[]> parse() {
         ArrayList<String[]> array = new ArrayList<>();
         try {
@@ -85,7 +85,7 @@ public class Storage {
         }
         return array;
     }
-    
+
     public boolean write(ArrayList<String[]> array) {
         try {
             FileWriter out = new FileWriter(file);
@@ -100,7 +100,7 @@ public class Storage {
         }
         return true;
     }
-    
+
     public Task decode(String[] args) throws JukeException {
         Task task = null;
         if (args.length > 2) {
@@ -134,7 +134,7 @@ public class Storage {
         }
         return task;
     }
-    
+
     public String[] encode(Task task) {
         String[] args = null;
         if (task instanceof Todo) {
