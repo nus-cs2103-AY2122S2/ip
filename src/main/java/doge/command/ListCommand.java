@@ -1,9 +1,6 @@
 package doge.command;
 
-import doge.DateTime;
-import doge.Storage;
-import doge.TaskList;
-import doge.Ui;
+import doge.*;
 import doge.exception.DogeException;
 import doge.exception.ListTasksDueException;
 import doge.task.Deadline;
@@ -41,11 +38,10 @@ public class ListCommand extends Command {
         assert ui != null : "Ui should not be null";
         assert storage != null : "Storage should not be null";
 
-        StringBuilder output = new StringBuilder("Here are the tasks in your list:");
+        TaskList tempTaskList = new TaskList();
+
         if (this.details.isEmpty()) {
-            for (int i = 0; i < tasks.size(); i++) {
-                output.append("\n").append(i + 1).append(") ").append(tasks.getTask(i));
-            }
+            this.message = list(tasks);
         } else {
             LocalDateTime dueDateTime;
             String[] tempStr = this.details.split(" ");
@@ -56,58 +52,67 @@ public class ListCommand extends Command {
                 throw new ListTasksDueException("Please state an appropriate duration for the occurrence?");
             }
 
-            int numbering = 1;
 
             for (int i = 0; i < tasks.size(); i++) {
                 Task currTask = tasks.getTask(i);
-                LocalDateTime currDateTime;
+                LocalDateTime currDateTime = null;
 
-                if (currTask instanceof Deadline) {
-                    Deadline currDeadline = (Deadline) currTask;
-                    currDateTime = currDeadline.getDateTime();
-                } else if (currTask instanceof Event) {
-                    Event currEvent= (Event) currTask;
-                    currDateTime = currEvent.getDateTime();
+                if (currTask instanceof Deadline || currTask instanceof Event) {
+                    currDateTime = currTask.getDateTime();
                 } else {
                     continue;
                 }
 
-                if (currDateTime != null) {
-                    switch (tempStr[0].trim()) {
-                    case "=":
-                        if (!currDateTime.isEqual(dueDateTime)) {
-                            continue;
-                        }
-                        break;
-                    case ">":
-                        if (!currDateTime.isAfter(dueDateTime)) {
-                            continue;
-                        }
-                        break;
-                    case "<":
-                        if (!currDateTime.isBefore(dueDateTime)) {
-                            continue;
-                        }
-                        break;
-                    case ">=":
-                        if (!currDateTime.isAfter(dueDateTime) || !currDateTime.isEqual(dueDateTime)) {
-                            continue;
-                        }
-                        break;
-                    case "<=":
-                        if (!currDateTime.isBefore(dueDateTime) || !currDateTime.isEqual(dueDateTime)) {
-                            continue;
-                        }
-                        break;
-                    default:
-                        throw new DogeException("Invalid limiter specified!");
-                    }
+                if (checkDateTime(tempStr[0].trim(), currDateTime, dueDateTime)) {
+                    tempTaskList.addTask(currTask);
                 }
-                output.append("\n").append(numbering).append(") ").append(currTask);
-                numbering++;
             }
+            this.message = list(tempTaskList);
         }
-        this.message = output.toString();
+    }
+
+    public String list(TaskList tasks) {
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            output.append("\n").append(i + 1).append(") ").append(tasks.getTask(i));
+        }
+        return output.toString();
+    }
+
+    public boolean checkDateTime(String limiter, LocalDateTime currDateTime, LocalDateTime dueDateTime) throws DogeException {
+        assert currDateTime != null : "current date/time is null";
+        assert dueDateTime != null : "due date/time is null";
+
+        switch (limiter) {
+        case "=":
+            if (currDateTime.isEqual(dueDateTime)) {
+                break;
+            }
+            return false;
+        case ">":
+            if (currDateTime.isAfter(dueDateTime)) {
+                break;
+            }
+            return false;
+        case "<":
+            if (currDateTime.isBefore(dueDateTime)) {
+                break;
+            }
+            return false;
+        case ">=":
+            if (currDateTime.isAfter(dueDateTime) || currDateTime.isEqual(dueDateTime)) {
+                break;
+            }
+            return false;
+        case "<=":
+            if (currDateTime.isBefore(dueDateTime) || currDateTime.isEqual(dueDateTime)) {
+                break;
+            }
+            return false;
+        default:
+            throw new DogeException("Invalid limiter specified!");
+        }
+        return true;
     }
 
     /**
