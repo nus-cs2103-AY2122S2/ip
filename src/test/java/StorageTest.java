@@ -51,7 +51,7 @@ public class StorageTest {
     @DisplayName("File is created")
     public void testFileCreated() {
         setUpParameters();
-        File filename = new File(Paths.get("").toAbsolutePath() + "/data/duke.txt");
+        File filename = new File(Paths.get("").toAbsolutePath() + "/data/Duke.txt");
         assertTrue(filename.exists());
     }
 
