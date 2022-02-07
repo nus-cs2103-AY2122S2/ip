@@ -21,7 +21,7 @@ public class UnmarkCommand extends Command {
             Task task = taskList.get(index - 1);
             task.setDone(false);
             return new CommandOutput(String.format("Okay, I've marked this task as not yet done:\n  %s", task),
-                    Sfx.SFX_COMMAND_UNMARK);
+                Sfx.SFX_COMMAND_UNMARK);
         } catch (Exception e) {
             return new CommandOutput("Error: Invalid index\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_INDEX);
         }

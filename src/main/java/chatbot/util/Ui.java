@@ -8,6 +8,10 @@ import javax.sound.sampled.Clip;
  * User interface handler.
  */
 public class Ui {
+    /**
+     * Plays an audio file.
+     * @param fileName the audio file
+     */
     public static void playSound(String fileName) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Ui.class.getResource(fileName));

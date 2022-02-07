@@ -52,11 +52,14 @@ public class MainWindow {
         this.commandList = commandList;
     }
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(new BotDialogBox(
-                "Hello! I'm Daphne. How may I help you today?\nType \"help\" for a list of commands."));
+        dialogContainer.getChildren().addAll(
+            new BotDialogBox("Hello! I'm Daphne. How may I help you today?\nType \"help\" for a list of commands."));
         Ui.playSound(Sfx.SFX_GREETINGS);
     }
 

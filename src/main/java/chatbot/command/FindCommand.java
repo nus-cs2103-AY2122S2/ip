@@ -1,10 +1,10 @@
 package chatbot.command;
 
+import java.util.Arrays;
+
 import chatbot.sfx.Sfx;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
-
-import java.util.Arrays;
 
 public class FindCommand extends Command {
     public static final String TRIGGER = "find";

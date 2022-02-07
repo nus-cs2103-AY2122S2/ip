@@ -21,6 +21,11 @@ public abstract class Command {
         return this.trigger;
     }
 
+    /**
+     * Valids the trigger word of an user input.
+     *
+     * @param input the user input
+     */
     public void validateTrigger(String[] input) {
         assert input.length > 0 : "Assert: Empty";
         assert input[0].equals(getTrigger()) : "Assert: Invalid trigger";

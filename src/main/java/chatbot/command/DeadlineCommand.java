@@ -1,18 +1,18 @@
 package chatbot.command;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Arrays;
+
 import chatbot.sfx.Sfx;
 import chatbot.task.Deadline;
 import chatbot.task.Task;
 import chatbot.task.TaskList;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Arrays;
-
 public class DeadlineCommand extends Command {
     public static final String TRIGGER = "deadline";
     public static final String FORMAT =
-            TRIGGER + " <desc> /by <date> <time>\n" + "Date format: YYYY-MM-DD\n" + "Time format: HH:MM or HH:MM:SS";
+        TRIGGER + " <desc> /by <date> <time>\n" + "Date format: YYYY-MM-DD\n" + "Time format: HH:MM or HH:MM:SS";
 
     public DeadlineCommand() {
         super(TRIGGER);
@@ -51,7 +51,7 @@ public class DeadlineCommand extends Command {
         Task task = new Deadline(desc, date, time);
         taskList.add(task);
         return new CommandOutput(
-                String.format("Alrighty! I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
-                        taskList.size()), Sfx.SFX_COMMAND_ADD);
+            String.format("Alrighty! I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
+                taskList.size()), Sfx.SFX_COMMAND_ADD);
     }
 }

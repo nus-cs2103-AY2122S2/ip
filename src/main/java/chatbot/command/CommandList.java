@@ -1,9 +1,9 @@
 package chatbot.command;
 
+import java.util.Hashtable;
+
 import chatbot.sfx.Sfx;
 import chatbot.task.TaskList;
-
-import java.util.Hashtable;
 
 /**
  * A collection of commands.
@@ -21,7 +21,7 @@ public class CommandList {
             @Override
             public CommandOutput execute(String[] input, TaskList taskList) {
                 return new CommandOutput("Unrecognised command.\nType \"help\" for a list of commands.",
-                        Sfx.SFX_COMMAND_UNRECOGNISED);
+                    Sfx.SFX_COMMAND_UNRECOGNISED);
             }
         };
     }
@@ -37,11 +37,13 @@ public class CommandList {
     }
 
     /**
-     * Returns the output of the command associated with the specified user input. If no command is associated, a default command is executed.
+     * Returns the output of the command associated with the specified user input.
+     * If no command is associated, a default command is executed.
      *
      * @param input    the user input
      * @param taskList the task list to execute the command on
-     * @return the output of the command associated with the specified user input. If no command is associated, a default command is executed.
+     * @return the output of the command associated with the specified user input.
+     * If no command is associated, a default command is executed.
      */
     public CommandOutput executeCommand(String input, TaskList taskList) {
         String[] inputArr = input.split("\\s+");

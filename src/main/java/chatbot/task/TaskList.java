@@ -1,9 +1,9 @@
 package chatbot.task;
 
-import chatbot.util.Storage;
-
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import chatbot.util.Storage;
 
 /**
  * An ordered collection of tasks.

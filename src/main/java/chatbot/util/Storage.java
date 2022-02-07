@@ -34,7 +34,7 @@ public class Storage {
             file.createNewFile();
 
             ObjectOutputStream objectOutputStream =
-                    new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file, false)));
+                new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file, false)));
             objectOutputStream.writeObject(item);
             objectOutputStream.flush();
             objectOutputStream.close();
@@ -54,7 +54,7 @@ public class Storage {
     public static <T extends Serializable> T load(String fileName) {
         try {
             ObjectInputStream objectInputStream =
-                    new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
+                new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
             T item = (T) objectInputStream.readObject();
             objectInputStream.close();
             return item;

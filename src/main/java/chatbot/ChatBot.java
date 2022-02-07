@@ -1,5 +1,7 @@
 package chatbot;
 
+import java.io.IOException;
+
 import chatbot.command.CommandList;
 import chatbot.command.DeadlineCommand;
 import chatbot.command.DeleteCommand;
@@ -24,8 +26,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
-
 /**
  * Task management chat bot.
  */
@@ -36,6 +36,9 @@ public class ChatBot extends Application {
     private final CommandList commandList;
     private final TaskList taskList;
 
+    /**
+     * Constructs a chat bot.
+     */
     public ChatBot() {
         this.taskList = TaskList.create(SAVE_FILE);
         this.commandList = new CommandList();
