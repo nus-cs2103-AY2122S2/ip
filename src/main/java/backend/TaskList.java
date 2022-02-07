@@ -18,14 +18,17 @@ public class TaskList {
         // print the ui user message
         Ui.list();
         String output = "";
+        int index = 1;
 
         // print out all objects in the list
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
-            int index = i + 1;
-            System.out.println(index + "." + currentTask.toString());
+            index = i + 1;
+//            System.out.println(index + "." + currentTask.toString());
             output = output + index + "." + currentTask.toString() + "\n";
         }
+
+        assert index - 1 == tasks.size() : "index should be the same as the number of tasks";
         return output;
     }
 
@@ -39,6 +42,7 @@ public class TaskList {
             Task currentTask = tasks.get(indexMarked);
             currentTask.setDone(true);
             output = Ui.mark(currentTask.toString()) ;
+            assert currentTask.getDone() == true : "task isDone should be set to true";
         } catch (IndexOutOfBoundsException e) {
             output = Ui.invalidTask();
         }
@@ -55,6 +59,7 @@ public class TaskList {
             Task currentTask = tasks.get(indexUnmarked);
             currentTask.setDone(false);
             output = Ui.unmark(currentTask.toString());
+            assert currentTask.getDone() == false : "task isDone should be set to false";
         } catch (IndexOutOfBoundsException e) {
             output = Ui.invalidTask();
         }
