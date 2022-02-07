@@ -1,15 +1,3 @@
-[D][ ] 1 (by: Wednesday, February 2, 2022 0900AM)
-[D][ ] 2 (by: Wednesday, February 2, 2022 1000AM)
-[D][ ] 3 (by: Wednesday, February 2, 2022 1100AM)
+[T][ ] asfg
 [T][ ] read
-[E][ ] 4 (at: Wednesday, February 2, 2022 1200PM)
-[D][ ] dummy (by: Tuesday, February 1, 2022)
-[D][ ] 6 (by: Wednesday, February 2, 2022 0200PM)
-[E][ ] 5 (at: Wednesday, February 2, 2022 0100PM)
-[D][ ] no time (by: Wednesday, February 2, 2022)
-[D][ ] same time as 6 (by: Wednesday, February 2, 2022 0200PM)
-[E][ ] no time (at: Wednesday, February 2, 2022)
-[D][ ] no time deadline (by: Wednesday, February 2, 2022)
-[D][ ] test deadline (by: Wednesday, February 2, 2022)
-[T][ ] todo a
-[D][ ] earliest (by: Wednesday, February 2, 2022 0700AM)
+[D][ ] asfg (by: Wednesday, February 2, 2022)

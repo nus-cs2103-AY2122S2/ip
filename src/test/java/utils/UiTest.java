@@ -39,12 +39,8 @@ public class UiTest {
     @Test
     @DisplayName("Deleted task message should be shown")
     public void showDeletedTaskMessage() {
-        TaskList tasks = new TaskList(new ArrayList<>());
-        Todo dummyTodo = new Todo("read book");
-        String taskOrTasks = tasks.getTaskList().size() <= 1 ? "duke/task" : "tasks";
-        String deletedTask = "Noted. I've removed this task: \n" + " " + dummyTodo + "\n"
-                + "Now you have " + tasks.getTaskList().size() + " " + taskOrTasks + " in the list.";
-        assertEquals(deletedTask, ui.deletedTask(tasks, dummyTodo));
+        String deleted = "Noted, the following tasks are deleted:\n\n";
+        assertEquals(deleted, ui.deletedTask(2));
     }
 
     @Test
@@ -72,19 +68,15 @@ public class UiTest {
     @Test
     @DisplayName("Marked task message should be shown")
     public void showMarkedMessage() {
-        Todo dummyTodo = new Todo("read book");
-        dummyTodo.setDone(true);
-        String marked = "Nice! I've marked this task as done: \n " + dummyTodo;
-        assertEquals(marked, ui.marked(dummyTodo));
+        String marked = "Nice! I've marked the following task as done:\n\n ";
+        assertEquals(marked, ui.marked(1));
     }
 
     @Test
     @DisplayName("Unmarked task message should be shown")
     public void showUnmarkedMessage() {
-        Todo dummyTodo = new Todo("read book");
-        dummyTodo.setDone(false);
-        String unmarked = "OK, I've marked this task as not done yet: \n " + dummyTodo;
-        assertEquals(unmarked, ui.unmarked(dummyTodo));
+        String unmarked = "OK, I've marked the following tasks as not done yet:\n\n";
+        assertEquals(unmarked, ui.unmarked(2));
     }
 
     @Test

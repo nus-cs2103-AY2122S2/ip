@@ -42,14 +42,14 @@ public class Ui {
     /**
      * Show deleted task and Ui.
      *
-     * @param tasks       the TaskList tasks
-     * @param taskDeleted the task deleted
+     * @param numOfTasksDeleted       the number of task deleted
      * @return deleted task prompt
      */
-    public String deletedTask(TaskList tasks, Task taskDeleted) {
-        String taskOrTasks = tasks.getTaskList().size() <= 1 ? "duke/task" : "tasks";
-        return "Noted. I've removed this task: \n" + " " + taskDeleted + "\n"
-                + "Now you have " + tasks.getTaskList().size() + " " + taskOrTasks + " in the list.";
+    public String deletedTask(int numOfTasksDeleted) {
+        String taskOrTasks = numOfTasksDeleted <= 1 ? "task" : "tasks";
+        String isOrAre = numOfTasksDeleted <= 1 ? "is" : "are";
+
+        return String.format("Noted, the following %s %s deleted:\n\n", taskOrTasks, isOrAre);
     }
 
     /**
@@ -84,21 +84,23 @@ public class Ui {
     /**
      * Show marked task Ui.
      *
-     * @param task the task to be marked
+     * @param numOfTasksDeleted the number of tasks marked
      * @return marked task prompt
      */
-    public String marked(Task task) {
-        return "Nice! I've marked this task as done: \n " + task;
+    public String marked(int numOfTasksDeleted) {
+        String taskOrTasks = numOfTasksDeleted <= 1 ? "task" : "tasks";
+        return String.format("Nice! I've marked the following %s as done:\n\n ", taskOrTasks);
     }
 
     /**
      * Show unmarked task Ui.
      *
-     * @param task the task to be unmarked
+     * @param numOfTasksDeleted the number of tasks unmarked
      * @return unmarked task prompt
      */
-    public String unmarked(Task task) {
-        return "OK, I've marked this task as not done yet: \n " + task;
+    public String unmarked(int numOfTasksDeleted) {
+        String taskOrTasks = numOfTasksDeleted <= 1 ? "task" : "tasks";
+        return String.format("OK, I've marked the following %s as not done yet:\n\n", taskOrTasks);
     }
 
     /**

@@ -1,6 +1,7 @@
 package duke.command;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.task.Task;
 import duke.utils.CortanaException;
@@ -12,14 +13,14 @@ import duke.utils.Ui;
  * The type Delete command.
  */
 public class DeleteCommand extends Command {
-    private final int index;
+    private final int[] index;
 
     /**
      * Instantiates a new Delete command.
      *
-     * @param index the index of task to be deleted
+     * @param index the index of task to be deleted, can delete more than 1 task at the same time
      */
-    public DeleteCommand(int index) {
+    public DeleteCommand(int... index) {
         this.index = index;
     }
 
@@ -32,14 +33,20 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         try {
-            Task taskDeleted = taskList.getTaskList().get(index);
-            taskList.getTaskList().remove(index);
-            taskList.getTaskSet().remove(taskDeleted);
-            assert !taskList.getTaskList().contains(taskDeleted) && !taskList.getTaskSet().contains(taskDeleted);
+            ArrayList<Task> tasksDeleted = new ArrayList<>();
+            Arrays.stream(index).forEach(index -> tasksDeleted.add(taskList.getTaskList().get(index)));
+
+            taskList.getTaskList().removeAll(tasksDeleted);
+            tasksDeleted.forEach(taskList.getTaskSet()::remove);
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.insert(0, ui.deletedTask(tasksDeleted.size()));
+            tasksDeleted.forEach(task -> stringBuilder.append(task).append("\n"));
+
             storage.writeFile(taskList);
-            return ui.deletedTask(taskList, taskDeleted);
+            return stringBuilder.toString();
         } catch (Exception e) {
-            assert index <= 0 : "Index is greater than 0";
             throw new CortanaException("No such task!");
         }
     }
@@ -48,7 +55,7 @@ public class DeleteCommand extends Command {
     public boolean equals(Object obj) {
         if (obj != null && obj.getClass() == getClass()) {
             DeleteCommand deleteCommand = (DeleteCommand) obj;
-            return deleteCommand.index == this.index;
+            return Arrays.equals(deleteCommand.index, this.index);
         } else {
             return false;
         }
@@ -56,6 +63,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public int hashCode() {
-        return Objects.hash(index);
+        return Arrays.hashCode(index);
     }
 }

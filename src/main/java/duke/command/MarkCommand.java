@@ -1,6 +1,7 @@
 package duke.command;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.task.Task;
 import duke.utils.CortanaException;
@@ -12,14 +13,14 @@ import duke.utils.Ui;
  * The type Mark command.
  */
 public class MarkCommand extends Command {
-    private final int index;
+    private final int[] index;
 
     /**
      * Instantiates a new Mark command.
      *
-     * @param index the index of task to be marked
+     * @param index the index of task to be marked, can mark more than 1 task at the same time
      */
-    public MarkCommand(int index) {
+    public MarkCommand(int... index) {
         this.index = index;
     }
 
@@ -32,12 +33,17 @@ public class MarkCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         try {
-            Task task = taskList.getTaskList().get(index);
-            task.markAsDone();
+            ArrayList<Task> tasksMarked = new ArrayList<>();
+            Arrays.stream(index).forEach(index -> taskList.getTaskList().get(index).markAsDone());
+            Arrays.stream(index).forEach(index -> tasksMarked.add(taskList.getTaskList().get(index)));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.insert(0, ui.marked(tasksMarked.size()));
+            tasksMarked.forEach(task -> stringBuilder.append(task).append("\n"));
+
             storage.writeFile(taskList);
-            return ui.marked(task);
+            return stringBuilder.toString();
         } catch (Exception e) {
-            assert index <= 0 : "Index is greater than 0";
             throw new CortanaException("No such task!");
         }
     }
@@ -46,7 +52,7 @@ public class MarkCommand extends Command {
     public boolean equals(Object obj) {
         if (obj != null && obj.getClass() == getClass()) {
             MarkCommand markCommand = (MarkCommand) obj;
-            return markCommand.index == this.index;
+            return Arrays.equals(markCommand.index, this.index);
         } else {
             return false;
         }
@@ -54,6 +60,6 @@ public class MarkCommand extends Command {
 
     @Override
     public int hashCode() {
-        return Objects.hash(index);
+        return Arrays.hashCode(index);
     }
 }

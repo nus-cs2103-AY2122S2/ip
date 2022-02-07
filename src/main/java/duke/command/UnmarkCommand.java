@@ -1,6 +1,7 @@
 package duke.command;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.task.Task;
 import duke.utils.CortanaException;
@@ -12,14 +13,14 @@ import duke.utils.Ui;
  * The type Unmark command.
  */
 public class UnmarkCommand extends Command {
-    private final int index;
+    private final int[] index;
 
     /**
      * Instantiates a new Unmark command.
      *
-     * @param index the index of task to be unmarked
+     * @param index the index of task to be unmarked, can unmark more than 1 task at the same time
      */
-    public UnmarkCommand(int index) {
+    public UnmarkCommand(int... index) {
         this.index = index;
     }
 
@@ -32,12 +33,18 @@ public class UnmarkCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         try {
-            Task task = taskList.getTaskList().get(index);
-            task.markAsUndone();
+            ArrayList<Task> tasksUnmarked = new ArrayList<>();
+            Arrays.stream(index).forEach(index -> taskList.getTaskList().get(index).markAsUndone());
+            Arrays.stream(index).forEach(index -> tasksUnmarked.add(taskList.getTaskList().get(index)));
+
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.insert(0, ui.unmarked(tasksUnmarked.size()));
+            tasksUnmarked.forEach(task -> stringBuilder.append(task).append("\n"));
+
             storage.writeFile(taskList);
-            return ui.unmarked(task);
+            return stringBuilder.toString();
         } catch (Exception e) {
-            assert index <= 0 : "Index is greater than 0";
             throw new CortanaException("No such task!");
         }
     }
@@ -46,7 +53,7 @@ public class UnmarkCommand extends Command {
     public boolean equals(Object obj) {
         if (obj != null && obj.getClass() == getClass()) {
             UnmarkCommand unmarkCommand = (UnmarkCommand) obj;
-            return unmarkCommand.index == this.index;
+            return Arrays.equals(unmarkCommand.index, this.index);
         } else {
             return false;
         }
@@ -54,6 +61,6 @@ public class UnmarkCommand extends Command {
 
     @Override
     public int hashCode() {
-        return Objects.hash(index);
+        return Arrays.hashCode(index);
     }
 }

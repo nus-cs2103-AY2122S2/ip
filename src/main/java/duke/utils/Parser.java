@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import duke.command.AddCommand;
@@ -41,9 +42,9 @@ public class Parser {
     public static Command parse(String input) throws CortanaException {
         boolean isExit = input.toLowerCase().replaceAll("[ |\\t]", "").equals("bye");
         boolean isListCommand = input.toLowerCase().replaceAll("[ |\\t]", "").equals("list");
-        boolean isMarkCommand = input.toLowerCase().matches("^mark \\d+|^mark -\\d+");
-        boolean isUnmarkCommand = input.toLowerCase().matches("^unmark \\d+|^unmark -\\d+");
-        boolean isDeleteCommand = input.toLowerCase().matches("^delete \\d+|^delete -\\d+");
+        boolean isMarkCommand = input.toLowerCase().matches("^mark [-\\d ]+|[\\d ]+");
+        boolean isUnmarkCommand = input.toLowerCase().matches("^unmark [-\\d ]+|[\\d ]+");
+        boolean isDeleteCommand = input.toLowerCase().matches("^delete [-\\d ]+|[\\d ]+");
         boolean isDeleteAllCommand = input.toLowerCase().matches("^delete all");
         boolean isShowAllOnSameDate = input.toLowerCase()
                 .matches("^show all( )?(\\d{4} ?.?/?-?\\d{1,2} ?.?/?-?\\d{1,2})?( )?(\\d{4})?");
@@ -64,16 +65,19 @@ public class Parser {
             return new ListCommand();
         }
         if (isMarkCommand) {
-            int index = Integer.parseInt(input.replaceAll("mark ", "")) - 1;
-            return new MarkCommand(index);
+            String[] indexesString = input.replaceAll("mark ", "").split(" ");
+            int[] arr = Arrays.stream(indexesString).mapToInt(i -> Integer.parseInt(i) - 1).toArray();
+            return new MarkCommand(arr);
         }
         if (isUnmarkCommand) {
-            int index = Integer.parseInt(input.replaceAll("unmark ", "")) - 1;
-            return new UnmarkCommand(index);
+            String[] indexesString = input.replaceAll("unmark ", "").split(" ");
+            int[] arr = Arrays.stream(indexesString).mapToInt(i -> Integer.parseInt(i) - 1).toArray();
+            return new UnmarkCommand(arr);
         }
         if (isDeleteCommand) {
-            int index = Integer.parseInt(input.replaceAll("delete ", "")) - 1;
-            return new DeleteCommand(index);
+            String[] indexesString = input.replaceAll("delete ", "").split(" ");
+            int[] arr = Arrays.stream(indexesString).mapToInt(i -> Integer.parseInt(i) - 1).toArray();
+            return new DeleteCommand(arr);
         }
         if (isDeleteAllCommand) {
             return new DeleteAllCommand();
