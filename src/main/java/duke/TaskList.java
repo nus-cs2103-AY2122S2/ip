@@ -152,6 +152,23 @@ public class TaskList {
         return (results.size() == 0) ? null : formatTaskList(results);
     }
 
+    /**
+     * Returns all deadlines and events that are not done.
+     *
+     * @return tasks to be reminded.
+     */
+    public ArrayList<Task> getReminderTasks() {
+        ArrayList<Task> reminderTasks = new ArrayList<>();
+
+        for (Task task : this.tasks) {
+            if ((task.getType().equals(Task.Type.DEADLINE) || task.getType().equals(Task.Type.EVENT))
+                    && task.getStatusIcon().equals(" ")) {
+                reminderTasks.add(task);
+            }
+        }
+        return reminderTasks;
+    }
+
     @Override
     public String toString() {
         return formatTaskList(this.tasks);

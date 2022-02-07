@@ -27,8 +27,8 @@ public class Event extends Task {
      *
      * @return time due of event.
      */
-    public String getAt() {
-        return this.at.format(Constant.OUT_TIME_FORMATTER);
+    public LocalDateTime getAt() {
+        return this.at;
     }
 
     @Override

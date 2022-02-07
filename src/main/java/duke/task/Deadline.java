@@ -27,8 +27,8 @@ public class Deadline extends Task {
      *
      * @return time due of deadline.
      */
-    public String getBy() {
-        return this.by.format(Constant.OUT_TIME_FORMATTER);
+    public LocalDateTime getBy() {
+        return this.by;
     }
 
     @Override

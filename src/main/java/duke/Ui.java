@@ -1,5 +1,12 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -29,7 +36,7 @@ public class Ui {
      */
     public String startMessage() {
         String msg = "Hello! I am Duke.\n"
-                + "Your wish is my command.\n\n";
+                + "Your wish is my command.";
         return OUTPUT_NAME + "\n" + msg + "\n";
     }
 
@@ -117,6 +124,39 @@ public class Ui {
             String msg = "Here are the matching tasks in your list:\n" + tasks;
             return OUTPUT_NAME + "\n" + msg;
         }
+    }
+
+    /**
+     * Returns deadlines and events to be reminded.
+     *
+     * @return string of tasks to be reminded.
+     */
+    public String reminderMessage() {
+        ArrayList<Task> remTasks = this.taskList.getReminderTasks();
+
+        String msg = "You have " + remTasks.size() + " reminder"
+                + (remTasks.size() > 1 ? "s." : ".") + "\n";
+
+        String deadlines = "";
+        String events = "";
+
+        for (Task task : remTasks) {
+            if (task.getType() == Task.Type.DEADLINE) {
+                Long days = ChronoUnit.DAYS.between(LocalDateTime.now(), ((Deadline) task).getBy());
+                deadlines += "In " + days + " day" + (days > 1 ? "s, " : ", ") + task.getDescription() + ".\n";
+            }
+            if (task.getType() == Task.Type.EVENT) {
+                Long days = ChronoUnit.DAYS.between(LocalDateTime.now(), ((Event) task).getAt());
+                events += "In " + days + " day" + (days > 1 ? "s, " : ", ") + task.getDescription() + ".\n";
+            }
+        }
+        if (!deadlines.equals("")) {
+            msg += "\nDeadline:\n" + deadlines;
+        }
+        if (!events.equals("")) {
+            msg += "\nEvent:\n" + events;
+        }
+        return OUTPUT_NAME + "\n" + msg;
     }
 
     /**

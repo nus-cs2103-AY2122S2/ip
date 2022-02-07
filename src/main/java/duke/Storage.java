@@ -52,13 +52,13 @@ public class Storage {
                 data += "D | ";
                 data += task.getStatusIcon().equals("X") ? "1 | " : "0 | ";
                 data += task.getDescription() + " | ";
-                data += ((Deadline) task).getBy() + "\n";
+                data += ((Deadline) task).getBy().format(Constant.OUT_TIME_FORMATTER) + "\n";
                 break;
             case EVENT:
                 data += "E | ";
                 data += task.getStatusIcon().equals("X") ? "1 | " : "0 | ";
                 data += task.getDescription() + " | ";
-                data += ((Event) task).getAt() + "\n";
+                data += ((Event) task).getAt().format(Constant.OUT_TIME_FORMATTER) + "\n";
                 break;
             default:
                 throw new IOException();
