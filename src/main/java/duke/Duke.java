@@ -1,5 +1,7 @@
 package duke;
 
+import gui.Ui;
+
 /**
  * This is the main duke.Duke program that will be able to process a duke.Task of 3 types: todo, deadline and task
  * duke.Duke is able to list, delete and mark/unmark tasks as done/undone.
@@ -9,6 +11,7 @@ package duke;
 public class Duke {
 
     static TaskList tasklist;
+    public static boolean hasJustBooted = true;
 
     public Duke() {
         initialise();

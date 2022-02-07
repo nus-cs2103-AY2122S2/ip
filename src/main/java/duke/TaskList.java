@@ -47,20 +47,19 @@ public class TaskList {
      * Marks/Unmarks tasks as done/undone. Marking tasks that are already marked will have no change;
      * same with unmarking unmarked tasks.
      *
-     * @param input Original input string that was entered
+     * @param taskNum taskNumber to mark/unmark
+     * @param isMark flag to check if task is to be marked or unmarked
      * @return String output of marked task
      */
-    public String markTask(String input) {
-        String[] inputArr = input.split(" ");
-        int taskNum = Integer.parseInt(inputArr[1]) - 1;
-        String s = "";
+    public String markTask(int taskNum, boolean isMark) {
+        String s;
         Task curr = tasklist.get(taskNum);
-        if (input.startsWith("mark")) {
+        if (isMark) {
             curr.mark();
-            s += Ui.printMarkTaskDone(curr);
+            s = Ui.printMarkTaskDone(curr);
         } else {
             curr.unmark();
-            s += Ui.printMarkTaskNotDone(curr);
+            s = Ui.printMarkTaskNotDone(curr);
         }
         Storage.writeAllToFile(this);
         return s;

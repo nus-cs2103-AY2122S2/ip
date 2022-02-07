@@ -40,7 +40,7 @@ public class Parser {
         } else if (input.startsWith("delete")) {
             s =  parseDelete(input, taskList);
         } else if (input.startsWith("mark") || input.startsWith("unmark")) {
-            s = taskList.markTask(input);
+            s = parseMarkTask(input, taskList);
         } else if (input.startsWith("event") || input.startsWith("todo") || input.startsWith("deadline")) {
             s = parseTask(input, taskList);
         } else if (input.startsWith("find ")){
@@ -49,6 +49,18 @@ public class Parser {
             s = Ui.printWhatDoesThatMean();
         }
         return s;
+    }
+
+    public static String parseMarkTask(String input, TaskList taskList) {
+        String[] inputArr = input.split(" ");
+        int taskNum = Integer.parseInt(inputArr[1]) - 1;
+        if (taskNum < 0 || taskNum > Task.totalTask){
+            return Ui.printNoSuchTask();
+        }
+        if (input.startsWith("unmark")) {
+            return taskList.markTask(taskNum, false);
+        }
+        return taskList.markTask(taskNum, true);
     }
 
     public static String parseFind(String input, TaskList taskList) {

@@ -9,7 +9,7 @@ public class Ui {
 
     static public String WRONG_DATE_FORMAT = "Note that dates should be in <<YYYY-MM-DD HHMM>> format\n";
 
-    public static String startup() {
+    public static String printStartup() {
         String s;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -144,5 +144,9 @@ public class Ui {
             s += String.format(" [E][%s] %s (on: %s) \n", task.getStatus(), task.name, task.time);
         }
         return s;
+    }
+
+    public static String printNoSuchTask() {
+        return "There exists no such task.";
     }
 }
