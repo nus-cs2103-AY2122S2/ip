@@ -1,9 +1,12 @@
 package duke.util;
 
-import java.util.List;
-
 import duke.task.Task;
 
+import java.util.List;
+
+/**
+ * Represents the User Interface
+ */
 public final class Ui {
 
     private static final String BAR = "-".repeat(60);
@@ -15,7 +18,7 @@ public final class Ui {
      * Main printing method that formats the output with BAR pre and post output
      * Most pre-defined printing methods in this class ultimately calls this method
      * for the actual printing
-     * 
+     *
      * @param message string to be printed
      */
     public static void printMessage(String message) {
@@ -45,8 +48,8 @@ public final class Ui {
     }
 
     /**
-     * Prints details of an Duke Exception, along with a hint to resolve the error
-     * 
+     * Prints details of a Duke Exception, along with a hint to resolve the error
+     *
      * @param e    Exception object
      * @param hint string message containing hint to resolve the error
      *             e.g. "Please try again" or "Please input in format XXXX"
@@ -81,8 +84,8 @@ public final class Ui {
      * Should be called directly outside of this class as this is intended as an
      * internal helper class
      * with no extra BAR formatting pre and post output
-     * 
-     * @param tasks
+     *
+     * @param tasks List of Task objects to be printed
      */
     private static void printNoOfTasks(List<Task> tasks) {
         System.out.println("Now you have " + tasks.size() + " tasks in the list");

@@ -1,9 +1,9 @@
 package duke.task;
 
+import duke.util.DateTimeCustomFormatter;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-
-import duke.util.DateTimeCustomFormatter;
 
 /**
  * Represents a Deadline object
@@ -13,22 +13,23 @@ public class Deadline extends Task {
 
     /**
      * Default constructor
-     * 
+     *
      * @param description description of the task
      * @param metaInfo    deadline information of the task
      */
-    public Deadline(String description, String metaInfo) throws DateTimeParseException{
+    public Deadline(String description, String metaInfo) throws DateTimeParseException {
         super(description, "D");
         this.metaInfo = DateTimeCustomFormatter.getDateFromString(metaInfo);
     }
 
     /**
      * This constructor initializes deadline objects with isDone specified
-     * @param isDone whether this task is done or not
+     *
+     * @param isDone      whether this task is done or not
      * @param description description of the task
-     * @param metaInfo deadline information of the task
+     * @param metaInfo    deadline information of the task
      */
-    public Deadline(boolean isDone, String description, String metaInfo) throws DateTimeParseException{
+    public Deadline(boolean isDone, String description, String metaInfo) throws DateTimeParseException {
         super(description, "D");
         if (isDone) {
             setDone();
@@ -46,8 +47,8 @@ public class Deadline extends Task {
         return super.toString() + "(by:" + DateTimeCustomFormatter.getStringFromDate(this.metaInfo) + ")";
     }
 
-    
-    /** 
+
+    /**
      * @return String string representation of this task to be saved to file
      */
     @Override

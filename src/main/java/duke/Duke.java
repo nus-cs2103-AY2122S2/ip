@@ -1,11 +1,11 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
+
+import java.util.Scanner;
 
 /**
  * Represents a chatbot
@@ -14,9 +14,22 @@ public class Duke {
     Storage storageHandler;
     TaskList tasks;
 
+    /**
+     * Default constructor
+     */
     public Duke() {
         storageHandler = new Storage();
         tasks = new TaskList();
+    }
+
+    /**
+     * Initializes a Duke chatbot object and calls Duke.Run()
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Duke kizer = new Duke();
+        kizer.run();
     }
 
     /**
@@ -72,15 +85,5 @@ public class Duke {
             }
         }
         storageHandler.saveTasksToFile(tasks.getTasks());
-    }
-
-    /**
-     * Initializes a Duke chatbot object and calls Duke.Run()
-     * 
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke kizer = new Duke();
-        kizer.run();
     }
 }

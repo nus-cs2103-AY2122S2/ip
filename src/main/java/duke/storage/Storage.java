@@ -1,12 +1,9 @@
 package duke.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.task.Deadline;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,12 +11,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Handles all data file Storage operations
+ */
 public class Storage {
-    private ArrayList<Task> tasks;
-
-    Path dirPath = Paths.get("./data/");
     static Path filePath = Paths.get("./data/data.txt");
+    Path dirPath = Paths.get("./data/");
+    private ArrayList<Task> tasks;
 
     /**
      * Default constructor

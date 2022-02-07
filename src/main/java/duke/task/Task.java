@@ -1,4 +1,5 @@
 package duke.task;
+
 /**
  * Representation of a Task object
  */
@@ -9,9 +10,8 @@ public class Task {
 
     /**
      * Default constructor
-     * 
+     *
      * @param description description of the task
-     * @param metaInfo    deadline information of the task
      */
     public Task(String description) {
         this.taskIcon = "T";
@@ -21,8 +21,9 @@ public class Task {
 
     /**
      * Constructor that allows custom taskIcon
+     *
      * @param description description of the task
-     * @param taskIcon custom task icon
+     * @param taskIcon    custom task icon
      */
     public Task(String description, String taskIcon) {
         this.taskIcon = taskIcon;
@@ -46,7 +47,7 @@ public class Task {
 
     /**
      * Sets isDone = true
-     * 
+     *
      * @return String task description is done!
      */
     public String setDone() {
@@ -56,7 +57,7 @@ public class Task {
 
     /**
      * Sets isDone = false
-     * 
+     *
      * @return String task description is undone!
      */
     public String setUndone() {
@@ -80,8 +81,8 @@ public class Task {
         return this.description;
     }
 
-    
-    /** 
+
+    /**
      * @return String string representation of this task to be saved to file
      */
     public String getPrintString() {

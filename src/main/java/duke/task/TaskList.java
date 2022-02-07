@@ -1,22 +1,36 @@
 package duke.task;
 
-import java.time.format.DateTimeParseException;
-import java.util.List;
-
 import duke.exception.DukeException;
 import duke.util.Ui;
 
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
+/**
+ * Handles all operations related to the List of Tasks
+ */
 public class TaskList {
     List<Task> tasks;
 
+    /**
+     * Constructor
+     *
+     * @param tasks List of tasks to be initialized
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Constructor with empty List
+     */
     public TaskList() {
         this.tasks = null;
     }
 
+    /**
+     * @return List of tasks
+     */
     public List<Task> getTasks() {
         return tasks;
     }
@@ -38,7 +52,7 @@ public class TaskList {
     }
 
     /**
-     * @param inputArray
+     * @param inputArray String[] containing the original user input but split by words
      */
     public void handleMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
@@ -49,7 +63,7 @@ public class TaskList {
     }
 
     /**
-     * @param inputArray
+     * @param inputArray String[] containing the original user input but split by words
      */
     public void handleUnMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
@@ -60,8 +74,8 @@ public class TaskList {
     }
 
     /**
-     * @param inputArray
-     * @param originalInput
+     * @param inputArray String[] containing the original user input but split by words
+     * @param originalInput Original user input captured as a String
      */
     public void handleTodo(String[] inputArray, String originalInput) {
         try {
@@ -77,6 +91,9 @@ public class TaskList {
         processNewTask(curr);
     }
 
+    /**
+     * @param originalInput Original user input captured as a String
+     */
     public void handleDeadline(String originalInput) {
         String metaInfo = originalInput.split("/by")[1];
         String strippedCommand = originalInput.substring(8);
@@ -90,6 +107,9 @@ public class TaskList {
         processNewTask(curr);
     }
 
+    /**
+     * @param originalInput Original user input captured as a String
+     */
     public void handleEvent(String originalInput) {
         String metaInfo = originalInput.split("/at")[1];
         String strippedCommand = originalInput.substring(5);
@@ -103,6 +123,9 @@ public class TaskList {
         processNewTask(curr);
     }
 
+    /**
+     * @param inputArray String[] containing the original user input but split by words
+     */
     public void handleDelete(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
 
