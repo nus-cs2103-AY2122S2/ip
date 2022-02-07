@@ -15,18 +15,15 @@ import duke.parser.InputParser;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
     private String filePath = "data/tasks.txt";
     private InputParser inputParser = new InputParser();
 
     public Duke() {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (RonException e) {
             this.tasks = new TaskList(filePath);
-            this.ui.showLoadingError();
         }
     }
 
@@ -34,13 +31,9 @@ public class Duke {
         return new WriteException().toString();
     }
 
-    public void run() {
-        this.ui.start(tasks);
-    }
-
     public String backupTasks() {
         try {
-            tasks.backup();
+            this.tasks.backup();
             return "Bye. Stay safe and have a nice day!";
         } catch (RonException e) {
             return showWriteError();
@@ -49,7 +42,7 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            return inputParser.parseInput(input, tasks);
+            return this.inputParser.parseInput(input, tasks);
         } catch (RonException e) {
             return e.toString();
         }

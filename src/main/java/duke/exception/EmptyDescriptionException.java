@@ -5,8 +5,8 @@ package duke.exception;
  * Exception thrown when user does not input a description of task
  */
 public class EmptyDescriptionException extends RonException {
-    public static final String MESSAGE = "Please add a description for ";
-    public static final String MESSAGE2 = " task.";
+    public static final String MESSAGE_FRONT = "Please add a description for ";
+    public static final String MESSAGE_END = " task.";
 
     private String type;
 
@@ -16,6 +16,6 @@ public class EmptyDescriptionException extends RonException {
 
     @Override
     public String toString() {
-        return super.toString() + MESSAGE + type + MESSAGE2;
+        return super.toString() + MESSAGE_FRONT + type + MESSAGE_END;
     }
 }

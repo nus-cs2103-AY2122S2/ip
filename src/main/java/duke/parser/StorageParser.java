@@ -25,22 +25,17 @@ public class StorageParser extends Parser {
         if (this.task instanceof Todo) {
             returnString = returnString + "T | " + (this.task.getIsDone() ? "1 | " : "0 | ")
                     + this.task.getDescription();
-        }
-
-        if (this.task instanceof Deadline) {
+        } else if (this.task instanceof Deadline) {
             String dateTime = ((Deadline) this.task)
                     .getDate().format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " " + ((Deadline) this.task)
                     .getTime().format(DateTimeFormatter.ofPattern("HHmm"));
             returnString = returnString + "D | " + (this.task.getIsDone() ? "1 | " : "0 | ")
                     + this.task.getDescription() + "| " + dateTime;
-        }
-
-        if (this.task instanceof Event) {
+        } else if (this.task instanceof Event) {
             String dateTime = ((Event) this.task).getDate().format(DateTimeFormatter.ofPattern("d/M/yyyy"));
             returnString = returnString + "E | " + (this.task.getIsDone() ? "1 | " : "0 | ")
                     + this.task.getDescription() + "| " + dateTime;
         }
-
         return returnString + "\n";
     }
 }

@@ -15,6 +15,8 @@ import javafx.util.Duration;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String WELCOME_TEXT = "Hello! I'm Ron. What can I do for you?";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -32,9 +34,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcomeText = "Hello! I'm Ron. What can I do for you?";
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeText, dukeImage)
+                DialogBox.getDukeDialog(WELCOME_TEXT, dukeImage)
         );
     }
 

@@ -37,15 +37,13 @@ public class TaskList {
                         task.toggleStatus();
                     }
                     store.add(task);
-                }
-                if (tokens[0].charAt(0) == "D".charAt(0)) {
+                } else if (tokens[0].charAt(0) == "D".charAt(0)) {
                     Task task = new Deadline("deadline " + tokens[2] + "/by " + tokens[3]);
                     if (Integer.parseInt(tokens[1].trim()) == 1) {
                         task.toggleStatus();
                     }
                     store.add(task);
-                }
-                if (tokens[0].charAt(0) == "E".charAt(0)) {
+                } else if (tokens[0].charAt(0) == "E".charAt(0)) {
                     Task task = new Event("event " + tokens[2] + "/at " + tokens[3]);
                     if (Integer.parseInt(tokens[1].trim()) == 1) {
                         task.toggleStatus();
@@ -80,10 +78,10 @@ public class TaskList {
 
     public String printTasks() {
         String string = "";
-        int i = 1;
+        int index = 1;
         for (Task task : this.store) {
-            string += i + "." + task + "\n";
-            i++;
+            string += index + "." + task + "\n";
+            index++;
         }
         return string;
     }
@@ -98,10 +96,10 @@ public class TaskList {
 
         String string = "";
 
-        int i = 1;
+        int index = 1;
         for (Task task : tempList) {
-            string += i + "." + task + "\n";
-            i++;
+            string += index + "." + task + "\n";
+            index++;
         }
         return string;
     }
@@ -136,6 +134,7 @@ public class TaskList {
 
     /**
      * Writes current state snapshot of tasklist into .txt file
+     * WriteException thrown if backup fails
      *
      * @throws WriteException
      */
