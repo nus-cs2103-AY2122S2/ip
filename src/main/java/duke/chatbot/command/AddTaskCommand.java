@@ -12,7 +12,7 @@ import duke.task.ToDo;
  * Command which adds a given task
  * to a given TaskList.
  */
-class AddTaskCommand extends TaskListCommand {
+public class AddTaskCommand extends TaskListCommand {
 
     public AddTaskCommand(String name, String args, TaskList taskList) {
         super(name, args, taskList);
@@ -79,5 +79,14 @@ class AddTaskCommand extends TaskListCommand {
             throw new IllegalArgumentException("Invalid task!");
         }
         return task;
+    }
+
+    /**
+     * Removes previously added task.
+     */
+    @Override
+    public void undo() {
+        TaskList taskList = super.getTaskList();
+        taskList.deleteTask(taskList.getSize() - 1);
     }
 }

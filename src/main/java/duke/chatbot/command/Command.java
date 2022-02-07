@@ -34,16 +34,24 @@ public abstract class Command {
     public abstract ArrayList<String> execute() throws IllegalArgumentException;
 
     /**
+     * Reverses the current command. Will be overridden only
+     * if command is non-trivial and changes tasks state.
+     */
+    public void undo() {};
+
+    /**
      * Parses user inputted command to extract
      * the name and args of the command, returning
      * the concrete Command subclass for the input.
      *
      * @param input Command inputted by user.
      * @param taskList TaskList maintained by ChatBot.
+     * @param lastExecutedCommand Last command executed by the ChatBot.
      * @return Command object corresponding to input.
      * @throws IllegalArgumentException If the command is not valid.
      */
-    public static Command parseCommand(String input, TaskList taskList) throws IllegalArgumentException {
+    public static Command parseCommand(String input, TaskList taskList, Command lastExecutedCommand)
+            throws IllegalArgumentException {
         String name = input;
         String args = null;
         // Separate command name and args
@@ -76,6 +84,9 @@ public abstract class Command {
         case "find":
             command = new FindCommand(name, args, taskList);
             break;
+        case "undo":
+            command = new UndoCommand(name, lastExecutedCommand);
+            break;
         case "bye":
             command = new ExitCommand(name, args);
             break;
@@ -83,6 +94,15 @@ public abstract class Command {
             throw new IllegalArgumentException("Invalid command");
         }
         return command;
+    }
+
+    /**
+     * Returns the original command inputted by user.
+     *
+     * @return String of original command.
+     */
+    public String getOriginalCommand() {
+        return this.name + " " + this.args;
     }
 
     protected String getName() {

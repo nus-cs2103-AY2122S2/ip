@@ -2,8 +2,11 @@ package duke.chatbot;
 
 import java.util.ArrayList;
 
+import duke.chatbot.command.AddTaskCommand;
 import duke.chatbot.command.Command;
+import duke.chatbot.command.DeleteTaskCommand;
 import duke.chatbot.command.ExitCommand;
+import duke.chatbot.command.MarkTaskCommand;
 import duke.data.TaskList;
 
 
@@ -19,6 +22,9 @@ public class ChatBot {
 
     /** Boolean to track if bot has received a termination command */
     private boolean hasTerminated;
+
+    /** Last executed command by ChatBot */
+    private Command lastExecutedCommand = null;
 
     /**
      * Returns a ChatBot that run commands based
@@ -42,9 +48,10 @@ public class ChatBot {
      */
     public ArrayList<String> runCommand(String input) {
         try {
-            Command command = Command.parseCommand(input, this.taskList);
+            Command command = Command.parseCommand(input, this.taskList, this.lastExecutedCommand);
             ArrayList<String> response = command.execute();
             this.updateTerminationStatus(command);
+            this.updateLastExecutedCommand(command);
             return response;
         } catch (IllegalArgumentException e) {
             ArrayList<String> response = new ArrayList<>();
@@ -67,5 +74,20 @@ public class ChatBot {
      */
     private void updateTerminationStatus(Command command) {
         this.hasTerminated = command instanceof ExitCommand;
+    }
+
+    /**
+     * Updates last executed command, only if the command
+     * is a non-trivial one which changes the tasks.
+     *
+     * @param newCommand Command that was just ran.
+     */
+    private void updateLastExecutedCommand(Command newCommand) {
+        //TODO: Use inheritance to group non-trivial commands
+        if (newCommand instanceof AddTaskCommand
+                || newCommand instanceof DeleteTaskCommand
+                || newCommand instanceof MarkTaskCommand) {
+            this.lastExecutedCommand = newCommand;
+        }
     }
 }
