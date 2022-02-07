@@ -52,10 +52,14 @@ public class UnmarkCommand implements Command {
         Task taskNotDone = !taskList.hasFilter()
                 ? markTaskNotDoneBasedOnAllTasks(taskList)
                 : markTaskNotDoneBasedOnFilteredTasks(taskList);
+        assert taskNotDone != null : "Task should not be null";
 
         storage.saveTasksToFile(taskList);
 
-        return ui.taskNotDoneMessage(taskNotDone);
+        String response = ui.taskNotDoneMessage(taskNotDone);
+        assert !response.equals("") : "Unmark response should not be empty";
+
+        return response;
     }
 
     /**

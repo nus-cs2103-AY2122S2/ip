@@ -35,10 +35,14 @@ public class AddToDoCommand extends AddCommand {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task newToDoTask = taskList.addToDoTask(super.getTaskDescription());
+        assert newToDoTask != null : "Task should not be null";
 
         storage.saveTasksToFile(taskList);
 
-        return ui.taskAddedMessage(newToDoTask) + System.lineSeparator()
+        String response = ui.taskAddedMessage(newToDoTask) + System.lineSeparator()
                 + ui.numOfTasksInListMessage(taskList);
+        assert !response.equals("") : "Add todo response should not be empty";
+
+        return response;
     }
 }

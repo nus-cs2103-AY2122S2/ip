@@ -52,6 +52,7 @@ public class DeleteCommand implements Command {
         Task taskDeleted = !taskList.hasFilter()
                 ? deleteTaskBasedOnAllTasks(taskList)
                 : deleteTaskBasedOnFilteredTasks(taskList);
+        assert taskDeleted != null : "Task should not be null";
 
         if (taskList.getNumOfFilteredTasks() == 0) {
             // Reset the List of filteredTasks when the List is empty
@@ -61,8 +62,11 @@ public class DeleteCommand implements Command {
 
         storage.saveTasksToFile(taskList);
 
-        return ui.taskDeletedMessage(taskDeleted) + System.lineSeparator()
+        String response = ui.taskDeletedMessage(taskDeleted) + System.lineSeparator()
                 + ui.numOfTasksInListMessage(taskList);
+        assert !response.equals("") : "Delete response should not be empty";
+
+        return response;
     }
 
     /**

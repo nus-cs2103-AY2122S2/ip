@@ -48,6 +48,8 @@ public class FindCommand implements Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert !keyword.equals("") : "Keyword should not be empty";
+
         if (taskList.getNumOfTasks() == 0) {
             throw new DukeException(ErrorMessage.ERROR_NO_TASKS_IN_LIST.toString());
         }
@@ -63,6 +65,9 @@ public class FindCommand implements Command {
             throw new DukeException(ErrorMessage.ERROR_NO_MATCHING_TASKS_IN_LIST.toString());
         }
 
-        return ui.tasksWithKeywordMessage(taskList, keyword);
+        String response = ui.tasksWithKeywordMessage(taskList, keyword);
+        assert !response.equals("") : "Find response should not be empty";
+
+        return response;
     }
 }

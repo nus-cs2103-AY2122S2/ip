@@ -42,10 +42,14 @@ public class AddEventCommand extends AddCommand {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task newEventTask = taskList.addEventTask(super.getTaskDescription(), taskDateTime);
+        assert newEventTask != null : "Task should not be null";
 
         storage.saveTasksToFile(taskList);
 
-        return ui.taskAddedMessage(newEventTask) + System.lineSeparator()
+        String response = ui.taskAddedMessage(newEventTask) + System.lineSeparator()
                 + ui.numOfTasksInListMessage(taskList);
+        assert !response.equals("") : "Add event response should not be empty";
+
+        return response;
     }
 }

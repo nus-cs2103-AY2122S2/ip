@@ -43,6 +43,8 @@ public class Ui {
      * @return The string representation of the message
      */
     public String taskAddedMessage(Task task) {
+        assert task != null : "Task should not be null";
+
         return "Got it. I've added this task:"
                 + System.lineSeparator() + "\t" + task;
     }
@@ -54,6 +56,8 @@ public class Ui {
      * @return The string representation of the message
      */
     public String taskDoneMessage(Task task) {
+        assert task != null : "Task should not be null";
+
         return "Nice! I've marked this task as done:"
                 + System.lineSeparator() + "\t" + task;
     }
@@ -65,6 +69,8 @@ public class Ui {
      * @return The string representation of the message
      */
     public String taskNotDoneMessage(Task task) {
+        assert task != null : "Task should not be null";
+
         return "OK, I've marked this task as not done yet:"
                 + System.lineSeparator() + "\t" + task;
     }
@@ -76,6 +82,8 @@ public class Ui {
      * @return The string representation of the message
      */
     public String taskDeletedMessage(Task task) {
+        assert task != null : "Task should not be null";
+
         return "Noted. I've removed this task:"
                 + System.lineSeparator() + "\t" + task;
     }
@@ -87,6 +95,9 @@ public class Ui {
      * @return The string representation of the message
      */
     public String numOfTasksInListMessage(TaskList taskList) {
+        assert taskList.getNumOfTasks() != 0
+                : "List of tasks in the task list should not be empty";
+
         return "Now you have " + taskList.getNumOfTasks()
                 + (taskList.getNumOfTasks() > 1 ? " tasks" : " task")
                 + " in the list.";
@@ -99,6 +110,9 @@ public class Ui {
      * @return The string representation of the message
      */
     public String tasksInListMessage(TaskList taskList) {
+        assert taskList.getNumOfTasks() != 0
+                : "List of tasks in the task list should not be empty";
+
         return "Here"
                 + (taskList.getNumOfTasks() > 1 ? " are the tasks " : " is the task ")
                 + "in your list:"
@@ -118,6 +132,9 @@ public class Ui {
      * @return The string representation of the message
      */
     public String tasksOnDateMessage(TaskList taskList, String dateStr) {
+        assert taskList.getNumOfFilteredTasks() != 0
+                : "List of filtered tasks in the task list should not be empty";
+
         return "Here"
                 + (taskList.getNumOfFilteredTasks() > 1 ? " are the tasks " : " is the task ")
                 + "on this date (" + processDateStr(dateStr) + "):"
@@ -139,6 +156,8 @@ public class Ui {
      * @return Specified date string after processing
      */
     private String processDateStr(String dateStr) {
+        assert !dateStr.equals("") : "Date should not be empty";
+
         LocalDate date;
         String processedDateStr;
 
@@ -161,6 +180,9 @@ public class Ui {
      * @return The string representation of the message
      */
     public String tasksWithKeywordMessage(TaskList taskList, String keyword) {
+        assert taskList.getNumOfFilteredTasks() != 0
+                : "List of filtered tasks in the task list should not be empty";
+
         return "Here"
                 + (taskList.getNumOfFilteredTasks() > 1 ? " are the matching tasks " : " is the matching task ")
                 + "in your list:"
@@ -180,6 +202,9 @@ public class Ui {
      * @return The string representation of the reminder message
      */
     public String filteredTasksReminderMessage(String filteredTasksMessage) {
+        assert !filteredTasksMessage.equals("")
+                : "Filtered tasks message should not be empty";
+
         return "[FILTERED TASKS]"
                 + System.lineSeparator()
                 + System.lineSeparator()
