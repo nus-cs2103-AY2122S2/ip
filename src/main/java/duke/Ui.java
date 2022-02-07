@@ -57,12 +57,15 @@ public class Ui {
      * @param tasks arraylist of desired tasks to show the user.
      */
     public String printTasks(ArrayList<Task> tasks) {
-        System.out.println("Here are the requested tasks:");
         StringBuilder taskList = new StringBuilder();
+        taskList.append("Here are the requested tasks:\n");
         for (int i = 1; i <= tasks.size(); i++) {
             taskList.append(i).append(". ").append(tasks.get(i - 1)).append("\n");
         }
-        return(taskList.toString().trim());
+        String out = taskList.toString().trim();
+        //output cannot be empty
+        assert !out.equals("");
+        return(out);
     }
 
     /**

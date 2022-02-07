@@ -51,6 +51,8 @@ public class Duke {
         } catch (DukeException e) {
             response = e.getMessage();
         }
+        //response to user should not be empty
+        assert !response.equals("");
         return response;
     }
 
