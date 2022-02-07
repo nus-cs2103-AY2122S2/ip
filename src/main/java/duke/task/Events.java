@@ -60,6 +60,10 @@ public class Events extends Task {
 
     @Override
     public String serialize() {
+        assert this.date != null;
+        assert this.fromtime != null;
+        assert this.bytime != null;
+        assert this.objective != null;
         return "E|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.date.toString()
                 + "|" + this.fromtime.toString() + "|" + this.bytime.toString() + "\n";
     };

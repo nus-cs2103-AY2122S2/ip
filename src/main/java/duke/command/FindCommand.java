@@ -38,6 +38,7 @@ public class FindCommand extends Command {
             reply.append(chosenTasks.get(i));
             reply.append("\n");
         }
+        
         return reply.toString();
     }
 }

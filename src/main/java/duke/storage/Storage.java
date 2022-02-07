@@ -46,6 +46,7 @@ public class Storage {
         }
 
         List<Task> loaded = new ArrayList<>();
+        assert dir.exists();
         Scanner sc = new Scanner(dir);
         while (sc.hasNext()) {
             String encoded = sc.nextLine();

@@ -58,6 +58,7 @@ public class Parser {
         if (input[0].equals("find")) {
             return new FindCommand(input[1]);
         } else {
+            assert input[0].equals("findDate");
             return new FindDateCommand(input[1]);
         }
     }
@@ -75,6 +76,7 @@ public class Parser {
             if (input[0].equals("deadline")) {
                 return new AddCommand(new DeadLine(taskName, input[input.length - 2], input[input.length - 1]));
             } else {
+                assert input[0].equals("event");
                 return new AddCommand(new Events(taskName,
                         input[input.length - 3], input[input.length - 2], input[input.length - 1]));
             }
@@ -88,6 +90,7 @@ public class Parser {
         if (input[0].equals("mark")) {
             return new MarkCommand(Integer.parseInt(input[1]), true);
         } else {
+            assert input[0].equals("unmark");
             return new MarkCommand(Integer.parseInt(input[1]), false);
         }
     }
