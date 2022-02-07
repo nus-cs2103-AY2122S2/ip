@@ -38,18 +38,20 @@ public class Storage {
      * @throws DukeException If there is no previously created file for tasks in hard disks.
      */
     public List<Task> load() throws IOException, DukeException {
-        List<Task> loaded = new ArrayList<>();
-        dir.getParentFile().mkdirs();
-        if (dir.createNewFile()) {
+        if (dir.getParentFile().mkdirs()) { // If no directory exists
             throw new DukeException("No previous save file");
-        } else {
-            Scanner sc = new Scanner(dir);
-            while (sc.hasNext()) {
-                String encoded = sc.nextLine();
-                loaded.add(Task.deserialize(encoded));
-            }
-            sc.close();
         }
+        if (dir.createNewFile()) { // If no save file exists
+            throw new DukeException("No previous save file");
+        }
+
+        List<Task> loaded = new ArrayList<>();
+        Scanner sc = new Scanner(dir);
+        while (sc.hasNext()) {
+            String encoded = sc.nextLine();
+            loaded.add(Task.deserialize(encoded));
+        }
+        sc.close();
         return loaded;
     }
 

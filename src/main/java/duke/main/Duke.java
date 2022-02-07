@@ -14,7 +14,8 @@ import duke.task.TaskList;
 public class Duke {
     protected Storage storage;
     protected TaskList tasks;
-
+    private static final String INDEX_OUT_OF_BOUND_MESSAGE = "You have no task with that number.\n";
+    private static final String DATE_PARSE_ERROR = "Your date and times have not been formatted properly.\n";
     /**
      * Constructor for Duke class
      * @param filePath Path for file where data is stored and loaded
@@ -43,9 +44,9 @@ public class Duke {
         } catch (IOException e) {
             return e.getMessage();
         } catch (IndexOutOfBoundsException e) {
-            return "You have no task with that number.\n";
+            return INDEX_OUT_OF_BOUND_MESSAGE;
         } catch (DateTimeParseException e) {
-            return "Your date and times have not been formatted properly.\n";
+            return DATE_PARSE_ERROR;
         }
     }
 
