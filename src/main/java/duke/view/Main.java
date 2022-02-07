@@ -2,7 +2,6 @@ package duke.view;
 
 import java.io.IOException;
 
-import duke.constants.Constants;
 import duke.main.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private final Duke duke = new Duke();
-    private Image appIcon = new Image(this.getClass().getResourceAsStream("/images/todo-64.png"));
+    private final Image appIcon = new Image(this.getClass().getResourceAsStream("/images/todo-64.png"));
 
     @Override
     public void start(Stage stage) {

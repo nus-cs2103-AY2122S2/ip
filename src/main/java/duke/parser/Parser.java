@@ -15,7 +15,7 @@ import duke.constants.Constants;
  * Parses or processes commands given by user input.
  */
 public class Parser {
-    private String fullCommand;
+    private final String fullCommand;
 
     /**
      * Creates a new Parser object to be used throughout the lifetime of the program.

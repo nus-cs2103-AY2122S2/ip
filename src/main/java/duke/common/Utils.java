@@ -14,17 +14,13 @@ public class Utils {
         assert type != null : "Utils[isValidType] type cannot be null.";
         assert type.length() > 0 : "Utils[isValidType] type must contain data.";
 
-        if (type.equalsIgnoreCase("todo")
+        return type.equalsIgnoreCase("todo")
                 || type.equalsIgnoreCase("event")
-                || type.equalsIgnoreCase("deadline")) {
-            return true;
-        }
-
-        return false;
+                || type.equalsIgnoreCase("deadline");
     }
 
     /**
-     * Checks if an input of event or deadline task has incompleted data provided by user.
+     * Checks if an input of event or deadline task has incomplete data provided by user.
      * 
      * @param taskArr TaskArr is an array broken down from the user input.
      * @return If a new deadline or event has missing data in it.
@@ -33,11 +29,7 @@ public class Utils {
         assert taskArr != null : "Utils[isMissingData] taskArr cannot be null.";
         assert taskArr.length > 0 : "Utils[isMissingData] taskArr must contain data.";
 
-        if (taskArr.length < 3 && !taskArr[0].equalsIgnoreCase("todo")) {
-            return true;
-        }
-
-        return false;
+        return taskArr.length < 3 && !taskArr[0].equalsIgnoreCase("todo");
     }
 
     /**

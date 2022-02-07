@@ -8,7 +8,7 @@ import duke.constants.Constants;
  * Displays feedback to the user.
  */
 public class Ui {
-    private Scanner sc;
+    private final Scanner sc;
 
     /**
      * Creates Ui object to be used throughout the program's lifetime.
@@ -57,9 +57,7 @@ public class Ui {
      * @return Returns the trimmed (no whitespaces around) command for command processing.
      */
     public String readCommand() {
-        String command = sc.nextLine().trim();
-
-        return command;
+        return sc.nextLine().trim();
     }
 
     /**

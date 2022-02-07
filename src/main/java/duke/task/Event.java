@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an event task with its description and date of event.
  */
 public class Event extends Task {
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
      * Creates an Event task with its description and date of event.

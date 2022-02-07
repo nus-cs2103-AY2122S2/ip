@@ -16,8 +16,8 @@ import duke.task.TaskList;
  * Marks whether a task is done.
  */
 public class ToggleCommand extends Command {
-    private String args;
-    private boolean isMark;
+    private final String args;
+    private final boolean isMark;
 
     /**
      * Creates new ToggleCommand object that receives user input.
@@ -41,7 +41,7 @@ public class ToggleCommand extends Command {
         assert taskList != null : "ToggleCommand[execute] taskList cannot be null.";
         assert storage != null : "ToggleCommand[execute] storage cannot be null.";
 
-        String response = "";
+        String response;
 
         try {
             if (this.args.length() == 0) {
@@ -55,7 +55,7 @@ public class ToggleCommand extends Command {
             int index = Integer.parseInt(this.args);
             Task updatedTask = taskList.toggleCompleted(this.isMark, --index);
             String taskString = updatedTask.toString();
-            String updateString = "";
+            String updateString;
 
             if (taskString.charAt(1) == 'D') {
                 String date = ((Deadline) updatedTask)

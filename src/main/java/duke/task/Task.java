@@ -5,9 +5,9 @@ package duke.task;
  * With its description, completion status and its type i.e. Todo, Deadline or Event.
  */
 public class Task {
-    private String description;
+    private final String description;
     private boolean completed;
-    private char type;
+    private final char type;
 
     /**
      * Creates a Task object.

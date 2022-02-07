@@ -38,7 +38,7 @@ public class Duke {
         assert input != null : "Duke[getResponse] input cannot be null.";
         assert input.length() > 0 : "Duke[getResponse] input must contain data.";
 
-        String response = "";
+        String response;
 
         try {
             Parser parser = new Parser(input);

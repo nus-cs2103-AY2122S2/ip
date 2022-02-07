@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.common.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -13,7 +12,7 @@ import duke.task.TaskList;
  * Finds for tasks based on keywords
  */
 public class FindCommand extends Command {
-    private String args;
+    private final String args;
 
     /**
      * Creates a FindCommand object.
@@ -28,7 +27,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) {
         assert taskList != null : "FindCommand[execute] taskList cannot be null.";
         assert storage != null : "FindCommand[execute] storage cannot be null.";
 

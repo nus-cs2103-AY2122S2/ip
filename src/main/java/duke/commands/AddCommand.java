@@ -18,7 +18,7 @@ import duke.task.Todo;
  * Adds task to list based on user input.
  */
 public class AddCommand extends Command {
-    private String fullCommand;
+    private final String fullCommand;
 
     /**
      * Creates new AddCommand object that receives user input.
@@ -44,55 +44,46 @@ public class AddCommand extends Command {
 
         String[] taskArr = null;
         String type = "";
-        String textToAdd = "";
-        Task task = null;
+        Task task;
         String response = "Got it. I've added this task:\n";
+        String[] taskData = null;
 
         try {
             taskArr = this.fullCommand.split(" ", 2);
             type = taskArr[0];
 
             if (type.equalsIgnoreCase("deadline")) {
-                String[] taskData = taskArr[1].split(" /by ");
+                taskData = taskArr[1].split(" /by ");
+
                 LocalDate by = LocalDate.parse(taskData[1]);
 
                 task = new Deadline(taskData[0], by);
-                textToAdd = String.format(
-                        "D | %s | %s | %s",
-                        task.getCompleted() ? "1" : "0",
-                        task.getDescription(),
-                        taskData[1]);
             } else if (type.equalsIgnoreCase("event")) {
-                String[] taskData = taskArr[1].split(" /at ");
+                taskData = taskArr[1].split(" /at ");
+
                 LocalDate at = LocalDate.parse(taskData[1]);
 
                 task = new Event(taskData[0], at);
-                textToAdd = String.format(
-                        "E | %s | %s | %s",
-                        task.getCompleted() ? "1" : "0",
-                        task.getDescription(),
-                        taskData[1]);
             } else if (type.equalsIgnoreCase("todo")) {
                 if (taskArr[1].trim().length() == 0) {
                     throw new IndexOutOfBoundsException();
                 }
 
                 task = new Todo(taskArr[1]);
-                textToAdd = String.format(
-                        "T | %s | %s",
-                        task.getCompleted() ? "1" : "0",
-                        task.getDescription());
             } else {
                 throw new IndexOutOfBoundsException();
             }
 
             taskList.add(task);
-            storage.writeToFile(textToAdd);
+
+            assert taskData != null : "AddCommand[execute] taskData cannot be null.";
+
+            storage.writeToFile(formatTaskString(task, taskData));
 
             int noOfTasks = taskList.size();
             String pluralTask = (noOfTasks > 1) ? "tasks" : "task";
 
-            response += "  " + task.toString() + "\n";
+            response += "  " + task + "\n";
             response += "Now you have " + noOfTasks + " " + pluralTask + " in the list.";
 
             return response;
@@ -114,5 +105,30 @@ public class AddCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new DukeException(Constants.INVALID_DATE_MSG);
         }
+    }
+
+    private String formatTaskString(Task task, String[] extraData) {
+        String textToAdd;
+        String taskType = task instanceof Deadline
+                ? "D"
+                : task instanceof Event
+                        ? "E"
+                        : "T";
+        String completionStatus = task.getCompleted() ? "1" : "0";
+        String taskDescription = task.getDescription();
+
+        /* Condition: If it's a Todo Task */
+        textToAdd = taskType.equalsIgnoreCase("T")
+                ? String.format("%s | %s | %s",
+                        taskType,
+                        completionStatus,
+                        taskDescription)
+                : String.format("%s | %s | %s | %s",
+                        taskType,
+                        completionStatus,
+                        taskDescription,
+                        extraData[1]);
+
+        return textToAdd;
     }
 }
