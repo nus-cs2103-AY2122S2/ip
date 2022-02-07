@@ -15,26 +15,20 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     protected Ui ui;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Robot.png"));
     private String filePath = "data/tasks.txt";
     private boolean isExit = false;
 
     public Duke() {
-
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError(e.getMessage());
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(ui.toString(), duke)
-            );
+            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.toString(), duke));
             this.tasks = new TaskList();
         }
-
     }
 
     protected String getResponse(String input) {

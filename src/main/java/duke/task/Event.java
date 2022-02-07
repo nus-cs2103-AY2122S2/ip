@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     private String at;
-    private LocalDate date;
 
     public Event(String description, String at) {
         super(description);
@@ -18,7 +17,6 @@ public class Event extends Task {
     public Event(String description, LocalDate date) {
         super(description);
         this.at = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        this.date = date;
     }
 
     /**
