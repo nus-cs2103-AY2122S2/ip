@@ -1,7 +1,5 @@
 package echo.task;
 
-import echo.command.TodoCommand;
-
 /**
  * Encapsulates a task.
  */
