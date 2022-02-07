@@ -23,7 +23,8 @@ public class TaskList {
                 String str = s.nextLine();
                 String[] strings = str.split(",");
                 Task task = null;
-                switch (strings[0]) {
+                String typeOfTask = strings[0];
+                switch (typeOfTask) {
                 case "E" :
                     task = new Event(str, true);
                     tasks.add(task);
@@ -37,10 +38,9 @@ public class TaskList {
                     tasks.add(task);
                     break;
                 default:
-                    break;
+                    assert false : typeOfTask;
                 }
                 if (str.charAt(5) == 'X') {
-                    assert task != null;
                     task.setDone();
                 }
             }
