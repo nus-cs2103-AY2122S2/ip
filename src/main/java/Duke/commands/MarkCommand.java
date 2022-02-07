@@ -29,6 +29,8 @@ public class MarkCommand extends Command {
      * @return message stating task mark. Else show error message.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
         try {
             int currTaskNum = Integer.parseInt(taskNum);
             if (tasks.getTaskList().size() >= currTaskNum && currTaskNum > 0) {

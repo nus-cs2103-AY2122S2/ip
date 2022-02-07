@@ -112,15 +112,15 @@ public class Ui {
     /**
      * Prints the search results of what the user find.
      *
-     * @param resultLists result lists from the search keyword.
+     * @param results result list from the search keyword.
      */
-    public String displaySearchResult(ArrayList<Task> resultLists) {
-        if (resultLists.size() == 0) {
+    public String displaySearchResult(ArrayList<Task> results) {
+        if (results.size() == 0) {
             return "Opps! No such results";
         } else {
             String result = "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < resultLists.size(); i++) {
-                Task currTask = resultLists.get(i);
+            for (int i = 0; i < results.size(); i++) {
+                Task currTask = results.get(i);
                 result += i + 1 + ". " + currTask;
             }
             return result;

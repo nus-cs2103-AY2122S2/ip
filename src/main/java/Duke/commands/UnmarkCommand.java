@@ -29,6 +29,8 @@ public class UnmarkCommand extends Command {
      * @return message stating task unmark. Else show error message.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
         try {
             int currTaskNum = Integer.parseInt(taskNum);
             if (tasks.getTaskList().size() >= currTaskNum && currTaskNum > 0) {

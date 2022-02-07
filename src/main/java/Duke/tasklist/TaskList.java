@@ -56,7 +56,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the task in the task list as complete.
+     * Marks the task in the task list as not complete.
      *
      * @param taskNum the task number in the list.
      * @return the task that is mark.
@@ -82,7 +82,7 @@ public class TaskList {
      * @param input input of the keyword by user.
      * @return the list of result that match the input.
      */
-    public ArrayList<Task> findTask(String input) {
+    public ArrayList<Task> findTasks(String input) {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task task : taskList) {
             if (task.getDescription().toLowerCase().contains(input.toLowerCase())) {

@@ -28,6 +28,7 @@ public class Parser {
      */
     public static Command parse(String command) {
         String[] commandList = command.split(" ", 2);
+        assert commandList.length == 2 : "the length should be 2!";
         String firstWord = commandList[0].toLowerCase();
         String remainingWord = commandList[1].trim();
         try {
@@ -41,6 +42,7 @@ public class Parser {
                     return new HandleErrorCommand("OOPS!!! The description of a deadline cannot be empty. :<");
                 }
                 String[] deadlineActions = remainingWord.split("/by", 2);
+                assert deadlineActions.length == 2 : "the length should be 2!";
                 Deadline deadlineTask = new Deadline(deadlineActions[0].trim(), deadlineActions[1].trim());
                 return new AddCommand(deadlineTask);
             case "event":
@@ -48,6 +50,7 @@ public class Parser {
                     return new HandleErrorCommand("OOPS!!! The description of a event cannot be empty. :<");
                 }
                 String[] eventActions = remainingWord.split("/at", 2);
+                assert eventActions.length == 2 : "the length should be 2!";
                 Event eventTask = new Event(eventActions[0].trim(), eventActions[1].trim());
                 return new AddCommand(eventTask);
             case "todo":
