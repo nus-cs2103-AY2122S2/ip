@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 
+/**
+ * Class for event related tasks.
+ */
 public class Event extends Task {
-
     protected LocalDate eventDate;
     protected DayOfWeek day;
     protected Month month;

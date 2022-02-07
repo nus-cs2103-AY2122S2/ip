@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 
+/**
+ * Represents deadline related tasks.
+ */
 public class Deadline extends Task {
-
     protected LocalDate deadlineDate;
     protected DayOfWeek day;
     protected Month month;
@@ -53,5 +55,4 @@ public class Deadline extends Task {
                 + this.time + ")"
                 + "\n";
     }
-
 }

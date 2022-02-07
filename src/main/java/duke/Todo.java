@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class that represents todo related tasks.
+ */
 public class Todo extends Task {
     /**
      * Constructs a Todo object.

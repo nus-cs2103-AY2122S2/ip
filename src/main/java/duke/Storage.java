@@ -15,7 +15,6 @@ import java.util.Scanner;
  * Stores user tasks data.
  */
 public class Storage {
-
     // initializing saver to save todoList tasks to relativePath
     private String fileSeparator = System.getProperty("file.separator");
     private String relativePath = "data" + fileSeparator + "duke.txt";
@@ -26,7 +25,6 @@ public class Storage {
      * @throws IOException
      */
     public Storage() throws IOException {
-
         File f = new File(this.relativePath);
         // if file does not exist, create file based on filepath
         if (!f.exists()) {
@@ -63,7 +61,6 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public ArrayList<Task> load() throws FileNotFoundException {
-        
         File f = new File(this.relativePath);
         Scanner s = new Scanner(f);
         ArrayList<Task> todoList = new ArrayList<>();
