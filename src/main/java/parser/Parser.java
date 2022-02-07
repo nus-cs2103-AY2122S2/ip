@@ -31,7 +31,7 @@ public class Parser {
         FIND;
     }
 
-    public static final int DEFAULT_PRIORITY = 999;
+    public static final Priorities DEFAULT_PRIORITY = Priorities.NORMAL;
 
     /**
      * Processes a raw String command and decides the command.
@@ -46,7 +46,7 @@ public class Parser {
         String response = fullCommand.trim();
         String[] responseArray;
         String[] secondSplit;
-        int priority = DEFAULT_PRIORITY;
+        Priorities priority = DEFAULT_PRIORITY;
         if (response.equals("")) {
             return new IncorrectCommand();
         }
@@ -57,10 +57,10 @@ public class Parser {
                 String textContent = removeSubString(response.toLowerCase(), responseArray[0].toLowerCase() + " ");
                 // if a command is creating a task, get the priority
                 if (responseArray.length > 1) {
-                    priority = getInt(responseArray[1]);
+                    priority = getPriority(responseArray[1]);
                     // remove the priority number from the content of the task message
                     if (priority != DEFAULT_PRIORITY) {
-                        textContent = removeSubString(response, responseArray[1]);
+                        textContent = removeSubString(textContent, responseArray[1]);
                     }
                 }
                 switch (command) {
@@ -136,17 +136,17 @@ public class Parser {
      * @param strNum String to compare with
      * @return Integer -> -1 = not convertible. Otherwise, the value
      */
-    public static int getInt(String strNum) {
-        int d = DEFAULT_PRIORITY;
+    public static Priorities getPriority(String strNum) {
+        Priorities priority = DEFAULT_PRIORITY;
         if (strNum == null || strNum.equals("")) {
-            return DEFAULT_PRIORITY;
+            return priority;
         } else {
             try {
-                d = Integer.parseInt(strNum);
-            } catch (NumberFormatException nfe) {
-                return d;
+                priority = Priorities.valueOf(strNum.toUpperCase());
+            } catch (IllegalArgumentException nfe) {
+                return priority;
             }
         }
-        return d;
+        return priority;
     }
 }

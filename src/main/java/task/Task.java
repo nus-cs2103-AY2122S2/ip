@@ -2,6 +2,8 @@ package task;
 
 import java.io.Serializable;
 
+import parser.Priorities;
+
 /**
  * Represents an abstraction of sub-types.
  * A task is a parent to the different kinds of task
@@ -10,7 +12,7 @@ import java.io.Serializable;
 public abstract class Task implements Serializable, Comparable {
     protected String description;
     protected boolean isDone;
-    protected int priority;
+    protected Priorities priority;
 
     /**
      * Class constructor.
@@ -18,7 +20,7 @@ public abstract class Task implements Serializable, Comparable {
      *
      * @param description Description of task
      */
-    public Task(String description, int priority) {
+    public Task(String description, Priorities priority) {
         this.description = description;
         this.isDone = false;
         this.priority = priority;
@@ -78,7 +80,7 @@ public abstract class Task implements Serializable, Comparable {
     public int compareTo(Object o) {
         if (o instanceof Task) {
             Task other = (Task) o;
-            return this.priority - other.priority;
+            return this.priority.compareTo(other.priority);
         } else {
             return 0;
         }

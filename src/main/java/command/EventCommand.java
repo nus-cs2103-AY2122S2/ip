@@ -1,6 +1,7 @@
 package command;
 
 import exception.DukeException;
+import parser.Priorities;
 import storage.Storage;
 import task.Event;
 import task.Task;
@@ -22,7 +23,7 @@ public class EventCommand extends Command {
      * @param description Description of event
      * @param at location of the event
      */
-    public EventCommand(String description, String at, int priority) {
+    public EventCommand(String description, String at, Priorities priority) {
         this.event = new Event(description, at, priority);
     }
 
