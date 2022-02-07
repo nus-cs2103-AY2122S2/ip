@@ -37,6 +37,7 @@ public class MarkCommand implements Command {
             } else {
                 taskList.markUndone(index);
             }
+            ui.markMessage();
         } catch (VanException ex) {
             System.out.println(ex);
         }

@@ -74,7 +74,7 @@ public class Parser {
                 try {
                     output = new MarkCommand(false, Integer.parseInt(parameters[1]));
                 } catch (NumberFormatException ex) {
-                    output = new InvalidCommand("Please use integer numbers e.g. 1, 2");
+                    output = new InvalidCommand("Please use integers e.g. 1, 2");
                 }
                 break;
             case "delete":
@@ -84,7 +84,7 @@ public class Parser {
                 try {
                     output = new DeleteCommand(Integer.parseInt(parameters[1]));
                 } catch (NumberFormatException ex) {
-                    output = new InvalidCommand("Please use integer numbers e.g. 1, 2");
+                    output = new InvalidCommand("Please use integers e.g. 1, 2");
                 }
                 break;
             case "find":
