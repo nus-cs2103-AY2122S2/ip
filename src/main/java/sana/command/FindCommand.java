@@ -13,9 +13,10 @@ public class FindCommand extends Command {
     /**
      * Executes the find command
      *
-     * @param args  user input together with the find command
-     * @param taskList  tasklist for the command to act on
-     * @return
+     * @param args  arguments in the command
+     * @param taskList  sana's tasklist
+     *
+     * @return  sana's response to the command
      */
     @Override
     public String executeCommand(String[] args, TaskList taskList) {

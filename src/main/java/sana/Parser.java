@@ -10,7 +10,6 @@ import sana.exception.UnknownCommandException;
  * @version 1.0
  */
 public class Parser {
-    private static SanaResponse sanaResponse = new SanaResponse();
 
     /**
      * Parses the command given to Sana

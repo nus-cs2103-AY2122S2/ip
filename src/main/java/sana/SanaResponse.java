@@ -1,10 +1,8 @@
 package sana;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 
 import sana.task.Task;
-import sana.task.ToDo;
 
 /**
  * Ui represents the user interface object that deals with user interaction
