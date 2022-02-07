@@ -29,7 +29,6 @@ public class ListCommand extends Command {
                 list += "\n     ";
             }
         }
-        ui.printContent(list);
         Storage.saveToFile(tasks);
         return list;
     }
