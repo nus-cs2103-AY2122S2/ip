@@ -49,7 +49,7 @@ public class FindCommand extends Command {
             List<Task> filteredTasks =
                     allTasks
                     .stream()
-                    .filter(task -> task.getDescription().contains(this.args))
+                    .filter(this::fullSearchTask)
                     .collect(Collectors.toList());
             int filteredLength = filteredTasks.size();
 
@@ -72,5 +72,11 @@ public class FindCommand extends Command {
         }
 
         return response;
+    }
+
+    private boolean fullSearchTask(Task task) {
+        String taskString = task.toString();
+
+        return taskString.contains(this.args);
     }
 }
