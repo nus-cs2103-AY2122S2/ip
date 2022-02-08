@@ -149,6 +149,10 @@ public class Nikki {
 
         }
 
+        // All valid command handler should give a response
+        // Else, an exception should have been raised
+        assert !response.isEmpty();
+
         return response;
     }
 
