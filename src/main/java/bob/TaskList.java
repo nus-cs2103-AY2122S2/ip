@@ -19,7 +19,7 @@ public class TaskList {
     /**
      * Creates a new TaskList with the provided List of Tasks.
      *
-     * @param tasks
+     * @param tasks List of Tasks to create a TaskList from.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
