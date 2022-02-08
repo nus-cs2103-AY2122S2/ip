@@ -39,9 +39,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
         this.tasks = tasks;
         String output;
-
         output = ui.listMessage();
         for (int i = 0; i < tasks.size(); i++) {
             output = output + INDENT + (i + 1) + "." + tasks.get(i).toString() + "\n";
