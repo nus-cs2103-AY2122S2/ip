@@ -77,4 +77,13 @@ public class TaskList {
     public Task getTask(int num) {
         return taskArr.get(num);
     }
+
+    public boolean checkTaskExist(Task toCheck) {
+        for (Task tsk: taskArr) {
+            if (tsk.toString().equals(toCheck.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
