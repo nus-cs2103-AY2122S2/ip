@@ -1,5 +1,6 @@
-[E][ ] go to sleep - at: Jan 01 2020
-[D][ ] find food - by: Jan 01 2020
+[E][X] go to sleep - at: Jan 01 2020
+[D][X] find food - by: Jan 01 2020
 [T][ ] wake up in the morning
 [E][ ] go to sleep - at: Jan 01 2020
 [D][ ] find food - by: Jan 01 2020
+[T][ ] this
