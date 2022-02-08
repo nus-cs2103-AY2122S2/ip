@@ -69,6 +69,7 @@ public class Storage {
     }
 
     private Task convertStringToTask(String task) {
+        assert task != null : "Error reading from storage file!";
         char type = task.charAt(0);
         boolean isDone = task.charAt(1) == '1';
         String[] detail = task.substring(2).split(" \\| ");

@@ -24,6 +24,7 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         String[] arguments = input.trim().split(" ", 2);
+        assert arguments.length > 0 : "Error when parsing input!";
 
         switch (arguments[0].toLowerCase()) {
         case "bye":
