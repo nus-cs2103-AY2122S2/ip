@@ -57,6 +57,8 @@ public class Storage {
             while (scanner.hasNext()) {
                 String input = scanner.nextLine();
                 UserInput userInput = Parser.parseTask(input);
+                // Assert that userInput is not null
+                assert userInput != null;
                 taskList.loadTask(userInput);
             }
         } catch (FileNotFoundException e) {
