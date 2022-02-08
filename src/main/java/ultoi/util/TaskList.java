@@ -1,10 +1,10 @@
 package ultoi.util;
 
-import ultoi.task.Task;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
+
+import ultoi.task.Task;
 
 /**
  * Represents a list of tasks.
@@ -99,9 +99,15 @@ public class TaskList {
         return "Now you have " + size() + " task(s) in total.";
     }
 
+    /**
+     * Find tasks with the given keyword.
+     *
+     * @param keyword Keyword to be found.
+     * @return A task list that contains tasks taht contains the keyword.
+     */
     public TaskList findTasksWith(String keyword) {
         List<Task> matchingTasks = new ArrayList<Task>(this.tasks.stream().filter(
-                task -> task.getDescription().contains(keyword)).collect(Collectors.toList()));
+            task -> task.getDescription().contains(keyword)).collect(Collectors.toList()));
 
         return new TaskList(matchingTasks);
     }

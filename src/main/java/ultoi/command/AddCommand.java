@@ -2,16 +2,11 @@ package ultoi.command;
 
 import ultoi.task.Task;
 import ultoi.task.ToDo;
-import ultoi.task.Deadline;
-import ultoi.task.Event;
-
-import ultoi.util.Ultoi;
-import ultoi.util.UltoiUi;
-import ultoi.util.UltoiException;
+import ultoi.util.Parser;
 import ultoi.util.Storage;
 import ultoi.util.TaskList;
-import ultoi.util.Parser;
-import ultoi.util.DateTime;
+import ultoi.util.UltoiException;
+import ultoi.util.UltoiUi;
 
 /**
  * Represents a command that adds task to the list.
@@ -20,11 +15,11 @@ import ultoi.util.DateTime;
  * @version 0.2.0
  */
 public class AddCommand implements Command {
+    public static final String COMMAND_AT = "/at";
+    public static final String COMMAND_BY = "/by";
     private static final String COMMAND_TODO = "todo";
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
-    public static final String COMMAND_BY = "/by";
-    public static final String COMMAND_AT = "/at";
     private static final String MESSAGE = "Got it! I have added this tasks:";
 
     private final Task task;

@@ -1,17 +1,10 @@
 package ultoi.command;
 
 import ultoi.task.Task;
-import ultoi.task.ToDo;
-import ultoi.task.Deadline;
-import ultoi.task.Event;
-
-import ultoi.util.Ultoi;
-import ultoi.util.UltoiUi;
-import ultoi.util.UltoiException;
 import ultoi.util.Storage;
 import ultoi.util.TaskList;
-import ultoi.util.Parser;
-import ultoi.util.DateTime;
+import ultoi.util.UltoiException;
+import ultoi.util.UltoiUi;
 
 /**
  * Represents a command that marks a task as done or undone.
@@ -38,8 +31,8 @@ public class MarkCommand implements Command {
         this.isMark = input.startsWith("mark");
 
         try {
-            this.index = Integer.parseInt(input.substring(
-                    (this.isMark ? this.COMMAND_LENGTH_MARK : this.COMMAND_LENGTH_UNMARK) + 1)) - 1;
+            this.index = Integer.parseInt(input.substring((
+                    this.isMark ? this.COMMAND_LENGTH_MARK : this.COMMAND_LENGTH_UNMARK) + 1)) - 1;
         } catch (Exception e) {
             throw UltoiException.commandMismatchException();
         }

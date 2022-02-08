@@ -1,6 +1,14 @@
 package ultoi.util;
 
+/**
+ * Represents a Duke class.
+ */
 public class Duke {
+    /**
+     * Prints a Duke shape.
+     *
+     * @param args User input.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

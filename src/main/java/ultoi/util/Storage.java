@@ -1,16 +1,14 @@
 package ultoi.util;
 
-import ultoi.command.AddCommand;
-import ultoi.task.Task;
-
 import java.io.File;
 import java.io.PrintWriter;
-
 import java.nio.file.Path;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
+
+import ultoi.command.AddCommand;
+import ultoi.task.Task;
 
 /**
  * Represents a Storage object that controls the read and write of file from and to hard disk.

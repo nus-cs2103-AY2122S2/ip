@@ -1,10 +1,8 @@
 package ultoi.task;
 
-import ultoi.task.Deadline;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
     @Test

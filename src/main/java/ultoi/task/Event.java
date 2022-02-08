@@ -1,25 +1,13 @@
 package ultoi.task;
 
-import ultoi.command.Command;
-import ultoi.command.AddCommand;
-import ultoi.command.ByeCommand;
-import ultoi.command.DeleteCommand;
-import ultoi.command.ListCommand;
-import ultoi.command.MarkCommand;
-
-import ultoi.util.Ultoi;
-import ultoi.util.UltoiUi;
-import ultoi.util.UltoiException;
-import ultoi.util.Storage;
-import ultoi.util.TaskList;
-import ultoi.util.Parser;
 import ultoi.util.DateTime;
+import ultoi.util.UltoiException;
 
 /**
  * Represents a event.
  *
  * @author snoidetx
- * @version 0.0.0
+ * @version 0.1.0
  */
 public class Event extends Task {
     protected DateTime dateTime;
