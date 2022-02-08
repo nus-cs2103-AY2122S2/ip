@@ -1,16 +1,23 @@
 package ultoi.command;
 
 import ultoi.task.Task;
+import ultoi.task.ToDo;
+import ultoi.task.Deadline;
+import ultoi.task.Event;
+
+import ultoi.util.Ultoi;
+import ultoi.util.UltoiUi;
+import ultoi.util.UltoiException;
 import ultoi.util.Storage;
 import ultoi.util.TaskList;
-import ultoi.util.UltoiException;
-import ultoi.util.UltoiUi;
+import ultoi.util.Parser;
+import ultoi.util.DateTime;
 
 /**
  * Represents a command that deletes task from the list.
  *
  * @author snoidetx
- * @version 0.1.0
+ * @version 0.0.0
  */
 public class DeleteCommand implements Command {
     private static final int COMMAND_LENGTH = 6;

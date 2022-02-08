@@ -2,6 +2,7 @@ package ultoi.util;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+
 import java.util.Scanner;
 
 /**
@@ -60,27 +61,27 @@ public class UltoiUi {
     }
 
     /**
-     * Returns the welcome message.
+     * Displays a piece of welcome message.
      *
-     * @return A string of the welcome message.
+     * @param msg Message shown.
      */
     public String showWelcomeMsg() {
         return showMsg(WELCOME_MESSAGE);
     }
 
     /**
-     * Returns a piece of loading error message.
+     * Displays a piece of loading error message.
      *
-     * @return A string of loading error.
+     * @param msg Message shown.
      */
     public String showLoadingError() {
         return showMsg(LOADING_ERROR);
     }
 
     /**
-     * Returns a piece of error message.
+     * Displays a piece of error message.
      *
-     * @return A string of error message.
+     * @param msg Message shown.
      */
     public String showError(UltoiException e) {
         return showMsg(e.toString() + " " + UltoiException.EXCEPTION_FACE);

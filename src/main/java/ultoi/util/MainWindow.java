@@ -2,12 +2,13 @@ package ultoi.util;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -26,9 +27,6 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image ultoiImage = new Image(this.getClass().getResourceAsStream("/images/DaUltoi.png"));
 
-    /**
-     * Initialised the main window.
-     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -40,11 +38,6 @@ public class MainWindow extends AnchorPane {
 
     }
 
-    /**
-     * Sets Ultoi to be the driver of the GUI.
-     *
-     * @param ultoi Ultoi object used to drive the GUI.
-     */
     public void setDriver(Ultoi ultoi) {
         this.ultoi = ultoi;
     }
