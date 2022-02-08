@@ -25,11 +25,11 @@ public class ResponseGenerator {
      * @return A setup message.
      */
     public String getStartupMessage() {
-        StringBuilder s = new StringBuilder();
-        s.append("Hello! I'm\n");
-        s.append(logo);
-        s.append("\nWhat can I do for you? =)");
-        return s.toString();
+        StringBuilder message = new StringBuilder();
+        message.append("Hello! I'm\n");
+        message.append(logo);
+        message.append("\nWhat can I do for you? =)");
+        return message.toString();
     }
 
     /**
@@ -60,6 +60,25 @@ public class ResponseGenerator {
     }
 
     /**
+     * Returns an error message for date/time format errors.
+     *
+     * @return An error message for date/time format errors.
+     */
+    public String getDateTimeFormatErrorMessage() {
+        return "Error parsing date, please enter dates in YYYY-MM-DD format!";
+    }
+
+    /**
+     * Returns the error message for errors in the package duke.exception.
+     *
+     * @param e An exception in the package duke.exception.
+     * @return The error message corresponding to the exception.
+     */
+    public String getDukeErrorMessage(Exception e) {
+        return e.getMessage();
+    }
+
+    /**
      * Returns the message to be printed when a task is added to the task list.
      *
      * @param latestTask The task that was just added to the task list.
@@ -67,11 +86,11 @@ public class ResponseGenerator {
      * @return The message to be printed when a task is added.
      */
     public String getAddTaskMessage(Task latestTask, int size) {
-        StringBuilder s = new StringBuilder();
-        s.append("added o.O:\n  ");
-        s.append(latestTask.toString());
-        s.append("\nNow there are " + size + " tasks on the list x)");
-        return s.toString();
+        StringBuilder message = new StringBuilder();
+        message.append("added o.O:\n  ");
+        message.append(latestTask.toString());
+        message.append("\nNow there are " + size + " tasks on the list x)");
+        return message.toString();
     }
 
     /**
@@ -84,17 +103,17 @@ public class ResponseGenerator {
         if (list.size() == 0) {
             return "There are no tasks on your list :O";
         }
-        StringBuilder s = new StringBuilder();
-        s.append("Here are the tasks on your list :O\n");
+        StringBuilder message = new StringBuilder();
+        message.append("Here are the tasks on your list :O\n");
         for (int i = 1; i <= list.size(); i++) {
-            s.append(i);
-            s.append(". ");
-            s.append(list.get(i - 1));
+            message.append(i);
+            message.append(". ");
+            message.append(list.get(i - 1));
             if (i < list.size()) {
-                s.append("\n");
+                message.append("\n");
             }
         }
-        return s.toString();
+        return message.toString();
     }
 
     /**
@@ -107,16 +126,16 @@ public class ResponseGenerator {
         if (list.size() == 0) {
             return "No items found :O";
         }
-        StringBuilder s = new StringBuilder();
-        s.append("Here are the matching tasks on your list :O\n");
+        StringBuilder message = new StringBuilder();
+        message.append("Here are the matching tasks on your list :O\n");
         for (int i = 1; i <= list.size(); i++) {
-            s.append(i);
-            s.append(". ");
-            s.append(list.get(i - 1));
+            message.append(i);
+            message.append(". ");
+            message.append(list.get(i - 1));
             if (i < list.size()) {
-                s.append("\n");
+                message.append("\n");
             }
         }
-        return s.toString();
+        return message.toString();
     }
 }

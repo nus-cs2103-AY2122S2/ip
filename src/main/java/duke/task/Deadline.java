@@ -40,7 +40,7 @@ public class Deadline extends Task {
      * @param isDone Whether the task is done yet.
      */
     public Deadline(String name, LocalDate time, boolean isDone) {
-        super(name, isDone);
+        super(name, "D", isDone);
         this.time = time;
     }
 
@@ -53,7 +53,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
+        return super.toString() + " (by: "
                 + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
@@ -63,10 +63,10 @@ public class Deadline extends Task {
      * @return A String representation of the Deadline.
      */
     @Override
-    public String convertToFileFormat() {
+    public String toFileFormatString() {
         if (isDone) {
-            return "D | 1 | " + name + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            return super.toFileFormatString() + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
-        return "D | 0 | " + name + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return super.toFileFormatString() + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 }

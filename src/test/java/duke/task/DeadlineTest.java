@@ -8,7 +8,7 @@ public class DeadlineTest {
     @Test
     public void testFileFormatConversion() {
         assertEquals("D | 0 | this week iP | Jan 27 2022",
-                new Deadline("this week iP", "2022-01-27").convertToFileFormat());
+                new Deadline("this week iP", "2022-01-27").toFileFormatString());
     }
 
     @Test

@@ -39,15 +39,15 @@ public class Storage {
      */
     public TaskList initialize() throws IOException {
         assert reader.ready();
-        TaskList tl = new TaskList();
+        TaskList taskList = new TaskList();
         while (true) {
-            String entry = reader.readLine();
-            if (entry == null) {
+            String input = reader.readLine();
+            if (input == null) {
                 break;
             }
-            tl.addTask(Parser.parseFileFormat(entry));
+            taskList.addTask(Parser.parseFileFormat(input));
         }
-        return tl;
+        return taskList;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Storage {
      * @throws IOException If there are issues faced when writing the task into the file.
      */
     public void addTask(Task t) throws IOException {
-        String newTask = t.convertToFileFormat() + "\n";
+        String newTask = t.toFileFormatString() + "\n";
         Files.write(dukePath, newTask.getBytes(), StandardOpenOption.APPEND);
     }
 
@@ -93,25 +93,25 @@ public class Storage {
             if (i != taskIndex) {
                 newList.add(currList.get(i));
             } else {
-                String[] entrySplit = currList.get(i).split(" \\| ");
-                int part = 0;
-                StringBuilder newLine = new StringBuilder();
-                while (part < entrySplit.length) {
-                    if (part != 0) {
-                        newLine.append(" | ");
+                String[] descriptionParts = currList.get(i).split(" \\| ");
+                StringBuilder newDescription = new StringBuilder();
+                int partIndex = 0;
+                while (partIndex < descriptionParts.length) {
+                    if (partIndex != 0) {
+                        newDescription.append(" | ");
                     }
-                    if (part == 1) {
-                        if (entrySplit[1].equals("0")) {
-                            newLine.append("1");
+                    if (partIndex == 1) {
+                        if (descriptionParts[1].equals("0")) {
+                            newDescription.append("1");
                         } else {
-                            newLine.append("0");
+                            newDescription.append("0");
                         }
                     } else {
-                        newLine.append(entrySplit[part]);
+                        newDescription.append(descriptionParts[partIndex]);
                     }
-                    part++;
+                    partIndex++;
                 }
-                newList.add(newLine.toString());
+                newList.add(newDescription.toString());
             }
         }
         Files.delete(dukePath);
