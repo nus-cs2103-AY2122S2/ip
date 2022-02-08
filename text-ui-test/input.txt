@@ -1,0 +1,28 @@
+todo
+todo borrow book
+deadline
+deadline return book
+deadline return book/sunday
+event
+event zoo trip
+event zoo trip/mon 12-4pm
+todo read book
+todo return book
+mark 
+mark a
+mark 1
+mark 4
+list
+unmark 
+unmark ball
+unmark 4
+unmark 4
+list
+mark 4
+mark 4
+mark 5
+mark 2
+mark 3
+list
+potato
+bye
