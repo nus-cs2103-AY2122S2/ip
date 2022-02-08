@@ -32,13 +32,12 @@ import javafx.stage.Stage;
  * @version v0.2
  */
 public class Duke extends Application {
-    private final Scanner scanner = new Scanner(System.in);
-    private boolean isRunning = false; // state to terminate the program
+    private boolean isRunning = true; // state to terminate the program
 
     private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
-    private Parser parser;
+    private final TaskList taskList;
+    private final Ui ui;
+    private final Parser parser;
 
     //JavaFX fields
     private ScrollPane scrollPane;
@@ -46,8 +45,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
         this.ui = new Ui();
@@ -59,99 +58,6 @@ public class Duke extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke().startProgram();
-    }
-
-    private void startProgram() {
-        storage.makeFile();
-        storage.loadFile(taskList);
-        ui.welcomeMessage();
-
-        while (!isRunning) {
-            try {
-                String input = scanner.nextLine(); // user input
-
-                // handle user input to command, description and time of task if applicable
-                UserInput userInput = parser.parseInput(input);
-                String command = userInput.getCommand();
-
-                // exit program when user input "bye"
-                if (command.equals("bye")) {
-                    ui.endProgram();
-                    isRunning = true;
-                    break;
-                }
-
-                // list out the tasks
-                if (command.equals("list")) {
-                    taskList.listTask(userInput);
-                    continue;
-                }
-
-                // mark certain task as done
-                if (command.startsWith("mark")) {
-                    taskList.markDone(userInput);
-                    storage.writeToFile(taskList.getList());
-                    continue;
-                }
-
-                // mark certain task as not done yet
-                if (command.startsWith("unmark")) {
-                    taskList.markUndone(userInput);
-                    storage.writeToFile(taskList.getList());
-                    continue;
-                }
-
-                // delete task
-                if (command.startsWith("delete")) {
-                    taskList.deleteTask(userInput);
-                    storage.writeToFile(taskList.getList());
-                    continue;
-                }
-
-                // create ToDoTask
-                if (command.equals("todo")) {
-                    taskList.addTask(userInput);
-                    storage.writeToFile(taskList.getList());
-                    continue;
-                }
-
-                // create DeadlineTask
-                if (command.equals("deadline")) {
-                    taskList.addTask(userInput);
-                    storage.writeToFile(taskList.getList());
-                    continue;
-                }
-
-                // create EventTask
-                if (command.equals("event")) {
-                    taskList.addTask(userInput);
-                    storage.writeToFile(taskList.getList());
-                    continue;
-                }
-
-                // find from list
-                if (command.equals("find")) {
-                    taskList.findTask(userInput);
-                    continue;
-                }
-
-                // Invalid command inputs result
-                throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
-
-            } catch (DukeException e) {
-                ui.errorMessage(e);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-
-        }
-
-        // close the scanner
-        scanner.close();
     }
 
     @Override
@@ -207,44 +113,44 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Scroll down to the end every time dialogContainer's height changes.
+        // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //Part 3. Add functionality to handle user input.
+        // Welcome message
+        Label dukeText = new Label(ui.welcomeMessage());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+
+        // Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            handleUserInput();
+            if (!isRunning) {
+                Platform.exit();
+                System.exit(0);
             }
         });
 
         userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            handleUserInput();
+            if (!isRunning) {
+                Platform.exit();
+                System.exit(0);
             }
         });
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() throws InterruptedException {
+    private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
-
-        if (userInput.getText().equals("bye")) {
-            Platform.exit();
-            System.exit(0);
-        }
 
         userInput.clear();
     }
@@ -263,62 +169,60 @@ public class Duke extends Application {
             // exit program when user input "bye"
             if (command.equals("bye")) {
                 String returnMessage = ui.endProgramFX();
-                isRunning = true;
+                isRunning = false;
                 return returnMessage;
             }
 
             // list out the tasks
             if (command.equals("list")) {
-                String returnMessage = taskList.listTaskFX(userInput);
-                return returnMessage;
+                return taskList.listTask(userInput);
             }
 
             // mark certain task as done
             if (command.startsWith("mark")) {
-                String returnMessage = taskList.markDoneFX(userInput);
+                String returnMessage = taskList.markDone(userInput);
                 storage.writeToFile(taskList.getList());
                 return returnMessage;
             }
 
             // mark certain task as not done yet
             if (command.startsWith("unmark")) {
-                String returnMessage = taskList.markUndoneFX(userInput);
+                String returnMessage = taskList.markUndone(userInput);
                 storage.writeToFile(taskList.getList());
                 return returnMessage;
             }
 
             // delete task
             if (command.startsWith("delete")) {
-                String returnMessage = taskList.deleteTaskFX(userInput);
+                String returnMessage = taskList.deleteTask(userInput);
                 storage.writeToFile(taskList.getList());
                 return returnMessage;
             }
 
             // create ToDoTask
             if (command.equals("todo")) {
-                String returnMessage = taskList.addTaskFX(userInput);
+                String returnMessage = taskList.addTask(userInput);
                 storage.writeToFile(taskList.getList());
                 return returnMessage;
             }
 
             // create DeadlineTask
             if (command.equals("deadline")) {
-                String returnMessage = taskList.addTaskFX(userInput);
+                String returnMessage = taskList.addTask(userInput);
                 storage.writeToFile(taskList.getList());
                 return returnMessage;
             }
 
             // create EventTask
             if (command.equals("event")) {
-                String returnMessage = taskList.addTaskFX(userInput);
+                String returnMessage = taskList.addTask(userInput);
                 storage.writeToFile(taskList.getList());
                 return returnMessage;
             }
 
             // find from list
             if (command.equals("find")) {
-                String returnMessage = taskList.findTaskFX(userInput);
-                return returnMessage;
+                return taskList.findTask(userInput);
             }
 
             // Invalid command inputs result
@@ -326,7 +230,6 @@ public class Duke extends Application {
 
         } catch (DukeException | IOException e) {
             return e.getMessage();
-
         }
     }
 }

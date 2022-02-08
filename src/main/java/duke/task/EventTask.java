@@ -18,10 +18,6 @@ public class EventTask extends Task {
         this.deadline = deadline;
     }
 
-    public String getDeadline() {
-        return this.deadline;
-    }
-
     @Override
     public String toString() {
         return String.format("[E]" + super.toString() + "(%s)", this.deadline.replaceFirst(" ", ": "));
