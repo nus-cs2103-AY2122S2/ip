@@ -47,6 +47,7 @@ public class DukeException extends Exception {
      * @throws DukeException
      */
     public void invalidDeadline (String descrip) throws DukeException {
+        assert descrip.contains("/by") : "Please include /by in your command";
         if ((descrip.split("/by", 2)[0].equals(""))) {
             throw new DukeException("Please indicate the a task for this deadline");
         } else if (descrip.indexOf("/by") == -1) {
@@ -62,6 +63,7 @@ public class DukeException extends Exception {
      * @throws DukeException
      */
     public void invalidEvent (String descrip) throws DukeException {
+        assert descrip.contains("/at") : "Please include /at in your command";
         if ((descrip.split("/at", 2)[0].equals(""))) {
             throw new DukeException("Please indicate the a task for this event");
         } else if (descrip.indexOf("/at") == -1) {
