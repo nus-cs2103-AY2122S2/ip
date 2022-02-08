@@ -13,7 +13,6 @@ import meep.task.ListTask;
 import meep.task.ToDo;
 
 
-
 public class ListCommandTest {
     @Test
     public void listCommandExecute_normalInput_success() {
@@ -33,7 +32,7 @@ public class ListCommandTest {
 
         String result = "\n     1.  [ D ][   ] report1 (by: Jul 29 2015 19:30)\n"
                 + "     2.  [ E ][   ] report2 (on: Jul 29 2015 19:30)\n"
-                + "     3.  [ T ][   ] report3\n";
+                + "     3.  [ T ][   ] report3" + "\n";
 
         assertEquals(result, c1.execute(tasks));
 
