@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,6 @@ import meep.exception.InvalidInputException;
 import meep.task.Deadline;
 import meep.task.Event;
 import meep.task.ListTask;
-import meep.task.Task;
 import meep.task.ToDo;
 
 public class StorageTest {
