@@ -1,12 +1,5 @@
 package duke;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoField;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Storage;
@@ -53,7 +46,7 @@ public class Duke {
      * @param dateTime    Date and time of the deadline.
      */
     public void addDeadline(String description, String dateTime) {
-        tasks.add(new Deadline(description, parseDateTime(dateTime)));
+        tasks.add(new Deadline(description, Parser.parseDateTime(dateTime)));
         saveData();
     }
 
@@ -65,7 +58,7 @@ public class Duke {
      * @param duration    Duration of the event.
      */
     public void addEvent(String description, String dateTime, String duration) {
-        tasks.add(new Event(description, parseDateTime(dateTime), parseDuration(duration)));
+        tasks.add(new Event(description, Parser.parseDateTime(dateTime), Parser.parseDuration(duration)));
         saveData();
     }
 
@@ -97,26 +90,5 @@ public class Duke {
     public void deleteTask(int index) {
         tasks.remove(index);
         saveData();
-    }
-
-    private LocalDateTime parseDateTime(String dateTime) {
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("yyyy-M-d[ HHmm]")
-                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0).parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-                .toFormatter();
-
-        try {
-            return LocalDateTime.parse(dateTime, formatter);
-
-        } catch (DateTimeParseException e) {
-            throw new DukeException(dateTime + " is not a valid date. Example: 2022-3-15 1630");
-        }
-    }
-
-    private Duration parseDuration(String duration) {
-        try {
-            return Duration.parse("PT" + duration);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(duration + " is not a valid duration. Example: 1h5m");
-        }
     }
 }
