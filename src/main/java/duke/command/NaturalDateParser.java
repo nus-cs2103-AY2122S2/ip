@@ -1,10 +1,12 @@
 package duke.command;
 
 import java.time.DateTimeException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,17 +16,24 @@ import java.util.regex.Pattern;
  */
 class NaturalDateParser {
     private static final String[] DAY_STRINGS = new String[] {
-        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-    };
-
-    private static final String[] DAY_SHORT_STRINGS = new String[] {
-        "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
+        "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+        "mon", "tue", "wed", "thu", "fri", "sat", "sun"
     };
 
     private static final String[] MONTH_STRINGS = new String[] {
         "january", "february", "march", "april", "may", "june", "july", "august", "september", "october",
         "november", "december", "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov",
         "dec"
+    };
+
+    final DayOfWeek[] dayMapping = new DayOfWeek[] {
+        DayOfWeek.MONDAY,
+        DayOfWeek.TUESDAY,
+        DayOfWeek.WEDNESDAY,
+        DayOfWeek.THURSDAY,
+        DayOfWeek.FRIDAY,
+        DayOfWeek.SATURDAY,
+        DayOfWeek.SUNDAY
     };
 
     private static final String KEYWORD_RELATIVE_YEAR = "next year";
@@ -41,6 +50,8 @@ class NaturalDateParser {
 
     private Pattern standardDatePattern;
     private Pattern standardDateTimePattern;
+    private Pattern dayPattern;
+    private Pattern dayTimePattern;
     private Pattern naturalDatePattern;
     private Pattern naturalDateTimePattern;
     private Pattern relativeDatePattern;
@@ -58,6 +69,7 @@ class NaturalDateParser {
         String timeGroup = "(?=.* (\\d{1,2}):(\\d{1,2}) )";
 
         buildStandardPatterns();
+        buildDayPatterns(timeGroup);
         buildNaturalPatterns(dayGroup, monthGroup, yearGroup, timeGroup);
         buildRelativePatterns(dayGroup, monthGroup, timeGroup);
     }
@@ -90,6 +102,11 @@ class NaturalDateParser {
         // The regex pattern uses spaces to match groups.
         // Pad the start and end with spaces to match regex.
         String paddedInput = " " + input + " ";
+        Matcher dayMatcher = dayPattern.matcher(paddedInput);
+        if (dayMatcher.matches()) {
+            return parseDayDate(dayMatcher);
+        }
+
         Matcher naturalMatcher = naturalDatePattern.matcher(paddedInput);
         if (naturalMatcher.matches()) {
             return parseNaturalDate(naturalMatcher);
@@ -119,6 +136,11 @@ class NaturalDateParser {
         // The regex pattern uses spaces to match groups.
         // Pad the start and end with spaces to match regex.
         String paddedInput = " " + input + " ";
+        Matcher dayMatcher = dayTimePattern.matcher(paddedInput);
+        if (dayMatcher.matches()) {
+            return parseDayTimeDate(dayMatcher);
+        }
+
         Matcher naturalMatcher = naturalDateTimePattern.matcher(paddedInput);
         if (naturalMatcher.matches()) {
             return parseNaturalDateTime(naturalMatcher);
@@ -139,6 +161,19 @@ class NaturalDateParser {
         standardDatePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4})");
         standardDateTimePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4}) "
                 + "(\\d{1,2})[-:](\\d{1,2})");
+    }
+
+    /**
+     * Creates the regex pattern for natural next x-day formats.
+     *
+     * @param timeGroup The regex capture group for time.
+     */
+    private void buildDayPatterns(String timeGroup) {
+        String allDays = String.join("|", DAY_STRINGS);
+        String dayGroup = "(?=.* (" + allDays + ") )";
+        dayPattern = Pattern.compile(String.format("^%s.*$", dayGroup), Pattern.CASE_INSENSITIVE);
+        dayTimePattern = Pattern.compile(String.format("^%s" + timeGroup + ".*$", dayGroup),
+                Pattern.CASE_INSENSITIVE);
     }
 
     /**
@@ -257,6 +292,46 @@ class NaturalDateParser {
             return parseDateTimePattern(String.format("%02d/%02d/%04d %02d:%02d", day, month, year,
                     hour, minute));
         } catch (NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    /**
+     * Translates a day-of-week from its natural text representation to its numeric date representation.
+     *
+     * @param dayText The day-of-week to translate in its natural text representation.
+     * @return The DayOfWeek representation of the supplied day-of-week.
+     */
+    private DayOfWeek parseNaturalDay(String dayText) {
+        String trimmedText = dayText.toLowerCase().trim();
+        return dayMapping[(Arrays.asList(DAY_STRINGS).indexOf(trimmedText) % 7)];
+    }
+
+    /**
+     * Translates a regex match for {@link #dayPattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the dayPattern.
+     * @return A LocalDateTime object that represents the supplied date, or null if supplied String
+     *         is invalid.
+     */
+    private LocalDateTime parseDayDate(Matcher match) {
+        DayOfWeek dayOfWeek = parseNaturalDay(match.group(1));
+        LocalDateTime today = LocalDate.now().atStartOfDay();
+        return today.with(TemporalAdjusters.next(dayOfWeek));
+    }
+
+    /**
+     * Translates a regex match for {@link #dayTimePattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the dayTimePattern.
+     * @return A LocalDateTime object that represents the supplied date, or null if supplied String
+     *         is invalid.
+     */
+    private LocalDateTime parseDayTimeDate(Matcher match) {
+        try {
+            LocalDateTime date = parseDayDate(match);
+            return addTimeComponent(match, 2, date);
+        } catch (NumberFormatException | NullPointerException | DateTimeException ex) {
             return null;
         }
     }

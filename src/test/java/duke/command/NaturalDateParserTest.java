@@ -1,24 +1,14 @@
 package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.time.temporal.TemporalAdjusters;
 
 import org.junit.jupiter.api.Test;
-
-import duke.exception.DukeIllegalArgumentException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-import duke.testutil.PrinterStub;
 
 public class NaturalDateParserTest {
     @Test
@@ -113,5 +103,24 @@ public class NaturalDateParserTest {
                 NaturalDateParser.getInstance().parseDate("13 nov this year").toString());
         assertEquals(zeroedNow.plusYears(1).withMonth(12).withDayOfMonth(23).toString(),
                 NaturalDateParser.getInstance().parseDate("23 Dec next year").toString());
+    }
+
+    @Test
+    public void testDayDate_validArgs_success() {
+        LocalDateTime zeroedNow = LocalDate.now().atStartOfDay();
+        LocalDateTime nextMon = zeroedNow.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        LocalDateTime nextTue = zeroedNow.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
+        LocalDateTime nextWed = zeroedNow.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
+        LocalDateTime nextFri = zeroedNow.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+
+        assertEquals(nextMon.toString(),
+                NaturalDateParser.getInstance().parseDate("mon").toString());
+        assertEquals(nextTue.toString(),
+                NaturalDateParser.getInstance().parseDate("tuesday").toString());
+        assertEquals(nextWed.withHour(12).withMinute(34).toString(),
+                NaturalDateParser.getInstance().parseDateTime("wed 12:34").toString());
+        assertEquals(nextFri.withHour(12).withMinute(34).toString(),
+                NaturalDateParser.getInstance().parseDateTime("FrIdAy 12:34").toString());
+
     }
 }
