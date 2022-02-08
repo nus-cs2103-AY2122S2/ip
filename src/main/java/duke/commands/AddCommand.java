@@ -55,6 +55,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
         this.tasks = tasks;
         String[] processedInput;
         switch (type) {
@@ -63,10 +64,12 @@ public class AddCommand extends Command {
             break;
         case "event":
             processedInput = input.split("/at", 2);
+            assert processedInput[1] != null;
             added = new Event(processedInput[0], processedInput[1]);
             break;
         case "deadline":
             processedInput = input.split("/by", 2);
+            assert processedInput[1] != null;
             added = new Deadline(processedInput[0], processedInput[1]);
             break;
         default:

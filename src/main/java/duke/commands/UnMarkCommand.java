@@ -44,6 +44,7 @@ public class UnMarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException {
+        assert tasks != null;
         this.tasks = tasks;
         if (pos >= tasks.size()) {
             throw new OutOfRangeException();
