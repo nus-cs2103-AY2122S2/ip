@@ -46,6 +46,7 @@ public class Window extends BorderPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        TaskCard.setDuke(d);
         update();
     }
 
@@ -129,7 +130,7 @@ public class Window extends BorderPane {
         assert filteredTasks.size() == filteredTaskIndices.size();
 
         for (int i = 0; i < filteredTasks.size(); i++) {
-            taskContainer.getChildren().add(new TaskCard(this, duke, filteredTasks.get(i), filteredTaskIndices.get(i)));
+            taskContainer.getChildren().add(new TaskCard(this, filteredTasks.get(i), filteredTaskIndices.get(i)));
         }
 
         assert taskContainer.getChildren().size() == filteredTasks.size();

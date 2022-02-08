@@ -10,7 +10,7 @@ import duke.DukeException;
  * Represents a task that is due at a certain time.
  */
 public class Deadline extends Task {
-    private final LocalDateTime by;
+    private LocalDateTime by;
 
     /**
      * Constructs a Deadline instance.
@@ -38,6 +38,10 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime by, boolean isDone) {
         this(description, by);
         this.isDone = isDone;
+    }
+
+    public void setBy(LocalDateTime by) {
+        this.by = by;
     }
 
     @Override
