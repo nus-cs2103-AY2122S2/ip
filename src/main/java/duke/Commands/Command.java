@@ -78,9 +78,9 @@ public class Command {
         StringBuilder toPrint = new StringBuilder("You have ")
                 .append(listOfTasks.size())
                 .append(" tasks and they are:\n");
-        for (int i = 0; i < listOfTasks.size(); i++) {
-            int num = i + 1;
-            String toAdd = num + "." + listOfTasks.get(i) + "\n";
+        for (int index = 0; index < listOfTasks.size(); index++) {
+            int num = index + 1;
+            String toAdd = num + "." + listOfTasks.get(index) + "\n";
             toPrint.append(toAdd);
         }
         return toPrint.toString();
@@ -92,6 +92,7 @@ public class Command {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
 
+        assert index > 0 && index < listOfTasks.size() : "index is not in range";
         Task toMark = listOfTasks.get(index);
         toMark.mark();
         StringBuilder toPrint = new StringBuilder("Nice! I've marked this task as done:\n").append(toMark)
@@ -105,6 +106,7 @@ public class Command {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
 
+        assert index > 0 && index < listOfTasks.size() : "index is not in range";
         Task toUnmark = listOfTasks.get(index);
         toUnmark.unmark();
         StringBuilder toPrint = new StringBuilder("OK, I've marked this task as not done yet:\n")
