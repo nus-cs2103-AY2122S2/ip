@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
+
 
 /**
  * Represents an instance of a Deadline
@@ -14,7 +14,7 @@ public class Deadline extends Task implements Comparable<Deadline> {
      * Store the date by which this instance
      * of the Deadline has to be completed
      */
-    protected LocalDate date;
+    private LocalDate date;
 
     /**
      * Constructor method for Deadline
@@ -39,7 +39,14 @@ public class Deadline extends Task implements Comparable<Deadline> {
         return "[D] " + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
-
+    /**
+     * compareTo method where Deadline with
+     * earlier date is considered less than
+     * a Deadline with a later date
+     *
+     * @param o Deadline Instance it is being compared to
+     * @return Integer based on compareTo definition
+     */
     @Override
     public int compareTo(Deadline o) {
         return this.date.compareTo(o.date);

@@ -1,6 +1,5 @@
 package duke.utils;
 
-import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 /**
@@ -16,6 +15,7 @@ public class Parser {
      * @param userInput The current command to be parsed
      * @param tl Instance of the tasklist at this moment
      * @param cd Instance of command class to call relevant command
+     * @return Response for givne user input
      * @throws DukeException If the user's command is not valid
      */
     public static String parse(String userInput, TaskList tl, Command cd) throws DukeException {
@@ -25,7 +25,6 @@ public class Parser {
 
         StringTokenizer st = new StringTokenizer(userInput, " ");
         String curr = st.nextToken();
-
 
         switch (curr) {
 
@@ -48,7 +47,7 @@ public class Parser {
         case "sort":
             return cd.sortTasks(tl, st);
         case "bye":
-            return Ui.printBye();
+            return cd.handleBye(st);
         default:
             throw new DukeException.DukeInvalidCommandException();
         }

@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 
 /**
  * Represents an instance of a Event
@@ -14,7 +13,7 @@ public class Event extends Task implements Comparable<Event> {
      * Store the date on which this Event
      * occurs
      */
-    protected LocalDate date;
+    private LocalDate date;
 
     /**
      * Constructor method for Event
@@ -49,6 +48,14 @@ public class Event extends Task implements Comparable<Event> {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * compareTo method where Event with
+     * earlier date is considered less than
+     * an Event with a later date
+     *
+     * @param o Event Instance it is being compared to
+     * @return Integer based on compareTo definition
+     */
     @Override
     public int compareTo(Event o) {
         return this.date.compareTo(o.date);

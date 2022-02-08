@@ -18,9 +18,9 @@ import javafx.scene.layout.HBox;
  * A custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
- *
- *
  */
+//@@author goel-a-reused
+// This class has been adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -61,3 +61,4 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+//@@author goel-a

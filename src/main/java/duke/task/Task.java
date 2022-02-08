@@ -1,7 +1,9 @@
 package duke.task;
 
-import duke.utils.Ui;
 import java.io.Serializable;
+
+import duke.utils.Ui;
+
 
 
 /**
@@ -32,6 +34,9 @@ public abstract class Task implements Serializable {
     /**
      * Mark this instance of task
      * as completed
+     *
+     * @return Message confirming the task has been marked as completed
+     *
      */
     public String markCompleted() {
         this.isFinished = true;
@@ -41,6 +46,8 @@ public abstract class Task implements Serializable {
     /**
      * Mark this instance of task
      * as not completed
+     *
+     * @return Message confirming the task has been marked as not completed
      */
     public String markNotCompleted() {
         this.isFinished = false;

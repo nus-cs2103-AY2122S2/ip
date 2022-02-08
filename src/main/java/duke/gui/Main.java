@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
  */
+//@@author goel-a-reused
+// This class has been adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class Main extends Application {
 
     private Duke duke = new Duke();
@@ -31,3 +33,4 @@ public class Main extends Application {
         }
     }
 }
+//@@author goel-a

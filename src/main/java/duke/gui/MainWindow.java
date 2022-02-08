@@ -1,7 +1,6 @@
 package duke.gui;
 
 import duke.utils.Duke;
-import duke.utils.Storage;
 import duke.utils.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -17,6 +16,8 @@ import javafx.util.Duration;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+//@@author goel-a-reused
+// This class has been adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -32,6 +33,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/drake.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/kwest.png"));
 
+    /**
+     * Method to initialize
+     * the main window
+     */
     @FXML
     public void initialize() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.printHello(), dukeImage));
@@ -65,3 +70,4 @@ public class MainWindow extends AnchorPane {
         }
     }
 }
+//@@author goel-a

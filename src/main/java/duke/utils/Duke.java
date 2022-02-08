@@ -13,6 +13,10 @@ public class Duke {
     private TaskList tl;
 
 
+    /**
+     * Instance of Command to handle
+     * various user commands
+     */
     private Command cd;
 
 
@@ -44,6 +48,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves the current list of tasks
+     * to the hard disk
+     */
     public void saveListToDisk() {
         this.tl.saveListToStorage();
     }

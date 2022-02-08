@@ -1,9 +1,8 @@
 package duke.utils;
 
-
-import duke.task.Task;
 import java.util.ArrayList;
 
+import duke.task.Task;
 
 /**
  * Class that handles user interactions
@@ -21,8 +20,9 @@ public class Ui {
      * the list
      *
      * @param tasks Arraylist of tasks
+     * @return String containing aforementioned list
      */
-    public static String printList(ArrayList<Task> tasks) {
+    protected static String printList(ArrayList<Task> tasks) {
 
         if (tasks.size() == 0) {
             return "No Tasks Right Now";
@@ -41,10 +41,11 @@ public class Ui {
      * the user's search request
      *
      * @param tasks Arraylist of tasks
+     * @return String containing aforementioned list
      */
-    public static String printSearchList(ArrayList<Task> tasks) {
+    protected static String printSearchList(ArrayList<Task> tasks) {
 
-        if(tasks.size() == 0) {
+        if (tasks.size() == 0) {
             return "No Matching Tasks Found";
         } else {
             StringBuilder st = new StringBuilder();
@@ -56,9 +57,17 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a given list of sorted
+     * Tasks
+     *
+     * @param tasks list of tasks to be printed
+     * @param type type of tasks being printed
+     * @return String containing aforementioned list
+     */
     public static String printSortedList(ArrayList<? extends Task> tasks, String type) {
 
-        if(tasks.size() == 0) {
+        if (tasks.size() == 0) {
             return "No Tasks of This Type";
         } else {
             StringBuilder st = new StringBuilder();
@@ -77,6 +86,7 @@ public class Ui {
      *
      * @param curr Task that has been added to the list
      * @param size number of tasks in the list
+     * @return String message confirming the task has been added to the list
      */
     public static String printTaskAddition(Task curr, int size) {
         StringBuilder st = new StringBuilder();
@@ -92,6 +102,7 @@ public class Ui {
      *
      * @param curr Task that has been removed from the list
      * @param size number of tasks in the list
+     * @return String message confirming the task has been deleted from the list
      */
     public static String printTaskDeletion(Task curr, int size) {
         StringBuilder st = new StringBuilder();
@@ -105,6 +116,8 @@ public class Ui {
 
     /**
      * Print the welcome message for the user
+     *
+     * @return String message as mentioned
      */
     public static String printHello() {
         return "Hello! I'm Duke! \n What can I do for you?";
@@ -112,6 +125,8 @@ public class Ui {
 
     /**
      * Print the goodbye message for the user
+     *
+     * @return String message as mentioned
      */
     public static String printBye() {
         return "Bye! Hope to see you again soon";
@@ -121,7 +136,8 @@ public class Ui {
      * Print a task has been marked
      * as completed
      *
-     * param t Task that has been marked as complete
+     * @param t Task that has been marked as complete
+     * @return String message confirming task has been marked as complete
      */
     public static String printMarkCompletion(Task t) {
         StringBuilder st = new StringBuilder();
@@ -134,7 +150,8 @@ public class Ui {
      * Print a task has been marked
      * as not completed
      *
-     * param t Task that has been marked as not complete
+     * @param t Task that has been marked as not complete
+     * @return String message confirming task has been marked as not complete
      */
     public static String printMarkUncompletion(Task t) {
         StringBuilder st = new StringBuilder();
@@ -148,6 +165,7 @@ public class Ui {
      * a particular DukeException
      *
      * @param e Exception received
+     * @return String error message
      */
     public static String showError(DukeException e) {
         return (e.toString());

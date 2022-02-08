@@ -1,22 +1,20 @@
 package duke.utils;
 
-import duke.task.Task;
-
-
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import duke.task.Task;
 
 /**
  * Class that deals with storing/saving
  * data on the hard disk
  */
-public  class Storage {
+public class Storage {
 
     /**
      * Retrieve saved tasks
@@ -24,7 +22,8 @@ public  class Storage {
      *
      * @return List of Tasks that has been saved on the hard disk
      */
-    // The solution below has been adapted from https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
+    //@@author goel-a-reused
+    // This method has been adapted from https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
     @SuppressWarnings("unchecked")
     public static ArrayList<Task> getSavedList() {
 
@@ -38,6 +37,7 @@ public  class Storage {
             return new ArrayList<>();
         }
     }
+    //@@author goel-a
 
     /**
      * Save the given list of tasks to the
@@ -45,7 +45,8 @@ public  class Storage {
      *
      * @param saved The current list of tasks to be saved to hard disk
      */
-    // The solution below has been adapted from https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
+    //@@author goel-a-reused
+    // This method has been adapted from https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
     public static void saveListToDisk(ArrayList<Task> saved) {
 
         File directory = new File("data");
@@ -63,4 +64,5 @@ public  class Storage {
             e.printStackTrace();
         }
     }
+    //@@author goel-a
 }
