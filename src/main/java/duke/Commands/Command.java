@@ -128,6 +128,19 @@ public class Command {
         return toPrint.toString();
     }
 
+    private static String help() {
+        StringBuilder toPrint = new StringBuilder("Here are the commands I can carry out for you:\n")
+                .append("1. list (List all the task you currently have)\n")
+                .append("2. mark [task number] (Mark the task as done)\n")
+                .append("3. unmark [task number] (Mark the task as not done)\n")
+                .append("4. delete [task number] (Deletes that specific task from the list\n")
+                .append("5. todo [task description] (Adds a Todo Task)\n")
+                .append("6. deadline [task description] /by [date in the format {yyyy/MM/dd HH:mm} ] (Adds a deadline task)\n")
+                .append("7. event [task description] /at [date in the format {yyyy/MM/dd HH:mm} ] (Adds a event task)\n")
+                .append("8. find [keyword] (Finds all tasks with the keyword in the description)\n");
+        return toPrint.toString();
+    }
+
     /**
      * Contains the logic for processing the processed userInput, finds the corresponding commands
      * to the userInput and executes it.
@@ -164,6 +177,9 @@ public class Command {
                 break;
             case "find":
                 toPrint = findTask(processedInput[1], listOfTasks);
+                break;
+            case "help":
+                toPrint = help();
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, "

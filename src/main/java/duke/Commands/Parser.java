@@ -31,6 +31,8 @@ public class Parser {
         // One word messages
         if (inputMessage.equals("list")) {
             msg = new String[]{"list"};
+        } else if (inputMessage.equals("help")) {
+            msg = new String[] {"help"};
         } else {
             // Mark and unmark have the same syntax, so only process it once
             try {
