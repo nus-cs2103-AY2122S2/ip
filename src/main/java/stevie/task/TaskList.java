@@ -47,6 +47,7 @@ public class TaskList {
         if (idx == 1) {
             return "There's no task that matched that keyword!";
         }
+        assert sb.length() > 0;
         if (idx > 1) {
             sb.deleteCharAt(sb.length() - 1);
         }
@@ -122,6 +123,7 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
         }
+        assert sb.length() > 0;
         if (sb.length() > 0) {
             sb.deleteCharAt(sb.length() - 1);
         }

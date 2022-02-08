@@ -54,6 +54,7 @@ public class TaskDataHandler {
             String line;
             ArrayList<Task> taskList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
+                assert !line.isEmpty();
                 TaskType type = TaskCreator.charToType(line.charAt(0));
                 String[] splits = line.split("\\|");
                 boolean done = splits[1] == "1";

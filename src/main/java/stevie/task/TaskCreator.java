@@ -34,6 +34,7 @@ public class TaskCreator {
         default:
             throw new TaskException("There is no such task!");
         }
+        assert newTask != null;
         if (done) {
             newTask.done();
         }
@@ -59,6 +60,7 @@ public class TaskCreator {
         default:
             throw new TaskException("There is no such task!");
         }
+        assert newTask != null;
         if (done) {
             newTask.done();
         }

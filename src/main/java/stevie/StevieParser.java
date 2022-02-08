@@ -30,6 +30,7 @@ public class StevieParser {
      * @throws StevieException if user's input is invalid or incomplete
      */
     public static Command parse(String userIn) throws StevieException {
+        assert !userIn.isEmpty();
         if (userIn.equals("bye")) {
             return new ExitCommand();
         } else if (userIn.equals("help")) {
