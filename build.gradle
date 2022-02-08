@@ -46,8 +46,9 @@ test {
     }
 }
 
-// Define the main class for the application.
-mainClassName = "spark.Main"
+application {
+    mainClassName = "spark.Launcher"
+}
 
 shadowJar {
     archiveBaseName = "spark"
