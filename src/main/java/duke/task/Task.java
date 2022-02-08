@@ -22,10 +22,6 @@ public class Task {
         return this.name;
     }
 
-    public boolean getIsDone() {
-        return this.isDone;
-    }
-
     /**
      * Mark the task as done.
      */

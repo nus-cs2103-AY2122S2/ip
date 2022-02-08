@@ -1,1 +1,4 @@
-[T][ ] abc
+[T][ ] buy bread
+[T][ ] buy dinner
+[E][ ] birthday party (at: Monday)
+[D][X] sweep the floor (by: Jan 1 2022)

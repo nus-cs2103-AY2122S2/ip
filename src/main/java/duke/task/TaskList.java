@@ -8,7 +8,6 @@ import duke.exception.DukeNoDescriptionException;
 import duke.exception.DukeNoTimeSpecifiedException;
 import duke.exception.DukeOutOfBoundException;
 import duke.io.UserInput;
-import duke.ui.Ui;
 
 /**
  * This is a TaskList class that used to store the tasks in an ArrayList.
@@ -22,22 +21,70 @@ public class TaskList {
      * @param userInput A UserInput object, capturing the user's input.
      * @throws DukeException If user's input is invalid.
      */
-    public void listTask(UserInput userInput) throws DukeException {
+    public String listTask(UserInput userInput) throws DukeException {
+        StringBuilder returnMessage = new StringBuilder();
         if (!userInput.getDescription().equals("") || !userInput.getTime().equals("")) {
             // throw wrong command exception
             throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
         }
-        Ui.drawDivider();
         if (list.size() == 0) {
-            System.out.println("Nothing on your list!");
+            return "Nothing on your list!";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            returnMessage.append("Here are the tasks in your list:\n");
             for (int i = 0; i < list.size(); i++) {
-                System.out.printf("%d.%s%n", i + 1, list.get(i).toString());
+                returnMessage.append(String.format("%d.%s%n", i + 1, list.get(i).toString()));
             }
         }
-        System.out.printf("Now you have %d tasks in the list%n", list.size());
-        Ui.drawDivider();
+        returnMessage.append(String.format("Now you have %d tasks in the list%n", list.size()));
+        return returnMessage.toString();
+    }
+
+    private String appendTaskMessage(Task task) {
+        StringBuilder returnMessage = new StringBuilder();
+
+        returnMessage.append("Got it. I've added this task:\n");
+        returnMessage.append(task);
+        returnMessage.append(String.format("\nNow you have %d tasks in the list%n", list.size()));
+        return returnMessage.toString();
+    }
+
+    private String addTodoTask(UserInput userInput) throws DukeException {
+        if (userInput.getDescription().equals("")) {
+            // throw no description exception
+            throw new DukeNoDescriptionException("OOPS!!! The description of a todo cannot be empty.");
+        }
+
+        Task newTask = new ToDoTask(userInput.getDescription());
+        list.add(newTask);
+        return appendTaskMessage(newTask);
+    }
+
+    private String addDeadlineTask(UserInput userInput) throws DukeException {
+        if (userInput.getDescription().equals("")) {
+            // throw no description exception
+            throw new DukeNoDescriptionException("OOPS!!! The description of a deadline cannot be empty.");
+        } else if (userInput.getTime().equals("")) {
+            // throw no time specified exception
+            throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
+        }
+
+        Task newTask = new DeadlineTask(userInput.getDescription(), userInput.getTime());
+        list.add(newTask);
+        return appendTaskMessage(newTask);
+    }
+
+    private String addEventTask(UserInput userInput) throws DukeException {
+        if (userInput.getDescription().equals("")) {
+            // throw no description exception
+            throw new DukeNoDescriptionException("OOPS!!! The description of a event cannot be empty.");
+        } else if (userInput.getTime().equals("")) {
+            // throw no time specified exception
+            throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
+        }
+
+        Task newTask = new EventTask(userInput.getDescription(), userInput.getTime());
+        list.add(newTask);
+        return appendTaskMessage(newTask);
     }
 
     /**
@@ -45,66 +92,38 @@ public class TaskList {
      * Print a message if the task is successfully added to the task list.
      *
      * @param userInput A UserInput object, capturing the user's input.
+     * @return A String of message.
      * @throws DukeException If user's input is invalid.
      */
-    public void addTask(UserInput userInput) throws DukeException {
+    public String addTask(UserInput userInput) throws DukeException {
+        String returnMessage = "";
+
         // add ToDoTask
         if (userInput.getCommand().equals("todo")) {
-            if (userInput.getDescription().equals("")) {
-                // throw no description exception
-                throw new DukeNoDescriptionException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            Task newTask = new ToDoTask(userInput.getDescription());
-            list.add(newTask);
-            Ui.drawDivider();
-            System.out.println("Got it. I've added this task:");
-            System.out.println(newTask);
+            returnMessage = addTodoTask(userInput);
         }
 
         // add DeadlineTask
         if (userInput.getCommand().equals("deadline")) {
-            if (userInput.getDescription().equals("")) {
-                // throw no description exception
-                throw new DukeNoDescriptionException("OOPS!!! The description of a deadline cannot be empty.");
-            } else if (userInput.getTime().equals("")) {
-                // throw no time specified exception
-                throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
-            }
-            Task newTask = new DeadlineTask(userInput.getDescription(), userInput.getTime());
-            list.add(newTask);
-            Ui.drawDivider();
-            System.out.println("Got it. I've added this task:");
-            System.out.println(newTask);
+            returnMessage = addDeadlineTask(userInput);
         }
 
         // add EventTask
         if (userInput.getCommand().equals("event")) {
-            if (userInput.getDescription().equals("")) {
-                // throw no description exception
-                throw new DukeNoDescriptionException("OOPS!!! The description of a event cannot be empty.");
-            } else if (userInput.getTime().equals("")) {
-                // throw no time specified exception
-                throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
-            }
-            Task newTask = new EventTask(userInput.getDescription(), userInput.getTime());
-            list.add(newTask);
-            Ui.drawDivider();
-            System.out.println("Got it. I've added this task:");
-            System.out.println(newTask);
+            returnMessage = addEventTask(userInput);
         }
 
-        System.out.printf("Now you have %d tasks in the list%n", list.size());
-        Ui.drawDivider();
+        return returnMessage;
     }
 
     /**
-     * Add task to the task list based on the user's input.
+     * load task to the task list based on the user's local data.
      * Does not print any message. This is used for loading up saved data when initialising Duke.
      *
      * @param userInput A UserInput object, capturing the user's input.
      * @throws DukeException If user's input is invalid.
      */
-    public void addTaskWithoutMessage(UserInput userInput) throws DukeException {
+    public void loadTask(UserInput userInput) throws DukeException {
         // add ToDoTask
         if (userInput.getCommand().equals("todo")) {
             Task newTask = new ToDoTask(userInput.getDescription(), userInput.getIsDone());
@@ -132,23 +151,28 @@ public class TaskList {
      * Print a message after the operation is completed.
      *
      * @param userInput A UserInput object, capturing the user's input.
+     * @return A String of message.
      * @throws DukeException If user's input is invalid.
      */
-    public void markDone(UserInput userInput) throws DukeException {
+    public String markDone(UserInput userInput) throws DukeException {
         if (userInput.getDescription().equals("")) {
             // throw no description exception
             throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
         }
-        int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
+        try {
+            int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
+            StringBuilder returnMessage = new StringBuilder();
 
-        // check if the user's input value is within the range of the list before mark done the task
-        checkOutOfBound(n - 1);
+            // check if the user's input value is within the range of the list before mark done the task
+            checkOutOfBound(n - 1);
 
-        Ui.drawDivider();
-        list.get(n - 1).markDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(list.get(n - 1).toString());
-        Ui.drawDivider();
+            list.get(n - 1).markDone();
+            returnMessage.append("Nice! I've marked this task as done:\n");
+            returnMessage.append(list.get(n - 1).toString());
+            return returnMessage.toString();
+        } catch (NumberFormatException e) {
+            throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
+        }
     }
 
     /**
@@ -156,23 +180,29 @@ public class TaskList {
      * Print a message after the operation is completed.
      *
      * @param userInput A UserInput object, capturing the user's input.
+     * @return A String of message.
      * @throws DukeException If user's input is invalid.
      */
-    public void markUndone(UserInput userInput) throws DukeException {
+    public String markUndone(UserInput userInput) throws DukeException {
         if (userInput.getDescription().equals("")) {
             // throw no description exception
             throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
         }
-        int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
 
-        // check if the user's input value is within the range of the list before mark un done the task
-        checkOutOfBound(n - 1);
+        try {
+            int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
+            StringBuilder returnMessage = new StringBuilder();
 
-        Ui.drawDivider();
-        list.get(n - 1).markUndone();
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(list.get(n - 1).toString());
-        Ui.drawDivider();
+            // check if the user's input value is within the range of the list before mark un done the task
+            checkOutOfBound(n - 1);
+
+            list.get(n - 1).markUndone();
+            returnMessage.append("OK, I've marked this task as not done yet:\n");
+            returnMessage.append(list.get(n - 1).toString());
+            return returnMessage.toString();
+        } catch (NumberFormatException e) {
+            throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
+        }
     }
 
     /**
@@ -180,24 +210,29 @@ public class TaskList {
      * Print a message after the operation is completed.
      *
      * @param userInput A UserInput object, capturing the user's input.
+     * @return A String of message.
      * @throws DukeException If user's input is invalid.
      */
-    public void deleteTask(UserInput userInput) throws DukeException {
+    public String deleteTask(UserInput userInput) throws DukeException {
         if (userInput.getDescription().equals("")) {
             // throw no description exception
             throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
         }
-        int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
+        try {
+            int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
+            StringBuilder returnMessage = new StringBuilder();
 
-        // check if the user's input value is within the range of the list before deleting the task
-        checkOutOfBound(n - 1);
+            // check if the user's input value is within the range of the list before deleting the task
+            checkOutOfBound(n - 1);
 
-        Ui.drawDivider();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(list.get(n - 1).toString());
-        list.remove(n - 1);
-        System.out.printf("Now you have %d tasks in the list%n", list.size());
-        Ui.drawDivider();
+            returnMessage.append("Noted. I've removed this task:\n");
+            returnMessage.append(list.get(n - 1).toString());
+            list.remove(n - 1);
+            returnMessage.append(String.format("\nNow you have %d tasks in the list%n", list.size()));
+            return returnMessage.toString();
+        } catch (NumberFormatException e) {
+            throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
+        }
     }
 
     /**
@@ -224,104 +259,7 @@ public class TaskList {
         }
     }
 
-    public void findTask(UserInput userInput) throws DukeException {
-        if (!userInput.getTime().equals("")) {
-            // throw wrong command exception
-            throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
-        }
-
-        ArrayList<Task> arrayList = new ArrayList<>();
-
-        Ui.drawDivider();
-        if (list.size() == 0) {
-            System.out.println("Nothing on your list!");
-        } else {
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getTaskName().contains(userInput.getDescription())) {
-                    arrayList.add(list.get(i));
-                }
-            }
-            if (arrayList.size() > 0) {
-                System.out.println("Here are the matching tasks in your list:");
-                for (int j = 0; j < arrayList.size(); j++) {
-                    System.out.println((j + 1) + "." + arrayList.get(j).toString());
-                }
-            } else {
-                System.out.println("OOPS!!! There are no matching tasks in your list!");
-            }
-        }
-        Ui.drawDivider();
-    }
-
-    public String listTaskFX(UserInput userInput) throws DukeException {
-        StringBuilder returnMessage = new StringBuilder();
-        if (!userInput.getDescription().equals("") || !userInput.getTime().equals("")) {
-            // throw wrong command exception
-            throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
-        }
-        if (list.size() == 0) {
-            return "Nothing on your list!";
-        } else {
-            returnMessage.append("Here are the tasks in your list:\n");
-            for (int i = 0; i < list.size(); i++) {
-                returnMessage.append(String.format("%d.%s%n", i + 1, list.get(i).toString()));
-            }
-        }
-        returnMessage.append(String.format("Now you have %d tasks in the list%n", list.size()));
-        return returnMessage.toString();
-    }
-
-    public String addTaskFX(UserInput userInput) throws DukeException {
-        StringBuilder returnMessage = new StringBuilder();
-
-        // add ToDoTask
-        if (userInput.getCommand().equals("todo")) {
-            if (userInput.getDescription().equals("")) {
-                // throw no description exception
-                throw new DukeNoDescriptionException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            Task newTask = new ToDoTask(userInput.getDescription());
-            list.add(newTask);
-            returnMessage.append("Got it. I've added this task:\n");
-            returnMessage.append(newTask);
-        }
-
-        // add DeadlineTask
-        if (userInput.getCommand().equals("deadline")) {
-            if (userInput.getDescription().equals("")) {
-                // throw no description exception
-                throw new DukeNoDescriptionException("OOPS!!! The description of a deadline cannot be empty.");
-            } else if (userInput.getTime().equals("")) {
-                // throw no time specified exception
-                throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
-            }
-            Task newTask = new DeadlineTask(userInput.getDescription(), userInput.getTime());
-            list.add(newTask);
-            returnMessage.append("Got it. I've added this task:\n");
-            returnMessage.append(newTask);
-        }
-
-        // add EventTask
-        if (userInput.getCommand().equals("event")) {
-            if (userInput.getDescription().equals("")) {
-                // throw no description exception
-                throw new DukeNoDescriptionException("OOPS!!! The description of a event cannot be empty.");
-            } else if (userInput.getTime().equals("")) {
-                // throw no time specified exception
-                throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
-            }
-            Task newTask = new EventTask(userInput.getDescription(), userInput.getTime());
-            list.add(newTask);
-            returnMessage.append("Got it. I've added this task:\n");
-            returnMessage.append(newTask);
-
-        }
-
-        returnMessage.append(String.format("\nNow you have %d tasks in the list%n", list.size()));
-        return returnMessage.toString();
-    }
-
-    public String findTaskFX(UserInput userInput) throws DukeException {
+    public String findTask(UserInput userInput) throws DukeException {
         if (!userInput.getTime().equals("")) {
             // throw wrong command exception
             throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
@@ -332,83 +270,24 @@ public class TaskList {
 
         if (list.size() == 0) {
             returnMessage.append("Nothing on your list!");
+        }
+
+        for (Task task : list) {
+            if (task.getTaskName().contains(userInput.getDescription())) {
+                arrayList.add(task);
+            }
+        }
+
+        if (arrayList.size() > 0) {
+            returnMessage.append("Here are the matching tasks in your list:\n");
+            for (int j = 0; j < arrayList.size(); j++) {
+                returnMessage.append(j + 1).append(".").append(arrayList.get(j).toString());
+            }
+
         } else {
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getTaskName().contains(userInput.getDescription())) {
-                    arrayList.add(list.get(i));
-                }
-            }
-            if (arrayList.size() > 0) {
-                returnMessage.append("Here are the matching tasks in your list:\n");
-                for (int j = 0; j < arrayList.size(); j++) {
-                    returnMessage.append((j + 1) + "." + arrayList.get(j).toString());
-                }
-            } else {
-                returnMessage.append("OOPS!!! There are no matching tasks in your list!");
-            }
+            returnMessage.append("OOPS!!! There are no matching tasks in your list!");
         }
 
-        return returnMessage.toString();
-    }
-
-    public String markDoneFX(UserInput userInput) throws DukeException {
-        if (userInput.getDescription().equals("")) {
-            // throw no description exception
-            throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
-        }
-        int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
-        StringBuilder returnMessage = new StringBuilder();
-
-        // check if the user's input value is within the range of the list before mark done the task
-        checkOutOfBound(n - 1);
-
-        // assert that n should be a positive number
-        assert !(n <= 0);
-
-        list.get(n - 1).markDone();
-        returnMessage.append("Nice! I've marked this task as done:\n");
-        returnMessage.append(list.get(n - 1).toString());
-        return returnMessage.toString();
-    }
-
-    public String markUndoneFX(UserInput userInput) throws DukeException {
-        if (userInput.getDescription().equals("")) {
-            // throw no description exception
-            throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
-        }
-        int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
-        StringBuilder returnMessage = new StringBuilder();
-
-        // check if the user's input value is within the range of the list before mark un done the task
-        checkOutOfBound(n - 1);
-
-        // assert that n should be a positive number
-        assert !(n <= 0);
-
-        list.get(n - 1).markUndone();
-        returnMessage.append("OK, I've marked this task as not done yet:\n");
-        returnMessage.append(list.get(n - 1).toString());
-        return returnMessage.toString();
-    }
-
-    public String deleteTaskFX(UserInput userInput) throws DukeException {
-        if (userInput.getDescription().equals("")) {
-            // throw no description exception
-            throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
-        }
-        int n = Integer.parseInt(userInput.getDescription().replaceAll("[^\\d-]", ""));
-        StringBuilder returnMessage = new StringBuilder();
-
-        // check if the user's input value is within the range of the list before deleting the task
-        checkOutOfBound(n - 1);
-
-        // assert that n should be a positive number
-        assert !(n <= 0);
-
-        returnMessage.append("Noted. I've removed this task:\n");
-        returnMessage.append(list.get(n - 1).toString());
-        list.remove(n - 1);
-        returnMessage.append(String.format("\nNow you have %d tasks in the list%n", list.size()));
         return returnMessage.toString();
     }
 }
