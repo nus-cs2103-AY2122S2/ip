@@ -14,6 +14,7 @@ import spike.command.ExitCommand;
 import spike.command.FindCommand;
 import spike.command.IncorrectCommand;
 import spike.command.ListCommand;
+import spike.command.RemindCommand;
 import spike.command.ToggleMarkCommand;
 import spike.task.Deadline;
 import spike.task.Event;
@@ -38,6 +39,8 @@ public class Parser {
     public static final String MSG_ERROR_DELETING = "Invalid arguments for deletion. Please check again!";
     public static final String DEADLINE_BY = "/by";
     public static final String EVENT_AT = "/at";
+    public static final String MSG_INVALID_SETTING_REMINDER_RANGE =
+            "Invalid arguments for setting range for reminder, please enter 'remind x' to see tasks due in x days.";
 
     protected enum CommandName {
         LIST("list"),
@@ -48,7 +51,8 @@ public class Parser {
         DEADLINE("deadline"),
         EVENT("event"),
         FIND("find"),
-        BYE("bye");
+        BYE("bye"),
+        REMIND("remind");
 
         private String command;
 
@@ -95,6 +99,8 @@ public class Parser {
             return parseFind(inputLine);
         case BYE:
             return parseExit();
+        case REMIND:
+            return parseRemind(commandWords);
         default:
             return new IncorrectCommand(UNEXPECTED_ERROR);
         }
@@ -238,24 +244,6 @@ public class Parser {
     }
 
     /**
-     * Validates command consist of only command and index.
-     * Such as delete and mark/mark
-     *
-     * @return true if command is valid, else false
-     */
-    private boolean validateIndexCommand(String[] commandWords, TaskList tasks) {
-        boolean isIncorrectParameter = commandWords.length != 2;
-        if (isIncorrectParameter) {
-            return false;
-        }
-        boolean isInvalidIndex = isValidIndex(commandWords[1], tasks.getListSize()) == -1;
-        if (isInvalidIndex) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Parses the find command.
      *
      * @param inputLine user raw input
@@ -275,6 +263,23 @@ public class Parser {
      */
     private Command parseExit() {
         return new ExitCommand();
+    }
+
+    /**
+     * Parses remind command.
+     *
+     * @return a command ready to be executed
+     */
+    private Command parseRemind(String[] commandWords) {
+        boolean isCompleteCommand = commandWords.length == 2;
+        if (!isCompleteCommand) {
+            return new IncorrectCommand(MSG_INVALID_SETTING_REMINDER_RANGE);
+        }
+        int validation = isValidInt(commandWords[1]);
+        if (validation == -1) {
+            return new IncorrectCommand(MSG_INVALID_SETTING_REMINDER_RANGE);
+        }
+        return new RemindCommand(validation);
     }
 
 
@@ -312,6 +317,21 @@ public class Parser {
     }
 
     /**
+     * Checks whether the input string is valid integer.
+     * If yes, return it, else return -1.
+     *
+     * @return indicator of whether the integer string given is valid
+     */
+    private static int isValidInt(String str) {
+        try {
+            int x = Integer.parseInt(str);
+            return x > 0 ? x : -1;
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    /**
      * Checks whether it is a valid command.
      * If valid, return that command enum number, else return null.
      *
@@ -323,5 +343,23 @@ public class Parser {
                 .filter(c -> c.getCommand().equals(input))
                 .findFirst()
                 .orElse(null);
+    }
+
+    /**
+     * Validates command consist of only command and index.
+     * Such as delete and mark/mark
+     *
+     * @return true if command is valid, else false
+     */
+    private boolean validateIndexCommand(String[] commandWords, TaskList tasks) {
+        boolean isIncorrectParameter = commandWords.length != 2;
+        if (isIncorrectParameter) {
+            return false;
+        }
+        boolean isInvalidIndex = isValidIndex(commandWords[1], tasks.getListSize()) == -1;
+        if (isInvalidIndex) {
+            return false;
+        }
+        return true;
     }
 }
