@@ -14,8 +14,8 @@ import java.util.Scanner;
  * Stores the user data in a text file.
  */
 public class Storage {
-    private final File directory = new File("data");
-    private final File file = new File("data/tasks.txt");
+    private final File STORAGE_DIRECTORY = new File("data");
+    private final File STORAGE_FILE = new File("data/tasks.txt");
 
     /**
      * Constructs a storage pointing to a text file.
@@ -23,28 +23,28 @@ public class Storage {
      * @throws DukeException If there is error when creating file.
      */
     public Storage() throws DukeException {
-        if (!directory.exists()) {
-            directory.mkdir();
+        if (!STORAGE_DIRECTORY.exists()) {
+            STORAGE_DIRECTORY.mkdir();
         }
 
         try {
-            file.createNewFile();
+            STORAGE_FILE.createNewFile();
         } catch (IOException e) {
             throw new DukeException("Error creating storage file! You data will not be stored.", e);
         }
     }
 
     /**
-     * Retrieves the tasks store in the storage text file.
+     * Retrieves the task list store in the storage text file.
      *
-     * @return The tasks stored in an array list.
+     * @return The task list in storage file.
      */
     public ArrayList<Task> retrieveTaskList() {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
-            Scanner sc = new Scanner(file);
+            Scanner sc = new Scanner(STORAGE_FILE);
             while (sc.hasNextLine()) {
-                tasks.add(stringToTask(sc.nextLine()));
+                tasks.add(convertStringToTask(sc.nextLine()));
             }
         } catch (FileNotFoundException e) {
             return tasks;
@@ -60,7 +60,7 @@ public class Storage {
      */
     public void saveTaskList(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(STORAGE_FILE);
             fw.write(tasks.taskListFileString());
             fw.close();
         } catch (IOException e) {
@@ -68,7 +68,7 @@ public class Storage {
         }
     }
 
-    private Task stringToTask(String task) {
+    private Task convertStringToTask(String task) {
         char type = task.charAt(0);
         boolean isDone = task.charAt(1) == '1';
         String[] detail = task.substring(2).split(" \\| ");

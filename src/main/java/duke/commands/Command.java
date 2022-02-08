@@ -17,11 +17,4 @@ public abstract class Command {
      * @param storage Local storage file.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
-     * Checks for it is an exit command.
-     *
-     * @return True for exit command, or false otherwise.
-     */
-    public abstract boolean isExit();
 }
