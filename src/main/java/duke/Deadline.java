@@ -1,6 +1,7 @@
 package duke;
 
 import exceptions.DukeDeadlineException;
+import main.Duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -50,15 +51,17 @@ public class Deadline extends Task {
                 throw new DukeDeadlineException("Deadline should be after today!");
             }
 
-
+            assert false;
             Deadline d_line = new Deadline(taskName, taskByDate);
             return d_line;
-        } catch (Exception e) {
-            DukeDeadlineException error = new DukeDeadlineException(
-                                                    "OOPS!!! Please enter in format: deadline <task> /by <yyyy-mm-dd> \n " +
+        } catch (AssertionError e) {
+            throw new DukeDeadlineException("Deadline is blocked!");
+        }
+        catch (Exception e) {
+            DukeDeadlineException error = new DukeDeadlineException( "OOPS!!! Please enter in format: deadline <task> /by <yyyy-mm-dd> \n " +
                                                     "e.g. deadline complete project /by 2022-12-24 \n" +
                                                     "Deadline set should be after today");
-            System.out.println(error.getMessage());
+
         }
         return null;
     }
