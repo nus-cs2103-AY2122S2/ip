@@ -78,7 +78,11 @@ public class Duke {
             return ui.displayList(taskList.getToDoList());
         case "mark":
         case "unmark":
-            return mark(Integer.parseInt(restOfInput));
+            int idx = Integer.parseInt(restOfInput);
+            if (idx - 1 < 0 || idx - 1 >= taskList.size()) {
+                return ui.idxOutOfBoundError();
+            }
+            return mark(idx);
         case "todo":
         case "deadline":
         case "event":
@@ -108,7 +112,11 @@ public class Duke {
             taskList.add(newTask);
             return ui.confirmAddition(newTask, taskList.getToDoList());
         case "delete":
-            return remove(Integer.parseInt(restOfInput));
+            idx = Integer.parseInt(restOfInput);
+            if (idx - 1 < 0 || idx - 1 >= taskList.size()) {
+                return ui.idxOutOfBoundError();
+            }
+            return remove(idx);
         case "find":
             ArrayList<Task> relevantTasks = taskList.find(restOfInput);
             return ui.showFindResult(relevantTasks);
@@ -123,6 +131,9 @@ public class Duke {
      * @param idx Index of the task in the <code>taskList</code>;
      */
     public String mark(int idx) {
+        assert (idx - 1 >= 0) : "Index of the element should be positive";
+        assert (idx - 1 < taskList.size()) : "Index of the element should be within the size of the list";
+
         taskList.get(idx - 1).mark();
         if (taskList.get(idx - 1).getIsDone()) {
             return ui.markAsDone(taskList.getToDoList(), idx);
@@ -151,6 +162,9 @@ public class Duke {
      * @param idx Index of the <code>task</code> in the <code>taskList</code>.
      */
     public String remove(int idx) {
+        assert (idx - 1 >= 0) : "Index of the element should be positive";
+        assert (idx - 1 < taskList.size()) : "Index of the element should be within the size of the list";
+
         Task removed = taskList.remove(idx - 1);
         return ui.confirmRemoval(removed, taskList.getToDoList());
     }

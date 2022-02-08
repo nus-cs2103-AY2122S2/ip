@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task. A <code>ToDo</code> object corresponds to the task represented by
  * a String name.
  */
-public class ToDo extends duke.task.Task {
+public class ToDo extends Task {
 
     /**
      * Returns a new instance of a <code>ToDo</code> object with the specified name.

@@ -64,4 +64,12 @@ public class TaskList {
         }
         return relevantTasks;
     }
+
+    /**
+     * Returns the size of the list
+     * @return Size of the list
+     */
+    public int size() {
+        return this.toDoList.size();
+    }
 }
