@@ -142,7 +142,4 @@ public class Ui {
         return "Bye! I'm sure you'll start talking to a real human now. Haha...";
     }
 
-    public String showKeywords() {
-        return "Here are the matching tasks in your list:";
-    }
 }

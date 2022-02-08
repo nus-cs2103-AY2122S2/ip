@@ -16,6 +16,8 @@ public class AddTaskCommand extends Command {
      * @param type Type of task, either ToDo, Deadline or Event.
      */
     public AddTaskCommand(String description, String type) {
+        assert(description != null && !description.equals(""));
+        assert(type != null && !type.equals(""));
         this.description = description;
         this.type = type;
     }
@@ -28,6 +30,9 @@ public class AddTaskCommand extends Command {
      * @param toDoBy Deadline which task must be completed by.
      */
     public AddTaskCommand(String description, String type, String toDoBy) {
+        assert(description != null && !description.equals(""));
+        assert(type != null && !type.equals(""));
+        assert(toDoBy != null && !type.equals(""));
         this.description = description;
         this.type = type;
         this.toDoBy = toDoBy;
@@ -51,7 +56,6 @@ public class AddTaskCommand extends Command {
                 tasks.addTask(new Event(description, toDoBy));
             }
             storage.writeToFile(tasks.getTaskArr());
-            System.out.println(ui.showSucessfulAdd(tasks.getTask(tasks.size() - 1), tasks.size()));
             return ui.showSucessfulAdd(tasks.getTask(tasks.size() - 1), tasks.size());
         } catch (DateTimeParseException e) {
             return ui.showError("DateTimeParseException");
