@@ -52,7 +52,7 @@ public class TaskList {
                 return "OK, I've marked this task as not done yet:\n "
                         + "   " + arr.get(clean).toString();
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             return "Don't be cheeky. Please write something that makes sense.";
         }
     }
