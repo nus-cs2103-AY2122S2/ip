@@ -25,11 +25,14 @@ public class Nikki {
      * Parser for handling user input
      * Contains predefined command list and syntax
      */
-    private final CommandParser cmd = new CommandParser(new Scanner(System.in));
+    private final CommandParser cmd = new CommandParser();
 
     /** Ui component for displaying text in format and color */
     private final Ui ui = new Ui();
 
+    /** Introduction string */
+    private String introduction = "Hello, I'm Nikki\n"
+            + "What can I do for you?";
 
     /**
      * Constructs a Nikki instance
@@ -37,97 +40,90 @@ public class Nikki {
      * @param filename File to load and save Tasks
      */
     public Nikki(String filename) {
-        ui.printBanner();
-
-        String introduction = "Hello, I'm Nikki\n"
-                + "What can I do for you?";
-        ui.say(introduction);
-
         try {
             storage = new Storage(filename);
             tasks = storage.loadTasks();
         } catch (IOException | NikkiException e) {
-            ui.warning("[!] Error reading file - initializing duke.task list as empty list");
+            // ui.warning("[!] Error reading file - initializing task list as empty list");
             tasks = new TaskList();
         }
 
     }
 
     /**
-     * Main driver method to run Nikki
+     * Interaction method to pass input to Nikki and get response
+     *
+     * @param input input from user
+     * @return response from Nikki
      */
-    public void run() {
-        while (true) {
-            try {
-                Command action = cmd.readAndParse();
-                handleAction(action);
-            } catch (NikkiException e) {
-                ui.error("!( ｀Д´)ﾉ  " + e.getLocalizedMessage());
-            }
+    public String interact(String input) {
+        try {
+            Command action = cmd.parseCommand(input);
+            String response = handleActionAndRespond(action);
+            return response;
+        } catch (NikkiException e) {
+            return "!( ｀Д´)ﾉ  " + e.getLocalizedMessage();
         }
     }
 
     /**
-     * Handles behaviours according to the command passed.
+     * Handles behaviours according to the command passed and responds with a message
      *
      * @param action command from user
      * @throws NikkiException general exception for invalid user command: invalid command, arguments, etc.
+     *
+     * @return Response message from Nikki
      */
-    private void handleAction(Command action) throws NikkiException {
+    private String handleActionAndRespond(Command action) throws NikkiException {
+        String response = "";
+
         switch (action.getName()) {
         case "bye":
-            ui.say("Bye! See you later!");
+            response = "Bye! See you later!";
             try {
                 storage.saveTasks(tasks);
             } catch (IOException e) {
-                ui.error("Can't save tasks to file");
+                response += "Oh... I can't save your tasks to file";
             }
-            System.exit(0);
             break;
 
         case "list":
-            ui.say("[*] Here are the tasks in your list:\n"
-                    + tasks.toString());
+            response = ui.getListReport(tasks);
             break;
 
         case "find":
             String pattern = action.getArgs();
-            ui.say("[*] Here are the matching tasks in your list:\n"
-                    + tasks.searchTasks(pattern).toString());
+            response = ui.getListReport(tasks.searchTasks(pattern));
             break;
 
         case "mark":
             // User input is 1-indexed, list uses 0-index
             int markIdx = Integer.parseInt(action.getArgs()) - 1;
             tasks.markTask(markIdx);
-            ui.say("[*] Marked the following duke.task as done:\n"
-                    + "\t" + tasks.getTask(markIdx).nameWithStatus());
+            response = ui.getUpdateTaskResponse(tasks.getTask(markIdx));
             break;
 
         case "unmark":
             // User input is 1-indexed, list uses 0-index
             int unmarkIdx = Integer.parseInt(action.getArgs()) - 1;
             tasks.unmarkTask(unmarkIdx);
-            ui.say("[*] Marked the following duke.task as not done:\n"
-                    + "\t" + tasks.getTask(unmarkIdx).nameWithStatus());
+            response = ui.getUpdateTaskResponse(tasks.getTask(unmarkIdx));
             break;
 
         case "delete":
             // User input is 1-indexed, list uses 0-index
             int dltIdx = Integer.parseInt(action.getArgs()) - 1;
             Task deletedTask = tasks.removeTask(dltIdx);
-            ui.say(String.format(
-                    "[-] Removed this duke.task:\n"
-                    + "\t%s\n"
-                    + "Now you have %d tasks in the list.",
-                    deletedTask.nameWithStatus(), tasks.size()));
+            response = ui.getDeletedTaskResponse(deletedTask);
+            response += ui.getTaskCountReport(tasks.size());
             break;
 
         case "todo":
             String todoName = action.getArgs();
             Todo todo = new Todo(todoName);
             tasks.addTask(todo);
-            ui.logNewTask(todo, tasks.size());
+            response = ui.getNewTaskResponse(todo);
+            response += ui.getTaskCountReport(tasks.size());
             break;
 
         case "deadline":
@@ -135,7 +131,8 @@ public class Nikki {
             String deadlineDate = action.getKwargs().get("by");
             Deadline deadline = new Deadline(deadlineName, deadlineDate);
             tasks.addTask(deadline);
-            ui.logNewTask(deadline, tasks.size());
+            response = ui.getNewTaskResponse(deadline);
+            response += ui.getTaskCountReport(tasks.size());
             break;
 
         case "event":
@@ -143,16 +140,23 @@ public class Nikki {
             String eventDate = action.getKwargs().get("at");
             Event event = new Event(eventName, eventDate);
             tasks.addTask(event);
-            ui.logNewTask(event, tasks.size());
+            response = ui.getNewTaskResponse(event);
+            response += ui.getTaskCountReport(tasks.size());
             break;
 
         default:
             throw new NikkiException("I don't know what to do");
 
         }
+
+        return response;
     }
 
-    public static void main(String[] args) {
-        new Nikki("data/tasks.txt").run();
+    /**
+     * Getter for introduction string
+     * @return introduction string
+     */
+    public String getIntroduction() {
+        return introduction;
     }
 }
