@@ -70,6 +70,7 @@ public class TaskList {
      * @return The number of Tasks in the TaskList.
      */
     public int numOfTasks() {
+        assert tasks.size() >= 0;
         return tasks.size();
     }
 
@@ -119,6 +120,7 @@ public class TaskList {
         if (taskNo > tasks.size() || taskNo < 0) {
             return false;
         } else {
+            assert (taskNo >= 0 && taskNo <= tasks.size());
             return true;
         }
     }

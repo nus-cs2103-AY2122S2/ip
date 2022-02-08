@@ -21,6 +21,8 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, String by) throws DukeException {
         super(taskName);
+        assert taskName.length() > 0;
+        assert by.length() > 0;
         boolean isCorrectFormat = checkFormat(by);
         if (isCorrectFormat) {
             try {

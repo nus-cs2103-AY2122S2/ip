@@ -34,6 +34,8 @@ public class AddEventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert this.task.length() > 0;
+        assert this.at.length() > 0;
         Event event = new Event(task, at);
         taskList.add(event);
         String response = "Got it. I've added this task:" + "\n";

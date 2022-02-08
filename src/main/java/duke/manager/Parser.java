@@ -30,6 +30,7 @@ public class Parser {
     public Command parse(String fullCommand) throws DukeException {
         fullCommand = fullCommand.trim();
         String keyword = fullCommand.split(" ")[0];
+        assert fullCommand.split(" ").length >= 1 : "Should have at least 1 word";
         switch (keyword) {
         case "list":
             return new ListCommand();
