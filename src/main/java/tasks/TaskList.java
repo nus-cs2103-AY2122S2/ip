@@ -7,10 +7,10 @@ import duke.Storage;
 import duke.TextUi;
 import duke.exceptions.DukeException;
 import duke.exceptions.TaskException;
+import duke.exceptions.UndoException;
 
 
 public class TaskList {
-
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static final TextUi ui = new TextUi();
 
@@ -35,6 +35,7 @@ public class TaskList {
      */
     public static String deleteTask(int taskId) throws DukeException {
         Task preview = tasks.get(taskId - 1);
+        // System.out.println(tasks.size());
         tasks.remove(taskId - 1);
         Storage.writeToDukeFile();
         return ui.showDeleteMsg(preview);
@@ -133,5 +134,44 @@ public class TaskList {
         return ui.showFindTaskMsg(listTasks(matchingTasks));
     }
 
+    /**
+     * Method that is used to get tasks stored in Duke
+     * @return an arraylist of tasks
+     */
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Method that is used to undo a delete command
+     * @param taskId id of the task
+     * @param removedTask the type of task that is removed
+     * @return a message stating the successful undo of a delete command
+     * @throws DukeException when there are problems writing to duke file
+     */
+    public static String addTaskBack(Integer taskId, Task removedTask) throws DukeException {
+        try {
+            tasks.add(taskId - 1, removedTask);
+            Storage.writeToDukeFile();
+            return ui.showUndoMsg("Delete");
+        } catch (IndexOutOfBoundsException e) {
+            throw new UndoException("EMPTY_PREVIOUS");
+        }
+    }
+
+    /**
+     * Method to undo an add command
+     * @return a message stating the successful undo of an add command
+     * @throws DukeException when there are problems writing to duke file
+     */
+    public String deleteLastTask() throws DukeException {
+        try {
+            tasks.remove(tasks.size() - 1);
+            Storage.writeToDukeFile();
+            return ui.showUndoMsg("Add");
+        } catch (IndexOutOfBoundsException e) {
+            throw new UndoException("EMPTY_PREVIOUS");
+        }
+    }
 
 }

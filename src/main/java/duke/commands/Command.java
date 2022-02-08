@@ -2,6 +2,8 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TextUi;
+import duke.exceptions.DukeException;
+import duke.exceptions.UndoException;
 import tasks.TaskList;
 
 /**
@@ -15,7 +17,11 @@ public class Command {
      * @param storage a storage object that is able to read and write to storage file
      * @return an empty string
      */
-    public String execute(TaskList taskList, TextUi ui, Storage storage) {
+    public String execute(TaskList taskList, TextUi ui, Storage storage) throws UndoException, DukeException {
+        return "";
+    }
+
+    public String undo(TaskList taskList) throws DukeException {
         return "";
     }
 }

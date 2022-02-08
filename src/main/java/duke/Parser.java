@@ -9,6 +9,7 @@ import duke.commands.Delete;
 import duke.commands.Find;
 import duke.commands.List;
 import duke.commands.Mark;
+import duke.commands.Undo;
 import duke.commands.Unmark;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
@@ -19,8 +20,9 @@ import tasks.TaskList;
  * Represents a parser object that parses commands that the user types into the GUI
  */
 public class Parser {
+    private Command previousCommand;
     enum CommandType {
-        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND, LIST, BYE;
+        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, FIND, LIST, BYE, UNDO;
 
         static CommandType getCommandType(String input) throws DukeException {
             for (CommandType type : CommandType.values()) {
@@ -48,17 +50,25 @@ public class Parser {
                 throw new TaskException("UNFOUND_TASK");
             }
 
+            Command currentCommand;
             switch (commandType) {
             case DELETE:
-                return new Delete(taskId);
+                currentCommand = new Delete(taskId);
+                previousCommand = currentCommand;
+                break;
             case UNMARK:
-                return new Unmark(taskId);
+                currentCommand = new Unmark(taskId);
+                previousCommand = currentCommand;
+                break;
             case MARK:
-                return new Mark(taskId);
+                currentCommand = new Mark(taskId);
+                previousCommand = currentCommand;
+                break;
             default:
                 assert false : commandType;
                 throw new InvalidCommandException();
             }
+            return currentCommand;
 
         } catch (NumberFormatException e) {
             throw new TaskException("INVALID_TASKID");
@@ -129,9 +139,12 @@ public class Parser {
             }
         }
 
+        Command currentCommand;
         switch (commandType) {
         case FIND:
-            return new Find(taskId);
+            currentCommand = new Find(taskId);
+            previousCommand = currentCommand;
+            break;
         case DELETE:
             return taskAction(CommandType.DELETE, taskId);
         case UNMARK:
@@ -139,14 +152,22 @@ public class Parser {
         case MARK:
             return taskAction(CommandType.MARK, taskId);
         case TODO:
-            return new AddToDo(taskDetails);
+            currentCommand = new AddToDo(taskDetails);
+            previousCommand = currentCommand;
+            break;
         case DEADLINE:
-            return new AddDeadline(description, date);
+            currentCommand = new AddDeadline(description, date);
+            previousCommand = currentCommand;
+            break;
         case EVENT:
-            return new AddEvent(description, dateTime);
+            currentCommand = new AddEvent(description, dateTime);
+            previousCommand = currentCommand;
+            break;
         default:
             throw new InvalidCommandException();
         }
+        return currentCommand;
+
     }
 
     /**
@@ -157,6 +178,8 @@ public class Parser {
      */
     public Command parseSingleCommand(CommandType commandType) throws DukeException {
         switch (commandType) {
+        case UNDO:
+            return new Undo(previousCommand);
         case BYE:
             return new Bye();
         case LIST:
