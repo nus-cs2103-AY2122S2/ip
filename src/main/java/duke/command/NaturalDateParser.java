@@ -30,6 +30,8 @@ class NaturalDateParser {
     private static final String KEYWORD_RELATIVE_MONTH = "next month";
     private static final String KEYWORD_RELATIVE_DAY = "tomorrow";
     private static final String KEYWORD_POSITIONAL_DAY = "today";
+    private static final String KEYWORD_POSITIONAL_MONTH = "this month";
+    private static final String KEYWORD_POSITIONAL_YEAR = "this year";
 
     private static final String DEFAULT_TIME = " 00:00";
     private static final String FORMAT_DEFAULT_DATETIME = "dd/MM/yyyy HH:mm";
@@ -37,44 +39,34 @@ class NaturalDateParser {
 
     private static NaturalDateParser instance;
 
-    private final Pattern standardDatePattern;
-    private final Pattern standardDateTimePattern;
-    private final Pattern naturalDatePattern;
-    private final Pattern naturalDateTimePattern;
-    private final Pattern relativeDatePattern;
-    private final Pattern relativeDateTimePattern;
+    private Pattern standardDatePattern;
+    private Pattern standardDateTimePattern;
+    private Pattern naturalDatePattern;
+    private Pattern naturalDateTimePattern;
+    private Pattern relativeDatePattern;
+    private Pattern relativeDateTimePattern;
 
+    /**
+     * Creates the singleton instance of NaturalDateParser.
+     */
     private NaturalDateParser() {
-        standardDatePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4})");
-        standardDateTimePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4}) (\\d{2})[-:](\\d{2})");
-
-        // Build Natural Patterns
+        // Create natural pattern matchers.
         String allMonths = String.join("|", MONTH_STRINGS);
         String dayGroup = "(?=.* (\\d{1,2}) )";
         String yearGroup = "(?=.* (\\d{4}) )";
         String monthGroup = "(?=.* (" + allMonths + ") )";
         String timeGroup = "(?=.* (\\d{1,2}):(\\d{1,2}) )";
 
-        String baseDatePattern = dayGroup + yearGroup + monthGroup;
-        String anchoredDatePattern = String.format("^%s.*$", baseDatePattern);
-        naturalDatePattern = Pattern.compile(anchoredDatePattern, Pattern.CASE_INSENSITIVE);
-
-        String dateTimePattern = baseDatePattern + timeGroup;
-        String anchoredDateTimePattern = String.format("^%s.*$", dateTimePattern);
-        naturalDateTimePattern = Pattern.compile(anchoredDateTimePattern, Pattern.CASE_INSENSITIVE);
-
-        // Build Relative Patterns
-        String relativeDayPattern = "(?=.* (" + KEYWORD_RELATIVE_DAY + "))";
-        String relativeMonthPattern = dayGroup + "(?=.* (" + KEYWORD_RELATIVE_MONTH + "))";
-        String relativeYearPattern = dayGroup + monthGroup + "(?=.* (" + KEYWORD_RELATIVE_YEAR + "))";
-        String combinedRelativeDatePattern = String.format("^(?:%s|%s|%s).*$", relativeDayPattern,
-                relativeMonthPattern, relativeYearPattern);
-        String combinedRelativeDateTimePattern = String.format("^(?:%s|%s|%s)%s.*$", relativeDayPattern,
-                relativeMonthPattern, relativeYearPattern, timeGroup);
-        relativeDatePattern = Pattern.compile(combinedRelativeDatePattern, Pattern.CASE_INSENSITIVE);
-        relativeDateTimePattern = Pattern.compile(combinedRelativeDateTimePattern, Pattern.CASE_INSENSITIVE);
+        buildStandardPatterns();
+        buildNaturalPatterns(dayGroup, monthGroup, yearGroup, timeGroup);
+        buildRelativePatterns(dayGroup, monthGroup, timeGroup);
     }
 
+    /**
+     * Get the singleton instance of <code>NaturalDateParser</code>.
+     *
+     * @return The singleton instance of NaturalDateParser.
+     */
     public static NaturalDateParser getInstance() {
         if (instance == null) {
             instance = new NaturalDateParser();
@@ -82,11 +74,14 @@ class NaturalDateParser {
         return instance;
     }
 
+    /**
+     * Translates a date string to a {@link LocalDateTime} object.
+     *
+     * @param input Date string to process.
+     * @return A {@link LocalDateTime} that represents the supplied date at 00:00 hours, or null if
+     *                                 the supplied date string is invalid.
+     */
     LocalDateTime parseDate(String input) {
-        if (input.equalsIgnoreCase(KEYWORD_POSITIONAL_DAY)) {
-            return LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
-        }
-
         Matcher standardMatcher = standardDatePattern.matcher(input);
         if (standardMatcher.matches()) {
             return parseStandardDate(standardMatcher);
@@ -108,11 +103,14 @@ class NaturalDateParser {
         return null;
     }
 
+    /**
+     * Translates a date-time string to a {@link LocalDateTime} object.
+     *
+     * @param input Date-time string to process.
+     * @return A {@link LocalDateTime} that represents the supplied date-time, or null if the supplied
+     *                                 date-time string is invalid.
+     */
     LocalDateTime parseDateTime(String input) {
-        if (input.equalsIgnoreCase(KEYWORD_POSITIONAL_DAY)) {
-            return LocalDateTime.now();
-        }
-
         Matcher standardMatcher = standardDateTimePattern.matcher(input);
         if (standardMatcher.matches()) {
             return parseStandardDateTime(standardMatcher);
@@ -135,11 +133,60 @@ class NaturalDateParser {
     }
 
     /**
+     * Creates the regex pattern for the standard rigid datetime format.
+     */
+    private void buildStandardPatterns() {
+        standardDatePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4})");
+        standardDateTimePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4}) (\\d{2})[-:](\\d{2})");
+    }
+
+    /**
+     * Creates the regex pattern for natural datetime formats.
+     *
+     * @param dayGroup The regex capture group for day.
+     * @param monthGroup The regex capture group for month.
+     * @param yearGroup The regex capture group for year.
+     * @param timeGroup The regex capture group for time.
+     */
+    private void buildNaturalPatterns(String dayGroup, String monthGroup, String yearGroup,
+                                      String timeGroup) {
+        String baseDatePattern = dayGroup + yearGroup + monthGroup;
+        String anchoredDatePattern = String.format("^%s.*$", baseDatePattern);
+        naturalDatePattern = Pattern.compile(anchoredDatePattern, Pattern.CASE_INSENSITIVE);
+
+        String dateTimePattern = baseDatePattern + timeGroup;
+        String anchoredDateTimePattern = String.format("^%s.*$", dateTimePattern);
+        naturalDateTimePattern = Pattern.compile(anchoredDateTimePattern, Pattern.CASE_INSENSITIVE);
+    }
+
+    /**
+     * Creates the regex pattern for relative datetime formats.
+     *
+     * @param dayGroup The regex capture group for day.
+     * @param monthGroup The regex capture group for month.
+     * @param timeGroup The regex capture group for time.
+     */
+    private void buildRelativePatterns(String dayGroup, String monthGroup, String timeGroup) {
+        String relativeDayPattern = "(?=.* (" + KEYWORD_RELATIVE_DAY + "|" + KEYWORD_POSITIONAL_DAY + "))";
+        String relativeMonthPattern = dayGroup + "(?=.* (" + KEYWORD_RELATIVE_MONTH + "|"
+                + KEYWORD_POSITIONAL_MONTH + "))";
+        String relativeYearPattern = dayGroup + monthGroup + "(?=.* (" + KEYWORD_RELATIVE_YEAR + "|"
+                + KEYWORD_POSITIONAL_YEAR + "))";
+        String combinedRelativeDatePattern = String.format("^(?:%s|%s|%s).*$", relativeDayPattern,
+                relativeMonthPattern, relativeYearPattern);
+        String combinedRelativeDateTimePattern = String.format("^(?:%s|%s|%s)%s.*$", relativeDayPattern,
+                relativeMonthPattern, relativeYearPattern, timeGroup);
+        relativeDatePattern = Pattern.compile(combinedRelativeDatePattern, Pattern.CASE_INSENSITIVE);
+        relativeDateTimePattern = Pattern.compile(combinedRelativeDateTimePattern, Pattern.CASE_INSENSITIVE);
+    }
+
+    /**
      * Translates a patterned string to a {@link LocalDateTime} object based on the given format.
      *
      * @param dateString Date-time string to process.
      * @param pattern Pattern format that the date-time string is in.
-     * @return A {@link LocalDateTime} that represents the supplied date-time.
+     * @return A {@link LocalDateTime} that represents the supplied date-time, or null if supplied String
+     *                                 is invalid.
      */
     private LocalDateTime parseDateTimePattern(String dateString, String pattern) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
@@ -150,14 +197,35 @@ class NaturalDateParser {
         }
     }
 
+    /**
+     * Translates a date-time patterned string to a {@link LocalDateTime} object based on the default format.
+     *
+     * @param dateString Date-time string to process.
+     * @return A {@link LocalDateTime} that represents the supplied date-time, or null if supplied String
+     *                                 is invalid.
+     */
     private LocalDateTime parseDateTimePattern(String dateString) {
         return parseDateTimePattern(dateString, FORMAT_DEFAULT_DATETIME);
     }
 
+    /**
+     * Translates a date patterned string to a {@link LocalDateTime} object based on the default format.
+     *
+     * @param dateString Date string to process.
+     * @return A {@link LocalDateTime} that represents the supplied date-time, or null if supplied String
+     *                                 is invalid.
+     */
     private LocalDateTime parseDatePattern(String dateString) {
         return parseDateTimePattern(dateString + DEFAULT_TIME, FORMAT_DEFAULT_DATETIME);
     }
 
+    /**
+     * Translates a regex match for {@link #standardDatePattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the standardDatePattern.
+     * @return A LocalDateTime object that represents the supplied date, or null if supplied String
+     *         is invalid.
+     */
     private LocalDateTime parseStandardDate(Matcher match) {
         try {
             int day = Integer.parseInt(match.group(1));
@@ -170,6 +238,13 @@ class NaturalDateParser {
         }
     }
 
+    /**
+     * Translates a regex match for {@link #standardDateTimePattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the standardDateTimePattern.
+     * @return A LocalDateTime object that represents the supplied date-time, or null if supplied String
+     *         is invalid.
+     */
     private LocalDateTime parseStandardDateTime(Matcher match) {
         try {
             int day = Integer.parseInt(match.group(1));
@@ -185,11 +260,25 @@ class NaturalDateParser {
         }
     }
 
+    /**
+     * Translates a month from its natural text representation to its numeric date representation.
+     *
+     * @param monthText The month to translate in its natural text representation.
+     * @return The numeric date representation of the supplied month.
+     */
     private int parseNaturalMonth(String monthText) {
         String trimmedText = monthText.toLowerCase().trim();
         return (Arrays.asList(MONTH_STRINGS).indexOf(trimmedText) % 12) + 1;
     }
 
+    /**
+     * Translates the date component of a regex match for {@link #naturalDatePattern} or
+     * {@link #naturalDateTimePattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the given patterns.
+     * @return A standard formatted string representation of the date.
+     * @throws NumberFormatException If either the day or year is not an integer.
+     */
     private String parseNaturalDateString(Matcher match) throws NumberFormatException {
         int day = Integer.parseInt(match.group(1));
         int year = Integer.parseInt(match.group(2));
@@ -198,6 +287,17 @@ class NaturalDateParser {
         return String.format("%02d/%02d/%04d", day, month, year);
     }
 
+    /**
+     * Adds the time component from a timeGroup regex match to the supplied {@link LocalDateTime} object.
+     *
+     * @param match The regex match result that includes the timeGroup pattern.
+     * @param start The starting index of the timeGroup pattern in the match.
+     * @param date The LocalDateTime object to add the time component to.
+     * @return A LocalDateTime object with the date from the <code>date</code> argument and time from the
+     *         regex match.
+     * @throws NumberFormatException If any component of the time is not an integer.
+     * @throws DateTimeException If the time is invalid.
+     */
     private LocalDateTime addTimeComponent(Matcher match, int start, LocalDateTime date)
             throws NumberFormatException, DateTimeException {
         int hour = Integer.parseInt(match.group(start));
@@ -206,6 +306,13 @@ class NaturalDateParser {
         return date.withHour(hour).withMinute(minute);
     }
 
+    /**
+     * Translates a regex match for {@link #naturalDatePattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the naturalDatePattern.
+     * @return A LocalDateTime object that represents the supplied date, or null if supplied String
+     *         is invalid.
+     */
     private LocalDateTime parseNaturalDate(Matcher match) {
         try {
             return parseDatePattern(parseNaturalDateString(match));
@@ -214,6 +321,13 @@ class NaturalDateParser {
         }
     }
 
+    /**
+     * Translates a regex match for {@link #naturalDateTimePattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the naturalDateTimePattern.
+     * @return A LocalDateTime object that represents the supplied date-time, or null if supplied String
+     *         is invalid.
+     */
     private LocalDateTime parseNaturalDateTime(Matcher match) {
         try {
             LocalDateTime date = parseNaturalDate(match);
@@ -227,20 +341,26 @@ class NaturalDateParser {
         }
     }
 
+    /**
+     * Translates a regex match for {@link #relativeDatePattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the relativeDatePattern.
+     * @return A LocalDateTime object that represents the supplied date, or null if supplied String
+     *         is invalid.
+     */
     private LocalDateTime parseRelativeDate(Matcher match) {
+        final LocalDateTime now = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+
         try {
             if (match.group(1) != null) {
-                // Tomorrow Case
-                return LocalDateTime.now().plusDays(1);
+                // Tomorrow or Today Case
+                return parseRelativeDay(now, match);
             } else if (match.group(3) != null) {
-                // Next Month Case
-                int day = Integer.parseInt(match.group(2));
-                return LocalDateTime.now().plusMonths(1).withDayOfMonth(day);
+                // Next Month or This Month Case
+                return parseRelativeMonth(now, match);
             } else if (match.group(6) != null) {
                 // Next Year Case
-                int day = Integer.parseInt(match.group(4));
-                int month = parseNaturalMonth(match.group(5));
-                return LocalDateTime.now().plusYears(1).withMonth(month).withDayOfMonth(day);
+                return parseRelativeYear(now, match);
             }
             return null;
         } catch (NumberFormatException | NullPointerException | DateTimeException ex) {
@@ -248,6 +368,73 @@ class NaturalDateParser {
         }
     }
 
+    /**
+     * Translates a regex match for a day-relative date string for {@link #relativeDatePattern} or
+     * {@link #relativeDateTimePattern}.
+     *
+     * @param now A LocalDateTime object representing the current date.
+     * @param match The regex match result for the day-relative date string.
+     * @return A LocalDateTime object representing the adjusted date.
+     */
+    private LocalDateTime parseRelativeDay(LocalDateTime now, Matcher match) {
+        if (match.group(1).equalsIgnoreCase(KEYWORD_RELATIVE_DAY)) {
+            return now.plusDays(1);
+        } else if (match.group(1).equalsIgnoreCase(KEYWORD_POSITIONAL_DAY)) {
+            return now;
+        }
+        return null;
+    }
+
+    /**
+     * Translates a regex match for a month-relative date string for {@link #relativeDatePattern} or
+     * {@link #relativeDateTimePattern}.
+     *
+     * @param now A LocalDateTime object representing the current date.
+     * @param match The regex match result for the month-relative date string.
+     * @return A LocalDateTime object representing the adjusted date.
+     * @throws NumberFormatException If day is not an integer.
+     */
+    private LocalDateTime parseRelativeMonth(LocalDateTime now, Matcher match) throws NumberFormatException {
+        int day = Integer.parseInt(match.group(2));
+        String anchorWord = match.group(3).toLowerCase();
+
+        if (anchorWord.equals(KEYWORD_RELATIVE_MONTH)) {
+            return now.plusMonths(1).withDayOfMonth(day);
+        } else if (anchorWord.equals(KEYWORD_POSITIONAL_MONTH)) {
+            return now.withDayOfMonth(day);
+        }
+        return null;
+    }
+
+    /**
+     * Translates a regex match for a year-relative date string for {@link #relativeDatePattern} or
+     * {@link #relativeDateTimePattern}.
+     *
+     * @param now A LocalDateTime object representing the current date.
+     * @param match The regex match result for the year-relative date string.
+     * @return A LocalDateTime object representing the adjusted date.
+     * @throws NumberFormatException If day is not an integer.
+     */
+    private LocalDateTime parseRelativeYear(LocalDateTime now, Matcher match) throws NumberFormatException {
+        int day = Integer.parseInt(match.group(4));
+        int month = parseNaturalMonth(match.group(5));
+        String anchorWord = match.group(6).toLowerCase();
+
+        if (anchorWord.equals(KEYWORD_RELATIVE_YEAR)) {
+            return now.plusYears(1).withMonth(month).withDayOfMonth(day);
+        } else if (anchorWord.equals(KEYWORD_POSITIONAL_YEAR)) {
+            return now.withMonth(month).withDayOfMonth(day);
+        }
+        return null;
+    }
+
+    /**
+     * Translates a regex match for {@link #relativeDateTimePattern} into a {@link LocalDateTime} object.
+     *
+     * @param match The regex match result for the relativeDateTimePattern.
+     * @return A LocalDateTime object that represents the supplied date-time, or null if supplied String
+     *         is invalid.
+     */
     private LocalDateTime parseRelativeDateTime(Matcher match) {
         try {
             LocalDateTime date = parseRelativeDate(match);
