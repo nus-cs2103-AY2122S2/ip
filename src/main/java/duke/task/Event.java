@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an event that is happening on a certain date.
  */
 public class Event extends Task implements Timeable {
+    public static final String DELIMITER = " /at ";
     private LocalDate at;
 
     public Event(String description, LocalDate at) {

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that has to be completed before a certain date.
  */
 public class Deadline extends Task implements Timeable {
+    public static final String DELIMITER = " /by ";
     private LocalDate by;
 
     public Deadline(String description, LocalDate by) {

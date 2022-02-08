@@ -16,6 +16,8 @@ public class Ui {
     public static final String TASKS_SIZE = "Now you have %d tasks in the list";
     public static final String BYE = "Bye. Hope to see you again soon!";
 
+    private static final String GREET = "Hello! I'm Waldo\nWhat can I do for you?";
+    private static final String ERROR_TEMPLATE = "☹ OOPS!!! %s";
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaWaldo.png"));
 
     private final VBox container;
@@ -28,17 +30,16 @@ public class Ui {
      * Sends a greeting dialog box to the user.
      */
     public void greet() {
-        this.container.getChildren().addAll(DialogBox.getDukeDialog("Hello! I'm Waldo\nWhat can I do for you?",
-                dukeImage));
+        this.addDukeDialogBox(GREET);
     }
 
     /**
-     * Prints a reply to the user.
-     * @param inputTxt A non-empty string which the bot will be using to reply.
+     * Generates a dialog box to reply to the user.
+     * @param inputTxt The text which waldo will reply with.
      */
     public void printMessage(String inputTxt) {
-        assert !inputTxt.isEmpty() : "Assertion failed on Ui.printMessage(): inputTxt is empty";
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(inputTxt, dukeImage));
+        // this.container.getChildren().addAll(DialogBox.getDukeDialog(inputTxt, dukeImage));
+        this.addDukeDialogBox(inputTxt);
     }
 
     public String getTaskSizeString(TaskStore tasks) {
@@ -50,9 +51,8 @@ public class Ui {
      * @param errorMsg The error message to display to the user
      */
     public void printError(String errorMsg) {
-        assert !errorMsg.isEmpty() : "Assertion failed on Ui.printError(): errorMsg is empty";
-        String em = String.format("☹ OOPS!!! %s", errorMsg);
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(em, dukeImage));
+        String error = String.format(ERROR_TEMPLATE, errorMsg);
+        this.addDukeDialogBox(error);
     }
 
     /**
@@ -63,19 +63,7 @@ public class Ui {
     public void printTaskAdd(Task task, TaskStore tasks) {
         String template = TASK_ADD + this.getTaskSizeString(tasks);
         String taskAddMessage = String.format(template, task, tasks.getSize());
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(taskAddMessage, dukeImage));
-    }
-
-    /**
-     * Generates a dialog when a task has been marked as done/undone. This will also display all tasks in the list.
-     * @param t The task that has been marked as done/undone
-     */
-    public void printTaskMarking(Task t) {
-        if (t.getIsDone()) {
-            this.container.getChildren().addAll(DialogBox.getDukeDialog(String.format(TASK_MARKED, t), dukeImage));
-        } else {
-            this.container.getChildren().addAll(DialogBox.getDukeDialog(String.format(TASK_UNMARKED, t), dukeImage));
-        }
+        this.addDukeDialogBox(taskAddMessage);
     }
 
     /**
@@ -86,10 +74,26 @@ public class Ui {
     public void printTaskDelete(Task task, TaskStore tasks) {
         String template = TASK_DELETE + this.getTaskSizeString(tasks);
         String taskDeleteMessage = String.format(template, task, tasks.getSize());
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(taskDeleteMessage, dukeImage));
+        this.addDukeDialogBox(taskDeleteMessage);
+    }
+
+    /**
+     * Generates a dialog when a task has been marked as done/undone. This will also display all tasks in the list.
+     * @param t The task that has been marked as done/undone
+     */
+    public void printTaskMarking(Task t) {
+        if (t.getIsDone()) {
+            this.addDukeDialogBox(String.format(TASK_MARKED, t));
+        } else {
+            this.addDukeDialogBox(String.format(TASK_UNMARKED, t));
+        }
     }
 
     public void bye() {
-        this.container.getChildren().addAll(DialogBox.getDukeDialog(BYE, dukeImage));
+        this.addDukeDialogBox(BYE);
+    }
+
+    public void addDukeDialogBox(String message) {
+        this.container.getChildren().addAll(DialogBox.getDukeDialog(message, dukeImage));
     }
 }
