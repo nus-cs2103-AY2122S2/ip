@@ -34,11 +34,13 @@ public class Event extends Task {
     @Override
     public String message() {
         if (this.time != null) {
-            return "E | " + "[" + this.getStatusIcon() + "] "
+            String messageWithTime = "E | " + "[" + this.getStatusIcon() + "] "
                     + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
+            return messageWithTime;
         } else {
-            return "E | " + "[" + this.getStatusIcon() + "] "
+            String messageWithoutTime = "E | " + "[" + this.getStatusIcon() + "] "
                     + super.message() + "(at:" + dateTimeFormat(date) + ")";
+            return messageWithoutTime;
         }
     }
 

@@ -23,7 +23,8 @@ public class Todos extends Task {
      */
     @Override
     public String message() {
-        return "T | " + "[" + this.getStatusIcon() + "] " + super.message();
+        String message = "T | " + "[" + this.getStatusIcon() + "] " + super.message();
+        return message;
     }
 
     @Override

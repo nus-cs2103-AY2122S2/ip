@@ -42,7 +42,6 @@ public class Ui {
      * @throws IOException
      */
     public String userCommand(String inp) throws IOException, DukeException {
-
         try {
             DukeException d = new DukeException();
             d.invalidCommands(inp);
@@ -53,44 +52,43 @@ public class Ui {
         }
 
         String[] temp = inp.split(" ", 2);
+        boolean isBye = inp.equals("bye");
+        boolean isList = inp.equals("list");
+        boolean isMark = temp[0].equals("mark");
+        boolean isUnmark = temp[0].equals("unmark");
+        boolean isTodo = temp[0].equals("todo");
+        boolean isDeadine = temp[0].equals("deadline");
+        boolean isEvent = temp[0].equals("event");
+        boolean isDelete = temp[0].equals("delete");
+        boolean isFind = temp[0].equals("find");
 
-
-        if (inp.equals("bye")) {
+        if (isBye) {
             isExit = true;
             storage.reSavingFiles(taskList.listOfInputs);
             return ("Bye. Hope to see you again soon!");
-        } else if (inp.equals("list")) {
+        } else if (isList) {
             return taskList.list();
-        } else if (temp[0].equals("mark")) {
-            int currNo = Integer.parseInt(temp[1]) - 1;
-            return taskList.mark(currNo);
-        } else if (temp[0].equals("unmark")) {
-            int currNo = Integer.parseInt(temp[1]) - 1;
-            return taskList.unMark(currNo);
-        } else if (temp[0].equals("todo")) {
-            return taskList.toDo(temp[1]);
-        } else if (temp[0].equals("deadline")) {
-            return taskList.deadLine(inp);
-           // return "ok deadline";
-        } else if (temp[0].equals("event")) {
-            return taskList.event(temp[1]);
-        } else if (temp[0].equals("delete")) {
-            // DeleteCommand d = new DeleteCommand(DUKE_DIRECTORY,DUKE_TXTFILE);
-            return taskList.delete(temp[1]);
-        } else if (temp[0].equals("find")) {
-            taskList.find(temp[1]);
-            return "";
         } else {
-            return "command is invalid, please re-enter again";
-//            throw new DukeException(temp[0]);
+            String command = temp[1];
+            if (isMark) {
+                int currNo = Integer.parseInt(command) - 1;
+                return taskList.mark(currNo);
+            } else if (isUnmark) {
+                int currNo = Integer.parseInt(command) - 1;
+                return taskList.unMark(currNo);
+            } else if (isTodo) {
+                return taskList.toDo(command);
+            } else if (isDeadine) {
+                return taskList.deadLine(inp);
+            } else if (isEvent) {
+                return taskList.event(command);
+            } else if (isDelete) {
+                return taskList.delete(command);
+            } else if (isFind) {
+                return taskList.find(command);
+            } else {
+                return "command is invalid, please re-enter again";
+            }
         }
     }
-
-
-
-
-
-
-
-
 }

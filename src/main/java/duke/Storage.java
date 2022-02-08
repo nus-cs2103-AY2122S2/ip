@@ -1,7 +1,5 @@
-
 package duke;
 
-import duke.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,7 +36,6 @@ public class Storage {
                 writeToFile(listOfInputs.get(i).message() + "\n", filePath);
             } else {
                 listOfInputs.get(i).updateData(filePath);
-                //updateData(listOfInputs.get(i).message(), filePath);
 
             }
         }
@@ -54,10 +51,10 @@ public class Storage {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
-                 message = message + sc.nextLine();
+                message = message + sc.nextLine();
             }
         } catch (FileNotFoundException e) {
-           return message + "Cannot read data!!!";
+            return message + "Cannot read data!!!";
         }
         return message;
     }
@@ -83,7 +80,6 @@ public class Storage {
     public void updateData(String message, String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write("\n" + message);
-        //fw.write(message + "\n");
         fw.close();
 
     }
