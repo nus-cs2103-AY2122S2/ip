@@ -120,9 +120,7 @@ public class Ui {
      */
     public static void generalErrorMessage() {
         System.out.println(LINE + "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n"
-                + "To view all task available: list\n"
-                + "To add more task: todo ...   deadline .../...    event .../...  or mark/unmark taskNumber\n"
-                + "To delete any task available: delete taskNumber\n"
+                + "for command format please enter: help\n"
                 + "please try again\n" + LINE);
     }
 

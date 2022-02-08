@@ -186,6 +186,20 @@ public class Parser {
     }
 
     /**
+     * execute when user command is help
+     */
+    public void helpCommand() {
+        System.out.println("------------Command help page---------------\n"
+                + "To view all task available: list\n"
+                + "To add task: todo (description) \n "
+                + "             deadline (description)/YYYY-MM-DD\n"
+                + "             event (description)/YYYY-MM-DD\n"
+                + "To mark or unmark task:  mark/unmark taskNumber\n"
+                + "To delete any task available: delete taskNumber\n"
+                + "To find a task: find (keyword of the task looking for)\n");
+    }
+
+    /**
      * Parse the user command and action taken
      */
     public void userCommand() throws IOException {
@@ -215,6 +229,8 @@ public class Parser {
             deleteCommand();
         } else if (inputArr[0].equals("find")) {
             findCommand();
+        } else if (inputArr[0].equals("help")) {
+            helpCommand();
         } else {
             Ui.generalErrorMessage();
         }
