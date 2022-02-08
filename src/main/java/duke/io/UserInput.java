@@ -11,10 +11,21 @@ public class UserInput {
     private String time = "";
     private boolean isDone;
 
+    /**
+     * UserInput constructor.
+     */
     public UserInput() {
         this.isDone = false;
     }
 
+    /**
+     * UserInput constructor.
+     *
+     * @param type A String parameter to capture the type of this UserInput.
+     * @param command A String parameter to capture the command of this UserInput.
+     * @param description A String parameter to capture the description of this UserInput.
+     * @param isDone A boolean parameter to capture if this UserInput is done or not done.
+     */
     public UserInput(String type, String command, String description, boolean isDone) {
         this.type = type;
         this.command = command;
@@ -22,6 +33,15 @@ public class UserInput {
         this.isDone = isDone;
     }
 
+    /**
+     * UserInput constructor.
+     *
+     * @param type A String parameter to capture the type of this UserInput.
+     * @param command A String parameter to capture the command of this UserInput.
+     * @param description A String parameter to capture the description of this UserInput.
+     * @param time A String parameter to capture the time of this UserInput.
+     * @param isDone A boolean parameter to capture if this UserInput is done or not done.
+     */
     public UserInput(String type, String command, String description, String time, boolean isDone) {
         this.type = type;
         this.command = command;

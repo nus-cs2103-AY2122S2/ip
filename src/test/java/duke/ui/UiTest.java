@@ -1,12 +1,11 @@
 package duke.ui;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 
 public class UiTest {
     /*
@@ -46,9 +45,9 @@ public class UiTest {
         setUpStreams();
         Ui ui = new Ui();
         ui.endProgram();
-        assertEquals("________________________________________\n" +
-                        "Bye. Hope to see you again soon!\n" +
-                        "________________________________________\n",
+        assertEquals("________________________________________\n"
+                        + "Bye. Hope to see you again soon!\n"
+                        + "________________________________________\n",
                 outContent.toString());
         restoreStreams();
     }

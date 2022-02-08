@@ -8,11 +8,22 @@ public class Task {
     private final String name;
     private boolean isDone;
 
+    /**
+     * Task constructor.
+     *
+     * @param taskName A String parameter to capture the name of this task.
+     */
     public Task(String taskName) {
         this.name = taskName;
         this.isDone = false;
     }
 
+    /**
+     * Task constructor.
+     *
+     * @param taskName A String parameter to capture the name of this task.
+     * @param isDone A boolean parameter to capture if this task is done or not done.
+     */
     public Task(String taskName, boolean isDone) {
         this.name = taskName;
         this.isDone = isDone;

@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.exception.DukeCommandDoesNotExistException;
 import duke.exception.DukeException;
@@ -10,7 +9,6 @@ import duke.io.UserInput;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -48,6 +46,9 @@ public class Duke extends Application {
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Duke constructor.
+     */
     public Duke() {
         this.ui = new Ui();
         this.taskList = new TaskList();

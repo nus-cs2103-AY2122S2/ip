@@ -162,7 +162,7 @@ public class Parser {
             day = day.toUpperCase();
 
             for (DayOfWeek d : DayOfWeek.values()) {
-                if(day.equals(d.toString())) {
+                if (day.equals(d.toString())) {
                     isDayOfWeek = true;
                 }
             }

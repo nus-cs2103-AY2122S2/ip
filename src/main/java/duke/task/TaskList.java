@@ -259,6 +259,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * A method to find task with a keyword.
+     *
+     * @param userInput A UserInput object, capturing the user's input.
+     * @return A String of message of the outcome.
+     * @throws DukeException If user's input is invalid.
+     */
     public String findTask(UserInput userInput) throws DukeException {
         if (!userInput.getTime().equals("")) {
             // throw wrong command exception
