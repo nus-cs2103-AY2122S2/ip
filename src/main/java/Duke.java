@@ -39,11 +39,14 @@ public class Duke {
                     num = Ui.exitHalloumi();
                     break;
                 case "list":
-                        Ui.printList(lists, lists.size());
-                        break;
+                    Ui.printList(lists, lists.size());
+                    break;
+                case "mark":
+                    taskList.mark(textSplit[1], lists);
+                    break;
                 case "unmark":
-                        taskList.unmark(textSplit[1], lists);
-                        break;
+                    taskList.unmark(textSplit[1], lists);
+                    break;
                 case "delete" :
                     taskList.delete(textSplit[1], lists);
                     break;
@@ -64,6 +67,9 @@ public class Duke {
                     break;
                 case "deadline":
                     taskList.deadline(fullDesc, textSplitOne[1], lists);
+                    break;
+                case "find":
+                    taskList.find(fullDesc, lists);
                     break;
                 default:
                     throw new DukeInvalidInput();

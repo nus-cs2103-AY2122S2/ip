@@ -99,4 +99,15 @@ public class TaskList {
         System.out.println("You have " + list.size() + " tasks left now! ^_^");
         Ui.lineTwo();
     }
+
+    public void find(String desc, ArrayList<Task> list) {
+        Ui.lineTwo();
+        System.out.println("Here are the matching tasks:");
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i).description.contains(desc)) {
+                System.out.println(i + 1 + ". " + list.get(i));
+            }
+        }
+        Ui.lineTwo();
+    }
 }
