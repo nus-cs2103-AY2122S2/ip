@@ -31,6 +31,7 @@ public class TaskList {
      * @return The task last added to the list.
      */
     public Task getLast() {
+        assert list.size() > 0;
         return list.get(list.size() - 1);
     }
 
@@ -51,6 +52,7 @@ public class TaskList {
      * @throws InvalidActionException If the task is already complete.
      */
     public String markItemDone(int index) throws InvalidActionException {
+        assert index < size();
         Task t = list.get(index);
         t.markAsDone();
         return "Task done! \\(n_n)/\n " + t.toString();
@@ -64,6 +66,7 @@ public class TaskList {
      * @throws InvalidActionException If the task is already incomplete.
      */
     public String markItemUndone(int index) throws InvalidActionException {
+        assert index < size();
         Task t = list.get(index);
         t.markUndone();
         return "Task not done =(\n " + t.toString();
@@ -76,6 +79,7 @@ public class TaskList {
      * @return The String representation of the task deleted from the task list.
      */
     public String deleteItem(int index) {
+        assert index < size();
         Task t = list.remove(index);
         return "deleted this item O_O:\n  " + t + "\nNow there are " + list.size() + " tasks on the list x)";
     }
