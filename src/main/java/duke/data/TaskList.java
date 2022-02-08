@@ -94,6 +94,22 @@ public class TaskList {
     }
 
     /**
+     * Adds task to task list at given index, and
+     * saving to storage.
+     *
+     * @param index Index to add task in.
+     * @param task Task to add.
+     * @throws IllegalArgumentException If index is out of list range.
+     */
+    public void addTask(int index, Task task) throws IllegalArgumentException {
+        if (!isValidIndex(index)) {
+            throw new IllegalArgumentException("Invalid index for current list");
+        }
+        this.tasks.add(index, task);
+        this.saveState();
+    }
+
+    /**
      * Deletes task from task list, and saving to storage.
      *
      * @param index Index of task to delete.
