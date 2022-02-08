@@ -12,6 +12,11 @@ class Parser {
         this.ui = new Ui();
     }
 
+    /**
+     * Executes and makes sense of the user command.
+     *
+     * @param input Input input given by the user .
+     */
     public void execute(String input) {
         String[] checkCase = input.split(" ");
         switch (checkCase[0].toLowerCase()) {

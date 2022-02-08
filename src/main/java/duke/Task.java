@@ -12,27 +12,41 @@ public class Task {
         isDone.add(false);
     }
 
+    /**
+     * Returns the status of a specific task.
+     */
     public String getStatusIcon() {
         return (isDone.get(0) ? "[X]" : "[ ]"); // mark done task with X // if done is "X" then " " 
     }
 
-    public void setAsDone() {
+    /**
+     * Sets a specific task to be marked.
+     */
+    public void setAsMarked() {
         isDone.set(0, true); 
     }
 
-    public void setAsUndone() {
+    /**
+     * Sets a specific task to be unmarked.
+     */
+    public void setAsUnmarked() {
         isDone.set(0, false);
     }
 
+    /**
+     * Returns a String which is based on the status icon of the task.
+     * 
+     * @param mark Mark the status of a specific task.
+     */
     public String marking(String mark) {
         if (mark.equals("mark")) {
-            setAsDone();
+            setAsMarked();
             String messageMarked = "Nice! I've marked this task as done: \n" + 
                                     this.toString() + "\n " 
                                     + "=======================================";
             return messageMarked; 
         } else {
-            setAsUndone();
+            setAsUnmarked();
             String messageUnmarked = "OK, I've marked this task as not done yet: \n" +
                                     this.toString() + "\n " 
                                     + "=======================================";
@@ -41,14 +55,23 @@ public class Task {
         }
     }
 
+    /**
+     * Returns a String of given Task.
+     */
     public String toString() {
         return getStatusIcon() + " " + this.description;
     }
 
+    /**
+     * Returns the initial of the task.
+     */
     public String getInitial(){
         return "Task";
     }
 
+    /**
+     * Returns the description a specific task.
+     */
     public String getDescription() {
         return description;
     }
