@@ -8,6 +8,7 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnMarkCommand;
+import duke.commands.UpdateCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.IncorrectValueException;
@@ -63,12 +64,16 @@ public class Parser {
         case "todo":
         case "event":
         case "deadline":
+        case "update":
             if (inputSplit.length < 2) {
                 throw new EmptyDescriptionException(commandType);
             }
             switch (commandType) {
             case "find":
                 cmd = new FindCommand(inputSplit[1]);
+                break;
+            case "update":
+                cmd = new UpdateCommand(inputSplit[1]);
                 break;
             default:
                 cmd = new AddCommand(commandType, inputSplit[1]);

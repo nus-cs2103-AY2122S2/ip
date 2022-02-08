@@ -31,6 +31,16 @@ public abstract class Task {
     public abstract String getDate();
 
     /**
+     * Abstract method to update Date of the task
+     */
+    public abstract void updateDate(String Update);
+
+    /**
+     * Abstract method to update Detail of the task
+     */
+    public abstract void updateDetail(String update);
+
+    /**
      * Marks the task as done
      */
     public void mark() {

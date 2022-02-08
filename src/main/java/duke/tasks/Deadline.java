@@ -41,6 +41,23 @@ public class Deadline extends Task {
     }
 
     /**
+     * Update the details of the task
+     */
+    @Override
+    public void updateDetail(String update) {
+        this.detail = update;
+    }
+
+    /**
+     * Update the date of the task
+     */
+    @Override
+    public void updateDate(String update) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
+        this.deadline = LocalDateTime.parse(update, formatter);
+    }
+
+    /**
      * Function to return string representation of Task with mark status date and detail
      * @return String representation of Task
      */

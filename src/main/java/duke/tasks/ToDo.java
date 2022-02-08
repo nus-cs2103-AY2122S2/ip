@@ -35,6 +35,21 @@ public class ToDo extends Task {
     }
 
     /**
+     * Update the details of the task
+     */
+    @Override
+    public void updateDetail(String update) {
+        this.detail = update;
+    }
+
+    /**
+     * Does nothing since todo has no date
+     */
+    @Override
+    public void updateDate(String update) {
+    }
+
+    /**
      * Function to return string representation of Task with mark status date and detail
      *
      * @return String representation of Task

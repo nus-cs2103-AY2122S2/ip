@@ -52,6 +52,10 @@ public class Ui {
         }
     }
 
+    public String updateMessage() {
+        return INDENT + "Ooohhh K! I have updated your task\n";
+    }
+
     public String listMessage() {
         return INDENT + "Here are the tasks in your list:\n";
     }
