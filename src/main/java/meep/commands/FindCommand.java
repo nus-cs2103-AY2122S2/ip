@@ -33,11 +33,12 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(ListTask tasks) {
-        ListTask result = tasks.findTasks(keyword);
-        if (result.size() == 0) {
+        String result = tasks.findTasks(keyword);
+        boolean isEmpty = result.length() == 0;
+        if (isEmpty) {
             return MESSAGE_NOT_FOUND;
         } else {
-            return MESSAGE_FOUND + result.generateTaskList();
+            return MESSAGE_FOUND + result;
         }
     }
 
