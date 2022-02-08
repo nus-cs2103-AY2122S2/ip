@@ -1,15 +1,14 @@
 package ultoi.util;
 
-import ultoi.task.Event;
-import ultoi.task.Deadline;
-
-import ultoi.command.Command;
 import ultoi.command.AddCommand;
 import ultoi.command.ByeCommand;
+import ultoi.command.Command;
 import ultoi.command.DeleteCommand;
 import ultoi.command.FindCommand;
 import ultoi.command.ListCommand;
 import ultoi.command.MarkCommand;
+import ultoi.task.Deadline;
+import ultoi.task.Event;
 
 /**
  * Represents a parser used to convert user input into valid commands.
@@ -107,7 +106,6 @@ public class Parser {
         String time = "";
 
         String[] tokens = input.split(" ");
-        
         for (int i = 1; i < tokens.length; i++) {
             if (tokens[i].equals(AddCommand.COMMAND_AT)) {
                 for (int j = i + 1; j < tokens.length; j++) {

@@ -1,19 +1,17 @@
 package ultoi.util;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.scene.text.Font;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Ultoi using FXML.
  */
 public class GuiDriver extends Application {
     @Override
