@@ -82,32 +82,33 @@ public class TaskManager {
         if (taskType == TaskType.TODO) {
             newTask = new ToDo(commandArg);
         } else if (taskType == TaskType.DEADLINE) {
-            String[] splitString = commandArg.split(" /by ", 2);
-            if (splitString.length == 2) {
-                LocalDateTime localDateTime = DateTimeUtil.getDateTime(splitString[1]);
-                newTask = new Deadline(splitString[0], localDateTime);
-            } else if (splitString.length == 1) {
-                if (splitString[0].startsWith("/by")) {
+            String[] commandArgs = commandArg.split(" /by ", 2);
+            if (commandArgs.length == 1) {
+                if (commandArgs[0].startsWith("/by")) {
                     throw new BaronException(Message.generateEmptyDescMessage(taskType));
-                } else {
-                    throw new BaronException("Please specify a deadline by the /by keyword.");
                 }
-            } else {
-                throw new BaronException("Please specify only one deadline.");
+                throw new BaronException("Please specify a deadline by the /by keyword.");
+            } else if (commandArgs.length == 0) {
+                throw new BaronException(Message.generateEmptyDescMessage(taskType));
             }
+
+            assert commandArgs.length == 2 : "commandArgs.length should be only up to 2";
+            LocalDateTime localDateTime = DateTimeUtil.getDateTime(commandArgs[1]);
+            newTask = new Deadline(commandArgs[0], localDateTime);
         } else {
-            String[] splitString = commandArg.split(" /at ", 2);
-            if (splitString.length == 2) {
-                LocalDateTime localDateTime = DateTimeUtil.getDateTime(splitString[1]);
-                newTask = new Event(splitString[0], localDateTime);
-            } else if (splitString.length == 1) {
-                if (splitString[0].startsWith("/at")) {
+            String[] commandArgs = commandArg.split(" /at ", 2);
+            if (commandArgs.length == 1) {
+                if (commandArgs[0].startsWith("/at")) {
                     throw new BaronException(Message.generateEmptyDescMessage(taskType));
                 }
                 throw new BaronException("Please specify a date by the /at keyword.");
-            } else {
-                throw new BaronException("Please specify only one date.");
+            } else if (commandArgs.length == 0) {
+                throw new BaronException(Message.generateEmptyDescMessage(taskType));
             }
+
+            assert commandArgs.length == 2 : "commandArgs.length should be only up to 2";
+            LocalDateTime localDateTime = DateTimeUtil.getDateTime(commandArgs[1]);
+            newTask = new Event(commandArgs[0], localDateTime);
         }
 
         this.taskList.add(newTask);
@@ -124,9 +125,9 @@ public class TaskManager {
      */
     public Task getTask(int index) throws BaronException {
         assert this.getTaskCount() >= 0 : "getTaskCount() cannot be < 0";
-        if (this.getTaskCount() == 0) {
+        if (this.isEmpty()) {
             throw new BaronException(Message.MESSAGE_NO_TASK);
-        } else if (index < 1 && index > this.getTaskCount()) {
+        } else if (index < 1 || index > this.getTaskCount()) {
             throw new BaronException(Message.generateTaskIndexOutOfBoundMessage(this.getTaskCount()));
         }
         return this.taskList.get(index - 1);
@@ -153,14 +154,14 @@ public class TaskManager {
         assert this.getTaskCount() >= 0 : "getTaskCount() cannot be < 0";
         if (this.isEmpty()) {
             throw new BaronException(Message.MESSAGE_NO_TASK);
-        } else if (index > 0 && index <= this.getTaskCount()) {
-            if (this.taskList.get(index - 1).mark()) {
-                return true;
-            } else {
-                throw new BaronException("The task is already marked.");
-            }
-        } else {
+        } else if (index < 1 || index > this.getTaskCount()) {
             throw new BaronException(Message.generateTaskIndexOutOfBoundMessage(this.getTaskCount()));
+        }
+
+        if (this.taskList.get(index - 1).mark()) {
+            return true;
+        } else {
+            throw new BaronException("The task is already marked.");
         }
     }
 
@@ -176,14 +177,14 @@ public class TaskManager {
         assert this.getTaskCount() >= 0 : "getTaskCount() cannot be < 0";
         if (this.isEmpty()) {
             throw new BaronException(Message.MESSAGE_NO_TASK);
-        } else if (index > 0 && index <= this.getTaskCount()) {
-            if (this.taskList.get(index - 1).unmark()) {
-                return true;
-            } else {
-                throw new BaronException("The task is not marked.");
-            }
-        } else {
+        } else if (index < 1 || index > this.getTaskCount()) {
             throw new BaronException(Message.generateTaskIndexOutOfBoundMessage(this.getTaskCount()));
+        }
+
+        if (this.taskList.get(index - 1).unmark()) {
+            return true;
+        } else {
+            throw new BaronException("The task is not marked.");
         }
     }
 
@@ -199,14 +200,14 @@ public class TaskManager {
         assert this.getTaskCount() >= 0 : "getTaskCount() cannot be < 0";
         if (this.isEmpty()) {
             throw new BaronException(Message.MESSAGE_NO_TASK);
-        } else if (index > 0 && index <= this.getTaskCount()) {
-            this.previousTaskList = this.getAllTasks();
-            Task deletedTask = this.taskList.get(index - 1);
-            this.taskList.remove(index - 1);
-            return deletedTask;
-        } else {
+        } else if (index < 1 || index > this.getTaskCount()) {
             throw new BaronException(Message.generateTaskIndexOutOfBoundMessage(this.getTaskCount()));
         }
+
+        this.previousTaskList = this.getAllTasks();
+        Task deletedTask = this.taskList.get(index - 1);
+        this.taskList.remove(index - 1);
+        return deletedTask;
     }
 
     /**

@@ -42,37 +42,38 @@ public class CommandManager {
             return new ByeCommand();
         } else if (fullCommand.equals("list")) {
             return new ListCommand(this.taskManager);
-        } else {
-            String[] splitString = fullCommand.split("\\s+", 2);
-            String commandArg = "";
+        }
 
-            if (splitString.length == 0) {
-                return new EmptyCommand();
-            }
+        String[] fullCommands = fullCommand.split("\\s+", 2);
+        String commandArg = "";
 
-            assert (splitString.length == 2) || (splitString.length == 1) : "splitString.length should be 1 or 2 only";
-            if (splitString.length == 2) {
-                commandArg = splitString[1];
-            }
+        if (fullCommands.length == 0) {
+            return new EmptyCommand();
+        }
 
-            switch (splitString[0]) {
-            case "mark":
-                return new MarkTaskCommand(this.taskManager, this.storage, commandArg);
-            case "unmark":
-                return new UnmarkTaskCommand(this.taskManager, this.storage, commandArg);
-            case "todo":
-                return new AddTaskCommand(this.taskManager, this.storage, TaskType.TODO, commandArg);
-            case "deadline":
-                return new AddTaskCommand(this.taskManager, this.storage, TaskType.DEADLINE, commandArg);
-            case "event":
-                return new AddTaskCommand(this.taskManager, this.storage, TaskType.EVENT, commandArg);
-            case "delete":
-                return new DeleteTaskCommand(this.taskManager, this.storage, commandArg);
-            case "find":
-                return new FindCommand(this.taskManager, commandArg);
-            default:
-                return new InvalidCommand();
-            }
+        assert (fullCommands.length == 2) || (fullCommands.length == 1) : "splitString.length should be 1 or 2 only";
+
+        if (fullCommands.length == 2) {
+            commandArg = fullCommands[1];
+        }
+
+        switch (fullCommands[0]) {
+        case "mark":
+            return new MarkTaskCommand(this.taskManager, this.storage, commandArg);
+        case "unmark":
+            return new UnmarkTaskCommand(this.taskManager, this.storage, commandArg);
+        case "todo":
+            return new AddTaskCommand(this.taskManager, this.storage, TaskType.TODO, commandArg);
+        case "deadline":
+            return new AddTaskCommand(this.taskManager, this.storage, TaskType.DEADLINE, commandArg);
+        case "event":
+            return new AddTaskCommand(this.taskManager, this.storage, TaskType.EVENT, commandArg);
+        case "delete":
+            return new DeleteTaskCommand(this.taskManager, this.storage, commandArg);
+        case "find":
+            return new FindCommand(this.taskManager, commandArg);
+        default:
+            return new InvalidCommand();
         }
     }
 }
