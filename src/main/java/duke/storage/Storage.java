@@ -69,6 +69,7 @@ public class Storage {
                     if (isMarked) {
                         curr.mark();
                     }
+                    assert curr != null : "to do should be created";
                     list.add(curr);
                 } else if (typeOfTask.equals("D")) {
                     String[] info = currTask.split(" \\(by: ");
@@ -78,6 +79,7 @@ public class Storage {
                     if (isMarked) {
                         curr.mark();
                     }
+                    assert curr != null : "deadline should be created";
                     list.add(curr);
                 } else {
                     String[] info = currTask.split(" \\(at: ");
@@ -87,6 +89,7 @@ public class Storage {
                     if (isMarked) {
                         curr.mark();
                     }
+                    assert curr != null : "event should be created";
                     list.add(curr);
                 }
             }
