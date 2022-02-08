@@ -21,7 +21,7 @@ public class TaskList {
     private static LinkedList<Task> list;
 
     /**
-     * Creates a new TaskList.
+     * Creates a new empty TaskList.
      */
     public TaskList() {
         list = new LinkedList<>();
@@ -142,6 +142,10 @@ public class TaskList {
      * @throws IndexOutOfBoundsException When the index is not in the List.
      */
     public Task remove(int idx) throws IndexOutOfBoundsException {
-        return list.remove(idx);
+        if (idx < 0 || idx >= list.size()) {
+            throw new IndexOutOfBoundsException(LilyException.ERROR_OUT_OF_BOUNDS);
+        } else {
+            return list.remove(idx);
+        }
     }
 }

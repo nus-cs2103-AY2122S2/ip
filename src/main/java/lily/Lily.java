@@ -46,6 +46,6 @@ public class Lily {
      * @param args Contents of the main driver.
      */
     public static void main(String[] args) {
-        new Lily("data/tasks.txt").run();
+        new Lily("./data/tasks.txt").run();
     }
 }

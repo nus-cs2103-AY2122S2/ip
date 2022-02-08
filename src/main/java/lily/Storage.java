@@ -32,6 +32,15 @@ public class Storage {
     }
 
     /**
+     * Create a new default Storage manager.
+     * 
+     * @param fp The filepath to load from and save to.
+     */
+    public Storage() {
+        filePath = "./data/tasks.txt";
+    }
+
+    /**
      * Returns a LinkedList from reading the savefile.
      * 
      * @return Saved tasks in the savefile.

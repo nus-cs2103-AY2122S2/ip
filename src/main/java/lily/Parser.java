@@ -29,6 +29,18 @@ public class Parser {
         this.st = st;
     }
 
+    /**
+     * Creates a new Empty Parser Object.
+     * 
+     * @param t Empty tasklist
+     * @param ui Empty Ui
+     * @param st The Storage needed to store data with default path
+     */
+    public Parser() {
+        this.tasks = new TaskList();
+        this.ui = new Ui(false);
+        this.st = new Storage();
+    }
 
     /**
      * The main loop of interacting with the user.
@@ -102,7 +114,7 @@ public class Parser {
             } catch (IOException ioe) {
                 ui.showError("I had trouble saving the file.");
             } catch (IndexOutOfBoundsException oob) {
-                ui.showError("eh bro your list is shorter than that");
+                ui.showError(LilyException.ERROR_OUT_OF_BOUNDS);
             } catch (DateTimeParseException dtpe) {
                 ui.showError("can you say the date again in this form: year-mm-dd");
             } catch (NumberFormatException nfe) {

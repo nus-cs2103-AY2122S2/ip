@@ -7,6 +7,7 @@ package lily.task;
  * Last Updated: Jan 2022 (AY21/22 Sem 2)
  */
 public class LilyException extends Exception {
+    public static final String ERROR_OUT_OF_BOUNDS = "eh bro your list is shorter than that";
     /**
      * Creates a LilyException, which is an exception specific to Lily.
      * 
