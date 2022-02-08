@@ -4,6 +4,7 @@ import ultoi.task.Task;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of tasks.
@@ -96,13 +97,8 @@ public class TaskList {
     }
 
     public TaskList findTasksWith(String keyword) {
-        List<Task> matchingTasks = new ArrayList<Task>();
-
-        for (int i = 0; i < size(); i++) {
-            if (tasks.get(i).getDescription().contains(keyword)) {
-                matchingTasks.add(tasks.get(i));
-            }
-        }
+        List<Task> matchingTasks = new ArrayList<Task>(this.tasks.stream().filter(
+                task -> task.getDescription().contains(keyword)).collect(Collectors.toList()));
 
         return new TaskList(matchingTasks);
     }
