@@ -27,6 +27,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
+        assert keyword != null : "Keyword should not be null";
         int i = 1;
         String result = MSG_MATCHING_TASK;
         for (Task task : tasks.getTasks()) {

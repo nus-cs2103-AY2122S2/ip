@@ -16,6 +16,7 @@ public class IncorrectCommand extends Command {
      * @return a command to display error message
      */
     public IncorrectCommand(String errorMsg) {
+        assert errorMsg != null : "Error message should not be null";
         this.errorMsg = errorMsg;
     }
 
