@@ -1,15 +1,15 @@
 package ultoi.util;
 
-import ultoi.task.Task;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import ultoi.task.Task;
 
 /**
  * Represents a list of tasks.
  *
  * @author snoidetx
- * @version 0.0.0
+ * @version 0.1.0
  */
 public class TaskList {
     private final List<Task> tasks;
@@ -95,6 +95,12 @@ public class TaskList {
         return "Now you have " + size() + " task(s) in total.";
     }
 
+    /**
+     * Returns a list of tasks that contains the given keyword.
+     *
+     * @param keyword Keyword as the findn criteria.
+     * @return A list of tasks that contains the given keyword.
+     */
     public TaskList findTasksWith(String keyword) {
         List<Task> matchingTasks = new ArrayList<Task>();
 

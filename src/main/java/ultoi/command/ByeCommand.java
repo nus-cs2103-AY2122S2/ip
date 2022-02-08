@@ -1,23 +1,15 @@
 package ultoi.command;
 
-import ultoi.task.Task;
-import ultoi.task.ToDo;
-import ultoi.task.Deadline;
-import ultoi.task.Event;
-
-import ultoi.util.Ultoi;
-import ultoi.util.UltoiUi;
-import ultoi.util.UltoiException;
 import ultoi.util.Storage;
 import ultoi.util.TaskList;
-import ultoi.util.Parser;
-import ultoi.util.DateTime;
+import ultoi.util.UltoiException;
+import ultoi.util.UltoiUi;
 
 /**
  * Represents a command that ends the bot.
  *
  * @author snoidetx
- * @version 0.0.0
+ * @version 0.1.0
  */
 public class ByeCommand implements Command {
     private static final String COMMAND_BYE = "bye";
@@ -30,7 +22,7 @@ public class ByeCommand implements Command {
      * @throws UltoiException If the input cannot be identified.
      */
     public ByeCommand(String input) throws UltoiException {
-        if (! input.equals(COMMAND_BYE)) {
+        if (!input.equals(COMMAND_BYE)) {
             throw UltoiException.commandMismatchException();
         }
     }
