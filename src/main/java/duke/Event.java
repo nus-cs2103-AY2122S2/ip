@@ -28,6 +28,7 @@ public class Event extends Task {
      */
     public String convertDate(String dueDate) {
         try {
+            assert !dueDate.equals("") : "No date!";
             LocalDate date = LocalDate.parse(dueDate);
             String year = String.valueOf(date.getYear());
             String month = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);

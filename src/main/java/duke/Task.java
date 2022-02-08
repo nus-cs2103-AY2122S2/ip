@@ -18,6 +18,7 @@ public class Task implements Serializable {
     }
 
     public String getName() {
+        assert this.name != null : "No name!";
         return this.name;
     }
 
