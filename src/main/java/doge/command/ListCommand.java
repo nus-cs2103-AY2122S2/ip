@@ -1,6 +1,9 @@
 package doge.command;
 
-import doge.*;
+import doge.DateTime;
+import doge.Storage;
+import doge.TaskList;
+import doge.Ui;
 import doge.exception.DogeException;
 import doge.exception.ListTasksDueException;
 import doge.task.Deadline;
@@ -51,7 +54,6 @@ public class ListCommand extends Command {
             } catch (IndexOutOfBoundsException e) {
                 throw new ListTasksDueException("Please state an appropriate duration for the occurrence?");
             }
-
 
             for (int i = 0; i < tasks.size(); i++) {
                 Task currTask = tasks.getTask(i);
