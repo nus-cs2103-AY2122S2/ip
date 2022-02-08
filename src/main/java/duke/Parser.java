@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Class for parsing through the input.
  */
