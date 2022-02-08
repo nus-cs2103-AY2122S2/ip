@@ -10,14 +10,6 @@ public class Ui {
     private static final String greet = lineDivider + "Hello! I'm Mum!\nWhat can I do for you?\n"
             + "Type \"commands\" to get a list of all commands.\n" + lineDivider;
     private static final String goodBye = lineDivider + "Bye. Hope to see you again soon!\n" + lineDivider;
-    private static final String addedTask = lineDivider + "Got it. I've added this task:\n"
-            + "   %s\nNow you have %d tasks in the list.\n" + lineDivider;
-    private static final String deleteTask = lineDivider + "Noted. I've removed this task:\n"
-            + "%s\nNow you have %d tasks in the list\n" + lineDivider;
-    private static final String markedTask = lineDivider + "Nice! I've marked this task as done:\n"
-            + "[%s] %s\n" + lineDivider;
-    private static final String unmarkedTask = lineDivider + "Ok, I've marked this task as not done yet:\n"
-            + "[%s] %s\n" + lineDivider;
 
     /**
      * Empty constructor to initialise this ui.
