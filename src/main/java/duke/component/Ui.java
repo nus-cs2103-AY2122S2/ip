@@ -1,12 +1,9 @@
 package duke.component;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 
 import static duke.constant.Message.GOOD_BYE;
 import static duke.constant.Message.GREETING;
-import static duke.constant.Message.HORIZONTAL_LINE;
 import static duke.constant.Message.LINE_PREFIX;
 import static duke.constant.Message.LINE_SEPARATOR;
 import static duke.constant.Message.CONFIRM_MARK;
@@ -21,16 +18,6 @@ public class Ui {
      */
     public String printGreeting() {
         return printMessage(GREETING);
-    }
-
-    /**
-     * Reads input from user.
-     *
-     * @param sc Scanner class
-     * @return String userInput
-     */
-    public String readCommand(Scanner sc) {
-        return sc.nextLine();
     }
 
     /**

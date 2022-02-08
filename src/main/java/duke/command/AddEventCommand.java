@@ -18,7 +18,7 @@ import static duke.constant.TaskConstant.PREFIX_AT_EVENT;
  * A representation of the command for adding an Event.
  */
 public class AddEventCommand extends Command {
-    String commandArgument;
+    private String commandArgument;
 
     /**
      * Class constructor.

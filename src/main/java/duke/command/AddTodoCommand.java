@@ -12,7 +12,7 @@ import duke.task.Todo;
  * A representation of the command for adding a Todo.
  */
 public class AddTodoCommand extends Command {
-    String commandArgument;
+    private String commandArgument;
 
     /**
      * Class constructor.

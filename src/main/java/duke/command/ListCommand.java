@@ -24,18 +24,18 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getNumberOfTasks() == 0) {
             return ui.printMessage(NO_TASK);
-//            return;
         }
-        String result = "";
+        String output = "";
 
-        result += ui.printMessage(LIST_TASK);
-        result += LINE_SEPARATOR;
+        output += ui.printMessage(LIST_TASK);
+        output += LINE_SEPARATOR;
         for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
             int index = i + 1;
-            result += ui.printMessage(LINE_PREFIX + index + "." + tasks.getTaskByIndex(i));
-            result += LINE_SEPARATOR;
+            output += ui.printMessage(LINE_PREFIX + index + "." + tasks.getTaskByIndex(i));
+            output += LINE_SEPARATOR;
         }
 
-        return result;
+        return output;
+
     }
 }

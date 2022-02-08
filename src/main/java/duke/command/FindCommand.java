@@ -16,7 +16,7 @@ import static duke.constant.Message.NO_TASK_MATCHED;
  * A representation of the command for founding tasks in the list.
  */
 public class FindCommand extends Command {
-    String commandArgument;
+    private String commandArgument;
 
     /**
      * Class constructor.
@@ -38,7 +38,6 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getNumberOfTasks() == 0) {
             return ui.printMessage(NO_TASK);
-//            return;
         }
 
         TaskList foundTasks = new TaskList();
@@ -51,13 +50,14 @@ public class FindCommand extends Command {
         if (foundTasks.getNumberOfTasks() == 0) {
             return ui.printMessage(NO_TASK_MATCHED);
         } else {
-            String result = "";
-            result += FOUND_TASK;
-            result += LINE_SEPARATOR;
+            String output = "";
+            output += FOUND_TASK;
+            output += LINE_SEPARATOR;
             for (int i = 0; i < foundTasks.getNumberOfTasks(); i++) {
-                result += ui.printMessage(LINE_PREFIX + (i + 1) + "." + foundTasks.getTaskByIndex(i));
+                output += ui.printMessage(LINE_PREFIX + (i + 1) + "." + foundTasks.getTaskByIndex(i));
             }
-            return result;
+            return output;
+
         }
 
 
