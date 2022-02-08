@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 repositories {
@@ -29,7 +30,7 @@ test {
 }
 
 application {
-    mainClassName = "juke.Juke"
+    mainClassName = "juke.Launcher"
 }
 
 shadowJar {
@@ -38,7 +39,12 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.29'
+    toolVersion = "8.29"
+}
+
+javafx {
+    version = "11"
+    modules = [ 'javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics' ]
 }
 
 run {

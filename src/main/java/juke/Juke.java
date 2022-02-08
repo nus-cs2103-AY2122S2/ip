@@ -1,5 +1,9 @@
 package juke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import juke.command.CommandHandler;
 import juke.common.Storage;
 import juke.common.TaskList;
@@ -8,7 +12,7 @@ import juke.common.Ui;
 /**
  * Entry point for the Juke application.
  */
-public class Juke {
+public class Juke extends Application {
     private static final Juke INSTANCE = new Juke();
 
     private TaskList taskList;
@@ -25,6 +29,15 @@ public class Juke {
         this.storage = new Storage(this);
         this.hasExited = false;
         CommandHandler.registerCommands();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label label = new Label("Hi");
+        Scene scene = new Scene(label);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void run() {
@@ -76,14 +89,5 @@ public class Juke {
      */
     public static Juke getInstance() {
         return INSTANCE;
-    }
-
-    /**
-     * Main class for the Juke application.
-     *
-     * @param args Running arguments, not used.
-     */
-    public static void main(String[] args) {
-        INSTANCE.run();
     }
 }
