@@ -17,7 +17,7 @@ import ultoi.util.DateTime;
  * Represents a command that adds task to the list.
  *
  * @author snoidetx
- * @version 0.0.0
+ * @version 0.2.0
  */
 public class AddCommand implements Command {
     private static final String COMMAND_TODO = "todo";
