@@ -26,7 +26,6 @@ public class Duke extends Application{
 //    //constructor
     private TaskList taskList;
     private Storage storage;
-    private Ui ui;
 //
     /**
      * Sets up the objects needed for the application to run.
@@ -35,7 +34,6 @@ public class Duke extends Application{
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
-        ui = new Ui();
         taskList = new TaskList(storage.load());
     }
 
@@ -124,7 +122,6 @@ public class Duke extends Application{
         String message = "";
         try {
                 message = Parser.parseInputLine(input, taskList);
-                ui.print(message);
                 storage.save(taskList.getTaskList());
             } catch (DukeException e) {
                 message = e.toString();

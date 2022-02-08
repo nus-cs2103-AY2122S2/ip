@@ -182,7 +182,13 @@ public class Parser {
             }
         }
         if (command.equals("delete")) {
-            int index = Integer.parseInt(strArr[1]) - 1;
+            int index;
+            try {
+                index = Integer.parseInt(strArr[1]) - 1;
+            } catch (ArrayIndexOutOfBoundsException e){
+               throw new DukeEmptyArgumentException();
+            }
+
             Task task;
             try {
                 task = taskList.get(index);
@@ -206,7 +212,6 @@ public class Parser {
 
             }
             return message.toString();
-
         }
         return null;
     }
