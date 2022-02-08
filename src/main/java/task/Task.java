@@ -9,11 +9,11 @@ import main.Date;
  * @since 0.1.0
  */
 public abstract class Task {
-    private static final String DONE_MEMORY = "@1@";
-    private static final String UNDONE_MEMORY = "@0@";
+    private static final String DONE_MEMORY = "1@";
+    private static final String UNDONE_MEMORY = "0@";
     private static final String DONE_STRING = "[X]";
     private static final String UNDONE_STRING = "[ ]";
-    private static final String ARCHIVED_TASK = "@A";
+    protected static final String ARCHIVED_TASK = "@A";
     // A string to represent the description of the task
     private final String description;
     // A boolean to represent if the task is done
@@ -79,12 +79,8 @@ public abstract class Task {
      * @return Memory representation of the task.
      */
     public String toMemoryString() {
-        String memoryString = this.description;
-        memoryString = isDone ? memoryString + DONE_MEMORY : memoryString + UNDONE_MEMORY;
-        if (isArchived) {
-            memoryString += ARCHIVED_TASK;
-        }
-        return memoryString;
+        String memoryString = isDone ? DONE_MEMORY : UNDONE_MEMORY;
+        return memoryString + description;
     }
 
     /**
@@ -106,6 +102,9 @@ public abstract class Task {
     public String toString() {
         return this.getStatusIcon()
                 + this.description;
+    }
+    protected String archiveString(String str) {
+        return isArchived ? str + ARCHIVED_TASK : str;
     }
 
 }

@@ -9,7 +9,7 @@ import main.Date;
  * @since 0.1.0
  */
 public class Event extends Task {
-    private static final String MEMORY_FORMAT = "E%s@%s";
+    private static final String MEMORY_FORMAT = "E@%s@%s";
     private static final String STRING_FORMAT = "[E]%s (at: %s)";
     // String representation of the time the event tasks place
     private final String at;
@@ -35,7 +35,8 @@ public class Event extends Task {
      */
     @Override
     public String toMemoryString() {
-        return String.format(MEMORY_FORMAT, super.toMemoryString(), this.at);
+        String output = String.format(MEMORY_FORMAT, super.toMemoryString(), this.at);
+        return archiveString(output);
     }
 
     /**

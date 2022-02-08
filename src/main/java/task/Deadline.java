@@ -9,7 +9,7 @@ import main.Date;
  * @since 0.1.0
  */
 public class Deadline extends Task {
-    private static final String MEMORY_FORMAT = "D%s@%s";
+    private static final String MEMORY_FORMAT = "D@%s@%s";
     private static final String STRING_FORMAT = "[D]%s (by: %s)";
     private final String by;
     private final Date date;
@@ -34,7 +34,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toMemoryString() {
-        return String.format(MEMORY_FORMAT, super.toMemoryString(), this.by);
+        String output = String.format(MEMORY_FORMAT, super.toMemoryString(), this.by);
+        return archiveString(output);
     }
 
     /**

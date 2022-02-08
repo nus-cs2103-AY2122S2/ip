@@ -20,7 +20,7 @@ public class TaskList {
     private static final int DESCRIPTION = 2;
     private static final int TASK_DATE = 3;
     private static final int MINIMUM_LENGTH = 3;
-    private static final int MAXIMUM_LENGTH = 4;
+    private static final int MAXIMUM_LENGTH = 5;
     private static final String INDENT_ONE = "\t";
     // archived tasks' descriptions end with "A"
     private static final String ARCHIVE_SIGN = "A";
@@ -117,8 +117,8 @@ public class TaskList {
     /**
      * Return an archived task.
      *
-     * @param index
-     * @return
+     * @param index The index of the task to be archived.
+     * @return An archived task
      */
     public Task archiveTask(int index) {
         Task toArchive = taskList.remove(index - 1);
