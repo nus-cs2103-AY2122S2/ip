@@ -23,100 +23,91 @@ public class Parser {
      * @throws DukeException If the input string have errors in its format.
      */
     public static Command parse(String input) throws DukeException {
-        String[] details = input.split(" ", 2);
+        String[] arguments = input.trim().split(" ", 2);
 
-        switch (details[0].toLowerCase()) {
+        switch (arguments[0].toLowerCase()) {
         case "bye":
             return new ExitCommand();
         case "list":
             return new ListCommand();
         case "mark":
-            return extractMark(details);
+            return extractMark(arguments);
         case "unmark":
-            return extractUnmark(details);
+            return extractUnmark(arguments);
         case "todo":
-            return extractToDo(details);
+            return extractToDo(arguments);
         case "deadline":
-            return extractDeadline(details);
+            return extractDeadline(arguments);
         case "event":
-            return extractEvent(details);
+            return extractEvent(arguments);
         case "delete":
-            return extractDelete(details);
+            return extractDelete(arguments);
         case "find":
-            return extractFind(details);
+            return extractFind(arguments);
         default:
             return new UnknownCommand();
         }
     }
 
-    private static Command extractToDo(String[] details) {
+    private static Command extractToDo(String[] arguments) {
         try {
-            if (details[1].trim().length() == 0) {
-                throw new IndexOutOfBoundsException("Empty description string");
-            }
-            return new AddCommand(new ToDo(details[1]));
+            return new AddCommand(new ToDo(arguments[1]));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Missing details! Please use the format: todo <description>", e);
         }
     }
 
-    private static Command extractDeadline(String[] details) {
+    private static Command extractDeadline(String[] arguments) {
         try {
-            String[] args = details[1].split(" /by ");
-            LocalDateTime by = LocalDateTime.parse(args[1], DateTimeFormatter.ofPattern("d/M/y HHmm"));
-            return new AddCommand(new Deadline(args[0], by));
-        } catch (IndexOutOfBoundsException e) {
+            String[] taskDetails = arguments[1].split(" /by ");
+            LocalDateTime dueDate = LocalDateTime.parse(taskDetails[1], DateTimeFormatter.ofPattern("d/M/y HHmm"));
+            return new AddCommand(new Deadline(taskDetails[0], dueDate));
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException(
                     "Missing details! Please use the format: deadline <description> /by <dd/mm/yyyy hhmm>", e);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(
-                    "Incorrect date/time format! Please use <dd/mm/yyyy hhmm>", e);
         }
     }
 
-    private static Command extractEvent(String[] details) {
+    private static Command extractEvent(String[] arguments) {
         try {
-            String[] args = details[1].split(" /at ");
-            LocalDateTime at = LocalDateTime.parse(args[1], DateTimeFormatter.ofPattern("d/M/y HHmm"));
-            return new AddCommand(new Event(args[0], at));
-        } catch (IndexOutOfBoundsException e) {
+            String[] taskDetails = arguments[1].split(" /at ");
+            LocalDateTime eventDate = LocalDateTime.parse(taskDetails[1], DateTimeFormatter.ofPattern("d/M/y HHmm"));
+            return new AddCommand(new Event(taskDetails[0], eventDate));
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException(
                     "Missing details! Please use the format: event <description> /at <dd/mm/yyyy hhmm>", e);
-        } catch (DateTimeParseException e) {
-            throw new DukeException(
-                    "Incorrect date/time format! Please use <dd/mm/yyyy hhmm>", e);
         }
     }
 
-    private static Command extractMark(String[] details) {
+    private static Command extractMark(String[] arguments) {
         try {
-            return new MarkCommand(Integer.parseInt(details[1].trim()) - 1);
+            return new MarkCommand(Integer.parseInt(arguments[1].trim()) - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException("Please enter an integer!", e);
         }
     }
 
-    private static Command extractUnmark(String[] details) {
+    private static Command extractUnmark(String[] arguments) {
         try {
-            return new UnmarkCommand(Integer.parseInt(details[1].trim()) - 1);
+            return new UnmarkCommand(Integer.parseInt(arguments[1].trim()) - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException("Please enter an integer!", e);
         }
     }
 
-    private static Command extractDelete(String[] details) {
+    private static Command extractDelete(String[] arguments) {
         try {
-            return new DeleteCommand(Integer.parseInt(details[1].trim()) - 1);
+            return new DeleteCommand(Integer.parseInt(arguments[1].trim()) - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException("Please enter an integer!", e);
         }
     }
 
-    private static Command extractFind(String[] details) {
+    private static Command extractFind(String[] arguments) {
         try {
-            return new FindCommand(details[1]);
+            return new FindCommand(arguments[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Enter some word to search!", e);
+            throw new DukeException("Enter some words to search!", e);
         }
     }
 }
