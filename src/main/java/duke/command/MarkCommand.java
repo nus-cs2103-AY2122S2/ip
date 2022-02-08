@@ -41,6 +41,7 @@ public class MarkCommand extends Command {
             throw new InvalidIndexException();
         }
         Task currentTask = tasks.getTaskByIndex(index);
+        assert currentTask != null: "task should not be null";
         currentTask.markAsDone();
 
         storage.writeTaskToFile(tasks);

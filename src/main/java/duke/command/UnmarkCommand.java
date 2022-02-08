@@ -41,6 +41,8 @@ public class UnmarkCommand extends Command {
             throw new InvalidIndexException();
         }
         Task currentTask = tasks.getTaskByIndex(index);
+        assert currentTask != null: "task should not be null";
+
         currentTask.markAsNotDone();
         storage.writeTaskToFile(tasks);
         return ui.printConfirmUnmark(currentTask);
