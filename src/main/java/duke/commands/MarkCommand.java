@@ -25,9 +25,10 @@ public abstract class MarkCommand extends Command {
     public static MarkCommand of(String userInput) {
         if (userInput.startsWith("mark")) {
             return new MarkDoneCommand(userInput);
-        } else {
+        } else if (userInput.startsWith("unmark")) {
             return new MarkUndoneCommand(userInput);
         }
+        return new InvalidMarkCommand();
     }
 
     public abstract String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;

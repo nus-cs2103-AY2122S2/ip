@@ -11,16 +11,25 @@ public class Event extends Task {
     private LocalDateTime date = null;
     private String dateString = "";
 
+    /**
+     * Constructor for Event class. Takes in a LocalDateTime object as the date instead of a string.
+     * @param taskName The string that represents the name of this event.
+     * @param date The LocalDateTime object that represents the date of this event.
+     */
     public Event(String taskName, LocalDateTime date) {
         this.taskName = taskName;
         this.date = date;
     }
 
+    /**
+     * Constructor for Event class. Takes in a string describing the date of this event.
+     * @param taskName The string that represents the name of this event.
+     * @param dateString The string that represents the date of this event.
+     */
     public Event(String taskName, String dateString) {
         this.taskName = taskName;
         this.dateString = dateString;
     }
-
 
     public char getType() {
         return 'E';
@@ -87,5 +96,42 @@ public class Event extends Task {
         }
 
         return false;
+    }
+
+    /**
+     * Updates the current date information with the given new date.
+     *
+     * @param newDate The new date to replace the current date.
+     * @return True if updated successfully, False if the new date given is the same as the current date.
+     */
+    @Override
+    public boolean updateDate(LocalDateTime newDate) {
+
+        if (newDate.equals(this.date)) {
+            return false;
+        }
+
+        this.date = newDate;
+        this.dateString = "";
+        return true;
+    }
+
+    /**
+     * Updates the current date information with the given new date.
+     *
+     * @param newDate The new date to replace the current date.
+     * @return True if updated successfully, False if the new date given is the same as the current date or empty.
+     */
+    @Override
+    public boolean updateDate(String newDate) {
+
+        if (newDate.strip().equals(this.dateString)) {
+            return false;
+        }
+
+        this.date = null;
+        this.dateString = newDate.strip();
+
+        return true;
     }
 }

@@ -4,15 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteTaskCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.SortByDateCommand;
-import duke.commands.SortByNameCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -21,6 +13,13 @@ import duke.tasks.Todo;
 
 public class Parser {
 
+    /**
+     * Parses the user input to a task object.
+     *
+     * @param userInput The string entered by the user.
+     * @return The task object parsed from the string.
+     * @throws DukeException If a wrong format is entered by the user.
+     */
     public static Task parseToTask(String userInput) throws DukeException {
 
         if (userInput.startsWith("todo")) {
@@ -94,6 +93,12 @@ public class Parser {
         return new Deadline(taskName, date);
     }
 
+    /**
+     * Converts a Task to the correct format to be saved in the file.
+     *
+     * @param t The task to be saved.
+     * @return The String format of the task to be stored in the file.
+     */
     public static String parseToFileFromTask(Task t) {
         String dateStr = "";
         if (t.getDateObj() == null) {
@@ -108,6 +113,13 @@ public class Parser {
         return String.format("%c\t%c\t%s\t%s", t.getType(), t.getDone(), t.getTaskName(), dateStr);
     }
 
+    /**
+     * Parses the contents saved in the file to Task objects.
+     *
+     * @param fileInput The string representing the Task object stored in the file.
+     * @return The Task that is parsed.
+     * @throws DukeException If the input is in the wrong format.
+     */
     public static Task parseToTaskFromFile(String fileInput) throws DukeException {
         // <type>\t<done>\t<name>\t<date>
         char type;
@@ -166,6 +178,13 @@ public class Parser {
         return t;
     }
 
+    /**
+     * Parses the user input into a command.
+     *
+     * @param input The string given by the user.
+     * @return A command representing the command to execute.
+     * @throws DukeException If the string entered is not of the correct form.
+     */
     public static Command parse(String input) throws DukeException {
 
         if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
@@ -184,11 +203,19 @@ public class Parser {
             return new DeleteTaskCommand(input);
         } else if (input.startsWith("find")) {
             return new FindCommand(input);
+        } else if (input.startsWith("update")) {
+            return UpdateCommand.of(input);
         }
 
         throw new DukeException("Invalid Command!");
     }
 
+    /**
+     * Parses a string into a LocalDateTime object.
+     *
+     * @param input The string to try to parse into a LocalDateTime object
+     * @return The LocalDateTime object if successfully parsed, null if it failed.
+     */
     public static LocalDateTime parseDateTime(String input) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         try {

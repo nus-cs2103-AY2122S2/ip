@@ -16,24 +16,16 @@ public class TaskManager {
         this.tasks.add(t);
     }
 
-    public boolean deleteTask(int index) {
-        if (tasks.size() == 0) {
-            return false;
-        } else {
-            if (index < 0 || index >= tasks.size()) {
-                return false;
-            } else {
-                Task t = tasks.get(index);
-                tasks.remove(index);
-                return true;
-            }
-        }
-    }
-
     public boolean deleteTask(Task t) {
         return tasks.remove(t);
     }
 
+    /**
+     * Marks a task as done in the current task list.
+     *
+     * @param index The index of the task in this task list.
+     * @return True if the task is successfully marked, false otherwise.
+     */
     public boolean markTaskDone(int index) {
         if (tasks.size() <= 0) {
             return false;
@@ -46,15 +38,13 @@ public class TaskManager {
             }
         }
     }
-    public boolean markTaskDone(Task t) {
-        if (t.getDone() == ' ') {
-            tasks.get(tasks.indexOf(t)).markDone();
-            return true;
-        }
-        return false;
-    }
 
-
+    /**
+     * Marks a task as undone in the current task list.
+     *
+     * @param index The index of the task in this task list.
+     * @return True if the task is successfully unmarked, false otherwise.
+     */
     public boolean markTaskUndone(int index) {
         if (tasks.size() <= 0) {
             return false;
@@ -66,13 +56,6 @@ public class TaskManager {
                 return t.markUndone();
             }
         }
-    }
-    public boolean markTaskUndone(Task t) {
-        if (t.getDone() == 'X') {
-            tasks.get(tasks.indexOf(t)).markUndone();
-            return true;
-        }
-        return false;
     }
 
     public ArrayList<Task> getTaskList() {

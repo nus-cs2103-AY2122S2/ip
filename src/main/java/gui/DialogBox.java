@@ -3,7 +3,6 @@ package gui;
 import java.io.IOException;
 import java.util.Collections;
 
-import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
 import duke.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,8 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import java.lang.Math;
 
 /**
  * An example of a custom control using FXML.
@@ -65,7 +62,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getStartingBanner(Image img){
+    public static DialogBox getStartingBanner(Image img) {
         Ui ui = new Ui();
         var db = new DialogBox(ui.showBanner(), img);
         db.flip();
@@ -73,7 +70,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getHelpBanner(Image img){
+    public static DialogBox getHelpBanner(Image img) {
         Ui ui = new Ui();
         var db = new DialogBox(ui.showHelpMenu(), img);
         db.flip();
