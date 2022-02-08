@@ -96,8 +96,8 @@ public class TaskList {
     public Stream<Task> stream() {
         return taskList.stream();
     }
-  
-    /* Retrieves the task pointed to, marks it as done and outputs
+
+    /** Retrieves the task pointed to, marks it as done and outputs
      * the task.
      *
      * @param pointer 1-based index of the task.
