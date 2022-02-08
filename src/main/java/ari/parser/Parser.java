@@ -109,7 +109,7 @@ public class Parser {
      * @throws EmptyCommandException if description is empty
      */
     private String getArgument(String command) throws EmptyCommandException {
-        String[] cmdArray = command.split(" ");
+        String[] commandArray= command.split(" ");
 
         if (cmdArray.length == 1) {
             throw new EmptyCommandException();
