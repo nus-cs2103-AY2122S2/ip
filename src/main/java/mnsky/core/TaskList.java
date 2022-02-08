@@ -12,6 +12,10 @@ import mnsky.task.Event;
 import mnsky.task.Task;
 
 public class TaskList {
+    private static final int CMD_INDEX = 0;
+    private static final int NAME_INDEX = 1;
+    private static final int PARAMETER_INDEX = 2;
+    private static final int MARK_INDEX = 3;
     private ArrayList<Task> tasks;
 
     /**
@@ -183,25 +187,23 @@ public class TaskList {
         ArrayList<ArrayList<String>> taskList = Parser.parseStorageData(storage.readFromDataFile());
         for (ArrayList<String> task : taskList) {
             Task actualTask;
-            switch (task.get(0)) {
+
+            switch (task.get(CMD_INDEX)) {
             case "task":
-                actualTask = addTask(task.get(1));
+                actualTask = addTask(task.get(NAME_INDEX));
                 break;
-
             case "event":
-                actualTask = addEvent(task.get(1), task.get(2));
+                actualTask = addEvent(task.get(NAME_INDEX), task.get(PARAMETER_INDEX));
                 break;
-
             case "deadline":
-                actualTask = addDeadline(task.get(1), task.get(2));
+                actualTask = addDeadline(task.get(NAME_INDEX), task.get(PARAMETER_INDEX));
                 break;
-
             default:
                 throw new MnskyException("????");
             }
 
             if (actualTask != null) {
-                if (task.get(3).equals("X")) {
+                if (task.get(MARK_INDEX).equals("X")) {
                     actualTask.mark();
                 }
             }

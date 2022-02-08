@@ -8,6 +8,10 @@ import mnsky.exceptions.MnskyException;
 import mnsky.exceptions.MnskyMissingParameterException;
 
 public class Parser {
+    private static final int MARK_INDEX = 4;
+    private static final int MIN_TASK_CMD_LENGTH = 2;
+    private static final int MIN_INDEX_CMD_LENGTH = 2;
+    private static final int MIN_FIND_CMD_LENGTH = 2;
     /**
      * Retrieves and returns the value of the index parameter from the input.
      * @param command The name of the command that called this function.
@@ -16,11 +20,11 @@ public class Parser {
      * @throws MnskyMissingParameterException If the index parameter is missing.
      */
     private static String retrieveIndex(String command, String[] inputSplit) throws MnskyMissingParameterException {
-        if (inputSplit.length < 2) {
+        if (inputSplit.length < MIN_INDEX_CMD_LENGTH) {
             throw new MnskyMissingParameterException(command, "index");
         }
 
-        return inputSplit[1];
+        return inputSplit[MIN_INDEX_CMD_LENGTH - 1];
     }
 
     /**
@@ -31,11 +35,11 @@ public class Parser {
      */
     private static ArrayList<String> parseTask(String input) throws MnskyMissingParameterException {
         String[] inputSplit = input.split(" ", 2);
-        if (inputSplit.length < 2) {
+        if (inputSplit.length < MIN_TASK_CMD_LENGTH) {
             throw new MnskyMissingParameterException("todo", "name");
         }
 
-        return new ArrayList<>(List.of("task", inputSplit[1]));
+        return new ArrayList<>(List.of("task", inputSplit[MIN_TASK_CMD_LENGTH - 1], ""));
     }
 
     /**
@@ -45,7 +49,7 @@ public class Parser {
      * @throws MnskyMissingParameterException Thrown if the name or the by parameter is missing.
      */
     private static ArrayList<String> parseDeadline(String[] inputSplit) throws MnskyMissingParameterException {
-        if (inputSplit.length < 2) {
+        if (inputSplit.length < MIN_TASK_CMD_LENGTH) {
             throw new MnskyMissingParameterException("deadline", "name");
         }
 
@@ -60,8 +64,11 @@ public class Parser {
             throw new MnskyMissingParameterException("deadline", "by");
         }
 
-        String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, byIndex));
-        String by = String.join(" ", Arrays.copyOfRange(inputSplit, byIndex + 1, inputSplit.length));
+        String[] deadlineNameSplit = Arrays.copyOfRange(inputSplit, 1, byIndex);
+        String[] bySplit = Arrays.copyOfRange(inputSplit, byIndex + 1, inputSplit.length);
+
+        String deadlineName = String.join(" ", deadlineNameSplit);
+        String by = String.join(" ", bySplit);
 
         return new ArrayList<>(List.of("deadline", deadlineName, by));
     }
@@ -88,19 +95,22 @@ public class Parser {
             throw new MnskyMissingParameterException("event", "at");
         }
 
-        String eventName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, atIndex));
-        String at = String.join(" ", Arrays.copyOfRange(inputSplit, atIndex + 1, inputSplit.length));
+        String[] eventNameSplit = Arrays.copyOfRange(inputSplit, 1, atIndex);
+        String[] atSplit = Arrays.copyOfRange(inputSplit, atIndex + 1, inputSplit.length);
+
+        String eventName = String.join(" ", eventNameSplit);
+        String at = String.join(" ", atSplit);
 
         return new ArrayList<>(List.of("event", eventName, at));
     }
 
     private static String retrieveSearchTerm(String input) {
         String[] inputSplit = input.split(" ", 2);
-        if (inputSplit.length < 2) {
+        if (inputSplit.length < MIN_FIND_CMD_LENGTH) {
             throw new MnskyMissingParameterException("find", "search_term");
         }
 
-        return inputSplit[1];
+        return inputSplit[MIN_FIND_CMD_LENGTH - 1];
     }
 
     /**
@@ -126,10 +136,7 @@ public class Parser {
                 }
 
                 if (nextTask != null) {
-                    if (nextTask.size() < 3) {
-                        nextTask.add("");
-                    }
-                    nextTask.add(line.substring(4, 5));
+                    nextTask.add(line.substring(MARK_INDEX, MARK_INDEX + 1));
                     tasks.add(nextTask);
                 }
             }

@@ -11,6 +11,7 @@ import java.util.Scanner;
 import mnsky.exceptions.MnskyException;
 
 public class Storage {
+    private static String dataFolderName = "data/";
     private String dataFilePath;
 
     /**
@@ -25,7 +26,7 @@ public class Storage {
      * Creates the data folder.
      */
     private void createDataFolder() {
-        File newFolder = new File("data/");
+        File newFolder = new File(dataFolderName);
         newFolder.mkdir();
     }
 
