@@ -79,6 +79,8 @@ public class Parser {
                 return new ByeCommand(inputArray);
             } else if (Command.CommandType.LIST.equals(firstArg)) {
                 return new ListCommand(inputArray);
+            } else if (Command.CommandType.isCommandType(firstArg)) {
+                throw new DukeMissingArgumentException(firstArg);
             } else {
                 throw new DukeCommandException(firstArg);
             }
@@ -102,13 +104,15 @@ public class Parser {
                 int indexOfBy = inputCommand.lastIndexOf("\\by ");
                 if (indexOfBy == -1) {
                     throw new DukeMissingArgumentException("\\by deadlineTime");
-                } else {
+                } else if (indexOfBy <= 0) {
                     String by = inputCommand.substring(indexOfBy + 4);
                     content = inputCommand.substring(9, indexOfBy - 1);
                     LocalDateTime date = null;
                     date = parseDateTime(by);
                     Task taskObj = new Deadline(content, date);
                     return new AddCommand(taskObj, inputArray);
+                } else {
+                    throw new DukeException("unknown error occurred");
                 }
             } else if (Command.CommandType.EVENT.equals(firstArg)) {
                 if (secondArg.equals("\\by")) {
@@ -118,13 +122,15 @@ public class Parser {
                 int indexOfAt = inputCommand.lastIndexOf("\\at ");
                 if (indexOfAt == -1) {
                     throw new DukeMissingArgumentException("\\at eventTime");
-                } else {
+                } else if (indexOfAt >= 0) {
                     String by = inputCommand.substring(indexOfAt + 4);
                     content = inputCommand.substring(6, indexOfAt - 1);
                     LocalDateTime date = null;
                     date = parseDateTime(by);
                     Task taskObj = new Event(content, date);
                     return new AddCommand(taskObj, inputArray);
+                } else {
+                    throw new DukeException("unknown error occurred");
                 }
             } else if (Command.CommandType.TODO.equals(firstArg)) {
                 String content = "";
