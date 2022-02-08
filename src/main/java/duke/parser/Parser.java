@@ -41,7 +41,11 @@ public class Parser {
                 break;
 
             case LIST:
-                ui.printMessage(tasks.toString());
+                if (tasks.getIsEmpty()) {
+                    ui.printMessage("There are no tasks in your list.");
+                } else {
+                    ui.printMessage(tasks.toString());
+                }
                 break;
 
             case MARK:

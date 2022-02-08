@@ -32,7 +32,12 @@ public class Ui {
                 dukeImage));
     }
 
+    /**
+     * Prints a reply to the user.
+     * @param inputTxt A non-empty string which the bot will be using to reply.
+     */
     public void printMessage(String inputTxt) {
+        assert !inputTxt.isEmpty() : "Assertion failed on Ui.printMessage(): inputTxt is empty";
         this.container.getChildren().addAll(DialogBox.getDukeDialog(inputTxt, dukeImage));
     }
 
@@ -45,6 +50,7 @@ public class Ui {
      * @param errorMsg The error message to display to the user
      */
     public void printError(String errorMsg) {
+        assert !errorMsg.isEmpty() : "Assertion failed on Ui.printError(): errorMsg is empty";
         String em = String.format("☹ OOPS!!! %s", errorMsg);
         this.container.getChildren().addAll(DialogBox.getDukeDialog(em, dukeImage));
     }
