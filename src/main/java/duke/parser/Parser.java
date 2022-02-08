@@ -20,7 +20,7 @@ import duke.exception.DukeException;
  * This class acts as a parser that parses user inputs into specific commands.
  */
 public class Parser {
-    private static final int OFFSET = 1;
+    private static final int ARRAY_INDEX_OFFSET = 1;
 
     /**
      * Parses the input string entered by user into a command known to the application.
@@ -43,13 +43,13 @@ public class Parser {
             case "find":
                 return new FindTaskCommand(commandTokens[1]);
             case "mark":
-                int indexOfTaskToMark = Integer.parseInt(commandTokens[1]) - OFFSET;
+                int indexOfTaskToMark = Integer.parseInt(commandTokens[1]) - ARRAY_INDEX_OFFSET;
                 return new MarkTaskCommand(indexOfTaskToMark);
             case "unmark":
-                int indexOfTaskToUnmark = Integer.parseInt(commandTokens[1]) - OFFSET;
+                int indexOfTaskToUnmark = Integer.parseInt(commandTokens[1]) - ARRAY_INDEX_OFFSET;
                 return new UnmarkTaskCommand(indexOfTaskToUnmark);
             case "delete":
-                int indexOfTaskToDelete = Integer.parseInt(commandTokens[1]) - OFFSET;
+                int indexOfTaskToDelete = Integer.parseInt(commandTokens[1]) - ARRAY_INDEX_OFFSET;
                 return new DeleteTaskCommand(indexOfTaskToDelete);
             case "todo":
                 return new AddToDoTaskCommand(commandTokens[1]);

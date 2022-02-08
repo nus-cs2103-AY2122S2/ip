@@ -29,19 +29,25 @@ public class TaskList {
      */
     public void populateWith(String[] data) throws DukeException {
         try {
-            numberOfTasks = data.length;
-            for (int i = 0; i < numberOfTasks; i++) {
+            for (int i = 0; i < data.length; i++) {
                 String[] tokens = data[i].split(",");
-                if (tokens[0].equals("T")) {
-                    tasks.add(new ToDo(tokens[1]));
-                } else if (tokens[0].equals("E")) {
-                    tasks.add(new Event(tokens[1], tokens[2]));
-                } else if (tokens[0].equals("D")) {
-                    tasks.add(new Deadline(tokens[1], LocalDate.parse(tokens[2])));
+                String taskType = tokens[0];
+                String description = tokens[1];
+                String additionalInfo = tokens[2];
+                boolean marked = tokens[3].equals("X");
+                
+                if (taskType.equals("T")) {
+                    tasks.add(new ToDo(description));
+                } else if (taskType.equals("E")) {
+                    tasks.add(new Event(description, additionalInfo));
+                } else if (taskType.equals("D")) {
+                    tasks.add(new Deadline(description, LocalDate.parse(additionalInfo)));
                 } else {
                     throw new IllegalArgumentException();
                 }
-                if (tokens[3].equals("X")) {
+                numberOfTasks++;
+
+                if (marked) {
                     tasks.get(i).mark();
                 }
             }
@@ -57,9 +63,11 @@ public class TaskList {
      */
     public String[] formatAsFileData() {
         String[] data = new String[numberOfTasks];
+
         for (int i = 0; i < numberOfTasks; i++) {
             data[i] = tasks.get(i).toFileFormat();
         }
+
         return data;
     }
 
