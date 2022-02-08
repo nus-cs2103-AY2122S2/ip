@@ -96,4 +96,13 @@ public class TextUi {
     public String showEmptyMsg() {
         return "Empty Much!";
     }
+
+    /**
+     * Method that tells the user that an action has been undone
+     * @param action The command that has been undone
+     * @return Action undone string
+     */
+    public String showUndoMsg(String action) {
+        return action + " has been undone!";
+    }
 }

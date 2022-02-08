@@ -29,9 +29,24 @@ public class Unmark extends Command {
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
         try {
-            return TaskList.markTask(taskId, false);
+            return taskList.markTask(taskId, false);
         } catch (DukeException e) {
             return e.getMessage();
         }
     }
+
+    /**
+     * Method that undoes an unmark command
+     * @param taskList tasks stored in duke
+     * @return message after an unmark command has been undone
+     */
+    @Override
+    public String undo(TaskList taskList) {
+        try {
+            return taskList.markTask(taskId, true);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
 }

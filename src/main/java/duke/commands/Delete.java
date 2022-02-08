@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Storage;
 import duke.TextUi;
 import duke.exceptions.DukeException;
+import tasks.Task;
 import tasks.TaskList;
 
 /**
@@ -10,6 +11,7 @@ import tasks.TaskList;
  */
 public class Delete extends Command {
     private final Integer taskId;
+    private Task deletedTask;
 
     /**
      * Initialize a Delete Command
@@ -29,9 +31,22 @@ public class Delete extends Command {
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
         try {
+            deletedTask = taskList.getTasks().get(taskId - 1);
             return TaskList.deleteTask(taskId);
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Method that undoes a delete command
+     * @param taskList tasks that are stored in Duke
+     * @return message after a delete command has been undone
+     * @throws DukeException in the event that the action is unable to be written into
+     * storage file
+     */
+    @Override
+    public String undo(TaskList taskList) throws DukeException {
+        return taskList.addTaskBack(taskId, deletedTask);
     }
 }

@@ -29,9 +29,25 @@ public class Mark extends Command {
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
         try {
-            return TaskList.markTask(taskId, true);
+            return taskList.markTask(taskId, true);
         } catch (DukeException e) {
             return e.getMessage();
         }
     }
+
+    /**
+     * Method that undoes a mark command
+     * @param taskList tasks stored in Duke
+     * @return message after a mark command has been undone
+     */
+    @Override
+    public String undo(TaskList taskList) {
+        try {
+            return taskList.markTask(taskId, false);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
 }
+

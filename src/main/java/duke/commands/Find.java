@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TextUi;
+import duke.exceptions.UndoException;
 import tasks.TaskList;
 
 /**
@@ -28,7 +29,12 @@ public class Find extends Command {
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
-        return TaskList.findTask(query);
+        return taskList.findTask(query);
+    }
+
+    @Override
+    public String undo(TaskList taskList) throws UndoException {
+        throw new UndoException("NOTHING");
     }
 
 }

@@ -36,9 +36,21 @@ public class AddToDo extends Command {
                 throw new DukeException("Todo command is invalid!");
             }
             Task todo = new Todo(taskDetails);
-            return TaskList.addTask(todo);
+            return taskList.addTask(todo);
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Method that undoes an add todo command
+     * @param taskList tasks that are stored in Duke
+     * @return message after an add todo command has been undone
+     * @throws DukeException in the event that the action is unable to be written into
+     * storage file
+     */
+    @Override
+    public String undo(TaskList taskList) throws DukeException {
+        return taskList.deleteLastTask();
     }
 }

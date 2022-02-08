@@ -44,4 +44,16 @@ public class AddDeadline extends Command {
             return e.getMessage();
         }
     }
+
+    /**
+     * Method that undoes an add deadline command
+     * @param taskList tasks that are stored in Duke
+     * @return message after an add deadline command has been undone
+     * @throws DukeException in the event that the action is unable to be written into
+     * storage file
+     */
+    @Override
+    public String undo(TaskList taskList) throws DukeException {
+        return taskList.deleteLastTask();
+    }
 }
