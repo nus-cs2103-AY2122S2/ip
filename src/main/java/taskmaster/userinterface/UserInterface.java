@@ -55,7 +55,7 @@ public class UserInterface {
 
     public String displayListOfCommand() {
         String result = "";
-        result += "Available Commands:\n";
+        result += "Available Commands in the program:\n";
         result += "List                                  -List out all your current tasks\n";
         result += "todo <task>                          -Add a todo task without any deadline"
                             + " specified\n";
