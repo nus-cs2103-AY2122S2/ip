@@ -1,6 +1,5 @@
 package duke;
 
-//import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.util.Parser;
 import duke.util.Save;
@@ -31,9 +30,6 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             String output = "\n" + c.execute(this.taskList, this.save);
-            //if (c instanceof ByeCommand) {
-            //      this.save.save();
-            //}
             return output;
         } catch (NullPointerException e) {
             return "This command is invalid";
