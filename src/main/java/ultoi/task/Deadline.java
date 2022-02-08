@@ -1,7 +1,7 @@
 package ultoi.task;
 
-import ultoi.util.DateTime;
 import ultoi.util.UltoiException;
+import ultoi.util.DateTime;
 
 /**
  * Represents a deadline task.
