@@ -40,15 +40,18 @@ public class AddTodoCommand extends Command<String> {
         String err = "Oh no! The description of todo cannot be empty... Try again :)\n";
         String response = "";
         if (echo.length == 1) {
+            assert false : "The description for to do is empty";
             throw new DukeException(err);
         }
         String description = echo[1];
         if (description.isEmpty()) {
+            assert false : "The description for to do event is empty";
             throw new DukeException(err);
         }
         Todo curr = new Todo(description);
         list.addTask(curr);
         response = Ui.showAddResponse(curr.toString(), list.getSize());
+        assert response != null;
         try {
             storage.writeToFile(list);
         } catch (IOException e) {

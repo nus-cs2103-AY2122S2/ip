@@ -28,6 +28,7 @@ public class ListCommand extends Command<String> {
         String response = "";
         response = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.getSize(); i++) {
+            assert list.getTask(i).toString() != null;
             response = response + (i + 1) + "." + list.getTask(i).toString() + "\n";
         }
         return response;
