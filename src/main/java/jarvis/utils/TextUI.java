@@ -27,7 +27,7 @@ public class TextUI {
      *
      * @return the next command
      */
-    public String nextCmd() {
+    public String getNextCmd() {
         return sc.nextLine();
     }
 

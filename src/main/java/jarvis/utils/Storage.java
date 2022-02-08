@@ -21,9 +21,6 @@ public class Storage {
     private static final String FILENAME = "duke.txt";
     private static final Path FILE_PATH = Paths.get(ROOT_FOLDER, DATA_DIR, FILENAME);
 
-    public Storage() {
-    }
-
     /**
      * Checks if the file exists.
      *

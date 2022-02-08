@@ -1,5 +1,7 @@
 package jarvis.gui;
 
+import java.util.Objects;
+
 import jarvis.Jarvis;
 import jarvis.utils.TextUI;
 import javafx.fxml.FXML;
@@ -25,8 +27,10 @@ public class MainWindow extends AnchorPane {
 
     private Jarvis duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
+    private final Image userImage = new Image(
+        Objects.requireNonNull(this.getClass().getResourceAsStream("/images/user.png")));
+    private final Image dukeImage = new Image(
+        Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jarvis.png")));
 
     /**
      * Initialize the main window.
