@@ -81,7 +81,7 @@ public class Storage {
                     }
                     break;
                 default:
-                    // Do nothing
+                    throw new DukeException("Incorrect format in Memory!");
                 }
                 listOfTasks.add(task);
                 st = reader.readLine();

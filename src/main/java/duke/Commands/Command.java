@@ -65,13 +65,13 @@ public class Command {
 
         if (index < 0 || index > listOfTasks.size() - 1) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
-        } else {
-            Task removedTask = listOfTasks.remove(index);
-            StringBuilder toPrint = new StringBuilder("Noted. I've removed this task:\n");
-            toPrint.append(removedTask.toString()).append("\n");
-            toPrint.append(listStatus(listOfTasks));
-            return toPrint.toString();
         }
+
+        Task removedTask = listOfTasks.remove(index);
+        StringBuilder toPrint = new StringBuilder("Noted. I've removed this task:\n");
+        toPrint.append(removedTask.toString()).append("\n");
+        toPrint.append(listStatus(listOfTasks));
+        return toPrint.toString();
     }
 
     private static String listTasks(TaskList listOfTasks) {
@@ -91,6 +91,7 @@ public class Command {
         if (index < 0 || index > listOfTasks.size() - 1) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
+
         Task toMark = listOfTasks.get(index);
         toMark.mark();
         StringBuilder toPrint = new StringBuilder("Nice! I've marked this task as done:\n").append(toMark)
@@ -103,6 +104,7 @@ public class Command {
         if (index < 0 || index > listOfTasks.size() - 1) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
+
         Task toUnmark = listOfTasks.get(index);
         toUnmark.unmark();
         StringBuilder toPrint = new StringBuilder("OK, I've marked this task as not done yet:\n")
