@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 import duke.exception.InvalidActionException;
 
 /** Superclass of concrete classes that can be added to the task list */
@@ -7,6 +9,7 @@ public abstract class Task {
     protected String name;
     protected String label;
     protected boolean isDone;
+    protected Reminder reminder;
 
     protected Task(String name, String label) {
         this(name, label, false);
@@ -28,6 +31,15 @@ public abstract class Task {
     public String toString() {
         String status = isDone ? "X" : " ";
         return "[" + label + "][" + status + "] " + name;
+    }
+
+    /**
+     * Returns the description of the Task.
+     *
+     * @return The description of the task.
+     */
+    public String getDescription() {
+        return this.name;
     }
 
     /**
@@ -64,5 +76,23 @@ public abstract class Task {
             return label + " | 1 | " + name;
         }
         return label + " | 0 | " + name;
+    }
+
+    /**
+     * Sets a reminder for the task.
+     *
+     * @param dateTime The time to remind the user of the task.
+     */
+    public void setReminder(LocalDateTime dateTime) {
+        reminder = new Reminder(dateTime);
+    }
+
+    /**
+     * Returns the reminder attached to this task.
+     *
+     * @return The reminder attached to this task.
+     */
+    public Reminder getReminder() {
+        return reminder;
     }
 }

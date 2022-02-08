@@ -2,11 +2,12 @@ package duke.ui;
 
 import java.util.ArrayList;
 
+import duke.task.Reminder;
 import duke.task.Task;
 
 /** Contains functionality relating to generating Duke's responses */
 public class ResponseGenerator {
-    private String logo;
+    private final String logo;
 
     /**
      * Creates a new Ui instance.
@@ -91,6 +92,27 @@ public class ResponseGenerator {
         message.append(latestTask.toString());
         message.append("\nNow there are " + size + " tasks on the list x)");
         return message.toString();
+    }
+
+    /**
+     * Returns the message to be printed when a reminder is added.
+     *
+     * @param task The task to remind the user of.
+     * @param reminderTime The time to remind the user.
+     * @return The message to be printed when a reminder is added.
+     */
+    public String getAddReminderMessage(Task task, Reminder reminderTime) {
+        return "Reminder at " + reminderTime.toString() + " for task: " + task.getDescription();
+    }
+
+    /**
+     * Returns the message to be printed when a reminder is gotten.
+     *
+     * @param t The task to remind about.
+     * @return The message to be printed to remind the user.
+     */
+    public String getReminderMessage(Task t) {
+        return "!Reminder! " + t.getDescription() + " at " + t.getReminder().getDateTime();
     }
 
     /**

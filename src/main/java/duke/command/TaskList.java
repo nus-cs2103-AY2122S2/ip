@@ -26,6 +26,17 @@ public class TaskList {
     }
 
     /**
+     * Returns the task specified by the index.
+     *
+     * @param index The task number to get.
+     * @return The task specified by the index.
+     */
+    public Task getTask(int index) {
+        assert list.size() > index;
+        return list.get(index);
+    }
+
+    /**
      * Returns the task last added to the list.
      *
      * @return The task last added to the list.
@@ -53,7 +64,7 @@ public class TaskList {
      */
     public String markItemDone(int index) throws InvalidActionException {
         assert index < size();
-        Task t = list.get(index);
+        Task t = getTask(index);
         t.markAsDone();
         return "Task done! \\(n_n)/\n " + t.toString();
     }
@@ -67,7 +78,7 @@ public class TaskList {
      */
     public String markItemUndone(int index) throws InvalidActionException {
         assert index < size();
-        Task t = list.get(index);
+        Task t = getTask(index);
         t.markUndone();
         return "Task not done =(\n " + t.toString();
     }

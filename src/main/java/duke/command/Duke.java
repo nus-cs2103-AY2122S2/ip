@@ -72,6 +72,9 @@ public class Duke {
                     int index = parser.parseNumericalDescription(input, command, taskList.size());
                     storage.deleteTask(index);
                     return taskList.deleteItem(index);
+                } else if (command.equals("remind")) {
+                    Task task = parser.parseReminderDescription(input, taskList);
+                    return responseGenerator.getAddReminderMessage(task, task.getReminder());
                 } else if (command.equals("find")) {
                     String query = parser.parseStringDescription(input, command);
                     return responseGenerator.printFoundItems(taskList.findItems(query));

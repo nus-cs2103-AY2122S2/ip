@@ -1,10 +1,13 @@
 package duke.ui;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.PatternSyntaxException;
 
+import duke.command.TaskList;
 import duke.exception.IncompleteInputException;
 import duke.exception.WrongInputException;
 import duke.task.Deadline;
@@ -14,7 +17,8 @@ import duke.task.Todo;
 
 /** Helps to make sense of user input */
 public class Parser {
-    private String[] acceptableInputs = new String[]{"mark", "unmark", "todo", "deadline", "event", "delete", "find"};
+    private final String[] acceptableInputs = new String[]{"mark", "unmark", "todo", "deadline", "event",
+        "delete", "find", "remind"};
 
     /**
      * Creates a new Parser instance.
@@ -107,14 +111,13 @@ public class Parser {
                     for (int i = 1; i < description.length; i++) {
                         firstPart.append(description[i]);
                         if (i < description.length - 1) {
-                            firstPart.append(command + " ");
+                            firstPart.append(command).append(" ");
                         }
                     }
                     finalDescription[0] = firstPart.toString();
                 }
                 finalDescription[1] = inputs[1];
             } else {
-                assert inputs.length > 2;
                 // "format" occurs more than once; time is taken to be the string beyond the last occurrence
                 String[] description = inputs[0].split(command + " ");
                 StringBuilder firstPart = new StringBuilder();
@@ -124,13 +127,13 @@ public class Parser {
                     for (int i = 1; i < description.length; i++) {
                         firstPart.append(description[i]);
                         if (i < description.length - 1) {
-                            firstPart.append(command + " ");
+                            firstPart.append(command).append(" ");
                         }
                     }
                 }
                 for (int i = 1; i < inputs.length - 1; i++) {
                     if (i < inputs.length - 1) {
-                        firstPart.append(" " + format + " ");
+                        firstPart.append(" ").append(format).append(" ");
                     }
                     firstPart.append(inputs[i]);
                 }
@@ -165,10 +168,47 @@ public class Parser {
         for (int i = 1; i < inputs.length; i++) {
             finalDescription.append(inputs[i]);
             if (i < inputs.length - 1) {
-                finalDescription.append(command + " ");
+                finalDescription.append(command).append(" ");
             }
         }
         return finalDescription.toString();
+    }
+
+    /**
+     * Adds a reminder to the task with task number specified in the user input
+     * and returns the task.
+     *
+     * @param input The user input.
+     * @param taskList The task list to retrieve the task from.
+     * @return The task specified by the task number in the user input.
+     * @throws WrongInputException If the input format does not match the required format.
+     */
+    public Task parseReminderDescription(String input, TaskList taskList) throws WrongInputException {
+        String[] inputs = input.split(" ");
+        if (inputs.length != 4) {
+            throw new WrongInputException("Unrecognized format D: D: D:"
+                    + " Please reformat in 'remind [task number] [reminder date in YYYY-MM-DD]"
+                    + "[reminder time in HH:MM]'!");
+        }
+        assert inputs[0].equals("remind");
+        try {
+            int index = Integer.parseInt(inputs[1]) - 1;
+            if (index >= taskList.size() || index < 0) {
+                throw new WrongInputException("Task with specified index does not exist!");
+            }
+            Task taskToRemind = taskList.getTask(index);
+            LocalDate reminderDate = LocalDate.parse(inputs[2]);
+            LocalTime reminderTime = LocalTime.parse(inputs[3]);
+            taskToRemind.setReminder(LocalDateTime.of(reminderDate, reminderTime));
+            return taskToRemind;
+        } catch (NumberFormatException e) {
+            throw new WrongInputException("Cannot recognize task number D: D: Please reformat in "
+                    + "'remind [task number] [reminder date in YYYY-MM-DD]"
+                    + "[reminder time in HH:MM]' format!");
+        } catch (DateTimeParseException e) {
+            throw new WrongInputException("Cannot recognize date/time format D: D: "
+                    + "Date should be in YYYY-MM-DD and time should be in HH:MM!");
+        }
     }
 
     /**
