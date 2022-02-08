@@ -74,18 +74,19 @@ public class Storage {
      * @return Returns an array list of the tasks loaded from the file.
      */
     public ArrayList<Task> load() {
-        ArrayList<Task> arrayList = new ArrayList<>();
+        ArrayList<Task> newTaskList = new ArrayList<>();
         File file = new File("data/duke.txt");
         try {
             Scanner sc = new Scanner(file);
-            String line = sc.nextLine();
+            sc.nextLine();
             while (sc.hasNext()) {
+                String line;
                 line = sc.nextLine();
                 Character c = line.charAt(4);
                 if (c.equals('T')) {
                     String description = line.substring(10);
                     ToDo todo = new ToDo(description);
-                    arrayList.add(todo);
+                    newTaskList.add(todo);
                 }
                 if (c.equals('E')) {
                     int indexOfOpenBracket = line.indexOf('(');
@@ -93,7 +94,7 @@ public class Storage {
                     String description = line.substring(10, indexOfOpenBracket - 1);
                     String time = line.substring(indexOfOpenBracket + 4, indexOfCloseBracket);
                     Event event = new Event(description, time);
-                    arrayList.add(event);
+                    newTaskList.add(event);
                 }
                 if (c.equals('D')) {
                     int indexOfOpenBracket = line.indexOf('(');
@@ -103,12 +104,12 @@ public class Storage {
                     DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(" MMM dd yyyy h:mm a");
                     LocalDateTime dateTime = LocalDateTime.parse(time, outputFormat);
                     Deadline deadline = new Deadline(description, dateTime);
-                    arrayList.add(deadline);
+                    newTaskList.add(deadline);
                 }
             }
         } catch (FileNotFoundException e) {
             return new ArrayList<>();
         }
-        return arrayList;
+        return newTaskList;
     }
 }

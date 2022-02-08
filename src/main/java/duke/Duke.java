@@ -27,10 +27,10 @@ public class Duke {
     public String getResponse(String input) {
         String tempResult = "";
         try {
-            Command c = Parser.parseUserInput(input);
-            if (c != null) {
+            Command command = Parser.parseUserInput(input);
+            if (command != null) {
                 try {
-                    tempResult = c.execute(tasks, ui, storage);
+                    tempResult = command.execute(tasks, ui, storage);
                 } catch (IOException e) {
                     tempResult = e.getMessage();
                 }

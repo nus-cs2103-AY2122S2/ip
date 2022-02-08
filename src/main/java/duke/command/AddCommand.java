@@ -6,14 +6,14 @@ import java.time.LocalDateTime;
 import duke.List;
 import duke.Storage;
 import duke.Ui;
-import duke.task.Tasks;
+import duke.task.TaskType;
 
 /**
  * Represents a Command which adds a Task to the task List.
  */
 public class AddCommand extends Command {
 
-    private Tasks taskType;
+    private TaskType taskType;
     private String description;
     private String time;
     private LocalDateTime localDateTime;
@@ -25,7 +25,7 @@ public class AddCommand extends Command {
      * @param description Description of the Task to be added.
      * @param time Time the Task added occurs at.
      */
-    public AddCommand(Tasks taskType, String description, String time) {
+    public AddCommand(TaskType taskType, String description, String time) {
         super(false);
         this.taskType = taskType;
         this.description = description;
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
      * @param taskType TaskType of the Task to be added.
      * @param description Description of the Task to be added.
      */
-    public AddCommand(Tasks taskType, String description) {
+    public AddCommand(TaskType taskType, String description) {
         super(false);
         this.taskType = taskType;
         this.description = description;
@@ -51,7 +51,7 @@ public class AddCommand extends Command {
      * @param description Description of the Task to be added.
      * @param localDateTime Local date and time of the Task that is added.
      */
-    public AddCommand(Tasks taskType, String description, LocalDateTime localDateTime) {
+    public AddCommand(TaskType taskType, String description, LocalDateTime localDateTime) {
         super(false);
         this.taskType = taskType;
         this.description = description;
@@ -69,8 +69,8 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(List taskList, Ui ui, Storage storage) throws IOException {
-        if (taskType == Tasks.DEADLINE) {
-            taskList.add(taskType, description, localDateTime);
+        if (taskType == TaskType.DEADLINE) {
+            taskList.add(description, localDateTime);
         } else {
             taskList.add(taskType, description, time);
         }

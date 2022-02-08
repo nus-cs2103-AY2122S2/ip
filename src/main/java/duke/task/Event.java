@@ -5,16 +5,16 @@ package duke.task;
  * and String timing of which the event is occuring at.
  */
 public class Event extends Task {
-    private String at;
+    private String dateAndTime;
 
     /**
      * Constructs an event task.
      * @param description Description of event task.
-     * @param at Date and time string of event task.
+     * @param dateAndTime Date and time string of event task.
      */
-    public Event(String description, String at) {
+    public Event(String description, String dateAndTime) {
         super(description);
-        this.at = at;
+        this.dateAndTime = dateAndTime;
     }
 
     /**
@@ -24,6 +24,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
+        return "[E]" + super.toString() + " (at:" + dateAndTime + ")";
     }
 }

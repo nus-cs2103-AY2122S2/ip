@@ -12,7 +12,7 @@ import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
 import duke.command.UnmarkDoneCommand;
 import duke.exception.DukeException;
-import duke.task.Tasks;
+import duke.task.TaskType;
 
 
 /**
@@ -21,16 +21,16 @@ import duke.task.Tasks;
 public class Parser {
 
     private static void checkIfUserInputValid(String userInput) throws DukeException {
-        String str = userInput.trim();
+        String trimmedInput = userInput.trim();
 
-        if (str.equals("todo")
-                || str.equals("deadline")
-                || str.equals("event")
-                || str.equals("find")) {
-            throw new DukeException(("OOPS!!! The description of a " + str + " cannot be empty."));
+        if (trimmedInput.equals("todo")
+                || trimmedInput.equals("deadline")
+                || trimmedInput.equals("event")
+                || trimmedInput.equals("find")) {
+            throw new DukeException(("OOPS!!! The description of a " + trimmedInput + " cannot be empty."));
         }
 
-        if (str.equals("mark") || str.equals("unmark") || str.equals("delete")) {
+        if (trimmedInput.equals("mark") || trimmedInput.equals("unmark") || trimmedInput.equals("delete")) {
             throw new DukeException(("OOPS!!! Please input the number of the task."));
         }
 
@@ -73,7 +73,7 @@ public class Parser {
             return new DeleteCommand(index);
         } else if (userInput.startsWith("todo")) {
             String description = userInput.substring(5);
-            Tasks taskType = Tasks.TODO;
+            TaskType taskType = TaskType.TODO;
             return new AddCommand(taskType, description);
         } else if (userInput.startsWith("deadline")) {
             int start = userInput.indexOf("/");
@@ -81,13 +81,13 @@ public class Parser {
             String description = userInput.substring(9, start - 1);
             DateTimeFormatter sourceFormat = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(timing, sourceFormat);
-            Tasks taskType = Tasks.DEADLINE;
+            TaskType taskType = TaskType.DEADLINE;
             return new AddCommand(taskType, description, dateTime);
         } else if (userInput.startsWith("event")) {
             int start = userInput.indexOf("/");
             String timing = userInput.substring(start + 3);
             String description = userInput.substring(6, start - 1);
-            Tasks taskType = Tasks.EVENT;
+            TaskType taskType = TaskType.EVENT;
             return new AddCommand(taskType, description, timing);
         } else if (userInput.startsWith("find")) {
             String description = userInput.substring(5);

@@ -9,16 +9,16 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private LocalDateTime by;
+    private LocalDateTime dateAndTime;
 
     /**
      * Constructs a deadline task.
      * @param description Description of deadline task.
-     * @param by LocalDateTime of the deadline task.
+     * @param dateAndTime LocalDateTime of the deadline task.
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime dateAndTime) {
         super(description);
-        this.by = by;
+        this.dateAndTime = dateAndTime;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(" MMM dd yyyy h:mm a");
-        String outputDateTime = by.format(outputFormat);
+        String outputDateTime = dateAndTime.format(outputFormat);
         return "[D]" + super.toString() + " (by:" + outputDateTime + ")";
     }
 }
