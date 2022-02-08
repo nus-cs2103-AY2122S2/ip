@@ -49,6 +49,7 @@ application {
 
 shadowJar {
     archiveBaseName = "dazz"
+    archiveVersion = "0.2"
     archiveClassifier = null
 }
 

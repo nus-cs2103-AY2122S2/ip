@@ -179,7 +179,7 @@ public class Ui {
         } else {
             taskList.list();
             for (Task task : taskList.getTasks()) {
-                showListMessage =  showListMessage  + index++ + ". " + task + "\n";
+                showListMessage = showListMessage + index++ + ". " + task + "\n";
             }
         }
         return showListMessage;
