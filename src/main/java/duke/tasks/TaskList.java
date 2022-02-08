@@ -2,6 +2,7 @@ package duke.tasks;
 
 import duke.DukeException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -88,9 +89,32 @@ public class TaskList {
      */
     public ArrayList<Task> findTasks(String search) {
         ArrayList<Task> result = new ArrayList<Task>();
-        for (Task t : tasks) {
-            if (t.description.contains(search)) {
-                result.add(t);
+        for (Task task : tasks) {
+            if (task.description.contains(search)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Task> findUpcomingTask() {
+        ArrayList<Task> result = new ArrayList<Task>();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime endRange = now.plusDays(2);
+        for (Task task : tasks) {
+            boolean upcoming = false;
+            boolean withinOneDay = false;
+
+            if (task instanceof Deadline) {
+                upcoming = ((Deadline) task).dueDate.isAfter(now);
+                withinOneDay = ((Deadline) task).dueDate.isBefore(endRange);
+            } else if (task instanceof Event) {
+                upcoming = ((Event) task).eventDate.isAfter(now);
+                withinOneDay = ((Event) task).eventDate.isBefore(endRange);
+            }
+
+            if (upcoming && withinOneDay) {
+                result.add(task);
             }
         }
         return result;

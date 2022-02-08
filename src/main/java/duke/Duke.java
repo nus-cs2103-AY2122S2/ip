@@ -3,7 +3,10 @@ package duke;
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
+
+import java.util.ArrayList;
 
 /**
  * Initializes and starts the duke program.
@@ -33,5 +36,16 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    public String getReminders() {
+        ArrayList<Task> upcomingTasks = tasks.findUpcomingTask();
+        StringBuilder reminder = new StringBuilder();
+        String title = upcomingTasks.isEmpty() ? "You got no upcoming tasks." : "Upcoming Tasks:";
+        reminder.append(title);
+        for (Task task : upcomingTasks) {
+            reminder.append("\n  " + task.toString());
+        }
+        return reminder.toString();
     }
 }
