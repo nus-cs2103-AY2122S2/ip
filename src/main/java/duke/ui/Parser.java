@@ -197,9 +197,12 @@ public class Parser {
                 throw new WrongInputException("Task with specified index does not exist!");
             }
             Task taskToRemind = taskList.getTask(index);
-            LocalDate reminderDate = LocalDate.parse(inputs[2]);
-            LocalTime reminderTime = LocalTime.parse(inputs[3]);
-            taskToRemind.setReminder(LocalDateTime.of(reminderDate, reminderTime));
+            LocalDateTime reminderDateTime = LocalDateTime.of(LocalDate.parse(inputs[2]),
+                    LocalTime.parse(inputs[3]));
+            if (reminderDateTime.isBefore(LocalDateTime.now())) {
+                throw new WrongInputException("D: The specified date/time has already passed!");
+            }
+            taskToRemind.setReminder(reminderDateTime);
             return taskToRemind;
         } catch (NumberFormatException e) {
             throw new WrongInputException("Cannot recognize task number D: D: Please reformat in "
