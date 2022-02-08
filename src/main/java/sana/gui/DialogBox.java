@@ -1,12 +1,11 @@
 package sana.gui;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -34,6 +33,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for the DialogBox object
+     *
+     * @param text  text in the DialogBox
+     * @param img   image in the DialogBox
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -47,7 +52,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         this.setBackground(new Background(BACKGROUND_COLOR));
-        this.setPadding(new Insets(5,5,5,5));
+        this.setPadding(new Insets(5, 5, 5, 5));
     }
 
     /**
@@ -60,11 +65,27 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Returns a new DialogBox containing the user input
+     *
+     * @param l user input
+     * @param iv    user image
+     *
+     * @return  DialogBox with user input
+     */
     public static DialogBox getUserDialog(String l, Image iv) {
         var db = new DialogBox(l, iv);
         return db;
     }
 
+    /**
+     * Returns a new DialogBox containing sana;s response
+     *
+     * @param l     sana's response
+     * @param iv    sana's image
+     *
+     * @return  DialogBox with sana's response
+     */
     public static DialogBox getDukeDialog(String l, Image iv) {
         var db = new DialogBox(l, iv);
         db.setMinHeight(Region.USE_PREF_SIZE);

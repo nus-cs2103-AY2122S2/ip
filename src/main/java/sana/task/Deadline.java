@@ -36,6 +36,16 @@ public class Deadline extends Task {
         this.deadlineTime = LocalDate.parse(deadlineTime);
     }
 
+    /**
+     * Change the date of the task
+     *
+     * @param newDate   new date of the task
+     */
+    public void changeDate(LocalDate newDate) {
+        this.deadlineTime = newDate;
+    }
+
+
 
     /**
      * Returns a String representation of the Deadline

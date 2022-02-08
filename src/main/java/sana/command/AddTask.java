@@ -1,14 +1,14 @@
 package sana.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import sana.TaskList;
 import sana.exception.IncompleteCommandException;
 import sana.exception.UnknownCommandException;
 import sana.task.Deadline;
 import sana.task.Event;
 import sana.task.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class AddTask extends Command {
     /**
@@ -47,7 +47,7 @@ public class AddTask extends Command {
                 memory.updateMemory(taskList.toList());
 
                 return sanaResponse.addNewTask(newEvent, taskList.taskAmt());
-            } else if (args[0].equals("deadline")){ // task is a deadline
+            } else if (args[0].equals("deadline")) { // task is a deadline
                 String deadlineName = args[1];
                 LocalDate deadlineDate = LocalDate.parse(args[2]);
                 if (deadlineName.isBlank()) {

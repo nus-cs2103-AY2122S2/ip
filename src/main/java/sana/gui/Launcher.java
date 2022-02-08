@@ -1,7 +1,6 @@
 package sana.gui;
 
 import javafx.application.Application;
-import sana.Sana;
 
 /**
  * A launcher class to workaround classpath issues.

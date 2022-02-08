@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import sana.exception.MemoryNotFoundException;
 import sana.task.Deadline;
 import sana.task.Event;
 import sana.task.Task;

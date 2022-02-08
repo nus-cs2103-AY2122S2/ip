@@ -37,6 +37,15 @@ public class Event extends Task {
     }
 
     /**
+     * Change the date of the task
+     *
+     * @param newDate   new date of the task
+     */
+    public void changeDate(LocalDate newDate) {
+        this.eventTime = newDate;
+    }
+
+    /**
      * Returns a String representation of the Event
      *
      * @return  Event in String

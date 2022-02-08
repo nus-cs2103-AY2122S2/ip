@@ -7,6 +7,8 @@ import sana.command.FindCommand;
 import sana.command.ListCommand;
 import sana.command.MarkCommand;
 import sana.command.UnmarkCommand;
+import sana.command.UpdateCommand;
+import sana.exception.SanaException;
 import sana.exception.UnknownCommandException;
 
 
@@ -47,13 +49,13 @@ public class Sana {
      * @param userCommand   the user command
      */
     public String doCommand(String userCommand) {
-        String[] parsedCmd = parser.parseCommand(userCommand);
-        if (parsedCmd.length == 0) {
-            return new UnknownCommandException().getMessage();
-        }
-        String command = parsedCmd[0];
-
         try {
+            String[] parsedCmd = parser.parseCommand(userCommand);
+            if (parsedCmd.length == 0) {
+                return new UnknownCommandException().getMessage();
+            }
+
+            String command = parsedCmd[0];
             switch (command) {
             case "bye":
                 return new ByeCommand().executeCommand(parsedCmd, userTasks);
@@ -71,10 +73,12 @@ public class Sana {
                 return new DeleteCommand().executeCommand(parsedCmd, userTasks);
             case "find":
                 return new FindCommand().executeCommand(parsedCmd, userTasks);
+            case "update":
+                return new UpdateCommand().executeCommand(parsedCmd, userTasks);
             default:
                 throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException e) {
+        } catch (SanaException e) {
             return e.getMessage();
         }
     }

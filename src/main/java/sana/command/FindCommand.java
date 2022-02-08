@@ -1,9 +1,9 @@
 package sana.command;
 
+import java.util.LinkedList;
+
 import sana.TaskList;
 import sana.task.Task;
-
-import java.util.LinkedList;
 
 /**
  * Encapsulates the FindCommand

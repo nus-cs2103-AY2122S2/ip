@@ -6,7 +6,7 @@ package sana.exception;
  * @author Jan
  * @version 1.0
  */
-public class IncompleteCommandException extends Exception {
+public class IncompleteCommandException extends SanaException {
     /** The message Sana says when the message is incomplete */
     private static final String MESSAGE = "MATE, finish your sentence!";
 

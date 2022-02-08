@@ -14,6 +14,14 @@ public class SanaResponse {
     /** Constructor for the Ui object */
     public SanaResponse() {}
 
+    /**
+     * Returns sana's response wehn a new task is added
+     *
+     * @param taskAdded task that was added
+     * @param totalTaskAmount   total task amount in the tasklist
+     *
+     * @return  sana's response
+     */
     public String addNewTask(Task taskAdded, Integer totalTaskAmount) {
         assert totalTaskAmount >= 0;
         assert taskAdded != null;
@@ -25,6 +33,14 @@ public class SanaResponse {
         return responseText.toString();
     }
 
+    /**
+     * Returns sana's response when a task is deleted
+     *
+     * @param taskDeleted   task that was deleted
+     * @param totalTaskAmount   total task amount in the tasklist
+     *
+     * @return  sana's response
+     */
     public String deleteTask(Task taskDeleted, Integer totalTaskAmount) {
         assert totalTaskAmount >= 0;
         assert taskDeleted != null;
@@ -66,7 +82,11 @@ public class SanaResponse {
         return taskListString.toString();
     }
 
-    /** Prints to system IO how many tasks in user task */
+    /** Prints to system IO how many tasks in user task
+     *
+     * @param taskNumber    number of tasks in the list
+     * @return  sana's response that says the number of tasks in list
+     */
     public String taskNumberText(int taskNumber) {
         String taskAmt = Integer.valueOf(taskNumber).toString();
         return "You have " + taskAmt + " things here.\n";
@@ -76,6 +96,7 @@ public class SanaResponse {
      * Prints Sana's message when tasks are marked or unmarked
      *
      * @param isMarked   if sana.task is marked or unmarked
+     * @return           Sana's response when a task is marked or unmarked
      */
     public String markText(boolean isMarked) {
         if (isMarked) {
@@ -83,6 +104,16 @@ public class SanaResponse {
         } else {
             return "Oopsies! I'll change it back!\n";
         }
+    }
+
+    /**
+     * Prints Sana's message when tasks are updated
+     *
+     * @param updatedTask   the updated task
+     * @return  Sana's response when a task is updated
+     */
+    public String updateTask(Task updatedTask) {
+        return "I've updated this item!\n";
     }
 
     public String dateFormatError() {

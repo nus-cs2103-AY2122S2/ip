@@ -33,6 +33,16 @@ public abstract class Task {
         this.taskName = taskName;
         this.isDone = isDone;
     }
+
+    /**
+     * Renames the task
+     *
+     * @param newName   new name of the task
+     */
+    public void rename(String newName) {
+        this.taskName = newName;
+    }
+
     /**
      * Returns the sana.task name
      *
