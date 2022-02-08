@@ -69,7 +69,7 @@ public class TaskList {
      * Returns the size of the list
      * @return Size of the list
      */
-    public int size() {
+    public int getSize() {
         return this.toDoList.size();
     }
 }

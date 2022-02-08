@@ -16,7 +16,7 @@ public class Ui {
      * Returns the greeting message
      * @return Greeting message is returned.
      */
-    public String greeting() {
+    public String greet() {
         String logo = "__  __ ____________\n"
                 + "\\ \\/ /|_  /_  /_  /\n"
                 + " >  <  / / / / / / \n"
@@ -158,7 +158,7 @@ public class Ui {
      * Returns the error caused by index out of bound error.
      * @return The error message of a index out of bound error is returned.
      */
-    public String idxOutOfBoundError() {
+    public String showIdxOutOfBoundError() {
         return "UH-OH!! the index should be between 1 and the size of the task list!";
     }
 }

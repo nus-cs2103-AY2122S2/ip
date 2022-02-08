@@ -19,7 +19,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
 
-        ui.greeting();
+        ui.greet();
 
         storage = new Storage();
 
@@ -61,12 +61,12 @@ public class Duke {
      * If the input matches none of the command, prompts the user to re-enter.
      */
     public String respond(String input) {
-        int i = input.indexOf(' ');
+        int idxOfSpace = input.indexOf(' ');
         String command;
         String restOfInput = "";
-        if (i > -1) {
-            command = input.substring(0, i);
-            restOfInput = input.substring(i).trim();
+        if (idxOfSpace > -1) {
+            command = input.substring(0, idxOfSpace);
+            restOfInput = input.substring(idxOfSpace).trim();
         } else {
             command = input;
         }
@@ -79,42 +79,42 @@ public class Duke {
         case "mark":
         case "unmark":
             int idx = Integer.parseInt(restOfInput);
-            if (idx - 1 < 0 || idx - 1 >= taskList.size()) {
-                return ui.idxOutOfBoundError();
+            if (idx - 1 < 0 || idx - 1 >= taskList.getSize()) {
+                return ui.showIdxOutOfBoundError();
             }
             return mark(idx);
         case "todo":
-        case "deadline":
-        case "event":
             Task newTask;
-            if (command.equals("todo")) {
-                command = restOfInput;
-                try {
-                    newTask = makeToDo(command);
-                } catch (ToDoIllegalArgumentException ex) {
-                    return ui.showIllegalArgumentError(ex);
-                }
-            } else if (command.equals("deadline")) {
-                try {
-                    String[] s = parser.parseDeadline(restOfInput);
-                    newTask = new Deadline(s[0], s[1]);
-                } catch (IncompleteArgumentException ex) {
-                    return ui.showIncompleteArgumentError();
-                }
-            } else {
-                try {
-                    String[] s = parser.parseEvent(restOfInput);
-                    newTask = new Event(s[0], s[1]);
-                } catch (IncompleteArgumentException ex) {
-                    return ui.showIncompleteArgumentError();
-                }
+            command = restOfInput;
+            try {
+                newTask = makeToDo(command);
+            } catch (ToDoIllegalArgumentException ex) {
+                return ui.showIllegalArgumentError(ex);
+            }
+            taskList.add(newTask);
+            return ui.confirmAddition(newTask, taskList.getToDoList());
+        case "deadline":
+            try {
+                String[] s = parser.parseDeadline(restOfInput);
+                newTask = new Deadline(s[0], s[1]);
+            } catch (IncompleteArgumentException ex) {
+                return ui.showIncompleteArgumentError();
+            }
+            taskList.add(newTask);
+            return ui.confirmAddition(newTask, taskList.getToDoList());
+        case "event":
+            try {
+                String[] s = parser.parseEvent(restOfInput);
+                newTask = new Event(s[0], s[1]);
+            } catch (IncompleteArgumentException ex) {
+                return ui.showIncompleteArgumentError();
             }
             taskList.add(newTask);
             return ui.confirmAddition(newTask, taskList.getToDoList());
         case "delete":
             idx = Integer.parseInt(restOfInput);
-            if (idx - 1 < 0 || idx - 1 >= taskList.size()) {
-                return ui.idxOutOfBoundError();
+            if (idx - 1 < 0 || idx - 1 >= taskList.getSize()) {
+                return ui.showIdxOutOfBoundError();
             }
             return remove(idx);
         case "find":
@@ -132,7 +132,7 @@ public class Duke {
      */
     public String mark(int idx) {
         assert (idx - 1 >= 0) : "Index of the element should be positive";
-        assert (idx - 1 < taskList.size()) : "Index of the element should be within the size of the list";
+        assert (idx - 1 < taskList.getSize()) : "Index of the element should be within the size of the list";
 
         taskList.get(idx - 1).mark();
         if (taskList.get(idx - 1).getIsDone()) {
@@ -163,7 +163,7 @@ public class Duke {
      */
     public String remove(int idx) {
         assert (idx - 1 >= 0) : "Index of the element should be positive";
-        assert (idx - 1 < taskList.size()) : "Index of the element should be within the size of the list";
+        assert (idx - 1 < taskList.getSize()) : "Index of the element should be within the size of the list";
 
         Task removed = taskList.remove(idx - 1);
         return ui.confirmRemoval(removed, taskList.getToDoList());
@@ -173,7 +173,7 @@ public class Duke {
         return "Xzzzbot: " + respond(input);
     }
 
-    String greeting() {
-        return ui.greeting();
+    String greet() {
+        return ui.greet();
     }
 }
