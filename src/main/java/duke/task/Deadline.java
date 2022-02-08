@@ -1,7 +1,7 @@
 package duke.task;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static duke.constant.Message.CLOSE_BRACKET;
@@ -12,7 +12,10 @@ import static duke.constant.TaskConstant.PREFIX_DEADLINE;
  * A class represents for a deadline.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDateTime by;
+    private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+
 
     /**
      * Class constructor with the description and the date time following yyyy-MM-dd format
@@ -24,7 +27,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DateTimeException {
         super(description);
-        this.by = LocalDate.parse(by.strip());
+        this.by = LocalDateTime.parse(by.strip(), inputFormatter);
     }
 
     /**
@@ -32,7 +35,7 @@ public class Deadline extends Task {
      * @return Deadline date in yyyy-mm-dd format
      */
     public String getBy() {
-        return by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return by.format(inputFormatter);
     }
 
     /**
@@ -41,6 +44,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return OPEN_BRACKET + PREFIX_DEADLINE + CLOSE_BRACKET + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return OPEN_BRACKET + PREFIX_DEADLINE + CLOSE_BRACKET + super.toString() + " (by: " + by.format(outputFormatter) + ")";
     }
 }

@@ -95,7 +95,12 @@ public class Parser {
             }
         } else if (prefix.equals(TaskConstant.PREFIX_EVENT)) {
             String at = tokens[3];
-            task = new Event(description, at);
+            try {
+                task = new Event(description, at);
+            } catch (DateTimeException e) {
+                exceptionHandler.handleOtherException(e);
+                task = new Todo(description);
+            }
         } else {
             task = new Todo(description);
         }
