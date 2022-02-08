@@ -1,6 +1,7 @@
 package gui;
 
 import duke.Duke;
+import duke.UI;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -36,13 +37,19 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Creates Duke upon command.
+     * @param d Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
+        String intro = UI.printIntro();
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(intro, dukeImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and
+     * then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -59,7 +66,6 @@ public class MainWindow extends AnchorPane {
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
             pauseTransition.setOnFinished(event -> Platform.exit());
             pauseTransition.play();
-
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

@@ -6,73 +6,34 @@ package duke;
  */
 public class UI {
 
-    /**
-     * String message for marking tasks.
-     */
-    static final String mark = "Nice! I've marked this task as";
+    /**String message for marking tasks.*/
+    public static final String mark = "Nice! I've marked this task as";
+    /**Error message to indicate user to provide a number.*/
+    public static final String gnum = "Give me a Number.";
+    /**Error message to inform user that description is empty.*/
+    public static final String gdes = "Description is empty, give me a description.";
+    /**Error message to inform user that description is empty.*/
+    public static final String invalid = "INVALID Entry man, Try again :-( ";
+    /**Error message to inform user that the search results were none.*/
+    public static final String noResult = "We were unable to find anything.";
+    /**Error message to inform user that list is empty.*/
+    public static final String emptyList = "The list is empty :(";
+    /**Error message to inform user that list is empty.*/
+    public static final String unKnown = "Detected an unknown entry.";
 
-    /**
-     * String representation of custom line for duke.Duke.
-     */
-    static final String line = "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
-
-    /**
-     * Error message to indicate user to provide a number.
-     */
-    static final String gnum = "Give me a Number.";
-
-    /**
-     * Error message to inform user that description is empty.
-     */
-    static final String gdes = "Description is empty, give me a description.";
-
-    /**
-     * Error message to inform user that description is empty.
-     */
-    static final String invalid = "INVALID Entry man, Try again :-( ";
-
-    /**
-     * Prints the intro of Mike with logo
-     * and intro paragraph.
-     */
-    public static void printIntro() {
-        String start = "              Greetings! Mike here!\n" +
-                "               How can I help you?\n" ;
-        String logo =
-                "||======||==||======|| !!!! ||====||    //===//======||\n"
-                        + "||                  || !!!! ||    ||   //   //       ||\n"
-                        + "||  ||==||  ||==||  ||======||    ||==||   //  ||====||\n"
-                        + "||  ||  ||  ||  ||  ||      ||            |||  ||====||\n"
-                        + "||  ||  ||  ||  ||  ||      ||    ||==||   \\\\  ||====||\n"
-                        + "||  ||  ||  ||  ||  ||      ||    ||   \\\\   \\\\       ||\n"
-                        + "||==||  ||==||  ||==||======||====||    \\\\===\\\\======||\n";
-
-        System.out.println("\n" + logo + line);
-        System.out.println(start + line);
+    /**Prints the intro paragraph of Mike.*/
+    public static String printIntro() {
+        String start = "Greetings! Mike here!\n" + "How can I help you?\n" ;
+        return start;
     }
 
     /**
-     * Prints custom line for duke.Duke.
-     */
-    public static String printLine() {
-        return line;
-    }
-
-    /**
-     * Prints bye message for duke.Duke.
-     * @return
+     * Prints Termination message for Duke.
+     *
+     * @return Termination message.
      */
     public static String printTerminate() {
         return "Bye yo. Hope I helped you!";
-    }
-
-    /**
-     * Prints text in between custom lines of duke.Duke.
-     *
-     * @param text Text to be printed.
-     */
-    public static String printWithLines(String text) {
-        return line + text + line;
     }
 
     /**

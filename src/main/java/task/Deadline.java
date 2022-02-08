@@ -1,14 +1,17 @@
 package task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents Task which is entered with Deadline Prefix.
  */
 public class Deadline extends Task {
+
     /**
      * Deadline date.
      */
     protected String by;
-
     /**
      * Creates a Deadline task.
      *
@@ -17,7 +20,19 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = formatDate(by);
+    }
+
+    /**
+     * Returns the formatted Date to display from the deadline input.
+     *
+     * @param input the input Date as per "yyyy-MM-dd HH:mm"
+     * @return the formatted Date as per "MMM-dd-yyyy HH:mm a"
+     */
+    private String formatDate(String input) {
+        DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatOut = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm a");
+        return LocalDateTime.parse(input, formatIn).format(formatOut);
     }
 
     /**

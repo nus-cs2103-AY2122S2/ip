@@ -5,7 +5,6 @@ import task.Event;
 import task.TaskList;
 import task.Todo;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,8 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
-    TaskList tasklist;
-
+    protected TaskList tasklist;
     public Parser(TaskList list) {
         tasklist = list;
     }
@@ -25,14 +23,13 @@ public class Parser {
      * Processes the TaskList according to the input
      * entered by the user.
      *
-     * @throws IOException If unexpected input is entered.
      */
-    public String processData(String cmd) {
+    public String processCommand(String cmd) throws DukeException {
         String[] c = cmd.split(" ");
         if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
-            return new DukeException(UI.gdes).getMessage();
+            throw new DukeException(UI.gdes);
         } else if (cmd.equals("mark") || cmd.equals("unmark") || cmd.equals("delete")) {
-            return new DukeException(UI.gnum).getMessage();
+            throw new DukeException(UI.gnum);
         } else if (c[0].equals("list")) {
             return tasklist.printTaskList();
         } else if (c[0].equals("mark")) {
@@ -45,7 +42,7 @@ public class Parser {
             return tasklist.add(new Todo(cmd.substring(4)));
         } else if (c[0].equals("deadline")) {
             String[] x = cmd.substring(8).split("/by ");
-            return tasklist.add(new Deadline(x[0], formatDate(x[1])));
+            return tasklist.add(new Deadline(x[0], x[1]));
         } else if (c[0].equals("event")) {
             String[] x = cmd.substring(5).split("/at ");
             return tasklist.add(new Event(x[0], x[1]));
@@ -55,19 +52,7 @@ public class Parser {
         } else if (c[0].equals("find")) {
             return tasklist.find(c[1]);
         } else {
-            return new DukeException(UI.invalid).getMessage();
+            throw new DukeException(UI.invalid);
         }
-    }
-
-    /**
-     * Returns the formatted Date to display from the deadline input.
-     *
-     * @param input the input Date as per "yyyy-MM-dd HH:mm"
-     * @return the formatted Date as per "MMM-dd-yyyy HH:mm a"
-     */
-    private String formatDate(String input) {
-        DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        DateTimeFormatter formatOut = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm a");
-        return LocalDateTime.parse(input, formatIn).format(formatOut);
     }
 }

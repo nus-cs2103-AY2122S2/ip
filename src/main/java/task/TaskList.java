@@ -1,134 +1,165 @@
 package task;
 
+import duke.DukeException;
 import duke.UI;
 import java.util.ArrayList;
 
 /**
- * Represents a list housing all the Tasks.
+ * Represents a list containing all the Tasks.
  */
 public class TaskList {
 
     /**
-     * List to house the Tasks.
+     * List that contains all Tasks.
      */
-    private ArrayList<Task> list;
+    private ArrayList<Task> Tasks;
 
     /**
-     * Creates a Task list based on an already
-     * existing list or empty list.
+     * Creates a TaskList based on an already
+     * existing list or empty list of tasks.
      *
      * @param list
      */
     public TaskList(ArrayList<Task> list) {
-        this.list = list;
+        this.Tasks = list;
     }
 
     /**
-     * Returns the list in ArrayList representation.
+     * Returns the TaskList in ArrayList representation.
      *
-     * @return List in ArrayList representation.
+     * @return TaskList in ArrayList representation.
      */
     public ArrayList<Task> getList() {
-        return this.list;
+        return this.Tasks;
     }
 
     /**
      * Returns the size of the list.
      *
-     * @return size of the list.
+     * @return Number of tasks in TaskList.
      */
     public int getSize() {
-        return list.size();
+        return this.Tasks.size();
     }
 
     /**
-     * Adds Task to the list.
+     * Adds Task to the TaskList.
      *
      * @param task Task to be added.
+     * @return Added Task Message.
      */
     public String add(Task task) {
-        list.add(task);
-        return UI.printAddMessage(list.get(getSize()-1).toString(), getSize()-1);
+        Tasks.add(task);
+        int index = this.getSize() - 1;
+        return UI.printAddMessage(Tasks.get(index).toString(), index);
     }
 
     /**
-     * Deletes the Task on the list corresponding to the
-     * input value.
+     * Deletes the Task on the list as per input value.
      *
-     * @param no Number of Task to be deleted.
+     * @param no Number of Task to be deleted on the list.
+     * @return Task deleted message.
      */
     public String delete(int no) {
-        return UI.deleteMessage(list.remove(no).toString());
+        return UI.deleteMessage(Tasks.remove(no).toString());
     }
 
     /**
-     * Marks the Task on the list corresponding to the
-     * input value.
+     * Marks the Task on the list as per the input value.
      *
-     * @param n Number of Task to be marked.
+     * @param no Number of Task to be marked on list.
+     * @return Task marked message.
      */
-    public String mark(int n) {
-        list.get(n).markAsDone();
-        return UI.printMarked(list.get(n).toString());
+    public String mark(int no) {
+        Tasks.get(no).markAsDone();
+        return UI.printMarked(Tasks.get(no).toString());
     }
 
     /**
-     * Unmarks the Task on the list corresponding to the
-     * input value.
+     * Unmark the Task on the list as per the input value.
      *
-     * @param n Number of Task to be unmarked.
+     * @param no Number of Task to be unmarked on list.
+     * @return Task unmarked message.
      */
-    public String unMark(int n) {
-        list.get(n).markAsUnDone();
-        return UI.printUnMarked(list.get(n).toString());
+    public String unMark(int no) {
+        Tasks.get(no).markAsUnDone();
+        return UI.printUnMarked(Tasks.get(no).toString());
     }
 
     /**
-     * Prints the Tasks in the Task list.
+     * Prints the Tasks in the TaskList.
      */
-    public String printTaskList() {
-        String str = "";
-        for(int m = 0; m < list.size(); m++) {
-            str+= (m + 1) + "." + list.get(m).toString() +"\n";
+    public String printTaskList() throws DukeException {
+        return printList(this.Tasks);
+    }
+
+    /**
+     * Prints the list of tasks which contain the search String.
+     *
+     * @param str String to search for.
+     * @return String representation of search result.
+     */
+    public String find(String str) throws DukeException {
+        ArrayList<Task> resultList = generateList(str);
+        if (resultList.size() != 0) {
+            return printList(resultList);
+        } else {
+            throw new DukeException(UI.noResult);
         }
-        return str;
     }
 
-    public String find(String str) {
-        return printSearchList(generateList(str));
-    }
-
+    /**
+     * Generates the list of tasks containing
+     * the string input.
+     *
+     * @param str String to search for.
+     * @return List of tasks if match is present, empty list if no match.
+     */
     private ArrayList<Task> generateList(String str) {
-        ArrayList<Task> output = new ArrayList<>();
-        for (int m = 0; m < list.size(); m++) {
-            String in = list.get(m).getDescription();
-            if (in.equals(str)) {
-                output.add(list.get(m));
-            } else if (scan(in, str)){
-                output.add(list.get(m));
-            } else {
-                // add nothing
+        ArrayList<Task> list = new ArrayList<>();
+        for(int m = 0; m < Tasks.size(); m++) {
+            String in = Tasks.get(m).getDescription();
+            if (in.equals(str) || scan(in, str)) {
+                list.add(Tasks.get(m));
             }
         }
-        return output;
+        return list;
     }
 
-    private boolean scan(String in, String str) {
+    /**
+     * Returns whether if the string input is present in sentence.
+     *
+     * @param sentence Sentence to be searched.
+     * @param str String input.
+     * @return Search result. True if String is present in Result.
+     */
+    private boolean scan(String sentence, String str) {
         boolean isPresent = false;
-        String[] y = in.split(" ");
-        for(int n = 0; n < y.length; n++) {
-            if (y[n].equals(str)) {
+        String[] words = sentence.split(" ");
+        for(int n = 0; n < words.length; n++) {
+            if (words[n].equals(str)) {
                 isPresent = true;
             }
         }
         return isPresent;
     }
 
-    private String printSearchList(ArrayList<Task> list) {
+    /**
+     * Prints the Tasks in the input List.
+     *
+     * @param list List of Tasks.
+     * @return String Representation of List to be printed.
+     */
+    private String printList(ArrayList<Task> list) throws DukeException {
         String str = "";
-        for(int m = 0; m < list.size(); m++) {
-            str+= (m + 1) + "." + list.get(m).toString() + "\n";
+        int size = list.size();
+        if (size != 0) {
+            for(int m = 0; m < size; m++) {
+                str+= (m + 1) + "." + list.get(m).toString() + "\n";
+            }
+            return str;
+        } else {
+            throw new DukeException(UI.emptyList);
         }
-        return str;
     }
 }

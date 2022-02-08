@@ -8,25 +8,28 @@ import task.TaskList;
 public class Duke {
 
     /**
-     * File where duke.Duke is stored, read and written.
+     * File where Duke is stored, read and written.
      */
     private Storage storage;
     /**
-     * List containing Tasks for duke.Duke to process.
+     * List containing Tasks for Duke to process.
      */
     private TaskList tasks;
     /**
-     * User Interface point of duke.Duke.
+     * Parser to handle user inputs.
      */
-    private UI ui;
-
     private Parser parser;
-    String filePath = "data/duke.txt";
+    /**
+     * Name of file path to store data.
+     */
+    protected final String FILE_PATH = "data/duke.txt";
 
-    public Duke() throws Exception {
+    /**
+     * Creates Duke.
+     */
+    public Duke() {
         try {
-            ui = new UI();
-            storage = new Storage(filePath);
+            storage = new Storage(FILE_PATH);
             tasks = new TaskList(storage.readData());
             parser = new Parser(tasks);
         } catch (Exception e) {
@@ -34,13 +37,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns Duke response according to
+     * the user command.
+     *
+     * @param cmd User command.
+     * @return Duke response.
+     */
     public String getResponse(String cmd) {
         try {
             if (cmd.equals("bye")) {
                 storage.writeData(tasks.getList());
                 return UI.printTerminate();
             } else {
-                return parser.processData(cmd);
+                return parser.processCommand(cmd);
             }
         } catch (Exception e) {
             return e.getMessage();

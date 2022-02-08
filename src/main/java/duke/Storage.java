@@ -39,31 +39,29 @@ public class Storage {
      */
     public ArrayList<Task> readData() throws Exception {
         File file = new File(filePath);
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> startingList = new ArrayList<>();
 
         if (file.exists()) {
 
-            BufferedReader r = new BufferedReader(new FileReader(file));
-            String t = r.readLine();
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
 
-            while (t != null) {
-                char i = t.charAt(0);
-                if (i == 'T') {
-                    String[] in = t.split(":");
-                    list.add(new Todo(in[2]));
-                } else if (i == 'D') {
-                    String[] in = t.split(":");
-                    list.add(new Deadline(in[2], in[3]));
-                } else if (i == 'E') {
-                    String[] in = t.split(":");
-                    list.add(new Event(in[2], in[3]));
+            while (line != null) {
+                char firstLetter = line.charAt(0);
+                String[] in = line.split(":");
+                if (firstLetter == 'T') {
+                    startingList.add(new Todo(in[2]));
+                } else if (firstLetter == 'D') {
+                    startingList.add(new Deadline(in[2], in[3]));
+                } else if (firstLetter == 'E') {
+                    startingList.add(new Event(in[2], in[3]));
                 } else {
-                    // do nothing
+                    throw new DukeException(UI.unKnown);
                 }
-                t = r.readLine();
+                line = reader.readLine();
             }
         }
-        return list;
+        return startingList;
     }
 
     /**

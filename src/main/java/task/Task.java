@@ -28,14 +28,13 @@ public class Task {
     }
 
     /**
-     * Returns String representation of the Task based
-     * on whether if the task is done or not. X if done
-     * and an empty space otherwise.
+     * Returns String representation of the Task status.
+     * X if done and an empty space otherwise.
      *
-     * @return "X" if Task is done and " " if not done.
+     * @return Task status
      */
     public String getStatusIcon() {
-        return isDone ? "X" : " ";
+        return this.isDone ? "X" : " ";
     }
 
     /**
@@ -68,11 +67,8 @@ public class Task {
      * @return String representation of Task to save.
      */
     public String toSave() {
-        if (isDone) {
-            return " : 1 : " + this.description;
-        } else {
-            return " : 0 : " + this.description;
-        }
+        String status = isDone ? " : 1 : " : " : 0 : ";
+        return status + this.description;
     }
 
     /**
