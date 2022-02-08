@@ -362,6 +362,9 @@ public class TaskList {
         // check if the user's input value is within the range of the list before mark done the task
         checkOutOfBound(n - 1);
 
+        // assert that n should be a positive number
+        assert !(n <= 0);
+
         list.get(n - 1).markDone();
         returnMessage.append("Nice! I've marked this task as done:\n");
         returnMessage.append(list.get(n - 1).toString());
@@ -379,6 +382,9 @@ public class TaskList {
         // check if the user's input value is within the range of the list before mark un done the task
         checkOutOfBound(n - 1);
 
+        // assert that n should be a positive number
+        assert !(n <= 0);
+
         list.get(n - 1).markUndone();
         returnMessage.append("OK, I've marked this task as not done yet:\n");
         returnMessage.append(list.get(n - 1).toString());
@@ -395,6 +401,9 @@ public class TaskList {
 
         // check if the user's input value is within the range of the list before deleting the task
         checkOutOfBound(n - 1);
+
+        // assert that n should be a positive number
+        assert !(n <= 0);
 
         returnMessage.append("Noted. I've removed this task:\n");
         returnMessage.append(list.get(n - 1).toString());
