@@ -58,19 +58,25 @@ public class AddCommand extends Command {
         assert tasks != null;
         this.tasks = tasks;
         String[] processedInput;
+        String time;
+        String details;
         switch (type) {
         case "todo":
             added = new ToDo(input);
             break;
         case "event":
             processedInput = input.split("/at", 2);
-            assert processedInput[1] != null;
-            added = new Event(processedInput[0], processedInput[1]);
+            details = processedInput[0];
+            time = processedInput[1];
+            assert time != null;
+            added = new Event(details, time);
             break;
         case "deadline":
             processedInput = input.split("/by", 2);
-            assert processedInput[1] != null;
-            added = new Deadline(processedInput[0], processedInput[1]);
+            details = processedInput[0];
+            time = processedInput[1];
+            assert time != null;
+            added = new Deadline(details, time);
             break;
         default:
             break;
