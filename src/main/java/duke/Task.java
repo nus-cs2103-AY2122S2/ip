@@ -57,7 +57,6 @@ public class Task {
      */
     public void updateData (String path) throws IOException {
         FileWriter fw = new FileWriter(path, true);
-//        fw.write("\n" + this.getStatusIcon() + " | " + this.description);
         fw.write(this.getStatusIcon() + " | " + this.description + "\n");
         fw.close();
     }
