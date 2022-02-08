@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * List of tasks of this bot that the user has access to.
@@ -73,11 +74,20 @@ public class TaskList {
     }
 
     /**
-     * Get size of list.
+     * Get the number of tasks in the list.
      *
      * @return size of list
      */
     public int getSize() {
         return this.listOfTasks.size();
+    }
+
+    /**
+     * Convert the arraylist into a list in order to use List calls
+     *
+     * @return a List of tasks in the collection.
+     */
+    public List<Task> taskListToList() {
+        return listOfTasks;
     }
 }
