@@ -34,7 +34,6 @@ public class Parser {
         } else {
             // Mark and unmark have the same syntax, so only process it once
             try {
-                // Do nothing (For Future methods to be added if their lengths are lesser than 4
                 if (inputMessage.substring(0, 4).contains("find")) {
                     if (inputMessage.length() <= 4) {
                         throw new DukeException(
