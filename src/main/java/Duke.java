@@ -6,13 +6,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 /**
  * A task tracker bot named Duke aka mum.
@@ -23,12 +17,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private String filePath = "./data/duke.txt";
-    private ScrollPane scrollPane;
-    private GridPane gridPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -68,8 +56,8 @@ public class Duke {
      * Starts Duke and await for input by user.
      */
     public void run() {
-        Ui.showWelcome();
         boolean isExit = false;
+        Ui.showWelcome();
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
@@ -90,10 +78,10 @@ public class Duke {
      * the dialog container. Clears the user input after processing.
      */
     public String handleUserInput(String fullCommand) {
-        boolean isExit = false;
         String response = "";
+        Command<String> c;
         try {
-            Command<String> c = Parser.parseInput(fullCommand, tasks, storage);
+            c = Parser.parseInput(fullCommand, tasks, storage);
             if (c.isExit()) {
                 System.exit(0);
                 return "Bye. Click on the close button to put me to sleep.";

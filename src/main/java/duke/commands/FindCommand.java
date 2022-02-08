@@ -36,10 +36,12 @@ public class FindCommand extends Command<String> {
         String err = "Oh no! The description of find cannot be empty... Try again :)\n";
         String response = "";
         if (echo.length == 1) {
+            assert false : "The task to find is not specified";
             throw new DukeException(err);
         }
         String description = echo[1];
         if (description.isEmpty()) {
+            assert false : "The task to delete is not specified";
             throw new DukeException(err);
         }
         int n = 1;
@@ -50,6 +52,7 @@ public class FindCommand extends Command<String> {
             String taskDetail = filteredList.get(i).toString();
             response = response + n + "." + taskDetail + "\n";
             n = n + 1;
+
         }
         return response;
     }

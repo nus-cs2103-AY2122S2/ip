@@ -17,6 +17,7 @@ public class ByeCommand extends Command<String> {
      * @return a empty string
      */
     public String execute() {
+        assert isExit() : "This shlould be a bye command and program exits";
         isExit();
         return "";
     }

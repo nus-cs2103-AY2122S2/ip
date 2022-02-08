@@ -33,6 +33,7 @@ public class TaskList {
      * @param task a Task type to be added into list
      */
     public void addTask(Task task) {
+        assert task != null;
         this.listOfTasks.add(task);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      * @param n the index of the task in list to be deleted.
      */
     public void deleteTask(int n) {
+        assert n >= 0;
         this.listOfTasks.remove(n);
     }
 
@@ -51,6 +53,7 @@ public class TaskList {
      * @param n the index of the task in list to be marked as completed
      */
     public void markTask(int n) {
+        assert n >= 0;
         this.getTask(n).mark();
     }
 
@@ -60,6 +63,7 @@ public class TaskList {
      * @param n the index of the task in list to be marked as uncompleted
      */
     public void unMarkTask(int n) {
+        assert n >= 0;
         this.getTask(n).unMark();
     }
 
@@ -70,6 +74,7 @@ public class TaskList {
      * @return the called task
      */
     public Task getTask(int n) {
+        assert n >= 0;
         return this.listOfTasks.get(n);
     }
 
