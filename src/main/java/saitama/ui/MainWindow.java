@@ -27,7 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Saitama saitama;
 
-    private final Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/King.jpg")));
+    private final Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/King.jpg")));
     private final Image saitamaImage = new Image(Objects.requireNonNull(
             this.getClass().getResourceAsStream("/images/Saitama.jpg")));
     private final Image saitamaExceptionImage = new Image(Objects.requireNonNull(

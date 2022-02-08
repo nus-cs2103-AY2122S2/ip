@@ -1,5 +1,9 @@
 package saitama.parser;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import saitama.commands.AddCommand;
 import saitama.commands.Command;
 import saitama.commands.DeleteCommand;
@@ -10,11 +14,13 @@ import saitama.commands.MarkCommand;
 import saitama.commands.UnmarkCommand;
 import saitama.exceptions.EmptyDescriptionException;
 import saitama.exceptions.InvalidCommandException;
+import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
 import saitama.exceptions.InvalidTaskNumberException;
 import saitama.exceptions.MissingQueryException;
 import saitama.tasks.Deadline;
 import saitama.tasks.Event;
+import saitama.tasks.RecursiveTag;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
@@ -33,10 +39,18 @@ public class Parser {
      * @throws InvalidTaskNumberException if given command takes in a task number but the number does not exist.
      */
     public static Command parse(String fullCommand) throws InvalidFormatException, EmptyDescriptionException,
-            InvalidCommandException, InvalidTaskNumberException, MissingQueryException {
+            InvalidCommandException, InvalidTaskNumberException, MissingQueryException, InvalidDateTimeException {
+
         String[] splitCommand = fullCommand.split(" ", 2); //split the command into [command_word, command_arguments]
         splitCommand[0] = splitCommand[0].toUpperCase(); //convert the command word to uppercase
         String command = splitCommand[0];
+
+        ArrayList<RecursiveTag> tags = new ArrayList<>();
+        if (splitCommand.length >= 2) { //if command has arguments
+            String commandArguments = splitCommand[1];
+            tags = getTags(commandArguments); //check for tags
+            splitCommand[1] = removeTags(commandArguments);
+        }
 
         switch (command) {
         case "BYE":
@@ -56,8 +70,7 @@ public class Parser {
         case "DEADLINE":
             //Fallthrough
         case "EVENT":
-            //Fallthrough
-            return prepareAdd(splitCommand);
+            return prepareAdd(splitCommand, tags);
         default:
             throw new InvalidCommandException();
         }
@@ -131,45 +144,75 @@ public class Parser {
      * @throws EmptyDescriptionException if no details of the task are given.
      * @throws InvalidCommandException if command does not exist.
      */
-    private static Command prepareAdd(String[] splitCommand) throws
-            InvalidFormatException, EmptyDescriptionException, InvalidCommandException {
-        if (splitCommand.length < 2) {
+    private static Command prepareAdd(String[] splitCommand, ArrayList<RecursiveTag> tags) throws
+            InvalidFormatException, EmptyDescriptionException, InvalidCommandException, InvalidDateTimeException {
+        if (splitCommand.length < 2 || splitCommand[1].equals("")) {
             throw new EmptyDescriptionException();
         }
-
         String taskType = splitCommand[0];
         String taskArguments = splitCommand[1];
+
+        RecursiveTag recursiveTag = null;
+        if (tags.size() > 0) {
+            recursiveTag = tags.get(0);
+        }
 
         assert taskType.equals("TODO") || taskType.equals("DEADLINE") || taskType.equals("EVENT")
                 : "Parser detected invalid task type to add!";
 
         switch (taskType) {
         case "TODO":
-            Task newTask = new ToDo(taskArguments);
+            Task newTask = new ToDo(taskArguments, recursiveTag);
             return new AddCommand(newTask);
         case "DEADLINE":
             String[] taskArgumentsList = taskArguments.split(" /by ", 2);
             if (taskArgumentsList.length < 2) {
                 throw new InvalidFormatException("You need to specify "
-                        + "the date of the deadline! <Deadline> /by <dd/mm/yyyy>");
+                        + "the deadline!\n deadline <task name> /by <dd/mm/yyyy hh:mm>");
             }
             String taskDescription = taskArgumentsList[0];
-            String deadline = taskArgumentsList[1];
-            newTask = new Deadline(taskDescription, deadline);
+            LocalDateTime deadline = processDateTime(taskArgumentsList[1]);
+            newTask = new Deadline(taskDescription, deadline, recursiveTag);
             return new AddCommand(newTask);
         case "EVENT":
             taskArgumentsList = taskArguments.split(" /at ", 2);
             if (taskArgumentsList.length < 2) {
-                throw new InvalidFormatException("You need to specify event location! <Event> /at <location>");
+                throw new InvalidFormatException("You need to specify event location!\n"
+                        + "event <task name> /at <location>");
             }
             taskDescription = taskArgumentsList[0];
             String location = taskArgumentsList[1];
-            newTask = new Event(taskDescription, location);
+            newTask = new Event(taskDescription, location, recursiveTag);
             return new AddCommand(newTask);
         default:
             //Should never happen since we asserted that the task type is valid
             throw new InvalidCommandException();
         }
+    }
+
+    private static ArrayList<RecursiveTag> getTags(String commandArguments) {
+        ArrayList<RecursiveTag> tags = new ArrayList<>();
+        String[] arguments = commandArguments.split(" ");
+        for (String argument : arguments) {
+            if (argument.startsWith("--")) {
+                RecursiveTag r = RecursiveTag.get(argument);
+                if (r != null) {
+                    tags.add(r);
+                }
+            }
+        }
+        return tags;
+    }
+
+    private static String removeTags(String commandArguments) {
+        String[] arguments = commandArguments.split(" ");
+        String taglessCommandArguments = commandArguments + " ";
+        for (String argument : arguments) {
+            if (argument.startsWith("--")) {
+                taglessCommandArguments = taglessCommandArguments.replace(argument + " ", "");
+            }
+        }
+        return taglessCommandArguments.substring(0, taglessCommandArguments.length() - 1);
     }
 
     /**
@@ -188,6 +231,43 @@ public class Parser {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    /**
+     * Returns a LocalDate object based on the by parameter.
+     *
+     * @param by The deadline in dd/mm/yyyy format.
+     * @return LocalDate object corresponding to the provided date.
+     * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
+     */
+    public static LocalDateTime processDateTime(String by) throws InvalidFormatException, InvalidDateTimeException {
+        String[] dateTime = by.split(" ", 2);
+        if (dateTime.length < 2) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+        }
+
+        String date = dateTime[0];
+        String time = dateTime[1];
+        String[] splitDate = date.split("/");
+        String[] splitTime = time.split(":");
+
+        if (splitDate.length < 3 || splitTime.length < 2) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+        }
+
+        try {
+            int year = Integer.parseInt(splitDate[2]);
+            int month = Integer.parseInt(splitDate[1]);
+            int day = Integer.parseInt(splitDate[0]);
+            int hour = Integer.parseInt(splitTime[0]);
+            int minute = Integer.parseInt(splitTime[1]);
+            LocalDateTime deadline = LocalDateTime.of(year, month, day, hour, minute);
+            return deadline;
+        } catch (NumberFormatException e) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+        } catch (DateTimeException e) {
+            throw new InvalidDateTimeException();
         }
     }
 }

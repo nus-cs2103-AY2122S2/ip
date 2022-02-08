@@ -4,13 +4,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import saitama.exceptions.FileCorruptException;
+import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
+import saitama.parser.Parser;
 import saitama.tasks.Deadline;
 import saitama.tasks.Event;
+import saitama.tasks.RecursiveTag;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
@@ -45,18 +50,15 @@ public class Storage {
         try {
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
-                boolean isDone;
-                Task newTask;
-                String[] splitCommandArguments;
-
                 //split each line in text file into [task type, isDone, task description]
-                String[] data = sc.nextLine().split(" ", 3);
+                String[] data = sc.nextLine().split(" ", 5);
 
-                if (data.length < 3) {
+                if (data.length < 5) {
                     throw new FileCorruptException();
                 }
 
                 //assign isDone
+                boolean isDone;
                 switch(data[1]) {
                 case "0":
                     isDone = false;
@@ -68,33 +70,59 @@ public class Storage {
                     throw new FileCorruptException();
                 }
 
+                //assign recursiveTag
+                RecursiveTag recursiveTag = RecursiveTag.get(data[2]);
+                //assign last reset date
+                LocalDate lastResetDate = LocalDate.parse(data[3]);
+
                 //add task to array list
-                switch(data[0]) {
+                String taskType = data[0];
+                String taskArguments = data[4];
+                switch(taskType) {
                 case "T":
-                    taskList.add(new ToDo(data[2], isDone));
+                    taskList.add(new ToDo(taskArguments, isDone, recursiveTag, lastResetDate));
                     break;
                 case "D":
-                    splitCommandArguments = data[2].split(" /by ", 2);
+                    String[] splitTaskArguments = taskArguments.split(" /by ", 2);
+                    if (splitTaskArguments.length < 2) {
+                        throw new FileCorruptException();
+                    }
+
+                    String description = splitTaskArguments[0];
+                    String deadlineString = splitTaskArguments[1];
+
                     try {
-                        newTask = new Deadline(splitCommandArguments[0], splitCommandArguments[1], isDone);
+                        LocalDateTime deadline = Parser.processDateTime(deadlineString);
+                        Task newTask = new Deadline(description,
+                                deadline, isDone, recursiveTag, lastResetDate);
                         taskList.add(newTask);
-                    } catch (InvalidFormatException e) {
+                    } catch (InvalidFormatException | InvalidDateTimeException e) {
                         throw new FileCorruptException();
                     }
                     break;
                 case "E":
-                    splitCommandArguments = data[2].split(" /at ", 2);
-                    newTask = new Event(splitCommandArguments[0], splitCommandArguments[1], isDone);
+                    splitTaskArguments = taskArguments.split(" /at ", 2);
+                    if (splitTaskArguments.length < 2) {
+                        throw new FileCorruptException();
+                    }
+
+                    description = splitTaskArguments[0];
+                    String location = splitTaskArguments[1];
+                    Task newTask = new Event(description,
+                            location, isDone, recursiveTag, lastResetDate);
                     taskList.add(newTask);
                     break;
                 default:
                     throw new FileCorruptException();
                 }
             }
-        } catch (FileNotFoundException | FileCorruptException e) {
-            return new ArrayList<>();
-        } finally {
             return taskList;
+        } catch (FileCorruptException e) {
+            System.out.println(e.getMessage());
+            return new ArrayList<>();
+        } catch (FileNotFoundException e) {
+            System.out.printf("Filepath %s not found. Creating new list...\n", filePath);
+            return new ArrayList<>();
         }
     }
 

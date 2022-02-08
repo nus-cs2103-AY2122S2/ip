@@ -5,6 +5,6 @@ package saitama.exceptions;
  */
 public class FileCorruptException extends SaitamaException {
     public FileCorruptException() {
-        super("The saved data is corrupted! Returning new task list...");
+        super("The saved data is corrupted! Creating new task list...");
     }
 }
