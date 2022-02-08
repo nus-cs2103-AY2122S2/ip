@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "pikabot.PikaBot"
+    mainClassName = "pikabot.Main"
 }
 
 shadowJar {
-    archiveBaseName = "pikabot"
+    archiveBaseName = "PikaBot"
     archiveClassifier = null
 }
 
