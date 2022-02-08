@@ -52,11 +52,15 @@ public class Parser {
      */
     public void userCommand() throws IOException {
         String inputArr[] = input.split(" ", 2);
+        inputArr[0] = inputArr[0].toLowerCase();
+        assert !inputArr[0].isEmpty() : "Please input your commend";
         if (inputArr[0].equals("bye")) {
+            assert inputArr[0].length() == 3 : "command should be bye";
             Ui.byeMessage();
             System.exit(0);
 
         } else if (inputArr[0].equals("list")) {
+            assert inputArr[0].length() == 4 : "command should be list";
             Ui.listMessage();
             for (int i = 1; i <= tasks.getTaskList().size(); i++) {
                 System.out.println(i + "." + tasks.getTaskList().get(i - 1));
@@ -64,6 +68,7 @@ public class Parser {
             System.out.println(Ui.LINE);
 
         } else if (inputArr[0].equals("mark") && isInteger(inputArr[1])) {
+            assert inputArr[0].length() == 4 : "command should be mark";
             try {
                 int taskNum = Integer.parseInt(inputArr[1]) - 1;
                 tasks.getTaskList().get(taskNum).markAsDone();
@@ -75,6 +80,7 @@ public class Parser {
             }
 
         } else if (inputArr[0].equals("unmark") && isInteger(inputArr[1])) {
+            assert inputArr[0].length() == 6 : "command should be unmark";
             try {
                 int taskNum = Integer.parseInt(inputArr[1]) - 1;
                 tasks.getTaskList().get(taskNum).markAsNotDone();
@@ -103,6 +109,7 @@ public class Parser {
             }
 
         } else if (inputArr[0].equals("event")) {
+            assert inputArr[0].length() == 5 : "command should be event";
             try {
                 String eventArr[] = inputArr[1].split("/at ", 2);
                 Event e = new Event(eventArr[0], eventArr[1]);
