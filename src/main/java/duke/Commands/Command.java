@@ -65,13 +65,13 @@ public class Command {
 
         if (index < 0 || index > listOfTasks.size() - 1) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
-        } else {
-            Task removedTask = listOfTasks.remove(index);
-            StringBuilder toPrint = new StringBuilder("Noted. I've removed this task:\n");
-            toPrint.append(removedTask.toString()).append("\n");
-            toPrint.append(listStatus(listOfTasks));
-            return toPrint.toString();
         }
+
+        Task removedTask = listOfTasks.remove(index);
+        StringBuilder toPrint = new StringBuilder("Noted. I've removed this task:\n");
+        toPrint.append(removedTask.toString()).append("\n");
+        toPrint.append(listStatus(listOfTasks));
+        return toPrint.toString();
     }
 
     private static String listTasks(TaskList listOfTasks) {
@@ -91,6 +91,7 @@ public class Command {
         if (index < 0 || index > listOfTasks.size() - 1) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
+
         assert index > 0 && index < listOfTasks.size() : "index is not in range";
         Task toMark = listOfTasks.get(index);
         toMark.mark();
@@ -104,6 +105,7 @@ public class Command {
         if (index < 0 || index > listOfTasks.size() - 1) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
+
         assert index > 0 && index < listOfTasks.size() : "index is not in range";
         Task toUnmark = listOfTasks.get(index);
         toUnmark.unmark();

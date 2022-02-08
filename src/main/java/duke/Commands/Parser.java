@@ -40,6 +40,7 @@ public class Parser {
                                 "☹ OOPS!!! I'm sorry, but you need to provide a description "
                                         + "for the find task\n");
                     }
+
                     msg = inputMessage.split("find ");
                     msg[0] = "find";
                 } else if (inputMessage.substring(0, 4).contains("todo")) {
@@ -48,16 +49,18 @@ public class Parser {
                                 "☹ OOPS!!! I'm sorry, but you need to provide a description "
                                         + "for the Todo task\n");
                     }
+
                     msg = inputMessage.split("todo ");
                     msg[0] = "todo";
                 } else if (inputMessage.substring(0, 6).contains("event ")) {
                     if (inputMessage.contains(" /at")) {
                         String temp = inputMessage.substring(6);
                         msg = temp.split(" /at");
-                        if (msg.length != 2) {
+                        if (msg.length != 2) { // If the split message's length is not 2, the format is incorrect
                             throw new DukeException(
                                     "☹ OOPS!!! I'm sorry, the duke.Tasks.Event description cannot be empty\n");
                         }
+
                         msg = new String[] {"event", msg[0], msg[1]};
                     } else {
                         throw new DukeException(
@@ -66,7 +69,7 @@ public class Parser {
                     }
                 } else if (inputMessage.contains("delete") || inputMessage.contains("mark")) {
                     msg = inputMessage.split(" ");
-                    if (msg.length != 2) {
+                    if (msg.length != 2) { // If the split message's length is not 2, the format is incorrect
                         throw new DukeException(
                                 "☹ OOPS!!! I'm sorry, but you need to enter a number as well!\n");
                     }
@@ -74,10 +77,11 @@ public class Parser {
                     if (inputMessage.contains("/by")) {
                         String temp = inputMessage.substring(9);
                         msg = temp.split(" /by");
-                        if (msg.length != 2) {
+                        if (msg.length != 2) { // If the split message's length is not 2, the format is incorrect
                             throw new DukeException(
                                     "☹ OOPS!!! I'm sorry, the Deadline description cannot be empty\n");
                         }
+
                         msg = new String[] {"deadline", msg[0], msg[1]};
                     } else {
                         throw new DukeException(
