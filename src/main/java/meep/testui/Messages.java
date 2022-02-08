@@ -1,4 +1,4 @@
-package meep.TextUi;
+package meep.testui;
 
 /**
  * Container for user visible messages.

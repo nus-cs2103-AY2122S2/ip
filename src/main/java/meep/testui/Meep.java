@@ -1,4 +1,4 @@
-package meep.TextUi;
+package meep.testui;
 
 import java.io.IOException;
 
