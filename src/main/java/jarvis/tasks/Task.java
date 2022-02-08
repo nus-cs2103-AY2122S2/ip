@@ -105,8 +105,8 @@ public abstract class Task {
         String taskDescription = taskArr[2];
 
         switch (taskCode) {
-        case jarvis.tasks.Todo.TASK_CODE:
-            task = new jarvis.tasks.Todo(taskDescription);
+        case Todo.TASK_CODE:
+            task = new Todo(taskDescription);
             break;
         case Deadline.TASK_CODE:
             if (taskArr.length < 4) {
@@ -115,12 +115,12 @@ public abstract class Task {
             LocalDate by = LocalDate.parse(taskArr[3]);
             task = new Deadline(taskDescription, by);
             break;
-        case jarvis.tasks.Event.TASK_CODE:
+        case Event.TASK_CODE:
             if (taskArr.length < 4) {
                 throw new InvalidTaskException("Insufficient values");
             }
             LocalDate at = LocalDate.parse(taskArr[3]);
-            task = new jarvis.tasks.Event(taskDescription, at);
+            task = new Event(taskDescription, at);
             break;
         default:
             throw new InvalidTaskException("Task format is invalid");

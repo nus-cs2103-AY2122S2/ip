@@ -36,14 +36,14 @@ public class Jarvis {
     }
 
     /**
-     * Handler for the duke bot.
+     * Handler for the duke bot. Used for TextUI.
      */
     private void handler() {
         ui.greet();
 
         while (this.status.equals(STATUS_RUNNING) && ui.hasNextCmd()) {
             try {
-                String cmdString = ui.nextCmd();
+                String cmdString = ui.getNextCmd();
                 Command cmd = Parser.parse(cmdString);
                 cmd.execute(taskList, ui);
                 if (cmd.isExit()) {
@@ -56,7 +56,7 @@ public class Jarvis {
     }
 
     /**
-     * Get response from executing the command.
+     * Get response from executing the command. Used for GUI.
      * @param cmdString command to execute
      * @return result
      */
