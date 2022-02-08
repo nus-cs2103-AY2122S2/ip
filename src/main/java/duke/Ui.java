@@ -62,7 +62,7 @@ public class Ui {
      * @param t Task that has been added.
      */
     public String showSucessfulAdd(Task t, int num) {
-        return "Roger, I got you. I've added this task:\n" + t + "\nNow you have " + num + " tasks in the list.\n";
+        return "Roger, I got you. I've added this task:\n" + t + "\nNow you have " + num + " tasks in the list.";
     }
 
     /**

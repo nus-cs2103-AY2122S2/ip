@@ -16,11 +16,15 @@ public class ListCommand extends Command {
         if (t.size() == 0) {
             return ui.showEmptyTask();
         }
-
+        String s = "Here are the tasks in your list:\n";
         for (int i = 0; i < t.size(); i++) {
-            return ui.showTask(i + 1, t.get(i));
+            s += ui.showTask(i + 1, t.get(i));
+            if (i == t.size() - 1) {
+                break;
+            }
+            s += '\n';
         }
-        return null;
+        return s;
     }
 
     /**

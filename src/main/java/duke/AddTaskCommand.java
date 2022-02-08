@@ -51,6 +51,7 @@ public class AddTaskCommand extends Command {
                 tasks.addTask(new Event(description, toDoBy));
             }
             storage.writeToFile(tasks.getTaskArr());
+            System.out.println(ui.showSucessfulAdd(tasks.getTask(tasks.size() - 1), tasks.size()));
             return ui.showSucessfulAdd(tasks.getTask(tasks.size() - 1), tasks.size());
         } catch (DateTimeParseException e) {
             return ui.showError("DateTimeParseException");
