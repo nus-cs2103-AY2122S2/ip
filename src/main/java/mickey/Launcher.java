@@ -1,4 +1,4 @@
-package mickey.app;
+package mickey;
 
 import javafx.application.Application;
 import mickey.Main;
