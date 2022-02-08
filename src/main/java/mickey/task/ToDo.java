@@ -11,7 +11,7 @@ public class ToDo extends Task {
      * @param description Task description.
      */
     public ToDo(String description) {
-        this.description = description;
+        super(description);
     }
 
     @Override

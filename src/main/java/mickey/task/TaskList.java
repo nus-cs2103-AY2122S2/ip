@@ -72,7 +72,7 @@ public class TaskList {
     public List<Task> findTasks(String description) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task t: tasks) {
-            if (t.description.contains(description)) {
+            if (t.getDescription().contains(description)) {
                 foundTasks.add(t);
             }
         }

@@ -29,23 +29,23 @@ public class Parser {
     public static Command parse(String fullCommand) throws MickeyException {
         String[] args = fullCommand.split(" ");
         switch (args[0]) {
-            case "todo":
-            case "deadline":
-            case "event":
-                return new AddCommand(fullCommand);
-            case "list":
-                return new ListCommand(fullCommand);
-            case "mark":
-            case "unmark":
-                return new MarkCommand(fullCommand);
-            case "delete":
-                return new DeleteCommand(fullCommand);
-            case "bye":
-                return new ByeCommand(fullCommand);
-            case "find":
-                return new FindCommand(fullCommand);
-            default:
-                throw new MickeyException("\tOh no! This is a disaster! I don't know what that means");
+        case "todo":
+        case "deadline":
+        case "event":
+            return new AddCommand(fullCommand);
+        case "list":
+            return new ListCommand(fullCommand);
+        case "mark":
+        case "unmark":
+            return new MarkCommand(fullCommand);
+        case "delete":
+            return new DeleteCommand(fullCommand);
+        case "bye":
+            return new ByeCommand(fullCommand);
+        case "find":
+            return new FindCommand(fullCommand);
+        default:
+            throw new MickeyException("\tOh no! This is a disaster! I don't know what that means");
         }
     }
 }

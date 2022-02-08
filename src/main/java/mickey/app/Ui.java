@@ -1,15 +1,15 @@
 package mickey.app;
 
-import mickey.task.Task;
-
 import java.util.Scanner;
+
+import mickey.task.Task;
 
 /**
  * Ui to print feedback based on user input.
  */
 public class Ui {
     /** Scanner object. */
-    Scanner sc;
+    private final Scanner sc;
 
     /**
      * Constructor.

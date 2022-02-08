@@ -1,22 +1,22 @@
 package mickey.command;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 import mickey.app.MickeyException;
 import mickey.app.Storage;
 import mickey.app.Ui;
 import mickey.task.TaskList;
-
-import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * Command object to handle user commands.
  */
 public abstract class Command {
     /** User input command. */
-    String cmd;
+    private final String cmd;
 
     /** Optional String arguments. */
-    Optional<String> args;
+    private final Optional<String> args;
 
     /**
      * Constructor.
@@ -31,6 +31,14 @@ public abstract class Command {
         } else {
             this.args = Optional.empty();
         }
+    }
+
+    /**
+     * Get user input command.
+     * @return Command string.
+     */
+    public String getCmd() {
+        return this.cmd;
     }
 
     /**

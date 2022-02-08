@@ -5,10 +5,14 @@ package mickey.task;
  */
 public abstract class Task {
     /** Task description */
-    public String description;
+    private final String description;
 
     /** If task is done. */
-    public boolean isDone = false;
+    private boolean isDone = false;
+
+    Task(String description) {
+        this.description = description;
+    }
 
     /**
      * Gets done status icon.
@@ -17,6 +21,24 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
+    }
+
+    /**
+     * Gets description of task.
+     *
+     * @return String of task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Gets is task is done.
+     *
+     * @return Boolean of whether task is done.
+     */
+    public boolean isDone() {
+        return this.isDone;
     }
 
     /**
