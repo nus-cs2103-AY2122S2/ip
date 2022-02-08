@@ -41,6 +41,8 @@ public class DeleteCommand extends Command {
         }
 
         Task deletedTask = tasks.getTaskByIndex(index);
+        assert deletedTask != null: "task should not be null";
+
         tasks.removeTaskByIndex(index);
 
         storage.writeTaskToFile(tasks);

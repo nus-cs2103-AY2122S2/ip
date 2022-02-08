@@ -109,7 +109,7 @@ public class Parser {
     }
 
     /**
-     * Excutes the command from user input.
+     * Executes the command from user input.
      * @param userInput user input read by Scanner
      * @return Specific command class
      * @throws DukeException if there is unknown command
