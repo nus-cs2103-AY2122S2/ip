@@ -41,14 +41,17 @@ public class AddEventCommand extends Command<String> {
         String wrongFormat = "Oh no! The format for event task is wrong... Try again :)\n";
         String response = "";
         if (echo.length == 1) {
+            assert false : "The description for event is empty";
             throw new DukeException(err);
         }
         String description = echo[1];
         if (description.isEmpty()) {
+            assert false : "The description for event is empty";
             throw new DukeException(err);
         }
         String[] details = description.split(" /at ", 2);
         if (details.length == 1) {
+            assert false : "The format for event should be: event example /at YYYY-MM-DD";
             throw new DukeException(wrongFormat);
         }
         String info = details[0];
@@ -56,6 +59,7 @@ public class AddEventCommand extends Command<String> {
         Event curr = new Event(info, date);
         list.addTask(curr);
         response = Ui.showAddResponse(curr.toString(), list.getSize());
+        assert response != null;
         try {
             storage.writeToFile(list);
         } catch (IOException e) {

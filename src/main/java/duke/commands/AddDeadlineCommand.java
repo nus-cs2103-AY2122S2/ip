@@ -42,14 +42,17 @@ public class AddDeadlineCommand extends Command<String> {
         String wrongFormat = "Oh no! The format for deadline task is wrong... Try again :)\n";
         String response = "";
         if (echo.length == 1) {
+            assert echo.length == 1;
             throw new DukeException(err);
         }
         String description = echo[1];
         if (description.isEmpty()) {
+            assert false : "There is no description for this deadline";
             throw new DukeException(err);
         }
         String[] details = description.split(" /by ", 2);
         if (details.length == 1) {
+            assert false : "The format for this deadline should be: deadline example /by yyyy-MM-DD";
             throw new DukeException(wrongFormat);
         }
         String info = details[0];
@@ -57,6 +60,7 @@ public class AddDeadlineCommand extends Command<String> {
         Deadline curr = new Deadline(info, date);
         list.addTask(curr);
         response = Ui.showAddResponse(curr.toString(), list.getSize());
+        assert response != null;
         try {
             storage.writeToFile(list);
         } catch (IOException e) {

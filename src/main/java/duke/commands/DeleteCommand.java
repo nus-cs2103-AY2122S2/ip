@@ -43,23 +43,28 @@ public class DeleteCommand extends Command<String> {
         int targetIndex;
         int size = list.getSize();
         if (echo.length == 1) {
+            assert false : "The task to delete is not specified";
             throw new DukeException(err);
         }
         String taskNum = echo[1];
         if (taskNum.isEmpty()) {
+            assert false : "The task to delete is not specified";
             throw new DukeException(err);
         }
         try {
             targetIndex = Integer.parseInt(taskNum);
         } catch (Exception e) {
+            assert false : "The task to delete is not specified in words";
             throw new DukeException(wrongFormat);
         }
         if (targetIndex > size || targetIndex <= 0) {
+            assert false : "The task to delete is not present";
             throw new DukeException(wrongNumber);
         } else {
             Task curr = list.getTask(targetIndex - 1);
             list.deleteTask(targetIndex - 1);
             response = Ui.showDeleteResponse(curr.toString(), size - 1);
+            assert response != null;
         }
         try {
             storage.writeToFile(list);
