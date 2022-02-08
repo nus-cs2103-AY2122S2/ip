@@ -43,6 +43,10 @@ public class DateTimeUtil {
      * @return the formatted date/time string for display from the given {@code LocalDateTime}.
      */
     public static String getDisplayString(LocalDateTime localDateTime) {
+        assert localDateTime != null : "localDateTime cannot be null";
+        if (localDateTime == null) {
+            return "";
+        }
         return localDateTime.format(DateTimeUtil.FORMATTER_DISPLAY);
     }
 
@@ -53,6 +57,10 @@ public class DateTimeUtil {
      * @return the formatted date/time string for storage from the given {@code LocalDateTime}.
      */
     public static String getSaveString(LocalDateTime localDateTime) {
+        assert localDateTime != null : "localDateTime cannot be null";
+        if (localDateTime == null) {
+            return "";
+        }
         return localDateTime.format(DateTimeUtil.FORMATTER_INPUT);
     }
 }

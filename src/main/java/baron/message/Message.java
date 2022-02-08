@@ -51,6 +51,7 @@ public class Message {
      * @return the message that warns that the task index is out of bound and thus invalid.
      */
     public static String generateTaskIndexOutOfBoundMessage(int taskCount) {
+        assert taskCount >= 0 : "taskCount should be >= 0";
         return "The task index is invalid, only accepts 1 to " + taskCount + ".";
     }
 }
