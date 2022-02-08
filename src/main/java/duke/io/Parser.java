@@ -24,6 +24,10 @@ public class Parser {
         if (typeOfTask == 'T') {
             int descriptionStart = 6; // Format: [<typeOfTask>][<isTaskDone>] <DescriptionStart> ...
             String description = input.substring(descriptionStart);
+
+            // assert that description is not empty
+            assert !(description.equals(""));
+
             description = description.replaceFirst(" ", "");
             return new UserInput("T", "todo", description, isTaskDone);
 
@@ -31,8 +35,16 @@ public class Parser {
             int descriptionStart = 6; // Format: [<typeOfTask>][<isTaskDone>] <DescriptionStart> ...
             int timeStart = input.indexOf("(by:");
             String description = input.substring(descriptionStart, timeStart);
+
+            // assert that description is not empty
+            assert !(description.equals(""));
+
             description = description.replaceFirst(" ", "");
             String time = input.substring(timeStart + 1, input.length() - 1);
+
+            // assert that time is not empty
+            assert !(time.equals(""));
+
             time = time.replaceFirst(":", "");
 
             return new UserInput("D", "deadline", description, time, isTaskDone);
@@ -41,8 +53,16 @@ public class Parser {
             int descriptionStart = 6; // Format: [<typeOfTask>][<isTaskDone>] <DescriptionStart> ...
             int timeStart = input.indexOf("(at:");
             String description = input.substring(descriptionStart, timeStart);
+
+            // assert that description is not empty
+            assert !(description.equals(""));
+
             description = description.replaceFirst(" ", "");
             String time = input.substring(timeStart + 1, input.length() - 1);
+
+            // assert that time is not empty
+            assert !(time.equals(""));
+
             time = time.replaceFirst(":", "");
 
             return new UserInput("E", "event", description, time, isTaskDone);
