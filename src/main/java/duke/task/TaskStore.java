@@ -47,6 +47,7 @@ public class TaskStore {
      */
     public Task addTask(String command, String args) throws DukeException, DateTimeParseException {
         Task t = this.createTask(command, args);
+        assert t != null : "Assertion failed on TaskStore.addTask(): Task should be created";
         this.tasks.add(t);
         return t;
     }

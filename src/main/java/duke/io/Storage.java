@@ -45,6 +45,7 @@ public class Storage {
      * @throws IOException If the file could not be accessed (e.g. file not found, no write permissions on file)
      */
     public void writeToFile(TaskStore ts) throws IOException {
+        assert file.exists() : "Assertion failed on Storage.writeToFile(): duke.txt does not exist";
         FileWriter fw = new FileWriter(PATH);
         for (Task task : ts.getTaskList()) {
             fw.write(task.writeToFile() + "\n");
