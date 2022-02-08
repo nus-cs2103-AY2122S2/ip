@@ -31,6 +31,12 @@ public class CommandManager {
      * @return a {@code Command} object ready for execution.
      */
     public Command parseCommand(String fullCommand) {
+        assert fullCommand != null : "fullCommand cannot be null";
+
+        if (fullCommand == null) {
+            return new EmptyCommand();
+        }
+
         fullCommand = fullCommand.strip();
         if (fullCommand.equals("bye")) {
             return new ByeCommand();
@@ -45,7 +51,8 @@ public class CommandManager {
             return new EmptyCommand();
         }
 
-        // splitString is of length 1 or 2
+        assert (fullCommands.length == 2) || (fullCommands.length == 1) : "splitString.length should be 1 or 2 only";
+
         if (fullCommands.length == 2) {
             commandArg = fullCommands[1];
         }

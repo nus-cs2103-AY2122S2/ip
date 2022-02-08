@@ -59,6 +59,7 @@ public class TaskManager {
      * @return the newly appended {@code Task}.
      */
     public Task addTask(Task newTask) {
+        assert newTask != null : "newTask cannot be null";
         this.taskList.add(newTask);
         return newTask;
     }
@@ -123,6 +124,7 @@ public class TaskManager {
      * @throws BaronException If there is no tasks or index is out of bound.
      */
     public Task getTask(int index) throws BaronException {
+        assert this.getTaskCount() >= 0 : "getTaskCount() cannot be < 0";
         if (this.isEmpty()) {
             throw new BaronException(Message.MESSAGE_NO_TASK);
         } else if (index < 1 || index > this.getTaskCount()) {
@@ -149,6 +151,7 @@ public class TaskManager {
      *                        or the index is out of bound.
      */
     public boolean markTask(int index) throws BaronException {
+        assert this.getTaskCount() >= 0 : "getTaskCount() cannot be < 0";
         if (this.isEmpty()) {
             throw new BaronException(Message.MESSAGE_NO_TASK);
         } else if (index < 1 || index > this.getTaskCount()) {
@@ -171,6 +174,7 @@ public class TaskManager {
      *                        or the index is out of bound.
      */
     public boolean unmarkTask(int index) throws BaronException {
+        assert this.getTaskCount() >= 0 : "getTaskCount() cannot be < 0";
         if (this.isEmpty()) {
             throw new BaronException(Message.MESSAGE_NO_TASK);
         } else if (index < 1 || index > this.getTaskCount()) {
@@ -193,6 +197,7 @@ public class TaskManager {
      * @throws BaronException If there is no task or the index is out of bound.
      */
     public Task deleteTask(int index) throws BaronException {
+        assert this.getTaskCount() >= 0 : "getTaskCount() cannot be < 0";
         if (this.isEmpty()) {
             throw new BaronException(Message.MESSAGE_NO_TASK);
         } else if (index < 1 || index > this.getTaskCount()) {
@@ -235,6 +240,7 @@ public class TaskManager {
      * @see #commitChanges()
      */
     public void revertChanges() {
+        assert this.previousTaskList != null : "Please read the JavaDoc of TaskManager's revertChanges!";
         if (this.previousTaskList != null) {
             this.taskList = new ArrayList<>(this.previousTaskList);
             this.previousTaskList = null;
@@ -248,6 +254,7 @@ public class TaskManager {
      * @see #revertChanges()
      */
     public void commitChanges() {
+        assert this.previousTaskList != null : "Please read the JavaDoc of TaskManager's commitChanges!";
         this.previousTaskList = null;
     }
 
