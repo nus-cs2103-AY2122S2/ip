@@ -3,6 +3,7 @@ package tasks;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -112,6 +113,20 @@ public class TaskList {
         tasks.remove(taskNumber - 1);
         storage.save(this);
         return "Okay, I have deleted " + currTask;
+    }
+
+    public String printSchedule(String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        String schedule = "Here are the list of events happening on " + date + "\n";
+            for (Task t : tasks) {
+                if (t instanceof Event){
+                    if (((Event) t).getDate().equals(localDate)){
+                        schedule = schedule + t;
+                    }
+                }
+            }
+
+        return schedule;
     }
 
 
