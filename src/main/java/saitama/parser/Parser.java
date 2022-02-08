@@ -1,5 +1,7 @@
 package saitama.parser;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import saitama.commands.AddCommand;
@@ -169,7 +171,7 @@ public class Parser {
                         + "the deadline!\n deadline <task name> /by <dd/mm/yyyy hh:mm>");
             }
             String taskDescription = taskArgumentsList[0];
-            String deadline = taskArgumentsList[1];
+            LocalDateTime deadline = processDateTime(taskArgumentsList[1]);
             newTask = new Deadline(taskDescription, deadline, recursiveTag);
             return new AddCommand(newTask);
         case "EVENT":
@@ -229,6 +231,43 @@ public class Parser {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    /**
+     * Returns a LocalDate object based on the by parameter.
+     *
+     * @param by The deadline in dd/mm/yyyy format.
+     * @return LocalDate object corresponding to the provided date.
+     * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
+     */
+    public static LocalDateTime processDateTime(String by) throws InvalidFormatException, InvalidDateTimeException {
+        String[] dateTime = by.split(" ", 2);
+        if (dateTime.length < 2) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+        }
+
+        String date = dateTime[0];
+        String time = dateTime[1];
+        String[] splitDate = date.split("/");
+        String[] splitTime = time.split(":");
+
+        if (splitDate.length < 3 || splitTime.length < 2) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+        }
+
+        try {
+            int year = Integer.parseInt(splitDate[2]);
+            int month = Integer.parseInt(splitDate[1]);
+            int day = Integer.parseInt(splitDate[0]);
+            int hour = Integer.parseInt(splitTime[0]);
+            int minute = Integer.parseInt(splitTime[1]);
+            LocalDateTime deadline = LocalDateTime.of(year, month, day, hour, minute);
+            return deadline;
+        } catch (NumberFormatException e) {
+            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+        } catch (DateTimeException e) {
+            throw new InvalidDateTimeException();
         }
     }
 }

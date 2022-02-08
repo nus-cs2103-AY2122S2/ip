@@ -2,6 +2,7 @@ package saitama.tasks;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * A to do.
@@ -22,8 +23,8 @@ public class ToDo extends Task {
      * @param description The details of the to do task.
      * @param isDone Whether the task is done.
      */
-    public ToDo(String description, boolean isDone, RecursiveTag recursiveTag) {
-        super(description, isDone, recursiveTag);
+    public ToDo(String description, boolean isDone, RecursiveTag recursiveTag, LocalDate lastResetDate) {
+        super(description, isDone, recursiveTag, lastResetDate);
     }
 
     /**
@@ -34,7 +35,7 @@ public class ToDo extends Task {
      */
     public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        fw.write(String.format("T %s %s %s\n", isDone, recursiveTag, description));
+        fw.write(String.format("T %s %s %s %s\n", isDone, recursiveTag, lastResetDate, description));
     }
 
     /**

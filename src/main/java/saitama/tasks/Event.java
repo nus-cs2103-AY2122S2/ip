@@ -2,6 +2,7 @@ package saitama.tasks;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * An event task.
@@ -27,8 +28,8 @@ public class Event extends Task {
      * @param at The event location.
      * @param isDone Whether the task is done.
      */
-    public Event(String description, String at, boolean isDone, RecursiveTag recursiveTag) {
-        super(description, isDone, recursiveTag);
+    public Event(String description, String at, boolean isDone, RecursiveTag recursiveTag, LocalDate lastResetDate) {
+        super(description, isDone, recursiveTag, lastResetDate);
         this.at = at;
     }
 
@@ -41,7 +42,7 @@ public class Event extends Task {
     public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
         String recursiveTag = this.recursiveTag == null ? "--" : this.recursiveTag.toString();
-        fw.write(String.format("E %s %s %s /at %s\n", isDone, recursiveTag, description, at));
+        fw.write(String.format("E %s %s %s %s /at %s\n", isDone, recursiveTag, lastResetDate, description, at));
     }
 
     /**

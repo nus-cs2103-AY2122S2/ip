@@ -1,5 +1,5 @@
-D 0 -- CS2103T /by 20/12/2022 20:22
-T 0 --rd Sleep
-E 0 --rw CS2103T Lecture /at Home
-D 0 --rw CS2106 Tutorial /by 12/12/1998 20:22
-E 0 --rb GEQ Tutorial /at CREATE
+D 1 -- 2022-02-08 CS2103T /by 20/12/2022 20:22
+T 1 --rd 2022-02-08 Sleep
+E 0 --rw 2022-02-08 CS2103T Lecture /at Home
+D 1 --rw 2022-02-09 CS2106 Tutorial /by 12/12/1998 20:22
+E 1 --rb 2022-02-12 GEQ Tutorial /at CREATE
