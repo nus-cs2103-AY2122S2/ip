@@ -225,9 +225,9 @@ public class Parser {
             }
         }
 
-        String output = "These are my finding tasks in your list 😄:/n";
+        String output = "These are my finding tasks in your list 😄:\n";
         for (int j = 0; j < tasks.size(); j++) {
-            output += "    " + (j + 1) + "." + tasks.get(j).toString() + "/n";
+            output += "    " + (j + 1) + "." + tasks.get(j).toString() + "\n";
         }
         return output;
     }
