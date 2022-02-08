@@ -1,10 +1,12 @@
 package duke;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.List;
 
-import javafx.scene.image.Image;
-import tasks.*;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
 import tasks.ToDo;
 
 public class Duke {
@@ -13,9 +15,6 @@ public class Duke {
     private Ui ui;
     private Parser parser;
     private List<Task> tasks;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Constructor for Duke.
@@ -53,57 +52,103 @@ public class Duke {
     /**
      * Performs an action depending on user's input.
      *
-     * @param command User's input after parsing.
+     * @param str User's input after parsing.
      * @return A string describing the action taken.
      */
-
-    public String handleCommand(String command) {
+    public String handleCommand(String str) {
         try {
-            String str = parser.parse(command);
-            switch (str) {
-            case "bye":
+            String command = parser.parse(str);
+            if (command.equals("bye")) {
                 return ui.getByeMessage();
-            case "list":
+            } else if (command.equals("list")) {
                 return taskList.printList();
-            default:
+            } else {
                 String[] temp = str.split(" ");
                 String firstWord = temp[0];
-                if (firstWord.equals("unmark") || firstWord.equals("mark") || firstWord.equals("delete")) {
-                    int taskNumber = Integer.parseInt(temp[1]);
-                    switch (firstWord) {
-                    case "mark":
-                        return taskList.mark(taskNumber);
-                    case "unmark":
-                        return taskList.unmark(taskNumber);
-                    case "delete":
-                        return taskList.delete(taskNumber);
-                    default:
-                        assert false : firstWord;
-                    }
-                } else {
-                    switch (firstWord) {
-                    case "todo":
-                        ToDo todo = new ToDo(str.substring(5));
-                        return taskList.addTask(todo);
-                    case "event":
-                        Event event = new Event(str.substring(6));
-                        return taskList.addTask(event);
-                    case "deadline":
-                        Deadline deadline = new Deadline(str.substring(9));
-                        return taskList.addTask(deadline);
-                    case "find":
-                        return taskList.find(str.substring(5));
-                    case "schedule":
-                        return taskList.printSchedule(str.substring(9));
-                    default:
-                        assert false : firstWord;
-                    }
+                switch (firstWord) {
+                case "mark":
+                    return markCommand(command);
+                case "unmark":
+                    return unmarkCommand(command);
+                case "delete":
+                    return deleteCommand(command);
+                case "todo":
+                case "event":
+                case "deadline":
+                    return addTaskCommand(command);
+                case "find":
+                    return taskList.find(str.substring(5));
+                case "schedule":
+                    return taskList.printSchedule(str.substring(9));
+                default:
+                    assert false : firstWord;
                 }
             }
         } catch (Exception e) {
             return e.getMessage();
         }
-        return command;
+        return str;
     }
+
+    /**
+     * Executes the command to mark a task as done.
+     * @param command Input from user containing a specific task number to be marked.
+     * @return A string detailing the task being marked as done.
+     * @throws IOException
+     */
+    public String markCommand(String command) throws IOException {
+        String[] temp = command.split(" ");
+        int taskNumber = Integer.parseInt(temp[1]);
+        return taskList.mark(taskNumber);
+    }
+
+    /**
+     * Executes the command to mark a task as not done.
+     * @param command Input from user containing a specific task number to be marked as not done.
+     * @return A string detailing the task being marked as not done.
+     * @throws IOException
+     */
+    public String unmarkCommand(String command) throws IOException {
+        String[] temp = command.split(" ");
+        int taskNumber = Integer.parseInt(temp[1]);
+        return taskList.unmark(taskNumber);
+    }
+
+    /**
+     * Executes the command to delete a task.
+     * @param command Input from user containing a specific task number to be deleted.
+     * @return A string detailing the task being deleted.
+     * @throws IOException
+     */
+    public String deleteCommand(String command) throws IOException {
+        String[] temp = command.split(" ");
+        int taskNumber = Integer.parseInt(temp[1]);
+        return taskList.delete(taskNumber);
+    }
+
+    /**
+     * Performs the command to add a task to the list of tasks.
+     * @param command Input from user containing the type and description of task to be added.
+     * @return A string detailing the task being added to list of tasks.
+     * @throws IOException
+     */
+    public String addTaskCommand(String command) throws IOException, DukeException {
+        String[] temp = command.split(" ");
+        String firstWord = temp[0];
+        switch (firstWord) {
+        case "todo":
+            ToDo todo = new ToDo(command.substring(5));
+            return taskList.addTask(todo);
+        case "event":
+            Event event = new Event(command.substring(6));
+            return taskList.addTask(event);
+        case "deadline":
+            Deadline deadline = new Deadline(command.substring(9));
+            return taskList.addTask(deadline);
+        default:
+            throw new DukeException();
+        }
+    }
+
 }
 

@@ -1,11 +1,9 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 import tasks.Task;
@@ -58,7 +56,7 @@ public class Storage implements StorageInterface {
     public void save(TaskList taskList) throws IOException {
         try {
             Files.delete(Path.of("Data/tasks.txt"));
-        } catch (NoSuchFileException e) {
+        } catch (Exception e) {
             File f = new File("Data");
             boolean isDirectoryCreated = f.mkdirs();
             assert isDirectoryCreated;

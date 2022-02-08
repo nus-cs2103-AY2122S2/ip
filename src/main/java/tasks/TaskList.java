@@ -94,6 +94,12 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Marks the specified task as done.
+     * @param taskNumber The taskNumber of the task to be marked.
+     * @return A string detailing the task being marked as done.
+     * @throws IOException
+     */
     public String mark(int taskNumber) throws IOException {
         Task currTask = tasks.get(taskNumber - 1);
         currTask.setDone();
@@ -101,6 +107,12 @@ public class TaskList {
         return "Nice! I've marked this task as done: \n" + "  " + currTask;
     }
 
+    /**
+     * Marks the specified task as not done.
+     * @param taskNumber The taskNumber of the task to be marked.
+     * @return A string detailing the task being marked as not done.
+     * @throws IOException
+     */
     public String unmark(int taskNumber) throws IOException {
         Task currTask = tasks.get(taskNumber - 1);
         currTask.setNotDone();
@@ -108,6 +120,12 @@ public class TaskList {
         return "OK, I've marked this task as not done yet:: \n" + "  " + currTask;
     }
 
+    /**
+     * Deletes the specified task.
+     * @param taskNumber The taskNumber of the task to be deleted.
+     * @return A string detailing the task being deleted.
+     * @throws IOException
+     */
     public String delete(int taskNumber) throws IOException {
         Task currTask = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
@@ -115,21 +133,23 @@ public class TaskList {
         return "Okay, I have deleted " + currTask;
     }
 
+    /**
+     * Prints the schedule of events on a specific date.
+     * @param date Date of schedule specified by user input.
+     * @return A String containing the schedule of events happening on the date.
+     */
     public String printSchedule(String date) {
         LocalDate localDate = LocalDate.parse(date);
         String schedule = "Here are the list of events happening on " + date + "\n";
-            for (Task t : tasks) {
-                if (t instanceof Event){
-                    if (((Event) t).getDate().equals(localDate)){
-                        schedule = schedule + t;
-                    }
+        for (Task t : tasks) {
+            if (t instanceof Event) {
+                if (((Event) t).getDate().equals(localDate)) {
+                    schedule = schedule + t;
                 }
             }
-
+        }
         return schedule;
     }
-
-
 
     /**
      * Finds all the tasks containing the keyword(s) from user input.

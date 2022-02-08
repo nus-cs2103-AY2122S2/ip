@@ -1,9 +1,9 @@
 package duke;
 
-import tasks.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import tasks.TaskList;
 
 public class Parser {
     private TaskList taskList;
@@ -44,11 +44,10 @@ public class Parser {
                     }
                 }
             }
-        }
-        else if (firstWord.equals("schedule")) {
+        } else if (firstWord.equals("schedule")) {
             try {
                 LocalDate date = LocalDate.parse(strArr[1]);
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 throw new DukeException();
             }
         } else {
