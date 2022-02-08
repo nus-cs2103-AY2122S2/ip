@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.DukeException;
+import duke.Message;
 import duke.commands.*;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -54,7 +55,7 @@ public class Parser {
         try {
             return new AddCommand(new ToDo(arguments[1]));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Missing details! Please use the format: todo <description>", e);
+            throw new DukeException(Message.ERRORMESSAGE_TODO, e);
         }
     }
 
@@ -64,8 +65,7 @@ public class Parser {
             LocalDateTime dueDate = LocalDateTime.parse(taskDetails[1], DateTimeFormatter.ofPattern("d/M/y HHmm"));
             return new AddCommand(new Deadline(taskDetails[0], dueDate));
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-            throw new DukeException(
-                    "Missing details! Please use the format: deadline <description> /by <dd/mm/yyyy hhmm>", e);
+            throw new DukeException(Message.ERRORMESSAGE_DEADLINE, e);
         }
     }
 
@@ -75,8 +75,7 @@ public class Parser {
             LocalDateTime eventDate = LocalDateTime.parse(taskDetails[1], DateTimeFormatter.ofPattern("d/M/y HHmm"));
             return new AddCommand(new Event(taskDetails[0], eventDate));
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-            throw new DukeException(
-                    "Missing details! Please use the format: event <description> /at <dd/mm/yyyy hhmm>", e);
+            throw new DukeException(Message.ERRORMESSAGE_EVENT, e);
         }
     }
 
@@ -84,7 +83,7 @@ public class Parser {
         try {
             return new MarkCommand(Integer.parseInt(arguments[1].trim()) - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Please enter an integer!", e);
+            throw new DukeException(Message.ERRORMESSAGE_INVALID_INTEGER, e);
         }
     }
 
@@ -92,7 +91,7 @@ public class Parser {
         try {
             return new UnmarkCommand(Integer.parseInt(arguments[1].trim()) - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Please enter an integer!", e);
+            throw new DukeException(Message.ERRORMESSAGE_INVALID_INTEGER, e);
         }
     }
 
@@ -100,7 +99,7 @@ public class Parser {
         try {
             return new DeleteCommand(Integer.parseInt(arguments[1].trim()) - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Please enter an integer!", e);
+            throw new DukeException(Message.ERRORMESSAGE_INVALID_INTEGER, e);
         }
     }
 
@@ -108,7 +107,7 @@ public class Parser {
         try {
             return new FindCommand(arguments[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Enter some words to search!", e);
+            throw new DukeException(Message.ERRORMESSAGE_MISSING_WORD, e);
         }
     }
 }
