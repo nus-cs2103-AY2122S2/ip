@@ -133,11 +133,10 @@ public class Storage {
     public void saveChanges(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(System.getProperty("user.dir") + filePath);
-            String latestList = "";
-            for (Task task : tasks.getTasks()) {
-                latestList = latestList + task.toFileFormat() + "\n";
-            }
-            fw.write(latestList);
+            StringBuilder latestList = new StringBuilder();
+            // Converting all tasks to string
+            tasks.getTasks().stream().forEach(task -> latestList.append(task.toFileFormat() + "\n"));
+            fw.write(latestList.toString());
             fw.close();
         } catch (IOException e) {
             System.out.println(MSG_ERROR_SAVING_FILE);

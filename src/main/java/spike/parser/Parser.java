@@ -5,6 +5,7 @@ import static spike.task.Task.DATE_TIME_PATTERN;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 import spike.command.AddCommand;
 import spike.command.Command;
@@ -317,11 +318,10 @@ public class Parser {
      * @return command name if the input is valid
      */
     private CommandName validateCommand(String input) {
-        for (CommandName c : CommandName.values()) {
-            if (c.getCommand().equals(input)) {
-                return c;
-            }
-        }
-        return null;
+        // Validate if this is an existing command, return it if valid
+        return Arrays.stream(CommandName.values())
+                .filter(c -> c.getCommand().equals(input))
+                .findFirst()
+                .orElse(null);
     }
 }

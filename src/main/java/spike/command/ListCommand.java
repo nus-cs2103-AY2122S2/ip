@@ -1,8 +1,8 @@
 package spike.command;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import spike.task.Task;
 import spike.task.TaskList;
 
 /**
@@ -55,13 +55,13 @@ public class ListCommand extends Command {
      * @return all tasks
      */
     private String getTaskListText(TaskList tasks) {
-        int i = 1;
-        String result = MSG_LIST_TASK;
-        for (Task task : tasks.getTasks()) {
-            result += i + "." + task + "\n";
-            i++;
-        }
-        return result.trim();
+        AtomicInteger i = new AtomicInteger(1);
+        StringBuilder result = new StringBuilder(MSG_LIST_TASK);
+        tasks.getTasks().stream().forEach(task -> {
+            result.append(i + "." + task + "\n");
+            i.getAndIncrement();
+        });
+        return result.toString().trim();
     }
 
     /**
@@ -71,14 +71,14 @@ public class ListCommand extends Command {
      * @return all task filtered by date
      */
     private String getTaskListTextByDate(TaskList tasks) {
-        int i = 1;
-        String result = MSG_LIST_TASK_BY_DATE;
-        for (Task task : tasks.getTasks()) {
+        AtomicInteger i = new AtomicInteger(1);
+        StringBuilder result = new StringBuilder(MSG_LIST_TASK_BY_DATE);
+        tasks.getTasks().stream().forEach(task -> {
             if (task.getDateTime().toLocalDate().equals(ldt.toLocalDate())) {
-                result = result + i + "." + task + "\n";
+                result.append(i + "." + task + "\n");
             }
-            i++;
-        }
-        return result.trim();
+            i.getAndIncrement();
+        });
+        return result.toString().trim();
     }
 }
