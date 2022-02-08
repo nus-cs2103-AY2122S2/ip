@@ -1,14 +1,14 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
+import duke.exceptions.DukeException;
 
 /**
  * Represents a command to mark a task as not done.
  */
-public class MarkUndoneCommand extends MarkCommand{
+public class MarkUndoneCommand extends MarkCommand {
     public MarkUndoneCommand(String userInput) {
         super(userInput);
     }
@@ -36,7 +36,7 @@ public class MarkUndoneCommand extends MarkCommand{
             }
             boolean isSuccess = taskManager.markTaskUndone(index);
             if (isSuccess) {
-                save(storage,ui,taskManager);
+                save(storage, ui, taskManager);
                 return ui.showUnmarked(taskManager.getTask(index));
             }
             return ui.showUnmarkNotNeeded(taskManager.getTask(index));

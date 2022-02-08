@@ -1,6 +1,9 @@
 package duke.commands;
 
-import duke.*;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskManager;
+import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.exceptions.FailedTaskParseException;
 import duke.tasks.Task;
@@ -27,8 +30,9 @@ public class AddCommand extends Command {
     public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         try {
             Task task = Parser.parseToTask(this.userInput);
+
             taskManager.addTask(task);
-            save(storage,ui,taskManager);
+            save(storage, ui, taskManager);
             return ui.showAddedTask(task, taskManager.size());
         } catch (FailedTaskParseException exception) {
             throw new DukeException("Wrong Format!");

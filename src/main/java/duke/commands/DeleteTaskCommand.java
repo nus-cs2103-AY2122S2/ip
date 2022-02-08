@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.Storage;
-import duke.tasks.Task;
 import duke.TaskManager;
 import duke.Ui;
+import duke.tasks.Task;
 
 /**
  * Represents a command to delete a task.
@@ -28,13 +28,14 @@ public class DeleteTaskCommand extends Command {
             return ui.showDeleteEmptyList();
         }
 
-        int index = Integer.parseInt(userInput.replaceFirst("delete","").strip()) - 1;
+        int index = Integer.parseInt(userInput.replaceFirst("delete", "").strip()) - 1;
 
         if (index < 0 || index >= taskManager.size()) {
             return ui.showDeleteOutOfBounds(taskManager.size());
         }
 
         Task t = taskManager.getTask(index);
+
         boolean success = taskManager.deleteTask(t);
         if (success) {
             save(storage, ui, taskManager);

@@ -5,15 +5,15 @@ import duke.exceptions.DukeException;
 
 
 
-public class Duke{
+public class Duke {
     private TaskManager manager;
     private Ui ui;
     private Storage storage;
 
     public Duke(String filePath) {
-        storage = new Storage(filePath);
-        ui = new Ui();
         try {
+            storage = new Storage(filePath);
+            ui = new Ui();
             ui.showLoadFilePath(storage.getFullPath());
             manager = storage.loadTaskManagerFromFile();
             ui.showLoadingComplete();
@@ -24,19 +24,19 @@ public class Duke{
         }
     }
 
-
     public void run() {
         ui.showBanner();
         ui.showList(manager);
 
         boolean isExit = false;
 
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String userInput = ui.getUserInputLine();
 
                 Command command = Parser.parse(userInput);
-                System.out.println(command.execute(storage,ui,manager));
+
+                System.out.println(command.execute(storage, ui, manager));
 
                 isExit = command.isExit();
             } catch (DukeException e) {
@@ -48,6 +48,7 @@ public class Duke{
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
+
             return command.execute(storage, ui, manager);
         } catch (DukeException e) {
             return e.getMessage();

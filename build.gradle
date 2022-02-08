@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
 }
@@ -24,7 +25,6 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-  //  mainModule = 'main'
     mainClassName = 'gui.Launcher'
 }
 
@@ -69,3 +69,8 @@ jlink {
 jlinkZip {
     group = 'distribution'
 }
+
+checkstyle {
+    toolVersion = '8.29'
+}
+
