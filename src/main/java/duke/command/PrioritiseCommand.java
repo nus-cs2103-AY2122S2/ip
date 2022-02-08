@@ -1,20 +1,25 @@
 package duke.command;
 
-import duke.task.Deadline;
 import duke.ui.Ui;
+import duke.util.Priority;
 import duke.util.Storage;
 import duke.util.TaskList;
 
-
-
 /**
- * Represents the command to add a deadline.
+ * Represents the command to mark a task as done.
  */
-public class DeadlineCommand extends Command {
-    private final Deadline deadline;
-
-    public DeadlineCommand(String description, String by) {
-        deadline = new Deadline(description, by);
+public class PrioritiseCommand extends Command {
+    private final int index;
+    private final Priority priority;
+    /**
+     * Executes the command.
+     *
+     * @param i  The task index.
+     * @param p The task priority.
+     */
+    public PrioritiseCommand(int i, Priority p) {
+        index = i;
+        priority = p;
     }
 
     /**
@@ -25,8 +30,8 @@ public class DeadlineCommand extends Command {
      * @param ui User interface of Duke.
      */
     public String execute(Storage storage, TaskList tasks, Ui ui) {
-        tasks.add(deadline);
-        return ui.addTask(deadline) + ui.countTasks(tasks);
+        tasks.prioritise(index, priority);
+        return ui.prioritiseTask(tasks.get(index));
     }
 
     /**

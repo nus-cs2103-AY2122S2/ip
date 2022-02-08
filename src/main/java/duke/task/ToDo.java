@@ -1,15 +1,28 @@
 package duke.task;
 
+import duke.util.Priority;
+import duke.util.Status;
+
 /**
  * Represents a to-do item.
  */
 public class ToDo extends Task {
-    public ToDo(String description) {
-        super(description);
+    /**
+     * Constructs a to-do.
+     * @param d The event description.
+     * @param s The event status.
+     * @param p The event priority.
+     */
+    public ToDo(String d, Status s, Priority p) {
+        super(d, s, p);
     }
 
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone);
+    /**
+     * Constructs a to-do with unspecified status and priority, which defaults to NOT_DONE and MEDIUM respectively.
+     * @param d The event description.
+     */
+    public ToDo(String d) {
+        super(d);
     }
 
     /**
@@ -19,7 +32,7 @@ public class ToDo extends Task {
      */
     @Override
     public String save() {
-        return "T | " + super.save() + System.lineSeparator();
+        return "T | " + super.save() + " | " + savePriority() + "\n";
     }
 
     /**

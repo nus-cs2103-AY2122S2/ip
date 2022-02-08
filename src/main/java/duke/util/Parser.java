@@ -8,6 +8,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.PrioritiseCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
 
@@ -28,7 +29,7 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "todo":
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("The description of a todo cannot be empty.");
         default:
             String[] commandArr = fullCommand.split(" ");
             if (commandArr.length > 1) {
@@ -54,6 +55,9 @@ public class Parser {
                         return new UnmarkCommand(index);
                     case "delete":
                         return new DeleteCommand(index);
+                    case "prioritise":
+                        Priority priority = parsePriority(commandArr[2]);
+                        return new PrioritiseCommand(index, priority);
                     default:
                         throw new DukeException("Sorry, but I don't know what that means :-(");
                     }
@@ -61,6 +65,21 @@ public class Parser {
             } else {
                 throw new DukeException("Sorry, but I don't know what that means :-(");
             }
+        }
+    }
+    /**
+     * Parses the input into a task priority.
+     * @param s The input.
+     * @return A task priority.
+     */
+    public static Priority parsePriority(String s) {
+        switch(s) {
+        case "low":
+            return Priority.LOW;
+        case "high":
+            return Priority.HIGH;
+        default:
+            return Priority.MEDIUM;
         }
     }
 }
