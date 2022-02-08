@@ -2,6 +2,7 @@ package duke.parser;
 
 import duke.TaskList;
 import duke.exception.DeleteIndexException;
+import duke.exception.DuplicateException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.IndexOutOfStoreException;
 import duke.exception.InvalidIndexException;
@@ -65,6 +66,9 @@ public class InputParser extends Parser {
                 throw new EmptyDescriptionException("todo");
             }
             Task task = new Todo(input);
+            if (tasks.isDuplicate(task)) {
+                throw new DuplicateException();
+            }
             tasks.add(task);
             return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("deadline")) {
@@ -79,6 +83,9 @@ public class InputParser extends Parser {
                 throw new WrongDateSyntaxException();
             }
             Task task = new Deadline(input);
+            if (tasks.isDuplicate(task)) {
+                throw new DuplicateException();
+            }
             tasks.add(task);
             return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("event")) {
@@ -93,6 +100,9 @@ public class InputParser extends Parser {
                 throw new WrongDateSyntaxException();
             }
             Task task = new Event(input);
+            if (tasks.isDuplicate(task)) {
+                throw new DuplicateException();
+            }
             tasks.add(task);
             return "Task added!\n" + task + "\n" + "There are " + tasks.size() + " task(s) in the list.";
         } else if (input.contains("find")) {

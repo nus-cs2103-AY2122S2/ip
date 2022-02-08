@@ -29,6 +29,21 @@ public class Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task currTask = (Task) o;
+        if (currTask.description.equals(this.description)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

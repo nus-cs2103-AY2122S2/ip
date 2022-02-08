@@ -27,6 +27,23 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Event)) {
+            return false;
+        }
+
+        Event currTask = (Event) o;
+        boolean eventsEqual = currTask.description.equals(this.description)
+                && currTask.date.equals(this.date);
+        if (eventsEqual) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + ("(at: " + this.getFullDateTime() + ")");
     }

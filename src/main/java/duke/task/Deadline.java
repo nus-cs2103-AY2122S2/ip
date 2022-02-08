@@ -36,6 +36,24 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline currTask = (Deadline) o;
+        boolean deadlinesEqual = currTask.description.equals(this.description)
+                && currTask.date.equals(this.date)
+                && currTask.time.equals(this.time);
+        if (deadlinesEqual) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + ("(by: " + this.getFullDateTime() + ")");
     }
