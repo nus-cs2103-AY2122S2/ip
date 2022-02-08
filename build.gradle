@@ -65,6 +65,10 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+run {
+    enableAssertions = true
+}
+
 run{
     standardInput = System.in
 }
