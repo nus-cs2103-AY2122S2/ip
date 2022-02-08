@@ -73,6 +73,9 @@ public class Ultoi {
     }
 
     public String getResponse(String input) {
+
+        assert input != null : "User input is null";
+
         try {
             Command cmd = Parser.parse(input);
             return cmd.execute(this.ui, this.tasks, this.storage);

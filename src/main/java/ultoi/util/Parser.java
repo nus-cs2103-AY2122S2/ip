@@ -28,6 +28,8 @@ public class Parser {
     public static Command parse(String input) throws UltoiException {
         String[] tokens = input.split(" ");
 
+        assert tokens.length > 0 : "Input string is not parsable";
+
         try {
             switch (tokens[0]) {
             case "list":
