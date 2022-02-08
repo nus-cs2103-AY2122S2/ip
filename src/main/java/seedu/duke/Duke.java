@@ -13,16 +13,16 @@ public class Duke {
     private static Storage storage;
     private static TaskList tasks;
     private Ui ui;
+    private String FILE_PATH = "taskHistory.txt";
 
     /**
      * Instantiates the ui, storage and tasklist objects.
      * Stores the tasks loaded into the tasklist object.
      *
-     * @param filePath Indicates the path where the task history will be written to.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -38,11 +38,12 @@ public class Duke {
      * Switches between cases based on the command passed in.
      * Exits the running chat-bot when the 'bye' command is read from user input.
      */
-    public void run() {
+    public String getResponse(String input) {
         ui.showWelcome();
-        String nextInput = ui.getNextInput();
+        String message = "HI";
+        String nextInput = input;
 
-        while (!nextInput.equals("bye")) {
+        /*while (!nextInput.equals("bye")) {
             String command = Parser.getCommand(nextInput);
             try {
                 switch (command) {
@@ -164,13 +165,8 @@ public class Duke {
             }
             nextInput = ui.getNextInput();
         }
-        ui.showExit();
-    }
+        ui.showExit();*/
 
-    /**
-     * Main method calls chained methods Duke() and run() to initialise the chat-bot.
-     */
-    public static void main(String[] args) {
-        new Duke("taskHistory.txt").run();
+        return message;
     }
 }
