@@ -56,6 +56,7 @@ public class Parser {
      * @throws WrongInputException If the input is not in the expected form.
      */
     public int parseNumericalDescription(String s, String command, int length) throws WrongInputException {
+        assert s.contains(command);
         String[] inputs = s.split(command + " ");
         if (length == 0) {
             throw new WrongInputException("D: D: D: There are no items in the list D: D: D:");
@@ -88,6 +89,8 @@ public class Parser {
      */
     public String[] parseFormatDescription(String s, String command, String format)
             throws WrongInputException, IncompleteInputException {
+        assert s.contains(command);
+        assert s.contains(format);
         try {
             String[] inputs = s.split(" " + format + " ");
             if (inputs.length < 2) {
@@ -111,8 +114,8 @@ public class Parser {
                 }
                 params[1] = inputs[1];
             } else {
-                // inputs.length > 2
-                // more than one occurrence of "format"; beyond the last one is taken to be the time
+                assert inputs.length > 2;
+                // "format" occurs more than once; time is taken to be the string beyond the last occurrence
                 String[] desc = inputs[0].split(command + " ");
                 StringBuilder firstPart = new StringBuilder();
                 if (desc.length == 2) {
@@ -149,6 +152,7 @@ public class Parser {
      * @throws IncompleteInputException If the input is incomplete.
      */
     public String parseStringDescription(String s, String command) throws IncompleteInputException {
+        assert s.contains(command);
         String[] inputs = s.split(command + " ");
         if (inputs.length == 1) {
             throw new IncompleteInputException("D: D: D: The description of a " + command
@@ -193,6 +197,7 @@ public class Parser {
                         false);
             }
         } else {
+            assert(entrySplit[0].equals("E"));
             if (entrySplit[1].equals("1")) {
                 return new Event(entrySplit[2],
                         LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),

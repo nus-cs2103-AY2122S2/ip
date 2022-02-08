@@ -38,7 +38,7 @@ public class Storage {
      * @throws IOException If I/O errors are faced when reading files.
      */
     public TaskList initialize() throws IOException {
-        // assumes reader is non-empty
+        assert reader.ready();
         TaskList tl = new TaskList();
         while (true) {
             String entry = reader.readLine();
