@@ -95,6 +95,15 @@ public class TaskList {
         return returnString;
     }
 
+    public boolean isDuplicate(Task task) {
+        for (Task currTask : this.store) {
+            if (task.equals(currTask)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Get number of tasks in current tasklist
      *
