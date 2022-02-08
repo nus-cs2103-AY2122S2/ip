@@ -338,7 +338,7 @@ public class Parser {
      * @return command name if the input is valid
      */
     private CommandName validateCommand(String input) {
-        // Validate if this is an existing command, return it if valid
+        // Validate if this is an existing command, return it if it is valid
         return Arrays.stream(CommandName.values())
                 .filter(c -> c.getCommand().equals(input))
                 .findFirst()
