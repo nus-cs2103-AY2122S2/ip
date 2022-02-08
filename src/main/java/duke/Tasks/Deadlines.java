@@ -39,11 +39,11 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: Date-> " + this.deadline.getDayOfMonth()
-                                             + " Month-> " + this.deadline.getMonth()
-                                             + " Day-> " + this.deadline.getDayOfWeek()
-                                             + " Year-> " + this.deadline.getYear()
-                                             + " Time-> " + this.deadline.getHour()
+        return "[D]" + super.toString() + " (by: " + this.deadline.getDayOfMonth()
+                                             + " " + this.deadline.getMonth()
+                                             + " " + this.deadline.getYear()
+                                             + ", " + this.deadline.getDayOfWeek()
+                                             + " " + this.deadline.getHour()
                                              + this.deadline.getMinute() + ")";
     }
 
