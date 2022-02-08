@@ -13,16 +13,24 @@ public class Duke {
     private TaskList tl;
 
 
+    private Command cd;
+
+
     /**
      * Constructor Method for Duke
      */
     public Duke() {
         tl = new TaskList(Storage.getSavedList());
+        cd = new Command();
     }
 
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns duke's response to the provided
+     * input.
+     *
+     * @param input the input from the user
+     * @return String response to be displayed
      */
     public String getResponse(String input) {
 
@@ -30,7 +38,7 @@ public class Duke {
         assert input != null : "assertion error";
 
         try {
-            return Parser.parse(input, this.tl);
+            return Parser.parse(input, this.tl, this.cd);
         } catch (DukeException e) {
             return Ui.showError(e);
         }

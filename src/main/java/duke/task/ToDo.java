@@ -10,10 +10,10 @@ public class ToDo extends Task {
      * Constructor method for ToDo
      *
      * @param desc Description of ToDo
-     * @param isComp Completion Status of ToDo
+     * @param isCompleted Completion Status of ToDo
      */
-    public ToDo(String desc, boolean isComp) {
-        super(desc, isComp);
+    public ToDo(String desc, boolean isCompleted) {
+        super(desc, isCompleted);
     }
 
     /**
