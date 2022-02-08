@@ -7,6 +7,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     public FindCommand(String keyword) {
+        assert(keyword != null && !keyword.equals(""));
         this.keyword = keyword;
     }
 
