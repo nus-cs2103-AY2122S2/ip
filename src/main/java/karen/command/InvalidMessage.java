@@ -34,6 +34,13 @@ public enum InvalidMessage {
             return "You're missing arguments to delete stuff";
         }
     },
+    MISSING_EDIT {
+        @Override
+        public String toString() {
+            return "You're missing arguments to edit stuff."
+                    + "\nThe command should look like this 'edit (index) /description (editValue)'";
+        }
+    },
     INCORRECT_MODIFY {
         @Override
         public String toString() {
@@ -50,6 +57,12 @@ public enum InvalidMessage {
         @Override
         public String toString() {
             return "Incorrect arguments passed into find command.\n'find' requires a term to search with.";
+        }
+    },
+    INCORRECT_EDIT {
+        @Override
+        public String toString() {
+            return "";
         }
     },
     INVALID_INDEX {

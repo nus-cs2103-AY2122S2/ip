@@ -39,6 +39,11 @@ public class Ui {
                 action, item.toString(), count);
     }
 
+    public String formatEditTask(Task item) {
+        return String.format("Fine. Task edited, looks like this now:\n%s",
+                item.toString());
+    }
+
     /**
      * Prints message for inputs and outputs with STD_DIVIDER wrapped around.
      *
