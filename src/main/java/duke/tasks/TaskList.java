@@ -20,16 +20,6 @@ public class TaskList {
     }
 
     /**
-     * Gets the string description of a task.
-     *
-     * @param index The index of task in the list.
-     * @return The task string.
-     */
-    public String getTaskString(int index) {
-        return tasks.get(index).toString();
-    }
-
-    /**
      * Gets the tasks count string.
      *
      * @return The tasks count string.
@@ -65,9 +55,11 @@ public class TaskList {
      *
      * @param index The index of the task in the list.
      */
-    public void markTask(int index) {
+    public Task markTask(int index) {
         try {
-            tasks.get(index).setDone(true);
+            Task task = tasks.get(index);
+            task.setDone(true);
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid index!", e);
         }
@@ -78,9 +70,11 @@ public class TaskList {
      *
      * @param index The index of the task in the list.
      */
-    public void unmarkTask(int index) {
+    public Task unmarkTask(int index) {
         try {
-            tasks.get(index).setDone(false);
+            Task task = tasks.get(index);
+            task.setDone(false);
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid index!", e);
         }
@@ -124,10 +118,10 @@ public class TaskList {
      *
      * @return The compact string description
      */
-    public String taskListFileString() {
+    public String taskListToStorageString() {
         StringBuilder result = new StringBuilder();
         for (Task t : tasks) {
-            result.append(t.simpleString() + "\n");
+            result.append(t.compactStorageString() + "\n");
         }
         return result.toString();
     }

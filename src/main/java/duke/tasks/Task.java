@@ -49,7 +49,7 @@ public class Task {
      *
      * @return The string description of the task.
      */
-    public String simpleString() {
+    public String compactStorageString() {
         return description;
     }
 }

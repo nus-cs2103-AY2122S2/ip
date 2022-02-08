@@ -29,7 +29,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String simpleString() {
+    public String compactStorageString() {
         String flag = isDone ? "1" : "0";
         return "T" + flag + description;
     }

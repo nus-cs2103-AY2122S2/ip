@@ -21,8 +21,8 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        tasks.markTask(index);
+        String task = tasks.markTask(index).toString();
         storage.saveTaskList(tasks);
-        return MESSAGE + "\n  " + tasks.getTaskString(index);
+        return MESSAGE + "\n  " + task;
     }
 }

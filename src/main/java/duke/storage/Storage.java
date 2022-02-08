@@ -61,7 +61,7 @@ public class Storage {
     public void saveTaskList(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(STORAGE_FILE);
-            fw.write(tasks.taskListFileString());
+            fw.write(tasks.taskListToStorageString());
             fw.close();
         } catch (IOException e) {
             throw new DukeException("Something went wrong when saving your data!", e);

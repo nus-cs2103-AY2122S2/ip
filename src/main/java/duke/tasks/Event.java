@@ -38,7 +38,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String simpleString() {
+    public String compactStorageString() {
         String flag = isDone ? "1" : "0";
         return "E" + flag + description + " | " + eventDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }

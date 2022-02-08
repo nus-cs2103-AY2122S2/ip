@@ -38,7 +38,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String simpleString() {
+    public String compactStorageString() {
         String flag = isDone ? "1" : "0";
         return "D" + flag + description + " | " + dueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
