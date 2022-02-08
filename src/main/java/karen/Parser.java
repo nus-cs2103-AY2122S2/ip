@@ -20,6 +20,8 @@ public class Parser {
     public static final Pattern DEADLINE_FORMAT = Pattern.compile("^deadline (?<description>.*) \\/by (?<time>.*)$");
     public static final Pattern EVENT_FORMAT = Pattern.compile("^event (?<description>.*) \\/at (?<time>.*)$");
     public static final Pattern FIND_FORMAT = Pattern.compile("^find (?<keyTerm>.*)$");
+    public static final Pattern EDIT_FORMAT = Pattern.compile(
+            "^edit\\s+(?<index>\\d+)\\s+\\/description\\s+(?<editValue>.*)$");
 
     /**
      * Validates if dateString parameter follows yyyy-mm-dd format.
@@ -57,6 +59,7 @@ public class Parser {
             if (fullInput.matches("^((?!\\/at).)*$")) {
                 cmd = new InvalidCommand(InvalidMessage.MISSING_AT.toString());
             }
+            break;
         default:
             cmd = new InvalidCommand();
         }
@@ -95,7 +98,7 @@ public class Parser {
             case "event":
                 matcher = EVENT_FORMAT.matcher(fullInput);
                 matcher.find();
-                cmd =  new AddCommand(new Event(matcher.group("description"),
+                cmd = new AddCommand(new Event(matcher.group("description"),
                         validateDateFormat(matcher.group("time"))));
                 break;
             default:
@@ -140,6 +143,27 @@ public class Parser {
         assert cmd != null;
 
         return cmd;
+    }
+
+    /**
+     *
+     * @param keyWord
+     * @param fullInput
+     * @return
+     */
+    private Command prepareEdit(String keyWord, String fullInput) {
+        final Matcher matcher = EDIT_FORMAT.matcher(fullInput);
+        if (!matcher.matches()) {
+            return new InvalidCommand(InvalidMessage.MISSING_EDIT.toString());
+        }
+
+        try {
+            return new EditCommand(Integer.valueOf(matcher.group("index")) - 1,
+                    matcher.group("editValue"));
+        } catch (IllegalStateException err) {
+            return new InvalidCommand(InvalidMessage.INCORRECT_EDIT.toString());
+        }
+
     }
 
     /**
@@ -210,6 +234,9 @@ public class Parser {
         case "mark":
         case "unmark":
             getCommand = prepareModify(keyWord, fullInput);
+            break;
+        case "edit":
+            getCommand = prepareEdit(keyWord, fullInput);
             break;
         case "delete":
             getCommand = prepareDelete(keyWord, fullInput);

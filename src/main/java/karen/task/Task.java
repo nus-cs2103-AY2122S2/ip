@@ -6,11 +6,11 @@ import java.time.LocalDate;
  * Abstract class to store description and status of Task
  */
 public abstract class Task {
-    private String description;
     protected boolean isDone;
+    private String description;
 
     public Task(String inputDescription) {
-        description = inputDescription;
+        setDescription(inputDescription);
         isDone = false;
     }
 
@@ -35,6 +35,14 @@ public abstract class Task {
      */
     public String getDoneIcon () {
         return (isDone) ? "X" : " ";
+    }
+
+    /**
+     * To set description of Task
+     * @param inputDescription
+     */
+    public void setDescription(String inputDescription) {
+        description = inputDescription;
     }
 
     /**
