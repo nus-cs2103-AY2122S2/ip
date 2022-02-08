@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
+        d.setMainWindow(this);
     }
 
     /**
@@ -64,6 +65,17 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         checkIfBye(input);
+    }
+
+    /**
+     * Creates a dialog box for Duke that reminds the user of a task.
+     *
+     * @param reminderMessage The message to remind the user.
+     */
+    public void showReminder(String reminderMessage) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(reminderMessage, dukeImage)
+        );
     }
 
     private void checkIfBye(String input) {

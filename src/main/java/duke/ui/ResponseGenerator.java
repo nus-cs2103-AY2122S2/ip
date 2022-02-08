@@ -2,6 +2,8 @@ package duke.ui;
 
 import java.util.ArrayList;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Reminder;
 import duke.task.Task;
 
@@ -80,6 +82,16 @@ public class ResponseGenerator {
     }
 
     /**
+     * Returns the error message when the maximum date/time is exceeded
+     * for scheduling of reminders.
+     *
+     * @return The error message that maximum date/time is exceeded.
+     */
+    public String getMaxDateTimeExceededErrorMessage() {
+        return "Maximum date/time exceeded D: please try again!";
+    }
+
+    /**
      * Returns the message to be printed when a task is added to the task list.
      *
      * @param latestTask The task that was just added to the task list.
@@ -102,7 +114,7 @@ public class ResponseGenerator {
      * @return The message to be printed when a reminder is added.
      */
     public String getAddReminderMessage(Task task, Reminder reminderTime) {
-        return "Reminder at " + reminderTime.toString() + " for task: " + task.getDescription();
+        return ":D Reminder set at " + reminderTime.getDateTime() + " for task: " + task.getDescription();
     }
 
     /**
@@ -112,7 +124,14 @@ public class ResponseGenerator {
      * @return The message to be printed to remind the user.
      */
     public String getReminderMessage(Task t) {
-        return "!Reminder! " + t.getDescription() + " at " + t.getReminder().getDateTime();
+        if (t instanceof Event) {
+            Event e = (Event) t;
+            return "!Reminder! " + e.getDescription() + " at " + e.formatTime();
+        } else if (t instanceof Deadline) {
+            Deadline d = (Deadline) t;
+            return "!Reminder! " + d.getDescription() + " by " + d.formatTime();
+        }
+        return "!Reminder! " + t.getDescription();
     }
 
     /**

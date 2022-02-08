@@ -1,7 +1,11 @@
 package duke.command;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import duke.exception.IncompleteInputException;
 import duke.exception.WrongInputException;
@@ -9,8 +13,10 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.ui.MainWindow;
 import duke.ui.Parser;
 import duke.ui.ResponseGenerator;
+import javafx.application.Platform;
 
 /** An application to manage tasks */
 public class Duke {
@@ -20,6 +26,7 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private ResponseGenerator responseGenerator;
+    private MainWindow mainWindow;
 
     /**
      * Creates a new Duke instance.
@@ -34,6 +41,16 @@ public class Duke {
             System.out.println(responseGenerator.getFileErrorMessage());
             taskList = new TaskList();
         }
+    }
+
+    /**
+     * Sets the mainWindow reference this Duke instance to the
+     * given mainWindow to allow for easier communication.
+     *
+     * @param mainWindow The GUI of Duke.
+     */
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
     }
 
     /**
@@ -74,6 +91,14 @@ public class Duke {
                     return taskList.deleteItem(index);
                 } else if (command.equals("remind")) {
                     Task task = parser.parseReminderDescription(input, taskList);
+                    long timeElapsed = LocalDateTime.now().until(task.getReminder().getLocalDateTime(),
+                            ChronoUnit.MILLIS);
+                    new Timer().schedule(new TimerTask() {
+                        public void run() {
+                            Platform.runLater(() ->
+                                    mainWindow.showReminder(responseGenerator.getReminderMessage(task)));
+                        }
+                    }, timeElapsed);
                     return responseGenerator.getAddReminderMessage(task, task.getReminder());
                 } else if (command.equals("find")) {
                     String query = parser.parseStringDescription(input, command);
@@ -100,6 +125,8 @@ public class Duke {
                 return responseGenerator.getDateTimeFormatErrorMessage();
             } catch (IOException e) {
                 return responseGenerator.getIoErrorMessage();
+            } catch (ArithmeticException e) {
+                return responseGenerator.getMaxDateTimeExceededErrorMessage();
             } catch (Exception e) {
                 return e.getMessage();
             }

@@ -25,4 +25,13 @@ public class Reminder {
     public String getDateTime() {
         return reminderTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
     }
+
+    /**
+     * Returns the LocalDateTime object this class encapsulates.
+     *
+     * @return The LocalDateTime object.
+     */
+    public LocalDateTime getLocalDateTime() {
+        return this.reminderTime;
+    }
 }
