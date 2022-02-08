@@ -35,6 +35,11 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException();
             }
+
+            if (taskIndex < 0) {
+                throw new DukeException();
+            }
+
             return new ParsedCommand(parsedCommand[0], taskIndex);
         case "find":
         case "todo":

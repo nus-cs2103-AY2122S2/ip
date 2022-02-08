@@ -296,7 +296,6 @@ public class Duke extends Application {
 
     }
 
-
     /**
      * Sets up the interface for when the user inputs and also the return string.
      *
