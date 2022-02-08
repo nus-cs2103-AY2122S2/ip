@@ -4,6 +4,11 @@ package karen.task;
  * Stores the description of the Tasks
  */
 public class ToDo extends Task {
+    /**
+     * Constructor for ToDo
+     *
+     * @param description Description of what ToDo is for
+     */
     public ToDo(String description) {
         super(description);
     }

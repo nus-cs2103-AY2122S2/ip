@@ -39,6 +39,11 @@ public class Ui {
                 action, item.toString(), count);
     }
 
+    /**
+     * Creates formatted string to Task item, to indicate an edit to Task
+     * @param item edited Task
+     * @return Formatted string
+     */
     public String formatEditTask(Task item) {
         return String.format("Fine. Task edited, looks like this now:\n%s",
                 item.toString());

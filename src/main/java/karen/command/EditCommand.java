@@ -12,6 +12,12 @@ public class EditCommand extends Command {
     private int taskIndex;
     private String editValue;
 
+    /**
+     * Constructor for EditCommand
+     *
+     * @param inputIndex 0-based index of Task to edit
+     * @param inputValue Updated value to edit description
+     */
     public EditCommand(int inputIndex, String inputValue) {
         taskIndex = inputIndex;
         editValue = inputValue;

@@ -9,6 +9,11 @@ public abstract class Task {
     protected boolean isDone;
     private String description;
 
+    /**
+     * Constructor for Task object
+     *
+     * @param inputDescription Description of what Task is for
+     */
     public Task(String inputDescription) {
         setDescription(inputDescription);
         isDone = false;

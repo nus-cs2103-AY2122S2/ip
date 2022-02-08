@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate atDate;
 
+    /**
+     * Constructor for Event
+     *
+     * @param description Description of what Event is for
+     * @param at A "yyyy-mm-dd" string for the Event to be completed at
+     */
     public Event(String description, String at) {
         super(description);
         atDate = parseDate(at);

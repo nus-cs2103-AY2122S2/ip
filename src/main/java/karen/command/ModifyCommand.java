@@ -15,6 +15,12 @@ public class ModifyCommand extends Command {
     protected ModifyType modifyAction;
     private int taskIndex;
 
+    /**
+     * Constructor for ModifyCommand
+     *
+     * @param inputIndex 0-based index of Task object to be referenced in Storage
+     * @param inputAction action to be applied to Tast at inputIndex in Storage
+     */
     public ModifyCommand(int inputIndex, ModifyType inputAction) {
         taskIndex = inputIndex;
         modifyAction = inputAction;
@@ -45,6 +51,8 @@ public class ModifyCommand extends Command {
                 storage.saveTasks();
                 outputResult = ui.displayUserInput(String.format(UNDONE_FORMAT, getTask));
                 break;
+            default:
+                outputResult = null;
             }
 
             // outputResult should not plausibly be null. Constructing ModifyCommand objects should
