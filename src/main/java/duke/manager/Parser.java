@@ -33,7 +33,7 @@ public class Parser {
         assert fullCommand.split(" ").length >= 1 : "Should have at least 1 word";
         switch (keyword) {
         case "list":
-            return new ListCommand();
+            return parseListCommand();
         case "mark":
             return parseMarkCommand(fullCommand, true);
         case "unmark":
@@ -47,7 +47,7 @@ public class Parser {
         case "delete":
             return parseDeleteTaskCommand(fullCommand);
         case "bye":
-            return new ExitCommand();
+            return parseExitCommand();
         case "find":
             return parseFindCommand(fullCommand);
         default:
@@ -152,4 +152,23 @@ public class Parser {
         String toFind = fullCommand.split(" ")[1];
         return new FindCommand(toFind);
     }
+
+    /**
+     * Returns a ListCommand.
+     *
+     * @return A ListCommand.
+     */
+    private ListCommand parseListCommand() {
+        return new ListCommand();
+    }
+
+    /**
+     * Returns an ExitCommand.
+     *
+     * @return An ExitCommand.
+     */
+    private ExitCommand parseExitCommand() {
+        return new ExitCommand();
+    }
+
 }
