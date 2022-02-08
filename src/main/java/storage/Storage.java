@@ -81,7 +81,7 @@ public class Storage {
     public void saveChanges(TaskList tasks) throws JarvisException {
         try {
             StringBuilder sb = new StringBuilder();
-            for (Task t : tasks.getTasks()) {
+            for (Task t : tasks.getTaskList()) {
                 sb.append(t.toFileString()).append("\n");
             }
             FileWriter fw = new FileWriter(dataFilePath);

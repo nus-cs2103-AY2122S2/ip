@@ -1,5 +1,8 @@
 package enums;
 
+/**
+ * An enum class for user commands.
+ */
 public enum Command {
     BYE,
     LIST,

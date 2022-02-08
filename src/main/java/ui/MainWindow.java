@@ -1,7 +1,6 @@
 package ui;
 
 import jarvis.Jarvis;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,9 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.lang.management.PlatformLoggingMXBean;
-import java.util.concurrent.TimeUnit;
-
+/**
+ * The main window for the GUI application.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
