@@ -21,6 +21,11 @@ public class DeleteCommand extends Command {
      * @throws TsundereException exception for invalid number.
      */
     public String execute(TaskList t, Storage s) throws TsundereException {
+      
+        int lenTasks = t.getCount();
+
+        assert lenTasks < 0 : "Should not have negative number of tasks in taskLIst!" ;
+      
         if (t.getCount() < this.num || this.num <= t.getFirstIndex()) {
             throw new TsundereException("Your number is not valid!!!");
         }
