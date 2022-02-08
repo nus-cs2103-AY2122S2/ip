@@ -15,10 +15,38 @@ import main.TesseractException;
  * @since 0.1.0
  */
 public class Command {
-    /**
-     * The specific command keyword
-     */
+    private static final String BY = "/by";
+    private static final String AT = "/at";
+    private static final String DATE = "date";
+    private static final String BYE_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DDL_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
+    private static final String FILTER_COMMAND = "filter";
+    private static final String FIND_COMMAND = "find";
+    private static final String MARK_COMMAND = "mark";
+    private static final String UNMARK_COMMAND = "unmark";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String INVALID_COMMAND = "You have entered an invalid command leh~";
+    private static final String INCOMPLETE_UNMARK = "Which task you want to unmark again?";
+    private static final String INVALID_INDEX = "You need to enter a valid list number mah~";
+    private static final String INCOMPLETE_FILTER = "What do you want to filter by again?";
+    private static final String TOO_MUCH_FIND_KEYWORD = "You can only find by one keyword siah~";
+    private static final String INCOMPLETE_FIND = "You need to key in your search keyword mah";
+    private static final String INCOMPLETE_EVENT = "Nah you need to provide me "
+        + "with the details of this event *_*";
+    private static final String EVENT_MISSING_TIMING = "When is the timing for your event again?";
+    private static final String INCOMPLETE_DEADLINE = "Sorry I can't create "
+        + "deadline without its details )-:";
+    private static final String DEADLINE_MISSING_TIMING = "When do you need to do this by again?";
+    private static final String INCOMPLETE_TODO = "I cannot create todo"
+            + " if you don't tell me what it's about eh :-(";
+    private static final String DUMMY_INVALID_COMMAND = "Hey bro, not sure if this command is valid eh #_#";
+
+    /** The specific command keyword */
     protected String cmdWord;
+
 
     Command(String keyword) {
         this.cmdWord = keyword;
@@ -46,61 +74,60 @@ public class Command {
         String[] cmdArr = fullCmd.split(" ");
         int cmdLen = cmdArr.length;
         switch (cmdArr[0]) {
-        case "bye":
-        case "list":
+        case BYE_COMMAND:
+        case LIST_COMMAND:
             if (cmdLen > 1) {
-                throw new TesseractException("You have entered an invalid command leh~");
+                throw new TesseractException(INVALID_COMMAND);
             }
             break;
-        case "delete":
-        case "mark":
-        case "unmark":
+        case DELETE_COMMAND:
+        case MARK_COMMAND:
+        case UNMARK_COMMAND:
             if (cmdLen == 1) {
-                throw new TesseractException("Which task you want to remove again?");
+                throw new TesseractException(INCOMPLETE_UNMARK);
             } else if (cmdLen > 2 || !Command.isInteger(cmdArr[1])
                     || Integer.parseInt(cmdArr[1]) > numOfTasks
                     || Integer.parseInt(cmdArr[1]) < 1) {
-                throw new TesseractException("You need to enter a valid list number mah~");
+                throw new TesseractException(INVALID_INDEX);
             }
             break;
-        case "filter":
-            if (cmdLen < 4 || !fullCmd.contains("/by")) {
-                throw new TesseractException("What do you want to filter by again?");
-            } else if (cmdArr[2].equals("date")) {
+        case FILTER_COMMAND:
+            if (cmdLen < 4 || !fullCmd.contains(BY)) {
+                throw new TesseractException(INCOMPLETE_FILTER);
+            } else if (cmdArr[2].equals(DATE)) {
                 Date.checkValidTime(cmdArr[3]);
             }
             break;
-        case "find":
+        case FIND_COMMAND:
             if (cmdLen > 2) {
-                throw new TesseractException("You can only find by one keyword siah~");
+                throw new TesseractException(TOO_MUCH_FIND_KEYWORD);
             } else if (cmdLen < 2) {
-                throw new TesseractException("You need to key in your search keyword mah");
+                throw new TesseractException(INCOMPLETE_FIND);
             }
             break;
-        case "event":
+        case EVENT_COMMAND:
             if (cmdLen == 1) {
-                throw new TesseractException("Nah you need to provide me with the details of this event *_*");
-            } else if (!fullCmd.contains("/at")) {
-                throw new TesseractException("When is the timing for your event again?");
-            }
-            Date.checkValidTime(cmdArr[cmdLen - 1]);
-            break;
-        case "deadline":
-            if (cmdLen == 1) {
-                throw new TesseractException("Sorry I can't create deadline without its details )-:");
-            } else if (!fullCmd.contains("/by")) {
-                throw new TesseractException("When do you need to do this by again?");
+                throw new TesseractException(INCOMPLETE_EVENT);
+            } else if (!fullCmd.contains(AT)) {
+                throw new TesseractException(EVENT_MISSING_TIMING);
             }
             Date.checkValidTime(cmdArr[cmdLen - 1]);
             break;
-        case "todo":
+        case DDL_COMMAND:
             if (cmdLen == 1) {
-                throw new TesseractException("I cannot create todo"
-                        + " if you don't tell me what it's about eh :-(");
+                throw new TesseractException(INCOMPLETE_DEADLINE);
+            } else if (!fullCmd.contains(BY)) {
+                throw new TesseractException(DEADLINE_MISSING_TIMING);
+            }
+            Date.checkValidTime(cmdArr[cmdLen - 1]);
+            break;
+        case TODO_COMMAND:
+            if (cmdLen == 1) {
+                throw new TesseractException(INCOMPLETE_TODO);
             }
             break;
         default:
-            throw new TesseractException("Hey bro, not sure if this command is valid eh #_#");
+            throw new TesseractException(DUMMY_INVALID_COMMAND);
         }
 
     }
@@ -114,23 +141,23 @@ public class Command {
     public static Command generate(String fullCmd) {
         String[] cmdArr = fullCmd.split(" ");
         switch (cmdArr[0]) {
-        case "bye":
+        case BYE_COMMAND:
             return new ExitCommand(cmdArr);
-        case "list":
+        case LIST_COMMAND:
             return new ListCommand(cmdArr);
-        case "filter":
+        case FILTER_COMMAND:
             return new FilterCommand(cmdArr);
-        case "find":
+        case FIND_COMMAND:
             return new FindCommand(cmdArr);
-        case "delete":
+        case DELETE_COMMAND:
             return new DeleteCommand(cmdArr);
-        case "mark":
+        case MARK_COMMAND:
             return new MarkCommand(cmdArr);
-        case "unmark":
+        case UNMARK_COMMAND:
             return new UnmarkCommand(cmdArr);
-        case "todo":
-        case "deadline":
-        case "event":
+        case TODO_COMMAND:
+        case DDL_COMMAND:
+        case EVENT_COMMAND:
             return new CreateTaskCommand(cmdArr);
         default:
             // dummy command

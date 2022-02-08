@@ -7,7 +7,7 @@ import command.Command;
 /**
  * Main driving class of Tesseract.
  * @author Fan Jue
- * @version 0.1.0
+ * @version 0.2.0
  * @since 0.1.0
  */
 public class Tesseract {
@@ -26,18 +26,10 @@ public class Tesseract {
         try {
             taskList = new TaskList(storage.getStorage());
         } catch (TesseractException e) {
-            ui.showError(e.getErrMsg());
             taskList = new TaskList();
+            ui.showError(e.getErrMsg());
         }
     }
-
-    /**
-     * Main driver of the AI.
-     * @param args
-     */
-    //public static void main(String[] args) {
-    //    new Tesseract(SCHEDULE_PATH).run();
-    //}
 
     /**
      * Run the system.

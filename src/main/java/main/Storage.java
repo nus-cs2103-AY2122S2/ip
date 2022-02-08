@@ -10,10 +10,17 @@ import java.util.Scanner;
 /**
  * Represent a memory storage.
  * @author Fan Jue
- * @version 0.1.0
+ * @version 0.2.0
  * @since 0.1.0
  */
 public class Storage {
+    private static final String CREATE_FILE_FAILURE = "Not joking but I cannot create a memory for you.. \n"
+            + "You mind changing a laptop?";
+    private static final String UPDATE_MEMORY_FAILURE = "Sorry but I cannot upload your list of "
+            + "tasks into memory due to"
+            + "some unforeseen errors :(\n "
+            + "Try command force exit (to be added in later)";
+    private static final boolean FALSE = false;
     /** A file used to read/store memory from/in hard disk */
     protected File file;
     /** A string of the relative path of the file */
@@ -29,7 +36,7 @@ public class Storage {
     public Storage(String path) {
         this.path = path;
         this.file = new File(path);
-        this.updated = false;
+        this.updated = FALSE;
     }
 
     /**
@@ -49,8 +56,7 @@ public class Storage {
             try {
                 this.file.createNewFile();
             } catch (IOException err) {
-                throw new TesseractException("Not joking but I cannot create a memory for you.. \n"
-                        + "You mind changing a laptop?");
+                throw new TesseractException(CREATE_FILE_FAILURE);
             }
         }
         return tasks;
@@ -87,11 +93,9 @@ public class Storage {
                 fw.write(System.lineSeparator());
             }
             fw.close();
-            this.updated = false; // storage is up-to-date
+            this.updated = FALSE; // storage is up-to-date
         } catch (IOException e) {
-            throw new TesseractException("Sorry but I cannot upload your list of tasks into memory due to"
-                    + "some unforeseen errors :(\n "
-                    + "Try command force exit (to be added in later)");
+            throw new TesseractException(UPDATE_MEMORY_FAILURE);
         }
     }
 }

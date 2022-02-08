@@ -7,6 +7,8 @@ package task;
  * @since 0.1.0
  */
 public class Todo extends Task {
+    private static final String TASK_SYMBOL = "T";
+    private static final String TASK_STRING = "[T]";
     /**
      * Create a todo.
      *
@@ -23,7 +25,7 @@ public class Todo extends Task {
      */
     @Override
     public String toMemoryString() {
-        return "T" + super.toMemoryString();
+        return TASK_SYMBOL + super.toMemoryString();
     }
 
     /**
@@ -33,6 +35,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return TASK_STRING + super.toString();
     }
 }
