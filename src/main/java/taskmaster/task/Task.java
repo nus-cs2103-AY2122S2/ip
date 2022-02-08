@@ -1,4 +1,6 @@
 package taskmaster.task;
+
+import taskmaster.util.TagList;
 /**
  * This class encapsulates the information necessary for a user task.
  */
@@ -9,6 +11,9 @@ public abstract class Task {
     /** Status of the task. **/
     protected boolean isCompleted;
 
+    /** Tag list **/
+    protected TagList tagList;
+
     /**
      * Constructor for Task Objects.
      *
@@ -17,6 +22,7 @@ public abstract class Task {
 
     public Task(String taskName) {
         this.taskName = taskName;
+        this.tagList = new TagList();
         this.isCompleted = false;
     }
 
@@ -74,4 +80,15 @@ public abstract class Task {
     public boolean containsKeyword(String keyword) {
         return this.taskName.toLowerCase().contains(keyword);
     }
+
+
+    public String addTag(String tag) {
+        tagList.addTag(tag);
+        return "Successfully added tag: \n" + tag + " to " + taskName + "\n";
+    }
+
+    public String getAllTags() {
+        return "Task " + taskName + " has the following tags \n" + tagList.getAllTags();
+    }
 }
+
