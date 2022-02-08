@@ -16,9 +16,7 @@ public class Jarvis {
 
     private boolean processNext = true;
 
-    public Jarvis() {
-        startup();
-    }
+    public Jarvis() {}
 
     /**
      * Runs the main chat/program loop.
@@ -63,15 +61,14 @@ public class Jarvis {
     /**
      * Initializes the UI and loads the data file in storage into the program.
      */
-    public void startup() {
+    public String startup() {
         try {
             storage = new Storage("data/data.txt");
             ui = new Ui();
             tasks = new TaskList(storage.loadData());
-            ui.welcome();
+            return ui.welcome();
         } catch (JarvisException e) {
-            ui.echo(e.getMessage());
-            System.exit(0);
+            return e.getMessage();
         }
     }
 

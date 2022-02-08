@@ -24,6 +24,7 @@ public class Storage {
      * @param dataFilePath Path of the file to store and retrieve data from.
      */
     public Storage(String dataFilePath) {
+        assert dataFilePath != null : "Data file path should not be null";
         this.dataFilePath = dataFilePath;
     }
 
