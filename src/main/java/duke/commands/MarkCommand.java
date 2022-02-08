@@ -43,25 +43,31 @@ public class MarkCommand extends Command<String> {
         int targetIndex;
         int size = list.getSize();
         if (echo.length == 1) {
+            assert false : "Task to mark is not specified";
             throw new DukeException(err);
         }
         String taskNum = echo[1];
         if (taskNum.isEmpty()) {
+            assert false : "Task to mark is not specified";
             throw new DukeException(err);
         }
         try {
             targetIndex = Integer.parseInt(taskNum);
         } catch (Exception e) {
+            assert false : "Task to mark is not spelled out in words";
             throw new DukeException(wrongFormat);
         }
         if (targetIndex > size || targetIndex <= 0) {
+            assert false : "Task to mark is not in list";
             throw new DukeException(wrongNumber);
         } else {
             Task curr = list.getTask(targetIndex - 1);
             list.markTask(targetIndex - 1);
             String status = curr.getStatus();
             String description = curr.getDescription();
+            assert description != null;
             response = Ui.showMarkRes(status, description);
+            assert response != null;
         }
         try {
             storage.writeToFile(list);

@@ -72,6 +72,7 @@ public class Storage {
                     if (isMarked) {
                         curr.mark();
                     }
+                    assert curr != null : "to do should be created";
                     list.add(curr);
                     break;
                 }
@@ -84,6 +85,7 @@ public class Storage {
                     if (isMarked) {
                         curr.mark();
                     }
+                    assert curr != null : "deadline should be created";
                     list.add(curr);
                     break;
                 }
@@ -95,6 +97,7 @@ public class Storage {
                     if (isMarked) {
                         curr.mark();
                     }
+                    assert curr != null : "event should be created";
                     list.add(curr);
                     break;
                 }
