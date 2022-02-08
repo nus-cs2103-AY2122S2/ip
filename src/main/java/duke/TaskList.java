@@ -123,6 +123,14 @@ public class TaskList {
         return output + "    " + taskString;
     }
 
+    /**
+     * Tags specified task in the list.
+     *
+     * @param taskToTag index of task to be tagged starting from 1.
+     * @param tag description of tag.
+     * @param storage storage of task list.
+     * @throws IOException
+     */
     public TaskList tagTask(int taskToTag, String tag, Storage storage) throws IOException {
         Task taskToBeTagged = taskLists.get(taskToTag - 1);
         Tag taskTag = new Tag(tag);
@@ -137,11 +145,7 @@ public class TaskList {
 
         // save the updated tasklist to disk
         TaskList tempTaskLists = new TaskList(taskLists);
-//        storage.save(tempTaskLists);
-//        String output = "OK, I've tagged this task:\n";
-//        String taskString = String.format("%s", taggedTask.toString());
         return tempTaskLists;
-//        return output + taskString;
     }
 
     /**

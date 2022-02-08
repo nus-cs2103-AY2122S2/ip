@@ -32,6 +32,14 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * Constructs event object.
+     *
+     * @param description event description.
+     * @param eventDate event date.
+     * @param time event time.
+     * @param tag event tag.
+     */
     public Event(String description, LocalDate eventDate, LocalTime time, Tag tag) {
         super(description);
         this.eventDate = eventDate;
@@ -42,6 +50,12 @@ public class Event extends Task {
         this.tag = tag;
     }
 
+    /**
+     * Tags event object.
+     *
+     * @param taskTag event tag.
+     * @return event object.
+     */
     @Override
     public Event tag(Tag taskTag) {
         return new Event(description, eventDate, time, taskTag);

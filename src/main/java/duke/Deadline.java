@@ -32,6 +32,14 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Constructs deadline object with tag.
+     *
+     * @param description description of deadline task.
+     * @param deadlineDate deadline date.
+     * @param time deadline time.
+     * @param tag deadline tag.
+     */
     public Deadline(String description , LocalDate deadlineDate, LocalTime time, Tag tag) {
         super(description);
         this.deadlineDate = deadlineDate;
@@ -42,6 +50,12 @@ public class Deadline extends Task {
         this.tag = tag;
     }
 
+    /**
+     * Tags deadline task.
+     *
+     * @param taskTag tag for task.
+     * @return deadline object.
+     */
     @Override
     public Deadline tag(Tag taskTag) {
         return new Deadline(description, deadlineDate, time, taskTag);

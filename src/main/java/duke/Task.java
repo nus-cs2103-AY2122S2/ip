@@ -18,6 +18,12 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Constructs a task object.
+     *
+     * @param description
+     * @param tag
+     */
     public Task(String description, Tag tag) {
         this.description = description;
         this.isDone = false;

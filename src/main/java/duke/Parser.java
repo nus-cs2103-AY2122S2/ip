@@ -232,12 +232,20 @@ public class Parser {
         return output;
     }
 
+    /**
+     * Manages tag task.
+     *
+     * @param taskLists task list.
+     * @param userInputs user input command.
+     * @param storage storage of tasks.
+     * @return string representation of tag command.
+     * @throws IOException
+     */
     static String parserTag(TaskList taskLists, String[] userInputs, Storage storage) throws IOException {
         int taskToTag = Integer.parseInt(userInputs[1]);
         String output = "OK, I've tagged this task:\n";
         TaskList taggedTaskList = taskLists.tagTask(taskToTag, userInputs[2], storage);
         String taskString = String.format("%s", taskLists.get(taskToTag - 1).toString());
-//        TaskList taggedTaskList = taskLists.tagTask(taskToTag, userInputs[2], storage);
         storage.save(taggedTaskList);
         for (int i = 0; i < taggedTaskList.size(); i++) {
             System.out.println(taggedTaskList.get(i).toString());
