@@ -49,7 +49,7 @@ public class FindCommand extends Command {
             List<Task> filteredTasks =
                     allTasks
                     .stream()
-                    .filter(task -> fullSearchTask(task))
+                    .filter(this::fullSearchTask)
                     .collect(Collectors.toList());
             int filteredLength = filteredTasks.size();
 
