@@ -17,6 +17,7 @@ public class Deadline extends Task {
      *
      * @param description The details of the deadline task.
      * @param by The deadline of the task.
+     * @param recursiveTag The frequency of recurrence the deadline task.
      */
     public Deadline(String description, LocalDateTime by, RecursiveTag recursiveTag) {
         super(description, recursiveTag);
@@ -29,6 +30,8 @@ public class Deadline extends Task {
      * @param description The details of the deadline task.
      * @param by The deadline of the task.
      * @param isDone Whether the task is done.
+     * @param recursiveTag The frequency recurrence of the deadline task.
+     * @param lastResetDate The last reset date of the task.
      */
     public Deadline(String description, LocalDateTime by, boolean isDone,
                     RecursiveTag recursiveTag, LocalDate lastResetDate) {

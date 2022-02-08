@@ -190,6 +190,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a list of RecursiveTags given the command arguments.
+     *
+     * @param commandArguments The command argument containing all the tags.
+     * @return The list of RecursiveTags found in the command argument.
+     */
     private static ArrayList<RecursiveTag> getTags(String commandArguments) {
         ArrayList<RecursiveTag> tags = new ArrayList<>();
         String[] arguments = commandArguments.split(" ");
@@ -204,6 +210,12 @@ public class Parser {
         return tags;
     }
 
+    /**
+     * Returns the String command arguments with all tags removed.
+     *
+     * @param commandArguments The command argument that needs its tags removed.
+     * @return The command arguments without tags.
+     */
     private static String removeTags(String commandArguments) {
         String[] arguments = commandArguments.split(" ");
         String taglessCommandArguments = commandArguments + " ";

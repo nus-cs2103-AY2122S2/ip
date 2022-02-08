@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
+
+/**
+ * An abstract class representing a task.
+ */
 public abstract class Task {
 
     protected String description;
@@ -34,10 +38,20 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns the done status of the task.
+     *
+     * @return the done status of the task.
+     */
     protected String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Returns the recursive tag of the task.
+     *
+     * @return the recursive tag of the task.
+     */
     protected String getRecursiveFrequency() {
         if (recursiveTag != null) {
             return recursiveTag.getLabel();
@@ -46,10 +60,20 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns if the task is recursive.
+     *
+     * @return
+     */
     public boolean isRecursive() {
         return recursiveTag != null;
     }
 
+    /**
+     * Checks if the timeframe of a recurring task should be reset.
+     *
+     * @return Whether a recurring task should be reset.
+     */
     private boolean shouldReset() {
         LocalDate today = LocalDate.now();
         LocalDate resetDate;
@@ -84,10 +108,16 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Marks a task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Marks a task as not done.
+     */
     public void markAsUndone() {
         isDone = false;
     }

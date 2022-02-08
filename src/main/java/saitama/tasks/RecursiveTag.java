@@ -3,6 +3,9 @@ package saitama.tasks;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * A list of tags for recurring tasks.
+ */
 public enum RecursiveTag {
     WEEKLY("--rw"), BIWEEKLY("--rb"), DAILY("--rd"), MONTHLY("--rm");
 
@@ -16,6 +19,12 @@ public enum RecursiveTag {
         this.tag = tag;
     }
 
+    /**
+     * Gets the RecursiveTag corresponding to the given tag, if it exists. Otherwise, returns null.
+     *
+     * @param tag
+     * @return
+     */
     public static RecursiveTag get(String tag) {
         if (tagMap.containsKey(tag)) {
             return tagMap.get(tag);
@@ -29,6 +38,11 @@ public enum RecursiveTag {
         return this.tag;
     }
 
+    /**
+     * Returns the label of the RecursiveTag.
+     *
+     * @return The label of the RecursiveTag.
+     */
     public String getLabel() {
         switch (this) {
         case DAILY:

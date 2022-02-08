@@ -12,6 +12,7 @@ public class ToDo extends Task {
      * Initialises an undone to do task.
      *
      * @param description The details of the to do task.
+     * @param recursiveTag The frequency recurrence of the event task.
      */
     public ToDo(String description, RecursiveTag recursiveTag) {
         super(description, recursiveTag);
@@ -22,6 +23,8 @@ public class ToDo extends Task {
      *
      * @param description The details of the to do task.
      * @param isDone Whether the task is done.
+     * @param recursiveTag The frequency recurrence of the event task.
+     * @param lastResetDate The last reset date of the task.
      */
     public ToDo(String description, boolean isDone, RecursiveTag recursiveTag, LocalDate lastResetDate) {
         super(description, isDone, recursiveTag, lastResetDate);
