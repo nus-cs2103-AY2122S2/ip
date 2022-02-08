@@ -1,17 +1,20 @@
 package spark;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
-import spark.parser.commands.commandtypes.AddDeadlineCommand;
-import spark.parser.commands.commandtypes.AddTodoCommand;
-import spark.parser.commands.commandtypes.Command;
-import spark.parser.commands.commandtypes.MarkCommand;
+
 import spark.exceptions.SparkException;
 import spark.exceptions.formatexceptions.InvalidDeadlineParamsException;
 import spark.exceptions.formatexceptions.InvalidMarkParamsException;
 import spark.exceptions.formatexceptions.InvalidTodoParamsException;
 import spark.parser.Parser;
-
-import static org.junit.jupiter.api.Assertions.*;
+import spark.parser.commands.commandtypes.AddDeadlineCommand;
+import spark.parser.commands.commandtypes.AddTodoCommand;
+import spark.parser.commands.commandtypes.Command;
+import spark.parser.commands.commandtypes.MarkCommand;
 
 public class ParserTest {
     @Test

@@ -6,6 +6,10 @@ package spark.exceptions.formatexceptions;
  * such as inputting an alphabet instead of an integer.
  */
 public class InvalidUnmarkParamsException extends FormatException {
+    /**
+     * Creates an Exception containing the
+     * error message to be displayed to the user on the GUI.
+     */
     public InvalidUnmarkParamsException() {
         super(String.format("%s\n%s\n%s",
                 "Seems like you gave me an invalid unmark task command!",

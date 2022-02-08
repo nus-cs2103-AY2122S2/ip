@@ -5,6 +5,10 @@ package spark.exceptions.formatexceptions;
  * attempts to add a Deadline with an incorrect format.
  */
 public class InvalidDeadlineParamsException extends FormatException {
+    /**
+     * Creates an exception containing the
+     * error message to be displayed to the user on the GUI.
+     */
     public InvalidDeadlineParamsException() {
         super(String.format("%s\n%s\n%s",
                 "Seems like you added an invalid Deadline!",

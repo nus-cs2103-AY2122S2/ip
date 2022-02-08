@@ -47,6 +47,7 @@ public class Event extends Task {
      */
     @Override
     public String encodeTask() {
-        return String.format("E @@@ %b @@@ %s @@@ %s", super.isDone(), super.getTitle(), this.eventDateTime.format(inputDateTimeFormatter));
+        return String.format("E @@@ %b @@@ %s @@@ %s", super.isDone(), super.getTitle(),
+                this.eventDateTime.format(inputDateTimeFormatter));
     }
 }

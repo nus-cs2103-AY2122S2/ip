@@ -1,8 +1,8 @@
 package spark;
 
-import spark.exceptions.SparkException;
-
 import java.util.Scanner;
+
+import spark.exceptions.SparkException;
 
 /**
  * Encapsulates all methods and functions required to
@@ -10,8 +10,10 @@ import java.util.Scanner;
  * to send inputs and receive feedback from Spark.Spark.
  */
 public class Ui {
-    private static final String normalLineSeparator = "======================================================================";
-    private static final String exceptionLineSeparator = "======================================================================";
+    private static final String normalLineSeparator = "================================"
+            + "======================================";
+    private static final String exceptionLineSeparator = "=============================="
+            + "========================================";
     private static final String defaultWelcomeMessage = String.format("%s\n%s",
             "Hello I'm Spark!",
             "What can I do for you?"

@@ -5,6 +5,10 @@ package spark.exceptions.formatexceptions;
  * attempts to add a Todo with an incorrect format.
  */
 public class InvalidTodoParamsException extends FormatException {
+    /**
+     * Creates an Exception containing the
+     * error message to be displayed to the user on the GUI.
+     */
     public InvalidTodoParamsException() {
         super(String.format("%s\n%s\n%s",
                 "Seems like you added an invalid Todo!",

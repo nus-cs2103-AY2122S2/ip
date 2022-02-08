@@ -1,14 +1,14 @@
 package spark.parser.commands.commandtypes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import spark.Ui;
 import spark.commandresponse.CommandResponse;
 import spark.commandresponse.SuccessResponse;
 import spark.commandresponse.WarningResponse;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a command for Spark to list all Tasks in the task-list.

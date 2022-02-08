@@ -1,14 +1,19 @@
 package spark.tasks;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import spark.exceptions.SparkException;
-import spark.exceptions.taskmodificationexceptions.TaskNotFoundException;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import spark.exceptions.SparkException;
+import spark.exceptions.taskmodificationexceptions.TaskNotFoundException;
+
 
 public class TaskListTest {
     private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
@@ -25,13 +30,9 @@ public class TaskListTest {
         // a unit test for TaskList#addToDo method
         TaskList taskList = new TaskList();
 
-        try {
-            taskList.addTodo("Buy milk");
-        } catch (SparkException e) {
-            fail(e.getMessage());
-        }
+        taskList.addTodo("Buy milk");
 
-        assertEquals(true, !taskList.findTask("Buy milk").isEmpty());
+        assertFalse(taskList.findTask("Buy milk").isEmpty());
     }
 
     @Test
@@ -41,7 +42,7 @@ public class TaskListTest {
 
         taskList.addDeadline("Do homework", validDateTime);
 
-        assertEquals(true, !taskList.findTask("Do homework").isEmpty());
+        assertFalse(taskList.findTask("Do homework").isEmpty());
     }
 
     @Test
@@ -62,11 +63,8 @@ public class TaskListTest {
     public void markTask_markNonExistentTask_throwsException() {
         // a unit test for TaskList#mark method
         TaskList taskList = new TaskList();
-        try {
-            taskList.addTodo("buy milk");
-        } catch (SparkException e) {
-            fail(e.getMessage());
-        }
+
+        taskList.addTodo("buy milk");
 
         // mark a Task that doesn't exist yet
         assertThrows(TaskNotFoundException.class, () -> taskList.markTask(5));

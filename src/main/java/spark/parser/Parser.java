@@ -5,9 +5,24 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import spark.exceptions.SparkException;
+import spark.exceptions.formatexceptions.EmptyKeywordException;
+import spark.exceptions.formatexceptions.InvalidDeadlineParamsException;
+import spark.exceptions.formatexceptions.InvalidEventParamsException;
+import spark.exceptions.formatexceptions.InvalidMarkParamsException;
+import spark.exceptions.formatexceptions.InvalidTodoParamsException;
+import spark.exceptions.formatexceptions.InvalidUnmarkParamsException;
 import spark.parser.commands.CommandKeyword;
-import spark.exceptions.formatexceptions.*;
-import spark.parser.commands.commandtypes.*;
+import spark.parser.commands.commandtypes.AddDeadlineCommand;
+import spark.parser.commands.commandtypes.AddEventCommand;
+import spark.parser.commands.commandtypes.AddTodoCommand;
+import spark.parser.commands.commandtypes.Command;
+import spark.parser.commands.commandtypes.DeleteTaskCommand;
+import spark.parser.commands.commandtypes.ExitCommand;
+import spark.parser.commands.commandtypes.FindTaskCommand;
+import spark.parser.commands.commandtypes.ListCommand;
+import spark.parser.commands.commandtypes.MarkCommand;
+import spark.parser.commands.commandtypes.UnMarkCommand;
+import spark.parser.commands.commandtypes.UnrecognisedCommand;
 import spark.parser.params.AddDeadlineParams;
 import spark.parser.params.AddEventParams;
 import spark.parser.params.AddTodoParams;
@@ -150,7 +165,7 @@ public class Parser {
         return params;
     }
 
-    private static int getDeleteTaskParams(String input, CommandKeyword keyword) throws EmptyKeywordException {
+    private static int getDeleteTaskParams(String input, CommandKeyword keyword) {
         String params = removeCommandKeyword(input, keyword);
         int index = Integer.parseInt(params);
 

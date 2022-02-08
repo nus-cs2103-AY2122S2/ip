@@ -30,8 +30,6 @@ public class Spark {
             this.storage = new Storage(DEFAULT_FILE_PATH_STRING);
             this.taskList = new TaskList(storage.readTasksFile());
         } catch (FileException | TaskDecodingException e) {
-            ui.printException(e);
-            ui.printMessageWithDivider("Note that any changes will not be saved to your save-file.");
             this.taskList = new TaskList();
         }
     }
