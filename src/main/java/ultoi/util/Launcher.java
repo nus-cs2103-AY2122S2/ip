@@ -3,7 +3,10 @@ package ultoi.util;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Represents a launcher that initializes and starts Ultoi.
+ *
+ * @author snoidetx
+ * @version 0.0.0
  */
 public class Launcher {
     public static void main(String[] args) {
