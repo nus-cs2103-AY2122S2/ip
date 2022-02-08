@@ -9,10 +9,12 @@ import main.Date;
  * @since 0.1.0
  */
 public class Event extends Task {
-    /** String representation of the time the event tasks place */
-    protected String at;
-    /** Date at which the event occurs */
-    protected Date date;
+    private static final String MEMORY_FORMAT = "E%s@%s";
+    private static final String STRING_FORMAT = "[E]%s (at: %s)";
+    // String representation of the time the event tasks place
+    private final String at;
+    // Date at which the event occurs
+    private final Date date;
 
     /**
      * Create an event which occurs on a specific date.
@@ -33,8 +35,7 @@ public class Event extends Task {
      */
     @Override
     public String toMemoryString() {
-        return "E" + super.toMemoryString()
-                + "@" + this.at;
+        return String.format(MEMORY_FORMAT, super.toMemoryString(), this.at);
     }
 
     /**
@@ -55,7 +56,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + " (at: " + date.formattedTime() + ")";
+        return String.format(STRING_FORMAT, super.toString(), date.formattedTime());
     }
 }

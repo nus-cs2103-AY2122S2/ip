@@ -9,10 +9,14 @@ import main.Date;
  * @since 0.1.0
  */
 public abstract class Task {
-    /** A string to represent the description of the task */
-    protected String description;
-    /** A boolean to represent if the task is done */
-    protected boolean isDone;
+    private static final String DONE_MEMORY = "@1@";
+    private static final String UNDONE_MEMORY = "@0@";
+    private static final String DONE_STRING = "[X]";
+    private static final String UNDONE_STRING = "[ ]";
+    // A string to represent the description of the task
+    private final String description;
+    // A boolean to represent if the task is done
+    private boolean isDone;
 
     /**
      * Create a task.
@@ -30,7 +34,8 @@ public abstract class Task {
      * @return "X" if the task is done, " " otherwise.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        // mark done task with X
+        return (isDone ? DONE_STRING : UNDONE_STRING);
     }
 
     /**
@@ -64,9 +69,9 @@ public abstract class Task {
      */
     public String toMemoryString() {
         if (isDone) {
-            return "@1@" + this.description;
+            return DONE_MEMORY + this.description;
         } else {
-            return "@0@" + this.description;
+            return UNDONE_MEMORY + this.description;
         }
     }
 
@@ -88,7 +93,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] "
+        return this.getStatusIcon()
                 + this.description;
     }
 

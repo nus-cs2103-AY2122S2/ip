@@ -17,7 +17,11 @@ import task.Todo;
  * @since 0.1.0
  */
 public class TaskList {
-    protected static final String INDENT2 = "\t\t";
+    private static final int DESCRIPTION = 2;
+    private static final int TASK_DATE = 3;
+    private static final int MINIMUM_LENGTH = 3;
+    private static final int MAXIMUM_LENGTH = 4;
+    private static final String INDENT_ONE = "\t";
 
     /**
      * A list of all tasks
@@ -42,20 +46,20 @@ public class TaskList {
     public TaskList(List<String> storageMemory) {
         this.taskList = new ArrayList<Task>();
         for (String str : storageMemory) {
-            String[] tasks = str.split("@", 4); // format: D@1@do something
+            String[] tasks = str.split("@", MAXIMUM_LENGTH); // format: D@1@do something
             Task taskNew;
-            if (tasks.length < 3) {
+            if (tasks.length < MINIMUM_LENGTH) {
                 break;
             }
             switch (tasks[0]) {
             case "E": //event
-                taskNew = new Event(tasks[2], tasks[3]);
+                taskNew = new Event(tasks[DESCRIPTION], tasks[TASK_DATE]);
                 break;
             case "D": //deadline
-                taskNew = new Deadline(tasks[2], tasks[3]);
+                taskNew = new Deadline(tasks[DESCRIPTION], tasks[TASK_DATE]);
                 break;
             default: // todo
-                taskNew = new Todo(tasks[2]);
+                taskNew = new Todo(tasks[DESCRIPTION]);
                 break;
             }
             if (Integer.parseInt(tasks[1]) == 1) {
@@ -188,7 +192,7 @@ public class TaskList {
     public String toString() {
         String msg = "";
         for (int i = 0; i < taskList.size(); i++) {
-            msg += INDENT2 + (i + 1) + "." + taskList.get(i).toString() + "\n";
+            msg += INDENT_ONE + (i + 1) + "." + taskList.get(i).toString() + "\n";
         }
         return msg;
     }

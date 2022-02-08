@@ -3,7 +3,7 @@ package main;
 /**
  * Represent exceptions specific to Tesseract.
  * @author Fan Jue
- * @version 0.1.0
+ * @version 0.2.0
  * @since 0.1.0
  */
 public class TesseractException extends Exception {

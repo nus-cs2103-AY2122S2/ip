@@ -8,22 +8,23 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
 /**
  * A GUI for Tesseract using FXML.
  */
 public class Main extends Application {
+    private static final String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
+    private static final String CSS_PATH = "/css/display.css";
 
     private Tesseract tesseract = new Tesseract();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(MAIN_WINDOW_PATH));
             AnchorPane ap = fxmlLoader.load();
 
             Scene scene = new Scene(ap);
-            scene.getStylesheets().add(getClass().getResource("/css/display.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(CSS_PATH).toExternalForm());
 
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setTesseract(tesseract);
