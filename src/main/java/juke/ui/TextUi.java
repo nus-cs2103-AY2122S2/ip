@@ -1,4 +1,4 @@
-package juke.common;
+package juke.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,12 +7,13 @@ import java.util.function.Supplier;
 import juke.command.Command;
 import juke.command.CommandHandler;
 import juke.command.Result;
+import juke.common.Parser;
 import juke.exception.JukeInvalidCommandException;
 
 /**
  * Manages the user interface involving user input and console output.
  */
-public class Ui {
+public class TextUi {
     private static final String LINE_PREFIX = "\u232c ";
     private static final String LINE_DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -35,7 +36,7 @@ public class Ui {
     /**
      * Constructor that initializes the scanner for user input.
      */
-    public Ui() {
+    public TextUi() {
         this.in = new Scanner(System.in);
     }
 

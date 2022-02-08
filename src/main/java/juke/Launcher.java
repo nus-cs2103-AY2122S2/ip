@@ -8,10 +8,15 @@ import javafx.application.Application;
 public class Launcher {
     /**
      * Entry point main method for the Juke application.
+     * Runs Juke CLI if 'cli' is given as the first argument.
      *
-     * @param args Arguments
+     * @param args Arguments.
      */
     public static void main(String[] args) {
-        Application.launch(Juke.class, args);
+        if (args.length > 0 && args[0].equalsIgnoreCase("cli")) {
+            Juke.main(args);
+        } else {
+            Application.launch(Juke.class, args);
+        }
     }
 }
