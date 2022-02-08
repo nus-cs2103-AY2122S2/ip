@@ -2,12 +2,13 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 /**
  * Represents an instance of a Event
  * type of Task
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Event> {
 
     /**
      * Store the date on which this Event
@@ -46,5 +47,10 @@ public class Event extends Task {
      */
     public String getDate() {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return this.date.compareTo(o.date);
     }
 }

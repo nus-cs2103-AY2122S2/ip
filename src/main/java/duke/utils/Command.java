@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 public class Command {
 
 
-    protected String markTaskComplete(TaskList tl, StringTokenizer st) throws DukeException.DukeInvalidNumberException {
+    protected String markTaskComplete(TaskList tl, StringTokenizer st) throws DukeException{
         try {
             int toMark = Integer.parseInt(st.nextToken());
             return tl.markTaskAsCompleted(toMark);
@@ -16,7 +16,7 @@ public class Command {
     }
 
 
-    protected String markTaskIncomplete(TaskList tl, StringTokenizer st) throws DukeException.DukeInvalidNumberException {
+    protected String markTaskIncomplete(TaskList tl, StringTokenizer st) throws DukeException{
         try {
             int toUnmark = Integer.parseInt(st.nextToken());
             return tl.markTaskAsUncomplete(toUnmark);
@@ -25,7 +25,7 @@ public class Command {
         }
     }
 
-    protected String createToDo(TaskList tl, StringTokenizer st) throws DukeException.DukeNoTaskGivenException {
+    protected String createToDo(TaskList tl, StringTokenizer st) throws DukeException {
         try {
             return tl.addToDo(st.nextToken(""));
         } catch (NoSuchElementException e) {
@@ -33,7 +33,7 @@ public class Command {
         }
     }
 
-    protected String createDeadline(String userInput, TaskList tl, String curr) throws DukeException.DukeNoTimeProvided {
+    protected String createDeadline(String userInput, TaskList tl, String curr) throws DukeException {
         try {
             userInput = userInput.replace(curr, "");
             String[] spl = userInput.split("/by ");
@@ -46,7 +46,7 @@ public class Command {
         }
     }
 
-    protected String createEvent(String userInput, TaskList tl, String curr) throws DukeException.DukeNoTimeProvided {
+    protected String createEvent(String userInput, TaskList tl, String curr) throws DukeException {
         try {
             userInput = userInput.replace(curr, "");
             String[] splo = userInput.split("/at ");
@@ -59,7 +59,7 @@ public class Command {
         }
     }
 
-    protected String deleteTask(TaskList tl, StringTokenizer st) throws DukeException.DukeInvalidNumberException {
+    protected String deleteTask(TaskList tl, StringTokenizer st) throws DukeException {
         try {
             int toDelete = Integer.parseInt(st.nextToken());
             return tl.deleteTask(toDelete);
@@ -68,11 +68,24 @@ public class Command {
         }
     }
 
-    protected String findTask(TaskList tl, StringTokenizer st) throws DukeException.DukeNoTaskGivenException {
+    protected String findTask(TaskList tl, StringTokenizer st) throws DukeException {
         try {
             return tl.findEvent(st.nextToken(""));
         } catch (NoSuchElementException e) {
             throw new DukeException.DukeNoTaskGivenException();
+        }
+    }
+
+    protected String sortTasks(TaskList tl, StringTokenizer st) throws DukeException {
+
+        String whichTask = st.nextToken();
+
+        if(whichTask.equals("deadline")) {
+            return tl.getDeadlinesSorted();
+        } else if (whichTask.equals("event")) {
+            return tl.getEventsSorted();
+        } else {
+            throw new DukeException.DukeInvalidCommandException();
         }
     }
 }

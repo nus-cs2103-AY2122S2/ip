@@ -9,6 +9,7 @@ import duke.task.ToDo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -183,6 +184,33 @@ public class TaskList {
         return Ui.printSearchList(matches);
     }
 
+    protected String getDeadlinesSorted() {
+
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i) instanceof Deadline) {
+                deadlines.add((Deadline) tasks.get(i));
+            }
+        }
+
+        Collections.sort(deadlines);
+        return Ui.printSortedList(deadlines, "deadline");
+    }
+
+    protected String getEventsSorted() {
+
+        ArrayList<Event> events = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i) instanceof Event) {
+                events.add((Event) tasks.get(i));
+            }
+        }
+
+        Collections.sort(events);
+        return Ui.printSortedList(events, "event");
+    }
 
 
 

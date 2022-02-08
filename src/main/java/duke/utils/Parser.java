@@ -45,6 +45,8 @@ public class Parser {
             return cd.deleteTask(tl, st);
         case "find":
             return cd.findTask(tl, st);
+        case "sort":
+            return cd.sortTasks(tl, st);
         case "bye":
             return Ui.printBye();
         default:

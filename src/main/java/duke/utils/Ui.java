@@ -56,6 +56,22 @@ public class Ui {
         }
     }
 
+    public static String printSortedList(ArrayList<? extends Task> tasks, String type) {
+
+        if(tasks.size() == 0) {
+            return "No Tasks of This Type";
+        } else {
+            StringBuilder st = new StringBuilder();
+            st.append("Here are your " + type + " tasks sorted by date: \n");
+            for (int x = 0; x < tasks.size(); x++) {
+                st.append((x + 1) + ". " + tasks.get(x).toString() + "\n");
+            }
+            return st.toString();
+        }
+    }
+
+
+
     /**
      * Print the addition of a new task to the list
      *
