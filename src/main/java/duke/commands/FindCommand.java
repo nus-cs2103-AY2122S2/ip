@@ -1,6 +1,10 @@
 package duke.commands;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.exception.DukeException;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 /**
@@ -41,14 +45,14 @@ public class FindCommand extends Command<String> {
             throw new DukeException(err);
         }
         int n = 1;
+        List<Task> filteredList = list.taskListToList().stream().filter(x -> x.toString().contains(description))
+                .collect(Collectors.toList());
         response = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < list.getSize(); i++) {
-            String taskDetail = list.getTask(i).toString();
-            assert taskDetail != null;
-            if (taskDetail.contains(description)) {
-                response = response + n + "." + taskDetail + "\n";
-                n = n + 1;
-            }
+        for (int i = 0; i < filteredList.size(); i++) {
+            String taskDetail = filteredList.get(i).toString();
+            response = response + n + "." + taskDetail + "\n";
+            n = n + 1;
+
         }
         return response;
     }
