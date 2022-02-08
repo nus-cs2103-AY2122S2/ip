@@ -33,6 +33,10 @@ public class Duke {
      * @return String response to be displayed
      */
     public String getResponse(String input) {
+
+        // Input received via GUI cannot be null;
+        assert input != null : "assertion error";
+
         try {
             return Parser.parse(input, this.tl, this.cd);
         } catch (DukeException e) {

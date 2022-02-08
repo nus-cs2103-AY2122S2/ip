@@ -20,8 +20,12 @@ public class Parser {
      */
     public static String parse(String userInput, TaskList tl, Command cd) throws DukeException {
 
+        // User Input cannot be Null
+        assert userInput != null : "assertion error";
+
         StringTokenizer st = new StringTokenizer(userInput, " ");
         String curr = st.nextToken();
+
 
         switch (curr) {
 
