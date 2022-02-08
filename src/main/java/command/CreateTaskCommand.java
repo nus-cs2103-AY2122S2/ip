@@ -11,7 +11,7 @@ import task.Todo;
 /**
  * Represent a command to create a new task.
  * @author Fan Jue
- * @version 0.1.0
+ * @version 0.2.0
  * @since 0.1.0
  */
 public class CreateTaskCommand extends Command {
@@ -58,6 +58,7 @@ public class CreateTaskCommand extends Command {
             // report error, this statement should not be reached
             return ui.admitBug();
         }
+
         taskList.addTask(newTask);
         storage.needUpdate();
         return ui.addTaskRes(newTask.toString(), taskList.size());

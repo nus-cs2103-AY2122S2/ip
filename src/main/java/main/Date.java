@@ -36,7 +36,7 @@ public class Date {
      * @throws TesseractException If the input string cannot be converted to a valid date.
      */
     public static void checkValidTime(String time) throws TesseractException {
-        if (time.length() != DATE_LENGTH) { // check if the string is of length 10
+        if (time.length() != DATE_LENGTH) {
             throw new TesseractException(INVALID_DATE_FORMAT);
         } else {
             try {
@@ -49,8 +49,6 @@ public class Date {
                 throw new TesseractException(INVALID_DATE);
             } catch (NumberFormatException e) {
                 throw new TesseractException(INVALID_DATE_FORMAT);
-            }
-        }
     }
 
     /**

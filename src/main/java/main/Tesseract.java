@@ -44,5 +44,13 @@ public class Tesseract {
         }
     }
 
+    public String getWelcomeMsg() {
+        return ui.sayHi();
+    }
+
+    public String getExitMsg() {
+        return ui.sayBye();
+    }
+
 
 }
