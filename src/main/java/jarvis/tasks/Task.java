@@ -34,6 +34,7 @@ public abstract class Task {
     public static Task of(String taskString) throws InvalidTaskException {
         Task task;
         String[] taskArr = taskString.split(" ", 2);
+        assert taskArr.length >= 1 : "Invalid taskArr";
         String taskType = taskArr[0];
         String[] params;
 
