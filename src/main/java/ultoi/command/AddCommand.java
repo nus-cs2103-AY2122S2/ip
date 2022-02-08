@@ -12,7 +12,7 @@ import ultoi.util.UltoiUi;
  * Represents a command that adds task to the list.
  *
  * @author snoidetx
- * @version 0.1.0
+ * @version 0.2.0
  */
 public class AddCommand implements Command {
     public static final String COMMAND_AT = "/at";
