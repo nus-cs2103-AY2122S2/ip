@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
+        assert task != null : "Task should not be null";
         tasks.deleteTask(task);
         return getDeletedTaskText(task, tasks);
     }

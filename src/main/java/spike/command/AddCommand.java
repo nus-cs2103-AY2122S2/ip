@@ -27,6 +27,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
+        assert task != null : "Task should not be null";
         tasks.addTask(task);
         return getAddedTaskText(task, tasks);
     }

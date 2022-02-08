@@ -53,6 +53,7 @@ public class Parser {
      * @return a proper command to be executed
      */
     public Command parseCommand(String inputLine, TaskList tasks) {
+        assert inputLine != "" : "Input should not be empty";
         // Extract the words
         String[] commandWords = inputLine.split(" ");
         // Get the command name and check validity
