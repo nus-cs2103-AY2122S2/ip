@@ -2,15 +2,15 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Exits the program.
  */
 public class ExitCommand extends Command {
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         storage.saveTaskList(tasks);
-        return ui.showExitMessage();
+        return EXIT_MESSAGE;
     }
 }

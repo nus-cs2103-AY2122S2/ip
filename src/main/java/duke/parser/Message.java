@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.parser;
 
 public class Message {
     public static final String WELCOME_MESSAGE = "Hello! I'm Duke, What can I do for you?";

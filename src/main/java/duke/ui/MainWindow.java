@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.parser.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -29,9 +30,12 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        assert userImage != null : "Image files missing!";
+        assert dukeImage != null : "Image files missing!";
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Welcome" ,dukeImage)
+                DialogBox.getDukeDialog(Message.WELCOME_MESSAGE,dukeImage)
         );
     }
 
