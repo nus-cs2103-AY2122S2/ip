@@ -35,7 +35,7 @@ public class Duke {
             ui.say(Command.execute(processedInput, this.taskList));
             userInput = ui.askForInput();
         }
-        storage.writeToStorage(this.taskList);
+        ui.say(storage.writeToStorage(this.taskList));
         ui.sayGoodbye();
     }
 

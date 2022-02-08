@@ -101,7 +101,7 @@ public class Storage {
      *
      * @param listOfTasks TaskList containing the list of tasks to be written to storage
      */
-    public void writeToStorage(TaskList listOfTasks) {
+    public String writeToStorage(TaskList listOfTasks) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(this.filepath
                                                         + File.separator + this.filename));
@@ -109,14 +109,14 @@ public class Storage {
                 try {
                     writer.write(formatTask(task));
                 } catch (IOException e) {
-                    System.out.println("Unable to write");
+                    return "Unable to write";
                 }
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("Unable to create writer");
-            e.printStackTrace();
+            return "Unable to create writer";
         }
+        return "null";
     }
 
     private String formatTask(Task task) {
