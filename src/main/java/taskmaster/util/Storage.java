@@ -98,8 +98,12 @@ public class Storage {
      */
     public void updateList(TaskList taskList) {
         try {
-            String filename = Paths.get("").toAbsolutePath() + "/data/Duke.txt";
-            FileWriter writer = new FileWriter(filename);
+            //Delete file if it exists to ensure that the existing tasks do not duplicate on
+            //the new data file.
+            if (DATA_FILE.exists()) {
+                DATA_FILE.delete();
+            }
+            FileWriter writer = new FileWriter(FILE_PATH);
             //Write the task list's tasks to the data file.
             writer.write(taskList.listTasksInTextFormat());
             writer.close();

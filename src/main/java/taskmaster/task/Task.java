@@ -62,7 +62,9 @@ public abstract class Task {
 
     /**
      * Method to check whether Task Name/Description
-     * contains the specified keyword.
+     * contains the specified keyword. The task name
+     * is converted into lower case for the search to be
+     * non-case sensitive.
      *
      * @param keyword Word to be checked.
      *
@@ -70,6 +72,6 @@ public abstract class Task {
      */
 
     public boolean containsKeyword(String keyword) {
-        return this.taskName.contains(keyword);
+        return this.taskName.toLowerCase().contains(keyword);
     }
 }
