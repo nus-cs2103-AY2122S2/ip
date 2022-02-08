@@ -101,7 +101,7 @@ public class CreateCommandTest {
             new CreateCommand("test /by test", TaskType.DEADLINE).execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Date not in the format dd/MM/yyyy HH:mm", ex.getMessage());
+            assertEquals("DateTime not in a known format", ex.getMessage());
         }
 
         try {
@@ -109,7 +109,7 @@ public class CreateCommandTest {
                     .execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Date not in the format dd/MM/yyyy HH:mm", ex.getMessage());
+            assertEquals("DateTime not in a known format", ex.getMessage());
         }
     }
 
@@ -143,14 +143,14 @@ public class CreateCommandTest {
             new CreateCommand("test /at test", TaskType.EVENT).execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Date not in the format dd/MM/yyyy HH:mm", ex.getMessage());
+            assertEquals("DateTime not in a known format", ex.getMessage());
         }
 
         try {
             new CreateCommand("test /at 32/12/2022 18:00", TaskType.EVENT).execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Date not in the format dd/MM/yyyy HH:mm", ex.getMessage());
+            assertEquals("DateTime not in a known format", ex.getMessage());
         }
     }
 }

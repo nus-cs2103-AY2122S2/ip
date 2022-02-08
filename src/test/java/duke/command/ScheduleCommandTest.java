@@ -54,14 +54,14 @@ public class ScheduleCommandTest {
             new ScheduleCommand("test").execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Date not in the format dd/MM/yyyy", ex.getMessage());
+            assertEquals("Date not in a known format", ex.getMessage());
         }
 
         try {
             new ScheduleCommand("32/12/2022").execute(linePrinter, list);
             fail();
         } catch (DukeIllegalArgumentException ex) {
-            assertEquals("Date not in the format dd/MM/yyyy", ex.getMessage());
+            assertEquals("Date not in a known format", ex.getMessage());
         }
     }
 }
