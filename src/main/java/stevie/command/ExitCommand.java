@@ -8,6 +8,7 @@ import stevie.task.TaskList;
  * ExitCommand is used to terminate session with Stevie/
  */
 public class ExitCommand extends Command {
+    private static final String endMessage = "Bye! Hope to see you again!";
     /**
      * Ui outputs a response string to let user know that session is terminating.
      *
@@ -18,8 +19,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
-        ui.outputMessage("Bye! Hope to see you again!");
-        return "Bye! Hope to see you again!";
+        ui.outputMessage(endMessage);
+        return endMessage;
     }
 
     /**

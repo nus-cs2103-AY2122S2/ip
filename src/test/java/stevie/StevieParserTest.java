@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import stevie.command.ExitCommand;
 import stevie.exception.StevieException;
+import stevie.parser.StevieParser;
 
 class StevieParserTest {
     @Test
