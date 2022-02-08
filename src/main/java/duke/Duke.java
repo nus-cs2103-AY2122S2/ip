@@ -180,6 +180,8 @@ public class Duke {
                     return Parser.parserDelete(taskLists, userInputArr, storage);
                 case "find":
                     return Parser.parserFind(taskLists, userInputTask);
+                case "tag":
+                    return Parser.parserTag(taskLists, userInputArr, storage);
                 }
             }
         }

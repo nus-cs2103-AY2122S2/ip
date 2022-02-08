@@ -14,6 +14,7 @@ public class Deadline extends Task {
     protected Month month;
     protected int year;
     protected LocalTime time;
+    protected Tag tag;
 
     /**
      * Constructs a Deadline object.
@@ -31,6 +32,21 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public Deadline(String description , LocalDate deadlineDate, LocalTime time, Tag tag) {
+        super(description);
+        this.deadlineDate = deadlineDate;
+        this.day = deadlineDate.getDayOfWeek();
+        this.month = deadlineDate.getMonth();
+        this.year = deadlineDate.getYear();
+        this.time = time;
+        this.tag = tag;
+    }
+
+    @Override
+    public Deadline tag(Tag taskTag) {
+        return new Deadline(description, deadlineDate, time, taskTag);
+    }
+
     /**
      * Returns a string representation to write to disk.
      *
@@ -38,7 +54,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toStringForSave() {
-        return "D " + super.toStringForSave() + " # " + this.deadlineDate + " " + this.time;
+        return tag == null
+               ? "D " + super.toStringForSave() + " # " + this.deadlineDate + " " + this.time
+               : "D " + super.toStringForSave() + " # " + this.deadlineDate + " " + this.time + " " + this.tag.toString();
     }
 
     /**
@@ -48,11 +66,19 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
+        return tag == null
+                ? ("[D]" + super.toString() + " (by: "
                 + this.month + " "
                 + this.day + " "
                 + this.year + " "
                 + this.time + ")"
-                + "\n";
+                + "\n")
+                : ("[D]" + super.toString() + " (by: "
+                + this.month + " "
+                + this.day + " "
+                + this.year + " "
+                + this.time + ")"
+                + this.tag.toString()
+                + "\n");
     }
 }

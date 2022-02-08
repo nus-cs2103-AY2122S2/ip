@@ -6,6 +6,7 @@ package duke;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Tag tag;
 
     /**
      * Constructs a Task object.
@@ -15,6 +16,12 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, Tag tag) {
+        this.description = description;
+        this.isDone = false;
+        this.tag = tag;
     }
 
     /**
@@ -53,5 +60,9 @@ public class Task {
     @Override
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + this.description;
+    }
+
+    public Task tag(Tag taskTag) {
+        return new Task(description, taskTag);
     }
 }
