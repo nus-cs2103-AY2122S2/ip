@@ -1,6 +1,9 @@
 package duke;
 import java.io.IOException;
 
+import duke.output.BooleanOutput;
+import duke.output.Output;
+import duke.output.TextOutput;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -11,8 +14,6 @@ import duke.task.ToDo;
  */
 public class Parser {
 
-    /** Represents whether or not the parser is accepting userinput. */
-    public boolean isPolling;
     private TaskList tasks;
 
     public Parser() {
@@ -22,9 +23,6 @@ public class Parser {
             Ui.printMessage(Ui.CORRUPTED_SAVE_MESSAGE);
             tasks = new TaskList();
         }
-
-        isPolling = true;
-        Ui.printMessage(Ui.GREETING_MESSAGE);
     }
 
     /**
@@ -32,20 +30,20 @@ public class Parser {
      * 
      * @param input The text input by the user.
      */
-    public void inputHandler(String input) {
+    public Output inputHandler(String input) {
         String[] commandArgs = input.split(" ", 2);
         String command = commandArgs[0];
         String commandDetails = commandArgs.length == 2 ? commandArgs[1] : null;
-
         String replyMessage = "";
+
         try {
             switch (command) {
             case "bye":
-                replyMessage = byeMessage();
-                break;
+                return byeMessage();
 
             case "list":
                 replyMessage = tasks.listItems();
+                
                 break;
 
             case "mark":
@@ -90,7 +88,7 @@ public class Parser {
             replyMessage = Ui.mergeMessages(ioException.toString(), Ui.READ_WRITE_ERROR_MESSAGE);
         }
 
-        Ui.printMessage(replyMessage);
+        return new TextOutput(replyMessage);
     }
 
     /**
@@ -127,11 +125,10 @@ public class Parser {
      * 
      * <p> Sets the parser to stop accepting user input. </p>
      * 
-     * @return The bye message.
+     * @return The bye message output.
      */
-    public String byeMessage() {
-        isPolling = false;
-        return "Bye. Hope to see you again soon!";
+    public Output byeMessage() {
+        return new BooleanOutput("Bye. Hope to see you again soon!", false);
     }
 
     private void assertNonEmptyDetails(String details) throws DukeException {
