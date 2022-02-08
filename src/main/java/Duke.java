@@ -3,13 +3,20 @@ import exceptions.DukeInvalidInput;
 import exceptions.DukeInvalidTodo;
 
 import java.io.*;
-import java.util.Objects;
-import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Main method containing the Chat Bot.
+ */
 public class Duke {
 
+    /**
+     * Method containing the main execution of the Chat Bot.
+     * @param args
+     * @throws DukeExceptions
+     * @throws IOException
+     */
     public static void main(String[] args) throws DukeExceptions, IOException {
         Scanner sc = new Scanner(System.in);
         Storage storage = new Storage();
@@ -18,7 +25,7 @@ public class Duke {
         int num = 0;
 
         storage.loadFromFile(lists);
-        taskList.enterHalloumi();
+        Ui.enterHalloumi();
 
         do {
             String text = sc.nextLine();

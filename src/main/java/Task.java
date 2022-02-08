@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that contains information for all tasks.
+ */
 public class Task {
     String description;
     boolean isDone;
@@ -26,6 +29,9 @@ public class Task {
     }
 }
 
+/**
+ * Todo class that inherits from the Task class.
+ */
 class ToDo extends Task {
     public ToDo(String desc) {
         super(desc);
@@ -36,6 +42,9 @@ class ToDo extends Task {
     }
 }
 
+/**
+ * Event class that inherits from the Task class.
+ */
 class Event extends Task {
     String at;
 
@@ -48,6 +57,9 @@ class Event extends Task {
     }
 }
 
+/**
+ * Deadline class that inherits from the Task class.
+ */
 class Deadline extends Task {
     LocalDate when;
 

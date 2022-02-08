@@ -5,7 +5,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to save and load data.
+ */
 public class Storage {
+
+    /**
+     * Method to write the task list to file.
+     * @param list provides data to write tasks to the file.
+     * @throws IOException
+     */
     public void writeToFile(ArrayList<Task> list) throws IOException {
         try {
             File f = new File("/Users/riakhaitan/iP/ip/data/duke.txt");
@@ -33,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to read tasks from the file.
+     * @param list data is written to this variable.
+     * @throws IOException
+     */
     public void loadFromFile(ArrayList<Task> list) throws IOException {
         File f = new File("/Users/riakhaitan/iP/ip/data/duke.txt");
         f.createNewFile();

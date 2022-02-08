@@ -1,15 +1,16 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Class that contains all task related functions.
+ */
 public class TaskList {
 
-    public void enterHalloumi() {
-        Ui.lineOne();
-        System.out.println("Hi! I'm Halloumi ^_^");
-        System.out.println("What do you need help with today?");
-        Ui.lineOne();
-    }
-
+    /**
+     * Method to mark task as done.
+     * @param task the task number as a string.
+     * @param list list containing all the tasks.
+     */
     public void mark(String task, ArrayList<Task> list) {
         Ui.lineOne();
         System.out.println("Good Job! ^_^");
@@ -20,6 +21,11 @@ public class TaskList {
         Ui.lineOne();
     }
 
+    /**
+     * Method to unmark task as done.
+     * @param task the task number as a string.
+     * @param list list containing all the tasks.
+     */
     public void unmark(String task, ArrayList<Task> list) {
         Ui.lineOne();
         System.out.println("I've unmarked task number " + task);
@@ -30,6 +36,11 @@ public class TaskList {
         Ui.lineOne();
     }
 
+    /**
+     * Method to delete a task from the list.
+     * @param task the task number as a string.
+     * @param list list containing all the tasks.
+     */
     public void delete(String task, ArrayList<Task> list) {
         Ui.lineOne();
         System.out.println("Noted. I've removed this task:");
@@ -39,6 +50,12 @@ public class TaskList {
         Ui.lineOne();
     }
 
+    /**
+     * Method to create an event task and add it to the list.
+     * @param desc description of the event.
+     * @param at additional information.
+     * @param list list containing all the tasks.
+     */
     public void event(String desc, String at, ArrayList<Task> list) {
         Ui.lineTwo();
         System.out.println("New task added:");
@@ -49,6 +66,11 @@ public class TaskList {
         Ui.lineTwo();
     }
 
+    /**
+     * Method to create a todo task and add it to the list.
+     * @param desc description of the event.
+     * @param list list containing all the tasks.
+     */
     public void todo(String desc, ArrayList<Task> list) {
         Ui.lineTwo();
         System.out.println("New task added:");
@@ -59,6 +81,12 @@ public class TaskList {
         Ui.lineTwo();
     }
 
+    /**
+     * Method to create a deadline task and add it to the list.
+     * @param desc description of the event.
+     * @param by additional information
+     * @param list list containing all the tasks.
+     */
     public void deadline(String desc, String by, ArrayList<Task> list) {
         Ui.lineTwo();
         System.out.println("New task added:");
