@@ -64,7 +64,6 @@ public class TaskList {
      * @param input The respective index of the ArrayList needed to be removed.
      * @param arr The ArrayList with the current list of tasks.
      * @return Acknowledgement string.
-     * @throws Exception Input is invalid.
      */
     public String delete(String input, ArrayList<Task> arr) {
         try {
@@ -94,7 +93,6 @@ public class TaskList {
      * @param input The information required for the initialization of the Deadline class.
      * @param arr The ArrayList with the current list of tasks.
      * @return Acknowledgement string.
-     * @throws Exception Invalid input.
      */
     public String deadline(String input, ArrayList<Task> arr) {
         try {
@@ -119,7 +117,6 @@ public class TaskList {
      * @param input The information required for the initialization of the Event class.
      * @param arr The ArrayList with the current list of tasks.
      * @return Acknowledgement string.
-     * @throws Exception Invalid input.
      */
     public String event(String input, ArrayList<Task> arr) {
         try {
@@ -145,7 +142,6 @@ public class TaskList {
      * @param input The information required for the search.
      * @param arr The ArrayList with the current list of tasks.
      * @return Acknowledgement string (found / not found).
-     * @throws Exception If there are no details in input.
      */
     public String find(String input, ArrayList<Task> arr) {
         try {
@@ -181,7 +177,6 @@ public class TaskList {
      * @param input The information required for the initialization of the Task class.
      * @param arr The ArrayList with the current list of tasks.
      * @return Acknowledgement string.
-     * @throws Exception Invalid input.
      */
     public String toDo(String input, ArrayList<Task> arr) {
         try {
