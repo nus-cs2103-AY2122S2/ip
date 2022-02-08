@@ -1,0 +1,30 @@
+list
+todo This is a todo task
+deadline This is a deadline task /by 12/11/2022 12:22
+event This is an event task /at 13/12/2022 15:00
+list
+mark 1
+mark 2
+list
+unmark 2
+list
+delete 2
+list
+todo
+deadline
+deadline /by
+deadline text /by
+deadline /by text
+event
+event /at
+event text /at
+event /at text
+mark 1
+unmark 2
+mark
+mark notanumber
+mark 4
+mark 0
+delete 0
+delete 3
+bye

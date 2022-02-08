@@ -1,7 +1,193 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+	------------------------------------
+	Hi! I'm Megumin
+	What do you need?
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	This is your task list:
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Added the following Todo Task:
+		[T][ ] This is a todo task
+	Now you have 1 task(s) in the list
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Added the following Deadline Task:
+		[D][ ] This is a deadline task (by: 12 Nov 2022 - 12:22 PM)
+	Now you have 2 task(s) in the list
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Added the following Event Task:
+		[E][ ] This is an event task (at: 13 Dec 2022 - 03:00 PM)
+	Now you have 3 task(s) in the list
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	This is your task list:
+	1. [T][ ] This is a todo task
+	2. [D][ ] This is a deadline task (by: 12 Nov 2022 - 12:22 PM)
+	3. [E][ ] This is an event task (at: 13 Dec 2022 - 03:00 PM)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Great Job Finishing the task:
+		 [T][X] This is a todo task
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Great Job Finishing the task:
+		 [D][X] This is a deadline task (by: 12 Nov 2022 - 12:22 PM)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	This is your task list:
+	1. [T][X] This is a todo task
+	2. [D][X] This is a deadline task (by: 12 Nov 2022 - 12:22 PM)
+	3. [E][ ] This is an event task (at: 13 Dec 2022 - 03:00 PM)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Marking the task as not done yet:
+		 [D][ ] This is a deadline task (by: 12 Nov 2022 - 12:22 PM)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	This is your task list:
+	1. [T][X] This is a todo task
+	2. [D][ ] This is a deadline task (by: 12 Nov 2022 - 12:22 PM)
+	3. [E][ ] This is an event task (at: 13 Dec 2022 - 03:00 PM)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Deleted the task:
+		 [D][ ] This is a deadline task (by: 12 Nov 2022 - 12:22 PM)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	This is your task list:
+	1. [T][X] This is a todo task
+	2. [E][ ] This is an event task (at: 13 Dec 2022 - 03:00 PM)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Task name cannot be empty
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Not in the format <Task name> /by <Date>
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Not in the format <Task name> /by <Date>
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Not in the format <Task name> /by <Date>
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Not in the format <Task name> /by <Date>
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Not in the format <Task name> /at <Date>
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Not in the format <Task name> /at <Date>
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Not in the format <Task name> /at <Date>
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Not in the format <Task name> /at <Date>
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Task is already done:
+		 [T][X] This is a todo task
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Task is already not done:
+		 [E][ ] This is an event task (at: 13 Dec 2022 - 03:00 PM)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Task Number must be a number
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	Task Number must be a number
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	No matching task with given number
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	No matching task with given number
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	No matching task with given number
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	No matching task with given number
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	Goodbye! Have a Nice Day.
+	------------------------------------
 
