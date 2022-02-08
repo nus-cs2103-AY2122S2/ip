@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.task.Task;
 import duke.util.Save;
 import duke.util.TaskList;
 
@@ -26,9 +27,12 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Save save) {
+        String status = "";
         String response = "";
         try {
-            tasks.getTask(taskNum).unmark();
+            Task task = tasks.getTask(taskNum);
+            task.unmark();
+            status = task.getStatus();
             response += "OK, I've marked this task as not done yet:\n";
             String unmarkString = tasks.getTask(taskNum).track() + tasks.getTask(taskNum).getStatus()
                     + " " + tasks.getTask(taskNum);
@@ -37,6 +41,7 @@ public class UnmarkCommand extends Command {
             response = "Woof Woof!!! This task cannot be found!!!";
         }
         save.save();
+        assert status.equals("[ ]");
         return response;
     }
 }
