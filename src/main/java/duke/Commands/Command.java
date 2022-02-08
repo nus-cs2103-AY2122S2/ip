@@ -135,8 +135,10 @@ public class Command {
                 .append("3. unmark [task number] (Mark the task as not done)\n")
                 .append("4. delete [task number] (Deletes that specific task from the list\n")
                 .append("5. todo [task description] (Adds a Todo Task)\n")
-                .append("6. deadline [task description] /by [date in the format {yyyy/MM/dd HH:mm} ] (Adds a deadline task)\n")
-                .append("7. event [task description] /at [date in the format {yyyy/MM/dd HH:mm} ] (Adds a event task)\n")
+                .append("6. deadline [task description] /by [date in the format {yyyy/MM/dd HH:mm} ] "
+                        + "(Adds a deadline task)\n")
+                .append("7. event [task description] /at [date in the format {yyyy/MM/dd HH:mm} ] "
+                        + "(Adds a event task)\n")
                 .append("8. find [keyword] (Finds all tasks with the keyword in the description)\n");
         return toPrint.toString();
     }
