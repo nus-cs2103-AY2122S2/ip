@@ -89,6 +89,7 @@ public class Storage {
                 } else if (t instanceof Deadline) {
                     newTask.append("D|");
                 } else {
+                    assert t instanceof Event;
                     newTask.append("E|");
                 }
 

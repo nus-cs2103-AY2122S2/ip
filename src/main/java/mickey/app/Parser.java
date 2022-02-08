@@ -27,6 +27,7 @@ public class Parser {
      * @throws MickeyException Exception for invalid commands.
      */
     public static Command parse(String fullCommand) throws MickeyException {
+        assert fullCommand != null;
         String[] args = fullCommand.split(" ");
         switch (args[0]) {
             case "todo":
