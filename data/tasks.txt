@@ -1,5 +1,5 @@
-T|1|gijsagj
+T|0|gijsagj
 E|1|run|2019-01-01
-T|0|eat book gokgopke
+T|1|eat book gokgopke
 D|0|eat book saokdsok|2015-01-02
 E|0|eat book again|2019-01-01

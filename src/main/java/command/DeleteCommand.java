@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
      * @throws TsundereException exception for invalid number.
      */
     public String execute(TaskList t, Storage s) throws TsundereException {
-        if (t.getCount() < this.num || this.num <= 0) {
+        if (t.getCount() < this.num || this.num <= t.getFirstIndex()) {
             throw new TsundereException("Your number is not valid!!!");
         }
         String rs = ("Deleting the following task. You're not being lazy, are you?\n" + t.getTaskStr(this.num));
@@ -38,4 +38,6 @@ public class DeleteCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+
 }

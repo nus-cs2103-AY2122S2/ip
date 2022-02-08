@@ -7,6 +7,8 @@ import java.util.List;
  * Manages the list of tasks.
  */
 public class TaskList {
+
+    private static final int FIRST_INDEX = 0;
     private List<Task> tasks;
     private int count;
 
@@ -85,18 +87,27 @@ public class TaskList {
     }
 
     /**
+     * Return the first index for the task
+     *
+     * @return the first index for the task
+     */
+    public int getFirstIndex() {
+        return FIRST_INDEX;
+    }
+
+    /**
      * Returns a string with all the task in the task list in string format.
      *
      * @return a string with all the task in the task list in string format.
      */
     public String listTasks() {
-        if (count == 0) {
+        if (count == FIRST_INDEX) {
             return "You got no task!!";
         }
 
         String s = "You forgetful baka... here are your tasks: ";
 
-        for (int i = 0; i < count; i++) {
+        for (int i = FIRST_INDEX; i < count; i++) {
             int num = i + 1;
             s += "\n" + num + ". " + tasks.get(i).toString();
         }
@@ -111,8 +122,8 @@ public class TaskList {
      */
     public String tasksToString() {
         String strReturn = "";
-        for (int i = 0; i < count; i++) {
-            if (i == 0) {
+        for (int i = FIRST_INDEX; i < count; i++) {
+            if (i == FIRST_INDEX) {
                 strReturn = tasks.get(i).saveString();
             } else {
                 strReturn += "\n" + tasks.get(i).saveString();

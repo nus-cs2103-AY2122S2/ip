@@ -17,9 +17,9 @@ public class AddCommand extends Command {
         EVENT
     }
 
+    private static final int MIN_SPACE_NUM = 2;
     protected Type type;
     protected String body;
-
     /**
      * Create a new AddCommand.
      *
@@ -50,26 +50,15 @@ public class AddCommand extends Command {
      * @throws TsundereException for incorrect input format.
      */
     public String execute(TaskList t, Storage s) throws TsundereException {
-        String[] splitStr;
         switch (this.type) {
         case TODO:
             t.addTask(new ToDo(body));
             break;
         case DEADLINE:
-            splitStr = body.split("/by");
-            if (splitStr.length < 2) {
-                throw new TsundereException("Hmph you baka, gimme a correct format."
-                        + " For example, deadline sleep/by 2019-01-15");
-            }
-            t.addTask(new Deadline(splitStr[0], splitStr[1]));
+            t.addTask(checkFormatDeadline());
             break;
         case EVENT:
-            splitStr = body.split("/at");
-            if (splitStr.length < 2) {
-                throw new TsundereException("Hmph you baka, gimme a correct format. "
-                        + "For example, event sleep/at 2019-01-15");
-            }
-            t.addTask(new Event(splitStr[0], splitStr[1]));
+            t.addTask(checkFormatEvent());
             break;
         default:
         }
@@ -87,5 +76,38 @@ public class AddCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Check if the input format is correct then return new Deadline
+     *
+     * @return a new Deadline
+     * @throws TsundereException if format is incorrect
+     */
+    public Deadline checkFormatDeadline() throws TsundereException {
+        String[] splitStr;
+        splitStr = body.split("/by");
+        if (splitStr.length < MIN_SPACE_NUM) {
+            throw new TsundereException("Hmph you baka, gimme a correct format."
+                    + " For example, deadline sleep/by 2019-01-15");
+        }
+
+        return new Deadline(splitStr[0], splitStr[1]);
+    }
+
+    /**
+     * Check if the input format is correct then return new Event
+     *
+     * @return a new Event
+     * @throws TsundereException if format is incorrect
+     */
+    public Event checkFormatEvent() throws TsundereException {
+        String[] splitStr;
+        splitStr = body.split("/at");
+        if (splitStr.length < MIN_SPACE_NUM) {
+            throw new TsundereException("Hmph you baka, gimme a correct format. "
+                    + "For example, event sleep/at 2019-01-15");
+        }
+        return new Event(splitStr[0], splitStr[1]);
     }
 }

@@ -15,6 +15,9 @@ import javafx.util.Duration;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final int TIMER = 1;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -26,8 +29,8 @@ public class MainWindow extends AnchorPane {
 
     private Tsundere tsundere;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
-    private Image tsundereImage = new Image(this.getClass().getResourceAsStream("/images/Tsundere1.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
+    private final Image tsundereImage = new Image(this.getClass().getResourceAsStream("/images/Tsundere1.jpg"));
 
     /**
      * Initializes with a DialogBox with intro.
@@ -81,7 +84,7 @@ public class MainWindow extends AnchorPane {
         }
         userInput.clear();
         if (response == "Finally, you're leaving!\nIt's not like i will miss you or anything...") {
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            PauseTransition delay = new PauseTransition(Duration.seconds(TIMER));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }

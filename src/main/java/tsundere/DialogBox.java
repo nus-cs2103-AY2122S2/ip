@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -77,7 +76,6 @@ public class DialogBox extends HBox {
     public static DialogBox getTsundereDialog(String text, Image img, Boolean isChain) {
         var db = new DialogBox(text, img);
         if (isChain) {
-            db.setPadding(new Insets(0, 5, 15, 5));
             db.displayPicture.setVisible(false);
         }
         db.flip();
