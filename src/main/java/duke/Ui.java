@@ -12,12 +12,12 @@ public class Ui {
 
     private static final String DUKE_DIRECTORY = "C:\\DukeDirectory";
     private static final String DUKE_TXTFILE = "C:\\DukeDirectory\\DukeSave.txt";
-    private TaskList taskList = new TaskList(DUKE_DIRECTORY, DUKE_TXTFILE);
-    private Storage storage = new Storage(DUKE_DIRECTORY, DUKE_TXTFILE);
+    private final TaskList taskList = new TaskList(DUKE_DIRECTORY, DUKE_TXTFILE);
+    private final Storage storage = new Storage(DUKE_DIRECTORY, DUKE_TXTFILE);
     public boolean isExit = false;
 
-    private String separation = "\n******************************\n";
-    private String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+    private final String separation = "\n******************************\n";
+    private final String greeting = "Hello! I'm Duke\nWhat can I do for you?";
 
 
     /**
