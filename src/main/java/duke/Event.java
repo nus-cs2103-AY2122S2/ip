@@ -14,6 +14,7 @@ public class Event extends Task {
     protected Month month;
     protected int year;
     protected LocalTime time;
+    protected Tag tag;
 
     /**
      * Constructs an Event object.
@@ -31,6 +32,21 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public Event(String description, LocalDate eventDate, LocalTime time, Tag tag) {
+        super(description);
+        this.eventDate = eventDate;
+        this.day = eventDate.getDayOfWeek();
+        this.month = eventDate.getMonth();
+        this.year = eventDate.getYear();
+        this.time = time;
+        this.tag = tag;
+    }
+
+    @Override
+    public Event tag(Tag taskTag) {
+        return new Event(description, eventDate, time, taskTag);
+    }
+
     /**
      * Returns a string representation to save to disk.
      *
@@ -38,7 +54,9 @@ public class Event extends Task {
      */
     @Override
     public String toStringForSave() {
-        return "E " + super.toStringForSave() + " # " + this.eventDate + " " + this.time;
+        return tag == null
+                ? "E " + super.toStringForSave() + " # " + this.eventDate + " " + this.time
+                : "E " + super.toStringForSave() + " # " + this.eventDate + " " + this.time + " " + this.tag.toString();
     }
 
     /**
@@ -48,11 +66,19 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
+        return tag == null
+                ? ("[E]" + super.toString() + " (at: "
                 + this.month + " "
                 + this.day + " "
                 + this.year + " "
                 + this.time + ")"
-                + "\n";
+                + "\n")
+                : ("[E]" + super.toString() + " (at: "
+                + this.month + " "
+                + this.day + " "
+                + this.year + " "
+                + this.time + " "
+                + this.tag.toString() + ")"
+                + "\n");
     }
 }

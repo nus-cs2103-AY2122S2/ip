@@ -11,7 +11,7 @@ import java.util.Arrays;
  */
 public class Parser {
     private static final ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event",
-            "deadline", "mark", "unmark", "list", "bye", "delete", "find"));
+            "deadline", "mark", "unmark", "list", "bye", "delete", "find", "tag"));
 
     /**
      * Manages the listing of task list.
@@ -230,6 +230,19 @@ public class Parser {
             output += "    " + (j + 1) + "." + tasks.get(j).toString() + "/n";
         }
         return output;
+    }
+
+    static String parserTag(TaskList taskLists, String[] userInputs, Storage storage) throws IOException {
+        int taskToTag = Integer.parseInt(userInputs[1]);
+        String output = "OK, I've tagged this task:\n";
+        TaskList taggedTaskList = taskLists.tagTask(taskToTag, userInputs[2], storage);
+        String taskString = String.format("%s", taskLists.get(taskToTag - 1).toString());
+//        TaskList taggedTaskList = taskLists.tagTask(taskToTag, userInputs[2], storage);
+        storage.save(taggedTaskList);
+        for (int i = 0; i < taggedTaskList.size(); i++) {
+            System.out.println(taggedTaskList.get(i).toString());
+        }
+        return output + taskString;
     }
 
     /**

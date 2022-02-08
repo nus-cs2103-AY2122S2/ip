@@ -43,9 +43,9 @@ public class TaskList {
      * @return string of tasks.
      */
     public String list() {
-        String output = "    Here are the tasks in your list: \n";
+        String output = "Here are the tasks in your list: \n";
         for (int i = 0; i < taskLists.size(); i++) {
-            String display = String.format("    %d.%s", i + 1, taskLists.get(i).toString());
+            String display = String.format("%d.%s", i + 1, taskLists.get(i).toString());
             output += display;
         }
         return output;
@@ -121,5 +121,35 @@ public class TaskList {
 
         String taskString = String.format("%s", taskLists.get(taskToUnmark - 1).toString());
         return output + "    " + taskString;
+    }
+
+    public TaskList tagTask(int taskToTag, String tag, Storage storage) throws IOException {
+        Task taskToBeTagged = taskLists.get(taskToTag - 1);
+        Tag taskTag = new Tag(tag);
+        Task taggedTask = taskToBeTagged.tag(taskTag);
+
+        // replace the original task to tagged task
+        taskLists.set(taskToTag - 1, taggedTask);
+
+        for (int i = 0; i < taskLists.size(); i++) {
+            System.out.println(taskLists.get(i).toString());
+        }
+
+        // save the updated tasklist to disk
+        TaskList tempTaskLists = new TaskList(taskLists);
+//        storage.save(tempTaskLists);
+//        String output = "OK, I've tagged this task:\n";
+//        String taskString = String.format("%s", taggedTask.toString());
+        return tempTaskLists;
+//        return output + taskString;
+    }
+
+    /**
+     * Sets task at a particular index in a tasklist to another task.
+     * @param taskToSet an index of a task to be set.
+     * @param task new task to replace that position.
+     */
+    public void set(int taskToSet, Task task) {
+        taskLists.set(taskToSet - 1, task);
     }
 }

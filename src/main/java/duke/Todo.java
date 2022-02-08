@@ -4,6 +4,7 @@ package duke;
  * Class that represents todo related tasks.
  */
 public class Todo extends Task {
+    protected Tag tag;
     /**
      * Constructs a Todo object.
      *
@@ -13,6 +14,16 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, Tag tag) {
+        super(description);
+        this.tag = tag;
+    }
+
+    @Override
+    public Todo tag(Tag taskTag) {
+        return new Todo(description, taskTag);
+    }
+
     /**
      * Returns a string of Todo object to save to disk.
      *
@@ -20,7 +31,9 @@ public class Todo extends Task {
      */
     @Override
     public String toStringForSave() {
-        return "T " + super.toStringForSave();
+        return tag == null
+                ? "T " + super.toStringForSave()
+                : "T " + super.toStringForSave() + " " + this.tag.toString();
     }
 
     /**
@@ -30,6 +43,8 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString() + "\n";
+        return tag == null
+                ? ("[T]" + super.toString() + "\n")
+                : ("[T]" + super.toString() + " " + this.tag.toString() + "\n");
     }
 }
