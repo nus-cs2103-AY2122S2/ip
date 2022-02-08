@@ -7,6 +7,11 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Represents a class which contains methods with regards to 
+ * creating a file, writing an output to a specific file and
+ * creating a directory.
+ */
 class FileClass {
 
     /**
@@ -14,8 +19,8 @@ class FileClass {
      * If the file does not exist in the path, 
      * a file at the specific file will be created instead.
      *
-     * @param filePath filePath location of the file.
-     * @throws IOException if the directory is invalid.
+     * @param filePath Location of the file.
+     * @throws IOException If the directory is invalid.
      */
     public void createFile(String filePath) {
         File f = new File(filePath);
@@ -33,8 +38,8 @@ class FileClass {
      * If the file does not exist in the path, 
      * IOException will be thrown instead.
      *
-     * @param filePath filePath location of the file.
-     * @param textToAdd textToAdd texts that will be written in the file.
+     * @param filePath Location of the file.
+     * @param textToAdd Texts that will be written in the file.
      * @throws IOException if the directory is invalid.
      */
     //taken from W3.3c File Access
@@ -49,8 +54,8 @@ class FileClass {
      * If the path does not exist, 
      * it will be created instead.
      *
-     * @param filePath filePath location of the file.
-     * @throws IOException if the path directory is invalid.
+     * @param filePath Location of the file.
+     * @throws IOException If the path directory is invalid.
      */
     public void createDirectory(String filePath) {
         File f = new File(filePath); //initialise the file

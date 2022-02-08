@@ -3,6 +3,10 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a class which is responsile to make sense
+ * of the user input.
+ */
 class Parser {
     public TaskList taskList;
     private Ui ui;
@@ -15,7 +19,7 @@ class Parser {
     /**
      * Executes and makes sense of the user command.
      *
-     * @param input Input input given by the user .
+     * @param input Input given by the user .
      */
     public void execute(String input) {
         String[] checkCase = input.split(" ");

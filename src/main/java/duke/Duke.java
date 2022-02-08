@@ -3,7 +3,10 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Duke {
+/**
+ * Represents the main class of the program.
+ */
+class Duke {
 
     private Storage storage;
     private TaskList taskList;
@@ -15,9 +18,8 @@ public class Duke {
         this.taskList = new TaskList(storage);
     }
 
-        /**
-     * Returns the 
-     *
+     /**
+     * Runs the program.
      */
     public void run() {
         ui.showWelcomeMessage();
@@ -41,6 +43,9 @@ public class Duke {
         storage.writeFile();
     }
 
+    /**
+     * The main method of the class.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("/data/tasks.txt");
         duke.run();
