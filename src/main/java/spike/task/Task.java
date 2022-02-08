@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
  * Encapsulate information of a user task.
  */
 public class Task {
+    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HHmm";
+    public static final String DATE_TIME_PATTERN_FOR_PRINT = "yyyy-MM-dd HH:mm";
     protected String description;
     protected boolean isDone;
     protected LocalDateTime dateTime;

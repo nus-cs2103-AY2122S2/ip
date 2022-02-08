@@ -6,7 +6,7 @@ import spike.task.TaskList;
  * Handles data before exiting.
  */
 public class ExitCommand extends Command {
-    public static final String EXIT_MESSAGE = "See you soon! ﾍ(=￣∇￣)ﾉ You may close this window now.";
+    public static final String MSG_EXIT = "See you soon! ﾍ(=￣∇￣)ﾉ You may close this window now.";
     /**
      * Save changes to list to the hard disk.
      *
@@ -15,6 +15,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        return EXIT_MESSAGE;
+        return MSG_EXIT;
     }
 }

@@ -7,6 +7,8 @@ import spike.task.TaskList;
  * Changes completion status of a task.
  */
 public class ToggleMarkCommand extends Command {
+    public static final String MSG_TASK_DONE = "Great! One more task done:\n";
+    public static final String MSG_TASK_UNDONE = "Oops, I've marked this task as not done yet:\n";
     private Task task;
     private int action;
 
@@ -33,10 +35,10 @@ public class ToggleMarkCommand extends Command {
         assert task != null : "Task should not be null";
         if (action == 1) {
             task.markAsDone();
-            return "Great! One more task done:\n" + task.toString();
+            return MSG_TASK_DONE + task.toString();
         } else {
             task.markAsNotDone();
-            return "Oops, I've marked this task as not done yet:\n" + task.toString();
+            return MSG_TASK_UNDONE + task.toString();
         }
     }
 }
