@@ -8,6 +8,9 @@ import mickey.task.TaskList;
  */
 public class Mickey {
 
+    /** Path of storage file. */
+    private static final String filePath = "src/main/data/save.txt";
+
     /** Storage to save and load previous tasks. */
     private final Storage storage;
 
@@ -16,9 +19,6 @@ public class Mickey {
 
     /** Ui to generate terminal output. */
     private final Ui ui;
-
-    /** Path of storage file. */
-    private static final String filePath = "src/main/data/save.txt";
 
     /**
      * Constructor.

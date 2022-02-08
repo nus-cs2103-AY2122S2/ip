@@ -11,7 +11,7 @@ public class Event extends Task {
     /**
      * Event date.
      */
-    public LocalDateTime at;
+    private final LocalDateTime at;
 
     /**
      * Constructor.
@@ -21,8 +21,17 @@ public class Event extends Task {
      * @throws DateTimeParseException DateTime parse error.
      */
     public Event(String description, String date) throws DateTimeParseException {
-        this.description = description;
+        super(description);
         this.at = LocalDateTime.parse(date, (DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
+    }
+
+    /**
+     * Gets Event at date.
+     *
+     * @return event at date.
+     */
+    public LocalDateTime getAt() {
+        return this.at;
     }
 
     @Override

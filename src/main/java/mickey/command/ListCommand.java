@@ -36,7 +36,7 @@ public class ListCommand extends Command {
                 result.append("\n\t").append(i + 1).append(". ").append(tasks.get(i));
             }
         } else {
-           result.append("Hooray! You have no tasks");
+            result.append("Hooray! You have no tasks");
         }
         return result.toString();
     }

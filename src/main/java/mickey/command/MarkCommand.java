@@ -35,7 +35,7 @@ public class MarkCommand extends Command {
             throw new MickeyException("No such task!");
         }
         Task toMark;
-        if (cmd.equals("mark")) {
+        if (getCmd().equals("mark")) {
             toMark = tasks.get(indexToMark).markAsDone();
             return ui.showMarkAsDone(toMark);
         } else {

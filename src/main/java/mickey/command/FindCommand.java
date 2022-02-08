@@ -1,12 +1,12 @@
 package mickey.command;
 
+import java.util.List;
+
 import mickey.app.MickeyException;
 import mickey.app.Storage;
 import mickey.app.Ui;
 import mickey.task.Task;
 import mickey.task.TaskList;
-
-import java.util.List;
 
 /**
  * Find command to find task.
