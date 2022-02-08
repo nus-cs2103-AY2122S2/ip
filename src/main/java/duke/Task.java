@@ -3,10 +3,16 @@ package duke;
 /**
  * Represents a task that is created by an user.
  */
-class Task {
+public class Task {
+
+    public enum Priority {
+        HIGH, MEDIUM, LOW
+    }
 
     protected String description;
     protected boolean hasCompleted;
+    protected Priority priority;
+
 
     /**
      * A constructor to create a new task
@@ -45,6 +51,14 @@ class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * To get the priority level of task.
+     * @return String of the priority level. (HIGH/MEDIUM/LOW)
+     */
+    public String getPriority() {
+        return this.priority.toString();
     }
 
 }

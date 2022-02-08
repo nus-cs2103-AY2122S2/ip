@@ -138,9 +138,16 @@ public class TaskList {
     public String toString() {
         String s = new String();
         int counter = 1;
+
+        if (taskArrayList.isEmpty()) {
+            s = "List is currently empty";
+            return s;
+        }
+
         for (Task task: taskArrayList) {
             s += (String.valueOf(counter) + ". "
-                    + task.toString() + task.getStatus() + " " + task.getDescription() + "\n");
+                    + task.toString() + task.getStatus() + " " + task.getDescription()
+                    + " Priority Level: " + task.getPriority() + "\n");
             counter++;
         }
         return s;

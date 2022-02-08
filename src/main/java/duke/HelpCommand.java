@@ -26,10 +26,10 @@ public class HelpCommand extends Command {
                 + "    4. Type list to see what are the tasks on hand.\n";
 
         String messageToWindow = "Hello. You can run a few commands with this machine.\n"
-                + "1. Type todo to create a task at hand. (eg. todo homework today)\n"
-                + "2. Type event to create an event. (eg. event Career Fair /at 26/01/2022 10:00 AM)\n"
-                + "3. Type deadline to create an deadline. "
-                + "(eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM)\n"
+                + "1. Type todo to create a task at hand. (eg. todo homework today $HIGH)\n"
+                + "2. Type event to create an event. \n(eg. event Career Fair /at 26/01/2022 10:00 AM $LOW)\n"
+                + "3. Type deadline to create an deadline. \n"
+                + "(eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM $MEDIUM)\n"
                 + "4. Type list to see what are the tasks on hand.\n";
 
         ui.outputMessage(message);

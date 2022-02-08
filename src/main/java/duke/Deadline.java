@@ -17,10 +17,12 @@ public class Deadline extends Task {
      *
      * @param description the content of what the deadline is about.
      * @param date the date of the deadline of the task.
+     * @param priority the priority level of this task (HIGH, MEDIUM, LOW).
      */
-    public Deadline(String description, Date date) {
+    public Deadline(String description, Date date, Priority priority) {
         super(description);
         this.date = date;
+        this.priority = priority;
     }
 
     /**
@@ -29,11 +31,13 @@ public class Deadline extends Task {
      * @param description the content of what the deadline is about.
      * @param hasCompleted a boolean variable to indicate if the task has been completed.
      * @param date the date of the deadline of the task.
+     * @param priority the priority level of this task (HIGH, MEDIUM, LOW).
      */
-    public Deadline(String description, boolean hasCompleted, Date date) {
+    public Deadline(String description, boolean hasCompleted, Date date, Priority priority) {
         super(description);
         this.hasCompleted = hasCompleted;
         this.date = date;
+        this.priority = priority;
     }
 
     /**

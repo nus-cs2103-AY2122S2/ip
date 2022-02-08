@@ -85,7 +85,7 @@ public class Storage {
      */
     public void appendTask(Task task) throws IOException {
         FileWriter appendWriter = new FileWriter(file, true);
-        String toPrint = task.toString() + task.getStatus() + task.getDescription();
+        String toPrint = task.toString() + task.getStatus() + task.getDescription() + "$" + task.getPriority();;
         System.out.println("writing");
         appendWriter.write(toPrint + "\n");
         appendWriter.close();
@@ -99,7 +99,7 @@ public class Storage {
     public void rewriteTask(TaskList taskList) throws IOException {
         FileWriter rewriteWriter = new FileWriter(file, false);
         for (Task task: taskList.getTaskArrayList()) {
-            String toPrint = task.toString() + task.getStatus() + task.getDescription();
+            String toPrint = task.toString() + task.getStatus() + task.getDescription() + "$" + task.getPriority();
             rewriteWriter.write(toPrint + "\n");
         }
 
@@ -115,11 +115,17 @@ public class Storage {
      */
     public boolean loadToDo(ArrayList<Task> taskArrayList, String currentCommand) {
         ToDos todo;
+        Task.Priority priority;
+        int indexOfPriority = currentCommand.indexOf("$");
+        String priorityInput = currentCommand.substring(indexOfPriority);
+        priority = parsePriority(priorityInput);
+
         if (currentCommand.charAt(4) == 'X') {
-            todo = new ToDos(currentCommand.substring(6), true);
+            todo = new ToDos(currentCommand.substring(6, indexOfPriority),
+                    true, priority);
             taskArrayList.add(todo);
         } else {
-            todo = new ToDos(currentCommand.substring(6));
+            todo = new ToDos(currentCommand.substring(6, indexOfPriority), priority);
             taskArrayList.add(todo);
         }
         return true;
@@ -136,14 +142,18 @@ public class Storage {
         String date = currentCommand.substring(currentCommand.indexOf('(') + 5, currentCommand.indexOf(')'));
         DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
         Date dueDate = (Date) formatter.parse(date);
+        Task.Priority priority;
+        int indexOfPriority = currentCommand.indexOf("$");
+        String priorityInput = currentCommand.substring(indexOfPriority);
+        priority = parsePriority(priorityInput);
 
         Deadline deadline;
         if (currentCommand.charAt(4) == 'X') {
             deadline = new Deadline(currentCommand.substring(6,
-                    currentCommand.indexOf('(') - 1), true, dueDate);
+                    currentCommand.indexOf('(') - 1), true, dueDate, priority);
         } else {
             deadline = new Deadline(currentCommand.substring(6,
-                    currentCommand.indexOf('(') - 1), dueDate);
+                    currentCommand.indexOf('(') - 1), dueDate, priority);
         }
         taskArrayList.add(deadline);
         return true;
@@ -161,16 +171,31 @@ public class Storage {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
         Date dueDate = (Date) formatter.parse(date);
         Event event;
+        Task.Priority priority;
+        int indexOfPriority = currentCommand.indexOf("$");
+        String priorityInput = currentCommand.substring(indexOfPriority);
+        priority = parsePriority(priorityInput);
 
         if (currentCommand.charAt(4) == 'X') {
             event = new Event(currentCommand.substring(6,
-                    currentCommand.indexOf('(') - 1), true, dueDate);
+                    currentCommand.indexOf('(') - 1), true, dueDate, priority);
         } else {
             event = new Event(currentCommand.substring(6,
-                    currentCommand.indexOf('(') - 1), dueDate);
+                    currentCommand.indexOf('(') - 1), dueDate, priority);
         }
         taskArrayList.add(event);
         return true;
+    }
+
+    private Task.Priority parsePriority(String command) {
+        if (command.equals("$HIGH")) {
+            return Task.Priority.HIGH;
+        } else if (command.equals("$MEDIUM")) {
+            return Task.Priority.MEDIUM;
+        } else if (command.equals("$LOW")) {
+            return Task.Priority.LOW;
+        }
+        return Task.Priority.HIGH;
     }
 
 }

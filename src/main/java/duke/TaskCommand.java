@@ -40,64 +40,85 @@ public class TaskCommand extends Command {
      */
     @Override
     String runCommand(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        String indentation = "    ";
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
-        String message = null;
-        if (taskType == TaskType.TODO) {
-            try {
-                String newString = command.substring(5).trim();
-                if (newString.length() == 0) {
-                    throw new StringIndexOutOfBoundsException();
-                }
-                ToDos newToDo = new ToDos(newString);
-                taskList.addTask(newToDo);
-                message = "Got it. I've added this task:\n"
-                        + indentation + "  " + newToDo.toString()
-                        + newToDo.getStatus() + " " + newToDo.getDescription() + "\n"
-                        + indentation + "Now you have "
-                        + String.valueOf(taskList.getSize()) + " tasks in the list.";
-                storage.appendTask(newToDo);
-            } catch (StringIndexOutOfBoundsException e) {
-                ui.showWrongFormat("ToDo");
-                return "Error";
-            }
-        } else if (taskType == TaskType.EVENT) {
-            try {
-                String description = command.substring(6, command.indexOf('/') - 1).trim();
-                String date = command.substring((command.indexOf('/') + 4)).trim();
-                Date dueDate = (Date) formatter.parse(date);
-                Event newEvent = new Event(description, dueDate);
-                taskList.addTask(newEvent);
-                message = "Got it. I've added this task:\n"
-                        + indentation + "  " + newEvent.toString()
-                        + newEvent.getStatus() + " " + newEvent.getDescription() + "\n"
-                        + indentation + "Now you have "
-                        + String.valueOf(taskList.getSize()) + " tasks in the list.";
-                storage.appendTask(newEvent);
-            } catch (StringIndexOutOfBoundsException | ParseException e) {
-                ui.showWrongFormat("Event");
-                return "Error";
-            }
-        } else if (taskType == TaskType.DEADLINE) {
-            try {
-                String description = command.substring(9, command.indexOf('/') - 1).trim();
-                String date = command.substring((command.indexOf('/') + 4)).trim();
-                Date dueDate = (Date) formatter.parse(date);
-                Deadline newDeadline = new Deadline(description, dueDate);
-                taskList.addTask(newDeadline);
-                message = "Got it. I've added this task:\n"
-                        + indentation + "  " + newDeadline.toString()
-                        + newDeadline.getStatus() + " " + newDeadline.getDescription() + "\n"
-                        + indentation + "Now you have "
-                        + String.valueOf(taskList.getSize() + " tasks in the list.");
-                storage.appendTask(newDeadline);
-            } catch (StringIndexOutOfBoundsException | ParseException e) {
-                ui.showWrongFormat("Deadline");
-                return "Error";
-            }
-        }
 
-        ui.outputMessage(message);
-        return message;
+        try {
+            String indentation = "    ";
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
+            String message = null;
+            int indexOfPriority = command.indexOf("$");
+            String priorityString = command.substring(indexOfPriority);
+            Task.Priority priority = parsePriority(priorityString);
+
+
+            if (taskType == TaskType.TODO) {
+                try {
+                    String newString = command.substring(5, indexOfPriority - 1).trim();
+                    if (newString.length() == 0) {
+                        throw new StringIndexOutOfBoundsException();
+                    }
+                    ToDos newToDo = new ToDos(newString, priority);
+                    taskList.addTask(newToDo);
+                    message = "Got it. I've added this task:\n"
+                            + indentation + "  " + newToDo.toString()
+                            + newToDo.getStatus() + " " + newToDo.getDescription() + "\n"
+                            + indentation + "Now you have "
+                            + String.valueOf(taskList.getSize()) + " tasks in the list.";
+                    storage.appendTask(newToDo);
+                } catch (StringIndexOutOfBoundsException e) {
+                    ui.showWrongFormat("ToDo");
+                    return "Error";
+                }
+            } else if (taskType == TaskType.EVENT) {
+                try {
+                    String description = command.substring(6, command.indexOf('/') - 1).trim();
+                    String date = command.substring((command.indexOf('/') + 4), indexOfPriority - 1).trim();
+                    Date dueDate = (Date) formatter.parse(date);
+                    Event newEvent = new Event(description, dueDate, priority);
+                    taskList.addTask(newEvent);
+                    message = "Got it. I've added this task:\n"
+                            + indentation + "  " + newEvent.toString()
+                            + newEvent.getStatus() + " " + newEvent.getDescription() + "\n"
+                            + indentation + "Now you have "
+                            + String.valueOf(taskList.getSize()) + " tasks in the list.";
+                    storage.appendTask(newEvent);
+                } catch (StringIndexOutOfBoundsException | ParseException e) {
+                    ui.showWrongFormat("Event");
+                    return "Error";
+                }
+            } else if (taskType == TaskType.DEADLINE) {
+                try {
+                    String description = command.substring(9, command.indexOf('/') - 1).trim();
+                    String date = command.substring((command.indexOf('/') + 4), indexOfPriority - 1).trim();
+                    Date dueDate = (Date) formatter.parse(date);
+                    Deadline newDeadline = new Deadline(description, dueDate, priority);
+                    taskList.addTask(newDeadline);
+                    message = "Got it. I've added this task:\n"
+                            + indentation + "  " + newDeadline.toString()
+                            + newDeadline.getStatus() + " " + newDeadline.getDescription() + "\n"
+                            + indentation + "Now you have "
+                            + String.valueOf(taskList.getSize() + " tasks in the list.");
+                    storage.appendTask(newDeadline);
+                } catch (StringIndexOutOfBoundsException | ParseException e) {
+                    ui.showWrongFormat("Deadline");
+                    return "Error";
+                }
+            }
+            ui.outputMessage(message);
+            return message;
+        } catch (StringIndexOutOfBoundsException e) {
+            return "Wrong format command, try again. Type /help to see available commands.";
+        }
     }
+
+    private Task.Priority parsePriority(String command) {
+        if (command.equals("$HIGH")) {
+            return Task.Priority.HIGH;
+        } else if (command.equals("$MEDIUM")) {
+            return Task.Priority.MEDIUM;
+        } else if (command.equals("$LOW")) {
+            return Task.Priority.LOW;
+        }
+        return Task.Priority.HIGH;
+    }
+
 }

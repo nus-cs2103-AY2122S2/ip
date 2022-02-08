@@ -9,9 +9,11 @@ public class ToDos extends Task {
      * The constructor for creating a To-Do task.
      *
      * @param description the content of what the deadline is about.
+     * @param priority the priority level of this task (HIGH, MEDIUM, LOW).
      */
-    public ToDos(String description) {
+    public ToDos(String description, Priority priority) {
         super(description);
+        this.priority = priority;
     }
 
     /**
@@ -19,10 +21,13 @@ public class ToDos extends Task {
      *
      * @param description the content of what the event is about.
      * @param hasCompleted a boolean variable to indicate if the task has been completed.
+     * @param priority the priority level of this task (HIGH, MEDIUM, LOW).
      */
-    public ToDos(String description, boolean hasCompleted) {
+    public ToDos(String description, boolean hasCompleted, Priority priority) {
         super(description);
         this.hasCompleted = hasCompleted;
+        this.priority = priority;
+
     }
 
     /**
