@@ -12,6 +12,10 @@ import java.time.format.DateTimeFormatter;
  * @since 0.1.0
  */
 public class Date {
+    private static final String INVALID_DATE_FORMAT = "Please enter date in the YYYY-MM-DD format~";
+    private static final String INVALID_DATE = "Please enter a valid date that can be found on calender :P";
+    private static final String DATE_FORMAT = "MMM d yyyy";
+    private static final int DATE_LENGTH = 10;
     private final LocalDate date;
     private final String time;
 
@@ -32,8 +36,8 @@ public class Date {
      * @throws TesseractException If the input string cannot be converted to a valid date.
      */
     public static void checkValidTime(String time) throws TesseractException {
-        if (time.length() != 10) { // check if the string is of length 10
-            throw new TesseractException("Please enter date in the YYYY-MM-DD format~");
+        if (time.length() != DATE_LENGTH) { // check if the string is of length 10
+            throw new TesseractException(INVALID_DATE_FORMAT);
         } else {
             try {
                 String[] ints = time.split("-", 3);
@@ -42,9 +46,9 @@ public class Date {
                 }
                 new Date(time).formattedTime();
             } catch (DateTimeException e) {
-                throw new TesseractException("Please enter a valid date that can be found on calender :P");
+                throw new TesseractException(INVALID_DATE);
             } catch (NumberFormatException e) {
-                throw new TesseractException("Please enter date in the YYYY-MM-DD format~");
+                throw new TesseractException(INVALID_DATE_FORMAT);
             }
         }
     }
@@ -65,7 +69,7 @@ public class Date {
      * @return The date of the instance in the "MMM d yyyy" format.
      */
     public String formattedTime() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return this.date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     /**

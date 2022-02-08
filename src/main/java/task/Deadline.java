@@ -9,8 +9,11 @@ import main.Date;
  * @since 0.1.0
  */
 public class Deadline extends Task {
-    protected String by;
-    protected Date date;
+    private static final String MEMORY_FORMAT = "D%s@%s";
+    private static final String STRING_FORMAT = "[D]%s (by: %s)";
+    private final String by;
+    private final Date date;
+
 
     /**
      * Create a deadline that needs to be finished before a specific date.
@@ -31,7 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toMemoryString() {
-        return "D" + super.toMemoryString() + "@" + this.by;
+        return String.format(MEMORY_FORMAT, super.toMemoryString(), this.by);
     }
 
     /**
@@ -52,6 +55,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.formattedTime() + ")";
+        return String.format(STRING_FORMAT, super.toString(), date.formattedTime());
     }
 }

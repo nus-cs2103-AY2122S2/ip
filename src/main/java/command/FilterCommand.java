@@ -14,6 +14,7 @@ import main.TessUi;
 public class FilterCommand extends Command {
     protected static final int KEYWORD = 2;
     protected static final int CONDITION = 3;
+    private static final String FILTER_BY_DATE = "date";
 
     /** The type of condition for filtering */
     protected String keyword; // filter by this condition, e.g. "filter /by date YYYY-MM-DDDD"
@@ -35,7 +36,7 @@ public class FilterCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, TessUi ui, Storage storage) {
-        if (this.keyword.equals("date")) {
+        if (this.keyword.equals(FILTER_BY_DATE)) {
             Date date = new Date(this.condition);
             return ui.filterRes(this.condition, taskList.filterByDate(date).toString());
         } else {

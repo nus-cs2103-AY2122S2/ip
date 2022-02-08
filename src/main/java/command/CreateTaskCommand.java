@@ -15,6 +15,12 @@ import task.Todo;
  * @since 0.1.0
  */
 public class CreateTaskCommand extends Command {
+    private static final String TODO_COMMAND = "todo";
+    private static final String DDL_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
+    private static final String BY = "/by";
+    private static final String AT = "/at";
+
     /** The type of task to be created */
     protected String taskType;
     /** The full command in an array */
@@ -39,14 +45,18 @@ public class CreateTaskCommand extends Command {
         String description = generateDescription(cmdArr);
         int cmdLen = cmdArr.length;
         switch (taskType) {
-        case "event":
+        case EVENT_COMMAND:
             newTask = new Event(description, cmdArr[cmdLen - 1]);
             break;
-        case "deadline":
+        case DDL_COMMAND:
             newTask = new Deadline(description, cmdArr[cmdLen - 1]);
             break;
-        default: // "todo"
+        case TODO_COMMAND:
             newTask = new Todo(description);
+            break;
+        default:
+            // report error, this statement should not be reached
+            return ui.admitBug();
         }
         taskList.addTask(newTask);
         storage.needUpdate();
@@ -58,7 +68,7 @@ public class CreateTaskCommand extends Command {
         int cmdLen = arr.length;
         String description = "";
         for (int i = 1; i < cmdLen - 1; i++) {
-            if (arr[i].equals("/at") || arr[i].equals("/by")) {
+            if (arr[i].equals(AT) || arr[i].equals(BY)) {
                 return description.substring(0, description.length() - 1);
             }
             description += arr[i] + " ";
