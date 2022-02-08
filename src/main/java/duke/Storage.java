@@ -16,6 +16,7 @@ public class Storage {
      * @param filePath Path where storage is located or to be created.
      */
     public Storage(String filePath) {
+        assert(filePath != null && !filePath.equals(""));
         this.filePath = filePath;
     }
 

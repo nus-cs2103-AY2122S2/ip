@@ -11,7 +11,6 @@ public class Parser {
      * @throws UnsupportedOperationException If userCommand is in the wrong format.
      */
     public static Command parse(String userCommand, Ui ui) throws UnsupportedOperationException, DukeException {
-
         String[] descriptions = userCommand.split(" ", 2);
         String command = descriptions[0];
         switch (command) {
