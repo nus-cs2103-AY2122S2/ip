@@ -60,8 +60,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response of Ducky upon user input.
+     *
+     * @param input User input in GUI (i.e. commands).
+     * @return Ducky's response the user's input.
      */
     public String getResponse(String input) {
         try {
@@ -74,4 +76,3 @@ public class Duke {
         }
     }
 }
-

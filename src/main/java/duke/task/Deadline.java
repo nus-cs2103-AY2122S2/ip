@@ -30,7 +30,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTask() {
-        return "[" + type +"]" + super.getTask() + " (by: " + by.getDatetime() + ")";
+        return "[" + type + "]" + super.getTask() + " (by: " + by.getDatetime() + ")";
     }
 
     /**

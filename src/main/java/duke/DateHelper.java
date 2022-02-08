@@ -1,8 +1,8 @@
 package duke;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.text.DateFormat;
 import java.util.Date;
 
 /**
@@ -12,9 +12,9 @@ import java.util.Date;
  */
 public class DateHelper {
     private Date formattedDatetime;
-    private static final String INVALID_DATE = "Oops, please put a valid time format!\n" +
-            "Let's try again ~(^.^)~\n" +
-            "Type 'help' if you need to know how to use this duke.command";
+    private static final String INVALID_DATE = "Oops, please put a valid time format!\n"
+            + "Let's try again ~(^.^)~\n"
+            + "Type 'help' if you need to know how to use this command";
 
     /**
      * Constructs a DateHelper.
@@ -37,8 +37,8 @@ public class DateHelper {
                 Date date = simpleDateFormat.parse(time);
                 formattedDatetime = date;
             } catch (ParseException err) {
-               throw new DukeException(INVALID_DATE);
-           }
+                throw new DukeException(INVALID_DATE);
+            }
         }
     }
 
@@ -50,6 +50,7 @@ public class DateHelper {
     public String getDatetime() {
         DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
         dateFormat.setLenient(false);
+        assert formattedDatetime != null : "No time was given previously";
         String strDate = dateFormat.format(formattedDatetime);
         return strDate;
     }

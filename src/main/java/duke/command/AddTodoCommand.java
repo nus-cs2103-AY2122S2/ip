@@ -11,9 +11,9 @@ import duke.task.Todo;
  */
 public class AddTodoCommand extends Command {
     private String description;
-    private static final String DESC_RESPONSE = "Oops! \\(@.@)/ You have not keyed in a description for the duke.task!\n" +
-            "Let's try again ~(^.^)~\n" +
-            "Type 'help' if you need to know how to use this duke.command";
+    private static final String DESC_RESPONSE = "Oops! \\(@.@)/ You have not keyed in a description for the task!\n"
+            + "Let's try again ~(^.^)~\n"
+            + "Type 'help' if you need to know how to use this command";
 
     /**
      * Constructor method for adding todos.
@@ -37,7 +37,6 @@ public class AddTodoCommand extends Command {
         if (description.length() == 0) {
             throw new DukeException(DESC_RESPONSE);
         } else {
-            System.out.println("des" + description);
             Todo entry = new Todo(description);
             tasks.addTask(entry);
             String message = entry.getTask();

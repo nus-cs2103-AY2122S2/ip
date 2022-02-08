@@ -4,7 +4,7 @@ package duke;
  * Duke specific exception that allows for custom error messages to be thrown.
  */
 public class DukeException extends Exception {
-    String message;
+    private String message;
 
     /**
      * Constructor method for DukeException.

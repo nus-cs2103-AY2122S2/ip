@@ -89,7 +89,7 @@ public class Storage {
         String state = parts[0].trim();
         String type = parts[1].trim();
         String description = parts[2].trim();
-        // 1. Check task.Task type
+        // 1. Check Task type
         if (type.equals("D")) {
             String time = parts[3];
             DateHelper datetime = new DateHelper(time);

@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Abstract class that stores information about whether the command bye has been inputted, and executes chunks of code
