@@ -12,6 +12,7 @@ public class ToDo extends Task {
      */
     public ToDo(String taskName) {
         super(taskName);
+        assert taskName.length() > 0;
     }
 
     /**

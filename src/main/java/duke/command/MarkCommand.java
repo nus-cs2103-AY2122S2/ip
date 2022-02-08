@@ -34,6 +34,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert this.taskNo > 0;
         String response = "";
         if (isMark) {
             taskList.markDone(taskNo);

@@ -34,6 +34,8 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert this.task.length() > 0;
+        assert this.by.length() > 0;
         Deadline deadline = new Deadline(task, by);
         taskList.add(deadline);
         String response = "Got it. I've added this task:" + "\n";
