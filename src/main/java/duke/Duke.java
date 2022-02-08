@@ -52,6 +52,9 @@ public class Duke {
         case FIND:
             output = handleFind(parsedInputs[DESCRIPTION_INDEX]);
             break;
+        case SORT:
+            output = handleSort();
+            break;
         default:
             break;
         }
@@ -151,6 +154,11 @@ public class Duke {
             output += "Integer provided is not in the list";
         }
         return output;
+    }
+
+    private String handleSort() {
+        list.sort();
+        return "List has been updated, here is the new order: \n" + handleList();
     }
 
 

@@ -63,4 +63,13 @@ public class Event extends Task {
         details[TIME_INDEX] = time;
         return details;
     }
+
+    /**
+     * Getter method that returns Datetime of Event
+     *
+     * @return Datetime of Event
+     */
+    public LocalDateTime getDatetime() {
+        return this.datetime;
+    }
 }

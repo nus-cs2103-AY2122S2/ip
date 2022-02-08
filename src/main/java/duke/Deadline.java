@@ -62,4 +62,13 @@ public class Deadline extends Task {
         details[TIME_INDEX] = time;
         return details;
     }
+
+    /**
+     * Getter method that returns Datetime of Deadline
+     *
+     * @return Datetime of Deadline
+     */
+    public LocalDateTime getDatetime() {
+        return this.datetime;
+    }
 }
