@@ -55,20 +55,20 @@ public class UserInterface {
 
     public String displayListOfCommand() {
         String result = "";
-        result += "   Commands:\n";
-        result += "   List\n     -List out all your current tasks\n";
-        result += "   todo <task name>\n     -Add a todo task without any deadline"
+        result += "Available Commands:\n";
+        result += "List                                  -List out all your current tasks\n";
+        result += "todo <task>                          -Add a todo task without any deadline"
                             + " specified\n";
-        result += "   deadline <taskname> /by <Date><Time>\n     -Adds a task due by "
+        result += "deadline <task> /by <Date><Time>      -Adds a task due by "
                             + "specified deadline\n";
-        result += "   event <taskname> /at <Date><Time>\n     -Adds a task that occurs at the specified "
+        result += "event <task> /at <Date><Time>         -Adds a task that occurs at the specified "
                             + "time\n";
-        result += "   mark <task number>\n     -Marks task as completed\n";
-        result += "   unmark <task number>\n     -Marks a completed task as uncompleted\n";
-        result += "   delete <task number>\n     -Deletes the task at the specified index\n";
-        result += "   bye\n     -Exits the program\n";
-        result += "   find <keyword>\n     -Retrieves all tasks that contains the "
-                            + "keyword\n";
+        result += "mark <task number>                    -Marks task as completed\n";
+        result += "unmark <task number>                  -Marks a completed task as uncompleted\n";
+        result += "delete <task number>                  -Deletes the task at the specified index\n";
+        result += "find <keyword>                        -Retrieves all tasks that contains the "
+                + "keyword\n";
+        result += "bye                                   -Exits the program\n";
         return result;
     }
 
