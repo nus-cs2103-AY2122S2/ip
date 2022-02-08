@@ -11,11 +11,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class FileReaderWriter {
-    private static final File FOLDER_PATH = new File("/Users/jiamingsim/repos/ip/data");
-    private static final File DATA_PATH = new File("/Users/jiamingsim/repos/ip/data/data.txt");
+public class Storage {
 
-    public FileReaderWriter() {}
+    private static final File FOLDER_PATH = new File("../../../data");
+    private static final File DATA_PATH = new File("../../../data/data.txt");
+
+    public Storage(){}
 
     @SuppressWarnings("Unchecked")
     public static void readFile() {
@@ -49,6 +50,35 @@ public class FileReaderWriter {
         }
     }
 
+    //    @SuppressWarnings("Unchecked")
+//    public static ArrayList<Task> load() {
+//        ArrayList<Task> toDoList = new ArrayList<>();
+//        try {
+//
+//            if (FOLDER_PATH.mkdir()) {
+//                Ui.print("Folder is created!\n");
+//            } else {
+//                Ui.print("Folder already exists.\n");
+//            }
+//            if (DATA_PATH.createNewFile()) {
+//                Ui.print("File is created!\n");
+//            } else {
+//                Ui.print("File already exists.\n");
+//                FileInputStream reader = new FileInputStream(DATA_PATH);
+//                ObjectInputStream listInput = new ObjectInputStream(reader);
+//                try {
+//                    toDoList = (ArrayList<Task>) listInput.readObject();
+//                    listInput.close();
+//                } catch (ClassNotFoundException e) {
+//                    Ui.print("class not found\n");
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return toDoList;
+//    }
+
     public static void writeToFile() {
         try {
 //            FileWriter fw = new FileWriter("data.txt",false);
@@ -61,11 +91,21 @@ public class FileReaderWriter {
             System.out.println("file not found");
         } catch (IOException e) {
             System.out.println("unable to write file");
-            System.out.println(e.getMessage());
         }
     }
-    
+//    public static void save() {
+//        try {
+//            FileOutputStream writer = new FileOutputStream(DATA_PATH);
+//            ObjectOutputStream saveList = new ObjectOutputStream(writer);
+//            saveList.writeObject(TaskList.getToDoList());
+//            saveList.close();
+//            Ui.print("your list has been saved!\n");
+//        } catch (FileNotFoundException e) {
+//            Ui.print("file not found");
+//        } catch (IOException e) {
+//            Ui.print("failed to write to file");
+//        }
+//    }
 }
 
 //@@author
-
