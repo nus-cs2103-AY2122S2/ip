@@ -49,7 +49,12 @@ public class Event extends Task {
         }
         super.saveFormat = strArr[0] + "," + strArr[1] + "," + strArr[2] + "," + strArr[3];
     }
-
+    public LocalDate getDate(){
+        return this.date;
+    }
+    public String getTime(){
+        return this.time;
+    }
     /**
      * Returns the string representation of the Event task.
      *

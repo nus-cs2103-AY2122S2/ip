@@ -2,6 +2,7 @@ package duke;
 
 public class Ui {
     private String welcomeMessage;
+    private String reminders;
     private String byeMessage;
 
     /**
@@ -13,7 +14,8 @@ public class Ui {
                         + "(____()'`; \n"
                         + "/,    /` \n"
                         + "\\\\\"--\\\\\n"
-                        + "Woof, I am (supposed to look like) a dog bot.\nWhat do you want from me?\n";
+                        + "Woof, I am (supposed to look like) a dog bot.\n"
+                        + "What do you want from me?";
 
         byeMessage = "Bye! Hope not to see you again :)";
     };

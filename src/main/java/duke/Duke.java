@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javafx.scene.image.Image;
@@ -92,6 +93,8 @@ public class Duke {
                         return taskList.addTask(deadline);
                     case "find":
                         return taskList.find(str.substring(5));
+                    case "schedule":
+                        return taskList.printSchedule(str.substring(9));
                     default:
                         assert false : firstWord;
                     }
