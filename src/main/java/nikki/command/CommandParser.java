@@ -43,18 +43,6 @@ public class CommandParser {
         { "delete", "delete (\\d+)", "delete <task number>" },
     };
 
-    /** Input source for parser to read from */
-    private final Scanner input;
-
-    /**
-     * Instantiates parser for parsing commands for Nikki
-     *
-     * @param input Scanner that takes in input
-     */
-    public CommandParser(Scanner input) {
-        this.input = input;
-    }
-
     /**
      * Checks whether a command matches
      *
@@ -62,7 +50,7 @@ public class CommandParser {
      * @return validity of the command
      * @throws NikkiException invalid command or syntax
      */
-    private static Command parseCommand(String cmd) throws NikkiException {
+    public static Command parseCommand(String cmd) throws NikkiException {
         String cmdName = cmd.split(" ")[0];
         for (String[] command : CommandParser.COMMANDS) {
             // Not the target command
@@ -98,19 +86,5 @@ public class CommandParser {
         }
 
         throw new NikkiException("What are you trying to do??");
-    }
-
-
-    /**
-     * Reads user input from previously specified input Scanner
-     * Parses command if the first token is a valid command (delimiter = " ")
-     *
-     * @return parsed command
-     * @throws NikkiException invalid command or syntax
-     */
-    public Command readAndParse() throws NikkiException {
-        String commandLine = this.input.nextLine();
-        Command command = CommandParser.parseCommand(commandLine);
-        return command;
     }
 }
