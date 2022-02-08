@@ -7,13 +7,13 @@ import java.util.ArrayList;
  *
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<duke.Task> taskList;
 
     /**
      * Initializes taskList with empty list.
      */
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<duke.Task>();
     }
 
     /**
@@ -23,7 +23,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<String> taskList) {
         for (int i = 0; i < taskList.size(); i++) {
-            this.taskList.add(new Task(taskList.get(i)));
+            this.taskList.add(new duke.Task(taskList.get(i)));
         }
     }
 
@@ -33,7 +33,7 @@ public class TaskList {
      * @param index
      * @return Task at index
      */
-    public Task get(int index) {
+    public duke.Task get(int index) {
         return this.taskList.get(index);
     }
 
@@ -49,7 +49,7 @@ public class TaskList {
      * Add task to the taskList.
      * @param task to be added to the List.
      */
-    public void add(Task task) {
+    public void add(duke.Task task) {
         this.taskList.add(task);
     }
 
@@ -58,7 +58,7 @@ public class TaskList {
      * @param description
      */
     public void add(String description) {
-        this.taskList.add(new Task(description));
+        this.taskList.add(new duke.Task(description));
     }
 
     /**
