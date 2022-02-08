@@ -101,7 +101,7 @@ public class ParserTest {
         InvalidInputException thrown = assertThrows(InvalidInputException.class, () -> {
             parser.parseTaskFormat("NO_SLASH");
         }, "InvalidInputException was expected");
-        assertEquals("Invalid format. eg. deadline return book /by 02/12/2019 18:00.", thrown.getMessage());
+        assertEquals("This is not a valid command. See 'help'", thrown.getMessage());
     }
 
 
@@ -122,7 +122,7 @@ public class ParserTest {
         InvalidInputException thrown1 = assertThrows(InvalidInputException.class, () -> {
             parser.checkPrepositionFormat("by", AddCommand.COMMAND_DEADLINE);
         }, "InvalidInputException was expected");
-        assertEquals("Invalid format. eg. deadline return book /by 02/12/2019 18:00.", thrown1.getMessage());
+        assertEquals("This is not a valid command. See 'help'", thrown1.getMessage());
 
         InvalidInputException thrown2 = assertThrows(InvalidInputException.class, () -> {
             parser.checkPrepositionFormat("invalidPreposition 02/12/2019 18:00", AddCommand.COMMAND_DEADLINE);
@@ -152,7 +152,7 @@ public class ParserTest {
             parser.parseDate(invalidDate);
         }, "InvalidInputException was expected");
         assertEquals("'" + invalidDate
-                + "' can't be formatted! Please format the date/time as dd/MM/yyyy HH:mm", thrown.getMessage());
+                + "' can't be formatted!Please format the date/time as dd/MM/yyyy HH:mm", thrown.getMessage());
     }
 
 }
