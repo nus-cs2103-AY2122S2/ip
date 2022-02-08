@@ -11,8 +11,8 @@ public class ToDo extends Task {
      * @param input descriptor of task
      * @param isReading flag to check if input is being read from file data
      */
-    public ToDo(String input, boolean isReading){
-        super(input, Task.totalTask, null, "T", isReading);
+    public ToDo(String input,int taskNum, boolean isReading){
+        super(input, taskNum, null, "T", isReading);
     }
 
     /**

@@ -3,12 +3,15 @@ package duke;
 import gui.Ui;
 import javafx.application.Platform;
 
+import java.util.ArrayList;
+
 /**
  * This is the class that parses through inputs
  */
 public class Parser {
 
-    public Parser(){
+
+    public Parser() {
         Storage.parser = this;
     }
 
@@ -17,12 +20,12 @@ public class Parser {
      * @param input input entered by user into Duke
      * @return String to output to gui
      */
-    public static String parseIsBye(String input, TaskList tasklist){
+    public static String parseIsBye(String input, TaskList taskList) {
         if (input.equals("bye")){
             Platform.exit();
             return Ui.printBye();
         } else {
-            return parseInput(input, tasklist);
+            return parseInput(input, taskList);
         }
     }
 
@@ -54,7 +57,7 @@ public class Parser {
     public static String parseMarkTask(String input, TaskList taskList) {
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
-        if (taskNum < 0 || taskNum > Task.totalTask){
+        if (taskNum < 0 || taskNum > taskList.get().size()){
             return Ui.printNoSuchTask();
         }
         if (input.startsWith("unmark")) {
@@ -72,15 +75,18 @@ public class Parser {
     public static String parseDelete(String input, TaskList taskList) {
         int firstIndexOfNumericalInput = 7;
         int numericalInput = Integer.parseInt(input.substring(firstIndexOfNumericalInput));
-        return taskList.deleteTask(numericalInput);
+        return taskList.deleteTask(numericalInput, taskList);
     }
 
     public static String parseTask(String input, TaskList taskList) {
-        Task task = parseCreateNewTask(input);
+        Task task = parseCreateNewTask(input, taskList);
         if (task == null) {
             return Ui.printEmptyDescriptionException();
         }
-        taskList.get().add(task);
+        int duplicateEntry = taskList.addTaskToList(task);
+        if (duplicateEntry != -1) {
+            return Ui.printDuplicateTask(duplicateEntry);
+        }
         return task.printFirstAddition;
 
     }
@@ -90,15 +96,15 @@ public class Parser {
      * @param input user input into Duke
      * @return task based on input parameters
      */
-    public static Task parseCreateNewTask(String input) {
+    public static Task parseCreateNewTask(String input, TaskList taskList) {
         Task task = null;
         try {
             if (input.startsWith("todo")) {
-                task = parseToDo(input);
+                task = parseToDo(input, taskList);
             } else if (input.startsWith("deadline")){
-                task = parseDeadline(input);
+                task = parseDeadline(input, taskList);
             } else {
-                task = parseEvent(input);
+                task = parseEvent(input, taskList);
             }
         } catch (EmptyDescriptorException e) {
             Ui.printEmptyDescriptionException();
@@ -107,40 +113,40 @@ public class Parser {
         return task;
     }
 
-    public static ToDo parseToDo(String input) throws EmptyDescriptorException {
+    public static ToDo parseToDo(String input, TaskList list) throws EmptyDescriptorException {
         String[] inputArr = input.split(" ");
         if (inputArr.length == 1) {
             throw new EmptyDescriptorException();
         }
         String nameOfTask = input.substring(4);
-        return new ToDo(nameOfTask, false);
+        return new ToDo(nameOfTask, list.getSize(), false);
     }
 
-    public static Deadline parseDeadline(String input) throws EmptyDescriptorException {
+    public static Deadline parseDeadline(String input, TaskList list) throws EmptyDescriptorException {
         String[] inputArr = input.split("/by ");
         if (inputArr.length == 1) {
             throw new EmptyDescriptorException();
         }
         String nameOfDeadline = inputArr[0].substring(8);
         String timeOfDeadline = inputArr[1];
-        return new Deadline(nameOfDeadline, timeOfDeadline, false);
+        return new Deadline(nameOfDeadline, timeOfDeadline, list.getSize(), false);
     }
 
-    public static Event parseEvent(String input) throws EmptyDescriptorException {
+    public static Event parseEvent(String input, TaskList list) throws EmptyDescriptorException {
         String[] inputArr = input.split("/at ");
         if (inputArr.length == 1) {
             throw new EmptyDescriptorException();
         }
         String nameOfEvent = inputArr[0].substring(5);
         String timeOfEvent = inputArr[1];
-        return new Event(nameOfEvent, timeOfEvent, false);
+        return new Event(nameOfEvent, timeOfEvent, list.getSize(),false);
     }
     /**
      * Parse data in file data
      * @param input one line of file data in the form of (Task_Type---Task_status---Task_name---date)
      * @return task based on file data information provided
      */
-    public static Task parseFileData(String input) {
+    public static Task parseFileData(String input, TaskList list) {
         if (input == null || input == ""){
             return null;
         }
@@ -153,12 +159,12 @@ public class Parser {
         if (typeOfTask.equals("D") || typeOfTask.equals("E")) {
             String time = stringArr[3];
             if (typeOfTask.equals("D")) {
-                task = new Deadline(nameOfTask, time, true);
+                task = new Deadline(nameOfTask, time, list.getSize(), true);
             } else {
-                task = new Event(nameOfTask, time, true);
+                task = new Event(nameOfTask, time, list.getSize(), true);
             }
         } else {
-            task = new ToDo(nameOfTask, true);
+            task = new ToDo(nameOfTask, list.getSize(), true);
         }
 
         if (isMarked.equals("true")) {

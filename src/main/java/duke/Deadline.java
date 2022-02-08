@@ -14,8 +14,8 @@ public class Deadline extends Task {
      * @param deadline deadline to complete task
      * @param isReading flag to check if input is being read from file data
      */
-    public Deadline(String input, String deadline, boolean isReading) {
-        super(input, Task.totalTask, deadline, "D", isReading);
+    public Deadline(String input, String deadline, int taskNum, boolean isReading) {
+        super(input, taskNum, deadline, "D", isReading);
     }
 
     /**

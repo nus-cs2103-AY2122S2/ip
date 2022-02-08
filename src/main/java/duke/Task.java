@@ -16,7 +16,6 @@ public class Task {
     public String name;
     public String type;
     int number;
-    public static int totalTask = 0;
     boolean isDone = false;
     boolean isCorrectDateFormat;
     String printFirstAddition = "";
@@ -38,21 +37,16 @@ public class Task {
             this.name = name;
             this.number = number;
             this.type = type;
-            isCorrectDateFormat = setDate(time, isReading);
+            this.isCorrectDateFormat = setDate(time, isReading);
 
             if (!isCorrectDateFormat) {
                 printFirstAddition += Ui.WRONG_DATE_FORMAT;
             }
 
-            this.type = type;
             if (!isReading) {
                 printFirstAddition += Ui.printAddThisTask(this);
                 Storage.addLineToFile(this.getDataRepresentation());
-                totalTask++;
-                printFirstAddition += Ui.printTotalTasks();
-            }
-            else {
-                totalTask++;
+                printFirstAddition += Ui.printTotalTasks(number);
             }
         }
         catch (EmptyDescriptorException e){
