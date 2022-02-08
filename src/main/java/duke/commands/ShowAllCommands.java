@@ -31,7 +31,7 @@ public class ShowAllCommands extends Command<String> {
             response += "event   | One of the 3 tasks type. eg: event_<yourtask>_/at_<YYYY-MM-DD HH:MM>\n";
             // Fallthrough
         case DEADLINE:
-            response += "deadline| One of the 3 tasks type. eg: deadline_<yourtask>_/by_<YYYY-MM-DD HH:MM>";
+            response += "deadline| One of the 3 tasks type. eg: deadline_<yourtask>_/by_<YYYY-MM-DD HH:MM>\n";
             // Fallthrough
         case BYE:
             response += "bye     | End this phone call\n";
