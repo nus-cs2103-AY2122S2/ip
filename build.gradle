@@ -44,13 +44,18 @@ test {
 }
 
 application {
-    mainClassName = "nikki.Nikki"
+    mainClassName = "nikki.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "nikki"
     archiveClassifier = null
+
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
 }
+
 
 checkstyle {
     toolVersion = '8.29'
