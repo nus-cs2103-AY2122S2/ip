@@ -86,6 +86,7 @@ public class Ui {
      * @return Returns a String message.
      */
     public String showFindTask(List taskList) {
+        assert !taskList.getArrayList().isEmpty() : "Task List should not be empty";
         String str = "";
         int i = 1;
         for (Task t : taskList.getArrayList()) {
