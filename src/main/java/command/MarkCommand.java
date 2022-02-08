@@ -11,6 +11,7 @@ public class MarkCommand extends Command {
     enum Type {
         MARK,
         UNMARK,
+        ERROR
     }
 
     protected Type type;
@@ -25,8 +26,10 @@ public class MarkCommand extends Command {
     public MarkCommand(String s, int num) {
         if (s.equals("MARK")) {
             this.type = Type.MARK;
-        } else {
+        } else if (s.equals("UNMARK")) {
             this.type = Type.UNMARK;
+        } else {
+            this.type = Type.ERROR;
         }
 
         this.num = num;
@@ -41,7 +44,7 @@ public class MarkCommand extends Command {
      */
     public String execute(TaskList t, Storage s) throws TsundereException {
         String say = "";
-        if (t.getCount() < this.num || this.num <= 0) {
+        if (t.getCount() < this.num || this.num <= t.getFirstIndex()) {
             throw new TsundereException("Your number is not valid!!!");
         }
         switch (type) {
@@ -54,6 +57,7 @@ public class MarkCommand extends Command {
             say = "You didn't actually finish?!\n";
             break;
         default:
+            throw new TsundereException("Error in the program!!!");
         }
         s.saveFile(t.tasksToString());
         return (say + t.getTaskStr(this.num));

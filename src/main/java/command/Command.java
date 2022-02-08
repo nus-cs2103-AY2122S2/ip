@@ -23,4 +23,5 @@ public abstract class Command {
      * @throws TsundereException for any wrong input format.
      */
     public abstract String execute(TaskList t, Storage s) throws TsundereException;
+
 }
