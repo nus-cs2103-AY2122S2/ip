@@ -11,8 +11,8 @@ import duke.DukeException;
  * Represents a task with a time and duration.
  */
 public class Event extends Task {
-    private final LocalDateTime at;
-    private final Duration duration;
+    private LocalDateTime at;
+    private Duration duration;
 
     /**
      * Constructs an Event instance.
@@ -47,6 +47,14 @@ public class Event extends Task {
     public Event(String description, LocalDateTime at, Duration duration, boolean isDone) {
         this(description, at, duration);
         this.isDone = isDone;
+    }
+
+    public void setAt(LocalDateTime at) {
+        this.at = at;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     @Override

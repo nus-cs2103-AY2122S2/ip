@@ -6,7 +6,7 @@ import duke.DukeException;
  * Represents a generic task that is not of any specific type.
  */
 public abstract class Task {
-    protected final String description;
+    protected String description;
     protected boolean isDone = false;
 
     /**
@@ -43,6 +43,10 @@ public abstract class Task {
 
     public void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
