@@ -32,9 +32,9 @@ public class Parser {
      * @return command to execute
      */
     public Command parse(String command) {
-        String[] cmdArray = command.split(" ");
+        String[] commandArray = command.split(" ");
 
-        String commandWord = cmdArray[0].toLowerCase();
+        String commandWord = commandArray[0].toLowerCase();
 
         switch (commandWord) {
         case ByeCommand.COMMAND_WORD:
@@ -92,13 +92,13 @@ public class Parser {
      */
     public String[] fileBreakdown(String fileCommand) {
         String[] words = fileCommand.split(" ");
-        String[] commandArguments= new String[3];
+        String[] commandArguments = new String[3];
 
-        returnCommands[0] = words[0]; // commands
-        returnCommands[1] = words[1]; // mark or not mark
-        returnCommands[2] = String.join(" ", Arrays.copyOfRange(words, 2, words.length)); // description
+        commandArguments[0] = words[0]; // commands
+        commandArguments[1] = words[1]; // mark or not mark
+        commandArguments[2] = String.join(" ", Arrays.copyOfRange(words, 2, words.length)); // description
 
-        return returnCommands;
+        return commandArguments;
     }
 
     /**
@@ -109,9 +109,9 @@ public class Parser {
      * @throws EmptyCommandException if description is empty
      */
     private String getArgument(String command) throws EmptyCommandException {
-        String[] commandArray= command.split(" ");
+        String[] commandArray = command.split(" ");
 
-        if (cmdArray.length == 1) {
+        if (commandArray.length == 1) {
             throw new EmptyCommandException();
         }
 
