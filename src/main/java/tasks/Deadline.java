@@ -24,7 +24,7 @@ public class Deadline extends Task {
             dateAndTime = strArr[1].split(" ");
             date = LocalDate.parse(dateAndTime[0]);
             time = dateAndTime[1];
-            super.saveFormat = "D," + this.description + "," + date + "," + time + "," + super.isDone;
+            super.saveFormat = "D," + this.description + "," + date + "," + time;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException();
         }
