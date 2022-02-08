@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
         DialogBox userDialogBox = DialogBox.getUserDialog(input, userImage);
         DialogBox botDialogBox = DialogBox.getDukeDialog(response, dukeImage);
 
-        dialogContainer.getChildren().remove(0,dialogContainer.getChildren().size());
+        //dialogContainer.getChildren().remove(0,dialogContainer.getChildren().size());
         dialogContainer.getChildren().addAll(userDialogBox, botDialogBox);
 
         if (response == LINE) {

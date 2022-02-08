@@ -40,7 +40,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.autosize();
+        //dialog.autosize();
         displayPicture.setImage(img);
     }
 
