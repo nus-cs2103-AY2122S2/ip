@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -35,7 +36,6 @@ class NaturalDateParser {
 
     private static final String DEFAULT_TIME = " 00:00";
     private static final String FORMAT_DEFAULT_DATETIME = "dd/MM/yyyy HH:mm";
-    private static final String FORMAT_DEFAULT_DATE = "dd/MM/yyyy";
 
     private static NaturalDateParser instance;
 
@@ -137,7 +137,8 @@ class NaturalDateParser {
      */
     private void buildStandardPatterns() {
         standardDatePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4})");
-        standardDateTimePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4}) (\\d{2})[-:](\\d{2})");
+        standardDateTimePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4}) "
+                + "(\\d{1,2})[-:](\\d{1,2})");
     }
 
     /**
@@ -349,7 +350,7 @@ class NaturalDateParser {
      *         is invalid.
      */
     private LocalDateTime parseRelativeDate(Matcher match) {
-        final LocalDateTime now = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+        final LocalDateTime now = LocalDate.now().atStartOfDay();
 
         try {
             if (match.group(1) != null) {
