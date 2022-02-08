@@ -3,6 +3,8 @@ package duke;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -64,7 +66,8 @@ public class TaskList {
                 String tempTimeBy = line.split("by: ")[1];
                 int endIdx = tempTimeBy.lastIndexOf(")");
                 String timeBy = tempTimeBy.substring(0, endIdx);
-                Task task = new Event(description, timeBy);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                Task task = new Event(description, LocalDate.parse(timeBy, formatter).toString());
                 if (isMarked) {
                     task = task.mark();
                 }
@@ -76,7 +79,8 @@ public class TaskList {
                 String tempTimeBy = line.split("at: ")[1];
                 int endIdx = tempTimeBy.lastIndexOf(")");
                 String timeBy = tempTimeBy.substring(0, endIdx);
-                Task task = new Event(description, timeBy);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                Task task = new Event(description, LocalDate.parse(timeBy, formatter).toString());
                 if (isMarked) {
                     task = task.mark();
                 }
