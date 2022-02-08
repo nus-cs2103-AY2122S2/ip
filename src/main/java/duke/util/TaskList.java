@@ -9,17 +9,19 @@ import duke.task.Task;
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
-
-    public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    /**
+     * Constructs a task list.
+     * @param t An ArrayList of tasks.
+     */
+    public TaskList(ArrayList<Task> t) {
+        tasks = t;
     }
 
+    /**
+     * Constructs an empty task list.
+     */
     public TaskList() {
         this(new ArrayList<>());
-    }
-
-    public Task get(int i) {
-        return tasks.get(i);
     }
 
     public boolean isEmpty() {
@@ -30,16 +32,20 @@ public class TaskList {
         return tasks.size();
     }
 
+    public Task get(int i) {
+        return tasks.get(i);
+    }
+
     public void add(Task task) {
         tasks.add(task);
     }
 
     public void mark(int index) {
-        tasks.get(index).markAsDone();
+        tasks.get(index).mark();
     }
 
     public void unmark(int index) {
-        tasks.get(index).markAsNotDone();
+        tasks.get(index).unmark();
     }
     /**
      * Deletes a task.
@@ -49,6 +55,14 @@ public class TaskList {
         Task task = tasks.get(index);
         tasks.remove(index);
         return task;
+    }
+    /**
+     * Changes the priority of a task.
+     * @param i The index of the task in the task list.
+     * @param p The priority to set the task to.
+     */
+    public void prioritise(int i, Priority p) {
+        tasks.get(i).prioritise(p);
     }
     /**
      * Filter the tasks according to a keyword.

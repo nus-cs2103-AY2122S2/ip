@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.task.Event;
 import duke.ui.Ui;
-import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 
@@ -23,7 +22,6 @@ public class EventCommand extends Command {
      * @param storage  Storage of Duke.
      * @param tasks Task list of Duke.
      * @param ui User interface of Duke.
-     * @throws DukeException if there is a problem updating the storage or user interface.
      */
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(event);

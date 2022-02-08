@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.util.Priority;
+import duke.util.Status;
+
 /**
  * Represents an event with a date and time.
  */
@@ -11,17 +14,24 @@ public class Event extends Task {
 
     /**
      * Constructs an event.
-     * @param description The event description.
-     * @param at The event date and time.
-     * @param isDone The event status, whether it is done or not.
+     * @param d The event description.
+     * @param s The event status.
+     * @param p The event priority.
+     * @param a The event datetime.
      */
-    public Event(String description, String at, boolean isDone) {
-        super(description, isDone);
-        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+    public Event(String d, Status s, Priority p, String a) {
+        super(d, s, p);
+        at = parseDateTime(a);
     }
 
-    public Event(String description, String at) {
-        this(description, at, false);
+    /**
+     * Constructs an event with unspecified status and priority, which defaults to NOT_DONE and MEDIUM respectively.
+     * @param d The event description.
+     * @param a The event datetime.
+     */
+    public Event(String d, String a) {
+        super(d);
+        at = parseDateTime(a);
     }
 
     /**
@@ -31,7 +41,7 @@ public class Event extends Task {
     @Override
     public String save() {
         String dateTime = at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        return "E | " + super.save() + " | " + dateTime + System.lineSeparator();
+        return "E | " + super.save() + " | " + dateTime + " | " + savePriority() + "\n";
     }
 
     /**
@@ -41,6 +51,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         String dateTime = at.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
-        return "[E]" + super.toString() + " (at: " + dateTime + ")" + "\n";
+        return "[E]" + super.toString() + " (at " + dateTime + ")\n";
     }
 }

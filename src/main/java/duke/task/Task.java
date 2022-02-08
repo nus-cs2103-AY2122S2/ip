@@ -1,23 +1,44 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import duke.util.Priority;
+import duke.util.Status;
+
 /**
  * Represents a task.
  */
 public class Task {
-    protected final String description;
-    protected boolean isDone;
+    private final String description;
+    private Status status;
+    private Priority priority;
     /**
      * Constructs a task.
-     * @param description The task description.
-     * @param isDone The task status e.g. whether it is done or not.
+     * @param d The task description.
+     * @param s The task status.
+     * @param p The task priority.
      */
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
+    public Task(String d, Status s, Priority p) {
+        description = d;
+        status = s;
+        priority = p;
     }
 
-    public Task(String description) {
-        this(description, false);
+    /**
+     * Constructs a task with unspecified status, which defaults to NOT_DONE.
+     * @param d The task description.
+     * @param p The task priority.
+     */
+    public Task(String d, Priority p) {
+        this(d, Status.NOT_DONE, p);
+    }
+    /**
+     * Constructs a task with unspecified status and priority, which defaults to NOT_DONE and MEDIUM respectively.
+     * @param d The task description.
+     */
+    public Task(String d) {
+        this(d, Status.NOT_DONE, Priority.MEDIUM);
     }
 
     public String getDescription() {
@@ -25,27 +46,51 @@ public class Task {
     }
 
     /**
-     * Returns a string X indicating whether the task is done or not.
+     * Returns the task status as a string.
      *
-     * @return String X indicating whether the task is done or not.
+     * @return "X" if the task is done, and " " if it is not.
      */
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+    public String statusToString() {
+        return (status == Status.DONE ? "X" : " ");
     }
 
     /**
-     * Marks the task as done.
+     * Return the task priority as a string.
      *
+     * @return The task priority as a string.
      */
-    public void markAsDone() {
-        isDone = true;
+    public String priorityToString() {
+        switch (priority) {
+        case LOW:
+            return "Low";
+        case HIGH:
+            return "High";
+        default:
+            return "Medium";
+        }
     }
 
     /**
-     * Marks the task as not done.
+     * Changing the task status to DONE.
+     *
      */
-    public void markAsNotDone() {
-        isDone = false;
+    public void mark() {
+        status = Status.DONE;
+    }
+
+    /**
+     * Changes the task status to NOT_DONE.
+     */
+    public void unmark() {
+        status = Status.NOT_DONE;
+    }
+
+    /**
+     * Sets the task priority.
+     * @param p The task priority.
+     */
+    public void prioritise(Priority p) {
+        priority = p;
     }
 
     /**
@@ -55,10 +100,26 @@ public class Task {
      */
     public String save() {
         int s = 0;
-        if (isDone) {
+        if (status == Status.DONE) {
             s = 1;
         }
         return s + " | " + description;
+    }
+
+    /**
+     * Returns the task priority as a string to be saved.
+     *
+     * @return The task priority as a string to be saved.
+     */
+    public String savePriority() {
+        switch(priority) {
+        case LOW:
+            return "0";
+        case HIGH:
+            return "2";
+        default:
+            return "1";
+        }
     }
 
     /**
@@ -68,6 +129,10 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + priorityToString() + "]" + "[" + statusToString() + "] " + description;
+    }
+
+    public LocalDateTime parseDateTime(String s) {
+        return LocalDateTime.parse(s, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 }

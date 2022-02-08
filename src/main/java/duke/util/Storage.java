@@ -37,19 +37,20 @@ public class Storage {
                 String fullCommand = sc.nextLine();
                 String[] commandArr = fullCommand.split(" \\| ");
                 String type = commandArr[0];
-                boolean status = (Integer.parseInt(commandArr[1]) == 1);
+                Status status = parseStatus(commandArr[1]);
                 String description = commandArr[2];
+                Priority priority = parsePriority(commandArr[commandArr.length - 1]);
                 switch (type) {
                 case "E":
                     String at = commandArr[3];
-                    tasks.add(new Event(description, at, status));
+                    tasks.add(new Event(description, status, priority, at));
                     break;
                 case "D":
                     String by = commandArr[3];
-                    tasks.add(new Deadline(description, by, status));
+                    tasks.add(new Deadline(description, status, priority, by));
                     break;
                 case "T":
-                    tasks.add(new ToDo(description, status));
+                    tasks.add(new ToDo(description, status, priority));
                     break;
                 default:
                     break;
@@ -77,6 +78,34 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
+        }
+    }
+
+    /**
+     * Parses a string to a task status.
+     * @param s The task status as a string.
+     */
+    public Status parseStatus(String s) {
+        int i = Integer.parseInt(s);
+        if (i == 0) {
+            return Status.NOT_DONE;
+        }
+        return Status.DONE;
+    }
+
+    /**
+     * Parses a string to a task priority.
+     * @param s The task priority as a string.
+     */
+    public Priority parsePriority(String s) {
+        int i = Integer.parseInt(s);
+        switch(i) {
+        case 0:
+            return Priority.LOW;
+        case 2:
+            return Priority.HIGH;
+        default:
+            return Priority.MEDIUM;
         }
     }
 }

@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.util.Priority;
+import duke.util.Status;
+
 /**
  * Represents a deadline.
  */
@@ -10,16 +13,24 @@ public class Deadline extends Task {
     private final LocalDateTime by;
     /**
      * Constructs a deadline.
-     * @param description The deadline description.
-     * @param by The deadline date and time.
+     * @param d The deadline description.
+     * @param s The deadline status.
+     * @param p The deadline priority.
+     * @param b The deadline datetime.
      */
-    public Deadline(String description, String by, boolean isDone) {
-        super(description, isDone);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+    public Deadline(String d, Status s, Priority p, String b) {
+        super(d, s, p);
+        by = parseDateTime(b);
     }
 
-    public Deadline(String description, String by) {
-        this(description, by, false);
+    /**
+     * Constructs a deadline.
+     * @param d The deadline description.
+     * @param b The deadline datetime.
+     */
+    public Deadline(String d, String b) {
+        super(d);
+        by = parseDateTime(b);
     }
 
     /**
@@ -30,7 +41,7 @@ public class Deadline extends Task {
     @Override
     public String save() {
         String dateTime = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        return "D | " + super.save() + " | " + dateTime + System.lineSeparator();
+        return "D | " + super.save() + " | " + dateTime + " | " + savePriority() + "\n";
     }
 
     /**
@@ -41,6 +52,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String dateTime = by.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
-        return "[D]" + super.toString() + " (by: " + dateTime + ")" + "\n";
+        return "[D]" + super.toString() + " (by " + dateTime + ")\n";
     }
 }

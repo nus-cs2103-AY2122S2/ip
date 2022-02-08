@@ -106,6 +106,14 @@ public class Ui {
     }
 
     /**
+     * Displays the task whose priority has been changed.
+     * @param task The task whose priority has been changed.
+     */
+    public String prioritiseTask(Task task) {
+        return "Got it, I've changed the priority of this task:\n" + task;
+    }
+
+    /**
      * Saves tasks to storage and displays farewell message.
      * @param storage Storage.
      * @param tasks Tasks to be saved.
