@@ -1,6 +1,7 @@
 package ui;
 
 import jarvis.Jarvis;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.lang.management.PlatformLoggingMXBean;
+import java.util.concurrent.TimeUnit;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,18 +28,29 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image jarvisImage = new Image(this.getClass().getResourceAsStream("/images/DaJarvis.png"));
 
+    /**
+     * Initializes FXML components.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initializes Jarvis and displays the startup message.
+     *
+     * @param j
+     */
     public void setJarvis(Jarvis j) {
+        assert j != null : "Jarvis should not be null";
         jarvis = j;
+        dialogContainer.getChildren().add(DialogBox.getJarvisDialog(jarvis.startup(), jarvisImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other
+     * containing Jarvis's reply and then appends them to the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -43,7 +58,7 @@ public class MainWindow extends AnchorPane {
         String response = jarvis.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, jarvisImage)
+                DialogBox.getJarvisDialog(response, jarvisImage)
         );
         userInput.clear();
     }
