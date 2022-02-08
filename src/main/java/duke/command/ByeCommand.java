@@ -16,6 +16,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Save save) {
+        save.save();
         return "Woof woof! Hope to see you again soon!";
     }
 }

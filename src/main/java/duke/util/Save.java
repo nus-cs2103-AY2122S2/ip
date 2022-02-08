@@ -172,15 +172,18 @@ public class Save {
                 String markStr = tokens[1];
                 int taskNumMark = Integer.parseInt(markStr) - 1;
                 this.tasks.getTask(taskNumMark).mark();
+                this.save();
                 break;
             case UNMARK:
                 String unmarkStr = tokens[1];
                 int taskNumUnmark = Integer.parseInt(unmarkStr) - 1;
                 tasks.getTask(taskNumUnmark).unmark();
+                this.save();
                 break;
             case TODO:
                 Todo todo = new Todo(name);
                 tasks.add(todo);
+                this.save();
                 break;
             case EVENT:
                 String[] tokensEvent = s.split("/at ");
@@ -190,6 +193,7 @@ public class Save {
                 String eventName = tokensNameEvent[0];
                 Event event = new Event(eventName, time);
                 tasks.add(event);
+                this.save();
                 break;
             case DEADLINE:
                 String[] tokensDeadline = s.split("/by ");
@@ -199,6 +203,7 @@ public class Save {
                 String deadlineName = tokensNameDeadline[0];
                 Deadline deadline = new Deadline(deadlineName, date);
                 tasks.add(deadline);
+                this.save();
                 break;
             default:
                 throw new InvalidCommandException("Incorrect format");

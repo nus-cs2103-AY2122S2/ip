@@ -36,6 +36,7 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             response = "☹ Woof Woof!!! This task cannot be found!!!";
         }
+        save.save();
         return response;
     }
 }

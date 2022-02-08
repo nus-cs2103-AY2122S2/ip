@@ -28,6 +28,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Save save) {
         tasks.add(task);
+        save.save();
         String response = "Got it. I've added this task:\n"
                 + task.track() + task.getStatus() + " " + task.toString()
                 + "\nNow you have " + (tasks.getCount()) + " tasks in the list.";
