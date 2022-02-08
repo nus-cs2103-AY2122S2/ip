@@ -29,7 +29,7 @@ import spike.task.ToDo;
 public class Parser {
     public static final String MSG_ERROR_LIST_BY_DATE =
             "Kindly enter the date in the format yyyy-MM-dd 0000 to filter by date";
-    public static final String MSG_MISSING_KEYWORD = "Kindly enter the keyword for finding task";
+    public static final String MSG_MISSING_FIND_KEYWORD = "Kindly enter the keyword for finding task";
     public static final String MSG_MISSING_TODO_INFO = "Hmmmm what to do? Think again?";
     public static final String MSG_MISSING_DEADLINE_INFO = "Deadline or task description missing.";
     public static final String MSG_WRONG_DATE_TIME_FORMAT = "Please enter a valid date in the format yyyy-MM-dd HHmm";
@@ -251,7 +251,7 @@ public class Parser {
      */
     private Command parseFind(String inputLine) {
         if (inputLine.length() <= 5) {
-            return new IncorrectCommand(MSG_MISSING_KEYWORD);
+            return new IncorrectCommand(MSG_MISSING_FIND_KEYWORD);
         }
         return new FindCommand(inputLine.substring(5));
     }
