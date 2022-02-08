@@ -53,14 +53,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        System.out.println("getting user dialog!");
         var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
 
     public static DialogBox getInnkeeperDialog(String text, Image img) {
-        System.out.println("getting innkeeper dialog!");
         return new DialogBox(text, img);
     }
 

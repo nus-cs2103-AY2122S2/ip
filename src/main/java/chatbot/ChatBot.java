@@ -43,15 +43,18 @@ public class ChatBot {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response from the ChatBot to the user's input.
      */
     public String getResponse(String input) {
-        System.out.println("getting response!");
         Parser parser = new Parser(ui, tasksStorage, contactsStorage, taskList, contactList);
         return parser.parse(input);
     }
 
+    /**
+     * Gets greeting message when ChatBot is first started up.
+     *
+     * @return The greeting message.
+     */
     public String getGreeting() {
         return ui.greet(taskList.isEmpty() && contactList.isEmpty());
     }

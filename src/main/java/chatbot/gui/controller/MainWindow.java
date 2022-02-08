@@ -62,14 +62,14 @@ public class MainWindow extends AnchorPane {
                                 new Insets(0))),
                         Collections.singletonList(new BackgroundImage(
                                 backgroundImage,
-                                BackgroundRepeat.NO_REPEAT,
-                                BackgroundRepeat.NO_REPEAT,
+                                BackgroundRepeat.REPEAT,
+                                BackgroundRepeat.REPEAT,
                                 BackgroundPosition.CENTER,
                                 new BackgroundSize(
-                                        1.0,
-                                        1.0,
-                                        true,
-                                        true,
+                                        800,
+                                        1150,
+                                        false,
+                                        false,
                                         false,
                                         false
                                 )
