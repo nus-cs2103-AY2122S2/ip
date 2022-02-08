@@ -49,6 +49,8 @@ public class Date {
                 throw new TesseractException(INVALID_DATE);
             } catch (NumberFormatException e) {
                 throw new TesseractException(INVALID_DATE_FORMAT);
+            }
+        }
     }
 
     /**
