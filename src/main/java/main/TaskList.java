@@ -17,7 +17,7 @@ import task.Todo;
  * @since 0.1.0
  */
 public class TaskList {
-    protected static final String INDENT2 = "        ";
+    protected static final String INDENT2 = "\t\t";
 
     /**
      * A list of all tasks
@@ -64,6 +64,8 @@ public class TaskList {
             this.taskList.add(taskNew);
         }
         this.numOfTasks = this.taskList.size();
+        // check if all tasks from memory are imported
+        assert(this.taskList.size() == storageMemory.size());
     }
 
     /**
@@ -93,6 +95,7 @@ public class TaskList {
      * @return Return the queried task.
      */
     public Task get(int index) {
+        assert(index < this.numOfTasks);
         return this.taskList.get(index);
     }
 
@@ -145,6 +148,7 @@ public class TaskList {
      * @return The removed task to be printed out by Ui.
      */
     public Task deleteTask(int index) {
+        assert(index <= this.numOfTasks);
         this.numOfTasks -= 1;
         return this.taskList.remove(index - 1);
     }
@@ -156,6 +160,7 @@ public class TaskList {
      * @return The marked task to be printed out by Ui.
      */
     public Task markAsDone(int index) {
+        assert(index <= this.numOfTasks);
         Task done = this.taskList.get(index - 1);
         done.markAsDone();
         return done;
@@ -168,6 +173,7 @@ public class TaskList {
      * @return The marked task to be printed out by Ui.
      */
     public Task markAsUndone(int index) {
+        assert(index <= this.numOfTasks);
         Task undone = this.taskList.get(index - 1);
         undone.markAsUndone();
         return undone;

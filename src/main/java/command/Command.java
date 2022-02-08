@@ -133,9 +133,9 @@ public class Command {
         case "event":
             return new CreateTaskCommand(cmdArr);
         default:
-            // Do nothing
+            // dummy command
+            return new Command("");
         }
-        return new Command(""); // dummy command
     }
 
     /**

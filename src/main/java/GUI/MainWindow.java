@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Tesseract tesseract;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaLoki.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaTesseract.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaLoki.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaTesseract.png"));
 
     @FXML
     public void initialize() {
@@ -34,6 +34,8 @@ public class MainWindow extends AnchorPane {
 
     public void setTesseract(Tesseract tess) {
         tesseract = tess;
+        String welcomeMsg = tesseract.getWelcomeMsg();
+        dialogContainer.getChildren().add(DialogBox.getTesseractDialog(welcomeMsg, dukeImage));
     }
 
     /**
