@@ -1,5 +1,7 @@
 package ultoi.task;
 
+import ultoi.util.DateTime;
+
 /**
  * Represents a to-do task.
  *
@@ -33,5 +35,15 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    /**
+     * Returns the date and time of the task.
+     *
+     * @return null.
+     */
+    @Override
+    public DateTime getDateTime() {
+        return null;
     }
 }

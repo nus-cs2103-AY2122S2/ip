@@ -1,5 +1,7 @@
 package ultoi.task;
 
+import ultoi.util.DateTime;
+
 /**
  * Represents a task.
  *
@@ -61,5 +63,14 @@ public class Task {
      */
     public String toString() {
         return "[" + genDoneSymbol() + "] " + description;
+    }
+
+    /**
+     * Returns the date and time of the task.
+     *
+     * @return null.
+     */
+    public DateTime getDateTime() {
+        return null;
     }
 }

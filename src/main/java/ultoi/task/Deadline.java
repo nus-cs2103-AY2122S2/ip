@@ -47,4 +47,13 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.dateTime.toString() + ")";
     }
+
+    /**
+     * Returns the date and time of the task.
+     *
+     * @return Date and time.
+     */
+    public DateTime getDateTime() {
+        return dateTime;
+    }
 }

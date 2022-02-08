@@ -7,6 +7,7 @@ import ultoi.command.DeleteCommand;
 import ultoi.command.FindCommand;
 import ultoi.command.ListCommand;
 import ultoi.command.MarkCommand;
+import ultoi.command.SortCommand;
 import ultoi.task.Deadline;
 import ultoi.task.Event;
 
@@ -44,6 +45,8 @@ public class Parser {
                 return new MarkCommand(input);
             case "find":
                 return new FindCommand(input);
+            case "sort":
+                return new SortCommand(input);
             case "bye":
                 return new ByeCommand(input);
             default:

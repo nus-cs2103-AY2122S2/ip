@@ -1,6 +1,8 @@
 package ultoi.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -113,6 +115,27 @@ public class TaskList {
     }
 
     /**
+     * Sorts the tasks by time.
+     */
+    public void sort() {
+        Comparator<Task> taskComparator = new Comparator<Task>() {
+            public int compare(Task taskA, Task taskB) {
+                if (taskA.getDateTime() == null && taskB.getDateTime() == null) {
+                    return taskA.getDescription().compareTo(taskB.getDescription());
+                } else if (taskA.getDateTime() == null) {
+                    return 1;
+                } else if (taskB.getDateTime() == null) {
+                    return -1;
+                } else {
+                    return taskA.getDateTime().compareTo(taskB.getDateTime());
+                }
+            }
+        };
+
+        Collections.sort(this.tasks, taskComparator);
+    }
+
+    /**
      * Returns the standard input strings of all the tasks in the list.
      *
      * @return Input strings of the tasks in the list.
@@ -121,7 +144,7 @@ public class TaskList {
         String str = "";
 
         for (int i = 0; i < size(); i++) {
-            str = getTask(i).toInputString();
+            str += getTask(i).toInputString();
             if (i < size() - 1) {
                 str = str + "\n";
             }

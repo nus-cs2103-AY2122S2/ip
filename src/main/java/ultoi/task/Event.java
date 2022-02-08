@@ -46,4 +46,14 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.dateTime.toString() + ")";
     }
+
+    /**
+     * Returns the date and time of the task.
+     *
+     * @return Date and time.
+     */
+    @Override
+    public DateTime getDateTime() {
+        return dateTime;
+    }
 }

@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * @author snoidetx
  * @version 0.0
  */
-public class DateTime {
+public class DateTime implements Comparable<DateTime> {
     private final LocalDate date;
     private final int time;
 
@@ -33,6 +33,15 @@ public class DateTime {
         }
     }
 
+    @Override
+    public int compareTo(DateTime ot) {
+        if (!this.date.isEqual(ot.date)) {
+            return this.date.compareTo(ot.date);
+        } else {
+            return this.time - ot.time;
+        }
+    }
+
     /**
      * Returns a string representing the standard input for this DateTime object.
      *
@@ -51,6 +60,6 @@ public class DateTime {
     @Override
     public String toString() {
         return this.date.toString() + " " + (this.time > 999 ? "" : "0")
-                + this.time / 100 + ":" + (this.time > 9 ? "" : "0") + this.time % 100;
+                + this.time / 100 + ":" + (this.time % 100 > 9 ? "" : "0") + this.time % 100;
     }
 }
