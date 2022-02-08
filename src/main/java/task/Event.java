@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
-    private final LocalDateTime at;
+    private LocalDateTime at;
 
     /**
      * Constructs an Event object.
@@ -16,6 +16,13 @@ public class Event extends Task {
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
+    }
+
+    /**
+     * Sets the event datetime to be 1 day later.
+     */
+    public void snooze() {
+        this.at = this.at.plusDays(1);
     }
 
     @Override

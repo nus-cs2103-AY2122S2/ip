@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
-    private final LocalDateTime by;
+    private LocalDateTime by;
 
     /**
      * Constructs a Deadline object.
@@ -16,6 +16,13 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
+    }
+
+    /**
+     * Sets the deadline datetime to be 1 day later.
+     */
+    public void snooze() {
+        this.by = this.by.plusDays(1);
     }
 
     @Override

@@ -164,6 +164,32 @@ public class TaskList {
     }
 
     /**
+     * Snoozes a deadline or event task by one day.
+     *
+     * @param parsedCommand The input command containing the task number.
+     * @throws JarvisException If task number is invalid.
+     */
+    public String snoozeTask(HashMap<String, Object> parsedCommand) throws JarvisException {
+        checkIfEmpty();
+        try {
+            Task task = taskList.get((Integer) parsedCommand.get("num"));
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                deadline.snooze();
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                event.snooze();
+            } else {
+                throw new JarvisException("Only deadlines and events can be snoozed.");
+            }
+            return "I've snoozed the following task by one day:\n\t" + task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new JarvisException("Please specify a valid task number (between 1 to "
+                    + taskList.size() + " inclusive).");
+        }
+    }
+
+    /**
      * Checks if the current task list is empty.
      *
      * @throws JarvisException If the task list is empty.

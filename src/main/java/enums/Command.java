@@ -12,7 +12,8 @@ public enum Command {
     TODO,
     DEADLINE,
     EVENT,
-    FIND;
+    FIND,
+    SNOOZE;
 
     @Override
     public String toString() {

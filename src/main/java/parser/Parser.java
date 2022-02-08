@@ -22,9 +22,11 @@ public class Parser {
         parsedCommand.put("command", tokens[0].trim().toUpperCase());
 
         Command command = Command.valueOf((String) parsedCommand.get("command"));
-        if (command == Command.MARK
-                || command == Command.UNMARK
-                || command == Command.DELETE) {
+        switch (command) {
+        case MARK:
+        case UNMARK:
+        case DELETE:
+        case SNOOZE:
             try {
                 int num = Integer.parseInt(tokens[1]) - 1;
                 parsedCommand.put("num", num);
@@ -33,56 +35,62 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new JarvisException("Please specify the task number numerically.");
             }
-        } else if (command == Command.TODO) {
+            break;
+        case TODO:
             try {
                 String description = input.trim().substring(Command.TODO.toString().length() + 1);
                 parsedCommand.put("description", description);
             } catch (IndexOutOfBoundsException e) {
                 throw new JarvisException("The description of the todo cannot be empty.");
             }
-        } else if (command == Command.DEADLINE) {
-            String[] split = input.split("/by");
+            break;
+        case DEADLINE:
+            String[] splitDeadlineCommand = input.split("/by");
 
             try {
-                String description = split[0].trim().substring(Command.DEADLINE.toString().length() + 1);
+                String description = splitDeadlineCommand[0].trim().substring(Command.DEADLINE.toString().length() + 1);
                 parsedCommand.put("description", description);
             } catch (IndexOutOfBoundsException e) {
                 throw new JarvisException("The description of the deadline cannot be empty.");
             }
-            if (split.length == 1) {
+            if (splitDeadlineCommand.length == 1) {
                 throw new JarvisException("Please specify the date of the deadline "
                         + "(usage: `deadline <description> /by <date>`).");
             }
-            if (split[1].trim().equals("")) {
+            if (splitDeadlineCommand[1].trim().equals("")) {
                 throw new JarvisException("The date of the deadline cannot be empty.");
             }
-            parsedCommand.put("date", parseDateTime(split[1]));
-        } else if (command == Command.EVENT) {
-            String[] split = input.split("/at");
+            parsedCommand.put("date", parseDateTime(splitDeadlineCommand[1]));
+            break;
+        case EVENT:
+            String[] splitEventCommand = input.split("/at");
 
             try {
-                String description = split[0].trim().substring(Command.EVENT.toString().length() + 1);
+                String description = splitEventCommand[0].trim().substring(Command.EVENT.toString().length() + 1);
                 parsedCommand.put("description", description);
             } catch (IndexOutOfBoundsException e) {
                 throw new JarvisException("The description of the event cannot be empty.");
             }
-            if (split.length == 1) {
+            if (splitEventCommand.length == 1) {
                 throw new JarvisException("Please specify the date of the event "
                         + "(usage: `event <description> /at <date>`).");
             }
-            if (split[1].trim().equals("")) {
+            if (splitEventCommand[1].trim().equals("")) {
                 throw new JarvisException("The date of the event cannot be empty.");
             }
-            parsedCommand.put("date", parseDateTime(split[1]));
-        } else if (command == Command.FIND) {
+            parsedCommand.put("date", parseDateTime(splitEventCommand[1]));
+            break;
+        case FIND:
             try {
                 String keyword = tokens[1];
                 parsedCommand.put("keyword", keyword);
             } catch (IndexOutOfBoundsException e) {
                 throw new JarvisException("The keyword cannot be empty.");
             }
+            break;
+        default:
+            break;
         }
-
         return parsedCommand;
     }
 

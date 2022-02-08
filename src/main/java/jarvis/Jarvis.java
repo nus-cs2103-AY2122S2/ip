@@ -50,6 +50,8 @@ public class Jarvis {
                     return taskList.addEvent(parsedCommand);
                 case FIND:
                     return taskList.findTasks(parsedCommand);
+                case SNOOZE:
+                    return taskList.snoozeTask(parsedCommand);
                 default:
                     break;
                 }
