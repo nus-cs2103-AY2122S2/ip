@@ -63,6 +63,11 @@ public class Ultoi {
     }
     */
 
+    /**
+     * Returns the welcome message of Ultoi.
+     *
+     * @return Welcome message of Ultoi.
+     */
     public String showWelcomeMsg() {
         return ui.showWelcomeMsg();
     }
