@@ -23,7 +23,6 @@ public class DeleteCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-
         try {
             Task t = tasks.delete(taskToDelete);
             storage.writeToFile(tasks.getTaskArr());

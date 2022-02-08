@@ -10,7 +10,7 @@ public class UnmarkCommand extends Command {
      *
      * @param taskToUnmark Integer position of task to delete in tasklist.
      */
-    public UnmarkCommand(int taskToMark) {
+    public UnmarkCommand(int taskToUnmark) {
         this.taskToUnmark = taskToUnmark;
     }
 

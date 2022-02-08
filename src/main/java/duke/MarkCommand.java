@@ -18,7 +18,6 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-
         try {
             tasks.mark(taskToMark);
             storage.writeToFile(tasks.getTaskArr());

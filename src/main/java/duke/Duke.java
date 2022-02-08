@@ -62,7 +62,6 @@ public class Duke {
         while (!end) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.horizontal(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand, ui);
                 c.execute(tasks, ui, storage);
                 end = c.isEnd();
@@ -70,8 +69,6 @@ public class Duke {
                 ui.showError("UnknownCommand");
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.horizontal();
             }
         }
     }
