@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -37,13 +38,14 @@ public class Storage {
      */
     public void writeToFile(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        int i = 0;
-        while (i < list.getSize()) {
-            String textToAdd = list.getTask(i).getTaskData();
-            fw.write(textToAdd + System.lineSeparator());
-            i++;
+        for (int i = 0; i < list.getSize(); i++) {
+            addTask(list.getTask(i), fw);
         }
         fw.close();
+    }
+    private void addTask(Task task, FileWriter fw) throws IOException {
+        String textToAdd = task.getTaskData();
+        fw.write(textToAdd + System.lineSeparator());
     }
 
     /**
@@ -61,25 +63,31 @@ public class Storage {
                 String currTask = s.nextLine();
                 String typeOfTask = Character.toString(currTask.charAt(1));
                 boolean isMarked = false;
-                if (Character.toString(currTask.charAt(4)).equals("X")) {
+                if (isTaskMarked(currTask)) {
                     isMarked = true;
                 }
-                if (typeOfTask.equals("T")) {
+                switch (typeOfTask) {
+                case "T": {
                     Todo curr = new Todo(currTask.substring(7));
                     if (isMarked) {
                         curr.mark();
                     }
                     list.add(curr);
-                } else if (typeOfTask.equals("D")) {
+                    break;
+                }
+                case "D": {
                     String[] info = currTask.split(" \\(by: ");
                     String description = info[0].substring(7);
                     String date = info[1].substring(0, info[1].length() - 1); //Oct 12 2020 1 pm
+
                     Deadline curr = new Deadline(description, date);
                     if (isMarked) {
                         curr.mark();
                     }
                     list.add(curr);
-                } else {
+                    break;
+                }
+                case "E": {
                     String[] info = currTask.split(" \\(at: ");
                     String description = info[0].substring(7);
                     String date = info[1].substring(0, info[1].length() - 1);
@@ -88,6 +96,10 @@ public class Storage {
                         curr.mark();
                     }
                     list.add(curr);
+                    break;
+                }
+                default:
+                    throw new DukeException("file contains wrong task format");
                 }
             }
         } catch (Exception err) {
@@ -99,5 +111,8 @@ public class Storage {
             }
         }
         return list;
+    }
+    private boolean isTaskMarked(String task) {
+        return Character.toString(task.charAt(4)).equals("X");
     }
 }
