@@ -14,8 +14,8 @@ public class Event extends Task {
      * @param time duration of event
      * @param isReading flag to check if input is being read from file data
      */
-    public Event(String input, String time, boolean isReading) {
-        super(input, Task.totalTask, time, "E", isReading);
+    public Event(String input, String time, int taskNum, boolean isReading) {
+        super(input, taskNum, time, "E", isReading);
     }
 
     /**
@@ -24,7 +24,7 @@ public class Event extends Task {
      * @return String representation of task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         assert (name != "" || name != null) : "Invalid: Event has no name";
         assert (time != "" || time != null) : "Invalid: Event has no time";
         return String.format("%d. [E][%s] %s (at: %s)\n", number + 1, getStatus(), name, this.time);

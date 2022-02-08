@@ -15,6 +15,10 @@ public class TaskList {
         tasklist = new ArrayList<Task>();
     }
 
+    public int getSize() {
+        return tasklist.size();
+    }
+
     public ArrayList<Task> get() {
         return this.tasklist;
     }
@@ -26,20 +30,19 @@ public class TaskList {
      * @param num index (starts from 1) to delete
      * @return String output of deleted Task
      */
-    public String deleteTask(int num) {
-        if (num > 0 && num <= Task.totalTask) {
+    public String deleteTask(int num, TaskList taskList) {
+        if (num > 0 && num <= tasklist.size()) {
             num--;
             String s = Ui.printRemovedThisTask(num, this);
             this.tasklist.remove(num);
-            Task.totalTask--;
-            for(int i = num; i <Task.totalTask; i++) {
+            for(int i = num; i <tasklist.size(); i++) {
                 this.tasklist.get(i).decrementNum();
             }
-            s += Ui.printTotalTasks();
+            s += Ui.printTotalTasks(this.tasklist.size()-1);
             Storage.writeAllToFile(this);
             return s;
         } else {
-            return "☹ OOPS!!! There is no such task found.";
+            return "OOPS!!! There is no such task found.";
         }
     }
 
@@ -73,12 +76,32 @@ public class TaskList {
      */
     public String findTask(String keyword) {
         TaskList matchTasks = new TaskList();
-        for(int i = 0; i < Task.totalTask; i++) {
+        for(int i = 0; i < tasklist.size(); i++) {
             if (this.tasklist.get(i).name.contains(keyword) || this.tasklist.get(i).time.contains(keyword)) {
                 matchTasks.tasklist.add(tasklist.get(i));
             }
         }
         return Ui.printMatchTasks(matchTasks.tasklist);
+    }
+
+    public int findDuplicateTask(String keyword) {
+        assert tasklist != null : "Invalid: TaskList is not initialised!";
+        for (int i=0; i < tasklist.size(); i++) {
+            if (this.tasklist.get(i).name.equals(keyword)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int addTaskToList(Task task) {
+        assert task.name != null : "Invalid: TaskName is null!";
+        int dupTaskNum = findDuplicateTask(task.name);
+        if (dupTaskNum != -1) {
+            return dupTaskNum + 1;
+        }
+        tasklist.add(task);
+        return -1;
     }
 
 }

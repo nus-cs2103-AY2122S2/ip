@@ -56,8 +56,8 @@ public class Ui {
      */
     public static String printAllTasks(TaskList tasklist) {
         String s = "Here are the tasks in your list:\n";
-        for (int i = 0; i < Task.totalTask; i++){
-            s += tasklist.tasklist.get(i).toString();
+        for (int i = 0; i < tasklist.get().size(); i++){
+            s += tasklist.get().get(i).toString();
         }
         s += "__________________________________________________________________";
         return s;
@@ -122,8 +122,8 @@ public class Ui {
      *
      * @return string representation of total tasks
      */
-    public static String printTotalTasks() {
-        return String.format("Now you have %d task on the list.\n", Task.totalTask);
+    public static String printTotalTasks(int size) {
+        return String.format("Now you have %d task on the list.\n", size + 1);
     }
 
 
@@ -147,6 +147,10 @@ public class Ui {
     }
 
     public static String printNoSuchTask() {
-        return "There exists no such task.";
+        return "There exists no such task.\n";
+    }
+
+    public static String printDuplicateTask(int i){
+        return String.format("Error: There is a duplicate task (taskNumber %d)\n", i);
     }
 }

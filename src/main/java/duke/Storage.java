@@ -28,7 +28,7 @@ public class Storage {
         assert taskList.tasklist != null : "Invalid: tasklist is null! (function called - writeAllToFile())";
         try {
             FileWriter fw = new FileWriter(saveData);
-            for (int i = 0; i < Task.totalTask; i++) {
+            for (int i = 0; i < taskList.get().size(); i++) {
                 fw.write(taskList.get().get(i).getDataRepresentation());
             }
             fw.close();
@@ -87,7 +87,7 @@ public class Storage {
     public static void readSavedData(TaskList taskList) throws FileNotFoundException {
         Scanner s = new Scanner(saveData);
         while (s.hasNext()) {
-            taskList.get().add(parser.parseFileData(s.nextLine()));
+            taskList.addTaskToList(parser.parseFileData(s.nextLine(), taskList));
         }
     }
 
