@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     protected String type = "GENERAL";
     protected String description;

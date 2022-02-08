@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,7 +25,7 @@ public class Storage {
                 String[] details = input.split(";", 4);
                 Task currTask = Parser.parseCommandFromFile(details);
                 TaskList.manager.add(currTask);
-            }lis
+            }
             sc.close();
         } catch (IOException e) {
             throw new CustomException("File cannot be created");

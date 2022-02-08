@@ -1,6 +1,8 @@
+package duke;
+
 public class Todo extends Task {
     protected static String type = "TODO";
-    
+
     public Todo(String description) {
         super(description);
     }
