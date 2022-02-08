@@ -87,6 +87,7 @@ public class AddTaskCommand extends TaskListCommand {
     @Override
     public void undo() {
         TaskList taskList = super.getTaskList();
+        // Delete last task from list since item is always appended to end
         taskList.deleteTask(taskList.getSize() - 1);
     }
 }

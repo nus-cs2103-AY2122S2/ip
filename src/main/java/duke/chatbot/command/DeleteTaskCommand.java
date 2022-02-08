@@ -48,6 +48,7 @@ public class DeleteTaskCommand extends TaskListCommand {
     @Override
     public void undo() {
         TaskList taskList = super.getTaskList();
-        taskList.addTask(deletedTask);
+        int taskIndex = this.getTaskIndex();
+        taskList.addTask(taskIndex, this.deletedTask);
     }
 }
