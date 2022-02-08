@@ -28,8 +28,10 @@ public class Command {
     private static final String MARK_COMMAND = "mark";
     private static final String UNMARK_COMMAND = "unmark";
     private static final String DELETE_COMMAND = "delete";
+    private static final String SCHEDULE_COMMAND = "schedule";
+    private static final String ARCHIVE_COMMAND = "archive";
     private static final String INVALID_COMMAND = "You have entered an invalid command leh~";
-    private static final String INCOMPLETE_UNMARK = "Which task you want to unmark again?";
+    private static final String INCOMPLETE_COMMAND = "Which task you want to update again?";
     private static final String INVALID_INDEX = "You need to enter a valid list number mah~";
     private static final String INCOMPLETE_FILTER = "What do you want to filter by again?";
     private static final String TOO_MUCH_FIND_KEYWORD = "You can only find by one keyword siah~";
@@ -42,10 +44,11 @@ public class Command {
     private static final String DEADLINE_MISSING_TIMING = "When do you need to do this by again?";
     private static final String INCOMPLETE_TODO = "I cannot create todo"
             + " if you don't tell me what it's about eh :-(";
+    private static final String INCOMPLETE_SCHEDULE = "Pls key in the date you want to view your schedule~";
     private static final String DUMMY_INVALID_COMMAND = "Hey bro, not sure if this command is valid eh #_#";
 
     /** The specific command keyword */
-    protected String cmdWord;
+    protected final String cmdWord;
 
 
     Command(String keyword) {
@@ -83,8 +86,9 @@ public class Command {
         case DELETE_COMMAND:
         case MARK_COMMAND:
         case UNMARK_COMMAND:
+        case ARCHIVE_COMMAND:
             if (cmdLen == 1) {
-                throw new TesseractException(INCOMPLETE_UNMARK);
+                throw new TesseractException(INCOMPLETE_COMMAND);
             } else if (cmdLen > 2 || !Command.isInteger(cmdArr[1])
                     || Integer.parseInt(cmdArr[1]) > numOfTasks
                     || Integer.parseInt(cmdArr[1]) < 1) {
@@ -126,6 +130,14 @@ public class Command {
                 throw new TesseractException(INCOMPLETE_TODO);
             }
             break;
+        case SCHEDULE_COMMAND:
+            if (cmdLen == 1) {
+                throw new TesseractException(INCOMPLETE_SCHEDULE);
+            } else if (cmdLen > 2) {
+                throw new TesseractException(INVALID_COMMAND);
+            }
+            Date.checkValidTime(cmdArr[cmdLen - 1]);
+            break;
         default:
             throw new TesseractException(DUMMY_INVALID_COMMAND);
         }
@@ -155,6 +167,10 @@ public class Command {
             return new MarkCommand(cmdArr);
         case UNMARK_COMMAND:
             return new UnmarkCommand(cmdArr);
+        case SCHEDULE_COMMAND:
+            return new ScheduleCommand(cmdArr);
+        case ARCHIVE_COMMAND:
+            return new ArchiveCommand(cmdArr);
         case TODO_COMMAND:
         case DDL_COMMAND:
         case EVENT_COMMAND:
@@ -188,5 +204,4 @@ public class Command {
     public boolean isExit() {
         return false;
     }
-
 }

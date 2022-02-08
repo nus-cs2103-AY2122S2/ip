@@ -13,10 +13,12 @@ public abstract class Task {
     private static final String UNDONE_MEMORY = "@0@";
     private static final String DONE_STRING = "[X]";
     private static final String UNDONE_STRING = "[ ]";
+    private static final String ARCHIVED_TASK = "@A";
     // A string to represent the description of the task
     private final String description;
     // A boolean to represent if the task is done
     private boolean isDone;
+    private boolean isArchived;
 
     /**
      * Create a task.
@@ -26,6 +28,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.isArchived = false;
     }
 
     /**
@@ -36,6 +39,14 @@ public abstract class Task {
     public String getStatusIcon() {
         // mark done task with X
         return (isDone ? DONE_STRING : UNDONE_STRING);
+    }
+
+    public void archive() {
+        this.isArchived = true;
+    }
+
+    public boolean isActive() {
+        return !this.isArchived;
     }
 
     /**
@@ -68,15 +79,15 @@ public abstract class Task {
      * @return Memory representation of the task.
      */
     public String toMemoryString() {
-        if (isDone) {
-            return DONE_MEMORY + this.description;
-        } else {
-            return UNDONE_MEMORY + this.description;
+        String memoryString = this.description;
+        memoryString = isDone ? memoryString + DONE_MEMORY : memoryString + UNDONE_MEMORY;
+        if (isArchived) {
+            memoryString += ARCHIVED_TASK;
         }
+        return memoryString;
     }
 
     /**
-<<<<<<< HEAD
      * Return a boolean representing if the keyword in search matches the task description.
      *
      * @param keyword The keyword to filter tasks.

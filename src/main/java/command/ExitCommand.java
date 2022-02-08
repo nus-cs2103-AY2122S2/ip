@@ -38,7 +38,7 @@ public class ExitCommand extends Command {
     public String execute(TaskList taskList, TessUi ui, Storage storage) {
         if (storage.isUpdated()) {
             try {
-                storage.updateStorage(taskList, taskList.size());
+                storage.updateStorage(taskList.allTasks(), taskList.size());
             } catch (TesseractException e) {
                 ui.showError(e.getErrMsg());
                 ui.admitBug();

@@ -6,24 +6,24 @@ import main.TessUi;
 import task.Task;
 
 /**
- * Represent a command to delete a task.
+ * Represent a command to archive a task.
  * @author Fan Jue
  * @version 0.1.0
  * @since 0.1.0
  */
-public class DeleteCommand extends Command {
+public class ArchiveCommand extends Command {
     private static final int KEYWORD = 1;
 
-    /** The index of the task to be deleted */
-    protected int index;
+    // The index of the task to be archived
+    private int index;
 
-    DeleteCommand(String[] cmdArr) {
+    ArchiveCommand(String[] cmdArr) {
         super(cmdArr[0]);
         this.index = Integer.parseInt(cmdArr[KEYWORD]);
     }
 
     /**
-     * Execute the command on the system to delete a task.
+     * Execute the command on the system to archive a task.
      *
      * @param taskList The list of all current tasks.
      * @param ui The user interface.
@@ -31,8 +31,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, TessUi ui, Storage storage) {
-        Task task = taskList.deleteTask(this.index);
+        Task task = taskList.archiveTask(this.index);
         storage.needUpdate();
-        return ui.deleteTaskRes(task.toString(), taskList.size());
+        // need to write archiveTaskRes()
+        return ui.archiveRes(task.toString());
     }
 }

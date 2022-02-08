@@ -22,21 +22,23 @@ public class TaskList {
     private static final int MINIMUM_LENGTH = 3;
     private static final int MAXIMUM_LENGTH = 4;
     private static final String INDENT_ONE = "\t";
-
-    /**
-     * A list of all tasks
-     */
+    // archived tasks' descriptions end with "A"
+    private static final String ARCHIVE_SIGN = "A";
+    private static final String EVENT = "E";
+    private static final String DEADLINE = "D";
+    private static final String TODO = "T";
+    // A list of all tasks
     protected List<Task> taskList;
-    /**
-     * The number of all current tasks
-     */
+    // The number of all current tasks
     protected int numOfTasks;
+    private List<Task> archiveList;
 
     /**
      * Create a TaskList to store and manipulate tasks
      */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
+        this.archiveList = new ArrayList<Task>();
         this.numOfTasks = 0;
     }
 
@@ -45,31 +47,39 @@ public class TaskList {
      */
     public TaskList(List<String> storageMemory) {
         this.taskList = new ArrayList<Task>();
+        this.archiveList = new ArrayList<Task>();
         for (String str : storageMemory) {
-            String[] tasks = str.split("@", MAXIMUM_LENGTH); // format: D@1@do something
+            String[] taskDescriptions = str.split("@", MAXIMUM_LENGTH); // format: D@1@do something
             Task taskNew;
-            if (tasks.length < MINIMUM_LENGTH) {
+            if (taskDescriptions.length < MINIMUM_LENGTH) {
                 break;
             }
-            switch (tasks[0]) {
-            case "E": //event
-                taskNew = new Event(tasks[DESCRIPTION], tasks[TASK_DATE]);
+            switch (taskDescriptions[0]) {
+            case EVENT: //event
+                taskNew = new Event(taskDescriptions[DESCRIPTION], taskDescriptions[TASK_DATE]);
                 break;
-            case "D": //deadline
-                taskNew = new Deadline(tasks[DESCRIPTION], tasks[TASK_DATE]);
+            case DEADLINE: //deadline
+                taskNew = new Deadline(taskDescriptions[DESCRIPTION], taskDescriptions[TASK_DATE]);
                 break;
-            default: // todo
-                taskNew = new Todo(tasks[DESCRIPTION]);
+            case TODO:
+                taskNew = new Todo(taskDescriptions[DESCRIPTION]);
                 break;
+            default:
+                // should not execute this line
+                taskNew = new Todo(taskDescriptions[DESCRIPTION]);
             }
-            if (Integer.parseInt(tasks[1]) == 1) {
+            if (Integer.parseInt(taskDescriptions[1]) == 1) {
                 taskNew.markAsDone();
             }
-            this.taskList.add(taskNew);
+            if (taskDescriptions[taskDescriptions.length - 1].equals(ARCHIVE_SIGN)) {
+                this.archiveList.add(taskNew);
+            } else {
+                this.taskList.add(taskNew);
+            }
         }
         this.numOfTasks = this.taskList.size();
         // check if all tasks from memory are imported
-        assert(this.taskList.size() == storageMemory.size());
+        assert((this.taskList.size() + archiveList.size()) == storageMemory.size());
     }
 
     /**
@@ -81,6 +91,18 @@ public class TaskList {
     public TaskList(List<Task> tasks, int numOfTasks) {
         this.taskList = tasks;
         this.numOfTasks = numOfTasks;
+        this.archiveList = new ArrayList<Task>();
+    }
+
+    /**
+     * Return a list of all tasks.
+     *
+     * @return A list of active tasks combined with archived tasks.
+     */
+    public TaskList allTasks() {
+        List<Task> allTasks = new ArrayList<Task>(taskList);
+        allTasks.addAll(archiveList);
+        return new TaskList(allTasks, allTasks.size());
     }
 
     /**
@@ -90,6 +112,19 @@ public class TaskList {
      */
     public int size() {
         return numOfTasks;
+    }
+
+    /**
+     * Return an archived task.
+     *
+     * @param index
+     * @return
+     */
+    public Task archiveTask(int index) {
+        Task toArchive = taskList.remove(index - 1);
+        toArchive.archive();
+        archiveList.add(toArchive);
+        return toArchive;
     }
 
     /**

@@ -23,6 +23,9 @@ public class TessUi {
             + INDENT_ONE + "%s";
     private static final String FILTER_STRUCTURE = "Here are the tasks filtered by %s:\n"
             + INDENT_ONE + "%s";
+    private static final String SCHEDULE_STRUCTURE = "Here are the tasks scheduled on %s:\n"
+            + INDENT_ONE + "%s";
+    private static final String ARCHIVE_STRUCTURE = "The following task has been archived~\n" + INDENT_ONE;
     private static final String ADMIT_BUG = "I think there's a bug inside me causing me to malfunction..";
 
     /**
@@ -90,6 +93,14 @@ public class TessUi {
      */
     public String filterRes(String condition, String msg) {
         return String.format(FILTER_STRUCTURE, condition, msg);
+    }
+
+    public String scheduleRes(String date, String msg) {
+        return String.format(SCHEDULE_STRUCTURE, date, msg);
+    }
+
+    public String archiveRes(String msg) {
+        return ARCHIVE_STRUCTURE + msg;
     }
 
     /**
