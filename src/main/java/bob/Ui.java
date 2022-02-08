@@ -79,6 +79,9 @@ public class Ui {
         Ui.printLine();
     }
 
+    /**
+     * Prints UI message for a search result.
+     */
     public static void find() {
         Ui.printLine();
         System.out.println("Here are the matching tasks in your list:");

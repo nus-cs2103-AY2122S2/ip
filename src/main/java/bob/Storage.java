@@ -101,7 +101,7 @@ public class Storage {
      */
     public void writeTaskListToFile(TaskList tasks) {
         StringBuilder tasksString = new StringBuilder();
-        
+
         for (int i = 0; i < tasks.size(); i++) {
             tasksString.append(tasks.get(i).generateSavedEntry());
             tasksString.append("\n");

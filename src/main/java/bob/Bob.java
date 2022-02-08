@@ -2,7 +2,15 @@ package bob;
 
 import java.util.Scanner;
 
+/**
+ * Driver class containing the main method for entry to program.
+ */
 public class Bob {
+    /**
+     * Main method as entry point to program.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         Ui.greet();
 
