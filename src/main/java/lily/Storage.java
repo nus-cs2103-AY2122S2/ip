@@ -66,7 +66,7 @@ public class Storage {
      */
     public void save(TaskList list) throws IOException {
         if (!list.isEmpty()) {
-            File dataFolder = new File("/data");
+            File dataFolder = new File("./data");
             if (!dataFolder.exists()) {
                 dataFolder.mkdir();
             }

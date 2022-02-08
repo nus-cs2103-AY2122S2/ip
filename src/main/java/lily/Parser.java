@@ -12,12 +12,9 @@ import java.time.format.DateTimeParseException;
  * @version Feb 2022 (AY21/22 Sem 2)
  */
 public class Parser {
-    private TaskList tasks;
-    private Ui ui;
-    private Storage st;
-    private String sentence;
-    private String[] parsedSentence;
-    private String command;
+    private final TaskList tasks;
+    private final Ui ui;
+    private final Storage st;
 
     /**
      * Creates a new Parser Object.
@@ -40,9 +37,9 @@ public class Parser {
     public void parse() {
         userInteracting: while (true) {
             try {
-                sentence = ui.readCommand();
-                parsedSentence = sentence.split(" ");
-                command = parsedSentence[0];
+                String sentence = ui.readCommand();
+                String[] parsedSentence = sentence.split(" ");
+                String command = parsedSentence[0];
                 switch (command) {
                 case "bye":
                     st.save(tasks);
@@ -51,8 +48,12 @@ public class Parser {
                 case "list":
                     ui.showList(tasks);
                     break;
-    
+
                 case "mark":
+                // Fallthrough
+                case "done":
+                // Fallthrough
+                case "do":
                     int addIdx = Integer.parseInt(parsedSentence[1]); // base 1
                     ui.showMarked(tasks.mark(addIdx - 1), addIdx);
                     break;
