@@ -31,6 +31,7 @@ public class AddToDoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert this.task.length() > 0;
         ToDo todo = new ToDo(task);
         taskList.add(todo);
         String response = "Got it. I've added this task:" + "\n";

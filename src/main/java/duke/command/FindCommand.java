@@ -35,6 +35,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert this.searchTerm.length() > 0;
         int numOfTasks = taskList.numOfTasks();
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (int i = 0; i < numOfTasks; i++) {

@@ -21,6 +21,8 @@ public class Event extends Task {
      */
     public Event(String taskName, String at) throws DukeException {
         super(taskName);
+        assert taskName.length() > 0;
+        assert at.length() > 0;
         boolean isCorrectFormat = checkFormat(at);
         if (isCorrectFormat) {
             try {

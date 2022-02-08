@@ -42,6 +42,7 @@ public class Storage {
             fileIn = new FileInputStream(filePath);
             in = new ObjectInputStream(fileIn);
             ArrayList<Task> tasks = (ArrayList<Task>) in.readObject();
+            assert tasks instanceof ArrayList;
             return tasks;
         } catch (FileNotFoundException e) {
             File f = new File(filePath);
