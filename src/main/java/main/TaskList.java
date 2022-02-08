@@ -104,11 +104,7 @@ public class TaskList {
      */
     public TaskList filterByDate(Date date) {
         List<Task> tasks = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.isOn(date)) {
-                tasks.add(task);
-            }
-        }
+        taskList.stream().filter(task -> task.isOn(date)).forEach(tasks::add);
         return new TaskList(tasks, tasks.size());
     }
 
@@ -120,11 +116,7 @@ public class TaskList {
      */
     public TaskList filterByKeyword(String keyword) {
         List<Task> tasks = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.isMatch(keyword)) {
-                tasks.add(task);
-            }
-        }
+        taskList.stream().filter(task -> task.isMatch(keyword)).forEach(tasks::add);
         return new TaskList(tasks, tasks.size());
     }
 
