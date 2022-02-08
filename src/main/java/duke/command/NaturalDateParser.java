@@ -26,7 +26,7 @@ class NaturalDateParser {
         "dec"
     };
 
-    final DayOfWeek[] dayMapping = new DayOfWeek[] {
+    private static final DayOfWeek[] DAY_MAPPING = new DayOfWeek[] {
         DayOfWeek.MONDAY,
         DayOfWeek.TUESDAY,
         DayOfWeek.WEDNESDAY,
@@ -304,7 +304,7 @@ class NaturalDateParser {
      */
     private DayOfWeek parseNaturalDay(String dayText) {
         String trimmedText = dayText.toLowerCase().trim();
-        return dayMapping[(Arrays.asList(DAY_STRINGS).indexOf(trimmedText) % 7)];
+        return DAY_MAPPING[(Arrays.asList(DAY_STRINGS).indexOf(trimmedText) % 7)];
     }
 
     /**
