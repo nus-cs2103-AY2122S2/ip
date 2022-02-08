@@ -47,10 +47,10 @@ Lists all the tasks.
 
 Format: `list [ date & time ]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- Note for [ date & time ]: enter it strictly in the following format
-       dd/mm/yyyy [ hh : mm ] | eg: 02/12/2019 18:00             
-</div>
+ **Tip:**
+ Note for `[ date & time ]`: enter it strictly in the following format
+  `dd/mm/yyyy [ hh : mm ]`  eg: 02/12/2019 18:00             
+
 
 Examples:
 * `list 02/12/2019 18:00`
@@ -78,6 +78,10 @@ Examples:
 * `event CS2103 tP group discussion /on 05/02/2022 14:00`
 * `event movie with JunJie /on 09/02/2022 19:00`
 
+ **Tip:**
+ Note for `[ date & time ]`: enter it strictly in the following format
+  `dd/mm/yyyy [ hh : mm ]`  eg: 02/12/2019 18:00   
+
 #### Adding deadline task
 
 tasks that need to be done before a specific date/time.
@@ -87,6 +91,10 @@ Format: `deadline [ task title ] /by [ date & time ]​`
 Examples:
 * `deadline CS2103 iP submission /by 17/02/2022 12:00`
 * `deadline clean my room /by 09/02/2022 19:00`
+
+ **Tip:**
+ Note for `[ date & time ]`: enter it strictly in the following format
+  `dd/mm/yyyy [ hh : mm ]`  eg: 02/12/2019 18:00   
 
 ### Locating task by a keyword: `find`
 
