@@ -92,7 +92,7 @@ public class Parser {
      */
     public String[] fileBreakdown(String fileCommand) {
         String[] words = fileCommand.split(" ");
-        String[] returnCommands = new String[3];
+        String[] commandArguments= new String[3];
 
         returnCommands[0] = words[0]; // commands
         returnCommands[1] = words[1]; // mark or not mark
