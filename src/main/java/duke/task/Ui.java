@@ -39,6 +39,10 @@ public class Ui {
      * @return A display of the list is returned.
      */
     public String displayList(ArrayList<Task> toDoList) {
+        if (toDoList.isEmpty()) {
+            return "you have finished all your tasks! Y A Y!!";
+        }
+
         int number = 1;
         String result = "here are your tasks\n";
         for (Task item : toDoList) {
@@ -138,7 +142,7 @@ public class Ui {
      */
     public String showFindResult(ArrayList<Task> relevantTasks) {
         if (relevantTasks.isEmpty()) {
-            return "There are no matching tasks \n";
+            return "There are no matching tasks :( \n";
         } else {
             String result = "Here are the matching tasks in the list : \n";
             int counter = 1;
@@ -148,5 +152,13 @@ public class Ui {
             }
             return result;
         }
+    }
+
+    /**
+     * Returns the error caused by index out of bound error.
+     * @return The error message of a index out of bound error is returned.
+     */
+    public String idxOutOfBoundError() {
+        return "UH-OH!! the index should be between 1 and the size of the task list!";
     }
 }

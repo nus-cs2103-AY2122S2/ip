@@ -54,7 +54,7 @@ public class Storage {
     /**
      * Reads the file at Path "data/duke.txt" and returns the content as a list.
      * @return ArrayList of <code>Tasks</code> from the data file.
-     * @throws duke.task.LoadingException If the file is not in the correct format.
+     * @throws LoadingException If the file is not in the correct format.
      */
     public ArrayList<Task> readFile() throws LoadingException {
         File dataFile = new File("data/duke.txt");
@@ -67,7 +67,6 @@ public class Storage {
 
                 switch (taskLine[0]) {
                 case "T":
-                    taskLine[2].trim();
                     toDoList.add(new ToDo(taskLine[2]));
                     break;
                 case "D":
