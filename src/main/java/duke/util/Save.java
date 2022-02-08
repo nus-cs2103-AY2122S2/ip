@@ -93,7 +93,7 @@ public class Save {
             fileDir.mkdirs();
             File fileToCreate = new File(fileDir, "duke.txt");
             try {
-                FileWriter createdFile = new FileWriter(fileToCreate);
+                fileToCreate.createNewFile();
             } catch (IOException e1) {
                 System.out.println("File cannot be created");
             }
