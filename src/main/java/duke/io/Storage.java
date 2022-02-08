@@ -13,7 +13,6 @@ import duke.task.TaskType;
 import duke.task.Timeable;
 import duke.task.Todo;
 
-
 /**
  * Represents an interface to perform file reading and writing the tasks to the drive.
  */
@@ -83,7 +82,6 @@ public class Storage {
                     tasks.addTask(new Deadline(line[2], isDone, Timeable.of(line[3])));
                     break;
                 default:
-
                 }
             }
 

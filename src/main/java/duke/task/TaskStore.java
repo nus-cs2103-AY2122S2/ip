@@ -99,6 +99,8 @@ public class TaskStore {
      */
     public String getTaskWithKeyword(String keyword) {
         StringBuilder sb = new StringBuilder();
+
+        // Numbers list from 1
         int count = 1;
         for (Task t : this.tasks) {
             if (t.getDescription().contains(keyword)) {
@@ -128,7 +130,7 @@ public class TaskStore {
      */
     public Task createTask(String command, String args) throws DukeException, DateTimeParseException {
         if (command.equals(Parser.MAKE_TODO)) {
-            if (args.equals("")) {
+            if (args.isEmpty()) {
                 throw new DukeException("Make sure the task is not empty!");
             }
             return new Todo(args);

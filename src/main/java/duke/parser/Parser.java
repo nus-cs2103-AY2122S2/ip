@@ -2,6 +2,8 @@ package duke.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskStore;
 import duke.ui.Ui;
@@ -33,6 +35,7 @@ public class Parser {
         String[] split = inputTxt.split(" ");
         String command = split[0].toLowerCase();
         String commandArgs = inputTxt.substring(command.length()).trim();
+
         Task task;
         try {
             switch (command) {
@@ -75,7 +78,7 @@ public class Parser {
                 break;
 
             case FIND:
-                if (commandArgs.equals("")) {
+                if (commandArgs.isEmpty()) {
                     throw new DukeException("Please enter a keyword for me to find.");
                 }
                 ui.printMessage(tasks.getTaskWithKeyword(commandArgs));
@@ -138,9 +141,9 @@ public class Parser {
     public static String getDelimiter(String action) throws DukeException {
         switch (action) {
         case MAKE_DEADLINE:
-            return " /by ";
+            return Deadline.DELIMITER;
         case MAKE_EVENT:
-            return " /at ";
+            return Event.DELIMITER;
         default:
             throw new DukeException("I'm sorry, but I don't think there's a delimiter for that..");
         }
