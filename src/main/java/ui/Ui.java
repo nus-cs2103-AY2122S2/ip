@@ -2,6 +2,10 @@ package ui;
 
 import java.util.Scanner;
 
+/**
+ * A user interface class.
+ * Used in the CLI version of the app.
+ */
 public class Ui {
     private Scanner scanner;
     private String output;

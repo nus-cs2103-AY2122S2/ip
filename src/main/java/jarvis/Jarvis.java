@@ -11,11 +11,15 @@ import ui.Ui;
 
 public class Jarvis {
     private Ui ui;
-    private TaskList tasks;
+    private TaskList taskList;
     private Storage storage;
 
-    private boolean processNext = true;
+    /** Boolean variable for the while loop. */
+    private boolean hasNext = true;
 
+    /**
+     * Constructs a new Jarvis instance.
+     */
     public Jarvis() {
         startup();
     }
@@ -26,28 +30,28 @@ public class Jarvis {
      * @return The response given based on the input.
      */
     public String getResponse(String input) {
-        while (processNext) {
+        while (hasNext) {
             try {
                 HashMap<String, Object> parsedCommand = Parser.parseInput(input);
                 switch (Command.valueOf((String) parsedCommand.get("command"))) {
                 case BYE:
                     return shutdown();
                 case LIST:
-                    return tasks.printTasks();
+                    return taskList.printTaskList();
                 case MARK:
-                    return tasks.markAsDone(parsedCommand);
+                    return taskList.markAsDone(parsedCommand);
                 case UNMARK:
-                    return tasks.markAsUndone(parsedCommand);
+                    return taskList.markAsUndone(parsedCommand);
                 case DELETE:
-                    return tasks.delete(parsedCommand);
+                    return taskList.delete(parsedCommand);
                 case TODO:
-                    return tasks.addTodo(parsedCommand);
+                    return taskList.addTodo(parsedCommand);
                 case DEADLINE:
-                    return tasks.addDeadline(parsedCommand);
+                    return taskList.addDeadline(parsedCommand);
                 case EVENT:
-                    return tasks.addEvent(parsedCommand);
+                    return taskList.addEvent(parsedCommand);
                 case FIND:
-                    return tasks.findTasks(parsedCommand);
+                    return taskList.findTasks(parsedCommand);
                 default:
                     break;
                 }
@@ -67,7 +71,7 @@ public class Jarvis {
         try {
             storage = new Storage("data/data.txt");
             ui = new Ui();
-            tasks = new TaskList(storage.loadData());
+            taskList = new TaskList(storage.loadData());
             ui.welcome();
         } catch (JarvisException e) {
             ui.echo(e.getMessage());
@@ -80,8 +84,8 @@ public class Jarvis {
      */
     public String shutdown() {
         try {
-            processNext = false;
-            storage.saveChanges(tasks);
+            hasNext = false;
+            storage.saveChanges(taskList);
             return ui.shutdown();
         } catch (JarvisException e) {
             return e.getMessage();

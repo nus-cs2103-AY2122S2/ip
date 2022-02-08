@@ -14,8 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This control represents a dialog box consisting of an ImageView to
+ * represent the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -53,10 +53,24 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Generates a dialog box for the user input.
+     *
+     * @param text The user input text.
+     * @param img The user image.
+     * @return The dialog box for the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Generates a dialog box for Jarvis' response.
+     *
+     * @param text The Jarvis response text.
+     * @param img The Jarvis image.
+     * @return The dialog box for Jarvis.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
