@@ -1,3 +1,5 @@
+package duke;
+
 public class InvalidCommand extends Command {
 
     public InvalidCommand(String command) {
