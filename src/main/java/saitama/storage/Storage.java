@@ -15,7 +15,7 @@ import saitama.exceptions.InvalidFormatException;
 import saitama.parser.Parser;
 import saitama.tasks.Deadline;
 import saitama.tasks.Event;
-import saitama.tasks.RecursiveTag;
+import saitama.tags.RecurFrequency;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
@@ -71,7 +71,7 @@ public class Storage {
                 }
 
                 //assign recursiveTag
-                RecursiveTag recursiveTag = RecursiveTag.get(data[2]);
+                RecurFrequency recurFrequency = RecurFrequency.get(data[2]);
                 //assign last reset date
                 LocalDate lastResetDate = LocalDate.parse(data[3]);
 
@@ -80,7 +80,7 @@ public class Storage {
                 String taskArguments = data[4];
                 switch(taskType) {
                 case "T":
-                    taskList.add(new ToDo(taskArguments, isDone, recursiveTag, lastResetDate));
+                    taskList.add(new ToDo(taskArguments, isDone, recurFrequency, lastResetDate));
                     break;
                 case "D":
                     String[] splitTaskArguments = taskArguments.split(" /by ", 2);
@@ -94,7 +94,7 @@ public class Storage {
                     try {
                         LocalDateTime deadline = Parser.processDateTime(deadlineString);
                         Task newTask = new Deadline(description,
-                                deadline, isDone, recursiveTag, lastResetDate);
+                                deadline, isDone, recurFrequency, lastResetDate);
                         taskList.add(newTask);
                     } catch (InvalidFormatException | InvalidDateTimeException e) {
                         throw new FileCorruptException();
@@ -109,7 +109,7 @@ public class Storage {
                     description = splitTaskArguments[0];
                     String location = splitTaskArguments[1];
                     Task newTask = new Event(description,
-                            location, isDone, recursiveTag, lastResetDate);
+                            location, isDone, recurFrequency, lastResetDate);
                     taskList.add(newTask);
                     break;
                 default:

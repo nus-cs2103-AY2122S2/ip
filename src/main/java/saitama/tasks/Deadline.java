@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import saitama.tags.RecurFrequency;
+
 /**
  * A deadline task.
  */
@@ -17,10 +19,10 @@ public class Deadline extends Task {
      *
      * @param description The details of the deadline task.
      * @param by The deadline of the task.
-     * @param recursiveTag The frequency of recurrence the deadline task.
+     * @param recurFrequency The frequency of recurrence the deadline task.
      */
-    public Deadline(String description, LocalDateTime by, RecursiveTag recursiveTag) {
-        super(description, recursiveTag);
+    public Deadline(String description, LocalDateTime by, RecurFrequency recurFrequency) {
+        super(description, recurFrequency);
         this.deadline = by;
     }
 
@@ -30,12 +32,12 @@ public class Deadline extends Task {
      * @param description The details of the deadline task.
      * @param by The deadline of the task.
      * @param isDone Whether the task is done.
-     * @param recursiveTag The frequency recurrence of the deadline task.
+     * @param recurFrequency The frequency recurrence of the deadline task.
      * @param lastResetDate The last reset date of the task.
      */
     public Deadline(String description, LocalDateTime by, boolean isDone,
-                    RecursiveTag recursiveTag, LocalDate lastResetDate) {
-        super(description, isDone, recursiveTag, lastResetDate);
+                    RecurFrequency recurFrequency, LocalDate lastResetDate) {
+        super(description, isDone, recurFrequency, lastResetDate);
         this.deadline = by;
     }
 
@@ -47,7 +49,7 @@ public class Deadline extends Task {
      */
     public void saveTask(FileWriter fw) throws IOException {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        String recursiveTag = this.recursiveTag == null ? "--" : this.recursiveTag.toString();
+        String recursiveTag = this.recurFrequency == null ? "--" : this.recurFrequency.toString();
         fw.write(String.format("D %s %s %s %s /by %s\n", isDone, recursiveTag, lastResetDate, description,
                 deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))));
     }

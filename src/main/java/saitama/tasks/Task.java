@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
+import saitama.tags.RecurFrequency;
+
 
 /**
  * An abstract class representing a task.
@@ -16,20 +18,20 @@ public abstract class Task {
 
     protected String description;
     protected boolean isDone;
-    protected RecursiveTag recursiveTag;
+    protected RecurFrequency recurFrequency;
     protected LocalDate lastResetDate;
 
-    Task(String description, RecursiveTag recursiveTag) {
+    Task(String description, RecurFrequency recurFrequency) {
         this.description = description;
-        this.recursiveTag = recursiveTag;
+        this.recurFrequency = recurFrequency;
         this.isDone = false;
         this.lastResetDate = LocalDate.now();
     }
 
-    Task(String description, boolean isDone, RecursiveTag recursiveTag,
+    Task(String description, boolean isDone, RecurFrequency recurFrequency,
          LocalDate lastResetDate) {
         this.description = description;
-        this.recursiveTag = recursiveTag;
+        this.recurFrequency = recurFrequency;
         this.lastResetDate = lastResetDate;
         this.isDone = isDone;
         if (shouldReset()) {
@@ -53,8 +55,8 @@ public abstract class Task {
      * @return the recursive tag of the task.
      */
     protected String getRecursiveFrequency() {
-        if (recursiveTag != null) {
-            return recursiveTag.getLabel();
+        if (recurFrequency != null) {
+            return recurFrequency.getLabel();
         } else {
             return "";
         }
@@ -65,8 +67,8 @@ public abstract class Task {
      *
      * @return
      */
-    public boolean isRecursive() {
-        return recursiveTag != null;
+    public boolean isRecurring() {
+        return recurFrequency != null;
     }
 
     /**
@@ -78,13 +80,13 @@ public abstract class Task {
         LocalDate today = LocalDate.now();
         LocalDate resetDate;
 
-        if (!isRecursive()) {
+        if (!isRecurring()) {
             return false;
         }
 
-        assert recursiveTag != null : "Task detects an error when checking if a task needs to be reset!";
+        assert recurFrequency != null : "Task detects an error when checking if a task needs to be reset!";
 
-        switch (recursiveTag) {
+        switch (recurFrequency) {
         case DAILY:
             resetDate = lastResetDate.plusDays(1);
             break;

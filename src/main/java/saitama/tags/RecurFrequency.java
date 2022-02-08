@@ -1,4 +1,4 @@
-package saitama.tasks;
+package saitama.tags;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -6,16 +6,16 @@ import java.util.HashMap;
 /**
  * A list of tags for recurring tasks.
  */
-public enum RecursiveTag {
+public enum RecurFrequency implements Tag {
     WEEKLY("--rw"), BIWEEKLY("--rb"), DAILY("--rd"), MONTHLY("--rm");
 
-    private static HashMap<String, RecursiveTag> tagMap = new HashMap<>();
+    private static HashMap<String, RecurFrequency> tagMap = new HashMap<>();
     private String tag;
 
     static {
-        Arrays.stream(RecursiveTag.values()).forEach(option -> tagMap.put(option.tag, option));
+        Arrays.stream(RecurFrequency.values()).forEach(option -> tagMap.put(option.tag, option));
     }
-    RecursiveTag(String tag) {
+    RecurFrequency(String tag) {
         this.tag = tag;
     }
 
@@ -23,9 +23,9 @@ public enum RecursiveTag {
      * Gets the RecursiveTag corresponding to the given tag, if it exists. Otherwise, returns null.
      *
      * @param tag
-     * @return
+     * @return The RecursiveTag corresponding to the given tag, if it exists. Otherwise, returns null.
      */
-    public static RecursiveTag get(String tag) {
+    public static RecurFrequency get(String tag) {
         if (tagMap.containsKey(tag)) {
             return tagMap.get(tag);
         } else {

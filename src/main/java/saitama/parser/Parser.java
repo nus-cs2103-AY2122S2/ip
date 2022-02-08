@@ -18,9 +18,10 @@ import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
 import saitama.exceptions.InvalidTaskNumberException;
 import saitama.exceptions.MissingQueryException;
+import saitama.tags.RecurFrequency;
+import saitama.tags.Tag;
 import saitama.tasks.Deadline;
 import saitama.tasks.Event;
-import saitama.tasks.RecursiveTag;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
@@ -45,7 +46,7 @@ public class Parser {
         splitCommand[0] = splitCommand[0].toUpperCase(); //convert the command word to uppercase
         String command = splitCommand[0];
 
-        ArrayList<RecursiveTag> tags = new ArrayList<>();
+        ArrayList<Tag> tags = new ArrayList<>();
         if (splitCommand.length >= 2) { //if command has arguments
             String commandArguments = splitCommand[1];
             tags = getTags(commandArguments); //check for tags
@@ -144,7 +145,7 @@ public class Parser {
      * @throws EmptyDescriptionException if no details of the task are given.
      * @throws InvalidCommandException if command does not exist.
      */
-    private static Command prepareAdd(String[] splitCommand, ArrayList<RecursiveTag> tags) throws
+    private static Command prepareAdd(String[] splitCommand, ArrayList<Tag> tags) throws
             InvalidFormatException, EmptyDescriptionException, InvalidCommandException, InvalidDateTimeException {
         if (splitCommand.length < 2 || splitCommand[1].equals("")) {
             throw new EmptyDescriptionException();
@@ -152,9 +153,13 @@ public class Parser {
         String taskType = splitCommand[0];
         String taskArguments = splitCommand[1];
 
-        RecursiveTag recursiveTag = null;
-        if (tags.size() > 0) {
-            recursiveTag = tags.get(0);
+        RecurFrequency recurFrequency = null;
+        for (Tag tag : tags) {
+            if (tag instanceof RecurFrequency) {
+                @SuppressWarnings("unchecked")
+                RecurFrequency rf = (RecurFrequency) tag;
+                recurFrequency = rf;
+            }
         }
 
         assert taskType.equals("TODO") || taskType.equals("DEADLINE") || taskType.equals("EVENT")
@@ -162,7 +167,7 @@ public class Parser {
 
         switch (taskType) {
         case "TODO":
-            Task newTask = new ToDo(taskArguments, recursiveTag);
+            Task newTask = new ToDo(taskArguments, recurFrequency);
             return new AddCommand(newTask);
         case "DEADLINE":
             String[] taskArgumentsList = taskArguments.split(" /by ", 2);
@@ -172,7 +177,7 @@ public class Parser {
             }
             String taskDescription = taskArgumentsList[0];
             LocalDateTime deadline = processDateTime(taskArgumentsList[1]);
-            newTask = new Deadline(taskDescription, deadline, recursiveTag);
+            newTask = new Deadline(taskDescription, deadline, recurFrequency);
             return new AddCommand(newTask);
         case "EVENT":
             taskArgumentsList = taskArguments.split(" /at ", 2);
@@ -182,7 +187,7 @@ public class Parser {
             }
             taskDescription = taskArgumentsList[0];
             String location = taskArgumentsList[1];
-            newTask = new Event(taskDescription, location, recursiveTag);
+            newTask = new Event(taskDescription, location, recurFrequency);
             return new AddCommand(newTask);
         default:
             //Should never happen since we asserted that the task type is valid
@@ -196,12 +201,12 @@ public class Parser {
      * @param commandArguments The command argument containing all the tags.
      * @return The list of RecursiveTags found in the command argument.
      */
-    private static ArrayList<RecursiveTag> getTags(String commandArguments) {
-        ArrayList<RecursiveTag> tags = new ArrayList<>();
+    private static ArrayList<Tag> getTags(String commandArguments) {
+        ArrayList<Tag> tags = new ArrayList<>();
         String[] arguments = commandArguments.split(" ");
         for (String argument : arguments) {
             if (argument.startsWith("--")) {
-                RecursiveTag r = RecursiveTag.get(argument);
+                RecurFrequency r = RecurFrequency.get(argument);
                 if (r != null) {
                     tags.add(r);
                 }
