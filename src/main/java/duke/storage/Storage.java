@@ -24,9 +24,17 @@ import duke.ui.Ui;
  */
 public class Storage {
     private final String filePath;
+    private final Ui ui;
 
-    public Storage(String filePath) {
+    /**
+     * Instantiates a Storage object with filePath and ui.
+     *
+     * @param filePath String Path of the file.
+     * @param ui Ui UI object.
+     */
+    public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
+        this.ui = ui;
     }
 
     /**
@@ -65,27 +73,27 @@ public class Storage {
                             dateString = line.substring(line.lastIndexOf("by: ") + 4, line.lastIndexOf(")"));
                             LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
                             if (isDone.equals("X")) {
-                                taskList.add(new Deadline(content, dateTime, true));
+                                taskList.add(new Deadline(content, dateTime, true, ui));
                             } else {
-                                taskList.add(new Deadline(content, dateTime));
+                                taskList.add(new Deadline(content, dateTime, ui));
                             }
                         } else {
                             content = line.substring(7, line.lastIndexOf(" (at: "));
                             dateString = line.substring(line.lastIndexOf("at: ") + 4, line.lastIndexOf(")"));
                             LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
                             if (isDone.equals("X")) {
-                                taskList.add(new Event(content, dateTime, true));
+                                taskList.add(new Event(content, dateTime, true, ui));
                             } else {
-                                taskList.add(new Event(content, dateTime));
+                                taskList.add(new Event(content, dateTime, ui));
                             }
                         }
                     } else {
                         if (isDone.equals("X")) {
                             String content = line.substring(7);
-                            taskList.add(new ToDo(content, true));
+                            taskList.add(new ToDo(content, true, ui));
                         } else {
                             String content = line.substring(7);
-                            taskList.add(new ToDo(content));
+                            taskList.add(new ToDo(content, ui));
                         }
                     }
                 }

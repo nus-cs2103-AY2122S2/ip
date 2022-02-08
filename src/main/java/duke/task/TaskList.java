@@ -79,13 +79,11 @@ public class TaskList {
      */
     public void markTask(int index) throws DukeInvalidArgumentException {
         if (tasks.size() == 0) {
-            Ui.printDivider();
-            System.out.println("    No tasks are in the list right now!");
-            Ui.printDivider();
+            ui.setNextMessage("No tasks are in the list right now!");
         } else if (index < 1 || index > tasks.size()) {
             throw new DukeInvalidArgumentException("index is not in the list");
         }
-        tasks.get(index - 1).mark();
+        ui.setNextMessage(tasks.get(index - 1).mark());
     }
 
     /**
@@ -95,13 +93,11 @@ public class TaskList {
      */
     public void unmarkTask(int index) throws DukeInvalidArgumentException {
         if (tasks.size() == 0) {
-            Ui.printDivider();
-            System.out.println("    No tasks are in the list right now!");
-            Ui.printDivider();
+            ui.setNextMessage("No tasks are in the list right now!");
         } else if (index < 1 || index > tasks.size()) {
             throw new DukeInvalidArgumentException("index is not in the list");
         }
-        tasks.get(index - 1).unmark();
+        ui.setNextMessage(tasks.get(index - 1).unmark());
     }
 
     /**
@@ -122,9 +118,7 @@ public class TaskList {
      */
     public void deleteTask(int index) throws DukeInvalidArgumentException {
         if (tasks.size() == 0) {
-            Ui.printDivider();
-            System.out.println("    No tasks are in the list right now!");
-            Ui.printDivider();
+            ui.setNextMessage("No tasks are in the list right now!");
         } else if (index < 1 || index > tasks.size()) {
             throw new DukeInvalidArgumentException("index is not in the list");
         } else {
@@ -185,7 +179,7 @@ public class TaskList {
             }
         };
         tasks.sort(comparator);
-        ui.showUiForSort(tasks, sortType);
+        ui.showUiForSort(this, sortType);
     }
 
     /**
@@ -207,6 +201,27 @@ public class TaskList {
             }
             return true;
         }
+    }
+
+    /**
+     * Returns the String representation of this taskList.
+     *
+     * @return String String representation of this TaskList object.
+     */
+    @Override
+    public String toString() {
+        String result = "";
+        ArrayList<Task> resultTasks = this.tasks;
+        for (int index = 0; index < resultTasks.size(); index++) {
+            int order = (index + 1);
+            Task task = resultTasks.get(index);
+            if (index == resultTasks.size() - 1) {
+                result += order + ": " + task.toString();
+            } else {
+                result += order + ": " + task.toString() + "\n";
+            }
+        }
+        return result;
     }
 
 }

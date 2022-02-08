@@ -2,12 +2,14 @@ package duke;
 
 import java.io.FileNotFoundException;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Contains main method for duke.Duke chatbot.
@@ -25,8 +27,8 @@ public class Duke {
      * If there is no file in the filePath, Storage will create a new file.
      */
     public Duke() {
-        this.storage = new Storage(filePath);
         this.ui = new Ui();
+        this.storage = new Storage(filePath, ui);
         try {
             this.tasks = new TaskList(storage.load(), ui);
         } catch (FileNotFoundException e) {
@@ -42,8 +44,8 @@ public class Duke {
      * @param filePath File's path.
      */
     public Duke(String filePath) {
-        this.storage = new Storage(filePath);
         this.ui = new Ui();
+        this.storage = new Storage(filePath, ui);
         try {
             this.tasks = new TaskList(storage.load(), ui);
         } catch (FileNotFoundException e) {
@@ -65,7 +67,11 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command cmd = Parser.parse(input);
+            Command cmd = Parser.parse(input, ui);
+            if (cmd instanceof ByeCommand) {
+                Platform.exit();
+                return "";
+            }
             cmd.executeCommand(tasks, ui, storage);
         } catch (DukeException e) {
             return e.toString();

@@ -15,8 +15,8 @@ public class Deadline extends Task {
      * @param content String content.
      * @param date    LocalDateTime due date.
      */
-    public Deadline(String content, LocalDateTime date) {
-        super(content, date);
+    public Deadline(String content, LocalDateTime date, Ui ui) {
+        super(content, date, ui);
     }
 
     /**
@@ -26,8 +26,8 @@ public class Deadline extends Task {
      * @param date    LocalDateTime due date.
      * @param isDone  Boolean to show if the task is done.
      */
-    public Deadline(String content, LocalDateTime date, boolean isDone) {
-        super(content, date, isDone);
+    public Deadline(String content, LocalDateTime date, boolean isDone, Ui ui) {
+        super(content, date, isDone, ui);
     }
 
     /**
@@ -39,10 +39,10 @@ public class Deadline extends Task {
     public String toString() {
         if (getIsDone()) {
             return "[D][X] " + getContent() + " (by: " + date
-                    .format(Ui.OUTPUT_FORMATTER) + ")";
+                    .format(Ui.OUTPUT_FORMATTER) + ")" + tags.toString();
         } else {
             return "[D][ ] " + getContent() + " (by: " + date
-                    .format(Ui.OUTPUT_FORMATTER) + ")";
+                    .format(Ui.OUTPUT_FORMATTER) + ")" + tags.toString();
         }
     }
 }

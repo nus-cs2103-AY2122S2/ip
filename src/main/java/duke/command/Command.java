@@ -22,6 +22,8 @@ public abstract class Command {
         DEADLINE,
         EVENT,
         SORT,
+        TAG,
+        UNTAG,
         TODO;
 
         /**

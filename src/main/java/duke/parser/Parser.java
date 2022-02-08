@@ -15,6 +15,7 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.SortCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeDateTimeFormatException;
 import duke.exception.DukeException;
@@ -26,6 +27,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 
 /**
@@ -68,7 +70,7 @@ public class Parser {
      * @return Command Returns any subclass of Command based on the input String.
      * @throws DukeException
      */
-    public static Command parse(String inputCommand) throws DukeException {
+    public static Command parse(String inputCommand, Ui ui) throws DukeException {
         if (inputCommand.trim().length() == 0) {
             throw new DukeCommandException("");
         }
@@ -109,7 +111,7 @@ public class Parser {
                     content = inputCommand.substring(9, indexOfBy - 1);
                     LocalDateTime date = null;
                     date = parseDateTime(by);
-                    Task taskObj = new Deadline(content, date);
+                    Task taskObj = new Deadline(content, date, ui);
                     return new AddCommand(taskObj, inputArray);
                 } else {
                     throw new DukeException("unknown error occurred");
@@ -127,7 +129,7 @@ public class Parser {
                     content = inputCommand.substring(6, indexOfAt - 1);
                     LocalDateTime date = null;
                     date = parseDateTime(by);
-                    Task taskObj = new Event(content, date);
+                    Task taskObj = new Event(content, date, ui);
                     return new AddCommand(taskObj, inputArray);
                 } else {
                     throw new DukeException("unknown error occurred");
@@ -137,7 +139,7 @@ public class Parser {
                 for (int k = 1; k < inputArray.length; k++) {
                     content += inputArray[k];
                 }
-                Task taskObj = new ToDo(content);
+                Task taskObj = new ToDo(content, ui);
                 return new AddCommand(taskObj, inputArray);
             } else if (Command.CommandType.MARK.equals(firstArg)) {
                 int index = parseInt(secondArg);
@@ -153,6 +155,26 @@ public class Parser {
                 } else {
                     throw new DukeInvalidArgumentException("sort type");
                 }
+            } else if (Command.CommandType.TAG.equals(firstArg)) {
+                if (inputArray.length == 2) {
+                    throw new DukeInvalidArgumentException("Too few arguments!");
+                } else if (inputArray.length != 3) {
+                    throw new DukeInvalidArgumentException("Too many arguments!");
+                }
+                String stringIndex = inputArray[1];
+                String name = inputArray[2];
+                int index = parseInt(stringIndex);
+                return new TagCommand(index, TagCommand.TagType.TAG, name);
+            } else if (Command.CommandType.UNTAG.equals(firstArg)) {
+                if (inputArray.length == 2) {
+                    throw new DukeInvalidArgumentException("Too few arguments!");
+                } else if (inputArray.length != 3) {
+                    throw new DukeInvalidArgumentException("Too many arguments!");
+                }
+                String stringIndex = inputArray[1];
+                String name = inputArray[2];
+                int index = parseInt(stringIndex);
+                return new TagCommand(index, TagCommand.TagType.UNTAG, name);
             } else {
                 return new InvalidCommand(inputCommand);
             }
