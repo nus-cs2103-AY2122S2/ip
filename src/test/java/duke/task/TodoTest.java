@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class TodoTest {
     @Test
     public void testFileFormatConversion() {
-        assertEquals("T | 0 | this week iP", new Todo("this week iP").convertToFileFormat());
+        assertEquals("T | 0 | this week iP", new Todo("this week iP").toFileFormatString());
     }
 
     @Test

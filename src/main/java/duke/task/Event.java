@@ -40,7 +40,7 @@ public class Event extends Task {
      * @param isDone Whether the task is done yet.
      */
     public Event(String name, LocalDate time, boolean isDone) {
-        super(name, isDone);
+        super(name, "E", isDone);
         this.time = time;
     }
 
@@ -53,7 +53,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
+        return super.toString() + " (at: "
                 + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
@@ -63,10 +63,10 @@ public class Event extends Task {
      * @return A String representation of the Event.
      */
     @Override
-    public String convertToFileFormat() {
+    public String toFileFormatString() {
         if (isDone) {
-            return "E | 1 | " + name + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            return super.toFileFormatString() + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
-        return "E | 0 | " + name + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return super.toFileFormatString() + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 }

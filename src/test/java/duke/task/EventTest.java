@@ -8,7 +8,7 @@ public class EventTest {
     @Test
     public void testFileFormatConversion() {
         assertEquals("E | 0 | this week lecture | Jan 28 2022",
-                new Event("this week lecture", "2022-01-28").convertToFileFormat());
+                new Event("this week lecture", "2022-01-28").toFileFormatString());
     }
 
     @Test

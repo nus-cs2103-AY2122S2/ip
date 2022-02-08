@@ -14,22 +14,24 @@ import duke.ui.ResponseGenerator;
 
 /** An application to manage tasks */
 public class Duke {
+    static final String DEADLINE_FORMAT = "/by";
+    static final String EVENT_FORMAT = "/at";
     private Parser parser;
     private Storage storage;
     private TaskList taskList;
-    private ResponseGenerator generator;
+    private ResponseGenerator responseGenerator;
 
     /**
      * Creates a new Duke instance.
      */
     public Duke() {
-        generator = new ResponseGenerator();
+        responseGenerator = new ResponseGenerator();
         parser = new Parser();
         try {
             storage = new Storage();
             taskList = storage.initialize();
         } catch (IOException e) {
-            System.out.println(generator.getFileErrorMessage());
+            System.out.println(responseGenerator.getFileErrorMessage());
             taskList = new TaskList();
         }
     }
@@ -40,7 +42,7 @@ public class Duke {
      * @return A startup message.
      */
     public String getStartupMessage() {
-        return generator.getStartupMessage();
+        return responseGenerator.getStartupMessage();
     }
 
     /**
@@ -51,57 +53,50 @@ public class Duke {
      */
     public String getResponse(String input) {
         if (input.equals("bye")) {
-            return generator.getByeMessage();
+            return responseGenerator.getByeMessage();
         } else if (input.equals("list")) {
-            return generator.printItems(taskList.getItems());
+            return responseGenerator.printItems(taskList.getItems());
         } else {
             try {
                 String command = parser.parseCommand(input);
 
-                if (command.equals("mark")) {
-                    int index = parser.parseNumericalDescription(input, "mark", taskList.size());
+                if (command.equals("mark") || command.equals("unmark")) {
+                    int index = parser.parseNumericalDescription(input, command, taskList.size());
                     storage.modifyTask(index);
                     return taskList.markItemDone(index);
-
                 } else if (command.equals("unmark")) {
-                    int index = parser.parseNumericalDescription(input, "unmark", taskList.size());
+                    int index = parser.parseNumericalDescription(input, command, taskList.size());
                     storage.modifyTask(index);
                     return taskList.markItemUndone(index);
-
                 } else if (command.equals("delete")) {
-                    int index = parser.parseNumericalDescription(input, "delete", taskList.size());
+                    int index = parser.parseNumericalDescription(input, command, taskList.size());
                     storage.deleteTask(index);
                     return taskList.deleteItem(index);
-
                 } else if (command.equals("find")) {
-                    String description = parser.parseStringDescription(input, "find");
-                    return generator.printFoundItems(taskList.findItems(description));
-
+                    String query = parser.parseStringDescription(input, command);
+                    return responseGenerator.printFoundItems(taskList.findItems(query));
                 } else {
                     // adding new tasks
                     if (command.equals("todo")) {
-                        String description = parser.parseStringDescription(input, "todo");
+                        String description = parser.parseStringDescription(input, command);
                         taskList.addTask(new Todo(description));
-
                     } else if (command.equals("deadline")) {
-                        String[] params = parser.parseFormatDescription(input, "deadline", "/by");
-                        taskList.addTask(new Deadline(params[0], params[1]));
-
+                        String[] description = parser.parseFormatDescription(input, command, DEADLINE_FORMAT);
+                        taskList.addTask(new Deadline(description[0], description[1]));
                     } else if (command.equals("event")) {
-                        String[] params = parser.parseFormatDescription(input, "event", "/at");
-                        taskList.addTask(new Event(params[0], params[1]));
+                        String[] description = parser.parseFormatDescription(input, command, EVENT_FORMAT);
+                        taskList.addTask(new Event(description[0], description[1]));
                     }
-
                     Task latestTask = taskList.getLast();
                     storage.addTask(latestTask);
-                    return generator.getAddTaskMessage(latestTask, taskList.size());
+                    return responseGenerator.getAddTaskMessage(latestTask, taskList.size());
                 }
             } catch (WrongInputException | IncompleteInputException e) {
-                return e.getMessage();
+                return responseGenerator.getDukeErrorMessage(e);
             } catch (DateTimeParseException e) {
-                return "Error parsing date, please enter dates in YYYY-MM-DD format!";
+                return responseGenerator.getDateTimeFormatErrorMessage();
             } catch (IOException e) {
-                return generator.getIoErrorMessage();
+                return responseGenerator.getIoErrorMessage();
             } catch (Exception e) {
                 return e.getMessage();
             }

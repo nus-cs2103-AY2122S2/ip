@@ -20,30 +20,6 @@ public class Todo extends Task {
      * @param isDone Whether the task is done yet.
      */
     public Todo(String name, boolean isDone) {
-        super(name, isDone);
-    }
-
-    /**
-     * Returns a String representation of the Todo.
-     * Indicates the task type and whether it has been done.
-     *
-     * @return A String representation of the Todo.
-     */
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-
-    /**
-     * Returns a String representation of the Todo to be entered in the storage file.
-     *
-     * @return A String representation of the Todo.
-     */
-    @Override
-    public String convertToFileFormat() {
-        if (isDone) {
-            return "T | 1 | " + name;
-        }
-        return "T | 0 | " + name;
+        super(name, "T", isDone);
     }
 }
