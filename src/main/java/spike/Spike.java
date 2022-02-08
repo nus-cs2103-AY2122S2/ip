@@ -58,6 +58,7 @@ public class Spike {
         Command command;
         command = new Parser().parseCommand(input, tasks);
         String executionResult = command.execute(tasks);
+        assert executionResult != "" : "Execution response should not be empty";
         if (!(command instanceof FindCommand || command instanceof IncorrectCommand
                 || command instanceof ListCommand)) {
             saveChanges();
