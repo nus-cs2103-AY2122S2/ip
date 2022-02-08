@@ -37,6 +37,21 @@ public abstract class Command {
                 return false;
             }
         }
+
+        /**
+         * Checks if the input string is a CommandType.
+         *
+         * @param input String input.
+         * @return boolean Boolean to show whether input string is a CommandType.
+         */
+        public static boolean isCommandType(String input) {
+            for (CommandType commandType : CommandType.values()) {
+                if (commandType.equals(input)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     protected String[] commandArray;
