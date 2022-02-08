@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -25,6 +26,11 @@ class NaturalDateParser {
         "dec"
     };
 
+    private static final String KEYWORD_RELATIVE_YEAR = "next year";
+    private static final String KEYWORD_RELATIVE_MONTH = "next month";
+    private static final String KEYWORD_RELATIVE_DAY = "tomorrow";
+    private static final String KEYWORD_POSITIONAL_DAY = "today";
+
     private static final String DEFAULT_TIME = " 00:00";
     private static final String FORMAT_DEFAULT_DATETIME = "dd/MM/yyyy HH:mm";
     private static final String FORMAT_DEFAULT_DATE = "dd/MM/yyyy";
@@ -35,23 +41,38 @@ class NaturalDateParser {
     private final Pattern standardDateTimePattern;
     private final Pattern naturalDatePattern;
     private final Pattern naturalDateTimePattern;
+    private final Pattern relativeDatePattern;
+    private final Pattern relativeDateTimePattern;
 
     private NaturalDateParser() {
-        standardDatePattern = Pattern.compile("(\\d{2}/\\d{2}/\\d{4})");
-        standardDateTimePattern = Pattern.compile("(\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2})");
+        standardDatePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4})");
+        standardDateTimePattern = Pattern.compile("(\\d{2})[/-](\\d{2})[/-](\\d{4}) (\\d{2})[-:](\\d{2})");
 
         // Build Natural Patterns
-        String allMonths = Arrays.stream(MONTH_STRINGS).reduce("", (x, y) -> x + "|" + y);
-        // Trim leading pipe as side effect of reduce operation
-        allMonths = allMonths.substring(1);
+        String allMonths = String.join("|", MONTH_STRINGS);
+        String dayGroup = "(?=.* (\\d{1,2}) )";
+        String yearGroup = "(?=.* (\\d{4}) )";
+        String monthGroup = "(?=.* (" + allMonths + ") )";
+        String timeGroup = "(?=.* (\\d{1,2}):(\\d{1,2}) )";
 
-        String baseDatePattern = "(?=.* (\\d{1,2}) )(?=.* (\\d{4}) )(?=.* (" + allMonths + ") )";
+        String baseDatePattern = dayGroup + yearGroup + monthGroup;
         String anchoredDatePattern = String.format("^%s.*$", baseDatePattern);
         naturalDatePattern = Pattern.compile(anchoredDatePattern, Pattern.CASE_INSENSITIVE);
 
-        String dateTimePattern = baseDatePattern + "(?=.* (\\d{1,2}):(\\d{1,2}) )";
+        String dateTimePattern = baseDatePattern + timeGroup;
         String anchoredDateTimePattern = String.format("^%s.*$", dateTimePattern);
         naturalDateTimePattern = Pattern.compile(anchoredDateTimePattern, Pattern.CASE_INSENSITIVE);
+
+        // Build Relative Patterns
+        String relativeDayPattern = "(?=.* (" + KEYWORD_RELATIVE_DAY + "))";
+        String relativeMonthPattern = dayGroup + "(?=.* (" + KEYWORD_RELATIVE_MONTH + "))";
+        String relativeYearPattern = dayGroup + monthGroup + "(?=.* (" + KEYWORD_RELATIVE_YEAR + "))";
+        String combinedRelativeDatePattern = String.format("^(?:%s|%s|%s).*$", relativeDayPattern,
+                relativeMonthPattern, relativeYearPattern);
+        String combinedRelativeDateTimePattern = String.format("^(?:%s|%s|%s)%s.*$", relativeDayPattern,
+                relativeMonthPattern, relativeYearPattern, timeGroup);
+        relativeDatePattern = Pattern.compile(combinedRelativeDatePattern, Pattern.CASE_INSENSITIVE);
+        relativeDateTimePattern = Pattern.compile(combinedRelativeDateTimePattern, Pattern.CASE_INSENSITIVE);
     }
 
     public static NaturalDateParser getInstance() {
@@ -62,9 +83,13 @@ class NaturalDateParser {
     }
 
     LocalDateTime parseDate(String input) {
+        if (input.equalsIgnoreCase(KEYWORD_POSITIONAL_DAY)) {
+            return LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+        }
+
         Matcher standardMatcher = standardDatePattern.matcher(input);
         if (standardMatcher.matches()) {
-            return parseDateTime(standardMatcher.group(1) + DEFAULT_TIME, FORMAT_DEFAULT_DATETIME);
+            return parseStandardDate(standardMatcher);
         }
 
         // The regex pattern uses spaces to match groups.
@@ -74,13 +99,23 @@ class NaturalDateParser {
         if (naturalMatcher.matches()) {
             return parseNaturalDate(naturalMatcher);
         }
+
+        Matcher relativeMatcher = relativeDatePattern.matcher(paddedInput);
+        if (relativeMatcher.matches()) {
+            return parseRelativeDate(relativeMatcher);
+        }
+
         return null;
     }
 
     LocalDateTime parseDateTime(String input) {
+        if (input.equalsIgnoreCase(KEYWORD_POSITIONAL_DAY)) {
+            return LocalDateTime.now();
+        }
+
         Matcher standardMatcher = standardDateTimePattern.matcher(input);
         if (standardMatcher.matches()) {
-            return parseDateTime(standardMatcher.group(0), FORMAT_DEFAULT_DATETIME);
+            return parseStandardDateTime(standardMatcher);
         }
 
         // The regex pattern uses spaces to match groups.
@@ -89,6 +124,11 @@ class NaturalDateParser {
         Matcher naturalMatcher = naturalDateTimePattern.matcher(paddedInput);
         if (naturalMatcher.matches()) {
             return parseNaturalDateTime(naturalMatcher);
+        }
+
+        Matcher relativeMatcher = relativeDateTimePattern.matcher(paddedInput);
+        if (relativeMatcher.matches()) {
+            return parseRelativeDateTime(relativeMatcher);
         }
 
         return null;
@@ -101,7 +141,7 @@ class NaturalDateParser {
      * @param pattern Pattern format that the date-time string is in.
      * @return A {@link LocalDateTime} that represents the supplied date-time.
      */
-    private LocalDateTime parseDateTime(String dateString, String pattern) {
+    private LocalDateTime parseDateTimePattern(String dateString, String pattern) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
         try {
             return LocalDateTime.parse(dateString, formatter);
@@ -110,33 +150,113 @@ class NaturalDateParser {
         }
     }
 
+    private LocalDateTime parseDateTimePattern(String dateString) {
+        return parseDateTimePattern(dateString, FORMAT_DEFAULT_DATETIME);
+    }
+
+    private LocalDateTime parseDatePattern(String dateString) {
+        return parseDateTimePattern(dateString + DEFAULT_TIME, FORMAT_DEFAULT_DATETIME);
+    }
+
+    private LocalDateTime parseStandardDate(Matcher match) {
+        try {
+            int day = Integer.parseInt(match.group(1));
+            int month = Integer.parseInt(match.group(2));
+            int year = Integer.parseInt(match.group(3));
+
+            return parseDatePattern(String.format("%02d/%02d/%04d", day, month, year));
+        } catch (NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    private LocalDateTime parseStandardDateTime(Matcher match) {
+        try {
+            int day = Integer.parseInt(match.group(1));
+            int month = Integer.parseInt(match.group(2));
+            int year = Integer.parseInt(match.group(3));
+            int hour = Integer.parseInt(match.group(4));
+            int minute = Integer.parseInt(match.group(5));
+
+            return parseDateTimePattern(String.format("%02d/%02d/%04d %02d:%02d", day, month, year,
+                    hour, minute));
+        } catch (NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    private int parseNaturalMonth(String monthText) {
+        String trimmedText = monthText.toLowerCase().trim();
+        return (Arrays.asList(MONTH_STRINGS).indexOf(trimmedText) % 12) + 1;
+    }
+
+    private String parseNaturalDateString(Matcher match) throws NumberFormatException {
+        int day = Integer.parseInt(match.group(1));
+        int year = Integer.parseInt(match.group(2));
+        int month = parseNaturalMonth(match.group(3));
+
+        return String.format("%02d/%02d/%04d", day, month, year);
+    }
+
+    private LocalDateTime addTimeComponent(Matcher match, int start, LocalDateTime date)
+            throws NumberFormatException, DateTimeException {
+        int hour = Integer.parseInt(match.group(start));
+        int minute = Integer.parseInt(match.group(start + 1));
+
+        return date.withHour(hour).withMinute(minute);
+    }
+
     private LocalDateTime parseNaturalDate(Matcher match) {
         try {
-            int year = Integer.parseInt(match.group(2));
-            int day = Integer.parseInt(match.group(1));
-            String monthText = match.group(3).toLowerCase().trim();
-            int month = (Arrays.asList(MONTH_STRINGS).indexOf(monthText) % 12) + 1;
-
-            return parseDate(String.format("%02d/%02d/%04d", day, month, year));
-        } catch (NumberFormatException ex) {
-            System.out.println(ex);
+            return parseDatePattern(parseNaturalDateString(match));
+        } catch (NumberFormatException | DateTimeException ex) {
             return null;
         }
     }
 
     private LocalDateTime parseNaturalDateTime(Matcher match) {
         try {
-            int year = Integer.parseInt(match.group(2));
-            int day = Integer.parseInt(match.group(1));
-            String monthText = match.group(3).toLowerCase().trim();
-            int month = (Arrays.asList(MONTH_STRINGS).indexOf(monthText) % 12) + 1;
+            LocalDateTime date = parseNaturalDate(match);
+            if (date == null) {
+                return null;
+            }
 
-            int hour = Integer.parseInt(match.group(4));
-            int minute = Integer.parseInt(match.group(5));
+            return addTimeComponent(match, 4, date);
+        } catch (NumberFormatException | DateTimeException ex) {
+            return null;
+        }
+    }
 
-            return parseDateTime(String.format("%02d/%02d/%04d %02d:%02d", day, month, year, hour, minute));
-        } catch (NumberFormatException ex) {
-            System.out.println(ex);
+    private LocalDateTime parseRelativeDate(Matcher match) {
+        try {
+            if (match.group(1) != null) {
+                // Tomorrow Case
+                return LocalDateTime.now().plusDays(1);
+            } else if (match.group(3) != null) {
+                // Next Month Case
+                int day = Integer.parseInt(match.group(2));
+                return LocalDateTime.now().plusMonths(1).withDayOfMonth(day);
+            } else if (match.group(6) != null) {
+                // Next Year Case
+                int day = Integer.parseInt(match.group(4));
+                int month = parseNaturalMonth(match.group(5));
+                return LocalDateTime.now().plusYears(1).withMonth(month).withDayOfMonth(day);
+            }
+            return null;
+        } catch (NumberFormatException | NullPointerException | DateTimeException ex) {
+            return null;
+        }
+    }
+
+    private LocalDateTime parseRelativeDateTime(Matcher match) {
+        try {
+            LocalDateTime date = parseRelativeDate(match);
+            if (date == null) {
+                return null;
+            }
+
+            return addTimeComponent(match, 7, date);
+        } catch (NumberFormatException | NullPointerException | DateTimeException ex) {
             return null;
         }
     }
