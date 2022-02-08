@@ -4,8 +4,8 @@ package juke.task;
  * Enum for the status of a task.
  */
 public enum TaskStatus {
-    NOT_DONE("unmark", "\u2610"),
-    DONE("mark", "\u2612");
+    NOT_DONE("unmark", "[ ]"),
+    DONE("mark", "[X]");
 
     /**
      * String for command use.

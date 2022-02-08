@@ -13,7 +13,7 @@ import juke.exception.JukeInvalidCommandException;
  * Manages the user interface involving user input and console output.
  */
 public class Ui {
-    private static final String LINE_PREFIX = "\u232c ";
+    private static final String LINE_PREFIX = "> ";
     private static final String LINE_DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String LINE_INDENT = "    ";

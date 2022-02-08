@@ -41,7 +41,7 @@ public class MarkCommand extends Command {
             switch (this.status) {
             case DONE:
                 if (this.juke.getTaskList().markTask(index)) {
-                    this.result = Result.success(String.format("Marked task \u00ab%s\u00bb as done.",
+                    this.result = Result.success(String.format("Marked task \'%s\' as done.",
                         this.juke.getTaskList().get(index).getDescription()));
                 } else {
                     this.result = Result.error(new JukeInvalidTaskIndexException());
@@ -50,7 +50,7 @@ public class MarkCommand extends Command {
                 break;
             case NOT_DONE:
                 if (this.juke.getTaskList().unmarkTask(index)) {
-                    this.result = Result.success(String.format("Marked task \u00ab%s\u00bb as done.",
+                    this.result = Result.success(String.format("Marked task \'%s\' as done.",
                         this.juke.getTaskList().get(index).getDescription()));
                 } else {
                     this.result = Result.error(new JukeInvalidTaskIndexException());
