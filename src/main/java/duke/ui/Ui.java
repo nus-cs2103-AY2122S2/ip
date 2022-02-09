@@ -2,6 +2,7 @@ package duke.ui;
 
 public class Ui {
 
+    private static final String DIVIDER_LINE = "   __________________________________________________\n";
     public Ui () {
         welcome();
     }
@@ -35,7 +36,7 @@ public class Ui {
      * @return divider line
      */
     public static String createLine() {
-        return  "   __________________________________________________\n";
+        return  DIVIDER_LINE;
     }
 
 }

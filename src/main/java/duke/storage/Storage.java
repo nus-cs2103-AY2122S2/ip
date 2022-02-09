@@ -49,9 +49,4 @@ public class Storage {
         }
     }
 
-    public static String getCurrentFilePath() {
-        return filePath;
-    }
-
-
 }

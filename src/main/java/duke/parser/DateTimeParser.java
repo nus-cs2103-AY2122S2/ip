@@ -9,13 +9,12 @@ public class DateTimeParser {
 
 
     /**
-     * Return a LocalDate object based on the input String
+     * Returns a LocalDate object based on the input String
      *
      * @param date an String giving the date to be parsed
      * @return a LocalDate object from the parsed String.
      * @throws DateTimeParseException
      */
-
     public static LocalDate parseDate(String date) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate parsedDate = LocalDate.parse(date, formatter);
