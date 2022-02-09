@@ -28,12 +28,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
+    /**
+     * Initializes the stage with a welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        String welcomeMessage =  "Hello! I'm Puke, your friendly neighbourhood chatbot! " +
-                "What do you want to do?";
+        String welcomeMessage = "Hello! I'm Puke, your friendly neighbourhood chatbot! "
+                + "What do you want to do?";
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)
@@ -52,7 +55,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         if (input.equals("bye")) {
-            Stage stage  = (Stage) dialogContainer.getScene().getWindow();
+            Stage stage = (Stage) dialogContainer.getScene().getWindow();
             stage.close();
         }
 

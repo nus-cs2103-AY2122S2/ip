@@ -1,13 +1,13 @@
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import puke.ui.MainWindow;
 import puke.Puke;
-
-import java.io.IOException;
+import puke.exception.PukeException;
+import puke.ui.MainWindow;
 
 /**
  * Main class for Puke.
@@ -26,10 +26,16 @@ public class PukeMain extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setPuke(puke);
 
-            stage.setOnCloseRequest(e -> puke.saveTasksToFile());
+            stage.setOnCloseRequest(x -> {
+                try {
+                    puke.saveTasksToFile();
+                } catch (PukeException e) {
+                    e.printStackTrace();
+                }
+            });
 
             stage.show();
-        } catch (IOException e) {
+        } catch (IOException | PukeException e) {
             e.printStackTrace();
         }
     }

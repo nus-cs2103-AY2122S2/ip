@@ -115,43 +115,55 @@ public class TaskList {
             throw new PukeException("I'll need a description for the task..");
         }
 
-        Task t = null;
-
-        if (type.equals("todo")) {
-            t = new Todo(args.trim());
-        } else {
-            String[] taskDetail = args.split("/");
-
-            if (taskDetail.length < 2) {
-                throw new PukeException("I'll need a date/time for this task..");
-            }
-
-            String dateTimeStr = taskDetail[1].split(" ", 2)[1];
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-            try {
-                LocalDateTime dateTime = LocalDateTime.parse(dateTimeStr, formatter);
-
-                if (dateTime.isBefore(LocalDateTime.now())) {
-                    throw new PukeException("Why are you trying to create a task in the past?");
-                }
-
-                if (type.equals("deadline")) {
-                    t = new Deadline(taskDetail[0].trim(), dateTime);
-                } else if (type.equals("event")) {
-                    t = new Event(taskDetail[0].trim(), dateTime);
-                }
-            } catch (DateTimeParseException e) {
-                throw new PukeException("I'll need a valid date/time in the format yyyy-mm-dd hh:mm");
-            }
-        }
-
-        assert t != null;
+        Task t = createTaskObject(type, args);
         tasks.add(t);
 
         return "Got it. I've added this task:\n  " + t
                 + "\nNow you have " + this.getNoOfTasks()
                 + (this.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.";
+    }
+
+    /**
+     * Creates a task object of the correct type based on the user input.
+     *
+     * @param type Type of task to add.
+     * @param args Argument given by the user.
+     * @return Task object created.
+     * @throws PukeException If the format of the user input is invalid.
+     */
+    public Task createTaskObject(String type, String args) throws PukeException {
+        if (type.equals("todo")) {
+            return new Todo(args.trim());
+        }
+
+        Task t = null;
+        String[] taskDetail = args.split("/");
+
+        if (taskDetail.length < 2) {
+            throw new PukeException("I'll need a date/time for this task..");
+        }
+
+        String dateTimeStr = taskDetail[1].split(" ", 2)[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+
+            if (dateTime.isBefore(LocalDateTime.now())) {
+                throw new PukeException("Why are you trying to create a task in the past?");
+            }
+
+            if (type.equals("deadline")) {
+                t = new Deadline(taskDetail[0].trim(), dateTime);
+            } else if (type.equals("event")) {
+                t = new Event(taskDetail[0].trim(), dateTime);
+            }
+        } catch (DateTimeParseException e) {
+            throw new PukeException("I'll need a valid date/time in the format yyyy-mm-dd hh:mm");
+        }
+
+        assert t != null;
+        return t;
     }
 
     /**
