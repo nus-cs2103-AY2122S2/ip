@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import puke.exception.PukeException;
 import puke.ui.MainWindow;
 import puke.Puke;
 
