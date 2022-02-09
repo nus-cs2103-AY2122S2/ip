@@ -6,18 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import bob.command.DeadlineCommand;
-import bob.command.DeleteCommand;
 import bob.command.EventCommand;
 import bob.command.ListCommand;
-import bob.command.MarkCommand;
 import bob.command.ToDoCommand;
 import bob.exception.DeadlineException;
 import bob.exception.EventException;
 import bob.exception.InvalidCommandException;
 import bob.exception.ToDoException;
-
-
-
 
 class ParserTest {
     @Test
@@ -28,10 +23,6 @@ class ParserTest {
         assertTrue(Parser.parse(deadlineInput) instanceof DeadlineCommand);
         String eventInput = "Event seminar /at 2022-01-31T22:59-23:59";
         assertTrue(Parser.parse(eventInput) instanceof EventCommand);
-        String markInput = "mark 1";
-        assertTrue(Parser.parse(markInput) instanceof MarkCommand);
-        String deleteInput = "delete 1";
-        assertTrue(Parser.parse(deleteInput) instanceof DeleteCommand);
         String listInput = "list";
         assertTrue(Parser.parse(listInput) instanceof ListCommand);
     }

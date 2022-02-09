@@ -19,6 +19,7 @@ import bob.exception.DeadlineException;
 import bob.exception.EventException;
 import bob.exception.FindException;
 import bob.exception.InvalidCommandException;
+import bob.exception.InvalidIndexException;
 import bob.exception.ToDoException;
 
 
@@ -58,8 +59,12 @@ public class Parser {
     }
 
     private static MarkCommand parseMark(String input) {
+        String indexString = input.substring(6).trim();
+        if (indexString.isBlank()) {
+            throw new InvalidIndexException();
+        }
         try {
-            int index = Integer.parseInt(input.substring(4).trim()) - 1;
+            int index = Integer.parseInt(indexString) - 1;
             return new MarkCommand(index);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException();
@@ -67,8 +72,12 @@ public class Parser {
     }
 
     private static DeleteCommand parseDelete(String input) {
+        String indexString = input.substring(6).trim();
+        if (indexString.isBlank()) {
+            throw new InvalidIndexException();
+        }
         try {
-            int index = Integer.parseInt(input.substring(6).trim()) - 1;
+            int index = Integer.parseInt(indexString) - 1;
             return new DeleteCommand(index);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException();
