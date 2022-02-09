@@ -22,3 +22,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+## Acknowledgements
+
+- [SE Education JavaFX Tutorial](https://se-education.org/guides/tutorials/javaFx.html)
+- Past projects for CSS inspiration: `hanweic53`
