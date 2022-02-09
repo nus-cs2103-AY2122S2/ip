@@ -3,10 +3,10 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.parser.DukeException;
 import duke.parser.Parser;
-
 
 /**
  * Represents a collection of the tasks stored in the program.
@@ -48,16 +48,80 @@ public class TaskStore {
     public Task addTask(String command, String args) throws DukeException, DateTimeParseException {
         Task t = this.createTask(command, args);
         assert t != null : "Assertion failed on TaskStore.addTask(): Task should be created";
-        this.tasks.add(t);
+
+        this.addTask(t);
         return t;
     }
 
-    public void addTask(Task t) {
+    /**
+     * Adds task to tasklist. If the task is a <code>Timeable</code>, it will check if there are clashing dates first
+     * and an DukeException is thrown if there is.
+     * @param t The task to add to the tasklist
+     * @throws DukeException If the task is a <code>Timeable</code> and it clashes with an existing task in the list
+     */
+    public void addTask(Task t) throws DukeException {
+        if (t instanceof Timeable) {
+            if (this.hasClashingDate((Timeable) t)) {
+                throw new DukeException("There is a task that falls on this day.");
+            }
+        }
+
         this.tasks.add(t);
     }
 
-    public void removeTask(Task t) {
-        this.tasks.remove(t);
+    /**
+     * Removes the tasks specified in the arguments. If an argument is invalid (not a number or not in range), it will
+     * be skipped.
+     * @param args The arguments in the form of a String array.
+     * @return The tasks that were deleted.
+     */
+    public ArrayList<Task> removeTasks(String[] args) {
+        ArrayList<Integer> indexList = this.getIndices(args);
+
+        // Sorts the indices in descending order to prevent false index deletion
+        indexList.sort(Collections.reverseOrder());
+
+        ArrayList<Task> deletedTasks = new ArrayList<>();
+        for (int index: indexList) {
+            Task deletedTask = this.tasks.remove(index);
+            deletedTasks.add(deletedTask);
+        }
+
+        return deletedTasks;
+    }
+
+    public void removeAllTasks() {
+        this.tasks.clear();
+    }
+
+    public void markAllTasks(boolean isDone) {
+        this.tasks.forEach((Task t) -> t.markTask(isDone));
+    }
+
+    /**
+     * Marks the specified tasks in args as done or undone depending on the command.
+     * If an argument is invalid (not a number or not in range), it will be skipped.
+     * @param args The arguments in the form of a String array.
+     * @param isDone Indicator to mark the task as done or undone.
+     * @return The tasks that were marked to be done or undone.
+     */
+    public ArrayList<Task> markTasks(String[] args, boolean isDone) {
+        ArrayList<Integer> indexList = this.getIndices(args);
+
+        ArrayList<Task> markedTasks = new ArrayList<>();
+        for (int index: indexList) {
+            Task markedTask = this.tasks.get(index);
+
+            // Ignore marking if task is already done/not done
+            if (markedTask.getIsDone() == isDone) {
+                continue;
+            }
+
+            markedTask.markTask(isDone);
+            markedTasks.add(markedTask);
+        }
+
+        return markedTasks;
     }
 
     /**
@@ -89,6 +153,43 @@ public class TaskStore {
         } else {
             return String.format("Here are your tasks on %s\n%s", dateString, tasksToPrint);
         }
+    }
+
+    /**
+     * Checks the task list of there are any clashing dates with another task
+     * @param t The timeable task to be checked
+     * @return true if there exists a task where the dates are the same. Otherwise, return false.
+     */
+    public boolean hasClashingDate(Timeable t) {
+        for (Task task : this.tasks) {
+            if (task instanceof Timeable) {
+                Timeable timeableTask = (Timeable) task;
+
+                if (timeableTask.isSameDate(t.getDate())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Integer> getIndices(String[] args) {
+        ArrayList<Integer> indexList = new ArrayList<>();
+
+        for (String arg : args) {
+            // Catch invalid numbers (non-digital characters or index out of range)
+            try {
+                int index = Integer.parseInt(arg) - 1;
+                if (index < 0 || index >= this.tasks.size()) {
+                    continue;
+                }
+                indexList.add(index);
+            } catch (NumberFormatException e) {
+                continue;
+            }
+        }
+
+        return indexList;
     }
 
     /**

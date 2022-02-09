@@ -1,8 +1,10 @@
 package duke;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 import duke.io.Storage;
+import duke.parser.DukeException;
 import duke.parser.Parser;
 import duke.task.TaskStore;
 import duke.ui.MainWindow;
@@ -32,6 +34,9 @@ public class Duke extends Application {
             ui.printError("Unable to load file.");
         } catch (DateTimeParseException e) {
             ui.printError("Sorry I don't understand that format. Make sure its in yyyy-mm-dd.");
+        } catch (DukeException e) {
+            String checkFile = "\nPlease check your import file if there are tasks that fall on the same day";
+            ui.printError(e.getMessage().concat(checkFile));
         }
     }
 

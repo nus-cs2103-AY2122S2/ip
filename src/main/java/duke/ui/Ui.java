@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.task.TaskStore;
 import javafx.scene.image.Image;
@@ -9,9 +11,9 @@ import javafx.scene.layout.VBox;
  * Represents an interface which will display messages to the user based on the inputs.
  */
 public class Ui {
-    public static final String TASK_MARKED = "Nice! I marked this task as done:\n %s";
-    public static final String TASK_UNMARKED = "OK, I've marked this task as not done yet:\n %s";
-    public static final String TASK_DELETE = "Noted. I've removed this task:\n\t %s\n";
+    public static final String TASK_MARKED = "Nice! I marked the %d task(s) as done:\n %s";
+    public static final String TASK_UNMARKED = "OK, I've marked %d task(s) as not done:\n %s";
+    public static final String TASK_DELETE = "Noted. I've removed the %d task(s): \n%s";
     public static final String TASK_ADD = "Got it. I've added this task:\n\t %s\n";
     public static final String TASKS_SIZE = "Now you have %d tasks in the list";
     public static final String BYE = "Bye. Hope to see you again soon!";
@@ -67,25 +69,30 @@ public class Ui {
     }
 
     /**
-     * Generates a dialog box when a task has been deleted. This will also display the remaining tasks in the list.
-     * @param task The task that has been deleted
-     * @param tasks The task list that contains the remaining tasks
+     * Prepares the summary of tasks that were deleted and displays them to the user.
+     * @param deletedTasks The tasks that were deleted.
+     * @param tasks The task list which was deleted.
      */
-    public void printTaskDelete(Task task, TaskStore tasks) {
+    public void printTaskDelete(ArrayList<Task> deletedTasks, TaskStore tasks) {
+        int numTasksDeleted = deletedTasks.size();
         String template = TASK_DELETE + this.getTaskSizeString(tasks);
-        String taskDeleteMessage = String.format(template, task, tasks.getSize());
+        String taskList = generateTaskInList(deletedTasks);
+        String taskDeleteMessage = String.format(template, numTasksDeleted, taskList);
+
         this.addDukeDialogBox(taskDeleteMessage);
     }
 
     /**
-     * Generates a dialog when a task has been marked as done/undone. This will also display all tasks in the list.
-     * @param t The task that has been marked as done/undone
+     * Prepares the summary fo tasks that were marked as done or undone and displays them to the user.
+     * @param tasks The tasks that were marked a done or undone.
+     * @param isDone Indicator of the task being marked as done or undone.
      */
-    public void printTaskMarking(Task t) {
-        if (t.getIsDone()) {
-            this.addDukeDialogBox(String.format(TASK_MARKED, t));
+    public void printTaskMarking(ArrayList<Task> tasks, boolean isDone) {
+        String taskList = this.generateTaskInList(tasks);
+        if (isDone) {
+            this.addDukeDialogBox(String.format(TASK_MARKED, tasks.size(), taskList));
         } else {
-            this.addDukeDialogBox(String.format(TASK_UNMARKED, t));
+            this.addDukeDialogBox(String.format(TASK_UNMARKED, tasks.size(), taskList));
         }
     }
 
@@ -95,5 +102,19 @@ public class Ui {
 
     public void addDukeDialogBox(String message) {
         this.container.getChildren().addAll(DialogBox.getDukeDialog(message, dukeImage));
+    }
+
+    /**
+     * Generates a numbered list from the task list.
+     * @param tasklist The task list to be generated as the numbered list.
+     * @return The generated numbered task list.
+     */
+    public String generateTaskInList(ArrayList<Task> tasklist) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasklist.size(); i++) {
+            String taskItem = String.format("\t%d.%s\n", (i + 1), tasklist.get(i).toString());
+            sb.append(taskItem);
+        }
+        return sb.toString();
     }
 }
