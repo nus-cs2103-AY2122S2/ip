@@ -40,7 +40,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         String replyMessage;
-        if (fullCommandArr[1].equalsIgnoreCase("all")) {
+        if (fullCommand.substring(6).isBlank()) { // no argument
+            throw new DeleteException("empty");
+        } else if (fullCommandArr[1].equalsIgnoreCase("all")) {
             if (tasks.isEmpty()) {
                 throw new DeleteException("list_empty");
             }
@@ -48,9 +50,7 @@ public class DeleteCommand extends Command {
             replyMessage = ui.deleteAllMessage();
         } else {
             try {
-                if (fullCommand.substring(6).isBlank()) { // no argument
-                    throw new DeleteException("empty");
-                } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) { // out of bounds
+                if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) { // out of bounds
                     throw new DeleteException("OOB");
                 } else if (Integer.parseInt(fullCommandArr[1]) < 1) {
                     throw new DeleteException("negative");

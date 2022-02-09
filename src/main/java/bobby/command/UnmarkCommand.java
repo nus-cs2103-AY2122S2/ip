@@ -39,8 +39,7 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        ui.printLongLine();
-        if (fullCommand.substring(4).isBlank()) { // no argument
+        if (fullCommand.substring(6).isBlank()) { // no argument
             throw new MarkException("empty");
         } else if (Character.isLetter(fullCommand.charAt(7))) { // contains letter instead of number
             throw new MarkException("letter");
