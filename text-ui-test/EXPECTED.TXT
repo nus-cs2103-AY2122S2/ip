@@ -1,7 +1,89 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello I'm Duke!
+What can I do for you?
+    _________________________
+    The following new task has been added:
+    [T][ ] first todo
+    You now have 1 tasks!
+    _________________________
+
+    _________________________
+    The following new task has been added:
+    [T][ ] second todo
+    You now have 2 tasks!
+    _________________________
+
+    _________________________
+    1.[T][ ] first todo
+    2.[T][ ] second todo
+    _________________________
+
+    _________________________
+    Congrats! The following task was marked as done:
+    [T][X] first todo
+    _________________________
+
+    _________________________
+    1.[T][X] first todo
+    2.[T][ ] second todo
+    _________________________
+
+    _________________________
+    The following new task has been added:
+    [E][ ] first event (at: first time)
+    You now have 3 tasks!
+    _________________________
+
+    _________________________
+    Sorry, the following problem has occurred:
+    Invalid date format: Dates should be in DD/MM/YYYY
+    _________________________
+
+    _________________________
+    Congrats! The following task was marked as done:
+    [T][X] second todo
+    _________________________
+
+    _________________________
+    1.[T][X] first todo
+    2.[T][X] second todo
+    3.[E][ ] first event (at: first time)
+    _________________________
+
+    _________________________
+    Noted. The following task has been deleted:
+    [T][X] second todo
+    You now have 2 tasks!
+    _________________________
+
+    _________________________
+    1.[T][X] first todo
+    2.[E][ ] first event (at: first time)
+    _________________________
+
+    _________________________
+    The following new task has been added:
+    [D][ ] first deadline (by: 01 Jan)
+    You now have 3 tasks!
+    _________________________
+
+    _________________________
+    1.[T][X] first todo
+    2.[E][ ] first event (at: first time)
+    3.[D][ ] first deadline (by: 01 Jan)
+    _________________________
+
+    _________________________
+    The following task was marked undone:
+    [T][ ] first todo
+    _________________________
+
+    _________________________
+    1.[T][ ] first todo
+    2.[E][ ] first event (at: first time)
+    3.[D][ ] first deadline (by: 01 Jan)
+    _________________________
+
+    _________________________
+    Goodbye!
+    _________________________
 
