@@ -11,7 +11,7 @@ public class Tag {
      * corresponds to an action represented by a String.
      * E.g., <code>tag 2 #fun</code>.
      *
-     * @param tag
+     * @param tag the String to be added as a Tag.
      */
     public Tag(String tag) {
         this.tag = tag;
