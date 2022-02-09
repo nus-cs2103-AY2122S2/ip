@@ -1,7 +1,8 @@
 package duke;
 
-import duke.task.Task;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -11,7 +12,7 @@ public class TaskList {
     }
 
     public TaskList() {
-      
+
     }
 
     /**
@@ -49,7 +50,13 @@ public class TaskList {
     public void unmarkTask(int n) {
         tasks.get(n).unmark();
     }
-    
+
+    /**
+     * Finds tasks which match a specified string.
+     *
+     * @param str String to match.
+     * @return Matching tasks.
+     */
     public TaskList find(String str) {
         TaskList matchingTasks = new TaskList();
         for (Task task : tasks) {

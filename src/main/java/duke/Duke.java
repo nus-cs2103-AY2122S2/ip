@@ -1,22 +1,18 @@
 package duke;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.command.Command;
-import java.lang.Boolean;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Duke {
-    
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initializes task list and reads tasks from storage.
+     *
+     * @param filePath File path to read task data from.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +24,13 @@ public class Duke {
         }
     }
 
+    public Duke() {
+        this("../data/duke.txt");
+    }
+
+    /**
+     * Runs the application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -46,8 +49,21 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates and runs Duke instance with a specified file path.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     * @param input User input.
+     * @return Duke's response to user.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
 }
