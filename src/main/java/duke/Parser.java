@@ -45,6 +45,8 @@ public class Parser {
                     taskList.mark(command.substring(7), false);
                 } else if (command.startsWith("delete ")) {
                     taskList.delete(command.substring(7));
+                } else if (command.startsWith("find ")) {
+                    taskList.find(command.substring(5));
                 } else if (command.startsWith("bye")) {
                     System.out.println(INDENT + "Bye. Hope to see you again soon!");
                     break;

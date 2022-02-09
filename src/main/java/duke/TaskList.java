@@ -33,7 +33,7 @@ public class TaskList {
     /**
      * Adds a Todo task by user command.
      *
-     * @param s information of the task to add.
+     * @param taskInfo information of the task to add.
      */
     public void addTodo(String taskInfo) {
         Todo todo = new Todo(taskInfo);
@@ -44,7 +44,7 @@ public class TaskList {
     /**
      * Adds a Deadline task by user command.
      *
-     * @param s information of the task to add.
+     * @param taskInfo information of the task to add.
      */
     public void addDdl(String taskInfo) {
         int i = taskInfo.indexOf(" /by ");
@@ -60,7 +60,7 @@ public class TaskList {
     /**
      * Adds an Event task by user command.
      *
-     * @param s information of the task to add.
+     * @param taskInfo information of the task to add.
      */
     public void addEvt(String taskInfo) {
         int i = taskInfo.indexOf(" /at ");
@@ -106,8 +106,8 @@ public class TaskList {
     /**
      * Changes the completion state of one task.
      *
-     * @param index index of the task to change.
-     * @param done state of the task to change to.
+     * @param command other information of the marking operation.
+     * @param isDone state of the task to change to.
      */
     public void mark(String command, boolean isDone) {
         Scanner markInfo = new Scanner(command);
@@ -130,7 +130,7 @@ public class TaskList {
     /**
      * Deletes one task from taskList.
      *
-     * @param index index of task to delete. Starts from 0.
+     * @param command other information of the deleting operation.
      */
     public void delete(String command) {
         Scanner deleteInfo = new Scanner(command);
