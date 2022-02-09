@@ -160,12 +160,23 @@ public class Ui {
         return searchesMessage;
     }
 
+    /**
+     * Returns the message of the list of commands for this chatbot.
+     * @return The application guide.
+     */
     public String messageForHelp() {
         return Stream.of(Instruction.values())
                 .map(Instruction::get)
                 .collect(Collectors.joining("\n\n"));
     }
 
+    /**
+     * Returns the message when an alias is added.
+     * @param hasUpdated Whether the <code>commandDictionary</code> is updated.
+     * @param alias The alias.
+     * @param command The command.
+     * @return The message of whether an alias has been added.
+     */
     public String messageForMapping(boolean hasUpdated, String alias, String command) {
         String successMapping = "Nice! Your alias for " + command + " is " + alias;
         String failureMapping = "Oops!! Your alias does not work!";

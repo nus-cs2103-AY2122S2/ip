@@ -3,20 +3,23 @@ package dazz;
 import java.util.HashMap;
 
 public class CommandMapper {
-    private final static String ALIAS = "alias";
-    private final static String BYE = "bye";
-    private final static String DEADLINE = "deadline";
-    private final static String DELETE = "delete";
-    private final static String EVENT = "event";
-    private final static String FIND = "find";
-    private final static String HELP = "help";
-    private final static String LIST = "list";
-    private final static String MARK = "mark";
-    private final static String UNMARK = "unmark";
-    private final static String TODO = "todo";
+    private static final String ALIAS = "alias";
+    private static final String BYE = "bye";
+    private static final String DEADLINE = "deadline";
+    private static final String DELETE = "delete";
+    private static final String EVENT = "event";
+    private static final String FIND = "find";
+    private static final String HELP = "help";
+    private static final String LIST = "list";
+    private static final String MARK = "mark";
+    private static final String UNMARK = "unmark";
+    private static final String TODO = "todo";
 
     private static final HashMap<String, String> commandDictionary = new HashMap<>();
 
+    /**
+     * Loads all the valid command into the <code>commandDictionary</code>
+     */
     public static void loadExistingMapping() {
         commandDictionary.put(ALIAS, ALIAS);
         commandDictionary.put(BYE, BYE);
@@ -31,10 +34,21 @@ public class CommandMapper {
         commandDictionary.put(TODO, TODO);
     }
 
+    /**
+     * Gets the command that the alias maps to.
+     * @param key The alias.
+     * @return The command i.e todo, deadline etc.
+     */
     public static String getCommand(String key) {
         return commandDictionary.get(key);
     }
 
+    /**
+     * Creates a mapping to valid commands.
+     * @param newAlias The alias.
+     * @param command The command i.e todo, deadline etc.
+     * @return true if there is no such alias that exists.
+     */
     public static boolean putAlias(String newAlias, String command) {
         boolean hasAlias = commandDictionary.containsKey(newAlias);
         if (hasAlias) {
