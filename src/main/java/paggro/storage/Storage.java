@@ -81,54 +81,54 @@ public class Storage {
                 NotableDate nDate;
                 Task t;
                 switch (type) {
-                    case 'T':
-                        details = taskString.split(" \\| ", 3);
-                        isDone = Boolean.parseBoolean(details[1]);
-                        des = details[2];
-                        tasks.add(new ToDo(des, isDone));
-                        break;
-                    case 'E':
-                        details = taskString.split(" \\| ");
-                        isDone = Boolean.parseBoolean(details[1]);
-                        des = details[2];
-                        lDate = LocalDate.parse(details[3]);
-                        if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
-                            nDate = new NotableDate(lDate);
-                            dateMap.put(lDate, nDate);
-                        } else {
-                            nDate = dateMap.get(lDate);
-                        }
-                        if (details.length > 4) {
-                            lTime = LocalTime.parse(details[4]);
-                            t = new Event(des, nDate, lTime, isDone);
-                        } else {
-                            t = new Event(des, nDate, isDone);
-                        }
-                        tasks.add(t);
-                        nDate.addTask(t);
-                        break;
-                    case 'D':
-                        details = taskString.split(" \\| ");
-                        isDone = Boolean.parseBoolean(details[1]);
-                        des = details[2];
-                        lDate = LocalDate.parse(details[3]);
-                        if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
-                            nDate = new NotableDate(lDate);
-                            dateMap.put(lDate, nDate);
-                        } else {
-                            nDate = dateMap.get(lDate);
-                        }
-                        if (details.length > 4) {
-                            lTime = LocalTime.parse(details[4]);
-                            t = new Deadline(des, nDate, lTime, isDone);
-                        } else {
-                            t = new Deadline(des, nDate, isDone);
-                        }
-                        tasks.add(t);
-                        nDate.addTask(t);
-                        break;
-                    default:
-                        throw new PaggroException(FOUR_SPACE + "File format error!");
+                case 'T':
+                    details = taskString.split(" \\| ", 3);
+                    isDone = Boolean.parseBoolean(details[1]);
+                    des = details[2];
+                    tasks.add(new ToDo(des, isDone));
+                    break;
+                case 'E':
+                    details = taskString.split(" \\| ");
+                    isDone = Boolean.parseBoolean(details[1]);
+                    des = details[2];
+                    lDate = LocalDate.parse(details[3]);
+                    if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
+                        nDate = new NotableDate(lDate);
+                        dateMap.put(lDate, nDate);
+                    } else {
+                        nDate = dateMap.get(lDate);
+                    }
+                    if (details.length > 4) {
+                        lTime = LocalTime.parse(details[4]);
+                        t = new Event(des, nDate, lTime, isDone);
+                    } else {
+                        t = new Event(des, nDate, isDone);
+                    }
+                    tasks.add(t);
+                    nDate.addTask(t);
+                    break;
+                case 'D':
+                    details = taskString.split(" \\| ");
+                    isDone = Boolean.parseBoolean(details[1]);
+                    des = details[2];
+                    lDate = LocalDate.parse(details[3]);
+                    if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
+                        nDate = new NotableDate(lDate);
+                        dateMap.put(lDate, nDate);
+                    } else {
+                        nDate = dateMap.get(lDate);
+                    }
+                    if (details.length > 4) {
+                        lTime = LocalTime.parse(details[4]);
+                        t = new Deadline(des, nDate, lTime, isDone);
+                    } else {
+                        t = new Deadline(des, nDate, isDone);
+                    }
+                    tasks.add(t);
+                    nDate.addTask(t);
+                    break;
+                default:
+                    throw new PaggroException(FOUR_SPACE + "File format error!");
                 }
             }
             return new Lister(tasks, dateMap);

@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -14,6 +13,9 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String WELCOME_MESSAGE = "    What do you want... =.=";
+    private static final String WINDOW_CLOSING = "    Window closing in 3 seconds...";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -24,9 +26,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private PaggroBot paggro;
-
-    private static final String WELCOME_MESSAGE = "    What do you want... =.=";
-    private static final String WINDOW_CLOSING = "    Window closing in 3 seconds...";
 
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
