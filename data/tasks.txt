@@ -1,4 +1,2 @@
-[D][ ] task (by: 10/2/22 03:30)
-[D][X] task (by: 11/3/22 04:20)
-[T][ ] party
-[E][X] shower (at: 12/12/20 03:45)
+[E][ ] tutorial (at: 5/2/22 12:00)
+[T][ ] take screenshot

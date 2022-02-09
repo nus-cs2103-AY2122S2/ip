@@ -42,12 +42,14 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
+            assert filepath != null;
             File file = new File(filepath.toString());
             Scanner scanner = new Scanner(file);
             ArrayList<Task> tasks = new ArrayList<>();
 
             while (scanner.hasNextLine()) {
                 String strTask = scanner.nextLine();
+                assert !strTask.isBlank();
                 boolean status = (strTask.charAt(4) == 'X');
 
                 if (strTask.startsWith("[T")) {
@@ -90,6 +92,7 @@ public class Storage {
      * @throws FileSaveException If the tasks cannot be stored in the respective file.
      */
     public void write(ArrayList<Task> tasks) throws FileSaveException {
+        assert filepath != null;
         File directory = new File(filepath.toString()).getParentFile();
 
         if (!directory.exists()) {
