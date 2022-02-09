@@ -1,5 +1,5 @@
-import duke.TaskList;
-import duke.Todo;
+import jarvis.TaskList;
+import jarvis.Todo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

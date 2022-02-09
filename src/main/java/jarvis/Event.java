@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 /**
  * Represents an event with a venue.

@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import java.util.LinkedList;
 

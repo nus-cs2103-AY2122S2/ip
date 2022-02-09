@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -56,6 +56,7 @@ public class Storage {
                 String type = scanner.next();
                 String status = scanner.next();
                 String description = scanner.nextLine().strip();
+
                 switch (type) {
                 case "[T]":
                     Todo task = new Todo(description);
@@ -100,7 +101,7 @@ public class Storage {
     }
 
     /**
-     * Creates a new Taks object which is then stored by being written to the todo list file.
+     * Creates a new Task object which is then stored by being written to the todo list file.
      *
      * @param task Task object to be stored into the todo list file
      */

@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @version 1.0
  * @since 2022-02-05
  */
-public class Duke {
+public class JarvisAI {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -21,7 +21,7 @@ public class Duke {
      * @param directoryPath path to the directory which the todo list is stored
      * @param filePath path to the todo list file
      */
-    public Duke(String directoryPath, String filePath) {
+    public JarvisAI(String directoryPath, String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(directoryPath, filePath);
         try {
@@ -38,7 +38,7 @@ public class Duke {
      * @param args Any arguments supplied by the user
      */
     public static void main(String[] args) {
-        new Duke("./data","./data/duke.txt").run();
+        new JarvisAI("./data","./data/duke.txt").run();
     }
 
     /**

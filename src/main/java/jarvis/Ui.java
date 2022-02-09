@@ -1,4 +1,4 @@
-package duke;
+package jarvis;
 
 /**
  * The Ui programs implements an application that simply displays responses given a user input.
