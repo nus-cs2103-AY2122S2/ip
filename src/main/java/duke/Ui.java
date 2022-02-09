@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 class Ui {
     private static final String DIVIDER = "=======================================";
     
@@ -30,6 +32,22 @@ class Ui {
                 String index = String.valueOf(i + 1);
                 listMessage =  listMessage + index + "." 
                         + tasklist.getTaskArray().get(i) + "\n";
+            }
+            System.out.println(listMessage);
+            System.out.println(DIVIDER);
+        }
+    }
+
+    public void showFindMessage(ArrayList<Task> taskArray) {
+        if (taskArray.isEmpty()) {
+            String listMessage = "There are no matching tasks in your list.";
+            System.out.println(listMessage);
+            System.out.println(DIVIDER);
+        } else {
+            String listMessage = "Here are the matching tasks in your list: \n";
+            for (int i = 0; i < taskArray.size(); i++) {
+                String index = String.valueOf(i + 1);
+                listMessage =  listMessage + index + "." + taskArray.get(i) + "\n";
             }
             System.out.println(listMessage);
             System.out.println(DIVIDER);

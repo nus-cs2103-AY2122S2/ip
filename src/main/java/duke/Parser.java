@@ -114,9 +114,15 @@ class Parser {
                 }
                 break;
 
+            case("find"):
+                String findCondition = "find ";
+                String stringSliced = input.substring(findCondition.length(), input.length());
+                ui.showFindMessage(taskList.findTask(stringSliced));
+                break;
+
             case("bye"):
                 ui.showGoodbyeMessage();
-                break;             
+                break;
 
             default:
                 ui.showDefaultMessage();

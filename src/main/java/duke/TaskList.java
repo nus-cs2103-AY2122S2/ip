@@ -19,6 +19,17 @@ class TaskList {
         this.getTaskArray().remove(index);
     }
 
+    public ArrayList<Task> findTask(String input) {
+        ArrayList<Task> containsInput = new ArrayList<Task>();
+        for (Task task: this.getTaskArray()) {
+            if (task.toString().contains(input)) {
+                containsInput.add(task);
+            }
+        }
+        return containsInput;
+    }
+
+
     public void showTask() {
         Ui.showListMessage(this);
     }
