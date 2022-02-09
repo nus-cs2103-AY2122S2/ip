@@ -1,6 +1,2 @@
-DEADLINE shower false 21/12/2022-12:21
-DEADLINE read true 21/11/1999-10:03
-DEADLINE eat false 20/01/1000-19:30
-TODO sadasd true
-TODO sleep true
-EVENT sleep false 11/11/1111-11:11
+MONEYCHANGE 3.00 false john
+MONEYCHANGE -2.00 true john

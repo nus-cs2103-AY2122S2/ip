@@ -25,6 +25,8 @@ public class Ui {
         "'todo [some activity]' - add a todo",
         "'deadline [some task] /by [dd/mm/yyyy-hh:mm]' - add a deadline",
         "'event [some event] /at [dd/mm/yyyy-hh:mm]' - add an event",
+        "'lend [some amount] /to [name]' - add an amount of money to be collected",
+        "'borrow [some amount] /from [name]' - add an amount of money to pay",
         "'list'- view all tasks",
         "'find [keyword]' - search tasks by keyword",
         "'mark [task number]' - mark a task as done",

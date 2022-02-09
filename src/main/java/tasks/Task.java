@@ -14,7 +14,8 @@ public abstract class Task {
     public enum TaskType {
         TODO,
         EVENT,
-        DEADLINE
+        DEADLINE,
+        MONEYCHANGE
     }
     private boolean isDone = false;
 
@@ -63,6 +64,9 @@ public abstract class Task {
             break;
         case DEADLINE:
             task = new Deadline(details[1], details[3]);
+            break;
+        case MONEYCHANGE:
+            task = new MoneyChange(Float.parseFloat(details[1]), details[3]);
             break;
         default:
             throw new DukeException("Invalid task string!");

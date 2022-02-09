@@ -3,6 +3,7 @@ package user;
 import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
+import tasks.MoneyChange;
 import tasks.Task;
 import tasks.Todo;
 
@@ -99,7 +100,7 @@ public class Parser {
      * @throws DukeException If the user's input is invalid.
      */
     public Task handleTodo(String taskString) throws DukeException {
-        if (taskString.length() <= 5) {
+        if (taskString.length() <= 5) { // length of 'todo '
             throw new DukeException(Task.BAD_DESCRIPTION_ERROR_STRING);
         } else {
             String taskName = taskString.substring(5); // "todo " has 5 characters
@@ -115,7 +116,7 @@ public class Parser {
      * @throws DukeException If the user's input is invalid.
      */
     public Task handleDeadline(String taskString) throws DukeException {
-        if (taskString.length() <= 9) {
+        if (taskString.length() <= 9) { // length of 'deadline '
             throw new DukeException(Task.BAD_DESCRIPTION_ERROR_STRING);
         } else {
             int byIdx = taskString.indexOf("/by");
@@ -141,19 +142,73 @@ public class Parser {
      * @throws DukeException If the user's input is invalid.
      */
     public Task handleEvent(String taskString) throws DukeException {
-        if (taskString.length() <= 6) {
+        if (taskString.length() <= 6) { // length of 'event '
             throw new DukeException(Task.BAD_DESCRIPTION_ERROR_STRING);
         } else {
             int atIdx = taskString.indexOf("/at");
             if (atIdx <= 6) { // either -1, or 0 to 6
                 throw new DukeException(Event.WRONG_FORMAT_ERROR_STRING);
             } else {
-                String taskName = taskString.substring(6, atIdx - 1); // "event " has 9 characters
+                String taskName = taskString.substring(6, atIdx - 1); // "event " has 6 characters
                 try {
                     String taskTime = taskString.substring(atIdx + 4); // "/at " has 4 characters
                     return new Event(taskName, taskTime);
                 } catch (StringIndexOutOfBoundsException err) {
                     throw new DukeException(Event.WRONG_FORMAT_ERROR_STRING);
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns an Event task given the user's input to lend someone money.
+     *
+     * @param taskString The user's input.
+     * @return The Event task.
+     * @throws DukeException If the user's input is invalid.
+     */
+    public Task handleLend(String taskString) throws DukeException {
+        if (taskString.length() <= 5) { // length of 'lend '
+            throw new DukeException(Task.BAD_DESCRIPTION_ERROR_STRING);
+        } else {
+            int toIdx = taskString.indexOf("/to");
+            if (toIdx <= 5) { // either -1, or 0 to 5
+                throw new DukeException(MoneyChange.WRONG_LEND_FORMAT_ERROR_STRING);
+            } else {
+                String amount = taskString.substring(5, toIdx - 1); // "lend " has 9 characters
+                float amountFloat = Float.parseFloat(amount);
+                try {
+                    String person = taskString.substring(toIdx + 4); // "/to " has 4 characters
+                    return new MoneyChange(-amountFloat, person);
+                } catch (StringIndexOutOfBoundsException err) {
+                    throw new DukeException(MoneyChange.WRONG_LEND_FORMAT_ERROR_STRING);
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns an Event task given the user's input to borrow money.
+     *
+     * @param taskString The user's input.
+     * @return The Event task.
+     * @throws DukeException If the user's input is invalid.
+     */
+    public Task handleBorrow(String taskString) throws DukeException {
+        if (taskString.length() <= 7) { // length of 'borrow '
+            throw new DukeException(Task.BAD_DESCRIPTION_ERROR_STRING);
+        } else {
+            int fromIdx = taskString.indexOf("/from");
+            if (fromIdx <= 7) { // either -1, or 0 to 7
+                throw new DukeException(MoneyChange.WRONG_BORROW_FORMAT_ERROR_STRING);
+            } else {
+                String amount = taskString.substring(7, fromIdx - 1); // "borrow " has 9 characters
+                float amountFloat = Float.parseFloat(amount);
+                try {
+                    String person = taskString.substring(fromIdx + 6); // "/from " has 6 characters
+                    return new MoneyChange(amountFloat, person);
+                } catch (StringIndexOutOfBoundsException err) {
+                    throw new DukeException(MoneyChange.WRONG_LEND_FORMAT_ERROR_STRING);
                 }
             }
         }
@@ -174,6 +229,10 @@ public class Parser {
             t = handleDeadline(taskString);
         } else if (taskString.startsWith("event ")) {
             t = handleEvent(taskString);
+        } else if (taskString.startsWith("lend ")) {
+            t = handleLend(taskString);
+        } else if (taskString.startsWith("borrow ")) {
+            t = handleBorrow(taskString);
         } else {
             throw new DukeException(Task.UNKNOWN_INPUT_ERROR_STRING);
         }
