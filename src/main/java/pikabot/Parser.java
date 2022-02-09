@@ -38,25 +38,31 @@ public class Parser {
      */
     public static Command parseCommand(String[] inputArr) {
         switch(inputArr[0].toLowerCase(Locale.ROOT)) {
-        case "deadline": {
+        case "deadline":
+        case "d": {
             return new DeadlineCommand(inputArr);
         }
-        case "delete": {
+        case "delete":
+        case "del": {
             return new DeleteCommand(inputArr);
         }
-        case "event": {
+        case "event":
+        case "e": {
             return new EventCommand(inputArr);
         }
         case "list": {
             return new ListCommand(inputArr);
         }
-        case "mark": {
+        case "mark":
+        case "m": {
             return new MarkCommand(inputArr);
         }
-        case "todo": {
+        case "todo":
+        case "t": {
             return new TodoCommand(inputArr);
         }
-        case "unmark": {
+        case "unmark":
+        case "um": {
             return new UnmarkCommand(inputArr);
         }
         case "find": {
