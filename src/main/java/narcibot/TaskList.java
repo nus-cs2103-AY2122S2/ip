@@ -12,6 +12,7 @@ public class TaskList {
     private ArrayList<Task> list;
 
     public TaskList(BufferedReader bufferedReader) throws IOException {
+        assert(bufferedReader != null);
         list = new ArrayList<>();
         String line = bufferedReader.readLine();
         while (line != null) {
@@ -39,6 +40,7 @@ public class TaskList {
      * @throws IOException
      */
     public void store(FileWriter fileWriter) throws IOException {
+        assert(fileWriter != null);
         for (Task task: list) {
             fileWriter.write(task.save() + "\n");
         }

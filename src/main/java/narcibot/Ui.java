@@ -57,6 +57,7 @@ public class Ui {
      * @param size
      */
     public void task(int size) {
+        assert(size > 0);
         System.out.println("I have added this task cause you won't remember it.");
         System.out.println("You now have " + size + " tasks");
     }
