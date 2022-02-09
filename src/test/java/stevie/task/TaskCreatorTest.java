@@ -22,9 +22,4 @@ class TaskCreatorTest {
             // Should not receive any exceptions
         }
     }
-
-    @Test
-    void charToType() throws TaskException {
-        assertEquals(TaskCreator.charToType('E'), TaskType.Event);
-    }
 }
