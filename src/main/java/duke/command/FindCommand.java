@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -26,8 +27,8 @@ public class FindCommand extends Command {
      * @param ui The ui of the program.
      * @param storage The storage of the program.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String result = taskList.findTasksWithKeyword(this.keyword);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String result = taskList.getTasksWithKeyword(this.keyword);
         ui.setResponse(result);
     }
 

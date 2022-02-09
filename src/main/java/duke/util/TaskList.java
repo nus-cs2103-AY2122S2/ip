@@ -8,6 +8,7 @@ import duke.task.Task;
  * Represents the list of tasks.
  */
 public class TaskList {
+    private static final String TWO_SPACES = "  ";
     private ArrayList<Task> tasks;
     private int totalTasks;
 
@@ -56,7 +57,7 @@ public class TaskList {
             int index = 1;
             for (int n = 0; n < totalTasks; n++) {
                 Task t = tasks.get(n);
-                list += "\n    " + index + "." + t.toString();
+                list += "\n" + Ui.showIndent() + index + "." + t.toString();
                 index++;
             }
         }
@@ -133,29 +134,29 @@ public class TaskList {
     }
 
     /**
-     * Returns the list of matching tasks. If no task matches keyword, return not found message.
+     * Returns the string representation of tasks that matches keyword.
+     * If no task matches keyword, return not found message.
      *
      * @param keyword The keyword used to search for tasks.
      * @return String representation of matching tasks.
+     * @throws DukeException If there are no matching tasks in list.
      */
-    public String findTasksWithKeyword(String keyword) {
+    public String getTasksWithKeyword(String keyword) throws DukeException {
         String list = "Here are the matching tasks in your list:";
-        int index = 1;
         int count = 0;
 
         for (int n = 0; n < totalTasks; n++) {
             Task task = tasks.get(n);
             if (task.hasKeyword(keyword)) {
                 count++;
-                list += "\n    " + count + "." + task;
+                list += "\n" + TWO_SPACES + count + "." + task;
             }
-            index++;
         }
 
         if (count > 0) {
             return list;
         } else {
-            return "Sorry, there are no tasks that match keyword.";
+            throw new DukeException("Sorry, there are no tasks that match keyword.");
         }
     }
 }

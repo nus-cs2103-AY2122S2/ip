@@ -33,11 +33,12 @@ public class DeleteCommand extends Command {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
             Task taskDeleted = taskList.delete(this.taskNum);
-            ui.setResponse("Okay, I've deleted this task:\n  " + ui.showIndent()
-                    + taskDeleted + "\n" + ui.showIndent() + taskList.getListStatus());
+            ui.setResponse("Okay, I've deleted this task:\n  " + Ui.showIndent()
+                    + taskDeleted + "\n" + Ui.showIndent() + taskList.getListStatus());
+
             storage.saveToHardDisk(taskList);
         } else {
-            throw new DukeException("Invalid task number. There are " + currentTotalTasks + " in the list.");
+            throw new DukeException("Invalid task number. There are " + currentTotalTasks + " tasks in the list.");
         }
     }
 
