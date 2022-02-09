@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @param storage The storage of the program.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String result = taskList.findTasksWithKeyword(this.keyword);
+        String result = taskList.getTasksWithKeyword(this.keyword);
         ui.setResponse(result);
     }
 

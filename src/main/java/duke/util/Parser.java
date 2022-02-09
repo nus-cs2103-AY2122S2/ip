@@ -23,8 +23,6 @@ import duke.task.Todo;
  */
 public class Parser {
 
-    public Parser() {}
-
     /**
      * Returns the Command parsed from the user input.
      *
@@ -127,8 +125,8 @@ public class Parser {
      *
      * @param descrArr The description split by the keyword.
      * @param keyword The keyword to be found in the description.
-     * @param taskType The type of the task (e.g. deadline, event)
-     * @return True if keyword can be found, false otherwise.
+     * @param taskType The type of the task (e.g. deadline, event).
+     * @return True if keyword can be found.
      * @throws DukeException If keyword is not found in description.
      */
     public static boolean keywordExists(String[] descrArr, String keyword, String taskType) throws DukeException {

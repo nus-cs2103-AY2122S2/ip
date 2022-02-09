@@ -133,14 +133,14 @@ public class TaskList {
     }
 
     /**
-     * Returns the list of matching tasks. If no task matches keyword, return not found message.
+     * Returns the string representation of tasks that matches keyword.
+     * If no task matches keyword, return not found message.
      *
      * @param keyword The keyword used to search for tasks.
      * @return String representation of matching tasks.
      */
-    public String findTasksWithKeyword(String keyword) {
+    public String getTasksWithKeyword(String keyword) {
         String list = "Here are the matching tasks in your list:";
-        int index = 1;
         int count = 0;
 
         for (int n = 0; n < totalTasks; n++) {
@@ -149,7 +149,6 @@ public class TaskList {
                 count++;
                 list += "\n    " + count + "." + task;
             }
-            index++;
         }
 
         if (count > 0) {
