@@ -51,14 +51,14 @@ public class TaskList {
                 task = new Todo(savedData[2]);
                 break;
             case "E":
-                if (savedData.length == 3) {
+                if (savedData.length == 4) {
                     task = new Event(savedData[2], savedData[3]);
                 } else { // If time is included for the task
                     task = new Event(savedData[2], savedData[3] + " " + savedData[4]);
                 }
                 break;
             case "D":
-                if (savedData.length == 3) {
+                if (savedData.length == 4) {
                     task = new Deadline(savedData[2], savedData[3]);
                 } else { // If time is included for the task
                     task = new Deadline(savedData[2], savedData[3] + " " + savedData[4]);
@@ -105,7 +105,7 @@ public class TaskList {
      * @return message to tell user that task has been deleted
      */
     public String delete(int taskIndex) {
-        StringBuilder str = new StringBuilder();.
+        StringBuilder str = new StringBuilder();
         int numOfTasksBeforeDeletion = taskList.size();
         try {
             Task task = taskList.get(taskIndex);
@@ -129,7 +129,7 @@ public class TaskList {
     public String findTaskMatchingKeyword(String keyword) {
 
         StringBuilder output = new StringBuilder();
-        List<Task> matchingTask = new ArrayList<>();
+        List<Task> matchingTask;
         matchingTask = this.taskList.stream()
                 .filter(str -> str.getTaskDescription().trim().contains(keyword))
                 .collect(Collectors.toList());
@@ -167,12 +167,6 @@ public class TaskList {
         return taskList.get(taskIndex).getTaskDescription();
     }
 
-    /**
-     * Mark a task in list of tasks as done
-     *
-     * @param taskIndex 0-based index of task number.
-     *
-     */
     /**
      * Mark a task in list of tasks as done
      *

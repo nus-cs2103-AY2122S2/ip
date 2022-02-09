@@ -24,16 +24,25 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String date) throws DukeException {
         super(description);
-        time = "";
+        this.time = "";
         String[] dateSplit = date.split(" ", 2);
         try {
             this.date = LocalDate.parse(dateSplit[0]);
             if (dateSplit.length != 1) {
-                time = dateSplit[1];
+                this.time = dateSplit[1];
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("\tInvalid date! Date format to be of type yyyy-mm-dd\n");
         }
+    }
+
+    /**
+     * Return if time of event was given as input
+     *
+     * @return true if deadline has an event time
+     */
+    private boolean hasTime() {
+        return !this.time.equalsIgnoreCase("");
     }
 
     /**
@@ -43,7 +52,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(pattern) + " " + time + ")";
+        StringBuilder eventTime = new StringBuilder();
+        if (hasTime()) {
+            eventTime.append(" ").append(time);
+        }
+        return "[D]" + super.toString() + " (by: " + date.format(pattern) + eventTime + ")";
     }
 
     /**
