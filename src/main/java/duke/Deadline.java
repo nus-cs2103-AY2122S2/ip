@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Deadline extends Task {
     private final LocalDate time;
@@ -29,6 +30,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + time.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
+                + time.format(DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH)) + ")";
     }
 }
