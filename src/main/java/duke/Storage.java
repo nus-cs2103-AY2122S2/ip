@@ -106,6 +106,8 @@ public class Storage {
                 fw.write("\n");
                 fw.write(t.isDone ? "1" : "0");
                 fw.write("\n");
+            } else {
+                assert sizeOfList == 0 : sizeOfList;
             }
         }
         fw.close();

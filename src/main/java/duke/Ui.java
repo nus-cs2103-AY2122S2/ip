@@ -19,6 +19,7 @@ public class Ui {
                 startGoodbye();
                 Storage.saveList(storeList);
             } else {
+                assert !command.equals("") : command;
                 CommandParser.parseCommand(command);
             }
         }
