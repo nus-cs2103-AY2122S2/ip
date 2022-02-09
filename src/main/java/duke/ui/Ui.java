@@ -73,6 +73,7 @@ public class Ui {
         String template = TASK_DELETE + this.getTaskSizeString(tasks);
         String taskList = generateTaskInList(deletedTasks);
         String taskDeleteMessage = String.format(template, numTasksDeleted, taskList);
+
         this.addDukeDialogBox(taskDeleteMessage);
     }
 

@@ -70,6 +70,11 @@ public class TaskStore {
     }
 
     public ArrayList<Task> removeTasks(String[] args) {
+        if (args.length == 1 && args[0].equals("all")) {
+            this.tasks.clear();
+            return new ArrayList<>();
+        }
+
         ArrayList<Integer> indexList = this.getIndices(args);
 
         // Sorts the indices in descending order to prevent false index deletion
@@ -82,6 +87,14 @@ public class TaskStore {
         }
 
         return deletedTasks;
+    }
+
+    public void removeAllTasks() {
+        this.tasks.clear();
+    }
+
+    public void markAllTasks(boolean isDone) {
+        this.tasks.forEach((Task t) -> t.markTask(isDone));
     }
 
     public ArrayList<Task> markTasks(String[] args, boolean isDone) {
@@ -156,7 +169,7 @@ public class TaskStore {
         ArrayList<Integer> indexList = new ArrayList<>();
 
         for (String arg : args) {
-            // Catch for invalid numbers (non-digital characters or index out of range)
+            // Catch invalid numbers (non-digital characters or index out of range)
             try {
                 int index = Integer.parseInt(arg) - 1;
                 if (index < 0 || index >= this.tasks.size()) {

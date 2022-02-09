@@ -39,6 +39,8 @@ public class Parser {
 
         Task task;
         try {
+            validateCommand(command, commandArgs, tasks);
+
             switch (command) {
             case BYE:
                 ui.bye();
@@ -54,21 +56,37 @@ public class Parser {
                 break;
 
             case MARK:
-                validateCommand(command, commandArgs, tasks);
-                ArrayList<Task> markedTasks = tasks.markTasks(commandArgs.split(" "), true);
-                ui.printTaskMarking(markedTasks, true);
+                //Fallthrough
+            case UNMARK:
+                // validateCommand(command, commandArgs, tasks);
+                boolean isMarkCommand = command.equals(MARK);
+
+                if (commandArgs.matches("all")) {
+                    tasks.markAllTasks(isMarkCommand);
+                    String markAction = isMarkCommand ? "Marked" : "Unmarked";
+                    String message = String.format("%s all tasks.", markAction);
+                    ui.printMessage(message);
+                } else {
+                    ArrayList<Task> markedTasks = tasks.markTasks(commandArgs.split(" "), isMarkCommand);
+                    ui.printTaskMarking(markedTasks, isMarkCommand);
+                }
                 break;
 
-            case UNMARK:
-                validateCommand(command, commandArgs, tasks);
-                markedTasks = tasks.markTasks(commandArgs.split(" "), false);
-                ui.printTaskMarking(markedTasks, false);
-                break;
+            // case UNMARK:
+            //     validateCommand(command, commandArgs, tasks);
+            //     markedTasks = tasks.markTasks(commandArgs.split(" "), false);
+            //     ui.printTaskMarking(markedTasks, false);
+            //     break;
 
             case DELETE:
-                validateCommand(command, commandArgs, tasks);
-                ArrayList<Task> deletedTasks = tasks.removeTasks(commandArgs.split(" "));
-                ui.printTaskDelete(deletedTasks, tasks);
+                // validateCommand(command, commandArgs, tasks);
+                if (commandArgs.matches("all")) {
+                    tasks.removeAllTasks();
+                    ui.printMessage("Deleted all tasks.");
+                } else {
+                    ArrayList<Task> deletedTasks = tasks.removeTasks(commandArgs.split(" "));
+                    ui.printTaskDelete(deletedTasks, tasks);
+                }
                 break;
 
             case MAKE_DEADLINE:
@@ -113,7 +131,8 @@ public class Parser {
     }
 
     /**
-     * Validates the input command, arguments and taskStore before executing the function.
+     * Validates the input command, arguments and taskStore before executing the function. If the command is "bye" or
+     * "list", the validation is skipped.
      * <br>
      * In general, the check ensures that the command and arguments are non-empty and the task store having at least
      * 1 item. Should any of these requirements fail, an exception is thrown.
@@ -129,12 +148,17 @@ public class Parser {
      */
     public static void validateCommand(String command, String commandArgs, TaskStore tasks) throws DukeException,
             NumberFormatException, IndexOutOfBoundsException {
+
+        if (command.equals(BYE) || command.equals(LIST)) {
+            return;
+        }
+
         if (tasks.getIsEmpty()) {
             throw new DukeException("Please make sure you have something in the list before performing this operation!");
         }
 
         if (commandArgs.isEmpty()) {
-            throw new DukeException(String.format("Please make sure your command follows this format: %s <number>", command));
+            throw new DukeException(String.format("The command %s should have arguments", command));
         }
 
         // int toMark = Integer.parseInt(commandArgs) - 1;
