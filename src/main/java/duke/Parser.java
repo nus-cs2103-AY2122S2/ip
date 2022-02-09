@@ -1,7 +1,18 @@
 package duke;
 
+/**
+ * A class responsible for breaking down commands into the command type,
+ * and constructing the commands to be executed.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input into Command objects.
+     *
+     * @param command A string containing the user input.
+     * @param ui Ui for reading user input and displaying output.
+     * @return Command to be executed.
+     */
     public static Command parse(String command, Ui ui) {
         command = command.strip().replaceAll(" +", " ");
         String firstWord = command.split(" ")[0];

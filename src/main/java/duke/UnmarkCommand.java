@@ -2,15 +2,28 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Represents an unmark command.
+ */
 public class UnmarkCommand extends Command {
 
-    private int taskNum;
+    private final int taskNum;
 
+    /**
+     * Constructs an instance of the UnmarkCommand class.
+     *
+     * @param command A string containing the "unmark" word.
+     * @param taskNum An integer representing the task number to unmark.
+     */
     public UnmarkCommand(String command, int taskNum) {
         super(command);
         this.taskNum = taskNum;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
             int taskIdx = taskNum - 1;

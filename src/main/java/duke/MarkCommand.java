@@ -2,15 +2,28 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Represents a mark command
+ */
 public class MarkCommand extends Command {
 
-    private int taskNum;
+    private final int taskNum;
 
+    /**
+     * Constructs an instance of the MarkCommand class.
+     *
+     * @param command A string containing the "mark" word.
+     * @param taskNum An integer representing the task number to mark.
+     */
     public MarkCommand(String command, int taskNum) {
         super(command);
         this.taskNum = taskNum;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
             int taskIdx = taskNum - 1;
