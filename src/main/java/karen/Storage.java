@@ -1,5 +1,7 @@
 package karen;
 
+import static karen.Parser.parseDate;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -136,10 +138,10 @@ public class Storage {
             initTask = new ToDo(taskArgs[0]);
             break;
         case "D":
-            initTask = new Deadline(taskArgs[0], taskArgs[1]);
+            initTask = new Deadline(taskArgs[0], parseDate(taskArgs[1]));
             break;
         case "E":
-            initTask = new Event(taskArgs[0], taskArgs[1]);
+            initTask = new Event(taskArgs[0], parseDate(taskArgs[1]));
             break;
         default:
             initTask = null;
