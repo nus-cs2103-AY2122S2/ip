@@ -8,19 +8,12 @@ import duke.task.Task;
  */
 public abstract class Command {
     protected Task task;
-    protected Integer index;
-    protected String word;
-
     /**
      * Constructor of Command class.
      * @param task task object created from user input.
-     * @param number an indicator to the index of the taskList in TaskList class.
-     * @param word keyword used to find similar tasks in taskList of TaskList class.
      */
-    public Command(Task task, Integer number, String word) {
+    public Command(Task task) {
         this.task = task;
-        this.index = number;
-        this.word = word;
     }
 
     /**

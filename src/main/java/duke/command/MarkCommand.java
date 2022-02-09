@@ -7,13 +7,14 @@ import duke.task.Task;
  * Represents the mark command. A <code>MarkCommand</code> object allows users to set the corresponding task as done.
  */
 public class MarkCommand extends Command {
-
+    private int index;
     /**
      * Constructor for MarkCommand class.
      * @param number an indicator to the index of the taskList in TaskList class.
      */
     public MarkCommand(Integer number) {
-        super(null, number, null);
+        super(null);
+        this.index = number;
     }
 
     /**
@@ -23,7 +24,6 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        int index = super.index;
         assert index > 0 : "Index provided should be greater then 0";
         Task markedTask = tasks.markTask(index);
         String message = "Nice! I've marked this task as done:\n";

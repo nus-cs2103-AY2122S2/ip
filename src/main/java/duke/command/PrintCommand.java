@@ -11,7 +11,7 @@ public class PrintCommand extends Command {
      * Constructor for PrintCommand class.
      */
     public PrintCommand() {
-        super(null, null, null);
+        super(null);
     }
 
     /**

@@ -9,12 +9,14 @@ import duke.task.Task;
  */
 public class UnmarkCommand extends Command {
 
+    private int index;
     /**
      * Constructor for the UnmarkCommand class.
      * @param number an indicator to the index of the taskList in TaskList class.
      */
     public UnmarkCommand(Integer number) {
-        super(null, number, null);
+        super(null);
+        this.index = number;
     }
 
     /**
@@ -25,7 +27,6 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         String message = "OK, I've marked this task as not done yet:\n";
-        int index = super.index;
         assert index > 0 : "Index provided should be greater then 0";
         Task unMarkedTask = tasks.unmarkTask(index);
         return message + unMarkedTask;

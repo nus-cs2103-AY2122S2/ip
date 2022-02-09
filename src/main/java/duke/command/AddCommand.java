@@ -15,7 +15,7 @@ public class AddCommand extends Command {
      * @param task task object created from user input.
      */
     public AddCommand(Task task) {
-        super(task, null, null);
+        super(task);
     }
 
     /**

@@ -7,13 +7,14 @@ import duke.functionality.TaskList;
  * in the taskList of TaskList class.
  */
 public class FindCommand extends Command {
-
+    private String keyword;
     /**
      * Constructor of FindCommand.
      * @param word keyword used to find similar tasks in taskList of TaskList class.
      */
     public FindCommand(String word) {
-        super(null, null, word);
+        super(null);
+        this.keyword = word;
     }
 
     /**
@@ -23,7 +24,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        TaskList newTaskList = tasks.findWord(super.word);
+        TaskList newTaskList = tasks.findWord(this.keyword);
         String message = "Here are the matching tasks in your list:\n";
         int counter = 1;
         for (int i = 0; i < newTaskList.getListSize(); i++) {
