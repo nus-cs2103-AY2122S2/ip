@@ -151,10 +151,28 @@ public class Duke extends Application {
                         .size() + " tasks in the list.";
                 storage.overwriteFile(tasks.getTasks());
                 break;
-            case FIND:
+            case FIND: {
                 String word = parser.parseFind(input);
                 response = ui.listTasksAsString(tasks.findTasks(word));
                 break;
+            }
+            case SNOOZE: {
+                int snoozeIndex = parser.parseIndex(input);
+                Task selectedTask = tasks.getTask(snoozeIndex);
+                boolean isSuccessful = false;
+                if (selectedTask instanceof Event) {
+                    isSuccessful = ((Event)selectedTask).snooze();
+                }
+                if (selectedTask instanceof Deadline) {
+                    isSuccessful = ((Deadline)selectedTask).snooze();
+                }
+                if (isSuccessful) {
+                    response = "Task snoozed by 10min!\n" + selectedTask.toString();
+                } else {
+                    throw new DukeException("Sorry! This task can't be snoozed!");
+                }
+                break;
+            }
             case ERROR:
                 throw new DukeException("Sorry :( I don't know what this means.");
             }

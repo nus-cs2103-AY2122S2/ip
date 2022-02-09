@@ -91,4 +91,16 @@ public class Event extends Task {
         return "E|" + (isDone == true ? "1|" : "0|") + getDescription() + "|" + getAt() + (
                 time != null ? (" " + time) : "") + "\n";
     }
+
+    /**
+     * Snooze functions which adds 10 minutes to time if it exists
+     * @return true if time exists, false if not
+     */
+    public boolean snooze() {
+        if (time == null) {
+            return false;
+        }
+        time = time.plusMinutes(10);
+        return true;
+    }
 }

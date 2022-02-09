@@ -37,6 +37,8 @@ public class Parser {
             return RESULT.EVENT;
         } else if (split[0].equals("find")) {
             return RESULT.FIND;
+        } else if (split[0].equals("snooze")) {
+            return RESULT.SNOOZE;
         }
         return RESULT.ERROR;
     }
@@ -147,7 +149,7 @@ public class Parser {
      * Enum which holds all the various user commands
      */
     public enum RESULT {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, ERROR, FIND
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, ERROR, FIND, SNOOZE
     }
 
 }
