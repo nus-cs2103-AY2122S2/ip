@@ -18,12 +18,7 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
-        List<Task> result = new ArrayList<>();
-        for (Task task : tasks.list()) {
-            if (task.toString().contains(input)) {
-                result.add(task);
-            }
-        }
+        List<Task> result = getSearchResultList(tasks);
 
         if (result.size() != 0) {
             response.append(ui.listFindResults(result));
@@ -32,5 +27,15 @@ public class FindCommand extends Command {
         }
 
         assert response.length() > 0; // response should not be empty
+    }
+
+    private List<Task> getSearchResultList(TaskList tasks) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : tasks.list()) {
+            if (task.toString().contains(input)) {
+                result.add(task);
+            }
+        }
+        return result;
     }
 }
