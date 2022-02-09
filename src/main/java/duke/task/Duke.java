@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -99,6 +100,8 @@ public class Duke {
                 newTask = new Deadline(s[0], s[1]);
             } catch (IncompleteArgumentException ex) {
                 return ui.showIncompleteArgumentError();
+            } catch (DateTimeParseException dateEx) {
+                return ui.showDateTimeParseError();
             }
             taskList.add(newTask);
             return ui.confirmAddition(newTask, taskList.getToDoList());
@@ -108,6 +111,8 @@ public class Duke {
                 newTask = new Event(s[0], s[1]);
             } catch (IncompleteArgumentException ex) {
                 return ui.showIncompleteArgumentError();
+            } catch (DateTimeParseException dateEx) {
+                return ui.showDateTimeParseError();
             }
             taskList.add(newTask);
             return ui.confirmAddition(newTask, taskList.getToDoList());

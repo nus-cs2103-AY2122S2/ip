@@ -161,4 +161,8 @@ public class Ui {
     public String showIdxOutOfBoundError() {
         return "UH-OH!! the index should be between 1 and the size of the task list!";
     }
+
+    public String showDateTimeParseError() {
+        return "please enter the date in the following format: yyyy-mm-dd !!";
+    }
 }
