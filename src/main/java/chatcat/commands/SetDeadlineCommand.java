@@ -35,7 +35,6 @@ public class SetDeadlineCommand extends Command {
      * @throws ChatCatException if description of deadline is empty.
      * @see Deadline
      * @see WriteToFile
-     * @see Commands
      * @see DateTimeUtil
      */
     public void setDeadline() throws ChatCatException {

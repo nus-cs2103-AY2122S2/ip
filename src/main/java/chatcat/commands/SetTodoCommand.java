@@ -35,7 +35,6 @@ public class SetTodoCommand extends Command {
      * @throws ChatCatException if description of deadline is empty.
      * @see Todo
      * @see WriteToFile
-     * @see Commands
      * @see DateTimeUtil
      */
     public void setTodo() throws ChatCatException {

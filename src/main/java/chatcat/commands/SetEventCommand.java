@@ -35,7 +35,6 @@ public class SetEventCommand extends Command {
      * @throws ChatCatException if description of event is empty.
      * @see Event
      * @see WriteToFile
-     * @see Commands
      * @see DateTimeUtil
      */
     public void setEvent() throws ChatCatException {

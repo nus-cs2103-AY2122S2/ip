@@ -19,7 +19,7 @@ import chatcat.commands.FilterCommand;
  * Allows clients to unmark, mark, add and delete tasks. Allows users to view task list.
  */
 public class TaskList {
-    ArrayList<Task> tasks = new ArrayList<>();
+    ArrayList<Task> tasks;
     WriteToFile writeToFile;
 
     /**
@@ -28,6 +28,7 @@ public class TaskList {
      */
     public TaskList() {
         writeToFile = new WriteToFile();
+        tasks = writeToFile.toRead();
     }
 
     /**
@@ -39,6 +40,7 @@ public class TaskList {
     public String listTasks() {
         ListTaskCommand listTasks = new ListTaskCommand(tasks, writeToFile);
         listTasks.listTasks();
+
         return listTasks.toString();
     }
 
