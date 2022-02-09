@@ -64,4 +64,15 @@ public class Event extends Task {
     public String getStorageData() {
         return String.format("[E]%s /at %s", super.getGenericTaskName(), at);
     }
+
+    /**
+     * Returns a new instance of a Task object with the same attributes as the current one.
+     * @return A copy of the current task object.
+     */
+    @Override
+    public Task copy() {
+        Task eventCopy = new Deadline(super.taskName, at, atDate, atTime);
+        eventCopy.done = this.done;
+        return eventCopy;
+    }
 }

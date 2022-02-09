@@ -10,7 +10,7 @@ public class Ui {
      * Prints the greeting message for the chatbot.
      */
     public String printGreeting() {
-        return "Hi, I'm MNSKY. I can help!";
+        return "Hi, I'm MNSKY.";
     }
 
     /**

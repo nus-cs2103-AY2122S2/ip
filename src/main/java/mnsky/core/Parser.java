@@ -39,7 +39,7 @@ public class Parser {
             throw new MnskyMissingParameterException("todo", "name");
         }
 
-        return new ArrayList<>(List.of("task", inputSplit[MIN_TASK_CMD_LENGTH - 1], ""));
+        return new ArrayList<>(List.of("todo", inputSplit[MIN_TASK_CMD_LENGTH - 1], ""));
     }
 
     /**
@@ -126,6 +126,7 @@ public class Parser {
             for (String line : rawTaskList) {
                 String[] lineSplit = line.split(" ");
                 ArrayList<String> nextTask = null;
+                assert line.length() >= 1;
 
                 if (line.charAt(1) == 'T') {
                     nextTask = parseTask(line);
@@ -155,20 +156,14 @@ public class Parser {
     public static ArrayList<String> parseInput(String input) throws MnskyException {
         String[] inputSplit = input.split(" ");
         ArrayList<String> parsedInput = new ArrayList<>();
+        assert inputSplit.length >= 1;
+        parsedInput.add(inputSplit[0]);
 
         switch (inputSplit[0]) {
-        case "bye":
-            parsedInput.add("bye");
-            break;
-        case "list":
-            parsedInput.add("list");
-            break;
         case "mark":
-            parsedInput.add("mark");
             parsedInput.add(retrieveIndex("mark", inputSplit));
             break;
         case "unmark":
-            parsedInput.add("unmark");
             parsedInput.add(retrieveIndex("unmark", inputSplit));
             break;
         case "todo":
@@ -181,15 +176,12 @@ public class Parser {
             parsedInput = parseDeadline(inputSplit);
             break;
         case "delete":
-            parsedInput.add("delete");
             parsedInput.add(retrieveIndex("delete", inputSplit));
             break;
         case "find":
-            parsedInput.add("find");
             parsedInput.add(retrieveSearchTerm(input));
             break;
-        default:
-            parsedInput.add("invalid");
+        default: // Do nothing
         }
 
         return parsedInput;

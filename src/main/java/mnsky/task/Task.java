@@ -1,8 +1,8 @@
 package mnsky.task;
 
 public class Task {
-    private String taskName;
-    private boolean done;
+    protected String taskName;
+    protected boolean done;
 
     /**
      * Constructor for the Task object.
@@ -58,5 +58,15 @@ public class Task {
      */
     public String getStorageData() {
         return toString();
+    }
+
+    /**
+     * Returns a new instance of a Task object with the same attributes as the current one.
+     * @return A copy of the current task object.
+     */
+    public Task copy() {
+        Task taskCopy = new Task(taskName);
+        taskCopy.done = this.done;
+        return taskCopy;
     }
 }

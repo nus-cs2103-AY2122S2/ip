@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import mnsky.exceptions.MnskyException;
 import mnsky.exceptions.MnskyInvalidParameterException;
@@ -17,6 +18,8 @@ public class TaskList {
     private static final int PARAMETER_INDEX = 2;
     private static final int MARK_INDEX = 3;
     private ArrayList<Task> tasks;
+    private Stack<ArrayList<Task>> undoHistory;
+    private Stack<ArrayList<Task>> redoHistory;
 
     /**
      * Creates a TaskList object. Retrieves the storage data if there are no issues with it.
@@ -25,6 +28,8 @@ public class TaskList {
      */
     public TaskList(Ui ui, Storage storage) {
         tasks = new ArrayList<>();
+        undoHistory = new Stack<>();
+        redoHistory = new Stack<>();
 
         try {
             getStorageData(storage);
@@ -48,9 +53,8 @@ public class TaskList {
     /**
      * Creates a new event (a task with an "at" parameter included) based on the parameters.
      * @return The new event.
-     * @throws MnskyException If the name or the at parameter is missing.
      */
-    public Event addEvent(String name, String at) throws MnskyException {
+    public Event addEvent(String name, String at) {
         String[] atSplit = at.split(" ");
         LocalDate atDate = null;
         LocalTime atTime = null;
@@ -73,7 +77,6 @@ public class TaskList {
     /**
      * Creates a new deadline (a task with a "by" parameter included) based on the parameters.
      * @return The new deadline.
-     * @throws MnskyException If the name or the by parameter is missing.
      */
     public Deadline addDeadline(String name, String by) {
         String[] bySplit = by.split(" ");
@@ -187,7 +190,7 @@ public class TaskList {
         ArrayList<ArrayList<String>> taskList = Parser.parseStorageData(storage.readFromDataFile());
         for (ArrayList<String> task : taskList) {
             Task actualTask;
-
+            assert task.size() > 3;
             switch (task.get(CMD_INDEX)) {
             case "task":
                 actualTask = addTask(task.get(NAME_INDEX));
@@ -199,7 +202,7 @@ public class TaskList {
                 actualTask = addDeadline(task.get(NAME_INDEX), task.get(PARAMETER_INDEX));
                 break;
             default:
-                throw new MnskyException("????");
+                throw new MnskyException("[MNSKY could not remember the storage data...]");
             }
 
             if (actualTask != null) {
@@ -258,5 +261,44 @@ public class TaskList {
         }
 
         return listStrings;
+    }
+
+    /**
+     * Adds the current task list to the undo history and empties the redo history before updating the task list.
+     */
+    public void addToUndoHistory() {
+        ArrayList<Task> oldTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            oldTasks.add(task.copy());
+        }
+        undoHistory.push(oldTasks);
+
+        while (!redoHistory.isEmpty()) {
+            redoHistory.pop();
+        }
+    }
+
+    /**
+     * Undoes the most recent update done to the task list, if an update exists.
+     */
+    public void undo() throws MnskyException {
+        if (undoHistory.isEmpty()) {
+            throw new MnskyException("[MNSKY has nothing to undo!]");
+        }
+
+        redoHistory.push(tasks);
+        tasks = undoHistory.pop();
+    }
+
+    /**
+     * Redoes the most recent undoed update, if it exists.
+     */
+    public void redo() throws MnskyException {
+        if (redoHistory.isEmpty()) {
+            throw new MnskyException("[MNSKY has nothing to redo!]");
+        }
+
+        undoHistory.push(tasks);
+        tasks = redoHistory.pop();
     }
 }
