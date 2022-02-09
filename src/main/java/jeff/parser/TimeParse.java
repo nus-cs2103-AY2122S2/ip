@@ -24,5 +24,4 @@ public class TimeParse {
     public String toString() {
         return time.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
-
 }
