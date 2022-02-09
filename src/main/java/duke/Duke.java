@@ -9,6 +9,7 @@ public class Duke {
     private TaskManager manager;
     private Ui ui;
     private Storage storage;
+    private boolean hasExited = false;
 
     public Duke(String filePath) {
         try {
@@ -48,13 +49,16 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-
+            this.hasExited = command.isExit();
             return command.execute(storage, ui, manager);
         } catch (DukeException e) {
             return e.getMessage();
         }
     }
 
+    public boolean HasExited() {
+        return this.hasExited;
+    }
     public static void main(String[] args) {
         new Duke("duke/data").run();
     }
