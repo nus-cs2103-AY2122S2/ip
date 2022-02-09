@@ -30,6 +30,8 @@ public abstract class AddCommand extends Command {
      * @param store represents the file storage of the class
      */
     public String addAndUpdate(Task task, TaskList tasks, Ui ui, Storage store) {
+        assert task != null : "Task should not be null in a command.";
+        assert tasks != null : "Task list should not be null in a command.";
         tasks.addTask(task);
         store.updateStore(tasks);
         return ui.newTask(task, tasks);

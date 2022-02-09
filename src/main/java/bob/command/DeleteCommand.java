@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage store) throws BobException {
         Task toDelete = tasks.getTask(index);
+        assert toDelete != null : "Task to be deleted should not be null.";
         tasks.deleteTask(toDelete);
         store.updateStore(tasks);
         StringBuilder reply = new StringBuilder();

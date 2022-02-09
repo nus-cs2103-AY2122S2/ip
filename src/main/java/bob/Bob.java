@@ -1,5 +1,8 @@
 package bob;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import bob.command.ByeCommand;
 import bob.command.Command;
 import bob.command.ListCommand;
@@ -17,9 +20,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 /**
  * The Bob class implements a chat-bot that records your tasks and tracks your progress.
  *
@@ -35,14 +35,10 @@ public class Bob extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image bobPic = new Image(this.getClass().getResourceAsStream( "/images/bobpfp.jpeg"));
-    private Image userPic = new Image(this.getClass().getResourceAsStream( "/images/userpfp.jpeg"));
+    private Image bobPic = new Image(this.getClass().getResourceAsStream("/images/bobpfp.jpeg"));
+    private Image userPic = new Image(this.getClass().getResourceAsStream("/images/userpfp.jpeg"));
     public Bob() {
 
-    }
-
-    public static void main(String[] args) {
-        new Bob().initializeBob();
     }
 
     public Storage getStore() {
@@ -189,7 +185,7 @@ public class Bob extends Application {
                 Platform.exit();
             }
             return c.execute(tasks, ui, store);
-        } catch (BobException e){
+        } catch (BobException e) {
             return ui.showError(e.getBobReply());
         }
     }

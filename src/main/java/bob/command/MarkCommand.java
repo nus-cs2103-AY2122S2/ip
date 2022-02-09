@@ -25,6 +25,7 @@ public class MarkCommand extends Command {
         } else {
             StringBuilder reply = new StringBuilder();
             toMark.setStatus(1);
+            assert toMark.getStatus() == 1: "Tasks status should be 1 but it is " + toMark.getStatus();
             reply.append(ui.finishTask() + "\n");
             reply.append(ui.printTask(toMark) + "\n");
             store.updateStore(tasks);
