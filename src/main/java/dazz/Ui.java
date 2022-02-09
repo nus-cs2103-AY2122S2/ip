@@ -134,7 +134,7 @@ public class Ui {
         } else {
             List<Task> tasks = taskList.getTasks();
             String taskNames = IntStream.rangeClosed(1, tasks.size())
-                    .mapToObj(x -> x + ". " + tasks.get(x-1))
+                    .mapToObj(x -> x + ". " + tasks.get(x - 1))
                     .collect(Collectors.joining("\n"));
             showListMessage = showListMessage + taskNames;
         }

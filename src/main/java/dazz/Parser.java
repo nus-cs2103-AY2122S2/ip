@@ -89,7 +89,7 @@ public class Parser {
     }
 
     private static EventCommand parseEvent(String input) throws DazzException {
-        String[] wordArr =  extractDescriptionAndDate(input, EVENT_TOKEN);
+        String[] wordArr = extractDescriptionAndDate(input, EVENT_TOKEN);
         return new EventCommand(wordArr[0], Ui.toLocalDateTime(wordArr[1]));
     }
 }
