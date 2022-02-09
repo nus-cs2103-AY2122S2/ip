@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.DukeException;
 import duke.operations.TaskList;
 import duke.task.Task;
 
@@ -30,6 +31,7 @@ public abstract class Command {
      *
      * @param tasks tasks the task to be executed.
      * @return the String to be printed depending on what has been executed.
+     * @throws DukeException throws an exception related to Duke.
      */
-    public abstract String execute(TaskList tasks);
+    public abstract String execute(TaskList tasks) throws DukeException;
 }

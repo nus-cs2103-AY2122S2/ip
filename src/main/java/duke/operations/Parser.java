@@ -12,7 +12,9 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.MarkCommand;
 import duke.command.PrintCommand;
+import duke.command.TagCommand;
 import duke.command.UnmarkCommand;
+import duke.command.UntagCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyInputException;
 import duke.exceptions.IncompleteInputException;
@@ -32,9 +34,11 @@ public class Parser {
     private static final int INDEX_AFTER_UNMARK = 1;
     private static final int INPUT_AFTER_AT = 3;
     private static final int INPUT_AFTER_BY = 3;
+    private static final int INPUT_AFTER_TAG = 3;
     private static final int INPUT_AFTER_TODO = 4;
     private static final int INPUT_AFTER_FIND = 4;
     private static final int INPUT_AFTER_EVENT = 5;
+    private static final int INPUT_AFTER_UNTAG = 5;
     private static final int INPUT_AFTER_DEADLINE = 8;
 
     /**
@@ -115,6 +119,10 @@ public class Parser {
             return handleDelete(strs);
         case "find":
             return handleFind(input);
+        case "tag":
+            return handleTag(input, firstWord);
+        case "untag":
+            return handleUntag(input);
         default:
             throw new UnknownInputException();
         }
@@ -188,6 +196,14 @@ public class Parser {
         }
     }
 
+    private static Command handleTagInput(String str) throws DukeException {
+        // breaks the string into 2 parts, index to tag, and tag.
+        String[] inputArgs = str.split("#");
+        int indexToTag = Integer.parseInt(inputArgs[0].trim()) - 1;
+        String tag = inputArgs[1].trim();
+        return new TagCommand(indexToTag, tag);
+    }
+
     private static Command handleTodo(String str, String firstWord) throws IncompleteInputException {
         String subString = str.substring(INPUT_AFTER_TODO).trim();
         if (subString.length() == EMPTY_INPUT) {
@@ -225,5 +241,20 @@ public class Parser {
     private static Command handleFind(String str) {
         String keyword = str.substring(INPUT_AFTER_FIND).trim();
         return new FindCommand(keyword);
+    }
+
+    private static Command handleTag(String str, String firstWord) throws DukeException {
+        String subString = str.substring(INPUT_AFTER_TAG).trim();
+        if (subString.length() == EMPTY_INPUT) {
+            throw new IncompleteInputException(firstWord);
+        } else {
+            return handleTagInput(subString);
+        }
+    }
+
+    private static Command handleUntag(String str) {
+        String listIndexString = str.substring(INPUT_AFTER_UNTAG).trim();
+        int listIndex = Integer.parseInt(listIndexString) - 1;
+        return new UntagCommand(listIndex);
     }
 }

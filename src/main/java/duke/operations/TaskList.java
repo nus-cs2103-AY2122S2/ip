@@ -2,6 +2,7 @@ package duke.operations;
 
 import java.util.ArrayList;
 
+import duke.task.Tag;
 import duke.task.Task;
 
 /**
@@ -85,7 +86,15 @@ public class TaskList {
     public String toString() {
         String output = "";
         for (int i = 0; i < TASK_ARRAY_LIST.size(); i++) {
-            output += (i + 1) + ". " + TASK_ARRAY_LIST.get(i).toString() + "\n   ";
+            if (TASK_ARRAY_LIST.get(i).getTag() == null) {
+                output += (i + 1) + ". "
+                        + TASK_ARRAY_LIST.get(i).toString() + " " + "\n   ";
+            } else {
+                output += (i + 1) + ". "
+                        + TASK_ARRAY_LIST.get(i).toString() + " "
+                        + "#"
+                        + TASK_ARRAY_LIST.get(i).getTag() + "\n   ";
+            }
         }
         return output;
     }
@@ -116,5 +125,29 @@ public class TaskList {
         }
 
         return emptyMessage + unknownMessage + output;
+    }
+
+    /**
+     * Tags a task in the task arraylist with a String
+     *
+     * @param index the index of the task array to be tagged.
+     * @param str the description of the tag to be added.
+     * @return a String representation of the tagged task.
+     */
+    public String tagInList(int index, String str) {
+        Tag tag = new Tag(str);
+        TASK_ARRAY_LIST.get(index).setTag(tag);
+        return "Task number " + (index + 1) + " has been tagged with #" + str;
+    }
+
+    /**
+     * Untags a task in the task arraylist with an index
+     *
+     * @param index the index of the task array to be untagged.
+     * @return a String representation of the untagged task.
+     */
+    public String untagInList(int index) {
+        TASK_ARRAY_LIST.get(index).setTag(null);
+        return "Task number " + (index + 1) + " has been untagged";
     }
 }

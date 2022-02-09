@@ -26,6 +26,22 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * An overloaded Deadline constructor to initialise a <code>Deadline</code> object. A <code>Deadline</code>
+     * corresponds to a task represented by a String, LocalDate, LocalTime, and Tag.
+     * E.g., <code>do project, 12-12-2022, 1900</code>.
+     *
+     * @param description the description of the deadline task to be done.
+     * @param date the date of the deadline of the task.
+     * @param time the time of the deadline of the task.
+     * @param tag the tag of the task to be added.
+     */
+    public Deadline(String description, LocalDate date, LocalTime time, Tag tag) {
+        super(description, tag);
+        this.date = date;
+        this.time = time;
+    }
+
     public LocalDate getDate() {
         return date;
     }
