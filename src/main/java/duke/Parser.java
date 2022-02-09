@@ -3,11 +3,12 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * Parser class handles parsing the String input into a Task object.
+ * Parser class handles parsing the stored text file strings
+ * into Task objects that can be loaded into TaskList
  */
 public class Parser {
     /**
-     * String input to be parsed.
+     * String to be parsed.
      */
     protected String string;
 
@@ -21,7 +22,7 @@ public class Parser {
     }
 
     /**
-     * The method that parses the string input and then
+     * The method that parses the string and then
      * creates a Deadline, Task, or Event object as necessary.
      *
      * @return Task object containing the data specified in the string

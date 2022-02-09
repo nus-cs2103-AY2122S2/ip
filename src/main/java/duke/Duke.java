@@ -89,14 +89,7 @@ public class Duke {
             }
             System.out.println("See you later alligator :)");
         } else if (command.equals("list")) {
-            if (list.size() == 0) {
-                System.out.println("Congrats there's nothing on your list!");
-            } else {
-                System.out.println("Here's everything on your list rn:");
-                for (Integer i = 1; i <= list.size(); i++) {
-                    System.out.println(i.toString() + " " + list.get(i - 1));
-                }
-            }
+            list.printList();
         } else if (command.equals("mark") || command.equals("unmark")) {
             if (split.length <= 1) {
                 throw new DukeException("You need to specify which task :/");
@@ -119,6 +112,9 @@ public class Duke {
             if (list.size() == 0) {
                 throw new DukeException("There aren't any tasks left to delete");
             } else {
+                if (split.length <= 1) {
+                    throw new DukeException("You need to specify which task :/");
+                }
                 int idx = Integer.parseInt(split[1]);
                 if (idx > list.size()) {
                     throw new DukeException("The task number you've given is invalid");
@@ -130,6 +126,12 @@ public class Duke {
                     System.out.printf("K you've now got %d tasks in the list\n", list.size());
                 }
             }
+        } else if (command.equals("find")) {
+            if (list.size() == 0) {
+                throw new DukeException("There aren't any tasks search :)");
+            }
+            String searchString = split[1];
+            list.search(searchString);
         } else {
             throw new DukeException("I'm not sure what that means");
         }
