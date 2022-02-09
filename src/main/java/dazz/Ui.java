@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import dazz.exception.ErrorType;
 import dazz.exception.InvalidDateFormatException;
@@ -172,15 +175,15 @@ public class Ui {
      * @return The details of the <code>Task</code> on the <code>TaskList</code>.
      */
     public String messageForList(TaskList taskList) {
-        int index = 1;
         String showListMessage = "Here are the tasks in your list:\n";
         if (taskList.getSize() == 0) {
             showListMessage = showListMessage + "\nYou have no task in your list.";
         } else {
-            taskList.list();
-            for (Task task : taskList.getTasks()) {
-                showListMessage = showListMessage + index++ + ". " + task + "\n";
-            }
+            List<Task> tasks = taskList.getTasks();
+            String taskNames = IntStream.rangeClosed(1, tasks.size())
+                    .mapToObj(x -> x + ". " + tasks.get(x-1))
+                    .collect(Collectors.joining("\n"));
+            showListMessage = showListMessage + taskNames;
         }
         return showListMessage;
     }
@@ -209,11 +212,11 @@ public class Ui {
         String finalSearch = search.toLowerCase(Locale.ROOT);
         String searchesMessage = "Here are the matching tasks in your list:\n";
         List<Task> tasks = taskList.getTasks();
-        for (Task task : tasks) {
-            if (task.getDescription().toLowerCase(Locale.ROOT).contains(finalSearch)) {
-                searchesMessage = searchesMessage + task + "\n";
-            }
-        }
+        String filteredTaskDescriptions = tasks.stream()
+                .map(Task::toString)
+                .filter(x -> x.toLowerCase(Locale.ROOT).contains(finalSearch))
+                .collect(Collectors.joining("\n"));
+        searchesMessage = searchesMessage + filteredTaskDescriptions;
         return searchesMessage;
     }
 
