@@ -8,7 +8,7 @@ import duke.util.TaskList;
  * This AddCommand class will add a task when executed.
  */
 public class AddCommand extends Command {
-    private Task task;
+    private final Task task;
 
     /**
      * Constructor for AddCommand which adds the provided task.
@@ -32,6 +32,8 @@ public class AddCommand extends Command {
         String response = "Got it. I've added this task:\n"
                 + task.track() + task.getStatus() + " " + task.toString()
                 + "\nNow you have " + (tasks.getCount()) + " tasks in the list.";
+        String status = task.getStatus();
+        assert status.equals("[ ]");
         return response;
     }
 }

@@ -8,7 +8,7 @@ import duke.util.TaskList;
  * This DeleteCommand class will delete a task provided with a 0-based index when executed.
  */
 public class DeleteCommand extends Command {
-    private int taskNum;
+    private final int taskNum;
 
     /**
      * Constructor for DeleteCommand which provides an index to delete.
@@ -27,10 +27,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Save save) {
-        String response = "";
+        String response;
+        int sizeOfTaskList = tasks.getCount();
         try {
             Task deleteTask = tasks.getTask(this.taskNum);
             tasks.delete(this.taskNum);
+            assert (sizeOfTaskList - 1) == tasks.getCount();
             response = "Noted. I've removed this task:\n" + deleteTask.track() + deleteTask.getStatus() + " "
                     + deleteTask + "\nNow you have " + tasks.getCount() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
