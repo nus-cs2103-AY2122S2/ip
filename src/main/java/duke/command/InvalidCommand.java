@@ -22,8 +22,7 @@ public class InvalidCommand implements Command {
      * @param storage a storage used to save the user's tasks.
      * @return a boolean indicating whether it is an exit command.
      */
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        System.out.println("I don't understand your query! Please try again.");
-        return false;
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return Ui.INVALID_MSG;
     }
 }

@@ -31,35 +31,37 @@ public class AddCommand implements Command {
      * @param storage a storage used to save the user's tasks.
      * @return a boolean indicating whether it is an exit command.
      */
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String command = this.commandAndDetails[0];
         String details = this.commandAndDetails[1];
+        String response = "";
         Task task = null;
         switch (command) {
         case "todo":
             task = new Todo(details.strip());
-            System.out.println("Added a to do task.");
+            response += "Added a to do task.\n";
             break;
         case "deadline":
             String[] deadlineAndTime = details.split("/by");
             task = new Deadline(deadlineAndTime[0].strip(), deadlineAndTime[1]);
-            System.out.println("Added a deadline.");
+            response += "Added a deadline.\n";
             break;
         case "event":
             String[] eventAndTime = details.split("/at");
             task = new Event(eventAndTime[0].strip(), eventAndTime[1]);
-            System.out.println("Added an event.");
+            response += "Added an event.\n";
             break;
         default:
-            System.out.println("There has been an error. Please try again.");
+            response += "There has been an error. Please try again.\n";
         }
 
         if (task != null) {
             taskList.addTask(task);
-            System.out.println("  " + task.toString());
-            System.out.println("You have " + taskList.size() + " task(s) in the list.");
+            response += "  " + task.toString() + "\n"
+                    + "You have " + taskList.size() + " task(s) in the list.";
             storage.writeToFile(taskList);
+            return response;
         }
-        return false;
+        return response;
     }
 }

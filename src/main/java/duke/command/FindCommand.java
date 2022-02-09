@@ -27,8 +27,7 @@ public class FindCommand implements Command {
      * @param storage a storage used to save the user's tasks.
      * @return a boolean indicating whether it is an exit command.
      */
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.listTasks(this.commandAndDetails[1]);
-        return false;
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.listTasks(this.commandAndDetails[1]);
     }
 }

@@ -9,6 +9,10 @@ import java.io.InputStreamReader;
  */
 public class Ui {
 
+    public static final String WELCOME_MSG = "Hi! I'm Duke.\nWhat can I do for you?";
+    public static final String BYE_MSG = "Bye. Hope to see you again soon!";
+    public static final String INVALID_MSG = "I don't understand your query! Please try again.";
+
     /**
      * Constructor for a Ui object.
      */
@@ -26,14 +30,14 @@ public class Ui {
      */
     public void showWelcome() {
         this.showLine();
-        System.out.println("Hi! I'm Duke.\nWhat can I do for you?");
+        System.out.println(WELCOME_MSG);
     }
 
     /**
      * Displays an exit message.
      */
     public void showExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(BYE_MSG);
         this.showLine();
     }
 
