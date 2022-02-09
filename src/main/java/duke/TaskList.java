@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Represents a taskList that supports multiple actions.
@@ -34,9 +35,9 @@ public class TaskList {
      *
      * @param s information of the task to add.
      */
-    public void addTodo(String s) {
-        Todo t = new Todo(s);
-        tasks.add(t);
+    public void addTodo(String taskInfo) {
+        Todo todo = new Todo(taskInfo);
+        tasks.add(todo);
         this.printAdd();
     }
 
@@ -45,10 +46,10 @@ public class TaskList {
      *
      * @param s information of the task to add.
      */
-    public void addDdl(String s) {
-        int i = s.indexOf(" /by ");
-        if (i > 0 && i + 5 < s.length()) {
-            Deadline t = new Deadline(s.substring(0, i), LocalDate.parse(s.substring(i + 5)));
+    public void addDdl(String taskInfo) {
+        int i = taskInfo.indexOf(" /by ");
+        if (i > 0 && i + 5 < taskInfo.length()) {
+            Deadline t = new Deadline(taskInfo.substring(0, i), LocalDate.parse(taskInfo.substring(i + 5)));
             tasks.add(t);
             this.printAdd();
         } else {
@@ -61,10 +62,10 @@ public class TaskList {
      *
      * @param s information of the task to add.
      */
-    public void addEvt(String s) {
-        int i = s.indexOf(" /at ");
-        if (i > 0 && i + 5 < s.length()) {
-            Event t = new Event(s.substring(0, i), s.substring(i + 5));
+    public void addEvt(String taskInfo) {
+        int i = taskInfo.indexOf(" /at ");
+        if (i > 0 && i + 5 < taskInfo.length()) {
+            Event t = new Event(taskInfo.substring(0, i), taskInfo.substring(i + 5));
             tasks.add(t);
             this.printAdd();
         } else {
@@ -108,12 +109,17 @@ public class TaskList {
      * @param index index of the task to change.
      * @param done state of the task to change to.
      */
-    public void mark(int index, boolean done) {
+    public void mark(String command, boolean isDone) {
+        Scanner markInfo = new Scanner(command);
+        if (!markInfo.hasNextInt()) {
+            throw new DukeException("Please enter an index.");
+        }
+        int index = markInfo.nextInt() - 1;
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
         }
-        tasks.set(index, tasks.get(index).mark(done));
-        if (done) {
+        tasks.set(index, tasks.get(index).mark(isDone));
+        if (isDone) {
             System.out.println(INDENT + "Nice! I've marked this task as done:");
         } else {
             System.out.println(INDENT + "OK, I've marked this task as not done yet:");
@@ -126,7 +132,12 @@ public class TaskList {
      *
      * @param index index of task to delete. Starts from 0.
      */
-    public void delete(int index) {
+    public void delete(String command) {
+        Scanner deleteInfo = new Scanner(command);
+        if (!deleteInfo.hasNextInt()) {
+            throw new DukeException("Please enter an index");
+        }
+        int index = deleteInfo.nextInt() - 1;
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
         }
