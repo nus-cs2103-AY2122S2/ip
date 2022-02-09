@@ -70,55 +70,36 @@ public class Ui {
 
     /**
      * Prints out indication that a task has been marked as done.
-     *
-     * @param task Task that has been marked as done.
+     *  @param task Task that has been marked as done.
+     * @param isMarkCommand Boolean to indicate whether command is to mark or unmark a task.
      */
-    public static String indicateMarked(Task task) {
+    public static String indicateEditMark(Task task, boolean isMarkCommand) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Nice! I've marked this task as done:").append("\n");
-        sb.append("  ").append(task);
-        return sb.toString();
-    }
-
-    /**
-     * Prints out indication that a task has been unmarked.
-     *
-     * @param task Task that has been unmarked.
-     */
-    public static String indicateUnmarked(Task task) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Nice! I've marked this task as not done yet:").append("\n");
+        if (isMarkCommand) {
+            sb.append("Nice! I've marked this task as done:").append("\n");
+        } else {
+            sb.append("Nice! I've marked this task as not done yet:").append("\n");
+        }
         sb.append("  ").append(task);
         return sb.toString();
     }
 
     /**
      * Prints out indication that a task has been added.
-     *
-     * @param task Task that has been added.
+     *  @param task Task that has been added.
      * @param taskList TaskList that task has been added to.
+     * @param isAddCommand Boolean to indicate whether command is a command to add or remove task.
      */
-    public static String indicateAddedTask(Task task, TaskList taskList) {
+    public static String indicateAddOrDeleteTask(Task task, TaskList taskList, boolean isAddCommand) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Got it. I've added this task:").append("\n");
+        if (isAddCommand) {
+            sb.append("Got it. I've added this task:").append("\n");
+        } else {
+            sb.append("Noted. I've removed this task:").append("\n");
+        }
         sb.append("  ").append(task).append("\n");
         sb.append("Now you have ").append(taskList.noOfTasks());
         sb.append(" tasks in the list.");
-        return sb.toString();
-    }
-
-    /**
-     * Prints out indication that a task has been removed.
-     *
-     * @param task Task that has been removed.
-     * @param taskList TaskList that task has been removed from.
-     */
-    public static String indicateRemovedTask(Task task, TaskList taskList) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Noted. I've removed this task:").append("\n");
-        sb.append("  ").append(task).append("\n");
-        sb.append("Now you have ").append(taskList.noOfTasks());
-        sb.append(" tasks in the list");
         return sb.toString();
     }
 

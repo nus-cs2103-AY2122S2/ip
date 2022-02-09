@@ -38,7 +38,7 @@ public class TodoCommand extends Command {
             Todo currTodo = Parser.parseTodo(todoCommand);
             taskList.add(currTodo);
             storage.appendToFile(currTodo);
-            return Ui.indicateAddedTask(currTodo, taskList);
+            return Ui.indicateAddOrDeleteTask(currTodo, taskList, true);
 
         } catch (TodoException | IOException e) {
             return Ui.printExceptionMessage(e);

@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
             Task taskToDelete = taskList.get(taskNumberToDelete - 1);
             taskList.delete(taskNumberToDelete);
             storage.taskListToFile(taskList);
-            return Ui.indicateRemovedTask(taskToDelete, taskList);
+            return Ui.indicateAddOrDeleteTask(taskToDelete, taskList, false);
         } catch (NoIntegerException | IOException e) {
             return Ui.printExceptionMessage(e);
         } catch (IndexOutOfBoundsException e) {
