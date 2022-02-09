@@ -21,6 +21,7 @@ public class TaskList {
      * @param item Task that the user would like to add (e.g. Event, Deadline, Todo).
      */
     public void addTask(Task item) {
+        assert item != null : "Task provided is null. Please check the Command class for debugging";
         tasks.add(item);
     }
 

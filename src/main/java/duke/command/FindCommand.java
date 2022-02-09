@@ -13,6 +13,7 @@ public class FindCommand extends Command {
             + "Type 'help' if you need to know how to use this command";
 
     public FindCommand(String findString) {
+        assert findString != null : "No string was provided to be found";
         findDetail = findString;
     }
 
