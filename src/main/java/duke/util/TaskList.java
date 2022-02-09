@@ -19,7 +19,7 @@ public class TaskList {
      * @param taskList an ArrayList which is abstracted into the TaskList.
      */
     public TaskList(ArrayList<Task> taskList) {
-        assert  taskList != null;
+        assert taskList != null;
         this.taskList = taskList;
     }
 
@@ -29,7 +29,7 @@ public class TaskList {
      * @return the String which will be prints out the task that has been added and the current tasks in the list.
      */
     public String addTask(Task task) {
-        assert  task != null;
+        assert task != null;
         this.taskList.add(task);
         return "Got it. I've added this task\n" + task.printTask() + "\n" + "Now you've got " + taskList.size()
                 + " tasks in the list.";
@@ -106,7 +106,7 @@ public class TaskList {
             printStr.append(num);
             printStr.append(". ");
             Task taskToBePrinted = taskList.get(i);
-            assert  taskToBePrinted != null;
+            assert taskToBePrinted != null;
             printStr.append(taskToBePrinted.printTask());
             printStr.append("\n");
         }
@@ -144,7 +144,7 @@ public class TaskList {
             printStr.append(num);
             printStr.append(". ");
             Task taskToBePrinted = foundTasks.get(i);
-            assert  taskToBePrinted != null;
+            assert taskToBePrinted != null;
             printStr.append(taskToBePrinted.printTask());
             printStr.append("\n");
         }
