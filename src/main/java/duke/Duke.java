@@ -29,6 +29,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private ArrayList<Task> itemList = new ArrayList<>();
+
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -64,20 +66,10 @@ public class Duke extends Application {
 
             Outputs op = new Outputs();
 
-            ArrayList<Task> itemList = new ArrayList<>();
             while(true) {
 
-                String file2 = "data/duke.txt";
-                try {
-                    for (Task t : itemList) {
-                        writeToFile(file2, t.getDescription() + "\n");
-                    }
-                } catch (IOException e) {
-                    System.out.println("");
-                }
-
                 String reply = input;
-                String[] splittedString = reply.split(" ");
+                String[] splittedString = input.split(" ");
 
                 File file = new File("data/duke.txt");
                 file.delete();
@@ -88,6 +80,8 @@ public class Duke extends Application {
                 }
 
                 if (splittedString[0].equals("mark") && splittedString.length == 2) { // check for mark tag
+                    assert !itemList.isEmpty() : "List is empty";
+                    try {
                     int index = Integer.valueOf(reply.split(" ")[1]);
                     itemList.get(index - 1).markAsDone();
                     return op.border +
@@ -95,16 +89,36 @@ public class Duke extends Application {
                             "       " + itemList.get(index - 1).getDescription() + "\n" +
                             op.instructions +
                             op.border;
-
+                } catch (NumberFormatException n) {
+                    return "Invalid input, please enter a valid index number instead";
+                }
                 } else if (splittedString[0].equals("unmark") && splittedString.length == 2) { // check for unmark tag
-                    int index = Integer.valueOf(reply.split(" ")[1]);
+                    assert !itemList.isEmpty() : "List is empty";
+                    try {
+                        int index = Integer.valueOf(reply.split(" ")[1]);
                     itemList.get(index - 1).markAsUndone();
                     return op.border +
                             "     OK, I've marked this task as not done yet: \n" +
                             "       " + itemList.get(index - 1).getDescription() + "\n" +
                             op.instructions +
                             op.border;
+                    } catch (NumberFormatException n) {
+                        return "Invalid input, please enter a valid index number instead";
+                    }
+                } else if (splittedString[0].equals("delete")) { //check for delete
+                    assert !itemList.isEmpty() : "List is empty";
+                    try {
+                        int index = Integer.valueOf(splittedString[1]);
 
+                        String toRemove = itemList.remove(index - 1).getDescription();
+                        return op.border +
+                                "     Noted. I've removed this task: \n" +
+                                "       " + toRemove + "\n" +
+                                "     Now you have " + itemList.size() + " tasks in the list.\n" + op.instructions +
+                                op.border;
+                    } catch (NumberFormatException n) {
+                        return "Invalid input, please enter a valid index number instead";
+                    }
                 } else if (splittedString[0].equals("todo")) { // check for todo tag
                     if (splittedString.length == 1) { //invalid todo command
                         return op.border +
@@ -155,9 +169,6 @@ public class Duke extends Application {
                     }
                 } else if (reply.equals("bye")) { // check for bye
                     System.exit(0);
-//                    return op.border +
-//                                "     Bye. Hope to see you again soon!\n" +
-//                                op.border;
                 } else if (reply.equals("list")) { // check for list
                     String totalString = op.border +
                             "    Here are the tasks in your list:\n";
@@ -167,19 +178,6 @@ public class Duke extends Application {
                     totalString += op.instructions +
                             op.border;
                     return totalString;
-                } else if (splittedString[0].equals("delete")) { //check for delete
-                    try {
-                        int index = Integer.valueOf(splittedString[1]);
-
-                        String toRemove = itemList.remove(index - 1).getDescription();
-                        return op.border +
-                                "     Noted. I've removed this task: \n" +
-                                "       " + toRemove + "\n" +
-                                "     Now you have " + itemList.size() + " tasks in the list.\n" + op.instructions +
-                                op.border;
-                    } catch (NumberFormatException n) {
-                        return "Invalid input, please enter a valid index number instead";
-                    }
                 } else if (splittedString[0].equals("find")) {
                     String keyword = splittedString[1];
                     List<Task> filteredItemList = new ArrayList<>();
@@ -196,17 +194,27 @@ public class Duke extends Application {
                     return op.border
                             + "     Here are the matching tasks in your list:\n" + relevantTasks
                             + op.instructions + op.border;
+                } else if (splittedString[0].equals("help")){
+                    return op.help;
                 } else { //check non-existing commands
                     return op.border +
                             "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                             op.instructions +
                             op.border;
                 }
+                String file2 = "data/duke.txt";
+                try {
+                    for (Task t : itemList) {
+                        writeToFile(file2, t.getDescription() + "\n");
+                    }
+                } catch (IOException e) {
+                    System.out.println("");
+                }
 
 
             }
         }
-        
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
