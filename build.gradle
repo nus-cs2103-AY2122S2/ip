@@ -54,6 +54,7 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.32'
+    configDir = file("$rootProject.projectDir/config/checkstyle")
 }
 
 run{
