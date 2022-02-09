@@ -72,12 +72,6 @@ public class Parser {
                 }
                 break;
 
-            // case UNMARK:
-            //     validateCommand(command, commandArgs, tasks);
-            //     markedTasks = tasks.markTasks(commandArgs.split(" "), false);
-            //     ui.printTaskMarking(markedTasks, false);
-            //     break;
-
             case DELETE:
                 // validateCommand(command, commandArgs, tasks);
                 if (commandArgs.matches("all")) {

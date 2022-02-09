@@ -69,12 +69,13 @@ public class TaskStore {
         this.tasks.add(t);
     }
 
+    /**
+     * Removes the tasks specified in the arguments. If an argument is invalid (not a number or not in range), it will
+     * be skipped.
+     * @param args The arguments in the form of a String array.
+     * @return The tasks that were deleted.
+     */
     public ArrayList<Task> removeTasks(String[] args) {
-        if (args.length == 1 && args[0].equals("all")) {
-            this.tasks.clear();
-            return new ArrayList<>();
-        }
-
         ArrayList<Integer> indexList = this.getIndices(args);
 
         // Sorts the indices in descending order to prevent false index deletion
@@ -97,6 +98,13 @@ public class TaskStore {
         this.tasks.forEach((Task t) -> t.markTask(isDone));
     }
 
+    /**
+     * Marks the specified tasks in args as done or undone depending on the command.
+     * If an argument is invalid (not a number or not in range), it will be skipped.
+     * @param args The arguments in the form of a String array.
+     * @param isDone Indicator to mark the task as done or undone.
+     * @return The tasks that were marked to be done or undone.
+     */
     public ArrayList<Task> markTasks(String[] args, boolean isDone) {
         ArrayList<Integer> indexList = this.getIndices(args);
 

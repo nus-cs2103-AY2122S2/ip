@@ -68,6 +68,11 @@ public class Ui {
         this.addDukeDialogBox(taskAddMessage);
     }
 
+    /**
+     * Prepares the summary of tasks that were deleted and displays them to the user.
+     * @param deletedTasks The tasks that were deleted.
+     * @param tasks The task list which was deleted.
+     */
     public void printTaskDelete(ArrayList<Task> deletedTasks, TaskStore tasks) {
         int numTasksDeleted = deletedTasks.size();
         String template = TASK_DELETE + this.getTaskSizeString(tasks);
@@ -77,6 +82,11 @@ public class Ui {
         this.addDukeDialogBox(taskDeleteMessage);
     }
 
+    /**
+     * Prepares the summary fo tasks that were marked as done or undone and displays them to the user.
+     * @param tasks The tasks that were marked a done or undone.
+     * @param isDone Indicator of the task being marked as done or undone.
+     */
     public void printTaskMarking(ArrayList<Task> tasks, boolean isDone) {
         String taskList = this.generateTaskInList(tasks);
         if (isDone) {
@@ -94,6 +104,11 @@ public class Ui {
         this.container.getChildren().addAll(DialogBox.getDukeDialog(message, dukeImage));
     }
 
+    /**
+     * Generates a numbered list from the task list.
+     * @param tasklist The task list to be generated as the numbered list.
+     * @return The generated numbered task list.
+     */
     public String generateTaskInList(ArrayList<Task> tasklist) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasklist.size(); i++) {
