@@ -11,6 +11,7 @@ public class CommandDelete extends Command {
 
     @SuppressWarnings("checkstyle:MissingJavadocMethod")
     public CommandDelete(TaskList taskList, int taskNo) {
+        assert taskList != null;
         this.taskList = taskList;
         this.taskNo = taskNo;
     }

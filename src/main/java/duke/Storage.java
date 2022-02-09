@@ -19,6 +19,8 @@ class Storage {
         Path filePath = Paths.get("data/taskList.txt");
         boolean fileExists = java.nio.file.Files.exists(filePath);
         try {
+            assert dirPath != null;
+            assert filePath != null;
             Files.createDirectories(dirPath);
             if (!fileExists) {
                 Files.createFile(filePath);

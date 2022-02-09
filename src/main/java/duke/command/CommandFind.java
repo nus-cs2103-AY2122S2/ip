@@ -9,6 +9,8 @@ public class CommandFind extends Command {
     private TaskList taskList;
 
     public CommandFind(String keyword, TaskList taskList) {
+        assert keyword != null;
+        assert taskList != null;
         this.keyword = keyword;
         this.taskList = taskList;
     }

@@ -8,6 +8,7 @@ public class CommandUnmark extends Command {
     private int taskNo;
 
     public CommandUnmark(TaskList taskList, int taskNo) {
+        assert taskList != null;
         this.taskList = taskList;
         this.taskNo = taskNo;
     }

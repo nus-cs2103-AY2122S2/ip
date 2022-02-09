@@ -37,6 +37,7 @@ public class Deadline extends Task {
         } else {
             isFinishedData = "0";
         }
+        assert this.date != null;
         return "D:" + isFinishedData + ":" + super.content + ":" + date.format(DateTimeFormatter.ISO_DATE);
     }
 }

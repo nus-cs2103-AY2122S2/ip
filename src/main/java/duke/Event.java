@@ -27,6 +27,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        assert this.time != null;
         return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.BASIC_ISO_DATE) + ")";
     }
 
@@ -37,6 +38,7 @@ public class Event extends Task {
      */
     @Override
     public String toData() {
+        assert this.time != null;
         String isFinishedData;
         if (super.finished) {
             isFinishedData = "1";

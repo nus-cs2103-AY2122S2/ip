@@ -13,6 +13,9 @@ public class CommandEvent extends Command {
     private String eventContent;
 
     public CommandEvent(TaskList taskList, String eventContent, LocalDate time) {
+        assert taskList != null;
+        assert eventContent != null;
+        assert time != null;
         this.eventContent = eventContent;
         this.taskList = taskList;
         this.time = time;
