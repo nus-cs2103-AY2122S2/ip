@@ -91,11 +91,11 @@ public class TaskList {
                     + " tasks in your task list arrr, better get workin' aye!\n");
             str.append(ui.requestNextCommand());
             assert numOfTasksBeforeAddition + 1 == taskList.size() : "Task should be added to task list";
-            return str.toString();
         } else {
             str.append(ui.showError("\tTask is invalid matey :-(, please try again!\n"));
-            return str.toString();
         }
+        
+        return str.toString();
     }
 
     /**
@@ -112,12 +112,12 @@ public class TaskList {
             this.taskList.remove(taskIndex);
             this.taskCount--;
             str.append(ui.deleteTask() + task + "\n" + ui.requestNextCommand());
-            assert numOfTasksBeforeDeletion + 1 == taskList.size() : "Task should be added to task list";
-            return str.toString();
+            assert numOfTasksBeforeDeletion - 1 == taskList.size() : "Task should be deleted from task list";
         } catch (IndexOutOfBoundsException e) {
             ui.showError("\tAin't nuthin' to be deleted here matey! :-(\n");
-            return str.toString();
         }
+
+        return str.toString();
     }
 
     /**
