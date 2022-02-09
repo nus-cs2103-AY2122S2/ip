@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import data.TaskList;
-import storage.Storage;
-import ui.Ui;
+import duke.data.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class ExitCommand extends Command {
 
@@ -13,8 +13,8 @@ public class ExitCommand extends Command {
      * @param storage Class that manages storage
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.respond("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.respond("Bye. Hope to see you again soon!");
     }
 
     public boolean isExit() {

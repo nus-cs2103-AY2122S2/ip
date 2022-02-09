@@ -1,9 +1,9 @@
-package parser;
+package duke.parser;
 
-import commands.*;
-import common.NoGoodException;
-import common.Type;
-import data.Task;
+import duke.commands.*;
+import duke.common.NoGoodException;
+import duke.common.Type;
+import duke.data.Task;
 
 public class Parser {
 

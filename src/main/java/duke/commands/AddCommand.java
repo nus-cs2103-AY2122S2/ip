@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import data.Task;
-import data.TaskList;
-import storage.Storage;
-import ui.Ui;
+import duke.data.Task;
+import duke.data.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class AddCommand extends Command {
     private final Task t;
@@ -20,11 +20,11 @@ public class AddCommand extends Command {
      * @param storage Class that manages storage
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(t);
         storage.record(t + "\n");
-        ui.respond("Got it. I've added this task:\n  " +
-                    t + "\nNow you have " + tasks.size() + " tasks in the list.");
+        return ui.respond("Got it. I've added this task:\n  " +
+                    t + "\n\nNow you have " + tasks.size() + " tasks in the list.");
 
     }
 

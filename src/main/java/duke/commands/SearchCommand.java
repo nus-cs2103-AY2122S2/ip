@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import data.TaskList;
-import storage.Storage;
-import ui.Ui;
+import duke.data.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class SearchCommand extends Command{
     private final String prefix;
@@ -19,8 +19,8 @@ public class SearchCommand extends Command{
      * @param storage Class that manages storage
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.respond("Here's are matching tasks in your list\n" + tasks.search(prefix));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.respond("Here's are matching tasks in your list\n" + tasks.search(prefix));
     }
 
     @Override

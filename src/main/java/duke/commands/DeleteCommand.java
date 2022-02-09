@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import data.Task;
-import data.TaskList;
-import storage.Storage;
-import ui.Ui;
+import duke.data.Task;
+import duke.data.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private final int i;
@@ -19,11 +19,11 @@ public class DeleteCommand extends Command {
      * @param storage Class that manages storage
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         Task t = tasks.get(i);
         tasks.remove(t);
-        ui.respond("Noted. I've removed this task: \n  " +
+        return ui.respond("Noted. I've removed this task: \n  " +
                 t + "\n     Now you have " + tasks.size() + " tasks in the list.");
     }
 

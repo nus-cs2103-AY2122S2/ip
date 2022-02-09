@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import data.TaskList;
-import storage.Storage;
-import ui.Ui;
+import duke.data.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class PrintCommand extends Command {
     private final String text;
@@ -18,8 +18,8 @@ public class PrintCommand extends Command {
      * @param storage Class that manages storage
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.respond(text);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.respond(text);
     }
 
     @Override

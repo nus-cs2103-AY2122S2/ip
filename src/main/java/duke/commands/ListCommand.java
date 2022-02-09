@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import data.TaskList;
-import storage.Storage;
-import ui.Ui;
+import duke.data.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class ListCommand extends Command {
 
@@ -13,8 +13,8 @@ public class ListCommand extends Command {
      * @param storage Class that manages storage
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.respond(tasks.listing());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.respond(tasks.listing());
     }
 
     @Override

@@ -1,10 +1,9 @@
-import commands.AddCommand;
-import commands.ExitCommand;
-import common.Type;
-import data.Task;
+import duke.commands.AddCommand;
+import duke.commands.ExitCommand;
+import duke.common.Type;
+import duke.data.Task;
 import org.junit.jupiter.api.Test;
-import parser.Parser;
-import ui.Ui;
+import duke.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

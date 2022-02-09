@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import data.Task;
-import data.TaskList;
-import storage.Storage;
-import ui.Ui;
+import duke.data.Task;
+import duke.data.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class MarkCommand extends Command {
     private final int i;
@@ -19,11 +19,11 @@ public class MarkCommand extends Command {
      * @param storage Class that manages storage
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
             Task t = tasks.get(i);
             t.mark();
-            ui.respond("Nice! I've marked this task as done:\n  " + t);
+            return ui.respond("Nice! I've marked this task as done:\n  " + t);
     }
 
     @Override

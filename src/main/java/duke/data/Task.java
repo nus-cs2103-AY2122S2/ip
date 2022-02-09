@@ -1,6 +1,6 @@
-package data;
+package duke.data;
 
-import common.Type;
+import duke.common.Type;
 
 public class Task {
     private final String name;
