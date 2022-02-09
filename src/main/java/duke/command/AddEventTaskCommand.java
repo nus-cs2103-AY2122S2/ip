@@ -32,9 +32,12 @@ public class AddEventTaskCommand extends Command {
      */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
-        taskList.addEventTask(description, at);
+        assert taskList != null;
+        assert ui != null;
 
+        taskList.addEventTask(description, at);
         int taskIndex = taskList.getNumberOfTasks() - 1;
+
         ui.showMessage("Got it. I've added this task: ");
         ui.showMessage(taskList.getDescriptionOfTaskAtIndex(taskIndex));
         ui.showMessage("Now you have " + taskList.getNumberOfTasks() + " tasks in the list.");

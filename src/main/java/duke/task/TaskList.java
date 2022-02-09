@@ -97,6 +97,7 @@ public class TaskList {
      * @return the string representation of a designated task.
      */
     public String getDescriptionOfTaskAtIndex(int index) {
+        assert index >= 0 && index < tasks.size() : index;
         return tasks.get(index).toString();
     }
 
@@ -146,6 +147,7 @@ public class TaskList {
             throw new DukeException("The task index provided is invalid");
         }
 
+        assert taskIndex >= 0 && taskIndex < tasks.size() : taskIndex;
         tasks.get(taskIndex).mark();
     }
 
@@ -160,6 +162,7 @@ public class TaskList {
             throw new DukeException("The task index provided is invalid");
         }
 
+        assert taskIndex >= 0 && taskIndex < tasks.size() : taskIndex;
         tasks.get(taskIndex).unmark();
     }
 
@@ -190,5 +193,6 @@ public class TaskList {
             tasks.remove(numberOfTasks - 1);
             numberOfTasks--;
         }
+        assert numberOfTasks == 0 : numberOfTasks;
     }
 }

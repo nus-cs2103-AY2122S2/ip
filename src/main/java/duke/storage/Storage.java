@@ -43,6 +43,7 @@ public class Storage {
             BufferedReader bufferReader = new BufferedReader(Files.newBufferedReader(path));
 
             int numberOfTasks = Integer.parseInt(bufferReader.readLine());
+            assert numberOfTasks >= 0 : numberOfTasks;
             String[] data = new String[numberOfTasks];
 
             for (int i = 0; i < numberOfTasks; i++) {
@@ -50,7 +51,7 @@ public class Storage {
             }
 
             return data;
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | AssertionError e) {
             throw new DukeException("Encounter incorrect file format when reading " + filePath);
         } catch (IOException e) {
             throw new DukeException("Failed to load tasks from " + filePath);

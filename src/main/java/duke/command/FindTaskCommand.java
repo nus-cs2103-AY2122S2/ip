@@ -33,6 +33,7 @@ public class FindTaskCommand extends Command {
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         ArrayList<String> matches = new ArrayList<>();
 
+        assert taskList != null;
         int numberOfTasks = taskList.getNumberOfTasks();
         for (int i = 0; i < numberOfTasks; i++) {
             String taskDescription = taskList.getDescriptionOfTaskAtIndex(i);
@@ -41,6 +42,7 @@ public class FindTaskCommand extends Command {
             }
         }
 
+        assert ui != null;
         if (matches.size() == 0) {
             ui.showMessage("There are no matching tasks in your list");
         } else {

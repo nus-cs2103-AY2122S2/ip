@@ -17,6 +17,8 @@ public class ListTaskCommand extends Command {
      */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
+        assert taskList != null;
+        assert ui != null;
         int numberOfTasks = taskList.getNumberOfTasks();
 
         if (numberOfTasks == 0) {
