@@ -186,6 +186,7 @@ public class TaskList {
      * @return Message containing confirmation that a task was deleted or an error.
      */
     public static String deleteTask(int index) {
+        assert tasks != null;
         try {
             Task t = tasks.get(index);
             tasks.remove(index);
@@ -203,6 +204,7 @@ public class TaskList {
      * @return Message containing confirmation that all tasks were cleared.
      */
     public static String clearTasks() {
+        assert tasks != null;
         tasks.clear();
         print(CLEAR_TASKS_CONFIRMED);
         return CLEAR_TASKS_CONFIRMED;
@@ -216,46 +218,67 @@ public class TaskList {
      * @return Message containing confirmation that a task was marked/unmarked or an error.
      */
     public static String markStatus(TaskStatus ts, int index) {
+        assert tasks != null;
         switch (ts) {
         case MARK: {
-            try {
-                Task t = tasks.get(index);
-                t.mark();
-                print(MARK_TASK);
-                print(INDENT + t);
-                return MARK_TASK + "\n" + INDENT + t;
-            } catch (IndexOutOfBoundsException e) {
-                if (tasks.isEmpty()) {
-                    print(ERROR_MARK_EMPTY);
-                    return ERROR_MARK_EMPTY;
-                }
-                print(ERROR_INDEX_OUT_OF_RANGE);
-                getNumberOfTasks();
-                return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
-            }
+            return markTask(index);
         }
         case UNMARK: {
-            try {
-                Task t = tasks.get(index);
-                t.unmark();
-                print(UNMARK_TASK);
-                print(INDENT + t);
-                return UNMARK_TASK + "\n" + INDENT + t;
-            } catch (IndexOutOfBoundsException e) {
-                if (tasks.isEmpty()) {
-                    print(ERROR_UNMARK_EMPTY);
-                    return ERROR_MARK_EMPTY;
-                }
-                print(ERROR_INDEX_OUT_OF_RANGE);
-                getNumberOfTasks();
-                return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
-            }
+            return unmarkTask(index);
         }
         default: {
             // Something has gone wrong
             print(ERROR_INVALID_TASK_STATUS);
             return ERROR_INVALID_TASK_STATUS;
         }
+        }
+    }
+
+    /**
+     * Marks a {@code Task} in the task list with the given index.
+     *
+     * @param index Index of the task to be marked.
+     * @return Message containing confirmation that a task was marked or an error.
+     */
+    private static String markTask(int index) {
+        try {
+            Task t = tasks.get(index);
+            t.mark();
+            print(MARK_TASK);
+            print(INDENT + t);
+            return MARK_TASK + "\n" + INDENT + t;
+        } catch (IndexOutOfBoundsException e) {
+            if (tasks.isEmpty()) {
+                print(ERROR_MARK_EMPTY);
+                return ERROR_MARK_EMPTY;
+            }
+            print(ERROR_INDEX_OUT_OF_RANGE);
+            getNumberOfTasks();
+            return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
+        }
+    }
+
+    /**
+     * Unmarks a {@code Task} in the task list with the given index.
+     *
+     * @param index Index of the task to be unmarked.
+     * @return Message containing confirmation that a task was unmarked or an error.
+     */
+    private static String unmarkTask(int index) {
+        try {
+            Task t = tasks.get(index);
+            t.unmark();
+            print(UNMARK_TASK);
+            print(INDENT + t);
+            return UNMARK_TASK + "\n" + INDENT + t;
+        } catch (IndexOutOfBoundsException e) {
+            if (tasks.isEmpty()) {
+                print(ERROR_UNMARK_EMPTY);
+                return ERROR_MARK_EMPTY;
+            }
+            print(ERROR_INDEX_OUT_OF_RANGE);
+            getNumberOfTasks();
+            return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
         }
     }
 
@@ -296,12 +319,14 @@ public class TaskList {
      * @return Number of tasks in the task list.
      */
     public static int getNumberOfTasks() {
+        assert tasks != null;
         String plurality = tasks.size() == 1 ? "" : "s";
         print("You have " + tasks.size() + " task" + plurality + ".");
         return tasks.size();
     }
 
     public static String getNumberOfTasksString() {
+        assert tasks != null;
         String plurality = tasks.size() == 1 ? "" : "s";
         return "You have " + tasks.size() + " task" + plurality + ".";
     }

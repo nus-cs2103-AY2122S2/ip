@@ -44,83 +44,131 @@ public class Parser {
         switch (command) {
         case "exit":
         case "bye": {
-            this.commandType = CommandType.BYE;
-            this.command = new ByeCommand();
+            setByeCommand();
             break;
         }
         case "list": {
-            this.commandType = CommandType.LIST;
-            this.command = new ListCommand();
+            setListCommand();
             break;
         }
         case "todo": {
-            this.commandType = CommandType.ADD;
-            this.command = new AddCommand(TaskType.TODO, desc);
+            setTodoCommand(desc);
             break;
         }
         case "deadline": {
-            this.commandType = CommandType.ADD;
-            this.command = new AddCommand(TaskType.DEADLINE, desc);
+            setDeadlineCommand(desc);
             break;
         }
         case "event": {
-            this.commandType = CommandType.ADD;
-            this.command = new AddCommand(TaskType.EVENT, desc);
+            setEventCommand(desc);
             break;
         }
         case "delete": {
-            this.commandType = CommandType.DELETE;
-            try {
-                int taskNo = Integer.parseInt(desc) - 1;
-                this.command = new DeleteCommand(taskNo);
-            } catch (NumberFormatException e) {
-                System.out.println(ERROR_INDEX_NOT_INTEGER);
-                message.append(ERROR_INDEX_NOT_INTEGER);
-                canActivate = false;
-            }
+            setDeleteCommand(desc);
             break;
         }
         case "clear": {
-            this.commandType = CommandType.CLEAR;
-            this.command = new ClearCommand();
+            setClearCommand();
             break;
         }
         case "mark": {
-            this.commandType = CommandType.CHANGE_STATUS;
-            try {
-                int taskNo = Integer.parseInt(desc) - 1;
-                this.command = new ChangeStatusCommand(TaskStatus.MARK, taskNo);
-            } catch (NumberFormatException e) {
-                System.out.println(ERROR_INDEX_NOT_INTEGER);
-                message.append(ERROR_INDEX_NOT_INTEGER);
-                canActivate = false;
-            }
+            setMarkCommand(desc);
             break;
         }
         case "unmark": {
-            this.commandType = CommandType.CHANGE_STATUS;
-            try {
-                int taskNo = Integer.parseInt(desc) - 1;
-                this.command = new ChangeStatusCommand(TaskStatus.UNMARK, taskNo);
-            } catch (NumberFormatException e) {
-                System.out.println(ERROR_INDEX_NOT_INTEGER);
-                message.append(ERROR_INDEX_NOT_INTEGER);
-                canActivate = false;
-            }
+            setUnmarkCommand(desc);
             break;
         }
         case "find": {
-            this.commandType = CommandType.FIND;
-            this.command = new FindCommand(desc);
+            setFindCommand(desc);
             break;
         }
         default: {
-            this.commandType = CommandType.UNKNOWN;
-            System.out.println(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
-            message.append(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
+            setUnknownCommand(commandRaw);
+        }
+        }
+    }
+
+    private void setByeCommand() {
+        this.commandType = CommandType.BYE;
+        this.command = new ByeCommand();
+    }
+
+    private void setListCommand() {
+        this.commandType = CommandType.LIST;
+        this.command = new ListCommand();
+    }
+
+    private void setTodoCommand(String desc) {
+        this.commandType = CommandType.ADD;
+        this.command = new AddCommand(TaskType.TODO, desc);
+    }
+
+    private void setDeadlineCommand(String desc) {
+        this.commandType = CommandType.ADD;
+        this.command = new AddCommand(TaskType.DEADLINE, desc);
+    }
+
+    private void setEventCommand(String desc) {
+        this.commandType = CommandType.ADD;
+        this.command = new AddCommand(TaskType.EVENT, desc);
+    }
+
+    private void setDeleteCommand(String desc) {
+        this.commandType = CommandType.DELETE;
+        try {
+            int taskNo = Integer.parseInt(desc) - 1;
+            this.command = new DeleteCommand(taskNo);
+        } catch (NumberFormatException e) {
+            System.out.println(ERROR_INDEX_NOT_INTEGER);
+            message.append(ERROR_INDEX_NOT_INTEGER);
             canActivate = false;
         }
+    }
+
+    private void setClearCommand() {
+        this.commandType = CommandType.CLEAR;
+        this.command = new ClearCommand();
+    }
+
+    private void setMarkCommand(String desc) {
+        this.commandType = CommandType.CHANGE_STATUS;
+        try {
+            int taskNo = Integer.parseInt(desc) - 1;
+            this.command = new ChangeStatusCommand(TaskStatus.MARK, taskNo);
+        } catch (NumberFormatException e) {
+            System.out.println(ERROR_INDEX_NOT_INTEGER);
+            message.append(ERROR_INDEX_NOT_INTEGER);
+            canActivate = false;
         }
+    }
+
+    private void setUnmarkCommand(String desc) {
+        this.commandType = CommandType.CHANGE_STATUS;
+        try {
+            int taskNo = Integer.parseInt(desc) - 1;
+            this.command = new ChangeStatusCommand(TaskStatus.UNMARK, taskNo);
+        } catch (NumberFormatException e) {
+            System.out.println(ERROR_INDEX_NOT_INTEGER);
+            message.append(ERROR_INDEX_NOT_INTEGER);
+            canActivate = false;
+        }
+    }
+
+    private void setFindCommand(String desc) {
+        this.commandType = CommandType.FIND;
+        this.command = new FindCommand(desc);
+    }
+
+    private void setUnknownCommand(String commandRaw) {
+        this.commandType = CommandType.UNKNOWN;
+        System.out.println(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
+        message.append(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
+        canActivate = false;
+    }
+
+    public CommandType getCommandType() {
+        return this.commandType;
     }
 
     /**
