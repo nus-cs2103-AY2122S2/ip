@@ -26,7 +26,7 @@ public class Deadline extends Task {
      * @return String to identify the Deadline.
      */
     @Override
-    public String identify() {
+    public String toString() {
         String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy" ));
         if (super.getIsDone()) {
             return String.format("[D][X] %s (by: %s)\n", super.getDescription(), dateString);

@@ -112,13 +112,13 @@ public class Storage {
      * @param dataArrList ArrayList</Task> that represents the updated taskList.
      * @throws DukeException If file is not writeable.
      */
-    public void updateStorage(ArrayList<Task> dataArrList) throws DukeException {
+    public void updateStorageFile(ArrayList<Task> dataArrList) throws DukeException {
         File file = new File(filePath);
         String updatedFileContents = "";
 
         for (int i = 0; i < dataArrList.size(); i++) {
             updatedFileContents = updatedFileContents.concat(
-                String.format("    %s", dataArrList.get(i).identify()));
+                String.format("    %s", dataArrList.get(i).toString()));
         }
 
         try {
@@ -140,7 +140,7 @@ public class Storage {
         File file = new File(filePath);
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            fw.write(String.format("    %s", task.identify()));
+            fw.write(String.format("    %s", task.toString()));
             fw.close();
         } catch (IOException errorMessage) {
             throw new DukeException();

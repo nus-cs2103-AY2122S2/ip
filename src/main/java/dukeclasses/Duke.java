@@ -6,7 +6,6 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 
-
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
@@ -27,6 +26,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 
 import javafx.util.Duration;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,6 +38,8 @@ public class Duke extends Application {
 
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image backgroundImage = new Image(this.getClass().getResource("/images/background.png").toString());
+    private final String PARSE_ERROR = "Fail to parse user input.";
     private static final String TEXT_DATA_FILE_PATH = "data.txt";
     private boolean isExit = false;
 
@@ -60,156 +62,17 @@ public class Duke extends Application {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException errorMessage) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
+
     /**
-     * Contains and runs the main logic of Duke.
+     * Prints user input and duke response.
+     *
+     * @param output string that represents the output to be printed into the GUI.
      */
-    private void handleUserInput() {
-        String output = ui.showInputError();
-        String stringUserInput = userInput.getText();
-
-        ParsedCommand parsedCommand = null;
-        try {
-            parsedCommand = Parser.parse(stringUserInput);
-        } catch (DukeException errorMessage) {
-            output =  ui.showInputError();
-
-            Label userText = new Label(userInput.getText());
-            Label dukeText = new Label(output);
-            dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(user)));
-
-            DialogBox dukeReply = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
-            Timeline delayReply = new Timeline();
-            delayReply.getKeyFrames().add(new KeyFrame(Duration.millis(500),
-                    (event) -> dialogContainer.getChildren().add(dukeReply)));
-            delayReply.play();
-            userInput.clear();
-            return ;
-        }
-
-        switch (parsedCommand.getCommand()) {
-        case "hi":
-            output =  ui.greet();
-            break;
-        case "bye":
-            isExit = true;
-            output =  ui.sayBye();
-            break;
-        case "list":
-            output =  ui.listTask(storage.getStorageFilePath());
-            break;
-        case "mark":
-            if (parsedCommand.getIndex() >= tasks.getTaskList().size()) {
-                output =  ui.showInputError();
-                break;
-            }
-            Task markedTask = tasks.updateTask(parsedCommand.getIndex(), true);
-            try {
-                storage.updateStorage(tasks.getTaskList());
-            } catch (DukeException errorMessage) {
-                output =  ui.showStorageError();
-                break;
-            }
-            output =  ui.identifyTask(markedTask);
-            break;
-        case "unmark":
-            if (parsedCommand.getIndex() > tasks.getTaskList().size()) {
-                output =  ui.showInputError();
-                break;
-            }
-
-            Task unmarkedTask = tasks.updateTask(parsedCommand.getIndex(), false);
-
-            try {
-                storage.updateStorage(tasks.getTaskList());
-            } catch (DukeException errorMessage) {
-                output =  ui.showStorageError();
-                break;
-            }
-            output =  ui.identifyTask(unmarkedTask);
-            break;
-        case "todo":
-            ToDo todo = new ToDo(parsedCommand.getTask());
-
-            try {
-                storage.appendToStorage(todo);
-            } catch (DukeException errorMessage) {
-                output =  ui.showStorageError();
-                break;
-            }
-
-            tasks.addTask(todo);
-            output =  ui.newTask(todo, tasks.getTaskList().size());
-            break;
-        case "event":
-            Event event = new Event(parsedCommand.getTask(), parsedCommand.getDueDate());
-
-            try {
-                storage.appendToStorage(event);
-            } catch (DukeException errorMessage) {
-                output =  ui.showStorageError();
-                break;
-            }
-
-            tasks.addTask(event);
-            output =  ui.newTask(event, tasks.getTaskList().size());
-            break;
-        case "deadline":
-            Deadline deadline = new Deadline(parsedCommand.getTask(), parsedCommand.getDueDate());
-
-            try {
-                storage.appendToStorage(deadline);
-            } catch (DukeException errorMessage) {
-                output =  ui.showStorageError();
-                break;
-            }
-
-            tasks.addTask(deadline);
-            output =  ui.newTask(deadline, tasks.getTaskList().size());
-            break;
-        case "delete":
-
-            if (parsedCommand.getIndex() > tasks.getTaskList().size()) {
-                output =  ui.showInputError();
-                break;
-            }
-
-            Task deletedTask = null;
-            try {
-                deletedTask = tasks.deleteTask(parsedCommand.getIndex());
-            } catch (DukeException errorMessage) {
-                output = ui.showInputError();
-                break;
-            }
-
-            try {
-                storage.updateStorage(tasks.getTaskList());
-            } catch (DukeException errorMessage) {
-                output =  ui.showStorageError();
-                break;
-            }
-
-            output =  ui.deleteTask(deletedTask);
-            break;
-        case "find":
-            String taskDescription = parsedCommand.getTask();
-            TaskList findTaskList = new TaskList();
-
-            for (int i = 0; i < tasks.getTaskList().size(); i++) {
-                Task task = tasks.getTaskList().get(i);
-                if (task.getDescription().contains(taskDescription)) {
-                    findTaskList.getTaskList().add(task);
-                }
-            }
-
-            output =  ui.listTaskUsingArrayList(findTaskList);
-            break;
-        }
-
+    private void updateChatBox(String output) {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(output);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(user)));
@@ -224,6 +87,300 @@ public class Duke extends Application {
     }
 
     /**
+     * Executes different commands based on command input and return the string which is the output.
+     *
+     * @param command command that was parsed from user input.
+     * @return output which is the String to be printed  in the GUI as Duke's response.
+     */
+    private String generateOutput(ParsedCommand command) {
+        switch (command.getCommand()) {
+        case "hi":
+            return ui.greet();
+        case "bye":
+            isExit = true;
+            return ui.sayBye();
+        case "list":
+            return ui.listTaskUsingArrayList(tasks);
+        case "mark":
+        case "unmark":
+            return executeChangeOfStatusCommand(command);
+        case "todo":
+        case "event":
+        case "deadline":
+            return executeNewTaskCommand(command);
+        case "delete":
+            return executeDeleteTaskCommand(command);
+        case "find":
+            return executeFindCommand(command);
+        default:
+            return ui.showInputError();
+        }
+    }
+
+    /**
+     * Parses the user input.
+     *
+     * @return ParsedCommand that represent the user input.
+     */
+    private ParsedCommand parseUserInput() {
+        String stringUserInput = userInput.getText();
+
+        try {
+            ParsedCommand parsedCommand = Parser.parse(stringUserInput, tasks.getTaskList().size());
+            return parsedCommand;
+        } catch (DukeException errorMessage) {
+            return null;
+        }
+    }
+
+    /**
+     * Execute methods related to the find command.
+     *
+     * @param command command that contains information for find command to execute.
+     * @return String output that is printed in the GUI as Duke's response.
+     */
+    private String executeFindCommand(ParsedCommand command) {
+        String taskDescription = command.getTask();
+        TaskList findTaskList = tasks.findInTaskList(taskDescription);
+        return ui.listTaskUsingArrayList(findTaskList);
+    }
+
+    /**
+     * Execute methods related to the commands that change status of the task.
+     *
+     * @param command command that contains information for change of status command to execute.
+     * @return String output that is printed in the GUI as Duke's response.
+     */
+    private String executeChangeOfStatusCommand(ParsedCommand command) {
+        Task modifiedTask = null;
+        if (command.getCommand().equals("mark")) {
+            modifiedTask = tasks.updateTask(command.getIndex(), true);
+        } else if (command.getCommand().equals("unmark")) {
+            modifiedTask = tasks.updateTask(command.getIndex(), false);
+        } else {
+            return ui.showInputError();
+        }
+
+        if (!updateItemsInStorage()) {
+            return ui.showStorageError();
+        }
+
+        return ui.identifyTask(modifiedTask);
+    }
+
+    /**
+     * Execute methods related to the commands that deletes task.
+     *
+     * @param command command that contains information for delete command to execute.
+     * @return String output that is printed in the GUI as Duke's response.
+     */
+    private String executeDeleteTaskCommand(ParsedCommand command) {
+        Task deletedTask = null;
+        try {
+            deletedTask = tasks.deleteTask(command.getIndex());
+        } catch (DukeException errorMessage) {
+            return ui.showInputError();
+        }
+
+        if (!updateItemsInStorage()) {
+            return ui.showStorageError();
+        }
+
+        return ui.deleteTask(deletedTask);
+    }
+
+    /**
+     * Execute methods related to the commands that creates task.
+     *
+     * @param command command that contains information for create command to execute.
+     * @return String output that is printed in the GUI as Duke's response.
+     */
+    private String executeNewTaskCommand(ParsedCommand command) {
+        //return a null Task if command is not any of the cases.
+        Task newTask = null;
+        switch (command.getCommand()) {
+        case "todo":
+            newTask = new ToDo(command.getTask());
+            break;
+        case "event":
+            newTask = new Event(command.getTask(), command.getDueDate());
+            break;
+        case "deadline":
+            newTask = new Deadline(command.getTask(), command.getDueDate());
+            break;
+        default:
+            return ui.showInputError();
+        }
+
+        tasks.addTask(newTask);
+
+        if (!appendNewTaskToStorage(newTask)) {
+            return ui.showStorageError();
+        }
+
+        return ui.sayAddTask(newTask, tasks.getTaskList().size());
+    }
+
+
+    /**
+     * Contains and runs the main logic of Duke.
+     */
+    private void handleUserInput() {
+        ParsedCommand parsedUserInput = parseUserInput();
+        if (parsedUserInput == null) {
+            updateChatBox(ui.showInputError());
+            return ;
+        }
+
+        String output = generateOutput(parsedUserInput);
+        updateChatBox(output);
+    }
+
+    /**
+     * Adds task to storage file.
+     *
+     * @param taskToAppend Task that is to be added to storage.
+     * @return true if appending succeeds else a false will be returned instead.
+     */
+    private boolean appendNewTaskToStorage(Task taskToAppend) {
+        try {
+            storage.appendToStorage(taskToAppend);
+        } catch (DukeException errorMessage) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Updates storage file.
+     *
+     * @return true if appending update else a false will be returned instead.
+     */
+    private boolean updateItemsInStorage() {
+        try {
+            storage.updateStorageFile(tasks.getTaskList());
+        } catch (DukeException errorMessage) {
+            updateChatBox(ui.showStorageError());
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Preset settings for the given button
+     *
+     * @param button The Button object to be used with the settings.
+     */
+    private void presetSendButton(Button button) {
+        AnchorPane.setBottomAnchor(sendButton, 0.1);
+        AnchorPane.setRightAnchor(sendButton, 0.1);
+
+        sendButton.setPrefWidth(55.0);
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+    }
+
+    /**
+     * Preset settings for the given ScrollPane object.
+     *
+     * @param pane Pane object to apply settings to.
+     * @param box Box object to be applied to pane.
+     */
+    private void presetScrollPane(ScrollPane pane, VBox box) {
+        pane.setPrefSize(400, 573);
+        pane.setVvalue(1.0);
+        pane.setFitToWidth(true);
+
+        pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        pane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        AnchorPane.setTopAnchor(scrollPane, 0.1);
+        scrollPane.setOpacity(0.9333);
+        scrollPane.setContent(box);
+    }
+
+    /**
+     * Preset settings for the TextField object.
+     *
+     * @param input TextField where settings are applied to.
+     */
+    private void presetUserInput(TextField input) {
+        AnchorPane.setLeftAnchor(input , 0.1);
+        AnchorPane.setBottomAnchor(input, 0.1);
+        input.setPrefWidth(345.0);
+        input.setOnAction((event) -> {
+            handleUserInput();
+            if (isExit) {
+                setTimer();
+            }
+        });
+    }
+
+    /**
+     * Sets delay for Duke to exit when the bye command is executed.
+     */
+    private void setTimer() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+            }
+        }, 1500);
+    }
+
+    /**
+     * Preset settings for the stage given.
+     *
+     * @param dukeStage Main stage of Duke.
+     * @param mainLayoutForStage MainLayout for the main stage of Duke.
+     */
+    private void presetStage(Stage dukeStage, Scene mainLayoutForStage) {
+        dukeStage.setScene(mainLayoutForStage);
+        dukeStage.setTitle("Duke");
+        dukeStage.setResizable(false);
+        dukeStage.setMinHeight(600.0);
+        dukeStage.setMinWidth(400.0);
+    }
+
+    /**
+     * Preset settings for the MainLayout class supplied.
+     *
+     * @param layout The AnchorPane object to apply the settings to
+     * @param pane The AnchorPane object to apply to the layout.
+     * @param text The TextField object to apply to the layout.
+     * @param button The Button object to apply to the layout.
+     */
+    private void presetMainLayout(AnchorPane layout, ScrollPane pane, TextField text, Button button) {
+        layout.setPrefSize(400.0, 600.0);
+        layout.getChildren().addAll(pane, text, button);
+    }
+
+    /**
+     * Preset settings for the background image of Duke's GUI.
+     *
+     * @param mainLayout The AnchorPane object to apply the background to.
+     */
+    private void presetBackgroundImage(AnchorPane mainLayout) {
+        Background bg = new Background(new BackgroundImage(
+                backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0,
+                true, true, false, false)));
+        mainLayout.setBackground(bg);
+    }
+
+    /**
+     * Preset settings for the DialogBox.
+     *
+     * @param dialogBox The VBox object to apply preset settings to.
+     */
+    private void presetDialogContainer(VBox dialogBox) {
+        dialogBox.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogBox.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogBox.getChildren().add(DialogBox.getUserDialog(new Label(ui.greet()), new ImageView(duke)));
+    }
+
+    /**
      * Sets the interface of the GUI.
      *
      * @param stage Stage to be used for the GUI.
@@ -232,82 +389,21 @@ public class Duke extends Application {
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
-
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 0.1);
-
-        AnchorPane.setBottomAnchor(sendButton, 0.1);
-        AnchorPane.setRightAnchor(sendButton, 0.1);
-
-        AnchorPane.setLeftAnchor(userInput , 0.1);
-        AnchorPane.setBottomAnchor(userInput, 0.1);
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        Image bgImage = new Image(this.getClass().getResource("/images/background.png").toString());
-        Background bg = new Background(new BackgroundImage(
-                bgImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0,
-                true, true, false, false)));
-        mainLayout.setBackground(bg);
-        scrollPane.setOpacity(0.9333);
         scene = new Scene(mainLayout);
 
-        stage.setScene(scene);
+        presetMainLayout(mainLayout, scrollPane, userInput, sendButton);
+        presetBackgroundImage(mainLayout);
+        presetScrollPane(scrollPane, dialogContainer);
+        presetDialogContainer(dialogContainer);
+        presetSendButton(sendButton);
+        presetUserInput(userInput);
+        presetStage(stage, scene);
         stage.show();
 
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        scrollPane.setPrefSize(400, 573);
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        userInput.setPrefWidth(345.0);
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-            if (isExit) {
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        Platform.exit();
-                    }
-                }, 1000);
-            }
-        });
-
-        sendButton.setPrefWidth(55.0);
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
 
     }
-
-    /**
-     * Sets up the interface for when the user inputs and also the return string.
-     *
-     * @param text String that is to be printed on the GUI.
-     * @return Label used for printing on the GUI.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
 
 }

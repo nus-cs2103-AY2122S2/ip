@@ -51,7 +51,7 @@ public class Task {
      *
      * @return String that identify the task
      */
-    public String identify() {
+    public String toString() {
         if (isDone) {
             return String.format("[X] %s", description);
         } else {
