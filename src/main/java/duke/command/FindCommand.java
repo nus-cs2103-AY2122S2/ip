@@ -12,7 +12,7 @@ import duke.util.Ui;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    private final String keyword;
+    private String keyword;
 
 
     /**
@@ -26,9 +26,11 @@ public class FindCommand extends Command {
 
     /**
      * Executes command by adding task into Duke.Duke.util.TaskList.
+     *
      * @param taskList List of tasks
      * @param ui       Ui provided
      * @param storage  Saved history
+     * @return message to tell user of the tasks matching with keyword given
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

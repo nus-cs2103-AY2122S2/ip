@@ -19,6 +19,8 @@ public class Storage {
     /**
      * Creates a new instance of Storage that loads the history from a specific path
      * or creates a new file for saving tasks
+     *
+     * @param filePath File path where file stores the task list
      */
     public Storage(String filePath) {
         Storage.filePath = filePath;
@@ -63,6 +65,8 @@ public class Storage {
 
     /**
      * Save all tasks into a file
+     *
+     * @param taskList list of tasks
      */
     public static void saveToFile(ArrayList<Task> taskList) {
         String result = "";
