@@ -3,7 +3,7 @@ package task;
 /**
  * The Todo class is a type of Task which is used to represent todo.
  */
-public class Todo extends Task {
+public class Todo extends Task implements Comparable<Task> {
     public Todo(String description) {
         super(description);
     }
@@ -26,5 +26,15 @@ public class Todo extends Task {
     @Override
     public String getSaveFormat() {
         return "T," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat();
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Deadline || o instanceof Event) {
+            return 1;
+        } else if (o instanceof Todo) {
+            return this.description.compareTo(o.description);
+        }
+        return 0;
     }
 }

@@ -4,3 +4,4 @@ E,0,project meeting,Aug 6th 2-4pm
 T,0,join sports club
 E,1,reunion dinner,31 jan 6pm
 D,1,assignment 1,2019-10-15
+T,0,eat sandwich

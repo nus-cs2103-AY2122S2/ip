@@ -3,7 +3,7 @@ package task;
 /**
  * The Event class is a type of Task which is used to represent an event that happens at a certain date/time.
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Task> {
     protected String at;
 
     public Event(String description, String at) {
@@ -29,5 +29,17 @@ public class Event extends Task {
     @Override
     public String getSaveFormat() {
         return "E," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "," + this.at;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Deadline) {
+            return 1;
+        } else if (o instanceof Todo) {
+            return -1;
+        } else if (o instanceof Event) {
+            return this.description.compareTo(o.description);
+        }
+        return 0;
     }
 }

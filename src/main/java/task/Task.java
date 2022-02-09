@@ -3,7 +3,7 @@ package task;
 /**
  *  The Task class represents an actual task to be completed.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -53,5 +53,10 @@ public class Task {
      */
     public String getSaveFormat() {
         return this.description;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        return this.description.compareTo(o.description);
     }
 }

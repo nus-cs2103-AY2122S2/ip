@@ -1,15 +1,19 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * The TaskList class is used to contain a list of tasks and methods to manipulate the tasks.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private boolean isSorted;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.isSorted = false;
     }
 
     public TaskList(ArrayList<Task> tasks) {
@@ -25,6 +29,7 @@ public class TaskList {
 
     public void addTask(Task t) {
         this.tasks.add(t);
+        this.sortTasks();
     }
 
     public Task getTask(int index) {
@@ -50,6 +55,10 @@ public class TaskList {
     }
 
     public String displayTasks(String startMsg, ArrayList<Task> tasks, boolean isFind) {
+        if (!this.isSorted) {
+            this.sortTasks();
+        }
+
         if (tasks.size() > 0) {
             StringBuilder sb = new StringBuilder(startMsg + "\n");
             for (int i = 0; i < tasks.size(); i++) {
@@ -71,6 +80,11 @@ public class TaskList {
     @Override
     public String toString() {
         return displayTasks("Here are the tasks in your list: ", this.tasks, false);
+    }
+
+    public void sortTasks() {
+        this.isSorted = true;
+        Collections.sort(this.tasks);
     }
 }
 
