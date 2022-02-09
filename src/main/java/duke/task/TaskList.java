@@ -108,7 +108,7 @@ public class TaskList {
     public TaskList getTaskListWithKeyword(final String keyword) {
         //predicate to check if task description has keyword
         Predicate<Task> filterPredicate = task -> {
-            return task.getTaskDescription().toLowerCase().matches(keyword.toLowerCase());
+            return task.getTaskDescription().toLowerCase().contains(keyword.toLowerCase());
         };
 
         //filter task
