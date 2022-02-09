@@ -1,5 +1,6 @@
 package dazz;
 
+import dazz.command.AliasCommand;
 import dazz.command.Command;
 import dazz.command.DeadlineCommand;
 import dazz.command.DefaultCommand;
@@ -32,7 +33,11 @@ public class Parser {
      */
     public static Command parse(String input) throws DazzException {
         String[] arr = input.split(" ", 2);
-        switch (arr[0]) {
+        String command = CommandMapper.getCommand(arr[0]);
+        command = !(command == null) ? command : "";
+        switch (command) {
+        case "alias":
+            return parseAlias(input);
         case "bye":
             return new ExitCommand();
         case "todo":
@@ -56,7 +61,7 @@ public class Parser {
         }
     }
 
-    /** this method only handles description from todo, find, delete, mark, unmark commands */
+    /** this method only handles description from alias, todo, find, delete, mark, unmark commands */
     private static String extractDescription(String input) throws IncompleteCommandException {
         String trimmedInput = input.trim();
         String[] arr = trimmedInput.split(" ", 2);
@@ -81,6 +86,27 @@ public class Parser {
             throw new EmptyDateException();
         }
         return new String[]{wordArr[0].trim(), wordArr[1].trim()};
+    }
+
+    // alias todo /as t
+    private static String[] extractCommandAndAlias(String input) throws IncompleteCommandException {
+        String trimmedInput = input.trim();
+
+        String[] arr = trimmedInput.split(" ", 2);
+        if (arr.length < 2 || arr[1].trim().startsWith("/as")) {
+            throw new IncompleteCommandException();
+        }
+
+        String[] wordArr = arr[1].split("/as");
+        if (wordArr.length < 2 || wordArr[1].trim().equals("")) {
+            throw new IncompleteCommandException();
+        }
+        return new String[]{wordArr[0].trim(), wordArr[1].trim()};
+    }
+
+    private static AliasCommand parseAlias(String input) throws DazzException {
+        String[] wordArr = extractCommandAndAlias(input);
+        return new AliasCommand(wordArr[0], wordArr[1]);
     }
 
     private static DeadlineCommand parseDeadline(String input) throws DazzException {
