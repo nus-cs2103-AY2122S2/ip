@@ -19,15 +19,17 @@ public class TaskList {
             String[] tokens = line.split("\\|", 4);
             boolean done = tokens[1].equals("1");
             switch(tokens[0]) {
-                case "T":
-                    list.add(new ToDo(tokens[2], done));
-                    break;
-                case "D":
-                    list.add(new Deadline(tokens[2], tokens[3], done));
-                    break;
-                case "E":
-                    list.add(new Event(tokens[2], tokens[3], done));
-                    break;
+            case "T":
+                list.add(new ToDo(tokens[2], done));
+                break;
+            case "D":
+                list.add(new Deadline(tokens[2], tokens[3], done));
+                break;
+            case "E":
+                list.add(new Event(tokens[2], tokens[3], done));
+                break;
+            default:
+                System.out.println("Save file is corrupted. Aborting tasks.");
             }
             line = bufferedReader.readLine();
         }
