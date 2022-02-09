@@ -12,6 +12,12 @@ import java.util.StringTokenizer;
  */
 public class Event extends Task {
     private static final char EVENT_SYMBOL = 'E';
+    private static final String DATE_FORMAT = "MMM d yyyy";
+    private static final String TIME_FORMAT = "hh:mm a";
+
+    private static final String DEFAULT_DATE = "2020-12-12";
+    private static final String DEFAULT_TIME = "11:59 PM";
+
     private LocalDate eventDate;
     private LocalTime eventTime;
 
@@ -24,9 +30,9 @@ public class Event extends Task {
     public Event() {
         super();
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        this.eventDate = LocalDate.parse("2020-12-12"); // just get default date
-        this.eventTime = LocalTime.parse("2359", timeFormatter);
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+        this.eventDate = LocalDate.parse(DEFAULT_DATE); // just get default date
+        this.eventTime = LocalTime.parse(DEFAULT_TIME, timeFormatter);
     }
 
     /**
@@ -52,8 +58,8 @@ public class Event extends Task {
     @Override
     public String saveFileFormat() {
         return EVENT_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" + this.eventDate.format(
-                DateTimeFormatter.ofPattern("MMM d yyyy")) + "|" + this.eventTime.format(
-                DateTimeFormatter.ofPattern("hh:mm a")) + "\n";
+                DateTimeFormatter.ofPattern(DATE_FORMAT)) + "|" + this.eventTime.format(
+                DateTimeFormatter.ofPattern(TIME_FORMAT)) + "\n";
     }
 
     /**
@@ -66,8 +72,8 @@ public class Event extends Task {
     public void extractDataFromLine(String data) {
         StringTokenizer st = new StringTokenizer(data, "|");
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
         st.nextToken(); // remove the type symbol
         isDone = Boolean.parseBoolean(st.nextToken());
@@ -85,7 +91,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[" + EVENT_SYMBOL + "]" + super.toString() + " (at: " + this.eventDate.format(
-                DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.eventTime.format(
-                DateTimeFormatter.ofPattern("hh:mm a")) + ")";
+                DateTimeFormatter.ofPattern(DATE_FORMAT)) + " " + this.eventTime.format(
+                DateTimeFormatter.ofPattern(TIME_FORMAT)) + ")";
     }
 }
