@@ -38,6 +38,16 @@ public class Task {
 
     /**
      *
+     * Method to set the task description
+
+     */
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+
+    /**
+     *
      * Method to get status icon of task to be used to print in Tasklist
      * @return X if it is done, " " if it is not done
      */

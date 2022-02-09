@@ -31,6 +31,8 @@ public class CommandParser {
             return TaskList.deleteTask(command, Duke.storeList);
         } else if (command.startsWith("find")) {
             return TaskList.findTask(command, Duke.storeList);
+        } else if (command.startsWith("update")) {
+            return TaskList.updateTask(command, Duke.storeList);
         } else {
             return Ui.unknownCommand();
         }

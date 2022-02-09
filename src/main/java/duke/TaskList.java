@@ -205,4 +205,27 @@ public class TaskList {
             return sb.toString();
         }
     }
+
+    /**
+     * Method to update description of Task
+     *
+     * @param command command to update task description
+     * @param storeList task to be updated is contained in here
+     * @return String of response by chatbot
+     */
+    public static String updateTask(String command, ArrayList<Task> storeList) {
+        int taskNumberToUpdate = Integer.parseInt(command.substring(7, 8));
+        try {
+            Task taskToBeUpdated = storeList.get(taskNumberToUpdate - 1);
+            String updatedDescription = command.substring(9);
+            if (updatedDescription.equals("")) {
+                return "Invalid description Master";
+            }
+            taskToBeUpdated.setDescription(updatedDescription);
+            return "The task number " + taskToBeUpdated + " description has been updated to " + updatedDescription;
+
+        } catch (IndexOutOfBoundsException e) {
+            return "Oh no, you only have " + storeList.size() + " items. Please choose again Master";
+        }
+    }
 }
