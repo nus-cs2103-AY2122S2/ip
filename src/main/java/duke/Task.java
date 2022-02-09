@@ -27,4 +27,8 @@ public class Task {
             return "[ ] " + name;
         }
     }
+
+    public boolean isDone() {
+        return done;
+    }
 }

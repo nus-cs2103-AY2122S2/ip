@@ -27,6 +27,10 @@ public class Ui {
         print.append(string);
     }
 
+    public void printReminder(String s) {
+        addToPrint(s);
+    }
+
     public void printAllTasks(TaskList tasklist) {
         ArrayList<Task> all = tasklist.getAllTasks();
         StringBuffer sb = new StringBuffer();
@@ -121,9 +125,7 @@ public class Ui {
     }
 
     public void showWelcome() {
-        addToPrint("Oh hello dear, I'm Dukie, Zi Xin's favourite chattie box\n" +
-                "Nice to meet you dear:>\n" +
-                "What can I do for you?");
+        addToPrint("Oh hello dear, I'm Dukie, Zi Xin's favourite chattie box\n");
     }
 
     public String readCommand() {

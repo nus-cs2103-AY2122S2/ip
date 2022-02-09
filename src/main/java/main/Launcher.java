@@ -10,7 +10,8 @@ public class Launcher {
         try {
             Application.launch(Main.class, args);
         } catch (Exception e) {
-            System.out.println(e.getCause());
+            e.printStackTrace();
+            e.getCause().getStackTrace();
         }
     }
 }

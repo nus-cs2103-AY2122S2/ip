@@ -6,6 +6,8 @@ import exceptions.DukeDeadlineException;
 import exceptions.DukeEventException;
 import exceptions.DukeException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -50,8 +52,6 @@ public class Duke {
 
     public Duke() throws DukeException {
         ui = new Ui();
-        ui.showWelcome();
-        ui.sendPrint();
         storage = new Storage(FILEPATH);
         try {
             tasklist = new TaskList(storage.getAllTasks());
@@ -63,6 +63,49 @@ public class Duke {
             ui.showError(e.getMessage());
             tasklist = new TaskList();
         }
+    }
+
+    public String getReminders() {
+        ArrayList<Task> all = tasklist.getAllTasks();
+        ArrayList<Task> overdueList = new ArrayList<>();
+        ArrayList<Task> overdueSoonList = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i) instanceof Deadline && !all.get(i).isDone()) {
+                Deadline deadline = (Deadline) all.get(i);
+
+                String dueDateString = deadline.getDate();
+                LocalDate dueDate = LocalDate.parse(dueDateString);
+
+                LocalDate today = LocalDate.now();
+                LocalDate oneWeek = today.plusDays(7);
+
+                if (dueDate.isBefore(today)) {
+                    overdueList.add(deadline);
+                } else if (dueDate.isBefore(oneWeek)) {
+                    overdueSoonList.add(deadline);
+                } else {
+                }
+            }
+        }
+
+        if (overdueList.size() != 0) {
+            sb.append("\n");
+            sb.append("Excuse.... these tasks exceed deadline alr bro..\n");
+            for (int i = 1; i <= overdueList.size(); i++) {
+                sb.append(i + ".] " + overdueList.get(i-1).toString() + "\n");
+            }
+        }
+
+        if (overdueSoonList.size() != 0) {
+            sb.append("\n");
+            sb.append("These task will be due within the next one week!\n");
+            for (int i = 1; i <= overdueSoonList.size(); i++) {
+                sb.append(i + ". " + overdueSoonList.get(i-1).toString() + "\n");
+            }
+        }
+        return sb.toString();
     }
 
     /* You should have your own function to generate a response to user input.
@@ -77,6 +120,7 @@ public class Duke {
             isWelcomed = true;
             ui.clearPrint();
             ui.showWelcome();
+            ui.printReminder(getReminders());
             return ui.sendPrint();
         }
 
