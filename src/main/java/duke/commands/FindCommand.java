@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -11,16 +12,19 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
 
     private String keyword;
-    private ArrayList<Task> tasks;
-
+    private String userInput;
     /**
      * Find the list of tasks with matching keywords
      *
-     * @param taskList list of task
      * @param userInput user input
      * @throws ArrayIndexOutOfBoundsException if no tasks found with given keyword
      */
-    public FindCommand(TaskList taskList, String userInput) {
+    public FindCommand(String userInput) {
+        this.userInput = userInput;
+    }
+
+    @Override
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         try {
             String currKeyword = userInput.split(" ")[1];
             ArrayList<Task> foundTasks = (ArrayList<Task>) taskList.getTasks().stream()
@@ -31,18 +35,14 @@ public class FindCommand extends Command {
 
             if (noMatch) {
                 Ui.printNoTaskFound();
-                return;
+                return null;
             }
 
             keyword = currKeyword;
-            tasks = foundTasks;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Please enter keyword of task to search!");
-        }
-    }
 
-    @Override
-    public String execute(TaskList tasks, Ui ui) {
-        return Ui.printFindResultHeader(keyword, this.tasks);
+            return Ui.printFindResultHeader(keyword, foundTasks);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please enter keyword of task to search!");
+        }
     }
 }
