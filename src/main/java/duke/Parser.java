@@ -77,25 +77,26 @@ public class Parser {
      * @param type    The type of the task
      * @return Task object
      */
+    @SuppressWarnings("checkstyle:Regexp")
     private Task parseMessageContents(String message, TaskTypes type) throws DukeException {
         assert (message != null) : "message should not be null";
         String[] messageArr = getMessageArray(message, type);
         assert messageArr != null : "Message Array is not supposed to be null";
         throwIfWrongFormat(message, messageArr, type);
 
-        String description = getDescription(messageArr);
-        String dateString = getDateString(messageArr);
+        String description = getDescription(messageArr, type);
+        String dateString = getDateString(messageArr, type);
         String timeBeginString = getTimeBeginString(messageArr, type);
-        String timeEndString = (type == TaskTypes.DEADLINE) ? null : getTimeEndString(messageArr);
 
         LocalDate date = parseDateFromString(dateString, type);
         LocalTime timeBegin = parseTimeFromString(timeBeginString, type);
         switch (type) {
         case TODO:
-            return new ToDo(messageArr[1]);
+            return new ToDo(description);
         case DEADLINE:
             return new Deadline(description, date, timeBegin);
         case EVENT:
+            String timeEndString = getTimeEndString(messageArr);
             LocalTime timeEnd = parseTimeFromString(timeEndString, TaskTypes.EVENT);
             assert timeEnd != null;
             throwIfEndTimeBeforeStartTime(timeBegin, timeEnd);
@@ -138,6 +139,9 @@ public class Parser {
         return null;
     }
     private LocalDate parseDateFromString(String dateString, TaskTypes type) throws DukeException {
+        if (type == TaskTypes.TODO) {
+            return null;
+        }
         try {
             return LocalDate.parse(dateString, Task.YEAR_FORMAT);
         } catch (DateTimeException e) {
@@ -155,7 +159,7 @@ public class Parser {
 
     private LocalTime parseTimeFromString(String timeString, TaskTypes type) throws DukeException {
         try {
-            if (type == TaskTypes.DEADLINE && timeString == null) {
+            if (type == TaskTypes.TODO || (type == TaskTypes.DEADLINE && timeString == null)) {
                 return null;
             } else {
                 return LocalTime.parse(timeString, Task.TIME_FORMAT);
@@ -217,12 +221,26 @@ public class Parser {
         return keyword;
     }
 
-    private String getDescription(String[] messageArr) {
-        return messageArr[0].substring(0, messageArr[0].length() - 1); //remove last whitespace
+    private String getDescription(String[] messageArr, TaskTypes type) throws DukeException {
+        switch (type) {
+        case TODO:
+            return messageArr[1];
+        case DEADLINE:
+        case EVENT:
+            return messageArr[0].substring(0, messageArr[0].length() - 1); //remove last whitespace
+        default:
+            throwInvalidTypeDeclaration();
+        }
+        assert false : "Runtime should not reach here";
+        return null; //should not reach here
     }
 
-    private String getDateString(String[] messageArr) {
-        return messageArr[1].substring(3);
+    private String getDateString(String[] messageArr, TaskTypes type) {
+        if (type == TaskTypes.TODO) {
+            return null;
+        } else {
+            return messageArr[1].substring(3);
+        }
     }
 
     private String getTimeBeginString(String[] messageArr, TaskTypes type) {
