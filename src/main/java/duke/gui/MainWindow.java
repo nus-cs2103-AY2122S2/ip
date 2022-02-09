@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -30,10 +32,14 @@ public class MainWindow extends AnchorPane {
     private Stage stage;
     private static final Ui ui = new Ui();
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private final Image welcomeGif = new Image(this.getClass().getResourceAsStream("/images/jack_sparrow_welcome.gif"));
-    private final Image exitGif = new Image(this.getClass().getResourceAsStream("/images/jack_sparrow_adios.gif"));
+    private final Image userImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
+    private final Image dukeImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
+    private final Image welcomeGif = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_welcome.gif")));
+    private final Image exitGif = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_adios.gif")));
 
     @FXML
     public void initialize() {

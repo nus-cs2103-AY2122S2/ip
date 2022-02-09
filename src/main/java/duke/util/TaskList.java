@@ -18,7 +18,7 @@ import duke.task.Todo;
 public class TaskList {
 
     private static final String TASK_ADDED = "Task Added, arrgh:\n";
-    private final ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
     private int taskCount = 0;
     private Ui ui = new Ui();
 
@@ -78,9 +78,11 @@ public class TaskList {
      * Adds a task into list of tasks.
      *
      * @param task List of tasks.
+     * @return message to tell user that task has been added
      */
     public String add(Task task) {
         StringBuilder str = new StringBuilder();
+        int numOfTasksBeforeAddition = taskList.size();
         if (task != null) {
             this.taskList.add(task);
             this.taskCount++;
@@ -88,6 +90,7 @@ public class TaskList {
             str.append("\nNow you have " + this.taskCount
                     + " tasks in your task list arrr, better get workin' aye!\n");
             str.append(ui.requestNextCommand());
+            assert numOfTasksBeforeAddition + 1 == taskList.size() : "Task should be added to task list";
         } else {
             str.append(ui.showError("\tTask is invalid matey :-(, please try again!\n"));
         }
@@ -99,14 +102,17 @@ public class TaskList {
      * Deletes a task from list of tasks.
      *
      * @param taskIndex 0-based index task number to be deleted.
+     * @return message to tell user that task has been deleted
      */
     public String delete(int taskIndex) {
-        StringBuilder str = new StringBuilder();
+        StringBuilder str = new StringBuilder();.
+        int numOfTasksBeforeDeletion = taskList.size();
         try {
             Task task = taskList.get(taskIndex);
             this.taskList.remove(taskIndex);
             this.taskCount--;
-            str.append(ui.deleteTask() + task+ "\n" + ui.requestNextCommand());
+            str.append(ui.deleteTask() + task + "\n" + ui.requestNextCommand());
+            assert numOfTasksBeforeDeletion - 1 == taskList.size() : "Task should be deleted from task list";
         } catch (IndexOutOfBoundsException e) {
             ui.showError("\tAin't nuthin' to be deleted here matey! :-(\n");
         }
@@ -118,6 +124,7 @@ public class TaskList {
      * Finds a task or tasks that matches the given keyword
      *
      * @param keyword keyword to be found in list of tasks
+     * @return message to tell user of the tasks matching with keyword given
      */
     public String findTaskMatchingKeyword(String keyword) {
 
@@ -164,10 +171,18 @@ public class TaskList {
      * Mark a task in list of tasks as done
      *
      * @param taskIndex 0-based index of task number.
+     *
+     */
+    /**
+     * Mark a task in list of tasks as done
+     *
+     * @param taskIndex taskIndex 0-based index of task number.
+     * @return message to tell user that task has been marked
      */
     public String markTask(int taskIndex) {
         StringBuilder str = new StringBuilder();
         Task curr = taskList.get(taskIndex);
+        assert curr != null : "Task does not exist";
         curr.markAsDone();
         str.append(ui.markAsDone() + curr + "\n" + ui.requestNextCommand());
 
@@ -178,10 +193,12 @@ public class TaskList {
      * Mark a task in list of tasks as not done
      *
      * @param taskIndex 0-based index of task number.
+     * @return message to tell user that task has been unmarked
      */
     public String unmarkTask(int taskIndex) {
         StringBuilder str = new StringBuilder();
         Task curr = taskList.get(taskIndex);
+        assert curr != null : "Task does not exist";
         curr.markAsUndone();
         str.append(ui.markAsUndone() + curr + "\n" + ui.requestNextCommand());
 
@@ -190,6 +207,8 @@ public class TaskList {
 
     /**
      * Prints out the list of outstanding tasks
+     *
+     * @return message to tell user of the outstanding tasks in the list
      */
     public String printTaskList() {
         StringBuilder str = new StringBuilder();

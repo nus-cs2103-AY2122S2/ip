@@ -12,7 +12,7 @@ import duke.util.Ui;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    private final Task task;
+    private Task task;
 
     /**
      * Constructor for AddCommand which adds the provided task.
@@ -25,9 +25,11 @@ public class AddCommand extends Command {
 
     /**
      * Executes command by adding task into Duke.Duke.util.TaskList.
+     *
      * @param taskList  List of tasks
      * @param ui        Ui provided
      * @param storage   Saved history
+     * @return message to tell user that task has been added
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
