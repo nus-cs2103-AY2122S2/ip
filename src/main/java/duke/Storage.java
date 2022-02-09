@@ -1,5 +1,6 @@
 package duke;
 import exceptions.DukeDeadlineException;
+import exceptions.DukeEventException;
 import exceptions.DukeException;
 
 import java.io.File;
@@ -51,7 +52,7 @@ public class Storage {
      * @throws DukeDeadlineException
      * @throws DukeException
      */
-    public ArrayList<Task> getAllTasks() throws IOException, DukeDeadlineException, DukeException {
+    public ArrayList<Task> getAllTasks() throws IOException, DukeDeadlineException, DukeException, DukeEventException {
         ArrayList<Task> all = new ArrayList<Task>();
         Scanner s = new Scanner(file);
         String str;

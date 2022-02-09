@@ -93,11 +93,15 @@ public class Parser {
                         "OOPS!!! Please enter in format: event <event> /at <event venue> \n " +
                                 "e.g. event Lesson /at Com1");
             } else {
-                Task task = Event.setEvent(words[1]);
-                if (task == null) {
-                    throw new DukeDeadlineException("Event not added...");
-                } else {
-                    return new AddCommand(task);
+                try {
+                    Task task = Event.setEvent(words[1]);
+                    if (task == null) {
+                        throw new DukeDeadlineException("Event not added...");
+                    } else {
+                        return new AddCommand(task);
+                    }
+                } catch (Exception e) {
+                    throw e;
                 }
             }
 
@@ -106,11 +110,15 @@ public class Parser {
                 throw new DukeDeadlineException("OOPS!!! Please enter in format: deadline <task> /by <yyyy-mm-dd> \n " +
                         "e.g. deadline complete project /by 2022-12-24");
             } else {
-                Task task = Deadline.setDeadline(words[1]);
-                if (task == null) {
-                    throw new DukeDeadlineException("Deadline not added...");
-                } else {
-                    return new AddCommand(task);
+                try {
+                    Task task = Deadline.setDeadline(words[1]);
+                    if (task == null) {
+                        throw new DukeDeadlineException("Deadline not added...");
+                    } else {
+                        return new AddCommand(task);
+                    }
+                } catch (Exception e) {
+                    throw e;
                 }
             }
 
@@ -120,7 +128,6 @@ public class Parser {
 
         } else if (words[0].equals("find")) {
             try {
-//                LocalDate localdate = LocalDate.parse(words[1]);
                 return new FindCommand(words[1]);
             } catch (Exception e) {
                 throw new DukeException("I'm not sure what's happening. Please try again later!");

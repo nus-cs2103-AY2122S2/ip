@@ -59,7 +59,7 @@ public class Duke {
             tasklist = new TaskList();
         } catch (IOException e) {
             System.exit(0);
-        } catch (DukeDeadlineException e) {
+        } catch (DukeDeadlineException | DukeEventException e) {
             ui.showError(e.getMessage());
             tasklist = new TaskList();
         }

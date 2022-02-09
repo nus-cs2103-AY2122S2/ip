@@ -55,16 +55,11 @@ public class Deadline extends Task {
 
             Deadline d_line = new Deadline(taskName, taskByDate);
             return d_line;
-        } catch (AssertionError e) {
-            throw new DukeDeadlineException("Deadline is blocked!");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             DukeDeadlineException error = new DukeDeadlineException( "OOPS!!! Please enter in format: deadline <task> /by <yyyy-mm-dd> \n " +
                                                     "e.g. deadline complete project /by 2022-12-24 \n" +
                                                     "Deadline set should be after today");
-
         }
-        return null;
     }
 
     /**
