@@ -64,7 +64,7 @@ public class Ui {
      * @return String illustrating the greeting message.
      */
     public String greet() {
-        return CommandsStringOutput.HI.toString();
+        return Commands.HI.toString();
     }
 
     /**
@@ -73,7 +73,7 @@ public class Ui {
      * @return String illustrating the bye message.
      */
     public String sayBye() {
-        return CommandsStringOutput.BYE.toString();
+        return Commands.BYE.toString();
     }
 
     /**
@@ -93,9 +93,9 @@ public class Ui {
      */
     public String identifyTask(Task task) {
         if (task.getIsDone()) {
-            return String.format("%s    %s", CommandsStringOutput.MARK.toString(), task.toString());
+            return String.format("%s    %s", Commands.MARK.toString(), task.toString());
         } else {
-            return String.format("%s    %s", CommandsStringOutput.UNMARK.toString(), task.toString());
+            return String.format("%s    %s", Commands.UNMARK.toString(), task.toString());
         }
     }
 
@@ -108,7 +108,7 @@ public class Ui {
      */
     public String sayAddTask(Task task, int numOfTask) {
         return String.format("%s    %s    Now you have %d tasks in the list.",
-                CommandsStringOutput.ADD.toString(), task.toString(),  numOfTask);
+                Commands.ADD.toString(), task.toString(),  numOfTask);
     }
 
     /**
@@ -118,7 +118,7 @@ public class Ui {
      * @return String to be printed which illustrates the list of tasks.
      */
     public String listTask(String filePath) {
-        String output = CommandsStringOutput.LIST.toString();
+        String output = Commands.LIST.toString();
         File file = new File(filePath);
         try {
             Scanner sc = new Scanner(file);
@@ -144,7 +144,7 @@ public class Ui {
      * @return String to be printed which illustrates list of tasks.
      */
     public String listTaskUsingArrayList(TaskList tasks) {
-        String output = CommandsStringOutput.MATCH.toString();
+        String output = Commands.MATCH.toString();
         for (int i = 0; i < tasks.getTaskList().size(); i++) {
             Task task = tasks.getTaskList().get(i);
             output = output + String.format("    %s", task.toString());
@@ -160,6 +160,6 @@ public class Ui {
      */
     public String deleteTask(Task task) {
         return String.format(
-                "%s      %s", CommandsStringOutput.DELETE.toString(), task.toString());
+                "%s      %s", Commands.DELETE.toString(), task.toString());
     }
 }
