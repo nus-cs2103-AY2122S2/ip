@@ -1,4 +1,5 @@
 package narcibot;
+
 public class Ui {
     /**
      * Print welcome message.

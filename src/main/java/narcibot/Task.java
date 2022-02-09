@@ -5,10 +5,11 @@ package narcibot;
  */
 public class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor of task with name.
+     *
      * @param name
      */
     public Task(String name) {
@@ -17,20 +18,22 @@ public class Task {
 
     /**
      * Constructor of task with name and status.
+     *
      * @param name
-     * @param done status of the task
+     * @param isDone status of the task
      */
-    public Task(String name, boolean done) {
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
      * Status of the task with format [status] name.
+     *
      * @return String
      */
     public String getStatus() {
-        String status = done ? "[X] " : "[ ] ";
+        String status = isDone ? "[X] " : "[ ] ";
         return status + name;
     }
 
@@ -39,7 +42,7 @@ public class Task {
      */
     public void markDone() {
         System.out.print("[X] " + name);
-        done = true;
+        isDone = true;
     }
 
     /**
@@ -47,15 +50,16 @@ public class Task {
      */
     public void markNotDone() {
         System.out.print("[ ] " + name);
-        done = false;
+        isDone = false;
     }
 
     /**
      * Returns a string with the format required in the save file.
+     *
      * @return String
      */
     public String save() {
-        return (done ? "1" : "0" )+ "|" + name;
+        return (isDone ? "1" : "0" )+ "|" + name;
     }
 
     public boolean inName(String name) {

@@ -2,6 +2,7 @@ package narcibot;
 public class ToDo extends Task {
     /**
      * Constructor for a ToDo task with name.
+     *
      * @param name
      */
     public ToDo(String name) {
@@ -11,11 +12,12 @@ public class ToDo extends Task {
 
     /**
      * Constructor for a ToDo task with name and status.
+     *
      * @param name
-     * @param done status of task
+     * @param isDone status of task
      */
-    public ToDo(String name, boolean done) {
-        super(name, done);
+    public ToDo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     /**
@@ -49,10 +51,11 @@ public class ToDo extends Task {
 
     /**
      * Return the string of the save format of the todo task
+     *
      * @return String
      */
     @Override
     public String save() {
-        return "T|"+ super.save();
+        return "T|" + super.save();
     }
 }

@@ -54,6 +54,7 @@ public class Narcibot extends Application {
 
     /**
      * Launches the GUI interface for narcibot
+     *
      * @param stage
      */
     @Override
@@ -182,40 +183,46 @@ public class Narcibot extends Application {
                 break;
             case "mark":
                 if (command.length != 2) {
-                    throw new IncorrectFormatException("Please enter mark followed by a number for this command. Example: mark 8");
+                    throw new IncorrectFormatException("Please enter mark followed by a number for this command. " +
+                            "Example: mark 8");
                 }
                 ui.mark();
                 taskList.mark(command[1]);
                 break;
             case "unmark":
                 if (command.length != 2) {
-                    throw new IncorrectFormatException("Please enter unmark followed by a number for this command. Example: unmark 7");
+                    throw new IncorrectFormatException("Please enter unmark followed by a number for this command. " +
+                            "Example: unmark 7");
                 }
                 ui.unmark();
                 taskList.unmark(command[1]);
                 break;
             case "delete":
                 if (command.length != 2) {
-                    throw new IncorrectFormatException("Please enter delete followed by a number for this command. Example: delete 7");
+                    throw new IncorrectFormatException("Please enter delete followed by a number for this command. " +
+                            "Example: delete 7");
                 }
                 ui.delete();
                 taskList.delete(command[1]);
                 break;
             case "todo":
                 if (command.length != 2) {
-                    throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is?");
+                    throw new IncorrectFormatException("You want me to remind you of something but " +
+                            "you won't tell me of what it is?");
                 }
                 ui.task(taskList.todo(command[1]));
                 break;
             case "deadline":
                 if (command.length != 3) {
-                    throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is? The format is deadline (task) /by (time)");
+                    throw new IncorrectFormatException("You want me to remind you of something " +
+                            "but you won't tell me of what it is? The format is deadline (task) /by (time)");
                 }
                 ui.task(taskList.deadline(command[1], command[2]));
                 break;
             case "event":
                 if (command.length != 3) {
-                    throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is? The format is event (task) /at (time)");
+                    throw new IncorrectFormatException("You want me to remind you of something but " +
+                            "you won't tell me of what it is? The format is event (task) /at (time)");
                 }
                 ui.task(taskList.event(command[1], command[2]));
                 break;

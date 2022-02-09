@@ -6,6 +6,7 @@ package narcibot;
 public class Parser {
     /**
      * Parse the command into an array of strings.
+     *
      * @param command the string to parse
      * @return the parsed array of string
      */

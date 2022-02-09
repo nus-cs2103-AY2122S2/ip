@@ -1,4 +1,5 @@
 package narcibot;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,6 +9,7 @@ public class Event extends Task {
 
     /**
      * Constructor for event class
+     *
      * @param name name of the event
      * @param time time of the event
      */
@@ -24,22 +26,24 @@ public class Event extends Task {
 
     /**
      * Constructor for event class with indication of the status
+     *
      * @param name name of event
      * @param time time of event
-     * @param done status of event
+     * @param isDone status of event
      */
-    public Event(String name, String time, boolean done) {
-        super(name, done);
+    public Event(String name, String time, boolean isDone) {
+        super(name, isDone);
         this.time = time;
     }
 
     /**
      * Gets status of event
+     *
      * @return String with format of [E][status] name (at: time)
      */
     @Override
     public String getStatus() {
-        return "[E]" + super.getStatus() + " (at: " + time +")";
+        return "[E]" + super.getStatus() + " (at: " + time + ")";
     }
 
     /**
@@ -49,7 +53,7 @@ public class Event extends Task {
     public void markDone() {
         System.out.print("[E]");
         super.markDone();
-        System.out.println(" (at: " + time +")");
+        System.out.println(" (at: " + time + ")");
     }
 
     /**
@@ -59,7 +63,7 @@ public class Event extends Task {
     public void markNotDone() {
         System.out.print("[E]");
         super.markNotDone();
-        System.out.println(" (at: " + time +")");
+        System.out.println(" (at: " + time + ")");
     }
 
     /**

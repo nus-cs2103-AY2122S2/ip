@@ -1,4 +1,5 @@
 package narcibot;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for a deadline task.
+     *
      * @param name name of the deadline
      * @param time time of the deadline
      */
@@ -16,7 +18,8 @@ public class Deadline extends Task {
         this.time = time;
         try {
             LocalDate date = LocalDate.parse(time);
-            System.out.println("[D][ ] " + name + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
+            System.out.println("[D][ ] " + name + " (by: " +
+                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
         } catch (DateTimeParseException e) {
             System.out.println("[D][ ] " + name + " (by: " + time + ")");
         }
@@ -24,23 +27,25 @@ public class Deadline extends Task {
 
     /**
      * Constructor for a deadline task with indication of the status of the task
+     *
      * @param name name of the deadline
      * @param time time of the deadline
-     * @param done status of the deadline
+     * @param isDone status of the deadline
      */
 
-    public Deadline(String name, String time, boolean done) {
-        super(name, done);
+    public Deadline(String name, String time, boolean isDone) {
+        super(name, isDone);
         this.time = time;
     }
 
     /**
      * Gets the status of the deadline
+     *
      * @return a String with the format of [D][status] name (by: time)
      */
     @Override
     public String getStatus() {
-        return "[D]" + super.getStatus() +" (by: " + time +")";
+        return "[D]" + super.getStatus() + " (by: " + time +")";
     }
 
     /**
@@ -65,6 +70,7 @@ public class Deadline extends Task {
 
     /**
      * Write down the format on the save file;
+     *
      * @return String with the format
      */
     @Override

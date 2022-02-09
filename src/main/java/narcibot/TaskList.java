@@ -1,4 +1,5 @@
 package narcibot;
+
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class TaskList {
 
     /**
      * Stores the tasks into the file given by fileWriter.
+     *
      * @param fileWriter
      * @throws IOException
      */
@@ -54,6 +56,7 @@ public class TaskList {
 
     /**
      * Mark task via index as done.
+     *
      * @param indexString
      * @throws IncorrectFormatException
      */
@@ -63,6 +66,7 @@ public class TaskList {
 
     /**
      * Mark task via index as not done.
+     *
      * @param indexString
      * @throws IncorrectFormatException
      */
@@ -72,6 +76,7 @@ public class TaskList {
 
     /**
      * Delete task via index
+     *
      * @param indexString
      * @throws IncorrectFormatException
      */
@@ -89,6 +94,7 @@ public class TaskList {
 
     /**
      * Initialize a new todo task.
+     *
      * @param task name of the todo
      * @return integer indicating the total number of tasks
      */
@@ -99,6 +105,7 @@ public class TaskList {
 
     /**
      * Initialize a new deadline task
+     *
      * @param task name of the deadline
      * @param time deadline of the task
      * @return integer indicating the total number of tasks
@@ -110,6 +117,7 @@ public class TaskList {
 
     /**
      * Initialize a new event task
+     *
      * @param task name of the event
      * @param time time of the event
      * @return integer indicating the total number of tasks
@@ -121,13 +129,14 @@ public class TaskList {
 
     /**
      * Finds tasks that has keyword in the name.
+     *
      * @param keyword
      */
     public void find(String keyword) {
         int matches = 0;
         for (Task task : list) {
             if(task.inName(keyword)) {
-                System.out.println((matches + 1) +"." + task.getStatus());
+                System.out.println((matches + 1) + "." + task.getStatus());
                 matches++;
             }
         }
