@@ -19,24 +19,18 @@ public class Duke {
         this.taskList = new TaskList();
         this.ui =  new Ui();
         this.parser = new Parser();
-    }
-
-    public void run() throws DukeException{
-        Scanner sc = new Scanner(System.in);
-
         this.storage.readFile(this.taskList);
-
-        System.out.println(WELCOME_MESSAGE);
-
-        while (!Command.getIsExit()) {
-            Command newCommand = this.parser.parse(sc.nextLine());
-            newCommand.runCommand(this.ui, this.taskList);
-        }
-
-        storage.writeFile(this.taskList);
     }
 
-    public static void main(String[] args) throws DukeException {
-        new Duke("data", "duke.txt").run();
+    public String getResponse(String input){
+        try {
+            Command command = this.parser.parse(input);
+            String reply = command.runCommand(this.ui, this.taskList);
+            this.storage.writeFile(this.taskList);
+            return reply;
+        }
+        catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

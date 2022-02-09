@@ -19,11 +19,11 @@ public class CUnmark extends Command{
     }
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) throws DukeException {
+    public String runCommand(Ui ui, TaskList taskList) throws DukeException {
         try {
             Task unmarkTask = taskList.getTask(this.getUnmarkIndex());
             unmarkTask.setIsDone(false);
-            ui.respondUnmark(unmarkTask);
+            return ui.respondUnmark(unmarkTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");
         }

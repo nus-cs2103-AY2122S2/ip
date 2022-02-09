@@ -10,7 +10,7 @@ public class CList extends Command {
     }
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) {
-        ui.respondList(taskList);
+    public String runCommand(Ui ui, TaskList taskList) {
+        return ui.respondList(taskList);
     }
 }

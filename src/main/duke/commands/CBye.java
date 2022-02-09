@@ -11,8 +11,8 @@ public class CBye extends Command{
     }
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) {
+    public String runCommand(Ui ui, TaskList taskList) {
         Command.exitDuke();
-        ui.respondBye();
+        return ui.respondBye();
     }
 }
