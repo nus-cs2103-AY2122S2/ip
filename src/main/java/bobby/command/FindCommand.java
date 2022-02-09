@@ -28,6 +28,9 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
+        assert tasks != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
+        assert storage != null : "Storage cannot be null";
         if (fullCommand.substring(4).isBlank()) {
             throw new FindException("empty_command");
         } else if (tasks.isEmpty()) {

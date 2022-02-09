@@ -38,6 +38,9 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
+        assert tasks != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
+        assert storage != null : "Storage cannot be null";
         if (fullCommand.substring(4).isBlank()) { // no argument
             throw new MarkException("empty");
         } else if (Character.isLetter(fullCommand.charAt(5))) { // contains letter instead of number
