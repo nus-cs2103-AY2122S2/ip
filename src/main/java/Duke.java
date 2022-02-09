@@ -4,26 +4,31 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
-    static WordList wordList;
+    private WordList wordList;
+    private JSONFileManager jsonFileManager;
+    private DukeUI ui;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        wordList = new WordList();
+    public Duke() {
+        this.ui = new DukeUI(new Scanner(System.in));
+        this.jsonFileManager = new JSONFileManager();
+        this.jsonFileManager.setUpSaveSystem();
+        this.wordList = this.jsonFileManager.loadListFromJSONFile();
+    }
 
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+    public Duke(String storagePath, String storageFileName) {
+        this.ui = new DukeUI(new Scanner(System.in));
+        this.jsonFileManager = new JSONFileManager(storagePath, storageFileName);
+        this.jsonFileManager.setUpSaveSystem();
+        this.wordList = this.jsonFileManager.loadListFromJSONFile();
+    }
 
-        JSONFileManager.setUpSaveSystem();
-        wordList = JSONFileManager.loadListFromJSONFile();
-        replyWelcomeMessage();
+    public void run() {
+        this.ui.replyWelcomeMessage();
         String input;
+
         while (true) {
             try {
-                input = sc.nextLine();
+                input = this.ui.waitForinput();
                 checkEmpty(input);
                 Object[] parseResult = InputParser.parseInput(input);
                 InputType inputType = (InputType) parseResult[0];
@@ -33,21 +38,28 @@ public class Duke {
                 if (inputType == InputType.BYE) {
                     break;
                 }
-                JSONFileManager.saveListToJSONFile(wordList);
+                this.jsonFileManager.saveListToJSONFile(wordList);
             } catch (EmptyInputException e) {
-                System.out.println(e);
+                this.ui.replyError(e);
                 continue;
             } catch (EmptyDescriptionException e) {
-                System.out.println(e);
+                this.ui.replyError(e);
             } catch (NumberFormatException e) {
-                System.out.println(e);
+                this.ui.replyError(e);
             } catch (Exception e) {
-                System.out.println(e);
+                this.ui.replyError(e);
             }
         }
+
+        this.ui.replyBye();
     }
 
-    public static void processInput(InputType inputType, String[] value) {
+    public static void main(String[] args) {
+        Duke dukeApp = new Duke("src/data/", "anotherTasks.json");
+        dukeApp.run();
+    }
+
+    public void processInput(InputType inputType, String[] value) {
         switch(inputType) {
             case LIST:
                 wordList.printList();
@@ -68,7 +80,6 @@ public class Duke {
                 wordList.storeEvent(value[0], DateTimeManager.parseString(value[1]), false, true);
                 break;
             case BYE:
-                replyBye();
                 break;
             case DELETE:
                 wordList.removeItem(Integer.parseInt(value[0]));
@@ -77,17 +88,9 @@ public class Duke {
         }
     }
 
-    public static void replyWelcomeMessage() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
-
     public static void checkEmpty(String input) throws EmptyInputException {
         if (input.isEmpty()) {
             throw new EmptyInputException("Input cannot be empty!");
         }
-    }
-    public static void replyBye() {
-        System.out.println("Bye. Hope to see you again soon!");
     }
 }

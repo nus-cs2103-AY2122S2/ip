@@ -1,6 +1,7 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,31 +14,45 @@ public class JSONFileManager {
     static private final String FILE_NAME = "tasks.json";
     static private final Path SAVE_FILE_PATH = SAVE_FOLDER_PATH.resolve(FILE_NAME);
 
-    static private boolean isExistsSaveFolder() {
-        return Files.exists(SAVE_FOLDER_PATH);
+    private Path saveFolderPath;
+    private Path saveFilePath;
+
+    public JSONFileManager() {
+        this.saveFolderPath = SAVE_FOLDER_PATH;
+        this.saveFilePath = SAVE_FILE_PATH;
     }
 
-    static private void createSaveFolder() {
+    public JSONFileManager(String saveFolderPath, String jsonFileName) {
+        String[] strPaths = saveFolderPath.split("/");
+        this.saveFolderPath = Paths.get(BASE_PATH, strPaths);
+        this.saveFilePath = this.saveFolderPath.resolve(jsonFileName);
+    }
+    private boolean isExistsSaveFolder() {
+        return Files.exists(this.saveFolderPath);
+    }
+
+    private void createSaveFolder() {
         try {
-            Files.createDirectories(SAVE_FOLDER_PATH);
+            Files.createDirectories(this.saveFolderPath);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
-    static private boolean isExistsSaveFile() {
-        return Files.exists(SAVE_FILE_PATH);
+    private boolean isExistsSaveFile() {
+        return Files.exists(saveFilePath);
     }
 
-    static private void createSaveFile() {
+    private void createSaveFile() {
         try {
-            Files.createFile(SAVE_FILE_PATH);
+            Files.createFile(saveFilePath);
+            saveListToJSONFile(new WordList());
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
-    static public void setUpSaveSystem() {
+    public void setUpSaveSystem() {
         if (!isExistsSaveFolder()) {
             createSaveFolder();
         }
@@ -47,9 +62,9 @@ public class JSONFileManager {
         }
     }
 
-    static public String readSavedString() {
+    private String readSavedString() {
         try {
-            String savedString = Files.readString(SAVE_FILE_PATH);
+            String savedString = Files.readString(saveFilePath);
             return savedString;
         } catch (IOException e) {
             System.out.println(e);
@@ -57,15 +72,15 @@ public class JSONFileManager {
         }
     }
 
-    static public void writeSavedString(String savedString) {
+    private void writeSavedString(String savedString) {
         try {
-            Files.writeString(SAVE_FILE_PATH, savedString);
+            Files.writeString(saveFilePath, savedString);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
-    static public String parseListToJSONString(WordList wordList) {
+    private String parseListToJSONString(WordList wordList) {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonWrapper = new JSONObject();
 
@@ -96,7 +111,7 @@ public class JSONFileManager {
         return jsonArray.toString();
     }
 
-    static public WordList parseJSONStringToList(String jsonString) {
+    private WordList parseJSONStringToList(String jsonString) {
         JSONArray jsonArray = new JSONArray(jsonString);
         WordList wordList = new WordList();
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -123,11 +138,11 @@ public class JSONFileManager {
         return wordList;
     }
 
-    static public WordList loadListFromJSONFile() {
+    public WordList loadListFromJSONFile() {
         return parseJSONStringToList(readSavedString());
     }
 
-    static public void saveListToJSONFile(WordList wordList) {
+    public void saveListToJSONFile(WordList wordList) {
         writeSavedString(parseListToJSONString(wordList));
     }
 }
