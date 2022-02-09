@@ -42,6 +42,9 @@ public class Event extends Task {
         } else {
             str += "[ ] " + super.desc + " (by: " + tempDate + ")";
         }
+        for (Tag tag: tags) {
+            str = str + " " + tag;
+        }
         return str;
     }
 
@@ -51,12 +54,17 @@ public class Event extends Task {
      * @return a string in this format E,{done},{desc},{date}.
      */
     @Override
-    public String changeFormat() {
+    public String changeFormat(TagList tagList) {
+        String str = "";
         if (super.isDone) {
-            return "E,1," + super.desc + "," + this.date;
+            str = str + "E,1," + super.desc + "," + this.date;
         } else {
-            return "E,0," + super.desc + "," + this.date;
+            str = str + "E,0," + super.desc + "," + this.date;
         }
+        for (Tag tag: tags) {
+            str = str + "," + tagList.getList().indexOf(tag);
+        }
+        return str;
     }
 
     public LocalDate getDate() {

@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * This class contains the task list and deals with add/delete list operations.
+ * This class contains the task list.
  * @author Sim Jun Heng
  * @version CS2103T AY21/22 Sem 2
  */

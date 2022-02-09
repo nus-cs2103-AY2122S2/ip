@@ -42,6 +42,9 @@ public class Deadline extends Task {
         } else {
             str += "[ ] " + super.desc + " (by: " + tempDate + ")";
         }
+        for (Tag tag: tags) {
+            str = str + " " + tag;
+        }
         return str;
     }
 
@@ -51,12 +54,17 @@ public class Deadline extends Task {
      * @return a string in this format D,{done},{desc},{date}.
      */
     @Override
-    public String changeFormat() {
+    public String changeFormat(TagList tagList) {
+        String str = "";
         if (super.isDone) {
-            return "D,1," + super.desc + "," + this.date;
+            str = str + "D,1," + super.desc + "," + this.date;
         } else {
-            return "D,0," + super.desc + "," + this.date;
+            str = str + "D,0," + super.desc + "," + this.date;
         }
+        for (Tag tag: tags) {
+            str = str + "," + tagList.getList().indexOf(tag);
+        }
+        return str;
     }
 
     public LocalDate getDate() {

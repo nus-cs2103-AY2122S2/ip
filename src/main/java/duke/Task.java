@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * This class specifies all the methods and variables of a task.
  * @author Sim Jun Heng
@@ -9,6 +11,7 @@ public abstract class Task {
     // Class variables
     protected boolean isDone;
     protected String desc;
+    protected ArrayList<Tag> tags = new ArrayList<>();
 
     /**
      * Assigns desc and done to this instance.
@@ -38,7 +41,16 @@ public abstract class Task {
     /**
      * Changes the string format of this event object.
      */
-    public abstract String changeFormat();
+    public abstract String changeFormat(TagList tagList);
+
+    /**
+     * Adds tag to this task.
+     *
+     * @param tag a tag object
+     */
+    public void tagTask(Tag tag) {
+        tags.add(tag);
+    }
 
     public String getDesc() {
         return desc;

@@ -25,6 +25,9 @@ public class ToDo extends Task {
         } else {
             str += "[ ] " + super.desc;
         }
+        for (Tag tag: tags) {
+            str = str + " " + tag;
+        }
         return str;
     }
 
@@ -34,12 +37,17 @@ public class ToDo extends Task {
      * @return a string in this format T,{done},{desc}.
      */
     @Override
-    public String changeFormat() {
+    public String changeFormat(TagList tagList) {
+        String str = "";
         if (super.isDone) {
-            return "T,1," + super.desc;
+            str = str + "T,1," + super.desc;
         } else {
-            return "T,0," + super.desc;
+            str = str + "T,0," + super.desc;
         }
+        for (Tag tag: tags) {
+            str = str + "," + tagList.getList().indexOf(tag);
+        }
+        return str;
     }
 
 }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * This class is a child of the Parser class. It parse with file inputs.
  * @author Sim Jun Heng
@@ -7,6 +9,7 @@ package duke;
  */
 public class FileParser extends Parser {
     private boolean isDone;
+    private ArrayList<String> tagArray = new ArrayList<>();
 
     /**
      * Parses file input.
@@ -24,6 +27,9 @@ public class FileParser extends Parser {
             }
             command = "todo";
             desc = dataArray[2];
+            for (int i = 3; i < dataArray.length; i++) {
+                tagArray.add(dataArray[i]);
+            }
             break;
         case "D":
             if (dataArray[1].equals("1")) {
@@ -34,6 +40,9 @@ public class FileParser extends Parser {
             command = "deadline";
             desc = dataArray[2];
             date = dataArray[3];
+            for (int i = 4; i < dataArray.length; i++) {
+                tagArray.add(dataArray[i]);
+            }
             break;
         case "E":
             if (dataArray[1].equals("1")) {
@@ -44,6 +53,9 @@ public class FileParser extends Parser {
             command = "event";
             desc = dataArray[2];
             date = dataArray[3];
+            for (int i = 4; i < dataArray.length; i++) {
+                tagArray.add(dataArray[i]);
+            }
             break;
         default:
             throw new DukeException("Error in file. Please try again.");
@@ -53,5 +65,9 @@ public class FileParser extends Parser {
 
     public boolean getIsDone() {
         return isDone;
+    }
+
+    public ArrayList<String> getTagArray() {
+        return tagArray;
     }
 }
