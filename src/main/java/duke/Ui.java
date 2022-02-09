@@ -5,7 +5,7 @@ package duke;
  * The UI class contains methods that deals with interactions with the user.
  */
 public class Ui {
-    final static String banner = "=======================================================================";
+    final static String BANNER = "=======================================================================";
 
     /**
      * Greeting message.

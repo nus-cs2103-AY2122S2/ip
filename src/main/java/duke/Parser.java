@@ -39,7 +39,7 @@ public class Parser {
         String input = scanned.nextLine();
 
         while (!input.equals(Commands.BYE.command)) {
-            System.out.println(Ui.banner);
+            System.out.println(Ui.BANNER);
 
             //prints the list of items when user inputs list
             if (input.equals(Commands.LIST.command)) {

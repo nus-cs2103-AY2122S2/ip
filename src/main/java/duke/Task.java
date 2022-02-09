@@ -40,27 +40,23 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");
     }
-
-    public static String markPrint;
     
     /**
      * Marks task as done and notifies user of the changes.
      */
     public void markAsDone() {
         isDone = true;
-        markPrint = "Nice! I've marked this task as done:\n" + this.getStatusIcon() + " " + this.description;
-        System.out.println(markPrint);
+        String message = "Nice! I've marked this task as done:\n" + this.getStatusIcon() + " " + this.description;
+        System.out.println(message);
     }
 
     /**
      * Marks task as undone and notifies user of the changes.
      */
-    public static String unmarkPrint;
-    //mark a task as undone and notifies the user
     public void markAsUndone(){
         isDone = false;
-        unmarkPrint = "Ok! I've marked this task as not done yet:\n" + this.getStatusIcon() + " "
+        String message = "Ok! I've marked this task as not done yet:\n" + this.getStatusIcon() + " "
         + this.description;
-        System.out.println(unmarkPrint);
+        System.out.println(message);
     }
 }
