@@ -66,7 +66,7 @@ class ParserTest {
     }
 
     @Test
-    public void todo_validArgument_correctCommandResult() {
+    public void todoCommand_validArgument_correctCommandResult() {
         String successMessage = "I have added the following task into list: \n\t%s\nnow you have %d tasks in the list.";
         String commandString = "todo this work";
         Command command = Parser.parse(commandString);
@@ -83,14 +83,14 @@ class ParserTest {
 
 
     @Test
-    public void todo_invalidArgument_incorrectCommandResult() {
+    public void todoCommand_invalidArgument_incorrectCommandResult() {
         String commandString = "todo";
         Command command = Parser.parse(commandString);
         String errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
         String expected = String.format(errorMsg, "The description of todo cannot be empty.");
         assertEquals(expected, command.execute(new TaskList()).getResult());
 
-        commandString = "todo /will this work";
+        commandString = "todo /this does not work";
         command = Parser.parse(commandString);
         errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
         expected = String.format(errorMsg, "todo require the description argument.");
