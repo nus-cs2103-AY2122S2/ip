@@ -1,5 +1,9 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.InvalidCommand;
@@ -7,11 +11,7 @@ import duke.command.ListCommand;
 import duke.command.ModifyCommand;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test

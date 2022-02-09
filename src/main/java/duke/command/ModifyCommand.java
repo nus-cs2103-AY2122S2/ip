@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
 
 /**
  * Represents a command for modifying tasks.
@@ -33,15 +33,17 @@ public class ModifyCommand implements Command {
         String command = this.commandAndDetails[0];
         int taskNumber = Integer.parseInt(this.commandAndDetails[1]);
         switch (command) {
-            case "mark":
-                this.markTask(taskNumber, taskList);
-                break;
-            case "unmark":
-                this.unmarkTask(taskNumber, taskList);
-                break;
-            case "delete":
-                this.deleteTask(taskNumber, taskList);
-                break;
+        case "mark":
+            this.markTask(taskNumber, taskList);
+            break;
+        case "unmark":
+            this.unmarkTask(taskNumber, taskList);
+            break;
+        case "delete":
+            this.deleteTask(taskNumber, taskList);
+            break;
+        default:
+            System.out.println("There has been an error. Please try again.");
         }
         storage.writeToFile(taskList);
         return false;
@@ -83,7 +85,7 @@ public class ModifyCommand implements Command {
         Task task = taskList.getTask(taskNumber - 1);
         taskList.removeTask(taskNumber - 1);
         System.out.println("This task has been removed:");
-        System.out.println("  " +  task);
+        System.out.println("  " + task);
         System.out.println("Now you have " + taskList.size() + " task(s).");
     }
 }

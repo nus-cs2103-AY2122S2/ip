@@ -1,7 +1,12 @@
 package duke.command;
 
-import duke.*;
-import duke.task.*;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Represents a command for adding tasks.
@@ -31,20 +36,22 @@ public class AddCommand implements Command {
         String details = this.commandAndDetails[1];
         Task task = null;
         switch (command) {
-            case "todo":
-                task = new Todo(details.strip());
-                System.out.println("Added a to do task.");
-                break;
-            case "deadline":
-                String[] deadlineAndTime = details.split("/by");
-                task = new Deadline(deadlineAndTime[0].strip(), deadlineAndTime[1]);
-                System.out.println("Added a deadline.");
-                break;
-            case "event":
-                String[] eventAndTime = details.split("/at");
-                task = new Event(eventAndTime[0].strip(), eventAndTime[1]);
-                System.out.println("Added an event.");
-                break;
+        case "todo":
+            task = new Todo(details.strip());
+            System.out.println("Added a to do task.");
+            break;
+        case "deadline":
+            String[] deadlineAndTime = details.split("/by");
+            task = new Deadline(deadlineAndTime[0].strip(), deadlineAndTime[1]);
+            System.out.println("Added a deadline.");
+            break;
+        case "event":
+            String[] eventAndTime = details.split("/at");
+            task = new Event(eventAndTime[0].strip(), eventAndTime[1]);
+            System.out.println("Added an event.");
+            break;
+        default:
+            System.out.println("There has been an error. Please try again.");
         }
 
         if (task != null) {

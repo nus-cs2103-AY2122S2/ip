@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.ModifyCommand;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -55,7 +61,8 @@ public class Parser {
         case "deadline":
         case "event":
             if (commandAndDetails.length == 1) {
-                throw new DukeException("Please specify the description and time of the " + command + " you want to add.");
+                throw new DukeException("Please specify the description and time of the "
+                        + command + " you want to add.");
             }
             String[] taskAndTime = commandAndDetails[1].split("/");
             if (taskAndTime.length < 2 || taskAndTime[0].equals("") || taskAndTime[1].length() < 3) {
