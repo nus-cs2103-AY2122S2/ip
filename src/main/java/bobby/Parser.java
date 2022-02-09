@@ -29,6 +29,8 @@ public class Parser {
                 bobby.terminate();
                 break;
             case LIST:
+                System.out.println("heloo");
+                assert false: "this should fail";
                 result = tasks.list();
                 break;
             case MARK:
