@@ -93,6 +93,9 @@ public class Storage {
      * @throws IOException if there's error arising from I/O methods.
      */
     public static void writeFile(TaskList list) throws IOException {
+        File directory = new File("./data");
+        File file = new File("./data/duke.txt");
+        assert (directory.exists() == true && file.exists() == true) : "Missing Directory and File";
         FileWriter fw = new FileWriter("./data/duke.txt");
         String str = list.getIndex(0).changeFormat();
         for (int i = 1; i < list.getSize(); i++) {
