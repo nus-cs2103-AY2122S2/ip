@@ -57,6 +57,10 @@ public class Parser {
             int index = Integer.parseInt(commandLine[1]) - 1;
             assert index >= 0 : "index should be more than or equal to 0.";
             return tasklist.delete(index);
+        } else if (prefixCommand.equals("tag")) {
+            int index = Integer.parseInt(commandLine[1]) - 1;
+            assert index >= 0 : "index should be more than or equal to 0.";
+            return tasklist.tag(index, commandLine[2]);
         } else if (prefixCommand.equals("find")) {
             return tasklist.find(commandLine[1]);
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {

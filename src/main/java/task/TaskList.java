@@ -50,9 +50,9 @@ public class TaskList {
      */
     public String add(Task task) {
         this.Tasks.add(task);
-        int index = this.getSize() - 1;
-        assert index >= 0 : "Index must be 0 or more.";
-        return UI.printAddMessage(this.Tasks.get(index).toString(), index);
+        int index = this.getSize();
+        assert index > 0 : "Index must be more than 0.";
+        return UI.printAddMessage(this.Tasks.get(index - 1).toString(), index);
     }
 
     /**
@@ -85,6 +85,18 @@ public class TaskList {
     public String unMark(int no) {
         this.Tasks.get(no).markAsUnDone();
         return UI.printUnMarked(this.Tasks.get(no).toString());
+    }
+
+    /**
+     * Tag the Task on the list as the input value and input string.
+     *
+     * @param no Number of Task to be tagged.
+     * @param str
+     * @return Task tagged message.
+     */
+    public String tag(int no, String str) {
+        this.Tasks.get(no).tag(str);
+        return UI.printTag(this.Tasks.get(no).toString(), str);
     }
 
     /**
@@ -157,8 +169,8 @@ public class TaskList {
      * @throws DukeException If list is empty.
      */
     private String printList(ArrayList<Task> list) throws DukeException {
-        String str = "";
         int size = list.size();
+        String str = "";
         if (size != 0) {
             for (int m = 0; m < size; m++) {
                 str+= m + 1 + "." + list.get(m).toString() + "\n";
