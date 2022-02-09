@@ -71,4 +71,10 @@ checkstyle {
 
 run {
     standardInput = System.in
+    enableAssertions = true
+
+}
+
+tasks.withType(Test) {
+    enableAssertions = true
 }
