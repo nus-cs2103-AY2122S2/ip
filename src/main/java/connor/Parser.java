@@ -9,6 +9,8 @@ import connor.command.CommandType;
 import connor.command.DeleteCommand;
 import connor.command.FindCommand;
 import connor.command.ListCommand;
+import connor.command.SortCommand;
+import connor.task.SortType;
 import connor.task.TaskStatus;
 import connor.task.TaskType;
 
@@ -21,6 +23,8 @@ public class Parser {
     private static final String ERROR_INDEX_NOT_INTEGER = "Error! Index must be a valid integer.";
     private static final String ERROR_INVALID_COMMAND_START = "My apologies, I don't understand what '";
     private static final String ERROR_INVALID_COMMAND_END = "' means.";
+    private static final String ERROR_INVALID_SORT_TYPE = "Error! Invalid type of sort!\n"
+            + "Sort commands available: 'time', 'type'";
 
     private CommandType commandType;
     private Command command;
@@ -83,6 +87,10 @@ public class Parser {
             setFindCommand(desc);
             break;
         }
+        case "sort": {
+            setSortCommand(desc);
+            break;
+        }
         default: {
             setUnknownCommand(commandRaw);
         }
@@ -120,9 +128,7 @@ public class Parser {
             int taskNo = Integer.parseInt(desc) - 1;
             this.command = new DeleteCommand(taskNo);
         } catch (NumberFormatException e) {
-            System.out.println(ERROR_INDEX_NOT_INTEGER);
-            message.append(ERROR_INDEX_NOT_INTEGER);
-            canActivate = false;
+            setError(message, ERROR_INDEX_NOT_INTEGER);
         }
     }
 
@@ -137,9 +143,7 @@ public class Parser {
             int taskNo = Integer.parseInt(desc) - 1;
             this.command = new ChangeStatusCommand(TaskStatus.MARK, taskNo);
         } catch (NumberFormatException e) {
-            System.out.println(ERROR_INDEX_NOT_INTEGER);
-            message.append(ERROR_INDEX_NOT_INTEGER);
-            canActivate = false;
+            setError(message, ERROR_INDEX_NOT_INTEGER);
         }
     }
 
@@ -149,9 +153,7 @@ public class Parser {
             int taskNo = Integer.parseInt(desc) - 1;
             this.command = new ChangeStatusCommand(TaskStatus.UNMARK, taskNo);
         } catch (NumberFormatException e) {
-            System.out.println(ERROR_INDEX_NOT_INTEGER);
-            message.append(ERROR_INDEX_NOT_INTEGER);
-            canActivate = false;
+            setError(message, ERROR_INDEX_NOT_INTEGER);
         }
     }
 
@@ -160,10 +162,31 @@ public class Parser {
         this.command = new FindCommand(desc);
     }
 
+    private void setSortCommand(String desc) {
+        this.commandType = CommandType.SORT;
+        switch (desc.toLowerCase().trim()) {
+        case "time": {
+            this.command = new SortCommand(SortType.TIME);
+            break;
+        }
+        case "type": {
+            this.command = new SortCommand(SortType.TYPE);
+            break;
+        }
+        default: {
+            setError(message, ERROR_INVALID_SORT_TYPE);
+        }
+        }
+    }
+
     private void setUnknownCommand(String commandRaw) {
         this.commandType = CommandType.UNKNOWN;
-        System.out.println(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
-        message.append(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
+        setError(message, ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
+    }
+
+    private void setError(StringBuilder sb, String errorMessage) {
+        System.out.println(errorMessage);
+        sb.append(errorMessage);
         canActivate = false;
     }
 

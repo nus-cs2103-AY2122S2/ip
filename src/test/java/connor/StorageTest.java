@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,15 +24,18 @@ public class StorageTest {
             t.mark();
             assertEquals("[#] T | Test\n", Storage.taskToString(t));
 
-            Deadline d = new Deadline("Test", "Monday");
-            assertEquals("[ ] D | Test | By: Monday\n", Storage.taskToString(d));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse("19-02-2022 14:30", formatter);
+            Deadline d = new Deadline("Test", dateTime);
+            assertEquals("[ ] D | Test | By: 19-02-2022 14:30\n", Storage.taskToString(d));
             d.mark();
-            assertEquals("[#] D | Test | By: Monday\n", Storage.taskToString(d));
+            assertEquals("[#] D | Test | By: 19-02-2022 14:30\n", Storage.taskToString(d));
 
-            Event e = new Event("Test", "Tuesday");
-            assertEquals("[ ] E | Test | At: Tuesday\n", Storage.taskToString(e));
+            LocalDateTime dateTime2 = LocalDateTime.parse("31-03-2022 23:30", formatter);
+            Event e = new Event("Test", dateTime2);
+            assertEquals("[ ] E | Test | At: 31-03-2022 23:30\n", Storage.taskToString(e));
             e.mark();
-            assertEquals("[#] E | Test | At: Tuesday\n", Storage.taskToString(e));
+            assertEquals("[#] E | Test | At: 31-03-2022 23:30\n", Storage.taskToString(e));
 
             ToDo t2 = new ToDo("Things");
             String s = "[ ] T | Things";
@@ -40,10 +44,6 @@ public class StorageTest {
             String s2 = "[#] T | Things";
             assertEquals(t2, Storage.stringToTask(s2));
 
-            LocalDate ld = LocalDate.parse("2022-10-31");
-            Deadline d2 = new Deadline("Stuff", ld);
-            String s3 = "[ ] D | Stuff | By: 2022-10-31\n";
-            assertEquals(s3, Storage.taskToString(d2));
         } catch (InvalidTaskFileException err) {
             fail();
         } catch (ConnorException err) {

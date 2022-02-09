@@ -18,17 +18,17 @@ class TaskListTest {
 
         TaskList.addTask(TaskType.TODO, "Things");
         assertEquals(1, TaskList.getNumberOfTasks());
-        TaskList.addTask(TaskType.DEADLINE, "Things /by Monday");
+        TaskList.addTask(TaskType.DEADLINE, "Things /by 19-02-2022 14:30");
         assertEquals(2, TaskList.getNumberOfTasks());
-        TaskList.addTask(TaskType.DEADLINE, "Things /at Monday");
+        TaskList.addTask(TaskType.DEADLINE, "Things /at 19-02-2022 14:30");
         assertEquals(2, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "Things /at   ");
         assertEquals(2, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.DEADLINE, "     /at Monday");
         assertEquals(2, TaskList.getNumberOfTasks());
-        TaskList.addTask(TaskType.EVENT, "Thing /at Monday");
+        TaskList.addTask(TaskType.EVENT, "Thing /at 19-02-2022 14:30");
         assertEquals(3, TaskList.getNumberOfTasks());
-        TaskList.addTask(TaskType.EVENT, "Thing/atMonday");
+        TaskList.addTask(TaskType.EVENT, "Thing/at19-02-2022 14:30");
         assertEquals(4, TaskList.getNumberOfTasks());
         TaskList.addTask(TaskType.EVENT, "ThingMonday");
         assertEquals(4, TaskList.getNumberOfTasks());

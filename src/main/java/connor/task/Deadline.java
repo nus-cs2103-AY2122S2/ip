@@ -1,63 +1,41 @@
 package connor.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a {@code Task} of type {@code Deadline}.
  */
 public class Deadline extends Task {
-    protected String by;
-    protected LocalDate date;
-    protected boolean hasLocalDate = false;
+    protected LocalDateTime dateTime;
 
     /**
      * Constructor for {@code Deadline} class.
      *
      * @param desc Description of the task.
-     * @param by Deadline of the task.
+     * @param dateTime Deadline date and time of the task.
+     * @see LocalDateTime
      */
-    public Deadline(String desc, String by) {
+    public Deadline(String desc, LocalDateTime dateTime) {
         super(desc, TaskType.DEADLINE);
-        this.by = by;
+        this.dateTime = dateTime;
     }
 
     /**
-     * Another constructor for {@code Deadline} class.
+     * Formats the date in an easier to read format.
      *
-     * @param desc Description of the task.
-     * @param date Deadline date of the task formatted in the ISO-8601 system.
-     * @see LocalDate
-     */
-    public Deadline(String desc, LocalDate date) {
-        super(desc, TaskType.DEADLINE);
-        this.date = date;
-        this.by = date.toString();
-        this.hasLocalDate = true;
-    }
-
-    public String getBy() {
-        return by;
-    }
-
-    public boolean hasLocalDate() {
-        return hasLocalDate;
-    }
-
-    /**
-     * Formats the date in an easier to read format if {@code Deadline} uses {@code LocalDate}.
-     * Returns a standard {@code String} deadline otherwise.
-     *
-     * @return {@code String} representation of either the LocalDate stored or a standard
-     * {@code String} deadline.
+     * @return {@code String} representation of the LocalDate stored.
      */
     private String getDate() {
-        if (hasLocalDate) {
-            // Of the form "June 24, 2019"
-            return date.format(DateTimeFormatter.ofPattern("MMMM d, yyyy"));
-        } else {
-            return by;
-        }
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma"));
+    }
+
+    public String getStorageDate() {
+        return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     /**

@@ -1,10 +1,13 @@
 package connor.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import connor.Connor;
+import connor.exception.ConnorException;
 
 /**
  * Stores and edits the task list.
@@ -24,6 +27,8 @@ public class TaskList {
     private static final String UNMARK_TASK = "Understood. I've unmarked the following task: ";
     private static final String NO_MATCHING_TASKS = "Sorry, there are no matching tasks in your list.";
     private static final String SHOW_MATCHING_TASKS = "Here are the matching tasks in your list: ";
+    private static final String SORT_TASKS_TIME = "Sorting tasks chronologically...";
+    private static final String SORT_TASKS_TYPE = "Sorting tasks by type...";
     private static final String ERROR_EMPTY_INDEX = "Error! Index cannot be empty.";
     private static final String ERROR_EMPTY_TASK_DESC = "Error! Tasks cannot have an empty description.";
     private static final String ERROR_EMPTY_DL_DESC = "Error! Deadlines cannot have empty descriptions or dates.";
@@ -31,19 +36,14 @@ public class TaskList {
     private static final String ERROR_INDEX_NOT_INTEGER = "Error! Index must be a valid integer.";
     private static final String ERROR_INDEX_OUT_OF_RANGE = "Error! Given index is out of range.";
     private static final String ERROR_INVALID_DL_FORMAT = "Error! Wrong format for deadlines.\n\n"
-            + "Deadline tasks must include \"by\" in the description.\nExample: \n"
-            + ">>> deadline Finish project /by Monday Morning";
-    private static final String ERROR_INVALID_DL_FORMAT_GUI = "Error! Wrong format for deadlines.\n\n"
-            + "Deadline tasks must include \"by\" in the description.\nExample: \n"
-            + "'deadline Finish project /by Monday Morning'";
+            + "Format:  deadline {task} /by DD-MM-YYYY HH:MM\n"
+            + "Example: deadline Finish Project /by 25-02-2022 23:59";
     private static final String ERROR_INVALID_EVENT_FORMAT = "Error! Wrong format for events.\n\n"
-            + "Event tasks must include \"at\" in the description.\nExample: \n"
-            + ">>> event Birthday Party at May 5th";
-    private static final String ERROR_INVALID_EVENT_FORMAT_GUI = "Error! Wrong format for events.\n\n"
-            + "Event tasks must include \"at\" in the description.\nExample: \n"
-            + "'event Birthday Party at May 5th'";
+            + "Format:  event {task} /at DD-MM-YYYY HH:MM\n"
+            + "Example: event Birthday Party /at 10-02-2022 12:30";
     private static final String ERROR_INVALID_TASK_TYPE = "Oh no! Incorrect Task type!";
     private static final String ERROR_INVALID_TASK_STATUS = "Oh no! Invalid Task status!";
+    private static final String ERROR_INVALID_SORT_TYPE = "Oh no! Invalid Sort type!";
     private static final String ERROR_MARK_EMPTY = "Error! I can't mark an empty task list!";
     private static final String ERROR_UNMARK_EMPTY = "Error! I can't unmark an empty task list!";
 
@@ -80,12 +80,6 @@ public class TaskList {
 
     /**
      * Adds a {@code Task} into the task list with a description.
-     * If the {@code Task} is a {@code Deadline} or an {@code Event}, the method splits the
-     * description into two parts, the actual description and when the {@code Task} is due/occurs,
-     * with the delimiter "/by" or "/at" respectively.
-     * <p>
-     * The method also checks if the given occasion is of the valid {@code LocalDate} format, defaulting
-     * to a regular {@code String} otherwise.
      *
      * @param taskType Type of {@code Task}.
      * @param desc Description of the task and also the occasion if the {@code Task} is a
@@ -98,85 +92,114 @@ public class TaskList {
             return ERROR_EMPTY_TASK_DESC;
         }
         StringBuilder message = new StringBuilder();
-        switch (taskType) {
-        case TODO:
-            ToDo todo = new ToDo(desc);
-            tasks.add(todo);
-            print(ADD_NEW_TASK);
-            print(INDENT + todo);
-            message.append(ADD_NEW_TASK + "\n" + INDENT + todo + "\n");
-            break;
-        case DEADLINE: {
-            if (!desc.contains("/by")) {
-                print(ERROR_INVALID_DL_FORMAT);
-                return ERROR_INVALID_DL_FORMAT_GUI;
+        try {
+            switch (taskType) {
+            case TODO:
+                addTodo(desc, message);
+                break;
+            case DEADLINE: {
+                addDeadline(desc, message);
+                break;
             }
-            String[] phrases = desc.split("/by", 2);
-            String thing = phrases[0].trim();
-            String when = phrases[1].trim();
-            if (thing.isBlank() || when.isBlank()) {
-                print(ERROR_EMPTY_DL_DESC);
-                return ERROR_EMPTY_TASK_DESC;
+            case EVENT: {
+                addEvent(desc, message);
+                break;
             }
-            try {
-                // Check if 'when' is a valid date
-                LocalDate ld = LocalDate.parse(when);
-                Deadline deadline = new Deadline(thing, ld);
-                tasks.add(deadline);
-                print(ADD_NEW_TASK);
-                print(INDENT + deadline);
-                message.append(ADD_NEW_TASK + "\n" + INDENT + deadline + "\n");
-            } catch (DateTimeParseException e) {
-                // Otherwise, treat it as a normal String
-                Deadline deadline = new Deadline(thing, when);
-                tasks.add(deadline);
-                print(ADD_NEW_TASK);
-                print(INDENT + deadline);
-                message.append(ADD_NEW_TASK + "\n" + INDENT + deadline + "\n");
+            default: {
+                // Something has gone wrong
+                print(ERROR_INVALID_TASK_TYPE);
+                return ERROR_INVALID_TASK_TYPE;
             }
-            break;
-        }
-        case EVENT: {
-            if (!desc.contains("/at")) {
-                print(ERROR_INVALID_EVENT_FORMAT);
-                return ERROR_INVALID_EVENT_FORMAT_GUI;
             }
-            String[] phrases = desc.split("/at", 2);
-            String thing = phrases[0].trim();
-            String when = phrases[1].trim();
-            if (thing.isBlank() || when.isBlank()) {
-                print(ERROR_EMPTY_EVENT_DESC);
-                return ERROR_EMPTY_EVENT_DESC;
-            }
-            try {
-                // Check if 'when' is a valid date
-                LocalDate ld = LocalDate.parse(when);
-                Event event = new Event(thing, ld);
-                tasks.add(event);
-                print(ADD_NEW_TASK);
-                print(INDENT + event);
-                message.append(ADD_NEW_TASK + "\n" + INDENT + event + "\n");
-            } catch (DateTimeParseException e) {
-                // Otherwise, treat it as a normal String
-                Event event = new Event(thing, when);
-                tasks.add(event);
-                print(ADD_NEW_TASK);
-                print(INDENT + event);
-                message.append(ADD_NEW_TASK + "\n" + INDENT + event + "\n");
-            }
-            break;
-        }
-        default: {
-            // Something has gone wrong
-            print(ERROR_INVALID_TASK_TYPE);
-            return ERROR_INVALID_TASK_TYPE;
-        }
+        } catch (ConnorException e) {
+            print(e.getMessage());
+            return e.getMessage();
         }
         // After task is added show current number of tasks
         print("");
         getNumberOfTasks();
         message.append(getNumberOfTasksString());
         return message.toString();
+    }
+
+    /**
+     * Adds a {@code ToDo} into the task list with a description.
+     *
+     * @param desc Description of the ToDo task.
+     * @param message Message to build upon.
+     */
+    private static void addTodo(String desc, StringBuilder message) {
+        ToDo todo = new ToDo(desc);
+        tasks.add(todo);
+        print(ADD_NEW_TASK);
+        print(INDENT + todo);
+        message.append(ADD_NEW_TASK + "\n" + INDENT + todo + "\n");
+    }
+
+    /**
+     * Adds a {@code Deadline} into the task list with a description and the date and time. The method splits the
+     * description into two parts, the actual description and when the {@code Task} is due,
+     * with the delimiter "/by". The deadline should be a valid date time format.
+     *
+     * @param desc Description of the Deadline task and also the occasion.
+     * @param message Message to build upon.
+     */
+    private static void addDeadline(String desc, StringBuilder message) throws ConnorException {
+        if (!desc.contains("/by")) {
+            print(ERROR_INVALID_DL_FORMAT);
+            throw new ConnorException(ERROR_INVALID_DL_FORMAT);
+        }
+        String[] phrases = desc.split("/by", 2);
+        String thing = phrases[0].trim();
+        String when = phrases[1].trim();
+        if (thing.isBlank() || when.isBlank()) {
+            print(ERROR_EMPTY_DL_DESC);
+            throw new ConnorException(ERROR_EMPTY_TASK_DESC);
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(when, formatter);
+            Deadline deadline = new Deadline(thing, dateTime);
+            tasks.add(deadline);
+            print(ADD_NEW_TASK);
+            print(INDENT + deadline);
+            message.append(ADD_NEW_TASK + "\n" + INDENT + deadline + "\n");
+        } catch (DateTimeParseException e) {
+            throw new ConnorException(ERROR_INVALID_DL_FORMAT);
+        }
+    }
+
+    /**
+     * Adds an {@code Event} into the task list with a description and the date and time. The method splits the
+     * description into two parts, the actual description and when the {@code Task} occurs,
+     * with the delimiter "/at". The event occasion should be a valid date time format.
+     *
+     * @param desc Description of the Event task and also the occasion.
+     * @param message Message to build upon.
+     */
+    private static void addEvent(String desc, StringBuilder message) throws ConnorException {
+        if (!desc.contains("/at")) {
+            print(ERROR_INVALID_EVENT_FORMAT);
+            throw new ConnorException(ERROR_INVALID_EVENT_FORMAT);
+        }
+        String[] phrases = desc.split("/at", 2);
+        String thing = phrases[0].trim();
+        String when = phrases[1].trim();
+        if (thing.isBlank() || when.isBlank()) {
+            print(ERROR_EMPTY_EVENT_DESC);
+            throw new ConnorException(ERROR_EMPTY_EVENT_DESC);
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(when, formatter);
+            Event event = new Event(thing, dateTime);
+            tasks.add(event);
+            print(ADD_NEW_TASK);
+            print(INDENT + event);
+            message.append(ADD_NEW_TASK + "\n" + INDENT + event + "\n");
+        } catch (DateTimeParseException e) {
+            throw new ConnorException(ERROR_INVALID_EVENT_FORMAT);
+        }
     }
 
     /**
@@ -310,6 +333,131 @@ public class TaskList {
             }
         }
         return taskListString.toString();
+    }
+
+    /**
+     * Sorts the list of Tasks by the SortType given.
+     *
+     * @param sortType Type of sort used to sort the tasks.
+     * @return Message containing confirmation that a sort has been done, or an error.
+     */
+    public static String sortTasks(SortType sortType) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            switch (sortType) {
+            case TYPE: {
+                sortTasksByType(sb);
+                break;
+            }
+            case TIME: {
+                sortTasksByTime(sb);
+                break;
+            }
+            default: {
+                print(ERROR_INVALID_SORT_TYPE);
+                sb.append(ERROR_INVALID_SORT_TYPE);
+            }
+            }
+        } catch (ConnorException e) {
+            print(e.getMessage());
+            return e.getMessage();
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Sorts tasks by type. ToDos first, then Deadlines, then Events.
+     *
+     * @param sb Message to append to.
+     * @throws ConnorException If a {@code Task} in the list is not of a valid task type.
+     */
+    private static void sortTasksByType(StringBuilder sb) throws ConnorException {
+        print(SORT_TASKS_TYPE);
+        sb.append(SORT_TASKS_TYPE + "\n");
+        ArrayList<Task> todos = new ArrayList<>();
+        ArrayList<Task> deadlines = new ArrayList<>();
+        ArrayList<Task> events = new ArrayList<>();
+        for (Task task : tasks) {
+            switch (task.getTaskType()) {
+            case TODO: {
+                todos.add(task);
+                break;
+            }
+            case DEADLINE: {
+                deadlines.add(task);
+                break;
+            }
+            case EVENT: {
+                events.add(task);
+                break;
+            }
+            default: {
+                print(ERROR_INVALID_TASK_TYPE);
+                throw new ConnorException(ERROR_INVALID_TASK_TYPE);
+            }
+            }
+        }
+        ArrayList<Task> sortedTasks = new ArrayList<>();
+        sortedTasks.addAll(todos);
+        sortedTasks.addAll(deadlines);
+        sortedTasks.addAll(events);
+        setTasks(sortedTasks);
+        sb.append(viewTasks());
+    }
+
+    /**
+     * Sorts Deadlines and Events in chronological order, then ToDos are appended at the end.
+     *
+     * @param sb Message to append to.
+     * @throws ConnorException If a {@code Task} in the list is not of a valid task type.
+     */
+    private static void sortTasksByTime(StringBuilder sb) throws ConnorException {
+        print(SORT_TASKS_TIME);
+        sb.append(SORT_TASKS_TIME + "\n");
+        ArrayList<ToDo> todos = new ArrayList<>();
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        ArrayList<Event> events = new ArrayList<>();
+        for (Task task : tasks) {
+            switch (task.getTaskType()) {
+            case TODO: {
+                todos.add((ToDo) task);
+                break;
+            }
+            case DEADLINE: {
+                deadlines.add((Deadline) task);
+                break;
+            }
+            case EVENT: {
+                events.add((Event) task);
+                break;
+            }
+            default: {
+                print(ERROR_INVALID_TASK_TYPE);
+                throw new ConnorException(ERROR_INVALID_TASK_TYPE);
+            }
+            }
+        }
+        deadlines.sort(Comparator.comparing(Deadline::getDateTime));
+        events.sort(Comparator.comparing(Event::getDateTime));
+        ArrayList<Task> sortedTasks = new ArrayList<>();
+        while (!(deadlines.isEmpty() || events.isEmpty())) {
+            LocalDateTime deadlineTime = deadlines.get(0).getDateTime();
+            LocalDateTime eventTime = events.get(0).getDateTime();
+            if (deadlineTime.isBefore(eventTime)) {
+                sortedTasks.add(deadlines.remove(0));
+            } else {
+                sortedTasks.add(events.remove(0));
+            }
+        }
+        if (deadlines.isEmpty()) {
+            sortedTasks.addAll(events);
+        }
+        if (events.isEmpty()) {
+            sortedTasks.addAll(deadlines);
+        }
+        sortedTasks.addAll(todos);
+        setTasks(sortedTasks);
+        sb.append(viewTasks());
     }
 
     /**

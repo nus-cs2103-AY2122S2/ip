@@ -1,63 +1,41 @@
 package connor.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a {@code Task} of type {@code Event}.
  */
 public class Event extends Task {
-    protected String at;
-    protected LocalDate date;
-    protected boolean hasLocalDate = false;
+    protected LocalDateTime dateTime;
 
     /**
      * Constructor for {@code Event} class.
      *
      * @param desc Description of the task.
-     * @param at Event occasion of the task.
+     * @param dateTime Deadline date and time of the task.
+     * @see LocalDateTime
      */
-    public Event(String desc, String at) {
+    public Event(String desc, LocalDateTime dateTime) {
         super(desc, TaskType.EVENT);
-        this.at = at;
+        this.dateTime = dateTime;
     }
 
     /**
-     * Another constructor for {@code Event} class.
+     * Formats the date in an easier to read format.
      *
-     * @param desc Description of the task.
-     * @param date Event date of the task formatted in the ISO-8601 system.
-     * @see LocalDate
+     * @return {@code String} representation of the LocalDate stored.
      */
-    public Event(String desc, LocalDate date) {
-        super(desc, TaskType.EVENT);
-        this.date = date;
-        this.at = date.toString();
-        this.hasLocalDate = true;
+    private String getDate() {
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mma"));
     }
 
-    public String getAt() {
-        return at;
+    public String getStorageDate() {
+        return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
-    public boolean hasLocalDate() {
-        return hasLocalDate;
-    }
-
-    /**
-     * Formats the date in an easier to read format if {@code Event} uses {@code LocalDate}.
-     * Returns a standard {@code String} deadline otherwise.
-     *
-     * @return {@code String} representation of either the LocalDate stored or a standard
-     * {@code String} event occasion.
-     */
-    public String getDate() {
-        if (hasLocalDate) {
-            // Of the form "June 24, 2019"
-            return date.format(DateTimeFormatter.ofPattern("MMMM d, yyyy"));
-        } else {
-            return at;
-        }
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     /**

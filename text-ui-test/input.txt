@@ -1,8 +1,8 @@
 clear
 list
 todo Do Laundry
-deadline Study /by 9pm
-event Birthday Party/atSaturday Afternoon
+deadline Study /by 10-02-2022 23:59
+event Birthday Party/at19-02-2022 10:30
 list
 mark 2
 mark 3
@@ -14,6 +14,7 @@ unmark 66
 list
 todo ppppppppppp
 event Meet Friend /at Sunday 12pm
+event Meet Friend /at 13-02-2022 12:00
 list
 delete 4
 delete 99
