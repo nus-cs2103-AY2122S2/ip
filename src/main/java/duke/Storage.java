@@ -56,12 +56,12 @@ public class Storage {
     public void writeFrom(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(path, false);
-            fw.write(taskList.fileUpdated());
+            fw.write(taskList.toString());
             fw.close();
         } catch (IOException e) {
             System.err.println(new DukeException("I cannot save changes to file.").toString());
             System.out.println("You could save this text file manually and reboot: ");
-            System.out.println(taskList.fileUpdated());
+            System.out.println(taskList.toString());
         }
     }
 }

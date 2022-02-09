@@ -87,7 +87,8 @@ public class TaskList {
         System.out.println(INDENT + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    public String fileUpdated() {
+    @Override
+    public String toString() {
         StringBuilder fileContent = new StringBuilder();
         for (Task t : tasks) {
             fileContent.append(t.fileFormat());

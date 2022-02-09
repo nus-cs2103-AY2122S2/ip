@@ -3,11 +3,10 @@ package duke;
 import java.util.Scanner;
 
 public class Duke {
-    private final String name;
+    private final static String NAME = "Cindy's Duke Bot";
     private final String path;
 
-    public Duke(String name, String path) {
-        this.name = name;
+    public Duke(String path) {
         this.path = path;
     }
 
@@ -15,7 +14,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         TaskList taskList = new TaskList();
         Storage storage = new Storage(path);
-        Ui ui = new Ui(name);
+        Ui ui = new Ui(NAME);
         Parser parser = new Parser(sc, taskList);
 
         ui.boot();
@@ -30,7 +29,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("Cindy's Duke Bot", "./duke.txt").run();
+        new Duke("./duke.txt").run();
     }
 }
 
