@@ -43,6 +43,7 @@ public class Duke {
     private Button sendButton;
     private Scene scene;
 
+    private boolean isWelcomed = false;
     private boolean isExit = false;
     private static final String FILEPATH =  "./duke.txt";
 
@@ -50,6 +51,7 @@ public class Duke {
     public Duke() throws DukeException {
         ui = new Ui();
         ui.showWelcome();
+        ui.sendPrint();
         storage = new Storage(FILEPATH);
         try {
             tasklist = new TaskList(storage.getAllTasks());
@@ -69,6 +71,13 @@ public class Duke {
     public String getResponse(String input) {
         if (isExit) {
             return "";
+        }
+
+        if (!isWelcomed) {
+            isWelcomed = true;
+            ui.clearPrint();
+            ui.showWelcome();
+            return ui.sendPrint();
         }
 
         try {
@@ -93,6 +102,7 @@ public class Duke {
 
 
     public void run() {
+        ui.showWelcome();
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
