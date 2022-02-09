@@ -10,8 +10,8 @@ public class Event extends Task {
      * @return
      * @throws
      */
-    public Event(String description) {
-        super(description);
+    public Event(String description, String tag) {
+        super(description, tag);
     }
 
     /**

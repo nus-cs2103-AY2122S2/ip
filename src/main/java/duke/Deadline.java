@@ -10,8 +10,8 @@ public class Deadline extends Task {
      * @return
      * @throws
      */
-    public Deadline(String description) {
-        super(description);
+    public Deadline(String description, String tag) {
+        super(description, tag);
     }
 
     /**

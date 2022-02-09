@@ -7,6 +7,7 @@ package duke;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag;
 
     /**
      * Constructor for all possible tasks, including todo, deadline and event
@@ -14,9 +15,14 @@ public class Task {
      * @return
      * @throws
      */
-    public Task(String description) {
+    public Task(String description, String tag) {
         this.description = description;
         this.isDone = false;
+        this.tag = tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     /**

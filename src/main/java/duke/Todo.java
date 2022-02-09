@@ -12,8 +12,8 @@ public class Todo extends Task {
      * @return
      * @throws
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, String tag) {
+        super(description, tag);
     }
 
     /**

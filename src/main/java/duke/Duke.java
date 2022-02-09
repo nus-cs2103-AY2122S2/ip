@@ -78,8 +78,20 @@ public class Duke extends Application {
                 } catch (IOException e) {
                     System.out.println(" ");
                 }
+                if (splittedString[0].equals("tag") && splittedString.length == 3) { // check for mark tag
+                    assert !itemList.isEmpty() : "List is empty";
+                    String tag = "#" + splittedString[2];
+                    try {
+                        int index = Integer.valueOf(reply.split(" ")[1]);
+                        itemList.get(index - 1).setTag(tag);
+                        return op.border +
+                                "     Nice! I've tagged " + '"' + itemList.get(index - 1).getDescription() + '"' +
+                        " with " + tag + "       " + "\n" + op.instructions + op.border;
+                    } catch (NumberFormatException n) {
+                        return "Invalid input, please enter a valid index number instead";
+                    }
 
-                if (splittedString[0].equals("mark") && splittedString.length == 2) { // check for mark tag
+                } else if (splittedString[0].equals("mark") && splittedString.length == 2) { // check for mark tag
                     assert !itemList.isEmpty() : "List is empty";
                     try {
                     int index = Integer.valueOf(reply.split(" ")[1]);
@@ -126,7 +138,7 @@ public class Duke extends Application {
                                 op.instructions +
                                 op.border;
                     } else { //valid todo command
-                        Task todoTask = new Todo(reply);
+                        Task todoTask = new Todo(reply, "");
                         itemList.add(todoTask);
                         return op.border +
                                 "     Got it. I've added this task: \n" +
@@ -142,7 +154,7 @@ public class Duke extends Application {
                                 op.instructions +
                                 op.border;
                     } else { //valid deadline command
-                        Task deadlineTask = new Deadline(reply);
+                        Task deadlineTask = new Deadline(reply, "");
                         itemList.add(deadlineTask);
                         return op.border +
                                 "     Got it. I've added this task: \n" +
@@ -158,7 +170,7 @@ public class Duke extends Application {
                                 op.instructions +
                                 op.border;
                     } else { //valid event command
-                        Task eventTask = new Event(reply);
+                        Task eventTask = new Event(reply, "");
                         itemList.add(eventTask);
                         return op.border +
                                 "     Got it. I've added this task: \n" +
@@ -173,7 +185,8 @@ public class Duke extends Application {
                     String totalString = op.border +
                             "    Here are the tasks in your list:\n";
                     for (int i = 0; i < itemList.size(); i++) {
-                        totalString += "    " + (i + 1) + ". " + itemList.get(i).getDescription() + "\n";
+                        totalString += "    " + (i + 1) + ". " + itemList.get(i).getDescription() + " " +
+                                itemList.get(i).tag + "\n";
                     }
                     totalString += op.instructions +
                             op.border;
@@ -188,12 +201,18 @@ public class Duke extends Application {
                     String relevantTasks = "";
                     int count = 1;
                     for (Task t : filteredItemList) {
-                        relevantTasks += "     " + count + "." + t.getDescription() + "\n";
+                        relevantTasks += "     " + count + "." + t.getDescription() + " " + t.tag + "\n";
                         count++;
                     }
-                    return op.border
-                            + "     Here are the matching tasks in your list:\n" + relevantTasks
-                            + op.instructions + op.border;
+                    if (relevantTasks.equals("")) { //no tasks with relevant keywords
+                        return op.border
+                                + "     Sorry, there are no matching tasks\n"
+                                + op.instructions + op.border;
+                    } else {
+                        return op.border
+                                + "     Here are the matching tasks in your list:\n" + relevantTasks
+                                + op.instructions + op.border;
+                    }
                 } else if (splittedString[0].equals("help")){
                     return op.help;
                 } else { //check non-existing commands
