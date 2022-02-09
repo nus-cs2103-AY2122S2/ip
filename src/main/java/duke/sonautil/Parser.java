@@ -53,6 +53,9 @@ public class Parser {
         } else if (userMessage.startsWith("find") && split[0].equals("find")) {
             command = processFindCommand(userMessage);
 
+        } else if (userMessage.startsWith("update") && split[0].equals("update")) {
+            String[] updateCommand = processUpdateCommand(userMessage);
+            return updateCommand;
         } else {
             command[0] = "unknown";
             throw new DukeException(Ui.userUnknownInputMessage(userMessage));
@@ -337,4 +340,88 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Processes user's 'update' command
+     *
+     * @param userMessage user's message
+     * @return string array of command information
+     * @throws DukeException if command is invalid / not understood
+     * @throws DateTimeParseException if date is invalid
+     */
+    private String[] processUpdateCommand(String userMessage) throws DukeException, DateTimeParseException {
+        String[] updateCommand = new String[5];
+        //show update guide
+        if (userMessage.equals("update guide")) {
+            throw new DukeException(Ui.showUpdateCommandGuide());
+        }
+
+        //empty message after update
+        if (userMessage.substring(6).replaceAll(" ", "").equals("")) {
+            throw new DukeException(Ui.updateEmptyBodyError());
+        }
+
+        //check format
+        String[] cmdSplit = userMessage.substring(7).split(":"); //["num type", "changes"]
+        String[] cmdFrontPart = cmdSplit[0].split(" "); //["num", "type"]
+        if (cmdSplit.length != 2 || cmdFrontPart.length != 2) {
+            throw new DukeException(Ui.updateWrongFormat());
+        }
+
+        //invalid command
+        boolean isValidNum = cmdFrontPart[0].replaceAll(" ", "").matches("\\d+|-\\d+");
+        if (!isValidNum) {
+            throw new DukeException(Ui.updateWrongFormat());
+        }
+
+        String typeRemovedSpaces = cmdFrontPart[1].replaceAll(" ", "").toLowerCase();
+        int taskIndex = Integer.parseInt(cmdFrontPart[0].replaceAll(" ", "")) - 1;
+
+        updateCommand[0] = "update";
+        updateCommand[1] = String.valueOf(taskIndex);
+        updateCommand[2] = typeRemovedSpaces;
+
+        //check if type matches changes
+        switch (typeRemovedSpaces) {
+        case "type":
+            String cmdBackPart = cmdSplit[1].replaceAll(" ", "").toLowerCase();
+            if (cmdBackPart.equals("todo") || cmdBackPart.equals("deadline") || cmdBackPart.equals("event")) {
+                updateCommand[3] = cmdBackPart;
+                return updateCommand;
+            } else {
+                throw new DukeException(Ui.updateInvalidTaskType());
+            }
+        case "name":
+            updateCommand[3] = cmdSplit[1].substring(1);
+            return updateCommand;
+        case "date":
+            String dateTime = cmdSplit[1].replaceAll(" ", "");
+            LocalDateTime dateTimeComplete;
+            String timeEntered = "false";
+
+            if (dateTime.length() == 14) { //date & time
+                LocalDate date = LocalDate.parse(dateTime.substring(0, 10));
+                int hour = Integer.parseInt(dateTime.substring(10, 12));
+                int min = Integer.parseInt(dateTime.substring(12));
+                dateTimeComplete = date.atTime(hour, min);
+                timeEntered = "true";
+                updateCommand[3] = dateTimeComplete.toString();
+                updateCommand[4] = timeEntered;
+                return updateCommand;
+            } else if (dateTime.length() == 10) { //date only
+                LocalDate date = LocalDate.parse(dateTime.substring(0, 10));
+                dateTimeComplete = date.atTime(23, 59);
+                updateCommand[3] = dateTimeComplete.toString();
+                updateCommand[4] = timeEntered;
+                return updateCommand;
+                //date & time invalid
+            } else {
+                throw new DukeException(Ui.dateTimeErrorMessage());
+            }
+
+        default:
+            throw new DukeException(Ui.updateWrongFormat());
+        }
+
+    }
 }
+

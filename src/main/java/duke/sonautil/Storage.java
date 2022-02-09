@@ -56,6 +56,8 @@ public class Storage {
         case "unmark":
             changeMarking("1", "0", Integer.parseInt(command[1]));
             break;
+        case "update":
+            editTask(Integer.parseInt(command[1]), command[2], command[3]);
         default:
         }
     }
@@ -185,7 +187,7 @@ public class Storage {
      * @throws IOException if fails access local file
      */
     private void changeMarking(String init, String goal, int taskToMark) throws IOException {
-        assert (init.equals("0") || init.equals("1"));c
+        assert (init.equals("0") || init.equals("1"));
         assert (goal.equals("0") || goal.equals("1"));
         String oldFileName = path;
         String tempFileName = "src/main/data/tempDuke.txt";
@@ -220,6 +222,83 @@ public class Storage {
 
         File newFile = new File(tempFileName);
         newFile.renameTo(oldFile);
+    }
+
+    //time, type, name
+    private void editTask(int taskIndex, String type, String change) throws IOException {
+        String oldFileName = path;
+        String tempFileName = "src/main/data/tempDuke.txt";
+        File tempFile = new File(tempFileName);
+        long lineCount = Files.lines(Path.of(path)).count();
+        int taskToChange = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(oldFileName));
+             BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (taskToChange == lineCount - 1 && taskToChange == taskIndex) { //if it is the last line
+                    if ((line.charAt(0) == 'T' && type.equals("date")) ||
+                            line.charAt(0) == 'T' && type.equals("type")) {
+                        break;
+                    }
+                    line = editTaskHelper(line, type, change);
+                    bw.write(line);
+                } else if (taskToChange == lineCount - 1) {
+                    bw.write(line);
+                } else if (taskToChange == taskIndex) {
+                    if (line.charAt(0) == 'D' && type.equals("date")) {
+                        break;
+                    }
+                    line = editTaskHelper(line, type, change);
+                    bw.write(line + "\n");
+                } else {
+                    bw.write(line + "\n");
+                }
+                taskToChange++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File oldFile = new File(oldFileName);
+        oldFile.delete();
+
+        File newFile = new File(tempFileName);
+        newFile.renameTo(oldFile);
+    }
+
+    private String editTaskHelper(String line, String type, String change) {
+        assert type.equals("type") || type.equals("name") || type.equals("date");
+        StringBuilder modifiedString = new StringBuilder();
+        String[] split = line.split(" \\| ");
+        if (type.equals("type")) {
+            if (line.charAt(0) == 'T') {
+                return line;
+            }
+            if (change.equals("todo")) {
+                split[0] = "T";
+                if (split.length == 4) {
+                    return split[0] + " | " + split[1] + " | " + split[2];
+                }
+            } else if (change.equals("deadline")) {
+                split[0] = "D";
+            } else {
+                split[0] = "E";
+            }
+        } else if (type.equals("name")) {
+            split[2] = change;
+        } else { //type.equals("date")
+            if (line.charAt(0) == 'T') {
+                return line;
+            }
+            split[3] = change;
+        }
+
+        for (String s : split) {
+            modifiedString.append(s);
+        }
+        return String.join(" | ", split);
     }
 
 

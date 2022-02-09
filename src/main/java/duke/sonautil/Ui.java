@@ -1,6 +1,9 @@
 package duke.sonautil;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -306,5 +309,127 @@ public class Ui {
         return "Here are the tasks that match your search:\n";
     }
 
+    /**
+     * Prints out when message after "update" is empty
+     *
+     * @return message to user
+     */
+    public static String updateEmptyBodyError() {
+        return "Oops! Do you need help with the update feature? Type 'update guide' to check out how to use it :D";
+    }
 
+    /**
+     * Returns message when update command has wrong format
+     *
+     * @return message to user
+     */
+    public static String updateWrongFormat() {
+        return "Oh no... The format of your update command is wrong :(. " +
+                "Type 'update guide' to check out how to use it :D";
+    }
+
+    /**
+     * Returns message when user want to change to a invalid task type
+     *
+     * @return message to user
+     */
+    public static String updateInvalidTaskType() {
+        return "The task types you can change is todo, deadline or event. Try again? :)\n" +
+                "P.S. note that a todo task cannot be changed to a deadline/event";
+    }
+
+    /**
+     * Returns message when user want to add date to a todo task
+     *
+     * @return message to user
+     */
+    public static String updateTodoDateError() {
+        return "You can't add a date to a Todo Task. Try add a new one! :)";
+    }
+
+    /**
+     * Returns message when user want to change a task type to the same type
+     *
+     * @return message to user
+     */
+    public static String updateSameTypeError(String type) {
+        return "Task already has type " + type + "~";
+    }
+
+    /**
+     * Returns message when user want to change from todo to a deadline or event
+     *
+     * @return message to user
+     */
+    public static String updateTypeErrorMessage() {
+        return "You can't change a Todo task to a Deadline or Event since it needs a date. Try adding a new task! :)";
+    }
+
+    /**
+     * Returns message when user want to change a task description to the same description
+     *
+     * @return message to user
+     */
+    public static String updateSameDescriptionError() {
+        return "Task has same description!";
+    }
+
+    /**
+     * Returns message when user successfully changed the type of task
+     *
+     * @param newTask the updated task
+     * @return message to user
+     */
+    public static String updateTypeSuccessMessage(Task newTask) {
+        if (newTask instanceof Todo) {
+            return "Done! Your task is now modified and updated~ You can't set date (and time) for a todo task, " +
+                    "therefore it is removed: \n" + newTask.toString();
+        } else {
+            return "Done~ Your task is now modified and updated:\n" + newTask.toString();
+        }
+    }
+
+    /**
+     * Returns message when user successfully changed the task description
+     *
+     * @param newTask the updated task
+     * @return message to user
+     */
+    public static String updateDateSuccessMessage(Task newTask, String timeEntered) {
+        if (timeEntered.equals("false") && newTask instanceof Deadline) {
+            return "Done~ Your task is now modified and updated!" +
+                    "Since you did not enter the due time for this task, I will help you set it at 23:59!\n";
+        } else if (timeEntered.equals("false") && newTask instanceof Event) {
+            return "Done~ Your task is now modified and updated!" +
+                    "Since you did not enter the due time for this task, I will help you set it at 00:00!\n";
+        } else {
+            return "Done~ Your task is now modified and updated:\n    " + newTask.toString();
+        }
+
+    }
+
+    /**
+     * Returns message when user want to change a task description to the same description
+     *
+     * @param newTask the updated task
+     * @return message to user
+     */
+    public static String updateDescriptionSuccessMessage(Task newTask) {
+        return "Done! Your task is now modified and updated~\n    " + newTask.toString();
+    }
+
+
+    /**
+     * Shows the guide for update command
+     *
+     * @return message to user
+     */
+    public static String showUpdateCommandGuide() {
+        return "*~*~*~*~*~*~*~*~*~*~*~*~*\n" +
+                "update [task #] [type/name/date]: [your change]\n" +
+                "*~*~*~*~*~*~*~*~*~*~*~*~* \n" +
+                "\n- put 'type' to change the task to another category (i.e. todo, deadline, event)\n" +
+                "- put 'name' to change the description of the task\n" +
+                "- put 'date' to change the date (and time) of the task\n";
+    }
 }

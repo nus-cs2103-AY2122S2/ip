@@ -34,12 +34,31 @@ public class Event extends Task {
     }
 
     /**
+     * Constructor for object Event
+     *
+     * @param description description for the task
+     * @param isDone whether the task is done
+     * @param at date of event
+     */
+    public Event(String description, boolean isDone, LocalDateTime at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
+    /**
      * Returns the time of the event happening
      *
      * @return LocalDateTime of the event
      */
-    public LocalDateTime getAt() {
+    public LocalDateTime getDate() {
         return at;
+    }
+
+    /**
+     * changes the date (and time) of event
+     */
+    public void changeDate(String date) {
+        at = LocalDateTime.parse(date);
     }
 
     @Override

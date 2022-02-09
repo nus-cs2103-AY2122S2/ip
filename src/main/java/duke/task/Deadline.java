@@ -34,12 +34,31 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructor for object Deadline
+     *
+     * @param description description for the task
+     * @param isDone whether the task is done
+     * @param by due date of deadline
+     */
+    public Deadline(String description, boolean isDone, LocalDateTime by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    /**
      * Returns the time of deadline
      *
      * @return LocalDateTime deadline
      */
-    public LocalDateTime getBy() {
+    public LocalDateTime getDate() {
         return by;
+    }
+
+    /**
+     * changes the date (and time) of deadline
+     */
+    public void changeDate(String date) {
+        by = LocalDateTime.parse(date);
     }
 
     @Override

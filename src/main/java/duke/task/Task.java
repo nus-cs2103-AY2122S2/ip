@@ -32,6 +32,18 @@ public class Task {
     }
 
     /**
+     * Constructor for object Task
+     *
+     * @param isDone whether the date is done or not
+     * @param description description for the task
+     */
+    public Task(String description, boolean isDone) {
+        assert(description != null && !description.equals(""));
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    /**
      * Returns whether the task is done or not. True for done, false for not done.
      *
      * @return boolean value
@@ -71,6 +83,13 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * changes the description of the task
+     */
+    public void updateDescription(String description) {
+        this.description = description;
     }
 
     @Override

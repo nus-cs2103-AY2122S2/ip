@@ -87,6 +87,8 @@ public class TaskList {
             return executeScheduleCommand(command);
         case "find":
             return executeFindCommand(command);
+        case "update":
+            return executeUpdateCommand(command);
         case "unknown":
             //fallthrough
         default:
@@ -181,13 +183,13 @@ public class TaskList {
         for (int i = 0; i < taskAddedIndex; i++) {
             if (list.get(i) instanceof Event) {
                 Event task = (Event) list.get(i);
-                if (date.isEqual(task.getAt().toLocalDate())) {
+                if (date.isEqual(task.getDate().toLocalDate())) {
                     scheduleList.add(task);
                 }
             }
             if (list.get(i) instanceof Deadline) {
                 Deadline task = (Deadline) list.get(i);
-                if (date.isEqual((task.getBy().toLocalDate()))) {
+                if (date.isEqual((task.getDate().toLocalDate()))) {
                     scheduleList.add(task);
                 }
             }
@@ -230,6 +232,81 @@ public class TaskList {
                 str += (i + 1) + "." + searchList.get(i).toString() + "\n";
             }
             return str;
+        }
+    }
+
+    /**
+     * Processes user's 'update' command on tasklist
+     *
+     * @param command user's command info
+     * @return message to user
+     * @throws DukeException if command is invalid / not understood
+     */
+    private String executeUpdateCommand(String[] command) throws DukeException {
+        //command: ["update", index, "type", "change", "timeEntered"]
+        String changeType = command[2];
+        String change = command[3];
+        String timeEntered = command[4];
+        int taskIndex = Integer.parseInt(command[1]);
+
+        //list is empty
+        if (taskAddedIndex == 0) {
+            throw new DukeException(Ui.listEmptyMessage());
+        }
+
+        //user trying to update a non-existing task
+        if (taskIndex >= taskAddedIndex || taskIndex < 0) {
+            throw new DukeException(Ui.taskDontExistMessage(taskIndex));
+        }
+
+        Task oldTask = list.get(taskIndex);
+        Task newTask;
+
+        //trying to add date to todo
+        if (oldTask instanceof Todo && changeType.equals("date")) {
+            throw new DukeException(Ui.updateTodoDateError());
+        }
+
+        boolean isRedundantChange = (change.equals("todo") && oldTask instanceof Todo) ||
+                (change.equals("deadline") && oldTask instanceof Deadline) ||
+                (change.equals("event") && oldTask instanceof Event);
+        if (isRedundantChange) {
+            throw new DukeException(Ui.updateSameTypeError(change));
+        }
+
+        boolean hasSameDescription = oldTask.getDescription().equals(change) && changeType.equals("name");
+        if (hasSameDescription) {
+            throw new DukeException(Ui.updateSameDescriptionError());
+        }
+
+        if (changeType.equals("type")) {
+            if (change.equals("todo")) {
+                newTask = new Todo(oldTask.getDescription(), oldTask.isDone());
+                list.set(taskIndex, newTask);
+                return Ui.updateTypeSuccessMessage(newTask);
+            } else if (change.equals("deadline") && oldTask instanceof Event) {
+                newTask = new Deadline(oldTask.getDescription(), oldTask.isDone(), ((Event) oldTask).getDate());
+                list.set(taskIndex, newTask);
+                return Ui.updateTypeSuccessMessage(newTask);
+            } else if (change.equals("event") && oldTask instanceof Deadline) {
+                newTask = new Event(oldTask.getDescription(), oldTask.isDone(), ((Deadline) oldTask).getDate());
+                list.set(taskIndex, newTask);
+                return Ui.updateTypeSuccessMessage(newTask);
+            } else {
+                return Ui.updateTypeErrorMessage();
+            }
+
+        } else if (changeType.equals("name")) {
+            list.get(taskIndex).updateDescription(change);
+            return Ui.updateDescriptionSuccessMessage(list.get(taskIndex));
+        } else { //changeType.equals("date")
+            assert list.get(taskIndex) instanceof Event || list.get(taskIndex) instanceof Deadline;
+            if (list.get(taskIndex) instanceof Event) {
+                ((Event) list.get(taskIndex)).changeDate(change);
+            } else {
+                ((Deadline) list.get(taskIndex)).changeDate(change);
+            }
+            return Ui.updateDateSuccessMessage(list.get(taskIndex), timeEntered);
         }
     }
 
