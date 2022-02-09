@@ -40,7 +40,7 @@ public class Duke {
      * @param filename The file which contains the list of tasks.
      */
     public Duke(String filename) {
-
+        assert filename.equals("data/duke.txt") : "File data/duke.txt not found!";
         // Gets the data from filename and creates a new task list based on the data in filename.
         try {
             storage = new Storage(filename);
