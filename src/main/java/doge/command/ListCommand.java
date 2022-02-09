@@ -45,7 +45,7 @@ public class ListCommand extends Command {
 
         if (this.details.isEmpty()) {
             this.message = list(tasks);
-        } else {
+        } else { // if duration is specified when listing
             LocalDateTime dueDateTime;
             String[] tempStr = this.details.split(" ");
 
