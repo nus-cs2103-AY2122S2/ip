@@ -64,6 +64,12 @@ public class Task {
     public String getDescription () {
         return this.description;
     }
+    public String frontDescription() {
+        return "";
+    }
+    public String backDescription() {
+        return this.description;
+    }
 
     /**
      * @param currNo

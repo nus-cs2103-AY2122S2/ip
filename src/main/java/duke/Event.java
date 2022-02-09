@@ -31,15 +31,25 @@ public class Event extends Task {
             this.time = null;
         }
     }
+    @Override
+    public String frontDescription() {
+        return "E | " + "[" + this.getStatusIcon() + "] ";
+    }
+    @Override
+    public String backDescription() {
+        return super.message();
+    }
 
     @Override
     public String message() {
         if (this.time != null) {
-            return "E | " + "[" + this.getStatusIcon() + "] "
-                    + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
+            String messageWithTime = frontDescription()
+                    + backDescription() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
+            return messageWithTime;
         } else {
-            return "E | " + "[" + this.getStatusIcon() + "] "
-                    + super.message() + "(at:" + dateTimeFormat(date) + ")";
+            String messageWithoutTime = frontDescription()
+                    + backDescription() + "(at:" + dateTimeFormat(date) + ")";
+            return messageWithoutTime;
         }
     }
 

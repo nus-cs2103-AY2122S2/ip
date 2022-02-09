@@ -12,12 +12,11 @@ public class Ui {
 
     private static final String DUKE_DIRECTORY = "C:\\DukeDirectory";
     private static final String DUKE_TXTFILE = "C:\\DukeDirectory\\DukeSave.txt";
-    private TaskList taskList = new TaskList(DUKE_DIRECTORY, DUKE_TXTFILE);
-    private Storage storage = new Storage(DUKE_DIRECTORY, DUKE_TXTFILE);
-    public boolean isExit = false;
-
-    private String separation = "\n******************************\n";
-    private String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+    private final TaskList taskList = new TaskList(DUKE_DIRECTORY, DUKE_TXTFILE);
+    private final Storage storage = new Storage(DUKE_DIRECTORY, DUKE_TXTFILE);
+    private boolean isExit = false;
+    private final String separation = "\n******************************\n";
+    private final String greeting = "Hello! I'm Duke\nWhat can I do for you?";
 
 
     /**
@@ -32,17 +31,17 @@ public class Ui {
         return separation + greeting + separation + "\nYou past Todos:"
                 + storage.readData(DUKE_TXTFILE) + taskList.writeToArrFromPrevData();
     }
-
-
+    public boolean isExit() {
+        return this.isExit;
+    }
     /**
      * for user to input command
      * this method will call other methods depending on the user's input
      * check if user input a valid commands and throw DukeException if commands are invalid
      * @exception DukeException
-     * @throws IOException
+     * @throws IOException e
      */
     public String userCommand(String inp) throws IOException, DukeException {
-
         try {
             DukeException d = new DukeException();
             d.invalidCommands(inp);
@@ -53,42 +52,45 @@ public class Ui {
         }
 
         String[] temp = inp.split(" ", 2);
-
-
-        if (inp.equals("bye")) {
+        boolean isBye = inp.equals("bye");
+        boolean isList = inp.equals("list");
+        boolean isMark = temp[0].equals("mark");
+        boolean isUnmark = temp[0].equals("unmark");
+        boolean isTodo = temp[0].equals("todo");
+        boolean isDeadine = temp[0].equals("deadline");
+        boolean isEvent = temp[0].equals("event");
+        boolean isDelete = temp[0].equals("delete");
+        boolean isFind = temp[0].equals("find");
+        boolean isSearch = temp[0].equals("search");
+        if (isBye) {
             isExit = true;
-            storage.reSavingFiles(taskList.listOfInputs);
+            storage.reSavingFiles(taskList.getListOfInputs());
             return ("Bye. Hope to see you again soon!");
-        } else if (inp.equals("list")) {
+        } else if (isList) {
             return taskList.list();
-        } else if (temp[0].equals("mark")) {
-            int currNo = Integer.parseInt(temp[1]) - 1;
-            return taskList.mark(currNo);
-        } else if (temp[0].equals("unmark")) {
-            int currNo = Integer.parseInt(temp[1]) - 1;
-            return taskList.unMark(currNo);
-        } else if (temp[0].equals("todo")) {
-            return taskList.toDo(temp[1]);
-        } else if (temp[0].equals("deadline")) {
-            return taskList.deadLine(inp);
-        } else if (temp[0].equals("event")) {
-            return taskList.event(temp[1]);
-        } else if (temp[0].equals("delete")) {
-            return taskList.delete(temp[1]);
-        } else if (temp[0].equals("find")) {
-            return taskList.find(temp[1]);
-        } else if (temp[0].equals("search")) {
-            return taskList.search(temp[1]);
         } else {
-            return "command is invalid, please re-enter again";
+            String command = temp[1];
+            if (isMark) {
+                int currNo = Integer.parseInt(command) - 1;
+                return taskList.mark(currNo);
+            } else if (isUnmark) {
+                int currNo = Integer.parseInt(command) - 1;
+                return taskList.unMark(currNo);
+            } else if (isTodo) {
+                return taskList.toDo(command);
+            } else if (isDeadine) {
+                return taskList.deadLine(inp);
+            } else if (isEvent) {
+                return taskList.event(command);
+            } else if (isDelete) {
+                return taskList.delete(command);
+            } else if (isFind) {
+                return taskList.find(command);
+            } else if (isSearch) {
+                return taskList.search(command);
+            } else {
+                return "command is invalid, please re-enter again";
+            }
         }
     }
-
-
-
-
-
-
-
-
 }

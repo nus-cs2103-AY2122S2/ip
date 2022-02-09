@@ -17,13 +17,22 @@ public class Todos extends Task {
 
     }
 
+    @Override
+    public String frontDescription() {
+        return "T | " + "[" + this.getStatusIcon() + "] ";
+    }
+    @Override
+    public String backDescription() {
+        return super.message();
+    }
     /**
      *
      * @return string to be printed
      */
     @Override
     public String message() {
-        return "T | " + "[" + this.getStatusIcon() + "] " + super.message();
+        String message = frontDescription() + backDescription();
+        return message;
     }
 
     @Override

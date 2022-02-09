@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    ArrayList<Task> listOfInputs = new ArrayList<>();
+    private ArrayList<Task> listOfInputs = new ArrayList<>();
     private String directory;
     private String filePath;
 
@@ -26,6 +26,9 @@ public class TaskList {
         this.directory = directory;
         this.filePath = filePath;
 
+    }
+    public ArrayList<Task> getListOfInputs() {
+        return this.listOfInputs;
     }
 
     /**
@@ -44,15 +47,17 @@ public class TaskList {
         return response;
     }
 
+
     /**
      * @param keywords
      * @return string that imdicates whether keyword is found
      */
-    public String search(String keywords) {
+    public String search(String keywords) { //list unable to differentiate backDes after resaving
         boolean hasWord = false;
         String response = "";
+
         for (int i = 0; i < listOfInputs.size(); i++) {
-            if (listOfInputs.get(i).getDescription().indexOf(keywords) == 0) {
+            if (listOfInputs.get(i).backDescription().indexOf(keywords) == 0) {
                 response = response + listOfInputs.get(i).message() + "\n";
                 hasWord = true;
             }
@@ -62,7 +67,6 @@ public class TaskList {
         }
         return response;
     }
-
     /**
      * @param word
      */
@@ -90,7 +94,8 @@ public class TaskList {
         Task taskDone = listOfInputs.get(currNo);
         response = response + taskDone.markDone(currNo);
         storage.updateData(taskDone.message(), filePath);
-        return "Good work!! I have marked it done:\n" + response;
+        String markedFinishMessage = "Good work!! I have marked it done:\n" + response;
+        return markedFinishMessage;
     }
 
     /**
@@ -100,9 +105,9 @@ public class TaskList {
      */
     public String unMark(int currNo) throws IOException {
         Task taskUndone = listOfInputs.get(currNo);
-        //System.out.println("Alrightt! I have marked it undone:\n" + taskUndone.markedUndone());
         storage.updateData(taskUndone.message(), filePath);
-        return "Alrightt! I have marked it undone:\n" + taskUndone.markedUndone();
+        String unMarkFinishMessage = "Alrightt! I have marked it undone:\n" + taskUndone.markedUndone();
+        return unMarkFinishMessage;
     }
 
     /**
@@ -115,8 +120,9 @@ public class TaskList {
         Todos todo = new Todos(str);
         listOfInputs.add(todo);
         storage.updateData(todo.message() , filePath);
-        return ("Okayy!! I've added this task:\n " + todo.message() + "\n You have "
-                + listOfInputs.size() + " tasks in the list.");
+        String message = "Okayy!! I've added this task:\n " + todo.message() + "\n You have "
+                + listOfInputs.size() + " tasks in the list.";
+        return message;
 
     }
 
@@ -134,8 +140,9 @@ public class TaskList {
         DeadLine deadLineTemp = new DeadLine(description, by);
         listOfInputs.add(deadLineTemp);
         storage.updateData(deadLineTemp.message(), filePath);
-        return ("Deadline for this task:\n " + deadLineTemp.message() + "\n You have "
-                + listOfInputs.size() + " tasks in the list.");
+        String message = "Deadline for this task:\n " + deadLineTemp.message() + "\n You have "
+                + listOfInputs.size() + " tasks in the list.";
+        return message;
 
     }
 
@@ -150,8 +157,9 @@ public class TaskList {
         Event eventTemp = new Event(event[0], event[1]);
         listOfInputs.add(eventTemp);
         storage.updateData(eventTemp.message(), filePath);
-        return ("I have added this task and the event time is:\n "
-                + eventTemp.message() + "\n You have " + listOfInputs.size() + " tasks in the list.");
+        String message = "I have added this task and the event time is:\n "
+                + eventTemp.message() + "\n You have " + listOfInputs.size() + " tasks in the list.";
+        return message;
 
     }
 
@@ -164,7 +172,8 @@ public class TaskList {
         int currNo = Integer.parseInt(str) - 1;
         listOfInputs.remove(currNo);
         Delete deleteTemp = new Delete(listOfInputs.get(currNo).getDescription());
-        return deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.";
+        String message = deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.";
+        return message;
     }
 
     /**

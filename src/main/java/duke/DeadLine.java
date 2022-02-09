@@ -35,12 +35,20 @@ public class DeadLine extends Task {
     }
 
     @Override
+    public String frontDescription() {
+       return "D | " + "[" + this.getStatusIcon() + "] ";
+    }
+    @Override
+    public String backDescription() {
+        return super.message();
+    }
+    @Override
     public String message() {
         if (this.time != null) {
-            return "D | " + "[" + this.getStatusIcon() + "] " + super.message()
+            return frontDescription() + backDescription()
                     + "(by:" + dateTimeFormat(date) + " " + time + ")";
         } else {
-            return "D | " + "[" + this.getStatusIcon() + "] " + super.message()
+            return frontDescription() + backDescription()
                     + "(by:" + dateTimeFormat(date) + ")";
         }
     }

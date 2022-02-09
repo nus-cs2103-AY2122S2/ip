@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class DukeException extends Exception {
 
     //all the commands
-    private String[] commands = new String[] {"deadline", "todo", "event", "delete", "mark", "unmark", "find"};
+    private String[] commands = new String[] {"deadline", "todo", "event", "delete", "mark", "unmark", "find", "search"};
 
     public DukeException(String message) {
         super(message);
