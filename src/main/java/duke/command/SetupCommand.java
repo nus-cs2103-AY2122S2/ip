@@ -20,6 +20,10 @@ public class SetupCommand extends Command {
      */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
+        assert ui != null;
+        assert taskList != null;
+        assert storage != null;
+
         try {
             taskList.populateWith(storage.loadTasksFromFile());
         } catch (DukeException exception) {

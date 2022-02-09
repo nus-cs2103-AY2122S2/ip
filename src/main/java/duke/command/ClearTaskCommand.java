@@ -18,6 +18,9 @@ public class ClearTaskCommand extends Command {
      */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
+        assert taskList != null;
+        assert ui != null;
+
         taskList.clear();
         ui.showMessage("All tasks cleared.");
     }
