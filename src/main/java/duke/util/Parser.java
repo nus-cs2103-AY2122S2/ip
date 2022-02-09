@@ -37,9 +37,10 @@ public class Parser {
         Command parsedCommand;
         switch(command) {
         case "list":
-            return new ListCommand();
+            parsedCommand = new ListCommand();
+            break;
         case "delete":
-            Integer taskNum = getTaskNumber(inputArr);
+            int taskNum = getTaskNumber(inputArr);
             parsedCommand = new DeleteCommand(taskNum);
             break;
         case "mark":
@@ -52,12 +53,13 @@ public class Parser {
             break;
         case "todo":
             String description = getDescription(inputArr, fullInput, command);
-            parsedCommand = new AddCommand(new Todo(description));
+            Task task = new Todo(description);
+            parsedCommand = new AddCommand(task);
             break;
         case "deadline":
             description = getDescription(inputArr, fullInput, command);
             String[] descrArr = splitDescriptionByKeyword(description, " /by ", command);
-            Task task = new Deadline(descrArr[0], parseDateTime(descrArr[1]));
+            task = new Deadline(descrArr[0], parseDateTime(descrArr[1]));
             parsedCommand = new AddCommand(task);
             break;
         case "event":
@@ -80,13 +82,13 @@ public class Parser {
     }
 
     /**
-     * Returns the task number provided by user.
+     * Returns the task number in user input.
      *
-     * @param inputArr The user input split by spaces.
-     * @return Integer task number.
+     * @param inputArr The user input split by white spaces.
+     * @return Task number.
      * @throws DukeException If task number is not provided.
      */
-    public static Integer getTaskNumber(String[] inputArr) throws DukeException {
+    public static int getTaskNumber(String[] inputArr) throws DukeException {
         if (inputArr.length == 1) {
             throw new DukeException("Please specify a task number!");
         }
@@ -96,23 +98,24 @@ public class Parser {
     /**
      * Returns the String description provided in the user input.
      *
-     * @param inputArr The user input split by spaces.
+     * @param inputArr The user input split by white spaces.
      * @param command The command that the description belongs to.
      * @return String description.
      * @throws DukeException If the description is not provided.
      */
     public static String getDescription(String[] inputArr, String fullInput, String command) throws DukeException {
         if (inputArr.length == 1) {
-            throw new DukeException("Oops, an " + command + " description cannot be left empty!");
+            throw new DukeException("Oops, " + (command.equals("event") ? "an " : "a ") + command
+                    + " description cannot be left empty!");
         }
         return fullInput.replace(command + " ", "");
     }
 
     /**
-     * Returns the String keyword provided in the user input.
+     * Returns the String keyword in the user input.
      *
-     * @param inputArr The user input split by spaces.
-     * @returns String keyword.
+     * @param inputArr The user input split by white spaces.
+     * @return String keyword.
      * @throws DukeException If a keyword is not provided or if more than one keyword is provided.
      */
     public static String getKeyword(String[] inputArr) throws DukeException {
@@ -131,7 +134,7 @@ public class Parser {
      * @param description The task description.
      * @param keyword The keyword to be found in the description to check if a date/time is specified.
      * @param taskType The type of the task.
-     * @return String[] containing description and datetime.
+     * @return String[] containing task description and datetime.
      * @throws DukeException If keyword is not given in description.
      */
     public static String[] splitDescriptionByKeyword(String description, String keyword, String taskType)

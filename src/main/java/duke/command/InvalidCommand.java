@@ -17,7 +17,7 @@ public class InvalidCommand extends Command {
      * @param storage The storage of the program.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showError("Oh no! I don't understand what that means...");
+        ui.setResponse("Oh no! I don't understand what that means...");
     }
 
     /**
@@ -28,5 +28,4 @@ public class InvalidCommand extends Command {
     public boolean isExit() {
         return false;
     }
-
 }

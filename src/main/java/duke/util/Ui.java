@@ -15,7 +15,7 @@ public class Ui {
      *
      * @return Indentation of four spaces.
      */
-    public String showIndent() {
+    public static String showIndent() {
         return indent;
     }
 

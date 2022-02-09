@@ -10,6 +10,7 @@ import duke.util.Ui;
  * Represents the unmark command to mark a task as not done.
  */
 public class UnmarkCommand extends Command {
+    private static final String TWO_SPACES = "  ";
     private final int taskNum;
 
     /**
@@ -33,10 +34,10 @@ public class UnmarkCommand extends Command {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
             Task taskUnmarked = taskList.unmark(this.taskNum);
-            ui.setResponse("Okay, I've marked this task as undone:\n      " + taskUnmarked);
+            ui.setResponse("Okay, I've marked this task as undone:\n" + Ui.showIndent() + TWO_SPACES + taskUnmarked);
             storage.saveToHardDisk(taskList);
         } else {
-            throw new DukeException("Invalid task number. There are " + currentTotalTasks + " in the list.");
+            throw new DukeException("Invalid task number. There are " + currentTotalTasks + " tasks in the list.");
         }
     }
 

@@ -50,37 +50,47 @@ public class Storage {
      * @throws DukeException If the tasks cannot be loaded.
      */
     public ArrayList<Task> load() throws DukeException {
-        File file = new File(filePath); // create a File for the given file path
+        File file = new File(filePath);
         ArrayList<Task> currentTasks = new ArrayList<>();
 
-        if (file.exists()) {
-            try {
-                Scanner s = new Scanner(file); // create a Scanner using the File as the source
-                while (s.hasNext()) {
-                    String task = s.nextLine();
-                    String[] taskComponents = task.split(" [|] "); // [type, status, description, time(if any)]
-                    Task t;
+        if (!file.exists()) {
+            throw new DukeException("Error loading tasks. File does not exist.");
+        }
 
-                    switch (taskComponents[0]) {
-                    case "D":
-                        t = new Deadline(taskComponents[2], Parser.parseDateTime(taskComponents[3]));
-                        break;
-                    case "E":
-                        t = new Event(taskComponents[2], Parser.parseDateTime(taskComponents[3]));
-                        break;
-                    default:
-                        t = new Todo(taskComponents[2]);
-                        break;
-                    }
-                    currentTasks.add(t);
+        try {
+            Scanner s = new Scanner(file);
+            while (s.hasNext()) {
+                String task = s.nextLine();
+                String[] taskComponents = task.split(" [|] "); // [type, status, description, time(if any)]
+                String taskType = taskComponents[0];
+                String status = taskComponents[1];
+                String description = taskComponents[2];
+                Task t;
 
-                    if (taskComponents[1].equals("1")) {
-                        t.markAsDone();
-                    }
+                switch (taskType) {
+                case "D":
+                    String datetime = taskComponents[3];
+                    t = new Deadline(description, Parser.parseDateTime(datetime));
+                    break;
+                case "E":
+                    datetime = taskComponents[3];
+                    t = new Event(description, Parser.parseDateTime(datetime));
+                    break;
+                case "T":
+                    t = new Todo(description);
+                    break;
+                default:
+                    throw new DukeException("Error loading tasks. Data saved in file has incorrect format.");
                 }
-            } catch (IOException e) {
-                throw new DukeException("Unable to load saved tasks.");
+                currentTasks.add(t);
+
+                boolean isCompleted = status.equals("1");
+                if (isCompleted) {
+                    t.markAsDone();
+                }
             }
+        } catch (IOException e) {
+            throw new DukeException("Unable to load saved tasks.");
         }
 
         return currentTasks;
