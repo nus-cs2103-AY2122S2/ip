@@ -10,6 +10,8 @@ public class DialogBox extends HBox{
     private ImageView displayPicture;
 
     public DialogBox(Label l, ImageView iv) {
+        assert(l != null);
+        assert(iv != null);
         text = l;
         displayPicture = iv;
 
