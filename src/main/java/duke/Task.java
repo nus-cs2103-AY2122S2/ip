@@ -50,6 +50,10 @@ public abstract class Task {
         }
     }
 
+    public boolean match(String keyword) {
+        return content.contains(keyword);
+    }
+
     /**
      * Returns the description of the task.
      * @return description of the task.

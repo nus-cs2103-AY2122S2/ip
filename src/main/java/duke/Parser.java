@@ -69,6 +69,8 @@ public class Parser {
                     } else {
                         throw new DukeException("Please enter an index to delete.");
                     }
+                } else if (command.startsWith("find ")) {
+                    taskList.find(command.substring(5));
                 } else if (command.startsWith("bye")) {
                     System.out.println(INDENT + "Bye. Hope to see you again soon!");
                     break;

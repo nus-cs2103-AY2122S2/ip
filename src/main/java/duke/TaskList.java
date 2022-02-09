@@ -140,6 +140,24 @@ public class TaskList {
         System.out.println(" in the list.");
     }
 
+    public void find(String keyword) {
+        boolean isFound = false;
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task t = tasks.get(i - 1);
+            boolean isMatch = t.match(keyword);
+            if (isMatch && !isFound) {
+                System.out.println(INDENT + "Here are the matching tasks in your list:");
+                isFound = true;
+            }
+            if (isMatch) {
+                System.out.println(INDENT + i + "." + t);
+            }
+        }
+        if (!isFound) {
+            System.out.println(INDENT + "" + "There is no matching task in your list.");
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder fileContent = new StringBuilder();
