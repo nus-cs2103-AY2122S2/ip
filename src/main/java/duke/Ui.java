@@ -100,7 +100,7 @@ public class Ui {
     }
 
     public void printFilteredDeadline(int input) {
-        String s = "None of your task is due on this date!";
+        String s = "Can't find anything! Try again with another keyword";
         System.out.println(s);
         addToPrint(s);
     }
