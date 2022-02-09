@@ -22,6 +22,7 @@ public class MarkCommand extends Command {
 
         Task task = tasks.mark(index);
         response.append(ui.taskMarkedMessage(task));
+        assert response.length() > 0; // response should not be empty
         storage.save(tasks.list());
     }
 

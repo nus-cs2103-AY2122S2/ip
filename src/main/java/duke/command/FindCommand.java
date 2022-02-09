@@ -25,6 +25,8 @@ public class FindCommand extends Command {
         } else {
             response.append(ui.taskNotFound());
         }
+
+        assert response.length() > 0; // response should not be empty
     }
 
     private List<Task> getSearchResultList(TaskList tasks) {

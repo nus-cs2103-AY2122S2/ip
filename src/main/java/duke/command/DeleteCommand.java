@@ -19,11 +19,11 @@ public class DeleteCommand extends Command {
             response.append("Invalid index, please try again.");
             return;
         }
-
-        Task task = tasks.remove(index);
-        response.append(ui.taskDeleteMessage(task, tasks.size()));
-        storage.save(tasks.list());
-    }
+            Task task = tasks.remove(index);
+            response.append(ui.taskDeleteMessage(task, tasks.size()));
+            assert response.length() > 0; // response should not be empty
+            storage.save(tasks.list());
+        }
 
     private boolean isOutOfBounds(TaskList tasks) {
         return index < 0 || index >= tasks.size();
