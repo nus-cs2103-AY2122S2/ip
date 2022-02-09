@@ -38,7 +38,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getTsundereDialog("Hmph, it's you again...", tsundereImage, false));
+        dialogContainer.getChildren().add(DialogBox.getTsundereDialog("Hmph, it's you again...", tsundereImage));
     }
 
     /**
@@ -58,30 +58,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = tsundere.getResponse(input);
-        String[] lines = response.split("\r\n|\r|\n");
-        boolean isChain = false;
-        if (lines.length > 3) {
-            dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-            for (int i = 0; i < lines.length; i += 3) {
-                String s = lines[i];
-                if (i + 1 < lines.length) {
-                    s = s + "\n" + lines[i + 1];
-                }
-                if (i + 2 < lines.length) {
-                    s = s + "\n" + lines[i + 2];
-                }
-                dialogContainer.getChildren().add(DialogBox.getTsundereDialog(s, tsundereImage, isChain));
-                if (!isChain) {
-                    isChain = true;
-                }
-            }
-
-        } else {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getTsundereDialog(response, tsundereImage, false)
-            );
-        }
+        assert userImage == null : "Error in the problem";
+        assert tsundereImage == null : "Error in the problem";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getTsundereDialog(response, tsundereImage)
+        );
         userInput.clear();
         if (response == "Finally, you're leaving!\nIt's not like i will miss you or anything...") {
             PauseTransition delay = new PauseTransition(Duration.seconds(TIMER));

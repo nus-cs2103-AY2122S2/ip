@@ -70,14 +70,10 @@ public class DialogBox extends HBox {
      *
      * @param text string that will appear as the dialog.
      * @param img image for the dialog.
-     * @param isChain is an continuation from the previous dialog as there is not enough space for one DialogBox.
      * @return a new dialogBox for AI.
      */
-    public static DialogBox getTsundereDialog(String text, Image img, Boolean isChain) {
+    public static DialogBox getTsundereDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        if (isChain) {
-            db.displayPicture.setVisible(false);
-        }
         db.flip();
         return db;
     }
