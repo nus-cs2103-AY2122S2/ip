@@ -25,7 +25,6 @@ public class ByeCommand extends Command {
     public void executeTask(TaskList taskList, FileManager fileManager) throws DukeException {
         fileManager.saveTasks();
         taskList.getUi().printBye();
-        System.exit(0);
     }
 
 }

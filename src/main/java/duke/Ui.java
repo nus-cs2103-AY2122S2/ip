@@ -42,7 +42,7 @@ public class Ui {
      * Print statement for when system exits
      */
     public void printBye() {
-        this.print("Bye. Hope I've motivated you as much as I could have, and SMILE :D\nClosing in 5 Seconds!");
+        this.print("Bye. Hope I've motivated you as much as I could have, and SMILE :D\nPlease close the window!");
     }
 
     /**
