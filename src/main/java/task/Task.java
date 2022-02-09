@@ -1,9 +1,13 @@
 
 package task;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * @param description task description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -38,5 +42,5 @@ public abstract class Task {
      * @return task in string form
      */
 
-    abstract public String storageString();
+    public abstract String storageString();
 }

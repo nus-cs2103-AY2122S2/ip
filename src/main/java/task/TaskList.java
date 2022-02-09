@@ -1,22 +1,30 @@
 
 package task;
 
-import util.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    public List<Task> list;
-    public Ui ui;
+    private final List<Task> list;
 
+    /**
+     * initialises a task-list
+     */
     public TaskList() {
-        this.list = new ArrayList<Task>();
-        this.ui = new Ui();
+        this.list = new ArrayList<>();
     }
 
-    public String add(Task t) {
-        list.add(t);
+    public List<Task> getTaskList() {
+        return list;
+    }
+
+    /**
+     * @param task task to be added into task-list
+     * @return String to show that task is added into the task-list
+     */
+
+    public String add(Task task) {
+        list.add(task);
         return addTask(this.get(this.size() - 1), this.size());
     }
 
@@ -78,14 +86,13 @@ public class TaskList {
      */
 
     public String addTask(Task task, int total) {
-        String tab = "    ";
         String firstLine = "Ah sure. I've added this task:\n";
-        String secondLine = tab + "  " + task.toString() + "\n";
+        String secondLine = task.toString() + "\n";
         String thirdLine;
         if (total == 1) {
-            thirdLine = tab + "Now you have " + total + " task in the list.";
+            thirdLine = "Now you have " + total + " task in the list.";
         } else {
-            thirdLine = tab + "Now you have " + total + " tasks in the list.";
+            thirdLine = "Now you have " + total + " tasks in the list.";
         }
 
         return firstLine + secondLine + thirdLine;
@@ -97,8 +104,7 @@ public class TaskList {
      * @param item keyword to be found
      */
     public String find(String item) {
-        ArrayList<Task> foundTasks = new ArrayList<Task>();
-        String tab = "    ";
+        ArrayList<Task> foundTasks = new ArrayList<>();
 
         for (Task t: this.list) {
             if (t.description.contains(item)) {
@@ -107,11 +113,11 @@ public class TaskList {
             }
         }
 
-        String firstLine = "Here are the matching tasks in you list:\n" + tab;
+        String firstLine = "Here are the matching tasks in you list:\n";
         StringBuilder lists = new StringBuilder();
         for (int i = 0; i < foundTasks.size(); i++) {
             if (i != 0) {
-                lists.append("\n").append(tab);
+                lists.append("\n");
             }
             lists.append(String.format("%d. %s", i + 1, foundTasks.get(i).toString()));
 

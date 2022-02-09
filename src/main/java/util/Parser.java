@@ -1,8 +1,13 @@
+
 package util;
 
 public class Parser {
-    String task, item;
+    private String task;
+    private String item;
 
+    /**
+     * Initialise parser
+     */
     public Parser() {
         this.task = "";
         this.item = "";

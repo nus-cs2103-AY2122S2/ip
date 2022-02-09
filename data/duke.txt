@@ -1,4 +1,4 @@
-[T][ ] sleep
+[T][X] sleep
 [T][ ] eat
 [T][ ] sleep
 [D][ ] 2103 2020-06-08 07:30

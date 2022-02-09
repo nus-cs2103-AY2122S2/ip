@@ -6,10 +6,15 @@ import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
 
-    public String by;
     protected LocalDateTime ldt;
+    private String by;
 
 
+    /**
+     *
+     * @param description description of Deadline
+     * @param by time in the form of YYYY-MM-DD HH:mm
+     */
     public Deadline(String description, String by) {
         super(description);
         this.ldt = parseString(by);
