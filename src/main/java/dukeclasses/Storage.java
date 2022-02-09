@@ -62,6 +62,7 @@ public class Storage {
         } catch (FileNotFoundException errorMessage) {
             throw new DukeException();
         }
+        assert sc != null : "Scanner should not be null.";
         while (sc.hasNext()) {
             String data = sc.nextLine();
             String[] processedData = data.trim().split("]", 3);
@@ -83,6 +84,7 @@ public class Storage {
                     throw new DukeException();
                 }
 
+                assert date != null : "Scanner should not be null.";
                 if (processedData[0].contains("E")) {
                     Event event = new Event(processedDataDescription[0].trim(), date);
                     if (processedData[1].contains("X")) {

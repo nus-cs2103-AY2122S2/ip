@@ -35,6 +35,8 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException();
             }
+            assert taskIndex != null : "taskIndex should not be null";
+            assert taskIndex > 0 : "taskIndex should be more than 0";
 
             if (taskIndex < 0) {
                 throw new DukeException();
@@ -63,6 +65,7 @@ public class Parser {
                 throw new DukeException();
             }
 
+            assert dueDate != null : "dueDate should not be null";
             return new ParsedCommand(parsedCommand[0].trim(), inputForConstructorWithDate[0].trim(), dueDate);
         default:
             throw new DukeException();

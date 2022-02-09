@@ -91,6 +91,7 @@ public class Duke extends Application {
             return ;
         }
 
+        assert parsedCommand != null: "parsedCommand should not be null";
         switch (parsedCommand.getCommand()) {
         case "hi":
             output =  ui.greet();
@@ -103,6 +104,7 @@ public class Duke extends Application {
             output =  ui.listTask(storage.getStorageFilePath());
             break;
         case "mark":
+            assert parsedCommand.getIndex() != null : "Index in parsedCommand should not be null";
             if (parsedCommand.getIndex() >= tasks.getTaskList().size()) {
                 output =  ui.showInputError();
                 break;
@@ -117,6 +119,7 @@ public class Duke extends Application {
             output =  ui.identifyTask(markedTask);
             break;
         case "unmark":
+            assert parsedCommand.getIndex() != null : "Index in parsedCommand should not be null";
             if (parsedCommand.getIndex() > tasks.getTaskList().size()) {
                 output =  ui.showInputError();
                 break;
@@ -133,6 +136,7 @@ public class Duke extends Application {
             output =  ui.identifyTask(unmarkedTask);
             break;
         case "todo":
+            assert parsedCommand.getTask() != null : "parsedCommand should not have an invalid task.";
             ToDo todo = new ToDo(parsedCommand.getTask());
 
             try {
@@ -146,6 +150,8 @@ public class Duke extends Application {
             output =  ui.newTask(todo, tasks.getTaskList().size());
             break;
         case "event":
+            assert parsedCommand.getDueDate() != null : "parsedCommand should not have an invalid due date.";
+            assert parsedCommand.getTask() != null : "parsedCommand should not have an invalid task.";
             Event event = new Event(parsedCommand.getTask(), parsedCommand.getDueDate());
 
             try {
@@ -159,6 +165,8 @@ public class Duke extends Application {
             output =  ui.newTask(event, tasks.getTaskList().size());
             break;
         case "deadline":
+            assert parsedCommand.getDueDate() != null : "parsedCommand should not have an invalid due date.";
+            assert parsedCommand.getTask() != null : "parsedCommand should not have an invalid task.";
             Deadline deadline = new Deadline(parsedCommand.getTask(), parsedCommand.getDueDate());
 
             try {
@@ -172,7 +180,7 @@ public class Duke extends Application {
             output =  ui.newTask(deadline, tasks.getTaskList().size());
             break;
         case "delete":
-
+            assert parsedCommand.getIndex() != null : "Index in parsedCommand should not be null";
             if (parsedCommand.getIndex() > tasks.getTaskList().size()) {
                 output =  ui.showInputError();
                 break;
@@ -196,6 +204,7 @@ public class Duke extends Application {
             output =  ui.deleteTask(deletedTask);
             break;
         case "find":
+            assert parsedCommand.getTask() != null : "parsedCommand should not have an invalid task.";
             String taskDescription = parsedCommand.getTask();
             TaskList findTaskList = new TaskList();
 
@@ -206,6 +215,7 @@ public class Duke extends Application {
                 }
             }
 
+            assert output != ui.showStorageError(): "output should not be a storage error";
             output =  ui.listTaskUsingArrayList(findTaskList);
             break;
         }
