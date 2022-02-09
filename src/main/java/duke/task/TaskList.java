@@ -70,4 +70,18 @@ public class TaskList {
     public boolean isEmpty() {
         return taskList.isEmpty();
     }
+
+
+    /**
+     * Prints out all tasks in taskList.
+     *
+     * @return String of all tasks.
+     */
+    public String printTasks() {
+        String output = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            output += "  " + (i + 1) + ". " + taskList.get(i).toString() + "\n";
+        }
+        return output;
+    }
 }

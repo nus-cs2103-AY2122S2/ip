@@ -10,7 +10,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.ui.Ui;
 
 
 /**
@@ -24,39 +23,37 @@ public class Parser {
      *
      * @param input User's input.
      * @param taskList Current list of tasks.
-     * @return Whether user is quitting Duke.
+     * @return Output of given command.
      * @throws DukeException If user enters unknown command.
      */
-    public static boolean parse(String input, TaskList taskList) throws DukeException {
+    public static String parse(String input, TaskList taskList) throws DukeException {
         if (input.equals("bye")) {
-            Ui.print("BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!");
-            return true;
+            return "BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!";
         } else if (input.equals("list")) {
-            handleList(taskList);
+            return handleList(taskList);
         } else {
             //Split command into 2 parts, the type of task, and remaining text
             String[] inputArgs = input.split(" ", 2);
             String command = inputArgs[0];
 
             if (command.equals("mark")) {
-                handleMark(taskList, inputArgs, true);
+                return handleMark(taskList, inputArgs, true);
             } else if (command.equals("unmark")) {
-                handleMark(taskList, inputArgs, false);
+                return handleMark(taskList, inputArgs, false);
             } else if (command.equals("delete")) {
-                handleDelete(taskList, inputArgs);
+                return handleDelete(taskList, inputArgs);
             } else if (command.equals("find")) {
-                handleFind(taskList, inputArgs);
+                return handleFind(taskList, inputArgs);
             } else if (command.equals("deadline")) {
-                handleDeadline(taskList, inputArgs);
+                return handleDeadline(taskList, inputArgs);
             } else if (command.equals("event")) {
-                handleEvent(taskList, inputArgs);
+                return handleEvent(taskList, inputArgs);
             } else if (command.equals("todo")) {
-                handleToDo(taskList, inputArgs);
+                return handleToDo(taskList, inputArgs);
             } else {
                 throw new DukeException("WHAT TALKING YOU? CHAO RECRUIT YOU BETTER WAKE UP YOUR IDEA!");
             }
         }
-        return false;
     }
 
     /**
@@ -64,18 +61,18 @@ public class Parser {
      * Prints all tasks in taskList
      *
      * @param taskList Current list of tasks.
+     * @return String of all tasks.
      */
-    private static void handleList(TaskList taskList) {
+    private static String handleList(TaskList taskList) {
         //Add name of task to str for easy printing
         int size = taskList.size();
         if (size == 0) {
-            Ui.print("NOTHING TO DO AH?");
-            Ui.print("YOU BETTER FIND SOMETHING TO DO BEFORE I CONFINE YOU CHAO RECRUIT!");
+            return "NOTHING TO DO AH?\n"
+                    + "YOU BETTER FIND SOMETHING TO DO BEFORE I CONFINE YOU CHAO RECRUIT!";
         } else {
-            Ui.print("NEED ME TO REMIND YOU AH?");
-            for (int i = 0; i < size; i++) {
-                Ui.print((i + 1) + "." + taskList.get(i));
-            }
+            String output = "NEED ME TO REMIND YOU AH?\n";
+            output += taskList.printTasks();
+            return output;
         }
     }
 
@@ -84,7 +81,7 @@ public class Parser {
      * If input is incomplete, returns true.
      *
      * @param inputArgs String array made up of individual words from input.
-     * @returns Whether input is incomplete.
+     * @return Whether input is incomplete.
      */
     private static boolean checkIncompleteness(String[] inputArgs) {
         return (inputArgs.length < 2 || inputArgs[1].isBlank());
@@ -96,24 +93,27 @@ public class Parser {
      * @param taskList Current list of tasks.
      * @param inputArgs String array made up of individual words from input.
      * @param isMark Whether to mark or unmark the task.
+     * @return Output of command.
      * @throws DukeException If number of task to mark/unmark not specified.
      */
-    private static void handleMark(TaskList taskList, String[] inputArgs, boolean isMark) throws DukeException {
+    private static String handleMark(TaskList taskList, String[] inputArgs, boolean isMark) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU WANT MARK? WEAR HELMET CANNOT THINK ALREADY AH?");
         } else {
             int num = Integer.parseInt(inputArgs[1]) - 1;
+            String output;
             if (isMark) {
                 taskList.get(num).mark();
-                Ui.print("THIS ONE");
-                Ui.print(taskList.get(num));
-                Ui.print("FINISH ALREADY AH? SWEE CHAI BUTTERFLY RECRUIT!");
+                output = "THIS ONE\n"
+                        + "  " + taskList.get(num)
+                        + "\nFINISH ALREADY AH? SWEE CHAI BUTTERFLY RECRUIT!";
             } else {
                 taskList.get(num).unmark();
-                Ui.print("I THOUGHT THIS ONE");
-                Ui.print(taskList.get(num));
-                Ui.print("FINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!");
+                output = "I THOUGHT THIS ONE\n"
+                        + "  " + taskList.get(num)
+                        + "\nFINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!";
             }
+            return output;
         }
     }
 
@@ -123,9 +123,10 @@ public class Parser {
      *
      * @param taskList Current list of tasks.
      * @param inputArgs String array made up of individual words from input.
+     * @return Output of command.
      * @throws DukeException If number of task to mark/unmark not specified.
      */
-    private static void handleDelete(TaskList taskList, String[] inputArgs) throws DukeException {
+    private static String handleDelete(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("YOU TRYING TO LEPAK IS IT? WAKE UP YOUR BLOODY IDEA!");
         } else {
@@ -133,14 +134,18 @@ public class Parser {
             Task toDelete = taskList.get(num);
             taskList.remove(num);
             int size = taskList.size();
-            Ui.print("YOU DON'T WANT DO THEN SAY DON'T DO AH?");
-            Ui.print(toDelete);
-            Ui.print("WAKE UP YOUR BLOODY IDEA CHAO RECRUIT!");
+            String output = "YOU DON'T WANT DO THEN SAY DON'T DO AH?\n"
+                    + "  " + toDelete
+                    + "\nWAKE UP YOUR BLOODY IDEA CHAO RECRUIT!\n";
             if (size == 0) {
-                Ui.print("NOTHING ELSE TO DO CAN RILEK ALREADY AH RECRUIT? DOWN 20!");
+                output += "NOTHING ELSE TO DO CAN RILEK ALREADY AH RECRUIT? DOWN 20!";
+            } else if (size > 0) {
+                output += size + " MORE TASKS REMAINING! YOU BETTER ONE TIMES GOOD ONE!";
             } else {
-                Ui.print(size + " MORE TASKS REMAINING! YOU BETTER ONE TIMES GOOD ONE!");
+                // When size < 0, should not occur.
+                throw new DukeException("NOTHING TO DO ALREADY STILL WANT CHAO GENG AH! THIS WEEKEND YOU WATCH OUT!");
             }
+            return output;
         }
     }
 
@@ -150,9 +155,10 @@ public class Parser {
      *
      * @param taskList Current list of tasks.
      * @param inputArgs String array made up of individual words from input.
+     * @return Output of command.
      * @throws DukeException If keyword missing.
      */
-    private static void handleFind(TaskList taskList, String[] inputArgs) throws DukeException {
+    private static String handleFind(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU TRYING TO FIND? WAKE UP YOUR BLOODY IDEA!");
         } else {
@@ -169,12 +175,11 @@ public class Parser {
 
             int tempSize = tempTaskList.size();
             if (tempSize == 0) {
-                Ui.print("I NEVER FIND ANYTHING! YOU DARE MAKE ME WASTE MY TIME AH?? VERY GOOD!");
+                return "I NEVER FIND ANYTHING! YOU DARE MAKE ME WASTE MY TIME AH?? VERY GOOD!";
             } else {
-                Ui.print("NEED ME HELP YOU FIND AH? VERY GOOD! THIS WEEKEND YOU WATCH OUT!");
-                for (int i = 0; i < tempTaskList.size(); i++) {
-                    Ui.print((i + 1) + "." + tempTaskList.get(i));
-                }
+                String output = "NEED ME HELP YOU FIND AH? VERY GOOD! THIS WEEKEND YOU WATCH OUT!\n";
+                output += tempTaskList.printTasks();
+                return output;
             }
         }
     }
@@ -185,9 +190,10 @@ public class Parser {
      *
      * @param taskList Current list of tasks.
      * @param inputArgs String array made up of individual words from input.
+     * @return Output of command.
      * @throws DukeException If input is incomplete.
      */
-    private static void handleDeadline(TaskList taskList, String[] inputArgs) throws DukeException {
+    private static String handleDeadline(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
         } else {
@@ -203,9 +209,12 @@ public class Parser {
             LocalTime t1 = LocalTime.parse(time, timeInputFormatter);
             Task newTask = new Deadline(taskName, d1, t1);
             taskList.add(newTask);
-            Ui.print("YOU BETTER FINISH THIS AH:");
-            Ui.print(newTask);
-            Ui.print("YOU STILL GOT " + taskList.size() + " THINGS TO DO AH BETTER NOT FORGET!");
+
+            String output = "YOU BETTER FINISH THIS AH:\n"
+                    + "  " + newTask
+                    + "\nYOU STILL GOT " + taskList.size() + " THINGS TO DO AH BETTER NOT FORGET!";
+
+            return output;
         }
     }
 
@@ -215,9 +224,10 @@ public class Parser {
      *
      * @param taskList Current list of tasks.
      * @param inputArgs String array made up of individual words from input.
+     * @return Output of command.
      * @throws DukeException If input is incomplete.
      */
-    private static void handleEvent(TaskList taskList, String[] inputArgs) throws DukeException {
+    private static String handleEvent(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
         } else {
@@ -234,9 +244,11 @@ public class Parser {
             LocalTime timeTo = LocalTime.parse(time[1], timeInputFormatter);
             Task newTask = new Event(taskName, d1, timeFrom, timeTo);
             taskList.add(newTask);
-            Ui.print("YOU BETTER REMEMBER THIS AH:");
-            Ui.print(newTask);
-            Ui.print("YOU STILL GOT " + taskList.size() + " THINGS TO DO AH BETTER NOT FORGET!");
+
+            String output = "YOU BETTER REMEMBER THIS AH:\n"
+                    + "  " + newTask
+                    + "\nYOU STILL GOT " + taskList.size() + " THINGS TO DO AH BETTER NOT FORGET!";
+            return output;
         }
     }
 
@@ -246,17 +258,19 @@ public class Parser {
      *
      * @param taskList Current list of tasks.
      * @param inputArgs String array made up of individual words from input.
+     * @return Output of command.
      * @throws DukeException If input is incomplete.
      */
-    private static void handleToDo(TaskList taskList, String[] inputArgs) throws DukeException {
+    private static String handleToDo(TaskList taskList, String[] inputArgs) throws DukeException {
         if (checkIncompleteness(inputArgs)) {
             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
         } else {
             Task newTask = new ToDo(inputArgs[1]);
             taskList.add(newTask);
-            Ui.print("YOU WANT TO DO THIS AH:");
-            Ui.print(newTask);
-            Ui.print("VERY GOOD! YOU STILL GOT " + taskList.size() + " THINGS TO DO AH BETTER NOT FORGET!");
+            String output = "YOU WANT TO DO THIS AH:\n"
+                    + "  " + newTask
+                    + "\nVERY GOOD! YOU STILL GOT " + taskList.size() + " THINGS TO DO AH BETTER NOT FORGET!";
+            return output;
         }
     }
 }
