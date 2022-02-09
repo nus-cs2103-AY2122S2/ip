@@ -29,6 +29,7 @@ public class Storage {
      */
     public void setFile(String filePath) {
         path = filePath;
+        assert filePath.endsWith(".txt") : "Filename should have .txt extension";
 
         this.filePath = new File(filePath);
 
@@ -101,6 +102,7 @@ public class Storage {
             Parser parser = new Parser();
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
+
                 ArrayList<Command> commands = parser.fileParse(line, taskList.getSize() + 1);
                 executeCommands(commands, taskList);
             }
