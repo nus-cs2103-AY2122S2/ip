@@ -75,19 +75,19 @@ public class CommandAdd extends Command {
         if (type.equals("todo")) {
             if (!args.matches("\\S+.*")) {
                 throw new DukeInvalidArgumentException(
-                        "OOPS!!! The description of a todo cannot be empty.");
+                        "ERMMM....The description of a todo cannot be empty.");
             }
             taskType = Task.TaskType.TODO;
         } else if (type.equals("deadline")) {
             if (!args.matches("\\S+.*\\s/by\\s\\S+.*")) {
                 throw new DukeInvalidArgumentException(
-                        "OOPS!!! The description/date of a deadline cannot be empty.");
+                        "ERMMM....The description/date of a deadline cannot be empty.");
             }
             taskType = Task.TaskType.DEADLINE;
         } else if (type.equals("event")) {
             if (!args.matches("\\S+.*\\s/at\\s\\S+.*")) {
                 throw new DukeInvalidArgumentException(
-                        "OOPS!!! The description/location of a event cannot be empty.");
+                        "ERMMM....The description/location of a event cannot be empty.");
             }
             taskType = Task.TaskType.EVENT;
         }

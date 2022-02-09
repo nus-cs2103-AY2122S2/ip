@@ -11,7 +11,7 @@
 
 .tab-pane
 {
-    -fx-background-image: url("file:C:/CS2103T/ip/src/main/resources/images/backgroundhd2.jpg");
+    -fx-background-image: url("../images/backgroundhd2.jpg");
     -fx-background-size: cover;
 
     -fx-tab-min-width:90px;

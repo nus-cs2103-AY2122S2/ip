@@ -47,6 +47,7 @@ public class MainTabPaneWindow extends TabPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
     private Image dukeErrorImage = new Image(this.getClass().getResourceAsStream("/images/error.png"));
+    private Image dukeInvalidImage = new Image(this.getClass().getResourceAsStream("/images/disappointed.png"));
 
 
     /**
@@ -75,6 +76,8 @@ public class MainTabPaneWindow extends TabPane {
         if (!detectGuiCommand(response)) {
             if (response.startsWith("OOPS")) {
                 responseImage = dukeErrorImage;
+            } else if (response.startsWith("ERMMM")) {
+                responseImage = dukeInvalidImage;
             }
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
@@ -93,6 +96,8 @@ public class MainTabPaneWindow extends TabPane {
         if (!detectGuiCommand(response)) {
             if (response.startsWith("OOPS")) {
                 responseImage = dukeErrorImage;
+            } else if (response.startsWith("ERMMM")) {
+                responseImage = dukeInvalidImage;
             }
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

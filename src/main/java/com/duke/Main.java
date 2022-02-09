@@ -26,22 +26,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/TabPane.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Tabpane.fxml"));
             TabPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("Duke");
             stage.setScene(scene);
+            stage.setResizable(false);
             fxmlLoader.<MainTabPaneWindow>getController().setDuke(duke);
             stage.show();
 
-            Image img = new Image(this.getClass().getResourceAsStream("/images/backgroundhd.jpg"));
-            BackgroundImage bImg = new BackgroundImage(img,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.DEFAULT,
-                    new BackgroundSize(1.0, 1.0, true, true, false, false));
-            Background bGround = new Background(bImg);
-            ap.setBackground(bGround);
         } catch (IOException e) {
             e.printStackTrace();
         }
