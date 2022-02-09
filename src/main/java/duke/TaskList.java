@@ -16,16 +16,16 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void addTodo(String s) {
-        Todo t = new Todo(s);
+    public void addTodo(String taskDescription) {
+        Todo t = new Todo(taskDescription);
         tasks.add(t);
         this.printAdd();
     }
 
-    public void addDdl(String s) {
-        int i = s.indexOf(" /by ");
-        if (i > 0 && i + 5 < s.length()) {
-            Deadline t = new Deadline(s.substring(0, i), LocalDate.parse(s.substring(i + 5)));
+    public void addDdl(String taskDescription) {
+        int i = taskDescription.indexOf(" /by ");
+        if (i > 0 && i + 5 < taskDescription.length()) {
+            Deadline t = new Deadline(taskDescription.substring(0, i), LocalDate.parse(taskDescription.substring(i + 5)));
             tasks.add(t);
             this.printAdd();
         } else {
@@ -33,10 +33,10 @@ public class TaskList {
         }
     }
 
-    public void addEvt(String s) {
-        int i = s.indexOf(" /at ");
-        if (i > 0 && i + 5 < s.length()) {
-            Event t = new Event(s.substring(0, i), s.substring(i + 5));
+    public void addEvt(String taskDescription) {
+        int i = taskDescription.indexOf(" /at ");
+        if (i > 0 && i + 5 < taskDescription.length()) {
+            Event t = new Event(taskDescription.substring(0, i), taskDescription.substring(i + 5));
             tasks.add(t);
             this.printAdd();
         } else {
@@ -68,12 +68,12 @@ public class TaskList {
         }
     }
 
-    public void mark(int index, boolean done) {
+    public void mark(int index, boolean isDone) {
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
         }
-        tasks.set(index, tasks.get(index).mark(done));
-        if (done) {
+        tasks.set(index, tasks.get(index).mark(isDone));
+        if (isDone) {
             System.out.println(INDENT + "Nice! I've marked this task as done:");
         } else {
             System.out.println(INDENT + "OK, I've marked this task as not done yet:");
