@@ -38,7 +38,9 @@ public class Parser {
             return output;
         } else if (userInput.split(" ")[0].equals("mark")) {
             String[] input = userInput.split(" ");
-            Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
+            int id = Integer.parseInt(input[1]) - 1;
+            assert id >= 0 : "invalid";
+            Task task =  Task.getTaskList()[id];
             task.markDone();
 
             String output = Ui.createLine()
@@ -51,7 +53,9 @@ public class Parser {
             return output;
         } else if (userInput.split(" ")[0].equals("unmark")) {
             String[] input = userInput.split(" ");
-            Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
+            int id = Integer.parseInt(input[1]) - 1;
+            assert id >= 0 : "invalid";
+            Task task =  Task.getTaskList()[id];
             task.markNotDone();
 
             String output = Ui.createLine()
@@ -63,7 +67,9 @@ public class Parser {
             return output;
         } else if (userInput.split(" ")[0].equals("delete")) {
             String[] input = userInput.split(" ");
-            Task task = Task.getTaskList()[Integer.parseInt(input[1]) - 1];
+            int id = Integer.parseInt(input[1]) - 1;
+            assert id >= 0 : "invalid";
+            Task task = Task.getTaskList()[id];
             task.deleteTask(task);
 
             String output = Ui.createLine()
