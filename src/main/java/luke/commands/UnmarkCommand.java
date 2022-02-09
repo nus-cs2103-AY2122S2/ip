@@ -32,7 +32,7 @@ public class UnmarkCommand extends UpdateCommand {
             taskList.get(getIndex() - 1).unmarkAsDone();
             return new CommandResult(DEFAULT_MESSAGE);
         } catch (IndexOutOfBoundsException e) {
-            return new CommandResult("The force cannot find the task.\nPlease try again :(");
+            return new CommandResult(TASK_NOT_FOUND_MESSAGE);
         }
     }
 }

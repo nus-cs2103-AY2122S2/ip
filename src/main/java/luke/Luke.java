@@ -16,8 +16,6 @@ import luke.storage.StorageFile;
  */
 public class Luke {
 
-    private static final String DATABASE_SUCCESS_MESSAGE = "Database initialized successfully!";
-
     private TaskList taskList;
     private StorageFile storageFile;
 
@@ -45,15 +43,13 @@ public class Luke {
     private void initializeStorage() {
         try {
             List<String> data = storageFile.load();
-            if (!data.isEmpty()) {
-                for (int i = 0; i < data.size(); i++) {
-                    String str = data.get(i);
-                    String[] inputs = str.split("\\|");
-                    Command cmd = Parser.parse(inputs[0]);
-                    cmd.execute(taskList);
-                    if (Integer.parseInt(inputs[1].strip()) == 1) {
-                        taskList.get(i).markAsDone();
-                    }
+            for (int i = 0; i < data.size(); i++) {
+                String str = data.get(i);
+                String[] inputs = str.split("\\|");
+                Command cmd = Parser.parse(inputs[0]);
+                cmd.execute(taskList);
+                if (Integer.parseInt(inputs[1].strip()) == 1) {
+                    taskList.get(i).markAsDone();
                 }
             }
         } catch (FileNotFoundException e) {

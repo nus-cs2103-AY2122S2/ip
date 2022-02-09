@@ -8,15 +8,6 @@ import luke.data.TaskList;
 public abstract class Command {
 
     /**
-     * Return false if the command is not instanceof ExitCommand.
-     *
-     * @return False if the command is not instanceof ExitCommand.
-     */
-    public boolean isExitCmd() {
-        return false;
-    }
-
-    /**
      * Takes in a task list, execute the command and returns its command result.
      *
      * @param taskList The task list to perform the action on.

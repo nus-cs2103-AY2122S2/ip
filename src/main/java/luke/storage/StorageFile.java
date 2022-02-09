@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class StorageFile {
 
+    private static final String READ_WRITE_FAIL_MESSAGE = "Unable to read or write to file.";
     private final File file;
 
     /**
@@ -33,7 +34,7 @@ public class StorageFile {
         }
 
         if (!this.file.canRead() && !this.file.canWrite()) {
-            throw new IOException("Unable to read or write to file.");
+            throw new IOException(READ_WRITE_FAIL_MESSAGE);
         }
     }
 

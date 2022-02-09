@@ -5,6 +5,7 @@ package luke.commands;
  */
 public abstract class UpdateCommand extends Command {
 
+    protected static final String TASK_NOT_FOUND_MESSAGE = "The force cannot find the task.\nPlease try again :(";
     private final int index;
 
     /**

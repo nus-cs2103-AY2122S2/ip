@@ -20,6 +20,9 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final int CIRCLE_RADIUS = 50;
+    private static final int CIRCLE_CENTER_X = 50;
+    private static final int CIRCLE_CENTER_Y = 50;
     @FXML
     private Label dialog;
     @FXML
@@ -37,7 +40,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        Circle clip = new Circle(50, 50, 50);
+        Circle clip = new Circle(CIRCLE_CENTER_X, CIRCLE_CENTER_Y, CIRCLE_RADIUS);
         displayPicture.setClip(clip);
     }
 

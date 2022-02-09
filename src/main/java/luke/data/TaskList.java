@@ -31,8 +31,7 @@ public class TaskList implements Storable {
     public List<String> getData() {
         List<String> list = new ArrayList<>();
         for (Task task : taskList) {
-            list.add(String.format("%s | %s", task.getCommandString(),
-                    task.isDone() ? "1" : "0"));
+            list.add(String.format("%s | %s", task.getCommandString(), task.isDone() ? "1" : "0"));
         }
         return list;
     }
@@ -85,8 +84,8 @@ public class TaskList implements Storable {
     }
 
     public void setFiltered(Predicate<Task> predicate) {
-        taskList.stream().forEach(x -> x.clearFilter());
         taskList.stream().forEach(x -> {
+            x.clearFilter();
             if (!predicate.test(x)) {
                 x.markAsFiltered();
             }
