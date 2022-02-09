@@ -104,9 +104,6 @@ public class Commands {
      * @return Mark response.
      */
     public String mark(int index, DukeHistory history) {
-        if (index < 0 || index > history.getSize() - 1) {
-            throw new IndexOutOfBoundsException();
-        }
         history.getTask(index).isMarked();
         Task currTask = history.getTask(index);
         String tasking = "";
@@ -137,9 +134,6 @@ public class Commands {
      * @return Unmark response.
      */
     public String unmark(int index, DukeHistory history) {
-        if (index < 0 || index > history.getSize() - 1) {
-            throw new IndexOutOfBoundsException();
-        }
         history.getTask(index).isUnmarked();
         Task currTask = history.getTask(index);
         String tasking = "";
@@ -212,6 +206,7 @@ public class Commands {
         if (timeStart == -1 || tokens.length - timeStart < 3) {
             throw new DukeException("'/by' not detected");
         }
+
         // Handle Date
         date = date.concat(convertToDukeDate(tokens[timeStart + 1]));
         // Handle Time

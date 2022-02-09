@@ -45,13 +45,11 @@ public class Duke {
         switch (keyword) {
         case "bye":
             try {
-                if (tokens.length != 1) {
-                    throw new DukeException("argument for bye detected");
-                }
+                assert(tokens.length == 1);
                 response = cmd.bye();
                 storage.update(history);
                 break;
-            } catch (DukeException ex) {
+            } catch (AssertionError ex) {
                 response = ui.printFoundArgumentError();
                 break;
             } catch (IOException e) {
@@ -60,22 +58,21 @@ public class Duke {
             }
         case "list":
             try {
-                if (tokens.length != 1) {
-                    throw new DukeException("argument for list detected");
-                }
+                assert (tokens.length == 1);
                 response = cmd.list(history);
                 break;
-            } catch (DukeException ex) {
+            } catch (AssertionError ex) {
                 response = ui.printFoundArgumentError();
                 break;
             }
         case "mark": {
             try {
-                int index = Integer.parseInt(tokens[1]);
-                response = cmd.mark(index - 1, history);
+                int index = Integer.parseInt(tokens[1]) - 1;
+                assert(index > 0 && index <= (history.getSize() - 1));
+                response = cmd.mark(index, history);
                 storage.update(history);
                 break;
-            } catch (IndexOutOfBoundsException ex) {
+            } catch (NumberFormatException | AssertionError ex) {
                 response = ui.printInvalidArgumentError();
                 break;
             } catch (IOException e) {
@@ -85,11 +82,12 @@ public class Duke {
         }
         case "unmark": {
             try {
-                int index = Integer.parseInt(tokens[1]);
-                response = cmd.unmark(index - 1, history);
+                int index = Integer.parseInt(tokens[1]) - 1;
+                assert(index > 0 && index <= (history.getSize() - 1));
+                response = cmd.unmark(index, history);
                 storage.update(history);
                 break;
-            } catch (IndexOutOfBoundsException ex) {
+            } catch (NumberFormatException | AssertionError ex) {
                 response = ui.printInvalidArgumentError();
                 break;
             } catch (IOException e) {
@@ -99,13 +97,11 @@ public class Duke {
         }
         case "todo": {
             try {
-                if (tokens.length <= 1) {
-                    throw new MissingFormatArgumentException("no argument detected");
-                }
+                assert(tokens.length > 1);
                 response = cmd.todo(tokens, history);
                 storage.update(history);
                 break;
-            } catch (MissingFormatArgumentException ex) {
+            } catch (AssertionError ex) {
                 response = ui.printMissingArgumentError(keyword);
                 break;
             } catch (IOException e) {
@@ -115,13 +111,11 @@ public class Duke {
         }
         case "deadline": {
             try {
-                if (tokens.length <= 1) {
-                    throw new MissingFormatArgumentException("no argument detected");
-                }
+                assert(tokens.length > 1);
                 response = cmd.deadline(tokens, history);
                 storage.update(history);
                 break;
-            } catch (MissingFormatArgumentException ex) {
+            } catch (AssertionError ex) {
                 response = ui.printMissingArgumentError(keyword);
                 break;
             } catch (DukeException ex) {
@@ -134,13 +128,11 @@ public class Duke {
         }
         case "event": {
             try {
-                if (tokens.length <= 1) {
-                    throw new MissingFormatArgumentException("no argument detected");
-                }
+                assert(tokens.length > 1);
                 response = cmd.event(tokens, history);
                 storage.update(history);
                 break;
-            } catch (MissingFormatArgumentException ex) {
+            } catch (AssertionError ex) {
                 response = ui.printMissingArgumentError(keyword);
                 break;
             } catch (DukeException ex) {
@@ -153,11 +145,12 @@ public class Duke {
         }
         case "delete": {
             try {
-                int index = Integer.parseInt(tokens[1]);
-                response = cmd.delete(index - 1, history);
+                int index = Integer.parseInt(tokens[1]) - 1;
+                assert(index > 0 && index <= (history.getSize() - 1));
+                response = cmd.delete(index, history);
                 storage.update(history);
                 break;
-            } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException ex) {
+            } catch (NumberFormatException | AssertionError ex) {
                 response = ui.printInvalidArgumentError();
                 break;
             } catch (IOException e) {
@@ -177,12 +170,10 @@ public class Duke {
         }
         case "find": {
             try {
-                if (tokens.length <= 1) {
-                    throw new MissingFormatArgumentException("no argument detected");
-                }
+                assert(tokens.length > 1);
                 response = cmd.find(tokens, history);
                 break;
-            } catch (MissingFormatArgumentException ex) {
+            } catch (AssertionError ex) {
                 response = ui.printMissingArgumentError(keyword);
                 break;
             } catch (DukeException e) {
