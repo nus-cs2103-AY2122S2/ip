@@ -52,11 +52,11 @@ public class Parser {
     public int parseIndex(String input) throws DukeException {
         String[] split = input.split(" ");
         try {
+            assert split.length >= 2;
             if (split.length < 2) {
                 throw new DukeException("What is this? Missing number!");
-            } else {
-                return Integer.parseInt(split[1]) - 1;
             }
+            return Integer.parseInt(split[1]) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("That's not a number");
         }
@@ -72,11 +72,11 @@ public class Parser {
      */
     public String parseTodo(String input) throws DukeException {
         String[] split = input.split(" ");
+        assert split.length >= 2;
         if (split.length < 2) {
-            throw new DukeException("OH NO! The description of event cannot be empty.");
-        } else {
-            return input.replace("todo ", "");
+            throw new DukeException("OH NO! The description of todo cannot be empty.");
         }
+        return input.replace("todo ", "");
     }
 
     /**
@@ -89,17 +89,17 @@ public class Parser {
      */
     public String[] parseDeadline(String input) throws DukeException {
         String[] split = input.split(" ");
+        assert split.length >= 2;
         if (split.length < 2) {
             throw new DukeException("OH NO! The description of deadline cannot be empty.");
-        } else {
-            String[] newSplit = input.split(" /by ");
-            if (newSplit.length > 1) {
-                newSplit[0] = newSplit[0].replace("deadline ", "");
-                return newSplit;
-            } else {
-                throw new DukeException("You are missing the date!.");
-            }
         }
+
+        String[] newSplit = input.split(" /by ");
+        if (newSplit.length > 1) {
+            newSplit[0] = newSplit[0].replace("deadline ", "");
+            return newSplit;
+        }
+        throw new DukeException("You are missing the date!.");
     }
 
     /**
@@ -112,17 +112,19 @@ public class Parser {
      */
     public String[] parseEvent(String input) throws DukeException {
         String[] split = input.split(" ");
+        assert split.length >= 2;
         if (split.length < 2) {
             throw new DukeException("OH NO! The description of deadline cannot be empty.");
-        } else {
-            String[] newSplit = input.split(" /at ");
-            if (newSplit.length > 1) {
-                newSplit[0] = newSplit[0].replace("event ", "");
-                return newSplit;
-            } else {
-                throw new DukeException("You are missing the date!.");
-            }
         }
+
+        String[] newSplit = input.split(" /at ");
+        if (newSplit.length > 1) {
+            newSplit[0] = newSplit[0].replace("event ", "");
+            return newSplit;
+        } else {
+            throw new DukeException("You are missing the date!.");
+        }
+
     }
 
     /**
@@ -134,11 +136,11 @@ public class Parser {
      */
     public String parseFind(String input) throws DukeException {
         String[] split = input.split(" ");
+        assert split.length >= 2;
         if (split.length < 2) {
             throw new DukeException("OH NO! The you are missing the keyword!");
-        } else {
-            return split[1];
         }
+        return split[1];
     }
 
     /**

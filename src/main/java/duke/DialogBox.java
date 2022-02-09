@@ -1,6 +1,5 @@
 package duke;
 
-import com.sun.prism.paint.ImagePattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;

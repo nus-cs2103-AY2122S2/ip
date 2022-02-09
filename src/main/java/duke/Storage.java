@@ -5,7 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +40,7 @@ public class Storage {
      *
      * @param text The text to pass into the file
      */
-    public void WriteToFile(String text) {
+    public void writeToFile(String text) {
         try {
             File myFile = new File(DATA_PATH + "/" + fileName);
             FileWriter fw = new FileWriter(myFile, true); // Boolean is for append mode
@@ -52,7 +57,7 @@ public class Storage {
      *
      * @param tasks The tasks that will overwrite the file
      */
-    public void OverwriteFile(List<Task> tasks) {
+    public void overwriteFile(List<Task> tasks) {
         try {
             File myFile = new File(DATA_PATH + "/" + fileName);
             FileWriter fw = new FileWriter(myFile); // Boolean is for append mode
@@ -73,7 +78,7 @@ public class Storage {
      * @return List of tasks
      * @throws DukeException Throws when file cannot be read
      */
-    public List<Task> ParseFile() throws DukeException {
+    public List<Task> parseFile() throws DukeException {
         try {
             File myFile = new File(DATA_PATH + "/" + fileName);
             if (myFile.exists()) {
