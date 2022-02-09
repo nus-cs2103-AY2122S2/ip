@@ -5,6 +5,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -46,6 +47,9 @@ public class Parser {
                 throw new DukeException("\tAaaarrrrgggghhhh you can't find nuthin' matey!\n");
             }
             command = new FindCommand(splitCommand[1]);
+            break;
+        case (HelpCommand.COMMAND_WORD):
+            command = new HelpCommand();
             break;
         case (ListCommand.COMMAND_WORD):
             command = new ListCommand();

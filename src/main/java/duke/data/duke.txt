@@ -1,6 +1,1 @@
-T | 0 | borrow book
-D | 1 | return book | 2021-04-19 | 2359hrs
-E | 0 | project meeting | 2021-12-31 | 12-6pm
-D | 0 | return book | 2021-04-19 | 
-D | 0 | return book | 2021-04-25 | 
-D | 0 | return book | 2021-04-29 | 
+T | 0 | Add new tasks into this list! :)

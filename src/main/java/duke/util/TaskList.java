@@ -72,6 +72,12 @@ public class TaskList {
             }
             taskList.add(task);
         }
+
+        if (isTaskListEmpty()) {
+            Todo defaultTask = new Todo("Add new tasks into this list! :)");
+            taskList.add(defaultTask);
+            taskCount++;
+        }
     }
 
     /**
@@ -165,6 +171,15 @@ public class TaskList {
      */
     public String getTask(int taskIndex) {
         return taskList.get(taskIndex).getTaskDescription();
+    }
+
+    /**
+     * Returns true if and only if the arraylist of tasks is empty
+     *
+     * @return true if list of tasks is still empty
+     */
+    public boolean isTaskListEmpty() {
+        return taskList.size() == 0;
     }
 
     /**

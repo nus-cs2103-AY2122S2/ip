@@ -12,6 +12,7 @@ import duke.util.Ui;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_EXAMPLE = "";
     private Task task;
 
     /**
@@ -20,6 +21,7 @@ public class AddCommand extends Command {
      * @param task Task to be added.
      */
     public AddCommand(Task task) {
+        super(COMMAND_WORD, COMMAND_EXAMPLE);
         this.task = task;
     }
 

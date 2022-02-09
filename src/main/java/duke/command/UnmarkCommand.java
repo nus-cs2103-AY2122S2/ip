@@ -11,6 +11,7 @@ import duke.util.Ui;
 public class UnmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
+    public static final String COMMAND_EXAMPLE = "unmark 1";
     private int taskIndex;
 
     /**
@@ -19,6 +20,7 @@ public class UnmarkCommand extends Command {
      * @param taskIndex 0-based index task number to be marked.
      */
     public UnmarkCommand(int taskIndex) {
+        super(COMMAND_WORD, COMMAND_EXAMPLE);
         this.taskIndex = taskIndex;
     }
 

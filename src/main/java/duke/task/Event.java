@@ -37,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return if time of event was given as input
+     * Returns true if time of event was given as input
      *
      * @return true if event has a time
      */

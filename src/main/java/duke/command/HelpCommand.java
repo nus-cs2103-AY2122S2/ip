@@ -6,14 +6,15 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * This ListCommand class will show a list of added tasks when executed.
+ * This HelpCommand class will show a list of commands that the user can type in
+ * and the format in which they should provide an input
  */
-public class ListCommand extends Command {
+public class HelpCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
-    public static final String COMMAND_EXAMPLE = "list tasks";
+    public static final String COMMAND_WORD = "help";
+    public static final String COMMAND_EXAMPLE = "help me!";
 
-    public ListCommand() {
+    public HelpCommand() {
         super(COMMAND_WORD, COMMAND_EXAMPLE);
     }
 
@@ -27,7 +28,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String output = taskList.printTaskList();
-        return output;
+        return ui.showHelpMessage();
     }
 }

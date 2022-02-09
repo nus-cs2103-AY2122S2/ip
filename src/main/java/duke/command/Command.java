@@ -10,6 +10,14 @@ import duke.util.Ui;
  */
 public abstract class Command {
 
+    protected final String COMMAND_WORD;
+    protected final String COMMAND_EXAMPLE;
+
+    protected Command(String commandWord, String commandExample) {
+        COMMAND_WORD = commandWord;
+        COMMAND_EXAMPLE = commandExample;
+    }
+
     /**
      * Executes command by printing exit message.
      *

@@ -12,6 +12,7 @@ import duke.util.Ui;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_EXAMPLE = "find list";
     private String keyword;
 
 
@@ -21,6 +22,7 @@ public class FindCommand extends Command {
      * @param keyword Keyword to find matching tasks in list of tasks.
      */
     public FindCommand(String keyword) {
+        super(COMMAND_WORD, COMMAND_EXAMPLE);
         this.keyword = keyword;
     }
 

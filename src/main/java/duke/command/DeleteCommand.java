@@ -11,6 +11,7 @@ import duke.util.Ui;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_EXAMPLE = "delete 1";
     private int taskIndex;
 
     /**
@@ -19,6 +20,7 @@ public class DeleteCommand extends Command {
      * @param taskIndex 0-based index.
      */
     public DeleteCommand(int taskIndex) {
+        super(COMMAND_WORD, COMMAND_EXAMPLE);
         this.taskIndex = taskIndex;
     }
 
