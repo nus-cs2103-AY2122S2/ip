@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
      * Constructor for ExitCommand class.
      */
     public ExitCommand() {
-        super(null, null, null);
+        super(null);
     }
 
     /**

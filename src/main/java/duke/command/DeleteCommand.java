@@ -9,12 +9,14 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
+    private int index;
     /**
      * Constructor for DeleteCommand class.
      * @param number an indicator to the index of the taskList in TaskList class.
      */
     public DeleteCommand(Integer number) {
-        super(null, number, null);
+        super(null);
+        this.index = number;
     }
 
     /**
@@ -24,8 +26,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        int index = super.index;
-        assert index > 0 : "Index provided should be greater then 0";
+        assert this.index > 0 : "Index provided should be greater then 0";
         Task deletedTask = tasks.deleteTask(index);
         String message = "Noted. I've removed this task:\n";
         return message + deletedTask.toString() + "\n"

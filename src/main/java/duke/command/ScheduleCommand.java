@@ -1,31 +1,34 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.functionality.TaskList;
 
 /**
- * Represents the find command. A <code>FindCommand</code> object corresponds to finding similar tasks
+ * Represents the schedule command. A <code>ScheduleCommand</code> object corresponds to finding similar tasks
  * in the taskList of TaskList class.
  */
-public class FindCommand extends Command {
-    private String keyword;
+public class ScheduleCommand extends Command {
+    private LocalDate date;
+
     /**
      * Constructor of FindCommand.
-     * @param word keyword used to find similar tasks in taskList of TaskList class.
+     * @param date date used to find similar tasks in taskList of TaskList class.
      */
-    public FindCommand(String word) {
+    public ScheduleCommand(LocalDate date) {
         super(null);
-        this.keyword = word;
+        this.date = date;
     }
 
     /**
-     * Returns a string which contains all the task after the execution of findWord in the TaskList class.
+     * Returns a string which contains all the task after the execution of findSameSchedule in the TaskList class.
      * @param tasks an object of TaskList, used to access public methods in TaskList class.
-     * @return crafted message after calling findword in the TaskList class.
+     * @return crafted message after calling findSameSchedule in the TaskList class.
      */
     @Override
     public String execute(TaskList tasks) {
-        TaskList newTaskList = tasks.findWord(this.keyword);
-        String message = "Here are the matching tasks in your list:\n";
+        TaskList newTaskList = tasks.findSameSchedule(this.date);
+        String message = "Here is your Schedule for " + this.date + "\n";
         int counter = 1;
         for (int i = 0; i < newTaskList.getListSize(); i++) {
             String output = counter + "." + newTaskList.getTask(i);
@@ -33,7 +36,7 @@ public class FindCommand extends Command {
             message += output + "\n";
         }
         if (counter == 1) {
-            message = "OOPS!, there are no matching task with the word provided." + "\n";
+            message = "You have no Schedule on " + this.date + "\n";
         }
         return message;
     }

@@ -12,6 +12,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.MarkCommand;
 import duke.command.PrintCommand;
+import duke.command.ScheduleCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.BlankCommandException;
 import duke.exception.DukeException;
@@ -29,6 +30,7 @@ public class Parser {
     private static final int EVENT_OFFSET = 5;
     private static final int TODO_OFFSET = 4;
     private static final int DEADLINE_OFFSET = 8;
+    private static final int SCHEDULE_OFFSET = 8;
     private static final int INPUT_OFFSET = 3;
     private static final int FIRST_INPUT = 0;
     private static final int SECOND_INPUT = 1;
@@ -126,6 +128,19 @@ public class Parser {
         return new AddCommand(new Todo(description));
     }
 
+    private static Command handleSchedule(String input, String command) throws DukeException {
+        String[] inputSplit = input.split(" ");
+        String description = input.substring(SCHEDULE_OFFSET).trim();
+        checkDescriptionLength(description, command);
+
+        try {
+            LocalDate date = formatDate(inputSplit[SECOND_INPUT]);
+            return new ScheduleCommand(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The expected input form is schedule yyyy-mm-dd");
+        }
+    }
+
     /**
      * Returns the respective command from user input.
      * @param input user input. Eg, "todo run".
@@ -161,6 +176,9 @@ public class Parser {
 
         } else if (command.equals("find")) {
             return new FindCommand(inputSplit[SECOND_INPUT]);
+
+        } else if (command.equals("schedule")) {
+            return handleSchedule(input, command);
 
         } else if (command.equals("")) {
             throw new BlankCommandException();
