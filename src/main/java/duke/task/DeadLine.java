@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
  *
  */
 public class DeadLine extends Task {
-    protected LocalDate bydate;
-    protected LocalTime bytime;
+    protected LocalDate doByDate;
+    protected LocalTime doByTime;
 
     /**
      * Constructor for DeadLine class where DeadLine is by default uncompleted.
@@ -20,8 +20,8 @@ public class DeadLine extends Task {
      */
     public DeadLine(String objective, String date, String time) {
         super(objective);
-        this.bydate = LocalDate.parse(date);
-        this.bytime = LocalTime.parse(time);
+        this.doByDate = LocalDate.parse(date);
+        this.doByTime = LocalTime.parse(time);
     }
 
     /**
@@ -33,13 +33,13 @@ public class DeadLine extends Task {
      */
     public DeadLine(String objective, Boolean done, String date, String time) {
         super(objective, done);
-        this.bydate = LocalDate.parse(date);
-        this.bytime = LocalTime.parse(time);
+        this.doByDate = LocalDate.parse(date);
+        this.doByTime = LocalTime.parse(time);
     }
 
     @Override
     public boolean sameTime(LocalDate date) {
-        return this.bydate.equals(date);
+        return this.doByDate.equals(date);
     }
 
     @Override
@@ -48,10 +48,10 @@ public class DeadLine extends Task {
             return -1;
         } else if (task instanceof DeadLine) {
             DeadLine deadline = (DeadLine) task;
-            return this.bydate.compareTo(deadline.bydate);
+            return this.doByDate.compareTo(deadline.doByDate);
         } else {
             Events event = (Events) task;
-            return this.bydate.compareTo(event.date);
+            return this.doByDate.compareTo(event.date);
         }
     }
 
@@ -59,7 +59,7 @@ public class DeadLine extends Task {
     public boolean equals(Object o) {
         if (o instanceof DeadLine) {
             DeadLine e = (DeadLine) o;
-            return this.bydate.equals(e.bydate) && this.bytime.equals(e.bytime)
+            return this.doByDate.equals(e.doByDate) && this.doByTime.equals(e.doByTime)
                     && this.objective.equals(e.objective) && (this.done == e.done);
         } else {
             return false;
@@ -68,17 +68,17 @@ public class DeadLine extends Task {
 
     @Override
     public String serialize() {
-        assert this.bydate != null;
-        assert this.bytime != null;
+        assert this.doByDate != null;
+        assert this.doByTime != null;
         assert this.objective != null;
         return "D|" + (this.done ? "1|" : "0|") + this.objective
-                + "|" + bydate.toString() + "|" + bytime.toString() + "\n";
+                + "|" + doByDate.toString() + "|" + doByTime.toString() + "\n";
     };
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + this.bydate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
-                + this.bytime.format(DateTimeFormatter.ofPattern("HH:mm a")) + ")";
+                + this.doByDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + this.doByTime.format(DateTimeFormatter.ofPattern("HH:mm a")) + ")";
     }
 }

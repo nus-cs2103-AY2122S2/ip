@@ -41,7 +41,7 @@ public class TaskList {
 
     public List<Task> getObjectives(String keyword) {
         List<Task> matches = this.objectives.stream()
-                .filter((x) -> x.contains(keyword))
+                .filter((x) -> x.containsKeyword(keyword))
                 .collect(Collectors.toList());
         return matches;
     }
@@ -108,6 +108,14 @@ public class TaskList {
         return encodedList;
     }
 
+    /**
+     * Sort the task list according to the specified criteria.
+     *
+     * @param sortBy Criteria to sort by.
+     * @param isAscending Order of the sort.
+     *
+     * @return List of sorted Tasks.
+     */
     public List<Task> sort(String sortBy, Boolean isAscending) {
         if (sortBy.equals("date")) {
             Collections.sort(objectives, TaskComparator.DateComparator);

@@ -50,8 +50,12 @@ public abstract class Task implements Comparable<Task> {
      */
     public abstract String serialize();
 
-
-    public boolean contains(String keyword) {
+    /**
+     * Check if the task contains keyword.
+     *
+     * @return True if the task contains keyword.
+     */
+    public boolean containsKeyword(String keyword) {
         return this.objective.contains(keyword);
     }
 
