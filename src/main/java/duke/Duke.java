@@ -8,7 +8,7 @@ import task.TaskList;
 public class Duke {
 
     /**
-     * File where Duke is stored, read and written.
+     * Storage where Duke is saved, read and updated.
      */
     private Storage storage;
     /**
@@ -29,9 +29,9 @@ public class Duke {
      */
     public Duke() {
         try {
-            storage = new Storage(FILE_PATH);
-            tasks = new TaskList(storage.readData());
-            parser = new Parser(tasks);
+            storage = new Storage(this.FILE_PATH);
+            tasks = new TaskList(this.storage.readData());
+            parser = new Parser(this.tasks);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -41,16 +41,16 @@ public class Duke {
      * Returns Duke response according to
      * the user command.
      *
-     * @param cmd User command.
+     * @param command User command.
      * @return Duke response.
      */
-    public String getResponse(String cmd) {
+    public String getResponse(String command) {
         try {
-            if (cmd.equals("bye")) {
+            if (command.equals("bye")) {
                 storage.writeData(tasks.getList());
                 return UI.printTerminate();
             } else {
-                return parser.processCommand(cmd);
+                return parser.processCommand(command);
             }
         } catch (Exception e) {
             return e.getMessage();

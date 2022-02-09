@@ -49,10 +49,10 @@ public class TaskList {
      * @return Added Task Message.
      */
     public String add(Task task) {
-        Tasks.add(task);
+        this.Tasks.add(task);
         int index = this.getSize() - 1;
         assert index >= 0 : "Index must be 0 or more.";
-        return UI.printAddMessage(Tasks.get(index).toString(), index);
+        return UI.printAddMessage(this.Tasks.get(index).toString(), index);
     }
 
     /**
@@ -62,7 +62,7 @@ public class TaskList {
      * @return Task deleted message.
      */
     public String delete(int no) {
-        return UI.deleteMessage(Tasks.remove(no).toString());
+        return UI.deleteMessage(this.Tasks.remove(no).toString());
     }
 
     /**
@@ -72,8 +72,8 @@ public class TaskList {
      * @return Task marked message.
      */
     public String mark(int no) {
-        Tasks.get(no).markAsDone();
-        return UI.printMarked(Tasks.get(no).toString());
+        this.Tasks.get(no).markAsDone();
+        return UI.printMarked(this.Tasks.get(no).toString());
     }
 
     /**
@@ -83,12 +83,15 @@ public class TaskList {
      * @return Task unmarked message.
      */
     public String unMark(int no) {
-        Tasks.get(no).markAsUnDone();
-        return UI.printUnMarked(Tasks.get(no).toString());
+        this.Tasks.get(no).markAsUnDone();
+        return UI.printUnMarked(this.Tasks.get(no).toString());
     }
 
     /**
-     * Prints the Tasks in the TaskList.
+     * Prints Tasks on the list.
+     *
+     * @return String representation of Tasks on List.
+     * @throws DukeException when list is empty.
      */
     public String printTaskList() throws DukeException {
         return printList(this.Tasks);
@@ -99,32 +102,33 @@ public class TaskList {
      *
      * @param str String to search for.
      * @return String representation of search result.
+     * @throws DukeException If no result is found.
      */
     public String find(String str) throws DukeException {
         ArrayList<Task> resultList = generateList(str);
         if (resultList.size() != 0) {
             return printList(resultList);
         } else {
-            throw new DukeException(UI.noResult);
+            throw new DukeException(UI.ERROR_NO_RESULT);
         }
     }
 
     /**
-     * Generates the list of tasks containing
-     * the string input.
+     * Generates the list of tasks containing the string input.
+     * Used only by find() method.
      *
      * @param str String to search for.
-     * @return List of tasks if match is present, empty list if no match.
+     * @return List of tasks with match, empty list if no match.
      */
     private ArrayList<Task> generateList(String str) {
-        ArrayList<Task> list = new ArrayList<>();
-        for(int m = 0; m < Tasks.size(); m++) {
-            String in = Tasks.get(m).getDescription();
+        ArrayList<Task> resultList = new ArrayList<>();
+        for (int m = 0; m < this.Tasks.size(); m++) {
+            String in = this.Tasks.get(m).getDescription();
             if (in.equals(str) || scan(in, str)) {
-                list.add(Tasks.get(m));
+                resultList.add(this.Tasks.get(m));
             }
         }
-        return list;
+        return resultList;
     }
 
     /**
@@ -137,7 +141,7 @@ public class TaskList {
     private boolean scan(String sentence, String str) {
         boolean isPresent = false;
         String[] words = sentence.split(" ");
-        for(int n = 0; n < words.length; n++) {
+        for (int n = 0; n < words.length; n++) {
             if (words[n].equals(str)) {
                 isPresent = true;
             }
@@ -150,17 +154,18 @@ public class TaskList {
      *
      * @param list List of Tasks.
      * @return String Representation of List to be printed.
+     * @throws DukeException If list is empty.
      */
     private String printList(ArrayList<Task> list) throws DukeException {
         String str = "";
         int size = list.size();
         if (size != 0) {
-            for(int m = 0; m < size; m++) {
-                str+= (m + 1) + "." + list.get(m).toString() + "\n";
+            for (int m = 0; m < size; m++) {
+                str+= m + 1 + "." + list.get(m).toString() + "\n";
             }
             return str;
         } else {
-            throw new DukeException(UI.emptyList);
+            throw new DukeException(UI.ERROR_EMPTY_LIST);
         }
     }
 }
