@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -130,7 +132,7 @@ public class Storage {
         String desc = t.getDesc();
         StringBuilder sb = new StringBuilder(doneStatus + taskType + spacing + desc);
         sb.append(spacing + "By: ");
-        sb.append(t.getBy());
+        sb.append(t.getStorageDate());
         sb.append("\n");
         return sb.toString();
     }
@@ -148,7 +150,7 @@ public class Storage {
         String desc = t.getDesc();
         StringBuilder sb = new StringBuilder(doneStatus + taskType + spacing + desc);
         sb.append(spacing + "At: ");
-        sb.append(t.getAt());
+        sb.append(t.getStorageDate());
         sb.append("\n");
         return sb.toString();
     }
@@ -206,18 +208,18 @@ public class Storage {
      * @return A {@code Deadline} that the {@code String} represents.
      * @throws IndexOutOfBoundsException If the {@code String} has an invalid {@code Deadline} form.
      */
-    private static Deadline stringToDeadline(String s, char doneStatus) throws IndexOutOfBoundsException {
+    private static Deadline stringToDeadline(String s, char doneStatus) throws
+            IndexOutOfBoundsException, InvalidTaskFileException {
         String[] parts = s.split(" \\| ", 3);
         String desc = parts[1];
         String when = parts[2].replaceFirst("By: ", "");
         Deadline deadline;
         try {
-            // Check if 'when' is a valid date
-            LocalDate ld = LocalDate.parse(when);
-            deadline = new Deadline(desc, ld);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(when, formatter);
+            deadline = new Deadline(desc, dateTime);
         } catch (DateTimeParseException e) {
-            // Otherwise, treat it as a normal String
-            deadline = new Deadline(desc, when);
+            throw new InvalidTaskFileException("A deadline has an invalid date time format!");
         }
         if (doneStatus == '#') {
             deadline.mark();
@@ -233,18 +235,18 @@ public class Storage {
      * @return An {@code Event} that the {@code String} represents.
      * @throws IndexOutOfBoundsException If the {@code String} has an invalid {@code Event} form.
      */
-    private static Event stringToEvent(String s, char doneStatus) throws IndexOutOfBoundsException {
+    private static Event stringToEvent(String s, char doneStatus) throws
+            IndexOutOfBoundsException, InvalidTaskFileException {
         String[] parts = s.split(" \\| ", 3);
         String desc = parts[1];
         String when = parts[2].replaceFirst("At: ", "");
         Event event;
         try {
-            // Check if 'when' is a valid date
-            LocalDate ld = LocalDate.parse(when);
-            event = new Event(desc, ld);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(when, formatter);
+            event = new Event(desc, dateTime);
         } catch (DateTimeParseException e) {
-            // Otherwise, treat it as a normal String
-            event = new Event(desc, when);
+            throw new InvalidTaskFileException("An event has an invalid date time format!");
         }
         if (doneStatus == '#') {
             event.mark();

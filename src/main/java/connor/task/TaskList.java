@@ -1,10 +1,14 @@
 package connor.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import connor.Connor;
+import connor.exception.ConnorException;
 
 /**
  * Stores and edits the task list.
@@ -31,17 +35,11 @@ public class TaskList {
     private static final String ERROR_INDEX_NOT_INTEGER = "Error! Index must be a valid integer.";
     private static final String ERROR_INDEX_OUT_OF_RANGE = "Error! Given index is out of range.";
     private static final String ERROR_INVALID_DL_FORMAT = "Error! Wrong format for deadlines.\n\n"
-            + "Deadline tasks must include \"by\" in the description.\nExample: \n"
-            + ">>> deadline Finish project /by Monday Morning";
-    private static final String ERROR_INVALID_DL_FORMAT_GUI = "Error! Wrong format for deadlines.\n\n"
-            + "Deadline tasks must include \"by\" in the description.\nExample: \n"
-            + "'deadline Finish project /by Monday Morning'";
+            + "Format:  deadline {task} /by DD-MM-YYYY HH:MM\n"
+            + "Example: deadline Finish Project /by 25-02-2022 23:59";
     private static final String ERROR_INVALID_EVENT_FORMAT = "Error! Wrong format for events.\n\n"
-            + "Event tasks must include \"at\" in the description.\nExample: \n"
-            + ">>> event Birthday Party at May 5th";
-    private static final String ERROR_INVALID_EVENT_FORMAT_GUI = "Error! Wrong format for events.\n\n"
-            + "Event tasks must include \"at\" in the description.\nExample: \n"
-            + "'event Birthday Party at May 5th'";
+            + "Format:  event {task} /at DD-MM-YYYY HH:MM\n"
+            + "Example: event Birthday Party /at 10-02-2022 12:30";
     private static final String ERROR_INVALID_TASK_TYPE = "Oh no! Incorrect Task type!";
     private static final String ERROR_INVALID_TASK_STATUS = "Oh no! Invalid Task status!";
     private static final String ERROR_MARK_EMPTY = "Error! I can't mark an empty task list!";
@@ -80,12 +78,6 @@ public class TaskList {
 
     /**
      * Adds a {@code Task} into the task list with a description.
-     * If the {@code Task} is a {@code Deadline} or an {@code Event}, the method splits the
-     * description into two parts, the actual description and when the {@code Task} is due/occurs,
-     * with the delimiter "/by" or "/at" respectively.
-     * <p>
-     * The method also checks if the given occasion is of the valid {@code LocalDate} format, defaulting
-     * to a regular {@code String} otherwise.
      *
      * @param taskType Type of {@code Task}.
      * @param desc Description of the task and also the occasion if the {@code Task} is a
@@ -98,85 +90,114 @@ public class TaskList {
             return ERROR_EMPTY_TASK_DESC;
         }
         StringBuilder message = new StringBuilder();
-        switch (taskType) {
-        case TODO:
-            ToDo todo = new ToDo(desc);
-            tasks.add(todo);
-            print(ADD_NEW_TASK);
-            print(INDENT + todo);
-            message.append(ADD_NEW_TASK + "\n" + INDENT + todo + "\n");
-            break;
-        case DEADLINE: {
-            if (!desc.contains("/by")) {
-                print(ERROR_INVALID_DL_FORMAT);
-                return ERROR_INVALID_DL_FORMAT_GUI;
+        try {
+            switch (taskType) {
+            case TODO:
+                addTodo(desc, message);
+                break;
+            case DEADLINE: {
+                addDeadline(desc, message);
+                break;
             }
-            String[] phrases = desc.split("/by", 2);
-            String thing = phrases[0].trim();
-            String when = phrases[1].trim();
-            if (thing.isBlank() || when.isBlank()) {
-                print(ERROR_EMPTY_DL_DESC);
-                return ERROR_EMPTY_TASK_DESC;
+            case EVENT: {
+                addEvent(desc, message);
+                break;
             }
-            try {
-                // Check if 'when' is a valid date
-                LocalDate ld = LocalDate.parse(when);
-                Deadline deadline = new Deadline(thing, ld);
-                tasks.add(deadline);
-                print(ADD_NEW_TASK);
-                print(INDENT + deadline);
-                message.append(ADD_NEW_TASK + "\n" + INDENT + deadline + "\n");
-            } catch (DateTimeParseException e) {
-                // Otherwise, treat it as a normal String
-                Deadline deadline = new Deadline(thing, when);
-                tasks.add(deadline);
-                print(ADD_NEW_TASK);
-                print(INDENT + deadline);
-                message.append(ADD_NEW_TASK + "\n" + INDENT + deadline + "\n");
+            default: {
+                // Something has gone wrong
+                print(ERROR_INVALID_TASK_TYPE);
+                return ERROR_INVALID_TASK_TYPE;
             }
-            break;
-        }
-        case EVENT: {
-            if (!desc.contains("/at")) {
-                print(ERROR_INVALID_EVENT_FORMAT);
-                return ERROR_INVALID_EVENT_FORMAT_GUI;
             }
-            String[] phrases = desc.split("/at", 2);
-            String thing = phrases[0].trim();
-            String when = phrases[1].trim();
-            if (thing.isBlank() || when.isBlank()) {
-                print(ERROR_EMPTY_EVENT_DESC);
-                return ERROR_EMPTY_EVENT_DESC;
-            }
-            try {
-                // Check if 'when' is a valid date
-                LocalDate ld = LocalDate.parse(when);
-                Event event = new Event(thing, ld);
-                tasks.add(event);
-                print(ADD_NEW_TASK);
-                print(INDENT + event);
-                message.append(ADD_NEW_TASK + "\n" + INDENT + event + "\n");
-            } catch (DateTimeParseException e) {
-                // Otherwise, treat it as a normal String
-                Event event = new Event(thing, when);
-                tasks.add(event);
-                print(ADD_NEW_TASK);
-                print(INDENT + event);
-                message.append(ADD_NEW_TASK + "\n" + INDENT + event + "\n");
-            }
-            break;
-        }
-        default: {
-            // Something has gone wrong
-            print(ERROR_INVALID_TASK_TYPE);
-            return ERROR_INVALID_TASK_TYPE;
-        }
+        } catch (ConnorException e) {
+            print(e.getMessage());
+            return e.getMessage();
         }
         // After task is added show current number of tasks
         print("");
         getNumberOfTasks();
         message.append(getNumberOfTasksString());
         return message.toString();
+    }
+
+    /**
+     * Adds a {@code ToDo} into the task list with a description.
+     *
+     * @param desc Description of the ToDo task.
+     * @param message Message to build upon.
+     */
+    private static void addTodo(String desc, StringBuilder message) {
+        ToDo todo = new ToDo(desc);
+        tasks.add(todo);
+        print(ADD_NEW_TASK);
+        print(INDENT + todo);
+        message.append(ADD_NEW_TASK + "\n" + INDENT + todo + "\n");
+    }
+
+    /**
+     * Adds a {@code Deadline} into the task list with a description and the date and time. The method splits the
+     * description into two parts, the actual description and when the {@code Task} is due,
+     * with the delimiter "/by". The deadline should be a valid date time format.
+     *
+     * @param desc Description of the Deadline task and also the occasion.
+     * @param message Message to build upon.
+     */
+    private static void addDeadline(String desc, StringBuilder message) throws ConnorException {
+        if (!desc.contains("/by")) {
+            print(ERROR_INVALID_DL_FORMAT);
+            throw new ConnorException(ERROR_INVALID_DL_FORMAT);
+        }
+        String[] phrases = desc.split("/by", 2);
+        String thing = phrases[0].trim();
+        String when = phrases[1].trim();
+        if (thing.isBlank() || when.isBlank()) {
+            print(ERROR_EMPTY_DL_DESC);
+            throw new ConnorException(ERROR_EMPTY_TASK_DESC);
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(when, formatter);
+            Deadline deadline = new Deadline(thing, dateTime);
+            tasks.add(deadline);
+            print(ADD_NEW_TASK);
+            print(INDENT + deadline);
+            message.append(ADD_NEW_TASK + "\n" + INDENT + deadline + "\n");
+        } catch (DateTimeParseException e) {
+            throw new ConnorException(ERROR_INVALID_DL_FORMAT);
+        }
+    }
+
+    /**
+     * Adds an {@code Event} into the task list with a description and the date and time. The method splits the
+     * description into two parts, the actual description and when the {@code Task} occurs,
+     * with the delimiter "/at". The event occasion should be a valid date time format.
+     *
+     * @param desc Description of the Event task and also the occasion.
+     * @param message Message to build upon.
+     */
+    private static void addEvent(String desc, StringBuilder message) throws ConnorException {
+        if (!desc.contains("/at")) {
+            print(ERROR_INVALID_EVENT_FORMAT);
+            throw new ConnorException(ERROR_INVALID_EVENT_FORMAT);
+        }
+        String[] phrases = desc.split("/at", 2);
+        String thing = phrases[0].trim();
+        String when = phrases[1].trim();
+        if (thing.isBlank() || when.isBlank()) {
+            print(ERROR_EMPTY_EVENT_DESC);
+            throw new ConnorException(ERROR_EMPTY_EVENT_DESC);
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(when, formatter);
+            Event event = new Event(thing, dateTime);
+            tasks.add(event);
+            print(ADD_NEW_TASK);
+            print(INDENT + event);
+            message.append(ADD_NEW_TASK + "\n" + INDENT + event + "\n");
+        } catch (DateTimeParseException e) {
+            throw new ConnorException(ERROR_INVALID_EVENT_FORMAT);
+        }
     }
 
     /**
