@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     public boolean hasTask(int index) {
-        if (!(this.tasks.size() != 0 && index >= 0 && index - 1 < tasks.size())) {
+        if (!(this.tasks.size() != 0 && index >= 0 && index < tasks.size())) {
             return false;
         }
         return true;
