@@ -144,21 +144,17 @@ public class Parser {
             throw new DukeException("Unable to load task from file!");
         }
 
-
         switch(type) {
         case 'T':
             t = new Todo(name);
             break;
-
         case 'D':
             if (date == null) {
                 t = new Deadline(name, dateStr);
             } else {
                 t = new Deadline(name, date);
-
             }
             break;
-
         case 'E':
             if (date == null) {
                 t = new Event(name, dateStr);
@@ -166,7 +162,6 @@ public class Parser {
                 t = new Event(name, date);
             }
             break;
-
         default:
             throw new DukeException("Unable to load task from file!");
         }

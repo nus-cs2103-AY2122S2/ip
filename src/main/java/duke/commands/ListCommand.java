@@ -23,6 +23,7 @@ public class ListCommand extends Command {
      * @return true after the list is displayed.
      */
     public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+        save(storage, ui, taskManager);
         return ui.showList(taskManager);
     }
 }
