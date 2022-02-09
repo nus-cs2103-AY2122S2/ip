@@ -1,6 +1,7 @@
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class Duke {
     static WordList wordList;
@@ -61,10 +62,10 @@ public class Duke {
                 wordList.storeTodo(value[0], false, true);
                 break;
             case DEADLINE:
-                wordList.storeDeadline(value[0], value[1], false, true);
+                wordList.storeDeadline(value[0], DateTimeManager.parseString(value[1]), false, true);
                 break;
             case EVENT:
-                wordList.storeEvent(value[0], value[1], false, true);
+                wordList.storeEvent(value[0], DateTimeManager.parseString(value[1]), false, true);
                 break;
             case BYE:
                 replyBye();
