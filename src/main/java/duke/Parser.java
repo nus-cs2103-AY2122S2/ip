@@ -110,6 +110,6 @@ public class Parser {
                 ui.throwDukeException("Please enter a description!");
             }
         }
-        return new InvalidCommand(userTaskString);
+            return new InvalidCommand(userTaskString);
     }
 }

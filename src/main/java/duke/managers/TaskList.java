@@ -55,7 +55,7 @@ public class TaskList {
      * @param task exact task to be added into users' Task List
      * @param toPrint boolean value to decide if we want to execute print statements
      */
-    public void addTask(Task task, Boolean toPrint) {
+    public void addTask(Task task, Boolean toPrint) throws DukeException {
         String tag = task.getTag();
         assert (tag.equals("T") | tag.equals("D") | tag.equals("E"));
         this.userTaskList.add(task);
@@ -68,6 +68,8 @@ public class TaskList {
             } else if (tag.equals("E")) {
                 ui.print("Magnifico! You have added this Event Item:\n" + task
                         + "\nRemember to be there 5 minutes early!");
+            } else {
+                ui.throwDukeException("This tag does not have a valid tag!"); //When a tasks tag is wrong
             }
         }
     }
@@ -97,7 +99,9 @@ public class TaskList {
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
     public boolean checkValidTask(int taskIndex) throws DukeException {
-        if ((taskIndex > this.userTaskList.size() - 1) || (taskIndex < 0)) {
+        boolean isNotWithinSizeLimit = taskIndex > this.userTaskList.size() - 1;
+        boolean isNegativeIndex = taskIndex < 0;
+        if (isNotWithinSizeLimit || isNegativeIndex) {
             ui.throwDukeException("There is no such task! Maybe you entered the wrong task?");
         }
         return true;

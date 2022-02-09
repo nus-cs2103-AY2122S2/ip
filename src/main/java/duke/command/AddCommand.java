@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.managers.FileManager;
 import duke.managers.TaskList;
 import duke.task.Task;
@@ -25,7 +26,7 @@ public class AddCommand extends Command {
      * @param fileManager
      */
     @Override
-    public void executeTask(TaskList taskList, FileManager fileManager) {
+    public void executeTask(TaskList taskList, FileManager fileManager) throws DukeException {
         taskList.addTask(this.task, true);
     }
 
