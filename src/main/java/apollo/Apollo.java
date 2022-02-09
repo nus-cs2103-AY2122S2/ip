@@ -3,7 +3,6 @@ package apollo;
 import apollo.commands.Command;
 import apollo.commands.ExitCommand;
 import apollo.exceptions.ApolloException;
-import apollo.exceptions.ApolloIllegalArgumentException;
 import apollo.exceptions.ApolloIoException;
 import apollo.parser.Parser;
 import apollo.tasks.TaskList;
