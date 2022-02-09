@@ -29,6 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert(findCommand[0].equals("find"));
         try {
             Parser.parseFindCommand(findCommand);
             String keyword = findCommand[1];

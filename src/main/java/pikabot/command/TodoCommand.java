@@ -33,6 +33,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert (todoCommand[0].equals("todo"));
         try {
             Todo currTodo = Parser.parseTodo(todoCommand);
             taskList.add(currTodo);

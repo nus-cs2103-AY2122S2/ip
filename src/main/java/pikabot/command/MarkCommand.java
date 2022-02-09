@@ -32,6 +32,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
+        assert (markCommand[0].equals("mark"));
         try {
             Parser.parseIntegerCommand(markCommand);
             int taskToMark = Integer.parseInt(markCommand[1]);
