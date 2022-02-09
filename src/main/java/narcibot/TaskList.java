@@ -145,4 +145,17 @@ public class TaskList {
             }
         }
     }
+
+    /**
+     *
+     * Updates a task with the new time if possible.
+     *
+     * @param indexString
+     * @param newTime
+     * @throws IncorrectFormatException
+     */
+    public void update(String indexString, String newTime) throws IncorrectFormatException {
+        Task task = list.get(checkValid(indexString) - 1);
+        task.update(newTime);
+    }
 }

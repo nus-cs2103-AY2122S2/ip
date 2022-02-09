@@ -58,4 +58,12 @@ public class ToDo extends Task {
     public String save() {
         return "T|" + super.save();
     }
+
+    /**
+     * Tells the user that this todo task has no time for it.
+     * @param newTime
+     */
+    public void update(String newTime) {
+        System.out.println("There is no time for a todo task");
+    }
 }

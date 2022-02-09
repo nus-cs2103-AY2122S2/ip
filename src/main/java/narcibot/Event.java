@@ -68,10 +68,22 @@ public class Event extends Task {
 
     /**
      * Save the event in the format
+     *
      * @return String with the required format
      */
     @Override
     public String save() {
         return "E|" + super.save() + "|" + time;
+    }
+
+    /**
+     * Update the new time.
+     *
+     * @param newTime
+     */
+    @Override
+    public void update(String newTime) {
+        this.time = newTime;
+        System.out.println("Your new task:\n" + getStatus());
     }
 }

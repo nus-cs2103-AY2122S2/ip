@@ -69,12 +69,23 @@ public class Deadline extends Task {
     }
 
     /**
-     * Write down the format on the save file;
+     * Write down the format on the save file.
      *
      * @return String with the format
      */
     @Override
     public String save() {
         return "D|" + super.save() +"|" + time;
+    }
+
+    /**
+     * Update the new time.
+     *
+     * @param newTime
+     */
+    @Override
+    public void update(String newTime) {
+        this.time = newTime;
+        System.out.println("Your new task:\n" + getStatus());
     }
 }

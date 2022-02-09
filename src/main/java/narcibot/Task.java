@@ -65,4 +65,7 @@ public class Task {
     public boolean inName(String name) {
         return this.name.contains(name);
     }
+
+    public void update(String newTime) {
+    }
 }

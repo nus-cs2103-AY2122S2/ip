@@ -233,6 +233,18 @@ public class Narcibot extends Application {
                 ui.find();
                 taskList.find(command[1]);
                 break;
+            case "update":
+                if (command.length != 2) {
+                    throw new IncorrectFormatException("You need to give me a task number and time to update." +
+                            "The format is update (taskNumber) (time");
+                }
+                String[] toUpdate = parser.parse(command[1]);
+                if(toUpdate.length != 2) {
+                    throw new IncorrectFormatException("You need to give me a task number and time to update." +
+                            "The format is update (taskNumber) (time");
+                }
+                taskList.update(toUpdate[0], toUpdate[1]);
+                break;
             default:
                 ui.unknown();
             }
