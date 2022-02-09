@@ -5,7 +5,7 @@ package duke.task;
  * This task can be done or fulfilled anytime, and is by default not done.
  */
 public class Todo extends Task {
-    private final String type = "T";
+    private static final String TYPE = "T";
     private final String name;
 
     /**
@@ -35,7 +35,7 @@ public class Todo extends Task {
      */
     @Override
     public String track() {
-        return "[" + this.type + "]";
+        return "[" + TYPE + "]";
     }
 
     /**

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.enums.CommandEnums;
 import duke.enums.Type;
 import duke.exceptions.InvalidCommandException;
 import duke.task.Deadline;
@@ -151,65 +150,7 @@ public class Save {
      * @param taskList ArrayList of Strings to be processed
      */
     public void process(ArrayList<String> taskList) throws InvalidCommandException {
-
-        for (String s : taskList) {
-            String[] tokens = s.split(" ");
-            String command = tokens[0];
-
-            CommandEnums inputCommandEnums = CommandEnums.valueOf(command.toUpperCase());
-
-            int sizeOfInputArr = tokens.length;
-
-            String name = "";
-            for (int i = 1; i < sizeOfInputArr - 1; i++) {
-                name = name.concat(tokens[i]);
-                name = name.concat(" ");
-            }
-            name = name.concat(tokens[sizeOfInputArr - 1]); // to eliminate white space at the end
-
-            switch (inputCommandEnums) {
-            case MARK:
-                String markStr = tokens[1];
-                int taskNumMark = Integer.parseInt(markStr) - 1;
-                this.tasks.getTask(taskNumMark).mark();
-                this.save();
-                break;
-            case UNMARK:
-                String unmarkStr = tokens[1];
-                int taskNumUnmark = Integer.parseInt(unmarkStr) - 1;
-                tasks.getTask(taskNumUnmark).unmark();
-                this.save();
-                break;
-            case TODO:
-                Todo todo = new Todo(name);
-                tasks.add(todo);
-                this.save();
-                break;
-            case EVENT:
-                String[] tokensEvent = s.split("/at ");
-                String time = tokensEvent[1];
-
-                String[] tokensNameEvent = name.split("/");
-                String eventName = tokensNameEvent[0];
-                Event event = new Event(eventName, time);
-                tasks.add(event);
-                this.save();
-                break;
-            case DEADLINE:
-                String[] tokensDeadline = s.split("/by ");
-                String date = tokensDeadline[1];
-
-                String[] tokensNameDeadline = name.split("/");
-                String deadlineName = tokensNameDeadline[0];
-                Deadline deadline = new Deadline(deadlineName, date);
-                tasks.add(deadline);
-                this.save();
-                break;
-            default:
-                throw new InvalidCommandException("Incorrect format");
-            }
-
-        }
+        taskList.forEach(x -> Parser.parse(x).execute(this.tasks, this));
     }
 
     /**
