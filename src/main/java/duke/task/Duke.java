@@ -103,6 +103,7 @@ public class Duke {
             } catch (DateTimeParseException dateEx) {
                 return ui.showDateTimeParseError();
             }
+
             taskList.add(newTask);
             return ui.confirmAddition(newTask, taskList.getToDoList());
         case "event":
@@ -114,7 +115,12 @@ public class Duke {
             } catch (DateTimeParseException dateEx) {
                 return ui.showDateTimeParseError();
             }
-            taskList.add(newTask);
+
+            try {
+                taskList.add(newTask);
+            } catch (DateClashException ex) {
+                return ui.showDateClashError();
+            }
             return ui.confirmAddition(newTask, taskList.getToDoList());
         case "delete":
             idx = Integer.parseInt(restOfInput);

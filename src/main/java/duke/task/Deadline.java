@@ -49,4 +49,9 @@ public class Deadline extends duke.task.Task {
     public String toText() {
         return "D | " + (this.getIsDone() ? 1 : 0) + " | " + this.getName() + " | " + this.by + "\n";
     }
+
+    @Override
+    public LocalDate getDate() {
+        return this.by;
+    }
 }

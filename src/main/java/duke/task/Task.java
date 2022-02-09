@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task. A <code>Task</code> object is represented by its name and a boolean indicating whether it is done.
  */
@@ -56,6 +58,8 @@ public abstract class Task {
     public String getName() {
         return this.name;
     }
+
+    public abstract LocalDate getDate();
 
     public abstract String toText();
 }

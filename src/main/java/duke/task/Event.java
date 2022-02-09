@@ -47,4 +47,9 @@ public class Event extends duke.task.Task {
     public String toText() {
         return "E | " + (this.getIsDone() ? 1 : 0) + " | " + this.getName() + " | " + this.at + "\n";
     }
+
+    @Override
+    public LocalDate getDate() {
+        return this.at;
+    }
 }

@@ -165,4 +165,8 @@ public class Ui {
     public String showDateTimeParseError() {
         return "please enter the date in the following format: yyyy-mm-dd !!";
     }
+
+    public String showDateClashError() {
+        return "this task clashes with another task in your list, maybe reschedule one of them?";
+    }
 }

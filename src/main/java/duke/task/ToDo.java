@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task. A <code>ToDo</code> object corresponds to the task represented by
  * a String name.
@@ -31,5 +33,10 @@ public class ToDo extends Task {
     @Override
     public String toText() {
         return "T | " + (this.getIsDone() ? 1 : 0) + " | " + this.getName() + "\n";
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return null;
     }
 }

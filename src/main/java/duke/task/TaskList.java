@@ -1,12 +1,15 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Represents a list of <code>Tasks</code>. A <code>TaskList</code> object is represented by an ArrayList of Tasks.
  */
 public class TaskList {
     private ArrayList<Task> toDoList;
+    private HashSet<LocalDate> dateList;
 
     /**
      * Returns a new instance of the <code>TaskList</code> object with the specified ArrayList.
@@ -14,6 +17,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> arr) {
         this.toDoList = arr;
+        this.dateList = new HashSet<>();
     }
 
     /**
@@ -29,7 +33,17 @@ public class TaskList {
      * @param task <code>Task</code> to be added to the list.
      */
     public void add(Task task) {
-        this.toDoList.add(task);
+        if (!(task instanceof Event)) {
+            this.toDoList.add(task);
+            return;
+        }
+
+        LocalDate date = task.getDate();
+        if (dateList.contains(date)) {
+            throw new DateClashException("Date clash with other task");
+        }
+        dateList.add(date);
+        toDoList.add(task);
     }
 
     /**
