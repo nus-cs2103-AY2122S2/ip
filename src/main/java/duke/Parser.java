@@ -20,18 +20,13 @@ public class Parser {
      * @throws DukeException throws if the format of the message was incorrect, or if the message was not understood
      */
     public String processMessage(String message, TaskList tasks, Storage storage) throws DukeException {
-        String returnMessage = null;
-        String currMessage;
-        Task currTask;
-        int index;
-
         if (isExitCommand(message)) {
             return null;
         }
-
-        currMessage = getFirstWord(message);
-
-        switch (currMessage) {
+        String returnMessage = null;
+        String currentMessage = getFirstWord(message);
+        Task currentTask;
+        switch (currentMessage) {
         case "help":
             returnMessage = Ui.HELP;
             break;
@@ -39,51 +34,35 @@ public class Parser {
             returnMessage = getListAsString(tasks);
             break;
         case "sort":
-            String typeString = getKeyword(message);
-            SortType type = getSortType(typeString);
-            tasks.sort(type);
-            storage.modifyStorage(null, ConfirmCodes.SORT, tasks);
+            sortList(message, tasks, storage);
             returnMessage = getSortMessage(tasks);
             break;
         case "mark":
-            index = getIndexFromMessage(message); //get the index
-            currTask = tasks.getTaskAtIndex(index);
-            currTask.markDone();
-
-            returnMessage = markTaskMessage(currTask);
+            returnMessage = changeTaskMark(message, ConfirmCodes.MARK, tasks);
             break;
         case "unmark":
-            index = getIndexFromMessage(message); //get the index
-            currTask = tasks.getTaskAtIndex(index);
-            currTask.markUndone();
-
-            returnMessage = unmarkTaskMessage(currTask);
+            returnMessage = changeTaskMark(message, ConfirmCodes.UNMARK, tasks);
             break;
         case "delete":
-            index = getIndexFromMessage(message);
-            currTask = tasks.removeTask(index);
-            storage.modifyStorage(currTask, ConfirmCodes.DELETION, tasks);
-
-            returnMessage = deleteTaskMessage(currTask, tasks);
+            returnMessage = deleteTask(message, tasks, storage);
             break;
         case "find":
-            String keyword = getKeyword(message);
-            returnMessage = getResultsOfFind(keyword, tasks);
+            returnMessage = getResultsOfFind(message, tasks);
             break;
         case "todo":
-            currTask = parseMessageContents(message, TaskTypes.TODO);
-            addTask(currTask, storage, tasks);
-            returnMessage = addTaskMessage(currTask, tasks);
+            currentTask = parseMessageContents(message, TaskTypes.TODO);
+            addTask(currentTask, storage, tasks);
+            returnMessage = addTaskMessage(currentTask, tasks);
             break;
         case "deadline":
-            currTask = parseMessageContents(message, TaskTypes.DEADLINE);
-            addTask(currTask, storage, tasks);
-            returnMessage = addTaskMessage(currTask, tasks);
+            currentTask = parseMessageContents(message, TaskTypes.DEADLINE);
+            addTask(currentTask, storage, tasks);
+            returnMessage = addTaskMessage(currentTask, tasks);
             break;
         case "event":
-            currTask = parseMessageContents(message, TaskTypes.EVENT);
-            addTask(currTask, storage, tasks);
-            returnMessage = addTaskMessage(currTask, tasks);
+            currentTask = parseMessageContents(message, TaskTypes.EVENT);
+            addTask(currentTask, storage, tasks);
+            returnMessage = addTaskMessage(currentTask, tasks);
             break;
         default:
             throwInvalidInput();
@@ -99,37 +78,11 @@ public class Parser {
      * @return Task object
      */
     private Task parseMessageContents(String message, TaskTypes type) throws DukeException {
-        String[] messageArr;
-
         assert (message != null) : "message should not be null";
+        String[] messageArr = getMessageArray(message, type);
+        assert messageArr != null : "Message Array is not supposed to be null";
+        throwIfWrongFormat(message, messageArr, type);
 
-        switch (type) {
-        case TODO:
-            messageArr = getMessageArr(message, TaskTypes.TODO);
-            throwIfWrongFormat(message, messageArr, TaskTypes.TODO);
-            assert messageArr != null;
-            return new ToDo(messageArr[1]);
-        case DEADLINE:
-            messageArr = getMessageArr(message, TaskTypes.DEADLINE);
-            throwIfWrongFormat(message, messageArr, TaskTypes.DEADLINE);
-
-            assert messageArr != null;
-            return parseTask(messageArr, TaskTypes.DEADLINE);
-        case EVENT:
-            messageArr = getMessageArr(message, TaskTypes.EVENT);
-            throwIfWrongFormat(message, messageArr, TaskTypes.EVENT);
-
-            assert messageArr != null;
-            return parseTask(messageArr, TaskTypes.EVENT);
-        default:
-            throwInvalidTypeDeclaration();
-        }
-        assert false : "Runtime should not reach here";
-        return null; //should not reach here
-    }
-
-    @SuppressWarnings("checkstyle:Regexp")
-    private Task parseTask(String[] messageArr, TaskTypes type) throws DukeException {
         String description = getDescription(messageArr);
         String dateString = getDateString(messageArr);
         String timeBeginString = getTimeBeginString(messageArr, type);
@@ -137,19 +90,17 @@ public class Parser {
 
         LocalDate date = parseDateFromString(dateString, type);
         LocalTime timeBegin = parseTimeFromString(timeBeginString, type);
-        LocalTime timeEnd = null;
-
-        if (type == TaskTypes.EVENT) {
-            timeEnd = parseTimeFromString(timeEndString, TaskTypes.EVENT);
+        switch (type) {
+        case TODO:
+            return new ToDo(messageArr[1]);
+        case DEADLINE:
+            return new Deadline(description, date, timeBegin);
+        case EVENT:
+            LocalTime timeEnd = parseTimeFromString(timeEndString, TaskTypes.EVENT);
             assert timeEnd != null;
             throwIfEndTimeBeforeStartTime(timeBegin, timeEnd);
-        }
-
-        if (type == TaskTypes.DEADLINE) {
-            return new Deadline(description, date, timeBegin);
-        } else if (type == TaskTypes.EVENT) {
             return new Event(description, date, timeBegin, timeEnd);
-        } else {
+        default:
             throwInvalidTypeDeclaration();
         }
         assert false : "Runtime should not reach here";
@@ -241,7 +192,8 @@ public class Parser {
         return "Alright then! I've sorted the tasks accordingly: \n" + tasks;
     }
 
-    private String getResultsOfFind(String keyword, TaskList tasks) {
+    private String getResultsOfFind(String message, TaskList tasks) throws DukeException {
+        String keyword = getKeyword(message);
         String foundTasks = tasks.find(keyword);
         if (foundTasks.equals("")) {
             return "My apologies, but no tasks were found for the given keyword.";
@@ -294,7 +246,31 @@ public class Parser {
         }
     }
 
-    private String[] getMessageArr(String message, TaskTypes types) throws DukeException {
+    private String changeTaskMark(String message, ConfirmCodes code, TaskList tasks) throws DukeException {
+        int index = getIndexFromMessage(message); //get the index
+        Task currentTask = tasks.getTaskAtIndex(index);
+        switch (code) {
+        case MARK:
+            currentTask.markDone();
+            return markTaskMessage(currentTask);
+        case UNMARK:
+            currentTask.markUndone();
+            return unmarkTaskMessage(currentTask);
+        default:
+            throwInvalidTypeDeclaration();
+        }
+        assert false : "Runtime should not reach here";
+        return null;
+    }
+
+    private String deleteTask(String message, TaskList tasks, Storage storage) throws DukeException {
+        int index = getIndexFromMessage(message);
+        Task currentTask = tasks.removeTask(index);
+        storage.modifyStorage(currentTask, ConfirmCodes.DELETION, tasks);
+        return deleteTaskMessage(currentTask, tasks);
+    }
+
+    private String[] getMessageArray(String message, TaskTypes types) throws DukeException {
         if (types == TaskTypes.TODO) {
             return message.split(" ", 2);
         } else if (types == TaskTypes.DEADLINE || types == TaskTypes.EVENT) {
@@ -317,6 +293,14 @@ public class Parser {
     private void addTask(Task task, Storage storage, TaskList tasks) throws DukeException {
         tasks.addTask(task);
         storage.modifyStorage(task, ConfirmCodes.ADDITION, tasks);
+    }
+
+    private void sortList(String message, TaskList tasks, Storage storage) throws DukeException {
+        String typeString = getKeyword(message);
+        SortType type = getSortType(typeString);
+        assert type != null : "Sort type is not supposed to be null";
+        tasks.sort(type);
+        storage.modifyStorage(null, ConfirmCodes.SORT, tasks);
     }
 
     private void throwIfWrongFormat(String message, String[] messageArr, TaskTypes type) throws DukeException {
