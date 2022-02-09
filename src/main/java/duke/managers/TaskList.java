@@ -1,9 +1,14 @@
 package duke.managers;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.Ui;
+import duke.task.Deadline;
 import duke.task.Task;
+
 
 public class TaskList {
     protected ArrayList<Task> userTaskList;
@@ -142,17 +147,61 @@ public class TaskList {
             ui.print("You currently do not have any outstanding tasks! Great job! :D");
         } else {
             ui.println("Here are your tasks that satisfy your criteria:");
-            int secondaryCounter = 1;
+            int counter = 1;
             for (int i = 1; i <= numberOfTasks; i++) {
                 Task userTask = this.userTaskList.get(i - 1);
                 if (userTask.getTaskDescription().matches("^.*" + userFindTask + ".*$")) {
-                    ui.println((String.valueOf(secondaryCounter) + ": " + userTask));
-                    secondaryCounter++;
+                    ui.println((String.valueOf(counter) + ": " + userTask));
+                    counter++;
                 }
             }
-            assert (secondaryCounter <= this.getSize());
+            assert (counter <= this.getSize());
             ui.print("");
         }
+    }
+
+    /**
+     * Checks if a date is between current date and an end date
+     *
+     * @param taskDeadlineDate
+     * @param endDate
+     * @return
+     */
+    public boolean taskWithinDate(LocalDate taskDeadlineDate, LocalDate endDate) {
+        LocalDate currentDate = LocalDate.now();
+        long daysFromCurrentDate = ChronoUnit.DAYS.between(currentDate, taskDeadlineDate);
+        long daysBeforeReminderEndDate = ChronoUnit.DAYS.between(taskDeadlineDate, endDate);
+        boolean isAfterCurrentDate = daysFromCurrentDate >= 0;
+        boolean isBeforeReminderEndDate = daysBeforeReminderEndDate >= 0;
+        if ((isAfterCurrentDate) & (isBeforeReminderEndDate)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Gives reminder of upcoming deadlines within the next week
+     *
+     * @param reminderEndDate
+     */
+    public void remindUserTasks(LocalDate reminderEndDate) {
+        int numberOfTasks = this.userTaskList.size();
+        String remindEndDateFormatted = reminderEndDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String message = String.format("Here are the upcoming deadlines that you have by %s:", remindEndDateFormatted);
+        ui.println(message);
+        int counter = 1;
+        for (int i = 1; i <= numberOfTasks; i++) {
+            Task userTask = this.userTaskList.get(i - 1);
+            if (userTask instanceof Deadline) {
+                if (taskWithinDate(((Deadline) userTask).getDeadlineDate(), reminderEndDate)) {
+                    ui.println((String.valueOf(counter) + ": " + userTask));
+                    counter++;
+                }
+            }
+        }
+        assert (counter <= this.getSize());
+        ui.print("");
     }
 
     /**

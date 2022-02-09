@@ -19,28 +19,31 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns deadline date in the format of "MMM dd yyyy"
+     * Returns deadline date
      *
-     * @return string representing deadline date in "MMM dd yyyy"
+     * @return LocalDate representing the deadline date
      */
-    public String getDeadlineDate() {
-        return this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    public LocalDate getDeadlineDate() {
+        return this.deadlineDate;
     }
 
     /**
      * returns deadline in save data format (format to be saved in data.txt file for task storage)
+     * deadline date is in the format of "MMM dd yyyy"
      * @return string representing the format it is saved in
      */
     @Override
     public String toSaveDataFormat() {
+        String deadlineDateFormatted = this.getDeadlineDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String isDone = (super.checkIsDone() == true) ? "1" : "0";
         return String.format("%s|%s|%s|%s\n", super.getTag(), isDone,
-                super.getTaskDescription(), this.getDeadlineDate());
+                super.getTaskDescription(), deadlineDateFormatted);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (By: " + this.getDeadlineDate() + ")";
+        String deadlineDateFormatted = this.getDeadlineDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return super.toString() + " (By: " + deadlineDateFormatted + ")";
     }
 
 }
