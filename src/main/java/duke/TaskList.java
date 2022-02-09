@@ -13,6 +13,9 @@ public class TaskList {
      *
      */
     public static String printTheList(ArrayList<Task> storeList) {
+        if (storeList.size() == 0) {
+            return "Sorry Master, I have nothing in my brain";
+        }
         StringBuffer sb = new StringBuffer();
         for (Task s : storeList) {
             sb.append(s.toString());
@@ -34,8 +37,9 @@ public class TaskList {
             return "Master, you wished wrongly. Remember you have to wish in this format " + "\n"
                     + "delete tasknumber. Please wish again";
         } else {
+            assert Integer.parseInt(command.substring(7)) <= storeList.size() : command.substring(7);
             try {
-                Task t = storeList.get(Integer.parseInt(command.substring(7)) + 1);
+                Task t = storeList.get(Integer.parseInt(command.substring(7)) - 1);
                 storeList.remove(Integer.parseInt(command.substring(7)));
                 return "Yes master. The task " + t.toString() + " has been removed " + "\n" + "Now you have "
                         + storeList.size() + " tasks left master";
