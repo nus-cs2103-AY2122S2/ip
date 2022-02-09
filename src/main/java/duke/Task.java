@@ -2,7 +2,12 @@ package duke;
 
 import java.util.ArrayList;
 
-public class Task {
+/**
+ * Represents the Task class which contains 
+ * the description of a specific task and its
+ * status.
+ */
+class Task {
     protected String description;
     protected ArrayList<Boolean> isDone;
 

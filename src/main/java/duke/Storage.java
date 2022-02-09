@@ -6,6 +6,11 @@ import java.io.File;
 
 import java.io.IOException;
 
+/**
+ * Represents the storage class which is responsible
+ * to store different tasks into a specific file or 
+ * to read different tasks from a specific file.
+ */
 class Storage {
     private ArrayList<Task> taskArray;
     private String path;
@@ -16,6 +21,11 @@ class Storage {
         this.path = path;
     }
 
+    /**
+     * Loads the different tasks from a specific file.
+     * If the file does not exist at the given path,
+     * a new file will then be created.
+     */
     public File load() {
         FileClass fc = new FileClass(); //file class 
         String homePath = HOME + "/data";
@@ -26,6 +36,11 @@ class Storage {
         return file;
     }
 
+    /**
+     * Writes the output to a specific file.
+     * If the file does not exist at the given path,
+     * a new file will then be created.
+     */
     public void writeFile() {
         FileClass fc = new FileClass();
         String filePath = HOME + "/data/stored.txt";
@@ -45,6 +60,9 @@ class Storage {
 
     }
     
+    /**
+     * Returns an ArrayList which contains different tasks.
+     */
     public ArrayList<Task> getList() {
         return this.taskArray;
     }
