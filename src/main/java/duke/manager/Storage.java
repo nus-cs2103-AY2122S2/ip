@@ -41,6 +41,7 @@ public class Storage {
         try {
             fileIn = new FileInputStream(filePath);
             in = new ObjectInputStream(fileIn);
+            @SuppressWarnings("unchecked")
             ArrayList<Task> tasks = (ArrayList<Task>) in.readObject();
             assert tasks instanceof ArrayList;
             return tasks;

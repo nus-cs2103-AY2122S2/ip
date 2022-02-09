@@ -9,6 +9,9 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.UpdateDeadlineCommand;
+import duke.command.UpdateEventCommand;
+import duke.command.UpdateToDoCommand;
 import duke.exception.DukeException;
 
 
@@ -18,14 +21,13 @@ import duke.exception.DukeException;
 public class Parser {
 
     /**
-     *
      * Returns the appropriate command depending on the fullCommand input that was given by the user.
      *
      * @param fullCommand A string, to be parsed, that was taken in from the user of the program.
      * @return The appropriate command depending on the parsed input.
      * @throws DukeException If an invalid task number was given,
-     *                      date/time was not given,
-     *                      empty task description or invalid command.
+     *                       date/time was not given,
+     *                       empty task description or invalid command.
      */
     public Command parse(String fullCommand) throws DukeException {
         fullCommand = fullCommand.trim();
@@ -50,6 +52,8 @@ public class Parser {
             return parseExitCommand();
         case "find":
             return parseFindCommand(fullCommand);
+        case "update":
+            return parseUpdateCommand(fullCommand);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -170,5 +174,30 @@ public class Parser {
     private ExitCommand parseExitCommand() {
         return new ExitCommand();
     }
+
+    /**
+     * Returns the appropriate Command to update the task.
+     *
+     * @param fullCommand The full command that was given by the user.
+     * @return An update Command that is specific to the type of task to update.
+     * @throws DukeException If a task type was not specific or the format was not adhered to.
+     */
+    private Command parseUpdateCommand(String fullCommand) throws DukeException {
+        String[] arguments = fullCommand.split(" ");
+        if (arguments.length <= 3) {
+            throw new DukeException("Please follow the command format!");
+        }
+        switch (arguments[1]) {
+        case "event":
+            return new UpdateEventCommand(fullCommand);
+        case "deadline":
+            return new UpdateDeadlineCommand(fullCommand);
+        case "todo":
+            return new UpdateToDoCommand(fullCommand);
+        default:
+            throw new DukeException("OOPS!!! Please enter a task type!");
+        }
+    }
+
 
 }

@@ -36,6 +36,18 @@ public class Event extends Task {
     }
 
     /**
+     * A constructor that stores the name of the task and the due date in a LocalDate format.
+     *
+     * @param taskName The name of the task.
+     * @param date The LocalDate representation of the date.
+     */
+    public Event(String taskName, LocalDate date) {
+        super(taskName);
+        assert taskName.length() > 0;
+        this.date = date;
+    }
+
+    /**
      * Returns the String representation of the task.
      *
      * @return A String representation of the task.
@@ -61,5 +73,14 @@ public class Event extends Task {
         } else {
             return true;
         }
+    }
+
+    /**
+     * Returns the LocalDate date of this Event.
+     *
+     * @return The LocalDate date of this Event.
+     */
+    public LocalDate getDate() {
+        return this.date;
     }
 }
