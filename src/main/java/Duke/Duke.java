@@ -17,7 +17,7 @@ public class Duke {
     private static final UiPrinter myUiPrinter = new UiPrinter();
     private static Disk myDisk;
     /**
-     * Empty contructor for Duke
+     * Empty constructor for Duke
      */
     public Duke() {
         myDisk = new Disk("src/main/java/data/savedTasks.txt", myListStorage);
