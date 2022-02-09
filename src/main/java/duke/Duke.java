@@ -2,20 +2,24 @@ package duke;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Represents a Duke chat bot and task management system.
  */
-public class Duke {
+public class Duke extends Application {
     private static final String NAME = "Cindy's Duke Bot";
-    private final String path;
+    private static final String PATH = "./duke.txt";
 
-    /**
-     * Class constructor.
-     *
-     * @param path path of file to read data from and store data to.
-     */
-    public Duke(String path) {
-        this.path = path;
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
@@ -24,7 +28,7 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
         TaskList taskList = new TaskList();
-        Storage storage = new Storage(path);
+        Storage storage = new Storage(PATH);
         Ui ui = new Ui(NAME);
         Parser parser = new Parser(sc, taskList);
 
@@ -40,7 +44,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./duke.txt").run();
+        new Duke().run();
     }
 }
 
