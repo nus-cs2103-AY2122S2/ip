@@ -116,6 +116,7 @@ public class Parser {
             for (String line : rawTaskList) {
                 String[] lineSplit = line.split(" ");
                 ArrayList<String> nextTask = null;
+                assert line.length() >= 1;
 
                 if (line.charAt(1) == 'T') {
                     nextTask = parseTask(line);
@@ -148,6 +149,7 @@ public class Parser {
     public static ArrayList<String> parseInput(String input) throws MnskyException {
         String[] inputSplit = input.split(" ");
         ArrayList<String> parsedInput = new ArrayList<>();
+        assert inputSplit.length >= 1;
         parsedInput.add(inputSplit[0]);
 
         switch (inputSplit[0]) {

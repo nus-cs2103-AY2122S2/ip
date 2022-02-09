@@ -114,7 +114,7 @@ public class Mnsky {
 
         try {
             ArrayList<String> parsedInput = Parser.parseInput(input);
-
+            assert parsedInput.size() >= 1;
             switch (parsedInput.get(0)) {
             case "hi":
                 responses.add(ui.printGreeting());

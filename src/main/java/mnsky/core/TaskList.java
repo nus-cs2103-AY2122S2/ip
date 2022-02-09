@@ -49,9 +49,8 @@ public class TaskList {
     /**
      * Creates a new event (a task with an "at" parameter included) based on the parameters.
      * @return The new event.
-     * @throws MnskyException If the name or the at parameter is missing.
      */
-    public Event addEvent(String name, String at) throws MnskyException {
+    public Event addEvent(String name, String at) {
         String[] atSplit = at.split(" ");
         LocalDate atDate = null;
         LocalTime atTime = null;
@@ -74,7 +73,6 @@ public class TaskList {
     /**
      * Creates a new deadline (a task with a "by" parameter included) based on the parameters.
      * @return The new deadline.
-     * @throws MnskyException If the name or the by parameter is missing.
      */
     public Deadline addDeadline(String name, String by) {
         String[] bySplit = by.split(" ");
@@ -188,6 +186,7 @@ public class TaskList {
         ArrayList<ArrayList<String>> taskList = Parser.parseStorageData(storage.readFromDataFile());
         for (ArrayList<String> task : taskList) {
             Task actualTask;
+            assert task.size() > 3;
             switch (task.get(0)) {
             case "task":
                 actualTask = addTask(task.get(1));
@@ -202,7 +201,7 @@ public class TaskList {
                 break;
 
             default:
-                throw new MnskyException("????");
+                throw new MnskyException("[MNSKY could not remember the storage data...]");
             }
 
             if (actualTask != null) {
