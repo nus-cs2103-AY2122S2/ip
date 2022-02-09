@@ -19,11 +19,11 @@ public class CDelete extends Command{
     }
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) throws DukeException {
+    public String runCommand(Ui ui, TaskList taskList) throws DukeException {
         try {
             Task deleteTask = taskList.getTask(this.getDeleteIndex());
             taskList.deleteTask(this.getDeleteIndex());
-            ui.respondDeleteTask(deleteTask, taskList);
+            return ui.respondDeleteTask(deleteTask, taskList);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");
         }

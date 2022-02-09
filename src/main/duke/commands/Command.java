@@ -20,5 +20,5 @@ public abstract class Command {
 
     public CommandType getCommandType() { return this.commandType; }
 
-    public abstract void runCommand(Ui ui, TaskList taskList) throws DukeException;
+    public abstract String runCommand(Ui ui, TaskList taskList) throws DukeException;
 }

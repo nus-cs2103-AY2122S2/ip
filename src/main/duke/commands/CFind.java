@@ -19,7 +19,7 @@ public class CFind extends Command{
     public String getFindString() { return this.findString; }
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) throws DukeException {
+    public String runCommand(Ui ui, TaskList taskList) throws DukeException {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (int i = 0; i < taskList.getTasksCount(); i++) {
             Task curTask = taskList.getTask(i);
@@ -27,6 +27,6 @@ public class CFind extends Command{
                 foundTasks.add(curTask);
             }
         }
-        ui.respondFindTask(foundTasks);
+        return ui.respondFindTask(foundTasks);
     }
 }

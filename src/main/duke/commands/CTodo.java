@@ -19,9 +19,9 @@ public class CTodo extends Command{
     }
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) {
+    public String runCommand(Ui ui, TaskList taskList) {
         Task newToDo = new ToDo(this.getDescription());
         taskList.addTask(newToDo);
-        ui.respondAddTask(newToDo, taskList);
+        return ui.respondAddTask(newToDo, taskList);
     }
 }

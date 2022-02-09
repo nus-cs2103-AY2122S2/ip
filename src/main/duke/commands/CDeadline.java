@@ -25,9 +25,9 @@ public class CDeadline extends Command {
     }
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) {
+    public String runCommand(Ui ui, TaskList taskList) {
         Task newDeadline = new Deadline(this.getDescription(), this.getDueDate());
         taskList.addTask(newDeadline);
-        ui.respondAddTask(newDeadline, taskList);
+        return ui.respondAddTask(newDeadline, taskList);
     }
 }

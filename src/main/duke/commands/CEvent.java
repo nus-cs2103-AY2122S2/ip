@@ -26,9 +26,9 @@ public class CEvent extends Command {
 
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) {
+    public String runCommand(Ui ui, TaskList taskList) {
         Task newEvent = new Event(this.getDescription(), this.getDateTime());
         taskList.addTask(newEvent);
-        ui.respondAddTask(newEvent, taskList);
+        return ui.respondAddTask(newEvent, taskList);
     }
 }

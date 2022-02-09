@@ -19,11 +19,11 @@ public class CMark extends Command{
     }
 
     @Override
-    public void runCommand(Ui ui, TaskList taskList) throws DukeException {
+    public String runCommand(Ui ui, TaskList taskList) throws DukeException {
         try {
             Task markTask = taskList.getTask(this.getMarkIndex());
             markTask.setIsDone(true);
-            ui.respondMark(markTask);
+            return ui.respondMark(markTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");
         }
