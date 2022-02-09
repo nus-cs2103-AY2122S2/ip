@@ -14,13 +14,4 @@ public class ExitCommand extends Command {
         return new CommandResult(DEFAULT_MESSAGE, true);
     }
 
-    /**
-     * Returns true as this is the exit command.
-     *
-     * @return True as this is the exit command.
-     */
-    @Override
-    public boolean isExitCmd() {
-        return true;
-    }
 }

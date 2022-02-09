@@ -31,6 +31,7 @@ public abstract class ReadCommand extends Command {
     public CommandResult readTaskList(TaskList taskList, String emptyMsg, String startMsg, boolean isFiltered) {
         String msg = emptyMsg;
         boolean isEmpty = true;
+        //Since task list may be fully filtered but not empty, require this check to see if tasks are filtered
         if (!taskList.isEmpty()) {
             msg = startMsg;
             for (int i = 0; i < taskList.size(); i++) {

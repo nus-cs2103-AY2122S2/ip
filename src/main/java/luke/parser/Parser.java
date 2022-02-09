@@ -28,9 +28,14 @@ import luke.data.tasks.Todo;
  * Implements the parser class which parses user input and returns commands to execute.
  */
 public class Parser {
-    /**
-     * Map of accepted user commands tied to the respective command action type.
-     */
+    private static final String INVALID_DATE_FORMAT_MESSAGE = "The force does not comprehend the date.";
+    private static final String INVALID_NUMBER_FORMAT_MESSAGE = "The force cannot convert the value to a number.";
+    private static final String EMPTY_DESCRIPTION_MESSAGE = "The description of %s cannot be empty.";
+    private static final String MISSING_ARGUMENT_MESSAGE = "%s require the %s argument.";
+    private static final String MISSING_KEYWORD_MESSAGE = "find command requires a keyword argument.";
+    private static final String MISSING_INDEX_MESSAGE = "The index of %s cannot be empty.";
+    private static final String COMMAND_NOT_FOUND = "Command not found.";
+    /* Map of accepted user commands tied to the respective command action type. */
     private static Map<String, CommandAction> commandActionMap = new HashMap<>() {{
             put("bye", CommandAction.EXIT);
             put("list", CommandAction.LIST);
@@ -52,27 +57,27 @@ public class Parser {
     public static Command parse(String input) {
         String[] inputs = input.split(" ", 2);
         try {
-            if (commandActionMap.containsKey(inputs[0])) {
-                CommandAction cmdAction = commandActionMap.get(inputs[0]);
-                assert(cmdAction != null);
-                switch (cmdAction.getCommandActionType()) {
-                case NO_ACTION:
-                    return new ExitCommand();
-                case READ:
-                    return prepareReadCommand(cmdAction, inputs);
-                case ADD:
-                    return prepareAddCommand(cmdAction, inputs);
-                case UPDATE:
-                    return prepareUpdateCommand(cmdAction, inputs);
-                default:
-                    break;
-                }
+            if (!commandActionMap.containsKey(inputs[0])) {
+                return new InvalidCommand();
             }
-            return new InvalidCommand();
+            CommandAction cmdAction = commandActionMap.get(inputs[0]);
+            assert(cmdAction != null);
+            switch (cmdAction.getCommandActionType()) {
+            case NO_ACTION:
+                return new ExitCommand();
+            case READ:
+                return prepareReadCommand(cmdAction, inputs);
+            case ADD:
+                return prepareAddCommand(cmdAction, inputs);
+            case UPDATE:
+                return prepareUpdateCommand(cmdAction, inputs);
+            default:
+                return new InvalidCommand();
+            }
         } catch (NumberFormatException e) {
-            return new InvalidCommand("The force cannot convert the value to a number.");
+            return new InvalidCommand(INVALID_NUMBER_FORMAT_MESSAGE);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand("The force does not comprehend the date.");
+            return new InvalidCommand(INVALID_DATE_FORMAT_MESSAGE);
         } catch (IllegalArgumentException e) {
             return new InvalidCommand(e.getMessage());
         }
@@ -84,6 +89,7 @@ public class Parser {
      * @param cmdAction The command action tied to the user input.
      * @param args      The arguments that the user have supplied.
      * @return The appropriate read command based on user input.
+     * @throws IllegalArgumentException If the command is not a read command.
      */
     private static ReadCommand prepareReadCommand(CommandAction cmdAction, String[] args) {
         assert(cmdAction.getCommandActionType() == ActionType.READ);
@@ -91,8 +97,10 @@ public class Parser {
         case FIND:
             String keyword = parseFindArgument(args);
             return new FindCommand(keyword);
-        default:
+        case LIST:
             return new ListCommand();
+        default:
+            throw new IllegalArgumentException(COMMAND_NOT_FOUND);
         }
     }
 
@@ -103,6 +111,7 @@ public class Parser {
      * @param cmdAction The command action tied to the user input.
      * @param args      The arguments that the user have supplied.
      * @return The appropriate update command based on user input.
+     * @throws IllegalArgumentException If the command is not a update command.
      */
     private static UpdateCommand prepareUpdateCommand(CommandAction cmdAction, String[] args) {
         assert(cmdAction.getCommandActionType() == ActionType.UPDATE);
@@ -112,8 +121,10 @@ public class Parser {
             return new MarkCommand(index);
         case UNMARK:
             return new UnmarkCommand(index);
-        default:
+        case DELETE:
             return new DeleteCommand(index);
+        default:
+            throw new IllegalArgumentException(COMMAND_NOT_FOUND);
         }
     }
 
@@ -123,6 +134,7 @@ public class Parser {
      * @param cmdAction The command action tied to the user input.
      * @param args      The arguments that the user have supplied.
      * @return The appropriate add command based on user input.
+     * @throws IllegalArgumentException If the command is not an add command.
      */
     private static AddCommand prepareAddCommand(CommandAction cmdAction, String[] args) {
         assert(cmdAction.getCommandActionType() == ActionType.ADD);
@@ -132,8 +144,10 @@ public class Parser {
             return new DeadlineCommand(new Deadline(argsMap));
         case EVENT:
             return new EventCommand(new Event(argsMap));
-        default:
+        case TODO:
             return new TodoCommand(new Todo(argsMap));
+        default:
+            throw new IllegalArgumentException(COMMAND_NOT_FOUND);
         }
     }
 
@@ -151,23 +165,23 @@ public class Parser {
         assert(cmdAction.getCommandActionType() == ActionType.ADD);
         Map<String, String> argsMap = new HashMap<>();
         if (args.length < 2) {
-            throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
+            throw new IllegalArgumentException(String.format(EMPTY_DESCRIPTION_MESSAGE, args[0]));
         }
         String[] inputs = args[1].split("/", 2);
         if (inputs[0].isBlank()) {
-            throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
+            throw new IllegalArgumentException(String.format(EMPTY_DESCRIPTION_MESSAGE, args[0]));
         }
         argsMap.put("description", inputs[0]);
         if (cmdAction != CommandAction.TODO) {
             String extraArg = cmdAction.getArgumentKeys().split(",", 2)[1];
             if (inputs.length < 2) {
-                throw new IllegalArgumentException(String.format("%s require the %s argument.", args[0], extraArg));
+                throw new IllegalArgumentException(String.format(MISSING_ARGUMENT_MESSAGE, args[0], extraArg));
             }
             inputs = inputs[1].split(" ", 2);
             if (inputs[0].equalsIgnoreCase(extraArg)) {
                 argsMap.put(extraArg, inputs[1]);
             } else {
-                throw new IllegalArgumentException(String.format("%s require the %s argument.", args[0], extraArg));
+                throw new IllegalArgumentException(String.format(MISSING_ARGUMENT_MESSAGE, args[0], extraArg));
             }
         }
         return argsMap;
@@ -182,11 +196,11 @@ public class Parser {
      */
     public static String parseFindArgument(String[] args) throws IllegalArgumentException {
         if (args.length < 2) {
-            throw new IllegalArgumentException(String.format("find command requires a keyword argument.", args[0]));
+            throw new IllegalArgumentException(String.format(MISSING_KEYWORD_MESSAGE, args[0]));
         }
 
         if (args[1].isBlank()) {
-            throw new IllegalArgumentException(String.format("find command requires a keyword argument.", args[0]));
+            throw new IllegalArgumentException(String.format(MISSING_KEYWORD_MESSAGE, args[0]));
         }
 
         return args[1];
@@ -201,7 +215,7 @@ public class Parser {
      */
     private static int parseUpdateArguments(String[] args) throws IllegalArgumentException {
         if (args.length < 2) {
-            throw new IllegalArgumentException(String.format("The index of %s cannot be empty.", args[0]));
+            throw new IllegalArgumentException(String.format(MISSING_INDEX_MESSAGE, args[0]));
         }
         return Integer.parseInt(args[1]);
     }

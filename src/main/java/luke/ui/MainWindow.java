@@ -19,6 +19,7 @@ import luke.commands.Result;
 public class MainWindow extends AnchorPane {
 
     private static final String GREETING_MESSAGE = "Hello! I am Luke! \nHow can I help you?";
+    private static final int EXIT_DELAY_DURATION = 3;
 
     @FXML
     private ScrollPane scrollPane;
@@ -63,7 +64,7 @@ public class MainWindow extends AnchorPane {
         if (result.isExit()) {
             userInput.setDisable(true);
             sendButton.setDisable(true);
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            PauseTransition delay = new PauseTransition(Duration.seconds(EXIT_DELAY_DURATION));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
