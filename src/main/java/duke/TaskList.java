@@ -48,7 +48,11 @@ public class TaskList {
         System.out.println(INDENT + "Got it. I've added this task:");
         int n = tasks.size();
         System.out.println(INDENT + "  " + tasks.get(n - 1));
-        System.out.println(INDENT + "Now you have " + n + " tasks in the list.");
+        System.out.print(INDENT + "Now you have " + n + " task");
+        if (n > 1) {
+            System.out.print("s");
+        }
+        System.out.println(" in the list.");
     }
 
     public void list() {
@@ -84,7 +88,11 @@ public class TaskList {
         Task t = tasks.remove(index);
         System.out.println(INDENT + "Noted. I've removed this task:");
         System.out.println(INDENT + "  " + t);
-        System.out.println(INDENT + "Now you have " + tasks.size() + " tasks in the list.");
+        System.out.print(INDENT + "Now you have " + tasks.size() + " task");
+        if (tasks.size() > 1) {
+            System.out.print("s");
+        }
+        System.out.println(" in the list.");
     }
 
     @Override

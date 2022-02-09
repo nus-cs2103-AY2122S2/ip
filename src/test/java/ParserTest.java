@@ -135,7 +135,7 @@ public class ParserTest {
         new Parser(new Scanner("mark 1\nbye"), taskList).parse();
         assertEquals(SEG_LINE + "\n"
                         + INDENT + "Nice! I've marked this task as done:\n"
-                        + INDENT + " [T][X] read book\n"
+                        + INDENT + "  [T][X] read book\n"
                         + SEG_LINE + "\n" + BYE_PHRASE,
                 myOut.toString());
     }
@@ -148,7 +148,7 @@ public class ParserTest {
         new Parser(new Scanner("unmark 1\nbye"), taskList).parse();
         assertEquals(SEG_LINE + "\n"
                         + INDENT + "OK, I've marked this task as not done yet:\n"
-                        + INDENT + " [T][ ] read book\n"
+                        + INDENT + "  [T][ ] read book\n"
                         + SEG_LINE + "\n" + BYE_PHRASE,
                 myOut.toString());
     }
@@ -161,8 +161,8 @@ public class ParserTest {
         new Parser(new Scanner("delete 1\nbye"), taskList).parse();
         assertEquals(SEG_LINE + "\n"
                         + INDENT + "Noted. I've removed this task:\n"
-                        + INDENT + " [T][ ] read book\n"
-                        + INDENT + "Now you have 0 task in the list."
+                        + INDENT + "  [T][ ] read book\n"
+                        + INDENT + "Now you have 0 task in the list.\n"
                         + SEG_LINE + "\n" + BYE_PHRASE,
                 myOut.toString());
     }
