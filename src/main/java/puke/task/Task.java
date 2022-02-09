@@ -5,7 +5,7 @@ package puke.task;
  */
 public abstract class Task {
     protected final String name;
-    protected int status; // 0: undone, 1: done
+    protected boolean isDone;
 
     /**
      * Initialises the task with the task name.
@@ -14,7 +14,7 @@ public abstract class Task {
      */
     Task(String taskName) {
         this.name = taskName;
-        this.status = 0;
+        this.isDone = false;
     }
 
     /**
@@ -23,21 +23,21 @@ public abstract class Task {
      * @return true if done; false otherwise.
      */
     public boolean isDone() {
-        return status == 1;
+        return isDone;
     }
 
     /**
      * Marks the task as done.
      */
     public void mark() {
-        this.status = 1;
+        this.isDone = true;
     }
 
     /**
      * Marks the task as undone.
      */
     public void unmark() {
-        this.status = 0;
+        this.isDone = false;
     }
 
     /**
