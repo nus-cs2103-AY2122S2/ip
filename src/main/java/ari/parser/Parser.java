@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 import ari.command.ByeCommand;
 import ari.command.Command;
 import ari.command.DeadlineCommand;
@@ -15,6 +16,7 @@ import ari.command.ListCommand;
 import ari.command.MarkCommand;
 import ari.command.TodoCommand;
 import ari.command.UnmarkCommand;
+import ari.command.ViewCommand;
 import ari.exception.AriException;
 import ari.exception.CommandFormatException;
 import ari.exception.DateTimeParseException;
@@ -57,6 +59,8 @@ public class Parser {
             return prepareDelete(command);
         case FindCommand.COMMAND_WORD:
             return prepareFind(command);
+        case ViewCommand.COMMAND_WORD:
+            return prepareView(command);
         default:
             return new IncorrectCommand("I am sorry Master, I am afraid I do not know what you mean");
         }
@@ -237,6 +241,22 @@ public class Parser {
             return new FindCommand(getArgument(desc));
         } catch (EmptyCommandException emptyEx) {
             return new IncorrectCommand(emptyEx.getMessage());
+        }
+    }
+
+    /**
+     * Returns FindCommand if desc is valid else IncorrectCommand
+     *
+     * @param desc description of task
+     * @return FindCommand
+     */
+    private Command prepareView(String desc) {
+        try {
+            return new ViewCommand(checkDateFormat(getArgument(desc)));
+        } catch (EmptyCommandException emptyEx) {
+            return new IncorrectCommand(emptyEx.getMessage());
+        } catch (DateTimeParseException dateEx) {
+            return new IncorrectCommand(dateEx.getMessage());
         }
     }
 

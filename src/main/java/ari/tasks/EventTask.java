@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Task for Events
  */
-public class EventTask extends Task {
-    protected String time;
-    protected LocalDate nowTime;
+public class EventTask extends Task implements Dateable {
+    protected String date;
+    protected LocalDate eventDate;
 
     /**
      * Constructor of EventTask
@@ -19,8 +19,8 @@ public class EventTask extends Task {
      */
     public EventTask(String description, String eventTime, LocalDate date) {
         super.taskDescription = description;
-        this.time = eventTime;
-        this.nowTime = date;
+        this.date = eventTime;
+        this.eventDate = date;
     }
 
     /**
@@ -30,7 +30,7 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + eventDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 
     /**
@@ -40,6 +40,10 @@ public class EventTask extends Task {
      */
     @Override
     public String writeToFile() {
-        return "event " + super.writeToFile() + "/at " + nowTime.toString();
+        return "event " + super.writeToFile() + "/at " + eventDate.toString();
+    }
+
+    public LocalDate getDate() {
+        return eventDate;
     }
 }

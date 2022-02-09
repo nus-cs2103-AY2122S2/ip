@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * Reprensents a Task with Deadline
  */
-public class DeadlineTask extends Task {
-    protected String time;
-    protected LocalDate nowTime;
+public class DeadlineTask extends Task implements Dateable {
+    protected String date;
+    protected LocalDate deadlineDate;
 
     /**
      * Constructor of DeadlineTask
@@ -19,8 +19,8 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String description, String deadline, LocalDate date) {
         super.taskDescription = description;
-        this.time = deadline;
-        this.nowTime = date;
+        this.date = deadline;
+        this.deadlineDate = date;
     }
 
     /**
@@ -30,7 +30,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 
     /**
@@ -40,7 +40,11 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String writeToFile() {
-        return "deadline " + super.writeToFile() + "/by " + time;
+        return "deadline " + super.writeToFile() + "/by " + date;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return deadlineDate;
+    }
 }
