@@ -23,13 +23,21 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Outputs the due date-time of the Deadline.
+     *
+     * @return due date-time.
+     */
+    public LocalDateTime getBy() {
+        return by;
+    }
 
     /**
      * Outputs the deadline of the task as formatted string.
      *
      * @return deadline as a string.
      */
-    public String getBy() {
+    public String getFormattedBy() {
         return by.format(DateTimeFormatter.ofPattern("h:mm a MMM dd yyyy"));
     }
 
@@ -61,6 +69,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getBy() + ")";
+        return "[D]" + super.toString() + " (by: " + getFormattedBy() + ")";
     }
 }

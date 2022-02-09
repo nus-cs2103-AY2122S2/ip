@@ -12,5 +12,6 @@ public enum CommandType {
     CREATE_EVENT,
     LIST,
     DELETE,
-    FIND
+    FIND,
+    SORT
 }
