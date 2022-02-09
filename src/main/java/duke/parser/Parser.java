@@ -44,7 +44,7 @@ public class Parser {
         case REMOVE:
             return new RemoveCommand(taskList, userInput);
         case FIND:
-            return new FindCommand(taskList, userInput);
+            return new FindCommand(userInput);
         case BYE:
             return new ByeCommand();
         default:
