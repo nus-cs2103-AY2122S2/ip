@@ -5,33 +5,33 @@ package duke.task;
  */
 public class Event extends Task {
 
-    private final String at;
+    private final String eventLocation;
 
     /**
      * Constructor for event task.
      * @param activity the activity that needs to be done.
-     * @param at the location of the event.
+     * @param eventLocation the location of the event.
      */
-    public Event(String activity, String at) {
+    public Event(String activity, String eventLocation) {
         super(activity, "E");
-        assert at != null;
-        this.at = at;
+        assert eventLocation != null;
+        this.eventLocation = eventLocation;
     }
 
     /** {@inheritDoc} */
     @Override
     public String printTask() {
         if (this.isMarked) {
-            return "[" + type + "][X] " + activity + " (at " + at + ")";
+            return "[" + type + "][X] " + activity + " (at " + eventLocation + ")";
         } else {
-            return "[" + type + "][ ] " + activity + " (at " + at + ")";
+            return "[" + type + "][ ] " + activity + " (at " + eventLocation + ")";
         }
     }
 
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return type + "|" + isMarked + "|" + activity + "|" + at + "|\n";
+        return type + "|" + isMarked + "|" + activity + "|" + eventLocation + "|\n";
     }
 
 }

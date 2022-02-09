@@ -27,8 +27,8 @@ import duke.task.Todo;
 public class Parser {
 
     // Global constant commands.
-    private static final SimpleDateFormat taskFormat = new SimpleDateFormat("MMM dd yyyy");
-    private static final SimpleDateFormat savedFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat TASK_FORMAT = new SimpleDateFormat("MMM dd yyyy");
+    private static final SimpleDateFormat SAVED_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     private static final Command EXIT_COMMAND = new ExitCommand();
     private static final Command LIST = new ListCommand();
@@ -72,7 +72,7 @@ public class Parser {
         case "D":
             String tmp = splitStr[3];
             try {
-                timeOrPlace = savedFormat.format(taskFormat.parse(tmp));
+                timeOrPlace = SAVED_FORMAT.format(TASK_FORMAT.parse(tmp));
             } catch (ParseException e) { // Corrupted Save File.
                 e.printStackTrace();
             }
