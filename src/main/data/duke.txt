@@ -1,5 +1,1 @@
 T | 0 | yay
-T | 1 | four
-T | 1 | hwwww
-T | 1 | party 
-D | 0 | hw  | 2022-02-02T10:30
