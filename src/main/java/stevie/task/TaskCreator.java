@@ -3,6 +3,7 @@ package stevie.task;
 import java.util.Date;
 
 import stevie.exception.TaskException;
+import stevie.exception.messages.TaskExceptionMessages;
 
 /**
  * Class to handle the creation of tasks. When a new task is added, update or add a new create method in
@@ -32,7 +33,7 @@ public class TaskCreator {
             newTask = new DeadlineTask(taskName, date);
             break;
         default:
-            throw new TaskException("There is no such task!");
+            throw new TaskException(TaskExceptionMessages.InvalidTaskTypeError);
         }
         assert newTask != null;
         if (done) {
@@ -58,32 +59,12 @@ public class TaskCreator {
             newTask = new ToDoTask(taskName);
             break;
         default:
-            throw new TaskException("There is no such task!");
+            throw new TaskException(TaskExceptionMessages.InvalidTaskTypeError);
         }
         assert newTask != null;
         if (done) {
             newTask.done();
         }
         return newTask;
-    }
-
-    /**
-     * Returns the type of the task, based on a character.
-     *
-     * @param eventChar character that represents a type of task
-     * @return task type with starting character that matches the character
-     * @throws TaskException if character supplied does not match any of the task type
-     */
-    public static TaskType charToType(char eventChar) throws TaskException {
-        switch (eventChar) {
-        case 'T':
-            return TaskType.Todo;
-        case 'E':
-            return TaskType.Event;
-        case 'D':
-            return TaskType.Deadline;
-        default:
-            throw new TaskException("There is no such task!");
-        }
     }
 }

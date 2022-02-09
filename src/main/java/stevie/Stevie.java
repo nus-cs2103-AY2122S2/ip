@@ -4,6 +4,7 @@ import java.io.File;
 
 import stevie.command.Command;
 import stevie.exception.StevieException;
+import stevie.parser.StevieParser;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
 
@@ -17,7 +18,7 @@ public class Stevie {
     /**
      * Path to the save file for task list
      */
-    private static String path = "src" + File.separator + "main"
+    private static final String path = "src" + File.separator + "main"
             + File.separator + "data" + File.separator + "tasks.txt";
 
     /**
@@ -44,10 +45,21 @@ public class Stevie {
         tasks = new TaskList(storage.loadTasks());
     }
 
+    /**
+     * Starts CLI for Stevie
+     *
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         new Stevie().run();
     }
 
+    /**
+     * Returns the responses from executing a command. Response can be a string to
+     * indicate a successful command, or an exception message.
+     * @param userInput string input by user
+     * @return response string
+     */
     public String getResponse(String userInput) {
         String out;
         try {
@@ -60,6 +72,9 @@ public class Stevie {
         return out;
     }
 
+    /**
+     * Method to start and sustain command-line session with user.
+     */
     private void run() {
         ui.greet();
         boolean isExit = false;

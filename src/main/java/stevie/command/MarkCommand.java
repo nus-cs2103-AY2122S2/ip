@@ -2,6 +2,7 @@ package stevie.command;
 
 import stevie.StevieUi;
 import stevie.exception.StevieException;
+import stevie.exception.TaskException;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
 
@@ -44,12 +45,8 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
         String out;
         try {
-            if (isDone) {
-                out = tasks.markDone(taskIdx);
-            } else {
-                out = tasks.markUndone(taskIdx);
-            }
-        } catch (StevieException ex) {
+            out = tasks.mark(taskIdx, isDone);
+        } catch (TaskException ex) {
             ui.outputMessage(ex.getMessage());
             return ex.getMessage();
         }
