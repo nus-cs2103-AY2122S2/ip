@@ -1,5 +1,6 @@
 import org.json.JSONWriter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -38,7 +39,7 @@ public class WordList {
         }
     }
 
-    public void storeDeadline(String word, String datetime, boolean isDone, boolean echo) {
+    public void storeDeadline(String word, LocalDateTime datetime, boolean isDone, boolean echo) {
         WordListItem deadline = new Deadline(word, datetime);
         if (isDone) {
             deadline.markItem();
@@ -49,7 +50,7 @@ public class WordList {
         }
     }
 
-    public void storeEvent(String word, String datetime, boolean isDone, boolean echo) {
+    public void storeEvent(String word, LocalDateTime datetime, boolean isDone, boolean echo) {
         WordListItem event = new Event(word, datetime);
         if (isDone) {
             event.markItem();

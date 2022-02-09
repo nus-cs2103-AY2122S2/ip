@@ -1,13 +1,15 @@
+import java.time.LocalDateTime;
+
 public class Event extends WordListItem{
     static private final String SYMBOL = "[E]";
-    private String datetime;
+    private LocalDateTime datetime;
 
-    public Event(String description, String datetime) {
+    public Event(String description, LocalDateTime datetime) {
         super(description);
         this.datetime = datetime;
     }
 
-    public String getDatetime() {
+    public LocalDateTime getDatetime() {
         return this.datetime;
     }
 
@@ -17,6 +19,7 @@ public class Event extends WordListItem{
 
     @Override
     public String toString() {
-        return SYMBOL + super.toString() + " (at: " + this.datetime + ")";
+        String datetimestr = DateTimeManager.getDisplayString(this.datetime);
+        return SYMBOL + super.toString() + " (at: " + datetimestr + ")";
     }
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
 public class JSONFileManager {
     static private final String BASE_PATH = System.getProperty("user.dir");
@@ -83,11 +84,11 @@ public class JSONFileManager {
 //            System.out.println(itemJSON);
             if (wordListItem instanceof Deadline) {
                 Deadline deadline = (Deadline) wordListItem;
-                itemJSON.put("datetime", deadline.getDatetime());
+                itemJSON.put("datetime", DateTimeManager.getOriginalString(deadline.getDatetime()));
             }
             if (wordListItem instanceof  Event) {
                 Event deadline = (Event) wordListItem;
-                itemJSON.put("datetime", deadline.getDatetime());
+                itemJSON.put("datetime", DateTimeManager.getOriginalString(deadline.getDatetime()));
             }
             jsonArray.put(itemJSON);
         });
@@ -108,12 +109,14 @@ public class JSONFileManager {
             } else if (symbol.equals(Deadline.getSymbol())) {
                 String description = jsonObject.getString("description");
                 boolean isDone = jsonObject.getBoolean("isDone");
-                String datetime = jsonObject.getString("datetime");
+                String datetimeString = jsonObject.getString("datetime");
+                LocalDateTime datetime = DateTimeManager.parseString(datetimeString);
                 wordList.storeDeadline(description, datetime, isDone,false);
             } else if (symbol.equals(Event.getSymbol())) {
                 String description = jsonObject.getString("description");
                 boolean isDone = jsonObject.getBoolean("isDone");
-                String datetime = jsonObject.getString("datetime");
+                String datetimeString = jsonObject.getString("datetime");
+                LocalDateTime datetime = DateTimeManager.parseString(datetimeString);
                 wordList.storeEvent(description, datetime, isDone,false);
             }
         }
