@@ -15,6 +15,7 @@ public class ListCommand extends Command {
         if (taskList.getSize() == 0) {
             return EMPTY_LIST_MESSAGE;
         }
+        assert taskList.getSize() != 0 : "TaskList should not be empty";
 
         StringBuilder resultString = new StringBuilder();
         resultString.append(LIST_MESSAGE);

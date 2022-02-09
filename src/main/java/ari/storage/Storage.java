@@ -30,6 +30,7 @@ public class Storage {
      */
     public void setFile(String filePath) {
         path = filePath;
+        assert filePath.endsWith(".txt") : "Filename should have .txt extension";
 
         this.filePath = new File(filePath);
 
@@ -105,6 +106,7 @@ public class Storage {
                     cmd = new MarkCommand(taskList.getSize());
                     cmd.setTaskList(taskList);
                     cmd.execute();
+                    assert taskList.getTask(taskList.getSize()).hasDone() : "Task should be marked here";
                 }
             }
 
