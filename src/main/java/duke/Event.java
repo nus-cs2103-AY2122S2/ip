@@ -6,12 +6,19 @@ package duke;
  */
 public class Event extends Task {
 
-    protected String at;
-    char type;
+    protected String eventDateTime;
+    protected char type;
 
-    public Event(String description, String at) {
+    /**
+     * Constructor for event task
+     *
+     * @param description represents task item
+     * @param eventDateTime task to be completed at
+     *
+     */
+    public Event(String description, String eventDateTime) {
         super(description);
-        this.at = at;
+        this.eventDateTime = eventDateTime;
         this.type = 'e';
     }
 
@@ -19,8 +26,9 @@ public class Event extends Task {
      *
      * Method to convert task to String type to be printed in the task list
      *
+     * @return String of task item
      */
     public String toString() {
-        return "[E]" + super.toString() + " (" + at + ")";
+        return "[E]" + super.toString() + " (" + eventDateTime + ")";
     }
 }

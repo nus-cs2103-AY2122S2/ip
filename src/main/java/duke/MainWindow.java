@@ -1,14 +1,19 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,10 +32,22 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image background = new Image(this.getClass().getResourceAsStream("/images/background.png"));
+
 
     @FXML
     public void initialize() {
+        String greeting = Ui.startGreeting();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(greeting, dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        BackgroundImage backgrnd = new BackgroundImage(background,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(1.0, 1.2, true, true, false, false));
+        dialogContainer.setBackground(new Background(backgrnd, null));
+
     }
 
     public void setDuke(Duke d) {
@@ -49,6 +66,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        dialogContainer.setSpacing(15);
+
         userInput.clear();
     }
 }

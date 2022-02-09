@@ -1,15 +1,13 @@
 package duke;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-
 
 /**
  * A GUI for Duke using FXML.
@@ -17,6 +15,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private Image icon = new Image(this.getClass().getResourceAsStream("/images/genieicon.png"));
 
     @Override
     public void start(Stage stage) {
@@ -25,6 +24,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("DukeGenie");
+            stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

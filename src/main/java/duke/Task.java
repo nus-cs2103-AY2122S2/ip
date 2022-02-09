@@ -8,6 +8,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for deadline task
+     *
+     * @param description represents task item
+     *
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -16,17 +22,15 @@ public class Task {
     /**
      *
      * Method to set the task to be done
-     * @return nothing
      */
     public void setMark() {
-
         this.isDone = true;
     }
 
     /**
      *
      * Method to set the task to be not done
-     * @return nothing
+
      */
     public void setUnmark() {
         this.isDone = false;

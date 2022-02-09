@@ -19,7 +19,6 @@ public class Storage {
      * Restores the contents of file from local directory
      *
      * @param storeList contents from file to be saved into this arraylist
-     * @return Nothing
      * @throws IOException If path is not valid
      */
     public static void restoreList(ArrayList<Task> storeList) throws IOException {
@@ -69,7 +68,6 @@ public class Storage {
      * Saves the contents of file in local directory
      *
      * @param arrlist arraylist contents to be saved locally
-     * @return Nothing
      * @throws IOException If path is not valid
      */
     public static void saveList(ArrayList<Task> arrlist) throws IOException {
@@ -86,7 +84,7 @@ public class Storage {
                 fw.write("\n");
                 fw.write(t.description);
                 fw.write("\n");
-                fw.write(e.at);
+                fw.write(e.eventDateTime);
                 fw.write("\n");
                 fw.write(t.isDone ? "1" : "0");
                 fw.write("\n");
@@ -96,7 +94,7 @@ public class Storage {
                 fw.write("\n");
                 fw.write(t.description);
                 fw.write("\n");
-                fw.write(d.by);
+                fw.write(d.deadlineDateTime);
                 fw.write("\n");
                 fw.write(t.isDone ? "1" : "0");
                 fw.write("\n");
@@ -117,7 +115,6 @@ public class Storage {
      * Erases the contents of file in local directory
      *
      * @param path path of the file to be erased
-     * @return Nothing
      * @throws IOException If path is not valid
      */
     public static void eraseList(String path) throws IOException {

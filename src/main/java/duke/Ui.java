@@ -26,8 +26,8 @@ public class Ui {
     }
 
     public static String unknownCommand() {
-        return "Master, I have all the knowledge in the world but I do not recognise that command," + "\n" +
-                " Please wish again";
+        return "Master, I have all the knowledge in the world but I do not recognise that command," + "\n"
+                + " Please wish again";
     }
 
     public static String startGoodbye() {
@@ -35,7 +35,7 @@ public class Ui {
     }
 
     public static String startGreeting() {
-        return "A very good day to you master, I'm Blue the Genie " + "\n" +
-                "What do you wish for today?" + "\n" + "Your wish is my command";
+        return "A very good day to you master, I'm Blue the Genie " + "\n"
+                + "What do you wish for today?" + "\n" + "Your wish is my command";
     }
 }

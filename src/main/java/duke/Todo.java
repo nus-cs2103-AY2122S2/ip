@@ -6,8 +6,14 @@ package duke;
  */
 public class Todo extends Task {
 
-    char type;
+    protected char type;
 
+    /**
+     * Constructor for todo task
+     *
+     * @param description represents task item
+     *
+     */
     public Todo(String description) {
         super(description);
         this.type = 't';

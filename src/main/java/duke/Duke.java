@@ -1,26 +1,27 @@
 package duke;
+
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  Class to start the Duke chatbot which supports adding tasks to a list
  */
-
 public class Duke extends Application {
 
+    protected static ArrayList<Task> storeList = new ArrayList<>();
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -28,7 +29,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    protected static ArrayList<Task> storeList = new ArrayList<>();
+    private Image background = new Image(this.getClass().getResourceAsStream("/images/background.png"));
 
     public static void main(String[] args) throws IOException {
         Ui.run();
@@ -108,8 +109,6 @@ public class Duke extends Application {
             }
         });
 
-        // more code to be added here later
-
     }
 
     /**
@@ -145,14 +144,14 @@ public class Duke extends Application {
      */
     public String getResponse(String command) throws IOException {
         if (command.equals("bye")) {
+            Storage.eraseList(Paths.get("Duke.java").toAbsolutePath().getParent().toString() + "/duke.txt");
             Storage.saveList(storeList);
             return Ui.startGoodbye();
         } else {
-            Storage.restoreList(storeList);
+            if (this.storeList.size() == 0) {
+                Storage.restoreList(storeList);
+            }
             return CommandParser.parseCommand(command);
         }
     }
-
-
-
 }

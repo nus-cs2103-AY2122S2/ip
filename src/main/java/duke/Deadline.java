@@ -8,30 +8,45 @@ import java.time.format.DateTimeFormatter;
  Supports date function and description of task
  */
 public class Deadline extends Task {
-    protected String by;
-    char type;
+    protected String deadlineDateTime;
+    protected char type;
 
-    public Deadline(String description, String by) {
+    /**
+     * Constructor for deadline task
+     *
+     * @param description represents task item
+     * @param deadlineDateTime task to be completed by
+     *
+     */
+    public Deadline(String description, String deadlineDateTime) {
         super(description);
-        this.by = by;
+        this.deadlineDateTime = deadlineDateTime;
         this.type = 'd';
     }
 
+    /**
+     * Getter method to get deadline date from command
+     *
+     * @return Deadline date of task
+     */
     public String getDate() {
         try {
-            LocalDate date = LocalDate.parse(by.substring(3, 13));
+            LocalDate date = LocalDate.parse(deadlineDateTime.substring(3, 13));
             DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
-            String dateFormatted = date.format(newFormat);
-            return dateFormatted;
+            return date.format(newFormat);
         } catch (DateTimeException e) {
-            return "Master, you wished wrongly. Remember you have to wish in this format " +
-                    "deadline task /by DD/MM/YYYY TIME. " + "\n" + "Please wish again";
+            return "Master, you wished wrongly. Remember you have to wish in this format "
+                    + "deadline task /by DD/MM/YYYY TIME. " + "\n" + "Please wish again";
         }
     }
 
+    /**
+     * Getter method to get deadline time from command
+     *
+     * @return Deadline time of task
+     */
     public String getTime() {
-        String timeclock = by.substring(14);
-        return timeclock;
+        return deadlineDateTime.substring(14);
     }
 
     /**

@@ -1,25 +1,21 @@
 package duke;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
- Class to parse the command given to the chat bot
- to determine what tasks the chatbot is to complete.
+ Class to parse the command given to the chatbot
+ to determine what tasks the chatbot is to complete and gives
+ the appropriate response.
  */
 public class CommandParser {
-
     /**
      * Parses command to see what type of command it is
      *
      * @param command Command given by the user
-     * @return Nothing
-     * @throws IOException If command is blank
+     * @return String of response to command
      */
-    public static String parseCommand(String command) throws IOException {
+    public static String parseCommand(String command) {
         if (command.equals("list")) {
             return TaskList.printTheList(Duke.storeList);
-        } else if (command.equals("hello") | command.equals("hi")) {
+        } else if (command.equals("hello") || command.equals("hi")) {
             return Ui.startGreeting();
         } else if (command.startsWith("mark ")) {
             return TaskList.markCommand(command, Duke.storeList);
@@ -33,7 +29,7 @@ public class CommandParser {
             return TaskList.addEvent(command, Duke.storeList);
         } else if (command.startsWith("delete")) {
             return TaskList.deleteTask(command, Duke.storeList);
-        }  else if (command.startsWith("find")) {
+        } else if (command.startsWith("find")) {
             return TaskList.findTask(command, Duke.storeList);
         } else {
             return Ui.unknownCommand();
