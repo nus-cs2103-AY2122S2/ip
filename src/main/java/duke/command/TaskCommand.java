@@ -55,12 +55,12 @@ public abstract class TaskCommand extends Command {
     protected String updateTaskList(Task newTask, TaskList taskList, Storage storage) throws DukeException {
         taskList.addTask(newTask);
         storage.saveList(taskList.getTaskList());
-        
+
         return getUpdatedTaskListStr(newTask, taskList);
     }
 
     private String getUpdatedTaskListStr(Task newTask, TaskList taskList) {
-        return "Gotcha. Added the task: \n   " + newTask.toString() + "\nNow you have "
+        return "Gotcha. Added the task: \n" + newTask.toString() + "\nNow you have "
                 + taskList.getTaskListSize() + " tasks in your list.";
     }
 }

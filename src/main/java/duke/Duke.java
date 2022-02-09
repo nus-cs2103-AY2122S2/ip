@@ -51,6 +51,8 @@ public class Duke {
                 newTask = new Event();
             } else if (type == 'D') {
                 newTask = new Deadline();
+            } else {
+                newTask = null;
             }
 
             return newTask;
@@ -60,8 +62,7 @@ public class Duke {
             storage = new Storage("data.txt", "./data/");
             storage.loadFromSave(taskList.getTaskList(), taskFactory);
         } catch (DukeException exception) {
-            // TODO:: issues loading from storage
-            System.out.println(exception.getMessage());
+            ui.printError(exception.getMessage());
         }
 
         // init parser

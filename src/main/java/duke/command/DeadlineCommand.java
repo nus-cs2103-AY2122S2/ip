@@ -23,6 +23,8 @@ public class DeadlineCommand extends TaskCommand {
     private static final String DATE_FORMAT_WRONG = "Date format maybe wrong. yy-mm-dd";
     private static final String TIME_FORMAT_WRONG = "Time format wrong. HHmm";
 
+    private static final String INPUT_TIME_FORMAT = "HHmm";
+    private static final String DEFAULT_TIME = "2359";
     /**
      * Constructor for command to init values.
      *
@@ -65,26 +67,42 @@ public class DeadlineCommand extends TaskCommand {
         }
 
         // parse the date in yy-mm-dd
-        LocalDate localDate;
-        try {
-            localDate = LocalDate.parse(dateTime[0]);
-        } catch (DateTimeParseException error) {
-            throw new DukeException(DATE_FORMAT_WRONG);
-        }
+        LocalDate localDate = ParseDateFromStr(dateTime[0]);
 
-        // parse the time in military format 0000
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
-        LocalTime localTime = LocalTime.parse("2359", formatter);
-        try {
-            // check if user input a time, if not use default time
-            if (dateTime.length > 1) {
-                localTime = LocalTime.parse(dateTime[1], formatter);
-            }
-        } catch (DateTimeParseException error) {
-            throw new DukeException(TIME_FORMAT_WRONG);
+        // check if user input a time, if not use default time
+        LocalTime localTime;
+        if (dateTime.length > 1) {
+            localTime = ParseTimeFromStr(dateTime[1]);
+        } else {
+            localTime = ParseTimeFromStr(DEFAULT_TIME);
         }
 
         newTask = new Deadline(statement, localDate, localTime);
         return updateTaskList(newTask, taskList, storage);
+    }
+
+    private LocalDate ParseDateFromStr(String date) throws DukeException{
+        LocalDate localDate;
+        
+        try {
+            localDate = LocalDate.parse(date);
+        } catch (DateTimeParseException error) {
+            throw new DukeException(DATE_FORMAT_WRONG);
+        }
+
+        return localDate;
+    }
+
+    private LocalTime ParseTimeFromStr(String time) throws DukeException{
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(INPUT_TIME_FORMAT);
+        LocalTime localTime;
+        
+        try {
+            localTime = LocalTime.parse(time, formatter);
+        } catch (DateTimeParseException error) {
+            throw new DukeException(TIME_FORMAT_WRONG);
+        }
+
+        return localTime;
     }
 }
