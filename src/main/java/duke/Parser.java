@@ -9,6 +9,7 @@ import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.RemindCommand;
 import duke.command.UnmarkCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -108,6 +109,17 @@ public class Parser {
                 return new FindCommand(userTaskString, userFindTask);
             } catch (StringIndexOutOfBoundsException err) { //For cases like "find" without any further description
                 ui.throwDukeException("Please enter a description!");
+            }
+        } else if (userTaskString.matches("^(remind|Remind|REMIND).*")) {
+            try {
+                String[] remindDeadlineSplit = userTaskString.split(" /before ", 2);
+                return new RemindCommand(userTaskString, remindDeadlineSplit[1]);
+            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException | DateTimeParseException err) {
+                ui.throwDukeException("Please enter a remind in the following format:\n"
+                        + "remind /before [yyyy-mm-dd]");
+                //StringIndexOutOfBoundsException For cases like "remind" without any other information
+                //ArrayIndexOutOfBoundsException For cases like "remind" without a "/by"
+                //DateTimeParseException For cases where date cannot be recognised
             }
         }
         return new InvalidCommand(userTaskString);

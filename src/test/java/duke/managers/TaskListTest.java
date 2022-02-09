@@ -57,4 +57,15 @@ public class TaskListTest {
         assertEquals(taskList.getTask(2).checkIsDone(), false);
     }
 
+    @Test
+    void taskList_remindTasks_success() throws DukeException {
+        TaskList taskList = new TaskList();
+        taskList.addTask(new Todo("Go for a jog"), false);
+        taskList.addTask(new Todo("Go for a run"), false);
+        taskList.addTask(new Todo("Go for a hike"), false);
+        taskList.markTaskDone(2, false);
+        taskList.markTaskNotDone(2, false);
+        assertEquals(taskList.getTask(2).checkIsDone(), false);
+    }
+
 }
