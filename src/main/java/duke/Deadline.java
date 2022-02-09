@@ -2,6 +2,8 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * This class is a subclass of Task.
  * @author Sim Jun Heng
@@ -18,9 +20,14 @@ public class Deadline extends Task {
      * @param date the date of the event.
      * @param isDone the current completion status of the task.
      */
-    public Deadline(String desc, LocalDate date, boolean isDone) {
+    public Deadline(String desc, String date, boolean isDone) throws DukeException {
         super(desc, isDone);
-        this.date = date;
+        try {
+            LocalDate formattedDate = LocalDate.parse(date);
+            this.date = formattedDate;
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("You have inserted an invalid date format.");
+        }
     }
 
     @Override
