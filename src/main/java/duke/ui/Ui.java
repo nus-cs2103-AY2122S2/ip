@@ -41,7 +41,7 @@ public class Ui {
      * @param taskList the task list containing the loaded task data.
      * @return a String containing the latest retrieved task data.
      */
-    public String showLoadingSuccess(TaskList taskList) {
+    public String showLoadedData(TaskList taskList) {
         if (taskList.getLength() != 0) {
             return "I've retrieved your latest task list data\n" + showTaskList(taskList);
         }
