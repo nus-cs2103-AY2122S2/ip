@@ -17,6 +17,10 @@ import stevie.exception.TaskException;
 public class TaskDataHandler {
     private final String path;
 
+    /**
+     * Constructor for TaskDataHandler
+     * @param path the location where save file is stored
+     */
     public TaskDataHandler(String path) {
         this.path = path;
     }
@@ -54,7 +58,7 @@ public class TaskDataHandler {
             String line;
             ArrayList<Task> taskList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
-                TaskType type = TaskCreator.charToType(line.charAt(0));
+                TaskType type = TaskType.charToTaskType(line.charAt(0));
                 String[] splits = line.split("\\|");
                 boolean done = splits[1] == "1";
                 Date date = splits.length > 3
