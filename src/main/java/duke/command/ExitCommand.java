@@ -12,6 +12,7 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
         response.append(ui.goodbye());
+        assert response.length() > 0; // response should not be empty
     }
 
     @Override

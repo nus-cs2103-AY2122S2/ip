@@ -27,6 +27,7 @@ public class Duke {
         this.FILE_PATH = filePath;
         this.storage = new Storage(FILE_PATH);
         this.tasks = new TaskList(storage.load());
+        assert tasks != null;
         this.ui = new Ui();
     }
 
@@ -40,6 +41,7 @@ public class Duke {
         StringBuilder response = new StringBuilder();
         try {
             Command c = Parser.parse(input);
+            assert c != null;
             c.execute(tasks, ui, storage, response);
             isListening = !c.isExit();
         } catch (ArrayIndexOutOfBoundsException e) {

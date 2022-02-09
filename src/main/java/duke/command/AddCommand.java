@@ -46,6 +46,7 @@ public class AddCommand extends Command {
             tasks.add(task);
             storage.save(tasks.list());
             response.append(ui.taskAddedMessage(task, tasks.size()));
+            assert response.length() > 0; // response should not be empty
         }
     }
 }
