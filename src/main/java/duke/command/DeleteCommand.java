@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
         } else {
             Task task = tasks.remove(index);
             response.append(ui.taskDeleteMessage(task, tasks.size()));
+            assert response.length() > 0; // response should not be empty
             storage.save(tasks.list());
         }
     }
