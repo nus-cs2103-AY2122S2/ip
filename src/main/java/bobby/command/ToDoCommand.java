@@ -3,7 +3,6 @@ package bobby.command;
 import bobby.Storage;
 import bobby.Ui;
 import bobby.exception.BobbyException;
-import bobby.exception.ToDoException;
 import bobby.task.TaskList;
 import bobby.task.ToDo;
 
@@ -12,20 +11,16 @@ import bobby.task.ToDo;
  * Represents a 'todo' command
  */
 public class ToDoCommand extends Command {
-    /** The full user input command */
-    private String fullCommand;
-    /** The full user input command in array form */
-    private String[] fullCommandArr;
+    /** The name of the ToDo task */
+    private String taskName;
 
     /**
      * Creates a ToDoCommand object.
      *
-     * @param fullCommand User input command
-     * @param fullCommandArr User input command in array form, split by a whitespace
+     * @param taskName Name of the ToDo task
      */
-    public ToDoCommand(String fullCommand, String[] fullCommandArr) {
-        this.fullCommand = fullCommand;
-        this.fullCommandArr = fullCommandArr;
+    public ToDoCommand(String taskName) {
+        this.taskName = taskName;
     }
 
     /**
@@ -42,10 +37,7 @@ public class ToDoCommand extends Command {
         assert tasks != null : "TaskList cannot be null";
         assert ui != null : "Ui cannot be null";
         assert storage != null : "Storage cannot be null";
-        if (fullCommand.substring(4).isBlank()) { // nothing after command
-            throw new ToDoException("todo");
-        }
-        ToDo newToDo = new ToDo(fullCommand.substring(5));
+        ToDo newToDo = new ToDo(taskName);
         tasks.addTask(newToDo);
         storage.saveTasks(tasks.getTaskList());
         return ui.todoMessage(newToDo) + "\n" + ui.printNumTasks(tasks);

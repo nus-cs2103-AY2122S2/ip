@@ -1,12 +1,8 @@
 package bobby.command;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import bobby.Storage;
 import bobby.Ui;
 import bobby.exception.BobbyException;
-import bobby.exception.EventException;
 import bobby.task.Event;
 import bobby.task.TaskList;
 
@@ -14,37 +10,20 @@ import bobby.task.TaskList;
  * Represents an 'event' command
  */
 public class EventCommand extends Command {
-    /** The full user input command */
-    private String fullCommand;
-    /** Specific date format that Bobby accepts as input */
-    private final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+    /** The name of the Deadline task */
+    private String eventName;
+    /** The date to tied to this task */
+    private String atDate;
 
     /**
      * Creates an EventCommand object.
      *
-     * @param fullCommand User input command.
+     * @param eventName Name of the Event task.
+     * @param atDate Date of the Event task.
      */
-    public EventCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
-    }
-
-    /**
-     * Checks whether the command includes a valid date.
-     *
-     * @param input The date to be inspected.
-     * @return True if the date is in the correct format.
-     */
-    public boolean isValidDate(String input) {
-        if (input.contains("[a-zA-Z]+") || input.length() != 10) {
-            return false;
-        }
-        try {
-            SIMPLE_DATE_FORMAT.setLenient(false);
-            SIMPLE_DATE_FORMAT.parse(input);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
+    public EventCommand(String eventName, String atDate) {
+        this.eventName = eventName;
+        this.atDate = atDate;
     }
 
     /**
@@ -62,18 +41,7 @@ public class EventCommand extends Command {
         assert tasks != null : "TaskList cannot be null";
         assert ui != null : "Ui cannot be null";
         assert storage != null : "Storage cannot be null";
-        if (fullCommand.substring(5).isBlank()) { // nothing after command
-            throw new EventException("blank");
-        } else if (!fullCommand.contains("/")) { // no "/"
-            throw new EventException("no_slash");
-        } else if (fullCommand.substring(fullCommand.indexOf("/") + 1).isBlank()) { // nothing after time
-            throw new EventException("no_date");
-        } else if (!isValidDate(fullCommand.substring(fullCommand.length() - 10))) { // invalid date
-            throw new EventException("invalid_date");
-        }
-        Event newEvent = new Event(fullCommand.substring(fullCommand.indexOf(" ") + 1,
-                fullCommand.indexOf("/") - 1),
-                fullCommand.substring(fullCommand.length() - 10));
+        Event newEvent = new Event(eventName, atDate);
         tasks.addTask(newEvent);
         storage.saveTasks(tasks.getTaskList());
         return ui.eventMessage(newEvent) + "\n" + ui.printNumTasks(tasks);

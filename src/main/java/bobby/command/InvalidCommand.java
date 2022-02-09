@@ -8,7 +8,7 @@ import bobby.Ui;
  * Represents a command that Bobby cannot understand
  */
 public class InvalidCommand extends Command {
-
+    private String errorType;
     /**
      * Creates an InvalidCommand object.
      */
