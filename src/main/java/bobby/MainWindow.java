@@ -27,13 +27,13 @@ public class MainWindow extends AnchorPane {
 
     private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/Stickman.png"));
     private final Image BOBBY_IMAGE = new Image(this.getClass().getResourceAsStream("/images/Bobby.png"));
-    private final ImageView USER_IV = new ImageView(USER_IMAGE);
-    private final ImageView BOBBY_IV = new ImageView(BOBBY_IMAGE);
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(Ui.showWelcome()), BOBBY_IV));
+        Label welcome = new Label(Ui.showWelcome());
+        ImageView bobbyIv = new ImageView(BOBBY_IMAGE);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, bobbyIv));
     }
 
     public void setBobby(Bobby b) {
@@ -49,9 +49,13 @@ public class MainWindow extends AnchorPane {
         String userInputString = userInput.getText();
         Label userText = new Label(userInputString);
         Label dukeText = new Label(bobby.getResponse(userInput.getText()));
+        ImageView userIv = new ImageView();
+        ImageView bobbyIv = new ImageView();
+        userIv.setImage(USER_IMAGE);
+        bobbyIv.setImage(BOBBY_IMAGE);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, USER_IV),
-                DialogBox.getDukeDialog(dukeText, BOBBY_IV)
+                DialogBox.getUserDialog(userText, userIv),
+                DialogBox.getDukeDialog(dukeText, bobbyIv)
         );
         if (userInputString.equals("bye")) {
             Platform.exit();

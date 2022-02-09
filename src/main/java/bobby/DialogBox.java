@@ -7,7 +7,6 @@ import javafx.scene.layout.HBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.layout.Region;
 
 public class DialogBox extends HBox {
 
@@ -43,7 +42,6 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
-        db.setMinHeight(Region.USE_PREF_SIZE);
         return db;
     }
 }
