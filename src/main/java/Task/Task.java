@@ -78,6 +78,15 @@ public class Task {
     }
 
     /**
+     * Returns type of Task as a String.
+     *
+     * @return String form of Task's type
+     */
+    public String getTaskType() {
+        return "";
+    }
+
+    /**
      * Prints Task details as a String.
      *
      * @return String form of Task details

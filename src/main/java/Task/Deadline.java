@@ -1,5 +1,7 @@
 package task;
 
+import java.util.ArrayList;
+
 public class Deadline extends Task {
 
     protected String by;
@@ -13,6 +15,16 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+    }
+
+    /**
+     * Returns type of Task as a String.
+     *
+     * @return String form of Task's type
+     */
+    @Override
+    public String getTaskType() {
+        return "D";
     }
 
     /**

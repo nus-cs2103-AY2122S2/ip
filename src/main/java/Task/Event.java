@@ -1,5 +1,10 @@
 package task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Event extends Task {
 
     protected String at;
@@ -13,6 +18,16 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
+    }
+
+    /**
+     * Returns type of Task as a String.
+     *
+     * @return String form of Task's type
+     */
+    @Override
+    public String getTaskType() {
+        return "E";
     }
 
     /**
