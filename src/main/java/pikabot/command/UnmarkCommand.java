@@ -38,7 +38,7 @@ public class UnmarkCommand extends Command {
             int taskToMark = Integer.parseInt(unmarkCommand[1]);
             taskList.markTaskAsUndone(taskToMark);
             storage.taskListToFile(taskList);
-            return Ui.indicateUnmarked(taskList.get(taskToMark - 1));
+            return Ui.indicateEditMark(taskList.get(taskToMark - 1), false);
         } catch (NoIntegerException | IOException e) {
             return Ui.printExceptionMessage(e);
         } catch (IndexOutOfBoundsException e) {

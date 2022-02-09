@@ -40,7 +40,7 @@ public class EventCommand extends Command {
             Event currEvent = Parser.parseEvent(eventCommand);
             taskList.add(currEvent);
             storage.appendToFile(currEvent);
-            return Ui.indicateAddedTask(currEvent, taskList);
+            return Ui.indicateAddOrDeleteTask(currEvent, taskList, true);
         } catch (EventException | IOException e) {
             return Ui.printExceptionMessage(e);
         } catch (DateTimeParseException e) {
