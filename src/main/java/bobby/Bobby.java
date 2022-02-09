@@ -68,7 +68,7 @@ public class Bobby {
     public static String getResponse(String input) {
         String replyMessage;
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parse(input.trim());
             replyMessage = c.execute(tasks, ui, storage);
         } catch (BobbyException e) {
             replyMessage = e.toString();

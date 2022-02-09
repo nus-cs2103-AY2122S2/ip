@@ -15,15 +15,6 @@ public class MarkException extends BobbyException {
         case "empty":
             errorMsg = "Which task?";
             break;
-        case "letter":
-            errorMsg = "C'mon, a letter is not a number dude";
-            break;
-        case "OOB":
-            errorMsg = "Number too big, count properly!";
-            break;
-        case "negative":
-            errorMsg = "Invalid number man, cannot be 0 or negative";
-            break;
         case "alr_marked":
             errorMsg = "This task is already marked as done";
             break;

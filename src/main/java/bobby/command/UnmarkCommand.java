@@ -4,6 +4,7 @@ package bobby.command;
 import bobby.Storage;
 import bobby.Ui;
 import bobby.exception.BobbyException;
+import bobby.exception.InvalidNumberException;
 import bobby.exception.MarkException;
 import bobby.task.Task;
 import bobby.task.TaskList;
@@ -12,20 +13,16 @@ import bobby.task.TaskList;
  * Represents an 'unmark' command.
  */
 public class UnmarkCommand extends Command {
-    /** The full user input command */
-    private String fullCommand;
-    /** The full user input command in array form */
-    private String[] fullCommandArr;
+    /** The task index to be marked */
+    private String toUnmark;
 
     /**
      * Creates an UnmarkCommand object.
      *
-     * @param fullCommand User input command
-     * @param fullCommandArr User input command in array form, split by a whitespace
+     * @param toUnmark The task index to be unmarked.
      */
-    public UnmarkCommand(String fullCommand, String[] fullCommandArr) {
-        this.fullCommand = fullCommand;
-        this.fullCommandArr = fullCommandArr;
+    public UnmarkCommand(String toUnmark) {
+        this.toUnmark = toUnmark;
     }
 
     /**
@@ -39,16 +36,13 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        if (fullCommand.substring(6).isBlank()) { // no argument
-            throw new MarkException("empty");
-        } else if (Character.isLetter(fullCommand.charAt(7))) { // contains letter instead of number
-            throw new MarkException("letter");
-        } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) { // out of bounds
-            throw new MarkException("OOB");
-        } else if (Integer.parseInt(fullCommandArr[1]) < 1) {
-            throw new MarkException("negative");
+        int indexUnmark;
+        try {
+            indexUnmark = Integer.parseInt(toUnmark) - 1;
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException("letter");
         }
-        Task task = tasks.getIndex(Integer.parseInt(fullCommandArr[1]) - 1);
+        Task task = tasks.getIndex(indexUnmark);
         if (!task.isDone()) {
             throw new MarkException("alr_unmarked");
         }

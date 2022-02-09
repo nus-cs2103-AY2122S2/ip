@@ -1,12 +1,8 @@
 package bobby.command;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import bobby.Storage;
 import bobby.Ui;
 import bobby.exception.BobbyException;
-import bobby.exception.DeadlineException;
 import bobby.task.Deadline;
 import bobby.task.TaskList;
 
@@ -14,34 +10,20 @@ import bobby.task.TaskList;
  * Represents a 'deadline' command
  */
 public class DeadlineCommand extends Command {
-    /** The full user input command */
-    private String fullCommand;
-    /** Specific date format that Bobby accepts as input */
-    private final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+    /** The name of the Deadline task */
+    private String taskName;
+    /** The date to tied to this task */
+    private String byDate;
 
     /**
      * Creates a DeadLineCommand object.
      *
-     * @param fullCommand User input command.
+     * @param taskName Name of the Deadline task.
+     * @param byDate Date of the Deadline task.
      */
-    public DeadlineCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
-    }
-
-    /**
-     * Checks whether the command includes a valid date.
-     *
-     * @param input The date to be inspected.
-     * @return True if the date is in the correct format.
-     */
-    public boolean isValidDate(String input) {
-        try {
-            SIMPLE_DATE_FORMAT.setLenient(false);
-            SIMPLE_DATE_FORMAT.parse(input);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
+    public DeadlineCommand(String taskName, String byDate) {
+        this.taskName = taskName;
+        this.byDate = byDate;
     }
 
     /**
@@ -55,18 +37,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        if (fullCommand.substring(8).isBlank()) { // nothing after command
-            throw new DeadlineException("blank");
-        } else if (!fullCommand.contains("/")) { // no "/"
-            throw new DeadlineException("no_slash");
-        } else if (fullCommand.substring(fullCommand.indexOf("/") + 1).isBlank()) { // nothing after time
-            throw new DeadlineException("no_date");
-        } else if (!isValidDate(fullCommand.substring(fullCommand.length() - 10))) { // invalid date
-            throw new DeadlineException("invalid_date");
-        }
-        Deadline newDeadline = new Deadline(fullCommand.substring(fullCommand.indexOf(" ") + 1,
-                fullCommand.indexOf("/") - 1),
-                fullCommand.substring(fullCommand.length() - 10));
+        Deadline newDeadline = new Deadline(taskName, byDate);
         tasks.addTask(newDeadline);
         storage.saveTasks(tasks.getTaskList());
         return ui.deadlineMessage(newDeadline) + "\n" + ui.printNumTasks(tasks);
