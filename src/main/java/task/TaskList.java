@@ -51,6 +51,7 @@ public class TaskList {
     public String add(Task task) {
         Tasks.add(task);
         int index = this.getSize() - 1;
+        assert index >= 0 : "Index must be 0 or more.";
         return UI.printAddMessage(Tasks.get(index).toString(), index);
     }
 
