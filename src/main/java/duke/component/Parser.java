@@ -13,6 +13,7 @@ import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.command.DeleteCommand;
 
+import duke.command.ViewCommand;
 import duke.constant.Message;
 import duke.constant.TaskConstant;
 
@@ -30,6 +31,7 @@ import static duke.constant.CommandConstant.COMMAND_LIST;
 import static duke.constant.CommandConstant.COMMAND_MARK;
 import static duke.constant.CommandConstant.COMMAND_TODO;
 import static duke.constant.CommandConstant.COMMAND_UNMARK;
+import static duke.constant.CommandConstant.COMMAND_VIEW;
 
 import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
@@ -95,7 +97,12 @@ public class Parser {
             }
         } else if (prefix.equals(TaskConstant.PREFIX_EVENT)) {
             String at = tokens[3];
-            task = new Event(description, at);
+            try {
+                task = new Event(description, at);
+            } catch (DateTimeException e) {
+                exceptionHandler.handleOtherException(e);
+                task = new Todo(description);
+            }
         } else {
             task = new Todo(description);
         }
@@ -138,6 +145,8 @@ public class Parser {
             return new AddEventCommand(commandArgument);
         case COMMAND_FIND:
             return new FindCommand(commandArgument);
+        case COMMAND_VIEW:
+            return new ViewCommand(commandArgument);
         default:
             throw new UnknownCommandException();
         }
