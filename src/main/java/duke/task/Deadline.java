@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * A constructor that stores the name of the task and its due date.
      *
      * @param taskName The name of the task.
-     * @param by The String representation of the date
+     * @param by       The String representation of the date
      * @throws DukeException If the date given is invalid or the format is incorrect.
      */
     public Deadline(String taskName, String by) throws DukeException {
@@ -33,6 +33,18 @@ public class Deadline extends Task {
         } else {
             throw new DukeException("Invalid time format, please use yyyy-mm-dd");
         }
+    }
+
+    /**
+     * A constructor that stores the name of the task and the due date in a LocalDate format.
+     *
+     * @param taskName The name of the task.
+     * @param dueDate  The LocalDate representation of the date.
+     */
+    public Deadline(String taskName, LocalDate dueDate) {
+        super(taskName);
+        assert taskName.length() > 0;
+        this.dueDate = dueDate;
     }
 
     /**
@@ -61,5 +73,14 @@ public class Deadline extends Task {
         } else {
             return true;
         }
+    }
+
+    /**
+     * Returns the LocalDate date of this Deadline.
+     *
+     * @return The LocalDate date of this Deadline.
+     */
+    public LocalDate getDate() {
+        return this.dueDate;
     }
 }

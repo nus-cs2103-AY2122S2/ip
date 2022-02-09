@@ -6,7 +6,7 @@ import duke.manager.TaskList;
 import duke.task.Deadline;
 
 /**
- * Represents a command that will add a Deadline Task to the TaskList upon execution..
+ * Represents a command that will add a Deadline Task to the TaskList upon execution.
  */
 public class AddDeadlineCommand extends Command {
     private String task;

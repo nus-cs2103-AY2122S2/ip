@@ -6,7 +6,7 @@ import duke.manager.TaskList;
 import duke.task.Event;
 
 /**
- * Represents a command that will add an Event Task to the TaskList upon execution..
+ * Represents a command that will add an Event Task to the TaskList upon execution.
  */
 public class AddEventCommand extends Command {
     private String task;

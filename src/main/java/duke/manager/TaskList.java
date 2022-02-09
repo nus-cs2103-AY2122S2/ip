@@ -110,7 +110,6 @@ public class TaskList {
     }
 
     /**
-     *
      * Returns a boolean depending on the taskNo given and whether it is within range of the ArrayList.
      *
      * @param taskNo The index to be checked if valid.
@@ -123,6 +122,20 @@ public class TaskList {
             assert (taskNo >= 0 && taskNo <= tasks.size());
             return true;
         }
+    }
+
+    /**
+     * Replaces the task at the taskNo index with the newTask.
+     *
+     * @param taskNo  The index to have the Task replaced.
+     * @param newTask The new Task to replace the old one.
+     * @throws DukeException If an invalid index in the list was given.
+     */
+    public void update(int taskNo, Task newTask) throws DukeException {
+        if (!isValidTaskNo(taskNo)) {
+            throw new DukeException("OOPS!!! Invalid task number.");
+        }
+        tasks.set(taskNo, newTask);
     }
 
 }

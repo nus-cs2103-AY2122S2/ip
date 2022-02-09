@@ -47,7 +47,7 @@ public class AddToDoCommand extends Command {
 
     /**
      * Returns true if it is an exit command and false otherwise.
-     * @return a boolean.
+     * @return A boolean.
      */
     @Override
     public boolean isExit() {

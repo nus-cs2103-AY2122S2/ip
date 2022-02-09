@@ -23,7 +23,7 @@ public abstract class Command {
 
     /**
      * Returns true if it is an exit command and false otherwise.
-     * @return a boolean.
+     * @return A boolean.
      */
     public abstract boolean isExit();
 }
