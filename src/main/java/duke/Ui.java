@@ -76,8 +76,9 @@ public class Ui {
         } else if (temp[0].equals("delete")) {
             return taskList.delete(temp[1]);
         } else if (temp[0].equals("find")) {
-            taskList.find(temp[1]);
-            return "";
+            return taskList.find(temp[1]);
+        } else if (temp[0].equals("search")) {
+            return taskList.search(temp[1]);
         } else {
             return "command is invalid, please re-enter again";
         }

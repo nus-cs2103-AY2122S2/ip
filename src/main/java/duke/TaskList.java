@@ -36,7 +36,7 @@ public class TaskList {
 
         if (listOfInputs.size() > 0) {
             for (int i = 0; i < listOfInputs.size(); i++) {
-                response = response + "\n" + (((i + 1) + ". " + listOfInputs.get(i).message()));
+                response = response + (((i + 1) + ". " + listOfInputs.get(i).message())) + "\n";
             }
         } else {
             response = "You got no task";
@@ -45,20 +45,40 @@ public class TaskList {
     }
 
     /**
-     * @param word
+     * @param keywords
+     * @return string that imdicates whether keyword is found
      */
-    public void find(String word) {
+    public String search(String keywords) {
         boolean hasWord = false;
+        String response = "";
         for (int i = 0; i < listOfInputs.size(); i++) {
-            if (listOfInputs.get(i).getDescription().contains(word)) {
-                System.out.println(listOfInputs.get(i).message());
+            if (listOfInputs.get(i).getDescription().indexOf(keywords) == 0) {
+                response = response + listOfInputs.get(i).message() + "\n";
                 hasWord = true;
             }
             if (i == listOfInputs.size() - 1 && !hasWord) {
-                System.err.println("No task with the word: " + word);
-                break;
+                response = "No task with the word: " + "[" + keywords + " ] ";
             }
         }
+        return response;
+    }
+
+    /**
+     * @param word
+     */
+    public String find(String word) {
+        boolean hasWord = false;
+        String response = "";
+        for (int i = 0; i < listOfInputs.size(); i++) {
+            if (listOfInputs.get(i).getDescription().contains(word)) {
+                response = response + listOfInputs.get(i).message() + "\n";
+                hasWord = true;
+            }
+            if (i == listOfInputs.size() - 1 && !hasWord) {
+                response = "No task with the word: " + word;
+            }
+        }
+        return response;
     }
 
     /**
