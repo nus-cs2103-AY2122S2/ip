@@ -90,8 +90,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + EVENT_SYMBOL + "]" + super.toString() + " (at: " + this.eventDate.format(
-                DateTimeFormatter.ofPattern(DATE_FORMAT)) + " " + this.eventTime.format(
-                DateTimeFormatter.ofPattern(TIME_FORMAT)) + ")";
+        String date = eventDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String time = eventTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
+        String classification = "[" + EVENT_SYMBOL + "]";
+
+
+        return classification + super.toString() + " (at: " + date + " " + time + ")";
     }
 }

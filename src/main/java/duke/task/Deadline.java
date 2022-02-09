@@ -90,7 +90,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadlineDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT))
-                + " " + this.deadlineTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT)) + ")";
+        String date = deadlineDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String time = deadlineTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
+        String classification = "[" + DEADLINE_SYMBOL + "]";
+
+        return classification + super.toString() + " (by: " + date + " " + time + ")";
     }
 }

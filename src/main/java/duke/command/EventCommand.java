@@ -23,6 +23,9 @@ public class EventCommand extends TaskCommand {
     private static final String DATE_FORMAT_WRONG = "duke.task.Event Date format is wrong. yy-mm-dd";
     private static final String TIME_FORMAT_WRONG = "duke.task.Event time format is wrong. HHmm";
 
+    private static final String INPUT_TIME_FORMAT = "HHmm";
+    private static final String DEFAULT_TIME = "2359";
+
     /**
      * Constructor for event command to init values.
      *
@@ -73,8 +76,8 @@ public class EventCommand extends TaskCommand {
         }
 
         // parse the time in military format 0000
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
-        LocalTime localTime = LocalTime.parse("2359", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(INPUT_TIME_FORMAT);
+        LocalTime localTime = LocalTime.parse(DEFAULT_TIME, formatter);
         try {
             // check if user input a time, if not use default time
             if (dateTime.length > 1) {

@@ -50,6 +50,7 @@ public abstract class Task implements Saving, Loading {
      */
     @Override
     public String toString() {
-        return "[" + (this.isDone ? "X] " : " ] ") + this.taskDescription;
+        String doneMarker = isDone ? "X] " : " ] ";
+        return "[" + doneMarker + taskDescription;
     }
 }
