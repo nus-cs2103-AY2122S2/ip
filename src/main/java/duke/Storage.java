@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -72,13 +73,17 @@ public class Storage {
                     storedTask = new Todo(taskName);
                 } else if (taskLineSplit[0].equals("E")) {
                     // if event starts with E, initialise as Event
-                    String startTime = taskLineSplit[taskLineSplit.length - 2];
-                    String endTime = taskLineSplit[taskLineSplit.length - 1];
-                    storedTask = new Event(taskName, startTime, endTime);
+                    String startTimeString = taskLineSplit[taskLineSplit.length - 2];
+                    String endTimeString = taskLineSplit[taskLineSplit.length - 1];
+                    LocalDateTime startDateTime = Parser.parseDateTime(startTimeString);
+                    LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
+
+                    storedTask = new Event(taskName, startDateTime, endDateTime);
                 } else {
                     // otherwise, event must start with D, initialise as Deadline
-                    String endTime = taskLineSplit[taskLineSplit.length - 1];
-                    storedTask = new Deadline(taskName, endTime);
+                    String endTimeString = taskLineSplit[taskLineSplit.length - 1];
+                    LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
+                    storedTask = new Deadline(taskName, endDateTime);
                 }
 
                 // set completion status

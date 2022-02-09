@@ -18,15 +18,13 @@ public class Deadline extends Task {
      * as well as an end datetime
      *
      * @param description Name of deadline task
-     * @param end End datetime of deadline task in d/MM/yyyy HHmm format, e.g. 9/11/2001 1500
+     * @param endTime End datetime of deadline task in d/MM/yyyy HHmm format, e.g. 9/11/2001 1500
      */
-    public Deadline(String description, String end) {
+    public Deadline(String description, LocalDateTime endTime) {
         super(description, Type.DEADLINE);
 
-        assert description != "" && end != "";
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        LocalDateTime endDate = LocalDateTime.parse(end, format);
-        this.endTime = endDate;
+        assert description != "" && endTime != null;
+        this.endTime = endTime;
     }
 
     /**
@@ -55,7 +53,7 @@ public class Deadline extends Task {
      * @return End datetime as a string using the default format
      */
     public String getEndTimeString() {
-        return getEndTimeString("dd/MM/yyyy HHmm");
+        return getEndTimeString(Ui.DATE_TIME_FORMAT);
     }
 
     /**

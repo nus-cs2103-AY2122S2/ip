@@ -31,6 +31,11 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
+run {
+    enableAssertions = true
+    standardInput = System.in
+}
+
 test {
     useJUnitPlatform()
 
@@ -46,12 +51,12 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
     manifest {
-        attributes "Main-Class": "duke.Duke"
+        attributes "Main-Class": "duke.Launcher"
     }
 }
 

@@ -26,16 +26,13 @@ public class Event extends Task {
      * @param start Start datetime of event task in d/MM/yyyy HHmm format, e.g. 9/11/2001 1500
      * @param end End datetime of event task in d/MM/yyyy HHmm format, e.g. 9/11/2001 1500
      */
-    public Event(String description, String start, String end) {
+    public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description, Type.EVENT);
 
-        assert description != "" && start != "" && end != "";
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        LocalDateTime startDate = LocalDateTime.parse(start, format);
-        LocalDateTime endDate = LocalDateTime.parse(end, format);
+        assert description != "" && start != null && end != null;
 
-        this.startTime = startDate;
-        this.endTime = endDate;
+        this.startTime = start;
+        this.endTime = end;
     }
 
     /**
@@ -73,7 +70,7 @@ public class Event extends Task {
      * @return Start datetime as a string using the default format
      */
     public String getStartTimeString() {
-        return getStartTimeString("dd/MM/yyyy HHmm");
+        return getStartTimeString(Ui.DATE_TIME_FORMAT);
     }
 
     /**
@@ -93,7 +90,7 @@ public class Event extends Task {
      * @return End datetime as a string using the default format
      */
     public String getEndTimeString() {
-        return getEndTimeString("dd/MM/yyyy HHmm");
+        return getEndTimeString(Ui.DATE_TIME_FORMAT);
     }
 
     /**
