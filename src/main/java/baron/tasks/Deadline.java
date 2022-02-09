@@ -25,6 +25,33 @@ public class Deadline extends Task {
     }
 
     /**
+     * Checks if this {@code Deadline} object is equal to the specified object.
+     *
+     * @param o an {@code Object} to be compared with.
+     * @return true if the specified object equals to this {@code Deadline} object.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null) {
+            return false;
+        }
+
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline deadline = (Deadline) o;
+        boolean isDescriptionEqual = this.description.equals(deadline.description);
+        boolean isByEqual = this.by.equals(deadline.by);
+
+        return isDescriptionEqual && isByEqual;
+    }
+
+    /**
      * Returns the string representation of this {@code Deadline} task.
      *
      * @return the string representation of this {@code Deadline} task.

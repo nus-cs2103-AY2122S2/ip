@@ -53,10 +53,20 @@ public abstract class Task {
     }
 
     /**
+     * Checks if this {@code Task} object is equal to the specified object.
+     *
+     * @param o an {@code Object} to be compared with.
+     * @return true if the specified object equals to this {@code Task} object.
+     */
+    @Override
+    public abstract boolean equals(Object o);
+
+    /**
      * Returns the string representation of this task.
      *
      * @return the string representation of this task.
      */
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
     }
