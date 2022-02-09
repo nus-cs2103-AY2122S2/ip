@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import connor.exception.ConnorException;
 import connor.exception.InvalidTaskFileException;
 import connor.task.Deadline;
 import connor.task.Event;
@@ -35,8 +36,19 @@ public class Storage {
      */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
+        makeDirectories(filePath);
+        new File(this.filePath).createNewFile();
+        copyTasks = new ArrayList<>();
+    }
+
+    /**
+     * Makes the corresponding directories based on the file path.
+     *
+     * @param filePath File path to the text file.
+     */
+    private void makeDirectories(String filePath) {
         ArrayList<File> filePathDirectories = new ArrayList<>();
-        File currentFilePath = new File(this.filePath);
+        File currentFilePath = new File(filePath);
         while (currentFilePath.getParentFile() != null) {
             File newFilePath = currentFilePath.getParentFile();
             filePathDirectories.add(newFilePath);
@@ -45,8 +57,6 @@ public class Storage {
         for (int i = filePathDirectories.size() - 1; i >= 0; i--) {
             filePathDirectories.get(i).mkdirs();
         }
-        new File(this.filePath).createNewFile();
-        copyTasks = new ArrayList<>();
     }
 
     /**
@@ -73,20 +83,72 @@ public class Storage {
      * @param t {@code Task} to be converted.
      * @return A {@code String} representation of the Task suitable for storing in the text file.
      */
-    public static String taskToString(Task t) {
-        String spacing = " | ";
-        String taskType = t.getLetter();
+    public static String taskToString(Task t) throws ConnorException {
+        switch (t.getTaskType()) {
+        case TODO: {
+            return todoToString((ToDo) t);
+        }
+        case DEADLINE: {
+            return deadlineToString((Deadline) t);
+        }
+        case EVENT: {
+            return eventToString((Event) t);
+        }
+        default: {
+            // Something has gone wrong
+            throw new ConnorException("Unexpected Task Type!");
+        }
+        }
+    }
+
+    /**
+     * Converts a {@code ToDo} into a {@code String} to store into the text file.
+     *
+     * @param t {@code ToDo} to be converted.
+     * @return A {@code String} representation of the ToDo suitable for storing in the text file.
+     */
+    public static String todoToString(ToDo t) {
         String doneStatus = t.isDone() ? "[#] " : "[ ] ";
+        String taskType = "T";
+        String spacing = " | ";
         String desc = t.getDesc();
         StringBuilder sb = new StringBuilder(doneStatus + taskType + spacing + desc);
-        if (t instanceof Deadline) {
-            sb.append(spacing + "By: ");
-            sb.append(((Deadline) t).getBy());
-        }
-        if (t instanceof Event) {
-            sb.append(spacing + "At: ");
-            sb.append(((Event) t).getAt());
-        }
+        sb.append("\n");
+        return sb.toString();
+    }
+
+    /**
+     * Converts a {@code Deadline} into a {@code String} to store into the text file.
+     *
+     * @param t {@code Deadline} to be converted.
+     * @return A {@code String} representation of the Deadline suitable for storing in the text file.
+     */
+    public static String deadlineToString(Deadline t) {
+        String doneStatus = t.isDone() ? "[#] " : "[ ] ";
+        String taskType = "D";
+        String spacing = " | ";
+        String desc = t.getDesc();
+        StringBuilder sb = new StringBuilder(doneStatus + taskType + spacing + desc);
+        sb.append(spacing + "By: ");
+        sb.append(t.getBy());
+        sb.append("\n");
+        return sb.toString();
+    }
+
+    /**
+     * Converts an {@code Event} into a {@code String} to store into the text file.
+     *
+     * @param t {@code Event} to be converted.
+     * @return A {@code String} representation of the Event suitable for storing in the text file.
+     */
+    public static String eventToString(Event t) {
+        String doneStatus = t.isDone() ? "[#] " : "[ ] ";
+        String taskType = "E";
+        String spacing = " | ";
+        String desc = t.getDesc();
+        StringBuilder sb = new StringBuilder(doneStatus + taskType + spacing + desc);
+        sb.append(spacing + "At: ");
+        sb.append(t.getAt());
         sb.append("\n");
         return sb.toString();
     }
@@ -104,54 +166,90 @@ public class Storage {
         char doneStatus = s.charAt(1);
         switch (taskType) {
         case 'T': {
-            String[] parts = s.split(" \\| ", 2);
-            String desc = parts[1];
-            ToDo todo = new ToDo(desc);
-            if (doneStatus == '#') {
-                todo.mark();
-            }
-            return todo;
+            return stringToTodo(s, doneStatus);
         }
         case 'D': {
-            String[] parts = s.split(" \\| ", 3);
-            String desc = parts[1];
-            String when = parts[2].replaceFirst("By: ", "");
-            Deadline deadline;
-            try {
-                // Check if 'when' is a valid date
-                LocalDate ld = LocalDate.parse(when);
-                deadline = new Deadline(desc, ld);
-            } catch (DateTimeParseException e) {
-                // Otherwise, treat it as a normal String
-                deadline = new Deadline(desc, when);
-            }
-            if (doneStatus == '#') {
-                deadline.mark();
-            }
-            return deadline;
+            return stringToDeadline(s, doneStatus);
         }
         case 'E': {
-            String[] parts = s.split(" \\| ", 3);
-            String desc = parts[1];
-            String when = parts[2].replaceFirst("At: ", "");
-            Event event;
-            try {
-                // Check if 'when' is a valid date
-                LocalDate ld = LocalDate.parse(when);
-                event = new Event(desc, ld);
-            } catch (DateTimeParseException e) {
-                // Otherwise, treat it as a normal String
-                event = new Event(desc, when);
-            }
-            if (doneStatus == '#') {
-                event.mark();
-            }
-            return event;
+            return stringToEvent(s, doneStatus);
         }
         default: {
             throw new InvalidTaskFileException("This task file is invalid!");
         }
         }
+    }
+
+    /**
+     * Converts a {@code String} representation of a ToDo into its {@code Task} form.
+     *
+     * @param s {@code String} to be converted.
+     * @param doneStatus The character representing the ToDo's status.
+     * @return A {@code ToDo} that the {@code String} represents.
+     * @throws IndexOutOfBoundsException If the {@code String} has an invalid {@code ToDo} form.
+     */
+    private static ToDo stringToTodo(String s, char doneStatus) throws IndexOutOfBoundsException {
+        String[] parts = s.split(" \\| ", 2);
+        String desc = parts[1];
+        ToDo todo = new ToDo(desc);
+        if (doneStatus == '#') {
+            todo.mark();
+        }
+        return todo;
+    }
+
+    /**
+     * Converts a {@code String} representation of a Deadline into its {@code Task} form.
+     *
+     * @param s {@code String} to be converted.
+     * @param doneStatus The character representing the Deadline's status.
+     * @return A {@code Deadline} that the {@code String} represents.
+     * @throws IndexOutOfBoundsException If the {@code String} has an invalid {@code Deadline} form.
+     */
+    private static Deadline stringToDeadline(String s, char doneStatus) throws IndexOutOfBoundsException {
+        String[] parts = s.split(" \\| ", 3);
+        String desc = parts[1];
+        String when = parts[2].replaceFirst("By: ", "");
+        Deadline deadline;
+        try {
+            // Check if 'when' is a valid date
+            LocalDate ld = LocalDate.parse(when);
+            deadline = new Deadline(desc, ld);
+        } catch (DateTimeParseException e) {
+            // Otherwise, treat it as a normal String
+            deadline = new Deadline(desc, when);
+        }
+        if (doneStatus == '#') {
+            deadline.mark();
+        }
+        return deadline;
+    }
+
+    /**
+     * Converts a {@code String} representation of an Event into its {@code Task} form.
+     *
+     * @param s {@code String} to be converted.
+     * @param doneStatus The character representing the Event's status.
+     * @return An {@code Event} that the {@code String} represents.
+     * @throws IndexOutOfBoundsException If the {@code String} has an invalid {@code Event} form.
+     */
+    private static Event stringToEvent(String s, char doneStatus) throws IndexOutOfBoundsException {
+        String[] parts = s.split(" \\| ", 3);
+        String desc = parts[1];
+        String when = parts[2].replaceFirst("At: ", "");
+        Event event;
+        try {
+            // Check if 'when' is a valid date
+            LocalDate ld = LocalDate.parse(when);
+            event = new Event(desc, ld);
+        } catch (DateTimeParseException e) {
+            // Otherwise, treat it as a normal String
+            event = new Event(desc, when);
+        }
+        if (doneStatus == '#') {
+            event.mark();
+        }
+        return event;
     }
 
     /**
@@ -169,6 +267,8 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             System.out.println(ERROR_GENERAL);
+            e.printStackTrace();
+        } catch (ConnorException e) {
             e.printStackTrace();
         }
     }

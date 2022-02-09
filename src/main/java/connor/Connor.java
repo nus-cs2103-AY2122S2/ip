@@ -56,15 +56,7 @@ public class Connor {
      */
     public void run() {
         ui.greetings();
-        try {
-            storage.loadTasks();
-        } catch (FileNotFoundException e) {
-            print(ERROR_FILE_NOT_FOUND);
-            e.printStackTrace();
-        } catch (IndexOutOfBoundsException | InvalidTaskFileException e) {
-            print(ERROR_FIX_TASK_FILE_START + e.getMessage());
-            print(ERROR_FIX_TASK_FILE_END);
-        }
+        loadTasks();
         TaskList.viewTasks();
         print(LINE);
         while (isActive) {
@@ -78,6 +70,21 @@ public class Connor {
             storage.updateFile();
         }
         sc.close();
+    }
+
+    /**
+     * Loads the tasks into storage.
+     */
+    private void loadTasks() {
+        try {
+            storage.loadTasks();
+        } catch (FileNotFoundException e) {
+            print(ERROR_FILE_NOT_FOUND);
+            e.printStackTrace();
+        } catch (IndexOutOfBoundsException | InvalidTaskFileException e) {
+            print(ERROR_FIX_TASK_FILE_START + e.getMessage());
+            print(ERROR_FIX_TASK_FILE_END);
+        }
     }
 
     /**

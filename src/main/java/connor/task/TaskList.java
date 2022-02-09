@@ -218,44 +218,64 @@ public class TaskList {
     public static String markStatus(TaskStatus ts, int index) {
         switch (ts) {
         case MARK: {
-            try {
-                Task t = tasks.get(index);
-                t.mark();
-                print(MARK_TASK);
-                print(INDENT + t);
-                return MARK_TASK + "\n" + INDENT + t;
-            } catch (IndexOutOfBoundsException e) {
-                if (tasks.isEmpty()) {
-                    print(ERROR_MARK_EMPTY);
-                    return ERROR_MARK_EMPTY;
-                }
-                print(ERROR_INDEX_OUT_OF_RANGE);
-                getNumberOfTasks();
-                return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
-            }
+            return markTask(index);
         }
         case UNMARK: {
-            try {
-                Task t = tasks.get(index);
-                t.unmark();
-                print(UNMARK_TASK);
-                print(INDENT + t);
-                return UNMARK_TASK + "\n" + INDENT + t;
-            } catch (IndexOutOfBoundsException e) {
-                if (tasks.isEmpty()) {
-                    print(ERROR_UNMARK_EMPTY);
-                    return ERROR_MARK_EMPTY;
-                }
-                print(ERROR_INDEX_OUT_OF_RANGE);
-                getNumberOfTasks();
-                return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
-            }
+            return unmarkTask(index);
         }
         default: {
             // Something has gone wrong
             print(ERROR_INVALID_TASK_STATUS);
             return ERROR_INVALID_TASK_STATUS;
         }
+        }
+    }
+
+    /**
+     * Marks a {@code Task} in the task list with the given index.
+     *
+     * @param index Index of the task to be marked.
+     * @return Message containing confirmation that a task was marked or an error.
+     */
+    private static String markTask(int index) {
+        try {
+            Task t = tasks.get(index);
+            t.mark();
+            print(MARK_TASK);
+            print(INDENT + t);
+            return MARK_TASK + "\n" + INDENT + t;
+        } catch (IndexOutOfBoundsException e) {
+            if (tasks.isEmpty()) {
+                print(ERROR_MARK_EMPTY);
+                return ERROR_MARK_EMPTY;
+            }
+            print(ERROR_INDEX_OUT_OF_RANGE);
+            getNumberOfTasks();
+            return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
+        }
+    }
+
+    /**
+     * Unmarks a {@code Task} in the task list with the given index.
+     *
+     * @param index Index of the task to be unmarked.
+     * @return Message containing confirmation that a task was unmarked or an error.
+     */
+    private static String unmarkTask(int index) {
+        try {
+            Task t = tasks.get(index);
+            t.unmark();
+            print(UNMARK_TASK);
+            print(INDENT + t);
+            return UNMARK_TASK + "\n" + INDENT + t;
+        } catch (IndexOutOfBoundsException e) {
+            if (tasks.isEmpty()) {
+                print(ERROR_UNMARK_EMPTY);
+                return ERROR_MARK_EMPTY;
+            }
+            print(ERROR_INDEX_OUT_OF_RANGE);
+            getNumberOfTasks();
+            return ERROR_INDEX_OUT_OF_RANGE + "\n" + getNumberOfTasksString();
         }
     }
 
