@@ -58,9 +58,10 @@ public class TaskDataHandler {
             String line;
             ArrayList<Task> taskList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
+                assert !line.isEmpty();
                 TaskType type = TaskType.charToTaskType(line.charAt(0));
                 String[] splits = line.split("\\|");
-                boolean done = splits[1] == "1";
+                boolean done = splits[1].equals("1");
                 Date date = splits.length > 3
                         ? new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(splits[3])
                         : null;

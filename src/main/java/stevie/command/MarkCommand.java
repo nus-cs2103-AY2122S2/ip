@@ -50,6 +50,7 @@ public class MarkCommand extends Command {
             ui.outputMessage(ex.getMessage());
             return ex.getMessage();
         }
+        assert out != null;
         tasks.save(storage);
         ui.outputMessage(out);
         return out;
