@@ -54,7 +54,8 @@ application { //Points to main application name
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+//    archiveBaseName = "duke"
+    archiveBaseName = "duke.gui.Launcher"
     archiveClassifier = null
 }
 
@@ -64,4 +65,6 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
+
 }
