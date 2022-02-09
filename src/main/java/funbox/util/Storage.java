@@ -66,6 +66,7 @@ public class Storage {
             } else {
                 this.ui.printDirAlreadyExist();
             }
+            this.createDirectory();
         } else if (!isFileExist()) {
             this.createFile(this.FILE_URL);
         } else {
@@ -141,6 +142,7 @@ public class Storage {
                 break;
             } else {
                 String[] taskSplit = task.split(this.DELIMITOR);
+                assert taskSplit.length >= 3 : "Length of split tasks should be equal or greater than length 3";
                 String type = this.typeHashmap.get(taskSplit[0]);
                 isDone = Integer.parseInt(taskSplit[1]);
                 String description = taskSplit[2];
@@ -179,6 +181,7 @@ public class Storage {
      * @throws IOException If file does not exist.
      */
     public void deleteTask(int index) throws IOException {
+        assert index >= 0 : "index should be greater or equal to 0";
         this.createFile(this.TEMPFILE_URL);
         File tempFile = new File(this.TEMPFILE_URL);
         File file = new File(this.FILE_URL);
@@ -189,7 +192,6 @@ public class Storage {
 
         while (true) {
             task = br.readLine();
-
             if (task == null) {
                 br.close();
                 fw.close();
@@ -213,6 +215,7 @@ public class Storage {
     public void writeTaskToStorage(Task task, Ui ui) {
         try {
             String result = "";
+            assert task.type != null : "The type of task is not suppose to be null";
             switch (task.type) {
             case "todo":
                 result = "T,0";
