@@ -50,11 +50,11 @@ public class Storage {
                 String[] data = line.split(":");
 
                 if (firstLetter == 'T') {
-                    startingList.add(new Todo(data[2]));
+                    startingList.add(new Todo(data[1], data[2], data[3]));
                 } else if (firstLetter == 'D') {
-                    startingList.add(new Deadline(data[2], data[3]));
+                    startingList.add(new Deadline(data[1], data[2], data[3], data[4]));
                 } else if (firstLetter == 'E') {
-                    startingList.add(new Event(data[2], data[3]));
+                    startingList.add(new Event(data[1], data[2], data[3], data[4]));
                 } else {
                     assert (firstLetter == 'T') || (firstLetter == 'D') || (firstLetter == 'E') : "Unknown entry.";
                     throw new DukeException(UI.ERROR_UNKNOWN);

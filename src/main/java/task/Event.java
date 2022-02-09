@@ -22,6 +22,19 @@ public class Event extends Task {
     }
 
     /**
+     * Creates Event based on saved data.
+     *
+     * @param status Status retrieved.
+     * @param description Description retrieved.
+     * @param tag Tag retrieved.
+     * @param at Location retrieved.
+     */
+    public Event(String status, String description, String tag, String at) {
+        super(status, description, tag);
+        this.at = at;
+    }
+
+    /**
      * Returns the string representation with details
      * on the task type, mark status, description and
      * event location.
@@ -30,7 +43,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     /**

@@ -24,6 +24,19 @@ public class Deadline extends Task {
     }
 
     /**
+     * Creates Deadline based on saved data.
+     *
+     * @param status Status retrieved.
+     * @param description Description retrieved.
+     * @param tag Tag retrieved.
+     * @param by Deadline retrieved.
+     */
+    public Deadline(String status, String description, String tag, String by) {
+        super(status, description, tag);
+        this.by = by;
+    }
+
+    /**
      * Returns the formatted Date to display from the deadline input.
      *
      * @param input the input Date as per "yyyy-MM-dd HH:mm"

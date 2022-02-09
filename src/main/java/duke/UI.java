@@ -75,4 +75,14 @@ public class UI {
         return UI.MARK + " as not done yet:\n" + text;
     }
 
+    /**
+     * Prints message that Task has been tagged as per tag input.
+     *
+     * @param text Description of Task.
+     * @param tag Name of Tag.
+     * @return String representation of Tag message.
+     */
+    public static String printTag(String text, String tag) {
+        return String.format("The following task:\n%s\nhas been tagged as a %s task.", text, tag);
+    }
 }

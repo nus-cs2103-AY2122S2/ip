@@ -4,7 +4,6 @@ import duke.Duke;
 import duke.UI;
 
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -68,7 +67,7 @@ public class MainWindow extends AnchorPane {
             userInput.setDisable(true);
             sendButton.setDisable(true);
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
-            pauseTransition.setOnFinished(event -> Platform.exit());
+            pauseTransition.setOnFinished(event -> System.exit(0));
             pauseTransition.play();
         } else {
             dialogContainer.getChildren().addAll(
