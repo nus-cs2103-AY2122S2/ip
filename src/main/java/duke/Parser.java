@@ -332,7 +332,7 @@ public class Parser {
         case DEADLINE:
             if (indexOfSpace == -1) {
                 throwEmptyDescriptionException();
-            } else if (messageArr.length < 2 || !message.contains("by")) {
+            } else if (messageArr.length < 2 || messageArr[1].indexOf("by") != 0) {
                 throwWrongDeadlineFormatException();
             } else if (messageArr[1].length() < 4) {
                 throwEmptyDateException();
@@ -341,7 +341,7 @@ public class Parser {
         case EVENT:
             if (indexOfSpace == -1) {
                 throwEmptyDescriptionException();
-            } else if (messageArr.length < 4 || !message.contains("at")) {
+            } else if (messageArr.length < 4 || messageArr[1].indexOf("by") != 0) {
                 throwWrongEventFormatException();
             } else if (messageArr[1].length() < 4) {
                 throwEmptyDateException();
