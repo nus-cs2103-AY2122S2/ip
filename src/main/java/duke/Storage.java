@@ -1,5 +1,7 @@
 package duke;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,14 +24,17 @@ public class Storage {
      * @throws IOException If path is not valid
      */
     public static void restoreList(ArrayList<Task> storeList) throws IOException {
-        String currentDirectory = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
-        String newFilePath = currentDirectory + "/duke.txt";
-        // create the file if do not exist yet
+        String newFilePath = getNewFilePath();
         try {
             Files.createFile(Paths.get(newFilePath));
         } catch (FileAlreadyExistsException e) {
-            File f = new File(newFilePath);
-            Scanner s = new Scanner(f);
+            restoreFromFile(storeList);
+        }
+    }
+
+    private static void restoreFromFile(ArrayList<Task> storeList) throws FileNotFoundException {
+        File f = new File(getNewFilePath());
+        try (Scanner s = new Scanner(f)) {
             while (s.hasNextLine()) {
                 String typeOfTask = s.nextLine();
                 if (typeOfTask.equals("e")) {
@@ -61,6 +66,8 @@ public class Storage {
                     continue;
                 }
             }
+        } catch (FileNotFoundException e) {
+            assert false;
         }
     }
 
@@ -72,8 +79,7 @@ public class Storage {
      */
     public static void saveList(ArrayList<Task> arrlist) throws IOException {
         int sizeOfList = arrlist.size();
-        String currentDirectory = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
-        String newFilePath = currentDirectory + "/duke.txt";
+        String newFilePath = getNewFilePath();
         eraseList(newFilePath);
         FileWriter fw = new FileWriter(newFilePath, true);
         for (int i = 0; i < sizeOfList; i++) {
@@ -111,6 +117,12 @@ public class Storage {
             }
         }
         fw.close();
+    }
+
+    private static String getNewFilePath() {
+        String currentDirectory = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
+        String newFilePath = currentDirectory + "/duke.txt";
+        return newFilePath;
     }
 
     /**
