@@ -72,7 +72,7 @@ public class Storage {
                 String type = splitVerticalBar[0];
                 String desc = splitVerticalBar[2];
 
-                // Add task to tasks based on type.
+                // Adds task to tasks based on type.
                 switch (type) {
                 case "T":
                 case "D":

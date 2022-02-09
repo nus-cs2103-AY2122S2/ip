@@ -41,6 +41,7 @@ public class Parser {
             switch (command) {
             case ListCommand.COMMAND:
                 return prepareListCommand();
+
             case TodoCommand.COMMAND:
                 // Fallthrough
             case DeadlineCommand.COMMAND:
@@ -74,6 +75,7 @@ public class Parser {
                     throw new EchoException("Invalid format. Follow the <yyyy-mm-dd> <24hr time> format."
                             + "\n" + "E.g. 2019-10-15 1800");
                 }
+
             case MarkCommand.COMMAND:
                 // Fallthrough
             case UnmarkCommand.COMMAND:
@@ -84,7 +86,7 @@ public class Parser {
                     throw new EchoException("Please specify the task number. Eg. mark 1");
                 }
 
-                // Parse second input into an int, throws NumberFormatException if it's not an int.
+                // Parses second input into an int, throws NumberFormatException if it's not an int.
                 try {
                     int taskIndex = Integer.parseInt(splitSpace[1]) - 1;
                     if (command.equals(MarkCommand.COMMAND)) {
@@ -98,14 +100,17 @@ public class Parser {
                     // Second input provided by user is not an int.
                     throw new EchoException("Second input must be an integer. Eg. mark 1");
                 }
+
             case FindCommand.COMMAND:
                 // If second input (description) is not specified
                 if (splitSpace.length == 1) {
                     throw new EchoException("Please specify the description to find!");
                 }
                 return prepareFindCommand(getDescription(input, command));
+
             case ByeCommand.COMMAND:
                 return prepareByeCommand();
+
             default:
                 return prepareHelpCommand();
             }
@@ -141,7 +146,7 @@ public class Parser {
     }
 
     /**
-     * Is user exited.
+     * Returns whether user is exited.
      *
      * @return True if user is exited; False otherwise.
      */
