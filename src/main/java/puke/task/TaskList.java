@@ -115,7 +115,8 @@ public class TaskList {
             throw new PukeException("I'll need a description for the task..");
         }
 
-        Task t;
+        Task t = null;
+
         if (type.equals("todo")) {
             t = new Todo(args.trim());
         } else {
@@ -137,7 +138,7 @@ public class TaskList {
 
                 if (type.equals("deadline")) {
                     t = new Deadline(taskDetail[0].trim(), dateTime);
-                } else {
+                } else if (type.equals("event")) {
                     t = new Event(taskDetail[0].trim(), dateTime);
                 }
             } catch (DateTimeParseException e) {
@@ -145,6 +146,7 @@ public class TaskList {
             }
         }
 
+        assert t != null;
         tasks.add(t);
 
         return "Got it. I've added this task:\n  " + t
@@ -175,6 +177,7 @@ public class TaskList {
 
         String taskInfo = tasks.get(taskNo - 1).toString();
         tasks.remove(taskNo - 1);
+
         return "There's no going back now. I've removed this task:\n  " + taskInfo
                 + "\nNow you have " + this.getNoOfTasks()
                 + (this.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.";
@@ -202,7 +205,7 @@ public class TaskList {
             }
         }
 
-        if (result == "") {
+        if (result.equals("")) {
             return "There is no matching task for '" + keyword + "'";
         } else {
             return "Here are the matching tasks for you:" + result;

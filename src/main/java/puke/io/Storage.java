@@ -57,7 +57,7 @@ public class Storage {
     private void populateTasks(TaskList tasks, Scanner s) throws PukeException {
         while (s.hasNext()) {
             String[] taskInfo = s.nextLine().split("@@");
-            Task t = null;
+            Task t;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
             switch (taskInfo[0]) {

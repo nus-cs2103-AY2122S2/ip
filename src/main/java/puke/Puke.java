@@ -47,7 +47,7 @@ public class Puke {
      * @return Response from the chatbot.
      */
     public String getResponse(String input) {
-        String response = "";
+        String response;
 
         try {
             response = parser.processInput(input, tasks);
