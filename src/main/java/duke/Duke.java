@@ -226,6 +226,11 @@ public class Duke extends Application {
                 return taskList.findTask(userInput);
             }
 
+            // show the list of commands
+            if (command.equals("help")) {
+                return taskList.ListOfCommands();
+            }
+
             // Invalid command inputs result
             throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
 

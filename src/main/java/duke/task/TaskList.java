@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 
+import duke.HelpPage;
 import duke.exception.DukeCommandDoesNotExistException;
 import duke.exception.DukeException;
 import duke.exception.DukeNoDescriptionException;
@@ -296,5 +297,10 @@ public class TaskList {
         }
 
         return returnMessage.toString();
+    }
+
+    public String ListOfCommands() {
+        HelpPage helpPage = new HelpPage();
+        return helpPage.toString();
     }
 }

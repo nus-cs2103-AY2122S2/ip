@@ -8,7 +8,9 @@ public class Ui {
      * @return A String of welcome message.
      */
     public String welcomeMessage() {
-        return ("Hello! I'm Duke\n" + "What can I do for you?");
+        return ("Hello! I'm Duke\n"
+                + "What can I do for you?\n"
+                + "Type 'help' to see the list of commands and learn about this app");
     }
 
     /**
