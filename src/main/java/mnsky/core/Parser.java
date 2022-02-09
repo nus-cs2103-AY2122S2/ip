@@ -35,7 +35,7 @@ public class Parser {
             throw new MnskyMissingParameterException("todo", "name");
         }
 
-        return new ArrayList<>(List.of("task", inputSplit[1]));
+        return new ArrayList<>(List.of("todo", inputSplit[1]));
     }
 
     /**
@@ -148,20 +148,13 @@ public class Parser {
     public static ArrayList<String> parseInput(String input) throws MnskyException {
         String[] inputSplit = input.split(" ");
         ArrayList<String> parsedInput = new ArrayList<>();
+        parsedInput.add(inputSplit[0]);
 
         switch (inputSplit[0]) {
-        case "bye":
-            parsedInput.add("bye");
-            break;
-        case "list":
-            parsedInput.add("list");
-            break;
         case "mark":
-            parsedInput.add("mark");
             parsedInput.add(retrieveIndex("mark", inputSplit));
             break;
         case "unmark":
-            parsedInput.add("unmark");
             parsedInput.add(retrieveIndex("unmark", inputSplit));
             break;
         case "todo":
@@ -174,21 +167,12 @@ public class Parser {
             parsedInput = parseDeadline(inputSplit);
             break;
         case "delete":
-            parsedInput.add("delete");
             parsedInput.add(retrieveIndex("delete", inputSplit));
             break;
         case "find":
-            parsedInput.add("find");
             parsedInput.add(retrieveSearchTerm(input));
             break;
-        case "undo":
-            parsedInput.add("undo");
-            break;
-        case "redo":
-            parsedInput.add("redo");
-            break;
-        default:
-            parsedInput.add("invalid");
+        default: // Do nothing
         }
 
         return parsedInput;
