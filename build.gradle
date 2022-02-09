@@ -46,8 +46,8 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "bob"
     archiveClassifier = null
+    archiveBaseName = "bob"
 }
 
 checkstyle {

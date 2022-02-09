@@ -25,6 +25,7 @@ public class MarkCommand extends Command {
         } else {
             StringBuilder reply = new StringBuilder();
             toMark.markTask();
+            assert toMark.isMarked(): "Task should be marked but not.";
             reply.append(ui.finishTask() + "\n");
             reply.append(ui.printTask(toMark) + "\n");
             store.updateStore(tasks);

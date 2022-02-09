@@ -20,7 +20,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 /**
  * The Bob class implements a chat-bot that records your tasks and tracks your progress.
  *
@@ -40,10 +39,6 @@ public class Bob extends Application {
     private Image userPic = new Image(this.getClass().getResourceAsStream("/images/userpfp.jpeg"));
     public Bob() {
 
-    }
-
-    public static void main(String[] args) {
-        new Bob().initializeBob();
     }
 
     public Storage getStore() {
