@@ -70,26 +70,26 @@ public class Storage {
                 Task curr;
                 // Check what type of task is this.
                 switch (type) {
-                    case "T ":
-                        curr = new Todo(name);
-                        break;
-                    case "D ":
-                        time = inputLine[3];
-                        curr = new Deadline(name.substring(0, name.length() - 1), time);
-                        break;
-                    case "E ":
-                        time = inputLine[3];
-                        curr = new Event(name.substring(0, name.length() - 1), time);
-                        break;
-                    default:
-                        curr = null;
+                case "T ":
+                    curr = new Todo(name);
+                    break;
+                case "D ":
+                    time = inputLine[3];
+                    curr = new Deadline(name.substring(0, name.length() - 1), time);
+                    break;
+                case "E ":
+                    time = inputLine[3];
+                    curr = new Event(name.substring(0, name.length() - 1), time);
+                    break;
+                default:
+                    curr = null;
                 }
                 // Check if the task is marked as done.
                 switch (done) {
-                    case "1 ":
-                        curr.setMark();
-                    case "0 ":
-                        break;
+                case "1 ":
+                    curr.setMark();
+                case "0 ":
+                    break;
                 }
                 // After all the necessary information, add it into the TaskList.
                 tasks.add(curr);
@@ -117,30 +117,32 @@ public class Storage {
                 Task currTask = tasks.getAt(n);
                 String str = null;
                 String suffix = null;
-                switch (currTask.whatType()) {
-                    case "T":
-                        str = "T | ";
-                        suffix = currTask.getDescription();
-                        break;
-                    case "D":
-                        str = "D | ";
-                        Deadline tempD = (Deadline) currTask;
-                        suffix = tempD.getDescription() + " | " + tempD.getOriginalDate();
-                        break;
-                    case "E":
-                        str = "E | ";
-                        Event tempE = (Event) currTask;
-                        suffix = tempE.getDescription() + " | " + tempE.getOriginalDate();
-                        break;
 
+                // Assign string values according to the type of Task.
+                switch (currTask.whatType()) {
+                case "T":
+                    str = "T | ";
+                    suffix = currTask.getDescription();
+                    break;
+                case "D":
+                    str = "D | ";
+                    Deadline tempD = (Deadline) currTask;
+                    suffix = tempD.getDescription() + " | " + tempD.getOriginalDate();
+                    break;
+                case "E":
+                    str = "E | ";
+                    Event tempE = (Event) currTask;
+                    suffix = tempE.getDescription() + " | " + tempE.getOriginalDate();
+                    break;
                 }
+                // Assign string values according to if the Task is done.
                 switch (currTask.getStatusIcon()) {
-                    case "X":
-                        str = str + "1 | ";
-                        break;
-                    case " ":
-                        str = str + "0 | ";
-                        break;
+                case "X":
+                    str = str + "1 | ";
+                    break;
+                case " ":
+                    str = str + "0 | ";
+                    break;
                 }
                 // Once all the information is extracted, write it into the file.
                 fw.write(str + suffix + System.lineSeparator());
