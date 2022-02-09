@@ -38,6 +38,10 @@ public class Deadline extends Task {
         return by.format(inputFormatter);
     }
 
+    public LocalDateTime getDateInLocalDateTime() {
+        return by;
+    }
+
     /**
      * Overrides toString method to make a string including prefix, status icon, description and date.
      * @return String representation of Deadline

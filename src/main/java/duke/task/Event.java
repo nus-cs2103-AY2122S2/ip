@@ -36,6 +36,10 @@ public class Event extends Task{
         return at.format(inputFormatter);
     }
 
+    public LocalDateTime getDateInLocalDateTime() {
+        return at;
+    }
+
     /**
      * Overrides toString method to make a string including prefix, status icon, description and date.
      * @return String representation of Event
