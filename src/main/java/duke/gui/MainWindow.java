@@ -21,14 +21,12 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
 
     private Duke duke;
-    // private String byeMessage = "Bye. Hope I've motivated you as much as I could have,
-    // and SMILE :D\nClosing in 5 Seconds!\n";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Initialises the the dialog container with the welcome message of duke.
+     * Initialises the dialog container with the welcome message of duke.
      */
     @FXML
     public void initialize() {
