@@ -1,36 +1,39 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
 public class MarkCommand extends Command {
 
+    private String userInput;
     private Task currTask;
 
     /**
      * Mark a task as complete
      *
-     * @param taskList the list of tasks
      * @param userInput the input from user
      */
-    public MarkCommand(TaskList taskList, String userInput) {
+    public MarkCommand(String userInput) throws DukeException {
+        this.userInput = userInput;
+    }
+
+    @Override
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         try {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
             assert index >= 1 : "Index less than 1!";
             Task task = taskList.getTasks().get(index);
             task.setComplete();
             currTask = task;
+            return Ui.printMarkSuccess(currTask);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Please enter a number of the item in the list you wish to mark!");
+            throw new DukeException("Please enter a number of the item in the list you wish to mark!");
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println("Please enter index within range 1 to " + taskList.getTasks().size());
+            throw new DukeException("Please enter index within range 1 to " + taskList.getTasks().size());
         }
-    }
 
-    @Override
-    public String execute(TaskList tasks, Ui ui) {
-        return Ui.printMarkSuccess(currTask);
     }
 
 }
