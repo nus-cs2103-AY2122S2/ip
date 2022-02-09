@@ -36,6 +36,7 @@ public class Storage {
             }
             this.file = new File("data/tasks.txt");
             this.file.createNewFile();
+            assert file.exists();
         } catch (FileAlreadyExistsException e) {
             e.getStackTrace();
         } catch (IOException e) {

@@ -62,6 +62,7 @@ public class Parser {
         } else if (arr[1].trim().equals("")) {
             throw new EmptyDescriptionException();
         }
+        assert !arr[1].equals("");
         return new TodoCommand(arr[1]);
     }
 
@@ -100,6 +101,7 @@ public class Parser {
         } else if (arr[1].trim().equals("")) {
             throw new IncompleteCommandException();
         }
+        assert !arr[1].equals("");
         return new FindCommand(arr[1]);
     }
 
@@ -110,6 +112,7 @@ public class Parser {
         } else if (arr[1].trim().equals("")) {
             throw new IncompleteCommandException();
         }
+        assert !arr[1].equals("");
         return new MarkCommand(Integer.parseInt(arr[1]));
     }
 
@@ -120,6 +123,7 @@ public class Parser {
         } else if (arr[1].trim().equals("")) {
             throw new IncompleteCommandException();
         }
+        assert !arr[1].equals("");
         return new UnmarkCommand(Integer.parseInt(arr[1]));
 
     }
@@ -131,6 +135,7 @@ public class Parser {
         } else if (arr[1].trim().equals("")) {
             throw new IncompleteCommandException();
         }
+        assert !arr[1].equals("");
         return new DeleteCommand(Integer.parseInt(arr[1]));
     }
 }
