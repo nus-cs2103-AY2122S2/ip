@@ -1,13 +1,28 @@
-package paggro;
-
-import org.junit.jupiter.api.Test;
-import paggro.parser.Parser;
-import paggro.task.ToDo;
+package paggrotest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import paggro.command.Command;
+import paggro.lister.Lister;
+import paggro.parser.Parser;
+import paggro.storage.Storage;
+import paggro.task.ToDo;
+import paggro.ui.Ui;
+
 public class PaggroTest {
+    public class CommandStub extends Command {
+        public CommandStub() {
+            super();
+        }
+
+        @Override
+        public String execute(Lister lister, Ui ui, Storage storage) {
+            return "";
+        }
+    }
     @Test
     void parse_unknownCommandString_throwPaggroException() {
         try {
