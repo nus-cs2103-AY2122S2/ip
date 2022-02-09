@@ -116,6 +116,16 @@ public class DioBotMessage extends BotMessage {
         return "/images/DIOBot.png";
     }
 
+    /**
+     * Returns the message to be printed when a command of type 'stats' is executed.
+     *
+     * @return stats message.
+     */
+    @Override
+    public String getStatsMessage() {
+        return "How Many Breads Have You Eaten In Your Life?";
+    }
+
     private String getTaskLeft(TaskList taskList) {
         String muda = "";
         for (int i = 0; i < taskList.size(); i++) {

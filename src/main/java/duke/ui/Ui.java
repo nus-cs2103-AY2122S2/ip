@@ -6,6 +6,7 @@ import duke.bot.DioBotMessage;
 import duke.bot.JjbaBotMessage;
 import duke.command.CommandFeedback;
 import duke.task.TaskList;
+import duke.user.UserProfile;
 
 /**
  * Represents the UI system of the program. A <code>Ui</code> object can be created to
@@ -40,21 +41,12 @@ public class Ui {
     }
 
     /**
-     * Prints the given task list.
-     *
-     * @param botMessage the botMessage being printed.
-     * @param taskList a task list.
-     */
-    private String getTaskListMessage(String botMessage, TaskList taskList) {
-        return botMessage + "\n" + taskList.toString();
-    }
-
-    /**
      * Prints an error message with a line separator
      * and a warning symbol '⚠'. The message will be
      * formatted with spacing.
      *
      * @param errorMsg error message to be formatted and print.
+     * @return the formatted error message.
      */
     public String formatError(String errorMsg) {
         return "!!! " + errorMsg;
@@ -64,6 +56,7 @@ public class Ui {
      * Prints an error message due to an invalid command.
      *
      * @param errorMsg error message to be formatted and print.
+     * @return the formatted error message.
      */
     public String getInvalidCommandMessage(String errorMsg) {
         if (errorMsg.isBlank()) {
@@ -78,9 +71,10 @@ public class Ui {
      * given in the command feedback.
      *
      * @param comFeed command feedback of an executed command.
+     * @param profile the user profile information.
      * @return the output message
      */
-    public String getCommandFeedbackMessage(CommandFeedback comFeed) {
+    public String getCommandFeedbackMessage(CommandFeedback comFeed, UserProfile profile) {
         switch (comFeed.cType) {
         case ADD:
             return bot.getAddMessage(comFeed.taskList, comFeed.task);
@@ -96,6 +90,9 @@ public class Ui {
             return bot.getBotMessage();
         case FIND:
             return getTaskListMessage(bot.getFindListMessage(comFeed.taskList.isEmpty()), comFeed.taskList);
+        case STATS:
+            System.out.println(getStatsMessage(bot.getStatsMessage(), profile.toString()));
+            return getStatsMessage(bot.getStatsMessage(), profile.toString());
         case EXIT:
             return bot.getExitMessage();
         default:
@@ -123,5 +120,13 @@ public class Ui {
 
     public String getBotImagePath() {
         return bot.getImagePath();
+    }
+
+    private String getTaskListMessage(String botMessage, TaskList taskList) {
+        return botMessage + "\n" + taskList.toString();
+    }
+
+    private String getStatsMessage(String botMessage, String userInfo) {
+        return botMessage + "\n" + userInfo;
     }
 }

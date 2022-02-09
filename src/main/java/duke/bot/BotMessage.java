@@ -75,6 +75,7 @@ public abstract class BotMessage {
     /**
      * Returns the message to be printed when a command of type 'find' is executed.
      *
+     * @param isEmpty the status of the list being empty.
      * @return find message.
      */
     public abstract String getFindListMessage(boolean isEmpty);
@@ -85,5 +86,12 @@ public abstract class BotMessage {
      * @return the image file path.
      */
     public abstract String getImagePath();
+
+    /**
+     * Returns the message to be printed when a command of type 'stats' is executed.
+     *
+     * @return stats message.
+     */
+    public abstract String getStatsMessage();
 }
 

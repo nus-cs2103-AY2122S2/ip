@@ -5,16 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
+import duke.user.UserProfile;
 
 /**
  * Represents the storage system of the program. A <code>Storage</code> object can be created to
@@ -26,6 +23,7 @@ public class Storage {
     public static final String MESSAGE_WRITE_FAILURE = "Something went wrong with file write!";
     public static final String MESSAGE_INVALID_FILE = "File Corrupted!";
 
+    private Scanner sc;
     private final String filePath;
 
     /**
@@ -43,20 +41,20 @@ public class Storage {
     }
 
     /**
-     * Saves the task list by writing the data of the tasks into
+     * Saves the user profile by writing the data of the user info into
      * the file specified in the Storage object.
      *
-     * @param taskList the task list to be saved.
+     * @param userProfile the user profile to be saved.
      * @throws DukeException if write to file fails.
      */
-    public void saveTaskList(TaskList taskList) throws DukeException {
+    public void saveUserProfile(UserProfile userProfile) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
 
-            for (int i = 0; i < taskList.size(); i++) {
-                Task curTask = taskList.get(i);
+            String[] dataSegments = userProfile.toData().split("\n");
 
-                fw.write(curTask.toData());
+            for (String dataSegment : dataSegments) {
+                fw.write(dataSegment);
                 fw.write(System.lineSeparator());
             }
             fw.close();
@@ -67,60 +65,61 @@ public class Storage {
     }
 
     /**
-     * Returns a task list by reading the data of the file
+     * Returns a user profile by reading the data of the file
      * specified in the Storage object.
      *
-     * @return a saved task list.
+     * @return a saved user profile.
      * @throws DukeException if write to file fails.
      */
-    public TaskList loadTaskList() throws DukeException {
+    public UserProfile loadUserProfile() throws DukeException {
         try {
-            ArrayList<Task> taskArr = new ArrayList<>();
             File file = new File(filePath);
-            Scanner sc = new Scanner(file);
+            sc = new Scanner(file);
 
-            while (sc.hasNextLine()) {
-                String data = sc.nextLine();
-                String[] dataArgs = data.split("\\|");
+            TaskList taskList = loadTaskList();
 
-                Task curTask = dataToTask(dataArgs);
-                taskArr.add(curTask);
+            String profileInfoArg = sc.nextLine();
+
+            if (!profileInfoArg.equals(String.format("[%s]", UserProfile.STORAGE_HEADER))) {
+                throw new IOException(MESSAGE_INVALID_FILE);
             }
 
-            return new TaskList(taskArr);
+            String[] profileData = new String[UserProfile.STATS_NO];
+            String data;
+
+            for (int i = 0; i < UserProfile.STATS_NO; i++) {
+                data = sc.nextLine();
+                profileData[i] = data;
+            }
+            sc.close();
+
+            return new UserProfile(taskList, LocalDate.parse(profileData[0]),
+                    Integer.parseInt(profileData[1]));
 
         } catch (FileNotFoundException e) {
             throw new DukeException(MESSAGE_READ_FAILURE);
-        } catch (IOException e) {
+        } catch (IOException | NoSuchElementException e) {
             throw new DukeException(e.getMessage());
         }
     }
 
-    private Task dataToTask(String[] dataArgs) throws IOException {
-        try {
-            int taskDone = Integer.parseInt(dataArgs[1]);
-            boolean isMarkValid = taskDone == 1 || taskDone == 0;
-            boolean isTaskMark = taskDone == 1;
+    private TaskList loadTaskList() throws IOException {
+        TaskList taskList = new TaskList();
 
-            if (!isMarkValid) {
-                throw new IOException(MESSAGE_INVALID_FILE);
-            }
+        String data = sc.nextLine();
+        String[] taskListArgs = data.split(" ");
 
-            switch (dataArgs[0]) {
-            case "T":
-                return new Todo(dataArgs[2], isTaskMark);
-            case "D":
-                return new Deadline(dataArgs[2], isTaskMark, LocalDate.parse(dataArgs[3]),
-                        LocalTime.parse(dataArgs[4]));
-            case "E":
-                return new Event(dataArgs[2], isTaskMark, LocalDate.parse(dataArgs[3]),
-                        LocalTime.parse(dataArgs[4]), LocalTime.parse(dataArgs[5]));
-            default:
-                throw new IOException(MESSAGE_INVALID_FILE);
-            }
-        } catch (NumberFormatException e) {
+        if (!taskListArgs[0].equals(String.format("[%s]", TaskList.STORAGE_HEADER))) {
             throw new IOException(MESSAGE_INVALID_FILE);
         }
-    }
 
+        for (int i = 0; i < Integer.parseInt(taskListArgs[1]); i++) {
+            data = sc.nextLine();
+
+            Task curTask = Task.createTask(data);
+            taskList.add(curTask);
+        }
+
+        return taskList;
+    }
 }

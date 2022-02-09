@@ -11,6 +11,7 @@ import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.StatsCommand;
 import duke.command.add.DeadlineCommand;
 import duke.command.add.EventCommand;
 import duke.command.add.TodoCommand;
@@ -85,6 +86,8 @@ public class Parser {
             return handleFind(inputArgs);
         case ExitCommand.COMMAND_WORD:
             return handleExit(inputArgs);
+        case StatsCommand.COMMAND_WORD:
+            return handleStats(inputArgs);
         case BotCommand.COMMAND_WORD_JJBA:
             return handleBot(inputArgs, BotType.JJBA);
         case BotCommand.COMMAND_WORD_DIO:
@@ -97,7 +100,6 @@ public class Parser {
     private static boolean checkSingleArgs(String[] inputArgs) {
         return (inputArgs.length < 2);
     }
-
 
     private static Command handleTodo(String[] inputArgs) throws InvalidArgumentException {
         if (checkSingleArgs(inputArgs)) {
@@ -220,5 +222,12 @@ public class Parser {
         return new ExitCommand();
     }
 
+    private static Command handleStats(String[] inputArgs) throws InvalidArgumentException {
+        if (!checkSingleArgs(inputArgs)) {
+            throw new InvalidArgumentException(StatsCommand.COMMAND_FORMAT);
+        }
+
+        return new StatsCommand();
+    }
 
 }

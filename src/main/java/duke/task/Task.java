@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Represents a task made by the user. A <code>Task</code> object cannot be
  * created as it is an abstract base class for all tasks. The task can
@@ -60,5 +64,41 @@ public abstract class Task {
      */
     public String toData() {
         return String.format("%d|%s", isMark ? 1 : 0, description);
+    }
+
+    /**
+     * Converts the data in string representation and
+     * creates a new Task object.
+     *
+     * @param data the data information about the task.
+     * @return a new task object.
+     * @throws IOException if read tasklist data fails.
+     */
+    public static Task createTask(String data) throws IOException {
+        try {
+            String[] dataArgs = data.split("\\|");
+            int taskDone = Integer.parseInt(dataArgs[1]);
+            boolean isMarkValid = taskDone == 1 || taskDone == 0;
+            boolean isTaskMark = taskDone == 1;
+
+            if (!isMarkValid) {
+                throw new IOException();
+            }
+
+            switch (dataArgs[0]) {
+            case "T":
+                return new Todo(dataArgs[2], isTaskMark);
+            case "D":
+                return new Deadline(dataArgs[2], isTaskMark, LocalDate.parse(dataArgs[3]),
+                        LocalTime.parse(dataArgs[4]));
+            case "E":
+                return new Event(dataArgs[2], isTaskMark, LocalDate.parse(dataArgs[3]),
+                        LocalTime.parse(dataArgs[4]), LocalTime.parse(dataArgs[5]));
+            default:
+                throw new IOException();
+            }
+        } catch (NumberFormatException | IOException e) {
+            throw new IOException();
+        }
     }
 }
