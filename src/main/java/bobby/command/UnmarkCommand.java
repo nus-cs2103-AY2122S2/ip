@@ -36,6 +36,9 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
+        assert tasks != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
+        assert storage != null : "Storage cannot be null";
         int indexUnmark;
         try {
             indexUnmark = Integer.parseInt(toUnmark) - 1;

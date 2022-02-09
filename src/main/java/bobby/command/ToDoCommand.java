@@ -34,6 +34,9 @@ public class ToDoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
+        assert tasks != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
+        assert storage != null : "Storage cannot be null";
         ToDo newToDo = new ToDo(taskName);
         tasks.addTask(newToDo);
         storage.saveTasks(tasks.getTaskList());
