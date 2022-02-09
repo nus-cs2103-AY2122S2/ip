@@ -227,7 +227,10 @@ public class Parser {
             return messageArr[1];
         case DEADLINE:
         case EVENT:
-            return messageArr[0].substring(0, messageArr[0].length() - 1); //remove last whitespace
+            String description = messageArr[0];
+
+            return description.endsWith(" ") ? messageArr[0].substring(0, messageArr[0].length() - 1)
+                : description; //remove last whitespace if it exists
         default:
             throwInvalidTypeDeclaration();
         }
@@ -341,7 +344,7 @@ public class Parser {
         case EVENT:
             if (indexOfSpace == -1) {
                 throwEmptyDescriptionException();
-            } else if (messageArr.length < 4 || messageArr[1].indexOf("by") != 0) {
+            } else if (messageArr.length < 4 || messageArr[1].indexOf("at") != 0) {
                 throwWrongEventFormatException();
             } else if (messageArr[1].length() < 4) {
                 throwEmptyDateException();

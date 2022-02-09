@@ -11,8 +11,8 @@ import java.time.LocalTime;
  */
 public class Deadline extends Task {
 
-    public static final String FORMAT = "[Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\"\n"
-        + "            + \" empty if no time in current task)";
+    public static final String FORMAT = "[Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\""
+        + "empty if no time in current task)";
 
     protected final LocalDate date;
     protected final LocalTime time;
