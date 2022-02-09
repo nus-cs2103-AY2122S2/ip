@@ -28,12 +28,30 @@ public class Event extends Task {
     }
 
     /**
+     * Outputs the start date-time of the event.
+     *
+     * @return start date-time.
+     */
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    /**
+     * Outputs the end date-time of the event.
+     *
+     * @return end date-time.
+     */
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    /**
      * Outputs the start and end times of event in a
      * formatted manner.
      *
      * @return the start and end time of Event.
      */
-    public String getAt() {
+    public String getFormattedAt() {
         return start.format(DateTimeFormatter.ofPattern("h:mm a")) + " - "
                 + end.format(DateTimeFormatter.ofPattern("h:mm a MMM dd yyyy"));
     }
@@ -76,6 +94,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + getAt() + ")";
+        return "[E]" + super.toString() + " (at: " + getFormattedAt() + ")";
     }
 }

@@ -11,7 +11,7 @@ import luca.task.TaskList;
 public class ListCommand extends Command {
 
     /**
-     * Constructor to create List duke.command.Command.
+     * Constructor to create List Command.
      */
     public ListCommand() {
         super(CommandType.LIST);
@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     /**
      * Returns the string containing list of tasks.
      *
-     * @param taskList duke.task.Task list loaded to the chat bot.
+     * @param taskList Task list loaded to the chat bot.
      * @return list of tasks as a string.
      */
     private static String listToString(TaskList taskList) {
