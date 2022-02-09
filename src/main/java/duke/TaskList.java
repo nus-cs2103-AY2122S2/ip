@@ -17,16 +17,16 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void addTodo(String command) {
-        Todo todo = new Todo(command);
+    public void addTodo(String taskInfo) {
+        Todo todo = new Todo(taskInfo);
         tasks.add(todo);
         this.printAdd();
     }
 
-    public void addDdl(String command) {
-        int i = command.indexOf(" /by ");
-        if (i > 0 && i + 5 < command.length()) {
-            Deadline t = new Deadline(command.substring(0, i), LocalDate.parse(command.substring(i + 5)));
+    public void addDdl(String taskInfo) {
+        int i = taskInfo.indexOf(" /by ");
+        if (i > 0 && i + 5 < taskInfo.length()) {
+            Deadline t = new Deadline(taskInfo.substring(0, i), LocalDate.parse(taskInfo.substring(i + 5)));
             tasks.add(t);
             this.printAdd();
         } else {
@@ -34,10 +34,10 @@ public class TaskList {
         }
     }
 
-    public void addEvt(String command) {
-        int i = command.indexOf(" /at ");
-        if (i > 0 && i + 5 < command.length()) {
-            Event t = new Event(command.substring(0, i), command.substring(i + 5));
+    public void addEvt(String taskInfo) {
+        int i = taskInfo.indexOf(" /at ");
+        if (i > 0 && i + 5 < taskInfo.length()) {
+            Event t = new Event(taskInfo.substring(0, i), taskInfo.substring(i + 5));
             tasks.add(t);
             this.printAdd();
         } else {
