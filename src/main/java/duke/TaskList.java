@@ -24,10 +24,10 @@ public class TaskList {
     /**
      * Adds a new task.
      *
-     * @param t the task to be added
+     * @param task the task to be added
      */
-    void add(Task t) {
-        tasks.add(t);
+    void add(Task task) {
+        tasks.add(task);
     }
 
     /**
