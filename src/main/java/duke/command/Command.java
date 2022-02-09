@@ -42,6 +42,10 @@ public abstract class Command {
      */
     protected String getTaskDescription(String input, String emptyDescErrDesc) throws DukeException {
         String taskDescription = "";
+        
+        //check if input have command key
+        assert input.length() > 0: "There's not input, command should not exist";
+        assert input.contains(key): "Command doesn't have key. Command should not exist.";
 
         try {
             taskDescription = input.substring(input.indexOf(key) + key.length() + 1);
