@@ -34,6 +34,8 @@ public class FindCommand extends Command {
         TaskList findResults = new TaskList();
         for (int i = 1; i < taskList.getLength() + 1; i++) {
             Task currTask = taskList.getTask(i);
+            assert currTask != null : "task retrieved from taskList cannot be null";
+
             if (currTask.getDescription().contains(this.searchString)) {
                 findResults.addTask(currTask);
             }

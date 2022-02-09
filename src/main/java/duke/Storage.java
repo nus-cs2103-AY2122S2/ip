@@ -55,16 +55,26 @@ public class Storage {
                         taskList.addTask(new Todo(currTask[2]));
                         break;
                     case "D":
-                        taskList.addTask(new Deadline(currTask[2], LocalDate.parse(currTask[3])));
+                        LocalDate deadlineDate = LocalDate.parse(currTask[3]);
+                        assert deadlineDate != null : "deadlineDate cannot be null";
+                        taskList.addTask(new Deadline(currTask[2], deadlineDate));
                         break;
                     case "E":
-                        taskList.addTask(new Event(currTask[2], LocalDate.parse(currTask[3])));
+                        LocalDate eventDate = LocalDate.parse(currTask[3]);
+                        assert eventDate != null : "eventDate cannot be null";
+                        taskList.addTask(new Event(currTask[2], eventDate));
                         break;
                     default:
                         break;
                     }
                     if (currTask[1].equals("1")) {
-                        taskList.getTask(taskList.getLength()).markAsDone();
+                        int taskListLength = taskList.getLength();
+                        assert taskListLength >= 0 : "taskList.getLength should return an int not less than 0";
+
+                        Task task = taskList.getTask(taskListLength);
+                        assert task != null : "task retrieved from taskList cannot be null";
+
+                        task.markAsDone();
                     }
                 }
             }
@@ -83,15 +93,30 @@ public class Storage {
         StringBuilder tasksToSave = new StringBuilder();
         for (int i = 1; i < taskList.getLength()+1; i++) {
             Task currTask = taskList.getTask(i);
+            assert currTask != null : "task retrieved from taskList cannot be null";
+
             String done = currTask.isDone() ? "1|" : "0|";
+
+            String description = currTask.getDescription();
+            assert description != null : "description should not be null";
+            assert description.strip() != "" : "description should not be an empty String or have whitespace only";
+
             if (currTask instanceof Todo) {
-                tasksToSave.append("T|").append(done).append(currTask.getDescription());
+                tasksToSave.append("T|").append(done).append(description);
             } else if (currTask instanceof Deadline) {
-                tasksToSave.append("D|").append(done).append(currTask.getDescription())
-                        .append("|").append(((Deadline) currTask).getDeadline());
+                String deadlineDate = ((Deadline) currTask).getDeadline();
+                assert deadlineDate != null : "deadlineDate should not be null";
+                assert deadlineDate.strip() != ""
+                        : "deadlineDate should not be an empty String or have whitespace only";
+
+                tasksToSave.append("D|").append(done).append(description).append("|").append(deadlineDate);
             } else if (currTask instanceof Event) {
-                tasksToSave.append("E|").append(done).append(currTask.getDescription())
-                        .append("|").append(((Event) currTask).getStartTime());
+                String eventDate = ((Event) currTask).getStartTime();
+                assert eventDate != null : "eventDate should not be null";
+                assert eventDate.strip() != "" : "eventDate should not be an empty String or have whitespace only";
+
+                tasksToSave.append("E|").append(done).append(description)
+                        .append("|").append(eventDate);
             }
             tasksToSave.append("\n");
         }
