@@ -1,8 +1,8 @@
 package duke.command;
 import duke.DukeException;
+import duke.gui.Ui;
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.gui.Ui;
 
 /**
  * Abstract class to represent the framework of a Command.
@@ -10,7 +10,7 @@ import duke.gui.Ui;
 public abstract class Command {
 
     protected CommandType commandType;
-    protected boolean active;
+    protected boolean isActive;
 
     /**
      * Initializes the Command object.
@@ -18,14 +18,14 @@ public abstract class Command {
      */
     public Command(CommandType commandType) {
         this.commandType = commandType;
-        this.active = true;
+        this.isActive = true;
     }
 
     /**
     * Returns a boolean reflecting if the current chat session with Duke is active or not.
     * @return boolean indicating if the chat session is active.
     */
-    public abstract boolean isActive();
+    public abstract boolean getActiveStatus();
 
     /**
      * A method that performs the logic associated with user-request command, using

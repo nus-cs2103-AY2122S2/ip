@@ -58,6 +58,10 @@ public class Ui {
         dukeResponse += "Okay, I've deleted this task" + task.toString() + "\n";
     }
 
+    /**
+     * Generates Duke's response, based on user's input.
+     * @return
+     */
     public String generateDukeResponse() {
         String generatedDukeResponse = dukeResponse;
         dukeResponse = new String("");

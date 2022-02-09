@@ -1,12 +1,13 @@
 package duke.command;
 import duke.DukeException;
+import duke.gui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.gui.Ui;
+
 
 /**
  * AddCommand represents the user's actions of adding Todo, Event & Deadline tasks.
@@ -108,8 +109,8 @@ public class AddCommand extends Command {
      * @return boolean indicating if the chat session is active or not.
      */
     @Override
-    public boolean isActive() {
-        return super.active;
+    public boolean getActiveStatus() {
+        return super.isActive;
     }
 
 }

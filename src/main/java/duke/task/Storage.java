@@ -41,7 +41,7 @@ public class Storage {
 
             // checks if the user already has existing save data
             if (!f.createNewFile()) {
-                //ui.showText("loading previous save data...");
+                ui.addText("loading previous save data...");
                 System.out.println("loading previous save data...");
                 Scanner s = new Scanner(f);
                 while (s.hasNext()) {
@@ -69,17 +69,11 @@ public class Storage {
                 s.close();
             // else creates the save data for further use
             } else {
-                //ui.showText("creating save data...");
                 ui.addText("creating save data...");
-                //System.out.println("creating save data...");
             }
 
-        // if the file cannot be read, generate an empty list
-        } catch (IOException e) {
-            ui.showError(e.getMessage());
-            return new ArrayList<Task>();
-        // if the file contains corrupt data, generate an empty list
-        } catch (DukeException e) {
+        // if the file cannot be read or contains corrupt data, generate an empty list
+        } catch (IOException | DukeException e) {
             ui.showError(e.getMessage());
             return new ArrayList<Task>();
         }
