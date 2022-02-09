@@ -12,6 +12,7 @@ import duke.ui.Ui;
  * This class is the main controller of the application.
  */
 public class Duke {
+    private final Parser parser;
     private final Storage storage;
     private final TaskList taskList;
     private final Ui ui;
@@ -21,6 +22,7 @@ public class Duke {
      * of the application.
      */
     public Duke() {
+        parser = new Parser();
         storage = new Storage();
         taskList = new TaskList();
         ui = new Ui();
@@ -33,7 +35,7 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            Command command = Parser.parse(input);
+            Command command = parser.parse(input);
             command.execute(ui, taskList, storage);
         } catch (DukeException exception) {
             ui.showErrorMessage(exception.getMessage());

@@ -2,10 +2,14 @@ package duke.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Optional;
 
 import duke.command.AddDeadlineTaskCommand;
 import duke.command.AddEventTaskCommand;
 import duke.command.AddToDoTaskCommand;
+import duke.command.AliasCommand;
 import duke.command.ByeCommand;
 import duke.command.ClearTaskCommand;
 import duke.command.Command;
@@ -21,6 +25,29 @@ import duke.exception.DukeException;
  */
 public class Parser {
     private static final int ARRAY_INDEX_OFFSET = 1;
+    private final HashMap<String, String> aliases;
+    private final HashSet<String> reservedCommands;
+
+    /**
+     * Class constructor.
+     */
+    public Parser() {
+        aliases = new HashMap<>();
+        reservedCommands = new HashSet<>();
+
+        aliases.put("a", "alias");
+        aliases.put("b", "bye");
+        aliases.put("c", "clear");
+        aliases.put("ls", "list");
+        aliases.put("f", "find");
+        aliases.put("m", "mark");
+        aliases.put("um", "unmark");
+        aliases.put("del", "delete");
+        aliases.put("t", "todo");
+        aliases.put("d", "deadline");
+        aliases.put("e", "event");
+        reservedCommands.addAll(aliases.values());
+    }
 
     /**
      * Parses the input string entered by user into a command known to the application.
@@ -29,11 +56,25 @@ public class Parser {
      * @return a command to be executed by the application.
      * @throws DukeException when <code>command</code> is invalid or its format is incorrect.
      */
-    public static Command parse(String command) throws DukeException {
+    public Command parse(String command) throws DukeException {
         String[] commandTokens = command.split(" ", 2);
+        String primaryCommand = Optional.ofNullable(aliases.get(commandTokens[0])).orElse(commandTokens[0]);
 
         try {
-            switch (commandTokens[0]) {
+            switch (primaryCommand) {
+            case "alias":
+                String[] aliasMapping = commandTokens[1].split(" ");
+                String from = aliasMapping[0];
+                String to = aliasMapping[1];
+                if (aliasMapping.length != 2) {
+                    throw new DukeException("The alias command takes in exactly 2 arguments");
+                } else if (reservedCommands.contains(from)) {
+                    throw new DukeException("Duke's original command cannot be changed");
+                } else if (!reservedCommands.contains(to)) {
+                    throw new DukeException("Alias can only refer to Duke's original command");
+                }
+                aliases.put(from, to);
+                return new AliasCommand(from, to);
             case "bye":
                 return new ByeCommand();
             case "clear":
