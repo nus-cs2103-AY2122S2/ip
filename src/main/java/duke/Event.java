@@ -41,11 +41,9 @@ public class Event extends Task {
             return e;
         } catch (Exception e) {
             throw new DukeEventException(
-                    "OOPS!!! Please enter in format: event <event> /at <event venue> \n " +
-                    "e.g. event Lesson /at Com1");
-//            System.out.println(error.getMessage());
+                "OOPS!!! Please enter in format: event <event> /at <event venue> \n " +
+                "e.g. event Lesson /at Com1");
         }
-//        return null;
     }
 
     @Override

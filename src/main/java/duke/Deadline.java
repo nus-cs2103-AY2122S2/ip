@@ -57,9 +57,9 @@ public class Deadline extends Task {
             return d_line;
         } catch (Exception e) {
             throw new DukeDeadlineException(
-                                                    "OOPS!!! Please enter in format: deadline <task> /by <yyyy-mm-dd> \n " +
-                                                    "e.g. deadline complete project /by 2022-12-24 \n" +
-                                                    "Deadline set should be after today");
+                "OOPS!!! Please enter in format: deadline <task> /by <yyyy-mm-dd> \n " +
+                "e.g. deadline complete project /by 2022-12-24 \n" +
+                "Deadline set should be after today");
         }
     }
 

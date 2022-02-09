@@ -36,8 +36,6 @@ public class Duke {
     public TaskList tasklist;
     public Ui ui;
 
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -93,9 +91,6 @@ public class Duke {
         return ui.sendPrint();
     }
 
-//    public static void main(String[] args) throws DukeException {
-//        new Duke(FILEPATH).run();
-//    }
 
     public void run() {
         while (!isExit) {
