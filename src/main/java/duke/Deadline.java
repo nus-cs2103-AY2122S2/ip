@@ -1,7 +1,7 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 /**
  * One of the three types of tasks that can be created.
