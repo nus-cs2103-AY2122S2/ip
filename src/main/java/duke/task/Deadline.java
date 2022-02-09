@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Deadline. A Deadline is a type of task that must be done by a certain date and time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
     private DateTimeFormatter dateOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");

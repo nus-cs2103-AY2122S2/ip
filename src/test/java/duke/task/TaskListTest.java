@@ -1,8 +1,9 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
     @Test
@@ -10,7 +11,7 @@ class TaskListTest {
         TaskList test = new TaskList();
         test.add(new ToDo("smn"));
         test.add(new ToDo("smn1"));
-        assertEquals(2,test.size());
+        assertEquals(2, test.size());
     }
 
     @Test

@@ -8,13 +8,13 @@ import duke.task.Task;
 public class Ui {
     private static final String NORMAL_SPACE = "      ";
     private static final String TASK_SPACE = "        ";
-    private static final String LOGO =
-            " _____           _ _   \n" +
-            "|  ___|         (_) |   \n" +
-            "| |__ _ __   ___ _| | __\n" +
-            "|  __| '_ \\ / __| | |/ /\n" +
-            "| |__| | | | (__| |   < \n" +
-            "\\____/_| |_|\\___|_|_|\\_\\";
+    private static final String LOGO = ""
+            + " _____           _ _   \n"
+            + "|  ___|         (_) |   \n"
+            + "| |__ _ __   ___ _| | __\n"
+            + "|  __| '_ \\ / __| | |/ /\n"
+            + "| |__| | | | (__| |   < \n"
+            + "\\____/_| |_|\\___|_|_|\\_\\";
     private static final String BORDER = "   ____________________________________________________________";
 
     /**

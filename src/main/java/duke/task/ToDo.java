@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a ToDo. A ToDo is a type of task that does not need to be completed by a certain date or time.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     public ToDo(String name) {
         super("T", name);
     }

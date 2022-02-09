@@ -1,16 +1,20 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Represents a file storing a list of Tasks keyed into Duke.
@@ -58,7 +62,7 @@ public class Storage {
             log.write("");
         } else {
             int size = taskList.size();
-            for (int i = 0; i < size; i ++) {
+            for (int i = 0; i < size; i++) {
                 Task curr = taskList.get(i);
                 String toWrite = curr.getType() + " | " + curr.getDone() + " | " + curr.getName();
                 if (curr.getType() == "D") {
@@ -77,8 +81,9 @@ public class Storage {
      * Parses each task in log file and returns ArrayList containing each task.
      *
      * @return ArrayList of tasks in log file.
+     * @throws DukeException if task type is not T, D, or E.
      */
-    public ArrayList<Task> readTasks() {
+    public ArrayList<Task> readTasks() throws DukeException {
         File f = new File(path);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -98,7 +103,7 @@ public class Storage {
                 String[] taskComponent = curr.split(" \\| ");
                 switch (taskComponent[0]) {
                 case "T":
-                    ToDo newToDo= new ToDo(taskComponent[2]);
+                    ToDo newToDo = new ToDo(taskComponent[2]);
                     if (taskComponent[1].equals("1")) {
                         newToDo.mark();
                     }
@@ -127,6 +132,8 @@ public class Storage {
                     }
                     tasks.add(newEvent);
                     break;
+                default:
+                    throw new DukeException("WHAT KIND OF RUBBISH IS THIS RECRUIT! WHAT YOU WRITING?");
                 }
             }
         } catch (IOException e) {

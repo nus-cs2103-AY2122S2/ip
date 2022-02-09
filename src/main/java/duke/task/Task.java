@@ -1,7 +1,7 @@
 package duke.task;
 
-import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -109,7 +109,7 @@ public class Task {
      *
      * @return Name of task.
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 

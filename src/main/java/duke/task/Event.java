@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an Event. An Event is a type of task that must be done from a certain date and time to another
  * date and time.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate date;
     private DateTimeFormatter dateOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
     private DateTimeFormatter timeOutputFormatter = DateTimeFormatter.ofPattern("HHmm");
