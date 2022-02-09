@@ -32,6 +32,7 @@ public class Luke {
         taskList = new TaskList();
         try {
             storageFile = new StorageFile(filePath);
+            assert(storageFile != null);
         } catch (IOException e) {
             System.err.println(e.getMessage());
             System.exit(1);
@@ -50,6 +51,7 @@ public class Luke {
                     String str = data.get(i);
                     String[] inputs = str.split("\\|");
                     Command cmd = Parser.parse(inputs[0]);
+                    assert(taskList != null);
                     cmd.execute(taskList);
                     if (Integer.parseInt(inputs[1].strip()) == 1) {
                         taskList.get(i).markAsDone();
@@ -71,6 +73,7 @@ public class Luke {
      */
     public Result getResponse(String input) {
         Command cmd = Parser.parse(input);
+        assert(taskList != null);
         CommandResult response = cmd.execute(taskList);
         try {
             storageFile.save(taskList);

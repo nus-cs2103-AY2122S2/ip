@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 
+import luke.commands.ActionType;
 import luke.commands.AddCommand;
 import luke.commands.Command;
 import luke.commands.CommandAction;
@@ -53,6 +54,7 @@ public class Parser {
         try {
             if (commandActionMap.containsKey(inputs[0])) {
                 CommandAction cmdAction = commandActionMap.get(inputs[0]);
+                assert(cmdAction != null);
                 switch (cmdAction.getCommandActionType()) {
                 case NO_ACTION:
                     return new ExitCommand();
@@ -84,6 +86,7 @@ public class Parser {
      * @return The appropriate read command based on user input.
      */
     private static ReadCommand prepareReadCommand(CommandAction cmdAction, String[] args) {
+        assert(cmdAction.getCommandActionType() == ActionType.READ);
         switch (cmdAction) {
         case FIND:
             String keyword = parseFindArgument(args);
@@ -102,6 +105,7 @@ public class Parser {
      * @return The appropriate update command based on user input.
      */
     private static UpdateCommand prepareUpdateCommand(CommandAction cmdAction, String[] args) {
+        assert(cmdAction.getCommandActionType() == ActionType.UPDATE);
         int index = parseUpdateArguments(args);
         switch (cmdAction) {
         case MARK:
@@ -121,6 +125,7 @@ public class Parser {
      * @return The appropriate add command based on user input.
      */
     private static AddCommand prepareAddCommand(CommandAction cmdAction, String[] args) {
+        assert(cmdAction.getCommandActionType() == ActionType.ADD);
         Map<String, String> argsMap = parseAddArguments(cmdAction, args);
         switch (cmdAction) {
         case DEADLINE:
@@ -143,7 +148,7 @@ public class Parser {
      */
     private static Map<String, String> parseAddArguments(CommandAction cmdAction, String[] args)
             throws IllegalArgumentException {
-
+        assert(cmdAction.getCommandActionType() == ActionType.ADD);
         Map<String, String> argsMap = new HashMap<>();
         if (args.length < 2) {
             throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
