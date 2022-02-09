@@ -14,8 +14,12 @@ import stevie.ui.MainWindow;
  */
 public class Main extends Application {
 
-    private Stevie stevie = new Stevie();
+    private final Stevie stevie = new Stevie();
 
+    /**
+     * Start GUI for Stevie
+     * @param stage for JavaFX
+     */
     @Override
     public void start(Stage stage) {
         try {

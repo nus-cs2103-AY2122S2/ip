@@ -32,6 +32,10 @@ public class MainWindow extends AnchorPane {
         dialogScrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets stevie field to an instance of Stevie.
+     * @param stevie an instance of Stevie
+     */
     public void setStevie(Stevie stevie) {
         this.stevie = stevie;
         showGreetings();

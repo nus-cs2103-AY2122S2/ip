@@ -2,6 +2,7 @@ package stevie.command;
 
 import stevie.StevieUi;
 import stevie.exception.StevieException;
+import stevie.exception.TaskException;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
 
@@ -38,7 +39,7 @@ public class DeleteCommand extends Command {
         String out;
         try {
             out = tasks.delete(taskIdx);
-        } catch (StevieException ex) {
+        } catch (TaskException ex) {
             ui.outputMessage(ex.getMessage());
             return ex.getMessage();
         }

@@ -14,11 +14,21 @@ public class ToDoTask extends Task {
         super(name);
     }
 
+    /**
+     * Returns a string representing the task's name.
+     *
+     * @return the name of the task
+     */
     @Override
     public String generateTaskSaveData() {
         return "T|" + (isDone ? "1" : "0") + "|" + name;
     }
 
+    /**
+     * Generates a formatted string to be written to a .txt save file.
+     *
+     * @return a formatted string that can be read to restore the todo task
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
