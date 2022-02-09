@@ -12,5 +12,6 @@ public class UnknownCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
         response.append("Sorry, I don't understand that command :/");
+        assert response.length() > 0; // response should not be empty
     }
 }

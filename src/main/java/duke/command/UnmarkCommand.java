@@ -22,5 +22,6 @@ public class UnmarkCommand extends Command {
             response.append(ui.taskUnmarkedMessage(task));
             storage.save(tasks.list());
         }
+        assert response.length() > 0; // response should not be empty
     }
 }
