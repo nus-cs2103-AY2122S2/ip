@@ -6,13 +6,26 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Represents a storage of data in Duke.
+ */
 public class Storage {
     private final String path;
 
+    /**
+     * Class constructor.
+     *
+     * @param path path of the file to store data.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Loads data from the storage file to the taskList of Duke.
+     *
+     * @param taskList taskList of the running Duke.
+     */
     public void loadTo(TaskList taskList) {
         try {
             File file = new File(path);
@@ -53,6 +66,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes data from the taskList of Duke to the storage file.
+     * @param taskList taskList of the running Duke.
+     */
     public void writeFrom(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(path, false);

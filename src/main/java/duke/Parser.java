@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Represents a parser that can parse the commands sent to Duke and execute.
+ */
 public class Parser {
     private static final String SEG_LINE = "    ____________________________________________________________";
     private static final String INDENT = "    ";
@@ -9,11 +12,20 @@ public class Parser {
     private final Scanner sc;
     private final TaskList taskList;
 
+    /**
+     * Class constructor.
+     *
+     * @param sc user input.
+     * @param taskList taskList to call commands on.
+     */
     public Parser(Scanner sc, TaskList taskList) {
         this.sc = sc;
         this.taskList = taskList;
     }
 
+    /**
+     * Waits for user commands, interprets them, and takes actions accordingly.
+     */
     public void parse() {
         while (true) {
             try {

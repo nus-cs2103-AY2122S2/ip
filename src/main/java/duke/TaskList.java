@@ -4,24 +4,47 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a taskList that supports multiple actions.
+ */
 public class TaskList {
     private static final String INDENT = "    ";
     private final List<Task> tasks;
 
+    /**
+     * Class constructor.
+     * Creates an empty list.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Loads a task from storage file when Duke is started.
+     * No interactive messages printed.
+     *
+     * @param task task to read from file to the taskList.
+     */
     public void readFromFile(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Adds a Todo task by user command.
+     *
+     * @param s information of the task to add.
+     */
     public void addTodo(String s) {
         Todo t = new Todo(s);
         tasks.add(t);
         this.printAdd();
     }
 
+    /**
+     * Adds a Deadline task by user command.
+     *
+     * @param s information of the task to add.
+     */
     public void addDdl(String s) {
         int i = s.indexOf(" /by ");
         if (i > 0 && i + 5 < s.length()) {
@@ -33,6 +56,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds an Event task by user command.
+     *
+     * @param s information of the task to add.
+     */
     public void addEvt(String s) {
         int i = s.indexOf(" /at ");
         if (i > 0 && i + 5 < s.length()) {
@@ -44,6 +72,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints user interactive messages for an add task action.
+     */
     private void printAdd() {
         System.out.println(INDENT + "Got it. I've added this task:");
         int n = tasks.size();
@@ -55,6 +86,9 @@ public class TaskList {
         System.out.println(" in the list.");
     }
 
+    /**
+     * Lists tasks in the taskList.
+     */
     public void list() {
         if (tasks.size() == 0) {
             System.out.println(INDENT + "You don't have tasks listed.");
@@ -68,6 +102,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Changes the completion state of one task.
+     *
+     * @param index index of the task to change.
+     * @param done state of the task to change to.
+     */
     public void mark(int index, boolean done) {
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
@@ -81,6 +121,11 @@ public class TaskList {
         System.out.println(INDENT + "  " + tasks.get(index));
     }
 
+    /**
+     * Deletes one task from taskList.
+     *
+     * @param index index of task to delete. Starts from 0.
+     */
     public void delete(int index) {
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
