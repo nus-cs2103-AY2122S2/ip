@@ -1,9 +1,9 @@
 package duke.command;
 import duke.DukeException;
+import duke.gui.Ui;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.gui.Ui;
 
 /**
  * MarkCommand represents the user's actions of marking/unmarking tasks.
@@ -74,8 +74,8 @@ public class MarkCommand extends Command {
      * @return boolean indicating if the chat session is active or not.
      */
     @Override
-    public boolean isActive() {
-        return super.active;
+    public boolean getActiveStatus() {
+        return super.isActive;
     }
 
 }

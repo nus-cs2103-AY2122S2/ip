@@ -1,9 +1,9 @@
 package duke.command;
 import duke.DukeException;
+import duke.gui.Ui;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.gui.Ui;
 
 /**
  * DeleteCommand representst the user's action of deleting a task.
@@ -60,8 +60,8 @@ public class DeleteCommand extends Command {
      * @return boolean indicating if the chat session is active or not.
      */
     @Override
-    public boolean isActive() {
-        return super.active;
+    public boolean getActiveStatus() {
+        return super.isActive;
     }
 
 }

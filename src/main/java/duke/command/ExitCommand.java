@@ -1,7 +1,7 @@
 package duke.command;
+import duke.gui.Ui;
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.gui.Ui;
 
 /**
  * ExitCommand represents the user's actions of exiting the Duke program.
@@ -24,7 +24,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        super.active = false;
+        super.isActive = false;
         return ui.showGoodbye();
     }
 
@@ -33,8 +33,8 @@ public class ExitCommand extends Command {
      * @return boolean indicating if the chat session is active or not.
      */
     @Override
-    public boolean isActive() {
-        return super.active;
+    public boolean getActiveStatus() {
+        return super.isActive;
     }
 
 }

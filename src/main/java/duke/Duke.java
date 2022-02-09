@@ -2,9 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.command.Parser;
+import duke.gui.Ui;
 import duke.task.Storage;
 import duke.task.TaskList;
-import duke.gui.Ui;
 
 /**
  * Represents a Duke chatbot.
@@ -13,26 +13,23 @@ import duke.gui.Ui;
 
 public class Duke {
 
-    private TaskList taskList;
-    private String userName;
-    private String taskFilePath;
+    private TaskList tasksList;
+    private String tasksFilePath;
     private Ui ui;
     private Storage storage;
     private String dukeResponse;
 
     /**
      * Constructor to initialize Duke & its various components.
-     *
      * @param filePath Path of savefile of tasks information
-     * @return Nothing.
      */
     public Duke(String filePath) {
         assert filePath != null;
-        taskFilePath = filePath;
+        tasksFilePath = filePath;
         ui = new Ui();
-        storage = new Storage(taskFilePath, ui);
+        storage = new Storage(tasksFilePath, ui);
         // load TaskList from existing data
-        taskList = new TaskList(storage.loadFileContents());
+        tasksList = new TaskList(storage.loadFileContents());
     }
 
     /**
@@ -42,7 +39,7 @@ public class Duke {
     public String getResponse(String userInput) {
         try {
             Command c = Parser.parse(userInput);
-            dukeResponse = c.execute(taskList, ui, storage);
+            dukeResponse = c.execute(tasksList, ui, storage);
         } catch (DukeException e) {
             dukeResponse = e.getMessage();
         }

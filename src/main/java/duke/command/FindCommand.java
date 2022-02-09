@@ -3,10 +3,11 @@ package duke.command;
 import java.util.ArrayList;
 
 import duke.DukeException;
+import duke.gui.Ui;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.gui.Ui;
+
 
 public class FindCommand extends Command {
 
@@ -23,8 +24,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean isActive() {
-        return super.active;
+    public boolean getActiveStatus() {
+        return super.isActive;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class FindCommand extends Command {
         boolean tasksMatchingSearchKey = false;
 
         // cycle through existing tasks & filter tasks
-        for (Task task: originalTaskList) {
+        for (Task task : originalTaskList) {
             // check if task matches searchKey
             if (task.getDescription().contains(searchKey)) {
                 filteredTaskList.add(task);
