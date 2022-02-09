@@ -66,4 +66,13 @@ public class Task {
     public String toString() {
         return "[" + getStatus() + "] " + description;
     }
+
+    /**
+     * Hint that there is a place attached to a task
+     *
+     * @return false by default.
+     */
+    public boolean isPlaceValid() {
+        return false;
+    }
 }

@@ -7,7 +7,7 @@ public class ShowAllCommands extends Command<String> {
     /**
      * Enumeration of all valid commands.
      */
-    enum Commands { LIST, TODO, EVENT, DEADLINE, BYE, MARK, UNMARK, DELETE, FIND }
+    enum Commands { LIST, TODO, EVENT, DEADLINE, BYE, MARK, UNMARK, DELETE, FIND, PLACES }
     /**
      * Constructor of this class to display out the valid commands for use.
      */
@@ -28,7 +28,7 @@ public class ShowAllCommands extends Command<String> {
             response += "todo    | One of the 3 tasks type. eg: todo_<yourtask>\n";
             // Fallthrough
         case EVENT:
-            response += "event   | One of the 3 tasks type. eg: event_<yourtask>_/at_<YYYY-MM-DD HH:MM>\n";
+            response += "event   | One of the 3 tasks type. eg: event_<yourtask>_/at_<YYYY-MM-DD HH:MM >LOCATION>\n";
             // Fallthrough
         case DEADLINE:
             response += "deadline| One of the 3 tasks type. eg: deadline_<yourtask>_/by_<YYYY-MM-DD HH:MM>\n";
@@ -47,6 +47,9 @@ public class ShowAllCommands extends Command<String> {
             // Fallthrough
         case FIND:
             response += "find    | Find the tasks with a keyword from list. eg: find_<keyword>\n";
+            // Fallthrough
+        case PLACES:
+            response += "places  | Find the tasks with a place from list. eg: places_<location>\n";
             // Fallthrough
         default:
             break;

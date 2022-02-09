@@ -9,6 +9,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
+import duke.commands.PlacesCommand;
 import duke.commands.ShowAllCommands;
 import duke.commands.UnmarkCommand;
 import duke.exception.DukeException;
@@ -49,6 +50,8 @@ public class Parser {
             return new DeleteCommand(listOfTasks, echo.split(" ", 2), storage);
         } else if (echo.toLowerCase().contains("find")) {
             return new FindCommand(listOfTasks, echo.split(" ", 2));
+        } else if (echo.toLowerCase().contains("places")) {
+            return new PlacesCommand(listOfTasks, echo.split(" ", 2));
         } else {
             throw new DukeException("Oh no! I fear I don't understand! Try again!\n");
         }
