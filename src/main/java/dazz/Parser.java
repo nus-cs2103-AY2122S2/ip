@@ -7,6 +7,7 @@ import dazz.command.DeleteCommand;
 import dazz.command.EventCommand;
 import dazz.command.ExitCommand;
 import dazz.command.FindCommand;
+import dazz.command.HelpCommand;
 import dazz.command.ListCommand;
 import dazz.command.MarkCommand;
 import dazz.command.TodoCommand;
@@ -51,6 +52,8 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(extractDescription(input)));
         case "list":
             return new ListCommand();
+        case "help":
+            return new HelpCommand();
         default:
             return new DefaultCommand();
         }
