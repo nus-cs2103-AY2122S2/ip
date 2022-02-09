@@ -4,8 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 import puke.exception.PukeException;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Represents the list of task in the current session.
@@ -57,6 +60,7 @@ public class TaskList {
             result += "\n" + i + "." + t.toString();
             i++;
         }
+
         return result;
     }
 
@@ -196,20 +200,23 @@ public class TaskList {
             throw new PukeException("I'll need a keyword to find..");
         }
 
-        String result = "";
-        int i = 1;
-        for (Task t : tasks) {
-            if (t.containKeyword(keyword)) {
-                result += "\n" + i + "." + t;
-                i++;
-            }
+        List<Task> matchingTasks = tasks.stream()
+                .filter(t -> t.containKeyword(keyword))
+                .collect(toList());
+
+        if (matchingTasks.isEmpty()) {
+            return "There is no matching task for '" + keyword + "'";
         }
 
-        if (result.equals("")) {
-            return "There is no matching task for '" + keyword + "'";
-        } else {
-            return "Here are the matching tasks for you:" + result;
+        String result = "";
+        int i = 1;
+        for (Task t : matchingTasks) {
+            result += "\n" + i + "." + t;
+            i++;
         }
+
+        assert result != "";
+        return "Here are the matching tasks for you:" + result;
     }
 
     /**
