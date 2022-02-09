@@ -152,6 +152,7 @@ public class Narcibot extends Application {
         Scanner sc = new Scanner(System.in);
         while (true) {
             input = sc.nextLine();
+            //terminate the program if a bye is received as the command
             if(command(parser.parse(input))) {
                 break;
             }
@@ -165,7 +166,6 @@ public class Narcibot extends Application {
     }
 
     private boolean command(String[] command) {
-        boolean end = false;
         try {
             switch (command[0]) {
             case "bye":
