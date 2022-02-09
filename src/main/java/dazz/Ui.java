@@ -64,13 +64,6 @@ public class Ui {
     }
 
     /**
-     * Prints the exit message when user exits.
-     */
-    public void showExit() {
-        System.out.println("\t" + messageForExit());
-    }
-
-    /**
      * Returns the message when user adds a <code>Task</code>.
      * @param task The <code>Task</code> to be added.
      * @param taskList The <code>TaskList</code> the <code>Task</code> is added to.
@@ -78,20 +71,8 @@ public class Ui {
      */
     public String messageForAdd(Task task, TaskList taskList) {
         return "Got it. I've added this task:\n"
-                + task + "\nNow you have"
+                + task + "\nNow you have "
                 + taskList.getSize() + " tasks in the list";
-    }
-
-    /**
-     * Prints the <code>Task</code> that has been added
-     * and the total number of <code>Task</code> in the list.
-     * @param task The <code>Task</code> added.
-     * @param taskList The <code>TaskList</code> the <code>Task</code> is added to.
-     */
-    public void showAdd(Task task, TaskList taskList) {
-        System.out.println("\tGot it. I've added this task:"
-                + "\n\t  " + task
-                + "\n\tNow you have " + taskList.getSize() + " tasks in the list.");
     }
 
     /**
@@ -121,15 +102,6 @@ public class Ui {
     }
 
     /**
-     * Shows the message that the <code>Task</code> has been marked.
-     * @param task The <code>Task</code> marked.
-     */
-    public void showMark(Task task) {
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t  " + task);
-    }
-
-    /**
      * Returns the message when a <code>Task</code> is unmarked.
      * @param task The task unmarked.
      * @return Message to prompt successful unmarking.
@@ -139,30 +111,12 @@ public class Ui {
     }
 
     /**
-     * Shows the message that the <code>Task</code> has been unmarked.
-     * @param task The <code>Task</code> unmarked.
-     */
-    public void showUnmark(Task task) {
-        System.out.println("\tOK, I've unmarked this task as not done yet:");
-        System.out.println("\t  " + task);
-    }
-
-    /**
      * Returns the message when a <code>Task</code> is deleted.
      * @param task The task deleted.
      * @return Message to prompt successful deleting.
      */
     public String messageForDelete(Task task) {
         return "Noted. I've removed this task:\n" + task;
-    }
-
-    /**
-     * Shows the message that the <code>Task</code> has been deleted.
-     * @param task The <code>Task</code>Task deleted.
-     */
-    public void showDelete(Task task) {
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t  " + task);
     }
 
     /**
@@ -186,20 +140,6 @@ public class Ui {
     }
 
     /**
-     * Prints the <code>Task</code> in the <code>TaskList</code>.
-     * User will be informed if there is no task.
-     * @param taskList The <code>TaskList</code> that contains the <code>Task</code>.
-     */
-    public void showList(TaskList taskList) {
-        System.out.println("\tHere are the tasks in your list:");
-        if (taskList.getSize() == 0) {
-            System.out.println("\tYou have no task in your list.");
-        } else {
-            taskList.list();
-        }
-    }
-
-    /**
      * Returns the message of the list of <code>Task</code> found.
      * @param taskList The <code>TaskList</code> that contains the <code>Task</code>.
      * @param search The search description.
@@ -218,32 +158,11 @@ public class Ui {
     }
 
     /**
-     * Prints the list of <code>Task</code> found.
-     */
-    public void showSearches(TaskList taskList, String search) {
-        String finalSearch = search.toLowerCase(Locale.ROOT);
-        System.out.println("\tHere are the matching tasks in your list:");
-        List<Task> tasks = taskList.getTasks();
-        tasks.forEach(x -> {
-            if (x.getDescription().toLowerCase(Locale.ROOT).contains(finalSearch)) {
-                System.out.println("\t" + x);
-            }
-        });
-    }
-
-    /**
      * Returns the default message.
      * @return The default message.
      */
     public String messageForDefault() {
         return ErrorType.INVALID_COMMAND.getErrorMessage();
-    }
-
-    /**
-     * Prints the default message.
-     */
-    public void showDefault() {
-        System.out.println("\t" + messageForDefault());
     }
 
     /**

@@ -2,6 +2,7 @@ package dazz;
 
 import dazz.command.Command;
 import dazz.exception.DazzException;
+import dazz.exception.ErrorType;
 
 /**
  * Represents a chatbot that allows user to keep track of their tasks (i.e a to-do list).
@@ -35,6 +36,9 @@ public class Dazz {
                 isExit = c.isExit();
             } catch (DazzException e) {
                 ui.showError(e.getMessage());
+            } catch (NumberFormatException e) {
+                // in case user did not type a number for
+                // delete, mark, unmark commands
             } finally {
                 ui.showLine();
             }
@@ -56,6 +60,8 @@ public class Dazz {
             return response;
         } catch (DazzException e) {
             return e.getMessage();
+        } catch (NumberFormatException e) {
+            return ErrorType.INVALID_INDEX.getErrorMessage();
         }
     }
 

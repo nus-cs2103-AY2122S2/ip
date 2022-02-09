@@ -30,7 +30,6 @@ public class TodoCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(todo);
-        //ui.showAdd(todo, taskList);
         String message = ui.messageForAdd(todo, taskList);
         storage.updateList(taskList);
         return message;
