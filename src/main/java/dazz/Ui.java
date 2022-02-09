@@ -166,6 +166,12 @@ public class Ui {
                 .collect(Collectors.joining("\n\n"));
     }
 
+    public String messageForMapping(boolean hasUpdated, String alias, String command) {
+        String successMapping = "Nice! Your alias for " + command + " is " + alias;
+        String failureMapping = "Oops!! Your alias does not work!";
+        return hasUpdated ? successMapping : failureMapping;
+    }
+
     /**
      * Returns the default message.
      * @return The default message.

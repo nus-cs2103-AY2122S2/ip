@@ -19,6 +19,7 @@ public class Dazz {
         this.storage = new Storage();
         this.taskList = new TaskList(storage.loadList());
         this.ui = new Ui();
+        CommandMapper.loadExistingMapping();
     }
 
     /**
