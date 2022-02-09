@@ -6,8 +6,8 @@ import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
 
-    private String description;
-    private String time;
+    private final String description;
+    private final String time;
 
     public AddCommand(String command, String description) {
         super(command);
