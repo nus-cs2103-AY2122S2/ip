@@ -11,9 +11,7 @@ public class ExitCommand extends Command {
     /**
      * Constructor for the exit command.
      */
-    public ExitCommand() {
-
-    }
+    public ExitCommand() {}
 
     /** {@inheritDoc} */
     @Override

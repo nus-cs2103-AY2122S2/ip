@@ -17,6 +17,7 @@ import duke.exception.DukeException;
 import duke.exception.InvalidCommandFormatException;
 import duke.exception.InvalidDateException;
 import duke.task.Deadline;
+import duke.task.DoAfter;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
@@ -33,8 +34,8 @@ public class Parser {
     private static final Command EXIT_COMMAND = new ExitCommand();
     private static final Command LIST = new ListCommand();
     private static final Command INVALID_COMMAND = new InvalidCommand("Invalid Command. Valid commands are:"
-            + "\n" + "todo\n" + "deadline\n" + "event\n" + "mark\n" + "unmark\n" + "list\n" + "delete\n" + "find\n"
-            + "bye");
+            + "\n" + "todo\n" + "deadline\n" + "event\n" + "do_after\n" + "mark\n" + "unmark\n" + "list\n" + "delete\n"
+            + "find\n" + "bye");
 
     /**
      * Constructor for a parser.
@@ -64,9 +65,7 @@ public class Parser {
             break;
         case "E":
             timeOrPlace = splitStr[3];
-
             assert timeOrPlace != null;
-
             parsedTask = new Event(activity, timeOrPlace);
             break;
         case "D":
@@ -78,6 +77,11 @@ public class Parser {
             }
             assert timeOrPlace != null;
             parsedTask = new Deadline(activity, timeOrPlace);
+            break;
+        case "A":
+            timeOrPlace = splitStr[3];
+            assert timeOrPlace != null;
+            parsedTask = new DoAfter(activity, timeOrPlace);
             break;
         default:
         }
@@ -116,6 +120,9 @@ public class Parser {
             break;
         case "event":
             parsed = parseEvent(userInput);
+            break;
+        case "do_after":
+            parsed = parseDoAfter(userInput);
             break;
         case "delete":
             parsed = parseDelete(userInput);
@@ -224,6 +231,26 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("Command event has invalid syntax -e.g., "
                     + "event [activity] /at [location]");
+        }
+        return new AddCommand(parsedTask);
+    }
+
+    /**
+     * Parses the given user input into an Add Command for a DoAfter task.
+     * @param userInput the user input to be parsed.
+     * @return an Add Command.
+     * @throws InvalidCommandFormatException if the Event Command format by the userInput is invalid.
+     */
+    private Command parseDoAfter(String[] userInput) throws InvalidCommandFormatException {
+        Task parsedTask;
+        try {
+            String[] splitAt = userInput[1].split(" /after ");
+            String activity = splitAt[0];
+            String doAfter = splitAt[1];
+            parsedTask = new DoAfter(activity, doAfter);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("Command event has invalid syntax -e.g., "
+                    + "do_after [activity] /after [task]");
         }
         return new AddCommand(parsedTask);
     }
