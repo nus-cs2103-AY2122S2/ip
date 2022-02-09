@@ -146,14 +146,12 @@ public class TaskList {
      */
     private static void addDeadline(String desc, StringBuilder message) throws ConnorException {
         if (!desc.contains("/by")) {
-            print(ERROR_INVALID_DL_FORMAT);
             throw new ConnorException(ERROR_INVALID_DL_FORMAT);
         }
         String[] phrases = desc.split("/by", 2);
         String thing = phrases[0].trim();
         String when = phrases[1].trim();
         if (thing.isBlank() || when.isBlank()) {
-            print(ERROR_EMPTY_DL_DESC);
             throw new ConnorException(ERROR_EMPTY_TASK_DESC);
         }
         try {
@@ -179,14 +177,12 @@ public class TaskList {
      */
     private static void addEvent(String desc, StringBuilder message) throws ConnorException {
         if (!desc.contains("/at")) {
-            print(ERROR_INVALID_EVENT_FORMAT);
             throw new ConnorException(ERROR_INVALID_EVENT_FORMAT);
         }
         String[] phrases = desc.split("/at", 2);
         String thing = phrases[0].trim();
         String when = phrases[1].trim();
         if (thing.isBlank() || when.isBlank()) {
-            print(ERROR_EMPTY_EVENT_DESC);
             throw new ConnorException(ERROR_EMPTY_EVENT_DESC);
         }
         try {
