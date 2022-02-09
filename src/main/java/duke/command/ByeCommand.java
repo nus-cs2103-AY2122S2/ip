@@ -22,8 +22,7 @@ public class ByeCommand implements Command {
      * @param storage a storage used to save the user's tasks.
      * @return a boolean indicating whether it is an exit command.
      */
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showExit();
-        return true;
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return Ui.BYE_MSG;
     }
 }

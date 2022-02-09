@@ -54,36 +54,49 @@ public class TaskList {
 
     /**
      * Displays all the tasks in the list.
+     *
+     * @return a list of the user's task.
      */
-    public void listTasks() {
+    public String listTasks() {
+        StringBuilder stringBuilder = new StringBuilder();
         if (taskList.size() == 0) {
-            System.out.println("You have no tasks!");
+            stringBuilder.append("You have no tasks!");
         } else {
-            System.out.println("The tasks on your list. Get it done!");
+            stringBuilder.append("The tasks on your list. Get it done!\n");
             for (int i = 0; i < taskList.size(); i++) {
                 int taskNumber = i + 1;
-                System.out.println("  " + taskNumber + ". " + taskList.get(i));
+                stringBuilder.append("  " + taskNumber + ". " + taskList.get(i));
+                if (i != taskList.size() - 1) {
+                    stringBuilder.append("\n");
+                }
             }
         }
+        return stringBuilder.toString();
     }
 
     /**
      * Displays the tasks in the list with a given keyword.
      *
      * @param keyword the search keyword used to find the tasks.
+     * @return a list of the user's task.
      */
-    public void listTasks(String keyword) {
+    public String listTasks(String keyword) {
+        StringBuilder stringBuilder = new StringBuilder();
         if (taskList.size() == 0) {
-            System.out.println("You have no tasks!");
+            stringBuilder.append("You have no tasks!");
         } else {
-            System.out.println("Here are the task(s) that contain(s) your keyword.");
+            stringBuilder.append("Here are the task(s) that contain(s) your keyword.\n");
             for (int i = 0; i < taskList.size(); i++) {
                 int taskNumber = i + 1;
                 Task task = taskList.get(i);
                 if (task.getDescription().contains(keyword)) {
-                    System.out.println("  " + taskNumber + ". " + task);
+                    stringBuilder.append("  " + taskNumber + ". " + task);
+                    if (i != taskList.size() - 1) {
+                        stringBuilder.append("\n");
+                    }
                 }
             }
         }
+        return stringBuilder.toString();
     }
 }

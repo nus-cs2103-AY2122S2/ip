@@ -29,24 +29,25 @@ public class ModifyCommand implements Command {
      * @param storage a storage used to save the user's tasks.
      * @return a boolean indicating whether it is an exit command.
      */
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String command = this.commandAndDetails[0];
         int taskNumber = Integer.parseInt(this.commandAndDetails[1]);
+        String response = "";
         switch (command) {
         case "mark":
-            this.markTask(taskNumber, taskList);
+            response += this.markTask(taskNumber, taskList);
             break;
         case "unmark":
-            this.unmarkTask(taskNumber, taskList);
+            response += this.unmarkTask(taskNumber, taskList);
             break;
         case "delete":
-            this.deleteTask(taskNumber, taskList);
+            response += this.deleteTask(taskNumber, taskList);
             break;
         default:
-            System.out.println("There has been an error. Please try again.");
+            response += "There has been an error. Please try again.";
         }
         storage.writeToFile(taskList);
-        return false;
+        return response;
     }
 
     /**
@@ -55,11 +56,10 @@ public class ModifyCommand implements Command {
      * @param taskNumber the index of the task in the task list.
      * @param taskList the list of the user's tasks.
      */
-    public void markTask(int taskNumber, TaskList taskList) {
+    public String markTask(int taskNumber, TaskList taskList) {
         Task task = taskList.getTask(taskNumber - 1);
         task.markAsDone();
-        System.out.println("Good job! This task is done:");
-        System.out.println("  " + task);
+        return "Good job! This task is done:\n" + "  " + task;
     }
 
     /**
@@ -68,11 +68,10 @@ public class ModifyCommand implements Command {
      * @param taskNumber the index of the task in the task list.
      * @param taskList the list of the user's tasks.
      */
-    public void unmarkTask(int taskNumber, TaskList taskList) {
+    public String unmarkTask(int taskNumber, TaskList taskList) {
         Task task = taskList.getTask(taskNumber - 1);
         task.unmarkAsDone();
-        System.out.println("Hurry up and get it done!");
-        System.out.println("  " + task);
+        return "Hurry up and get it done!\n" + "  " + task;
     }
 
     /**
@@ -81,11 +80,10 @@ public class ModifyCommand implements Command {
      * @param taskNumber the index of the task in the task list.
      * @param taskList the list of the user's tasks.
      */
-    public void deleteTask(int taskNumber, TaskList taskList) {
+    public String deleteTask(int taskNumber, TaskList taskList) {
         Task task = taskList.getTask(taskNumber - 1);
         taskList.removeTask(taskNumber - 1);
-        System.out.println("This task has been removed:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + taskList.size() + " task(s).");
+        return "This task has been removed:\n" + "  " + task + "\n" + "Now you have "
+                + taskList.size() + " task(s).";
     }
 }
