@@ -1,11 +1,10 @@
 package connor.task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.Comparator;
 
 import connor.Connor;
 import connor.exception.ConnorException;
@@ -28,6 +27,8 @@ public class TaskList {
     private static final String UNMARK_TASK = "Understood. I've unmarked the following task: ";
     private static final String NO_MATCHING_TASKS = "Sorry, there are no matching tasks in your list.";
     private static final String SHOW_MATCHING_TASKS = "Here are the matching tasks in your list: ";
+    private static final String SORT_TASKS_TIME = "Sorting tasks chronologically...";
+    private static final String SORT_TASKS_TYPE = "Sorting tasks by type...";
     private static final String ERROR_EMPTY_INDEX = "Error! Index cannot be empty.";
     private static final String ERROR_EMPTY_TASK_DESC = "Error! Tasks cannot have an empty description.";
     private static final String ERROR_EMPTY_DL_DESC = "Error! Deadlines cannot have empty descriptions or dates.";
@@ -42,6 +43,7 @@ public class TaskList {
             + "Example: event Birthday Party /at 10-02-2022 12:30";
     private static final String ERROR_INVALID_TASK_TYPE = "Oh no! Incorrect Task type!";
     private static final String ERROR_INVALID_TASK_STATUS = "Oh no! Invalid Task status!";
+    private static final String ERROR_INVALID_SORT_TYPE = "Oh no! Invalid Sort type!";
     private static final String ERROR_MARK_EMPTY = "Error! I can't mark an empty task list!";
     private static final String ERROR_UNMARK_EMPTY = "Error! I can't unmark an empty task list!";
 
@@ -331,6 +333,131 @@ public class TaskList {
             }
         }
         return taskListString.toString();
+    }
+
+    /**
+     * Sorts the list of Tasks by the SortType given.
+     *
+     * @param sortType Type of sort used to sort the tasks.
+     * @return Message containing confirmation that a sort has been done, or an error.
+     */
+    public static String sortTasks(SortType sortType) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            switch (sortType) {
+            case TYPE: {
+                sortTasksByType(sb);
+                break;
+            }
+            case TIME: {
+                sortTasksByTime(sb);
+                break;
+            }
+            default: {
+                print(ERROR_INVALID_SORT_TYPE);
+                sb.append(ERROR_INVALID_SORT_TYPE);
+            }
+            }
+        } catch (ConnorException e) {
+            print(e.getMessage());
+            return e.getMessage();
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Sorts tasks by type. ToDos first, then Deadlines, then Events.
+     *
+     * @param sb Message to append to.
+     * @throws ConnorException If a {@code Task} in the list is not of a valid task type.
+     */
+    private static void sortTasksByType(StringBuilder sb) throws ConnorException {
+        print(SORT_TASKS_TYPE);
+        sb.append(SORT_TASKS_TYPE + "\n");
+        ArrayList<Task> todos = new ArrayList<>();
+        ArrayList<Task> deadlines = new ArrayList<>();
+        ArrayList<Task> events = new ArrayList<>();
+        for (Task task : tasks) {
+            switch (task.getTaskType()) {
+            case TODO: {
+                todos.add(task);
+                break;
+            }
+            case DEADLINE: {
+                deadlines.add(task);
+                break;
+            }
+            case EVENT: {
+                events.add(task);
+                break;
+            }
+            default: {
+                print(ERROR_INVALID_TASK_TYPE);
+                throw new ConnorException(ERROR_INVALID_TASK_TYPE);
+            }
+            }
+        }
+        ArrayList<Task> sortedTasks = new ArrayList<>();
+        sortedTasks.addAll(todos);
+        sortedTasks.addAll(deadlines);
+        sortedTasks.addAll(events);
+        setTasks(sortedTasks);
+        sb.append(viewTasks());
+    }
+
+    /**
+     * Sorts Deadlines and Events in chronological order, then ToDos are appended at the end.
+     *
+     * @param sb Message to append to.
+     * @throws ConnorException If a {@code Task} in the list is not of a valid task type.
+     */
+    private static void sortTasksByTime(StringBuilder sb) throws ConnorException {
+        print(SORT_TASKS_TIME);
+        sb.append(SORT_TASKS_TIME + "\n");
+        ArrayList<ToDo> todos = new ArrayList<>();
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        ArrayList<Event> events = new ArrayList<>();
+        for (Task task : tasks) {
+            switch (task.getTaskType()) {
+            case TODO: {
+                todos.add((ToDo) task);
+                break;
+            }
+            case DEADLINE: {
+                deadlines.add((Deadline) task);
+                break;
+            }
+            case EVENT: {
+                events.add((Event) task);
+                break;
+            }
+            default: {
+                print(ERROR_INVALID_TASK_TYPE);
+                throw new ConnorException(ERROR_INVALID_TASK_TYPE);
+            }
+            }
+        }
+        deadlines.sort(Comparator.comparing(Deadline::getDateTime));
+        events.sort(Comparator.comparing(Event::getDateTime));
+        ArrayList<Task> sortedTasks = new ArrayList<>();
+        while (!(deadlines.isEmpty() || events.isEmpty())) {
+            LocalDateTime deadlineTime = deadlines.get(0).getDateTime();
+            LocalDateTime eventTime = events.get(0).getDateTime();
+            if (deadlineTime.isBefore(eventTime)) {
+                sortedTasks.add(deadlines.remove(0));
+            } else {
+                sortedTasks.add(events.remove(0));
+            }
+        }
+        if (deadlines.isEmpty()) {
+            sortedTasks.addAll(events);
+        }
+        if (events.isEmpty()) {
+            sortedTasks.addAll(deadlines);
+        }
+        sortedTasks.addAll(todos);
+        setTasks(sortedTasks);
+        sb.append(viewTasks());
     }
 
     /**
