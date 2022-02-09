@@ -80,6 +80,11 @@ public class DukeGui extends Application {
         AnchorPane.setBottomAnchor(userInput,
                 1.0);
 
+        Label dukeText = new Label("Welcome to Duke! What can I do for you?");
+        dialogContainer.getChildren()
+                .addAll(DukeDialogBox.getDukeDialog(dukeText,
+                                new ImageView(dukeImage)));
+
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             try {
