@@ -3,6 +3,7 @@ package bobby.command;
 import bobby.Storage;
 import bobby.Ui;
 import bobby.exception.BobbyException;
+import bobby.exception.InvalidNumberException;
 import bobby.exception.MarkException;
 import bobby.task.Task;
 import bobby.task.TaskList;
@@ -11,20 +12,16 @@ import bobby.task.TaskList;
  * Represents a 'mark' command
  */
 public class MarkCommand extends Command {
-    /** The full user input command */
-    private String fullCommand;
-    /** The full user input command in array form */
-    private String[] fullCommandArr;
+    /** The task index to be marked */
+    private String toMark;
 
     /**
      * Creates a MarkCommand object.
      *
-     * @param fullCommand User input command
-     * @param fullCommandArr User input command in array form, split by a whitespace
+     * @param toMark The task index to be marked.
      */
-    public MarkCommand(String fullCommand, String[] fullCommandArr) {
-        this.fullCommand = fullCommand;
-        this.fullCommandArr = fullCommandArr;
+    public MarkCommand(String toMark) {
+        this.toMark = toMark;
     }
 
     /**
@@ -38,16 +35,13 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        if (fullCommand.substring(4).isBlank()) { // no argument
-            throw new MarkException("empty");
-        } else if (Character.isLetter(fullCommand.charAt(5))) { // contains letter instead of number
-            throw new MarkException("letter");
-        } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) { // out of bounds
-            throw new MarkException("OOB");
-        } else if (Integer.parseInt(fullCommandArr[1]) < 1) {
-            throw new MarkException("negative");
+        int indexMark;
+        try {
+            indexMark = Integer.parseInt(toMark) - 1;
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException("letter");
         }
-        Task task = tasks.getIndex(Integer.parseInt(fullCommandArr[1]) - 1);
+        Task task = tasks.getIndex(indexMark);
         if (task.isDone()) {
             throw new MarkException("alr_marked");
         }

@@ -11,10 +11,10 @@ import bobby.task.TaskList;
 
 
 public class FindCommand extends Command {
-    private String fullCommand;
+    private String keyword;
 
-    public FindCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -28,20 +28,27 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
-        if (fullCommand.substring(4).isBlank()) {
-            throw new FindException("empty_command");
-        } else if (tasks.isEmpty()) {
+        if (tasks.isEmpty()) {
             throw new FindException("empty_tasks");
         }
-        String keyword = fullCommand.substring(4).trim().toLowerCase();
-        ArrayList<Task> tempTasks = new ArrayList<Task>();
+        TaskList tempTaskList = extractTasksWithKeyword(tasks);
+        return ui.printFindTaskList(tempTaskList);
+    }
+
+    /**
+     * Extracts the tasks containing the keyword and put into a new TaskList.
+     *
+     * @param tasks TaskList object containing a list of Tasks.
+     * @returns TaskList containing only tasks containing the keyword.
+     */
+    private TaskList extractTasksWithKeyword(TaskList tasks) {
+        ArrayList<Task> tempTasks = new ArrayList<>();
         for (Task t : tasks.getTaskList()) {
             if ((t.getTaskName().toLowerCase()).contains(keyword)) {
                 tempTasks.add(t);
             }
         }
-        TaskList tempTaskList = new TaskList(tempTasks);
-        return ui.printFindTaskList(tempTaskList);
+        return new TaskList(tempTasks);
     }
 
     /**

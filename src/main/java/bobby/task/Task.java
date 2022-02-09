@@ -45,14 +45,12 @@ public class Task implements Serializable, Comparable<Task> {
 
     @Override
     public int compareTo(Task t) {
-        if (this.date == null || t.date == null) {
-            if (this.date == null && t.date == null) {
-                return 0;
-            } else if (this.date == null) {
-                return 1;
-            } else {
-                return -1;
-            }
+        if (this.date == null && t.date == null) {
+            return 0;
+        } else if (this.date == null) {
+            return 1;
+        } else if (t.date == null) {
+            return -1;
         } else if (this.date.isBefore(t.date)) {
             return -1;
         } else if (this.date.isAfter((t.date))) {

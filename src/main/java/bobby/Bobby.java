@@ -59,10 +59,16 @@ public class Bobby {
         new Bobby().run();
     }
 
+    /**
+     * Retrieves the appropriate reply from Bobby
+     *
+     * @param input The string command
+     * @return The reply message from Bobby
+     */
     public static String getResponse(String input) {
         String replyMessage;
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parse(input.trim());
             replyMessage = c.execute(tasks, ui, storage);
         } catch (BobbyException e) {
             replyMessage = e.toString();

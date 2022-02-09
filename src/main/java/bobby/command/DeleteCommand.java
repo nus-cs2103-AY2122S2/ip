@@ -4,6 +4,7 @@ import bobby.Storage;
 import bobby.Ui;
 import bobby.exception.BobbyException;
 import bobby.exception.DeleteException;
+import bobby.exception.InvalidNumberException;
 import bobby.task.Task;
 import bobby.task.TaskList;
 
@@ -12,20 +13,16 @@ import bobby.task.TaskList;
  * Represents a 'delete' command.
  */
 public class DeleteCommand extends Command {
-    /** The full user input command */
-    private String fullCommand;
-    /** The full user input command in array form */
-    private String[] fullCommandArr;
+    /** The task index to be deleted */
+    private String toDelete;
 
     /**
      * Creates a DeleteCommand object.
      *
-     * @param fullCommand User input command
-     * @param fullCommandArr User input command in array form, split by a whitespace
+     * @param toDelete The task index to be deleted, or 'all'
      */
-    public DeleteCommand(String fullCommand, String[] fullCommandArr) {
-        this.fullCommand = fullCommand;
-        this.fullCommandArr = fullCommandArr;
+    public DeleteCommand(String toDelete) {
+        this.toDelete = toDelete;
     }
 
     /**
@@ -40,7 +37,8 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException {
         String replyMessage;
-        if (fullCommandArr[1].equalsIgnoreCase("all")) {
+        int indexDelete;
+        if (toDelete.equalsIgnoreCase("all")) {
             if (tasks.isEmpty()) {
                 throw new DeleteException("list_empty");
             }
@@ -48,17 +46,11 @@ public class DeleteCommand extends Command {
             replyMessage = ui.deleteAllMessage();
         } else {
             try {
-                if (fullCommand.substring(6).isBlank()) { // no argument
-                    throw new DeleteException("empty");
-                } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) { // out of bounds
-                    throw new DeleteException("OOB");
-                } else if (Integer.parseInt(fullCommandArr[1]) < 1) {
-                    throw new DeleteException("negative");
-                }
+                indexDelete = Integer.parseInt(toDelete) - 1;
             } catch (NumberFormatException e) {
-                throw new DeleteException("letter"); // contains letter(s)
+                throw new InvalidNumberException("letter");
             }
-            Task task = tasks.getIndex(Integer.parseInt(fullCommandArr[1]) - 1);
+            Task task = tasks.getIndex(indexDelete);
             replyMessage = ui.deleteMessage(task);
             tasks.removeTask(task);
         }
