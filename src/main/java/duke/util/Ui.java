@@ -13,7 +13,7 @@ import duke.command.UnmarkCommand;
 public class Ui {
 
     private static final String EXIT_MESSAGE = "Fair winds adventurer, till we meet next time yarr. Bye for now.\n";
-    private static final String HELP = "Typing 'help' will show ye all commands available, yarr.\n";
+    private static final String HELP = "Typing 'help me!' will show ye all commands available, yarr.\n";
     private static final String HELP_MESSAGE =
             "These are the list of commands available and format to type them matey:\n";
     private static final String LINE = "___________________________________________________________\n";
@@ -26,7 +26,7 @@ public class Ui {
     private static final String TASK_MATCH = "Avast ye Matey. Here goes your matching tasks in your task list:\n";
     private static final String TASK_UNCHECKED = "Alright matey, hurry up and finish up this task arrr:\n";
     private static final String WELCOME_MESSAGE = "Ahoy! Welcome aboard adventurer, Cap'n Dave at your service.\n";
-    private static final String WELCOME_QUESTION = "What can I do for you? Your command:\n";
+    private static final String WELCOME_QUESTION = "What can I do for ya?\n";
 
     /**
      * Prints a message to inform user that task has been deleted

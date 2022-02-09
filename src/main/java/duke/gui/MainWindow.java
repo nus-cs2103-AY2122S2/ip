@@ -40,6 +40,8 @@ public class MainWindow extends AnchorPane {
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_welcome.gif")));
     private final Image exitGif = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_adios.gif")));
+    private final Image errorPhoto = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_disgusted.jpg")));
 
     @FXML
     public void initialize() {
@@ -80,6 +82,11 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog("Adventurer replies: " + input, userImage),
                     DialogBox.getDukeDialog(e.getMessage(), dukeImage)
             );
+            // Show error gif
+            ImageView iv = new ImageView(errorPhoto);
+            iv.setFitHeight(300);
+            iv.setFitWidth(500);
+            dialogContainer.getChildren().add(iv);
         }
         userInput.clear();
     }
