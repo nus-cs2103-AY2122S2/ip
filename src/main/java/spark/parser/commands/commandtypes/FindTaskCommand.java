@@ -3,7 +3,6 @@ package spark.parser.commands.commandtypes;
 import java.util.ArrayList;
 import java.util.List;
 
-import spark.Ui;
 import spark.commandresponse.CommandResponse;
 import spark.commandresponse.SuccessResponse;
 import spark.commandresponse.WarningResponse;
@@ -30,7 +29,7 @@ public class FindTaskCommand extends Command {
     }
 
     @Override
-    public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
+    public List<CommandResponse> execute(TaskList tasks, Storage storage) {
         List<CommandResponse> responses = new ArrayList<>();
         responses.add(findAllMatchingTasks(tasks, searchTerm));
         return responses;

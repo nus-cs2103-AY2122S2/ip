@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import spark.Ui;
 import spark.commandresponse.CommandResponse;
 import spark.commandresponse.ErrorResponse;
 import spark.commandresponse.SuccessResponse;
@@ -32,7 +31,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
+    public List<CommandResponse> execute(TaskList tasks, Storage storage) {
         List<CommandResponse> responses = new ArrayList<>();
 
         boolean isDuplicate = tasks.alreadyHasTask(title);

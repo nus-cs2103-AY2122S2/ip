@@ -2,7 +2,6 @@ package spark.parser.commands.commandtypes;
 
 import java.util.List;
 
-import spark.Ui;
 import spark.commandresponse.CommandResponse;
 import spark.storage.Storage;
 import spark.tasks.TaskList;
@@ -12,5 +11,5 @@ import spark.tasks.TaskList;
  * All valid commands are sub-classes of this class.
  */
 public abstract class Command {
-    public abstract List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract List<CommandResponse> execute(TaskList tasks, Storage storage);
 }

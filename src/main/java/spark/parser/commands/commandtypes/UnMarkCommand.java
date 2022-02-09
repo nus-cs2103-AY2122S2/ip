@@ -3,7 +3,6 @@ package spark.parser.commands.commandtypes;
 import java.util.ArrayList;
 import java.util.List;
 
-import spark.Ui;
 import spark.commandresponse.CommandResponse;
 import spark.commandresponse.ErrorResponse;
 import spark.commandresponse.SuccessResponse;
@@ -29,7 +28,7 @@ public class UnMarkCommand extends Command {
     }
 
     @Override
-    public List<CommandResponse> execute(TaskList tasks, Ui ui, Storage storage) {
+    public List<CommandResponse> execute(TaskList tasks, Storage storage) {
         List<CommandResponse> responses = new ArrayList<>();
 
         try {

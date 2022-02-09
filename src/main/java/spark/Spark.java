@@ -16,7 +16,6 @@ import spark.tasks.TaskList;
 public class Spark {
     private static final String DEFAULT_FILE_PATH_STRING = "spark_save_file.txt";
     private TaskList taskList;
-    private Ui ui;
     private Storage storage;
 
     /**
@@ -24,8 +23,6 @@ public class Spark {
      * the default relative file-path on the user's hard-disk.
      */
     public Spark() {
-        this.ui = new Ui();
-
         try {
             this.storage = new Storage(DEFAULT_FILE_PATH_STRING);
             this.taskList = new TaskList(storage.readTasksFile());
@@ -47,7 +44,7 @@ public class Spark {
 
         try {
             Command command = Parser.parseInput(userInput);
-            responses.addAll(command.execute(taskList, ui, storage));
+            responses.addAll(command.execute(taskList, storage));
         } catch (SparkException e) {
             responses.add(new ErrorResponse(e));
         }
