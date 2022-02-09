@@ -29,6 +29,7 @@ public class Event extends Task {
     public Event(String description, String start, String end) {
         super(description, Type.EVENT);
 
+        assert description != "" && start != "" && end != "";
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         LocalDateTime startDate = LocalDateTime.parse(start, format);
         LocalDateTime endDate = LocalDateTime.parse(end, format);

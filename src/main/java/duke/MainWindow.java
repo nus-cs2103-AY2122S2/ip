@@ -26,19 +26,44 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ape285.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ape288.png"));
 
+    /**
+     * Initialise Main window with welcome message and proper height
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        sendDukeWelcomeMsg();
     }
 
     public void setDuke(Duke d) {
         duke = d;
     }
 
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    /**
+     * Sends a message to user by duke
+     *
+     * @param message Message to be sent to user by duke
+     */
+    private void sendDukeMsg(String message) {
+        assert (message != null) : "message is null :(";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(message, dukeImage)
+        );
     }
 
+    /**
+     * Sends duke welcome message
+     */
+    private void sendDukeWelcomeMsg() {
+        sendDukeMsg(Ui.displayWelcomeMsg());
+    }
+
+    /**
+     * Prints user input & profile picture + duke output & profile
+     * picture on the GUI
+     *
+     * @throws DukeException
+     */
     @FXML
     private void handleUserInput() throws DukeException {
         String userText = userInput.getText();

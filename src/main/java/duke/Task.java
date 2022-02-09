@@ -28,6 +28,7 @@ public class Task {
      * @param eventType Type of event
      */
     public Task(String description, Type eventType) {
+        assert description != null && eventType != null;
         this.description = description.trim();
         this.isDone = false;
         this.eventType = eventType;
