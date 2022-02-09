@@ -8,17 +8,7 @@ import duke.task.Task;
 public class Ui {
 
     // variables for indentation
-    private String logo =
-            "    _                  _     \n"
-            + "   |_|                |_|    \n"
-            + "    _  __ _ _ ____   ___ ___ \n"
-            + "   | |/ _` | '__\\ \\ / / / __|\n"
-            + "   | | (_| | |   \\ V /| \\__ \\\n"
-            + "   | |\\__,_|_|    \\_/ |_|___/\n"
-            + "  _/ |                       \n"
-            + " |__/                        \n";
-    private String emoji = "😀";
-    private String userName;
+    private String logo = "Jarvis";
     private String dukeResponse;
 
     /**
@@ -35,7 +25,7 @@ public class Ui {
     public String showWelcome() {
 
         // Jarvis introduces himself
-        addText("Hello, I'm\n" + logo + "your personal assistant" + "How should I address you?");
+        addText("Hello, I'm " + logo + ", your personal assistant. How should I address you?");
 
         return generateDukeResponse();
     }
