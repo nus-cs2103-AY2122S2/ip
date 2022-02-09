@@ -57,7 +57,7 @@ public class Storage {
                     startingList.add(new Event(data[2], data[3]));
                 } else {
                     assert (firstLetter == 'T') || (firstLetter == 'D') || (firstLetter == 'E') : "Unknown entry.";
-                    throw new DukeException(UI.unKnown);
+                    throw new DukeException(UI.ERROR_UNKNOWN);
                 }
                 line = reader.readLine();
             }

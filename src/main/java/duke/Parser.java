@@ -37,20 +37,25 @@ public class Parser {
             return tasklist.printTaskList();
         } else if (prefixCommand.equals("mark")) {
             int index = Integer.parseInt(commandLine[1]) - 1;
+            assert index >= 0 : "index should be more than or equal to 0.";
             return tasklist.mark(index);
         } else if (prefixCommand.equals("unmark")) {
             int index = Integer.parseInt(commandLine[1]) - 1;
+            assert index >= 0 : "index should be more than or equal to 0.";
             return tasklist.unMark(index);
         } else if (prefixCommand.equals("todo")) {
             return tasklist.add(new Todo(command.substring(4)));
         } else if (prefixCommand.equals("deadline")) {
             String[] x = command.substring(8).split("/by ");
+            assert x.length == 2 : "More or less than 2 elements detected";
             return tasklist.add(new Deadline(x[0], x[1]));
         } else if (prefixCommand.equals("event")) {
             String[] x = command.substring(5).split("/at ");
+            assert x.length == 2 : "More or less than 2 elements detected";
             return tasklist.add(new Event(x[0], x[1]));
         } else if (commandLine.equals("delete")) {
             int index = Integer.parseInt(commandLine[1]) - 1;
+            assert index >= 0 : "index should be more than or equal to 0.";
             return tasklist.delete(index);
         } else if (prefixCommand.equals("find")) {
             return tasklist.find(commandLine[1]);
