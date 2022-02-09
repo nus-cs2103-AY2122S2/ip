@@ -23,12 +23,16 @@ public class BotStorage implements Storage {
 
     /**
      * Initialize the database helper for Duke bot
+     *
      * @param path Relative path where the database is located
      * @param directory Directory where database is located
      * @throws IOException If an I/O exception occur
      */
     public BotStorage(String path, String directory) throws IOException {
         this.path = path;
+        // Assert that the path and directory is not empty
+        assert(!(path == ""));
+        assert(!(directory == ""));
         database = new File(path);
         this.directory = directory;
         doesDatabaseExists();

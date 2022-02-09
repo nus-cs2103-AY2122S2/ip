@@ -35,14 +35,14 @@ public class DeleteTaskCommand extends angela.command.Command {
     @Override
     public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
-        if (!NumericChecker.isNumeric(description)) {
-            return exception.printNotNumericError("delete");
-        } else {
+        if (NumericChecker.isNumeric(description)) {
             int taskNumber = Integer.parseInt(description);
             Task removeTask = taskList.removeTask(taskNumber);
             botStorage.deleteTask(taskNumber);
             dateTable.deleteTaskOnDate(removeTask);
             return ui.showDeleteTask(removeTask, taskList.getTotalTask());
+        } else {
+            return exception.printNotNumericError("delete");
         }
     }
 

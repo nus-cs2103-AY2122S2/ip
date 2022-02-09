@@ -9,7 +9,6 @@ public class BotException {
      * Prints error when the bot command does not follow with description
      *
      * @param description The input command type
-     *
      * @return The reply string of Angela
      */
     public String printEmptyDescriptionError(String description) {
@@ -21,7 +20,6 @@ public class BotException {
      * eg: 'todo abc' instead of 'todo 2'
      *
      * @param description The input command type
-     *
      * @return The reply string of Angela
      */
     public String printNotNumericError(String description) {
@@ -30,6 +28,7 @@ public class BotException {
 
     /**
      * Prints error when the input command does not belong to any known command
+     *
      * @return The reply string of Angela
      */
     public String printWrongSyntaxError() {
@@ -38,6 +37,7 @@ public class BotException {
 
     /**
      * Prints error when the input date does not appear in the database
+     *
      * @return The reply string of Angela
      */
     public String printDateNotFoundError() {

@@ -20,35 +20,26 @@ public class Angela {
     private final DateTable dateTable;
 
     /**
-     * Initialize an empty instance of Duke
-     */
-    public Angela(String... args) {
-        botStorage = null;
-        taskList = null;
-        ui = null;
-        dateTable = null;
-    }
-
-    /**
-     * Initialize the Duke bot
+     * Initialize the Angela bot
+     *
      * @param path Relative path where the database is located
      * @param directory Directory where database is located
      * @throws IOException If an I/O exception occur
      */
     public Angela(String path, String directory) throws IOException {
-        TaskList taskList1 = new TaskList();
+        TaskList tempTaskList = new TaskList();
 
         botStorage = new BotStorage(path, directory);
         ui = new Ui();
         dateTable = new DateTable(ui);
 
         try {
-            taskList1 = new TaskList(botStorage, ui, dateTable);
+            tempTaskList = new TaskList(botStorage, ui, dateTable);
         } catch (IOException e) {
             ui.showLoadingError();
-            taskList1 = new TaskList();
+            tempTaskList = new TaskList();
         }
-        this.taskList = taskList1;
+        this.taskList = tempTaskList;
     }
 
 
@@ -66,6 +57,12 @@ public class Angela {
         return temp;
     }
 
+    /**
+     * Return the output string generate from the input command
+     *
+     * @param input The input command
+     * @return The display string obtain from the input command
+     */
     public String getResponse(String input) {
         return this.run(input);
     }

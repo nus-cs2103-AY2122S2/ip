@@ -15,6 +15,7 @@ public class Task {
 
     /**
      * Initialize a task object
+     *
      * @param description Description of the task
      * @param type Type of the task
      */

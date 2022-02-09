@@ -21,6 +21,7 @@ public class UpdateMarkCommand extends angela.command.Command {
 
     /**
      * Initialize an Update Mark Command
+     *
      * @param description The task id need to be updated
      * @param isDone True if we want to update the task as done, false otherwise
      */

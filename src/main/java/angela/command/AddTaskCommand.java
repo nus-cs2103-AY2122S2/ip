@@ -20,6 +20,7 @@ public class AddTaskCommand extends Command {
 
     /**
      * Initialize an Add Task Command
+     *
      * @param fullInput Full input from user
      * @param description The description of the task
      * @param type The type of the task

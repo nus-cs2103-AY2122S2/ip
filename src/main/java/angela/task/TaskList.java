@@ -30,6 +30,7 @@ public class TaskList {
 
     /**
      * Initialize an empty reference of task list with only storage, for testing purposes
+     *
      * @param botStorage The input storage reference
      */
     public TaskList(Storage botStorage) {
@@ -40,6 +41,7 @@ public class TaskList {
 
     /**
      * Initialize the task-list object for Duke bot to use
+     *
      * @param botStorage The database for offline data storing
      * @param ui The ui interface that interact with user
      * @param dateTable Collections of dates and tasks

@@ -1,8 +1,8 @@
-package angela.gui;
+package angela;
 
 import java.io.IOException;
 
-import angela.Angela;
+import angela.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,6 +26,8 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            // Assert the input value is not null
+            assert(!(ap == null));
             Scene scene = new Scene(ap);
             stage.setTitle("Angela");
             // Allow the open window to be resized

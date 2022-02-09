@@ -1,5 +1,6 @@
 package angela.gui;
 
+import angela.Main;
 import javafx.application.Application;
 
 public class Launcher {

@@ -14,6 +14,7 @@ public class GetTaskFromDateCommand extends angela.command.Command {
 
     /**
      * Initialize a Get Task From Date Command
+     *
      * @param dateTable Collections of dates and tasks
      * @param description The date that we need to find task on
      */
