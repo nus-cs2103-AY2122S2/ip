@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public abstract class WordListItem {
     private String description;
     private boolean isDone;

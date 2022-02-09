@@ -1,3 +1,5 @@
+package duke.parsers;
+
 public enum InputType {
     BYE("bye"),
     LIST("list"),

@@ -1,10 +1,14 @@
+package duke.tasks;
+
+import duke.managers.DateTimeManager;
+
 import java.time.LocalDateTime;
 
-public class Event extends WordListItem{
-    static private final String SYMBOL = "[E]";
+public class Deadline extends WordListItem {
+    static private final String SYMBOL = "[D]";
     private LocalDateTime datetime;
 
-    public Event(String description, LocalDateTime datetime) {
+    public Deadline(String description, LocalDateTime datetime) {
         super(description);
         this.datetime = datetime;
     }
@@ -20,6 +24,6 @@ public class Event extends WordListItem{
     @Override
     public String toString() {
         String datetimestr = DateTimeManager.getDisplayString(this.datetime);
-        return SYMBOL + super.toString() + " (at: " + datetimestr + ")";
+        return SYMBOL + super.toString() + " (by: " + datetimestr + ")";
     }
 }
