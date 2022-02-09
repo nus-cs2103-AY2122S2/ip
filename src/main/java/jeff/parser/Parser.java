@@ -7,6 +7,7 @@ import jeff.command.Command;
 import jeff.command.DeadlineCommand;
 import jeff.command.DeleteCommand;
 import jeff.command.EventCommand;
+import jeff.command.FindCommand;
 import jeff.command.HelpCommand;
 import jeff.command.ListCommand;
 import jeff.command.MarkCommand;
@@ -117,6 +118,12 @@ public class Parser {
                         + " index number so that I can delete it from the list.");
             }
             return new DeleteCommand(body);
+        case ("find"):
+            if (len == 1) {
+                throw new JeffException(" ☹ OOPS!!! Please tell me the keyword"
+                        + " so that I know what you are looking for.");
+            }
+            return new FindCommand(body);
         default:
             return new HelpCommand();
         }
