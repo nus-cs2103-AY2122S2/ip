@@ -3,6 +3,7 @@ package apollo;
 import apollo.commands.Command;
 import apollo.commands.ExitCommand;
 import apollo.exceptions.ApolloException;
+import apollo.exceptions.ApolloIllegalArgumentException;
 import apollo.exceptions.ApolloIoException;
 import apollo.parser.Parser;
 import apollo.tasks.TaskList;
@@ -68,9 +69,27 @@ public class Apollo extends Application {
         } while (!ExitCommand.isExit(command));
     }
 
+    public String getResponse(String userCommand) {
+        try {
+            Command command = new Parser().parseCommand(userCommand);
+            String outcome = command.execute();
+            Storage.save(taskList);
+            return outcome;
+        } catch (ApolloException e) {
+            return e.getMessage();
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Gui gui = new Gui();
+        try {
+            taskList = Storage.load();
+        } catch (ApolloIoException e) {
+            taskList = new TaskList();
+        }
+
+        Command.setTaskList(taskList);
         gui.start(primaryStage);
     }
 }
