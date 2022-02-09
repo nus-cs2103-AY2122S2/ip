@@ -12,7 +12,8 @@ public class Parser {
      * Parses the user input.
      *
      * @param userCommand String that the user inputs.
-     * @return ParsedCommand that denotes the command and other relevant information if the user input is valid.
+     * @return ParsedCommand that denotes the command and other relevant information if the
+     *         user input is valid.
      * @throws DukeException If user input is invalid.
      */
     public static ParsedCommand parse(String userCommand, Integer sizeOfTaskList) throws DukeException {
@@ -43,7 +44,11 @@ public class Parser {
         case "deadline":
             if (parsedCommand[1].contains("/by")) {
                 String[] inputForConstructorWithDate = parsedCommand[1].split("/by", 2);
-                parseDateInput(parsedCommand[0].trim(), inputForConstructorWithDate[1].trim());
+                ParsedCommand processedCommand =  parseDateInput(parsedCommand[0].trim(),
+                        inputForConstructorWithDate[1].trim());
+                if (processedCommand == null) {
+                    throw new DukeException();
+                }
             } else {
                 throw new DukeException();
             }
