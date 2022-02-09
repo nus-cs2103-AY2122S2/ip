@@ -91,7 +91,7 @@ public class TaskList {
                 System.out.println(results.get(i) + " " + tasks.get(results.get(i)));
             }
         } else {
-            System.out.println("Nothing in the list matches your search :)");
+            System.out.println("Hmm nothing in the list matches your search :)");
         }
     }
 }
