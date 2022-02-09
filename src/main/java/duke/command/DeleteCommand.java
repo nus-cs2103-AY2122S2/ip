@@ -45,6 +45,7 @@ public class DeleteCommand extends Command {
             }
 
             Task task = taskList.remove(taskIndex);
+            assert task != null;
             ui.deleteTask(task);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());

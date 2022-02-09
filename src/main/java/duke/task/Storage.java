@@ -70,7 +70,8 @@ public class Storage {
             // else creates the save data for further use
             } else {
                 //ui.showText("creating save data...");
-                System.out.println("creating save data...");
+                ui.addText("creating save data...");
+                //System.out.println("creating save data...");
             }
 
         // if the file cannot be read, generate an empty list

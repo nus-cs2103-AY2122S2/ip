@@ -47,6 +47,7 @@ public class AddCommand extends Command {
             task = new Todo(description, false);
             taskList.add(task);
             ui.addTask(task);
+            assert task != null;
             break;
         case EVENT:
             // Fallthrough
@@ -77,6 +78,7 @@ public class AddCommand extends Command {
 
                 taskList.add(task);
                 ui.addTask(task);
+                assert task != null;
             } catch (DukeException e) {
                 return ui.showError(e.getMessage());
             }

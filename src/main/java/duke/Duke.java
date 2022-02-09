@@ -27,6 +27,7 @@ public class Duke {
      * @return Nothing.
      */
     public Duke(String filePath) {
+        assert filePath != null;
         taskFilePath = filePath;
         ui = new Ui();
         storage = new Storage(taskFilePath, ui);

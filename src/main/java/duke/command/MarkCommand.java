@@ -22,6 +22,7 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(CommandType commandType, String description, boolean mark) {
         super(commandType);
+        assert (mark == true || mark == false) && (description != null);
         this.mark = mark;
         this.description = description;
     }
@@ -35,7 +36,6 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String dukeResponse = "";
 
         // when the user input has the "mark" command & an integer
         if (description.toLowerCase().matches(super.commandType.getRegex())) {
