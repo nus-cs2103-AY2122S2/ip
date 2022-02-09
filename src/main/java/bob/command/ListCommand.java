@@ -37,16 +37,15 @@ public class ListCommand extends Command {
             } else {
                 return ui.free();
             }
-        } else {
-            StringBuilder reply = new StringBuilder();
-            if (!isGreetList) {
-                reply.append(ui.preListReply() + "\n");
-            }
-            for (int i = 1; i <= tasks.size(); i++) {
-                reply.append(ui.say(String.format("\t %o . %s\n", i, tasks.getTask(i - 1).printStatus())));
-            }
-            reply.append(ui.postListFace());
-            return reply.toString();
         }
+        StringBuilder reply = new StringBuilder();
+        if (!isGreetList) {
+            reply.append(ui.preListReply() + "\n");
+        }
+        for (int i = 1; i <= tasks.size(); i++) {
+            reply.append(ui.say(String.format("\t %o . %s\n", i, tasks.getTask(i - 1).printStatus())));
+        }
+        reply.append(ui.postListFace());
+        return reply.toString();
     }
 }

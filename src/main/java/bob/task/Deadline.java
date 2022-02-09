@@ -16,13 +16,13 @@ public class Deadline extends Task {
     public Deadline(String name, LocalDateTime dateTime) {
         super(name);
         super.setType("D");
-        super.setStatus(0);
+        super.unmarkTask();
         this.date = dateTime;
     }
 
     @Override
     public String printStatus() {
-        return "[D] " + Task.statusSymbols[super.getStatus()] + " " + this + " (by: "
+        return "[D] " + super.getStatusSymbol() + " " + this + " (by: "
                 + date.format(DateTimeFormatter.ofPattern("dd MMM yyy HH:mm")) + ")";
     }
 
