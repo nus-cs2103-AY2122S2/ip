@@ -24,6 +24,10 @@ public abstract class Task {
         }
     }
 
+    public boolean match(String keyword) {
+        return content.contains(keyword);
+    }
+
     public String getContent() {
         return content;
     }
