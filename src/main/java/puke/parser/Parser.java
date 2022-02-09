@@ -35,16 +35,7 @@ public class Parser {
             }
         case "mark":
         case "unmark":
-            try {
-                int taskNo = Integer.parseInt(argument);
-                if (command.equals("mark")) {
-                    return tasks.markTask(taskNo);
-                } else {
-                    return tasks.unmarkTask(taskNo);
-                }
-            } catch (NumberFormatException e) {
-                throw new PukeException("I'll need a valid task number for it..");
-            }
+            return markUnmarkTask(command, argument, tasks);
         case "todo":
         case "deadline":
         case "event":
@@ -55,6 +46,28 @@ public class Parser {
             return tasks.findTasks(argument);
         default:
             throw new PukeException("Are you sure you're making sense?");
+        }
+    }
+
+    /**
+     * Mark/unmark a task based on the command and input given.
+     *
+     * @param command Command to either mark/unmark.
+     * @param argument Input from the user.
+     * @param tasks List of tasks currently.
+     * @return Response from the chat-bot.
+     * @throws PukeException If the task cannot be marked/unmarked; Or the task is invalid.
+     */
+    public String markUnmarkTask(String command, String argument, TaskList tasks) throws PukeException {
+        try {
+            int taskNo = Integer.parseInt(argument);
+            if (command.equals("mark")) {
+                return tasks.markTask(taskNo);
+            } else {
+                return tasks.unmarkTask(taskNo);
+            }
+        } catch (NumberFormatException e) {
+            throw new PukeException("I'll need a valid task number for it..");
         }
     }
 }

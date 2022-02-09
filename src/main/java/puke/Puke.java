@@ -24,20 +24,22 @@ public class Puke {
         parser = new Parser();
     }
 
-    public void loadTasksFromFile() {
-        try {
-            storage.loadTasks(tasks);
-        } catch (PukeException e) {
-            return;
-        }
+    /**
+     * Loads tasks from the storage file into the task list.
+     *
+     * @throws PukeException If the tasks cannot be loaded.
+     */
+    public void loadTasksFromFile() throws PukeException {
+        storage.loadTasks(tasks);
     }
 
-    public void saveTasksToFile() {
-        try {
-            storage.saveTasks(tasks);
-        } catch (PukeException e) {
-            return;
-        }
+    /**
+     * Saves tasks to the storage file from the task list.
+     *
+     * @throws PukeException If the tasks cannot be saved.
+     */
+    public void saveTasksToFile() throws PukeException {
+        storage.saveTasks(tasks);
     }
 
     /**
