@@ -16,6 +16,7 @@ public class Parser {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
+        FIND("find"),
         BYE("bye");
 
 
@@ -78,6 +79,11 @@ public class Parser {
             //delete a task from the list
             else if (input.length() >= 6 && Commands.DELETE.command.equals(input.substring(0, 6))) {
                 TaskList.delete(input);
+            }
+
+            //find a word in the tasks
+            else if (input.length() >= 4 && Commands.FIND.command.equals(input.substring(0, 4))) {
+                TaskList.find(input);
             }
 
 

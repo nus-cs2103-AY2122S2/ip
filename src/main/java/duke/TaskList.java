@@ -159,6 +159,32 @@ public class TaskList {
         }
     }
 
+    protected static void find(String input) throws DukeException {
+        ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
+        if (arr.get(1) == "") {
+            throw new DukeException("Sorry, please tell me what you want to find!");
+        }
+
+        String word = arr.get(1);
+        ArrayList<String> tasksFound = new ArrayList<>();
+        for (Task task : Duke.list) {
+            String description = task.toString();
+            if (description.contains(word)) {
+                tasksFound.add(description);
+            }
+        }
+
+        if (tasksFound.size() < 1) {
+            System.out.println("Sorry! I didn't find anything with \"" + word + "\" in it. :(");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < tasksFound.size(); i++) {
+                int count = i + 1;
+                System.out.println(count + ". " + tasksFound.get(i));
+            }
+        }
+    }
+
     /**
      * To process the input string and separate the description and date (if applicable).
      * 
