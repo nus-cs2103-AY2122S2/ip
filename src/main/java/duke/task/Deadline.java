@@ -9,8 +9,7 @@ import java.time.format.DateTimeFormatter;
  * not done.
  */
 public class Deadline extends Task {
-
-    private final String type = "D";
+    private static final String TYPE = "D";
     private final String initialDateStr;
     private final String convertedDateStr;
     private final String name;
@@ -47,8 +46,7 @@ public class Deadline extends Task {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd LLL yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
 
-        String str = this.date.format(dateFormatter) + ", " + this.time.format(timeFormatter);
-        return str;
+        return this.date.format(dateFormatter) + ", " + this.time.format(timeFormatter);
     }
 
     /**
@@ -58,7 +56,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return this.name + "(by: " + convertedDateStr + ")";
+        return this.name + "(by: " + getDate() + ")";
     }
 
     /**
@@ -68,7 +66,7 @@ public class Deadline extends Task {
      */
     @Override
     public String track() {
-        return "[" + this.type + "]";
+        return "[" + TYPE + "]";
     }
 
     /**

@@ -18,7 +18,6 @@ public class Duke {
     public Duke() {
         this.save = new Save();
         this.taskList = save.taskList();
-        //        this.ui = new Ui();
     }
 
     /**
