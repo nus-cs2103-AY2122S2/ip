@@ -81,7 +81,7 @@ public class Storage {
             String profileInfoArg = sc.nextLine();
 
             if (!profileInfoArg.equals(String.format("[%s]", UserProfile.STORAGE_HEADER))) {
-                throw new IOException(MESSAGE_INVALID_FILE);
+                throw new IOException();
             }
 
             String[] profileData = new String[UserProfile.STATS_NO];
@@ -98,8 +98,10 @@ public class Storage {
 
         } catch (FileNotFoundException e) {
             throw new DukeException(MESSAGE_READ_FAILURE);
-        } catch (IOException | NoSuchElementException e) {
-            throw new DukeException(e.getMessage());
+        } catch (IOException e) {
+            throw new DukeException(MESSAGE_INVALID_FILE);
+        } catch (NoSuchElementException e) {
+            throw new DukeException(e.getMessage(), true);
         }
     }
 
@@ -110,7 +112,7 @@ public class Storage {
         String[] taskListArgs = data.split(" ");
 
         if (!taskListArgs[0].equals(String.format("[%s]", TaskList.STORAGE_HEADER))) {
-            throw new IOException(MESSAGE_INVALID_FILE);
+            throw new IOException();
         }
 
         for (int i = 0; i < Integer.parseInt(taskListArgs[1]); i++) {
