@@ -50,6 +50,7 @@ public class Parser {
             }
 
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
+            assert taskNo >= 0 : "Task number calculation issues";
             return new MarkAsDoneCommand(taskList, taskNo);
         } else if (command.equals(MarkAsUndoneCommand.COMMAND_WORD)) {
             Pair<Boolean, String> result = checkForInvalidIndex(inputArray);
@@ -58,12 +59,14 @@ public class Parser {
             }
 
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
+            assert taskNo >= 0 : "Task number calculation issues";
             return new MarkAsUndoneCommand(taskList, taskNo);
         } else if (command.equals(AddTodoCommand.COMMAND_WORD)) {
             String[] inputSplit = input.split(" ", 2);
             if (inputSplit.length < 2) {
                 return new ErrorCommand("The description of a todo cannot be empty");
             }
+
             String description = inputSplit[1];
             return new AddTodoCommand(taskList, description);
         } else if (command.equals(AddDeadlineCommand.COMMAND_WORD)) {
@@ -121,6 +124,7 @@ public class Parser {
             }
 
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
+            assert taskNo >= 0 : "Task number calculation issues";
             return new DeleteCommand(taskList, taskNo);
         } else if (command.equals(FindCommand.COMMAND_WORD)) {
             String[] inputSplit = input.split(" ", 2);

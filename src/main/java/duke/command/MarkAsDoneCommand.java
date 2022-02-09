@@ -26,6 +26,7 @@ public class MarkAsDoneCommand extends TaskListCommand {
     public CommandResult runCommand() {
         Task currentTask = taskList.get(taskNo);
         currentTask.markAsDone();
+        assert currentTask.isDone() : "Task didn't get marked as done";
         String message = "Marked as done:\n" + currentTask.getCurrentStatus();
         return new CommandResult(message, true);
     }
