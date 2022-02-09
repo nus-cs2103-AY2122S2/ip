@@ -32,9 +32,9 @@ public class Parser {
         case LIST:
             return new ListCommand(taskList);
         case MARK:
-            return new MarkCommand(taskList, userInput);
+            return new MarkCommand(userInput);
         case UNMARK:
-            return new UnmarkCommand(taskList, userInput);
+            return new UnmarkCommand(userInput);
         case DEADLINE:
             return new AddDeadlineCommand(userInput);
         case EVENT:
@@ -42,7 +42,7 @@ public class Parser {
         case TODO:
             return new AddToDoCommand(userInput);
         case REMOVE:
-            return new RemoveCommand(taskList, userInput);
+            return new RemoveCommand(userInput);
         case FIND:
             return new FindCommand(taskList, userInput);
         case BYE:
