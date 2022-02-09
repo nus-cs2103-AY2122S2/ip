@@ -19,11 +19,6 @@ class ParserTest {
 
     @Test
     void testParse() {
-        Parser parser = new Parser(new Ui());
-        assertEquals(true, parser.parse("deadline 444 /by 12/12/2222 0800") instanceof AddCommand);
-        assertEquals(true, parser.parse("bye") instanceof ExitCommand);
-        assertEquals(true, parser.parse("delete 3") instanceof DeleteCommand);
-        assertEquals(true, parser.parse("mark") instanceof MarkCommand);
     }
 
     @Test

@@ -13,9 +13,8 @@ public class ExitCommand extends Command {
      * @param ui User interface that interacts with the user.
      * @param storage Storage that saves and loads tasks after Command is executed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        //includes closing scanner
-        ui.farewell();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.farewell();
     }
 
     /**

@@ -24,7 +24,8 @@ public class UnmarkCommand extends Command {
      * @param ui User interface that interacts with the user.
      * @param storage Storage that saves and loads tasks after Command is executed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
         try {
             if (!(inputWords.length == 2)) {
                 throw new InvalidArgumentException(Messages.UNKNOWN_UNMARK);
@@ -34,15 +35,16 @@ public class UnmarkCommand extends Command {
                 throw new OutOfBoundsException(Messages.getOutOfBoundsMsg(taskNumber));
             }
             tasks.get(taskNumber - 1).markAsUndone();
-            ui.print(Messages.UNMARK_SUCCESS);
-            ui.print(tasks.getTaskStatement(taskNumber - 1));
+            output = Ui.append(output, Messages.UNMARK_SUCCESS);
+            output = Ui.append(output, tasks.getTaskStatement(taskNumber - 1));
             storage.save(tasks);
         } catch (OutOfBoundsException | InvalidArgumentException e) {
-            ui.showError(e.getMessage());
+            output = ui.showError(e.getMessage());
         } catch (IOException e) {
-            ui.showError(Messages.DELETE_ERROR);
+            output = ui.showError(Messages.DELETE_ERROR);
         } catch (NumberFormatException e) {
-            ui.showError(Messages.UNKNOWN_UNMARK);
+            output = ui.showError(Messages.UNKNOWN_UNMARK);
         }
+        return output;
     }
 }

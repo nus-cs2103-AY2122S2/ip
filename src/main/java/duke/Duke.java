@@ -25,27 +25,39 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
-//    private static Storage storage;
-//    private static TaskList tasks;
-//    private static Ui ui;
-//
-//    /**
-//     * Starts up the Duke Bot in a specified filePath. If filePath
-//     * exists, then load the previously saved TaskList. Else, create a new one.
-//     *
-//     * @param filePath the specified filePath in user's computer downloads.
-//     */
-//    public Duke(String filePath) {
-//        this.ui = new Ui();
-//        this.storage = new Storage(filePath);
-//        try {
-//            this.tasks = new TaskList(storage.load());
-//        } catch (IOException e) { //abstract to duke.exception.DukeException
-//            ui.showError("Error loading file.");
-//            this.tasks = new TaskList();
-//        }
-//    }
-//
+    private static Storage storage;
+    private static TaskList tasks;
+    private static Ui ui;
+    /** Interprets messages sent by the user */
+    private Parser parser;
+    //the specified filePath in user's computer downloads.
+    private final String filePath = "data/duke.txt";
+
+    /**
+     * Starts up the Duke Bot in a specified filePath. If filePath
+     * exists, then load the previously saved TaskList. Else, create a new one.
+     */
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.parser = new Parser(ui);
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (IOException e) { //abstract to duke.exception.DukeException
+            ui.showError("Error loading file.");
+            this.tasks = new TaskList();
+        }
+    }
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
 //    /**
 //     * Runs the chatbot application.
 //     */
@@ -55,10 +67,7 @@ public class Duke extends Application {
 //        while (!isExit) {
 //            try {
 //                String fullCommand = ui.readCommand();
-//                // shows the divider line ("__________")
-//                ui.divide();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
+//                String response = parser.parse(fullCommand);
 //                isExit = c.isExit();
 //            } catch (Exception e) {
 //                ui.showError(e.getMessage());
@@ -68,19 +77,11 @@ public class Duke extends Application {
 //        }
 //
 //    }
-//
+
 //    public static void main(String[] args) {
-//        new Duke("data/duke.txt").run();
+//        new Duke().run();
 //    }
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
     @Override
     public void start(Stage stage) {
@@ -132,16 +133,16 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
+//        //Step 3. Add functionality to handle user input.
+//        sendButton.setOnMouseClicked((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -176,11 +177,15 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
+//        if (parser.isExit(dukeText)) {
+//            dialogContainer.getChildren().addAll(
+//                    DialogBox.getDukeDialog(ui.farewell(), dukeImage));
+//        }
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
     }
@@ -189,8 +194,8 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input!
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) {
+        return parser.parse(input, tasks, storage);
     }
 
 }

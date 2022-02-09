@@ -25,26 +25,28 @@ public class FindCommand extends Command {
      * @param ui User interface that interacts with the user.
      * @param storage Storage that saves and loads tasks after Command is executed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
         try {
             String keyword = Parser.parseDescription(input);
-            ui.showToUser(Messages.FIND_MSG);
+            output = Ui.append(output, Messages.FINDING_MSG);
             int matchCount = 0;
             for (int i = 0; i < tasks.getSize(); i++) {
                 if (tasks.get(i).getTaskData().contains(keyword)) {
                     matchCount++;
-                    ui.print(matchCount + "." + tasks.getTaskStatement(i));
+                    output = Ui.append(output, matchCount + "." + tasks.getTaskStatement(i));
                 }
             }
             if (matchCount == 0) {
-                ui.showToUser(Messages.NO_FIND_MATCH_MSG);
+                output = ui.showToUser(Messages.NO_FIND_MATCH_MSG);
             } else {
-                ui.showToUser(Messages.getMatchCountMsg(matchCount));
+                output = Ui.append(output, ui.showToUser(Messages.getMatchCountMsg(matchCount)));
             }
             //use string.contains(string) method to search
         } catch (InvalidArgumentException e) {
-            ui.showError(e.getMessage());
+            output = ui.showError(e.getMessage());
         }
 
+        return output;
     }
 }

@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.task.TaskList;
 
 /**
@@ -10,67 +8,38 @@ import duke.task.TaskList;
 public class Ui {
     public static final String LINE_SEPARATOR = System.lineSeparator();
 
-    public static final String EXCLAMATION = "!";
-
-    public static final String DIVIDER = "================================================================";
-
     public static final String LINE_PREFIX = "|| ";
-
-    public static final String BOT_NAME = "Feline";
 
     public static final String COMMANDS = "list, todo, deadline (using /by),"
             + " event (using /at), mark, unmark, delete";
 
-    private Scanner scanner;
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
     /**
-     * Returns the next String input of the user.
-     *
-     * @return the next input of the user.
+     * Appends a string to the original string.
+     * @param curr the original string.
+     * @param add the string to append.
      */
-    public String readCommand() {
-        return scanner.nextLine();
+    public static String append(String curr, String add) {
+        return curr + add + LINE_SEPARATOR;
     }
-
     /**
-     * Displays "=================" divider line in Ui.
+     * Greets the user.
      */
-    public void divide() {
-        showToUser(DIVIDER);
-    }
-
-    /**
-     * Greets the user
-     */
-    public void greet() {
-        showToUser(DIVIDER, Messages.WELCOME_MESSAGE);
+    public String greet() {
+        return showToUser(LINE_SEPARATOR, Messages.WELCOME_MESSAGE);
     }
 
     /**
      * Says bye to the user and closes the scanner for system input.
      */
-    public void farewell() {
-        showToUser(DIVIDER, Messages.FAREWELL_MESSAGE);
-        scanner.close();
+    public String farewell() {
+        return showToUser(LINE_SEPARATOR, Messages.FAREWELL_MESSAGE);
     }
 
     /**
      * Displays the available commands Duke chatbot consists of.
      */
-    public void showCommands() {
-        showToUser(Messages.UNKNOWN_COMMAND, COMMANDS);
-    }
-
-    /**
-     * Prints the given message.
-     *
-     * @param message The message to be printed and displayed to user.
-     */
-    public void print(String message) {
-        System.out.println(message);
+    public String showCommands() {
+        return showToUser(Messages.UNKNOWN_COMMAND, COMMANDS);
     }
 
     /**
@@ -78,8 +47,8 @@ public class Ui {
      *
      * @param tasks The TaskList that consists of the task number we want to retrieve.
      */
-    public void printTaskCount(TaskList tasks) {
-        print(String.format("Now you have %d task(s) in your list.", tasks.getSize()));
+    public String printTaskCount(TaskList tasks) {
+        return String.format("Now you have %d task(s) in your list.", tasks.getSize());
     }
 
     /**
@@ -87,10 +56,12 @@ public class Ui {
      *
      * @param tasks The TaskList that consists of the latest task added and the total task count.
      */
-    public void printTaskAdded(TaskList tasks) {
-        print("Got it. I've added this task:");
-        print(tasks.get(tasks.getSize() - 1).toString());
-        printTaskCount(tasks);
+    public String printTaskAdded(TaskList tasks) {
+        String output = "";
+        output = Ui.append(output, "Got it. I've added this task: ");
+        output = Ui.append(output, tasks.get(tasks.getSize() - 1).toString());
+        output = Ui.append(output, printTaskCount(tasks));
+        return output;
     }
 
     /**
@@ -98,8 +69,8 @@ public class Ui {
      *
      * @param message The message that is displayed to user.
      */
-    public void showError(String message) {
-        showToUser(message);
+    public String showError(String message) {
+        return showToUser(message);
     }
 
     /**
@@ -107,9 +78,11 @@ public class Ui {
      *
      * @param message The messages that are displayed to the user, can be 1 or more using Varargs.
      */
-    public void showToUser(String... message) {
+    public String showToUser(String... message) {
+        String output = "";
         for (String m : message) {
-            System.out.println(LINE_PREFIX + m.replace("\n", LINE_SEPARATOR + LINE_PREFIX));
+            output = Ui.append(output, m);
         }
+        return output;
     }
 }

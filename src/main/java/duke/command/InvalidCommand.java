@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 public class InvalidCommand extends Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showCommands();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showCommands();
     }
 }

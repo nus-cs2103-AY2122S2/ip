@@ -45,7 +45,7 @@ public class Messages {
 
     public static final String UNKNOWN_FIND = "Please provide a keyword to search for your task.";
 
-    public static final String FIND_MSG = "Finding matching tasks in your list:";
+    public static final String FINDING_MSG = "Finding matching tasks in your list:";
 
     public static final String NO_FIND_MATCH_MSG = "I cannot find any task associated with the given keyword!";
 

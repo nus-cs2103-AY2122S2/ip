@@ -10,6 +10,8 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.InvalidArgumentException;
+import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.ui.Messages;
 import duke.ui.Ui;
 
@@ -30,38 +32,53 @@ public class Parser {
      * @param input Input by the user.
      * @return Command that is desired according to input.
      */
-    public static Command parse(String input) {
+    public String parse(String input, TaskList tasks, Storage storage) {
+        Command command = new InvalidCommand();
         try {
             String[] inputWords = input.split("\\s");
             //action is first word of the input
             Action action = Action.valueOf(inputWords[0].toUpperCase());
             switch (action) {
             case BYE:
-                return new ExitCommand();
+                command = new ExitCommand();
+                break;
             case LIST:
-                return new ListCommand();
+                command = new ListCommand();
+                break;
             case TODO:
-                return new AddCommand(Action.TODO, input);
+                command = new AddCommand(Action.TODO, input);
+                break;
             case DEADLINE:
-                return new AddCommand(Action.DEADLINE, input);
+                command = new AddCommand(Action.DEADLINE, input);
+                break;
             case EVENT:
-                return new AddCommand(Action.EVENT, input);
+                command = new AddCommand(Action.EVENT, input);
+                break;
             case MARK:
-                return new MarkCommand(inputWords);
+                command = new MarkCommand(inputWords);
+                break;
             case UNMARK:
-                return new UnmarkCommand(inputWords);
+                command = new UnmarkCommand(inputWords);
+                break;
             case DELETE:
-                return new DeleteCommand(inputWords);
+                command = new DeleteCommand(inputWords);
+                break;
             case FIND:
-                return new FindCommand(input);
+                command = new FindCommand(input);
+                break;
             default:
-                return new InvalidCommand();
+                command = new InvalidCommand();
             }
         } catch (IllegalArgumentException e) {
-            return new InvalidCommand();
+            command = new InvalidCommand();
+        } finally {
+            return command.execute(tasks, ui, storage);
         }
     }
 
+    public boolean isExit(String input) {
+        return input.equals("bye");
+    }
     /**
      * Returns the Description of task.
      *

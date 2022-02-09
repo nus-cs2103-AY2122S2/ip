@@ -24,7 +24,8 @@ public class MarkCommand extends Command {
      * @param ui User interface that interacts with the user.
      * @param storage Storage that saves and loads tasks after Command is executed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
         try {
             if (!(inputWords.length == 2)) { //e.g mark 2, cannot be mark 2 2 or just mark
                 throw new InvalidArgumentException(Messages.UNKNOWN_MARK);
@@ -34,15 +35,16 @@ public class MarkCommand extends Command {
                 throw new OutOfBoundsException(Messages.getOutOfBoundsMsg(taskNumber));
             }
             tasks.get(taskNumber - 1).markAsDone();
-            ui.print(Messages.MARK_SUCCESS);
-            ui.print(tasks.getTaskStatement(taskNumber - 1));
+            output = Ui.append(output, Messages.MARK_SUCCESS);
+            output = Ui.append(output, tasks.getTaskStatement(taskNumber - 1));
             storage.save(tasks);
         } catch (OutOfBoundsException | InvalidArgumentException e) {
-            ui.showError(e.getMessage());
+            output = ui.showError(e.getMessage());
         } catch (IOException e) {
-            ui.showError(Messages.DELETE_ERROR);
+            output = ui.showError(Messages.DELETE_ERROR);
         } catch (NumberFormatException e) {
-            ui.showError(Messages.UNKNOWN_MARK);
+            output = ui.showError(Messages.UNKNOWN_MARK);
         }
+        return output;
     }
 }
