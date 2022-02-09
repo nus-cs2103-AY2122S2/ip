@@ -260,6 +260,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             StringBuilder textToUpdate = new StringBuilder();
             copyTasks = TaskList.getTasks();
+            assert copyTasks != null;
             for (Task t : copyTasks) {
                 textToUpdate.append(taskToString(t));
             }
