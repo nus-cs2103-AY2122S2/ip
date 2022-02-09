@@ -50,12 +50,10 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        System.out.println("GETUSERDIALOG");
         return new DialogBox(text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        System.out.println("GETDUKEDIALOG");
         var db = new DialogBox(text, img);
         db.flip();
         return db;

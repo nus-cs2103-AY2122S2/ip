@@ -15,7 +15,7 @@ public class StorageErrorException extends DukeException {
     public String callback() {
         String uiResponse = "";
         uiResponse += DukeException.DIVIDER + "\n";
-        uiResponse += "Invalid Storage \n";
+        uiResponse += "Issue with Storage \n";
         uiResponse += Response.DIVIDER + "\n";
         return uiResponse;
     }
