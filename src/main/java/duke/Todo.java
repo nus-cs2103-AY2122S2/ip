@@ -10,6 +10,8 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description, Type.TODO);
+
+        assert description != "" : "TODO task must have a non-empty description!";
     }
 
     /**

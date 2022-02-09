@@ -64,49 +64,44 @@ public class Duke {
     public String run(String input) throws DukeException {
         Command command = Parser.parse(input);
 
-        if (command.equals(Command.BYE)) {
-            try {
-                storage.saveListOnDisk(tasks);
-            } catch (IOException err) {
-                System.out.println("Error occurred while trying to save list data to disk");
-                err.printStackTrace();
-            }
+        int itemIndex;
+        Task selectedTask;
+        String taskName;
 
-            return this.ui.displayExitMsg();
-
-
-        } else if (command.equals(Command.LIST)) {
+        switch (command) {
+        case LIST:
             System.out.println("LIST COMMAND CALLED");
             return runListCommand();
 
-        } else if (command.equals(Command.MARK)) {
-            int itemIndex = Integer.parseInt(input.split(" ")[1]);
-            Task selectedTask = tasks.getTask(itemIndex - 1);
+        case MARK:
+            itemIndex = Integer.parseInt(input.split(" ")[1]);
+            selectedTask = tasks.getTask(itemIndex - 1);
             selectedTask.markAsComplete();
             return this.ui.displayMarkMsg(selectedTask.toString());
 
-        } else if (command.equals(Command.UNMARK)) {
-            int itemIndex = Integer.parseInt(input.split(" ")[1]);
-            Task selectedTask = tasks.getTask(itemIndex - 1);
+        case UNMARK:
+            itemIndex = Integer.parseInt(input.split(" ")[1]);
+            //assert (itemIndex > 0) : "unmark item index must be greater than 0!";
+            selectedTask = tasks.getTask(itemIndex - 1);
             selectedTask.markAsIncomplete();
             return this.ui.displayUnmarkMsg(selectedTask.toString());
 
-        } else if (command.equals(Command.DEADLINE)) {
+        case DEADLINE:
             String endTime = getDeadlineTiming(input);
-            String taskName = input.replaceAll("deadline", "").split("/by")[0];
+            taskName = input.replaceAll("deadline", "").split("/by")[0];
             Deadline newDeadline = new Deadline(taskName, endTime);
             tasks.addTask(newDeadline);
             return this.ui.displayListedText(newDeadline, tasks.getSize());
 
-        } else if (command.equals(Command.EVENT)) {
+        case EVENT:
             String[] eventTimings = getEventTimings(input);
-            String taskName = input.replaceAll("event", "").split("/at")[0];
+            taskName = input.replaceAll("event", "").split("/at")[0];
             Event newEvent = new Event(taskName, eventTimings[0], eventTimings[1]);
             tasks.addTask(newEvent);
             return this.ui.displayListedText(newEvent, tasks.getSize());
 
-        } else if (command.equals(Command.TODO)) {
-            String taskName = input.replaceAll("todo", "");
+        case TODO:
+            taskName = input.replaceAll("todo", "");
 
             if (input.split(" ").length <= 1) {
                 throw new TodoEmptyException();
@@ -116,7 +111,7 @@ public class Duke {
             tasks.addTask(newTodo);
             return this.ui.displayListedText(newTodo, tasks.getSize());
 
-        } else if (command.equals(Command.DELETE)) {
+        case DELETE:
             if (input.split("").length <= 1) {
                 throw new DeleteEmptyException();
             }
@@ -134,19 +129,32 @@ public class Duke {
                     Todo deletedTodo = (Todo) deletedTask;
                     return this.ui.displayDeletedMessage(deletedTodo, tasks.getSize());
                 }
+                // code should be EVENT/DEADLINE/TODO
+                assert false;
             } catch (IndexOutOfBoundsException err) {
                 throw new DukeException("task index provided is invalid :(");
             }
+            break;
 
-        } else if (command.equals(Command.FIND)) {
+        case FIND:
             String searchTerm = input.split(" ")[1];
             TaskList foundTasks = tasks.findTask(searchTerm);
             return this.ui.displayFoundTaskList(foundTasks);
 
-        } else {
-            throw new UnknownCommandException();
+        case BYE:
+            try {
+                storage.saveListOnDisk(tasks);
+            } catch (IOException err) {
+                System.out.println("Error occurred while trying to save list data to disk");
+                err.printStackTrace();
+            }
+            return this.ui.displayExitMsg();
+
+        default:
+            assert false;
         }
 
+        assert false;
         return "";
     }
 }

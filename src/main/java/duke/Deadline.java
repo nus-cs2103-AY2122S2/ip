@@ -22,6 +22,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String end) {
         super(description, Type.DEADLINE);
+
+        assert description != "" && end != "";
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         LocalDateTime endDate = LocalDateTime.parse(end, format);
         this.endTime = endDate;

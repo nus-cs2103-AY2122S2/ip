@@ -13,6 +13,7 @@ public class TaskList {
     }
 
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null;
         this.tasks = tasks;
     }
 

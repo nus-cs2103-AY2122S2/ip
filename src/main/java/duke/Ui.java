@@ -20,7 +20,8 @@ public class Ui {
      * @param msg the message to be styled
      * @return    the styled message
      */
-    public String formatMsg(String msg) {
+    public static String formatMsg(String msg) {
+        assert msg != "" : "cannot format an empty msg!";
         String startFormat = "####################\n";
         String endFormat = "####################";
         return startFormat + msg + endFormat;
@@ -29,7 +30,7 @@ public class Ui {
     /**
      * Returns a styled welcome message upon launch
      */
-    public String displayWelcomeMsg() {
+    public static String displayWelcomeMsg() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -56,6 +57,7 @@ public class Ui {
      * @return List of tasks as a single string
      */
     public String renderTaskList(ArrayList<Task> tasks) {
+        assert tasks != null || tasks.size() <= 0 : "Cannot render an empty task list!";
         String renderStr = "";
         for (int i = 0; i < tasks.size(); i++) {
             String dataStr = String.format("%d. ", i + 1)
@@ -72,6 +74,7 @@ public class Ui {
      * @param tasks arrayList of Task data
      */
     public String displayTaskList(ArrayList<Task> tasks) {
+        assert tasks != null || tasks.size() <= 0 : "Cannot render an empty task list!";
         return formatMsg(renderTaskList(tasks));
     }
 
@@ -81,6 +84,7 @@ public class Ui {
      * @param foundTasks ArrayList of tasks found via FIND
      */
     public String displayFoundTaskList(TaskList foundTasks) {
+        assert foundTasks != null || foundTasks.getSize() <= 0 : "Cannot render an empty task list!";
         String message = "Here are the matching tasks in your list:\n";
         return formatMsg(message + renderTaskList(foundTasks.getTasks()));
     }
@@ -91,6 +95,7 @@ public class Ui {
      * @param task Task to be marked as complete
      */
     public String displayMarkMsg(String task) {
+        assert task != "" : "Cannot display an empty task as marked!";
         String markMsg = "Nice! I've marked this task as done:\n"
                 + task + "\n";
         return formatMsg(markMsg);
@@ -102,6 +107,7 @@ public class Ui {
      * @param task Task to be marked as incomplete
      */
     public String displayUnmarkMsg(String task) {
+        assert task != "" : "Cannot display an empty task as unmarked!";
         String unmarkMsg = "Nice! I've marked this task as NOT done:\n"
                 + task + "\n";
         return formatMsg(unmarkMsg);
@@ -129,6 +135,8 @@ public class Ui {
      * @param size Number of tasks remaining in list
      */
     public String displayDeletedMessage(Task deletedTask, int size) {
+        assert deletedTask != null : "Cannot display an empty task as deleted!";
+        assert size >= 0 : "Number of tasks in list cannot be negative!";
         String output = " Noted. I've removed this task:\n"
                 + "  "
                 + deletedTask
