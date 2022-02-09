@@ -38,14 +38,14 @@ public class Duke {
         }
     }
 
-//    public static void main(String[] args) {
-//        new Duke("./data/duke.txt").run();
-//    }
-//
-//    /**
-//     * Runs the bot application until the user inputs the exit command.
-//     */
-//    public void run() {
+    public static void main(String[] args) {
+        new Duke("./data/duke.txt").run();
+    }
+
+    /**
+     * Runs the bot application until the user inputs the exit command.
+     */
+    public void run() {
 //        this.ui.showWelcome();
 //        boolean isRun = true;
 //        while (isRun) {
@@ -58,5 +58,5 @@ public class Duke {
 //                this.ui.showError(e.getMessage());
 //            }
 //        }
-//    }
+    }
 }
