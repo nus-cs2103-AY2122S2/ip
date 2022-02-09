@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "PukeMain"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
