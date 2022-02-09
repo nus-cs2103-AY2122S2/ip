@@ -15,14 +15,18 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
-        if (index < 0 || index >= tasks.size()) {
+        if (isOutOfBounds(tasks)) {
             response.append("Invalid index, please try again.");
-        } else {
+            return;
+        }
             Task task = tasks.remove(index);
             response.append(ui.taskDeleteMessage(task, tasks.size()));
             assert response.length() > 0; // response should not be empty
             storage.save(tasks.list());
         }
+
+    private boolean isOutOfBounds(TaskList tasks) {
+        return index < 0 || index >= tasks.size();
     }
 }
 
