@@ -1,8 +1,18 @@
 package duke;
 
-import duke.task.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-import java.io.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Represents a storage for data to be saved.
@@ -13,7 +23,8 @@ public class Storage {
 
     /**
      * Constructor for a Storage object
-     * @param dataPath
+     *
+     * @param dataPath the path of the file that is used to save the tasks.
      */
     public Storage(String dataPath) {
         this.dataPath = dataPath;
@@ -51,10 +62,12 @@ public class Storage {
                 Task task = taskList.getTask(i);
                 if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
-                    printWriter.println("D | " + deadline.getStatusIcon() + " | " + deadline.getDescription() + " | " + deadline.getDateAndTime());
+                    printWriter.println("D | " + deadline.getStatusIcon() + " | " + deadline.getDescription()
+                            + " | " + deadline.getDateAndTime());
                 } else if (task instanceof Event) {
                     Event event = (Event) task;
-                    printWriter.println("E | " + event.getStatusIcon() + " | " + event.getDescription() + " | " + event.getDateAndTime());
+                    printWriter.println("E | " + event.getStatusIcon() + " | " + event.getDescription()
+                            + " | " + event.getDateAndTime());
                 } else if (task instanceof Todo) {
                     Todo todo = (Todo) task;
                     printWriter.println("T | " + todo.getStatusIcon() + " | " + todo.getDescription());

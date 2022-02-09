@@ -1,10 +1,10 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
-import java.io.*;
 
 /**
  * Represents a Duke chatbot.
@@ -27,7 +27,7 @@ public class Duke {
     /**
      * Initiates the chatbot.
      *
-     * @throws IOException
+     * @throws IOException if there is an error with the input/output.
      */
     public void run() throws IOException {
         this.ui.showWelcome();

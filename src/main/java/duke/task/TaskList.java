@@ -67,6 +67,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Displays the tasks in the list with a given keyword.
+     *
+     * @param keyword the search keyword used to find the tasks.
+     */
     public void listTasks(String keyword) {
         if (taskList.size() == 0) {
             System.out.println("You have no tasks!");

@@ -1,11 +1,12 @@
 package task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
@@ -15,7 +16,7 @@ public class TaskListTest {
         taskList.addTask(new Deadline("homework", "2022-02-11T11:59:00"));
 
         assertEquals(taskList.size(), 2);
-        assertEquals(taskList.getTask(0).toString(),"[T][ ] testing");
+        assertEquals(taskList.getTask(0).toString(), "[T][ ] testing");
 
         taskList.removeTask(0);
 
