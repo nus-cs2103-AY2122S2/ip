@@ -35,7 +35,7 @@ public class TaskList {
                 String description = tokens[1];
                 String additionalInfo = tokens[2];
                 boolean marked = tokens[3].equals("X");
-                
+
                 if (taskType.equals("T")) {
                     tasks.add(new ToDo(description));
                 } else if (taskType.equals("E")) {
