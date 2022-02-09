@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * can be created to store all the different type of task the user has saved.
  */
 public class TaskList {
+
+    public static final String STORAGE_HEADER = "tasklist";
     private ArrayList<Task> taskArr = new ArrayList<>();
 
     /**
@@ -102,5 +104,20 @@ public class TaskList {
             output += String.format("      %d. %s\n", i + 1, taskArr.get(i).toString());
         }
         return output;
+    }
+
+    /**
+     * Returns the data of the task list.
+     *
+     * @return data of the task list.
+     */
+    public String toData() {
+        String data = String.format("[%s] %d\n", STORAGE_HEADER, taskArr.size());
+
+        for (int i = 0; i < taskArr.size(); i++) {
+            data += taskArr.get(i).toData() + "\n";
+        }
+
+        return data;
     }
 }

@@ -10,18 +10,18 @@ import duke.command.CommandFeedback;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.user.UserProfile;
 
 /**
  * Represents a task bot. A <code>Duke</code> object can be created to
  * accept user input, create tasks and respond to the user.
  */
 public class Duke {
-    public static final String FILE_PATH = "/data/taskInfo.txt";
+    public static final String FILE_PATH = "/data/userInfo.txt";
 
     private boolean isExit;
-    private TaskList taskList;
+    private UserProfile userProfile;
     private Storage storage;
     private final Ui ui;
 
@@ -39,16 +39,19 @@ public class Duke {
      */
     public Duke(BotMessage bot) {
         ui = new Ui(bot);
-        taskList = new TaskList();
+        userProfile = new UserProfile();
     }
 
     /**
+     * Initialises the storage system by checking the file
+     * location validity.
      *
+     * @throws DukeException if there is an error in setting up the storage system.
      */
     public void initializeStorageSystem() throws DukeException {
         try {
             storage = new Storage(FILE_PATH);
-            taskList = storage.loadTaskList();
+            userProfile = storage.loadUserProfile();
 
         } catch (IOException e) {
             storage = null;
@@ -77,6 +80,12 @@ public class Duke {
         case BOT:
             ui.setBot(((BotCommand) com).getBotType());
             break;
+        case MARK:
+            userProfile.addCompletion();
+            break;
+        case UNMARK:
+            userProfile.removeCompletion();
+            break;
         case EXIT:
             isExit = true;
             break;
@@ -84,7 +93,7 @@ public class Duke {
             ui.formatError("Unexpected error in handleCommandFeedback!");
         }
 
-        return ui.getCommandFeedbackMessage(comFeed);
+        return ui.getCommandFeedbackMessage(comFeed, userProfile);
     }
 
     /**
@@ -102,10 +111,10 @@ public class Duke {
             }
 
             Command c = Parser.parseCommand(input.trim());
-            CommandFeedback cf = c.execute(taskList);
+            CommandFeedback cf = c.execute(userProfile.getTaskList());
 
             if (storage != null) {
-                storage.saveTaskList(taskList);
+                storage.saveUserProfile(userProfile);
             }
 
             return handleCommandFeedback(c, cf);

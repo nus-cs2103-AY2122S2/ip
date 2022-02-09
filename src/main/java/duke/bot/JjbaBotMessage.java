@@ -116,6 +116,16 @@ public class JjbaBotMessage extends BotMessage {
         return "/images/JJBABot.png";
     }
 
+    /**
+     * Returns the message to be printed when a command of type 'stats' is executed.
+     *
+     * @return stats message.
+     */
+    @Override
+    public String getStatsMessage() {
+        return "Here is your profile information:";
+    }
+
     private String getTaskLeft(TaskList taskList) {
         return String.format("You have %s task%s in your list.", (taskList.size() > 0)
                 ? taskList.size() : "no", (taskList.size() <= 1) ? "" : "s");
