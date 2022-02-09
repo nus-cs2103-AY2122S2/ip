@@ -114,6 +114,7 @@ public class Parser {
         if (commandArray.length == 1) {
             throw new EmptyCommandException();
         }
+        assert commandArray.length != 0 : "Arguments should not be empty";
 
         return command.substring(command.indexOf(' ') + 1);
     }
