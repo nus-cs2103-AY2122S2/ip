@@ -44,14 +44,14 @@ public class Bobby {
         }
     }
 
-    /**
-     * Main method that uses the run method
-     * @param args Unused.
-     */
-    public static void main(String[] args) {
-        Ui.showWelcome();
-        new Bobby("bobby.txt").run();
-    }
+//    /**
+//     * Main method that uses the run method
+//     * @param args Unused.
+//     */
+//    public static void main(String[] args) {
+//        Ui.showWelcome();
+//        new Bobby("bobby.txt").run();
+//    }
 
     public String getResponse(String text) {
         return Parser.parse(tasks, text, this);

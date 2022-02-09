@@ -1,5 +1,6 @@
 package bobby;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,12 +25,15 @@ public class MainWindow extends AnchorPane {
 
     private Bobby bobby;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/Stickman.png"));
+    private final Image BOBBY_IMAGE = new Image(this.getClass().getResourceAsStream("/images/Bobby.png"));
+    private final ImageView USER_IV = new ImageView(USER_IMAGE);
+    private final ImageView BOBBY_IV = new ImageView(BOBBY_IMAGE);
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(Ui.showWelcome()), BOBBY_IV));
     }
 
     public void setBobby(Bobby b) {
@@ -42,16 +46,17 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
+        String userInputString = userInput.getText();
+        Label userText = new Label(userInputString);
         Label dukeText = new Label(bobby.getResponse(userInput.getText()));
-        ImageView userIv = new ImageView();
-        ImageView dukeIv = new ImageView();
-        userIv.setImage(userImage);
-        dukeIv.setImage(dukeImage);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, userIv),
-                DialogBox.getDukeDialog(dukeText, dukeIv)
+                DialogBox.getUserDialog(userText, USER_IV),
+                DialogBox.getDukeDialog(dukeText, BOBBY_IV)
         );
+        if (userInputString.equals("bye")) {
+            Platform.exit();
+        }
+
         userInput.clear();
     }
 }
