@@ -23,7 +23,13 @@ public class Duke {
         }
     }
 
-    public void handle(String input) throws DukeException{
+    /**
+     * Runs the Price command that is given
+     *
+     * @param input The command to be run
+     * @throws DukeException if the command is formatted wrongly
+     */
+    private void handle(String input) throws DukeException{
         String[] split = input.split(" ");
         String command = split[0];
         if (command.equals("todo")) {
@@ -129,7 +135,7 @@ public class Duke {
         }
     }
 
-    public void run() {
+    private void run() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -146,6 +152,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method.
+     * Calls the driver methods to begin the execution of Prince.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

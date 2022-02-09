@@ -5,13 +5,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class handles loading and saving the list of tasks
+ * at the beginning and end of execution.
+ */
 public class Storage {
+    /**
+     * The filepath of= the text file that contains the task list.
+     */
     private String filePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath the file path
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task list from the stored file.
+     *
+     * @return the tasks in a ArrayList of Task objects
+     * @throws IOException if the file doesn't exist
+     */
     ArrayList<Task> load()  throws IOException {
             ArrayList<Task> list = new ArrayList<>();
             File data = new File("prince.txt");

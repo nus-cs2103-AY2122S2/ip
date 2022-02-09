@@ -2,13 +2,30 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Parser class handles parsing the String input into a Task object.
+ */
 public class Parser {
+    /**
+     * String input to be parsed.
+     */
     protected String string;
 
+    /**
+     * Constructor for Parser.
+     *
+     * @param string The string to be parsed
+     */
     Parser(String string) {
         this.string =  string;
     }
 
+    /**
+     * The method that parses the string input and then
+     * creates a Deadline, Task, or Event object as necessary.
+     *
+     * @return Task object containing the data specified in the string
+     */
     Task parse() {
         Task t = new Task("null");
         switch (string.substring(0,3)) {
@@ -32,7 +49,7 @@ public class Parser {
         return t;
     }
 
-    String monthToInt(String month) {
+    private String monthToInt(String month) {
         String r = "";
         switch (month) {
         case "Jan":
