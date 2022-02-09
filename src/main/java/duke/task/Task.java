@@ -32,13 +32,16 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void markAsDone() {
-        isDone = true;
+    public void markTask(boolean isDone) {
+        this.isDone = isDone;
     }
-
-    public void markAsUndone() {
-        isDone = false;
-    }
+    // public void markAsDone() {
+    //     isDone = true;
+    // }
+    //
+    // public void markAsUndone() {
+    //     isDone = false;
+    // }
 
     /**
      * Generates a string which represents the task for disk storage. The format is as follows:

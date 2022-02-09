@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.parser.DukeException;
 import duke.parser.Parser;
@@ -68,8 +69,38 @@ public class TaskStore {
         this.tasks.add(t);
     }
 
-    public void removeTask(Task t) {
-        this.tasks.remove(t);
+    public ArrayList<Task> removeTasks(String[] args) {
+        ArrayList<Integer> indexList = this.getIndices(args);
+
+        // Sorts the indices in descending order to prevent false index deletion
+        indexList.sort(Collections.reverseOrder());
+
+        ArrayList<Task> deletedTasks = new ArrayList<>();
+        for (int index: indexList) {
+            Task deletedTask = this.tasks.remove(index);
+            deletedTasks.add(deletedTask);
+        }
+
+        return deletedTasks;
+    }
+
+    public ArrayList<Task> markTasks(String[] args, boolean isDone) {
+        ArrayList<Integer> indexList = this.getIndices(args);
+
+        ArrayList<Task> markedTasks = new ArrayList<>();
+        for (int index: indexList) {
+            Task markedTask = this.tasks.get(index);
+
+            // Ignore marking if task is already done/not done
+            if (markedTask.getIsDone() == isDone) {
+                continue;
+            }
+
+            markedTask.markTask(isDone);
+            markedTasks.add(markedTask);
+        }
+
+        return markedTasks;
     }
 
     /**
@@ -119,6 +150,25 @@ public class TaskStore {
             }
         }
         return false;
+    }
+
+    public ArrayList<Integer> getIndices(String[] args) {
+        ArrayList<Integer> indexList = new ArrayList<>();
+
+        for (String arg : args) {
+            // Catch for invalid numbers (non-digital characters or index out of range)
+            try {
+                int index = Integer.parseInt(arg) - 1;
+                if (index < 0 || index >= this.tasks.size()) {
+                    continue;
+                }
+                indexList.add(index);
+            } catch (NumberFormatException e) {
+                continue;
+            }
+        }
+
+        return indexList;
     }
 
     /**

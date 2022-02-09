@@ -1,6 +1,7 @@
 package duke.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -41,6 +42,7 @@ public class Parser {
             switch (command) {
             case BYE:
                 ui.bye();
+                System.exit(0);
                 break;
 
             case LIST:
@@ -52,25 +54,27 @@ public class Parser {
                 break;
 
             case MARK:
-                task = validateMarkCommand(command, commandArgs, tasks);
-                task.markAsDone();
-                ui.printTaskMarking(task);
+                validateCommand(command, commandArgs, tasks);
+                ArrayList<Task> markedTasks = tasks.markTasks(commandArgs.split(" "), true);
+                ui.printTaskMarking(markedTasks, true);
                 break;
 
             case UNMARK:
-                task = validateMarkCommand(command, commandArgs, tasks);
-                task.markAsUndone();
-                ui.printTaskMarking(task);
+                validateCommand(command, commandArgs, tasks);
+                markedTasks = tasks.markTasks(commandArgs.split(" "), false);
+                ui.printTaskMarking(markedTasks, false);
                 break;
 
             case DELETE:
-                task = validateMarkCommand(command, commandArgs, tasks);
-                tasks.removeTask(task);
-                ui.printTaskDelete(task, tasks);
+                validateCommand(command, commandArgs, tasks);
+                ArrayList<Task> deletedTasks = tasks.removeTasks(commandArgs.split(" "));
+                ui.printTaskDelete(deletedTasks, tasks);
                 break;
 
             case MAKE_DEADLINE:
+                // Fallthrough
             case MAKE_EVENT:
+                // Fallthrough
             case MAKE_TODO:
                 task = tasks.addTask(command, commandArgs);
                 ui.printTaskAdd(task, tasks);
@@ -109,18 +113,21 @@ public class Parser {
     }
 
     /**
-     * Validates the command and its arguments for the arguments (mark and unmark).
+     * Validates the input command, arguments and taskStore before executing the function.
+     * <br>
+     * In general, the check ensures that the command and arguments are non-empty and the task store having at least
+     * 1 item. Should any of these requirements fail, an exception is thrown.
      *
      * @param command     The action which the user wishes to execute.
      * @param commandArgs The parameters passed to support the action
      * @param tasks       The task store which the user wishes to update
-     * @return The updated task from <code>tasks</code>.
+     // * @return The updated task from <code>tasks</code>.
      * @throws DukeException             If there is a syntax error in the command or <code>tasks</code> does not have
      *                                   any tasks.
-     * @throws NumberFormatException     If the provided parameters is not a number.
+     // * @throws NumberFormatException     If the provided parameters is not a number.
      * @throws IndexOutOfBoundsException If the provided index exceeds the size of <code>tasks</code> or the index < 0.
      */
-    public static Task validateMarkCommand(String command, String commandArgs, TaskStore tasks) throws DukeException,
+    public static void validateCommand(String command, String commandArgs, TaskStore tasks) throws DukeException,
             NumberFormatException, IndexOutOfBoundsException {
         if (tasks.getIsEmpty()) {
             throw new DukeException("Please make sure you have something in the list before performing this operation!");
@@ -130,8 +137,8 @@ public class Parser {
             throw new DukeException(String.format("Please make sure your command follows this format: %s <number>", command));
         }
 
-        int toMark = Integer.parseInt(commandArgs) - 1;
-        return tasks.getTask(toMark);
+        // int toMark = Integer.parseInt(commandArgs) - 1;
+        // return tasks.getTask(toMark);
     }
 
     /**
