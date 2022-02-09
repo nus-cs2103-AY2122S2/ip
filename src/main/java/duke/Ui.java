@@ -14,7 +14,7 @@ class Ui {
 
     public void showWelcomeMessage() {
         String startMessage = "Hello! I'm Duke\n"
-                            + "What can I do for you?";
+                + "What can I do for you?";
         System.out.println(startMessage);
         System.out.println(DIVIDER);
     }
@@ -28,7 +28,8 @@ class Ui {
             String listMessage = "Here are the tasks in your list: \n";
             for (int i = 0; i < tasklist.getTaskArray().size(); i++) {
                 String index = String.valueOf(i + 1);
-                listMessage =  listMessage + index + "." + tasklist.getTaskArray().get(i) + "\n";
+                listMessage =  listMessage + index + "." 
+                        + tasklist.getTaskArray().get(i) + "\n";
             }
             System.out.println(listMessage);
             System.out.println(DIVIDER);
@@ -39,7 +40,7 @@ class Ui {
         String messageTask = "Got it. I've added this task: \n";
         String taskString = task.toString();
         System.out.println(messageTask + taskString + "\n"
-                        + "Now you have " + no0fTask + " tasks in the list.");
+                + "Now you have " + no0fTask + " tasks in the list.");
         System.out.println(DIVIDER);
     }
 
@@ -47,8 +48,8 @@ class Ui {
         String messageTask = "Noted. I've removed this task: \n"; 
         String taskString = task.toString();
         System.out.println(messageTask + taskString 
-                            + "\n" +
-                            "Now you have " + noOfTask + " tasks in the list.");
+                + "\n" + "Now you have " + noOfTask 
+                + " tasks in the list.");
         System.out.println(DIVIDER);
     }
 

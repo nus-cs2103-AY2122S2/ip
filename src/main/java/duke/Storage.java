@@ -1,7 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
+
 import java.io.File;
+
 import java.io.IOException;
 
 class Storage {
@@ -33,7 +35,7 @@ class Storage {
             try {
                 String firstInitial = tasks.getInitial() ; //first initial character
                 String textToAdd = firstInitial + " | " + tasks.getStatusIcon() + " | " 
-                                    + taskArray.get(i).getDescription();
+                        + taskArray.get(i).getDescription();
                 fc.writeFile(filePath, textToAdd);
             } catch (IOException e) {
                 System.out.println("File is not found :(!");
