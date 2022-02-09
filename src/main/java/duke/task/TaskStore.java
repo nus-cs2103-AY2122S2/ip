@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import duke.parser.DukeException;
 import duke.parser.Parser;
 
-
 /**
  * Represents a collection of the tasks stored in the program.
  */
@@ -48,11 +47,24 @@ public class TaskStore {
     public Task addTask(String command, String args) throws DukeException, DateTimeParseException {
         Task t = this.createTask(command, args);
         assert t != null : "Assertion failed on TaskStore.addTask(): Task should be created";
-        this.tasks.add(t);
+
+        this.addTask(t);
         return t;
     }
 
-    public void addTask(Task t) {
+    /**
+     * Adds task to tasklist. If the task is a <code>Timeable</code>, it will check if there are clashing dates first
+     * and an DukeException is thrown if there is.
+     * @param t The task to add to the tasklist
+     * @throws DukeException If the task is a <code>Timeable</code> and it clashes with an existing task in the list
+     */
+    public void addTask(Task t) throws DukeException {
+        if (t instanceof Timeable) {
+            if (this.hasClashingDate((Timeable) t)) {
+                throw new DukeException("There is a task that falls on this day.");
+            }
+        }
+
         this.tasks.add(t);
     }
 
@@ -89,6 +101,24 @@ public class TaskStore {
         } else {
             return String.format("Here are your tasks on %s\n%s", dateString, tasksToPrint);
         }
+    }
+
+    /**
+     * Checks the task list of there are any clashing dates with another task
+     * @param t The timeable task to be checked
+     * @return true if there exists a task where the dates are the same. Otherwise, return false.
+     */
+    public boolean hasClashingDate(Timeable t) {
+        for (Task task : this.tasks) {
+            if (task instanceof Timeable) {
+                Timeable timeableTask = (Timeable) task;
+
+                if (timeableTask.isSameDate(t.getDate())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

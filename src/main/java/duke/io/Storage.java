@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import duke.parser.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -63,7 +64,7 @@ public class Storage {
      * @throws DateTimeParseException If the date could not be parsed when creating the task. The user may need to
      *                                change the date format such that it is readable by the program.
      */
-    public TaskStore importTasks() throws IOException, DateTimeParseException {
+    public TaskStore importTasks() throws DateTimeParseException, DukeException, IOException {
         TaskStore tasks = new TaskStore();
 
         try {
