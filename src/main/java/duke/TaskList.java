@@ -5,6 +5,13 @@ import java.util.ArrayList;
  Class to process the Tasklist of the chatbot
  */
 public class TaskList {
+    private static final String DEADLINE_WRONG_FORMAT = "Master, you wished wrongly. Remember you have to wish in"
+            + "this format " + "deadline task /by DD/MM/YYYY TIME. " + "\n" + "Please wish again";;
+    private static final String EVENT_WRONG_FORMAT = "Master, you wished wrongly." + "\n"
+            + "Remember you have to wish in this format " + "event task /at TIME." + "\n" + "Please wish again";;
+    private static final String TODO_WRONG_FORMAT = "Master, I have all the knowledge in the world but"
+            + "I do not know what you want to do," + "\n" + " Please wish again in the format todo task";;
+
     /**
      * Prints the arraylist for the user of the chatbot
      *
@@ -106,15 +113,13 @@ public class TaskList {
     public static String addEvent(String command, ArrayList<Task> storeList) {
         int slash = command.indexOf("/");
         if (slash == -1 || slash <= 6) {
-            return "Master, you wished wrongly." + "\n" + "Remember you have to wish in this format "
-                    + "event task /at TIME." + "\n" + "Please wish again";
+            return EVENT_WRONG_FORMAT;
         } else {
             String newTask = command.substring(6, slash - 1);
             String atTime = command.substring(slash + 1);
             Event event = new Event(newTask, atTime);
             storeList.add(event);
-            return "Added to my brain master:" + event.toString() + " Currently I have " + storeList.size()
-                    + " things in my brain";
+            return "Added to my brain master:" + event.toString() + " " + printSizeOfList(storeList);
         }
     }
 
@@ -128,14 +133,12 @@ public class TaskList {
      */
     public static String addTodo(String command, ArrayList<Task> storeList) {
         if (command.length() < 5) {
-            return "Master, I have all the knowledge in the world but I do not know what you want to do," + "\n"
-                    + " Please wish again in the format todo task";
+            return TODO_WRONG_FORMAT;
         } else {
             String newTask = command.substring(5);
             Todo todo = new Todo(newTask);
             storeList.add(todo);
-            return "Added to my brain master:" + "\n" + todo.toString() + "\n" + "Currently I have " + storeList.size()
-                    + " things in my brain";
+            return "Added to my brain master:" + "\n" + todo.toString() + "\n" + printSizeOfList(storeList);
         }
     }
 
@@ -150,21 +153,29 @@ public class TaskList {
     public static String addDeadline(String command, ArrayList<Task> storeList) {
         int slash = command.indexOf("/");
         if (slash == -1 || slash <= 9) {
-            return "Master, you wished wrongly. Remember you have to wish in this format "
-                    + "deadline task /by DD/MM/YYYY TIME. " + "\n" + "Please wish again";
+            return DEADLINE_WRONG_FORMAT;
         } else {
             String newTask = command.substring(9, slash - 1);
             if (newTask.equals("")) {
-                return "Master, you wished wrongly. Remember you have to wish in this format "
-                        + "deadline task /by DD/MM/YYYY TIME. " + "\n" + "Please wish again";
+                return DEADLINE_WRONG_FORMAT;
             } else {
                 String endTime = command.substring(slash + 1);
                 Deadline deadline = new Deadline(newTask, endTime);
                 storeList.add(deadline);
-                return "Added to my brain master:" + "\n" + deadline.toString() + "Currently I have "
-                        + storeList.size() + " things in my brain";
+                return "Added to my brain master:" + "\n" + deadline.toString() + printSizeOfList(storeList);
             }
         }
+    }
+
+    /**
+     * Print string of size of list
+     *
+     * @param storeList find size of list
+     * @return String of response by chatbot
+     *
+     */
+    private static String printSizeOfList(ArrayList<Task> storeList) {
+        return "Currently I have " + storeList.size() + " things in my brain";
     }
 
     /**
@@ -181,8 +192,6 @@ public class TaskList {
         for (int i = 0; i < sizeOfList; i++) {
             if (storeList.get(i).getDescription().contains(itemToFind)) {
                 tasksToBePrinted.add(storeList.get(i));
-            } else {
-
             }
         }
         if (tasksToBePrinted.size() == 0) {
@@ -193,9 +202,7 @@ public class TaskList {
                 sb.append(s.toString());
                 sb.append(" ");
             }
-
-            String str = sb.toString();
-            return str;
+            return sb.toString();
         }
     }
 }
