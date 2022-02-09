@@ -50,6 +50,7 @@ test {
 
 application {
     mainClass = "duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
