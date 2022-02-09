@@ -10,9 +10,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 
 public class DukeGUI extends Application {
+
+    // User images
+    private Image user = new Image(this.getClass().getResourceAsStream("/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -20,7 +26,8 @@ public class DukeGUI extends Application {
     private Button sendButton;
     private Scene scene;
 
-    public static void main(String[] args) {
+    public static void main() {
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
     }
 
     @Override
@@ -75,28 +82,24 @@ public class DukeGUI extends Application {
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
