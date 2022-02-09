@@ -56,14 +56,16 @@ public class TaskList {
      * @param toPrint boolean value to decide if we want to execute print statements
      */
     public void addTask(Task task, Boolean toPrint) throws DukeException {
+        String tag = task.getTag();
+        assert (tag.equals("T") | tag.equals("D") | tag.equals("E"));
         this.userTaskList.add(task);
         if (toPrint) {
-            if (task.getTag() == "T") {
+            if (tag.equals("T")) {
                 ui.print("Fantabulous! You have added this Todo Item:\n" + task);
-            } else if (task.getTag() == "D") {
+            } else if (tag.equals("D")) {
                 ui.print("Perfect! You have added this Deadline Item:\n" + task
                         + "\nRemember to stick to your objective date!");
-            } else if (task.getTag() == "E") {
+            } else if (tag.equals("E")) {
                 ui.print("Magnifico! You have added this Event Item:\n" + task
                         + "\nRemember to be there 5 minutes early!");
             } else {
@@ -81,8 +83,10 @@ public class TaskList {
      */
     public void deleteTask(int taskIndex) throws DukeException {
         if (this.checkValidTask(taskIndex)) {
+            int originalSize = this.getSize();
             Task userTask = this.userTaskList.get(taskIndex);
             this.userTaskList.remove(taskIndex);
+            assert (this.getSize() == originalSize - 1); //Check if size has decreased by 1
             ui.print("I have removed " + userTask);
         }
     }
@@ -120,6 +124,7 @@ public class TaskList {
                     counter += 1;
                 }
             }
+            assert (counter <= this.getSize());
             if (counter == 0) {
                 ui.print("You have completed all your tasks! Great job!");
             } else {
@@ -145,6 +150,7 @@ public class TaskList {
                     secondaryCounter++;
                 }
             }
+            assert (secondaryCounter <= this.getSize());
             ui.print("");
         }
     }
@@ -164,6 +170,7 @@ public class TaskList {
             if (toPrint) {
                 ui.print("Congratulations on completing the task!\n" + task);
             }
+            assert (task.checkIsDone() == true);
         }
     }
 
@@ -182,6 +189,7 @@ public class TaskList {
             if (toPrint) {
                 ui.print("I have un-marked this task!\n" + task);
             }
+            assert (task.checkIsDone() == false);
         }
     }
 
