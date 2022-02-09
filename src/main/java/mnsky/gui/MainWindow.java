@@ -50,12 +50,19 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Gets user input from the TextField box and passes it to the displayResponse() function.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        displayResponse(input);
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    public void displayResponse(String input) {
         ArrayList<String> responses = mnsky.getResponses(input);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
 

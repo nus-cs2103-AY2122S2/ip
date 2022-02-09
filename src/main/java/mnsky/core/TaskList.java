@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import mnsky.exceptions.MnskyException;
 import mnsky.exceptions.MnskyInvalidParameterException;
@@ -13,6 +14,8 @@ import mnsky.task.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    private Stack<ArrayList<Task>> undoHistory;
+    private Stack<ArrayList<Task>> redoHistory;
 
     /**
      * Creates a TaskList object. Retrieves the storage data if there are no issues with it.
@@ -21,6 +24,8 @@ public class TaskList {
      */
     public TaskList(Ui ui, Storage storage) {
         tasks = new ArrayList<>();
+        undoHistory = new Stack<>();
+        redoHistory = new Stack<>();
 
         try {
             getStorageData(storage);
@@ -255,5 +260,44 @@ public class TaskList {
         }
 
         return listStrings;
+    }
+
+    /**
+     * Adds the current task list to the undo history and empties the redo history before updating the task list.
+     */
+    public void addToUndoHistory() {
+        ArrayList<Task> oldTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            oldTasks.add(task.copy());
+        }
+        undoHistory.push(oldTasks);
+
+        while (!redoHistory.isEmpty()) {
+            redoHistory.pop();
+        }
+    }
+
+    /**
+     * Undoes the most recent update done to the task list, if an update exists.
+     */
+    public void undo() throws MnskyException {
+        if (undoHistory.isEmpty()) {
+            throw new MnskyException("[MNSKY has nothing to undo!]");
+        }
+
+        redoHistory.push(tasks);
+        tasks = undoHistory.pop();
+    }
+
+    /**
+     * Redoes the most recent undoed update, if it exists.
+     */
+    public void redo() throws MnskyException {
+        if (redoHistory.isEmpty()) {
+            throw new MnskyException("[MNSKY has nothing to redo!]");
+        }
+
+        undoHistory.push(tasks);
+        tasks = redoHistory.pop();
     }
 }
