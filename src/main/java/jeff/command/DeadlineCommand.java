@@ -20,7 +20,8 @@ public class DeadlineCommand extends Command {
     private String dateInfo;
 
     /**
-     * Constructor of DeadlineCommand.
+     * Constructor of DeadlineCommand that stores the description
+     * and dateInfo to be used in the creation of Deadline object.
      *
      * @param description Name of the task.
      * @param dateInfo End date of the task.
@@ -31,8 +32,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Creates a new Deadline task and store it
-     * into the task list and feedback to the user.
+     * Creates a new Deadline task and store it into the task list and feedback to the user.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.

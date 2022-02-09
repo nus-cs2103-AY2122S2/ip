@@ -19,7 +19,8 @@ public class TodoCommand extends Command {
     private String description;
 
     /**
-     * Constructor of TodoCommand.
+     * Constructor of TodoCommand that stores the description
+     * to be used in the creation of Todo object.
      *
      * @param body Name of the task.
      */
@@ -28,8 +29,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Creates a new Todo task and store it
-     * into the task list and feedback to the user.
+     * Creates a new Todo task and store it into the task list and feedback to the user.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.

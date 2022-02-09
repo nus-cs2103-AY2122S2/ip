@@ -20,7 +20,8 @@ public class EventCommand extends Command {
     private String dateInfo;
 
     /**
-     * Constructor of EventCommand.
+     * Constructor of EventCommand that stores the description
+     * and dateInfo to be used in the creation of Event object.
      *
      * @param description Name of the task.
      * @param dateInfo Date of the task.
@@ -31,8 +32,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Creates a new Event task and store it
-     * into the task list and feedback to the user.
+     * Creates a new Event task and store it into the task list and feedback to the user.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.

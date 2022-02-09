@@ -17,7 +17,7 @@ public class MarkCommand extends Command {
     private int index;
 
     /**
-     * Constructor of MarkCommand.
+     * Constructor of MarkCommand stores the index in index 0 format.
      *
      * @param body Position of the task to mark as done.
      */
@@ -26,8 +26,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Marks the Task as done according
-     * to index given by the user if available.
+     * Marks the Task as done according to index given by the user if available.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.

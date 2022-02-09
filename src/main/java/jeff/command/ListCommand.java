@@ -13,8 +13,7 @@ import jeff.ui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Passes the string to print to ui class
-     * to print out every entry of the list if any.
+     * Passes the string to print to ui class to print out every entry of the list if any.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.

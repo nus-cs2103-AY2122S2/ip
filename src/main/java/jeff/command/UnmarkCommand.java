@@ -17,7 +17,7 @@ public class UnmarkCommand extends Command {
     private int index;
 
     /**
-     * Constructor of UnmarkCommand.
+     * Constructor of UnmarkCommand stores the index in index 0 format.
      *
      * @param body Position of the task to mark as not done.
      */
@@ -26,8 +26,7 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Marks the Task as not done according
-     * to index given by the user if available.
+     * Marks the Task as not done according to index given by the user if available.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
