@@ -54,4 +54,14 @@ public class Message {
         assert taskCount >= 0 : "taskCount should be >= 0";
         return "The task index is invalid, only accepts 1 to " + taskCount + ".";
     }
+
+    /**
+     * Generate the message to warn that duplicate tasks have been detected.
+     *
+     * @param taskType the type of task.
+     * @return the message to warn that duplicate tasks have been detected.
+     */
+    public static String generateDuplicateTaskMessage(TaskType taskType) {
+        return String.format("This %s has already been recorded.", taskType.getCommand());
+    }
 }

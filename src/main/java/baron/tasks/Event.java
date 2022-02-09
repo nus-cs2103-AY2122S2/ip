@@ -25,6 +25,33 @@ public class Event extends Task {
     }
 
     /**
+     * Checks if this {@code Event} object is equal to the specified object.
+     *
+     * @param o an {@code Object} to be compared with.
+     * @return true if the specified object equals to this {@code Event} object.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null) {
+            return false;
+        }
+
+        if (!(o instanceof Event)) {
+            return false;
+        }
+
+        Event event = (Event) o;
+        boolean isDescriptionEqual = this.description.equals(event.description);
+        boolean isAtEqual = this.at.equals(event.at);
+
+        return isDescriptionEqual && isAtEqual;
+    }
+
+    /**
      * Returns the string representation of this {@code Event} task.
      *
      * @return the string representation of this {@code Event} task.

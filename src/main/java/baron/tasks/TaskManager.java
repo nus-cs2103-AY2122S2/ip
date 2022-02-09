@@ -111,6 +111,10 @@ public class TaskManager {
             newTask = new Event(commandArgs[0], localDateTime);
         }
 
+        if (this.taskList.contains(newTask)) {
+            throw new BaronException(Message.generateDuplicateTaskMessage(taskType));
+        }
+
         this.taskList.add(newTask);
         this.previousTaskList = this.getAllTasks();
         return newTask;
