@@ -38,7 +38,7 @@ public class JarvisAI {
      * @param args Any arguments supplied by the user
      */
     public static void main(String[] args) {
-        new JarvisAI("./data","./data/duke.txt").run();
+        new JarvisAI("./data", "./data/duke.txt").run();
     }
 
     /**
