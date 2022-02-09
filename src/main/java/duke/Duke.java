@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents a Duke chat bot and task management system.
  */
 public class Duke {
-    private final static String NAME = "Cindy's Duke Bot";
+    private static final String NAME = "Cindy's Duke Bot";
     private final String path;
 
     /**
