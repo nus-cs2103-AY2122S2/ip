@@ -1,6 +1,7 @@
 package karen.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Abstract class to store description and status of Task
@@ -43,7 +44,8 @@ public abstract class Task {
     }
 
     /**
-     * To set description of Task
+     * To set description of Task.
+     *
      * @param inputDescription
      */
     public void setDescription(String inputDescription) {
@@ -67,13 +69,14 @@ public abstract class Task {
     public abstract String toSaveData();
 
     /**
-     * Takes input string in yyyy-mm-dd format to parse to LocalDate object.
+     * Formats LocalDateTime object into string representation `yyyy-MM-dd HHmm`
      *
-     * @param dateString String object input
-     * @return LocalDate object representation of dateString parameter
+     * @param date input LocalDateTime object
+     * @return Formatted LocalDateTime in string representation `yyyy-MM-dd HHmm`
      */
-    public LocalDate parseDate(String dateString) {
-        return LocalDate.parse(dateString);
+    public String formatDate(LocalDateTime date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        return date.format(formatter);
     }
 
     /**

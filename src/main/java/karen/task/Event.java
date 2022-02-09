@@ -1,13 +1,13 @@
 package karen.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Stores the (/at) date in which the Event occurs at
  */
 public class Event extends Task {
-    protected LocalDate atDate;
+    protected LocalDateTime atDate;
 
     /**
      * Constructor for Event
@@ -15,9 +15,9 @@ public class Event extends Task {
      * @param description Description of what Event is for
      * @param at A "yyyy-mm-dd" string for the Event to be completed at
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
-        atDate = parseDate(at);
+        atDate = at;
     }
 
     /**
@@ -25,7 +25,7 @@ public class Event extends Task {
      */
     @Override
     public String toSaveData() {
-        return String.format("E|%s|%s|%s", isDone, getDescription(), atDate);
+        return String.format("E|%s|%s|%s", isDone, getDescription(), formatDate(atDate));
     }
 
     /**
@@ -33,6 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+        return "[E]" + super.toString() + " (at: " + atDate.format(formatter) + ")";
     }
 }

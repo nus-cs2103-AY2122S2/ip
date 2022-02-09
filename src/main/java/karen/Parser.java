@@ -1,7 +1,8 @@
 package karen;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,21 +33,33 @@ public class Parser {
     public static final Pattern FIND_FORMAT = Pattern.compile("^find (?<keyTerm>.*)$");
     public static final Pattern EDIT_FORMAT = Pattern.compile(
             "^edit\\s+(?<index>\\d+)\\s+\\/description\\s+(?<editValue>.*)$");
+    public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern(
+            "yyyy-MM-dd HHmm");
 
     /**
-     * Validates if dateString parameter follows yyyy-mm-dd format.
+     * Validates and returns LocalDateTime object if dateString parameter follows yyyy-mm-dd format.
      *
      * @param dateString input string
-     * @return dateString original input string
+     * @return LocalDateTime object representation of dateString
      * @throws KarenException if format doesn't follow yyyy-mm-dd
      */
-    public String validateDateFormat(String dateString) throws KarenException {
+    public LocalDateTime validateDateFormat(String dateString) throws KarenException {
         try {
-            LocalDate.parse(dateString);
+            return parseDate(dateString);
         } catch (DateTimeException err) {
             throw new KarenException(InvalidMessage.INVALID_DATE.toString());
         }
-        return dateString;
+    }
+
+    /**
+     * Static method to parse string in format `yyyy-mm-dd HHmm` into
+     * LocalDateTime object
+     *
+     * @param dateString input date string
+     * @return parsed LocalDateTime
+     */
+    public static LocalDateTime parseDate(String dateString) {
+        return LocalDateTime.parse(dateString, DATETIME_FORMATTER);
     }
 
     /**
@@ -90,23 +103,25 @@ public class Parser {
      */
     private Command prepareAdd(String keyWord, String fullInput) {
         final Matcher matcher;
+        String trimInput = fullInput.trim();
+
         try {
             Command cmd;
 
             switch (keyWord) {
             case "todo":
-                matcher = TODO_FORMAT.matcher(fullInput);
+                matcher = TODO_FORMAT.matcher(trimInput);
                 matcher.find();
                 cmd = new AddCommand(new ToDo(matcher.group("description")));
                 break;
             case "deadline":
-                matcher = DEADLINE_FORMAT.matcher(fullInput);
+                matcher = DEADLINE_FORMAT.matcher(trimInput);
                 matcher.find();
                 cmd = new AddCommand(new Deadline(matcher.group("description"),
                         validateDateFormat(matcher.group("time"))));
                 break;
             case "event":
-                matcher = EVENT_FORMAT.matcher(fullInput);
+                matcher = EVENT_FORMAT.matcher(trimInput);
                 matcher.find();
                 cmd = new AddCommand(new Event(matcher.group("description"),
                         validateDateFormat(matcher.group("time"))));
@@ -117,7 +132,7 @@ public class Parser {
             return cmd;
         } catch (IllegalStateException err) {
             // indicates that the format isn't valid - can't parse it
-            return prepareInvalid(keyWord, fullInput);
+            return prepareInvalid(keyWord, trimInput);
         } catch (KarenException err) {
             return new InvalidCommand(err.toString());
         }

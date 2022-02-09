@@ -1,13 +1,13 @@
 package karen.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Stores the (/by) date in which the Deadline occurs by
  */
 public class Deadline extends Task {
-    protected LocalDate byDate;
+    protected LocalDateTime byDate;
 
     /**
      * Constructor for Deadline
@@ -15,9 +15,9 @@ public class Deadline extends Task {
      * @param description Description of what Deadline is for
      * @param by A "yyyy-mm-dd" string for the Deadline to be completed by
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
-        byDate = parseDate(by);
+        byDate = by;
     }
 
     /**
@@ -25,7 +25,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveData() {
-        return String.format("D|%s|%s|%s", isDone, getDescription(), byDate);
+        return String.format("D|%s|%s|%s", isDone, getDescription(), formatDate(byDate));
     }
 
     /**
@@ -33,6 +33,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+        return "[D]" + super.toString() + " (by: " + byDate.format(formatter) + ")";
     }
 }
