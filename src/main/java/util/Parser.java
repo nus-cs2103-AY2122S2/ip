@@ -30,24 +30,31 @@ public class Parser {
                 return new ListCommand("list");
             } else if (command.equals("todo")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new ToDoCommand(fullCommand.substring(5));
             } else if (command.equals("deadline")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new DeadlineCommand(fullCommand.substring(9));
             } else if (command.equals("event")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new EventCommand(fullCommand.substring(6));
             } else if (command.equals("mark")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new MarkCommand(fullCommand.substring(5));
             } else if (command.equals("unmark")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new UnmarkCommand(fullCommand.substring(7));
             } else if (command.equals("delete")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new DeleteCommand(fullCommand.substring(7));
             } else if (command.equals("find")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new FindCommand(fullCommand.substring(5));
             } else if (command.equals("bye")) {
                 return new ByeCommand("bye");
