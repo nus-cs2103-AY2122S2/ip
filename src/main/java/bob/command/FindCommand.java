@@ -19,9 +19,6 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.getTask(i);
             if (currentTask.toString().contains(search)) {
-                if (isResultEmpty) {
-                    reply.append(ui.searchHasResults() + "\n");
-                }
                 isResultEmpty = false;
                 reply.append(ui.say(String.format("\t %o . %s\n", i + 1, currentTask.printStatus())));
             }
@@ -29,7 +26,10 @@ public class FindCommand extends Command {
         if (isResultEmpty) {
             reply.append(ui.noSearchResults());
         } else {
-            reply.append(ui.postListFace());
+            StringBuilder hasResultsReply = new StringBuilder(ui.searchHasResults() + "\n");
+            hasResultsReply.append(reply.toString());
+            hasResultsReply.append(ui.postListFace());
+            reply = hasResultsReply;
         }
         return reply.toString();
     }

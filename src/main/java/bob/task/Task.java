@@ -9,14 +9,13 @@ public abstract class Task implements Serializable {
     protected static String[] statusSymbols = new String[]{"[ ]", "[✓]"};
     private String name;
     private String type;
-    private int status;
+    private String taskStatus;
+    private enum Status {
+        MARKED, UNMARKED
+    }
 
     public Task(String name) {
         this.name = name;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public void setType(String type) {
@@ -27,14 +26,26 @@ public abstract class Task implements Serializable {
         return this.name;
     }
 
-    public int getStatus() {
-        return this.status;
+    public boolean isMarked() {
+        return taskStatus.equals(Status.MARKED.name());
+    }
+
+    public void unmarkTask() {
+        this.taskStatus = Status.UNMARKED.name();
+    }
+
+    public String getStatusSymbol() {
+        if (taskStatus.equals(Status.MARKED.name())) {
+            return statusSymbols[1];
+        } else {
+            return statusSymbols[0];
+        }
     }
 
     public abstract String printStatus();
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void markTask() {
+        this.taskStatus = Status.MARKED.name();
     }
 
     @Override

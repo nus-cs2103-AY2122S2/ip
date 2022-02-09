@@ -12,11 +12,11 @@ public class Todo extends Task {
     public Todo(String name) {
         super(name);
         super.setType("T");
-        super.setStatus(0);
+        super.unmarkTask();
     }
 
     @Override
     public String printStatus() {
-        return "[T] " + statusSymbols[super.getStatus()] + " " + this;
+        return "[T] " + super.getStatusSymbol() + " " + this;
     }
 }

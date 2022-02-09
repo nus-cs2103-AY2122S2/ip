@@ -20,12 +20,12 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage store) throws BobException {
         Task toMark = tasks.getTask(index);
-        if (toMark.getStatus() == 1) {
+        if (toMark.isMarked()) {
             return ui.doneBefore();
         } else {
             StringBuilder reply = new StringBuilder();
-            toMark.setStatus(1);
-            assert toMark.getStatus() == 1: "Tasks status should be 1 but it is " + toMark.getStatus();
+            toMark.markTask();
+            assert toMark.isMarked(): "Task should be marked but not.";
             reply.append(ui.finishTask() + "\n");
             reply.append(ui.printTask(toMark) + "\n");
             store.updateStore(tasks);
