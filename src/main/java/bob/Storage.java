@@ -30,7 +30,7 @@ public class Storage {
                 store.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("File exception while creating new file");
+            assert false : ("File exception while creating new file, message:" + e.getMessage());
         }
     }
 

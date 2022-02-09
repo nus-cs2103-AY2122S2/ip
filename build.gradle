@@ -42,12 +42,12 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "bob.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "bob"
     archiveClassifier = null
+    archiveBaseName = "bob"
 }
 
 checkstyle {
