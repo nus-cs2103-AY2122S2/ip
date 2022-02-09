@@ -1,18 +1,24 @@
 package juke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import juke.command.CommandHandler;
 import juke.common.Storage;
 import juke.common.TaskList;
-import juke.common.Ui;
+import juke.ui.Gui;
+import juke.ui.TextUi;
 
 /**
  * Entry point for the Juke application.
  */
-public class Juke {
+public class Juke extends Application {
     private static final Juke INSTANCE = new Juke();
 
     private TaskList taskList;
-    private Ui ui;
+    private TextUi textUi;
+    private Gui gui;
     private Storage storage;
     private boolean hasExited;
 
@@ -21,17 +27,28 @@ public class Juke {
      */
     public Juke() {
         this.taskList = new TaskList();
-        this.ui = new Ui();
+        this.textUi = new TextUi();
+        this.gui = new Gui();
         this.storage = new Storage(this);
         this.hasExited = false;
         CommandHandler.registerCommands();
     }
 
+    @Override
+    public void start(Stage stage) {
+        this.gui.initializeUiComponents(stage);
+        this.gui.formatUiComponents(stage);
+        this.gui.handleEventListeners(stage);
+    }
+
+    /**
+     * Runs Juke CLI.
+     */
     private void run() {
-        this.ui.greet();
+        this.textUi.greet();
         this.storage.loadTasks();
         while (!this.hasExited) {
-            this.ui.runUiLoop();
+            this.textUi.runUiLoop();
         }
     }
 
@@ -56,8 +73,8 @@ public class Juke {
      *
      * @return Ui.
      */
-    public Ui getUi() {
-        return this.ui;
+    public TextUi getUi() {
+        return this.textUi;
     }
 
     /**
@@ -79,9 +96,9 @@ public class Juke {
     }
 
     /**
-     * Main class for the Juke application.
+     * Entry point main method for Juke CLI.
      *
-     * @param args Running arguments, not used.
+     * @param args Run arguments, unused.
      */
     public static void main(String[] args) {
         INSTANCE.run();

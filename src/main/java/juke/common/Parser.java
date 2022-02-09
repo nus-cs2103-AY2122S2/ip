@@ -17,7 +17,7 @@ public class Parser {
      * @param input Input string to parse.
      * @return List of string arrays with the above specifications.
      */
-    public static ArrayList<String[]> parseInput(String input) {
+    public static ArrayList<String[]> parseCommand(String input) {
         String[] paramSplit = input.strip().split(" -");
         ArrayList<String[]> list = new ArrayList<>();
         if (paramSplit.length == 0 || paramSplit[0].isBlank()) {

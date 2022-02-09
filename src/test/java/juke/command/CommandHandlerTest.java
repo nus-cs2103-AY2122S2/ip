@@ -1,26 +1,19 @@
-package juke.common;
+package juke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import juke.command.AddCommand;
-import juke.command.DeleteCommand;
-import juke.command.EchoCommand;
-import juke.command.ExitCommand;
-import juke.command.FindCommand;
-import juke.command.ListCommand;
-import juke.command.MarkCommand;
 import juke.exception.JukeInvalidCommandException;
 import juke.task.TaskStatus;
 import juke.task.TaskType;
 
-public class UiTest {
+public class CommandHandlerTest {
     @Test
     public void getCommand_invalidCommand_exceptionThrown() {
         try {
-            assertEquals(0, new Ui().getCommand("aaa"));
+            assertEquals(0, CommandHandler.fetchCommand("aaa"));
             fail();
         } catch (JukeInvalidCommandException e) {
             assertEquals("[ERROR] Invalid command: aaa.", e.getMessage());
@@ -30,7 +23,7 @@ public class UiTest {
     @Test
     public void getCommand_blankCommand_nullReturned() {
         try {
-            assertEquals(null, new Ui().getCommand(""));
+            assertEquals(null, CommandHandler.fetchCommand(""));
         } catch (JukeInvalidCommandException e) {
             fail();
         }
@@ -40,34 +33,35 @@ public class UiTest {
     public void getCommand_validCommand_commandReturned() {
         try {
             assertEquals(new EchoCommand().getClass(),
-                    new Ui().getCommand("echo").getClass());
+                    CommandHandler.fetchCommand("echo").getClass());
             assertEquals(new ExitCommand().getClass(),
-                    new Ui().getCommand("bye").getClass());
+                    CommandHandler.fetchCommand("bye").getClass());
             assertEquals(new ListCommand().getClass(),
-                    new Ui().getCommand("list").getClass());
+                    CommandHandler.fetchCommand("list").getClass());
             assertEquals(new AddCommand(TaskType.TODO).getClass(),
-                    new Ui().getCommand("todo").getClass());
+                    CommandHandler.fetchCommand("todo").getClass());
             assertEquals(TaskType.TODO, (
-                    (AddCommand) new Ui().getCommand("todo")).getType());
+                    (AddCommand) CommandHandler.fetchCommand("todo")).getType());
             assertEquals(new AddCommand(TaskType.EVENT).getClass(),
-                    new Ui().getCommand("event").getClass());
+                    CommandHandler.fetchCommand("event").getClass());
             assertEquals(TaskType.EVENT, (
-                    (AddCommand) new Ui().getCommand("event")).getType());
+                    (AddCommand) CommandHandler.fetchCommand("event")).getType());
             assertEquals(new AddCommand(TaskType.DEADLINE).getClass(),
-                    new Ui().getCommand("deadline").getClass());
+                    CommandHandler.fetchCommand("deadline").getClass());
             assertEquals(TaskType.DEADLINE, (
-                    (AddCommand) new Ui().getCommand("deadline")).getType());
+                    (AddCommand) CommandHandler.fetchCommand("deadline")).getType());
             assertEquals(new MarkCommand(TaskStatus.DONE).getClass(),
-                    new Ui().getCommand("mark").getClass());
-            assertEquals(TaskStatus.DONE, ((MarkCommand) new Ui().getCommand("mark")).getStatus());
+                    CommandHandler.fetchCommand("mark").getClass());
+            assertEquals(TaskStatus.DONE, (
+                    (MarkCommand) CommandHandler.fetchCommand("mark")).getStatus());
             assertEquals(new MarkCommand(TaskStatus.NOT_DONE).getClass(),
-                    new Ui().getCommand("unmark").getClass());
+                    CommandHandler.fetchCommand("unmark").getClass());
             assertEquals(TaskStatus.NOT_DONE, (
-                    (MarkCommand) new Ui().getCommand("unmark")).getStatus());
+                    (MarkCommand) CommandHandler.fetchCommand("unmark")).getStatus());
             assertEquals(new DeleteCommand().getClass(),
-                    new Ui().getCommand("delete").getClass());
+                    CommandHandler.fetchCommand("delete").getClass());
             assertEquals(new FindCommand().getClass(),
-                    new Ui().getCommand("find").getClass());
+                    CommandHandler.fetchCommand("find").getClass());
         } catch (JukeInvalidCommandException e) {
             fail();
         }

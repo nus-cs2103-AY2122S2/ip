@@ -1,8 +1,6 @@
-package juke.common;
+package juke.ui;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Supplier;
 
 import juke.command.Command;
 import juke.command.CommandHandler;
@@ -12,7 +10,7 @@ import juke.exception.JukeInvalidCommandException;
 /**
  * Manages the user interface involving user input and console output.
  */
-public class Ui {
+public class TextUi {
     private static final String LINE_PREFIX = "> ";
     private static final String LINE_DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -35,17 +33,19 @@ public class Ui {
     /**
      * Constructor that initializes the scanner for user input.
      */
-    public Ui() {
+    public TextUi() {
         this.in = new Scanner(System.in);
     }
 
+    /**
+     * Handles the logic of running the main UI loop for Juke CLI.
+     */
     public void runUiLoop() {
         this.printPrefix();
         try {
-            Command cmd = this.getCommand(this.getInput());
-            if (cmd != null) {
-                this.executeAndPrint(cmd);
-            }
+            Command cmd = CommandHandler.fetchCommand(this.getInput());
+            CommandHandler.execute(cmd);
+            this.displayResult(CommandHandler.fetchResult(cmd));
         } catch (JukeInvalidCommandException e) {
             this.formattedPrint(e.getMessage());
         }
@@ -53,27 +53,6 @@ public class Ui {
 
     public String getInput() {
         return this.in.nextLine();
-    }
-
-    public Command getCommand(String input) throws JukeInvalidCommandException {
-        ArrayList<String[]> paramSplit = Parser.parseInput(input);
-        if (paramSplit.get(0)[0].isBlank()) {
-            return null;
-        }
-        Supplier<Command> cmdSup = CommandHandler.COMMANDS.get(paramSplit.get(0)[0]);
-        if (cmdSup == null) {
-            throw new JukeInvalidCommandException(paramSplit.get(0)[0]);
-        }
-        Command cmd = cmdSup.get().addParameter("", paramSplit.remove(0)[1]);
-        for (String[] args : paramSplit) {
-            cmd = cmd.addParameter(args[0], args[1]);
-        }
-        return cmd;
-    }
-
-    public void executeAndPrint(Command command) {
-        command.execute();
-        this.displayResult(command.getResult());
     }
 
     /**
@@ -112,11 +91,11 @@ public class Ui {
     /**
      * Prints a string with decorative formatting.
      *
-     * @param text String to print.
+     * @param texts Strings to print.
      */
-    public void formattedPrint(String... text) {
+    public void formattedPrint(String... texts) {
         System.out.println(LINE_DIVIDER);
-        for (String str : text) {
+        for (String str : texts) {
             System.out.println(LINE_INDENT + str);
         }
         System.out.println(LINE_DIVIDER + System.lineSeparator());
