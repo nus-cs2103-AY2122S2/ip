@@ -88,11 +88,11 @@ public class TaskList {
             str.append("\nNow you have " + this.taskCount
                     + " tasks in your task list arrr, better get workin' aye!\n");
             str.append(ui.requestNextCommand());
-            return str.toString();
         } else {
             str.append(ui.showError("\tTask is invalid matey :-(, please try again!\n"));
-            return str.toString();
         }
+        
+        return str.toString();
     }
 
     /**
@@ -107,11 +107,11 @@ public class TaskList {
             this.taskList.remove(taskIndex);
             this.taskCount--;
             str.append(ui.deleteTask() + task+ "\n" + ui.requestNextCommand());
-            return str.toString();
         } catch (IndexOutOfBoundsException e) {
             ui.showError("\tAin't nuthin' to be deleted here matey! :-(\n");
-            return str.toString();
         }
+
+        return str.toString();
     }
 
     /**
