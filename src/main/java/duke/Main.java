@@ -39,14 +39,13 @@ public class Main extends Application {
             stage.setResizable(false);
             stage.setMinHeight(600.0);
             stage.setMinWidth(400.0);
-
             Image icon = new Image(
                     Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Icon.png")));
             stage.getIcons().add(icon);
 
             //set background
             Image img = new Image(
-                    Objects.requireNonNull(this.getClass().getResourceAsStream("/images/background.png")));
+                    Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Background.png")));
             BackgroundImage bImg = new BackgroundImage(img,
                     BackgroundRepeat.NO_REPEAT,
                     BackgroundRepeat.NO_REPEAT,
