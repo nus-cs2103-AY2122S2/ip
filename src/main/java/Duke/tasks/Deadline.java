@@ -26,18 +26,19 @@ public class Deadline extends Task {
     }
 
     /**
-     * Strings representation of Deadline in the save file.
+     * Returns the strings representation of Deadline in the save file.
      *
      * @return the formats of the String to be save in the file
      */
     @Override
-    public String saveToFileString() {
-        return "D|" + (isDone ? "1|" : "0|") + super.getDescription() + "|" + date + " "
+    public String encodeTaskToString() {
+        String isDoneNum = (isDone ? "1|" : "0|");
+        return "D|" + isDoneNum + super.getDescription() + "|" + date + " "
                 + time + "\n";
     }
 
     /**
-     * Strings representation of Deadline.
+     * Returns the strings representation of Deadline.
      *
      * @return [D] with the status and description of the task,
      *         and by when.

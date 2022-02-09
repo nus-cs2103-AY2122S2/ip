@@ -51,19 +51,19 @@ public class TaskList {
      */
     public Task markTask(int taskNum) {
         Task currTask = taskList.get(taskNum - 1);
-        currTask.setChecked();
+        currTask.setMarked();
         return currTask;
     }
 
     /**
-     * Marks the task in the task list as complete.
+     * Marks the task in the task list as not complete.
      *
      * @param taskNum the task number in the list.
      * @return the task that is mark.
      */
     public Task unmarkTask(int taskNum) {
         Task currTask = taskList.get(taskNum - 1);
-        currTask.setUnchecked();
+        currTask.setUnmarked();
         return currTask;
     }
 
@@ -82,7 +82,7 @@ public class TaskList {
      * @param input input of the keyword by user.
      * @return the list of result that match the input.
      */
-    public ArrayList<Task> findTask(String input) {
+    public ArrayList<Task> findTasks(String input) {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task task : taskList) {
             if (task.getDescription().toLowerCase().contains(input.toLowerCase())) {

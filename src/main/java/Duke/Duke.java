@@ -38,7 +38,11 @@ public class Duke {
 
     /**
      * Returns the response base on the input.
+     *
+     * @param input the inputs by the user.
+     * @return the String of the respective command.
      */
+
     public String getResponse(String input) {
         try {
             ui.showLine(); // show the divider line ("_______")

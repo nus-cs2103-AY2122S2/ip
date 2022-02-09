@@ -46,24 +46,18 @@ public class Storage {
                 String[] currTaskLine = currLine.split("\\|");
                 switch (currTaskLine[0]) {
                 case "T":
-                    ToDo todoTask = new ToDo(currTaskLine[2]);
-                    if (currTaskLine[1].equals("1")) {
-                        todoTask.setChecked();
-                    }
-                    taskList.add(todoTask);
+                    ToDo toDoTask = new ToDo(currTaskLine[2]);
+                    checkIfTaskMark(currTaskLine[1], toDoTask);
+                    taskList.add(toDoTask);
                     break;
                 case "D":
                     Deadline deadlineTask = new Deadline(currTaskLine[2], currTaskLine[3]);
-                    if (currTaskLine[1].equals("1")) {
-                        deadlineTask.setChecked();
-                    }
+                    checkIfTaskMark(currTaskLine[1], deadlineTask);
                     taskList.add(deadlineTask);
                     break;
                 case "E":
                     Event eventTask = new Event(currTaskLine[2], currTaskLine[3]);
-                    if (currTaskLine[1].equals("1")) {
-                        eventTask.setChecked();
-                    }
+                    checkIfTaskMark(currTaskLine[1], eventTask);
                     taskList.add(eventTask);
                     break;
                 default:
@@ -76,6 +70,19 @@ public class Storage {
     }
 
     /**
+     * Checks if the task is 1 and set the task as mark if is 1. Else,
+     * nothing is done.
+     *
+     * @param markNum either 1 or 0. 1 as mark, 0 as not mark.
+     * @param task task to be checked.
+     */
+    private void checkIfTaskMark(String markNum, Task task) {
+        if (markNum.equals("1")) {
+            task.setMarked();
+        }
+    }
+
+    /**
      * Writes the task in task list into the file.
      *
      * @param taskList the list of tasks.
@@ -85,7 +92,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(saveFilePath);
             for (int i = 0; i < taskList.size(); i++) {
-                writer.write(taskList.get(i).saveToFileString());
+                writer.write(taskList.get(i).encodeTaskToString());
             }
             writer.close();
         } catch (IOException e) {

@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      * @param tasks List of the tasks.
      * @param ui UI that deals with interactions with the user.
      * @param storage storage handles the saving and writing to file.
-     * @return message stating task adeed.
+     * @return message stating task added.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
