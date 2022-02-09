@@ -19,7 +19,7 @@ public class Ui {
     }
 
 
-    
+
     public void printIntroduction() {
         printDukeLogo();
         System.out.println("Hello! I'm Duke.\n" + "What can I do for you?");
@@ -73,6 +73,13 @@ public class Ui {
     public void printDeleteTask(Task deleted, TaskList taskList) {
         System.out.println("This task has been removed:\n" + deleted.toString());
         printNumTasks(taskList);
+    }
+
+    public void printSomeTasks(ArrayList<Task> tasks) {
+        for (int i = 1; i <= tasks.size(); i++) {
+            System.out.println("" + i + ". " + tasks.get(i - 1).toString());
+        }
+
     }
 
     public String readCommand() {

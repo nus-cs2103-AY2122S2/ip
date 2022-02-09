@@ -56,5 +56,20 @@ class TaskList {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(tasks.get(taskNo).getStatusIcon() + tasks.get(taskNo).getName());
     }
-    
+
+    /**
+     * Finds the tasks that contains the keyword provided.
+     * @param keyword Keyword for searching a task.
+     * @return An ArrayList of the Tasks that contains the specific keyword.
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> relatedTasks = new ArrayList<>();
+        for (Task current : this.tasks) {
+            String taskName = current.getName();
+            if (taskName.contains(keyword)) {
+                relatedTasks.add(current);
+            }
+        }
+        return relatedTasks;
+    }
 }
