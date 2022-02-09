@@ -37,7 +37,9 @@ public class Parser {
      * @return Command.
      */
     public static Command parseCommand(String[] inputArr) {
-        switch(inputArr[0].toLowerCase(Locale.ROOT)) {
+
+        inputArr[0] = inputArr[0].toLowerCase(Locale.ROOT);
+        switch(inputArr[0]) {
         case "deadline":
         case "d": {
             return new DeadlineCommand(inputArr);
@@ -99,12 +101,14 @@ public class Parser {
      */
     public static Deadline parseDeadline(String[] deadlineArray) throws DeadlineException {
         if (deadlineArray.length == 1) {
-            throw new DeadlineException("The description of a deadline cannot be empty.");
+            throw new DeadlineException("Description of deadline cannot be empty! "
+                + "Please enter a deadline in this format:"
+                + "\"deadline description /by YYYY-MM-DD\"");
         } else {
             String[] deadlineDetails = deadlineArray[1].split("/by ", 2);
             if (deadlineDetails.length == 1) {
-                throw new DeadlineException("The description of a deadline must contain "
-                        + "a deadline in the numerical format YYYY-MM-DD");
+                throw new DeadlineException("Please enter a deadline in this format: "
+                    + "\"deadline description /by YYYY-MM-DD\"");
             } else {
                 try {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -126,18 +130,20 @@ public class Parser {
      */
     public static Event parseEvent(String[] eventArray) throws EventException {
         if (eventArray.length == 1) {
-            throw new EventException("The description of an event cannot be empty.");
+            throw new EventException("The description of an event cannot be empty! "
+                + "Please enter an event in this format: "
+                + "\"event description /at YYYY-MM-DD\"");
         } else {
             String[] eventDetails = eventArray[1].split("/at ", 2);
             if (eventDetails.length == 1) {
-                throw new EventException("The description of an event must contain a date in "
-                        + "the numerical format YYYY-MM-DD");
+                throw new EventException("Please enter an event in this format: "
+                    + "\"event description /at YYYY-MM-DD\"");
             } else {
                 try {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     return new Event(eventDetails[0], LocalDate.parse(eventDetails[1], dtf));
                 } catch (DateTimeParseException e) {
-                    throw new EventException("Invalid exception! Event has to have a valid date in "
+                    throw new EventException("Invalid event! Event has to have a valid date in "
                             + "numerical format YYYY-MM-DD");
                 }
             }

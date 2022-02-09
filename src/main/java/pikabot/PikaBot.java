@@ -3,8 +3,6 @@ package pikabot;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import pikabot.command.Command;
 import pikabot.task.Task;
 
