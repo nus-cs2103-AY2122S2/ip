@@ -23,7 +23,7 @@ public class ExitCommand implements Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage, MessageUi ui) {
-        Alert alert = AlertUi.makeConfirmationAlert("Confirm exit", "Do you want to exit Ekud?" );
+        Alert alert = AlertUi.makeConfirmationAlert("Confirm exit", "Do you want to exit Ekud?");
         if (alert.showAndWait().get() == ButtonType.OK) {
             AlertUi.makeInformationAlert("Farewell!", ui.showExitMessage());
             System.exit(0);

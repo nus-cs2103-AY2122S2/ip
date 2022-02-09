@@ -1,13 +1,17 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.MessageUi;
 
-import java.time.LocalDate;
-
+/**
+ * Represents commands which postpones a task in the task list. A PostponeCommand
+ * object corresponds a valid Ekud command, which can then be executed.
+ */
 public class PostponeCommand implements Command {
 
     private String fullCommand;
@@ -15,6 +19,11 @@ public class PostponeCommand implements Command {
     private int position;
     private LocalDate localDate;
 
+    /**
+     * Constructor for this class.
+     *
+     * @param fullCommand User's input.
+     */
     public PostponeCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         this.splicedFullCommand = fullCommand.split(" ");

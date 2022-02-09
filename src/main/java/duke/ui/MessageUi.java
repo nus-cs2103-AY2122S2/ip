@@ -11,6 +11,7 @@ public class MessageUi {
 
     /**
      * Outputs a welcome message to the user when the programme launch.
+     *
      * @return Welcome message.
      */
     public String showWelcomeMessage() {
@@ -20,6 +21,7 @@ public class MessageUi {
     /**
      * Outputs a message when the text file cannot be found in the
      * specified directory.
+     *
      * @return Cannot find file message.
      */
     public String showFileNotFoundMessage() {
@@ -30,6 +32,7 @@ public class MessageUi {
     /**
      * Outputs a message when the text file can be found in the
      * specified directory.
+     *
      * @return Can find file message.
      */
     public String showFileFoundMessage(TaskList tasks) {
@@ -39,6 +42,7 @@ public class MessageUi {
 
     /**
      * Outputs a message when user exits the programme.
+     *
      * @return Exit message.
      */
     public String showExitMessage() {
@@ -47,6 +51,7 @@ public class MessageUi {
 
     /**
      * Outputs a message when the user adds a task.
+     *
      * @return Task added message.
      */
     public String showAddTaskMessage(TaskList taskList, Task task) {
@@ -57,6 +62,7 @@ public class MessageUi {
 
     /**
      * Outputs a message when the user marks a task.
+     *
      * @return Task mark message.
      */
     public String showMarkMessage(Task task) {
@@ -65,6 +71,7 @@ public class MessageUi {
 
     /**
      * Outputs a message when the user unmarks a task.
+     *
      * @return Task unmark message.
      */
     public String showUnMarkMessage(Task task) {
@@ -77,6 +84,7 @@ public class MessageUi {
 
     /**
      * Outputs a message when the user delete a task.
+     *
      * @return Task delete message.
      */
     public String showDeleteMessage(Task task, int taskSize) {
@@ -87,6 +95,7 @@ public class MessageUi {
 
     /**
      * Outputs a message when user views an empty task list.
+     *
      * @return Empty task list message.
      */
     public String showEmptyListMessage() {
@@ -95,6 +104,7 @@ public class MessageUi {
 
     /**
      * Outputs a message when user views a task list.
+     *
      * @return All task in task list message.
      */
     public String showListMessage(TaskList tasks) {
@@ -107,6 +117,7 @@ public class MessageUi {
 
     /**
      * Outputs a message when user wants to clear task list.
+     *
      * @return Clear task list confirmation message.
      */
     public String showClearListConfirmationMessage() {
@@ -115,10 +126,11 @@ public class MessageUi {
 
     /**
      * Outputs a message when user confirms to clear task list.
+     *
      * @return Task list cleared message.
      */
     public String showClearListMessage() {
-            return "Got it, Ekud has cleared your task list";
+        return "Got it, Ekud has cleared your task list";
     }
 }
 

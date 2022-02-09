@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +10,6 @@ import java.util.List;
 
 import duke.exception.DukeException;
 import duke.task.Task;
-import duke.ui.MessageUi;
 
 /**
  * A class that interacts with the directory of the file. A file in this context
@@ -41,8 +39,8 @@ public class Storage {
             Files.createDirectories(dirPath);
             Files.createFile(filePath);
         } catch (IOException error) {
-            throw new DukeException("File at " + error.getMessage() +
-                    " could not be created");
+            throw new DukeException("File at " + error.getMessage()
+                    + " could not be created");
         }
     }
 
@@ -58,8 +56,8 @@ public class Storage {
             fw.write(textToAdd);
             fw.close();
         } catch (IOException error) {
-            throw new DukeException("File at " + error.getMessage() +
-                    " could not be appended");
+            throw new DukeException("File at " + error.getMessage()
+                    + " could not be appended");
         }
     }
 
@@ -77,8 +75,8 @@ public class Storage {
             lines.set(lineNumber - 1, data);
             Files.write(filePath, lines, StandardCharsets.UTF_8);
         } catch (IOException error) {
-            throw new DukeException("File at " + error.getMessage() +
-                    " could not be found");
+            throw new DukeException("File at " + error.getMessage()
+                    + " could not be found");
         }
     }
 
@@ -100,8 +98,8 @@ public class Storage {
             fw.write(stringBuilder.toString());
             fw.close();
         } catch (IOException err) {
-            throw new DukeException("File at " + err.getMessage() +
-                    " could not be written to");
+            throw new DukeException("File at " + err.getMessage()
+                    + " could not be written to");
         }
     }
 
@@ -119,8 +117,8 @@ public class Storage {
             data = Files.readAllLines(filePath, StandardCharsets.UTF_8);
             return data;
         } catch (IOException err) {
-            throw new DukeException("File at " + err.getMessage() +
-                    " could not be loaded");
+            throw new DukeException("File at " + err.getMessage()
+                    + " could not be loaded");
         }
     }
 }

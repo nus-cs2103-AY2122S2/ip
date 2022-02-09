@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +20,16 @@ public class TaskList {
 
     /**
      * Constructor for the TaskList class.
+     *
      * @throws DukeException
      */
     public TaskList() {
-            tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
      * Constructor for when there is a text file in the specified directory.
+     *
      * @param data String list containing the information of task list.
      * @throws DukeException If task list is not found.
      */
@@ -73,7 +74,8 @@ public class TaskList {
     /**
      * Clear the task list and creates a overwrites exising text file
      * with empty text.
-     * @param tasks Existing task list.
+     *
+     * @param tasks   Existing task list.
      * @param storage Storage class.
      * @throws DukeException If text file is not found.
      */
@@ -100,19 +102,20 @@ public class TaskList {
 
     /**
      * Add a task to the task list.
-     * @param task Task.
-     * @param ui MessageUi class.
+     *
+     * @param task    Task.
+     * @param ui      MessageUi class.
      * @param storage Storage class.
      * @return Task added message.
      * @throws DukeException If text file cannot be found.
      */
     public String addToList(Task task, MessageUi ui, Storage storage) throws DukeException {
-            tasks.add(task);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(task.taskDescriptionForFile()
-                    + System.lineSeparator());
-            storage.appendToFile(stringBuilder.toString());
-            return ui.showAddTaskMessage(this, task);
+        tasks.add(task);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(task.taskDescriptionForFile()
+                + System.lineSeparator());
+        storage.appendToFile(stringBuilder.toString());
+        return ui.showAddTaskMessage(this, task);
     }
 }
 
