@@ -38,6 +38,7 @@ public class Juke extends Application {
     public void start(Stage stage) {
         this.gui.initializeUiComponents(stage);
         this.gui.formatUiComponents(stage);
+        this.gui.handleEventListeners(stage);
     }
 
     /**
