@@ -29,6 +29,7 @@ public class DeleteCommand extends UpdateCommand {
     public CommandResult execute(TaskList taskList) {
         try {
             Task removedTask = taskList.remove(getIndex() - 1);
+            assert(removedTask != null);
             return new CommandResult(String.format(DEFAULT_MESSAGE, removedTask));
         } catch (IndexOutOfBoundsException e) {
             return new CommandResult("The force cannot find the task.\nPlease try again :(");
