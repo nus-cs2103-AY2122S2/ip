@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import dazz.exception.ErrorType;
 import dazz.exception.InvalidDateFormatException;
@@ -157,6 +158,12 @@ public class Ui {
                 .collect(Collectors.joining("\n"));
         searchesMessage = searchesMessage + filteredTaskDescriptions;
         return searchesMessage;
+    }
+
+    public String messageForHelp() {
+        return Stream.of(Instruction.values())
+                .map(Instruction::get)
+                .collect(Collectors.joining("\n\n"));
     }
 
     public String messageForMapping(boolean hasUpdated, String alias, String command) {
