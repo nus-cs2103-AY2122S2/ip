@@ -9,6 +9,7 @@ import java.util.Scanner;
 import duke.exceptions.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Tag;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -22,8 +23,11 @@ public class Storage {
     private static final int IS_MARKED = 1;
     private static final int DESCRIPTION = 2;
     private static final int START_DATE = 3;
+    private static final int TODO_TAG = 3;
     private static final int START_TIME = 4;
     private static final int END_TIME = 5;
+    private static final int DEADLINE_TAG = 5;
+    private static final int EVENT_TAG = 6;
 
     /**
      * A Storage constructor to initialise a <code>Storage</code> object. A <code>Storage</code>
@@ -75,16 +79,18 @@ public class Storage {
         String finalOutput = null;
         int mark = (task.getStatusIcon().equals("X") ? IS_MARKED : IS_UNMARKED);
         if (task instanceof ToDo) {
-            finalOutput = "T|" + mark + "|" + task.getDescription();
+            finalOutput = "T|" + mark + "|" + task.getDescription() + "|" + task.getTag();
         } else if (task instanceof Deadline) {
             finalOutput = "D|" + mark + "|" + task.getDescription()
                     + "|" + Parser.convertLocalDateToString(((Deadline) task).getDate())
-                    + "|" + Parser.convertLocalTimeToString(((Deadline) task).getTime());
+                    + "|" + Parser.convertLocalTimeToString(((Deadline) task).getTime())
+                    + "|" + task.getTag();
         } else if (task instanceof Event) {
             finalOutput = "E|" + mark + "|" + task.getDescription()
                     + "|" + Parser.convertLocalDateToString(((Event) task).getDate())
                     + "|" + Parser.convertLocalTimeToString(((Event) task).getStartTime())
-                    + "|" + Parser.convertLocalTimeToString(((Event) task).getEndTime());
+                    + "|" + Parser.convertLocalTimeToString(((Event) task).getEndTime())
+                    + "|" + task.getTag();
         }
         return finalOutput;
     }
@@ -99,7 +105,7 @@ public class Storage {
         // Create a new directory from current working directory
         File directory = new File(currWorkingDirectory + "/DukeSaveDirectory");
 
-        // Create a new txt in filepath
+        // creates a new txt in filepath
         File txtFile = new File(currWorkingDirectory + filePath);
 
         // returns true if directory is created
@@ -158,7 +164,12 @@ public class Storage {
     }
 
     private static void readTodo(String[] strings, int num) {
-        Task toDo = new ToDo(strings[2]);
+        Task toDo;
+        if (strings[TODO_TAG].equals("null")) {
+            toDo = new ToDo(strings[DESCRIPTION]);
+        } else {
+            toDo = new ToDo(strings[DESCRIPTION], new Tag(strings[TODO_TAG]));
+        }
         if (isMarked(num)) {
             toDo.mark();
         } else {
@@ -168,8 +179,14 @@ public class Storage {
     }
 
     private static void readDeadline(String[] strings, int num) {
-        Task deadline = new Deadline(strings[DESCRIPTION], Parser.convertStringToLocalDate(strings[START_DATE]),
-                Parser.convertStringToLocalTime(strings[START_TIME]));
+        Task deadline;
+        if (strings[DEADLINE_TAG].equals("null")) {
+            deadline = new Deadline(strings[DESCRIPTION], Parser.convertStringToLocalDate(strings[START_DATE]),
+                    Parser.convertStringToLocalTime(strings[START_TIME]));
+        } else {
+            deadline = new Deadline(strings[DESCRIPTION], Parser.convertStringToLocalDate(strings[START_DATE]),
+                    Parser.convertStringToLocalTime(strings[START_TIME]), new Tag(strings[DEADLINE_TAG]));
+        }
         if (isMarked(num)) {
             deadline.mark();
         } else {
@@ -179,9 +196,17 @@ public class Storage {
     }
 
     private static void readEvent(String[] strings, int num) {
-        Task event = new Event(strings[DESCRIPTION], Parser.convertStringToLocalDate(strings[START_DATE]),
-                Parser.convertStringToLocalTime(strings[START_TIME]),
-                Parser.convertStringToLocalTime(strings[END_TIME]));
+        Task event;
+        if (strings[EVENT_TAG].equals("null")) {
+            event = new Event(strings[DESCRIPTION], Parser.convertStringToLocalDate(strings[START_DATE]),
+                    Parser.convertStringToLocalTime(strings[START_TIME]),
+                    Parser.convertStringToLocalTime(strings[END_TIME]));
+        } else {
+            event = new Event(strings[DESCRIPTION], Parser.convertStringToLocalDate(strings[START_DATE]),
+                    Parser.convertStringToLocalTime(strings[START_TIME]),
+                    Parser.convertStringToLocalTime(strings[END_TIME]),
+                    new Tag(strings[EVENT_TAG]));
+        }
         if (isMarked(num)) {
             event.mark();
         } else {

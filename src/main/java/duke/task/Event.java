@@ -29,6 +29,24 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    /**
+     * An Event constructor to initialise a <code>Event</code> object. An <code>Event</code>
+     * corresponds to a task represented by a String, LocalDate, LocalTime, LocalTime, and Tag.
+     * E.g., <code>do project, 12-12-2022, 1900, 2200</code>.
+     *
+     * @param description the description of the event task to be done.
+     * @param date the date of the event of the task.
+     * @param startTime the start time of the event of the task.
+     * @param endTime the end time of the event of the task.
+     * @param tag the tag of the task to be added.
+     */
+    public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime, Tag tag) {
+        super(description, tag);
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public LocalDate getDate() {
         return date;
     }
