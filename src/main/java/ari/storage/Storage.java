@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import ari.command.Command;
-import ari.command.MarkCommand;
 import ari.parser.Parser;
 import ari.tasks.Task;
 import ari.tasks.TaskList;
@@ -30,33 +29,37 @@ public class Storage {
      */
     public void setFile(String filePath) {
         path = filePath;
+        assert filePath.endsWith(".txt") : "Filename should have .txt extension";
 
         this.filePath = new File(filePath);
 
         if (!this.filePath.exists()) {
-            createFile();
+            initializeFile();
         }
     }
 
     /**
      * Creates file at specified location
      */
-    private void createFile() {
+    private void initializeFile() {
         String[] paths = path.split("/");
         String tempPath = "";
         for (String p : paths) {
             tempPath += p + "/";
             File file = new File(tempPath);
-            if (p.contains(".")) {
-                try {
-                    file.createNewFile();
-                } catch (IOException e) {
-                    System.out.println("An error has occurred in Storage class");
-                    break;
-                }
-            } else {
-                file.mkdir();
+            createFile(file);
+        }
+    }
+
+    private void createFile(File path) {
+        if (path.toString().contains(".")) {
+            try {
+                path.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        } else {
+            path.mkdir();
         }
     }
 
@@ -69,16 +72,20 @@ public class Storage {
         ArrayList<Task> tasks = taskList.getAllTasks();
 
         try {
-            FileWriter wFile = new FileWriter(this.filePath);
-            for (Task task : tasks) {
-                wFile.write(task.writeToFile());
-                wFile.write(System.lineSeparator());
-            }
-            wFile.close();
+            writeTasksInFile(tasks);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private void writeTasksInFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter wFile = new FileWriter(this.filePath);
+        for (Task task : tasks) {
+            wFile.write(task.writeToFile());
+            wFile.write(System.lineSeparator());
+        }
+        wFile.close();
     }
 
     /**
@@ -95,17 +102,9 @@ public class Storage {
             Parser parser = new Parser();
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
-                String[] todos = parser.fileBreakdown(line);
 
-                Command cmd = parser.fileParse(todos[0], todos[2]);
-                cmd.setTaskList(taskList);
-                cmd.execute();
-
-                if (todos[1].equals("1")) {
-                    cmd = new MarkCommand(taskList.getSize());
-                    cmd.setTaskList(taskList);
-                    cmd.execute();
-                }
+                ArrayList<Command> commands = parser.fileParse(line, taskList.getSize() + 1);
+                executeCommands(commands, taskList);
             }
 
             reader.close();
@@ -114,5 +113,12 @@ public class Storage {
         }
 
         return taskList;
+    }
+
+    private void executeCommands(ArrayList<Command> commands, TaskList taskList) {
+        for (Command command : commands) {
+            command.setTaskList(taskList);
+            command.execute();
+        }
     }
 }

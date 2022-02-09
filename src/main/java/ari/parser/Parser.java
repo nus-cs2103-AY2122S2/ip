@@ -1,11 +1,25 @@
 package ari.parser;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
-import ari.command.*;
+
+import ari.command.ByeCommand;
+import ari.command.Command;
+import ari.command.DeadlineCommand;
+import ari.command.DeleteCommand;
+import ari.command.EventCommand;
+import ari.command.FindCommand;
+import ari.command.IncorrectCommand;
+import ari.command.ListCommand;
+import ari.command.MarkCommand;
+import ari.command.TodoCommand;
+import ari.command.UnmarkCommand;
+import ari.command.ViewCommand;
+import ari.exception.AriException;
 import ari.exception.CommandFormatException;
+import ari.exception.DateTimeParseException;
 import ari.exception.EmptyCommandException;
 
 /**
@@ -55,25 +69,36 @@ public class Parser {
     /**
      * Assigns methods to execute from input of save file if it exists
      *
-     * @param instruction command to run
-     * @param description description of task
+     * @param fileInput command to breakdown and run
+     * @param index current size of the taskList
      * @return command to execute
      */
-    public Command fileParse(String instruction, String description) {
-        String command = instruction + " " + description;
+    public ArrayList<Command> fileParse(String fileInput, int index) {
+        String[] todos = fileBreakdown(fileInput);
+        String instruction = todos[0];
+        String commandString = todos[0] + " " + todos[2];
+
+        ArrayList<Command> commands = new ArrayList<>();
 
         switch (instruction) {
-        case MarkCommand.COMMAND_WORD:
-            return prepareMark(command);
         case TodoCommand.COMMAND_WORD:
-            return prepareTodo(command);
+            commands.add(prepareTodo(commandString));
+            break;
         case DeadlineCommand.COMMAND_WORD:
-            return prepareDeadline(command);
+            commands.add(prepareDeadline(commandString));
+            break;
         case EventCommand.COMMAND_WORD:
-            return prepareEvent(command);
+            commands.add(prepareEvent(commandString));
+            break;
         default:
-            return new IncorrectCommand("Unknown commands in file!");
+            commands.add((new IncorrectCommand("Unknown commands in file!")));
+            return commands;
         }
+
+        if (todos[1].equals("1")) {
+            commands.add(prepareMark("mark " + String.valueOf(index)));
+        }
+        return commands;
     }
 
     /**
@@ -106,6 +131,7 @@ public class Parser {
         if (commandArray.length == 1) {
             throw new EmptyCommandException();
         }
+        assert commandArray.length != 0 : "Arguments should not be empty";
 
         return command.substring(command.indexOf(' ') + 1);
     }
@@ -167,12 +193,8 @@ public class Parser {
             String[] taskTime = splitBy(getArgument(desc));
             LocalDate date = checkDateFormat(taskTime[1]);
             return new DeadlineCommand(taskTime[0], taskTime[1], date);
-        } catch (EmptyCommandException emptyEx) {
-            return new IncorrectCommand(emptyEx.getMessage());
-        } catch (CommandFormatException cmdEx) {
-            return new IncorrectCommand(cmdEx.getMessage());
-        } catch (DateTimeParseException dateTimeEx) {
-            return new IncorrectCommand(dateTimeEx.getMessage());
+        } catch (AriException e) {
+            return new IncorrectCommand(e.getMessage());
         }
     }
 
@@ -187,12 +209,8 @@ public class Parser {
             String[] taskTime = splitAt(getArgument(desc));
             LocalDate date = checkDateFormat(taskTime[1]);
             return new EventCommand(taskTime[0], taskTime[1], date);
-        } catch (EmptyCommandException emptyEx) {
-            return new IncorrectCommand(emptyEx.getMessage());
-        } catch (CommandFormatException cmdEx) {
-            return new IncorrectCommand(cmdEx.getMessage());
-        } catch (DateTimeParseException dateTimeEx) {
-            return new IncorrectCommand(dateTimeEx.getMessage());
+        } catch (AriException e) {
+            return new IncorrectCommand(e.getMessage());
         }
     }
 
@@ -257,7 +275,7 @@ public class Parser {
         }
 
         for (int i = 0; i < words.length; i++) {
-            words[i] = words[i].stripLeading().stripTrailing();
+            words[i] = words[i].strip();
         }
 
         return words;
@@ -278,7 +296,7 @@ public class Parser {
         }
 
         for (int i = 0; i < words.length; i++) {
-            words[i] = words[i].stripLeading().stripTrailing();
+            words[i] = words[i].strip();
         }
 
         return words;
@@ -289,14 +307,13 @@ public class Parser {
      *
      * @param date date of task
      * @return LocalDate of task
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException throws error when date format is incorrect
      */
     private LocalDate checkDateFormat(String date) throws DateTimeParseException {
         try {
             return LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            throw new DateTimeParseException("Dear Master, please enter the date using \"YYYY-MM-DD\" format",
-                    e.getParsedString(), e.getErrorIndex());
+            throw new DateTimeParseException("Dear Master, please enter the date using \"YYYY-MM-DD\" format");
         }
     }
 

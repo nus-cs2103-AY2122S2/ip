@@ -39,8 +39,4 @@ public class Ari {
         storage.save(toDoList);
         return command.execute();
     }
-
-    public void save() {
-        storage.save(toDoList);
-    }
 }
