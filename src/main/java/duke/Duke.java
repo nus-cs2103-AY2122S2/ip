@@ -22,7 +22,7 @@ public class Duke {
     /**
      * Constructor for Duke Chatbot
      */
-    public Duke() {
+    public Duke() throws DukeException {
         taskList = new TaskList();
         store = new Storage(taskList);
         commandHandler = new Parser();

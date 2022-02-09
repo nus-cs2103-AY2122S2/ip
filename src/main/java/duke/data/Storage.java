@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.ForeignException;
+import duke.dukeexceptions.StorageErrorException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -32,8 +33,9 @@ public class Storage {
     /**
      * Function that is run upon initialisation of the storage.
      * Load the persist storage into a TaskList.
+     * @throws DukeException if storage error is encountered.
      */
-    public void initialiseStorage() {
+    public void initialiseStorage() throws DukeException {
         File data = new File("data");
         try {
             if (data.exists()) {
@@ -45,16 +47,12 @@ public class Storage {
                 persistStore.createNewFile();
             }
         } catch (Exception e) {
-            e.getMessage();
+            throw new StorageErrorException("");
         }
     }
 
     private static boolean convertMarkToBoolean(String mark) {
-        if (mark.equals("1")) {
-            return true;
-        } else {
-            return false;
-        }
+        return mark.equals("1");
     }
 
     private static Task convertStorageToTask(String taskString) {
@@ -72,10 +70,11 @@ public class Storage {
     }
 
     /**
-     * function that loads from permanent storage to the TaskList.
-     * @return
+     * Function that loads from permanent storage to the TaskList.
+     * @return TaskList from storage.
+     * @throws DukeException if storage error is encountered.
      */
-    public TaskList loadFromDisk() {
+    public TaskList loadFromDisk() throws DukeException {
         try {
             Scanner fileReader = null;
             fileReader = new Scanner(persistStore);
@@ -86,13 +85,12 @@ public class Storage {
             }
             return taskList;
         } catch (Exception e) {
-            e.getMessage();
-            return new TaskList();
+            throw new StorageErrorException("");
         }
     }
 
     /**
-     * function that loads the TaskList into the permanent storage.
+     * Function that loads the TaskList into the permanent storage.
      * @param taskList tasklist
      * @throws DukeException exception
     */

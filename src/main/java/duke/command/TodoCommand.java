@@ -30,7 +30,6 @@ public class TodoCommand extends Command {
         String[] stringCmdUnits = stringCmd.split("todo ");
         Task tempTask = new ToDo(stringCmdUnits[1]);
         Integer oldTaskListLength = taskList.taskLength();
-        System.out.println("X");
         taskList.addTask(tempTask);
         assert taskList.taskLength() == oldTaskListLength + 1 : "Add Todo Task to list";
         store.loadToDisk(taskList);
