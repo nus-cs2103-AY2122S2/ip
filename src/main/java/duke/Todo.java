@@ -5,13 +5,15 @@ package duke;
  */
 public class Todo extends Task {
 
+    private static String TODO_EMPTY_DESCRIPTION = "TODO task must have a non-empty description!";
+
     /**
      * Initialise todo task with a description (task name)
      */
     public Todo(String description) {
         super(description, Type.TODO);
 
-        assert description != "" : "TODO task must have a non-empty description!";
+        assert description != "" : TODO_EMPTY_DESCRIPTION;
     }
 
     /**
@@ -22,7 +24,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]"
-                + super.toString();
+        return "[T]" + super.toString();
     }
 }

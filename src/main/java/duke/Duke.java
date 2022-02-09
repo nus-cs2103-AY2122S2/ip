@@ -3,7 +3,7 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Main duke application class
@@ -25,34 +25,170 @@ public class Duke {
         }
     }
 
-    public String[] getEventTimings(String text) {
-        // /at 2/12/2022 1800 to 1900
-        String fullDateString = text.split("/at")[1].trim();
-        String[] timingSplit = fullDateString.split("to");
+    /**
+     * List existing tasks created by user (if exists)
+     *
+     * @return List of tasks created by user
+     */
+    public String runListCommand() {
+        return Ui.displayTaskList(tasks.getTasks());
+    }
 
-        if (timingSplit.length < 2) {
-            System.out.println("Error, duke.Event must contain both start & end timings!");
-            return new String[]{};
-        } else {
-            String dateText = timingSplit[0].trim().split(" ")[0];
-            String startTimeText = timingSplit[0].trim().split(" ")[1];
-            String endTimeText = timingSplit[1].trim();
-            String startDateText = dateText + " " + startTimeText;
-            String endDateText = dateText + " " + endTimeText;
-            String[] eventTimings = new String[] {startDateText, endDateText};
-            return eventTimings;
+    /**
+     * Mark task with index provided by the user
+     *
+     * @param input Input text provided by user
+     * @return Returns the successfully marked message or invalid_task_index_error message if given index is invalid
+     */
+    public String runMarkCommand(String input) {
+        int itemIndex = Integer.parseInt(input.split(" ")[1]);
+        try {
+            Task selectedTask = tasks.getTask(itemIndex - 1);
+            selectedTask.markAsComplete();
+            return Ui.displayMarkMsg(selectedTask.toString());
+        } catch (IndexOutOfBoundsException err) {
+            return Ui.INVALID_INDEX_ERROR;
         }
     }
 
-    public String getDeadlineTiming(String text) {
-        String dateText = text.split("/by")[1].trim();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        LocalDateTime date = LocalDateTime.parse(dateText, format);
-        return dateText;
+    /**
+     * Unmark task with index provided by the user
+     *
+     * @param input Input text from user
+     * @return Returns the successfully unmarked message or invalid_task_index_error message if given index is invalid
+     */
+    public String runUnmarkCommand(String input) {
+        int itemIndex = Integer.parseInt(input.split(" ")[1]);
+        try {
+            Task selectedTask = tasks.getTask(itemIndex - 1);
+            selectedTask.markAsIncomplete();
+            return Ui.displayUnmarkMsg(selectedTask.toString());
+        } catch (IndexOutOfBoundsException err) {
+            return Ui.INVALID_INDEX_ERROR;
+        }
     }
 
-    public String runListCommand() {
-        return this.ui.displayTaskList(tasks.getTasks());
+    /**
+     * Add deadline to list of tasks from input provided by user
+     *
+     * @param input Input text from user
+     * @return Returns the successfully added deadline message or daedline_missing_timings_error
+     * message if given deadline end timing is invalid or missing
+     */
+    public String runDeadlineCommand(String input) {
+        String endTime = Parser.getDeadlineTiming(input);
+        if (endTime == Ui.DEADLINE_INVALID_TIMINGS_ERROR) {
+            return Ui.DEADLINE_INVALID_TIMINGS_ERROR;
+        }
+
+        LocalDateTime endDate = Parser.parseDateTime(endTime);
+        String taskName = input.replaceAll("deadline", "").split("/by")[0];
+        Deadline newDeadline = new Deadline(taskName, endDate);
+        tasks.addTask(newDeadline);
+        return Ui.displayListedText(newDeadline, tasks.getSize());
+    }
+
+    /**
+     * Add event to list of tasks from input provided by user
+     *
+     * @param input Input text from user
+     * @return Returns the successfully added event message or event_missing_timings_error
+     * message if given event start or end timing is invalid or missing
+     */
+    public String runEventCommand(String input) {
+        String taskName = input.replaceAll("event", "").split("/at")[0];
+        String eventTimings = Parser.getEventTimings(input);
+        String[] eventTimingsSplit = eventTimings.split(",");
+        String startTimeString = eventTimingsSplit[0];
+        String endTimingString = eventTimingsSplit[1];
+
+        try {
+            LocalDateTime startDate = Parser.parseDateTime(startTimeString);
+            System.out.println("start date: " + startDate);
+            LocalDateTime endDate = Parser.parseDateTime(endTimingString);
+            System.out.println("end date: " + endDate);
+            Event newEvent = new Event(taskName, startDate, endDate);
+            tasks.addTask(newEvent);
+            return Ui.displayListedText(newEvent, tasks.getSize());
+
+        } catch (DateTimeParseException err) {
+            return Ui.EVENT_INVALID_TIMINGS_ERROR;
+        }
+    }
+
+    /**
+     * Add TODO to list of tasks from input provided by user
+     *
+     * @param input Input text from user
+     * @return Returns the successfully added TODO message or todo_invalid_name_error
+     * message if given event start or end timing is invalid or missing
+     */
+    public String runTodoCommand(String input) {
+        String taskName = input.replaceAll("todo", "");
+
+        if (input.split(" ").length < 2) {
+            return Ui.TASK_INVALID_NAME_ERROR;
+        }
+
+        Todo newTodo = new Todo(taskName);
+        tasks.addTask(newTodo);
+        return Ui.displayListedText(newTodo, tasks.getSize());
+    }
+
+    /**
+     * Delete task with index specified by user
+     *
+     * @param input Input text from user
+     * @return Returns the successfully deleted task message or invalid_index_error
+     * message if given an invalid task index
+     */
+    public String runDeleteCommand(String input) {
+        if (input.split("").length < 2) {
+           return Ui.INVALID_INDEX_ERROR;
+        }
+
+        int taskIndex = Integer.parseInt(input.split(" ")[1]);
+        try {
+            Task deletedTask = tasks.removeTaskIndex(taskIndex - 1);
+            if (deletedTask.getEventType() == Type.EVENT) {
+                Event deletedEvent = (Event) deletedTask;
+                return Ui.displayDeletedMessage(deletedEvent, tasks.getSize());
+            } else if (deletedTask.getEventType() == Type.DEADLINE) {
+                Deadline deletedDeadline = (Deadline) deletedTask;
+                return Ui.displayDeletedMessage(deletedDeadline, tasks.getSize());
+            } else if (deletedTask.getEventType() == Type.TODO) {
+                Todo deletedTodo = (Todo) deletedTask;
+                return Ui.displayDeletedMessage(deletedTodo, tasks.getSize());
+            }
+            // code should be EVENT/DEADLINE/TODO
+            assert false;
+        } catch (IndexOutOfBoundsException err) {
+            return Ui.INVALID_INDEX_ERROR;
+        }
+
+        assert false;
+        return "";
+    }
+
+    /**
+     * Find task with search term provided by user
+     *
+     * @param input Input text from user
+     * @return Returns the successfully found tasks or invalid_index_error
+     * message if given an invalid task index
+     */
+    public String runFindCommand(String input) {
+        String searchTerm = input.split(" ")[1];
+        if (searchTerm == "") {
+            return Ui.INVALID_SEARCH_TERM;
+        }
+
+        TaskList foundTasks = tasks.findTask(searchTerm);
+        if (foundTasks.getSize() < 1) {
+            return Ui.SEARCH_TERM_NOT_FOUND;
+        }
+
+        return Ui.displayFoundTaskList(foundTasks);
     }
 
     /**
@@ -64,82 +200,30 @@ public class Duke {
     public String run(String input) throws DukeException {
         Command command = Parser.parse(input);
 
-        int itemIndex;
-        Task selectedTask;
-        String taskName;
-
         switch (command) {
         case LIST:
-            System.out.println("LIST COMMAND CALLED");
             return runListCommand();
 
         case MARK:
-            itemIndex = Integer.parseInt(input.split(" ")[1]);
-            selectedTask = tasks.getTask(itemIndex - 1);
-            selectedTask.markAsComplete();
-            return this.ui.displayMarkMsg(selectedTask.toString());
+            return runMarkCommand(input);
 
         case UNMARK:
-            itemIndex = Integer.parseInt(input.split(" ")[1]);
-            //assert (itemIndex > 0) : "unmark item index must be greater than 0!";
-            selectedTask = tasks.getTask(itemIndex - 1);
-            selectedTask.markAsIncomplete();
-            return this.ui.displayUnmarkMsg(selectedTask.toString());
+            return runUnmarkCommand(input);
 
         case DEADLINE:
-            String endTime = getDeadlineTiming(input);
-            taskName = input.replaceAll("deadline", "").split("/by")[0];
-            Deadline newDeadline = new Deadline(taskName, endTime);
-            tasks.addTask(newDeadline);
-            return this.ui.displayListedText(newDeadline, tasks.getSize());
+            return runDeadlineCommand(input);
 
         case EVENT:
-            String[] eventTimings = getEventTimings(input);
-            taskName = input.replaceAll("event", "").split("/at")[0];
-            Event newEvent = new Event(taskName, eventTimings[0], eventTimings[1]);
-            tasks.addTask(newEvent);
-            return this.ui.displayListedText(newEvent, tasks.getSize());
+            return runEventCommand(input);
 
         case TODO:
-            taskName = input.replaceAll("todo", "");
-
-            if (input.split(" ").length <= 1) {
-                throw new TodoEmptyException();
-            }
-
-            Todo newTodo = new Todo(taskName);
-            tasks.addTask(newTodo);
-            return this.ui.displayListedText(newTodo, tasks.getSize());
+            return runTodoCommand(input);
 
         case DELETE:
-            if (input.split("").length <= 1) {
-                throw new DeleteEmptyException();
-            }
-
-            int taskIndex = Integer.parseInt(input.split(" ")[1]);
-            try {
-                Task deletedTask = tasks.removeTaskIndex(taskIndex - 1);
-                if (deletedTask.getEventType() == Type.EVENT) {
-                    Event deletedEvent = (Event) deletedTask;
-                    return this.ui.displayDeletedMessage(deletedEvent, tasks.getSize());
-                } else if (deletedTask.getEventType() == Type.DEADLINE) {
-                    Deadline deletedDeadline = (Deadline) deletedTask;
-                    return this.ui.displayDeletedMessage(deletedDeadline, tasks.getSize());
-                } else if (deletedTask.getEventType() == Type.TODO) {
-                    Todo deletedTodo = (Todo) deletedTask;
-                    return this.ui.displayDeletedMessage(deletedTodo, tasks.getSize());
-                }
-                // code should be EVENT/DEADLINE/TODO
-                assert false;
-            } catch (IndexOutOfBoundsException err) {
-                throw new DukeException("task index provided is invalid :(");
-            }
-            break;
+            return runDeleteCommand(input);
 
         case FIND:
-            String searchTerm = input.split(" ")[1];
-            TaskList foundTasks = tasks.findTask(searchTerm);
-            return this.ui.displayFoundTaskList(foundTasks);
+            return runFindCommand(input);
 
         case BYE:
             try {

@@ -52,6 +52,20 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Display text/message of user as well as response by duke
+     *
+     * @param dukeText String response by duke
+     * @param userText String input by user
+     */
+    private void sendDukeAndUserMsg(String dukeText, String userText) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getDukeDialog(dukeText, dukeImage)
+        );
+        userInput.clear();
+    }
+
+    /**
      * Sends duke welcome message
      */
     private void sendDukeWelcomeMsg() {
@@ -65,16 +79,15 @@ public class MainWindow extends AnchorPane {
      * @throws DukeException
      */
     @FXML
-    private void handleUserInput() throws DukeException {
+    private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = duke.run(userText);
 
-        System.out.println("DUKE TEST: " + dukeText);
+        try {
+            String dukeText = duke.run(userText);
+            sendDukeAndUserMsg(dukeText, userText);
 
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getDukeDialog(dukeText, dukeImage)
-        );
-        userInput.clear();
+        } catch (DukeException err) {
+            err.printStackTrace();
+        }
     }
 }
