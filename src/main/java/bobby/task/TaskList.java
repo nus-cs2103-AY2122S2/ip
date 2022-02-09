@@ -50,6 +50,9 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Method to sort deadlines and events to the top, by chronological ordering
+     */
     public void sortTaskList() {
         if (tasks.isEmpty()) {
             return;
