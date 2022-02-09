@@ -54,12 +54,14 @@ public class Storage {
 
         // check if file exist
         file = new File(fullFilePath);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException exception) {
-                throw new DukeException(FILE_CANNOT_CREATE_MSG);
-            }
+        if (file.exists()) {
+            return;
+        }
+
+        try {
+            file.createNewFile();
+        } catch (IOException exception) {
+            throw new DukeException(FILE_CANNOT_CREATE_MSG);
         }
     }
 
@@ -78,6 +80,10 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
                 T newTask = factory.apply(nextLine); // create the proper obj type
+
+                if (newTask == null) {
+                    continue;
+                }
 
                 newTask.extractDataFromLine(nextLine);
                 list.add(newTask);

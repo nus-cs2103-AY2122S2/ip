@@ -12,6 +12,12 @@ import java.util.StringTokenizer;
  */
 public class Deadline extends Task {
     private static final char DEADLINE_SYMBOL = 'D';
+    private static final String DATE_FORMAT = "MMM d yyyy";
+    private static final String TIME_FORMAT = "hh:mm a";
+
+    private static final String DEFAULT_DATE = "2020-12-12";
+    private static final String DEFAULT_TIME = "11:59 PM";
+
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
 
@@ -24,9 +30,9 @@ public class Deadline extends Task {
     public Deadline() {
         super();
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        this.deadlineDate = LocalDate.parse("2020-12-12"); // just get default date
-        this.deadlineTime = LocalTime.parse("2359", timeFormatter);
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+        this.deadlineDate = LocalDate.parse(DEFAULT_DATE); // just get default date
+        this.deadlineTime = LocalTime.parse(DEFAULT_TIME, timeFormatter);
     }
 
     /**
@@ -52,8 +58,8 @@ public class Deadline extends Task {
     @Override
     public String saveFileFormat() {
         return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" 
-                + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "|" 
-                + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + "\n";
+                + this.deadlineDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) + "|" 
+                + this.deadlineTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT)) + "\n";
     }
 
     /**
@@ -66,8 +72,8 @@ public class Deadline extends Task {
     public void extractDataFromLine(String data) {
         StringTokenizer st = new StringTokenizer(data, "|");
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
         st.nextToken(); // remove the type symbol
         isDone = Boolean.parseBoolean(st.nextToken());
@@ -84,7 +90,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " " + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
+        String date = deadlineDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String time = deadlineTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
+        String classification = "[" + DEADLINE_SYMBOL + "]";
+
+        return classification + super.toString() + " (by: " + date + " " + time + ")";
     }
 }

@@ -62,6 +62,8 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[" + TODO_SYMBOL + "]" + super.toString();
+        String classification = "[" + TODO_SYMBOL + "]";
+
+        return classification + super.toString();
     }
 }
