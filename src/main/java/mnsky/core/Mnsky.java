@@ -8,7 +8,8 @@ import mnsky.task.Event;
 import mnsky.task.Task;
 
 public class Mnsky {
-    private static final String[] writeCommands = {"mark", "unmark", "task", "event", "deadline", "delete"};
+    private static final String[] writeCommands = {"mark", "unmark", "task", "event", "deadline", "delete",
+        "redo", "undo"};
 
     private TaskList taskList;
     private Ui ui;
@@ -24,9 +25,9 @@ public class Mnsky {
     }
 
     /**
-     * Returns whether or not command passed in the argument is a command that writes to the task list.
+     * Returns whether or not command passed in the argument is a command that changes the state of the task list.
      * @param searchedCommand The command to be checked.
-     * @return True if the command writes to the task list, or false otherwise.
+     * @return True if the command changes the state of the task list, or false otherwise.
      */
     private boolean isWriteCommand(String searchedCommand) {
         for (String command : writeCommands) {
@@ -39,6 +40,20 @@ public class Mnsky {
     }
 
     /**
+     * Returns whether or not the command passed in the argument is a command that directly changes the state of the
+     * task list (e.g. not an undo or redo)
+     * @param searchedCommand The command to be checked.
+     * @return True if the command directly changes the state of the task list, or false otherwise.
+     */
+    private boolean isDirectWriteCommand(String searchedCommand) {
+        if (searchedCommand.equals("undo") || searchedCommand.equals("redo")) {
+            return false;
+        }
+
+        return isWriteCommand(searchedCommand);
+    }
+
+    /**
      * Parses and processes the input to get Mnsky's responses for the user.
      * @return Mnsky's responses to the input
      */
@@ -47,6 +62,11 @@ public class Mnsky {
 
         try {
             ArrayList<String> parsedInput = Parser.parseInput(input);
+
+            if (isDirectWriteCommand(parsedInput.get(0))) {
+                taskList.addToUndoHistory();
+            }
+
             switch (parsedInput.get(0)) {
             case "bye":
                 responses.add("bye");
@@ -80,6 +100,14 @@ public class Mnsky {
                 break;
             case "find":
                 responses = ui.printListStrings(taskList.find(parsedInput.get(1)));
+                break;
+            case "undo":
+                taskList.undo();
+                responses = ui.printListStrings(taskList.getListStrings());
+                break;
+            case "redo":
+                taskList.redo();
+                responses = ui.printListStrings(taskList.getListStrings());
                 break;
             default:
                 responses.add("...");

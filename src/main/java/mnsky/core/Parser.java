@@ -181,6 +181,12 @@ public class Parser {
             parsedInput.add("find");
             parsedInput.add(retrieveSearchTerm(input));
             break;
+        case "undo":
+            parsedInput.add("undo");
+            break;
+        case "redo":
+            parsedInput.add("redo");
+            break;
         default:
             parsedInput.add("invalid");
         }
