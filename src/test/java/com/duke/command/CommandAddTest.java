@@ -33,23 +33,23 @@ public class CommandAddTest {
         addCommand = new CommandAdd(
                 "deadline", "/by tomorrow 20/12/2022", taskList);
         assertEquals(addCommand.execute().getResultMessage(),
-                "OOPS!!! The description/date of a deadline cannot be empty.");
+                "ERMMM....The description/date of a deadline cannot be empty.");
 
         addCommand = new CommandAdd(
                 "todo", "", taskList);
         assertEquals(addCommand.execute().getResultMessage(),
-                "OOPS!!! The description of a todo cannot be empty.");
+                "ERMMM....The description of a todo cannot be empty.");
 
         addCommand = new CommandAdd(
                 "event", "/at school", taskList);
         assertEquals(addCommand.execute().getResultMessage(),
-                "OOPS!!! The description/location of a event cannot be empty.");
+                "ERMMM....The description/location of a event cannot be empty.");
 
         //Invalid location
         addCommand = new CommandAdd(
                 "event", "project /at", taskList);
         assertEquals(addCommand.execute().getResultMessage(),
-                "OOPS!!! The description/location of a event cannot be empty.");
+                "ERMMM....The description/location of a event cannot be empty.");
     }
 
     @BeforeAll
