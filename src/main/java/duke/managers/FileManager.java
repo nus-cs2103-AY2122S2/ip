@@ -89,31 +89,32 @@ public class FileManager {
         return this.userTaskList;
     }
 
+    private void handleTaskCompletion(String[] markIdentifier) throws DukeException {
+        if (markIdentifier[1].equals("1")) {
+            int indexOfTask = this.userTaskList.getSize() - 1;
+            this.userTaskList.markTaskDone(indexOfTask, false);
+        }
+    }
+
     private void parseLoadedTask(String loadedTask) throws DukeException {
         String[] loadedTaskSplit = loadedTask.split(Pattern.quote("|"));
         switch (loadedTaskSplit[0]) {
         case "T":
             Todo todo = new Todo(loadedTaskSplit[2]);
             this.userTaskList.addTask(todo, false);
-            if (loadedTaskSplit[1].equals("1")) {
-                this.userTaskList.markTaskDone(this.userTaskList.getSize() - 1, false);
-            }
+            handleTaskCompletion(loadedTaskSplit);
             break;
         case "D":
             Deadline deadline = new Deadline(loadedTaskSplit[2], LocalDate.parse(loadedTaskSplit[3],
                     DateTimeFormatter.ofPattern("MMM dd yyyy")).toString());
             // Parse the saved format "MMM dd yyyy" into yyyy-mm-dd which is what Deadline() class requires
             this.userTaskList.addTask(deadline, false);
-            if (loadedTaskSplit[1].equals("1")) {
-                this.userTaskList.markTaskDone(this.userTaskList.getSize() - 1, false);
-            }
+            handleTaskCompletion(loadedTaskSplit);
             break;
         case "E":
             Event event = new Event(loadedTaskSplit[2], loadedTaskSplit[3]);
             this.userTaskList.addTask(event, false);
-            if (loadedTaskSplit[1].equals("1")) {
-                this.userTaskList.markTaskDone(this.userTaskList.getSize() - 1, false);
-            }
+            handleTaskCompletion(loadedTaskSplit);
             break;
         default:
             throw new DukeException("Unexpected value: " + loadedTaskSplit[0]);

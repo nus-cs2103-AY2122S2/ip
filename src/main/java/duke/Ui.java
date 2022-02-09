@@ -52,7 +52,7 @@ public class Ui {
      */
     public String returnResponse() {
         String responseToReturn = this.response;
-        this.response = "";
+        this.response = ""; // Reset response
         return responseToReturn;
 
     }
