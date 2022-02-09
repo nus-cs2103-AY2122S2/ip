@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TaskList {
     private static final String INDENT = "    ";
@@ -16,16 +17,16 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void addTodo(String taskDescription) {
-        Todo t = new Todo(taskDescription);
-        tasks.add(t);
+    public void addTodo(String command) {
+        Todo todo = new Todo(command);
+        tasks.add(todo);
         this.printAdd();
     }
 
-    public void addDdl(String taskDescription) {
-        int i = taskDescription.indexOf(" /by ");
-        if (i > 0 && i + 5 < taskDescription.length()) {
-            Deadline t = new Deadline(taskDescription.substring(0, i), LocalDate.parse(taskDescription.substring(i + 5)));
+    public void addDdl(String command) {
+        int i = command.indexOf(" /by ");
+        if (i > 0 && i + 5 < command.length()) {
+            Deadline t = new Deadline(command.substring(0, i), LocalDate.parse(command.substring(i + 5)));
             tasks.add(t);
             this.printAdd();
         } else {
@@ -33,10 +34,10 @@ public class TaskList {
         }
     }
 
-    public void addEvt(String taskDescription) {
-        int i = taskDescription.indexOf(" /at ");
-        if (i > 0 && i + 5 < taskDescription.length()) {
-            Event t = new Event(taskDescription.substring(0, i), taskDescription.substring(i + 5));
+    public void addEvt(String command) {
+        int i = command.indexOf(" /at ");
+        if (i > 0 && i + 5 < command.length()) {
+            Event t = new Event(command.substring(0, i), command.substring(i + 5));
             tasks.add(t);
             this.printAdd();
         } else {
@@ -68,7 +69,12 @@ public class TaskList {
         }
     }
 
-    public void mark(int index, boolean isDone) {
+    public void mark(String command, boolean isDone) {
+        Scanner markInfo = new Scanner(command);
+        if (!markInfo.hasNextInt()) {
+            throw new DukeException("Please enter an index.");
+        }
+        int index = markInfo.nextInt() - 1;
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
         }
@@ -81,7 +87,12 @@ public class TaskList {
         System.out.println(INDENT + "  " + tasks.get(index));
     }
 
-    public void delete(int index) {
+    public void delete(String command) {
+        Scanner deleteInfo = new Scanner(command);
+        if (!deleteInfo.hasNextInt()) {
+            throw new DukeException("Please enter an index");
+        }
+        int index = deleteInfo.nextInt() - 1;
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
         }
