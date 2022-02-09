@@ -24,19 +24,19 @@ public abstract class Command {
      */
     public static Command of(Keywords keyword, String[] tokens) throws ChiException {
         switch(keyword.toString()) {
-        case "ADD" :
+        case "ADD":
             return new AddCommand(tokens);
-        case "DELETE" :
+        case "DELETE":
             return new DeleteCommand(Arrays.copyOfRange(tokens, 1, tokens.length));
-        case "MARK" :
+        case "MARK":
             return new MarkCommand(Arrays.copyOfRange(tokens, 1, tokens.length));
-        case "UNMARK" :
+        case "UNMARK":
             return new UnmarkCommand(Arrays.copyOfRange(tokens, 1, tokens.length));
-        case "FIND" :
+        case "FIND":
             return new FindCommand(Arrays.copyOfRange(tokens, 1, tokens.length));
-        case "LIST" :
+        case "LIST":
             return new ListCommand();
-        case "HELP" :
+        case "HELP":
             return new HelpCommand(tokens);
         default:
             throw new ChiException("Could not create command nyan!");

@@ -72,6 +72,7 @@ public class AddCommand extends Command {
                     newTask = new Deadline(s, ld, lt, false);
                     tl.addTask(newTask);
                     sge.updateFile(newTask, tl, "deadline");
+                    assert tl.getSize() > 0 : "After adding, there should not be 0 tasks";
                     return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask, tl.getSize());
                 }
@@ -88,6 +89,7 @@ public class AddCommand extends Command {
                     newTask = new Event(s, ld, lt, lt1, false);
                     tl.addTask(newTask);
                     sge.updateFile(newTask, tl, "deadline");
+                    assert tl.getSize() > 0 : "After adding, there should not be 0 tasks";
                     return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask, tl.getSize());
                 }

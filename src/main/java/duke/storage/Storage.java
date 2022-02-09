@@ -55,6 +55,7 @@ public class Storage {
     private Task convertFileDataToTask(String task) {
         // We assume the task stored inside is correct
         String[] splitTask = task.split("\\|");
+        assert splitTask.length > 2 : "There is something wrong with this stored task";
         for (int i = 0; i < splitTask.length; i++) {
             splitTask[i] = splitTask[i].trim();
         }

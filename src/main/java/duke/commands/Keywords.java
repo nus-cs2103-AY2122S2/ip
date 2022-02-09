@@ -44,8 +44,6 @@ public enum Keywords {
      */
     public static Keywords getKeyword(String token) throws ChiException {
         for (Keywords k: Keywords.values()) {
-            System.out.println(token);
-            System.out.println(k);
             if (k.keywordMappings.get(token.toLowerCase()) != null) {
                 return k.keywordMappings.get(token.toLowerCase());
             }
