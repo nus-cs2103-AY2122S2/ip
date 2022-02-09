@@ -1,9 +1,13 @@
-import org.json.JSONWriter;
+package duke.tasks;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+import duke.tasks.WordListItem;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class WordList {
     private ArrayList<WordListItem> wordList;

@@ -1,5 +1,10 @@
+package duke.parsers;
+
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.UnknownInputException;
+
 public class InputParser {
-    static Object[] parseInput(String input) throws EmptyDescriptionException, UnknownInputException {
+    static public Object[] parseInput(String input) throws EmptyDescriptionException, UnknownInputException {
         InputType type = InputType.NONE;
         String[] value = new String[]{ input };
         for(InputType inputType: InputType.values()) {
@@ -13,7 +18,7 @@ public class InputParser {
                 } else if (inputType == InputType.TODO || inputType == InputType.MARK
                         || inputType == InputType.UNMARK || inputType == InputType.DELETE) {
                     try {
-                        String description = input.substring(inputType.label.length() + 1);
+                        String description = input.substring(inputType.label.length() + 1).trim();
                         if (description.isBlank()) {
                             throw new EmptyDescriptionException("only blank characters found after command :(");
                         }
@@ -23,13 +28,13 @@ public class InputParser {
                     }
                 } else if (inputType == InputType.DEADLINE) {
                     int datetimeIndex = input.indexOf("/by");
-                    String description = input.substring(inputType.label.length() + 1, datetimeIndex - 1);
-                    String datetime = input.substring(datetimeIndex + 4);
+                    String description = input.substring(inputType.label.length() + 1, datetimeIndex - 1).trim();
+                    String datetime = input.substring(datetimeIndex + 4).trim();
                     value = new String[]{description, datetime};
                 } else if (inputType == InputType.EVENT) {
                     int datetimeIndex = input.indexOf("/at");
-                    String description = input.substring(inputType.label.length() + 1, datetimeIndex - 1);
-                    String datetime = input.substring(datetimeIndex + 4);
+                    String description = input.substring(inputType.label.length() + 1, datetimeIndex - 1).trim();
+                    String datetime = input.substring(datetimeIndex + 4).trim();
                     value = new String[]{description, datetime};
                 }
 

@@ -1,7 +1,12 @@
+package duke.managers;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+import duke.tasks.WordList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

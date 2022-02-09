@@ -1,4 +1,6 @@
-public class Todo extends WordListItem{
+package duke.tasks;
+
+public class Todo extends WordListItem {
     static private final String SYMBOL = "[T]";
 
     public Todo(String description) {
