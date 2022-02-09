@@ -15,9 +15,9 @@ public class TaskList {
         this.ui = new Ui();
     }
 
-    public void add(Task t) {
+    public String add(Task t) {
         list.add(t);
-        ui.reply(addTask(this.get(this.size() - 1), this.size()));
+        return addTask(this.get(this.size() - 1), this.size());
     }
 
     public int size() {
@@ -37,14 +37,14 @@ public class TaskList {
      * @param item index of the item in the list to be deleted
      */
 
-    public void deleteItem(String item) {
+    public String deleteItem(String item) {
         try {
             int index = Integer.parseInt(item);
             Task t = this.get(index - 1);
             this.remove(index - 1);
-            ui.reply(removeTask(t, this.size()));
+            return removeTask(t, this.size());
         } catch (IndexOutOfBoundsException e) {
-            ui.reply("You can't do that! It's not on the list!");
+            return "You can't do that! It's not on the list!";
         }
     }
 
@@ -96,7 +96,7 @@ public class TaskList {
      * prints the UI for find item
      * @param item keyword to be found
      */
-    public void find(String item) {
+    public String find(String item) {
         ArrayList<Task> foundTasks = new ArrayList<Task>();
         String tab = "    ";
 
@@ -117,7 +117,7 @@ public class TaskList {
 
         }
 
-        ui.reply(firstLine + lists);
+        return firstLine + lists;
     }
 
 
