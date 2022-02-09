@@ -7,5 +7,7 @@ list
 Mark 1
 Mark 2
 List
+Find cs
+Find help
 Bye
 
