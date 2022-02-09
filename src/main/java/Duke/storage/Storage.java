@@ -46,11 +46,11 @@ public class Storage {
                 String[] currTaskLine = currLine.split("\\|");
                 switch (currTaskLine[0]) {
                 case "T":
-                    ToDo todoTask = new ToDo(currTaskLine[2]);
+                    ToDo toDoTask = new ToDo(currTaskLine[2]);
                     if (currTaskLine[1].equals("1")) {
-                        todoTask.setChecked();
+                        toDoTask.setChecked();
                     }
-                    taskList.add(todoTask);
+                    taskList.add(toDoTask);
                     break;
                 case "D":
                     Deadline deadlineTask = new Deadline(currTaskLine[2], currTaskLine[3]);
@@ -67,6 +67,7 @@ public class Storage {
                     taskList.add(eventTask);
                     break;
                 default:
+                    assert false; //Execution will never reach this point.
                 }
             }
         } catch (IOException e) {
@@ -85,7 +86,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(saveFilePath);
             for (int i = 0; i < taskList.size(); i++) {
-                writer.write(taskList.get(i).saveToFileString());
+                writer.write(taskList.get(i).encodeTaskToString());
             }
             writer.close();
         } catch (IOException e) {

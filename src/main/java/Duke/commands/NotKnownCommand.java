@@ -18,6 +18,7 @@ public class NotKnownCommand extends Command {
      * @return show error message.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert ui != null;
         return ui.showError("OOPS!!! I'm sorry, but I don't know what that means :<");
     }
 

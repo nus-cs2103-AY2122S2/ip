@@ -57,7 +57,7 @@ public abstract class Task {
         isDone = false;
     }
 
-    public abstract String saveToFileString();
+    public abstract String encodeTaskToString();
 
     /**
      * Returns the date that was converted from String to LocalDate.
@@ -97,7 +97,7 @@ public abstract class Task {
     }
 
     /**
-     * The String representation of the Task.
+     * Returns the String representation of the Task.
      *
      * @return the status and description of the task.
      */

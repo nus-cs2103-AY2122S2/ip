@@ -19,6 +19,9 @@ public class ExitCommand extends Command {
      * @return message saying goodbye.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         storage.save(tasks.getTaskList());
         return ui.showGoodBye();
     }

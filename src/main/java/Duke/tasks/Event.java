@@ -25,18 +25,18 @@ public class Event extends Task {
     }
 
     /**
-     * Strings representation of Event in the save file.
+     * Returns the strings representation of Event in the save file.
      *
      * @return the formats of the String to be save in the file.
      */
     @Override
-    public String saveToFileString() {
+    public String encodeTaskToString() {
         return "E|" + (isDone ? "1|" : "0|") + super.getDescription() + "|" + date + " "
                 + time + "\n";
     }
 
     /**
-     * Strings representation of event.
+     * Returns the strings representation of event.
      *
      * @return [E] with the status and description of the task,
      *         and at when.

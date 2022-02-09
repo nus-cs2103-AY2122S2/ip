@@ -15,17 +15,17 @@ public class ToDo extends Task {
     }
 
     /**
-     * The String representation of ToDO in the save file.
+     * Returns the strings representation of ToDO in the save file.
      *
      * @return the formats of the String to be save in the file
      */
     @Override
-    public String saveToFileString() {
+    public String encodeTaskToString() {
         return "T|" + (isDone ? "1|" : "0|") + super.getDescription() + "\n";
     }
 
     /**
-     * The String representation of ToDo.
+     * Returns the strings representation of ToDo.
      *
      * @return [T] with the status and description of the task.
      */

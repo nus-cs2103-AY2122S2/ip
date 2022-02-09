@@ -19,6 +19,8 @@ public class ListCommand extends Command {
      * @return string of task in the list.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
+        assert ui != null;
         return ui.showList(tasks.getTaskList());
     }
 
