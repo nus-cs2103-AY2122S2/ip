@@ -59,10 +59,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (Objects.equals(input, "bye")) {
-            // Credit to @ddx-510 for the wait method.
+            //@@author ddx-510-reused
             PauseTransition wait = new PauseTransition(Duration.seconds(3));
             wait.setOnFinished(event -> Platform.exit());
             wait.play();
+            //@@author
         }
     }
 }

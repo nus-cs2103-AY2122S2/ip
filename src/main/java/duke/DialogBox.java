@@ -37,9 +37,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        //@@author jbkim1999-reused
         Circle clip = new Circle(49.5, 49.5, 50);
         displayPicture.setImage(img);
         displayPicture.setClip(clip);
+        //@@author
     }
 
     /**

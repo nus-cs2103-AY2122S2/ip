@@ -24,6 +24,9 @@ public class Storage {
      * @throws IOException If file not found.
      * @throws ClassNotFoundException If unable to find Task class to cast ArrayList to.
      */
+    //@@author waleedkhan-reused
+    // Reused from https://tinyurl.com/yckrncus
+    // with minor modifications
     public ArrayList<Task> load() throws IOException, ClassNotFoundException {
         FileInputStream readData = new FileInputStream("data/duke.ser");
         ObjectInputStream readStream = new ObjectInputStream(readData);
@@ -33,6 +36,7 @@ public class Storage {
         readStream.close();
         return arr;
     }
+    //@@author
 
     /**
      * Save the current task list to new file 'data/duke.ser'
@@ -42,6 +46,9 @@ public class Storage {
      *
      * @param arr Current task list.
      */
+    //@@author waleedkhan-reused
+    // Reused from https://tinyurl.com/yckrncus
+    // with minor modifications
     public void save(ArrayList<Task> arr) {
         File directory = new File("data");
         if (!directory.exists()) {
@@ -58,6 +65,7 @@ public class Storage {
             System.out.println("Something went wrong. I think I may be corrupted.");
         }
     }
+    //@@author
 
     /**
      * Will invoke save command to save the current list into data/duke.ser to be loaded in future
