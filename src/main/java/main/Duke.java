@@ -36,8 +36,6 @@ public class Duke {
     public TaskList tasklist;
     public Ui ui;
 
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -45,6 +43,7 @@ public class Duke {
     private Button sendButton;
     private Scene scene;
 
+    private boolean isWelcomed = false;
     private boolean isExit = false;
     private static final String FILEPATH =  "./duke.txt";
 
@@ -52,6 +51,7 @@ public class Duke {
     public Duke() throws DukeException {
         ui = new Ui();
         ui.showWelcome();
+        ui.sendPrint();
         storage = new Storage(FILEPATH);
         try {
             tasklist = new TaskList(storage.getAllTasks());
@@ -71,6 +71,13 @@ public class Duke {
     public String getResponse(String input) {
         if (isExit) {
             return "";
+        }
+
+        if (!isWelcomed) {
+            isWelcomed = true;
+            ui.clearPrint();
+            ui.showWelcome();
+            return ui.sendPrint();
         }
 
         try {
@@ -93,11 +100,9 @@ public class Duke {
         return ui.sendPrint();
     }
 
-//    public static void main(String[] args) throws DukeException {
-//        new Duke(FILEPATH).run();
-//    }
 
     public void run() {
+        ui.showWelcome();
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();

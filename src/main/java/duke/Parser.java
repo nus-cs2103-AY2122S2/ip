@@ -33,7 +33,7 @@ public class Parser {
             if (words.length != 2) {
                 throw new DukeEventException(
                         "OOPS!!! Please enter in format: mark <task_number>\n " +
-                                "e.g. mark 1");
+                        "e.g. mark 1");
             } else {
                 try {
                     int ranking = Integer.parseInt(words[1]);

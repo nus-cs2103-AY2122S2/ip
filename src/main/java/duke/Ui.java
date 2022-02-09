@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,6 +30,7 @@ public class Ui {
     public void printAllTasks(TaskList tasklist) {
         ArrayList<Task> all = tasklist.getAllTasks();
         StringBuffer sb = new StringBuffer();
+
         for (int i = 1; i <= all.size(); i++) {
             String s = "";
             Task task = all.get(i-1);

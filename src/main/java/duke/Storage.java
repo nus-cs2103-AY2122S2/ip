@@ -70,14 +70,13 @@ public class Storage {
 
             if (type[1].equals("T")) {
                 Task todo = new ToDo(content[1]);
-
                 if (completion[1].equals("X")) {
                     todo.markDone();
                 }
-
                 all.add(todo);
 
             } else if (type[1].equals("E")) {
+
                 // format of Event is [E][ ] event_name (at: event_venue)
                 // str_split[] = { "[E", "[ ", " event_name (at: event_venue)" }
                 // content = { " ", "event_name (at: event_venue)" }
@@ -131,6 +130,7 @@ public class Storage {
     public void writeToFile(TaskList tasklist) throws IOException {
         FileWriter fw = new FileWriter(file);
         ArrayList<Task> all = tasklist.getAllTasks();
+
         // go through all Task object and write to filepath
         for (int i = 1; i <= all.size(); i++) {
             fw.write(i + ". " + all.get(i - 1));
