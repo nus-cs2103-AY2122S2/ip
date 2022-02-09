@@ -33,22 +33,27 @@ public class Parser {
         } else if (c[0].equals("list")) {
             return tasklist.printTaskList();
         } else if (c[0].equals("mark")) {
-            int no = Integer.parseInt(c[1]) - 1;
-            return tasklist.mark(no);
+            int no = Integer.parseInt(c[1]);
+            assert no > 0 : "number should be more than 0.";
+            return tasklist.mark(no - 1);
         } else if (c[0].equals("unmark")) {
-            int no = Integer.parseInt(c[1]) - 1;
-            return tasklist.unMark(no);
+            int no = Integer.parseInt(c[1]);
+            assert no > 0 : "number should be more than 0.";
+            return tasklist.unMark(no - 1);
         } else if (c[0].equals("todo")) {
             return tasklist.add(new Todo(cmd.substring(4)));
         } else if (c[0].equals("deadline")) {
             String[] x = cmd.substring(8).split("/by ");
+            assert x.length == 2 : "More or less than 2 elements detected";
             return tasklist.add(new Deadline(x[0], x[1]));
         } else if (c[0].equals("event")) {
             String[] x = cmd.substring(5).split("/at ");
+            assert x.length == 2 : "More or less than 2 elements detected";
             return tasklist.add(new Event(x[0], x[1]));
         } else if (c[0].equals("delete")) {
-            int no = Integer.parseInt(c[1]) - 1;
-            return tasklist.delete(no);
+            int no = Integer.parseInt(c[1]);
+            assert no > 0 : "number should be more than 0.";
+            return tasklist.delete(no - 1);
         } else if (c[0].equals("find")) {
             return tasklist.find(c[1]);
         } else {
