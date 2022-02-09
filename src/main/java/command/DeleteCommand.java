@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, UiForGUI ui, Storage storage) throws DukeException {
         int index = Integer.parseInt(this.tokenizedCommand[1]) - 1;
+        assert index < tasks.getSize() : "index should be lesser than the task list's size";
         Task t = tasks.getTask(index);
         tasks.removeTask(t);
         storage.updateSavedTasks(t.getSaveFormat(), "");
