@@ -58,10 +58,10 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     *
+     * @param input
+     * @return Juke's response based on the command
      */
-
     private String getResponse(String input) {
 
             Outputs op = new Outputs();
@@ -75,10 +75,11 @@ public class Duke extends Application {
                 file.delete();
                 try {
                     file.createNewFile();
-                } catch (IOException e) {
-                    System.out.println(" ");
-                }
+                } catch (IOException e) { }
 
+                /**
+                 * if command is "mark {index no.}", mark said task as done
+                 */
                 if (splittedString[0].equals("mark") && splittedString.length == 2) { // check for mark tag
                     assert !itemList.isEmpty() : "List is empty";
                     try {
@@ -89,9 +90,16 @@ public class Duke extends Application {
                             "       " + itemList.get(index - 1).getDescription() + "\n" +
                             op.instructions +
                             op.border;
+
                 } catch (NumberFormatException n) {
                     return "Invalid input, please enter a valid index number instead";
                 }
+
+
+                /**
+                 * if command is "unmark {index no.}", mark said task as undone
+                 */
+
                 } else if (splittedString[0].equals("unmark") && splittedString.length == 2) { // check for unmark tag
                     assert !itemList.isEmpty() : "List is empty";
                     try {
@@ -217,9 +225,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
 
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -276,19 +282,5 @@ public class Duke extends Application {
 
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-
-        return textToAdd;
-    }
 }
 
