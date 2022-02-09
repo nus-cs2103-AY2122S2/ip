@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a general task which the user has inserted.
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
     private final TaskType taskType;
