@@ -36,7 +36,13 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
+
+        storage = new Storage("data/duke.txt");
+        assert storage != null;
+        tasks = new TaskList(storage.load(), storage.getNumberOfTasks());
+
+
         //Step 1. Formatting the window to look as expected.
 
         //The container for the content of the chat to scroll.
@@ -102,11 +108,19 @@ public class Duke extends Application {
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         // more code to be added here later
@@ -131,12 +145,12 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+//        Label dukeText = new Label(p.getResponse());
         dialogContainer.getChildren().addAll(
                 new DialogBox(userText.getText(), new ImageView(user).getImage()),
-                new DialogBox(dukeText.getText(), new ImageView(duke).getImage())
+                new DialogBox("iwfweifewoefw", new ImageView(duke).getImage())
         );
         userInput.clear();
     }
@@ -145,8 +159,10 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) throws IOException {
+        Parser p = new Parser(input, tasks, storage);
+
+        return p.getResponse();
     }
 
     public static void main(String[] args) throws IOException {
