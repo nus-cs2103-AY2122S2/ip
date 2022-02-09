@@ -116,6 +116,9 @@ public class Mnsky {
             ArrayList<String> parsedInput = Parser.parseInput(input);
 
             switch (parsedInput.get(0)) {
+            case "hi":
+                responses.add(ui.printGreeting());
+                break;
             case "bye":
                 responses.add("bye");
                 break;
