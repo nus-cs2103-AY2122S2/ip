@@ -39,7 +39,7 @@ public class DeadlineCommand extends Command {
             Deadline currDeadline = Parser.parseDeadline(deadlineCommand);
             taskList.add(currDeadline);
             storage.appendToFile(currDeadline);
-            return Ui.indicateAddedTask(currDeadline, taskList);
+            return Ui.indicateAddOrDeleteTask(currDeadline, taskList, true);
 
         } catch (DeadlineException | IOException e) {
             return Ui.printExceptionMessage(e);

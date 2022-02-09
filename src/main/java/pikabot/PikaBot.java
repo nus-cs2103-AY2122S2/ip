@@ -3,7 +3,6 @@ package pikabot;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import pikabot.command.Command;
 import pikabot.task.Task;
@@ -19,6 +18,9 @@ public class PikaBot {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Constructor for PikaBot.
+     */
     public PikaBot() {
         this.storage = new Storage(FILEPATH);
         this.taskList = new TaskList(new ArrayList<Task>());
@@ -50,31 +52,4 @@ public class PikaBot {
 
         return response;
     }
-
-    /**
-     * Boots up PikaBot application.
-     *
-     * @param args Command line arguments entered by user.
-     */
-    /*
-    public static void main(String[] args) {
-
-        PikaBot pikaBot = new PikaBot();
-        Scanner sc = new Scanner(System.in);
-        System.out.println(Ui.printWelcomeText());
-
-        String input = sc.nextLine();
-        String[] strInputArr = input.split(" ", 2);
-
-        while (!strInputArr[0].equals("bye")) {
-            Command command = Parser.parseCommand(strInputArr);
-            command.execute(pikaBot.taskList, pikaBot.storage);
-            input = sc.nextLine();
-            strInputArr = input.split(" ", 2);
-        }
-
-        System.out.println(Ui.printClosingText());
-        sc.close();
-    }
-    */
 }

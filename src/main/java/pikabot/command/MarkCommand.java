@@ -37,7 +37,7 @@ public class MarkCommand extends Command {
             int taskToMark = Integer.parseInt(markCommand[1]);
             taskList.markTaskAsDone(taskToMark);
             storage.taskListToFile(taskList);
-            return Ui.indicateMarked(taskList.get(taskToMark - 1));
+            return Ui.indicateEditMark(taskList.get(taskToMark - 1), true);
         } catch (NoIntegerException | IOException e) {
             return Ui.printExceptionMessage(e);
         } catch (IndexOutOfBoundsException e) {

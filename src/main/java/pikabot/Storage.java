@@ -23,7 +23,7 @@ import pikabot.task.Todo;
  */
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructs a Storage object.
@@ -55,12 +55,15 @@ public class Storage {
         Scanner sc = new Scanner(f);
         ArrayList<Task> arrList = new ArrayList<>();
         TaskList taskList = new TaskList(arrList);
+        int stringIndexTaskType = 1;
+        int stringIndexTaskStatus = 4;
+        int stringIndexTask = 7;
 
         while (sc.hasNextLine()) {
             String taskStr = sc.nextLine();
-            char taskType = taskStr.charAt(1);
-            boolean isTaskDone = (taskStr.charAt(4) == 'X');
-            taskStr = taskStr.substring(7);
+            char taskType = taskStr.charAt(stringIndexTaskType);
+            boolean isTaskDone = (taskStr.charAt(stringIndexTaskStatus) == 'X');
+            taskStr = taskStr.substring(stringIndexTask);
 
             if (taskType == 'D') {
                 String[] taskDetails = taskStr.split("\\(by: ", 2);
@@ -84,12 +87,15 @@ public class Storage {
                 }
                 taskList.add(event);
 
-            } else {
+            } else if (taskType == 'T') {
                 Todo todo = new Todo(taskStr);
                 if (isTaskDone) {
                     todo.markAsDone();
                 }
                 taskList.add(todo);
+
+            } else {
+                Ui.printExceptionCustomisedMessage("Invalid Task type stored in data file can't be parsed.");
             }
         }
         return taskList;
