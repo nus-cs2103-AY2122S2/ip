@@ -11,7 +11,7 @@ class ParserTest {
     private static final String[] DESCRIPTIONS = {"eat", "sleep", "code"};
     private static final String[] FILLERS = {"dinner", "lunch", "project"};
     private static final String[] DATES = {"01/01/2022", "02/02/2022", "03/03/2022"};
-    private static final String[] TIMES = {"06:00", "12:00", "18:00", "23:59"};
+    private static final String[] TIMES = {"06:00", "1200", "1800", "23:59"};
 
     @Test
     public void deadlineCommand_validInput_correctCommandResult() {
@@ -33,6 +33,71 @@ class ParserTest {
     }
 
     @Test
+    public void deadlineCommand_invalidArgument_incorrectCommandResult() {
+        String commandString = String.format("deadline %s", DESCRIPTIONS[0]);
+        Command command = Parser.parse(commandString);
+        String errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        String expected = String.format(errorMsg, "deadline require the by argument.");
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+
+        commandString = "deadline";
+        command = Parser.parse(commandString);
+        errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        expected = String.format(errorMsg, "The description of deadline cannot be empty.");
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+
+        commandString = String.format("deadline %s /by tmr", DESCRIPTIONS[0]);
+        command = Parser.parse(commandString);
+        errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        expected = String.format(errorMsg, "The force does not comprehend the date.");
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+
+        commandString = "deadline /today";
+        command = Parser.parse(commandString);
+        errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        expected = String.format(errorMsg, "deadline require the description argument.");
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+
+        commandString = "deadline sleep /today";
+        command = Parser.parse(commandString);
+        errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        expected = String.format(errorMsg, "deadline require the by argument.");
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+    }
+
+    @Test
+    public void todo_validArgument_correctCommandResult() {
+        String successMessage = "I have added the following task into list: \n\t%s\nnow you have %d tasks in the list.";
+        String commandString = "todo this work";
+        Command command = Parser.parse(commandString);
+        String expectedCommandResult = "[T][ ] this work";
+        String expected = String.format(successMessage, expectedCommandResult, 1);
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+
+        commandString = "todo this should work too /not this";
+        command = Parser.parse(commandString);
+        expectedCommandResult = "[T][ ] this should work too";
+        expected = String.format(successMessage, expectedCommandResult, 1);
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+    }
+
+
+    @Test
+    public void todo_invalidArgument_incorrectCommandResult() {
+        String commandString = "todo";
+        Command command = Parser.parse(commandString);
+        String errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        String expected = String.format(errorMsg, "The description of todo cannot be empty.");
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+
+        commandString = "todo /will this work";
+        command = Parser.parse(commandString);
+        errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        expected = String.format(errorMsg, "todo require the description argument.");
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+    }
+
+    @Test
     public void eventCommand_invalidArgument_incorrectCommandResult() {
         String commandString = String.format("event %s", DESCRIPTIONS[0]);
         Command command = Parser.parse(commandString);
@@ -50,6 +115,12 @@ class ParserTest {
         command = Parser.parse(commandString);
         errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
         expected = String.format(errorMsg, "The force does not comprehend the date.");
+        assertEquals(expected, command.execute(new TaskList()).getResult());
+
+        commandString = "event /at Sunday noon";
+        command = Parser.parse(commandString);
+        errorMsg = "Oops, the force has encountered an error:\n%s\nPlease try again :(";
+        expected = String.format(errorMsg, "event require the description argument.");
         assertEquals(expected, command.execute(new TaskList()).getResult());
     }
 

@@ -8,7 +8,7 @@ import luke.data.TaskList;
 public abstract class ReadCommand extends Command {
 
     /**
-     * Takes in a task list and return the appropriate message based on the items in the task.
+     * Takes in a task list and returns the appropriate message based on the items in the task.
      *
      * @param taskList The task list to loop through.
      * @param emptyMsg The message to print if the task list is empty.
@@ -20,7 +20,7 @@ public abstract class ReadCommand extends Command {
     }
 
     /**
-     * Takes in a task list and return the appropriate message based on the items in the task.
+     * Takes in a task list and returns the appropriate message based on the items in the task.
      *
      * @param taskList   The task list to loop through.
      * @param emptyMsg   The message to print if the task list is empty.
@@ -31,6 +31,7 @@ public abstract class ReadCommand extends Command {
     public CommandResult readTaskList(TaskList taskList, String emptyMsg, String startMsg, boolean isFiltered) {
         String msg = emptyMsg;
         boolean isEmpty = true;
+
         //Since task list may be fully filtered but not empty, require this check to see if tasks are filtered
         if (!taskList.isEmpty()) {
             msg = startMsg;

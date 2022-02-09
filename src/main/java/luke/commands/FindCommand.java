@@ -22,7 +22,7 @@ public class FindCommand extends ReadCommand {
     }
 
     /**
-     * Takes in a task list, filter the task list based on keywords and read the task list.
+     * Takes in a task list, filters the task list based on keywords and reads the task list.
      *
      * @param taskList The task list to perform the action on.
      * @return The result of this command's execution.

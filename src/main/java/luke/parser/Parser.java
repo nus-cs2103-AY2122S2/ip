@@ -84,7 +84,7 @@ public class Parser {
     }
 
     /**
-     * Prepares and return the appropriate read command.
+     * Prepares and returns the appropriate read command.
      *
      * @param cmdAction The command action tied to the user input.
      * @param args      The arguments that the user have supplied.
@@ -106,7 +106,7 @@ public class Parser {
 
 
     /**
-     * Prepares and return the appropriate update command.
+     * Prepares and returns the appropriate update command.
      *
      * @param cmdAction The command action tied to the user input.
      * @param args      The arguments that the user have supplied.
@@ -129,7 +129,7 @@ public class Parser {
     }
 
     /**
-     * Prepares and return the appropriate add command.
+     * Prepares and returns the appropriate add command.
      *
      * @param cmdAction The command action tied to the user input.
      * @param args      The arguments that the user have supplied.
@@ -138,6 +138,10 @@ public class Parser {
      */
     private static AddCommand prepareAddCommand(CommandAction cmdAction, String[] args) {
         assert(cmdAction.getCommandActionType() == ActionType.ADD);
+        if (args.length < 2) {
+            throw new IllegalArgumentException(String.format(EMPTY_DESCRIPTION_MESSAGE, args[0]));
+        }
+
         Map<String, String> argsMap = parseAddArguments(cmdAction, args);
         switch (cmdAction) {
         case DEADLINE:
@@ -153,7 +157,7 @@ public class Parser {
 
 
     /**
-     * Parses and return the arguments tied to the add commands.
+     * Parses and returns the arguments tied to the add commands.
      *
      * @param cmdAction The command action tied to the user input.
      * @param args      The arguments that the user have supplied.
@@ -163,32 +167,44 @@ public class Parser {
     private static Map<String, String> parseAddArguments(CommandAction cmdAction, String[] args)
             throws IllegalArgumentException {
         assert(cmdAction.getCommandActionType() == ActionType.ADD);
+        assert(args.length == 2);
+
+        //add description argument identifier
+        args[1] = "description " + args[1];
         Map<String, String> argsMap = new HashMap<>();
-        if (args.length < 2) {
-            throw new IllegalArgumentException(String.format(EMPTY_DESCRIPTION_MESSAGE, args[0]));
+        String[] actualArgs = args[1].split("/(?=[A-Za-z])");
+        String[] expectedArgs = cmdAction.getArgumentKeys().split(",");
+
+        verifyArguments(args[0], actualArgs, expectedArgs);
+
+        for (int i = 0; i < expectedArgs.length; i++) {
+            String[] argValuePair = actualArgs[i].split(" ", 2);
+            argsMap.put(argValuePair[0], argValuePair[1]);
         }
-        String[] inputs = args[1].split("/", 2);
-        if (inputs[0].isBlank()) {
-            throw new IllegalArgumentException(String.format(EMPTY_DESCRIPTION_MESSAGE, args[0]));
-        }
-        argsMap.put("description", inputs[0]);
-        if (cmdAction != CommandAction.TODO) {
-            String extraArg = cmdAction.getArgumentKeys().split(",", 2)[1];
-            if (inputs.length < 2) {
-                throw new IllegalArgumentException(String.format(MISSING_ARGUMENT_MESSAGE, args[0], extraArg));
-            }
-            inputs = inputs[1].split(" ", 2);
-            if (inputs[0].equalsIgnoreCase(extraArg)) {
-                argsMap.put(extraArg, inputs[1]);
-            } else {
-                throw new IllegalArgumentException(String.format(MISSING_ARGUMENT_MESSAGE, args[0], extraArg));
-            }
-        }
+
         return argsMap;
     }
 
+    private static void verifyArguments(String command, String[] actualArgs, String[] expectedArgs) {
+        for (int i = 0; i < expectedArgs.length; i++) {
+            if (i == actualArgs.length) {
+                throw new IllegalArgumentException(String.format(MISSING_ARGUMENT_MESSAGE, command, expectedArgs[i]));
+            }
+            String[] argValuePair = actualArgs[i].split(" ", 2);
+            if (argValuePair.length < 2) {
+                throw new IllegalArgumentException(String.format(MISSING_ARGUMENT_MESSAGE, command, expectedArgs[i]));
+            }
+            if (argValuePair[1].isBlank()) {
+                throw new IllegalArgumentException(String.format(MISSING_ARGUMENT_MESSAGE, command, expectedArgs[i]));
+            }
+            if (!argValuePair[0].equalsIgnoreCase(expectedArgs[i])) {
+                throw new IllegalArgumentException(String.format(MISSING_ARGUMENT_MESSAGE, command, expectedArgs[i]));
+            }
+        }
+    }
+
     /**
-     * Parses and return the arguments tied to the find command
+     * Parses and returns the arguments tied to the find command
      *
      * @param args The arguments that the user have supplied.
      * @return The arguments mapped to the keywords of the command.
@@ -207,7 +223,7 @@ public class Parser {
     }
 
     /**
-     * Parses and return the arguments tied to the update commands.
+     * Parses and returns the arguments tied to the update commands.
      *
      * @param args The arguments that the user have supplied.
      * @return The arguments mapped to the keywords of the command.
