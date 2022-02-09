@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import funbox.exception.FunBoxExceptions;
@@ -22,12 +23,11 @@ import funbox.task.ToDo;
 public class Storage {
     private final String DIR_URL = "data/";
     private final String FILE_URL = "data/tasks.txt";
-    private final String TEMPFILE_URL = "data/temp.txt";
-    private final String DELIMITOR = ",";
-    private Ui ui;
-    private Parser parser;
+    private final String DELIMITER = ",";
+    private final Ui ui;
+    private final Parser parser;
     private TaskList taskList;
-    private HashMap<String, String> typeHashmap;
+    private final HashMap<String, String> typeHashmap;
 
     /**
      * The constructor for the storage class.
@@ -41,7 +41,9 @@ public class Storage {
         this.typeHashmap = new HashMap<>();
         this.taskList = new TaskList();
         setUpHashMap();
-        preCheck();
+        createDirectory();
+        createFile();
+        setTaskList();
     }
 
     /**
@@ -54,26 +56,45 @@ public class Storage {
     }
 
     /**
-     * Checks if the required directory and file exists, and reads tasks from the file and
-     * insert it into a list.
+     * Creates a new directory if the specified directory do not exist.
      */
-    private void preCheck() {
-        if (!isDirectoryExist()) {
-            boolean isDirectoryCreated = this.createDirectory();
-            if (isDirectoryCreated) {
-                this.ui.printDirSuccess();
-                this.createFile(this.FILE_URL);
-            } else {
-                this.ui.printDirAlreadyExist();
-            }
-        } else if (!isFileExist()) {
-            this.createFile(this.FILE_URL);
-        } else {
+    private void createDirectory() {
+        if (!doesDirectoryExist()) {
+            new File(DIR_URL).mkdir();
+        }
+    }
+
+    /**
+     * Set the task list by reading the file.
+     */
+    public void setTaskList() {
+        try {
+            this.taskList = readFile();
+        } catch (FunBoxExceptions | IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * Creates a new file if the specified file does not exist.
+     */
+    private void createFile() {
+        if (!doesFileExist()) {
             try {
-                this.taskList = this.readFile();
-            } catch (IOException | FunBoxExceptions e) {
+                new File(FILE_URL).createNewFile();
+            } catch (IOException e) {
                 ui.showError(e.getMessage());
             }
+        }
+    }
+
+    /**
+     * Creates a new file if the specified file does not exist.
+     */
+    private void createTempFile(String url) {
+        try {
+            new File(url).createNewFile();
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
         }
     }
 
@@ -82,39 +103,24 @@ public class Storage {
      *
      * @return Return true if directory exist, otherwise, false
      */
-    private boolean isDirectoryExist() {
+    private boolean doesDirectoryExist() {
         return new File(this.DIR_URL).isDirectory();
     }
 
     /**
-     * Check if file tasks.txt exist in 'data'
+     * Checks if file tasks.txt exist in 'data'
      *
      * @return Return true if file exist, otherwise, false
      */
-    private boolean isFileExist() {
+    private boolean doesFileExist() {
         return Files.exists(Paths.get(this.FILE_URL));
     }
 
     /**
-     * Creates directory 'data' under 'ip'
+     * Returns the task list.
      *
-     * @return Return true if directory exists, otherwise, false
+     * @return Return the task list to the user.
      */
-    private boolean createDirectory() {
-        return new File(this.DIR_URL).mkdir();
-    }
-
-    /**
-     * Creates file `tasks.txt` under 'data' directory
-     */
-    private void createFile(String fileUrl) {
-        try {
-            new File(fileUrl).createNewFile();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public TaskList getTaskList() {
         return this.taskList;
     }
@@ -127,49 +133,51 @@ public class Storage {
      */
     public TaskList readFile() throws IOException, FunBoxExceptions {
         File file = new File(this.FILE_URL);
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String task;
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
         TaskList taskList = new TaskList();
-        int isDone = 0;
+
+        boolean isDone = false;
         int counter = 0;
 
         while (true) {
-            task = br.readLine();
+            String task = br.readLine();
 
             if (task == null) {
                 br.close();
                 break;
-            } else {
-                String[] taskSplit = task.split(this.DELIMITOR);
-                String type = this.typeHashmap.get(taskSplit[0]);
-                isDone = Integer.parseInt(taskSplit[1]);
-                String description = taskSplit[2];
-
-                switch (type) {
-                case "todo":
-                    taskList.add(new ToDo(description, type));
-                    break;
-                case "event":
-                    taskList.add(new Event(description,
-                            parser.stringToLocalDate(taskSplit[3]),
-                            parser.getTime(taskSplit[3]), type));
-                    break;
-                case "deadline":
-                    taskList.add(new Deadline(description,
-                            parser.stringToLocalDate(taskSplit[3]),
-                            parser.getTime(taskSplit[3]), type));
-                    break;
-                default:
-                    break;
-                }
             }
 
+            String[] taskSplit = task.split(DELIMITER);
+            String type = typeHashmap.get(taskSplit[0]);
+            String description = taskSplit[2];
+            isDone = isTaskDone(taskSplit[1]);
+
+            switch (type) {
+            case "todo":
+                taskList.add(new ToDo(description, type));
+                break;
+            case "event":
+                LocalDate eventDate = parser.stringToLocalDate(taskSplit[3]);
+                String eventTime = parser.getTime(taskSplit[3]);
+                taskList.add(new Event(description, eventDate, eventTime, type));
+                break;
+            case "deadline":
+                LocalDate deadlineDate = parser.stringToLocalDate(taskSplit[3]);
+                String deadlineTime = parser.getTime(taskSplit[3]);
+                taskList.add(new Deadline(description, deadlineDate, deadlineTime, type));
+                break;
+            }
         }
-        if (isDone == 1) {
+        if (isDone) {
             taskList.setPreTaskDone(counter);
         }
-        counter++;
         return taskList;
+    }
+
+    private boolean isTaskDone(String x) {
+        int temp = Integer.parseInt(x);
+        return temp != 0;
     }
 
     /**
@@ -179,11 +187,14 @@ public class Storage {
      * @throws IOException If file does not exist.
      */
     public void deleteTask(int index) throws IOException {
-        this.createFile(this.TEMPFILE_URL);
-        File tempFile = new File(this.TEMPFILE_URL);
+        String tempFileUrl = "data/temp.txt";
+        createTempFile(tempFileUrl);
+        File tempFile = new File(tempFileUrl);
         File file = new File(this.FILE_URL);
+
         BufferedReader br = new BufferedReader(new FileReader(file));
-        FileWriter fw = new FileWriter(this.TEMPFILE_URL, true);
+        FileWriter fw = new FileWriter(tempFileUrl, true);
+
         String task;
         int counter = 1;
 
@@ -193,13 +204,14 @@ public class Storage {
             if (task == null) {
                 br.close();
                 fw.close();
+                File temp = file;
                 file.delete();
-                tempFile.renameTo(new File(this.FILE_URL));
+                tempFile.renameTo(temp);
                 break;
-            } else {
-                if (counter != index) {
-                    fw.write(task + "\n");
-                }
+            }
+
+            if (counter != index) {
+                fw.write(task + "\n");
             }
             counter++;
         }
@@ -210,34 +222,44 @@ public class Storage {
      *
      * @param task The task user inputted
      */
-    public void writeTaskToStorage(Task task, Ui ui) {
+    public void writeTaskToStorage(Task task) {
         try {
-            String result = "";
+            String prefix;
+            String finalResult = "";
             switch (task.type) {
             case "todo":
-                result = "T,0";
-                result = result.concat(DELIMITOR).concat(task.description);
+                prefix = "T,0";
+                finalResult = parseTask(prefix, task.description);
                 break;
             case "deadline":
-                Deadline temp = (Deadline) task;
-                result = "D,0";
-                result = result.concat(DELIMITOR).concat(temp.description).concat(DELIMITOR)
-                        .concat(temp.getDate().toString()).concat(" ").concat(temp.getTime());
+                prefix = "D,0";
+                Deadline deadlineTemp = (Deadline) task;
+                finalResult = parseTask(prefix, task.description,
+                        deadlineTemp.time, deadlineTemp.date.toString());
                 break;
             case "event":
-                Event temp2 = (Event) task;
-                result = "E,0";
-                result = result.concat(DELIMITOR).concat(temp2.description).concat(DELIMITOR)
-                        .concat(temp2.date.toString()).concat(" ").concat(temp2.time);
+                prefix = "E,0";
+                Event eventTemp = (Event) task;
+                finalResult = parseTask(prefix, task.description,
+                        eventTemp.time, eventTemp.date.toString());
                 break;
             default:
                 break;
             }
             FileWriter fw = new FileWriter(this.FILE_URL, true);
-            fw.write(result + "\n");
+            fw.write(finalResult + "\n");
             fw.close();
         } catch (IOException e) {
             ui.showError(e.getMessage());
         }
     }
+
+    private String parseTask(String prefix, String task) {
+        return prefix.concat(task);
+    }
+
+    private String parseTask(String prefix, String task, String time, String date) {
+        return prefix.concat(DELIMITER).concat(task).concat(DELIMITER).concat(date).concat(" ").concat(time);
+    }
+
 }

@@ -7,12 +7,14 @@ import funbox.util.Storage;
 import funbox.util.Parser;
 import funbox.task.Event;
 
+import java.time.LocalDate;
+
 /**
  * Deal with handling command for Event.
  */
 public class EventCommand extends Command {
-    String description;
-    Parser parser;
+    private final String description;
+    private final Parser parser;
 
     /**
      * Constructor class for EventCommand.
@@ -36,18 +38,23 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
-        String result = "";
+        String result;
+
         if (description.equals("")) {
-            throw new FunBoxExceptions("`event` command is missing a field!");
-        } else {
-            String[] resultArr = this.parser.getDescriptionAndDate(this.description, "event");
-            Event event = new Event(resultArr[0],
-                    parser.stringToLocalDate(resultArr[1]),
-                    parser.getTime(resultArr[1]), "event");
-            taskList.add(event);
-            result = "Got it. I've added this task:" + "\n" + ui.printTask(taskList.getSize(), event);
-            storage.writeTaskToStorage(event, ui);
+            throw new FunBoxExceptions("`event` command usage: event <task> /at <date> <time>");
         }
+
+        String[] resultArr = parser.getDescAndDate(description, "event");
+
+        LocalDate date = parser.stringToLocalDate(resultArr[1]);
+        String time = parser.getTime(resultArr[1]);
+
+        Event event = new Event(resultArr[0], date, time,"event");
+        taskList.add(event);
+
+        result = ui.taskPrefix().concat(ui.printTask(taskList.getSize(), event));
+        storage.writeTaskToStorage(event);
+
         return result;
     }
 }

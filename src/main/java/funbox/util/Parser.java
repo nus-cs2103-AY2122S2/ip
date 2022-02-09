@@ -20,18 +20,14 @@ import funbox.exception.FunBoxExceptions;
  */
 public class Parser {
 
-    public final String unknownCommand = "Sorry! You have used the command wrongly!";
-
     /**
      * Parses the user text commands to a Command object.
      *
      * @param command The command entered by the user.
-     * @param taskList The list containing the tasks.
-     * @param ui Interface which interact with users.
      * @return Return a command object to be executed.
      * @throws FunBoxExceptions If command is not available/exist.
      */
-    public Command parseCommand(String command, TaskList taskList, Ui ui) throws FunBoxExceptions {
+    public Command parseCommand(String command) throws FunBoxExceptions {
         String[] parsedCommand = command.split(" ");
         String commandType = parsedCommand[0];
         String description = parsedCommand.length > 1
@@ -63,7 +59,7 @@ public class Parser {
     }
 
     /**
-     * Concats the strings in the array to a single string.
+     * Concatenates the strings in the array to a single string.
      *
      * @param parsedCommand The array containing the strings to be concatenated.
      * @param startingIndex The point which the concatenation should begin.
@@ -71,14 +67,16 @@ public class Parser {
      */
     public String concatFormat(String[] parsedCommand, int startingIndex) {
         String result = "";
-        for (int i = startingIndex; i < parsedCommand.length; i++) {
-            if (i == parsedCommand.length - 1) {
-                result = result.concat(parsedCommand[i]);
-            } else {
-                result = result.concat(parsedCommand[i]).concat(" ");
-            }
-        }
+        int arrayLength = parsedCommand.length;
+        int lastIndex = arrayLength - 1;
 
+        for (int i = startingIndex; i < arrayLength; i++) {
+            if (i == lastIndex) {
+                result = result.concat(parsedCommand[i]);
+                break;
+            }
+            result = result.concat(parsedCommand[i] + " ");
+        }
         return result;
     }
 
@@ -90,7 +88,7 @@ public class Parser {
      * @return Returns a string array where the first item is the description
      *         and the second item contains the date.
      */
-    public String[] getDescriptionAndDate(String message, String type) {
+    public String[] getDescAndDate(String message, String type) {
         if (type.equals("event")) {
             return message.split(" /at ");
         }
@@ -105,7 +103,6 @@ public class Parser {
      * whether it's a message, command, or command which require special formatting
      */
     public String[] formatCommands(String message) {
-        // Split message by blank space
         return message.split(" ");
     }
 
@@ -114,17 +111,18 @@ public class Parser {
      *
      * @param dateTime The date and time which the task should be completed by
      * @return Returns a LocalDate object
-     * @throws FunBoxExceptions If dateTimeArr.length != 2
+     * @throws FunBoxExceptions If the length of dateTimeArr != 2
      */
     public LocalDate stringToLocalDate(String dateTime) throws FunBoxExceptions {
         String[] dateTimeArr = this.formatCommands(dateTime);
         LocalDate result;
-        if (dateTimeArr.length == 2) {
-            result = LocalDate.parse(dateTimeArr[0]);
-        } else {
+
+        if (dateTimeArr.length < 2) {
             throw new FunBoxExceptions("ERROR! Please ensure date and time"
                     + " is in the correct format: yyyy-mm-dd time");
         }
+
+        result = LocalDate.parse(dateTimeArr[0]);
 
         return result;
     }
@@ -135,17 +133,17 @@ public class Parser {
      *
      * @param dateTime The date and time which the task should be completed by
      * @return Returns a time
-     * @throws FunBoxExceptions If dateTimeArr.length != 2
+     * @throws FunBoxExceptions If the length of dateTimeArr != 2
      */
     public String getTime(String dateTime) throws FunBoxExceptions {
-        String[] dateTimeArr = this.formatCommands(dateTime);
-        String time;
-        if (dateTimeArr.length == 2) {
-            time = dateTimeArr[1];
-        } else {
+
+        String[] dateTimeArr = formatCommands(dateTime);
+
+        if (dateTimeArr.length != 2) {
             throw new FunBoxExceptions("ERROR! Please ensure date and time"
                     + " is in this format: yyyy-mm-dd time");
         }
-        return time;
+
+        return dateTimeArr[1];
     }
 }

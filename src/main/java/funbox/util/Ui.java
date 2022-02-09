@@ -57,7 +57,7 @@ public class Ui {
      * @return Returns a message of an item on the list.
      */
     public String printTask(int index, Task task) {
-       return index + "." + task;
+       return index + "." + task + "\n";
     }
 
     /**
@@ -104,7 +104,7 @@ public class Ui {
      * @return Returns a header message when a task is marked as done.
      */
     public String printMarkDone() {
-        return "Nice! I've marked this task as done:";
+        return "Nice! I've marked this task as done:\n";
     }
 
     /**
@@ -133,5 +133,14 @@ public class Ui {
      */
     public String printDeletedTask(Task task) {
        return task.toString();
+    }
+
+    /**
+     * Returns a prefix message when a task has been added to the list.
+     *
+     * @return Returns a prefix message of the added task.
+     */
+    public String taskPrefix() {
+        return "Got it. I've added this task: \n";
     }
 }

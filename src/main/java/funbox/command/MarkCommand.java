@@ -34,13 +34,22 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
         String result = "";
-        if ((index - 1) > taskList.getSize() || (index - 1) < 0) {
-            throw new FunBoxExceptions("Wrong index!");
-        } else {
-            int index = this.index - 1;
-            taskList.setTaskDone(index);
-            result = ui.printMarkDone() + "\n" + taskList.getTask(ui, index);
+
+        boolean isGreaterThanList = (index - 1) > taskList.getSize();
+        boolean isNegative = (index - 1) < 0;
+
+        if (isGreaterThanList) {
+            throw new FunBoxExceptions("The index entered is larger than the list!");
         }
+
+        if (isNegative) {
+            throw new FunBoxExceptions("The index cannot be negative!");
+        }
+
+        int currIndex = index - 1;
+        taskList.setTaskDone(currIndex);
+        result = ui.printMarkDone().concat(taskList.getTask(ui, currIndex));
+
         return result;
     }
 }
