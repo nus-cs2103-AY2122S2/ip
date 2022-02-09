@@ -66,7 +66,8 @@ public class Parser {
      */
     public static CommandType getCommandType(String userInput) {
         String command = userInput.split(" ")[0].toLowerCase(Locale.ROOT);
-
+        assert !command.equals("") : "Empty Command";
+        
         switch (command) {
         case "list":
             return CommandType.LIST;
