@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    private boolean isByeCommand;
+    private boolean isByeCommand = false;
+    private TaskList taskList;
 
-    public Parser(){
-        isByeCommand = false;
+    public Parser(TaskList taskList){
+        this.taskList = taskList;
     }
 
     public String parse(String userInput) {
@@ -16,7 +17,7 @@ public class Parser {
         // Split user input into individual words
         String[] split = userInput.split(" ");
         String outputMessage = "";
-        ArrayList<Task> toDoList = TaskList.getToDoList();
+        ArrayList<Task> toDoList = taskList.getToDoList();
         switch (split[0]) {
         case "bye":
             outputMessage = "goodbye!\n";
@@ -96,7 +97,7 @@ public class Parser {
                     String[] divide = item.split("/");
                     String name = divide[0];
                     String dueDate = divide[1];
-                    Deadline d = new Deadline(name, LocalDate.parse(dueDate.substring(3)));
+                    Deadline d = new Deadline(name.trim(), dueDate.substring(3));
                     toDoList.add(d);
                     outputMessage = String.format("task added:\n%s\n", d);
                     outputMessage += String.format("you now have %d tasks\n", toDoList.size());
@@ -119,7 +120,7 @@ public class Parser {
                     String[] divide = item.split("/");
                     String name = divide[0];
                     String time = divide[1];
-                    Event e = new Event(name, LocalDate.parse(time.substring(3)));
+                    Event e = new Event(name.trim(), time.substring(3));
                     toDoList.add(e);
                     outputMessage = String.format("task added:\n%s\n", e);
                     outputMessage += String.format("you now have %d tasks\n", toDoList.size());

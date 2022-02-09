@@ -51,11 +51,11 @@ public class Storage {
         return toDoList;
     }
 
-    public static void save() {
+    public static void save(TaskList taskList) {
         try {
             FileOutputStream writer = new FileOutputStream(DATA_PATH);
             ObjectOutputStream saveList = new ObjectOutputStream(writer);
-            saveList.writeObject(TaskList.getToDoList());
+            saveList.writeObject(taskList.getToDoList());
             saveList.close();
             Ui.print("your list has been saved!\n");
         } catch (FileNotFoundException e) {

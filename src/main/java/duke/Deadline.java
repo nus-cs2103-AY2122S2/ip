@@ -8,9 +8,9 @@ class Deadline extends Task {
 
     private final LocalDate dueDate;
 
-    public Deadline(String name, LocalDate dueDate) {
+    public Deadline(String name, String dueDate) {
         super(name);
-        this.dueDate = dueDate;
+        this.dueDate = LocalDate.parse(dueDate);
     }
 
     @Override
