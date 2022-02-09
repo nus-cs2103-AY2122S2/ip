@@ -48,8 +48,8 @@ public class Deadline extends Task {
      * @throws IOException if there is an error writing the file.
      */
     public void saveTask(FileWriter fw) throws IOException {
-        String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        String recursiveTag = this.recurFrequency == null ? "--" : this.recurFrequency.toString();
+        String isDone = getStatusIcon() == "X" ? "1" : "0";
+        String recursiveTag = recurFrequency == null ? "--" : recurFrequency.toString();
         fw.write(String.format("D %s %s %s %s /by %s\n", isDone, recursiveTag, lastResetDate, description,
                 deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))));
     }
@@ -61,7 +61,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + this.deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")) + ")";
+        return String.format("[D]%s (by: %s)", super.toString(),
+                deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
     }
 }

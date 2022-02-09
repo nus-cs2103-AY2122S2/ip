@@ -50,9 +50,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns the recursive tag of the task.
+     * Returns the string label of the RecurFrequency tag.
      *
-     * @return the recursive tag of the task.
+     * @return The string label of the RecurFrequency tag.
      */
     protected String getRecursiveFrequency() {
         if (recurFrequency != null) {
@@ -63,9 +63,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns if the task is recursive.
+     * Returns if the task is recurring.
      *
-     * @return
+     * @return Whether the task is recurring.
      */
     public boolean isRecurring() {
         return recurFrequency != null;
@@ -77,15 +77,13 @@ public abstract class Task {
      * @return Whether a recurring task should be reset.
      */
     private boolean shouldReset() {
-        LocalDate today = LocalDate.now();
-        LocalDate resetDate;
-
         if (!isRecurring()) {
             return false;
         }
-
         assert recurFrequency != null : "Task detects an error when checking if a task needs to be reset!";
 
+        LocalDate today = LocalDate.now();
+        LocalDate resetDate = lastResetDate;
         switch (recurFrequency) {
         case DAILY:
             resetDate = lastResetDate.plusDays(1);
@@ -100,7 +98,7 @@ public abstract class Task {
             resetDate = lastResetDate.with(TemporalAdjusters.firstDayOfNextMonth());
             break;
         default:
-            resetDate = today;
+            assert false; //recurFrequency can only take the enumerated forms, or null
         }
 
         if (!today.isBefore(resetDate)) {
@@ -128,7 +126,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s %s", this.getStatusIcon(), this.getRecursiveFrequency(),
-                this.description);
+        return String.format("[%s]%s %s", getStatusIcon(), getRecursiveFrequency(),
+                description);
     }
 }

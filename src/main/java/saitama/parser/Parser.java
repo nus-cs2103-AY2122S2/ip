@@ -159,6 +159,7 @@ public class Parser {
                 @SuppressWarnings("unchecked")
                 RecurFrequency rf = (RecurFrequency) tag;
                 recurFrequency = rf;
+                break;
             }
         }
 

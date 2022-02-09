@@ -13,9 +13,9 @@ import saitama.exceptions.FileCorruptException;
 import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
 import saitama.parser.Parser;
+import saitama.tags.RecurFrequency;
 import saitama.tasks.Deadline;
 import saitama.tasks.Event;
-import saitama.tags.RecurFrequency;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 
@@ -44,7 +44,7 @@ public class Storage {
     public ArrayList<Task> load() {
         assert filePath.endsWith(".txt") : "File path needs to be a .txt file";
 
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(filePath);
 
         try {

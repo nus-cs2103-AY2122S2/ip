@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import saitama.tasks.Deadline;
 import saitama.tags.RecurFrequency;
+import saitama.tasks.Deadline;
 import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 

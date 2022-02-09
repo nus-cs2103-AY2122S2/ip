@@ -33,7 +33,8 @@ public class Event extends Task {
      * @param recurFrequency The frequency recurrence of the event task.
      * @param lastResetDate The last reset date of the task.
      */
-    public Event(String description, String at, boolean isDone, RecurFrequency recurFrequency, LocalDate lastResetDate) {
+    public Event(String description, String at, boolean isDone,
+                 RecurFrequency recurFrequency, LocalDate lastResetDate) {
         super(description, isDone, recurFrequency, lastResetDate);
         this.at = at;
     }
@@ -45,8 +46,8 @@ public class Event extends Task {
      * @throws IOException if there is an error writing the file.
      */
     public void saveTask(FileWriter fw) throws IOException {
-        String isDone = this.getStatusIcon() == "X" ? "1" : "0";
-        String recursiveTag = this.recurFrequency == null ? "--" : this.recurFrequency.toString();
+        String isDone = getStatusIcon() == "X" ? "1" : "0";
+        String recursiveTag = recurFrequency == null ? "--" : recurFrequency.toString();
         fw.write(String.format("E %s %s %s %s /at %s\n", isDone, recursiveTag, lastResetDate, description, at));
     }
 
@@ -57,6 +58,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return String.format("[E]%s (at: %s)", super.toString(), at);
     }
 }
