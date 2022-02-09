@@ -11,7 +11,7 @@ import duke.util.Ui;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-    private final int taskIndex;
+    private int taskIndex;
 
     /**
      * Constructor for DeleteCommand which provides an index to delete.
@@ -25,9 +25,11 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes command by printing exit message.
+     *
      * @param taskList List of tasks.
      * @param ui       Ui provided.
      * @param storage  Saved history.
+     * @return message to tell user that task has been deleted
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

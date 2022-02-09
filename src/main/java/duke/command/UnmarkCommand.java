@@ -24,9 +24,11 @@ public class UnmarkCommand extends Command {
 
     /**
      * Executes command by unmarking task in TaskList.
+     *
      * @param taskList List of tasks
      * @param ui       Ui provided
      * @param storage  Saved history
+     * @return message to tell user that task has been unmarked
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

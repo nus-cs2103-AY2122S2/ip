@@ -1,6 +1,7 @@
 package duke.gui;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import duke.Duke;
 import javafx.application.Application;
@@ -16,7 +17,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private final Duke duke = new Duke();
-    private final Image appImage = new Image(this.getClass().getResourceAsStream("/images/pirate.png"));
+    private final Image appImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/pirate.png")));
 
     @Override
     public void start(Stage stage) {
