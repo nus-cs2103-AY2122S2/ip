@@ -14,8 +14,16 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /**
+     * Duke created.
+     */
     private Duke duke = new Duke();
 
+    /**
+     * Starts GUI.
+     *
+     * @param stage Output window.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -24,7 +32,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getRoot().setStyle("-fx-font-family: 'serif'");
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(this.duke);
             stage.setTitle("Mike");
             stage.show();
         } catch (IOException e) {

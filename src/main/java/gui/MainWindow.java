@@ -2,6 +2,7 @@ package gui;
 
 import duke.Duke;
 import duke.UI;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 import javafx.util.Duration;
 
 /**
@@ -27,9 +27,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    /**Duke to be printed.*/
     private Duke duke;
 
+    /**Image of user.*/
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    /**Image of Duke.*/
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
@@ -55,10 +58,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
         if (input.equals("bye")) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getUserDialog(input, this.userImage),
+                    DialogBox.getDukeDialog(response, this.dukeImage)
             );
 
             userInput.setDisable(true);
@@ -68,10 +72,11 @@ public class MainWindow extends AnchorPane {
             pauseTransition.play();
         } else {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getUserDialog(input, this.userImage),
+                    DialogBox.getDukeDialog(response, this.dukeImage)
             );
         }
+
         userInput.clear();
     }
 }

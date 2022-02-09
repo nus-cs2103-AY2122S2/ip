@@ -43,7 +43,7 @@ public class Task {
      * @return String representation of Task description
      */
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -67,7 +67,7 @@ public class Task {
      * @return String representation of Task to save.
      */
     public String toSave() {
-        String status = isDone ? " : 1 : " : " : 0 : ";
+        String status = this.isDone ? " : 1 : " : " : 0 : ";
         return status + this.description;
     }
 
