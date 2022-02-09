@@ -6,15 +6,18 @@ import apollo.exceptions.ApolloException;
 import apollo.exceptions.ApolloIoException;
 import apollo.parser.Parser;
 import apollo.tasks.TaskList;
+import apollo.ui.gui.Gui;
 import apollo.ui.Welcome;
 import apollo.ui.Ui;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 import java.time.LocalTime;
 
 /**
  * Main class for program.
  */
-public class Apollo {
+public class Apollo extends Application {
 
     private static TaskList taskList;
     private static Ui ui;
@@ -63,5 +66,11 @@ public class Apollo {
                 ui.printMessage(e.getMessage());
             }
         } while (!ExitCommand.isExit(command));
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Gui gui = new Gui();
+        gui.start(primaryStage);
     }
 }
