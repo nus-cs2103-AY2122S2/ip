@@ -2,7 +2,6 @@ package duke;
 
 
 import javafx.application.Application;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import duke.task.TaskList;
@@ -11,7 +10,6 @@ import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Todo;
 
-import java.util.Scanner;
 
 /**
  * Duke class used for running the Duke chat bot

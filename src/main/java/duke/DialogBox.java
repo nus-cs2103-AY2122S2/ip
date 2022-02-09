@@ -7,12 +7,17 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
-    private Label text;
+    private final Label text;
     private ImageView displayPicture;
     private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/button.png"));
 
@@ -28,7 +33,7 @@ public class DialogBox extends HBox {
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
         this.setBackground(new Background(new BackgroundImage(backgroundImage
-                ,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER
+                ,BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER
                 ,new BackgroundSize(400,-1,false,false,false,false))));
 
         this.setAlignment(Pos.TOP_RIGHT);
