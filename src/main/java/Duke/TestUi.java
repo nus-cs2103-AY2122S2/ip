@@ -47,6 +47,7 @@ public class TestUi extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+        assert scene != null : "Unable to load GUI";
 
         stage.setScene(scene);
         stage.show();
@@ -127,6 +128,9 @@ public class TestUi extends Application {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return commandList.action(input, parser, list, storage);
+        String response = commandList.action(input, parser, list, storage);
+        assert response != "" : "Error in getting response";
+
+        return response;
     }
 }
