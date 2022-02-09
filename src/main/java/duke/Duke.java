@@ -1,5 +1,9 @@
 package duke;
 
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.function.Function;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -15,13 +19,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.ui.Ui;
-
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.function.Function;
 
 /**
  * Duke chatbot behavior and data.
@@ -92,13 +92,18 @@ public class Duke {
         try {
             Command command = parser.parse(input);
             response = command.execute(input, taskList, storage);
-        } catch(DukeException error) {
+        } catch (DukeException error) {
             return error.getMessage();
         }
 
         return response;
     }
 
+    /**
+     * Main function of Duke.
+     *
+     * @param args NIL
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.runDuke();

@@ -8,7 +8,7 @@ import duke.util.Storage;
 /**
  * Abstract class for add task commands.
  *
- * <p>All future commands about adding new tasks to the list should inherit from this class</>
+ * <p>All future commands about adding new tasks to the list should inherit from this class</p>
  */
 public abstract class TaskCommand extends Command {
     private static final String TASK_DESC_EMPTY = "The description of your task cannot be empty.";
@@ -16,7 +16,7 @@ public abstract class TaskCommand extends Command {
     /**
      * Constructor for command to init values.
      *
-     * <p>Calls superclass Command constructor.</>
+     * <p>Calls superclass Command constructor.</p>
      *
      * @param key Keyword to call this command.
      */
@@ -29,7 +29,7 @@ public abstract class TaskCommand extends Command {
      *
      * <p>Get task description without the command keyword.
      * Calls the super class, Command, getTaskDescriptor, but this
-     * function passes the default task description empty statement.</>
+     * function passes the default task description empty statement.</p>
      *
      * @param input The full user input.
      * @return User input without the command's keyword.
@@ -43,7 +43,7 @@ public abstract class TaskCommand extends Command {
      * Add new task into task list, update save and print.
      *
      * <p>Updates the task list and output the added task through
-     * the UI</>
+     * the UI</p>
      *
      * @param newTask The new task to be added into the list.
      * @param taskList User tasklist.

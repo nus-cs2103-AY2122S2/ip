@@ -1,25 +1,25 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Adds event command.
  *
  * <p>Extends from TaskCommand, as this class adds new Events task
- * to the task list</>
+ * to the task list.</p>
  */
 public class EventCommand extends TaskCommand {
-    private static final String TASK_FORMAT_WRONG
-            = "Did you remember to put in the date after /at? Or did u remember to add /at?";
+    private static final String TASK_FORMAT_WRONG =
+            "Did you remember to put in the date after /at? Or did u remember to add /at?";
     private static final String DATE_FORMAT_WRONG = "duke.task.Event Date format is wrong. yy-mm-dd";
     private static final String TIME_FORMAT_WRONG = "duke.task.Event time format is wrong. HHmm";
 
@@ -29,7 +29,7 @@ public class EventCommand extends TaskCommand {
     /**
      * Constructor for event command to init values.
      *
-     * <p>Calls superclass TaskCommand constructor.</>
+     * <p>Calls superclass TaskCommand constructor.</p>
      *
      * @param key Keyword to call this command.
      */
@@ -42,7 +42,7 @@ public class EventCommand extends TaskCommand {
      *
      * <p>Create and add new event task into the task list base on what the user inputs.
      * Will also print the new event task created through the UI.<br>
-     * User does not have to put in a time, default time set is 2359.</>
+     * User does not have to put in a time, default time set is 2359.</p>
      *
      * @param input User input.
      * @param taskList User tasklist.
@@ -68,23 +68,22 @@ public class EventCommand extends TaskCommand {
         }
 
         // parse the date in yy-mm-dd
-        LocalDate localDate = ParseDateFromStr(dateTime[0]);
+        LocalDate localDate = parseDateFromStr(dateTime[0]);
 
         // check if user input a time, if not use default time
         LocalTime localTime;
         if (dateTime.length > 1) {
-            localTime = ParseTimeFromStr(dateTime[1]);
+            localTime = parseTimeFromStr(dateTime[1]);
         } else {
-            localTime = ParseTimeFromStr(DEFAULT_TIME);
+            localTime = parseTimeFromStr(DEFAULT_TIME);
         }
 
         newTask = new Event(statement, localDate, localTime);
         return updateTaskList(newTask, taskList, storage);
     }
 
-    private LocalDate ParseDateFromStr(String date) throws DukeException{
+    private LocalDate parseDateFromStr(String date) throws DukeException {
         LocalDate localDate;
-        
         try {
             localDate = LocalDate.parse(date);
         } catch (DateTimeParseException error) {
@@ -94,10 +93,9 @@ public class EventCommand extends TaskCommand {
         return localDate;
     }
 
-    private LocalTime ParseTimeFromStr(String time) throws DukeException{
+    private LocalTime parseTimeFromStr(String time) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(INPUT_TIME_FORMAT);
         LocalTime localTime;
-        
         try {
             localTime = LocalTime.parse(time, formatter);
         } catch (DateTimeParseException error) {

@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 /**
  * Tasks without any date/time attached to it.
  *
- * <p>e.g., visit new theme park.</>
+ * <p>e.g., visit new theme park.</p>
  */
 public class Todo extends Task {
     private static final char TODO_SYMBOL = 'T';
@@ -13,7 +13,7 @@ public class Todo extends Task {
     /**
      * Default constructor for Todo.
      *
-     * <p>Calls super class, Task, default constructor.</>
+     * <p>Calls super class, Task, default constructor.</p>
      */
     public Todo() {
         super();

@@ -32,13 +32,16 @@ public class EditTaskMarkCommand extends Command {
      *
      * <p>Based on the task number given, will check whether the task exists.
      * If the task exists, will mark or unmark it.
-     * Afterwards, print out the updated task using the UI.</>
+     * Afterwards, print out the updated task using the UI.</p>
      *
      * @param input User input
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
      * @return Edited task description.
-     * @throws DukeException If no task description or invalid input (User must write the task number in int) or task index does not exist.
+     * @throws DukeException If:
+     * - No task description.
+     * - Invalid input (User must write the task number in int).
+     * - Task index does not exist.
      */
     @Override
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {

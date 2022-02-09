@@ -25,13 +25,16 @@ public class DeleteCommand extends Command {
      * Execution behavior of the delete command.
      *
      * <p>Delete existing task in the task list base on the task number
-     * given by user.</>
+     * given by user.</p>
      *
      * @param input User input
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
      * @return Delete task response.
-     * @throws DukeException If no task description or invalid input (User must write the task number in int) or task index does not exist.
+     * @throws DukeException If:
+     * - No task description.
+     * - Invalid input (User must write the task number in int).
+     * - Task index does not exist.
      */
     @Override
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {

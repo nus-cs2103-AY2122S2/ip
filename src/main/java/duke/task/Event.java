@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 /**
  * Event are tasks that start at a specific time and ends at a specific time.
  *
- * <p>e.g., team project meeting on 2/10/2019 2-4pm.</>
+ * <p>e.g., team project meeting on 2/10/2019 2-4pm.</p>
  */
 public class Event extends Task {
     private static final char EVENT_SYMBOL = 'E';
@@ -25,7 +25,7 @@ public class Event extends Task {
      * Default constructor for Event.
      *
      * <p>Calls super class, Task, default constructor.
-     * Sets eventDate and eventTime to default values 2020-12-12 and 2359.</>
+     * Sets eventDate and eventTime to default values 2020-12-12 and 2359.</p>
      */
     public Event() {
         super();

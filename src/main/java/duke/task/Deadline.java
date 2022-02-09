@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 /**
  * Deadline are tasks that need to be done before a specific date/time.
  *
- * <p>e.g., submit report by 11/10/2019 5pm.</>
+ * <p>e.g., submit report by 11/10/2019 5pm.</p>
  */
 public class Deadline extends Task {
     private static final char DEADLINE_SYMBOL = 'D';
@@ -25,7 +25,7 @@ public class Deadline extends Task {
      * Default constructor for Deadline.
      *
      * <p>Calls super class, Task, default constructor.
-     * Sets deadlineDate and deadlineTime to default values 2020-12-12 and 2359.</>
+     * Sets deadlineDate and deadlineTime to default values 2020-12-12 and 2359.</p>
      */
     public Deadline() {
         super();
@@ -57,8 +57,8 @@ public class Deadline extends Task {
      */
     @Override
     public String saveFileFormat() {
-        return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" 
-                + this.deadlineDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) + "|" 
+        return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|"
+                + this.deadlineDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) + "|"
                 + this.deadlineTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT)) + "\n";
     }
 

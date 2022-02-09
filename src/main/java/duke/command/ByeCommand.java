@@ -13,7 +13,7 @@ public class ByeCommand extends Command {
     /**
      * Bye Command constructor.
      *
-     * <p>Calls superclass Command constructor.</>
+     * <p>Calls superclass Command constructor.</p>
      *
      * @param key Keyword to call this command.
      */
@@ -24,7 +24,7 @@ public class ByeCommand extends Command {
     /**
      * Execution behavior of the bye command.
      *
-     * <p>Prints the bye response using the Duke UI.</>
+     * <p>Prints the bye response using the Duke UI.</p>
      *
      * @param input User input
      * @param taskList User tasklist.

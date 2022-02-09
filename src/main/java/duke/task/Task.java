@@ -6,7 +6,7 @@ import duke.util.Saving;
 /**
  * Abstracts class Task.
  *
- * <p>Any sub-task class will inherit. Can save and load.</>
+ * <p>Any sub-task class will inherit. Can save and load.</p>
  */
 public abstract class Task implements Saving, Loading {
     protected boolean isDone;
@@ -15,7 +15,7 @@ public abstract class Task implements Saving, Loading {
     /**
      * Default constructor for task.
      *
-     * <p>Set isDone to false and taskDescription to be empty.</>
+     * <p>Set isDone to false and taskDescription to be empty.</p>
      */
     public Task() {
         this.isDone = false;
@@ -25,7 +25,7 @@ public abstract class Task implements Saving, Loading {
     /**
      * Overloaded constructor for task.
      *
-     * <p>IsDone is still defaulted to false.</>
+     * <p>IsDone is still defaulted to false.</p>
      *
      * @param taskDescription Task description of task.
      */

@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import duke.exception.DukeException;
 
 /**
  * Contains the task list and basic operations involving it.
@@ -23,7 +23,7 @@ public class TaskList {
 
     /**
      * Overloaded constructor for TaskList.
-     * 
+     *
      * @param tasks Takes in an arraylist of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -101,7 +101,7 @@ public class TaskList {
 
     /**
      * Filters and gets the tasklist with only task that has the keyword.
-     * 
+     *
      * @param keyword Keyword we want the task to have.
      * @return TaskList with the keyword.
      */
@@ -112,7 +112,10 @@ public class TaskList {
         };
 
         //filter task
-        ArrayList<Task> filteredTasks = tasks.stream().filter(filterPredicate).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Task> filteredTasks = tasks
+                .stream()
+                .filter(filterPredicate)
+                .collect(Collectors.toCollection(ArrayList::new));
 
         return new TaskList(filteredTasks);
     }

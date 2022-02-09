@@ -1,10 +1,10 @@
 package duke.util;
 
-import duke.command.Command;
-import duke.exception.DukeException;
-
 import java.util.HashMap;
 import java.util.StringTokenizer;
+
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Deals with making sense of the user command.
@@ -16,7 +16,7 @@ public class Parser {
     /**
      * Parser constructor.
      *
-     * @param commands Hash map <String, command> of commands with their command call keyword as the key.
+     * @param commands Hashmap, takes in String, return command. Command call keyword is the key.
      */
     public Parser(HashMap<String, Command> commands) {
         this.commands = commands;

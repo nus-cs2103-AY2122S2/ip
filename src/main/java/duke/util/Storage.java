@@ -1,7 +1,5 @@
 package duke.util;
 
-import duke.exception.DukeException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,14 +7,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import duke.exception.DukeException;
+
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     // exception messages
     private static final String FILE_CANNOT_CREATE_MSG = "HEY! File or directory cannot be created!";
-    private static final String FILE_LOADING_ERROR_MSG
-            = "HEY! File load data cannot be read or may be corrupted! Your prev save may be gone, start anew.";
+    private static final String FILE_LOADING_ERROR_MSG =
+            "HEY! File load data cannot be read or may be corrupted! Your prev save may be gone, start anew.";
     private static final String CANNOT_WRITE_TO_FILE_MSG = "Cannot write data to file. What's up with that?";
     private final String fileDirPath;
     private final String fullFilePath;
@@ -40,7 +40,7 @@ public class Storage {
      * Initializes file and directory.
      *
      * <p>Creates file and directory if they don't exist yet base on the file name and directory path provided.
-     * If file and directory already exists, will just open the file.</>
+     * If file and directory already exists, will just open the file.</p>
      *
      * @throws DukeException If cannot create new file.
      */
@@ -69,7 +69,7 @@ public class Storage {
      * Load task list from file saved.
      *
      * @param list List to store the new objects created based on the data.
-     * @param factory Function<String, T> that takes in an input and returns a new object that extends Loading.
+     * @param factory Lambda that takes in a string and returns a new object that extends Loading.
      * @param <T> Object that should extend Loading.
      * @throws DukeException If there are issues reading the file or format of file is wrong.
      */

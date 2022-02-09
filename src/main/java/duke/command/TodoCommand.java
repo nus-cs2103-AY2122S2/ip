@@ -10,14 +10,14 @@ import duke.util.Storage;
  * Add todo command.
  *
  * <p>Extends from TaskCommand, as this class adds new todo task
- * to the task list</>
+ * to the task list</p>
  */
 public class TodoCommand extends TaskCommand {
 
     /**
      * Constructor for todo command to init values.
      *
-     * <p>Calls superclass TaskCommand constructor.</>
+     * <p>Calls superclass TaskCommand constructor.</p>
      *
      * @param key
      */
@@ -29,7 +29,7 @@ public class TodoCommand extends TaskCommand {
      * Execution behavior of the add todo command.
      *
      * <p>Create and add new todo task into the task list base on what the user inputs.
-     * Will also print the new todo task created through the UI.</>
+     * Will also print the new todo task created through the UI.</p>
      *
      * @param input User input
      * @param taskList User tasklist.

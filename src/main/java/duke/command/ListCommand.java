@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     /**
      * List Command constructor.
      *
-     * <p>Calls superclass Command constructor.</>
+     * <p>Calls superclass Command constructor.</p>
      *
      * @param key Keyword to call this command.
      */
@@ -24,7 +24,7 @@ public class ListCommand extends Command {
     /**
      * Execution behavior of the list command.
      *
-     * <p>Prints out the current tasks in the list using the Duke UI.</>
+     * <p>Prints out the current tasks in the list using the Duke UI.</p>
      *
      * @param input User input
      * @param taskList User tasklist.
