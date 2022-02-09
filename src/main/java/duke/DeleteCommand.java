@@ -1,4 +1,6 @@
 package duke;
+import exceptions.DukeException;
+
 import java.io.IOException;
 
 /**
@@ -20,8 +22,12 @@ public class DeleteCommand extends Command {
      * @return void
      * @throws IOException
      */
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
-        assert ranking > 0 && ranking <= tasklist.getLength() : "Please give a valid input (0 < input < number of tasks";
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws IOException, DukeException {
+        try {
+            assert ranking > 0 && ranking <= tasklist.getLength();
+        } catch (AssertionError e) {
+            throw new DukeException("Please input a valid index between 1 to " + tasklist.getLength());
+        }
 
         tasklist.delete(ranking);
         storage.writeToFile(tasklist);

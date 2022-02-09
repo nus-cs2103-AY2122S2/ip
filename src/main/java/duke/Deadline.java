@@ -47,11 +47,12 @@ public class Deadline extends Task {
 
             LocalDate today = LocalDate.now();
 
-            if (!taskByDate.isAfter(today)) {
+            try {
+                assert taskByDate.isAfter(today);
+            } catch (AssertionError e) {
                 throw new DukeDeadlineException("Deadline should be after today!");
             }
 
-            assert false;
             Deadline d_line = new Deadline(taskName, taskByDate);
             return d_line;
         } catch (AssertionError e) {
