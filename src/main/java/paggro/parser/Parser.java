@@ -18,7 +18,6 @@ import paggro.exception.PaggroException;
  */
 public class Parser {
     private static final String FOUR_SPACE = "    ";
-    
     /**
      * Parses the String of user input into a command.
      *
@@ -98,7 +97,8 @@ public class Parser {
         } else if (command.equals("bye")) {
             return new ByeCommand();
         } else { // command not recognised
-            final String invalidCommandError = "Come on... You don't actually expect me to understand that right... =.=";
+            final String invalidCommandError =
+                    "Come on... You don't actually expect me to understand that right... =.=";
             throw new PaggroException(FOUR_SPACE + invalidCommandError);
         }
     }
