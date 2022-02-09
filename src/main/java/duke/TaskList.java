@@ -151,6 +151,11 @@ public class TaskList {
         System.out.println(" in the list.");
     }
 
+    /**
+     * Finds tasks that match the keyword.
+     * 
+     * @param keyword keyword to search for a match.
+     */
     public void find(String keyword) {
         boolean isFound = false;
         for (int i = 1; i <= tasks.size(); i++) {

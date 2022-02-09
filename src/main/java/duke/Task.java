@@ -50,12 +50,19 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Searches for keyword in the task description.
+     *
+     * @param keyword keyword to search for a match.
+     * @return whether task matches keyword.
+     */
     public boolean match(String keyword) {
         return content.contains(keyword);
     }
 
     /**
      * Returns the description of the task.
+     *
      * @return description of the task.
      */
     public String getContent() {
