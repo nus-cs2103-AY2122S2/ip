@@ -28,7 +28,7 @@ public class Event extends Task {
      * @return Event object
      * @throws IOException
      */
-    public static Event setEvent(String input) {
+    public static Event setEvent(String input) throws DukeEventException {
         String eventName;
         String eventAt;
 
@@ -40,12 +40,12 @@ public class Event extends Task {
             Event e = new Event(eventName, eventAt);
             return e;
         } catch (Exception e) {
-            DukeEventException error = new DukeEventException(
+            throw new DukeEventException(
                     "OOPS!!! Please enter in format: event <event> /at <event venue> \n " +
                     "e.g. event Lesson /at Com1");
-            System.out.println(error.getMessage());
+//            System.out.println(error.getMessage());
         }
-        return null;
+//        return null;
     }
 
     @Override

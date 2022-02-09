@@ -46,21 +46,21 @@ public class Deadline extends Task {
 
             LocalDate today = LocalDate.now();
 
-            if (!taskByDate.isAfter(today)) {
-                throw new DukeDeadlineException("Deadline should be after today!");
+            try {
+                assert taskByDate.isAfter(today);
+            } catch (AssertionError e) {
+                throw new DukeDeadlineException(
+                        "OOPS!!! Deadline set should be after today");
             }
-
 
             Deadline d_line = new Deadline(taskName, taskByDate);
             return d_line;
         } catch (Exception e) {
-            DukeDeadlineException error = new DukeDeadlineException(
+            throw new DukeDeadlineException(
                                                     "OOPS!!! Please enter in format: deadline <task> /by <yyyy-mm-dd> \n " +
                                                     "e.g. deadline complete project /by 2022-12-24 \n" +
                                                     "Deadline set should be after today");
-            System.out.println(error.getMessage());
         }
-        return null;
     }
 
     /**
