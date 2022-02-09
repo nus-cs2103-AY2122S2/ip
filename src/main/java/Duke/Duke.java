@@ -51,6 +51,7 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+        assert scene != null : "Unable to load GUI";
 
         stage.setScene(scene);
         stage.show();
@@ -132,6 +133,9 @@ public class Duke extends Application {
      * Gets response from Duke in response to user's input.
      */
     protected String getResponse(String input) {
-        return commandList.execute(input, list, storage);
+        String response = commandList.action(input, parser, list, storage);
+        assert response != "" : "Error in getting response";
+
+        return response;
     }
 }
