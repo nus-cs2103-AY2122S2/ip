@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Loads the tasks saved in the data file.
+     *
      * @return An ArrayList of Task containing the saved tasks or an empty list if there are no tasks saved.
      * @throws DukeException If there are issues accessing the data file.
      */
@@ -74,40 +75,39 @@ public class Storage {
 
     /**
      * Updates the list of tasks saved in the data file.
-     * @param oldDetails The current save format of the task to be updated.
+     *
+     * @param oldDetails     The current save format of the task to be updated.
      * @param updatedDetails The new save format of the task to be updated.
      * @throws DukeException If there are issues accessing or writing to the data file .
      */
     public void updateSavedTasks(String oldDetails, String updatedDetails) throws DukeException {
         try {
-            FileWriter fw;
             if (oldDetails.isEmpty()) {
                 this.content.add(updatedDetails);
-                fw = new FileWriter(this.filePath, true);
+                FileWriter fw = new FileWriter(this.filePath, true);
                 fw.write(updatedDetails);
-            } else {
-                fw = new FileWriter(this.filePath);
-                StringBuilder sb = new StringBuilder();
-                if (updatedDetails.isEmpty()) {
-                    int indexToRemoveAt = 0;
-                    for (int i = 0; i < this.content.size(); i++) {
-                        if (!this.content.get(i).equals(oldDetails)) {
-                            sb.append(this.content.get(i) + System.lineSeparator());
-                        } else {
-                            indexToRemoveAt = i;
-                        }
-                    }
-                    this.content.remove(indexToRemoveAt);
-                } else {
-                    for (int i = 0; i < this.content.size(); i++) {
-                        if (this.content.get(i).equals(oldDetails)) {
-                            this.content.set(i, updatedDetails);
-                        }
-                        sb.append(this.content.get(i) + System.lineSeparator());
-                    }
-                }
-                fw.write(sb.toString());
+                fw.close();
+                return;
             }
+
+            FileWriter fw = new FileWriter(this.filePath);
+            StringBuilder sb = new StringBuilder();
+            int indexToRemoveAt = 0;
+            for (int i = 0; i < this.content.size(); i++) {
+                if (!updatedDetails.isEmpty() && this.content.get(i).equals(oldDetails)) {
+                    this.content.set(i, updatedDetails);
+                    sb.append(this.content.get(i) + System.lineSeparator());
+                }
+                else if (!updatedDetails.isEmpty() || !this.content.get(i).equals(oldDetails)) {
+                    sb.append(this.content.get(i) + System.lineSeparator());
+                } else if (updatedDetails.isEmpty()) {
+                    indexToRemoveAt = i;
+                }
+            }
+            if (updatedDetails.isEmpty()) {
+                this.content.remove(indexToRemoveAt);
+            }
+            fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
             throw new DukeException("Something went wrong with saving the tasks");
