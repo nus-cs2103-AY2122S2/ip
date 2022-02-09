@@ -9,6 +9,15 @@ import duke.task.Todo;
 
 public class TaskListTest {
     @Test
+    void taskList_addTask_success() throws DukeException {
+        TaskList taskList = new TaskList();
+        taskList.addTask(new Todo("Go for a jog"), false);
+        taskList.addTask(new Todo("Return book /by 2020-01-01"), false);
+        taskList.addTask(new Todo("Meeting /at 9 feb 2022"), false);
+        assertEquals(taskList.getSize(), 3);
+    }
+
+    @Test
     void taskList_getSize_success() throws DukeException {
         TaskList taskList = new TaskList();
         taskList.addTask(new Todo("Go for a jog"), false);
