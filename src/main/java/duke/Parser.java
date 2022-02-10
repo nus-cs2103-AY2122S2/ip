@@ -100,6 +100,17 @@ public class Parser {
                 System.out.println("Uh-oh! There's no event here!");
             }
             break;
+        case "find":
+            try {
+                if (command.equals("find")) {
+                    throw new DukeException("Uh-oh! There is nothing to find here!");
+                }
+                description = command.substring(firstWord.length() + 1);
+                return new FindCommand(firstWord, description);
+            } catch (DukeException e) {
+                ui.showMessage(e.getMessage());
+            }
+            break;
         }
         return new InvalidCommand("Please try again!");
     }
