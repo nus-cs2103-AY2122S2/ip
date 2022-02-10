@@ -20,5 +20,7 @@ public class CommandEmpty extends Command {
      * @param storage - not used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {}
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "";
+    }
 }

@@ -21,7 +21,7 @@ public class CommandHelp extends Command {
      * @param storage - not used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTutorial();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showTutorial();
     }
 }

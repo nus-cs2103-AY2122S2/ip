@@ -38,13 +38,16 @@ public class CommandToDo extends Command {
      * @param tasks - for TaskList to add ToDo Task
      * @param ui - to let user know that execution was successful
      * @param storage - to save updated TaskList
-     * @throws DukeException - thrown if error saving data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = new TaskToDo(this.name);
-        tasks.add(task);
-        storage.save(tasks);
-        ui.showTaskAdded();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            Task task = new TaskToDo(this.name);
+            tasks.add(task);
+            storage.save(tasks);
+            return ui.showTaskAdded();
+        } catch (DukeException e) {
+            return ui.showException(e);
+        }
     }
 }

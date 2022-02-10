@@ -54,21 +54,22 @@ public class CommandDeadline extends Command {
      * @param tasks - for TaskList to add Deadline Task
      * @param ui - to let user know that execution was successful
      * @param storage - to save updated TaskList
-     * @throws DukeException - thrown if error saving data or
-     *                         invalid date and/or time
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ManagerDate md = new ManagerDate(date);
         ManagerTime mt = new ManagerTime(time);
-
-        if (md.isDateValid() && mt.isTimeValid()) {
-            Task task = new TaskDeadline(this.name, this.date, this.time);
-            tasks.add(task);
-            storage.save(tasks);
-            ui.showTaskAdded();
-        } else {
-            throw new DukeException("Invalid date and/or time!");
+        try {
+            if (md.isDateValid() && mt.isTimeValid()) {
+                Task task = new TaskDeadline(this.name, this.date, this.time);
+                tasks.add(task);
+                storage.save(tasks);
+                return ui.showTaskAdded();
+            } else{
+                throw new DukeException("Invalid date and/or time!");
+            }
+        } catch (DukeException e) {
+            return ui.showException(e);
         }
     }
 }

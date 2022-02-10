@@ -44,13 +44,15 @@ public class CommandUnmark extends Command {
      * @param tasks - for TaskList to unmark Task
      * @param ui - to let user know that execution was successful
      * @param storage - to save updated TaskList
-     * @throws DukeException - thrown if TaskList does not contain tasks
-     *                         or error saving data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.unmark(this.taskNum);
-        storage.save(tasks);
-        ui.showTaskUnmarked();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            tasks.unmark(this.taskNum);
+            storage.save(tasks);
+            return ui.showTaskUnmarked();
+        } catch (DukeException e) {
+            return ui.showException(e);
+        }
     }
 }

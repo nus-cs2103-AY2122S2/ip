@@ -22,12 +22,15 @@ public class CommandClear extends Command {
      * @param tasks - for TaskList empty out
      * @param ui - to let user know that execution was successful
      * @param storage - to save updated TaskList
-     * @throws DukeException - thrown if error saving data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.clear();
-        storage.save(tasks);
-        ui.showClear();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            tasks.clear();
+            storage.save(tasks);
+            return ui.showClear();
+        } catch (DukeException e) {
+            return ui.showException(e);
+        }
     }
 }

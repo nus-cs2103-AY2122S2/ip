@@ -44,13 +44,15 @@ public class CommandMark extends Command {
      * @param tasks - for TaskList to mark Task
      * @param ui - to let user know that execution was successful
      * @param storage - to save updated TaskList
-     * @throws DukeException - thrown if tasklist does not contain tasks
-     *                         or error saving data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.mark(this.taskNum);
-        storage.save(tasks);
-        ui.showTaskMarked();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            tasks.mark(this.taskNum);
+            storage.save(tasks);
+            return ui.showTaskMarked();
+        } catch (DukeException e) {
+            return ui.showException(e);
+        }
     }
 }

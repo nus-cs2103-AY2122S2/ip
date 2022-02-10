@@ -1,7 +1,6 @@
 package duke.main;
 
 import duke.commands.Command;
-import duke.commands.CommandEmpty;
 import duke.exceptions.DukeException;
 import duke.system.Parser;
 import duke.system.Storage;
@@ -22,14 +21,13 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Sole constructor.
-     *
-     * @param filePath - the file path of the folder where
-     *                   the data of duke will be stored
+     * Overloaded constructor for javaFX integration.
+     * Constructor without params required for javaFX to run.
+     * Previous file path specification have been transferred here.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -39,43 +37,23 @@ public class Duke {
     }
 
     /**
-     * This method is used to run Duke.
-     * It first displays a simple greeting,
-     * followed by a simple tutorial of the commands
-     * It will then prompt the user for their input,
-     * then execute the respective command.
-     * This process of prompting for input and
-     * execution will repeat until the user inputs
-     * the exit command.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showGreeting();
-        ui.showLine();
-        ui.showTutorial();
-        ui.showLine();
-        boolean isExitCommand;
-        do {
-            Command c = new CommandEmpty();
-            try {
-                String fullCommand = ui.promptCommand();
-                c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                ui.showException(e);
-            } finally {
-                ui.showLine();
-            }
-            isExitCommand = c.isExit();
-        } while (!isExitCommand);
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showException(e);
+        }
     }
 
-    /**
-     * This is the main method of Duke.
-     * It is used to start the Duke program.
-     *
-     * @param args - not used
-     */
-    public static void main(String[] args) {
-        new Duke("data").run();
+    public String getGreeting() {
+        return ui.showGreeting();
+    }
+
+    public String getTutorial() {
+        return ui.showTutorial();
     }
 }

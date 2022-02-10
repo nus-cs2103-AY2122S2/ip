@@ -21,10 +21,13 @@ public class CommandList extends Command {
      * @param tasks - to obtain a String of all the consolidated tasks
      * @param ui - to print all the tasks
      * @param storage - not used
-     * @throws DukeException - thrown if TaskList does not contain tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showList(tasks.tasksAsString());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            return ui.showList(tasks.tasksAsString());
+        } catch (DukeException e) {
+            return ui.showException(e);
+        }
     }
 }

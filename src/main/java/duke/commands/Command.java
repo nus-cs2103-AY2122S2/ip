@@ -20,8 +20,7 @@ public abstract class Command {
      * @param ui - Ui for I/O related methods
      * @param storage - Storage for data saving method
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage)
-            throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Method that returns false for all Command objects,

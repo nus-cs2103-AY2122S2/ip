@@ -37,10 +37,13 @@ public class CommandFind extends Command {
      *                contain the keyword
      * @param ui - to print all the tasks that contains the keyword
      * @param storage - not used
-     * @throws DukeException - thrown if TaskList does not contain tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showResult(tasks.find(this.keyword));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            return ui.showResult(tasks.find(this.keyword));
+        } catch (DukeException e) {
+            return ui.showException(e);
+        }
     }
 }
