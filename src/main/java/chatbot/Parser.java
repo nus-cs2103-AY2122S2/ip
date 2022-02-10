@@ -33,7 +33,7 @@ public class Parser {
     * @see      TaskList
     * @see      Storage
     */
-    public static boolean parseText(
+    public static boolean parseTextAndWillContinue(
             String inputText, TaskList taskList, Storage storage) { // returns true if bot should continue parsing text
         inputText = inputText.trim();
         String[] inputStringArray = inputText.split(" ");
