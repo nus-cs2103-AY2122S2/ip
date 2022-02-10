@@ -1,0 +1,4 @@
+T,0,read book
+D,0,return book,03/12/2022 18:00
+E,0,project meeting,01/12/2021 18:00
+E,0,attent lecture ,20/02/2022 19:00
