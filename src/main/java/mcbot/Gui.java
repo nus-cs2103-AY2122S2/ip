@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import mcbot.exception.McBotException;
 import mcbot.task.Task;
 
-
 /**
- * Ui class is the user interface class.
- * This class handles inputs and outputs of the user.
+ * Gui class is the user interface class.
+ * This class handles outputs of the user.
  */
 public class Gui {
     private final String frameLine = "==========================================";
 
     /**
-     * Constructor for Ui. 
+     * Constructor for Gui. 
      */
-    public Gui() {}
+    public Gui() {
+    }
 
     /**
-     * Method to print the welcome line.
+     * Method to return the welcome line.
      */
     public String welcomeLine() {
         String logo = "\n"
@@ -34,60 +34,72 @@ public class Gui {
     }
 
     /**
-     * Method to print loading error if file is not found. 
+     * Method to return loading error if file is not found. 
      */
     public String showLoadingError() {
         return "File not found. I will create one for you";
     }
 
     /**
-     * Method to print goodbye line. 
+     * Method to return goodbye line.
+     * 
+     * @return The string for goodbye line.
      */
     public String byeLine() {
         return "Arghh! This ain't the last time ye see me lad";
     }
 
     /**
-     * Method to print when a task is marked done. 
+     * Method to return when a task is marked done.
+     * 
+     * @return The string for marking a task.
      */
     public String markLine() {
         return "Aye I'ave marked it done:";
     }
 
     /**
-     * Method to print when a marked task is marked done again. 
+     * Method to return when a marked task is marked done again.
+     * 
+     * @return The string for marking duplication.
      */
     public String markDuplication() {
         return "You fool!! It is already mark'd";
     }
 
     /**
-     * Method to print when a task is unmarked done. 
+     * Method to return when a task is unmarked done.
+     * 
+     * @return The string for unmarking a task.
      */
     public String unmarkLine() {
         return "Aye I'ave unmarked it:";
     }
 
     /**
-     * Method to print when an unmarked task is unmarked again. 
+     * Method to return when an unmarked task is unmarked again.
+     * 
+     * @return The string for unmarking duplication.
      */
     public String unmarkDuplication() {
         return "You fool!! It is already unmark'd";
     }
 
     /**
-     * Method to print the details of a task. 
+     * Method to return the details of a task.
      *
-     * @param t is the task to be printed. 
+     * @param t is the task to be returned.
+     * @return The string for the printed task.
      */
     public String printTask(Task t) {
         return t.toString();
     }
 
     /**
-     * Method to print all the task in the list. 
+     * Method to return all the task in the list.
      *
-     * @param arrList the list of task to be printed. 
+     * @param arrList the list of task to be returned.
+     * @return The string for printing a list of task.
      */
     public String listTask(ArrayList<Task> arrList) {
         int i = 1;
@@ -100,10 +112,11 @@ public class Gui {
     }
 
     /**
-     * Method to print when a ToDo task is added successfully. 
+     * Method to return when a ToDo task is added successfully.
      *
-     * @param t is the ToDo task to be added. 
+     * @param t is the ToDo task to be added.
      * @param size is the total number of tasks saved in the list. 
+     * @return The string for the added ToDo task.
      */
     public String addTodoLine(Task t, int size) {
         StringBuilder sb = new StringBuilder("Got 'em down as todo:\n");
@@ -113,9 +126,10 @@ public class Gui {
     }
 
     /**
-     * Method to print error in the case of a mark command. 
+     * Method to return error in the case of a mark command.
      *
-     * @param error is the type of error thrown. 
+     * @param error is the type of error thrown.
+     * @return The string for the error when marking.
      */
     public String markError(String error) {
         switch(error) {
@@ -131,9 +145,10 @@ public class Gui {
     }
 
     /**
-     * Method to print error in the case of a delete command. 
+     * Method to return error in the case of a delete command.
      *
-     * @param error is the type of error thrown. 
+     * @param error is the type of error thrown.
+     * @return The string for deletion error.
      */
     public String deleteError(String error) {
         switch (error) {
@@ -147,9 +162,10 @@ public class Gui {
     }
 
     /**
-     * Method to print error in the case of adding a Task command. 
+     * Method to return error in the case of adding a Task command.
      *
-     * @param error is the type of error thrown. 
+     * @param error is the type of error thrown.
+     * @return The string for task error.
      */
     public String taskError(String error) {
         switch (error) {
@@ -169,10 +185,11 @@ public class Gui {
     }
 
     /**
-     * Method to print when a Deadline task is added successfully. 
+     * Method to return when a Deadline task is added successfully.
      *
-     * @param t is the deadline task to be added. 
-     * @param size is the total number of tasks saved in the list. 
+     * @param t is the deadline task to be added.
+     * @param size is the total number of tasks saved in the list.
+     * @return The string for adding deadline task.
      */
     public String addDeadlineLine(Task t, int size) {
         StringBuilder sb = new StringBuilder("Got 'em down as deadline:\n");
@@ -183,19 +200,21 @@ public class Gui {
     }
 
     /**
-     * Method to print error.
+     * Method to return error.
      *
-     * @param e is the exception thrown.  
+     * @param e is the exception thrown.
+     * @return The string for printing error.
      */
     public String printError(McBotException e) {
         return e.getMessage();
     }
 
     /**
-     * Method to print when a Event task is added successfully. 
+     * Method to return when a Event task is added successfully.
      *
-     * @param t is the event task to be added. 
-     * @param size is the total number of tasks saved in the list. 
+     * @param t is the event task to be added.
+     * @param size is the total number of tasks saved in the list.
+     * @return The string for adding event task.
      */
     public String addEventLine(Task t, int size) {
         StringBuilder sb = new StringBuilder("Got 'em down as event:\n");
@@ -205,29 +224,16 @@ public class Gui {
     }
 
     /**
-     * Method to print when a task is deleted successfully.
+     * Method to return when a task is deleted successfully.
      *
-     * @param t is the task to be deleted. 
-     * @param size is the total number of tasks saved in the list. 
+     * @param t is the task to be deleted.
+     * @param size is the total number of tasks saved in the list.
+     * @return The string for deleting a task.
      */
     public String deleteLine(Task t, int size) {
         StringBuilder sb = new StringBuilder("Aye, I 'ave deleted it\n");
         sb.append(t.toString() + "\n");
         sb.append("Ye now have " + size + " tasks in list lad");
         return sb.toString();
-    }
-
-    /**
-     * Method to print when the search found no match for any tasks. 
-     */
-    public String noMatch() {
-        return "No matching task found, sorry mate";
-    }
-
-    /**
-     * Method to print when the search successfully found at least 1 matching task. 
-     */
-    public String printFind() {
-        return "I'ave found this: ";
     }
 }
