@@ -33,6 +33,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return " [D]" + super.toString() + "\t (by " + DateFormatter.formatDateInLongForm(deadline) + ")";
+        return " [D]"
+                + super.toString()
+                + "\t (by " + DateFormatter.formatDateInLongForm(deadline) + ")";
     }
 }
