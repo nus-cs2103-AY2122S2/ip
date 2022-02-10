@@ -1,14 +1,6 @@
 package pyke.util;
 
-import pyke.command.AddDeadlineCommand;
-import pyke.command.AddEventCommand;
-import pyke.command.AddTodoCommand;
-import pyke.command.Command;
-import pyke.command.DelCommand;
-import pyke.command.ExitCommand;
-import pyke.command.FindCommand;
-import pyke.command.ListCommand;
-import pyke.command.MarkCommand;
+import pyke.command.*;
 import pyke.exception.InvalidCommandException;
 
 
@@ -27,6 +19,8 @@ public class Parser {
             return new DelCommand(Integer.parseInt(tokenList[1]));
         case "todo":
             return new AddTodoCommand(command.substring(5));
+        case "help":
+            return new HelpCommand();
         case "deadline":
             return new AddDeadlineCommand(
                     command.substring(9).split("/")[0],
