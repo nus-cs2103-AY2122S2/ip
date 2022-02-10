@@ -17,6 +17,7 @@ import duke.ui.Ui;
 public class AddCommand extends Command {
 
     private Action action;
+    private String output = "";
     private String input;
 
     /**
@@ -41,50 +42,82 @@ public class AddCommand extends Command {
         String output = "";
         switch (action) {
         case TODO:
-            try {
-                String description = Parser.parseDescription(this.input);
-                tasks.add(new Todo(description));
-                storage.save(tasks);
-                output = ui.printTaskAdded(tasks);
-            } catch (InvalidArgumentException e) {
-                output = ui.showError(e.getMessage());
-            } catch (IOException e) {
-                output = ui.showError(Messages.SAVE_ERROR);
-            } finally {
-                break;
-            }
+            return addTodo(tasks, ui, storage);
         case DEADLINE:
-            //deadline do hw /by no idea :-p
-            try {
-                String[] deadlineFields = Parser.parseDeadline(input);
-                tasks.add(new Deadline(deadlineFields[0], deadlineFields[1]));
-                storage.save(tasks);
-                output = ui.printTaskAdded(tasks);
-            } catch (InvalidArgumentException e) {
-                output = ui.showError(e.getMessage());
-            } catch (DateTimeParseException e) {
-                output = ui.showError(Messages.UNKNOWN_DATETIME);
-            } catch (IOException e) {
-                output = ui.showError(Messages.SAVE_ERROR);
-            } finally {
-                break;
-            }
+            return addDeadline(tasks, ui, storage);
         case EVENT:
-            //event project meeting /at Mon 2-4pm
-            try {
-                String[] eventFields = Parser.parseEvent(input);
-                tasks.add(new Event(eventFields[0], eventFields[1]));
-                storage.save(tasks);
-                output = ui.printTaskAdded(tasks);
-            } catch (InvalidArgumentException e) {
-                output = ui.showError(e.getMessage());
-            } catch (IOException e) {
-                output = ui.showError(Messages.SAVE_ERROR);
-            } finally {
-                break;
-            }
+            return addEvent(tasks, ui, storage);
         default:
             //do nothing
+        }
+        return output;
+    }
+
+    /**
+     * Adds a Todo task.
+     *
+     * @param tasks TaskList that command is executed on.
+     * @param ui User interface that interacts with the user.
+     * @param storage Storage that saves and loads tasks after Command is executed.
+     * @return resultant string to output to user.
+     */
+    public String addTodo(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            String description = Parser.parseDescription(this.input);
+            tasks.add(new Todo(description));
+            storage.save(tasks);
+            output = ui.printTaskAdded(tasks);
+        } catch (InvalidArgumentException e) {
+            output = ui.showError(e.getMessage());
+        } catch (IOException e) {
+            output = ui.showError(Messages.SAVE_ERROR);
+        }
+        return output;
+    }
+
+    /**
+     * Adds a Deadline Task.
+     *
+     * @param tasks TaskList that command is executed on.
+     * @param ui User interface that interacts with the user.
+     * @param storage Storage that saves and loads tasks after Command is executed.
+     * @return resultant string to output to user.
+     */
+    public String addDeadline(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            String[] deadlineFields = Parser.parseDeadline(input);
+            tasks.add(new Deadline(deadlineFields[0], deadlineFields[1]));
+            storage.save(tasks);
+            output = ui.printTaskAdded(tasks);
+        } catch (InvalidArgumentException e) {
+            output = ui.showError(e.getMessage());
+        } catch (DateTimeParseException e) {
+            output = ui.showError(Messages.UNKNOWN_DATETIME);
+        } catch (IOException e) {
+            output = ui.showError(Messages.SAVE_ERROR);
+        }
+        return output;
+    }
+
+    /**
+     * Adds an Event task.
+     * 
+     * @param tasks TaskList that command is executed on.
+     * @param ui User interface that interacts with the user.
+     * @param storage Storage that saves and loads tasks after Command is executed.
+     * @return resultant string to output to user.
+     */
+    public String addEvent(TaskList tasks, Ui ui, Storage storage) {
+        //event project meeting /at Mon 2-4pm
+        try {
+            String[] eventFields = Parser.parseEvent(input);
+            tasks.add(new Event(eventFields[0], eventFields[1]));
+            storage.save(tasks);
+            output = ui.printTaskAdded(tasks);
+        } catch (InvalidArgumentException e) {
+            output = ui.showError(e.getMessage());
+        } catch (IOException e) {
+            output = ui.showError(Messages.SAVE_ERROR);
         }
         return output;
     }
