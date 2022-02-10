@@ -44,13 +44,13 @@ public class Ui {
         return this.constructResponse(message);
     }
 
-    public void showAddTask(Task task, int totalTasksBeforeAdd) {
-        this.output.println(this.constructAddTaskResponse(task, totalTasksBeforeAdd));
+    public void showAddTask(Task task, int totalTasksAfterAdd) {
+        this.output.println(this.constructAddTaskResponse(task, totalTasksAfterAdd));
     }
 
-    private String constructAddTaskResponse(Task task, int totalTasksBeforeAdd) {
+    private String constructAddTaskResponse(Task task, int totalTasksAfterAdd) {
         final String message = "Got it. I've added this task:\n  " + task
-                + "\nNow you have " + (totalTasksBeforeAdd + 1) + " tasks in the list.";
+                + "\nNow you have " + totalTasksAfterAdd + " tasks in the list.";
         return this.constructResponse(message);
     }
 
@@ -72,13 +72,13 @@ public class Ui {
         return this.constructResponse(message);
     }
 
-    public void showDeleteTask(Task task, int totalTasksBeforeDelete) {
-        this.output.println(this.constructDeleteTaskResponse(task, totalTasksBeforeDelete));
+    public void showDeleteTask(Task task, int totalTasksAfterDelete) {
+        this.output.println(this.constructDeleteTaskResponse(task, totalTasksAfterDelete));
     }
 
-    private String constructDeleteTaskResponse(Task task, int totalTasksBeforeDelete) {
+    private String constructDeleteTaskResponse(Task task, int totalTasksAfterDelete) {
         final String response = "Noted. I've removed this task:\n  " + task
-                + "\nNow you have " + (totalTasksBeforeDelete - 1) + " tasks in the list.";
+                + "\nNow you have " + totalTasksAfterDelete + " tasks in the list.";
         return this.constructResponse(response);
     }
 
