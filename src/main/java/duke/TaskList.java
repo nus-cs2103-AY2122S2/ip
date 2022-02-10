@@ -2,6 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * TaskList class which stores Task objects in an ArrayList.
  */

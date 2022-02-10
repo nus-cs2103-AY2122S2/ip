@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 /**
  * Ui class to interact with the user in console.
  */

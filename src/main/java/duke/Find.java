@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 /**
  * Find class to act as a searcher for keywords.
  */

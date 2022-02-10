@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Todo class to store todo type of task.
