@@ -38,7 +38,18 @@ public class Duke {
      * @return the welcome message and the loaded data as a String.
      */
     public String loadDataAndWelcome() {
-        return ui.showWelcome() + storage.loadData(taskList, ui);
+        String message = ui.showWelcome();
+
+        try {
+            storage.loadData(taskList);
+        } catch (DukeException e) {
+            message += ui.showLoadingError(e.getMessage());
+            return message;
+        }
+
+        message += ui.showLoadedData(taskList);
+        return message;
+
     }
 
     /**
