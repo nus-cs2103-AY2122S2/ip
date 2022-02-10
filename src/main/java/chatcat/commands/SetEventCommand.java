@@ -45,8 +45,8 @@ public class SetEventCommand extends Command {
         }
 
         String[] split = EVENT.split("/at ");
-
         String eventStr = split[0].substring(6);
+      
         DateTimeUtil dateTimeUtil = new DateTimeUtil(split[1]);
         event = new Event(eventStr, dateTimeUtil.getTime());
 

@@ -12,42 +12,47 @@ public class Parser {
         this.taskList = taskList;
     }
 
-    public void parseTaskList(String input) {
+    public String parseTask(String input) {
         String[] splitInput = input.split(" ");
+        String output = "";
 
         try {
             switch(splitInput[0]) {
             case "list":
-                taskList.listTasks();
+                output = taskList.listTasks();
                 break;
             case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
+                output = taskList.exitChatCat();
                 break;
             case "mark":
-                taskList.mark(input);
+                output = taskList.mark(input);
                 break;
             case "unmark":
-                taskList.unmark(input);
+                output = taskList.unmark(input);
                 break;
             case "todo":
-                taskList.setTodo(input);
+                output = taskList.setTodo(input);
                 break;
             case "deadline":
-                taskList.setDeadline(input);
+                output = taskList.setDeadline(input);
                 break;
             case "event":
-                taskList.setEvent(input);
+                output = taskList.setEvent(input);
                 break;
             case "delete":
-                taskList.delete(input);
+                output = taskList.delete(input);
+                break;
+            case "find":
+                output = taskList.filter(input);
                 break;
             default:
-                throw new ChatCatException(
-                        "OOPS!!! I'm sorry, but I don't know what that means");
+                throw new ChatCatException("OOPS!!! I'm sorry, but I don't know what that means");
             }
         } catch (ChatCatException wrf) {
             wrf.printStackTrace();
         }
+
+        return output;
     }
 
     public boolean isBye(String command) {

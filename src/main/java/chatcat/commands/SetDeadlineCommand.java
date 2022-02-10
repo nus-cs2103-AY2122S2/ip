@@ -45,8 +45,8 @@ public class SetDeadlineCommand extends Command {
         }
 
         String[] split = DEADLINE.split("/by ");
-
         String deadlineStr = split[0].substring(9);
+      
         DateTimeUtil dateTimeUtil = new DateTimeUtil(split[1]);
         deadline = new Deadline(deadlineStr, dateTimeUtil.getTime());
 

@@ -1,7 +1,7 @@
 package chatcat.tasks;
 
 /**
- * The default Todo class. Inherited from {@code Task}.
+ * The default Todo class inherited from {@code Task}.
  *
  * @see Task
  */

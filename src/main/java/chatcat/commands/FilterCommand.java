@@ -38,6 +38,7 @@ public class FilterCommand extends Command {
 
         /** Searches the task list and outputs tasks with keyword in filteredList **/
         String[] input = KEYWORD.split(" ");
+      
         super.tasks.forEach(task -> {
             if (task.containsKeyword(input[1])) {
                 filteredList.add(task);

@@ -2,52 +2,41 @@ package chatcat.tasklist;
 
 import java.util.ArrayList;
 
-import chatcat.tasks.Deadline;
-import chatcat.tasks.Event;
-import chatcat.util.UI;
 import chatcat.tasks.Task;
-import chatcat.tasks.Todo;
 import chatcat.util.WriteToFile;
 import chatcat.chatcatexception.ChatCatException;
+import chatcat.commands.SetDeadlineCommand;
+import chatcat.commands.SetEventCommand;
+import chatcat.commands.SetTodoCommand;
+import chatcat.commands.ListTaskCommand;
+import chatcat.commands.MarkCommand;
+import chatcat.commands.UnmarkCommand;
+import chatcat.commands.DeleteCommand;
+import chatcat.commands.FilterCommand;
 
 /**
  * Handles writing and reading to list of tasks represented as an {@code ArrayList}.
  * Allows clients to unmark, mark, add and delete tasks. Allows users to view task list.
  */
 public class TaskList {
-    ArrayList<Task> Tasks = new ArrayList<>();
+    ArrayList<Task> tasks;
     WriteToFile writeToFile;
-    UI ui;
 
     /**
      * Creates {@code TaskList} object containing an empty Task List {@code ArrayList}.
-     * Creates {@code UI} object.
+     * Creates {@code WriteToFile} object.
      */
     public TaskList() {
-        ui = new UI();
         writeToFile = new WriteToFile();
+        tasks = writeToFile.toRead();
     }
 
     /**
      * Prints out all tasks in Task List.
      *
      * @see WriteToFile
-     * @see Task
+     * @see ListTaskCommand
      */
-<<<<<<< Updated upstream
-    public void listTasks() {
-        Tasks = writeToFile.toRead();
-
-        if (Tasks.size() == 0) {
-            System.out.println("empty list!");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < Tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + Tasks.get(i));
-            }
-        }
-        System.out.println("");
-=======
     public String listTasks() {
         ListTaskCommand listTasks = new ListTaskCommand(tasks, writeToFile);
         listTasks.getTaskList();
@@ -62,148 +51,112 @@ public class TaskList {
      */
     public String exitChatCat() {
         return "Bye. Hope to see you again soon!";
->>>>>>> Stashed changes
     }
 
     /**
      * Marks task at specified location.
      *
      * @param str containing the task to be marked.
-     * @see UI
-     * @see Task
+     * @return marked task {@code Task} in String.
      * @see WriteToFile
+     * @see MarkCommand
      */
-    public void mark(String str) {
-        String[] input = str.split(" ");
-        int taskID = Integer.parseInt(input[1]) - 1;
+    public String mark(String str) {
+        MarkCommand markCommand = new MarkCommand(tasks, writeToFile, str);
+        markCommand.mark();
 
-        Tasks.get(taskID).setDone();
-        writeToFile.toWrite(Tasks);
-
-        ui.printOutPut("Nice! I've marked this task as done:\n"
-                + Tasks.get(taskID));
+        return markCommand.toString();
     }
 
     /**
      * Unmark task at specified location.
      *
      * @param str containing the task to be marked.
-     * @see UI
-     * @see Task
+     * @return unmarked task {@code Task} in String.
      * @see WriteToFile
+     * @see UnmarkCommand
      */
-    public void unmark(String str) {
-        String[] input = str.split(" ");
-        int taskID = Integer.parseInt(input[1]) - 1;
+    public String unmark(String str) {
+        UnmarkCommand unmarkCommand = new UnmarkCommand(tasks, writeToFile, str);
+        unmarkCommand.unmark();
 
-        Tasks.get(taskID).setUnDone();
-        writeToFile.toWrite(Tasks);
-
-        ui.printOutPut("OK, I've marked this task as not done yet:\n"
-                + Tasks.get(taskID));
+        return unmarkCommand.toString();
     }
 
     /**
      * Creates a todo {@code todo} object and appends the object at the end of {@code taskList}.
      *
      * @param str containing the task to be added.
+     * @return created todo task {@code Task} in String.
      * @throws ChatCatException if description of todo is empty.
-     * @see UI
-     * @see Todo
      * @see WriteToFile
+     * @see SetTodoCommand
      */
-    public void setTodo(String str) throws ChatCatException {
-        String[] input = str.split(" ");
-        if (input.length == 1) {
-            throw new ChatCatException(
-                    "OOPS!!! The description of a todo cannot be empty.");
-        }
+    public String setTodo(String str) throws ChatCatException {
+        SetTodoCommand setTodoCommand = new SetTodoCommand(tasks, writeToFile, str);
+        setTodoCommand.setTodo();
 
-        Todo todo = new Todo(str.substring(5));
-        Tasks.add(todo);
-        writeToFile.toWrite(Tasks);
-
-        ui.printOutPut("Got it. I've added this task:\n"
-                + todo);
-        ui.printOutPut("Now you have "
-                + Tasks.size() + " tasks in the list.");
+        return setTodoCommand.toString();
     }
 
     /**
      * Creates a deadline {@code Deadline} object and appends the object at the end of {@code taskList}.
      *
      * @param str containing the task to be added.
+     * @return created deadline task {@code Task} in String.
      * @throws ChatCatException if description of deadline is empty.
-     * @see UI
-     * @see Deadline
      * @see WriteToFile
+     * @see SetDeadlineCommand
      */
-    public void setDeadline(String str) throws ChatCatException {
-        String[] input = str.split(" ");
+    public String setDeadline(String str) throws ChatCatException {
+        SetDeadlineCommand setDeadlineCommand = new SetDeadlineCommand(tasks, writeToFile, str);
+        setDeadlineCommand.setDeadline();
 
-        if (input.length == 1) {
-            throw new ChatCatException("OOPS!!! The description of a deadline cannot be empty.");
-        }
-
-        String[] split = str.split("/by ");
-        Deadline deadline = new Deadline(split[0].substring(9), split[1]);
-
-        Tasks.add(deadline);
-        writeToFile.toWrite(Tasks);
-
-        ui.printOutPut("Got it. I've added this task:\n"
-                + deadline);
-        ui.printOutPut("Now you have "
-                + Tasks.size() + " tasks in the list.");
+        return setDeadlineCommand.toString();
     }
 
     /**
      * Creates a deadline {@code Event} object and appends the object at the end of {@code taskList}.
      *
      * @param str containing the task to be added.
+     * @return created Event task {@code Task} in String.
      * @throws ChatCatException if description of event is empty.
-     * @see UI
-     * @see Event
      * @see WriteToFile
+     * @see SetEventCommand
      */
-    public void setEvent(String str) throws ChatCatException {
-        String[] input = str.split(" ");
+    public String setEvent(String str) throws ChatCatException {
+        SetEventCommand setEventCommand = new SetEventCommand(tasks, writeToFile, str);
+        setEventCommand.setEvent();
 
-        if (input.length == 1) {
-            throw new ChatCatException("OOPS!!! The description of a event cannot be empty.");
-        }
-
-        String[] split = str.split("/at ");
-        Event event = new Event(split[0].substring(6), split[1]);
-
-        Tasks.add(event);
-        writeToFile.toWrite(Tasks);
-
-        ui.printOutPut("Got it. I've added this task:\n"
-                + event);
-        ui.printOutPut("Now you have "
-                + Tasks.size() + " tasks in the list." + "\n");
+        return setEventCommand.toString();
     }
 
     /**
      * Deletes a specified task {@code Task} in the tasklist {@code taskList}.
      *
      * @param str containing the task to be deleted.
-     * @see UI
-     * @see Task
+     * @return deleted task {@code Task} in String.
      * @see WriteToFile
+     * @see DeleteCommand
      */
-    public void delete(String str) {
-        Tasks = writeToFile.toRead();
-        String[] input = str.split(" ");
-        int toDelete = Integer.parseInt(input[1]) - 1;
+    public String delete(String str) {
+        DeleteCommand deleteCommand = new DeleteCommand(tasks, writeToFile, str);
+        deleteCommand.delete();
 
-        Task removed = Tasks.remove(toDelete);
-        writeToFile.toWrite(Tasks);
+        return deleteCommand.toString();
+    }
 
-        ui.printOutPut("Noted. I've removed this task:\n"
-                + removed);
-        ui.printOutPut("Now you have " + Tasks.size()
-                + " tasks in the list.");
+    /**
+     * Displays the tasks {@code Task} in tasklist {@code taskList} that includes a specified keyword.
+     *
+     * @param str containing the keyword.
+     * @return a representation in string of filtered {@code Task} tasks that includes on keyword.
+     * @see FilterCommand
+     */
+    public String filter(String str) throws ChatCatException {
+        FilterCommand filterCommand = new FilterCommand(tasks, writeToFile, str);
+        filterCommand.filter();
+
+        return filterCommand.toString();
     }
 }

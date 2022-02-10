@@ -2,17 +2,11 @@ package chatcat.tasks;
 
 import java.io.Serializable;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-
 /**
- * The default Deadline class. Inherited from {@code Task}.
- *
- * @see DateTimeFormatter
- * @see DateTimeFormatterBuilder
+ * The default Task class.
  */
 public class Task implements Serializable {
-    private final String task;
+    private final String TASK;
     private boolean isDone;
 
     /**
@@ -21,7 +15,7 @@ public class Task implements Serializable {
      * @param task the description of this task.
      */
     public Task(String task) {
-        this.task = task;
+        this.TASK = task;
         this.isDone = false;
     }
 
@@ -35,7 +29,7 @@ public class Task implements Serializable {
     /**
      * Unmarks a task {@code Task} as not completed.
      */
-    public void setUnDone() {
+    public void setUndone() {
         isDone = false;
     }
 
@@ -49,12 +43,21 @@ public class Task implements Serializable {
     }
 
     /**
+     * Returns a true if task contains a keyword, else returns false.
+     *
+     * @return true if task contains a keyword, else returns false.
+     */
+    public boolean containsKeyword(String str) {
+        return TASK.contains(str);
+    }
+
+    /**
      * Returns a representation in string of {@code Task} task.
      *
      * @return a representation in string of {@code Task} task.
      */
     @Override
     public String toString() {
-        return getStatus() + " " + task;
+        return getStatus() + " " + TASK;
     }
 }
