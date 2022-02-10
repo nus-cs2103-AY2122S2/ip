@@ -1,8 +1,10 @@
 package duke;
 
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 /**
  * Duke Chat Bot that allows users to track tasks.
@@ -10,22 +12,18 @@ import java.util.ArrayList;
  * @author Benjamin Koh
  */
 
-public class Duke {
+public class Duke  {
 
     private static TaskList taskList;
 
     /**
      * Main method. Takes in user input and updates list, interacts with user
      *
-     * @param args The user inputs
      */
 
-    public static void main(String[] args) {
+    public Duke() {
         Ui.welcome();
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
         taskList = new TaskList();
-
         try {
             Storage.initialise();
         } catch (IOException e) {
@@ -37,17 +35,29 @@ public class Duke {
             e.printStackTrace();
         }
 
-        while (!input.equals("bye")) {
-            try {
-                Parser.parse(input, taskList);
-            } catch (DukeException | IOException e) {
-                System.out.println(e);
-            } finally {
-                input = scanner.nextLine();
-            }
-        }
 
-        scanner.close();
-        Ui.exit();
     }
+
+    String getResponse(String input) {
+        input = input.toLowerCase().trim();
+        assert (!input.equals("")): "Please enter an input.";
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            PrintStream printStream = new PrintStream(outputStream);
+
+            PrintStream oldStream = System.out;
+
+            System.setOut(printStream);
+
+            Parser.parse(input, taskList);
+
+            System.out.flush();
+            System.setOut(oldStream);
+            return outputStream.toString();
+        } catch (DukeException | IOException e) {
+            System.out.println(e);
+        }
+        return "Invalid input.";
+    }
+
 }

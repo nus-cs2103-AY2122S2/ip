@@ -70,9 +70,9 @@ public class Storage {
                 LocalDateTime eventTime = LocalDateTime.parse(eventDate, displayFormat);
                 taskToAdd = new Event(eventDesc, eventTime.format(inputFormat));
             } else if (taskLetter.equals("D")) {
-                int deadlineAtIndex = descriptionWithTime.indexOf(" (by:");
+                int deadlineAtIndex = descriptionWithTime.indexOf(" (by: ");
                 String deadlineDesc = descriptionWithTime.substring(0, deadlineAtIndex);
-                int deadlineDateIndex = deadlineAtIndex + 4;
+                int deadlineDateIndex = deadlineAtIndex + 6;
                 String deadlineDate = descriptionWithTime.substring(deadlineDateIndex, descriptionWithTimeIndex).trim();
                 LocalDateTime deadlineTime = LocalDateTime.parse(deadlineDate, displayFormat);
                 taskToAdd = new Deadline(deadlineDesc, deadlineTime.format(inputFormat));
