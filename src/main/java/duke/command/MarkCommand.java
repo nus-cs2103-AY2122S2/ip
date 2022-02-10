@@ -20,6 +20,7 @@ public class MarkCommand extends Command {
      * @param id Index of the task that is to be marked in the TaskList.
      */
     public MarkCommand(String id) {
+        assert id != null : "No task ID was provided to be marked";
         markId = id;
     }
 

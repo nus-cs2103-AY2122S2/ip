@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
      * @param id Index of the task that the user would like to delete.
      */
     public DeleteCommand(String id) {
+        assert id != null : "No task ID was provided to be deleted";
         deleteId = id;
     }
 
