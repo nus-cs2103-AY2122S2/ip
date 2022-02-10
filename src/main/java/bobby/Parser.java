@@ -7,8 +7,13 @@ import java.time.format.DateTimeParseException;
  * understood by the program and executes them accordingly.
  */
 public class Parser {
-    public Parser() {
 
+    private static String splitInputToCommand(String input) {
+        return input.split(" ", 2)[0];
+    }
+
+    private static int splitInputToIndex(String input) {
+        return Integer.parseInt(input.split(" ", 2)[1]) - 1;
     }
 
     /**
@@ -20,8 +25,7 @@ public class Parser {
      */
     public static String parse(TaskList tasks, String userInput, Bobby bobby) {
         String result = "Error, result uninitialized.";
-        String[] inputs = userInput.split(" ", 2);
-        String command = inputs[0];
+        String command = splitInputToCommand(userInput);
         try {
             switch (Commands.valueOf(command.toUpperCase())) {
             case BYE:
@@ -33,7 +37,7 @@ public class Parser {
                 break;
             case MARK:
                 try {
-                    int i = Integer.parseInt(inputs[1]) - 1;
+                    int i = splitInputToIndex(userInput);
                     result = tasks.mark(i);
                 } catch (BobbyException e) {
                     System.out.println(e);
@@ -41,7 +45,7 @@ public class Parser {
                 break;
             case UNMARK:
                 try {
-                    int k = Integer.parseInt(inputs[1]) - 1;
+                    int k = splitInputToIndex(userInput);
                     result = tasks.unmark(k);
                 } catch (BobbyException e) {
                     System.out.println(e);
@@ -80,7 +84,7 @@ public class Parser {
             case FIND:
                 String[] queries = inputs[1].split(" ");
                 if (queries.length > 1) {
-                    result = "Bobby can only search using 1 keyword.";
+                    result = Ui.findError();
                 } else {
                     String query = inputs[1];
                     result = tasks.find(query);

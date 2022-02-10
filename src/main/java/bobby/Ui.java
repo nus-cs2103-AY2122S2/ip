@@ -47,6 +47,10 @@ public class Ui {
         return t.toString();
     }
 
+    public static String findError() {
+        return "Bobby can only search using 1 keyword.";
+    }
+
     public static String printAddedTask(Task t, ArrayList<Task> taskArray) {
         return "Bobby heard: " + t.toString() + System.lineSeparator() + "Bobby remembers "
                 + taskArray.size() + " tasks(s).";
