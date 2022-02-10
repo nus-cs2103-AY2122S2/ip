@@ -67,6 +67,7 @@ public class Ui {
      * @param n Current size of list
      */
     public String addTask(Task t, int n) {
+        assert t != null : "Task that is added cannot be null";
         String msg = "\nDuke: Got it. I've added this task:\n      "
                 + t + "\n      Now you have "
                 + n + " tasks in the list.\n";
@@ -74,15 +75,17 @@ public class Ui {
     }
 
     /**
-     * Prints out message for deleting Task from the list
+     * Prints out message for deleting Task from the list. The number of tasks left is after deletion.
      * @param t
      * @param n
      * @return
      */
     public String deleteTask(Task t, int n) {
+        assert t != null : "Task to be deleted cannot be null";
+        int numleft = n - 1;
         String msg = "\nDuke: Noted. I've removed this task:\n      "
                 + t + "\n      Now you have "
-                + n + " tasks in the list.\n";
+                + numleft + " tasks in the list.\n";
         return msg;
     }
 
