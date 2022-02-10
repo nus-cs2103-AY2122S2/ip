@@ -67,8 +67,8 @@ public class Storage {
             FileWriter myObj = new FileWriter(this.path);
             myObj.flush();
             for (int i = 0; i < taskList.tasks.size(); i++) {
-                myObj.write(taskList.tasks.get(i).symbol() + "/" + taskList.tasks.get(i).getStatusIcon() + "/" +
-                        taskList.tasks.get(i).toString() + "\n");
+                myObj.write(taskList.tasks.get(i).symbol() + "/" + taskList.tasks.get(i).getStatusIcon() +
+                        "/" + taskList.tasks.get(i).toString() + "\n");
             }
             myObj.close();
         } catch (IOException e) {

@@ -24,8 +24,8 @@ public class TaskList {
     public String displayList() {
         String returnString = "";
         for (int i = 0; i < tasks.size(); i++) {
-            returnString = returnString + (i + 1) + ". [" + tasks.get(i).symbol() + "][" + 
-                tasks.get(i).getStatusIcon() + "] " + tasks.get(i).displayTime() + "\n";
+            returnString = returnString + (i + 1) + ". [" + tasks.get(i).symbol() + "][" +
+                    tasks.get(i).getStatusIcon() + "] " + tasks.get(i).displayTime() + "\n";
         }
         return returnString;
     }
@@ -37,7 +37,8 @@ public class TaskList {
      */
     public String addToList(String[] stringsToAdd) throws DukeException {
         if (stringsToAdd.length < 2) {
-            throw new DukeException("OOPS!! The description of a " + stringsToAdd[0] + " cannot be empty.");
+            throw new DukeException("OOPS!! The description of a " +
+                    stringsToAdd[0] + " cannot be empty.");
         } else {
             Task task;
             String returnString = "";
@@ -70,8 +71,8 @@ public class TaskList {
                 }
             }
             tasks.add(task);
-            return "Got it!! :D I've added this task:\n" + " [" + task.symbol() + "][] " + returnString +
-                    "\nNow you have " + tasks.size() + " tasks in the list.";
+            return "Got it!! :D I've added this task:\n" + " [" + task.symbol() + "][] " +
+                    returnString + "\nNow you have " + tasks.size() + " tasks in the list.";
         }
     }
 
@@ -136,8 +137,8 @@ public class TaskList {
         }
         String returnString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < foundTasks.size(); i++) {
-            returnString = returnString + (i + 1) + ". [" + foundTasks.get(i).symbol() + "][" + 
-                foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";
+            returnString = returnString + (i + 1) + ". [" + foundTasks.get(i).symbol() + "]["
+                    + foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";
         }
         return returnString;
     }

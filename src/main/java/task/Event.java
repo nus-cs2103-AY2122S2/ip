@@ -28,7 +28,8 @@ public class Event extends Task {
      */
     @Override
     public String displayTime() {
-        return super.toString() + this.date.getDayOfMonth() + " " + this.date.getMonth() + " " + this.date.getYear();
+        return super.toString() + this.date.getDayOfMonth() + " " + this.date.getMonth()
+                + " " + this.date.getYear();
     }
 
     /**
