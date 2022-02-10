@@ -32,6 +32,8 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTask(index);
+        assert task != null : "task retrieved from taskList cannot be null";
+
         task.markAsNotDone();
         return ui.showTaskUnmarked(task)
                 + this.saveData(taskList, ui, storage);
