@@ -19,6 +19,7 @@ public abstract class Task {
     public Task(String description, boolean done) {
         this.description = description;
         this.done = done;
+        this.date = null;
     }
 
     /**
@@ -34,8 +35,15 @@ public abstract class Task {
      * @return A String representing the description of a Task.
      */
     public String getDescription() {
-        //
         return this.description;
+    }
+
+    /**
+     * Getter method to return the date associated with a Task.
+     * @return The LocalDate representing the date of a Task.
+     */
+    public LocalDate getDate() {
+        return this.date;
     }
 
     /**
