@@ -66,50 +66,56 @@ public class Duke {
      * @throws WrongCommandException if user enters invalid commands
      */
     public static void parseCommand() throws WrongCommandException {
-
+        int taskNumber;
         Scanner myScanner = new Scanner(System.in);
         Commands commands = new Commands(myListStorage, myPrinter);
 
         while (myScanner.hasNextLine()) {
             String cmd = myScanner.nextLine();
             try {
-                if (cmd.equals("bye")) {
-                    commands.cmdBye();
-                    myDisk.saveToDisk();
-                    break;
-                } else if (cmd.contains("todo")) {
+                String[] cmds = Parser.parseCmdAndDes(cmd);
+                switch (cmds[0]) {
+                case "todo":
                     commands.cmdTodo(cmd);
                     myDisk.saveToDisk();
-                } else if (cmd.contains("event")) {
-                    commands.cmdEvent(cmd);
-                    myDisk.saveToDisk();
-                } else if (cmd.contains("deadline")) {
+                    break;
+                case "deadline":
                     commands.cmdDeadline(cmd);
                     myDisk.saveToDisk();
-                } else if (cmd.contains("list")) {
-                    commands.cmdList();
-                } else if (cmd.contains("find")) {
+                    break;
+                case "event":
+                    commands.cmdEvent(cmd);
+                    myDisk.saveToDisk();
+                    break;
+                case "mark":
+                    taskNumber = Character.getNumericValue(cmd.charAt(cmd.length() - 1));
+                    commands.cmdMark(taskNumber);
+                    myDisk.saveToDisk();
+                    break;
+                case "unmark":
+                    taskNumber = Character.getNumericValue(cmd.charAt(cmd.length() - 1));
+                    commands.cmdUnmark(taskNumber);
+                    myDisk.saveToDisk();
+                    break;
+                case "delete":
+                    taskNumber = Character.getNumericValue(cmd.charAt(cmd.length() - 1));
+                    commands.cmdDelete(taskNumber);
+                    myDisk.saveToDisk();
+                    break;
+                case "find":
                     commands.cmdFind(cmd);
-                } else {
-                    int taskNumber = Character.getNumericValue(cmd.charAt(cmd.length() - 1));
-                    if (cmd.contains("mark")) {
-                        if (cmd.contains("unmark")) {
-                            commands.cmdUnmark(taskNumber);
-                            myDisk.saveToDisk();
-                        } else {
-                            commands.cmdMark(taskNumber);
-                            myDisk.saveToDisk();
-                        }
-                    } else if (cmd.contains("delete")) {
-                        commands.cmdDelete(taskNumber);
-                        myDisk.saveToDisk();
-                    } else {
-                        throw new WrongCommandException("Invalid Command");
-                    }
+                    break;
+                case "list":
+                    commands.cmdList();
+                    break;
+                case "bye":
+                    commands.cmdBye();
+                    break;
+                default:
+                    throw new WrongCommandException("Invalid Command");
                 }
             } catch (EmptyMessageException | WrongDateFormatException e) {
                 myPrinter.printExceptions(e);
-                //cmd = myScanner.nextLine();
             }
         }
     }
