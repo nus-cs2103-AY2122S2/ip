@@ -43,6 +43,7 @@ public class AddTaskCommand extends Command {
             break;
         case DEADLINE:
             String[] deadlineInputs = task.split("/by", 2);
+            assert deadlineInputs.length > 0 : "Invalid task";
             if (deadlineInputs.length == 1) {
                 throw new DateException("deadline");
             }
@@ -51,6 +52,7 @@ public class AddTaskCommand extends Command {
             break;
         case EVENT:
             String[] eventInputs = task.split("/at", 2);
+            assert eventInputs.length > 0 : "Invalid task";
             if (eventInputs.length == 1) {
                 throw new DateException("event");
             }
