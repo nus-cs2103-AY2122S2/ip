@@ -1,16 +1,16 @@
 package stevie.exception.messages;
 
 public enum TaskExceptionMessages {
-    InvalidTaskTypeError {
-        @Override
-        public String toString() {
-            return "There is no such task!";
-        }
-    },
-    InvalidTaskIndexError {
-        @Override
-        public String toString() {
-            return "There is no such task!";
-        }
+    InvalidTaskTypeError("There is no such task type!"),
+    InvalidTaskIndexError("Index is invalid"),
+    EmptyTaskListError("There is no task in task list!"),
+    EmptyUndoListError("There is nothing to undo!");
+    private final String message;
+    TaskExceptionMessages(String message) {
+        this.message = message;
+    }
+    @Override
+    public String toString() {
+        return message;
     }
 }

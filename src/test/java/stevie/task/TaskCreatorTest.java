@@ -9,6 +9,8 @@ import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 import stevie.exception.TaskException;
+import stevie.task.types.EventTask;
+import stevie.task.types.TaskType;
 
 class TaskCreatorTest {
 

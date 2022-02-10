@@ -4,6 +4,7 @@ import stevie.command.Command;
 import stevie.command.ExitCommand;
 import stevie.command.HelpCommand;
 import stevie.command.ListCommand;
+import stevie.command.UndoCommand;
 import stevie.exception.ParserException;
 import stevie.exception.TaskException;
 import stevie.exception.messages.ParserExceptionMessages;
@@ -53,6 +54,8 @@ public class StevieParser {
             return new HelpCommand();
         case "list":
             return new ListCommand();
+        case "undo":
+            return new UndoCommand();
         default:
             throw new ParserException(ParserExceptionMessages.InvalidCommandParseError);
         }

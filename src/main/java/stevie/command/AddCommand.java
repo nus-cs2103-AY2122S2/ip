@@ -1,26 +1,25 @@
 package stevie.command;
 
 import stevie.StevieUi;
-import stevie.task.Task;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
+import stevie.task.types.Task;
+import stevie.undo.UndoHistory;
+import stevie.undo.actions.Undo;
+import stevie.undo.actions.UndoAdd;
 
 /**
  * AddCommand executes to add a task to the task list, and save the newly updated task list.
  */
-public class AddCommand extends Command {
-    /**
-     * The task to be added to task list
-     */
-    private final Task task;
-
+public class AddCommand extends ChangeCommand<Task> {
+    private static final String message = "Got it! I have added a new task:\n";
     /**
      * Constructor for an AddCommand
      *
      * @param task task to be added
      */
     public AddCommand(Task task) {
-        this.task = task;
+        super(task);
     }
 
     /**
@@ -34,10 +33,17 @@ public class AddCommand extends Command {
      * @return false to not terminate the session
      */
     @Override
-    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
-        String out = tasks.add(task);
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui, UndoHistory undoHistory) {
+        tasks.add(parameter);
+        undoHistory.addUndo(generateUndo());
         tasks.save(storage);
+        String out = message + parameter.toString() + "\n"
+                + tasks.getSize();
         ui.outputMessage(out);
         return out;
+    }
+
+    public Undo generateUndo() {
+        return new UndoAdd();
     }
 }

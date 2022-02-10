@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import stevie.exception.TaskException;
+import stevie.task.types.Task;
+import stevie.task.types.TaskType;
+
 /**
  * Loads and saves Tasks added by stevie.Stevie chat bot.
  */

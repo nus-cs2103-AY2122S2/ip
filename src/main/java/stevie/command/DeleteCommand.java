@@ -4,23 +4,23 @@ import stevie.StevieUi;
 import stevie.exception.TaskException;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
+import stevie.task.types.Task;
+import stevie.undo.UndoHistory;
+import stevie.undo.actions.Undo;
+import stevie.undo.actions.UndoDelete;
 
 /**
  * DeleteCommand executes to delete a task from the task list, and save the newly updated task list.
  */
-public class DeleteCommand extends Command {
-    /**
-     * The index of the task to be deleted
-     */
-    private final int taskIdx;
-
+public class DeleteCommand extends ChangeCommand<Integer> {
+    private static final String message = "I have deleted the following task:\n";
     /**
      * Constructor for DeleteCommand.
      *
      * @param idx index of task to be deleted
      */
     public DeleteCommand(int idx) {
-        taskIdx = idx;
+        super(idx);
     }
 
     /**
@@ -34,17 +34,22 @@ public class DeleteCommand extends Command {
      * @return false to not terminate the session
      */
     @Override
-    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
-        String out;
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui, UndoHistory undoHistory) {
+        Task task;
         try {
-            out = tasks.delete(taskIdx);
+            task = tasks.delete(parameter);
         } catch (TaskException ex) {
             ui.outputMessage(ex.getMessage());
             return ex.getMessage();
         }
-        assert out != null;
+        undoHistory.addUndo(generateUndo(parameter, task));
+        String out = message + task.toString() + "\n" + tasks.getSize();
         tasks.save(storage);
         ui.outputMessage(out);
         return out;
+    }
+
+    public Undo generateUndo(int idx, Task task) {
+        return new UndoDelete(idx, task);
     }
 }

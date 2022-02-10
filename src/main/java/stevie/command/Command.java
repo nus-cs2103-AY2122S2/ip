@@ -3,6 +3,7 @@ package stevie.command;
 import stevie.StevieUi;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
+import stevie.undo.UndoHistory;
 
 /**
  * Command class encapsulates the action of Stevie chatbot executing an instruction given by the user.
@@ -18,7 +19,7 @@ public abstract class Command {
      * @param ui      to pass a response string for output
      * @return false if Command does not terminate session with Stevie, else true
      */
-    public abstract String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui);
+    public abstract String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui, UndoHistory undoHistory);
 
     /**
      * Returns true if command causes program to terminate, else return false.

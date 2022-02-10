@@ -8,7 +8,7 @@ import stevie.exception.ParserException;
 import stevie.exception.TaskException;
 import stevie.exception.messages.ParserExceptionMessages;
 import stevie.task.TaskCreator;
-import stevie.task.TaskType;
+import stevie.task.types.TaskType;
 
 public class EventTaskParser extends DatedTaskParser {
     private static final String regexString = "^(.*s?)\\s/at\\s(.*s?)";

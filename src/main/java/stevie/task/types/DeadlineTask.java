@@ -1,9 +1,9 @@
-package stevie.task;
+package stevie.task.types;
 
 import java.util.Date;
 
 /**
- * A type of task that can be characterised as an deadline. A <code>stevie.task.DeadlineTask</code> contains
+ * A type of task that can be characterised as an deadline. A <code>stevie.task.types.DeadlineTask</code> contains
  * a name and an deadline.
  */
 public class DeadlineTask extends Task {

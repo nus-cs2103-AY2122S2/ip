@@ -1,40 +1,25 @@
 package stevie.exception.messages;
 
+/**
+ * ParserExceptionMessages contains exception messages relating to errors caused during
+ * parsing operations.
+ */
 public enum ParserExceptionMessages {
-    AddEventParseError {
-        @Override
-        public String toString() {
-            return "Event task requires a name and date!";
-        }
-    },
-    AddDeadlineParseError {
-        @Override
-        public String toString() {
-            return "Deadline task requires a name and date!";
-        }
-    },
-    AddTodoParseError {
-        @Override
-        public String toString() {
-            return "Todo task requires a name!";
-        }
-    },
-    DateParseError {
-        @Override
-        public String toString() {
-            return "Date format is unacceptable!";
-        }
-    },
-    IndexParseError {
-        @Override
-        public String toString() {
-            return "Index must be an integer!";
-        }
-    },
-    InvalidCommandParseError {
-        @Override
-        public String toString() {
-            return "Oops! Your instructions were unclear!";
-        }
+    AddEventParseError("Event task requires a name and date!"),
+    AddDeadlineParseError("Deadline task requires a name and date!"),
+    AddTodoParseError("Todo task requires a name!"),
+    DateParseError("Date format is unacceptable!"),
+    IndexParseError("Index must be an integer!"),
+    InvalidCommandParseError("Oops! Your instructions were unclear!");
+
+    private final String message;
+
+    ParserExceptionMessages(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return message;
     }
 }

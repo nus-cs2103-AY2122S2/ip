@@ -7,6 +7,7 @@ import stevie.exception.StevieException;
 import stevie.parser.StevieParser;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
+import stevie.undo.UndoHistory;
 
 /**
  * stevie.Stevie is a class that serves as a user interface to allow access to an underlying
@@ -37,12 +38,18 @@ public class Stevie {
     private final TaskDataHandler storage;
 
     /**
+     * Handles undo command
+     */
+    private final UndoHistory undoHistory;
+
+    /**
      * Constructor for Stevie
      */
     public Stevie() {
         ui = new StevieUi();
         storage = new TaskDataHandler(path);
         tasks = new TaskList(storage.loadTasks());
+        undoHistory = new UndoHistory();
     }
 
     /**
@@ -64,7 +71,7 @@ public class Stevie {
         String out;
         try {
             Command command = StevieParser.parse(userInput);
-            out = command.execute(tasks, storage, ui);
+            out = command.execute(tasks, storage, ui, undoHistory);
         } catch (StevieException ex) {
             ui.outputMessage(ex.getMessage());
             out = ex.getMessage();
@@ -83,7 +90,7 @@ public class Stevie {
             try {
                 userIn = ui.getUserInput();
                 Command command = StevieParser.parse(userIn);
-                command.execute(tasks, storage, ui);
+                command.execute(tasks, storage, ui, undoHistory);
                 isExit = command.isExit();
             } catch (StevieException ex) {
                 ui.outputMessage(ex.getMessage());

@@ -3,6 +3,7 @@ package stevie.command;
 import stevie.StevieUi;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
+import stevie.undo.UndoHistory;
 
 /**
  * FindCommand is executed to retrieve all tasks in task list that contains
@@ -32,7 +33,7 @@ public class FindCommand extends Command {
      * @return false to indicate that command does not terminate Stevie
      */
     @Override
-    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui, UndoHistory undoHistory) {
         String out = tasks.find(query);
         ui.outputMessage(out);
         return out;

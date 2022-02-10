@@ -1,5 +1,7 @@
 package stevie.ui;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import stevie.Stevie;
 
 /**
@@ -42,20 +45,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private void showGreetings() {
-        String logo = "  .--.--.       ___\n"
-                + " /  /    '.   ,--.'|_                        ,--,\n"
-                + "|  :  /`. /   |  | :,'                     ,--.'|\n"
-                + ";  |  |--`    :  : ' :                .---.|  |,\n"
-                + "|  :  ;_    .;__,'  /     ,---.     /.  ./|`--'_       ,---.\n"
-                + " \\  \\    `. |  |   |     /     \\  .-' . ' |,' ,'|     /     \\\n"
-                + "  `----.   \\:__,'| :    /    /  |/___/ \\: |'  | |    /    /  |\n"
-                + "  __ \\  \\  |  '  : |__ .    ' / |.   \\  ' .|  | :   .    ' / |\n"
-                + " /  /`--'  /  |  | '.'|'   ;   /| \\   \\   ''  : |__ '   ;   /|\n"
-                + "'--'.     /   ;  :    ;'   |  / |  \\   \\   |  | '.'|'   |  / |\n"
-                + "  `--'---'    |  ,   / |   :    |   \\   \\ |;  :    ;|   :    |\n"
-                + "               ---`-'   \\   \\  /     '---\" |  ,   /  \\   \\  /\n"
-                + "                         `----'             ---`-'    `----'\n";
-        String greetings = "Hello I'm \n" + logo
+        String greetings = "Hello I'm Stevie!\n"
                 + "Tell me about your upcoming activities!\n"
                 + "Input \"help\" for instructions.";
         dialogContainer.getChildren().addAll(
@@ -77,10 +67,9 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (response.equals("Bye! Hope to see you again!")) {
-            exit();
+            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.play();
         }
-    }
-    private void exit() {
-        System.exit(0);
     }
 }

@@ -4,6 +4,11 @@ import java.util.Date;
 
 import stevie.exception.TaskException;
 import stevie.exception.messages.TaskExceptionMessages;
+import stevie.task.types.DeadlineTask;
+import stevie.task.types.EventTask;
+import stevie.task.types.Task;
+import stevie.task.types.TaskType;
+import stevie.task.types.ToDoTask;
 
 /**
  * Class to handle the creation of tasks. When a new task is added, update or add a new create method in

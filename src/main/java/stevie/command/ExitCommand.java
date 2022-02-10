@@ -3,6 +3,7 @@ package stevie.command;
 import stevie.StevieUi;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
+import stevie.undo.UndoHistory;
 
 /**
  * ExitCommand is used to terminate session with Stevie/
@@ -18,7 +19,7 @@ public class ExitCommand extends Command {
      * @return true to terminate the session
      */
     @Override
-    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui, UndoHistory undoHistory) {
         ui.outputMessage(endMessage);
         return endMessage;
     }

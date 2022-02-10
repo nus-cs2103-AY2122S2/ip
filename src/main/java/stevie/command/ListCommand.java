@@ -3,6 +3,7 @@ package stevie.command;
 import stevie.StevieUi;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
+import stevie.undo.UndoHistory;
 
 /**
  * ListCommand is used to list all tasks in the task list.
@@ -17,7 +18,7 @@ public class ListCommand extends Command {
      * @return false to not terminate the session
      */
     @Override
-    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui, UndoHistory undoHistory) {
         String out = tasks.toString();
         ui.outputMessage(out);
         return out;

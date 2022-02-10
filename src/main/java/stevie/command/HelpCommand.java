@@ -3,6 +3,7 @@ package stevie.command;
 import stevie.StevieUi;
 import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
+import stevie.undo.UndoHistory;
 
 public class HelpCommand extends Command {
     private static final String helpString = "\"list\": to display your activities.\n"
@@ -23,7 +24,7 @@ public class HelpCommand extends Command {
      * @return string of instruction
      */
     @Override
-    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui) {
+    public String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui, UndoHistory undoHistory) {
         ui.outputMessage(helpString);
         return helpString;
     }

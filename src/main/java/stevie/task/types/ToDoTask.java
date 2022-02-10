@@ -1,7 +1,7 @@
-package stevie.task;
+package stevie.task.types;
 
 /**
- * A type of task that can be characterised as an to-do. A <code>stevie.task.ToDoTask</code> contains
+ * A type of task that can be characterised as an to-do. A <code>stevie.task.types.ToDoTask</code> contains
  * a name.
  */
 public class ToDoTask extends Task {

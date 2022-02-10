@@ -1,4 +1,4 @@
-package stevie.task;
+package stevie.task.types;
 
 import stevie.exception.TaskException;
 import stevie.exception.messages.TaskExceptionMessages;

@@ -12,7 +12,7 @@ class StevieParserTest {
     @Test
     void parse() throws StevieException {
         StevieUiStub ui = new StevieUiStub();
-        assertEquals(new ExitCommand().execute(null, null, ui),
-                StevieParser.parse("bye").execute(null, null, ui));
+        assertEquals(new ExitCommand().execute(null, null, ui, null),
+                StevieParser.parse("bye").execute(null, null, ui, null));
     }
 }

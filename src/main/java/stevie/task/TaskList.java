@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import stevie.exception.TaskException;
 import stevie.exception.messages.TaskExceptionMessages;
+import stevie.task.types.Task;
 
 /**
  * Represents the a list of Tasks. <code>stevie.task.TaskList</code> object stores and handles users'
@@ -25,10 +26,9 @@ public class TaskList {
      * @param task a task to be added to task list
      * @return a response string to indicate that task is successfully added
      */
-    public String add(Task task) {
+    public Task add(Task task) {
         tasks.add(task);
-        return "Got it! I have added a new task:\n" + task
-                + "\nYou have " + tasks.size() + " tasks in your list.";
+        return task;
     }
 
     /**
@@ -62,17 +62,17 @@ public class TaskList {
      * @return the marked task
      * @throws TaskException if index is out of bounds of task list size
      */
-    public String mark(int idx, boolean isDone) throws TaskException {
+    public Task mark(int idx, boolean isDone) throws TaskException {
         if (idx < 0 || idx >= tasks.size()) {
             throw new TaskException(TaskExceptionMessages.InvalidTaskIndexError, (idx + 1));
         }
-        Task ac = tasks.get(idx);
+        Task task = tasks.get(idx);
         if (isDone) {
-            ac.done();
+            task.done();
         } else {
-            ac.undone();
+            task.undone();
         }
-        return "This activity is marked as done:\n" + ac;
+        return task;
     }
 
     /**
@@ -82,15 +82,13 @@ public class TaskList {
      * @return response string to user
      * @throws TaskException if index is out of bounds of task list size
      */
-    public String delete(int idx) throws TaskException {
+    public Task delete(int idx) throws TaskException {
         if (idx < 0 || idx >= tasks.size()) {
             throw new TaskException(TaskExceptionMessages.InvalidTaskIndexError, (idx + 1));
         }
-        Task ac = tasks.get(idx);
+        Task task = tasks.get(idx);
         tasks.remove(idx);
-        return "I have deleted the following task:\n"
-                + ac.toString()
-                + "\nYou have " + tasks.size() + " tasks left.";
+        return task;
     }
 
     /**
@@ -117,10 +115,42 @@ public class TaskList {
     }
 
     /**
+     * Get a string that details the amount of task in task list.
+     * @return string detailing size of task list
+     */
+    public String getSize() {
+        return "\nYou have " + tasks.size() + " tasks in your list.";
+    }
+
+    /**
      * Saves tasks in the task list.
      * @param storage instance of TaskDataHandler that writes tasks to a .txt file
      */
     public void save(TaskDataHandler storage) {
         storage.saveTasks(tasks);
+    }
+
+    /**
+     * Remove last added task in list.
+     */
+    public void deleteLast() throws TaskException {
+        if (tasks.isEmpty()) {
+            throw new TaskException(TaskExceptionMessages.EmptyTaskListError);
+        }
+        tasks.remove(tasks.size() - 1);
+    }
+
+    /**
+     * Add task at particular index.
+     * @param idx to add task add
+     * @param task task to be added
+     * @throws TaskException if index is invalid
+     */
+    public void addAtIndex(int idx, Task task) throws TaskException {
+        assert task != null;
+        if (idx < 0 || idx > tasks.size()) {
+            throw new TaskException(TaskExceptionMessages.InvalidTaskIndexError, (idx + 1));
+        }
+        tasks.add(idx, task);
     }
 }

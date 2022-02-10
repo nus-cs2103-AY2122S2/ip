@@ -11,6 +11,6 @@ public class TaskException extends StevieException {
         super(message.toString());
     }
     public TaskException(TaskExceptionMessages message, int invalidIdx) {
-        super(message.toString() + invalidIdx);
+        super(message.toString() + ": " + invalidIdx);
     }
 }
