@@ -12,11 +12,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
+import duke.task.*;
 import duke.ui.Ui;
 
 /**
@@ -24,9 +20,17 @@ import duke.ui.Ui;
  */
 public class Storage {
     private final String filePath;
+    private final Ui ui;
 
-    public Storage(String filePath) {
+    /**
+     * Instantiates a Storage object with filePath and ui.
+     *
+     * @param filePath String Path of the file.
+     * @param ui       Ui UI object.
+     */
+    public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
+        this.ui = ui;
     }
 
     /**
@@ -57,37 +61,83 @@ public class Storage {
                     String typeAndIsDone = line.substring(0, 6);
                     String type = typeAndIsDone.substring(1, 2); // D, E, or T
                     String isDone = typeAndIsDone.substring(4, 5);
-                    if (!type.equals("T")) {
-                        String content = "";
-                        String dateString = "";
-                        if (type.equals("D")) {
-                            content = line.substring(7, line.lastIndexOf(" (by: "));
-                            dateString = line.substring(line.lastIndexOf("by: ") + 4, line.lastIndexOf(")"));
-                            LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
-                            if (isDone.equals("X")) {
-                                taskList.add(new Deadline(content, dateTime, true));
+                    int indexOfTag = line.lastIndexOf(" | ");
+                    if (indexOfTag == -1) {
+                        if (!type.equals("T")) {
+                            String content = "";
+                            String dateString = "";
+                            if (type.equals("D")) {
+                                content = line.substring(7, line.lastIndexOf(" (by: "));
+                                dateString = line.substring(line.lastIndexOf("by: ") + 4, line.lastIndexOf(")"));
+                                LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
+                                if (isDone.equals("X")) {
+                                    taskList.add(new Deadline(content, dateTime, true, ui));
+                                } else {
+                                    taskList.add(new Deadline(content, dateTime, ui));
+                                }
                             } else {
-                                taskList.add(new Deadline(content, dateTime));
+                                content = line.substring(7, line.lastIndexOf(" (at: "));
+                                dateString = line.substring(line.lastIndexOf("at: ") + 4, line.lastIndexOf(")"));
+                                LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
+                                if (isDone.equals("X")) {
+                                    taskList.add(new Event(content, dateTime, true, ui));
+                                } else {
+                                    taskList.add(new Event(content, dateTime, ui));
+                                }
                             }
                         } else {
-                            content = line.substring(7, line.lastIndexOf(" (at: "));
-                            dateString = line.substring(line.lastIndexOf("at: ") + 4, line.lastIndexOf(")"));
-                            LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
                             if (isDone.equals("X")) {
-                                taskList.add(new Event(content, dateTime, true));
+                                String content = line.substring(7);
+                                taskList.add(new ToDo(content, true, ui));
                             } else {
-                                taskList.add(new Event(content, dateTime));
+                                String content = line.substring(7);
+                                taskList.add(new ToDo(content, ui));
                             }
                         }
                     } else {
-                        if (isDone.equals("X")) {
-                            String content = line.substring(7);
-                            taskList.add(new ToDo(content, true));
+                        String tagString = line.substring(indexOfTag + 3);
+                        String[] tagArray = tagString.split(" ");
+                        ArrayList<Tag> tags = new ArrayList<>();
+                        for (int k = 0; k < tagArray.length; k++) {
+                            tagArray[k] = tagArray[k].substring(1);
+                        }
+                        for (String str : tagArray) {
+                            Tag tag = new Tag(str);
+                            tags.add(tag);
+                        }
+                        if (!type.equals("T")) {
+                            String content = "";
+                            String dateString = "";
+                            if (type.equals("D")) {
+                                content = line.substring(7, line.lastIndexOf(" (by: "));
+                                dateString = line.substring(line.lastIndexOf("by: ") + 4, line.lastIndexOf(")"));
+                                LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
+                                if (isDone.equals("X")) {
+                                    taskList.add(new Deadline(content, dateTime, true, tags, ui));
+                                } else {
+                                    taskList.add(new Deadline(content, dateTime, false, tags, ui));
+                                }
+                            } else {
+                                content = line.substring(7, line.lastIndexOf(" (at: "));
+                                dateString = line.substring(line.lastIndexOf("at: ") + 4, line.lastIndexOf(")"));
+                                LocalDateTime dateTime = LocalDateTime.parse(dateString, Ui.OUTPUT_FORMATTER);
+                                if (isDone.equals("X")) {
+                                    taskList.add(new Event(content, dateTime, true, tags, ui));
+                                } else {
+                                    taskList.add(new Event(content, dateTime, false, tags, ui));
+                                }
+                            }
                         } else {
-                            String content = line.substring(7);
-                            taskList.add(new ToDo(content));
+                            if (isDone.equals("X")) {
+                                String content = line.substring(7, indexOfTag);
+                                taskList.add(new ToDo(content, true, tags, ui));
+                            } else {
+                                String content = line.substring(7, indexOfTag);
+                                taskList.add(new ToDo(content, false, tags, ui));
+                            }
                         }
                     }
+
                 }
                 line = bufferedReader.readLine();
             }

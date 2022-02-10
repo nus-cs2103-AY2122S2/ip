@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import duke.ui.Ui;
 
@@ -9,52 +10,84 @@ public class Task implements Comparable<Task> {
     protected boolean isDone;
     protected String content;
     protected LocalDateTime date;
+    protected TagList tags;
+    protected Ui ui;
 
     /**
      * Constructs a Task object with content string.
      *
      * @param content String content to be put in the task.
      */
-    public Task(String content) {
+    public Task(String content, Ui ui) {
         this.isDone = false;
         this.content = content;
         this.date = null;
+        tags = new TagList(ui);
+        this.ui = ui;
     }
 
     /**
      * Constructs a Task object with content string and whether the task is done.
      *
      * @param content String content to be put in the task.
-     * @param isDone boolean boolean to show whether task is done.
+     * @param isDone  boolean boolean to show whether task is done.
      */
-    public Task(String content, boolean isDone) {
+    public Task(String content, boolean isDone, Ui ui) {
         this.isDone = isDone;
         this.content = content;
+        tags = new TagList(ui);
+        this.ui = ui;
+    }
+
+    public Task(String content, boolean isDone, ArrayList<Tag> tags, Ui ui) {
+        this.isDone = isDone;
+        this.content = content;
+        this.tags = new TagList(tags, ui);
+        this.ui = ui;
     }
 
     /**
      * Constructs a Task object with content string and date.
      *
      * @param content String content to be put in the task.
-     * @param date LocalDateTime date of Task.
+     * @param date    LocalDateTime date of Task.
      */
-    public Task(String content, LocalDateTime date) {
+    public Task(String content, LocalDateTime date, Ui ui) {
         this.isDone = false;
         this.content = content;
         this.date = date;
+        tags = new TagList(ui);
+        this.ui = ui;
     }
 
     /**
      * Constructs a Task object with content string, date, and whether the task is done.
      *
      * @param content String content to be put in the task.
-     * @param date LocalDateTime date of Task.
-     * @param isDone boolean boolean to show whether task is done.
+     * @param date    LocalDateTime date of Task.
+     * @param isDone  boolean boolean to show whether task is done.
      */
-    public Task(String content, LocalDateTime date, boolean isDone) {
+    public Task(String content, LocalDateTime date, boolean isDone, Ui ui) {
         this.isDone = isDone;
         this.content = content;
         this.date = date;
+        tags = new TagList(ui);
+        this.ui = ui;
+    }
+
+    /**
+     * Constructs a Task object with content string, date, and whether the task is done.
+     *
+     * @param content String content to be put in the task.
+     * @param date    LocalDateTime date of Task.
+     * @param isDone  boolean boolean to show whether task is done.
+     */
+    public Task(String content, LocalDateTime date, boolean isDone, ArrayList<Tag> tags, Ui ui) {
+        this.isDone = isDone;
+        this.content = content;
+        this.date = date;
+        this.tags = new TagList(tags, ui);
+        this.ui = ui;
     }
 
     /**
@@ -68,6 +101,7 @@ public class Task implements Comparable<Task> {
 
     /**
      * Returns the content string.
+     *
      * @return String content instance variable.
      */
     public String getContent() {
@@ -75,25 +109,34 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Marks this task as done.
+     * Returns the TagList.
+     *
+     * @return TagList object.
      */
-    public void mark() {
+    public TagList getTagList() {
+        return tags;
+    }
+
+    /**
+     * Marks this task as done.
+     *
+     * @return String Result of the mark.
+     */
+    public String mark() {
         this.isDone = true;
-        Ui.printDivider();
-        System.out.println("    Nice! I've marked this task as done: ");
-        System.out.println("    " + this.toString());
-        Ui.printDivider();
+        String result = "Nice! I've marked this task as done: " + this.toString();
+        return result;
     }
 
     /**
      * Unmarks this task.
+     *
+     * @return String Result of the mark.
      */
-    public void unmark() {
+    public String unmark() {
         this.isDone = false;
-        Ui.printDivider();
-        System.out.println("    I've unmarked this task: ");
-        System.out.println("    " + this.toString());
-        Ui.printDivider();
+        String result = "I've unmarked this task: " + this.toString();
+        return result;
     }
 
     /**

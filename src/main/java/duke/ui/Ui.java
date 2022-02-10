@@ -77,17 +77,7 @@ public class Ui {
     public String showUiForTaskList(TaskList taskList) {
         assert taskList != null;
         assert taskList.size() != 0;
-        String result = "";
-        ArrayList<Task> tasks = taskList.getTasks();
-        for (int index = 0; index < tasks.size(); index++) {
-            int order = (index + 1);
-            Task task = tasks.get(index);
-            if (index == tasks.size() - 1) {
-                result += order + ": " + task.toString();
-            } else {
-                result += order + ": " + task.toString() + "\n";
-            }
-        }
+        String result = taskList.toString();
         nextMessage = result;
         return result;
     }
@@ -123,18 +113,42 @@ public class Ui {
     }
 
     /**
-     * Prints all elements in the sorted list.
+     * Shows all elements in the sorted list.
      *
-     * @param tasks    ArrayList of Task objects to be printed.
+     * @param taskList ArrayList of Task objects to be printed.
      * @param sortType Type of sorting based on the enum.
      */
-    public String showUiForSort(ArrayList<Task> tasks, TaskList.SortType sortType) {
-        assert tasks != null;
-        assert tasks.size() != 0;
+    public String showUiForSort(TaskList taskList, TaskList.SortType sortType) {
+        assert taskList != null;
+        assert taskList.size() != 0;
         String result = "Sorting your tasks by" + sortType.toString() + ":\n";
-        for (Task task : tasks) {
-            result += "" + task.toString() + "\n";
-        }
+        result += taskList.toString();
+        nextMessage = result;
+        return result;
+    }
+
+    /**
+     * Shows the Ui when adding a tag to a task.
+     *
+     * @param tagName String Name of the tag to be added.
+     * @param task    Task Task object.
+     * @return String String for adding a tag.
+     */
+    public String showUiForTag(String tagName, Task task) {
+        String result = "Adding the following Tag #" + tagName + " to " + task.toString();
+        nextMessage = result;
+        return result;
+    }
+
+    /**
+     * Shows the Ui when deleting a tag to a task.
+     *
+     * @param tagName String Name of the tag to be deleted.
+     * @param task    Task Task object.
+     * @return String String for adding a tag.
+     */
+    public String showUiForUntag(String tagName, Task task) {
+        String result = "Deleting the following Tag #" + tagName + " to " + task.toString();
         nextMessage = result;
         return result;
     }

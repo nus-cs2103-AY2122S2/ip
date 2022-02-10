@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.ui.Ui;
+
+import java.util.ArrayList;
+
 /**
  * A task object that only has content and isDone.
  * No date or time is specified.
@@ -10,8 +14,8 @@ public class ToDo extends Task {
      * Instantiates ToDo object with given content.
      * @param content Content for ToDo.
      */
-    public ToDo(String content) {
-        super(content);
+    public ToDo(String content, Ui ui) {
+        super(content, ui);
     }
 
     /**
@@ -19,8 +23,12 @@ public class ToDo extends Task {
      * @param content String content for ToDo.
      * @param isDone Boolean to show if the task is done.
      */
-    public ToDo(String content, boolean isDone) {
-        super(content, isDone);
+    public ToDo(String content, boolean isDone, Ui ui) {
+        super(content, isDone, ui);
+    }
+
+    public ToDo(String content, boolean isDone, ArrayList<Tag> tags, Ui ui) {
+        super(content, isDone, tags, ui);
     }
 
     /**
@@ -31,9 +39,9 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         if (getIsDone()) {
-            return "[T][X] " + getContent();
+            return "[T][X] " + getContent() + tags.toString();
         } else {
-            return "[T][ ] " + getContent();
+            return "[T][ ] " + getContent() + tags.toString();
         }
     }
 }
