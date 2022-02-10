@@ -29,6 +29,7 @@ public class Storage {
     public ArrayList<Task> loadFile() {
         ArrayList<Task> taskArray = new ArrayList<Task>();
         try {
+            File file = new File("bobby.txt");
             if (file.exists()) {
                 Scanner s = new Scanner(file);
                 while (s.hasNext()) {
@@ -63,7 +64,6 @@ public class Storage {
             } else {
                 file.createNewFile();
             }
-            assert file.exists(): "File not found error.";
         } catch (IOException e) {
             System.out.println("An error has occurred.");
         }
@@ -75,7 +75,6 @@ public class Storage {
      * @param taskArray ArrayList of current tasks to be written into file.
      */
     public void updateFile(ArrayList<Task> taskArray) {
-        assert file.exists(): "file does not exist";
         try {
             FileWriter fw = new FileWriter("bobby.txt");
             for (int i = 0; i < taskArray.size(); i++) {
