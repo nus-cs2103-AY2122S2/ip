@@ -38,18 +38,21 @@ public class Parser {
             return ui.list(taskList);
         } else if (input.startsWith("mark")) {
             int taskNum = Integer.parseInt(input.substring(5));
+            assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
             Task markedTask = taskList.mark(taskNum);
             String outputLabel = ui.markTask(markedTask);
             storage.save(taskList);
             return outputLabel;
         } else if (input.startsWith("unmark")) {
             int taskNum = Integer.parseInt(input.substring(7));
+            assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
             Task unmarkedTask = taskList.unmark(taskNum);
             String outputLabel = ui.unmarkTask(unmarkedTask);
             storage.save(taskList);
             return outputLabel;
         } else if (input.startsWith("delete")) {
             int taskNum = Integer.parseInt(input.substring(7));
+            assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
             Task deletedTask = taskList.delete(taskNum);
             String outputLabel = ui.deleteTask(taskList, deletedTask);
             storage.save(taskList);
