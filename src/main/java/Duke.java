@@ -152,4 +152,5 @@ public class Duke extends Application {
         assert userInput == "bye" : "User input should be bye";
         return "Bye. Hope to see you again soon! :))";
     }
+
 }
