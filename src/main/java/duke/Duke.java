@@ -121,11 +121,11 @@ public class Duke extends Application{
     public String getResponse(String input) {
         String message = "";
         try {
-                message = Parser.parseInputLine(input, taskList);
-                storage.save(taskList.getTaskList());
-            } catch (DukeException e) {
-                message = e.toString();
-            }
+            message = Parser.parseInputLine(input, taskList);
+            storage.save(taskList.getTaskList());
+        } catch (DukeException e) {
+            message = e.toString();
+        }
         return message;
     }
 
