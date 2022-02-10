@@ -30,7 +30,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.chatbot.Duke"
+    mainClassName = "seedu.duke.gui.Launcher"
 }
 
 shadowJar {
