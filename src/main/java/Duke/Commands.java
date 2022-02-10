@@ -40,9 +40,9 @@ public class Commands {
         if (cmd.length() == 4) {
             throw new EmptyMessageException("Todo Error");
         }
-        assert (parsedCmd.length > 4);
         Task newTask = new ToDo(parsedCmd[1]);
         myStorage.addToList(newTask);
+        assert myStorage.length() != 0 : "Task was not added successfully";
         myPrinter.printTask(newTask, myStorage.length());
         return myUiPrinter.printTask(newTask, myStorage.length());
     }
@@ -75,6 +75,7 @@ public class Commands {
         //think about how to handle missing deadline exceptions
         Task newTask = new Deadline(deadline[0], deadline[1]);
         myStorage.addToList(newTask);
+        assert myStorage.length() != 0 : "Task was not added successfully";
         myPrinter.printTask(newTask, myStorage.length());
         return myUiPrinter.printTask(newTask, myStorage.length());
     }
@@ -107,6 +108,7 @@ public class Commands {
         }
         Task newTask = new Event(event[0], event[1]);
         myStorage.addToList(newTask);
+        assert myStorage.length() != 0 : "Task was not added successfully";
         myPrinter.printTask(newTask, myStorage.length());
         return myUiPrinter.printTask(newTask, myStorage.length());
     }
