@@ -87,7 +87,7 @@ public class AddCommand extends Command {
         ui.print("i added this duke.task: ");
         ui.print(t.toString());
         storage.save(tasks);
-        return null;
+        return "ok i added the task";
     }
 
     /**

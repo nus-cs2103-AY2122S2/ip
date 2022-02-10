@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
         ui.print(String.format("I've deleted duke.task %d!", this.index));
         ui.print(String.format("  %s", removedTask.toString()));
         storage.save(tasks);
-        return null;
+        return "ok i deleted";
     }
 
     @Override

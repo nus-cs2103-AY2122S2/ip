@@ -2,10 +2,10 @@ package duke.main;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.utility.UI;
 import duke.task.TaskList;
 import duke.utility.Parser;
 import duke.utility.Storage;
+import duke.utility.UI;
 
 
 /**
@@ -13,22 +13,13 @@ import duke.utility.Storage;
  */
 
 public class Duke {
-    /**
-     * To load and save tasks into the specified file path
-     */
+
     private Storage storage;
-    /**
-     * To maintain the current list of tasks
-     */
+
     private TaskList tasks;
-    /**
-     * To handle any input output interaction with users
-     */
+
     private UI ui;
 
-    /**
-     * Returns a Duke application that loads previously saved tasks.
-     */
     public Duke(String filePath){
         this.ui = new UI();
         this.storage = new Storage(filePath);
@@ -50,7 +41,7 @@ public class Duke {
             return e.toString();
         }
     }
-    public void run() {
+/*    public void run() {
         this.ui.startMessage();
         boolean bye = false;
         while(!bye){
@@ -71,5 +62,5 @@ public class Duke {
     public static void main(String[] args) {
         String filePath = "src/main/storage/save.text";
         new Duke(filePath).run();
-    }
+    }*/
 }

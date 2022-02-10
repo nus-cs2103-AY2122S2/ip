@@ -16,7 +16,7 @@ public class ExitCommand extends Command{
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) {
         ui.print("Aww. Bye! See you again soon");
-        return null;
+        return "bye bye";
     }
 
     @Override

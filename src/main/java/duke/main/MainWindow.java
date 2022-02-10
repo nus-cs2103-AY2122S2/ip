@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
         if (input.trim().equals("bye")) {
+            DialogBox.getDukeDialog("bye bye", dukeImage);
             Platform.exit();
         }
 
