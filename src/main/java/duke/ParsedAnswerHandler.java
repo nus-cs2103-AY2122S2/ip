@@ -17,9 +17,49 @@ public class ParsedAnswerHandler {
         this.pa = pa;
     }
 
-    String execute() {
+    void assertCommandNotEmpty() {
         assert !pa.getCommand().isEmpty() : "Each ParsedAnswer object should contain a command.";
+    }
+
+    String writeTaskToFile(String task, String result) {
         String filePath = System.getProperty("user.dir")  + "/data/storage.txt";
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
+            writer.append(task);
+            writer.close();
+            return result;
+        } catch (IOException e) {
+            return "Error saving task to file.";
+        }
+
+    }
+
+    String changeMarkStatus(String action) {
+        if (action.equalsIgnoreCase("mark")) {
+            try {
+                Task t = Storage.taskList.get(pa.getIndex() - 1);
+                t.markAsDone();
+                Storage s = new Storage();
+                s.save();
+                return "Successfully marked " + pa.getIndex();
+            } catch (IndexOutOfBoundsException e) {
+                return "Item not found. Please try again.";
+            }
+        } else {
+            try {
+                Task t = Storage.taskList.get(pa.getIndex() - 1);
+                t.markAsUndone();
+                Storage s = new Storage();
+                s.save();
+                return "Successfully ummarked " + pa.getIndex();
+            } catch (IndexOutOfBoundsException e) {
+                return "Item not found. Please try again.";
+            }
+        }
+    }
+
+    String execute() {
+        assertCommandNotEmpty();
         switch (pa.getCommand()) {
             case "bye":
                 Duke.isGoodbye = true;
@@ -31,73 +71,40 @@ public class ParsedAnswerHandler {
             case "todo":
                 ToDos td = new ToDos(pa.getDesc());
                 TaskList.add(td);
-                try {
-                    String sb = "T," +
-                            "1," +
-                            td.getDescription() + '\n';
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
-                    writer.append(sb);
-                    writer.close();
-                    return "Successfully added todo task to list.";
-                } catch (IOException e) {
-                    return "Error saving task to file.";
-                }
+                String todoTask = "T," +
+                        "1," +
+                        td.getDescription() + '\n';
+                String todoResult = "Successfully added todo task to list.";
+                return writeTaskToFile(todoTask, todoResult);
 
             case "deadline":
                 Deadline dl = new Deadline(pa.getDesc(), pa.getDate());
                 TaskList.add(dl);
-                try {
-                    String sb = "D," +
-                            "1," +
-                            dl.getDescription() +
-                            "," +
-                            dl.getBy() + '\n';
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
-                    writer.append(sb);
-                    writer.close();
-                    return "Successfully added deadline to list.";
-                } catch (IOException e) {
-                    return "Error saving task to file.";
-                }
+                String deadlineTask = "D," +
+                        "1," +
+                        dl.getDescription() +
+                        "," +
+                        dl.getBy() + '\n';
+
+                String deadlineResult = "Successfully added deadline to list.";
+                return writeTaskToFile(deadlineTask, deadlineResult);
 
             case "event":
                 Event ev = new Event(pa.getDesc(), pa.getDate());
                 TaskList.add(ev);
-                try {
-                    String sb = "E," +
-                            "1," +
-                            ev.getDescription() +
-                            "," +
-                            ev.getAt() + '\n';
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
-                    writer.append(sb);
-                    writer.close();
-                    return "Successfully added event to list.";
-                } catch (IOException e) {
-                    return "Error saving task to file.";
-                }
+                String eventTask = "E," +
+                        "1," +
+                        ev.getDescription() +
+                        "," +
+                        ev.getAt() + '\n';
+                String eventResult = "Successfully added event to list.";
+                return writeTaskToFile(eventTask, eventResult);
 
             case "mark":
-                try {
-                    Task t = Storage.taskList.get(pa.getIndex() - 1);
-                    t.markAsDone();
-                    Storage s = new Storage();
-                    s.save();
-                    return "Successfully marked " + pa.getIndex();
-                } catch (IndexOutOfBoundsException e) {
-                    return "Item not found. Please try again.";
-                }
+               return changeMarkStatus("mark");
 
             case "unmark":
-               try {
-                   Task t = Storage.taskList.get(pa.getIndex() - 1);
-                   t.markAsUndone();
-                   Storage s = new Storage();
-                   s.save();
-                   return "Successfully ummarked " + pa.getIndex();
-               } catch (IndexOutOfBoundsException e) {
-                   return "Item not found. Please try again.";
-               }
+              return changeMarkStatus("unmark");
 
             case "error":
                 return pa.getDesc();
