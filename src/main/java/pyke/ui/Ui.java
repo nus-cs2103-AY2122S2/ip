@@ -4,6 +4,16 @@ import java.util.Scanner;
 public class Ui {
     private static final String GREETINGS = "Hello! I'm Pyke\n" + "What can I do for you?";
     private static final String FAREWELL = "Bye. Hope to see you again soon!";
+    private static final String HELP =
+            "Command: todo [task name] \n \t Add a todo task into the list \n" +
+            "Command: deadline [task name] \\by [deadline time] \n \t Add a deadline task into the list \n" +
+            "Command: event [task name] \\at [event time] \n \t Add an event into the list \n" +
+            "Command: list \n \t List all tasks \n" +
+            "Command: mark [task id] \n \t Mark the task as done\n" +
+            "Command: unmark [task id] \n \t Mark the task as undone\n" +
+            "Command: find [keyword] \n \t Find all tasks which contain the keyword in name\n" +
+            "Command: delete [task id] \n \t Delete that task\n" +
+            "Command: bye \n \t Exit the chat bot";
     private Scanner scanner;
     public Ui() {
         scanner = new Scanner(System.in);
@@ -52,6 +62,9 @@ public class Ui {
         System.out.println(convertToChatBox(FAREWELL));
     }
 
+    public void outputHelpInfo() {
+        System.out.println(convertToChatBox(HELP));
+    }
     /**
      * Output text in a chat-box style
      *
@@ -81,4 +94,6 @@ public class Ui {
     public String outputUiFarewell() {
         return FAREWELL;
     }
+
+    public String outputUiHelp() { return HELP; }
 }
