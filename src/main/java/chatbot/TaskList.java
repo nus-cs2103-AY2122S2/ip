@@ -61,7 +61,10 @@ public class TaskList {
     */
     public String insertNewTask(Task newTask) throws DukeException {
         String reply = "";
+        int previousListSize = this.taskList.size();
         addTask(newTask);
+        int currentListSize = this.taskList.size();
+        assert currentListSize == previousListSize + 1; // ensure the list item was added
         String taskListLength = Integer.toString(this.taskList.size());
         reply += "Very well Sir. I have added this task:";
         reply += "\n   " + newTask.toString();
@@ -134,8 +137,10 @@ public class TaskList {
     public String deleteTask(int taskIndex) throws DukeException {
         String reply = "";
         Task taskToRemove = getTaskFromIndex(taskIndex);
-
+        int previousListSize = this.taskList.size();
         this.taskList.remove(taskToRemove);
+        int currentListSize = this.taskList.size();
+        assert currentListSize == previousListSize - 1; // ensure the list item was removed
         String taskListLength = Integer.toString(taskList.size());
 
         reply += "Very well Sir. I have removed this task:";
