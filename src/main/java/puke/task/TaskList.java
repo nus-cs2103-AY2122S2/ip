@@ -1,5 +1,7 @@
 package puke.task;
 
+import static java.util.stream.Collectors.toList;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,8 +10,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import puke.exception.PukeException;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * Represents the list of task in the current session.
@@ -145,7 +145,7 @@ public class TaskList {
         String[] taskDetail = args.split("/");
 
         if (taskDetail.length < 2) {
-            throw new PukeException("I'll need a date/time for this task..");
+            throw new PukeException("I'll need a date/time for this task..\n\nType 'help' for more info!");
         }
 
         String dateTimeStr = taskDetail[1].split(" ", 2)[1];

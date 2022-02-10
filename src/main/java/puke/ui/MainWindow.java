@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         String welcomeMessage = "Hello! I'm Puke, your friendly neighbourhood chatbot! "
-                + "What do you want to do?";
+                + "What do you want to do?\n\nType 'help' to view available commands!";
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)
