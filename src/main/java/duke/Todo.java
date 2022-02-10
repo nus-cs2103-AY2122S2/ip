@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     /**
      * Constructs an instance of the Todo class, which is unmarked by default.
-     * @param description
+     * @param description A string representing the task description.
      */
     public Todo(String description) {
         super(description);
