@@ -5,3 +5,218 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+________________________________________
+Hello! I'm Duke
+What can I do for you?
+________________________________________
+________________________________________
+Nothing on your list!
+Now you have 0 tasks in the list
+________________________________________
+________________________________________
+OOPS!!! The description of a todo cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! Remember to set a time.
+________________________________________
+________________________________________
+OOPS!!! The description of a event cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! Remember to set a time.
+________________________________________
+________________________________________
+Got it. I've added this task:
+[T][ ] buy bread
+Now you have 1 tasks in the list
+________________________________________
+________________________________________
+Got it. I've added this task:
+[T][ ] sell bread
+Now you have 2 tasks in the list
+________________________________________
+________________________________________
+Nice! I've marked this task as done:
+[T][X] buy bread
+________________________________________
+________________________________________
+Here are the tasks in your list:
+1.[T][X] buy bread
+2.[T][ ] sell bread
+Now you have 2 tasks in the list
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! Please double check the task number
+________________________________________
+________________________________________
+Nice! I've marked this task as done:
+[T][X] sell bread
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+Got it. I've added this task:
+[D][ ] homework (by: Mon 3pm)
+Now you have 3 tasks in the list
+________________________________________
+________________________________________
+OOPS!!! Please double check the task number
+________________________________________
+________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Remember to set a time.
+________________________________________
+________________________________________
+OOPS!!! The description of a event cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! Remember to set a time.
+________________________________________
+________________________________________
+OK, I've marked this task as not done yet:
+[T][ ] sell bread
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+Here are the tasks in your list:
+1.[T][X] buy bread
+2.[T][ ] sell bread
+3.[D][ ] homework (by: Mon 3pm)
+Now you have 3 tasks in the list
+________________________________________
+________________________________________
+OK, I've marked this task as not done yet:
+[T][ ] buy bread
+________________________________________
+________________________________________
+Got it. I've added this task:
+[E][ ] movie date (at: next week)
+Now you have 4 tasks in the list
+________________________________________
+________________________________________
+Here are the tasks in your list:
+1.[T][ ] buy bread
+2.[T][ ] sell bread
+3.[D][ ] homework (by: Mon 3pm)
+4.[E][ ] movie date (at: next week)
+Now you have 4 tasks in the list
+________________________________________
+________________________________________
+Got it. I've added this task:
+[E][ ] project meeting (at: Mon 2-4pm)
+Now you have 5 tasks in the list
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+Got it. I've added this task:
+[D][ ] return book (by: Sunday)
+Now you have 6 tasks in the list
+________________________________________
+________________________________________
+Here are the tasks in your list:
+1.[T][ ] buy bread
+2.[T][ ] sell bread
+3.[D][ ] homework (by: Mon 3pm)
+4.[E][ ] movie date (at: next week)
+5.[E][ ] project meeting (at: Mon 2-4pm)
+6.[D][ ] return book (by: Sunday)
+Now you have 6 tasks in the list
+________________________________________
+________________________________________
+OOPS!!! The description of a todo cannot be empty.
+________________________________________
+________________________________________
+Here are the tasks in your list:
+1.[T][ ] buy bread
+2.[T][ ] sell bread
+3.[D][ ] homework (by: Mon 3pm)
+4.[E][ ] movie date (at: next week)
+5.[E][ ] project meeting (at: Mon 2-4pm)
+6.[D][ ] return book (by: Sunday)
+Now you have 6 tasks in the list
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+Here are the tasks in your list:
+1.[T][ ] buy bread
+2.[T][ ] sell bread
+3.[D][ ] homework (by: Mon 3pm)
+4.[E][ ] movie date (at: next week)
+5.[E][ ] project meeting (at: Mon 2-4pm)
+6.[D][ ] return book (by: Sunday)
+Now you have 6 tasks in the list
+________________________________________
+________________________________________
+OOPS!!! Please double check the task number
+________________________________________
+________________________________________
+Nice! I've marked this task as done:
+[T][X] sell bread
+________________________________________
+________________________________________
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 7 tasks in the list
+________________________________________
+________________________________________
+Here are the tasks in your list:
+1.[T][ ] buy bread
+2.[T][X] sell bread
+3.[D][ ] homework (by: Mon 3pm)
+4.[E][ ] movie date (at: next week)
+5.[E][ ] project meeting (at: Mon 2-4pm)
+6.[D][ ] return book (by: Sunday)
+7.[T][ ] borrow book
+Now you have 7 tasks in the list
+________________________________________
+________________________________________
+Bye. Hope to see you again soon!
+________________________________________

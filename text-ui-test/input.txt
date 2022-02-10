@@ -1,0 +1,50 @@
+list
+todo
+deadline
+deadline hello
+event
+event hello
+todo buy bread
+todo sell bread
+mark 1
+list
+bleh
+blah
+mark 3
+mark 2
+mark -2
+mark -1
+mark 0
+
+deadline homework /by Mon 3pm
+mark 5
+deadline
+bleh
+blah
+mark -2
+mark -1
+mark 0
+deadline hello
+event
+
+event hello
+unmark 2
+
+list
+unmark 1
+event movie date /at next week
+list
+event project meeting /at Mon 2-4pm
+bleh
+deadline return book /by Sunday
+list
+todo
+list
+hello
+add go back home
+list
+unmark 8
+mark 2
+todo borrow book
+list
+bye
