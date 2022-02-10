@@ -174,6 +174,7 @@ public class McBotGui {
     private String executeTodo(Parser parser) {
         try {
             String taskName = parser.getDetails();
+            assert !taskName.isBlank() : "Task name should not be blank";
             Task t = new ToDo(taskName);
             tasks.add(t);
             storage.appendData(t);
@@ -253,6 +254,7 @@ public class McBotGui {
             if (tasks.size() == 0) {
                 throw new McBotException("Your list is empty boi");
             }
+            assert tasks.size() != 0 : "Task size should be more than 0";
             return gui.listTask(tasks.getList());
         } catch (McBotException e) {
             return gui.printError(e);
