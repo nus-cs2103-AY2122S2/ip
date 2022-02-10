@@ -1,13 +1,11 @@
 package myboss;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-
-import java.util.Scanner;
-
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Represents a storage with specified file path.
@@ -35,24 +33,26 @@ public class Storage {
     public boolean appendTaskToFile(Task task) throws MyBossException {
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            String stringToAppend = task.taskType + "|" + task.isDone + "|" + task.taskName;
-            switch (task.taskType) {
-                case "E":
-                    // typecasting because only an event would have taskType "E"
-                    Event event = (Event) task;
-                    stringToAppend = stringToAppend + "|" + event.eventDate + "|" + event.timeRange;
-                    break;
-                case "D":
-                    // typecasting because only a deadline would have taskType "D"
-                    Deadline deadlineTask = (Deadline) task;
-                    stringToAppend = stringToAppend + "|" + deadlineTask.deadline;
-                    break;
+            String stringToAppend = task.getTaskType() + "|" + task.getIsDone() + "|" + task.getTaskName();
+            switch (task.getTaskType()) {
+            case "E":
+                // typecasting because only an event would have taskType "E"
+                Event event = (Event) task;
+                stringToAppend = stringToAppend + "|" + event.getEventDate() + "|" + event.getTimeRange();
+                break;
+            case "D":
+                // typecasting because only a deadline would have taskType "D"
+                Deadline deadlineTask = (Deadline) task;
+                stringToAppend = stringToAppend + "|" + deadlineTask.getDeadline();
+                break;
+            default:
+                throw new MyBossException(Ui.APPEND_TO_FILE_EXCEPTION_MSG);
             }
             fw.write(stringToAppend + System.lineSeparator());
             fw.close();
             return true;
         } catch (IOException e) {
-            throw new MyBossException(Ui.appendToFileExceptionMsg);
+            throw new MyBossException(Ui.APPEND_TO_FILE_EXCEPTION_MSG);
         }
     }
 
@@ -69,7 +69,7 @@ public class Storage {
             return true;
         } catch (IOException e) {
             //Ui.outputMyBoss("Error clearing DB");
-            throw new MyBossException(Ui.clearFileExceptionMsg);
+            throw new MyBossException(Ui.CLEAR_FILE_EXCEPTION_MSG);
         }
     }
 
@@ -90,7 +90,7 @@ public class Storage {
             }
             return true;
         } catch (IOException e) {
-            throw new MyBossException(Ui.fileCreationExceptionMsg);
+            throw new MyBossException(Ui.FILE_CREATION_EXCEPTION_MSG);
         }
     }
 
@@ -126,7 +126,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new MyBossException(Ui.fileNotFoundExceptionMsg);
+            throw new MyBossException(Ui.FILE_NOT_FOUND_EXCEPTION_MSG);
         }
         return tempTaskList;
     }

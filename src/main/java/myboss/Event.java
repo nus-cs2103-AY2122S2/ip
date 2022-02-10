@@ -9,8 +9,8 @@ import java.util.Objects;
  * corresponds to a task with a specified date and time range.
  */
 public class Event extends Task {
-    String timeRange;
-    LocalDate eventDate;
+    private String timeRange;
+    private LocalDate eventDate;
 
     /**
      * Creates an Event Object with the specified task name and datetime.
@@ -53,6 +53,14 @@ public class Event extends Task {
         this.timeRange = timeRange;
     }
 
+    public String getTimeRange() {
+        return timeRange;
+    }
+
+    public LocalDate getEventDate() {
+        return eventDate;
+    }
+
     /**
      * Returns the string output of an Event Object when marked as done or not done.
      *
@@ -62,17 +70,17 @@ public class Event extends Task {
     @Override
     public String markAsDone(boolean isDone) {
         if (isDone) {
-            this.isDone = true;
-            return  " Nice! I've marked this task as done:" + "\n" + "  " +
-                    "     [" + this.taskType + "]" + //[T]
-                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
-                    this.taskName;
+            setIsDone(true);
+            return " Nice! I've marked this task as done:" + "\n" + "  "
+                    + "     [" + this.getTaskType() + "]" + //[T]
+                    "[" + (this.getIsDone() ? "X" : " ") + "] " + // [X]
+                    this.getTaskName();
         } else {
-            this.isDone = false;
-            return "OK, I've marked this task as not done yet:" + "\n" + "  " +
-                    "     [" + this.taskType + "]" + //[T]
-                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
-                    this.taskName;
+            setIsDone(false);
+            return "OK, I've marked this task as not done yet:" + "\n" + "  "
+                    + "     [" + this.getTaskType() + "]" //[T]
+                    + "[" + (this.getIsDone() ? "X" : " ") + "] " // [X]
+                    + this.getTaskName();
         }
     }
 
@@ -80,18 +88,24 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
         String eventDateFormatted = eventDate.format(formatter);
-        return "[" + this.taskType + "]"
-                + "[" + (isDone ? "X" : " ") + "] "
-                + this.taskName
-                + " (at: " + eventDateFormatted + " " + this.timeRange + ")" +
-                "\n";
+        return "[" + this.getTaskType() + "]"
+                + "[" + (getIsDone() ? "X" : " ") + "] "
+                + this.getTaskName()
+                + " (at: " + eventDateFormatted + " " + this.timeRange + ")"
+                + "\n";
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Event event = (Event) o;
         return Objects.equals(timeRange, event.timeRange) && Objects.equals(eventDate, event.eventDate);
     }
