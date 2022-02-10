@@ -26,13 +26,12 @@ public class Duke {
      * @return String of executed command.
      */
     public String handleInput(String input) {
-        try {
-            Command c = Parser.parse(input);
-            String output = "\n" + c.execute(this.taskList, this.save);
-            return output;
-        } catch (NullPointerException e) {
+        Command c = Parser.parse(input);
+        if (c == null) {
             return "This command is invalid";
         }
+        String output = "\n" + c.execute(this.taskList, this.save);
+        return output;
     }
 
     /**
