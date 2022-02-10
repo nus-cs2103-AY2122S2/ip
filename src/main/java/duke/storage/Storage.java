@@ -29,16 +29,20 @@ public class Storage {
         this.file = new File(filePath);
         this.filePath = filePath;
         if (!file.exists()) {
-            try {
-                File directory = new File(file.getParent());
-                //data file not in specific folder, need to handle
-                if (!directory.exists()) {
-                    directory.mkdirs();
-                }
-                file.createNewFile();
-            } catch (IOException e) {
-                e.getMessage();
+            createFile();
+        }
+    }
+
+    public void createFile() {
+        try {
+            File directory = new File(file.getParent());
+            //data file not in specific folder, need to handle
+            if (!directory.exists()) {
+                directory.mkdirs();
             }
+            file.createNewFile();
+        } catch (IOException e) {
+            e.getMessage();
         }
     }
 
@@ -57,7 +61,7 @@ public class Storage {
     }
 
     /**
-     * Loads up the tasks that were previously saved, and creates new file if required file
+     * Loads up the tasks that were previously saved into Strings, and creates new file if required file
      * does not exist in computer.
      *
      * @return the Arraylist of Task objects.
@@ -70,31 +74,76 @@ public class Storage {
             Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) {
                 String task = sc.nextLine();
-                char letter = task.charAt(0);
-                char isMarked = task.charAt(4);
-                boolean isDone = isMarked == ('1');
-                String taskLine = task.substring(8);
-                Task taskToAdd = null;
-                switch (letter) {
-                case 'T':
-                    taskToAdd = new Todo(taskLine, isDone);
-                    break;
-                case 'D':
-                    String[] theTask = taskLine.split(" \\| ", 2);
-                    taskToAdd = new Deadline(theTask[0], theTask[1], isDone);
-                    break;
-                case 'E':
-                    String[] eventTasking = taskLine.split(" \\| ", 2);
-                    taskToAdd = new Event(eventTasking[0], eventTasking[1], isDone);
-                    break;
-                default:
-                    //will not reach here.
-                }
+
+                char letter = getLetter(task);
+                boolean isDone = getDoneStatus(task);
+                // the content after letter and mark.
+                String taskContent = getTaskContent(task);
+
+                Task taskToAdd = generateTask(letter, isDone, taskContent);
                 tasks.add(taskToAdd);
             }
-        } catch (FileNotFoundException e) { //required file doesnt exist in their computer, create new file
+        } catch (FileNotFoundException e) {
+            //required file doesnt exist in their computer, create new file
             this.file.createNewFile();
         }
         return tasks;
+    }
+
+    /**
+     * Returns 'T', 'D', or 'E' based on Task type.
+     * @param task the given task.
+     * @return the letter of given task type.
+     */
+    public char getLetter(String task) {
+        return task.charAt(0);
+    }
+
+    /**
+     * Returns whether a task is done.
+     *
+     * @param task the given task.
+     * @return the isDone status of task.
+     */
+    public boolean getDoneStatus(String task) {
+        char markedBool = task.charAt(4);
+        return markedBool == ('1');
+    }
+
+    /**
+     * Returns the string of the task that was saved into formatted data.
+     *
+     * @param task the given task.
+     * @return the formatted task string.
+     */
+    public String getTaskContent(String task) {
+        return task.substring(8);
+    }
+
+    /**
+     * Constructs the given task.
+     *
+     * @param letter char of task type.
+     * @param isDone isDone status of task.
+     * @param taskContent the formatted task string.
+     * @return Task generated.
+     */
+    public Task generateTask(char letter, boolean isDone, String taskContent) {
+        String[] tokens = taskContent.split("\\|", 2);
+        String description = tokens[0];
+        switch (letter) {
+        case 'T':
+            return new Todo(description, isDone);
+        case 'D':
+            String by = tokens[1];
+            return new Deadline(description, by, isDone);
+        case 'E':
+            String at = tokens[1];
+            return new Event(description, at, isDone);
+        default:
+            assert false : "generateTask should not reach here.";
+        }
+        assert false : "generateTask should not reach here.";
+        return null;
     }
 }
