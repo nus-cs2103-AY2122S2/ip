@@ -21,7 +21,6 @@ public class CommandManager {
     private final UiManager uiManager;
     private final ListStorage listStorage;
     private final ListLoader listLoader;
-    private boolean isOpen;
 
 
     /**
@@ -30,16 +29,8 @@ public class CommandManager {
     public CommandManager() {
         this.uiManager = new UiManager();
         this.taskManager = new TaskManager(this.uiManager);
-        this.isOpen = true;
         this.listStorage = new ListStorage(this.taskManager);
         this.listLoader = new ListLoader(this.taskManager);
-    }
-
-    /**
-     * Sets the boolean isOpen to false.
-     */
-    public void setClose() {
-        this.isOpen = false;
     }
 
     /**
@@ -73,7 +64,6 @@ public class CommandManager {
             String[] command = uiManager.parseCommand(s);
             switch (command[0]) {
             case "bye":
-                this.setClose();
                 listStorage.saveList();
                 return uiManager.exit();
             case "list":

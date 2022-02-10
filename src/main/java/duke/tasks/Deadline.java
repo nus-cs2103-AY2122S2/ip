@@ -68,7 +68,7 @@ public class Deadline extends Task implements Serializable {
                     date.getYear());
 
         } else {
-           return String.format("[D][ ] %s(by: %s %s %s)",
+            return String.format("[D][ ] %s(by: %s %s %s)",
                     description,
                     date.getDayOfMonth(),
                     date.getMonth(),

@@ -28,6 +28,7 @@ public class NumCommand extends Command {
         this.uiManager = um;
         this.type = t;
         this.num = Integer.parseInt(task) - 1;
+        assert num > 0 : "Invalid index";
     }
 
     /**
