@@ -57,6 +57,7 @@ public class Storage {
                 writer.write(System.lineSeparator());
             }
             writer.close();
+            return;
         } catch (IOException e) {
             Ui ui = new Ui();
             ui.showMessage(e.getMessage());
@@ -92,6 +93,7 @@ public class Storage {
                 }
                 break;
             default:
+                assert false : input.get(0);
                 throw new DukeException("Unknown type");
             }
         }
@@ -106,5 +108,6 @@ public class Storage {
         } catch (IOException err) {
             ui.showIoException();
         }
+        assert false;
     }
 }

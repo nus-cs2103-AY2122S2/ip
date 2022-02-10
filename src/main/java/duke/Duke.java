@@ -31,19 +31,20 @@ public class Duke {
     /**
      * Function to generate a response to user input.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException{
         String output = "";
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
             output = ui.getOutput();
+            if (!output.equals("")) {
+                return output;
+            } else {
+                assert output.equals("") : "Sorry, get empty output";
+            }
         } catch (DukeException e) {
             e.printStackTrace();
         }
-        if (!output.equals("")) {
-            return output;
-        } else {
-            return "Sorry I dont know";
-        }
+        return output;
     }
 }
