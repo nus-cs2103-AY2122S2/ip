@@ -1,7 +1,5 @@
 package lily;
 
-import lily.task.LilyException;
-
 import lily.task.Task;
 import lily.task.Todo;
 import lily.task.Deadline;

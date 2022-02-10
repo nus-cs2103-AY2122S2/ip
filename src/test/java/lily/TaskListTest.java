@@ -1,6 +1,5 @@
 package lily;
 
-import lily.task.LilyException;
 import lily.task.Task;
 import lily.task.Todo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +21,7 @@ public class TaskListTest {
     @DisplayName("Add Todo")
     @Test
     void addTodo_filledTaskList_success() {
-        LinkedList ll = new LinkedList<>(Arrays.asList(new Todo("Test Add Todo")));
+        LinkedList<Task> ll = new LinkedList<>(Arrays.asList(new Todo("Test Add Todo")));
         TaskList tl = new TaskList(ll);
         String s = "Added Item";
         assertSame(tl.addTodo(s).getDesc(), s);

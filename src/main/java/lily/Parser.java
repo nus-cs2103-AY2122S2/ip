@@ -1,7 +1,5 @@
 package lily;
 
-import lily.task.LilyException;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
@@ -31,10 +29,7 @@ public class Parser {
 
     /**
      * Creates a new Empty Parser Object.
-     * 
-     * @param t Empty tasklist
-     * @param ui Empty Ui
-     * @param st The Storage needed to store data with default path
+     * For debugging
      */
     public Parser() {
         this.tasks = new TaskList();
@@ -43,85 +38,97 @@ public class Parser {
     }
 
     /**
+     * Read's user's input for parsing.
+     *
+     * @param s The sentence the user had input.
+     */
+    public void readCommand(String s) {
+        parse(s);
+    }
+
+    /**
      * The main loop of interacting with the user.
      * Decodes the input and calls the relevant functions.
      */
-    public void parse() {
-        userInteracting: while (true) {
-            try {
-                String sentence = ui.readCommand();
-                String[] parsedSentence = sentence.split(" ");
-                String command = parsedSentence[0];
-                switch (command) {
-                case "bye":
-                    st.save(tasks);
-                    break userInteracting;
-    
-                case "list":
-                    ui.showList(tasks);
-                    break;
+    public void parse(String sentence) {
+        try {
+            String[] parsedSentence = sentence.split(" ");
+            String command = parsedSentence[0];
+            switch (command) {
+            case "bye":
+                ui.closeUi();
+                st.save(tasks);
+                break;
 
-                case "mark":
-                // Fallthrough
-                case "done":
-                // Fallthrough
-                case "do":
-                    int addIdx = Integer.parseInt(parsedSentence[1]); // base 1
-                    ui.showMarked(tasks.mark(addIdx - 1), addIdx);
-                    break;
-    
-                case "unmark":
-                    int delIdx = Integer.parseInt(parsedSentence[1]);
-                    ui.showUnmarked(tasks.unmark(delIdx - 1), delIdx);
-                    break;
-    
-                case "todo":
-                    ui.showTaskAdded(tasks.addTodo(findTodoDescStart(sentence)), tasks.getSize());
-                    break;
-                case "deadline":
-                    String[] parsedDeadline = findDeadlineDescStart(sentence);
-                    ui.showTaskAdded(tasks.addDeadline(parsedDeadline[0], parsedDeadline[1]), tasks.getSize());
-                    break;
-                case "event":
-                    String[] parsedEvent = findEventDescStart(sentence);
-                    ui.showTaskAdded(tasks.addEvent(parsedEvent[0], parsedEvent[1]), tasks.getSize());
-                    break;
-    
-                case "delete":
-                // Fallthrough
-                case "remove":
-                    ui.showTaskRemoved(tasks.remove(
-                            Integer.parseInt(parsedSentence[1]) - 1), 
-                            tasks);
-                    break;
+            case "list":
+                ui.showList(tasks);
+                break;
 
-                case "find":
-                // Fallthrough
-                case "search":
-                    if (parsedSentence.length > 2) {
-                        throw new LilyException("bro you can only find 1 word at a time");
-                    } else {
-                        ui.showFind(parsedSentence[1], tasks);
-                    }
-                    break;
+            case "mark":
+            // Fallthrough
+            case "done":
+            // Fallthrough
+            case "do":
+                int addIdx = Integer.parseInt(parsedSentence[1]); // base 1
+                ui.showMarked(tasks.mark(addIdx - 1), addIdx);
+                break;
+
+            case "unmark":
+                int delIdx = Integer.parseInt(parsedSentence[1]);
+                ui.showUnmarked(tasks.unmark(delIdx - 1), delIdx);
+                break;
+
+            case "todo":
+                ui.showTaskAdded(tasks.addTodo(findTodoDescStart(sentence)), tasks.getSize());
+                break;
+
+            case "deadline":
+                String[] parsedDeadline = findDeadlineDescStart(sentence);
+                ui.showTaskAdded(tasks.addDeadline(parsedDeadline[0], parsedDeadline[1]), tasks.getSize());
+                break;
+
+            case "event":
+                String[] parsedEvent = findEventDescStart(sentence);
+                ui.showTaskAdded(tasks.addEvent(parsedEvent[0], parsedEvent[1]), tasks.getSize());
+                break;
     
-                default:
-                    ui.showInvalidCommand(sentence);
+            case "delete":
+            // Fallthrough
+            case "remove":
+                ui.showTaskRemoved(tasks.remove(
+                        Integer.parseInt(parsedSentence[1]) - 1),
+                        tasks);
+                break;
+
+            case "find":
+            // Fallthrough
+            case "search":
+                if (parsedSentence.length > 2) {
+                    throw new LilyException("bro you can only find 1 word at a time");
+                } else {
+                    ui.showFind(parsedSentence[1], tasks);
                 }
-
-            } catch (LilyException le) {
-                ui.showError(le.getMessage());
-            } catch (IOException ioe) {
-                ui.showError("I had trouble saving the file.");
-            } catch (IndexOutOfBoundsException oob) {
-                ui.showError(LilyException.ERROR_OUT_OF_BOUNDS);
-            } catch (DateTimeParseException dtpe) {
-                ui.showError("can you say the date again in this form: year-mm-dd");
-            } catch (NumberFormatException nfe) {
-                ui.showError("eh can you type its number instead?");
+                break;
+    
+            default:
+                ui.showInvalidCommand(sentence);
             }
+
+        } catch (LilyException le) {
+            ui.showError(le.getMessage());
+
+        } catch (IOException ioe) {
+            ui.showError(LilyException.ERROR_WRITE_FILE);
+
+        } catch (IndexOutOfBoundsException oob) {
+            ui.showError(LilyException.ERROR_OUT_OF_BOUNDS);
+
+        } catch (DateTimeParseException dtpe) {
+            ui.showError(LilyException.FORMAT_DATE);
+
+        } catch (NumberFormatException nfe) {
+            ui.showError(LilyException.FORMAT_IDX);
         }
-        ui.closeUi();
     }
 
 

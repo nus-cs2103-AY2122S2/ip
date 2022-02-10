@@ -1,5 +1,7 @@
 package lily.task;
 
+import lily.LilyException;
+
 import java.io.Serializable;
 
 /**
