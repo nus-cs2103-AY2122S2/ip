@@ -2,6 +2,7 @@ package mcbot;
 
 import mcbot.exception.InvalidCommandException;
 import mcbot.exception.McBotException;
+import mcbot.exception.AnomalyException;
 import mcbot.task.Deadline;
 import mcbot.task.Event;
 import mcbot.task.Task;
@@ -79,7 +80,7 @@ public class McBotGui {
      * @return goodbye line.
      */
     private String executeBye() {
-        return gui.byeLine();
+        return "bye";
     }
 
     /**
@@ -131,7 +132,10 @@ public class McBotGui {
      */
     private String executeEvent(Parser parser) {
         try {
-            Task t = createEvent(parser);
+            Event t = createEvent(parser);
+            if (tasks.hasAnomaly(t)) {
+                throw new AnomalyException();
+            }
             tasks.add(t);
             storage.appendData(t);
             return gui.addEventLine(t, tasks.size());
@@ -141,6 +145,8 @@ public class McBotGui {
             return gui.taskError("eventFormat");
         } catch (DateTimeParseException e) {
             return gui.taskError("datetimeFormat");
+        } catch (AnomalyException e) {
+            return gui.anomalyError();
         }
     }
 
@@ -268,7 +274,7 @@ public class McBotGui {
      * @return the event task created.
      * @throws InvalidCommandException when any data is missing.
      */
-    private Task createEvent(Parser parser) throws InvalidCommandException {
+    private Event createEvent(Parser parser) throws InvalidCommandException {
         String taskName = parser.getEventTask();
         String dateStr = parser.getEventDate();
         LocalDate eventDate = LocalDate.parse(dateStr, dateFormatter);

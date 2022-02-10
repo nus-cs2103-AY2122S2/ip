@@ -45,7 +45,7 @@ public class Gui {
      * 
      * @return The string for goodbye line.
      */
-    public String byeLine() {
+    public static String byeLine() {
         return "Arghh! This ain't the last time ye see me lad";
     }
 
@@ -235,5 +235,9 @@ public class Gui {
         sb.append(t.toString() + "\n");
         sb.append("Ye now have " + size + " tasks in list lad");
         return sb.toString();
+    }
+
+    public String anomalyError() {
+        return "Mate, this two events are clashing. I can't create this event.";
     }
 }

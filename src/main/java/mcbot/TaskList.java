@@ -1,7 +1,10 @@
 package mcbot;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
+import mcbot.task.Event;
 import mcbot.task.Task;
 
 /**
@@ -96,5 +99,24 @@ public class TaskList {
         } else {
             return sb.toString();
         }
+    }
+
+    public boolean hasAnomaly(Event t) {
+        LocalDate currDate = t.getEventDate();
+        LocalTime currTime = t.getEventTime();
+        boolean isAnomalyFound = false;
+        for (Task prevTask: taskList) {
+            if (prevTask instanceof Event) {
+                Event prevEvent = (Event) prevTask;
+                LocalDate prevDate = prevEvent.getEventDate();
+                LocalTime prevTime = prevEvent.getEventTime();
+                boolean hasSameDate = currDate.equals(prevDate);
+                boolean hasSameTime = currTime.equals(prevTime);
+                if (hasSameDate && hasSameTime) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

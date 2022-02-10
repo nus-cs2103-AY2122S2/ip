@@ -63,7 +63,7 @@ public class Storage {
         File folder = new File("./data");
         boolean isFileMissing = !f.exists();
         boolean isFolderMissing = !folder.exists();
-        if (!isFileMissing && !isFolderMissing) {
+        if (isFolderMissing) {
             boolean isFolderCreated = folder.mkdir();
             boolean isFileCreated = f.createNewFile();
             if (isFolderCreated && isFileCreated) {
@@ -72,7 +72,7 @@ public class Storage {
             } else {
                 System.out.println("Something went wrong in creating file/folder.");
             }
-        } else {
+        } else if (isFileMissing) {
             boolean isFileCreated = f.createNewFile();
             if (isFileCreated) {
                 System.out.println("I'ave created a new file for ya, " + filePath + " to save yer list");

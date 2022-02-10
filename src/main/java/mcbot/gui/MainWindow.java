@@ -1,5 +1,9 @@
 package mcbot.gui;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -42,12 +46,34 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        boolean isEnd = false;
         String input = userInput.getText();
         String response = mcBotGui.getResponse(input);
+        if (response.equals("bye")) {
+            isEnd = true;
+            response = "Arghh! This ain't the last time ye see me lad";
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, mcBotImage)
         );
         userInput.clear();
+        
+        //code snippet from https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
+        if (isEnd) {
+            Task<Void> sleeper = new Task<>() {
+                @Override
+                protected Void call() {
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    return null;
+                }
+            };
+            sleeper.setOnSucceeded(event -> Platform.exit());
+            new Thread(sleeper).start();
+        }
     }
 }

@@ -66,6 +66,14 @@ public class Event extends Task {
             return getTaskIcon() + " | " + isDone + " | " + taskName + " | " + eventDate;
         }
     }
+    
+    public LocalDate getEventDate() {
+        return eventDate;
+    }
+    
+    public LocalTime getEventTime() {
+        return eventTime;
+    }
 
     /**
      * Returns a String that describes the Task.
