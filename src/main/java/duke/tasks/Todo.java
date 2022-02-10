@@ -31,18 +31,22 @@ public class Todo extends Task {
      *               the description of the task.
      */
     protected static Todo createTask(String[] tokens) throws DukeException {
-        String item = "";
-        if (tokens.length == 1) {
+        String description = createDescription(tokens);
+        if (description.equals("")) {
             throw new DukeException("The description of a todo task cannot be empty!");
         }
+        return new Todo(description);
+    }
 
+    private static String createDescription(String[] tokens) {
+        String description = "";
         for (String token : tokens) {
             if (token.equals("todo")) {
                 continue;
             } else {
-                item += token + " ";
+                description += token + " ";
             }
         }
-        return new Todo(item.trim());
+        return description.trim();
     }
 }

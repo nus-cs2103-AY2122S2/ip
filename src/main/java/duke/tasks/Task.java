@@ -38,7 +38,7 @@ public abstract class Task implements Serializable {
      */
     public String toString() {
         String display = isCompleted ? "[X]" : "[  ]";
-        return display + " " + description.toString();
+        return display + " " + description;
     }
 
 
