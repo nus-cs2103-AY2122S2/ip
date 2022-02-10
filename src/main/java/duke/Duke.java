@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 
@@ -56,5 +57,12 @@ public class Duke {
      */
     public String getResponse(String userInput) throws DukeException, IOException {
         return ui.parseUserInput(tasks, storage, userInput);
+    }
+
+    /**
+     * Obtains the current list of tasks to be used for populating pie chart data
+     */
+    public ArrayList<Task> getTasks() {
+        return tasks.getTasks();
     }
 }
