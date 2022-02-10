@@ -12,7 +12,7 @@ public class Event extends Task {
      * @param eventBy validated event date with type LocalDate
      */
     public Event(String description, LocalDate eventBy) {
-        super(description);
+        super(description, eventBy);
         this.eventBy = eventBy;
     }
 

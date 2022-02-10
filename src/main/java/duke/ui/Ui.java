@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import duke.Duke;
@@ -88,6 +89,16 @@ public class Ui {
 
         return response;
     }
+
+    /** Print result header for find command */
+    public static String printReminderResultHeader(LocalDate date, ArrayList<Task> tasks) {
+        String response = "Reminder to do your task(s) on "
+                + "\"" + date + "\"" + ":"
+                + printTasks(tasks);
+
+        return response;
+    }
+
     /**
      * Iterates and prints through the tasks
      *

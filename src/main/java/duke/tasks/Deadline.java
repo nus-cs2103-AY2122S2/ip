@@ -12,7 +12,7 @@ public class Deadline extends Task {
      * @param deadlineBy validated deadline with type LocalDate
      */
     public Deadline(String description, LocalDate deadlineBy) {
-        super(description);
+        super(description, deadlineBy);
         this.deadlineBy = deadlineBy;
     }
 
