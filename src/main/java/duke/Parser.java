@@ -11,8 +11,60 @@ public class Parser {
         this.input = input;
     }
 
-    public ParsedAnswer parse() {
+    void assertInputNotEmpty() {
         assert !input.isEmpty() : "Input cannot be left blank.";
+    }
+
+    String getCommandThroughRegex(String regex) {
+        String command = "";
+        if (regex.equalsIgnoreCase("/by")) {
+            command = "event";
+        } else if (regex.equalsIgnoreCase("/at")) {
+            command = "deadline";
+        } else {
+            command = "todo";
+        }
+
+        return command;
+    }
+
+
+    ParsedAnswer parseInputWithRegex(String regex, String[] inputToParse) {
+        String command = getCommandThroughRegex(regex);
+        if (regex.equalsIgnoreCase("none")) {
+            try {
+                String desc = inputToParse[1];
+                ParsedAnswer pa = new ParsedAnswer(command, -1);
+                pa.setDesc(desc);
+                return pa;
+            } catch (Exception e) {
+                ParsedAnswer pa = new ParsedAnswer("error", -1);
+                pa.setDesc("The description cannot be empty!");
+                return pa;
+            }
+        } else {
+            try {
+                String[] eventParseBy = inputToParse[1].split(regex);
+                ParsedAnswer pa;
+                if (eventParseBy.length <= 1) {
+                    pa = new ParsedAnswer("error", -1);
+                    pa.setDesc("Please check that your input format is correct.");
+                } else {
+                    pa = new ParsedAnswer(command, -1);
+                    pa.setDesc(eventParseBy[0]);
+                    pa.setDate(eventParseBy[1]);
+                }
+                return pa;
+            } catch (Exception e) {
+                ParsedAnswer pa = new ParsedAnswer("error", -1);
+                pa.setDesc("The description cannot be empty!");
+                return pa;
+            }
+        }
+    }
+
+    public ParsedAnswer parse() {
+        assertInputNotEmpty();
         String[] parsedString = input.toLowerCase().split(" ", 2);
         switch (parsedString[0]) {
             case "bye":
@@ -29,7 +81,7 @@ public class Parser {
                     return new ParsedAnswer("unmark", -1);
                 }
 
-            case "mark" :
+            case "mark":
                 try {
                     int idx = Integer.parseInt(parsedString[1]);
                     return new ParsedAnswer("mark", idx);
@@ -46,54 +98,13 @@ public class Parser {
                 }
 
             case "todo":
-                try {
-                    String desc = parsedString[1];
-                    ParsedAnswer pa = new ParsedAnswer("todo", -1);
-                    pa.setDesc(parsedString[1]);
-                    return pa;
-                } catch (Exception e) {
-                    ParsedAnswer pa = new ParsedAnswer("error", -1);
-                    pa.setDesc("The description cannot be empty!");
-                    return pa;
-                }
+                return parseInputWithRegex("none", parsedString);
 
             case "event":
-                try {
-                    String [] eventParseBy = parsedString[1].split("/at");
-                    ParsedAnswer pa;
-                    if (eventParseBy.length <= 1) {
-                        pa = new ParsedAnswer("error", -1);
-                        pa.setDesc("Please check that your input format is correct.");
-                    } else {
-                        pa = new ParsedAnswer("event", -1);
-                        pa.setDesc(eventParseBy[0]);
-                        pa.setDate(eventParseBy[1]);
-                    }
-                    return pa;
-                } catch (Exception e) {
-                    ParsedAnswer pa = new ParsedAnswer("error", -1);
-                    pa.setDesc("The description cannot be empty!");
-                    return pa;
-                }
+                return parseInputWithRegex("/at", parsedString);
 
             case "deadline":
-                try {
-                    String [] dlParseBy = parsedString[1].split("/by");
-                    ParsedAnswer pa;
-                    if (dlParseBy.length <= 1) {
-                        pa = new ParsedAnswer("error", -1);
-                        pa.setDesc("Please check that your input format is correct.");
-                    } else {
-                        pa = new ParsedAnswer("deadline", -1);
-                        pa.setDesc(dlParseBy[0]);
-                        pa.setDate(dlParseBy[1]);
-                    }
-                    return pa;
-                } catch (Exception e) {
-                    ParsedAnswer pa = new ParsedAnswer("error", -1);
-                    pa.setDesc("The description cannot be empty!");
-                    return pa;
-                }
+                return parseInputWithRegex("/by", parsedString);
 
             case "find":
                 try {
@@ -107,7 +118,7 @@ public class Parser {
                 }
 
             default:
-                ParsedAnswer pa = new ParsedAnswer("error", - 1);
+                ParsedAnswer pa = new ParsedAnswer("error", -1);
                 pa.setDesc("Sorry, but I have no idea what you mean.");
                 return pa;
         }

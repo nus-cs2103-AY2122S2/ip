@@ -7,25 +7,29 @@ import java.util.ArrayList;
  */
 
 public class TaskList {
-    static void add(Task task) {
+    static void assertTaskListNotNull() {
         assert Storage.taskList != null : "The list does not exist in the first place.";
+    }
+
+    static void add(Task task) {
+        assertTaskListNotNull();
         Storage.taskList.add(task);
     }
 
     static String delete(int idx) {
-        assert Storage.taskList != null : "The list does not exist in the first place.";
+        assertTaskListNotNull();
         try {
             Storage.taskList.remove(idx - 1);
             Storage s = new Storage();
             s.save();
-            return "Successfully deleted file.";
+            return "Successfully deleted task.";
         } catch (IndexOutOfBoundsException e) {
             return "Item not found in list.";
         }
     }
 
     static String list() {
-        assert Storage.taskList != null : "The list does not exist in the first place.";
+        assertTaskListNotNull();
         ArrayList<Task> taskArrayList = Storage.taskList;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the tasks in your list: " + "\n");
@@ -36,7 +40,7 @@ public class TaskList {
     }
 
     static String find(String term){
-        assert Storage.taskList != null : "The list does not exist in the first place.";
+        assertTaskListNotNull();
         StringBuilder stringBuilder = new StringBuilder();
         boolean hasResults = false;
         for (Task t : Storage.taskList) {
