@@ -107,7 +107,7 @@ public class Parser {
      * @see      Storage
      */
     public static String parseTextGui(
-            String inputText, TaskList taskList, Storage storage) { // returns true if bot should continue parsing text
+            String inputText, TaskList taskList, Storage storage) {
         inputText = inputText.trim();
         String[] inputStringArray = inputText.split(" ");
         try {
