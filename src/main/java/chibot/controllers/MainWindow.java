@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImg.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/chisan.png"));
+    private Image chiImage = new Image(this.getClass().getResourceAsStream("/images/chisan.png"));
 
     /**
      * Places introduction message when window opens.
@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getChiDialog(chi.getWelcomeMessage(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getChiDialog(chi.getWelcomeMessage(), chiImage));
     }
 
     public void setDuke(Chi d) {
@@ -76,7 +76,7 @@ public class MainWindow extends AnchorPane {
         try {
             input = userInput.getText();
             if (input.equalsIgnoreCase("bye")) {
-                dialogContainer.getChildren().add(DialogBox.getChiDialog(chi.getGoodbyeMessage(), dukeImage));
+                dialogContainer.getChildren().add(DialogBox.getChiDialog(chi.getGoodbyeMessage(), chiImage));
                 PauseTransition pt = new PauseTransition(Duration.seconds(3));
                 pt.setOnFinished(e -> Platform.exit());
                 pt.play();
@@ -84,20 +84,20 @@ public class MainWindow extends AnchorPane {
                 response = chi.getResponse(input);
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getChiDialog(response, dukeImage)
+                        DialogBox.getChiDialog(response, chiImage)
                 );
             }
             userInput.clear();
         } catch (ChiException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getChiDialog(e.getMessage(), dukeImage)
+                    DialogBox.getChiDialog(e.getMessage(), chiImage)
             );
             userInput.clear();
         } catch (IOException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getChiDialog("The IO is faulty nyan~!", dukeImage)
+                    DialogBox.getChiDialog("The IO is faulty nyan~!", chiImage)
             );
             userInput.clear();
         }

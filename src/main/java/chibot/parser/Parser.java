@@ -33,7 +33,7 @@ public class Parser {
             throw new ChiException("Hey it's not like I want you to...but can you type something nyan!");
         } else {
             // Check if message is valid command
-            Keywords s = messageValidator(messageFragments);
+            Keywords s = inspectMessage(messageFragments);
             // Create a new command instance for the user command
             Command r = Command.of(s, messageFragments);
             return r.execute(tl, sge);
@@ -47,7 +47,7 @@ public class Parser {
      * @return A Keyword enum of the command to be executed.
      * @throws ChiException If the command sent by the user is not in correct format.
      */
-    public Keywords messageValidator(String[] tokens) throws ChiException {
+    public Keywords inspectMessage(String[] tokens) throws ChiException {
         try {
             /* Check if the 1st word is a valid command
                @author WJunHong-reused
@@ -64,7 +64,7 @@ public class Parser {
             if (isMultiWordCommand && tokens.length < MIN_COMMAND_LENGTH) {
                 throw new ChiException("Hey this command is too short nyan!");
             } else if (isNumericCommand && tokens.length < MIN_COMMAND_LENGTH) {
-                throw new ChiException("Hey can you specify a number nyan!"); // Check if numeric commands have numbers
+                throw new ChiException("Hey can you specify a number nyan!");
             } else if (res.equals(Keywords.LIST) && tokens.length > LIST_COMMAND_LENGTH) {
                 throw new ChiException("Hey this command doesn't take in so many arguments nyan!");
             } else if (res.equals(Keywords.HELP) && tokens.length > MAX_HELP_COMMAND_LENGTH) {
