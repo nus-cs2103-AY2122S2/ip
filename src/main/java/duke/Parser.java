@@ -22,6 +22,7 @@ public class Parser {
 
     private static void checkIfUserInputValid(String userInput) throws DukeException {
         String trimmedInput = userInput.trim();
+        assert !trimmedInput.isBlank() : "Input given should not be blank";
 
         if (checkMissingDescriptionOfInput(trimmedInput)) {
             throw new DukeException(("OOPS!!! The description of a " + trimmedInput + " cannot be empty."));

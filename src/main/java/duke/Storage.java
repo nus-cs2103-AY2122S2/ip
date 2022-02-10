@@ -37,6 +37,7 @@ public class Storage {
         if (!directory.exists()) {
             directory.mkdirs();
         }
+        assert file.exists() : "Data save file does not exist";
     }
     /**
      * Writes the data of list to the file.
@@ -46,6 +47,7 @@ public class Storage {
      * @throws IOException If an error occurs while writing to file.
      */
     public void writeToFile(String filePath, List taskList) throws IOException {
+        assert !filePath.isEmpty() : "Save data file does not exist";
         FileWriter fw = new FileWriter(filePath);
         fw.write(taskList.toString());
         fw.close();
@@ -59,6 +61,7 @@ public class Storage {
     public ArrayList<Task> load() {
         ArrayList<Task> newTaskList = new ArrayList<>();
         File file = new File("data/duke.txt");
+        assert file.exists() : "Save data file does not exist";
         try {
             Scanner sc = new Scanner(file);
             sc.nextLine();
