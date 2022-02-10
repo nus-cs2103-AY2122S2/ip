@@ -39,7 +39,7 @@ public class TaskList {
      */
     public String listTasks() {
         ListTaskCommand listTasks = new ListTaskCommand(tasks, writeToFile);
-        listTasks.listTasks();
+        listTasks.getTaskList();
 
         return listTasks.toString();
     }

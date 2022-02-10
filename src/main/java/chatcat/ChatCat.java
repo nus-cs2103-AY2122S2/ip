@@ -6,12 +6,10 @@ import java.io.InputStreamReader;
 
 import chatcat.tasklist.TaskList;
 import chatcat.util.Parser;
-import chatcat.util.Ui;
 
 public class ChatCat {
     private static TaskList taskList = new TaskList();
     private static Parser parser = new Parser(taskList);
-    private static Ui ui = new Ui();
 
     public String getResponse(String str) {
         return this.parser.parseTask(str);
@@ -26,8 +24,6 @@ public class ChatCat {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        ui.showWelcomeSMS();
 
         String input = " ";
 

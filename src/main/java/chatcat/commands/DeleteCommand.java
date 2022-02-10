@@ -34,11 +34,13 @@ public class DeleteCommand extends Command {
      */
     public void delete() {
         super.tasks = writeToFile.toRead();
-        String[] input = INDEX_TO_DELETE.split(" ");
-        int toDelete = Integer.parseInt(input[1]) - 1;
 
-        assert toDelete < super.tasks.size() : "Index is larger than task list size";
-        removed = tasks.remove(toDelete);
+        String[] input = INDEX_TO_DELETE.split(" ");
+        int indexToDelete = Integer.parseInt(input[1]) - 1;
+
+        assert indexToDelete < super.tasks.size() : "Index is larger than task list size";
+        removed = tasks.remove(indexToDelete);
+
         writeToFile.toWrite(tasks);
     }
 

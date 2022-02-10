@@ -28,14 +28,17 @@ public class FilterCommand extends Command {
     }
 
     /**
-     * Displays the tasks {@code Task} in tasklist {@code taskList} that includes a specified keyword.
+     * Displays the tasks {@code Task} in tasklist
+     * {@code taskList} that includes a specified keyword.
      *
      * @see Task
      */
     public void filter() throws ChatCatException {
         super.tasks = writeToFile.toRead();
-        String[] input = KEYWORD.split(" ");
 
+        /** Searches the task list and outputs tasks with keyword in filteredList **/
+        String[] input = KEYWORD.split(" ");
+      
         super.tasks.forEach(task -> {
             if (task.containsKeyword(input[1])) {
                 filteredList.add(task);
@@ -48,9 +51,11 @@ public class FilterCommand extends Command {
     }
 
     /**
-     * Returns a representation in string of filtered {@code Task} tasks that includes on keyword.
+     * Returns a representation in string of filtered
+     * {@code Task} tasks that includes on keyword.
      *
-     * @return a representation in string of filtered {@code Task} tasks that includes on keyword.
+     * @return a representation in string of filtered
+     * {@code Task} tasks that includes on keyword.
      */
     @Override
     public String toString() {
@@ -60,7 +65,6 @@ public class FilterCommand extends Command {
         for (int i = 0; i < filteredList.size(); i++) {
             str.append((i + 1) + ". " + filteredList.get(i) + "\n");
         }
-        str.append("");
 
         return str.toString();
     }

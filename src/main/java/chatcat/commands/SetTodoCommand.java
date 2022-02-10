@@ -44,8 +44,10 @@ public class SetTodoCommand extends Command {
             throw new ChatCatException(
                     "OOPS!!! The description of a todo cannot be empty.");
         }
+      
+        String todoStr = TODO.substring(5);
+        todo = new Todo(todoStr);
 
-        todo = new Todo(TODO.substring(5));
         super.tasks.add(todo);
         super.writeToFile.toWrite(super.tasks);
     }

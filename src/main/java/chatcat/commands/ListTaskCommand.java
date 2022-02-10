@@ -23,12 +23,12 @@ public class ListTaskCommand extends Command{
     }
 
     /**
-     * Prints out all tasks in Task List.
+     * Reads saved task list from previous session.
      *
      * @see WriteToFile
      * @see Task
      */
-    public void listTasks() {
+    public void getTaskList() {
         tasks = writeToFile.toRead();
     }
 

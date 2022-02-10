@@ -45,8 +45,10 @@ public class SetDeadlineCommand extends Command {
         }
 
         String[] split = DEADLINE.split("/by ");
+        String deadlineStr = split[0].substring(9);
+      
         DateTimeUtil dateTimeUtil = new DateTimeUtil(split[1]);
-        deadline = new Deadline(split[0].substring(9), dateTimeUtil.getTime());
+        deadline = new Deadline(deadlineStr, dateTimeUtil.getTime());
 
         super.tasks.add(deadline);
         super.writeToFile.toWrite(super.tasks);
