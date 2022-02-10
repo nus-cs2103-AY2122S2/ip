@@ -1,10 +1,10 @@
 package aeromon;
 
+import java.util.ArrayList;
+
 import aeromon.command.Command;
 import aeromon.command.CommandManager;
 import aeromon.task.TaskArrayList;
-
-import java.util.ArrayList;
 
 /**
  * Aeromon class that runs the Aeromon bot.
@@ -50,6 +50,10 @@ public class Aeromon {
         }
     }
 
+    /**
+     * Executes the Aeromon class and runs the bot.
+     * @param args
+     */
     public static void main(String[] args) {
         Aeromon aeromon = new Aeromon("data/localTasks.txt");
         aeromon.start();
