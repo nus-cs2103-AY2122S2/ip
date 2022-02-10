@@ -26,6 +26,7 @@ public class AddDeadlineCommand extends Command {
      * @throws DukeException Exception is thrown when there is no time provided
      */
     public AddDeadlineCommand(String input, String time) throws DukeException {
+        assert input != null : "No description was provided to the task";
         description = input;
         if (time.length() == 0) {
             throw new DukeException("Oops! You have not keyed in a due date for the task! ┗(｀Дﾟ┗(｀ﾟДﾟ´)┛ﾟД´)┛\n"

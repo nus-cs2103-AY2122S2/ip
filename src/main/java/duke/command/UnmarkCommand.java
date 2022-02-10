@@ -20,6 +20,7 @@ public class UnmarkCommand extends Command {
      * @param id Index of the task that is to be unmarked in the TaskList.
      */
     public UnmarkCommand(String id) {
+        assert id != null : "No task ID was provided to be marked";
         unmarkId = id;
     }
 

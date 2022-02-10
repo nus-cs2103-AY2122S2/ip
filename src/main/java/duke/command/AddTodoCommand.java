@@ -21,6 +21,7 @@ public class AddTodoCommand extends Command {
      * @param input Description of the todo task.
      */
     public AddTodoCommand(String input) {
+        assert input != null : "No description was provided to the task";
         description = input;
     }
 
