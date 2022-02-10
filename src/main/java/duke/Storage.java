@@ -18,6 +18,11 @@ public class Storage {
     private String fileName;
     private TaskList tasks;
 
+    private static final int STATE_INDEX = 0;
+    private static final int TYPE_INDEX = 1;
+    private static final int DESCRIPTION_INDEX = 2;
+    private static final int TIME_INDEX = 3;
+
     /**
      * Constructor of the Storage class.
      *
@@ -86,17 +91,17 @@ public class Storage {
      */
     private void processString(String line) throws DukeException {
         String[] parts = line.split("\\|");
-        String state = parts[0].trim();
-        String type = parts[1].trim();
-        String description = parts[2].trim();
+        String state = parts[STATE_INDEX].trim();
+        String type = parts[TYPE_INDEX].trim();
+        String description = parts[DESCRIPTION_INDEX].trim();
         // 1. Check Task type
         if (type.equals("D")) {
-            String time = parts[3];
+            String time = parts[TIME_INDEX];
             DateHelper datetime = new DateHelper(time);
             Deadline out = new Deadline(description, datetime);
             tasks.addTask(out);
         } else if (type.equals("E")) {
-            String time = parts[3];
+            String time = parts[TIME_INDEX];
             DateHelper datetime = new DateHelper(time);
             Event out = new Event(description, datetime);
             tasks.addTask(out);

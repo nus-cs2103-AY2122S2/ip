@@ -11,7 +11,7 @@ import duke.task.TaskList;
  */
 public class MarkCommand extends Command {
     private String markId;
-    static final String OOB_RESPONSE = "Sorry, I could not find the item \\(T.T)/\n"
+    private static final String OOB_RESPONSE = "Sorry, I could not find the item \\(T.T)/\n"
             + "Please type 'list' to view your current entries.";
 
     /**
@@ -33,8 +33,9 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        int markTaskId = Integer.parseInt(markId) - 1;
         try {
-            Task currentTask = tasks.getTask(Integer.parseInt(markId) - 1);
+            Task currentTask = tasks.getTask(markTaskId);
             currentTask.setDone();
             String message = currentTask.getTask();
             return ("Ok, I have marked the following task:\n" + message);

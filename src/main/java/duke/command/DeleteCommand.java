@@ -11,7 +11,7 @@ import duke.task.TaskList;
  */
 public class DeleteCommand extends Command {
     private String deleteId;
-    static final String OOB_RESPONSE = "Sorry, I could not find the item \\(T.T)/\n"
+    private static final String OOB_RESPONSE = "Sorry, I could not find the item \\(T.T)/\n"
             + "Please type 'list' to view your current entries.";
 
     /**
@@ -33,8 +33,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        int deleteTaskId = Integer.parseInt(deleteId) - 1;
         try {
-            Task currTask = tasks.removeTask(Integer.parseInt(deleteId) - 1);
+            Task currTask = tasks.removeTask(deleteTaskId);
             return ("I have removed this from your tasks:\n" + currTask.getTask()
                     + "\nYou now have " + tasks.getSize() + " tasks");
         } catch (IndexOutOfBoundsException e) {

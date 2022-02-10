@@ -12,7 +12,7 @@ import duke.task.TaskList;
 public class UnmarkCommand extends Command {
     private String unmarkId;
     static final String OOB_RESPONSE = "Sorry, I could not find the item \\(T.T)/\n"
-            + "Please type 'list' to view your current entries.";
+                                        + "Please type 'list' to view your current entries.";
 
     /**
      * Constructor for the UnmrkCommand.
