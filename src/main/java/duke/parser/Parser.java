@@ -25,6 +25,12 @@ import duke.task.ToDo;
 import duke.ui.Ui;
 
 public class Parser {
+
+    /**
+     * Returns a command with user input.
+     *
+     * @param text text to be parsed.
+     */
     public static Command parse(String text) throws DukeException {
         List<String> input = Arrays.asList(text.split(" "));
         switch (input.get(0)) {
@@ -33,113 +39,31 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "mark":
-            try {
-                int markIndex = Integer.parseInt(input.get(1)) - 1;
-                return new MarkCommand(markIndex);
-            } catch (IndexOutOfBoundsException e) {
-                return new ErrorCommand("Missing Index");
-            }
+            return prepareMark(input);
         case "unmark":
-            try {
-                int unmarkIndex = Integer.parseInt(input.get(1)) - 1;
-                return new UnmarkCommand(unmarkIndex);
-            } catch (IndexOutOfBoundsException e) {
-                return new ErrorCommand("Missing Index");
-            }
+            return prepareUnMark(input);
         case "todo":
-            StringBuilder todo = new StringBuilder();
-            if (input.size() == 1) {
-                DukeException exception = new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                return new ErrorCommand(exception.toString());
-            } else {
-                assert input.size() != 1 : "empty description";
-                for (int i = 1; i < input.size(); i++) {
-                    todo.append(input.get(i)).append(" ");
-                }
-                return new AddTodoCommand(new ToDo(todo.toString()));
-            }
+            return prepareAddTodo(input);
         case "deadline":
-            StringBuilder deadline = new StringBuilder();
-            StringBuilder deadlineBy = new StringBuilder();
-            int byIndex = input.indexOf("/by");
-            if (input.size() == 1) {
-                assert input.size() != 1 : "empty description";
-                DukeException exception = new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                return new ErrorCommand(exception.toString());
-            } else if (byIndex == -1) {
-                DukeException exception = new DukeException("OOPS!!! The datetime of a deadline cannot be empty.");
-                return new ErrorCommand(exception.toString());
-            } else {
-                assert byIndex != -1 : "empty date";
-                for (int i = 1; i < byIndex; i++) {
-                    deadline.append(input.get(i)).append(" ");
-                }
-                for (int i = byIndex + 1; i < input.size(); i++) {
-                    deadlineBy.append(input.get(i)).append(" ");
-                }
-                LocalDate date = convertDate(deadlineBy.toString().trim());
-                if (date != null) {
-                    return new AddDeadlineCommand(new Deadline(deadline.toString(), date));
-                } else {
-                    assert date == null : "No date provided";
-                }
-                return new ErrorCommand("Add deadline error");
-            }
+            return prepareAddDeadline(input);
         case "event":
-            int atIndex = input.indexOf("/at");
-            if (input.size() == 1) {
-                assert input.size() != 1 : "empty description";
-                DukeException exception = new DukeException("OOPS!!! The description of a event cannot be empty.");
-                return new ErrorCommand(exception.toString());
-            } else if (atIndex == -1) {
-                DukeException exception = new DukeException("OOPS!!! The datetime of a event cannot be empty.");
-                return new ErrorCommand(exception.toString());
-            } else {
-                assert atIndex != -1 : "empty date";
-                StringBuilder event = new StringBuilder();
-                for (int i = 1; i < atIndex; i++) {
-                    event.append(input.get(i)).append(" ");
-                }
-                StringBuilder eventAt = new StringBuilder();
-                for (int i = atIndex + 1; i < input.size(); i++) {
-                    eventAt.append(input.get(i)).append(" ");
-                }
-                LocalDate date = convertDate(eventAt.toString().trim());
-                if (date != null) {
-                    return new AddEventCommand(new Event(event.toString(), date));
-                } else {
-                    assert date == null : "No date provided";
-                }
-                return new ErrorCommand("Add event error");
-            }
+            return prepareAddEvent(input);
         case "delete":
-            try {
-                int deleteIndex = Integer.parseInt(input.get(1)) - 1;
-                return new DeleteCommand(deleteIndex);
-            } catch (IndexOutOfBoundsException | NumberFormatException ex) {
-                DukeException exception = new DukeException("OOPS!!! invalid index.");
-                return new ErrorCommand(exception.toString());
-            }
+            return prepareDelete(input);
         case "search":
-            LocalDate date = convertDate(input.get(1));
-            if (date != null) {
-                return new SearchCommand(date);
-            } else {
-                assert date == null : "No date provided";
-            }
-            return new ErrorCommand("Search error");
+            return prepareSearchDate(input);
         case "find":
-            try {
-                String keyword = input.get(1);
-                return new FindCommand(keyword);
-            } catch (IndexOutOfBoundsException e) {
-                return new ErrorCommand("Please put in keyword");
-            }
+            return prepareFind(input);
         default:
             return new ErrorCommand("I'm sorry, but I don't know what that means");
         }
     }
 
+    /**
+     * Convert date String to LocalDate
+     *
+     * @param dateText text to be parsed.
+     */
     public static LocalDate convertDate (String dateText) {
         Ui ui = new Ui();
         try {
@@ -148,6 +72,123 @@ public class Parser {
         } catch (DateTimeParseException e) {
             ui.showDateTimeParseException();
             return null;
+        }
+    }
+
+    private static Command prepareMark(List<String> input) {
+        try {
+            int markIndex = Integer.parseInt(input.get(1)) - 1;
+            return new MarkCommand(markIndex);
+        } catch (IndexOutOfBoundsException e) {
+            return new ErrorCommand("Missing Index");
+        }
+    }
+
+    private static Command prepareUnMark(List<String> input) {
+        try {
+            int unmarkIndex = Integer.parseInt(input.get(1)) - 1;
+            return new UnmarkCommand(unmarkIndex);
+        } catch (IndexOutOfBoundsException e) {
+            return new ErrorCommand("Missing Index");
+        }
+    }
+
+    private static Command prepareAddToDo(List<String> input) {
+        StringBuilder todo = new StringBuilder();
+        if (input.size() == 1) {
+            assert input.size() != 1 : "empty description";
+            DukeException exception = new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            return new ErrorCommand(exception.toString());
+        } else {
+            for (int i = 1; i < input.size(); i++) {
+                todo.append(input.get(i)).append(" ");
+            }
+            return new AddTodoCommand(new ToDo(todo.toString()));
+        }
+    }
+
+    private static Command prepareAddEvent(List<String> input) {
+        int atIndex = input.indexOf("/at");
+        if (input.size() == 1) {
+            assert input.size() != 1 : "empty description";
+            DukeException exception = new DukeException("OOPS!!! The description of a event cannot be empty.");
+            return new ErrorCommand(exception.toString());
+        } else if (atIndex == -1) {
+            DukeException exception = new DukeException("OOPS!!! The datetime of a event cannot be empty.");
+            return new ErrorCommand(exception.toString());
+        } else {
+            assert atIndex != -1 : "empty date";
+            StringBuilder event = new StringBuilder();
+            for (int i = 1; i < atIndex; i++) {
+                event.append(input.get(i)).append(" ");
+            }
+            StringBuilder eventAt = new StringBuilder();
+            for (int i = atIndex + 1; i < input.size(); i++) {
+                eventAt.append(input.get(i)).append(" ");
+            }
+            LocalDate date = convertDate(eventAt.toString().trim());
+            if (date != null) {
+                return new AddEventCommand(new Event(event.toString(), date));
+            } else {
+                assert date == null : "No date provided";
+            }
+            return new ErrorCommand("Add event error");
+        }
+    }
+
+    private static Command prepareAddDeadline(List<String> input) {
+        StringBuilder deadline = new StringBuilder();
+        StringBuilder deadlineBy = new StringBuilder();
+        int byIndex = input.indexOf("/by");
+        if (input.size() == 1) {
+            assert input.size() != 1 : "empty description";
+            DukeException exception = new DukeException("The description of a deadline cannot be empty.");
+            return new ErrorCommand(exception.toString());
+        } else if (byIndex == -1) {
+            DukeException exception = new DukeException("The datetime of a deadline cannot be empty.");
+            return new ErrorCommand(exception.toString());
+        } else {
+            assert byIndex != -1 : "empty date";
+            for (int i = 1; i < byIndex; i++) {
+                deadline.append(input.get(i)).append(" ");
+            }
+            for (int i = byIndex + 1; i < input.size(); i++) {
+                deadlineBy.append(input.get(i)).append(" ");
+            }
+            LocalDate date = convertDate(deadlineBy.toString().trim());
+            if (date != null) {
+                return new AddDeadlineCommand(new Deadline(deadline.toString(), date));
+            } else {
+                assert date == null : "No date provided";
+            }
+            return new ErrorCommand("Add deadline error");
+        }
+    }
+
+    private static Command prepareDelete(List<String> input) {
+        try {
+            int deleteIndex = Integer.parseInt(input.get(1)) - 1;
+            return new DeleteCommand(deleteIndex);
+        } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+            DukeException exception = new DukeException("OOPS!!! invalid index.");
+            return new ErrorCommand(exception.toString());
+        }
+    }
+
+    private static Command prepareSearchDate(List<String> input) {
+        LocalDate date = convertDate(input.get(1));
+        if (date != null) {
+            return new SearchCommand(date);
+        }
+        return new ErrorCommand("Search error");
+    }
+
+    private static Command prepareFind(List<String> input) {
+        try {
+            String keyword = input.get(1);
+            return new FindCommand(keyword);
+        } catch (IndexOutOfBoundsException e) {
+            return new ErrorCommand("Please put in keyword");
         }
     }
 }

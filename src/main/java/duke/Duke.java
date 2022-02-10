@@ -12,6 +12,11 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
 
+    /**
+     * Main class of the Duke application that connect Ui Storage and TaskList
+     *
+     * @param filePath   the file location.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

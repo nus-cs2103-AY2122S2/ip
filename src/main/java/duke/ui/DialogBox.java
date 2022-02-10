@@ -49,12 +49,12 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         tmp.get(1).setTranslateX(10);
-        tmp.get(1).setStyle("-fx-text-fill:black;" +
-                        "-fx-font-size: 12;" +
-                        "-fx-padding: 5 10;" +
-                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" +
-                        "-fx-background-radius: 16;" +
-                        "-fx-background-color: white"
+        tmp.get(1).setStyle("-fx-text-fill:black;"
+                        + "-fx-font-size: 12;"
+                        + "-fx-padding: 5 10;"
+                        + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);"
+                        + "-fx-background-radius: 16;"
+                        + "-fx-background-color: white"
         );
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);

@@ -6,11 +6,24 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
+    /**
+     * Event class.
+     *
+     * @param task tasks for event.
+     * @param at time at.
+     */
     public Event(String task, LocalDate at) {
         super(task.trim());
         this.at = at;
     }
 
+    /**
+     * Event class change done status.
+     *
+     * @param task tasks for event.
+     * @param at time at.
+     * @param done done status.
+     */
     public Event(String task, LocalDate at, boolean done) {
         super(task, done);
         this.at = at;
@@ -39,7 +52,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + Type.E + "]" + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        String outputDate = at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return "[" + Type.E + "]" + super.toString()
+                + " (at: " + outputDate + ")";
     }
 }

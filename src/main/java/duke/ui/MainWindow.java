@@ -32,12 +32,16 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         sendButton.setBackground(null);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        scrollPane.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("/view/style.css")).toExternalForm());
+        scrollPane.getStylesheets().add(Objects.requireNonNull(
+                this.getClass().getResource("/view/style.css")).toExternalForm());
     }
 
     public void setDuke(Duke d) {

@@ -25,7 +25,7 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * filter and format the string out put of list by the date.
+     * Filters and formats the string out put of list by the date.
      *
      * @param tasks   the entire TaskList.
      * @param ui      the ui interface and messages.
@@ -37,7 +37,8 @@ public class SearchCommand extends Command {
         searchText.append("Here are the tasks on ")
                 .append(date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))).append(" \n");
         for (int i = 0; i < tasks.getSize(); i++) {
-            if (tasks.getByIndex(i).getDate() != null && tasks.getByIndex(i).getDate().equals(date)) {
+            LocalDate currDate = tasks.getByIndex(i).getDate();
+            if (currDate != null && currDate.equals(date)) {
                 searchText.append("    ").append(i + 1).append(". ")
                         .append(tasks.getByIndex(i))
                         .append("\n");
