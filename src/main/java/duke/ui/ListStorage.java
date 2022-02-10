@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
-import duke.tasks.TaskManager;
+import duke.tasks.Task;
 
 /**
  * ListStorage Object that handles storage of Tasks in a ser file.
@@ -14,30 +15,27 @@ import duke.tasks.TaskManager;
  * Creates ser file if absent.
  */
 public class ListStorage {
-    private TaskManager taskManager;
 
     /**
      * Constructs the ListStorage Object.
-     *
-     * @param taskManager TaskManager used for getting task list
      */
-    public ListStorage(TaskManager taskManager) {
-        this.taskManager = taskManager;
+    public ListStorage() {
     }
 
     /**
      * Saves task list into text file.
      *
+     * @param taskList ArrayList containing tasks
      * @throws IOException if Task objects in ArrayList are not serializable
      */
-    public void saveList() throws IOException {
+    public void saveList(ArrayList<Task> taskList) throws IOException {
         File file = new File("storage");
         if (!file.exists()) {
             file.mkdir();
         }
         FileOutputStream writeData = new FileOutputStream("storage/list.ser");
         ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-        writeStream.writeObject(taskManager.getList());
+        writeStream.writeObject(taskList);
         writeStream.flush();
         writeStream.close();
     }

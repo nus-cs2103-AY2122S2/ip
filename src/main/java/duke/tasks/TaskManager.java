@@ -1,8 +1,10 @@
 package duke.tasks;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.exceptions.InvalidOperationException;
+import duke.ui.ListStorage;
 import duke.ui.UiManager;
 
 /**
@@ -11,6 +13,7 @@ import duke.ui.UiManager;
  */
 public class TaskManager {
     private UiManager uiManager;
+    private ListStorage listStorage;
     private ArrayList<Task> tasks;
     private String taskList;
 
@@ -19,8 +22,9 @@ public class TaskManager {
      *
      * @param manager UiManager object that is used to handle user input and output
      */
-    public TaskManager(UiManager manager) {
+    public TaskManager(UiManager manager, ListStorage storage) {
         this.uiManager = manager;
+        this.listStorage = storage;
         this.tasks = new ArrayList<>();
     }
 
@@ -124,6 +128,20 @@ public class TaskManager {
      */
     public void loadList(ArrayList<Task> taskList) {
         this.tasks = taskList;
+    }
+
+    /**
+     * Saves a task list into a serializable file
+     *
+     * @throws IOException if Task objects in ArrayList are not serializable
+     */
+    public void saveList() throws IOException {
+        this.listStorage.saveList(tasks);
+    }
+
+    public String exit() throws IOException {
+        this.saveList();
+        return this.uiManager.exit();
     }
 
     /**

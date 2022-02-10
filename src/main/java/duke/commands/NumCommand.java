@@ -5,6 +5,8 @@ import duke.exceptions.InvalidOperationException;
 import duke.tasks.TaskManager;
 import duke.ui.UiManager;
 
+import java.io.IOException;
+
 /**
  * NumCommand Object that issues commands dealing with
  * number type input.
@@ -28,7 +30,7 @@ public class NumCommand extends Command {
         this.uiManager = um;
         this.type = t;
         this.num = Integer.parseInt(task) - 1;
-        assert num > 0 : "Invalid index";
+        assert num >= 0 : "Invalid index";
     }
 
     /**
@@ -38,14 +40,20 @@ public class NumCommand extends Command {
      * @throws IndexOutOfBoundsException if the index provided is invalid
      * @throws InvalidOperationException if the operation is invalid
      */
-    public String execute() throws IndexOutOfBoundsException, InvalidOperationException, DukeException {
+    public String execute() throws IndexOutOfBoundsException, InvalidOperationException, DukeException, IOException {
         switch (type) {
         case MARK:
-            return taskManager.mark(num);
+            String markLabel =  taskManager.mark(num);
+            this.taskManager.saveList();
+            return markLabel;
         case UNMARK:
-            return taskManager.unmark(num);
+            String unmarkLabel = taskManager.unmark(num);
+            this.taskManager.saveList();
+            return unmarkLabel;
         case DELETE:
-            return taskManager.delete(num);
+            String deleteLabel = taskManager.delete(num);
+            this.taskManager.saveList();
+            return deleteLabel;
         default:
             throw new DukeException();
         }
