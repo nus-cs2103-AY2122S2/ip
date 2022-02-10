@@ -34,31 +34,13 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
 
-            //
-            AtomicBoolean shuttingDown = new AtomicBoolean(false);
+            // Starts the Reminder feature
+            launchReminders();
 
-            // Sets up the Reminder Timer
-            Thread thread = new Thread(() -> {
-                while (!shuttingDown.get() && !Thread.interrupted()) {
-                    launchReminders();
-                    try {
-                        Thread.sleep(1_000);
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                    }
-                }
-            });
-            thread.setDaemon(true);
-            thread.start();
-            //launchReminders();
-
-            // Adds a listener to execute a function when the stage is closed.
+            // Adds a listener to close the Reminder feature when the stage is closed.
             stage.setOnCloseRequest(event -> {
                 System.out.println("Stage is closing");
-                shuttingDown.set(true);
-                thread.interrupt();
                 closeReminders();
-                Platform.exit();
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,8 +54,10 @@ public class Main extends Application {
         timer = new Timer();
         RemindersTask tasks = new RemindersTask();
         if (repeatingReminders) {
-            timer.scheduleAtFixedRate(tasks, 5_000, 10_000);
+            // First reminder alert dialog appears 5 seconds after launching the app, then every 60 seconds afterwards.
+            timer.scheduleAtFixedRate(tasks, 5_000, 60_000);
         } else {
+            // First & only reminder alert dialog appears 5 seconds after launching the app.
             timer.schedule(tasks, 5_000);
         }
     }
