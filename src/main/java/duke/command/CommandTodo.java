@@ -3,7 +3,6 @@ package duke.command;
 import duke.Response;
 import duke.TaskList;
 import duke.Todo;
-import duke.Ui;
 
 public class CommandTodo extends Command {
     private TaskList taskList;

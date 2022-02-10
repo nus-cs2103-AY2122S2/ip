@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
 
 public class CommandUnmark extends Command {
     private TaskList taskList;

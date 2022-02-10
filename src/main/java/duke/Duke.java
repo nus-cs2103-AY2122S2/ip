@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.dukeexception.DukeException;
 import duke.dukeexception.NoTimeGivenException;
 
 /**
@@ -23,15 +24,13 @@ class Duke {
             storage.writeData(taskList);
             return response;
         } catch (NumberFormatException e) {
-            //mark command
-            //unmark command
             return "mark command must precede with a decimal number!";
-            //delete command
         } catch (IndexOutOfBoundsException e) {
-            //todo command
             return "please specify what to do";
         } catch (NoTimeGivenException e) {
             return "specify the time please\n";
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
