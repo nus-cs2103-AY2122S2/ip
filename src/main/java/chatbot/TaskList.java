@@ -87,6 +87,7 @@ public class TaskList {
             reply += "\n " + counter.toString() + "." + taskInfo; // note: new line is at the start
             counter++;
         }
+        assert counter - 1 <= this.taskList.size(); // counter should not exceed task list size
         String listHeader = "This is your agenda of tasks Sir:";
         return listHeader + reply;
     }
@@ -168,6 +169,7 @@ public class TaskList {
                 taskCounter++;
             }
         }
+        assert taskCounter - 1 <= this.taskList.size(); // there cannot be more tasks from this method than the list
         if (taskCounter == 1) { // no tasks were found
             return noTasksFound;
         }
