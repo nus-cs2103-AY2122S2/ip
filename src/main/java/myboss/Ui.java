@@ -1,5 +1,6 @@
 package myboss;
 
+import java.util.List;
 import java.util.Scanner;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Ui {
      * @param taskList the specified list of tasks.
      * @return string representation of list of found tasks.
      */
-    public String outputFoundTasks(ArrayList<Task> taskList) {
+    public String outputFoundTasks(List<Task> taskList) {
         StringBuilder tempOut = new StringBuilder("");
         tempOut.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
