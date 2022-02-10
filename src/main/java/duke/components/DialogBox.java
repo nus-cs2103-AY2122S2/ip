@@ -21,6 +21,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String DIALOGUE_BOX_FMXL_PATH = "/view/DialogBox.fxml";
+
     @FXML
     private Label dialog;
     @FXML
@@ -29,7 +31,7 @@ public class DialogBox extends HBox {
     private DialogBox(String text, Image img) {
         try {
             // Checks if DialogueBox.fxml file exists.
-            URL dialogueBoxFile = MainWindow.class.getResource("/view/DialogBox.fxml");
+            URL dialogueBoxFile = MainWindow.class.getResource(DIALOGUE_BOX_FMXL_PATH);
             assert dialogueBoxFile != null : "Dialogue Box Fxml file not found";
             assert img != null : "Image not found";
             // If it exists, continue running.

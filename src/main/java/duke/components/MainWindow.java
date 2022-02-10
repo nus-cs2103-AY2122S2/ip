@@ -28,7 +28,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
     private Image pcPrincipalImage;
     private Image cartmanImage;
 
