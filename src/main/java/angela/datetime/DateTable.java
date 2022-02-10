@@ -13,6 +13,8 @@ import angela.util.Ui;
  * Stores collection of task and time and performs operation to it
  */
 public class DateTable {
+    private static final String DATE_FORMAT = "d/M/yyyy";
+
     private HashMap<LocalDate, ArrayList<Task>> dateMap = new HashMap<>();
     private final BotException exception = new BotException();
     private final Ui ui;
@@ -28,7 +30,7 @@ public class DateTable {
      */
     public String getEventOnDate(String dateString) {
         LocalDate date = LocalDate.parse(dateString,
-                DateTimeFormatter.ofPattern("d/M/yyyy"));
+                DateTimeFormatter.ofPattern(DATE_FORMAT));
 
         if (dateMap.containsKey(date)) {
             ArrayList<Task> eventList = dateMap.get(date);

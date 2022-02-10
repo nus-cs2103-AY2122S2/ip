@@ -13,6 +13,9 @@ import angela.util.Ui;
  * Adds task to the respective storage command
  */
 public class AddTaskCommand extends Command {
+    private static final int TODO_LENGTH = 4;
+    private static final int DEADLINE_LENGTH = 8;
+    private static final int EVENT_LENGTH = 5;
     private final String description;
     private final String fullInput;
     private final String type;
@@ -41,7 +44,8 @@ public class AddTaskCommand extends Command {
      */
     private void addTaskDatabase(DateTable dateTable, BotStorage botStorage, Task task,
             TaskList taskList) throws IOException {
-        if (!task.getType().equals("T")) {
+        String taskType = task.getType();
+        if (!taskType.equals("T")) {
             dateTable.addDate(task);
         }
         botStorage.addTaskToDatabase(task);
@@ -61,11 +65,11 @@ public class AddTaskCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui,
             BotStorage botStorage, DateTable dateTable) throws IOException {
-        if (type.equals("T") && fullInput.length() == 4) {
+        if (type.equals("T") && fullInput.length() == TODO_LENGTH) {
             return exception.printEmptyDescriptionError("todo");
-        } else if (type.equals("D") && fullInput.length() == 8) {
+        } else if (type.equals("D") && fullInput.length() == DEADLINE_LENGTH) {
             return exception.printEmptyDescriptionError("deadline");
-        } else if (type.equals("E") && fullInput.length() == 5) {
+        } else if (type.equals("E") && fullInput.length() == EVENT_LENGTH) {
             return exception.printEmptyDescriptionError("event");
         } else {
             Task task = new Task(description, type);
