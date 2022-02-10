@@ -81,4 +81,8 @@ public class Task {
     public boolean isRelated(String term) {
         return name.contains(term);
     }
+
+    public boolean isSameTask(String compare) {
+        return name.equals(compare);
+    }
 }

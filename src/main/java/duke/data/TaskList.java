@@ -67,11 +67,24 @@ public class TaskList {
     }
 
     /**
-     * Marks the task at index to be undone
+     * Marks the task at index to be undone.
      * @param index index in the task
      */
     public void unmarkTask(int index) {
         tasks.get(index).setMark(false);
     }
 
+    /**
+     * Function that check if a specific task is in the TaskList.
+     * @param taskname name of the task.
+     * @return boolean depending if it is present in the Tasklist.
+     */
+    public boolean checkIfPresent(String taskname) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).isSameTask(taskname)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

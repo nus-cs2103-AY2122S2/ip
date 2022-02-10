@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.dukeexceptions.DukeException;
 import duke.responses.AddTaskResponse;
+import duke.responses.DuplicateTaskResponse;
 import duke.responses.Response;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -27,8 +28,13 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public Response execute() throws DukeException {
-        String[] ans = this.stringCmd.split(" /by ");
-        Task tempTask = new Deadline(ans[0].replace("deadline ", ""), ans[1]);
+        String[] stringCmdUnits = this.stringCmd.split(" /by ");
+        String taskName = stringCmdUnits[1];
+        if (taskList.checkIfPresent(taskName)) {
+            return new DuplicateTaskResponse(taskName);
+        }
+        Task tempTask = new Deadline(stringCmdUnits[0].replace("deadline ", ""),
+                taskName);
         Integer oldTaskListLength = taskList.taskLength();
         this.taskList.addTask(tempTask);
         assert taskList.taskLength() == oldTaskListLength + 1 : "Add Deadline Task to list";
