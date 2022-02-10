@@ -11,9 +11,6 @@ import heylo.tasks.Todo;
  * Represents a commands input by the user in the command line.
  */
 public class Command {
-    private final boolean isArgumentGiven;
-    private final boolean isExtraInfoGiven;
-    private final boolean isExtraInfoValid;
     private String command;
     private String argument;
     private String extraInfo;
@@ -28,12 +25,12 @@ public class Command {
         String[] extraArgs = input.trim().split("/", 2);
         this.command = inputArgs[0];
 
-        isArgumentGiven = inputArgs.length > 1;
-        isExtraInfoGiven = extraArgs.length > 1 && extraArgs[0].length() > 0;
-        isExtraInfoValid = extraArgs[1].trim().split(" ", 2).length > 1;
+        boolean isArgumentGiven = inputArgs.length > 1;
+        boolean isExtraInfoGiven = extraArgs.length > 1 && extraArgs[0].length() > 0;
 
         if (isArgumentGiven && isExtraInfoGiven) {
             this.argument = inputArgs[1].substring(0, inputArgs[1].indexOf("/"));
+            boolean isExtraInfoValid = extraArgs[1].trim().split(" ", 2).length > 1;
             if (isExtraInfoValid) {
                 this.extraInfo = extraArgs[1].trim().split(" ", 2)[1];
             }
