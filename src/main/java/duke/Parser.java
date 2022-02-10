@@ -22,15 +22,25 @@ public class Parser {
     private Checker checker;
     private Storage storage;
     private Command parsedCommand;
+    private static final int COMMAND_INDEX = 0;
+    private static final int DETAILS_INDEX = 1;
+    private static final int DESCRIPTION_INDEX = 0;
+    private static final int TIME_INDEX = 1;
 
     private static String DESC_RESPONSE = "Oops! \\(@.@)/ You have not keyed in a description for the "
             + "task!\n"
             + "Let's try again ~(^.^)~\n"
             + "Type 'help' if you need to know how to use this command";
 
-    private static String ID_RESPONSE = "Oops! \\(@.@)/ You have not keyed in an ID!\n"
+    private static String MISSING_ID_RESPONSE = "Oops! \\(@.@)/ You have not keyed in an ID!\n"
             + "Let's try again ~(^.^)~\n"
             + "Type 'help' if you need to know how to use this command";
+
+    private static String MISSING_DATE_RESPONSE = "Oops, please specify a date!";
+
+    private static final String INVALID_RESPONSE = "Sorry, I did not catch that! \\(T.T)/\n"
+            + "type 'help' to see all commands I can help with.";
+
     /**
      * Constructor method for Parser.
      *
@@ -48,7 +58,7 @@ public class Parser {
      */
     public Command parse() throws DukeException {
         textEntered = userInput.split(" ", 2);
-        command = textEntered[0];
+        command = textEntered[COMMAND_INDEX];
         checker = new Checker(command);
 
         switch (checker.getStatus()) {
@@ -63,15 +73,15 @@ public class Parser {
             break;
         case DELETE:
             try {
-                String deleteId = textEntered[1];
+                String deleteId = textEntered[DETAILS_INDEX];
                 parsedCommand = new DeleteCommand(deleteId);
             } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
-                throw new DukeException(ID_RESPONSE);
+                throw new DukeException(MISSING_ID_RESPONSE);
             }
             break;
         case TODO:
             try {
-                String description = textEntered[1];
+                String description = textEntered[DETAILS_INDEX];
                 parsedCommand = new AddTodoCommand(description);
             } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
                 throw new DukeException(DESC_RESPONSE);
@@ -79,14 +89,14 @@ public class Parser {
             break;
         case DEADLINE:
             try {
-                String text = textEntered[1];
+                String text = textEntered[DETAILS_INDEX];
                 if (!text.contains("/by")) {
                     throw new DukeException("Please use \"/by\"");
                 }
                 String[] textArr = text.split("/by");
-                String description = textArr[0].trim();
+                String description = textArr[DESCRIPTION_INDEX].trim();
                 if (textArr.length == 1) {
-                    throw new DukeException("Oops, please specify a date!");
+                    throw new DukeException(MISSING_DATE_RESPONSE);
                 }
                 String time = textArr[1].trim();
                 parsedCommand = new AddDeadlineCommand(description, time);
@@ -96,16 +106,16 @@ public class Parser {
             break;
         case EVENT:
             try {
-                String text = textEntered[1];
+                String text = textEntered[DETAILS_INDEX];
                 if (!text.contains("/at")) {
                     throw new DukeException("Please use \"/at\"");
                 }
                 String[] textArr = text.split("/at ");
-                String description = textArr[0].trim();
+                String description = textArr[DESCRIPTION_INDEX].trim();
                 if (textArr.length == 1) {
-                    throw new DukeException("Oops, please specify a date!");
+                    throw new DukeException(MISSING_DATE_RESPONSE);
                 }
-                String time = textArr[1];
+                String time = textArr[TIME_INDEX];
                 parsedCommand = new AddEventCommand(description, time);
             } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
                 throw new DukeException(DESC_RESPONSE);
@@ -113,31 +123,30 @@ public class Parser {
             break;
         case UNMARK:
             try {
-                String unmarkId = textEntered[1];
+                String unmarkId = textEntered[DETAILS_INDEX];
                 parsedCommand = new UnmarkCommand(unmarkId);
             } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
-                throw new DukeException(ID_RESPONSE);
+                throw new DukeException(MISSING_ID_RESPONSE);
             }
             break;
         case MARK:
             try {
-                String markId = textEntered[1];
+                String markId = textEntered[DETAILS_INDEX];
                 parsedCommand = new MarkCommand(markId);
             } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
-                throw new DukeException(ID_RESPONSE);
+                throw new DukeException(MISSING_ID_RESPONSE);
             }
             break;
         case FIND:
             try {
-                String findString = textEntered[1];
+                String findString = textEntered[DETAILS_INDEX];
                 parsedCommand = new FindCommand(findString);
             } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
-                throw new DukeException(ID_RESPONSE);
+                throw new DukeException(MISSING_ID_RESPONSE);
             }
             break;
         default:
-            throw new DukeException(String.format("Sorry, I did not catch that! \\(T.T)/\n"
-                    + "type 'help' to see all commands I can help with."));
+            throw new DukeException(INVALID_RESPONSE);
         }
         return parsedCommand;
     }
