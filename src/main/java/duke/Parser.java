@@ -32,32 +32,53 @@ public class Parser {
      * @throws IOException  If user inputs invalid command.
      */
     public String readUserInput(String input) throws IOException {
-        if (input.startsWith("bye")) {
+        if (input.startsWith("bye") || input.startsWith("b")) {
             return ui.exit();
-        } else if (input.startsWith("list")) {
+        } else if (input.startsWith("list") || input.startsWith("l")) {
             return ui.list(taskList);
         } else if (input.startsWith("mark")) {
             int taskNum = Integer.parseInt(input.substring(5));
+            assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
+            return handleMarkTask(taskNum);
+        } else if (input.startsWith("m")) {
+            int taskNum = Integer.parseInt(input.substring(2));
             assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
             return handleMarkTask(taskNum);
         } else if (input.startsWith("unmark")) {
             int taskNum = Integer.parseInt(input.substring(7));
             assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
             return handleUnmarkTask(taskNum);
+        } else if (input.startsWith("u")) {
+            int taskNum = Integer.parseInt(input.substring(2));
+            assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
+            return handleUnmarkTask(taskNum);
         } else if (input.startsWith("delete")) {
             int taskNum = Integer.parseInt(input.substring(7));
             assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
             return handleDeleteTask(taskNum);
-        } else if (input.startsWith("todo")) {
+        } else if (input.startsWith("del")) {
+            int taskNum = Integer.parseInt(input.substring(4));
+            assert taskNum > 0 && taskNum <= taskList.getTaskList().size() : "taskNum out of bounds";
+            return handleDeleteTask(taskNum);
+        } else if (input.startsWith("todo") || input.startsWith("t")) {
             return handleTodoTask(input);
         } else if (input.startsWith("deadline")) {
             String userInput = input.substring(9);
             return handleDeadlineTask(userInput);
+        } else if (input.startsWith("d")) {
+            String userInput = input.substring(2);
+            return handleDeadlineTask(userInput);
         } else if (input.startsWith("event")) {
             String userInput = input.substring(6);
             return handleEventTask(userInput);
+        } else if (input.startsWith("e")) {
+            String userInput = input.substring(2);
+            return handleEventTask(userInput);
         } else if (input.startsWith("find")) {
             String keyword = input.substring(5);
+            return handleFindTask(keyword);
+        } else if (input.startsWith("f")) {
+            String keyword = input.substring(2);
             return handleFindTask(keyword);
         } else {
             return ui.throwError("");
