@@ -90,6 +90,9 @@ public class CommandManager {
             case "find":
                 FindCommand find = new FindCommand(this.uiManager, this.taskManager, command[1]);
                 return find.execute();
+            case "update":
+                UpdateCommand update = new UpdateCommand(this.uiManager, this.taskManager, command[1], Type.UPDATE);
+                return update.execute();
             default:
                 throw new DukeException();
             }

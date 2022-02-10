@@ -47,6 +47,11 @@ public class ToDo extends Task implements Serializable {
         this.isDone = false;
     }
 
+    @Override
+    public void update(String description) {
+        this.description = description;
+    }
+
     /**
      * @return a String representation of the ToDo Object
      */
