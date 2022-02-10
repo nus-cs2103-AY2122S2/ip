@@ -3,6 +3,7 @@ package chibot.controllers;
 import chibot.Main;
 import chibot.chi.Chi;
 import chibot.exception.ChiException;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -74,13 +76,17 @@ public class MainWindow extends AnchorPane {
         try {
             input = userInput.getText();
             if (input.equalsIgnoreCase("bye")) {
-                Platform.exit();
+                dialogContainer.getChildren().add(DialogBox.getChiDialog(chi.getGoodbyeMessage(), dukeImage));
+                PauseTransition pt = new PauseTransition(Duration.seconds(3));
+                pt.setOnFinished(e -> Platform.exit());
+                pt.play();
+            } else {
+                response = chi.getResponse(input);
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getChiDialog(response, dukeImage)
+                );
             }
-            response = chi.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getChiDialog(response, dukeImage)
-            );
             userInput.clear();
         } catch (ChiException e) {
             dialogContainer.getChildren().addAll(

@@ -49,9 +49,11 @@ public class UI {
 
     /**
      * Prints the goodbye message to the user.
+     *
+     * @return The goodbye message.
      */
-    public void printGoodbye() {
-        System.out.println("Leaving already? Alright... see you soon nyan!!!");
+    public String printGoodbye() {
+        return "Leaving already? Alright... see you soon nyan!!!";
     }
 
     /**

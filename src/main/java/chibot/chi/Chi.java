@@ -61,4 +61,8 @@ public class Chi {
     public String getWelcomeMessage() {
         return this.ui.printWelcome();
     }
+
+    public String getGoodbyeMessage() {
+        return this.ui.printGoodbye();
+    }
 }
