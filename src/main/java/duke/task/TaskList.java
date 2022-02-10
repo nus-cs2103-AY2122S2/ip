@@ -58,7 +58,7 @@ public class TaskList {
      * @throws TaskOutOfBoundsException If there is no task with the given index.
      */
     public Task getTask(int index) throws TaskOutOfBoundsException {
-        if (0 < index & index <= tasks.size()) {
+        if (isTaskInList(index)) {
             return tasks.get(index - 1);
         } else {
             throw new TaskOutOfBoundsException("No task number " + index);
@@ -73,7 +73,7 @@ public class TaskList {
      * @throws TaskOutOfBoundsException If there is no task with the given index.
      */
     public Task deleteTask(int index) throws TaskOutOfBoundsException {
-        if (0 < index & index <= tasks.size()) {
+        if (isTaskInList(index)) {
             return tasks.remove(index - 1);
         } else {
             throw new TaskOutOfBoundsException("No task number " + index);
@@ -87,5 +87,15 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Checks if the given task exists in tasks.
+     *
+     * @param i The index of the task.
+     * @return True if the task exists and false otherwise.
+     */
+    public boolean isTaskInList(int i) {
+        return 0 < i & i <= tasks.size();
     }
 }

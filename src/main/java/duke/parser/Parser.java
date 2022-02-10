@@ -31,8 +31,8 @@ public class Parser {
      * @throws DukeException If the user provides an invalid or incorrectly formatted command.
      */
     public static Command parse(String strCommand) throws DukeException {
-        String[] splitCommand = strCommand.split(" ", 2);
-        String keyword = splitCommand[0];
+        String[] commandSegments = strCommand.split(" ", 2);
+        String keyword = commandSegments[0];
         Command command;
 
         assert !keyword.isBlank();
@@ -47,103 +47,198 @@ public class Parser {
 
             break;
         case "mark":
-            if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
-                throw new MissingArgumentException("Missing task number");
-            } else {
-                try {
-                    int index = Integer.parseInt(splitCommand[1]);
-                    command = new MarkCommand(index);
-                } catch (NumberFormatException e) {
-                    throw new InvalidArgumentException("Not a valid number");
-                }
-            }
+            command = parseMarkCommand(commandSegments);
             break;
         case "unmark":
-            if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
-                throw new MissingArgumentException("Missing task number");
-            } else {
-                try {
-                    int index = Integer.parseInt(splitCommand[1]);
-                    command = new UnmarkCommand(index);
-                } catch (NumberFormatException e) {
-                    throw new InvalidArgumentException("Not a valid number");
-                }
-            }
+            command = parseUnmarkCommand(commandSegments);
             break;
         case "delete":
-            if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
-                throw new MissingArgumentException("Missing task number");
-            } else {
-                try {
-                    int index = Integer.parseInt(splitCommand[1]);
-                    command = new DeleteCommand(index);
-                } catch (NumberFormatException e) {
-                    throw new InvalidArgumentException("Not a valid number");
-                }
-            }
+            command = parseDeleteCommand(commandSegments);
             break;
         case "todo":
-            if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
-                throw new MissingArgumentException("Missing task number");
-            } else {
-                String title = splitCommand[1];
-                command = new AddCommand(new Todo(title));
-            }
+            command = parseAddTodoCommand(commandSegments);
             break;
         case "event":
-            if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
-                throw new MissingArgumentException("Missing name and time");
-            } else {
-                String[] taskArguments = splitCommand[1].split("/at", 2);
-                if (taskArguments[0].isBlank()) {
-                    throw new MissingArgumentException("Missing name");
-                } else if (taskArguments.length == 1 || taskArguments[1].isBlank()) {
-                    throw new MissingArgumentException("Missing time");
-                } else {
-                    String title = taskArguments[0];
-                    String time = taskArguments[1];
-                    try {
-                        SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
-                        Date dateTime = parser.parse(time);
-                        command = new AddCommand(new Event(title, dateTime));
-                    } catch (ParseException e) {
-                        throw new InvalidArgumentException("Incorrect time format");
-                    }
-                }
-            }
+            command = parseAddEventCommand(commandSegments);
             break;
         case "deadline":
-            if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
-                throw new MissingArgumentException("Missing name and time");
-            } else {
-                String[] taskArguments = splitCommand[1].split("/by", 2);
-                if (taskArguments[0].isBlank()) {
-                    throw new MissingArgumentException("Missing name");
-                } else if (taskArguments.length == 1 || taskArguments[1].isBlank()) {
-                    throw new MissingArgumentException("Missing time");
-                } else {
-                    String title = taskArguments[0];
-                    String time = taskArguments[1];
-                    try {
-                        SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
-                        Date dateTime = parser.parse(time);
-                        command = new AddCommand(new Deadline(title, dateTime));
-                    } catch (ParseException e) {
-                        throw new InvalidArgumentException("Incorrect time format");
-                    }
-                }
-            }
+            command = parseAddDeadlineCommand(commandSegments);
             break;
         case "find":
-            if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
-                throw new MissingArgumentException("Missing keyword or keyphrase");
-            } else {
-                command = new FindCommand(splitCommand[1]);
-            }
+            command = parseFindCommand(commandSegments);
             break;
         default:
             throw new InvalidCommandException("Not an understood command");
         }
         return command;
+    }
+
+    /**
+     * Determines whether the given String array has two arguments.
+     *
+     * @param arr The String array.
+     * @return True if it has two arguments and false otherwise.
+     */
+    public static boolean hasTwoArguments(String[] arr) {
+        return arr.length == 2 && !arr[1].isBlank();
+    }
+
+    /**
+     * Parses time in String form into a Date object.
+     *
+     * @param timeAsString The time in String form.
+     * @return The time as a Date object.
+     * @throws ParseException If the time cannot be parsed.
+     */
+    public static Date parseTimeFromString(String timeAsString) throws ParseException {
+        SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
+        return parser.parse(timeAsString);
+    }
+
+    /**
+     * Parses a MarkCommand from user input if formatted correctly and valid.
+     *
+     * @param segments The user input separated into command components.
+     * @return The corresponding MarkCommand.
+     * @throws DukeException If the command is incorrectly formatted.
+     */
+    public static MarkCommand parseMarkCommand(String[] segments) throws DukeException {
+        if (hasTwoArguments(segments)) {
+            try {
+                int index = Integer.parseInt(segments[1]);
+                return new MarkCommand(index);
+            } catch (NumberFormatException e) {
+                throw new InvalidArgumentException("Not a valid number");
+            }
+        } else {
+            throw new MissingArgumentException("Missing task number");
+        }
+    }
+
+    /**
+     * Parses a UnmarkCommand from user input if formatted correctly and valid.
+     *
+     * @param segments The user input separated into command components.
+     * @return The corresponding UnmarkCommand.
+     * @throws DukeException If the command is incorrectly formatted.
+     */
+    public static UnmarkCommand parseUnmarkCommand(String[] segments) throws DukeException {
+        if (hasTwoArguments(segments)) {
+            try {
+                int index = Integer.parseInt(segments[1]);
+                return new UnmarkCommand(index);
+            } catch (NumberFormatException e) {
+                throw new InvalidArgumentException("Not a valid number");
+            }
+        } else {
+            throw new MissingArgumentException("Missing task number");
+        }
+    }
+
+    /**
+     * Parses a DeleteCommand from user input if formatted correctly and valid.
+     *
+     * @param segments The user input separated into command components.
+     * @return The corresponding DeleteCommand.
+     * @throws DukeException If the command is incorrectly formatted.
+     */
+    public static DeleteCommand parseDeleteCommand(String[] segments) throws DukeException {
+        if (hasTwoArguments(segments)) {
+            try {
+                int index = Integer.parseInt(segments[1]);
+                return new DeleteCommand(index);
+            } catch (NumberFormatException e) {
+                throw new InvalidArgumentException("Not a valid number");
+            }
+        } else {
+            throw new MissingArgumentException("Missing task number");
+        }
+    }
+
+    /**
+     * Parses an AddCommand for a Todo from user input if formatted correctly and valid.
+     *
+     * @param segments The user input separated into command components.
+     * @return The corresponding AddCommand.
+     * @throws MissingArgumentException If no title is provided for the Todo.
+     */
+    public static AddCommand parseAddTodoCommand(String[] segments) throws MissingArgumentException {
+        if (hasTwoArguments(segments)) {
+            String title = segments[1];
+            return new AddCommand(new Todo(title));
+        } else {
+            throw new MissingArgumentException("Missing task title");
+        }
+    }
+
+    /**
+     * Parses an AddCommand for an Event from user input if formatted correctly and valid.
+     *
+     * @param segments The user input separated into command components.
+     * @return The corresponding AddCommand.
+     * @throws MissingArgumentException If the input is missing information or is formatted incorrectly.
+     */
+    public static AddCommand parseAddEventCommand(String[] segments) throws DukeException {
+        if (hasTwoArguments(segments)) {
+            String[] taskArguments = segments[1].split("/at", 2);
+            if (!taskArguments[0].isBlank() && hasTwoArguments(taskArguments)) {
+                String title = taskArguments[0];
+                try {
+                    Date time = parseTimeFromString(taskArguments[1]);
+                    return new AddCommand(new Event(title, time));
+                } catch (ParseException e) {
+                    throw new InvalidArgumentException("Incorrect time format");
+                }
+            } else if (!taskArguments[0].isBlank()) {
+                throw new MissingArgumentException("Missing name");
+            } else {
+                throw new MissingArgumentException("Missing time");
+            }
+        } else {
+            throw new MissingArgumentException("Missing name and time");
+        }
+    }
+
+    /**
+     * Parses an AddCommand for an Deadline from user input if formatted correctly and valid.
+     *
+     * @param segments The user input separated into command components.
+     * @return The corresponding AddCommand.
+     * @throws MissingArgumentException If the input is missing information or is formatted incorrectly.
+     */
+    public static AddCommand parseAddDeadlineCommand(String[] segments) throws DukeException {
+        if (hasTwoArguments(segments)) {
+            String[] taskArguments = segments[1].split("/by", 2);
+            if (!taskArguments[0].isBlank() && hasTwoArguments(taskArguments)) {
+                String title = taskArguments[0];
+                try {
+                    Date time = parseTimeFromString(taskArguments[1]);
+                    return new AddCommand(new Deadline(title, time));
+                } catch (ParseException e) {
+                    throw new InvalidArgumentException("Incorrect time format");
+                }
+            } else if (!taskArguments[0].isBlank()) {
+                throw new MissingArgumentException("Missing name");
+            } else {
+                throw new MissingArgumentException("Missing time");
+            }
+        } else {
+            throw new MissingArgumentException("Missing name and time");
+        }
+    }
+
+    /**
+     * Parses a FindCommand from user input if formatted correctly and valid.
+     *
+     * @param segments The user input separated into command components.
+     * @return The corresponding FindCommand.
+     * @throws MissingArgumentException If no keyword or keyphrase is provided.
+     */
+    public static FindCommand parseFindCommand(String[] segments) throws MissingArgumentException {
+        if (hasTwoArguments(segments)) {
+            return new FindCommand(segments[1]);
+        } else {
+            throw new MissingArgumentException("Missing keyword or keyphrase");
+        }
     }
 }
