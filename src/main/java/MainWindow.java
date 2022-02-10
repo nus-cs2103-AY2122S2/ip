@@ -29,7 +29,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Label("Hello! I'm main.Duke :) \nWhat can I do for you? :D"), new ImageView(dukeImage))
+                DialogBox.getDukeDialog(new Label("Hello! I'm main.Duke :) \nWhat can I do for you? :D"),
+                        new ImageView(dukeImage))
         );
     }
 
@@ -38,8 +39,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
