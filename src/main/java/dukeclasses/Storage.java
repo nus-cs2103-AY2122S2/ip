@@ -119,6 +119,8 @@ public class Storage {
      *                       error occur during processing of storage file.
      */
     private ArrayList<Task> scanFileAndAddTask(File file, ArrayList<Task> tasks) throws DukeException {
+        assert file != null: "command should not be null.";
+        assert tasks != null: "command Task should not be null.";
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {

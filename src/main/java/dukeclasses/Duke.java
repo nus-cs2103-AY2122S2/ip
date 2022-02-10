@@ -82,8 +82,6 @@ public class Duke extends Application {
         delayReply.getKeyFrames().add(new KeyFrame(Duration.millis(500),
                 (event) -> dialogContainer.getChildren().add(dukeReply)));
         delayReply.play();
-
-        userInput.clear();
     }
 
     /**
@@ -93,6 +91,7 @@ public class Duke extends Application {
      * @return output which is the String to be printed  in the GUI as Duke's response.
      */
     private String generateOutput(ParsedCommand command) {
+        assert command != null: "command should not be null";
         switch (command.getCommand()) {
         case "hi":
             return ui.greet();
@@ -124,7 +123,7 @@ public class Duke extends Application {
      */
     private ParsedCommand parseUserInput() {
         String stringUserInput = userInput.getText();
-
+        assert stringUserInput != null : "UserInput should not be null";
         try {
             ParsedCommand parsedCommand = Parser.parse(stringUserInput, tasks.getTaskList().size());
             return parsedCommand;
@@ -140,6 +139,8 @@ public class Duke extends Application {
      * @return String output that is printed in the GUI as Duke's response.
      */
     private String executeFindCommand(ParsedCommand command) {
+        assert command != null: "command should not be null.";
+        assert command.getTask() != null: "command Task should not be null.";
         String taskDescription = command.getTask();
         TaskList findTaskList = tasks.findInTaskList(taskDescription);
         return ui.listTaskUsingArrayList(findTaskList);
@@ -160,11 +161,11 @@ public class Duke extends Application {
         } else {
             return ui.showInputError();
         }
+        assert  modifiedTask != null : "Task should not be null.";
 
         if (!updateItemsInStorage()) {
             return ui.showStorageError();
         }
-
         return ui.identifyTask(modifiedTask);
     }
 
@@ -196,6 +197,8 @@ public class Duke extends Application {
      * @return String output that is printed in the GUI as Duke's response.
      */
     private String executeNewTaskCommand(ParsedCommand command) {
+        assert command != null: "command should not be null.";
+        assert command.getTask() != null: "command Task should not be null.";
         Task newTask;
         switch (command.getCommand()) {
         case "todo":
@@ -211,6 +214,7 @@ public class Duke extends Application {
             return ui.showInputError();
         }
 
+        assert newTask != null : "newTask cannot be null";
         tasks.addTask(newTask);
 
         if (!appendNewTaskToStorage(newTask)) {
