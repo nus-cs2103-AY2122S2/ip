@@ -23,11 +23,21 @@ public class Event extends Task {
      * @param content String content.
      * @param date    LocalDateTime date on which the event is occurring.
      * @param isDone  Boolean to show if the task is done.
+     * @param ui      Ui UI object.
      */
     public Event(String content, LocalDateTime date, boolean isDone, Ui ui) {
         super(content, date, isDone, ui);
     }
 
+    /**
+     * Instantiates a Event object with content and date and isDone.
+     *
+     * @param content String content.
+     * @param date    LocalDateTime due date.
+     * @param isDone  Boolean to show if the task is done.
+     * @param tags    ArrayList of Tags.
+     * @param ui      Ui UI object.
+     */
     public Event(String content, LocalDateTime date, boolean isDone, ArrayList<Tag> tags, Ui ui) {
         super(content, date, isDone, tags, ui);
     }

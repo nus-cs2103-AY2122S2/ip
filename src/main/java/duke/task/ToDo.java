@@ -1,8 +1,8 @@
 package duke.task;
+import java.util.ArrayList;
 
 import duke.ui.Ui;
 
-import java.util.ArrayList;
 
 /**
  * A task object that only has content and isDone.
@@ -27,6 +27,14 @@ public class ToDo extends Task {
         super(content, isDone, ui);
     }
 
+    /**
+     * Instantiates a ToDo object with content and date and isDone.
+     *
+     * @param content String content.
+     * @param isDone  Boolean to show if the task is done.
+     * @param tags    ArrayList of Tags.
+     * @param ui      Ui UI object.
+     */
     public ToDo(String content, boolean isDone, ArrayList<Tag> tags, Ui ui) {
         super(content, isDone, tags, ui);
     }

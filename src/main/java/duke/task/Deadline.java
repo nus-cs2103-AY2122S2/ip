@@ -15,6 +15,7 @@ public class Deadline extends Task {
      *
      * @param content String content.
      * @param date    LocalDateTime due date.
+     * @param ui      Ui UI object.
      */
     public Deadline(String content, LocalDateTime date, Ui ui) {
         super(content, date, ui);
@@ -26,11 +27,21 @@ public class Deadline extends Task {
      * @param content String content.
      * @param date    LocalDateTime due date.
      * @param isDone  Boolean to show if the task is done.
+     * @param ui      Ui UI object.
      */
     public Deadline(String content, LocalDateTime date, boolean isDone, Ui ui) {
         super(content, date, isDone, ui);
     }
 
+    /**
+     * Instantiates a Deadline object with content and date and isDone.
+     *
+     * @param content String content.
+     * @param date    LocalDateTime due date.
+     * @param isDone  Boolean to show if the task is done.
+     * @param tags    ArrayList of Tags.
+     * @param ui      Ui UI object.
+     */
     public Deadline(String content, LocalDateTime date, boolean isDone, ArrayList<Tag> tags, Ui ui) {
         super(content, date, isDone, tags, ui);
     }

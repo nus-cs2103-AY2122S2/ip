@@ -23,7 +23,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Loads the duke.Duke chatbot with a default save file location.
+     * Loads the Duke chatbot with a default save file location.
      * If there is no file in the filePath, Storage will create a new file.
      */
     public Duke() {
@@ -38,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Loads the duke.Duke chatbot with a given filePath to the saved file.
+     * Loads the Duke chatbot with a given filePath to the saved file.
      * If there is no file in the filePath, Storage will create a new file.
      *
      * @param filePath File's path.
@@ -54,6 +54,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the Ui object.
+     *
+     * @return Ui Ui object.
+     */
     public Ui getUi() {
         if (ui != null) {
             return ui;

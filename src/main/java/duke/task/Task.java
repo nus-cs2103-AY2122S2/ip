@@ -51,6 +51,7 @@ public class Task implements Comparable<Task> {
      *
      * @param content String content to be put in the task.
      * @param date    LocalDateTime date of Task.
+     * @param ui      Ui UI object.
      */
     public Task(String content, LocalDateTime date, Ui ui) {
         this.isDone = false;
@@ -66,6 +67,7 @@ public class Task implements Comparable<Task> {
      * @param content String content to be put in the task.
      * @param date    LocalDateTime date of Task.
      * @param isDone  boolean boolean to show whether task is done.
+     * @param ui      Ui UI object.
      */
     public Task(String content, LocalDateTime date, boolean isDone, Ui ui) {
         this.isDone = isDone;
@@ -81,6 +83,8 @@ public class Task implements Comparable<Task> {
      * @param content String content to be put in the task.
      * @param date    LocalDateTime date of Task.
      * @param isDone  boolean boolean to show whether task is done.
+     * @param tags    ArrayList of Tags.
+     * @param ui      Ui UI object.
      */
     public Task(String content, LocalDateTime date, boolean isDone, ArrayList<Tag> tags, Ui ui) {
         this.isDone = isDone;

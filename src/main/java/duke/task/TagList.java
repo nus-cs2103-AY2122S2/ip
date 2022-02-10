@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import duke.ui.Ui;
 
+/**
+ * Contains the Ui and an ArrayList of Tag objects. Manages adding and deleting of tags.
+ */
 public class TagList {
     private ArrayList<Tag> tags;
     private Ui ui;
