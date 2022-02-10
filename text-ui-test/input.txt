@@ -1,0 +1,33 @@
+clearls 1
+clearls
+list
+deadline /by 12/12/2022 1800
+deadline iP  
+deadline iP /by tomorrow
+deadline iP /by 12/12/2022 1800
+list
+todo 
+todo cut hair
+list
+event movie 
+event movie /at Waterway Plaza
+list
+mark 1
+mark 3
+list
+delete 1
+list
+delete 3
+delete abc
+list
+unmark 2
+list
+delete 2
+delete 1
+list
+bye lumu
+bye
+
+
+
+
