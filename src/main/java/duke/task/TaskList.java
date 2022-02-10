@@ -96,8 +96,7 @@ public class TaskList {
             if (!tasks.get(i).isEmpty()) {
                 int index = i + 1;
                 s += "  " + index + ". " + tasks.get(i) + "\n";
-            }
-            else {
+            } else {
                 s += "You have " + i +" tasks on your list.";
                 break;
             }

@@ -45,7 +45,63 @@ public class Parser {
 
         // Handle do, undo, delete
         String firstWord = input.replaceAll(" .*", "");
-        if (firstWord.equals("do") || firstWord.equals("undo") || firstWord.equals("delete")) {
+
+        switch (firstWord) {
+        case "do":
+            // Fallthrough
+        case "undo":
+            // Fallthrough
+        case "delete":
+            input = input.replaceAll(".* ", "");
+            if (input.matches("[0-9]+")) {
+                return command;
+            }
+            System.out.println("You need to specify the task you want to "+ firstWord + " by its index :c");
+            return "";
+        case "todo":
+            input = input.substring(4).trim();
+            if (input.equals("")) {
+                System.out.println("Oops, you need to mention what the task is :c");
+                return "";
+            }
+            return command;
+        case "deadline":
+            input = input.substring(8).trim();
+            if (!input.contains(" by ")) {
+                System.out.println("Oops, you need to format deadline tasks as \"deadline X by Y\" :c");
+                return "";
+            }
+            String lastWord = input.substring(input.lastIndexOf(" ") + 1);
+            if (lastWord.equals("by")) {
+                return "";
+            }
+            return command;
+        case "event":
+            input = input.substring(5).trim();
+            if (!input.contains(" at ")) {
+                System.out.println("Oops, you need to format event tasks as \"event X at Y\" :c");
+                return "";
+            }
+            String finalWord = input.substring(input.lastIndexOf(" ")+1);
+            if (finalWord.equals("at")) {
+                return "";
+            }
+            return command;
+        case "find":
+            input = input.substring(4).trim();
+            if (input.equals("")) {
+                System.out.println("Oops, you need to mention what the keyword is :c");
+                return "";
+            }
+            if (input.contains(" ")) {
+                System.out.println("Oops, you can only search for one keyword at a time :c");
+                return "";
+            }
+            return command;
+        default:
+            return "";
+        }
+        /*if (firstWord.equals("do") || firstWord.equals("undo") || firstWord.equals("delete")) {
             input = input.replaceAll(".* ", "");
             if (input.matches("[0-9]+")) {
                 return command;
@@ -106,6 +162,6 @@ public class Parser {
             return command;
         }
 
-        return "";
+        return "";*/
     }
 }
