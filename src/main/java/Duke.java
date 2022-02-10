@@ -12,7 +12,7 @@ public class Duke {
     private final TaskList tasks;
     private final Ui ui;
 
-    private boolean isNew = true;
+    private boolean isNewMessage = true;
 
 
     /**
@@ -35,9 +35,7 @@ public class Duke {
         }
 
 
-
     }
-
 
 
     /**
@@ -70,8 +68,8 @@ public class Duke {
 
     public String getResponse(String input) {
 
-        if (isNew) {
-            isNew = false;
+        if (isNewMessage) {
+            isNewMessage = false;
             return ui.greet();
         } else if (input.equals("bye")) {
             try {

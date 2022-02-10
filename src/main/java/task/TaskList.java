@@ -1,72 +1,197 @@
 
 package task;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskList {
-    private final List<Task> list;
+import util.CommandList;
+import util.DateTimeParser;
 
-    /**
-     * initialises a task-list
-     */
-    public TaskList() {
-        this.list = new ArrayList<>();
-    }
+public class TaskList {
+    private final List<Task> list = new ArrayList<>();
+    private final DateTimeParser dtp = new DateTimeParser();
+    private final CommandList cl = new CommandList();
+
 
     public List<Task> getTaskList() {
         return list;
     }
 
-    /**
-     * @param task task to be added into task-list
-     * @return String to show that task is added into the task-list
-     */
-
-    public String add(Task task) {
-        list.add(task);
-        return addTask(this.get(this.size() - 1), this.size());
-    }
-
-    public int size() {
+    private int size() {
         return list.size();
     }
 
-    public Task get(int index) {
+    private Task get(int index) {
         return list.get(index);
     }
 
-    public void remove(int index) {
+    private void remove(int index) {
         list.remove(index);
     }
 
     /**
-     * creates command message to inform the user that item has been deleted
-     * @param item index of the item in the list to be deleted
+     * executes the command and returns a response
+     * @param command command to be executed
+     * @param description description of command
+     * @return response of command executed
      */
 
-    public String deleteItem(String item) {
+    public String execute(String command, String description) {
+        switch (command) {
+        case "todo":
+            return processTodo(description);
+
+        case "deadline":
+            return processDeadline(description);
+
+        case "event":
+            return processEvent(description);
+
+        case "list":
+            return processList();
+
+        case "mark":
+            return processMark(description);
+
+        case "unmark":
+            return processUnmark(description);
+
+        case "delete":
+            return processDelete(description);
+
+        case "find":
+            return processFind(description);
+
+        case "commandlist":
+            return processCommandList();
+
+        default:
+            return "This command does not exists!\nUse 'commandlist' to list out the commands";
+
+        }
+    }
+
+    private String processCommandList() {
+        StringBuilder commands = new StringBuilder();
+        for (String s: cl.getCommands()) {
+            commands.append(s).append("\n");
+        }
+        return "Here are the list of commands:\n" + commands;
+    }
+
+    private String processFind(String description) {
+        if (description.equals("")) {
+            return "Please specify the item that you would like to find.";
+        }
+        assert !description.equals("");
+        return findResponse(description);
+    }
+
+    private String processTodo(String description) {
+        if (!description.equals("")) {
+            Task task = new Todo(description);
+            list.add(task);
+            return addTaskReponse(this.get(this.size() - 1), this.size());
+        } else {
+            return "Todo cannot be empty!!! :/";
+        }
+
+    }
+
+    private String processDeadline(String description) {
+        if (description.equals("")) {
+            return "Deadline cannot be empty!!! :/";
+        }
+        try {
+            dtp.parseDateTime(description, "deadline");
+            Task task = new Deadline(dtp.getDescription(), dtp.getTime());
+            list.add(task);
+            return addTaskReponse(this.get(this.size() - 1), this.size());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please specify your deadline in the format 'task /by when'";
+        } catch (DateTimeParseException e) {
+            return "Please put your date in the format\nYYYY-MM-DD HH:mm";
+        }
+
+    }
+
+    private String processEvent(String description) {
+        if (description.equals("")) {
+            return "Event cannot be empty!!! :/";
+        }
+        try {
+            assert !description.equals("");
+            dtp.parseDateTime(description, "event");
+            Task task = new Event(dtp.getDescription(), dtp.getTime());
+            list.add(task);
+            return addTaskReponse(this.get(this.size() - 1), this.size());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please specify your event in the format 'task /at when'";
+        } catch (DateTimeParseException e) {
+            return "Please put your date in the format\n'YYYY-MM-DD HH:mm'";
+        }
+
+    }
+
+    private String processList() {
+        StringBuilder lists = new StringBuilder();
+        for (int i = 0; i < size(); i++) {
+            if (i != 0) {
+                lists.append("\n");
+            }
+            lists.append(String.format("%d. %s", i + 1, get(i).toString()));
+
+        }
+        return lists.toString();
+    }
+
+    private String processMark(String description) {
+        if (description.equals("")) {
+            return "Please specify the index of the item that you would like to mark.";
+        }
+        try {
+            assert !description.equals("");
+            int index = Integer.parseInt(description);
+            get(index - 1).markAsDone();
+            return "Good job for accomplishing something today! I've marked this task as done:\n"
+                    + get(index - 1).toString();
+        } catch (IndexOutOfBoundsException e) {
+            return "You can't do that! It's not in the list!";
+        }
+    }
+
+    private String processUnmark(String description) {
+        if (description.equals("")) {
+            return "Please specify the index of the item that you would like to unmark.";
+        }
+        try {
+            assert !description.equals("");
+            int index = Integer.parseInt(description);
+            get(index - 1).markAsUndone();
+            return "Stop procrastinating you lazy prick! I've marked this task as not done yet:\n"
+                    + get(index - 1).toString();
+        } catch (IndexOutOfBoundsException e) {
+            return "You can't do that! It's not in the list!";
+        }
+    }
+
+
+    private String processDelete(String item) {
         try {
             int index = Integer.parseInt(item);
             Task t = this.get(index - 1);
             this.remove(index - 1);
-            return removeTask(t, this.size());
+            return removeTaskResponse(t, this.size());
         } catch (IndexOutOfBoundsException e) {
             return "You can't do that! It's not on the list!";
         }
     }
 
-    /**
-     * removes the task from the list
-     * @param task task to be removed
-     * @param total total number of tasks after removing this task from the list
-     * @return String message to tell the user that item has been deleted
-     */
-
-    public String removeTask(Task task, int total) {
+    private String removeTaskResponse(Task task, int total) {
         String tab = "    ";
         String firstLine = "Less work for you then less work for me then. I've removed this task:\n";
-        String secondLine = tab + "  " + task.toString() + "\n";
+        String secondLine = task.toString() + "\n";
         String thirdLine;
 
         if (total == 1) {
@@ -78,14 +203,7 @@ public class TaskList {
 
     }
 
-    /**
-     * adds the task to the list
-     * @param task task to be added
-     * @param total total number of tasks after adding this task to the list
-     * @return string depicting number of tasks
-     */
-
-    public String addTask(Task task, int total) {
+    private String addTaskReponse(Task task, int total) {
         String firstLine = "Ah sure. I've added this task:\n";
         String secondLine = task.toString() + "\n";
         String thirdLine;
@@ -99,11 +217,7 @@ public class TaskList {
 
     }
 
-    /**
-     * prints the UI for find item
-     * @param item keyword to be found
-     */
-    public String find(String item) {
+    private String findResponse(String item) {
         ArrayList<Task> foundTasks = new ArrayList<>();
 
         for (Task t: this.list) {
@@ -125,7 +239,6 @@ public class TaskList {
 
         return firstLine + lists;
     }
-
 
 
 }

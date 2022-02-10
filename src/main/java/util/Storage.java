@@ -13,9 +13,6 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
-
-
-
 public class Storage {
 
     private final File file;
