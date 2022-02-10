@@ -15,7 +15,6 @@ import duke.taskobjects.Event;
 import duke.taskobjects.Task;
 import duke.taskobjects.TaskWithDate;
 import duke.taskobjects.Todo;
-import duke.taskobjects.Types;
 
 /**
  * Storage object that deals with exporting and importing task list items to a file.
@@ -31,7 +30,7 @@ class Storage {
         return Files.exists(pathToFile);
     }
 
-    protected ArrayList<Task> importTasks() { // CHANGE THIS IN THE FUTURE, TEXT HANDLING SHLD BE DONE BY PARSE
+    protected ArrayList<Task> importTasks() {
         if (!doesFileExist()) {
             System.out.println("Existing file not found, starting fresh...");
             return new ArrayList<>();
@@ -44,30 +43,12 @@ class Storage {
             System.out.println("Something went wrong while reading saved file");
             return new ArrayList<>();
         }
+
         ArrayList<Task> taskList = new ArrayList<>();
         while (s.hasNext()) {
             String input = s.nextLine();
-            String[] inputArray = input.split("`");
-            String type = inputArray[0];
-            boolean isDone = inputArray[1].equals("X");
-            String description = inputArray[2];
-
-            // Parse input into array
-            Task newTask = null;
-            switch (type) {
-            case "T":
-                newTask = new Todo(description, isDone);
-                break;
-            case "E":
-                newTask = new Event(description, isDone, inputArray[3]);
-                break;
-            case "D":
-                newTask = new Deadline(description, isDone, inputArray[3]);
-                break;
-            default:
-                break;
-            }
-
+            ImportTaskParameters taskParameters = new ImportTaskParameters(input);
+            Task newTask = generateNewImportedTask(taskParameters);
             if (newTask != null) {
                 taskList.add(newTask);
             }
@@ -75,26 +56,33 @@ class Storage {
         return taskList;
     }
 
-    // CHANGE THIS IN THE FUTURE, TEXT HANDLING SHLD BE DONE BY PARSE
+    private Task generateNewImportedTask(ImportTaskParameters para) {
+        switch (para.getType()) {
+        case "T":
+            return new Todo(para.getDescription(), para.getIsDone());
+        case "E":
+            assert !para.getDate().isEmpty() : "Error importing date";
+            return new Event(para.getDescription(), para.getIsDone(), para.getDate());
+        case "D":
+            assert !para.getDate().isEmpty() : "Error importing date";
+            return new Deadline(para.getDescription(), para.getIsDone(), para.getDate());
+        default:
+            return null;
+        }
+    }
+
     protected boolean exportTasks(List<Task> taskList) {
         // Opening file for writing
         BufferedWriter writer;
         try {
             writer = Files.newBufferedWriter(pathToFile, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            System.out.println("Something went wrong while writing to file (1)");
-            return false;
-        }
-
-        // Export taskList to string
-        try {
+            // Export task list to String
             writer.write(exportTaskListToString(taskList));
             writer.flush();
         } catch (IOException e) {
-            System.out.println("Something went wrong while writing to file (2)");
+            System.out.println("Something went wrong while writing to file");
             return false;
         }
-
         return true;
     }
 
@@ -103,21 +91,79 @@ class Storage {
         for (Task task : taskList) {
             String finalOutput = "";
 
-            if (task.getType() == Types.TODO) {
-                finalOutput = "T`" + (task.isDone() ? "X`" : "O`")
-                        + task.getTaskName() + "\n";
-            } else if (task.getType() == Types.EVENT) {
+            switch (task.getType()) {
+            case TODO:
+                finalOutput = generateExportStringTodo(task);
+                break;
+            case EVENT: {
                 TaskWithDate taskWithDate = (TaskWithDate) task;
-                finalOutput = "E`" + (task.isDone() ? "X`" : "O`")
-                        + task.getTaskName() + "`" + taskWithDate.getDate() + "\n";
-            } else if (task.getType() == Types.DEADLINE) {
-                TaskWithDate taskWithDate = (TaskWithDate) task;
-                finalOutput = "D`" + (task.isDone() ? "X`" : "O`")
-                        + task.getTaskName() + "`" + taskWithDate.getDate() + "\n";
+                finalOutput = generateExportStringEvent(taskWithDate);
+                break;
+            }
+            case DEADLINE: {
+                TaskWithDate taskWithDate2 = (TaskWithDate) task;
+                finalOutput = generateExportStringDeadline(taskWithDate2);
+                break;
+            }
+            default:
+                assert false : "Error occurred reading exporting task";
             }
             sb.append(finalOutput);
         }
         return sb.toString();
     }
 
+    private String generateExportStringTodo(Task task) {
+        return "T`" + (task.isDone() ? "X`" : "O`")
+                + task.getTaskName() + "\n";
+    }
+
+    private String generateExportStringEvent(TaskWithDate task) {
+        return "E`" + (task.isDone() ? "X`" : "O`")
+                + task.getTaskName() + "`" + task.getDate() + "\n";
+    }
+
+    private String generateExportStringDeadline(TaskWithDate task) {
+        return "D`" + (task.isDone() ? "X`" : "O`")
+                + task.getTaskName() + "`" + task.getDate() + "\n";
+    }
+
+}
+
+class ImportTaskParameters {
+    private final String type;
+    private final boolean isDone;
+    private final String description;
+    private final String date;
+
+    public ImportTaskParameters(String input) {
+        String[] inputArray = input.split("`");
+        type = inputArray[0];
+        isDone = inputArray[1].equals("X");
+        description = inputArray[2];
+
+        boolean isTaskWithDate = (type.equals("E") || type.equals("D"));
+        if (isTaskWithDate) {
+            date = inputArray[3];
+        } else {
+            date = "";
+        }
+    }
+
+    // Getter functions
+    public String getType() {
+        return type;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }
