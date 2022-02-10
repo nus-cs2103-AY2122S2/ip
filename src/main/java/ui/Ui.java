@@ -10,6 +10,7 @@ public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String ERROR_MESSAGE_PREFIX = "☹ OOPS!!! ";
 
     private final PrintStream output;
 
@@ -79,6 +80,14 @@ public class Ui {
         final String response = "Noted. I've removed this task:\n  " + task
                 + "\nNow you have " + (totalTasksBeforeDelete - 1) + " tasks in the list.";
         return this.constructResponse(response);
+    }
+
+    public void showError(String message) {
+        this.output.println(this.constructErrorResponse(message));
+    }
+
+    private String constructErrorResponse(String message) {
+        return this.constructResponse(Ui.ERROR_MESSAGE_PREFIX + message);
     }
 
     private String constructResponse(String content) {
