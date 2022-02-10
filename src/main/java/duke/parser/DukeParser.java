@@ -42,26 +42,25 @@ public class DukeParser {
         Scanner s = new Scanner(f);
         ArrayList<Task> ans = new ArrayList<Task>();
         while (s.hasNext()) {
+            Task j = null;
             String[] k = s.nextLine().split("\\|");
-            if (k[0].equals("T")) {
-                Task j = new ToDos(k[2]);
-                if (k[1].equals("true")) {
-                    j.mark();
-                }
-                ans.add(j);
-            } else if (k[0].equals("D")) {
-                Task j = new Deadlines(k[2], k[3]);
-                if (k[1].equals("true")) {
-                    j.mark();
-                }
-                ans.add(j);
-            } else if (k[0].equals("E")) {
-                Task j = new Events(k[2], k[3]);
-                if (k[1].equals("true")) {
-                    j.mark();
-                }
-                ans.add(j);
+            switch (k[0]) {
+            case "T" :
+                j = new ToDos(k[2]);
+                break;
+            case "D" :
+                j = new Deadlines(k[2], k[3]);
+                break;
+            case "E" :
+                j = new Events(k[2], k[3]);
+                break;
+            default :
+                throw new IOException();
             }
+            if (k[1].equals("true")) {
+                j.mark();
+            }
+            ans.add(j);
         }
         return ans;
     }
@@ -97,6 +96,125 @@ public class DukeParser {
     }
 
     /**
+     * Checks whether the input is in the right format for Bye command
+     * @param arg user input
+     * @return Bye command
+     * @throws DukeException
+     */
+    private static Command checkByeFormat(String[] arg) throws DukeException {
+        if (arg.length == 1) {
+            return new ExitCommand();
+        } else {
+            throw new WrongFormatException();
+        }
+    }
+
+    /**
+     * Check whether the input is in the right format for the mark,unmark and delete command
+     * @param arg User input
+     * @param cmd The command to return
+     * @return Mark, Unmark or Delete command
+     * @throws DukeException
+     */
+    private static Command checkMarkUnmarkDelete(String[] arg, String cmd) throws DukeException {
+        Command curr = null;
+        if (arg.length == 1) {
+            throw new MissingArgumentException();
+        } else if (!isInt(arg[1])) {
+            throw new WrongFormatException();
+        }
+        switch (cmd) {
+        case "mark" :
+            curr = new MarkCommand(Integer.parseInt(arg[1].trim()));
+            break;
+        case "unmark" :
+            curr = new UnMarkCommand(Integer.parseInt(arg[1].trim()));
+            break;
+        case "delete" :
+            curr = new DeleteCommand(Integer.parseInt(arg[1].trim()));
+            break;
+        default :
+            throw new MissingArgumentException();
+        }
+        return curr;
+    }
+
+    /**
+     * Checks whether the Today or List command is in the right format. One word with no other arguments
+     * @param arg user input
+     * @param cmd command
+     * @return TodayTask or List Command
+     * @throws DukeException
+     */
+    private static Command checkTodayList(String[] arg, String cmd) throws DukeException {
+        if (arg.length != 1) {
+            throw new WrongFormatException();
+        }
+        switch (cmd) {
+        case "today" :
+            return new TodayTask();
+        case "list" :
+            return new ListCommand();
+        default :
+            throw new InvalidCommandException();
+        }
+    }
+
+    /**
+     * Checks whether the Find or Todo command is in the right format.
+     * Input must be the command, followed by an argument
+     * @param arg User input
+     * @param cmd Command to be checked
+     * @return Find or Todo command
+     * @throws DukeException
+     */
+    private static Command checkFindTodo(String[] arg, String cmd) throws DukeException {
+        if (arg.length == 1) {
+            throw new MissingArgumentException();
+        }
+        switch (cmd) {
+        case "find" :
+            return new FindCommand(arg[1]);
+        case "todo" :
+            return new AddTask(cmd, arg[1]);
+        default :
+            throw new InvalidCommandException();
+        }
+    }
+
+    private static Command checkDeadlineEvent(String[] arg, String cmd) throws DukeException {
+        String regex = "";
+        String term = "";
+        switch (cmd) {
+        case "deadline" :
+            regex = ".+/by.+";
+            term = "/by";
+            break;
+        case "event" :
+            regex = ".+/at.+";
+            term = "/at";
+            break;
+        default :
+            throw new InvalidCommandException();
+        }
+
+        if (arg.length == 1) {
+            throw new MissingArgumentException();
+        }
+
+        if (!arg[1].matches(regex)) {
+            throw new WrongFormatException();
+        }
+
+        String[] body = arg[1].split(term);
+        if (!isValidDate(body[1].trim())) {
+            throw new InvalidDateException();
+        }
+
+        return new AddTask(cmd, body[0], body[1].trim());
+    }
+
+    /**
      * Creates a Command object depending on the String arguments.
      * It returns a Command object corresponding to the String cmd, if the arguments
      * are in the right format.
@@ -110,95 +228,30 @@ public class DukeParser {
         Command curr;
         switch (cmd) {
         case "bye" :
-            if (arg.length == 1) {
-                curr = new ExitCommand();
-                break;
-            } else {
-                throw new WrongFormatException();
-            }
+            curr = checkByeFormat(arg);
+            break;
         case "mark" :
-            if (arg.length == 1) {
-                throw new MissingArgumentException();
-            } else if (!isInt(arg[1])) {
-                throw new WrongFormatException();
-            } else {
-                curr = new MarkCommand(Integer.parseInt(arg[1].trim()));
-                break;
-            }
+            //Fallthrough
         case "unmark" :
-            if (arg.length == 1) {
-                throw new MissingArgumentException();
-            } else if (!isInt(arg[1])) {
-                throw new WrongFormatException();
-            } else {
-                curr = new UnMarkCommand(Integer.parseInt(arg[1].trim()));
-                break;
-            }
+            //Fallthrough
         case "delete" :
-            if (arg.length == 1) {
-                throw new MissingArgumentException();
-            } else if (!isInt(arg[1])) {
-                throw new WrongFormatException();
-            } else {
-                curr = new DeleteCommand(Integer.parseInt(arg[1].trim()));
-                break;
-            }
+            curr = checkMarkUnmarkDelete(arg, cmd);
+            break;
         case "today" :
-            if (arg.length == 1) {
-                curr = new TodayTask();
-                break;
-            } else {
-                throw new WrongFormatException();
-            }
+            //Fallthrough
         case "list" :
-            if (arg.length == 1) {
-                curr = new ListCommand();
-                break;
-            } else {
-                throw new WrongFormatException();
-            }
-        case "todo" :
-            if (arg.length == 1) {
-                throw new MissingArgumentException();
-            } else {
-                curr = new AddTask(cmd, arg[1]);
-                break;
-            }
-        case "deadline" :
-            if (arg.length == 1) {
-                throw new MissingArgumentException();
-            } else if (!arg[1].matches(".+/by.+")) {
-                throw new WrongFormatException();
-            } else {
-                String[] body = arg[1].split("/by");
-                if (!isValidDate(body[1].trim())) {
-                    throw new InvalidDateException();
-                } else {
-                    curr = new AddTask(cmd, body[0], body[1].trim());
-                    break;
-                }
-            }
-        case "event" :
-            if (arg.length == 1) {
-                throw new MissingArgumentException();
-            } else if (!arg[1].matches(".+/at.+")) {
-                throw new WrongFormatException();
-            } else {
-                String[] body = arg[1].split("/at");
-                if (!isValidDate(body[1].trim())) {
-                    throw new InvalidDateException();
-                } else {
-                    curr = new AddTask(cmd, body[0], body[1].trim());
-                    break;
-                }
-            }
+            curr = checkTodayList(arg, cmd);
+            break;
         case "find" :
-            if (arg.length == 1) {
-                throw new MissingArgumentException();
-            } else {
-                curr = new FindCommand(arg[1]);
-                break;
-            }
+            //Fallthrough
+        case "todo" :
+            curr = checkFindTodo(arg, cmd);
+            break;
+        case "deadline" :
+            //Fallthrough
+        case "event" :
+            curr = checkDeadlineEvent(arg, cmd);
+            break;
         default :
             throw new InvalidCommandException();
         }

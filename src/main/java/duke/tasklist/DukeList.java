@@ -82,26 +82,31 @@ public class DukeList {
         storage.store(tasks);
     }
 
+    private boolean checkDate(LocalDate d) {
+        return d.equals(LocalDate.now());
+    }
+
     /**
      * Prints a list of tasks due on current date to the console
      */
     public String todayTask() {
-        LocalDate cur = LocalDate.now();
         String day = "\nDuke: Here are the tasks due today\n";
         boolean b = true;
         for (Task t: tasks) {
+            boolean isCorrectDate = true;
+            boolean isDeadlineEvent = false;
             if (t instanceof Deadlines) {
                 Deadlines d = (Deadlines) t;
-                if (d.getDate().isEqual(cur)) {
-                    b = false;
-                    day = day + "     " + t + "\n";
-                }
+                isDeadlineEvent = true;
+                isCorrectDate = checkDate(d.getDate());
             } else if (t instanceof Events) {
                 Events e = (Events) t;
-                if (e.getDate().isEqual(cur)) {
-                    b = false;
-                    day = day + "     " + t + "\n";
-                }
+                isDeadlineEvent = true;
+                isCorrectDate = checkDate(e.getDate());
+            }
+            if (isCorrectDate && isDeadlineEvent) {
+                b = false;
+                day = day + "     " + t + "\n";
             }
         }
         if (b) {
