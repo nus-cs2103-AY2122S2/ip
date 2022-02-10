@@ -3,6 +3,7 @@ package duke;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * This class receives a ParsedAnswer object and execute commands based on information
@@ -17,6 +18,7 @@ public class ParsedAnswerHandler {
     }
 
     String execute() {
+        assert !pa.getCommand().isEmpty() : "Each ParsedAnswer object should contain a command.";
         String filePath = System.getProperty("user.dir")  + "/data/storage.txt";
         switch (pa.getCommand()) {
             case "bye":
