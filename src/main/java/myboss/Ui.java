@@ -10,20 +10,15 @@ import java.util.ArrayList;
 public class Ui {
     static final String INDENT = "    ";
 
-    /**
-     * Outputs the greeting message of the chatbot.
-     */
-    public String greeting() {
-        return " Hello! I'm YourBoss.\n" +
-                " What can you do for me?";
-    }
-
-    /**
-     * Outputs the farewell message of the chatbot.
-     */
-    public String farewell() {
-        return " Bye. Hope I never see you again!";
-    }
+    static final String unknownCommandExceptionMsg = " OOPS!!! I'm sorry, but I don't know what that means :-(";
+    static final String missingTimeArgumentExceptionMsg = "OOPS!!! Argument after missing /at or /by!!!";
+    static final String missingArgumentExceptionMsg = "OOPS!!! I think you're missing some arguments!";
+    static final String wrongDateFormatExceptionMsg = "Date must be of format yyyy-mm-dd!";
+    static final String indexOutOfBoundsExceptionMsg = "OOPS!!! Index out of bounds!";
+    static final String appendToFileExceptionMsg = "Error appending task to text file!";
+    static final String fileNotFoundExceptionMsg = "Error file not found!";
+    static final String fileCreationExceptionMsg = "An Error has occurred with file creation!";
+    static final String clearFileExceptionMsg = "Error clearing File";
 
     /**
      * Outputs the given task list.

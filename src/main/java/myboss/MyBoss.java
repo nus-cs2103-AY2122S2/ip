@@ -8,8 +8,8 @@ import java.time.format.DateTimeParseException;
  * A MyBoss Object corresponds to a Personal Assistant Chatbot.
  */
 public class MyBoss {
-    private final Storage storage;
-    private final TaskList tasks;
+    private Storage storage;
+    private TaskList tasks;
     private final Ui ui;
 
     /**
@@ -18,8 +18,12 @@ public class MyBoss {
     public MyBoss() {
         String filePath = "./data/tasks.txt";
         ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.loadTaskListFromFile());
+        try {
+            storage = new Storage(filePath);
+            tasks = new TaskList(storage.loadTaskListFromFile());
+        } catch (MyBossException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -30,7 +34,7 @@ public class MyBoss {
      */
     public String getResponse(String input) {
         String[] userCmdSplit = Parser.splitUserCmd(input);
-        String command = userCmdSplit[0];
+        String command = Parser.getUserCmd(userCmdSplit);
 
         String remainingUserInput = Parser.getRemainingUserCmd(userCmdSplit);
 
@@ -42,58 +46,64 @@ public class MyBoss {
             case "list":
                 return ui.outputTaskList(tasks.getTaskList());
             case "mark":
-                //fallthrough
+                // fallthrough
             case "unmark":
                 // fallthrough
             case "delete":
                 int currTaskIndex = Parser.getTaskIndex(userCmdSplit);
-                Task currTask = tasks.get(currTaskIndex);
-                if (command.equals("mark")) {
-                    return ui.outputMarked(currTask);
-                } else if (command.equals("unmark")) {
-                    return ui.outputUnmarked(currTask);
-                } else {
-                    storage.updateFile(tasks.getTaskList());
-                    return ui.outputDeleteTask(tasks.deleteTask(currTaskIndex));
-                }
+                return getMarkOrDeleteOutput(command, currTaskIndex);
             case "todo":
                 ToDo newToDo = new ToDo(remainingUserInput);
-                tasks.addTask(newToDo);
-                storage.appendTaskToFile(newToDo);
-                return ui.addTaskOutput(newToDo);
+                return handleTaskEvent(newToDo);
             case "deadline":
                 String[] parsedDeadline = Parser.parseDeadlineUserCmd(remainingUserInput);
                 String deadlineName = parsedDeadline[0];
                 String timeBy = parsedDeadline[1];
                 Deadline newDeadline = new Deadline(deadlineName, timeBy);
-                tasks.addTask(newDeadline);
-                storage.appendTaskToFile(newDeadline);
-                return ui.addTaskOutput(newDeadline);
+                return handleTaskEvent(newDeadline);
             case "event":
                 String[] parsedEvent = Parser.parseEventUserCmd(remainingUserInput);
                 String eventName = parsedEvent[0];
                 String timeRange = parsedEvent[1];
                 Event newEvent = new Event(eventName, timeRange);
-                tasks.addTask(newEvent);
-                storage.appendTaskToFile(newEvent);
-                return ui.addTaskOutput(newEvent);
+                return handleTaskEvent(newEvent);
             case "find":
                 return ui.outputFoundTasks(tasks.findTasks(remainingUserInput));
             default:
-                throw new MyBossException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new MyBossException(Ui.unknownCommandExceptionMsg);
 
             }
         } catch (StringIndexOutOfBoundsException ex) {
-            return "OOPS!!! Argument after missing /at or /by!!!";
+            return Ui.missingTimeArgumentExceptionMsg;
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "OOPS!!! I think you're missing some arguments!";
+            return Ui.missingArgumentExceptionMsg;
         } catch (MyBossException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
-            return "Date must be of format yyyy-mm-dd!";
+            return Ui.wrongDateFormatExceptionMsg;
         } catch (IndexOutOfBoundsException e) {
-            return "OOPS!!! Index out of bounds!";
+            return Ui.indexOutOfBoundsExceptionMsg;
         }
     }
+
+    String getMarkOrDeleteOutput(String command, int currTaskIndex) throws MyBossException {
+        Task currTask = tasks.get(currTaskIndex);
+
+        if (command.equals("mark")) {
+            return ui.outputMarked(currTask);
+        } else if (command.equals("unmark")) {
+            return ui.outputUnmarked(currTask);
+        } else {
+            storage.updateFile(tasks.getTaskList());
+            return ui.outputDeleteTask(tasks.deleteTask(currTaskIndex));
+        }
+    }
+
+    String handleTaskEvent(Task task) throws MyBossException {
+        tasks.addTask(task);
+        storage.appendTaskToFile(task);
+        return ui.addTaskOutput(task);
+    }
+
 }
 
