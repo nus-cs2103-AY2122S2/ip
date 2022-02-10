@@ -29,6 +29,9 @@ public class AddCommand extends Command {
      * @return message stating task added.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         tasks.addTask(task);
         return ui.showTaskAdded(task, tasks.getTaskList());
     }

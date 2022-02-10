@@ -112,7 +112,7 @@ public class Ui {
     /**
      * Prints the search results of what the user find.
      *
-     * @param results result lists from the search keyword.
+     * @param results result list from the search keyword.
      */
     public String displaySearchResult(ArrayList<Task> results) {
         if (results.size() == 0) {

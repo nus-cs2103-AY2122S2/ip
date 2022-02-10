@@ -9,7 +9,7 @@ import duke.ui.DukeException;
 public class ToDoTest {
 
     @Test
-    public void saveToFileString_callingMethod_outputShownCorrectly() throws DukeException {
+    public void encodeTaskToString_callingMethod_outputShownCorrectly() throws DukeException {
         String expectedResult = new ToDo("Homework").encodeTaskToString();
         String actualResult = "T|0|Homework\n";
         assertEquals(expectedResult, actualResult);

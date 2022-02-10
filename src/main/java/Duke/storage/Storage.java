@@ -48,6 +48,9 @@ public class Storage {
                 case "T":
                     ToDo toDoTask = new ToDo(currTaskLine[2]);
                     checkIfTaskMark(currTaskLine[1], toDoTask);
+                    if (currTaskLine[1].equals("1")) {
+                        toDoTask.setChecked();
+                    }
                     taskList.add(toDoTask);
                     break;
                 case "D":
@@ -61,6 +64,7 @@ public class Storage {
                     taskList.add(eventTask);
                     break;
                 default:
+                    assert false; //Execution will never reach this point.
                 }
             }
         } catch (IOException e) {

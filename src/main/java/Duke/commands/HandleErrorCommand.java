@@ -29,6 +29,7 @@ public class HandleErrorCommand extends Command {
      * @return error message.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert ui != null;
         return ui.showError(errorMsg);
     }
 

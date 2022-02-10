@@ -31,6 +31,8 @@ public class FindCommand extends Command {
      * @return string of search results.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
         ArrayList<Task> searchResultList = tasks.findTasks(keyword);
         return ui.displaySearchResult(searchResultList);
     }
