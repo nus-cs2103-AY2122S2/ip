@@ -179,10 +179,7 @@ public class Duke extends Application {
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
-//        if (parser.isExit(dukeText)) {
-//            dialogContainer.getChildren().addAll(
-//                    DialogBox.getDukeDialog(ui.farewell(), dukeImage));
-//        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(dukeText, dukeImage)

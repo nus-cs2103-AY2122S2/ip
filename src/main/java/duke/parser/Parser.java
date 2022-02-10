@@ -35,9 +35,11 @@ public class Parser {
     public String parse(String input, TaskList tasks, Storage storage) {
         Command command = new InvalidCommand();
         try {
+            // EDIT: EXTRACT INTO NEW STRINGSPLIT METHOD FOR CODE QUALITY.
             String[] inputWords = input.split("\\s");
             //action is first word of the input
             Action action = Action.valueOf(inputWords[0].toUpperCase());
+
             switch (action) {
             case BYE:
                 command = new ExitCommand();
@@ -76,8 +78,8 @@ public class Parser {
         }
     }
 
-    public boolean isExit(String input) {
-        return input.equals("bye");
+    public static boolean isExit(String input) {
+        return input.equalsIgnoreCase("bye");
     }
     /**
      * Returns the Description of task.

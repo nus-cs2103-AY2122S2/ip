@@ -84,8 +84,9 @@ public class AddCommand extends Command {
                 break;
             }
         default:
-            //do nothing
+            assert false : "AddCommand should not reach here as action should be valid!";
         }
         return output;
     }
+
 }

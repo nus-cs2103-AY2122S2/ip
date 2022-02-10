@@ -30,8 +30,9 @@ public class Storage {
         this.filePath = filePath;
         if (!file.exists()) {
             try {
+                //arrowhead! change later for code quality
                 File directory = new File(file.getParent());
-                //data file not in specific folder, need to handle
+                //data file not in specific folder
                 if (!directory.exists()) {
                     directory.mkdirs();
                 }
@@ -67,6 +68,7 @@ public class Storage {
     public ArrayList<Task> load() throws FileNotFoundException, IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
+            //edit later for SLAP
             Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) {
                 String task = sc.nextLine();
@@ -88,7 +90,7 @@ public class Storage {
                     taskToAdd = new Event(eventTasking[0], eventTasking[1], isDone);
                     break;
                 default:
-                    //will not reach here.
+                    assert false : "load() should not reach here.";
                 }
                 tasks.add(taskToAdd);
             }

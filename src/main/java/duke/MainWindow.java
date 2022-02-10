@@ -9,7 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import duke.parser.Parser;
 import duke.ui.Messages;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -45,7 +47,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equalsIgnoreCase("bye")) {
+        if (Parser.isExit(input)) {
             Platform.exit();
         }
         String response = duke.getResponse(input);
