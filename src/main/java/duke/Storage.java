@@ -21,7 +21,7 @@ public class Storage {
     private static final String TODO_IDENTIFIER = "T";
     private static final String DEADLINE_IDENTIFIER = "D";
     private static final String EVENT_IDENTIFIER = "E";
-    private static final String DELIMITER = "\\|";
+    private static final String DELIMITER = " %% ";
     private static final String TASK_DONE = "1";
     private static final String TASK_NOT_DONE = "0";
 

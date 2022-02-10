@@ -46,26 +46,11 @@ public class Parser {
         try {
             switch (commandString) {
             case TODO:
-                if (details.strip().equals("")) {
-                    throw new DukeException("Please enter a description for the todo task.");
-                }
-                return new AddTaskCommand(new Todo(details));
+                return new AddTaskCommand(makeTodo(details));
             case DEADLINE:
-                String[] deadlineInputs = details.split(" /by ", 2);
-                if (deadlineInputs.length == 1 || deadlineInputs[1].strip().equals("")
-                        || deadlineInputs[0].strip().equals("")) {
-                    throw new DukeException("Please specify a deadline task as\n"
-                            + "deadline [description] /by [date in yyyy-mm-dd format].");
-                }
-                return new AddTaskCommand(new Deadline(deadlineInputs[0], LocalDate.parse(deadlineInputs[1])));
+                return new AddTaskCommand(makeDeadline(details));
             case EVENT:
-                String[] eventInputs = details.split(" /at ", 2);
-                if (eventInputs.length == 1 || eventInputs[1].strip().equals("")
-                        || eventInputs[0].strip().equals("")) {
-                    throw new DukeException("Please specify an event task as\n"
-                            + "event [description] /by [date in yyyy-mm-dd format].");
-                }
-                return new AddTaskCommand(new Event(eventInputs[0], LocalDate.parse(eventInputs[1])));
+                return new AddTaskCommand(makeEvent(details));
             case MARK:
                 return new MarkCommand(convertIndex(details, taskListLength));
             case UNMARK:
@@ -86,6 +71,41 @@ public class Parser {
         }
     }
 
+    private static Todo makeTodo(String userInput) throws DukeException {
+        if (userInput.strip().equals("")) {
+            throw new DukeException("Please enter a description for the todo task.");
+        }
+        return new Todo(userInput);
+    }
+
+    private static Deadline makeDeadline(String userInput) throws DukeException {
+        String[] deadlineDetails = userInput.split(" /by ", 2);
+
+        if (isInvalidDetails(deadlineDetails)) {
+            throw new DukeException("Please specify a deadline task as\n"
+                    + "deadline [description] /by [date in yyyy-mm-dd format].");
+        }
+
+        return new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1]));
+    }
+
+    private static Event makeEvent(String userInput) throws DukeException {
+        String[] eventDetails = userInput.split(" /at ", 2);
+
+        if (isInvalidDetails(eventDetails)) {
+            throw new DukeException("Please specify an event task as\n"
+                    + "event [description] /by [date in yyyy-mm-dd format].");
+        }
+
+        return new Event(eventDetails[0], LocalDate.parse(eventDetails[1]));
+    }
+
+    private static boolean isInvalidDetails(String[] taskDetails) {
+        boolean isTooShort = taskDetails.length == 1;
+        boolean hasNoDescription = taskDetails[0].strip().equals("");
+        boolean hasNoDate = taskDetails[1].strip().equals("");
+        return isTooShort || hasNoDescription || hasNoDate;
+    }
 
     private static int convertIndex(String indexString, int taskListLength) throws DukeException {
         if (indexString.strip().equals("")) {
