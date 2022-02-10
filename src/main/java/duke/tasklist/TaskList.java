@@ -1,5 +1,7 @@
 package duke.tasklist;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +12,8 @@ import duke.task.Task;
  * The task list which contains all the tasks.
  */
 public class TaskList {
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
     /** The ArrayList which stores all the tasks. */
     private final ArrayList<Task> tasks;
 
@@ -130,5 +134,16 @@ public class TaskList {
         }
 
         return filteredTaskList;
+    }
+
+    /**
+     * Checks the task list if there is another event with the date in dateString.
+     *
+     * @param date The date to check whether a clash occurs.
+     * @return True if there is a task with the date dateString, false otherwise.
+     */
+    public boolean checkDateInTaskList(LocalDateTime date) {
+        boolean hasDate = tasks.stream().anyMatch(task -> task.getDate().equals(date));
+        return hasDate;
     }
 }

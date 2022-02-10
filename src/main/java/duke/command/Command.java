@@ -1,13 +1,18 @@
 package duke.command;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import duke.dukeexceptions.DateClashException;
 import duke.dukeexceptions.DukeExceptions;
 import duke.dukeexceptions.EmptyDateException;
 import duke.dukeexceptions.EmptyKeywordException;
 import duke.dukeexceptions.EmptyNumberException;
 import duke.dukeexceptions.EmptyTaskException;
 import duke.dukeexceptions.InvalidCommandException;
+import duke.dukeexceptions.InvalidDateException;
 import duke.dukeexceptions.InvalidNumberException;
 import duke.dukeexceptions.ListIndexOutOfBoundException;
 import duke.storage.Storage;
@@ -18,6 +23,8 @@ import duke.tasklist.TaskList;
  * The Command object that represents the different commands of Duke.
  */
 public abstract class Command {
+    /** The formatter to format the user entered date. */
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected static final boolean IS_MARKED = false;
     protected String parameter;
     protected String commandName;
@@ -280,7 +287,7 @@ class TodoCommand extends Command {
         }
 
         boolean isMarked = false;
-        String date = null;
+        LocalDateTime date = null;
         Task todo = Task.createTask(commandName, isMarked, parameter, date);
         taskList.addTask(todo);
         String todoString = todo.toString();
@@ -330,12 +337,27 @@ class DeadlineCommand extends Command {
         if (index < 0) {
             throw EmptyDateException.createEmptyDate(commandName);
         }
+
+        // Get the date from the parameter.
         String[] tasksAndDates = getTaskNameAndDate(index, parameter, commandName);
         String task = tasksAndDates[0];
-        String date = tasksAndDates[1];
+        String dateString = tasksAndDates[1];
 
+        // Parse the date of the deadline as DD MMM YYYY HH:mm.
+        LocalDateTime date;
+        try {
+            date = LocalDateTime.parse(dateString, FORMATTER);
+        } catch (DateTimeParseException e) {
+            // If the user did not enter a valid date format.
+            throw new InvalidDateException();
+        }
+        boolean haveDateClash = taskList.checkDateInTaskList(date);
+        if (haveDateClash) {
+            throw DateClashException.createDateClashException(date.format(FORMATTER));
+        }
         boolean isMarked = false;
         Task deadline = Task.createTask(commandName, isMarked, task, date);
+
         taskList.addTask(deadline);
         String deadlineString = deadline.toString();
 
@@ -386,7 +408,20 @@ class EventCommand extends Command {
 
         String[] tasksAndDates = getTaskNameAndDate(index, parameter, commandName);
         String task = tasksAndDates[0];
-        String date = tasksAndDates[1];
+        String dateString = tasksAndDates[1];
+
+        // Parse the date of the deadline as DD MMM YYYY HH:mm.
+        LocalDateTime date;
+        try {
+            // If the user did not enter a valid date format.
+            date = LocalDateTime.parse(dateString, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
+        boolean haveDateClash = taskList.checkDateInTaskList(date);
+        if (haveDateClash) {
+            throw DateClashException.createDateClashException(date.format(FORMATTER));
+        }
 
         boolean isMarked = false;
         Task event = Task.createTask(commandName, isMarked, task, date);
