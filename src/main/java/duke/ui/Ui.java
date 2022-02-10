@@ -26,15 +26,15 @@ public class Ui {
      * @return The list of matching tasks.
      */
     public String displayAllTasks(ArrayList<Task> tasks) {
-        if (tasks.size() == 0) {
-            return "There are no tasks in your list.";
-        } else {
+        if (!tasks.isEmpty()) {
             StringBuilder strBuilder = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
                 String line = i + 1 + ". " + tasks.get(i) + '\n';
                 strBuilder.append(line);
             }
             return "Here are your tasks:\n" + strBuilder.toString();
+        } else {
+            return "There are no tasks in your list.";
         }
     }
 
@@ -45,15 +45,15 @@ public class Ui {
      * @return The list of matching tasks.
      */
     public String displayMatchingTasks(ArrayList<Task> tasks) {
-        if (tasks.size() == 0) {
-            return "There are no matching tasks in your list.";
-        } else {
+        if (!tasks.isEmpty()) {
             StringBuilder strBuilder = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
                 String line = i + 1 + ". " + tasks.get(i) + '\n';
                 strBuilder.append(line);
             }
             return "Here are the matching tasks:\n" + strBuilder.toString();
+        } else {
+            return "There are no matching tasks in your list.";
         }
     }
 
@@ -104,7 +104,7 @@ public class Ui {
      * @return The number of tasks in the list.
      */
     public String displayNumberOfTasks(ArrayList<Task> tasks) {
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             return "You have 0 tasks in your list";
         } else if (tasks.size() == 1) {
             return "You have 1 task in your list";

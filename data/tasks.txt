@@ -1,4 +1,6 @@
-[D][ ] task (by: 10/2/22 03:30)
 [D][X] task (by: 11/3/22 04:20)
 [T][ ] party
 [E][X] shower (at: 12/12/20 03:45)
+[T][ ] shopping
+[E][ ] help (at: 2/2/22 13:00)
+[D][ ] this (by: 2/5/22 08:00)

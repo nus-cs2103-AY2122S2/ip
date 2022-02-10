@@ -47,35 +47,9 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
 
             while (scanner.hasNextLine()) {
-                String strTask = scanner.nextLine();
-                boolean status = (strTask.charAt(4) == 'X');
-
-                if (strTask.startsWith("[T")) {
-                    String taskTitle = strTask.substring(7);
-                    tasks.add(new Todo(taskTitle, status));
-
-                } else if (strTask.startsWith("[D")) {
-                    String[] taskInfo = strTask.substring(7).split("\\(by:");
-                    String time = taskInfo[1].substring(0, taskInfo[1].length() - 1);
-                    SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
-                    try {
-                        Date dateTime = parser.parse(time);
-                        tasks.add(new Deadline(taskInfo[0], dateTime, status));
-                    } catch (ParseException e) {
-                        throw new InvalidArgumentException("Invalid time format");
-                    }
-
-                } else if (strTask.startsWith("[E")) {
-                    String[] taskInfo = strTask.substring(7).split("\\(at:");
-                    String time = taskInfo[1].substring(0, taskInfo[1].length() - 1);
-                    SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
-                    try {
-                        Date dateTime = parser.parse(time);
-                        tasks.add(new Event(taskInfo[0], dateTime, status));
-                    } catch (ParseException e) {
-                        throw new InvalidArgumentException("Invalid time format");
-                    }
-                }
+                String taskAsString = scanner.nextLine();
+                Task task = parseTaskFromString(taskAsString);
+                tasks.add(task);
             }
             return tasks;
         } catch (FileNotFoundException e) {
@@ -108,4 +82,117 @@ public class Storage {
             throw new FileSaveException("Could not save file to the directory.");
         }
     }
+
+    /**
+     * Gets the completion status of a task in String form.
+     *
+     * @param task The given task.
+     * @return The completion status.
+     */
+    public boolean getTaskStatus(String task) {
+        return task.charAt(4) == 'X';
+    }
+
+    /**
+     * Gets the full description of the given task in String form.
+     *
+     * @param task The given task.
+     * @return The task's description.
+     */
+    public String getTaskDescription(String task) {
+        return task.substring(7);
+    }
+
+    /**
+     * Parses time in String form into a Date object.
+     *
+     * @param timeAsString The time in String form.
+     * @return The time as a Date object.
+     * @throws ParseException If the time cannot be parsed.
+     */
+    public Date parseTimeFromString(String timeAsString) throws ParseException {
+        SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
+        return parser.parse(timeAsString);
+    }
+
+    /**
+     * Parses a Todo task from a String.
+     *
+     * @param task The task in String form.
+     * @return The corresponding Todo.
+     */
+    public Todo parseTodoFromString(String task) {
+        boolean isComplete = getTaskStatus(task);
+        String title = getTaskDescription(task);
+
+        return new Todo(title, isComplete);
+    }
+
+    /**
+     * Parses a Deadline task from a String.
+     *
+     * @param task The task in String form.
+     * @return The corresponding Deadline.
+     * @throws ParseException If the time cannot be parsed.
+     */
+    public Deadline parseDeadlineFromString(String task) throws ParseException {
+        boolean isComplete = getTaskStatus(task);
+        String description = getTaskDescription(task);
+
+        String[] segments = description.split("\\(by:");
+        String title = segments[0];
+        Date time = parseTimeFromString(segments[1].substring(0, segments[1].length() - 1));
+
+        return new Deadline(title, time, isComplete);
+    }
+
+    /**
+     * Parses an Event task from a String.
+     *
+     * @param task The task in String form.
+     * @return The corresponding Event.
+     * @throws ParseException If the time cannot be parsed.
+     */
+    public Event parseEventFromString(String task) throws ParseException {
+        boolean isComplete = getTaskStatus(task);
+        String description = getTaskDescription(task);
+
+        String[] segments = description.split("\\(at:");
+        String title = segments[0];
+        Date time = parseTimeFromString(segments[1].substring(0, segments[1].length() - 1));
+
+        return new Event(title, time, isComplete);
+    }
+
+    /**
+     * Parses a line from the data file to a task.
+     *
+     * @param taskAsString The task in String form.
+     * @return The corresponding Task.
+     * @throws DukeException If the task cannot be parsed.
+     */
+    public Task parseTaskFromString(String taskAsString) throws DukeException {
+        Task task;
+
+        if (taskAsString.startsWith("[T")) {
+            task = parseTodoFromString(taskAsString);
+        } else if (taskAsString.startsWith("[D")) {
+            try {
+                task = parseDeadlineFromString(taskAsString);
+            } catch (ParseException e) {
+                throw new InvalidArgumentException("Invalid time format");
+            }
+        } else if (taskAsString.startsWith("[E")) {
+            try {
+                task = parseEventFromString(taskAsString);
+            } catch (ParseException e) {
+                throw new InvalidArgumentException("Invalid time format");
+            }
+        } else {
+            throw new DukeException("Cannot parse task in file");
+        }
+
+        return task;
+    }
+
 }
