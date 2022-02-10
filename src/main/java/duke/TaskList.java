@@ -34,24 +34,26 @@ public class TaskList {
      * Adds a Todo task by user command.
      *
      * @param taskInfo information of the task to add.
+     * @return responding messages.
      */
-    public void addTodo(String taskInfo) {
+    public String addTodo(String taskInfo) {
         Todo todo = new Todo(taskInfo);
         tasks.add(todo);
-        this.printAdd();
+        return printAdd();
     }
 
     /**
      * Adds a Deadline task by user command.
      *
      * @param taskInfo information of the task to add.
+     * @return responding messages.
      */
-    public void addDdl(String taskInfo) {
+    public String addDdl(String taskInfo) {
         int i = taskInfo.indexOf(" /by ");
         if (i > 0 && i + 5 < taskInfo.length()) {
             Deadline t = new Deadline(taskInfo.substring(0, i), LocalDate.parse(taskInfo.substring(i + 5)));
             tasks.add(t);
-            this.printAdd();
+            return printAdd();
         } else {
             throw new DukeException("The description of a deadline should be \"<task> /by <time>\".");
         }
@@ -61,45 +63,53 @@ public class TaskList {
      * Adds an Event task by user command.
      *
      * @param taskInfo information of the task to add.
+     * @return responding messages.
      */
-    public void addEvt(String taskInfo) {
+    public String addEvt(String taskInfo) {
         int i = taskInfo.indexOf(" /at ");
         if (i > 0 && i + 5 < taskInfo.length()) {
             Event t = new Event(taskInfo.substring(0, i), taskInfo.substring(i + 5));
             tasks.add(t);
-            this.printAdd();
+            return printAdd();
         } else {
             throw new DukeException("The description of an event should be \"<task> /at <time>\".");
         }
     }
 
     /**
-     * Prints user interactive messages for an add task action.
+     * Returns messages for an add task action.
+     *
+     * @return responding messages.
      */
-    private void printAdd() {
-        System.out.println(INDENT + "Got it. I've added this task:");
+    private String printAdd() {
+        StringBuilder sb = new StringBuilder("Got it. I've added this task:");
+        sb.append(System.lineSeparator()).append("  ");
         int n = tasks.size();
-        System.out.println(INDENT + "  " + tasks.get(n - 1));
-        System.out.print(INDENT + "Now you have " + n + " task");
+        sb.append(tasks.get(n - 1)).append(System.lineSeparator())
+                .append(String.format("%s%d%s", "Now you have ", n, " task"));
         if (n > 1) {
-            System.out.print("s");
+            sb.append("s");
         }
-        System.out.println(" in the list.");
+        sb.append(" in the list.").append(System.lineSeparator());
+        return sb.toString();
     }
 
     /**
      * Lists tasks in the taskList.
+     *
+     * @return responding messages.
      */
-    public void list() {
+    public String list() {
         if (tasks.size() == 0) {
-            System.out.println(INDENT + "You don't have tasks listed.");
+            return "You don't have tasks listed.";
         } else {
-            System.out.println(INDENT + "Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
+            sb.append(System.lineSeparator());
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.print(INDENT);
-                System.out.print(i + 1);
-                System.out.println("." + tasks.get(i));
+                sb.append(String.format("%d%s%s", i + 1, ".", tasks.get(i)));
+                sb.append(System.lineSeparator());
             }
+            return sb.toString();
         }
     }
 
@@ -108,8 +118,9 @@ public class TaskList {
      *
      * @param command other information of the marking operation.
      * @param isDone state of the task to change to.
+     * @return responding messages.
      */
-    public void mark(String command, boolean isDone) {
+    public String mark(String command, boolean isDone) {
         Scanner markInfo = new Scanner(command);
         if (!markInfo.hasNextInt()) {
             throw new DukeException("Please enter an index.");
@@ -119,20 +130,23 @@ public class TaskList {
             throw new DukeException("Please enter a valid index.");
         }
         tasks.set(index, tasks.get(index).mark(isDone));
+        String msg;
         if (isDone) {
-            System.out.println(INDENT + "Nice! I've marked this task as done:");
+            msg = "Nice! I've marked this task as done:";
         } else {
-            System.out.println(INDENT + "OK, I've marked this task as not done yet:");
+            msg = "OK, I've marked this task as not done yet:";
         }
-        System.out.println(INDENT + "  " + tasks.get(index));
+        return msg + System.lineSeparator()
+                + "  " + tasks.get(index) + System.lineSeparator();
     }
 
     /**
      * Deletes one task from taskList.
      *
      * @param command other information of the deleting operation.
+     * @return responding messages.
      */
-    public void delete(String command) {
+    public String delete(String command) {
         Scanner deleteInfo = new Scanner(command);
         if (!deleteInfo.hasNextInt()) {
             throw new DukeException("Please enter an index");
@@ -142,36 +156,45 @@ public class TaskList {
             throw new DukeException("Please enter a valid index.");
         }
         Task t = tasks.remove(index);
-        System.out.println(INDENT + "Noted. I've removed this task:");
-        System.out.println(INDENT + "  " + t);
-        System.out.print(INDENT + "Now you have " + tasks.size() + " task");
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task:");
+        sb.append(System.lineSeparator())
+                .append("  ").append(t)
+                .append(System.lineSeparator())
+                .append(String.format("%s%d%s", "Now you have ", tasks.size(), " task"));
         if (tasks.size() > 1) {
-            System.out.print("s");
+            sb.append("s");
         }
-        System.out.println(" in the list.");
+        sb.append(" in the list.").append(System.lineSeparator());
+        return sb.toString();
     }
 
     /**
      * Finds tasks that match the keyword.
      *
      * @param keyword keyword to search for a match.
+     * @return responding messages.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
+        StringBuilder sb = new StringBuilder();
         boolean isFound = false;
-        for (int i = 1; i <= tasks.size(); i++) {
-            Task t = tasks.get(i - 1);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
             boolean isMatch = t.match(keyword);
             if (isMatch && !isFound) {
-                System.out.println(INDENT + "Here are the matching tasks in your list:");
+                sb.append("Here are the matching tasks in your list:")
+                        .append(System.lineSeparator());
                 isFound = true;
             }
             if (isMatch) {
-                System.out.println(INDENT + i + "." + t);
+                sb.append(String.format("%d%s%s", i + 1, ".", t))
+                        .append(System.lineSeparator());
             }
         }
         if (!isFound) {
-            System.out.println(INDENT + "" + "There is no matching task in your list.");
+            sb.append("There is no matching task in your list.")
+                    .append(System.lineSeparator());
         }
+        return sb.toString();
     }
 
     @Override
