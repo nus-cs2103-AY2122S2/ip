@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 /**
  * Represents a task
  */
@@ -45,17 +43,6 @@ public class Task {
     public void unmarkTaskDone() {
         this.isDone = false;
     }
-
-    /**
-     * Updates description based on content given
-     *
-     * @param content to replace description section
-     */
-    public void updateDescription(String content) {
-        this.description = content;
-    }
-
-    public void updateDate(String content) throws DukeException {}
 
     /**
      * Gets format to display task on file

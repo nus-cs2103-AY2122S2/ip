@@ -36,10 +36,7 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(remainingCommand));
         } else if (fullCommand.startsWith("todo") || fullCommand.startsWith("deadline") || fullCommand.startsWith("event")) {
             return splitCommand(fullCommand);
-        } else if (fullCommand.startsWith("update")) {
-            String[] remainingCommands = fullCommand.split(" ");
-            return new UpdateCommand(Integer.parseInt(remainingCommands[1]), remainingCommands[2], remainingCommands[3]);
-        }  else {
+        } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
         }
     }
