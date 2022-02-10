@@ -26,57 +26,29 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads from file
+     *
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
         try {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                List<String> input = Arrays.asList(sc.nextLine().split(" \\| "));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                switch (input.get(0)) {
-                case "T":
-                    ToDo newTodo = new ToDo(input.get(2).trim());
-                    list.add(newTodo);
-                    if (input.get(1).equals("1")) {
-                        list.set(list.indexOf(newTodo), newTodo.mark());
-                    }
-                    break;
-                case "D":
-                    Deadline newDeadline = new Deadline(input.get(2).trim(),
-                            LocalDate.parse(input.get(3).trim(), formatter));
-                    list.add(newDeadline);
-                    if (input.get(1).equals("1")) {
-                        list.set(list.indexOf(newDeadline), newDeadline.mark());
-                    }
-                    break;
-                case "E":
-                    Event newEvent = new Event(input.get(2).trim(), LocalDate.parse(input.get(3).trim(), formatter));
-                    list.add(newEvent);
-                    if (input.get(1).equals("1")) {
-                        list.set(list.indexOf(newEvent), newEvent.mark());
-                    }
-                    break;
-                default:
-                    throw new DukeException("Unknown type");
-                }
-            }
-            sc.close();
+            loadFileHandler(list, file);
         } catch (FileNotFoundException e) {
             Ui ui = new Ui();
             if (file.getParentFile().mkdirs()) {
-                try {
-                    if (file.createNewFile()) {
-                        ui.showFileCreated();
-                    }
-                } catch (IOException err) {
-                    ui.showIoException();
-                }
+                createOrReadFile(file, ui);
             }
         }
         return list;
     }
 
+    /**
+     * Saves to file
+     *
+     * @param taskList tasks to be saved.
+     */
     public void saveTaskList(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(filePath);
@@ -86,7 +58,53 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("Error happened cannot save to file");
+            Ui ui = new Ui();
+            ui.showMessage(e.getMessage());
+        }
+    }
+
+    private void loadFileHandler(ArrayList<Task> list, File file) throws FileNotFoundException, DukeException {
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            List<String> input = Arrays.asList(sc.nextLine().split(" \\| "));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            switch (input.get(0)) {
+            case "T":
+                ToDo newTodo = new ToDo(input.get(2).trim());
+                list.add(newTodo);
+                if (input.get(1).equals("1")) {
+                    list.set(list.indexOf(newTodo), newTodo.mark());
+                }
+                break;
+            case "D":
+                Deadline newDeadline = new Deadline(input.get(2).trim(),
+                        LocalDate.parse(input.get(3).trim(), formatter));
+                list.add(newDeadline);
+                if (input.get(1).equals("1")) {
+                    list.set(list.indexOf(newDeadline), newDeadline.mark());
+                }
+                break;
+            case "E":
+                Event newEvent = new Event(input.get(2).trim(), LocalDate.parse(input.get(3).trim(), formatter));
+                list.add(newEvent);
+                if (input.get(1).equals("1")) {
+                    list.set(list.indexOf(newEvent), newEvent.mark());
+                }
+                break;
+            default:
+                throw new DukeException("Unknown type");
+            }
+        }
+        sc.close();
+    }
+
+    private void createOrReadFile(File file, Ui ui) {
+        try {
+            if (file.createNewFile()) {
+                ui.showFileCreated();
+            }
+        } catch (IOException err) {
+            ui.showIoException();
         }
     }
 }

@@ -32,8 +32,9 @@ public class AddTodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks = tasks.add(newTodo);
         storage.saveTaskList(tasks);
+        int taskIndex = tasks.getSize() - 1;
         ui.showMessage("Got it. I've added this task: \n        "
-                + tasks.getByIndex(tasks.getSize() - 1) + "\n    Now you have "
+                + tasks.getByIndex(taskIndex) + "\n    Now you have "
                 + tasks.getSize() + " tasks in the list.");
     }
 }

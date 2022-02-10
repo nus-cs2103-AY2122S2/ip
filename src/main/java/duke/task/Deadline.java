@@ -6,11 +6,24 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * Event deadline.
+     *
+     * @param task tasks for deadline.
+     * @param by time by.
+     */
     public Deadline(String task, LocalDate by) {
         super(task.trim());
         this.by = by;
     }
 
+    /**
+     * Deadline class change done status.
+     *
+     * @param task tasks for deadline.
+     * @param by time by.
+     * @param done done status.
+     */
     public Deadline(String task, LocalDate by, boolean done) {
         super(task, done);
         this.by = by;
@@ -39,7 +52,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        String outputDate = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return "[" + Type.D + "]" + super.toString()
-                + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+                + " (by: " + outputDate + ")";
     }
 }
