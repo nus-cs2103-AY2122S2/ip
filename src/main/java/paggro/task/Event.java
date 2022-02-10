@@ -58,13 +58,17 @@ public class Event extends Task {
         DateTimeFormatter dFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter tFormat = DateTimeFormatter.ofPattern("HH:mm");
         final String separator = " | ";
-
-        String parseStr = "E" + separator + isDone() + separator + getDescription() + separator
-                + date.getLocalDate().format(dFormat);
-
+        final String formattedTags = super.getTags().toString()
+                .replace(",", "")
+                .replace("[", "")
+                .replace("]", "");
+        final String dateStr = this.date.getLocalDate().format(dFormat);
+        String timeStr = "";
         if (time != null) {
-            parseStr += time.format(tFormat);
+            timeStr = time.format(tFormat);
         }
+        String parseStr = "E" + separator + isDone() + separator + getDescription() + separator
+                + dateStr + separator + timeStr + separator + formattedTags;
 
         return parseStr;
     }
@@ -89,8 +93,12 @@ public class Event extends Task {
         if (time != null) {
             str += " " + time.format(DateTimeFormatter.ofPattern("h:mma"));
         }
+        str += ") | Tags:";
 
-        str += ")";
+        int noOfTags = super.getTags().size();
+        for (int i = 0; i < noOfTags; i++) {
+            str += " " + super.getTags().get(i).toString();
+        }
         return str;
     }
 }

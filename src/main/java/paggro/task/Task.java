@@ -1,5 +1,7 @@
 package paggro.task;
 
+import java.util.ArrayList;
+
 /**
  * This class encapsulates a Task object representing a task as described by the user.
  */
@@ -8,6 +10,8 @@ public abstract class Task {
     private String description;
     /** The boolean indicating if the task is complete. */
     private boolean isDone;
+    /** The list of tags associated with the Task object */
+    private ArrayList<Tag> tags;
 
     /**
      * Default constructor of Task.
@@ -17,6 +21,7 @@ public abstract class Task {
     public Task(String des) {
         description = des;
         isDone = false;
+        tags = new ArrayList<>();
     }
 
     /**
@@ -28,6 +33,7 @@ public abstract class Task {
     public Task(String des, boolean isDone) {
         description = des;
         this.isDone = isDone;
+        tags = new ArrayList<>();
     }
 
     /**
@@ -46,6 +52,19 @@ public abstract class Task {
      */
     public boolean isDone() {
         return isDone;
+    }
+
+    /**
+     * Adds a tag to the list of tags
+     *
+     * @param tag Tag to be added to task.
+     */
+    public void tagTask(Tag tag) {
+        tags.add(tag);
+    }
+
+    public ArrayList<Tag> getTags() {
+        return this.tags;
     }
 
     public void setDone() {

@@ -17,6 +17,7 @@ import paggro.lister.Lister;
 import paggro.notabledate.NotableDate;
 import paggro.task.Deadline;
 import paggro.task.Event;
+import paggro.task.Tag;
 import paggro.task.Task;
 import paggro.task.ToDo;
 
@@ -70,6 +71,7 @@ public class Storage {
             }
             ArrayList<Task> tasks = new ArrayList<>();
             HashMap<LocalDate, NotableDate> dateMap = new HashMap<>();
+            HashMap<String, Tag> tagMap = new HashMap<>();
             while (sc.hasNextLine()) {
                 String taskString = sc.nextLine();
                 char type = taskString.charAt(0);
@@ -79,16 +81,34 @@ public class Storage {
                 LocalDate lDate;
                 LocalTime lTime;
                 NotableDate nDate;
-                Task t;
+                String[] tagArr;
+                Tag tag;
+                Task task;
                 switch (type) {
                 case 'T':
-                    details = taskString.split(" \\| ", 3);
+                    details = taskString.split(" \\| ", 4);
                     isDone = Boolean.parseBoolean(details[1]);
                     des = details[2];
-                    tasks.add(new ToDo(des, isDone));
+                    task = new ToDo(des, isDone);
+                    tasks.add(task);
+
+                    tagArr = details[3].split(" ");
+                    for (String str : tagArr) {
+                        if (!str.equals("")) {
+                            String tagStr = str.replace("#", "");
+                            if (!tagMap.containsKey(tagStr)) {
+                                tag = new Tag(tagStr);
+                                tagMap.put(tagStr, tag);
+                            } else {
+                                tag = tagMap.get(tagStr);
+                            }
+                            task.tagTask(tag);
+                            tag.addTaskToTag(task);
+                        }
+                    }
                     break;
                 case 'E':
-                    details = taskString.split(" \\| ");
+                    details = taskString.split(" \\| ", 6);
                     isDone = Boolean.parseBoolean(details[1]);
                     des = details[2];
                     lDate = LocalDate.parse(details[3]);
@@ -98,19 +118,35 @@ public class Storage {
                     } else {
                         nDate = dateMap.get(lDate);
                     }
-                    if (details.length > 4) {
-                        lTime = LocalTime.parse(details[4]);
-                        t = new Event(des, nDate, lTime, isDone);
+                    lTime = LocalTime.parse(details[4]);
+                    if (!lTime.equals("")) {
+                        task = new Event(des, nDate, lTime, isDone);
                     } else {
-                        t = new Event(des, nDate, isDone);
+                        task = new Event(des, nDate, isDone);
                     }
-                    tasks.add(t);
-                    nDate.addTask(t);
+
+                    tagArr = details[5].split(" ", 6);
+                    for (String str : tagArr) {
+                        if (!str.equals("")) {
+                            String tagStr = str.replace("#", "");
+                            if (!tagMap.containsKey(tagStr)) {
+                                tag = new Tag(tagStr);
+                                tagMap.put(tagStr, tag);
+                            } else {
+                                tag = tagMap.get(tagStr);
+                            }
+                            task.tagTask(tag);
+                            tag.addTaskToTag(task);
+                        }
+                    }
+                    tasks.add(task);
+                    nDate.addTask(task);
                     break;
                 case 'D':
-                    details = taskString.split(" \\| ");
+                    details = taskString.split(" \\| ", 6);
                     isDone = Boolean.parseBoolean(details[1]);
                     des = details[2];
+
                     lDate = LocalDate.parse(details[3]);
                     if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
                         nDate = new NotableDate(lDate);
@@ -118,20 +154,37 @@ public class Storage {
                     } else {
                         nDate = dateMap.get(lDate);
                     }
-                    if (details.length > 4) {
-                        lTime = LocalTime.parse(details[4]);
-                        t = new Deadline(des, nDate, lTime, isDone);
+
+                    lTime = LocalTime.parse(details[4]);
+                    if (!lTime.equals("")) {
+                        task = new Deadline(des, nDate, lTime, isDone);
                     } else {
-                        t = new Deadline(des, nDate, isDone);
+                        task = new Deadline(des, nDate, isDone);
                     }
-                    tasks.add(t);
-                    nDate.addTask(t);
+
+                    tagArr = details[5].split(" ");
+                    for (String str : tagArr) {
+                        if (!str.equals("")) {
+                            String tagStr = str.replace("#", "");
+                            if (!tagMap.containsKey(tagStr)) {
+                                tag = new Tag(tagStr);
+                                tagMap.put(tagStr, tag);
+                            } else {
+                                tag = tagMap.get(tagStr);
+                            }
+                            task.tagTask(tag);
+                            tag.addTaskToTag(task);
+                        }
+                    }
+
+                    tasks.add(task);
+                    nDate.addTask(task);
                     break;
                 default:
                     throw new PaggroException(FOUR_SPACE + "File format error!");
                 }
             }
-            return new Lister(tasks, dateMap);
+            return new Lister(tasks, dateMap, tagMap);
         }
     }
 
@@ -178,13 +231,13 @@ public class Storage {
     }
 
     /**
-     * Marks the task at a given line of the file as done in storage.
+     * Updates the task at a given line of the file in storage.
      *
-     * @param lineNum The line number containing the task to be marked.
-     * @param task    The task to be marked as done.
+     * @param lineNum The line number containing the task to be updated.
+     * @param task    The task to be updated.
      * @throws IOException
      */
-    public void markInStorage(int lineNum, Task task) throws IOException {
+    public void updateInStorage(int lineNum, Task task) throws IOException {
         final String updatedFilePath = "./data/updated_paggro.txt";
         File updatedFile = new File(updatedFilePath);
         Scanner sc = new Scanner(paggroData);
@@ -204,33 +257,5 @@ public class Storage {
         Files.delete(Paths.get(filePath));
         Files.copy(Paths.get(updatedFilePath), Paths.get(filePath));
         Files.delete(Paths.get(updatedFilePath));
-    }
-
-    /**
-     * Unmarks the task at a given line of the file as not done in storage.
-     *
-     * @param lineNum The line number containing the task to be unmarked.
-     * @param task    The task to be unmarked as done.
-     * @throws IOException
-     */
-    public void unmarkInStorage(int lineNum, Task task) throws IOException {
-        File updatedFile = new File("./data/updated_paggro.txt");
-        Scanner sc = new Scanner(paggroData);
-        updatedFile.createNewFile();
-        FileWriter fw = new FileWriter(updatedFile);
-        int j = 1;
-        while (sc.hasNext()) {
-            String currLine = sc.nextLine();
-            if (j != lineNum) {
-                fw.write(currLine + System.lineSeparator());
-            } else {
-                fw.write(task.parseTask() + System.lineSeparator());
-            }
-            j++;
-        }
-        fw.close();
-        Files.delete(Paths.get(filePath));
-        Files.copy(Paths.get("./data/updated_paggro.txt"), Paths.get(filePath));
-        Files.delete(Paths.get("./data/updated_paggro.txt"));
     }
 }

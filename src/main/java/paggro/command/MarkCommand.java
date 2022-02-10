@@ -51,7 +51,7 @@ public class MarkCommand extends Command {
         Task task = lister.getTasks().get(index - 1);
 
         try {
-            storage.markInStorage(index, task);
+            storage.updateInStorage(index, task);
         } catch (IOException e) {
             throw new PaggroException(FOUR_SPACE + "Could not mark in paggro.txt =.=");
         }

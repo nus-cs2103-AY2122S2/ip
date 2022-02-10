@@ -36,11 +36,11 @@ public class PaggroTest {
 
     @Test
     void toDoParseTask_toDoNothingTrue_parsedToDoString() {
-        assertEquals("T | true | Nothing", new ToDo("Nothing", true).parseTask());
+        assertEquals("T | true | Nothing | ", new ToDo("Nothing", true).parseTask());
     }
 
     @Test
     void toDoParseTask_toDoNothingFalse_parsedToDoString() {
-        assertEquals("T | false | Nothing", new ToDo("Nothing").parseTask());
+        assertEquals("T | false | Nothing | ", new ToDo("Nothing").parseTask());
     }
 }

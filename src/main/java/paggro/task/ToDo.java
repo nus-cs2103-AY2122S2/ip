@@ -31,7 +31,14 @@ public class ToDo extends Task {
     @Override
     public String parseTask() {
         final String separator = " | ";
-        return "T" + separator + Boolean.toString(isDone()) + separator + getDescription();
+        final String formattedTags = super.getTags().toString()
+                .replace(",", "")
+                .replace("[", "")
+                .replace("]", "");
+        String parseStr = "T" + separator + isDone() + separator
+                + getDescription() + separator + formattedTags;
+
+        return parseStr;
     }
 
     /**
@@ -41,10 +48,17 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
+        String str;
         if (isDone()) {
-            return "[T][X] " + getDescription();
+            str = "[T][X] ";
         } else {
-            return "[T][ ] " + getDescription();
+            str = "[T][ ] ";
         }
+        str += getDescription() + " | Tags:";
+        int noOfTags = super.getTags().size();
+        for (int i = 0; i < noOfTags; i++) {
+            str += " " + super.getTags().get(i).toString();
+        }
+        return str;
     }
 }

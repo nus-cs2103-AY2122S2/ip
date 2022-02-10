@@ -116,7 +116,7 @@ public class Ui {
      * @return String of the message.
      */
     public String showAdded(Task task) {
-        return FOUR_SPACE + "Fine I'll add this task in:\n      "
+        return FOUR_SPACE + "Fine I've added this task in:\n      "
                 + task + "\n";
     }
 
@@ -134,4 +134,23 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns the tagged task message.
+     *
+     * @param task Task that was tagged.
+     * @return String of the message.
+     */
+    public String showTagged(Task task) {
+        return FOUR_SPACE + "Fine. I've tagged this task:\n      "
+                + task + "\n";
+    }
+
+    /**
+     * Returns the empty tag message.
+     *
+     * @return String of the message.
+     */
+    public String showEmptyTag() {
+        return FOUR_SPACE + "No tasks associated with this tag... =.=\n";
+    }
 }
