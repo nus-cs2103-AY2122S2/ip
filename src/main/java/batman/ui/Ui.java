@@ -24,7 +24,8 @@ public class Ui {
      * Displays the exit message.
      */
     public String exit() {
-        return "Bye. This city needs me. na na na na na na BATMAN\n";
+        return "Bye this program will self-destruct in 3 seconds. "
+                + "This city needs me. na na na na na na BATMAN\n";
     }
 
     /**

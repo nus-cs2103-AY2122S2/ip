@@ -29,6 +29,9 @@ public class Parser {
             case "todo":
             case "event":
             case "deadline":
+                if (command.length <= 1) {
+                    throw new DukeException(Error.EMPTY_DESC);
+                }
                 sb.append(TaskList.addTask(command));
                 break;
             case "delete":
@@ -42,6 +45,7 @@ public class Parser {
             }
         } catch (DukeException e) {
             sb.append(e.invalidInput());
+            sb.append(e.emptyDesc());
         }
         return sb;
     }

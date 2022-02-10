@@ -14,7 +14,10 @@ public class DukeException extends Exception {
      * @return String object of an invalid input.
      */
     public String invalidInput() {
-        return "I'm sorry, but I don't know what that means.\n";
+        if (this.err == Error.INVALID) {
+            return "I'm sorry, but I don't know what that means.\n";
+        }
+        return "";
     }
 
     /**
@@ -23,7 +26,10 @@ public class DukeException extends Exception {
      * @return String object of an empty description.
      */
     public String emptyDesc() {
-        return "The description of a task cannot be empty.\n";
+        if (this.err == Error.EMPTY_DESC) {
+            return "The description of a task cannot be empty.\n";
+        }
+        return "";
     }
 
     /**
@@ -32,7 +38,10 @@ public class DukeException extends Exception {
      * @return String object of a non-existing index in list.
      */
     public String listError() {
-        return "Index does not exists in array.\n";
+        if (this.err == Error.LIST_ERROR) {
+            return "Index does not exists in array.\n";
+        }
+        return "";
     }
 
 }

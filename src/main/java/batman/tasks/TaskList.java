@@ -43,9 +43,6 @@ public class TaskList {
             Task t;
             String description;
             String details;
-            if (command.length <= 1) {
-                throw new DukeException(Error.EMPTY_DESC);
-            }
             task = command[1];
             switch (command[0]) {
             case "deadline":
@@ -64,8 +61,6 @@ public class TaskList {
             }
             tasks.add(t);
             return printTask(t);
-        } catch (DukeException e) {
-            return e.emptyDesc();
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Missing argument(s) for tasks\n"
                     + "e.g. <task> <desc> /(at or by) <datetime>\n";
