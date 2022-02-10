@@ -5,6 +5,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 import jarvis.exceptions.InvalidTaskException;
+import jarvis.exceptions.TagNotFoundException;
+import jarvis.tags.Tag;
+import jarvis.tags.TagList;
 
 public abstract class Task {
     private static final String TODO = "todo";
@@ -13,6 +16,8 @@ public abstract class Task {
 
     private final String description;
     private Boolean isDone;
+    private LocalDate dateCompleted;
+    private TagList tags;
 
     /**
      * Constructor for the task object.
@@ -22,6 +27,8 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.dateCompleted = null;
+        this.tags = new TagList();
     }
 
     /**
@@ -34,24 +41,21 @@ public abstract class Task {
     public static Task of(String taskString) throws InvalidTaskException {
         Task task;
         String[] taskArr = taskString.split(" ", 2);
-        assert taskArr.length >= 1 : "Invalid taskArr";
+
+        if (taskArr.length < 2) {
+            throw new InvalidTaskException("The description of a task cannot be empty.");
+        }
         String taskType = taskArr[0];
         String[] params;
 
         switch (taskType) {
         case TODO:
-            if (taskArr.length <= 1) {
-                throw new InvalidTaskException("The description of a todo cannot be empty.");
-            }
             task = new jarvis.tasks.Todo(taskArr[1]);
             break;
 
         case DEADLINE:
-            if (taskArr.length <= 1) {
-                throw new InvalidTaskException("The description of a task cannot be empty.");
-            }
             params = taskArr[1].split(" /by ");
-            if (params.length <= 1) {
+            if (params.length < 2) {
                 throw new InvalidTaskException("The deadline of a task cannot be empty.");
             }
             try {
@@ -60,15 +64,11 @@ public abstract class Task {
             } catch (DateTimeParseException e) {
                 throw new InvalidTaskException("Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]");
             }
-
             break;
 
         case EVENT:
-            if (taskArr.length <= 1) {
-                throw new InvalidTaskException("The description of a event cannot be empty.");
-            }
             params = taskArr[1].split(" /at ");
-            if (params.length <= 1) {
+            if (params.length < 2) {
                 throw new InvalidTaskException("The time of an event cannot be empty.");
             }
             try {
@@ -153,10 +153,60 @@ public abstract class Task {
     }
 
     /**
+     * Get the date completed of the task.
+     *
+     * @return date completed of the task
+     */
+    public String getDateCompleted() {
+        return this.dateCompleted.toString();
+    }
+
+    /**
+     * Get all the tags associated with the task.
+     * @return tagList
+     */
+    public TagList getTags() {
+        return this.tags;
+    }
+
+    /**
+     * Add a tag to the task.
+     */
+    public void tag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    /**
+     * Checks if the task contains a given tag.
+     * @param tagName name of the tag
+     * @return true or false
+     */
+    public boolean hasTag(String tagName) {
+        return tags.contains(tagName);
+    }
+
+    /**
+     * Gets the tag object by the tag name.
+     * @param tagName name of the tag
+     * @return tag object
+     */
+    public Tag getTag(String tagName) throws TagNotFoundException {
+        return tags.getTag(tagName);
+    }
+
+    /**
+     * Removes a tag from the task.
+     */
+    public void untag(Tag tag) {
+        this.tags.remove(tag);
+    }
+
+    /**
      * Mark the current task as completed.
      */
     public void markAsCompleted() {
         this.isDone = true;
+        this.dateCompleted = LocalDate.now();
     }
 
     /**
@@ -164,6 +214,7 @@ public abstract class Task {
      */
     public void markAsUncompleted() {
         this.isDone = false;
+        this.dateCompleted = null;
     }
 
     /**
@@ -182,6 +233,10 @@ public abstract class Task {
      */
     public abstract String toCsv(String delimiter);
 
+    /**
+     * Gets the string representation of the task.
+     * @return string of the task
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);

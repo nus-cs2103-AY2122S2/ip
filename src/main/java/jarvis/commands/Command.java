@@ -1,6 +1,7 @@
 package jarvis.commands;
 
 import jarvis.exceptions.InvalidTaskException;
+import jarvis.exceptions.JarvisException;
 import jarvis.tasks.TaskList;
 import jarvis.utils.TextUI;
 
@@ -17,18 +18,18 @@ public abstract class Command {
     /**
      * Function to execute the command.
      *
-     * @param dukeList dukeList object
+     * @param taskList taskList object
      * @param ui ui object
      * @throws InvalidTaskException invalid task
      */
-    public void execute(TaskList dukeList, TextUI ui) throws InvalidTaskException {
-        ui.printMsg(getResult(dukeList));
+    public void execute(TaskList taskList, TextUI ui) throws JarvisException {
+        ui.printMsg(getResult(taskList));
     }
 
     /**
      * Function to execute the command and get the result.
-     * @param dukeList dukeList object
+     * @param taskList taskList object
      * @throws InvalidTaskException invalid task
      */
-    public abstract String getResult(TaskList dukeList) throws InvalidTaskException;
+    public abstract String getResult(TaskList taskList) throws JarvisException;
 }

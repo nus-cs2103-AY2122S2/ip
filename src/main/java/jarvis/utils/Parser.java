@@ -8,7 +8,11 @@ import jarvis.commands.HelpCommand;
 import jarvis.commands.ListCommand;
 import jarvis.commands.MarkCommand;
 import jarvis.commands.QuitCommand;
+import jarvis.commands.TagCommand;
+import jarvis.commands.TagsCommand;
+import jarvis.commands.TaskTagsCommand;
 import jarvis.commands.UnmarkCommand;
+import jarvis.commands.UntagCommand;
 import jarvis.exceptions.InvalidCommandException;
 
 public class Parser {
@@ -18,6 +22,10 @@ public class Parser {
     private static final String UNMARK_COMMAND = "unmark";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
+    private static final String TAGS_COMMAND = "tags";
+    private static final String TASKTAGS_COMMAND = "tasktags";
+    private static final String TAG_COMMAND = "tag";
+    private static final String UNTAG_COMMAND = "untag";
     private static final String HELP_COMMAND = "help";
 
     /**
@@ -29,6 +37,7 @@ public class Parser {
     public static Command parse(String cmdString) throws InvalidCommandException {
         String[] argv = getArgs(cmdString);
         String action = getAction(argv);
+        String[] params;
         Command cmd;
 
         switch (action) {
@@ -52,6 +61,20 @@ public class Parser {
             break;
         case HELP_COMMAND:
             cmd = new HelpCommand();
+            break;
+        case TAGS_COMMAND:
+            cmd = new TagsCommand();
+            break;
+        case TASKTAGS_COMMAND:
+            cmd = new TaskTagsCommand(getIdx(argv));
+            break;
+        case TAG_COMMAND:
+            params = getParams(argv);
+            cmd = new TagCommand(Integer.parseInt(params[0]), params[1]);
+            break;
+        case UNTAG_COMMAND:
+            params = getParams(argv);
+            cmd = new UntagCommand(Integer.parseInt(params[0]), params[1]);
             break;
         default:
             cmd = new AddCommand(cmdString);
@@ -116,6 +139,21 @@ public class Parser {
         }
 
         return argv[1];
+    }
+
+    /**
+     * Get params from the args.
+     *
+     * @param argv array of args
+     * @return params
+     * @throws InvalidCommandException keyword is invalid
+     */
+    public static String[] getParams(String[] argv) throws InvalidCommandException {
+        if (argv.length < 2) {
+            throw new InvalidCommandException("No params specified");
+        }
+
+        return argv[1].split(" ");
     }
 
     /**

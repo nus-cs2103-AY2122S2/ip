@@ -3,6 +3,9 @@ package jarvis.tasks;
 import java.util.ArrayList;
 
 import jarvis.exceptions.InvalidTaskException;
+import jarvis.exceptions.TagNotFoundException;
+import jarvis.tags.Tag;
+import jarvis.tags.TagList;
 import jarvis.utils.Storage;
 
 public class TaskList {
@@ -10,6 +13,7 @@ public class TaskList {
 
     private final Storage storage;
     private final ArrayList<Task> taskList;
+    private final TagList tagList;
     private final boolean useStorage;
 
     /**
@@ -23,6 +27,7 @@ public class TaskList {
         } else {
             this.taskList = new ArrayList<>(CAPACITY);
         }
+        this.tagList = new TagList();
         this.useStorage = true;
     }
 
@@ -32,6 +37,7 @@ public class TaskList {
     public TaskList(ArrayList<Task> taskList) {
         this.storage = null;
         this.taskList = taskList;
+        this.tagList = new TagList();
         this.useStorage = false;
     }
 
@@ -51,6 +57,24 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Get the tag list.
+     *
+     * @return array of tasks
+     */
+    public TagList getTagList() {
+        return this.tagList;
+    }
+
+    /**
+     * Get the task object from the tasklist.
+     * @param idx index of the task
+     * @return task object
+     */
+    public Task getTask(int idx) throws IndexOutOfBoundsException {
+        return this.taskList.get(idx - 1);
     }
 
     /**
@@ -116,6 +140,43 @@ public class TaskList {
         return "Noted. I've removed this task:\n"
                 + String.format("\t%s\n", task)
                 + String.format("Now you have %d Duke.tasks in the list.", this.taskList.size());
+    }
+
+    /**
+     * Add a tag to a task.
+     * @param taskIdx index of a task
+     * @param tagName name of the tag
+     * @return status string
+     * @throws TagNotFoundException tag not found in the list
+     */
+    public String tagTask(int taskIdx, String tagName) throws TagNotFoundException {
+        Task task = this.taskList.get(taskIdx - 1);
+        if (!tagList.contains(tagName)) {
+            tagList.add(tagName);
+        }
+        Tag tag = tagList.getTag(tagName);
+        task.tag(tag);
+
+        return String.format("OK, I've tagged this task with %s:\n", tag)
+            + String.format("\t%s", task);
+    }
+
+    /**
+     * Removes a tag to a task.
+     * @param taskIdx index of a task
+     * @param tagName name of the tag
+     * @return status string
+     */
+    public String untagTask(int taskIdx, String tagName) throws TagNotFoundException {
+        Task task = this.taskList.get(taskIdx - 1);
+        if (!task.hasTag(tagName)) {
+            return String.format("No tags by the name of %s found", tagName);
+        }
+        Tag tag = task.getTag(tagName);
+        task.untag(tag);
+
+        return String.format("OK, I've untagged %s from this task:\n", tag)
+            + String.format("\t%s", task);
     }
 
     /**

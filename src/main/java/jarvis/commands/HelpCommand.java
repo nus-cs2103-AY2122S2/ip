@@ -9,7 +9,11 @@ public class HelpCommand extends Command {
         + "* find task - find idx\n"
         + "* list tasks - list\n"
         + "* mark task - mark idx\n"
-        + "* unmark task -unmark idx\n"
+        + "* unmark task - unmark idx\n"
+        + "* list tags - tags\n"
+        + "* list task tags - tasktags idx\n"
+        + "* tag task - tag idx tagName\n"
+        + "* untag task - untag idx tagName\n"
         + "* quit - bye\n";
 
     /**
