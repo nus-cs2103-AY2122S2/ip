@@ -45,6 +45,8 @@ public class Storage {
                 Deadline deadlineTask = (Deadline) task;
                 stringToAppend = stringToAppend + "|" + deadlineTask.getDeadline();
                 break;
+            case "T":
+                break;
             default:
                 throw new MyBossException(Ui.APPEND_TO_FILE_EXCEPTION_MSG);
             }
