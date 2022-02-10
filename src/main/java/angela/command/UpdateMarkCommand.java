@@ -50,11 +50,11 @@ public class UpdateMarkCommand extends angela.command.Command {
         } else {
             stateDescription = "unmark";
         }
-
         if (!NumericChecker.isNumeric(description)) {
             return exception.printNotNumericError(stateDescription);
         } else {
             int taskNumber = Integer.parseInt(description);
+            assert taskNumber > -1 : "Task number should be a positive integer";
             Task task = taskList.getTask(taskNumber);
             botStorage.changeStatusTask(taskNumber, task);
             return ui.showTaskMark(task, isDone);
