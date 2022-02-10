@@ -15,10 +15,10 @@ public abstract class Command<String> {
 
     /**
      * change status of program
-     * @param bool boolean to change the status of program
+     * @param isRunning boolean to change the status of program
      */
-    public void changeRunning(boolean bool) {
-        systemRunning = bool;
+    public void changeRunning(boolean isRunning) {
+        systemRunning = isRunning;
     }
 
     /**

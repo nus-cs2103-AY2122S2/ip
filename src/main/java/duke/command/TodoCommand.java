@@ -10,8 +10,8 @@ import duke.ui.Ui;
  */
 public class TodoCommand extends Command<String> {
 
-    private TaskList list;
-    private String description;
+    private TaskList taskList;
+    private String inputText;
     private Storage storage;
     private Ui ui;
 
@@ -23,8 +23,8 @@ public class TodoCommand extends Command<String> {
      * @param ui ui of subsequent system out to user
      */
     public TodoCommand(String description, TaskList list, Storage storage, Ui ui) {
-        this.list = list;
-        this.description = description;
+        this.taskList = list;
+        this.inputText = description;
         this.storage = storage;
         this.ui = ui;
         runCommand();
@@ -32,14 +32,14 @@ public class TodoCommand extends Command<String> {
 
 
     /**
-     * add todotask to task list
+     * add todo task to task list
      */
     @Override
     public void runCommand() {
-        String splicedString = description.substring(5);
+        String splicedString = inputText.substring(5);
         ToDo freshTodo = new ToDo(splicedString);
-        list.addTask(freshTodo);
-        storage.writeToFile(list);
-        ui.showAddTodo(freshTodo, list);
+        taskList.addTask(freshTodo);
+        storage.writeToFile(taskList);
+        ui.showAddTodo(freshTodo, taskList);
     }
 }

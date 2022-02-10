@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class FindCommand extends Command<String> {
 
     private String command;
-    private TaskList list;
+    private TaskList taskList;
 
     /**
      * Constructor for find command
@@ -20,7 +20,7 @@ public class FindCommand extends Command<String> {
      */
     public FindCommand(String command, TaskList list) {
         this.command = command;
-        this.list = list;
+        this.taskList = list;
         runCommand();
     }
 
@@ -31,8 +31,8 @@ public class FindCommand extends Command<String> {
     public void runCommand() {
         String searchText = command.substring(5);
         ArrayList<Task> freshList = new ArrayList<>();
-        for (int i = 0; i < list.getSize(); i++) {
-            Task currTask = list.getTask(i);
+        for (int i = 0; i < taskList.getSize(); i++) {
+            Task currTask = taskList.getTask(i);
             if (currTask.toString().contains(searchText)) {
                 freshList.add(currTask);
             }
