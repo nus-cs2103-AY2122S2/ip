@@ -23,23 +23,6 @@ public class Duke {
         }
     }
 
-    public void textUI() {
-        Ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
     /**
      * Function to generate a response to user input.
      */
