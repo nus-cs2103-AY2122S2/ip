@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.exception.ListException;
 import duke.task.Deadline;
@@ -80,18 +81,6 @@ public class List {
         }
     }
     //CODESTYLE.OFF: "MissingSwitchDefault"
-
-    /**
-     * Adds a Task to the list, used for deadline task.
-     *
-     * @param description Description of Task.
-     * @param date Date of Task is due.
-     */
-    /*public void add(String description, LocalDateTime date) {
-        Deadline deadline = new Deadline(description, date);
-        tasks.add(deadline);
-    }*/
-
     /**
      * Deletes a task from the list and returns it.
      *
@@ -128,7 +117,9 @@ public class List {
         }
         return new List(findTaskList);
     }
-
+    public void sort() {
+        Collections.sort(this.getArrayList());
+    }
     /**
      * Returns a String representation of the List in the desired format.
      *

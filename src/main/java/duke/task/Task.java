@@ -4,7 +4,7 @@ package duke.task;
  * Represents a Task. A Task object corresponds to a String description
  * and a boolean condition which represents if the task is done or not.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
 
     private final String description;
     private boolean isDone;
@@ -35,7 +35,10 @@ public abstract class Task {
     public void unmarkDone() {
         this.isDone = false;
     }
-
+    @Override
+    public int compareTo(Task otherTask) {
+        return 0;
+    }
     /**
      * Returns a String representation of a Task in the desired format.
      *

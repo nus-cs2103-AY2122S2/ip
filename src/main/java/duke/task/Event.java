@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an Event task. An Event Object corresponds to a String description of the event
  * and String timing of which the event is occuring at.
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Task> {
     private final LocalDateTime dateAndTime;
 
     /**
@@ -25,6 +25,35 @@ public class Event extends Task {
      *
      * @return String representation.
      */
+    @Override
+    public int compareTo(Task otherTask) {
+        if (otherTask.getClass() != this.getClass()) {
+            int compareValueOfOtherTask = 3;
+            int compareValueOfCurrentTask = 3;
+            if (otherTask instanceof ToDo) {
+                compareValueOfOtherTask = 1;
+            }
+            if (otherTask instanceof Deadline) {
+                compareValueOfOtherTask = 2;
+            }
+            return Integer.compare(compareValueOfCurrentTask, compareValueOfOtherTask);
+        } else {
+            Event otherEvent;
+            otherEvent = (Event) otherTask;
+            LocalDateTime currentDateAndTime = this.dateAndTime;
+            LocalDateTime otherDateAndTime = otherEvent.dateAndTime;
+            return compareLocalDateTime(currentDateAndTime, otherDateAndTime);
+        }
+    }
+    private static int compareLocalDateTime(LocalDateTime currentDateAndTime, LocalDateTime otherDateAndTime) {
+        if (currentDateAndTime.isBefore(otherDateAndTime)) {
+            return -1;
+        } else if (currentDateAndTime.isAfter(otherDateAndTime)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
     @Override
     public String toString() {
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(" MMM dd yyyy h:mm a");
