@@ -1,9 +1,9 @@
 package heylo;
 
-import java.util.Scanner;
-
 import heylo.commands.Command;
 import heylo.tasks.Task;
+
+import java.util.Scanner;
 
 
 /**
@@ -16,22 +16,15 @@ public class Main {
      * @param args Input arguments.
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
         Task.getSavedTasks();
         greet();
-
-        while (true) {
-            String input = sc.nextLine();
-            Command cmd = new Command(input);
-            cmd.run(sc);
-        }
+        runCommandsTillExit();
     }
 
     /**
      * Greets the user with a stylized logo.
      */
-    public static void greet() {
+    static void greet() {
         String logo =
                 " _   _                  _\n"
                         + "| | | |   ___   _   _  | |   ___\n"
@@ -42,5 +35,15 @@ public class Main {
 
         System.out.println(logo);
         System.out.println("Heylo! What can I do for you today? :)\n");
+    }
+
+    static void runCommandsTillExit() {
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            String input = sc.nextLine();
+            Command cmd = new Command(input);
+            cmd.run(sc);
+        }
     }
 }
