@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import duke.ui.Ui;
 
@@ -30,6 +31,9 @@ public class Deadline extends Task {
         super(content, date, isDone, ui);
     }
 
+    public Deadline(String content, LocalDateTime date, boolean isDone, ArrayList<Tag> tags, Ui ui) {
+        super(content, date, isDone, tags, ui);
+    }
     /**
      * Returns the String representation of this class object.
      *

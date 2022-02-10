@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.ui.Ui;
 
+import java.util.ArrayList;
+
 /**
  * A task object that only has content and isDone.
  * No date or time is specified.
@@ -23,6 +25,10 @@ public class ToDo extends Task {
      */
     public ToDo(String content, boolean isDone, Ui ui) {
         super(content, isDone, ui);
+    }
+
+    public ToDo(String content, boolean isDone, ArrayList<Tag> tags, Ui ui) {
+        super(content, isDone, tags, ui);
     }
 
     /**

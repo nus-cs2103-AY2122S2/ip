@@ -44,7 +44,7 @@ public class TagList {
      * @param tagName String Name of the tag to be removed.
      */
     public void deleteTag(String tagName, Task task) {
-        // Tag equality is based on Tag name, so we can compare to a new Tag object with the same name.
+        // Tag equality is based on Tag name.
         boolean isRemoved = tags.remove(new Tag(tagName));
         if (isRemoved) {
             ui.showUiForUntag(tagName, task);
@@ -60,11 +60,14 @@ public class TagList {
      */
     @Override
     public String toString() {
-        String result = " #";
+        String result = "";
+        if (tags.size() != 0) {
+            result += " | ";
+        }
         for (int k = 0; k < tags.size(); k++) {
             String tagString = tags.get(k).toString();
             if (k != tags.size() - 1) {
-                result += tagString + ", ";
+                result += tagString + " ";
             } else {
                 result += tagString;
             }

@@ -39,6 +39,13 @@ public class Task implements Comparable<Task> {
         this.ui = ui;
     }
 
+    public Task(String content, boolean isDone, ArrayList<Tag> tags, Ui ui) {
+        this.isDone = isDone;
+        this.content = content;
+        this.tags = new TagList(tags, ui);
+        this.ui = ui;
+    }
+
     /**
      * Constructs a Task object with content string and date.
      *

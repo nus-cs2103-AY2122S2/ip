@@ -2,7 +2,8 @@ package duke.task;
 
 /**
  * Tag object provides the function of attaching a tag to a Task object.
- * A user can create its own tag by using the command "tag indexNumber".
+ * A user can create its own tag by using the command "tag indexNumber tagName".
+ * Tag can only be one word!
  */
 public class Tag {
     private String name;
@@ -36,6 +37,6 @@ public class Tag {
      */
     @Override
     public String toString() {
-        return name;
+        return "#" + name;
     }
 }

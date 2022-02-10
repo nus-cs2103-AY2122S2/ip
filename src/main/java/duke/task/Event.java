@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import duke.ui.Ui;
 
@@ -25,6 +26,10 @@ public class Event extends Task {
      */
     public Event(String content, LocalDateTime date, boolean isDone, Ui ui) {
         super(content, date, isDone, ui);
+    }
+
+    public Event(String content, LocalDateTime date, boolean isDone, ArrayList<Tag> tags, Ui ui) {
+        super(content, date, isDone, tags, ui);
     }
 
     /**

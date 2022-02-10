@@ -47,5 +47,6 @@ public class TagCommand extends Command {
         } else {
             throw new DukeException("Unknown error occurred");
         }
+        storage.save(taskList);
     }
 }

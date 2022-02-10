@@ -104,9 +104,10 @@ public class Parser {
                 }
                 String content = "";
                 int indexOfBy = inputCommand.lastIndexOf("\\by ");
+                System.out.println(indexOfBy);
                 if (indexOfBy == -1) {
                     throw new DukeMissingArgumentException("\\by deadlineTime");
-                } else if (indexOfBy <= 0) {
+                } else if (indexOfBy >= 0) {
                     String by = inputCommand.substring(indexOfBy + 4);
                     content = inputCommand.substring(9, indexOfBy - 1);
                     LocalDateTime date = null;
