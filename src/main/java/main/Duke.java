@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import chatbot.DukeException;
 import chatbot.Parser;
+import chatbot.ParserTextUi;
 import chatbot.Storage;
 import chatbot.TaskList;
 import chatbot.Ui;
@@ -71,7 +72,7 @@ public class Duke {
 
         while (true) {
             String inputText = scanner.nextLine().trim();
-            boolean parsedText = Parser.parseTextAndWillContinue(inputText, taskList, storage);
+            boolean parsedText = ParserTextUi.parseTextAndWillContinue(inputText, taskList, storage);
             if (!parsedText) { // bot should not parse anymore
                 scanner.close();
                 break;

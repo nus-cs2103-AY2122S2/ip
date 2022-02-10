@@ -107,7 +107,7 @@ public class TaskList {
         String reply = "";
         // check command
         boolean markAsDone = false; // default is "unmark"
-        if (type.equals("mark")) {
+        if (type.equals("mark") || type.equals("m")) {
             markAsDone = true;
         }
         if (taskIndex >= this.taskList.size()) { // invalid integer input

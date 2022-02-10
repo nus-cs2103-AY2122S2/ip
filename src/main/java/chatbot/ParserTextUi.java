@@ -8,77 +8,82 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 /**
-* Parser class for the bot, to handle incoming inputs from the user.
+* Parser class for the bot for command line text ui, to handle incoming inputs from the user.
 */
-public class Parser {
+public class ParserTextUi {
     private static final String UNRECOGNIZED_COMMAND = "Sorry Sir, I do not understand that command.";
     private static final String NOT_VALID_NUMBER = "Please enter a valid number Sir.";
     private static final String COMMAND_REQUIRES_NUMBER = "Sorry Sir, this command requires a number.";
     private static final String MISSING_TASK_INFO = "Sorry Sir, the <%s> command cannot be empty.";
     private static final String BYE_MESSAGE = "Farewell Sir. May you have a wonderful day.";
     /**
-     * Returns the String of the reply to the user's input inputText
-     *
-     * @param    inputText    input of the user
-     * @param    taskList     TaskList of the user
-     * @param    storage      Storage of the user denoting the location of the save file
-     * @return                the String containing the reply
-     * @see      TaskList
-     * @see      Storage
-     */
-    public static String parseTextGui(
-            String inputText, TaskList taskList, Storage storage) {
+    * Displays the farewell message to the user.
+    */
+    public static void displayFarewell() {
+        Ui.displayMessage(BYE_MESSAGE);
+    }
+    /**
+    * Returns the boolean of whether the bot should expect more inputs from the user,
+    * after processing the inputText String from the user.
+    *
+    * @param    inputText    input of the user
+    * @param    taskList     TaskList of the user
+    * @param    storage      Storage of the user denoting the location of the save file
+    * @return                the boolean to denote whether there are more future inputs
+    * @see      TaskList
+    * @see      Storage
+    */
+    public static boolean parseTextAndWillContinue(
+            String inputText, TaskList taskList, Storage storage) { // returns true if bot should continue parsing text
         inputText = inputText.trim();
         String[] inputStringArray = inputText.split(" ");
         try {
             if (inputText.equals("bye")) { // bye command
-                return BYE_MESSAGE;
-            } else if (inputText.equals("list") || inputText.equals("l")) { // list command
+                displayFarewell();
+                return false;
+            } else if (inputText.equals("list")) { // list command
                 String message = taskList.getTaskListMessage();
-                return message;
+                Ui.displayMessage(message);
+                return true;
 
-            } else if (inputStringArray[0].equals("mark")
-                    || inputStringArray[0].equals("unmark")
-                    || inputStringArray[0].equals("m")
-                    || inputStringArray[0].equals("um")) {
+            } else if (inputStringArray[0].equals("mark") || inputStringArray[0].equals("unmark")) {
                 // mark / unmark command
                 try {
                     String inputNumberString = inputStringArray[1];
                     int taskIndex = convertToTaskIndex(inputNumberString);
                     String message = taskList.markTask(taskIndex, inputStringArray[0]);
                     storage.saveData(taskList);
-                    return message;
+                    Ui.displayMessage(message);
+                    return true;
                 } catch (ArrayIndexOutOfBoundsException exception) { // no input together with command
                     throw new DukeException(COMMAND_REQUIRES_NUMBER);
                 }
 
             } else if (inputStringArray[0].equals("todo")
-                    || inputStringArray[0].equals("deadline")
-                    || inputStringArray[0].equals("event")
-                    || inputStringArray[0].equals("t")
-                    || inputStringArray[0].equals("d")
-                    || inputStringArray[0].equals("e")) {
+                || inputStringArray[0].equals("deadline")
+                || inputStringArray[0].equals("event")) {
                 Task newTask = createNewTaskFromInput(inputStringArray[0], inputText);
                 String message = taskList.insertNewTask(newTask);
                 storage.saveData(taskList);
-                return message;
+                Ui.displayMessage(message);
+                return true;
 
-            } else if (inputStringArray[0].equals("delete")
-                    || inputStringArray[0].equals("del")) {
+            } else if (inputStringArray[0].equals("delete")) {
                 try {
                     String inputNumberString = inputStringArray[1];
                     int deleteTaskIndex = convertToTaskIndex(inputNumberString);
                     String message = taskList.deleteTask(deleteTaskIndex);
                     storage.saveData(taskList);
-                    return message;
+                    Ui.displayMessage(message);
+                    return true;
                 } catch (ArrayIndexOutOfBoundsException exception) { // no input together with command
                     throw new DukeException(COMMAND_REQUIRES_NUMBER);
                 }
-            } else if (inputStringArray[0].equals("find")
-                    || inputStringArray[0].equals("f")) {
+            } else if (inputStringArray[0].equals("find")) {
                 try {
                     String message = taskList.findTaskName(inputStringArray[1]);
-                    return message;
+                    Ui.displayMessage(message);
+                    return true;
                 } catch (ArrayIndexOutOfBoundsException exception) {
                     throw new DukeException(String.format(MISSING_TASK_INFO, "find"));
                 }
@@ -86,7 +91,8 @@ public class Parser {
                 throw new DukeException(UNRECOGNIZED_COMMAND);
             }
         } catch (DukeException dukeException) {
-            return dukeException.toString();
+            Ui.displayMessage(dukeException.toString());
+            return true;
         }
     }
     /**
@@ -102,22 +108,17 @@ public class Parser {
     */
     public static Task createNewTaskFromInput(String type, String inputText) throws DukeException {
         Task newTask;
-        String taskName = "";
+        String taskName;
         String taskDateTime;
         String missingDateTime = "Sorry Sir, the description of <" + type + "> is missing a date/time.";
         String missingTaskInfo = "Sorry Sir, the <" + type + "> command cannot be empty.";
         String wrongDateTimeFormat = "Sorry Sir, the date/time needs to be in the format: YYYY-MM-DD HH:MM";
-        LocalDate taskDate;
-        LocalTime taskTime;
-        if (type.equals("deadline") || type.equals("d")
-                || type.equals("event") || type.equals("e")) { // is a deadline/event task
+
+        if (type.equals("deadline")) { // is a deadline task
             String[] inputStringArray = inputText.split(" /by ");
             try {
-                String[] taskNameArray = inputStringArray[0].split(" ");
-                for (int i = 1; i < taskNameArray.length; i++) {
-                    taskName += taskNameArray[i];
-                }
-            } catch (ArrayIndexOutOfBoundsException exception) {
+                taskName = inputStringArray[0].substring(9);
+            } catch (StringIndexOutOfBoundsException exception) {
                 throw new DukeException(missingTaskInfo);
             }
             try {
@@ -127,26 +128,43 @@ public class Parser {
             }
             try {
                 String[] taskDateTimeArray = taskDateTime.split(" ");
-                taskDate = LocalDate.parse(taskDateTimeArray[0]);
-                taskTime = null;
+                LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
+                LocalTime taskTime = null;
                 if (taskDateTimeArray.length > 1) {
                     taskTime = LocalTime.parse(taskDateTimeArray[1]);
                 }
+                newTask = new Deadline(taskName, taskDate, taskTime);
             } catch (DateTimeParseException exception) {
                 throw new DukeException(wrongDateTimeFormat);
             }
-            if (type.equals("deadline") || type.equals("d")) { // deadline
-                newTask = new Deadline(taskName, taskDate, taskTime);
-            } else { // event
+
+        } else if (type.equals("event")) { // is an event task
+            String[] inputStringArray = inputText.split(" /at ");
+            try {
+                taskName = inputStringArray[0].substring(6);
+            } catch (StringIndexOutOfBoundsException exception) {
+                throw new DukeException(missingTaskInfo);
+            }
+            try {
+                taskDateTime = inputStringArray[1];
+            } catch (Exception ArrayIndexOutOfBoundsException) {
+                throw new DukeException(missingDateTime);
+            }
+            try {
+                String[] taskDateTimeArray = taskDateTime.split(" ");
+                LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
+                LocalTime taskTime = null;
+                if (taskDateTimeArray.length > 1) {
+                    taskTime = LocalTime.parse(taskDateTimeArray[1]);
+                }
                 newTask = new Event(taskName, taskDate, taskTime);
+            } catch (DateTimeParseException exception) {
+                throw new DukeException(wrongDateTimeFormat);
             }
 
         } else { // is a to-do task
             try {
-                String[] taskNameArray = inputText.split(" ");
-                for (int i = 1; i < taskNameArray.length; i++) {
-                    taskName += taskNameArray[i];
-                }
+                taskName = inputText.substring(5);
             } catch (StringIndexOutOfBoundsException exception) {
                 throw new DukeException(missingTaskInfo);
             }
