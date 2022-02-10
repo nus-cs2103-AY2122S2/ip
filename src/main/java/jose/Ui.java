@@ -78,7 +78,7 @@ public class Ui {
         String list = "Aqui estan las tareas en su lista:" + LS;
 
         for (int i = 0; i < tasks.size(); i++) {
-            list += i + 1 + ": " + tasks.get(i) + LS;
+            list += (i + 1) + ": " + tasks.get(i) + LS;
         }
 
         return list;

@@ -38,11 +38,11 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        String[] taskInfo;
         Task tempTask;
 
         try {
             Parser.Command command = parser.parse(input);
+
             switch (command) {
             case BYE:
                 return ui.showExitMessage();
@@ -65,27 +65,19 @@ public class Duke {
                 updateDataFile();
                 return ui.showDeleteMessage(tempTask) + ui.showRemainingTasks(tasks);
             case FIND:
-                taskInfo = input.split(" ", 2);
-                assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
-                return ui.showList(tasks.findTasks(taskInfo[1]));
+                return ui.showList(tasks.findTasks(input.split(" ", 2)[1]));
             case TODO:
-                taskInfo = input.split(" ", 2);
-                assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
-                tempTask = new ToDo(taskInfo[1]);
+                tempTask = createTodo(input);
                 tasks.addTask(tempTask);
                 updateDataFile();
                 return ui.showAddMessage(tempTask) + ui.showRemainingTasks(tasks);
             case DEADLINE:
-                taskInfo = input.split(" ", 2)[1].split(" /by ");
-                assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
-                tempTask = new Deadline(taskInfo[0], taskInfo[1]);
+                tempTask = createDeadline(input);
                 tasks.addTask(tempTask);
                 updateDataFile();
                 return ui.showAddMessage(tempTask) + ui.showRemainingTasks(tasks);
             case EVENT:
-                taskInfo = input.split(" ", 2)[1].split(" /at ");
-                assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
-                tempTask = new Event(taskInfo[0], taskInfo[1]);
+                tempTask = createEvent(input);
                 tasks.addTask(tempTask);
                 updateDataFile();
                 return ui.showAddMessage(tempTask) + ui.showRemainingTasks(tasks);
@@ -101,5 +93,23 @@ public class Duke {
 
     public void updateDataFile() throws IOException {
         storage.update(tasks);
+    }
+
+    public Task createTodo(String input) {
+        String taskInfo[] = input.split(" ", 2);
+        assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
+        return new ToDo(taskInfo[1]);
+    }
+
+    public Task createDeadline(String input) {
+        String[] taskInfo = input.split(" ", 2)[1].split(" /by ");
+        assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
+        return new Deadline(taskInfo[0], taskInfo[1]);
+    }
+
+    public Task createEvent(String input) {
+        String[] taskInfo = input.split(" ", 2)[1].split(" /at ");
+        assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
+        return new Event(taskInfo[0], taskInfo[1]);
     }
 }
