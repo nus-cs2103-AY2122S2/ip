@@ -23,9 +23,11 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(Ui ui, DukeList tasks) {
         try {
+            String msg = ui.deleteTask(tasks.getTask(index), tasks.getSize());
             tasks.delete(index);
-            return ui.deleteTask(tasks.getTask(index), tasks.getSize());
+            return msg;
         } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
             return "\nDuke: Wrong index to delete! Use \"list\" to see the current tasks.\n";
         }
     }
