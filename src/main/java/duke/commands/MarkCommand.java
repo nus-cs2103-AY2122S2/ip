@@ -68,6 +68,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        assert taskList != null : "Task list provided must not be null.";
         String variance = isMark ? "done" : "undone";
         String output = "Done! I've marked this task as " + variance + "\n    ";
         return output + taskList.markTask(index, isMark);

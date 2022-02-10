@@ -33,6 +33,7 @@ public class StoreDeadlineCommand extends StoreCommand {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        assert taskList != null : "Task list provided must not be null.";
         return "Got it. I've added this task:\n    "
                 + taskList.addDeadlineTask(tokens)
                 + "\nNow you have " + taskList.getSize() + " task(s) in the list.";
