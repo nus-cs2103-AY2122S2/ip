@@ -10,9 +10,9 @@ import duke.exception.DukeException;
  */
 public class Duke {
 
-    private Storage storage;
-    private List tasks;
-    private Ui ui;
+    private final Storage storage;
+    private final List tasks;
+    private final Ui ui;
 
     /**
      * Create a chatterbot.
@@ -27,10 +27,10 @@ public class Duke {
     public String getResponse(String input) {
         String tempResult = "";
         try {
-            Command c = Parser.parseUserInput(input);
-            if (c != null) {
+            Command command = Parser.parseUserInput(input);
+            if (command != null) {
                 try {
-                    tempResult = c.execute(tasks, ui, storage);
+                    tempResult = command.execute(tasks, ui, storage);
                 } catch (IOException e) {
                     tempResult = e.getMessage();
                 }

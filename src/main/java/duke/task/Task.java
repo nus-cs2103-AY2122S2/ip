@@ -6,7 +6,7 @@ package duke.task;
  */
 public abstract class Task {
 
-    private String description;
+    private final String description;
     private boolean isDone;
     /**
      * Constructs a task object.

@@ -7,7 +7,7 @@ import duke.exception.ListException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.Tasks;
+import duke.task.TaskType;
 import duke.task.ToDo;
 
 /**
@@ -15,14 +15,14 @@ import duke.task.ToDo;
  */
 public class List {
 
-    private ArrayList<Task> arrayList;
+    private ArrayList<Task> tasks;
 
     public List() {
-        this.arrayList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public List(ArrayList<Task> list) {
-        this.arrayList = list;
+        this.tasks = list;
     }
 
 
@@ -32,7 +32,7 @@ public class List {
      * @return returns arraylist of Tasks.
      */
     public ArrayList<Task> getArrayList() {
-        return this.arrayList;
+        return this.tasks;
     }
 
     /**
@@ -41,7 +41,7 @@ public class List {
      * @param index Index of the task to be marked done in the array list of list.
      */
     public void markDone(int index) {
-        Task task = arrayList.get(index);
+        Task task = tasks.get(index);
         task.markDone();
     }
 
@@ -51,7 +51,7 @@ public class List {
      * @param index Index of the task to be marked as not done in the array list of list.
      */
     public void unmarkDone(int index) {
-        Task task = arrayList.get(index);
+        Task task = tasks.get(index);
         task.unmarkDone();
     }
 
@@ -63,15 +63,19 @@ public class List {
      * @param timing Date/Time for event task.
      */
     //CODESTYLE.OFF: "MissingSwitchDefault"
-    public void add(Tasks taskType, String description, String timing) {
+    public void add(TaskType taskType, String description, LocalDateTime timing) {
         switch (taskType) {
         case TODO:
             ToDo toDo = new ToDo(description);
-            arrayList.add(toDo);
+            tasks.add(toDo);
             break;
         case EVENT:
             Event event = new Event(description, timing);
-            arrayList.add(event);
+            tasks.add(event);
+            break;
+        case DEADLINE:
+            Deadline deadline = new Deadline(description, timing);
+            tasks.add(deadline);
             break;
         }
     }
@@ -80,14 +84,13 @@ public class List {
     /**
      * Adds a Task to the list, used for deadline task.
      *
-     * @param taskType TaskType of Task.
      * @param description Description of Task.
      * @param date Date of Task is due.
      */
-    public void add(Tasks taskType, String description, LocalDateTime date) {
+    /*public void add(String description, LocalDateTime date) {
         Deadline deadline = new Deadline(description, date);
-        arrayList.add(deadline);
-    }
+        tasks.add(deadline);
+    }*/
 
     /**
      * Deletes a task from the list and returns it.
@@ -97,16 +100,16 @@ public class List {
      * @throws ListException If the index is out of bound.
      */
     public Task delete(int index) throws ListException {
-        if (index < 1 || index > arrayList.size()) {
+        if (index < 1 || index > tasks.size()) {
             throw new ListException("Sorry. The task you indicated cannot be found.\n"
                     + "Please enter a new task.");
         } else {
-            return arrayList.remove(index - 1);
+            return tasks.remove(index - 1);
         }
     }
 
     public Task getLast() {
-        return arrayList.get(arrayList.size() - 1);
+        return tasks.get(tasks.size() - 1);
     }
 
     /**
@@ -117,7 +120,7 @@ public class List {
      */
     public List findTask(String findDescription) {
         ArrayList<Task> findTaskList = new ArrayList<>();
-        for (Task task : arrayList) {
+        for (Task task : tasks) {
             String description = task.getDescription();
             if (description.contains(findDescription)) {
                 findTaskList.add(task);
@@ -134,9 +137,9 @@ public class List {
     @Override
     public String toString() {
         String str = "Here are the tasks in your list:\n";
-        for (int i = 0; i < this.arrayList.size(); i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             int index = i + 1;
-            str = str + index + ". " + this.arrayList.get(i).toString() + "\n";
+            str = str + index + ". " + this.tasks.get(i).toString() + "\n";
         }
         return str;
     }
