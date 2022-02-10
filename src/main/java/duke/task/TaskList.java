@@ -66,9 +66,8 @@ public class TaskList {
      * @throws InvalidTaskNumberException If id > index or id <= 0 (can't modify)
      */
     public String mark(int id, String instr) throws InvalidTaskNumberException {
-        if (id > index || id <= 0) {
-            throw new InvalidTaskNumberException();
-        }
+        assert id <= index && id > 0;
+
         String out = tasks.get(id - 1).switchMark(instr);
         return out;
     }
@@ -81,9 +80,8 @@ public class TaskList {
      * @throws InvalidTaskNumberException If id > index or id <= 0 (can't remove)
      */
     public String remove(int id) throws InvalidTaskNumberException {
-        if (id > index || id <= 0) {
-            throw new InvalidTaskNumberException();
-        }
+        assert id <= index && id > 0;
+
         Task removed = tasks.remove(id - 1);
         index--;
         String out = "Noted, I have removed this task:\n  "
