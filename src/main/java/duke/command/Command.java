@@ -1,13 +1,18 @@
 package duke.command;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import duke.dukeexceptions.DateClashException;
 import duke.dukeexceptions.DukeExceptions;
 import duke.dukeexceptions.EmptyDateException;
 import duke.dukeexceptions.EmptyKeywordException;
 import duke.dukeexceptions.EmptyNumberException;
 import duke.dukeexceptions.EmptyTaskException;
 import duke.dukeexceptions.InvalidCommandException;
+import duke.dukeexceptions.InvalidDateException;
 import duke.dukeexceptions.InvalidNumberException;
 import duke.dukeexceptions.ListIndexOutOfBoundException;
 import duke.storage.Storage;
@@ -18,6 +23,8 @@ import duke.tasklist.TaskList;
  * The Command object that represents the different commands of Duke.
  */
 public abstract class Command {
+    /** The formatter to format the user entered date. */
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected String parameter;
 
     /**
@@ -291,10 +298,23 @@ class DeadlineCommand extends Command {
         }
 
         // Get the date from the parameter.
-        String date = parameter.substring(index + 5, parameter.length());
+        String dateString = parameter.substring(index + 5, parameter.length());
         // If the user did not enter a date after "/by".
-        if (date.isBlank()) {
+        if (dateString.isBlank()) {
             throw EmptyDateException.createEmptyDate("deadline");
+        }
+
+        // Parse the date of the deadline as DD MMM YYYY HH:mm.
+        LocalDateTime date;
+        try {
+            date = LocalDateTime.parse(dateString, FORMATTER);
+        } catch (DateTimeParseException e) {
+            // If the user did not enter a valid date format.
+            throw new InvalidDateException();
+        }
+        boolean haveDateClash = taskList.checkDateInTaskList(date);
+        if (haveDateClash) {
+            throw DateClashException.createDateClashException(date.format(FORMATTER));
         }
 
         // Creates a new deadline task, then add it to the task list.
@@ -350,10 +370,22 @@ class EventCommand extends Command {
         }
 
         // Get the date from the parameter.
-        String date = parameter.substring(index + 5, parameter.length());
+        String dateString = parameter.substring(index + 5, parameter.length());
         // If the user did not enter a date after "/at".
-        if (date.isBlank()) {
+        if (dateString.isBlank()) {
             throw EmptyDateException.createEmptyDate("event");
+        }
+        // Parse the date of the deadline as DD MMM YYYY HH:mm.
+        LocalDateTime date;
+        try {
+            // If the user did not enter a valid date format.
+            date = LocalDateTime.parse(dateString, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
+        boolean haveDateClash = taskList.checkDateInTaskList(date);
+        if (haveDateClash) {
+            throw DateClashException.createDateClashException(date.format(FORMATTER));
         }
 
         // Creates a new event task, then add it to the task list.

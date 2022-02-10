@@ -122,7 +122,7 @@ public class TestCommand {
             FileWriter fw = new FileWriter(dataFile);
 
             // Add the initial data into the data file.
-            tasks.addTask(Task.createTask("TODO", false, "Task 1", ""));
+            tasks.addTask(Task.createTask("TODO", false, "Task 1", null));
             storage.updateData(tasks);
             String result = "";
             while (sc.hasNext()) {
@@ -193,7 +193,7 @@ public class TestCommand {
             FileWriter fw = new FileWriter(dataFile);
 
             // Initialize the data in the data file.
-            tasks.addTask(Task.createTask("TODO", true, "Task 1", ""));
+            tasks.addTask(Task.createTask("TODO", true, "Task 1", null));
             storage.updateData(tasks);
             String result = "";
             while (sc.hasNext()) {
@@ -325,6 +325,23 @@ public class TestCommand {
     }
 
     @Test
+    void createDeadlineCommand_duplicatedDate_throwsDateClashException() {
+        String fileName = "data/test/dukeDuplicatedDateTest.txt";
+        String date = "1/1/2022 2359";
+        String expected = "There is already a deadline/event scheduled on " + date;
+        try {
+            Storage storage = new Storage(fileName);
+            TaskList tasks = storage.getData();
+            String parameter = "Deadline 2 /by " + date;
+            Command cmd = Command.getCommand("DEADLINE", parameter);
+            String result = cmd.run(tasks, storage);
+            Assertions.fail();
+        } catch (Exception e) {
+            Assertions.assertEquals(expected, e.getMessage());
+        }
+    }
+
+    @Test
     void createDeadlineCommand_correctDeadline_createDeadlineInFile() {
         String initial = "";
         String expectedOne =
@@ -415,6 +432,23 @@ public class TestCommand {
     }
 
     @Test
+    void createEventCommand_duplicatedDate_throwsDateClashException() {
+        String fileName = "data/test/dukeDuplicatedDateTest.txt";
+        String date = "1/1/2022 2359";
+        String expected = "There is already a deadline/event scheduled on " + date;
+        try {
+            Storage storage = new Storage(fileName);
+            TaskList tasks = storage.getData();
+            String parameter = "Event 2 /at " + date;
+            Command cmd = Command.getCommand("EVENT", parameter);
+            String result = cmd.run(tasks, storage);
+            Assertions.fail();
+        } catch (Exception e) {
+            Assertions.assertEquals(expected, e.getMessage());
+        }
+    }
+
+    @Test
     void createEventCommand_correctEvent_createEventInFile() {
         String initial = "";
         String expectedOne =
@@ -500,7 +534,7 @@ public class TestCommand {
         Storage storage = new Storage(fileName);
         TaskList tasks = new TaskList();
         try {
-            tasks.addTask(Task.createTask("TODO", false, "Task 1", ""));
+            tasks.addTask(Task.createTask("TODO", false, "Task 1", null));
             storage.updateData(tasks);
             File dataFile = new File(fileName);
             Scanner sc = new Scanner(dataFile);
