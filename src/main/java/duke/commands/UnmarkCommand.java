@@ -22,7 +22,6 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList taskList, Ui ui) throws DukeException {
         try {
             int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
-            assert index >= 1 : "Index less than 1!";
             Task task = taskList.getTasks().get(index);
             task.setIncomplete();
             currTask = task;
