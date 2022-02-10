@@ -6,6 +6,7 @@ import java.io.IOException;
  * Represents a command
  */
 public abstract class Command {
+
     private final String command;
 
     /**
