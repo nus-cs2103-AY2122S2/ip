@@ -16,13 +16,15 @@ public class Messages {
 
     public static final String FAREWELL_MESSAGE = "See you next time" + EXCLAMATION;
 
-    public static final String UNKNOWN_COMMAND = "Unknown command! the follow are the commands: ";
+    public static final String UNKNOWN_COMMAND = "Unknown command! Here is the list of commands: ";
 
     public static final String UNKNOWN_TODO = "todo.. todo what?";
 
     public static final String UNKNOWN_DEADLINE = "Sorry but.. deadline of what??";
 
-    public static final String UNKNOWN_DATETIME = "Invalid date-time format! Format: /by <dd/MM/yyyy HHMM>."
+    public static final String DATETIME_FORMAT = "<dd/MM/yyyy HHMM>";
+
+    public static final String UNKNOWN_DATETIME = "Invalid date-time format! Format: " + DATETIME_FORMAT
             + System.lineSeparator() + "An example: 12/12/2222 0800";
 
     public static final String UNKNOWN_EVENT = "What event? No event stated.";

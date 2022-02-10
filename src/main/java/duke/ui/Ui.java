@@ -10,8 +10,8 @@ public class Ui {
 
     public static final String LINE_PREFIX = "|| ";
 
-    public static final String COMMANDS = "list, todo, deadline (using /by),"
-            + " event (using /at), mark, unmark, delete";
+    public static final String[] COMMANDS = {"list", "todo <task>", "deadline <task> /by " + Messages.DATETIME_FORMAT,
+            "event <task> /at <at>", "mark <taskNumber>", "unmark <taskNumber>", "delete <taskNumber>", "bye"};
 
     /**
      * Appends a string to the original string.
@@ -39,7 +39,14 @@ public class Ui {
      * Displays the available commands Duke chatbot consists of.
      */
     public String showCommands() {
-        return showToUser(Messages.UNKNOWN_COMMAND, COMMANDS);
+        String output = "";
+        output = Ui.append(output, Messages.UNKNOWN_COMMAND);
+        int count = 0;
+        for (int i = count; i < COMMANDS.length; i++) {
+            count++;
+            output += count + ". " + COMMANDS[i] + LINE_SEPARATOR;
+        }
+        return output;
     }
 
     /**
