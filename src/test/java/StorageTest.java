@@ -68,7 +68,7 @@ public class StorageTest {
         Storage storage = new Storage(filePath);
 
         try {
-            storage.updateStorage(tasks);
+            storage.updateStorageFile(tasks);
         } catch (DukeException errorMessage) {
             fail();
         }
@@ -81,8 +81,8 @@ public class StorageTest {
         }
 
         for (int i = 0; i < 3; i++) {
-            String expectedOutput =  String.format("    %s", tasks.get(i).identify());
-            assertEquals(sc.nextLine(), expectedOutput);
+            String expectedOutput =  String.format("    %s", tasks.get(i).toString());
+            assertEquals(sc.nextLine().concat("\n"), expectedOutput);
         }
 
         sc.close();
@@ -120,8 +120,8 @@ public class StorageTest {
         } catch (FileNotFoundException errorMessage) {
             fail();
         }
-        String expectedOutput =  String.format("    %s", event.identify());
-        assertEquals(sc.nextLine(), expectedOutput);
+        String expectedOutput =  String.format("    %s", event.toString());
+        assertEquals(sc.nextLine().concat("\n"), expectedOutput);
         sc.close();
     }
 

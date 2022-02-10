@@ -8,17 +8,17 @@ public class EventTest {
 
     @Test
     public void testEventIdentify() {
-        assertEquals("[E][ ] do homework (by: Oct 15 2011)",
-            new Event("do homework", LocalDate.parse("2011-10-15")).identify());
+        assertEquals("[E][ ] do homework (by: Oct 15 2011)\n",
+            new Event("do homework", LocalDate.parse("2011-10-15")).toString());
     }
 
     @Test
     public void testSetIsDone() {
         Event event = new Event("do homework", LocalDate.parse("2011-10-15"));
         event.setDone(true);
-        assertEquals("[E][X] do homework (by: Oct 15 2011)", event.identify());
+        assertEquals("[E][X] do homework (by: Oct 15 2011)\n", event.toString());
         event.setDone(false);
-        assertEquals("[E][ ] do homework (by: Oct 15 2011)", event.identify());
+        assertEquals("[E][ ] do homework (by: Oct 15 2011)\n", event.toString());
     }
 
     @Test

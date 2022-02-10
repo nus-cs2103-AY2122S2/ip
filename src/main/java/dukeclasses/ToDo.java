@@ -21,7 +21,7 @@ public class ToDo extends Task{
      * @return String that represent the description of the task and its status(i.e. mark or unmarked).
      */
     @Override
-    public String identify() {
+    public String toString() {
         if (super.getIsDone()) {
             return String.format("[T][X] %s\n", super.getDescription());
         } else {

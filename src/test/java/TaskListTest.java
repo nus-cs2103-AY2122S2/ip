@@ -1,11 +1,8 @@
-import dukeclasses.TaskList;
-import dukeclasses.Task;
-import dukeclasses.ToDo;
-import dukeclasses.Deadline;
-import dukeclasses.Event;
+import dukeclasses.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,8 +36,12 @@ public class TaskListTest {
         taskList.addTask(deadline);
         taskList.addTask((event));
 
-        taskList.deleteTask(0);
-        taskList.deleteTask(1);
+        try {
+            taskList.deleteTask(0);
+            taskList.deleteTask(1);
+        } catch (DukeException error) {
+            fail();
+        }
 
         assertEquals(1, taskList.getTaskList().size());
         assertEquals(deadline, taskList.getTaskList().get(0));

@@ -72,7 +72,17 @@ public class TaskList {
         } else {
             return tasks.remove(index);
         }
+    }
 
+    public TaskList findInTaskList(String taskDescriptionToFind){
+        TaskList findTaskList = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().contains(taskDescriptionToFind)) {
+                findTaskList.addTask(task);
+            }
+        }
+        return findTaskList;
     }
 
 }
