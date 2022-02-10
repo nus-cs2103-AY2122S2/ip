@@ -2,21 +2,14 @@
 package athena.ui;
 
 import java.util.List;
-import java.util.Scanner;
 
 import athena.tasks.TaskList;
 
 public class Ui {
     private final TaskList taskList;
-    private final Scanner scanner;
 
     public Ui(TaskList taskList) {
         this.taskList = taskList;
-        scanner = new Scanner(System.in);
-    }
-
-    public String readNextLine() {
-        return scanner.nextLine();
     }
 
     public void showSpecificTasks(List<Integer> taskNumbers) {

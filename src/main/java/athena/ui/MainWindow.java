@@ -33,8 +33,8 @@ public class MainWindow extends Stage {
 
     private Athena athena;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
+    private Image athenaImage = new Image(this.getClass().getResourceAsStream("/images/athena.jpg"));
 
     public MainWindow(Athena athena) {
         this.athena = athena;
@@ -63,7 +63,7 @@ public class MainWindow extends Stage {
         String response = athena.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, athenaImage)
         );
         userInput.clear();
     }
