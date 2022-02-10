@@ -9,6 +9,8 @@ public class CommandTodo extends Command {
     private String todoContent;
 
     public CommandTodo(TaskList taskList, String todoContent) {
+        assert taskList != null;
+        assert todoContent != null;
         this.taskList = taskList;
         this.todoContent = todoContent;
     }

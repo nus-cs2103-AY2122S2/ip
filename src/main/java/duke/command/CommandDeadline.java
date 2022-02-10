@@ -22,6 +22,9 @@ public class CommandDeadline extends Command {
      * @param date Due date of the task to be added.
      */
     public CommandDeadline(TaskList taskList, String deadlineContent, LocalDate date) {
+        assert taskList != null;
+        assert deadlineContent != null;
+        assert date != null;
         this.deadlineContent = deadlineContent;
         this.date = date;
         this.taskList = taskList;

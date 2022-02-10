@@ -21,6 +21,7 @@ public class TaskList {
      * @param task the task to be added
      */
     public void addTask(Task task) {
+        assert task != null;
         todo.add(task);
     }
 
@@ -87,17 +88,16 @@ public class TaskList {
      * @return the String representation of the TaskList, to be stored locally.
      */
     public String toData() {
-        String txtdata = "";
+        String textData = "";
         for (int i = 0; i < todo.size(); i++) {
-            txtdata += todo.get(i).toData() + "\n";
+            textData += todo.get(i).toData() + "\n";
         }
-        return txtdata;
+        return textData;
     }
 
     public TaskList search(String keyword) {
         TaskList searchResult = new TaskList();
         for (int i = 0; i < this.todo.size(); i++) {
-
             int index = this.todo.get(i).toString().indexOf(keyword);
             if (index != -1) {
                 searchResult.addTask(this.todo.get(i));

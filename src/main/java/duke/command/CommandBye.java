@@ -23,6 +23,7 @@ public class CommandBye extends Command {
      */
     @Override
     public String execute() {
+        assert over != null;
         String msg = Response.RESPONSE_GOODBYE;
         over.setOver();
         return msg;

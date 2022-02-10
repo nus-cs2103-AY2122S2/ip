@@ -18,6 +18,8 @@ class Duke {
     }
 
     public String getResponse(String userInput) {
+        assert this.storage != null;
+        assert this.taskList != null;
         try {
             Command command = Parser.parse(userInput, taskList);
             String response = command.execute();

@@ -17,6 +17,7 @@ public class CommandDelete extends Command {
      * @param taskNo The number of the task in the list.
      */
     public CommandDelete(TaskList taskList, int taskNo) {
+        assert taskList != null;
         this.taskList = taskList;
         this.taskNo = taskNo;
     }
