@@ -176,10 +176,12 @@ public class Parser {
                 throw new DukeException(MoneyChange.WRONG_LEND_FORMAT_ERROR_STRING);
             } else {
                 String amount = taskString.substring(5, toIdx - 1); // "lend " has 9 characters
-                float amountFloat = Float.parseFloat(amount);
                 try {
+                    float amountFloat = Float.parseFloat(amount);
                     String person = taskString.substring(toIdx + 4); // "/to " has 4 characters
                     return new MoneyChange(-amountFloat, person);
+                } catch (NumberFormatException err) {
+                    throw new DukeException(MoneyChange.INVALID_MONEY_AMOUNT);
                 } catch (StringIndexOutOfBoundsException err) {
                     throw new DukeException(MoneyChange.WRONG_LEND_FORMAT_ERROR_STRING);
                 }
@@ -203,10 +205,12 @@ public class Parser {
                 throw new DukeException(MoneyChange.WRONG_BORROW_FORMAT_ERROR_STRING);
             } else {
                 String amount = taskString.substring(7, fromIdx - 1); // "borrow " has 9 characters
-                float amountFloat = Float.parseFloat(amount);
                 try {
+                    float amountFloat = Float.parseFloat(amount);
                     String person = taskString.substring(fromIdx + 6); // "/from " has 6 characters
                     return new MoneyChange(amountFloat, person);
+                } catch (NumberFormatException err) {
+                    throw new DukeException(MoneyChange.INVALID_MONEY_AMOUNT);
                 } catch (StringIndexOutOfBoundsException err) {
                     throw new DukeException(MoneyChange.WRONG_LEND_FORMAT_ERROR_STRING);
                 }

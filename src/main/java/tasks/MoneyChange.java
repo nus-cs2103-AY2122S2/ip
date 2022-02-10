@@ -7,6 +7,8 @@ public class MoneyChange extends Task {
             "Format for lending: 'lend [some amount] /to [name]'";
     public static final String WRONG_BORROW_FORMAT_ERROR_STRING =
             "Format for borrowing: 'borrow [some amount] /from [name]'";
+    public static final String INVALID_MONEY_AMOUNT =
+            "Remember to type a number for lending or borrowing!";
 
     private final Task.TaskType taskType = Task.TaskType.MONEYCHANGE;
     private final float changeAmount;

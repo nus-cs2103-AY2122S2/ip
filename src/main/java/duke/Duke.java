@@ -22,16 +22,23 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.ui.greet();
+        duke.run();
+    }
+
+    /**
+     * The function to be executed to start Duke CLI.
+     */
+    public void run() {
+        ui.greet();
         String userInput;
-        boolean finished = false;
-        while (!finished) {
-            userInput = duke.ui.getInput();
+        boolean isFinished = false;
+        while (!isFinished) {
+            userInput = ui.getInput();
             if (userInput.equals("bye")) {
-                duke.ui.sayGoodbye();
-                finished = true;
+                ui.sayGoodbye();
+                isFinished = true;
             } else {
-                duke.ui.handle(userInput);
+                ui.handle(userInput);
             }
         }
     }

@@ -1,2 +1,3 @@
-MONEYCHANGE 3.00 false john
-MONEYCHANGE -2.00 true john
+TODO sleep false
+EVENT party false 11/11/2000-12:34
+MONEYCHANGE 5.00 false Mark
