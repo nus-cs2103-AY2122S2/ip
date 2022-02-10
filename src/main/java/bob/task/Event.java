@@ -1,6 +1,7 @@
 package bob.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 /**
@@ -27,6 +28,10 @@ public class Event extends Task {
         super.setType("E");
     }
 
+    public LocalDateTime getDateTime() {
+        return LocalDateTime.of(date, startTime);
+    }
+
     @Override
     public String printStatus() {
         return "[E] " + super.getStatusSymbol() + " " + this + " (at: "
@@ -38,5 +43,18 @@ public class Event extends Task {
     @Override
     public String toString() {
         return super.getName();
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Todo) {
+            return -1;
+        } else if (o instanceof Deadline) {
+            Deadline dl = (Deadline) o;
+            return this.getDateTime().compareTo(dl.getDateTime());
+        } else {
+            Event event = (Event) o;
+            return this.getDateTime().compareTo(event.getDateTime());
+        }
     }
 }

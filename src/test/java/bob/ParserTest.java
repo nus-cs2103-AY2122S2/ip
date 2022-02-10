@@ -12,6 +12,7 @@ import bob.command.ToDoCommand;
 import bob.exception.DeadlineException;
 import bob.exception.EventException;
 import bob.exception.InvalidCommandException;
+import bob.exception.InvalidIndexException;
 import bob.exception.ToDoException;
 
 class ParserTest {
@@ -36,9 +37,9 @@ class ParserTest {
         String eventInput = "Event seminar /at invalid date";
         assertThrows(EventException.class, () -> Parser.parse(eventInput));
         String markInput = "mark one";
-        assertThrows(InvalidCommandException.class, () -> Parser.parse(markInput));
+        assertThrows(InvalidIndexException.class, () -> Parser.parse(markInput));
         String deleteInput = "delete two";
-        assertThrows(InvalidCommandException.class, () -> Parser.parse(deleteInput));
+        assertThrows(InvalidIndexException.class, () -> Parser.parse(deleteInput));
         String emptyInput = "invalid command";
         assertThrows(InvalidCommandException.class, () -> Parser.parse(emptyInput));
     }

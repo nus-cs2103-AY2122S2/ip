@@ -22,7 +22,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -34,6 +34,15 @@ public class DialogBox extends HBox {
         Circle c = new Circle(60, 60, 60);
         displayPicture.setClip(c);
         dialog.setText(text);
+        if (isUser) {
+            dialog.setStyle("-fx-background-color: GAINSBORO;"
+                    + "-fx-background-radius: 25;"
+                    + "-fx-padding: 15 15 15 15");
+        } else {
+            dialog.setStyle("-fx-background-color: DODGERBLUE; "
+                    + "-fx-background-radius: 25;"
+                    + "-fx-padding: 15 15 15 15");
+        }
         displayPicture.setFitWidth(120.0);
         displayPicture.setFitHeight(120.0);
         displayPicture.setImage(img);
@@ -47,11 +56,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, true);
     }
 
     public static DialogBox getBobDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, false);
         db.flip();
         return db;
     }

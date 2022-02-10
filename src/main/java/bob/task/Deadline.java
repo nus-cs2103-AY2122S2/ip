@@ -20,6 +20,10 @@ public class Deadline extends Task {
         this.date = dateTime;
     }
 
+    public LocalDateTime getDateTime() {
+        return date;
+    }
+
     @Override
     public String printStatus() {
         return "[D] " + super.getStatusSymbol() + " " + this + " (by: "
@@ -29,5 +33,18 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return super.getName();
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Todo) {
+            return -1;
+        } else if (o instanceof Deadline) {
+            Deadline dl = (Deadline) o;
+            return this.date.compareTo(dl.getDateTime());
+        } else {
+            Event event = (Event) o;
+            return this.date.compareTo(event.getDateTime());
+        }
     }
 }

@@ -19,4 +19,13 @@ public class Todo extends Task {
     public String printStatus() {
         return "[T] " + super.getStatusSymbol() + " " + this;
     }
+
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Deadline || o instanceof Event) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

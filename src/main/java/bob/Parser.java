@@ -13,6 +13,8 @@ import bob.command.EventCommand;
 import bob.command.FindCommand;
 import bob.command.ListCommand;
 import bob.command.MarkCommand;
+import bob.command.PriorityCommand;
+import bob.command.PriorityListCommand;
 import bob.command.ToDoCommand;
 import bob.exception.BobException;
 import bob.exception.DeadlineException;
@@ -20,6 +22,7 @@ import bob.exception.EventException;
 import bob.exception.FindException;
 import bob.exception.InvalidCommandException;
 import bob.exception.InvalidIndexException;
+import bob.exception.PriorityException;
 import bob.exception.ToDoException;
 
 
@@ -53,13 +56,32 @@ public class Parser {
             return new ByeCommand();
         } else if (firstWord.equalsIgnoreCase("find")) {
             return parseFind(input);
+        } else if (firstWord.equalsIgnoreCase("priority")) {
+            return parsePriority(input);
+        } else if (firstWord.equalsIgnoreCase("prioritylist")) {
+            return new PriorityListCommand();
         } else {
             throw new InvalidCommandException();
         }
     }
 
+    private static PriorityCommand parsePriority(String input) {
+        String priorityString = input.substring(8).trim();
+        String[] inputArr = priorityString.split(" ");
+        if (priorityString.isBlank() || inputArr.length != 2) {
+            throw new PriorityException();
+        }
+        try {
+            int index = Integer.parseInt(inputArr[0]) - 1;
+            String priority = inputArr[1];
+            return new PriorityCommand(index, priority);
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
+    }
+
     private static MarkCommand parseMark(String input) {
-        String indexString = input.substring(6).trim();
+        String indexString = input.substring(4).trim();
         if (indexString.isBlank()) {
             throw new InvalidIndexException();
         }
@@ -67,7 +89,7 @@ public class Parser {
             int index = Integer.parseInt(indexString) - 1;
             return new MarkCommand(index);
         } catch (NumberFormatException e) {
-            throw new InvalidCommandException();
+            throw new InvalidIndexException();
         }
     }
 
@@ -80,7 +102,7 @@ public class Parser {
             int index = Integer.parseInt(indexString) - 1;
             return new DeleteCommand(index);
         } catch (NumberFormatException e) {
-            throw new InvalidCommandException();
+            throw new InvalidIndexException();
         }
     }
 
