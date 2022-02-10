@@ -1,6 +1,5 @@
 package myboss;
 
-import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -43,6 +42,7 @@ public class MyBoss {
             case "bye":
                 storage.updateFile(tasks.getTaskList());
                 Main.exitPlatform();
+                return "";
             case "list":
                 return ui.outputTaskList(tasks.getTaskList());
             case "mark":
@@ -70,19 +70,19 @@ public class MyBoss {
             case "find":
                 return ui.outputFoundTasks(tasks.findTasks(remainingUserInput));
             default:
-                throw new MyBossException(Ui.unknownCommandExceptionMsg);
+                throw new MyBossException(Ui.UNKNOWN_COMMAND_EXCEPTION_MSG);
 
             }
         } catch (StringIndexOutOfBoundsException ex) {
-            return Ui.missingTimeArgumentExceptionMsg;
+            return Ui.MISSING_TIME_ARGUMENT_EXCEPTION_MSG;
         } catch (ArrayIndexOutOfBoundsException e) {
-            return Ui.missingArgumentExceptionMsg;
+            return Ui.MISSING_ARGUMENT_EXCEPTION_MSG;
         } catch (MyBossException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
-            return Ui.wrongDateFormatExceptionMsg;
+            return Ui.WRONG_DATE_FORMAT_EXCEPTION_MSG;
         } catch (IndexOutOfBoundsException e) {
-            return Ui.indexOutOfBoundsExceptionMsg;
+            return Ui.INDEX_OUT_OF_BOUNDS_EXCEPTION_MSG;
         }
     }
 

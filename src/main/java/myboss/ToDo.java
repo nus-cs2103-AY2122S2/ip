@@ -33,25 +33,25 @@ public class ToDo extends Task {
     @Override
     public String markAsDone(boolean isDone) {
         if (isDone) {
-            this.isDone = true;
-            return  " Nice! I've marked this task as done:" + "\n" + "  " +
-                    "     [" + this.taskType + "]" + //[T]
-                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
-                    this.taskName;
+            setIsDone(true);
+            return " Nice! I've marked this task as done:" + "\n" + "  "
+                    + "     [" + this.getTaskType() + "]" + //[T]
+                    "[" + (this.getIsDone() ? "X" : " ") + "] " + // [X]
+                    this.getTaskName();
         } else {
-            this.isDone = false;
-            return "OK, I've marked this task as not done yet:" + "\n" + "  " +
-                    "     [" + this.taskType + "]" + //[T]
-                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
-                    this.taskName;
+            setIsDone(false);
+            return "OK, I've marked this task as not done yet:" + "\n" + "  "
+                    + "     [" + this.getTaskType() + "]" //[T]
+                    + "[" + (this.getIsDone() ? "X" : " ") + "] " // [X]
+                    + this.getTaskName();
         }
     }
 
     @Override
     public String toString() {
-        return "[" + this.taskType + "]" +
-                "[" + (isDone ? "X" : " ") + "] " +
-                this.taskName + "\n";
+        return "[" + this.getTaskType() + "]"
+                + "[" + (getIsDone() ? "X" : " ") + "] "
+                + this.getTaskName() + "\n";
     }
 
     @Override

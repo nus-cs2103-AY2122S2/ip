@@ -1,9 +1,7 @@
 package myboss;
 
-import java.util.List;
-import java.util.Scanner;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a user interface.
@@ -11,15 +9,15 @@ import java.util.ArrayList;
 public class Ui {
     static final String INDENT = "    ";
 
-    static final String unknownCommandExceptionMsg = " OOPS!!! I'm sorry, but I don't know what that means :-(";
-    static final String missingTimeArgumentExceptionMsg = "OOPS!!! Argument after missing /at or /by!!!";
-    static final String missingArgumentExceptionMsg = "OOPS!!! I think you're missing some arguments!";
-    static final String wrongDateFormatExceptionMsg = "Date must be of format yyyy-mm-dd!";
-    static final String indexOutOfBoundsExceptionMsg = "OOPS!!! Index out of bounds!";
-    static final String appendToFileExceptionMsg = "Error appending task to text file!";
-    static final String fileNotFoundExceptionMsg = "Error file not found!";
-    static final String fileCreationExceptionMsg = "An Error has occurred with file creation!";
-    static final String clearFileExceptionMsg = "Error clearing File";
+    static final String UNKNOWN_COMMAND_EXCEPTION_MSG = " OOPS!!! I'm sorry, but I don't know what that means :-(";
+    static final String MISSING_TIME_ARGUMENT_EXCEPTION_MSG = "OOPS!!! Argument after missing /at or /by!!!";
+    static final String MISSING_ARGUMENT_EXCEPTION_MSG = "OOPS!!! I think you're missing some arguments!";
+    static final String WRONG_DATE_FORMAT_EXCEPTION_MSG = "Date must be of format yyyy-mm-dd!";
+    static final String INDEX_OUT_OF_BOUNDS_EXCEPTION_MSG = "OOPS!!! Index out of bounds!";
+    static final String APPEND_TO_FILE_EXCEPTION_MSG = "Error appending task to text file!";
+    static final String FILE_NOT_FOUND_EXCEPTION_MSG = "Error file not found!";
+    static final String FILE_CREATION_EXCEPTION_MSG = "An Error has occurred with file creation!";
+    static final String CLEAR_FILE_EXCEPTION_MSG = "Error clearing File";
 
     /**
      * Outputs the given task list.
@@ -81,7 +79,7 @@ public class Ui {
         StringBuilder output = new StringBuilder();
         output.append("Got it. I've added this task:\n")
                 .append(INDENT + "   " + task)
-                .append("Now you have "+ TaskList.getSize() +" tasks in the list.");
+                .append("Now you have " + TaskList.getSize() + " tasks in the list.");
         return output.toString();
     }
 
@@ -95,7 +93,7 @@ public class Ui {
         StringBuilder output = new StringBuilder();
         output.append("Noted. I've removed this task:\n")
                 .append(INDENT + "   " + task)
-                .append("Now you have "+ TaskList.getSize() +" tasks in the list.");
+                .append("Now you have " + TaskList.getSize() + " tasks in the list.");
         return output.toString();
     }
 }

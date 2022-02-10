@@ -9,7 +9,7 @@ import java.util.Objects;
  * to a task with a specified date.
  */
 public class Deadline extends Task {
-    LocalDate deadline;
+    private LocalDate deadline;
 
     /**
      * Creates an undone Deadline Task Object with the specified task name and deadline.
@@ -34,6 +34,10 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(deadline);
     }
 
+    public LocalDate getDeadline() {
+        return this.deadline;
+    }
+
     /**
      * Returns string output of a Deadline Object when marked as done or not done.
      *
@@ -43,17 +47,17 @@ public class Deadline extends Task {
     @Override
     public String markAsDone(boolean isDone) {
         if (isDone) {
-            this.isDone = true;
-            return  " Nice! I've marked this task as done:" + "\n" + "  " +
-                    "     [" + this.taskType + "]" + //[T]
-                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
-                    this.taskName;
+            setIsDone(true);
+            return " Nice! I've marked this task as done:" + "\n" + "  "
+                    + "     [" + this.getTaskType() + "]" + //[T]
+                    "[" + (this.getIsDone() ? "X" : " ") + "] " + // [X]
+                    this.getTaskName();
         } else {
-            this.isDone = false;
-            return "OK, I've marked this task as not done yet:" + "\n" + "  " +
-                    "     [" + this.taskType + "]" + //[T]
-                    "[" + (this.isDone ? "X" : " ") + "] " + // [X]
-                    this.taskName;
+            setIsDone(false);
+            return "OK, I've marked this task as not done yet:" + "\n" + "  "
+                    + "     [" + this.getTaskType() + "]" //[T]
+                    + "[" + (this.getIsDone() ? "X" : " ") + "] " // [X]
+                    + this.getTaskName();
         }
     }
 
@@ -61,19 +65,25 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
         String deadlineFormatted = deadline.format(formatter);
-        return "[" + this.taskType + "]" +
-                "[" + (isDone ? "X" : " ") + "] " +
-                this.taskName +
-                " (by: " + deadlineFormatted + ")" +
-                "\n";
+        return "[" + this.getTaskType() + "]"
+                + "[" + (getIsDone() ? "X" : " ") + "] "
+                + this.getTaskName()
+                + " (by: " + deadlineFormatted + ")"
+                + "\n";
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Deadline deadline1 = (Deadline) o;
-        return Objects.equals(taskType, deadline1.taskType) && Objects.equals(deadline, deadline1.deadline);
+        return Objects.equals(getTaskType(), deadline1.getTaskType()) && Objects.equals(deadline, deadline1.deadline);
     }
 }

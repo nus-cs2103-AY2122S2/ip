@@ -7,9 +7,9 @@ import java.util.Objects;
  * and whether it is done or not.
  */
 public class Task {
-    boolean isDone;
-    String taskName;
-    String taskType;
+    private boolean isDone;
+    private String taskName;
+    private String taskType;
 
     /**
      * Creates a Task Object with the specified task name and task type.
@@ -36,6 +36,22 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public String getTaskType() {
+        return taskType;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(boolean bool) {
+        this.isDone = bool;
+    }
+
     /**
      * Returns the string output of a task when marked as done or not done.
      *
@@ -45,27 +61,31 @@ public class Task {
     public String markAsDone(boolean isDone) {
         if (isDone) {
             this.isDone = true;
-            return  "Nice! I've marked this task as done:" + "\n" + "  " +
-                    "    [" + (this.isDone ? "X" : " ") + "] " +
-                    this.taskName;
+            return "Nice! I've marked this task as done:" + "\n" + "  "
+                    + "    [" + (this.isDone ? "X" : " ") + "] "
+                    + this.taskName;
         } else {
             this.isDone = false;
-            return "OK, I've marked this task as not done yet:" + "\n" + "  " +
-                    "    [" + (this.isDone ? "X" : " ") + "] " +
-                    this.taskName;
+            return "OK, I've marked this task as not done yet:" + "\n" + "  "
+                    + "    [" + (this.isDone ? "X" : " ") + "] "
+                    + this.taskName;
         }
     }
 
     @Override
     public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] " +
-                this.taskName + "\n";
+        return "[" + (isDone ? "X" : " ") + "] "
+                + this.taskName + "\n";
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
         return isDone == task.isDone
                 && Objects.equals(taskName, task.taskName)

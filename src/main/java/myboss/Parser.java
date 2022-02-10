@@ -13,7 +13,7 @@ public class Parser {
      * @return first word and remaining string split.
      */
     public static String[] splitUserCmd(String userCmd) {
-        return userCmd.split(" ",2);
+        return userCmd.split(" ", 2);
     }
 
     public static String getUserCmd(String[] userCmdSplit) {
