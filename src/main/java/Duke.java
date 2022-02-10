@@ -62,14 +62,6 @@ public class Duke extends Application {
      */
     public static void main(String[] args) {}
 
-    /**
-     * Greeting the user when bot is started.
-     * @return String greeting.
-     */
-    public String greetUser() {
-        return "Hello! I'm main.Duke :) \nWhat can I do for you? :D";
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -134,20 +126,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
