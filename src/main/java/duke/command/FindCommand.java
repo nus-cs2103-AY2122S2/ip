@@ -5,10 +5,10 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class FindCommand extends Command {
-    private final String keyword;
+    private final String[] keywords;
 
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String ... keywords) {
+        this.keywords = keywords;
     }
 
     @Override
@@ -16,11 +16,13 @@ public class FindCommand extends Command {
         StringBuilder searchText = new StringBuilder();
         searchText.append("Here are matching tasks \n");
         boolean isFound = false;
-        for (int i = 0; i < tasks.getSize(); i++) {
-            if (tasks.getByIndex(i).getTask().contains(keyword.trim())) {
-                isFound = true;
-                searchText.append("    ").append(i + 1).append(". ")
-                        .append(tasks.getByIndex(i)).append("\n");
+        for (String keyword: keywords) {
+            for (int i = 0; i < tasks.getSize(); i++) {
+                if (checkKeyword(tasks, i, keyword)) {
+                    isFound = true;
+                    searchText.append("    ").append(i + 1).append(". ")
+                            .append(tasks.getByIndex(i)).append("\n");
+                }
             }
         }
         if (isFound) {
@@ -29,5 +31,9 @@ public class FindCommand extends Command {
         } else {
             ui.showMessage("Sorry no result found");
         }
+    }
+
+    private boolean checkKeyword(TaskList tasks, int i, String keyword) {
+        return tasks.getByIndex(i).getTask().contains(keyword.trim());
     }
 }
