@@ -13,9 +13,8 @@ import duke.task.TaskType;
  */
 public class AddCommand extends Command {
 
-    private TaskType taskType;
-    private String description;
-    private String time;
+    private final TaskType taskType;
+    private final String description;
     private LocalDateTime localDateTime;
 
     /**
@@ -25,12 +24,12 @@ public class AddCommand extends Command {
      * @param description Description of the Task to be added.
      * @param time Time the Task added occurs at.
      */
-    public AddCommand(TaskType taskType, String description, String time) {
+    /*public AddCommand(TaskType taskType, String description, String time) {
         super(false);
         this.taskType = taskType;
         this.description = description;
         this.time = time;
-    }
+    }*/
 
     /**
      * Constructor for a AddCommand, specifically used for a ToDo Task.
@@ -38,11 +37,11 @@ public class AddCommand extends Command {
      * @param taskType TaskType of the Task to be added.
      * @param description Description of the Task to be added.
      */
-    public AddCommand(TaskType taskType, String description) {
+    /*public AddCommand(TaskType taskType, String description) {
         super(false);
         this.taskType = taskType;
         this.description = description;
-    }
+    } */
 
     /**
      * Constructor for a AddCommand, specifically used for a Deadline Task.
@@ -69,11 +68,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(List taskList, Ui ui, Storage storage) throws IOException {
-        if (taskType == TaskType.DEADLINE) {
-            taskList.add(description, localDateTime);
-        } else {
-            taskList.add(taskType, description, time);
-        }
+        taskList.add(taskType, description, localDateTime);
         storage.writeToFile("data/duke.txt", taskList);
         return ui.showAddedTask(taskList);
     }

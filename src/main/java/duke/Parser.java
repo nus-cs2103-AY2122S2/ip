@@ -23,30 +23,40 @@ public class Parser {
     private static void checkIfUserInputValid(String userInput) throws DukeException {
         String trimmedInput = userInput.trim();
 
-        if (trimmedInput.equals("todo")
-                || trimmedInput.equals("deadline")
-                || trimmedInput.equals("event")
-                || trimmedInput.equals("find")) {
+        if (checkMissingDescriptionOfInput(trimmedInput)) {
             throw new DukeException(("OOPS!!! The description of a " + trimmedInput + " cannot be empty."));
         }
 
-        if (trimmedInput.equals("mark") || trimmedInput.equals("unmark") || trimmedInput.equals("delete")) {
+        if (checkMissingIndexOfInput(trimmedInput)) {
             throw new DukeException(("OOPS!!! Please input the number of the task."));
         }
 
-        if (!(userInput.startsWith("list")
-                || userInput.startsWith("mark")
-                || userInput.startsWith("unmark")
-                || userInput.startsWith("delete")
-                || userInput.startsWith("todo")
-                || userInput.startsWith("event")
-                || userInput.startsWith("deadline")
-                || userInput.equals("bye")
-                || userInput.startsWith("find"))) {
+        if (checkUnknownInput(trimmedInput)) {
             throw new DukeException("\"OOPS!!! I'm sorry, but I don't know what that means :-(\"");
         }
     }
-
+    private static boolean checkUnknownInput(String trimmedInput) {
+        return !(trimmedInput.startsWith("list")
+                || trimmedInput.startsWith("mark")
+                || trimmedInput.startsWith("unmark")
+                || trimmedInput.startsWith("delete")
+                || trimmedInput.startsWith("todo")
+                || trimmedInput.startsWith("event")
+                || trimmedInput.startsWith("deadline")
+                || trimmedInput.equals("bye")
+                || trimmedInput.startsWith("find"));
+    }
+    private static boolean checkMissingDescriptionOfInput(String trimmedInput) {
+        return trimmedInput.equals("todo")
+                || trimmedInput.equals("deadline")
+                || trimmedInput.equals("event")
+                || trimmedInput.equals("find");
+    }
+    private static boolean checkMissingIndexOfInput(String trimmedInput) {
+        return trimmedInput.equals("mark")
+                || trimmedInput.equals("unmark")
+                || trimmedInput.equals("delete");
+    }
     /**
      * Parse user inputs and return a valid Command if user input is valid.
      *
@@ -60,40 +70,63 @@ public class Parser {
         if (userInput.equals("list")) {
             return new ListCommand();
         } else if (userInput.startsWith("mark")) {
-            String str = userInput.substring(5);
-            int number = Integer.parseInt(str) - 1;
-            return new MarkDoneCommand(number);
+            return parseMarkInput(userInput);
         } else if (userInput.startsWith("unmark")) {
-            String str = userInput.substring(7);
-            int number = Integer.parseInt(str) - 1;
-            return new UnmarkDoneCommand(number);
+            return parseUnmarkInput(userInput);
         } else if (userInput.startsWith("delete")) {
-            String indexStr = userInput.substring(7);
-            int index = Integer.parseInt(indexStr);
-            return new DeleteCommand(index);
+            return parseDeleteInput(userInput);
         } else if (userInput.startsWith("todo")) {
-            String description = userInput.substring(5);
-            TaskType taskType = TaskType.TODO;
-            return new AddCommand(taskType, description);
+            return parseTodoInput(userInput);
         } else if (userInput.startsWith("deadline")) {
-            int start = userInput.indexOf("/");
-            String timing = userInput.substring(start + 3);
-            String description = userInput.substring(9, start - 1);
-            DateTimeFormatter sourceFormat = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(timing, sourceFormat);
-            TaskType taskType = TaskType.DEADLINE;
-            return new AddCommand(taskType, description, dateTime);
+            return parseDeadlineInput(userInput);
         } else if (userInput.startsWith("event")) {
-            int start = userInput.indexOf("/");
-            String timing = userInput.substring(start + 3);
-            String description = userInput.substring(6, start - 1);
-            TaskType taskType = TaskType.EVENT;
-            return new AddCommand(taskType, description, timing);
+            return parseEventInput(userInput);
         } else if (userInput.startsWith("find")) {
-            String description = userInput.substring(5);
-            return new FindCommand(description);
+            return parseFindInput(userInput);
         } else {
             return new ByeCommand();
         }
+    }
+    private static Command parseMarkInput(String userInput) {
+        String str = userInput.substring(5);
+        int number = Integer.parseInt(str) - 1;
+        return new MarkDoneCommand(number);
+    }
+    private static Command parseUnmarkInput(String userInput) {
+        String str = userInput.substring(7);
+        int number = Integer.parseInt(str) - 1;
+        return new UnmarkDoneCommand(number);
+    }
+    private static Command parseDeleteInput(String userInput) {
+        String indexStr = userInput.substring(7);
+        int index = Integer.parseInt(indexStr);
+        return new DeleteCommand(index);
+    }
+    private static Command parseTodoInput(String userInput) {
+        String description = userInput.substring(5);
+        TaskType taskType = TaskType.TODO;
+        return new AddCommand(taskType, description, null);
+    }
+    private static Command parseDeadlineInput(String userInput) {
+        int start = userInput.indexOf("/");
+        String timing = userInput.substring(start + 3);
+        String description = userInput.substring(9, start - 1);
+        DateTimeFormatter sourceFormat = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(timing, sourceFormat);
+        TaskType taskType = TaskType.DEADLINE;
+        return new AddCommand(taskType, description, dateTime);
+    }
+    private static Command parseEventInput(String userInput) {
+        int start = userInput.indexOf("/");
+        String timing = userInput.substring(start + 3);
+        String description = userInput.substring(6, start - 1);
+        DateTimeFormatter sourceFormat = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(timing, sourceFormat);
+        TaskType taskType = TaskType.EVENT;
+        return new AddCommand(taskType, description, dateTime);
+    }
+    private static Command parseFindInput(String userInput) {
+        String description = userInput.substring(5);
+        return new FindCommand(description);
     }
 }

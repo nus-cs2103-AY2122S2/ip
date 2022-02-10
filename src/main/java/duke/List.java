@@ -63,7 +63,7 @@ public class List {
      * @param timing Date/Time for event task.
      */
     //CODESTYLE.OFF: "MissingSwitchDefault"
-    public void add(TaskType taskType, String description, String timing) {
+    public void add(TaskType taskType, String description, LocalDateTime timing) {
         switch (taskType) {
         case TODO:
             ToDo toDo = new ToDo(description);
@@ -73,6 +73,10 @@ public class List {
             Event event = new Event(description, timing);
             tasks.add(event);
             break;
+        case DEADLINE:
+            Deadline deadline = new Deadline(description, timing);
+            tasks.add(deadline);
+            break;
         }
     }
     //CODESTYLE.OFF: "MissingSwitchDefault"
@@ -80,14 +84,13 @@ public class List {
     /**
      * Adds a Task to the list, used for deadline task.
      *
-     * @param taskType TaskType of Task.
      * @param description Description of Task.
      * @param date Date of Task is due.
      */
-    public void add(String description, LocalDateTime date) {
+    /*public void add(String description, LocalDateTime date) {
         Deadline deadline = new Deadline(description, date);
         tasks.add(deadline);
-    }
+    }*/
 
     /**
      * Deletes a task from the list and returns it.

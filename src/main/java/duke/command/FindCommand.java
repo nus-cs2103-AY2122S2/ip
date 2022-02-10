@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.Ui;
 
 public class FindCommand extends Command {
-    private String description;
+    private final String description;
 
     /**
      * Constructs a find command.

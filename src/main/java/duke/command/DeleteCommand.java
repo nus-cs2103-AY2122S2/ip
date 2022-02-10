@@ -13,7 +13,7 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
      * Constructs a delete command.
@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
      * @param taskList TaskList of current Tasks.
      * @param ui Ui.
      * @param storage Storage.
-     * @returns Returns a String reply to the user.
+     * @return Returns a String reply to the user.
      * @throws IOException If File to be written to in Storage is not found.
      * @throws DukeException If task to be deleted is not found in the list.
      */

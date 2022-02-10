@@ -11,7 +11,7 @@ import duke.task.Task;
  */
 public class Ui {
 
-    private Scanner sc;
+    private final Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);

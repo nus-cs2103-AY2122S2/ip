@@ -10,9 +10,9 @@ import duke.exception.DukeException;
  */
 public class Duke {
 
-    private Storage storage;
-    private List tasks;
-    private Ui ui;
+    private final Storage storage;
+    private final List tasks;
+    private final Ui ui;
 
     /**
      * Create a chatterbot.
