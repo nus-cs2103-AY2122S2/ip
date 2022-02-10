@@ -134,7 +134,7 @@ public class Parser {
         /* Example: deadline abc /by xyz is split into:
            deadline abc AND xyz.
          */
-        String[] deadlineArr = splitWithRegex(input, "by");
+        String[] deadlineArr = splitWithRegex(input, "/by");
 
         // Example: deadline deadlineDescription is split to deadline and deadlineDescription.
         String[] deadlineSplit = splitWhiteSpace(deadlineArr[0]);
@@ -162,7 +162,7 @@ public class Parser {
         /* Example: event abc /at xyz is split into:
            event abc AND xyz
          */
-        String[] eventArr = splitWithRegex(input, "at");
+        String[] eventArr = splitWithRegex(input, "/at");
 
         // Example: deadline deadlineDescription is split to deadline and deadlineDescription.
         String[] eventSplit = splitWhiteSpace(eventArr[0]);

@@ -46,7 +46,7 @@ public class AddCommand extends Command {
         case EVENT:
             return addEvent(tasks, ui, storage);
         default:
-            //do nothing
+            assert false: "add command should not reach here";
         }
         assert false : "add command should not reach here";
         return null;
