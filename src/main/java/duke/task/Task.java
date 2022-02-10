@@ -6,11 +6,22 @@ public class Task {
     protected String task;
     protected boolean done;
 
+    /**
+     * Task class.
+     *
+     * @param task tasks for task.
+     */
     public Task(String task) {
         this.task = task;
         this.done = false;
     }
 
+    /**
+     * Task class for modify status.
+     *
+     * @param task tasks for task.
+     * @param done done status.
+     */
     public Task(String task, boolean done) {
         this.task = task;
         this.done = done;
