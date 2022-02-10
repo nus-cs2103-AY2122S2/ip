@@ -2,10 +2,9 @@ package pyke.ui;
 import java.util.Scanner;
 
 public class Ui {
+    private static final String GREETINGS = "Hello! I'm Pyke\n" + "What can I do for you?";
+    private static final String FAREWELL = "Bye. Hope to see you again soon!";
     private Scanner scanner;
-    private final String GREETINGS = "Hello! I'm Pyke\n" + "What can I do for you?";
-    private final String FAREWELL = "Bye. Hope to see you again soon!";
-
     public Ui() {
         scanner = new Scanner(System.in);
     }
@@ -35,6 +34,9 @@ public class Ui {
         return scanner.nextLine();
     }
 
+    /**
+     * The duke logo
+     */
     public void showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

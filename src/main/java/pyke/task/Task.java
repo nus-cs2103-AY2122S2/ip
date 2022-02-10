@@ -4,6 +4,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * The default constructor
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -13,8 +17,8 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void setStatus(boolean new_status) {
-        this.isDone = new_status;
+    public void setStatus(boolean newStatus) {
+        this.isDone = newStatus;
     }
 
     public boolean hasKeyword(String keyword) {

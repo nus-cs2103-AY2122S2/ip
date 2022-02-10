@@ -1,21 +1,26 @@
 package pyke.command;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import pyke.exception.EmptyDescriptionException;
 import pyke.exception.EmptyTimeException;
 import pyke.exception.PykeException;
 import pyke.task.Deadline;
 import pyke.ui.Ui;
-import pyke.util.TaskList;
 import pyke.util.Storage;
+import pyke.util.TaskList;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
     private String taskName;
     private String ddl;
 
+    /**
+     * The default constructor for Deadine class
+     * @param taskName
+     * @param ddl the deadline for the task in String format
+     */
     public AddDeadlineCommand(String taskName, String ddl) {
         this.taskName = taskName;
         this.ddl = ddl;
@@ -23,7 +28,8 @@ public class AddDeadlineCommand extends Command{
 
     /**
      * Execute a command that adds a deadline task.
-     * Then it will write the list to the local file and output certain info about this operation.
+     * Then it will write the list to the local file
+     * and output certain info about this operation.
      *
      * @param taskList the class store the tasks info
      * @param ui the interface for output information
@@ -33,7 +39,8 @@ public class AddDeadlineCommand extends Command{
      * @throws IOException if there is an error when writing to the local file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws PykeException, DateTimeParseException, IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage)
+            throws PykeException, DateTimeParseException, IOException {
         if (taskName.isEmpty()) {
             throw new EmptyDescriptionException();
         } else if (ddl.isEmpty()) {
@@ -48,7 +55,8 @@ public class AddDeadlineCommand extends Command{
     }
 
     @Override
-    public String executeUi(TaskList taskList, Ui ui, Storage storage) throws PykeException, DateTimeParseException, IOException {
+    public String executeUi(TaskList taskList, Ui ui, Storage storage)
+            throws PykeException, DateTimeParseException, IOException {
         if (taskName.isEmpty()) {
             throw new EmptyDescriptionException();
         } else if (ddl.isEmpty()) {

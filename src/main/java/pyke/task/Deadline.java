@@ -1,13 +1,16 @@
 package pyke.task;
 
-import pyke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * The default constructor
+     * @param description
+     * @param by
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;

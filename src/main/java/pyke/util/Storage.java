@@ -1,10 +1,5 @@
 package pyke.util;
 
-import pyke.task.Task;
-import pyke.task.Deadline;
-import pyke.task.Event;
-import pyke.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,10 +8,21 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import pyke.task.Deadline;
+import pyke.task.Event;
+import pyke.task.Task;
+import pyke.task.ToDo;
+
+
 public class Storage {
     private static java.nio.file.Path fileDir;
     private static java.nio.file.Path filePath;
 
+    /**
+     * The default constructor
+     * @param dir the file directory
+     * @param fileName
+     */
     public Storage(String dir, String fileName) {
         fileDir = Paths.get(".", dir);
         filePath = Paths.get(".", dir, fileName);
@@ -65,7 +71,7 @@ public class Storage {
             BufferedReader reader = Files.newBufferedReader(filePath);
             String str = null;
 
-            while((str = reader.readLine()) != null) {
+            while ((str = reader.readLine()) != null) {
                 String[] parsedList = str.split("\\|");
                 String taskType = parsedList[0].split(" ")[0];
                 Integer isMarked = Character.getNumericValue(parsedList[1].charAt(1));
@@ -80,7 +86,7 @@ public class Storage {
                 }
             }
         }
-        return ;
+        return;
     }
 
     /**
@@ -96,6 +102,6 @@ public class Storage {
         }
         writer.flush();
         writer.close();
-        return ;
+        return;
     }
 }

@@ -4,7 +4,7 @@ import pyke.ui.Ui;
 import pyke.util.Storage;
 import pyke.util.TaskList;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     /**
      * c
      *
@@ -19,7 +19,9 @@ public class ListCommand extends Command{
             String outputText = "";
             for (int i = 1; i <= taskList.getSize(); i++) {
                 outputText = outputText.concat(i + "." + taskList.getTaskOutputStyle(i - 1));
-                if (i != taskList.getSize()) outputText = outputText.concat("\n");
+                if (i != taskList.getSize()) {
+                    outputText = outputText.concat("\n");
+                }
             }
             assert outputText != null;
             ui.outputText(outputText);
@@ -34,7 +36,9 @@ public class ListCommand extends Command{
             String outputText = "";
             for (int i = 1; i <= taskList.getSize(); i++) {
                 outputText = outputText.concat(i + "." + taskList.getTaskOutputStyle(i - 1));
-                if (i != taskList.getSize()) outputText = outputText.concat("\n");
+                if (i != taskList.getSize()) {
+                    outputText = outputText.concat("\n");
+                }
             }
             assert outputText != null;
             return ui.outputUiText(outputText);

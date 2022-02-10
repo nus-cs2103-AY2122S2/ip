@@ -1,17 +1,22 @@
 package pyke.command;
 
+import java.io.IOException;
+
 import pyke.exception.InvalidNumberException;
 import pyke.exception.PykeException;
 import pyke.ui.Ui;
 import pyke.util.Storage;
 import pyke.util.TaskList;
 
-import java.io.IOException;
-
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private boolean markType;
     private int taskId;
 
+    /**
+     * The default constructor
+     * @param markType
+     * @param taskId
+     */
     public MarkCommand(boolean markType, int taskId) {
         this.markType = markType;
         this.taskId = taskId;
@@ -33,9 +38,11 @@ public class MarkCommand extends Command{
             taskList.setTaskStatus(taskId - 1, markType);
             storage.saveFile(taskList);
             if (!markType) {
-                ui.outputText("OK, I've marked this task as not done yet: \n  " + taskList.getTaskOutputStyle(taskId - 1));
+                ui.outputText("OK, I've marked this task as not done yet: \n  "
+                        + taskList.getTaskOutputStyle(taskId - 1));
             } else {
-                ui.outputText("Nice! I've marked this task as done: \n  " + taskList.getTaskOutputStyle(taskId - 1));
+                ui.outputText("Nice! I've marked this task as done: \n  "
+                        + taskList.getTaskOutputStyle(taskId - 1));
             }
         }
     }
@@ -48,9 +55,11 @@ public class MarkCommand extends Command{
             taskList.setTaskStatus(taskId - 1, markType);
             storage.saveFile(taskList);
             if (!markType) {
-                return ui.outputUiText("OK, I've marked this task as not done yet: \n  " + taskList.getTaskOutputStyle(taskId - 1));
+                return ui.outputUiText("OK, I've marked this task as not done yet: \n  "
+                        + taskList.getTaskOutputStyle(taskId - 1));
             } else {
-                return ui.outputUiText("Nice! I've marked this task as done: \n  " + taskList.getTaskOutputStyle(taskId - 1));
+                return ui.outputUiText("Nice! I've marked this task as done: \n  "
+                        + taskList.getTaskOutputStyle(taskId - 1));
             }
         }
     }

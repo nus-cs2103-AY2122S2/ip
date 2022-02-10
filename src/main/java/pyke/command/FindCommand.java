@@ -6,7 +6,7 @@ import pyke.util.TaskList;
 
 
 public class FindCommand extends Command {
-    String keyword;
+    private String keyword;
     public FindCommand(String keywords) {
         this.keyword = keywords;
     }

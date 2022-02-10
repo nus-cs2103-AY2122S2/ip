@@ -1,5 +1,9 @@
 package pyke.command;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import pyke.exception.EmptyDescriptionException;
 import pyke.exception.EmptyTimeException;
 import pyke.exception.PykeException;
@@ -8,14 +12,16 @@ import pyke.ui.Ui;
 import pyke.util.Storage;
 import pyke.util.TaskList;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
-public class AddEventCommand extends Command{
+public class AddEventCommand extends Command {
     private String taskName;
     private String eventTime;
 
+    /**
+     * The default constructor
+     * @param taskName
+     * @param eventTime
+     */
     public AddEventCommand(String taskName, String eventTime) {
         this.taskName = taskName;
         this.eventTime = eventTime;
@@ -32,7 +38,8 @@ public class AddEventCommand extends Command{
      * @throws DateTimeParseException if the input dates are not in the correct format for parsing
      * @throws IOException if there is an error when writing to the local file
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws PykeException, DateTimeParseException, IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage)
+            throws PykeException, DateTimeParseException, IOException {
         if (taskName.isEmpty()) {
             throw new EmptyDescriptionException();
         } else if (eventTime.isEmpty()) {
@@ -47,7 +54,8 @@ public class AddEventCommand extends Command{
     }
 
     @Override
-    public String executeUi(TaskList taskList, Ui ui, Storage storage) throws PykeException, DateTimeParseException, IOException {
+    public String executeUi(TaskList taskList, Ui ui, Storage storage)
+            throws PykeException, DateTimeParseException, IOException {
         if (taskName.isEmpty()) {
             throw new EmptyDescriptionException();
         } else if (eventTime.isEmpty()) {

@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import pyke.Pyke;
-import pyke.ui.controller.DialogBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,6 +27,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image pykeImage = new Image(this.getClass().getResourceAsStream("/images/DaPyke.png"));
 
+    /**
+     * The initialization method for the MainWindow component
+     * It will bind the dialogContainer and send default greetings
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

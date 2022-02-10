@@ -1,6 +1,5 @@
 package pyke.task;
 
-import pyke.task.Task;
 
 public class ToDo extends Task {
     public ToDo(String description) {

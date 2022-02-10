@@ -1,5 +1,10 @@
 package pyke;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.time.format.DateTimeParseException;
+
 import pyke.command.Command;
 import pyke.exception.EmptyDescriptionException;
 import pyke.exception.InvalidCommandException;
@@ -10,11 +15,6 @@ import pyke.util.Parser;
 import pyke.util.Storage;
 import pyke.util.TaskList;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.time.format.DateTimeParseException;
-
 
 public class Pyke {
 
@@ -23,6 +23,10 @@ public class Pyke {
     private Parser parser;
     private Storage storage;
 
+    /**
+     * The default constructor of Pyke class. It will load the ui, taskList, parser and storage.
+     * In addition, the storage will load the default list from a local file
+     */
     public Pyke() {
         ui = new Ui();
         taskList = new TaskList();
@@ -31,7 +35,12 @@ public class Pyke {
     }
 
 
-    public String UiInit() {
+    /**
+     * The method to initialize the ui component
+     * It will load the local file into taskList.
+     * @return the message to be sent after initialization
+     */
+    public String uiInit() {
         try {
             storage.init(taskList);
         } catch (IOException e) {
@@ -40,6 +49,12 @@ public class Pyke {
         return ui.outputUiGreeting();
     }
 
+    /**
+     * The runtime processing command component for GUI application
+     * For an input given, it will evaluate and run the command and return corresponding results
+     * @param input the user input received from GUI controller
+     * @return the corresponding output from running the input command
+     */
     public String processCommand(String input) {
         try {
             Command c = parser.parseCommand(input);
@@ -50,7 +65,7 @@ public class Pyke {
             return ui.outputUiText("OOPS!!! Seems like this is a invalid number :-(");
         } catch (EmptyDescriptionException e) {
             return ui.outputUiText("OOPS!!! The description cannot be empty. :-(");
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             return ui.outputUiText("OOPS!!! Please enter date in yyyy-mm-dd style. (e.g. 2002-06-25)");
         } catch (IOException e) {
             return ui.outputUiText("Oops, seems like there is an error when writing to local saved files");
@@ -74,7 +89,7 @@ public class Pyke {
         } catch (IOException e) {
             ui.outputException("Oops, seems like there is an error when reading local saved files");
         }
-        while(!exitFlag) {
+        while (!exitFlag) {
             try {
                 Command c = parser.parseCommand(ui.getCommand());
                 c.execute(taskList, ui, storage);
@@ -85,7 +100,7 @@ public class Pyke {
                 ui.outputException("OOPS!!! Seems like this is a invalid number :-(");
             } catch (EmptyDescriptionException e) {
                 ui.outputException("OOPS!!! The description cannot be empty. :-(");
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 ui.outputException("OOPS!!! Please enter date in yyyy-mm-dd style. (e.g. 2002-06-25)");
             } catch (IOException e) {
                 ui.outputException("Oops, seems like there is an error when writing to local saved files");

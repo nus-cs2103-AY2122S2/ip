@@ -1,8 +1,9 @@
 package pyke.util;
 
+import java.util.ArrayList;
+
 import pyke.task.Task;
 
-import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -72,7 +73,7 @@ public class TaskList {
      *
      * @param taskId the index of the task we want to set the status
      * @param newStatus the new status to be set to
-     * @return the task that just get updated 
+     * @return the task that just get updated
      */
     public Task setTaskStatus(int taskId, boolean newStatus) {
         Task temp = taskList.get(taskId);

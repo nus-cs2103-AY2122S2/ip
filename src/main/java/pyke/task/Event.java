@@ -1,13 +1,16 @@
 package pyke.task;
 
-import pyke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected LocalDate eventTime;
 
+    /**
+     * The default constructor
+     * @param description
+     * @param eventTime
+     */
     public Event(String description, LocalDate eventTime) {
         super(description);
         this.eventTime = eventTime;

@@ -1,14 +1,14 @@
 package pyke.command;
 
+import java.io.IOException;
+
 import pyke.exception.InvalidNumberException;
 import pyke.exception.PykeException;
 import pyke.ui.Ui;
 import pyke.util.Storage;
 import pyke.util.TaskList;
 
-import java.io.IOException;
-
-public class DelCommand extends Command{
+public class DelCommand extends Command {
     private int taskId;
 
     public DelCommand(int taskId) {

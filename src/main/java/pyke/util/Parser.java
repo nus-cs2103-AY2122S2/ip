@@ -1,11 +1,19 @@
 package pyke.util;
 
-import pyke.command.*;
+import pyke.command.AddDeadlineCommand;
+import pyke.command.AddEventCommand;
+import pyke.command.AddTodoCommand;
+import pyke.command.Command;
+import pyke.command.DelCommand;
+import pyke.command.ExitCommand;
+import pyke.command.FindCommand;
+import pyke.command.ListCommand;
+import pyke.command.MarkCommand;
 import pyke.exception.InvalidCommandException;
 
 
 public class Parser {
-    private static Command dispatchCommand(String command, String[] tokenList) throws InvalidCommandException{
+    private static Command dispatchCommand(String command, String[] tokenList) throws InvalidCommandException {
         switch (tokenList[0]) {
         case "bye":
             return new ExitCommand();

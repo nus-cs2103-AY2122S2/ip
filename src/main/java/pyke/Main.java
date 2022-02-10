@@ -24,7 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            pyke.UiInit();
+            pyke.uiInit();
             fxmlLoader.<MainWindow>getController().setPyke(pyke);
             stage.setTitle("Pyke");
             stage.getIcons().add(new Image(Pyke.class.getResourceAsStream("/images/icon.png")));

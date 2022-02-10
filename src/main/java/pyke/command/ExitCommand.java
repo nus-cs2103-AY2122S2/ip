@@ -4,7 +4,7 @@ import pyke.ui.Ui;
 import pyke.util.Storage;
 import pyke.util.TaskList;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * Execute a command that indicates the exit of the program
      * Then it will output certain farewell words
