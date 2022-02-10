@@ -24,8 +24,8 @@ public class TaskList {
     public String displayList() {
         String returnString = "";
         for (int i = 0; i < tasks.size(); i++) {
-            returnString = returnString + (i + 1) + ". [" + tasks.get(i).symbol() + "][" + tasks.get(i).getStatusIcon()
-                    + "] " + tasks.get(i).displayTime() + "\n";
+            returnString = returnString + (i + 1) + ". [" + tasks.get(i).symbol() + "][" + 
+                tasks.get(i).getStatusIcon() + "] " + tasks.get(i).displayTime() + "\n";
         }
         return returnString;
     }
@@ -136,8 +136,8 @@ public class TaskList {
         }
         String returnString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < foundTasks.size(); i++) {
-            returnString = returnString + (i + 1) + ". [" + foundTasks.get(i).symbol() + "]["
-                    + foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";
+            returnString = returnString + (i + 1) + ". [" + foundTasks.get(i).symbol() + "][" + 
+                foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";
         }
         return returnString;
     }

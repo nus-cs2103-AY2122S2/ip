@@ -38,14 +38,14 @@ public class Storage {
                 String[] lineArray = line.split("/");
                 Task task;
                 switch (lineArray[0]) {
-                    case "T":
-                        task = new Todo(lineArray[2]);
-                        break;
-                    case "E":
-                        task = new Event(lineArray[2], lineArray[3]);
-                        break;
-                    default:
-                        task = new Deadline(lineArray[2], lineArray[3]);
+                case "T":
+                    task = new Todo(lineArray[2]);
+                    break;
+                case "E":
+                    task = new Event(lineArray[2], lineArray[3]);
+                    break;
+                default:
+                    task = new Deadline(lineArray[2], lineArray[3]);
                 }
                 if (lineArray[1].equals("X")) {
                     task.setAsDone();
