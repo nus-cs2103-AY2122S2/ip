@@ -149,6 +149,7 @@ public class Duke extends Application {
         if (!inputStringArray[0].equals("bye")) {
             return new Duke().run(userInput);
         }
+        assert userInput == "bye" : "User input should be bye";
         return "Bye. Hope to see you again soon! :))";
     }
 }
