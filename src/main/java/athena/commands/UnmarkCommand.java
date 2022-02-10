@@ -1,9 +1,11 @@
 package athena.commands;
 
+import java.util.ArrayList;
+
 import athena.exceptions.InputErrorCode;
 import athena.exceptions.InputException;
 import athena.tasks.TaskList;
-import athena.ui.Ui;
+import athena.ui.Messages;
 
 /**
  * Represents an unmark command given to Athena by the user. When executed, marks
@@ -25,16 +27,18 @@ public class UnmarkCommand extends Command {
      * Marks the task corresponding to the given task number as not done on the given
      * TaskList and display outputs to the given Ui.
      *
-     * @param ui Ui instance to display outputs through.
      * @param taskList TaskList instance to mark the task as not done on.
+     * @return Command output.
      * @throws InputException If given task number is invalid/out of range.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList) throws InputException {
+    public String execute(TaskList taskList) throws InputException {
         if (taskList.isValidTaskNumber(taskNumber)) {
             taskList.setTaskAsNotDone(taskNumber);
-            ui.sayText("Alright, I've marked the following task as not done:");
-            ui.showTask(taskNumber);
+            ArrayList<String> outputs = new ArrayList<>();
+            outputs.add("Alright, I've marked the following task as not done:");
+            outputs.add(taskList.getTaskString(taskNumber));
+            return Messages.getMultiLineString(outputs);
         } else {
             throw new InputException(InputErrorCode.INVALID_TASK_NUMBER);
         }

@@ -3,7 +3,7 @@ package athena.commands;
 import java.time.LocalDateTime;
 
 import athena.tasks.TaskList;
-import athena.ui.Ui;
+import athena.ui.Messages;
 
 /**
  * Represents a deadline command given to Athena by the user. When executed, sets a new
@@ -28,12 +28,12 @@ public class DeadlineCommand extends Command {
      * Creates a new deadline task in the given TaskList and outputs the results to the
      * given Ui.
      *
-     * @param ui ui instance to display outputs through.
      * @param taskList taskList instance to create the deadline task in.
+     * @return Command output.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList) {
+    public String execute(TaskList taskList) {
         int taskNumber = taskList.addDeadline(taskName, dueDateTime);
-        ui.sayTaskAddingLines(taskNumber);
+        return Messages.getTaskAddingDialog(taskList, taskNumber);
     }
 }

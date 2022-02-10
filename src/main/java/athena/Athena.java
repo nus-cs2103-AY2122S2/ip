@@ -8,31 +8,31 @@ import athena.exceptions.InputException;
 import athena.parser.Parser;
 import athena.storage.Storage;
 import athena.tasks.TaskList;
-import athena.ui.Ui;
+import athena.ui.MainWindow;
+import athena.ui.Messages;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Provides the point of entry into the Athena program. Initializes the program and handles
  * the main program logic.
  */
-public class Main {
+public class Athena extends Application {
     private static final String SAVE_DIRECTORY = "data";
     private static final String SAVE_FILENAME = "athena.txt";
 
     private TaskList taskList;
     private final Storage storage;
-    private final Ui ui;
     private boolean isActive;
 
     /**
      * Initializes the program by loading task data from disk if any and initializing all
      * requisite objects and data structures.
      */
-    public Main() {
+    public Athena() {
         storage = new Storage(SAVE_DIRECTORY, SAVE_FILENAME);
         initTaskList(); // Load save data if present
-        ui = new Ui(taskList);
         isActive = true;
-        ui.sayText("Greetings! My name is Athena. What can I help you with?");
     }
 
     private void initTaskList() {
@@ -40,7 +40,7 @@ public class Main {
             try {
                 taskList = storage.loadFromDisk();
             } catch (IOException e) {
-                ui.sayText("I couldn't load from disk. Opening new task list instead.");
+                System.out.println("I couldn't load from disk. Opening new task list instead.");
                 taskList = new TaskList();
             }
         } else {
@@ -48,39 +48,39 @@ public class Main {
         }
     }
 
-    /**
-     * Starts running the main logic of the program, which is to keep reading and running user
-     * commands until the 'bye' command is given. Also, saves the task list to the disk
-     * when modified.
-     */
-    public void run() {
-        while (isActive) {
-            String input = ui.readNextLine();
-            try {
-                Command command = Parser.getCommand(input);
-                command.execute(ui, taskList);
-                if (command instanceof ShutdownCommand) {
-                    isActive = false;
-                }
-            } catch (InputException e) {
-                ui.sayText(e.getMessage());
+    public String getResponse(String input) {
+        String response = "";
+        try {
+            Command command = Parser.getCommand(input);
+            response = command.execute(taskList);
+            if (command instanceof ShutdownCommand) {
+                isActive = false;
             }
+        } catch (InputException e) { // return error message instead.
+            return e.getMessage();
+        }
+        try {
             saveIfTaskListModified();
+        } catch (IOException e) {
+            response += "\nI encountered a problem saving to disk: " + e.getMessage();
         }
+        return response;
     }
 
-    private void saveIfTaskListModified() {
+    private void saveIfTaskListModified() throws IOException {
         if (taskList.wasModified()) {
-            try {
-                storage.saveToDisk(taskList);
-                taskList.setNotModified();
-            } catch (IOException e) {
-                ui.sayText("I encountered a problem saving to disk: " + e.getMessage());
-            }
+            storage.saveToDisk(taskList);
+            taskList.setNotModified();
         }
     }
 
-    public static void main(String[] args) {
-        new Main().run();
+    public boolean isActive() {
+        return isActive;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        stage = new MainWindow(new Athena());
+        stage.show();
     }
 }

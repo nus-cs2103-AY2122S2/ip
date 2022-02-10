@@ -40,7 +40,7 @@ public class InputException extends Exception {
             return "Error. Please provide a date and time.";
             // No fallthrough
         case INVALID_TASK_DATETIME:
-            return "Error. Please enter the date and time in the following format: dd/mm/yyyy hh:mm";
+            return "Error. Please enter the date and time in the following format: dd/mm/yyyy hhmm";
             // No fallthrough
         case MISSING_SEARCH_PHRASE:
             return "Error. Please provide a search phrase.";
