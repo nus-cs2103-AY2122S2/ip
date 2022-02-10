@@ -90,7 +90,7 @@ public class TaskList {
         if (n > 1) {
             sb.append("s");
         }
-        sb.append(" in the list.").append(System.lineSeparator());
+        sb.append(" in the list.");
         return sb.toString();
     }
 
@@ -104,10 +104,9 @@ public class TaskList {
             return "You don't have tasks listed.";
         } else {
             StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
-            sb.append(System.lineSeparator());
             for (int i = 0; i < tasks.size(); i++) {
-                sb.append(String.format("%d%s%s", i + 1, ".", tasks.get(i)));
-                sb.append(System.lineSeparator());
+                sb.append(System.lineSeparator())
+                        .append(String.format("%d%s%s", i + 1, ".", tasks.get(i)));
             }
             return sb.toString();
         }
@@ -137,7 +136,7 @@ public class TaskList {
             msg = "OK, I've marked this task as not done yet:";
         }
         return msg + System.lineSeparator()
-                + "  " + tasks.get(index) + System.lineSeparator();
+                + "  " + tasks.get(index);
     }
 
     /**
@@ -164,7 +163,7 @@ public class TaskList {
         if (tasks.size() > 1) {
             sb.append("s");
         }
-        sb.append(" in the list.").append(System.lineSeparator());
+        sb.append(" in the list.");
         return sb.toString();
     }
 
@@ -186,13 +185,12 @@ public class TaskList {
                 isFound = true;
             }
             if (isMatch) {
-                sb.append(String.format("%d%s%s", i + 1, ".", t))
-                        .append(System.lineSeparator());
+                sb.append(System.lineSeparator())
+                        .append(String.format("%d%s%s", i + 1, ".", t));
             }
         }
         if (!isFound) {
-            sb.append("There is no matching task in your list.")
-                    .append(System.lineSeparator());
+            return "There is no matching task in your list.";
         }
         return sb.toString();
     }
