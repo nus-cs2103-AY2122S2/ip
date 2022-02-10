@@ -68,12 +68,4 @@ public class TaskList {
         return taskList;
     }
 
-    //public static ArrayList<Task> getTasksWithDueDates() {return taskList;}
-//    public static ArrayList<Task> getTasksWithDueDates() {
-//        return new ArrayList<Task>(getTasks().stream()
-//                .filter(task -> (task.getStatusIcon() == "X"))
-//                .collect(Collectors.toList()));
-//        // removeIf()
-//    }
-
 }
