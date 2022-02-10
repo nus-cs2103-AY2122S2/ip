@@ -40,4 +40,5 @@ public class Event extends Task {
     public String toString() {
         return super.toString() + "/" + this.date.toString();
     }
+
 }
