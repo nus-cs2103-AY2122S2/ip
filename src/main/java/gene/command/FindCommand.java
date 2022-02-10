@@ -1,13 +1,14 @@
 package gene.command;
 
+import java.util.ArrayList;
+
 import gene.component.Storage;
 import gene.component.TaskList;
 import gene.component.Ui;
 import gene.task.Task;
 
-import java.util.ArrayList;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private final String keyword;
 
     public FindCommand(String unparsedKey) {
@@ -25,7 +26,7 @@ public class FindCommand extends Command{
      * @param storage the storage class object
      */
     @Override
-    public void execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList tasks, Ui userInt, Storage storage) {
         ArrayList<Task> tempTask = new ArrayList<>();
 
         for (int i = 0; i < tasks.size(); i++) { //to edit in tasklist
@@ -37,7 +38,7 @@ public class FindCommand extends Command{
         StringBuilder initList = new StringBuilder();
 
         if (tempTask.size() == 0) {
-            userInt.print("Awwman, there are no matching tasks in your list");
+            return "Awwman, there are no matching tasks in your list";
         } else {
             for (int i = 1; i < tempTask.size() + 1; i++) { //to edit in tasklist
                 initList.append(i).append(".");
@@ -45,13 +46,11 @@ public class FindCommand extends Command{
                 initList.append("\n");
             }
 
-            userInt.print(
-                    "----------------------------" +
+            return          "----------------------------" +
                             "----------------------------\n" +
                             "Here are the matching tasks in your list:\n" +
                             initList.toString() +
-                            "--------------------------------------------------------\n"
-            );
+                            "--------------------------------------------------------\n";
         }
     }
 

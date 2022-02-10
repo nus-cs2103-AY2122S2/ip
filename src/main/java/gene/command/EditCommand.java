@@ -39,7 +39,7 @@ public class EditCommand extends Command{
      * @param storage the storage class object
      */
     @Override
-    public void execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList tasks, Ui userInt, Storage storage) {
         String[] tokens = this.taskBody.split(" ");
         String strIndex = tokens[1]; //error here
         int index = Integer.parseInt(strIndex);
@@ -67,7 +67,7 @@ public class EditCommand extends Command{
         tasks.set(index, newTask);
         storage.updatesToFile(index, mark);
 
-        userInt.print(toPrint);
+        return toPrint;
 
     }
 

@@ -80,7 +80,7 @@ public class Storage {
      *
      * @return full list of existing tasks from the target file
      */
-    public ArrayList<Task> readFile() {
+    public ArrayList<Task> readFile() { // to do / here / 0
         try {
             FileReader fileReader = new FileReader(this.absolutePath.toString());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -203,12 +203,12 @@ public class Storage {
             }
             switch(taskType) {
                 case "T":
-                    String[] todoTokens = taskKey.split("todo ");
+                    String[] todoTokens = taskKey.split("todo "); //  to do / sleep / 1
                     toWrite = "todo / " + todoTokens[1] + " / " + mark;
                     bufferedWriter.append(newLine + toWrite);
                     break;
                 case "E":
-                    String[] eventTokens = taskKey.split("event ");
+                    String[] eventTokens = taskKey.split("event "); // event / sleep / 2/12/2020 1900
                     toWrite = eventTokens[1];
                     String[] eSplit = toWrite.split(" /at ");
                     toWrite = String.join(" / ", eSplit );

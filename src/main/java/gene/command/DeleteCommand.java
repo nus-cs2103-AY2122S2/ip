@@ -12,7 +12,7 @@ import gene.task.Task;
  * @version 1.0
  * @since 2022-01-12
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private final String taskBody;
 
     /**
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command{
      * @param storage the storage class object
      */
     @Override
-    public void execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList tasks, Ui userInt, Storage storage) {
         try {
             String[] tokens = taskBody.split(" ");
             String strIndex = tokens[1]; //error here
@@ -41,18 +41,17 @@ public class DeleteCommand extends Command{
             Task targetTask = tasks.get(index);
             tasks.remove(index); //error if empty
             storage.deleteLineToFile(index); //error if empty
-            System.out.println(
-                    "----------------------------" +
+            return          "----------------------------" +
                             "----------------------------\n" +
                             "Noted. I've removed this task:\n"
                             + "  " + targetTask + "\n"
                             + "Now you have " + tasks.size() + " tasks in the list."
                             + "\n"
-                            + "--------------------------------------------------------"
-            );
+                            + "--------------------------------------------------------";
         } catch (Exception err) {
             System.out.println("File and list is already empty");
         }
+        return "";
     }
 
     /**

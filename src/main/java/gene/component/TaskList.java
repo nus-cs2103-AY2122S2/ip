@@ -1,8 +1,8 @@
 package gene.component;
 
-import gene.task.Task;
-
 import java.util.ArrayList;
+
+import gene.task.Task;
 
 /**
  * The task list class. handles all of gene's task list actions.

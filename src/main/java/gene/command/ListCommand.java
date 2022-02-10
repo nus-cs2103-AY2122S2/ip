@@ -4,7 +4,7 @@ import gene.component.Storage;
 import gene.component.TaskList;
 import gene.component.Ui;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * The execute methods contains the instruction(s) for when the command is
@@ -16,7 +16,7 @@ public class ListCommand extends Command{
      * @param storage the storage class object
      */
     @Override
-    public void execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList tasks, Ui userInt, Storage storage) {
         StringBuilder initList = new StringBuilder();
 
         for (int i = 1; i < tasks.size() + 1; i++) { //to edit in tasklist
@@ -25,12 +25,10 @@ public class ListCommand extends Command{
             initList.append("\n");
         }
         
-        userInt.print(
-                "----------------------------" +
+        return          "----------------------------" +
                         "----------------------------\n" +
                 initList.toString() +
-                        "--------------------------------------------------------\n"
-        );
+                        "--------------------------------------------------------\n";
     }
 
     /**

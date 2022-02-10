@@ -1,5 +1,9 @@
 package gene.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import gene.component.Storage;
 import gene.component.TaskList;
 import gene.component.Ui;
@@ -10,9 +14,7 @@ import gene.task.EventTask;
 import gene.task.Task;
 import gene.task.TodoTask;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 
 /**
  * The add command class. This class encapsulates the different kinds of
@@ -23,7 +25,7 @@ import java.time.format.DateTimeParseException;
  * @version 1.0
  * @since 2022-01-12
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final String taskBody;
     private final String taskType;
 
@@ -46,17 +48,16 @@ public class AddCommand extends Command{
      * @param storage the storage class object
      */
     @Override
-    public void execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList tasks, Ui userInt, Storage storage) {
         switch (this.taskType) {
         case "todo":
-            addTodo(taskBody, userInt, storage, tasks);
-            break;
+            return addTodo(taskBody, userInt, storage, tasks);
         case "deadline":
-            addDeadline(taskBody, userInt, storage, tasks);
-            break;
+            return addDeadline(taskBody, userInt, storage, tasks);
         case "event":
-            addEvent(taskBody, userInt, storage, tasks);
-            break;
+            return addEvent(taskBody, userInt, storage, tasks);
+        default:
+            return "Add command mismatch";
         }
     }
 
@@ -81,7 +82,7 @@ public class AddCommand extends Command{
      * @param storage Gene's storage
      * @param itemList Gene's item list
      */
-    public void addTodo(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
+    public String addTodo(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
         storage.writeToFile(taskKey, "T", false);
         String[] tokens = taskKey.split("todo ");
         String taskTitle = "";
@@ -92,20 +93,18 @@ public class AddCommand extends Command{
                 taskTitle = tokens[1];
             }
         } catch (BadDescriptionException err) {
-            System.out.println(err.getMessage());
-            return;
+            return err.getMessage();
         }
         Task newTask = new TodoTask(taskTitle);
         itemList.add(newTask);
 
-        userInt.print("----------------------------" +
+        return "----------------------------" +
                         "----------------------------\n" +
                         "Got it. I've added this task:\n"
                         + "  " + newTask + "\n"
                         + "Now you have " + itemList.size() + " tasks in the list."
                         + "\n"
-                        + "--------------------------------------------------------\n"
-        );
+                        + "--------------------------------------------------------\n";
     }
 
     /**
@@ -119,7 +118,7 @@ public class AddCommand extends Command{
      * @param storage Gene's storage
      * @param itemList Gene's item list
      */
-    public void addEvent(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
+    public String addEvent(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
         String[] tokens = taskKey.split("event ");
         String taskTitle = "";
         try {
@@ -130,8 +129,7 @@ public class AddCommand extends Command{
                 taskTitle = tokens[1];
             }
         } catch (BadDescriptionException err) {
-            System.out.println(err.getMessage());
-            return;
+            return err.getMessage();
         }
         String[] secondSplit = taskTitle.split(" /at ");
         taskTitle = secondSplit[0];
@@ -143,8 +141,7 @@ public class AddCommand extends Command{
                 deadline = secondSplit[1];
             }
         } catch (BadDeadlineException err) {
-            System.out.println(err.getMessage());
-            return;
+            return err.getMessage();
         }
 
         try {
@@ -152,20 +149,17 @@ public class AddCommand extends Command{
             Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             storage.writeToFile(taskKey, "E", false);
             itemList.add(newTask);
-            userInt.print(
-                    "----------------------------" +
+            return          "----------------------------" +
                             "----------------------------\n" +
                             "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
                             + "Now you have " + itemList.size() + " tasks in the list."
                             + "\n"
-                            + "--------------------------------------------------------\n"
-            );
-        } catch(DateTimeParseException err) {
-            userInt.print(
+                            + "--------------------------------------------------------\n";
+        } catch (DateTimeParseException err) {
+            return
                     "Bad date time format used, please use this date time format instead: "
-                    + "d/MM/yyyy HHmm."
-            );
+                    + "d/MM/yyyy HHmm.";
         }
     }
 
@@ -180,7 +174,7 @@ public class AddCommand extends Command{
      * @param storage Gene's storage
      * @param itemList Gene's item list
      */
-    public void addDeadline(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
+    public String addDeadline(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
         String[] tokens = taskKey.split("deadline ");
         String taskTitle = "";
         try {
@@ -190,8 +184,7 @@ public class AddCommand extends Command{
                 taskTitle = tokens[1];
             }
         } catch (BadDescriptionException err) {
-            System.out.println(err.getMessage());
-            return;
+            return err.getMessage();
         }
         String[] secondSplit = taskTitle.split(" /by ");
         taskTitle = secondSplit[0];
@@ -203,8 +196,7 @@ public class AddCommand extends Command{
                 deadline = secondSplit[1];
             }
         } catch (BadDeadlineException err) {
-            System.out.println(err.getMessage());
-            return;
+            return err.getMessage();
         }
 
         try {
@@ -215,17 +207,15 @@ public class AddCommand extends Command{
             Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             storage.writeToFile(taskKey, "D", false);
             itemList.add(newTask);
-            userInt.print(
-                    "----------------------------" +
+            return        "----------------------------" +
                             "----------------------------\n" +
                             "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
                             + "Now you have " + itemList.size() + " tasks in the list."
                             + "\n"
-                            + "--------------------------------------------------------\n"
-            );
-        } catch(DateTimeParseException err) {
-            System.out.println(err.getMessage());
+                            + "--------------------------------------------------------\n";
+        } catch (DateTimeParseException err) {
+            return err.getMessage();
         }
     }
 }
