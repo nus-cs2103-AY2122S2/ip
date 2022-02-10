@@ -53,6 +53,15 @@ public class TaskList {
         taskList.remove(i);
     }
 
+    public void deleteAll() {
+        taskList.clear();
+    }
+
+    public boolean addAll(ArrayList<Task> anotherList) {
+        return taskList.addAll(anotherList);
+    }
+
+
     /**
      * Returns the size of the TaskList object.
      * @return returns the size of the TaskList object.

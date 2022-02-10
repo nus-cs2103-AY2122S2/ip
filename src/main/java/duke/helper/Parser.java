@@ -210,6 +210,18 @@ public class Parser {
             }
             return message.toString();
         }
+        if (command.equals("archive")) {
+            Storage archiveStorage = new Storage("data/archive.txt");
+            archiveStorage.save(taskList.getTaskList());
+            taskList.deleteAll();
+            return "your tasks have been archived, type 'unarchive' to  retrieve the archived list";
+        }
+        if (command.equals("unarchive")) {
+            Storage archiveStorage = new Storage("data/archive.txt");
+            taskList.addAll(archiveStorage.load());
+            archiveStorage.deleteContent();
+            return "you have unarchived your task, now they are in your task list !";
+        }
         throw new DukeInvalidCommandException();
     }
 }

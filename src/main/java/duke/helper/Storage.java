@@ -2,10 +2,7 @@ package duke.helper;
 
 import duke.tasks.Task;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,7 +24,7 @@ public class Storage {
                 dir = new File(System.getProperty("user.dir") + directoryPath);
                 dir.mkdir();
                 file.createNewFile();
-//                System.out.println("not a file yet, creating");
+                System.out.println("not a file yet, creating");
             }
         } catch (IOException e) {
             System.out.println("error initiating file");
@@ -70,5 +67,13 @@ public class Storage {
             System.out.println(e.getMessage() + " error loading ");
         }
         return taskList;
+    }
+
+    public void deleteContent() {
+        try {
+            new PrintWriter(file.getPath()).close();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found");
+        }
     }
 }
