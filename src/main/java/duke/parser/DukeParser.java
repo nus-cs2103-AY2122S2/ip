@@ -267,6 +267,7 @@ public class DukeParser {
         String[] arg = inp.split(" ", 2);
         try {
             Command c = createCommand(arg, arg[0]);
+            assert c != null : "Command to return cannot be null";
             return c;
         } catch (DukeException e) {
             return new TryAgain(e.getMessage());
