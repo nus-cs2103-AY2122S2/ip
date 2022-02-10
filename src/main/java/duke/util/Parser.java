@@ -14,6 +14,7 @@ import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.FixedDurationTask;
 import duke.task.Todo;
 
 /**
@@ -60,7 +61,7 @@ public class Parser {
      */
     public static Command deadlineCommand(String input) throws IndexOutOfBoundsException {
         try {
-            String[] tokens = input.split("/by ");
+            String[] tokens = input.split("\\s+/by\\s+");
             String date = tokens[1];
             String name = tokens[0];
             Deadline deadline = new Deadline(name, date);
@@ -79,7 +80,7 @@ public class Parser {
      */
     public static Command eventCommand(String input) throws IndexOutOfBoundsException {
         try {
-            String[] tokens = input.split("/at ");
+            String[] tokens = input.split("\\s+/at\\s+");
             String date = tokens[1];
             String name = tokens[0];
             Event event = new Event(name, date);
@@ -133,6 +134,25 @@ public class Parser {
     }
 
     /**
+     * Returns a command to add a task with a fixed duration.
+     * @param input String which includes name and duration of task.
+     * @return Command to add the task.
+     * @throws IndexOutOfBoundsException If there is no duration specified.
+     */
+    public static Command fixedCommand(String input) throws IndexOutOfBoundsException {
+        try {
+            String[] tokens = input.split("\\s+/needs\\s+");
+            String name = tokens[0];
+            String duration = tokens[1];
+            FixedDurationTask fixed = new FixedDurationTask(name, duration);
+            return new AddCommand(fixed);
+        } catch (IndexOutOfBoundsException e) {
+            String invalidAddMessage = "☹ Please specify a duration!!";
+            return new InvalidCommand(invalidAddMessage);
+        }
+    }
+
+    /**
      * Parses the String input and returns the appropriate command.
      *
      * @param input String input from user.
@@ -182,6 +202,9 @@ public class Parser {
                     break;
                 case FIND:
                     command = new FindCommand(name);
+                    break;
+                case FIXED:
+                    command = Parser.fixedCommand(name);
                     break;
                 default:
                     throw new InvalidCommandException("\t☹ Woof Woof!!! This command is unidentifiable!!!");

@@ -33,7 +33,6 @@ public class AddCommand extends Command {
                 + task.track() + task.getStatus() + " " + task.toString()
                 + "\nNow you have " + (tasks.getCount()) + " tasks in the list.";
         String status = task.getStatus();
-        assert status.equals("[ ]");
         return response;
     }
 }

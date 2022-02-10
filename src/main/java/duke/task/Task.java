@@ -5,7 +5,9 @@ package duke.task;
  * tracker that keeps track of the type of task.
  */
 public abstract class Task {
-    private String status = "[ ]"; // for all new tasks added to list, they are initially not done.
+    private static final String DONE_STATUS = "[X]";
+    private static final String UNDONE_STATUS = "[ ]";
+    private String status = UNDONE_STATUS; // for all new tasks added to list, they are initially not done.
     private final String description;
     private boolean isDone = false;
 
@@ -24,7 +26,7 @@ public abstract class Task {
     public void mark() {
         if (!isDone) {
             isDone = true;
-            this.status = "[X]";
+            this.status = DONE_STATUS;
         }
     }
 
@@ -34,7 +36,7 @@ public abstract class Task {
     public void unmark() {
         if (isDone) {
             isDone = false;
-            this.status = "[ ]";
+            this.status = UNDONE_STATUS;
         }
     }
 

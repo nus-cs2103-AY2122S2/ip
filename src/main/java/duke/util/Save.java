@@ -11,6 +11,7 @@ import duke.enums.Type;
 import duke.exceptions.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.FixedDurationTask;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -117,7 +118,7 @@ public class Save {
     }
 
     /**
-     * Adds a task to the list that has a date or time.
+     * Adds a task to the list that has either a date, time or duration.
      *
      * @param type   Type of command.
      * @param status Status of Task.
@@ -141,6 +142,11 @@ public class Save {
             }
             break;
         default:
+            inputsToBeProcessed.add("fixed " + name + " /needs " + date);
+            this.count++;
+            if (status.equals("1")) {
+                inputsToBeProcessed.add("mark " + this.count);
+            }
         }
     }
 
@@ -167,12 +173,17 @@ public class Save {
                 s = s + "T / " + (todo.getStatus().equals("[X]") ? "1 / " : "0 / ") + todo.getName();
             } else if (task instanceof Event) {
                 Event event = (Event) task;
-                s = s + "E / " + (event.getStatus().equals("[X]") ? "1 / " : "0 / ") + event.getName() + "/ "
+                s = s + "E / " + (event.getStatus().equals("[X]") ? "1 / " : "0 / ") + event.getName() + " / "
                         + event.getTime();
+            } else if (task instanceof FixedDurationTask) {
+                FixedDurationTask fixed = (FixedDurationTask) task;
+                s = s + "F / " + (fixed.getStatus().equals("[X]") ? "1 / " : "0 / ") + fixed.getName() + " / "
+                        + fixed.getDuration();
+
             } else {
                 Deadline deadline = (Deadline) task;
                 s = s + "D / " + (deadline.getStatus().equals("[X]") ? "1 / " : "0 / ") + deadline.getName()
-                        + "/ " + deadline.getUnconvertedDate();
+                        + " / " + deadline.getUnconvertedDate();
             }
             s += "\n";
         }
