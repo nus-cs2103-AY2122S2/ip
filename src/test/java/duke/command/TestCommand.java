@@ -563,4 +563,29 @@ public class TestCommand {
             Assertions.fail();
         }
     }
+
+    @Test
+    void createHelpCommand_helpCommand_returnsStringWithHelpOfAllCommands() {
+        String expected = "Here are the tasks avaliable for duke:\n"
+                + "List: Shows all the tasks in duke\n"
+                + "Mark <number>: Marks the task in the index <number>\n"
+                + "Unmark <number>: Unmarks the task in the index <number>\n"
+                + "Find <keyword>: finds all the task that contains <keyword>\n"
+                + "Delete <number>: Deletes the task in index <number>\n"
+                + "Todo <name of todo>: Creates a new todo <name of todo>\n"
+                + "Deadline <name of deadline> <date of deadline in dd/mm/yyyy HHmm>: "
+                + "Creates a new deadline <name of deadline> at <date of deadline in dd/mm/yyyy HHmm>\n"
+                + "Event <name of deadline> <date of deadline in dd/mm/yyyy HHmm>: "
+                + "Creates a new event <name of deadline> at <date of deadline in dd/mm/yyyy HHmm>\n"
+                + "Bye: Exits duke.";
+        try {
+            Command cmd = Command.getCommand("HELP", "");
+            Storage storage = new Storage(fileName);
+            TaskList tasks = new TaskList();
+            Assertions.assertEquals(expected, cmd.run(tasks, storage));
+        } catch (Exception e) {
+            Assertions.fail();
+        }
+
+    }
 }

@@ -68,6 +68,8 @@ public abstract class Command {
             return new DeleteCommand(parameter);
         } else if (command.equals("FIND")) {
             return new FindCommand(parameter);
+        } else if (command.equals("HELP")) {
+            return new HelpCommand(parameter);
         } else {
             // Throws invalid command as the user gives a invalid command.
             throw InvalidCommandException.createInvalidCommand(command);
@@ -432,7 +434,7 @@ class FindCommand extends Command {
     }
 
     /**
-     * Gets all the tasks that contains the keyword and shos it to the user.
+     * Gets all the tasks that contains the keyword and shows it to the user.
      *
      * @param taskList The TaskList which the command will act on.
      * @param storage The Storage on which the command will act on.
@@ -450,5 +452,52 @@ class FindCommand extends Command {
         TaskList filteredTaskList = taskList.findTasksFromKeyword(parameter);
 
         return "These are the tasks that have the keyword \"" + parameter + "\"\n" + filteredTaskList.printTasks();
+    }
+}
+
+class HelpCommand extends Command {
+    /**
+     * Creates a new Help Command.
+     *
+     * @param parameter The parameter entered by the user.
+     */
+    protected HelpCommand(String parameter) {
+        super(parameter);
+    }
+
+    /**
+     * Shows all the manual for all commands in duke.
+     *
+     * @param taskList The TaskList which the command will act on.
+     * @param storage The Storage on which the command will act on.
+     * @return The string that shows the manual for all commands.
+     * @throws DukeExceptions There is no Duke exception expected.
+     */
+    @Override
+    public String run(TaskList taskList, Storage storage) throws DukeExceptions {
+        String openingSentence = "Here are the tasks avaliable for duke:\n";
+        String listHelp = "List: Shows all the tasks in duke\n";
+        String markHelp = "Mark <number>: Marks the task in the index <number>\n";
+        String unmarkHelp = "Unmark <number>: Unmarks the task in the index <number>\n";
+        String findHelp = "Find <keyword>: finds all the task that contains <keyword>\n";
+        String deleteHelp = "Delete <number>: Deletes the task in index <number>\n";
+        String todoHelp = "Todo <name of todo>: Creates a new todo <name of todo>\n";
+        String deadlineHelp = "Deadline <name of deadline> <date of deadline in dd/mm/yyyy HHmm>: "
+                + "Creates a new deadline <name of deadline> at <date of deadline in dd/mm/yyyy HHmm>\n";
+        String eventHelp = "Event <name of deadline> <date of deadline in dd/mm/yyyy HHmm>: "
+                + "Creates a new event <name of deadline> at <date of deadline in dd/mm/yyyy HHmm>\n";
+        String byeHelp = "Bye: Exits duke.";
+        String result = openingSentence
+                .concat(listHelp)
+                .concat(markHelp)
+                .concat(unmarkHelp)
+                .concat(findHelp)
+                .concat(deleteHelp)
+                .concat(todoHelp)
+                .concat(deadlineHelp)
+                .concat(eventHelp)
+                .concat(byeHelp);
+        System.out.println(result);
+        return result;
     }
 }
