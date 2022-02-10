@@ -55,6 +55,7 @@ public class Ui {
                 return "Event cannot be empty!!! :/";
             }
             try {
+                assert !item.equals("");
                 dtp.parseDateTime(item, "event");
                 return tasks.add(new Event(dtp.getDescription(), dtp.getTime()));
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -79,6 +80,7 @@ public class Ui {
                 return "Please specify the index of the item that you would like to mark.";
             }
             try {
+                assert !item.equals("");
                 int index = Integer.parseInt(item);
                 tasks.get(index - 1).markAsDone();
                 return "Good job for accomplishing something today! I've marked this task as done:\n"
@@ -92,6 +94,7 @@ public class Ui {
                 return "Please specify the index of the item that you would like to unmark.";
             }
             try {
+                assert !item.equals("");
                 int index = Integer.parseInt(item);
                 tasks.get(index - 1).markAsUndone();
                 return "Stop procrastinating you lazy prick! I've marked this task as not done yet:\n"
@@ -107,6 +110,7 @@ public class Ui {
             if (item.equals("")) {
                 return "Please specify the item that you would like to find.";
             }
+            assert !item.equals("");
             return tasks.find(item);
 
         case "commandlist":
