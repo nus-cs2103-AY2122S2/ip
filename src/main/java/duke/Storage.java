@@ -31,7 +31,7 @@ public class Storage {
         while (bufferedReader.ready()) {
             String line = bufferedReader.readLine();
 
-            if (line.charAt(3) == 'D') {
+            if (line.split("\\.")[1].charAt(1) == 'D') {
                 boolean isDone = line.charAt(6) == 'X';
                 String name = line.split(" \\(by: ")[0].substring(9);
 
@@ -40,7 +40,7 @@ public class Storage {
                 doneBy = doneBy.substring(0, doneBy.length() - 1); // removes end bracket
 
                 taskList.add(new TaskDeadlines(isDone, name, doneBy));
-            } else if (line.charAt(3) == 'E') {
+            } else if (line.split("\\.")[1].charAt(1) == 'E') {
                 boolean isDone = line.charAt(6) == 'X';
 
                 String name = line.split(" \\(at: ")[0].substring(9);
