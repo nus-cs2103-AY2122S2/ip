@@ -49,6 +49,7 @@ public class Parser {
                 if (processedCommand == null) {
                     throw new DukeException();
                 }
+                return processedCommand;
             } else {
                 throw new DukeException();
             }
