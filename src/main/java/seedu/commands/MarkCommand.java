@@ -16,6 +16,7 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList tasks) throws DukeException {
         Task task = tasks.get(idx);
+        assert task != null: "Need to have task before continuing";
         task.mark();
         return "Task: " + task.toString() + " is marked!";
     }

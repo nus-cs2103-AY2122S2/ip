@@ -19,6 +19,7 @@ public class DeadlineCommand extends Command {
         if (task.length == 1) {
             throw new DukeException("Delimiter /by no found.");
         } else {
+            assert task.length == 2: "Array is supposed to contain 2 items";
             description = task[0].trim();
             dateTime = checkDateTime(task[1].trim());
         }
