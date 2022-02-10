@@ -58,6 +58,7 @@ public class Storage {
                     }
                     break;
                 default:
+                    assert false : input.get(0);
                     throw new DukeException("Unknown type");
                 }
             }
@@ -85,8 +86,10 @@ public class Storage {
                 writer.write(System.lineSeparator());
             }
             writer.close();
+            return;
         } catch (IOException e) {
             System.out.println("Error happened cannot save to file");
         }
+        assert false;
     }
 }

@@ -89,6 +89,7 @@ public class Ui {
     }
 
     public void showMessage(String s) {
+        assert s.equals("") : "Empty output";
         out.println(output(s));
         outputString = s;
     }
