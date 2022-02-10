@@ -42,20 +42,20 @@ public class AddTaskCommand extends Command {
             this.description = task;
             break;
         case DEADLINE:
-            String[] dInput = task.split("/by", 2);
-            if (dInput.length == 1) {
+            String[] deadlineInputs = task.split("/by", 2);
+            if (deadlineInputs.length == 1) {
                 throw new DateException("deadline");
             }
-            this.description = dInput[0];
-            this.date = dInput[1];
+            this.description = deadlineInputs[0];
+            this.date = deadlineInputs[1];
             break;
         case EVENT:
-            String[] eInput = task.split("/at", 2);
-            if (eInput.length == 1) {
+            String[] eventInputs = task.split("/at", 2);
+            if (eventInputs.length == 1) {
                 throw new DateException("event");
             }
-            this.description = eInput[0];
-            this.date = eInput[1];
+            this.description = eventInputs[0];
+            this.date = eventInputs[1];
             break;
         default:
             throw new DukeException();

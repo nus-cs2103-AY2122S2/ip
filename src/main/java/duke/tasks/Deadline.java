@@ -61,21 +61,18 @@ public class Deadline extends Task implements Serializable {
     @Override
     public String toString() {
         if (isDone) {
-            return "[D]" + "[X] " + description + "(by: "
-                    + date.getDayOfMonth()
-                    + " "
-                    + date.getMonth()
-                    + " "
-                    + date.getYear()
-                    + ")";
+            return String.format("[D][X] %s(by: %s %s %s)",
+                    description,
+                    date.getDayOfMonth(),
+                    date.getMonth(),
+                    date.getYear());
+
         } else {
-            return "[D]" + "[ ] " + description + "(by: "
-                    + date.getDayOfMonth()
-                    + " "
-                    + date.getMonth()
-                    + " "
-                    + date.getYear()
-                    + ")";
+           return String.format("[D][ ] %s(by: %s %s %s)",
+                    description,
+                    date.getDayOfMonth(),
+                    date.getMonth(),
+                    date.getYear());
         }
     }
 }

@@ -60,21 +60,17 @@ public class Event extends Task implements Serializable {
     @Override
     public String toString() {
         if (isDone) {
-            return "[E]" + "[X] " + description + "(at: "
-                    + date.getDayOfMonth()
-                    + " "
-                    + date.getMonth()
-                    + " "
-                    + date.getYear()
-                    + ")";
+            return String.format("[E][X] %s(at: %s %s %s)",
+                    description,
+                    date.getDayOfMonth(),
+                    date.getMonth(),
+                    date.getYear());
         } else {
-            return "[E]" + "[ ] " + description + "(at: "
-                    + date.getDayOfMonth()
-                    + " "
-                    + date.getMonth()
-                    + " "
-                    + date.getYear()
-                    + ")";
+            return String.format("[E][ ] %s(at: %s %s %s)",
+                    description,
+                    date.getDayOfMonth(),
+                    date.getMonth(),
+                    date.getYear());
         }
     }
 }

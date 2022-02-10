@@ -54,7 +54,7 @@ public class UiManager {
      */
     public String printAdd(Task t, int i) {
         String s = "Got it, I added:\n" + t + "\n";
-        s += "Now you have " + i + " item(s) in your list";
+        s += String.format("now you have %d items(s) in your list", i);
         return s;
     }
 
@@ -90,7 +90,7 @@ public class UiManager {
     public String printDelete(String string, int i) {
         String s = "I removed this task for you:\n";
         s += string + "\n";
-        s += "Now you have " + i + " item(s) in your list";
+        s += String.format("now you have %d items(s) in your list", i);
         return s;
     }
 
@@ -137,7 +137,7 @@ public class UiManager {
      * @param taskName the String representation of the keyword
      */
     public String printFind(String tasks, String taskName) {
-        String s = "These are the tasks labeled " + taskName + ":\n";
+        String s = String.format("These are the tasks labeled %s:\n", taskName);
         s += tasks;
         return s;
     }

@@ -9,8 +9,7 @@ public class DukeException extends Exception {
     /**
      * Constructs the DukeException Object
      */
-    public DukeException() {
-    }
+    public DukeException() {}
 
     /**
      * @return a String representation of the error message

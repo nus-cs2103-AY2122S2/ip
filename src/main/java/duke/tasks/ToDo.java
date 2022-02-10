@@ -53,9 +53,9 @@ public class ToDo extends Task implements Serializable {
     @Override
     public String toString() {
         if (isDone) {
-            return "[T]" + "[X] " + this.description;
+            return String.format("[T][X] %s", this.description);
         } else {
-            return "[T]" + "[ ] " + this.description;
+            return String.format("[T][ ] %s", this.description);
         }
     }
 }
