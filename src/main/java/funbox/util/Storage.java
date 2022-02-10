@@ -149,6 +149,7 @@ public class Storage {
             }
 
             String[] taskSplit = task.split(DELIMITER);
+            assert taskSplit.length >= 3 : "Length of split tasks should be equal or greater than length 3";
             String type = typeHashmap.get(taskSplit[0]);
             String description = taskSplit[2];
             isDone = isTaskDone(taskSplit[1]);
@@ -187,6 +188,7 @@ public class Storage {
      * @throws IOException If file does not exist.
      */
     public void deleteTask(int index) throws IOException {
+        assert index >= 0 : "index should be greater or equal to 0";
         String tempFileUrl = "data/temp.txt";
         createTempFile(tempFileUrl);
         File tempFile = new File(tempFileUrl);
@@ -200,7 +202,6 @@ public class Storage {
 
         while (true) {
             task = br.readLine();
-
             if (task == null) {
                 br.close();
                 fw.close();
@@ -226,6 +227,8 @@ public class Storage {
         try {
             String prefix;
             String finalResult = "";
+            assert task.type != null : "The type of task is not suppose to be null";
+
             switch (task.type) {
             case "todo":
                 prefix = "T,0";

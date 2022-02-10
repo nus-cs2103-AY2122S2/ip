@@ -31,8 +31,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions, IOException {
+        assert ui != null : "ui should not be null";
         String result = "";
-
         boolean isGreaterThanList = (index - 1) > taskList.getSize();
         boolean isNegative = (index - 1) < 0;
 

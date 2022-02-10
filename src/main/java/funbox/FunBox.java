@@ -26,6 +26,7 @@ public class FunBox  {
     public Result getResponse(String input) {
         String result;
         boolean isExit = false;
+        assert input != null : "Input should not be null";
         try {
             Command task = parser.parseCommand(input);
             result = task.execute(taskList, ui, storage);

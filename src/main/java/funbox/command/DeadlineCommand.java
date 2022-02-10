@@ -39,7 +39,8 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
         String result;
-
+        assert ui != null : "ui should not be null";
+        assert storage != null : "ui should not be null";
         if (description.equals("")) {
             throw new FunBoxExceptions("`deadline` command usage: deadline <task> /by <date> <time>");
         }
