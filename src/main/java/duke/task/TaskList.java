@@ -1,12 +1,13 @@
 package duke.task;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * A class to contain all tasks of the user.
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    static ArrayList<Task> taskList;
 
     /**
      * Initializes the current taskList with an external ArrayList.
@@ -63,8 +64,16 @@ public class TaskList {
      * A getter method to return the current entire taskList.
      * @return ArrayList containing existing tasks.
      */
-    public ArrayList<Task> getTasks() {
+    public static ArrayList<Task> getTasks() {
         return taskList;
+    }
+
+    //public static ArrayList<Task> getTasksWithDueDates() {return taskList;}
+    public static ArrayList<Task> getTasksWithDueDates() {
+        return new ArrayList<Task>(getTasks().stream()
+                .filter(task -> (task.getStatusIcon() == "X"))
+                .collect(Collectors.toList()));
+        // removeIf()
     }
 
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Abstract class to represent the framework of a Task.
  */
@@ -7,6 +9,7 @@ public abstract class Task {
 
     protected String description;
     protected boolean done;
+    protected LocalDate date;
 
     /**
      * Initializes the Task object.
