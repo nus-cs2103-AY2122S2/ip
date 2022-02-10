@@ -33,8 +33,11 @@ public class MarkCommand extends Command<String> {
     public void runCommand() {
         int taskNumber = intSearch(text) - 1;
         if (taskNumber < list.getSize() && taskNumber >= 0) {
+            assert taskNumber < list.getSize(): "condition falsely returning true";
+            assert taskNumber >= 0: "condition falsely returning true";
             Task intendedTask = list.getTask(taskNumber);
             intendedTask.setDone(true);
+            assert intendedTask.getDone() == true: "Method not working";
             storage.writeToFile(list);
             System.out.println("  " + "SOLID! I've marked this task as done:\n"
                     + "    " + intendedTask);
