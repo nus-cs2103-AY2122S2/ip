@@ -1,9 +1,10 @@
-package duke;
+package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.TaskList;
+import duke.task.tasks.Deadline;
+import duke.task.tasks.Event;
+import duke.task.tasks.Task;
+import duke.task.tasks.ToDo;
 import duke.util.Constants;
 
 import java.io.File;

@@ -1,7 +1,7 @@
-package duke;
+package duke.task;
 
 import duke.exception.InvalidTaskNumberException;
-import duke.task.Task;
+import duke.task.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class TaskList {
         return output;
     }
 
-    List<Task> listTasks() {
+    public List<Task> listTasks() {
         return tasks;
     }
 

@@ -1,5 +1,9 @@
 package duke;
 
+import duke.command.Command;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.util.Parser;
 
 import java.util.Scanner;
@@ -40,14 +44,13 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.greetings();
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                String output = Parser.parse(sc.nextLine(), taskList);
-                if (output.equals("BYE")) {
-                    break;
-                }
+                String input = sc.nextLine();
+                String output = processUserInput(input);
                 ui.log(output);
-                storage.updateStorage(taskList);
+                isExit = output.equals("") ? true : false;
             } catch (Exception e) {
                 ui.showLoadingError(e);
             }
@@ -55,9 +58,11 @@ public class Duke {
         ui.bye();
     }
 
-    public String getResponse(String input) {
+    public String processUserInput(String input) {
         try {
-            String output = Parser.parse(input, taskList);
+            Command response = Parser.parse(input, taskList);
+            String output = response.executeCommand(taskList);
+            storage.updateStorage(taskList);
             return output;
         } catch (Exception e) {
             return e.getMessage();

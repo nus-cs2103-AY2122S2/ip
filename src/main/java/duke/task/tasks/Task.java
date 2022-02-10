@@ -1,4 +1,4 @@
-package duke.task;
+package duke.task.tasks;
 
 /**
  * Represent task to be done.

@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exception.InvalidTaskNumberException;
-import duke.task.Deadline;
-import duke.task.Task;
+import duke.task.tasks.Deadline;
+import duke.task.tasks.Task;
+import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
