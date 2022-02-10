@@ -88,7 +88,6 @@ public abstract class Task {
             throw new IllegalArgumentException();
         }
     }
-  
     /**
      * Gets the date of either the deadline or event.
      *
@@ -101,7 +100,6 @@ public abstract class Task {
     protected String getMarkedTag(boolean isMarked) {
         return isMarked ? "[X]" : "[ ]";
     }
-  
     protected String getDateInFormat(String adj, String date) {
         String result = "(" + adj + ": " + date + ")";
         return result;
@@ -152,7 +150,6 @@ final class Deadline extends Task {
     private static final String DEADLINE = "DEADLINE\n";
     /** The date of the dateline */
     private LocalDateTime deadline;
- 
     /**
      * A task with a deadline.
      *
@@ -174,8 +171,8 @@ final class Deadline extends Task {
     @Override
     public String toString() {
         String doneIndicator = getMarkedTag(isMarked);
-        String date = deadline.format(formatter);
-        String deadlineString = getDateInFormat("by", date);
+        String dateString = date.format(FORMATTER);
+        String deadlineString = getDateInFormat("by", dateString);
         String result = TAG.concat(doneIndicator).concat(" ").concat(taskName).concat(" ").concat(deadlineString);
         return result;
     }
@@ -189,8 +186,8 @@ final class Deadline extends Task {
     public String updateIntoDatabase() {
         String isMarkedString = String.valueOf(isMarked).concat("\n");
         String taskNameString = taskName.concat("\n");
-        String date = deadline.format(initFormatter).concat("\n");
-        String result = DEADLINE.concat(isMarkedString).concat(taskNameString).concat(date).concat(NEXT_LINE);
+        String dateString = date.format(INIT_FORMATTER).concat("\n");
+        String result = DEADLINE.concat(isMarkedString).concat(taskNameString).concat(dateString).concat(NEXT_LINE);
         return result;
     }
 }
@@ -200,7 +197,6 @@ final class Event extends Task {
     private static final String EVENT = "EVENT\n";
     /** The date of the event */
     private LocalDateTime eventDate;
-  
     /**
      * Creates the event task.
      *
@@ -222,8 +218,8 @@ final class Event extends Task {
     @Override
     public String toString() {
         String doneIndicator = getMarkedTag(isMarked);
-        String date = eventDate.format(formatter);
-        String eventDateString = getDateInFormat("at", date);
+        String dateString = date.format(FORMATTER);
+        String eventDateString = getDateInFormat("at", dateString);
         String result = TAG.concat(doneIndicator).concat(" ").concat(taskName).concat(" ").concat(eventDateString);
         return result;
     }
@@ -237,9 +233,8 @@ final class Event extends Task {
     public String updateIntoDatabase() {
         String isMarkedString = String.valueOf(isMarked).concat("\n");
         String taskNameString = taskName.concat("\n");
-        String date = eventDate.format(initFormatter).concat("\n");
-        String result = EVENT.concat(isMarkedString).concat(taskNameString).concat(date).concat(NEXT_LINE);
+        String dateString = date.format(INIT_FORMATTER).concat("\n");
+        String result = EVENT.concat(isMarkedString).concat(taskNameString).concat(dateString).concat(NEXT_LINE);
         return result;
-
     }
 }

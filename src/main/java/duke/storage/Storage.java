@@ -51,7 +51,7 @@ public class Storage {
             String dateString = fileInput.nextLine();
             LocalDateTime date = null;
             // If the program finishes processing a task.
-            if (date.equals(NEXT_ITEM_LINE)) {
+            if (dateString.equals(NEXT_ITEM_LINE)) {
                 date = null;
             } else {
                 // Changes the date to the LocalDateFormat

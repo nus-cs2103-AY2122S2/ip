@@ -76,9 +76,10 @@ public class TestCommand {
         try {
             TaskList taskList = storage.getData();
             Command cmd = Command.getCommand("LIST", "");
-            Assertions.assertEquals(expected, cmd.run(taskList, storage));
+            String result = cmd.run(taskList, storage);
+            Assertions.assertEquals(expected, result);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             Assertions.fail();
         }
     }
@@ -384,7 +385,7 @@ public class TestCommand {
             fw.write("");
             fw.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             Assertions.fail();
         }
     }

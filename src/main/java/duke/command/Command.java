@@ -287,7 +287,7 @@ class TodoCommand extends Command {
         }
 
         boolean isMarked = false;
-        String date = null;
+        LocalDateTime date = null;
         Task todo = Task.createTask(commandName, isMarked, parameter, date);
         taskList.addTask(todo);
         String todoString = todo.toString();
@@ -338,19 +338,7 @@ class DeadlineCommand extends Command {
             throw EmptyDateException.createEmptyDate(commandName);
         }
 
-        // Gets the task name form the parameter.
-        String task = parameter.substring(0, index);
-        // If the user did not enter a task name, then throw empty task exception.
-        if (task.isBlank()) {
-            throw EmptyTaskException.createEmptyTask(commandName);
-        }
-
         // Get the date from the parameter.
-        String dateString = parameter.substring(index + 5, parameter.length());
-        // If the user did not enter a date after "/by".
-        if (dateString.isBlank()) {
-            throw EmptyDateException.createEmptyDate(commandName);
-        }
         String[] tasksAndDates = getTaskNameAndDate(index, parameter, commandName);
         String task = tasksAndDates[0];
         String dateString = tasksAndDates[1];
@@ -367,7 +355,6 @@ class DeadlineCommand extends Command {
         if (haveDateClash) {
             throw DateClashException.createDateClashException(date.format(FORMATTER));
         }
-      
         boolean isMarked = false;
         Task deadline = Task.createTask(commandName, isMarked, task, date);
 
