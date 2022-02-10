@@ -1,11 +1,14 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Provides abstraction of an task in the todoList
  */
 public abstract class Task {
     protected boolean finished;
     protected String content;
+    protected ArrayList<Tag> tags;
 
     /**
      * Contructs an item object
@@ -15,6 +18,7 @@ public abstract class Task {
     public Task(String content) {
         this.content = content;
         this.finished = false;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -38,10 +42,12 @@ public abstract class Task {
      */
     @Override
     public String toString() {
+
+        String tagsToString = tagsToString(tags);
         if (finished) {
-            return "[X] " + content;
+            return "[X] " + content + tagsToString;
         } else {
-            return "[ ] " + content;
+            return "[ ] " + content + tagsToString;
         }
     }
 
@@ -58,5 +64,21 @@ public abstract class Task {
         }
     }
 
+    public void addTag(String tagMessage) {
+        tags.add(new Tag(tagMessage));
+    }
+
+    public void deleteTag(int tagNumber) {
+        int index = tagNumber - 1;
+        tags.remove(index);
+    }
+
+    private static String tagsToString(ArrayList<Tag> tags) {
+        String tagsToString = "";
+        for (int i = 0; i < tags.size(); i++) {
+            tagsToString = tagsToString + " " + tags.get(i);
+        }
+        return tagsToString;
+    }
 
 }

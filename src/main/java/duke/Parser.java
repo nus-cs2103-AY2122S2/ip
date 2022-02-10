@@ -10,9 +10,11 @@ import duke.command.CommandEvent;
 import duke.command.CommandFind;
 import duke.command.CommandList;
 import duke.command.CommandMark;
+import duke.command.CommandTag;
 import duke.command.CommandTodo;
 import duke.command.CommandUnclear;
 import duke.command.CommandUnmark;
+import duke.command.CommandUntag;
 import duke.dukeexception.DukeException;
 import duke.dukeexception.NoTimeGivenException;
 import duke.dukeexception.TooLittleArgException;
@@ -34,6 +36,7 @@ class Parser {
         String[] words = userInput.split(" ");
         String firstWord = words[0];
         int taskNo;
+        Task task;
         switch(firstWord) {
         case "list":
             return new CommandList(taskList);
@@ -70,8 +73,20 @@ class Parser {
             return new CommandDelete(taskList, taskNo);
         case "find":
             checkArgNumber(words, 2);
-            String wordSecond = words[1];
-            return new CommandFind(wordSecond, taskList);
+            String searchKeyword = words[1];
+            return new CommandFind(searchKeyword, taskList);
+        case "tag":
+            checkArgNumber(words, 3);
+            taskNo = Integer.parseInt(words[1]);
+            task = taskList.get(taskNo - 1);
+            String tagMessage = words[2];
+            return new CommandTag(task, tagMessage);
+        case "untag":
+            checkArgNumber(words, 3);
+            taskNo = Integer.parseInt(words[1]);
+            task = taskList.get(taskNo - 1);
+            int tagNo = Integer.parseInt(words[2]);
+            return new CommandUntag(task, tagNo);
         default:
             return new CommandUnclear();
         }
