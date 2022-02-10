@@ -7,6 +7,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private ContactList contacts;
 
     /**
      * Initializes task list and reads tasks from storage.
@@ -16,6 +17,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        contacts = new ContactList();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -39,7 +41,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage, contacts);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

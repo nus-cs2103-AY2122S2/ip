@@ -46,6 +46,10 @@ public class Parser {
             return parseUnmarkCommand(fullCommand);
         } else if (command.equals("bye")) {
             return parseExitCommand();
+        } else if (command.equals("addContact")) {
+            return parseAddContactCommand();
+        } else if (command.equals("deleteContact")) {
+            return parseDeleteContactCommand();
         } else {
             throw new DukeException("I don't recognize that command.");
         }
@@ -147,6 +151,32 @@ public class Parser {
      */
     private static Command parseExitCommand() {
         return new ExitCommand();
+    }
+
+    /**
+     * Parses delete contact command.
+     *
+     * @param fullCommand String to parse.
+     * @return DeleteContactCommand instance.
+     */
+    private static Command parseDeleteContactCommand(String fullCommand) {
+        String dataString = fullCommand.replaceFirst("deleteContact ", "");
+        int taskNumber = Integer.parseInt(dataString);
+        return new DeleteContactCommand(taskNumber);
+    }
+
+    /**
+     * Parses add contact command.
+     *
+     * @param fullCommand String to parse.
+     * @return AddContactCommand instance.
+     */
+    private static Command parseAddContactCommand(String fullCommand) {
+        String dataString = fullCommand.replaceFirst("addContact ", "");
+        String[] dataArr = dataString.split(" ");
+        String name = dataArr[0];
+        String telegram = dataArr[1];
+        return new AddContactCommand(name, telegram);
     }
 
 }
