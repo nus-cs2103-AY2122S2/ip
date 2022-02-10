@@ -71,7 +71,7 @@ public class Duke {
 
         while (true) {
             String inputText = scanner.nextLine().trim();
-            boolean parsedText = Parser.parseText(inputText, taskList, storage);
+            boolean parsedText = Parser.parseTextAndWillContinue(inputText, taskList, storage);
             if (!parsedText) { // bot should not parse anymore
                 scanner.close();
                 break;
