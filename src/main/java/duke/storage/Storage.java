@@ -18,6 +18,7 @@ import duke.tasklist.TaskList;
 public class Storage {
     /** The formatter to format the user entered date. */
     protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final String NEXT_ITEM_LINE = "*** Next Task ***";
     /** The file which stores the tasks in the task list. */
     private File file;
 
@@ -27,6 +28,7 @@ public class Storage {
      * @param filename THe file where the tasks in the tasks list is retrieved and stored.
      */
     public Storage(String filename) {
+        assert filename != null : "Filename is empty";
         this.file = new File(filename);
     }
 
@@ -49,8 +51,8 @@ public class Storage {
             String dateString = fileInput.nextLine();
             LocalDateTime date = null;
             // If the program finishes processing a task.
-            if (dateString.equals("*** Next Task ***")) {
-                dateString = null;
+            if (date.equals(NEXT_ITEM_LINE)) {
+                date = null;
             } else {
                 // Changes the date to the LocalDateFormat
                 date = LocalDateTime.parse(dateString, FORMATTER);

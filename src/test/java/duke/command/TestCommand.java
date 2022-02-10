@@ -32,7 +32,7 @@ public class TestCommand {
             Command cmd = Command.getCommand("Some", "random command");
             Assertions.fail();
         } catch (Exception e) {
-            Assertions.assertEquals("Sorry! I don't undestand what are you saying!", e.getMessage());
+            Assertions.assertEquals("Sorry! I don't understand what are you saying!", e.getMessage());
         }
     }
 
@@ -232,7 +232,7 @@ public class TestCommand {
             String result = cmd.run(tasks, storage);
             Assertions.fail();
         } catch (DukeExceptions e) {
-            Assertions.assertEquals("Are you tryng to add something to todo", e.getMessage());
+            Assertions.assertEquals("Are you trying to add something to Todo", e.getMessage());
         }
     }
 
@@ -292,7 +292,7 @@ public class TestCommand {
             String result = cmd.run(tasks, storage);
             Assertions.fail();
         } catch (DukeExceptions e) {
-            Assertions.assertEquals("Are you tryng to add something to deadline", e.getMessage());
+            Assertions.assertEquals("Are you trying to add something to Deadline", e.getMessage());
         }
     }
 
@@ -399,7 +399,7 @@ public class TestCommand {
             String result = cmd.run(tasks, storage);
             Assertions.fail();
         } catch (DukeExceptions e) {
-            Assertions.assertEquals("Are you tryng to add something to event", e.getMessage());
+            Assertions.assertEquals("Are you trying to add something to Event", e.getMessage());
         }
     }
 
