@@ -2,7 +2,8 @@ Here are the tasks in your list:
 1. [T][ ] watch movie
 2. [T][ ] wash shirt
 3. [T][ ] watch movie
-4. [D][ ] submit assignemnt (by: Feb 18 2022 11:59 PM)
-5. [D][ ] CS2103T assignment (by: Mar 23 2022 6:00 PM)
-6. [E][ ] dinner (at: Mar 04 2022 1:00 PM)
-7. [E][ ] movie night (at: May 30 2022 11:00 PM)
+4. [T][ ] wash car
+5. [D][ ] submit assignemnt (by: Feb 18 2022 11:59 PM)
+6. [D][ ] CS2103T assignment (by: Mar 23 2022 6:00 PM)
+7. [E][ ] dinner (at: Mar 04 2022 1:00 PM)
+8. [E][ ] movie night (at: May 30 2022 11:00 PM)

@@ -19,11 +19,10 @@ public class Event extends Task implements Comparable<Task> {
         super(description);
         this.dateAndTime = dateAndTime;
     }
-
     /**
-     * Returns a String representation of an Event task in the desired format.
-     *
-     * @return String representation.
+     * Compare tasks by task type and local date time.
+     * @param otherTask The task compared with.
+     * @return Returns -1,0,1.
      */
     @Override
     public int compareTo(Task otherTask) {
@@ -54,6 +53,11 @@ public class Event extends Task implements Comparable<Task> {
             return 0;
         }
     }
+    /**
+     * Returns a String representation of an Event task in the desired format.
+     *
+     * @return String representation.
+     */
     @Override
     public String toString() {
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(" MMM dd yyyy h:mm a");

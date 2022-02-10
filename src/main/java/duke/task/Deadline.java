@@ -20,6 +20,12 @@ public class Deadline extends Task implements Comparable<Task> {
         super(description);
         this.dateAndTime = dateAndTime;
     }
+
+    /**
+     * Compare tasks by task type and local date time.
+     * @param otherTask The task compared with.
+     * @return Returns -1,0,1.
+     */
     @Override
     public int compareTo(Task otherTask) {
         if (otherTask.getClass() != this.getClass()) {

@@ -117,6 +117,10 @@ public class List {
         }
         return new List(findTaskList);
     }
+    /**
+     * Sort the tasks in the task list by their task type.
+     * Also sorts deadline tasks and event tasks by their local date time.
+     */
     public void sort() {
         Collections.sort(this.getArrayList());
     }

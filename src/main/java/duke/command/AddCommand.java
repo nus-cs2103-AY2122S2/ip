@@ -15,36 +15,9 @@ public class AddCommand extends Command {
 
     private final TaskType taskType;
     private final String description;
-    private LocalDateTime localDateTime;
-
+    private final LocalDateTime localDateTime;
     /**
-     * Constructor for a AddCommand, specifically used for a Event Task.
-     *
-     * @param taskType TaskType of the Task to be added.
-     * @param description Description of the Task to be added.
-     * @param time Time the Task added occurs at.
-     */
-    /*public AddCommand(TaskType taskType, String description, String time) {
-        super(false);
-        this.taskType = taskType;
-        this.description = description;
-        this.time = time;
-    }*/
-
-    /**
-     * Constructor for a AddCommand, specifically used for a ToDo Task.
-     *
-     * @param taskType TaskType of the Task to be added.
-     * @param description Description of the Task to be added.
-     */
-    /*public AddCommand(TaskType taskType, String description) {
-        super(false);
-        this.taskType = taskType;
-        this.description = description;
-    } */
-
-    /**
-     * Constructor for a AddCommand, specifically used for a Deadline Task.
+     * Constructs an Add Command.
      *
      * @param taskType TaskType of the Task to be added.
      * @param description Description of the Task to be added.

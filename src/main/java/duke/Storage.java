@@ -23,7 +23,6 @@ import duke.task.ToDo;
 public class Storage {
 
     private File file;
-    private final String filePath;
     private final File directory;
 
     /**
@@ -31,8 +30,7 @@ public class Storage {
      * @param filePath Storage path of the file.
      */
     public Storage(String filePath) {
-        file = new File("data/duke.txt");
-        this.filePath = filePath;
+        file = new File(filePath);
         directory = new File("data");
         if (!directory.exists()) {
             directory.mkdirs();
