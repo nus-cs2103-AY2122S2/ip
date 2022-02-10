@@ -126,16 +126,18 @@ public class TaskList {
      * @throws FunBoxExceptions If date is not formatted in `yyyy-mm-dd`.
      * @return Returns a string to be displayed to the user.
      */
-
     public String filterTasks(String filterDate, TaskList taskList, Ui ui) throws FunBoxExceptions {
         LocalDate date;
         String result = "";
+
         try {
             date = LocalDate.parse(filterDate);
+
             ArrayList<Task> eventList = new ArrayList<>(taskList.getTaskList());
             ArrayList<Task> deadlineList = new ArrayList<>(taskList.getTaskList());
-            eventList.removeIf(task -> (task.type.contains("todo") || task.type.contains("deadline")));
-            deadlineList.removeIf(task -> (task.type.contains("todo") || task.type.contains("event")));
+
+            filterTaskList(eventList,"deadline");
+            filterTaskList(deadlineList, "event");
 
             int counter = 0;
             int eventSize = eventList.size();
@@ -146,15 +148,15 @@ public class TaskList {
                 Event temp = (Event) eventList.get(i);
                 if (temp.date.equals(date)) {
                     counter++;
-                    result += ui.printTask(counter, temp) + "\n";
+                    result += ui.printTask(counter, temp);
                 }
             }
 
             for (int i = 0; i < deadlineSize; i++) {
                 Deadline temp = (Deadline) deadlineList.get(i);
-                if (temp.getDate().equals(date)) {
+                if (temp.time.equals(date)) {
                     counter++;
-                    result += ui.printTask(counter, temp) + "\n";
+                    result += ui.printTask(counter, temp);
                 }
             }
 
@@ -167,6 +169,10 @@ public class TaskList {
         }
 
         return result;
+    }
+
+    private void filterTaskList(ArrayList<Task> tasks, String filter) {
+        tasks.removeIf(task -> (task.type.contains("todo") || task.type.contains(filter)));
     }
 
     /**

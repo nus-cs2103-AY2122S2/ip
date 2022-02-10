@@ -31,14 +31,22 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions, IOException {
-        String result = "";
         assert ui != null : "ui should not be null";
-        if ((index - 1) > taskList.getSize() || (index - 1) < 0) {
-            throw new FunBoxExceptions("Wrong index!");
-        } else {
-            result = taskList.delete(this.index - 1, ui);
-            storage.deleteTask(index);
+        String result = "";
+        boolean isGreaterThanList = (index - 1) > taskList.getSize();
+        boolean isNegative = (index - 1) < 0;
+
+        if (isGreaterThanList) {
+            throw new FunBoxExceptions("The index entered is larger than the list!");
         }
+
+        if (isNegative) {
+            throw new FunBoxExceptions("The index cannot be negative!");
+        }
+
+        result = taskList.delete(this.index - 1, ui);
+        storage.deleteTask(index);
+
         return result;
     }
 }

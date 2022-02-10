@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private LocalDate date;
-    private String time;
+    public LocalDate date;
+    public String time;
 
     /**
      * The constructor for the Deadline.
@@ -22,24 +22,6 @@ public class Deadline extends Task {
         super(description, type);
         this.date = date;
         this.time = time;
-    }
-
-    /**
-     * Return the time.
-     *
-     * @return Return the time.
-     */
-    public String getTime() {
-        return this.getTime();
-    }
-
-    /**
-     * Returns the local date.
-     *
-     * @return Returns the local date.
-     */
-    public LocalDate getDate() {
-        return this.date;
     }
 
     /**

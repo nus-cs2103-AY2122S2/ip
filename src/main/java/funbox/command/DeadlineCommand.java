@@ -7,6 +7,8 @@ import funbox.util.Storage;
 import funbox.util.Parser;
 import funbox.task.Deadline;
 
+import java.time.LocalDate;
+
 /**
  * Deal with handling command for Deadline.
  */
@@ -36,20 +38,24 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
-        String result = "";
+        String result;
         assert ui != null : "ui should not be null";
         assert storage != null : "ui should not be null";
         if (description.equals("")) {
-            throw new FunBoxExceptions("`deadline` command is missing a field!");
-        } else {
-            String[] resultArr = this.parser.getDescriptionAndDate(this.description, "deadline");
-            Deadline deadline = new Deadline(resultArr[0],
-                    parser.stringToLocalDate(resultArr[1]),
-                    parser.getTime(resultArr[1]), "deadline");
-            taskList.add(deadline);
-            storage.writeTaskToStorage(deadline, ui);
-            result = "Got it. I've added this task:" + "\n" + ui.printTask(taskList.getSize(), deadline);
+            throw new FunBoxExceptions("`deadline` command usage: deadline <task> /by <date> <time>");
         }
+
+        String[] resultArr = this.parser.getDescAndDate(this.description, "deadline");
+
+        LocalDate date = parser.stringToLocalDate(resultArr[1]);
+        String time = parser.getTime(resultArr[1]);
+
+        Deadline deadline = new Deadline(resultArr[0], date, time,"deadline");
+        taskList.add(deadline);
+
+        result = ui.taskPrefix().concat(ui.printTask(taskList.getSize(), deadline));
+        storage.writeTaskToStorage(deadline);
+
         return result;
     }
 }

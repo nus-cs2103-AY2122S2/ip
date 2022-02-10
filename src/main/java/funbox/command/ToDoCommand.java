@@ -33,18 +33,20 @@ public class ToDoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
-        String result = "";
+        String result;
         assert ui != null : "ui should not be null";
         assert storage != null : "ui should not be null";
-        if (description.equals("")) {
-            throw new FunBoxExceptions("`todo` command is missing a field!");
-        } else {
-            ToDo todo = new ToDo(this.description, "todo");
-            taskList.add(todo);
 
-            result = "Got it. I've added this task:" + "\n" + ui.printTask(taskList.getSize(), todo);
-            storage.writeTaskToStorage(todo, ui);
+        if (description.equals("")) {
+            throw new FunBoxExceptions("`todo` command usage: todo <task>");
         }
+
+        ToDo todo = new ToDo(description, "todo");
+        taskList.add(todo);
+
+        result = ui.taskPrefix().concat(ui.printTask(taskList.getSize(), todo));
+        storage.writeTaskToStorage(todo);
+
         return result;
     }
 }
