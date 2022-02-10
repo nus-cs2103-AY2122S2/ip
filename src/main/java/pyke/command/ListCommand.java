@@ -21,6 +21,7 @@ public class ListCommand extends Command{
                 outputText = outputText.concat(i + "." + taskList.getTaskOutputStyle(i - 1));
                 if (i != taskList.getSize()) outputText = outputText.concat("\n");
             }
+            assert outputText != null;
             ui.outputText(outputText);
         }
     }
@@ -35,6 +36,7 @@ public class ListCommand extends Command{
                 outputText = outputText.concat(i + "." + taskList.getTaskOutputStyle(i - 1));
                 if (i != taskList.getSize()) outputText = outputText.concat("\n");
             }
+            assert outputText != null;
             return ui.outputUiText(outputText);
         }
     }
