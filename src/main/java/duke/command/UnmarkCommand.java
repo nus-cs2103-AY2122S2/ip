@@ -31,12 +31,14 @@ public class UnmarkCommand extends Command {
                 throw new InvalidArgumentException(Messages.UNKNOWN_UNMARK);
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
-            if (taskNumber > tasks.getSize() || taskNumber <= 0) {
+            if (tasks.isOutOfBounds(taskNumber)) {
                 throw new OutOfBoundsException(Messages.getOutOfBoundsMsg(taskNumber));
             }
             tasks.get(taskNumber - 1).markAsUndone();
+
             output = Ui.append(output, Messages.UNMARK_SUCCESS);
             output = Ui.append(output, tasks.getTaskStatement(taskNumber - 1));
+
             storage.save(tasks);
         } catch (OutOfBoundsException | InvalidArgumentException e) {
             output = ui.showError(e.getMessage());

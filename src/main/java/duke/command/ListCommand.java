@@ -18,7 +18,7 @@ public class ListCommand extends Command {
         String output = "";
         output = Ui.append(output, Messages.LIST_MSG);
         for (int i = 0; i < tasks.getSize(); i++) {
-            output = Ui.append(output, i + 1 + "." + tasks.getTaskStatement(i));
+            output = Ui.append(output, i + 1 + ". " + tasks.getTaskStatement(i));
         }
         return output;
     }
