@@ -197,7 +197,8 @@ public abstract class Task {
         }
 
         for (int i = 0; i < foundCount; i++) {
-            System.out.println("   " + (i + 1) + "." + taskList.get(foundIndexes[i]).toString());
+            System.out.println("   " + (i + 1) + "."
+                    + taskList.get(foundIndexes[i]).toString());
         }
     }
 
