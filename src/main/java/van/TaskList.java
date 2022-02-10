@@ -35,4 +35,12 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return tasks;
     }
+
+    public void addTag(int taskNumber, String newTag) {
+        this.tasks.get(taskNumber - 1).addTag(newTag);
+    }
+
+    public void deleteTag(int taskNumber, String newTag) {
+        this.tasks.get(taskNumber - 1).deleteTag(newTag);
+    }
 }

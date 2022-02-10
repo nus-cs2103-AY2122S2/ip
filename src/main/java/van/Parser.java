@@ -35,6 +35,12 @@ public class Parser {
         case "find":
             output = caseFind(parameters);
             break;
+        case "tag":
+            output = caseTag(parameters);
+            break;
+        case "untag":
+            output = caseUnTag(parameters);
+            break;
         case "bye":
             output = new ExitCommand();
             break;
@@ -52,26 +58,36 @@ public class Parser {
         if (taskList != null) {
             for (int i = 0; i < taskList.size(); i++) {
                 String fileLine = taskList.get(i);
-                String[] taskDetail = fileLine.split("\\|");
-                switch (taskDetail[0]) {
+                String[] taskDetails = fileLine.split("\\|");
+                switch (taskDetails[0]) {
                 case "E":
-                    date = LocalDateTime.parse(taskDetail[3], dateFormat);
-                    tasks.add(new Event(taskDetail[2], date));
+                    date = LocalDateTime.parse(taskDetails[3], dateFormat);
+                    tasks.add(new Event(taskDetails[2], date));
+                    addTags(tasks.get(i), taskDetails[4]);
                     break;
                 case "D":
-                    date = LocalDateTime.parse(taskDetail[3], dateFormat);
-                    tasks.add(new Deadline(taskDetail[2], date));
+                    date = LocalDateTime.parse(taskDetails[3], dateFormat);
+                    tasks.add(new Deadline(taskDetails[2], date));
+                    addTags(tasks.get(i), taskDetails[4]);
                     break;
                 case "T":
-                    tasks.add(new ToDo(taskDetail[2]));
+                    tasks.add(new ToDo(taskDetails[2]));
+                    addTags(tasks.get(i), taskDetails[3]);
                     break;
                 }
-                if (taskDetail[1].equals("1")) {
+                if (taskDetails[1].equals("1")) {
                     tasks.get(i).setDone();
                 }
             }
         }
         return tasks;
+    }
+
+    public static void addTags(Task task, String tag) {
+        String[] tags = tag.split(" #");
+        for (int i = 1; i < tags.length; i++) {
+            task.addTag(tags[i]);
+        }
     }
 
     public static String[] parseDescription(Task task) {
@@ -185,6 +201,44 @@ public class Parser {
                 throw new VanException("Invalid format. Please use find <keyword>");
             }
             return new FindCommand(parameters[1]);
+        } catch(VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
+    }
+
+    private static Command caseTag(String[] parameters) {
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use tag <task number> #<tag>");
+            }
+            String[] taskArguments = parameters[1].split(" #");
+            if (taskArguments.length != 2) {
+                throw new VanException("Invalid format. Please use tag <task number> #<tag>");
+            }
+            try {
+                return new TagCommand(true, Integer.parseInt(taskArguments[0]), taskArguments[1]);
+            } catch (NumberFormatException ex) {
+                return new InvalidCommand("Please use integers e.g. 1, 2");
+            }
+        } catch(VanException ex) {
+            return new InvalidCommand(ex.getError());
+        }
+    }
+
+    private static Command caseUnTag(String[] parameters) {
+        try {
+            if (parameters.length != 2) {
+                throw new VanException("Invalid format. Please use untag <task number> #<tag>");
+            }
+            String[] taskArguments = parameters[1].split(" #");
+            if (taskArguments.length != 2) {
+                throw new VanException("Invalid format. Please use untag <task number> #<tag>");
+            }
+            try {
+                return new TagCommand(false, Integer.parseInt(taskArguments[0]), taskArguments[1]);
+            } catch (NumberFormatException ex) {
+                return new InvalidCommand("Please use integers e.g. 1, 2");
+            }
         } catch(VanException ex) {
             return new InvalidCommand(ex.getError());
         }

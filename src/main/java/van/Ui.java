@@ -15,7 +15,17 @@ public class Ui {
     }
 
     public void invalidMessage(String message) {
+        builder.setLength(0);
         builder.append(message);
+    }
+
+    public void tagMessage(boolean isAddTag) {
+        builder.setLength(0);
+        if (isAddTag) {
+            builder.append("tag added\n");
+        } else {
+            builder.append("tag deleted\n");
+        }
     }
 
     public void taskMessage(Task task, int count) {
@@ -27,7 +37,7 @@ public class Ui {
 
     public void markMessage() {
         builder.setLength(0);
-        builder.append("Changed task status");
+        builder.append("Changed task status\n");
     }
 
     public void printList(ArrayList<Task> taskList) {

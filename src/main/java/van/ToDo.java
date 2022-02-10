@@ -22,7 +22,7 @@ public class ToDo extends Task {
      */
     @Override
     public String getStatus() {
-        return "[T]" + super.getStatus();
+        return "[T]" + super.getStatus() + " " + tag.toString();
     }
 
     /**
@@ -33,6 +33,7 @@ public class ToDo extends Task {
      */
     @Override
     public String saveStatus() {
-        return "T|" + super.getCompletion() + "|" + description;
+        return "T|" + super.getCompletion() + "|" + description +
+          "| " + tag.toString();
     }
 }

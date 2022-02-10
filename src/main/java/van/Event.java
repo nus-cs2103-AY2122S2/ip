@@ -31,7 +31,8 @@ public class Event extends Task {
     @Override
     public String saveStatus() {
         return "E|" + super.getCompletion() + "|" + description + "|" +
-          date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+          date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) +
+          "| " + tag.toString();
     }
 
     /**
@@ -43,6 +44,7 @@ public class Event extends Task {
     @Override
     public String getStatus() {
         return "[E]" + super.getStatus() + " (at:" +
-          date.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
+          date.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ") " +
+          tag.toString();
     }
 }

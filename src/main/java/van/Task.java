@@ -6,6 +6,7 @@ package van;
 public class Task {
     protected String description;
     protected boolean done;
+    protected Tag tag;
 
     /**
      * Creates a Task object that encapsulates the description of the
@@ -16,6 +17,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.done = false;
+        this.tag = new Tag();
     }
 
     /**
@@ -67,5 +69,13 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    public void addTag(String newTag) {
+        tag.add(newTag);
+    }
+
+    public void deleteTag(String newTag) {
+        tag.delete(newTag);
     }
 }
