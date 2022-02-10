@@ -1,7 +1,7 @@
-import duke.exception.ChiException;
-import duke.parser.Parser;
-import duke.storage.StorageStub;
-import duke.tasklist.TaskListStub;
+import chibot.exception.ChiException;
+import chibot.parser.Parser;
+import chibot.storage.StorageStub;
+import chibot.tasklist.TaskListStub;
 
 import org.junit.jupiter.api.Test;
 
