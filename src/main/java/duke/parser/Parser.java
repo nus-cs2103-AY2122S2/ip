@@ -43,7 +43,7 @@ public class Parser {
         case "unmark":
             return prepareUnMark(input);
         case "todo":
-            return prepareAddTodo(input);
+            return prepareAddToDo(input);
         case "deadline":
             return prepareAddDeadline(input);
         case "event":
