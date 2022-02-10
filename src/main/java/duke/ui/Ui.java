@@ -42,6 +42,7 @@ public class Ui {
      * @return a String containing the latest retrieved task data.
      */
     public String showLoadedData(TaskList taskList) {
+        assert taskList.getLength() >= 0 : "taskList.getLength() should return an int not less than 0";
         if (taskList.getLength() != 0) {
             return "I've retrieved your latest task list data\n" + showTaskList(taskList);
         }
@@ -86,6 +87,7 @@ public class Ui {
      * @return a message from duke to show a task was added.
      */
     public String showTaskAdded(Task task, TaskList taskList) {
+        assert taskList.getLength() >= 0 : "taskList.getLength() should return an int not less than 0";
         return "Got it. I've added this task:\n" + task
                 + "\nNow you have " + taskList.getLength() + " tasks in the list.";
     }
@@ -118,6 +120,8 @@ public class Ui {
      * @return a message from duke to show a task was deleted.
      */
     public String showTaskDeleted(Task task, TaskList taskList) {
+        assert taskList.getLength() >= 0 : "taskList.getLength() should return an int not less than 0";
+
         return "Noted. I've removed this task:\n" + task
                 + "\nNow you have " + taskList.getLength() + " tasks in the list.";
     }

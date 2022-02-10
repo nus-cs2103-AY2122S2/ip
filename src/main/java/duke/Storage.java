@@ -68,19 +68,32 @@ public class Storage {
                 taskList.addTask(new Todo(currTask[2]));
                 break;
             case DEADLINE_IDENTIFIER:
-                taskList.addTask(new Deadline(currTask[2], LocalDate.parse(currTask[3])));
+                LocalDate deadlineDate = LocalDate.parse(currTask[3]);
+                assert deadlineDate != null : "deadlineDate cannot be null";
+                taskList.addTask(new Deadline(currTask[2], deadlineDate));
                 break;
             case EVENT_IDENTIFIER:
-                taskList.addTask(new Event(currTask[2], LocalDate.parse(currTask[3])));
+                LocalDate eventDate = LocalDate.parse(currTask[3]);
+                assert eventDate != null : "eventDate cannot be null";
+                taskList.addTask(new Event(currTask[2], eventDate));
                 break;
             default:
                 throw new DukeException
-                        (String.format("txt file supplied has unknown character %s", currTask[0]));
+                        (String.format("txt file supplied has unknown character %s ", currTask[0]));
             }
             if (currTask[1].equals(TASK_DONE)) {
-                taskList.getTask(taskList.getLength()).markAsDone();
+                markLatestTaskDone(taskList);
             }
         }
+    }
+
+    private void markLatestTaskDone(TaskList taskList) {
+        assert taskList.getLength() >= 0 : "taskList.getLength should return an int not less than 0";
+
+        Task task = taskList.getTask(taskList.getLength());
+        assert task != null : "task retrieved from taskList cannot be null";
+
+        task.markAsDone();
     }
 
     /**
@@ -104,16 +117,23 @@ public class Storage {
         StringBuilder tasksToSave = new StringBuilder();
         for (int i = 1; i < taskList.getLength()+1; i++) {
             Task currTask = taskList.getTask(i);
+            assert currTask != null : "task retrieved from taskList cannot be null";
+
+            String description = currTask.getDescription();
+            assert description != null : "description should not be null";
+            assert description.strip() != "" : "description should not be an empty String or have whitespace only";
+
             String done = currTask.isDone()
                           ? TASK_DONE + DELIMITER
                           : TASK_NOT_DONE + DELIMITER;
+
             if (currTask instanceof Todo) {
-                tasksToSave.append(TODO_IDENTIFIER).append(DELIMITER).append(done).append(currTask.getDescription());
+                tasksToSave.append(TODO_IDENTIFIER).append(DELIMITER).append(done).append(description);
             } else if (currTask instanceof Deadline) {
-                tasksToSave.append(DEADLINE_IDENTIFIER).append(DELIMITER).append(done).append(currTask.getDescription())
+                tasksToSave.append(DEADLINE_IDENTIFIER).append(DELIMITER).append(done).append(description)
                         .append(DELIMITER).append(((Deadline) currTask).getDeadline());
             } else if (currTask instanceof Event) {
-                tasksToSave.append(EVENT_IDENTIFIER).append(DELIMITER).append(done).append(currTask.getDescription())
+                tasksToSave.append(EVENT_IDENTIFIER).append(DELIMITER).append(done).append(description)
                         .append(DELIMITER).append(((Event) currTask).getStartTime());
             } else {
                 throw new DukeException("Unable to save unknown task type");

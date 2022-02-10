@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Storage;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -36,7 +37,7 @@ public abstract class Command {
     protected String saveData(TaskList taskList, Ui ui, Storage storage) {
         try {
             storage.saveData(taskList);
-        } catch (duke.exception.DukeException e) {
+        } catch (DukeException e) {
             return ui.showSavingError(e.getMessage());
         }
         return "";

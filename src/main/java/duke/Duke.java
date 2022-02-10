@@ -61,6 +61,8 @@ public class Duke {
     public String getResponse(String userInput) {
         try {
             Command command = Parser.parse(userInput, taskList.getLength());
+            assert command != null : "command cannot be null";
+
             isExit = command.isExit();
             return command.execute(taskList, ui, storage);
         } catch (DukeException e) {
