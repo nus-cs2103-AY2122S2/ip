@@ -11,7 +11,7 @@ import angela.util.Ui;
  * Finds task that match with specific keyword
  */
 public class FindTaskCommand extends Command {
-    private String keyWord;
+    private final String keyWord;
 
     public FindTaskCommand(String keyWord) {
         this.keyWord = keyWord;

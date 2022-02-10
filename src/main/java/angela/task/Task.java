@@ -7,6 +7,10 @@ import java.time.format.DateTimeFormatter;
  * Stores the information about the task
  */
 public class Task {
+    private static final String MARK_TASK = " Nice! I've marked this task as done: " + "\n" + "  ";
+    private static final String UNMARK_TASK = " OK, I've marked this task as not done yet: " + "\n" + "  ";
+    private static final String DATABASE_DATE_FORMAT = "d/M/yyyy";
+    private static final String DISPLAY_DATE_FORMAT = "MMM d yyyy";
     private final String description;
     private boolean isComplete;
     private final String type;
@@ -43,7 +47,7 @@ public class Task {
             command = description.indexOf(" ", slashIndex);
             String timeString = description.substring(command + 1);
             this.time = LocalDate.parse(timeString,
-                    DateTimeFormatter.ofPattern("d/M/yyyy"));
+                    DateTimeFormatter.ofPattern(DATABASE_DATE_FORMAT));
             this.timeCommand = description.substring(slashIndex + 1, command);
         } else {
             slashIndex = description.length();
@@ -54,17 +58,18 @@ public class Task {
     }
 
     /**
-     * Changes the task state to become completed
+     * Changes status of the task
+     *
+     * @param isComplete New status of the task
+     * @return String represent the changed status
      */
-    public void changeTaskDone() {
-        this.isComplete = true;
-    }
-
-    /**
-     * Changes the task state to become uncompleted
-     */
-    public void changeTaskUndone() {
-        this.isComplete = false;
+    public String changeTaskStatus(boolean isComplete) {
+        this.isComplete = isComplete;
+        if (isComplete) {
+            return MARK_TASK + this;
+        } else {
+            return UNMARK_TASK + this;
+        }
     }
 
     /**
@@ -73,31 +78,9 @@ public class Task {
      * @return The string with the database file format
      */
     public String createTextDatabase() {
-        String done = "";
-        String timeDue = "";
-
-        if (isComplete) {
-            done = "1";
-        } else {
-            done = "0";
-        }
-
-        if (this.timeCommand.equals("")) {
-            timeDue = " |";
-        } else {
-            timeDue = "| " + timeCommand + " "
-                    + this.time.format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " |";
-        }
-
-        return "| " + type + " | " + done + " | " + description + timeDue;
-    }
-
-    public LocalDate getTime() {
-        return this.time;
-    }
-
-    public String getType() {
-        return this.type;
+        String done = createStatus(true);
+        String timeDue = createTimeDue(true);
+        return mergeTextDatabase(done, timeDue, true);
     }
 
     /**
@@ -107,17 +90,111 @@ public class Task {
      */
     @Override
     public String toString() {
-        String bracketString = "[ ]";
-        String timeCommandString = "";
+        String bracketString = createStatus(false);
+        String timeCommandString = createTimeDue(false);
+        return mergeTextDatabase(bracketString, timeCommandString, false);
+    }
 
-        if (isComplete) {
-            bracketString = "[X]";
+    /**
+     * Returns the string represent the status of task
+     *
+     * @return The string represent the status
+     */
+    private String createStatus(boolean isDatabase) {
+        if (isDatabase) {
+            return createStatusDatabase();
+        } else {
+            return createStatusDisplay();
         }
+    }
 
+    /**
+     * Returns the string represent the status of task for database file
+     *
+     * @return The string represent the status for the database file
+     */
+    private String createStatusDatabase() {
+        if (isComplete) {
+            return "1";
+        } else {
+            return "0";
+        }
+    }
+
+    /**
+     * Returns the string represent the status of task for GUI display
+     *
+     * @return The string represent the status for GUI display
+     */
+    private String createStatusDisplay() {
+        if (isComplete) {
+            return "[X]";
+        } else {
+            return "[ ]";
+        }
+    }
+
+    /**
+     * Returns the string represent due time of task
+     *
+     * @return The string represent the time
+     */
+    private String createTimeDue(boolean isDatabase) {
+        if (isDatabase) {
+            return createTimeDueDatabase();
+        } else {
+            return createTimeDueDisplay();
+        }
+    }
+
+    /**
+     * Returns the string represent due time of task for database file
+     *
+     * @return The string represent the time for database file
+     */
+    private String createTimeDueDatabase() {
+        if (this.timeCommand.equals("")) {
+            return " |";
+        } else {
+            return "| " + timeCommand + " "
+                    + this.time.format(DateTimeFormatter.ofPattern(DATABASE_DATE_FORMAT)) + " |";
+        }
+    }
+
+    /**
+     * Returns the string represent due time of task for GUI display
+     *
+     * @return The string represent the time for GUI display
+     */
+    private String createTimeDueDisplay() {
+        String timeCommandString = "";
         if (!this.timeCommand.equals("")) {
             timeCommandString = "(" + this.timeCommand + ": "
-                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                    + time.format(DateTimeFormatter.ofPattern(DISPLAY_DATE_FORMAT)) + ")";
         }
-        return "[" + type + "]" + bracketString + " " + description + timeCommandString;
+        return timeCommandString;
+    }
+
+    /**
+     * Returns the string from merging two status and time due of the task
+     *
+     * @param done Status of the task
+     * @param timeDue Time due of the task
+     * @return The string from merging them together
+     */
+    private String mergeTextDatabase(String done, String timeDue, boolean isDatabase) {
+        if (isDatabase) {
+            return "| " + type + " | " + done + " | " + description + timeDue;
+        } else {
+            return "[" + type + "]" + done + " " + description + timeDue;
+        }
+    }
+
+    public LocalDate getTime() {
+        return this.time;
+    }
+
+    public String getType() {
+        return this.type;
     }
 }
