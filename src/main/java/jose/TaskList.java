@@ -28,12 +28,11 @@ public class TaskList {
      */
     public TaskList(ArrayList<String> arr) {
         tasks = new ArrayList<>();
-        String[] task;
-        boolean isDone;
 
         for (String s : arr) {
-            task = s.split("\\|");
-            isDone = task[1].equals("1");
+            String[] task = s.split("\\|");
+            boolean isDone = task[1].equals("1");
+            
             if (task[0].equals("T")) {
                 tasks.add(new ToDo(task[2], isDone));
             } else if (task[0].equals("D")) {

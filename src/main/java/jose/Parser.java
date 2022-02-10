@@ -26,6 +26,7 @@ public class Parser {
         } else {
             String[] task = input.split(" ");
             String command = task[0];
+            
             switch (command) {
             case "mark":
                 return Command.MARK;
