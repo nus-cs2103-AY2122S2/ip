@@ -98,4 +98,21 @@ public class TaskList {
     public boolean isTaskInList(int i) {
         return 0 < i & i <= tasks.size();
     }
+
+    /**
+     * Checks if a task with the same title as the given tasks already exists.
+     *
+     * @param task The given task.
+     * @return True if the task is a duplicate and false otherwise.
+     */
+    public boolean isDuplicateTask(Task task) {
+        String title = task.getTitle();
+
+        for (Task t : tasks) {
+            if (t.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

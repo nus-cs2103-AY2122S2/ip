@@ -40,6 +40,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("d/M/yy HH:mm");
-        return "[E]" + super.toString() + "(at: " + formatter.format(time) + ")";
+        return "[E]" + super.toString() + " (at: " + formatter.format(time) + ")";
     }
 }

@@ -180,7 +180,7 @@ public class Parser {
      */
     public static AddCommand parseAddEventCommand(String[] segments) throws DukeException {
         if (hasTwoArguments(segments)) {
-            String[] taskArguments = segments[1].split("/at", 2);
+            String[] taskArguments = segments[1].split(" /at", 2);
             if (!taskArguments[0].isBlank() && hasTwoArguments(taskArguments)) {
                 String title = taskArguments[0];
                 try {
@@ -208,7 +208,7 @@ public class Parser {
      */
     public static AddCommand parseAddDeadlineCommand(String[] segments) throws DukeException {
         if (hasTwoArguments(segments)) {
-            String[] taskArguments = segments[1].split("/by", 2);
+            String[] taskArguments = segments[1].split(" /by", 2);
             if (!taskArguments[0].isBlank() && hasTwoArguments(taskArguments)) {
                 String title = taskArguments[0];
                 try {

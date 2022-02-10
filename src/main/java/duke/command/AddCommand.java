@@ -32,9 +32,15 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FileSaveException {
+        boolean isDuplicateTask = taskList.isDuplicateTask(this.task);
         taskList.addTask(task);
         storage.write(taskList.getTasks());
 
-        return ui.displayAddedTask(task) + "\n" + ui.displayNumberOfTasks(taskList.getTasks());
+        if (isDuplicateTask) {
+            return "FYI, there is already a task with that name in your list."
+                    + "\n" + ui.displayAddedTask(task) + "\n" + ui.displayNumberOfTasks(taskList.getTasks());
+        } else {
+            return ui.displayAddedTask(task) + "\n" + ui.displayNumberOfTasks(taskList.getTasks());
+        }
     }
 }

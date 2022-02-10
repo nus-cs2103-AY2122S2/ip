@@ -142,7 +142,7 @@ public class Storage {
         boolean isComplete = getTaskStatus(task);
         String description = getTaskDescription(task);
 
-        String[] segments = description.split("\\(by:");
+        String[] segments = description.split(" \\(by:");
         String title = segments[0];
         Date time = parseTimeFromString(segments[1].substring(0, segments[1].length() - 1));
 
@@ -160,7 +160,7 @@ public class Storage {
         boolean isComplete = getTaskStatus(task);
         String description = getTaskDescription(task);
 
-        String[] segments = description.split("\\(at:");
+        String[] segments = description.split(" \\(at:");
         String title = segments[0];
         Date time = parseTimeFromString(segments[1].substring(0, segments[1].length() - 1));
 
