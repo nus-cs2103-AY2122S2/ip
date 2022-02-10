@@ -96,16 +96,20 @@ public class Duke {
     }
 
     public Task createTodo(String input) {
-        return new ToDo(input.split(" ", 2)[1]);
+        String taskInfo[] = input.split(" ", 2);
+        assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
+        return new ToDo(taskInfo[1]);
     }
 
     public Task createDeadline(String input) {
         String[] taskInfo = input.split(" ", 2)[1].split(" /by ");
+        assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
         return new Deadline(taskInfo[0], taskInfo[1]);
     }
 
     public Task createEvent(String input) {
         String[] taskInfo = input.split(" ", 2)[1].split(" /at ");
+        assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
         return new Event(taskInfo[0], taskInfo[1]);
     }
 }
