@@ -81,18 +81,26 @@ public class TaskList {
 
     /**
      * Prints out all the tasks in the task list and their index.
+     * @return task list as a string
      */
-    public void list() {
+    public String list() {
+        String listString = "";
+        
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + "." + tasks.get(i - 1).toString());
+            String listElement = i + "." + tasks.get(i - 1).toString();
+
+            listString = listString + listElement + System.lineSeparator();
         }
+
+        return listString;
     }
     
     /**
      * Prints out all the tasks in the task list that contains the keyword.
      * @param keyword keyword to be contained by the tasks
+     * @return result as a string
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         ArrayList<Task> searchResults = new ArrayList<>();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -101,12 +109,16 @@ public class TaskList {
             }
         }
 
-        System.out.println("Here are the matching tasks in your list:");
+        String searchResultString = "";
+
+        searchResultString = searchResultString + "Here are the matching tasks in your list:" + System.lineSeparator();
         for (int j = 1; j <= searchResults.size(); j++) {
-            System.out.println(j + ". " + searchResults.get(j - 1).toString());
+            String result = j + ". " + searchResults.get(j - 1).toString();
+            searchResultString = searchResultString + result + System.lineSeparator();
         }
+
+        return searchResultString;
     }
-    
     /**
      * Marks the task indexed by the index as done.
      * @param index the index of the task that is to be marked as done

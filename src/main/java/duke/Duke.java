@@ -1,56 +1,58 @@
 package duke;
 
 import duke.command.Command;
-
 /**
  * Duke class is the main class of the program.
  */
 public class Duke {
+    private static String FILE_PATH = ".\\src\\main\\java\\duke\\data\\duke.txt";
     private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private TaskList tasks = new TaskList();
 
     /**
      * Constructor of Duke that takes in a file path specifying the location of the
      * storage file.
      * @param filePath file path specifying the location of the storage file
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke() {
+        storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            tasks = new TaskList();
         }
     }
 
     /**
      * Initiates the program and outlines the operation backbone of the program.
      */
-    public void run() {
-        ui.welcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
+    // public void run() {
+    //     ui.welcome();
+    //     boolean isExit = false;
+    //     while (!isExit) {
+    //         try {
+    //             String fullCommand = ui.readCommand();
+    //             ui.showLine(); // show the divider line ("_______")
+    //             Command c = Parser.parse(fullCommand);
+    //             c.execute(tasks, ui, storage);
+    //             isExit = c.isExit();
+    //         } catch (DukeException e) {
+    //             ui.showError(e.getMessage());
+    //         } finally {
+    //             ui.showLine();
+    //         }
+    //     }
+    // }
 
-    /**
-     * Runs the Duke program.
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke("./src/main/java/duke/data/duke.txt").run();
+    public String getResponse(String fullCommand) throws DukeException {
+        Command c;
+        try {
+            c = Parser.parse(fullCommand);
+            String response = c.execute(tasks, storage);
+            
+            return response;
+        } catch (DukeException e) {
+            return Ui.showError(e.getMessage());
+        }
+
     }
 }

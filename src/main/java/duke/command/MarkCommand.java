@@ -29,10 +29,10 @@ public class MarkCommand extends Command {
      * @param storage storage instance local to user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task markedTask = tasks.mark(index);
         storage.updateAfterMark(index);
-        ui.markMessage(markedTask);
+        return Ui.markMessage(markedTask);
     }
 
     /**

@@ -38,7 +38,7 @@ public class AddCommand extends Command {
      * @param storage storage instance local to user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         switch (type) {
         case "T":
             task = new ToDo(description);
@@ -55,7 +55,8 @@ public class AddCommand extends Command {
 
         tasks.add(task);
         storage.updateAfterAdd(task);
-        ui.addMessage(task, tasks.getNumberOfTasks());
+        
+        return Ui.addMessage(task, tasks.getNumberOfTasks());
     }
 
     /**

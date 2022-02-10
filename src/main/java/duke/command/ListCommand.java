@@ -18,8 +18,8 @@ public class ListCommand extends Command {
      * @param storage storage instance local to user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.list();
+    public String execute(TaskList tasks, Storage storage) {
+        return tasks.list();
     }
 
     /**

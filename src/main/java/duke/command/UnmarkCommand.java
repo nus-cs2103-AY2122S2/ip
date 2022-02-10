@@ -29,10 +29,10 @@ public class UnmarkCommand extends Command {
      * @param storage storage instance local to user
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task unmarkedTask = tasks.unmark(index);
         storage.updateAfterUnmark(index);
-        ui.unmarkMessage(unmarkedTask);
+        return Ui.unmarkMessage(unmarkedTask);
     }
 
     /**

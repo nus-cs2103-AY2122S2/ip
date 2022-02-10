@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * Command is an abstract class that specifies 2 methods that has to be
@@ -13,5 +12,5 @@ public abstract class Command {
 
     public abstract boolean isExit();
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 }
