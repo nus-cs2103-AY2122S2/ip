@@ -34,6 +34,7 @@ public class TaskList {
      * @see WriteToFile
      * @see Task
      */
+<<<<<<< Updated upstream
     public void listTasks() {
         Tasks = writeToFile.toRead();
 
@@ -46,6 +47,22 @@ public class TaskList {
             }
         }
         System.out.println("");
+=======
+    public String listTasks() {
+        ListTaskCommand listTasks = new ListTaskCommand(tasks, writeToFile);
+        listTasks.getTaskList();
+
+        return listTasks.toString();
+    }
+
+    /**
+     * Prints out exit message.
+     *
+     * return exit message
+     */
+    public String exitChatCat() {
+        return "Bye. Hope to see you again soon!";
+>>>>>>> Stashed changes
     }
 
     /**
