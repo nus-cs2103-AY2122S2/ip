@@ -47,6 +47,8 @@ public class Storage {
             System.out.println("Info: Save file found.\n");
         }
 
+        assert file.exists(): "No save file exists at all";
+
         try {
             Scanner sc = new Scanner(FILE);
             ArrayList<Task> tasks = new ArrayList<>();

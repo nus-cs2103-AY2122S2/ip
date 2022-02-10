@@ -58,6 +58,7 @@ public class Parser {
         if (cmds.length == 2) {
             cmd.input(cmds[1].trim());
         } else {
+            assert cmds.length == 1: "Array not suppose to contain 2 items";
             cmd.input("");
         }
 
