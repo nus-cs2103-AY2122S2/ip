@@ -72,46 +72,29 @@ public class TaskList {
     }
 
     /**
-     * Method to find a task that matches with the string. 
+     * Method to find any matching task name.
      * 
-     * @param taskName is the string to be matched with. 
-     * @param ui is the user interface of McBot. 
+     * @param taskName name to be searched for.
+     * @return the task if any task matches found.
      */
-    public void find(String taskName, Ui ui) {
-        boolean anyMatch = false;
-        boolean isHeaderPrinted = false;
-        for (Task t : taskList) {
-            if (t.getTaskName().contains(taskName)) {
-                anyMatch = true;
-                if (!isHeaderPrinted && anyMatch) {
-                    ui.printFind();
-                    isHeaderPrinted = true;
-                }
-                ui.printTask(t);
-            }
-        }
-        if (!anyMatch) {
-            ui.noMatch();
-        }
-    }
-
-    public String find(String taskName, Gui gui) {
-        boolean anyMatch = false;
-        boolean isHeaderPrinted = false;
+    public String find(String taskName) {
         StringBuilder sb = new StringBuilder();
+        boolean isFirst = true;
+        boolean anyMatch = false;
         for (Task t : taskList) {
-            if (t.getTaskName().contains(taskName)) {
+            boolean isTaskFound = t.getTaskName().contains(taskName);
+            if (isTaskFound && isFirst) {
+                sb.append("I'ave found this: \n");
+                isFirst = false;
                 anyMatch = true;
-                if (!isHeaderPrinted && anyMatch) {
-                    sb.append(gui.printFind() + "\n");
-                    isHeaderPrinted = true;
-                }
-                sb.append(gui.printTask(t) + "\n");
+            } else if (isTaskFound) {
+                sb.append(t + "\n");
             }
         }
         if (!anyMatch) {
-            return gui.noMatch();
+            return "No matching task found, sorry mate";
+        } else {
+            return sb.toString();
         }
-        return sb.toString();
     }
 }

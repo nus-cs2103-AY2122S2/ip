@@ -72,8 +72,12 @@ public class Parser {
      * 
      * @return the string of deadline task name.
      */
-    public String getDeadlineTask() {
-        return fullCommand.split(" ", 2)[1].split(" /by ")[0];
+    public String getDeadlineTask() throws InvalidCommandException {
+        String taskName = fullCommand.split(" ", 2)[1].split(" /by ")[0];
+        if (taskName.isBlank()) {
+            throw new InvalidCommandException("you can't leave your deadline task empty");
+        }
+        return taskName;
     }
 
     /**
@@ -81,8 +85,12 @@ public class Parser {
      *
      * @return the string of deadline task date.
      */
-    public String getDeadlineDate() {
-        return fullCommand.split(" ", 2)[1].split(" /by ")[1].split(" ")[0];
+    public String getDeadlineDate() throws InvalidCommandException {
+        String deadlineDate = fullCommand.split(" ", 2)[1].split(" /by ")[1].split(" ")[0];
+        if (deadlineDate.isBlank()) {
+            throw new InvalidCommandException("you can't leave your deadline date empty");
+        }
+        return deadlineDate;
     }
 
     /**
@@ -90,8 +98,12 @@ public class Parser {
      *
      * @return the string of event task name.
      */
-    public String getEventTask() {
-        return fullCommand.split(" ", 2)[1].split(" /at ")[0];
+    public String getEventTask() throws InvalidCommandException {
+        String taskName = fullCommand.split(" ", 2)[1].split(" /at ")[0];
+        if (taskName.isBlank()) {
+            throw new InvalidCommandException("you can't leave your event task empty");
+        }
+        return taskName;
     }
 
     /**
@@ -99,8 +111,12 @@ public class Parser {
      *
      * @return the string of event task date.
      */
-    public String getEventDate() {
-        return fullCommand.split(" ", 2)[1].split(" /at ")[1].split(" ")[0];
+    public String getEventDate() throws InvalidCommandException {
+        String eventDate = fullCommand.split(" ", 2)[1].split(" /at ")[1].split(" ")[0];
+        if (eventDate.isBlank()) {
+            throw new InvalidCommandException("you can't leave your event date/time empty");
+        }
+        return eventDate;
     }
 
     /**
