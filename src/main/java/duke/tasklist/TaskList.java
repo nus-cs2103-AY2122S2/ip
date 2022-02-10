@@ -32,6 +32,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.taskList.add(task);
+        assert taskList.size() > 0 : "Task List not updated";
     }
 
     /**
