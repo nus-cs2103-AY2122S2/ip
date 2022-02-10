@@ -3,7 +3,6 @@ package seedu.duke.command;
 import seedu.duke.chatbot.Storage;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
-import seedu.duke.chatbot.Ui;
 
 /**
  * Created when user wants to check the {@link Task} in {@link TaskList}.
@@ -20,7 +19,7 @@ public class ListCommand extends Command {
      * {inheritDoc}.
      */
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage) {
+    public TaskList execute(TaskList tasks, Storage storage) {
         return tasks;
     }
 

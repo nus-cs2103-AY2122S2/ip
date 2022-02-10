@@ -24,10 +24,10 @@ public class AddCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
         TaskList newTaskList = taskList.add(taskToAdd);
         String lineToAdd = storage.createSummaryFromTask(this.taskToAdd);
-        storage.addLine(storage.getFilePath(), lineToAdd);
+        storage.addLine(lineToAdd);
         return newTaskList;
     }
 

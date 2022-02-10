@@ -25,16 +25,16 @@ import java.util.Scanner;
  */
 public class Storage {
     private final String filePath;
-    private final Ui ui;
+    private final String fileName;
 
     /**
      * Creates a Storage object which is used to update the database as commands are executed.
      * @param filePath specifying the path to the database
-     * @param ui which is used to handle printing of replies to user
+     * @param fileName specifying the name of the file
      */
-    Storage(String filePath, Ui ui) {
+    Storage(String filePath, String fileName) {
         this.filePath = filePath;
-        this.ui = ui;
+        this.fileName = fileName;
     }
 
     public String getFilePath() {
@@ -47,25 +47,35 @@ public class Storage {
      * @throws DukeException if database file is not found or unable to create the {@link TaskList}
      */
     TaskList getOldTaskList() throws DukeException {
-        System.out.println("Hold on, I am checking if you have tasks saved.");
-        TaskList oldTaskList = new TaskList();
-        File myObj;
+        System.out.println(Ui.showStartLoading());
+
+        File file = this.getDatabaseFile();
+
+        TaskList oldTaskList = this.createTaskListFromDatabase(file);
+
+        System.out.println(Ui.showWelcome());
+
+        return oldTaskList;
+    }
+
+    File getDatabaseFile() throws DukeException {
+        File directory = new File(this.filePath);
+
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        File file = new File(this.fileName);
 
         try {
-            myObj = new File(this.filePath);
-            //if the file does not exist, then ui can tell user that a new file will be created
-            if (myObj.createNewFile()) {
-                System.out.println(ui.showFileCreated(myObj));
-            } else {
-                //if the file exists, a taskList will be created to store the previous tasks
-                oldTaskList = this.createTaskListFromDatabase(myObj);
+            if (file.createNewFile()) {
+                System.out.println(Ui.showFileCreated(file));
             }
-            //welcome
-            System.out.println(Ui.showWelcome());
-            return oldTaskList;
         } catch (IOException e) {
             throw new DukeException("An error occured. I will restart the list");
         }
+
+        return file;
     }
 
     TaskList createTaskListFromDatabase(File myObj) throws DukeException {
@@ -80,7 +90,7 @@ public class Storage {
             }
             sc.close();
             //ui to show the old task list to user
-            System.out.println(ui.showLoadingResult(taskList));
+            System.out.println(Ui.showLoadingResult(taskList));
             return taskList;
         } catch (FileNotFoundException e) {
             throw new LoadingException();
@@ -140,14 +150,13 @@ public class Storage {
 
     /**
      *Used to add the summary string of a task to be saved into the database.
-     * @param filePath which stores the absolute path to the database
      * @param lineContent which stores the summary string of the task to be saved
      * @throws DukeException if unable to store the line into the database
      */
-    public void addLine(String filePath, String lineContent) throws DukeException {
-        File f = new File(filePath);
+    public void addLine(String lineContent) throws DukeException {
+        File file = new File(this.fileName);
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
             bw.append(lineContent);
             bw.close();
         } catch (IOException e) {
@@ -163,15 +172,16 @@ public class Storage {
 
     public void convertTaskListToFile(TaskList taskList) throws DukeException {
         //rewrite to a new file
-        File f = new File(this.filePath);
-        if (f.delete()) {
-            ui.showCompleteUpdateOfFile();
+        File file = new File(this.fileName);
+        if (file.delete()) {
+            //need to make Duke talk first
+            Ui.showCompleteUpdateOfFile();
         } else {
             throw new UnableToUpdateDatabaseException();
         }
         for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
             String lineToAdd = this.createSummaryFromTask(taskList.getTasks().get(i));
-            this.addLine(filePath, lineToAdd);
+            this.addLine(lineToAdd);
         }
     }
 

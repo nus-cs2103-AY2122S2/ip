@@ -43,17 +43,9 @@ public class Ui {
     }
 
     /**
-     * Takes in input from user.
-     * @return command from user in string
-     */
-    String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
      * Shows error message from exceptions raised.
      * @param errorMessage taken from exceptions raised
-     * @return
+     * @return errorMessage to be said by chatbot
      */
     public static String showError(String errorMessage) {
         System.out.println(errorMessage);
@@ -63,7 +55,7 @@ public class Ui {
     /**
      *Shows the result of loading all saved task, which is a {@link TaskList}.
      * @param oldTaskList for {@link TaskList} generated from database
-     * @return
+     * @return response by chatbot after converting database information to {@link TaskList}
      */
     public static String showLoadingResult(TaskList oldTaskList) {
         return "Take a look at your previous tasks:\n" + oldTaskList.printTasks();
@@ -74,7 +66,7 @@ public class Ui {
      * @param myObj which is the file that was created
      */
      public static String showFileCreated(File myObj) {
-        return "File Created: " + myObj.getName();
+         return "File Created: " + myObj.getName();
     }
 
     /**
@@ -104,7 +96,7 @@ public class Ui {
     /**
      * Indicates to user that their command to unmark a {@link Task} is successful.
      * @param unmarkedTask which is the {@link Task} that was unmarked
-     * @return
+     * @return response by chatbot after {@link seedu.duke.command.UnmarkCommand}
      */
     public static String showUnmarkedResult(Task unmarkedTask) {
         return String

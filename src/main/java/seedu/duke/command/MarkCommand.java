@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
      * @throws DukeException if the index of task is invalid or database cannot be updated
      */
     @Override
-    public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
         TaskList newTaskList = taskList.mark(this.index);
         storage.convertTaskListToFile(newTaskList);
         return newTaskList;

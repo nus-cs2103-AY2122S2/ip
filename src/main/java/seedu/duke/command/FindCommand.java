@@ -23,9 +23,9 @@ public class FindCommand extends Command {
      * {inheritDoc}.
      */
     @Override
-    public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
         TaskList newTaskList = taskList.find(this.searchTerm);
-        return taskList; //return the old tasklist because the new one is a filtered version
+        return newTaskList; //return the old tasklist because the new one is a filtered version
     }
 
     /**

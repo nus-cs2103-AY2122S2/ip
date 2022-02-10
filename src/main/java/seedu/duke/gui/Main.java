@@ -14,7 +14,8 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt");
+    //"C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt"
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {

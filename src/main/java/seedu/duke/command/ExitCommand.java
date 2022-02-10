@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.chatbot.Storage;
-import seedu.duke.chatbot.Ui;
 import seedu.duke.task.TaskList;
 
 /**
@@ -18,7 +17,7 @@ public class ExitCommand extends Command {
      *{@inheritDoc}.
      */
     @Override
-    public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
+    public TaskList execute(TaskList taskList, Storage storage) {
         return taskList;
     }
 

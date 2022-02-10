@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
      *{@inheritDoc}.
      */
     @Override
-    public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
         TaskList newTaskList = taskList.delete(index);
         Task taskToRemove = taskList.getTasks().get(index);
         String lineToRemove = storage.createSummaryFromTask(taskToRemove);
