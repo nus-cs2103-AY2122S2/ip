@@ -37,24 +37,8 @@ public class Storage {
         if (!directory.exists()) {
             directory.mkdirs();
         }
+        assert file.exists() : "Data save file does not exist";
     }
-
-    /**
-     * Prints the content of the file.
-     *
-     * @param filePath File path of file to be printed.
-     * @throws FileNotFoundException If file is not found.
-     */
-    public String printFileContent(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        String string = "";
-        while (s.hasNext()) {
-            string += s.nextLine();
-        }
-        return string;
-    }
-
     /**
      * Writes the data of list to the file.
      *
@@ -63,6 +47,7 @@ public class Storage {
      * @throws IOException If an error occurs while writing to file.
      */
     public void writeToFile(String filePath, List taskList) throws IOException {
+        assert !filePath.isEmpty() : "Save data file does not exist";
         FileWriter fw = new FileWriter(filePath);
         fw.write(taskList.toString());
         fw.close();
@@ -76,6 +61,7 @@ public class Storage {
     public ArrayList<Task> load() {
         ArrayList<Task> arrayList = new ArrayList<>();
         File file = new File("data/duke.txt");
+        assert file.exists() : "Save data file does not exist";
         try {
             Scanner sc = new Scanner(file);
             String line = sc.nextLine();
