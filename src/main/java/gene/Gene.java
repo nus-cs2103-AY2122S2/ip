@@ -7,16 +7,12 @@ import gene.component.Storage;
 import gene.component.TaskList;
 import gene.component.Ui;
 import gene.exception.UnrecognizedCommandException;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * The Gene program is as of right now a simple program that tracks
@@ -71,6 +67,7 @@ public class Gene {
 
     void initFile() {
         geneList.initFile();
+        System.out.println("File inilization process started");
     }
 
     String handleUserInput(String nextLine) {

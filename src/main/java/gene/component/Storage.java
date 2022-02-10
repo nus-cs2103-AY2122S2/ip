@@ -7,6 +7,7 @@ import gene.task.TodoTask;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -50,8 +51,12 @@ public class Storage {
     public void createDirectory() {
         try {
             this.absolutePath = Files.createDirectories(this.absolutePath);
+        } catch (FileAlreadyExistsException err) {
+            //
         } catch (IOException err) {
-            System.out.println(err.getMessage() + " create dir");
+            err.printStackTrace();
+        } catch (SecurityException err) {
+            //
         }
     }
 
@@ -63,8 +68,10 @@ public class Storage {
         try {
             this.absolutePath = this.absolutePath.resolve(this.fileName);
             Files.createFile(this.absolutePath);
-        } catch (IOException err) {
+        } catch (FileAlreadyExistsException err) {
             //its ok if file already exists.
+        } catch (IOException err) {
+            err.printStackTrace();
         }
     }
 
@@ -86,7 +93,7 @@ public class Storage {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             String line;
-            while((line  = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 //write to arraylist
                 //create task
                 String[] tokens = line.split(" / ");
@@ -111,7 +118,7 @@ public class Storage {
             fileReader.close();
             bufferedReader.close();
         } catch (Exception err) {
-            System.out.println(err.getMessage() + " create reader");
+            err.printStackTrace();
         }
 
         this.targetFile = new File(this.absolutePath.toString());
@@ -136,8 +143,10 @@ public class Storage {
             String targetLine = lines.get(index);
             String currentLine;
 
-            while((currentLine = reader.readLine()) != null) {
-                if(currentLine.equals(targetLine)) continue;
+            while ((currentLine = reader.readLine()) != null) {
+                if (currentLine.equals(targetLine)) {
+                    continue;
+                }
                 writer.write(currentLine + "\n");
             }
 
@@ -154,7 +163,7 @@ public class Storage {
 
             this.targetFile = tempFile;
 
-        } catch(Exception err) {
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }
@@ -178,7 +187,7 @@ public class Storage {
             lines.set(index, targetLine);
             Files.write(this.absolutePath, lines, StandardCharsets.UTF_8);
         } catch (Exception err) {
-
+            err.printStackTrace();
         }
     }
 
@@ -202,30 +211,30 @@ public class Storage {
                 newLine = "\n";
             }
             switch(taskType) {
-                case "T":
-                    String[] todoTokens = taskKey.split("todo "); //  to do / sleep / 1
-                    toWrite = "todo / " + todoTokens[1] + " / " + mark;
-                    bufferedWriter.append(newLine + toWrite);
-                    break;
-                case "E":
-                    String[] eventTokens = taskKey.split("event "); // event / sleep / 2/12/2020 1900
-                    toWrite = eventTokens[1];
-                    String[] eSplit = toWrite.split(" /at ");
-                    toWrite = String.join(" / ", eSplit );
-                    toWrite = "event / " + toWrite + " / " + mark;
-                    bufferedWriter.append(newLine + toWrite);
-                    break;
-                case "D":
-                    String[] deadlineTokens = taskKey.split("deadline ");
-                    toWrite = deadlineTokens[1];
-                    String[] dSplit = toWrite.split(" /by ");
-                    toWrite = String.join(" / ", dSplit );
-                    toWrite = "deadline / " + toWrite + " / " + mark;
-                    bufferedWriter.append(newLine + toWrite);
-                    break;
+            case "T":
+                String[] todoTokens = taskKey.split("todo "); //  to do / sleep / 1
+                toWrite = "todo / " + todoTokens[1] + " / " + mark;
+                bufferedWriter.append(newLine + toWrite);
+                break;
+            case "E":
+                String[] eventTokens = taskKey.split("event "); // event / sleep / 2/12/2020 1900
+                toWrite = eventTokens[1];
+                String[] eSplit = toWrite.split(" /at ");
+                toWrite = String.join(" / ", eSplit );
+                toWrite = "event / " + toWrite + " / " + mark;
+                bufferedWriter.append(newLine + toWrite);
+                break;
+            case "D":
+                String[] deadlineTokens = taskKey.split("deadline ");
+                toWrite = deadlineTokens[1];
+                String[] dSplit = toWrite.split(" /by ");
+                toWrite = String.join(" / ", dSplit );
+                toWrite = "deadline / " + toWrite + " / " + mark;
+                bufferedWriter.append(newLine + toWrite);
+                break;
             }
             bufferedWriter.close();
-        } catch(Exception err) {
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }

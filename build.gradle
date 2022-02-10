@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "gene.Gene"
+    mainClassName = "gene.Launcher"
 }
 
 shadowJar {

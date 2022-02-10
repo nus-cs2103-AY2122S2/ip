@@ -40,8 +40,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        gene.initFile();
-
         //In
         String input = userInput.getText();
 
