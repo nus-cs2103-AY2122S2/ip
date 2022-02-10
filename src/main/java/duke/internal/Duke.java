@@ -60,6 +60,8 @@ public class Duke {
     }
 
     public GuiFeedback getResponse(String input) {
+        assert parser != null : "Parser must be initialized.";
+        assert storage != null : "Storage must be initialized.";
         try {
             Command command = parser.parse(input);
             String output = command.execute(taskList);
@@ -77,6 +79,7 @@ public class Duke {
      * Further extensions in regard to new commands should be done here.
      */
     protected void initializeCommands() {
+        assert parser != null : "Parser must be initialized.";
         parser.addCommand(new DeleteCommand());
         parser.addCommand(new ExitCommand());
         parser.addCommand(new FindCommand());

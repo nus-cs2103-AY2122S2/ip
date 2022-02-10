@@ -60,6 +60,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        assert taskList != null : "Task list provided must not be null.";
         return "Noted. I've removed this task:\n    "
                 + taskList.remove(index)
                 + "\nNow you have " + taskList.getSize() + " task(s) in the list.";

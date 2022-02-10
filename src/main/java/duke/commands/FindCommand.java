@@ -68,6 +68,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) {
+        assert !searchString.equals("") : "searchString should not be empty";
         String output = "Here are the matching tasks in your list:" + "\n";
         ArrayList<String> tasksString = taskList.search(searchString);
         for (int i = 0; i < tasksString.size(); i++) {
