@@ -6,7 +6,7 @@ package duke.task;
 public class Task {
 
     private String description;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for task object
@@ -14,7 +14,8 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
+        assert !this.isDone : "isDone should be false after instantiating the object";
     }
 
     /**
@@ -22,7 +23,7 @@ public class Task {
      * @return boolean for whether task is done
      */
     public boolean getDone() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -30,11 +31,16 @@ public class Task {
      * @param bool Set task accordingt to boolean
      */
     public void setDone(boolean bool) {
-        this.done = bool;
+        this.isDone = bool;
     }
+
+    /**
+     * Override the toString method from the object class
+     * @return the task description with checkbox depending on isDone
+     */
     @Override
     public String toString() {
-        return "[" + (this.done ? "X" : " ") + "] "
+        return "[" + (this.isDone ? "X" : " ") + "] "
             + this.description;
     }
 }

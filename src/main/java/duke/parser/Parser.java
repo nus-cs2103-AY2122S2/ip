@@ -11,8 +11,6 @@ import duke.ui.Ui;
  */
 public class Parser {
 
-    private String command;
-
     /**
      * Constructor for parser object
      */

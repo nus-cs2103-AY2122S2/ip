@@ -13,7 +13,7 @@ public class ByeCommand extends Command<String> {
     }
 
     /**
-     * change the status of the program
+     * changes the status of the program
      */
     public void runCommand() {
         super.changeRunning(false);

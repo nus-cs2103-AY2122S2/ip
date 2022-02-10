@@ -5,9 +5,6 @@ package duke.task;
  */
 public class ToDo extends Task {
 
-    private boolean done;
-    private String description;
-
     /**
      * Constructor for ToDo object
      * @param description description of task
