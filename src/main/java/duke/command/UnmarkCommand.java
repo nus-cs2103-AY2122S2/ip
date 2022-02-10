@@ -9,8 +9,8 @@ import duke.tasklist.TaskList;
  */
 public class UnmarkCommand extends Command<String> {
 
-    private String text;
-    private TaskList list;
+    private String inputText;
+    private TaskList taskList;
     private Storage storage;
 
     /**
@@ -20,8 +20,8 @@ public class UnmarkCommand extends Command<String> {
      * @param storage storage of where this task will be unmarked
      */
     public UnmarkCommand(String text, TaskList list, Storage storage) {
-        this.text = text;
-        this.list = list;
+        this.inputText = text;
+        this.taskList = list;
         this.storage = storage;
         runCommand();
     }
@@ -31,14 +31,14 @@ public class UnmarkCommand extends Command<String> {
      */
     @Override
     public void runCommand() {
-        int taskNumber = intSearch(text) - 1;
-        if (taskNumber < list.getSize() && taskNumber >= 0) {
-            assert taskNumber < list.getSize(): "condition falsely returning true";
+        int taskNumber = intSearch(inputText) - 1;
+        if (taskNumber < taskList.getSize() && taskNumber >= 0) {
+            assert taskNumber < taskList.getSize(): "condition falsely returning true";
             assert taskNumber >= 0: "condition falsely returning true";
-            Task intendedTask = list.getTask(taskNumber);
+            Task intendedTask = taskList.getTask(taskNumber);
             intendedTask.setDone(false);
             assert intendedTask.getDone() == false: "Method not working";
-            storage.writeToFile(list);
+            storage.writeToFile(taskList);
             System.out.println("  " + "AIYO! I've marked this task as not done yet:\n"
                     + "    " + intendedTask);
         } else {
@@ -48,11 +48,11 @@ public class UnmarkCommand extends Command<String> {
 
     /**
      * Format string to obtain index
-     * @param text unformatted string
+     * @param inputText unformatted string
      * @return index of task to mark
      */
-    public int intSearch(String text) {
-        String[] splicedString = text.split(" ");
+    public int intSearch(String inputText) {
+        String[] splicedString = inputText.split(" ");
         return Integer.parseInt(splicedString[1]);
     }
 }

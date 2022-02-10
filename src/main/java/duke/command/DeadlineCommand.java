@@ -10,8 +10,8 @@ import duke.ui.Ui;
  */
 public class DeadlineCommand extends Command<String> {
 
-    private TaskList list;
-    private String text;
+    private TaskList taskList;
+    private String inputText;
     private Storage storage;
     private Ui ui;
 
@@ -23,8 +23,8 @@ public class DeadlineCommand extends Command<String> {
      * @param ui ui of subsequent system out to user
      */
     public DeadlineCommand(String text, TaskList list, Storage storage, Ui ui) {
-        this.list = list;
-        this.text = text;
+        this.taskList = list;
+        this.inputText = text;
         this.storage = storage;
         this.ui = ui;
         runCommand();
@@ -35,13 +35,13 @@ public class DeadlineCommand extends Command<String> {
      */
     @Override
     public void runCommand() {
-        String[] splicedString = text.split(" /by ");
+        String[] splicedString = inputText.split(" /by ");
         String splicedDescription = splicedString[0].substring(9);
         String dueDate = splicedString[1];
         Deadline freshDeadline = new Deadline(splicedDescription, dueDate, false);
-        list.addTask(freshDeadline);
-        storage.writeToFile(list);
-        ui.showAddDeadline(freshDeadline, list);
+        taskList.addTask(freshDeadline);
+        storage.writeToFile(taskList);
+        ui.showAddDeadline(freshDeadline, taskList);
     }
 }
 

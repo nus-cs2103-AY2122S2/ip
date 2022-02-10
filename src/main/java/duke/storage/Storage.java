@@ -66,39 +66,7 @@ public class Storage {
         try {
             FileInputStream readFile = new FileInputStream(storedFilePath);
             Scanner sc = new Scanner(readFile);
-            while (sc.hasNextLine()) {
-                String currTask = sc.nextLine();
-                char taskType = currTask.charAt(3);
-                boolean isDone = false;
-                if (currTask.charAt(6) == 'X') {
-                    isDone = true;
-                }
-                if (taskType == 'T') {
-                    ToDo freshTodo = new ToDo(currTask.substring(9));
-                    if (isDone) {
-                        freshTodo.setDone(true);
-                    }
-                    taskList.add(freshTodo);
-                } else if (taskType == 'D') {
-                    String[] splicedString = currTask.split(" \\(by: ");
-                    String description = splicedString[0].substring(9);
-                    String date = splicedString[1].substring(0, splicedString[1].length() - 1);
-                    Deadline freshDeadline = new Deadline(description, date, true);
-                    if (isDone) {
-                        freshDeadline.setDone(true);
-                    }
-                    taskList.add(freshDeadline);
-                } else {
-                    String[] splicedString = currTask.split(" \\(at: ");
-                    String description = splicedString[0].substring(9);
-                    String date = splicedString[1].substring(0, splicedString[1].length() - 1);
-                    Event freshEvent = new Event(description, date, true);
-                    if (isDone) {
-                        freshEvent.setDone(true);
-                    }
-                    taskList.add(freshEvent);
-                }
-            }
+            diskParser(sc, taskList);
             sc.close();
         } catch (FileNotFoundException e) {
             try {
@@ -109,5 +77,47 @@ public class Storage {
             }
         }
         return taskList;
+    }
+
+    /**
+     * parse the text file to load the content
+     * @param scanner scanner object to scan text file
+     * @param taskList task list to add to current task list object
+     */
+    public void diskParser(Scanner scanner, ArrayList<Task> taskList) {
+        while (scanner.hasNextLine()) {
+            String currTask = scanner.nextLine();
+            char taskType = currTask.charAt(3);
+            boolean isDone = false;
+            if (currTask.charAt(6) == 'X') {
+                isDone = true;
+            }
+
+            if (taskType == 'T') {
+                ToDo freshTodo = new ToDo(currTask.substring(9));
+                if (isDone) {
+                    freshTodo.setDone(true);
+                }
+                taskList.add(freshTodo);
+            } else if (taskType == 'D') {
+                String[] splicedString = currTask.split(" \\(by: ");
+                String description = splicedString[0].substring(9);
+                String date = splicedString[1].substring(0, splicedString[1].length() - 1);
+                Deadline freshDeadline = new Deadline(description, date, true);
+                if (isDone) {
+                    freshDeadline.setDone(true);
+                }
+                taskList.add(freshDeadline);
+            } else {
+                String[] splicedString = currTask.split(" \\(at: ");
+                String description = splicedString[0].substring(9);
+                String date = splicedString[1].substring(0, splicedString[1].length() - 1);
+                Event freshEvent = new Event(description, date, true);
+                if (isDone) {
+                    freshEvent.setDone(true);
+                }
+                taskList.add(freshEvent);
+            }
+        }
     }
 }

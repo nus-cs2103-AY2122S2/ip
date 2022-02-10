@@ -10,8 +10,8 @@ import duke.ui.Ui;
  */
 public class EventCommand extends Command<String> {
 
-    private TaskList list;
-    private String description;
+    private TaskList taskList;
+    private String inputText;
     private Storage storage;
     private Ui ui;
 
@@ -23,8 +23,8 @@ public class EventCommand extends Command<String> {
      * @param ui ui of subsequent system out to user
      */
     public EventCommand(String description, TaskList list, Storage storage, Ui ui) {
-        this.list = list;
-        this.description = description;
+        this.taskList = list;
+        this.inputText = description;
         this.storage = storage;
         this.ui = ui;
         runCommand();
@@ -35,12 +35,12 @@ public class EventCommand extends Command<String> {
      */
     @Override
     public void runCommand() {
-        String[] splicedString = description.split(" /at ");
+        String[] splicedString = inputText.split(" /at ");
         String splicedDescription = splicedString[0].substring(6);
         String dueDate = splicedString[1];
         Event freshEvent = new Event(splicedDescription, dueDate, false);
-        list.addTask(freshEvent);
-        storage.writeToFile(list);
-        ui.showAddEvent(freshEvent, list);
+        taskList.addTask(freshEvent);
+        storage.writeToFile(taskList);
+        ui.showAddEvent(freshEvent, taskList);
     }
 }

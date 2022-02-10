@@ -12,13 +12,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
- * Duke class
+ * Duke class containing entry point to program
  */
 public class Duke {
 
     public static int COUNTER = 1;
     private Storage storage;
-    private TaskList task;
+    private TaskList taskList;
     private Ui ui;
     /**
      * Constructor for Duke object
@@ -28,21 +28,21 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            task = new TaskList(storage.loadFile());
+            taskList = new TaskList(storage.loadFile());
         } catch (DukeException e) {
             ui.showLoadingError();
-            task = new TaskList();
+            taskList = new TaskList();
         }
     }
 
     /**
-     * run the program
+     * Entry point to run Whey, taking in inputs and outputting the appropriate response
      */
     public void run(String input) {
         DukeManager dukeManager = new DukeManager();
             try {
                 String testCommand = dukeManager.test(input);
-                Command<String> newTask = Parser.parseCommand(testCommand, task, storage, ui);
+                Command<String> newTask = Parser.parseCommand(testCommand, taskList, storage, ui);
                 if (!newTask.isRunning()) {
                     System.exit(0);
                 }

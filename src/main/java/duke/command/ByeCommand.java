@@ -6,7 +6,7 @@ package duke.command;
 public class ByeCommand extends Command<String> {
 
     /**
-     * Constructor for ByeCommand object
+     * Constructor for ByeCommand object that causes the program to exit
      */
     public ByeCommand() {
         runCommand();
