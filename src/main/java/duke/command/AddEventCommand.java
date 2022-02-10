@@ -20,7 +20,7 @@ public class AddEventCommand extends Command {
 
     private static final String NO_DATE_RESPONSE = "Oops! You have not keyed in a due date for the task! ┗(｀Дﾟ┗(｀ﾟДﾟ´)┛ﾟД´)┛\n"
             + "Let's try again  (☆｀• ω •´)ｂ\n"
-            + "Type 'help' if you need to know how to use this command"
+            + "Type 'help' if you need to know how to use this command";
 
     /**
      * Constructor for AddEventCommand.
