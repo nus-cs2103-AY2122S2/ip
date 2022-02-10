@@ -39,6 +39,7 @@ public class DialogBox extends HBox {
         }
 
         label.setText(text);
+        label.setTextFill(Color.BLACK);
         label.setBackground(background);
         imageView.setImage(image);
     }
@@ -63,7 +64,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image image) {
-        Insets insets = new Insets(0);
+        Insets insets = new Insets(6);
         CornerRadii cornerRadii = new CornerRadii(10);
         DialogBox dukeDialog = new DialogBox(text, image,
                 new Background(new BackgroundFill(Color.WHITE, cornerRadii, insets)));
