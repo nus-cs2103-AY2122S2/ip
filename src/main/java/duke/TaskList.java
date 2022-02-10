@@ -187,7 +187,10 @@ public class TaskList {
         return "There is no matching task in your list.";
     }
 
-    protected void clear() {
+    /**
+     * Clears all tasks in taskList. 
+     */
+    public void clear() {
         tasks.clear();
     }
 
