@@ -42,12 +42,12 @@ public class DeleteCommand extends Command {
                 throw new ChiException("Hey there is something wrong with this delete command nyan!");
             }
             int index = getIndexInMessage(msg);
+            assert index != tl.getSize() : "The index should never equal size";
             Task toDelete = tl.getTask(index);
             tl.deleteTask(toDelete);
             sge.updateFile(toDelete, tl, "delete");
             return String.format("Chi-san has removed the task~!\n%s\n You now have %d tasks!\n",
                     toDelete, tl.getSize());
-
         } catch (IOException e) {
             throw new ChiException("Hey something went wrong with the IO nyan!");
         }

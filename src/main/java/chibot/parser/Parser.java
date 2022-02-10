@@ -55,6 +55,7 @@ public class Parser {
                with modification
 
              */
+            assert tokens.length > 0 : "There should at least be a word here";
             Keywords res = Keywords.getKeyword(tokens[0].toUpperCase());
             // Check if it is an add task or find command that has at least 1 word defined
             boolean isMultiWordCommand = res.equals(Keywords.ADD) || res.equals(Keywords.FIND);
@@ -65,7 +66,6 @@ public class Parser {
             } else if (isNumericCommand && tokens.length < MIN_COMMAND_LENGTH) {
                 throw new ChiException("Hey can you specify a number nyan!"); // Check if numeric commands have numbers
             } else if (res.equals(Keywords.LIST) && tokens.length > LIST_COMMAND_LENGTH) {
-                // Check if list has anything defined behind it
                 throw new ChiException("Hey this command doesn't take in so many arguments nyan!");
             } else if (res.equals(Keywords.HELP) && tokens.length > MAX_HELP_COMMAND_LENGTH) {
                 throw new ChiException("Hey Chi-san can only help you with one thing at a time nyan!");
