@@ -40,29 +40,44 @@ public class Parser {
             break;
         case "delete":
             try {
+                if (command.equals("delete")) {
+                    throw new DukeException("Please type what you want to delete!");
+                }
                 description = command.substring(firstWord.length() + 1);
                 int taskNum = Integer.parseInt(description);
                 return new DeleteCommand(firstWord, taskNum);
             } catch (NumberFormatException e) {
                 ui.showMessage("Please input an integer!");
+            } catch (DukeException e) {
+                ui.showMessage(e.getMessage());
             }
             break;
         case "mark":
             try {
+                if (command.equals("mark")) {
+                    throw new DukeException("Please type what you want to mark!");
+                }
                 description = command.substring(firstWord.length() + 1);
                 int taskNum = Integer.parseInt(description);
                 return new MarkCommand(firstWord, taskNum);
             } catch (NumberFormatException e) {
                 ui.showMessage("Please input an integer!");
+            } catch (DukeException e) {
+                ui.showMessage(e.getMessage());
             }
             break;
         case "unmark":
             try {
+                if (command.equals("unmark")) {
+                    throw new DukeException("Please type what you want to unmark!");
+                }
                 description = command.substring(firstWord.length() + 1);
                 int taskNum = Integer.parseInt(description);
                 return new UnmarkCommand(firstWord, taskNum);
             } catch (NumberFormatException e) {
                 ui.showMessage("Please input an integer!");
+            } catch (DukeException e) {
+                ui.showMessage(e.getMessage());
             }
             break;
         case "deadline":
