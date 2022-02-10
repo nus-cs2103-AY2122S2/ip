@@ -32,11 +32,8 @@ public class Parser {
             switch (Commands.valueOf(command.toUpperCase())) {
             case BYE:
                 result = Ui.printExit();
-                bobby.terminate();
                 break;
             case LIST:
-                System.out.println("heloo");
-                assert false: "this should fail";
                 result = tasks.list();
                 break;
             case MARK:
@@ -44,6 +41,7 @@ public class Parser {
                     int i = splitInputToIndex(userInput);
                     result = tasks.mark(i);
                 } catch (BobbyException e) {
+                    result = e.toString();
                     System.out.println(e);
                 }
                 break;
@@ -52,6 +50,7 @@ public class Parser {
                     int k = splitInputToIndex(userInput);
                     result = tasks.unmark(k);
                 } catch (BobbyException e) {
+                    result = e.toString();
                     System.out.println(e);
                 }
                 break;
@@ -59,6 +58,7 @@ public class Parser {
                 try {
                     result = tasks.addToDo(userInput);
                 } catch (BobbyException e) {
+                    result = e.toString();
                     System.out.println(e);
                 }
                 break;
@@ -66,8 +66,10 @@ public class Parser {
                 try {
                     result = tasks.addDeadline(userInput);
                 } catch (BobbyException e) {
+                    result = e.toString();
                     System.out.println(e);
                 } catch (DateTimeParseException e) {
+                    result = e.toString();
                     System.out.println("Invalid date format. Please use YYYY-MM-DD.");
                 }
                 break;
@@ -75,14 +77,17 @@ public class Parser {
                 try {
                     result = tasks.addEvent(userInput);
                 } catch (BobbyException e) {
+                    result = e.toString();
                     System.out.println(e);
                 }
                 break;
             case DELETE:
                 try {
-                    result = tasks.delete(userInput);
+                    int i = Integer.parseInt(inputs[1]) - 1;
+                    result = tasks.delete(i);
                 } catch (BobbyException e) {
-                    System.err.println(e);
+                    result = e.toString();
+                    System.out.println(e);
                 }
                 break;
             case FIND:
@@ -101,6 +106,7 @@ public class Parser {
             result = "Bobby did not understand you. Please use valid inputs.";
             System.out.println("Bobby does not understand you. Please use valid inputs.");
         }
+        assert !result.equals(null): "result uninitialized";
         return result;
     }
 }
