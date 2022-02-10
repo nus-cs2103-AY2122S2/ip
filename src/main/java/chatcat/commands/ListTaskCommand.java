@@ -27,7 +27,6 @@ public class ListTaskCommand extends Command{
      *
      * @see WriteToFile
      * @see Task
-     * @see Commands
      */
     public void listTasks() {
         tasks = writeToFile.toRead();
@@ -42,15 +41,12 @@ public class ListTaskCommand extends Command{
     public String toString() {
         StringBuffer str = new StringBuffer();
 
-        if (tasks.size() == 0) {
-            str.append("empty list!");
-        } else {
-            str.append("Here are the tasks in your list:" + "\n");
-            for (int i = 0; i < super.tasks.size(); i++) {
-                str.append((i + 1) + ". " + super.tasks.get(i) + "\n");
-            }
+        assert super.tasks.size() > 0 : "empty list!";
+
+        str.append("Here are the tasks in your list:" + "\n");
+        for (int i = 0; i < super.tasks.size(); i++) {
+            str.append((i + 1) + ". " + super.tasks.get(i) + "\n");
         }
-        str.append("");
 
         return str.toString();
     }

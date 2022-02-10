@@ -36,6 +36,7 @@ public class UnmarkCommand extends Command {
         String[] input = UNMARK.split(" ");
         taskID = Integer.parseInt(input[1]) - 1;
 
+        assert taskID < super.tasks.size() : "Index is larger than task list size";
         super.tasks.get(taskID).setUndone();
         super.writeToFile.toWrite(super.tasks);
     }

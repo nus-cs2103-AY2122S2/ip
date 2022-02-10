@@ -31,12 +31,12 @@ public class MarkCommand extends Command {
      *
      * @see Task
      * @see WriteToFile
-     * @see Commands
      */
     public void mark() {
         String[] input = MARK.split(" ");
         taskID = Integer.parseInt(input[1]) - 1;
 
+        assert taskID < super.tasks.size() : "Index is larger than task list size";
         super.tasks.get(taskID).setDone();
         super.writeToFile.toWrite(super.tasks);
     }

@@ -31,7 +31,6 @@ public class FilterCommand extends Command {
      * Displays the tasks {@code Task} in tasklist {@code taskList} that includes a specified keyword.
      *
      * @see Task
-     * @see Commands
      */
     public void filter() throws ChatCatException {
         super.tasks = writeToFile.toRead();
