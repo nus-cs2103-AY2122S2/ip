@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * @param description Task description.
      */
     public Deadline(String description, String by) {
-        super(description, false);
+        super(description);
         String[] dateTime = by.split(" ");
         this.by = LocalDateTime.of(LocalDate.parse(dateTime[0]),
                 LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm")));
@@ -25,8 +25,8 @@ public class Deadline extends Task {
      *
      * @param description Task description
      */
-    public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone);
+    public Deadline(String description, boolean isDone, String by, Priority priority) {
+        super(description, isDone, priority);
         this.by = LocalDateTime.parse(by);
     }
 

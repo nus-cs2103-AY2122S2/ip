@@ -48,6 +48,11 @@ public class Duke {
                 return ui.showExitMessage();
             case LIST:
                 return ui.showList(tasks.getTasks());
+            case PRIORITY:
+                tempTask = tasks.getTask(parser.getIndex(input));
+                tempTask.changePriority(parser.getPriority(input));
+                updateDataFile();
+                return ui.showPriorityMessage(tempTask);
             case MARK:
                 tempTask = tasks.getTask(parser.getIndex(input));
                 tempTask.mark();

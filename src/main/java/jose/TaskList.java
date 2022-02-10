@@ -31,14 +31,29 @@ public class TaskList {
 
         for (String s : arr) {
             String[] task = s.split("\\|");
-            boolean isDone = task[1].equals("1");
+            boolean isDone = task[2].equals("1");
+            Task.Priority priority = null;
+
+            switch (task[1]) {
+                case "1":
+                    priority = Task.Priority.LOW;
+                    break;
+                case "2":
+                    priority = Task.Priority.MEDIUM;
+                    break;
+                case "3":
+                    priority = Task.Priority.HIGH;
+                    break;
+                default:
+                    System.out.println("Oops");
+            }
             
             if (task[0].equals("T")) {
-                tasks.add(new ToDo(task[2], isDone));
+                tasks.add(new ToDo(task[3], isDone, priority));
             } else if (task[0].equals("D")) {
-                tasks.add(new Deadline(task[2], isDone, task[3]));
+                tasks.add(new Deadline(task[3], isDone, task[4], priority));
             } else {
-                tasks.add(new Event(task[2], isDone, task[3]));
+                tasks.add(new Event(task[3], isDone, task[4], priority));
             }
         }
     }

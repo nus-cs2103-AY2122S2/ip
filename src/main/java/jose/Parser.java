@@ -8,7 +8,7 @@ public class Parser {
      * A set of predefined commands.
      */
     public enum Command {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND, PRIORITY
     }
 
     /**
@@ -29,6 +29,8 @@ public class Parser {
             String command = task[0];
             
             switch (command) {
+            case "priority":
+                return Command.PRIORITY;
             case "mark":
                 return Command.MARK;
             case "unmark":
@@ -69,5 +71,15 @@ public class Parser {
      */
     public int getIndex(String input) {
         return Integer.parseInt(input.split(" ")[1]) - 1;
+    }
+
+    /**
+     * Returns an int index as given in the user command.
+     *
+     * @param input The user command containing an index of a task in the task list.
+     * @return An int index of a task.
+     */
+    public String getPriority(String input) {
+        return input.split(" ")[2];
     }
 }

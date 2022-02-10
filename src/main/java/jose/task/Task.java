@@ -6,6 +6,14 @@ package jose.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
+
+    /**
+     * A set of predefined priority values.
+     */
+    public enum Priority {
+        LOW, MEDIUM, HIGH
+    }
 
     /**
      * Constructor that only takes in a description and sets the isDone variable to false by default.
@@ -15,6 +23,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         isDone = false;
+        priority = Priority.LOW;
     }
 
     /**
@@ -23,9 +32,10 @@ public class Task {
      * @param description Description of a task.
      * @param isDone Boolean stating whether a task is done.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, Priority priority) {
         this.description = description;
         this.isDone = isDone;
+        this.priority = priority;
     }
 
     /**
@@ -53,6 +63,22 @@ public class Task {
     }
 
     /**
+     * Method to mark a task as not done.
+     */
+    public void changePriority(String priority) {
+        switch (priority) {
+        case "low":
+            this.priority = Priority.LOW;
+        case "medium":
+            this.priority = Priority.MEDIUM;
+        case "high":
+            this.priority = Priority.HIGH;
+        default:
+            this.priority = Priority.LOW;
+        }
+    }
+
+    /**
      * Returns an icon representing the status of a task based on the isDone variable.
      *
      * @return An icon representing the status of a task.
@@ -62,12 +88,39 @@ public class Task {
     }
 
     /**
+     * Returns the numerical presentation of the priority of a task.
+     *
+     * @return A number representing the priority of a task.
+     */
+    private String getPriority() {
+        switch (priority) {
+        case LOW:
+            return "1";
+        case MEDIUM:
+            return "2";
+        case HIGH:
+            return "3";
+        default:
+            return "?";
+        }
+    }
+
+    /**
+     * Returns an icon representing the priority of a task based on the priority variable.
+     *
+     * @return An icon representing the priority of a task.
+     */
+    public String getPriorityIcon() {
+        return "[" + getPriority() + "]";
+    }
+
+    /**
      * Returns a formatted representation of a task that will be saved to the data file.
      *
      * @return A formatted string to be saved to the data file.
      */
     public String formatData() {
-        return (isDone ? "1" : "0") + "|" + description;
+        return getPriority() + "|" + (isDone ? "1" : "0") + "|" + description;
     }
 
     /**
@@ -77,6 +130,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return getStatusIcon() + " " + description;
+        return getPriorityIcon() + getStatusIcon() + " " + description;
     }
 }

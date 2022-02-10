@@ -14,7 +14,7 @@ public class Event extends Task {
      * @param description Task description.
      */
     public Event(String description, String at) {
-        super(description, false);
+        super(description);
         String[] dateTime = at.split(" ");
         this.at = LocalDateTime.of(LocalDate.parse(dateTime[0]),
                 LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm")));
@@ -25,8 +25,8 @@ public class Event extends Task {
      *
      * @param description Task description
      */
-    public Event(String description, boolean isDone, String at) {
-        super(description, isDone);
+    public Event(String description, boolean isDone, String at, Priority priority) {
+        super(description, isDone, priority);
         this.at = LocalDateTime.parse(at);
     }
 

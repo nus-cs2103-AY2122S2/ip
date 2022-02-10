@@ -43,6 +43,15 @@ public class Ui {
     }
 
     /**
+     * Shows the task that was just marked.
+     *
+     * @param task A task.
+     */
+    public String showPriorityMessage(Task task) {
+        return "Hombre changido da priority op:" + LS + task;
+    }
+
+    /**
      * Shows the task that was just added to the task list.
      *
      * @param task A task.

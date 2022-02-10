@@ -10,7 +10,7 @@ public class ToDo extends Task {
      * @param description Task description.
      */
     public ToDo(String description) {
-        super(description, false);
+        super(description);
     }
 
     /**
@@ -18,8 +18,8 @@ public class ToDo extends Task {
      *
      * @param description Task description
      */
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone);
+    public ToDo(String description, boolean isDone, Priority priority) {
+        super(description, isDone, priority);
     }
 
     /**
