@@ -47,6 +47,10 @@ public class DeadlineCommand extends Command {
 
         String[] resultArr = this.parser.getDescAndDate(this.description, "deadline");
 
+        if (resultArr.length < 2) {
+            throw new FunBoxExceptions("`deadline` command usage: deadline <task> /by <date> <time>");
+        }
+
         LocalDate date = parser.stringToLocalDate(resultArr[1]);
         String time = parser.getTime(resultArr[1]);
 

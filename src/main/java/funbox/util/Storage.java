@@ -137,7 +137,6 @@ public class Storage {
         BufferedReader br = new BufferedReader(fr);
         TaskList taskList = new TaskList();
 
-        boolean isDone = false;
         int counter = 0;
 
         while (true) {
@@ -149,10 +148,9 @@ public class Storage {
             }
 
             String[] taskSplit = task.split(DELIMITER);
-            assert taskSplit.length >= 3 : "Length of split tasks should be equal or greater than length 3";
             String type = typeHashmap.get(taskSplit[0]);
             String description = taskSplit[2];
-            isDone = isTaskDone(taskSplit[1]);
+            boolean isDone = isTaskDone(taskSplit[1]);
 
             switch (type) {
             case "todo":
@@ -169,10 +167,11 @@ public class Storage {
                 taskList.add(new Deadline(description, deadlineDate, deadlineTime, type));
                 break;
             }
+            if (isDone) {
+                taskList.setPreTaskDone(counter);
+            }
         }
-        if (isDone) {
-            taskList.setPreTaskDone(counter);
-        }
+
         return taskList;
     }
 
@@ -214,6 +213,92 @@ public class Storage {
             if (counter != index) {
                 fw.write(task + "\n");
             }
+            counter++;
+        }
+    }
+
+    /**
+     * The task to be mark from the file.
+     *
+     * @param index The position of the task in the file.
+     * @throws IOException If file does not exist.
+     */
+    public void markTask(int index) throws IOException {
+        assert index >= 0 : "index should be greater or equal to 0";
+        String tempFileUrl = "data/temp.txt";
+        createTempFile(tempFileUrl);
+        File tempFile = new File(tempFileUrl);
+        File file = new File(this.FILE_URL);
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        FileWriter fw = new FileWriter(tempFileUrl, true);
+
+        String task;
+        int counter = 0;
+
+        while (true) {
+            task = br.readLine();
+            if (task == null) {
+                br.close();
+                fw.close();
+                File temp = file;
+                file.delete();
+                tempFile.renameTo(temp);
+                break;
+            }
+
+            if (counter != index) {
+                fw.write(task + "\n");
+            } else {
+                String[] temp = task.split(",");
+                temp[1] = "1";
+                String result = String.join(",", temp);
+                fw.write(result + "\n");
+            }
+
+            counter++;
+        }
+    }
+
+    /**
+     * The task to be unmark from the file.
+     *
+     * @param index The position of the task in the file.
+     * @throws IOException If file does not exist.
+     */
+    public void unmarkTask(int index) throws IOException {
+        assert index >= 0 : "index should be greater or equal to 0";
+        String tempFileUrl = "data/temp.txt";
+        createTempFile(tempFileUrl);
+        File tempFile = new File(tempFileUrl);
+        File file = new File(this.FILE_URL);
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        FileWriter fw = new FileWriter(tempFileUrl, true);
+
+        String task;
+        int counter = 0;
+
+        while (true) {
+            task = br.readLine();
+            if (task == null) {
+                br.close();
+                fw.close();
+                File temp = file;
+                file.delete();
+                tempFile.renameTo(temp);
+                break;
+            }
+
+            if (counter != index) {
+                fw.write(task + "\n");
+            } else {
+                String[] temp = task.split(",");
+                temp[1] = "0";
+                String result = String.join(",", temp);
+                fw.write(result + "\n");
+            }
+
             counter++;
         }
     }

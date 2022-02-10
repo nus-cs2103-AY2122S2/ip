@@ -48,6 +48,10 @@ public class EventCommand extends Command {
 
         String[] resultArr = parser.getDescAndDate(description, "event");
 
+        if (resultArr.length < 2) {
+            throw new FunBoxExceptions("`event` command usage: event <task> /at <date> <time>");
+        }
+
         LocalDate date = parser.stringToLocalDate(resultArr[1]);
         String time = parser.getTime(resultArr[1]);
 

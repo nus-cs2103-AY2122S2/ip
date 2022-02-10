@@ -6,6 +6,8 @@ import funbox.util.Ui;
 import funbox.util.TaskList;
 import funbox.util.Storage;
 
+import java.io.IOException;
+
 /**
  * Deal with handling command for Mark.
  */
@@ -32,7 +34,7 @@ public class MarkCommand extends Command {
      * @throws FunBoxExceptions If (index - 1) > taskList.getSize() or (index - 1) < 0.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions, IOException {
         String result = "";
 
         boolean isGreaterThanList = (index - 1) > taskList.getSize();
@@ -49,7 +51,7 @@ public class MarkCommand extends Command {
         int currIndex = index - 1;
         taskList.setTaskDone(currIndex);
         result = ui.printMarkDone().concat(taskList.getTask(ui, currIndex));
-
+        storage.markTask(currIndex);
         return result;
     }
 }

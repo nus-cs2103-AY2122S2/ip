@@ -80,14 +80,15 @@ public class TaskList {
      */
     public String printTasks(Ui ui) {
         String result = "";
-        if (this.getSize() >= 1) {
+        if (getSize() == 0) {
+            result = ui.emptyList();
+        } else {
             result = ui.printListHeader() + "\n";
             for (int i = 0; i < this.taskList.size(); i++) {
                 result += ui.printTask(i + 1, this.taskList.get(i)) + "\n";
             }
-        } else {
-            result = ui.emptyList();
         }
+
         return result;
     }
 
@@ -106,7 +107,7 @@ public class TaskList {
      * @return Returns the size of the list.
      */
     public int getSize() {
-        return this.taskList.size();
+        return taskList.size();
     }
 
     /**

@@ -1,6 +1,7 @@
 package funbox.util;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import funbox.command.ByeCommand;
 import funbox.command.Command;
@@ -19,6 +20,8 @@ import funbox.exception.FunBoxExceptions;
  * Deal with parsing and making sense of the user commands.
  */
 public class Parser {
+    private final String dateFormat = "[dd/MM/yyyy][d/MM/yyyy][dd/M/yyyy][d/MM/yyyy]" +
+            "[dd-MM-yyyy][d-MM-yyyy][dd-M-yyyy][d-MM-yyyy][yyyy-MM-dd]";
 
     /**
      * Parses the user text commands to a Command object.
@@ -119,10 +122,10 @@ public class Parser {
 
         if (dateTimeArr.length < 2) {
             throw new FunBoxExceptions("ERROR! Please ensure date and time"
-                    + " is in the correct format: yyyy-mm-dd time");
+                    + " follows the following format: <date> <time>");
         }
 
-        result = LocalDate.parse(dateTimeArr[0]);
+        result = LocalDate.parse(dateTimeArr[0], DateTimeFormatter.ofPattern(dateFormat));
 
         return result;
     }
