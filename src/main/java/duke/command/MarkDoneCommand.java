@@ -11,7 +11,7 @@ import duke.Ui;
  */
 public class MarkDoneCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
      * Constructs a mark done command.

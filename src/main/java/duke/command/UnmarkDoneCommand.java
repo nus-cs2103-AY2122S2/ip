@@ -12,7 +12,7 @@ import duke.Ui;
  */
 public class UnmarkDoneCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
      * Constructs an unmark done command.

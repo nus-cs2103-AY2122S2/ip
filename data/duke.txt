@@ -1,6 +1,9 @@
 Here are the tasks in your list:
 1. [T][ ] study ACCA 
 2. [D][ ] submit assignemnt (by: Feb 18 2022 11:59 PM)
-3. [T][ ] wash car
-4. [T][ ] watch movie
-5. [E][ ] go party (at: Sunday 10pm)
+3. [T][ ] watch movie
+4. [T][ ] wash shirt
+5. [E][ ] movie night (at: May 30 2022 11:00 PM)
+6. [T][ ] watch movie
+7. [D][ ] CS2103T assignment (by: Mar 23 2022 6:00 PM)
+8. [E][ ] dinner (at: Mar 04 2022 1:00 PM)
