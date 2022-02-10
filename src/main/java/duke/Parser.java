@@ -38,52 +38,122 @@ public class Parser {
             return ui.list(taskList);
         } else if (input.startsWith("mark")) {
             int taskNum = Integer.parseInt(input.substring(5));
-            Task markedTask = taskList.mark(taskNum);
-            String outputLabel = ui.markTask(markedTask);
-            storage.save(taskList);
-            return outputLabel;
+            return handleMarkTask(taskNum);
         } else if (input.startsWith("unmark")) {
             int taskNum = Integer.parseInt(input.substring(7));
-            Task unmarkedTask = taskList.unmark(taskNum);
-            String outputLabel = ui.unmarkTask(unmarkedTask);
-            storage.save(taskList);
-            return outputLabel;
+            return handleUnmarkTask(taskNum);
         } else if (input.startsWith("delete")) {
             int taskNum = Integer.parseInt(input.substring(7));
-            Task deletedTask = taskList.delete(taskNum);
-            String outputLabel = ui.deleteTask(taskList, deletedTask);
-            storage.save(taskList);
-            return outputLabel;
+            return handleDeleteTask(taskNum);
         } else if (input.startsWith("todo")) {
-            if (input.split(" ").length == 1) {
-                return ui.throwError("todo");
-            } else {
-                String userInput = input.substring(5);
-                taskList.addTodo(userInput);
-                String outputLabel = ui.addTask(taskList);
-                storage.save(taskList);
-                return outputLabel;
-            }
+            return handleTodoTask(input);
         } else if (input.startsWith("deadline")) {
             String userInput = input.substring(9);
-            String[] strArr = userInput.split(" /by ");
-            taskList.addDeadline(strArr[0], strArr[1]);
-            String outputLabel = ui.addTask(taskList);
-            storage.save(taskList);
-            return outputLabel;
+            return handleDeadlineTask(userInput);
         } else if (input.startsWith("event")) {
             String userInput = input.substring(6);
-            String[] strArr = userInput.split(" /at ");
-            taskList.addEvent(strArr[0], strArr[1]);
-            String outputLabel = ui.addTask(taskList);
-            storage.save(taskList);
-            return outputLabel;
+            return handleEventTask(userInput);
         } else if (input.startsWith("find")) {
             String keyword = input.substring(5);
-            TaskList matchingTasks = finder.find(taskList, keyword);
-            return ui.listMatching(matchingTasks);
+            return handleFindTask(keyword);
         } else {
             return ui.throwError("");
         }
+    }
+
+    /**
+     * Marks task as done and updates the tasklist.
+     *
+     * @param taskNum   The task number to be marked as done.
+     * @return  String to be printed.
+     */
+    public String handleMarkTask(int taskNum) throws IOException {
+        Task markedTask = taskList.mark(taskNum);
+        String outputLabel = ui.markTask(markedTask);
+        storage.save(taskList);
+        return outputLabel;
+    }
+
+    /**
+     * Marks task as not done and updates the tasklist.
+     *
+     * @param taskNum   The task number to be marked as not done.
+     * @return  String to be printed.
+     */
+    public String handleUnmarkTask(int taskNum) throws IOException {
+        Task unmarkedTask = taskList.unmark(taskNum);
+        String outputLabel = ui.unmarkTask(unmarkedTask);
+        storage.save(taskList);
+        return outputLabel;
+    }
+
+    /**
+     * Deletes task and updates the tasklist.
+     *
+     * @param taskNum   The task number to delete.
+     * @return  String to be printed.
+     */
+    public String handleDeleteTask(int taskNum) throws IOException {
+        Task deletedTask = taskList.delete(taskNum);
+        String outputLabel = ui.deleteTask(taskList, deletedTask);
+        storage.save(taskList);
+        return outputLabel;
+    }
+
+    /**
+     * Adds a Todo task to the tasklist.
+     *
+     * @param userInput The user input containing the task information.
+     * @return  String to be printed.
+     */
+    public String handleTodoTask(String userInput) throws IOException {
+        if (userInput.split(" ").length == 1) {
+            return ui.throwError("todo");
+        } else {
+            String input = userInput.substring(5);
+            taskList.addTodo(input);
+            String outputLabel = ui.addTask(taskList);
+            storage.save(taskList);
+            return outputLabel;
+        }
+    }
+
+    /**
+     * Adds a Deadline task to the tasklist.
+     *
+     * @param userInput The user input containing the task information.
+     * @return  String to be printed.
+     */
+    public String handleDeadlineTask(String userInput) throws IOException {
+        String[] strArr = userInput.split(" /by ");
+        taskList.addDeadline(strArr[0], strArr[1]);
+        String outputLabel = ui.addTask(taskList);
+        storage.save(taskList);
+        return outputLabel;
+    }
+
+    /**
+     * Adds a Event task to the tasklist.
+     *
+     * @param userInput The user input containing the task information.
+     * @return  String to be printed.
+     */
+    public String handleEventTask(String userInput) throws IOException {
+        String[] strArr = userInput.split(" /at ");
+        taskList.addEvent(strArr[0], strArr[1]);
+        String outputLabel = ui.addTask(taskList);
+        storage.save(taskList);
+        return outputLabel;
+    }
+
+    /**
+     * Finds and returns the tasks that contain the keyword.
+     *
+     * @param keyword   The keyword to search for.
+     * @return  All the tasks that contain the keyword.
+     */
+    public String handleFindTask(String keyword) {
+        TaskList matchingTasks = finder.find(taskList, keyword);
+        return ui.listMatching(matchingTasks);
     }
 }
