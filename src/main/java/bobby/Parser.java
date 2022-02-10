@@ -16,6 +16,10 @@ public class Parser {
         return Integer.parseInt(input.split(" ", 2)[1]) - 1;
     }
 
+    private static String[] splitInputToQuery(String input) {
+        return input.split(" ", 2)[1].split(" ");
+    }
+
     /**
      * Converts user input into commands, passes the commands to TaskList
      * to be executed, or terminates the Bobby program.
@@ -24,10 +28,8 @@ public class Parser {
      * @param bobby instance of Bobby to be terminated if BYE command given.
      */
     public static String parse(TaskList tasks, String userInput, Bobby bobby) {
-        //String command = splitInputToCommand(userInput);
+        String command = splitInputToCommand(userInput);
         String result;
-        String[] inputs = userInput.split(" ", 2);
-        String command = inputs[0];
         try {
             switch (Commands.valueOf(command.toUpperCase())) {
             case BYE:
@@ -69,8 +71,7 @@ public class Parser {
                     result = e.toString();
                     System.out.println(e);
                 } catch (DateTimeParseException e) {
-                    result = e.toString();
-                    System.out.println("Invalid date format. Please use YYYY-MM-DD.");
+                    result = Ui.dateFormatError();
                 }
                 break;
             case EVENT:
@@ -83,7 +84,7 @@ public class Parser {
                 break;
             case DELETE:
                 try {
-                    int i = Integer.parseInt(inputs[1]) - 1;
+                    int i = splitInputToIndex(userInput);
                     result = tasks.delete(i);
                 } catch (BobbyException e) {
                     result = e.toString();
@@ -91,11 +92,11 @@ public class Parser {
                 }
                 break;
             case FIND:
-                String[] queries = inputs[1].split(" ");
+                String[] queries = splitInputToQuery(userInput);
                 if (queries.length > 1) {
                     result = Ui.findError();
                 } else {
-                    String query = inputs[1];
+                    String query = queries[0];
                     result = tasks.find(query);
                 }
                 break;

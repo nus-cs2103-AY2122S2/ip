@@ -51,6 +51,9 @@ public class Ui {
         return "Bobby can only search using 1 keyword.";
     }
 
+    public static String dateFormatError() {
+        return "Invalid date format. Please use YYYY-MM-DD.";
+    }
     public static String printAddedTask(Task t, ArrayList<Task> taskArray) {
         return "Bobby heard: " + t.toString() + System.lineSeparator() + "Bobby remembers "
                 + taskArray.size() + " tasks(s).";
