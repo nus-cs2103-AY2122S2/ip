@@ -49,7 +49,7 @@ public class Storage {
                     ToDo toDoTask = new ToDo(currTaskLine[2]);
                     checkIfTaskMark(currTaskLine[1], toDoTask);
                     if (currTaskLine[1].equals("1")) {
-                        toDoTask.setChecked();
+                        toDoTask.setMarked();
                     }
                     taskList.add(toDoTask);
                     break;
