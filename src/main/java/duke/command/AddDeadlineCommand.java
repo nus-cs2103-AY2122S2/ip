@@ -47,7 +47,8 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (description.length() == 0) {
+        boolean isEmptyDescription = description.length() == 0;
+        if (isEmptyDescription) {
             throw new DukeException(DESC_RESPONSE);
         } else {
             Deadline entry = new Deadline(description, datetime);

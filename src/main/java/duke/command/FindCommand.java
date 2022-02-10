@@ -8,7 +8,7 @@ import duke.task.TaskList;
 public class FindCommand extends Command {
     private String findDetail;
 
-    private static final String DESC_RESPONSE = "Oops! (・へ・) You have not keyed in a description for the task!\n"
+    private static final String MISSING_ID_RESPONSE = "Oops! (・へ・) You have not keyed in a task ID to be found!\n"
             + "Let's try again (๑•̀ㅁ•́๑)✧\n"
             + "Type 'help' if you need to know how to use this command";
 
@@ -19,8 +19,9 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (findDetail.length() == 0) {
-            throw new DukeException(DESC_RESPONSE);
+        boolean isEmptyId = findDetail.length() == 0;
+        if (isEmptyId) {
+            throw new DukeException(MISSING_ID_RESPONSE);
         } else {
             String foundTasks = tasks.findTasks(findDetail);
             if (foundTasks == "") {

@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.DateHelper;
 import duke.DukeException;
-import duke.task.Event;
 import duke.Storage;
 import duke.Ui;
+import duke.task.Event;
 import duke.task.TaskList;
 
 /**
@@ -18,6 +18,10 @@ public class AddEventCommand extends Command {
             + "Let's try again ~(^.^)~\n"
             + "Type 'help' if you need to know how to use this command";
 
+    private static final String NO_DATE_RESPONSE = "Oops! You have not keyed in a due date for the task! ┗(｀Дﾟ┗(｀ﾟДﾟ´)┛ﾟД´)┛\n"
+            + "Let's try again  (☆｀• ω •´)ｂ\n"
+            + "Type 'help' if you need to know how to use this command"
+
     /**
      * Constructor for AddEventCommand.
      *
@@ -26,12 +30,11 @@ public class AddEventCommand extends Command {
      * @throws DukeException thrown when there is no due date for the task.
      */
     public AddEventCommand(String input, String time) throws DukeException {
-        assert input != null : "No description was provided to the task";
+        assert input != null : "Missing description input for the event";
         description = input;
-        if (time.length() == 0) {
-            throw new DukeException("Oops! You have not keyed in a due date for the task! ┗(｀Дﾟ┗(｀ﾟДﾟ´)┛ﾟД´)┛\n"
-                    + "Let's try again  (☆｀• ω •´)ｂ\n"
-                    + "Type 'help' if you need to know how to use this command");
+        boolean isEmptyTime = time.length() == 0;
+        if (isEmptyTime) {
+            throw new DukeException(NO_DATE_RESPONSE);
         } else {
             datetime = new DateHelper(time);
         }
