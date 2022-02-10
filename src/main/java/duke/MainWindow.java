@@ -34,12 +34,14 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void greet() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Nice to meet you !", dukeImage)
         );
-
+    }
+    public void setDuke(Duke d) {
+        duke = d;
+        greet();
     }
 
     /**
