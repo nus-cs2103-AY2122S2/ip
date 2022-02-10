@@ -15,7 +15,7 @@ public class Parser {
             int indexOfDifferentiator = eventInformation.indexOf("-");
             String dateAndStartTime = eventInformation.substring(0, indexOfDifferentiator).trim();
             String endTime = eventInformation.substring(indexOfDifferentiator + 1).trim();
-            currTask = new Event(details[2].trim(), dateAndStartTime, endTime);
+            currTask = new Event(details[2].replaceAll("^\\s+", ""), dateAndStartTime, endTime);
         }
 
         if (status == 1) {
@@ -25,12 +25,7 @@ public class Parser {
         return currTask;
     }
 
-    public Boolean isValidCommand(String taskType) {
-        return taskType.equals("todo") || taskType.equals("deadline")
-                || taskType.equals("event");
-    }
-
-    public Task parseCommandFromUser(String taskType, String instruction) throws CustomException {
+    public static Task parseCommandFromUser(String taskType, String instruction) throws CustomException {
         Task taskParsed;
         if (taskType.equals("todo")) {
             String description = instruction.substring(4);
@@ -63,5 +58,10 @@ public class Parser {
 
         }
         return taskParsed;
+    }
+
+    public Boolean isValidCommand(String taskType) {
+        return taskType.equals("todo") || taskType.equals("deadline")
+                || taskType.equals("event");
     }
 }
