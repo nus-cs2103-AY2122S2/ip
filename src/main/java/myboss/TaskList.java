@@ -1,6 +1,9 @@
 package myboss;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Represents a list of tasks.
@@ -68,14 +71,10 @@ public class TaskList {
         return taskList.remove(index);
     }
 
-    public ArrayList<Task> findTasks(String keyword) {
-        ArrayList<Task> res = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task curr = taskList.get(i);
-            if (curr.taskName.contains(keyword)) {
-                res.add(curr);
-            }
-        }
+    public List<Task> findTasks(String keyword) {
+        List<Task> res = taskList.stream()
+                .filter(curr -> curr.taskName.contains(keyword))
+                .collect(toList());
         return res;
     }
 }
