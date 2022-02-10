@@ -19,7 +19,6 @@ import duke.ui.UiManager;
 public class CommandManager {
     private final TaskManager taskManager;
     private final UiManager uiManager;
-    private final ListStorage listStorage;
     private final ListLoader listLoader;
 
 
@@ -28,8 +27,7 @@ public class CommandManager {
      */
     public CommandManager() {
         this.uiManager = new UiManager();
-        this.taskManager = new TaskManager(this.uiManager);
-        this.listStorage = new ListStorage(this.taskManager);
+        this.taskManager = new TaskManager(this.uiManager, new ListStorage());
         this.listLoader = new ListLoader(this.taskManager);
     }
 
@@ -64,46 +62,31 @@ public class CommandManager {
             String[] command = uiManager.parseCommand(s);
             switch (command[0]) {
             case "bye":
-                listStorage.saveList();
-                return uiManager.exit();
+                return taskManager.exit();
             case "list":
                 return uiManager.printList(taskManager);
             case "todo":
                 AddTaskCommand todo = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.TODO);
-                String todoTask = todo.execute();
-                listStorage.saveList();
-                return todoTask;
+                return todo.execute();
             case "deadline":
                 AddTaskCommand deadline =
                         new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.DEADLINE);
-                String deadlineTask = deadline.execute();
-                listStorage.saveList();
-                return deadlineTask;
+                return deadline.execute();
             case "event":
                 AddTaskCommand event = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.EVENT);
-                String eventTask = event.execute();
-                listStorage.saveList();
-                return eventTask;
+                return event.execute();
             case "mark":
                 NumCommand mark = new NumCommand(this.uiManager, this.taskManager, command[1], Type.MARK);
-                String markTask = mark.execute();
-                listStorage.saveList();
-                return markTask;
+                return mark.execute();
             case "unmark":
                 NumCommand unmark = new NumCommand(this.uiManager, this.taskManager, command[1], Type.UNMARK);
-                String unmarkTask = unmark.execute();
-                listStorage.saveList();
-                return unmarkTask;
+                return unmark.execute();
             case "delete":
                 NumCommand delete = new NumCommand(this.uiManager, this.taskManager, command[1], Type.DELETE);
-                String deleteTask = delete.execute();
-                listStorage.saveList();
-                return deleteTask;
+                return delete.execute();
             case "save":
                 SaveCommand save = new SaveCommand(this.uiManager, this.taskManager);
-                String saveTask = save.execute();
-                listStorage.saveList();
-                return saveTask;
+                return save.execute();
             case "find":
                 FindCommand find = new FindCommand(this.uiManager, this.taskManager, command[1]);
                 return find.execute();

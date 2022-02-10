@@ -1,5 +1,6 @@
 package duke.commands;
 
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 import duke.exceptions.DateException;
@@ -71,17 +72,23 @@ public class AddTaskCommand extends Command {
      * @throws DateTimeParseException if an invalid String is passed into date
      * @throws DukeException if an invalid command is given
      */
-    public String execute() throws DateTimeParseException, DukeException {
+    public String execute() throws DateTimeParseException, DukeException, IOException {
         switch (type) {
         case TODO:
             Task newToDo = new ToDo(this.description);
-            return taskManager.addTask(newToDo);
+            String toDoLabel = taskManager.addTask(newToDo);
+            this.taskManager.saveList();
+            return toDoLabel;
         case DEADLINE:
             Task newDeadline = new Deadline(this.description, this.date);
-            return taskManager.addTask(newDeadline);
+            String deadlineLabel = taskManager.addTask(newDeadline);
+            this.taskManager.saveList();
+            return deadlineLabel;
         case EVENT:
             Task newEvent = new Event(this.description, this.date);
-            return taskManager.addTask(newEvent);
+            String eventLabel = taskManager.addTask(newEvent);
+            this.taskManager.saveList();
+            return eventLabel;
         default:
             throw new DukeException();
         }

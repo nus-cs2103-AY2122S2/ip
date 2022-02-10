@@ -47,6 +47,7 @@ public class SaveCommand extends Command {
     public String execute() {
         try {
             this.writeToFile(this.directory);
+            this.taskManager.saveList();
             return this.uiManager.printSave();
         } catch (IOException e) {
             return uiManager.showErrorMessage("Oops! This is not a valid path!\nCheck if the directory exists!");
