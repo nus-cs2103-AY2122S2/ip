@@ -2,9 +2,12 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+/**
+ * Manages the ui aspect of the console
+ */
 public class Ui {
 
-    private final Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -20,6 +23,7 @@ public class Ui {
 
     /**
      * Gets the user input.
+     *
      * @return User input.
      */
     public String readCommand() {

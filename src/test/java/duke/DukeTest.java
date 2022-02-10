@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.commands.ByeCommand;
+import seedu.commands.Command;
 import seedu.commands.DeadlineCommand;
 import seedu.duke.DukeException;
 import seedu.duke.Parser;
@@ -41,8 +42,8 @@ public class DukeTest {
     @Test
     public void testDefaultExit() {
         ByeCommand b = new ByeCommand();
-        assertFalse(b.isExit());
-        b.execute(null, null, null);
-        assertTrue(b.isExit());
+        assertFalse(Command.isExit());
+        b.execute(null);
+        assertTrue(Command.isExit());
     }
 }
