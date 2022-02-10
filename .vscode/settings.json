@@ -1,0 +1,4 @@
+{
+    "java.import.gradle.home": "GRADLE_HOME",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
