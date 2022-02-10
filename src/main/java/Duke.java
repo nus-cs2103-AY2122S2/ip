@@ -62,6 +62,14 @@ public class Duke extends Application {
      */
     public static void main(String[] args) {}
 
+    /**
+     * User greeting
+     * @returns String message to greet user when the bot is started.
+     */
+    public String greetUser() {
+        return "Hello! what can Duke do for you today?";
+    }
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
