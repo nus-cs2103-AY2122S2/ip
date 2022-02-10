@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.dukeexceptions.DukeException;
 import duke.responses.AddTaskResponse;
+import duke.responses.DuplicateTaskResponse;
 import duke.responses.Response;
 import duke.task.Task;
 import duke.task.ToDo;
@@ -28,7 +29,11 @@ public class TodoCommand extends Command {
     @Override
     public Response execute() throws DukeException {
         String[] stringCmdUnits = stringCmd.split("todo ");
-        Task tempTask = new ToDo(stringCmdUnits[1]);
+        String taskName = stringCmdUnits[1];
+        if (taskList.checkIfPresent(taskName)) {
+            return new DuplicateTaskResponse(taskName);
+        }
+        Task tempTask = new ToDo(taskName);
         Integer oldTaskListLength = taskList.taskLength();
         taskList.addTask(tempTask);
         assert taskList.taskLength() == oldTaskListLength + 1 : "Add Todo Task to list";
