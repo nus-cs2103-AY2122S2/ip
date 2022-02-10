@@ -14,6 +14,7 @@ import java.io.IOException;
 public class Duke {
     private Storage storage;
     private TaskList taskList;
+    private Parser parser;
     private static final String FILE_PATH = "data/";
     private static final String FILE_NAME = "duke.txt";
 
@@ -21,6 +22,7 @@ public class Duke {
      * Creates the chatbot.
      */
     public Duke() {
+        this.parser = new Parser();
         this.storage = new Storage(FILE_PATH, FILE_NAME);
         try {
             this.taskList = storage.getOldTaskList();
@@ -31,7 +33,6 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            Parser parser = new Parser();
             Command c = parser.parse(input); //read the full command and return the command
             this.taskList = c.execute(this.taskList, this.storage);
             return c.getResponseAfterCommand(this.taskList);

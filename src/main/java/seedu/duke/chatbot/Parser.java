@@ -190,6 +190,7 @@ public class Parser {
         //command is given as "deadline <taskname> /at <date>" so find "/by"
         // to find where to cut the string for <date>
         int dateMarkerIndex = command.indexOf("/by");
+
         if (dateMarkerIndex == -1) { // "/" does not exist
             throw new NoDateException();
         }
