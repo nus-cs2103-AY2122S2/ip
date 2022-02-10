@@ -33,6 +33,8 @@ public class Storage {
      * @param fileName specifying the name of the file
      */
     Storage(String filePath, String fileName) {
+        assert filePath.length() > 0 : "Storage Constructor - filePath cannot be null";
+        assert fileName.length() > 0 : "Storage Constructor - fileName cannot be null";
         this.filePath = filePath;
         this.fileName = fileName;
     }
@@ -104,10 +106,12 @@ public class Storage {
      */
     Task getTaskFromSummary(String taskDetails) {
         //taskType is the first letter - e.g. "T"f
+        assert taskDetails.length() !=0 : "Storage getTaskFromSummary - Task details are empty";
+
         String taskType = taskDetails.substring(0,1);
         //start from index 2 to skip space
         boolean doneStatus = Integer.parseInt(taskDetails.substring(2,3)) == 1;
-        //taskname
+
         String taskName;
         //only tasks with dates have '/'
         if (taskDetails.contains("/")) {
@@ -154,6 +158,7 @@ public class Storage {
      * @throws DukeException if unable to store the line into the database
      */
     public void addLine(String lineContent) throws DukeException {
+        assert lineContent.length() != 0 : "Storage: addLine - Cannot load empty line into database";
         File file = new File(this.fileName);
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));

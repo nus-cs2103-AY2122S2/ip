@@ -14,7 +14,6 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    //"C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt"
     private Duke duke = new Duke();
 
     @Override
