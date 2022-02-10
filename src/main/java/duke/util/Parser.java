@@ -10,7 +10,7 @@ import duke.task.tasks.Event;
 import duke.task.tasks.ToDo;
 
 public class Parser {
-    public static Command parse(String line, TaskList taskList) throws DukeException {
+    public static Command parse(String line) throws DukeException {
         String[] input = line.strip().split(" ", 2);
 
         String command = input[0];

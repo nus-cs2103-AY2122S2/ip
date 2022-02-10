@@ -60,7 +60,7 @@ public class Duke {
 
     public String processUserInput(String input) {
         try {
-            Command response = Parser.parse(input, taskList);
+            Command response = Parser.parse(input);
             String output = response.executeCommand(taskList);
             storage.updateStorage(taskList);
             return output;
