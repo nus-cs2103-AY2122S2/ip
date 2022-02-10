@@ -35,6 +35,8 @@ public class Parser {
         String keyword = commandSegments[0];
         Command command;
 
+        assert !keyword.isBlank();
+
         switch (keyword) {
         case "bye":
             command = new ExitCommand();
