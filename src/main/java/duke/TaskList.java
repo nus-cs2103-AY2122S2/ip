@@ -75,7 +75,7 @@ public class TaskList {
             } else {
                 String deleteStringToReturn = "";
                 deleteStringToReturn += "Noted. I've removed this task: \n   "
-                       + arr.get(delete).toString();
+                       + arr.get(delete).toString() + "\n";
                 arr.remove(delete);
                 deleteStringToReturn += "Now you have " + arr.size() + " tasks in the list.";
                 return deleteStringToReturn;
@@ -189,5 +189,35 @@ public class TaskList {
         } catch (Exception e) {
             return "Don't be cheeky. Give me something to do.";
         }
+    }
+
+    /**
+     * Returns a large string of text which details all commands in task list.
+     *
+     * @return Help Text
+     */
+    public String help() {
+        String helpString = "Oh I see you need help! Fret not! I'm here to help. \n"
+                + "Ok, so we have several options that you can type. Let's go over them. \n"
+                + "\n"
+                + "1. ToDo \n"
+                + "Type in 'todo xxx', and 'xxx' will be added into the list \n"
+                + "2. Event \n"
+                + "Type in 'event xxx /at YYY-MM-DD, and the event will be added into the list \n"
+                + "3. Deadline \n"
+                + "Type in 'deadline xxx /by YYY-MM-DD, and the deadline will be added into the list \n"
+                + "4. Find \n"
+                + "Type in 'find xxx', and I'll search the list for everything containing 'xxx' \n"
+                + "5. List \n"
+                + "Type in 'list' to see all items \n"
+                + "6. Mark / Unmark \n"
+                + "Type in 'mark [index]' or 'unmark [index] to mark / unmark them respectively. \n"
+                + "For example, type in mark 1 to mark the first item in the list as done \n"
+                + "7. Delete \n"
+                + "Type in 'delete [index]' to delete the item at specified index. \n"
+                + "For example, type in delete 1 to delete the first item in the list \n"
+                + "\n"
+                + "I hope that answers your questions!";
+        return helpString;
     }
 }

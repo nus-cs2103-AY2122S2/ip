@@ -31,6 +31,10 @@ public class Duke {
         Parser reader = new Parser();
         return reader.parse(input, tasks, storage);
     }
+    public String getHelp() {
+        Parser reader = new Parser();
+        return reader.parse("help", tasks, storage);
+    }
 }
 
 

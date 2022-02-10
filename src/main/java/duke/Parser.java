@@ -34,6 +34,8 @@ public class Parser {
             return tasks.toDo(commandString, tasks.arr);
         } else if (commandString.contains("find")) {
             return tasks.find(commandString, tasks.arr);
+        } else if (commandString.equals("help")) {
+            return tasks.help();
         } else {
             return commandString + " is not a valid command. Please try again.";
         }

@@ -25,6 +25,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button helpButton;
 
     private Duke duke;
 
@@ -65,5 +67,16 @@ public class MainWindow extends AnchorPane {
             wait.play();
             //@@author
         }
+    }
+
+    /**
+     * Creates one dialogue box for Prof. He will return a text box that details oll the commands in Prof.
+     */
+    @FXML
+    private void handleHelpInput() {
+        String response = duke.getHelp();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
     }
 }
