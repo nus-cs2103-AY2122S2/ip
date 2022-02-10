@@ -39,6 +39,14 @@ public class Task implements Comparable<Task> {
         this.ui = ui;
     }
 
+    /**
+     * Constructs a Task object with content string and date.
+     *
+     * @param content String content to be put in the task.
+     * @param isDone  boolean boolean to show whether task is done.
+     * @param tags    ArrayList of Tag objects.
+     * @param ui      Ui UI object.
+     */
     public Task(String content, boolean isDone, ArrayList<Tag> tags, Ui ui) {
         this.isDone = isDone;
         this.content = content;

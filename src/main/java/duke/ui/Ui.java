@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Locale;
 
 import duke.task.Task;

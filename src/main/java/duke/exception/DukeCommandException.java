@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.ui.Ui;
-
 /**
  * This exception occurs when the user provides empty command or a non-existent command.
  */
