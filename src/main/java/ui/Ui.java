@@ -71,7 +71,7 @@ public class Ui {
         return this.constructResponse(message);
     }
 
-    private void showDeleteTask(Task task, int totalTasksBeforeDelete) {
+    public void showDeleteTask(Task task, int totalTasksBeforeDelete) {
         this.output.println(this.constructDeleteTaskResponse(task, totalTasksBeforeDelete));
     }
 
