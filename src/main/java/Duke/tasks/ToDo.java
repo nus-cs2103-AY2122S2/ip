@@ -21,7 +21,8 @@ public class ToDo extends Task {
      */
     @Override
     public String encodeTaskToString() {
-        return "T|" + (isDone ? "1|" : "0|") + super.getDescription() + "\n";
+        String isDoneNum = (isDone ? "1|" : "0|");
+        return "T|" + isDoneNum + super.getDescription() + "\n";
     }
 
     /**

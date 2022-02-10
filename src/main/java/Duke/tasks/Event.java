@@ -31,7 +31,8 @@ public class Event extends Task {
      */
     @Override
     public String encodeTaskToString() {
-        return "E|" + (isDone ? "1|" : "0|") + super.getDescription() + "|" + date + " "
+        String isDoneNum = (isDone ? "1|" : "0|");
+        return "E|" + isDoneNum + super.getDescription() + "|" + date + " "
                 + time + "\n";
     }
 

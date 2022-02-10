@@ -47,6 +47,7 @@ public class Storage {
                 switch (currTaskLine[0]) {
                 case "T":
                     ToDo toDoTask = new ToDo(currTaskLine[2]);
+                    checkIfTaskMark(currTaskLine[1], toDoTask);
                     if (currTaskLine[1].equals("1")) {
                         toDoTask.setChecked();
                     }
@@ -54,16 +55,12 @@ public class Storage {
                     break;
                 case "D":
                     Deadline deadlineTask = new Deadline(currTaskLine[2], currTaskLine[3]);
-                    if (currTaskLine[1].equals("1")) {
-                        deadlineTask.setChecked();
-                    }
+                    checkIfTaskMark(currTaskLine[1], deadlineTask);
                     taskList.add(deadlineTask);
                     break;
                 case "E":
                     Event eventTask = new Event(currTaskLine[2], currTaskLine[3]);
-                    if (currTaskLine[1].equals("1")) {
-                        eventTask.setChecked();
-                    }
+                    checkIfTaskMark(currTaskLine[1], eventTask);
                     taskList.add(eventTask);
                     break;
                 default:
@@ -74,6 +71,19 @@ public class Storage {
             throw new DukeException("Opps! An error occurred. @.@");
         }
         return taskList;
+    }
+
+    /**
+     * Checks if the task is 1 and set the task as mark if is 1. Else,
+     * nothing is done.
+     *
+     * @param markNum either 1 or 0. 1 as mark, 0 as not mark.
+     * @param task task to be checked.
+     */
+    private void checkIfTaskMark(String markNum, Task task) {
+        if (markNum.equals("1")) {
+            task.setMarked();
+        }
     }
 
     /**

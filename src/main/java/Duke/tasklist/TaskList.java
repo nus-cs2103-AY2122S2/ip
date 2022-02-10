@@ -51,7 +51,7 @@ public class TaskList {
      */
     public Task markTask(int taskNum) {
         Task currTask = taskList.get(taskNum - 1);
-        currTask.setChecked();
+        currTask.setMarked();
         return currTask;
     }
 
@@ -63,7 +63,7 @@ public class TaskList {
      */
     public Task unmarkTask(int taskNum) {
         Task currTask = taskList.get(taskNum - 1);
-        currTask.setUnchecked();
+        currTask.setUnmarked();
         return currTask;
     }
 

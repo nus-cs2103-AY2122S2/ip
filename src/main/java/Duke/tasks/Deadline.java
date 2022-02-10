@@ -32,7 +32,8 @@ public class Deadline extends Task {
      */
     @Override
     public String encodeTaskToString() {
-        return "D|" + (isDone ? "1|" : "0|") + super.getDescription() + "|" + date + " "
+        String isDoneNum = (isDone ? "1|" : "0|");
+        return "D|" + isDoneNum + super.getDescription() + "|" + date + " "
                 + time + "\n";
     }
 

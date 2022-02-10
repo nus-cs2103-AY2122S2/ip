@@ -45,7 +45,7 @@ public abstract class Task {
      * Sets the task that is done to true.
      *
      */
-    public void setChecked() {
+    public void setMarked() {
         isDone = true;
     }
 
@@ -53,7 +53,7 @@ public abstract class Task {
      * Sets the task that is not done to false.
      *
      */
-    public void setUnchecked() {
+    public void setUnmarked() {
         isDone = false;
     }
 
@@ -97,7 +97,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns the String representation of the Task.
+     * Returns the strings representation of the Task.
      *
      * @return the status and description of the task.
      */
