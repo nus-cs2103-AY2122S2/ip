@@ -108,7 +108,7 @@ public class Parser {
         if (command.equals("mark")) {
             int index = Integer.parseInt(strArr[1]) - 1;
             Task temp;
-            try{
+            try {
                 temp = taskList.get(index);
             } catch(IndexOutOfBoundsException e) {
                 throw new DukeInvalidIndexException();
@@ -138,15 +138,15 @@ public class Parser {
             }
             String title;
             String[] splitArr = input.split("/by", 2);
-            try{
+            try {
                 title = splitArr[0].substring("deadline".length() + 1).trim();
             }
-            catch (StringIndexOutOfBoundsException e){
+            catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyArgumentException();
             }
             String time = splitArr[1].trim();
             Task task;
-            if(isDate(time)) {
+            if (isDate(time)) {
                 LocalDate ld = LocalDate.parse(time);
                 task = new Deadline(title, ld);
             } else {
