@@ -38,3 +38,7 @@ dependencies {
 }
 
 mainClassName = 'duke.Launcher'
+
+run {
+    enableAssertions = true
+}

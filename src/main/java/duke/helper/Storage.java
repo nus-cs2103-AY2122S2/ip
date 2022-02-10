@@ -27,7 +27,7 @@ public class Storage {
                 dir = new File(System.getProperty("user.dir") + directoryPath);
                 dir.mkdir();
                 file.createNewFile();
-                System.out.println("not a file yet, creating");
+//                System.out.println("not a file yet, creating");
             }
         } catch (IOException e) {
             System.out.println("error initiating file");
