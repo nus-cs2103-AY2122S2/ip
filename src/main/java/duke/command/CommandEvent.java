@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import duke.Event;
 import duke.Response;
 import duke.TaskList;
-import duke.Ui;
 
 public class CommandEvent extends Command {
     private TaskList taskList;

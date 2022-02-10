@@ -40,4 +40,8 @@ public class Deadline extends Task {
         assert this.date != null;
         return "D:" + isFinishedData + ":" + super.content + ":" + date.format(DateTimeFormatter.ISO_DATE);
     }
+
+    public static String contentTimeDivder() {
+        return "/by";
+    }
 }

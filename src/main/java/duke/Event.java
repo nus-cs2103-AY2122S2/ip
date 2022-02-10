@@ -20,6 +20,10 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public static String contentTimeDivder() {
+        return "/at";
+    }
+
     /**
      * returns a string representation of the event to be seen by users.
      *
