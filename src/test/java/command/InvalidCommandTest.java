@@ -6,14 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import karen.KarenException;
 import karen.command.InvalidCommand;
+import karen.command.InvalidMessage;
 
 public class InvalidCommandTest {
     @Test
     public void constructorOverload() {
         assertEquals("I don't understand anything - I want to speak with your manager",
                 new InvalidCommand().getMessage());
-        assertEquals("Override message",
-                new InvalidCommand("Override message").getMessage());
+        assertEquals("Wrong date formatting. It should be in yyyy-mm-dd HHmm.",
+                new InvalidCommand(InvalidMessage.INVALID_DATE).getMessage());
     }
 
     @Test
@@ -23,7 +24,7 @@ public class InvalidCommandTest {
             cmd.execute();
         } catch (KarenException err) {
             assertEquals("I don't understand anything - I want to speak with your manager",
-                    err.toString());
+                    err.getMessage());
         }
     }
 

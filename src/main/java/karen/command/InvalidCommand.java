@@ -8,22 +8,22 @@ import karen.Ui;
  * To indicate invalid user inputs.
  */
 public class InvalidCommand extends Command {
-    private String invalidMessage;
+    private InvalidMessage invalidMessage;
 
     /**
      * Constructor function to override default message of InvalidCommand
      *
-     * @param message custom message to describe invalidity
+     * @param inputMessage custom enum message to describe invalid command
      */
-    public InvalidCommand(String message) {
-        invalidMessage = message;
+    public InvalidCommand(InvalidMessage inputMessage) {
+        invalidMessage = inputMessage;
     }
 
     /**
      * Constructor function to create InvalidCommand objects with DEFAULT_MESSAGE
      */
     public InvalidCommand() {
-        invalidMessage = InvalidMessage.INVALID_DEFAULT.toString();
+        invalidMessage = InvalidMessage.INVALID_DEFAULT;
     }
 
     /**
@@ -32,7 +32,7 @@ public class InvalidCommand extends Command {
      * @return message that describes invalid command
      */
     public String getMessage() {
-        return invalidMessage;
+        return invalidMessage.toString();
     }
 
     /**

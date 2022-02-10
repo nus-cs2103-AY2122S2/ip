@@ -32,7 +32,7 @@ public class Karen {
             Command cmd = parser.parseInput(fullInput);
             response = cmd.execute(ui, storage);
         } catch (KarenException err) {
-            response = err.toString();
+            response = err.getMessage();
         }
         return response;
     }

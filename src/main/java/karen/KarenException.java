@@ -1,29 +1,41 @@
 package karen;
 
+import karen.command.InvalidMessage;
+
 /**
  * To rewrap runtime exception thrown while running Karen with
  * custom messages for user.
  */
 public class KarenException extends Exception {
-    private String message;
+    private InvalidMessage invalidMessage;
 
     /**
-     * Constructor for throwing a KarenException
+     * Constructor for throwing a KarenException, used for backwards compatibility
+     * and for custom String.format(...) formatting
      *
      * @param msg Error message
      */
     public KarenException(String msg) {
         super(msg);
-        message = msg;
     }
 
     /**
-     * Converts message into a central formatting
+     * Constructor for throwing a new KarenException
      *
-     * @return Message from KarenException
+     * @param invalidMsg Input InvalidMessage types
      */
-    @Override
-    public String toString() {
-        return message;
+    public KarenException(InvalidMessage invalidMsg) {
+        super(invalidMsg.toString());
+        invalidMessage = invalidMsg;
     }
+
+    /**
+     * Getter function for InvalidMessage Enum type
+     *
+     * @return InvalidMessage Enum
+     */
+    public InvalidMessage getInvalidEnum() {
+        return invalidMessage;
+    }
+
 }

@@ -13,7 +13,7 @@ public enum InvalidMessage {
     INVALID_DATE {
         @Override
         public String toString() {
-            return "Wrong date formatting. It should be in yyyy-mm-dd";
+            return "Wrong date formatting. It should be in yyyy-mm-dd HHmm.";
         }
     },
     MISSING_BY {

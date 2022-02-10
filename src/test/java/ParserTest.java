@@ -28,7 +28,7 @@ public class ParserTest {
                     new Parser().validateDateFormat("2021-31-12"));
             fail();
         } catch (KarenException err) {
-            assertEquals("Wrong date formatting. It should be in yyyy-mm-dd", err.toString());
+            assertEquals("Wrong date formatting. It should be in yyyy-mm-dd HHmm.", err.getMessage());
         }
     }
 }

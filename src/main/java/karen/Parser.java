@@ -47,7 +47,7 @@ public class Parser {
         try {
             return parseDate(dateString);
         } catch (DateTimeException err) {
-            throw new KarenException(InvalidMessage.INVALID_DATE.toString());
+            throw new KarenException(InvalidMessage.INVALID_DATE);
         }
     }
 
@@ -75,12 +75,12 @@ public class Parser {
         switch (keyWord) {
         case "deadline":
             if (fullInput.matches("^((?!\\/by).)*$")) {
-                cmd = new InvalidCommand(InvalidMessage.MISSING_BY.toString());
+                cmd = new InvalidCommand(InvalidMessage.MISSING_BY);
             }
             break;
         case "event":
             if (fullInput.matches("^((?!\\/at).)*$")) {
-                cmd = new InvalidCommand(InvalidMessage.MISSING_AT.toString());
+                cmd = new InvalidCommand(InvalidMessage.MISSING_AT);
             }
             break;
         default:
@@ -134,7 +134,7 @@ public class Parser {
             // indicates that the format isn't valid - can't parse it
             return prepareInvalid(keyWord, trimInput);
         } catch (KarenException err) {
-            return new InvalidCommand(err.toString());
+            return new InvalidCommand(err.getInvalidEnum());
         }
     }
 
@@ -149,7 +149,7 @@ public class Parser {
     private Command prepareModify(String keyWord, String fullInput) {
         final Matcher matcher = INDEX_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
-            return new InvalidCommand(InvalidMessage.INCORRECT_MODIFY.toString());
+            return new InvalidCommand(InvalidMessage.INCORRECT_MODIFY);
         }
 
         Command cmd;
@@ -179,14 +179,14 @@ public class Parser {
     private Command prepareEdit(String keyWord, String fullInput) {
         final Matcher matcher = EDIT_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
-            return new InvalidCommand(InvalidMessage.MISSING_EDIT.toString());
+            return new InvalidCommand(InvalidMessage.MISSING_EDIT);
         }
 
         try {
             return new EditCommand(Integer.valueOf(matcher.group("index")) - 1,
                     matcher.group("editValue"));
         } catch (IllegalStateException err) {
-            return new InvalidCommand(InvalidMessage.INCORRECT_EDIT.toString());
+            return new InvalidCommand(InvalidMessage.INCORRECT_EDIT);
         }
 
     }
@@ -202,13 +202,13 @@ public class Parser {
     private Command prepareDelete(String keyWord, String fullInput) {
         final Matcher matcher = INDEX_FORMAT.matcher(fullInput);
         if (!matcher.matches()) {
-            return new InvalidCommand(InvalidMessage.MISSING_DELETE.toString());
+            return new InvalidCommand(InvalidMessage.MISSING_DELETE);
         }
 
         try {
             return new DeleteCommand(Integer.valueOf(matcher.group("index")) - 1);
         } catch (IllegalStateException err) {
-            return new InvalidCommand(InvalidMessage.INCORRECT_DELETE.toString());
+            return new InvalidCommand(InvalidMessage.INCORRECT_DELETE);
         }
     }
 
@@ -222,7 +222,7 @@ public class Parser {
     private Command prepareFind(String keyWord, String fullInput) {
         final Matcher matcher = FIND_FORMAT.matcher(fullInput.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand(InvalidMessage.INCORRECT_FIND.toString());
+            return new InvalidCommand(InvalidMessage.INCORRECT_FIND);
         }
 
         return new FindCommand(matcher.group("keyTerm"));
