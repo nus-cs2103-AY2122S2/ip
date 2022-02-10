@@ -13,23 +13,26 @@ import seedu.commands.MarkCommand;
 import seedu.commands.TodoCommand;
 import seedu.commands.UnmarkCommand;
 
+/**
+ * Parses the input of the user
+ */
 public class Parser {
 
-    private final HashMap<String, Command> converter = new HashMap<>();
+    private final HashMap<String, Command> CONVERTER = new HashMap<>();
 
     /**
      * Links string command to command objects.
      */
     public Parser() {
-        converter.put("bye", new ByeCommand());
-        converter.put("todo", new TodoCommand());
-        converter.put("list", new ListCommand());
-        converter.put("find", new FindCommand());
-        converter.put("mark", new MarkCommand());
-        converter.put("event", new EventCommand());
-        converter.put("delete", new DeleteCommand());
-        converter.put("unmark", new UnmarkCommand());
-        converter.put("deadline", new DeadlineCommand());
+        CONVERTER.put("bye", new ByeCommand());
+        CONVERTER.put("todo", new TodoCommand());
+        CONVERTER.put("list", new ListCommand());
+        CONVERTER.put("find", new FindCommand());
+        CONVERTER.put("mark", new MarkCommand());
+        CONVERTER.put("event", new EventCommand());
+        CONVERTER.put("delete", new DeleteCommand());
+        CONVERTER.put("unmark", new UnmarkCommand());
+        CONVERTER.put("deadline", new DeadlineCommand());
     }
 
     /**
@@ -46,11 +49,11 @@ public class Parser {
             throw new DukeException("There is no command.");
         }
 
-        if (!converter.containsKey(cmds[0].trim())) {
+        if (!CONVERTER.containsKey(cmds[0].trim())) {
             throw new DukeException("Wrong command.");
         }
 
-        Command cmd = converter.get(cmds[0].trim());
+        Command cmd = CONVERTER.get(cmds[0].trim());
 
         if (cmds.length == 2) {
             cmd.input(cmds[1].trim());

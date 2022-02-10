@@ -2,38 +2,30 @@ package seedu.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * The Event Class of Task
+ */
 public class Event extends Task {
 
-    private final LocalDateTime at;
+    private LocalDateTime atDateTime;
 
-    /**
-     * Constructor for Event class
-     * @param description Description of Task
-     * @param at Datetime of task to be held
-     */
-    public Event(String description, LocalDateTime at) {
+    public Event(String description, LocalDateTime atDateTime) {
         super(description);
-        this.at = at;
+        this.atDateTime = atDateTime;
     }
 
-    /**
-     * Constructor for Event class
-     * @param description Description of Task
-     * @param isCompleted Marks whether task is completed or not
-     * @param at Datetime of task to be held
-     */
-    public Event(String description, boolean isCompleted, LocalDateTime at) {
+    public Event(String description, boolean isCompleted, LocalDateTime atDateTime) {
         super(description, isCompleted);
-        this.at = at;
+        this.atDateTime = atDateTime;
     }
 
     @Override
     public String toFile() {
-        return "E\t" + super.toFile() + "\t" + at.format(FORMATTER);
+        return "E\t" + super.toFile() + "\t" + atDateTime.format(DATE_FORMAT);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + at.format(FORMATTER) + ")";
+        return "[E]" + super.toString() + " (by: " + atDateTime.format(DATE_FORMAT) + ")";
     }
 }

@@ -4,15 +4,19 @@ import seedu.commands.Command;
 import seedu.storage.Storage;
 import seedu.storage.TaskList;
 
+/**
+ * The main class of Duke
+ */
 public class Duke {
 
-    private final Ui ui;
+    private Ui ui;
     private TaskList tasks;
-    private final Parser parser;
-    private final Storage storage;
+    private Parser parser;
+    private Storage storage;
 
     /**
      * Constructor for Duke class
+     *
      * @param filePath The file path of the save file.
      */
     public Duke(String filePath) {
@@ -48,6 +52,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Used in the GUI to get responses from Duke
+     *
+     * @param input The command to be entered
+     * @return The response of Duke
+     */
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);

@@ -16,29 +16,33 @@ import seedu.task.Task;
 import seedu.task.Todo;
 
 
+/**
+ * Long term storage for the data in the task list
+ */
 public class Storage {
 
-    private final File file;
+    private final File FILE;
 
     public Storage(String filePath) {
-        file = Paths.get(filePath).toFile();
+        FILE = Paths.get(filePath).toFile();
     }
 
     /**
      * Reads contents of save file and initialises list.
+     *
      * @return Arraylist of tasks read from save file.
      * @throws DukeException Throws any error occurred during reading process.
      */
     public ArrayList<Task> load() throws DukeException {
 
-        if (Paths.get(file.getParent()).toFile().mkdirs()) {
+        if (Paths.get(FILE.getParent()).toFile().mkdirs()) {
             System.out.println("Info: Parent directory created.");
         } else {
             System.out.println("Info: Parent directory found.");
         }
 
         if (createFile()) {
-            System.out.println("Info: " + file.getAbsolutePath() + " created.\n");
+            System.out.println("Info: " + FILE.getAbsolutePath() + " created.\n");
         } else {
             System.out.println("Info: Save file found.\n");
         }
@@ -46,7 +50,7 @@ public class Storage {
         assert file.exists(): "No save file exists at all";
 
         try {
-            Scanner sc = new Scanner(file);
+            Scanner sc = new Scanner(FILE);
             ArrayList<Task> tasks = new ArrayList<>();
 
             while (sc.hasNextLine()) {
@@ -58,12 +62,12 @@ public class Storage {
                     tasks.add(new Todo(task[1], isCompleted));
                     break;
                 case "D":
-                    LocalDateTime by = LocalDateTime.parse(task[3], Task.getFormatter());
-                    tasks.add(new Deadline(task[1], isCompleted, by));
+                    LocalDateTime byDate = LocalDateTime.parse(task[3], Task.getFormatter());
+                    tasks.add(new Deadline(task[1], isCompleted, byDate));
                     break;
                 case "E":
-                    LocalDateTime at = LocalDateTime.parse(task[3], Task.getFormatter());
-                    tasks.add(new Event(task[1], isCompleted, at));
+                    LocalDateTime atDate = LocalDateTime.parse(task[3], Task.getFormatter());
+                    tasks.add(new Event(task[1], isCompleted, atDate));
                     break;
                 default:
                     throw new DukeException("Unknown task type found: " + task[0]);
@@ -78,7 +82,7 @@ public class Storage {
 
     private boolean createFile() throws DukeException {
         try {
-            return file.createNewFile();
+            return FILE.createNewFile();
         } catch (IOException e) {
             throw new DukeException("File creation error. So, cannot save.");
         }
@@ -86,12 +90,13 @@ public class Storage {
 
     /**
      * Saves entire list into the save file.
+     *
      * @param tasks Arraylist of tasks to be saved
      * @throws DukeException Throws error occurred when saving
      */
     public void saveAll(ArrayList<Task> tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(FILE);
 
             for (Task t : tasks) {
                 fw.write(t.toFile() + "\n");
