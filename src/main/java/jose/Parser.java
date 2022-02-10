@@ -25,7 +25,9 @@ public class Parser {
             return Command.LIST;
         } else {
             String[] task = input.split(" ");
+            assert task.length > 0 : "task should contain a command";
             String command = task[0];
+
             switch (command) {
             case "mark":
                 return Command.MARK;

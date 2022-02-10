@@ -66,21 +66,25 @@ public class Duke {
                 return ui.showDeleteMessage(tempTask) + ui.showRemainingTasks(tasks);
             case FIND:
                 taskInfo = input.split(" ", 2);
+                assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
                 return ui.showList(tasks.findTasks(taskInfo[1]));
             case TODO:
                 taskInfo = input.split(" ", 2);
+                assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
                 tempTask = new ToDo(taskInfo[1]);
                 tasks.addTask(tempTask);
                 updateDataFile();
                 return ui.showAddMessage(tempTask) + ui.showRemainingTasks(tasks);
             case DEADLINE:
                 taskInfo = input.split(" ", 2)[1].split(" /by ");
+                assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
                 tempTask = new Deadline(taskInfo[0], taskInfo[1]);
                 tasks.addTask(tempTask);
                 updateDataFile();
                 return ui.showAddMessage(tempTask) + ui.showRemainingTasks(tasks);
             case EVENT:
                 taskInfo = input.split(" ", 2)[1].split(" /at ");
+                assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
                 tempTask = new Event(taskInfo[0], taskInfo[1]);
                 tasks.addTask(tempTask);
                 updateDataFile();
