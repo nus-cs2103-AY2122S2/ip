@@ -25,6 +25,7 @@ public class Main extends Application {
             // change the font
             scene.getRoot().setStyle("-fx-font-family: Courier; -fx-font-size: 18");
             stage.setScene(scene);
+            stage.setTitle("Spark");
 
             fxmlLoader.<MainWindow>getController().setSpark(spark);
             stage.show();
