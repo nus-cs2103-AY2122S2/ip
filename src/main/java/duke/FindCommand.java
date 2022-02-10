@@ -1,13 +1,20 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
+/**
+ * Represents a find command
+ */
 public class FindCommand extends Command {
 
     private final String searchWord;
 
+    /**
+     * Constructs an instance of the FindCommand class.
+     *
+     * @param command A String containing the word "find".
+     * @param searchWord A String representing the query.
+     */
     public FindCommand(String command, String searchWord) {
         super(command);
         this.searchWord = searchWord;
@@ -21,8 +28,7 @@ public class FindCommand extends Command {
         int taskCount = 0;
         StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
         for (Task task : tasks.getList()) {
-            List<String> descriptionWords = Arrays.asList(task.getDescription().split(" "));
-            if (descriptionWords.contains(searchWord)) {
+            if (task.getDescription().contains(this.searchWord)) {
                 taskCount += 1;
                 output.append("\n").append(taskCount).append(".").append(task);
             }
