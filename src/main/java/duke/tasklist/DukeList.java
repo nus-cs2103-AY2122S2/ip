@@ -77,7 +77,6 @@ public class DukeList {
      * @param x Index of task in list to delete
      */
     public void delete(int x) {
-        Task t = tasks.get(x - 1);
         tasks.remove(x - 1);
         storage.store(tasks);
     }

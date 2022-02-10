@@ -40,9 +40,9 @@ public class DukeParser {
      */
     public static ArrayList<Task> readData(File f) throws IOException {
         Scanner s = new Scanner(f);
-        ArrayList<Task> ans = new ArrayList<Task>();
+        ArrayList<Task> ans = new ArrayList<>();
         while (s.hasNext()) {
-            Task j = null;
+            Task j;
             String[] k = s.nextLine().split("\\|");
             switch (k[0]) {
             case "T" :
@@ -117,7 +117,7 @@ public class DukeParser {
      * @throws DukeException
      */
     private static Command checkMarkUnmarkDelete(String[] arg, String cmd) throws DukeException {
-        Command curr = null;
+        Command curr;
         if (arg.length == 1) {
             throw new MissingArgumentException();
         } else if (!isInt(arg[1])) {
@@ -183,8 +183,8 @@ public class DukeParser {
     }
 
     private static Command checkDeadlineEvent(String[] arg, String cmd) throws DukeException {
-        String regex = "";
-        String term = "";
+        String regex;
+        String term;
         switch (cmd) {
         case "deadline" :
             regex = ".+/by.+";
