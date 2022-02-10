@@ -14,11 +14,7 @@ public class Duke {
     public Duke() {
         TaskList taskList = new TaskList();
         Storage storage = new Storage(PATH);
-        try {
-            storage.loadTo(taskList);
-        } catch (DukeException e) {
-            System.err.println(e.toString());
-        }
+        storage.loadTo(taskList);
         parser = new Parser(taskList, storage);
     }
 
@@ -30,11 +26,3 @@ public class Duke {
         return parser.parse(input);
     }
 }
-
-
-
-
-
-
-
-

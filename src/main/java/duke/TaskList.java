@@ -9,7 +9,6 @@ import java.util.Scanner;
  * Represents a taskList that supports multiple actions.
  */
 public class TaskList {
-    private static final String INDENT = "    ";
     private final List<Task> tasks;
 
     /**
@@ -22,7 +21,7 @@ public class TaskList {
 
     /**
      * Loads a task from storage file when Duke is started.
-     * No interactive messages printed.
+     * No messages printed.
      *
      * @param task task to read from file to the taskList.
      */
@@ -39,7 +38,7 @@ public class TaskList {
     public String addTodo(String taskInfo) {
         Todo todo = new Todo(taskInfo);
         tasks.add(todo);
-        return printAdd();
+        return addMessage();
     }
 
     /**
@@ -53,7 +52,7 @@ public class TaskList {
         if (i > 0 && i + 5 < taskInfo.length()) {
             Deadline t = new Deadline(taskInfo.substring(0, i), LocalDate.parse(taskInfo.substring(i + 5)));
             tasks.add(t);
-            return printAdd();
+            return addMessage();
         } else {
             throw new DukeException("The description of a deadline should be \"<task> /by <time>\".");
         }
@@ -70,7 +69,7 @@ public class TaskList {
         if (i > 0 && i + 5 < taskInfo.length()) {
             Event t = new Event(taskInfo.substring(0, i), taskInfo.substring(i + 5));
             tasks.add(t);
-            return printAdd();
+            return addMessage();
         } else {
             throw new DukeException("The description of an event should be \"<task> /at <time>\".");
         }
@@ -79,19 +78,17 @@ public class TaskList {
     /**
      * Returns messages for an add task action.
      *
-     * @return responding messages.
+     * @return messages for an add task action.
      */
-    private String printAdd() {
-        StringBuilder sb = new StringBuilder("Got it. I've added this task:");
-        sb.append(System.lineSeparator()).append("  ");
+    private String addMessage() {
+        StringBuilder message = new StringBuilder("Got it. I've added this task:\n  ");
         int n = tasks.size();
-        sb.append(tasks.get(n - 1)).append(System.lineSeparator())
-                .append(String.format("%s%d%s", "Now you have ", n, " task"));
+        message.append(String.format("%s\nNow you have %d task", tasks.get(n - 1), n));
         if (n > 1) {
-            sb.append("s");
+            message.append("s");
         }
-        sb.append(" in the list.");
-        return sb.toString();
+        message.append(" in the list.");
+        return message.toString();
     }
 
     /**
@@ -103,12 +100,11 @@ public class TaskList {
         if (tasks.size() == 0) {
             return "You don't have tasks listed.";
         } else {
-            StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
+            StringBuilder message = new StringBuilder("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                sb.append(System.lineSeparator())
-                        .append(String.format("%d%s%s", i + 1, ".", tasks.get(i)));
+                message.append(String.format("\n%d.%s", i + 1, tasks.get(i)));
             }
-            return sb.toString();
+            return message.toString();
         }
     }
 
@@ -129,14 +125,14 @@ public class TaskList {
             throw new DukeException("Please enter a valid index.");
         }
         tasks.set(index, tasks.get(index).mark(isDone));
-        String msg;
+
+        String message;
         if (isDone) {
-            msg = "Nice! I've marked this task as done:";
+            message = "Nice! I've marked this task as done:";
         } else {
-            msg = "OK, I've marked this task as not done yet:";
+            message = "OK, I've marked this task as not done yet:";
         }
-        return msg + System.lineSeparator()
-                + "  " + tasks.get(index);
+        return message + "\n  " + tasks.get(index);
     }
 
     /**
@@ -154,17 +150,15 @@ public class TaskList {
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
         }
-        Task t = tasks.remove(index);
-        StringBuilder sb = new StringBuilder("Noted. I've removed this task:");
-        sb.append(System.lineSeparator())
-                .append("  ").append(t)
-                .append(System.lineSeparator())
-                .append(String.format("%s%d%s", "Now you have ", tasks.size(), " task"));
+        Task taskRemoved = tasks.remove(index);
+
+        StringBuilder message = new StringBuilder("Noted. I've removed this task:\n  ");
+        message.append(String.format("%s\nNow you have %d task", taskRemoved, tasks.size()));
         if (tasks.size() > 1) {
-            sb.append("s");
+            message.append("s");
         }
-        sb.append(" in the list.");
-        return sb.toString();
+        message.append(" in the list.");
+        return message.toString();
     }
 
     /**
@@ -174,25 +168,27 @@ public class TaskList {
      * @return responding messages.
      */
     public String find(String keyword) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder message = new StringBuilder();
         boolean isFound = false;
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             boolean isMatch = t.match(keyword);
             if (isMatch && !isFound) {
-                sb.append("Here are the matching tasks in your list:")
-                        .append(System.lineSeparator());
+                message.append("Here are the matching tasks in your list:\n");
                 isFound = true;
             }
             if (isMatch) {
-                sb.append(System.lineSeparator())
-                        .append(String.format("%d%s%s", i + 1, ".", t));
+                message.append(String.format("\n%d.%s", i + 1, t));
             }
         }
-        if (!isFound) {
-            return "There is no matching task in your list.";
+        if (isFound) {
+            return message.toString();
         }
-        return sb.toString();
+        return "There is no matching task in your list.";
+    }
+
+    protected void clear() {
+        tasks.clear();
     }
 
     @Override
