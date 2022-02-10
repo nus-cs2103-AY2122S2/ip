@@ -23,6 +23,7 @@ public class Parser {
      * @return index of task.
      */
     public static int getTaskIndex(String[] userCmd) {
+        assert userCmd[1] != null : "There should be a second argument in the command";
         return Integer.parseInt(userCmd[1]) - 1;
     }
 
