@@ -31,8 +31,8 @@ public class BotStorage implements Storage {
     public BotStorage(String path, String directory) throws IOException {
         this.path = path;
         // Assert that the path and directory is not empty
-        assert(!(path == ""));
-        assert(!(directory == ""));
+        assert(!(path.equals("")));
+        assert(!(directory.equals("")));
         database = new File(path);
         this.directory = directory;
         doesDatabaseExists();
@@ -47,8 +47,11 @@ public class BotStorage implements Storage {
     public boolean doesDatabaseExists() throws IOException {
         if (!database.exists()) {
             File directoryFile = new File(this.directory);
-            directoryFile.mkdir();
-            database.createNewFile();
+            boolean canCreateDirectory = directoryFile.mkdir();
+            boolean canCreateFile = database.createNewFile();
+            // Assert that we can create the new database file
+            assert(canCreateDirectory);
+            assert(canCreateFile);
             return false;
         }
         return true;

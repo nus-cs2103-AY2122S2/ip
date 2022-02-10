@@ -37,6 +37,7 @@ public class DeleteTaskCommand extends angela.command.Command {
             throws IOException {
         if (NumericChecker.isNumeric(description)) {
             int taskNumber = Integer.parseInt(description);
+            assert taskNumber > -1 : "Task number should be a positive integer";
             Task removeTask = taskList.removeTask(taskNumber);
             botStorage.deleteTask(taskNumber);
             dateTable.deleteTaskOnDate(removeTask);

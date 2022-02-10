@@ -49,6 +49,7 @@ public class Task {
             slashIndex = description.length();
             this.timeCommand = "";
         }
+        assert slashIndex != -1 : "Slash Index should not be -1";
         return slashIndex;
     }
 
