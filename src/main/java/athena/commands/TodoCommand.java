@@ -1,7 +1,7 @@
 package athena.commands;
 
 import athena.tasks.TaskList;
-import athena.ui.Ui;
+import athena.ui.Messages;
 
 /**
  * Represents a todo command given to Athena by the user. When executed, creates
@@ -23,13 +23,13 @@ public class TodoCommand extends Command {
      * Creates a new todo task in the given taskList and displays the outputs
      * on the given ui.
      *
-     * @param ui Ui instance to display outputs through.
      * @param taskList TaskList instance to create the todo task on.
+     * @return Command output.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList) {
+    public String execute(TaskList taskList) {
         int taskNumber = taskList.addTodo(taskName);
-        ui.sayTaskAddingLines(taskNumber);
+        return Messages.getTaskAddingDialog(taskList, taskNumber);
     }
 
     /**

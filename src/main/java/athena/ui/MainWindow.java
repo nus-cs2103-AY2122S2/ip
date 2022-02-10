@@ -3,6 +3,7 @@ package athena.ui;
 import java.io.IOException;
 
 import athena.Athena;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -46,6 +48,7 @@ public class MainWindow extends Stage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        displayAthenaDialog("Greetings! My name is Athena. What can I help you with?");
     }
 
     @FXML
@@ -54,17 +57,30 @@ public class MainWindow extends Stage {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Athena's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = athena.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, athenaImage)
-        );
+        displayUserDialog(input);
+        displayAthenaDialog(response);
         userInput.clear();
+        if (!athena.isActive()) {
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> close());
+            delay.play();
+        }
+    }
+
+    private void displayAthenaDialog(String dialog) {
+        dialogContainer.getChildren().add(DialogBox.getAthenaDialog(dialog, athenaImage));
+    }
+
+    private void displayUserDialog(String dialog) {
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(dialog, userImage));
     }
 }

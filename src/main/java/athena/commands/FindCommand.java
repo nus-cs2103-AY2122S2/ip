@@ -1,9 +1,10 @@
 package athena.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import athena.tasks.TaskList;
-import athena.ui.Ui;
+import athena.ui.Messages;
 
 /**
  * Represents a find command given to Athena by the user. When executed, displays
@@ -26,17 +27,19 @@ public class FindCommand extends Command {
      * and displays them through the given ui. If no matching tasks are found, apology
      * text is displayed instead.
      *
-     * @param ui Ui instance to display outputs through.
      * @param taskList TaskList instance to search for matching tasks in.
+     * @return Command output.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList) {
+    public String execute(TaskList taskList) {
         List<Integer> taskNumbers = taskList.getTaskNumbersContainingPhrase(searchPhrase);
         if (taskNumbers.size() > 0) {
-            ui.sayText(String.format("Here are the tasks containing the phrase '%s'", searchPhrase));
-            ui.showSpecificTasks(taskNumbers);
+            ArrayList<String> outputs = new ArrayList<>();
+            outputs.add(String.format("Here are the tasks containing the phrase '%s'", searchPhrase));
+            outputs.add(Messages.getSpecificTasksDialog(taskList, taskNumbers));
+            return Messages.getMultiLineString(outputs);
         } else {
-            ui.sayText(String.format("Sorry, no tasks were found containing the phrase '%s'", searchPhrase));
+            return String.format("Sorry, no tasks were found containing the phrase '%s'", searchPhrase);
         }
     }
 }

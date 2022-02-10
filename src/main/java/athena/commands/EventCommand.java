@@ -3,7 +3,7 @@ package athena.commands;
 import java.time.LocalDateTime;
 
 import athena.tasks.TaskList;
-import athena.ui.Ui;
+import athena.ui.Messages;
 
 /**
  * Represents an event command given to Athena by the user. When executed, creates a new
@@ -27,12 +27,12 @@ public class EventCommand extends Command {
     /**
      * Creates a new event task in the given taskList and displays the results through the ui.
      *
-     * @param ui Ui instance to display outputs through.
      * @param taskList The TaskList instance to add the event to.
+     * @return Command output.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList) {
+    public String execute(TaskList taskList) {
         int taskNumber = taskList.addEvent(taskName, eventDateTime);
-        ui.sayTaskAddingLines(taskNumber);
+        return Messages.getTaskAddingDialog(taskList, taskNumber);
     }
 }
