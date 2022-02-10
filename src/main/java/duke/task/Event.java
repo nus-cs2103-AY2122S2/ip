@@ -1,11 +1,11 @@
-package src.main.java.duke.task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import src.main.java.duke.DukeException;
+import duke.DukeException;
 
 /**
  * Event is a Task that should be attended at a certain date and time.

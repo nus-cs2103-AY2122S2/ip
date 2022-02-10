@@ -1,8 +1,8 @@
-package src.main.java.duke.command;
+package duke.command;
 
-import src.main.java.duke.Storage;
-import src.main.java.duke.Ui;
-import src.main.java.duke.TaskList;
+import duke.Storage;
+import duke.Ui;
+import duke.TaskList;
 
 /**
  * ListCommand is a Command that triggers the program to print out the task list

@@ -1,9 +1,9 @@
-package src.main.java.duke.command;
+package duke.command;
 
-import src.main.java.duke.DukeException;
-import src.main.java.duke.Storage;
-import src.main.java.duke.Ui;
-import src.main.java.duke.TaskList;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.TaskList;
 
 /**
  * Command is an abstract class that specifies 2 methods that has to be

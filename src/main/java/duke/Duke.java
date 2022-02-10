@@ -1,6 +1,6 @@
-package src.main.java.duke;
+package duke;
 
-import src.main.java.duke.command.Command;
+import duke.command.Command;
 
 /**
  * Duke class is the main class of the program.

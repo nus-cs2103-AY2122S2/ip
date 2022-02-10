@@ -1,10 +1,10 @@
-package src.main.java.duke.command;
+package duke.command;
 
-import src.main.java.duke.DukeException;
-import src.main.java.duke.Storage;
-import src.main.java.duke.Ui;
-import src.main.java.duke.task.Task;
-import src.main.java.duke.TaskList;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Task;
+import duke.TaskList;
 
 /**
  * MarkCommand is a Command that marks the indexed task as done.

@@ -1,4 +1,4 @@
-package src.main.java.duke.task;
+package duke.task;
 
 /**
  * ToDo is a Task with no specific start or end date or time.

@@ -1,10 +1,10 @@
-package src.main.java.duke.command;
+package duke.command;
 
-import src.main.java.duke.DukeException;
-import src.main.java.duke.Storage;
-import src.main.java.duke.TaskList;
-import src.main.java.duke.Ui;
-import src.main.java.duke.task.Task;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * UnmarkCommand is a Command that marks the indexed task as not yet done.

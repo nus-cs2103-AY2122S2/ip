@@ -1,4 +1,4 @@
-package src.main.java.duke;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import src.main.java.duke.task.Task;
+import duke.task.Task;
 
 /**
  * Storage class manages the storage file and the actions on the storage file.

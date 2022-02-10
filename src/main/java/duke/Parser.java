@@ -1,13 +1,13 @@
-package src.main.java.duke;
+package duke;
 
-import src.main.java.duke.command.AddCommand;
-import src.main.java.duke.command.Command;
-import src.main.java.duke.command.DeleteCommand;
-import src.main.java.duke.command.ExitCommand;
-import src.main.java.duke.command.FindCommand;
-import src.main.java.duke.command.ListCommand;
-import src.main.java.duke.command.MarkCommand;
-import src.main.java.duke.command.UnmarkCommand;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * Parser class parses the command passed in as a String and represents it as a

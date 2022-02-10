@@ -1,10 +1,10 @@
-package src.main.java.duke.command;
+package duke.command;
 
-import src.main.java.duke.DukeException;
-import src.main.java.duke.Storage;
-import src.main.java.duke.Ui;
-import src.main.java.duke.task.*;
-import src.main.java.duke.TaskList;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.*;
+import duke.TaskList;
 
 /**
  * AddCommand is a Command that adds a task that is either a ToDo task, Deadline

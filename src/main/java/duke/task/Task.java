@@ -1,4 +1,4 @@
-package src.main.java.duke.task;
+package duke.task;
 
 /**
  * Task is a class that manages the actions that a Task can do such as marking

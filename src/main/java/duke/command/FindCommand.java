@@ -1,8 +1,8 @@
-package src.main.java.duke.command;
+package duke.command;
 
-import src.main.java.duke.TaskList;
-import src.main.java.duke.Ui;
-import src.main.java.duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
 
 public class FindCommand extends Command {
     private String keyword;

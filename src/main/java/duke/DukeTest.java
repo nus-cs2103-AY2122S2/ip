@@ -1,12 +1,12 @@
-package src.main.java.duke;
+package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import src.main.java.duke.task.Deadline;
-import src.main.java.duke.task.Event;
-import src.main.java.duke.task.Task;
-import src.main.java.duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,8 +1,8 @@
-package src.main.java.duke;
+package duke;
 
 import java.util.Scanner;
 
-import src.main.java.duke.task.Task;
+import duke.task.Task;
 
 /**
  * Ui is a class that manages the bulk of the user interaction required by the

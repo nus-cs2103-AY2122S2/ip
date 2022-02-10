@@ -1,4 +1,4 @@
-package src.main.java.duke;
+package duke;
 
 /**
  * DukeException is an Exception unique to Duke.
