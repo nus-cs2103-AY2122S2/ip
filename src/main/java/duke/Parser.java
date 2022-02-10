@@ -145,6 +145,8 @@ public class Parser {
             }
             Ui.printFind(listString);
             break;
+        case("bye"):
+            Ui.exit();
         default:
             throw new UnknownCommandException("\n" + Ui.BLANK_LINE
                     + "    I'm sorry, but I don't know what that means :-(\n" + Ui.BLANK_LINE);

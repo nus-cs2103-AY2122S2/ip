@@ -15,17 +15,17 @@ public class Ui {
                     + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String WELCOME_MESSAGE = logo + "\n"
-            + "    ____________________________________________________________\n"
+            + "    ________________________________\n"
             + "     Hello! I'm SquishyBot" + "\n"
             + "     What can I do for you?" + "\n"
-            + "    ____________________________________________________________\n";
+            + "    ________________________________\n";
 
     private static final String GOODBYE_MESSAGE = "\n"
-            + "    ____________________________________________________________\n"
+            + "    ________________________________\n"
             + "     Bye. Hope to see you again soon!" + "\n"
-            + "    ____________________________________________________________\n";
+            + "    ________________________________\n";
 
-    public static final String BLANK_LINE = "    ____________________________________________________________\n";
+    public static final String BLANK_LINE = "    ________________________________\n";
 
     /**
      * Welcomes the User
@@ -56,13 +56,13 @@ public class Ui {
      */
 
     public static void printList(TaskList taskList) {
-        System.out.println("\n" + BLANK_LINE);
+        System.out.println("\n");
         for (int i = 1; i < taskList.getSize() + 1; i++) {
             Task curr = taskList.get(i - 1);
             String toPrint = "     " + i + "." + curr;
             System.out.println(toPrint);
         }
-        System.out.println("\n" + BLANK_LINE);
+        System.out.println("\n");
     }
 
     /**
@@ -75,8 +75,8 @@ public class Ui {
     public static void printMark(int numToMark, TaskList taskList) {
         Task markedTask = taskList.get(numToMark - 1);
         markedTask.markAsDone();
-        System.out.println(BLANK_LINE + "     Nice! I've marked this task as done: " + "\n" + "     " + markedTask
-                + "\n" + BLANK_LINE);
+        System.out.println("     Nice! I've marked this task as done: " + "\n" + "     " + markedTask
+                + "\n");
     }
 
     /**
@@ -89,8 +89,8 @@ public class Ui {
     public static void printUnmark(int numToUnmark, TaskList taskList) {
         Task markedTask = taskList.get(numToUnmark - 1);
         markedTask.markAsNotDone();
-        System.out.println(BLANK_LINE + "     OK, I've marked this task as not done yet: " + "\n" + "     " + markedTask
-                + "\n" + BLANK_LINE);
+        System.out.println("     OK, I've marked this task as not done yet: " + "\n" + "     " + markedTask
+                + "\n");
     }
 
     /**
@@ -101,8 +101,8 @@ public class Ui {
      */
 
     public static void printTodo(String todoString, TaskList taskList) {
-        String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [T][ ]" + todoString
-                + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n" + BLANK_LINE;
+        String temp = "\n" +  "     Got it. I've added this task: \n" + "       [T][ ]" + todoString
+                + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
         System.out.println(temp);
     }
 
@@ -115,9 +115,9 @@ public class Ui {
      */
 
     public static void printDeadline(String deadlineName, String deadlineTime, TaskList taskList) {
-        String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [D][ ]" + deadlineName +
+        String temp = "\n"  + "     Got it. I've added this task: \n" + "       [D][ ]" + deadlineName +
                 "(by:" + deadlineTime + ")" + "\n" +
-                "     Now you have " + taskList.getSize() + " task(s) in the list.\n" + BLANK_LINE;
+                "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
         System.out.println(temp);
     }
 
@@ -130,9 +130,9 @@ public class Ui {
      */
 
     public static void printEvent(String eventName, String eventTime, TaskList taskList) {
-        String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [E][ ]" + eventName +
+        String temp = "\n"  + "     Got it. I've added this task: \n" + "       [E][ ]" + eventName +
                 "(at: " + eventTime + ")" + "\n" +
-                "     Now you have " + taskList.getSize() + " task(s) in the list.\n" + BLANK_LINE;
+                "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
         System.out.println(temp);
     }
 
@@ -147,13 +147,13 @@ public class Ui {
     public static void printDelete(int numToDelete, TaskList taskList) {
         Task deleteTask = taskList.get(numToDelete - 1);
         taskList.remove(numToDelete);
-        System.out.println(BLANK_LINE + "     Noted. I've removed this task: " + "\n" + "     " + deleteTask
-                + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n" + BLANK_LINE);
+        System.out.println("     Noted. I've removed this task: " + "\n" + "     " + deleteTask
+                + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n");
     }
 
     public static void printFind(StringBuilder listString) {
-        String temp = "\n" + BLANK_LINE + "     Here are the matching tasks in your list: " + "\n" + "     "
-                + listString + "\n" + BLANK_LINE;
+        String temp = "\n"+ "     Here are the matching tasks in your list: " + "\n" + "     "
+                + listString + "\n";
         System.out.println(temp);
     }
 }
