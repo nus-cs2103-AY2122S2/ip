@@ -22,6 +22,31 @@ public class Storage {
         filePath = Paths.get(".", dir, fileName);
     }
 
+    private void processTodo (TaskList taskList, Integer isMarked, String taskName) {
+        Task temp = new ToDo(taskName);
+        if (isMarked == 1) {
+            temp.setStatus(true);
+        }
+        taskList.addTask(temp);
+    }
+
+    private void processDeadline(TaskList taskList, Integer isMarked, String taskName, String[] parsedList) {
+        String taskTime = parsedList[3].substring(1);
+        Task temp = new Deadline(taskName, LocalDate.parse(taskTime));
+        if (isMarked == 1) {
+            temp.setStatus(true);
+        }
+        taskList.addTask(temp);
+    }
+
+    private void processEvent(TaskList taskList, Integer isMarked, String taskName, String[] parsedList) {
+        String taskTime = parsedList[3].substring(1);
+        Task temp = new Event(taskName, LocalDate.parse(taskTime));
+        if (isMarked == 1) {
+            temp.setStatus(true);
+        }
+        taskList.addTask(temp);
+    }
     /**
      * Initialte the taskList by the local file.
      * If such file or directory does not exist, it will attempt to create one
@@ -47,25 +72,11 @@ public class Storage {
                 String taskName = parsedList[2].substring(1);
 
                 if (taskType.equals("T")) {
-                    Task temp = new ToDo(taskName);
-                    if (isMarked == 1) {
-                        temp.setStatus(true);
-                    }
-                    taskList.addTask(temp);
+                    processTodo(taskList, isMarked, taskName);
                 } else if (taskType.equals("D")) {
-                    String taskTime = parsedList[3].substring(1);
-                    Task temp = new Deadline(taskName, LocalDate.parse(taskTime));
-                    if (isMarked == 1) {
-                        temp.setStatus(true);
-                    }
-                    taskList.addTask(temp);
+                    processDeadline(taskList, isMarked, taskName, parsedList);
                 } else if (taskType.equals("E")) {
-                    String taskTime = parsedList[3].substring(1);
-                    Task temp = new Event(taskName, LocalDate.parse(taskTime));
-                    if (isMarked == 1) {
-                        temp.setStatus(true);
-                    }
-                    taskList.addTask(temp);
+                    processEvent(taskList, isMarked, taskName, parsedList);
                 }
             }
         }
