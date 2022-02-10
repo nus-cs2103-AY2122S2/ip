@@ -2,6 +2,7 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Represents a deadline which is a more specific case of a task.
@@ -9,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected String time;
-    protected LocalDate ld;
+    protected LocalDate localDate;
 
     public Deadline(String description, String time) {
         super(description);
@@ -22,14 +23,14 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
 
-    public Deadline(String description, LocalDate ld) {
+    public Deadline(String description, LocalDate localDate) {
         super(description);
-        this.ld = ld;
+        this.localDate = localDate;
     }
 
-    public Deadline(String description, LocalDate ld, boolean isDone) {
+    public Deadline(String description, LocalDate localDate, boolean isDone) {
         super(description);
-        this.ld = ld;
+        this.localDate = localDate;
         this.isDone = isDone;
     }
     /**
@@ -38,10 +39,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if(ld == null) {
+        if (localDate == null) {
             return "[D]" + super.toString() + " (by: " + time + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " + ld.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")) + ")";
+            return "[D]" + super.toString() + " (by: " + localDate.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy").withLocale(Locale.ENGLISH)) + ")";
         }
 
     }
@@ -53,7 +54,7 @@ public class Deadline extends Task {
     @Override
     public String getDetail(){
         int status = isDone ? 1 : 0;
-        String t = this.time == null ? ld.toString() : this.time;
+        String t = this.time == null ? localDate.toString() : this.time;
         return "D" + " | " + status + " | " + this.description + " | " + t + "\n";
     }
 }

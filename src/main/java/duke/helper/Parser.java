@@ -90,10 +90,8 @@ public class Parser {
     public static String parseInputLine(String input, TaskList taskList) throws DukeException {
         String[] strArr = input.split(" ");
         String command = strArr[0];
-        if (!(command.equals("bye") || command.equals("list") || command.equals("mark") || command.equals("todo")
-                || command.equals("deadline") || command.equals("event") || command.equals("delete") ||
-                command.equals("find"))) {
-            throw new DukeInvalidCommandException();
+        if (command.equals("bye")) {
+            return null;
         }
         if (command.equals("list")) {
             StringBuilder message = new StringBuilder("Here are the tasks in your list:");
@@ -131,55 +129,52 @@ public class Parser {
 
         if (command.equals("deadline")) {
             if (strArr.length == 1) throw new DukeEmptyArgumentException();
-            if (hasKeyword(strArr, "/by")) {
-                String title;
-                String[] splitArr = input.split("/by", 2);
-                try{
-                    title = splitArr[0].substring("deadline".length() + 1).trim();
-                }
-                catch (StringIndexOutOfBoundsException e){
-                    throw new DukeEmptyArgumentException();
-                }
-                String time = splitArr[1].trim();
-                Task task;
-                if(isDate(time)) {
-                    LocalDate ld = LocalDate.parse(time);
-                    task = new Deadline(title, ld);
-                } else {
-                    task = new Deadline(title, time);
-                }
-                taskList.insert(task);
-                return "Got it. I've added this task:" + "\n" + "   " + task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
-            }
-            else {
+            if (!hasKeyword(strArr, "/by")) {
                 throw new DukeMissingArgumentException("/by");
             }
+            String title;
+            String[] splitArr = input.split("/by", 2);
+            try{
+                title = splitArr[0].substring("deadline".length() + 1).trim();
+            }
+            catch (StringIndexOutOfBoundsException e){
+                throw new DukeEmptyArgumentException();
+            }
+            String time = splitArr[1].trim();
+            Task task;
+            if(isDate(time)) {
+                LocalDate ld = LocalDate.parse(time);
+                task = new Deadline(title, ld);
+            } else {
+                task = new Deadline(title, time);
+            }
+            taskList.insert(task);
+            return "Got it. I've added this task:" + "\n" + "   " + task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
+
         }
         if (command.equals("event")) {
             if (strArr.length == 1) throw new DukeEmptyArgumentException();
-            if (hasKeyword(strArr, "/at")) {
-                String title;
-                String[] splitArr = input.split("/at", 2);
-                try {
-                    title = splitArr[0].substring("event".length() + 1).trim();
-                } catch (StringIndexOutOfBoundsException e){
-                    throw new DukeEmptyArgumentException();
-                }
-                String time = splitArr[1].trim();
-                Task task;
-                if (isDate(time)) {
-                    LocalDate ld = LocalDate.parse(time);
-                    task = new Event(title, ld);
-                } else {
-                    task = new Event(title, time);
-                }
-                taskList.insert(task);
-                return "Got it. I've added this task:" + "\n" +
-                "   " + task.toString() + "\n" + "Now you have " + taskList.size() + "tasks in the list.";
-            }
-            else {
+            if (!hasKeyword(strArr, "/at")) {
                 throw new DukeMissingArgumentException("/at");
             }
+            String title;
+            String[] splitArr = input.split("/at", 2);
+            try {
+                title = splitArr[0].substring("event".length() + 1).trim();
+            } catch (StringIndexOutOfBoundsException e){
+                throw new DukeEmptyArgumentException();
+            }
+            String time = splitArr[1].trim();
+            Task task;
+            if (isDate(time)) {
+                LocalDate ld = LocalDate.parse(time);
+                task = new Event(title, ld);
+            } else {
+                task = new Event(title, time);
+            }
+            taskList.insert(task);
+            return "Got it. I've added this task:" + "\n" +
+                    "   " + task.toString() + "\n" + "Now you have " + taskList.size() + "tasks in the list.";
         }
         if (command.equals("delete")) {
             int index;
@@ -188,7 +183,6 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e){
                throw new DukeEmptyArgumentException();
             }
-
             Task task;
             try {
                 task = taskList.get(index);
@@ -209,10 +203,9 @@ public class Parser {
                     message.append("\n" + j + ". " + taskList.get(index).toString());
                     j++;
                 }
-
             }
             return message.toString();
         }
-        return null;
+        throw new DukeInvalidCommandException();
     }
 }

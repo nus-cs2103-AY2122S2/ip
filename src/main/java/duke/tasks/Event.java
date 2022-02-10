@@ -2,13 +2,14 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Represents an event which is a more specific instance of a Task.
  */
 public class Event extends Task {
     protected String time;
-    protected LocalDate ld;
+    protected LocalDate localdate;
 
     public Event(String description, String time) {
         super(description);
@@ -20,14 +21,14 @@ public class Event extends Task {
         this.isDone = isDone;
     }
 
-    public Event(String description, LocalDate ld) {
+    public Event(String description, LocalDate localDate) {
         super(description);
-        this.ld = ld;
+        this.localdate = localDate;
     }
 
     public Event(String description, LocalDate ld, boolean isDone) {
         super(description);
-        this.ld = ld;
+        this.localdate = ld;
         this.isDone = isDone;
     }
 
@@ -37,10 +38,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if(ld == null) {
+        if (localdate == null) {
             return "[E]" + super.toString() + " (by: " + time + ")";
         } else {
-            return "[E]" + super.toString() + " (by: " + ld.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy")) + ")";
+            return "[E]" + super.toString() + " (by: " + localdate.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy").withLocale(Locale.ENGLISH)) + ")";
         }
     }
 
@@ -51,7 +52,7 @@ public class Event extends Task {
     @Override
     public String getDetail(){
         int status = isDone ? 1 : 0;
-        String t = this.time == null ? ld.toString() : this.time;
+        String t = this.time == null ? localdate.toString() : this.time;
         return "E" + " | " + status + " | " + this.description + " | " + t + "\n";
     }
 }
