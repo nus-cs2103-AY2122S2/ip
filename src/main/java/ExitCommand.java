@@ -5,7 +5,10 @@ public class ExitCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+
         super.toggleExit();
+        return "Exiting.";
+
     }
 }

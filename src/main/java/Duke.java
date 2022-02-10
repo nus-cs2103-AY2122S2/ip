@@ -1,6 +1,8 @@
 import java.lang.System;
 import java.io.IOException;
 
+
+
 public class Duke {
 
     private final Ui ui;
@@ -50,7 +52,18 @@ public class Duke {
         ui.printExitMessage();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/savedTasks.txt").run();
+    public String getResponse(String input) {
+        try {
+            //String stringCommand = ui.readCommand();
+            Command command = Parser.parseCommand(input);
+            return command.execute(tasks, ui, storage);
+        } catch (DukeException de) {
+            ui.printDukeException(de);
+        } catch (IOException ie) {
+            ui.printUpdateIoError(ie);
+        }
+        return "Failed?";
     }
+
+
 }

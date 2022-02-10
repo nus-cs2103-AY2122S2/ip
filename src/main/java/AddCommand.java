@@ -18,9 +18,9 @@ public class AddCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.addTask(this.toAdd);
         storage.writeTasks(taskList);
-        ui.printAddTaskMessage(this.toAdd, taskList);
+        return ui.printAddTaskMessage(this.toAdd, taskList);
     }
 }

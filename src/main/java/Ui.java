@@ -6,6 +6,7 @@ public class Ui {
     private final Scanner sc;
 
     public Ui() {
+
         this.sc = new Scanner(System.in);
     }
 
@@ -47,39 +48,44 @@ public class Ui {
 
     }
 
-    public void printTasks(TaskList tasks) {
+    public String printTasks(TaskList tasks) {
         ArrayList<Task> taskList = tasks.getTasks();
+        StringBuilder toReturn = new StringBuilder();
+
         for (int i = 1; i <= taskList.size(); i++) {
-            System.out.println("" + i + ". " + taskList.get(i - 1).toString());
+            toReturn.append(i).append(". ").append(taskList.get(i - 1).toString());
         }
+          return  toReturn.toString();
+    }
+
+    public String printNumTasks(TaskList taskList) {
+       return "Now you have " + taskList.getTasks().size() + " tasks in the list.";
 
     }
 
-    public void printNumTasks(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
+    public String printAddTaskMessage(Task added, TaskList taskList) {
+        String toReturn = "Got it. I've added this task:\n" + added.toString();
+        toReturn += printNumTasks(taskList);
+        return toReturn;
+    }
+
+    public String printMarkDone(Task marked) {
+        return "This task is marked as done:\n" + marked.toString();
 
     }
 
-    public void printAddTaskMessage(Task added, TaskList taskList) {
-        System.out.println("Got it. I've added this task:\n" + added.toString());
-        printNumTasks(taskList);
+    public String printDeleteTask(Task deleted, TaskList taskList) {
+        String toReturn = "This task has been removed:\n" + deleted.toString();
+        toReturn += printNumTasks(taskList);
+        return  toReturn;
     }
 
-    public void printMarkDone(Task marked) {
-        System.out.println("This task is marked as done:\n" + marked.toString());
-
-    }
-
-    public void printDeleteTask(Task deleted, TaskList taskList) {
-        System.out.println("This task has been removed:\n" + deleted.toString());
-        printNumTasks(taskList);
-    }
-
-    public void printSomeTasks(ArrayList<Task> tasks) {
+    public String printSomeTasks(ArrayList<Task> tasks) {
+        StringBuilder toReturn = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println("" + i + ". " + tasks.get(i - 1).toString());
+            toReturn.append(i).append(". ").append(tasks.get(i - 1).toString());
         }
-
+        return toReturn.toString();
     }
 
     public String readCommand() {

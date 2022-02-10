@@ -10,20 +10,17 @@ public abstract class Command {
      * @param storage
      * @throws IOException
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
-    /**
-     *
-     */
+
     public void toggleExit() {
+
         this.exit = !this.exit;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public boolean isExit() {
+
         return this.exit;
     }
 }
