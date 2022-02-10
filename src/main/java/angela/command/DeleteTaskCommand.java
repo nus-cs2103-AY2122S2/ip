@@ -14,7 +14,7 @@ import angela.util.Ui;
  * Deletes a specific task
  */
 public class DeleteTaskCommand extends angela.command.Command {
-    private String description;
+    private final String description;
     private final BotException exception = new BotException();
 
     public DeleteTaskCommand(String description) {
@@ -30,7 +30,7 @@ public class DeleteTaskCommand extends angela.command.Command {
      * @param ui         Reference of the <code>Ui</code> object
      * @param botStorage Reference of the <code>BotStorage</code> object
      * @param dateTable  Reference of the <code>DateTable</code> object
-     * @throws IOException
+     * @throws IOException If an I/O error occur
      */
     @Override
     public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)

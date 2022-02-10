@@ -13,11 +13,6 @@ public class Ui {
      * Initialize an Ui interface
      */
     public Ui() {
-        //String logo = " ____        _        \n"
-        //        + "|  _ \\ _   _| | _____ \n"
-        //        + "| | | | | | | |/ / _ \\\n"
-        //        + "| |_| | |_| |   <  __/\n"
-        //        + "|____/ \\__,_|_|\\_\\___|\n";
         startChat();
     }
 
@@ -41,13 +36,13 @@ public class Ui {
      * @param storingList Current task list
      */
     public String showTaskList(ArrayList<Task> storingList) {
-        String reply = " Here are the tasks in your list:";
+        StringBuilder reply = new StringBuilder(" Here are the tasks in your list:");
 
         for (int i = 1; i <= storingList.size(); i++) {
-            reply += "\n";
-            reply += " " + i + "." + storingList.get(i - 1);
+            reply.append("\n");
+            reply.append(" ").append(i).append(".").append(storingList.get(i - 1));
         }
-        return reply;
+        return reply.toString();
     }
 
     /**
@@ -57,13 +52,7 @@ public class Ui {
      * @param isDone State of the task
      */
     public String showTaskMark(Task task, boolean isDone) {
-        if (isDone) {
-            task.changeTaskDone();
-            return " Nice! I've marked this task as done: " + "\n" + "  " + task;
-        } else {
-            task.changeTaskUndone();
-            return " OK, I've marked this task as not done yet: " + "\n" + "  " + task;
-        }
+        return task.changeTaskStatus(isDone);
     }
 
     /**
@@ -98,15 +87,14 @@ public class Ui {
      * @param eventList Collection of tasks on the date
      */
     public String showDate(ArrayList<Task> eventList) {
-        System.out.println(TypicalString.LONG_LINE);
-        String reply = "You have " + eventList.size()
-                + " deadlines/events in the day:";
+        StringBuilder reply = new StringBuilder("You have " + eventList.size()
+                + " deadlines/events in the day:");
 
         for (int i = 1; i <= eventList.size(); i++) {
-            reply += "\n";
-            reply += i + "." + eventList.get(i - 1);
+            reply.append("\n");
+            reply.append(i).append(".").append(eventList.get(i - 1));
         }
-        return reply;
+        return reply.toString();
     }
 
     /**
@@ -118,7 +106,7 @@ public class Ui {
     public String showSearchResult(int numIndex, Task task) {
         String reply = "";
         if (numIndex == 1) {
-            reply += " Here are the matching tasks in your list:";
+            reply += TypicalString.MATCH_TASK;
         }
         reply += " " + numIndex + "." + task;
         return reply;
@@ -150,6 +138,11 @@ public class Ui {
         GOODBYE {
             public String toString() {
                 return " Bye. Hope to see you again soon!";
+            }
+        },
+        MATCH_TASK {
+            public String toString() {
+                return " Here are the matching tasks in your list:";
             }
         }
     }

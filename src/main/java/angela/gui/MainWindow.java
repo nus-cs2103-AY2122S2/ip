@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
  * Controller for angela.gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String USER_IMAGE_URL = "/images/DaUser.png";
+    private static final String ANGELA_IMAGE_URL = "/images/DaAngela.png";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -24,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Angela angela;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image angelaImage = new Image(this.getClass().getResourceAsStream("/images/DaAngela.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_URL));
+    private final Image angelaImage = new Image(this.getClass().getResourceAsStream(ANGELA_IMAGE_URL));
 
     @FXML
     public void initialize() {
@@ -37,14 +39,13 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Angela's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = angela.getResponse(input);
-        //dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getAngelaDialog(response, angelaImage)

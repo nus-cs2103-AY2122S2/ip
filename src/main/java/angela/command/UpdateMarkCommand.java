@@ -15,8 +15,8 @@ import angela.util.Ui;
  * Updates the state of the task
  */
 public class UpdateMarkCommand extends angela.command.Command {
-    private String description;
-    private boolean isDone;
+    private final String description;
+    private final boolean isDone;
     private final BotException exception = new BotException();
 
     /**
@@ -43,21 +43,41 @@ public class UpdateMarkCommand extends angela.command.Command {
     @Override
     public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
-        String stateDescription = "";
+        String stateDescription = getTaskStatus();
+        return printCommandOutput(taskList, ui, botStorage, stateDescription);
+    }
 
+    /**
+     * Get status of the task
+     * @return The status of the task
+     */
+    private String getTaskStatus() {
         if (isDone) {
-            stateDescription = "mark";
+            return "mark";
         } else {
-            stateDescription = "unmark";
+            return "unmark";
         }
-        if (!NumericChecker.isNumeric(description)) {
-            return exception.printNotNumericError(stateDescription);
-        } else {
+    }
+
+    /**
+     * Returns the display string of the task to GUI
+     *
+     * @param taskList   Reference of the <code>TaskList</code> object
+     * @param ui         Reference of the <code>Ui</code> object
+     * @param botStorage Reference of the <code>BotStorage</code> object
+     * @return The output display string
+     * @throws IOException If an I/O error occur
+     */
+    private String printCommandOutput(TaskList taskList, Ui ui, BotStorage botStorage, String stateDescription)
+            throws IOException {
+        if (NumericChecker.isNumeric(description)) {
             int taskNumber = Integer.parseInt(description);
             assert taskNumber > -1 : "Task number should be a positive integer";
             Task task = taskList.getTask(taskNumber);
             botStorage.changeStatusTask(taskNumber, task);
             return ui.showTaskMark(task, isDone);
+        } else {
+            return exception.printNotNumericError(stateDescription);
         }
     }
 

@@ -10,7 +10,6 @@ import angela.command.GetTaskFromDateCommand;
 import angela.command.ShowListCommand;
 import angela.command.UpdateMarkCommand;
 import angela.command.WrongSyntaxCommand;
-import angela.datetime.DateTable;
 
 /**
  * Helps to parse the input command into the respective Command Object
@@ -28,19 +27,18 @@ public class Parser {
      * @param command User input command
      */
     private static void readInput(String command) {
-        int commandIndex = command.indexOf(" ");
-        botCommandWord = separateCommandWord(command, commandIndex);
-        description = separateDescription(command, commandIndex);
+        botCommandWord = separateCommandWord(command);
+        description = separateDescription(command);
     }
 
     /**
      * Returns the key command word from the input command
      *
      * @param command      The user input command
-     * @param commandIndex Separation index between key command word and description
      * @return The key command word
      */
-    private static String separateCommandWord(String command, int commandIndex) {
+    private static String separateCommandWord(String command) {
+        int commandIndex = command.indexOf(" ");
         if (commandIndex == -1) {
             return command;
         } else {
@@ -52,10 +50,10 @@ public class Parser {
      * Returns the description from the input command
      *
      * @param command      The user input command
-     * @param commandIndex Separation index between key command word and description
      * @return The description
      */
-    private static String separateDescription(String command, int commandIndex) {
+    private static String separateDescription(String command) {
+        int commandIndex = command.indexOf(" ");
         if (commandIndex == -1) {
             return command;
         } else {
@@ -66,11 +64,10 @@ public class Parser {
     /**
      * Returns a specific Command Object base on the input command
      *
-     * @param dateTable The database of date and tasks
      * @param fullInput The user input command
      * @return Command Object that suitable for the input command
      */
-    public static Command parse(DateTable dateTable, String fullInput) {
+    public static Command parse(String fullInput) {
         readInput(fullInput);
         switch (botCommandWord) {
         case "list":
@@ -88,7 +85,7 @@ public class Parser {
         case "delete":
             return new DeleteTaskCommand(description);
         case "date":
-            return new GetTaskFromDateCommand(dateTable, description);
+            return new GetTaskFromDateCommand(description);
         case "bye":
             return new ByeCommand();
         case "find":

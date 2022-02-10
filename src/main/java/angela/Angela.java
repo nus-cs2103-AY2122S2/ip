@@ -27,12 +27,11 @@ public class Angela {
      * @throws IOException If an I/O exception occur
      */
     public Angela(String path, String directory) throws IOException {
-        TaskList tempTaskList = new TaskList();
-
         botStorage = new BotStorage(path, directory);
         ui = new Ui();
         dateTable = new DateTable(ui);
 
+        TaskList tempTaskList = new TaskList();
         try {
             tempTaskList = new TaskList(botStorage, ui, dateTable);
         } catch (IOException e) {
@@ -49,7 +48,7 @@ public class Angela {
     public String run(String input) {
         String temp = "";
         try {
-            Command c = Parser.parse(dateTable, input);
+            Command c = Parser.parse(input);
             temp = c.execute(taskList, ui, botStorage, dateTable);
         } catch (IOException e) {
             System.out.println(e.getMessage());

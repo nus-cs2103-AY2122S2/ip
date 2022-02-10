@@ -78,7 +78,7 @@ public class BotStorage implements Storage {
                 task = new Task(description, type);
             }
             if (status.equals("1")) {
-                task.changeTaskDone();
+                task.changeTaskStatus(true);
             }
             storingList.add(task);
         }

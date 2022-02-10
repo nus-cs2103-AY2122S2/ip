@@ -9,17 +9,14 @@ import angela.util.Ui;
  * Extracts events on a specific date command
  */
 public class GetTaskFromDateCommand extends angela.command.Command {
-    private final DateTable dateTable;
     private final String description;
 
     /**
      * Initialize a Get Task From Date Command
      *
-     * @param dateTable Collections of dates and tasks
      * @param description The date that we need to find task on
      */
-    public GetTaskFromDateCommand(DateTable dateTable, String description) {
-        this.dateTable = dateTable;
+    public GetTaskFromDateCommand(String description) {
         this.description = description;
     }
 

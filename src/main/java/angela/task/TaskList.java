@@ -109,16 +109,16 @@ public class TaskList {
      * @param keyWord The keyword to find the matching task
      */
     public String findTasksByKeyWord(String keyWord) {
-        String reply = "";
+        StringBuilder reply = new StringBuilder();
         int numIndex = 0;
-        for (int i = 0; i < storingList.size(); i++) {
-            Task task = storingList.get(i);
+        for (Task task : storingList) {
             if (isTaskHasKeyWord(task, keyWord)) {
                 numIndex += 1;
-                reply += ui.showSearchResult(numIndex, task);
+                String taskDescription = ui.showSearchResult(numIndex, task);
+                reply.append(taskDescription);
             }
         }
-        return reply;
+        return reply.toString();
     }
 
     /**
