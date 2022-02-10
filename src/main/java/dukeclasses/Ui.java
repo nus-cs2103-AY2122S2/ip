@@ -9,6 +9,12 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    private static final String STORAGE_LOAD_ERROR = "Storage load failed\n";
+    private static final String STORAGE_UPDATE_ERROR = "Fail to update storage\n";
+    private static final String FILE_ERROR = "Invalid File\n";
+    private static final String INVALID_INPUT_ERROR = "    Invalid input detected. Please check your input\n";
+    private static final String TASK_NOT_FOUND_ERROR = "Task not found.\n";
+
     /**
      * Class constructor to initiate Ui
      */
@@ -22,7 +28,7 @@ public class Ui {
      * @return String illustrating the load error message.
      */
     public String showLoadingError() {
-        return "Storage load failed\n";
+        return STORAGE_LOAD_ERROR;
     }
 
     /**
@@ -31,7 +37,7 @@ public class Ui {
      * @return String illustrating the file error message.
      */
     public String showFileError() {
-        return "Invalid File\n";
+        return FILE_ERROR;
     }
 
     /**
@@ -40,7 +46,7 @@ public class Ui {
      * @return String illustrating the storage error message.
      */
     public String showStorageError() {
-        return "Fail to update storage\n";
+        return STORAGE_UPDATE_ERROR;
     }
 
     /**
@@ -49,7 +55,7 @@ public class Ui {
      * @return String illustrating the input error message.
      */
     public String showInputError() {
-        return "    Invalid input detected. Please check your input\n";
+        return INVALID_INPUT_ERROR;
     }
 
     /**
@@ -76,7 +82,7 @@ public class Ui {
      * @return String illustrating the task cannot be found error message.
      */
     public String sayTaskNotFound() {
-        return "Task not found.\n";
+        return TASK_NOT_FOUND_ERROR;
     }
 
     /**
@@ -87,10 +93,9 @@ public class Ui {
      */
     public String identifyTask(Task task) {
         if (task.getIsDone()) {
-            String output = String.format("%s    %s", Commands.MARK.toString(), task.identify());
-            return output;
+            return String.format("%s    %s", Commands.MARK.toString(), task.toString());
         } else {
-            return String.format("%s      %s", Commands.UNMARK.toString(), task.identify());
+            return String.format("%s    %s", Commands.UNMARK.toString(), task.toString());
         }
     }
 
@@ -101,9 +106,9 @@ public class Ui {
      * @param numOfTask Number of tasks in the list.
      * @return String to be printed which illustrates identity of the new task.
      */
-    public String newTask(Task task, int numOfTask) {
+    public String sayAddTask(Task task, int numOfTask) {
         return String.format("%s    %s    Now you have %d tasks in the list.",
-                Commands.ADD.toString(), task.identify(),  numOfTask);
+                Commands.ADD.toString(), task.toString(),  numOfTask);
     }
 
     /**
@@ -142,7 +147,7 @@ public class Ui {
         String output = Commands.MATCH.toString();
         for (int i = 0; i < tasks.getTaskList().size(); i++) {
             Task task = tasks.getTaskList().get(i);
-            output = output + String.format("    %s", task.identify());
+            output = output + String.format("    %s", task.toString());
         }
         return output;
     }
@@ -155,6 +160,6 @@ public class Ui {
      */
     public String deleteTask(Task task) {
         return String.format(
-                "%s      %s", Commands.DELETE.toString(), task.identify());
+                "%s      %s", Commands.DELETE.toString(), task.toString());
     }
 }
