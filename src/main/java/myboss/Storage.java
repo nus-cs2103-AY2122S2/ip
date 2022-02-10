@@ -21,7 +21,7 @@ public class Storage {
      *
      * @param filePath path to file.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws MyBossException {
         this.filePath = filePath;
         createDirAndFileIfNonExistent();
     }
@@ -32,7 +32,7 @@ public class Storage {
      * @param task task specified.
      * @return whether the task was appended successfully.
      */
-    public boolean appendTaskToFile(Task task) {
+    public boolean appendTaskToFile(Task task) throws MyBossException {
         try {
             FileWriter fw = new FileWriter(filePath, true);
             String stringToAppend = task.taskType + "|" + task.isDone + "|" + task.taskName;
@@ -52,8 +52,7 @@ public class Storage {
             fw.close();
             return true;
         } catch (IOException e) {
-            //Ui.outputMyBoss("Error appending task to text file!");
-            return false;
+            throw new MyBossException(Ui.appendToFileExceptionMsg);
         }
     }
 
@@ -62,7 +61,7 @@ public class Storage {
      *
      * @return whether the clear was successful.
      */
-    public boolean clearTaskFile() {
+    public boolean clearTaskFile() throws MyBossException {
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write("");
@@ -70,7 +69,7 @@ public class Storage {
             return true;
         } catch (IOException e) {
             //Ui.outputMyBoss("Error clearing DB");
-            return false;
+            throw new MyBossException(Ui.clearFileExceptionMsg);
         }
     }
 
@@ -79,7 +78,7 @@ public class Storage {
      *
      * @return whether the directory and file was created successfully.
      */
-    public boolean createDirAndFileIfNonExistent() {
+    public boolean createDirAndFileIfNonExistent() throws MyBossException {
         try {
             File fileObj = new File(filePath);
             File parentFile = fileObj.getParentFile();
@@ -91,8 +90,7 @@ public class Storage {
             }
             return true;
         } catch (IOException e) {
-            //Ui.outputMyBoss("An Error has occurred with file creation!");
-            return false;
+            throw new MyBossException(Ui.fileCreationExceptionMsg);
         }
     }
 
@@ -101,7 +99,7 @@ public class Storage {
      *
      * @return the ArrayList of tasks loaded from storage file.
      */
-    public ArrayList<Task> loadTaskListFromFile() {
+    public ArrayList<Task> loadTaskListFromFile() throws MyBossException {
         // get taskList from file
         ArrayList<Task> tempTaskList = new ArrayList<>();
         try {
@@ -128,7 +126,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            //Ui.outputMyBoss("Error file not found!");
+            throw new MyBossException(Ui.fileNotFoundExceptionMsg);
         }
         return tempTaskList;
     }
@@ -138,10 +136,11 @@ public class Storage {
      *
      * @param taskList list of tasks to be written into the storage file.
      */
-    public void updateFile(ArrayList<Task> taskList) {
+    public void updateFile(ArrayList<Task> taskList) throws MyBossException {
         createDirAndFileIfNonExistent();
         clearTaskFile();
-        taskList.forEach((task)
-                -> appendTaskToFile(task));
+        for (int i = 0; i < taskList.size(); i++) {
+            appendTaskToFile(taskList.get(i));
+        }
     }
 }
