@@ -2,9 +2,12 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
-import duke.task.*;
 import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * AddCommand is a Command that adds a task that is either a ToDo task, Deadline
@@ -19,7 +22,6 @@ public class AddCommand extends Command {
     /**
      * Constructor for AddCommand which takes in the type of task and description of
      * task that is to be added.
-     * 
      * @param type        type of task to be added
      * @param description description of task to be added
      */
@@ -31,7 +33,6 @@ public class AddCommand extends Command {
     /**
      * Adds the task to TaskList, updates the storage file and notifies the user
      * when it's done
-     * 
      * @param tasks   task list local to user
      * @param ui      ui instance local to user
      * @param storage storage instance local to user

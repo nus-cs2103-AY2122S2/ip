@@ -9,7 +9,6 @@ public class ToDo extends Task {
     /**
      * Constructor for ToDo task takes in the description of the task and whether it
      * has been marked as done.
-     * 
      * @param description the description of the ToDo task
      * @param isDone      true if the task has been marked as done
      */
@@ -19,7 +18,6 @@ public class ToDo extends Task {
 
     /**
      * Constructor for ToDo task takes in the description of the task.
-     * 
      * @param description the description of the ToDo task
      */
     public ToDo(String description) {
@@ -28,7 +26,6 @@ public class ToDo extends Task {
 
     /**
      * Returns the String representation of todo task.
-     * 
      * @return string representation of todo task
      */
     @Override

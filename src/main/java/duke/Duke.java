@@ -13,7 +13,6 @@ public class Duke {
     /**
      * Constructor of Duke that takes in a file path specifying the location of the
      * storage file.
-     * 
      * @param filePath file path specifying the location of the storage file
      */
     public Duke(String filePath) {
@@ -49,7 +48,6 @@ public class Duke {
 
     /**
      * Runs the Duke program.
-     * 
      * @param args
      */
     public static void main(String[] args) {

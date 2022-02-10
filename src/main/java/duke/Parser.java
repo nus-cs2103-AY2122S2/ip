@@ -18,7 +18,6 @@ public class Parser {
 
     /**
      * Returns the relevent Command object to be executed from the string input.
-     * 
      * @param fullCommand the command as a String
      * @return Command object that triggers an action from the program based on the
      *         command

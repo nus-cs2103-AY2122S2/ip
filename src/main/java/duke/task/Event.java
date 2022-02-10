@@ -19,7 +19,6 @@ public class Event extends Task {
     /**
      * Constructor for Event that takes in a description of the Event task and
      * whether it is marked as done.
-     * 
      * @param description the description of the event task, containing the date and
      *                    time of the event
      * @param isDone      true if the event task has been marked as done
@@ -54,7 +53,6 @@ public class Event extends Task {
 
     /**
      * Constructor for Event that takes in a description of the Event task.
-     * 
      * @param description the description of the event task, containing the date and
      *                    time of the event
      * @throws DukeException exception thrown when the event datetime is invalid due
@@ -66,7 +64,6 @@ public class Event extends Task {
 
     /**
      * Returns the String representation of event task.
-     * 
      * @return string representation of event task
      */
     @Override

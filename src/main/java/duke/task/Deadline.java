@@ -19,7 +19,6 @@ public class Deadline extends Task {
     /**
      * Constructor for Deadline that takes in a description of the Deadline task and
      * whether it is marked as done.
-     * 
      * @param description the description of the deadline task, containing the date
      *                    and time of deadline
      * @param isDone      true if the deadline task has been marked as done
@@ -54,7 +53,6 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline that takes in a description of the Deadline task
-     * 
      * @param description the description of the deadline task, containing the date
      *                    and time of deadline
      * @throws DukeException exception thrown when the deadline is invalid due to
@@ -67,7 +65,6 @@ public class Deadline extends Task {
 
     /**
      * Returns the String representation of deadline task.
-     * 
      * @return string representation of deadline task
      */
     @Override

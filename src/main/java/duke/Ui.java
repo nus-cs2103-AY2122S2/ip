@@ -10,7 +10,7 @@ import duke.task.Task;
  */
 public class Ui {
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * welcome method prints out a welcome message when the user boots the program.
@@ -30,31 +30,28 @@ public class Ui {
     /**
      * addMessage method prints out a message to let the user know what task has
      * been added and how many tasks there are currently in the task list.
-     * 
      * @param task the task that has just been added into the task list
      * @param size the size of the task list
      */
     public void addMessage(Task task, int size) {
-        System.out.println("Got it. I've added this task:\n" + task.toString() +
-                "\nNow you have " + size + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + task.toString()
+                + "\nNow you have " + size + " tasks in the list.");
     }
 
     /**
      * deleteMessage method prints out a message to let the user know what task has
      * been deleted and how many tasks there are remaining in the task list.
-     * 
      * @param task the task that has just been deleted into the task list
      * @param size the size of the task list
      */
     public void deleteMessage(Task task, int size) {
-        System.out.println("Noted. I've removed this task:\n" + task.toString() +
-                "\nNow you have " + size + " tasks in the list.");
+        System.out.println("Noted. I've removed this task:\n" + task.toString()
+                + "\nNow you have " + size + " tasks in the list.");
     }
 
     /**
      * markMessage method prints out a message to let the user know which task has
      * just been marked as done.
-     * 
      * @param task the task that has just been marked as done
      */
     public void markMessage(Task task) {
@@ -64,7 +61,6 @@ public class Ui {
     /**
      * unmarkMessage method prints out a message to let the user know which task has
      * just been marked as not yet done.
-     * 
      * @param task the task that has just been marked as not yet done
      */
     public void unmarkMessage(Task task) {
@@ -82,7 +78,6 @@ public class Ui {
     /**
      * readCommand method reads for the user's input and reflects that input to the
      * program to be processed.
-     * 
      * @return a command of type String that is the user's input
      */
     public String readCommand() {
@@ -93,7 +88,6 @@ public class Ui {
     /**
      * showError method prints out the error message to the user to let the user
      * know why the program cannot run as intended
-     * 
      * @param errorMessage a message describing the fault
      */
     public void showError(String errorMessage) {

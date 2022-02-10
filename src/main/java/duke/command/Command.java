@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.TaskList;
+import duke.Ui;
 
 /**
  * Command is an abstract class that specifies 2 methods that has to be

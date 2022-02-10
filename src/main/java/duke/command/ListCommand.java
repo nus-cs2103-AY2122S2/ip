@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.TaskList;
+import duke.Ui;
 
 /**
  * ListCommand is a Command that triggers the program to print out the task list
@@ -13,7 +13,6 @@ public class ListCommand extends Command {
 
     /**
      * Lists out the tasks stored in the tasks list.
-     * 
      * @param tasks   task list local to user
      * @param ui      ui instance local to user
      * @param storage storage instance local to user

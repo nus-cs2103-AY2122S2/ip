@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-import duke.TaskList;
 
 /**
  * DeleteCommand is a Command that deletes the task at the index specified from
@@ -16,7 +16,6 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for DeleteCommand that takes in the index of the task to be
      * deleted from the program.
-     * 
      * @param index index of task to be deleted
      */
     public DeleteCommand(int index) {
@@ -26,7 +25,6 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the indexed task from task list and storage file and updates the user
      * when the task is deleted.
-     * 
      * @param tasks   task list local to user
      * @param ui      ui instance local to user
      * @param storage storage instance local to user

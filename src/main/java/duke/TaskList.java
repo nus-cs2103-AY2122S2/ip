@@ -12,13 +12,12 @@ import duke.task.ToDo;
  * the task list.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
     private static String buffer = " xxx ";
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList that takes in data from the storage file and
      * constructs a task list from there.
-     * 
      * @param tasksArr data read from the storage file
      * @throws DukeException exception when data is corrupted or task list cannot be
      *                       created as intended
@@ -62,7 +61,6 @@ public class TaskList {
 
     /**
      * Adds the task specified to the task list.
-     * 
      * @param task the task to be added
      */
     public void add(Task task) {
@@ -71,7 +69,6 @@ public class TaskList {
 
     /**
      * Deletes the task indexed by the index specified.
-     * 
      * @param index the index of the task that is to be deleted
      * @return the task after it is deleted from the task list
      */
@@ -93,7 +90,6 @@ public class TaskList {
     
     /**
      * Prints out all the tasks in the task list that contains the keyword.
-     * 
      * @param keyword keyword to be contained by the tasks
      */
     public void find(String keyword) {
@@ -113,7 +109,6 @@ public class TaskList {
     
     /**
      * Marks the task indexed by the index as done.
-     * 
      * @param index the index of the task that is to be marked as done
      * @return the task after it is marked as done
      */
@@ -126,7 +121,6 @@ public class TaskList {
 
     /**
      * Marks the task indexed by the index as not yet done.
-     * 
      * @param index the index of the task that is to be marked as not yet done
      * @return the task after it is marked as not yet done
      */
@@ -139,7 +133,6 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the task list.
-     * 
      * @return number of tasks in the task list
      */
     public int getNumberOfTasks() {

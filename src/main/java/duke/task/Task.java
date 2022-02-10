@@ -12,8 +12,7 @@ public class Task {
     /**
      * Constructor for Task that takes in the type of task, description of task and
      * whether the task is marked as done as input to instantiate a new instance of
-     * Task
-     * 
+     * Task.
      * @param type        the type of task
      * @param description the description of the task
      * @param isDone      whether the task is done
@@ -27,7 +26,6 @@ public class Task {
     /**
      * Constructor for Task that takes in the type of task and description of task.
      * Task is assumed to be not yet done.
-     * 
      * @param type        the type of task
      * @param description the description of the task
      */
@@ -52,7 +50,6 @@ public class Task {
     /**
      * Returns a boolean value depending on whether the task is done,
      * if it is then the method returns true.
-     * 
      * @return true if the task has been marked as done
      */
     public boolean isDone() {
@@ -61,7 +58,6 @@ public class Task {
 
     /**
      * Returns the type of the task.
-     * 
      * @return the type of task
      */
     public String getType() {
@@ -70,7 +66,6 @@ public class Task {
 
     /**
      * Returns the description of the task.
-     * 
      * @return the description of the task
      */
     public String getDescription() {

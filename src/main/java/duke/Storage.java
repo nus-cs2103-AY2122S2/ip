@@ -13,13 +13,12 @@ import duke.task.Task;
  * Storage class manages the storage file and the actions on the storage file.
  */
 public class Storage {
-    private File storageFile;
     private static String buffer = " xxx ";
+    private File storageFile;
 
     /**
      * Constructor for Storage that takes in a file path that points to the storage
      * file
-     * 
      * @param filePath
      */
     public Storage(String filePath) {
@@ -29,7 +28,6 @@ public class Storage {
     /**
      * Reads the content of the storage file and passes the data to be processed by
      * the program.
-     * 
      * @return an array of Strings each representing the tasks stored in the storage
      *         file
      * @throws DukeException exception thrown when file cannot be found or is
@@ -46,7 +44,6 @@ public class Storage {
 
                 dataLine = storageFileReader.readLine();
             }
-
             String[] tasksArr = fileContent.split(System.lineSeparator());
             storageFileReader.close();
 
@@ -60,15 +57,13 @@ public class Storage {
 
     /**
      * Reflects the addition of the task in the storage list.
-     * 
      * @param task the task that has just been added to the task list
      * @throws DukeException exception thrown when there is an error accessing or
      *                       writing to the storage file
      */
     public void updateAfterAdd(Task task) throws DukeException {
         try {
-            int isMarked = task.isDone() ? 1 : 0; // isMarked is the integer representation of task.isDone(); 1 = true,
-                                                  // 0 = false
+            int isMarked = task.isDone() ? 1 : 0; // isMarked is the integer representation of task.isDone();
 
             FileWriter storageFileWriter = new FileWriter(storageFile, true);
             storageFileWriter.write(task.getType() + buffer + isMarked + buffer + task.getDescription() + "\n");
@@ -80,7 +75,6 @@ public class Storage {
 
     /**
      * Reflects the marked indexed task in the storage list.
-     * 
      * @param index the index of the task that has just been marked as done
      * @throws DukeException exception thrown when there is an error accessing or
      *                       writing to the storage file
@@ -91,7 +85,6 @@ public class Storage {
 
     /**
      * Reflects the unmarked indexed task in the storage list.
-     * 
      * @param index the index of the task that has just been marked as not yet done
      * @throws DukeException exception thrown when there is an error accessing or
      *                       writing to the storage file
@@ -102,7 +95,6 @@ public class Storage {
 
     /**
      * Reflects the deleted task in the storage list.
-     * 
      * @param index the index of the task that has just been deleted
      * @throws DukeException exception thrown when there is an error accessing or
      *                       writing to the storage file
@@ -138,7 +130,6 @@ public class Storage {
     /**
      * Updates the storage file when there has just been a change to whether a task
      * has been marked as done or not yet done.
-     * 
      * @param index        index of the task which the action is performed on
      * @param isToBeMarked true if the action marked the task as done, otherwise
      *                     false
@@ -185,7 +176,6 @@ public class Storage {
 
     /**
      * Wipes the storage file of all its data.
-     * 
      * @throws DukeException exception thrown when there is an error accessing or
      *                       writing to the storage file
      */
