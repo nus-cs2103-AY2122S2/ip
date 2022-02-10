@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 
 /**
@@ -24,6 +26,7 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return tasks;
     }
+
 
     /**
      * Marks task on the list as done
@@ -80,6 +83,25 @@ public class TaskList {
             }
         }
         return matchingTasks;
+    }
+
+    /**
+     * Updates section of task with content specified
+     *
+     * @param number task number of task to be updated
+     * @param section section of task to be updated
+     * @param content content to be placed in that section
+     * @throws DukeException if section is invalid
+     */
+    public void updateTask(int number, String section, String content) throws DukeException {
+        assert number >= 0 && number <= tasks.size();
+        if (section.equals("description")) {
+            tasks.get(number).updateDescription(content);
+        } else if (section.equals("date")) {
+            tasks.get(number).updateDate(content);
+        } else {
+            throw new DukeException("The section you have inputted is invalid.");
+        }
     }
 }
 

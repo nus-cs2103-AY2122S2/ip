@@ -117,4 +117,8 @@ public class Ui {
     public String toString() {
         return output;
     }
+
+    public void showUpdateTask(Task task) {
+        output = "I have just updated your task to:\n" + task;
+    }
 }

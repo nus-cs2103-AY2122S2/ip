@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.exception.DukeException;
+import duke.main.Duke;
+
 /**
  * Represents a todo task
  */
@@ -17,6 +20,10 @@ public class Todo extends Task{
     @Override
     public String getFileFormat() {
         return "T" + super.getFileFormat();
+    }
+
+    public void updateDate(String content) throws DukeException {
+        throw new DukeException("Todo task does not have a date!");
     }
 
     /**
