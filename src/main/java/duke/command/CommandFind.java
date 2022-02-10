@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Response;
 import duke.TaskList;
-import duke.Ui;
 
 public class CommandFind extends Command {
     private String keyword;

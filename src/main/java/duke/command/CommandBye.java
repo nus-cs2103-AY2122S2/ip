@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Over;
 import duke.Response;
-import duke.Ui;
 
 /**
  * Represents the 'bye' command that shuts off Duke.
