@@ -1,5 +1,7 @@
 package duke.gui;
 
+import static javafx.application.Platform.exit;
+
 import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -11,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import static javafx.application.Platform.exit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

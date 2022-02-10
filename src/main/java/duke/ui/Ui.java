@@ -1,8 +1,5 @@
 package duke.ui;
 
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-
 import duke.task.Task;
 import duke.tasklist.DukeList;
 
@@ -38,20 +35,6 @@ public class Ui {
         return msg;
     }
 
-    /**
-     * Reads input from the console.
-     * @return String of input from console
-     */
-    public String readInput() {
-        Scanner s = new Scanner(System.in);
-        String ans = "";
-        try {
-            ans = s.nextLine();
-        } catch (NoSuchElementException e) {
-            System.out.println("Input a command!");
-        }
-        return ans;
-    }
 
     public String markTask(Task t) {
         return "Duke: Nice! I've marked this task as done:\n      " + t;
