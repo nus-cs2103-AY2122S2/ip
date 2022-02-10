@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 public class TaskList {
     static void add(Task task) {
+        assert Storage.taskList != null : "The list does not exist in the first place.";
         Storage.taskList.add(task);
     }
 
     static String delete(int idx) {
+        assert Storage.taskList != null : "The list does not exist in the first place.";
         try {
             Storage.taskList.remove(idx - 1);
             Storage s = new Storage();
@@ -23,6 +25,7 @@ public class TaskList {
     }
 
     static String list() {
+        assert Storage.taskList != null : "The list does not exist in the first place.";
         ArrayList<Task> taskArrayList = Storage.taskList;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the tasks in your list: " + "\n");
@@ -33,6 +36,7 @@ public class TaskList {
     }
 
     static String find(String term){
+        assert Storage.taskList != null : "The list does not exist in the first place.";
         StringBuilder stringBuilder = new StringBuilder();
         boolean hasResults = false;
         for (Task t : Storage.taskList) {

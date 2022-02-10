@@ -12,6 +12,7 @@ public class Parser {
     }
 
     public ParsedAnswer parse() {
+        assert !input.isEmpty() : "Input cannot be left blank.";
         String[] parsedString = input.toLowerCase().split(" ", 2);
         switch (parsedString[0]) {
             case "bye":
