@@ -23,6 +23,7 @@ public class Storage {
      * @param filename THe file where the tasks in the tasks list is retrieved and stored.
      */
     public Storage(String filename) {
+        assert filename != null : "Filename is empty";
         this.file = new File(filename);
     }
 

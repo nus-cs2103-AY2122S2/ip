@@ -1,6 +1,7 @@
 package duke.components;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
@@ -27,7 +28,12 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            // Checks if DialogueBox.fxml file exists.
+            URL dialogueBoxFile = MainWindow.class.getResource("/view/DialogBox.fxml");
+            assert dialogueBoxFile != null : "Dialogue Box Fxml file not found";
+            assert img != null : "Image not found";
+            // If it exists, continue running.
+            FXMLLoader fxmlLoader = new FXMLLoader(dialogueBoxFile);
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
