@@ -139,6 +139,25 @@ public class TaskManager {
         this.listStorage.saveList(tasks);
     }
 
+    /**
+     * Updates task description of a task at a given index location
+     *
+     * @param num index of the Task to be updated
+     * @param description String representing the new task description
+     * @return String containing relevant Task object
+     */
+    public String update(Integer num, String description) {
+        Task task = tasks.get(num);
+        task.update(description);
+        return uiManager.printUpdate(task);
+    }
+
+    /**
+     * Prints an exit message upon exiting the program.
+     *
+     * @return String to print on exit
+     * @throws IOException if tasks in task list are not serializable
+     */
     public String exit() throws IOException {
         this.saveList();
         return this.uiManager.exit();

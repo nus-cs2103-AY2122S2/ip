@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOperationException;
 import duke.tasks.TaskManager;
 import duke.ui.UiManager;
-
-import java.io.IOException;
 
 /**
  * NumCommand Object that issues commands dealing with
@@ -39,11 +39,13 @@ public class NumCommand extends Command {
      * @return String containing the relevant Task Object
      * @throws IndexOutOfBoundsException if the index provided is invalid
      * @throws InvalidOperationException if the operation is invalid
+     * @throws DukeException if the command is invalid
+     * @throws IOException if the task is not serializable
      */
     public String execute() throws IndexOutOfBoundsException, InvalidOperationException, DukeException, IOException {
         switch (type) {
         case MARK:
-            String markLabel =  taskManager.mark(num);
+            String markLabel = taskManager.mark(num);
             this.taskManager.saveList();
             return markLabel;
         case UNMARK:

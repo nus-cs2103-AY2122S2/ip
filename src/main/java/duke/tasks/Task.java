@@ -22,4 +22,6 @@ public abstract class Task implements Serializable {
      * @throws InvalidOperationException if Task Object is undone
      */
     public abstract void unmark() throws InvalidOperationException;
+
+    public abstract void update(String description);
 }

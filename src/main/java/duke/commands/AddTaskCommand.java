@@ -71,6 +71,7 @@ public class AddTaskCommand extends Command {
      * @return a String containing the Task Object
      * @throws DateTimeParseException if an invalid String is passed into date
      * @throws DukeException if an invalid command is given
+     * @throws IOException if the task is not serializable
      */
     public String execute() throws DateTimeParseException, DukeException, IOException {
         switch (type) {

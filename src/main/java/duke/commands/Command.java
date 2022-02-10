@@ -1,9 +1,9 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOperationException;
-
-import java.io.IOException;
 
 /**
  * Skeletal implementation of a Command Object.

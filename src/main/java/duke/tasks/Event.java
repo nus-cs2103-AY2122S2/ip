@@ -54,6 +54,11 @@ public class Event extends Task implements Serializable {
 
     }
 
+    @Override
+    public void update(String description) {
+        this.description = description;
+    }
+
     /**
      * @return a String representation of the Event Object
      */
