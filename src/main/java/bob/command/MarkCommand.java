@@ -19,6 +19,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage store) throws BobException {
+        assert index >= 0 : "Index is negative";
         Task toMark = tasks.getTask(index);
         if (toMark.isMarked()) {
             return ui.doneBefore();
