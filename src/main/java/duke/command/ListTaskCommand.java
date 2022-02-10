@@ -11,6 +11,8 @@ import duke.task.TaskList;
  */
 public class ListTaskCommand extends Command {
 
+    private static String LIST_TASK_HEADER = "Here are your tasks:\n";
+    private static String ADD_TASK_PROMPT = "Please add some tasks first *(^.^)*";
     /**
      * Executes the listing of tasks within the Task List.
      *
@@ -21,17 +23,17 @@ public class ListTaskCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (tasks.getSize() == 0) {
-            throw new DukeException("Please add some tasks first *(^.^)*");
+        boolean isTaskListEmpty = tasks.getSize() == 0;
+        if (isTaskListEmpty) {
+            throw new DukeException(ADD_TASK_PROMPT);
         } else {
-            String topLine = ("Here are your tasks:\n");
             String output = "";
             for (int i = 0; i < tasks.getSize(); i++) {
                 Task currentTask = tasks.getTask(i);
                 String message = currentTask.getTask();
                 output = output + ("\n" + (i + 1) + ". " + message);
             }
-            return topLine + output;
+            return LIST_TASK_HEADER + output;
         }
     }
 }
