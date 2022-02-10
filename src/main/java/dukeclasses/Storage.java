@@ -69,7 +69,7 @@ public class Storage {
         String[] processedDataDescription = processedData[2].split("\\(by:", 2);
         String temp = processedDataDescription[1].replace(")", "");
 
-        LocalDate date = null;
+        LocalDate date;
         try {
             date = LocalDate.parse(temp.trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException errorMessage) {
@@ -139,7 +139,6 @@ public class Storage {
      * @throws DukeException If file is not writeable.
      */
     public void updateStorageFile(ArrayList<Task> dataArrList) throws DukeException {
-        File file = new File(filePath);
         String updatedFileContents = "";
 
         for (int i = 0; i < dataArrList.size(); i++) {
@@ -163,7 +162,6 @@ public class Storage {
      * @throws DukeException If file is not writeable.
      */
     public void appendToStorage(Task task) throws DukeException {
-        File file = new File(filePath);
         try {
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(String.format("    %s", task.toString()));

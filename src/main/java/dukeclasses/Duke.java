@@ -38,8 +38,8 @@ public class Duke extends Application {
 
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private final Image backgroundImage = new Image(this.getClass().getResource("/images/background.png").toString());
-    private final String PARSE_ERROR = "Fail to parse user input.";
+    private final Image backgroundImage = new Image(
+            this.getClass().getResource("/images/background.png").toString());
     private static final String TEXT_DATA_FILE_PATH = "data.txt";
     private boolean isExit = false;
 
@@ -152,7 +152,7 @@ public class Duke extends Application {
      * @return String output that is printed in the GUI as Duke's response.
      */
     private String executeChangeOfStatusCommand(ParsedCommand command) {
-        Task modifiedTask = null;
+        Task modifiedTask;
         if (command.getCommand().equals("mark")) {
             modifiedTask = tasks.updateTask(command.getIndex(), true);
         } else if (command.getCommand().equals("unmark")) {
@@ -175,7 +175,7 @@ public class Duke extends Application {
      * @return String output that is printed in the GUI as Duke's response.
      */
     private String executeDeleteTaskCommand(ParsedCommand command) {
-        Task deletedTask = null;
+        Task deletedTask;
         try {
             deletedTask = tasks.deleteTask(command.getIndex());
         } catch (DukeException errorMessage) {
@@ -196,8 +196,7 @@ public class Duke extends Application {
      * @return String output that is printed in the GUI as Duke's response.
      */
     private String executeNewTaskCommand(ParsedCommand command) {
-        //return a null Task if command is not any of the cases.
-        Task newTask = null;
+        Task newTask;
         switch (command.getCommand()) {
         case "todo":
             newTask = new ToDo(command.getTask());
@@ -377,7 +376,8 @@ public class Duke extends Application {
     private void presetDialogContainer(VBox dialogBox) {
         dialogBox.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogBox.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        dialogBox.getChildren().add(DialogBox.getUserDialog(new Label(ui.greet()), new ImageView(duke)));
+        dialogBox.getChildren().add(DialogBox.getUserDialog(
+                new Label(ui.greet()), new ImageView(duke)));
     }
 
     /**
