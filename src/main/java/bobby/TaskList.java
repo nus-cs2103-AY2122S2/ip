@@ -60,7 +60,6 @@ public class TaskList {
         } else {
             throw new BobbyException("Description cannot be empty.");
         }
-
     }
 
     /**
@@ -89,23 +88,17 @@ public class TaskList {
 
     /**
      * deletes Removes Task of index given in user input from the list.
-     * @param task user input containing index of task to be deleted.
+     * @param index index of task to be deleted.
      * @throws BobbyException when no given index or when index is bigger than list.
      */
-    public String delete(String task) throws BobbyException {
-        String[] inputs = task.split(" ", 2);
-        if (inputs.length > 1) {
-            int i = Integer.parseInt(inputs[1]) - 1;
-            if (i > taskArray.size()) {
-                throw new BobbyException("Invalid index given to Bobby.");
-            }
-            Task t = taskArray.get(i);
-            taskArray.remove(i);
-            storage.updateFile(taskArray);
-            return Ui.printDeletedTask(t, taskArray);
-        } else {
-            throw new BobbyException("Indicate which task should be deleted.");
+    public String delete(int index) throws BobbyException {
+        if (index > taskArray.size() - 1|| index < 0) {
+            throw new BobbyException("Invalid index given to Bobby.");
         }
+        Task t = taskArray.get(index);
+        taskArray.remove(index);
+        storage.updateFile(taskArray);
+        return Ui.printDeletedTask(t, taskArray);
     }
 
     /**
@@ -118,32 +111,34 @@ public class TaskList {
 
     /**
      * Marks a task as done.
-     * @param i index of task to be marked as done.
+     * @param index index of task to be marked as done.
      * @throws BobbyException when index given exceeds size of list.
      */
-    public String mark(int i) throws BobbyException {
-        if (i > taskArray.size()) {
+    public String mark(int index) throws BobbyException {
+        if (index > taskArray.size() - 1 || index < 0) {
             throw new BobbyException("Invalid index given to Bobby.");
         }
-        Task t = taskArray.get(i);
+        Task t = taskArray.get(index);
         t.markAsDone();
         storage.updateFile(taskArray);
+        assert t.isDone: "error in mark";
         return Ui.taskDone(t);
     }
 
 
     /**
      * Unmarks a task as done.
-     * @param i index of task to be unmarked.
+     * @param index index of task to be unmarked.
      * @throws BobbyException when index given exceeds size of list.
      */
-    public String unmark(int i) throws BobbyException {
-        if (i > taskArray.size()) {
+    public String unmark(int index) throws BobbyException {
+        if (index > taskArray.size() - 1 || index < 0) {
             throw new BobbyException("Invalid index given to Bobby.");
         }
-        Task t = taskArray.get(i);
+        Task t = taskArray.get(index);
         t.unmarkAsDone();
         storage.updateFile(taskArray);
+        assert !t.isDone: "error in unmark";
         return Ui.taskNotDone(t);
     }
 
@@ -154,7 +149,6 @@ public class TaskList {
     public String find(String query) {
         boolean isSuccessful = false;
         ArrayList<Task> resultTasks = new ArrayList<>();
-        System.out.println("Bobby found these task(s):");
         for (Task t : taskArray) {
             String[] contents = t.description.split(" ");
             for (String content : contents) {
