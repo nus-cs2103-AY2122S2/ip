@@ -14,6 +14,7 @@ import duke.tasklist.TaskList;
  * The Storage object acts as an interface between Duke and the filename for database management.
  */
 public class Storage {
+    private static final String NEXT_ITEM_LINE = "*** Next Task ***";
     /** The file which stores the tasks in the task list. */
     private File file;
 
@@ -45,7 +46,7 @@ public class Storage {
             String date = fileInput.nextLine();
 
             // If the program finishes processing a task.
-            if (date.equals("*** Next Task ***")) {
+            if (date.equals(NEXT_ITEM_LINE)) {
                 date = null;
             } else {
                 fileInput.nextLine();
