@@ -27,6 +27,7 @@ public class Parser {
     }
 
     /**
+     *
      * Reads user input and outputs the desired Command.
      *
      * @param input Input by the user.
@@ -35,11 +36,10 @@ public class Parser {
     public String parse(String input, TaskList tasks, Storage storage) {
         Command command = new InvalidCommand();
         try {
-            // EDIT: EXTRACT INTO NEW STRINGSPLIT METHOD FOR CODE QUALITY.
-            String[] inputWords = input.split("\\s");
+            String[] inputWords = splitWhiteSpace(input);
             //action is first word of the input
-            Action action = Action.valueOf(inputWords[0].toUpperCase());
-
+            String actionWord = inputWords[0];
+            Action action = Parser.getAction(actionWord);
             switch (action) {
             case BYE:
                 command = new ExitCommand();
@@ -73,9 +73,23 @@ public class Parser {
             }
         } catch (IllegalArgumentException e) {
             command = new InvalidCommand();
+        } catch (NullPointerException e) {
+            command = new InvalidCommand();
         } finally {
             return command.execute(tasks, ui, storage);
         }
+    }
+    
+    /**
+     * Gets Action from input string.
+     *
+     * @param command input string.
+     * @return the Action.
+     * @throws IllegalArgumentException exception when not one of enum types.
+     * @throws NullPointerException exception when input string is null.
+     */
+    public static Action getAction(String command) throws IllegalArgumentException, NullPointerException {
+        return Action.valueOf(command.toUpperCase());
     }
 
     public static boolean isExit(String input) {
@@ -89,17 +103,22 @@ public class Parser {
      * @throws InvalidArgumentException Exception when there are no keywords provided.
      */
     public static String parseDescription(String input) throws InvalidArgumentException {
-        String[] arr = input.split("\\s", 2);
+        String[] arr = splitWhiteSpace(input);
+
         //no keyword given by user
         if (arr.length <= 1) {
-            // action is either find or todo.
-            if (arr[0].equals("todo")) {
+            Action action = Parser.getAction(arr[0]);
+            if (action.equals(Action.TODO)) {
                 throw new InvalidArgumentException(Messages.UNKNOWN_TODO);
-            } else {
+            } else if (action.equals(Action.FIND)) {
                 throw new InvalidArgumentException(Messages.UNKNOWN_FIND);
+            } else {
+                assert false : "no commands other than todo and find should use parseDescription";
             }
         }
-        return arr[1].trim();
+
+        String description = arr[1].trim();
+        return description;
     }
 
     // returns duke.task.Deadline description and dateTime in a String[] like a pair.
@@ -112,13 +131,19 @@ public class Parser {
      * @throws InvalidArgumentException when invalid format is given in user input.
      */
     public static String[] parseDeadline(String input) throws InvalidArgumentException {
-        String[] deadlineArr = input.split("/by", 2);
-        String[] deadlineSplit = deadlineArr[0].split("\\s", 2);
-        // no description
+        /* Example: deadline abc /by xyz is split into:
+           deadline abc AND xyz.
+         */
+        String[] deadlineArr = splitWithRegex(input, "by");
+
+        // Example: deadline deadlineDescription is split to deadline and deadlineDescription.
+        String[] deadlineSplit = splitWhiteSpace(deadlineArr[0]);
+
+        // deadline with no description stated.
         if (deadlineSplit.length <= 1) {
             throw new InvalidArgumentException(Messages.UNKNOWN_DEADLINE);
         }
-        // don't have /by keyword
+        // deadline with no /by keyword.
         if (deadlineArr.length <= 1) {
             throw new InvalidArgumentException(Messages.UNKNOWN_DATETIME);
         }
@@ -134,16 +159,46 @@ public class Parser {
      * @throws InvalidArgumentException when invalid is given in user input.
      */
     public static String[] parseEvent(String input) throws InvalidArgumentException {
-        String[] eventArr = input.split("/at", 2);
-        String[] eventSplit = eventArr[0].split("\\s", 2);
+        /* Example: event abc /at xyz is split into:
+           event abc AND xyz
+         */
+        String[] eventArr = splitWithRegex(input, "at");
+
+        // Example: deadline deadlineDescription is split to deadline and deadlineDescription.
+        String[] eventSplit = splitWhiteSpace(eventArr[0]);
+
+        //event with no description stated.
         if (eventSplit.length <= 1) {
             throw new InvalidArgumentException(Messages.UNKNOWN_EVENT);
         }
+        //event with no /at stated.
         if (eventArr.length <= 1) {
             throw new InvalidArgumentException(Messages.UNKNOWN_LOCATION);
         }
-        // description, and at respectively
+        // description, and /at respectively
         return new String[]{eventSplit[1].trim(), eventArr[1].trim()};
     }
+
+    /**
+     * Splits a String into an array of strings, with white space as divider.
+     *
+     * @param input String to be split.
+     * @return String array result after dividing.
+     */
+    public static String[] splitWhiteSpace(String input) {
+        return input.split("\\s");
+    }
+
+    /**
+     * Splits the string with given regex.
+     *
+     * @param input String to be split.
+     * @param regex the dividing regex that splits the String.
+     * @return array of split Strings.
+     */
+    public static String[] splitWithRegex(String input, String regex) {
+        return input.split(regex, 2);
+    }
+
 
 }

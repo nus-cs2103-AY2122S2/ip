@@ -62,4 +62,13 @@ public class TaskList {
         return this.get(i).toString();
     }
 
+    /**
+     * Check if a given task number exists in tasklist.
+     *
+     * @param taskNumber input task number.
+     * @return whether number is out of bounds in tasklist.
+     */
+    public boolean isOutOfBounds(int taskNumber) {
+        return taskNumber > getSize() || taskNumber <= 0;
+    }
 }
