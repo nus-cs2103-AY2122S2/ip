@@ -102,6 +102,8 @@ public class Storage {
                 try {
                     String[] savedData = readFile.nextLine().split(" \\| ");
                     String command;
+                    assert savedData.length > 0 : "Empty line in file!";
+
                     switch (savedData[0]) {
                     case "T":
                         command = "todo " + savedData[2];
