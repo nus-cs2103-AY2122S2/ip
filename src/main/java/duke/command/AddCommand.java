@@ -17,7 +17,6 @@ import duke.ui.Ui;
 public class AddCommand extends Command {
 
     private Action action;
-    private String output = "";
     private String input;
 
     /**
@@ -39,7 +38,6 @@ public class AddCommand extends Command {
      * @param storage Storage that saves and loads tasks after Command is executed.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String output = "";
         switch (action) {
         case TODO:
             return addTodo(tasks, ui, storage);
@@ -50,7 +48,8 @@ public class AddCommand extends Command {
         default:
             //do nothing
         }
-        return output;
+        assert false : "add command should not reach here";
+        return null;
     }
 
     /**
@@ -62,6 +61,7 @@ public class AddCommand extends Command {
      * @return resultant string to output to user.
      */
     public String addTodo(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
         try {
             String description = Parser.parseDescription(this.input);
             tasks.add(new Todo(description));
@@ -84,6 +84,7 @@ public class AddCommand extends Command {
      * @return resultant string to output to user.
      */
     public String addDeadline(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
         try {
             String[] deadlineFields = Parser.parseDeadline(input);
             tasks.add(new Deadline(deadlineFields[0], deadlineFields[1]));
@@ -101,13 +102,14 @@ public class AddCommand extends Command {
 
     /**
      * Adds an Event task.
-     * 
+     *
      * @param tasks TaskList that command is executed on.
      * @param ui User interface that interacts with the user.
      * @param storage Storage that saves and loads tasks after Command is executed.
      * @return resultant string to output to user.
      */
     public String addEvent(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
         //event project meeting /at Mon 2-4pm
         try {
             String[] eventFields = Parser.parseEvent(input);

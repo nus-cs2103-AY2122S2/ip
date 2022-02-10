@@ -31,7 +31,7 @@ public class MarkCommand extends Command {
                 throw new InvalidArgumentException(Messages.UNKNOWN_MARK);
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
-            if (taskNumber > tasks.getSize() || taskNumber <= 0) {
+            if (tasks.isOutOfBounds(taskNumber)) {
                 throw new OutOfBoundsException(Messages.getOutOfBoundsMsg(taskNumber));
             }
             tasks.get(taskNumber - 1).markAsDone();

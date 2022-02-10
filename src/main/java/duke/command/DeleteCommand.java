@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
                 throw new InvalidArgumentException(Messages.UNKNOWN_DELETE);
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
-            if (taskNumber > tasks.getSize() || taskNumber <= 0) {
+            if (tasks.isOutOfBounds(taskNumber)) {
                 throw new OutOfBoundsException(Messages.getOutOfBoundsMsg(taskNumber));
             }
             output = Ui.append(output, Messages.DELETE_SUCCESS);
