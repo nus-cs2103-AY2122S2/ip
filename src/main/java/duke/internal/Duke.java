@@ -39,24 +39,29 @@ public class Duke {
     }
 
     /**
-     * Initializes the duke system and internal managers.
+     * Initializes the duke system and internal managers for the duke program to be functional.
      * @throws DukeException when the initialization causes some internal error.
      */
     public String initialize() {
         initializeCommands();
+        boolean isFirstTime = false;
         try {
             taskList = storage.load();
-            return ui.getGreet();
         } catch (DukeException e) {
             taskList = new TaskList();
+            isFirstTime = true;
+        }
+        if (isFirstTime) {
             String output = "Hi i see it's your first time here!" + "\n";
             try {
                 output += parser.parse("help").execute(taskList);
             } catch (DukeException ex) {
-                e.printStackTrace();
+                //This exception should never be thrown as help is an existing command.
             }
             return ui.getFormattedMessage(output);
         }
+
+        return ui.getGreet();
     }
 
     public GuiFeedback getResponse(String input) {
@@ -75,7 +80,7 @@ public class Duke {
     }
 
     /**
-     * Initializes all the commands that should be recognized by Duke.
+     * Initializes all the commands are recognized by Duke.
      * Further extensions in regard to new commands should be done here.
      */
     protected void initializeCommands() {

@@ -48,43 +48,62 @@ public class Event extends Task {
      *               the description and start time to end time of the task.
      */
     protected static Event createTask(String[] tokens) throws DukeException {
-        boolean found = false;
-        String item = "";
-        String dateString = "";
-        String endString = "";
-        int idx = 0;
+        String description = createDescription(tokens);
+        if (description.equals("")) {
+            throw new DukeException("The description of an event task cannot be empty!");
+        }
 
-        for (; idx < tokens.length; idx++) {
+        LocalDate date = createDate(tokens);
+        LocalTime[] timings = createTime(tokens);
+        LocalTime startTime = timings[0];
+        LocalTime endTime = timings[1];
+
+        return new Event(description, date, startTime, endTime);
+    }
+
+    private static String createDescription(String[] tokens) {
+        String description = "";
+        for (int idx = 0; idx < tokens.length; idx++) {
             if (tokens[idx].equals("event")) {
                 continue;
             } else if (tokens[idx].equals("/at")) {
                 idx++;
                 break;
             }
-            item += tokens[idx] + " ";
+            description += tokens[idx] + " ";
         }
+        return description.trim();
+    }
 
-        if (item.equals("")) {
-            throw new DukeException("The description of an event task cannot be empty!");
+    private static LocalDate createDate(String[] tokens) throws DukeException {
+        int idx = 0;
+        for (; idx < tokens.length; idx++) {
+            if (tokens[idx].equals("/at")) {
+                break;
+            }
         }
-
-        LocalDate date;
-        LocalTime startTime;
-        LocalTime endTime;
         try {
-            date = LocalDate.parse(tokens[idx]);
-            idx++;
+            String dateString = tokens[idx + 1];
+            return LocalDate.parse(dateString);
         } catch (Exception e) {
             throw new DukeException("Please specify a valid date!");
         }
+    }
 
+    private static LocalTime[] createTime(String[] tokens) throws DukeException {
+        int idx = 0;
+        for (; idx < tokens.length; idx++) {
+            if (tokens[idx].equals("/at")) {
+                break;
+            }
+        }
         try {
-            String[] timeString = tokens[idx].split("-");
-            startTime = LocalTime.parse(timeString[0]);
-            endTime = LocalTime.parse(timeString[1]);
+            String[] timeString = tokens[idx + 2].split("-");
+            LocalTime startTime = LocalTime.parse(timeString[0]);
+            LocalTime endTime = LocalTime.parse(timeString[1]);
+            return new LocalTime[]{startTime, endTime};
         } catch (Exception e) {
             throw new DukeException("Please specify a valid start time and end time! (hh:mm)");
         }
-        return new Event(item.trim(), date, startTime, endTime);
     }
 }

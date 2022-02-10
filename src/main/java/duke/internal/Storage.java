@@ -38,6 +38,8 @@ public class Storage {
      * error which indicates that there is no existing list of task.
      *
      * @return a TaskList that was saved previously by the program.
+     * @throws DukeException throws an empty message exception to inform
+     *                       the system that there is no saved file.
      */
     public TaskList load() throws DukeException {
         try {
@@ -59,14 +61,17 @@ public class Storage {
      *
      * @param taskList the task list that is currently used by
      *                 the program.
+     * @throws DukeException throws a DukeException to inform the user
+     *                       there's an error in saving to file.
      */
-    public void save(TaskList taskList) {
+    public void save(TaskList taskList) throws DukeException {
         File file = new File(absoluteFilePath.toString());
         file.getParentFile().mkdirs();
         try {
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            //A common exception that is thrown for any first time user.
+            //There is no need for any action or output to user.
         }
 
         try {
@@ -75,8 +80,8 @@ public class Storage {
             oos.writeObject(taskList);
             oos.close();
             fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new DukeException("Command executed but there is an error saving to disk!");
         }
 
     }

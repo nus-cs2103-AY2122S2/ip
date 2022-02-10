@@ -64,9 +64,26 @@ public class Deadline extends Task {
      *               the description and date/time of the task.
      */
     protected static Deadline createTask(String[] tokens) throws DukeException {
+
+        String description = createDescription(tokens);
+
+        if (description.equals("")) {
+            throw new DukeException("The description of a deadline task cannot be empty!");
+        }
+
+        LocalDate date = createDate(tokens);
+        LocalTime time = createTime(tokens);
+
+        if (time == null) {
+            return new Deadline(description, date);
+        } else {
+            return new Deadline(description, date, time);
+        }
+    }
+
+    private static String createDescription(String[] tokens) {
         String item = "";
-        int idx = 0;
-        for (; idx < tokens.length; idx++) {
+        for (int idx = 0; idx < tokens.length; idx++) {
             if (tokens[idx].equals("deadline")) {
                 continue;
             } else if (tokens[idx].equals("/by")) {
@@ -75,31 +92,41 @@ public class Deadline extends Task {
             }
             item += tokens[idx] + " ";
         }
+        return item.trim();
+    }
 
-
-        if (item.equals("")) {
-            throw new DukeException("The description of a deadline task cannot be empty!");
+    private static LocalDate createDate(String[] tokens) throws DukeException {
+        int idx = 0;
+        for (; idx < tokens.length; idx++) {
+            if (tokens[idx].equals("/by")) {
+                break;
+            }
         }
-
-        LocalDate date;
-        LocalTime time;
-
         try {
-            date = LocalDate.parse(tokens[idx]);
-            idx++;
+            String dateString = tokens[idx + 1];
+            return LocalDate.parse(dateString);
         } catch (Exception e) {
             throw new DukeException("Please specify a valid date!");
         }
+    }
 
-        if (idx == tokens.length) {
-            return new Deadline(item.trim(), date);
-        } else {
-            try {
-                time = LocalTime.parse(tokens[idx]);
-                return new Deadline(item.trim(), date, time);
-            } catch (Exception e) {
-                throw new DukeException("Please specify a valid time! (hh:mm)");
+    private static LocalTime createTime(String[] tokens) throws DukeException {
+        int idx = 0;
+        for (; idx < tokens.length; idx++) {
+            if (tokens[idx].equals("/by")) {
+                break;
             }
+        }
+        int timeIndex = idx + 2;
+        if (timeIndex == tokens.length) {
+            return null;
+        }
+
+        try {
+            String timeString = tokens[timeIndex];
+            return LocalTime.parse(timeString);
+        } catch (Exception e) {
+            throw new DukeException("Please specify a valid time! (hh:mm)");
         }
     }
 }
