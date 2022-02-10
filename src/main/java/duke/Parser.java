@@ -24,6 +24,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
+        case "archive":
+            return new ArchiveCommand();
         case "mark":
             return new MarkCommand(inputArr[1], true);
         case "unmark":

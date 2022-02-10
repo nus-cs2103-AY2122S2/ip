@@ -41,14 +41,14 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task taskToMark = tasks.getTasks().get(id - 1);
+            Task taskToMark = tasks.getCurrentTasks().get(id - 1);
             if (this.mark) {
                 taskToMark.mark();
-                storage.saveToFile(tasks.getTasks());
+                storage.saveToFile(tasks.getCurrentTasks(), false);
                 return ui.notifyMarkedTaskMessage(taskToMark, true);
             } else {
                 taskToMark.unmark();
-                storage.saveToFile(tasks.getTasks());
+                storage.saveToFile(tasks.getCurrentTasks(), false);
                 return ui.notifyMarkedTaskMessage(taskToMark, false);
             }
         } catch (IndexOutOfBoundsException e) {

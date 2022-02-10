@@ -54,4 +54,8 @@ public class Task {
     public String getDetails() {
         return this.details;
     }
+
+    public boolean isComplete() {
+        return this.isComplete;
+    }
 }

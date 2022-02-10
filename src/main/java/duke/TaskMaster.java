@@ -2,21 +2,25 @@ package duke;
 
 import duke.task.Task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the overarching list of tasks the user has noted down.
  */
 public class TaskMaster {
 
-    ArrayList<Task> tasks;
+    private ArrayList<Task> currentTasks;
+    private ArrayList<Task> archivedTasks;
 
     /**
      * Constructor
-     * @param tasks an arraylist of tasks
+     * @param group an arraylist containing 2 arraylists of tasks
      */
-    public TaskMaster(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public TaskMaster(List<ArrayList<Task>> group) {
+        this.currentTasks = group.get(0);
+        this.archivedTasks = group.get(1);
     }
 
     /**
@@ -24,9 +28,9 @@ public class TaskMaster {
      * @param t Task t to be added
      */
     public void addTask(Task t) {
-        int sizeBefore = this.tasks.size();
-        this.tasks.add(t);
-        assert this.tasks.size() == sizeBefore + 1;
+        int sizeBefore = this.currentTasks.size();
+        this.currentTasks.add(t);
+        assert this.currentTasks.size() == sizeBefore + 1;
     }
 
     /**
@@ -35,9 +39,9 @@ public class TaskMaster {
      * @return the deleted task
      */
     public Task deleteTask(int i) {
-        int sizeBefore = this.tasks.size();
-        Task removedTask = this.tasks.remove(i - 1);
-        assert this.tasks.size() == sizeBefore - 1;
+        int sizeBefore = this.currentTasks.size();
+        Task removedTask = this.currentTasks.remove(i - 1);
+        assert this.currentTasks.size() == sizeBefore - 1;
         return removedTask;//-1 because arr index starts frm 0
     }
 
@@ -45,9 +49,11 @@ public class TaskMaster {
      * retrieves all the tasks.
      * @return the tasks as an arraylist.
      */
-    public ArrayList<Task> getTasks() {
-        return tasks;
+    public ArrayList<Task> getCurrentTasks() {
+        return this.currentTasks;
     }
+
+    public ArrayList<Task> getArchivedTasks() { return this.archivedTasks; }
 
     /**
      * finds all tasks that have details that are related to the keyword.
@@ -56,11 +62,25 @@ public class TaskMaster {
      */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
+        for (Task task : this.currentTasks) {
             if (task.getDetails().contains(keyword)) {
                 matchingTasks.add(task);
             }
         }
         return matchingTasks;
+    }
+
+    /**
+     *
+     */
+    public void moveToArchives() {
+        ArrayList <Task> toBeArchived = new ArrayList<>();
+        for (Task t : this.currentTasks) {
+            if (t.isComplete()) {
+                toBeArchived.add(t);
+            }
+        }
+        this.archivedTasks.addAll(toBeArchived);
+        this.currentTasks.removeAll(toBeArchived);
     }
 }

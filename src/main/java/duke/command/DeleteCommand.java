@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task removed_task = tasks.deleteTask(this.id);
-            storage.saveToFile(tasks.getTasks());
+            storage.saveToFile(tasks.getCurrentTasks(), false);
             return ui.notifyRemovedTaskMessage(removed_task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please enter a valid id");

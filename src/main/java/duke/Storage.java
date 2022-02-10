@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,8 +20,8 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final String FILE_PATH = "data/duke.txt";
-
+    private final String TASK_FILE_PATH = "data/duke.txt";
+    private final String ARCHIVE_FILE_PATH = "data/archive.txt";
     /**
      * Constructor for Storage class.
      */
@@ -29,22 +31,25 @@ public class Storage {
      * Reads in a list of tasks from the user's text file and saves them into an arraylist of Tasks.
      * @return the arraylist of Tasks
      */
-    public ArrayList<Task> loadTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
-        String dir = System.getProperty("user.dir");
-        java.nio.file.Path path = java.nio.file.Paths.get(dir, this.FILE_PATH);
+    public List<ArrayList<Task>> loadTasks() {
+        ArrayList<Task> currentTasks = new ArrayList<>();
+        readFile(this.TASK_FILE_PATH, currentTasks);
+        ArrayList<Task> archivedTasks = new ArrayList<>();
+        readFile(this.ARCHIVE_FILE_PATH, archivedTasks);
+        return Arrays.asList(currentTasks, archivedTasks);
+    }
 
+    public void readFile(String path, ArrayList<Task> tasks) {
         try {
-            File myObj = new File(path.toString());
-            Scanner myReader = new Scanner(myObj);
-            System.out.println("I see you have an existing list.");
-            while (myReader.hasNextLine()) {
-                readLine(tasks, myReader);
-            } myReader.close();
+            File myObj = new File(path);
+            Scanner sc = new Scanner(myObj);
+            while (sc.hasNextLine()) {
+                readLine(tasks, sc);
+            } sc.close();
         } catch (FileNotFoundException e) {
             System.out.println("It seems you do not have an existing list, I will create it now.");
             try {
-                File file = new File(path.toString());
+                File file = new File(path);
                 file.getParentFile().mkdir();
                 file.createNewFile();
                 System.out.println("file created successfully");
@@ -52,7 +57,6 @@ public class Storage {
                 System.out.println("Failed to create file");
             }
         }
-        return tasks;
     }
 
     /**
@@ -94,12 +98,18 @@ public class Storage {
      * Writes the given arraylist of Tasks out to the user's file.
      * @param tasks the arraylist of Tasks to be saved
      */
-    public void saveToFile(ArrayList<Task> tasks) {
+    public void saveToFile(ArrayList<Task> tasks, boolean isArchive) {
         String text = "";
         for (int i = 1; i <= tasks.size(); i++) {
             text += tasks.get(i - 1) + "\n";
         }
-        try (PrintWriter out = new PrintWriter(this.FILE_PATH)) {
+        String path;
+        if (!isArchive) {
+            path = this.TASK_FILE_PATH;
+        } else {
+            path = this.ARCHIVE_FILE_PATH;
+        }
+        try (PrintWriter out = new PrintWriter(path)) {
             out.println(text);
         } catch (FileNotFoundException e) {
             System.out.println("Failed to save list");

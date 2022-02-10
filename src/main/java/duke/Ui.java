@@ -76,4 +76,12 @@ public class Ui {
         }
     }
 
+    /**
+     * used to notify the user when tasks have been successfully archived
+     */
+    public String notifyArchivedTasks() {
+        return "All completed tasks have been moved to the archive.";
+
+    }
+
 }

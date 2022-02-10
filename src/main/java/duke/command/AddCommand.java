@@ -42,21 +42,22 @@ public class AddCommand extends Command {
             throw new DukeException("☹ OOPS!!! The description cannot be empty.");
         }
         if (!details.contains("/")) {
-            throw new DukeException("☹ OOPS!!! The date of a " + cmd + " cannot be empty. " +
-                    "Use /at and type the date with the format yyyy-mm-dd after it");
+            throw new DukeException("☹ OOPS!!! The date of a " + cmd + " cannot be empty. "
+                    + "Use /at and type the date with the format yyyy-mm-dd after it");
         }
         try {
             String[] detailsArray = details.split("/");
             String givenDate = detailsArray[1].trim().substring(3); //ignore the words at or by + the space that follows
             LocalDate parsedDate = LocalDate.parse(givenDate);
             if (cmd .equals("event")) {
-                this.task = new Event(details, parsedDate);
+                this.task = new Event(detailsArray[0].trim(), parsedDate);
             } else {
-                this.task = new Deadline(details, parsedDate);
+                this.task = new Deadline(detailsArray[0].trim(), parsedDate);
             }
         } catch (
                 DateTimeParseException | ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-            throw new DukeException("Please use /at and type the date with the format yyyy-mm-dd after it");
+            throw new DukeException("Wrong date format./n"
+                    + " Please use /at and type the date with the format yyyy-mm-dd after it");
         }
     }
 
@@ -71,7 +72,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskMaster tasks, Ui ui, Storage storage) {
         tasks.addTask(this.task);
-        storage.saveToFile(tasks.getTasks());
+        storage.saveToFile(tasks.getCurrentTasks(), false);
         return ui.notifyAddedTaskMessage(this.task);
     }
 }
