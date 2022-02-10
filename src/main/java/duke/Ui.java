@@ -12,13 +12,14 @@ import duke.task.TaskList;
  * @version 0.1
  */
 public class Ui {
-    Scanner reader = new Scanner(System.in);
+    private Scanner reader = new Scanner(System.in);
 
     /**
      * Displays a welcome message.
      */
     public void showWelcome() {
-        System.out.println("Hello, traveller! My name in Paimon.\nHow can I help you today?");
+        System.out.println("Hello, traveller! My name in Paimon.\n"
+                + "How can I help you today?");
     }
 
     /**
@@ -43,25 +44,34 @@ public class Ui {
      * Displays a generic error message about failed data loading from a file.
      */
     public void showLoadingError() {
-        System.out.println("Oh no, an error occurred with processing the data file :c");
+        System.out.println("Oh no, an error occurred with processing the data "
+                + "file :c");
     }
 
     /**
      * Displays a specific error message about some exception in the program.
+     *
+     * @param s string describing error
      */
     public void showError(String s) {
-        System.out.println("Oh no, the following error occurred while running the program:");
+        System.out.println("Oh no, the following error occurred while running "
+                + "the program:");
         System.out.println(s);
     }
 
     /**
      * Handles display output for commands.
-     * Displays the associated message with a given command and prints the list of tasks if necessary.
+     * Displays the associated message with a given command and prints the list
+     * of tasks if necessary.
+     *
+     * @param command string describing command
+     * @param tasks current TaskList of tasks
      */
     public void showCommandMessage(String command, TaskList tasks) {
         switch (command) {
         case "list":
-            System.out.println("Hmm... Paimon keeps a clear record in her diary.");
+            System.out.println("Hmm... Paimon keeps a clear record in her "
+                    + "diary.");
             System.out.println(tasks);
             break;
         case "do":
@@ -70,22 +80,24 @@ public class Ui {
             System.out.println("Task successfully updated.");
             break;
         case "delete":
-            System.out.println("Noted, the task has been scrubbed off the list!");
+            System.out.println("Noted, the task has been scrubbed off the "
+                    + "list!");
             System.out.println(tasks);
             break;
         case "todo":
-            System.out.println("Got it! I have noted down the following task in your list.");
+            System.out.println("Got it! I have noted down the following task "
+                    + "in your list.");
             break;
         case "find":
             System.out.println("Here are the matching tasks in your list:");
             break;
         case "deadline":
-            System.out.println("Got it! I have noted down the following task in your list. " +
-                    "\nRemember the deadline!");
+            System.out.println("Got it! I have noted down the following task in"
+                    + " your list. \nRemember the deadline!");
             break;
         case "event":
-            System.out.println("Got it! I have noted down the following task in your list. " +
-                    "\nDo be there on time!");
+            System.out.println("Got it! I have noted down the following task in"
+                    + " your list.\nDo be there on time!");
             break;
         case "bye":
             showGoodbye();

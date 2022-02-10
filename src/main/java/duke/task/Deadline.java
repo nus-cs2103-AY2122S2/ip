@@ -1,18 +1,20 @@
 package duke.task;
 
 /**
- * Represents a task that occurs on a particular date and/or time or within a given timeslot
- * Note: the allowable formats for date and time to be interpreted correctly by Deadline is
- * YYYY/MM/DD (with ./| being valid separators) and HHMM.
+ * Represents a task that occurs at a particular date and/or time
+ * Note: the allowable formats for date and time to be interpreted
+ * correctly by Deadline is YYYY/MM/DD (with ./| being valid separators)
+ * and HHMM.
  *
  * @author  Elumalai Oviya Dharshini
  * @version 0.1
  */
 public class Deadline extends TaskWithDateTime {
-    protected String by;
+    private String by;
 
     /**
-     * Constructor for Deadline that initializes the Deadline with a given description and dateTime string.
+     * Constructor for Deadline.
+     * Initializes Deadline with a given description and dateTime string.
      *
      * @param description description of Deadline
      * @param by dateTime string associated with Deadline
@@ -23,11 +25,11 @@ public class Deadline extends TaskWithDateTime {
     }
 
     /**
-     * Default toString method that returns the description, dateTime of Deadline with its completion status and
-     * Deadline marker.
+     * Default toString method that returns the description, dateTime of
+     * Deadline with its completion status and Deadline marker.
      *
-     * @return formatted string of the description, dateTime and completeness status of Deadline with a Deadline
-     * marker
+     * @return formatted string of the description, dateTime and completeness
+     * status of Deadline with a Deadline marker
      */
     @Override
     public String toString() {
@@ -36,9 +38,10 @@ public class Deadline extends TaskWithDateTime {
     }
 
     /**
-     * Parses contents of Deadline into a csv-like format delimited by '|'
+     * Parses contents of Deadline into a csv-like format delimited by '|'.
      *
-     * @return formatted string of Deadline, its dateTime, completion status and a Deadline marker
+     * @return formatted string of Deadline, its dateTime, completion status
+     * and a Deadline marker.
      */
     @Override
     public String writeToFile() {

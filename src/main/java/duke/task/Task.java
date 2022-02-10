@@ -1,14 +1,14 @@
 package duke.task;
 
 /**
- * Represents a task and consists of its description and completeness status
+ * Represents a task and consists of its description and completeness status.
  *
  * @author  Elumalai Oviya Dharshini
  * @version 0.1
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for Task that initializes the task with a given description.
@@ -54,16 +54,18 @@ public class Task {
     }
 
     /**
-     * Default toString method that returns the description of Task with its completion status.
+     * Default toString method that returns the description of Task with
+     * its completion status.
      *
-     * @return formatted string of the description and completeness status of Task
+     * @return formatted string of the description and completeness status
+     * of Task.
      */
     public String toString() {
-        return "["+ this.getStatusIcon() + "] " + description;
+        return "[" + this.getStatusIcon() + "] " + description;
     }
 
     /**
-     * Parses contents of Task into a csv-like format delimited by '|'
+     * Parses contents of Task into a csv-like format delimited by '|'.
      *
      * @return formatted string of Task and its completion status
      */

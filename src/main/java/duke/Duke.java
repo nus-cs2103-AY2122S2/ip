@@ -1,14 +1,14 @@
 package duke;
 
-import duke.task.Todo;
-import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
- * The Duke program implements a simple task bot application with CRUD functionality.
- * The program can add three different types of tasks (todo, deadline, event), mark tasks as done, and
- * delete tasks.
+ * The Duke program implements a simple task bot with CRUD functionality.
+ * The program can add three different types of tasks (todo, deadline,
+ * event), mark tasks as done, and delete tasks.
  *
  * @author  Elumalai Oviya Dharshini
  * @version 0.1
@@ -19,9 +19,11 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructor for Duke that instantiates UI and storage, and loads Tasks from a file into tasks.
-     * If there is an error with loading Tasks from the specified file, it initializes tasks to be an empty
-     * TaskList.
+     * Constructor for Duke.
+     *
+     * Instantiates UI and storage, and loads Tasks from a file into tasks.
+     * If there is an error with loading Tasks from the specified file, it
+     * initializes tasks to bean empty TaskList.
      *
      * @param filePath path of the storage file from the current directory
      */
@@ -38,8 +40,9 @@ public class Duke {
 
     /**
      * Handles the execution and main logic of the Duke program.
-     * It polls for user input continuously, parses user input and displays appropriate messages until user
-     * input is "bye", upon which it displays a goodbye message and terminates the program.
+     * It polls for user input continuously, parses user input and
+     * displays appropriate messages until user input is "bye",
+     * upon which it displays a goodbye message and terminates the program.
      */
     public void run() {
         ui.showWelcome();
@@ -61,17 +64,20 @@ public class Duke {
                         ui.showCommandMessage(command, tasks);
                         break;
                     case "do":
-                        int i = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                        int i = Integer.parseInt(input.replaceAll("[^0-9]",
+                                "")) - 1;
                         tasks.get(i).markComplete();
                         ui.showCommandMessage(command, tasks);
                         break;
                     case "undo":
-                        int j = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                        int j = Integer.parseInt(input.replaceAll("[^0-9]",
+                                "")) - 1;
                         tasks.get(j).markIncomplete();
                         ui.showCommandMessage(command, tasks);
                         break;
                     case "delete":
-                        int k = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                        int k = Integer.parseInt(input.replaceAll("[^0-9]",
+                                "")) - 1;
                         tasks.remove(k);
                         ui.showCommandMessage(command, tasks);
                         break;
@@ -101,6 +107,8 @@ public class Duke {
                         ui.showCommandMessage(command, tasks);
                         System.out.println(e);
                         break;
+                    default:
+                        break;
                     }
 
                     if (!command.equals("list") && !command.equals("bye")) {
@@ -118,7 +126,8 @@ public class Duke {
     }
 
     /**
-     * Main method that starts the program by calling a new instance of Duke with a specified file path.
+     * Main method that starts the program.
+     * It calls a new instance of Duke with a specified file path.
      *
      * @param args command-line arguments
      */

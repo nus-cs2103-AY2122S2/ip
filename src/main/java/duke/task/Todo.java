@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a todo - a task with a description and no time limit
+ * Represents a todo - a task with a description and no time limit.
  *
  * @author  Elumalai Oviya Dharshini
  * @version 0.1
@@ -18,9 +18,11 @@ public class Todo extends Task {
     }
 
     /**
-     * Default toString method that returns the description of Todo with its completion status and Todo marker.
+     * Default toString method that returns the description of Todo
+     * with its completion status and Todo marker.
      *
-     * @return formatted string of the description and completeness status of Todo with a Todo marker
+     * @return formatted string of the description and completeness
+     * status of Todo with a Todo marker.
      */
     @Override
     public String toString() {
@@ -28,7 +30,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Parses contents of Todo into a csv-like format delimited by '|'
+     * Parses contents of Todo into a csv-like format delimited by '|'.
      *
      * @return formatted string of Todo, its completion status and a Todo marker
      */

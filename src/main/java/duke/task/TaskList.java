@@ -11,17 +11,19 @@ import java.util.LinkedList;
  * @version 0.1
  */
 public class TaskList {
-    protected List<Task> tasks;
+    private List<Task> tasks;
 
     /**
-     * Empty constructor for TaskList that initializes the TaskList with an empty linked list.
+     * Empty constructor for TaskList.
+     * Initializes the TaskList with an empty linked list.
      */
     public TaskList() {
         this.tasks = new LinkedList<>();
     }
 
     /**
-     * Constructor for TaskList that initializes TaskList with a given list of Tasks.
+     * Constructor for TaskList.
+     * Initializes TaskList with a given list of Tasks.
      *
      * @param tasks list of Task objects
      */
@@ -31,19 +33,19 @@ public class TaskList {
     }
 
     /**
-     * Returns the length of TaskList
+     * Returns the length of TaskList.
      *
-     * @return number of elements in tasks
+     * @return number of elements in tasks.
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Retrieves and returns Task at a given index in TaskList
+     * Retrieves and returns Task at a given index in TaskList.
      *
      * @param i index of Task to be retrieved in TaskList
-     * @return Task at a given index in tasks
+     * @return Task at a given index in tasks.
      */
     public Task get(int i) {
         if (i < size() && i >= 0) {
@@ -53,7 +55,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes Task at a given index in TaskList
+     * Deletes Task at a given index in TaskList.
+     *
+     * @param i index of task to be removed
      */
     public void remove(int i) {
         if (i < size() && i >= 0) {
@@ -62,14 +66,17 @@ public class TaskList {
     }
 
     /**
-     * Appends Task to end of TaskList
+     * Appends Task to end of TaskList.
+     *
+     * @param t  Task to be added
      */
     public void add(Task t) {
         tasks.add(t);
     }
 
     /**
-     * Searches for occurrences of a given word in tasks and returns a list of Tasks that contain it.
+     * Searches for occurrences of a given word in tasks.
+     * Returns a list of Tasks that contain it.
      *
      * @param word keyword to be searched for
      * @return TaskList of the Tasks containing the specified word
@@ -85,10 +92,11 @@ public class TaskList {
     }
 
     /**
-     * Default toString method that returns a string of all tasks in TaskList and the number of tasks in
-     * TaskList.
+     * Default toString method that returns a string of all tasks in
+     * TaskList and the number of tasks in TaskList.
      *
-     * @return formatted string of all Tasks in TaskList and number of Tasks in TaskList delimited by newlines
+     * @return formatted string of all Tasks in TaskList and number of
+     * Tasks in TaskList delimited by newlines.
      */
     public String toString() {
         String s = "";
@@ -97,7 +105,7 @@ public class TaskList {
                 int index = i + 1;
                 s += "  " + index + ". " + tasks.get(i) + "\n";
             } else {
-                s += "You have " + i +" tasks on your list.";
+                s += "You have " + i + " tasks on your list.";
                 break;
             }
         }

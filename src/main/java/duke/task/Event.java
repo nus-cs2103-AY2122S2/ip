@@ -1,18 +1,19 @@
 package duke.task;
 
 /**
- * Represents a task that occurs on a particular date and/or time or within a given timeslot
- * Note: the allowable formats for date and time to be interpreted correctly by Event is YYYY/MM/DD (with
- * ./| being valid separators) and HHMM.
+ * Represents a task that occurs at a particular date and/or time.
+ * Note: the allowable formats for date and time to be interpreted correctly
+ * by Event is YYYY/MM/DD (with * ./| being valid separators) and HHMM.
  *
  * @author  Elumalai Oviya Dharshini
  * @version 0.1
  */
 public class Event extends TaskWithDateTime {
-    protected String at;
+    private String at;
 
     /**
-     * Constructor for Event that initializes the Event with a given description and dateTime string.
+     * Constructor for Event.
+     * Initializes the Event with a given description and dateTime string.
      *
      * @param description description of Event
      * @param at dateTime string associated with Event
@@ -23,10 +24,11 @@ public class Event extends TaskWithDateTime {
     }
 
     /**
-     * Default toString method that returns the description, dateTime of Event with its completion status and
-     * Event marker.
+     * Default toString method that returns the description, dateTime
+     * of Event with its completion status and Event marker.
      *
-     * @return formatted string of the description, dateTime and completeness status of Event with an Event marker
+     * @return formatted string of the description, dateTime and completeness
+     * status of Event with an Event marker.
      */
     @Override
     public String toString() {
@@ -34,9 +36,10 @@ public class Event extends TaskWithDateTime {
     }
 
     /**
-     * Parses contents of Event into a csv-like format delimited by '|'
+     * Parses contents of Event into a csv-like format delimited by '|'.
      *
-     * @return formatted string of Event, its dateTime, completion status and an Event marker
+     * @return formatted string of Event, its dateTime, completion status
+     * and an Event marker.
      */
     @Override
     public String writeToFile() {
