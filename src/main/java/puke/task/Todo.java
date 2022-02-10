@@ -1,5 +1,7 @@
 package puke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task without any date/time attached to it.
  */
@@ -12,6 +14,15 @@ public class Todo extends Task {
     public Todo(String taskName) {
         super(taskName);
     }
+
+    /**
+     * Returns null since it does not have a date/time associated.
+     *
+     * @return null.
+     */
+    public LocalDateTime getDate() {
+        return null;
+    };
 
     /**
      * Generates a string to save the task information on the storage file.

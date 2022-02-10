@@ -21,6 +21,15 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the date/time object of the task.
+     *
+     * @return The date/time of the task.
+     */
+    public LocalDateTime getDate() {
+        return at;
+    };
+
+    /**
      * Generates a string to save the task information on the storage file.
      *
      * @return String representation of the task for the storage file.

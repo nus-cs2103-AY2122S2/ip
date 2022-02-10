@@ -1,5 +1,7 @@
 package puke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task of different types.
  */
@@ -27,17 +29,26 @@ public abstract class Task {
     }
 
     /**
+     * Returns the name of the task.
+     *
+     * @return Task name.
+     */
+    public String getTaskName() {
+        return name;
+    }
+
+    /**
      * Marks the task as done.
      */
     public void mark() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
      * Marks the task as undone.
      */
     public void unmark() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -51,11 +62,19 @@ public abstract class Task {
     }
 
     /**
+     * Returns the date/time object of the task (if applicable).
+     *
+     * @return The date/time of the task if it is a deadline/event; Or null otherwise.
+     */
+    abstract LocalDateTime getDate();
+
+    /**
      * Generates a string to save the task information on the storage file.
      *
      * @return String representation of the task for the storage file.
      */
     abstract String toSaveString();
+
 
     /**
      * Returns a string representation of the task.

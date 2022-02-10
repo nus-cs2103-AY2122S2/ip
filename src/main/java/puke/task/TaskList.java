@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import puke.exception.PukeException;
@@ -57,7 +58,7 @@ public class TaskList {
         String result = "Here are the tasks you have:";
         int i = 1;
         for (Task t : tasks) {
-            result += "\n" + i + "." + t.toString();
+            result += "\n  " + i + "." + t.toString();
             i++;
         }
 
@@ -200,7 +201,6 @@ public class TaskList {
     }
 
     /**
-
      * Returns a list of task(s) with name containing the specified keyword.
      *
      * @param keyword Keyword to match in the task name.
@@ -229,6 +229,95 @@ public class TaskList {
 
         assert result != "";
         return "Here are the matching tasks for you:" + result;
+    }
+
+    /**
+     * Sorts the task list according to date.
+     *
+     * @param byAscending To sort the task list by ascending order if true; Or descending if false;
+     * @return A message with the list of sorted tasks.
+     */
+    public String sortByDate(boolean byAscending) {
+        if (byAscending) {
+            tasks.sort((t1, t2) -> {
+                if (t1.getDate() == null) {
+                    return 1;
+                } else if (t2.getDate() == null || t2.getDate().isAfter(t1.getDate())) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            });
+        } else {
+            tasks.sort((t1, t2) -> {
+                if (t1.getDate() == null) {
+                    return -1;
+                } else if (t2.getDate() == null || t2.getDate().isAfter(t1.getDate())) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            });
+        }
+
+        String result = "I have sorted the tasks by the date:";
+        int i = 1;
+        for (Task t : tasks) {
+            result += "\n  " + i + "." + t.toString();
+            i++;
+        }
+        return result;
+    }
+
+    /**
+     * Sorts the task list according to the name.
+     *
+     * @param byAscending To sort the task list by ascending order if true; Or descending if false;
+     * @return A message with the list of sorted tasks.
+     */
+    public String sortByName(boolean byAscending) {
+        if (byAscending) {
+            tasks.sort(Comparator.comparing(Task::getTaskName));
+        } else {
+            tasks.sort(Comparator.comparing(Task::getTaskName).reversed());
+        }
+
+        String result = "I have sorted the tasks by the name:";
+        int i = 1;
+        for (Task t : tasks) {
+            result += "\n  " + i + "." + t.toString();
+            i++;
+        }
+        return result;
+    }
+
+    /**
+     * Sorts the task list according to the type.
+     *
+     * @return A message with the list of sorted tasks.
+     */
+    public String sortByType() {
+        tasks.sort((t1, t2) -> {
+            if ((t1 instanceof Todo && t2 instanceof Todo)
+                    || (t1 instanceof Deadline && t2 instanceof Deadline)
+                    || (t1 instanceof Event && t2 instanceof Event)) {
+                return 0;
+            } else if ((t1 instanceof Todo && t2 instanceof Deadline)
+                    || (t1 instanceof Todo && t2 instanceof Event)
+                    || (t1 instanceof Deadline && t2 instanceof Event)) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+
+        String result = "I have sorted the tasks by the type:";
+        int i = 1;
+        for (Task t : tasks) {
+            result += "\n  " + i + "." + t.toString();
+            i++;
+        }
+        return result;
     }
 
     /**
