@@ -21,16 +21,17 @@ import duke.task.Tasks;
 public class Parser {
 
     private static void checkIfUserInputValid(String userInput) throws DukeException {
-        String str = userInput.trim();
+        String trimmedInput = userInput.trim();
 
-        if (str.equals("todo")
-                || str.equals("deadline")
-                || str.equals("event")
-                || str.equals("find")) {
-            throw new DukeException(("OOPS!!! The description of a " + str + " cannot be empty."));
+        assert !trimmedInput.isBlank() : "Input given should not be blank";
+        if (trimmedInput.equals("todo")
+                || trimmedInput.equals("deadline")
+                || trimmedInput.equals("event")
+                || trimmedInput.equals("find")) {
+            throw new DukeException(("OOPS!!! The description of a " + trimmedInput + " cannot be empty."));
         }
 
-        if (str.equals("mark") || str.equals("unmark") || str.equals("delete")) {
+        if (trimmedInput.equals("mark") || trimmedInput.equals("unmark") || trimmedInput.equals("delete")) {
             throw new DukeException(("OOPS!!! Please input the number of the task."));
         }
 
