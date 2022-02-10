@@ -65,16 +65,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Sets the task list used in the current Parser instance.
-     *
-     * Used for {@code Command}s and certain result printing.
-     * @param taskList Task list used for modification or reference when {@code Command}s are executed.
-     */
-    public void setTaskList(TaskList taskList) {
-        this.taskList = taskList;
-    }
-
     private Command generateMarkAsDoneCommand(String[] inputArray) {
         Pair<Boolean, String> result = checkForInvalidIndex(inputArray);
         if (result.first()) {
@@ -82,6 +72,7 @@ public class Parser {
         }
 
         int taskNo = Integer.parseInt(inputArray[1]) - 1;
+        assert taskNo >= 0 : "Task number calculation issues";
         return new MarkAsDoneCommand(taskList, taskNo);
     }
 
@@ -92,6 +83,7 @@ public class Parser {
         }
 
         int taskNo = Integer.parseInt(inputArray[1]) - 1;
+        assert taskNo >= 0 : "Task number calculation issues";
         return new MarkAsUndoneCommand(taskList, taskNo);
     }
 
@@ -149,6 +141,7 @@ public class Parser {
         }
 
         int taskNo = Integer.parseInt(inputArray[1]) - 1;
+        assert taskNo >= 0 : "Task number calculation issues";
         return new DeleteCommand(taskList, taskNo);
     }
 

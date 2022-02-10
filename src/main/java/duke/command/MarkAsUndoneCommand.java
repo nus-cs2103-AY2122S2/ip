@@ -26,6 +26,7 @@ public class MarkAsUndoneCommand extends TaskListCommand {
     public CommandResult runCommand() {
         Task currentTask = taskList.get(taskNo);
         currentTask.markAsUndone();
+        assert !currentTask.isDone() : "Task didn't get marked as undone";
         String message = "Marked as undone:\n" + currentTask.getCurrentStatus();
         return new CommandResult(message, true);
     }
