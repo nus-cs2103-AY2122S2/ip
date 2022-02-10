@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class StorageTest {
 
     @Test
-    void testClearTaskFile() {
+    void testClearTaskFile() throws MyBossException {
         Storage s = new Storage("./test/StorageTest.txt");
         assertEquals(s.clearTaskFile(),true);
     }
 
     @Test
-    void testAppendTaskToFile() throws IOException {
+    void testAppendTaskToFile() throws MyBossException {
         Storage s = new Storage("./test/StorageTest.txt");
         assertEquals(s.appendTaskToFile(new ToDo("Test Todo 1")),true);
         assertEquals(s.appendTaskToFile(new Event("Test Event 2", "2023-10-01 2pm")),true);
@@ -24,7 +24,7 @@ class StorageTest {
     }
 
     @Test
-    void testLoadTaskListFromFile() {
+    void testLoadTaskListFromFile() throws MyBossException {
         Storage s = new Storage("./test/StorageTest.txt");
         ArrayList<Task> taskList = new ArrayList<>();
         taskList.add(new ToDo("Test Todo 1"));

@@ -16,6 +16,10 @@ public class Parser {
         return userCmd.split(" ",2);
     }
 
+    public static String getUserCmd(String[] userCmdSplit) {
+        return userCmdSplit[0];
+    }
+
     /**
      * Returns the task index of the task number specified by the userCmd.
      *
@@ -34,11 +38,10 @@ public class Parser {
      * @return remaining string from split user command.
      */
     public static String getRemainingUserCmd(String[] userCmd) {
-        if (userCmd.length > 1) {
-            return userCmd[1];
-        } else {
+        if (userCmd.length <= 1) {
             return "";
         }
+        return userCmd[1];
     }
 
     /**
