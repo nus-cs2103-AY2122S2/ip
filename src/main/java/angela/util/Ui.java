@@ -108,7 +108,7 @@ public class Ui {
         if (numIndex == 1) {
             reply += TypicalString.MATCH_TASK;
         }
-        reply += " " + numIndex + "." + task;
+        reply += " " + numIndex + "." + task + "\n";
         return reply;
     }
 
@@ -142,7 +142,7 @@ public class Ui {
         },
         MATCH_TASK {
             public String toString() {
-                return " Here are the matching tasks in your list:";
+                return " Here are the matching tasks in your list:" + "\n";
             }
         }
     }

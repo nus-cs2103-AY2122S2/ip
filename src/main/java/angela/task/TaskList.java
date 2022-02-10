@@ -111,12 +111,12 @@ public class TaskList {
     public String findTasksByKeyWord(String keyWord) {
         StringBuilder reply = new StringBuilder();
         int numIndex = 0;
-        for (Task task : storingList) {
-            if (isTaskHasKeyWord(task, keyWord)) {
-                numIndex += 1;
-                String taskDescription = ui.showSearchResult(numIndex, task);
-                reply.append(taskDescription);
-            }
+        ArrayList<Task> filterTask = new ArrayList<>();
+        storingList.stream().filter(s -> isTaskHasKeyWord(s, keyWord)).forEach(filterTask::add);
+        for (Task task : filterTask) {
+            numIndex += 1;
+            String taskDescription = ui.showSearchResult(numIndex, task);
+            reply.append(taskDescription);
         }
         return reply.toString();
     }
