@@ -62,20 +62,24 @@ public class Parser {
         boolean isDone = strArr[1].equals("1") ? true : false;
         switch (command) {
         case "T":
+            assert strArr.length == 3;
             return new Todo(strArr[2], isDone);
         case "D":
+            assert strArr.length == 4;
             if (isDate(strArr[3])) {
                 LocalDate ld = LocalDate.parse(strArr[3]);
                 return new Deadline(strArr[2], ld, isDone);
             }
             return new Deadline(strArr[2], strArr[3], isDone);
         case "E":
+            assert strArr.length == 4;
             if (isDate(strArr[3])) {
                 LocalDate ld = LocalDate.parse(strArr[3]);
                 return new Event(strArr[2], ld, isDone);
             }
             return new Event(strArr[2], strArr[3], isDone);
         default:
+            assert false : nextLine;
             return null;
         }
     }
