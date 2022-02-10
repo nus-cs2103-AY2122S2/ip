@@ -1,3 +1,2 @@
-T,0,run 10km
 T,0,run more
 D,0,assignment 1,2022-02-09

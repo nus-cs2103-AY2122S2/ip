@@ -62,7 +62,7 @@ public class Disk {
         }
         Scanner fileScanner = new Scanner(file);
         while (fileScanner.hasNextLine()) {
-            String cmd = fileScanner.nextLine(); // e.g. T | 1 | description
+            String cmd = fileScanner.nextLine();
             String [] separator = cmd.split(",", 4);
             Task currTask = null;
             switch(separator[0]) {
