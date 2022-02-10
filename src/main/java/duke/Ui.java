@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 class Ui {
     private static final String DIVIDER = "=======================================";
-    
     Ui() {
     }
-
     public void showGoodbyeMessage() {
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(endMessage);
@@ -30,7 +28,7 @@ class Ui {
             String listMessage = "Here are the tasks in your list: \n";
             for (int i = 0; i < tasklist.getTaskArray().size(); i++) {
                 String index = String.valueOf(i + 1);
-                listMessage =  listMessage + index + "." 
+                listMessage = listMessage + index + "."
                         + tasklist.getTaskArray().get(i) + "\n";
             }
             System.out.println(listMessage);
@@ -47,7 +45,7 @@ class Ui {
             String listMessage = "Here are the matching tasks in your list: \n";
             for (int i = 0; i < taskArray.size(); i++) {
                 String index = String.valueOf(i + 1);
-                listMessage =  listMessage + index + "." + taskArray.get(i) + "\n";
+                listMessage = listMessage + index + "." + taskArray.get(i) + "\n";
             }
             System.out.println(listMessage);
             System.out.println(DIVIDER);
@@ -63,10 +61,10 @@ class Ui {
     }
 
     public void showDeletedMessage(Task task, String noOfTask) {
-        String messageTask = "Noted. I've removed this task: \n"; 
+        String messageTask = "Noted. I've removed this task: \n";
         String taskString = task.toString();
-        System.out.println(messageTask + taskString 
-                + "\n" + "Now you have " + noOfTask 
+        System.out.println(messageTask + taskString
+                + "\n" + "Now you have " + noOfTask
                 + " tasks in the list.");
         System.out.println(DIVIDER);
     }

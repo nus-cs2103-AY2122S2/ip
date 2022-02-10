@@ -1,20 +1,18 @@
 package duke;
 
-import java.util.ArrayList;
-
 import java.io.File;
-
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Represents the storage class which is responsible
- * to store different tasks into a specific file or 
+ * to store different tasks into a specific file or
  * to read different tasks from a specific file.
  */
 class Storage {
+    private static String HOME = System.getProperty("user.home");
     private ArrayList<Task> taskArray;
     private String path;
-    private static String HOME = System.getProperty("user.home");
 
     Storage(String path) {
         this.taskArray = new ArrayList<Task>();
@@ -27,7 +25,7 @@ class Storage {
      * a new file will then be created.
      */
     public File load() {
-        FileClass fc = new FileClass(); //file class 
+        FileClass fc = new FileClass(); //file class
         String homePath = HOME + "/data";
         path = HOME + path;
         fc.createDirectory(homePath); //create directory first
@@ -48,8 +46,8 @@ class Storage {
         for (int i = 0; i < taskArray.size(); i++) {
             Task tasks = taskArray.get(i);
             try {
-                String firstInitial = tasks.getInitial() ; //first initial character
-                String textToAdd = firstInitial + " | " + tasks.getStatusIcon() + " | " 
+                String firstInitial = tasks.getInitial(); //first initial character
+                String textToAdd = firstInitial + " | " + tasks.getStatusIcon() + " | "
                         + taskArray.get(i).getDescription();
                 fc.writeFile(filePath, textToAdd);
             } catch (IOException e) {
@@ -57,17 +55,11 @@ class Storage {
             }
 
         }
-
     }
-    
     /**
      * Returns an ArrayList which contains different tasks.
      */
     public ArrayList<Task> getList() {
         return this.taskArray;
     }
-    
-
-
-
 }

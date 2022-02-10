@@ -17,7 +17,6 @@ class TaskList {
 
     /**
      * Adds a task into the current storage.
-     * 
      * @param task Specific task to be added.
      */
     public void addTask(Task task) {
@@ -26,7 +25,6 @@ class TaskList {
 
     /**
      * Deletes a task from the current storage.
-     * 
      * @param index Index of a specifc task to be deleted.
      */
     public void deleteTask(int index) { //might need to change
@@ -36,8 +34,7 @@ class TaskList {
     /**
      * Returns an ArrayList which is used to store tasks which contains
      * the specific keyword.
-     * 
-     * @param input Keyword used to find matching tasks in the list.
+     * @param keyword Keyword used to find matching tasks in the list.
      */
     public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> containsInput = new ArrayList<Task>();
@@ -62,5 +59,4 @@ class TaskList {
     public ArrayList<Task> getTaskArray() {
         return storage.getList();
     }
-    
 }

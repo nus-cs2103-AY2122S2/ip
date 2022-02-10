@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Represents the Task class which contains 
+ * Represents the Task class which contains
  * the description of a specific task and its
  * status.
  */
@@ -21,14 +21,14 @@ class Task {
      * Returns the status of a specific task.
      */
     public String getStatusIcon() {
-        return (isDone.get(0) ? "[X]" : "[ ]"); // mark done task with X // if done is "X" then " " 
+        return (isDone.get(0) ? "[X]" : "[ ]"); // mark done task with X // if done is "X" then " "
     }
 
     /**
      * Sets a specific task to be marked.
      */
     public void setAsMarked() {
-        isDone.set(0, true); 
+        isDone.set(0, true);
     }
 
     /**
@@ -40,20 +40,19 @@ class Task {
 
     /**
      * Returns a String which is based on the status icon of the task.
-     * 
      * @param mark Mark the status of a specific task.
      */
     public String marking(String mark) {
         if (mark.equals("mark")) {
             setAsMarked();
-            String messageMarked = "Nice! I've marked this task as done: \n" + 
-                    this.toString() + "\n " 
+            String messageMarked = "Nice! I've marked this task as done: \n"
+                    + this.toString() + "\n "
                     + "=======================================";
-            return messageMarked; 
+            return messageMarked;
         } else {
             setAsUnmarked();
-            String messageUnmarked = "OK, I've marked this task as not done yet: \n" +
-                    this.toString() + "\n " 
+            String messageUnmarked = "OK, I've marked this task as not done yet: \n"
+                    + this.toString() + "\n "
                     + "=======================================";
             return messageUnmarked;
 
@@ -70,7 +69,7 @@ class Task {
     /**
      * Returns the initial of the task.
      */
-    public String getInitial(){
+    public String getInitial() {
         return "Task";
     }
 
