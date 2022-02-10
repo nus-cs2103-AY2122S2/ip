@@ -130,6 +130,9 @@ public class Main extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
+        if (input.equals("bye")) {
+            return "Bye Bye!";
+        }
         return "Duke heard: " + input;
     }
 }
