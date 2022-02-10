@@ -45,6 +45,12 @@ public class Duke {
         if (ExitCommand.isExitCommand(parsedCommand)) { // Checking for exit
             Platform.exit();
         }
+
+        // Flush to disk if modified
+        if (runCommand.isModified()) {
+            fh.exportTasks(taskList.getList());
+        }
+
         return runCommand.toString();
     }
 
@@ -81,7 +87,6 @@ public class Duke {
         // Flush to disk if modified
         if (runCommand.isModified()) {
             fh.exportTasks(taskList.getList());
-            // CHANGE THIS IN THE FUTURE TO GET RID OF GET FUNCTION
         }
         return false;
     }
