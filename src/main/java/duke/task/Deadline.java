@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline task. A Deadline object corresponds to a String description of the Task
  * and the LocalDateTime the task is due.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Task> {
 
     private final LocalDateTime dateAndTime;
 
@@ -20,7 +20,36 @@ public class Deadline extends Task {
         super(description);
         this.dateAndTime = dateAndTime;
     }
+    @Override
+    public int compareTo(Task otherTask) {
+        if (otherTask.getClass() != this.getClass()) {
+            int compareValueOfOtherTask = 2;
+            int compareValueOfCurrentTask = 2;
+            if (otherTask instanceof ToDo) {
+                compareValueOfOtherTask = 1;
+            }
+            if (otherTask instanceof Event) {
+                compareValueOfOtherTask = 3;
+            }
+            return Integer.compare(compareValueOfCurrentTask, compareValueOfOtherTask);
+        } else {
+            Deadline otherDeadline;
+            otherDeadline = (Deadline) otherTask;
+            LocalDateTime currentDateAndTime = this.dateAndTime;
+            LocalDateTime otherDateAndTime = otherDeadline.dateAndTime;
+            return compareLocalDateTime(currentDateAndTime, otherDateAndTime);
+        }
+    }
 
+    private static int compareLocalDateTime(LocalDateTime currentDateAndTime, LocalDateTime otherDateAndTime) {
+        if (currentDateAndTime.isBefore(otherDateAndTime)) {
+            return -1;
+        } else if (currentDateAndTime.isAfter(otherDateAndTime)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
     /**
      * Returns a String representation of the deadline task in the desired format.
      *

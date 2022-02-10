@@ -10,6 +10,7 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
+import duke.command.SortCommand;
 import duke.command.UnmarkDoneCommand;
 import duke.exception.DukeException;
 import duke.task.TaskType;
@@ -45,7 +46,8 @@ public class Parser {
                 || trimmedInput.startsWith("event")
                 || trimmedInput.startsWith("deadline")
                 || trimmedInput.equals("bye")
-                || trimmedInput.startsWith("find"));
+                || trimmedInput.startsWith("find")
+                || trimmedInput.startsWith("sort"));
     }
     private static boolean checkMissingDescriptionOfInput(String trimmedInput) {
         return trimmedInput.equals("todo")
@@ -84,6 +86,8 @@ public class Parser {
             return parseEventInput(userInput);
         } else if (userInput.startsWith("find")) {
             return parseFindInput(userInput);
+        } else if (userInput.equals("sort")) {
+            return new SortCommand();
         } else {
             return new ByeCommand();
         }
