@@ -66,8 +66,9 @@ public class Task {
 
     /**
      * Returns an Integer array containing the task id of the tasks containing the keyword.
+     * Works even if the keyword is entered partially
      *
-     * @param keyword the keyword user want to find
+     * @param keyword the keyword user want to find,
      * @return
      */
     public static Integer[] findTask(String keyword) {
