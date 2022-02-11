@@ -18,6 +18,7 @@ public class MarkCommand extends Command {
      * @param index the index of the task to be marked as done
      */
     public MarkCommand(int index) {
+        assert index > 0;
         this.index = index;
     }
 
@@ -25,11 +26,11 @@ public class MarkCommand extends Command {
      * Marks the indexed task as done, stores the changes in the storage list and
      * updates the user when completed.
      * @param tasks   task list local to user
-     * @param ui      ui instance local to user
      * @param storage storage instance local to user
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+        assert tasks.getNumberOfTasks() >= this.index;
         Task markedTask = tasks.mark(index);
         storage.updateAfterMark(index);
         return Ui.showMarkedMessage(markedTask);

@@ -69,6 +69,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert this.printedString != null;
+
         return this.isDone ? "[D][X] " + this.printedString
                 : "[D][ ] " + this.printedString;
     }

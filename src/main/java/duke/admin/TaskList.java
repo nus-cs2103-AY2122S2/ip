@@ -74,6 +74,7 @@ public class TaskList {
      * @return the task after it is deleted from the task list
      */
     public Task delete(int index) {
+        assert index <= tasks.size();
         Task deletedTask = tasks.get(index);
         tasks.remove(index);
 
@@ -129,6 +130,7 @@ public class TaskList {
      * @return the task after it is marked as done
      */
     public Task mark(int index) {
+        assert index <= tasks.size();
         Task indexedTask = tasks.get(index);
         indexedTask.mark();
 
@@ -141,6 +143,7 @@ public class TaskList {
      * @return the task after it is marked as not yet done
      */
     public Task unmark(int index) {
+        assert index <= tasks.size();
         Task indexedTask = tasks.get(index);
         indexedTask.unmark();
 

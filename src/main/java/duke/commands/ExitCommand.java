@@ -21,7 +21,6 @@ public class ExitCommand extends Command {
     /**
      * Prints a farewell message to the user and exits the program.
      * @param tasks   task list local to user
-     * @param ui      ui instance local to user
      * @param storage storage instance local to user
      */
     @Override
