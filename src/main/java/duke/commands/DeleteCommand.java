@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
      * @param index index of task to be deleted
      */
     public DeleteCommand(int index) {
+        assert index > 0;
         this.index = index;
     }
 
@@ -26,15 +27,16 @@ public class DeleteCommand extends Command {
      * Deletes the indexed task from task list and storage file and updates the user
      * when the task is deleted.
      * @param tasks   task list local to user
-     * @param ui      ui instance local to user
      * @param storage storage instance local to user
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+        assert tasks.getNumberOfTasks() >= this.index;
+
         Task deletedTask = tasks.delete(index);
         storage.updateAfterDelete(index);
         
-        return Ui.showDeletedMessage(deletedTask, tasks.getNumberOfTasks());
+        return Ui.showDeletedMessage(deletedTask, tasks);
     }
 
     /**

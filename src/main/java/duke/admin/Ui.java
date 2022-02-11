@@ -29,9 +29,9 @@ public class Ui {
      * @param task the task that has just been added into the task list
      * @param size the size of the task list
      */
-    public static String showAddedMessage(Task task, int size) {
+    public static String showAddedMessage(Task task, TaskList tasks) {
         return "Got it. I've added this task:\n" + task.toString()
-                + "\nNow you have " + size + " tasks in the list.";
+                + "\nNow you have " + tasks.getNumberOfTasks() + " tasks in the list.";
     }
 
     /**
@@ -40,9 +40,9 @@ public class Ui {
      * @param task the task that has just been deleted into the task list
      * @param size the size of the task list
      */
-    public static String showDeletedMessage(Task task, int size) {
+    public static String showDeletedMessage(Task task, TaskList tasks) {
         return "Noted. I've removed this task:\n" + task.toString()
-                + "\nNow you have " + size + " tasks in the list.";
+                + "\nNow you have " + tasks.getNumberOfTasks() + " tasks in the list.";
     }
 
     /**
@@ -73,14 +73,26 @@ public class Ui {
     }
 
     public static String listTasks(TaskList tasks) {
-        String elementsList = tasks.list();
+        String listResult = tasks.list();
 
-        if (elementsList.equals("")) {
+        if (listResult.equals("")) {
             return "There are currently no elements in the list!";
         } else {
-            String listPreamble = "These are the tasks currently stored in the list:\n";
+            String listResultPrefix = "These are the tasks currently stored in the list:\n";
 
-            return listPreamble + tasks.list();
+            return listResultPrefix + listResult;
+        }
+    }
+
+    public static String findTasks(TaskList tasks, String keyword) {
+        String findResult = tasks.find(keyword);
+
+        if (findResult.equals("")) {
+            return "No results containing the keyword found!";
+        } else {
+            String findResultPrefix = "Here are the matching tasks in your list:" + System.lineSeparator();
+
+            return findResultPrefix + findResult;
         }
     }
 }
