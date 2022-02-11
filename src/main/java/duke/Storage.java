@@ -29,7 +29,7 @@ public class Storage {
         ArrayList<Task> toDoList = new ArrayList<>();
         try {
 
-            if (FOLDER_PATH.mkdir()) {
+            if (FOLDER_PATH.mkdirs()) {
                 Ui.print("Folder is created!\n");
             } else {
                 Ui.print("Folder already exists.\n");
