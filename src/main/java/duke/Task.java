@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Base class for task object that stores event type,
  * task name, completion status
@@ -22,6 +24,11 @@ public class Task {
     protected Type eventType;
 
     /**
+     * List of tags associated w task
+     */
+    protected ArrayList<String> tags;
+
+    /**
      * Initialise task with description & eventType
      *
      * @param description Name of task
@@ -32,6 +39,7 @@ public class Task {
         this.description = description.trim();
         this.isDone = false;
         this.eventType = eventType;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -63,6 +71,13 @@ public class Task {
     }
 
     /**
+     * Return tags associated w task
+     */
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
+    /**
      * Return string representation of the task
      * e.g. [E][X] Sample task
      *
@@ -70,7 +85,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description + " ";
+        return "[" + getStatusIcon() + "] " + description + Ui.renderTags(getTags()) + " ";
     }
 
     /**
@@ -85,5 +100,12 @@ public class Task {
      */
     public void markAsIncomplete() {
         isDone = false;
+    }
+
+    /**
+     * Add tag to task
+     */
+    public void addTag(String tag) {
+        tags.add(tag);
     }
 }

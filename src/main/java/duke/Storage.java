@@ -14,14 +14,134 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    private static final String TAG_SEPARATOR = "_";
+    private static final String EMPTY_TAGS = "[]";
     /**
      * String containing path to save list of tasks
      */
     private String filePath;
 
+
     public Storage(String filePath) {
         assert filePath != null && filePath != "";
         this.filePath = filePath;
+    }
+
+    /**
+     * Render task tags to be stored locally
+     *
+     * @param tags Arraylist of tags associated w task
+     * @return String representation of tags formatted for storage
+     */
+    private String storeTags(ArrayList<String> tags) {
+        Boolean hasTags = tags.size() > 0;
+        String renderStr = "";
+
+        if (!hasTags) {
+            return EMPTY_TAGS;
+        }
+
+        renderStr += "[";
+
+        for (int i = 0; i < tags.size(); i++) {
+            Boolean isLastTag = i == tags.size() - 1;
+            String tag = tags.get(i);
+
+            renderStr += tag;
+
+            if (!isLastTag) {
+                renderStr += TAG_SEPARATOR;
+            } else {
+                renderStr += "]";
+            }
+        }
+        return renderStr;
+    }
+
+    /**
+     * Create default file that stores data for duke
+     *
+     * @param defaultFile File object of file path used to store duke data
+     */
+    public void createStorageFile(File defaultFile) {
+        if (!defaultFile.getParentFile().exists()) {
+            String output = "Data directory does not exist, creating list file now at: "
+                    + this.filePath
+                    + "\n";
+            System.out.println(output);
+            if (!defaultFile.getParentFile().mkdirs()) {
+                System.out.println("Error occurred when trying to create Data directory :(");
+            }
+        }
+
+        try {
+            defaultFile.createNewFile();
+        } catch (IOException err) {
+            System.out.println("An IO error occurred while trying to create list.txt file :(");
+            err.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads duke data from default file provided
+     *
+     * @param defaultFile File object of filepath used to store duke data
+     * @return ArrayList of task data stored locally from the default file provided
+     * @throws FileNotFoundException
+     */
+    public ArrayList<Task> loadFromDefaultFile(File defaultFile) throws FileNotFoundException {
+        Scanner f = new Scanner(defaultFile);
+        ArrayList<Task> data = new ArrayList<>();
+
+        while (f.hasNext()) {
+            String[] taskLineSplit = f.nextLine().split(",");
+            String taskType = taskLineSplit[0];
+            boolean isTodo = taskType.equals("T");
+            boolean isEvent = taskType.equals("E");
+            boolean isCompleted = Integer.parseInt(taskLineSplit[1]) == 1 ? true : false;
+            String taskName = taskLineSplit[2];
+            String taskTags = taskLineSplit[3].substring(1, taskLineSplit[3].length() - 1);
+            Task storedTask;
+
+            if (isTodo) {
+                // if event starts with T, initialise as TODO
+                storedTask = new Todo(taskName);
+            } else if (isEvent) {
+                // if event starts with E, initialise as Event
+                String startTimeString = taskLineSplit[taskLineSplit.length - 2];
+                String endTimeString = taskLineSplit[taskLineSplit.length - 1];
+                LocalDateTime startDateTime = Parser.parseDateTime(startTimeString);
+                LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
+
+                storedTask = new Event(taskName, startDateTime, endDateTime);
+            } else {
+                // otherwise, event must start with D, initialise as Deadline
+                String endTimeString = taskLineSplit[taskLineSplit.length - 1];
+                LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
+                storedTask = new Deadline(taskName, endDateTime);
+            }
+
+            // set completion status
+            if (isCompleted) {
+                storedTask.markAsComplete();
+            } else {
+                storedTask.markAsIncomplete();
+            }
+
+            // set tags
+            String[] taskTagSplit = taskTags.split(TAG_SEPARATOR);
+            boolean hasTags = taskTagSplit.length > 0;
+            boolean nonEmptyTag = taskTagSplit[0].length() > 0;
+            if (hasTags && nonEmptyTag) {
+                for (String taskTag: taskTagSplit) {
+                    storedTask.addTag(taskTag);
+                }
+            }
+
+            data.add(storedTask);
+        }
+
+        return data;
     }
 
     /**
@@ -37,66 +157,13 @@ public class Storage {
         // if list.txt does not exist, create empty list.txt file
         // and return an empty ArrayList
         if (!defaultFile.exists()) {
-            if (!defaultFile.getParentFile().exists()) {
-                String output = "Data directory does not exist, creating list file now at: "
-                        + this.filePath
-                        + "\n";
-                System.out.println(output);
-                if (!defaultFile.getParentFile().mkdirs()) {
-                    System.out.println("Error occurred when trying to create Data directory :(");
-                }
-            }
-
-            try {
-                defaultFile.createNewFile();
-            } catch (IOException err) {
-                System.out.println("An IO error occurred while trying to create list.txt file :(");
-                err.printStackTrace();
-            }
-
+            createStorageFile(defaultFile);
             return new ArrayList<>();
 
         } else {
             // if list.txt file exists, load from disk and return
             // ArrayList of Tasks from list.txt
-            Scanner f = new Scanner(defaultFile);
-            ArrayList<Task> data = new ArrayList<>();
-
-            while (f.hasNext()) {
-                String[] taskLineSplit = f.nextLine().split(",");
-                Boolean isCompleted = Integer.parseInt(taskLineSplit[1]) == 1 ? true : false;
-                String taskName = taskLineSplit[2];
-                Task storedTask;
-
-                if (taskLineSplit[0].equals("T")) {
-                    // if event starts with T, initialise as TODO
-                    storedTask = new Todo(taskName);
-                } else if (taskLineSplit[0].equals("E")) {
-                    // if event starts with E, initialise as Event
-                    String startTimeString = taskLineSplit[taskLineSplit.length - 2];
-                    String endTimeString = taskLineSplit[taskLineSplit.length - 1];
-                    LocalDateTime startDateTime = Parser.parseDateTime(startTimeString);
-                    LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
-
-                    storedTask = new Event(taskName, startDateTime, endDateTime);
-                } else {
-                    // otherwise, event must start with D, initialise as Deadline
-                    String endTimeString = taskLineSplit[taskLineSplit.length - 1];
-                    LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
-                    storedTask = new Deadline(taskName, endDateTime);
-                }
-
-                // set completion status
-                if (isCompleted) {
-                    storedTask.markAsComplete();
-                } else {
-                    storedTask.markAsIncomplete();
-                }
-
-                data.add(storedTask);
-            }
-
-            return data;
+            return loadFromDefaultFile(defaultFile);
         }
     }
 
@@ -111,12 +178,17 @@ public class Storage {
 
         for (Task task: taskList.getTasks()) {
             String taskText = "";
+
+            boolean isEvent = task.getEventType().equals(Type.EVENT);
+            boolean isTodo = task.getEventType().equals(Type.TODO);
+            boolean isDeadline = task.getEventType().equals(Type.DEADLINE);
+
             // set event type
-            if (task.getEventType().equals(Type.EVENT)) {
+            if (isEvent) {
                 taskText += "E,";
-            } else if (task.getEventType().equals(Type.TODO)) {
+            } else if (isTodo) {
                 taskText += "T,";
-            } else if (task.getEventType().equals(Type.DEADLINE)) {
+            } else if (isDeadline) {
                 taskText += "D,";
             }
 
@@ -127,21 +199,16 @@ public class Storage {
                 taskText += "0,";
             }
 
+            taskText += task.getDescription() + "," + storeTags(task.getTags()) + ",";
+
             // set task name & timing
-            if (task.getEventType().equals(Type.TODO)) {
-                taskText += task.getDescription();
-            } else if (task.getEventType().equals(Type.EVENT)) {
+            if (isEvent) {
                 Event event = (Event) task;
-                taskText += task.getDescription()
-                        + ","
-                        + event.getStartTimeString()
-                        + ","
-                        + event.getEndTimeString();
-            } else if (task.getEventType().equals(Type.DEADLINE)) {
+                taskText += event.getStartTimeString()
+                        + "," + event.getEndTimeString();
+            } else if (isDeadline) {
                 Deadline deadline = (Deadline) task;
-                taskText += task.getDescription()
-                        + ","
-                        + deadline.getEndTimeString();
+                taskText += deadline.getEndTimeString();
             }
 
             taskText += "\n";
