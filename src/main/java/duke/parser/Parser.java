@@ -186,7 +186,7 @@ public class Parser {
      * @return String array result after dividing.
      */
     public static String[] splitWhiteSpace(String input) {
-        return input.split("\\s");
+        return input.split("\\s", 2);
     }
 
     /**
