@@ -41,6 +41,7 @@ public class Storage {
                 this.file.getParentFile().mkdirs();
                 this.file.createNewFile();
             }
+            assert this.file.exists() : "File supposed to be created.";
         } catch (IOException e) {
             throw new DukeException("INVALID FILE PATH");
         }
