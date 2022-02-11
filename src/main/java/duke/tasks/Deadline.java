@@ -1,10 +1,12 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+
 public class Deadline extends Task{
 
-    private String date;
+    private LocalDateTime date;
 
-    public Deadline(String content, String date) {
+    public Deadline(String content, LocalDateTime date) {
         super(content);
         this.date = date;
     }
