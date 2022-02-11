@@ -1,9 +1,9 @@
 package duke;
 import java.io.IOException;
 
-import duke.output.BooleanOutput;
-import duke.output.Output;
-import duke.output.TextOutput;
+import duke.exceptions.CorruptedSaveException;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidItemNumberException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -42,19 +42,12 @@ public class Parser {
                 return byeMessage();
 
             case "list":
-                replyMessage = tasks.listItems();
-                
-                break;
+                return tasks.listItems();
 
-            case "mark":
-                assertValidItemNumber(commandDetails);
-                replyMessage = tasks.markItem(Integer.parseInt(commandDetails));
-                Storage.updateTaskFile(tasks);
-                break;
-
+            case "mark": //index number operations
             case "unmark":
-                assertValidItemNumber(commandDetails);
-                replyMessage = tasks.unmarkItem(Integer.parseInt(commandDetails));
+            case "delete":
+                replyMessage = indexNumberOperation(command, commandDetails);
                 Storage.updateTaskFile(tasks);
                 break;
 
@@ -121,6 +114,30 @@ public class Parser {
     }
 
     /**
+     * Handles index-related operations on tasks.
+     * 
+     * @param command The type of operation to be carried out.
+     * @param commandDetails The user-specified parameters.
+     * @return A success message for the user.
+     */
+    private String indexNumberOperation(String command, String commandDetails) throws InvalidItemNumberException{
+        assertValidItemNumber(commandDetails);
+        int index = Integer.parseInt(commandDetails);
+
+        switch (command) {
+        case "mark":
+            return tasks.markItem(index);
+        case "unmark":
+            return tasks.unmarkItem(index);
+        case "delete":
+            return tasks.deleteItem(index);
+        default:
+            return "";
+        }
+    }
+
+
+    /**
      * The action to be taken when a bye command is issued.
      * 
      * <p> Sets the parser to stop accepting user input. </p>
@@ -146,21 +163,20 @@ public class Parser {
         return true;
     }
 
-    private void assertValidItemNumber(String str) throws DukeException {
+    private void assertValidItemNumber(String str) throws InvalidItemNumberException {
         if (str == null) {
-            throw new DukeException("Missing item number!");
+            throw new InvalidItemNumberException("Missing item number!");
         }
         
         if (!isNumeric(str)) {
-            throw new DukeException(
+            throw new InvalidItemNumberException(
             "Please specify a numerical value for the item number instead of \"" + str + "\"!");
         }
 
         int itemNumber = Integer.parseInt(str);
 
         if (!tasks.isValidItemNumber(itemNumber)) {
-            throw new DukeException(
-            "Please specify a valid item number");
+            throw new InvalidItemNumberException("Please specify a valid item number");
         }
     }
 }
