@@ -46,7 +46,7 @@ public class Ui {
     }
 
     private String delete(String argument) throws TsohgException {
-        int index = Integer.parseInt(argument) - 1;
+        int index = parseIndex(argument);
         String response = "Noted. I've removed this task:\n"
                 + tasks.deleteItem(index) + "\n"
                 + tasks.listCount();
@@ -54,14 +54,14 @@ public class Ui {
     }
 
     private String mark(String argument) throws TsohgException {
-        int index = Integer.parseInt(argument) - 1;
+        int index = parseIndex(argument);
         String response = "Nice! I've marked this task as done:\n"
                 + tasks.markItem(index);
         return response;
     }
 
     private String unmark(String argument) throws TsohgException {
-        int index = Integer.parseInt(argument) - 1;
+        int index = parseIndex(argument);
         String response = "OK, I've marked this task as not done yet:\n"
                 + tasks.unmarkItem(index);
         return response;
@@ -110,5 +110,20 @@ public class Ui {
         String response = "Here are the matching tasks in your list:\n"
                 + tasks.find(argument);
         return response;
+    }
+
+    private int parseIndex(String argument) throws TsohgException {
+        try {
+            int index = Integer.parseInt(argument) - 1;
+            if (index >= tasks.size()) {
+                throw new TsohgException("Index must smaller than\nthe size of the list.");
+            }
+            if (0 > index) {
+                throw new TsohgException("Index must be greater than zero.");
+            }
+            return index;
+        } catch (NumberFormatException e) {
+            throw new TsohgException("Index must be a valid number.");
+        }
     }
 }

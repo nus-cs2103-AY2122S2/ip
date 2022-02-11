@@ -30,6 +30,7 @@ public class TaskList {
      * @throws TsohgException If something wrong happens.
      */
     public String deleteItem(int index) throws TsohgException {
+        assert 0 <= index && index < size();
         Task item = items.get(index);
         items.remove(index);
         saveToFile();
@@ -43,6 +44,7 @@ public class TaskList {
      * @throws TsohgException If something wrong happens.
      */
     public String markItem(int index) throws TsohgException {
+        assert 0 <= index && index < size();
         items.get(index).mark();
         saveToFile();
         return items.get(index).toString();
@@ -55,6 +57,7 @@ public class TaskList {
      * @throws TsohgException If something wrong happens.
      */
     public String unmarkItem(int index) throws TsohgException {
+        assert 0 <= index && index < size();
         items.get(index).unmark();
         saveToFile();
         return items.get(index).toString();
@@ -125,7 +128,7 @@ public class TaskList {
         while (scanner.hasNext()) {
             String[] data = scanner.nextLine().split(" \\| ");
             String type = data[0];
-            Task item;
+            Task item = null;
             switch (type) {
             case "T":
                 item = new TodoTask(data[2]);
@@ -137,7 +140,7 @@ public class TaskList {
                 item = new DeadlineTask(data[2], data[3]);
                 break;
             default:
-                item = new TodoTask("");
+                assert false;
             }
             if (data[1].equals("1")) {
                 item.mark();
@@ -156,6 +159,14 @@ public class TaskList {
             result = result.concat(item.toStore() + "\n");
         }
         this.storage.write(result);
+    }
+
+    /**
+     * Returns the size of the item list
+     * @return return the size of the item list
+     */
+    public int size() {
+        return items.size();
     }
 
     /**
