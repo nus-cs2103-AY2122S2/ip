@@ -13,6 +13,7 @@ public class TaskList {
 
     /** Instantiates a list of tasks */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null;
         this.tasks = tasks;
     }
 
@@ -23,6 +24,7 @@ public class TaskList {
      * @return A success message.
      */
     public String addTask(Task task) {
+        assert task != null;
         tasks.add(task);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %s task(s) in the list",
                 task, tasks.size());
@@ -35,6 +37,7 @@ public class TaskList {
      * @return A success message for the user.
      */
     public String deleteItem(int itemNumber) {
+        assert itemNumber <= tasks.size() && itemNumber > 0;
         Task task = tasks.remove(itemNumber - 1);
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %s task(s) in the list",
                 task, tasks.size());
@@ -47,6 +50,7 @@ public class TaskList {
      * @return A success message for the user.
      */
     public String markItem(int itemNumber) {
+        assert itemNumber <= tasks.size() && itemNumber > 0;
         Task task = tasks.get(itemNumber - 1);
         task.markAsDone();
         return "Nice! I've marked this as done:\n  " + task;
@@ -59,6 +63,7 @@ public class TaskList {
      * @return A success message for the user.
      */
     public String unmarkItem(int itemNumber) {
+        assert itemNumber <= tasks.size() && itemNumber > 0;
         Task task = tasks.get(itemNumber - 1);
         task.unmarkAsDone();
         return "OK, I've marked this task as not done yet:\n  " + task;
@@ -99,6 +104,7 @@ public class TaskList {
      * @return A list of tasks
      */
     public String find(String searchText) {
+        assert searchText != null;
         TaskList matchedTasks = new TaskList();
         
         for(Task task : tasks) {

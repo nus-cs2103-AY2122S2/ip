@@ -19,6 +19,7 @@ public class Ui {
      * @param message The message to be printed.
      */
     public static void printMessage(String message) {
+        assert message != null;
         System.out.println(chatBox(message));
     }
 
@@ -29,6 +30,7 @@ public class Ui {
      * @return Modified text.
      */
     public static String chatBox(String givenText) {
+        assert givenText != null;
         StringBuilder box = new StringBuilder();
         box.append(LINE);
         box.append(newLineAfter(givenText));
@@ -44,6 +46,7 @@ public class Ui {
      * @return The modified string.
      */
     public static String newLineAfter(String text) {
+        assert text != null;
         if (text.charAt(text.length() - 1) != '\n') {
             return text + '\n';
         }
