@@ -56,6 +56,10 @@ public class Angela {
         return temp;
     }
 
+    public DateTable getDateTable() {
+        return dateTable;
+    }
+
     /**
      * Return the output string generate from the input command
      *

@@ -62,7 +62,7 @@ public class TaskList {
      */
     public boolean isFileHasText() throws IOException {
         if (!(botStorage.getDatabaseLength() == 0)) {
-            botStorage.readFileContent(storingList);
+            botStorage.readFileContent(storingList, dateTable);
             totalTask = storingList.size();
             return true;
         } else {

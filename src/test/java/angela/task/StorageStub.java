@@ -3,6 +3,7 @@ package angela.task;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import angela.datetime.DateTable;
 import angela.util.Storage;
 
 public class StorageStub implements Storage {
@@ -46,7 +47,7 @@ public class StorageStub implements Storage {
     }
 
     @Override
-    public void readFileContent(ArrayList<Task> storingList) throws IOException {
+    public void readFileContent(ArrayList<Task> storingList, DateTable dateTable) throws IOException {
         storingList.add(new Task("return book /by 2/12/2019", "D"));
         storingList.add(new Task("return book /by 2/12/2019", "D"));
     }

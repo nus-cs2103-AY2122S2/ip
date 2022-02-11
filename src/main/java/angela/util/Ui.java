@@ -1,13 +1,19 @@
 package angela.util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
+import angela.datetime.DateTable;
 import angela.task.Task;
 
 /**
  * Represents a helper program to read from and write to interface
  */
 public class Ui {
+    private static final String DATE_FORMAT = "MMM d yyyy";
 
     /**
      * Initialize an Ui interface
@@ -109,6 +115,56 @@ public class Ui {
         }
         reply += " " + numIndex + "." + task + "\n";
         return reply;
+    }
+
+    /**
+     * Returns string represent list of task in order of time
+     *
+     * @param dateTable Time and task map
+     * @return The string represent the list of task
+     */
+    public String showUpcomingDeadlines(DateTable dateTable) {
+        TreeMap<LocalDate, ArrayList<Task>> dateMap = dateTable.getDateMap();
+        if (dateMap.size() == 0) {
+            return "Great, you don't have any upcoming deadlines";
+        }
+        StringBuilder upcomingDeadline = new StringBuilder(" Here are your upcoming deadlines: \n");
+        for (Map.Entry<LocalDate, ArrayList<Task>> entry : dateMap.entrySet()) {
+            LocalDate dateKey = entry.getKey();
+            ArrayList<Task> taskValue = entry.getValue();
+            for (Task task : taskValue) {
+                upcomingDeadline.append(" ");
+                upcomingDeadline.append(dateKey.format(DateTimeFormatter.ofPattern(DATE_FORMAT))).append(": ");
+                upcomingDeadline.append(task.getDescription()).append("\n");
+            }
+        }
+        return upcomingDeadline.toString();
+    }
+
+    /**
+     * Returns string represent the nearest deadlines date and its task
+     * @param dateTable Time and task map
+     * @return The string represent the nearest deadlines and tasks
+     */
+    public String showNearestDeadlines(DateTable dateTable) {
+        TreeMap<LocalDate, ArrayList<Task>> dateMap = dateTable.getDateMap();
+        if (dateMap.size() == 0) {
+            return " You have 0 nearest deadline";
+        }
+        Map.Entry<LocalDate, ArrayList<Task>> nearestDate = dateMap.firstEntry();
+        LocalDate dateKey = nearestDate.getKey();
+        ArrayList<Task> taskValue = nearestDate.getValue();
+
+        StringBuilder nearestDeadline = new StringBuilder(" You have ");
+        nearestDeadline.append(taskValue.size()).append(" nearest deadlines on ");
+        nearestDeadline.append(dateKey.format(DateTimeFormatter.ofPattern(DATE_FORMAT))).append(": \n");
+        int count = 1;
+        for (Task task : taskValue) {
+            nearestDeadline.append(" ");
+            nearestDeadline.append(count).append(". ").append(task.getDescription()).append("\n");
+            count += 1;
+        }
+        return nearestDeadline.toString();
     }
 
     /**

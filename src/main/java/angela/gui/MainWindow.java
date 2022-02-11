@@ -30,6 +30,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Angela angela;
+    private final Ui ui = new Ui();
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_URL));
     private final Image angelaImage = new Image(this.getClass().getResourceAsStream(ANGELA_IMAGE_URL));
@@ -39,10 +40,35 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        setScrollPane();
+        setUiAtBegin();
+    }
+
+    /**
+     * Sets up properties for the scroll pane
+     */
+    private void setScrollPane() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        Ui ui = new Ui();
-        String input = ui.startChat();
-        dialogContainer.getChildren().add(DialogBox.getAngelaDialog(input, angelaImage));
+    }
+
+    /**
+     * Sets up the displayed text for GUI in the beginning
+     */
+    private void setUiAtBegin() {
+        String helloText = ui.startChat();
+        DialogBox helloBox = DialogBox.getAngelaDialog(helloText, angelaImage);
+        dialogContainer.getChildren().addAll(helloBox);
+    }
+
+    /**
+     * Display upcoming deadlines in GUI
+     */
+    public void displayUpcomingDeadline() {
+        String nearestDeadlineText = ui.showNearestDeadlines(angela.getDateTable());
+        String upcomingDeadlineText = ui.showUpcomingDeadlines(angela.getDateTable());
+        DialogBox upcomingDeadlineBox = DialogBox.getAngelaDialog(upcomingDeadlineText, angelaImage);
+        DialogBox nearestDeadlineBox = DialogBox.getAngelaDialog(nearestDeadlineText, angelaImage);
+        dialogContainer.getChildren().addAll(upcomingDeadlineBox, nearestDeadlineBox);
     }
 
     public void setAngela(Angela d) {

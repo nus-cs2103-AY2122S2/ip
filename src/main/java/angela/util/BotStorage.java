@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import angela.datetime.DateTable;
 import angela.task.Task;
 
 
@@ -63,7 +64,7 @@ public class BotStorage implements Storage {
      * @param storingList The collection need to append
      * @throws IOException If an I/O error occur
      */
-    public void readFileContent(ArrayList<Task> storingList) throws IOException {
+    public void readFileContent(ArrayList<Task> storingList, DateTable dateTable) throws IOException {
         FileReader fr = new FileReader(database);
         BufferedReader br = new BufferedReader(fr);
         String line;
@@ -79,6 +80,9 @@ public class BotStorage implements Storage {
             }
             if (status.equals("1")) {
                 task.changeTaskStatus(true);
+            }
+            if (type.equals("D") || type.equals("E")) {
+                dateTable.addDate(task);
             }
             storingList.add(task);
         }
