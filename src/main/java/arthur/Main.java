@@ -13,12 +13,13 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Arthur arthur = new Arthur();
+    private static final String RESOURCE_LOCATION = "/view/MainWindow.fxml";
+    private final Arthur arthur = new Arthur();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(RESOURCE_LOCATION));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);

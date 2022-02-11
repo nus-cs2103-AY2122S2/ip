@@ -4,6 +4,8 @@ package arthur.task;
  * A class that creates task objects
  */
 public class Task {
+    private static final String MARKED_OUTPUT_TEMPLATE = "[X] >> ";
+    private static final String UNMARKED_OUTPUT_TEMPLATE = "[ ] >> ";
     private final String description; // Task.Task description
     private boolean isDone;
 
@@ -32,9 +34,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[X] >> " + this.description;
+            return MARKED_OUTPUT_TEMPLATE + this.description;
         } else {
-            return "[ ] >> " + this.description;
+            return UNMARKED_OUTPUT_TEMPLATE + this.description;
         }
     }
 }

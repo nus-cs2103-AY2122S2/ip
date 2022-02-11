@@ -9,11 +9,7 @@ import java.time.format.DateTimeParseException;
  * Handles string conversion to Date and Time objects.
  */
 public class DateTime {
-    private LocalDate date;
-    private LocalTime time;
     private final String str;
-    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
-    private DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mma");
 
     /**
      * Converts input string to date and time objects.
@@ -22,18 +18,22 @@ public class DateTime {
      */
     public DateTime(String input) throws DateTimeParseException {
         // Checks if date is present
+        LocalTime time;
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mma");
         if (input.contains("-")) {
             String[] tempArr = input.split(" ");
+            LocalDate date;
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
             if (tempArr.length == 2) {
-                this.date = LocalDate.parse(tempArr[0]);
-                this.time = LocalTime.parse(tempArr[1]);
+                date = LocalDate.parse(tempArr[0]);
+                time = LocalTime.parse(tempArr[1]);
                 this.str = date.format(dateFormat) + " " + time.format(timeFormat);
             } else {
-                this.date = LocalDate.parse(input);
+                date = LocalDate.parse(input);
                 this.str = date.format(dateFormat);
             }
         } else {
-            this.time = LocalTime.parse(input);
+            time = LocalTime.parse(input);
             this.str = time.format(timeFormat);
         }
     }

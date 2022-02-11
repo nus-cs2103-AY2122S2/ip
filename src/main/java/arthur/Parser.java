@@ -4,8 +4,8 @@ package arthur;
  * Handles decoding of the user commands
  */
 public class Parser {
+    private static final String BYE_MESSAGE = "Bye! \n" + "Have a great day!";
     private String command;
-    private boolean isEnd;
 
     /**
      * Constructor for the parser object
@@ -19,11 +19,10 @@ public class Parser {
      * Uses the command string to determine appropriate action.
      * If input is "list", will execute listOut method. If not, adds
      * instruction to tasks list.
-     * @param taskList The tasklist of tasks and operations
+     * @param taskList The Tasklist of tasks and operations
      * @param storage The object to access data file in storage
-     * @param ui The arthur.Ui class to use for user interaction
      */
-    public String execute(TaskList taskList, Storage storage, Ui ui) {
+    public String execute(TaskList taskList, Storage storage) {
         String[] temp = this.command.split(" ", 2); // Helps to isolate the first word
         String inst = temp[0];
 
@@ -57,8 +56,7 @@ public class Parser {
                 this.command = taskList.find(temp[1]);
                 break;
             case "bye":
-                this.isEnd = true;
-                this.command = "Bye!" + "\n" + "Have a great day!";
+                this.command = BYE_MESSAGE;
                 break;
             default: // Future improvement: throw invalid command exception here
                 break;
@@ -67,13 +65,5 @@ public class Parser {
             this.command = "Please enter a valid number!";
         }
         return this.command;
-    }
-
-    /**
-     * Uses boolean to show if "bye" command has been received.
-     * @return True: If "bye" command given. False otherwise.
-     */
-    public boolean isEnd() {
-        return this.isEnd;
     }
 }
