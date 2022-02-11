@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.stack.CallStack;
 import duke.task.TaskList;
 
 public class FindCommand extends Command {
@@ -10,7 +11,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String executeCommand(TaskList taskList) {
+    public String executeCommand(TaskList taskList, CallStack callStack) {
         return taskList.findKeyWord(keyWord);
     }
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.stack.CallStack;
 import duke.task.TaskList;
 import duke.exception.InvalidTaskNumberException;
 
@@ -11,7 +12,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String executeCommand(TaskList taskList) throws InvalidTaskNumberException {
+    public String executeCommand(TaskList taskList, CallStack callStack) throws InvalidTaskNumberException {
+        callStack.pushState(taskList);
         return taskList.remove(index);
     }
 }
