@@ -15,6 +15,7 @@ public class TaskList {
     /**
      * Executes the adding of the task
      * onto the list.
+     *
      * @param action the task
      */
     public void add(Action action) {
@@ -23,6 +24,7 @@ public class TaskList {
 
     /**
      * Returns the list of tasks.
+     *
      * @return list
      */
     public ArrayList<Action> getList() {
@@ -31,6 +33,7 @@ public class TaskList {
 
     /**
      * Returns the size of the list.
+     *
      * @return size of list
      */
     public int size() {
@@ -41,24 +44,35 @@ public class TaskList {
      * Sets one of the list's task's status to done
      * according to the given index from
      * the input.
+     *
      * @param taskNo index of task
      */
-    public void setDone(int taskNo) {
-        list.set(taskNo, list.get(taskNo).setDone());
+    public void setDone(int taskNo) throws DukeException {
+        try {
+            list.set(taskNo, list.get(taskNo).setDone());
+        } catch (IndexOutOfBoundsException indexError) {
+            throw new DukeException("Please input the right index!");
+        }
     }
 
     /**
      * Unsets one of the list's task's status to undone
      * according to the given index from the input
+     *
      * @param taskNo index of task
      */
-    public void setUnDone(int taskNo) {
-        list.set(taskNo, list.get(taskNo).setUnDone());
+    public void setUnDone(int taskNo) throws DukeException {
+        try {
+            list.set(taskNo, list.get(taskNo).setUnDone());
+        } catch (IndexOutOfBoundsException indexError) {
+            throw new DukeException("Please input the right index!");
+        }
     }
 
     /**
      * Returns one of the list's task based on the
      * given index from the input
+     *
      * @param taskNo index of task
      * @return a task
      */
@@ -70,16 +84,22 @@ public class TaskList {
      * Returns one of the list's task based on the
      * given index from the input.Also removes it from
      * the list.
+     *
      * @param taskNo index of task
      * @return deleted task
      */
-    public Action delete(int taskNo) {
-        return list.remove(taskNo);
+    public Action delete(int taskNo) throws DukeException {
+        try {
+            return list.remove(taskNo);
+        } catch (IndexOutOfBoundsException indexError) {
+            throw new DukeException("Please input the right index!");
+        }
     }
 
     /**
      * Returns an ordered list of tasks that matches
      * witht the input.
+     *
      * @param task input to be matched
      * @return list of matching tasks
      */

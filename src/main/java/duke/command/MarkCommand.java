@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ui.DukeException;
 import duke.ui.Storage;
 import duke.ui.TaskList;
 import duke.ui.Ui;
@@ -14,6 +15,7 @@ public class MarkCommand extends Command {
 
     /**
      * Constructs a new MarkCommand with a variable, taskNo.
+     *
      * @param taskNo arrayList index of a task in a taskList
      */
     public MarkCommand(int taskNo) {
@@ -25,12 +27,13 @@ public class MarkCommand extends Command {
      * a task on the given taskList.
      * Executes a method which sets the status of the
      * task as done.
+     *
      * @param taskList a list of the current tasks
-     * @param ui user interface
-     * @param storage file storage
+     * @param ui       user interface
+     * @param storage  file storage
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.setDone(taskNo);
         assert taskList.getAction(taskNo).getStatus().equals("X") : "task status should be X";
         String statement = "Nice! I have marked this task as done:\n  ";
@@ -40,6 +43,7 @@ public class MarkCommand extends Command {
     /**
      * Returns false for non-Exit
      * commands.
+     *
      * @return false
      */
     @Override

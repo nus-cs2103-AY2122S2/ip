@@ -24,6 +24,7 @@ public class Duke {
 
     /**
      * Returns the storage
+     *
      * @return storage
      */
     public Storage getStorage() {
@@ -32,6 +33,7 @@ public class Duke {
 
     /**
      * Returns taskList.
+     *
      * @return taskList
      */
     public TaskList getTasks() {
@@ -40,6 +42,7 @@ public class Duke {
 
     /**
      * Returns Ui.
+     *
      * @return Ui
      */
     public Ui getUi() {

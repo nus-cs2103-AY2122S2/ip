@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ui.DukeException;
 import duke.ui.Storage;
 import duke.ui.TaskList;
 import duke.ui.Ui;
@@ -23,12 +24,13 @@ public class UnmarkCommand extends Command {
      * a task from a given taskList.
      * Executes a method that sets the status of the task
      * as undone.
+     *
      * @param taskList a list of the current tasks
-     * @param ui user interface
-     * @param storage file storage
+     * @param ui       user interface
+     * @param storage  file storage
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.setUnDone(taskNo);
         assert taskList.getAction(taskNo).getStatus().equals(" ") : "task status should be blank";
         String statement = "Ok, I have marked this task as not done yet:\n  ";
@@ -37,6 +39,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Returns false for non-Exit commands.
+     *
      * @return false
      */
     @Override
