@@ -7,6 +7,7 @@ import mickey.command.DeleteCommand;
 import mickey.command.FindCommand;
 import mickey.command.ListCommand;
 import mickey.command.MarkCommand;
+import mickey.command.SortCommand;
 
 /**
  * Parser to handle input commands to Mickey.
@@ -45,6 +46,8 @@ public class Parser {
             return new ByeCommand(fullCommand);
         case "find":
             return new FindCommand(fullCommand);
+        case "sort":
+            return new SortCommand(fullCommand);
         default:
             throw new MickeyException("\tOh no! This is a disaster! I don't know what that means");
         }

@@ -77,7 +77,7 @@ public class Ui {
      * @param t Task to print.
      */
     public String showDeleteTask(int numTasks, Task t) {
-        return "Alrighty. I've removed this task.\n" + t + "You now have " + numTasks + " tasks";
+        return "Alrighty. I've removed this task.\n\t" + t + "\nYou now have " + numTasks + " tasks";
     }
 
     /**

@@ -46,7 +46,7 @@ public abstract class Command {
      * @return String array containing task and date.
      */
     String[] splitArgs() {
-        return args.map(s -> Arrays.stream(s.split("/by", 2)).map(String::trim).toArray(String[]::new))
+        return args.map(s -> Arrays.stream(s.split("/by|/at", 2)).map(String::trim).toArray(String[]::new))
                 .orElse(null);
     }
 
@@ -71,6 +71,7 @@ public abstract class Command {
      */
     String getDate() throws MickeyException {
         String[] split = splitArgs();
+        System.out.println(Arrays.toString(split));
         if (split.length == 1 || split[1].length() == 0) {
             throw new MickeyException("\tOops! Pluto must have eaten the date.");
         }

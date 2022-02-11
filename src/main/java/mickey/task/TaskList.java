@@ -1,7 +1,10 @@
 package mickey.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
+import mickey.app.MickeyException;
 
 /**
  * TaskList to store tasks.
@@ -80,11 +83,41 @@ public class TaskList {
     }
 
     /**
+     * Sort tasks by criteria.
+     */
+    public void sortTasks(SortBy criteria) throws MickeyException {
+        switch(criteria) {
+        case ALPHABETICAL:
+            tasks.sort(Comparator.comparing(Task::getDescription));
+            break;
+        case DEADLINE:
+            tasks.sort(new DeadlineComparator());
+            break;
+        default:
+            throw new MickeyException("Oops! Could not sort tasks");
+        }
+    }
+
+    /**
      * Adds task to list.
      *
      * @param t Task to add.
      */
     public void add(Task t) {
         tasks.add(t);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        if (tasks.size() > 0) {
+            result.append("Oh boy! You have ").append(tasks.size()).append(" tasks:");
+            for (int i = 0; i < tasks.size(); i++) {
+                result.append("\n\t").append(i + 1).append(". ").append(tasks.get(i));
+            }
+        } else {
+            result.append("Hooray! You have no tasks");
+        }
+        return result.toString();
     }
 }
