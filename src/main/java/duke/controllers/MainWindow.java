@@ -54,5 +54,4 @@ public class MainWindow extends AnchorPane {
             System.out.println(Ui.showErrorMessage(e.getMessage()));
         }
     }
-    
 }

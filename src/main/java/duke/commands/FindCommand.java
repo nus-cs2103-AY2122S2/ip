@@ -6,9 +6,13 @@ import duke.admin.TaskList;
 public class FindCommand extends Command {
     private String keyword;
 
+    /**
+     * Constructor for FindCommand that takes in a keyword to be used to filter the matching results.
+     * @param keyword
+     */
     public FindCommand(String keyword) {
         assert keyword != null;
-        
+
         this.keyword = keyword;
     }
 

@@ -27,7 +27,7 @@ public class Ui {
      * Prints out a message to let the user know what task has
      * been added and how many tasks there are currently in the task list.
      * @param task the task that has just been added into the task list
-     * @param size the size of the task list
+     * @param tasks the list of task being managed by Duke
      */
     public static String showAddedMessage(Task task, TaskList tasks) {
         return "Got it. I've added this task:\n" + task.toString()
@@ -38,7 +38,7 @@ public class Ui {
      * Prints out a message to let the user know what task has
      * been deleted and how many tasks there are remaining in the task list.
      * @param task the task that has just been deleted into the task list
-     * @param size the size of the task list
+     * @param tasks the list of task being managed by Duke
      */
     public static String showDeletedMessage(Task task, TaskList tasks) {
         return "Noted. I've removed this task:\n" + task.toString()
@@ -72,6 +72,11 @@ public class Ui {
         return "Uh oh... We ran into an error: " + errorMessage;
     }
 
+    /**
+     * Returns the list of tasks as a String to be printed out in response to user's request to print the task list.
+     * @param tasks list of tasks to be printed
+     * @return the list of tasks as a String with Ui features included
+     */
     public static String listTasks(TaskList tasks) {
         String listResult = tasks.list();
 
@@ -84,6 +89,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns a string of tasks containing the keyword.
+     * @param tasks list of tasks to be searched
+     * @param keyword the keyword that the results have to contain
+     * @return the list of matching tasks as a String to be printed
+     */
     public static String findTasks(TaskList tasks, String keyword) {
         String findResult = tasks.find(keyword);
 

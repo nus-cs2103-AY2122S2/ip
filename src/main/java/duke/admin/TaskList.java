@@ -87,7 +87,7 @@ public class TaskList {
      */
     public String list() {
         String listString = "";
-        
+
         for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i - 1);
             String listElement = i + "." + task.toString();
@@ -97,7 +97,7 @@ public class TaskList {
 
         return listString;
     }
-    
+
     /**
      * Prints out all the tasks in the task list that contains the keyword.
      * @param keyword keyword to be contained by the tasks

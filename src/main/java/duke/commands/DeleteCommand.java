@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
 
         Task deletedTask = tasks.delete(index);
         storage.updateAfterDelete(index);
-        
+
         return Ui.showDeletedMessage(deletedTask, tasks);
     }
 

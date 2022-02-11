@@ -56,7 +56,7 @@ public class AddCommand extends Command {
 
         tasks.add(taskToBeAdded);
         storage.updateAfterAdd(taskToBeAdded);
-        
+
         return Ui.showAddedMessage(taskToBeAdded, tasks);
     }
 
