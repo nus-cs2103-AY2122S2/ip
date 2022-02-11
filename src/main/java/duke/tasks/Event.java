@@ -1,10 +1,11 @@
-package duke.task;
+package duke.tasks;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
+import duke.exceptions.CorruptedSaveException;
+import duke.exceptions.DukeException;
 
 /**
  * Represents an Event which is a kind of Task.
@@ -76,12 +77,33 @@ public class Event extends Task {
     /**
      * Formats an Event instance to be stored in an external file.
      */
+    @Override
     public String toFileFormat() {
         Integer i = this.isDone ? 1 : 0;
         String startDateString = startDate.format(DATE_FORMATTER);
         String timeString = time == null ? "" : " " + time.format(TIME_FORMATTER);
         return String.format("E | %d | %s | %s%s\n", 
                 i, this.task, startDateString, timeString);
+    }
+
+    /**
+     * Converts a string from file format to Task.
+     * 
+     * <p> The inverse of `toFileFormat()`.</p>
+     * 
+     * @param fileString The string to convert.
+     * @throws CorruptedSaveException if unable to parse the string correctly
+     */
+    public static Event fromFileFormat(String fileString) throws CorruptedSaveException {
+        String[] packetSections = fileString.split(" \\| ");
+        try {
+            boolean isDone = Integer.parseInt(packetSections[1]) == 1;
+            String taskName = packetSections[2];
+            String startDateString = packetSections[3];
+            return new Event(taskName, isDone, startDateString);
+        } catch (Exception e) {
+            throw new CorruptedSaveException();
+        }
     }
 
     /**

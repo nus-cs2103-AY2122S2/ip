@@ -1,13 +1,14 @@
 package duke;
 import java.io.IOException;
 
-import duke.output.BooleanOutput;
-import duke.output.Output;
-import duke.output.TextOutput;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.commands.Command;
+import duke.exceptions.CorruptedSaveException;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidItemNumberException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /**
  * Encapsulates the logic to parse and understand inputs by the user.
@@ -17,12 +18,19 @@ public class Parser {
     private TaskList tasks;
 
     public Parser() {
-        try {
-            tasks = Storage.readSaveFile();
-        } catch (DukeException e) {
-            Ui.printMessage(Ui.CORRUPTED_SAVE_MESSAGE);
-            tasks = new TaskList();
-        }
+        tasks = new TaskList();
+    }
+
+    /**
+     * Instantiate a parser using the saved file.
+     * 
+     * @return Parser resumed from the previous session.
+     * @throws CorruptedSaveException if savefile is corrupted.
+     */
+    public static Parser fromSave() throws CorruptedSaveException {
+        Parser p = new Parser();
+        p.tasks = Storage.readSaveFile();
+        return p;
     }
 
     /**
@@ -30,7 +38,7 @@ public class Parser {
      * 
      * @param input The text input by the user.
      */
-    public Output inputHandler(String input) {
+    public String inputHandler(String input) {
         assert input != null;
         String[] commandArgs = input.split(" ", 2);
         String command = commandArgs[0];
@@ -39,40 +47,23 @@ public class Parser {
 
         try {
             switch (command) {
-            case "bye":
+            case Command.BYE_COMMAND:
                 return byeMessage();
-
             case "list":
-                replyMessage = tasks.listItems();
-                
-                break;
+                return tasks.listItems();
 
-            case "mark":
-                assertValidItemNumber(commandDetails);
-                replyMessage = tasks.markItem(Integer.parseInt(commandDetails));
-                Storage.updateTaskFile(tasks);
-                break;
-
+            case "mark": //index number operations
             case "unmark":
-                assertValidItemNumber(commandDetails);
-                replyMessage = tasks.unmarkItem(Integer.parseInt(commandDetails));
+            case "delete":
+                replyMessage = indexNumberOperation(command, commandDetails);
                 Storage.updateTaskFile(tasks);
                 break;
 
-            case "todo":
-                //Fall Through
+            case "todo": //create task operations
             case "deadline": 
-                //Fall Through
             case "event":
-                assertNonEmptyDetails(commandDetails);
                 Task task = createTask(command, commandDetails);
                 replyMessage = tasks.addTask(task);
-                Storage.updateTaskFile(tasks);
-                break;
-
-            case "delete":
-                assertValidItemNumber(commandDetails);
-                replyMessage = tasks.deleteItem(Integer.parseInt(commandDetails));
                 Storage.updateTaskFile(tasks);
                 break;
 
@@ -89,7 +80,7 @@ public class Parser {
             replyMessage = Ui.mergeMessages(ioException.toString(), Ui.READ_WRITE_ERROR_MESSAGE);
         }
 
-        return new TextOutput(replyMessage);
+        return replyMessage;
     }
 
     /**
@@ -102,6 +93,7 @@ public class Parser {
      */
     public Task createTask(String command, String commandDetails) throws DukeException {
         assert command != null;
+        assertNonEmptyDetails(commandDetails);
         String[] taskArgs = null;
 
         if (command.equals("todo")) {
@@ -123,14 +115,38 @@ public class Parser {
     }
 
     /**
+     * Handles index-related operations on tasks.
+     * 
+     * @param command The type of operation to be carried out.
+     * @param commandDetails The user-specified parameters.
+     * @return A success message for the user.
+     */
+    private String indexNumberOperation(String command, String commandDetails) throws InvalidItemNumberException{
+        assertValidItemNumber(commandDetails);
+        int index = Integer.parseInt(commandDetails);
+
+        switch (command) {
+        case "mark":
+            return tasks.markItem(index);
+        case "unmark":
+            return tasks.unmarkItem(index);
+        case "delete":
+            return tasks.deleteItem(index);
+        default:
+            return "";
+        }
+    }
+
+
+    /**
      * The action to be taken when a bye command is issued.
      * 
      * <p> Sets the parser to stop accepting user input. </p>
      * 
-     * @return The bye message output.
+     * @return The bye message.
      */
-    public Output byeMessage() {
-        return new BooleanOutput("Bye. Hope to see you again soon!", false);
+    private String byeMessage() {
+        return Ui.BYE_MESSAGE;
     }
 
     private void assertNonEmptyDetails(String details) throws DukeException {
@@ -148,21 +164,20 @@ public class Parser {
         return true;
     }
 
-    private void assertValidItemNumber(String str) throws DukeException {
+    private void assertValidItemNumber(String str) throws InvalidItemNumberException {
         if (str == null) {
-            throw new DukeException("Missing item number!");
+            throw new InvalidItemNumberException("Missing item number!");
         }
         
         if (!isNumeric(str)) {
-            throw new DukeException(
+            throw new InvalidItemNumberException(
             "Please specify a numerical value for the item number instead of \"" + str + "\"!");
         }
 
         int itemNumber = Integer.parseInt(str);
 
         if (!tasks.isValidItemNumber(itemNumber)) {
-            throw new DukeException(
-            "Please specify a valid item number");
+            throw new InvalidItemNumberException("Please specify a valid item number");
         }
     }
 }
