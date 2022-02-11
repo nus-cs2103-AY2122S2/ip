@@ -45,6 +45,9 @@ class TaskList {
             Event tmp = (Event) task;
             eventList.add(tmp);
         }
+
+        assert task.equals(list.get(list.size() - 1)) == true : "Task should have been added";
+
         return "Got it! I've added this task:\n" + task.getTaskDetails()
                 + "\nTotal tasks on the list: " + this.list.size() + "\n";
     }
@@ -63,6 +66,9 @@ class TaskList {
             Event tmp = (Event) removedTask;
             eventList.remove(tmp);
         }
+
+        assert removedTask.equals(list.get(index)) == false : "Task should have been removed, but it is not!!";
+
         return "Successfully removed the following task:\n" + removedTask.getTaskDetails() + "\n"
                 + "You have " + this.list.size() + " tasks remaining!!\n";
     }
@@ -87,7 +93,9 @@ class TaskList {
      * Marks item of the given index of tasklist done.
      */
     public String markItem(int index) {
-        return list.get(index).markTaskDone();
+        String printString = list.get(index).markTaskDone();
+        assert list.get(index).isDone == true : "Task should have been marked done!!";
+        return printString;
     }
 
     /**
@@ -96,7 +104,9 @@ class TaskList {
      * @param index integer to indicate the item index to be unmarked.
      */
     public String unmarkItem(int index) {
-        return list.get(index).markTaskUndone();
+        String printString =  list.get(index).markTaskUndone();
+        assert list.get(index).isDone == false : "Task should have been marked undone!!";
+        return printString;
     }
 
     /**
