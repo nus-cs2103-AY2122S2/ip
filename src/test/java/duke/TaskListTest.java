@@ -12,13 +12,13 @@ public class TaskListTest {
     public void addTaskTest() {
         TaskList taskList = new TaskList();
         Task deadline = new Deadline("eat", "2019-12-12");
-        assertEquals(taskList.numTasks(), 0);
+        assertEquals(taskList.getNumberOfTasks(), 0);
 
         for (int i = 0; i < 100; i++) {
             taskList.addTask(deadline);
         }
 
-        assertEquals(taskList.numTasks(), 100);
+        assertEquals(taskList.getNumberOfTasks(), 100);
 
     }
 
@@ -31,7 +31,7 @@ public class TaskListTest {
             taskList.addTask(deadline);
         }
 
-        assertEquals(taskList.numTasks(), 100);
+        assertEquals(taskList.getNumberOfTasks(), 100);
 
         for (int i = 0; i < 50; i++) {
             try {
@@ -41,7 +41,7 @@ public class TaskListTest {
             }
         }
 
-        assertEquals(taskList.numTasks(), 50);
+        assertEquals(taskList.getNumberOfTasks(), 50);
 
 
     }

@@ -34,7 +34,7 @@ public class TaskList {
      *
      * @return number of tasks inside the list
      */
-    public int numTasks() {
+    public int getNumberOfTasks() {
         return this.index;
     }
 
@@ -92,7 +92,7 @@ public class TaskList {
     public String findKeyWord(String word) {
         String output = "Here are the matching tasks in your list:";
         for (int i = 0; i < index; i++) {
-            if (tasks.get(i).contains(word)) {
+            if (tasks.get(i).hasWord(word)) {
                 output += String.format("\n%d.%s", i + 1, tasks.get(i));
             }
         }

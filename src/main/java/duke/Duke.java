@@ -46,14 +46,10 @@ public class Duke {
         ui.greetings();
         boolean isExit = false;
         while (!isExit) {
-            try {
-                String input = sc.nextLine();
-                String output = processUserInput(input);
-                ui.log(output);
-                isExit = output.equals("") ? true : false;
-            } catch (Exception e) {
-                ui.showLoadingError(e);
-            }
+            String input = sc.nextLine();
+            String output = processUserInput(input);
+            ui.log(output);
+            isExit = output.equals("") ? true : false;
         }
         ui.bye();
     }
