@@ -23,9 +23,7 @@ HoloBot is a **desktop app** for managing tasks, optimized for use via a Command
 3. Copy the file to the folder you want to use as the home folder for your HoloBot.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
 
-![Startup Screen](Ui.png "Title")
-
-
+![Startup Screen](Startup.PNG "Startup")
 
 5. Type the command in the command box and press Enter to execute it. 
 
@@ -45,6 +43,10 @@ Displays a list of tasks that are stored in the data file.
 
 Format: `list`
 - Each task is represented as the following: `TASK_INDEX.[TYPE][COMPLETION_STATUS] NAME (ADDITIONAL_DETAILS)`
+
+Usage Example:
+
+![List](List.PNG "List")
 
 ### Creating a To-Do Task: `todo`
 Creates a new to-do task based on the description that you have specified.
@@ -139,6 +141,11 @@ Format:
   - Only the name is searched.
   - Only parts of the name needs to match with the `SEARCH_SUBSTRING`. e.g `find ab` will match `abc`
 
+
+Usage Example:
+
+![Find](Find.PNG "Find")
+
 ### Listing out tasks scheduled on a particular day: `schedule`
 Finds and lists out tasks that happens/is due on the date specified.
 
@@ -148,12 +155,20 @@ Format:
   - Finds deadline tasks that were due/is going to be due on the `DATE_IN_YYYY-MM-DD`.
   - Only the date is searched.
 
+Usage Example:
+
+![Schedule](Schedule.PNG "Schedule")
+
 ### Exiting HoloBot: `bye`
 Exits the program.
 
 Format:
 - `bye`
   - The program will exit automatically, 5 seconds after the exit message is being displayed.
+
+Usage Example:
+
+![Bye](Bye.PNG "Bye")
 
 ### Saving and Editing the data file
 The data file `data.txt` can be found in the data folder (ip/data).
