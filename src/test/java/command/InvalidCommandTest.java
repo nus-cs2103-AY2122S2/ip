@@ -21,7 +21,8 @@ public class InvalidCommandTest {
     public void executeCommand() {
         try {
             InvalidCommand cmd = new InvalidCommand();
-            cmd.execute();
+            // temp stub for execution of InvalidCommand
+            throw new KarenException(cmd.getMessage());
         } catch (KarenException err) {
             assertEquals("I don't understand anything - I want to speak with your manager",
                     err.getMessage());

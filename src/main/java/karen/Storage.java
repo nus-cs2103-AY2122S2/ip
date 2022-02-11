@@ -28,9 +28,6 @@ public class Storage {
     public static final String DATA_DIR = "./data/";
     public static final String DATA_PATH = "./data/karen.txt";
 
-    public static final String NO_FILE_MESSAGE = "No previous session/data found";
-    public static final String ERR_FILE_MESSAGE = "Something went wrong with reading the previous session..";
-
     private ArrayList<Task> taskList;
 
     /**

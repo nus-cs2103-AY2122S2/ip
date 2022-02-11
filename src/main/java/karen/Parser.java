@@ -23,6 +23,9 @@ import karen.task.ToDo;
 
 /**
  * Validates and parses arguments to create Command objects.
+ *
+ * Code organisation partially adapted from:
+ * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
  */
 public class Parser {
     public static final Pattern INDEX_FORMAT = Pattern.compile("^(?<keyWord>[^\\s]+)\\s+(?<index>\\d+)$");

@@ -48,12 +48,4 @@ public class InvalidCommand extends Command {
         throw new KarenException(invalidMessage);
     }
 
-    /**
-     * Temp fix for mocking - to be done later
-     * @return Not return an output string directly
-     * @throws KarenException with message to describe invalidness of command
-     */
-    public String execute() throws KarenException {
-        throw new KarenException(invalidMessage);
-    }
 }
