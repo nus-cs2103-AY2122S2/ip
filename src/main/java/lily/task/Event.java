@@ -1,5 +1,7 @@
 package lily.task;
 
+import lily.LilyException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,11 +20,15 @@ public class Event extends Task {
      * 
      * @param s The description of what is happening.
      * @param at When the event is happening.
-     * @throws DateTimeParseException When the input is not a date.
+     * @throws LilyException When the input is not a date.
      */
-    public Event(String s, String at) throws DateTimeParseException {
+    public Event(String s, String at) throws LilyException {
         super(s);
-        this.at = LocalDate.parse(at);
+        try {
+            this.at = LocalDate.parse(at);
+        } catch (DateTimeParseException dtpe) {
+            throw new LilyException(LilyException.FORMAT_DATE);
+        }
     }
 
     /**
@@ -32,7 +38,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " 
-        + at.format(DateTimeFormatter.ofPattern("dd MMM yy")) + ")";
+        String date = at.format(DateTimeFormatter.ofPattern("dd MMM yy"));
+        return "[E]" + super.toString() + " (at: " + date + ")";
     }
 } 

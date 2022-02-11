@@ -15,7 +15,7 @@ import java.io.ObjectInputStream;
  * Loads and Saves the Task list from the savefile.
  * 
  * @author Hong Yi En, Ian
- * @version Jan 2022 (AY21/22 Sem 2)
+ * @version Feb 2022 (AY21/22 Sem 2)
  */
 public class Storage {
     private String filePath;
@@ -27,15 +27,6 @@ public class Storage {
      */
     public Storage(String fp) {
         filePath = fp;
-    }
-
-    /**
-     * Create a new default Storage manager.
-     * 
-     * @param fp The filepath to load from and save to.
-     */
-    public Storage() {
-        filePath = "./data/tasks.txt";
     }
 
     /**
@@ -57,10 +48,10 @@ public class Storage {
             fis.close();
             result = read;
         } catch (IOException e) {
-            throw new LilyException("There's no save file.");
+            throw new LilyException(LilyException.ERROR_LOAD_FILE);
         } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
             c.printStackTrace();
+            throw new LilyException(LilyException.ERROR_LOAD_FILE_UNKNOWN_CLASS);
         } 
         return result;
     }

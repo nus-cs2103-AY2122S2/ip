@@ -28,16 +28,6 @@ public class Parser {
     }
 
     /**
-     * Creates a new Empty Parser Object.
-     * For debugging
-     */
-    public Parser() {
-        this.tasks = new TaskList();
-        this.ui = new Ui(false);
-        this.st = new Storage();
-    }
-
-    /**
      * Read's user's input for parsing.
      *
      * @param s The sentence the user had input.
@@ -104,7 +94,7 @@ public class Parser {
             // Fallthrough
             case "search":
                 if (parsedSentence.length > 2) {
-                    throw new LilyException("bro you can only find 1 word at a time");
+                    throw new LilyException(LilyException.ERROR_TOO_MANY_SEARCH_TERMS);
                 } else {
                     ui.showFind(parsedSentence[1], tasks);
                 }
@@ -121,10 +111,9 @@ public class Parser {
             ui.showError(LilyException.ERROR_WRITE_FILE);
 
         } catch (IndexOutOfBoundsException oob) {
+            // caught when user types "mark, unmark or delete" without giving an index
+            // if user types "mark 5" when the list has 2 items, it throws lily exception instead
             ui.showError(LilyException.ERROR_OUT_OF_BOUNDS);
-
-        } catch (DateTimeParseException dtpe) {
-            ui.showError(LilyException.FORMAT_DATE);
 
         } catch (NumberFormatException nfe) {
             ui.showError(LilyException.FORMAT_IDX);

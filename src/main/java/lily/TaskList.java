@@ -5,7 +5,6 @@ import lily.task.Todo;
 import lily.task.Deadline;
 import lily.task.Event;
 
-import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
 /**
@@ -66,13 +65,13 @@ public class TaskList {
      * 
      * @param idx The index of the task to be marked.
      * @return The task after it has been marked.
-     * @throws IndexOutOfBoundsException If the index exceeds the list.
-     * @throws LilyException If user has finished the task already.
+     * @throws LilyException If user hasn't done the task yet OR index exceeds list length.
      */
-    public Task mark(int idx) throws IndexOutOfBoundsException, LilyException {
-                    /*
-                     * if input doesn't have an int, ask which number you want to mark .
-                     */
+    public Task mark(int idx) throws LilyException {
+        if (idx < 0 || idx >= list.size()) {
+            throw new LilyException(LilyException.ERROR_OUT_OF_BOUNDS);
+        }
+
         Task t = list.get(idx);
         t.mark();
         return t;
@@ -83,10 +82,13 @@ public class TaskList {
      * 
      * @param idx The index of the task to be unmarked.
      * @return The task after it has been unmarked.
-     * @throws IndexOutOfBoundsException If the index exceeds the list.
-     * @throws LilyException If user hasn't done the task yet.
+     * @throws LilyException If user hasn't done the task yet OR index exceeds list length.
      */
-    public Task unmark(int idx) throws IndexOutOfBoundsException, LilyException {
+    public Task unmark(int idx) throws LilyException {
+        if (idx < 0 || idx >= list.size()) {
+            throw new LilyException(LilyException.ERROR_OUT_OF_BOUNDS);
+        }
+
         Task t = list.get(idx);
         t.unmark();
         return t;
@@ -110,9 +112,9 @@ public class TaskList {
      * @param desc What the deadline is about.
      * @param by When the deadline is due.
      * @return The deadline that was added.
-     * @throws DateTimeParseException If the date was not recognizable.
+     * @throws LilyException If the date was not recognizable.
      */
-    public Task addDeadline(String desc, String by) throws DateTimeParseException {
+    public Task addDeadline(String desc, String by) throws LilyException {
         Deadline d = new Deadline(desc, by);
         list.add(d);
         return d;
@@ -124,9 +126,9 @@ public class TaskList {
      * @param desc What the Event is about.
      * @param at When the Event is due.
      * @return The Event that was added.
-     * @throws DateTimeParseException If the date was not recognizable.
+     * @throws LilyException If the date was not recognizable.
      */
-    public Task addEvent(String desc, String at) throws DateTimeParseException {
+    public Task addEvent(String desc, String at) throws LilyException {
         Event e = new Event(desc, at);
         list.add(e);
         return e;
@@ -137,13 +139,13 @@ public class TaskList {
      * 
      * @param idx The index of which was removed.
      * @return The Task that was removed.
-     * @throws IndexOutOfBoundsException When the index is not in the List.
+     * @throws LilyException When the index is not in the List.
      */
-    public Task remove(int idx) throws IndexOutOfBoundsException {
+    public Task remove(int idx) throws LilyException {
         if (idx < 0 || idx >= list.size()) {
-            throw new IndexOutOfBoundsException(LilyException.ERROR_OUT_OF_BOUNDS);
-        } else {
-            return list.remove(idx);
+            throw new LilyException(LilyException.ERROR_OUT_OF_BOUNDS);
         }
+
+        return list.remove(idx);
     }
 }

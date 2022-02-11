@@ -40,7 +40,7 @@ public class Task implements Serializable{
      */
     public void mark() throws LilyException {
         if (isDone) {
-            throw new LilyException("bro this task is already marked.");
+            throw new LilyException(LilyException.ERROR_ALREADY_MARKED);
         } else {
             isDone = true;
         }
@@ -53,7 +53,7 @@ public class Task implements Serializable{
      */
     public void unmark() throws LilyException {
         if (!isDone) {
-            throw new LilyException("bro you haven't done this.");
+            throw new LilyException(LilyException.ERROR_ALREADY_UNMARKED);
         } else {
             isDone = false;
         }
@@ -65,7 +65,8 @@ public class Task implements Serializable{
      * @return X if the task is done.
      */
     public String getStatusIcon() {
-        return "[" + (isDone ? "X" : " ") + "] ";
+        String icon = isDone ? "X" : " ";
+        return "[" + icon + "] ";
     }
 
     /**

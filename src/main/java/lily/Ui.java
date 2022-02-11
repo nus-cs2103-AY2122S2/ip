@@ -30,7 +30,7 @@ public class Ui {
      * @return output of processing a command.
      */
     public String getOutput() {
-        return this.output;
+        return output;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Ui {
      * @param msg the error message
      */
     public void showError(String msg) {
-        this.output = msg;
+        output = msg;
     }
 
     /**
@@ -66,7 +66,7 @@ public class Ui {
                     + LS
                     + "why is it so full of nonsense";
         } else {
-            this.output = "oh bother, a new one" + LS;
+            output = "oh bother, a new one" + LS;
             welcomeMessage += "hey." + LS
                     + "i don't really wanna track your tasks," + LS
                     + "but i guess i have no choice (っ◞‸◟c)" + LS
@@ -85,12 +85,11 @@ public class Ui {
      */
     private String listTasks(LinkedList<Task> list) {
         String listMsg = "";
-        int i = 1;
-        for (Task t : list) {
-            listMsg += "    " + i + "."
-                    + t.toString()
-                    + (i == list.size() ? "" : LS);
-            i++;
+        for (int i = 1; i <= list.size(); i++) {
+            // Only add LS for the last task
+            String endingLs = (i == list.size() ? "" : LS);
+            String currTask = list.get(i - 1).toString();
+            listMsg += "    " + i + "." + currTask + endingLs; 
         }
         return listMsg;
     }
@@ -116,7 +115,7 @@ public class Ui {
      * Prints the exit message and closes the scanner.
      */
     public void closeUi() {
-        this.output = "finally. what took you so long? (´-ω-`)" + LS
+        output = "finally. what took you so long? (´-ω-`)" + LS
                 + LS
                 + "oh, if your list had stuff, i've saved it" + LS
                 + "i'll bring it up when you bug me again. bye";
@@ -129,9 +128,9 @@ public class Ui {
      */
     public void showList(TaskList tl) {
         if (tl.isEmpty()) {
-            this.output = "there's nothing in the list bro";
+            output = "there's nothing in the list bro";
         } else {
-            this.output = "you told me you had to" + LS + listTasks(tl.getContents());
+            output = "you told me you had to" + LS + listTasks(tl.getContents());
         }
     }
 
@@ -142,7 +141,7 @@ public class Ui {
      * @param idx The position of the Task in the TaskList.
      */
     public void showMarked(Task t, int idx) {
-        this.output = "oh. you've finished it. okay" + LS
+        output = "oh. you've finished it. okay" + LS
                 + idx + "." + t.toString();
     }
 
@@ -153,7 +152,7 @@ public class Ui {
      * @param idx The position of the Task in the TaskList.
      */
     public void showUnmarked(Task t, int idx) {
-        this.output = "hey, you gotta get it done later, okay?" + LS
+        output = "hey, you gotta get it done later, okay?" + LS
                 + idx + "." + t.toString();
     }
 
@@ -166,7 +165,7 @@ public class Ui {
     public void showTaskAdded(Task t, int size) {
         String plural = size == 1 ? " task " : " tasks ";
 
-        this.output = "i've dumped this into your list:" + LS
+        output = "i've dumped this into your list:" + LS
                 + t.toString() + LS
                 + "so now you have " + size + plural
                 + "happening. hope you're happy";
@@ -179,7 +178,7 @@ public class Ui {
      * @param tl The TaskList after the Task was removed. 
      */
     public void showTaskRemoved(Task t, TaskList tl) {
-        this.output = "hmph. then why did you make me track your" + LS
+        output = "hmph. then why did you make me track your" + LS
                 + t + LS
                 + LS
                 + "anyway, now you're left with" + LS
@@ -204,10 +203,11 @@ public class Ui {
                 matchedTasks.add(currTask);
             }
         }
+
         if (matchedTasks.size() == 0) {
-            this.output = "bro, your list has nothing with that inside";
+            output = LilyException.ERROR_404;
         } else {
-            this.output = "ah. here are your tasks with \"" + searchTerm + "\" in them." + LS
+            output = "ah. here are your tasks with \"" + searchTerm + "\" in them." + LS
                     + listTasks(matchedTasks);
         }
     }
@@ -218,7 +218,7 @@ public class Ui {
      * @param sentence The user's input.
      */
     public void showInvalidCommand(String sentence) {
-        this.output = sentence + "?" + LS
+        output = sentence + "?" + LS
                 + LS
                 + "bro i cannot understand you ( ︶︿︶)" + LS + LS
                 + "i only know these hor:" + LS
