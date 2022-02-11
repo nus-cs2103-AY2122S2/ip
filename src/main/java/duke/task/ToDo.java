@@ -7,6 +7,7 @@ import java.util.HashMap;
  */
 final class ToDo extends Task {
 
+    private static final String TASK_TYPE_ICON = "[T]";
     /**
      * Initializes a to-do item, with a description.
      *
@@ -28,7 +29,7 @@ final class ToDo extends Task {
      */
     @Override
     protected String getTypeIcon() {
-        return "[T]";
+        return TASK_TYPE_ICON;
     }
 
     /**

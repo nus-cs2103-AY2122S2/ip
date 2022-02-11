@@ -87,7 +87,9 @@ public class TaskManager {
      */
     public boolean isValidIndex(int index) {
 
-        return (index > 0 && index <= this.tasks.size());
+        boolean isPositiveIndex = index > 0;
+        boolean isIndexInRange = index <= this.tasks.size();
+        return isIndexInRange && isPositiveIndex;
     }
 
     /**
@@ -117,7 +119,8 @@ public class TaskManager {
      */
     public List<Task> search(String keyword) {
 
-        return tasks.stream().filter(x -> x.getDescription().contains(keyword)).collect(Collectors.toList());
+        return tasks.stream().filter(x -> x.getDescription().contains(keyword))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -131,7 +134,8 @@ public class TaskManager {
         StringBuilder result = new StringBuilder("List of tasks:\n");
 
         for (int i = 0; i < tasks.size(); i++) {
-            result.append("     ").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
+            result.append("     ").append(i + 1).append(". ")
+                    .append(tasks.get(i).toString()).append("\n");
         }
 
         result.append(">> Now you have ").append(tasks.size()).append(" tasks in the list.");
