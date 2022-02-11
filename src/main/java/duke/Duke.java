@@ -1,17 +1,20 @@
 package duke;
-
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 /**
  * Class containing Duke and main function
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
     private Parser parser;
 
-    public Duke(String filepath) {
+    public Duke(String filePath, String fileDirectory) {
         this.ui = new Ui();
-        this.storage = new Storage(filepath);
+        this.storage = new Storage(filePath, fileDirectory);
         this.taskList = new TaskList();
         this.parser = new Parser();
     }
@@ -32,7 +35,11 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("./data/tasks.txt", "./data").run();
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+    }
 }
