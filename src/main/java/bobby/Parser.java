@@ -71,6 +71,10 @@ public class Parser {
                     result = tasks.find(query);
                 }
                 break;
+            case UNDO:
+                tasks.undo();
+                result = Ui.printUndo();
+                break;
             default:
                 result = Ui.invalidInput();
             }

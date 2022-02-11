@@ -16,7 +16,7 @@ public class Bobby {
      */
     public Bobby(String filePath) {
         storage = new Storage(filePath);
-        tasks = new TaskList(storage.createFile(), storage);
+        tasks = new TaskList(storage.createTaskArray(), storage);
     }
 
     public String getResponse(String text) {

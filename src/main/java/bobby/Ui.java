@@ -67,4 +67,8 @@ public class Ui {
         }
         return result;
     }
+
+    public static String printUndo() {
+        return "Bobby has forgotten your previous change.";
+    }
 }

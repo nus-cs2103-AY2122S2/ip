@@ -62,7 +62,7 @@ public class Storage {
      * if file does not exist.
      * @return ArrayList of tasks loaded from file.
      */
-    public ArrayList<Task> createFile() {
+    public ArrayList<Task> createTaskArray() {
         ArrayList<Task> taskArray = new ArrayList<Task>();
         try {
             if (!file.createNewFile()) {
