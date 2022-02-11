@@ -42,6 +42,8 @@ public class Storage {
                     newTask = new Deadline(thing, task[3]);
                 } else if (type.equals("E")) {
                     newTask = new Event(thing, task[3]);
+                } else {
+                    throw new DukeException("Loading error");
                 }
                 if (status.equals("1")) {
                     newTask.mark();
