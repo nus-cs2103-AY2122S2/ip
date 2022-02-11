@@ -11,8 +11,11 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private static final File FOLDER_PATH = new File("../../../../data");
-    private static final File DATA_PATH = new File("../../../../data/data.txt");
+    private static String directoryPath = System.getProperty("user.dir") + "/data/";
+    private static String listFile = "data.txt";
+
+    private static final File FOLDER_PATH = new File(directoryPath);
+    private static final File DATA_PATH = new File(directoryPath + listFile);
 
     public Storage(){
     }
