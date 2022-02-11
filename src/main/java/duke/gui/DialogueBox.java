@@ -14,12 +14,12 @@ public class DialogueBox extends HBox {
     /**
      * Constructor for a dialogue box.
      *
-     * @param l  Text to be displayed.
-     * @param iv Window to contain text.
+     * @param label Text to be displayed.
+     * @param image Window to contain text.
      */
-    public DialogueBox(Label l, ImageView iv, boolean isUser) {
-        text = l;
-        displayPicture = iv;
+    public DialogueBox(Label label, ImageView image, boolean isUser) {
+        text = label;
+        displayPicture = image;
         displayPicture.setClip(new Circle(50, 50, 50));
 
 
@@ -31,13 +31,14 @@ public class DialogueBox extends HBox {
 
         if (isUser) {
             setStyle("-fx-background-color: #1982FC; -fx-padding: 5 5 5 5; \n");
-            l.setStyle("-fx-font-family: 'monospaced'; -fx-font-weight: bold; -fx-font-size: 14; " +
-                    "-fx-text-fill: #FFFFFF");
+            text.setStyle("-fx-font-family: 'monospaced'; -fx-font-weight: bold; -fx-font-size: "
+                    + "14; -fx-text-fill: #FFFFFF");
             this.setAlignment(Pos.TOP_RIGHT);
             this.getChildren().addAll(text, displayPicture);
         } else {
             setStyle("-fx-background-color: #EEEEEE; -fx-padding: 5 5 5 5; \n");
-            l.setStyle("-fx-font-family: 'monospaced'; -fx-font-weight: bold; -fx-font-size: 14");
+            text.setStyle("-fx-font-family: 'monospaced'; -fx-font-weight: bold; -fx-font-size: "
+                    + "14");
             this.setAlignment(Pos.TOP_LEFT);
             this.getChildren().addAll(displayPicture, text);
         }

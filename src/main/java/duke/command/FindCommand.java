@@ -37,7 +37,7 @@ public class FindCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList newTaskList = taskList.filter(this.keywords);
         String output = "MATCHING TASKS HERE:" + newTaskList;
-        ui.showMessage("MATCHING TASKS HERE:" + newTaskList);
+        ui.showMessage(output);
         return output;
     }
 
