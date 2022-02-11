@@ -14,7 +14,7 @@ public class TaskList {
     /**
      * Internal ArrayList of tasks.
      */
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for an empty list of tasks.
@@ -83,6 +83,10 @@ public class TaskList {
         assert stringifiedData.endsWith("\n") : "Data does "
                 + "not end with newline (\\n) character.";
         return stringifiedData;
+    }
+
+    public void copy(TaskList taskList) {
+        this.tasks = new ArrayList<>(taskList.tasks);
     }
 
     @Override

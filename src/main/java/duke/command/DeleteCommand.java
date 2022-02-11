@@ -3,6 +3,7 @@ package duke.command;
 import duke.logic.DukeException;
 import duke.logic.Storage;
 import duke.logic.TaskList;
+import duke.logic.TaskStack;
 import duke.logic.Ui;
 import duke.task.Task;
 
@@ -38,7 +39,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If write to file is unsuccessful.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage, TaskStack taskStack) throws DukeException {
         Task task;
 
         if (taskList.isValidIndex(index)) {
@@ -48,6 +49,9 @@ public class DeleteCommand extends Command {
             throw new DukeException("INVALID INDEX");
         }
 
+        TaskList copiedTaskList = new TaskList();
+        copiedTaskList.copy(taskList);
+        taskStack.push(copiedTaskList);
         storage.writeToFile(taskList);
         String output = "TASK REMOVED:\n"
                 + task + "\n"

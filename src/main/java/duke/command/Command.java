@@ -3,6 +3,7 @@ package duke.command;
 import duke.logic.DukeException;
 import duke.logic.Storage;
 import duke.logic.TaskList;
+import duke.logic.TaskStack;
 import duke.logic.Ui;
 
 /**
@@ -20,7 +21,8 @@ public abstract class Command {
      * @return boolean value that determines process termination.
      * @throws DukeException If operation is unsuccessful.
      */
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage,
+                                   TaskStack taskStack) throws DukeException;
 
     public abstract boolean isExitCommand();
 }

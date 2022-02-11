@@ -13,6 +13,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.UndoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -24,7 +25,7 @@ import duke.task.Todo;
  */
 public class Parser {
     private enum CommandType {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND, CLEAR
+        BYE, LIST, UNDO, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND, CLEAR
     }
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
@@ -97,6 +98,9 @@ public class Parser {
                 break;
             case LIST:
                 command = new ListCommand();
+                break;
+            case UNDO:
+                command = new UndoCommand();
                 break;
             case MARK:
                 command = new MarkCommand(parseIndex(splitInput[1]), true);

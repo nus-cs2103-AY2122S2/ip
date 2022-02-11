@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.logic.Storage;
 import duke.logic.TaskList;
+import duke.logic.TaskStack;
 import duke.logic.Ui;
 
 /**
@@ -34,7 +35,7 @@ public class FindCommand extends Command {
      * @return <code>true</code> upon successful execution.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage, TaskStack taskStack) {
         TaskList newTaskList = taskList.filter(this.keywords);
         String output = "MATCHING TASKS HERE:" + newTaskList;
         ui.showMessage(output);

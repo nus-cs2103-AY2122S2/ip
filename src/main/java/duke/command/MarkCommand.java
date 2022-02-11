@@ -3,6 +3,7 @@ package duke.command;
 import duke.logic.DukeException;
 import duke.logic.Storage;
 import duke.logic.TaskList;
+import duke.logic.TaskStack;
 import duke.logic.Ui;
 import duke.task.Task;
 
@@ -44,7 +45,7 @@ public class MarkCommand extends Command {
      * @throws DukeException If write to file is unsuccessful.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage, TaskStack taskStack) throws DukeException {
         Task task;
         String output;
 
@@ -54,6 +55,10 @@ public class MarkCommand extends Command {
             throw new DukeException("INVALID INDEX");
         }
 
+        TaskList copiedTaskList = new TaskList();
+        copiedTaskList.copy(taskList);
+        taskStack.push(copiedTaskList);
+
         if (isMarkCommand) {
             task.markAsDone();
             output = "TASK DONE:\n" + task;
@@ -62,6 +67,7 @@ public class MarkCommand extends Command {
             output = "TASK UNDONE:\n" + task;
         }
         storage.writeToFile(taskList);
+        ui.showMessage(output);
         return output;
     }
 

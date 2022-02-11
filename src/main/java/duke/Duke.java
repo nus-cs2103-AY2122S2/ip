@@ -10,6 +10,7 @@ import duke.logic.DukeException;
 import duke.logic.Parser;
 import duke.logic.Storage;
 import duke.logic.TaskList;
+import duke.logic.TaskStack;
 import duke.logic.Ui;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -56,6 +57,11 @@ public class Duke extends Application {
     private Ui ui;
 
     /**
+     * Stack of tasks for use with undo command.
+     */
+    private TaskStack taskStack;
+
+    /**
      * Default constructor for an instance of Duke. Used for GUI.
      */
     public Duke() {
@@ -83,6 +89,7 @@ public class Duke extends Application {
             ui.showError(e);
             this.taskList = new TaskList();
         }
+        this.taskStack = new TaskStack();
     }
 
     /**
@@ -97,7 +104,7 @@ public class Duke extends Application {
             try {
                 String fullCommand = ui.readCommand();
                 Command command = Parser.parse(fullCommand);
-                command.execute(this.taskList, this.ui, this.storage);
+                command.execute(this.taskList, this.ui, this.storage, this.taskStack);
                 hasExited = command.isExitCommand();
             } catch (DukeException e) {
                 ui.showError(e);
@@ -190,7 +197,7 @@ public class Duke extends Application {
                     }
                 }, 1000);
             }
-            return command.execute(taskList, ui, storage);
+            return command.execute(taskList, ui, storage, taskStack);
         } catch (DukeException e) {
             return ui.showError(e);
         }

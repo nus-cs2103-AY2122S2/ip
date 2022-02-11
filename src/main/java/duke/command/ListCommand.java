@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.logic.Storage;
 import duke.logic.TaskList;
+import duke.logic.TaskStack;
 import duke.logic.Ui;
 
 /**
@@ -19,9 +20,9 @@ public class ListCommand extends Command {
      * @return <code>true</code> upon successful execution.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage, TaskStack taskStack) {
         String output = "YOUR TASKS:" + taskList;
-        System.out.println(output);
+        ui.showMessage(output);
         return output;
     }
 
