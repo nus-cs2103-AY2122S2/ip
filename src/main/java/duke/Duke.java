@@ -37,7 +37,10 @@ public class Duke {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
             output = ui.getOutput();
-            assert output.equals("") : "Sorry, get empty output";
+            if (c.isExit()) {
+                return ui.getOutput();
+            }
+            assert output.equals("") : "Error empty output";
             return output;
         } catch (DukeException e) {
             throw new DukeException("User Input error");

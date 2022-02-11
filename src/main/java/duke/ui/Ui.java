@@ -8,6 +8,8 @@ import duke.data.DukeException;
 
 public class Ui {
     private static final String DIVIDER = "    ____________________________________________________________";
+    private static final String WELCOME_MSG = "Hello! I'm Yae Guuji\nWhat can I do for you?";
+    private static final String EXIT_MSG = "Bye. Hope to see you again soon!";
 
     private final PrintStream out;
     private String outputString;
@@ -40,7 +42,7 @@ public class Ui {
         String logo = "    d(`･ω･´)b";
         System.out.println(logo);
         System.out.println("    Hello! I'm duke.Duke by A0221330A.\n    What can I do for you?");
-        return "Hello! I'm Yae Guuji\nWhat can I do for you?";
+        return WELCOME_MSG;
     }
 
     /**
@@ -55,8 +57,8 @@ public class Ui {
      * Returns exit message.
      */
     public void showExitMessage() {
-        out.println(output("Bye. Hope to see you again soon!"));
-        outputString = "Bye. Hope to see you again soon!";
+        out.println(output(EXIT_MSG));
+        outputString = EXIT_MSG;
     }
 
     /**
@@ -108,5 +110,9 @@ public class Ui {
      */
     public String getOutput() {
         return outputString;
+    }
+
+    public static String getExitMessage() {
+        return EXIT_MSG;
     }
 }
