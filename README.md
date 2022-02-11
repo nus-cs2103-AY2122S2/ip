@@ -1,24 +1,51 @@
-# Duke project template
+# Project Description
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a greenfield Java project for CS2103T Software Engineering. 
 
-## Setting up in Intellij
+>  “Any fool can write code that a computer can understand. 
+> Good programmers write code that humans can understand.”
+> -Martin Fowler.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## What is Duke?
+***
+Duke is a basic Todo List with a built-in interface for users to interact with. 
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+**Features include:**
+- [x] ~~Adding new Tasks~~ **IMPROVED! Able to add specific tasks such as: Todo, Deadlines and Events!**
+- [x] Deleting Tasks.
+- [x] Mark and Unmark tasks.
+- [x] List the task in an interface.
+- [ ] ~~Help Menu~~.Dropped due to the lack of time.
+
+## Instructions
+***
+
+###Commands and their purpose
+1. ``list`` shows the list of tasks that has yet to be done.
+2. ``mark <integer>`` marks the task as completed.  
+3. ``unmark <integer>`` un-marks the task as not completed.
+4. ``todo <task>`` creates a new task that user has to do.
+5. ``deadline <task> /by <date>`` creates a new deadline and a date in which the task has to be completed by.
+6. ``event <task> /at <date>`` creates a new event and a date in which the event is held at.
+7. ``find <description>`` finds tasks that matches the description.
+8. ``delete <integer>`` deletes the specific task from the list.
+
+note: `<integer>` represents the order of the specific task in the list
+
+**All you need to do is**
+1. Download the .jar file from [here](https://github.com/tandeshao/ip/releases/tag/shadowJar).
+2. Open the command prompt/terminal.
+3. Navigate to the directory of the .jar file.
+4. Ensure that you have jdk set up in your local environment.
+5. Run ``java -jar Launcher.jar``.
+6. Let it manage your tasks for you 😃
+
+***
+If you are interested. Here's the ``Launcher`` class:
+```java
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+}
+```
