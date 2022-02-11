@@ -1,29 +1,90 @@
+TaskJamie is a desktop app used to keep track of tasks. It provides a Graphical User Interface (GUI)  
 # User Guide
 
-## Features 
+1. Ensure that you have Java `11` or above installed in your Computer.
+2. Download the latest `duke.jar` from  [here](https://github.com/ChanWeiJie/ip/releases/tag/A-Jar)
+3. Copy the file to the folder you want to use as the _home folder_ for your TaskJamie.
+4. Double-click the file to start the app. The GUI should not appear similar to the one found [here](https://chanweijie.github.io/ip/Ui.png). This is because
+the app does not contain any sample data. 
 
-### Feature-ABC
+## Features
 
-Description of the feature.
+## Adding a task : `todo` , `event`, `deadline`
 
-### Feature-XYZ
+Adds a task into TaskJame.
 
-Description of the feature.
+Format for `todo`: todo `description`
 
-## Usage
+Format for `event`: event `description` /at `date` `start_time` `end_time`
 
-### `Keyword` - Describe action
+Format for `deadline`: deadline `description` /by `date` `time`
 
-Describe the action and its outcome.
+**NOTES** the following are the format for the date and any of the mentioned time
+- `time`: `hhmm`
+- `date`: `yyyy-mm-dd`
 
-Example of usage: 
+Example of usage: `todo run`
 
-`keyword (optional arguments)`
+Expected outcome: TaskJamie would record that task and save it. 
+TaskJamie should show a message `Got it. I've added this task: `task description` ` and TaskJamie would tell you how many
+tasks are in the list. Eg: `Now you have `x` tasks in your list.
 
-Expected outcome:
 
-Description of the outcome.
+## Deleting a task : `delete`
 
-```
-expected output
-```
+Deletes a task from the list in TaskJamie.
+
+Format : `delete index`
+
+- `index` would be the index of the task to be deleted from the list.
+
+Example of usage: `delete 1`
+
+Expected outcome: TaskJamie will remove the task at index 1 and should show a message `Got it. I've removed this task: `task description`
+and TaskJamie would tell you how many tasks are left in the list. Eg: `Now you have `x` tasks in your list.
+
+## Listing all tasks: `list`
+
+Shows a list of all tasks in the address book.
+
+Format : `list`
+
+
+## Checking/Unchecking a task on the list : `unmark`, `mark`
+
+Marks/Unmarks the specified task in the list as done or not done.
+
+Format for `mark` : `mark index`
+
+Format for `unmark` : `unmark index`
+
+- `index` would be the index of the task to be deleted from the list.
+
+Example usage : `mark 1`
+
+Expected outcome: TaskJamie will mark the task at index 1 and should show a message `Nice! I've marked this task as done: `task description`
+and TaskJamie would Mark and `X` on that task to signify that the task is done. The negation is true as well (for unmark).
+
+## Listing all `events` and `deadlines` from a particular `date` : `schedule`
+
+Shows a list of all tasks that have the same date provided.
+
+Format : `schedule date`
+
+- As stated above, the format for date would be **`yyyy-mm-dd`**
+
+Example usage : `schedule 2022-05-29`
+
+Expected outcome: TaskJamie will list all the task that are associated with the given date and should 
+show a message `Here is your Schedule for `date``.
+
+## Exiting the program : `bye`
+
+Exits the program.
+
+Format: `bye`
+
+## Saving the data
+
+Tasks stored in TaskJamie are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
