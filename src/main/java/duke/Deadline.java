@@ -45,6 +45,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean isDuplicate(Task other) {
+        if (super.isDuplicate(other) && other instanceof Deadline) {
+            Deadline deadline = (Deadline) other;
+            return time.equals(deadline.time);
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + time.format(DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH)) + ")";

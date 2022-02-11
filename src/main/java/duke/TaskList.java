@@ -188,7 +188,39 @@ public class TaskList {
     }
 
     /**
-     * Clears all tasks in taskList. 
+     * Detects duplicate tasks in taskList.
+     *
+     * @return responding messages.
+     */
+    public String duplicates() {
+        StringBuilder message = new StringBuilder();
+        List<Task> duplicates = new ArrayList<>();
+        for (int i = 0; i < tasks.size() - 1; i++) {
+            Task taskAtI = tasks.get(i);
+            for (int j = i + 1; j < tasks.size(); j++) {
+                Task taskAtJ = tasks.get(j);
+                boolean isDuplicate = taskAtI.isDuplicate(taskAtJ);
+                if (isDuplicate && duplicates.isEmpty()) {
+                    message.append("Here are the duplicate tasks:");
+                }
+                if (isDuplicate && !duplicates.contains(taskAtI)) {
+                    duplicates.add(taskAtI);
+                    message.append(String.format("\n%d.%s", i + 1, taskAtI));
+                }
+                if (isDuplicate && !duplicates.contains(taskAtJ)) {
+                    duplicates.add(taskAtJ);
+                    message.append(String.format("\n%d.%s", j + 1, taskAtJ));
+                }
+            }
+        }
+        if (duplicates.isEmpty()) {
+            return "There is no duplicate task in your list.";
+        }
+        return message.toString();
+    }
+
+    /**
+     * Clears all tasks in taskList.
      */
     public void clear() {
         tasks.clear();

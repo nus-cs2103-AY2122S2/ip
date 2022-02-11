@@ -69,6 +69,16 @@ public abstract class Task {
         return content;
     }
 
+    /**
+     * Checks whether another task is a duplicate.
+     *
+     * @param other another task.
+     * @return whether the other task is a duplicate.
+     */
+    public boolean isDuplicate(Task other) {
+        return content.equals(other.content);
+    }
+
     @Override
     public String toString() {
         String s = "[";

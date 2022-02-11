@@ -41,6 +41,15 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean isDuplicate(Task other) {
+        if (super.isDuplicate(other) && other instanceof Event) {
+            Event event = (Event) other;
+            return time.equals(event.time);
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + time + ")";
     }
