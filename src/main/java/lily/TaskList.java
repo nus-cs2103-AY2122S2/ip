@@ -4,6 +4,7 @@ import lily.task.Task;
 import lily.task.Todo;
 import lily.task.Deadline;
 import lily.task.Event;
+import lily.task.Job;
 
 import java.util.LinkedList;
 
@@ -138,7 +139,7 @@ public class TaskList {
      * Types of tasks the user can add.
      */
     private enum TaskType {
-        TODO, DEADLINE, EVENT
+        TODO, DEADLINE, EVENT, JOB
     }
 
     /**
@@ -176,6 +177,18 @@ public class TaskList {
     }
 
     /**
+     * Adds a Job to the TaskList.
+     * 
+     * @param desc What the Job is about.
+     * @param dur How long the Job will take
+     * @return The Job that was added.
+     * @throws LilyException If the duration was not recognizable.
+     */
+    public Task addJob(String desc, String dur) throws LilyException {
+        return addTask(TaskType.JOB, desc, dur);
+    }
+
+    /**
      * Abstraction for adding tasks.
      * 
      * @param t The type of task being added.
@@ -197,6 +210,10 @@ public class TaskList {
 
         case EVENT:
             task = new Event(desc, date);
+            break;
+
+        case JOB:
+            task = new Job(desc, date);
             break;
 
         default:

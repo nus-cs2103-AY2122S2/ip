@@ -83,11 +83,17 @@ public class Parser {
                 ui.showTaskAdded(tasks.addEvent(eventDescription, eventDate), tasks.getSize());
                 break;
     
+            case "job":
+                String jobDescription = findDescDate(TaskType.JOB, sentence)[0];
+                String jobDuration = findDescDate(TaskType.JOB, sentence)[1];
+                ui.showTaskAdded(tasks.addJob(jobDescription, jobDuration), tasks.getSize());
+                break;
+
             case "delete":
             // Fallthrough
             case "remove":
                 assert parsedSentence[1] != null : "User should have input an index to mark";
-                ui.showTaskRemoved(tasks.remove( Integer.parseInt(parsedSentence[1]) - 1), tasks);
+                ui.showTaskRemoved(tasks.remove(Integer.parseInt(parsedSentence[1]) - 1), tasks);
                 break;
 
             case "find":
@@ -126,7 +132,8 @@ public class Parser {
     private enum TaskType {
         TODO (5, 0, "unused tag"), 
         DEADLINE (9, 4, "/by"), 
-        EVENT (6, 4, "/at");
+        EVENT (6, 4, "/at"),
+        JOB (4, 5, "/for");
 
         private final int cmdCharLen;
         private final int dateCharLen;
@@ -179,6 +186,11 @@ public class Parser {
                         s.indexOf(TaskType.EVENT.getDateTag()) - 1);
                 break;
 
+            case JOB:
+                result[0] = s.substring(TaskType.JOB.getCmdLen(), 
+                        s.indexOf(TaskType.JOB.getDateTag()) - 1);
+                break;
+
             default:
                 throw new LilyException(LilyException.ERROR_UNKNOWN_TASK_TYPE);
             }
@@ -202,6 +214,11 @@ public class Parser {
             case EVENT:
                 result[1] = s.substring( s.indexOf(TaskType.EVENT.getDateTag()) 
                         + TaskType.EVENT.getDateCharLen());
+                break;
+
+            case JOB:
+                result[1] = s.substring( s.indexOf(TaskType.JOB.getDateTag()) 
+                        + TaskType.JOB.getDateCharLen());
                 break;
 
             default:
