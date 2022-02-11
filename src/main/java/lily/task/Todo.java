@@ -13,7 +13,7 @@ public class Todo extends Task {
      * @param s The description of what is due.
      */
     public Todo(String s) {
-        super(s);
+        super(varArgs(s, "for the tag"));
     }
     
     /**
@@ -24,5 +24,12 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    private static String varArgs(String ... descriptions) {
+        for (String d : descriptions) {
+            System.out.println(d);
+        }
+        return descriptions[0];
     }
 } 

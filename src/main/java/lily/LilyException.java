@@ -3,8 +3,7 @@ package lily;
 /**
  * Exceptions thrown by Lily-related functions
  * 
- * Author: Hong Yi En, Ian
- * Referenced: Lim Bing Sen's iP's very ingenious and organised duke.exception.DukeException
+ * @@author bingsen0806-reused Referenced Bing Sen's ingenious and organised duke.exception.DukeException
  * Last Updated: Feb 2022 (AY21/22 Sem 2)
  */
 public class LilyException extends Exception {
