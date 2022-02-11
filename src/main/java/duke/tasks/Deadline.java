@@ -6,17 +6,17 @@ import java.time.format.DateTimeFormatter;
  * Deadline is a class which represents the deadline task.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDate deadlineDate;
 
     /**
      * Creates a Deadline task object, constructor.
      *
      * @param description A description of the task.
-     * @param by The date which the task must be completed.
+     * @param deadlineDate The date which the task must be completed.
      */
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, LocalDate deadlineDate) {
         super(description);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Deadline extends Task {
         String output = "D";
         String markState = this.isDone ? "mark" : "unmark";
         return output + " | " + markState + " | "
-                + this.description + this.by;
+                + this.description + this.deadlineDate;
     }
 
     /**
@@ -41,6 +41,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+                + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

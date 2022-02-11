@@ -6,16 +6,16 @@ import java.time.format.DateTimeFormatter;
  * Event class is a class which represents the event task.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    protected LocalDate eventDate;
 
     /**
      * Creates an Event task object, constructor.
      * @param description A description of the task.
-     * @param at The date which the event happens.
+     * @param eventDate The date which the event happens.
      */
-    public Event(String description, LocalDate at) {
+    public Event(String description, LocalDate eventDate) {
         super(description);
-        this.at = at;
+        this.eventDate = eventDate;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Event extends Task {
         String output = "E";
         String markState = this.isDone ? "mark" : "unmark";
         return output + " | " + markState + " | "
-                + this.description + " | " + this.at;
+                + this.description + " | " + this.eventDate;
 
     }
 
@@ -41,6 +41,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+                + this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

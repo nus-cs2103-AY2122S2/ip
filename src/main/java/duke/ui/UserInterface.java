@@ -13,14 +13,18 @@ public class UserInterface {
     private static final String BYE = "\nBye. Hope to see you again soon!\n";
 
     /**
-     * Prints the introduction message.
+     * Returns a String containing the introduction message.
+     *
+     * @return A String containing the introduction message.
      */
     public static String introMessage() {
         return INTRO;
     }
 
     /**
-     * Prints the bye message.
+     * Returns a String containing the bye message.
+     *
+     * @return A String containing the bye message.
      */
     public static String byeMessage() {
         return BYE;
@@ -28,7 +32,9 @@ public class UserInterface {
 
     /**
      * Prints the duke error message.
+     *
      * @param error The error message description.
+     * @return AString containing the error message.
      */
     public static String errorMessage(DukeException error) {
         return error.getMessage();
