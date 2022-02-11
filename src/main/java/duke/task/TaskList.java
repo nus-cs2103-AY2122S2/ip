@@ -7,7 +7,6 @@ public class TaskList {
 
     /**
      * TaskList class.
-     *
      */
     public TaskList() {
         this.tasks = new ArrayList<>();

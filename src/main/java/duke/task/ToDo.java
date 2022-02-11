@@ -22,18 +22,18 @@ public class ToDo extends Task {
 
     @Override
     public ToDo mark() {
-        return new ToDo(task, true);
+        return new ToDo(super.getTask(), true);
     }
 
     @Override
     public ToDo unmark() {
-        return new ToDo(task, false);
+        return new ToDo(super.getTask(), false);
     }
 
     @Override
     public String saveData() {
-        int done = super.done ? 1 : 0;
-        return Type.T + " | " + done + " | " + task;
+        int done = super.getDoneStatus();
+        return Type.T + " | " + done + " | " + super.getTask();
     }
 
     @Override

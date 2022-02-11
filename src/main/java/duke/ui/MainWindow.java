@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws DukeException{
+    private void handleUserInput() throws DukeException {
         try {
             String input = userInput.getText();
             String response = duke.getResponse(input);
@@ -68,6 +68,5 @@ public class MainWindow extends AnchorPane {
         } catch (DukeException e) {
             throw new DukeException("User Input error");
         }
-
     }
 }

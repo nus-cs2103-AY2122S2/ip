@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDate at;
+    private final LocalDate at;
 
     /**
      * Event class.
      *
      * @param task tasks for event.
-     * @param at time at.
+     * @param at   time at.
      */
     public Event(String task, LocalDate at) {
         super(task.trim());
@@ -21,7 +21,7 @@ public class Event extends Task {
      * Event class change done status.
      *
      * @param task tasks for event.
-     * @param at time at.
+     * @param at   time at.
      * @param done done status.
      */
     public Event(String task, LocalDate at, boolean done) {
@@ -31,18 +31,18 @@ public class Event extends Task {
 
     @Override
     public Event mark() {
-        return new Event(task, at, true);
+        return new Event(super.getTask(), at, true);
     }
 
     @Override
     public Event unmark() {
-        return new Event(task, at, false);
+        return new Event(super.getTask(), at, false);
     }
 
     @Override
     public String saveData() {
-        int done = super.done ? 1 : 0;
-        return Type.E + " | " + done + " | " + task + " | " + at;
+        int done = super.getDoneStatus();
+        return Type.E + " | " + done + " | " + super.getTask() + " | " + at;
     }
 
     @Override

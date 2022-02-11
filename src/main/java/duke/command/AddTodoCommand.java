@@ -13,7 +13,7 @@ public class AddTodoCommand extends Command {
     private final ToDo newTodo;
 
     /**
-     * Returns a to do command with new to do.
+     * Returns a to-do command with new to do.
      *
      * @param newTodo new to do.
      */

@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    private final LocalDate by;
 
     /**
      * Event deadline.
      *
      * @param task tasks for deadline.
-     * @param by time by.
+     * @param by   time by.
      */
     public Deadline(String task, LocalDate by) {
         super(task.trim());
@@ -21,7 +21,7 @@ public class Deadline extends Task {
      * Deadline class change done status.
      *
      * @param task tasks for deadline.
-     * @param by time by.
+     * @param by   time by.
      * @param done done status.
      */
     public Deadline(String task, LocalDate by, boolean done) {
@@ -31,18 +31,18 @@ public class Deadline extends Task {
 
     @Override
     public Deadline mark() {
-        return new Deadline(task, by, true);
+        return new Deadline(super.getTask(), by, true);
     }
 
     @Override
     public Deadline unmark() {
-        return new Deadline(task, by, false);
+        return new Deadline(super.getTask(), by, false);
     }
 
     @Override
     public String saveData() {
-        int done = super.done ? 1 : 0;
-        return Type.D + " | " + done + " | " + task + " | " + by;
+        int done = super.getDoneStatus();
+        return Type.D + " | " + done + " | " + super.getTask() + " | " + by;
     }
 
     @Override

@@ -11,9 +11,9 @@ public class FindCommand extends Command {
     /**
      * Returns an error command with error message.
      *
-     * @param keywords  the keywords to be found.
+     * @param keywords the keywords to be found.
      */
-    public FindCommand(String ... keywords) {
+    public FindCommand(String... keywords) {
         this.keywords = keywords;
         this.isFound = false;
     }
@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        for (String keyword: keywords) {
+        for (String keyword : keywords) {
             handleFind(tasks, ui, keyword);
         }
     }

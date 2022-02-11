@@ -15,7 +15,7 @@ public class Duke {
     /**
      * Main class of the Duke application that connect Ui Storage and TaskList
      *
-     * @param filePath   the file location.
+     * @param filePath the file location.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -31,20 +31,16 @@ public class Duke {
     /**
      * Function to generate a response to user input.
      */
-    public String getResponse(String input) throws DukeException{
-        String output = "";
+    public String getResponse(String input) throws DukeException {
         try {
+            String output;
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
             output = ui.getOutput();
-            if (!output.equals("")) {
-                return output;
-            } else {
-                assert output.equals("") : "Sorry, get empty output";
-            }
+            assert output.equals("") : "Sorry, get empty output";
+            return output;
         } catch (DukeException e) {
-            e.printStackTrace();
+            throw new DukeException("User Input error");
         }
-        return output;
     }
 }

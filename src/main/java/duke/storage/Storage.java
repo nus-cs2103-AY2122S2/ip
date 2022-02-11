@@ -20,7 +20,7 @@ import duke.task.ToDo;
 import duke.ui.Ui;
 
 public class Storage {
-    protected String filePath;
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -28,7 +28,6 @@ public class Storage {
 
     /**
      * Loads from file
-     *
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
@@ -57,7 +56,6 @@ public class Storage {
                 writer.write(System.lineSeparator());
             }
             writer.close();
-            return;
         } catch (IOException e) {
             Ui ui = new Ui();
             ui.showMessage(e.getMessage());

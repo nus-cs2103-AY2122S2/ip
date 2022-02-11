@@ -19,7 +19,7 @@ public class Ui {
     /**
      * Ui class.
      *
-     * @param in input Stream.
+     * @param in  input Stream.
      * @param out output Stream.
      */
     public Ui(InputStream in, PrintStream out) {
@@ -39,7 +39,7 @@ public class Ui {
         System.out.println(DIVIDER);
         String logo = "    d(`･ω･´)b";
         System.out.println(logo);
-        System.out.println("Hello! I'm duke.Duke by A0221330A.\n    What can I do for you?\n" + DIVIDER);
+        System.out.println("    Hello! I'm duke.Duke by A0221330A.\n    What can I do for you?");
         return "Hello! I'm Yae Guuji\nWhat can I do for you?";
     }
 
@@ -94,6 +94,7 @@ public class Ui {
 
     /**
      * Returns specific message.
+     *
      * @param s input Stream.
      */
     public void showMessage(String s) {

@@ -3,8 +3,8 @@ package duke.task;
 import java.time.LocalDate;
 
 public class Task {
-    protected String task;
-    protected boolean done;
+    private final String task;
+    private final boolean done;
 
     /**
      * Task class.
@@ -47,8 +47,12 @@ public class Task {
         return task;
     }
 
+    public int getDoneStatus() {
+        return done ? 1 : 0;
+    }
+
     @Override
     public String toString() {
-        return done ? "[X] " + task : "[ ] " + task;
+        return done ? "[\u2713] " + task : "[\u2003] " + task;
     }
 }
