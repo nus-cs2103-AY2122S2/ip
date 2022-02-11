@@ -77,46 +77,47 @@ public class Storage {
      * @return List of tasks read from local file.
      * @throws DukeException If read from local file is unsuccessful.
      */
-    public ArrayList<Task> readFromFile() throws DukeException {
+    public TaskList readFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
-
+        Scanner sc;
+        
         try {
-            Scanner sc = new Scanner(this.file);
-
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                String[] breakdown = line.split(" \\| ");
-                String command = breakdown[0];
-
-                try {
-                    TaskType taskType = TaskType.valueOf(command);
-
-                    switch (taskType) {
-                    case T:
-                        tasks.add(new Todo(breakdown[2],
-                                Boolean.parseBoolean(breakdown[1])));
-                        break;
-                    case E:
-                        tasks.add(new Event(breakdown[2],
-                                Boolean.parseBoolean(breakdown[1]),
-                                LocalDateTime.parse(breakdown[3])));
-                        break;
-                    case D:
-                        tasks.add(new Deadline(breakdown[2],
-                                Boolean.parseBoolean(breakdown[1]),
-                                LocalDateTime.parse(breakdown[3])));
-                        break;
-                    default:
-                        throw new IllegalArgumentException();
-                    }
-                } catch (IllegalArgumentException e) {
-                    throw new DukeException("INVALID TASK TYPE");
-                }
-            }
-
-            return tasks;
+            sc = new Scanner(this.file);
         } catch (IOException e) {
             throw new DukeException("INVALID FILE PATH");
         }
+
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            String[] breakdown = line.split(" \\| ");
+            String command = breakdown[0];
+
+            try {
+                TaskType taskType = TaskType.valueOf(command);
+
+                switch (taskType) {
+                case T:
+                    tasks.add(new Todo(breakdown[2],
+                            Boolean.parseBoolean(breakdown[1])));
+                    break;
+                case E:
+                    tasks.add(new Event(breakdown[2],
+                            Boolean.parseBoolean(breakdown[1]),
+                            LocalDateTime.parse(breakdown[3])));
+                    break;
+                case D:
+                    tasks.add(new Deadline(breakdown[2],
+                            Boolean.parseBoolean(breakdown[1]),
+                            LocalDateTime.parse(breakdown[3])));
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException e) {
+                throw new DukeException("INVALID TASK TYPE");
+            }
+        }
+
+        return new TaskList(tasks);
     }
 }

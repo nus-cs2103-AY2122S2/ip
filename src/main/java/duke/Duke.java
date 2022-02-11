@@ -62,7 +62,7 @@ public class Duke extends Application {
         try {
             this.ui = new Ui();
             this.storage = new Storage("./data/saved.txt");
-            this.taskList = new TaskList(storage.readFromFile());
+            this.taskList = storage.readFromFile();
         } catch (DukeException e) {
             ui.showError(e);
             this.taskList = new TaskList();
@@ -78,7 +78,7 @@ public class Duke extends Application {
         try {
             this.ui = new Ui();
             this.storage = new Storage(filePath);
-            this.taskList = new TaskList(storage.readFromFile());
+            this.taskList = storage.readFromFile();
         } catch (DukeException e) {
             ui.showError(e);
             this.taskList = new TaskList();
