@@ -30,6 +30,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
+        assert this.description != null;
         return this.isDone ? "[T][X] " + this.description
                 : "[T][ ] " + this.description;
     }

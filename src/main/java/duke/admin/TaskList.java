@@ -74,6 +74,7 @@ public class TaskList {
      * @return the task after it is deleted from the task list
      */
     public Task delete(int index) {
+        assert index <= tasks.size();
         Task deletedTask = tasks.get(index);
         tasks.remove(index);
 
@@ -112,7 +113,6 @@ public class TaskList {
 
         String searchResultString = "";
 
-        searchResultString = searchResultString + "Here are the matching tasks in your list:" + System.lineSeparator();
         for (int j = 1; j <= searchResults.size(); j++) {
             String result = j + ". " + searchResults.get(j - 1).toString();
             searchResultString = searchResultString + result + System.lineSeparator();
@@ -126,6 +126,7 @@ public class TaskList {
      * @return the task after it is marked as done
      */
     public Task mark(int index) {
+        assert index <= tasks.size();
         Task indexedTask = tasks.get(index);
         indexedTask.mark();
 
@@ -138,6 +139,7 @@ public class TaskList {
      * @return the task after it is marked as not yet done
      */
     public Task unmark(int index) {
+        assert index <= tasks.size();
         Task indexedTask = tasks.get(index);
         indexedTask.unmark();
 

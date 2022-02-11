@@ -25,6 +25,8 @@ public class Parser {
      * @throws DukeException exception thrown when command is invalid or improper
      */
     public static Command parse(String fullCommand) throws DukeException {
+        assert fullCommand != null;
+        
         String[] splitCommand = fullCommand.split(" ", 2);
         String action = splitCommand[0];
 

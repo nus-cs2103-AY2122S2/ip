@@ -17,7 +17,7 @@ import duke.tasks.ToDo;
 public class AddCommand extends Command {
     private String description;
     private String type;
-    private Task task;
+    private Task taskToBeAdded;
 
     /**
      * Constructor for AddCommand which takes in the type of task and description of
@@ -26,6 +26,8 @@ public class AddCommand extends Command {
      * @param description description of task to be added
      */
     public AddCommand(String type, String description) {
+        assert type != null;
+        assert description != null;
         this.type = type;
         this.description = description;
     }
@@ -40,22 +42,22 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         switch (type) {
         case "T":
-            task = new ToDo(description);
+            taskToBeAdded = new ToDo(description);
             break;
         case "D":
-            task = new Deadline(description);
+            taskToBeAdded = new Deadline(description);
             break;
         case "E":
-            task = new Event(description);
+            taskToBeAdded = new Event(description);
             break;
         default:
             break;
         }
 
-        tasks.add(task);
-        storage.updateAfterAdd(task);
+        tasks.add(taskToBeAdded);
+        storage.updateAfterAdd(taskToBeAdded);
         
-        return Ui.showAddedMessage(task, tasks.getNumberOfTasks());
+        return Ui.showAddedMessage(taskToBeAdded, tasks);
     }
 
     /**
