@@ -31,7 +31,6 @@ class Parser {
                 throw new EmptyDescriptionException("Todo description cannot be empty!");
             }
         } else if (commandWord.equals("deadline")) {
-            // include date exception!
             if (ui.isValidTask(fullCommand)) {
                 if (ui.isValidDeadline(fullCommand)) {
                     String taskName = ui.getTaskName(fullCommand);
