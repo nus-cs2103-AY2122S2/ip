@@ -84,6 +84,7 @@ public class TaskList {
      */
     public void addTask(CommandEnum commandEnum, String description, String modifierMessage) throws
             DateTimeParseException {
+        assert description != "" : "task description shouldn't be empty";
         switch (commandEnum) {
         case TODO:
             this.tasks.add(new Todo(description));
@@ -117,6 +118,7 @@ public class TaskList {
      * @return String representation of the given task.
      */
     public String taskString(int taskNumber) {
+        assert taskNumber >= 1 || taskNumber <= taskListSize() : "taskNumber should be within the range";
         return this.tasks.get(taskNumber - 1).toString();
     }
 

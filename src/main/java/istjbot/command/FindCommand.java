@@ -56,6 +56,8 @@ public class FindCommand extends Command {
             }
         }
 
+        assert keyword.length() != 0 : "keyword shouldn't be blank";
+
         String searchList = tasks.searchByKeywordString(keyword.toString());
         return ui.showTasksByKeyword(searchList);
     }
