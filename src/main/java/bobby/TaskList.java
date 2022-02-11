@@ -120,6 +120,7 @@ public class TaskList {
      * Generates a list of current tasks.
      */
     public String list() {
+        System.out.println("stack size check: " + stateStack.size());
         return Ui.printList(taskArray);
     }
 
@@ -193,13 +194,17 @@ public class TaskList {
     }
 
     public void undo() {
-        stateStack.pop();   // removes from the top
-        System.out.println(stateStack.size());  // shows that size is decreasing
-        State prevState = stateStack.peek();    // prevState stores top element using peek()
-        taskArray = prevState.loadState();
-
-        // this prints the last task in my peeked() array, which is always the same even though i popped, this doesnt change
-        System.out.println(stateStack.peek().loadState().get(stateStack.peek().loadState().size()-1).toString());
-        //System.out.println(taskArray.get(taskArray.size() - 1).toString());
+//        System.out.println("size before pop: " + stateStack.size());
+//        State currentState = stateStack.pop();   // removes from the top
+//        System.out.println("size after pop: " + stateStack.size());  // shows that size is decreasing
+//        State prevState = stateStack.peek();    // prevState stores top element using peek()
+//        taskArray = prevState.loadState();
+//        storage.updateFile(taskArray);
+//
+//        // this prints the last task in my peeked() array, which is always the same even though i popped, this doesnt change
+//        System.out.println(currentState.loadState().get(currentState.loadState().size()-1).toString());
+//        System.out.println(currentState.loadState().get(0).toString());
+//        //System.out.println(stateStack.peek().loadState().get(stateStack.peek().loadState().size()-1).toString());
+//        //System.out.println(taskArray.get(taskArray.size() - 1).toString());
     }
 }
