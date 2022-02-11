@@ -24,6 +24,7 @@ public class Duke {
             Command command = this.parser.parse(input);
             String reply = command.runCommand(this.ui, this.taskList);
             this.storage.writeFile(this.taskList);
+            assert (reply != null);
             return reply;
         }
         catch (DukeException e) {

@@ -4,7 +4,7 @@ import main.duke.TaskList;
 import main.duke.Ui;
 import main.duke.enums.CommandType;
 
-public class CBye extends Command{
+public class CBye extends Command {
 
     public CBye() {
         super(CommandType.BYE);

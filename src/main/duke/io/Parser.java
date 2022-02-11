@@ -17,10 +17,10 @@ public class Parser {
      * @throws DukeException when invalid input detected
      */
     public Command parse(String userInput) throws DukeException {
+        assert (userInput.length() != 0);
         String[] inputArray = userInput.split(" ");
         String userCommand = inputArray[0];
         Command newCommand;
-
         switch (userCommand) {
             case "bye":
                 newCommand = new CBye();
