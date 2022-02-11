@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -27,9 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        for (String keyword : keywords) {
-            handleFind(tasks, ui, keyword);
-        }
+        Arrays.stream(keywords).forEach(k -> handleFind(tasks, ui, k));
     }
 
     private void handleFind(TaskList tasks, Ui ui, String keyword) {
