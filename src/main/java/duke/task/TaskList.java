@@ -3,6 +3,7 @@ package duke.task;
 import duke.exception.InvalidTaskNumberException;
 import duke.task.tasks.Task;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,16 @@ import java.util.List;
  * removing tasks, updating tasks
  */
 public class TaskList {
-    private final List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks;
     private int index = 0;
+
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     /**
      * Add a new task into the tasks list. will return the string to be printed
@@ -23,7 +32,7 @@ public class TaskList {
      */
     public String addTask(Task newTask) {
         tasks.add(newTask);
-        index++;
+        index = tasks.size();
         String output = "Got it. I've added this task:\n  " +
                 newTask + "\nnow you have " + this.index + " tasks in the list";
         return output;
@@ -46,7 +55,7 @@ public class TaskList {
      */
     public String getTasks() {
         String output = "Here are the tasks in your list:";
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             output += String.format("\n%d.%s", i + 1, tasks.get(i));
         }
         return output;
@@ -70,6 +79,11 @@ public class TaskList {
 
         String out = tasks.get(id - 1).switchMark(instr);
         return out;
+    }
+
+    public TaskList cloneSelf() {
+        ArrayList<Task> copyArray = new ArrayList<>(this.tasks);
+        return new TaskList(copyArray);
     }
 
     /**
@@ -97,5 +111,13 @@ public class TaskList {
             }
         }
         return output;
+    }
+
+    public String copyStateFrom(TaskList lastState) {
+        if (lastState == null) {
+            return "You have not done any commands yet";
+        }
+        this.tasks = lastState.tasks;
+        return "Undo'd, now " + getTasks();
     }
 }

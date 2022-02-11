@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.stack.CallStack;
 import duke.task.TaskList;
 import duke.command.*;
 import duke.exception.CommandNotFoundException;
@@ -29,7 +30,7 @@ public class Parser {
             return new MarkCommand(taskId);
         case "unmark":
             taskId = Integer.parseInt(input[1]);
-            return new MarkCommand(taskId);
+            return new UnmarkCommand(taskId);
         case "find":
             String keyWord = input[1];
             return new FindCommand(keyWord);
@@ -45,6 +46,8 @@ public class Parser {
         case "delete":
             taskId = Integer.parseInt(input[1]);
             return new DeleteCommand(taskId);
+        case "undo":
+            return new UndoCommand();
         default:
             throw new CommandNotFoundException();
         }
