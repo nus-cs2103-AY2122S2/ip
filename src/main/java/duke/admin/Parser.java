@@ -1,13 +1,12 @@
 package duke.admin;
 
 import duke.commands.AddCommand;
+import duke.commands.ChangeMarkCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.UnmarkCommand;
 import duke.exceptions.DukeException;
 
 /**
@@ -45,14 +44,14 @@ public class Parser {
                 throw new DukeException("I don't know what to mark!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
-                return new MarkCommand(index);
+                return new ChangeMarkCommand(index, true);
             }
         case "unmark":
             if (!(descriptionExist)) {
                 throw new DukeException("I don't know what to unmark!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
-                return new UnmarkCommand(index);
+                return new ChangeMarkCommand(index, false);
             }
         case "todo":
             if (!(descriptionExist)) {

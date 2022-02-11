@@ -36,18 +36,22 @@ public class Task {
         this(type, description, false);
     }
 
-    /**
-     * Marks the task as done.
-     */
-    public void mark() {
-        this.isDone = true;
-    }
+    // /**
+    //  * Marks the task as done.
+    //  */
+    // public void mark() {
+    //     this.isDone = true;
+    // }
 
-    /**
-     * Marks the task as not yet done.
-     */
-    public void unmark() {
-        this.isDone = false;
+    // /**
+    //  * Marks the task as not yet done.
+    //  */
+    // public void unmark() {
+    //     this.isDone = false;
+    // }
+
+    public void toggleMark() {
+        this.isDone = !(this.isDone);
     }
 
     /**

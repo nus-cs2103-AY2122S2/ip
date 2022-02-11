@@ -74,25 +74,25 @@ public class Storage {
         }
     }
 
-    /**
-     * Reflects the marked indexed task in the storage list.
-     * @param index the index of the task that has just been marked as done
-     * @throws DukeException exception thrown when there is an error accessing or
-     *                       writing to the storage file
-     */
-    public void updateAfterMark(int index) throws DukeException {
-        this.modifyFile(index, true);
-    }
+    // /**
+    //  * Reflects the marked indexed task in the storage list.
+    //  * @param index the index of the task that has just been marked as done
+    //  * @throws DukeException exception thrown when there is an error accessing or
+    //  *                       writing to the storage file
+    //  */
+    // public void updateAfterMark(int index) throws DukeException {
+    //     this.modifyFile(index, true);
+    // }
 
-    /**
-     * Reflects the unmarked indexed task in the storage list.
-     * @param index the index of the task that has just been marked as not yet done
-     * @throws DukeException exception thrown when there is an error accessing or
-     *                       writing to the storage file
-     */
-    public void updateAfterUnmark(int index) throws DukeException {
-        this.modifyFile(index, false);
-    }
+    // /**
+    //  * Reflects the unmarked indexed task in the storage list.
+    //  * @param index the index of the task that has just been marked as not yet done
+    //  * @throws DukeException exception thrown when there is an error accessing or
+    //  *                       writing to the storage file
+    //  */
+    // public void updateAfterUnmark(int index) throws DukeException {
+    //     this.modifyFile(index, false);
+    // }
 
     /**
      * Reflects the deleted task in the storage list.
@@ -138,7 +138,7 @@ public class Storage {
      *                       writing to the storage file
      */
 
-    private void modifyFile(int index, boolean isToBeMarked) throws DukeException {
+    public void updateAfterChangeMark(int index, boolean toMark) throws DukeException {
         try {
             int dataLineCounter = 0; //initializing the counter
             BufferedReader storageFileReader = new BufferedReader(new FileReader(storageFile));
@@ -148,11 +148,11 @@ public class Storage {
             while (dataLine != null) {
                 if (dataLineCounter == index) {
                     if (dataLine.charAt(6) == '1') {
-                        if (!(isToBeMarked)) {
+                        if (!(toMark)) {
                             dataLine = dataLine.replaceFirst("xxx 1 xxx", "xxx 0 xxx");
                         }
                     } else {
-                        if (isToBeMarked) {
+                        if (toMark) {
                             dataLine = dataLine.replaceFirst("xxx 0 xxx", "xxx 1 xxx");
                         }
                     }
