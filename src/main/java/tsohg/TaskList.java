@@ -10,7 +10,7 @@ public class TaskList {
 
     private final ArrayList<Task> items;
 
-    private Storage storage;
+    private final Storage storage;
 
     /**
      * Constructor of the class.
@@ -113,7 +113,7 @@ public class TaskList {
         String result = "";
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).contains(keyword)) {
-                result = result.concat(String.format("%d.%s\n", i + 1, items.get(i)));
+                result = result.concat(formatItemOutput(i));
             }
         }
         return result;
@@ -185,8 +185,12 @@ public class TaskList {
     public String toString() {
         String result = "";
         for (int i = 0; i < items.size(); i++) {
-            result = result.concat(String.format("%d.%s\n", i + 1, items.get(i)));
+            result = result.concat(formatItemOutput(i));
         }
         return result;
+    }
+
+    private String formatItemOutput(int index) {
+        return String.format("%d.%s\n", index + 1, items.get(index));
     }
 }
