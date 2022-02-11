@@ -1,6 +1,8 @@
 package tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +17,11 @@ class TaskTest {
     @Test
     void testSetMarked() {
         Tasks t = new ToDos("hello", false);
-        assertEquals(false, t.getMarked());
-        t.setMarked(true);
-        assertEquals(true, t.getMarked());
-        t.setMarked(false);
-        assertEquals(false, t.getMarked());
+        assertFalse(t.getMarked());
+        t.setMarked();
+        assertTrue(t.getMarked());
+        t.setUnmarked();
+        assertFalse(t.getMarked());
     }
 
     /**

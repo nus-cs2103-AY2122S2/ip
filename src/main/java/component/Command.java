@@ -66,53 +66,54 @@ public class Command {
      * @param description Description to be used for matching.
      */
     private String find(String description) {
-        String s = "Here are the matching task in your list: ";
-        return s + "\n" + tasks.find(description);
+        String dukeReply = "Here are the matching task in your list: ";
+        String resultOfFind = tasks.findDescription(description);
+        return dukeReply + "\n" + resultOfFind;
 
     }
 
 
     /**
      * Deletes the task in the TaskList.
-     * @param i 0-based index for deletion of Task in the TaskList.
+     * @param index 0-based index for deletion of Task in the TaskList.
      */
-    private String deleteTask(int i) {
-        String s = "Noted. I've removed this task:" + "\n" + tasks.remove(i);
-        String res = String.format("Now you have %d tasks in the list.", tasks.size());
-        return s + "\n" + res;
+    private String deleteTask(int index) {
+        String dukeReply = "Noted. I've removed this task:" + "\n" + tasks.remove(index);
+        String additionalStatement = String.format("Now you have %d tasks in the list.", tasks.listSize());
+        return dukeReply + "\n" + additionalStatement;
     }
 
     /**
      * Marks the task in the TaskList.
-     * @param i 0-based index for users to mark the Task in the TaskList.
+     * @param index 0-based index for users to mark the Task in the TaskList.
      */
-    private String mark(int i) {
-        String s = "Nice! I've marked this task as done:";
-        Tasks t = tasks.get(i);
-        t.setMarked(true);
-        return s + "\n" + t;
+    private String mark(int index) {
+        String dukeReply = "Nice! I've marked this task as done:";
+        Tasks retrievedTask = tasks.getTask(index);
+        retrievedTask.setMarked();
+        return dukeReply + "\n" + retrievedTask;
     }
 
     /**
      * Un-marks the task in the TaskList.
-     * @param i  0-based index for users to unmark the task in the TaskList.
+     * @param index  0-based index for users to unmark the task in the TaskList.
      */
-    private String unmark(int i) {
-        String s = "OK, I've marked this task as not done yet:";
-        Tasks t = tasks.get(i);
-        t.setMarked(false);
-        return s + "\n" + t;
+    private String unmark(int index) {
+        String dukeReply = "OK, I've marked this task as not done yet:";
+        Tasks retrievedTask = tasks.getTask(index);
+        retrievedTask.setUnmarked();
+        return dukeReply + "\n" + retrievedTask;
     }
 
     /**
      * Adds task to the TaskList.
-     * @param t Task to be added.
+     * @param newTask Task to be added.
      */
-    private String addTask(Tasks t) {
-        tasks.add(t);
-        String s = "Got it. I've added this task:" + "\n" + " " + t;
-        String res = String.format("Now you have %d tasks in the list.", tasks.size());
-        return s + "\n" + res;
+    private String addTask(Tasks newTask) {
+        tasks.addTask(newTask);
+        String dukeReply = "Got it. I've added this task:" + "\n" + " " + newTask;
+        String amountOfTaskInList = String.format("Now you have %d tasks in the list.", tasks.listSize());
+        return dukeReply + "\n" + amountOfTaskInList;
     }
 
     /**
@@ -120,9 +121,9 @@ public class Command {
      */
     private String printList() {
         StringBuilder result = new StringBuilder("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.listSize(); i++) {
             String num = String.format("%d. ", i + 1);
-            String res = num + tasks.get(i).toString();
+            String res = num + tasks.getTask(i).toString();
             result.append("\n").append(res);
         }
         return result.toString();

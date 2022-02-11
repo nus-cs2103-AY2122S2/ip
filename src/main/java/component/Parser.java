@@ -37,32 +37,40 @@ public class Parser {
     /**
      * Checks user input.
      * @param userInput User input in a String.
-     * @throws TaskException Throws a TaskException if the user input is invalid.
+     * @throws exceptions.TaskException Throws a TaskException if the user input is invalid.
      */
     private void checkUserInput(String userInput) throws TaskException {
-        String[] splitInput = userInput.split(" ");
-        if (splitInput.length == 0 || notCommand(splitInput[0])) {
-            throw new IncorrectInputException();
+        String[] wordsSplitByEmptySpace = userInput.split(" ");
+        String firstWord = wordsSplitByEmptySpace[0];
+        if (firstWord.equals("mark") || firstWord.equals("unmark")) {
+            checkForWrongInputException(wordsSplitByEmptySpace);
+        }
 
-        } else if (splitInput.length == 1 && !userInput.equals("list") && !userInput.equals("bye")) {
-            String command = splitInput[0];
-            switch (command) {
-            case "todo":
-                throw new ToDosException();
-            case "deadline":
-                throw new DeadlineException();
-            default: //case "event":
-                throw new EventException();
-            }
+        if (notCommand(firstWord)) {
+            throw new IncorrectInputException();
         } else {
-            String command = splitInput[0];
-            if (command.equals("mark") || command.equals("unmark")) {
-                try {
-                    Integer.parseInt(splitInput[1]);
-                } catch (NumberFormatException e) {
-                    throw new WrongInputException();
-                }
-            }
+            checkForException(wordsSplitByEmptySpace);
+        }
+    }
+
+    private void checkForWrongInputException(String[] wordsSplitByEmptySpace) throws WrongInputException {
+        try {
+            Integer.parseInt(wordsSplitByEmptySpace[1]);
+        } catch (NumberFormatException e) {
+            throw new WrongInputException();
+        }
+    }
+
+    private void checkForException(String[] wordsSplitByEmptySpace) throws ToDosException,
+            DeadlineException, EventException {
+        String command = wordsSplitByEmptySpace[0];
+        switch (command) {
+        case "todo":
+            throw new ToDosException();
+        case "deadline":
+            throw new DeadlineException();
+        default: //case "event":
+            throw new EventException();
         }
     }
 
@@ -73,8 +81,9 @@ public class Parser {
      */
     private static boolean notCommand(String command) {
         return (!command.equals("bye") && !command.equals("list")
-                && !command.equals("delete") && !command.equals("mark") && !command.equals("unmark")
-                && !command.equals("todo") && !command.equals("deadline") && !command.equals("event")
+                && !command.equals("delete") && !command.equals("mark")
+                && !command.equals("unmark") && !command.equals("todo")
+                && !command.equals("deadline") && !command.equals("event")
                 && !command.equals("find"));
     }
 

@@ -10,64 +10,69 @@ import tasks.Tasks;
  * This class encapsulates the logic of Task List in Duke.
  */
 public class TaskList implements Iterable<Tasks> {
-    private final ArrayList<Tasks> ls;
+    private final ArrayList<Tasks> list;
 
     /**
      * Constructor for TaskList.
-     * @param ls Arraylist that contains the Tasks in Duke.
+     * @param list Arraylist that contains the Tasks in Duke.
      */
-    public TaskList(ArrayList<Tasks> ls) {
-        this.ls = ls;
+    public TaskList(ArrayList<Tasks> list) {
+        this.list = list;
     }
 
     /**
      * Getter method for TaskList.
-     * @param i 0-based index for users to get the task from the TaskList.
+     * @param index 0-based index for users to get the task from the TaskList.
      * @return Task from the TaskList.
      */
-    public Tasks get(int i) {
-        return ls.get(i);
+    public Tasks getTask(int index) {
+        return list.get(index);
     }
 
     /**
      * Adds the Task into the TaskList.
-     * @param t Task that is added to the TaskList.
+     * @param Task Task that is added to the TaskList.
      */
-    public void add(Tasks t) {
-        ls.add(t);
+    public void addTask(Tasks Task) {
+        list.add(Task);
     }
 
     /**
-     * Removes the Task at index i from the TaskList
-     * @param i 0-based index indicating position of Task in the TaskList.
+     * Removes the Task at index index from the TaskList
+     * @param index 0-based index indicating position of Task in the TaskList.
      * @return Task that is removed.
      */
-    public Tasks remove(int i) {
-        return ls.remove(i);
+    public Tasks remove(int index) {
+        return list.remove(index);
     }
 
     /**
      * Size of TaskList.
      * @return Integer representing size of TaskList.
      */
-    public int size() {
-        return ls.size();
+    public int listSize() {
+        return list.size();
     }
 
     /**
      * Prints out a list of Task in that TaskList that matches the description.
      * @param description  Description of the Task.
      */
-    public String find(String description) {
+    public String findDescription(String description) {
         int count = 1;
-        StringBuilder res = new StringBuilder();
-        for (Tasks t : ls) {
-            if (t.getTask().contains(description)) {
-                res.append(count).append(".").append(t).append("\n");
+        StringBuilder dukeReply = createDukeReply(description, count);
+        return dukeReply.toString();
+    }
+
+    private StringBuilder createDukeReply(String description, int count) {
+        StringBuilder dukeReply = new StringBuilder();
+        for (Tasks task : list) {
+            if (task.getTask().contains(description)) {
+                dukeReply.append(count).append(".").append(task).append("\n");
                 count++;
             }
         }
-        return res.toString();
+        return dukeReply;
     }
 
     /**
@@ -78,16 +83,16 @@ public class TaskList implements Iterable<Tasks> {
     public Iterator<Tasks> iterator() {
         return new Iterator<>() {
             private int currentIndex = 0;
-            private final int currentSize = ls.size();
+            private final int currentSize = list.size();
 
             @Override
             public boolean hasNext() {
-                return currentIndex < currentSize && ls.get(currentIndex) != null;
+                return currentIndex < currentSize && list.get(currentIndex) != null;
             }
 
             @Override
             public Tasks next() {
-                return ls.get(currentIndex++);
+                return list.get(currentIndex++);
             }
 
             @Override
