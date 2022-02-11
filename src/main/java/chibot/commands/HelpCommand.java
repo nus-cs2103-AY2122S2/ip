@@ -44,7 +44,7 @@ public class HelpCommand extends Command {
      * @return A String of help message.
      */
     public String printGenericHelpMessage() {
-        return "Chi is happy you are asking for help! Do go to the following link on how to get started!";
+        return "Chi is happy you are asking for help!\n Do go to the following link on how to get started!";
 
     }
 
