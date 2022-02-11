@@ -18,6 +18,17 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public String createNewTask(String[] inputStringsArray) throws DukeException {
+        switch (inputStringsArray[2]) {
+        case "todo":
+        case "deadline":
+        case "event":
+            return addToList(inputStringsArray);
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
+        }
+    }
+
     /**
      * Prints all tasks in the task list.
      */
@@ -27,7 +38,11 @@ public class TaskList {
             returnString = returnString + (i + 1) + ". [" + tasks.get(i).symbol() + "][" +
                     tasks.get(i).getStatusIcon() + "] " + tasks.get(i).displayTime() + "\n";
         }
-        return returnString;
+        if (returnString.equals("")) {
+            return "Seems like you haven't added any tasks to your list yet...";
+        } else {
+            return returnString;
+        }
     }
 
     /**
@@ -36,14 +51,14 @@ public class TaskList {
      * @throws DukeException If input string does not comply with todo, deadline or event formats.
      */
     public String addToList(String[] stringsToAdd) throws DukeException {
-        if (stringsToAdd.length < 2) {
+        if (stringsToAdd.length < 4) {
             throw new DukeException("OOPS!! The description of a " +
                     stringsToAdd[0] + " cannot be empty.");
         } else {
             Task task;
             String returnString = "";
             boolean containsBy = false;
-            for (int i = 1; i < stringsToAdd.length; i++) {
+            for (int i = 3; i < stringsToAdd.length; i++) {
                 if (stringsToAdd[i].equals("by")) {
                     containsBy = true;
                     break;
@@ -51,13 +66,13 @@ public class TaskList {
                     returnString = returnString + stringsToAdd[i] + " ";
                 }
             }
-            if (stringsToAdd[0].equals("todo")) {
+            if (stringsToAdd[2].equals("todo")) {
                 if (containsBy) {
                     throw new DukeException("Todo cannot have a due date. Create an deadline or event instead :)");
                 } else {
                     task = new Todo(returnString);
                 }
-            } else if (stringsToAdd[0].equals("deadline")) {
+            } else if (stringsToAdd[2].equals("deadline")) {
                 if (!containsBy) {
                     throw new DukeException("A deadline needs a due date. Create a todo instead.");
                 } else {
@@ -142,5 +157,4 @@ public class TaskList {
         }
         return returnString;
     }
-
 }

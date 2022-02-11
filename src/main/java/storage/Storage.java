@@ -1,6 +1,8 @@
 package storage;
 
 import exception.DukeException;
+import notes.Note;
+import notes.NoteList;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -17,10 +19,12 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    String path;
+    String taskPath;
+    String notePath;
 
-    public Storage(String path) {
-        this.path = path;
+    public Storage(String taskPath, String notePath) {
+        this.taskPath = taskPath;
+        this.notePath = notePath;
     }
 
     /**
@@ -28,9 +32,9 @@ public class Storage {
      * @return list of tasks retrieved from the storage, else an empty list.
      * @throws DukeException If data file does not exist.
      */
-    public ArrayList<Task> setUpData() throws DukeException {
+    public ArrayList<Task> setUpTaskData() throws DukeException {
         try {
-            FileReader myObj = new FileReader(this.path);
+            FileReader myObj = new FileReader(this.taskPath);
             BufferedReader br = new BufferedReader(myObj);
             String line;
             ArrayList<Task> tasks = new ArrayList<>();
@@ -59,21 +63,58 @@ public class Storage {
     }
 
     /**
+     * Retrieves notes from the storage (if any) and adds them to a new note list.
+     * @return list of notes retrieved from the storage, else an empty list.
+     * @throws DukeException If data file does not exist.
+     */
+    public ArrayList<Note> setUpNoteData() throws DukeException {
+        try {
+            FileReader myObj = new FileReader(this.notePath);
+            BufferedReader br = new BufferedReader(myObj);
+            String line;
+            ArrayList<Note> notes = new ArrayList<>();
+            while ((line = br.readLine()) != null) {
+                Note newNote = new Note(line);
+                notes.add(newNote);
+            }
+            return notes;
+        } catch (IOException e) {
+            throw new DukeException("File does not exist.");
+        }
+    }
+
+    /**
      * Adds or removes tasks from storage according to changes made by user.
      * @param taskList updated list of tasks.
      */
-    public void updateData(TaskList taskList) {
+    public void updateTaskData(TaskList taskList) {
         try {
-            FileWriter myObj = new FileWriter(this.path);
-            myObj.flush();
+            FileWriter taskPath = new FileWriter(this.taskPath);
+            taskPath.flush();
             for (int i = 0; i < taskList.tasks.size(); i++) {
-                myObj.write(taskList.tasks.get(i).symbol() + "/" + taskList.tasks.get(i).getStatusIcon() +
+                taskPath.write(taskList.tasks.get(i).symbol() + "/" + taskList.tasks.get(i).getStatusIcon() +
                         "/" + taskList.tasks.get(i).toString() + "\n");
             }
-            myObj.close();
+            taskPath.close();
         } catch (IOException e) {
             System.out.println("File does not exist.");
         }
     }
 
+    /**
+     * Adds or removes notes from storage according to changes made by user.
+     * @param noteList updated list of notes.
+     */
+    public void updateNoteData(NoteList noteList) {
+        try {
+            FileWriter notePath = new FileWriter(this.notePath);
+            notePath.flush();
+            for (int i = 0; i < noteList.notes.size(); i++) {
+                notePath.write(noteList.notes.get(i).toString() + "\n");
+            }
+            notePath.close();
+        } catch (IOException e) {
+            System.out.println("File does not exist.");
+        }
+    }
 }

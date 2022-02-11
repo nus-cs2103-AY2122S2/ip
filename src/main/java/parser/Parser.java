@@ -1,8 +1,10 @@
 package parser;
 
 import exception.DukeException;
+import notes.NoteList;
 import storage.Storage;
 import task.TaskList;
+import ui.Ui;
 
 /**
  * Interface that deals with making sense of the user commands.
@@ -10,9 +12,11 @@ import task.TaskList;
 public class Parser {
 
     TaskList tasks;
+    NoteList notes;
 
-    public Parser(TaskList tasks) {
+    public Parser(TaskList tasks, NoteList notes) {
         this.tasks = tasks;
+        this.notes = notes;
     }
 
     /**
@@ -23,29 +27,58 @@ public class Parser {
      */
     public String userCommand(String[] inputStringsArray, Storage storage) throws DukeException {
         switch (inputStringsArray[0]) {
+        case "task":
+            return taskParser(inputStringsArray, storage);
+        case "note":
+            return noteParser(inputStringsArray, storage);
+        case "help":
+            return Ui.userHelp();
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
+        }
+    }
+
+    public String taskParser(String[] inputStringsArray, Storage storage) throws DukeException {
+        switch (inputStringsArray[1]) {
         case "list":
             return tasks.displayList();
         case "mark":
-            String marked = tasks.mark(inputStringsArray[1]);
-            storage.updateData(tasks);
+            String marked = tasks.mark(inputStringsArray[2]);
+            storage.updateTaskData(tasks);
             return marked;
         case "unmark":
-            String unmarked = tasks.unmark(inputStringsArray[1]);
-            storage.updateData(tasks);
+            String unmarked = tasks.unmark(inputStringsArray[2]);
+            storage.updateTaskData(tasks);
             return unmarked;
-        //Fallthrough
-        case "todo":
-        case "deadline":
-        case "event":
-            String added = tasks.addToList(inputStringsArray);
-            storage.updateData(tasks);
+        case "new":
+            String added = tasks.createNewTask(inputStringsArray);;
+            storage.updateTaskData(tasks);
             return added;
         case "delete":
-            String deleted = tasks.delete(inputStringsArray[1]);
-            storage.updateData(tasks);
+            String deleted = tasks.delete(inputStringsArray[2]);
+            storage.updateTaskData(tasks);
             return deleted;
         case "find":
-            return tasks.find(inputStringsArray[1]);
+            return tasks.find(inputStringsArray[2]);
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
+        }
+    }
+
+    public String noteParser(String[] inputStringsArray, Storage storage) throws DukeException {
+        switch (inputStringsArray[1]) {
+        case "list":
+            return notes.displayList();
+        case "new":
+            String added = notes.addToList(inputStringsArray);
+            storage.updateNoteData(notes);
+            return added;
+        case "delete":
+            String deleted = notes.delete(inputStringsArray[2]);
+            storage.updateNoteData(notes);
+            return deleted;
+        case "find":
+            return notes.find(inputStringsArray[2]);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
         }

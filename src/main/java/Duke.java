@@ -1,4 +1,5 @@
 import exception.DukeException;
+import notes.NoteList;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
@@ -29,20 +30,24 @@ public class Duke extends Application {
     private final Ui ui;
     private final Storage storage;
     private TaskList tasks;
+    private NoteList notes;
     private final Parser parser;
-    private static final String FILE_PATH = "data.txt";
+    private static final String TASK_FILE_PATH = "data.txt";
+    private static final String NOTE_FILE_PATH = "data1.txt";
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
-        storage = new Storage(FILE_PATH);
+        storage = new Storage(TASK_FILE_PATH, NOTE_FILE_PATH);
         try {
-            tasks = new TaskList(storage.setUpData());
+            tasks = new TaskList(storage.setUpTaskData());
+            notes = new NoteList(storage.setUpNoteData());
         } catch (DukeException e) {
             tasks = new TaskList();
+            notes = new NoteList();
         }
-        ui = new Ui(tasks);
-        parser = new Parser(tasks);
+        ui = new Ui(tasks, notes);
+        parser = new Parser(tasks, notes);
     }
 
     /**
