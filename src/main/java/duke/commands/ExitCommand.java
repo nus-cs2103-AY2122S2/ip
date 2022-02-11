@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.admin.Storage;
+import duke.admin.TaskList;
+import duke.admin.Ui;
 
 /**
  * ExitCommand is a Command that terminates the program.
@@ -26,6 +26,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return Ui.goodBye();
+        return Ui.showGoodByeMessage();
     }
 }

@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
+import duke.admin.Storage;
+import duke.admin.TaskList;
+import duke.exceptions.DukeException;
 
 /**
  * Command is an abstract class that specifies 2 methods that has to be

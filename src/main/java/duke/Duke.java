@@ -1,6 +1,11 @@
 package duke;
 
-import duke.command.Command;
+import duke.admin.Parser;
+import duke.admin.Storage;
+import duke.admin.TaskList;
+import duke.admin.Ui;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 /**
  * Duke class is the main class of the program.
  */
@@ -51,7 +56,7 @@ public class Duke {
             
             return response;
         } catch (DukeException e) {
-            return Ui.showError(e.getMessage());
+            return Ui.showErrorMessage(e.getMessage());
         }
 
     }

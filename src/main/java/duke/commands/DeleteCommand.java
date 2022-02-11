@@ -1,10 +1,10 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
+import duke.admin.Storage;
+import duke.admin.TaskList;
+import duke.admin.Ui;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
 
 /**
  * DeleteCommand is a Command that deletes the task at the index specified from
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
         Task deletedTask = tasks.delete(index);
         storage.updateAfterDelete(index);
         
-        return Ui.deleteMessage(deletedTask, tasks.getNumberOfTasks());
+        return Ui.showDeletedMessage(deletedTask, tasks.getNumberOfTasks());
     }
 
     /**

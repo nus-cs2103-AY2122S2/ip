@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.admin.Storage;
+import duke.admin.TaskList;
+import duke.admin.Ui;
 
 /**
  * ListCommand is a Command that triggers the program to print out the task list
@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return tasks.list();
+        return Ui.listTasks(tasks);
     }
 
     /**
