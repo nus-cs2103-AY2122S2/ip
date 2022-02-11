@@ -2,6 +2,8 @@ package dooke.core.exceptions;
 
 /**
  * Exception indicating an empty description for the ToDo object.
+ * @author s7manth
+ * @version 0.2
  */
 public class ToDoEmptyException extends DookeException {
     public ToDoEmptyException() {

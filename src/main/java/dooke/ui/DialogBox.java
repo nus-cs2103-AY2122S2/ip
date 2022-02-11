@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 /**
  * Controller class representing a dialog box consisting of an ImageView to represent the
  * speaker's face and a label containing text from the speaker.
+ * @author s7manth
+ * @version 0.2
  */
 public class DialogBox extends HBox {
     @FXML

@@ -14,7 +14,7 @@ import dooke.utilities.OutputFormatter;
  * Manager class to handle input/output data.
  *
  * @author s7manth
- * @version 0.1
+ * @version 0.2
  */
 public class IoManager {
     private InputStream inputStream;

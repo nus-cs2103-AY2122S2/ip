@@ -2,6 +2,8 @@ package dooke.core.exceptions;
 
 /**
  * Exception indicating the absence of arguments for the command.
+ * @author s7manth
+ * @version 0.2
  */
 public class EmptyArgumentException extends DookeException {
     public EmptyArgumentException() {
