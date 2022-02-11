@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import duke.exceptions.CorruptedSaveException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -68,26 +69,20 @@ public class Storage {
         TaskList tasks = new TaskList();
         File f = new File(FILEPATH);
         Scanner s = null;
-
         try {
             s = new Scanner(f);
             while (s.hasNextLine()) {
                 String packet = s.nextLine();
                 String[] packetSections = packet.split(" \\| ");
-                String taskName = packetSections[2];
-                boolean isDone = Integer.parseInt(packetSections[1]) == 1;
-
                 switch (packetSections[0]) {
                 case "T":
-                    tasks.addTask(new ToDo(taskName, isDone));
+                    tasks.addTask(ToDo.fromFileFormat(packet));
                     break;
                 case "D":
-                    String deadlineString = packetSections[3];
-                    tasks.addTask(new Deadline(taskName, isDone, deadlineString));
+                    tasks.addTask(Deadline.fromFileFormat(packet));
                     break;
                 case "E":
-                    String startDateString = packetSections[3];
-                    tasks.addTask(new Event(taskName, isDone, startDateString));
+                    tasks.addTask(Event.fromFileFormat(packet));
                     break;
                 default:
                     break;
@@ -100,7 +95,6 @@ public class Storage {
                 s.close();
             }
         }
-
         return tasks;
         
     }

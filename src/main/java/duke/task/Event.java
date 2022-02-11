@@ -85,6 +85,26 @@ public class Event extends Task {
     }
 
     /**
+     * Converts a string from file format to Task.
+     * 
+     * <p> The inverse of `toFileFormat()`.</p>
+     * 
+     * @param fileString The string to convert.
+     * @throws CorruptedSaveException if unable to parse the string correctly
+     */
+    public static Event fromFileFormat(String fileString) throws CorruptedSaveException {
+        String[] packetSections = fileString.split(" \\| ");
+        try {
+            boolean isDone = Integer.parseInt(packetSections[1]) == 1;
+            String taskName = packetSections[2];
+            String startDateString = packetSections[3];
+            return new Event(taskName, isDone, startDateString);
+        } catch (Exception e) {
+            throw new CorruptedSaveException();
+        }
+    }
+
+    /**
      * Returns the string representation of an Event.
      */
     @Override
