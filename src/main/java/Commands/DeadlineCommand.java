@@ -29,6 +29,9 @@ public class DeadlineCommand extends DukeCommand {
         LocalDateTime localDateTime = Parser.parseDateTime(this.commandBody, "deadline");
 
         Tasks.Deadline deadlineTask = new Tasks.Deadline(deadlineName, localDateTime);
+
+        assert deadlineTask.getDescription().equals(deadlineName) : "Deadline object not correctly created";
+
         tasks.add(deadlineTask);
 
         storage.save(tasks);

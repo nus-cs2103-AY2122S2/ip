@@ -21,6 +21,9 @@ public class UnmarkCommand extends DukeCommand {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index = Integer.parseInt(this.commandBody) - 1;
+
+            assert index >= tasks.getSize() || index < 0 : "Invalid indexing of taskList from ummark command";
+
             Task task = tasks.get(index);
             task.toggleUncompleted();
             storage.save(tasks);
