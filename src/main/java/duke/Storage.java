@@ -8,10 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.exceptions.CorruptedSaveException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
@@ -62,32 +63,26 @@ public class Storage {
      * Reads and retrieve the contents of the save file in the hard disk.
      * 
      * @return The list of tasks stored in the file.
-     * @throws DukeException If the contents of the file cannot be restored correctly.
+     * @throws CorruptedSaveException If the contents of the file cannot be restored correctly.
      */
-    public static TaskList readSaveFile() throws DukeException {
+    public static TaskList readSaveFile() throws CorruptedSaveException {
         TaskList tasks = new TaskList();
         File f = new File(FILEPATH);
         Scanner s = null;
-
         try {
             s = new Scanner(f);
             while (s.hasNextLine()) {
                 String packet = s.nextLine();
                 String[] packetSections = packet.split(" \\| ");
-                String taskName = packetSections[2];
-                boolean isDone = Integer.parseInt(packetSections[1]) == 1;
-
                 switch (packetSections[0]) {
                 case "T":
-                    tasks.addTask(new ToDo(taskName, isDone));
+                    tasks.addTask(ToDo.fromFileFormat(packet));
                     break;
                 case "D":
-                    String deadlineString = packetSections[3];
-                    tasks.addTask(new Deadline(taskName, isDone, deadlineString));
+                    tasks.addTask(Deadline.fromFileFormat(packet));
                     break;
                 case "E":
-                    String startDateString = packetSections[3];
-                    tasks.addTask(new Event(taskName, isDone, startDateString));
+                    tasks.addTask(Event.fromFileFormat(packet));
                     break;
                 default:
                     break;
@@ -100,7 +95,6 @@ public class Storage {
                 s.close();
             }
         }
-
         return tasks;
         
     }

@@ -1,10 +1,11 @@
-package duke.task;
+package duke.tasks;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
+import duke.exceptions.CorruptedSaveException;
+import duke.exceptions.DukeException;
 
 /**
  * Represents a Deadline which is a kind of Task.
@@ -75,12 +76,34 @@ public class Deadline extends Task {
     /**
      * Formats a Deadline instance to be stored in an external file.
      */
+    @Override
     public String toFileFormat() {
         Integer i = this.isDone ? 1 : 0;
         String deadlineString = deadline.format(DATE_FORMATTER);
         String timeString = time == null ? "" : " " + time.format(TIME_FORMATTER);
         return String.format("D | %d | %s | %s%s\n", 
                 i, this.task, deadlineString, timeString);
+    }
+
+    /**
+     * Converts a string from file format to Task.
+     * 
+     * <p> The inverse of toFileFormat().</p>
+     * 
+     * @param fileString The string to convert.
+     * @throws CorruptedSaveException if unable to parse the string correctly
+     */
+    public static Deadline fromFileFormat(String fileString) throws CorruptedSaveException {
+        String[] packetSections = fileString.split(" \\| ");
+        try {
+            boolean isDone = Integer.parseInt(packetSections[1]) == 1;
+            String taskName = packetSections[2];
+            String deadlineString = packetSections[3];
+            return new Deadline(taskName, isDone, deadlineString);
+        } catch (Exception e) {
+            throw new CorruptedSaveException();
+        }
+
     }
 
     /**

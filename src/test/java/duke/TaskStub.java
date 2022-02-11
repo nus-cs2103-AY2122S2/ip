@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.Task;
+import duke.tasks.Task;
 
 public class TaskStub extends Task {
 

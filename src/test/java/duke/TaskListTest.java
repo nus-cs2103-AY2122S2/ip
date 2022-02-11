@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Task;
+import duke.tasks.Task;
 
 public class TaskListTest {
     @Test
