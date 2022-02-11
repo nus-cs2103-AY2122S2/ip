@@ -100,9 +100,10 @@ public class TaskList {
      * @return responding messages.
      */
     public String list() {
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             return "You don't have tasks listed.";
         } else {
+            assert tasks.size() > 0;
             StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 sb.append(System.lineSeparator())
