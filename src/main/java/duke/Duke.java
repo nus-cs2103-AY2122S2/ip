@@ -104,6 +104,8 @@ public class Duke extends Application {
             }
         } while (!hasExited);
 
+        assert hasExited : "Not supposed to have exited.";
+
         ui.closeScanner();
     }
 
