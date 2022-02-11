@@ -30,4 +30,16 @@ public class FindCommand extends Command {
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) {
         taskList.findTask(target);
     }
+
+    /**
+     * Compares equality of two FindCommand objects based on target String.
+     *
+     * @param otherFind FindCommand The other FindCommand object to be compared to.
+     * @return boolean Shows whether the two objects are equal.
+     */
+    @Override
+    public boolean equals(Object otherFind) {
+        FindCommand otherFindCommand = (FindCommand) otherFind;
+        return otherFindCommand.target.equals(this.target);
+    }
 }

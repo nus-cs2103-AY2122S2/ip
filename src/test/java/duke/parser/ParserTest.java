@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.ui.Ui;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +7,7 @@ import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
-//import duke.command.FindCommand;
-//import duke.command.InvalidCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.SortCommand;
@@ -18,6 +16,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.ui.Ui;
+
 
 /**
  * Tests if Parser functions work as intended.
@@ -26,7 +26,9 @@ public class ParserTest {
     private static final Ui ui = new Ui();
 
     /**
-     * Tests if the parser parses an add command correctly
+     * Tests if the parser parses an add command correctly.
+     *
+     * @throws DukeException A potential exception that can occur during parsing.
      */
     @Test
     public void parseAddTest() throws DukeException {
@@ -51,9 +53,9 @@ public class ParserTest {
     }
 
     /**
-     * Tests if the parser parses a delete command correctly
+     * Tests if the parser parses a delete command correctly.
      *
-     * @throws DukeException
+     * @throws DukeException A potential exception that can occur during parsing.
      */
     @Test
     public void parseDeleteTest() throws DukeException {
@@ -64,9 +66,22 @@ public class ParserTest {
     }
 
     /**
-     * Tests if the parser parses a list command correctly
+     * Tests if the parser parses a find command correctly.
      *
-     * @throws DukeException
+     * @throws DukeException A potential exception that can occur during parsing.
+     */
+    @Test
+    public void parseFindTest() throws DukeException {
+        String inputCommand = "find hello";
+        Command find = new FindCommand("hello", inputCommand.split(" "));
+        Command result = Parser.parse(inputCommand, ui);
+        Assertions.assertEquals(find, result);
+    }
+
+    /**
+     * Tests if the parser parses a list command correctly.
+     *
+     * @throws DukeException A potential exception that can occur during parsing.
      */
     @Test
     public void parseListTest() throws DukeException {
@@ -77,9 +92,9 @@ public class ParserTest {
     }
 
     /**
-     * Tests if the parser parses a bye command correctly
+     * Tests if the parser parses a bye command correctly.
      *
-     * @throws DukeException
+     * @throws DukeException A potential exception that can occur during parsing.
      */
     @Test
     public void parseByeTest() throws DukeException {
@@ -90,9 +105,9 @@ public class ParserTest {
     }
 
     /**
-     * Tests if the parser parses a mark command correctly
+     * Tests if the parser parses a mark command correctly.
      *
-     * @throws DukeException
+     * @throws DukeException A potential exception that can occur during parsing.
      */
     @Test
     public void parseMarkTest() throws DukeException {
@@ -108,9 +123,9 @@ public class ParserTest {
     }
 
     /**
-     * Tests if the parser parses a sort command correctly
+     * Tests if the parser parses a sort command correctly.
      *
-     * @throws DukeException
+     * @throws DukeException A potential exception that can occur during parsing.
      */
     @Test
     public void parseSortTest() throws DukeException {
