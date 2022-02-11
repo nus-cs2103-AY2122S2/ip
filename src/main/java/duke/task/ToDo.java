@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exceptions.CorruptedSaveException;
+
 /**
  * Represents a task which is to be done.
  */
@@ -30,6 +32,7 @@ public class ToDo extends Task {
     /**
      * Formats a ToDo instance to be stored in an external file.
      */
+    @Override
     public String toFileFormat() {
         Integer i = this.isDone ? 1 : 0;
         return String.format("T | %d | %s\n", i, this.task);

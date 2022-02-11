@@ -17,12 +17,19 @@ public class Parser {
     private TaskList tasks;
 
     public Parser() {
-        try {
-            tasks = Storage.readSaveFile();
-        } catch (DukeException e) {
-            Ui.printMessage(Ui.CORRUPTED_SAVE_MESSAGE);
-            tasks = new TaskList();
-        }
+        tasks = new TaskList();
+    }
+
+    /**
+     * Instantiate a parser using the saved file.
+     * 
+     * @return Parser resumed from the previous session.
+     * @throws CorruptedSaveException if savefile is corrupted.
+     */
+    public static Parser fromSave() throws CorruptedSaveException {
+        Parser p = new Parser();
+        p.tasks = Storage.readSaveFile();
+        return p;
     }
 
     /**
@@ -30,7 +37,7 @@ public class Parser {
      * 
      * @param input The text input by the user.
      */
-    public Output inputHandler(String input) {
+    public String inputHandler(String input) {
         String[] commandArgs = input.split(" ", 2);
         String command = commandArgs[0];
         String commandDetails = commandArgs.length == 2 ? commandArgs[1] : null;
@@ -40,7 +47,6 @@ public class Parser {
             switch (command) {
             case "bye":
                 return byeMessage();
-
             case "list":
                 return tasks.listItems();
 
@@ -51,20 +57,11 @@ public class Parser {
                 Storage.updateTaskFile(tasks);
                 break;
 
-            case "todo":
-                //Fall Through
+            case "todo": //create task operations
             case "deadline": 
-                //Fall Through
             case "event":
-                assertNonEmptyDetails(commandDetails);
                 Task task = createTask(command, commandDetails);
                 replyMessage = tasks.addTask(task);
-                Storage.updateTaskFile(tasks);
-                break;
-
-            case "delete":
-                assertValidItemNumber(commandDetails);
-                replyMessage = tasks.deleteItem(Integer.parseInt(commandDetails));
                 Storage.updateTaskFile(tasks);
                 break;
 
@@ -81,7 +78,7 @@ public class Parser {
             replyMessage = Ui.mergeMessages(ioException.toString(), Ui.READ_WRITE_ERROR_MESSAGE);
         }
 
-        return new TextOutput(replyMessage);
+        return replyMessage;
     }
 
     /**
@@ -93,6 +90,7 @@ public class Parser {
      * @throws DukeException if user-specified parameters do not meet the expected format.
      */
     public Task createTask(String command, String commandDetails) throws DukeException {
+        assertNonEmptyDetails(commandDetails);
         String[] taskArgs = null;
 
         if (command.equals("todo")) {
@@ -142,10 +140,10 @@ public class Parser {
      * 
      * <p> Sets the parser to stop accepting user input. </p>
      * 
-     * @return The bye message output.
+     * @return The bye message.
      */
-    public Output byeMessage() {
-        return new BooleanOutput("Bye. Hope to see you again soon!", false);
+    private String byeMessage() {
+        return Ui.BYE_MESSAGE;
     }
 
     private void assertNonEmptyDetails(String details) throws DukeException {

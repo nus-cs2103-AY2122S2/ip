@@ -4,7 +4,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
+import duke.exceptions.CorruptedSaveException;
+import duke.exceptions.DukeException;
 
 /**
  * Represents an Event which is a kind of Task.
@@ -76,6 +77,7 @@ public class Event extends Task {
     /**
      * Formats an Event instance to be stored in an external file.
      */
+    @Override
     public String toFileFormat() {
         Integer i = this.isDone ? 1 : 0;
         String startDateString = startDate.format(DATE_FORMATTER);

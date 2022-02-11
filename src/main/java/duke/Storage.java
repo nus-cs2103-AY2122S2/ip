@@ -63,9 +63,9 @@ public class Storage {
      * Reads and retrieve the contents of the save file in the hard disk.
      * 
      * @return The list of tasks stored in the file.
-     * @throws DukeException If the contents of the file cannot be restored correctly.
+     * @throws CorruptedSaveException If the contents of the file cannot be restored correctly.
      */
-    public static TaskList readSaveFile() throws DukeException {
+    public static TaskList readSaveFile() throws CorruptedSaveException {
         TaskList tasks = new TaskList();
         File f = new File(FILEPATH);
         Scanner s = null;
