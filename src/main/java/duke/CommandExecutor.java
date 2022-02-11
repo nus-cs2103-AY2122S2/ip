@@ -111,8 +111,8 @@ public class CommandExecutor {
         taskManager.addTask(task);
         StringBuilder str = new StringBuilder();
         str.append("Got it. I've added this task:\n");
-        str.append("  " + task + "\n");
-        str.append("Now you have " + taskManager.getNumberOfTasks() + " duke.tasks in the list.");
+        str.append(task + "\n");
+        str.append("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
         taskManager.saveTasks();
         return str.toString();
     }
@@ -127,8 +127,8 @@ public class CommandExecutor {
         Task task = taskManager.removeTask(indexOfTask);
         StringBuilder str = new StringBuilder();
         str.append("Noted. I've removed this task:\n");
-        str.append("  " + task + "\n");
-        str.append("Now you have " + taskManager.getNumberOfTasks() + " duke.tasks left in the list.");
+        str.append(task + "\n");
+        str.append("Now you have " + taskManager.getNumberOfTasks() + " tasks left in the list.");
         taskManager.saveTasks();
         return str.toString();
     }

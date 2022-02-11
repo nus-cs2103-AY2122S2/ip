@@ -45,6 +45,7 @@ public class MainWindow extends AnchorPane {
                 + "Unmark a task as done:\nunmark <task number>\n\n"
                 + "Delete a task:\ndelete <task number>\n\n"
                 + "Find tasks matching a keyword:\nfind <task name>\n\n"
+                + "Sort all your tasks in alphabetical order:\nsort\n\n"
                 + "Exit the chat:\nbye";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(introMessage, dukeImage));

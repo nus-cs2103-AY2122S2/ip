@@ -39,12 +39,11 @@ public class Parser {
             if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("missing mark index");
             }
-
             //mark index should not be empty now
             assert !input.substring(MARK_INFO_INDEX).isEmpty();
             parsedInput.add(input.substring(MARK_INFO_INDEX));
         } else if (command.equals("unmark")) {
-            if (hasRequiredInformation(command, input)) {
+            if (!hasRequiredInformation(command, input)) {
                 throw new RequiredInformationMissingException("missing unmark index");
             }
             assert !input.substring(UNMARK_INFO_INDEX).isEmpty();
