@@ -34,6 +34,7 @@ public class Parser {
      * @throws DukeException if wrong input is detected
      */
     String execute(String input) throws DukeException {
+        assert(input.length() > 0);
         String output;
         try {
             String[] inputArray = input.split(" ", 2);
