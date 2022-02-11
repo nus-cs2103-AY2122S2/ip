@@ -1,7 +1,5 @@
 package athena.commands;
 
-import java.util.ArrayList;
-
 import athena.exceptions.InputErrorCode;
 import athena.exceptions.InputException;
 import athena.tasks.TaskList;
@@ -24,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes the specified task from the given taskList and displays the results on the ui.
+     * Deletes the specified task from the given taskList and returns output.
      *
      * @param taskList TaskList instance to delete task from.
      * @return Command output.
@@ -32,17 +30,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws InputException {
-        if (taskList.isValidTaskNumber(taskNumber)) {
-            ArrayList<String> outputs = new ArrayList<>();
-            outputs.add("Alright, I will delete the following task from the list:");
-            outputs.add(taskList.getTaskString(taskNumber));
-
-            taskList.deleteTask(taskNumber);
-
-            outputs.add(Messages.getCurrentNumberOfTasksDialog(taskList));
-            return Messages.getMultiLineString(outputs);
-        } else {
+        if (!taskList.isValidTaskNumber(taskNumber)) {
             throw new InputException(InputErrorCode.INVALID_TASK_NUMBER);
         }
+        String preDialog = Messages.getPreDeletionDialog(taskList, taskNumber);
+        taskList.deleteTask(taskNumber);
+        String postDialog = Messages.getCurrentNumberOfTasksDialog(taskList);
+        return Messages.getMultiLineString(preDialog, postDialog);
     }
 }

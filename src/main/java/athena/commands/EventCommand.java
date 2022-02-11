@@ -25,7 +25,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Creates a new event task in the given taskList and displays the results through the ui.
+     * Creates a new event task in the given taskList and returns the output.
      *
      * @param taskList The TaskList instance to add the event to.
      * @return Command output.

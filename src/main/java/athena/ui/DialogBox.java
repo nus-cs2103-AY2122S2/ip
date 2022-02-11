@@ -7,24 +7,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    public static final String ATHENA_DIALOG_BACKGROUND_COLOR_CSS = "-fx-background-color: #dae8ff";
     @FXML
     private Label dialog;
     @FXML
@@ -39,7 +34,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -49,13 +43,10 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        tmp.get(0).setStyle("-fx-background-color: #dae8ff");
+        tmp.get(0).setStyle(ATHENA_DIALOG_BACKGROUND_COLOR_CSS);
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.setBackground((new Background(new BackgroundFill(Color.GREY,
-                CornerRadii.EMPTY,
-                Insets.EMPTY))));
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

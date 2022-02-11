@@ -1,7 +1,5 @@
 package athena.commands;
 
-import java.util.ArrayList;
-
 import athena.exceptions.InputErrorCode;
 import athena.exceptions.InputException;
 import athena.tasks.TaskList;
@@ -25,7 +23,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Marks the task corresponding to the given task number as not done on the given
-     * TaskList and display outputs to the given Ui.
+     * TaskList and returns the outputs.
      *
      * @param taskList TaskList instance to mark the task as not done on.
      * @return Command output.
@@ -33,14 +31,10 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws InputException {
-        if (taskList.isValidTaskNumber(taskNumber)) {
-            taskList.setTaskAsNotDone(taskNumber);
-            ArrayList<String> outputs = new ArrayList<>();
-            outputs.add("Alright, I've marked the following task as not done:");
-            outputs.add(taskList.getTaskString(taskNumber));
-            return Messages.getMultiLineString(outputs);
-        } else {
+        if (!taskList.isValidTaskNumber(taskNumber)) {
             throw new InputException(InputErrorCode.INVALID_TASK_NUMBER);
         }
+        taskList.setTaskAsNotDone(taskNumber);
+        return Messages.getUnmarkTaskDialog(taskList, taskNumber);
     }
 }

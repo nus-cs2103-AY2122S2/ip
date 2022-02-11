@@ -20,8 +20,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Creates a new todo task in the given taskList and displays the outputs
-     * on the given ui.
+     * Creates a new todo task in the given taskList and returns the outputs.
      *
      * @param taskList TaskList instance to create the todo task on.
      * @return Command output.

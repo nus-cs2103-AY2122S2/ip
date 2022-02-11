@@ -1,13 +1,12 @@
 package athena.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import athena.tasks.TaskList;
 import athena.ui.Messages;
 
 /**
- * Represents a find command given to Athena by the user. When executed, displays
+ * Represents a find command given to Athena by the user. When executed, finds
  * the tasks containing the given search phrase.
  */
 public class FindCommand extends Command {
@@ -24,8 +23,8 @@ public class FindCommand extends Command {
 
     /**
      * Searches for tasks in the given task list containing the search phrase,
-     * and displays them through the given ui. If no matching tasks are found, apology
-     * text is displayed instead.
+     * and returns the results. If no matching tasks are found, apology
+     * text is returned instead.
      *
      * @param taskList TaskList instance to search for matching tasks in.
      * @return Command output.
@@ -33,13 +32,9 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList taskList) {
         List<Integer> taskNumbers = taskList.getTaskNumbersContainingPhrase(searchPhrase);
-        if (taskNumbers.size() > 0) {
-            ArrayList<String> outputs = new ArrayList<>();
-            outputs.add(String.format("Here are the tasks containing the phrase '%s'", searchPhrase));
-            outputs.add(Messages.getSpecificTasksDialog(taskList, taskNumbers));
-            return Messages.getMultiLineString(outputs);
-        } else {
-            return String.format("Sorry, no tasks were found containing the phrase '%s'", searchPhrase);
+        if (taskNumbers.size() == 0) {
+            return Messages.getNoMatchesFoundDialog(searchPhrase);
         }
+        return Messages.getSpecificTasksFoundDialog(taskList, taskNumbers, searchPhrase);
     }
 }
