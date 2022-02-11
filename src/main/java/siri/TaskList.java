@@ -37,15 +37,25 @@ class TaskList {
      * @param task to be added.
      * @return string to be printed after addItem had been completed.
      */
-    public String addItem(Task task) {
-        list.add(task);
+    public String addItem(Task task) throws SiriException {
+  
         if (task instanceof Deadline) {
             Deadline tmp = (Deadline) task;
             deadlineList.add(tmp);
         } else if (task instanceof Event) {
             Event tmp = (Event) task;
+            for (int i = 0; i < eventList.size(); i++) {
+                Event comparedEvent = eventList.get(i);
+                if (tmp.dateCompare(comparedEvent.getEventDate()) == true
+                        && tmp.timeCompare(comparedEvent.getEventTime()) == true) {
+                    throw new SiriException("There is an event happening on the same date and time!!"
+                            + "Please remove that task if you want to proceed to add the current task.");
+                }
+            }
             eventList.add(tmp);
         }
+
+        list.add(task);
 
         assert task.equals(list.get(list.size() - 1)) == true : "Task should have been added";
 

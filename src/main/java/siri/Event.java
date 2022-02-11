@@ -30,11 +30,40 @@ class Event extends Task {
     }
 
     /**
+     * Get the Event time.
+     * 
+     * @return the time that the event happens.
+     */
+    public LocalTime getEventTime() {
+        return this.eventTime;
+    }
+
+    /**
+     * Get the Event date.
+     * 
+     * @return the date that the event happens.
+     */
+    public LocalDate getEventDate() {
+        return this.eventDate;
+    }
+
+    /**
+     * Compares time passed with the Event task occurance.
+     * 
+     * @param time the time that the Event task time is comparing to.
+     * @return true if time is the same as the Event time
+     * and false if the time is not the same as the Event time (ignores format).
+     */
+    public boolean timeCompare(LocalTime time) {
+        return this.eventTime.equals(time);
+    }
+
+    /**
      * Compares date passed with the Event task occurance.
      *
      * @param date the date that the Event task date is comparing to.
-     * @return true if date is the same as the Event task date
-     * and false if the date is not the same as the Task date (ignores format).
+     * @return true if date is the same as the Event date
+     * and false if the date is not the same as the Event date (ignores format).
      */
     public boolean dateCompare(LocalDate date) {
         return this.eventDate.equals(date);
