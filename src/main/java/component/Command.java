@@ -42,6 +42,7 @@ public class Command {
 
         switch (action) {
         case "help":
+            // Shows the commands that are available in duke.
             return printCommandsAvailable();
         case "list":
             return printList();
