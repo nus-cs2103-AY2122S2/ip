@@ -1,7 +1,30 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello bel
+Oh no! You didn't give me a task.
+I don't you gave me a valid date
+I don't you gave me a valid date
+Sorry I don't understand :(
+Got it, I've added this task: 
+ [T][ ] return books
+Now you have 1 task in the list
+Got it, I've added this task: 
+ [D][ ] pass books 
+Now you have 2 task in the list
+Got it, I've added this task: 
+ [E][ ] project meeting 
+Now you have 3 task in the list
+Here is your to-do:
+1 . [T][ ] return books
+2 . [D][ ] pass books 
+3 . [E][ ] project meeting 
+Nice! I've marked this task as done: 
+[T][X] return books
+OK, I've marked this task as not done yet:
+ [T][ ] return books
+It seems like you haven't marked it as done yet...
+Nice! I've marked this task as done: 
+[D][X] pass books 
+Oh hmm...you finished it already though...what a trooper!
+Here is your to-do:
+1 . [T][ ] return books
+2 . [D][X] pass books 
+3 . [E][ ] project meeting 
