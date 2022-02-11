@@ -51,34 +51,32 @@ class Storage {
     public String load() throws SiriException {
         String loadedData = "";
 
-        if (directory.exists()) {
-            if (dataFile.exists()) {
-                try {
-                    Scanner sc = new Scanner(dataFile);
-
-                    while (sc.hasNextLine()) {
-                        loadedData = loadedData + sc.nextLine() + "\n";
-                    }
-
-                    sc.close();
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
-
-            } else {
-                throw new SiriException("File does not exist!!");
-            }
-        } else {
-            //dirFile don't exist
+        if (directory.exists() == false) {
             directory.mkdir();
             throw new SiriException("Directory and file does not exist!!");
         }
 
+        if (dataFile.exists() == false) {
+            throw new SiriException("File does not exist!!");
+        }
+
+        try {
+            Scanner sc = new Scanner(dataFile);
+
+            while (sc.hasNextLine()) {
+                loadedData = loadedData + sc.nextLine() + "\n";
+            }
+
+            sc.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
         if (loadedData.trim() == "") {
             throw new SiriException("No data found!!");
-        } else {
-            return loadedData;
         }
+         
+        return loadedData;
     }
 
     /**

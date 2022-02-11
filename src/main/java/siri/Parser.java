@@ -24,8 +24,7 @@ class Parser {
      * Method to handle the command being passed in.
      *
      * @param command String representation of the command that is passed in.
-     * @return true to indicate further acceptance of command is allowed and false to indicate
-     * further acceptance of command is not allowed.
+     * @return String to be printed after executing the command.
      * @throws SiriException if command structure is invalid, command is not recognised or
      * if there are missing or extra fields in command.
      */
@@ -39,165 +38,34 @@ class Parser {
         } else {
             switch (inputSplit[0]) {
             case "mark":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("Please ENTER the item number to mark!!");
-                } else if (this.taskList.size() == 0) {
-                    throw new SiriException("There is currently no tasks!!");
-                } else {
-                    try {
-                        int index = Integer.parseInt(inputSplit[1].trim());
-                        index--;
-
-                        if (index >= this.taskList.size() || index < 0) {
-                            throw new SiriException("Please ENTER a number within the number of tasks!!");
-                        } else {
-                            printString = this.taskList.markItem(index);
-                            break;
-                        }
-                    } catch (NumberFormatException nfe) {
-                        throw new SiriException("Please ENTER a valid item number to mark!!");
-                    }
-                }
+                printString = handleMarkCommand(inputSplit);
+                break;
             case "unmark":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("Please ENTER the item number to unmark!!");
-                } else if (this.taskList.size() == 0) {
-                    throw new SiriException("There is currently no tasks!!");
-                } else {
-                    try {
-                        int index = Integer.parseInt(inputSplit[1].trim());
-                        index--;
-
-                        if (index >= this.taskList.size() || index < 0) {
-                            throw new SiriException("Please ENTER a number within the number of tasks!!");
-                        } else {
-                            printString = this.taskList.unmarkItem(index);
-                            break;
-                        }
-                    } catch (NumberFormatException nfe) {
-                        throw new SiriException("Please ENTER a valid item number to unmark!!");
-                    }
-                }
+                printString = handleUnmarkCommand(inputSplit);
+                break;
             case "list":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    printString = this.taskList.print();
-                    break;
-                } else {
-                    throw new SiriException("OPPS!! list does not take in any parameter!!");
-                }
+                printString = handleListCommand(inputSplit);
+                break;
             case "todo":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("todo cannot be EMPTY!! Please ENTER something for todo!!");
-                } else {
-                    ToDos todoTask = new ToDos(inputSplit[1].trim(), false);
-                    printString = this.taskList.addItem(todoTask);
-                    break;
-                }
+                printString = handleTodoCommand(inputSplit);
+                break;
             case "deadline":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("deadline cannot be EMPTY!! Please ENTER something for deadline!!");
-                } else {
-                    String[] dlSplit = inputSplit[1].split(" /by ", 2);
-
-                    if (dlSplit.length == 1 || dlSplit[1].trim().length() == 0) {
-                        throw new SiriException("deadline has no date/time!! Please ENTER a date/time for deadline!!");
-                    } else {
-                        try {
-                            Deadline dlTask;
-                            String[] dlDateTime = dlSplit[1].split(" ", 2);
-                            LocalDate dlDate = Parser.stringToDate(dlDateTime[0].trim());
-                            if (dlDateTime.length == 1 || dlDateTime[1].trim().length() == 0) {
-                                dlTask = new Deadline(dlSplit[0], false, dlDate);
-                            } else {
-                                LocalTime dlTime = Parser.stringToTime(dlDateTime[1].trim());
-                                dlTask = new Deadline(dlSplit[0], false, dlDate, dlTime);
-                            }
-                            printString = this.taskList.addItem(dlTask);
-                            break;
-                        } catch (DateTimeParseException dtpe) {
-                            throw new SiriException("deadline date/time format is wrong!!\n"
-                                    + "Please ENTER your date time in DD-MM-YYYY HH:MM (if applicable) format!!");
-                        }
-                    }
-                }
+                printString = handleDeadlineCommand(inputSplit);
+                break;
             case "event":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("event cannot be EMPTY!! Please ENTER something for event!!");
-                } else {
-                    String[] eventSplit = inputSplit[1].split(" /at ", 2);
-
-                    if (eventSplit.length == 1 || eventSplit[1].trim().length() == 0) {
-                        throw new SiriException("event has no date/time!! Please ENTER a date and time for event!!");
-                    } else {
-                        try {
-                            String[] eventDateTime = eventSplit[1].split(" ", 2);
-                            LocalDate eDate = Parser.stringToDate(eventDateTime[0].trim());
-                            Event eventTask;
-                            if (eventDateTime.length == 1 || eventDateTime[1].trim().length() == 0) {
-                                throw new SiriException("Missing date/time field!!\n"
-                                        + "Please ENTER date your date time in DD-MM-YYYY HH:MM format!!");
-                            } else {
-                                LocalTime eTime = Parser.stringToTime(eventDateTime[1].trim());
-                                eventTask = new Event(eventSplit[0], false, eDate, eTime);
-                            }
-                            printString = this.taskList.addItem(eventTask);
-                            break;
-                        } catch (DateTimeParseException dtpe) {
-                            throw new SiriException("event date/time format is wrong!!\n"
-                                    + "Please ENTER your date time in DD-MM-YYYY  HH:MM format!!");
-                        }
-                    }
-                }
+                printString = handleEventCommand(inputSplit);
+                break;
             case "delete":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("Please ENTER the item number to delete!!");
-                } else if (this.taskList.size() == 0) {
-                    throw new SiriException("There is currently no tasks!!");
-                } else {
-                    try {
-                        int index = Integer.parseInt(inputSplit[1].trim());
-                        index--;
-
-                        if (index >= this.taskList.size() || index < 0) {
-                            throw new SiriException("Please ENTER a number within the number of tasks!!");
-                        } else {
-                            printString = this.taskList.deleteTask(index);
-                            break;
-                        }
-                    } catch (NumberFormatException nfe) {
-                        throw new SiriException("Please ENTER a valid item number to unmark!!");
-                    }
-                }
+                printString = handleDeleteCommand(inputSplit);
+                break;
             case "eprint":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("Please ENTER a date!!");
-                } else {
-                    try {
-                        LocalDate eCheckedDate = Parser.stringToDate(inputSplit[1].trim());
-                        printString = this.taskList.printEventOn(eCheckedDate);
-                    } catch (DateTimeParseException dtpe) {
-                        throw new SiriException("Please ENTER your date in DD-MM-YYYY format!!");
-                    }
-                }
+                printString = handleEPrintCommand(inputSplit);
                 break;
             case "dlprint":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("Please ENTER a date!!");
-                } else {
-                    try {
-                        LocalDate dlCheckedDate = Parser.stringToDate(inputSplit[1].trim());
-                        printString = this.taskList.printDeadlineOn(dlCheckedDate);
-                    } catch (DateTimeParseException dtpe) {
-                        throw new SiriException("Please ENTER your date in DD-MM-YYYY format!!");
-                    }
-                }
+                printString = handleDlPrintCommand(inputSplit);
                 break;
             case "find":
-                if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
-                    throw new SiriException("Please ENTER a word to find!!");
-                } else {
-                    printString = this.taskList.find(inputSplit[1].trim());
-                }
+                printString = handleFindCommand(inputSplit);
                 break;
             case "bye":
                 throw new SiriException("Bye!!");
@@ -207,6 +75,169 @@ class Parser {
         }
 
         return printString;
+    }
+
+    private String handleMarkCommand(String[] input) throws SiriException{
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("Please ENTER the item number to mark!!");
+        }
+
+        try {
+            int index = Integer.parseInt(input[1].trim());
+            index--;
+            return this.taskList.markItem(index);
+        } catch (NumberFormatException nfe) {
+            throw new SiriException("Please ENTER a valid item number to mark!!");
+        }
+
+    }
+
+    private String handleUnmarkCommand(String[] input) throws SiriException {
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("Please ENTER the item number to unmark!!");
+        }
+
+        try {
+            int index = Integer.parseInt(input[1].trim());
+            index--;
+            return this.taskList.unmarkItem(index);
+        } catch (NumberFormatException nfe) {
+            throw new SiriException("Please ENTER a valid item number to unmark!!");
+        }
+        
+    }
+
+    private String handleListCommand(String[] input) throws SiriException {
+        if (input.length != 1 || input[1].trim().length() != 0) {
+            throw new SiriException("OPPS!! list does not take in any parameter!!");
+        }
+        return this.taskList.print();
+    }
+
+    private String handleTodoCommand(String[] input) throws SiriException {
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("todo cannot be EMPTY!! Please ENTER something for todo!!");
+        }
+
+        ToDos todoTask = new ToDos(input[1].trim(), false);
+        return this.taskList.addItem(todoTask);
+    }
+
+    private String handleDeadlineCommand(String[] input) throws SiriException {
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("deadline cannot be EMPTY!! Please ENTER something for deadline!!");
+        }
+
+        String[] dlSplit = input[1].split(" /by ", 2);
+
+        if (dlSplit.length == 1 || dlSplit[1].trim().length() == 0) {
+            throw new SiriException("deadline has no date/time!! Please ENTER a date/time for deadline!!");
+        } 
+
+        try {
+            Deadline dlTask;
+            String[] dlDateTime = dlSplit[1].split(" ", 2);
+            LocalDate dlDate = Parser.stringToDate(dlDateTime[0].trim());
+            if (dlDateTime.length == 1 || dlDateTime[1].trim().length() == 0) {
+                dlTask = new Deadline(dlSplit[0], false, dlDate);
+            } else {
+                LocalTime dlTime = Parser.stringToTime(dlDateTime[1].trim());
+                dlTask = new Deadline(dlSplit[0], false, dlDate, dlTime);
+            }
+            return this.taskList.addItem(dlTask);
+        } catch (DateTimeParseException dtpe) {
+            throw new SiriException("deadline date/time format is wrong!!\n"
+                    + "Please ENTER your date time in DD-MM-YYYY HH:MM (if applicable) format!!");
+        }
+    }
+
+    private String handleEventCommand(String[] input) throws SiriException {
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("event cannot be EMPTY!! Please ENTER something for event!!");
+        } 
+
+        String[] eventSplit = input[1].split(" /at ", 2);
+
+        if (eventSplit.length == 1 || eventSplit[1].trim().length() == 0) {
+            throw new SiriException("event has no date/time!! Please ENTER a date and time for event!!");
+        } 
+
+        try {
+            String[] eventDateTime = eventSplit[1].split(" ", 2);
+            LocalDate eDate = Parser.stringToDate(eventDateTime[0].trim());
+            Event eventTask;
+            if (eventDateTime.length == 1 || eventDateTime[1].trim().length() == 0) {
+                throw new SiriException("Missing date/time field!!\n"
+                        + "Please ENTER date your date time in DD-MM-YYYY HH:MM format!!");
+            } else {
+                LocalTime eTime = Parser.stringToTime(eventDateTime[1].trim());
+                eventTask = new Event(eventSplit[0], false, eDate, eTime);
+            }
+            return this.taskList.addItem(eventTask);
+        } catch (DateTimeParseException dtpe) {
+            throw new SiriException("event date/time format is wrong!!\n"
+                    + "Please ENTER your date time in DD-MM-YYYY  HH:MM format!!");
+        }
+        
+
+    }
+
+    private String handleDeleteCommand(String[] input) throws SiriException {
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("Please ENTER the item number to delete!!");
+        } 
+        
+        if (this.taskList.size() == 0) {
+            throw new SiriException("There is currently no tasks!!");
+        } 
+
+        try {
+            int index = Integer.parseInt(input[1].trim());
+            index--;
+
+            if (index >= this.taskList.size() || index < 0) {
+                throw new SiriException("Please ENTER a number within the number of tasks!!");
+            } else {
+                return this.taskList.deleteTask(index);
+            }
+        } catch (NumberFormatException nfe) {
+            throw new SiriException("Please ENTER a valid item number to unmark!!");
+        }
+        
+    }
+
+    private String handleEPrintCommand(String[] input) throws SiriException {
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("Please ENTER a date!!");
+        } 
+
+        try {
+            LocalDate eCheckedDate = Parser.stringToDate(input[1].trim());
+            return this.taskList.printEventOn(eCheckedDate);
+        } catch (DateTimeParseException dtpe) {
+            throw new SiriException("Please ENTER your date in DD-MM-YYYY format!!");
+        }
+        
+    }
+
+    private String handleDlPrintCommand(String[] input) throws SiriException {
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("Please ENTER a date!!");
+        } 
+
+        try {
+            LocalDate dlCheckedDate = Parser.stringToDate(input[1].trim());
+            return this.taskList.printDeadlineOn(dlCheckedDate);
+        } catch (DateTimeParseException dtpe) {
+            throw new SiriException("Please ENTER your date in DD-MM-YYYY format!!");
+        }
+    }
+
+    private String handleFindCommand(String[] input) throws SiriException {
+        if (input.length == 1 || input[1].trim().length() == 0) {
+            throw new SiriException("Please ENTER a word to find!!");
+        } 
+        return this.taskList.find(input[1].trim());
     }
 
     private static LocalDate stringToDate(String dateString) {
