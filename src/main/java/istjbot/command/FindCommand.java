@@ -33,11 +33,17 @@ public class FindCommand extends Command {
      * Executes the procedure of finding the task(s) with user inputted keyword.
      *
      * @param tasks TaskList responsible for searching of the task(s).
-     * @param ui Ui responsible for printing out the final messages displayed to the user.
+     * @param ui Text part of the User Interface.
      * @param storage Storage.
      * @throws BotException When the keyword is not specified by the user.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+        String keyword = extractKeyword();
+        String searchList = tasks.searchByKeywordString(keyword);
+        return ui.showTasksByKeyword(searchList);
+    }
+
+    private String extractKeyword() throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
         StringBuilder keyword = new StringBuilder();
 
@@ -47,7 +53,6 @@ public class FindCommand extends Command {
         }
 
         for (int i = 1; i < commandInfo.length; i++) {
-
             // For proper keyword spacing
             if (i == commandInfo.length - 1) {
                 keyword.append(commandInfo[i]);
@@ -55,8 +60,6 @@ public class FindCommand extends Command {
                 keyword.append(commandInfo[i] + " ");
             }
         }
-
-        String searchList = tasks.searchByKeywordString(keyword.toString());
-        return ui.showTasksByKeyword(searchList);
+        return keyword.toString();
     }
 }

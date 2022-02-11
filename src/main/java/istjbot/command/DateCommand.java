@@ -35,22 +35,25 @@ public class DateCommand extends Command {
      * Executes the procedure of finding the task(s) with user inputted date.
      *
      * @param tasks TaskList responsible for searching of the task(s).
-     * @param ui Ui responsible for printing out the final messages displayed to the user.
+     * @param ui Text part of the User Interface.
      * @param storage Storage.
      * @throws BotException When the date user inputted is not a valid one.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        String[] commandInfo = this.getFullCommand().split(" ");
-
-        if (commandInfo.length != 2) {
-            throw new BotException("As an IstjBot, I don't think that is a proper date you entered.");
-        }
-
+        String dateString = extractDateString();
         try {
-            String searchList = tasks.searchByDateString(commandInfo[1]);
+            String searchList = tasks.searchByDateString(dateString);
             return ui.showTasksByDate(searchList);
         } catch (DateTimeParseException e) {
             throw new BotException("As an IstjBot, I don't think that is a proper date you entered.");
         }
+    }
+
+    private String extractDateString() throws BotException {
+        String[] commandInfo = this.getFullCommand().split(" ");
+        if (commandInfo.length != 2) {
+            throw new BotException("As an IstjBot, I don't think that is a proper date you entered.");
+        }
+        return commandInfo[1];
     }
 }

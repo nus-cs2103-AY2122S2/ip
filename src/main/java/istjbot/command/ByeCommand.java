@@ -33,18 +33,21 @@ public class ByeCommand extends Command {
      * Executes the procedure of ending the interaction with the IstjBot.
      *
      * @param tasks TaskList.
-     * @param ui Ui responsible for printing out the terminal messages displayed to the user.
+     * @param ui Text part of the User Interface.
      * @param storage Storage.
      * @throws BotException When the interaction cannot be finished due to extra information at the back.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+        checkForError();
+        return ui.showBye();
+    }
+
+    private void checkForError() throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
         if (commandInfo.length > 1) {
             throw new BotException("As an IstjBot, I cannot understand more than bye.");
         }
-
-        return ui.showBye();
     }
 }

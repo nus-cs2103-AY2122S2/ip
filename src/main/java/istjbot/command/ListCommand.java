@@ -33,19 +33,20 @@ public class ListCommand extends Command {
      * Executes the procedure of returning all the tasks currently stored by the user.
      *
      * @param tasks TaskList responsible for returning all the tasks.
-     * @param ui Ui responsible for printing out the final messages displayed to the user.
+     * @param ui Text part of the User Interface.
      * @param storage Storage.
      * @throws BotException When there are unnecessary terms attached other than list.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        String[] commandInfo = this.getFullCommand().split(" ");
+        checkForError();
+        String list = tasks.tasksToString();
+        return ui.showTasks(list);
+    }
 
+    private void checkForError() throws BotException {
+        String[] commandInfo = this.getFullCommand().split(" ");
         if (commandInfo.length > 1) {
             throw new BotException("As an IstjBot, I cannot understand more than list.");
         }
-
-        String list = tasks.tasksToString();
-
-        return ui.showTasks(list);
     }
 }
