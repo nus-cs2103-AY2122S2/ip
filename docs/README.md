@@ -13,35 +13,36 @@ the app does not contain any sample data.
 
 Adds a task into TaskJame.
 
-Format for `todo`: todo `description`
+Format for `todo`: `todo DESCRIPTION`
 
-Format for `event`: event `description` /at `date` `start_time` `end_time`
+Format for `event`: `event DESCRIPTION /at DATE START_TIME END_TIME`
 
-Format for `deadline`: deadline `description` /by `date` `time`
+Format for `deadline`: `deadline DESCRIPTION /by DATE TIME`
 
 **NOTES** the following are the format for the date and any of the mentioned time
-- `time`: `hhmm`
-- `date`: `yyyy-mm-dd`
+- `TIME`: `hhmm`
+- `DATE`: `yyyy-mm-dd`
 
 Example of usage: `todo run`
 
 Expected outcome: TaskJamie would record that task and save it. 
-TaskJamie should show a message `Got it. I've added this task: `task description` ` and TaskJamie would tell you how many
-tasks are in the list. Eg: `Now you have `x` tasks in your list.
+TaskJamie should show a message `Got it. I've added this task: `task description`` and TaskJamie would tell you how many
+tasks are in the list. Eg: `Now you have `x` tasks in your list.`
 
 
 ## Deleting a task : `delete`
 
 Deletes a task from the list in TaskJamie.
 
-Format : `delete index`
+Format : `delete INDEX`
 
-- `index` would be the index of the task to be deleted from the list.
+- `INDEX` would be the index of the task to be deleted from the list.
 
 Example of usage: `delete 1`
 
-Expected outcome: TaskJamie will remove the task at index 1 and should show a message `Got it. I've removed this task: `task description`
-and TaskJamie would tell you how many tasks are left in the list. Eg: `Now you have `x` tasks in your list.
+Expected outcome: TaskJamie will remove the task at index 1 and should show a message `Got it. I've removed this task: `task description``
+and TaskJamie would tell you how many tasks are left in the list. Eg: `Now you have `x` tasks in your list.`
+
 
 ## Listing all tasks: `list`
 
@@ -62,10 +63,11 @@ Format for `unmark` : `unmark index`
 
 Example usage : `mark 1`
 
-Expected outcome: TaskJamie will mark the task at index 1 and should show a message `Nice! I've marked this task as done: `task description`
+Expected outcome: TaskJamie will mark the task at index 1 and should show a message `Nice! I've marked this task as done:``task description`
 and TaskJamie would Mark and `X` on that task to signify that the task is done. The negation is true as well (for unmark).
 
-## Listing all `events` and `deadlines` from a particular `date` : `schedule`
+
+## Listing all `events` and `deadlines` from a particular `date`: `schedule`
 
 Shows a list of all tasks that have the same date provided.
 
@@ -76,7 +78,7 @@ Format : `schedule date`
 Example usage : `schedule 2022-05-29`
 
 Expected outcome: TaskJamie will list all the task that are associated with the given date and should 
-show a message `Here is your Schedule for `date``.
+show a message `Here is your Schedule for` `date``.
 
 ## Exiting the program : `bye`
 
