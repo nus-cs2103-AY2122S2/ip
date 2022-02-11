@@ -68,7 +68,6 @@ public class Parser {
      */
     public static LocalDate convertDate(String dateString) throws DukeException {
         try {
-            System.out.println(dateString + "a");
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             return LocalDate.parse(dateString, format);
         } catch (DateTimeParseException error) {

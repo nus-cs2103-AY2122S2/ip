@@ -124,9 +124,11 @@ public class TaskList {
      */
     public String addToDoTask(String description) {
         String output = ADDED;
+        int lastSize = this.taskList.size();
         Todo todoItem = new Todo(description);
         this.taskList.add(todoItem);
         int numOfItems = this.taskList.size();
+        assert numOfItems - lastSize == 1 : "item not added successfully";
         output = output + todoItem + "\n";
         output = output + "Now you have " + numOfItems + " tasks in the list.";
         return output;
@@ -141,9 +143,11 @@ public class TaskList {
      */
     public String addDeadlineTask(String[] arr) throws DukeException {
         String output = ADDED;
+        int lastSize = this.taskList.size();
         Deadline deadlineItem = new Deadline(arr[0], Parser.convertDate(arr[1]));
         this.taskList.add(deadlineItem);
         int numOfItems = this.taskList.size();
+        assert numOfItems - lastSize == 1 : "item not added successfully";
         output = output + deadlineItem + "\n";
         output = output + "Now you have " + numOfItems + " tasks in the list.";
         return output;
@@ -158,9 +162,11 @@ public class TaskList {
      */
     public String addEventTask(String[] arr) throws DukeException {
         String output = ADDED;
+        int lastSize = this.taskList.size();
         Event eventItem = new Event(arr[0], Parser.convertDate(arr[1]));
         this.taskList.add(eventItem);
         int numOfItems = this.taskList.size();
+        assert numOfItems - lastSize == 1 : "item not added successfully";
         output = output + eventItem + "\n";
         output = output + "Now you have " + numOfItems + " tasks in the list.";
         return output;
@@ -176,10 +182,12 @@ public class TaskList {
     public String deleteTask(String taskNumber) throws DukeException {
         try {
             String output = REMOVED;
+            int lastSize = this.taskList.size();
             int index = Integer.parseInt(taskNumber) - 1;
             Task itemToDelete = this.taskList.get(index);
             this.taskList.remove(index);
             int numOfItems = this.taskList.size();
+            assert lastSize - numOfItems == 1 : "item not deleted successfully";
             output = output + itemToDelete + "\n";
             output = output + "Now you have " + numOfItems + " tasks in the list.";
             return output;

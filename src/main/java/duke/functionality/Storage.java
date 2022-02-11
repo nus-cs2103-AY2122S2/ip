@@ -81,6 +81,7 @@ public class Storage {
             File directory = new File("data");
             if (!directory.exists()) {
                 directory.mkdir();
+                assert directory.exists() : "directory not added";
             }
             String path = directory.getAbsolutePath() + "/Duke.txt";
             File newFile = new File(path);
