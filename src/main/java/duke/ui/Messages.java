@@ -17,6 +17,7 @@ public class Messages {
     public static final String FAREWELL_MESSAGE = "See you next time" + EXCLAMATION;
 
     public static final String UNKNOWN_COMMAND = "Unknown command! Here is the list of commands: ";
+    public static final String TRY_HELP_MSG = "If unsure, try 'help'.";
 
     public static final String UNKNOWN_TODO = "todo.. todo what?";
 
@@ -54,6 +55,39 @@ public class Messages {
     public static final String SAVE_ERROR = "Error saving file";
 
     public static final String LIST_MSG = "Here are the tasks in your list:";
+
+    // whole block involves the help messages of each command.
+    public static final String HELP_INTRO = "New to the App? Fret not bro!" + LINE_SEPARATOR +
+            "This app allows you to add Tasks to your TaskList, so that you can keep track of them!" + LINE_SEPARATOR +
+            "Here are the list of commands:" + LINE_SEPARATOR;
+    public static final String TODO_HELP = "'todo' adds a task to do, without any constraints.";
+    public static final String DEADLINE_HELP = "'deadline', with the valid format provided," +
+            " adds a task that has a deadline.";
+    public static final String EVENT_HELP = "'event' adds a task with a location or destination," +
+            " i.e, where the task is at.";
+    public static final String LIST_HELP = "'list' prints out your whole task list currently!";
+    public static final String BYE_HELP =  "'bye' ends the program- Don't worry, I would have saved your tasks!";
+    public static final String MARK_AND_UNMARK_HELP = "'mark' and 'unmark' marks the task as done, " +
+            "or not done respectively.";
+    public static final String DELETE_HELP =  "'delete' deletes a task, obviously.";
+    public static final String FIND_HELP =  "'find' is very useful when searching for a task with the given keyword," +
+            " especially when the list is long!";
+    public static final String HELP_HELP = "'help' gives you an overview of our commands. You literally just used it.";
+    //body of help.
+    public static final String HELP_SUMMARY = "todo, deadline, and event are commands that adds the respective " +
+            "type of task into your list." + LINE_SEPARATOR +
+            TODO_HELP + LINE_SEPARATOR +
+            DEADLINE_HELP + LINE_SEPARATOR +
+            EVENT_HELP + LINE_SEPARATOR +
+            LIST_HELP + LINE_SEPARATOR +
+            BYE_HELP + LINE_SEPARATOR +
+            MARK_AND_UNMARK_HELP + LINE_SEPARATOR +
+            DELETE_HELP + LINE_SEPARATOR +
+            FIND_HELP + LINE_SEPARATOR +
+            HELP_HELP + LINE_SEPARATOR;
+    //conclusion of Help.
+    public static final String HELP_CONCLUSION = "Go ahead and manage and your tasks bro! I'll be here to help.";
+    public static final String HELP_BODY = HELP_SUMMARY + HELP_CONCLUSION;
 
     public static final String getMatchCountMsg (int matchCount) {
         return String.format("There are %d task(s) that match your keyword.", matchCount);

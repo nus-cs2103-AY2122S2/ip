@@ -40,7 +40,6 @@ public class Ui {
      */
     public String showCommands() {
         String output = "";
-        output = Ui.append(output, Messages.UNKNOWN_COMMAND);
         int count = 0;
         for (int i = count; i < COMMANDS.length; i++) {
             count++;

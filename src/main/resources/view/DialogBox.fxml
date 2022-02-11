@@ -14,7 +14,7 @@
             <Font name="Courier New Bold" size="16.0" />
          </font>
          <effect>
-            <Glow level="0.68" />
+            <Glow level="0.85" />
          </effect></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
