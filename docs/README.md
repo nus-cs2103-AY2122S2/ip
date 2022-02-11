@@ -41,9 +41,9 @@
 
    Adds a new ToDo to your list.
 
-     Format: `todo [task description]`
+   Format: `todo [task description]`
     
-     Example: `todo Homework` (adds Homework to the list)
+   Example: `todo Homework` (adds Homework to the list)
 
  - **deadline**
 
