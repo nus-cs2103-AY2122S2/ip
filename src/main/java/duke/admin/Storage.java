@@ -62,37 +62,136 @@ public class Storage {
      * @throws DukeException exception thrown when there is an error accessing or
      *                       writing to the storage file
      */
-    public void updateAfterAdd(Task task) throws DukeException {
+    public void updateAfterAdd(Task task, String description) throws DukeException {
         try {
             int isMarked = task.isDone() ? 1 : 0; // isMarked is the integer representation of task.isDone();
 
             FileWriter storageFileWriter = new FileWriter(storageFile, true);
-            storageFileWriter.write(task.getType() + buffer + isMarked + buffer + task.getDescription() + "\n");
+            storageFileWriter.write(task.getType() + buffer + isMarked + buffer + description + "\n");
             storageFileWriter.close();
         } catch (IOException e) {
             throw new DukeException("Cannot update addition in save file!! :-(");
         }
     }
 
-    // /**
-    //  * Reflects the marked indexed task in the storage list.
-    //  * @param index the index of the task that has just been marked as done
-    //  * @throws DukeException exception thrown when there is an error accessing or
-    //  *                       writing to the storage file
-    //  */
-    // public void updateAfterMark(int index) throws DukeException {
-    //     this.modifyFile(index, true);
-    // }
+    /**
+     * Updates the storage file after details of tasks have been updated.
+     * @param typeOfTask type of task that has been updated
+     * @param typeOfUpdate what details has been updated: description, date or time
+     * @param index index of task that has been updated
+     * @param updateValue value to be updated to
+     * @throws DukeException exception thrown when there is an error accessing or writing to the storage file
+     */
+    public void updateAfterEdits(String typeOfTask, String typeOfUpdate, int index, String updateValue)
+            throws DukeException {
+        try {
+            int dataLineCounter = 0; //initializing the counter
+            BufferedReader storageFileReader = new BufferedReader(new FileReader(storageFile));
+            String contentToBeWritten = "";
+            String dataLine = storageFileReader.readLine();
 
-    // /**
-    //  * Reflects the unmarked indexed task in the storage list.
-    //  * @param index the index of the task that has just been marked as not yet done
-    //  * @throws DukeException exception thrown when there is an error accessing or
-    //  *                       writing to the storage file
-    //  */
-    // public void updateAfterUnmark(int index) throws DukeException {
-    //     this.modifyFile(index, false);
-    // }
+            while (dataLine != null) {
+                if (dataLineCounter == index) {
+                    int startCharIndex = 0;
+
+                    if (typeOfTask.equals("D") || typeOfTask.equals("E")) {
+                        switch (typeOfUpdate) {
+                        case "description":
+                            int numOfCharsBeforeDescription = 12;
+                            int numOfCharsAfterDescription = 21;
+
+                            String prefix = dataLine.substring(startCharIndex, numOfCharsBeforeDescription);
+                            String suffix = dataLine.substring(dataLine.length() - numOfCharsAfterDescription);
+
+                            dataLine = prefix + updateValue + suffix;
+                            break;
+                        case "date":
+                            int numOfCharsFromDate = 16;
+                            int numOfCharsAfterDate = 6;
+                            int indexOfDate = dataLine.length() - numOfCharsFromDate;
+
+                            String dateToBeUpdated = dataLine.substring(indexOfDate,
+                                    dataLine.length() - numOfCharsAfterDate);
+
+                            dataLine = dataLine.replaceFirst(dateToBeUpdated, updateValue);
+                            break;
+                        case "time":
+                            int numOfCharsFromTime = 5;
+
+                            String timeToBeUpdated = dataLine.substring(dataLine.length() - numOfCharsFromTime);
+
+                            dataLine = dataLine.replaceFirst(timeToBeUpdated, updateValue);
+                            break;
+                        default:
+                            break;
+                        }
+                    } else if (typeOfTask.equals("T")) {
+                        switch (typeOfUpdate) {
+                        case "description":
+                            int numOfCharsBeforeDescription = 12;
+
+                            String prefix = dataLine.substring(startCharIndex, numOfCharsBeforeDescription);
+
+                            dataLine = prefix + updateValue;
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                }
+
+                contentToBeWritten = contentToBeWritten + dataLine + System.lineSeparator();
+                dataLine = storageFileReader.readLine();
+                dataLineCounter++;
+            }
+
+            FileWriter storageFileWriter = new FileWriter(storageFile);
+            storageFileWriter.write(contentToBeWritten);
+
+            storageFileReader.close();
+            storageFileWriter.close();
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Save file not found!! :-(");
+        } catch (IOException e) {
+            throw new DukeException("Cannot update edits in save file!! D:");
+        }
+    }
+
+    /**
+     * Updates the storage list after a clone action has been performed.
+     * @param index index of task to be cloned
+     * @throws DukeException exception thrown when there is an error accessing or writing to the storage file
+     */
+    public void updateAfterClone(int index) throws DukeException {
+        try {
+            int dataLineCounter = 0;
+            BufferedReader storageFileReader = new BufferedReader(new FileReader(storageFile));
+            String contentToBeWritten = "";
+            String dataLine = storageFileReader.readLine();
+            String clone = "";
+
+            while (dataLine != null) {
+                if (dataLineCounter == index) {
+                    clone = clone + dataLine;
+                }
+
+                contentToBeWritten = contentToBeWritten + dataLine + System.lineSeparator();
+                dataLine = storageFileReader.readLine();
+                dataLineCounter++;
+            }
+
+            contentToBeWritten = contentToBeWritten + clone + System.lineSeparator();
+            FileWriter storageFileWriter = new FileWriter(storageFile);
+            storageFileWriter.write(contentToBeWritten);
+
+            storageFileReader.close();
+            storageFileWriter.close();
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Save file not found!! :-(");
+        } catch (IOException e) {
+            throw new DukeException("Cannot update clone action in save file!! D:");
+        }
+    }
 
     /**
      * Reflects the deleted task in the storage list.
@@ -105,14 +204,14 @@ public class Storage {
             int dataLineCounter = 0; //initializing the counter
             BufferedReader storageFileReader = new BufferedReader(new FileReader(storageFile));
             String contentToBeWritten = "";
-            String dateLine = storageFileReader.readLine();
+            String dataLine = storageFileReader.readLine();
 
-            while (dateLine != null) {
+            while (dataLine != null) {
                 if (dataLineCounter != index) {
-                    contentToBeWritten = contentToBeWritten + dateLine + System.lineSeparator();
+                    contentToBeWritten = contentToBeWritten + dataLine + System.lineSeparator();
                 }
 
-                dateLine = storageFileReader.readLine();
+                dataLine = storageFileReader.readLine();
                 dataLineCounter++;
             }
 
@@ -137,7 +236,6 @@ public class Storage {
      * @throws DukeException exception thrown when there is an error accessing or
      *                       writing to the storage file
      */
-
     public void updateAfterChangeMark(int index, boolean toMark) throws DukeException {
         try {
             int dataLineCounter = 0; //initializing the counter
