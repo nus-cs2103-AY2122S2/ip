@@ -14,19 +14,17 @@ public class Duke {
     private String name;
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private String initializationMessage;
 
     /**
      * Constructs a {@code Duke} object with its name and path for storage.
      */
     public Duke(String name) {
         this.name = name;
-        this.ui = new Ui();
         this.storage = new Storage(System.getProperty("user.dir"));
         try {
             this.tasks = storage.load();
         } catch (Exception e) {
-            ui.showMessage(e.getMessage());
             this.tasks = new TaskList();
         }
     }
@@ -39,17 +37,17 @@ public class Duke {
         return "Hello! I'm " + name + ".\nWhat can I do for you?";
     }
 
-    public Pair<Boolean, String> getResponse(String input) {
+    public Response getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            String res = c.execute(tasks);
+            String response = c.execute(tasks);
             storage.update(tasks);
             if (c.isExit()) {
-                return new Pair<>(true, res);
+                return new Response(true, response);
             }
-            return new Pair<>(false, res);
+            return new Response(false, response);
         } catch (Exception e) {
-            return new Pair<>(false, e.getMessage());
+            return new Response(false, e.getMessage());
         }
     }
 

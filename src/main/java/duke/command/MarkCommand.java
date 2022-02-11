@@ -21,10 +21,10 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         if (index > tasks.size() || index <= 0) {
-            return "Invalid index";
+            return "Index out of bound";
         }
         tasks.set(index, tasks.get(index).mark());
-        return "Nice! I've marked this task as done:\n"
+        return "Nice! I've marked this task as done:\n  "
                 + tasks.get(index);
     }
 

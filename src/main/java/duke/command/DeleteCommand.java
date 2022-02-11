@@ -21,9 +21,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         if (index <= tasks.size()) {
-            String res = "Noted. I've removed this task:\n" + tasks.get(index);
+            String response = "Noted. I've removed this task:\n  " + tasks.get(index);
             tasks.remove(index);
-            return res;
+            return response;
         } else {
             return "Index is invalid";
         }

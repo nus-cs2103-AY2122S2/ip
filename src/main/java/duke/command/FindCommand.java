@@ -33,11 +33,11 @@ public class FindCommand extends Command {
         if (matchingIndexes.size() == 0) {
             return "No matching tasks are found.";
         }
-        String res = "Here are the matching tasks in your list:";
+        String response = "Here are the matching tasks in your list:";
         for (int i : matchingIndexes) {
-            res += "\n  " + i + ". " + tasks.get(i);
+            response += "\n  " + i + ". " + tasks.get(i);
         }
-        return res;
+        return response;
     }
 
     @Override

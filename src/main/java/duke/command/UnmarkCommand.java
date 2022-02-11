@@ -21,10 +21,10 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         if (index > tasks.size() || index <= 0) {
-            return "Invalid index";
+            return "Index out of bound";
         }
         tasks.set(index, tasks.get(index).unmark());
-        return "OK, I've marked this task as not done yet:\n"
+        return "OK, I've marked this task as not done yet:\n  "
                 + tasks.get(index);
     }
 

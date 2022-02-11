@@ -64,7 +64,7 @@ public class Storage {
                         + "line will be ignored");
             }
             if (record[1].equals("1")) {
-                tasks.set(tasks.size() - 1, tasks.get(tasks.size() - 1).mark());
+                tasks.set(tasks.size(), tasks.get(tasks.size()).mark());
             }
         }
         return tasks;

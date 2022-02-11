@@ -28,7 +28,7 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList tasks) {
         Task t = new Deadline(description, by);
         tasks.add(t);
-        return "Got it. I've added this task:\n" + t
+        return "Got it. I've added this task:\n  " + t
                 + "\nNow you have " + tasks.size() + " tasks in your list.";
     }
 

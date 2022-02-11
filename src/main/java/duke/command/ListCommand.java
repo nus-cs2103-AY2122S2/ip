@@ -18,11 +18,11 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             return "There are no tasks in your list~";
         }
-        String res = "Here are the tasks in your list:";
+        String response = "Here are the tasks in your list:";
         for (int i = 1; i <= tasks.size(); i++) {
-            res += "\n  " + i + ". " + tasks.get(i);
+            response += "\n  " + i + ". " + tasks.get(i);
         }
-        return res;
+        return response;
     }
 
     @Override

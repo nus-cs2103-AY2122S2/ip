@@ -1,21 +1,18 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
+import duke.Response;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.beans.property.Property;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-import javafx.util.Pair;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -73,14 +70,14 @@ public class MainWindow extends AnchorPane {
         if (trimmedInput.equals("")) {
             return;
         }
-        Pair<Boolean, String> response = duke.getResponse(trimmedInput);
+        Response response = duke.getResponse(trimmedInput);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response.getValue(), dukeImage)
+                DialogBox.getDukeDialog(response.getResponse(), dukeImage)
         );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         userInput.clear();
-        if (response.getKey()) {
+        if (response.isExit()) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
