@@ -33,13 +33,15 @@ public class MainWindow extends Stage {
     @FXML
     private Button sendButton;
 
-    private Athena athena;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private Image athenaImage = new Image(this.getClass().getResourceAsStream("/images/athena.jpg"));
+    private final Athena athena;
+    private final Image userImage;
+    private final Image athenaImage;
 
     public MainWindow(Athena athena) {
         this.athena = athena;
+        userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
+        athenaImage = new Image(this.getClass().getResourceAsStream("/images/athena.jpg"));
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
@@ -48,7 +50,7 @@ public class MainWindow extends Stage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        displayAthenaDialog("Greetings! My name is Athena. What can I help you with?");
+        displayAthenaDialog(Messages.WELCOME_MESSAGE);
     }
 
     @FXML
@@ -67,13 +69,17 @@ public class MainWindow extends Stage {
         displayUserDialog(input);
         displayAthenaDialog(response);
         userInput.clear();
-        if (!athena.isActive()) {
-            userInput.setDisable(true);
-            sendButton.setDisable(true);
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished(event -> close());
-            delay.play();
+        if (!athena.getIsActive()) {
+            shutdown();
         }
+    }
+
+    private void shutdown() {
+        userInput.setDisable(true);
+        sendButton.setDisable(true);
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> close());
+        delay.play();
     }
 
     private void displayAthenaDialog(String dialog) {

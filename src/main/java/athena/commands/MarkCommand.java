@@ -1,7 +1,5 @@
 package athena.commands;
 
-import java.util.ArrayList;
-
 import athena.exceptions.InputErrorCode;
 import athena.exceptions.InputException;
 import athena.tasks.TaskList;
@@ -24,7 +22,8 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Marks the task corresponding to the given task number as done.
+     * Marks the task corresponding to the given task number as done on the given
+     * TaskList and returns the outputs.
      *
      * @param taskList The taskList instance to mark the task as complete in.
      * @return Command output.
@@ -32,14 +31,10 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws InputException {
-        if (taskList.isValidTaskNumber(taskNumber)) {
-            taskList.setTaskAsDone(taskNumber);
-            ArrayList<String> outputs = new ArrayList<>();
-            outputs.add("Alright, I've marked the following task as done:");
-            outputs.add(taskList.getTaskString(taskNumber));
-            return Messages.getMultiLineString(outputs);
-        } else {
+        if (!taskList.isValidTaskNumber(taskNumber)) {
             throw new InputException(InputErrorCode.INVALID_TASK_NUMBER);
         }
+        taskList.setTaskAsDone(taskNumber);
+        return Messages.getMarkTaskDialog(taskList, taskNumber);
     }
 }

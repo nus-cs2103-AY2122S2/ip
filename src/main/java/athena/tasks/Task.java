@@ -1,12 +1,20 @@
 package athena.tasks;
 
+/**
+ * Represents a single task object on a task list.
+ */
 public abstract class Task {
-    public static final char SAVE_SEPARATOR = '|';
-    private final String description;
+    public static final String SAVE_SEPARATOR = "|";
+    private final String name;
     private boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
+    /**
+     * Initializes a new task object with the given name.
+     *
+     * @param name The name of the task object to be created.
+     */
+    public Task(String name) {
+        this.name = name;
         this.isDone = false;
     }
 
@@ -18,16 +26,33 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    // Returns the icon of the type of task
+    /**
+     * Returns the character icon corresponding to the given task object.
+     *
+     * @return The character icon of the given task instance.
+     */
     public abstract String getIcon();
 
+    /**
+     * Returns the task object in a save-friendly format, for easy
+     * saving and loading.
+     *
+     * @return Task object in a save-friendly format.
+     */
     public String getSaveFormat() {
-        return getIcon() + SAVE_SEPARATOR + (isDone ? 1 : 0) + SAVE_SEPARATOR + description;
+        String isDoneString = (isDone ? "1" : "0");
+        return String.join(SAVE_SEPARATOR, getIcon(), isDoneString, name);
     }
 
+
+    /**
+     * Returns a string representation of the task.
+     *
+     * @return String representation of the task.
+     */
     @Override
     public String toString() {
         String completionMark = (this.isDone ? "X" : " ");
-        return String.format("[%s][%s] %s", getIcon(), completionMark, this.description);
+        return String.format("[%s][%s] %s", getIcon(), completionMark, this.name);
     }
 }
