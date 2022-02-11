@@ -72,8 +72,12 @@ public class Parser {
                 }
                 break;
             case UNDO:
-                tasks.undo();
-                result = Ui.printUndo();
+                try {
+                    tasks.undo();
+                    result = Ui.printUndo();
+                } catch (BobbyException e) {
+                    result = Ui.printUndoError();
+                }
                 break;
             default:
                 result = Ui.invalidInput();

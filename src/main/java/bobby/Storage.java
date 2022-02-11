@@ -17,6 +17,7 @@ public class Storage {
 
     /**
      * Constructor to create a Storage instance.
+     *
      * @param filePath file path where the .txt file is loaded from or created.
      */
     public Storage(String filePath) {
@@ -60,6 +61,7 @@ public class Storage {
     /**
      * Loads file from given file path if file exists. Creates an empty file
      * if file does not exist.
+     *
      * @return ArrayList of tasks loaded from file.
      */
     public ArrayList<Task> createTaskArray() {

@@ -21,7 +21,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> taskArray, Storage storage) {
         this.stateStack = new Stack<State>();
-        stateStack.push(new State(taskArray));
+        stateStack.push(new State(new ArrayList<Task>(taskArray), 0));
         this.taskArray = taskArray;
         this.storage = storage;
     }
@@ -41,7 +41,6 @@ public class TaskList {
         taskArray.add(newTodo);
         storage.updateFile(taskArray);
         updateStateArray();
-        System.out.println(taskArray.get(taskArray.size() - 1).toString());
 
         return Ui.printAddedTask(newTodo, taskArray);
     }
@@ -187,24 +186,18 @@ public class TaskList {
     }
 
     private void updateStateArray() {
-        currentState = new State(taskArray);
+        ArrayList<Task> taskArrayCopy = new ArrayList<Task>(taskArray);
+        currentState = new State(taskArrayCopy, stateStack.size());
         stateStack.push(currentState);
-        System.out.println("pushed");
-        System.out.println(currentState.loadState().get(currentState.loadState().size()-1).toString());
     }
 
-    public void undo() {
-//        System.out.println("size before pop: " + stateStack.size());
-//        State currentState = stateStack.pop();   // removes from the top
-//        System.out.println("size after pop: " + stateStack.size());  // shows that size is decreasing
-//        State prevState = stateStack.peek();    // prevState stores top element using peek()
-//        taskArray = prevState.loadState();
-//        storage.updateFile(taskArray);
-//
-//        // this prints the last task in my peeked() array, which is always the same even though i popped, this doesnt change
-//        System.out.println(currentState.loadState().get(currentState.loadState().size()-1).toString());
-//        System.out.println(currentState.loadState().get(0).toString());
-//        //System.out.println(stateStack.peek().loadState().get(stateStack.peek().loadState().size()-1).toString());
-//        //System.out.println(taskArray.get(taskArray.size() - 1).toString());
+    public void undo() throws BobbyException {
+        if (stateStack.size() <= 1) {
+            throw new BobbyException("Bobby cannot Undo any further.");
+        }
+        stateStack.pop();
+        currentState = stateStack.peek();
+        taskArray = currentState.loadState();
+        storage.updateFile(taskArray);
     }
 }

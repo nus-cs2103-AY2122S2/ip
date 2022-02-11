@@ -71,4 +71,8 @@ public class Ui {
     public static String printUndo() {
         return "Bobby has forgotten your previous change.";
     }
+
+    public static String printUndoError() {
+        return "Bobby cannot Undo any further.";
+    }
 }
