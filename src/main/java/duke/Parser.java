@@ -80,19 +80,28 @@ class Parser {
             } else {
                 throw new InvalidCommandFormatException("Invalid find!");
             }
+        } else if (commandWord.equals("delete")) {
+            if (ui.isValidDeleteFormat(fullCommand)); {
+                DeleteCommand deleteCommand = new DeleteCommand(fullCommand,
+                        ui.deleteIndex(fullCommand));
+                return deleteCommand;
+            }
+        } else if (commandWord.equals("sort")) {
+            SortCommand sortCommand = new SortCommand(fullCommand);
+            return sortCommand;
         } else {
-            String generalFormatExceptionString = "Please give a proper command!\n" +
-                    "List of commands: \n" +
-                    "1. todo\n" +
-                    "2. deadline\n" +
-                    "3. event\n" +
-                    "4. list\n" +
-                    "5. mark\n" +
-                    "6. unmark\n" +
-                    "7. find\n" +
-                    "8. delete \n" +
-                    "9. bye";
-            throw new InvalidCommandFormatException(generalFormatExceptionString);
+                String generalFormatExceptionString = "Please give a proper command!\n" +
+                        "List of commands: \n" +
+                        "1. todo\n" +
+                        "2. deadline\n" +
+                        "3. event\n" +
+                        "4. list\n" +
+                        "5. mark\n" +
+                        "6. unmark\n" +
+                        "7. find\n" +
+                        "8. delete \n" +
+                        "9. bye";
+                throw new InvalidCommandFormatException(generalFormatExceptionString);
         }
     }
 }

@@ -136,6 +136,19 @@ public class Ui {
         }
     }
 
+    public boolean isValidDeleteFormat(String fullCommand) {
+        try {
+            Integer.parseInt(fullCommand.substring(fullCommand.indexOf(' ') + 1));
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public int deleteIndex(String fullCommand) {
+        return Integer.parseInt(fullCommand.substring(fullCommand.indexOf(' ') + 1));
+    }
+
     public boolean isValidUnmarkFormat(String fullCommand) {
         try {
             Integer.parseInt(fullCommand.substring(fullCommand.indexOf(' ') + 1));

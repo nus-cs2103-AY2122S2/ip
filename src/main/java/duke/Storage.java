@@ -17,6 +17,11 @@ import java.util.Scanner;
 class Storage {
     private final String filePath;
     private final String fileDirectory;
+    private final static int TASK_TYPE = 0;
+    private final static int TASK_COMPLETED = 1;
+    private final static int TASK_ITEM = 2;
+    private final static int TASK_DATE = 3;
+
 
     Storage(String filePath, String fileDirectory) {
         this.filePath = filePath;
@@ -52,9 +57,9 @@ class Storage {
             while (sc.hasNext()) {
                 String task = sc.nextLine();
                 String[] values = task.split(" \\| ");
-                String taskType = values[0];
-                String taskCompletion = values[1];
-                String taskItem = values[2];
+                String taskType = values[TASK_TYPE];
+                String taskCompletion = values[TASK_COMPLETED];
+                String taskItem = values[TASK_ITEM];
                 switch (taskType) {
                     case "T":
                         ToDo todo = new ToDo(taskItem);
@@ -64,8 +69,8 @@ class Storage {
                         taskList.add(todo);
                         break;
                     case "E":
-                        String taskDate = values[3];
-                        LocalDate date = LocalDate.parse(taskDate);
+                        String eventDate = values[TASK_DATE];
+                        LocalDate date = LocalDate.parse(eventDate);
                         Event event = new Event(taskItem, date);
                         if (taskCompletion == "1") {
                             event.setCompleted();

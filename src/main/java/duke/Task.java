@@ -1,6 +1,5 @@
 package duke;
 
-
 /**
  * Abstract class task
  */
@@ -49,4 +48,5 @@ abstract class Task {
             return "[ ] " + task;
         }
     }
+
 }
