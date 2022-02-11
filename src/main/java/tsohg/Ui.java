@@ -5,7 +5,7 @@ package tsohg;
  */
 public class Ui {
 
-    private TaskList tasks;
+    private final TaskList tasks;
 
     public Ui(TaskList tasks) {
         this.tasks = tasks;
@@ -40,41 +40,36 @@ public class Ui {
     }
 
     private String list() {
-        String response = "Here are the tasks in your list:\n"
+        return "Here are the tasks in your list:\n"
                 + tasks.toString();
-        return response;
     }
 
     private String delete(String argument) throws TsohgException {
         int index = parseIndex(argument);
-        String response = "Noted. I've removed this task:\n"
+        return "Noted. I've removed this task:\n"
                 + tasks.deleteItem(index) + "\n"
                 + tasks.listCount();
-        return response;
     }
 
     private String mark(String argument) throws TsohgException {
         int index = parseIndex(argument);
-        String response = "Nice! I've marked this task as done:\n"
+        return "Nice! I've marked this task as done:\n"
                 + tasks.markItem(index);
-        return response;
     }
 
     private String unmark(String argument) throws TsohgException {
         int index = parseIndex(argument);
-        String response = "OK, I've marked this task as not done yet:\n"
+        return "OK, I've marked this task as not done yet:\n"
                 + tasks.unmarkItem(index);
-        return response;
     }
 
     private String todo(String argument) throws TsohgException {
         if (argument == null) {
             throw new TsohgException("OOPS!!! The description of a todo cannot be empty.");
         }
-        String response = "Got it. I've added this task:\n"
+        return "Got it. I've added this task:\n"
                 + tasks.addTodo(argument) + "\n"
                 + tasks.listCount();
-        return response;
     }
 
     private String deadline(String argument) throws TsohgException {
@@ -84,10 +79,9 @@ public class Ui {
         }
         String name = split[0];
         String date = split[1];
-        String response = "Got it. I've added this task:\n"
+        return "Got it. I've added this task:\n"
                 + tasks.addDeadline(name, date) + "\n"
                 + tasks.listCount();
-        return response;
     }
 
     private String event(String argument) throws TsohgException {
@@ -97,19 +91,17 @@ public class Ui {
         }
         String name = split[0];
         String date = split[1];
-        String response = "Got it. I've added this task:\n"
+        return "Got it. I've added this task:\n"
                 + tasks.addEvent(name, date) + "\n"
                 + tasks.listCount();
-        return response;
     }
 
     private String find(String argument) throws TsohgException {
         if (argument == null) {
             throw new TsohgException("OOPS!!! The description of find cannot be empty.");
         }
-        String response = "Here are the matching tasks in your list:\n"
+        return "Here are the matching tasks in your list:\n"
                 + tasks.find(argument);
-        return response;
     }
 
     private int parseIndex(String argument) throws TsohgException {
