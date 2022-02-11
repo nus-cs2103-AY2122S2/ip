@@ -3,7 +3,8 @@ package angela.datetime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
+import java.util.TreeMap;
 
 import angela.exception.BotException;
 import angela.task.Task;
@@ -15,7 +16,7 @@ import angela.util.Ui;
 public class DateTable {
     private static final String DATE_FORMAT = "d/M/yyyy";
 
-    private HashMap<LocalDate, ArrayList<Task>> dateMap = new HashMap<>();
+    private final TreeMap<LocalDate, ArrayList<Task>> dateMap = new TreeMap<>(Comparator.naturalOrder());
     private final BotException exception = new BotException();
     private final Ui ui;
 
@@ -68,5 +69,9 @@ public class DateTable {
             ArrayList<Task> taskArrayList = dateMap.get(task.getTime());
             taskArrayList.remove(task);
         }
+    }
+
+    public TreeMap<LocalDate, ArrayList<Task>> getDateMap() {
+        return dateMap;
     }
 }

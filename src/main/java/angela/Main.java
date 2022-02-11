@@ -69,5 +69,6 @@ public class Main extends Application {
         stage.setScene(scene);
         fxmlLoader.<MainWindow>getController().setAngela(angela);
         stage.show();
+        fxmlLoader.<MainWindow>getController().displayUpcomingDeadline();
     }
 }

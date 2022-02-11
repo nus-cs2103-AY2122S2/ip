@@ -3,6 +3,7 @@ package angela.util;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import angela.datetime.DateTable;
 import angela.task.Task;
 
 /**
@@ -23,7 +24,7 @@ public interface Storage {
      * @param storingList The collection need to append
      * @throws IOException If an I/O error occur
      */
-    void readFileContent(ArrayList<Task> storingList) throws IOException;
+    void readFileContent(ArrayList<Task> storingList, DateTable dateTable) throws IOException;
 
     /**
      * Retrieves the total length of the database
