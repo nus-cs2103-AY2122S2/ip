@@ -1,7 +1,11 @@
 package ui;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
+import java.util.Scanner;
 
 import tasks.Task;
 
@@ -12,10 +16,16 @@ public class Ui {
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String ERROR_MESSAGE_PREFIX = "☹ OOPS!!! ";
 
+    private final Scanner input;
     private final PrintStream output;
 
-    public Ui(OutputStream outputStream) {
+    public Ui(InputStream inputStream, OutputStream outputStream) throws IOException {
+        this.input = new Scanner(inputStream);;
         this.output = new PrintStream(outputStream);
+    }
+
+    public String readCommand() throws IOException {
+        return input.nextLine();
     }
 
     public void showWelcome() {
