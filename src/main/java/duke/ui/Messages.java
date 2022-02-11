@@ -9,7 +9,7 @@ public class Messages {
 
     public static final String EXCLAMATION = "!";
 
-    public static final String BOT_NAME = "Feline";
+    public static final String BOT_NAME = "Koro";
 
     public static final String WELCOME_MESSAGE = "Yoooo! My name is "
             + BOT_NAME + EXCLAMATION + LINE_SEPARATOR + "How can i help you bro?";
