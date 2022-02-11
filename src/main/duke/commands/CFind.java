@@ -16,7 +16,9 @@ public class CFind extends Command{
         this.findString = findString;
     }
 
-    public String getFindString() { return this.findString; }
+    public String getFindString() {
+        return this.findString;
+    }
 
     @Override
     public String runCommand(Ui ui, TaskList taskList) throws DukeException {

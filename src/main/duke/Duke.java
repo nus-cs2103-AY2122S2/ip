@@ -4,10 +4,7 @@ import main.duke.commands.Command;
 import main.duke.io.Parser;
 import main.duke.io.Storage;
 
-import java.util.Scanner;
-
 public class Duke {
-    private static final String WELCOME_MESSAGE = "Hello! I'm Duke \n" + "What can I do for you";
 
     private Storage storage;
     private TaskList taskList;

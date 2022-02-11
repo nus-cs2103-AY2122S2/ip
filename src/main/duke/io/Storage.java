@@ -29,7 +29,9 @@ public class Storage {
         return System.getProperty("user.dir");
     }
 
-    private String getDirname() { return this.dirname; }
+    private String getDirname() {
+        return this.dirname;
+    }
 
     private String getFilename() { return this.filename; }
 
