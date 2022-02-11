@@ -23,6 +23,8 @@ import athena.exceptions.InputException;
 public class Parser {
     private static final DateTimeFormatter INPUT_FORMATTER =
             DateTimeFormatter.ofPattern("d/M/yyyy Hmm");
+    private static final String DEADLINE_DATE_KEYWORD = "/by";
+    private static final String EVENT_DATE_KEYWORD = "/at";
 
     /**
      * Returns a Command object based on the given input, which encapsulates the user
@@ -33,38 +35,33 @@ public class Parser {
      * @throws InputException If user input is invalid, such as when providing a non-existent command.
      */
     public static Command getCommand(String input) throws InputException {
-        // Separate out the command keyword from the other arguments given
-        String[] splitInput = input.split(" ", 2);
-        String command = splitInput[0];
-        String remainingInput = "";
-        if (splitInput.length > 1) {
-            remainingInput = splitInput[1];
-        }
+        String commandWord = getCommandWord(input);
+        String commandArgs = getCommandArguments(input);
 
         // Generate command object to return
-        switch (command) {
+        switch (commandWord) {
         case "todo":
-            return new TodoCommand(getTaskNameFromInput(remainingInput));
+            return new TodoCommand(getTaskNameFromArgs(commandArgs));
             // No fallthrough necessary
         case "deadline":
-            return new DeadlineCommand(getTaskNameFromInput(remainingInput),
-                    getDateTimeFromInput(remainingInput, "/by"));
+            return new DeadlineCommand(getTaskNameFromArgs(commandArgs),
+                    getDateTimeFromArgs(commandArgs, DEADLINE_DATE_KEYWORD));
             // No fallthrough necessary
         case "event":
-            return new EventCommand(getTaskNameFromInput(remainingInput),
-                    getDateTimeFromInput(remainingInput, "/at"));
+            return new EventCommand(getTaskNameFromArgs(commandArgs),
+                    getDateTimeFromArgs(commandArgs, EVENT_DATE_KEYWORD));
             // No fallthrough necessary
         case "mark":
-            return new MarkCommand(getTaskNumberFromInput(remainingInput));
+            return new MarkCommand(getTaskNumberFromArgs(commandArgs));
             // No fallthrough necessary
         case "unmark":
-            return new UnmarkCommand(getTaskNumberFromInput(remainingInput));
+            return new UnmarkCommand(getTaskNumberFromArgs(commandArgs));
             // No fallthrough necessary
         case "delete":
-            return new DeleteCommand(getTaskNumberFromInput(remainingInput));
+            return new DeleteCommand(getTaskNumberFromArgs(commandArgs));
             // No fallthrough necessary
         case "find":
-            return new FindCommand(getSearchPhraseFromInput(remainingInput));
+            return new FindCommand(getSearchPhraseFromArgs(commandArgs));
         case "list":
             return new ListCommand();
             // No fallthrough necessary
@@ -77,50 +74,60 @@ public class Parser {
         }
     }
 
-    private static int getTaskNumberFromInput(String input) throws InputException {
-        int taskNumber = -1;
+    private static String getCommandWord(String input) {
+        String[] splitInput = input.split(" ", 2);
+        return splitInput[0];
+    }
+
+    private static String getCommandArguments(String input) {
+        String[] splitInput = input.split(" ", 2);
+        if (splitInput.length >= 2) {
+            return splitInput[1];
+        } else {
+            return "";
+        }
+    }
+
+    private static int getTaskNumberFromArgs(String args) throws InputException {
         try {
-            taskNumber = Integer.parseInt(input);
+            return Integer.parseInt(args);
         } catch (NumberFormatException e) {
             throw new InputException(InputErrorCode.MISSING_TASK_NUMBER);
         }
-        return taskNumber;
     }
 
-    private static String getTaskNameFromInput(String input) throws InputException {
-        // Remove excess input arising from extra fields like /by and /at
-        input = input.split("/")[0].strip();
-        if (input.isEmpty()) {
+    private static String getTaskNameFromArgs(String args) throws InputException {
+        // Strip excess arising from extra arguments like /by and /at
+        String stripped = args.split("/")[0].strip();
+        if (stripped.isEmpty()) {
             throw new InputException(InputErrorCode.MISSING_TASK_NAME);
         }
-        return input;
+        return stripped;
     }
 
-    private static String getSearchPhraseFromInput(String input) throws InputException {
-        if (input.isEmpty()) {
+    private static String getSearchPhraseFromArgs(String args) throws InputException {
+        if (args.isEmpty()) {
             throw new InputException(InputErrorCode.MISSING_SEARCH_PHRASE);
         }
-        return input;
+        return args;
     }
 
-    private static LocalDateTime getDateTimeFromInput(String input, String keyword)
+    private static LocalDateTime getDateTimeFromArgs(String args, String keyword)
             throws InputException {
-        LocalDateTime dateTime;
-        if (!input.contains(keyword)) {
+        if (!args.contains(keyword)) {
             throw new InputException(InputErrorCode.MISSING_TASK_DATETIME);
-        } else {
-            // Split by keyword, take the latter part.
-            String dateTimeString = input.split(keyword, 2)[1].strip();
-            if (dateTimeString.isEmpty()) {
-                throw new InputException(InputErrorCode.MISSING_TASK_DATETIME);
-            } else {
-                try {
-                    dateTime = LocalDateTime.parse(dateTimeString, INPUT_FORMATTER);
-                } catch (DateTimeParseException e) {
-                    throw new InputException(InputErrorCode.INVALID_TASK_DATETIME);
-                }
-            }
         }
-        return dateTime;
+
+        // Split by keyword, take the latter part.
+        String dateTimeString = args.split(keyword, 2)[1].strip();
+        if (dateTimeString.isEmpty()) {
+            throw new InputException(InputErrorCode.MISSING_TASK_DATETIME);
+        }
+
+        try {
+            return LocalDateTime.parse(dateTimeString, INPUT_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new InputException(InputErrorCode.INVALID_TASK_DATETIME);
+        }
     }
 }

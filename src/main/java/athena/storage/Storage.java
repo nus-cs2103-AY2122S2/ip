@@ -13,8 +13,8 @@ import athena.tasks.TaskList;
  * task list onto the disk.
  */
 public class Storage {
-    private Path directoryPath;
-    private Path savePath;
+    private final Path directoryPath;
+    private final Path savePath;
 
     /**
      * Constructs a new Storage instance with the given save location information.
@@ -34,12 +34,10 @@ public class Storage {
      * @throws IOException If unable to save to disk successfully.
      */
     public void saveToDisk(TaskList taskList) throws IOException {
-        // Create the data directory if necessary
         if (!Files.exists(directoryPath)) {
             Files.createDirectory(directoryPath);
         }
-
-        // Save the file, overriding any existing save
+        // Overrides any existing file
         List<String> taskListSaveFormat = taskList.getSaveFormat();
         Files.write(savePath, taskListSaveFormat);
     }

@@ -30,13 +30,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws InputException {
-        if (taskList.isValidTaskNumber(taskNumber)) {
-            String preDialog = Messages.getPreDeletionDialog(taskList, taskNumber);
-            taskList.deleteTask(taskNumber);
-            String postDialog = Messages.getCurrentNumberOfTasksDialog(taskList);
-            return Messages.getMultiLineString(preDialog, postDialog);
-        } else {
+        if (!taskList.isValidTaskNumber(taskNumber)) {
             throw new InputException(InputErrorCode.INVALID_TASK_NUMBER);
         }
+        String preDialog = Messages.getPreDeletionDialog(taskList, taskNumber);
+        taskList.deleteTask(taskNumber);
+        String postDialog = Messages.getCurrentNumberOfTasksDialog(taskList);
+        return Messages.getMultiLineString(preDialog, postDialog);
     }
 }

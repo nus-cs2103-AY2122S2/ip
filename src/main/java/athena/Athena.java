@@ -9,6 +9,7 @@ import athena.parser.Parser;
 import athena.storage.Storage;
 import athena.tasks.TaskList;
 import athena.ui.MainWindow;
+import athena.ui.Messages;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -27,21 +28,18 @@ public class Athena extends Application {
     /**
      * Initializes the program by loading task data from disk if any and initializing all
      * requisite objects and data structures.
+     *
+     * @throws IOException If unable to load from disk.
      */
-    public Athena() {
+    public Athena() throws IOException {
         storage = new Storage(SAVE_DIRECTORY, SAVE_FILENAME);
-        initTaskList(); // Load save data if present
+        initTaskList();
         isActive = true;
     }
 
-    private void initTaskList() {
+    private void initTaskList() throws IOException {
         if (storage.hasExistingSave()) {
-            try {
-                taskList = storage.loadFromDisk();
-            } catch (IOException e) {
-                System.out.println("I couldn't load from disk. Opening new task list instead.");
-                taskList = new TaskList();
-            }
+            taskList = storage.loadFromDisk();
         } else {
             taskList = new TaskList();
         }
@@ -55,13 +53,14 @@ public class Athena extends Application {
             if (command instanceof ShutdownCommand) {
                 isActive = false;
             }
-        } catch (InputException e) { // return error message instead.
+        } catch (InputException e) { // return error message instead
             return e.getMessage();
         }
+
         try {
             saveIfTaskListModified();
         } catch (IOException e) {
-            response += "\nI encountered a problem saving to disk: " + e.getMessage();
+            response += "\n" + Messages.SAVE_ERROR_MESSAGE + e.getMessage();
         }
         return response;
     }
@@ -73,13 +72,17 @@ public class Athena extends Application {
         }
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
     @Override
     public void start(Stage stage) {
-        stage = new MainWindow(new Athena());
-        stage.show();
+        try {
+            stage = new MainWindow(new Athena());
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Fatal error: Could not load file from disk.");
+        }
     }
 }

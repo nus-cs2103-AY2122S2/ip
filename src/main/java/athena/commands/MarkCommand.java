@@ -1,7 +1,5 @@
 package athena.commands;
 
-import java.util.ArrayList;
-
 import athena.exceptions.InputErrorCode;
 import athena.exceptions.InputException;
 import athena.tasks.TaskList;
