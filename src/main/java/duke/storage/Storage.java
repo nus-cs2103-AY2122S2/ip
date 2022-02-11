@@ -102,6 +102,9 @@ public class Storage {
      */
     public void writeTasks(ArrayList<Task> tasks) {
 
+        assert this.taskFile.exists() : "The data file is missing,"
+                + " please restart the application";
+
         try {
             FileOutputStream writeData = new FileOutputStream(this.taskFile);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
