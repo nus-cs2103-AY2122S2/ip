@@ -1,6 +1,3 @@
-
-#Duke the Doggo
-Personal assistant to help you manage your tasks.
 # User Guide
 ## Features
 ### Feature-Add Tasks
@@ -14,7 +11,7 @@ Deadline - Task that needs to be completed by a specific time and/or date
 
 ### Feature-Mark Tasks
 Mark tasks as complete as you finish them.
-You can also unmark tasks that you may have mistakenly marked as done! :U+1F603:
+You can also unmark tasks that you may have mistakenly marked as done!
 
 ## Usage
 
