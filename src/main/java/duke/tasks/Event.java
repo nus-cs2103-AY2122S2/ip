@@ -68,6 +68,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        assert this.printedString != null;
         return this.isDone ? "[E][X] " + this.printedString
                 : "[E][ ] " + this.printedString;
     }

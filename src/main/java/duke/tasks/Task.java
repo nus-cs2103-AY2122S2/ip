@@ -18,6 +18,9 @@ public class Task {
      * @param isDone      whether the task is done
      */
     public Task(String type, String description, boolean isDone) {
+        assert type != null;
+        assert description != null;
+        assert isDone || !(isDone);
         this.type = type;
         this.description = description;
         this.isDone = isDone;

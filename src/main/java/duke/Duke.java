@@ -14,44 +14,34 @@ public class Duke {
     private Storage storage;
     private TaskList tasks = new TaskList();
 
-    /**
-     * Constructor of Duke that takes in a file path specifying the location of the
-     * storage file.
-     * @param filePath file path specifying the location of the storage file
-     */
     public Duke() {
         storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
+            System.out.println(Ui.showErrorMessage(e.getMessage()));
+        }
+    }
+    
+    /**
+     * Constructor of Duke that takes in a file path specifying the location of the
+     * storage file.
+     * @param filePath string specifying location of storage file 
+     */
+    public Duke(String filePath) {
+        assert filePath != null;
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            System.out.println(Ui.showErrorMessage(e.getMessage()));
         }
     }
 
-    /**
-     * Initiates the program and outlines the operation backbone of the program.
-     */
-    // public void run() {
-    //     ui.welcome();
-    //     boolean isExit = false;
-    //     while (!isExit) {
-    //         try {
-    //             String fullCommand = ui.readCommand();
-    //             ui.showLine(); // show the divider line ("_______")
-    //             Command c = Parser.parse(fullCommand);
-    //             c.execute(tasks, ui, storage);
-    //             isExit = c.isExit();
-    //         } catch (DukeException e) {
-    //             ui.showError(e.getMessage());
-    //         } finally {
-    //             ui.showLine();
-    //         }
-    //     }
-    // }
-
     public String getResponse(String fullCommand) throws DukeException {
-        Command c;
+        assert fullCommand != null;
         try {
-            c = Parser.parse(fullCommand);
+            Command c = Parser.parse(fullCommand);
             String response = c.execute(tasks, storage);
             
             return response;
