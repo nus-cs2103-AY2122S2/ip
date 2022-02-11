@@ -1,0 +1,10 @@
+list
+todo read book
+deadline return book /by 3 June
+event birthday party /at 16 June
+list
+mark 1
+UNMARK 01
+mark 2
+deadline do homework /by no idea :p
+bye
