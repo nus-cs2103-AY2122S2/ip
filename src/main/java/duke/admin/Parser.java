@@ -25,56 +25,55 @@ public class Parser {
      * @throws DukeException exception thrown when command is invalid or improper
      */
     public static Command parse(String fullCommand) throws DukeException {
-        assert fullCommand != null;
-        
-        String[] splitCommand = fullCommand.split(" ", 2);
+        String[] splitCommand = fullCommand.split(" ", 2); //splits command into action and details
         String action = splitCommand[0];
+        boolean descriptionExist = splitCommand.length > 1;
 
-        if (splitCommand.length > 1) {
+        if (descriptionExist) {
             description = splitCommand[1];
         }
 
         switch (action) {
         case "list":
-            if (splitCommand.length > 1) {
+            if (descriptionExist) {
                 throw new DukeException("There should not be anything else after list.");
             } else {
                 return new ListCommand();
             }
         case "mark":
-            if (splitCommand.length < 2) {
+            if (!(descriptionExist)) {
                 throw new DukeException("I don't know what to mark!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
                 return new MarkCommand(index);
             }
         case "unmark":
-            if (splitCommand.length < 2) {
+            if (!(descriptionExist)) {
                 throw new DukeException("I don't know what to unmark!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
                 return new UnmarkCommand(index);
             }
         case "todo":
-            if (splitCommand.length < 2) {
+            if (!(descriptionExist)) {
                 throw new DukeException("The description of a todo cannot be empty.");
             } else {
                 return new AddCommand("T", description);
             }
         case "deadline":
-            if (splitCommand.length < 2) {
+            if (!(descriptionExist)) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
                 return new AddCommand("D", description);
             }
         case "event":
-            if (splitCommand.length < 2) {
+            if (!(descriptionExist)) {
                 throw new DukeException("The description of an event cannot be empty.");
             } else {
                 return new AddCommand("E", description);
             }
         case "delete":
-            if (splitCommand.length < 2) {
+            if (!(descriptionExist)) {
                 throw new DukeException("I don't know what to delete!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;

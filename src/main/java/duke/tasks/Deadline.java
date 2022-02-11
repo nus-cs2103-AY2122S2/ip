@@ -30,11 +30,11 @@ public class Deadline extends Task {
         try {
             String[] splitDescription = description.split("/by ");
             if (splitDescription.length > 1) {
-                String[] dateTimeArray = splitDescription[1].split(" ");
+                String[] splitDateTime = splitDescription[1].split(" ");
 
-                if (dateTimeArray.length > 1) {
-                    this.deadlineDate = LocalDate.parse(dateTimeArray[0]);
-                    this.deadlineTime = LocalTime.parse(dateTimeArray[1]);
+                if (splitDateTime.length > 1) {
+                    this.deadlineDate = LocalDate.parse(splitDateTime[0]);
+                    this.deadlineTime = LocalTime.parse(splitDateTime[1]);
 
                     this.printedString = splitDescription[0] + " (by: "
                             + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "

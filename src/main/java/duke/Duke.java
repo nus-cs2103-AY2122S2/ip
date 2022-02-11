@@ -10,16 +10,16 @@ import duke.exceptions.DukeException;
  * Duke class is the main class of the program.
  */
 public class Duke {
-    private static String FILE_PATH = ".\\src\\main\\java\\duke\\data\\duke.txt";
+    private static String DEFAULT_FILE_PATH = ".\\src\\main\\java\\duke\\data\\duke.txt";
     private Storage storage;
-    private TaskList tasks = new TaskList();
+    private TaskList tasks;
 
     public Duke() {
-        storage = new Storage(FILE_PATH);
+        storage = new Storage(DEFAULT_FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            System.out.println(Ui.showErrorMessage(e.getMessage()));
+            tasks = new TaskList();
         }
     }
     
@@ -34,7 +34,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            System.out.println(Ui.showErrorMessage(e.getMessage()));
+            tasks = new TaskList();
         }
     }
 

@@ -89,7 +89,8 @@ public class TaskList {
         String listString = "";
         
         for (int i = 1; i <= tasks.size(); i++) {
-            String listElement = i + "." + tasks.get(i - 1).toString();
+            Task task = tasks.get(i - 1);
+            String listElement = i + "." + task.toString();
 
             listString = listString + listElement + System.lineSeparator();
         }
@@ -106,15 +107,18 @@ public class TaskList {
         ArrayList<Task> searchResults = new ArrayList<>();
 
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).toString().contains(keyword)) {
-                searchResults.add(tasks.get(i));
+            Task task = tasks.get(i);
+            String taskAsString = task.toString();
+            if (taskAsString.contains(keyword)) {
+                searchResults.add(task);
             }
         }
 
         String searchResultString = "";
 
         for (int j = 1; j <= searchResults.size(); j++) {
-            String result = j + ". " + searchResults.get(j - 1).toString();
+            Task matchedTask = searchResults.get(j - 1);
+            String result = j + ". " + matchedTask.toString();
             searchResultString = searchResultString + result + System.lineSeparator();
         }
 

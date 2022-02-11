@@ -30,13 +30,13 @@ public class Event extends Task {
         try {
             String[] splitDescription = description.split("/at ");
             if (splitDescription.length > 1) {
-                String[] dateTimeArray = splitDescription[1].split(" ");
+                String[] splitDateTime = splitDescription[1].split(" ");
 
-                if (dateTimeArray.length > 1) {
-                    this.eventDate = LocalDate.parse(dateTimeArray[0]);
-                    this.eventTime = LocalTime.parse(dateTimeArray[1]);
+                if (splitDateTime.length > 1) {
+                    this.eventDate = LocalDate.parse(splitDateTime[0]);
+                    this.eventTime = LocalTime.parse(splitDateTime[1]);
 
-                    this.printedString = dateTimeArray[0] + " (by: "
+                    this.printedString = splitDateTime[0] + " (by: "
                             + this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
                             + this.eventTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
                 } else {
