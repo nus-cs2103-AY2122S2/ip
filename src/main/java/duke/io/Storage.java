@@ -32,17 +32,17 @@ public class Storage {
      *
      * @param folderName folder name to create the save file.
      * @param fileName name of save file.
-     * @param arr list of tasks to be saved.
+     * @param taskList list of tasks to be saved.
      * @return 0: save success, -1: error encountered.
      */
-    public static int saveFile(String folderName, String fileName, TaskList arr) {
+    public static int saveFile(String folderName, String fileName, TaskList taskList) {
         try {
             Files.createDirectories(Paths.get(folderName));
             String filePath = folderName + "/" + fileName;
             File myObj = new File(filePath);
             myObj.createNewFile();
             FileWriter writer = new FileWriter(filePath);
-            writer.write(arr.toFileString());
+            writer.write(taskList.toFileString());
             writer.close();
             return 0;
         } catch (IOException e) {
