@@ -14,7 +14,7 @@ import duke.task.TaskManager;
  */
 public class Ui {
 
-    private static final String WELCOME_MESSAGE = "Hello, this is main.Duke!\nWhat can I do for you today?";
+    private static final String WELCOME_MESSAGE = "Hello, this is Duke!\nWhat can I do for you today?";
     private static final String OUTPUT_PREFIX = ">> ";
     private static final String SEE_YOU_MESSAGE = "Bye!";
     private static final String PROMPT_INSTRUCTION_MESSAGE = "What else can I do for you?";
