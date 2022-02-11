@@ -11,15 +11,15 @@ import istjbot.ui.Ui;
 
 /**
  * Encapsulates a chat-bot that interacts with a user in a way that
- * the user gives out a command, which is then executed by the bot and prints out the
- * result back.
+ * the user gives out a command, which is then executed by the bot and shows the
+ * result through GUI.
  */
 public class IstjBot {
     /** Storage for saving and loading the tasks to and from an external txt file. */
     private Storage storage;
     /** TaskList for actual adding, modifying, and searching of tasks. */
     private TaskList tasks;
-    /** Ui for printing out messages to be read by the user. */
+    /** text-part of the User Interface. */
     private Ui ui;
 
     private boolean isExit = false;
@@ -38,7 +38,6 @@ public class IstjBot {
             this.ui = new Ui();
             this.storage = new Storage(filePath);
             this.tasks = new TaskList(storage.load());
-
         } catch (IOException | BotException e) {
             existsConstructorError = true;
             constructorError = e.getMessage();
@@ -46,6 +45,12 @@ public class IstjBot {
         }
     }
 
+    /**
+     * Returns a String of response from IstjBot.
+     *
+     * @param input String of user input.
+     * @return String of response from IstjBot.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -56,14 +61,29 @@ public class IstjBot {
         }
     }
 
+    /**
+     * Returns a boolean whether the IstjBot should cease its operation.
+     *
+     * @return Boolean that tells whether to cease IstjBot's operation.
+     */
     public boolean shouldExitIstjBot() {
         return isExit;
     }
 
+    /**
+     * Returns a boolean whether any error occurred when constructing the IstjBot.
+     *
+     * @return Boolean that tells whether constructor method raised an error.
+     */
     public boolean existsConstructorError() {
         return existsConstructorError;
     }
 
+    /**
+     * Returns a String of error message when constructing the IstjBot.
+     *
+     * @return String of error message.
+     */
     public String showConstructorError() {
         return constructorError;
     }

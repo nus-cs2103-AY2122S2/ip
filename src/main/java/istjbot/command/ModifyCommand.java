@@ -5,6 +5,9 @@ import istjbot.storage.Storage;
 import istjbot.task.TaskList;
 import istjbot.ui.Ui;
 
+/**
+ * Encapsulates the procedure of modifying (marking, un-marking) and deleting of a task.
+ */
 public class ModifyCommand extends Command {
 
     public ModifyCommand(CommandEnum commandEnum, String fullCommand) {
@@ -18,21 +21,7 @@ public class ModifyCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        String[] commandInfo = this.getFullCommand().split(" ");
-
-        if (commandInfo.length != 2) {
-            throw new BotException("As an IstjBot, I don't think that is a proper index.");
-        }
-
-        int taskNumber;
-        try {
-            taskNumber = Integer.parseInt(commandInfo[1]);
-        } catch (NumberFormatException e) {
-            throw new BotException("As an IstjBot, I don't think that is a proper index.");
-        }
-        if (taskNumber < 1 || taskNumber > tasks.taskListSize()) {
-            throw new BotException("As an IstjBot, I don't think that is a proper index.");
-        }
+        int taskNumber = extractTaskNumber(tasks);
 
         switch (this.getCommandEnum()) {
         case MARK:
@@ -53,5 +42,24 @@ public class ModifyCommand extends Command {
         default:
             return null;
         }
+    }
+
+    private int extractTaskNumber(TaskList tasks) throws BotException {
+        String[] commandInfo = this.getFullCommand().split(" ");
+
+        if (commandInfo.length != 2) {
+            throw new BotException("As an IstjBot, I don't think that is a proper index.");
+        }
+
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(commandInfo[1]);
+        } catch (NumberFormatException e) {
+            throw new BotException("As an IstjBot, I don't think that is a proper index.");
+        }
+        if (taskNumber < 1 || taskNumber > tasks.taskListSize()) {
+            throw new BotException("As an IstjBot, I don't think that is a proper index.");
+        }
+        return taskNumber;
     }
 }

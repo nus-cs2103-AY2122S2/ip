@@ -35,17 +35,29 @@ public class AddCommand extends Command {
      * Executes the procedure of adding a specific type of task.
      *
      * @param tasks TaskList responsible for adding the task specified by the user.
-     * @param ui Ui responsible for printing out the final messages displayed to the user.
+     * @param ui Text part of the User Interface.
      * @param storage Storage responsible for saving the added tasks into an external file.
      * @throws BotException When the task cannot be generated due to incomplete information provided.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+        String[] taskInfo = extractTaskInfo();
+        try {
+            tasks.addTask(this.getCommandEnum(), taskInfo[0], taskInfo[1]);
+        } catch (DateTimeParseException e) {
+            throw new BotException("As an IstjBot, I don't think that is a proper date you entered.");
+        }
+        storage.save(tasks);
+        return ui.showTaskAdded(tasks.taskListSize(), tasks.taskString(tasks.taskListSize()));
+    }
+
+    private String[] extractTaskInfo() throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
         if (commandInfo.length == 1) {
             throw new BotException("As an IstjBot, I cannot find any description for your task.");
         }
+
         String description = "";
         int modifier = -1;
         boolean modifierFound = false;
@@ -88,17 +100,6 @@ public class AddCommand extends Command {
             throw new BotException("As an IstjBot, I cannot add a special task with no timing attached.");
         }
 
-        // TaskList
-        try {
-            tasks.addTask(this.getCommandEnum(), description, modifierMessage);
-        } catch (DateTimeParseException e) {
-            throw new BotException("As an IstjBot, I don't think that is a proper date you entered.");
-        }
-
-        // Storage
-        storage.save(tasks);
-
-        // Ui
-        return ui.showTaskAdded(tasks.taskListSize(), tasks.taskString(tasks.taskListSize()));
+        return new String[]{description, modifierMessage};
     }
 }
