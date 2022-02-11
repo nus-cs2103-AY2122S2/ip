@@ -5,7 +5,7 @@ package duke;
  */
 public class Todo extends Task {
 
-    private static String TODO_EMPTY_DESCRIPTION = "TODO task must have a non-empty description!";
+    private static String TODO_EMPTY_DESCRIPTION = "TODO task must not have an empty description!";
 
     /**
      * Initialise todo task with a description (task name)

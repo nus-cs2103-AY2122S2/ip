@@ -41,7 +41,12 @@ public class Duke {
      * @return Returns the successfully marked message or invalid_task_index_error message if given index is invalid
      */
     public String runMarkCommand(String input) {
-        int itemIndex = Integer.parseInt(input.split(" ")[1]);
+        String[] inputSplit = input.split(" ");
+
+        Boolean isValidInput = inputSplit.length == 2;
+        assert isValidInput : "invalid input command!";
+
+        int itemIndex = Integer.parseInt(inputSplit[1]);
         try {
             Task selectedTask = tasks.getTask(itemIndex - 1);
             selectedTask.markAsComplete();
@@ -58,7 +63,12 @@ public class Duke {
      * @return Returns the successfully unmarked message or invalid_task_index_error message if given index is invalid
      */
     public String runUnmarkCommand(String input) {
-        int itemIndex = Integer.parseInt(input.split(" ")[1]);
+        String[] inputSplit = input.split(" ");
+
+        Boolean isValidInput = inputSplit.length == 2;
+        assert isValidInput : "invalid input command!";
+
+        int itemIndex = Integer.parseInt(inputSplit[1]);
         try {
             Task selectedTask = tasks.getTask(itemIndex - 1);
             selectedTask.markAsIncomplete();
@@ -125,11 +135,6 @@ public class Duke {
      */
     public String runTodoCommand(String input) {
         String taskName = input.replaceAll("todo", "");
-
-        if (input.split(" ").length < 2) {
-            return Ui.TASK_INVALID_NAME_ERROR;
-        }
-
         Todo newTodo = new Todo(taskName);
         tasks.addTask(newTodo);
         return Ui.displayListedText(newTodo, tasks.getSize());
@@ -143,26 +148,34 @@ public class Duke {
      * message if given an invalid task index
      */
     public String runDeleteCommand(String input) {
-        if (input.split("").length < 2) {
-           return Ui.INVALID_INDEX_ERROR;
-        }
+        String[] inputSplit = input.split(" ");
 
-        int taskIndex = Integer.parseInt(input.split(" ")[1]);
+        Boolean isValidInput = inputSplit.length == 2;
+        assert isValidInput : "invalid input command!";
+
+        int taskIndex = Integer.parseInt(inputSplit[1]) - 1;
         try {
-            Task deletedTask = tasks.removeTaskIndex(taskIndex - 1);
-            if (deletedTask.getEventType() == Type.EVENT) {
+            Task deletedTask = tasks.removeTaskIndex(taskIndex);
+
+            Boolean taskIsEvent = deletedTask.getEventType() == Type.EVENT;
+            Boolean taskIsDeadline = deletedTask.getEventType() == Type.DEADLINE;
+            Boolean taskIsTodo = deletedTask.getEventType() == Type.TODO;
+
+            if (taskIsEvent) {
                 Event deletedEvent = (Event) deletedTask;
                 return Ui.displayDeletedMessage(deletedEvent, tasks.getSize());
-            } else if (deletedTask.getEventType() == Type.DEADLINE) {
+            } else if (taskIsDeadline) {
                 Deadline deletedDeadline = (Deadline) deletedTask;
                 return Ui.displayDeletedMessage(deletedDeadline, tasks.getSize());
-            } else if (deletedTask.getEventType() == Type.TODO) {
+            } else if (taskIsTodo) {
                 Todo deletedTodo = (Todo) deletedTask;
                 return Ui.displayDeletedMessage(deletedTodo, tasks.getSize());
             }
             // code should be EVENT/DEADLINE/TODO
             assert false;
+
         } catch (IndexOutOfBoundsException err) {
+            // if index provided by user is invalid
             return Ui.INVALID_INDEX_ERROR;
         }
 
@@ -174,21 +187,61 @@ public class Duke {
      * Find task with search term provided by user
      *
      * @param input Input text from user
-     * @return Returns the successfully found tasks or invalid_index_error
-     * message if given an invalid task index
+     * @return Returns the successfully found tasks or INVALID_SEARCH_TERM
+     * OR SEARCH_TERM_NOT_FOUND message if given an invalid task index
      */
     public String runFindCommand(String input) {
-        String searchTerm = input.split(" ")[1];
-        if (searchTerm == "") {
+        String[] inputSplit = input.split(" ");
+
+        Boolean isInvalidInput = inputSplit.length < 2;
+        assert isInvalidInput : "invalid input command!";
+
+        String searchTerm = inputSplit[1];
+        Boolean isEmptySearchTerm = searchTerm == "";
+
+        if (isEmptySearchTerm) {
             return Ui.INVALID_SEARCH_TERM;
         }
 
         TaskList foundTasks = tasks.findTask(searchTerm);
-        if (foundTasks.getSize() < 1) {
+        Boolean matchingTaskNotFound = foundTasks.getSize() < 1;
+
+        if (matchingTaskNotFound) {
             return Ui.SEARCH_TERM_NOT_FOUND;
         }
 
         return Ui.displayFoundTaskList(foundTasks);
+    }
+
+    /**
+     * Tag specified task with tag term provided by user
+     *
+     * @param input Input text from user
+     * @return Returns the successfully tagged task or INVALID_TAG_ERROR
+     * message if given an invalid task index
+     */
+    public String runTagCommand(String input) {
+        String[] inputSplit = input.split(" ");
+
+        Boolean invalidCommandFormat = inputSplit.length != 3;
+        if (invalidCommandFormat) {
+            return Ui.INVALID_TAG_TERM;
+        }
+
+        String tag = inputSplit[2];
+        Boolean isEmptyTag = tag == "";
+        if (isEmptyTag) {
+            return Ui.EMPTY_TAG_TERM;
+        }
+
+        int taskIndex = Integer.parseInt(inputSplit[1]) - 1;
+        try {
+            Task taggedTask = tasks.tagTask(taskIndex, tag);
+            return Ui.displayTaggedMessage(taggedTask);
+
+        } catch (IndexOutOfBoundsException err) {
+            return Ui.INVALID_INDEX_ERROR;
+        }
     }
 
     /**
@@ -225,6 +278,9 @@ public class Duke {
         case FIND:
             return runFindCommand(input);
 
+        case TAG:
+            return runTagCommand(input);
+
         case BYE:
             try {
                 storage.saveListOnDisk(tasks);
@@ -232,7 +288,10 @@ public class Duke {
                 System.out.println("Error occurred while trying to save list data to disk");
                 err.printStackTrace();
             }
-            return this.ui.displayExitMsg();
+            return Ui.displayExitMsg();
+
+        case ERROR:
+            return Ui.displayInvalidCommandError();
 
         default:
             assert false;

@@ -51,7 +51,20 @@ public class TaskList {
     }
 
     public ArrayList<Task> getTasks() {
-        return tasks;
+        return this.tasks;
+    }
+
+    /**
+     * Tag task with a specified tag
+     *
+     * @param index Index of task to be tagged
+     * @param tag Tag text
+     * @return The tagged task
+     */
+    public Task tagTask(int index, String tag) {
+        Task taskToTag = getTask(index);
+        taskToTag.addTag(tag);
+        return taskToTag;
     }
 
     public int getSize() {

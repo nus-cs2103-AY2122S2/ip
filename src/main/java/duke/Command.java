@@ -12,6 +12,7 @@ public enum Command {
     TODO,
     DELETE,
     FIND,
+    TAG,
     BYE,
     ERROR
 }

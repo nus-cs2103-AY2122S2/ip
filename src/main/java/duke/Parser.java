@@ -21,28 +21,32 @@ public class Parser {
      */
     public static Command parse(String input) {
         String[] inputSplit = input.split(" ");
+        Boolean isNonEmptyCommand = inputSplit.length > 0;
 
-        if (inputSplit.length > 0) {
+        if (isNonEmptyCommand) {
             String commandString = inputSplit[0];
+            Boolean isValidCommand = inputSplit.length > 1;
 
             if (commandString.equals("bye")) {
                 return Command.BYE;
             } else if (commandString.equals("list")) {
                 return Command.LIST;
-            } else if (commandString.equals("mark")) {
+            } else if (commandString.equals("mark") && isValidCommand) {
                 return Command.MARK;
-            } else if (commandString.equals("unmark")) {
+            } else if (commandString.equals("unmark") && isValidCommand) {
                 return Command.UNMARK;
-            } else if (commandString.equals("deadline")) {
+            } else if (commandString.equals("deadline") && isValidCommand) {
                 return Command.DEADLINE;
-            } else if (commandString.equals("event")) {
+            } else if (commandString.equals("event") && isValidCommand) {
                 return Command.EVENT;
-            } else if (commandString.equals("todo")) {
+            } else if (commandString.equals("todo") && isValidCommand) {
                 return Command.TODO;
-            } else if (commandString.equals("delete")) {
+            } else if (commandString.equals("delete") && isValidCommand) {
                 return Command.DELETE;
-            } else if (commandString.equals("find")) {
+            } else if (commandString.equals("find") && isValidCommand) {
                 return Command.FIND;
+            } else if (commandString.equals("tag") && isValidCommand) {
+                return Command.TAG;
             } else {
                 return Command.ERROR;
             }
@@ -55,6 +59,13 @@ public class Parser {
         return LocalDateTime.parse(time, timeFormatter);
     }
 
+    /**
+     * Parse datetime from string with default date time
+     * format of D/MM/YYYY HHmm eg. 9/11/2001 1900
+     *
+     * @param dateTime String text of date time to be parsed
+     * @return LocalDateTime object of date time from string input
+     */
     public static LocalDateTime parseDateTime(String dateTime) {
         return LocalDateTime.parse(dateTime, dateTimeFormatter);
     }
@@ -90,9 +101,11 @@ public class Parser {
         String[] timingSplit = fullDateString.split("to");
         String[] eventTimings = extractEventDateTimings(timingSplit);
 
+        Boolean missingStartEndTimings = eventTimings.length < 2;
+
         // if user input does NOT contain start and end timing
         // in the given format
-        if (eventTimings.length < 2) {
+        if (missingStartEndTimings) {
             return Ui.EVENT_INVALID_TIMINGS_ERROR;
         } else {
             return String.join(",", eventTimings);
@@ -101,8 +114,9 @@ public class Parser {
 
     public static String getDeadlineTiming(String text) {
         String[] inputSplit = text.split("/by");
+        Boolean missingDeadlineTiming = inputSplit.length < 2;
 
-        if (inputSplit.length < 2) {
+        if (missingDeadlineTiming) {
             return Ui.DEADLINE_INVALID_TIMINGS_ERROR;
         }
 
