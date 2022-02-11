@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 /**
  * Represents exit command.
- * change state of isExit().
+ * Changes state of isExit().
  */
 public class ExitCommand extends Command {
     public ExitCommand() {
@@ -26,7 +26,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * check and change the command exit to true.
+     * Returns command exit status is true.
      */
     @Override
     public boolean isExit() {

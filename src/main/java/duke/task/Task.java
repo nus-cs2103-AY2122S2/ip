@@ -4,27 +4,27 @@ import java.time.LocalDate;
 
 public class Task {
     private final String task;
-    private final boolean done;
+    private final boolean isDone;
 
     /**
-     * Task class.
+     * Represents Task class.
      *
      * @param task tasks for task.
      */
     public Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
-     * Task class for modify status.
+     * Changes status by generating new Task.
      *
      * @param task tasks for task.
-     * @param done done status.
+     * @param isDone done status.
      */
-    public Task(String task, boolean done) {
+    public Task(String task, boolean isDone) {
         this.task = task;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public Task mark() {
@@ -48,11 +48,11 @@ public class Task {
     }
 
     public int getDoneStatus() {
-        return done ? 1 : 0;
+        return isDone ? 1 : 0;
     }
 
     @Override
     public String toString() {
-        return done ? "[\u2713] " + task : "[\u2003] " + task;
+        return isDone ? "[\u2713] " + task : "[\u2003] " + task;
     }
 }

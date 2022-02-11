@@ -30,17 +30,17 @@ public class Storage {
      * Loads from file
      */
     public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
         try {
-            loadFileHandler(list, file);
+            loadFileHandler(taskList, file);
         } catch (FileNotFoundException e) {
             Ui ui = new Ui();
             if (file.getParentFile().mkdirs()) {
                 createOrReadFile(file, ui);
             }
         }
-        return list;
+        return taskList;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Storage {
         }
     }
 
-    private void loadFileHandler(ArrayList<Task> list, File file) throws FileNotFoundException, DukeException {
+    private void loadFileHandler(ArrayList<Task> taskList, File file) throws FileNotFoundException, DukeException {
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             List<String> input = Arrays.asList(sc.nextLine().split(" \\| "));
@@ -70,24 +70,24 @@ public class Storage {
             switch (input.get(0)) {
             case "T":
                 ToDo newTodo = new ToDo(input.get(2).trim());
-                list.add(newTodo);
+                taskList.add(newTodo);
                 if (input.get(1).equals("1")) {
-                    list.set(list.indexOf(newTodo), newTodo.mark());
+                    taskList.set(taskList.indexOf(newTodo), newTodo.mark());
                 }
                 break;
             case "D":
                 Deadline newDeadline = new Deadline(input.get(2).trim(),
                         LocalDate.parse(input.get(3).trim(), formatter));
-                list.add(newDeadline);
+                taskList.add(newDeadline);
                 if (input.get(1).equals("1")) {
-                    list.set(list.indexOf(newDeadline), newDeadline.mark());
+                    taskList.set(taskList.indexOf(newDeadline), newDeadline.mark());
                 }
                 break;
             case "E":
                 Event newEvent = new Event(input.get(2).trim(), LocalDate.parse(input.get(3).trim(), formatter));
-                list.add(newEvent);
+                taskList.add(newEvent);
                 if (input.get(1).equals("1")) {
-                    list.set(list.indexOf(newEvent), newEvent.mark());
+                    taskList.set(taskList.indexOf(newEvent), newEvent.mark());
                 }
                 break;
             default:

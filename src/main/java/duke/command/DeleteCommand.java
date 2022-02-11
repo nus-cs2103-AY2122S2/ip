@@ -7,7 +7,7 @@ import duke.ui.Ui;
 
 /**
  * Represents delete command.
- * inherit from Command.
+ * Inherits from Command.
  */
 public class DeleteCommand extends Command {
     private final int deleteIndex;
@@ -23,8 +23,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Change tasks after delete.
-     * Update the storage.
+     * Changes tasks after delete.
+     * Updates the storage.
      *
      * @param tasks   the entire TaskList.
      * @param ui      the ui interface and messages.

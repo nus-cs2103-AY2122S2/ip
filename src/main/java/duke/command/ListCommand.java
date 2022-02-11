@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * call and format the string out put of list.
+     * Calls and formats the string out put of list.
      *
      * @param tasks   the entire TaskList.
      * @param ui      the ui interface and messages.

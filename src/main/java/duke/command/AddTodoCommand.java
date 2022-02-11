@@ -7,7 +7,7 @@ import duke.ui.Ui;
 
 /**
  * Represents add new to do command.
- * inherit from Command.
+ * Inherits from Command.
  */
 public class AddTodoCommand extends Command {
     private final ToDo newTodo;

@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 /**
  * Represents mark command.
- * inherit from Command.
+ * Inherits from Command.
  */
 public class MarkCommand extends Command {
     private final int markIndex;
@@ -22,8 +22,8 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Change one task of tasks after mark.
-     * Update the storage.
+     * Changes one task of tasks after mark.
+     * Updates the storage.
      *
      * @param tasks   the entire TaskList.
      * @param ui      the ui interface and messages.

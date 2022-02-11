@@ -13,7 +13,7 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Main class of the Duke application that connect Ui Storage and TaskList
+     *  Connects Ui Storage and TaskList Main class of the Duke application
      *
      * @param filePath the file location.
      */
@@ -29,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Function to generate a response to user input.
+     * Generates a response to user input.
      */
     public String getResponse(String input) throws DukeException {
         try {

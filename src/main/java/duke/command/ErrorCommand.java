@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 /**
  * Represents error command.
- * inherit from Command.
+ * Inherits from Command.
  */
 public class ErrorCommand extends Command {
     private final String err;
@@ -22,7 +22,7 @@ public class ErrorCommand extends Command {
     }
 
     /**
-     * return error Message.
+     * Returns error Message.
      *
      * @param tasks   the entire TaskList.
      * @param ui      the ui interface and messages.

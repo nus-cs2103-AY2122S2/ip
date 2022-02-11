@@ -19,7 +19,7 @@ public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
-     * check and make sure the command exit is false.
+     * Returns command exit status is false.
      */
     public boolean isExit() {
         return false;

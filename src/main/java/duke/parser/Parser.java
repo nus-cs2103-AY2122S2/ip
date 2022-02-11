@@ -63,7 +63,7 @@ public class Parser {
     }
 
     /**
-     * Convert date String to LocalDate
+     * Converts date String to LocalDate
      *
      * @param dateText text to be parsed.
      */

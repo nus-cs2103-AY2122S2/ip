@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 /**
  * Represents unmark command.
- * inherit from Command.
+ * Inherits from Command.
  */
 public class UnmarkCommand extends Command {
     private final int unmarkIndex;
@@ -22,8 +22,8 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Change one task of tasks after unmark.
-     * Update the storage.
+     * Changes one task of tasks after unmark.
+     * Updates the storage.
      *
      * @param tasks   the entire TaskList.
      * @param ui      the ui interface and messages.

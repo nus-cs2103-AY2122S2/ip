@@ -19,7 +19,7 @@ public class Ui {
     }
 
     /**
-     * Ui class.
+     * Represents Ui class.
      *
      * @param in  input Stream.
      * @param out output Stream.

@@ -6,14 +6,14 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * TaskList class.
+     * Represents TaskList class.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * TaskList class for modify tasks.
+     * Represents TaskList class for modify tasks.
      *
      * @param tasks tasks for list.
      */
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * TaskList class for adding new task.
+     * Represents TaskList class for adding new task.
      *
      * @param task task to be added.
      */
@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * TaskList class for removing task.
+     * Represents TaskList class for removing task.
      *
      * @param index tasks index for removing.
      */

@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(Objects.requireNonNull(

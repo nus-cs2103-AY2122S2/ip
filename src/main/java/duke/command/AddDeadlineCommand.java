@@ -7,7 +7,7 @@ import duke.ui.Ui;
 
 /**
  * Represents add new deadline command
- * inherit from Command
+ * Inherits from Command
  */
 public class AddDeadlineCommand extends Command {
     private final duke.task.Deadline newDeadline;

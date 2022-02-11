@@ -7,7 +7,7 @@ import duke.ui.Ui;
 
 /**
  * Represents add new event command.
- * inherit from Command.
+ * Inherits from Command.
  */
 public class AddEventCommand extends Command {
     private final Event newEvent;

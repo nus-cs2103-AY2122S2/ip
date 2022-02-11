@@ -7,7 +7,7 @@ public class Event extends Task {
     private final LocalDate at;
 
     /**
-     * Event class.
+     * Represents task Event class.
      *
      * @param task tasks for event.
      * @param at   time at.
@@ -18,14 +18,14 @@ public class Event extends Task {
     }
 
     /**
-     * Event class change done status.
+     * Changes done status by generating new Task.
      *
      * @param task tasks for event.
      * @param at   time at.
-     * @param done done status.
+     * @param isDone done status.
      */
-    public Event(String task, LocalDate at, boolean done) {
-        super(task, done);
+    public Event(String task, LocalDate at, boolean isDone) {
+        super(task, isDone);
         this.at = at;
     }
 
@@ -41,8 +41,8 @@ public class Event extends Task {
 
     @Override
     public String saveData() {
-        int done = super.getDoneStatus();
-        return Type.E + " | " + done + " | " + super.getTask() + " | " + at;
+        int isDone = super.getDoneStatus();
+        return Type.E + " | " + isDone + " | " + super.getTask() + " | " + at;
     }
 
     @Override

@@ -2,7 +2,7 @@ package duke.task;
 
 public class ToDo extends Task {
     /**
-     * To-do class.
+     * Represents To-do class.
      *
      * @param task tasks for to-do.
      */
@@ -11,13 +11,13 @@ public class ToDo extends Task {
     }
 
     /**
-     * To-do class change done status.
+     * Changes done status.
      *
      * @param task tasks for deadline.
-     * @param done done status.
+     * @param isDone done status.
      */
-    public ToDo(String task, boolean done) {
-        super(task, done);
+    public ToDo(String task, boolean isDone) {
+        super(task, isDone);
     }
 
     @Override
@@ -32,8 +32,8 @@ public class ToDo extends Task {
 
     @Override
     public String saveData() {
-        int done = super.getDoneStatus();
-        return Type.T + " | " + done + " | " + super.getTask();
+        int isDone = super.getDoneStatus();
+        return Type.T + " | " + isDone + " | " + super.getTask();
     }
 
     @Override
