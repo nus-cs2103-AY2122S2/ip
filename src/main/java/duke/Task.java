@@ -7,19 +7,19 @@ import java.time.format.DateTimeFormatter;
  * Represent a task to complete
  */
 public class Task {
-    public boolean isDone;
-    public String task;
-    public String type;
-    public String time;
-    public LocalDate date;
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+    boolean isDone;
+    protected final String task;
+    protected final String type;
+    protected final String time;
+    protected LocalDate date;
+    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
      * Constructor of task
      * @param task Description of the task
      * @param type Type of the task
      */
-    public Task(String task, String type) {
+    Task(String task, String type) {
         this.isDone = false;
         this.task = task;
         this.type = type;
