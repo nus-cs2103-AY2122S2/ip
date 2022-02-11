@@ -60,20 +60,24 @@ public class Storage {
      * Writes the Tasklist to a file.
      * 
      * @param list The Tasklist to be exported.
-     * @throws IOException If a problem arose.
+     * @throws LilyException If the file could not be written.
      */
-    public void save(TaskList list) throws IOException {
-        if (!list.isEmpty()) {
-            File dataFolder = new File("./data");
-            if (!dataFolder.exists()) {
-                dataFolder.mkdir();
+    public void save(TaskList list) throws LilyException {
+        try {
+            if (!list.isEmpty()) {
+                File dataFolder = new File("./data");
+                if (!dataFolder.exists()) {
+                    dataFolder.mkdir();
+                }
+    
+                FileOutputStream fos = new FileOutputStream(filePath);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(list.getContents());
+                oos.close();
+                fos.close();
             }
-
-            FileOutputStream fos = new FileOutputStream(filePath);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(list.getContents());
-            oos.close();
-            fos.close();
+        } catch (IOException e) {
+            throw new LilyException(LilyException.ERROR_WRITE_FILE);
         }
     }
 }

@@ -17,11 +17,11 @@ public class Task implements Serializable{
     /**
      * Create a Task.
      * 
-     * @param desc What the Task is about.
+     * @param description What the Task is about.
      */
-    public Task(String desc) {
-        this.desc = desc;
-        this.isDone = false;
+    public Task(String description) {
+        desc = description;
+        isDone = false;
     }
 
     /**
@@ -36,27 +36,31 @@ public class Task implements Serializable{
     /**
      * Mark the task as done.
      * 
+     * @return this task after it is done
      * @throws LilyException If user has finished the task already.
      */
-    public void mark() throws LilyException {
+    public Task mark() throws LilyException {
         if (isDone) {
             throw new LilyException(LilyException.ERROR_ALREADY_MARKED);
-        } else {
-            isDone = true;
         }
+
+        isDone = true;
+        return this;
     }
 
     /**
      * Mark the task as undone.
      * 
+     * @return this task after it is undone
      * @throws LilyException If user hasn't done the task yet.
      */
-    public void unmark() throws LilyException {
+    public Task unmark() throws LilyException {
         if (!isDone) {
             throw new LilyException(LilyException.ERROR_ALREADY_UNMARKED);
-        } else {
-            isDone = false;
         }
+
+        isDone = false;
+        return this;
     }
 
     /**
