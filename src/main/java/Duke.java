@@ -1,9 +1,23 @@
 import bot.Bot;
-import taskservice.FileSystemTaskService;
+
+import parser.Parser;
+
+import storage.Storage;
+
+import tasklist.StorageTaskList;
+import tasklist.TaskList;
+
+import ui.Ui;
 
 public class Duke {
+    private static final String APP_PATH = "/test";
+
     public static void main(String[] args) throws Exception {
-        final Bot bot = new Bot(new FileSystemTaskService("/test"));
-        bot.start(System.in, System.out);
+        final Parser parser = new Parser();
+        final Ui ui = new Ui(System.in, System.out);
+        final TaskList taskList = new StorageTaskList(new Storage(Duke.APP_PATH));
+
+        final Bot bot = new Bot(parser, ui, taskList);
+        bot.run();
     }
 }
