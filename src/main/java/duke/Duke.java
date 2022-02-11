@@ -19,7 +19,7 @@ public class Duke {
             bufferResponse(e.getMessage());
             this.parser = new Parser();
         }
-        //bufferResponse(Ui.GREETING_MESSAGE);
+        bufferResponse(Ui.GREETING_MESSAGE);
     }
 
     public void generateOutput(String input) {
@@ -31,7 +31,7 @@ public class Duke {
         outputQueue.add(response);
     }
     
-    public String getNextResponse() {
+    public String pollNextResponse() {
         return outputQueue.poll();
     }
 

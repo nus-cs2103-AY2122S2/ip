@@ -1,6 +1,7 @@
 package duke;
 import java.io.IOException;
 
+import duke.commands.Command;
 import duke.exceptions.CorruptedSaveException;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidItemNumberException;
@@ -45,7 +46,7 @@ public class Parser {
 
         try {
             switch (command) {
-            case "bye":
+            case Command.BYE_COMMAND:
                 return byeMessage();
             case "list":
                 return tasks.listItems();
