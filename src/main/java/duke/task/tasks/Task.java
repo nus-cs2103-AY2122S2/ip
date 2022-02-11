@@ -25,7 +25,7 @@ public abstract class Task {
      * @param word keyword search
      * @return keyword exists inside the string taskname
      */
-    public boolean contains(String word) {
+    public boolean hasWord(String word) {
         return taskName.contains(word);
     }
 
@@ -52,7 +52,7 @@ public abstract class Task {
      * @return String representation of the current state of the task.
      */
     public String getStatusIcon() {
-        return isDone? "X": " ";
+        return isDone ? "X" : " ";
     }
 
     @Override
