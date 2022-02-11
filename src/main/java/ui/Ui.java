@@ -29,6 +29,14 @@ public class Ui {
     }
 
     /**
+     * User greeting
+     * @return String message to greet user when the bot is started.
+     */
+    public static String greetUser() {
+        return "Hello! I'm main.Duke :) \nWhat can I do for you? :D";
+    }
+
+    /**
      * Displays appropriate error messages.
      * @param e DukeException for the error caused by incorrect user input.
      * @returns Error message.
