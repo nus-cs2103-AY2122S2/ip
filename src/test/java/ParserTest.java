@@ -31,8 +31,7 @@ class ParserTest {
 
     @Test
     public void testInputToDo() throws IOException {
-        Parser.parse(new TaskList(new ArrayList<Task>(), new Storage("bobby.txt")), "todo 2103 iP",
-                new Bobby("bobby.txt"));
+        Parser.parse(new TaskList(new ArrayList<Task>(), new Storage("bobby.txt")), "todo 2103 iP");
         assertEquals("Bobby heard: [T][ ] 2103 iP" + System.lineSeparator()
                 + "Bobby remembers 1 task(s).", outputStreamCaptor.toString().trim());
     }
@@ -40,15 +39,14 @@ class ParserTest {
     @Test
     public void testInputDeadLine() throws IOException {
         Parser.parse(new TaskList(new ArrayList<Task>(), new Storage("bobby.txt")),
-                "deadline cs2106 quiz /by 2022-01-31", new Bobby("bobby.txt"));
+                "deadline cs2106 quiz /by 2022-01-31");
         assertEquals("Bobby heard: [D][ ] cs2106 quiz (by: Jan 31 2022)" + System.lineSeparator()
                 + "Bobby remembers 1 task(s).", outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void parseInputs_invalidInputs_bobbyExceptionThrown() throws IOException {
-        Parser.parse(new TaskList(new ArrayList<Task>(), new Storage("bobby.txt")), "random input",
-                new Bobby("bobby.txt"));
+        Parser.parse(new TaskList(new ArrayList<Task>(), new Storage("bobby.txt")), "random input");
         assertEquals("Bobby does not understand you. Please use valid inputs.",
                 outputStreamCaptor.toString().trim());
     }

@@ -1,6 +1,5 @@
 package bobby;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Ui {
@@ -9,25 +8,19 @@ public class Ui {
         return "Bobby greets you. Bobby is here to help.";
     }
 
-    public static String fileExists() {
-        return "Bobby remembers previous tasks.";
-    }
-
-    public static String newFileCreated() {
-        return "Bobby has created a new list.";
-    }
-
     /**
      * Prints the tasks currently in the list of tasks.
      * @param taskArray ArrayList containing current tasks to be printed.
      */
     public static String printList(ArrayList<Task> taskArray) {
+        int count = 0;
         String result = "Here is what you told Bobby:" + System.lineSeparator();
         for (int i = 0; i < taskArray.size(); i++) {
             Task t = taskArray.get(i);
-            int count = i + 1;
+            count = i + 1;
             result = result + count + "." + t.toString() + System.lineSeparator();
         }
+        assert count == taskArray.size();
         return result;
     }
 
@@ -43,10 +36,17 @@ public class Ui {
         return "Bobby will remember that this task is not yet done:\n" + t.toString();
     }
 
-    public static String printTask(Task t) {
-        return t.toString();
+    public static String findError() {
+        return "Bobby can only search using 1 keyword.";
     }
 
+    public static String dateFormatError() {
+        return "Invalid date format. Please use YYYY-MM-DD.";
+    }
+
+    public static String invalidInput() {
+        return "Bobby did not understand you. Please use valid inputs.";
+    }
     public static String printAddedTask(Task t, ArrayList<Task> taskArray) {
         return "Bobby heard: " + t.toString() + System.lineSeparator() + "Bobby remembers "
                 + taskArray.size() + " tasks(s).";
