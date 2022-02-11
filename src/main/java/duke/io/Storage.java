@@ -17,6 +17,11 @@ import duke.task.TaskList;
  * Handles all file saving and loading operations of Duke. <br>
  */
 public class Storage {
+    static final int TODO_TASK = 0;
+    static final int DEADLINE_TASK = 1;
+    static final int EVENT_TASK = 2;
+    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/M/yyyy");
+
     /**
      * Saves the content of the provided Task ArrayList into the file specified. <br>
      * Tasks are delimited by ';'. <br>
@@ -31,7 +36,6 @@ public class Storage {
      * @return 0: save success, -1: error encountered.
      */
     public static int saveFile(String folderName, String fileName, TaskList arr) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         try {
             Files.createDirectories(Paths.get(folderName));
             String filePath = folderName + "/" + fileName;
@@ -65,18 +69,25 @@ public class Storage {
             }
             sc.close();
             for (String s : ss.toString().split(";")) {
-                String[] args = s.split(",");
-                if (args[0].equals("T")) {
-                    tl.addTask(args[2], args[1].equals("T"), null, 0);
-                } else if (args[0].equals("D")) {
-                    tl.addTask(args[2], args[1].equals("T"), LocalDate.parse(args[3], formatter), 1);
-                } else if (args[0].equals("E")) {
-                    tl.addTask(args[2], args[1].equals("T"), LocalDate.parse(args[3], formatter), 2);
-                }
+                addTaskFromString(s, tl);
             }
             return 0;
         } catch (FileNotFoundException e) {
             return -1;
         }
+    }
+
+    /**
+     * Adds a task constructed from the specified string into the specified task list
+     */
+    public static void addTaskFromString(String taskString, TaskList taskList) {
+        String[] args = taskString.split(",");
+        String taskType = args[0];
+        String taskName = args[2];
+        boolean isMarked = args[1].equals("T");
+        int taskCode = taskType.equals("T") ? TODO_TASK : taskType.equals("D") ? DEADLINE_TASK : EVENT_TASK;
+        LocalDate date = args.length < 4 ? null : LocalDate.parse(args[3], DATE_FORMATTER);
+
+        taskList.addTask(taskName, isMarked, date, taskCode);
     }
 }

@@ -84,13 +84,13 @@ public class TaskList {
      * @param taskName The name of the Task to be added.
      * @param isMarked If the Task that is being added is marked.
      * @param date The date of the Task (null for TodoTask).
-     * @param taskType The type task to be added.
+     * @param taskCode The type task to be added.
      */
-    public int addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
+    public int addTask(String taskName, boolean isMarked, LocalDate date, int taskCode) {
         assert !taskName.equals("") : "taskName must be specified";
-        assert taskType > -1 && taskType < 3 : "taskType must be between 0 and 2";
+        assert taskCode > -1 && taskCode < 3 : "taskType must be between 0 and 2";
 
-        switch (taskType) {
+        switch (taskCode) {
         case 0:
             this.tasks.add(new ToDoTask(taskName, isMarked));
             break;
