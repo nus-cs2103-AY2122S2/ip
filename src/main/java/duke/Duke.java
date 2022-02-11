@@ -79,6 +79,7 @@ public class Duke extends Application {
 
         while (!userInput.equals("bye")) {
             userInput = ui.readCommand();
+            assert(!userInput.equals(""));
             Parser.parse(userInput);
         }
         ui.closeScanner();
