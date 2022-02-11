@@ -55,21 +55,20 @@ public class Storage {
      * Loads the content from the file specified into the specified TaskList.
      *
      * @param filePath path of the file to be read.
-     * @param tl TaskList to be updated.
+     * @param taskList TaskList to be updated.
      * @return 0: load success, -1: error encountered.
      */
-    public static int loadFile(String filePath, TaskList tl) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
+    public static int loadFile(String filePath, TaskList taskList) {
         try {
             FileInputStream fs = new FileInputStream(filePath);
             Scanner sc = new Scanner(fs);
-            StringBuilder ss = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             while (sc.hasNextLine()) {
-                ss.append(sc.nextLine());
+                sb.append(sc.nextLine());
             }
             sc.close();
-            for (String s : ss.toString().split(";")) {
-                addTaskFromString(s, tl);
+            for (String taskString : sb.toString().split(";")) {
+                addTaskFromString(taskString, taskList);
             }
             return 0;
         } catch (FileNotFoundException e) {
