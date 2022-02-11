@@ -9,7 +9,6 @@ import athena.parser.Parser;
 import athena.storage.Storage;
 import athena.tasks.TaskList;
 import athena.ui.MainWindow;
-import athena.ui.Messages;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
