@@ -28,9 +28,10 @@ public class Command {
     }
 
     /**
-     * Execution of command logic in Duke.
+     * Run command to return duke reply.
+     * @return A string representing what Duke replied.
      */
-    public String execute() {
+    public String runCommand() {
         String[] wordSplit = userInput.split(" ");
         String action = wordSplit[0];
         String[] split = userInput.split("/");
@@ -40,6 +41,8 @@ public class Command {
         String details = split.length > 1 ? split[1].substring(3) : "";
 
         switch (action) {
+        case "help":
+            return printCommandsAvailable();
         case "list":
             return printList();
         case "mark":
@@ -62,67 +65,85 @@ public class Command {
     }
 
     /**
+     * Print commands that are available n Duke.
+     * @return A string representing what Duke replied.
+     */
+    private String printCommandsAvailable() {
+        String openingStatement = "Here are some of the available commands in Duke: \n";
+        String commands = "1. list\n2. mark"
+                + "\n3. unmark\n4. todo\n 5.deadline\n 6. event\n "
+                + "7. event\n 8. delete\n 9. find\n 10. bye";
+        return openingStatement + commands;
+    }
+
+    /**
      * Finds Task that matches that description from the TaskList.
      * @param description Description to be used for matching.
+     * @return A string representing what Duke replied.
      */
     private String find(String description) {
-        String s = "Here are the matching task in your list: ";
-        return s + "\n" + tasks.find(description);
-
+        String dukeReply = "Here are the matching task in your list: ";
+        String resultOfFind = tasks.findDescription(description);
+        return dukeReply + "\n" + resultOfFind;
     }
 
 
     /**
      * Deletes the task in the TaskList.
-     * @param i 0-based index for deletion of Task in the TaskList.
+     * @param index 0-based index for deletion of Task in the TaskList.
+     * @return A string representing what Duke replied.
      */
-    private String deleteTask(int i) {
-        String s = "Noted. I've removed this task:" + "\n" + tasks.remove(i);
-        String res = String.format("Now you have %d tasks in the list.", tasks.size());
-        return s + "\n" + res;
+    private String deleteTask(int index) {
+        String dukeReply = "Noted. I've removed this task:" + "\n" + tasks.remove(index);
+        String additionalStatement = String.format("Now you have %d tasks in the list.", tasks.listSize());
+        return dukeReply + "\n" + additionalStatement;
     }
 
     /**
      * Marks the task in the TaskList.
-     * @param i 0-based index for users to mark the Task in the TaskList.
+     * @param index 0-based index for users to mark the Task in the TaskList.
+     * @return A string representing what Duke replied.
      */
-    private String mark(int i) {
-        String s = "Nice! I've marked this task as done:";
-        Tasks t = tasks.get(i);
-        t.setMarked(true);
-        return s + "\n" + t;
+    private String mark(int index) {
+        String dukeReply = "Nice! I've marked this task as done:";
+        Tasks retrievedTask = tasks.getTask(index);
+        retrievedTask.setMarked();
+        return dukeReply + "\n" + retrievedTask;
     }
 
     /**
      * Un-marks the task in the TaskList.
-     * @param i  0-based index for users to unmark the task in the TaskList.
+     * @param index  0-based index for users to unmark the task in the TaskList.
+     * @return A string representing what Duke replied.
      */
-    private String unmark(int i) {
-        String s = "OK, I've marked this task as not done yet:";
-        Tasks t = tasks.get(i);
-        t.setMarked(false);
-        return s + "\n" + t;
+    private String unmark(int index) {
+        String dukeReply = "OK, I've marked this task as not done yet:";
+        Tasks retrievedTask = tasks.getTask(index);
+        retrievedTask.setUnmarked();
+        return dukeReply + "\n" + retrievedTask;
     }
 
     /**
      * Adds task to the TaskList.
-     * @param t Task to be added.
+     * @param newTask Task to be added.
+     * @return A string representing what Duke replied.
      */
-    private String addTask(Tasks t) {
-        tasks.add(t);
-        String s = "Got it. I've added this task:" + "\n" + " " + t;
-        String res = String.format("Now you have %d tasks in the list.", tasks.size());
-        return s + "\n" + res;
+    private String addTask(Tasks newTask) {
+        tasks.addTask(newTask);
+        String dukeReply = "Got it. I've added this task:" + "\n" + " " + newTask;
+        String amountOfTaskInList = String.format("Now you have %d tasks in the list.", tasks.listSize());
+        return dukeReply + "\n" + amountOfTaskInList;
     }
 
     /**
      * Prints the TaskList in the Ui.
+     * @return A string representing what Duke replied.
      */
     private String printList() {
         StringBuilder result = new StringBuilder("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.listSize(); i++) {
             String num = String.format("%d. ", i + 1);
-            String res = num + tasks.get(i).toString();
+            String res = num + tasks.getTask(i).toString();
             result.append("\n").append(res);
         }
         return result.toString();
@@ -130,6 +151,7 @@ public class Command {
 
     /**
      * Prints the bye Ui for the user.
+     * @return A string representing what Duke replied.
      */
     private String sayBye() {
         return "Bye. Hope to see you again soon!";

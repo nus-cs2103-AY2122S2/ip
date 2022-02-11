@@ -13,15 +13,19 @@ public class Ui {
      * @param storage Storage that is manipulated by the {@link component.Command} class.
      * @param userInput input that is given by the user.
      */
-    public String run(TaskList tasks, Storage storage, String userInput) {
+    public String generateDukeReply(TaskList tasks, Storage storage, String userInput) {
         try {
-            Parser p = new Parser(userInput);
-            String s = p.executeCommand(tasks);
-            storage.write(tasks);
-            return s;
-        } catch (TaskException e) {
-            return e.getMessage();
+            return createDukeReply(tasks, storage, userInput);
+        } catch (TaskException exception) {
+            return exception.getMessage();
         }
+    }
+
+    private String createDukeReply(TaskList tasks, Storage storage, String userInput) throws TaskException {
+        Parser parser = new Parser(userInput);
+        String dukeReply = parser.executeCommand(tasks);
+        storage.addTask(tasks);
+        return dukeReply;
     }
 
 
@@ -29,6 +33,7 @@ public class Ui {
      * Initialise the Duke Ui.
      */
     public String initUi() {
+        //Statement to be printed when duke is initialised.
         return "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 

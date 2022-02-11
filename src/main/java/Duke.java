@@ -7,7 +7,10 @@ import component.Ui;
  *  that helps user keep track of tasks.
  */
 public class Duke {
-
+    /**
+     * Default path name to retrieve the data from previous instance of duke.
+     */
+    private static final String DEFAULT_STORAGE_PATH_NAME = "data/duke.txt";
     /**
      * {@link Storage}
      */
@@ -27,18 +30,24 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("data/duke.txt");
+        this.storage = new Storage(DEFAULT_STORAGE_PATH_NAME);
         this.tasks = new TaskList(storage.load());
     }
 
     /**
-     * Run Duke program.
+     * Initialises the Duke Ui.
      */
     public String initUi() {
         return ui.initUi();
     }
 
-    public String getResponse(String input) {
-        return ui.run(tasks, storage, input);
+    /**
+     * Gets the response from duke with the userInput.
+     * @param userInput User input in the form of a string.
+     * @return String showing the user input.
+     */
+    public String getResponse(String userInput) {
+        //runs the ui to retrieve the output based on userInput.
+        return ui.generateDukeReply(tasks, storage, userInput);
     }
 }

@@ -19,14 +19,14 @@ import tasks.ToDos;
  * from the Duke program.
  */
 public class Storage {
-    private final String pathName;
+    private final String storageLocation;
 
     /**
      * Constructor for Storage.
      * @param pathName Relative path to the file.
      */
     public Storage(String pathName) {
-        this.pathName = Paths.get(System.getProperty("user.dir"), pathName).toString();
+        this.storageLocation = Paths.get(System.getProperty("user.dir"), pathName).toString();
     }
 
     /**
@@ -34,47 +34,53 @@ public class Storage {
      * @return TaskList that is updated with contents from the previous Duke instances.
      */
     public ArrayList<Tasks> load() {
-        ArrayList<Tasks> ls = new ArrayList<Tasks>();
+        ArrayList<Tasks> list = new ArrayList<Tasks>();
+        File storageFile = new File(storageLocation);
 
-        File data = new File(pathName);
         try {
-            Scanner s = new Scanner(data);
-            while (s.hasNext()) {
-                String str = s.nextLine();
-                String[] arr = str.split("|");
-                String type = arr[0];
-                boolean marked = arr[2].equals("1");
-                String remainingStr = str.substring(str.lastIndexOf("|") + 1);
-                switch (type) {
-                case "D":
-                    ls.add(new DeadLines(
-                            str.substring(4, str.lastIndexOf("|")),
-                            marked, remainingStr));
-                    break;
-                case "E":
-                    ls.add(new Events(str.substring(4, str.lastIndexOf("|")),
-                            marked, remainingStr));
-                    break;
-                default: //case "T":
-                    ls.add(new ToDos(remainingStr, marked));
-                    break;
-                }
-            }
-            s.close();
+            Scanner storageContent = new Scanner(storageFile);
+            modifyList(list, storageContent);
+            storageContent.close();
         } catch (FileNotFoundException e) {
             System.out.println("There is no cache, "
                     + "duke will be initialised as per normal.");
         }
-        return ls;
+        return list;
+    }
+
+    private void modifyList(ArrayList<Tasks> list, Scanner storageContent) {
+        while (storageContent.hasNext()) {
+            String nextLineOfContent = storageContent.nextLine();
+            String[] splitNextLineByEmptySpaces = nextLineOfContent.split("|");
+            String commandType = splitNextLineByEmptySpaces[0];
+            boolean isMarked = splitNextLineByEmptySpaces[2].equals("1");
+            int startingIndexOfDescription = nextLineOfContent.lastIndexOf("|") + 1;
+            String description = nextLineOfContent.substring(startingIndexOfDescription);
+
+            switch (commandType) {
+            case "D":
+                list.add(new DeadLines(
+                        nextLineOfContent.substring(4, startingIndexOfDescription - 1),
+                        isMarked, description));
+                break;
+            case "E":
+                list.add(new Events(nextLineOfContent.substring(4, startingIndexOfDescription - 1),
+                        isMarked, description));
+                break;
+            default: //case "T":
+                list.add(new ToDos(description, isMarked));
+                break;
+            }
+        }
     }
 
     /**
      * Writes the Tasks into the file for storage.
      * @param arr TaskList containing all the Tasks required for storage.
      */
-    public void write(TaskList arr) {
+    public void addTask(TaskList arr) {
         try {
-            File f = new File(pathName);
+            File f = new File(storageLocation);
             FileWriter fw = new FileWriter(f);
             for (Tasks t : arr) {
                 fw.write(t.cacheString() + System.lineSeparator());

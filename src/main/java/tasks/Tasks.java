@@ -24,11 +24,17 @@ public abstract class Tasks {
     }
 
     /**
-     * Sets {@link #marked} to the specified value.
-     * @param var Boolean to mark a task as completed/not completed.
+     * Sets {@link #marked} to true.
      */
-    public void setMarked(Boolean var) {
-        this.marked = var;
+    public void setMarked() {
+        this.marked = true;
+    }
+
+    /**
+     * Sets {@link #marked} to false.
+     */
+    public void setUnmarked() {
+        this.marked = false;
     }
 
     /**
