@@ -4,6 +4,8 @@ import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidArgumentException;
 import duke.storage.Storage;
 import duke.tasks.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -56,6 +58,11 @@ public class Duke {
         return arguments[1].split(" /([Aa][Tt]|[Bb][Yy]) ", 2);
     }
 
+    private static LocalDateTime parseDateTime(String datetime) {
+        DateTimeFormatter datetimePattern = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return LocalDateTime.parse(datetime, datetimePattern);
+    }
+
     public static void commandProcessor() {
         String userInput = getUserInput.nextLine();
         String[] parsedUserInput = userInput.split(" ", 2);
@@ -103,7 +110,7 @@ public class Duke {
         case "deadline":
             try {
                 String[] parsedArguments = parseArguments(parsedUserInput);
-                Deadline newDeadline = new Deadline(parsedArguments[0], parsedArguments[1]);
+                Deadline newDeadline = new Deadline(parsedArguments[0], parseDateTime(parsedArguments[1]));
                 taskList.add(newDeadline);
                 displayTaskAdd(newDeadline);
             } catch (DukeInvalidArgumentException e) {
@@ -113,7 +120,7 @@ public class Duke {
         case "event":
             try {
                 String[] parsedArguments = parseArguments(parsedUserInput);
-                Event newEvent = new Event(parsedArguments[0], parsedArguments[1]);
+                Event newEvent = new Event(parsedArguments[0], parseDateTime(parsedArguments[1]));
                 taskList.add(newEvent);
                 displayTaskAdd(newEvent);
             } catch (DukeInvalidArgumentException e) {
