@@ -21,8 +21,13 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
             stage.setTitle("Koro Task Manager");
+            stage.setResizable(false);
             stage.setScene(scene);
+            stage.setMinHeight(600.0);
+            stage.setMinWidth(400.0);
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
