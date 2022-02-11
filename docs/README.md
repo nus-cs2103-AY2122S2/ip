@@ -175,19 +175,19 @@ Action | Format, Examples
 **Schedule** | `schedule DATE_IN_YYYY-MM-DD`
 **Exit** | `bye`
 
-[1]: https://github.com/Korochii/ip/edit/master/docs/README.md#quick-start
+[1]: https://korochii.github.io/ip/#quick-start
 [2]: https://www.oracle.com/java/technologies/downloads/#java11
 [3]: https://korochii.github.io/ip/
-[4]: https://github.com/Korochii/ip/edit/master/docs/README.md#features
-[5]: https://github.com/Korochii/ip/edit/master/docs/README.md#listing-all-tasks--list
-[6]: https://github.com/Korochii/ip/edit/master/docs/README.md#creating-a-to-do-task-todo
-[7]: https://github.com/Korochii/ip/edit/master/docs/README.md#creating-a-deadline-task-deadline
-[8]: https://github.com/Korochii/ip/edit/master/docs/README.md#creating-an-event-task-event
-[9]: https://github.com/Korochii/ip/edit/master/docs/README.md#marking-a-task-as-completed-mark
-[10]: https://github.com/Korochii/ip/edit/master/docs/README.md#unmarking-a-task-unmark
-[11]: https://github.com/Korochii/ip/edit/master/docs/README.md#deleting-a-task-delete
-[12]: https://github.com/Korochii/ip/edit/master/docs/README.md#finding-a-task-find
-[13]: https://github.com/Korochii/ip/edit/master/docs/README.md#listing-out-tasks-scheduled-on-a-particular-day-schedule
-[14]: https://github.com/Korochii/ip/edit/master/docs/README.md#exiting-holobot-bye
-[15]: https://github.com/Korochii/ip/edit/master/docs/README.md#saving-and-editing-the-data-file
-[16]: https://github.com/Korochii/ip/edit/master/docs/README.md#command-summary
+[4]: https://korochii.github.io/ip/#features
+[5]: https://korochii.github.io/ip/#listing-all-tasks--list
+[6]: https://korochii.github.io/ip/#creating-a-to-do-task-todo
+[7]: https://korochii.github.io/ip/#creating-a-deadline-task-deadline
+[8]: https://korochii.github.io/ip/#creating-an-event-task-event
+[9]: https://korochii.github.io/ip/#marking-a-task-as-completed-mark
+[10]: https://korochii.github.io/ip/#unmarking-a-task-unmark
+[11]: https://korochii.github.io/ip/#deleting-a-task-delete
+[12]: https://korochii.github.io/ip/#finding-a-task-find
+[13]: https://korochii.github.io/ip/#listing-out-tasks-scheduled-on-a-particular-day-schedule
+[14]: https://korochii.github.io/ip/#exiting-holobot-bye
+[15]: https://korochii.github.io/ip/#saving-and-editing-the-data-file
+[16]: https://korochii.github.io/ip/#command-summary
