@@ -14,7 +14,6 @@ import duke.tasks.ToDo;
  */
 public class TaskList {
     private static final String BUFFER = " xxx ";
-    private static final Task TRIGGER_TASK = new Task("Z", "tH1$ 1s Th3 tR1gG3r t45K");
     private ArrayList<Task> tasks;
 
     /**
@@ -91,7 +90,7 @@ public class TaskList {
 
         for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i - 1);
-            String listElement = i + "." + task.toString();
+            String listElement = i + ". " + task.toString();
 
             listString = listString + listElement + System.lineSeparator();
         }
@@ -125,31 +124,6 @@ public class TaskList {
 
         return searchResultString;
     }
-    // /**
-    //  * Marks the task indexed by the index as done.
-    //  * @param index the index of the task that is to be marked as done
-    //  * @return the task after it is marked as done
-    //  */
-    // public Task mark(int index) {
-    //     assert index <= tasks.size();
-    //     Task indexedTask = tasks.get(index);
-    //     indexedTask.mark();
-
-    //     return indexedTask;
-    // }
-
-    // /**
-    //  * Marks the task indexed by the index as not yet done.
-    //  * @param index the index of the task that is to be marked as not yet done
-    //  * @return the task after it is marked as not yet done
-    //  */
-    // public Task unmark(int index) {
-    //     assert index <= tasks.size();
-    //     Task indexedTask = tasks.get(index);
-    //     indexedTask.unmark();
-
-    //     return indexedTask;
-    // }
 
     /**
      * Changes the mark of the task if the command requests for a change in mark and returns the task that has been
@@ -168,10 +142,9 @@ public class TaskList {
 
         if (isChangingMark) {
             taskToChange.toggleMark();
-            return taskToChange;
-        } else {
-            return TRIGGER_TASK;
         }
+
+        return taskToChange;
     }
 
     /**
@@ -180,5 +153,45 @@ public class TaskList {
      */
     public int getNumberOfTasks() {
         return tasks.size();
+    }
+
+    /**
+     * Updates the details of the indexed task and returns the resulting task.
+     * @param type details to be updated: description, date or time
+     * @param index index of task to be updated
+     * @param updateValue value to be updated to
+     * @return task that has been updated
+     * @throws DukeException when there is an error trying to update the date or time value
+     */
+    public Task update(String type, int index, String updateValue) throws DukeException {
+        Task task = tasks.get(index);
+
+        switch (type) {
+        case "description":
+            task.updateDescription(updateValue);
+            break;
+        case "date":
+            task.updateDate(updateValue);
+            break;
+        case "time":
+            task.updateTime(updateValue);
+            break;
+        default:
+            break;
+        }
+
+        return task;
+    }
+
+    /**
+     * Clones the indexed task and adds to the the end of the task list. Returns the cloned task at the end.
+     * @param index index of the task to be cloned
+     * @return the task that is cloned
+     */
+    public Task clone(int index) {
+        Task taskToBeCloned = tasks.get(index);
+        tasks.add(taskToBeCloned);
+
+        return taskToBeCloned;
     }
 }

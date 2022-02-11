@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.exceptions.DukeException;
+
 /**
  * ToDo is a Task with no specific start or end date or time.
  */
@@ -13,7 +15,8 @@ public class ToDo extends Task {
      * @param isDone      true if the task has been marked as done
      */
     public ToDo(String description, boolean isDone) {
-        super(type, description, isDone);
+        this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -21,7 +24,7 @@ public class ToDo extends Task {
      * @param description the description of the ToDo task
      */
     public ToDo(String description) {
-        super(type, description);
+        this(description, false);
     }
 
     /**
@@ -31,7 +34,27 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         assert this.description != null;
-        return this.isDone ? "[T][X] " + this.description
-                : "[T][ ] " + this.description;
+        return this.isDone ? "!!!DONE!!! To do -" + this.description
+                : "Todo - " + this.description;
+    }
+
+    @Override
+    public void updateDate(String newDate) throws DukeException {
+        System.out.println("No date value for Todo task");
+    }
+
+    @Override
+    public void updateTime(String newTime) throws DukeException {
+        System.out.println("No time value for Todo task");
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void updateDescription(String description) {
+        this.description = description;
     }
 }

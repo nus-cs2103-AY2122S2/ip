@@ -129,4 +129,23 @@ public class Ui {
             return findResultPrefix + findResult;
         }
     }
+
+    /**
+     * Returns a string informing user that update has been completed.
+     * @param task task to be updated
+     * @return a string informing user that the task is updated and shows the user the updated task
+     */
+    public static String showUpdatedMessage(Task task) {
+        return "I have updated the task as per your request! This is the updated task:\n" + task.toString();
+    }
+
+    /**
+     * Returns a string informing user that the cloning action is completed.
+     * @param task the cloned task
+     * @return a string detailing the cloned task and that cloning is complete.
+     */
+    public static String showClonedMessage(Task task) {
+        return "I have cloned the task and added it to the end of the task list! This is the cloned task:\n"
+                + task.toString();
+    }
 }

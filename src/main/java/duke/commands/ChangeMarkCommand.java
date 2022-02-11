@@ -27,10 +27,7 @@ public class ChangeMarkCommand extends Command {
         Task task = tasks.changeMark(index, toMark);
         storage.updateAfterChangeMark(index, toMark);
 
-        boolean isTriggerTask = task.getType().equals("Z") && task.getDescription().equals("tH1$ 1s Th3 tR1gG3r t45K");
-
-        return isTriggerTask ? Ui.showNoChangeMarkMessage(toMark)
-                : Ui.showChangeMarkMessage(task, toMark);
+        return Ui.showChangeMarkMessage(task, toMark);
     }
 
     @Override
