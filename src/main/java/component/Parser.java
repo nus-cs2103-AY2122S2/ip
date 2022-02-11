@@ -31,7 +31,7 @@ public class Parser {
      */
     public String executeCommand(TaskList tasks) {
         Command c = new Command(input, tasks);
-        return c.execute();
+        return c.runCommand();
     }
 
     /**
@@ -48,11 +48,29 @@ public class Parser {
 
         if (notCommand(firstWord)) {
             throw new IncorrectInputException();
-        } else {
-            checkForException(wordsSplitByEmptySpace);
+        }
+
+        if (incorrectLength(wordsSplitByEmptySpace)) {
+            checkForTaskException(wordsSplitByEmptySpace);
         }
     }
 
+    /**
+     * Checks if user input is of incorrect length.
+     * @param wordsSplitByEmptySpace String array representing the user input split by empty space.
+     * @return Boolean value representing if user input has an incorrect length.
+     */
+    private boolean incorrectLength(String[] wordsSplitByEmptySpace) {
+        String firstWord = wordsSplitByEmptySpace[0];
+        return wordsSplitByEmptySpace.length == 1
+                && !firstWord.equals("list") && !firstWord.equals("bye") && !firstWord.equals("help");
+    }
+
+    /**
+     * Checks if user input has the wrong format.
+     * @param wordsSplitByEmptySpace String array representing the user input split by empty space.
+     * @throws WrongInputException Throws {@link exceptions.WrongInputException} if there is wrong input format.
+     */
     private void checkForWrongInputException(String[] wordsSplitByEmptySpace) throws WrongInputException {
         try {
             Integer.parseInt(wordsSplitByEmptySpace[1]);
@@ -61,7 +79,14 @@ public class Parser {
         }
     }
 
-    private void checkForException(String[] wordsSplitByEmptySpace) throws ToDosException,
+    /**
+     * Checks if user input violates any task commands' format.
+     * @param wordsSplitByEmptySpace String array representing the user input split by empty space.
+     * @throws ToDosException Throws {@link exceptions.ToDosException} if ToDos command has the wrong format.
+     * @throws DeadlineException Throws {@link  exceptions.DeadlineException} if Deadline command has the wrong format.
+     * @throws EventException Throws {@link  exceptions.EventException} if Event command has the wrong format.
+     */
+    private void checkForTaskException(String[] wordsSplitByEmptySpace) throws ToDosException,
             DeadlineException, EventException {
         String command = wordsSplitByEmptySpace[0];
         switch (command) {
@@ -84,7 +109,7 @@ public class Parser {
                 && !command.equals("delete") && !command.equals("mark")
                 && !command.equals("unmark") && !command.equals("todo")
                 && !command.equals("deadline") && !command.equals("event")
-                && !command.equals("find"));
+                && !command.equals("find") && !command.equals("help"));
     }
 
 }

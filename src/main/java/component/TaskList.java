@@ -30,11 +30,11 @@ public class TaskList implements Iterable<Tasks> {
     }
 
     /**
-     * Adds the Task into the TaskList.
-     * @param Task Task that is added to the TaskList.
+     * Adds the task into the TaskList.
+     * @param task task that is added to the TaskList.
      */
-    public void addTask(Tasks Task) {
-        list.add(Task);
+    public void addTask(Tasks task) {
+        list.add(task);
     }
 
     /**
