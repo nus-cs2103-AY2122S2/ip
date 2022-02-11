@@ -25,6 +25,7 @@ public class Parser {
      */
     public String execute(TaskList taskList, Storage storage, Ui ui) {
         String[] temp = this.command.split(" ", 2); // Helps to isolate the first word
+        assert temp.length >= 1 : "Invalid command is executed";
         String inst = temp[0];
 
         try {

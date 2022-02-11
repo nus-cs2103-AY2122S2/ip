@@ -16,7 +16,7 @@ public class ArthurException {
     public static void checkException(String e)
             throws EmptyDescriptionException, InvalidInstructionException {
         String[] temp = e.split(" ", 2);
-
+        assert temp.length >= 1 : "Invalid command input";
         // Check for valid instructions
         switch (temp[0]) {
         case "bye":

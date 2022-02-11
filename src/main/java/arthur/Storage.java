@@ -12,8 +12,8 @@ import arthur.task.Task;
  * Handles creating and editing data file.
  */
 public class Storage {
-    private final File storage;
     private static final String FILE_PATH = "data/Tasks.txt";
+    private final File storage;
     private final Ui ui;
 
     /**
