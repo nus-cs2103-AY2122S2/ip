@@ -44,9 +44,7 @@ public class HelpCommand extends Command {
      * @return A String of help message.
      */
     public String printGenericHelpMessage() {
-        return "To start using ChiBot, simply type in a command into the text box and hit enter!\n\n"
-                + "If you are unsure about a command, type \"help <command name>\" to let Chi know!\n\n"
-                + "Hope Chi has been helpful to you!";
+        return "Chi is happy you are asking for help! Do go to the following link on how to get started!";
 
     }
 
@@ -63,27 +61,27 @@ public class HelpCommand extends Command {
             return "Type \"list\" to get a list of all your tasks!";
             // Fallthrough
         case "mark":
-            return "Type \"mark index\" to mark the task at index as complete! E.g. mark 1";
+            return "Type \"mark index\" to mark the task at index as complete!\n E.g. mark 1";
             // Fallthrough
         case "unmark":
-            return "Type \"unmark index\" to unmark the task at index as incomplete! E.g. unmark 1";
+            return "Type \"unmark index\" to unmark the task at index as incomplete!\n E.g. unmark 1";
             // Fallthrough
         case "delete":
-            return "Type \"delete index\" to remove a task at the index! E.g. delete 1";
+            return "Type \"delete index\" to remove a task at the index!\n E.g. delete 1";
             // Fallthrough
         case "find":
             return "Type \"find word1 word2 ...\" to find tasks which match ALL specified words! " +
-                    "E.g. find new beach";
+                    "\nE.g. find new beach";
             // Fallthrough
         case "todo":
-            return "Type \"todo task\" to create new todo task! E.g. todo write essay tonight";
+            return "Type \"todo task\" to create new todo task!\nE.g. todo write essay tonight";
         case "deadline":
             return "Type \"deadline description /by Y-M-D H:M\" to create new deadline!" +
-                    "deadline finish report /by 2022-03-10 14:55";
+                    "\nE.g.deadline finish report /by 2022-03-10 14:55";
             // Fallthrough
         case "event":
             return "Type \"event <description> /at Y-M-D H:M-H:M\" to " +
-                    "create new event! E.g. event visit girlfriend /at 2022-10-10 12:00-18:00"
+                    "create new event!\n E.g. event visit girlfriend /at 2022-10-10 12:00-18:00"
                     + "\nMake sure the timings are progressive!";
             // Fallthrough
         case "exit":
