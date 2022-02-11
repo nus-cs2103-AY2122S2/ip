@@ -13,7 +13,8 @@ import duke.tasks.ToDo;
  * the task list.
  */
 public class TaskList {
-    private static String buffer = " xxx ";
+    private static final String BUFFER = " xxx ";
+    private static final Task TRIGGER_TASK = new Task("Z", "tH1$ 1s Th3 tR1gG3r t45K");
     private ArrayList<Task> tasks;
 
     /**
@@ -28,7 +29,7 @@ public class TaskList {
             tasks = new ArrayList<>();
 
             for (String task : tasksArr) {
-                String[] taskDetails = task.split(buffer);
+                String[] taskDetails = task.split(BUFFER);
 
                 String type = taskDetails[0];
                 Boolean isMarked = (Integer.parseInt(taskDetails[1]) > 0);
@@ -124,30 +125,53 @@ public class TaskList {
 
         return searchResultString;
     }
+    // /**
+    //  * Marks the task indexed by the index as done.
+    //  * @param index the index of the task that is to be marked as done
+    //  * @return the task after it is marked as done
+    //  */
+    // public Task mark(int index) {
+    //     assert index <= tasks.size();
+    //     Task indexedTask = tasks.get(index);
+    //     indexedTask.mark();
+
+    //     return indexedTask;
+    // }
+
+    // /**
+    //  * Marks the task indexed by the index as not yet done.
+    //  * @param index the index of the task that is to be marked as not yet done
+    //  * @return the task after it is marked as not yet done
+    //  */
+    // public Task unmark(int index) {
+    //     assert index <= tasks.size();
+    //     Task indexedTask = tasks.get(index);
+    //     indexedTask.unmark();
+
+    //     return indexedTask;
+    // }
+
     /**
-     * Marks the task indexed by the index as done.
-     * @param index the index of the task that is to be marked as done
-     * @return the task after it is marked as done
+     * Changes the mark of the task if the command requests for a change in mark and returns the task that has been
+     * changed. If not, return a trigger task to trigger the system to inform the user that the command does not
+     * change the task.
+     * @param index index of task to be marked
+     * @param toMark if the command wishes the indexed task to be marked or not
+     * @return the changed task or a trigger task
      */
-    public Task mark(int index) {
+    public Task changeMark(int index, boolean toMark) {
         assert index <= tasks.size();
-        Task indexedTask = tasks.get(index);
-        indexedTask.mark();
 
-        return indexedTask;
-    }
+        Task taskToChange = tasks.get(index);
+        boolean isMarked = taskToChange.isDone();
+        boolean isChangingMark = isMarked ^ toMark;
 
-    /**
-     * Marks the task indexed by the index as not yet done.
-     * @param index the index of the task that is to be marked as not yet done
-     * @return the task after it is marked as not yet done
-     */
-    public Task unmark(int index) {
-        assert index <= tasks.size();
-        Task indexedTask = tasks.get(index);
-        indexedTask.unmark();
-
-        return indexedTask;
+        if (isChangingMark) {
+            taskToChange.toggleMark();
+            return taskToChange;
+        } else {
+            return TRIGGER_TASK;
+        }
     }
 
     /**

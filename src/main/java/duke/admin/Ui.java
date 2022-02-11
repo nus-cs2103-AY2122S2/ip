@@ -45,22 +45,45 @@ public class Ui {
                 + "\nNow you have " + tasks.getNumberOfTasks() + " tasks in the list.";
     }
 
+    // /**
+    //  * Prints out a message to let the user know which task has
+    //  * just been marked as done.
+    //  * @param task the task that has just been marked as done
+    //  */
+    // public static String showMarkedMessage(Task task) {
+    //     return "Nice! I've marked this task as done:\n" + task.toString();
+    // }
+
+    // /**
+    //  * Prints out a message to let the user know which task has
+    //  * just been marked as not yet done.
+    //  * @param task the task that has just been marked as not yet done
+    //  */
+    // public static String showUnmarkedMessage(Task task) {
+    //     return "OK, I've marked this task as not done yet:\n" + task.toString();
+    // }
+
     /**
-     * Prints out a message to let the user know which task has
-     * just been marked as done.
-     * @param task the task that has just been marked as done
+     * Returns a string to inform the user that the mark is changed.
+     * @param task task to be changed
+     * @param toMark if the command wishes for the task to be marked or not.
+     * @return a string to inform the user that the mark is changed.
      */
-    public static String showMarkedMessage(Task task) {
-        return "Nice! I've marked this task as done:\n" + task.toString();
+    public static String showChangeMarkMessage(Task task, boolean toMark) {
+        return toMark ? "Nice! I've marked this task as done:\n" + task.toString()
+                : "OK, I've marked this task as not done yet:\n" + task.toString();
     }
 
     /**
-     * Prints out a message to let the user know which task has
-     * just been marked as not yet done.
-     * @param task the task that has just been marked as not yet done
+     * Returns a message to inform the user that the task is already marked or unmarked.
+     * @param toMark if the command wishes to mark the task or not
+     * @return a message to inform the user that the task is already marked or unmarked
      */
-    public static String showUnmarkedMessage(Task task) {
-        return "OK, I've marked this task as not done yet:\n" + task.toString();
+    public static String showNoChangeMarkMessage(boolean toMark) {
+        String message = "The task is already ";
+        String messageSuffix = toMark ? "marked." : "unmarked.";
+
+        return message + messageSuffix;
     }
 
     /**
