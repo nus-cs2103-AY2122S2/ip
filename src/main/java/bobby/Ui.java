@@ -1,20 +1,11 @@
 package bobby;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Ui {
 
     public static String showWelcome() {
         return "Bobby greets you. Bobby is here to help.";
-    }
-
-    public static String fileExists() {
-        return "Bobby remembers previous tasks.";
-    }
-
-    public static String newFileCreated() {
-        return "Bobby has created a new list.";
     }
 
     /**
@@ -43,10 +34,6 @@ public class Ui {
 
     public static String taskNotDone(Task t) {
         return "Bobby will remember that this task is not yet done:\n" + t.toString();
-    }
-
-    public static String printTask(Task t) {
-        return t.toString();
     }
 
     public static String findError() {
