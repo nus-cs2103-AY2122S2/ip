@@ -6,25 +6,25 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDate date;
 
     /**
      * Constructor to create an instance of Deadline.
      * @param description description of the Deadline Task to be done.
-     * @param by deadline in which task needs to be done in YYYY-MM-DD format.
+     * @param date deadline in which task needs to be done in YYYY-MM-DD format.
      */
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, LocalDate date) {
         super(description);
-        this.by = by;
+        this.date = date;
     }
 
     @Override
     public void writeToFile(FileWriter fw) throws IOException {
-        fw.write("D ; " + isDone + " ; " + description + " ; " + by + System.lineSeparator());
+        fw.write("D ; " + isDone + " ; " + description + " ; " + date + System.lineSeparator());
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

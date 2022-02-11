@@ -16,10 +16,10 @@ public class Bobby {
      */
     public Bobby(String filePath) {
         storage = new Storage(filePath);
-        tasks = new TaskList(storage.loadFile(), storage);
+        tasks = new TaskList(storage.createFile(), storage);
     }
 
     public String getResponse(String text) {
-        return Parser.parse(tasks, text, this);
+        return Parser.parse(tasks, text);
     }
 }

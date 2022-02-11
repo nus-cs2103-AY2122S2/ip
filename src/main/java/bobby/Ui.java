@@ -22,12 +22,14 @@ public class Ui {
      * @param taskArray ArrayList containing current tasks to be printed.
      */
     public static String printList(ArrayList<Task> taskArray) {
+        int count = 0;
         String result = "Here is what you told Bobby:" + System.lineSeparator();
         for (int i = 0; i < taskArray.size(); i++) {
             Task t = taskArray.get(i);
-            int count = i + 1;
+            count = i + 1;
             result = result + count + "." + t.toString() + System.lineSeparator();
         }
+        assert count == taskArray.size();
         return result;
     }
 
@@ -53,6 +55,10 @@ public class Ui {
 
     public static String dateFormatError() {
         return "Invalid date format. Please use YYYY-MM-DD.";
+    }
+
+    public static String invalidInput() {
+        return "Bobby did not understand you. Please use valid inputs.";
     }
     public static String printAddedTask(Task t, ArrayList<Task> taskArray) {
         return "Bobby heard: " + t.toString() + System.lineSeparator() + "Bobby remembers "

@@ -25,9 +25,8 @@ public class Parser {
      * to be executed, or terminates the Bobby program.
      * @param tasks TaskList that handles the execution of commands.
      * @param userInput user input to be parsed.
-     * @param bobby instance of Bobby to be terminated if BYE command given.
      */
-    public static String parse(TaskList tasks, String userInput, Bobby bobby) {
+    public static String parse(TaskList tasks, String userInput) {
         String command = splitInputToCommand(userInput);
         String result;
         try {
@@ -39,57 +38,29 @@ public class Parser {
                 result = tasks.list();
                 break;
             case MARK:
-                try {
-                    int i = splitInputToIndex(userInput);
-                    result = tasks.mark(i);
-                } catch (BobbyException e) {
-                    result = e.toString();
-                    System.out.println(e);
-                }
+                int i = splitInputToIndex(userInput);
+                result = tasks.mark(i);
                 break;
             case UNMARK:
-                try {
-                    int k = splitInputToIndex(userInput);
-                    result = tasks.unmark(k);
-                } catch (BobbyException e) {
-                    result = e.toString();
-                    System.out.println(e);
-                }
+                int k = splitInputToIndex(userInput);
+                result = tasks.unmark(k);
                 break;
             case TODO:
-                try {
-                    result = tasks.addToDo(userInput);
-                } catch (BobbyException e) {
-                    result = e.toString();
-                    System.out.println(e);
-                }
+                result = tasks.addToDo(userInput);
                 break;
             case DEADLINE:
                 try {
                     result = tasks.addDeadline(userInput);
-                } catch (BobbyException e) {
-                    result = e.toString();
-                    System.out.println(e);
                 } catch (DateTimeParseException e) {
                     result = Ui.dateFormatError();
                 }
                 break;
             case EVENT:
-                try {
-                    result = tasks.addEvent(userInput);
-                } catch (BobbyException e) {
-                    result = e.toString();
-                    System.out.println(e);
-                }
+                result = tasks.addEvent(userInput);
                 break;
             case DELETE:
-                try {
-                    int i = splitInputToIndex(userInput);
-                    result = tasks.delete(i);
-                } catch (BobbyException e) {
-                    result = e.toString();
-                    System.out.println(e);
-                }
+                int j = splitInputToIndex(userInput);
+                result = tasks.delete(j);
                 break;
             case FIND:
                 String[] queries = splitInputToQuery(userInput);
@@ -101,11 +72,12 @@ public class Parser {
                 }
                 break;
             default:
-                result = "Bobby did not understand you. Please use valid inputs.";
+                result = Ui.invalidInput();
             }
         } catch (IllegalArgumentException e) {
-            result = "Bobby did not understand you. Please use valid inputs.";
-            System.out.println("Bobby does not understand you. Please use valid inputs.");
+            result = Ui.invalidInput();
+        } catch (BobbyException e) {
+            result = e.toString();
         }
         assert !result.equals(null): "result uninitialized";
         return result;
