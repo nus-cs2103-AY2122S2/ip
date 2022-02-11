@@ -19,10 +19,6 @@ public class Ui {
         return "Hello! I'm Duke \nWhat can I do for you?\n";
     }
 
-    public String showLine() {
-        return "_____________________________\n";
-    }
-
     public String showDeleteReply(Task task, int taskListSize) {
         return String.format("Noted. I've removed this task:\n" + "%s" +
                 "\nNow you have %s tasks in the list.\n", task.toString(), taskListSize);
@@ -36,12 +32,10 @@ public class Ui {
         return String.format("OK, I've marked this task as not done yet: \n %s \n", task.toString());
     }
 
-
     public String showTaskList(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder("Here are the items in your list: \n");
         for (int i = 0; i < taskList.getSize(); i++) {
             Tasks.Task task = taskList.get(i);
-
             stringBuilder.append((i + 1) + ".");
             stringBuilder.append(task.toString() + "\n");
         }

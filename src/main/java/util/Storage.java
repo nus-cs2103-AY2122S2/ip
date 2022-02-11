@@ -25,7 +25,6 @@ public class Storage {
         ArrayList<Task> arr = new ArrayList<>();
         File f = new File(filePath);
 
-        // Task | Completeness (1 = complete, 0 = not yet) | description | date by
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
             String taskDetails = s.nextLine();

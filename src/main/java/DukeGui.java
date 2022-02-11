@@ -106,7 +106,6 @@ public class DukeGui extends Application {
 
         stage.setScene(scene);
         stage.show();
-        // more code to be added here later
     }
 
     private Label getDialogLabel(String text) {

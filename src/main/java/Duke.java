@@ -33,37 +33,13 @@ public class Duke extends Application {
 
     }
 
-    /**
-     * Runs the application
-     */
-    /*
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                ui.showLine();
-
-                DukeCommand c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-
-            } catch (DukeException e) {
-                ui.showErrorMessage(e.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-     */
-
     public String executeCommand(String input) throws IOException, DukeException {
-        DukeCommand c = Parser.parse(input);
-        return c.execute(tasks, ui, storage);
+        try {
+            DukeCommand c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch(DukeException e) {
+            return e.getMessage();
+        }
     }
 
     @Override

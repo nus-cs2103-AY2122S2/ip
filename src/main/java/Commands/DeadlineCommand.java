@@ -36,6 +36,5 @@ public class DeadlineCommand extends DukeCommand {
 
         storage.save(tasks);
         return ui.showSuccessfulAdd(deadlineTask, tasks.getSize());
-
     }
 }
