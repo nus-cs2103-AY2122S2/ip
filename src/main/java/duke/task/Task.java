@@ -12,16 +12,6 @@ public class Task {
         this.isDone = false;
     }
 
-    Task(String taskName) {
-        this.taskName = taskName;
-        this.isDone = false;
-    }
-
-    Task(String taskName, boolean isDone) {
-        this.taskName = taskName;
-        this.isDone = isDone;
-    }
-
     /**
      * Converts the Task to a String to be used for File Saving.
      */
