@@ -29,84 +29,22 @@ public class Parser {
                 newCommand = new CList();
                 break;
             case "mark":
-                try {
-                    int markIndex = Integer.parseInt(inputArray[1]) - 1;
-                    newCommand = new CMark(markIndex);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please specify the task you wish to mark.");
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid index format.");
-                }
+                newCommand = createNewMark(inputArray);
                 break;
             case "unmark":
-                try {
-                    int unmarkIndex = Integer.parseInt(inputArray[1]) - 1;
-                    newCommand = new CUnmark(unmarkIndex);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please specify the task you wish to unmark.");
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid index format.");
-                }
+                newCommand = createNewUnmark(inputArray);
                 break;
             case "delete":
-                try {
-                    int deleteIndex = Integer.parseInt(inputArray[1]) - 1;
-                    newCommand = new CDelete(deleteIndex);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please specify the task you wish to delete.");
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid index format.");
-                }
+                newCommand = createNewDelete(inputArray);
                 break;
             case "todo":
-                String todoDescription = String.join(" ",
-                        Arrays.copyOfRange(inputArray, 1, inputArray.length));
-                if (todoDescription.equals("")) {
-                    throw new DukeException("Please specify the description of the todo task.");
-                }
-                newCommand = new CTodo(todoDescription);
+                newCommand = createNewToDo(inputArray);
                 break;
             case "deadline":
-                if (!userInput.contains("/by")) {
-                    throw new DukeException("Please specify the due date using the /by keyword.");
-                } else {
-                    try {
-                        int byIndex = Arrays.asList(inputArray).indexOf("/by");
-                        String deadlineDescription = String.join(" ",
-                                Arrays.copyOfRange(inputArray, 1, byIndex));
-                        String dueDate = String.join(" ",
-                                Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
-                        LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
-                        // check if the date and time input is in the right format
-                        if (deadlineDescription.equals("") || dueDate.equals("")) {
-                            throw new DukeException("Please specify the description/due date of the deadline task.");
-                        }
-                        newCommand = new CDeadline(deadlineDescription, dueDate);
-                    } catch (DateTimeParseException e){
-                        throw new DukeException("Please provide the date time in this format YYYY-MM-DD 0000");
-                    }
-                }
+                newCommand = createNewDeadline(userInput, inputArray);
                 break;
             case "event":
-                if (!userInput.contains("/at")) {
-                    throw new DukeException("Please specify the date time using the /at keyword.");
-                } else {
-                    try {
-                        int byIndex = Arrays.asList(inputArray).indexOf("/at");
-                        String eventDescription = String.join(" ",
-                                Arrays.copyOfRange(inputArray, 1, byIndex));
-                        String dateTime = String.join(" ",
-                                Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
-                        LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
-                        // check if the date and time input is in the right format
-                        if (eventDescription.equals("") || dateTime.equals("")) {
-                            throw new DukeException("Please specify the description/date time of the event task.");
-                        }
-                        newCommand = new CEvent(eventDescription, dateTime);
-                    } catch (DateTimeParseException e){
-                        throw new DukeException("Please provide the date time in this format YYYY-MM-DD 0000");
-                    }
-                }
+                newCommand = createNewEvent(userInput, inputArray);
                 break;
             case "find":
                 String findString = String.join(" ",
@@ -117,5 +55,91 @@ public class Parser {
                 throw new DukeException("Sorry. I do not understand your input.");
         }
         return newCommand;
+    }
+
+    private Command createNewMark(String[] inputArray) throws DukeException{
+        try {
+            int markIndex = Integer.parseInt(inputArray[1]) - 1;
+            return new CMark(markIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please specify the task you wish to mark.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid index format.");
+        }
+    }
+
+    private Command createNewUnmark(String[] inputArray) throws DukeException {
+        try {
+            int unmarkIndex = Integer.parseInt(inputArray[1]) - 1;
+            return new CUnmark(unmarkIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please specify the task you wish to unmark.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid index format.");
+        }
+    }
+
+    private Command createNewDelete(String[] inputArray) throws DukeException {
+        try {
+            int deleteIndex = Integer.parseInt(inputArray[1]) - 1;
+            return new CDelete(deleteIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please specify the task you wish to delete.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid index format.");
+        }
+    }
+
+    private Command createNewToDo(String[] inputArray) throws DukeException {
+        String todoDescription = String.join(" ",
+                Arrays.copyOfRange(inputArray, 1, inputArray.length));
+        if (todoDescription.equals("")) {
+            throw new DukeException("Please specify the description of the todo task.");
+        }
+        return new CTodo(todoDescription);
+    }
+
+    private  Command createNewDeadline(String userInput, String[] inputArray) throws DukeException {
+        if (!userInput.contains("/by")) {
+            throw new DukeException("Please specify the due date using the /by keyword.");
+        } else {
+            try {
+                int byIndex = Arrays.asList(inputArray).indexOf("/by");
+                String deadlineDescription = String.join(" ",
+                        Arrays.copyOfRange(inputArray, 1, byIndex));
+                String dueDate = String.join(" ",
+                        Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
+                LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                // check if the date and time input is in the right format
+                if (deadlineDescription.equals("") || dueDate.equals("")) {
+                    throw new DukeException("Please specify the description/due date of the deadline task.");
+                }
+                return new CDeadline(deadlineDescription, dueDate);
+            } catch (DateTimeParseException e){
+                throw new DukeException("Please provide the date time in this format YYYY-MM-DD 0000");
+            }
+        }
+    }
+
+    private  Command createNewEvent(String userInput, String[] inputArray) throws DukeException {
+        if (!userInput.contains("/at")) {
+            throw new DukeException("Please specify the date time using the /at keyword.");
+        } else {
+            try {
+                int byIndex = Arrays.asList(inputArray).indexOf("/at");
+                String eventDescription = String.join(" ",
+                        Arrays.copyOfRange(inputArray, 1, byIndex));
+                String dateTime = String.join(" ",
+                        Arrays.copyOfRange(inputArray, byIndex + 1, inputArray.length));
+                LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                // check if the date and time input is in the right format
+                if (eventDescription.equals("") || dateTime.equals("")) {
+                    throw new DukeException("Please specify the description/date time of the event task.");
+                }
+                return new CEvent(eventDescription, dateTime);
+            } catch (DateTimeParseException e){
+                throw new DukeException("Please provide the date time in this format YYYY-MM-DD 0000");
+            }
+        }
     }
 }

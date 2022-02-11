@@ -14,11 +14,17 @@ public abstract class Command {
         this.commandType = commandType;
     }
 
-    public static boolean getIsExit() { return Command.isExit; }
+    public static boolean getIsExit() {
+        return Command.isExit;
+    }
 
-    public static void exitDuke() { Command.isExit = true; }
+    public static void exitDuke() {
+        Command.isExit = true;
+    }
 
-    public CommandType getCommandType() { return this.commandType; }
+    public CommandType getCommandType() {
+        return this.commandType;
+    }
 
     public abstract String runCommand(Ui ui, TaskList taskList) throws DukeException;
 }
