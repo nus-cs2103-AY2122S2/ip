@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
 
 import java.awt.Desktop;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.net.URI;
@@ -40,12 +41,28 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/Images/red.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/green.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/Images/profile.png")
+            , 200, 200, false, false);
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/Images/red.png")
+            , 200, 200, false, false);
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String welcomeMessage = "Hello!! I am Duke, your humble personal chatbot.\n"
+                + "What can I do for you?";
+        String cannotSeeFullListAdvice = "PS - If you cannot see your tasks, please go to " +
+                "help -> my tasks";
+        String helpMessage = "If you are new to this app, please type help to see full list of " +
+                "commands";
+        String fileLocationWarning = "Please create a file with the path\n C:/repos/ip/data/tasks.txt" +
+                " or there will be errors using the app.";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage),
+                DialogBox.getDukeDialog(cannotSeeFullListAdvice, dukeImage),
+                DialogBox.getDukeDialog(helpMessage, dukeImage),
+                DialogBox.getDukeDialog(fileLocationWarning, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -81,7 +98,6 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Handle action related to "About" menu item.
-     *
      */
     @FXML
     private void handleAboutAction() throws URISyntaxException, IOException {
@@ -105,9 +121,26 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Handles action to open file containing all tasks recorded so far
+     */
+    @FXML
+    private void handleMyTasks() throws IOException {
+        openTaskFile();
+    }
+
+    /**
      * Leads the user away to the help page
      */
     private void provideAboutFunctionality() throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://nicksunwork.wixsite.com/dukeguide"));
     }
+
+    /**
+     * Opens task file in directory C:/repos/ip/data/tasks.txt
+     */
+    private void openTaskFile() throws IOException {
+        Desktop.getDesktop().open(new File("C:/repos/ip/data/tasks.txt"));
+    }
+
+
 }

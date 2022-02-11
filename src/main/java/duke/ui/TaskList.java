@@ -93,7 +93,8 @@ public class TaskList {
                 notation++;
             }
         }
-        return result.toString();
+        return result.toString().equals("") ? "Oops, we cannot find a similar task"
+                : result.toString();
     }
 
     /**
