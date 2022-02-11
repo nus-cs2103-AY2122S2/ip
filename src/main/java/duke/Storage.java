@@ -21,7 +21,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  */
 public class Storage {
 
-    private static final String FILEPATH = "data/duke.txt";
+    private static final String FILE_PATH = "data/duke.txt";
     private static final String DIR_PATH = "data/";
 
     /**
@@ -47,7 +47,7 @@ public class Storage {
      * @throws IOException If an I/O error occurs.
      */
     public static void updateTaskFile (TaskList taskList) throws IOException {
-        String tempFilePath = FILEPATH + ".new";
+        String tempFilePath = FILE_PATH + ".new";
         File file = Storage.createFileIfNotExist(tempFilePath, DIR_PATH);
         FileWriter fw = new FileWriter(file, true);
         
@@ -55,7 +55,7 @@ public class Storage {
             fw.write(task.toFileFormat());
         }
         fw.close();
-        Files.move(Paths.get(tempFilePath), Paths.get(FILEPATH), REPLACE_EXISTING);
+        Files.move(Paths.get(tempFilePath), Paths.get(FILE_PATH), REPLACE_EXISTING);
 
     }
 
@@ -67,7 +67,7 @@ public class Storage {
      */
     public static TaskList readSaveFile() throws CorruptedSaveException {
         TaskList tasks = new TaskList();
-        File f = new File(FILEPATH);
+        File f = new File(FILE_PATH);
         Scanner s = null;
         try {
             s = new Scanner(f);

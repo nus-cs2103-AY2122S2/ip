@@ -39,6 +39,7 @@ public class Parser {
      * @param input The text input by the user.
      */
     public String inputHandler(String input) {
+        assert input != null;
         String[] commandArgs = input.split(" ", 2);
         String command = commandArgs[0];
         String commandDetails = commandArgs.length == 2 ? commandArgs[1] : null;
@@ -91,6 +92,7 @@ public class Parser {
      * @throws DukeException if user-specified parameters do not meet the expected format.
      */
     public Task createTask(String command, String commandDetails) throws DukeException {
+        assert command != null;
         assertNonEmptyDetails(commandDetails);
         String[] taskArgs = null;
 
