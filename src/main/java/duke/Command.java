@@ -44,5 +44,5 @@ public abstract class Command {
      * @param storage Storage to read pre-existing tasks, and update tasks to hard disk.
      * @throws IOException if an I/O error occurs.
      */
-    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 }

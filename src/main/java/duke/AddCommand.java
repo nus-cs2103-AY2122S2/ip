@@ -67,6 +67,9 @@ public class AddCommand extends Command {
                 ui.showMessage("  " + taskEvent);
                 ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
                 break;
+            default:
+                // pass through
+                break;
             }
             storage.update(tasks);
         } catch (DateTimeParseException e) {

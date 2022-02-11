@@ -27,12 +27,12 @@ public class Todo extends Task {
     public Task mark() {
         return new Todo(this.getDescription(), true);
     }
-    
+
     @Override
     public Task unmark() {
         return new Todo(this.getDescription(), false);
     }
-    
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

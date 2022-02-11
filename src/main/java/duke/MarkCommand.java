@@ -31,10 +31,10 @@ public class MarkCommand extends Command {
                 throw new DukeException("Please choose a valid task! (Your list has "
                         + tasks.size() + " tasks)");
             }
-        tasks.set(taskIdx, tasks.get(taskIdx).mark());
-        ui.showMessage("Nice! I've marked this task as done:\n  "
-                + tasks.get(taskIdx));
-        storage.update(tasks);
+            tasks.set(taskIdx, tasks.get(taskIdx).mark());
+            ui.showMessage("Nice! I've marked this task as done:\n  "
+                    + tasks.get(taskIdx));
+            storage.update(tasks);
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
         }

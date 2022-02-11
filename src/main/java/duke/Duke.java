@@ -17,7 +17,7 @@ public class Duke {
      * @param filePath A string representing the path to the file to save tasks to.
      * @throws IOException if an I/O error occurs.
      */
-    public Duke(String filePath) throws IOException{
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {

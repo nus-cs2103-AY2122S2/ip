@@ -126,6 +126,9 @@ public class Parser {
                 ui.showMessage(e.getMessage());
             }
             break;
+        default:
+            // pass through
+            break;
         }
         return new InvalidCommand("Please try again!");
     }
