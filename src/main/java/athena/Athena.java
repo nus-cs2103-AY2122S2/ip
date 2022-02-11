@@ -31,6 +31,7 @@ public class Athena extends Application {
     public Athena() {
         storage = new Storage(SAVE_DIRECTORY, SAVE_FILENAME);
         initTaskList(); // Load save data if present
+        assert taskList != null;
         isActive = true;
     }
 
@@ -52,6 +53,7 @@ public class Athena extends Application {
         try {
             Command command = Parser.getCommand(input);
             response = command.execute(taskList);
+            assert !response.isEmpty();
             if (command instanceof ShutdownCommand) {
                 isActive = false;
             }

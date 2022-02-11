@@ -15,6 +15,7 @@ public class Messages {
     }
 
     public static String getSpecificTasksDialog(TaskList taskList, List<Integer> taskNumbers) {
+        assert taskNumbers.size() > 0;
         ArrayList<String> outputs = new ArrayList<>();
         for (int taskNumber : taskNumbers) {
             outputs.add(String.format("%d. %s", taskNumber, taskList.getTaskString(taskNumber)));
