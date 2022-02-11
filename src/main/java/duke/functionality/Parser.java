@@ -15,7 +15,13 @@ public class Parser {
     public static final String ERROR_UNKNOWN = "OOPS, I'm sorry, but I don't know what that means :-(";
     public static final String ERROR_DESCRIPTION = "OOPS, The description of a command cannot be empty.";
     public static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-MM-dd HHmm";
-
+    private static final int INDEX_AFTER_MARK_COMMAND = 5;
+    private static final int INDEX_AFTER_UNMARK_COMMAND = 7;
+    private static final int INDEX_AFTER_TODO_COMMAND = 5;
+    private static final int INDEX_AFTER_DEADLINE_COMMAND = 9;
+    private static final int INDEX_AFTER_EVENT_COMMAND = 6;
+    private static final int INDEX_AFTER_DELETE_COMMAND = 7;
+    private static final int INDEX_AFTER_FIND_COMMAND = 5;
     /**
      * Adds a specific type of task into the tasklist depending on the user input.
      *
@@ -30,25 +36,25 @@ public class Parser {
             if (input.equals("list")) {
                 output = taskList.listItems();
             } else if (input.startsWith("mark")) {
-                String taskNumber = input.substring(5);
+                String taskNumber = input.substring(INDEX_AFTER_MARK_COMMAND);
                 output = taskList.markTask(taskNumber);
             } else if (input.startsWith("unmark")) {
-                String taskNumber = input.substring(7);
+                String taskNumber = input.substring(INDEX_AFTER_UNMARK_COMMAND);
                 output = taskList.unmarkTask(taskNumber);
             } else if (input.startsWith("todo")) {
-                String description = input.substring(5);
+                String description = input.substring(INDEX_AFTER_TODO_COMMAND);
                 output = taskList.addToDoTask(description);
             } else if (input.startsWith("deadline")) {
-                String[] descriptionArr = input.substring(9).split(" /by ");
+                String[] descriptionArr = input.substring(INDEX_AFTER_DEADLINE_COMMAND).split(" /by ");
                 output = taskList.addDeadlineTask(descriptionArr);
             } else if (input.startsWith("event")) {
-                String[] descriptionArr = input.substring(6).split(" /at ");
+                String[] descriptionArr = input.substring(INDEX_AFTER_EVENT_COMMAND).split(" /at ");
                 output = taskList.addEventTask(descriptionArr);
             } else if (input.startsWith("delete")) {
-                String taskNumber = input.substring(7);
+                String taskNumber = input.substring(INDEX_AFTER_DELETE_COMMAND);
                 output = taskList.deleteTask(taskNumber);
             } else if (input.startsWith("find")) {
-                String description = input.substring(5);
+                String description = input.substring(INDEX_AFTER_FIND_COMMAND);
                 output = taskList.findTask(taskList, description);
             } else {
                 throw new DukeException(ERROR_UNKNOWN);
