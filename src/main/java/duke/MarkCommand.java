@@ -14,12 +14,12 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.length()) {
             throw new OutOfBoundsException("Out of bounds!");
         } else {
             taskList.mark(index);
-            ui.showMark(taskList.getTask(index));
+            return ui.markString(taskList.getTask(index));
         }
     }
 

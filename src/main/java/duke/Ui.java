@@ -19,43 +19,38 @@ public class Ui {
         return string;
     }
 
-    public void showBye() {
+    public void showMessage(String message) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
-
-    public void showHi() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Hello! I' Duke \nWhat can I do for you?");
+        System.out.println(message);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    public void showMark(Task task) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String byeString() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public void showUnmark(Task task) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("OK, I've marked this task as not done yet: ");
-        System.out.println(task);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String welcomeString() {
+        String welcome = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " +
+                "\nHello! I' Duke " +
+                "\nWhat can I do for you?" +
+                "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        return welcome;
     }
 
-    public void showOutOfBounds() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Out of bounds!");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String markString(Task task) {
+        return "Nice! I've marked this task as done: \n" + task;
     }
 
-    public void showAddTask(Task task) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Got it, I have added this task:" );
-        System.out.println(task);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String unmarkString(Task task) {
+        return "OK, I've marked this task as incomplete: \n" + task;
+    }
+
+    public String outOfBoundsString() {
+        return "Out of bounds!";
+    }
+
+    public String addTaskString(Task task) {
+        return "Got it, I have added this task: \n" + task;
     }
 
     public void showEmptyMessageError() {
@@ -70,28 +65,22 @@ public class Ui {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    public void showSave() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("File saved!");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String saveString() {
+        return "File saved!";
     }
 
-    public void showDelete(Task task, int taskListSize) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(task);
-        System.out.println(String.format("Now you have %d task(s) in the list.", taskListSize));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String deleteString(Task task, int taskListSize) {
+        return "Noted. I've removed this task: \n" + task + "\n" +
+                String.format("Now you have %d task(s) in the list.", taskListSize);
     }
 
-    public void showSaveError(IOException e) {
-        System.out.println("Something went wrong: " + e.getMessage());
+    public String saveErrorString(IOException e) {
+
+        return "Something went wrong: " + e.getMessage();
     }
 
-    public void list(TaskList taskList) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        taskList.list();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String list(TaskList taskList) {
+        return taskList.list();
     }
 
     public String getCommandWord(String fullCommand) {
@@ -178,16 +167,12 @@ public class Ui {
         }
     }
 
-    public void findTask(String fullCommand, TaskList taskList) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String findTask(String fullCommand, TaskList taskList) {
         String taskName = getTaskName(fullCommand);
-        taskList.find(taskName);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        return taskList.find(taskName);
     }
 
-    public void showError(Exception exception) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(exception.getMessage());
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String errorString(Exception exception) {
+        return exception.getMessage();
     }
 }

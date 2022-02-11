@@ -26,10 +26,15 @@ public class TaskList {
         this.arrayList.add(item);
     }
 
-    public void list() {
+    public String list() {
+        String str = "";
         for (int i = 0; i < arrayList.size(); i++) {
-            System.out.println((i + 1) + ". " + arrayList.get(i).toString());
+            if (i >= 1) {
+                str += "\n";
+            }
+            str += (i + 1) + ". " + arrayList.get(i).toString();
         }
+        return str;
     }
 
     public void mark(int index) {
@@ -88,13 +93,14 @@ public class TaskList {
         return s;
     }
 
-    public void find(String string) {
+    public String find(String string) {
         String lowercase = string.toLowerCase();
         for (int i = 0; i < arrayList.size(); i++) {
             Task task = arrayList.get(i);
             if (task.getTaskName().toLowerCase().contains(lowercase)) {
-                System.out.println(task);
+                return task.toString();
             }
         }
+        return "No task found!";
     }
 }

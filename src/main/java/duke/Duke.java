@@ -1,12 +1,8 @@
 package duke;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 /**
  * Class containing Duke and main function
  */
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -15,21 +11,30 @@ public class Duke extends Application {
     public Duke(String filePath, String fileDirectory) {
         this.ui = new Ui();
         this.storage = new Storage(filePath, fileDirectory);
-        this.taskList = new TaskList();
+        try {
+            storage.createFile();
+            this.taskList = storage.readData();
+        } catch (Exception e) {
+            this.taskList = new TaskList();
+        }
         this.parser = new Parser();
     }
 
+    public String welcome() {
+        return ui.welcomeString();
+    }
+
     public void run() {
-        ui.showHi();
+        ui.showMessage(ui.welcomeString());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
+                ui.showMessage(c.execute(taskList, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e);
+                ui.showMessage(ui.errorString(e));
             }
         }
     }
@@ -38,8 +43,14 @@ public class Duke extends Application {
         new Duke("./data/tasks.txt", "./data").run();
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    protected String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            return c.execute(taskList, ui, storage);
 
+        } catch (DukeException e) {
+            return ui.errorString(e);
+        }
     }
+
 }

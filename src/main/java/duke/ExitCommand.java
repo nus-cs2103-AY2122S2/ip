@@ -12,8 +12,8 @@ class ExitCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showBye();
+    String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.byeString();
     }
 
     @Override

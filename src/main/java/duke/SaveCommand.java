@@ -14,12 +14,12 @@ class SaveCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             storage.writeToFile(taskList.saveText());
-            ui.showSave();
+            return ui.saveString();
         } catch (IOException e) {
-            ui.showSaveError(e);
+            return ui.saveErrorString(e);
         }
     }
 

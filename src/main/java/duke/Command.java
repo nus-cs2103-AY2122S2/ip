@@ -15,7 +15,7 @@ abstract class Command {
         return command;
     }
 
-    abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     abstract boolean isExit();
 }

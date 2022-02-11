@@ -12,12 +12,12 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.length()) {
             throw new OutOfBoundsException("Out of bounds!");
         } else {
             taskList.unmark(index);
-            ui.showUnmark(taskList.getTask(index));
+            return ui.unmarkString(taskList.getTask(index));
         }
     }
 

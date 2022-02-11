@@ -14,13 +14,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    String execute(TaskList taskList, Ui ui, Storage storage) {
         if (this.index < 0 || this.index > taskList.length()) {
-            ui.showOutOfBounds();
+            return ui.outOfBoundsString();
         } else {
             Task task = taskList.getTask(index);
             taskList.delete(index);
-            ui.showDelete(task, taskList.getSize());
+            return ui.deleteString(task, taskList.getSize());
         }
     }
 

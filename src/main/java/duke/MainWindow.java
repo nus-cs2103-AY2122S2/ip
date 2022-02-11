@@ -48,7 +48,7 @@ public class MainWindow extends AnchorPane {
         String response;
         String input;
         if (isStart) {
-            response = duke.onStart();
+            response = duke.welcome();
             input = "";
             isStart = false;
             dialogContainer.getChildren().addAll(

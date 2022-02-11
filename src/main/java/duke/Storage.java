@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -46,8 +45,8 @@ class Storage {
         fw.close();
     }
 
-    public ArrayList<Task> readData() {
-        ArrayList<Task> taskList = new ArrayList<>();
+    public TaskList readData() {
+        TaskList taskList = new TaskList();
         try {
             Scanner sc = new Scanner(new File(filePath));
             while (sc.hasNext()) {
