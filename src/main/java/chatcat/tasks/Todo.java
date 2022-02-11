@@ -7,6 +7,8 @@ package chatcat.tasks;
  */
 public class Todo extends Task {
 
+    String todoStr;
+
     /**
      * Creates a {@code Todo} object using a specified description.
      *
@@ -14,6 +16,7 @@ public class Todo extends Task {
      */
     public Todo(String todo) {
         super(todo);
+        this.todoStr = todo;
     }
 
     /**
@@ -24,5 +27,33 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    /**
+     * Checks if this todo {@code Todo} instance is the same as
+     * another todo {@code Todo} instance.
+     *
+     * @param o object {@code Object} to compare with this todo {@code Todo} instance.
+     * @return true if parameter has the same description as this
+     * todo {@code Todo} instance.
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null) {
+            return false;
+        }
+
+        if (!(o instanceof Todo)) {
+            return false;
+        }
+
+        if (o == this) {
+            return true;
+        }
+
+        Todo todo = (Todo) o;
+
+        return this.todoStr.equals(todo.todoStr);
     }
 }

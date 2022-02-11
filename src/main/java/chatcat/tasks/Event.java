@@ -9,18 +9,18 @@ import chatcat.util.DateTimeUtil;
  * @see DateTimeUtil
  */
 public class Event extends Task {
-    String event;
+    String eventStr;
     String time;
 
     /**
      * Creates a {@code Event} object using a specified description.
      *
-     * @param event the description of this task.
+     * @param eventStr the description of this task.
      * @param time the time of the task.
      */
-    public Event(String event, String time) {
-        super(event);
-        this.event = event;
+    public Event(String eventStr, String time) {
+        super(eventStr);
+        this.eventStr = eventStr;
         this.time = time;
     }
 
@@ -32,5 +32,37 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + time + ")";
+    }
+
+    /**
+     * Checks if this event {@code Event} instance is the same as
+     * another event {@code Event} instance.
+     *
+     * @param o object {@code Object} to compare with this event {@code Event} instance.
+     * @return true if parameter has the same description as this
+     * event {@code event} instance.
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null) {
+            return false;
+        }
+
+        if (!(o instanceof Event)) {
+            return false;
+        }
+
+        if (o == this) {
+            return true;
+        }
+
+        Event event = (Event) o;
+        boolean isEventEqual;
+        boolean isDateEqual = this.time.equals(event.time);
+        boolean isEventTypeEqual = this.eventStr.equals(event.eventStr);
+        isEventEqual = isDateEqual && isEventTypeEqual;
+
+        return isEventEqual;
     }
 }

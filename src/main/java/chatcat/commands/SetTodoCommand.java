@@ -6,6 +6,7 @@ import chatcat.chatcatexception.ChatCatException;
 import chatcat.tasks.Task;
 import chatcat.tasks.Todo;
 import chatcat.util.DateTimeUtil;
+import chatcat.util.OutputMessage;
 import chatcat.util.WriteToFile;
 
 /**
@@ -36,17 +37,21 @@ public class SetTodoCommand extends Command {
      * @see Todo
      * @see WriteToFile
      * @see DateTimeUtil
+     * @see OutputMessage
      */
     public void setTodo() throws ChatCatException {
         String[] input = TODO.split(" ");
 
         if (input.length == 1) {
-            throw new ChatCatException(
-                    "OOPS!!! The description of a todo cannot be empty.");
+            throw new ChatCatException(OutputMessage.taskErrorMessage());
         }
       
         String todoStr = TODO.substring(5);
         todo = new Todo(todoStr);
+
+        if (this.tasks.contains(todo)) {
+                throw new ChatCatException(OutputMessage.repeatedTaskErrorMessage());
+        }
 
         super.tasks.add(todo);
         super.writeToFile.toWrite(super.tasks);
@@ -56,11 +61,11 @@ public class SetTodoCommand extends Command {
      * Returns created todo task {@code Task} in String.
      *
      * @return created todo task {@code Task} in String.
+     * @see OutputMessage
      */
     @Override
     public String toString() {
-        return "Got it. I've added this task:\n" + todo + "\n" +
-                "Now you have " + super.tasks.size() + " tasks in the list.";
+        return OutputMessage.setTaskMessage(todo, super.tasks.size());
     }
 }
 

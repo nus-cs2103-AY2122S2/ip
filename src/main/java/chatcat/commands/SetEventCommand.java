@@ -6,6 +6,7 @@ import chatcat.chatcatexception.ChatCatException;
 import chatcat.tasks.Event;
 import chatcat.tasks.Task;
 import chatcat.util.DateTimeUtil;
+import chatcat.util.OutputMessage;
 import chatcat.util.WriteToFile;
 
 /**
@@ -36,12 +37,13 @@ public class SetEventCommand extends Command {
      * @see Event
      * @see WriteToFile
      * @see DateTimeUtil
+     * @see OutputMessage
      */
     public void setEvent() throws ChatCatException {
         String[] input = EVENT.split(" ");
 
         if (input.length == 1) {
-            throw new ChatCatException("OOPS!!! The description of a event cannot be empty.");
+            throw new ChatCatException(OutputMessage.taskErrorMessage());
         }
 
         String[] split = EVENT.split("/at ");
@@ -49,6 +51,10 @@ public class SetEventCommand extends Command {
       
         DateTimeUtil dateTimeUtil = new DateTimeUtil(split[1]);
         event = new Event(eventStr, dateTimeUtil.getTime());
+
+        if (this.tasks.contains(event)) {
+            throw new ChatCatException(OutputMessage.repeatedTaskErrorMessage());
+        }
 
         super.tasks.add(event);
         super.writeToFile.toWrite(super.tasks);
@@ -58,11 +64,11 @@ public class SetEventCommand extends Command {
      * Returns created event task {@code Task} in String.
      *
      * @return created event task {@code Task} in String.
+     * @see OutputMessage
      */
     @Override
     public String toString() {
-        return "Got it. I've added this task:\n" + event + "\n" +
-                "Now you have " + super.tasks.size() + " tasks in the list.";
+        return OutputMessage.setTaskMessage(event, super.tasks.size());
     }
 }
 

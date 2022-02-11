@@ -6,18 +6,18 @@ package chatcat.tasks;
  * @see Task
  */
 public class Deadline extends Task {
-    String deadline;
+    String deadlineStr;
     String time;
 
     /**
      * Creates a {@code Deadline} object using a specified description.
      *
-     * @param deadline the description of this task.
+     * @param deadlineStr the description of this task.
      * @param time the time of the task.
      */
-    public Deadline(String deadline, String time) {
-        super(deadline);
-        this.deadline = deadline;
+    public Deadline(String deadlineStr, String time) {
+        super(deadlineStr);
+        this.deadlineStr = deadlineStr;
         this.time = time;
     }
 
@@ -29,5 +29,37 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + time + ")";
+    }
+
+    /**
+     * Checks if this deadline {@code Deadline} instance is the same as
+     * another deadline {@code Deadline} instance.
+     *
+     * @param o object {@code Object} to compare with this deadline {@code Deadline} instance.
+     * @return true if parameter has the same description as this
+     * deadline {@code Deadline} instance.
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null) {
+            return false;
+        }
+
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+
+        if (o == this) {
+            return true;
+        }
+
+        Deadline deadline = (Deadline) o;
+        boolean isDeadlineEqual;
+        boolean isDateEqual = this.time.equals(deadline.time);
+        boolean isDeadlineTypeEqual = this.deadlineStr.equals(deadline.deadlineStr);
+        isDeadlineEqual = isDateEqual && isDeadlineTypeEqual;
+
+        return isDeadlineEqual;
     }
 }

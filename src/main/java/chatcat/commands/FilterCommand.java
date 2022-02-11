@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import chatcat.chatcatexception.ChatCatException;
 import chatcat.tasks.Task;
 import chatcat.util.WriteToFile;
+import chatcat.util.OutputMessage;
 
 /**
  * The default FilterCommand class inherited from {@code Command}.
@@ -46,7 +47,7 @@ public class FilterCommand extends Command {
         });
 
         if (filteredList.isEmpty()) {
-            throw new ChatCatException("No task with keyword: " + "str");
+            throw new ChatCatException(OutputMessage.deleteErrorMessage());
         }
     }
 
@@ -56,16 +57,10 @@ public class FilterCommand extends Command {
      *
      * @return a representation in string of filtered
      * {@code Task} tasks that includes on keyword.
+     * @see OutputMessage
      */
     @Override
     public String toString() {
-        StringBuffer str = new StringBuffer();
-
-        str.append("Here are the matching tasks in your list:" + "\n");
-        for (int i = 0; i < filteredList.size(); i++) {
-            str.append((i + 1) + ". " + filteredList.get(i) + "\n");
-        }
-
-        return str.toString();
+        return OutputMessage.filterMessage(filteredList);
     }
 }

@@ -3,6 +3,7 @@ package chatcat.commands;
 import java.util.ArrayList;
 
 import chatcat.tasks.Task;
+import chatcat.util.OutputMessage;
 import chatcat.util.WriteToFile;
 
 /**
@@ -48,12 +49,11 @@ public class DeleteCommand extends Command {
      * Returns deleted task {@code Task} in String.
      *
      * @return deleted task {@code Task} in String.
+     * @see OutputMessage
      */
     @Override
     public String toString() {
-        return "Noted. I've removed this task:\n" + removed + "\n" +
-                "Now you have " + super.tasks.size() +
-                " tasks in the list.";
+        return OutputMessage.deleteMessage(removed.toString(), super.tasks.size());
     }
 }
 

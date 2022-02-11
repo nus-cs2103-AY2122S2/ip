@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import chatcat.tasks.Task;
 import chatcat.util.WriteToFile;
+import chatcat.util.OutputMessage;
 
 /**
  * The default MarkCommand class inherited from {@code Command}.
@@ -45,10 +46,11 @@ public class MarkCommand extends Command {
      * Returns marked task {@code Task} in String.
      *
      * @return marked task {@code Task} in String.
+     * @see OutputMessage
      */
     @Override
     public String toString() {
-        return ("Nice! I've marked this task as done:\n" + super.tasks.get(taskID));
+        return OutputMessage.markTaskMessage(super.tasks.get(taskID).toString());
     }
 }
 

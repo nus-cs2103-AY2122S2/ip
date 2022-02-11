@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import chatcat.tasks.Task;
 import chatcat.util.WriteToFile;
+import chatcat.util.OutputMessage;
 
 /**
  * The default ListTaskCommand class inherited from {@code Command}.
@@ -36,18 +37,10 @@ public class ListTaskCommand extends Command{
      * Returns a representation in string of Task in list {@code Task}.
      *
      * @return a representation in string of Task in list {@code Task}.
+     * @see OutputMessage
      */
     @Override
     public String toString() {
-        StringBuffer str = new StringBuffer();
-
-        assert super.tasks.size() > 0 : "empty list!";
-
-        str.append("Here are the tasks in your list:" + "\n");
-        for (int i = 0; i < super.tasks.size(); i++) {
-            str.append((i + 1) + ". " + super.tasks.get(i) + "\n");
-        }
-
-        return str.toString();
+        return OutputMessage.listTaskMessage(super.tasks);
     }
 }

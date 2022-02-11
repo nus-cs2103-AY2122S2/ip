@@ -6,6 +6,7 @@ import chatcat.chatcatexception.ChatCatException;
 import chatcat.tasks.Deadline;
 import chatcat.tasks.Task;
 import chatcat.util.DateTimeUtil;
+import chatcat.util.OutputMessage;
 import chatcat.util.WriteToFile;
 
 /**
@@ -36,12 +37,13 @@ public class SetDeadlineCommand extends Command {
      * @see Deadline
      * @see WriteToFile
      * @see DateTimeUtil
+     * @see OutputMessage
      */
     public void setDeadline() throws ChatCatException {
         String[] input = DEADLINE.split(" ");
 
         if (input.length == 1) {
-            throw new ChatCatException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new ChatCatException(OutputMessage.taskErrorMessage());
         }
 
         String[] split = DEADLINE.split("/by ");
@@ -49,6 +51,10 @@ public class SetDeadlineCommand extends Command {
       
         DateTimeUtil dateTimeUtil = new DateTimeUtil(split[1]);
         deadline = new Deadline(deadlineStr, dateTimeUtil.getTime());
+
+        if (this.tasks.contains(deadline)) {
+            throw new ChatCatException(OutputMessage.repeatedTaskErrorMessage());
+        }
 
         super.tasks.add(deadline);
         super.writeToFile.toWrite(super.tasks);
@@ -58,11 +64,11 @@ public class SetDeadlineCommand extends Command {
      * Returns created deadline task {@code Task} in String.
      *
      * @return created deadline task {@code Task} in String.
+     * @see OutputMessage
      */
     @Override
     public String toString() {
-        return "Got it. I've added this task:\n" + deadline + "\n" +
-                "Now you have " + super.tasks.size() + " tasks in the list.";
+        return OutputMessage.setTaskMessage(deadline, super.tasks.size());
     }
 }
 

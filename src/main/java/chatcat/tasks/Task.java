@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * The default Task class.
  */
-public class Task implements Serializable {
+public abstract class Task implements Serializable {
     private final String TASK;
     private boolean isDone;
 
@@ -60,4 +60,8 @@ public class Task implements Serializable {
     public String toString() {
         return getStatus() + " " + TASK;
     }
+
+    @Override
+    public abstract boolean equals(Object o);
+
 }

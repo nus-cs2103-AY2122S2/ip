@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import chatcat.tasks.Task;
 import chatcat.util.WriteToFile;
+import chatcat.util.OutputMessage;
 
 /**
  * The default UnmarkCommand class inherited from {@code Command}.
@@ -45,10 +46,11 @@ public class UnmarkCommand extends Command {
      * Returns unmarked task {@code Task} in String.
      *
      * @return unmarked task {@code Task} in String.
+     * @see OutputMessage
      */
     @Override
     public String toString() {
-        return ("OK, I've marked this task as not done yet:\n" + super.tasks.get(taskID));
+        return OutputMessage.unmarkTaskMessage(super.tasks.get(taskID).toString());
     }
 }
 
