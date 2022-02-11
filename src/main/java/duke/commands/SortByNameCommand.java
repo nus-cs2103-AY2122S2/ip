@@ -24,12 +24,11 @@ public class SortByNameCommand extends Command {
      * @return true after the list is displayed.
      * @see TaskByNameComparator
      */
-    @Override
     public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         ArrayList tasks = taskManager.getTaskList();
         Collections.sort(tasks, new TaskByNameComparator());
         save(storage, ui, taskManager);
-        return ui.showList(taskManager);
+        return new ListCommand().execute(storage, ui, taskManager);
     }
 }
 /**

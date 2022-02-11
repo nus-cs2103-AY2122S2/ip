@@ -134,13 +134,12 @@ public class Parser {
             type = split[0].toCharArray()[0];
             done = split[1].toCharArray()[0];
             name = split[2].strip();
+            if (name.equals("")) {
+                throw new DukeException("Unable to load task from file!");
+            }
             dateStr = split[3];
             date = Parser.parseDateTime(split[3]);
         } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException("Unable to load task from file!");
-        }
-
-        if (name.equals("")) {
             throw new DukeException("Unable to load task from file!");
         }
 
@@ -182,28 +181,99 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
 
+        input = input.strip();
+
         if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
-            return new AddCommand(input);
+            return newAddCommand(input);
         } else if (input.equals("list")) {
             return new ListCommand();
         } else if (input.equals("list name")) {
             return new SortByNameCommand();
         } else if (input.equals("list date")) {
             return new SortByDateCommand();
-        } else if (input.startsWith("mark") || input.startsWith("unmark")) {
-            return MarkCommand.of(input);
+        } else if (input.startsWith("mark")) {
+            return newMarkDoneCommand(input.replaceFirst("mark", ""));
+        } else if (input.startsWith("unmark")) {
+            return newMarkUndoneCommand(input.replaceFirst("unmark", ""));
         } else if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.startsWith("delete")) {
-            return new DeleteTaskCommand(input);
+            return newDeleteTaskCommand(input.replaceFirst("delete", ""));
         } else if (input.startsWith("find")) {
-            return new FindCommand(input);
+            return newFindCommand(input.replaceFirst("find", ""));
         } else if (input.startsWith("update")) {
-            return UpdateCommand.of(input);
+            return newUpdateCommand(input.replaceFirst("update", ""));
         }
 
         throw new DukeException("Invalid Command!");
     }
+
+    public static AddCommand newAddCommand(String input) throws DukeException{
+        Task taskToAdd = Parser.parseToTask(input);
+        return new AddCommand(taskToAdd);
+    }
+
+    public static DeleteTaskCommand newDeleteTaskCommand(String index) throws DukeException {
+        try {
+            int indexToDelete = Integer.parseInt(index.strip());
+            return new DeleteTaskCommand(indexToDelete);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number entered! Please enter an integer");
+        }
+    }
+
+    public static FindCommand newFindCommand(String keyword) {
+        keyword = keyword.strip();
+        return new FindCommand(keyword);
+    }
+
+    public static MarkDoneCommand newMarkDoneCommand(String index) throws DukeException {
+        try {
+            int indexToMark = Integer.parseInt(index.strip()) - 1;
+            return new MarkDoneCommand(indexToMark);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number entered! Please enter an integer");
+        }
+    }
+
+    public static MarkUndoneCommand newMarkUndoneCommand(String index) throws DukeException {
+        try {
+            int indexToMark = Integer.parseInt(index.strip()) - 1;
+            return new MarkUndoneCommand(indexToMark);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number entered! Please enter an integer");
+        }
+    }
+
+    public static UpdateCommand newUpdateCommand(String input) throws DukeException {
+
+        try {
+            int indexToUpdate = Integer.parseInt(input.strip().split(" ")[0]) - 1;
+
+            if (input.contains("/name")) {
+                String newName = input.split("/name")[1];
+                return new UpdateNameCommand(indexToUpdate,newName);
+            }
+
+            if (input.contains("/date")) {
+                String inputDate = input.split("/date")[1];
+                LocalDateTime date = Parser.parseDateTime(inputDate);
+
+                if (date != null) {
+                    return new UpdateDateCommand(indexToUpdate,date);
+                } else {
+                    return new UpdateDateCommand(indexToUpdate,inputDate);
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number entered! Please enter an integer");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid format entered! Please enter an integer");
+        }
+        return null;
+    }
+
 
     /**
      * Parses a string into a LocalDateTime object.
@@ -214,7 +284,7 @@ public class Parser {
     public static LocalDateTime parseDateTime(String input) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         try {
-            LocalDateTime date = LocalDateTime.parse(input, format);
+            LocalDateTime date = LocalDateTime.parse(input.strip(), format);
             return date;
         } catch (DateTimeParseException exception) {
             return null;

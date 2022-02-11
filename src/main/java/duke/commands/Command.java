@@ -12,19 +12,11 @@ import duke.exceptions.DukeException;
  * @see DeleteTaskCommand
  * @see ExitCommand
  * @see ListCommand
- * @see MarkCommand
  * @see SortByDateCommand
  * @see SortByNameCommand
  */
 public abstract class Command {
-    protected String userInput = "";
-    private Storage storage = new Storage();
-    private Ui ui = new Ui();
-    private TaskManager taskManager = new TaskManager();
 
-    public Command(String userInput) {
-        this.userInput = userInput;
-    }
     public Command() { }
 
     /**

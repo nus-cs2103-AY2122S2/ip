@@ -20,6 +20,10 @@ public class TaskManager {
         return tasks.remove(t);
     }
 
+    public boolean deleteTask(int index) {
+        return tasks.remove(index) != null;
+    }
+
     /**
      * Marks a task as done in the current task list.
      *

@@ -12,8 +12,10 @@ import duke.tasks.Task;
  * Represents a command to Add a new Task.
  */
 public class AddCommand extends Command {
-    public AddCommand(String userInput) {
-        super(userInput);
+    private Task taskToAdd;
+
+    public AddCommand(Task t) {
+        this.taskToAdd = t;
     }
 
     /**
@@ -28,14 +30,8 @@ public class AddCommand extends Command {
      * @throws DukeException If format of the task is wrong.
      */
     public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
-        try {
-            Task task = Parser.parseToTask(this.userInput);
-
-            taskManager.addTask(task);
-            save(storage, ui, taskManager);
-            return ui.showAddedTask(task, taskManager.size());
-        } catch (FailedTaskParseException exception) {
-            throw new DukeException("Wrong Format!");
-        }
+        taskManager.addTask(taskToAdd);
+        save(storage, ui, taskManager);
+        return ui.showAddedTask(taskToAdd, taskManager.size());
     }
 }

@@ -9,8 +9,10 @@ import duke.tasks.Task;
  * Represents a command to delete a task.
  */
 public class DeleteTaskCommand extends Command {
-    public DeleteTaskCommand(String userInput) {
-        super(userInput);
+    private int indexToDelete;
+
+    public DeleteTaskCommand(int index) {
+        this.indexToDelete = index;
     }
 
     /**
@@ -22,24 +24,20 @@ public class DeleteTaskCommand extends Command {
      * @param taskManager The TaskManager that contains the Task object.
      * @return true if command executed successfully, false otherwise.
      */
-    @Override
     public String execute(Storage storage, Ui ui, TaskManager taskManager) {
         if (taskManager.size() == 0) {
             return ui.showDeleteEmptyList();
         }
 
-        int index = Integer.parseInt(userInput.replaceFirst("delete", "").strip()) - 1;
-
-        if (index < 0 || index >= taskManager.size()) {
+        if (this.indexToDelete < 0 || this.indexToDelete >= taskManager.size()) {
             return ui.showDeleteOutOfBounds(taskManager.size());
         }
 
-        Task t = taskManager.getTask(index);
-
-        boolean success = taskManager.deleteTask(t);
-        if (success) {
+        Task toDelete = taskManager.getTask(this.indexToDelete);
+        boolean isSuccess = taskManager.deleteTask(this.indexToDelete);
+        if (isSuccess) {
             save(storage, ui, taskManager);
-            return ui.showDeletedTask(t, taskManager.size());
+            return ui.showDeletedTask(toDelete, taskManager.size());
         }
         return ui.showDeleteFailed();
     }

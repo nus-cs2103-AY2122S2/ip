@@ -8,9 +8,11 @@ import duke.exceptions.DukeException;
 /**
  * Represents a command to mark a task as done.
  */
-public class MarkDoneCommand extends MarkCommand {
-    public MarkDoneCommand(String userInput) {
-        super(userInput);
+public class MarkDoneCommand extends Command{
+    private int indexToMark;
+
+    public MarkDoneCommand(int index) {
+        this.indexToMark = index;
     }
 
     /**
@@ -24,25 +26,22 @@ public class MarkDoneCommand extends MarkCommand {
      * @return true if command executed successfully, false otherwise.
      * @throws DukeException If index entered is not a number.
      */
-    @Override
     public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
         try {
             if (taskManager.size() == 0) {
                 return ui.showMarkEmptyList();
             }
 
-            int index = Integer.parseInt(userInput.replaceFirst("mark", "").strip()) - 1;
-
-            if (index < 0 || index >= taskManager.size()) {
+            if (this.indexToMark < 0 || indexToMark >= taskManager.size()) {
                 return ui.showMarkOutOfBounds();
             }
-            boolean isSuccess = taskManager.markTaskDone(index);
+            boolean isSuccess = taskManager.markTaskDone(indexToMark);
             if (isSuccess) {
                 save(storage, ui, taskManager);
-                return ui.showMarked(taskManager.getTask(index));
+                return ui.showMarked(taskManager.getTask(indexToMark));
             }
 
-            return ui.showMarkNotNeeded(taskManager.getTask(index));
+            return ui.showMarkNotNeeded(taskManager.getTask(indexToMark));
         } catch (NumberFormatException e) {
             return ui.showInvalidIntegerError();
         }

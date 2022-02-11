@@ -8,10 +8,6 @@ import duke.Ui;
  * Represents a command to cause the application to quit.
  */
 public class ExitCommand extends Command {
-    public ExitCommand() {
-        super();
-    }
-
 
     @Override
     public boolean isExit() {

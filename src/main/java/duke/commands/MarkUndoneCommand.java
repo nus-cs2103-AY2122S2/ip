@@ -8,9 +8,11 @@ import duke.exceptions.DukeException;
 /**
  * Represents a command to mark a task as not done.
  */
-public class MarkUndoneCommand extends MarkCommand {
-    public MarkUndoneCommand(String userInput) {
-        super(userInput);
+public class MarkUndoneCommand extends Command {
+    private int indexToUnmark;
+
+    public MarkUndoneCommand(int index) {
+        this.indexToUnmark = index;
     }
 
     /**
@@ -29,17 +31,16 @@ public class MarkUndoneCommand extends MarkCommand {
             if (taskManager.size() == 0) {
                 return ui.showUnmarkEmptyList();
             }
-            int index = Integer.parseInt(userInput.replaceFirst("unmark", "").strip()) - 1;
 
-            if (index < 0 || index >= taskManager.size()) {
+            if (indexToUnmark < 0 || indexToUnmark >= taskManager.size()) {
                 return ui.showUnmarkOutOfBounds();
             }
-            boolean isSuccess = taskManager.markTaskUndone(index);
+            boolean isSuccess = taskManager.markTaskUndone(indexToUnmark);
             if (isSuccess) {
                 save(storage, ui, taskManager);
-                return ui.showUnmarked(taskManager.getTask(index));
+                return ui.showUnmarked(taskManager.getTask(indexToUnmark));
             }
-            return ui.showUnmarkNotNeeded(taskManager.getTask(index));
+            return ui.showUnmarkNotNeeded(taskManager.getTask(indexToUnmark));
 
         } catch (NumberFormatException e) {
             return "Invalid number entered!";

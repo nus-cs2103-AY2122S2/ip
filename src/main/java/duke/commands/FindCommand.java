@@ -12,9 +12,10 @@ import duke.tasks.Task;
  * Represents a command to find all tasks containing the specified keyword.
  */
 public class FindCommand extends Command {
+    private String keyword;
 
-    public FindCommand(String userInput) {
-        super(userInput);
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -25,9 +26,7 @@ public class FindCommand extends Command {
      * @param taskManager The Task Manager containing all tasks to search in.
      * @return True after printing search results.
      */
-    @Override
     public String execute(Storage storage, Ui ui, TaskManager taskManager) {
-        String keyword = userInput.replaceFirst("find", "").strip();
         ArrayList<Task> results = new ArrayList<>(
                 new ArrayList<>(taskManager.getTaskList())
                         .stream()
