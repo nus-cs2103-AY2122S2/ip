@@ -46,7 +46,8 @@ public class InputException extends Exception {
             return "Error. Please provide a search phrase.";
             // No fallthrough
         default:
-            return ""; // Should not get here.
+            assert false;
+            return "";
             // No fallthrough
         }
     }
