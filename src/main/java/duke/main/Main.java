@@ -17,12 +17,17 @@ public class Main extends Application {
 
     private Duke duke = Duke.ofGuiApplication();
 
+    /**
+     * Starts the application.
+     *
+     * @param stage The stage to be used by the application.
+     */
     @Override
     public void start(Stage stage) {
         try {
-            URL fxmlLocation = getClass().getResource("/view/MainWindow.fxml");
-            System.out.println(fxmlLocation);
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            URL filePath = Main.class.getResource("/view/MainWindow.fxml");
+            assert filePath != null : "Some resource is missing, unable to proceed.";
+            FXMLLoader fxmlLoader = new FXMLLoader(filePath);
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
