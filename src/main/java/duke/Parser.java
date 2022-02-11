@@ -25,22 +25,24 @@ public class Parser {
         try {
             if (command.startsWith("list")) {
                 return taskList.list();
-            } else if (command.startsWith("todo ")) {
-                return taskList.addTodo(command.substring(5));
-            } else if (command.startsWith("deadline ")) {
-                return taskList.addDdl(command.substring(9));
-            } else if (command.startsWith("event ")) {
-                return taskList.addEvt(command.substring(6));
-            } else if (command.startsWith("mark ")) {
-                return taskList.mark(command.substring(5), true);
-            } else if (command.startsWith("unmark ")) {
-                return taskList.mark(command.substring(7), false);
-            } else if (command.startsWith("delete ")) {
-                return taskList.delete(command.substring(7));
-            } else if (command.startsWith("find ")) {
-                return taskList.find(command.substring(5));
-            } else if (command.startsWith("duplicates")) {
+            } else if (command.startsWith("todo")) {
+                return taskList.addTodo(command.substring(4).trim());
+            } else if (command.startsWith("deadline")) {
+                return taskList.addDdl(command.substring(8).trim());
+            } else if (command.startsWith("event")) {
+                return taskList.addEvt(command.substring(5).trim());
+            } else if (command.startsWith("mark")) {
+                return taskList.mark(command.substring(4), true);
+            } else if (command.startsWith("unmark")) {
+                return taskList.mark(command.substring(6), false);
+            } else if (command.startsWith("delete")) {
+                return taskList.delete(command.substring(6));
+            } else if (command.startsWith("find")) {
+                return taskList.find(command.substring(4).trim());
+            } else if (command.startsWith("duplicate")) {
                 return taskList.duplicates();
+            } else if (command.startsWith("clear")) {
+                return taskList.clear();
             } else if (command.startsWith("save")) {
                 return storage.writeFrom(taskList);
             } else {

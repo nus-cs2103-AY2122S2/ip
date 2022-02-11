@@ -50,7 +50,9 @@ public class TaskList {
     public String addDdl(String taskInfo) {
         int i = taskInfo.indexOf(" /by ");
         if (i > 0 && i + 5 < taskInfo.length()) {
-            Deadline t = new Deadline(taskInfo.substring(0, i), LocalDate.parse(taskInfo.substring(i + 5)));
+            Deadline t = new Deadline(
+                    taskInfo.substring(0, i).trim(),
+                    LocalDate.parse(taskInfo.substring(i + 5).trim()));
             tasks.add(t);
             return addMessage();
         } else {
@@ -67,7 +69,9 @@ public class TaskList {
     public String addEvt(String taskInfo) {
         int i = taskInfo.indexOf(" /at ");
         if (i > 0 && i + 5 < taskInfo.length()) {
-            Event t = new Event(taskInfo.substring(0, i), taskInfo.substring(i + 5));
+            Event t = new Event(
+                    taskInfo.substring(0, i).trim(),
+                    taskInfo.substring(i + 5).trim());
             tasks.add(t);
             return addMessage();
         } else {
@@ -174,7 +178,7 @@ public class TaskList {
             Task t = tasks.get(i);
             boolean isMatch = t.match(keyword);
             if (isMatch && !isFound) {
-                message.append("Here are the matching tasks in your list:\n");
+                message.append("Here are the matching tasks in your list:");
                 isFound = true;
             }
             if (isMatch) {
@@ -222,8 +226,9 @@ public class TaskList {
     /**
      * Clears all tasks in taskList.
      */
-    public void clear() {
+    public String clear() {
         tasks.clear();
+        return "You now have no task listed.";
     }
 
     @Override
