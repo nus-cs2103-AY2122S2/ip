@@ -1,8 +1,11 @@
 package Duke;
 
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected LocalDate doneOn;
 
     /**
      * Costructor method for Task.
@@ -28,6 +31,7 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+        this.doneOn = LocalDate.now();
     }
 
     /**
@@ -35,6 +39,7 @@ public class Task {
      */
     public void unmark() {
         this.isDone = false;
+        this.doneOn = null;
     }
 
     /**

@@ -1,6 +1,7 @@
 package Duke;
 
 import Duke.Exceptions.EmptyMessageException;
+import Duke.Exceptions.MissingEnquiryDateException;
 import Duke.Exceptions.WrongCommandException;
 import Duke.Exceptions.WrongDateFormatException;
 
@@ -105,6 +106,9 @@ public class Duke {
                 case "find":
                     commands.cmdFind(cmd);
                     break;
+                case "stats":
+                    commands.cmdStats(cmd);
+                    break;
                 case "list":
                     commands.cmdList();
                     break;
@@ -114,7 +118,7 @@ public class Duke {
                 default:
                     throw new WrongCommandException("Invalid Command");
                 }
-            } catch (EmptyMessageException | WrongDateFormatException e) {
+            } catch (EmptyMessageException | WrongDateFormatException | MissingEnquiryDateException e) {
                 myPrinter.printExceptions(e);
             }
         }
@@ -169,10 +173,13 @@ public class Duke {
             case "bye":
                 result = commands.cmdBye();
                 return result;
+            case "stats":
+                result = commands.cmdStats(input);
+                return result;
             default:
                 return "That is not in my defined features! Try again please!";
             }
-        } catch (EmptyMessageException | WrongDateFormatException e) {
+        } catch (EmptyMessageException | WrongDateFormatException | MissingEnquiryDateException e) {
             myPrinter.printExceptions(e);
             return myUiPrinter.printExceptions(e);
         }

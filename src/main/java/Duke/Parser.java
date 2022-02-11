@@ -40,4 +40,7 @@ public class Parser {
     public static String[] splitDateAndTime(String dateTime) {
         return dateTime.split(" ", 2);
     }
+    public static String[] splitSearchAndDays(String search) {
+        return search.split(" ", 2);
+    }
 }

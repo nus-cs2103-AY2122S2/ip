@@ -1,13 +1,17 @@
 package Duke;
 
 import Duke.Exceptions.EmptyMessageException;
+import Duke.Exceptions.MissingEnquiryDateException;
 import Duke.Exceptions.WrongDateFormatException;
+
+import java.time.LocalDate;
 
 public class Commands {
 
     private final ListStorage myStorage;
     private final Printer myPrinter;
     private final UiPrinter myUiPrinter = new UiPrinter();
+    private final Statistics myStatistics;
 
     /**
      * Constructor for Commands. Commands contain a ListStorage
@@ -19,6 +23,7 @@ public class Commands {
     public Commands(ListStorage listStorage, Printer printer) {
         this.myStorage = listStorage;
         this.myPrinter = printer;
+        this.myStatistics = new Statistics(this.myStorage);
     }
 
     /**
@@ -177,5 +182,43 @@ public class Commands {
         }
         myPrinter.printList(tempStorage);
         return myUiPrinter.printList(tempStorage);
+    }
+
+    /**
+     * Returns a list of completed tasks during the period of enquiry.
+     * @param cmd Command containing keyword and period of enquiry.
+     * @return List of completed tasks.
+     */
+    public String cmdStats(String cmd) throws MissingEnquiryDateException {
+        String[] cmds = Parser.splitSearchAndDays(cmd);
+        LocalDate day;
+        if (cmds.length <= 1) {
+            throw new MissingEnquiryDateException("Missing enquiry date");
+        }
+        String toFind = cmds[1];
+        String result;
+        switch (toFind) {
+        case "today":
+            day = LocalDate.now();
+            result = myStatistics.getCompletedTask(day);
+            System.out.println(result);
+            return result;
+        case "this week":
+            day = LocalDate.now().minusDays(7);
+            result = myStatistics.getCompletedTask(day);
+            System.out.println(result);
+            return result;
+        case "this month":
+            day = LocalDate.now().minusDays(31);
+            result = myStatistics.getCompletedTask(day);
+            System.out.println(result);
+            return result;
+        default:
+            long convertDaysToInt = Long.parseLong(toFind);
+            day = LocalDate.now().minusDays(convertDaysToInt);
+            result = myStatistics.getCompletedTask(day);
+            System.out.println(result);
+            return result;
+        }
     }
 }
