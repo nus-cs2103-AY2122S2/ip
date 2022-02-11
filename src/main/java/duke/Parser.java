@@ -18,9 +18,9 @@ public class Parser {
     String getCommandThroughRegex(String regex) {
         String command = "";
         if (regex.equalsIgnoreCase("/by")) {
-            command = "event";
-        } else if (regex.equalsIgnoreCase("/at")) {
             command = "deadline";
+        } else if (regex.equalsIgnoreCase("/at")) {
+            command = "event";
         } else {
             command = "todo";
         }
