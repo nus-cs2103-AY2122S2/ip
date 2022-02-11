@@ -35,6 +35,7 @@ class TaskList {
      * Adds the passed task into the TaskList.
      *
      * @param task to be added.
+     * @return string to be printed after addItem had been completed.
      */
     public String addItem(Task task) {
         list.add(task);
@@ -56,8 +57,9 @@ class TaskList {
      * Deletes item of the given index from TaskList.
      *
      * @param index integer to indicate the index of the item that is selected to be deleted.
+     * @return string to be printed after deleteItem had completed.
      */
-    public String deleteTask(int index) {
+    public String deleteItem(int index) {
         Task removedTask = list.remove(index);
         if (removedTask instanceof Deadline) {
             Deadline tmp = (Deadline) removedTask;
@@ -75,24 +77,35 @@ class TaskList {
 
     /**
      * Prints the TaskList out in order with status of each task.
+     * 
+     * @return string to be printed after print had been completed.
      */
     public String print() {
-        String printString;
         if (list.size() == 0) {
-            printString  = "There is currently no item on the list!!\n";
-        } else {
-            printString = "Task List:\n";
-            for (int i = 0; i < list.size(); i++) {
-                printString = printString + (i + 1) + ". " + list.get(i).getTaskDetails() + "\n";
-            }
+            return "There is currently no item on the list!!\n";
+        }
+
+        String printString = "Task List:\n";
+        for (int i = 0; i < list.size(); i++) {
+            printString = printString + (i + 1) + ". " + list.get(i).getTaskDetails() + "\n";
         }
         return printString;
     }
 
     /**
      * Marks item of the given index of tasklist done.
+     * 
+     * @return string to be printed after markItem had been completed.
      */
-    public String markItem(int index) {
+    public String markItem(int index) throws SiriException {
+        if (this.list.size() == 0) {
+            throw new SiriException("There is currently no tasks!!");
+        }
+        
+        if (index >= this.list.size() || index < 0) {
+            throw new SiriException("Please ENTER a number within the number of tasks!!");
+        }
+
         String printString = list.get(index).markTaskDone();
         assert list.get(index).isDone == true : "Task should have been marked done!!";
         return printString;
@@ -102,43 +115,50 @@ class TaskList {
      * Marks item of the given index of tasklist undone.
      *
      * @param index integer to indicate the item index to be unmarked.
+     * @return string to be printed after unmarkItem had been completed.
      */
-    public String unmarkItem(int index) {
-        String printString =  list.get(index).markTaskUndone();
+    public String unmarkItem(int index) throws SiriException{
+        if (this.list.size() == 0) {
+            throw new SiriException("There is currently no tasks!!");
+        } 
+
+        if (index >= this.list.size() || index < 0) {
+            throw new SiriException("Please ENTER a number within the number of tasks!!");
+        }
+        String printString = list.get(index).markTaskUndone();
         assert list.get(index).isDone == false : "Task should have been marked undone!!";
         return printString;
+
     }
 
     /**
      * Prints the events in the tasklist that falls on the date that is passed in as parameter.
      *
      * @param date the date that the is being referenced to.
+     * @return string to be printed after printEventOn had been completed.
      */
     public String printEventOn(LocalDate date) {
-        ArrayList<Event> tmp = new ArrayList<Event>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
-        String printString;
-
-        if (eventList.size() != 0) {
-            for (int i = 0; i < eventList.size(); i++) {
-                if (eventList.get(i).dateCompare(date)) {
-                    tmp.add(eventList.get(i));
-                }
-            }
-
-            if (tmp.size() == 0) {
-                printString = "No event on " + date.format(dtf) + "!!\n";
-            } else {
-                printString = tmp.size() + " events on " + date.format(dtf) + ":\n";
-                for (int i = 0; i < tmp.size(); i++) {
-                    printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
-                }
-
-            }
-        } else {
-            printString = "No event on " + date.format(dtf) + "!!\n";
+        if (eventList.size() == 0) {
+            return "No event on " + date.format(dtf) + "!!\n";
         }
 
+        ArrayList<Event> tmp = new ArrayList<Event>();
+
+        for (int i = 0; i < eventList.size(); i++) {
+            if (eventList.get(i).dateCompare(date)) {
+                tmp.add(eventList.get(i));
+            }
+        }
+
+        if (tmp.size() == 0) {
+            return "No event on " + date.format(dtf) + "!!\n";
+        } 
+
+        String printString = tmp.size() + " events on " + date.format(dtf) + ":\n";
+        for (int i = 0; i < tmp.size(); i++) {
+            printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
+        }
         return printString;
     }
 
@@ -146,31 +166,31 @@ class TaskList {
      * Prints the deadlines in the tasklist that falls on the date that is passed in as parameter.
      *
      * @param date the date that the is being referenced to.
+     * @return string to be printed after printDeadlineOn had been completed.
      */
     public String printDeadlineOn(LocalDate date) {
-        String printString;
-        ArrayList<Deadline> tmp = new ArrayList<Deadline>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
 
-        if (deadlineList.size() != 0) {
-            for (int i = 0; i < deadlineList.size(); i++) {
-                if (deadlineList.get(i).dateCompare(date)) {
-                    tmp.add(deadlineList.get(i));
-                }
-            }
-
-            if (tmp.size() == 0) {
-                printString = "No deadline on " + date.format(dtf) + "!!\n";
-            } else {
-                printString = tmp.size() + " deadline item(s) on " + date.format(dtf) + ":\n";
-                for (int i = 0; i < tmp.size(); i++) {
-                    printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
-                }
-            }
-        } else {
-            printString = "No deadline on " + date.format(dtf) + "!!\n";
+        if (deadlineList.size() == 0) {
+            return "No deadline on " + date.format(dtf) + "!!\n";
         }
 
+        ArrayList<Deadline> tmp = new ArrayList<Deadline>();
+
+        for (int i = 0; i < deadlineList.size(); i++) {
+            if (deadlineList.get(i).dateCompare(date)) {
+                tmp.add(deadlineList.get(i));
+            }
+        }
+
+        if (tmp.size() == 0) {
+            return "No deadline on " + date.format(dtf) + "!!\n";
+        }
+            
+        String printString = tmp.size() + " deadline item(s) on " + date.format(dtf) + ":\n";
+        for (int i = 0; i < tmp.size(); i++) {
+            printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
+        }
         return printString;
     }
 
@@ -178,36 +198,47 @@ class TaskList {
      * Prints items which contains the keyword passed.
      *
      * @param keyword to search through the list of tasks.
+     * @return string to be printed after find had been completed.
      */
     public String find(String keyword) {
+        if (list.size() == 0) {
+            return "There is currently no item on the list!!";
+        }
+
         ArrayList<Task> tmp = new ArrayList<Task>();
-        String printString = "";
 
-        if (list.size() != 0) {
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).item.contains(keyword)) {
-                    tmp.add(list.get(i));
-                }
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).item.contains(keyword)) {
+                tmp.add(list.get(i));
             }
+        }
 
-            if (tmp.size() == 0) {
-                printString = "No item on the list contains \"" +  keyword + "\"!!\n";
-            } else {
-                printString = "Here are the matching tasks in you list:\n";
-                for (int i = 0; i < tmp.size(); i++) {
-                    printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
-                }
-            }
-        } else {
-            System.out.println("There are currently no item on the list!!");
+        if (tmp.size() == 0) {
+            return "No item on the list contains \"" +  keyword + "\"!!\n";
+        }
+
+        String printString = "Here are the matching tasks in you list:\n";
+        for (int i = 0; i < tmp.size(); i++) {
+            printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
         }
 
         return printString;
     }
 
+    private Deadline createLoadedDeadline(String[] taskDetails) {
+        String[] dlSubSplit = taskDetails[2].split(" /by ", 2);
+        String[] dlSubSplit2 = dlSubSplit[1].split(" ", 2);
+        if (dlSubSplit2.length == 1 || dlSubSplit2[1].trim().length() == 0) {
+            return new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(taskDetails[1].trim()),
+                    TaskList.stringToDate(dlSubSplit[1].trim()));
+        } 
+        return new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(taskDetails[1].trim()),
+                TaskList.stringToDate(dlSubSplit2[0]), TaskList.stringToTime(dlSubSplit2[1]));
+
+    }
+
     private void startUpAddTask(String input) {
         String[] inputSplit = input.split(" ", 3);
-
         try {
             switch (inputSplit[0]) {
             case "T":
@@ -215,16 +246,7 @@ class TaskList {
                 list.add(todo);
                 break;
             case "D":
-                String[] dlSubSplit = inputSplit[2].split(" /by ", 2);
-                String[] dlSubSplit2 = dlSubSplit[1].split(" ", 2);
-                Deadline dl;
-                if (dlSubSplit2.length == 1 || dlSubSplit2[1].trim().length() == 0) {
-                    dl = new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(inputSplit[1].trim()),
-                            TaskList.stringToDate(dlSubSplit[1].trim()));
-                } else {
-                    dl = new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(inputSplit[1].trim()),
-                            TaskList.stringToDate(dlSubSplit2[0]), TaskList.stringToTime(dlSubSplit2[1]));
-                }
+                Deadline dl = createLoadedDeadline(inputSplit);
                 list.add(dl);
                 deadlineList.add(dl);
                 break;
@@ -240,7 +262,7 @@ class TaskList {
                 throw new SiriException("Error in data format!!");
             }
         } catch (DateTimeParseException dtpe) {
-            throw new SiriException("Error LOADING data!!");
+            throw new SiriException("Error in data date/time format!!");
         }
 
     }
