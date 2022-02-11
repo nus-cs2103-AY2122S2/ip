@@ -1,17 +1,19 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 import duke.exceptions.DukeException;
+import duke.interfaces.Timable;
 
 /**
  * Represents an event task.
  * Stores the date, start time and end time of the event.
  */
-public class Event extends Task {
+public class Event extends Task implements Timable {
 
     protected LocalDate date;
     protected LocalTime startTime;
@@ -30,6 +32,16 @@ public class Event extends Task {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    /**
+     * Gets the dateTime representation of an event, with the date being
+     * the date of the event and time being the start time of the event.
+     * @return the dateTime representation of this deadLine task.
+     */
+    @Override
+    public LocalDateTime getDateTime() {
+        return LocalDateTime.of(date, startTime);
     }
 
     @Override

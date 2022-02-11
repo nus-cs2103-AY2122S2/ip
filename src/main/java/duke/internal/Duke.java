@@ -7,6 +7,7 @@ import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
+import duke.commands.SortCommand;
 import duke.commands.StoreDeadlineCommand;
 import duke.commands.StoreEventCommand;
 import duke.commands.StoreTodoCommand;
@@ -95,5 +96,6 @@ public class Duke {
         parser.addCommand(new StoreEventCommand());
         parser.addCommand(new StoreTodoCommand());
         parser.addCommand(new HelpCommand());
+        parser.addCommand(new SortCommand());
     }
 }

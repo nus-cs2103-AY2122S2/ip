@@ -1,9 +1,12 @@
 package duke.tasks;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import duke.exceptions.DukeException;
+import duke.interfaces.Timable;
 
 /**
  * Represents a container that manages the tasks in the program.
@@ -130,5 +133,47 @@ public class TaskList implements Serializable {
             }
         }
         return taskSet;
+    }
+
+    /**
+     * Sorts the internal list of task alphabetically.
+     * @return a list of string representations of the tasks in the sorted list.
+     */
+    public ArrayList<String> sortAlphabetically() {
+        Comparator<Task> alphabetical = new Comparator<>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.description.compareTo(o2.description);
+            }
+        };
+        tasks.sort(alphabetical);
+        return list();
+    }
+
+    /**
+     * Sorts the internal list of task chronologically.
+     * @return a list of string representations of the tasks in the sorted list.
+     */
+    public ArrayList<String> sortChronologically() {
+        Comparator<Task> chronological = new Comparator<>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                if (o1 instanceof Timable && o2 instanceof Timable) {
+                    Timable t1 = (Timable) o1;
+                    Timable t2 = (Timable) o2;
+                    LocalDateTime dt1 = t1.getDateTime();
+                    LocalDateTime dt2 = t2.getDateTime();
+                    return dt1.compareTo(dt2);
+                } else if (!(o1 instanceof Timable) && o2 instanceof Timable) {
+                    return 1;
+                } else if (o1 instanceof Timable && !(o2 instanceof Timable)) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        };
+        tasks.sort(chronological);
+        return list();
     }
 }

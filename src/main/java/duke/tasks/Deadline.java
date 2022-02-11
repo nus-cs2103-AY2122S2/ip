@@ -1,17 +1,19 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 import duke.exceptions.DukeException;
+import duke.interfaces.Timable;
 
 /**
  * Represents a task with a deadline.
  * Stores the date and time(if applicable) of the deadline tasks
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Timable {
 
     protected LocalDate date;
     protected LocalTime time;
@@ -41,6 +43,20 @@ public class Deadline extends Task {
         this.date = date;
         this.time = time;
         hasTime = true;
+    }
+
+    /**
+     * Gets the dateTime representation of a deadline, with the date being
+     * the date of the deadline and time(if applicable) being the time of the deadline task.
+     * @return the dateTime representation of this deadline task.
+     */
+    @Override
+    public LocalDateTime getDateTime() {
+        if (hasTime) {
+            return LocalDateTime.of(date, time);
+        } else {
+            return LocalDateTime.of(date, LocalTime.MIN);
+        }
     }
 
     @Override
