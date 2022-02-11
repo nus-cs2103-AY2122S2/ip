@@ -1,7 +1,7 @@
-package duke.exception;
+package holobot.exception;
 
 /**
- * Represents an exception class that can be thrown when using Duke.
+ * Represents an exception class that can be thrown when using HoloBot.
  *
  * @author Terng Yan Long
  */

@@ -1,4 +1,4 @@
-package duke.task;
+package holobot.task;
 
 /**
  * Represents a task that is to be done by the user.

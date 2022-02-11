@@ -1,8 +1,8 @@
-package duke.gui;
+package holobot.gui;
 
 import java.io.FileNotFoundException;
 
-import duke.Duke;
+import holobot.HoloBot;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private HoloBot holoBot;
 
     // Image Credit to kelsoji (https://www.pinterest.com/kelsoji)
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Rushia.png"));
@@ -38,26 +38,26 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) throws FileNotFoundException {
-        duke = d;
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hi! I am KoroBot :D\n"
+    public void setDuke(HoloBot d) throws FileNotFoundException {
+        holoBot = d;
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hi! I am HoloBot :D\n"
                 + "How may I help you?", dukeImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing HoloBot's reply and then appends them
+     * to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = holoBot.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (response.equals("See you again!")) {
+        if (response.equals("See you again, peko!")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();

@@ -1,9 +1,9 @@
-package duke;
+package holobot;
 
-import duke.exception.DukeException;
-import duke.misc.Parser;
-import duke.misc.Storage;
-import duke.misc.TaskList;
+import holobot.exception.DukeException;
+import holobot.misc.Parser;
+import holobot.misc.Storage;
+import holobot.misc.TaskList;
 
 /**
  * KoroBot is a chatbot that tracks the list of tasks on hand.
@@ -11,14 +11,14 @@ import duke.misc.TaskList;
  * @version 9.0
  * @since 1.0
  */
-public class Duke {
+public class HoloBot {
     private Storage storage;
     private TaskList listOfTasks;
 
     /**
-     * Creates a new instance of Duke.
+     * Creates a new instance of HoloBot.
      */
-    public Duke() {
+    public HoloBot() {
         storage = new Storage();
         listOfTasks = storage.initTaskList(100); // Assume there will be no more than 100 tasks
     }

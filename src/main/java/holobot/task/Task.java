@@ -1,7 +1,7 @@
-package duke.task;
+package holobot.task;
 
 /**
- * Represents the task that the user has created in Duke.
+ * Represents the task that the user has created in HoloBot.
  *
  * @author Terng Yan Long
  */

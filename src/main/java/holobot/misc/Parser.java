@@ -1,4 +1,4 @@
-package duke.misc;
+package holobot.misc;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,10 +7,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
-import duke.exception.DukeException;
-import duke.exception.InvalidCommand;
-import duke.exception.InvalidDateTime;
-import duke.exception.InvalidIndex;
+import holobot.exception.DukeException;
+import holobot.exception.InvalidCommand;
+import holobot.exception.InvalidDateTime;
+import holobot.exception.InvalidIndex;
 
 /**
  * Extracts and deciphers the user's input, and subsequently calls the relevant function.
@@ -118,9 +118,9 @@ public class Parser {
                 throw new InvalidCommand("The argument MUST contain a single date.");
             }
         case ("bye"):
-            return "See you again!";
+            return "See you again, peko!";
         default:
-            throw new InvalidCommand("I'm sorry, but I don't know what that means :(");
+            throw new InvalidCommand("I don't know what that means :(");
         }
     }
 

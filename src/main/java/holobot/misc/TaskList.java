@@ -1,4 +1,4 @@
-package duke.misc;
+package holobot.misc;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.exception.InvalidDateTime;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import holobot.exception.InvalidDateTime;
+import holobot.task.Deadline;
+import holobot.task.Event;
+import holobot.task.Task;
+import holobot.task.Todo;
 
 /**
  * Acts as a storage for all the tasks that the user has entered.

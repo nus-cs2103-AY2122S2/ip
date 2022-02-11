@@ -1,4 +1,4 @@
-package duke.exception;
+package holobot.exception;
 
 /**
  * Represents an exception that will be thrown when the user enters an invalid date or time.
@@ -25,6 +25,6 @@ public class InvalidDateTime extends DukeException {
      */
     @Override
     public String toString() {
-        return "OOPS!!! " + errorMessage;
+        return "EHHHHHHH~ " + errorMessage;
     }
 }

@@ -1,10 +1,10 @@
-package duke.misc;
+package holobot.misc;
 
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import duke.exception.InvalidDateTime;
+import holobot.exception.InvalidDateTime;
 
 /**
  * Deals with the checking validity of date and time.

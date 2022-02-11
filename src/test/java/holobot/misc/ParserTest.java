@@ -1,6 +1,6 @@
-package duke.misc;
+package holobot.misc;
 
-import static duke.misc.Parser.parse;
+import static holobot.misc.Parser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -428,7 +428,7 @@ public class ParserTest {
             parse("this is an invalid command", listOfTasks);
             fail();
         } catch (Exception e) {
-            assertEquals("I'm sorry, but I don't know what that means :(", e.getMessage());
+            assertEquals("I don't know what that means :(", e.getMessage());
         }
     }
 
