@@ -56,11 +56,13 @@ public class Parser {
             case "done":
             // Fallthrough
             case "do":
+                assert parsedSentence[1] != null : "User should have input an index to mark";
                 int addIdx = Integer.parseInt(parsedSentence[1]); // base 1
                 ui.showMarked(tasks.mark(addIdx - 1), addIdx);
                 break;
 
             case "unmark":
+                assert parsedSentence[1] != null : "User should have input an index to unmark";
                 int delIdx = Integer.parseInt(parsedSentence[1]);
                 ui.showUnmarked(tasks.unmark(delIdx - 1), delIdx);
                 break;
@@ -84,12 +86,14 @@ public class Parser {
             case "delete":
             // Fallthrough
             case "remove":
+                assert parsedSentence[1] != null : "User should have input an index to mark";
                 ui.showTaskRemoved(tasks.remove( Integer.parseInt(parsedSentence[1]) - 1), tasks);
                 break;
 
             case "find":
             // Fallthrough
             case "search":
+                assert parsedSentence[1] != null : "User should have input a search term";
                 if (parsedSentence.length > 2) {
                     throw new LilyException(LilyException.ERROR_TOO_MANY_SEARCH_TERMS);
                 } else {

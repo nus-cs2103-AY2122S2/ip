@@ -42,6 +42,7 @@ public class Lily extends Application {
         parser = new Parser(tasks, ui, storage);
     }
 
+
     /**
      * Previous driver method of the application before GUI introduced.
      * Used for unit tests only
@@ -56,6 +57,7 @@ public class Lily extends Application {
      * Runs the application.
      */
     public void run() {
+        assert tasks != null : "Tasks should have been created in the constructor.";
         ui.showWelcome(tasks);
     }
 
