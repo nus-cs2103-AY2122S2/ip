@@ -13,7 +13,6 @@ public class Ui {
      * Initialize an Ui interface
      */
     public Ui() {
-        startChat();
     }
 
     /**
@@ -132,7 +131,7 @@ public class Ui {
         },
         HELLO {
             public String toString() {
-                return " Hello! I'm Duke";
+                return " Hello! I'm Angela, your personal task manager assistant";
             }
         },
         GOODBYE {

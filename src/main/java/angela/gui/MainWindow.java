@@ -1,6 +1,9 @@
 package angela.gui;
 
 import angela.Angela;
+import angela.util.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,11 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for angela.gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String GOODBYE = "bye";
     private static final String USER_IMAGE_URL = "/images/DaUser.png";
     private static final String ANGELA_IMAGE_URL = "/images/DaAngela.png";
     @FXML
@@ -29,9 +34,15 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_URL));
     private final Image angelaImage = new Image(this.getClass().getResourceAsStream(ANGELA_IMAGE_URL));
 
+    /**
+     * Initialize the FXML
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Ui ui = new Ui();
+        String input = ui.startChat();
+        dialogContainer.getChildren().add(DialogBox.getAngelaDialog(input, angelaImage));
     }
 
     public void setAngela(Angela d) {
@@ -51,5 +62,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getAngelaDialog(response, angelaImage)
         );
         userInput.clear();
+        if (input.equals(GOODBYE)) {
+            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+            pauseTransition.setOnFinished(f -> Platform.exit());
+            pauseTransition.play();
+        }
     }
 }
