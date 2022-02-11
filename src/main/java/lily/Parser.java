@@ -1,8 +1,5 @@
 package lily;
 
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-
 /**
  * Makes sense of commands input by the user and executes them.
  * 
@@ -25,16 +22,6 @@ public class Parser {
         this.tasks = t;
         this.ui = ui;
         this.st = st;
-    }
-
-    /**
-     * Creates a new Empty Parser Object.
-     * For debugging
-     */
-    public Parser() {
-        this.tasks = new TaskList();
-        this.ui = new Ui(false);
-        this.st = new Storage();
     }
 
     /**
@@ -79,32 +66,32 @@ public class Parser {
                 break;
 
             case "todo":
-                ui.showTaskAdded(tasks.addTodo(findTodoDescStart(sentence)), tasks.getSize());
+                ui.showTaskAdded(tasks.addTodo(findDescDate(TaskType.TODO, sentence)[0]), tasks.getSize());
                 break;
 
             case "deadline":
-                String[] parsedDeadline = findDeadlineDescStart(sentence);
-                ui.showTaskAdded(tasks.addDeadline(parsedDeadline[0], parsedDeadline[1]), tasks.getSize());
+                String deadDescription = findDescDate(TaskType.DEADLINE, sentence)[0];
+                String deadDate = findDescDate(TaskType.DEADLINE, sentence)[1];
+                ui.showTaskAdded(tasks.addDeadline(deadDescription, deadDate), tasks.getSize());
                 break;
 
             case "event":
-                String[] parsedEvent = findEventDescStart(sentence);
-                ui.showTaskAdded(tasks.addEvent(parsedEvent[0], parsedEvent[1]), tasks.getSize());
+                String eventDescription = findDescDate(TaskType.EVENT, sentence)[0];
+                String eventDate = findDescDate(TaskType.EVENT, sentence)[1];
+                ui.showTaskAdded(tasks.addEvent(eventDescription, eventDate), tasks.getSize());
                 break;
     
             case "delete":
             // Fallthrough
             case "remove":
-                ui.showTaskRemoved(tasks.remove(
-                        Integer.parseInt(parsedSentence[1]) - 1),
-                        tasks);
+                ui.showTaskRemoved(tasks.remove( Integer.parseInt(parsedSentence[1]) - 1), tasks);
                 break;
 
             case "find":
             // Fallthrough
             case "search":
                 if (parsedSentence.length > 2) {
-                    throw new LilyException("bro you can only find 1 word at a time");
+                    throw new LilyException(LilyException.ERROR_TOO_MANY_SEARCH_TERMS);
                 } else {
                     ui.showFind(parsedSentence[1], tasks);
                 }
@@ -117,69 +104,109 @@ public class Parser {
         } catch (LilyException le) {
             ui.showError(le.getMessage());
 
-        } catch (IOException ioe) {
-            ui.showError(LilyException.ERROR_WRITE_FILE);
-
         } catch (IndexOutOfBoundsException oob) {
-            ui.showError(LilyException.ERROR_OUT_OF_BOUNDS);
-
-        } catch (DateTimeParseException dtpe) {
-            ui.showError(LilyException.FORMAT_DATE);
+            // caught when user types "mark", "unmark" or "delete" without giving an index
+            // if user types "mark 5" when the list has 2 items, 
+            // it throws lily exception instead
+            ui.showError(LilyException.ERROR_MISSING_INDEX);
 
         } catch (NumberFormatException nfe) {
+            // caught when user types "mark two"
             ui.showError(LilyException.FORMAT_IDX);
         }
     }
 
-
     /**
-     * Finds the description of the todo in the user's input.
-     * 
-     * @param s The user's input sentence.
-     * @return The description of the todo.
-     * @throws LilyException When there is no description.
+     * Types of tasks the user can add.
      */
-    private static String findTodoDescStart(String s) throws LilyException {
-        try {
-            return s.substring(5); // "todo " is 5 char long
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new LilyException("You gotta tell me what the todo is about!");
+    private enum TaskType {
+        TODO (5, 0, "unused tag"), 
+        DEADLINE (9, 4, "/by"), 
+        EVENT (6, 4, "/at");
+
+        private final int cmdCharLen;
+        private final int dateCharLen;
+        private final String dateTag;
+
+        TaskType(int cmdLength, int dateTagLength, String tag) {
+            cmdCharLen = cmdLength;
+            dateCharLen = dateTagLength;
+            dateTag = tag;
+        }
+
+        public int getCmdLen() {
+            return cmdCharLen;
+        } 
+
+        public int getDateCharLen() {
+            return dateCharLen;
+        }
+
+        public String getDateTag() {
+            return dateTag;
         }
     }
 
     /**
-     * Finds the description of the deadline in the user's input.
+     * Finds the description and date of each kind of task added.
      * 
-     * @param s The user's input sentence.
-     * @return The description and date of the deadline.
-     * @throws LilyException When there is no description.
-     */
-    private static String[] findDeadlineDescStart(String s) throws LilyException {
-        String[] result = new String[2];
-        try {
-            result[0] = s.substring(9, s.indexOf("/by") - 1);
-            result[1] = s.substring(s.indexOf("/by") + 4);
-            return result;
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new LilyException("You gotta tell me what the deadline is about!");
-        }
-    }
-    
-    /**
-     * Finds the description of the event in the user's input.
-     * 
+     * @param type of task to find the desc and date for.
      * @param s The user's input sentence.
      * @return The description and date of the event.
      * @throws LilyException When there is no description.
      */
-    private static String[] findEventDescStart(String s) throws LilyException {
+    private static String[] findDescDate(TaskType type, String s) throws LilyException {
         String[] result = new String[2];
+
+        // find the description
         try {
-            result[0] = s.substring(6, s.indexOf("/at") - 1);
-            result[1] = s.substring(s.indexOf("/at") + 4);
-            return result;
+            switch(type) {
+            case TODO:
+                result[0] = s.substring(TaskType.TODO.getCmdLen());
+                break;
+
+            case DEADLINE:
+                result[0] = s.substring(TaskType.DEADLINE.getCmdLen(), 
+                        s.indexOf(TaskType.DEADLINE.getDateTag()) - 1);
+                break;
+
+            case EVENT:
+                result[0] = s.substring(TaskType.EVENT.getCmdLen(), 
+                        s.indexOf(TaskType.EVENT.getDateTag()) - 1);
+                break;
+
+            default:
+                throw new LilyException(LilyException.ERROR_UNKNOWN_TASK_TYPE);
+            }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new LilyException("You gotta tell me what the event is about!");
+            // problem: triggers when user uses the wrong tag. 
+            // eg. /at or /by for deadline and event respectively
+            throw new LilyException(LilyException.ERROR_MISSING_DESC);
         }
+
+        // find the date
+        try {
+            switch(type) {
+            case TODO:
+                break;
+
+            case DEADLINE:
+                result[1] = s.substring( s.indexOf(TaskType.DEADLINE.getDateTag()) 
+                        + TaskType.DEADLINE.getDateCharLen());
+                break;
+
+            case EVENT:
+                result[1] = s.substring( s.indexOf(TaskType.EVENT.getDateTag()) 
+                        + TaskType.EVENT.getDateCharLen());
+                break;
+
+            default:
+                throw new LilyException(LilyException.ERROR_UNKNOWN_TASK_TYPE);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new LilyException(LilyException.ERROR_MISSING_DATE);
+        }
+
+        return result;
     }
 }

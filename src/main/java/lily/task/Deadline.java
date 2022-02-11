@@ -1,5 +1,7 @@
 package lily.task;
 
+import lily.LilyException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,11 +20,15 @@ public class Deadline extends Task {
      * 
      * @param s The description of what is due.
      * @param by When the task is due, in the format of "yyyy-mm-dd".
-     * @throws DateTimeParseException When the input is not a date.
+     * @throws LilyException When the input is not a date.
      */
-    public Deadline(String s, String by) throws DateTimeParseException {
+    public Deadline(String s, String by) throws LilyException {
         super(s);
-        this.by = LocalDate.parse(by);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException dtpe) {
+            throw new LilyException(LilyException.FORMAT_DATE);
+        }
     }
 
     /**
@@ -32,7 +38,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " 
-        + by.format(DateTimeFormatter.ofPattern("dd MMM yy")) + ")";
+        String date = by.format(DateTimeFormatter.ofPattern("dd MMM yy"));
+        return "[D]" + super.toString() + " (by: " + date + ")";
     }
 } 

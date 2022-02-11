@@ -15,7 +15,7 @@ import java.io.ObjectInputStream;
  * Loads and Saves the Task list from the savefile.
  * 
  * @author Hong Yi En, Ian
- * @version Jan 2022 (AY21/22 Sem 2)
+ * @version Feb 2022 (AY21/22 Sem 2)
  */
 public class Storage {
     private String filePath;
@@ -27,15 +27,6 @@ public class Storage {
      */
     public Storage(String fp) {
         filePath = fp;
-    }
-
-    /**
-     * Create a new default Storage manager.
-     * 
-     * @param fp The filepath to load from and save to.
-     */
-    public Storage() {
-        filePath = "./data/tasks.txt";
     }
 
     /**
@@ -57,10 +48,10 @@ public class Storage {
             fis.close();
             result = read;
         } catch (IOException e) {
-            throw new LilyException("There's no save file.");
+            throw new LilyException(LilyException.ERROR_LOAD_FILE);
         } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
             c.printStackTrace();
+            throw new LilyException(LilyException.ERROR_LOAD_FILE_UNKNOWN_CLASS);
         } 
         return result;
     }
@@ -69,20 +60,24 @@ public class Storage {
      * Writes the Tasklist to a file.
      * 
      * @param list The Tasklist to be exported.
-     * @throws IOException If a problem arose.
+     * @throws LilyException If the file could not be written.
      */
-    public void save(TaskList list) throws IOException {
-        if (!list.isEmpty()) {
-            File dataFolder = new File("./data");
-            if (!dataFolder.exists()) {
-                dataFolder.mkdir();
+    public void save(TaskList list) throws LilyException {
+        try {
+            if (!list.isEmpty()) {
+                File dataFolder = new File("./data");
+                if (!dataFolder.exists()) {
+                    dataFolder.mkdir();
+                }
+    
+                FileOutputStream fos = new FileOutputStream(filePath);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(list.getContents());
+                oos.close();
+                fos.close();
             }
-
-            FileOutputStream fos = new FileOutputStream(filePath);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(list.getContents());
-            oos.close();
-            fos.close();
+        } catch (IOException e) {
+            throw new LilyException(LilyException.ERROR_WRITE_FILE);
         }
     }
 }

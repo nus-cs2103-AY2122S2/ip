@@ -5,7 +5,6 @@ import lily.task.Todo;
 import lily.task.Deadline;
 import lily.task.Event;
 
-import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 
 /**
@@ -23,15 +22,6 @@ public class TaskList {
      */
     public TaskList() {
         list = new LinkedList<>();
-    }
-
-    /**
-     * Creates a new TaskList from the data in the savefile.
-     * @param loadedData The TaskList from the savefile.
-     * @throws LilyException If there isn't a file or data to load.
-     */
-    public TaskList(LinkedList<Task> loadedData) {
-        list = loadedData;
     }
 
     /**
@@ -62,20 +52,30 @@ public class TaskList {
     }
 
     /**
+     * Creates a new TaskList from the data in the savefile.
+     * @param loadedData The TaskList from the savefile.
+     * @throws LilyException If there isn't a file or data to load.
+     */
+    public TaskList(LinkedList<Task> loadedData) {
+        list = loadedData;
+    }
+
+    /**
+     * Types of operations the user can perform on Tasks.
+     */
+    private enum TaskOperation {
+        MARK, UNMARK, REMOVE
+    }
+
+    /**
      * Marks the task and returns it.
      * 
      * @param idx The index of the task to be marked.
      * @return The task after it has been marked.
-     * @throws IndexOutOfBoundsException If the index exceeds the list.
-     * @throws LilyException If user has finished the task already.
+     * @throws LilyException If user hasn't done the task yet OR index exceeds list length.
      */
-    public Task mark(int idx) throws IndexOutOfBoundsException, LilyException {
-                    /*
-                     * if input doesn't have an int, ask which number you want to mark .
-                     */
-        Task t = list.get(idx);
-        t.mark();
-        return t;
+    public Task mark(int idx) throws LilyException {
+        return operate(idx, TaskOperation.MARK);
     }
 
     /**
@@ -83,13 +83,62 @@ public class TaskList {
      * 
      * @param idx The index of the task to be unmarked.
      * @return The task after it has been unmarked.
-     * @throws IndexOutOfBoundsException If the index exceeds the list.
-     * @throws LilyException If user hasn't done the task yet.
+     * @throws LilyException If user hasn't done the task yet OR index exceeds list length.
      */
-    public Task unmark(int idx) throws IndexOutOfBoundsException, LilyException {
-        Task t = list.get(idx);
-        t.unmark();
-        return t;
+    public Task unmark(int idx) throws LilyException {
+        return operate(idx, TaskOperation.UNMARK);
+    }
+
+    /**
+     * Removes a Task from the TaskList.
+     * 
+     * @param idx The index of which was removed.
+     * @return The Task that was removed.
+     * @throws LilyException When the index is not in the List.
+     */
+    public Task remove(int idx) throws LilyException {
+        return operate(idx, TaskOperation.REMOVE);
+    }
+
+    /**
+     * Abstraction for similar operations on tasks.
+     * 
+     * @param idx of the item in the taskList
+     * @param op operation which should be done on the item
+     * @return the task after it has been operated upon
+     * @throws LilyException When the index is not in the list or the task cannot be operated on.
+     */
+    private Task operate(int idx, TaskOperation op) throws LilyException {
+        boolean isOutOfBounds = idx < 0 || idx >= list.size();
+        if (isOutOfBounds) {
+            throw new LilyException(LilyException.ERROR_OUT_OF_BOUNDS);
+        }
+
+        Task result;
+        switch(op) {
+        case MARK:
+            result = list.get(idx).mark();
+            break;
+
+        case UNMARK:
+            result = list.get(idx).unmark();
+            break;
+
+        case REMOVE:
+            result = list.remove(idx);
+            break;
+
+        default:
+            throw new LilyException(LilyException.ERROR_UNKNOWN_COMMAND);
+        }
+        return result;
+    }
+
+    /**
+     * Types of tasks the user can add.
+     */
+    private enum TaskType {
+        TODO, DEADLINE, EVENT
     }
 
     /**
@@ -98,10 +147,8 @@ public class TaskList {
      * @param desc What the todo is about.
      * @return The todo that was added.
      */
-    public Task addTodo(String desc) {
-        Todo t = new Todo(desc);
-        list.add(t);
-        return t;
+    public Task addTodo(String desc) throws LilyException {
+        return addTask(TaskType.TODO, desc, "unused string");
     }
 
     /**
@@ -110,12 +157,10 @@ public class TaskList {
      * @param desc What the deadline is about.
      * @param by When the deadline is due.
      * @return The deadline that was added.
-     * @throws DateTimeParseException If the date was not recognizable.
+     * @throws LilyException If the date was not recognizable.
      */
-    public Task addDeadline(String desc, String by) throws DateTimeParseException {
-        Deadline d = new Deadline(desc, by);
-        list.add(d);
-        return d;
+    public Task addDeadline(String desc, String by) throws LilyException {
+        return addTask(TaskType.DEADLINE, desc, by);
     }
 
     /**
@@ -124,26 +169,41 @@ public class TaskList {
      * @param desc What the Event is about.
      * @param at When the Event is due.
      * @return The Event that was added.
-     * @throws DateTimeParseException If the date was not recognizable.
+     * @throws LilyException If the date was not recognizable.
      */
-    public Task addEvent(String desc, String at) throws DateTimeParseException {
-        Event e = new Event(desc, at);
-        list.add(e);
-        return e;
+    public Task addEvent(String desc, String at) throws LilyException {
+        return addTask(TaskType.EVENT, desc, at);
     }
 
     /**
-     * Removes a Task from the TaskList.
+     * Abstraction for adding tasks.
      * 
-     * @param idx The index of which was removed.
-     * @return The Task that was removed.
-     * @throws IndexOutOfBoundsException When the index is not in the List.
+     * @param t The type of task being added.
+     * @param desc of the task.
+     * @param date of the task happening.
+     * @return the task being added.
+     * @throws LilyException If the date was not recognizable.
      */
-    public Task remove(int idx) throws IndexOutOfBoundsException {
-        if (idx < 0 || idx >= list.size()) {
-            throw new IndexOutOfBoundsException(LilyException.ERROR_OUT_OF_BOUNDS);
-        } else {
-            return list.remove(idx);
+    private Task addTask(TaskType t, String desc, String date) throws LilyException {
+        Task task;
+        switch(t) {
+        case TODO:
+            task = new Todo(desc);
+            break;
+
+        case DEADLINE:
+            task = new Deadline(desc, date);
+            break;
+
+        case EVENT:
+            task = new Event(desc, date);
+            break;
+
+        default:
+            throw new LilyException(LilyException.ERROR_UNKNOWN_TASK_TYPE);
         }
+
+        list.add(task);
+        return task;
     }
 }

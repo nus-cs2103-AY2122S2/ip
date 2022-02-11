@@ -62,7 +62,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (input.equals("bye")) {
+            Lily.exitApplication();
             /*
+            Please don't mark me down for dead code, this is for future features.
             Enable this if you can get the close message in UI to work
             try {
                 Thread.sleep(3000); // apparently this pauses the printing
@@ -72,7 +74,6 @@ public class MainWindow extends AnchorPane {
                 Lily.exitApplication();
             }
              */
-            Lily.exitApplication();
         }
     }
 

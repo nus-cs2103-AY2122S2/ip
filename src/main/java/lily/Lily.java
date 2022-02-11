@@ -1,10 +1,10 @@
 package lily;
 
-import javafx.fxml.FXML;
 import lily.control.MainWindow;
 
 import java.io.IOException;
 
+import javafx.fxml.FXML;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -43,13 +43,6 @@ public class Lily extends Application {
     }
 
     /**
-     * Runs the application.
-     */
-    public void run() {
-        ui.showWelcome(tasks);
-    }
-
-    /**
      * Previous driver method of the application before GUI introduced.
      * Used for unit tests only
      * 
@@ -57,6 +50,13 @@ public class Lily extends Application {
      */
     public static void main(String[] args) {
         new Lily().run();
+    }
+
+    /**
+     * Runs the application.
+     */
+    public void run() {
+        ui.showWelcome(tasks);
     }
 
     /**
