@@ -21,6 +21,10 @@ public class Event extends Task {
         this.at = timings.getString();
     }
 
+    public DateTime getTiming() {
+        return this.timings;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(At: " + this.at + ")";

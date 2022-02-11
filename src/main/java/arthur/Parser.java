@@ -1,5 +1,7 @@
 package arthur;
 
+import arthur.timings.DateTime;
+
 /**
  * Handles decoding of the user commands
  */
@@ -36,6 +38,9 @@ public class Parser {
             case "unmark":
                 this.command = taskList.marker(this.command);
                 storage.editTasks(taskList.getTask(Integer.parseInt(temp[1]) - 1), 1);
+                break;
+            case "reminder":
+                this.command = DateTime.checkDate(taskList);
                 break;
             case "todo":
                 this.command = taskList.todo(temp[1]);

@@ -21,6 +21,10 @@ public class Deadline extends Task {
         this.by = timing.getString();
     }
 
+    public DateTime getTiming() {
+        return this.timing;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(By: " + this.by + ")";

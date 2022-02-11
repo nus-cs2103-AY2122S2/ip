@@ -181,9 +181,9 @@ public class TaskList {
     }
 
     /**
-     * Gets the Task.Task object at the given index from taskList.
-     * @param num The index of the Task.Task object to retrieve
-     * @return A Task.Task object
+     * Gets the Task object at the given index from taskList.
+     * @param num The index of the Task object to retrieve
+     * @return A Task object
      * @throws IndexOutOfBoundsException Incorrect index needs to be handled properly
      */
     public Task getTask(int num) throws IndexOutOfBoundsException {
