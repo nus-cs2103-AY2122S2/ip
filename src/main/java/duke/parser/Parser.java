@@ -46,6 +46,7 @@ public class Parser {
      * Parses a String to an int, but throws DukeNumberFormatException instead.
      *
      * @return int Integer value of the String.
+     * @throws DukeNumberFormatException Thrown when Integer class parseInt throws a NumberFormatException.
      */
     public static int parseInt(String input) throws DukeNumberFormatException {
         try {
@@ -55,6 +56,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a String input into a LocalDateTime object.
+     *
+     * @param input String Date input.
+     * @return LocalDateTime object.
+     * @throws DukeDateTimeFormatException Thrown when LocalDateTime parse throws a DateTimeParseException.
+     */
     public static LocalDateTime parseDateTime(String input) throws DukeDateTimeFormatException {
         try {
             return LocalDateTime.parse(input, INPUT_FORMATTER);
