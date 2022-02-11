@@ -12,7 +12,7 @@ import duke.exceptions.DukeException;
 public class Duke {
     private static String FILE_PATH = ".\\src\\main\\java\\duke\\data\\duke.txt";
     private Storage storage;
-    private TaskList tasks = new TaskList();
+    private TaskList tasks;
 
     /**
      * Constructor of Duke that takes in a file path specifying the location of the
@@ -24,34 +24,13 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
+            tasks = new TaskList();
         }
     }
 
-    /**
-     * Initiates the program and outlines the operation backbone of the program.
-     */
-    // public void run() {
-    //     ui.welcome();
-    //     boolean isExit = false;
-    //     while (!isExit) {
-    //         try {
-    //             String fullCommand = ui.readCommand();
-    //             ui.showLine(); // show the divider line ("_______")
-    //             Command c = Parser.parse(fullCommand);
-    //             c.execute(tasks, ui, storage);
-    //             isExit = c.isExit();
-    //         } catch (DukeException e) {
-    //             ui.showError(e.getMessage());
-    //         } finally {
-    //             ui.showLine();
-    //         }
-    //     }
-    // }
-
     public String getResponse(String fullCommand) throws DukeException {
-        Command c;
         try {
-            c = Parser.parse(fullCommand);
+            Command c = Parser.parse(fullCommand);
             String response = c.execute(tasks, storage);
             
             return response;

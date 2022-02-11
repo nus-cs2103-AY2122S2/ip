@@ -102,7 +102,7 @@ public class Storage {
      */
     public void updateAfterDelete(int index) throws DukeException {
         try {
-            int dataLineCounter = 0;
+            int dataLineCounter = 0; //initializing the counter
             BufferedReader storageFileReader = new BufferedReader(new FileReader(storageFile));
             String contentToBeWritten = "";
             String dateLine = storageFileReader.readLine();
@@ -140,7 +140,7 @@ public class Storage {
 
     private void modifyFile(int index, boolean isToBeMarked) throws DukeException {
         try {
-            int dataLineCounter = 0;
+            int dataLineCounter = 0; //initializing the counter
             BufferedReader storageFileReader = new BufferedReader(new FileReader(storageFile));
             String contentToBeWritten = "";
             String dataLine = storageFileReader.readLine();
