@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String welcomeMessage = "Hello!! I am Duke, your humble personal chatbot.\n"
+        String welcomeMessage = "Hello!! I am Friendly Friend, your humble personal chatbot.\n"
                 + "What can I do for you?";
         String cannotSeeFullListAdvice = "PS - If you cannot see your tasks, please go to " +
                 "help -> my tasks";

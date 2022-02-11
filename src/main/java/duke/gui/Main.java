@@ -24,7 +24,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            stage.setTitle("Duke");
+            stage.setTitle("Friendly Friend");
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Images/red.png")));
 
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/View/MainWindow.fxml"));
