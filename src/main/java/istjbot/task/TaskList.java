@@ -17,6 +17,10 @@ import istjbot.exception.BotException;
 public class TaskList {
     /** ArrayList of tasks stored. */
     private final ArrayList<Task> tasks = new ArrayList<>();
+    private static final int TASK_TYPE = 0;
+    private static final int TASK_MARKED_OR_NOT = 1;
+    private static final int TASK_DESCRIPTION = 2;
+    private static final int TASK_DATE = 3;
 
     /**
      * Constructor for this TaskList.
@@ -32,21 +36,21 @@ public class TaskList {
      * @throws FileNotFoundException When the file with that specified path is not found.
      */
     public TaskList(File file) throws BotException, FileNotFoundException {
-        // Assumption: IstjBox.txt is new or not tampered with by a user
+        // IstjBox.txt is new or not tampered with by a user
         // FileNotFoundException will not be thrown as we only pass an existing file to the TaskList
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String line = sc.nextLine();
+            // Can be abstracted out, but did not since it is a constructor method
             String[] taskInfo = line.split(" / ");
 
             Task taskAdded;
-            // Use static variable to address indexes
-            CommandEnum commandEnum = CommandEnum.stringToCommandEnum(taskInfo[0]);
-            boolean isMarked = Integer.parseInt(taskInfo[1]) == 1;
+            CommandEnum commandEnum = CommandEnum.stringToCommandEnum(taskInfo[TASK_TYPE]);
+            boolean isMarked = Integer.parseInt(taskInfo[TASK_MARKED_OR_NOT]) == 1;
 
             switch (commandEnum) {
             case TODO:
-                taskAdded = new Todo(taskInfo[2]);
+                taskAdded = new Todo(taskInfo[TASK_DESCRIPTION]);
                 this.tasks.add(taskAdded);
                 if (isMarked) {
                     taskAdded.mark();
@@ -54,7 +58,7 @@ public class TaskList {
                 break;
 
             case DEADLINE:
-                taskAdded = new Deadline(taskInfo[2], taskInfo[3]);
+                taskAdded = new Deadline(taskInfo[TASK_DESCRIPTION], taskInfo[TASK_DATE]);
                 this.tasks.add(taskAdded);
                 if (isMarked) {
                     taskAdded.mark();
@@ -62,7 +66,7 @@ public class TaskList {
                 break;
 
             case EVENT:
-                taskAdded = new Event(taskInfo[2], taskInfo[3]);
+                taskAdded = new Event(taskInfo[TASK_DESCRIPTION], taskInfo[TASK_DATE]);
                 this.tasks.add(taskAdded);
                 if (isMarked) {
                     taskAdded.mark();
@@ -129,6 +133,11 @@ public class TaskList {
      */
     public String tasksToTxtString() {
         StringBuilder str = new StringBuilder();
+        addTxtTasksToStringBuilder(str);
+        return str.toString();
+    }
+
+    private void addTxtTasksToStringBuilder(StringBuilder str) {
         for (Task task : tasks) {
             if (str.length() == 0) {
                 str.append(task.toTxtString());
@@ -136,7 +145,6 @@ public class TaskList {
                 str.append("\n" + task.toTxtString());
             }
         }
-        return str.toString();
     }
 
     /**
@@ -146,17 +154,20 @@ public class TaskList {
      */
     public String tasksToString() {
         StringBuilder str = new StringBuilder();
-        int[] count = new int[]{1};
+        addTasksToStringBuilder(str);
+        return str.toString();
+    }
 
+    private void addTasksToStringBuilder(StringBuilder str) {
+        int count = 1;
         for (Task task : tasks) {
             if (str.length() == 0) {
-                str.append(count[0] + ". " + task.toString());
+                str.append(count + ". " + task.toString());
             } else {
-                str.append("\n" + count[0] + ". " + task.toString());
+                str.append("\n" + count + ". " + task.toString());
             }
-            count[0]++;
+            count++;
         }
-        return str.toString();
     }
 
     /**
@@ -201,8 +212,13 @@ public class TaskList {
     public String searchByDateString(String dateString) throws DateTimeParseException {
         LocalDate dateGiven = LocalDate.parse(dateString);
         StringBuilder searchList = new StringBuilder();
-        int[] count = new int[]{1};
+        addDateSearchToStringBuilder(searchList, dateGiven);
+        return searchList.toString();
+    }
 
+    private void addDateSearchToStringBuilder(StringBuilder searchList, LocalDate dateGiven) {
+        int[] count = new int[]{1};
+        // Arrow-head identified
         for (Task task : tasks) {
             task.getDate().ifPresent(date -> {
                 if (date.isEqual(dateGiven)) {
@@ -215,7 +231,6 @@ public class TaskList {
                 }
             });
         }
-        return searchList.toString();
     }
 
     /**
@@ -227,8 +242,13 @@ public class TaskList {
      */
     public String searchByKeywordString(String keyword) {
         StringBuilder searchList = new StringBuilder();
-        int count = 1;
+        addSearchToStringBuilder(searchList, keyword);
+        return searchList.toString();
+    }
 
+    private void addSearchToStringBuilder(StringBuilder searchList, String keyword) {
+        int count = 1;
+        // Arrow-head identified
         for (Task task : tasks) {
             if (task.description.contains(keyword)) {
                 if (searchList.length() == 0) {
@@ -239,6 +259,5 @@ public class TaskList {
                 count++;
             }
         }
-        return searchList.toString();
     }
 }

@@ -1,13 +1,15 @@
 package istjbot.ui;
 
 /**
- * Encapsulates the concept of text-based Ui representation of the bot.
- * Responsible for printing out all user messages after the command is executed.
+ * Encapsulates text part of the User Interface, which is rendered via GUI
+ * through the use of JavaFX.
  */
 public class Ui {
 
     /**
-     * Prints out a welcome message.
+     * Returns a String of a welcome message.
+     *
+     * @return String of a welcome message.
      */
     public static String showWelcome() {
         String welcomeMessage = "Hello! I'm IstjBot. \n" + "What can I do for you?";
@@ -15,10 +17,11 @@ public class Ui {
     }
 
     /**
-     * Prints out a confirmation message that the task has been successfully added.
+     * Returns a String of a confirmation message that the task has been successfully added.
      *
-     * @param tasksSize Number of tasks used whether to pluralize "task."
-     * @param addedTask String of the task added.
+     * @param tasksSize Integer of number of tasks in the list.
+     * @param addedTask String representation of added task.
+     * @return
      */
     public String showTaskAdded(int tasksSize, String addedTask) {
         assert tasksSize > 0 : "there should now be at least one task";
@@ -32,9 +35,10 @@ public class Ui {
     }
 
     /**
-     * Prints out a confirmation that the task has been successfully marked as done.
+     * Returns a String of a confirmation message that the task has been successfully marked as done.
      *
      * @param task String of the task marked.
+     * @return String of confirmation message.
      */
     public String showTaskMarked(String task) {
         String message = "As an IstjBot, I've marked this task as done: \n" + task;
@@ -42,9 +46,9 @@ public class Ui {
     }
 
     /**
-     * Prints out a confirmation that the task has been successfully unmarked as not done.
-     *
+     * Returns a confirmation message that the task has been successfully unmarked as not done.
      * @param task String of the task unmarked.
+     * @return String of confirmation message.
      */
     public String showTaskUnmarked(String task) {
         String message = "As an IstjBot, I've unmarked this task: \n" + task;
@@ -52,10 +56,11 @@ public class Ui {
     }
 
     /**
-     * Prints out a confirmation message that the task has been successfully deleted.
+     * Returns a String of a confirmation message that the task has been successfully deleted.
      *
-     * @param tasksSize Number of tasks used whether to pluralize "task."
+     * @param tasksSize Integer of number of tasks in the list.
      * @param deletedTask String of the task that has just been deleted.
+     * @return String of confirmation message.
      */
     public String showTaskDeleted(int tasksSize, String deletedTask) {
         String initialMessage = "As an IstjBot, I've removed this task: \n";
@@ -66,9 +71,11 @@ public class Ui {
     }
 
     /**
-     * Prints out messages and tasks that have been filtered with user's input date.
+     * Returns a String consisting of tasks that have been filtered with user's input date,
+     * plus IstjBot's message.
      *
      * @param searchList String of all tasks that are filtered with user's input date.
+     * @return String of tasks and IstjBot's message.
      */
     public String showTasksByDate(String searchList) {
         String initialMessage = "As an IstjBot, I present you the task(s) with that date.";
@@ -77,9 +84,10 @@ public class Ui {
     }
 
     /**
-     * Prints out messages and tasks that have been filtered with user's input keyword.
+     * Returns a String of messages and tasks that have been filtered with user's input keyword.
      *
      * @param searchList String of all tasks that are filtered with user's input keyword.
+     * @return String of filtered tasks with IstjBot's message.
      */
     public String showTasksByKeyword(String searchList) {
         String initialMessage = "As an IstjBot, I present you the task(s) with that keyword.";
@@ -88,9 +96,10 @@ public class Ui {
     }
 
     /**
-     * Prints out all tasks that are stored.
+     * Returns a String consisting of all tasks that are stored plus IstjBot's message.
      *
      * @param list String of all tasks.
+     * @return String of all tasks with IstjBot's message.
      */
     public String showTasks(String list) {
         String initialMessage = "As an IstjBot, I present you the task(s) in your list:";
@@ -99,7 +108,9 @@ public class Ui {
     }
 
     /**
-     * Prints out a bye message to the user.
+     * Returns a String of bye message to the user.
+     *
+     * @return String of bye message.
      */
     public String showBye() {
         String message = "Bye, I, IstjBot, will be organizing your tasks until you come back.";
@@ -107,9 +118,10 @@ public class Ui {
     }
 
     /**
-     * Prints out the error message.
+     * Returns a String of the error message.
      *
      * @param errorMessage String of the error message.
+     * @return String of error message.
      */
     public String showError(String errorMessage) {
         return errorMessage;
