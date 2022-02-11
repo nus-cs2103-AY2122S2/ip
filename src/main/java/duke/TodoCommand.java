@@ -1,3 +1,5 @@
+package duke;
+
 public class TodoCommand extends Command {
     private final Todo todo;
 

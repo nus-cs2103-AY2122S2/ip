@@ -1,13 +1,15 @@
-public class MarkCommand extends Command {
+package duke;
+
+public class DeleteCommand extends Command {
     public int number;
 
-    public MarkCommand(int number) {
+    public DeleteCommand(int number) {
         this.number = number;
     }
 
     public void execute(Storage storage, TaskList tasks, Ui ui) {
-        tasks.mark(number);
-        ui.showMark(tasks.get(number));
+        ui.showDelete(tasks.get(number - 1), tasks);
+        tasks.delete(number);
     }
 
     @Override

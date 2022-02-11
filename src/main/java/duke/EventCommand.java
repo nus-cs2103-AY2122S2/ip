@@ -1,3 +1,5 @@
+package duke;
+
 public class EventCommand extends Command {
     private final Event event;
 
