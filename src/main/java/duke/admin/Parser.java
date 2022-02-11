@@ -2,11 +2,13 @@ package duke.admin;
 
 import duke.commands.AddCommand;
 import duke.commands.ChangeMarkCommand;
+import duke.commands.CloneCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.UpdateCommand;
 import duke.exceptions.DukeException;
 
 /**
@@ -81,7 +83,24 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "find":
-            return new FindCommand(description);
+            if (!(descriptionExist)) {
+                throw new DukeException("The keyword to search for cannot be empty.");
+            } else {
+                return new FindCommand(description);
+            }
+        case "update":
+            if (!(descriptionExist)) {
+                throw new DukeException("Improper format to request for an update.");
+            } else {
+                return new UpdateCommand(description);
+            }
+        case "clone":
+            if (!(descriptionExist)) {
+                throw new DukeException("I don't know which task to clone!");
+            } else {
+                int index = Integer.parseInt(description) - 1;
+                return new CloneCommand(index);
+            }
         default:
             throw new DukeException("Invalid command :-(");
         }
