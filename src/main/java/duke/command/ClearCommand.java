@@ -6,6 +6,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Represents a Command object that will clear all tasks in data and
@@ -25,6 +26,7 @@ public class ClearCommand extends Command {
     @Override
     public String execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
         stg.clearData();
+        stg.clearStack();
         tasks.clearAllTask();
         return "All data cleared!";
     }

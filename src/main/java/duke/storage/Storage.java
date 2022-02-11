@@ -101,4 +101,11 @@ public class Storage {
             throws IOException {
         FileHandler.insertToFile(this.filePath, indexToInsert, textToInsert);
     }
+
+    /**
+     * Clears all items in the stack.
+     */
+    public void clearStack() {
+        this.memory.clear();
+    }
 }
