@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -34,9 +36,14 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
+        Rectangle clip = new Rectangle();
+        clip.setWidth(50);
+        clip.setHeight(60);
+        clip.setArcHeight(20);
+        clip.setArcWidth(20);
+        displayPicture.setClip(clip);
     }
 
     /**
