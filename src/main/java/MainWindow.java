@@ -1,4 +1,4 @@
-import java.util.Objects;
+import java.io.InputStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -21,16 +21,33 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private final Image dukeImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/DaDuke.png")));
+    private final Image userImage;
+    private final Image dukeImage;
 
+    /**
+     * Constructor method for MainWindow.
+     */
+    public MainWindow() {
+        InputStream daUserPath = this.getClass().getResourceAsStream("/images/DaUser.png");
+        InputStream daDukePath = this.getClass().getResourceAsStream("/images/DaDuke.png");
+        assert daUserPath != null : "daUser path not suppose to be null!";
+        assert daDukePath != null : "daDuke path not suppose to be null!";
+        userImage = new Image(daUserPath);
+        dukeImage = new Image(daDukePath);
+    }
+
+    /**
+     * Initialize height for FXML window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Set the duke instance in the dialog container.
+     * @param d duke instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(
