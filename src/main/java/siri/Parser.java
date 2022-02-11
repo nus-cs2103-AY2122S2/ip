@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Class to make sense of user commands and execute the commands.
@@ -83,9 +85,8 @@ class Parser {
         }
 
         try {
-            int index = Integer.parseInt(input[1].trim());
-            index--;
-            return this.taskList.markItem(index);
+            ArrayList<Integer> indexArray = this.createMassOpsList(input[1].trim());
+            return this.taskList.markItem(indexArray);
         } catch (NumberFormatException nfe) {
             throw new SiriException("Please ENTER a valid item number to mark!!");
         }
@@ -98,9 +99,8 @@ class Parser {
         }
 
         try {
-            int index = Integer.parseInt(input[1].trim());
-            index--;
-            return this.taskList.unmarkItem(index);
+            ArrayList<Integer> indexArray = this.createMassOpsList(input[1].trim());
+            return this.taskList.unmarkItem(indexArray);
         } catch (NumberFormatException nfe) {
             throw new SiriException("Please ENTER a valid item number to unmark!!");
         }
@@ -192,14 +192,9 @@ class Parser {
         } 
 
         try {
-            int index = Integer.parseInt(input[1].trim());
-            index--;
+            ArrayList<Integer> indexArray = this.createMassOpsList(input[1].trim());
 
-            if (index >= this.taskList.size() || index < 0) {
-                throw new SiriException("Please ENTER a number within the number of tasks!!");
-            } else {
-                return this.taskList.deleteTask(index);
-            }
+            return this.taskList.deleteItem(indexArray);
         } catch (NumberFormatException nfe) {
             throw new SiriException("Please ENTER a valid item number to unmark!!");
         }
@@ -238,6 +233,27 @@ class Parser {
             throw new SiriException("Please ENTER a word to find!!");
         } 
         return this.taskList.find(input[1].trim());
+    }
+
+    private ArrayList<Integer> createMassOpsList(String input) throws SiriException {
+        String[] inputSplit = input.split(" ");
+        ArrayList<Integer> indexArray = new ArrayList<Integer>();
+        HashSet<Integer> indexDuplicateChecker = new HashSet<Integer>();
+        for (int i = 0; i < inputSplit.length; i++) {
+            if (inputSplit[i].trim() == "") {
+                continue;
+            }
+
+            int index = Integer.parseInt(inputSplit[i].trim()) - 1;
+            
+            if (indexDuplicateChecker.contains(index)) {
+                throw new SiriException("Please do not ENTER duplicate index!!");
+            }
+
+            indexDuplicateChecker.add(index);
+            indexArray.add(index);
+        }
+        return indexArray;
     }
 
     private static LocalDate stringToDate(String dateString) {

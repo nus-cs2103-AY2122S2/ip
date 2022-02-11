@@ -36,18 +36,22 @@ class Task {
 
     /**
      * Changes isDone to true (mark task as done).
+     * 
+     * @return details of task that is marked done.
      */
     public String markTaskDone() {
         isDone = true;
-        return "Great job for completing task:\n" + this.getTaskDetails() + "\n";
+        return this.getTaskDetails() + "\n";
     }
 
     /**
      * Changes isDone to false (mark task as undone).
+     * 
+     * @return details of task taht is marked undone.
      */
     public String markTaskUndone() {
         isDone = false;
-        return "Task marked as uncompleted:\n" + this.getTaskDetails() + "\n";
+        return this.getTaskDetails() + "\n";
     }
 
     /**

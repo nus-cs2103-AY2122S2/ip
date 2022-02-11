@@ -59,20 +59,29 @@ class TaskList {
      * @param index integer to indicate the index of the item that is selected to be deleted.
      * @return string to be printed after deleteItem had completed.
      */
-    public String deleteItem(int index) {
-        Task removedTask = list.remove(index);
-        if (removedTask instanceof Deadline) {
-            Deadline tmp = (Deadline) removedTask;
-            deadlineList.remove(tmp);
-        } else if (removedTask instanceof Event) {
-            Event tmp = (Event) removedTask;
-            eventList.remove(tmp);
+    public String deleteItem(ArrayList<Integer> intArr) throws SiriException {
+        String printString = "Successfully removed the following task(s):\n";
+
+        for (int i = 0; i< intArr.size(); i++) {
+            int index = intArr.get(i);
+            if (index < 0 || index >= this.list.size()) {
+                throw new SiriException("Please ENTER number(s) within the number of tasks only!!");
+            }
+    
+            Task removedTask = list.remove(index);
+            if (removedTask instanceof Deadline) {
+                Deadline tmp = (Deadline) removedTask;
+                deadlineList.remove(tmp);
+            } else if (removedTask instanceof Event) {
+                Event tmp = (Event) removedTask;
+                eventList.remove(tmp);
+            }
+            assert removedTask.equals(list.get(index)) == false : "Task should have been removed, but it is not!!";
+            printString = printString + removedTask.getTaskDetails() + "\n";
         }
+        
 
-        assert removedTask.equals(list.get(index)) == false : "Task should have been removed, but it is not!!";
-
-        return "Successfully removed the following task:\n" + removedTask.getTaskDetails() + "\n"
-                + "You have " + this.list.size() + " tasks remaining!!\n";
+        return printString + "You have " + this.list.size() + " tasks remaining!!\n";
     }
 
     /**
@@ -97,17 +106,23 @@ class TaskList {
      * 
      * @return string to be printed after markItem had been completed.
      */
-    public String markItem(int index) throws SiriException {
+    public String markItem(ArrayList<Integer> intArr) throws SiriException {
         if (this.list.size() == 0) {
             throw new SiriException("There is currently no tasks!!");
         }
-        
-        if (index >= this.list.size() || index < 0) {
-            throw new SiriException("Please ENTER a number within the number of tasks!!");
-        }
 
-        String printString = list.get(index).markTaskDone();
-        assert list.get(index).isDone == true : "Task should have been marked done!!";
+        String printString = "Great job for completing the following task(s):\n" ;
+
+        for (int i = 0; i < intArr.size(); i++) {
+            
+            int index = intArr.get(i);
+            if (index >= this.list.size() || index < 0) {
+                throw new SiriException("Please ENTER a number within the number of tasks!!");
+            }
+
+            printString = printString + list.get(index).markTaskDone();
+            assert list.get(index).isDone == true : "Task should have been marked done!!";
+        }
         return printString;
     }
 
@@ -117,16 +132,23 @@ class TaskList {
      * @param index integer to indicate the item index to be unmarked.
      * @return string to be printed after unmarkItem had been completed.
      */
-    public String unmarkItem(int index) throws SiriException{
+    public String unmarkItem(ArrayList<Integer> intArr) throws SiriException{
         if (this.list.size() == 0) {
             throw new SiriException("There is currently no tasks!!");
-        } 
-
-        if (index >= this.list.size() || index < 0) {
-            throw new SiriException("Please ENTER a number within the number of tasks!!");
         }
-        String printString = list.get(index).markTaskUndone();
-        assert list.get(index).isDone == false : "Task should have been marked undone!!";
+
+        String printString = "I've marked the following task(s) as uncompleted:\n" ;
+
+        for (int i = 0; i < intArr.size(); i++) {
+            
+            int index = intArr.get(i);
+            if (index >= this.list.size() || index < 0) {
+                throw new SiriException("Please ENTER a number within the number of tasks!!");
+            }
+
+            printString = printString + list.get(index).markTaskUndone();
+            assert list.get(index).isDone == false : "Task should have been marked undone!!";
+        }
         return printString;
 
     }
