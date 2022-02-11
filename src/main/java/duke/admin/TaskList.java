@@ -1,11 +1,12 @@
-package duke;
+package duke.admin;
 
 import java.util.ArrayList;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /**
  * TaskList class manages the task list and the actions that can be performed on

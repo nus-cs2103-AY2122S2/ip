@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 /**
  * Task is a class that manages the actions that a Task can do such as marking

@@ -1,13 +1,13 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.admin.Storage;
+import duke.admin.TaskList;
+import duke.admin.Ui;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /**
  * AddCommand is a Command that adds a task that is either a ToDo task, Deadline
@@ -34,7 +34,6 @@ public class AddCommand extends Command {
      * Adds the task to TaskList, updates the storage file and notifies the user
      * when it's done
      * @param tasks   task list local to user
-     * @param ui      ui instance local to user
      * @param storage storage instance local to user
      */
     @Override
@@ -56,7 +55,7 @@ public class AddCommand extends Command {
         tasks.add(task);
         storage.updateAfterAdd(task);
         
-        return Ui.addMessage(task, tasks.getNumberOfTasks());
+        return Ui.showAddedMessage(task, tasks.getNumberOfTasks());
     }
 
     /**

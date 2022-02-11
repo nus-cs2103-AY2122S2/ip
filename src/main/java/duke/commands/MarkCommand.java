@@ -1,10 +1,10 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
+import duke.admin.Storage;
+import duke.admin.TaskList;
+import duke.admin.Ui;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
 
 /**
  * MarkCommand is a Command that marks the indexed task as done.
@@ -32,7 +32,7 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task markedTask = tasks.mark(index);
         storage.updateAfterMark(index);
-        return Ui.markMessage(markedTask);
+        return Ui.showMarkedMessage(markedTask);
     }
 
     /**

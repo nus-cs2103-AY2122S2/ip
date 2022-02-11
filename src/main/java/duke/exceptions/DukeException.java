@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * DukeException is an Exception unique to Duke.

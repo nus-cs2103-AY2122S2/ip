@@ -1,8 +1,8 @@
 package duke.controllers;
 
 import duke.Duke;
-import duke.DukeException;
-import duke.Ui;
+import duke.admin.Ui;
+import duke.exceptions.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -51,7 +51,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(response, dukeImage));
             userInput.clear();
         } catch (DukeException e) {
-            System.out.println(Ui.showError(e.getMessage()));
+            System.out.println(Ui.showErrorMessage(e.getMessage()));
         }
     }
     
