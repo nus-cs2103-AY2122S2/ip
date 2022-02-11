@@ -56,6 +56,10 @@ public class Parser {
                 Parser.exceptionCheck(commandParts.length, command);
                 assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new FindCommand(fullCommand.substring(5));
+            } else if (command.equals("viewSchedule")) {
+              Parser.exceptionCheck(commandParts.length, command);
+              assert commandParts.length == 1 : "Not handling empty body exception correctly";
+              return new ViewScheduleCommand(fullCommand.substring(13));
             } else if (command.equals("bye")) {
                 return new ByeCommand("bye");
             } else {
@@ -113,6 +117,7 @@ public class Parser {
         LocalDate deadline;
 
         try {
+            // Parser.checkClashes(dateTime[1], dateTime[2])
             deadline = Parser.parseDate(dateTime[1]);
             localTime = Parser.parseTime(dateTime[2]);
         } catch (DateTimeParseException e) {
@@ -121,6 +126,21 @@ public class Parser {
             throw new DukeException("Please enter a valid time");
         }
         return LocalDateTime.of(deadline, localTime);
+    }
+
+    /**
+     * Overloaded method
+     * @param dateTime
+     * @return
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
+        String splitDateTime[] = dateTime.split(" ");
+        if (splitDateTime.length != 2) {
+            throw new DukeException("Please enter a valid date and time in the format YYYY-MM-DD HHMM");
+        }
+        LocalDate localDate = Parser.parseDate(splitDateTime[0]);
+        LocalTime localTime = Parser.parseTime(splitDateTime[1]);
+        return LocalDateTime.of(localDate, localTime);
     }
 
     public static LocalDate parseDate(String date) throws DukeException {

@@ -14,6 +14,10 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
+    public LocalDateTime getEventDate() {
+        return this.dateTime;
+    }
+
     /**
      * Generates a String representation of the Event object
      * @return String representation of the Event object

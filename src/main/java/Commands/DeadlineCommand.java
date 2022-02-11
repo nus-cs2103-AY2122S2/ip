@@ -1,6 +1,9 @@
 package Commands;
 
 import Exceptions.DukeException;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
 import Tasks.TaskList;
 import util.Parser;
 import util.Storage;
