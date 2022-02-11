@@ -79,7 +79,10 @@ public class TaskList {
         for (Task task : this.tasks) {
             data.append(task.toData()).append("\n");
         }
-        return data.toString();
+        String stringifiedData = data.toString();
+        assert stringifiedData.endsWith("\n") : "Data does "
+                + "not end with newline (\\n) character.";
+        return stringifiedData;
     }
 
     @Override
