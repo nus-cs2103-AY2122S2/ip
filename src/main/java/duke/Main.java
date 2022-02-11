@@ -15,6 +15,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
 
+    /**
+     * Sets the stage for the application.
+     *
+     * @param stage The stage to be set.
+     */
     @Override
     public void start(Stage stage) {
         try {

@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a new DialogBox object to encapsulate message and image.
+     *
+     * @param text The String message.
+     * @param img The profile image.
+     * @return A DialogBox encapsulating the message and the image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets the Duke chatbot dialog box.
+     *
+     * @param text The message by Duke.
+     * @param img Duke's image
+     * @return The Dialog box encapsulating both the message and the image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

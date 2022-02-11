@@ -21,6 +21,7 @@ public class Parser {
      *
      * @param input String user input to be parsed.
      * @param taskList A tasklist to keep track of all the tasks.
+     * @return A String output.
      * @throws DukeException If user input is not understood or description is empty.
      */
     public static String parse(String input, TaskList taskList) throws DukeException {

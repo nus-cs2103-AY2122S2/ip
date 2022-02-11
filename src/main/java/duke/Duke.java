@@ -27,6 +27,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets the String response based on the String input.
+     *
+     * @param input String input from user
+     * @return A String response based on the input.
+     */
     public String getResponse(String input) {
         String output = "";
         try {

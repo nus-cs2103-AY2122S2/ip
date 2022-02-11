@@ -53,7 +53,7 @@ public class TaskList {
     }
 
     /**
-     * Prints out the list of tasks in the tasklist.
+     * @return A String containing all the items in the list.
      */
     public String listItems() {
         String output = LIST;
@@ -64,7 +64,7 @@ public class TaskList {
     }
 
     /**
-     * Prints a list of items that matches to the search.
+     * @return A String containing the items that match the search query.
      */
     public String listItemsMatch() {
         String output = MATCH;
@@ -78,6 +78,7 @@ public class TaskList {
      * Marks the specific task as done.
      *
      * @param taskNumber A String to be parsed into an integer, represents task number.
+     * @return A String message saying that the task has been marked.
      * @throws DukeException If task has been marked.
      */
     public String markTask(String taskNumber) throws DukeException {
@@ -98,6 +99,7 @@ public class TaskList {
      * Unmarks a task.
      *
      * @param taskNumber A String to be parsed into an integer, represents task number.
+     * @return A String message saying that the task has been unmarked.
      * @throws DukeException If task has been unmarked.
      */
     public String unmarkTask(String taskNumber) throws DukeException {
@@ -118,6 +120,7 @@ public class TaskList {
      * Adds a Todo task to the tasklist.
      *
      * @param description A description of the Todo task.
+     * @return A String message saying that the Todo task has been added.
      */
     public String addToDoTask(String description) {
         String output = ADDED;
@@ -133,6 +136,7 @@ public class TaskList {
      * Adds a Deadline task to the tasklist.
      *
      * @param arr A String array containing the components of the user input.
+     * @return A String message saying that the Deadline task has been added.
      * @throws DukeException If conversion of the date is wrong in format.
      */
     public String addDeadlineTask(String[] arr) throws DukeException {
@@ -149,6 +153,7 @@ public class TaskList {
      * Adds an Event task to the tasklist.
      *
      * @param arr A String array containing the components of the user input.
+     * @return A String message saying that the Event task has been added.
      * @throws DukeException If conversion of the date is wrong in format.
      */
     public String addEventTask(String[] arr) throws DukeException {
@@ -165,6 +170,7 @@ public class TaskList {
      * Deletes a task from the tasklist.
      *
      * @param taskNumber A String to be parsed into an integer, represents task number.
+     * @return A String message saying that the task has been deleted.
      * @throws DukeException If the task to be deleted does not exist.
      */
     public String deleteTask(String taskNumber) throws DukeException {
@@ -196,6 +202,7 @@ public class TaskList {
      *
      * @param taskList The tasklist containing all the tasks.
      * @param userInput The String user input containing the key word to search.
+     * @return A String message with all the relevant tasks found.
      */
     public String findTask(TaskList taskList, String userInput) {
         TaskList foundTasks = new TaskList();
