@@ -15,12 +15,13 @@ import istjbot.exception.BotException;
  * different modifying methods (such as add, delete) for tasks that are stored.
  */
 public class TaskList {
-    /** ArrayList of tasks stored. */
-    private final ArrayList<Task> tasks = new ArrayList<>();
     private static final int TASK_TYPE = 0;
     private static final int TASK_MARKED_OR_NOT = 1;
     private static final int TASK_DESCRIPTION = 2;
     private static final int TASK_DATE = 3;
+
+    /** ArrayList of tasks stored. */
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Constructor for this TaskList.
