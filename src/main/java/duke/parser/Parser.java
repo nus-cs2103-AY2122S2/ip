@@ -47,7 +47,7 @@ public class Parser {
      *
      * @return int Integer value of the String.
      */
-    private static int parseInt(String input) throws DukeNumberFormatException {
+    public static int parseInt(String input) throws DukeNumberFormatException {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -55,7 +55,7 @@ public class Parser {
         }
     }
 
-    private static LocalDateTime parseDateTime(String input) throws DukeDateTimeFormatException {
+    public static LocalDateTime parseDateTime(String input) throws DukeDateTimeFormatException {
         try {
             return LocalDateTime.parse(input, INPUT_FORMATTER);
         } catch (DateTimeParseException e) {
