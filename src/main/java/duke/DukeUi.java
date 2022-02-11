@@ -24,12 +24,11 @@ public class DukeUi {
      * @return Error message.
      */
     public String printWriteError() {
-        String err = "_______________________________________________________\n"
+        return "_______________________________________________________\n"
                 + "* Write to duke.txt failed *\n"
                 + "Please try again!\n"
                 + "If the problem persists, please contact the administrator!\n"
                 + "_______________________________________________________\n";
-        return err;
     }
 
     /**
@@ -53,12 +52,11 @@ public class DukeUi {
      * @return Error message.
      */
     public String printFoundArgumentError() {
-        String err = "_______________________________________________________\n"
+        return "_______________________________________________________\n"
                 + "* Arguments detected *\n"
                 + "This command does not require any arguments.\n"
                 + "Are you sure this command is what you mean? If so, please try again!\n"
                 + "_______________________________________________________\n";
-        return err;
     }
 
     /**
@@ -66,11 +64,10 @@ public class DukeUi {
      * @return Error message.
      */
     public String printInvalidArgumentError() {
-        String err = "_______________________________________________________\n"
+        return "_______________________________________________________\n"
                 + "* Invalid entry detected *\n"
                 + "Please provide a valid entry!\n"
                 + "_______________________________________________________\n";
-        return err;
     }
 
     /**
@@ -80,11 +77,10 @@ public class DukeUi {
      * @return Error message.
      */
     public String printMissingArgumentError(String keyword) {
-        String err = "_______________________________________________________\n"
+        return "_______________________________________________________\n"
                 + "* No arguments detected *\n"
                 + "Please provide a description for your " + keyword + "!\n"
                 + "_______________________________________________________\n";
-        return err;
     }
 
     /**
@@ -97,29 +93,54 @@ public class DukeUi {
     public String printMissingDateTimeArgumentError(String keyword) {
         switch (keyword) {
         case "deadline": {
-            String err = "_______________________________________________________\n"
+            return "_______________________________________________________\n"
                     + "* Time frame not detected *\n"
                     + "Please provide a time frame for your " + keyword + "!\n"
+                    + "e.g. deadline return book /by Sunday 7pm\n"
+                    + "_______________________________________________________\n";
+        }
+        case "event": {
+            return "_______________________________________________________\n"
+                    + "* Time frame not detected *\n"
+                    + "Please provide a time frame for your " + keyword + "!\n"
+                    + "e.g. event project meeting /at 20/2/2022 1000H-1200H\n"
+                    + "_______________________________________________________\n";
+        }
+        default:
+            return "_______________________________________________________\n"
+                    + "* Time frame not detected *\n"
+                    + "Please provide a time frame for your " + keyword + "!\n"
+                    + "_______________________________________________________\n";
+        }
+    }
+
+    /**
+     * -To add javadoc here-
+     *
+     * @param keyword A String representing the specific command used.
+     * @return Error message.
+     */
+    public String printMissingLabel(String keyword) {
+        switch (keyword) {
+        case "deadline": {
+            return "_______________________________________________________\n"
+                    + "* Label not detected *\n"
                     + "Check if you have typed '/by' to indicate the time frame!\n"
                     + "e.g. deadline return book /by Sunday 7pm\n"
                     + "_______________________________________________________\n";
-            return err;
         }
         case "event": {
-            String err = "_______________________________________________________\n"
-                    + "* Time frame not detected *\n"
-                    + "Please provide a time frame for your " + keyword + "!\n"
+            return "_______________________________________________________\n"
+                    + "* Label not detected *\n"
                     + "Check if you have typed '/at' to indicate the time frame!\n"
                     + "e.g. event project meeting /at 20/2/2022 1000H-1200H\n"
                     + "_______________________________________________________\n";
-            return err;
         }
         default:
-            String err = "_______________________________________________________\n"
-                    + "* Time frame not detected *\n"
-                    + "Please provide a time frame for your " + keyword + "!\n"
+            return "_______________________________________________________\n"
+                    + "* Label not detected *\n"
+                    + "Please provide a Label for your " + keyword + "!\n"
                     + "_______________________________________________________\n";
-            return err;
         }
     }
 
@@ -128,7 +149,7 @@ public class DukeUi {
      * @return Error message.
      */
     public String printListOfCommands() {
-        String err = "_______________________________________________________\n"
+        return "_______________________________________________________\n"
                 + "* Unrecognised keyword used *\n"
                 + "Please try the keywords provided below:\n"
                 + "    1. list\n"
@@ -141,7 +162,6 @@ public class DukeUi {
                 + "    8. update\n"
                 + "    9. bye\n"
                 + "_______________________________________________________\n";
-        return err;
     }
 
     /**
@@ -149,10 +169,15 @@ public class DukeUi {
      * @return Error message.
      */
     public String printFoundNothing() {
-        String err = "_______________________________________________________\n"
+        return "_______________________________________________________\n"
                 + "It appears we could not find anything matching the phrase.\n"
                 + "Please try adding the task to Duke!\n"
                 + "_______________________________________________________\n";
-        return err;
+    }
+
+    public String printFailedAccess() {
+        return "_______________________________________________________\n"
+                + "Duke cannot find the task in history.\n"
+                + "_______________________________________________________\n";
     }
 }

@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,21 +12,25 @@ import java.util.Date;
 /**
  * Represents a class that contains the logic for all keywords that Duke recognizes.
  */
-public class Commands {
+public abstract class Commands {
 
-    public Commands() { // Empty Constructor
+    DukeHistory history;
+    String[] userInput;
+    DukeUi ui;
+
+    public Commands(DukeHistory history, String[] userInput, DukeUi ui) {
+        this.history = history;
+        this.userInput = userInput;
+        this.ui = ui;
     }
 
-    /**
-     *  Prints a response to "bye" command to indicate that the command was accepted.
-     * @return Bye response.
-     */
-    public String bye() { // Get DukeLCH to Exit
-        String bye = "_______________________________________________________\n"
-                + "Goodbye. I hope to be of service to you again soon!\n"
-                + "_______________________________________________________\n";
-        return bye;
-    }
+    public abstract String validateAndExecute();
+
+    public abstract void validate();
+
+    public abstract String execute() throws DukeException;
+
+
 
     /**
      * A method that takes in a String, checks it against 2 accepted date formats and converts it into
@@ -79,144 +84,6 @@ public class Commands {
                 return time;
             }
         }
-    }
-
-    /**
-     * A method that, when called, gets the inputted instance of DukeHistory
-     * to print a list of all tasks in its records.
-     *
-     * @param history An instance of DukeHistory.
-     * @return List response.
-     */
-    public String list(DukeHistory history) { // Get DukeLCH to List cmdHistory
-        String border = "_______________________________________________________\n";
-        String response = border
-                + "These are your tasks that we have in our records:\n"
-                + history.printAll() + border;
-        return response;
-    }
-
-    /**
-     * A method that, when called, checks the validity of a given entry index before getting the inputted instance
-     * of DukeHistory to mark that entry in its records as done.
-     *  @param index An integer indicating the desired entry to mark.
-     * @param history An instance of DukeHistory.
-     * @return Mark response.
-     */
-    public String mark(int index, DukeHistory history) {
-        if (index < 0 || index > history.getSize() - 1) {
-            throw new IndexOutOfBoundsException();
-        }
-        history.getTask(index).isMarked();
-        Task currTask = history.getTask(index);
-        String tasking = "";
-        if (currTask instanceof ToDos) {
-            ToDos temp = (ToDos) currTask;
-            tasking = tasking.concat(temp.getToDo());
-        } else if (currTask instanceof Deadlines) {
-            Deadlines temp = (Deadlines) currTask;
-            tasking = tasking.concat(temp.getDeadline());
-        } else if (currTask instanceof Event) {
-            Event temp = (Event) currTask;
-            tasking = tasking.concat(temp.getEvent());
-        } else {
-            System.out.println("Error occurred while processing " + currTask.getTask()); // Temporary error handler
-        }
-        String msg = "_______________________________________________________\n"
-                + "Well done! You have completed the task:\n"
-                + "    " + tasking
-                + "_______________________________________________________\n";
-        return msg;
-    }
-
-    /**
-     * A method that, when called, checks the validity of a given entry index before getting the inputted instance
-     * of DukeHistory to unmark that entry in its records.
-     *  @param index An integer indicating the desired entry to unmark.
-     * @param history An instance of DukeHistory.
-     * @return Unmark response.
-     */
-    public String unmark(int index, DukeHistory history) {
-        if (index < 0 || index > history.getSize() - 1) {
-            throw new IndexOutOfBoundsException();
-        }
-        history.getTask(index).isUnmarked();
-        Task currTask = history.getTask(index);
-        String tasking = "";
-        if (currTask instanceof ToDos) {
-            ToDos temp = (ToDos) currTask;
-            tasking = tasking.concat(temp.getToDo());
-        } else if (currTask instanceof Deadlines) {
-            Deadlines temp = (Deadlines) currTask;
-            tasking = tasking.concat(temp.getDeadline());
-        } else if (currTask instanceof Event) {
-            Event temp = (Event) currTask;
-            tasking = tasking.concat(temp.getEvent());
-        } else {
-            System.out.println("Error occurred while processing " + currTask.getTask()); // Temporary error handler
-        }
-        String msg = "_______________________________________________________\n"
-                + "A reminder that the following task has not been done:\n"
-                + "    " + tasking
-                + "_______________________________________________________\n";
-        return msg;
-    }
-
-    /**
-     * A method that, when called, uses the provided String[] tokens to build a description for a ToDos Task.
-     *
-     * It then gets the inputted instance of DukeHistory to add a ToDos task entry into it's record
-     * using the generated description.
-     *  @param tokens A String[] of tokens inputted by the user.
-     * @param history An instance of DukeHistory.
-     * @return Todo_task response.
-     */
-    public String todo(String[] tokens, DukeHistory history) {
-        String description = "";
-        for (int i = 1; i < tokens.length; i++) {
-            description = description.concat(tokens[i]);
-            if (i != (tokens.length - 1)) {
-                description = description.concat(" ");
-            }
-        }
-        return history.addToDo(description);
-    }
-
-    /**
-     * A method that, when called, uses the provided String[] tokens to build a description, date and time
-     * for a Deadline Task.
-     *
-     * It then gets the inputted instance of DukeHistory to add a Deadline task entry into it's records
-     * using the generated description, date and time.
-     *
-     * @param tokens A String[] of tokens inputted by the user.
-     * @param history An instance of DukeHistory.
-     * @throws DukeException If the '/by' phrase is not detected in the String[] of tokens.
-     * @return Deadline_task response.
-     */
-    public String deadline(String[] tokens, DukeHistory history) throws DukeException {
-        String description = "";
-        String date = "";
-        String time = "";
-        int timeStart = -1; // -1 is a placeholder to indicate /by has not been found
-        for (int i = 1; i < tokens.length; i++) {
-            if (tokens[i].equals("/by")) {
-                timeStart = i;
-                break;
-            } else {
-                description = description.concat(tokens[i]);
-            }
-            description = description.concat(" ");
-        }
-        // Check for Date and Time
-        if (timeStart == -1 || tokens.length - timeStart < 3) {
-            throw new DukeException("'/by' not detected");
-        }
-        // Handle Date
-        date = date.concat(convertToDukeDate(tokens[timeStart + 1]));
-        // Handle Time
-        time = time.concat(convertToDukeTime(tokens[timeStart + 2]));
-        return history.addDeadline(description, date, time);
     }
 
     /**

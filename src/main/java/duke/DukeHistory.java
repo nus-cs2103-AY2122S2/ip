@@ -17,17 +17,12 @@ public class DukeHistory {
      * ArrayList records.
      *
      * @param description A String description interpreted by Commands.todo().
-     * @return Todo_task response.
+     * @return Todo_task.
      */
-    public String addToDo(String description) {
+    public ToDos addToDo(String description) {
         ToDos tempToDo = new ToDos(description);
         records.add(tempToDo);
-        String msg = "_______________________________________________________\n"
-                + "Understood, adding this task now:\n"
-                + "    " + tempToDo.getToDo()
-                + "Currently you have " + records.size() + " tasks in our records.\n"
-                + "_______________________________________________________\n";
-        return msg;
+        return tempToDo;
     }
 
     /**
@@ -53,15 +48,10 @@ public class DukeHistory {
      * @param time A String time interpreted by Commands.convertToDukeTime().
      * @return Deadline_task response.
      */
-    public String addDeadline(String description, String date, String time) {
+    public Deadlines addDeadline(String description, String date, String time) {
         Deadlines tempDeadline = new Deadlines(description, date, time);
         records.add(tempDeadline);
-        String msg = "_______________________________________________________\n"
-                + "Understood, adding this task now:\n"
-                + "    " + tempDeadline.getDeadline()
-                + "Currently you have " + records.size() + " tasks in our records.\n"
-                + "_______________________________________________________\n";
-        return msg;
+        return tempDeadline;
     }
 
     /**
