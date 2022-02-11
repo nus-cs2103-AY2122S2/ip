@@ -94,7 +94,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         } finally {
             return tasks;
         }
@@ -110,10 +110,9 @@ public class Storage {
             FileWriter writer = new FileWriter(file.getPath(), true);
             writer.write(task.toString() + "\n");
             writer.close();
-            Ui.create(task);
         }
         catch (IOException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
 
@@ -158,9 +157,9 @@ public class Storage {
                 throw new DukeException("This is an invalid task id, sir.");
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
 }

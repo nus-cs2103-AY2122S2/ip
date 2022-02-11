@@ -1,7 +1,6 @@
 package jarvis;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 /**
  * The Parser program implements an application which parses a user's input and acts accordingly.
@@ -12,90 +11,66 @@ import java.util.Scanner;
  */
 public class Parser {
     /**
-     * Parses the user's input and allow Duke to act accordingly.
+     * Parses the user input and allows J.A.R.V.I.S to act accordingly.
      *
-     * @param input user's input
-     * @param sc scanner to scan user's input
-     * @param tasks list of tasks
-     * @param storage Storage object which handles updating the todo file accordingly
+     * @param input user's String input
+     * @param tasks a TaskList to store all tasks
+     * @param storage a Storage object which saves and updates a todo list file
+     * @return String J.A.R.V.I.S response to user input
      */
-    public static void parse(String input, Scanner sc, TaskList tasks, Storage storage) {
-        while (!input.equalsIgnoreCase("bye")) {
-            Ui.showLine();
-            int id;
-            switch (input) {
-            case "list":
-                tasks.list();
-                break;
-            case "todo":
-                sc.reset();
-                try {
-                    input = sc.nextLine().strip();
-                    if (input.isEmpty()) {
-                        throw new DukeException("Do what, sir?");
-                    }
-                    Todo task = new Todo(input);
-                    tasks.add(task);
-                    storage.create(task);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    break;
+    public static String parse(String input, TaskList tasks, Storage storage) {
+        String[] command = input.split(" ", 2);
+        switch (command[0]) {
+        case "list":
+            return tasks.list();
+        case "todo":
+            try {
+                if (command[1].isEmpty()) {
+                    throw new DukeException("Do what, sir?");
                 }
-            case "deadline":
-                sc.reset();
-                input = sc.nextLine().strip();
-                String[] deadline = input.split(" /by ");
-                try {
-                    if (deadline.length < 2) {
-                        throw new DukeException("Invalid deadline task, sir.");
-                    }
-                    LocalDate date = LocalDate.parse(deadline[1]);
-                    Deadline task = new Deadline(deadline[0], date);
-                    tasks.add(task);
-                    storage.create(task);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    break;
-                }
-            case "event":
-                sc.reset();
-                input = sc.nextLine().strip();
-                String[] event = input.split(" /at ");
-                try {
-                    if (event.length < 2) {
-                        throw new DukeException("Invalid event task, sir.");
-                    }
-                    Event task = new Event(event[0], event[1]);
-                    tasks.add(task);
-                    storage.create(task);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    break;
-                }
-            case "mark":
-                // Fallthrough
-            case "unmark":
-                // Fallthrough
-            case "remove":
-                id = sc.nextInt();
-                storage.update(id, input);
-                tasks.update(id, input);
-                break;
-            case "find":
-                sc.reset();
-                input = sc.nextLine().strip();
-                tasks.find(input);
-                break;
-            default:
-                sc.reset();
-                Ui.unknownCommand(sc.nextLine());
-                break;
+                Todo task = new Todo(command[1]);
+                storage.create(task);
+                return tasks.add(task);
+            } catch (DukeException e) {
+                return e.getMessage();
             }
-            Ui.showLine();
-            input = sc.next();
+        case "deadline":
+            String[] deadline = command[1].split(" /by ");
+            try {
+                if (deadline.length < 2) {
+                    throw new DukeException("Invalid deadline task, sir.");
+                }
+                LocalDate date = LocalDate.parse(deadline[1]);
+                Deadline task = new Deadline(deadline[0], date);
+                storage.create(task);
+                return tasks.add(task);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        case "event":
+            String[] event = command[1].split(" /at ");
+            try {
+                if (event.length < 2) {
+                    throw new DukeException("Invalid event task, sir.");
+                }
+                Event task = new Event(event[0], event[1]);
+                storage.create(task);
+                return tasks.add(task);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        case "mark":
+            // Fallthrough
+        case "unmark":
+            // Fallthrough
+        case "remove":
+            int id = Integer.parseInt(command[1]);
+            storage.update(id, command[0]);
+            return tasks.update(id, command[0]);
+        case "find":
+            return tasks.find(command[1]);
+        default:
+            return Ui.unknownCommand("\"" + input + "\"");
         }
     }
 }

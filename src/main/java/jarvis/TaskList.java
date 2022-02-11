@@ -32,11 +32,12 @@ public class TaskList {
     /**
      * Lists out all of the tasks stored in the list.
      */
-    public void list() {
-        Ui.list();
+    public String list() {
+        String output = Ui.list();
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + ". " + get(i - 1));
+            output += "\n" + i + ". " + get(i - 1);
         }
+        return output;
     }
 
     /**
@@ -44,8 +45,9 @@ public class TaskList {
      *
      * @param task task to be added to the list
      */
-    public void add(Task task) {
+    public String add(Task task) {
         tasks.add(task);
+        return Ui.add(task);
     }
 
     /**
@@ -64,33 +66,29 @@ public class TaskList {
      * @param id id of the task
      * @param command how the task should be updated (mark done, mark not done or removed)
      */
-    public void update(int id, String command) {
+    public String update(int id, String command) {
         if (id > tasks.size()) {
-            return;
+            return Ui.invalidId();
         }
         switch (command) {
         case "mark":
             if (tasks.get(id - 1).isDone()) {
-                Ui.alreadyDone(tasks.get(id - 1));
+                return Ui.alreadyDone(tasks.get(id - 1));
             } else {
                 tasks.get(id - 1).setDone();
-                Ui.done(tasks.get(id - 1).toString());
+                return Ui.done(tasks.get(id - 1).toString());
             }
-            break;
         case "unmark":
             if (!tasks.get(id - 1).isDone()) {
-                Ui.alreadyNotDone(tasks.get(id - 1));
+                return Ui.alreadyNotDone(tasks.get(id - 1));
             } else {
                 tasks.get(id - 1).setNotDone();
-                Ui.notDone(tasks.get(id - 1).toString());
+                return Ui.notDone(tasks.get(id - 1).toString());
             }
-            break;
         case "remove":
-            Ui.remove(tasks.remove(id - 1).toString());
-            break;
+            return Ui.remove(tasks.remove(id - 1).toString());
         default:
-            Ui.unknownCommand(command);
-            break;
+            return Ui.unknownCommand(command);
         }
     }
 
@@ -99,13 +97,14 @@ public class TaskList {
      *
      * @param keyword keyword to search for tasks
      */
-    public void find(String keyword) {
-        Ui.match();
+    public String find(String keyword) {
+        String output = Ui.find();
         int counter = 1;
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).toString().contains(keyword)) {
-                System.out.println(counter++ + ". " + get(i));
+                output += "\n" + counter++ + ". " + get(i);
             }
         }
+        return output;
     }
 }
