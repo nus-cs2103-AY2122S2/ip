@@ -7,7 +7,8 @@ import arthur.exceptions.EmptyDescriptionException;
 import arthur.exceptions.InvalidInstructionException;
 
 public class Arthur {
-
+    private static final String DATE_TIME_ERROR_MESSAGE = "Please enter the date/time in format: "
+            + "yyyy-mm-dd hh:mm \n" + "You can also enter time or date only";
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
@@ -35,15 +36,13 @@ public class Arthur {
         boolean isExit = false;
         String result = string;
         while (!isExit) {
-            String inst = string;
             try {
-                ArthurException.checkException(inst);
-                Parser commander = new Parser(inst);
-                result = commander.execute(tasks, storage, ui);
+                ArthurException.checkException(string);
+                Parser commander = new Parser(string);
+                result = commander.execute(tasks, storage);
                 isExit = true;
             } catch (DateTimeParseException e) {
-                ui.printFormat("Please enter the date/time in format: yyyy-mm-dd hh:mm \n"
-                        + "You can also enter time or date only");
+                ui.printFormat(DATE_TIME_ERROR_MESSAGE);
             } catch (InvalidInstructionException | EmptyDescriptionException f) {
                 ui.printFormat(f.getMessage());
             }

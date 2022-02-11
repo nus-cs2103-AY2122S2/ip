@@ -4,6 +4,7 @@ package arthur.exceptions;
  * Handles the custom exception for arthur.Arthur.
  */
 public class ArthurException {
+    private static final String DATE_TIME_NOT_PRESENT_MESSAGE = "Please state the date and/or time";
 
     /**
      * Checks given user input for instruction validity.
@@ -38,9 +39,9 @@ public class ArthurException {
             if (temp.length < 2 || temp[1].trim().isEmpty()) {
                 throw new EmptyDescriptionException(temp[0]);
             } else if (temp[0].equals("deadline") && !temp[1].contains("/by")) {
-                throw new InvalidInstructionException("Please state the date and/or time");
+                throw new InvalidInstructionException(DATE_TIME_NOT_PRESENT_MESSAGE);
             } else if (temp[0].equals("event") && !temp[1].contains("/at")) {
-                throw new InvalidInstructionException("Please state the date and/or time");
+                throw new InvalidInstructionException(DATE_TIME_NOT_PRESENT_MESSAGE);
             }
         }
     }

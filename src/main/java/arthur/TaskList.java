@@ -14,6 +14,7 @@ import arthur.task.Todo;
  * Handles the list of tasks and operations on it.
  */
 public class TaskList {
+    private static final String INVALID_TASK_NUMBER_MESSAGE = "Invalid task number. Please try again";
     private final ArrayList<Task> taskList;
     private final Storage storage;
 
@@ -60,7 +61,7 @@ public class TaskList {
                 return "Alright, I will unmark this \n" + currTask;
             }
         } catch (IndexOutOfBoundsException a) {
-            return "Invalid task number. Please try again";
+            return INVALID_TASK_NUMBER_MESSAGE;
         }
     }
 
@@ -137,7 +138,7 @@ public class TaskList {
             return "Successfully removed this task: \n" + currTask
                     + "\n" + outstanding();
         } catch (IndexOutOfBoundsException e) {
-            return "Invalid task number. Please try again";
+            return INVALID_TASK_NUMBER_MESSAGE;
         }
     }
 

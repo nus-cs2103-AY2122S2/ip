@@ -13,6 +13,9 @@ import arthur.task.Task;
  */
 public class Storage {
     private static final String FILE_PATH = "data/Tasks.txt";
+    private static final String ISSUE_MESSAGE = "Sorry, there seems to be an Issue. \n"
+            + "Please restart and try again";
+    private static final String PLACE_TO_SPLIT_STRING = " >> ";
     private final File storage;
     private final Ui ui;
 
@@ -28,8 +31,7 @@ public class Storage {
             try {
                 storage.createNewFile();
             } catch (IOException e) {
-                ui.printFormat("Sorry, there seems to be an Issue."
-                        + "\n" + "Please restart and try again");
+                ui.printFormat(ISSUE_MESSAGE);
             }
         }
     }
@@ -52,8 +54,7 @@ public class Storage {
             fw.write(task.toString() + "\n");
             fw.close();
         } catch (IOException ex) {
-            ui.printFormat("Sorry, there seems to be an Issue."
-                    + "\n" + "Please restart and try again");
+            ui.printFormat(ISSUE_MESSAGE);
         }
     }
 
@@ -68,12 +69,12 @@ public class Storage {
 
 
         try {
-            String[] tempArr = task.toString().split(" >> ");
+            String[] tempArr = task.toString().split(PLACE_TO_SPLIT_STRING);
             Scanner sc = new Scanner(storage);
             while (sc.hasNext()) {
                 // This is the task stored in the file
                 String curr = sc.nextLine();
-                String[] currArr = curr.split(" >> ");
+                String[] currArr = curr.split(PLACE_TO_SPLIT_STRING);
                 // Checks if the modified task info matches the stored task
                 if (currArr[1].equals(tempArr[1])) {
                     switch (id) {
@@ -99,8 +100,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            ui.printFormat("Sorry, there seems to be an Issue."
-                    + "\n" + "Please restart and try again");
+            ui.printFormat(ISSUE_MESSAGE);
             e.printStackTrace();
         }
     }
