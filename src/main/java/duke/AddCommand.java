@@ -14,6 +14,7 @@ class AddCommand extends Command {
     @Override
     String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(task);
+        assert taskList.arrayList.contains(task) : "new task should be added";
         return ui.addTaskString(task);
     }
 
