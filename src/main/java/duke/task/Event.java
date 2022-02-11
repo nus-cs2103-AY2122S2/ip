@@ -12,8 +12,8 @@ public class Event extends Task {
     /**
      * Creates an event task with the given data.
      *
-     * @param description Description of the task to be created.
-     * @param at Event time of the task to be created.
+     * @param description Description of the task.
+     * @param at Event time of the task.
      */
     public Event(String description, LocalDate at) {
         super(description, TaskType.EVENT);
@@ -23,9 +23,9 @@ public class Event extends Task {
     /**
      * Creates an event task with the given data.
      *
-     * @param description Description of the task to be created.
-     * @param isDone Status of the task to be created.
-     * @param at Event time of the task to be created.
+     * @param description Description of the task.
+     * @param isDone Status of the task.
+     * @param at Event time of the task.
      */
     public Event(String description, boolean isDone, LocalDate at) {
         super(description, isDone, TaskType.EVENT);

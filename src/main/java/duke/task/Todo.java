@@ -7,7 +7,7 @@ public class Todo extends Task {
     /**
      * Creates a todo task with the given data.
      *
-     * @param description Description of the task to be created.
+     * @param description Description of the task.
      */
     public Todo(String description) {
         super(description, TaskType.TODO);
@@ -16,8 +16,8 @@ public class Todo extends Task {
     /**
      * Creates a todo task with the given data.
      *
-     * @param description Description of the task to be created.
-     * @param isDone Status of the task to be created.
+     * @param description Description of the task.
+     * @param isDone Status of the task.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone, TaskType.TODO);

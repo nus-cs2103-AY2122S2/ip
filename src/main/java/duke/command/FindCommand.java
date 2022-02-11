@@ -6,7 +6,7 @@ import duke.ui.Ui;
 import duke.util.TaskList;
 
 /**
- * Represents a command that finds tasks with the user-specified keyword.
+ * Represents a command that finds and lists tasks with the user-specified keyword.
  */
 public class FindCommand extends Command {
     private String keyword;

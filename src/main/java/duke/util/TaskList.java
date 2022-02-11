@@ -51,7 +51,7 @@ public class TaskList {
      * Returns the task at the specified index.
      *
      * @param index One-based index of the task to be retrieved.
-     * @return Task at index - 1.
+     * @return Task at specified index.
      * @throws DukeException If the index is invalid.
      */
     public Task getTask(int index) throws DukeException {

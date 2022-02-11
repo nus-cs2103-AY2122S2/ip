@@ -8,6 +8,9 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.util.TaskList;
 
+/**
+ * Represents a command that filters and lists tasks with the user-specified date.
+ */
 public class ScheduleCommand extends Command {
     private LocalDate dateToSearch;
 

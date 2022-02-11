@@ -35,14 +35,12 @@ public class Parser {
         if (splitDate.length != 3) {
             throw new DukeException(ErrorMessage.MESSAGE_INVALID_DATE_FORMAT);
         }
-        LocalDate formattedDate;
         try {
-            formattedDate = LocalDate.of(Integer.parseInt(splitDate[0]),
+            return LocalDate.of(Integer.parseInt(splitDate[0]),
                     Integer.parseInt(splitDate[1]), Integer.parseInt(splitDate[2]));
         } catch (DateTimeException e) {
             throw new DukeException(ErrorMessage.MESSAGE_INVALID_DATE_VALUE);
         }
-        return formattedDate;
     }
 
     private static void checkIfInputIsValid(String input) throws DukeException {
@@ -98,9 +96,7 @@ public class Parser {
     }
 
     private static ScheduleCommand createNewScheduleCommand(String[] args) throws DukeException {
-        if (args.length == 1) {
-            throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
-        }
+        checkIfDateExists(args.length);
         return new ScheduleCommand(parseDate(args[1]));
     }
 

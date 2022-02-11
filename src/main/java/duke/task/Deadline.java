@@ -12,8 +12,8 @@ public class Deadline extends Task {
     /**
      * Creates a deadline task with the given data.
      *
-     * @param description Description of the task to be created.
-     * @param by Deadline of the task to be created.
+     * @param description Description of the task.
+     * @param by Deadline of the task.
      */
     public Deadline(String description, LocalDate by) {
         super(description, TaskType.DEADLINE);
@@ -23,9 +23,9 @@ public class Deadline extends Task {
     /**
      * Creates a deadline task with the given data.
      *
-     * @param description Description of the task to be created.
-     * @param isDone Status of the task to be created.
-     * @param by Deadline of the task to be created.
+     * @param description Description of the task.
+     * @param isDone Status of the task.
+     * @param by Deadline of the task.
      */
     public Deadline(String description, boolean isDone, LocalDate by) {
         super(description, isDone, TaskType.DEADLINE);

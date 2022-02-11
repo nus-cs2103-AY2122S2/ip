@@ -14,8 +14,8 @@ public class Task {
     /**
      * Creates a task with the given data.
      *
-     * @param description Description of the task to be created.
-     * @param type Type of the task to be created.
+     * @param description Description of the task.
+     * @param type Type of the task.
      */
     public Task(String description, TaskType type) {
         this.description = description;
@@ -26,9 +26,9 @@ public class Task {
     /**
      * Creates a task with the given data.
      *
-     * @param description Description of the task to be created.
-     * @param isDone Status of the task to be created.
-     * @param type Type of the task to be created.
+     * @param description Description of the task.
+     * @param isDone Status of the task.
+     * @param type Type of the task.
      */
     public Task(String description, boolean isDone, TaskType type) {
         this.description = description;

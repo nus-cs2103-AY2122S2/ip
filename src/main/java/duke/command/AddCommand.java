@@ -7,7 +7,7 @@ import duke.ui.Ui;
 import duke.util.TaskList;
 
 /**
- * Represents a command that adds the specified task to the task list.
+ * Represents a command that adds a task to the task list.
  */
 public class AddCommand extends Command {
     private static final String MESSAGE_TO_SHOW = "Meow! %s is added!\nNumber of tasks in list: %d";

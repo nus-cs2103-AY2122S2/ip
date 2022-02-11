@@ -35,10 +35,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-
         // Clips the image into a circle
         displayPicture.setImage(img);
-        Circle clip = new Circle(50);
+        Circle clip = new Circle(45);
         clip.setCenterX(displayPicture.getFitWidth() / 2);
         clip.setCenterY(displayPicture.getFitHeight() / 2);
         displayPicture.setClip(clip);
@@ -55,9 +54,10 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        // remove space occupied by image
         displayPicture.setFitWidth(0);
         displayPicture.setFitHeight(0);
-        HBox parent = (HBox) dialog.getParent();
+        HBox parent = (HBox) displayPicture.getParent();
         parent.setAlignment(Pos.CENTER);
     }
 
@@ -71,6 +71,10 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    private void setDukeTextStyle() {
+        dialog.setStyle("-fx-background-radius: 5; -fx-background-color: #98a9b4; -fx-text-fill: WHITE");
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
@@ -78,6 +82,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setDukeTextStyle();
         return db;
     }
 
