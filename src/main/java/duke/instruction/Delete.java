@@ -6,8 +6,8 @@ import duke.ui.Ui;
 
 final class Delete extends Instruction {
 
-    private int toDeleteIndex;
-    private Task toDelete;
+    private final int toDeleteIndex;
+    private final Task toDelete;
 
     /**
      * Instantiates an instruction "delete", with the given line of instruction.
@@ -67,7 +67,6 @@ final class Delete extends Instruction {
      * Performs deletion of the task.
      *
      * @param ui The UI to be used.
-     * @return The message after deletion.
      */
     @Override
     public void act(Ui ui) {

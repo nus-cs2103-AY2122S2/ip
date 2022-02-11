@@ -12,6 +12,9 @@ import java.util.HashMap;
 final class Deadline extends Task {
 
     private static final String DUE_TIME_FIELD = "due_time";
+    private static final String DELIMITER = " /by ";
+    private static final String TASK_TYPE_ICON = "[D]";
+
     private final LocalDate dueTime;
 
     /**
@@ -66,7 +69,7 @@ final class Deadline extends Task {
      */
     private static String[] parseDetails(String details) throws FailedToInterpretTaskException {
 
-        String[] args = details.split(" /by ", 2);
+        String[] args = details.split(DELIMITER, 2);
 
         if (args.length != 2) {
             throw new FailedToInterpretTaskException(
@@ -83,7 +86,7 @@ final class Deadline extends Task {
      */
     @Override
     protected String getTypeIcon() {
-        return "[D]";
+        return TASK_TYPE_ICON;
     }
 
     /**

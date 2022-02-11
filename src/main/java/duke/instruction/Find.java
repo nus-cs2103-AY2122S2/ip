@@ -12,9 +12,9 @@ final class Find extends Instruction {
      *
      * @param instruction The raw instruction from user.
      * @param tasks The task manager to be used.
-     * @throws InvalidInstructionException
+     * @throws InvalidInstructionException If the instruction is not valid.
      */
-    protected Find(String instruction, TaskManager tasks) throws InvalidInstructionException {
+    Find(String instruction, TaskManager tasks) throws InvalidInstructionException {
 
         super("find", tasks);
         this.keyword = parseInstruction(instruction);

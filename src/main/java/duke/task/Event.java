@@ -8,6 +8,8 @@ import java.util.HashMap;
 final class Event extends Task {
 
     private static final String TIME_RANGE_FIELD = "time_range";
+    private static final String DELIMITER = " /at/";
+    private static final String TASK_TYPE_ICON = "[E]";
 
     // At this stage, the time range is treated as a string.
     private final String timeRange;
@@ -55,7 +57,7 @@ final class Event extends Task {
      */
     private static String[] parseDetails(String details) throws FailedToInterpretTaskException {
 
-        String[] args = details.split(" /at ", 2);
+        String[] args = details.split(DELIMITER, 2);
 
         if (args.length != 2) {
             throw new FailedToInterpretTaskException(
@@ -85,7 +87,7 @@ final class Event extends Task {
      */
     @Override
     protected String getTypeIcon() {
-        return "[E]";
+        return TASK_TYPE_ICON;
     }
 
     /**
