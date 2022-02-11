@@ -48,9 +48,9 @@ public class ListCommand extends Command {
     public String execute(TaskList taskList) {
         assert taskList != null : "Task list provided must not be null.";
         ArrayList<String> taskSet = taskList.list();
-        String output = "Here are the tasks in your list:" + "\n    ";
+        String output = "Here are the tasks in your list:" + "\n";
         for (int i = 0; i < taskSet.size(); i++) {
-            output += i + 1 + ". " + taskSet.get(i) + "\n    ";
+            output += i + 1 + ". " + taskSet.get(i) + "\n\n";
         }
         return output.trim();
     }
