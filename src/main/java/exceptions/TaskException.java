@@ -11,6 +11,6 @@ public class TaskException extends Exception {
      * Constructor for TaskException.
      */
     public TaskException() {
-        super(" ☹ OOPS!!!");
+        super("OOPS!!!");
     }
 }

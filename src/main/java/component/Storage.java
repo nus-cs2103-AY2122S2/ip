@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class Storage {
      * @param pathName Relative path to the file.
      */
     public Storage(String pathName) {
-        this.pathName = pathName;
+        this.pathName = Paths.get(System.getProperty("user.dir"), pathName).toString();
     }
 
     /**
@@ -34,6 +35,7 @@ public class Storage {
      */
     public ArrayList<Tasks> load() {
         ArrayList<Tasks> ls = new ArrayList<Tasks>();
+
         File data = new File(pathName);
         try {
             Scanner s = new Scanner(data);

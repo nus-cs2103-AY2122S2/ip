@@ -1,5 +1,3 @@
-import java.nio.file.Paths;
-
 import component.Storage;
 import component.TaskList;
 import component.Ui;
@@ -29,7 +27,7 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(Paths.get("").toAbsolutePath() + "/data/duke.txt");
+        this.storage = new Storage("data/duke.txt");
         this.tasks = new TaskList(storage.load());
     }
 
