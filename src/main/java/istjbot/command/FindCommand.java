@@ -60,6 +60,8 @@ public class FindCommand extends Command {
                 keyword.append(commandInfo[i] + " ");
             }
         }
+        assert keyword.length() != 0 : "keyword shouldn't be blank";
+
         return keyword.toString();
     }
 }

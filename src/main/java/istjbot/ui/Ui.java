@@ -24,6 +24,8 @@ public class Ui {
      * @return
      */
     public String showTaskAdded(int tasksSize, String addedTask) {
+        assert tasksSize > 0 : "there should now be at least one task";
+
         String initialMessage = "As an IstjBot, I will add this task right now. \n";
         // May refactor finalMessage?
         String finalMessage = "Now you have " + tasksSize + " ";
