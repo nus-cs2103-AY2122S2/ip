@@ -15,19 +15,19 @@ public class FindCommand extends DukeCommand {
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        TaskList arrList = new TaskList();
+        TaskList arrListResult = new TaskList();
 
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.get(i);
             if (task.getDescription().contains(this.commandBody)) {
-                arrList.add(task);
+                arrListResult.add(task);
             }
         }
 
-        if (arrList.getSize() == 0 ){
+        if (arrListResult.getSize() == 0 ){
             return ui.showEmptyFind();
         } else {
-            return ui.showTaskList(arrList);
+            return ui.showTaskList(arrListResult);
         }
     }
 }

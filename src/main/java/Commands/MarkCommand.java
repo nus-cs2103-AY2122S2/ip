@@ -22,6 +22,9 @@ public class MarkCommand extends DukeCommand {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index = Integer.parseInt(this.commandBody) - 1;
+
+            assert index >= tasks.getSize() || index < 0 : "Invalid indexing of taskList from mark command";
+
             Task task = tasks.get(index);
             task.toggleCompleted();
             storage.save(tasks);

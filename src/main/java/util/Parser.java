@@ -30,24 +30,31 @@ public class Parser {
                 return new ListCommand("list");
             } else if (command.equals("todo")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new ToDoCommand(fullCommand.substring(5));
             } else if (command.equals("deadline")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new DeadlineCommand(fullCommand.substring(9));
             } else if (command.equals("event")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new EventCommand(fullCommand.substring(6));
             } else if (command.equals("mark")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new MarkCommand(fullCommand.substring(5));
             } else if (command.equals("unmark")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new UnmarkCommand(fullCommand.substring(7));
             } else if (command.equals("delete")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new DeleteCommand(fullCommand.substring(7));
             } else if (command.equals("find")) {
                 Parser.exceptionCheck(commandParts.length, command);
+                assert commandParts.length == 1 : "Not handling empty body exception correctly";
                 return new FindCommand(fullCommand.substring(5));
             } else if (command.equals("bye")) {
                 return new ByeCommand("bye");
@@ -83,7 +90,6 @@ public class Parser {
      * @throws DukeException
      */
     public static LocalDateTime parseDateTime(String description, String task) throws DukeException {
-
         String splitDesc[] = new String[0];
 
         if (task.equals("deadline")) {
@@ -91,50 +97,50 @@ public class Parser {
         } else if (task.equals("event")) {
             splitDesc = description.split("/at");
         }
-
         if (splitDesc.length == 1) {
             throw new DukeException("Please enter a valid date and time in the format: /by YYYY-MM-DD HHMM");
         }
 
         String dateTime[] = splitDesc[1].split(" ");
 
-        if (dateTime.length == 1 || dateTime.length == 2) {
+        if (dateTime.length == 0 || dateTime.length == 1) {
             throw new DukeException("Please enter a valid date and time in the format: /by YYYY-MM-DD HHMM");
-        }
-
-        String date = dateTime[1];
-
-        if (date.length() != 10) {
-            throw new DukeException("Please enter a valid date");
-        }
-
-
-        if (dateTime.length == 2) {
+        } else if (dateTime.length == 2) {
             throw new DukeException("Please enter a time");
         }
 
-        int time = Integer.parseInt(dateTime[2]);
-
-        if (dateTime[2].length() < 4 || time < 0000 || time >= 2400) {
-            throw new DukeException("Please enter a valid time");
-        }
-
-        int hour = Integer.parseInt(dateTime[2].substring(0,2));;
-        int minute = Integer.parseInt(dateTime[2].substring(2,4));
-
         LocalTime localTime;
-
-        LocalDate deadline = LocalDate.parse("2010-01-01");
+        LocalDate deadline;
 
         try {
-            deadline = LocalDate.parse(date);
-            localTime = LocalTime.of(hour, minute);
+            deadline = Parser.parseDate(dateTime[1]);
+            localTime = Parser.parseTime(dateTime[2]);
         } catch (DateTimeParseException e) {
             throw new DukeException("Please enter a valid date in the format yyyy-mm-dd");
         } catch (DateTimeException e) {
             throw new DukeException("Please enter a valid time");
         }
-
         return LocalDateTime.of(deadline, localTime);
+    }
+
+    public static LocalDate parseDate(String date) throws DukeException {
+        if (date.length() != 10) {
+            System.out.println(date.length());
+            throw new DukeException("Please enter a valid date now");
+        }
+        LocalDate deadline = LocalDate.parse(date);
+        return deadline;
+    }
+
+    public static LocalTime parseTime(String time) throws DukeException {
+        int timeInt = Integer.parseInt(time);
+
+        if (time.length() < 4 || timeInt < 0 || timeInt >= 2400) {
+            throw new DukeException("Please enter a valid time");
+        }
+
+        int hour = Integer.parseInt(time.substring(0,2));;
+        int minute = Integer.parseInt(time.substring(2,4));
+        return LocalTime.of(hour, minute);
     }
 }

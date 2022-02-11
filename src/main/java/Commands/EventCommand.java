@@ -29,10 +29,13 @@ public class EventCommand extends DukeCommand {
         String deadlineName = Parser.parseDescription(this.commandBody);
         LocalDateTime localDateTime = Parser.parseDateTime(this.commandBody, "event");
 
-        Tasks.Deadline deadlineTask = new Tasks.Deadline(deadlineName, localDateTime);
-        tasks.add(deadlineTask);
+        Tasks.Event eventTask = new Tasks.Event(deadlineName, localDateTime);
+
+        assert eventTask.getDescription().equals(deadlineName) : "Event object not correctly created";
+
+        tasks.add(eventTask);
 
         storage.save(tasks);
-        return ui.showSuccessfulAdd(deadlineTask, tasks.getSize());
+        return ui.showSuccessfulAdd(eventTask, tasks.getSize());
     }
 }
