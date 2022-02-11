@@ -17,6 +17,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private final Ui ui;
+    private final static String FILEPATH = "../../../data/tasks.txt";
 
     /**
      * Constructor for Duke.
@@ -47,6 +48,7 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
+
         while (!isExit) {
             try {
                 String input = ui.readInput();
@@ -58,64 +60,60 @@ public class Duke {
                 }
                 input = Parser.handleInput(input);
 
-                try {
-                    switch (command) {
-                    case "list":
-                        ui.showCommandMessage(command, tasks);
-                        break;
-                    case "do":
-                        int i = Integer.parseInt(input.replaceAll("[^0-9]",
-                                "")) - 1;
-                        tasks.get(i).markComplete();
-                        ui.showCommandMessage(command, tasks);
-                        break;
-                    case "undo":
-                        int j = Integer.parseInt(input.replaceAll("[^0-9]",
-                                "")) - 1;
-                        tasks.get(j).markIncomplete();
-                        ui.showCommandMessage(command, tasks);
-                        break;
-                    case "delete":
-                        int k = Integer.parseInt(input.replaceAll("[^0-9]",
-                                "")) - 1;
-                        tasks.remove(k);
-                        ui.showCommandMessage(command, tasks);
-                        break;
-                    case "todo":
-                        Todo t = new Todo(input);
-                        tasks.add(t);
-                        ui.showCommandMessage(command, tasks);
-                        System.out.println(t);
-                        break;
-                    case "find":
-                        ui.showCommandMessage(command, tasks);
-                        System.out.println(tasks.find(input));
-                        break;
-                    case "deadline":
-                        String datetime = input.replaceAll(".* by ", "");
-                        input = input.replaceAll(" by .*", "");
-                        Deadline d = new Deadline(input, datetime);
-                        tasks.add(d);
-                        ui.showCommandMessage(command, tasks);
-                        System.out.println(d);
-                        break;
-                    case "event":
-                        String time = input.replaceAll(".* at ", "");
-                        input = input.replaceAll(" at .*", "");
-                        Event e = new Event(input, time);
-                        tasks.add(e);
-                        ui.showCommandMessage(command, tasks);
-                        System.out.println(e);
-                        break;
-                    default:
-                        break;
-                    }
+                switch (command) {
+                case "list":
+                    ui.showCommandMessage(command, tasks);
+                    break;
+                case "do":
+                    int i = Integer.parseInt(input.replaceAll("[^0-9]",
+                            "")) - 1;
+                    tasks.get(i).markComplete();
+                    ui.showCommandMessage(command, tasks);
+                    break;
+                case "undo":
+                    int j = Integer.parseInt(input.replaceAll("[^0-9]",
+                            "")) - 1;
+                    tasks.get(j).markIncomplete();
+                    ui.showCommandMessage(command, tasks);
+                    break;
+                case "delete":
+                    int k = Integer.parseInt(input.replaceAll("[^0-9]",
+                            "")) - 1;
+                    tasks.remove(k);
+                    ui.showCommandMessage(command, tasks);
+                    break;
+                case "todo":
+                    Todo t = new Todo(input);
+                    tasks.add(t);
+                    ui.showCommandMessage(command, tasks);
+                    System.out.println(t);
+                    break;
+                case "find":
+                    ui.showCommandMessage(command, tasks);
+                    System.out.println(tasks.find(input));
+                    break;
+                case "deadline":
+                    String datetime = input.replaceAll(".* by ", "");
+                    input = input.replaceAll(" by .*", "");
+                    Deadline d = new Deadline(input, datetime);
+                    tasks.add(d);
+                    ui.showCommandMessage(command, tasks);
+                    System.out.println(d);
+                    break;
+                case "event":
+                    String time = input.replaceAll(".* at ", "");
+                    input = input.replaceAll(" at .*", "");
+                    Event e = new Event(input, time);
+                    tasks.add(e);
+                    ui.showCommandMessage(command, tasks);
+                    System.out.println(e);
+                    break;
+                default:
+                    break;
+                }
 
-                    if (!command.equals("list") && !command.equals("bye")) {
-                        storage.save(tasks);
-                    }
-                } catch (Exception e) {
-                    throw new RuntimeException(e.getMessage());
+                if (!command.equals("list") && !command.equals("bye")) {
+                    storage.save(tasks);
                 }
 
                 isExit = command.equals("bye");
@@ -132,7 +130,7 @@ public class Duke {
      * @param args command-line arguments
      */
     public static void main(String[] args) {
-        new Duke("../../../data/tasks.txt").run();
+        new Duke(FILEPATH).run();
     }
 
 }

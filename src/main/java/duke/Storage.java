@@ -53,49 +53,52 @@ public class Storage {
      * non-standard format
      */
     Storage(String filePath) throws IOException {
+        tasks = new ArrayList<>();
         this.filePath = filePath;
         File data = new File(filePath);
         data.getParentFile().mkdirs();
         //make preceding directories, if any are not found
         ignoreResult(data.getParentFile().mkdirs());
 
-        tasks = new ArrayList<>();
-        if (!data.createNewFile()) { //if file exists
-            Scanner fileReader = new Scanner(data);
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                String[] tmp = line.split("\\|");
-                boolean isDone = tmp[1].trim().equals("D");
-
-                switch (tmp[0].trim()) {
-                case "T":
-                    Todo t = new Todo(tmp[2].trim());
-                    if (isDone) {
-                        t.markComplete();
-                    }
-                    tasks.add(t);
-                    break;
-                case "D":
-                    Deadline d = new Deadline(tmp[2].trim(), tmp[3].trim());
-                    if (isDone) {
-                        d.markComplete();
-                    }
-                    tasks.add(d);
-                    break;
-                case "E":
-                    Event e = new Event(tmp[2].trim(), tmp[3].trim());
-                    if (isDone) {
-                        e.markComplete();
-                    }
-                    tasks.add(e);
-                    break;
-                default:
-                    throw new RuntimeException("Corrupted data in data file at "
-                            + filePath);
-                }
-            }
-            fileReader.close();
+        // If file does not exist, create new file and return
+        if (data.createNewFile()) {
+            return;
         }
+
+        Scanner fileReader = new Scanner(data);
+        while (fileReader.hasNextLine()) {
+            String line = fileReader.nextLine();
+            String[] tmp = line.split("\\|");
+            boolean isDone = tmp[1].trim().equals("D");
+
+            switch (tmp[0].trim()) {
+            case "T":
+                Todo t = new Todo(tmp[2].trim());
+                if (isDone) {
+                    t.markComplete();
+                }
+                tasks.add(t);
+                break;
+            case "D":
+                Deadline d = new Deadline(tmp[2].trim(), tmp[3].trim());
+                if (isDone) {
+                    d.markComplete();
+                }
+                tasks.add(d);
+                break;
+            case "E":
+                Event e = new Event(tmp[2].trim(), tmp[3].trim());
+                if (isDone) {
+                    e.markComplete();
+                }
+                tasks.add(e);
+                break;
+            default:
+                throw new RuntimeException("Corrupted data in data file at "
+                        + filePath);
+            }
+        }
+        fileReader.close();
     }
 
     /**
