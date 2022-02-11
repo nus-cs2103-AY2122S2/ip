@@ -69,4 +69,5 @@ public class ParserTest {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());
         }
     }
+
 }

@@ -7,46 +7,52 @@ public enum Commands {
             return "    Hello! I'm Duke\n    What can I do for you?\n";
         }
     },
-    BYE{
+    BYE {
         @Override
         public String toString() {
             return "    Bye. Hope to see you again soon!\n";
         }
     },
-    LIST{
+    LIST {
         @Override
         public String toString() {
             return "    Here are the tasks in your list:\n";
         }
     },
-    MARK{
+    MARK {
         @Override
         public String toString() {
             return "    Nice! I've marked this task as done:\n";
         }
     },
-    UNMARK{
+    UNMARK {
         @Override
         public String toString() {
             return "    Ok! I've marked this task as not done yet:\n";
         }
     },
-    ADD{
+    ADD {
         @Override
         public String toString() {
             return "    Got it. I've added this task:\n";
         }
     },
-    DELETE{
+    DELETE {
         @Override
         public String toString() {
             return "    Noted. I've removed this task:\n";
         }
     },
-    MATCH{
+    MATCH {
         @Override
         public String toString(){
             return "    Here are the matching tasks in your list:\n";
+        }
+    },
+    RECUR {
+        @Override
+        public String toString(){
+            return "    I have recurred the task to as follow:\n";
         }
     }
 

@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     private LocalDate deadline;
+    private boolean isRecurring;
+    private RecurPeriod recurPeriod;
 
     /**
      * Class constructor of Event.
@@ -15,11 +17,26 @@ public class Event extends Task {
      * @param description String that describes Event.
      * @param deadline LocalDate indicating the date Event is due on.
      */
-    public Event(String description, LocalDate deadline) {
+    public Event(String description, LocalDate deadline, RecurPeriod recurPeriod) {
         super(description);
         this.deadline = deadline;
+        this.recurPeriod = recurPeriod;
+        if (recurPeriod != null) {
+            this.isRecurring = true;
+        } else {
+            this.isRecurring = false;
+        }
     }
 
+    public boolean getIsRecurring() {
+        return this.isRecurring;
+    }
+
+    public void recur() {
+        if (isRecurring) {
+            deadline = deadline.plus(recurPeriod.getPeriod());
+        }
+    }
     /**
      * Returns a string of the identity of the Event(i.e. its description and due Date).
      * Identity used in taskList.
@@ -29,10 +46,18 @@ public class Event extends Task {
     @Override
     public String toString() {
         String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy" ));
+        String output = "";
         if (super.getIsDone()) {
-            return String.format("[E][X] %s (by: %s)\n", super.getDescription(), dateString);
+            output = "[E][X]";
+
         } else {
-            return String.format("[E][ ] %s (by: %s)\n", super.getDescription(), dateString);
+            output = "[E][ ]";
+        }
+        if (isRecurring) {
+            return String.format("%s %s every %s (by: %s)\n",
+                    output, super.getDescription(), recurPeriod.toString(), dateString);
+        } else {
+            return String.format("%s %s (by: %s)\n", output, super.getDescription(), dateString);
         }
     }
 

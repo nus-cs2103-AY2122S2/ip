@@ -82,6 +82,8 @@ public class Duke extends Application {
         delayReply.getKeyFrames().add(new KeyFrame(Duration.millis(500),
                 (event) -> dialogContainer.getChildren().add(dukeReply)));
         delayReply.play();
+
+        userInput.clear();
     }
 
     /**
@@ -99,9 +101,10 @@ public class Duke extends Application {
             isExit = true;
             return ui.sayBye();
         case "list":
-            return ui.listTaskUsingArrayList(tasks);
+            return ui.listTask(TEXT_DATA_FILE_PATH);
         case "mark":
         case "unmark":
+        case "recur":
             return executeChangeOfStatusCommand(command);
         case "todo":
         case "event":
@@ -158,6 +161,8 @@ public class Duke extends Application {
             modifiedTask = tasks.updateTask(command.getIndex(), true);
         } else if (command.getCommand().equals("unmark")) {
             modifiedTask = tasks.updateTask(command.getIndex(), false);
+        } else if (command.getCommand().equals("recur")){
+            modifiedTask = tasks.recur(command.getIndex());
         } else {
             return ui.showInputError();
         }
@@ -166,7 +171,7 @@ public class Duke extends Application {
         if (!updateItemsInStorage()) {
             return ui.showStorageError();
         }
-        return ui.identifyTask(modifiedTask);
+        return ui.identifyTask(command, modifiedTask);
     }
 
     /**
@@ -205,10 +210,10 @@ public class Duke extends Application {
             newTask = new ToDo(command.getTask());
             break;
         case "event":
-            newTask = new Event(command.getTask(), command.getDueDate());
+            newTask = new Event(command.getTask(), command.getDueDate(), command.getRecurPeriod());
             break;
         case "deadline":
-            newTask = new Deadline(command.getTask(), command.getDueDate());
+            newTask = new Deadline(command.getTask(), command.getDueDate(), command.getRecurPeriod());
             break;
         default:
             return ui.showInputError();
