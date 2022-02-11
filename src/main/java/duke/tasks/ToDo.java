@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 import duke.exceptions.CorruptedSaveException;
 

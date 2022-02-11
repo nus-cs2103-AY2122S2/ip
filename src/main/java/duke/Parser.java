@@ -4,10 +4,10 @@ import java.io.IOException;
 import duke.exceptions.CorruptedSaveException;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidItemNumberException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /**
  * Encapsulates the logic to parse and understand inputs by the user.

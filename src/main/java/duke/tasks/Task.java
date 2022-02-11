@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 /**
  * Abstract class representing a Task
