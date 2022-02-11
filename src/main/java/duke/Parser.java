@@ -39,11 +39,10 @@ public class Parser {
                 return taskList.delete(command.substring(7));
             } else if (command.startsWith("find ")) {
                 return taskList.find(command.substring(5));
-            } else if (command.startsWith("bye")) {
-                storage.writeFrom(taskList);
-                return "Changes are saved. Hope to see you again soon!";
+            } else if (command.startsWith("save")) {
+                return storage.writeFrom(taskList);
             } else {
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry, but I don't know what that means.");
             }
         } catch (DukeException e) {
             return e.toString();

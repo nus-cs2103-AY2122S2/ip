@@ -28,41 +28,55 @@ public class Storage {
      */
     public void loadTo(TaskList taskList) {
         try {
+            Scanner sc = fileReader();
+            while (sc.hasNext()) {
+                readOneTask(sc, taskList);
+            }
+        } catch (DukeException e) {
+            taskList.clear();
+        }
+    }
+
+    private Scanner fileReader() {
+        try {
             File file = new File(path);
             file.createNewFile();
             Scanner sc = new Scanner(file);
             sc.useDelimiter(" \\| ");
-            while (sc.hasNext()) {
-                String taskType = sc.next();
-                String isDoneSymbol = sc.next();
-                String content = sc.next();
-                boolean isDone;
-                switch (isDoneSymbol) {
-                case "0":
-                    isDone = false;
-                    break;
-                case "1":
-                    isDone = true;
-                    break;
-                default:
-                    throw new DukeException("I cannot read the file. It is not in the expected format.");
-                }
-                switch (taskType) {
-                case "T":
-                    taskList.readFromFile(new Todo(content, isDone));
-                    break;
-                case "D":
-                    taskList.readFromFile(new Deadline(content, LocalDate.parse(sc.next()), isDone));
-                    break;
-                case "E":
-                    taskList.readFromFile(new Event(content, sc.next(), isDone));
-                    break;
-                default:
-                    throw new DukeException("I cannot read the file. It is not in the expected format.");
-                }
-            }
+            return sc;
         } catch (IOException e) {
-            throw new DukeException("I cannot create the data file.");
+            return new Scanner("");
+        }
+    }
+
+    private void readOneTask(Scanner sc, TaskList taskList) {
+        String taskType = sc.next();
+        String isDoneSymbol = sc.next();
+        String content = sc.next();
+        boolean isDone = symbolToBoolean(isDoneSymbol);
+        switch (taskType) {
+        case "T":
+            taskList.readFromFile(new Todo(content, isDone));
+            break;
+        case "D":
+            taskList.readFromFile(new Deadline(content, LocalDate.parse(sc.next()), isDone));
+            break;
+        case "E":
+            taskList.readFromFile(new Event(content, sc.next(), isDone));
+            break;
+        default:
+            throw new DukeException("I cannot read the file. It is not in the expected format.");
+        }
+    }
+
+    private boolean symbolToBoolean(String symbol) {
+        switch (symbol) {
+        case "0":
+            return false;
+        case "1":
+            return true;
+        default:
+            throw new DukeException("I cannot read the file. It is not in the expected format.");
         }
     }
 
@@ -70,15 +84,16 @@ public class Storage {
      * Writes data from the taskList of Duke to the storage file.
      * @param taskList taskList of the running Duke.
      */
-    public void writeFrom(TaskList taskList) {
+    public String writeFrom(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(path, false);
             fw.write(taskList.toString());
             fw.close();
+            return "Changes are saved. Hope to see you again soon!";
         } catch (IOException e) {
-            System.err.println(new DukeException("I cannot save changes to file.").toString());
-            System.out.println("You could save this text file manually and reboot: ");
-            System.out.println(taskList.toString());
+            return "I cannot save changes to file. "
+                    + "You could save this text file manually and reboot Duke: \n"
+                    + taskList;
         }
     }
 }

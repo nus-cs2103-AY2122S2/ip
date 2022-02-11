@@ -7,6 +7,6 @@ public class DukeException extends IllegalArgumentException {
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! " + super.getMessage();
+        return ":-( OOPS!!! " + super.getMessage();
     }
 }
