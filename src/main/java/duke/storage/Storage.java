@@ -129,7 +129,7 @@ public class Storage {
      * @return Task generated.
      */
     public Task generateTask(char letter, boolean isDone, String taskContent) {
-        String[] tokens = taskContent.split("\\|", 2);
+        String[] tokens = taskContent.split("\\| ", 2);
         String description = tokens[0];
         switch (letter) {
         case 'T':
