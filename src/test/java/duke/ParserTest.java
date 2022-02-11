@@ -29,20 +29,6 @@ public class ParserTest { // Just need to ensure it is returning the correct Com
         } catch (Exception e) {
             fail(e.getMessage());
         }
-
-        //        Parser parser = new Parser();
-//        try {
-//            TaskList tsklist = new TaskList();
-//            tsklist.add(new Todo("borrow book"));
-//            tsklist.add(new Deadline("return book", "1999-03-03"));
-//            tsklist.add(new Event("project meeting", "2022-01-24"));
-//
-//            parser.setTaskList(tsklist);
-//
-//
-//        } catch (Exception e) {
-//            fail(e.getMessage());
-//        }
     }
 
     @Test
@@ -241,4 +227,29 @@ public class ParserTest { // Just need to ensure it is returning the correct Com
             fail(e.getMessage());
         }
     }
+
+//    @Test
+//    public void testParse_postpone() {
+//
+//    }
+//
+//    @Test
+//    public void testParse_postpone_taskWithNoDate() {
+//
+//    }
+//
+//    @Test
+//    public void testParse_postpone_notEnoughArguments() {
+//
+//    }
+//
+//    @Test
+//    public void testParse_postpone_incorrectDate() {
+//
+//    }
+//
+//    @Test
+//    public void testParse_postpone_incorrectInt() {
+//
+//    }
 }

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * An abstract class representing a Task with dates.
  */
 public abstract class TaskWithDate extends Task {
-    private final LocalDate date;
+    private LocalDate date;
 
     /**
      * Default constructor for TaskWithDate.
@@ -15,9 +15,9 @@ public abstract class TaskWithDate extends Task {
      * @param name Task name or description.
      * @param date Additional date variable.
      */
-    public TaskWithDate(String name, String date) {
+    public TaskWithDate(String name, LocalDate date) {
         super(name);
-        this.date = LocalDate.parse(date);
+        this.date = date;
     }
 
     /**
@@ -30,6 +30,10 @@ public abstract class TaskWithDate extends Task {
     public TaskWithDate(String name, boolean isDone, String date) {
         super(name, isDone);
         this.date = LocalDate.parse(date);
+    }
+
+    public void changeDate(LocalDate newDate) {
+        this.date = newDate;
     }
 
     /**

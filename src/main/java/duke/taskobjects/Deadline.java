@@ -1,5 +1,7 @@
 package duke.taskobjects;
 
+import java.time.LocalDate;
+
 /**
  * Representation of a Task with a deadline.
  */
@@ -10,7 +12,7 @@ public class Deadline extends TaskWithDate {
      * @param name Task name or description.
      * @param deadline String representation of date.
      */
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, LocalDate deadline) {
         super(name, deadline);
     }
 
