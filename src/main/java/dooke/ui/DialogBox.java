@@ -15,9 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * Controller class representing a dialog box consisting of an ImageView to represent the
+ * speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -25,7 +24,13 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    /**
+     * Constructor for the DialogBox class.
+     *
+     * @param text The text that would go into the dialog box.
+     * @param image The accompanying image.
+     */
+    private DialogBox(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,7 +41,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setImage(image);
     }
 
     /**
@@ -49,12 +54,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    /**
+     * Method for obtaining the user's dialog box.
+     *
+     * @param text The text for the dialog box.
+     * @param image The accompanying image.
+     * @return The resulting dialog box.
+     */
+    public static DialogBox getUserDialog(String text, Image image) {
+        return new DialogBox(text, image);
     }
 
-    public static DialogBox getDookeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    /**
+     * Method for obtaining the dooke's dialog box.
+     *
+     * @param text The text for the dialog box.
+     * @param image The accompanying image.
+     * @return The resulting dialog box.
+     */
+    public static DialogBox getDookeDialog(String text, Image image) {
+        var db = new DialogBox(text, image);
         db.flip();
         return db;
     }

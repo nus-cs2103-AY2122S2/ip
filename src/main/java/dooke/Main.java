@@ -16,6 +16,10 @@ public class Main extends Application {
 
     private Dooke dooke = new Dooke();
 
+    /**
+     * Override start method for starting the gui application.
+     * @param stage The stage of the javafx application.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -23,7 +27,6 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-//            stage.getIcons().add(BOT_ICON);
             fxmlLoader.<MainWindow>getController().setDooke(dooke);
             stage.setTitle("Dooke");
             stage.show();
