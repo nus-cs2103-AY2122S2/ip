@@ -46,7 +46,7 @@ public class AddCommand extends Command {
         case EVENT:
             return addEvent(tasks, ui, storage);
         default:
-            assert false: "add command should not reach here";
+            assert false : "add command should not reach here";
         }
         assert false : "add command should not reach here";
         return null;
@@ -64,8 +64,10 @@ public class AddCommand extends Command {
         String output = "";
         try {
             String description = Parser.parseDescription(this.input);
+
             tasks.add(new Todo(description));
             storage.save(tasks);
+
             output = ui.printTaskAdded(tasks);
         } catch (InvalidArgumentException e) {
             output = ui.showError(e.getMessage());

@@ -2,22 +2,20 @@ package duke;
 
 import java.io.IOException;
 
-import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -25,13 +23,22 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
+    //the specified filePath in user's computer downloads.
+    private static final String filePath = "data/duke.txt";
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
     /** Interprets messages sent by the user */
-    private Parser parser;
-    //the specified filePath in user's computer downloads.
-    private final String filePath = "data/duke.txt";
+    private final Parser parser;
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     /**
      * Starts up the Duke Bot in a specified filePath. If filePath
@@ -48,40 +55,6 @@ public class Duke extends Application {
             this.tasks = new TaskList();
         }
     }
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-//    /**
-//     * Runs the chatbot application.
-//     */
-//    public void run() {
-//        ui.greet();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                String response = parser.parse(fullCommand);
-//                isExit = c.isExit();
-//            } catch (Exception e) {
-//                ui.showError(e.getMessage());
-//            } finally {
-//                ui.divide();
-//            }
-//        }
-//
-//    }
-
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
-
 
     @Override
     public void start(Stage stage) {
@@ -133,17 +106,6 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-//        //Step 3. Add functionality to handle user input.
-//        sendButton.setOnMouseClicked((event) -> {
-//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-//            userInput.clear();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-//            userInput.clear();
-//        });
-
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
@@ -179,10 +141,6 @@ public class Duke extends Application {
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
-//        if (parser.isExit(dukeText)) {
-//            dialogContainer.getChildren().addAll(
-//                    DialogBox.getDukeDialog(ui.farewell(), dukeImage));
-//        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(dukeText, dukeImage)
@@ -191,8 +149,7 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input!
-     * Replace this stub with your completed method.
+     * Gets the response to the user input.
      */
     public String getResponse(String input) {
         return parser.parse(input, tasks, storage);

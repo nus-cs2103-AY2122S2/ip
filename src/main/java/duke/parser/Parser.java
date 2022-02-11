@@ -96,9 +96,16 @@ public class Parser {
         return Action.valueOf(command.toUpperCase());
     }
 
+    /**
+     * Checks if user has input 'bye' command.
+     *
+     * @param input user input.
+     * @return whether input equals bye, ignoring case.
+     */
     public static boolean isExit(String input) {
         return input.equalsIgnoreCase("bye");
     }
+
     /**
      * Returns the Description of task.
      *

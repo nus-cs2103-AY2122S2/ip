@@ -8,10 +8,9 @@ import duke.task.TaskList;
 public class Ui {
     public static final String LINE_SEPARATOR = System.lineSeparator();
 
-    public static final String LINE_PREFIX = "|| ";
-
     public static final String[] COMMANDS = {"list", "todo <task>", "deadline <task> /by " + Messages.DATETIME_FORMAT,
-            "event <task> /at <at>", "mark <taskNumber>", "unmark <taskNumber>", "delete <taskNumber>", "bye"};
+                                                "event <task> /at <at>", "mark <taskNumber>",
+                                                "unmark <taskNumber>", "delete <taskNumber>", "bye"};
 
     /**
      * Appends a string to the original string.
@@ -20,12 +19,6 @@ public class Ui {
      */
     public static String append(String curr, String add) {
         return curr + add + LINE_SEPARATOR;
-    }
-    /**
-     * Greets the user.
-     */
-    public String greet() {
-        return showToUser(LINE_SEPARATOR, Messages.WELCOME_MESSAGE);
     }
 
     /**

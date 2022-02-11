@@ -17,8 +17,4 @@ public abstract class Command {
      * @param storage Storage that saves and loads tasks after Command is executed.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
-
-    public boolean isExit() {
-        return false;
-    }
 }

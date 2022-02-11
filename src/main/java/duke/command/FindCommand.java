@@ -30,6 +30,7 @@ public class FindCommand extends Command {
         try {
             String keyword = Parser.parseDescription(input);
             output = Ui.append(output, Messages.FINDING_MSG);
+
             int matchCount = 0;
             for (int i = 0; i < tasks.getSize(); i++) {
                 if (tasks.get(i).getTaskData().contains(keyword)) {
@@ -37,12 +38,12 @@ public class FindCommand extends Command {
                     output = Ui.append(output, matchCount + "." + tasks.getTaskStatement(i));
                 }
             }
+
             if (matchCount == 0) {
                 output = ui.showToUser(Messages.NO_FIND_MATCH_MSG);
             } else {
                 output = Ui.append(output, ui.showToUser(Messages.getMatchCountMsg(matchCount)));
             }
-            //use string.contains(string) method to search
         } catch (InvalidArgumentException e) {
             output = ui.showError(e.getMessage());
         }

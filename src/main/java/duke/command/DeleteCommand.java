@@ -30,15 +30,19 @@ public class DeleteCommand extends Command {
             if (!(inputWords.length == 2)) {
                 throw new InvalidArgumentException(Messages.UNKNOWN_DELETE);
             }
+
             int taskNumber = Integer.parseInt(inputWords[1]);
             if (tasks.isOutOfBounds(taskNumber)) {
                 throw new OutOfBoundsException(Messages.getOutOfBoundsMsg(taskNumber));
             }
+
             output = Ui.append(output, Messages.DELETE_SUCCESS);
             output = Ui.append(output, tasks.getTaskStatement(taskNumber - 1));
+
             tasks.remove(taskNumber - 1);
-            output = Ui.append(output, ui.printTaskCount(tasks));
             storage.save(tasks);
+
+            output = Ui.append(output, ui.printTaskCount(tasks));
         } catch (OutOfBoundsException | InvalidArgumentException e) {
             output = ui.showError(e.getMessage());
         } catch (IOException e) {

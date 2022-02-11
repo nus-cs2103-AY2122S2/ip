@@ -1,5 +1,7 @@
 package duke;
 
+import duke.parser.Parser;
+import duke.ui.Messages;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import duke.ui.Messages;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,6 +29,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the main window for GUI.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -45,7 +49,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equalsIgnoreCase("bye")) {
+        if (Parser.isExit(input)) {
             Platform.exit();
         }
         String response = duke.getResponse(input);
