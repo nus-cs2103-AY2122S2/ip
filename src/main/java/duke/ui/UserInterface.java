@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.exceptions.DukeException;
 
 /**
@@ -10,7 +8,6 @@ import duke.exceptions.DukeException;
  */
 public class UserInterface {
     private static final String INTRO = "Hello! I'm YQ, your personal assistant\n" + "What can I do for you?\n";
-    private static final String BYE = "\nBye. Hope to see you again soon!\n";
 
     /**
      * Returns a String containing the introduction message.
@@ -19,15 +16,6 @@ public class UserInterface {
      */
     public static String introMessage() {
         return INTRO;
-    }
-
-    /**
-     * Returns a String containing the bye message.
-     *
-     * @return A String containing the bye message.
-     */
-    public static String byeMessage() {
-        return BYE;
     }
 
     /**
