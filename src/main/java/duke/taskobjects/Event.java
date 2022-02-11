@@ -1,5 +1,7 @@
 package duke.taskobjects;
 
+import java.time.LocalDate;
+
 /**
  * Representation of a Task that's an event.
  */
@@ -10,7 +12,7 @@ public class Event extends TaskWithDate {
      * @param name Task name or description.
      * @param time String representation of date.
      */
-    public Event(String name, String time) {
+    public Event(String name, LocalDate time) {
         super(name, time);
     }
 

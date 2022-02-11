@@ -14,7 +14,11 @@ import duke.command.FindCommand;
 import duke.command.ListAllTasksCommand;
 import duke.command.MarkAsDoneCommand;
 import duke.command.MarkAsUndoneCommand;
+import duke.command.PostponeTaskCommand;
 import duke.exceptions.NullDateProvidedException;
+import duke.exceptions.TaskNoDateException;
+import duke.taskobjects.Task;
+import duke.taskobjects.TaskWithDate;
 
 /**
  * Parser object that takes in user input and returns a {@code Command} type.
@@ -60,6 +64,8 @@ public class Parser {
             return generateDeleteCommand(inputArray);
         case FindCommand.COMMAND_WORD:
             return generateFindCommand(input);
+        case PostponeTaskCommand.COMMAND_WORD:
+            return generatePostponeCommand(inputArray);
         default:
             return new ErrorCommand("Unknown command: " + command);
         }
@@ -98,38 +104,38 @@ public class Parser {
 
     private Command generateAddDeadlineCommand(String input) {
         String[] deadlineStringSplit;
+        LocalDate deadline;
         try {
             boolean hasDateKeyword = input.contains(DEADLINE_DATE_KEYWORD);
             if (!hasDateKeyword) {
                 throw new NullDateProvidedException();
             }
             deadlineStringSplit = input.split(DEADLINE_DATE_KEYWORD);
-            LocalDate.parse(deadlineStringSplit[1]); // Checking if date valid
+            deadline = LocalDate.parse(deadlineStringSplit[1]); // Checking if date valid
         } catch (NullDateProvidedException | IndexOutOfBoundsException | DateTimeParseException e) {
             return new ErrorCommand("Please enter /by followed by a date in this format YYYY-MM-DD");
         }
 
         // Splitting input to command and deadline
-        String deadline = deadlineStringSplit[1];
         String description = deadlineStringSplit[0].split(" ", 2)[1];
         return new AddDeadlineCommand(taskList, description, deadline);
     }
 
     private Command generateAddEventCommand(String input) {
         String[] deadlineStringSplit;
+        LocalDate deadline;
         try {
             boolean hasDateKeyword = input.contains(EVENT_DATE_KEYWORD);
             if (!hasDateKeyword) {
                 throw new NullDateProvidedException();
             }
             deadlineStringSplit = input.split(EVENT_DATE_KEYWORD);
-            LocalDate.parse(deadlineStringSplit[1]); // Checking if date valid
+            deadline = LocalDate.parse(deadlineStringSplit[1]); // Checking if date valid
         } catch (NullDateProvidedException | IndexOutOfBoundsException | DateTimeParseException e) {
             return new ErrorCommand("Please enter /by followed by a date in this format YYYY-MM-DD");
         }
 
         // Splitting input to command and deadline
-        String deadline = deadlineStringSplit[1];
         String description = deadlineStringSplit[0].split(" ", 2)[1];
         return new AddEventCommand(taskList, description, deadline);
     }
@@ -152,6 +158,61 @@ public class Parser {
         }
         String searchQuery = inputSplit[1];
         return new FindCommand(taskList, searchQuery);
+    }
+
+    private Command generatePostponeCommand(String[] inputArray) {
+        PostponeCommandCheckResults results = checkPostponeCommandInputs(inputArray);
+        if (!results.isSuccessful()) {
+            return new ErrorCommand(results.getErrorMessage());
+        }
+
+        return new PostponeTaskCommand(taskList, results.getTaskNo(), results.getNewDate());
+    }
+
+    private PostponeCommandCheckResults checkPostponeCommandInputs(String[] inputArray) {
+        int taskNo;
+        LocalDate newDate;
+
+        // Checking for 3 parameters
+        if (inputArray.length != 3) {
+            return new PostponeCommandCheckResults("Invalid arguments entered");
+        }
+
+        // Check for invalid index
+        Pair<Boolean, String> result = checkForInvalidIndex(inputArray);
+        if (result.first()) {
+            return new PostponeCommandCheckResults(result.second());
+        }
+        taskNo = Integer.parseInt(inputArray[1]) - 1;
+
+        try {
+            // Check if task has date
+            Task currentTask = taskList.get(taskNo);
+            if (!(currentTask instanceof TaskWithDate)) {
+                throw new TaskNoDateException();
+            }
+
+            // Check if date is valid
+            newDate = LocalDate.parse(inputArray[2]);
+        } catch (TaskNoDateException e) {
+            return new PostponeCommandCheckResults("The selected task does not have a date");
+        } catch (DateTimeParseException e) {
+            return new PostponeCommandCheckResults("Please enter date in the format YYYY-MM-DD");
+        }
+        // Checking for valid results
+        assert taskNo != -1 : "Task number incorrect";
+        assert newDate != null : "New Date not instantiated correctly";
+        return new PostponeCommandCheckResults(taskNo, newDate);
+    }
+
+    /**
+     * Sets the task list used in the current Parser instance.
+     *
+     * Used for {@code Command}s and certain result printing.
+     * @param taskList Task list used for modification or reference when {@code Command}s are executed.
+     */
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     private Pair<Boolean, String> checkForInvalidIndex(String[] strArr) {
@@ -188,5 +249,46 @@ class Pair<T, V> {
 
     public V second() {
         return second;
+    }
+}
+
+class PostponeCommandCheckResults {
+    private final boolean isSuccessful;
+    private final String errorMessage;
+    private final int taskNo;
+    private final LocalDate newDate;
+
+    /**
+     * Constructor for PostponeCommandCheckResults when isSuccessful = false
+     * @param errorMessage Error message
+     */
+    public PostponeCommandCheckResults(String errorMessage) {
+        this.isSuccessful = false;
+        this.errorMessage = errorMessage;
+        taskNo = -1;
+        newDate = null;
+    }
+
+    public PostponeCommandCheckResults(int taskNo, LocalDate newDate) {
+        this.isSuccessful = true;
+        this.errorMessage = "";
+        this.taskNo = taskNo;
+        this.newDate = newDate;
+    }
+
+    public boolean isSuccessful() {
+        return isSuccessful;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public int getTaskNo() {
+        return taskNo;
+    }
+
+    public LocalDate getNewDate() {
+        return newDate;
     }
 }

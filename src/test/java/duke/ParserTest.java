@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import duke.command.AddDeadlineCommand;
@@ -17,6 +19,8 @@ import duke.command.FindCommand;
 import duke.command.ListAllTasksCommand;
 import duke.command.MarkAsDoneCommand;
 import duke.command.MarkAsUndoneCommand;
+import duke.command.PostponeTaskCommand;
+import duke.taskobjects.Deadline;
 import duke.taskobjects.Todo;
 
 public class ParserTest { // Just need to ensure it is returning the correct Command
@@ -29,20 +33,6 @@ public class ParserTest { // Just need to ensure it is returning the correct Com
         } catch (Exception e) {
             fail(e.getMessage());
         }
-
-        //        Parser parser = new Parser();
-//        try {
-//            TaskList tsklist = new TaskList();
-//            tsklist.add(new Todo("borrow book"));
-//            tsklist.add(new Deadline("return book", "1999-03-03"));
-//            tsklist.add(new Event("project meeting", "2022-01-24"));
-//
-//            parser.setTaskList(tsklist);
-//
-//
-//        } catch (Exception e) {
-//            fail(e.getMessage());
-//        }
     }
 
     @Test
@@ -237,6 +227,94 @@ public class ParserTest { // Just need to ensure it is returning the correct Com
             assertInstanceOf(ErrorCommand.class, resultCommand);
             ErrorCommand errorCommand1 = (ErrorCommand) resultCommand1;
             assertEquals("Unknown command: unknown", errorCommand1.runCommand().toString());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testParse_postpone() {
+        try {
+            Parser parser = new Parser();
+            TaskList taskList = new TaskList();
+            parser.setTaskList(taskList);
+            taskList.add(new Deadline("Test", LocalDate.parse("2000-03-01")));
+
+            Command resultCommand = parser.parseCommand("postpone 1 2020-03-01");
+            assertInstanceOf(PostponeTaskCommand.class, resultCommand);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testParse_postpone_taskWithNoDate() {
+        try {
+            Parser parser = new Parser();
+            TaskList taskList = new TaskList();
+            parser.setTaskList(taskList);
+            taskList.add(new Todo("Test"));
+
+            Command resultCommand = parser.parseCommand("postpone 1 2020-03-01");
+            assertInstanceOf(ErrorCommand.class, resultCommand);
+            ErrorCommand errorCommand = (ErrorCommand) resultCommand;
+            assertEquals("The selected task does not have a date", errorCommand.runCommand().toString());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testParse_postpone_notEnoughArguments() {
+        try {
+            Parser parser = new Parser();
+            TaskList taskList = new TaskList();
+            parser.setTaskList(taskList);
+            taskList.add(new Deadline("Test", LocalDate.parse("2000-03-01")));
+
+            Command resultCommand = parser.parseCommand("postpone");
+            assertInstanceOf(ErrorCommand.class, resultCommand);
+            ErrorCommand errorCommand = (ErrorCommand) resultCommand;
+            assertEquals("Invalid arguments entered", errorCommand.runCommand().toString());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testParse_postpone_incorrectDate() {
+        try {
+            Parser parser = new Parser();
+            TaskList taskList = new TaskList();
+            parser.setTaskList(taskList);
+            taskList.add(new Deadline("Test", LocalDate.parse("2000-03-01")));
+
+            Command resultCommand = parser.parseCommand("postpone 1 test");
+            assertInstanceOf(ErrorCommand.class, resultCommand);
+            ErrorCommand errorCommand = (ErrorCommand) resultCommand;
+            assertEquals("Please enter date in the format YYYY-MM-DD", errorCommand.runCommand().toString());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testParse_postpone_incorrectInt() {
+        try {
+            Parser parser = new Parser();
+            TaskList taskList = new TaskList();
+            parser.setTaskList(taskList);
+            taskList.add(new Deadline("Test", LocalDate.parse("2000-03-01")));
+
+            Command resultCommand = parser.parseCommand("postpone 10 2020-03-01");
+            assertInstanceOf(ErrorCommand.class, resultCommand);
+            ErrorCommand errorCommand = (ErrorCommand) resultCommand;
+            assertEquals("Invalid number entered, index out of bounds", errorCommand.runCommand().toString());
+
+            Command resultCommand2 = parser.parseCommand("postpone test 2020-03-01");
+            assertInstanceOf(ErrorCommand.class, resultCommand);
+            ErrorCommand errorCommand2 = (ErrorCommand) resultCommand2;
+            assertEquals("That's not a number", errorCommand2.runCommand().toString());
         } catch (Exception e) {
             fail(e.getMessage());
         }

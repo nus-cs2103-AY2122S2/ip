@@ -1,7 +1,11 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.TaskList;
 import duke.taskobjects.Deadline;
+
+
 
 /**
  * Command to add a deadline task to the task list.
@@ -9,7 +13,7 @@ import duke.taskobjects.Deadline;
 public class AddDeadlineCommand extends AddCommand {
     public static final String COMMAND_WORD = "deadline";
 
-    public AddDeadlineCommand(TaskList taskList, String description, String date) {
+    public AddDeadlineCommand(TaskList taskList, String description, LocalDate date) {
         super(taskList, new Deadline(description, date));
     }
 

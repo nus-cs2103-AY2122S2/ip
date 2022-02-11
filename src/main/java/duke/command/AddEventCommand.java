@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.TaskList;
 import duke.taskobjects.Event;
 
@@ -9,7 +11,7 @@ import duke.taskobjects.Event;
 public class AddEventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";
 
-    public AddEventCommand(TaskList taskList, String description, String date) {
+    public AddEventCommand(TaskList taskList, String description, LocalDate date) {
         super(taskList, new Event(description, date));
     }
 
