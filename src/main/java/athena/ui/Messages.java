@@ -29,6 +29,7 @@ public class Messages {
 
     public static String getSpecificTasksFoundDialog(TaskList taskList, List<Integer> taskNumbers,
             String searchPhrase) {
+        assert taskNumbers.size() > 0;
         ArrayList<String> outputs = new ArrayList<>();
         outputs.add(String.format("Here are the tasks containing the phrase '%s'", searchPhrase));
         for (int taskNumber : taskNumbers) {

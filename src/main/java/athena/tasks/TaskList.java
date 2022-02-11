@@ -20,6 +20,7 @@ public class TaskList {
     // Known bug - code will break if user input includes |
     public TaskList(List<String> taskListSaveFormat) {
         this();
+        assert taskListSaveFormat.size() > 0;
 
         // Create the appropriate task based on each line of the save file and add to taskList
         for (int i = 0; i < taskListSaveFormat.size(); i++) {
@@ -85,18 +86,21 @@ public class TaskList {
     }
 
     public void setTaskAsDone(int taskNumber) {
-        Task task = tasks.get(taskNumber - 1); // assume valid taskNumber
+        assert isValidTaskNumber(taskNumber);
+        Task task = tasks.get(taskNumber - 1);
         task.setDone();
         wasModified = true;
     }
 
     public void setTaskAsNotDone(int taskNumber) {
-        Task task = tasks.get(taskNumber - 1); // assume valid taskNumber
+        assert isValidTaskNumber(taskNumber);
+        Task task = tasks.get(taskNumber - 1);
         task.setNotDone();
         wasModified = true;
     }
 
     public void deleteTask(int taskNumber) {
+        assert isValidTaskNumber(taskNumber);
         tasks.remove(taskNumber - 1);
         wasModified = true;
     }
@@ -105,8 +109,8 @@ public class TaskList {
         return tasks.size();
     }
 
-    // Assume valid taskNumber
     public String getTaskString(int taskNumber) {
+        assert isValidTaskNumber(taskNumber);
         return tasks.get(taskNumber - 1).toString();
     }
 

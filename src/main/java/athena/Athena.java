@@ -34,6 +34,7 @@ public class Athena extends Application {
     public Athena() throws IOException {
         storage = new Storage(SAVE_DIRECTORY, SAVE_FILENAME);
         initTaskList();
+        assert taskList != null;
         isActive = true;
     }
 
@@ -50,6 +51,7 @@ public class Athena extends Application {
         try {
             Command command = Parser.getCommand(input);
             response = command.execute(taskList);
+            assert !response.isEmpty();
             if (command instanceof ShutdownCommand) {
                 isActive = false;
             }
