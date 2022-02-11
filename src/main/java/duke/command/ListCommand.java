@@ -36,24 +36,3 @@ public class ListCommand extends Command {
         return reply.toString();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

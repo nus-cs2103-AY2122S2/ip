@@ -25,6 +25,10 @@ public class SortCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws IOException {
         List<Task> sortedList = tasks.sort(sortBy, isAscending);
         storage.overWriteFile(tasks);
+        return getReply(sortedList);
+    }
+
+    private String getReply(List<Task> sortedList) {
         StringBuilder reply = new StringBuilder();
         reply.append(this.speak(Dialogue.LIST));
         for (int i = 0; i < sortedList.size(); i++) {

@@ -55,16 +55,16 @@ public class Parser {
             throw new duke.main.DukeException("Keyword for sorting is invalid.\n");
         }
 
-        if (input.length == 3) {
-            String order = input[2].toLowerCase();
-            if (!order.equals("asc") && !order.equals("desc")) {
-                throw new duke.main.DukeException("Cannot determine from command whether ascending or descending.\n");
-            }
-            Boolean isAscending = order.equals("asc");
-            return new SortCommand(input[1], isAscending);
+        if (input.length == 2) {
+            return new SortCommand(input[1]);
         }
 
-        return new SortCommand(input[1]);
+        String order = input[2].toLowerCase();
+        if (!order.equals("asc") && !order.equals("desc")) {
+            throw new duke.main.DukeException("Cannot determine from command whether ascending or descending.\n");
+        }
+        Boolean isAscending = order.equals("asc");
+        return new SortCommand(input[1], isAscending);
     }
 
     private static Command prepareFind(String[] input) throws DukeException {
@@ -85,18 +85,15 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! The description of a " + input[0] + " cannot be empty.\n");
         }
 
+        String taskName = getTaskString(input);
         if (input[0].equals("todo")) {
-            String taskName = getTaskString(input);
             return new AddCommand(new ToDos(taskName));
+        } else if (input[0].equals("deadline")) {
+            return new AddCommand(new DeadLine(taskName, input[input.length - 2], input[input.length - 1]));
+        } else if (input[0].equals("event")) {
+            return new AddCommand(new Events(taskName, input[input.length - 3], input[input.length - 2], input[input.length - 1]));
         } else {
-            String taskName = getTaskString(input);
-            if (input[0].equals("deadline")) {
-                return new AddCommand(new DeadLine(taskName, input[input.length - 2], input[input.length - 1]));
-            } else {
-                assert input[0].equals("event");
-                return new AddCommand(new Events(taskName,
-                        input[input.length - 3], input[input.length - 2], input[input.length - 1]));
-            }
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }
 

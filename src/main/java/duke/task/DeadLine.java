@@ -51,7 +51,7 @@ public class DeadLine extends Task {
             return this.doByDate.compareTo(deadline.doByDate);
         } else {
             Events event = (Events) task;
-            return this.doByDate.compareTo(event.date);
+            return this.doByDate.compareTo(event.doByDate);
         }
     }
 
