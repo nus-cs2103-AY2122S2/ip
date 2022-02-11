@@ -8,15 +8,29 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private LocalDate deadline;
+    private boolean isRecurring;
+    private RecurPeriod recurPeriod;
 
     /**
      * Constructor for Deadline.
      * @param description Describes the deadline.
      * @param deadline LocalDate that state the due date of instance of Deadline.
      */
-    public Deadline(String description, LocalDate deadline) {
+    public Deadline(String description, LocalDate deadline, RecurPeriod recurPeriod) {
         super(description);
         this.deadline = deadline;
+        this.recurPeriod = recurPeriod;
+        if (recurPeriod != null) {
+            this.isRecurring = true;
+        } else {
+            this.isRecurring = false;
+        }
+    }
+
+    public void recur() {
+        if (isRecurring) {
+            deadline = deadline.plus(recurPeriod.getPeriod());
+        }
     }
 
     /**
@@ -28,10 +42,17 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy" ));
+        String output = "";
         if (super.getIsDone()) {
-            return String.format("[D][X] %s (by: %s)\n", super.getDescription(), dateString);
+            output = "[D][X]";
         } else {
-            return String.format("[D][ ] %s (by: %s)\n", super.getDescription(), dateString);
+            output = "[D][ ]";
+        }
+        if (isRecurring) {
+            return String.format("%s %s every %s (by: %s)\n",
+                    output, super.getDescription(), recurPeriod.toString(), dateString);
+        } else {
+            return String.format("%s %s (by: %s)\n", output, super.getDescription(), dateString);
         }
     }
 }

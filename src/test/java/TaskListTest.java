@@ -29,8 +29,8 @@ public class TaskListTest {
         TaskList taskList = new TaskList(new ArrayList<Task>());
 
         ToDo todo = new ToDo("do homework");
-        Deadline deadline = new Deadline("swim", LocalDate.parse("2021-10-15"));
-        Event event = new Event("run", LocalDate.parse("2021-10-10"));
+        Deadline deadline = new Deadline("swim", LocalDate.parse("2021-10-15"), null);
+        Event event = new Event("run", LocalDate.parse("2021-10-10"), null);
 
         taskList.addTask(todo);
         taskList.addTask(deadline);
@@ -52,8 +52,8 @@ public class TaskListTest {
         TaskList taskList = new TaskList(new ArrayList<Task>());
 
         ToDo todo = new ToDo("do homework");
-        Deadline deadline = new Deadline("swim", LocalDate.parse("2021-10-15"));
-        Event event = new Event("run", LocalDate.parse("2021-10-10"));
+        Deadline deadline = new Deadline("swim", LocalDate.parse("2021-10-15"), null);
+        Event event = new Event("run", LocalDate.parse("2021-10-10"), null);
 
         taskList.addTask(todo);
         taskList.addTask(deadline);

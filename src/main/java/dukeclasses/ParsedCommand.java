@@ -10,6 +10,7 @@ public class ParsedCommand {
     private Integer index;
     private LocalDate dueDate;
     private String task;
+    private RecurPeriod recurPeriod;
 
     /**
      * Constructor for ParsedCommand for commands that only need String to be instantiated.
@@ -21,6 +22,7 @@ public class ParsedCommand {
         this.index = null;
         this.dueDate = null;
         this.task = null;
+        this.recurPeriod = null;
     }
 
     /**
@@ -35,6 +37,7 @@ public class ParsedCommand {
         this.index = index;
         this.dueDate = null;
         this.task = null;
+        this.recurPeriod = null;
     }
 
     /**
@@ -46,9 +49,10 @@ public class ParsedCommand {
      */
     public ParsedCommand(String command, String task) {
         this.command = command;
-        this.index = index;
+        this.index = null;
         this.dueDate = null;
         this.task = task;
+        this.recurPeriod = null;
     }
 
     /**
@@ -60,9 +64,19 @@ public class ParsedCommand {
      */
     public ParsedCommand(String command, String task, LocalDate dueDate) {
         this.command = command;
-        this.index = index;
+        this.index = null;
         this.dueDate = dueDate;
         this.task = task;
+        this.recurPeriod = null;
+    }
+
+
+    public ParsedCommand(String command, String task, LocalDate dueDate, RecurPeriod recurPeriod) {
+        this.command = command;
+        this.index = null;
+        this.dueDate = dueDate;
+        this.task = task;
+        this.recurPeriod = recurPeriod;
     }
 
     /**
@@ -100,6 +114,15 @@ public class ParsedCommand {
      */
     public String getTask() {
         return this.task;
+    }
+
+    /**
+     * Returns the recurPeriod of the task.
+     *
+     * @return RecurPeriod that represents the recurPeriod of the task.
+     */
+    public RecurPeriod getRecurPeriod() {
+        return this.recurPeriod;
     }
 
 }

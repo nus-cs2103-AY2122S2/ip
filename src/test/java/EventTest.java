@@ -9,12 +9,12 @@ public class EventTest {
     @Test
     public void testEventIdentify() {
         assertEquals("[E][ ] do homework (by: Oct 15 2011)\n",
-            new Event("do homework", LocalDate.parse("2011-10-15")).toString());
+            new Event("do homework", LocalDate.parse("2011-10-15"), null).toString());
     }
 
     @Test
     public void testSetIsDone() {
-        Event event = new Event("do homework", LocalDate.parse("2011-10-15"));
+        Event event = new Event("do homework", LocalDate.parse("2011-10-15"), null);
         event.setDone(true);
         assertEquals("[E][X] do homework (by: Oct 15 2011)\n", event.toString());
         event.setDone(false);
@@ -23,12 +23,12 @@ public class EventTest {
 
     @Test
     public void testGetDescription() {
-        assertEquals(" ", new Event(" ", LocalDate.parse("2011-10-15")).getDescription());
+        assertEquals(" ", new Event(" ", LocalDate.parse("2011-10-15"), null).getDescription());
     }
 
     @Test
     public void testGetIsDone() {
-        Event event = new Event("do homework", LocalDate.parse("2011-10-15"));
+        Event event = new Event("do homework", LocalDate.parse("2011-10-15"), null);
         assertEquals(false, event.getIsDone());
         event.setDone(true);
         assertEquals(true, event.getIsDone());

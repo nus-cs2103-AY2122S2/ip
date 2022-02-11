@@ -42,6 +42,22 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public Task recur(int index) {
+        Task task = tasks.get(index);
+        if (task instanceof ToDo) {
+            return task;
+        }
+
+        if (task instanceof Event) {
+            Event event = (Event) task;
+            event.recur();
+        } else {
+            Deadline deadline = (Deadline) task;
+            deadline.recur();
+        }
+        return tasks.get(index);
+    }
+
     /**
      * Returns the taskList in the form of an ArrayList</Task>
      *

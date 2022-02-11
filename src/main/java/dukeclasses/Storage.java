@@ -41,53 +41,11 @@ public class Storage {
         try {
             ArrayList<Task> tasks = new ArrayList<Task>();
             File openedFile = openFile(filePath);
-            tasks = scanFileAndAddTask(openedFile, tasks);
+            tasks = readFileIntoArrayList(openedFile, tasks);
             return tasks;
         } catch (DukeException error) {
             throw new DukeException();
         }
-    }
-
-    /**
-     * Creates Task from the data given as a String.
-     *
-     * @param data String that represents the Task.
-     * @return Task that represents the String argument.
-     * @throws DukeException If data is an event or deadline and does not have a valid date.
-     */
-    private Task createTaskFromStorageFile(String data) throws DukeException {
-        String[] processedData = data.trim().split("]", 3);
-        Task task;
-        if (processedData[0].contains("T")) {
-            task = new ToDo(processedData[2].trim());
-            if (processedData[1].contains("X")) {
-                task.setDone(true);
-            }
-            return task;
-        }
-
-        String[] processedDataDescription = processedData[2].split("\\(by:", 2);
-        String temp = processedDataDescription[1].replace(")", "");
-
-        LocalDate date;
-        try {
-            date = LocalDate.parse(temp.trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        } catch (DateTimeParseException errorMessage) {
-            throw new DukeException();
-        }
-
-        if (processedData[0].contains("E")) {
-            task = new Event(processedDataDescription[0].trim(), date);
-        } else if (processedData[0].contains("D")) {
-            task = new Deadline(processedDataDescription[0].trim(), date);
-        } else {
-            throw new DukeException();
-        }
-
-        if (processedData[1].contains("X")) {
-            task.setDone(true);
-        }
-        return task;
     }
 
     /**
@@ -118,13 +76,13 @@ public class Storage {
      * @throws DukeException If file object given to Scanner class does not exist or if
      *                       error occur during processing of storage file.
      */
-    private ArrayList<Task> scanFileAndAddTask(File file, ArrayList<Task> tasks) throws DukeException {
+    private ArrayList<Task> readFileIntoArrayList(File file, ArrayList<Task> tasks) throws DukeException {
         assert file != null: "command should not be null.";
         assert tasks != null: "command Task should not be null.";
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                Task task = createTaskFromStorageFile(sc.nextLine());
+                Task task = Parser.parseDataToGetTask(sc.nextLine());
                 tasks.add(task);
             }
             sc.close();

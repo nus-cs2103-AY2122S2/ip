@@ -62,8 +62,8 @@ public class StorageTest {
 
         ArrayList<Task> tasks = new ArrayList<Task>();
         tasks.add(new ToDo("sleep"));
-        tasks.add(new Event("run", LocalDate.parse("2021-10-10")));
-        tasks.add(new Event("do homework", LocalDate.parse("2021-12-05")));
+        tasks.add(new Event("run", LocalDate.parse("2021-10-10"), null));
+        tasks.add(new Event("do homework", LocalDate.parse("2021-12-05"), null));
 
         Storage storage = new Storage(filePath);
 
@@ -107,7 +107,7 @@ public class StorageTest {
         }
 
         Storage storage = new Storage(filePath);
-        Event event = new Event("go to school", LocalDate.parse("2021-09-24"));
+        Event event = new Event("go to school", LocalDate.parse("2021-09-24"), null);
         try {
             storage.appendToStorage(event);
         } catch (DukeException errorMessage) {

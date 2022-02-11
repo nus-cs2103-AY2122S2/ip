@@ -91,7 +91,11 @@ public class Ui {
      * @param task Task which will have its details printed.
      * @return String to be printed which illustrates identity of the task.
      */
-    public String identifyTask(Task task) {
+    public String identifyTask(ParsedCommand command, Task task) {
+        if (command.getCommand().equals("recur")) {
+            return String.format("%s    %s", Commands.RECUR.toString(), task.toString());
+        }
+
         if (task.getIsDone()) {
             return String.format("%s    %s", Commands.MARK.toString(), task.toString());
         } else {
