@@ -35,25 +35,18 @@ public class Storage {
                 String type = task[0];
                 String status = task[1];
                 String thing = task[2];
+                Task newTask;
                 if (type.equals("T")) {
-                    Task newTask = new Todo(thing);
-                    if (status.equals("1")) {
-                        newTask.mark();
-                    }
-                    this.list.add(newTask);
+                    newTask = new Todo(thing);
                 } else if (type.equals("D")) {
-                    Task newTask = new Deadline(thing, task[3]);
-                    if (status.equals("1")) {
-                        newTask.mark();
-                    }
-                    this.list.add(newTask);
+                    newTask = new Deadline(thing, task[3]);
                 } else if (type.equals("E")) {
-                    Task newTask = new Event(thing, task[3]);
-                    if (status.equals("1")) {
-                        newTask.mark();
-                    }
-                    this.list.add(newTask);
+                    newTask = new Event(thing, task[3]);
                 }
+                if (status.equals("1")) {
+                    newTask.mark();
+                }
+                this.list.add(newTask);
                 input = bufferedReader.readLine();
             }
             return this.list;
