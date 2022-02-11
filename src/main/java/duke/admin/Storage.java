@@ -132,7 +132,7 @@ public class Storage {
      * Updates the storage file when there has just been a change to whether a task
      * has been marked as done or not yet done.
      * @param index        index of the task which the action is performed on
-     * @param isToBeMarked true if the action marked the task as done, otherwise
+     * @param toMark true if the action marked the task as done, otherwise
      *                     false
      * @throws DukeException exception thrown when there is an error accessing or
      *                       writing to the storage file

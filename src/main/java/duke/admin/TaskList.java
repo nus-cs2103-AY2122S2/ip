@@ -151,6 +151,14 @@ public class TaskList {
     //     return indexedTask;
     // }
 
+    /**
+     * Changes the mark of the task if the command requests for a change in mark and returns the task that has been
+     * changed. If not, return a trigger task to trigger the system to inform the user that the command does not
+     * change the task.
+     * @param index index of task to be marked
+     * @param toMark if the command wishes the indexed task to be marked or not
+     * @return the changed task or a trigger task
+     */
     public Task changeMark(int index, boolean toMark) {
         assert index <= tasks.size();
 
@@ -165,6 +173,7 @@ public class TaskList {
             return TRIGGER_TASK;
         }
     }
+
     /**
      * Returns the number of tasks in the task list.
      * @return number of tasks in the task list
