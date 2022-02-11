@@ -19,8 +19,8 @@ public class ListCommand extends Command {
             return "There are no tasks in your list~";
         }
         String res = "Here are the tasks in your list:";
-        for (int i = 0; i < tasks.size(); i++) {
-            res += "\n  " + (i + 1) + ". " + tasks.get(i);
+        for (int i = 1; i <= tasks.size(); i++) {
+            res += "\n  " + i + ". " + tasks.get(i);
         }
         return res;
     }

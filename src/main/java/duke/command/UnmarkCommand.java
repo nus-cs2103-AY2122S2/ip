@@ -23,9 +23,9 @@ public class UnmarkCommand extends Command {
         if (index > tasks.size() || index <= 0) {
             return "Invalid index";
         }
-        tasks.set(index - 1, tasks.get(index - 1).unmark());
+        tasks.set(index, tasks.get(index).unmark());
         return "OK, I've marked this task as not done yet:\n"
-                + tasks.get(index - 1);
+                + tasks.get(index);
     }
 
     @Override

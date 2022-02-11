@@ -1,16 +1,6 @@
 package duke;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.TodoCommand;
-import duke.command.UnmarkCommand;
-import duke.command.UnrecognizedCommand;
+import duke.command.*;
 
 public class Parser {
 
@@ -21,6 +11,7 @@ public class Parser {
      * @throws DukeException if the input does not have a correct format
      */
     public static Command parse(String input) throws DukeException {
+        input.trim();
         String[] splited = input.split(" ", 2);
         String firstWord = splited[0];
         String remaining = "";
@@ -38,7 +29,18 @@ public class Parser {
         } else if (input.matches("unmark [1-9]+\\d*")) {
             return new UnmarkCommand(Integer.parseInt(remaining));
         } else if (firstWord.equals("find")) {
+            if (remaining.equals("")) {
+                throw new DukeException("Must specify what to find");
+            }
             return new FindCommand(remaining);
+        } else if (firstWord.equals("edit")) {
+            if (remaining.equals("")) {
+                throw new DukeException("Must specify what to edit");
+            } else if (!remaining.matches("[1-9]+\\d* .+")) {
+                throw new DukeException("Must specify which item to edit");
+            }
+            String[] indexText = remaining.split(" ", 2);
+            return new EditCommand(Integer.parseInt(indexText[0]), indexText[1]);
         } else if (firstWord.equals("todo")) {
             if (remaining.equals("")) {
                 throw new DukeException("The description of a todo cannot be empty");
@@ -56,7 +58,7 @@ public class Parser {
         } else if (firstWord.equals("event")) {
             String[] desc_at = remaining.split(" /at ", 2);
             if (desc_at.length < 2) {
-                throw new DukeException("Must specify the time of the event");
+                throw new DukeException("Must specify a time for the event");
             } else if (desc_at[0].length() == 0) {
                 throw new DukeException("The description of an event cannot be empty");
             }

@@ -12,7 +12,7 @@
   <children>
     <ImageView>
       <image>
-        <Image url="@../images/background.jpg" />
+        <Image url="@../images/papillon.png" />
       </image>
     </ImageView>
     <TextField fx:id="userInput" onAction="#handleUserInput" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" prefHeight="32.0" AnchorPane.bottomAnchor="5.0" />

@@ -80,7 +80,7 @@ public class Storage {
         records.delete();
         records.createNewFile();
         FileWriter fw = new FileWriter(records.getPath());
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 1; i <= tasks.size(); i++) {
             Task t = tasks.get(i);
             fw.write(t.toStringRecord() + "\n");
         }

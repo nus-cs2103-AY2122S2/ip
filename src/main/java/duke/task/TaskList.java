@@ -38,7 +38,7 @@ public class TaskList {
      * @return the task at the specified index
      */
     public Task get(int index) {
-        return list.get(index);
+        return list.get(index - 1);
     }
 
     /**
@@ -49,7 +49,7 @@ public class TaskList {
      */
     public TaskList set(int index, Task t) {
         ArrayList<Task> newList = list;
-        newList.set(index, t);
+        newList.set(index - 1, t);
         return new TaskList(newList);
     }
 
@@ -60,7 +60,7 @@ public class TaskList {
      */
     public TaskList remove(int index) {
         ArrayList<Task> newList = list;
-        newList.remove(index);
+        newList.remove(index - 1);
         return new TaskList(newList);
     }
 

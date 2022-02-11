@@ -23,9 +23,9 @@ public class MarkCommand extends Command {
         if (index > tasks.size() || index <= 0) {
             return "Invalid index";
         }
-        tasks.set(index - 1, tasks.get(index - 1).mark());
+        tasks.set(index, tasks.get(index).mark());
         return "Nice! I've marked this task as done:\n"
-                + tasks.get(index - 1);
+                + tasks.get(index);
     }
 
     @Override

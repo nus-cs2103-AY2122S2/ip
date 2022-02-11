@@ -24,7 +24,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         ArrayList<Integer> matchingIndexes = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 1; i <= tasks.size(); i++) {
             Task t = tasks.get(i);
             if (t.getDescription().contains(text)) {
                 matchingIndexes.add(i);
@@ -35,7 +35,7 @@ public class FindCommand extends Command {
         }
         String res = "Here are the matching tasks in your list:";
         for (int i : matchingIndexes) {
-            res += "\n  " + (i + 1) + ". " + tasks.get(i);
+            res += "\n  " + i + ". " + tasks.get(i);
         }
         return res;
     }
