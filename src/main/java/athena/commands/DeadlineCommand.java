@@ -25,8 +25,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Creates a new deadline task in the given TaskList and outputs the results to the
-     * given Ui.
+     * Creates a new deadline task in the given TaskList and returns output.
      *
      * @param taskList taskList instance to create the deadline task in.
      * @return Command output.

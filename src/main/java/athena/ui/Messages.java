@@ -10,12 +10,21 @@ import athena.tasks.TaskList;
  * Provides helper methods for generating Athena's dialogue output.
  */
 public class Messages {
+
+    public static final String PRE_DELETION_MESSAGE = "Alright, I will delete the following task from the list:";
+
     public static String getMultiLineString(List<String> inputs) {
         return String.join("\n", inputs);
     }
 
-    public static String getSpecificTasksDialog(TaskList taskList, List<Integer> taskNumbers) {
+    public static String getMultiLineString(String... inputs) {
+        return String.join("\n", inputs);
+    }
+
+    public static String getSpecificTasksFoundDialog(TaskList taskList, List<Integer> taskNumbers,
+            String searchPhrase) {
         ArrayList<String> outputs = new ArrayList<>();
+        outputs.add(String.format("Here are the tasks containing the phrase '%s'", searchPhrase));
         for (int taskNumber : taskNumbers) {
             outputs.add(String.format("%d. %s", taskNumber, taskList.getTaskString(taskNumber)));
         }
@@ -35,6 +44,27 @@ public class Messages {
         outputs.add("Here's the current list of tasks:");
         outputs.add(taskList.toString());
         return getMultiLineString(outputs);
+    }
+
+    public static String getMarkTaskDialog(TaskList taskList, int taskNumber) {
+        String MARKED_TASK_AS_DONE = "Alright, I've marked the following task as done:";
+        String taskToString = taskList.getTaskString(taskNumber);
+        return Messages.getMultiLineString(MARKED_TASK_AS_DONE, taskToString);
+    }
+
+    public static String getUnmarkTaskDialog(TaskList taskList, int taskNumber) {
+        String MARKED_TASK_AS_NOT_DONE = "Alright, I've marked the following task as not done:";
+        String taskToString = taskList.getTaskString(taskNumber);
+        return Messages.getMultiLineString(MARKED_TASK_AS_NOT_DONE, taskToString);
+    }
+
+    public static String getPreDeletionDialog(TaskList taskList, int taskNumber) {
+        String taskToBeDeleted = taskList.getTaskString(taskNumber);
+        return getMultiLineString(PRE_DELETION_MESSAGE, taskToBeDeleted);
+    }
+
+    public static String getNoMatchesFoundDialog(String searchPhrase) {
+        return String.format("Sorry, no tasks were found containing the phrase '%s'", searchPhrase);
     }
 
     public static String getCurrentNumberOfTasksDialog(TaskList taskList) {

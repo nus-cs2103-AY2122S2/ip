@@ -10,7 +10,7 @@ import athena.tasks.TaskList;
 public abstract class Command {
 
     /**
-     * Executes the command through the given ui and taskList.
+     * Executes the command using the given taskList.
      *
      * @param tasklist taskList instance to run command with respect to.
      * @return Command output.
