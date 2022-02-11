@@ -31,32 +31,35 @@ public class Storage {
     public TaskList load() throws IOException {
         File directory = new File(Constants.DATA_DIRECTORY);
         if (!directory.exists()) {
-            if (!directory.mkdirs()) {
-                throw new IOException("Cannot create new directory");
-            }
+            directory.mkdirs();
         }
+
         File dataFile = new File(directory, Constants.FILE_NAME);
         if (!dataFile.createNewFile()) {
-            Scanner sc = new Scanner(dataFile);
-            while (sc.hasNext()) {
-                String[] line = sc.nextLine().strip().split(" <> ");
-                Task currentTask;
-                switch (line[0]) {
-                case "T":
-                    currentTask = new ToDo(line[2], line[1].equals("1"));
-                    break;
-                case "D":
-                    currentTask = new Deadline(line[2], line[1].equals("1"), line[3]);
-                    break;
-                default:
-                    currentTask = new Event(line[2], line[1].equals("1"), line[3]);
-                    break;
-                }
-                taskList.addTask(currentTask);
-            }
-            sc.close();
+            populateData(dataFile);
         }
         return taskList;
+    }
+
+    private void populateData(File dataFile) throws IOException {
+        Scanner sc = new Scanner(dataFile);
+        while (sc.hasNext()) {
+            String[] line = sc.nextLine().strip().split(" <> ");
+            Task currentTask;
+            switch (line[0]) {
+            case "T":
+                currentTask = new ToDo(line[2], line[1].equals("1"));
+                break;
+            case "D":
+                currentTask = new Deadline(line[2], line[1].equals("1"), line[3]);
+                break;
+            default:
+                currentTask = new Event(line[2], line[1].equals("1"), line[3]);
+                break;
+            }
+            taskList.addTask(currentTask);
+        }
+        sc.close();
     }
 
     /**

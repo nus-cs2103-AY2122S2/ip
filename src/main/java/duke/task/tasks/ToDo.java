@@ -20,4 +20,9 @@ public class ToDo extends Task {
     public String encode() {
         return "T <> " + super.encode() + "\n";
     }
+
+    @Override
+    public ToDo cloneSelf() {
+        return new ToDo(getTaskName(), isDone());
+    }
 }

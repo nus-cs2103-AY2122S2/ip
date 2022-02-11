@@ -13,7 +13,11 @@ public class Deadline extends Task {
     public Deadline(String taskName, boolean isDone, String deadline) {
         super(taskName, isDone);
         this.deadline = LocalDate.parse(deadline);
+    }
 
+    public Deadline(String taskName, boolean isDone, LocalDate deadline) {
+        super(taskName, isDone);
+        this.deadline = deadline;
     }
 
     @Override
@@ -25,5 +29,10 @@ public class Deadline extends Task {
     @Override
     public String encode() {
         return "D <> " + super.encode() + " <> " + deadline + "\n";
+    }
+
+    @Override
+    public Deadline cloneSelf() {
+        return new Deadline(getTaskName(), isDone(), this.deadline);
     }
 }

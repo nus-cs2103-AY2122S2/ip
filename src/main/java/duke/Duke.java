@@ -1,13 +1,16 @@
 package duke;
 
+import com.sun.tools.jconsole.JConsoleContext;
 import duke.command.Command;
 import duke.command.UndoCommand;
 import duke.stack.CallStack;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.util.Constants;
 import duke.util.Parser;
 
+import java.awt.*;
 import java.util.Scanner;
 
 /**
@@ -19,6 +22,7 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
     private final CallStack callStack;
+
     /**
      * Duke constructor method, takes no parameter,
      * initialize Ui, storage, and task list loaded from
@@ -52,7 +56,7 @@ public class Duke {
             String input = sc.nextLine();
             String output = processUserInput(input);
             ui.log(output);
-            isExit = output.equals("");
+            isExit = output.equals(Constants.BYE);
         }
         ui.bye();
     }

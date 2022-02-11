@@ -46,15 +46,13 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.processUserInput(input);
-        boolean isExit = false;
-        if (response.equals("")) {
-            response = Constants.BYE;
-            isExit = true;
-        }
+        boolean isExit = response.equals(Constants.BYE);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
         if (isExit) {
             Platform.exit();
         }

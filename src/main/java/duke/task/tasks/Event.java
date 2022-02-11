@@ -16,6 +16,11 @@ public class Event extends Task {
         this.time = LocalDate.parse(time);
     }
 
+    public Event(String taskName, boolean isDone, LocalDate time) {
+        super(taskName, isDone);
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + String.format(" (at: %s)",
@@ -25,5 +30,10 @@ public class Event extends Task {
     @Override
     public String encode() {
         return "E <> " + super.encode() + " <> " + time + "\n";
+    }
+
+    @Override
+    public Event cloneSelf() {
+        return new Event(getTaskName(), isDone(), this.time);
     }
 }

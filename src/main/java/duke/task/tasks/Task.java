@@ -30,7 +30,7 @@ public abstract class Task {
     }
 
     /**
-     * handle the mark and unmark instruction, alter the isDone variable
+     * Handle the mark and unmark instruction, alter the isDone variable
      *
      * @param instr instruction mark/unmark
      * @return String containing the information of the changed task.
@@ -67,5 +67,15 @@ public abstract class Task {
      */
     public String encode() {
         return String.format("%d <> %s", isDone? 1: 0, taskName);
+    }
+
+    public abstract Task cloneSelf();
+
+    String getTaskName() {
+        return this.taskName;
+    }
+
+    boolean isDone() {
+        return this.isDone;
     }
 }

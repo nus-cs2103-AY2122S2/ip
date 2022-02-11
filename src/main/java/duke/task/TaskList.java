@@ -82,7 +82,10 @@ public class TaskList {
     }
 
     public TaskList cloneSelf() {
-        ArrayList<Task> copyArray = new ArrayList<>(this.tasks);
+        ArrayList<Task> copyArray = new ArrayList<>();
+        for (Task task: tasks) {
+            copyArray.add(task.cloneSelf());
+        }
         return new TaskList(copyArray);
     }
 
