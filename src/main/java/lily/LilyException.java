@@ -10,6 +10,9 @@ public class LilyException extends Exception {
     public static final String ERROR_OUT_OF_BOUNDS = "eh bro your list is shorter than that";
     public static final String ERROR_WRITE_FILE = "I had trouble saving the file.";
     public static final String ERROR_QUIT_INTERRUPT = "oi I thought you said byebye already";
+    public static final String ERROR_NO_DESC_TODO = "You gotta tell me what the todo is about!";
+    public static final String ERROR_NO_DESC_DEADLN = "You gotta tell me what the deadline is about!";
+    public static final String ERROR_NO_DESC_EVENT = "You gotta tell me what the event is about!";
     public static final String FORMAT_DATE = "can you say the date again in this form: year-mm-dd";
     public static final String FORMAT_IDX = "eh can you type its number instead?";
     /**

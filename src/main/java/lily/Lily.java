@@ -46,6 +46,7 @@ public class Lily extends Application {
      * Runs the application.
      */
     public void run() {
+        assert tasks != null : "Tasks should have been created in the constructor.";
         ui.showWelcome(tasks);
     }
 

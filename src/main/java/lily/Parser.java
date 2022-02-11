@@ -69,25 +69,30 @@ public class Parser {
             case "done":
             // Fallthrough
             case "do":
+                assert parsedSentence[1] != null : "User should have input an index to mark";
                 int addIdx = Integer.parseInt(parsedSentence[1]); // base 1
                 ui.showMarked(tasks.mark(addIdx - 1), addIdx);
                 break;
 
             case "unmark":
+                assert parsedSentence[1] != null : "User should have input an index to unmark";
                 int delIdx = Integer.parseInt(parsedSentence[1]);
                 ui.showUnmarked(tasks.unmark(delIdx - 1), delIdx);
                 break;
 
             case "todo":
+                assert parsedSentence[1] != null : "User should have input a description";
                 ui.showTaskAdded(tasks.addTodo(findTodoDescStart(sentence)), tasks.getSize());
                 break;
 
             case "deadline":
+                assert parsedSentence[1] != null : "User should have input a description";
                 String[] parsedDeadline = findDeadlineDescStart(sentence);
                 ui.showTaskAdded(tasks.addDeadline(parsedDeadline[0], parsedDeadline[1]), tasks.getSize());
                 break;
 
             case "event":
+                assert parsedSentence[1] != null : "User should have input a description";
                 String[] parsedEvent = findEventDescStart(sentence);
                 ui.showTaskAdded(tasks.addEvent(parsedEvent[0], parsedEvent[1]), tasks.getSize());
                 break;
@@ -95,6 +100,7 @@ public class Parser {
             case "delete":
             // Fallthrough
             case "remove":
+                assert parsedSentence[1] != null : "User should have input an index to mark";
                 ui.showTaskRemoved(tasks.remove(
                         Integer.parseInt(parsedSentence[1]) - 1),
                         tasks);
@@ -103,6 +109,7 @@ public class Parser {
             case "find":
             // Fallthrough
             case "search":
+                assert parsedSentence[1] != null : "User should have input a search term";
                 if (parsedSentence.length > 2) {
                     throw new LilyException("bro you can only find 1 word at a time");
                 } else {
@@ -143,7 +150,7 @@ public class Parser {
         try {
             return s.substring(5); // "todo " is 5 char long
         } catch (StringIndexOutOfBoundsException e) {
-            throw new LilyException("You gotta tell me what the todo is about!");
+            throw new LilyException(LilyException.ERROR_NO_DESC_TODO);
         }
     }
 
@@ -161,7 +168,7 @@ public class Parser {
             result[1] = s.substring(s.indexOf("/by") + 4);
             return result;
         } catch (StringIndexOutOfBoundsException e) {
-            throw new LilyException("You gotta tell me what the deadline is about!");
+            throw new LilyException(LilyException.ERROR_NO_DESC_DEADLN);
         }
     }
     
@@ -179,7 +186,7 @@ public class Parser {
             result[1] = s.substring(s.indexOf("/at") + 4);
             return result;
         } catch (StringIndexOutOfBoundsException e) {
-            throw new LilyException("You gotta tell me what the event is about!");
+            throw new LilyException(LilyException.ERROR_NO_DESC_EVENT);
         }
     }
 }
