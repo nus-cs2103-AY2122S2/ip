@@ -47,7 +47,7 @@ public class Task {
      * @return A boolean value, true if complete, false if
      * incomplete.
      */
-    public Boolean getStatus() {
+    public boolean getStatus() {
         return this.status;
     }
 

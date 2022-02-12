@@ -14,8 +14,7 @@ import java.io.IOException;
 public abstract class Command {
 
     /**
-     * Based on the Command type, will execute its appropriate
-     * action.
+     * Executes an operation based on the command type.
      *
      * @param stg The storage object to use file writing methods.
      * @param ui The ui object to handle I/O requests.
@@ -27,8 +26,7 @@ public abstract class Command {
     public abstract String execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException;
 
     /**
-     * Based on the Command type, will signify if the app should terminate
-     * its current run.
+     * Returns boolean value to state if the app should exit its run.
      */
     public abstract boolean isExit();
 

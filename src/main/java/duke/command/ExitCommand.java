@@ -14,7 +14,7 @@ import duke.DukeException;
 public class ExitCommand extends Command {
 
     /**
-     * Does nothing.
+     * Returns nothing.
      *
      * @param stg The storage object to use file writing methods.
      * @param ui The ui object to handle I/O requests.
@@ -28,7 +28,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Signifies to the app to terminate its current run.
+     * Returns boolean value to state if the app should exit its run.
      */
     @Override
     public boolean isExit() {

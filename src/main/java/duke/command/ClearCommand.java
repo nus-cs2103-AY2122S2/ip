@@ -15,7 +15,7 @@ import java.util.List;
 public class ClearCommand extends Command {
 
     /**
-     * Will clear all tasks in data and tasklist.
+     * Clears all tasks in the tasklist.
      *
      * @param stg   The storage object to use file writing methods.
      * @param ui    The ui object to handle I/O requests.
@@ -32,7 +32,7 @@ public class ClearCommand extends Command {
     }
 
     /**
-     * Signifies to the app to not terminate its current run.
+     * Returns boolean value to state if the app should exit its run.
      */
     @Override
     public boolean isExit() {

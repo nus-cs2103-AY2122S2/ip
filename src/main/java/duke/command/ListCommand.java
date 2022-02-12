@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ListCommand extends Command {
 
     /**
-     * Will list out all tasks items in the tasklist.
+     * Returns a list to show all tasks items in the tasklist.
      *
      * @param stg The storage object to use file writing methods.
      * @param ui The ui object to handle I/O requests.
@@ -30,7 +30,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Signifies to the app to not terminate its current run.
+     * Returns boolean value to state if the app should exit its run.
      */
     @Override
     public boolean isExit() {
