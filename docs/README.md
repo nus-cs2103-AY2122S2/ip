@@ -192,7 +192,7 @@ Action | Format, Examples
 
 [1]: https://korochii.github.io/ip/#quick-start
 [2]: https://www.oracle.com/java/technologies/downloads/#java11
-[3]: https://korochii.github.io/ip/
+[3]: https://github.com/Korochii/ip/releases/download/A-Release/HoloBot.jar
 [4]: https://korochii.github.io/ip/#features
 [5]: https://korochii.github.io/ip/#listing-all-tasks--list
 [6]: https://korochii.github.io/ip/#creating-a-to-do-task-todo
