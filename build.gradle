@@ -16,7 +16,7 @@ repositories {
 }
 
 application {
-    mainClassName = "Yale"
+    mainClassName = "yale.Yale"
 }
 
 dependencies {

@@ -26,6 +26,14 @@ public class Task {
     }
 
     /**
+     * Getter method for Task name.
+     * @return String containing name of Task.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Returns a String to indicate
      * to user if task is marked or not
      * @return Returns a checked box if task is marked.
@@ -65,6 +73,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.name;
+        return getStatusIcon() + " " + getName();
     }
 }
