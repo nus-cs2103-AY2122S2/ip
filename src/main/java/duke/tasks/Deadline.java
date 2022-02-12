@@ -30,7 +30,34 @@ public class Deadline extends Task {
         String output = "D";
         String markState = this.isDone ? "mark" : "unmark";
         return output + " | " + markState + " | "
-                + this.description + this.deadlineDate;
+                + this.description + " | " + this.deadlineDate;
+    }
+
+    /**
+     * Checks if the current Deadline task is equal
+     * to the Deadline task passed into the function.
+     *
+     * @param task The Deadline task to be checked.
+     * @return True if equal, false otherwise.
+     */
+    public boolean equalsTo(Deadline task) {
+        String descriptionToCheck = task.getDescription();
+        String currentDescription = this.getDescription();
+        boolean isDescriptionSame = descriptionToCheck.equals(currentDescription);
+        LocalDate dateToCheck = task.getDeadlineDate();
+        LocalDate currentDate = this.deadlineDate;
+        boolean isDateSame = dateToCheck.isEqual(currentDate);
+
+        return isDescriptionSame && isDateSame;
+    }
+
+    /**
+     * Gets the date of the deadline of the task.
+     *
+     * @return A LocalDate object representing the deadline.
+     */
+    LocalDate getDeadlineDate() {
+        return this.deadlineDate;
     }
 
     /**

@@ -22,6 +22,20 @@ public class Todo extends Task {
     }
 
     /**
+     * Checks if the current Todo task is equal
+     * to the Todo task passed into the function.
+     *
+     * @param task The Todo task to be checked.
+     * @return True if equal, false otherwise.
+     */
+    public boolean equalsTo(Todo task) {
+        String descriptionToCheck = task.getDescription();
+        String currentDescription = this.getDescription();
+        boolean isDescriptionSame = descriptionToCheck.equals(currentDescription);
+        return isDescriptionSame;
+    }
+
+    /**
      * Returns the String representation of the Todo task.
      *
      * @return A String representation of the Todo task.

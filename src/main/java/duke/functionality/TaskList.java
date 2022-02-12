@@ -23,6 +23,8 @@ public class TaskList {
     private static final String ALREADY_UNMARKED = "Task has already been unmarked...";
     private static final String ALREADY_DELETED = "Task has already been deleted...";
     private static final String MATCH = "Here are the matching tasks in your list:\n";
+    private static final String DUPLICATE_MESSAGE = "This is a duplicate task... try again";
+    private static final String EMPTY_LIST = "The list is empty... Try adding some tasks!";
 
     private final ArrayList<Task> taskList;
 
@@ -60,6 +62,11 @@ public class TaskList {
         for (int i = 0; i < this.taskList.size(); i++) {
             output = output + (i + 1 + "." + this.taskList.get(i)) + "\n";
         }
+
+        if(this.taskList.size() == 0) {
+            output = EMPTY_LIST;
+        }
+
         return output;
     }
 
@@ -117,7 +124,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a Todo task to the tasklist.
+     * Adds a Todo task to the tasklist if it does not already exists.
      *
      * @param description A description of the Todo task.
      * @return A String message saying that the Todo task has been added.
@@ -125,17 +132,32 @@ public class TaskList {
     public String addToDoTask(String description) {
         String output = ADDED;
         int lastSize = this.taskList.size();
-        Todo todoItem = new Todo(description);
-        this.taskList.add(todoItem);
-        int numOfItems = this.taskList.size();
-        assert numOfItems - lastSize == 1 : "item not added successfully";
-        output = output + todoItem + "\n";
-        output = output + "Now you have " + numOfItems + " tasks in the list.";
+        Todo todoTask = new Todo(description);
+        boolean isThereDuplicates = false;
+
+        for(int i = 0; i < this.taskList.size(); i++) {
+            Task taskInList = this.taskList.get(i);
+            if (taskInList instanceof Todo
+                    && ((Todo) taskInList).equalsTo(todoTask)) {
+                isThereDuplicates = true;
+                break;
+            }
+        }
+
+        if (!isThereDuplicates) {
+            this.taskList.add(todoTask);
+            int numOfItems = this.taskList.size();
+            assert numOfItems - lastSize == 1 : "item not added successfully";
+            output = output + todoTask + "\n";
+            output = output + "Now you have " + numOfItems + " tasks in the list.";
+        } else {
+            output = DUPLICATE_MESSAGE;
+        }
         return output;
     }
 
     /**
-     * Adds a Deadline task to the tasklist.
+     * Adds a Deadline task to the tasklist if it does not already exist.
      *
      * @param arr A String array containing the components of the user input.
      * @return A String message saying that the Deadline task has been added.
@@ -144,17 +166,32 @@ public class TaskList {
     public String addDeadlineTask(String[] arr) throws DukeException {
         String output = ADDED;
         int lastSize = this.taskList.size();
-        Deadline deadlineItem = new Deadline(arr[0], Parser.convertDate(arr[1]));
-        this.taskList.add(deadlineItem);
-        int numOfItems = this.taskList.size();
-        assert numOfItems - lastSize == 1 : "item not added successfully";
-        output = output + deadlineItem + "\n";
-        output = output + "Now you have " + numOfItems + " tasks in the list.";
+        Deadline deadlineTask = new Deadline(arr[0], Parser.convertDate(arr[1]));
+        boolean isThereDuplicates = false;
+
+        for(int i = 0; i < this.taskList.size(); i++) {
+            Task taskInList = this.taskList.get(i);
+            if (taskInList instanceof Deadline
+                    && ((Deadline) taskInList).equalsTo(deadlineTask)) {
+                isThereDuplicates = true;
+                break;
+            }
+        }
+
+        if (!isThereDuplicates) {
+            this.taskList.add(deadlineTask);
+            int numOfItems = this.taskList.size();
+            assert numOfItems - lastSize == 1 : "item not added successfully";
+            output = output + deadlineTask + "\n";
+            output = output + "Now you have " + numOfItems + " tasks in the list.";
+        } else {
+            output = DUPLICATE_MESSAGE;
+        }
         return output;
     }
 
     /**
-     * Adds an Event task to the tasklist.
+     * Adds an Event task to the tasklist if it does not already exist.
      *
      * @param arr A String array containing the components of the user input.
      * @return A String message saying that the Event task has been added.
@@ -163,12 +200,27 @@ public class TaskList {
     public String addEventTask(String[] arr) throws DukeException {
         String output = ADDED;
         int lastSize = this.taskList.size();
-        Event eventItem = new Event(arr[0], Parser.convertDate(arr[1]));
-        this.taskList.add(eventItem);
-        int numOfItems = this.taskList.size();
-        assert numOfItems - lastSize == 1 : "item not added successfully";
-        output = output + eventItem + "\n";
-        output = output + "Now you have " + numOfItems + " tasks in the list.";
+        Event eventTask = new Event(arr[0], Parser.convertDate(arr[1]));
+        boolean isThereDuplicates = false;
+
+        for(int i = 0; i < this.taskList.size(); i++) {
+            Task taskInList = this.taskList.get(i);
+            if (taskInList instanceof Event
+                    && ((Event) taskInList).equalsTo(eventTask)) {
+                isThereDuplicates = true;
+                break;
+            }
+        }
+
+        if (!isThereDuplicates) {
+            this.taskList.add(eventTask);
+            int numOfItems = this.taskList.size();
+            assert numOfItems - lastSize == 1 : "item not added successfully";
+            output = output + eventTask + "\n";
+            output = output + "Now you have " + numOfItems + " tasks in the list.";
+        } else {
+            output = DUPLICATE_MESSAGE;
+        }
         return output;
     }
 
