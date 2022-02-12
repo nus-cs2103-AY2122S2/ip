@@ -43,9 +43,9 @@ public class Task {
         String result = time;
         String[] dayAndTime = time.split(" ", 2);
         String[] split = dayAndTime[0].split("[-/]", 3);
-        int parts = split.length;
+        int numberOfParts = split.length;
         try {
-            if (parts == 3) {
+            if (numberOfParts == 3) {
                 int year = Integer.parseInt(split[0]);
                 int month = Integer.parseInt(split[1]);
                 int day = Integer.parseInt(split[2]);
