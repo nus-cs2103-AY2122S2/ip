@@ -25,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * Says goodbye to the user as the app shuts down.
+     * Sends goodbye to the user as the app shuts down.
      */
     public String goodbye() {
         return "Bye. Have a great day!";
@@ -48,7 +48,7 @@ public class Ui {
     }
 
     /**
-     * used when a task has been successfully deleted.
+     * Returns a message when a task has been successfully deleted.
      * @param t task that was removed.
      */
     public String notifyRemovedTaskMessage(Task t) {
@@ -56,7 +56,7 @@ public class Ui {
     }
 
     /**
-     * used when a task has been successfully added.
+     * Returns a message when a task has been successfully added.
      * @param t task that was added.
      */
     public String notifyAddedTaskMessage(Task t) {
@@ -64,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * used when a task was successfully marked as incomplete or complete.
+     * Returns a message when a task was successfully marked as incomplete or complete.
      * @param t task that was marked
      * @param isComplete boolean flag for whether the task was marked complete or not complete.
      */
@@ -77,7 +77,7 @@ public class Ui {
     }
 
     /**
-     * used to notify the user when tasks have been successfully archived
+     * Returns a message to notify the user when tasks have been successfully archived
      */
     public String notifyArchivedTasks() {
         return "All completed tasks have been moved to the archive.";

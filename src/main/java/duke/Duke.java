@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 
 /**
@@ -31,6 +32,9 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             response = command.execute(this.taskMaster, this.ui, this.storage);
+            if (command instanceof ExitCommand) {
+                System.exit(0);
+            }
         } catch (DukeException e) {
             response = e.getMessage();
         }

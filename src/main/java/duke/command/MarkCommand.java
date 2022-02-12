@@ -11,7 +11,7 @@ import duke.task.Task;
  */
 public class MarkCommand extends Command {
 
-    private boolean mark;
+    private boolean isMark;
     private int id;
 
     /**
@@ -23,7 +23,7 @@ public class MarkCommand extends Command {
     public MarkCommand(String id, boolean mark) throws DukeException {
         try {
             this.id = Integer.parseInt(id);
-            this.mark = mark;
+            this.isMark = mark;
         } catch (NumberFormatException e) {
             throw new DukeException("That is no item in this list with that id");
         }
@@ -42,7 +42,7 @@ public class MarkCommand extends Command {
     public String execute(TaskMaster tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task taskToMark = tasks.getCurrentTasks().get(id - 1);
-            if (this.mark) {
+            if (this.isMark) {
                 taskToMark.mark();
                 storage.saveToFile(tasks.getCurrentTasks(), false);
                 return ui.notifyMarkedTaskMessage(taskToMark, true);
