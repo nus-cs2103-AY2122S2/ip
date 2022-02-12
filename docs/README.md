@@ -61,6 +61,8 @@ Meow! (Here's what I found! (the numbering is kept the same as the "list" comman
 2. [D][ ] submit individual project (by: 2022-02-18 23:59)
 ```
 
+---
+
 ### Feature - Mark (and unmark) your tasks as done!
 
 Fluffers allows you to mark and unmark your tasks as done with the `mark` and `unmark` commands! Once you're done with the task, you can delete them with the `delete` command too!
@@ -85,6 +87,8 @@ Response from Fluffers:
 Meow! (Okay, this task is done:
 [D][X] submit individual project (by: 2022-02-18 23:59))
 ```
+
+---
 
 ### Feature - Say hi and bye to Fluffers!!
 
