@@ -1,8 +1,5 @@
 package holobot.gui;
 
-import java.io.IOException;
-import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+
+import java.io.IOException;
+import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.
