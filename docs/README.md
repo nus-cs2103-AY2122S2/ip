@@ -1,5 +1,9 @@
 # User Guide
 
+# Requirements
+- [ ] Java 11 Runtime
+- [ ] Comic Sans MS Bold font installed
+
 ## Features 
 
 ### Feature-Create a tasklist for multiple types of tasks
