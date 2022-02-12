@@ -109,6 +109,12 @@ public class Parser {
                 newTask = new Event(details, dateTime);
             }
 
+            for (Task t : taskList.getTasks()) {
+                if (t.toString().equals(newTask.toString())) {
+                    throw new DukeException("This task already exists!");
+                }
+            }
+
             taskList.addTask(newTask);
         } else {
             throw new DukeException("no such task type");
@@ -126,6 +132,7 @@ public class Parser {
      */
     public String guiTakeInput(String input, TaskList taskList) throws DukeException {
         if (input.equals("bye")) {
+            Storage.storeTasks(taskList.getTasks());
             return BYE_MSG;
         } else if (input.equals("list")) { //Check if input == list
             return taskList.guiPrintList();

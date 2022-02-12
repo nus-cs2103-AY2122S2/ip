@@ -19,7 +19,7 @@ public class Todo extends Task {
      */
     @Override
     public void printTask() {
-        System.out.print(this.toString());
+        System.out.println(this.toString());
     }
 
     /**

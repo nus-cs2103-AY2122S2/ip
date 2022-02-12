@@ -64,7 +64,7 @@ public class Deadline extends Task {
      */
     @Override
     public void printTask() {
-        System.out.print(this.toString());
+        System.out.println(this.toString());
     }
 
     /**

@@ -31,7 +31,7 @@ public class Duke {
     }
 
     /**
-     * method to run the application and start taking in puts
+     * method to run the application and start taking inputs
      */
     public void run() {
         ui.startUp();
@@ -57,7 +57,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke("./src/main/data/data.txt", "./src/main/data").run();
+        new Duke("c:/data/data.txt", "c:/data").run();
     }
 
     public String getResponse(String input) throws DukeException, IOException {

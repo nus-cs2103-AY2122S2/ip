@@ -14,8 +14,8 @@ import java.util.Scanner;
  * Contains 2 attributes passed in when Duke runs
  */
 public class Storage {
-    private String path;
-    private String fileDir;
+    private static String path;
+    private static String fileDir;
 
     /**
      * Constructor for Storage class
@@ -83,7 +83,7 @@ public class Storage {
      *
      * @param tasks an arrayList of current tasks
      */
-    public void storeTasks(ArrayList<Task> tasks) {
+    public static void storeTasks(ArrayList<Task> tasks) {
         //Saving the changes back to file
         File file = new File(fileDir);
         //if prev file exists, delete it and replace with new empty file
