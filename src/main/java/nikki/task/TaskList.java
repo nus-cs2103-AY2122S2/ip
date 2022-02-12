@@ -57,13 +57,15 @@ public class TaskList {
      * @throws NikkiException index out of range
      */
     private void checkIndex(int index) throws NikkiException {
-        if (index < 0 || index >= this.size()) {
-            throw new NikkiException(
-                    this.size() == 0
-                            ? "List is empty"
-                            : String.format("Please choose tasks from 1 to %d", this.size())
-            );
+        if (index >= 0 && index < this.size()) {
+            return;
         }
+
+        throw new NikkiException(
+                this.size() == 0
+                        ? "List is empty"
+                        : String.format("Please choose tasks from 1 to %d", this.size())
+        );
     }
 
     /**
@@ -121,12 +123,7 @@ public class TaskList {
         String result = "";
 
         for (int i = 0; i < this.size(); i++) {
-            try {
-                result += this.getTask(i).toFileSaveFormat();
-            } catch (NikkiException e) {
-                // This won't happen, given the bounds of the for-loop
-                assert false;
-            }
+            result += this.tasks.get(i).toFileSaveFormat();
 
             if (i != this.size() - 1) {
                 result += "\n";
@@ -164,16 +161,11 @@ public class TaskList {
         String result = "";
 
         for (int i = 0; i < this.size(); i++) {
-            try {
-                Task current = this.getTask(i);
-                result += String.format(
-                        "%3d. %s",
-                        i + 1,
-                        current.nameWithStatus());
-            } catch (NikkiException e) {
-                // This won't happen, given the bounds of the for-loop
-                assert false;
-            }
+            Task current = this.tasks.get(i);
+            result += String.format(
+                    "%3d. %s",
+                    i + 1,
+                    current.nameWithStatus());
 
             if (i != this.size() - 1) {
                 result += "\n";
