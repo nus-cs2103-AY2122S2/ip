@@ -34,7 +34,7 @@ public class NumCommand extends Command {
     }
 
     /**
-     * Apply changes to the Task object using the TaskManager Object.
+     * Applies changes to the Task object using the TaskManager Object.
      *
      * @return String containing the relevant Task Object
      * @throws IndexOutOfBoundsException if the index provided is invalid
