@@ -11,8 +11,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -23,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
@@ -34,9 +35,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        ImagePattern imagePattern = new ImagePattern(img);
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setFill(imagePattern);
         dialog.setMinHeight(USE_PREF_SIZE);
     }
 
@@ -44,6 +45,8 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
+        dialog.setStyle("-fx-text-fill:black;" + "-fx-padding: 10 10;"
+                + "-fx-background-radius: 20;" + "-fx-background-color: white;");
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
