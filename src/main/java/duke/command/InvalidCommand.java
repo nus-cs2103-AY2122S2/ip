@@ -16,7 +16,8 @@ public class InvalidCommand extends Command {
      * @return
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String output = Messages.UNKNOWN_COMMAND;
+        String output = "";
+        output = Ui.append(output, Messages.UNKNOWN_COMMAND);
         output = Ui.append(output, ui.showCommands());
         output += Messages.TRY_HELP_MSG;
         return output;
