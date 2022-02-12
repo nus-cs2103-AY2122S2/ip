@@ -40,6 +40,8 @@ public class Ui {
             return event(argument);
         case "find":
             return find(argument);
+        case "priority":
+            return switchPriority(argument);
         default:
             throw new TsohgException("OOPS!!! I'm sorry,\n but I don't know what that means :-(");
         }
@@ -108,6 +110,12 @@ public class Ui {
         }
         return "Here are the matching tasks in your list:\n"
                 + tasks.find(argument);
+    }
+
+    private String switchPriority(String argument) throws TsohgException {
+        int index = parseIndex(argument);
+        return "OK, I've changed the priority of this task:\n"
+                + tasks.switchPriority(index);
     }
 
     private int parseIndex(String argument) throws TsohgException {

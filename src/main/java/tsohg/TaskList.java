@@ -70,7 +70,7 @@ public class TaskList {
      * @throws TsohgException If something wrong happens.
      */
     public String addTodo(String name) throws TsohgException {
-        Task item = new TodoTask(name);
+        Task item = new TodoTask(name, false);
         items.add(item);
         saveToFile();
         return item.toString();
@@ -84,7 +84,7 @@ public class TaskList {
      * @throws TsohgException If something wrong happens.
      */
     public String addDeadline(String name, String date) throws TsohgException {
-        Task item = new DeadlineTask(name, date);
+        Task item = new DeadlineTask(name, date, false);
         items.add(item);
         saveToFile();
         return item.toString();
@@ -98,7 +98,7 @@ public class TaskList {
      * @throws TsohgException If something wrong happens.
      */
     public String addEvent(String name, String date) throws TsohgException {
-        Task item = new EventTask(name, date);
+        Task item = new EventTask(name, date, false);
         items.add(item);
         saveToFile();
         return item.toString();
@@ -120,33 +120,57 @@ public class TaskList {
     }
 
     /**
+     * Switch the priority of the task.
+     * @param index The index of the item.
+     * @return A success message after switching.
+     * @throws TsohgException If something wrong happens.
+     */
+    public String switchPriority(int index) throws TsohgException {
+        assert 0 <= index && index < size();
+        items.get(index).switchPriority();
+        saveToFile();
+        return items.get(index).toString();
+    }
+
+    /**
      * Reads from the storage and populate the content as a list.
      * @throws TsohgException If something wrong happens.
      */
     private void readFromFile() throws TsohgException {
         Scanner scanner = storage.read();
         while (scanner.hasNext()) {
-            String[] data = scanner.nextLine().split(" \\| ");
+            String[] data = parseLine(scanner.nextLine());
             String type = data[0];
             Task item = null;
             switch (type) {
             case "T":
-                item = new TodoTask(data[2]);
+                item = new TodoTask(data[3], false);
                 break;
             case "E":
-                item = new EventTask(data[2], data[3]);
+                item = new EventTask(data[3], data[4], false);
                 break;
             case "D":
-                item = new DeadlineTask(data[2], data[3]);
+                item = new DeadlineTask(data[3], data[4], false);
                 break;
             default:
                 assert false;
             }
             if (data[1].equals("1")) {
+                item.switchPriority();
+            }
+            if (data[2].equals("1")) {
                 item.mark();
             }
             items.add(item);
         }
+    }
+
+    private String[] parseLine(String line) {
+        String[] data = line.split("\\|", -1);
+        for (int i = 0; i < data.length; i++) {
+            data[i] = data[i].strip();
+        }
+        return data;
     }
 
     /**

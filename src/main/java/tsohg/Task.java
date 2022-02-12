@@ -7,13 +7,15 @@ public abstract class Task {
 
     protected final String name;
     protected boolean isDone;
+    protected boolean isHighPriority;
 
     /**
      * Constructor of the class.
      * @param name The name of the task.
      */
-    Task(String name) {
+    Task(String name, boolean isHighPriority) {
         this.name = name;
+        this.isHighPriority = isHighPriority;
         this.isDone = false;
     }
 
@@ -41,11 +43,22 @@ public abstract class Task {
     }
 
     /**
+     * Switch the priority of the item.
+     */
+    public void switchPriority() {
+        this.isHighPriority = !this.isHighPriority;
+    }
+
+    /**
      * Returns the status icon of a task.
      * @return the status icon of a task.
      */
     protected String getStatusIcon() {
         return isDone ? "X" : " ";
+    }
+
+    protected String getPriority() {
+        return isHighPriority ? "H" : "L";
     }
 
     /**

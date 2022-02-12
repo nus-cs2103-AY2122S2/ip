@@ -9,8 +9,8 @@ public class TodoTask extends Task {
      * Constructor of the class
      * @param name Name of the task.
      */
-    public TodoTask(String name) {
-        super(name);
+    public TodoTask(String name, boolean priority) {
+        super(name, priority);
     }
 
     /**
@@ -19,7 +19,7 @@ public class TodoTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", getStatusIcon(), name);
+        return String.format("[T][%s][%s] %s", getPriority(), getStatusIcon(), name);
     }
 
     /**
@@ -28,6 +28,6 @@ public class TodoTask extends Task {
      */
     @Override
     public String toStore() {
-        return String.format("T | %d | %s", this.isDone ? 1 : 0, this.name);
+        return String.format("T | %d | %d | %s", isHighPriority ? 1 : 0, isDone ? 1 : 0, name);
     }
 }
