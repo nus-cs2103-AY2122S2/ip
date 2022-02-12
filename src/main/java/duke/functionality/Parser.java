@@ -14,7 +14,8 @@ import duke.exceptions.DukeException;
 public class Parser {
     public static final String ERROR_UNKNOWN = "OOPS, I'm sorry, but I don't know what that means :-(";
     public static final String ERROR_DESCRIPTION = "OOPS, The description of a command cannot be empty.";
-    public static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-MM-dd HHmm";
+    public static final String ERROR_MISSING_DATE = "OOPS, check again if you have the date and the description.";
+    public static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-mm-dd";
     public static final String ERROR_FORGET_SPACE = "You forgot a space somewhere...";
     private static final int INDEX_AFTER_MARK_COMMAND = 5;
     private static final int INDEX_AFTER_UNMARK_COMMAND = 7;
@@ -60,8 +61,10 @@ public class Parser {
             } else {
                 throw new DukeException(ERROR_UNKNOWN);
             }
-        } catch (IndexOutOfBoundsException error) {
+        } catch (StringIndexOutOfBoundsException error) {
             throw new DukeException(ERROR_DESCRIPTION);
+        } catch (ArrayIndexOutOfBoundsException error) {
+            throw new DukeException(ERROR_MISSING_DATE);
         } catch (NumberFormatException error) {
             throw new DukeException(ERROR_FORGET_SPACE);
         }

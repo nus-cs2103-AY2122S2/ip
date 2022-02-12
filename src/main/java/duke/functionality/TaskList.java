@@ -25,6 +25,7 @@ public class TaskList {
     private static final String MATCH = "Here are the matching tasks in your list:\n";
     private static final String DUPLICATE_MESSAGE = "This is a duplicate task... try again";
     private static final String EMPTY_LIST = "The list is empty... Try adding some tasks!";
+    private static final String TASK_NOT_FOUND = "There is no matching tasks in the list... try something else.";
 
     private final ArrayList<Task> taskList;
 
@@ -265,6 +266,7 @@ public class TaskList {
      * @return A String message with all the relevant tasks found.
      */
     public String findTask(TaskList taskList, String userInput) {
+        String output = "";
         TaskList foundTasks = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
             String stringToSearch = taskList.get(i).getDescription();
@@ -272,7 +274,11 @@ public class TaskList {
                 foundTasks.addGeneralTask(taskList.get(i));
             }
         }
-        return foundTasks.listItemsMatch();
+        if (foundTasks.size() != 0) {
+            output = output + foundTasks.listItemsMatch();
+        } else {
+            output = output + TASK_NOT_FOUND;
+        }
+        return output;
     }
-
 }
