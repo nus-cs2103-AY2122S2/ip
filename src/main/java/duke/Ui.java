@@ -12,7 +12,8 @@ public class Ui {
             + "|____/  |_|  |_| |_|\n";
 
     /**
-     * Return a line
+     * Returns a line
+     *
      * @return A String of line
      */
     public String getLine() {
@@ -27,7 +28,8 @@ public class Ui {
     }
 
     /**
-     * surround the input with two lines
+     * Surrounds the input with two lines
+     *
      * @param input String to be surrounded
      * @return String of input surrounded with two lines
      */

@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Represent a chatbot called BH
+ * Represents a chatbot called BH
  * It is able to read input and proceed with different kind of task and save all the tasks
  */
 public class BH {
@@ -15,8 +15,9 @@ public class BH {
     private Parser parser;
 
     /**
-     * constructor of BH
-     * @throws DukeException if the filepath is invalid
+     * Constructs a BH
+     *
+     * @throws DukeException If the filepath is invalid
      */
     public BH() throws DukeException {
         this.storage = new Storage(FILEPATH);
@@ -26,19 +27,11 @@ public class BH {
     }
 
     /**
-     * Return a String of line
-     * @return String of line
-     */
-    public String getUiLine() {
-        return this.ui.getLine();
-    }
-
-    /**
-     * Read the input and execute the command according to the input
-     * Return the output as a String
-     * @param input Command from users
-     * @return String of the result after execuation
-     * @throws DukeException
+     * Executes the input by parser
+     *
+     * @param input User Command
+     * @return Result after execution
+     * @throws DukeException If invalid input is detected
      */
     public String run(String input) throws DukeException {
         return this.parser.execute(input);
