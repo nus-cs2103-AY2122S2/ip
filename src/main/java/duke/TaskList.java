@@ -56,6 +56,15 @@ public class TaskList {
         return this.list.get(index).toString();
     }
 
+    String tagTask(int index, String tagDetail) {
+        this.list.get(index).tag(tagDetail);
+        return this.list.get(index).toString();
+    }
+
+    String untagTask(int index) {
+        this.list.get(index).untag();
+        return this.list.get(index).toString();
+    }
     /**
      * Checks all task in the list having same date as the input
      *
