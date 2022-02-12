@@ -23,4 +23,12 @@ class TaskListTest {
         assertEquals(0, t.getSize());
     }
 
+    @Test
+    void returnedString_searchReturnsTasks_tasksWithMatchingWordsAreReturned() {
+        TaskList t = new TaskList();
+        TaskStub ts = new TaskStub("");
+        t.addTask(ts);
+        String[] wordsToCheck = {"some", "words"};
+        assertEquals("forT1\n", t.checkWordsInTask(wordsToCheck));
+    }
 }

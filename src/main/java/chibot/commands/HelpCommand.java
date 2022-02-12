@@ -45,7 +45,6 @@ public class HelpCommand extends Command {
      */
     public String printGenericHelpMessage() {
         return "Chi is happy you are asking for help!\n Do go to the following link on how to get started!";
-
     }
 
     /**

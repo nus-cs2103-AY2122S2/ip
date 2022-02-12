@@ -52,7 +52,7 @@ public class Storage {
      * @param task A single task stored in the data file.
      * @return A Task instance of the task read from the data file.
      */
-    private Task convertFileDataToTask(String task) {
+    public Task convertFileDataToTask(String task) {
         String[] splitTask = task.split("\\|");
         assert splitTask.length > 2 : "There is something wrong with this stored task";
         for (int i = 0; i < splitTask.length; i++) {
@@ -61,8 +61,9 @@ public class Storage {
         if (splitTask[0].equals("T")) {
             if (splitTask[1].equals("1")) {
                 return new Todo(splitTask[2], true);
+            } else if (splitTask[1].equals("0")) {
+                return new Todo(splitTask[2], false);
             }
-            return new Todo(splitTask[2], false);
         } else if (splitTask[0].equals("D")) {
             if (splitTask.length == 5) {
                 return new Deadline(splitTask[2], LocalDate.parse(splitTask[3],

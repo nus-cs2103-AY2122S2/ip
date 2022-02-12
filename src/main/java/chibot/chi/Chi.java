@@ -14,16 +14,16 @@ import java.io.IOException;
 public class Chi {
 
     /** Contains the task data stored in the hard-drive */
-    private Storage storage;
+    private final Storage storage;
 
     /** Contains the task data stored in the program */
     private TaskList taskList;
 
     /** Handles interactions with the user */
-    private UI ui;
+    private final UI ui;
 
     /** Interprets messages sent by the user */
-    private Parser parser;
+    private final Parser parser;
 
     /**
      * Instantiates the necessary components to run the application.
@@ -57,11 +57,18 @@ public class Chi {
 
     /**
      * Prints the welcome message.
+     *
+     * @return The String of welcome message.
      */
     public String getWelcomeMessage() {
         return this.ui.printWelcome();
     }
 
+    /**
+     * Prints the goodbye message.
+     *
+     * @return The String of goodbye message.
+     */
     public String getGoodbyeMessage() {
         return this.ui.printGoodbye();
     }

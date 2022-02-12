@@ -15,6 +15,16 @@ public class TaskStub extends Task {
     }
 
     /**
+     * Returns a fixed boolean for testing purposes.
+     *
+     * @param wordsToCheck Array of keywords.
+     * @return True.
+     */
+    public boolean checkDescriptionForWords(String[] wordsToCheck) {
+        return true;
+    }
+
+    /**
      * Returns a fixed task description.
      *
      * @return String representation of the task description.
