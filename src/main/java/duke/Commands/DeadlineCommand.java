@@ -1,6 +1,5 @@
 package duke.Commands;
 
-import duke.Commands.Commands;
 import duke.Deadlines;
 import duke.DukeHistory;
 import duke.DukeUi;

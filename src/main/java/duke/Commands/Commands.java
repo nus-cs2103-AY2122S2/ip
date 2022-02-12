@@ -4,7 +4,6 @@ import duke.DukeException;
 import duke.DukeHistory;
 import duke.DukeUi;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
