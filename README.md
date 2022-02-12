@@ -1,24 +1,29 @@
-# Duke project template
+# Duke project
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a chatbot with basic functionality to add, remove, update and delete tasks. It has a basic GUI written with JavaFX.
 
-## Setting up in Intellij
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Adding a Task
+There are three types of Tasks: Todo, Deadline and Event.  
+To add a Todo: `todo <taskname>`.    
+To add a Deadline: `deadline <taskname> /by YYYY/MM/DD HHSS`.    
+To add an Event: `event <taskname> /at <timing (no specific format)>`.  
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Removing a Task
+To remove a task, type `delete <taskID>`.
+
+## Viewing Tasks
+To view your list of tasks, simply type `list`.
+
+## Marking and Unmarking tasks
+To mark a task as done, type `mark <taskID>`.    
+To unmark a task as done, type `unmark <taskID>`.  
+
+## Finding tasks
+To find a task that has a name containing the specific keyword, type `find <keyword>`.  
+
+## Update tasks
+To update a task's name, type `update name <taskID> <newname>`.  
+To update a Deadline/Event time,  type `update time <taskID> <newtime>`. (Ensure `<newtime>` follows the respective formatting).
+
+
