@@ -35,21 +35,20 @@ public class Storage {
         try {
             File f = new File(this.filePath); // create a File for the given file path
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
-            if (!s.hasNext()) {
-                System.out.println("You have no saved tasks.");
-
+            boolean hasTask = s.hasNext();
+            if (!hasTask) {
+                return "You have no saved tasks.";
             } else {
                 String output = "";
-                while (s.hasNext()) {
+                while (hasTask) {
                     output += s.nextLine() + "\n";
                 }
                 return output;
             }
-            return "";
         } catch (IOException e) {
             new File("data").mkdirs();
-            return "";
         }
+        return "";
     }
 
     /**
@@ -75,7 +74,6 @@ public class Storage {
      * @param list List of Task objects.
      */
     public void writeTextTo(TaskList list) {
-        String file2 = this.filePath;
         try {
             writeToFile(list.exportOut());
         } catch (IOException e) {
