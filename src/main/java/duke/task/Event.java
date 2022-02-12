@@ -12,7 +12,6 @@ public class Event extends Task {
 
     /**
      * Default constructor
-     * 
      * @param description description of the task
      * @param metaInfo    duration information of the task
      */
@@ -23,7 +22,6 @@ public class Event extends Task {
 
     /**
      * This constructor initializes event objects with isDone specified
-     * 
      * @param isDone      whether this task is done or not
      * @param description description of the task
      * @param metaInfo    duration information of the task

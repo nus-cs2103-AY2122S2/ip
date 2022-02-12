@@ -1,17 +1,17 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.util.Ui;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.DukeException;
+import duke.util.Ui;
 
 /**
  * Handles all operations related to the List of Tasks
  */
 public class TaskList {
-    List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Constructor

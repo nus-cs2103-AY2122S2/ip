@@ -1,18 +1,19 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
 
-import java.util.Scanner;
 
 /**
  * Represents a chatbot
  */
 public class Duke {
-    Storage storageHandler;
-    TaskList tasks;
+    private Storage storageHandler;
+    private TaskList tasks;
 
     /**
      * Default constructor
@@ -53,38 +54,38 @@ public class Duke {
             String originalInput = parser.getOriginalInput();
 
             switch (command) {
-                case "bye":
-                    tasks.handleBye();
-                    sc.close();
-                    canContinue = false;
-                    break;
-                case "list":
-                    tasks.handleList();
-                    break;
-                case "mark":
-                    tasks.handleMark(inputArray);
-                    break;
-                case "unmark":
-                    tasks.handleUnMark(inputArray);
-                    break;
-                case "todo":
-                    tasks.handleTodo(inputArray, originalInput);
-                    break;
-                case "deadline":
-                    tasks.handleDeadline(originalInput);
-                    break;
-                case "event":
-                    tasks.handleEvent(originalInput);
-                    break;
-                case "delete":
-                    tasks.handleDelete(inputArray);
-                    break;
-                case "find":
-                    tasks.handleFind(inputArray);
-                    break;
-                default:
-                    Ui.printDontKnowCommand();
-                    break;
+            case "bye":
+                tasks.handleBye();
+                sc.close();
+                canContinue = false;
+                break;
+            case "list":
+                tasks.handleList();
+                break;
+            case "mark":
+                tasks.handleMark(inputArray);
+                break;
+            case "unmark":
+                tasks.handleUnMark(inputArray);
+                break;
+            case "todo":
+                tasks.handleTodo(inputArray, originalInput);
+                break;
+            case "deadline":
+                tasks.handleDeadline(originalInput);
+                break;
+            case "event":
+                tasks.handleEvent(originalInput);
+                break;
+            case "delete":
+                tasks.handleDelete(inputArray);
+                break;
+            case "find":
+                tasks.handleFind(inputArray);
+                break;
+            default:
+                Ui.printDontKnowCommand();
+                break;
             }
         }
         storageHandler.saveTasksToFile(tasks.getTasks());

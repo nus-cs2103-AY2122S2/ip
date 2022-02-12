@@ -1,8 +1,8 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Represents the User Interface
@@ -25,6 +25,10 @@ public final class Ui {
         System.out.println(BAR + "\n" + message + "\n" + BAR);
     }
 
+    /**
+     * Prints a greeting with a custom bot name
+     * @param botName custom bot name
+     */
     public static void printGreeting(String botName) {
         String greeting = "Hello! I'm " + botName + "\nWhat can I do for you?";
         printMessage(greeting);
@@ -34,11 +38,20 @@ public final class Ui {
         printMessage("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints a message that describes handling an unknown command
+     */
     public static void printDontKnowCommand() {
         String message = "OOPS!!! I'm sorry, but I don't know what that means :-(\nPlease try again:";
         printMessage(message);
     }
 
+    /**
+     * Prints the feedback footer, designed for feedback after handling a user command
+     * @param message message to be printed
+     * @param targetTask Task object that is involved in the user command
+     * @param tasks List of Tasks for looping through to be printed
+     */
     public static void printFeedbackFooter(String message, Task targetTask, List<Task> tasks) {
         System.out.println(BAR);
         System.out.println(message);

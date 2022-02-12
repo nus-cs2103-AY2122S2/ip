@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.util.DateTimeCustomFormatter;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
+import duke.util.DateTimeCustomFormatter;
 
 /**
  * Represents a Deadline object

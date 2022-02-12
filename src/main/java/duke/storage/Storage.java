@@ -1,10 +1,5 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,12 +9,17 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Handles all data file Storage operations
  */
 public class Storage {
-    static Path filePath = Paths.get("./data/data.txt");
-    Path dirPath = Paths.get("./data/");
+    private static Path filePath = Paths.get("./data/data.txt");
+    private Path dirPath = Paths.get("./data/");
     private ArrayList<Task> tasks;
 
     /**
@@ -30,7 +30,7 @@ public class Storage {
     }
 
     /**
-     * @return List<Task> list of task objects read from file
+     * @return list of task objects read from file
      */
     public List<Task> loadTasksFromFile() {
 
@@ -70,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * @return List<String> list of tasks in raw string format that are read from file
+     * @return list of tasks in raw string format that are read from file
      */
     private List<String> readFile() {
         try {
@@ -82,21 +82,21 @@ public class Storage {
     }
 
     /**
-     * @param fileData list of tasks in String format to be converted to List<Task>
+     * @param fileData list of tasks in String format to be converted to List of Tasks
      */
     public void convertStringToTasks(List<String> fileData) {
         if (fileData != null) {
             for (String line : fileData) {
                 String[] item = line.split("\\|");
                 switch (item[0].replaceAll("\\s", "")) {
-                    case "D":
-                        this.tasks.add(new Deadline(item[1].replaceAll("\\s", "").equals("1"), item[2], item[3]));
-                        break;
-                    case "E":
-                        tasks.add(new Event(item[1].replaceAll("\\s", "").equals("1"), item[2], item[3]));
-                        break;
-                    default:
-                        tasks.add(new Todo(item[1].replaceAll("\\s", "").equals("1"), item[2]));
+                case "D":
+                    this.tasks.add(new Deadline(item[1].replaceAll("\\s", "").equals("1"), item[2], item[3]));
+                    break;
+                case "E":
+                    tasks.add(new Event(item[1].replaceAll("\\s", "").equals("1"), item[2], item[3]));
+                    break;
+                default:
+                    tasks.add(new Todo(item[1].replaceAll("\\s", "").equals("1"), item[2]));
                 }
             }
         }
