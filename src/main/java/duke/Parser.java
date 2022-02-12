@@ -34,6 +34,9 @@ public class Parser {
      * @throws DukeException If wrong input is detected
      */
     String execute(String input) throws DukeException {
+
+        assert(input.length() > 0);
+        String output;
         try {
             String[] inputArray = input.split(" ", 2);
             String commandType = inputArray[0].toLowerCase();
