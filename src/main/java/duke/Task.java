@@ -13,6 +13,7 @@ public class Task {
     protected final String time;
     protected LocalDate date;
     protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected String tag;
 
     /**
      * Constructor of task
@@ -25,6 +26,7 @@ public class Task {
         this.type = type;
         this.date = LocalDate.now();
         this.time = this.date.toString();
+        this.tag = "";
     }
 
     /**
@@ -88,6 +90,14 @@ public class Task {
         }
     }
 
+    public void tag(String tag) {
+        this.tag = tag;
+    }
+
+    public void untag() {
+        this.tag = "";
+    }
+
     /**
      * Returns a String to represent the task
      *
@@ -96,9 +106,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[" + this.type + "] [X] " + this.task;
+            return "[" + this.type + "] [X] " + this.task + "   " + this.tag;
         } else {
-            return "[" + this.type + "] [ ] " + this.task;
+            return "[" + this.type + "] [ ] " + this.task + "   " + this.tag;
         }
     }
 }

@@ -62,6 +62,10 @@ public class Parser {
                 return new CheckCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "find":
                 return new FindCommand(this.ui, this.taskList, this.storage, input).runCommand();
+            case "tag":
+                return new TagCommand(this.ui, this.taskList, this.storage, input).runCommand();
+            case "untag":
+                return new UntagCommand(this.ui, this.taskList, this.storage, input).runCommand();
             default:
                 return ui.sayWrongInput();
             }
