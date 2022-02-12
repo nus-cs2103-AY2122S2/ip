@@ -14,7 +14,7 @@
 
 Fluffers currently offers 4 types of tasks:
 
-| task type | description | usage | example |
+| Task type | Description | Usage | Example |
 | --- | --- | --- | --- |
 | To do task | This is the most basic task, like one that you will write on a post it note and paste it on your fridge! | `todo <description>` | `todo E-Learning homework` |
 | Deadline task | This is a task with a fixed dateline, so that you know when to finish it by! | `deadline <description> /by <date>` | `deadline Submit E-Learning homework /by 2022-02-14 23:59` |
@@ -34,23 +34,38 @@ Response from Fluffers:
 ```
 Meow! (Okay, added this task:
 [D][ ] submit individual project (by: 2022-02-18 23:59)
-There are # tasks in the list now.)
+There are 2 tasks in the list now.)
 ```
+
+---
 
 ### Feature - View and find your tasks!
 
 Fluffers allows you to check your tasks with the `list` command, as well as allowing you to find your tasks using `find`!
 
-| Command type | description | usage | example |
+| Command type | Description | Usage | Example |
 | --- | --- | --- | --- |
 | List all tasks | Lists all the tasks you have created! | `list` | `list` |
 | Finds a task | Finds a task with a given keyword! This keyword can be from the description or the time! | `find <keyword>` | `find homework`, `find 2022-02` |
+
+Another example with the expected output:
+
+Input: 
+
+`find project`
+
+Response from Fluffers:
+
+```
+Meow! (Here's what I found! (the numbering is kept the same as the "list" command))
+2. [D][ ] submit individual project (by: 2022-02-18 23:59)
+```
 
 ### Feature - Mark (and unmark) your tasks as done!
 
 Fluffers allows you to mark and unmark your tasks as done with the `mark` and `unmark` commands! Once you're done with the task, you can delete them with the `delete` command too!
 
-| Command type | description | usage | example |
+| Command type | Description | Usage | Example |
 | --- | --- | --- | --- |
 | Mark a task as done | Marks a task as done! You will see a `x` if it is marked as done! | `mark <task number>` | `mark 2` |
 | Unmark a task as done | Unmarks a task as undone! All tasks are undone by default. | `unmark <task number>` | `unmark 3` |
@@ -58,29 +73,24 @@ Fluffers allows you to mark and unmark your tasks as done with the `mark` and `u
 
 **Note that the task number is the number that is listed using the `list` and `find` commands!**
 
+Another example with the expected output:
+
+Input: 
+
+`mark 2`
+
+Response from Fluffers:
+
+```
+Meow! (Okay, this task is done:
+[D][X] submit individual project (by: 2022-02-18 23:59))
+```
+
 ### Feature - Say hi and bye to Fluffers!!
 
 You can say hi and bye to Fluffers to turn her functionalities on and off! (Not sure why you'd want to do that, though...)
 
-| Command type | description | usage | example |
+| Command type | Description | Usage | Example |
 | --- | --- | --- | --- |
 | Greetings | Says hi to Fluffers, waking her up if she was asleep! | `hi` | `hi` |
 | Goodbye | Says goodbye to Fluffers, letting her sleep if she was awake! | `bye` | `bye` |
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
