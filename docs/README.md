@@ -1,5 +1,9 @@
 # User Guide
 
+<div align="center">
+    <img src="https://raw.githubusercontent.com/domlimm/ip/master/docs/Ui.png" />
+</div>
+
 Abby is a <b>desktop application that serves as a task manager for managing tasks via a Command Line Interface</b>
 (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Abby can get your tasks managed much more efficiently and quick as compared to
