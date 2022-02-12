@@ -24,9 +24,9 @@ Format for `deadline`: `deadline DESCRIPTION /by DATE TIME`
 - `DATE`: `yyyy-mm-dd`
 
 Example of usage: 
-`todo run`
-`deadline return book /by 2022-05-28 2000`
-`event book sale /at 2022-05-27 0800`		  
+- `todo run`
+- `deadline return book /by 2022-05-28 2000`
+- `event book sale /at 2022-05-27 0800`		  
 
 Expected outcome: 
 
@@ -47,8 +47,8 @@ Example of usage: `delete 1`
 
 Expected outcome: 
 TaskJamie will remove the task at index 1.
-TaskJamie should show a message `Got it. I've removed this task: task_description`
-and TaskJamie would tell you how many tasks are left in the list. Eg: `Now you have x tasks in your list.`
+TaskJamie should show a message `Got it. I've removed this task: task_description`and 
+TaskJamie would tell you how many tasks are left in the list. Eg: `Now you have x tasks in your list.`
 
 
 ## Listing all tasks: `list`
@@ -69,8 +69,8 @@ Format for `unmark` : `unmark INDEX`
 - `INDEX` would be the index of the task to be deleted from the list.
 
 Example usage : 
-`mark 1`
-`unmark 1` 
+- `mark 1`
+- `unmark 1` 
 
 Expected outcome:
  
