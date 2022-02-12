@@ -19,7 +19,8 @@ public class ByeCommand extends Command<String> {
     }
 
     /**
-     * Unused
+     * Runs the command.
+     * This is unused, but needs to be implemented as it is an abstract method
      *
      * @param toDoList the user's list of Tasks
      * @param cmd      the user input to Burp

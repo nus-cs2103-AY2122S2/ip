@@ -21,6 +21,7 @@ public class ListCommand extends Command<String> {
 
     /**
      * Lists out all the Tasks in the TaskList.
+     * Sets the appropriate response after command is ran
      *
      * @param toDoList the user's List of Tasks
      * @param cmd      the user input to Burp

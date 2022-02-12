@@ -19,6 +19,7 @@ public class DuplicateCommand extends Command<String> {
     }
 
     /**
+     * Runs the logic for handling a duplicate command
      * Unused
      *
      * @param toDoList the user's list of Tasks

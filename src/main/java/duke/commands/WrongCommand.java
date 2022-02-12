@@ -23,6 +23,7 @@ public class WrongCommand extends Command<String> {
     }
 
     /**
+     * Runs the command.
      * Unused
      *
      * @param toDoList the user's list of Tasks

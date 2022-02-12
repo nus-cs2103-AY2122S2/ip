@@ -20,6 +20,7 @@ public class FindCommand extends Command<String> {
 
     /**
      * Lists out all the Tasks found according to the given search term
+     * Sets the appropriate response after finding based on search term
      *
      * @param toDoList the user's List of Tasks
      * @param cmd      the user input to Burp

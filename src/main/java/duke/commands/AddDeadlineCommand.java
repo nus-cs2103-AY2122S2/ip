@@ -33,6 +33,7 @@ public class AddDeadlineCommand extends Command<String> {
 
     /**
      * Adds a new Deadline Task to the current TaskList
+     * Sets the appropriate response if a Deadline Task is successfully added
      *
      * @param toDoList the user's List of Tasks
      * @param cmd      the user input to Burp

@@ -54,7 +54,6 @@ public class Deadline extends Task {
             this.date = LocalDate.parse(splitDateTime[0]);
             this.time = splitDateTime[1];
         } catch (Exception e) {
-            // System.out.println("No date format given");
         }
     }
 

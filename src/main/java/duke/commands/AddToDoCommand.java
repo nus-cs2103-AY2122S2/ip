@@ -33,6 +33,7 @@ public class AddToDoCommand extends Command<String> {
 
     /**
      * Adds a new ToDo Task to the current TaskList
+     * Then, sets the appropriate response when successfully added
      *
      * @param toDoList the user's List of Tasks
      * @param cmd      the user input to Burp

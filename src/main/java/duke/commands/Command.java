@@ -12,6 +12,7 @@ import duke.main.TaskList;
 public abstract class Command<E> {
     /**
      * Abstract method that runs a certain command based on the specific class.
+     * Called via the constructor of each concrete class
      *
      * @param toDoList the user's List of Tasks
      * @param cmd the user input to Burp

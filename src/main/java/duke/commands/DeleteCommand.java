@@ -31,6 +31,7 @@ public class DeleteCommand extends Command<Integer> {
 
     /**
      * Deletes a Task from the current TaskList
+     * Sets the appropriate response after successfully deleting
      *
      * @param toDoList       the user's List of Tasks
      * @param numberToDelete the item number to delete

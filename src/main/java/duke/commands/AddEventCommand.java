@@ -32,6 +32,7 @@ public class AddEventCommand extends Command<String> {
 
     /**
      * Adds a new Event Task to the current TaskList
+     * Sets the appropriate response if an Event Task is successfully added
      *
      * @param toDoList the user's List of Tasks
      * @param cmd      the user input to Burp
