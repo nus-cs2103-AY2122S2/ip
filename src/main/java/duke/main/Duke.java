@@ -31,8 +31,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     *
+     * @param input input is the user input keyed into the input field.
+     * @return Returns the response from the system back to the user.
      */
     public String getResponse(String input) {
         assert input != null : "Duke[getResponse] input cannot be null.";

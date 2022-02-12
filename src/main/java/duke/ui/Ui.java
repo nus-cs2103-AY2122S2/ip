@@ -38,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * Display a message when there is an issue loading from the text file that holds tasks.
+     * Displays a message when there is an issue loading from the text file that holds tasks.
      */
     public void showLoadingError() {
         output(Constants.STORAGE_READ_MSG);
