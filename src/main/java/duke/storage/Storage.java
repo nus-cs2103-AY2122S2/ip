@@ -74,7 +74,6 @@ public class Storage {
     public ArrayList<Task> load() throws FileNotFoundException, IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            //edit later for SLAP
             Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) {
                 String task = sc.nextLine();
