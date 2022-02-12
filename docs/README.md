@@ -67,7 +67,7 @@ Meow! (Here's what I found! (the numbering is kept the same as the "list" comman
 
 ---
 
-### Feature - Mark (and unmark) your tasks as done!
+### Feature - Mark (and unmark) your tasks as done! Delete them too!
 
 Fluffers allows you to mark and unmark your tasks as done with the `mark` and `unmark` commands! Once you're done with the task, you can delete them with the `delete` command too!
 
