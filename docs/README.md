@@ -150,7 +150,7 @@ Action | Format, Examples
 **todo** | `todo <task description>`
 **event** | `event <task description> /at <yyyy-MM-dd HHmm>`
 **deadline** | `deadline <task description> /by <yyyy-MM-dd HHmm>`
-**delete** | `delete INDEX'
+**delete** | `delete INDEX`
 **mark** | `mark INDEX`
 **unmark** | `unmark INDEX`
 **list** | `list`
