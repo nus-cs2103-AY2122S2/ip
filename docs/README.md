@@ -4,7 +4,7 @@ Koro Task Manager
 ## Quick Start
 
 1. Ensure you have Java `11` installed in your computer.
-2. Download the latest duke.jar from [here](../build/libs/duke.jar)
+2. Download the latest duke.jar from [here](https://github.com/janald99/ip)
 3. Double-click the file to start the app.
 4. Type the commands in the text box at the bottom and press Enter
 to execute it. e.g typing `help` and pressing Enter will display a detailed guide.
