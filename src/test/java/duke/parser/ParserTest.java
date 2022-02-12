@@ -18,7 +18,6 @@ public class ParserTest {
     private Ui ui;
     private Storage storage;
 
-
     @BeforeEach
     public void setUp() {
         try {
@@ -39,7 +38,7 @@ public class ParserTest {
             try {
                 assertEquals(parser.parseCommand(s).execute(tasks, ui, storage), errorMessage);
             } catch (DukeException e) {
-                ui.replyUser(e.getMessage());
+                assertEquals(e.getMessage(), errorMessage);
             }
         }
     }
@@ -53,8 +52,7 @@ public class ParserTest {
                 assertEquals(parser.parseCommand(s).execute(tasks, ui, storage), byeMessage);
             }
         } catch (DukeException e) {
-            ui.replyUser(e.getMessage());
+            System.out.println(e.getMessage());
         }
-
     }
 }

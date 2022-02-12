@@ -11,7 +11,7 @@ import duke.ui.MainWindow;
  */
 public class Main extends Application {
     /**
-     * Starts up a Duke object.
+     * Starts up the application.
      *
      * @param stage the stage of the application
      */

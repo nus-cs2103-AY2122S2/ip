@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.InvalidTaskException;
+import duke.exceptions.MissingTaskException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -34,7 +34,7 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (!tasks.containsTask(targetIndex)) {
-            throw new InvalidTaskException();
+            throw new MissingTaskException();
         }
 
         Task t = tasks.unmarkTask(targetIndex);

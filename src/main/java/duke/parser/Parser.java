@@ -12,10 +12,13 @@ import duke.commands.DeleteCommand;
 import duke.commands.EditCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
-import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyArgumentException;
+import duke.exceptions.ExcessArgumentException;
+import duke.exceptions.InvalidArgumentException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -90,7 +93,7 @@ public class Parser {
      * @param request full user input
      * @return the prepared command
      */
-    private Command prepareTodo(String request) {
+    private Command prepareTodo(String request) throws EmptyArgumentException {
         assert !request.equals("") : "request should not be empty";
         assert request.contains("todo") : "request is a todo";
 
@@ -99,7 +102,7 @@ public class Parser {
                 .split(" ");
 
         if (parsedReq.length == 1) {
-            return new IncorrectCommand("The description of a todo cannot be empty.");
+            throw new EmptyArgumentException("description of the todo", "add");
         }
 
         assert parsedReq.length != 1 : "length of parsed request should be longer than one";
@@ -116,15 +119,15 @@ public class Parser {
      * @param request full user input
      * @return the prepared add command
      */
-    private Command prepareDeadline(String request) {
+    private Command prepareDeadline(String request) throws EmptyArgumentException, InvalidArgumentException {
         assert !request.equals("") : "request should not be empty";
         assert request.contains("deadline") : "request is a deadline";
 
         if (request.strip()
                 .length() == 8) {
-            return new IncorrectCommand("The description of a deadline cannot be empty.");
+            throw new EmptyArgumentException("description of the deadline", "add");
         } else if (!request.contains(" /by ")) {
-            return new IncorrectCommand("You left the date/time of the deadline empty!");
+            throw new EmptyArgumentException("date/time of the deadline", "add");
         }
 
         String next = request.substring(8);
@@ -133,9 +136,9 @@ public class Parser {
         String by = parsedReq[1].strip();
 
         if (desc.length() == 0) {
-            return new IncorrectCommand("The description of a deadline cannot be empty.");
+            throw new EmptyArgumentException("description of the deadline", "add");
         } else if (by.length() == 0) {
-            return new IncorrectCommand("You left the date/time of the deadline empty!");
+            throw new EmptyArgumentException("date/time of the deadline", "add");
         }
 
         assert desc.length() > 0 && by.length() > 0 : "description and by should exist";
@@ -159,7 +162,7 @@ public class Parser {
                             LocalTime.parse(by, TIME_IN)));
         case INVALID:
         default:
-            return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+            throw new InvalidArgumentException("date and/or time in one of the following formats:\n"
                     + "    yyyy-MM-dd HHmm\n"
                     + "    yyyy-MM-dd\n"
                     + "    or HHmm");
@@ -173,15 +176,15 @@ public class Parser {
      * @param request full user input
      * @return the prepared add command
      */
-    private Command prepareEvent(String request) {
+    private Command prepareEvent(String request) throws EmptyArgumentException, InvalidArgumentException {
         assert !request.equals("") : "request should not be empty";
         assert request.contains("event") : "request is an event";
 
         if (request.strip()
                 .length() == 5) {
-            return new IncorrectCommand("The description of an event cannot be empty.");
+            throw new EmptyArgumentException("description of the event", "add");
         } else if (!request.contains(" /at ")) {
-            return new IncorrectCommand("You left the date/time of the event empty!");
+            throw new EmptyArgumentException("date/time of the event", "add");
         }
 
         String next = request.substring(5);
@@ -190,9 +193,9 @@ public class Parser {
         String at = parsedReq[1].strip();
 
         if (desc.length() == 0) {
-            return new IncorrectCommand("The description of an event cannot be empty.");
+            throw new EmptyArgumentException("description of the event", "add");
         } else if (at.length() == 0) {
-            return new IncorrectCommand("You left the date/time of the event empty!");
+            throw new EmptyArgumentException("date/time of the event", "add");
         }
         assert desc.length() > 0 && at.length() > 0 : "description and at should exist";
 
@@ -215,7 +218,7 @@ public class Parser {
                             LocalTime.parse(at, TIME_IN)));
         case INVALID:
         default:
-            return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+            throw new InvalidArgumentException("date and/or time in one of the following formats:\n"
                     + "    yyyy-MM-dd HHmm\n"
                     + "    yyyy-MM-dd\n"
                     + "    or HHmm");
@@ -228,13 +231,13 @@ public class Parser {
      * @param request full user input
      * @return the prepared delete command
      */
-    private Command prepareDelete(String request) {
+    private Command prepareDelete(String request) throws EmptyArgumentException, InvalidArgumentException {
         assert !request.equals("") : "request should not be empty";
         assert request.contains("delete") : "request is a delete";
 
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
-            return new IncorrectCommand("Please tell me which task you would like to delete.");
+            throw new EmptyArgumentException("task number of the task", "delete");
         }
 
         assert parsedReq.length == 2 : "delete command should have an argument";
@@ -242,7 +245,7 @@ public class Parser {
             return new DeleteCommand(
                     Integer.parseInt(parsedReq[1]));
         } catch (NumberFormatException n) {
-            return new IncorrectCommand("Please enter a valid task number to delete!");
+            throw new InvalidArgumentException("valid task number to delete");
         }
     }
 
@@ -252,13 +255,13 @@ public class Parser {
      * @param request full user input
      * @return the prepared mark command
      */
-    private Command prepareMark(String request) {
+    private Command prepareMark(String request) throws InvalidArgumentException, EmptyArgumentException {
         assert !request.equals("") : "request should not be empty";
         assert request.contains("mark") : "request is a mark";
 
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
-            return new IncorrectCommand("Please tell me which task you would like to be marked as done.");
+            throw new EmptyArgumentException("task number of the task", "mark as done");
         } else {
             assert parsedReq.length == 2 : "mark command should have an argument";
 
@@ -266,7 +269,7 @@ public class Parser {
                 return new MarkCommand(
                         Integer.parseInt(parsedReq[1]));
             } catch (NumberFormatException n) {
-                return new IncorrectCommand("Please enter a valid task to mark as done!");
+                throw new InvalidArgumentException("valid task to mark as done");
             }
         }
     }
@@ -277,14 +280,14 @@ public class Parser {
      * @param request full user input
      * @return the prepared unmark command
      */
-    private Command prepareUnmark(String request) {
+    private Command prepareUnmark(String request) throws EmptyArgumentException, InvalidArgumentException {
         assert !request.equals("") : "request should not be empty";
         assert request.contains("unmark") : "request is an unmark";
 
         String[] parsedReq = request.split(" ");
 
         if (parsedReq.length != 2) {
-            return new IncorrectCommand("Please tell me which task you would like to be marked as undone.");
+            throw new EmptyArgumentException("task number of the task", "mark as undone");
         } else {
             assert parsedReq.length == 2 : "unmark command should have an argument";
 
@@ -292,7 +295,7 @@ public class Parser {
                 return new UnmarkCommand(
                         Integer.parseInt(parsedReq[1]));
             } catch (NumberFormatException n) {
-                return new IncorrectCommand("Please enter a valid task number to mark as undone!");
+                throw new InvalidArgumentException("valid task number to make as undone");
             }
         }
     }
@@ -303,24 +306,25 @@ public class Parser {
      * @param request full user input
      * @return the prepared find command
      */
-    private Command prepareFind(String request) {
+    private Command prepareFind(String request) throws EmptyArgumentException {
         assert !request.equals("") : "request should not be empty";
         assert request.contains("find") : "request is a find";
 
         if (request.strip().equals("find")) {
-            return new IncorrectCommand("Please provide me with keywords for the task(s) you would like to find.");
+            throw new EmptyArgumentException("keyword(s) for the task(s)", "find");
         }
 
         String parsedReq = request.substring(6);
         return new FindCommand(parsedReq);
     }
 
-    private Command prepareEdit(String request) {
+    private Command prepareEdit(String request) throws EmptyArgumentException, InvalidArgumentException,
+            ExcessArgumentException {
         assert !request.equals("") : "request should not be empty";
         assert request.contains("update") : "request is a update";
 
         if (request.strip().equals("edit")) {
-            return new IncorrectCommand("Please specify the task that you would like to update.");
+            throw new EmptyArgumentException("task number of the task", "update");
         }
 
         String next = request.substring(4).strip();
@@ -328,25 +332,30 @@ public class Parser {
         try {
             taskIndex = Integer.parseInt(String.valueOf(next.charAt(0)));
         } catch (NumberFormatException e) {
-            return new IncorrectCommand("Please specify the task you would like to update.");
+            throw new InvalidArgumentException("task to be edited");
         }
 
         String edits = next.substring(1).strip();
         if (edits.length() == 0) {
-            return new IncorrectCommand("You did not specify any edits!");
+            throw new EmptyArgumentException("edits", "edit the tasks with");
         }
 
         if (edits.startsWith("desc/")) {
             String description = edits.substring(5);
             if (description.contains("desc/") || description.contains("dt/")) {
-                return new IncorrectCommand("Please input only one edit at a time!");
+                throw new ExcessArgumentException("a single edit");
+            } else if (description.length() == 0) {
+                throw new EmptyArgumentException("description", "update the task with");
             }
             return new EditCommand(taskIndex, description);
         } else if (edits.startsWith("dt/")) {
             String dateTime = edits.substring(3).strip();
             if (dateTime.contains("desc/") || dateTime.contains("dt/")) {
-                return new IncorrectCommand("Please input only one edit at a time!");
+                throw new ExcessArgumentException("a single edit");
+            } else if (dateTime.length() == 0) {
+                throw new EmptyArgumentException("date and/or time", "update the task with");
             }
+
             Format f = Parser.parseDateTime(dateTime);
 
             switch (f) {
@@ -365,14 +374,14 @@ public class Parser {
                         LocalTime.parse(dateTime, TIME_IN));
             case INVALID:
             default:
-                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+                throw new InvalidArgumentException("date and/or time in one of the following formats:\n"
                         + "    yyyy-MM-dd HHmm\n"
                         + "    yyyy-MM-dd\n"
                         + "    or HHmm");
             }
         }
 
-        return new IncorrectCommand("Prefix your edit with desc/ for descriptions and dt/ for date and/or time");
+        throw new InvalidArgumentException("edit with prefix desc/ for descriptions and dt/ for date and/or time");
     }
 
     /**
@@ -381,30 +390,33 @@ public class Parser {
      * @param input the user's initial input
      * @return the command based on the user's input
      */
-    public Command parseCommand(String input) {
-        if (input.strip().equals("bye")) {
-            return new ExitCommand();
-        } else if (input.strip().equals("list")) {
-            return new ListCommand();
-        } else if (input.startsWith("mark")) {
-            return prepareMark(input);
-        } else if (input.startsWith("unmark")) {
-            return prepareUnmark(input);
-        } else if (input.startsWith("todo")) {
-            return prepareTodo(input);
-        } else if (input.startsWith("deadline")) {
-            return prepareDeadline(input);
-        } else if (input.startsWith("event")) {
-            return prepareEvent(input);
-        } else if (input.startsWith("delete")) {
-            return prepareDelete(input);
-        } else if (input.startsWith("find")) {
-            return prepareFind(input);
-        } else if (input.startsWith("edit")) {
-            return prepareEdit(input);
-        }
+    public Command parseCommand(String input) throws DukeException {
+        String commandPrefix = ((input.split(" "))[0]).toUpperCase();
 
-        return new IncorrectCommand("My apologies, but it seems that I do not understand your request.");
+        switch (commandPrefix) {
+        case "BYE":
+            return new ExitCommand();
+        case "LIST":
+            return new ListCommand();
+        case "MARK":
+            return prepareMark(input);
+        case "UNMARK":
+            return prepareUnmark(input);
+        case "TODO":
+            return prepareTodo(input);
+        case "DEADLINE":
+            return prepareDeadline(input);
+        case "EVENT":
+            return prepareEvent(input);
+        case "DELETE":
+            return prepareDelete(input);
+        case "FIND":
+            return prepareFind(input);
+        case "EDIT":
+            return prepareEdit(input);
+        default:
+            throw new DukeException("My apologies, but it seems that I do not understand your request.");
+        }
     }
 
     /**

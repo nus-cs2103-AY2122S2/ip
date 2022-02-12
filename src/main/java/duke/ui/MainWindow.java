@@ -120,23 +120,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String userText = userInput.getText();
-        Command command = new Parser().parseCommand(userText);
+        Command command;
         DialogBox userDialogueBox = DialogBox.getUserDialog(userText, userImage);
         try {
+            command = new Parser().parseCommand(userText);
             String dukeText = command.execute(tasks, ui, storage);
             DialogBox dukeDialogueBox = DialogBox.getDukeDialog(dukeText, dukeImage);
             dialogContainer.getChildren().addAll(
                     userDialogueBox,
                     dukeDialogueBox
             );
-        } catch (DukeException e) {
-            DialogBox dukeDialogueBox = DialogBox.getDukeDialog(e.getMessage(), dukeImage);
-                    dialogContainer.getChildren().addAll(
-                    userDialogueBox,
-                    dukeDialogueBox
-            );
-        } finally {
-            userInput.clear();
+
             if (command.isExit()) {
                 new Timer().schedule(new TimerTask() {
                     @Override
@@ -145,6 +139,14 @@ public class MainWindow extends AnchorPane {
                     }
                 }, 2000);
             }
+        } catch (DukeException e) {
+            DialogBox dukeDialogueBox = DialogBox.getDukeDialog(e.getMessage(), dukeImage);
+                    dialogContainer.getChildren().addAll(
+                    userDialogueBox,
+                    dukeDialogueBox
+            );
+        } finally {
+            userInput.clear();
         }
     }
 }
