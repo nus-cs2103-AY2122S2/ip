@@ -1,6 +1,8 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Encapsulates a list of tasks recorded by Duke.
@@ -15,14 +17,8 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    /**
-     * Returns a task specified by a given index.
-     *
-     * @param index the index of the task (starting from 1)
-     * @return
-     */
-    public Task getTask(int index) {
-        return this.tasks.get(index - 1);
+    private TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -42,6 +38,36 @@ public class TaskList {
      */
     public void deleteTask(int index) {
         this.tasks.remove(index - 1);
+    }
+
+    /**
+     * Returns a task specified by a given index.
+     *
+     * @param index the index of the task (starting from 1)
+     * @return
+     */
+    public Task getTask(int index) {
+        return this.tasks.get(index - 1);
+    }
+
+    /**
+     * Gets all tasks that are scheduled within a specified number
+     * of days from today, including tasks that are scheduled today.
+     *
+     * @param daysFromToday the number of days from today.
+     * @return a task list containing all such tasks.
+     */
+    public TaskList getUpcomingTasks(int daysFromToday) {
+        LocalDate today = LocalDate.now();
+        LocalDate endDate = today.plusDays(daysFromToday + 1);
+        ArrayList upcomingTasks = tasks.stream()
+                .filter(task -> task instanceof ScheduledTask)
+                .map(scheduledTask -> (ScheduledTask) scheduledTask)
+                .filter(scheduledTask -> !(scheduledTask.isEarlierThan(today)))
+                .filter(scheduledTask -> scheduledTask.isEarlierThan(endDate))
+                .sorted()
+                .collect(Collectors.toCollection(ArrayList::new));
+        return new TaskList(upcomingTasks);
     }
 
     /**

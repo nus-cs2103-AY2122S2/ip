@@ -10,6 +10,7 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.RemindCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -31,6 +32,7 @@ public class Parser {
     private static final String UNMARK = "unmark";
     private static final String BYE = "bye";
     private static final String FIND = "find";
+    private static final String REMIND = "remind";
 
     /**
      * Parses user inputs to produce commands understood by Duke.
@@ -63,6 +65,8 @@ public class Parser {
                 return new ByeCommand();
             case FIND:
                 return new FindCommand(details);
+            case REMIND:
+                return new RemindCommand(parseNumberOfDays(details));
             default:
                 throw new DukeException(String.format("Sorry, the command '%s' is not supported.", commandString));
             }
@@ -71,11 +75,11 @@ public class Parser {
         }
     }
 
-    private static Todo makeTodo(String userInput) throws DukeException {
-        if (userInput.strip().equals("")) {
+    private static Todo makeTodo(String description) throws DukeException {
+        if (isEmptyString(description)) {
             throw new DukeException("Please enter a description for the todo task.");
         }
-        return new Todo(userInput);
+        return new Todo(description);
     }
 
     private static Deadline makeDeadline(String userInput) throws DukeException {
@@ -102,24 +106,44 @@ public class Parser {
 
     private static boolean isInvalidDetails(String[] taskDetails) {
         boolean isTooShort = taskDetails.length == 1;
-        boolean hasNoDescription = taskDetails[0].strip().equals("");
-        boolean hasNoDate = taskDetails[1].strip().equals("");
+        boolean hasNoDescription = isEmptyString(taskDetails[0]);
+        boolean hasNoDate = isEmptyString(taskDetails[1]);
         return isTooShort || hasNoDescription || hasNoDate;
     }
 
     private static int convertIndex(String indexString, int taskListLength) throws DukeException {
-        if (indexString.strip().equals("")) {
+        if (isEmptyString(indexString)) {
             throw new DukeException("Please specify a task.");
         }
-        int index;
-        try {
-            index = Integer.parseInt(indexString);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Please specify a task using its index in the task list.");
-        }
+        checkValidNumber(indexString);
+        int index = Integer.parseInt(indexString);
         if (index < 1 || index > taskListLength) {
             throw new DukeException("Please specify a valid task index.");
         }
         return index;
+    }
+
+    private static int parseNumberOfDays(String userInput) throws DukeException {
+        if (isEmptyString(userInput)) {
+            return RemindCommand.DEFAULT_NUM_DAYS;
+        }
+        checkValidNumber(userInput);
+        int numberOfDays = Integer.parseInt(userInput);
+        if (numberOfDays < 0) {
+            throw new DukeException("Please specify a positive number of days from today for the reminder.");
+        }
+        return numberOfDays;
+    }
+
+    private static boolean isEmptyString(String userInput) {
+        return userInput.strip().equals("");
+    }
+
+    private static void checkValidNumber(String userInput) throws DukeException {
+        try {
+            Integer.parseInt(userInput);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please specify a task using its index in the task list.");
+        }
     }
 }

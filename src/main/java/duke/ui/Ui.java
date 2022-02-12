@@ -70,7 +70,7 @@ public class Ui {
     }
 
     /**
-     * Gives the contents of the task list as a String.
+     * Gives the contents of the task list.
      *
      * @param taskList the task list to be shown.
      * @return a String containing the contents of the task list.
@@ -127,7 +127,7 @@ public class Ui {
     }
 
     /**
-     * Gives the search results of a FindCommand execution.
+     * Gives the results of searching a task list.
      *
      * @param findResults the tasks found, in the form of a task list.
      * @return the search results of the FindCommand execution.
@@ -137,9 +137,34 @@ public class Ui {
     }
 
     /**
+     * Gives a message showing the tasks which are scheduled within a specified
+     * number of days from today.
+     *
+     * @param upcomingTasks the tasks that are scheduled within a specified number of days from today.
+     * @param daysFromToday the number of days from today.
+     * @return the upcoming tasks, with an accompanying message from Duke.
+     */
+    public String showRemindResult(TaskList upcomingTasks, int daysFromToday) {
+        boolean isReminderForToday = daysFromToday == 0;
+        boolean hasEmptySchedule = upcomingTasks.getLength() == 0;
+
+        if (isReminderForToday && hasEmptySchedule) {
+            return "You're free! You have no tasks scheduled for today!";
+        } else if (!isReminderForToday && hasEmptySchedule) {
+            return "You're free! You have no tasks scheduled for the next " + daysFromToday + " days!";
+        } else if (isReminderForToday && !hasEmptySchedule) {
+            return "Better get to work! You have the following task(s) scheduled for today:\n" + upcomingTasks;
+        } else {
+            return "For the next " + daysFromToday + " day(s), you have the following task(s) scheduled:\n"
+                    + upcomingTasks;
+        }
+    }
+
+    /**
      * Gives a goodbye message.
      */
     public String showGoodbye() {
         return "Bye! Hope to see you again!";
     }
+
 }
