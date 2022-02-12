@@ -39,7 +39,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        return "Thanks for waiting, let me introduce myself! Hello from\n" + logo;
+        return "Hello from\n" + logo;
     }
 
     /**
