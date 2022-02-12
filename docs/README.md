@@ -1,8 +1,8 @@
-TaskJamie is a desktop app used to keep track of tasks. It provides a Graphical User Interface (GUI)  
-# User Guide
+TaskJamie is a desktop app used to keep track of tasks. It provides a Graphical User Interface (GUI) for users to input their commands.
+# User Guide (Set up)
 
 1. Ensure that you have Java `11` or above installed in your Computer.
-2. Download the latest `duke.jar` from  [here](https://github.com/ChanWeiJie/ip/releases/tag/A-Jar)
+2. Download the latest `duke.jar` from  [here](https://github.com/ChanWeiJie/ip/releases/tag/A-Jar2)
 3. Copy the file to the folder you want to use as the _home folder_ for your TaskJamie.
 4. Double-click the file to start the app. The GUI should not appear similar to the one found [here](https://chanweijie.github.io/ip/Ui.png). This is because
 the app does not contain any sample data. 
@@ -23,11 +23,16 @@ Format for `deadline`: `deadline DESCRIPTION /by DATE TIME`
 - `TIME`: `hhmm`
 - `DATE`: `yyyy-mm-dd`
 
-Example of usage: `todo run`
+Example of usage: 
+`todo run`
+`deadline return book /by 2022-05-28 2000`
+`event book sale /at 2022-05-27 0800`		  
 
-Expected outcome: TaskJamie would record that task and save it. 
-TaskJamie should show a message `Got it. I've added this task: task_description` and TaskJamie would tell you how many
-tasks are in the list. Eg: `Now you have x tasks in your list.`
+Expected outcome: 
+
+TaskJamie would record that task and save it. 
+TaskJamie should show a message `Got it. I've added this task: task_description` 
+and TaskJamie would tell you how many tasks are in the list. Eg: `Now you have x tasks in your list.`
 
 
 ## Deleting a task : `delete`
@@ -40,7 +45,9 @@ Format : `delete INDEX`
 
 Example of usage: `delete 1`
 
-Expected outcome: TaskJamie will remove the task at index 1 and should show a message `Got it. I've removed this task: task_description`
+Expected outcome: 
+TaskJamie will remove the task at index 1.
+TaskJamie should show a message `Got it. I've removed this task: task_description`
 and TaskJamie would tell you how many tasks are left in the list. Eg: `Now you have x tasks in your list.`
 
 
@@ -61,9 +68,14 @@ Format for `unmark` : `unmark INDEX`
 
 - `INDEX` would be the index of the task to be deleted from the list.
 
-Example usage : `mark 1`
+Example usage : 
+`mark 1`
+`unmark 1` 
 
-Expected outcome: TaskJamie will mark the task at index 1 and should show a message `Nice! I've marked this task as done: task_description`
+Expected outcome:
+ 
+TaskJamie will mark the task at index 1.
+TaskJamie should show a message `Nice! I've marked this task as done: task_description`
 and TaskJamie would Mark and `X` on that task to signify that the task is done. The negation is true as well (for unmark).
 
 
@@ -77,8 +89,9 @@ Format : `schedule DATE`
 
 Example usage : `schedule 2022-05-29`
 
-Expected outcome: TaskJamie will list all the task that are associated with the given date and should 
-show a message `Here is your Schedule for DATE`.
+Expected outcome: 
+TaskJamie will list all the task that are associated with the given date and 
+should show a message `Here is your Schedule for DATE`.
 
 ## Exiting the program : `bye`
 
