@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
+/**
+ * Compares Tasks to determine sort order
+ */
 public class TaskComparator implements Comparator<Task> {
     @Override
     public int compare(Task task, Task otherTask) {

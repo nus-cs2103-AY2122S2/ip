@@ -22,7 +22,7 @@ public class Deadline extends Task {
     private LocalDateTime datetime;
 
     /**
-     * Creation of Deadline Task
+     * Creates Deadline Task
      *
      * @param description String of task description
      * @param time String representing when task is due

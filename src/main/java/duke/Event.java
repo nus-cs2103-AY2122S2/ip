@@ -22,7 +22,7 @@ public class Event extends Task {
     private LocalDateTime datetime;
 
     /**
-     * Creation of Event Task
+     * Creates Event Task
      *
      * @param description String of task description
      * @param time String representing when task is occurring
