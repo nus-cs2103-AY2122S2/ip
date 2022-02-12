@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class DukeIoException extends DukeException {
     /**
-     * Sole constructor for the <code>DukeIoException</code> class.
+     * Creates a <code>DukeIoException</code> object.
      *
      * @param message Error-specific message.
      */

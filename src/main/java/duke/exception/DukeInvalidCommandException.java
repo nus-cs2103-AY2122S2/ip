@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class DukeInvalidCommandException extends DukeException {
     /**
-     * Sole constructor for the <code>DukeInvalidCommandException</code> class.
+     * Creates a <code>DukeInvalidCommandException</code> object.
      *
      * @param message Error-specific message.
      */

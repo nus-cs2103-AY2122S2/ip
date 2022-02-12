@@ -19,7 +19,7 @@ public abstract class Task implements Serializable {
     private boolean isDone;
 
     /**
-     * Sole Constructor for {@link Task}.
+     * Creates a {@link Task} object.
      *
      * @param type Type of the task to be created.
      * @param description Description of the task.

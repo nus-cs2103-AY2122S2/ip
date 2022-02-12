@@ -44,6 +44,11 @@
       <property name="checkFormat" value="$1"/>
     </module>
 
+    <module name="MethodLength">
+      <property name="tokens" value="METHOD_DEF"/>
+      <property name="max" value="30"/>
+    </module>
+
     <!--
     IMPORT CHECKS
     -->
@@ -401,3 +406,4 @@
 
   </module>
 </module>
+

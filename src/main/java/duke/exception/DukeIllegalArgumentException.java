@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class DukeIllegalArgumentException extends DukeException {
     /**
-     * Sole constructor for the <code>DukeIllegalArgumentException</code> class.
+     * Creates a <code>DukeIllegalArgumentException</code> object.
      *
      * @param message Error-specific message.
      */

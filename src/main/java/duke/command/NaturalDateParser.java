@@ -75,7 +75,7 @@ class NaturalDateParser {
     }
 
     /**
-     * Get the singleton instance of <code>NaturalDateParser</code>.
+     * Returns the singleton instance of <code>NaturalDateParser</code>.
      *
      * @return The singleton instance of NaturalDateParser.
      */

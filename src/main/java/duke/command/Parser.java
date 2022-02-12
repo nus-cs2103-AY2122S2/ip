@@ -4,7 +4,7 @@ import duke.exception.DukeInvalidCommandException;
 import duke.task.TaskType;
 
 /**
- * Factory for {@link Command} objects.
+ * Creates {@link Command} objects.
  * Translates command strings to an instance of some subclass of <code>Command</code>
  * that can subsequently be executed.
  */
@@ -34,7 +34,19 @@ public class Parser {
         final String commandLowerCase = commandParts[0].toLowerCase();
         final String args = command.substring(commandLowerCase.length()).trim();
 
-        switch (commandLowerCase) {
+        return instantiateCommand(commandLowerCase, args);
+    }
+
+    /**
+     * Matches the supplied command word to the appropriate type of Command.
+     * @param commandWord The command word to identify the type of Command object to be created.
+     * @param args The argument string to be passed to the created Command object.
+     * @return A new instance of the Command class for the command word supplied.
+     * @throws DukeInvalidCommandException If the command word is invalid.
+     */
+    private static Command instantiateCommand(String commandWord, String args)
+            throws DukeInvalidCommandException {
+        switch (commandWord) {
         case COMMAND_EXIT:
             return new ExitCommand(args);
         case COMMAND_LIST:
@@ -42,7 +54,7 @@ public class Parser {
         case COMMAND_MARK:
             // Fallthrough
         case COMMAND_UNMARK:
-            return new MarkCommand(args, commandLowerCase.equals(COMMAND_MARK));
+            return new MarkCommand(args, commandWord.equals(COMMAND_MARK));
         case COMMAND_CREATE_TODO:
             return new CreateCommand(args, TaskType.TODO);
         case COMMAND_CREATE_DEADLINE:
@@ -60,7 +72,7 @@ public class Parser {
         case COMMAND_FIND:
             return new FindCommand(args);
         default:
-            throw new DukeInvalidCommandException(String.format("No such command: %s", commandLowerCase));
+            throw new DukeInvalidCommandException(String.format("No such command: %s", commandWord));
         }
     }
 }
