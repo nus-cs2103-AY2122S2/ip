@@ -6,7 +6,10 @@ import duke.ui.Ui;
 /**
  * Represents the instruction 'quit'.
  */
-final class Quit extends Instruction {
+final class QuitInstruction extends Instruction {
+
+    private static final String HELP_MESSAGE = "bye: quit the application.\n"
+            + "usage: bye";
 
     private static final String SEE_YOU_MESSAGE = "Bye!";
 
@@ -15,7 +18,7 @@ final class Quit extends Instruction {
      *
      * @param message The terminating command that signals the end of program.
      */
-    Quit(String message, TaskManager tasks) {
+    QuitInstruction(String message, TaskManager tasks) {
         super(message, tasks);
     }
 
@@ -26,7 +29,7 @@ final class Quit extends Instruction {
      */
     @Override
     public void act(Ui ui) {
-        ui.printMessage(Quit.SEE_YOU_MESSAGE);
+        ui.printMessage(QuitInstruction.SEE_YOU_MESSAGE);
     }
 
     /**
@@ -39,5 +42,14 @@ final class Quit extends Instruction {
     public String getOutputMessage() {
 
         return SEE_YOU_MESSAGE;
+    }
+
+    /**
+     * Get the help message for the current instruction.
+     *
+     * @return The help message.
+     */
+    static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 }

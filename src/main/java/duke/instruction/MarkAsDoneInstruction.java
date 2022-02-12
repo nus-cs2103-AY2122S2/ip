@@ -5,11 +5,14 @@ import duke.task.TaskManager;
 import duke.ui.Ui;
 
 /**
- * Represents the instruction "unmark".
+ * Represents the instruction "mark as done".
  */
-final class UnmarkAsDone extends Instruction {
+final class MarkAsDoneInstruction extends Instruction {
 
-    private final Task toUnmark;
+    private static final String HELP_MESSAGE = "mark: mark a task with given index as done.\n"
+            + "usage: mark <task_id>";
+
+    private final Task toMark;
 
     /**
      * Constructor 1. Initializes the instruction using an index of task.
@@ -17,21 +20,23 @@ final class UnmarkAsDone extends Instruction {
      * @param index The index of the task.
      * @param tasks The task manager to be used.
      */
-    private UnmarkAsDone(int index, TaskManager tasks) {
-        super("unmark", tasks);
-        this.toUnmark = tasks.getTaskIndex(index);
+    private MarkAsDoneInstruction(int index, TaskManager tasks) {
+
+        super("mark", tasks);
+        this.toMark = tasks.getTaskIndex(index);
     }
 
     /**
-     * Constructor 2. Takes in the whole instruction line and initializes the instruction.UnmarkAsDone instruction.
+     * Constructor 2. Takes in the whole instruction line and initializes the
+     * instruction.MarkAsDoneInstruction instruction.
      *
-     * @param instruction The line of instruction. It has to be guaranteed that the first word is 'unmark'.
+     * @param instruction The line of instruction. It has to be guaranteed that the first word is 'mark'.
      * @param tasks The task manager to be used.
-     * @throws InvalidInstructionException If the instruction cannot be interpreted.
+     * @throws InvalidInstructionException If it cannot find the task to be deleted.
      */
-    protected UnmarkAsDone(String instruction, TaskManager tasks) throws InvalidInstructionException {
+    protected MarkAsDoneInstruction(String instruction, TaskManager tasks) throws InvalidInstructionException {
 
-        this(UnmarkAsDone.parseInstruction(instruction, tasks), tasks);
+        this(MarkAsDoneInstruction.parseInstruction(instruction, tasks), tasks);
     }
 
     /**
@@ -39,6 +44,7 @@ final class UnmarkAsDone extends Instruction {
      * index of task to be marked.
      *
      * @param instruction The line of instruction.
+     * @param tasks The task manager used by this instruction.
      * @return The index of the object to be marked.
      * @throws InvalidInstructionException If (i) the instruction has no valid integer to be parsed;
      * or (ii) the index is out of range.
@@ -49,15 +55,15 @@ final class UnmarkAsDone extends Instruction {
         int index;
 
         if (args.length < 2) {
-            throw new InvalidInstructionException("Oops, the index of the task to be unmarked cannot be empty!");
+            throw new InvalidInstructionException("Oops, the index of the task to be marked cannot be empty!");
         } else if (args.length > 2) {
-            throw new InvalidInstructionException("Oops, there should be only one index of task after 'unmark'.");
+            throw new InvalidInstructionException("Oops, there should be only one index of task after 'mark'.");
         }
 
         try {
             index = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            throw new InvalidInstructionException("Oops, unmark operation only accepts integer index!");
+            throw new InvalidInstructionException("Oops, mark operation only accepts integer index!");
         }
 
         if (!tasks.isValidIndex(index)) {
@@ -68,14 +74,14 @@ final class UnmarkAsDone extends Instruction {
     }
 
     /**
-     * Performs the action of marking a task as not done, and prints the message to the UI.
+     * Performs the action to mark the encapsulated task as done.
      *
      * @param ui The UI to be used by this instruction.
      */
     @Override
     public void act(Ui ui) {
-        TaskManager.markAsNotDone(this.toUnmark);
-        ui.printMessage("I've marked this task as not done yet:\n" + this.toUnmark);
+        TaskManager.markAsDone(this.toMark);
+        ui.printMessage("Nice! I've marked this task as done:\n     " + this.toMark);
     }
 
     /**
@@ -87,7 +93,16 @@ final class UnmarkAsDone extends Instruction {
      */
     public String getOutputMessage() {
 
-        TaskManager.markAsNotDone(this.toUnmark);
-        return "I've marked this task as not done yet:\n" + this.toUnmark;
+        TaskManager.markAsDone(this.toMark);
+        return "Nice! I've marked this task as done:\n     " + this.toMark;
+    }
+
+    /**
+     * Get the help message for the current instruction.
+     *
+     * @return The help message.
+     */
+    static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 }

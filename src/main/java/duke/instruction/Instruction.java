@@ -1,5 +1,8 @@
 package duke.instruction;
 
+import java.util.Arrays;
+import java.util.List;
+
 import duke.main.DukeException;
 import duke.task.Task;
 import duke.task.TaskManager;
@@ -13,6 +16,12 @@ public abstract class Instruction {
 
     private static final String TERMINATE_INSTRUCTION = "bye";
 
+    private static final List<Class<? extends Instruction>> INSTRUCTION_TYPES =
+            Arrays.asList(AddInstruction.class, DeleteInstruction.class,
+                    FindInstruction.class, HelpInstruction.class,
+                    ListTasksInstruction.class, MarkAsDoneInstruction.class,
+                    QuitInstruction.class, UnmarkAsDoneInstruction.class);
+
     protected TaskManager tasks;
     private String description;
 
@@ -25,6 +34,16 @@ public abstract class Instruction {
     protected Instruction(String description, TaskManager tasks) {
         this.description = description;
         this.tasks = tasks;
+    }
+
+    /**
+     * Constructor to be used by subclasses that does not operate on
+     * tasks.
+     *
+     * @param description The description of the instruction.
+     */
+    protected Instruction(String description) {
+        this.description = description;
     }
 
     protected static String getTerminateInstruction() {
@@ -53,26 +72,28 @@ public abstract class Instruction {
 
         switch (type) {
         case "list":
-            return new ListTasks(tasks);
+            return new ListTasksInstruction(tasks);
         case Instruction.TERMINATE_INSTRUCTION:
-            return new Quit(Instruction.TERMINATE_INSTRUCTION, tasks);
+            return new QuitInstruction(Instruction.TERMINATE_INSTRUCTION, tasks);
         case "mark":
             // Mark the task as done. If the second parameter is not an integer, or if the task does not exit, throw
             // an exception. (To be implemented later)
-            return new MarkAsDone(instruction, tasks);
+            return new MarkAsDoneInstruction(instruction, tasks);
         case "unmark":
             // Mark the task as not done. If the second parameter is not an integer, or if the task does not exit,
             // throw an exception. (To be implemented later)
-            return new UnmarkAsDone(instruction, tasks);
+            return new UnmarkAsDoneInstruction(instruction, tasks);
         case "todo":
         case "event":
         case "deadline":
             // These three cases are used to add tasks of different types.
-            return new Add(Task.of(instruction), tasks);
+            return new AddInstruction(Task.of(instruction), tasks);
         case "delete":
-            return new Delete(instruction, tasks);
+            return new DeleteInstruction(instruction, tasks);
         case "find":
-            return new Find(instruction, tasks);
+            return new FindInstruction(instruction, tasks);
+        case "help":
+            return new HelpInstruction();
         default:
             throw new InvalidInstructionException("Oops, I'm not sure what you mean.");
         }
@@ -98,8 +119,9 @@ public abstract class Instruction {
      * Performs the associated action of the task. By default, there is no action associated to a task.
      *
      * @param ui The UI to be used by this instruction.
+     * @throws DukeException If any exception occurs when dealing with the instruction.
      */
-    public abstract void act(Ui ui);
+    public abstract void act(Ui ui) throws DukeException;
 
     /**
      * Returns whether current instruction is a terminating instruction.
@@ -107,7 +129,7 @@ public abstract class Instruction {
      * @return True if current instruction is a terminating instruction.
      */
     public boolean isTerminatingInstruction() {
-        return this instanceof Quit;
+        return this instanceof QuitInstruction;
     }
 
     /**
@@ -116,6 +138,16 @@ public abstract class Instruction {
      * will not be printed to the output stream.
      *
      * @return The output message to the GUI.
+     * @throws DukeException If unable to get the output message.
      */
-    public abstract String getOutputMessage();
+    public abstract String getOutputMessage() throws DukeException;
+
+    /**
+     * Returns a list of classes that represent each type of instructions.
+     *
+     * @return The list.
+     */
+    protected static List<Class<? extends Instruction>> getInstructionTypes() {
+        return INSTRUCTION_TYPES;
+    }
 }

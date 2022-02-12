@@ -9,12 +9,14 @@ import duke.ui.Ui;
 /**
  * Represents the instruction "list".
  */
-final class ListTasks extends Instruction {
+final class ListTasksInstruction extends Instruction {
 
+    private static final String HELP_MESSAGE = "list: list all the active tasks.\n"
+            + "usage: list";
     /**
      * Constructor of the instruction, adds the description.
      */
-    ListTasks(TaskManager tasks) {
+    ListTasksInstruction(TaskManager tasks) {
         super("list", tasks);
     }
 
@@ -43,6 +45,15 @@ final class ListTasks extends Instruction {
         List<Task> tasks = this.tasks.listOfTasks();
 
         return TaskManager.listToString(tasks);
+    }
+
+    /**
+     * Get the help message for the current instruction.
+     *
+     * @return The help message.
+     */
+    protected static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 
 }

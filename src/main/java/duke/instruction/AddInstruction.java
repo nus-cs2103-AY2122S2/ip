@@ -7,7 +7,13 @@ import duke.ui.Ui;
 /**
  * Represents the 'add' instruction to main.Duke.
  */
-public final class Add extends Instruction {
+public final class AddInstruction extends Instruction {
+
+    private static final String HELP_MESSAGE = "add: adds a task (todo/deadline/event) "
+            + "to the task list.\n"
+            + "usage: 1. todo <task_name>"
+            + "       2. deadline <task_name> /by <YYYY-MM-DD>"
+            + "       3. event <task_name> /at <time_in_any_format>";
 
     private final Task task;
 
@@ -17,7 +23,7 @@ public final class Add extends Instruction {
      * @param task The task to be added.
      * @param tasks The task manager to be used.
      */
-    protected Add(Task task, TaskManager tasks) throws IllegalArgumentException {
+    protected AddInstruction(Task task, TaskManager tasks) throws IllegalArgumentException {
 
         super("add", tasks);
         this.task = task;
@@ -42,5 +48,15 @@ public final class Add extends Instruction {
      */
     public String getOutputMessage() {
         return tasks.addTask(task);
+    }
+
+
+    /**
+     * Get the help message for the current instruction.
+     *
+     * @return The help message.
+     */
+    protected static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 }
