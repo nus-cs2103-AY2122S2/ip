@@ -39,7 +39,8 @@ public class SearchCommand extends Command {
         for (int i = 0; i < tasks.getSize(); i++) {
             LocalDate currDate = tasks.getByIndex(i).getDate();
             if (currDate != null && currDate.equals(date)) {
-                searchText.append("    ").append(i + 1).append(". ")
+                String index = String.valueOf(i + 1);
+                searchText.append("    ").append(String.format("%1$3s", index)).append(". ")
                         .append(tasks.getByIndex(i))
                         .append("\n");
             }

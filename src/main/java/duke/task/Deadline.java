@@ -7,7 +7,7 @@ public class Deadline extends Task {
     private final LocalDate by;
 
     /**
-     * Represents task deadline.
+     * Represents Deadline.
      *
      * @param task tasks for deadline.
      * @param by   time by.
@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Changes done status by generating new Task.
+     * Changes done status by generating new Deadline.
      *
      * @param task tasks for deadline.
      * @param by   time by.
@@ -26,6 +26,19 @@ public class Deadline extends Task {
      */
     public Deadline(String task, LocalDate by, boolean isDone) {
         super(task, isDone);
+        this.by = by;
+    }
+
+    /**
+     * Changes status by generating new Deadline.
+     *
+     * @param task tasks for task.
+     * @param isDone done status.
+     * @param by   time by.
+     * @param priority priority status.
+     */
+    public Deadline(String task, LocalDate by, boolean isDone, Priority priority) {
+        super(task, isDone, priority);
         this.by = by;
     }
 
@@ -40,9 +53,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public Deadline setPriority(Priority priority) {
+        boolean isDone = super.getDoneStatus() == 1;
+        return new Deadline(super.getTask(), by, isDone, priority);
+    }
+
+    @Override
     public String saveData() {
         int isDone = super.getDoneStatus();
-        return Type.D + " | " + isDone + " | " + super.getTask() + " | " + by;
+        return Type.D + " | " + isDone + " | " + super.getPriorityText() + " | " + super.getTask() + " | " + by;
     }
 
     @Override

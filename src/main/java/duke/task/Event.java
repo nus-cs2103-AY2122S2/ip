@@ -29,6 +29,19 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Changes status by generating new Deadline.
+     *
+     * @param task tasks for task.
+     * @param isDone done status.
+     * @param at   time at.
+     * @param priority priority status.
+     */
+    public Event(String task, LocalDate at, boolean isDone, Priority priority) {
+        super(task, isDone, priority);
+        this.at = at;
+    }
+
     @Override
     public Event mark() {
         return new Event(super.getTask(), at, true);
@@ -40,9 +53,15 @@ public class Event extends Task {
     }
 
     @Override
+    public Event setPriority(Priority priority) {
+        boolean isDone = super.getDoneStatus() == 1;
+        return new Event(super.getTask(), at, isDone, priority);
+    }
+
+    @Override
     public String saveData() {
         int isDone = super.getDoneStatus();
-        return Type.E + " | " + isDone + " | " + super.getTask() + " | " + at;
+        return Type.E + " | " + isDone + " | " + super.getPriorityText() + " | " + super.getTask() + " | " + at;
     }
 
     @Override

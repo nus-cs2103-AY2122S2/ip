@@ -55,6 +55,7 @@ public class DialogBox extends HBox {
     private void flip() {
         dialog.setTranslateX(10);
         dialog.setStyle("-fx-text-fill:black;"
+                + "-fx-font-family: 'Lucida Console';"
                 + "-fx-font-size: 12;"
                 + "-fx-padding: 5 10;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);"
