@@ -29,7 +29,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setResizable(false);
-            stage.setTitle("Duke");
+            stage.setTitle("YQ Chatbot");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

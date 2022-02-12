@@ -7,7 +7,7 @@ import duke.exceptions.DukeException;
  * in which the user interacts with.
  */
 public class UserInterface {
-    private static final String INTRO = "Hello! I'm YQ, your personal assistant\n" + "What can I do for you?\n";
+    private static final String INTRO = "Hello! I'm YQ, your personal assistant chatbot\n" + "What can I do for you?\n";
 
     /**
      * Returns a String containing the introduction message.
