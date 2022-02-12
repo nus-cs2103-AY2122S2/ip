@@ -25,7 +25,6 @@ public class Storage {
      *                 storage of the tasks will be located at.
      */
     public Storage(String filePath) {
-        //initialize Path object
         String dataPath = System.getProperty("user.dir") + filePath;
         path = Paths.get(dataPath);
         createFile();
@@ -34,12 +33,12 @@ public class Storage {
     /**
      * Creates file to store tasks.
      */
-    public static void createFile() {
+    private static void createFile() {
         File dataDir = new File("./data");
         dataDir.mkdirs();
-        //create file
         try {
             Files.createFile(path);
+            assert Files.exists(path) : "File does not exists";
             System.out.println("File has been created...");
 
         } catch (IOException e) {
@@ -61,6 +60,8 @@ public class Storage {
 
     /**
      * Returns tasks from specified file.
+     *
+     * @return
      */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -75,9 +76,11 @@ public class Storage {
                 tasks.add(new Event(item[1].equals("1"), item[2], item[3]));
                 break;
             default:
+                assert item[1].equals("T");
                 tasks.add(new Todo(item[1].equals("1"), item[2]));
             }
         }
+        assert tasks != null;
         return tasks;
     }
 }
