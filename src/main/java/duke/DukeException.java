@@ -3,10 +3,13 @@ package duke;
 import duke.common.Constant;
 
 /**
- * This class handles errors in Duke.
+ * A class that handles errors in Duke.
  */
 public class DukeException extends Exception {
 
+    /**
+     * A class that invalid command errors.
+     */
     public static class DukeInvalidCommandException extends DukeException {
         @Override
         public String toString() {
@@ -14,6 +17,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles commands that require descriptions but has no descriptions.
+     */
     public static class DukeNoDescriptionFoundException extends DukeException {
         @Override
         public String toString() {
@@ -21,6 +27,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles commands that require time but has no time.
+     */
     public static class DukeTimeNotFoundException extends DukeException {
         @Override
         public String toString() {
@@ -28,6 +37,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles invalid date time format.
+     */
     public static class DukeDateTimeFormatException extends DukeException {
         @Override
         public String toString() {
@@ -35,6 +47,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * TA class that handles input time that are in the past.
+     */
     public static class DukePastTimeException extends DukeException {
         @Override
         public String toString() {
@@ -42,6 +57,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles empty task index.
+     */
     public static class DukeTaskNotFoundException extends DukeException {
         @Override
         public String toString() {
@@ -49,6 +67,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles invalid task index.
+     */
     public static class DukeNotAValidNumberException extends DukeException {
         @Override
         public String toString() {
@@ -56,6 +77,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles doing operation on tasks when the list is empty.
+     */
     public static class DukeEmptyTaskException extends DukeException {
         @Override
         public String toString() {
@@ -63,6 +87,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles IO errors.
+     */
     public static class DukeIoException extends DukeException {
         @Override
         public String toString() {
@@ -70,6 +97,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles marking tasks that are already marked.
+     */
     public static class DukeMarkedException extends DukeException {
         @Override
         public String toString() {
@@ -77,6 +107,9 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * A class that handles unmarking tasks that are already unmarked.
+     */
     public static class DukeUnMarkException extends DukeException {
         @Override
         public String toString() {

@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * Create an instance of Duke with default path.
+     * Creates an instance of Duke with default path.
      */
     public Duke() {
         this(DEFAULT_PATH);

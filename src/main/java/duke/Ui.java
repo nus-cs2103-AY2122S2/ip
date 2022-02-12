@@ -37,7 +37,7 @@ public class Ui {
     public String startMessage() {
         String msg = "Hello! I am Duke.\n"
                 + "Your wish is my command.";
-        return OUTPUT_NAME + "\n" + msg + "\n";
+        return msg + "\n";
     }
 
     /**
@@ -46,8 +46,8 @@ public class Ui {
      * @return string of a list of tasks.
      */
     public String listMessage() {
-        String msg = "Here are the tasks in your list-\n" + taskList;
-        return OUTPUT_NAME + "\n" + msg;
+        String msg = "Here are the tasks in your list:\n" + taskList;
+        return msg;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Ui {
      */
     public String endMessage() {
         String msg = "don't leave me don't leave me.";
-        return OUTPUT_NAME + "\n" + msg + "\n";
+        return msg + "\n";
     }
 
     /**
@@ -66,9 +66,9 @@ public class Ui {
      * @return string of a newly added task information.
      */
     public String addTaskMessage() {
-        String msg = "Got it. I have added this task-\n" + taskList.getTaskDescription(taskList.size()) + "\n";
+        String msg = "Got it. I have added this task:\n" + taskList.getTaskDescription(taskList.size()) + "\n";
         msg += "Now you have " + taskList.size() + " tasks.";
-        return OUTPUT_NAME + "\n" + msg + "\n";
+        return msg + "\n";
     }
 
     /**
@@ -77,9 +77,9 @@ public class Ui {
      * @return string of latest deleted task information.
      */
     public String deleteMessage(String toDelete) {
-        String msg = "Noted. I've removed this task-\n" + toDelete + "\n";
+        String msg = "Noted. I've removed this task:\n" + toDelete + "\n";
         msg += "Now you have " + taskList.size() + " tasks.";
-        return OUTPUT_NAME + "\n" + msg + "\n";
+        return msg + "\n";
     }
 
     /**
@@ -89,7 +89,7 @@ public class Ui {
      */
     public String markMessage(int taskId) {
         String msg = "I have marked this as done.\n" + taskList.getTaskDescription(taskId);
-        return OUTPUT_NAME + "\n" + msg + "\n";
+        return msg + "\n";
     }
 
     /**
@@ -99,7 +99,7 @@ public class Ui {
      */
     public String unMarkMessage(int taskId) {
         String msg = "I have unmarked this task.\n" + taskList.getTaskDescription(taskId);
-        return OUTPUT_NAME + "\n" + msg + "\n";
+        return msg + "\n";
     }
 
     /**
@@ -119,10 +119,10 @@ public class Ui {
      */
     public String findMessage(String tasks) {
         if (tasks == null) {
-            return OUTPUT_NAME + "\n" + "Unable to find anything :(" + "\n";
+            return "Unable to find anything :(" + "\n";
         } else {
             String msg = "Here are the matching tasks in your list:\n" + tasks;
-            return OUTPUT_NAME + "\n" + msg;
+            return msg;
         }
     }
 
@@ -136,7 +136,6 @@ public class Ui {
 
         String msg = "You have " + remTasks.size() + " reminder"
                 + (remTasks.size() > 1 ? "s." : ".") + "\n";
-
         String deadlines = "";
         String events = "";
 
@@ -156,7 +155,7 @@ public class Ui {
         if (!events.equals("")) {
             msg += "\nEvent:\n" + events;
         }
-        return OUTPUT_NAME + "\n" + msg;
+        return msg;
     }
 
     /**
@@ -166,7 +165,6 @@ public class Ui {
      * @return error message.
      */
     public String showErrorMessage(String error) {
-        return OUTPUT_NAME + "\n" + error + "\n";
+        return error + "\n";
     }
-
 }

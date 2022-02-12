@@ -31,6 +31,12 @@ public class Deadline extends Task {
         return this.by;
     }
 
+
+    /**
+     * Returns the string of deadline.
+     *
+     * @return string of deadline.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.by.format(Constant.OUT_TIME_FORMATTER) + ")";

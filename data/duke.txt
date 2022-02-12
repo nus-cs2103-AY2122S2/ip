@@ -1,3 +1,2 @@
-E | 0 | party at usa | Feb 9 2022 20:00
-D | 0 | project | Feb 20 2022 23:59
-T | 1 | party
+E | 0 | end of year party | Dec 31 2022 23:59
+D | 0 | homework | May 2 2022 23:59

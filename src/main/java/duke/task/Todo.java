@@ -13,6 +13,11 @@ public class Todo extends Task {
         super(description, Type.TODO);
     }
 
+    /**
+     * Returns the string of todo.
+     *
+     * @return the string of todo.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

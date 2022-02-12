@@ -68,6 +68,11 @@ public abstract class Task {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Returns the string of task.
+     *
+     * @return the string of task.
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

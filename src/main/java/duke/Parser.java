@@ -33,7 +33,7 @@ public class Parser {
     }
 
     /**
-     * Main logic in handling user inputs based on commands entered.
+     * Handles main logic of processing user inputs based on commands entered.
      *
      * @return response after processing the input.
      */
@@ -75,9 +75,7 @@ public class Parser {
             default:
                 throw new DukeException.DukeInvalidCommandException();
             }
-
             taskList.save();
-
             return output;
         } catch (DukeException e) {
             throw e;
@@ -99,6 +97,7 @@ public class Parser {
                 throw new DukeException.DukeNoDescriptionFoundException();
             }
         }
+
         String commandInfo = commandLine[1];
         if (commandLine.length == 2 && !commandType.equals("todo")) {
             Task.Type taskType = null;
@@ -111,19 +110,15 @@ public class Parser {
                 taskType = Task.Type.EVENT;
                 separator = "/at";
             }
-            // check if instruction contains valid /by or /at keyword.
             if (!commandInfo.contains(separator)) {
                 throw new DukeException.DukeInvalidCommandException();
             }
-            // check if there is a description
             if (commandInfo.substring(0, commandInfo.indexOf(separator)).length() == 0) {
                 throw new DukeException.DukeNoDescriptionFoundException();
             }
-            // check if there is a time
             if (commandInfo.substring(commandInfo.indexOf(separator) + 3).length() == 0) {
                 throw new DukeException.DukeTimeNotFoundException();
             }
-
             String[] essentialInfo = commandInfo.split(separator);
             taskList.addTask(essentialInfo[0], parseGetTime(essentialInfo[1].trim()), taskType);
             return;

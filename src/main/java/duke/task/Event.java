@@ -31,6 +31,11 @@ public class Event extends Task {
         return this.at;
     }
 
+    /**
+     * Returns the string of event.
+     *
+     * @return the string of event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + this.at.format(Constant.OUT_TIME_FORMATTER) + ")";

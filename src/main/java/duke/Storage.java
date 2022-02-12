@@ -78,8 +78,8 @@ public class Storage {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        Scanner scanner = new Scanner(new File(this.filePath));
 
+        Scanner scanner = new Scanner(new File(this.filePath));
         int idx = 1;
         while (scanner.hasNext()) {
             String dataLine = scanner.nextLine();
@@ -94,7 +94,6 @@ public class Storage {
 
             boolean isDone = isDoneStr.equals("1");
             String description = taskArr[2];
-
             if (taskType.equals("T")) {
                 taskList.addTask(description, Task.Type.TODO);
             } else if (taskType.equals("D")) {

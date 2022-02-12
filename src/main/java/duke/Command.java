@@ -40,7 +40,7 @@ public enum Command {
     }
 
     /**
-     * Check if a command is valid.
+     * Checks if a command is valid.
      *
      * @param c command to be processed.
      * @return true if command is valid else false.
