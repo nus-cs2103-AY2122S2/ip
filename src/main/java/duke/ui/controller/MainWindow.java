@@ -16,10 +16,6 @@ import javafx.scene.paint.Color;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
- *
- * Reused with modifications from JavaFX tutorial at
- * https://se-education.org/guides/tutorials/javaFx.html
- * by Jeffrey Lum.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -58,6 +54,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        // @@author Jeffrey Lum
+        // Reused from JavaFX tutorial at
+        // https://se-education.org/guides/tutorials/javaFx.html
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -65,6 +64,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        // @@author
 
         if (duke.hasTerminated()) {
             // Disables input field and sets gray fill over application

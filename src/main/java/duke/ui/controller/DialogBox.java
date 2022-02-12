@@ -17,12 +17,9 @@ import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * This control represents a dialog box consisting of a Circle filled
+ * with an ImagePattern to represent the speaker's face and a label
  * containing text from the speaker.
- *
- * Reused with modifications from JavaFX tutorial at
- * https://se-education.org/guides/tutorials/javaFx.html
- * by Jeffrey Lum.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -32,6 +29,9 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         assert img != null : "Image of DialogBox should not be null";
+        // @@author Jeffrey Lum
+        // Reused from JavaFX tutorial at
+        // https://se-education.org/guides/tutorials/javaFx.html
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -40,6 +40,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // @@author
 
         dialog.setText(text);
         displayPicture.setFill(new ImagePattern(img));
@@ -49,10 +50,14 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
+        // @@author Jeffrey Lum
+        // Reused from JavaFX tutorial at
+        // https://se-education.org/guides/tutorials/javaFx.html
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        // @@author
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
