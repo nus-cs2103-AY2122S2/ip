@@ -23,7 +23,7 @@ public class IstjBot {
     private Ui ui;
 
     private boolean isExit = false;
-    private boolean existsConstructorError = false;
+    private boolean hasConstructorError = false;
     private String constructorError = "";
 
     /**
@@ -39,7 +39,7 @@ public class IstjBot {
             this.storage = new Storage(filePath);
             this.texts = new TextList(storage.load());
         } catch (IOException | BotException e) {
-            existsConstructorError = true;
+            hasConstructorError = true;
             constructorError = e.getMessage();
             this.texts = new TextList();
         }
@@ -76,7 +76,7 @@ public class IstjBot {
      * @return Boolean that tells whether constructor method raised an error.
      */
     public boolean existsConstructorError() {
-        return existsConstructorError;
+        return hasConstructorError;
     }
 
     /**

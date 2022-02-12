@@ -76,18 +76,18 @@ public class AddCommand extends Command {
 
         String description = "";
         int modifier = -1;
-        boolean modifierDateFound = false;
+        boolean foundModifierDate = false;
         String modifierDate = "";
 
         // Extracting text description
         for (int i = 1; i < commandInfo.length; i++) {
             if (noteOrTaskType == CommandEnum.DEADLINE && commandInfo[i].equals("/by")) {
                 modifier = i;
-                modifierDateFound = true;
+                foundModifierDate = true;
                 break;
             } else if (noteOrTaskType == CommandEnum.EVENT && commandInfo[i].equals("/at")) {
                 modifier = i;
-                modifierDateFound = true;
+                foundModifierDate = true;
                 break;
             }
             if (i == 1) {
@@ -101,7 +101,7 @@ public class AddCommand extends Command {
         // or no modifier date indication at all for special tasks
         if (description.equals("")) {
             throw new BotException("As an IstjBot, I cannot add a special task with no description.");
-        } else if (!modifierDateFound) {
+        } else if (!foundModifierDate) {
             if (noteOrTaskType == CommandEnum.DEADLINE || noteOrTaskType == CommandEnum.EVENT) {
                 throw new BotException("As an IstjBot, I cannot add a special task with no timing attached.");
             }
