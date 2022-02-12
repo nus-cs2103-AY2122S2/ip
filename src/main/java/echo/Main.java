@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Echo echo = new Echo(Paths.get("").toAbsolutePath() + "/data/echo.txt");
+    private Echo echo = new Echo(getPath());
 
     /**
      * Starts GUI for Echo using JavaFX.
@@ -37,5 +37,14 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * Returns the absolute path of Echo save file.
+     *
+     * @return Absolute path of save file.
+     */
+    private String getPath() {
+        String currentPath = Paths.get("").toAbsolutePath().toString();
+        return currentPath.replace("\\", "/") + "/data/echo.txt";
     }
 }

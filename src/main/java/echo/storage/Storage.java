@@ -21,8 +21,11 @@ import echo.utils.EchoException;
  */
 public class Storage {
 
-    /** File path containing the saved task list. */
+    /** File path containing the save file. */
     private final String FILE_PATH;
+
+    /** Save file containing task list. */
+    private File saveFile;
 
     /**
      * Constructor for Storage class.
@@ -51,14 +54,9 @@ public class Storage {
      * @throws EchoException If file at FILE_PATH is not formatted properly.
      */
     public TaskList load() throws FileNotFoundException, EchoException {
-        File file = new File(FILE_PATH);
-        Scanner s = new Scanner(file);
+        createDirectoryAndFileIfNotExist();
+        Scanner s = new Scanner(saveFile);
         TaskList tasks = new TaskList();
-        File directory = file.getParentFile();
-
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
 
         while (s.hasNext()) {
             String line = s.nextLine();
@@ -109,6 +107,28 @@ public class Storage {
      */
     private LocalDateTime getLocalDateTime(String[] splitVerticalBar) {
         return LocalDateTime.parse(splitVerticalBar[3], DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+    }
+
+    /**
+     * Creates data directory and echo.txt if not already exist.
+     *
+     * @throws EchoException If there are issues accessing the directory or save file.
+     */
+    private void createDirectoryAndFileIfNotExist() throws EchoException {
+        try {
+            String folderPath = FILE_PATH.substring(0, FILE_PATH.lastIndexOf("/"));
+            File directory = new File(folderPath);
+            boolean isDirectoryCreated = directory.mkdir();
+
+            saveFile = new File(FILE_PATH);
+            boolean isFileCreated = saveFile.createNewFile();
+
+            if (isDirectoryCreated || isFileCreated) {
+                throw new EchoException("Hi new user! A save file has been created");
+            }
+        } catch (IOException e) {
+            throw new EchoException("Something went wrong during creating directory or creating file");
+        }
     }
 
     /**
