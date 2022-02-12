@@ -34,7 +34,7 @@ public class Ui {
      */
     public String initUi() {
         //Statement to be printed when duke is initialised.
-        return "Hello! I'm Duke" + "\n" + "What can I do for you?";
+        return "Hello! I'm Dodo" + "\n" + "What can I do for you?";
     }
 
 }
