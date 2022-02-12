@@ -3,9 +3,14 @@ package duke.instruction;
 import duke.task.TaskManager;
 import duke.ui.Ui;
 
-final class Find extends Instruction {
+final class FindInstruction extends Instruction {
+
+    private static final String HELP_MESSAGE = "find: find a list of tasks that contain the given"
+            + "keyword.\n"
+            + "usage: find <keyword>";
 
     private final String keyword;
+
 
     /**
      * Constructs a Find instruction.
@@ -14,7 +19,7 @@ final class Find extends Instruction {
      * @param tasks The task manager to be used.
      * @throws InvalidInstructionException If the instruction is not valid.
      */
-    Find(String instruction, TaskManager tasks) throws InvalidInstructionException {
+    FindInstruction(String instruction, TaskManager tasks) throws InvalidInstructionException {
 
         super("find", tasks);
         this.keyword = parseInstruction(instruction);
@@ -52,5 +57,14 @@ final class Find extends Instruction {
     public String getOutputMessage() {
 
         return TaskManager.listToString((tasks.search(keyword)));
+    }
+
+    /**
+     * Get the help message for the current instruction.
+     *
+     * @return The help message.
+     */
+    protected static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 }

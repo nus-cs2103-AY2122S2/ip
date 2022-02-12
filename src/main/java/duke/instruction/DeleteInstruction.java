@@ -4,7 +4,10 @@ import duke.task.Task;
 import duke.task.TaskManager;
 import duke.ui.Ui;
 
-final class Delete extends Instruction {
+final class DeleteInstruction extends Instruction {
+
+    private static final String HELP_MESSAGE = "delete: delete a task.\n"
+            + "usage: delete <task_id>";
 
     private final int toDeleteIndex;
     private final Task toDelete;
@@ -16,7 +19,7 @@ final class Delete extends Instruction {
      * @param tasks The task manager used.
      * @throws InvalidInstructionException If the given instruction does not contain a valid index.
      */
-    Delete(String instruction, TaskManager tasks) throws InvalidInstructionException {
+    DeleteInstruction(String instruction, TaskManager tasks) throws InvalidInstructionException {
         this(parseInstruction(instruction, tasks), tasks);
     }
 
@@ -25,7 +28,7 @@ final class Delete extends Instruction {
      * @param index The index of the task to be deleted.
      * @param tasks The task manager to be used.
      */
-    private Delete(int index, TaskManager tasks) {
+    private DeleteInstruction(int index, TaskManager tasks) {
         super("delete", tasks);
         this.toDeleteIndex = index;
         this.toDelete = tasks.getTaskIndex(index);
@@ -90,5 +93,14 @@ final class Delete extends Instruction {
 
         return "You have successfully deleted:\n"
                 + this.toDelete.toString();
+    }
+
+    /**
+     * Get the help message for the current instruction.
+     *
+     * @return The help message.
+     */
+    protected static String getHelpMessage() {
+        return HELP_MESSAGE;
     }
 }
