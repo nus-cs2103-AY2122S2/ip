@@ -3,10 +3,12 @@ package duke.tasklist;
 import java.time.LocalDate;
 import java.util.List;
 
+import duke.exceptions.DuplicateTaskException;
 import duke.storage.Storage;
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Task;
+import duke.task.ToDos;
 
 public class DukeList {
 
@@ -24,11 +26,38 @@ public class DukeList {
     }
 
     /**
+     * Returns index of task if the Task is present in the current list, else return -1
+     * @param t Task to check
+     * @return Index of duplicate task or -1
+     */
+    private int isPresent(Task t) {
+        boolean isInside = false;
+        int count = 0;
+        for (Task i : tasks) {
+            count++;
+            if (i instanceof Deadlines) {
+                isInside = ((Deadlines) i).equals(t);
+            } else if (i instanceof Events) {
+                isInside = ((Events) i).equals(t);
+            } else if (i instanceof ToDos) {
+                isInside = ((ToDos) i).equals(t);
+            }
+            if (isInside) {
+                return count;
+            }
+        }
+        return -1;
+    }
+    /**
      * Adds a task to the list, prints add message to the console.
      * @param t Task to be added
      */
-    public void add(Task t) {
+    public void add(Task t) throws DuplicateTaskException {
         assert t != null : "Task to add cannot be null";
+        int x = isPresent(t);
+        if (x > 0) {
+            throw new DuplicateTaskException(x);
+        }
         tasks.add(t);
         storage.store(tasks);
     }

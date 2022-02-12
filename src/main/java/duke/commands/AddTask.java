@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DuplicateTaskException;
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Task;
@@ -53,8 +54,12 @@ public class AddTask extends Command {
         default :
             t = new Events(msg, date);
         }
-        list.add(t);
-        return ui.addTask(t, list.getSize());
+        try {
+            list.add(t);
+            return ui.addTask(t, list.getSize());
+        } catch (DuplicateTaskException e) {
+            return e.getMessage();
+        }
     }
 
     @Override
