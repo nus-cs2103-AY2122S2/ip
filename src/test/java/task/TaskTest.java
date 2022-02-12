@@ -1,15 +1,19 @@
 package task;
 
-import duke.task.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.DeadLine;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
 
 public class TaskTest {
     @Test
     public void canSerialize() {
         Task td = new ToDos("Todo works", true);
-        Task dl = new DeadLine("Deadline works", false,"2019-10-15", "18:00:00");
+        Task dl = new DeadLine("Deadline works", false, "2019-10-15", "18:00:00");
         Task et = new Events("Events works", "2019-10-15", "18:00:00", "20:00:00");
         assertEquals(dl.serialize(), "D|0|Deadline works|2019-10-15|18:00\n");
         assertEquals(td.serialize(), "T|1|Todo works\n");
@@ -22,7 +26,7 @@ public class TaskTest {
         Task dl = Task.deserialize("D|0|Deadline works|2019-10-15|18:00:00");
         Task et = Task.deserialize("E|0|Events works|2019-10-15|18:00|20:00:00");
         assertEquals(td.equals(new ToDos("Todo works", true)), true);
-        assertEquals(dl.equals(new DeadLine("Deadline works", false,"2019-10-15", "18:00:00")), true);
+        assertEquals(dl.equals(new DeadLine("Deadline works", false, "2019-10-15", "18:00:00")), true);
         assertEquals(et.equals(new Events("Events works", "2019-10-15", "18:00:00", "20:00:00")), true);
     }
 }

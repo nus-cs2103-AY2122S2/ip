@@ -12,10 +12,11 @@ import duke.task.TaskList;
  * Duke is a chat-bot that curates a todo list according to user's commands.
  */
 public class Duke {
-    protected Storage storage;
-    protected TaskList tasks;
     private static final String INDEX_OUT_OF_BOUND_MESSAGE = "You have no task with that number.\n";
     private static final String DATE_PARSE_ERROR = "Your date and times have not been formatted properly.\n";
+    protected Storage storage;
+    protected TaskList tasks;
+
     /**
      * Constructor for Duke class
      * @param filePath Path for file where data is stored and loaded

@@ -1,9 +1,10 @@
 package command;
 
-import duke.command.ExitCommand;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.command.ExitCommand;
 
 public class ExitCommandTest {
     @Test

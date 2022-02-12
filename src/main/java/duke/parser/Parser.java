@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.FindDateCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.SortCommand;
 import duke.main.DukeException;
 import duke.task.DeadLine;
 import duke.task.Events;
@@ -11,6 +19,13 @@ import duke.task.ToDos;
  *
  */
 public class Parser {
+    private static final String DESCRIPTION_EMPTY = "The description of a %s cannot be empty.\n";
+    private static final String FILL_PROPER_INPUT = "Fill in proper input to find.\n";
+    private static final String FILL_PROPER_INPUT_MARK = "Fill in proper integer for marking/unmarking.\n";
+    private static final String FILL_PROPER_INPUT_DELETE = "Fill in proper integer for deletion.\n";
+    private static final String NO_SUCH_COMMAND = "I'm sorry, but I don't know what that means\n";
+    private static final String SORT_KEYWORD_INVALID = "Keyword for sorting is invalid.\n";
+    private static final String SORT_ORDER_INVALID = "Cannot determine from command whether ascending or descending.\n";
 
     /**
      * Returns the command from parsing user's instructions.
@@ -41,18 +56,18 @@ public class Parser {
         case "sort":
             return Parser.prepareSort(input);
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            throw new DukeException(NO_SUCH_COMMAND);
         }
     }
 
     private static Command prepareSort(String[] input) throws DukeException {
         if (input.length != 3 && input.length != 2) {
-            throw new duke.main.DukeException("Fill in proper input to find.\n");
+            throw new duke.main.DukeException(FILL_PROPER_INPUT);
         }
 
         String keyword = input[1].toLowerCase();
         if (!keyword.equals("task") && !keyword.equals("mark") && !keyword.equals("date")) {
-            throw new duke.main.DukeException("Keyword for sorting is invalid.\n");
+            throw new duke.main.DukeException(SORT_KEYWORD_INVALID);
         }
 
         if (input.length == 2) {
@@ -61,7 +76,7 @@ public class Parser {
 
         String order = input[2].toLowerCase();
         if (!order.equals("asc") && !order.equals("desc")) {
-            throw new duke.main.DukeException("Cannot determine from command whether ascending or descending.\n");
+            throw new duke.main.DukeException(SORT_ORDER_INVALID);
         }
         Boolean isAscending = order.equals("asc");
         return new SortCommand(input[1], isAscending);
@@ -69,7 +84,7 @@ public class Parser {
 
     private static Command prepareFind(String[] input) throws DukeException {
         if (input.length != 2) {
-            throw new duke.main.DukeException("Fill in proper input to find.\n");
+            throw new duke.main.DukeException(FILL_PROPER_INPUT);
         }
 
         if (input[0].equals("find")) {
@@ -82,7 +97,7 @@ public class Parser {
 
     private static Command prepareAdd(String[] input) throws DukeException {
         if (input.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a " + input[0] + " cannot be empty.\n");
+            throw new DukeException(String.format(DESCRIPTION_EMPTY, input[0]));
         }
 
         String taskName = getTaskString(input);
@@ -91,15 +106,16 @@ public class Parser {
         } else if (input[0].equals("deadline")) {
             return new AddCommand(new DeadLine(taskName, input[input.length - 2], input[input.length - 1]));
         } else if (input[0].equals("event")) {
-            return new AddCommand(new Events(taskName, input[input.length - 3], input[input.length - 2], input[input.length - 1]));
+            return new AddCommand(new Events(taskName, input[input.length - 3],
+                    input[input.length - 2], input[input.length - 1]));
         } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            throw new DukeException(NO_SUCH_COMMAND);
         }
     }
 
     private static Command prepareMark(String[] input) throws DukeException {
         if (input.length != 2) {
-            throw new DukeException("Fill in proper integer for marking/unmarking.\n");
+            throw new DukeException(FILL_PROPER_INPUT_MARK);
         }
         if (input[0].equals("mark")) {
             return new MarkCommand(Integer.parseInt(input[1]), true);
@@ -111,7 +127,7 @@ public class Parser {
 
     private static Command prepareDelete(String[] input) throws DukeException {
         if (input.length != 2) {
-            throw new DukeException("Fill in proper integer for deletion.\n");
+            throw new DukeException(FILL_PROPER_INPUT_DELETE);
         }
         return new DeleteCommand(Integer.parseInt(input[1]));
     }

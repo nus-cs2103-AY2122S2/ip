@@ -51,7 +51,8 @@ public class Events extends Task {
     public boolean equals(Object o) {
         if (o instanceof Events) {
             Events e = (Events) o;
-            return this.doByDate.equals(e.doByDate) && this.doFromTime.equals(e.doFromTime) && this.doBytime.equals(e.doBytime)
+            return this.doByDate.equals(e.doByDate)
+                    && this.doFromTime.equals(e.doFromTime) && this.doBytime.equals(e.doBytime)
                     && this.objective.equals(e.objective) && this.done == e.done;
         } else {
             return false;

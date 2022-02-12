@@ -1,21 +1,33 @@
 package duke.command;
 
+import java.io.IOException;
+import java.util.List;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.io.IOException;
-import java.util.List;
 
 public class SortCommand extends Command {
     private String sortBy;
     private Boolean isAscending;
 
+    /**
+     * Constructor for SortCommand.
+     * Task is marked as true as default.
+     *
+     * @param sortBy keyword to sort by
+     */
     public SortCommand (String sortBy) {
         this.sortBy = sortBy;
         this.isAscending = true;
     }
-
+    /**
+     * Constructor for SortCommand.
+     *
+     * @param sortBy        the sortBy
+     * @param isAscending the isAscending
+     */
     public SortCommand (String sortBy, Boolean isAscending) {
         this.sortBy = sortBy;
         this.isAscending = isAscending;
