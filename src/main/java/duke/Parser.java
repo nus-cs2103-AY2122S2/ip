@@ -1,7 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-
 /**
  * Executes user commands
  */
@@ -36,63 +34,38 @@ public class Parser {
      * @throws DukeException If wrong input is detected
      */
     String execute(String input) throws DukeException {
+
+        assert(input.length() > 0);
+        String output;
         try {
             String[] inputArray = input.split(" ", 2);
             String commandType = inputArray[0].toLowerCase();
             switch (commandType) {
+            case "hi":
+                return new HiCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "bye":
-                return ui.echo("GoodBye! Thanks for using B.H!");
+                return new ByeCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "list":
-                return ui.echo(this.taskList.getList());
+                return new ListCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "mark":
-                int index = Integer.parseInt(inputArray[1]) - 1;
-                if (index < this.taskList.getListSize()) {
-                    return ui.echo("Well done! \n" + this.taskList.mark(index));
-                } else {
-                    return ui.echo("Index out of range");
-                }
+                return new MarkCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "unmark":
-                int index = Integer.parseInt(inputArray[1]) - 1;
-                return ui.echo("Oh no! \n" + this.taskList.unMark(index));
+                return new UnmarkCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "todo":
-                String task = inputArray[1];
-                Task newTask = new Todo(task);
-                this.taskList.addToList(newTask);
-                return ui.echo("Task added: " + newTask.toString() + "\n"
-                       + "Now you have " + this.taskList.getListSize() + " tasks in the list");
+                return new TodoCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "deadline":
-                String s = inputArray[1];
-                String[] arr = s.split("/by");
-                String task = arr[0];
-                String time = arr[1];
-                Task newTask = new Deadline(task, time);
-                this.taskList.addToList(newTask);
-                return ui.echo("Task added:" + newTask.toString() + "\n"
-                        + "Now you have " + this.taskList.getListSize() + " tasks in the list");
+                return new DeadlineCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "event":
-                String s = inputArray[1];
-                String[] arr = s.split("/at");
-                String task = arr[0];
-                String time = arr[1];
-                Task newTask = new Event(task, time);
-                this.taskList.addToList(newTask);
-                return ui.echo("Task added:" + newTask.toString() + "\n"
-                        + "Now you have " + this.taskList.getListSize() + " tasks in the list");
+                return new EventCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "delete":
-                int index = Integer.parseInt(inputArray[1]) - 1;
-                return ui.echo("Okay, I have remove this task:\n"
-                        + this.taskList.deleteTask(index));
+                return new DeleteCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "check":
-                LocalDate date = LocalDate.parse(inputArray[1]);
-                return ui.echo(this.taskList.checkDate(date));
+                return new CheckCommand(this.ui, this.taskList, this.storage, input).runCommand();
             case "find":
-                String[] arr = input.split(" ", 2);
-                String word = arr[1];
-                return ui.echo(this.taskList.checkWord(word));
+                return new FindCommand(this.ui, this.taskList, this.storage, input).runCommand();
             default:
-                return ui.echo("Wrong input, please check again");
+                return ui.sayWrongInput();
             }
-            this.storage.save(this.taskList.getArrayList());
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
             throw new DukeException(ui.echo("Duke exception!!!"));
