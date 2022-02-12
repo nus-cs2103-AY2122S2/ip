@@ -1,14 +1,14 @@
 package arthur.timings;
 
-import arthur.TaskList;
-import arthur.task.Deadline;
-import arthur.task.Event;
-import arthur.task.Task;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import arthur.TaskList;
+import arthur.task.Deadline;
+import arthur.task.Event;
+import arthur.task.Task;
 
 /**
  * Handles string conversion to Date and Time objects.
@@ -48,6 +48,11 @@ public class DateTime {
         return this.str;
     }
 
+    /**
+     * Checks the date with current date to see if they are the same.
+     * @param tasklist The tasklist with list of tasks info.
+     * @return A string of all the tasks due on the current date.
+     */
     public static String checkDate(TaskList tasklist) {
         StringBuilder result = new StringBuilder(REMINDER_TEMPLATE);
         String currDate = LocalDate.now().format(DATE_FORMAT);

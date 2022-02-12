@@ -4,6 +4,10 @@ package arthur;
  * Handles interactions with the user.
  */
 public class Ui {
+    private static final String LOGO = "  / \\    _ |_ |_  | |  _  \n"
+            + "/----\\ |  |_ | | |_| |  ";
+    private static final String WELCOME_MESSAGE = "Greetings from \n" + LOGO
+            + "\n" + "How may I assist you today?";
 
     /**
      * Constructor for Ui object.
@@ -11,23 +15,13 @@ public class Ui {
     public Ui() {
     }
 
-    /**
-     * Adds design above and below the given text.
-     * @param text The string to be placed between the design
-     */
-    public void printFormat(String text) {
-        String design = "_";
-        System.out.println(design.repeat(50) + "\n"
-                + text + "\n" + design.repeat(50));
-    }
 
     /**
      * Displays the logo and greetings.
+     *
+     * @return A string version of the logo and welcome message
      */
-    public void showWelcome() {
-        String logo = " / \\   _ |_ |_  | |  _  \n"
-                + "/---\\ |  |_ | | |_| |  ";
-        printFormat("Greetings from\n" + logo
-                + "\n" + "How may I assist you today?");
+    public String showWelcome() {
+        return WELCOME_MESSAGE;
     }
 }

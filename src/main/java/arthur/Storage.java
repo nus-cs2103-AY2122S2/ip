@@ -13,31 +13,31 @@ import arthur.task.Task;
  */
 public class Storage {
     private static final String FILE_PATH = "data/Tasks.txt";
-    private static final String ISSUE_MESSAGE = "Sorry, there seems to be an Issue. \n"
+    private static final String IO_ISSUE_MESSAGE = "Sorry, there seems to be an Issue. \n"
             + "Please restart and try again";
+    private static final String IO_FILE_ISSUE_MESSAGE = "Sorry, there seems to be an Issue "
+            + "with adding the task to the file. \n" + "Please restart and try again";
     private static final String PLACE_TO_SPLIT_STRING = " >> ";
     private final File storage;
-    private final Ui ui;
 
     /**
      * Gets the ui and creates the necessary file and directories.
-     * @param ui The ui object
      */
-    public Storage(Ui ui) {
-        this.ui = ui;
+    public Storage() {
         new File("data").mkdirs();
         storage = new File(FILE_PATH);
         if (!storage.exists()) {
             try {
                 storage.createNewFile();
             } catch (IOException e) {
-                ui.printFormat(ISSUE_MESSAGE);
+                System.out.println(IO_ISSUE_MESSAGE);
             }
         }
     }
 
     /**
      * Gives the file stored in hard drive.
+     *
      * @return The data file
      */
     public File getTasks() {
@@ -46,6 +46,7 @@ public class Storage {
 
     /**
      * Appends task to the data file
+     *
      * @param task The task to be appended
      */
     public void addTasks(Task task) {
@@ -54,54 +55,46 @@ public class Storage {
             fw.write(task.toString() + "\n");
             fw.close();
         } catch (IOException ex) {
-            ui.printFormat(ISSUE_MESSAGE);
+            System.out.println(IO_FILE_ISSUE_MESSAGE);
         }
     }
 
     /**
      * Edits the tasks in the data file.
+     *
      * @param task The task to be edited
-     * @param id 1 to mark/unmark, 2 to delete the line from file
+     * @param id   1 to mark/unmark, 2 to delete the line from file
      */
-    public void editTasks(Task task, int id) {
+    public void editTasks(Task task, int id) throws FileNotFoundException, IOException {
         StringBuilder tempData = new StringBuilder();
         // This splits the modified task to help get the task info
-
-
-        try {
-            String[] tempArr = task.toString().split(PLACE_TO_SPLIT_STRING);
-            Scanner sc = new Scanner(storage);
-            while (sc.hasNext()) {
-                // This is the task stored in the file
-                String curr = sc.nextLine();
-                String[] currArr = curr.split(PLACE_TO_SPLIT_STRING);
-                // Checks if the modified task info matches the stored task
-                if (currArr[1].equals(tempArr[1])) {
-                    switch (id) {
-                    // For mark/unmark
-                    case 1:
-                        tempData.append(task).append("\n");
-                        break;
-                    // For delete, by skipping append
-                    case 2:
-                        break;
-                    default:
-                        break;
-                    }
-                } else {
-                    tempData.append(curr).append("\n");
+        String[] tempArr = task.toString().split(PLACE_TO_SPLIT_STRING);
+        Scanner sc = new Scanner(storage);
+        while (sc.hasNext()) {
+            // This is the task stored in the file
+            String curr = sc.nextLine();
+            String[] currArr = curr.split(PLACE_TO_SPLIT_STRING);
+            // Checks if the modified task info matches the stored task
+            if (currArr[1].equals(tempArr[1])) {
+                switch (id) {
+                // For mark/unmark
+                case 1:
+                    tempData.append(task).append("\n");
+                    break;
+                // For delete, by skipping append
+                case 2:
+                    break;
+                default:
+                    break;
                 }
+            } else {
+                tempData.append(curr).append("\n");
             }
-
-            // Clears all info from stored file. Uses tempData to fill in updated data
-            FileWriter f = new FileWriter(FILE_PATH);
-            f.write(tempData.toString());
-            f.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            ui.printFormat(ISSUE_MESSAGE);
-            e.printStackTrace();
         }
+
+        // Clears all info from stored file. Uses tempData to fill in updated data
+        FileWriter f = new FileWriter(FILE_PATH);
+        f.write(tempData.toString());
+        f.close();
     }
 }

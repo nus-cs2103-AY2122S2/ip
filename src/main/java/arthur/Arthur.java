@@ -1,5 +1,7 @@
 package arthur;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 import arthur.exceptions.ArthurException;
@@ -9,22 +11,25 @@ import arthur.exceptions.InvalidInstructionException;
 public class Arthur {
     private static final String DATE_TIME_ERROR_MESSAGE = "Please enter the date/time in format: "
             + "yyyy-mm-dd hh:mm \n" + "You can also enter time or date only";
+    private static final String VALID_NUM_ERROR = "Please enter a valid number!";
+    private static final String IO_ISSUE_MESSAGE = "Sorry, there seems to be an Issue. \n"
+            + "Please restart and try again";
+    private static final String FILE_NOT_FOUND_ERROR_MESSAGE = "The file can't be found. \n"
+            + "Please restart and try again.";
     private final Storage storage;
     private TaskList tasks;
-    private final Ui ui;
 
     /**
      * Initiates the arthur.Ui, arthur.Storage and taskList object.
      * Adds existing tasks from hard disk if any available.
      */
     public Arthur() {
-        ui = new Ui();
-        storage = new Storage(ui);
+        Ui ui = new Ui();
+        storage = new Storage();
         try {
             tasks = new TaskList(storage);
         } catch (DateTimeParseException e) {
-            ui.printFormat("Please enter the date/time in format: yyyy-mm-dd hh:mm \n"
-                    + "You can also enter time or date only");
+            System.out.println(DATE_TIME_ERROR_MESSAGE);
         }
     }
 
@@ -32,20 +37,21 @@ public class Arthur {
      * Runs the given instructions till "bye" command is given
      */
     public String run(String string) {
-        ui.showWelcome();
-        boolean isExit = false;
-        String result = string;
-        while (!isExit) {
-            try {
-                ArthurException.checkException(string);
-                Parser commander = new Parser(string);
-                result = commander.execute(tasks, storage);
-                isExit = true;
-            } catch (DateTimeParseException e) {
-                ui.printFormat(DATE_TIME_ERROR_MESSAGE);
-            } catch (InvalidInstructionException | EmptyDescriptionException f) {
-                ui.printFormat(f.getMessage());
-            }
+        String result;
+        try {
+            ArthurException.checkException(string);
+            Parser commander = new Parser(string);
+            result = commander.execute(tasks, storage);
+        } catch (DateTimeParseException e) {
+            result = DATE_TIME_ERROR_MESSAGE;
+        } catch (InvalidInstructionException | EmptyDescriptionException f) {
+            result = f.getMessage();
+        } catch (IndexOutOfBoundsException g) {
+            result = VALID_NUM_ERROR;
+        } catch (FileNotFoundException h) {
+            result = FILE_NOT_FOUND_ERROR_MESSAGE;
+        } catch (IOException i) {
+            result = IO_ISSUE_MESSAGE;
         }
         return result;
     }

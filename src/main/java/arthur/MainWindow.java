@@ -22,12 +22,18 @@ public class MainWindow extends AnchorPane {
 
     private Arthur arthur;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image arthurImage = new Image(this.getClass().getResourceAsStream("/images/Arthur.png"));
+    private final Image userImage = new Image(
+            this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image arthurImage = new Image(
+            this.getClass().getResourceAsStream("/images/Arthur.png"));
 
+    /**
+     * Loads the scrollPane and welcome message upon initialisation.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getAurthurDialog(new Ui().showWelcome(), arthurImage));
     }
 
     public void setArthur(Arthur a) {

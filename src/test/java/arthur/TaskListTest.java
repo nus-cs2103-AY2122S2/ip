@@ -11,12 +11,12 @@ public class TaskListTest {
         assertEquals("Added a new Task.Todo task: \n"
                 + "[T][ ] >> test\n"
                 + "You have 1 tasks in list at the moment.",
-                new TaskList(new Storage(new Ui())).todo("test"));
+                new TaskList(new Storage()).todo("test"));
 
         assertEquals("Added a new Task.Todo task: \n"
                         + "[T][ ] >> testing\n"
                         + "You have 1 tasks in list at the moment.",
-                new TaskList(new Storage(new Ui())).todo("testing"));
+                new TaskList(new Storage()).todo("testing"));
     }
 
     @Test
@@ -24,12 +24,12 @@ public class TaskListTest {
         assertEquals("Added a new Task.Deadline task: \n"
                         + "[D][ ] >> testing (By: 15 Apr 2021)\n"
                         + "You have 1 tasks in list at the moment.",
-                new TaskList(new Storage(new Ui())).deadline("testing /by 2021-04-15"));
+                new TaskList(new Storage()).deadline("testing /by 2021-04-15"));
     }
 
     @Test
     public void deadLine_checkExceptionHandling_exceptionThrow() {
         assertEquals("Please add the deadline date",
-                new TaskList(new Storage(new Ui())).deadline("testing /by "));
+                new TaskList(new Storage()).deadline("testing /by "));
     }
 }
