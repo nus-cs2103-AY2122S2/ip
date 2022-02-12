@@ -25,7 +25,7 @@ public class Duke {
     /**
      * Initializes a Duke chatbot object and calls Duke.Run()
      *
-     * @param args
+     * @param args varargs
      */
     public static void main(String[] args) {
         Duke kizer = new Duke();
