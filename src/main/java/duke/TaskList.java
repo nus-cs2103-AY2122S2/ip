@@ -85,7 +85,7 @@ public class TaskList {
         
         tasks.get(idx - 1).unmark();
         
-        return "T_T BMO can't believe you lied to me before.. I will unmark this task:\n      " + tasks.get(idx - 1);
+        return "T_T BMO hate it when you lie. I will unmark this task:\n      " + tasks.get(idx - 1);
 
     }
 
@@ -122,7 +122,7 @@ public class TaskList {
             isSingular = "";
         }
         
-        return "\n    Now you have " + tasks.size() + " task" + isSingular + " in your list.";
+        return "\nNow you have " + tasks.size() + " task" + isSingular + " in your list.";
     }
 
     /**

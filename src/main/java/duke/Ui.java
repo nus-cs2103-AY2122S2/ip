@@ -70,6 +70,8 @@ public class Ui {
 
     public String getHelpMessage() {
         return "BMO is happy to help! Here are a list of commands that BMO is able to interpret: \n"
+                + "todo, deadline, event, mark, unmark, delete, note, checknote, deletenote";
+        /*
                 + "$ todo [description] -- adds a simple todo task\n"
                 + "$ deadline [description] /[yyyy-mm-dd] -- adds a deadline\n"
                 + "$ event [description] /[yyyy-mm-dd] -- adds an event\n"
@@ -79,5 +81,7 @@ public class Ui {
                 + "$ note [label]: [description] -- adds a new note\n"
                 + "$ checknote -- check your notes\n"
                 + "$ deletenote [label] -- delete the note with that label";
+
+        */
     }
 }

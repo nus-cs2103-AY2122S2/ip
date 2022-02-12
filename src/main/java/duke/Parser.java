@@ -64,7 +64,8 @@ public class Parser {
         try {
             return input.split(" ", 2)[1].split("/", 2)[0];  
         } catch (Exception e) {
-            throw new DukeAbsentInfoException("Description of task not specified");
+            throw new DukeAbsentInfoException("Description of task not specified, \n"
+                        + "eg. todo [description]");
         }
         
     }
