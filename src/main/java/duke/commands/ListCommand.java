@@ -8,6 +8,7 @@ import duke.ui.Ui;
  * Lists out all tasks in the TaskList.
  */
 public class ListCommand extends Command {
+    private static final String EMPTY_LIST = "There are currently no tasks in your list!";
     /**
      * Executes the list command.
      *
@@ -18,6 +19,10 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        if (tasks.isEmpty()) {
+            return EMPTY_LIST;
+        }
+
         return "Your outstanding tasks as of now are as listed:\n"
                 + tasks.toString();
     }
