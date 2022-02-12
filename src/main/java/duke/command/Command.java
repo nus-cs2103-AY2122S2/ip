@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
+import duke.command.dateparser.DateParser;
 import duke.exception.DukeException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Task;
@@ -69,7 +70,7 @@ public abstract class Command {
      * @throws DukeIllegalArgumentException If the supplied date string is not in a valid format.
      */
     protected LocalDateTime parseDate(String dateString) throws DukeIllegalArgumentException {
-        LocalDateTime parsedDate = NaturalDateParser.getInstance().parseDate(dateString);
+        LocalDateTime parsedDate = DateParser.getInstance().parseDate(dateString);
         if (parsedDate == null) {
             throw new DukeIllegalArgumentException("Date not in a known format");
         }
@@ -84,7 +85,7 @@ public abstract class Command {
      * @throws DukeIllegalArgumentException If the supplied date-time string is not in a valid format.
      */
     protected LocalDateTime parseDateTime(String dateString) throws DukeIllegalArgumentException {
-        LocalDateTime parsedDateTime = NaturalDateParser.getInstance().parseDateTime(dateString);
+        LocalDateTime parsedDateTime = DateParser.getInstance().parseDateTime(dateString);
         if (parsedDateTime == null) {
             throw new DukeIllegalArgumentException("DateTime not in a known format");
         }
