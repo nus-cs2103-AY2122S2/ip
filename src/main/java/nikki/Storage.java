@@ -36,10 +36,12 @@ public class Storage {
      */
     private void createIfNotExist() throws IOException {
         // Create file if it doesn't exist
-        if (!this.file.exists()) {
-            this.file.getParentFile().mkdirs();
-            this.file.createNewFile();
+        if (this.file.exists()) {
+            return;
         }
+
+        this.file.getParentFile().mkdirs();
+        this.file.createNewFile();
     }
 
     /**

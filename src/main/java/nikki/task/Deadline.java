@@ -64,11 +64,9 @@ public class Deadline extends Task {
      */
     @Override
     public String nameWithStatus() {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
-
         return String.format("%s (by: %s)",
                 super.nameWithStatus(),
-                this.date.format(fmt));
+                this.date.format(Task.DATE_FORMAT));
     }
 
     /**
