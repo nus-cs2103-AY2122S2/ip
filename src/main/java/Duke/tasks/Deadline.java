@@ -48,5 +48,29 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " " + time + ")";
     }
+
+    /**
+     * Returns true if the new task is same as the task inside the task list.
+     * Else false.
+     *
+     * @param other the other task to compare.
+     * @return true if the new task is same as the task inside the task list.
+     *         Else return false.
+     */
+    @Override
+    public boolean taskEquals(Task other) {
+        if (other instanceof Deadline) {
+            Deadline deadlineTask = (Deadline) other;
+            boolean isSameDescription = (this.description.equals(other.description));
+            boolean isSameDate = this.date.equals(deadlineTask.date);
+            boolean isSameTime = this.time.equals(deadlineTask.time);
+            if (isSameDescription && isSameDate && isSameTime) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 }
 

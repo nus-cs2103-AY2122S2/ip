@@ -54,21 +54,28 @@ public class Ui {
     }
 
     /**
-     * Prints message to inform the users that task is added into the list.
+     * Returns message to inform the users that task is added into the list.
      *
      * @param task task to be added into the list.
      * @param taskLists the list of task.
+     * @param hasAdded true if the task has added into task list. Else false.
+     * @return the message to inform the users if the task is added into list.
      */
-    public String showTaskAdded(Task task, ArrayList<Task> taskLists) {
-        return "Got it. I've added this task:" + "\n" + task + "\n"
-                + "Now you have " + taskLists.size() + " tasks in the list.";
+    public String showTaskAdded(Task task, ArrayList<Task> taskLists, boolean hasAdded) {
+        if (hasAdded) {
+            return "Got it. I've added this task:" + "\n" + task + "\n"
+                    + "Now you have " + taskLists.size() + " tasks in the list.";
+        } else {
+            return "Opps! The same task added multiple times!";
+        }
     }
 
     /**
-     * Prints message to inform the users that task is deleted from the list.
+     * Returns message to inform the users that task is deleted from the list.
      *
      * @param task task to be deleted from the list.
      * @param taskLists the list of task.
+     * @return the message to inform the users that task is deleted from the list.
      */
     public String showTaskDeleted(Task task, ArrayList<Task> taskLists) {
         return "Noted. I've removed this task:" + "\n" + task + "\n"
@@ -77,6 +84,9 @@ public class Ui {
 
     /**
      * Displays the list of tasks the user has.
+     *
+     * @param taskLists the list of task to show to the user.
+     * @return the message displaying the list of task in the list.
      */
     public String showList(ArrayList<Task> taskLists) {
         if (taskLists.size() == 0) {
@@ -92,27 +102,30 @@ public class Ui {
     }
 
     /**
-     * Prints message to inform the users that task is mark as complete.
+     * Returns message to inform the users that task is mark as complete.
      *
      * @param currTask task to be mark.
+     * @return message to inform the users that task is mark as complete.
      */
     public String showTaskMarked(Task currTask) {
         return "Nice! I've marked this task as done:\n" + currTask;
     }
 
     /**
-     * Prints message to inform the users that task is unmarked as not complete.
+     * Returns message to inform the users that task is unmarked as not complete.
      *
      * @param currTask task to be unmarked.
+     * @return message to inform the users that task is unmarked as not complete.
      */
     public String showTaskUnmarked(Task currTask) {
         return "OK, I've marked this task as not done yet:\n" + currTask;
     }
 
     /**
-     * Prints the search results of what the user find.
+     * Returnss the search results of what the user find.
      *
      * @param results result list from the search keyword.
+     * @return the search results of what the user find.
      */
     public String displaySearchResult(ArrayList<Task> results) {
         if (results.size() == 0) {

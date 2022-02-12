@@ -47,5 +47,30 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + " " + time + ")";
     }
+
+
+    /**
+     * Returns true if the new task is same as the task inside the task list.
+     * Else false.
+     *
+     * @param other the other task to compare.
+     * @return true if the new task is same as the task inside the task list.
+     *         Else return false.
+     */
+    @Override
+    public boolean taskEquals(Task other) {
+        if (other instanceof Event) {
+            Event eventTask = (Event) other;
+            boolean isSameDescription = (this.description.equals(other.description));
+            boolean isSameDate = this.date.equals(eventTask.date);
+            boolean isSameTime = this.time.equals(eventTask.time);
+            if (isSameDescription && isSameDate && isSameTime) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 }
 

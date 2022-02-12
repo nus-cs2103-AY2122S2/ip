@@ -29,9 +29,19 @@ public class TaskList {
      * Adds the task into task list.
      *
      * @param task the task to be added.
+     * @return true if the task is added. Else false.
      */
-    public void addTask(Task task) {
-        taskList.add(task);
+    public boolean addTask(Task task) {
+        boolean hasAdded = true;
+        for (Task currTask : taskList) {
+            if (currTask.taskEquals(task)) {
+                hasAdded = false;
+            }
+        }
+        if (hasAdded) {
+            taskList.add(task);
+        }
+        return hasAdded;
     }
 
     /**

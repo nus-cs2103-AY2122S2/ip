@@ -34,4 +34,26 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Returns true if the new task is same as the task inside the task list.
+     * Else false.
+     *
+     * @param other the other task to compare.
+     * @return true if the new task is same as the task inside the task list.
+     *         Else return false.
+     */
+    @Override
+    public boolean taskEquals(Task other) {
+        if (other instanceof ToDo) {
+            ToDo toDoTask = (ToDo) other;
+            boolean isSameDescription = (this.description.equals(other.description));
+            if (isSameDescription) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 }

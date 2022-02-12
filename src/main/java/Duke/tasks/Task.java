@@ -59,6 +59,8 @@ public abstract class Task {
 
     public abstract String encodeTaskToString();
 
+    public abstract boolean taskEquals(Task task);
+
     /**
      * Returns the date that was converted from String to LocalDate.
      *
@@ -105,4 +107,5 @@ public abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
+
 }
