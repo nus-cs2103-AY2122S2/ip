@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private IstjBot istjBot = new IstjBot("data/tasks.txt");
+    private IstjBot istjBot = new IstjBot("data/texts.txt");
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/istjuser.png"));
     private Image istjBotImage = new Image(this.getClass().getResourceAsStream("/images/istjbot.jpeg"));

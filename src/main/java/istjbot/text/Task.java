@@ -1,4 +1,4 @@
-package istjbot.task;
+package istjbot.text;
 
 import java.time.LocalDate;
 import java.util.Optional;

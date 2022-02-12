@@ -2,11 +2,11 @@ package istjbot.command;
 
 import istjbot.exception.BotException;
 import istjbot.storage.Storage;
-import istjbot.task.TaskList;
+import istjbot.text.TextList;
 import istjbot.ui.Ui;
 
 /**
- * Encapsulates the procedure of modifying (marking, un-marking) and deleting of a task.
+ * Encapsulates the procedure of marking and un-marking a task.
  */
 public class ModifyCommand extends Command {
 
@@ -20,31 +20,26 @@ public class ModifyCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        int taskNumber = extractTaskNumber(tasks);
+    public String execute(TextList texts, Ui ui, Storage storage) throws BotException {
+        int taskNumber = extractTaskNumber(texts);
 
         switch (this.getCommandEnum()) {
         case MARK:
-            tasks.markTask(taskNumber);
-            storage.save(tasks);
-            return ui.showTaskMarked(tasks.taskString(taskNumber));
+            texts.markTask(taskNumber);
+            storage.save(texts);
+            return ui.showTaskMarked(texts.taskString(taskNumber));
 
         case UNMARK:
-            tasks.unmarkTask(taskNumber);
-            storage.save(tasks);
-            return ui.showTaskUnmarked(tasks.taskString(taskNumber));
-
-        case DELETE:
-            String deletedTask = tasks.deletedTaskString(taskNumber);
-            storage.save(tasks);
-            return ui.showTaskDeleted(tasks.taskListSize(), deletedTask);
+            texts.unmarkTask(taskNumber);
+            storage.save(texts);
+            return ui.showTaskUnmarked(texts.taskString(taskNumber));
 
         default:
-            return null;
+            throw new BotException("As an IstjBot, this statement should not be shown to you.");
         }
     }
 
-    private int extractTaskNumber(TaskList tasks) throws BotException {
+    private int extractTaskNumber(TextList texts) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
         if (commandInfo.length != 2) {
@@ -57,7 +52,7 @@ public class ModifyCommand extends Command {
         } catch (NumberFormatException e) {
             throw new BotException("As an IstjBot, I don't think that is a proper index.");
         }
-        if (taskNumber < 1 || taskNumber > tasks.taskListSize()) {
+        if (taskNumber < 1 || taskNumber > texts.taskListSize()) {
             throw new BotException("As an IstjBot, I don't think that is a proper index.");
         }
         return taskNumber;

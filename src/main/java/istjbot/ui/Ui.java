@@ -21,7 +21,7 @@ public class Ui {
      *
      * @param tasksSize Integer of number of tasks in the list.
      * @param addedTask String representation of added task.
-     * @return
+     * @return String of confirmation message.
      */
     public String showTaskAdded(int tasksSize, String addedTask) {
         assert tasksSize > 0 : "there should now be at least one task";
@@ -32,6 +32,21 @@ public class Ui {
         String plural = tasksSize > 1 ? "tasks" : "task";
         finalMessage += plural + " in the list.";
         return initialMessage + addedTask + "\n" + finalMessage;
+    }
+
+    /**
+     * Returns a String of a confirmation message that the note has been successfully added.
+     *
+     * @param notesSize Integer of number of notes in the list.
+     * @param addedNote String representation of added note.
+     * @return String of confirmation message.
+     */
+    public String showNoteAdded(int notesSize, String addedNote) {
+        String initialMessage = "As an IstjBot, I will add this note right now. \n";
+        String finalMessage = "Now you have " + notesSize + " ";
+        String plural = notesSize > 1 ? "notes" : "note";
+        finalMessage += plural + " in the list.";
+        return initialMessage + addedNote + "\n" + finalMessage;
     }
 
     /**
@@ -71,6 +86,21 @@ public class Ui {
     }
 
     /**
+     * Returns a String of a confirmation message that the note has been successfully deleted.
+     *
+     * @param notesSize Integer of number of notes in the list.
+     * @param deletedNote String of the note that has just been deleted.
+     * @return String of confirmation message.
+     */
+    public String showNoteDeleted(int notesSize, String deletedNote) {
+        String initialMessage = "As an IstjBot, I've removed this note: \n";
+        String finalMessage = "Now you have " + notesSize + " ";
+        String plural = notesSize > 1 ? "notes" : "note";
+        finalMessage += plural + " in the list.";
+        return initialMessage + deletedNote + "\n" + finalMessage;
+    }
+
+    /**
      * Returns a String consisting of tasks that have been filtered with user's input date,
      * plus IstjBot's message.
      *
@@ -103,6 +133,18 @@ public class Ui {
      */
     public String showTasks(String list) {
         String initialMessage = "As an IstjBot, I present you the task(s) in your list:";
+        initialMessage += list.isEmpty() ? "" : "\n";
+        return initialMessage + list;
+    }
+
+    /**
+     * Returns a String consisting of all notes that are stored plus IstjBot's message.
+     *
+     * @param list String of all notes.
+     * @return String of all notes with IstjBot's message.
+     */
+    public String showNotes(String list) {
+        String initialMessage = "As an IstjBot, I present you the note(s) in your list:";
         initialMessage += list.isEmpty() ? "" : "\n";
         return initialMessage + list;
     }

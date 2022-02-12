@@ -1,4 +1,4 @@
-package istjbot.task;
+package istjbot.text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,22 +11,26 @@ import istjbot.command.CommandEnum;
 import istjbot.exception.BotException;
 
 /**
- * Encapsulates a list of tasks that are stored in an ArrayList, and supports
- * different modifying methods (such as add, delete) for tasks that are stored.
+ * Encapsulates a list of texts (tasks and notes) that are stored in each ArrayList.
+ * Supports different modifying methods (such as add, delete, search, and mark/unmark) for tasks,
+ * and simplified methods (such as view, add, and delete) for notes.
  */
-public class TaskList {
-    private static final int TASK_TYPE = 0;
+public class TextList {
+    private static final int NOTE_OR_TASK_TYPE = 0;
+    private static final int NOTE_DESCRIPTION = 1;
     private static final int TASK_MARKED_OR_NOT = 1;
     private static final int TASK_DESCRIPTION = 2;
     private static final int TASK_DATE = 3;
 
     /** ArrayList of tasks stored. */
     private final ArrayList<Task> tasks = new ArrayList<>();
+    /** ArrayList of notes stored. */
+    private final ArrayList<Note> notes = new ArrayList<>();
 
     /**
      * Constructor for this TaskList.
      */
-    public TaskList() {}
+    public TextList() {}
 
     /**
      * Constructor for this TaskList.
@@ -36,42 +40,52 @@ public class TaskList {
      * @throws BotException When the command listed in the file is incorrect.
      * @throws FileNotFoundException When the file with that specified path is not found.
      */
-    public TaskList(File file) throws BotException, FileNotFoundException {
-        // IstjBox.txt is new or not tampered with by a user
-        // FileNotFoundException will not be thrown as we only pass an existing file to the TaskList
+    public TextList(File file) throws BotException, FileNotFoundException {
+        // The file should be new or not tampered with by a user
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String line = sc.nextLine();
             // Can be abstracted out, but did not since it is a constructor method
-            String[] taskInfo = line.split(" / ");
+            String[] textInfo = line.split(" / ");
 
             Task taskAdded;
-            CommandEnum commandEnum = CommandEnum.stringToCommandEnum(taskInfo[TASK_TYPE]);
-            boolean isMarked = Integer.parseInt(taskInfo[TASK_MARKED_OR_NOT]) == 1;
+            boolean isMarked;
+
+            Note noteAdded;
+
+            CommandEnum commandEnum = CommandEnum.stringToCommandEnum(textInfo[NOTE_OR_TASK_TYPE]);
 
             switch (commandEnum) {
             case TODO:
-                taskAdded = new Todo(taskInfo[TASK_DESCRIPTION]);
+                taskAdded = new Todo(textInfo[TASK_DESCRIPTION]);
                 this.tasks.add(taskAdded);
+                isMarked = Integer.parseInt(textInfo[TASK_MARKED_OR_NOT]) == 1;
                 if (isMarked) {
                     taskAdded.mark();
                 }
                 break;
 
             case DEADLINE:
-                taskAdded = new Deadline(taskInfo[TASK_DESCRIPTION], taskInfo[TASK_DATE]);
+                taskAdded = new Deadline(textInfo[TASK_DESCRIPTION], textInfo[TASK_DATE]);
                 this.tasks.add(taskAdded);
+                isMarked = Integer.parseInt(textInfo[TASK_MARKED_OR_NOT]) == 1;
                 if (isMarked) {
                     taskAdded.mark();
                 }
                 break;
 
             case EVENT:
-                taskAdded = new Event(taskInfo[TASK_DESCRIPTION], taskInfo[TASK_DATE]);
+                taskAdded = new Event(textInfo[TASK_DESCRIPTION], textInfo[TASK_DATE]);
                 this.tasks.add(taskAdded);
+                isMarked = Integer.parseInt(textInfo[TASK_MARKED_OR_NOT]) == 1;
                 if (isMarked) {
                     taskAdded.mark();
                 }
+                break;
+
+            case NOTE:
+                noteAdded = new Note(textInfo[NOTE_DESCRIPTION]);
+                this.notes.add(noteAdded);
                 break;
 
             default:
@@ -84,27 +98,39 @@ public class TaskList {
      *
      * @param commandEnum Type of the task.
      * @param description Description for the task.
-     * @param modifierMessage Date set for the task.
-     * @throws DateTimeParseException When the modifierMessage contains a wrong date format.
+     * @param modifierDate Date set for the task.
+     * @throws DateTimeParseException When the modifierDate contains a wrong date format.
      */
-    public void addTask(CommandEnum commandEnum, String description, String modifierMessage) throws
+    public void addTask(CommandEnum commandEnum, String description, String modifierDate) throws
             DateTimeParseException {
         assert description != "" : "task description shouldn't be empty";
+
         switch (commandEnum) {
         case TODO:
             this.tasks.add(new Todo(description));
             break;
 
         case DEADLINE:
-            this.tasks.add(new Deadline(description, modifierMessage));
+            this.tasks.add(new Deadline(description, modifierDate));
             break;
 
         case EVENT:
-            this.tasks.add(new Event(description, modifierMessage));
+            this.tasks.add(new Event(description, modifierDate));
             break;
 
         default:
         }
+    }
+
+    /**
+     * Adds the note to notes ArrayList.
+     *
+     * @param description Description for the note.
+     */
+    public void addNote(String description) {
+        assert description != "" : "note description shouldn't be empty";
+
+        this.notes.add(new Note(description));
     }
 
     /**
@@ -114,6 +140,10 @@ public class TaskList {
      */
     public int taskListSize() {
         return this.tasks.size();
+    }
+
+    public int noteListSize() {
+        return this.notes.size();
     }
 
     /**
@@ -128,22 +158,40 @@ public class TaskList {
     }
 
     /**
-     * Returns a String representation of all tasks with a txt file format.
+     * Returns a String representation of the note with respective noteNumber.
      *
-     * @return a String (txt-file based) representation of all tasks.
+     * @param noteNumber Number (order) of the note that appear in notes ArrayList. (1-based)
+     * @return String representation of the given note.
      */
-    public String tasksToTxtString() {
+    public String noteString(int noteNumber) {
+        assert noteNumber >= 1 || noteNumber <= noteListSize() : "noteNumber should be within the range";
+        return this.notes.get(noteNumber - 1).toString();
+    }
+
+    /**
+     * Returns a String representation of all texts (tasks and notes) with a txt file format.
+     *
+     * @return a String (txt-file based) representation of all texts.
+     */
+    public String textsToTxtString() {
         StringBuilder str = new StringBuilder();
-        addTxtTasksToStringBuilder(str);
+        addTxtTextsToStringBuilder(str);
         return str.toString();
     }
 
-    private void addTxtTasksToStringBuilder(StringBuilder str) {
+    private void addTxtTextsToStringBuilder(StringBuilder str) {
         for (Task task : tasks) {
             if (str.length() == 0) {
                 str.append(task.toTxtString());
             } else {
                 str.append("\n" + task.toTxtString());
+            }
+        }
+        for (Note note : notes) {
+            if (str.length() == 0) {
+                str.append(note.toTxtString());
+            } else {
+                str.append("\n" + note.toTxtString());
             }
         }
     }
@@ -166,6 +214,29 @@ public class TaskList {
                 str.append(count + ". " + task.toString());
             } else {
                 str.append("\n" + count + ". " + task.toString());
+            }
+            count++;
+        }
+    }
+
+    /**
+     * Returns a String representation of all notes for display.
+     *
+     * @return a String (display based) representation of all notes.
+     */
+    public String notesToString() {
+        StringBuilder str = new StringBuilder();
+        addNotesToStringBuilder(str);
+        return str.toString();
+    }
+
+    private void addNotesToStringBuilder(StringBuilder str) {
+        int count = 1;
+        for (Note note : notes) {
+            if (str.length() == 0) {
+                str.append(count + ". " + note.toString());
+            } else {
+                str.append("\n" + count + ". " + note.toString());
             }
             count++;
         }
@@ -200,6 +271,19 @@ public class TaskList {
         Task deletedTask = this.tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
         return deletedTask.toString();
+    }
+
+    /**
+     * Deletes a note with given noteNumber and
+     * returns a String representation of that note (for display).
+     *
+     * @param noteNumber Number (order) of the note that appear in notes ArrayList. (1-based)
+     * @return String representation of the note that is deleted.
+     */
+    public String deletedNoteString(int noteNumber) {
+        Note deletedNote = this.notes.get(noteNumber - 1);
+        notes.remove(noteNumber - 1);
+        return deletedNote.toString();
     }
 
     /**

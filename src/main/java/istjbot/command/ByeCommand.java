@@ -2,7 +2,7 @@ package istjbot.command;
 
 import istjbot.exception.BotException;
 import istjbot.storage.Storage;
-import istjbot.task.TaskList;
+import istjbot.text.TextList;
 import istjbot.ui.Ui;
 
 /**
@@ -32,13 +32,13 @@ public class ByeCommand extends Command {
     /**
      * Executes the procedure of ending the interaction with the IstjBot.
      *
-     * @param tasks TaskList.
+     * @param texts TextList.
      * @param ui Text part of the User Interface.
      * @param storage Storage.
      * @throws BotException When the interaction cannot be finished due to extra information at the back.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TextList texts, Ui ui, Storage storage) throws BotException {
         checkForError();
         return ui.showBye();
     }
