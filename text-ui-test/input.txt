@@ -1,0 +1,6 @@
+todo test1
+deadline test2 /by 2022-12-21 01:00
+event test3 /at 2022-03-05 13:00
+mark 2
+list
+bye
