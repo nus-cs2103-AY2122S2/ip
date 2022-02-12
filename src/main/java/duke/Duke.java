@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.stage.Stage;
+
 import java.util.Arrays;
 
 /**
@@ -12,6 +14,7 @@ public class Duke {
     static final int TIME_INDEX = 2;
 
     private final TaskList list = DataStore.loadData();
+    private Stage stage;
 
     /**
      * You should have your own function to generate a response to user input.
@@ -56,7 +59,7 @@ public class Duke {
             output = handleSort();
             break;
         case BYE:
-            output = handleBye();
+            handleBye();
             break;
         default:
             break;
@@ -70,8 +73,8 @@ public class Duke {
         return output;
     }
 
-    private String handleBye() {
-        return "Thank you, hope to see you again!";
+    private void handleBye() {
+        stage.close();
     }
 
     private String handleFind(String search) {
@@ -169,4 +172,7 @@ public class Duke {
     }
 
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }

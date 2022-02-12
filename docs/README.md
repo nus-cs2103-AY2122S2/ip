@@ -156,10 +156,4 @@ To end the program, enter the following:
 ```
 bye
 ```
-This will end the program and you may close
-the window afterwards
-
-Expected Return:
-```
-Thank you, hope to see you again!
-```
+This will end the program and the window will close
