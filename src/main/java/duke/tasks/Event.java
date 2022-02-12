@@ -30,7 +30,33 @@ public class Event extends Task {
         String markState = this.isDone ? "mark" : "unmark";
         return output + " | " + markState + " | "
                 + this.description + " | " + this.eventDate;
+    }
 
+    /**
+     * Checks if the current Event task is equal
+     * to the Event task passed into the function.
+     *
+     * @param task The Event task to be checked.
+     * @return True if equal, false otherwise.
+     */
+    public boolean equalsTo(Event task) {
+        String descriptionToCheck = task.getDescription();
+        String currentDescription = this.getDescription();
+        boolean isDescriptionSame = descriptionToCheck.equals(currentDescription);
+        LocalDate dateToCheck = task.getEventDate();
+        LocalDate currentDate = this.eventDate;
+        boolean isDateSame = dateToCheck.isEqual(currentDate);
+
+        return isDescriptionSame && isDateSame;
+    }
+
+    /**
+     * Gets the date of the Event task.
+     *
+     * @return A LocalDate object representing the date of Event.
+     */
+    LocalDate getEventDate() {
+        return this.eventDate;
     }
 
     /**
