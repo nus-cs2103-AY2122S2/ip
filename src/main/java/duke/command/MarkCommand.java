@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.task.TaskList;
 
+/**
+ * A Command that marks the specified task when executed.
+ */
 public class MarkCommand extends Command {
 
     private final int index;
@@ -28,6 +31,10 @@ public class MarkCommand extends Command {
                 + tasks.get(index);
     }
 
+    /**
+     * Indicates that the program should not be exited.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

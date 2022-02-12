@@ -1,14 +1,12 @@
 package duke.command;
 
-import duke.Duke;
-import duke.DukeDateTime;
 import duke.DukeException;
 import duke.Parser;
-import duke.task.Deadline;
-import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 
+/**
+ * A Command that edits the specified task when executed.
+ */
 public class EditCommand extends Command {
 
     private final int index;
@@ -57,6 +55,10 @@ public class EditCommand extends Command {
         return "Ok, I've updated the task:\n  " + index + ". " + tasks.get(index);
     }
 
+    /**
+     * Indicates that the program should not be exited.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

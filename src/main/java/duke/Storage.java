@@ -11,6 +11,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Handles writing and reading from the storage area.
+ */
 public class Storage {
 
     private final String filePath;

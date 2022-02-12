@@ -8,7 +8,7 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: transparent;">
   <children>
-    <Label fx:id="label" text="Label" wrapText="true" maxWidth="360.0">
+    <Label fx:id="label" text="Label" wrapText="true" maxWidth="560.0">
       <font>
         <Font name="Consolas" size="14.0" />
       </font>

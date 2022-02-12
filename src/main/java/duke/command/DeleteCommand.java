@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.task.TaskList;
 
+/**
+ * A Command that deletes the specified task when executed.
+ */
 public class DeleteCommand extends Command {
 
     private final int index;
@@ -29,6 +32,10 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Indicates that the program should not be exited.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

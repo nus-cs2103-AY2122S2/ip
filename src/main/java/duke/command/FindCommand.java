@@ -5,6 +5,9 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * A Command that finds tasks containing the keyword when executed.
+ */
 public class FindCommand extends Command {
 
     private final String text;
@@ -18,7 +21,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Constructs a new {@code TaskList} with matching tasks and asks the UI to display the list.
+     * Finds all tasks containing the keyword.
      * @param tasks current list of tasks
      */
     @Override
@@ -40,6 +43,10 @@ public class FindCommand extends Command {
         return response;
     }
 
+    /**
+     * Indicates that the program should not be exited.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

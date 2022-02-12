@@ -13,7 +13,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 /**
@@ -28,6 +32,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView imageView;
 
+    /**
+     * Constructor for the {@code DialogBox} object.
+     */
     private DialogBox(String text, Image image, Background background) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -54,6 +61,9 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the dialog box for the user side.
+     */
     public static DialogBox getUserDialog(String text, Image image) {
         Insets insets = new Insets(6);
         CornerRadii cornerRadii = new CornerRadii(10);
@@ -63,6 +73,9 @@ public class DialogBox extends HBox {
         return userDialog;
     }
 
+    /**
+     * Returns the dialog box for the Duke side.
+     */
     public static DialogBox getDukeDialog(String text, Image image) {
         Insets insets = new Insets(6);
         CornerRadii cornerRadii = new CornerRadii(10);

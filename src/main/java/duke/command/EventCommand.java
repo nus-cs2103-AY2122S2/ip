@@ -5,6 +5,9 @@ import duke.task.Task;
 import duke.task.Event;
 import duke.task.TaskList;
 
+/**
+ * A Command that adds an event when executed.
+ */
 public class EventCommand extends Command {
 
     private final String description;
@@ -29,9 +32,13 @@ public class EventCommand extends Command {
         Task t = new Event(description, at);
         tasks.add(t);
         return "Got it. I've added this task:\n  " + t
-                + "\nNow you have " + tasks.size() + " tasks in your list.";
+                + "\nNow you have " + tasks.size() + " task(s) in your list.";
     }
 
+    /**
+     * Indicates that the program should not be exited.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

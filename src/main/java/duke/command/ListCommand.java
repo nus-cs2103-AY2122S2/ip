@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.task.TaskList;
 
+/**
+ * A Command that shows the current list of tasks when executed.
+ */
 public class ListCommand extends Command {
 
     /**
@@ -25,6 +28,10 @@ public class ListCommand extends Command {
         return response;
     }
 
+    /**
+     * Indicates that the program should not be exited.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

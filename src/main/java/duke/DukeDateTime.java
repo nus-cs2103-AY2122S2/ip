@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Time used by Duke. Implemented using {@code LocalDate} and optionally {@code LocalTime}.
+ */
 public class DukeDateTime {
 
     private final LocalDate date;

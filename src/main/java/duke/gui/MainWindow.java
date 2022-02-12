@@ -33,10 +33,17 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
-    public void setDuke(Duke d) {
-        duke = d;
+    /**
+     * Sets the Duke of the GUI.
+     * @param duke The Duke to set
+     */
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
+    /**
+     * Initializes the GUI with a ScrollPane, a user input field; sets up scrolling.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -55,6 +62,9 @@ public class MainWindow extends AnchorPane {
         userInput.setStyle("-fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);");
     }
 
+    /**
+     * Displays the greetings from Duke.
+     */
     public void greet() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greet(), dukeImage));
     }

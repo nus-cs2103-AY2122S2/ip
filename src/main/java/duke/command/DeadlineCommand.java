@@ -5,6 +5,9 @@ import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.TaskList;
 
+/**
+ * A Command that adds a deadline task when executed.
+ */
 public class DeadlineCommand extends Command {
 
     private final String description;
@@ -29,9 +32,13 @@ public class DeadlineCommand extends Command {
         Task t = new Deadline(description, by);
         tasks.add(t);
         return "Got it. I've added this task:\n  " + t
-                + "\nNow you have " + tasks.size() + " tasks in your list.";
+                + "\nNow you have " + tasks.size() + " task(s) in your list.";
     }
 
+    /**
+     * Indicates that the program should not be exited.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

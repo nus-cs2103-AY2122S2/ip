@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeDateTime;
 
+/**
+ * Task of type Event.
+ */
 public class Event extends Task {
 
     protected static Icon ICON = Icon.E;

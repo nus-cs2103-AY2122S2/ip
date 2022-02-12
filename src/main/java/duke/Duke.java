@@ -2,8 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
-import javafx.util.Pair;
 
+/**
+ * A Duke with a name.
+ */
 public class Duke {
 
     private static String logo = " ____        _        \n"
@@ -17,7 +19,7 @@ public class Duke {
     private String initializationMessage;
 
     /**
-     * Constructs a {@code Duke} object with its name and path for storage.
+     * Constructs a {@code Duke} object with its name.
      */
     public Duke(String name) {
         this.name = name;
@@ -31,12 +33,15 @@ public class Duke {
 
     /**
      * Returns the greetings from Duke.
-     * @return greetings from Duke.
      */
     public String greet() {
         return "Hello! I'm " + name + ".\nWhat can I do for you?";
     }
 
+    /**
+     * Returns the response of a user input.
+     * @param input the user input
+     */
     public Response getResponse(String input) {
         try {
             Command c = Parser.parse(input);

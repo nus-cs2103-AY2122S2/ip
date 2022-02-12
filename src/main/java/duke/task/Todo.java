@@ -1,7 +1,8 @@
 package duke.task;
 
-import duke.DukeDateTime;
-
+/**
+ * Task of type Todo.
+ */
 public class Todo extends Task {
 
     protected static Icon ICON = Icon.T;

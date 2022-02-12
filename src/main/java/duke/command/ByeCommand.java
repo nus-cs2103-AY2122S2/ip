@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.task.TaskList;
 
+/**
+ * A Command that signals to exit the program when executed.
+ */
 public class ByeCommand extends Command {
 
     /**
@@ -18,6 +21,10 @@ public class ByeCommand extends Command {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Indicates that the program should be exited.
+     * @return true
+     */
     @Override
     public boolean isExit() {
         return true;

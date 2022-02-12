@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeDateTime;
 
+/**
+ * Task of type Deadline.
+ */
 public class Deadline extends Task {
 
     protected static Icon ICON = Icon.D;

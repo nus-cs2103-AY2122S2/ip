@@ -1,7 +1,22 @@
 package duke;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EditCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
+import duke.command.UnrecognizedCommand;
 
+/**
+ * Command parser.
+ */
 public class Parser {
 
     /**
@@ -22,6 +37,8 @@ public class Parser {
             return new ByeCommand();
         } else if (input.equals("list")) {
             return new ListCommand();
+        } else if (input.equals("help")) {
+            return new HelpCommand();
         } else if (input.matches("delete [1-9]+\\d*")) {
             return new DeleteCommand(Integer.parseInt(remaining));
         } else if (input.matches("mark [1-9]+\\d*")) {
