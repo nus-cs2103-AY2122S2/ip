@@ -23,7 +23,7 @@ public abstract class Command {
      * @exception IOException
      * @see IOException
      */
-    public abstract void execute(TaskList taskList, Storage storage) throws DukeException, IOException;
+    public abstract String execute(TaskList taskList, Storage storage) throws DukeException, IOException;
 
     /**
      * This method is used to check if this command closes the Duke Application.

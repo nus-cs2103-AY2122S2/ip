@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.Ui;
+import java.io.IOException;
+
+import duke.Ui.Ui;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents a command to mark a task as uncompleted in the Duke application.
@@ -14,7 +14,7 @@ import java.io.IOException;
  * @version 1.0
  */
 public class UndoCommand extends Command {
-    int taskId;
+    private final int taskId;
 
     /**
      * Constructor to create an Undo Command.
@@ -34,15 +34,15 @@ public class UndoCommand extends Command {
      * @exception IOException
      * @see IOException
      */
-    public void execute(TaskList taskList, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Storage storage) throws IOException, DukeException {
         if (taskId >= taskList.getTotalTasks() || taskId < 0) {
             throw new DukeException(Ui.MSG_INVALIDTASKID);
         } else if (!taskList.isDone(taskId)) {
             throw new DukeException(Ui.MSG_TASKNOTCOMPLETE);
         } else {
             taskList.uncompleteTask(taskId);
-            Ui.print(Ui.updateTaskMsg(taskList.getTask(taskId).toString()));
             storage.writeToFile(taskList);
+            return Ui.updateTaskMsg(taskList.getTask(taskId).toString());
         }
     }
 
@@ -52,8 +52,8 @@ public class UndoCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return "To mark a task as incomplete, use the undo command followed by the task number.\n"+
-                "(Hint: Use the list command to find the task number)\n"+
-                "  Usage: undo <Task Id> | i.e. undo 3\n\n";
+        return "To mark a task as incomplete, use the undo command followed by the task number.\n"
+                + "(Hint: Use the list command to find the task number)\n"
+                + "  Usage: undo <Task Id> | i.e. undo 3\n\n";
     }
 }

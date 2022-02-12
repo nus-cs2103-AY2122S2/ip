@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import duke.Ui;
+import duke.Ui.Ui;
 import duke.io.Storage;
 import duke.task.TaskList;
 
@@ -16,8 +16,8 @@ import duke.task.TaskList;
  */
 public class AddCommand extends Command {
 
-    private CommandType commandType;
-    private String description;
+    private final CommandType commandType;
+    private final String description;
     private LocalDate date;
     private LocalTime time;
 
@@ -55,7 +55,7 @@ public class AddCommand extends Command {
      * @exception IOException
      * @see IOException
      */
-    public void execute(TaskList taskList, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Storage storage) throws IOException {
         int taskId = -1;
         switch (commandType) {
         case TODO:
@@ -70,8 +70,8 @@ public class AddCommand extends Command {
         default:
             break;
         }
-        Ui.print(Ui.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1));
         storage.writeToFile(taskList);
+        return Ui.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1);
     }
 
     /**

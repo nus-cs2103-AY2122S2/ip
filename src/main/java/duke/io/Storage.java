@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.Parser;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.Ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;

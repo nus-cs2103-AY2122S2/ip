@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui.Ui;
 import duke.io.Storage;
 import duke.task.TaskList;
 
@@ -17,7 +18,8 @@ public class ExitCommand extends Command {
      * @param taskList The list of task in the Duke application.
      * @param storage  Storage of task in local persistent disk.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.MSG_EXIT;
     }
 
     /**
@@ -26,8 +28,8 @@ public class ExitCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return "To close the application, use the bye command.\n"+
-                "  Usage: bye\n\n";
+        return "To close the application, use the bye command.\n"
+                + "  Usage: bye\n\n";
     }
 
     /**

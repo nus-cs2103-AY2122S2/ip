@@ -3,10 +3,13 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.Ui.Main;
+import duke.Ui.Ui;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
+import javafx.application.Application;
 
 /**
  * Represents the Duke Application.
@@ -24,7 +27,7 @@ public class Duke {
     /**
      * Initialization of Duke application.
      */
-    private Duke() {
+    public Duke() {
         storage = new Storage(parser);
         try {
             taskList = storage.importTasks();
@@ -33,32 +36,23 @@ public class Duke {
         }
     }
 
-    /**
-     * Running instance of Duke application.
-     */
-    private void run() {
-        Ui.printWelcome();
-        boolean status = true;
-        String inputTxt;
-        while (status) {
-            try {
-                inputTxt = sc.nextLine();
-                Command c = parser.parse(inputTxt);
-                c.execute(taskList, storage);
-                status = !c.isExit();
-            } catch (DukeException e) {
-                Ui.print(e.getMessage());
-            } catch (IOException e) {
-                Ui.print(Ui.MSG_FILEWRITEERROR);
-            }
+    public String getResponse(String inputTxt) {
+        try {
+            inputTxt = sc.nextLine();
+            Command c = parser.parse(inputTxt);
+            return c.execute(taskList, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            return Ui.MSG_FILEWRITEERROR;
         }
-        Ui.printExit();
     }
 
     /**
      * Initiation of the Duke application.
      */
     public static void main(String[] args) {
-        new Duke().run();
+        // new Duke().run();
+        Application.launch(Main.class, args);
     }
 }

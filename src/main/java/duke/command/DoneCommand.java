@@ -1,11 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
+import duke.Ui.Ui;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
-import duke.Ui;
 
-import java.io.IOException;
 
 /**
  * Represents a command to mark a task as complete in the Duke application.
@@ -15,7 +16,7 @@ import java.io.IOException;
  */
 public class DoneCommand extends Command {
 
-    int taskId;
+    private final int taskId;
 
     /**
      * Constructor to create a Done Command.
@@ -35,15 +36,15 @@ public class DoneCommand extends Command {
      * @exception IOException
      * @see IOException
      */
-    public void execute(TaskList taskList, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Storage storage) throws IOException, DukeException {
         if (taskId >= taskList.getTotalTasks() || taskId < 0) {
             throw new DukeException(Ui.MSG_INVALIDTASKID);
         } else if (taskList.isDone(taskId)) {
             throw new DukeException(Ui.MSG_TASKALREADYDONE);
         } else {
             taskList.completeTask(taskId);
-            Ui.print(Ui.updateTaskMsg(taskList.getTask(taskId).toString()));
             storage.writeToFile(taskList);
+            return Ui.updateTaskMsg(taskList.getTask(taskId).toString());
         }
     }
 
@@ -53,8 +54,8 @@ public class DoneCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return "To mark a task as complete, use the done command followed by the task number.\n"+
-                "(Hint: Use the list command to find the task number)\n"+
-                "  Usage: done <Task Id> | i.e. done 3\n\n";
+        return "To mark a task as complete, use the done command followed by the task number.\n"
+                + "(Hint: Use the list command to find the task number)\n"
+                + "  Usage: done <Task Id> | i.e. done 3\n\n";
     }
 }

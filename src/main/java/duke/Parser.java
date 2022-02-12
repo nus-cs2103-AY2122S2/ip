@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.Ui.Ui;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.CommandType;

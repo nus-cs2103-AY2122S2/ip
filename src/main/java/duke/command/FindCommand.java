@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Ui;
+import duke.Ui.Ui;
 import duke.io.Storage;
 import duke.task.TaskList;
 
@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * @param taskList The list of task in the Duke application.
      * @param storage  Storage of task in local persistent disk.
      */
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         StringBuffer result = new StringBuffer("Here are the matching task(s) in your list:\n");
         int count = 1;
         for (int i = 0; i < taskList.getTotalTasks(); i++) {
@@ -39,9 +39,9 @@ public class FindCommand extends Command {
             }
         }
         if (count == 1) {
-            Ui.print(Ui.MSG_NOMATCH);
+            return Ui.MSG_NOMATCH;
         } else {
-            Ui.print(result.toString().trim());
+            return result.toString().trim();
         }
     }
 
@@ -51,7 +51,7 @@ public class FindCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return "To find a task, use the find command.\n" +
-                "Usage: find <search term> | i.e. find homework\n\n";
+        return "To find a task, use the find command.\n"
+                + "Usage: find <search term> | i.e. find homework\n\n";
     }
 }

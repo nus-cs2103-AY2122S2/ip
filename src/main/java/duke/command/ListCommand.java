@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.Ui.Ui;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
-import duke.Ui;
 
 /**
  * Represents a list command in the Duke application.
@@ -11,7 +11,7 @@ import duke.Ui;
  * @author Zheng Teck
  * @version 1.0
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Execute the command to print the tasks in task list.
@@ -20,11 +20,11 @@ public class ListCommand extends Command{
      * @param storage  Storage of task in local persistent disk.
      * @throws DukeException There exist no task in the task list.
      */
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         if (taskList.isEmpty()) {
             throw new DukeException(Ui.MSG_EMPTYTASK);
         } else {
-            Ui.print(Ui.taskListMsg(taskList));
+            return Ui.taskListMsg(taskList);
         }
     }
 
@@ -34,8 +34,8 @@ public class ListCommand extends Command{
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return "To list all task(s), use the list command.\n" +
-                "  Usage: list\n\n";
+        return "To list all task(s), use the list command.\n"
+                + "  Usage: list\n\n";
 
     }
 }

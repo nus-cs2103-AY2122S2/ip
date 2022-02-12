@@ -6,7 +6,7 @@ package duke.exception;
  * @author Zheng Teck
  * @version 1.0
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * Constructor to create custom duke errors.

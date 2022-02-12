@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
+import duke.Ui.Ui;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents a command to delete task from the Duke application.
@@ -15,7 +15,7 @@ import java.io.IOException;
  * @version 1.0
  */
 public class DeleteCommand extends Command {
-    int taskId;
+    private int taskId;
 
     /**
      * Constructor to create a Delete Command.
@@ -35,14 +35,14 @@ public class DeleteCommand extends Command {
      * @exception IOException
      * @see IOException
      */
-    public void execute(TaskList taskList, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Storage storage) throws IOException, DukeException {
         if (taskId > taskList.getTotalTasks() || taskId < 0) {
             throw new DukeException(Ui.MSG_INVALIDTASKID);
         } else {
             Task task = taskList.getTask(taskId);
             int totalTask = taskList.deleteTask(taskId);
-            Ui.print((Ui.deleteTaskMsg(task.toString(), totalTask + 1)));
             storage.writeToFile(taskList);
+            return Ui.deleteTaskMsg(task.toString(), totalTask + 1);
         }
     }
 
@@ -52,9 +52,8 @@ public class DeleteCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return "To delete a task, use the delete command followed by the task number.\n" +
-                "(Hint: Use the list command to find the task number)\n" +
-                "  Usage: delete <Task Id> | i.e. delete task 3\n\n";
-
+        return "To delete a task, use the delete command followed by the task number.\n"
+                + "(Hint: Use the list command to find the task number)\n"
+                + "  Usage: delete <Task Id> | i.e. delete task 3\n\n";
     }
 }
