@@ -145,7 +145,7 @@ Tip: Try adding a few tasks and inspect the data format and follow them.
 
 ## Command summary
 
-Action | Format, Examples
+Action | Format
 --------|------------------
 **todo** | `todo <task description>`
 **event** | `event <task description> /at <yyyy-MM-dd HHmm>`
