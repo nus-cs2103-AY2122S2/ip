@@ -33,6 +33,8 @@ Here are the tasks in your list:
   4. [E][ ] party at Evan's (Feb 27 2022)
 ```
 
+
+
 ### `todo [description]` - add a todo task to Task List
 
 Add a todo task to your Task List. Todo task supports task description feature only.
@@ -51,6 +53,8 @@ Got it. BMO has added this task:
 Now you have 1 task in your list.
 ```
 
+
+
 ### `deadline [description] /[yyyy-mm-dd]` - add a deadline to Task List
 
 Example of usage: 
@@ -67,6 +71,8 @@ Got it. BMO has added this task:
 Now you have 2 tasks in your list.
 ```
 
+
+
 ### `event [description] /[yyyy-mm-dd]` - add an event to Task List
 
 Example of usage:
@@ -82,6 +88,8 @@ Got it. BMO has added this task:
     [E][ ] party at Evan's (Feb 27 2022)
 Now you have 3 tasks in your list.
 ```
+
+
 
 ### `mark [index]` - mark a task
 
@@ -100,6 +108,8 @@ Awesome! :D Another task done:
     [T][X] borrow book
 ```
 
+
+
 ### `unmark [index]` - unmark a task
 
 Unmarks the task according to the index of the Task List.
@@ -116,6 +126,8 @@ The indexed task will be unmarked and shown.
 T_T BMO hate it when you lie. I will unmark this task:
     [T][ ] borrow book
 ```
+
+
 
 ### `delete [index]` - delete a task
 
@@ -134,6 +146,8 @@ BMO deleted the task. Yay!:
     [T][X] borrow book
 ```
 
+
+
 ### `note [label]: [description]` - add a new note to your Personalised Notes
 
 Adds a new note with a label and a description. Notes are referred to by their labels instead of index.
@@ -151,6 +165,8 @@ BMO added this to your notes:
     StudentID: A0123456M
 ```
 
+
+
 ### `checknote` - check your Personalised Notes
 
 Checks your Personalised Notes.
@@ -167,6 +183,8 @@ The current list of Personalised Notes.
 Here are your notes:
     StudentID: A0123456M
 ```
+
+
 
 ### `deletenote [label]` - delete a note
 
