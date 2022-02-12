@@ -33,7 +33,11 @@ public abstract class AddCommand extends Command {
     @Override
     public String execute(Calendar calendar, Ui ui, Storage storage) {
         try {
+            int previousNumOfEntries = calendar.numOfEntries();
+
             calendar.add(taskToAdd);
+
+            assert calendar.numOfEntries() - previousNumOfEntries == 1 : "task was not added";
             storage.save(calendar);
             return ui.showTaskAdded(taskToAdd, calendar.numOfEntries());
         } catch (IOException e) {

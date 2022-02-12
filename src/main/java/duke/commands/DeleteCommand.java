@@ -38,6 +38,10 @@ public class DeleteCommand extends Command {
             int index = Integer.parseInt(indexToDelete);
             String taskString = calendar.taskStringAtIndex(index);
             calendar.remove(index);
+
+            // check that task has been removed
+            assert !calendar.taskStringAtIndex(index).equals(taskString) == true : "task was not deleted";
+
             storage.save(calendar);
             return ui.showTaskDeleted(taskString);
         } catch (IndexOutOfBoundsException e) {

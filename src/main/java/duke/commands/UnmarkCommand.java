@@ -36,6 +36,9 @@ public class UnmarkCommand extends Command {
         try {
             Integer index = Integer.parseInt(indexToUnmark);
             calendar.markAsNotDone(index);
+
+            assert calendar.getTaskAtIndex(index).getIsComplete() == false : "task is still marked as complete";
+
             storage.save(calendar);
             return ui.showTaskIncomplete(calendar.taskStringAtIndex(index));
         } catch (IndexOutOfBoundsException e) {

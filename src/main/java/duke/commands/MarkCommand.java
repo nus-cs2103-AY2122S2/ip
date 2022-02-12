@@ -36,6 +36,9 @@ public class MarkCommand extends Command {
         try {
             Integer index = Integer.parseInt(indexToMark);
             calendar.markAsDone(index);
+
+            assert calendar.getTaskAtIndex(index).getIsComplete() : "task is still marked as incomplete";
+
             storage.save(calendar);
             return ui.showTaskComplete(calendar.taskStringAtIndex(index));
         } catch (IndexOutOfBoundsException e) {
