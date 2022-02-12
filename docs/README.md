@@ -1,4 +1,7 @@
 # User Guide for the task manager chatbot - Spike
+A quick view of the application GUI:
+
+<img width="600" alt="Ui" src="https://user-images.githubusercontent.com/77217780/153714076-caffc21d-9b88-4ab5-acce-c92e86123332.png">
 
 ## Features 
 
@@ -145,15 +148,15 @@ Tip: Try adding a few tasks and inspect the data format and follow them.
 
 ## Command summary
 
-Action | Format
---------|------------------
-**todo** | `todo <task description>`
-**event** | `event <task description> /at <yyyy-MM-dd HHmm>`
-**deadline** | `deadline <task description> /by <yyyy-MM-dd HHmm>`
-**delete** | `delete INDEX`
-**mark** | `mark INDEX`
-**unmark** | `unmark INDEX`
-**list** | `list`
-**find** | `find <keyword(s)>`
-**remind** | `remind <integer day range>`
-**bye** | `bye`
+|Action | Format|
+|--------|------------------|
+|**todo** | `todo <task description>`|
+|**event** | `event <task description> /at <yyyy-MM-dd HHmm>`|
+|**deadline** | `deadline <task description> /by <yyyy-MM-dd HHmm>`|
+|**delete** | `delete INDEX`|
+|**mark** | `mark INDEX`|
+|**unmark** | `unmark INDEX`|
+|**list** | `list`|
+|**find** | `find <keyword(s)>`|
+|**remind** | `remind <integer day range>`|
+|**bye** | `bye`|
