@@ -9,7 +9,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * The main method to start the GUI.
+     * Starts the GUI.
      *
      * @param args command line arguments
      */

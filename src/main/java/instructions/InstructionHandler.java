@@ -47,6 +47,7 @@ public class InstructionHandler {
         } catch (NoSuchTaskException e) {
             // This is okay as the only methods that will throw a NoSuchTaskException are the ones that
             // need to modify the tasks in the task list.
+            assert inst instanceof ModifyListedTaskInst;
             ModifyListedTaskInst castedInst = (ModifyListedTaskInst) inst;
             return String.format("There is no task %d!", castedInst.getTaskNum());
         } catch (InvalidActionException e) {
