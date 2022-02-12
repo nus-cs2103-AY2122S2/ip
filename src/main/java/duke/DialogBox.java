@@ -20,8 +20,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    final private static String USER_PATH = "/view/UserDialogBox.fxml";
-    final private static String DUKE_PATH = "/view/DukeDialogBox.fxml";
+    static final String USER_PATH = "/view/UserDialogBox.fxml";
+    static final String DUKE_PATH = "/view/DukeDialogBox.fxml";
     @FXML
     private Label dialog;
     @FXML
