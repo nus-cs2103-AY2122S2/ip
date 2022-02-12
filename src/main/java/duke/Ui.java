@@ -1,8 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.CommandType;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
@@ -11,8 +11,7 @@ import duke.command.ListCommand;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Ui {
 
@@ -28,8 +27,8 @@ public class Ui {
 
     public static final String MSG_EMPTYINPUT = "☹ OOPS!!! I'm sorry, input cannot be empty!";
 
-    public static final String MSG_INVALDTASKIDFORMAT = "☹ OOPS!!! I'm sorry, task Id should be a number. " +
-            "You can use the list command to find the tasks.";
+    public static final String MSG_INVALDTASKIDFORMAT = "☹ OOPS!!! I'm sorry, task Id should be a number. "
+            + "You can use the list command to find the tasks.";
 
     public static final String MSG_INVALIDCMD = "☹ OOPS!!! I'm sorry, but I don't know what that means!";
 

@@ -1,5 +1,10 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.CommandType;
@@ -12,11 +17,6 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.UndoCommand;
 import duke.exception.DukeException;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -69,7 +69,7 @@ public class Parser {
     }
 
     private Command formatCmdWithSingleInput(CommandType commandType, String inputTxt) throws DukeException {
-        String description = inputTxt.substring(inputTxt.indexOf(' ')).trim().replaceAll("\\|","-");
+        String description = inputTxt.substring(inputTxt.indexOf(' ')).trim().replaceAll("\\|", "-");
         if (description.isEmpty()) {
             throw new DukeException(Ui.MSG_EMPTYINPUT);
         } else if (commandType.equals(CommandType.TODO)) {
@@ -99,7 +99,8 @@ public class Parser {
         String[] formatInputTxt = commandType.equals(CommandType.DEADLINE)
                 ? inputTxt.split(" /by ")
                 : inputTxt.split(" /at ");
-        String description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim().replaceAll("\\|","-");
+        String description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' '))
+                .trim().replaceAll("\\|", "-");
         String due = formatInputTxt[1].trim();
 
         if (description.isEmpty() || due.isEmpty()) {

@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.io.Storage;
-import duke.task.TaskList;
-import duke.Ui;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import duke.Ui;
+import duke.io.Storage;
+import duke.task.TaskList;
 
 /**
  * Represents a command to add a new task (ToDo, Deadline, Event) to the Duke application.
@@ -16,10 +16,10 @@ import java.time.LocalTime;
  */
 public class AddCommand extends Command {
 
-    CommandType commandType;
-    String description;
-    LocalDate date;
-    LocalTime time;
+    private CommandType commandType;
+    private String description;
+    private LocalDate date;
+    private LocalTime time;
 
     /**
      * Constructor to create a ToDo Command.
@@ -80,20 +80,17 @@ public class AddCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return
-                "There are three types of task. They are as follows\n" +
-                "1. ToDo\n" +
-                "   Todo represents simple tasks with only the description field.\n" +
-                "   Usage: todo <description> | i.e. eat lunch with mum\n" +
-                "2. Event\n" +
-                "   Event represents tasks happening at a certain time with the description field.\n" +
-                "   Usage: event <description> /at <DD-MM-YYYY HH:MM> " +
-                        "| i.e. event project meeting /at 30-05-2023 13:59\n" +
-                "3. Deadline\n" +
-                "   Deadline represents tasks that are due by certain date time with the description field.\n" +
-                "   Usage: deadline <description> /by <DD-MM-YYYY HH:MM> " +
-                        "| i.e. deadline do homework /by 30-05-2023 13:59\n\n";
-
-
+        return "There are three types of task. They are as follows\n"
+                + "1. ToDo\n"
+                + "   Todo represents simple tasks with only the description field.\n"
+                    + "   Usage: todo <description> | i.e. eat lunch with mum\n"
+                + "2. Event\n"
+                + "   Event represents tasks happening at a certain time with the description field.\n"
+                    + "   Usage: event <description> /at <DD-MM-YYYY HH:MM> "
+                + "| i.e. event project meeting /at 30-05-2023 13:59\n"
+                + "3. Deadline\n"
+                + "   Deadline represents tasks that are due by certain date time with the description field.\n"
+                + "   Usage: deadline <description> /by <DD-MM-YYYY HH:MM> "
+                + "| i.e. deadline do homework /by 30-05-2023 13:59\n\n";
     }
 }

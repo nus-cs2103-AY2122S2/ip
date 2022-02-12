@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.io.Storage;
 import duke.task.TaskList;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Represents the Duke Application.
