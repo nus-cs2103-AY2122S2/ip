@@ -159,4 +159,17 @@ public class TaskList {
             throw new DukeException("Sorry, there are no tasks that match keyword.");
         }
     }
+
+    /**
+     * Returns the task with the updated description.
+     *
+     * @param taskNum The index of the task to be updated.
+     * @param description The new description of the task.
+     * @return The updated task.
+     */
+    public Task update(int taskNum, String description) throws DukeException {
+        Task taskToUpdate = tasks.get(taskNum - 1);
+        taskToUpdate.updateTask(description);
+        return taskToUpdate;
+    }
 }

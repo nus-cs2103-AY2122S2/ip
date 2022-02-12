@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.util.DukeException;
+import duke.util.Parser;
+
 /**
  * Represents an event, with a specific date and time.
  */
@@ -52,5 +55,31 @@ public class Event extends Task {
     @Override
     public String getDescription() {
         return this.description + " | " + at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
+
+    /**
+     * Sets datetime of event.
+     *
+     * @param newAt The new datetime to be set for the event.
+     */
+    public void setDateTime(LocalDateTime newAt) {
+        this.at = newAt;
+    }
+
+    /**
+     * Updates the event task with the given description.
+     *
+     * @param description The description to be updated.
+     * @return The updated task.
+     * @throws DukeException If given description is invalid.
+     */
+    @Override
+    public Task updateTask(String description) throws DukeException {
+        String[] descrArr = Parser.splitDescriptionByKeyword(description, "/at", "event");
+        String newDescription = descrArr[0];
+        LocalDateTime newDateTime = Parser.parseDateTime(descrArr[1]);
+        setDescription(newDescription);
+        setDateTime(newDateTime);
+        return this;
     }
 }

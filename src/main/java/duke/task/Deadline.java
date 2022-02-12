@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.util.DukeException;
+import duke.util.Parser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -52,5 +55,31 @@ public class Deadline extends Task {
     @Override
     public String getDescription() {
         return this.description + " | " + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
+
+    /**
+     * Sets datetime of the deadline.
+     *
+     * @param newBy The new datetime to be set for the deadline.
+     */
+    public void setDateTime(LocalDateTime newBy) {
+        this.by = newBy;
+    }
+
+    /**
+     * Updates the deadline task with the given description.
+     *
+     * @param description The description to be updated.
+     * @return The updated task.
+     * @throws DukeException If given description is invalid.
+     */
+    @Override
+    public Task updateTask(String description) throws DukeException {
+        String[] descrArr = Parser.splitDescriptionByKeyword(description, "/by", "deadline");
+        String newDescription = descrArr[0];
+        LocalDateTime newDateTime = Parser.parseDateTime(descrArr[1]);
+        setDescription(newDescription);
+        setDateTime(newDateTime);
+        return this;
     }
 }

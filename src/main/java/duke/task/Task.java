@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.util.DukeException;
+
 /**
  * Represents a task to be completed.
  */
@@ -23,6 +25,15 @@ public abstract class Task {
      * @return The type of the task.
      */
     public abstract String getType();
+
+    /**
+     * Updates task with the given description.
+     *
+     * @param description The description to be updated.
+     * @return The updated task.
+     * @throws DukeException If description given is invalid and task cannot be updated.
+     */
+    public abstract Task updateTask(String description) throws DukeException;
 
     /**
      * Returns the string representation of the task.
@@ -73,5 +84,14 @@ public abstract class Task {
      */
     public boolean hasKeyword(String keyword) {
         return description.contains(keyword);
+    }
+
+    /**
+     * Sets task description to the given description.
+     *
+     * @param newDescription The new description to replace the current one.
+     */
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
     }
 }

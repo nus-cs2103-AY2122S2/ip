@@ -13,6 +13,7 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
+import duke.command.UpdateCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -58,19 +59,24 @@ public class Parser {
             break;
         case "deadline":
             description = getDescription(inputArr, fullInput, command);
-            String[] descrArr = splitDescriptionByKeyword(description, " /by ", command);
+            String[] descrArr = splitDescriptionByKeyword(description, "/by", command);
             task = new Deadline(descrArr[0], parseDateTime(descrArr[1]));
             parsedCommand = new AddCommand(task);
             break;
         case "event":
             description = getDescription(inputArr, fullInput, command);
-            descrArr = splitDescriptionByKeyword(description, " /at ", command);
+            descrArr = splitDescriptionByKeyword(description, "/at", command);
             task = new Event(descrArr[0], parseDateTime(descrArr[1]));
             parsedCommand = new AddCommand(task);
             break;
         case "find":
             String keyword = getKeyword(inputArr);
             parsedCommand = new FindCommand(keyword);
+            break;
+        case "update":
+            taskNum = getTaskNumber(inputArr);
+            description = getNewDescription(inputArr, fullInput);
+            parsedCommand = new UpdateCommand(taskNum, description);
             break;
         case "bye":
             parsedCommand = new ExitCommand();
@@ -99,6 +105,7 @@ public class Parser {
      * Returns the String description provided in the user input.
      *
      * @param inputArr The user input split by white spaces.
+     * @param fullInput The entire string given in user input.
      * @param command The command that the description belongs to.
      * @return String description.
      * @throws DukeException If the description is not provided.
@@ -109,6 +116,21 @@ public class Parser {
                     + " description cannot be left empty!");
         }
         return fullInput.replace(command + " ", "");
+    }
+
+    /**
+     * Returns the new String description provided in the user input.
+     *
+     * @param inputArr The user input split by white spaces.
+     * @param fullInput The entire string given in user input.
+     * @return String description to be updated.
+     * @throws DukeException If the description is not provided.
+     */
+    public static String getNewDescription(String[] inputArr, String fullInput) throws DukeException {
+        if (inputArr.length == 2) {
+            throw new DukeException("Oops, please provide a new description!");
+        }
+        return fullInput.substring(9);
     }
 
     /**
@@ -143,7 +165,12 @@ public class Parser {
             throw new DukeException("Oops, please use " + keyword
                     + " to set a date and time for this " + taskType + "!");
         }
-        return description.split(" /by ");
+        String[] descrArr = description.split(" " + keyword + " ");
+        if (descrArr.length == 1) {
+            throw new DukeException("Oops, please provide description in this format:\n" + Ui.showIndent()
+                + "description " + keyword + " yyyy-mm-dd HH:mm");
+        }
+        return descrArr;
     }
 
     /**
