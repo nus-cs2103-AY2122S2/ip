@@ -43,11 +43,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "controller.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "yeowoo"
     archiveClassifier = null
 }
 
