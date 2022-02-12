@@ -32,7 +32,7 @@ Example:
   - Creates a new ***Todo*** task called `CS2103 IP`.
 
 
-### Adding a ***Event*** Task
+### Adding an ***Event*** Task
 Creates a new Event task along with the name of the task provided, as well as the **Date** and **Time** (Optional) of the event.
 
 Format: 
@@ -49,7 +49,7 @@ Example:
 - `event CS2103 TP meeting /at 2022-02-24` 
   - Creates a new ***Event*** task called `CS2103 TP meeting (at 24 Feb 2022)`.
   
-### Adding a ***Deadlines*** Task
+### Adding a ***Deadline*** Task
 Creates a new Deadline task along with the name of the task provided, as well as the **Date** and **Time** (Optional) of the event.
 
 Format: 
