@@ -1,7 +1,7 @@
 # User Guide
 Duke is an application for **managing and running your tasks**. Structure of user guide adapted from [AB3 User Guide](https://github.com/se-edu/addressbook-level3/blob/master/docs/UserGuide.md).
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ## Quick start
 
