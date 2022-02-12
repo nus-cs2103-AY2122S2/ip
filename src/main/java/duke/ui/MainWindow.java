@@ -140,8 +140,8 @@ public class MainWindow extends AnchorPane {
                 }, 2000);
             }
         } catch (DukeException e) {
-            DialogBox dukeDialogueBox = DialogBox.getDukeDialog(e.getMessage(), dukeImage);
-                    dialogContainer.getChildren().addAll(
+            DialogBox dukeDialogueBox = DialogBox.getDukeExceptionDialog(e.getMessage(), dukeImage);
+            dialogContainer.getChildren().addAll(
                     userDialogueBox,
                     dukeDialogueBox
             );
