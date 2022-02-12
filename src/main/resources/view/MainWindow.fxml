@@ -10,7 +10,7 @@
     <children>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="638.0" prefWidth="500.0" style="-fx-background-color: WHITE;" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="638.0" prefWidth="500.0" style="-fx-background-color: #dbdbdb;" />
+                <VBox fx:id="dialogContainer" prefHeight="638.0" prefWidth="500.0" style="-fx-background-image: url('images/Background.jpg'); fx-background-position: center center;"  />
             </content>
         </ScrollPane>
         <TextField fx:id="userInput" layoutY="639.0" onAction="#handleUserInput" prefHeight="52.0" prefWidth="425.0" style="-fx-background-color: #FFFFFF;" />
