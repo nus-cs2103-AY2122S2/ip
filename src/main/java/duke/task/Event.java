@@ -55,8 +55,7 @@ public class Event extends Task {
     public static boolean isDate(String input) {
         try {
             LocalDate.parse(input);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
         return true;

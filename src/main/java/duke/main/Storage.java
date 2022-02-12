@@ -34,31 +34,36 @@ public class Storage {
             if (file.exists()) {
                 FileReader fr = new FileReader(file);
                 Scanner sc = new Scanner(fr);
-                ArrayList<Task> tasks = new ArrayList<>();
-                while (sc.hasNextLine()) {
-                    Task task;
-                    String line = sc.nextLine();
-                    String[] splitLine  = line.split(" | ");
-                    if (splitLine[0].equals("T")) {
-                       task = new Todo(splitLine[2]);
-                    } else if (splitLine[0].equals("D")) {
-                        task = new Deadline(splitLine[2], splitLine[3]);
-                    } else if (splitLine[0].equals("E")) {
-                        task = new Event(splitLine[2], splitLine[3]);
-                    } else {
-                        throw new DukeException("OOPS!!! I don't know what task type is that.");
-                    }
-                    if (splitLine[1].equals("1")) {
-                        task.markTaskDone();
-                    }
-                    tasks.add(task);
-                }
+                ArrayList<Task> tasks = fillUpTasks(sc);
                 return tasks;
             }
             return new ArrayList<>();
         } catch (IOException e) {
             throw new DukeException("OOPS!!! An I0Exception occurred.");
         }
+    }
+
+    public ArrayList<Task> fillUpTasks(Scanner sc) throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            Task task;
+            String line = sc.nextLine();
+            String[] splitLine  = line.split(" | ");
+            if (splitLine[0].equals("T")) {
+                task = new Todo(splitLine[2]);
+            } else if (splitLine[0].equals("D")) {
+                task = new Deadline(splitLine[2], splitLine[3]);
+            } else if (splitLine[0].equals("E")) {
+                task = new Event(splitLine[2], splitLine[3]);
+            } else {
+                throw new DukeException("OOPS!!! I don't know what task type is that.");
+            }
+            if (splitLine[1].equals("1")) {
+                task.markTaskDone();
+            }
+            tasks.add(task);
+        }
+        return tasks;
     }
 
     /**

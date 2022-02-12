@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.exception.DukeException;
-import duke.main.Duke;
 
 /**
  * Represents a todo task
