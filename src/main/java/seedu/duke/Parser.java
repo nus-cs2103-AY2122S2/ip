@@ -2,16 +2,7 @@ package seedu.duke;
 
 import java.util.HashMap;
 
-import seedu.commands.ByeCommand;
-import seedu.commands.Command;
-import seedu.commands.DeadlineCommand;
-import seedu.commands.DeleteCommand;
-import seedu.commands.EventCommand;
-import seedu.commands.FindCommand;
-import seedu.commands.ListCommand;
-import seedu.commands.MarkCommand;
-import seedu.commands.TodoCommand;
-import seedu.commands.UnmarkCommand;
+import seedu.commands.*;
 
 /**
  * Parses the input of the user
@@ -33,6 +24,7 @@ public class Parser {
         CONVERTER.put("delete", new DeleteCommand());
         CONVERTER.put("unmark", new UnmarkCommand());
         CONVERTER.put("deadline", new DeadlineCommand());
+        CONVERTER.put("priority", new PriorityCommand());
     }
 
     /**

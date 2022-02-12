@@ -1,6 +1,8 @@
 package seedu.storage;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import seedu.duke.DukeException;
 import seedu.task.Task;
@@ -10,22 +12,22 @@ import seedu.task.Task;
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> TASKS;
 
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        this.TASKS = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> taskList) {
-        this.tasks = new ArrayList<>(taskList);
+        this.TASKS = new ArrayList<>(taskList);
     }
 
     public void add(Task task) {
-        tasks.add(task);
+        TASKS.add(task);
     }
 
     public ArrayList<Task> getTasks() {
-        return tasks;
+        return TASKS;
     }
 
     /**
@@ -37,7 +39,7 @@ public class TaskList {
      */
     public Task remove(int idx) throws DukeException {
         Task t = get(idx);
-        tasks.remove(idx);
+        TASKS.remove(idx);
         return t;
     }
 
@@ -50,27 +52,32 @@ public class TaskList {
      */
     public Task get(int idx) throws DukeException {
         try {
-            return tasks.get(idx);
+            return TASKS.get(idx);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist.");
         }
     }
 
+    public String sort() {
+        Collections.sort(TASKS);
+        return "Task list has been sorted!";
+    }
+
     /**
-     * Find all tasks with the given string in the task list
+     * Find all TASKS with the given string in the task list
      *
      * @param search The string to be searched
-     * @return A list in string representation of all the tasks with the substring found
+     * @return A list in string representation of all the TASKS with the substring found
      */
     public String find(String search) {
         StringBuilder s = new StringBuilder("Found:\n");
 
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription().contains(search)) {
+        for (int i = 0; i < TASKS.size(); i++) {
+            if (TASKS.get(i).getDescription().contains(search)) {
                 s.append("\t\t");
                 s.append(i + 1);
                 s.append(". ");
-                s.append(tasks.get(i).toString());
+                s.append(TASKS.get(i).toString());
                 s.append("\n");
             }
         }
@@ -86,16 +93,16 @@ public class TaskList {
     @Override
     public String toString() {
 
-        if (tasks.isEmpty()) {
+        if (TASKS.isEmpty()) {
             return "Empty list";
         }
 
         StringBuilder out = new StringBuilder("This List:\n");
 
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < TASKS.size(); i++) {
             out.append("\t\t");
             out.append(i + 1 + ". ");
-            out.append(tasks.get(i).toString());
+            out.append(TASKS.get(i).toString());
             out.append("\n");
         }
 
