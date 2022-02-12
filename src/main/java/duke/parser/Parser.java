@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
@@ -68,6 +69,9 @@ public class Parser {
             case FIND:
                 command = new FindCommand(input);
                 break;
+            case HELP:
+                command = new HelpCommand();
+                break;
             default:
                 command = new InvalidCommand();
             }
@@ -92,9 +96,16 @@ public class Parser {
         return Action.valueOf(command.toUpperCase());
     }
 
+    /**
+     * Checks if user has input 'bye' command.
+     *
+     * @param input user input.
+     * @return whether input equals bye, ignoring case.
+     */
     public static boolean isExit(String input) {
         return input.equalsIgnoreCase("bye");
     }
+
     /**
      * Returns the Description of task.
      *
@@ -134,7 +145,7 @@ public class Parser {
         /* Example: deadline abc /by xyz is split into:
            deadline abc AND xyz.
          */
-        String[] deadlineArr = splitWithRegex(input, "by");
+        String[] deadlineArr = splitWithRegex(input, "/by");
 
         // Example: deadline deadlineDescription is split to deadline and deadlineDescription.
         String[] deadlineSplit = splitWhiteSpace(deadlineArr[0]);
@@ -162,7 +173,7 @@ public class Parser {
         /* Example: event abc /at xyz is split into:
            event abc AND xyz
          */
-        String[] eventArr = splitWithRegex(input, "at");
+        String[] eventArr = splitWithRegex(input, "/at");
 
         // Example: deadline deadlineDescription is split to deadline and deadlineDescription.
         String[] eventSplit = splitWhiteSpace(eventArr[0]);
@@ -186,7 +197,7 @@ public class Parser {
      * @return String array result after dividing.
      */
     public static String[] splitWhiteSpace(String input) {
-        return input.split("\\s");
+        return input.split("\\s", 2);
     }
 
     /**

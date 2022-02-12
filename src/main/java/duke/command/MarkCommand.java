@@ -30,14 +30,17 @@ public class MarkCommand extends Command {
             if (!(inputWords.length == 2)) { //e.g mark 2, cannot be mark 2 2 or just mark
                 throw new InvalidArgumentException(Messages.UNKNOWN_MARK);
             }
+
             int taskNumber = Integer.parseInt(inputWords[1]);
             if (tasks.isOutOfBounds(taskNumber)) {
                 throw new OutOfBoundsException(Messages.getOutOfBoundsMsg(taskNumber));
             }
+
             tasks.get(taskNumber - 1).markAsDone();
+            storage.save(tasks);
+
             output = Ui.append(output, Messages.MARK_SUCCESS);
             output = Ui.append(output, tasks.getTaskStatement(taskNumber - 1));
-            storage.save(tasks);
         } catch (OutOfBoundsException | InvalidArgumentException e) {
             output = ui.showError(e.getMessage());
         } catch (IOException e) {

@@ -46,7 +46,7 @@ public class AddCommand extends Command {
         case EVENT:
             return addEvent(tasks, ui, storage);
         default:
-            assert false : "AddCommand should not reach here as action should be valid!";
+            assert false : "add command should not reach here";
         }
         assert false : "add command should not reach here";
         return null;
@@ -64,8 +64,10 @@ public class AddCommand extends Command {
         String output = "";
         try {
             String description = Parser.parseDescription(this.input);
+
             tasks.add(new Todo(description));
             storage.save(tasks);
+
             output = ui.printTaskAdded(tasks);
         } catch (InvalidArgumentException e) {
             output = ui.showError(e.getMessage());
@@ -87,8 +89,10 @@ public class AddCommand extends Command {
         String output = "";
         try {
             String[] deadlineFields = Parser.parseDeadline(input);
+          
             tasks.add(new Deadline(deadlineFields[0], deadlineFields[1]));
             storage.save(tasks);
+          
             output = ui.printTaskAdded(tasks);
         } catch (InvalidArgumentException e) {
             output = ui.showError(e.getMessage());
@@ -113,8 +117,10 @@ public class AddCommand extends Command {
         //event project meeting /at Mon 2-4pm
         try {
             String[] eventFields = Parser.parseEvent(input);
+          
             tasks.add(new Event(eventFields[0], eventFields[1]));
             storage.save(tasks);
+          
             output = ui.printTaskAdded(tasks);
         } catch (InvalidArgumentException e) {
             output = ui.showError(e.getMessage());

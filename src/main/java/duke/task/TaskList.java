@@ -63,7 +63,7 @@ public class TaskList {
     }
 
     /**
-     * Check if a given task number exists in tasklist.
+     * Checks if a given task number exists in tasklist.
      *
      * @param taskNumber input task number.
      * @return whether number is out of bounds in tasklist.

@@ -33,6 +33,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a file, and if file is not in specified folder, creates the directory path toe the file too.
+     */
     public void createFile() {
         try {
             File directory = new File(file.getParent());
@@ -130,7 +133,7 @@ public class Storage {
      * @return Task generated.
      */
     public Task generateTask(char letter, boolean isDone, String taskContent) {
-        String[] tokens = taskContent.split("\\|", 2);
+        String[] tokens = taskContent.split("\\| ", 2);
         String description = tokens[0];
         switch (letter) {
         case 'T':
