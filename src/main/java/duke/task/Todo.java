@@ -36,5 +36,17 @@ public class Todo extends Task {
     public String getType() {
         return this.type;
     }
+
+    /**
+     * Updates the todo task with the given description.
+     *
+     * @param description The description to be updated.
+     * @return The updated task.
+     */
+    @Override
+    public Task updateTask(String description) {
+        setDescription(description);
+        return this;
+    }
 }
 
