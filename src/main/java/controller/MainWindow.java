@@ -31,9 +31,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Dog.png"));
 
+    /**
+     * Initializes JAVA FX components and sends a welcome message to user.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox
+                .getDukeDialog("Woof! I am Yeowoo the Shiba Inu! How can I help you?\n", dukeImage));
     }
 
     public void setDuke(Duke d) {
