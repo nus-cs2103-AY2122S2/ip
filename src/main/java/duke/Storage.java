@@ -53,7 +53,12 @@ public class Storage {
         File file = new File(this.filePath);
         boolean createDirectory = file.getParentFile().mkdirs();
         boolean created = file.createNewFile();
-
+        //System.out.print();
+        if (!file.exists()) {
+            assert createDirectory;
+            assert created;
+        }
+        assert file.exists();
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();

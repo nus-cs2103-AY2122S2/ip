@@ -21,6 +21,7 @@ public class Duke {
 
     public void startDuke() throws DukeException, IOException {
         storage.loadData();
+        //assert false;
         ui.displayHelloMessage();
         String command = sc.next();
         String description = sc.nextLine();
@@ -33,6 +34,7 @@ public class Duke {
             storage.saveData();
         }
         ui.displayByeMessage();
+
     }
     public static void main(String[] args) throws DukeException, IOException {
         Duke duke = new Duke();
