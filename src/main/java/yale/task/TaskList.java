@@ -120,6 +120,7 @@ public class TaskList {
         if (list.getSize() == 0) {
             return "You have no tasks at the moment!";
         } else {
+            assert list.getSize() != 0 : "List size should be more than 0";
             return "Here are the tasks in your list\n"
                     + list.listOut();
         }
@@ -138,6 +139,7 @@ public class TaskList {
             if (itemNo > list.getSize() || itemNo < 1) {
                 return "Error: That task does not exist!";
             } else {
+                assert itemNo <= list.getSize() : "Task number should be within list size";
                 String noted = "Noted. I've removed this task:\n   "
                         + list.getTask(itemNo - 1).toString();
                 list.deleteTask(itemNo - 1);
