@@ -6,6 +6,8 @@ import seedu.duke.task.TaskList;
 
 import java.io.IOException;
 
+
+
 public abstract class Command {
     /**
      *Executes a command.
@@ -28,4 +30,5 @@ public abstract class Command {
      * @return the response from Duke
      */
     public abstract String getResponseAfterCommand(TaskList taskList);
+
 }

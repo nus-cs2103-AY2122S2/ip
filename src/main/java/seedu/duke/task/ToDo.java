@@ -30,6 +30,43 @@ public class ToDo extends Task {
     }
 
     /**
+     * Used to update the ToDo object with a new Note.
+     * @param toDo which contains information to transfer over to new ToDo
+     * @param newNoteList which contains the updated notelist to store into ToDo
+     */
+    public ToDo(ToDo toDo, NoteList newNoteList) {
+        super(toDo, newNoteList);
+    }
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task editNoteList(int indexOfNote, String noteContent) {
+        NoteList newNoteList = super.getNotes().editNote(indexOfNote, noteContent);
+        return new ToDo(this, newNoteList);
+    }
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task addNoteToNoteList(Note newNote) {
+        NoteList newNoteList = super.getNotes().addNote(newNote);
+        return new ToDo(this, newNoteList);
+    }
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task deleteNoteFromNoteList(int indexOfNote) {
+        NoteList newNoteList = super.getNotes().deleteNote(indexOfNote);
+        return new ToDo(this, newNoteList);
+    }
+
+
+    /**
      * {inheritDoc}.
      */
     @Override

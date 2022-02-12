@@ -129,4 +129,32 @@ public class Ui {
     public static String showCompletedSearch(TaskList taskList) {
         return "Here are the matched tasks:\n" + taskList.printTasks();
     }
+
+    /**
+     * Used to show result after Add Note Command.
+     * @param taskList is the updated tasklist after command is executed
+     * @param updatedTask is the task that had the note added to it
+     * @return a string to be printed to user
+     */
+    public static String showAddNoteResult(TaskList taskList, Task updatedTask) {
+        return String
+                .format("Got it, I've added a note to task %s\nUse 'show note <taskNumber>' to see the note",
+                        updatedTask.toString());
+    }
+
+    public static String showNote(TaskList taskList, Task taskToShow) {
+        return String
+                .format("%s:\n%s",
+                        taskToShow.toString(),taskToShow.getNoteResult());
+    }
+
+    public static String showDeleteNoteResult(TaskList taskList, Task updatedTask) {
+        return String.format("Got it! I've deleted the note from %s",updatedTask.toString());
+    }
+
+    public static String showEditNoteResult(TaskList taskList, Task updatedTask) {
+        return String.format("Got it! I've edited the note from %s",updatedTask.toString());
+    }
+
+
 }

@@ -16,6 +16,7 @@ public abstract class Task {
      */
     private final boolean isDone;
     private final LocalDateTime date;
+    private final NoteList notes;
 
     /**
      * Constructor for a task.
@@ -26,6 +27,7 @@ public abstract class Task {
         this.isDone = false;
         //do null pointer exception check
         this.date = null;
+        this.notes = new NoteList();
     }
 
     /**
@@ -37,6 +39,17 @@ public abstract class Task {
         this.taskName = name;
         this.isDone = doneStatus;
         this.date = date;
+        this.notes = new NoteList();
+    }
+
+    /**
+     * Constructor used when editing note.
+     */
+    Task(Task oldTask, NoteList newNoteList) {
+        this.taskName = oldTask.getTaskName();
+        this.isDone = oldTask.isDone();
+        this.date = oldTask.getDate();
+        this.notes = newNoteList;
     }
 
     /**
@@ -64,6 +77,24 @@ public abstract class Task {
         }
     }
 
+    public NoteList getNotes() {
+        return this.notes;
+    }
+
+    public String getNoteResult() {
+        return this.notes.toString();
+    }
+
+    /**
+     * Edits the note in each task.
+     * @param noteContent contains the new note content to update
+     * @return an updated Task
+     */
+    public abstract Task editNoteList(int indexOfNote, String noteContent);
+
+    public abstract Task addNoteToNoteList(Note newNote);
+
+    public abstract Task deleteNoteFromNoteList(int indexOfNote);
     /**
      * Marks task as done.or undone.
      * @return new Task with done attribute as the boolean parameter

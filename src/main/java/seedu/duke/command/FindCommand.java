@@ -24,8 +24,7 @@ public class FindCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
-        TaskList newTaskList = taskList.find(this.searchTerm);
-        return newTaskList; //return the old tasklist because the new one is a filtered version
+        return taskList; //return the old tasklist because the new one is a filtered version
     }
 
     /**
@@ -33,7 +32,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String getResponseAfterCommand(TaskList taskList) {
-        return Ui.showCompletedSearch(taskList);
+        TaskList newTaskList = taskList.find(this.searchTerm);
+        return Ui.showCompletedSearch(newTaskList);
     }
 
     /**

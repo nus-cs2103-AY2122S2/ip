@@ -153,4 +153,17 @@ public class TaskList {
 
         return newTaskList;
     }
+
+    /**
+     * Helps to update the tasklist by replacing out a older task with an updated version of it
+     * @param taskIndex contains index of task to be replaced in the arraylist of tasks
+     * @param updatedTask contains the updated task to be put into the tasklist
+     * @return
+     */
+    public TaskList replace(int taskIndex, Task updatedTask) {
+        ArrayList<Task> updatedTasks = this.copyTaskList();
+        updatedTasks.set(taskIndex,updatedTask);
+        return new TaskList(updatedTasks);
+    }
+
 }
