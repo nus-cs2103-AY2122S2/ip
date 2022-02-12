@@ -25,7 +25,7 @@ public class Event extends Task {
             date = LocalDate.parse(dateAndTime[0]);
             time = dateAndTime[1];
             super.saveFormat = "E," + this.description + "," + date + "," + time;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (Exception e) {
             throw new DukeException();
         }
     }

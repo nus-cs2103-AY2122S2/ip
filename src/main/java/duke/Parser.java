@@ -22,32 +22,31 @@ public class Parser {
     public String parse(String str) throws MissingDescriptionException, DukeException, InvalidTaskException {
         String[] strArr = str.split(" ");
         String firstWord = strArr[0];
-        if (firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo")
-                || firstWord.equals("list") || firstWord.equals("delete") || firstWord.equals("unmark")
-                || firstWord.equals("mark") || firstWord.equals("find") || firstWord.equals("bye")) {
-
-            if ((firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo"))
-                    && strArr.length == 1) {
+        if ((firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo"))) {
+            if (strArr.length == 1) {
                 throw new MissingDescriptionException();
             }
-            if (firstWord.equals("unmark") || firstWord.equals("mark") || firstWord.equals("delete")) {
-                if (strArr.length == 1) {
-                    throw new DukeException();
-                } else {
-                    try {
-                        int index = Integer.parseInt(strArr[1]);
-                        if (taskList.getTasks().size() < index) {
-                            throw new InvalidTaskException();
-                        }
-                    } catch (Exception e) {
+        } else if (firstWord.equals("unmark") || firstWord.equals("mark") || firstWord.equals("delete")) {
+            if (strArr.length == 1) {
+                throw new DukeException();
+            } else {
+                try {
+                    int index = Integer.parseInt(strArr[1]);
+                    if (taskList.getTasks().size() < index) {
                         throw new InvalidTaskException();
                     }
+                } catch (Exception e) {
+                    throw new InvalidTaskException();
                 }
             }
         } else if (firstWord.equals("schedule")) {
             try {
                 LocalDate date = LocalDate.parse(strArr[1]);
             } catch (DateTimeParseException e) {
+                throw new DukeException();
+            }
+        } else if (firstWord.equals("list") || firstWord.equals("find") || firstWord.equals("bye")) {
+            if (strArr.length > 1) {
                 throw new DukeException();
             }
         } else {
