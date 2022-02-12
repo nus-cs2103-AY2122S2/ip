@@ -1,5 +1,7 @@
 package athena.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,9 @@ public class Messages {
     public static final String MARKED_TASK_AS_NOT_DONE = "Alright, I've marked the following task as not done:";
     public static final String ONE_TASK_IN_LIST_MESSAGE = "Now you have 1 task in your list.";
     public static final String SAVE_ERROR_MESSAGE = "I encountered a problem saving to disk: ";
+    public static final String NO_REMINDERS_MESSAGE =
+            "Congratulations! You have nothing coming up in the given time period";
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public static String getMultiLineString(List<String> inputs) {
         return String.join("\n", inputs);
@@ -32,6 +37,20 @@ public class Messages {
         assert taskNumbers.size() > 0;
         ArrayList<String> outputs = new ArrayList<>();
         outputs.add(String.format("Here are the tasks containing the phrase '%s'", searchPhrase));
+        for (int taskNumber : taskNumbers) {
+            outputs.add(String.format("%d. %s", taskNumber, taskList.getTaskString(taskNumber)));
+        }
+        return getMultiLineString(outputs);
+    }
+
+
+    public static String getRemindersFoundInRangeDialog(TaskList taskList, List<Integer> taskNumbers,
+            LocalDate startDate, LocalDate endDate) {
+        assert taskNumbers.size() > 0;
+        ArrayList<String> outputs = new ArrayList<>();
+        outputs.add(String.format("You have the following tasks coming up between %s to %s",
+                startDate.format(OUTPUT_FORMATTER), endDate.format(OUTPUT_FORMATTER)));
+
         for (int taskNumber : taskNumbers) {
             outputs.add(String.format("%d. %s", taskNumber, taskList.getTaskString(taskNumber)));
         }

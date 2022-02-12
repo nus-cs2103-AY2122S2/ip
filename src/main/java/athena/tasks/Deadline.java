@@ -1,5 +1,6 @@
 package athena.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -49,6 +50,23 @@ public class Deadline extends Task {
     @Override
     public String getIcon() {
         return "D";
+    }
+
+    /**
+     * Returns true if the deadline falls within the given time period.
+     *
+     * @param startDate The startDate of the time period.
+     * @param endDate The endDate of the time period.
+     * @return True if deadline falls within given time period, inclusive of endDAte
+     */
+    @Override
+    public boolean isFallingBetweenInclusive(LocalDate startDate, LocalDate endDate) {
+        LocalDate dueDate = dueDateTime.toLocalDate();
+        if (dueDate.isBefore(startDate) || dueDate.isAfter(endDate)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

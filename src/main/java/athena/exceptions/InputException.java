@@ -45,6 +45,10 @@ public class InputException extends Exception {
         case MISSING_SEARCH_PHRASE:
             return "Error. Please provide a search phrase.";
             // No fallthrough
+        case INVALID_REMINDER_PHRASE:
+            return "I do not understand that phrase. Try asking me for reminders "
+                + "for 'today', 'tomorrow', 'this week' or 'next week'";
+            // No fallthrough
         default:
             assert false;
             return "";
