@@ -46,15 +46,15 @@ public enum RecurFrequency implements Tag {
     public String getLabel() {
         switch (this) {
         case DAILY:
-            return "[Daily]";
+            return "(Daily)";
         case WEEKLY:
-            return "[Weekly]";
-        case MONTHLY:
-            return "[Monthly]";
+            return "(Weekly)";
         case BIWEEKLY:
-            return "[Biweekly]";
+            return "(Biweekly)";
+        case MONTHLY:
+            return "(Monthly)";
         default:
-            return "[??]";
+            return "??";
         }
     }
 }

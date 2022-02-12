@@ -13,15 +13,18 @@ import saitama.tasks.ToDo;
 class TaskTest {
 
     private Task task = new ToDo("Eat", null);
-    private Task recursiveDeadline = new Deadline("CS2103T", LocalDateTime.of(2022, 12, 28, 20, 0), true,
-                RecurFrequency.WEEKLY, LocalDate.of(2000, 12, 20));
+    private Task recursiveDeadline = new Deadline("CS2103T", LocalDateTime.of(2052, 12, 28, 20, 0),
+            true, RecurFrequency.WEEKLY, LocalDate.of(2000, 12, 20));
 
     @Test
     void testToString() {
-        assertEquals("[T][ ] Eat", task.toString());
+        String tick = "\u2713";
+        String cross = "\u2718";
+        assertEquals(String.format("[T][%s] Eat", cross), task.toString());
         task.markAsDone();
-        assertEquals("[T][X] Eat", task.toString());
+        assertEquals(String.format("[T][%s] Eat", tick), task.toString());
         assertEquals(true, recursiveDeadline.isRecurring());
-        assertEquals("[D][ ][Weekly] CS2103T (by: 28 Dec 2022 20:00)", recursiveDeadline.toString());
+        assertEquals(String.format("[D][%s](Weekly) CS2103T (by: 28 Dec 2052 20:00)", cross),
+                recursiveDeadline.toString());
     }
 }

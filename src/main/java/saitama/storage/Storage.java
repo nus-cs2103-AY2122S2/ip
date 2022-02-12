@@ -57,64 +57,13 @@ public class Storage {
                     throw new FileCorruptException();
                 }
 
-                //assign isDone
-                boolean isDone;
-                switch(data[1]) {
-                case "0":
-                    isDone = false;
-                    break;
-                case "1":
-                    isDone = true;
-                    break;
-                default:
-                    throw new FileCorruptException();
-                }
-
-                //assign recursiveTag
-                RecurFrequency recurFrequency = RecurFrequency.get(data[2]);
-                //assign last reset date
-                LocalDate lastResetDate = LocalDate.parse(data[3]);
-
-                //add task to array list
                 String taskType = data[0];
+                boolean isDone = getIsDone(data[1]);
+                RecurFrequency recurFrequency = RecurFrequency.get(data[2]);
+                LocalDate lastResetDate = LocalDate.parse(data[3]);
                 String taskArguments = data[4];
-                switch(taskType) {
-                case "T":
-                    taskList.add(new ToDo(taskArguments, isDone, recurFrequency, lastResetDate));
-                    break;
-                case "D":
-                    String[] splitTaskArguments = taskArguments.split(" /by ", 2);
-                    if (splitTaskArguments.length < 2) {
-                        throw new FileCorruptException();
-                    }
 
-                    String description = splitTaskArguments[0];
-                    String deadlineString = splitTaskArguments[1];
-
-                    try {
-                        LocalDateTime deadline = Parser.processDateTime(deadlineString);
-                        Task newTask = new Deadline(description,
-                                deadline, isDone, recurFrequency, lastResetDate);
-                        taskList.add(newTask);
-                    } catch (InvalidFormatException | InvalidDateTimeException e) {
-                        throw new FileCorruptException();
-                    }
-                    break;
-                case "E":
-                    splitTaskArguments = taskArguments.split(" /at ", 2);
-                    if (splitTaskArguments.length < 2) {
-                        throw new FileCorruptException();
-                    }
-
-                    description = splitTaskArguments[0];
-                    String location = splitTaskArguments[1];
-                    Task newTask = new Event(description,
-                            location, isDone, recurFrequency, lastResetDate);
-                    taskList.add(newTask);
-                    break;
-                default:
-                    throw new FileCorruptException();
-                }
+                addTaskToList(taskList, taskType, isDone, recurFrequency, lastResetDate, taskArguments);
             }
             return taskList;
         } catch (FileCorruptException e) {
@@ -124,6 +73,113 @@ public class Storage {
             System.out.printf("Filepath %s not found. Creating new list...\n", filePath);
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * Adds a task with the corresponding passed parameters to the given task list.
+     *
+     * @param taskList The task list which the task is to be added to.
+     * @param taskType The type of the task to be added.
+     * @param isDone The isDone status of the task to be added.
+     * @param recurFrequency The RecurFrequency of the task.
+     * @param lastResetDate The last reset date of the task.
+     * @param taskArguments The task's arguments.
+     * @throws FileCorruptException if the saved task has an invalid format.
+     */
+    private void addTaskToList(ArrayList<Task> taskList, String taskType, boolean isDone, RecurFrequency recurFrequency,
+                               LocalDate lastResetDate, String taskArguments) throws FileCorruptException {
+        switch(taskType) {
+        case "T":
+            Task newTask = new ToDo(taskArguments, isDone, recurFrequency, lastResetDate);
+            taskList.add(newTask);
+            break;
+        case "D":
+            newTask = createDeadlineTask(isDone, recurFrequency, lastResetDate, taskArguments);
+            taskList.add(newTask);
+            break;
+        case "E":
+            newTask = createEventTask(isDone, recurFrequency, lastResetDate, taskArguments);
+            taskList.add(newTask);
+            break;
+        default:
+            throw new FileCorruptException();
+        }
+    }
+
+    /**
+     * Creates an event task based on the passed parameters.
+     *
+     * @param isDone The isDone status of the task.
+     * @param recurFrequency The recurFrequency of the task.
+     * @param lastResetDate The last reset date of the task.
+     * @param taskArguments The task's arguments.
+     * @return A new event task based on the corresponding passed parameters.
+     * @throws FileCorruptException if the format of the saved event is invalid.
+     */
+    private Task createEventTask(boolean isDone, RecurFrequency recurFrequency,
+                                 LocalDate lastResetDate, String taskArguments) throws FileCorruptException {
+        String[] splitTaskArguments = taskArguments.split(" /at ", 2);
+        if (splitTaskArguments.length < 2) {
+            throw new FileCorruptException();
+        }
+
+        String description = splitTaskArguments[0];
+        String location = splitTaskArguments[1];
+        Task newTask = new Event(description,
+                location, isDone, recurFrequency, lastResetDate);
+        return newTask;
+    }
+
+    /**
+     * Creates a deadline task based on the passed parameters.
+     *
+     * @param isDone The isDone status of the task.
+     * @param recurFrequency The recurFrequency of the task.
+     * @param lastResetDate The last reset date of the task.
+     * @param taskArguments The task's arguments.
+     * @return A new Deadline task based on the corresponding passed parameters.
+     * @throws FileCorruptException if the format of the saved deadline is invalid.
+     */
+    private Task createDeadlineTask(boolean isDone, RecurFrequency recurFrequency, LocalDate lastResetDate,
+                                    String taskArguments) throws FileCorruptException {
+        String[] splitTaskArguments = taskArguments.split(" /by ", 2);
+        if (splitTaskArguments.length < 2) {
+            throw new FileCorruptException();
+        }
+
+        String description = splitTaskArguments[0];
+        String deadlineString = splitTaskArguments[1];
+
+        try {
+            LocalDateTime deadline = Parser.processDateTime(deadlineString);
+            Task newTask = new Deadline(description,
+                    deadline, isDone, recurFrequency, lastResetDate);
+            return newTask;
+        } catch (InvalidFormatException | InvalidDateTimeException e) {
+            throw new FileCorruptException();
+        }
+    }
+
+    /**
+     * Returns the boolean format of the saved isDone.
+     *
+     * @param data The isDone status of the task.
+     * @return The boolean format of the isDone status.
+     * @throws FileCorruptException if the saved isDone status is neither "true" nor "false".
+     */
+    private boolean getIsDone(String data) throws FileCorruptException {
+        boolean isDone;
+        switch(data) {
+        case "false":
+            isDone = false;
+            break;
+        case "true":
+            isDone = true;
+            break;
+        default:
+            throw new FileCorruptException();
+        }
+        return isDone;
     }
 
     /**

@@ -39,7 +39,6 @@ public class ToDo extends Task {
      * @throws IOException if there is an error writing the file.
      */
     public void saveTask(FileWriter fw) throws IOException {
-        String isDone = getStatusIcon() == "X" ? "1" : "0";
         fw.write(String.format("T %s %s %s %s\n", isDone, recurFrequency, lastResetDate, description));
     }
 

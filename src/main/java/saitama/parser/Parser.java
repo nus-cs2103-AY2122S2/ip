@@ -50,7 +50,7 @@ public class Parser {
         if (splitCommand.length >= 2) { //if command has arguments
             String commandArguments = splitCommand[1];
             tags = getTags(commandArguments); //check for tags
-            splitCommand[1] = removeTags(commandArguments);
+            splitCommand[1] = removeTags(commandArguments); //modify the string to remove tags
         }
 
         switch (command) {
@@ -145,23 +145,15 @@ public class Parser {
      * @throws EmptyDescriptionException if no details of the task are given.
      * @throws InvalidCommandException if command does not exist.
      */
-    private static Command prepareAdd(String[] splitCommand, ArrayList<Tag> tags) throws
-            InvalidFormatException, EmptyDescriptionException, InvalidCommandException, InvalidDateTimeException {
-        if (splitCommand.length < 2 || splitCommand[1].equals("")) {
-            throw new EmptyDescriptionException();
-        }
+    private static Command prepareAdd(String[] splitCommand, ArrayList<Tag> tags) throws InvalidFormatException,
+            EmptyDescriptionException, InvalidCommandException, InvalidDateTimeException {
         String taskType = splitCommand[0];
+        if (splitCommand.length < 2 || splitCommand[1].trim().equals("")) {
+            throw new EmptyDescriptionException(String.format("The description of %s cannot be empty!", taskType));
+        }
         String taskArguments = splitCommand[1];
 
-        RecurFrequency recurFrequency = null;
-        for (Tag tag : tags) {
-            if (tag instanceof RecurFrequency) {
-                @SuppressWarnings("unchecked")
-                RecurFrequency rf = (RecurFrequency) tag;
-                recurFrequency = rf;
-                break;
-            }
-        }
+        RecurFrequency recurFrequency = getRecurFrequency(tags);
 
         assert taskType.equals("TODO") || taskType.equals("DEADLINE") || taskType.equals("EVENT")
                 : "Parser detected invalid task type to add!";
@@ -171,29 +163,94 @@ public class Parser {
             Task newTask = new ToDo(taskArguments, recurFrequency);
             return new AddCommand(newTask);
         case "DEADLINE":
-            String[] taskArgumentsList = taskArguments.split(" /by ", 2);
-            if (taskArgumentsList.length < 2) {
-                throw new InvalidFormatException("You need to specify "
-                        + "the deadline!\n deadline <task name> /by <dd/mm/yyyy hh:mm>");
-            }
-            String taskDescription = taskArgumentsList[0];
-            LocalDateTime deadline = processDateTime(taskArgumentsList[1]);
-            newTask = new Deadline(taskDescription, deadline, recurFrequency);
+            newTask = createDeadlineTask(taskArguments, recurFrequency);
             return new AddCommand(newTask);
         case "EVENT":
-            taskArgumentsList = taskArguments.split(" /at ", 2);
-            if (taskArgumentsList.length < 2) {
-                throw new InvalidFormatException("You need to specify event location!\n"
-                        + "event <task name> /at <location>");
-            }
-            taskDescription = taskArgumentsList[0];
-            String location = taskArgumentsList[1];
-            newTask = new Event(taskDescription, location, recurFrequency);
+            newTask = createEventTask(taskArguments, recurFrequency);
             return new AddCommand(newTask);
         default:
             //Should never happen since we asserted that the task type is valid
             throw new InvalidCommandException();
         }
+    }
+
+    /**
+     * Creates an event task given the task arguments and recur frequency of the task.
+     *
+     * @param taskArguments The event task's arguments.
+     * @param recurFrequency The RecurFrequency of the task.
+     * @return A new event task based on the task's arguments and recur frequency.
+     * @throws InvalidFormatException if the task argument format is not in the form task name /at location.
+     * @throws EmptyDescriptionException if the description of the task is empty.
+     */
+    private static Task createEventTask(String taskArguments, RecurFrequency recurFrequency)
+            throws InvalidFormatException, EmptyDescriptionException {
+        String[] taskArgumentsList = taskArguments.split(" /at ", 2);
+        if (taskArgumentsList.length < 2) {
+            throw new InvalidFormatException("You need to specify event name and event location!\n"
+                    + "Format: event <task name> /at <location>");
+        }
+
+        String taskDescription = taskArgumentsList[0];
+        if (taskDescription.trim().equals("")) {
+            throw new EmptyDescriptionException("The description of the event task cannot be empty!");
+        }
+
+        String location = taskArgumentsList[1];
+        if (location.trim().equals("")) {
+            throw new InvalidFormatException("Your event location cannot be empty!");
+        }
+
+        Task newTask = new Event(taskDescription, location, recurFrequency);
+        return newTask;
+    }
+
+    /**
+     * Creates a deadline task given the task arguments and recur frequency of the task.
+     *
+     * @param taskArguments The deadline task's arguments.
+     * @param recurFrequency The RecurFrequency of the task.
+     * @return A new deadline task based on the task's arguments and recur frequency.
+     * @throws InvalidFormatException if the task argument format is not in the form
+     * task name /by dd/mm/yyyy hh:mm.
+     * @throws EmptyDescriptionException if the description of the task is empty.
+     * @throws InvalidDateTimeException if the specified date or time does not exist.
+     */
+    private static Task createDeadlineTask(String taskArguments, RecurFrequency recurFrequency)
+            throws InvalidFormatException, EmptyDescriptionException, InvalidDateTimeException {
+        String[] taskArgumentsList = taskArguments.split(" /by ", 2);
+        if (taskArgumentsList.length < 2) {
+            throw new InvalidFormatException("You need to specify "
+                    + "the task name and deadline!\nFormat: deadline <task name> /by <dd/mm/yyyy hh:mm>");
+        }
+
+        String taskDescription = taskArgumentsList[0];
+        if (taskDescription.trim().equals("")) {
+            throw new EmptyDescriptionException("The description of the deadline task cannot be empty!");
+        }
+
+        LocalDateTime deadline = processDateTime(taskArgumentsList[1]);
+        Task newTask = new Deadline(taskDescription, deadline, recurFrequency);
+        return newTask;
+    }
+
+    /**
+     * Returns the first RecurFrequency tag given a list of tags.
+     *
+     * @param tags The list of tags.
+     * @return The first RecurFrequency tag in the list.
+     */
+    private static RecurFrequency getRecurFrequency(ArrayList<Tag> tags) {
+        RecurFrequency recurFrequency = null;
+        for (Tag tag : tags) {
+            if (tag instanceof RecurFrequency) {
+                @SuppressWarnings("unchecked")
+                RecurFrequency rf = (RecurFrequency) tag;
+                recurFrequency = rf;
+                break;
+            }
+        }
+        return recurFrequency;
     }
 
     /**
@@ -234,7 +291,7 @@ public class Parser {
     }
 
     /**
-     * A helper function to test if a String can be converted to integer.
+     * Returns whether the string can be converted to integer.
      *
      * @param string The string to be converted to integer.
      * @return Whether the string can be converted to integer.

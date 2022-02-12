@@ -35,9 +35,16 @@ public abstract class Task {
         this.lastResetDate = lastResetDate;
         this.isDone = isDone;
         if (shouldReset()) {
-            this.isDone = false;
-            this.lastResetDate = LocalDate.now();
+            reset();
         }
+    }
+
+    /**
+     * Resets the task when it recurs.
+     */
+    protected void reset() {
+        this.isDone = false;
+        this.lastResetDate = LocalDate.now();
     }
 
     /**
@@ -46,7 +53,9 @@ public abstract class Task {
      * @return the done status of the task.
      */
     protected String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        String tick = "\u2713";
+        String cross = "\u2718";
+        return (isDone ? tick : cross); // mark done task with X
     }
 
     /**
@@ -76,7 +85,7 @@ public abstract class Task {
      *
      * @return Whether a recurring task should be reset.
      */
-    private boolean shouldReset() {
+    protected boolean shouldReset() {
         if (!isRecurring()) {
             return false;
         }
@@ -126,7 +135,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s %s", getStatusIcon(), getRecursiveFrequency(),
-                description);
+        return String.format("[%s]%s %s", getStatusIcon(), getRecursiveFrequency(), description);
     }
 }

@@ -46,9 +46,7 @@ public class Event extends Task {
      * @throws IOException if there is an error writing the file.
      */
     public void saveTask(FileWriter fw) throws IOException {
-        String isDone = getStatusIcon() == "X" ? "1" : "0";
-        String recursiveTag = recurFrequency == null ? "--" : recurFrequency.toString();
-        fw.write(String.format("E %s %s %s %s /at %s\n", isDone, recursiveTag, lastResetDate, description, at));
+        fw.write(String.format("E %s %s %s %s /at %s\n", isDone, recurFrequency, lastResetDate, description, at));
     }
 
     /**
