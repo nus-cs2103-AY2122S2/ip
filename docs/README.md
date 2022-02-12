@@ -4,16 +4,13 @@ Welcome! Spark is a friendly chatbot that helps you keep track of your todos, de
 Here's how you can interact with him 😁
 
 ## Features
-- [list your tasks](#`todo`-Add-a-task)
-- add a `todo`
-- add a `deadline`
-- add an `event`
-- mark completed tasks
-- restore completed tasks
-- delete a `todo`, `deadline` or `event`
-- exit
+- keep track of your `todos`, `deadlines` and `events`
+- avoid adding duplicate tasks by mistake
 
-### Detecting duplicate tasks
+### Keep track of your `todos`, `deadlines` and `events`
+Spark helps remember important tasks and dates!
+
+### Avoid adding duplicate tasks by mistake
 Whenever you add a task with the same name as one that you've previously added, Spark will show you a helpful reminder that you've done so!
 
 ## Usage
