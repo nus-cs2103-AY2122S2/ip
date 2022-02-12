@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -36,6 +37,10 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+
+        //make profile picture circular : referenced from Olivia Johansen's project at https://github.com/oliviajohansen
+        Circle circle = new Circle( 40,50,33);
+        displayPicture.setClip(circle);
         displayPicture.setImage(img);
     }
 

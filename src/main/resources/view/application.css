@@ -1,0 +1,30 @@
+/*
+//@@author {isabelteo}-reused
+apply CSS : referenced from Olivia Johansen's project at https://github.com/oliviajohansen
+with my own additions*/
+
+#anchor {
+    -fx-background-image: url('/images/bg.png');
+    -fx-background-size: cover;
+}
+
+#sendButton {
+    -fx-background-color: #A6DCED;
+    -fx-font-weight: bold;
+    -fx-font-family: "Verdana";
+}
+
+
+/*credited to caitlinjee at https://github.com/caitlinjee with slight modification*/
+.speech-bubble {
+    -fx-background-color: #A6DCED;
+    -fx-background-radius: 10px;
+}
+
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}

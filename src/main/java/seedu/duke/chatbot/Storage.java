@@ -49,8 +49,6 @@ public class Storage {
      * @throws DukeException if database file is not found or unable to create the {@link TaskList}
      */
     TaskList getOldTaskList() throws DukeException {
-        System.out.println(Ui.showStartLoading());
-
         File file = this.getDatabaseFile();
 
         TaskList oldTaskList = this.createTaskListFromDatabase(file);
@@ -70,8 +68,8 @@ public class Storage {
         File file = new File(this.fileName);
 
         try {
-            if (file.createNewFile()) {
-                System.out.println(Ui.showFileCreated(file));
+            if (!file.exists()) {
+                file.createNewFile();
             }
         } catch (IOException e) {
             throw new DukeException("An error occured. I will restart the list");
@@ -91,8 +89,6 @@ public class Storage {
                 taskList = taskList.add(taskToAdd);
             }
             sc.close();
-            //ui to show the old task list to user
-            System.out.println(Ui.showLoadingResult(taskList));
             return taskList;
         } catch (FileNotFoundException e) {
             throw new LoadingException();
