@@ -61,28 +61,29 @@ public class CommandParser {
             Pattern p = Pattern.compile(command[1]);
             Matcher m = p.matcher(cmd);
 
-            if (m.matches()) {
-                if (m.groupCount() > 0) {
-                    String arg = m.group(1);
-                    HashMap<String, String> kwargs = new HashMap<>();
-
-                    // kwargs start at 2,
-                    // The last one is groupCount() - 1, its value being groupCount()
-                    for (int i = 2; i < m.groupCount(); i += 2) {
-                        kwargs.put(m.group(i), m.group(i + 1));
-                    }
-
-                    return new Command(cmdName, arg, kwargs);
-                } else {
-                    return new Command(cmdName);
-                }
-            } else {
-                // Syntax error
+            // Syntax error
+            if (!m.matches()) {
                 throw new NikkiException(String.format(
                         "Woi, that's not how you do it...\n"
-                        + "\tUsage: %s",
+                                + "\tUsage: %s",
                         command[2]));
             }
+
+            // No args or kwargs
+            if (m.groupCount() == 0) {
+                return new Command(cmdName);
+            }
+
+            // Match args
+            String arg = m.group(1);
+            HashMap<String, String> kwargs = new HashMap<>();
+
+            // Match kwargs
+            for (int i = 2; i < m.groupCount(); i += 2) {
+                kwargs.put(m.group(i), m.group(i + 1));
+            }
+
+            return new Command(cmdName, arg, kwargs);
         }
 
         throw new NikkiException("What are you trying to do??");

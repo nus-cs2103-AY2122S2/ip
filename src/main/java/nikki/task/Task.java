@@ -2,10 +2,15 @@ package nikki.task;
 
 import nikki.NikkiException;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class to encapsulate basic properties and methods of a Task
  */
 public class Task {
+    /** Date format for all Task object */
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
     /** Mark in checkbox of completed Task */
     private static final char COMPLETED_MARK = 'X';
 
@@ -158,7 +163,7 @@ public class Task {
             throw new NikkiException("Wrong format");
         }
 
-        // Extract relevant duke.task information
+        // Extract relevant task information
         String taskTag = taskInfo[0];
         Boolean taskStatus = taskInfo[1].equals("1");
         String taskName = taskInfo[2];

@@ -36,10 +36,12 @@ public class Storage {
      */
     private void createIfNotExist() throws IOException {
         // Create file if it doesn't exist
-        if (!this.file.exists()) {
-            this.file.getParentFile().mkdirs();
-            this.file.createNewFile();
+        if (this.file.exists()) {
+            return;
         }
+
+        this.file.getParentFile().mkdirs();
+        this.file.createNewFile();
     }
 
     /**
@@ -67,20 +69,23 @@ public class Storage {
 
         try {
             Scanner fileReader = new Scanner(this.file);
-
-            TaskList taskList = new TaskList();
-            for (int lineCount = 1; fileReader.hasNextLine(); lineCount++) {
-                try {
-                    Task task = Task.parseFileSaveFormat(fileReader.nextLine());
-                    taskList.addTask(task);
-                } catch (NikkiException e) {
-                    throw new NikkiException(String.format("Wrong format in line %d", lineCount));
-                }
-            }
-
-            return taskList;
+            return loadTaskListFromScanner(fileReader);
         } catch (FileNotFoundException e) {
             return new TaskList();
         }
+    }
+
+    private TaskList loadTaskListFromScanner(Scanner scanner) throws NikkiException {
+        TaskList taskList = new TaskList();
+        for (int lineCount = 1; scanner.hasNextLine(); lineCount++) {
+            try {
+                Task task = Task.parseFileSaveFormat(scanner.nextLine());
+                taskList.addTask(task);
+            } catch (NikkiException e) {
+                throw new NikkiException(String.format("Wrong format in line %d", lineCount));
+            }
+        }
+
+        return taskList;
     }
 }
