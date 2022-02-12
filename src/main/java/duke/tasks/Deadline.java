@@ -66,9 +66,9 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
         String markedPrint;
         if (isMarked) {
-            markedPrint = "[E][X] ";
+            markedPrint = "[D][X] ";
         } else {
-            markedPrint = "[E][ ] ";
+            markedPrint = "[D][ ] ";
         }
         return markedPrint + detail + "(by:" + deadline.format(formatter) + ")";
     }
