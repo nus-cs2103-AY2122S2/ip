@@ -42,4 +42,23 @@ public class Events extends Task {
         return this.date;
     }
 
+    /**
+     * Returns true if Object is duplicate of Event, else return false
+     * @param e Object to check
+     * @return Boolean
+     */
+    @Override
+    public boolean equals(Object e) {
+        if (!(e instanceof Events)) {
+            return false;
+        }
+        Events ev = (Events) e;
+        if (!ev.getDate().equals(this.date)) {
+            return false;
+        }
+        if (!ev.taskDescription().equals(this.taskDescription())) {
+            return false;
+        }
+        return true;
+    }
 }

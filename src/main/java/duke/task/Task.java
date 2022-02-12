@@ -45,6 +45,19 @@ public class Task {
         return this.isDone;
     }
 
+    /**
+     * Returns true if object is duplicate of Task, else return false
+     * @param t Object to check
+     * @return Boolean
+     */
+    @Override
+    public boolean equals(Object t) {
+        if (!(t instanceof Task)) {
+            return false;
+        }
+        return ((Task) t).taskDescription().equals(this.s);
+    }
+
 
     public boolean find(String phrase) {
         return this.s.contains(phrase);

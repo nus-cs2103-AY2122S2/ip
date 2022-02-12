@@ -41,4 +41,24 @@ public class Deadlines extends Task {
     public LocalDate getDate() {
         return this.date;
     }
+
+    /**
+     * Returns true if is a duplicate Deadline, else return false
+     * @param d Object to check
+     * @return Boolean
+     */
+    @Override
+    public boolean equals(Object d) {
+        if (!(d instanceof Deadlines)) {
+            return false;
+        }
+        Deadlines de = (Deadlines) d;
+        if (!de.getDate().equals(this.date)) {
+            return false;
+        }
+        if (!de.taskDescription().equals(this.taskDescription())) {
+            return false;
+        }
+        return true;
+    }
 }
