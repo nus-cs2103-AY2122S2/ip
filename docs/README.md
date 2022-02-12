@@ -1,4 +1,4 @@
-# User Guide for the DDXChatBot
+# DDXChatBot User Guide
 
 ## Features 
 
@@ -86,7 +86,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### 'mark' - Mark a task
+### `mark` - Mark a task
 
 Mark a task as done
 
@@ -102,7 +102,7 @@ Nice! I've marked this task as done:
 [T][X] #{tag} description
 ```
 
-### 'unmark' - Unmark a task
+### `unmark` - Unmark a task
 
 Unmark a task as not done yet
 
@@ -119,7 +119,7 @@ Okay, I've marked this task as not done yet:
 [T][] #{tag} description
 ```
 
-### 'delete' - Delete a task
+### `delete` - Delete a task
 
 Delete a task and remove from list
 
@@ -137,7 +137,7 @@ Okay, I've removed this task:
 Now you have 0 tasks in the list.
 ```
 
-### 'list' - List all tasks
+### `list` - List all tasks
 
 Display all the tasks.
 
@@ -156,7 +156,7 @@ Here are the tasks in your list:
 3. [D][] #{your tag} (by Mon dd yyyy hh:mm) description
 ```
 
-### 'find' - Filter tasks by keyword
+### `find` - Filter tasks by keyword
 
 Display all the tasks that contains certain string.
 
