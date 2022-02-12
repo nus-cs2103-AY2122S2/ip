@@ -33,24 +33,7 @@ public class Storage {
             BufferedReader bufferedReader = new BufferedReader(reader);
             String input = bufferedReader.readLine();
             while (input != null) {
-                String[] task = input.split(" ### ");
-                String type = task[0];
-                String status = task[1];
-                String thing = task[2];
-                Task newTask;
-                if (type.equals("T")) {
-                    newTask = new Todo(thing);
-                } else if (type.equals("D")) {
-                    newTask = new Deadline(thing, task[3]);
-                } else if (type.equals("E")) {
-                    newTask = new Event(thing, task[3]);
-                } else {
-                    throw new DukeException("Loading error");
-                }
-                if (status.equals("1")) {
-                    newTask.mark();
-                }
-                this.list.add(newTask);
+                this.list.add(createTaskByType(input));
                 input = bufferedReader.readLine();
             }
             return this.list;
@@ -59,6 +42,29 @@ public class Storage {
             throw new DukeException("Loading error");
         }
     }
+
+
+    private Task createTaskByType(String input) throws DukeException {
+        Task newTask;
+        String[] task = input.split(" ### ");
+        String type = task[0];
+        String status = task[1];
+        String thing = task[2];
+        if (type.equals("T")) {
+            newTask = new Todo(thing);
+        } else if (type.equals("D")) {
+            newTask = new Deadline(thing, task[3]);
+        } else if (type.equals("E")) {
+            newTask = new Event(thing, task[3]);
+        } else {
+            throw new DukeException("Loading error");
+        }
+        if (status.equals("1")) {
+            newTask.mark();
+        }
+        return newTask;
+    }
+
 
     /**
      * Saves all tasks in the list to the filepath
