@@ -4,7 +4,7 @@ or the Graphical User Interface (GUI).
 
 ## Quick Start
 1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) installed
-2. Download Duke.jar from [here](https://github.com/lzf834/ip/releases/tag/Level-10)
+2. Download Duke.jar from [here](https://github.com/lzf834/ip/releases/tag/A-Release)
 3. Run the app by double-clicking the .jar file
 4. Type in your commands and hit `Enter` to execute them.
 
