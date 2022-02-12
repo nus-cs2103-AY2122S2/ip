@@ -55,6 +55,9 @@ public class Duke {
         case SORT:
             output = handleSort();
             break;
+        case BYE:
+            output = handleBye();
+            break;
         default:
             break;
         }
@@ -65,6 +68,10 @@ public class Duke {
 
         // Return String
         return output;
+    }
+
+    private String handleBye() {
+        return "Thank you, hope to see you again!";
     }
 
     private String handleFind(String search) {
