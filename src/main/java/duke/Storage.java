@@ -30,7 +30,6 @@ public class Storage {
             for (Task task : TaskList.dukeList) {
                 String text = "";
                 String description = task.getDescription();
-                //task.isDone = false;
                 if (task instanceof ToDo) {
                     text = "T | " + (task.getIsDone() ? "1" : "0") + " | " + description + '\n';
                 } else if (task instanceof Event) {
