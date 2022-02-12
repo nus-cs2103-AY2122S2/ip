@@ -9,10 +9,10 @@ import seedu.storage.TaskList;
  */
 public class Duke {
 
-    private Ui ui;
+    private final Ui UI;
     private TaskList tasks;
-    private Parser parser;
-    private Storage storage;
+    private final Parser PARSER;
+    private final Storage STORAGE;
 
     /**
      * Constructor for Duke class
@@ -20,14 +20,14 @@ public class Duke {
      * @param filePath The file path of the save file.
      */
     public Duke(String filePath) {
-        ui = new Ui();
-        parser = new Parser();
-        storage = new Storage(filePath);
+        UI = new Ui();
+        PARSER = new Parser();
+        STORAGE = new Storage(filePath);
 
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(STORAGE.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            UI.showError(e.getMessage());
         }
 
         System.out.println("Welcome!\n");
@@ -41,13 +41,13 @@ public class Duke {
     public void run() {
         while (!Command.isExit()) {
             try {
-                String fullCommand = ui.readCommand();
-                Command c = parser.parse(fullCommand);
+                String fullCommand = UI.readCommand();
+                Command c = PARSER.parse(fullCommand);
                 String resp = c.execute(tasks);
-                storage.saveAll(tasks.getTasks());
-                ui.printCompleted(resp);
+                STORAGE.saveAll(tasks.getTasks());
+                UI.printCompleted(resp);
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                UI.showError(e.getMessage());
             }
         }
     }
@@ -60,9 +60,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command c = parser.parse(input);
+            Command c = PARSER.parse(input);
             String resp = c.execute(tasks);
-            storage.saveAll(tasks.getTasks());
+            STORAGE.saveAll(tasks.getTasks());
             return resp;
         } catch (DukeException e) {
             return e.getMessage();

@@ -13,7 +13,7 @@ public class MarkCommand extends Command {
 
     @Override
     public void input(String inst) throws DukeException {
-        idx = super.checkIdx(inst);
+        idx = super.checkInt(inst) - 1;
     }
 
     /**

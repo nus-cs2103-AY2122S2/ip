@@ -47,7 +47,7 @@ public class Storage {
             System.out.println("Info: Save file found.\n");
         }
 
-        assert file.exists(): "No save file exists at all";
+        assert FILE.exists(): "No save file exists at all";
 
         try {
             Scanner sc = new Scanner(FILE);
@@ -56,18 +56,21 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String[] task = sc.nextLine().split("\t");
                 boolean isCompleted = Boolean.parseBoolean(task[2]);
+                int priority = Integer.parseInt(task[3]);
 
                 switch (task[0]) {
                 case "T":
-                    tasks.add(new Todo(task[1], isCompleted));
+                    tasks.add(new Todo(task[1], isCompleted, priority));
                     break;
                 case "D":
-                    LocalDateTime byDate = LocalDateTime.parse(task[3], Task.getFormatter());
-                    tasks.add(new Deadline(task[1], isCompleted, byDate));
+                    assert task.length == 5: "Task saved incorrectly";
+                    LocalDateTime byDate = LocalDateTime.parse(task[task.length-1], Task.getFormatter());
+                    tasks.add(new Deadline(task[1], isCompleted, byDate, priority));
                     break;
                 case "E":
-                    LocalDateTime atDate = LocalDateTime.parse(task[3], Task.getFormatter());
-                    tasks.add(new Event(task[1], isCompleted, atDate));
+                    assert task.length == 5: "Task saved incorrectly";
+                    LocalDateTime atDate = LocalDateTime.parse(task[task.length-1], Task.getFormatter());
+                    tasks.add(new Event(task[1], isCompleted, atDate, priority));
                     break;
                 default:
                     throw new DukeException("Unknown task type found: " + task[0]);

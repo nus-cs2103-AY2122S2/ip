@@ -25,16 +25,16 @@ public abstract class Command {
     public abstract String execute(TaskList tasks) throws DukeException;
 
     /**
-     * Converts index of list in string form into integer form.
+     * Converts string to integer form.
      *
-     * @param idx Index of task list in string form
-     * @return Index of task list in integer form.
+     * @param str Number in string type
+     * @return An integer.
      * @throws DukeException Input is not an integer.
      */
-    public int checkIdx(String idx) throws DukeException {
-        checkExist(idx);
+    public int checkInt(String str) throws DukeException {
+        checkExist(str);
         try {
-            return Integer.parseInt(idx) - 1;
+            return Integer.parseInt(str);
         } catch (NumberFormatException e) {
             throw new DukeException("That is not a number.");
         }

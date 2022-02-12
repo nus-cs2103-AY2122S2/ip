@@ -14,8 +14,8 @@ public class Event extends Task {
         this.atDateTime = atDateTime;
     }
 
-    public Event(String description, boolean isCompleted, LocalDateTime atDateTime) {
-        super(description, isCompleted);
+    public Event(String description, boolean isCompleted, LocalDateTime atDateTime, int priority) {
+        super(description, isCompleted, priority);
         this.atDateTime = atDateTime;
     }
 
