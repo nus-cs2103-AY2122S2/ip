@@ -1,8 +1,8 @@
 package duke;
 
-import javafx.stage.Stage;
-
 import java.util.Arrays;
+
+import javafx.stage.Stage;
 
 /**
  * Class to get response from user inputs
