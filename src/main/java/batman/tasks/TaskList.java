@@ -12,7 +12,7 @@ public class TaskList {
     private static ArrayList<Task> tasks;
 
     public TaskList() {
-        tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public TaskList(List<Task> tasks) {
@@ -36,6 +36,7 @@ public class TaskList {
      *
      * @param command An array of strings containing the
      *                details of a task.
+     * @return String object of added task.
      */
     public static String addTask(String[] command) {
         try {
@@ -129,7 +130,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t : tasks) {
-            if (t.description.contains(keyword)) {
+            if (t.contains(keyword)) {
                 temp.add(t);
             }
         }

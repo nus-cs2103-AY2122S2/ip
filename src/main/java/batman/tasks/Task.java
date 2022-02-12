@@ -6,7 +6,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * An encapsulation of a Task to be done, that can be marked as completed.
+     * Encapsulates tasks to be done, that can be marked as completed.
      *
      * @param description Description of task.
      */
@@ -32,6 +32,10 @@ public abstract class Task {
     }
 
     public abstract String appendToFile();
+
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
 
     @Override
     public String toString() {
