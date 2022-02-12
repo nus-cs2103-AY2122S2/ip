@@ -391,7 +391,12 @@ public class Parser {
      * @return the command based on the user's input
      */
     public Command parseCommand(String input) throws DukeException {
-        String commandPrefix = ((input.split(" "))[0]).toUpperCase();
+        if (input.isBlank()) {
+            throw new EmptyArgumentException("command", "execute");
+        }
+
+        String[] array = input.strip().split(" ");
+        String commandPrefix = array[0].toUpperCase();
 
         switch (commandPrefix) {
         case "BYE":

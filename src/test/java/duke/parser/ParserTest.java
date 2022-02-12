@@ -33,7 +33,7 @@ public class ParserTest {
     @Test
     public void parse_emptyInput_returnsIncorrectCommand() {
         String[] emptyInputs = {"", " ", "\n \n"};
-        String errorMessage = "My apologies, but it seems that I do not understand your request.";
+        String errorMessage = "Please provide me with the command that you would like to execute!";
         for (String s : emptyInputs) {
             try {
                 assertEquals(parser.parseCommand(s).execute(tasks, ui, storage), errorMessage);
