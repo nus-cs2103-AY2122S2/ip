@@ -2,14 +2,24 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * List of tasks
+ */
 public class TaskList {
 
     public ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList class(when creating new)
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for TaskList class(TaskList already exists)
+     * @param list list of tasks
+     */
     public TaskList(ArrayList<Task> list) {
         this.tasks = list;
     }

@@ -2,9 +2,18 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Parser for commands
+ */
 public class Parser {
         // private String command;
 
+        /**
+         * Parses user command
+         * @param fullCommand command given
+         * @return Command object
+         * @throws DukeException when invalid command is given
+         */
         public static Command parse(String fullCommand) throws DukeException {
                 if (fullCommand.equals("bye")) {
                         return new ExitCommand();

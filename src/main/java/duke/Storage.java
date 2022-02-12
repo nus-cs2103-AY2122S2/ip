@@ -8,6 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class concerning storage of tasks
+ */
 public class Storage {
     protected String filePath;
 
@@ -15,6 +18,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks recorded on data file to task list
+     * @return list of tasks
+     * @throws DukeException when an error occurs during loading
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File folder = new File("data");
@@ -69,6 +77,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves list of tasks to the system
+     * @param tasks list of tasks
+     * @throws DukeException when error occurs during saving of tasks
+     */
     public void save(TaskList tasks) throws DukeException {
         String toWrite = "";
         for (int i = 0; i < tasks.getSize(); i++){
