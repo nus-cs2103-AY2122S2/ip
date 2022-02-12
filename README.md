@@ -22,3 +22,42 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+# DDXTodo
+
+> Your time is limited, so don't waste it living someone else's life. - [Steve Jobs](https://news.stanford.edu/2005/06/14/jobs-061505/#:~:text=Your%20time%20is%20limited%2C%20so,follow%20your%20heart%20and%20intuition.)
+
+**DDXTodo** frees your mind of having to remember things you need to do and helps you live a more efficient life.
+
+ It's,
+- text-based
+- easy to learn
+- ~~FAST~~ SUPER FAST to use
+
+All you need to do is,
+
+1. download it from [here](https://github.com/ddx-510/ip/releases/tag/A-Jar).
+2. double-click it.
+3. add your tasks.
+4. let it manage your tasks for you 
+
+And it is FREE!
+
+Features:
+
+- [x]  Managing tasks
+- [x]  Managing deadlines
+- [x]  Event Reminders
+- [ ] Categorize tasks (Coming soon)
+
+---
+
+If you Java programmer, you can use it to practice Java too. Here's the `main` method:
+
+``` java
+public class Main {
+    public static void main(String[] args) {
+        Application.launch(MainApp.class, args);
+    }
+}
+```
