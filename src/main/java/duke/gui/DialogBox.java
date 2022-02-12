@@ -52,6 +52,17 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Changes the dialog box style when warning occurs
+     */
+    public void setWarning() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        tmp.get(0).setStyle("-fx-background-color: #F18781; -fx-background-radius: 10; -fx-padding: 10;");
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
+    }
+
+    /**
      * Gets user dialog.
      *
      * @param text the text
@@ -72,6 +83,13 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setMinHeight(Region.USE_PREF_SIZE);
+        return db;
+    }
+
+    public static DialogBox getWarningDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.setWarning();
         db.setMinHeight(Region.USE_PREF_SIZE);
         return db;
     }

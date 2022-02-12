@@ -74,7 +74,7 @@ public class Storage {
     public Tag getTag(String data) {
         int tagPos = data.indexOf("#{");
         int tagEnd = data.indexOf("}");
-        String tagDescription = data.substring(tagPos + 3, tagEnd);
+        String tagDescription = data.substring(tagPos + 2, tagEnd);
         return new Tag(tagDescription);
     }
 
@@ -96,7 +96,8 @@ public class Storage {
                 switch (tempType) {
                 case "T":
                     Tag tag = getTag(data);
-                    Task tempTask = new ToDo(data.substring(7), tag);
+                    int desPos = data.indexOf("}") + 1;
+                    Task tempTask = new ToDo(data.substring(desPos), tag);
                     if (data.charAt(4) == 'X') {
                         tempTask.markAsDone();
                     }
@@ -105,7 +106,8 @@ public class Storage {
                 case "D":
                     int byPos = data.indexOf("(by:");
                     String by = data.substring(byPos + 5, data.length() - 1);
-                    String description = data.substring(7, byPos - 1);
+                    desPos = data.indexOf("}") + 1;
+                    String description = data.substring(desPos, byPos - 1);
                     tag = getTag(data);
                     tempTask = new Deadline(description, LocalDateTime.parse(by, formatter), tag);
                     if (data.charAt(4) == 'X') {
@@ -116,7 +118,8 @@ public class Storage {
                 case "E":
                     int atPos = data.indexOf("(at:");
                     String at = data.substring(atPos + 5, data.length() - 1);
-                    description = data.substring(7, atPos - 1);
+                    desPos = data.indexOf("}") + 1;
+                    description = data.substring(desPos, atPos - 1);
                     tag = getTag(data);
                     tempTask = new Event(description, LocalDateTime.parse(at, formatter), tag);
                     if (data.charAt(4) == 'X') {

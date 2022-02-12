@@ -53,4 +53,20 @@ public class Duke {
         return result;
     }
 
+    /**
+     * Is error boolean.
+     *
+     * @param input the input
+     * @return the boolean
+     */
+    public Boolean isError(String input) {
+        boolean result = false;
+        try {
+            Parser.parse(input);
+            return false;
+        } catch (DukeException e) {
+            return true;
+        }
+    }
+
 }
