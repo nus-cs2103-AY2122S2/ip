@@ -28,12 +28,13 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = "";
         try {
-            String keyword = Parser.parseDescription(input);
+            String keyword = Parser.parseDescription(input).toLowerCase();
             output = Ui.append(output, Messages.FINDING_MSG);
 
             int matchCount = 0;
             for (int i = 0; i < tasks.getSize(); i++) {
-                if (tasks.get(i).getTaskData().contains(keyword)) {
+                String taskData = tasks.get(i).getTaskData().toLowerCase();
+                if (taskData.contains(keyword)) {
                     matchCount++;
                     output = Ui.append(output, matchCount + "." + tasks.getTaskStatement(i));
                 }
