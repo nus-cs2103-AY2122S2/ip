@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
@@ -30,6 +31,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -54,7 +56,6 @@ public class MainWindow extends AnchorPane {
             DialogBox.getUserDialog(input, userImage),
             reply
         );
-        dialogContainer.heightProperty().addListener((observable) -> reply.heightProperty());
         userInput.clear();
         if (input.equals("bye")) {
             new Thread(() -> {
