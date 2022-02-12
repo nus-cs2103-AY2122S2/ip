@@ -2,7 +2,7 @@ package istjbot.command;
 
 import istjbot.exception.BotException;
 import istjbot.storage.Storage;
-import istjbot.task.TaskList;
+import istjbot.text.TextList;
 import istjbot.ui.Ui;
 
 /**
@@ -26,7 +26,7 @@ public abstract class Command {
     }
 
     public abstract boolean isExit();
-    public abstract String execute(TaskList task, Ui ui, Storage storage) throws BotException;
+    public abstract String execute(TextList texts, Ui ui, Storage storage) throws BotException;
 
     /**
      * Returns the specific CommandEnum related to the Command.

@@ -4,11 +4,11 @@ import java.time.format.DateTimeParseException;
 
 import istjbot.exception.BotException;
 import istjbot.storage.Storage;
-import istjbot.task.TaskList;
+import istjbot.text.TextList;
 import istjbot.ui.Ui;
 
 /**
- * Encapsulates the procedure of adding a task.
+ * Encapsulates the procedure of adding a task or a note.
  */
 public class AddCommand extends Command {
     /**
@@ -32,45 +32,62 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the procedure of adding a specific type of task.
+     * Executes the procedure of adding a specific type of task or a note.
      *
-     * @param tasks TaskList responsible for adding the task specified by the user.
+     * @param texts TextList responsible for adding a task or a note specified by the user.
      * @param ui Text part of the User Interface.
-     * @param storage Storage responsible for saving the added tasks into an external file.
-     * @throws BotException When the task cannot be generated due to incomplete information provided.
+     * @param storage Storage responsible for saving the task or the note into an external file.
+     * @throws BotException When the text cannot be added due to incomplete information provided.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        String[] taskInfo = extractTaskInfo();
+    public String execute(TextList texts, Ui ui, Storage storage) throws BotException {
+        CommandEnum noteOrTaskType = this.getCommandEnum();
+        String[] textInfo = extractTextInfo(noteOrTaskType);
+
+        // TextList
         try {
-            tasks.addTask(this.getCommandEnum(), taskInfo[0], taskInfo[1]);
+            if (noteOrTaskType == CommandEnum.NOTE) {
+                texts.addNote(textInfo[0]);
+            } else {
+                texts.addTask(this.getCommandEnum(), textInfo[0], textInfo[1]);
+            }
         } catch (DateTimeParseException e) {
             throw new BotException("As an IstjBot, I don't think that is a proper date you entered.");
         }
-        storage.save(tasks);
-        return ui.showTaskAdded(tasks.taskListSize(), tasks.taskString(tasks.taskListSize()));
+
+        // Storage
+        storage.save(texts);
+
+        // Ui
+        if (noteOrTaskType == CommandEnum.NOTE) {
+            return ui.showNoteAdded(texts.noteListSize(), texts.noteString(texts.noteListSize()));
+        } else {
+            return ui.showTaskAdded(texts.taskListSize(), texts.taskString(texts.taskListSize()));
+        }
     }
 
-    private String[] extractTaskInfo() throws BotException {
+    private String[] extractTextInfo(CommandEnum noteOrTaskType) throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
 
+        // Error handle for text with no description (and no modifier date)
         if (commandInfo.length == 1) {
-            throw new BotException("As an IstjBot, I cannot find any description for your task.");
+            throw new BotException("As an IstjBot, I cannot find any description for your text.");
         }
 
         String description = "";
         int modifier = -1;
-        boolean modifierFound = false;
-        String modifierMessage = "";
+        boolean modifierDateFound = false;
+        String modifierDate = "";
 
+        // Extracting text description
         for (int i = 1; i < commandInfo.length; i++) {
-            if (this.getCommandEnum() == CommandEnum.DEADLINE && commandInfo[i].equals("/by")) {
+            if (noteOrTaskType == CommandEnum.DEADLINE && commandInfo[i].equals("/by")) {
                 modifier = i;
-                modifierFound = true;
+                modifierDateFound = true;
                 break;
-            } else if (this.getCommandEnum() == CommandEnum.EVENT && commandInfo[i].equals("/at")) {
+            } else if (noteOrTaskType == CommandEnum.EVENT && commandInfo[i].equals("/at")) {
                 modifier = i;
-                modifierFound = true;
+                modifierDateFound = true;
                 break;
             }
             if (i == 1) {
@@ -80,26 +97,30 @@ public class AddCommand extends Command {
             }
         }
 
-        // Error handle for modifier and description
+        // Error handle for no description but with modifier date indication,
+        // or no modifier date indication at all for special tasks
         if (description.equals("")) {
-            throw new BotException("As an IstjBot, I cannot add a task with no description.");
-        } else if (!modifierFound && (this.getCommandEnum() == CommandEnum.DEADLINE
-                || this.getCommandEnum() == CommandEnum.EVENT)) {
-            throw new BotException("As an IstjBot, I cannot add a special task with no timing attached.");
-        }
-
-        if (this.getCommandEnum() == CommandEnum.DEADLINE || this.getCommandEnum() == CommandEnum.EVENT) {
-            for (int i = modifier + 1; i < commandInfo.length; i++) {
-                modifierMessage += i == commandInfo.length - 1 ? commandInfo[i] : commandInfo[i] + " ";
+            throw new BotException("As an IstjBot, I cannot add a special task with no description.");
+        } else if (!modifierDateFound) {
+            if (noteOrTaskType == CommandEnum.DEADLINE || noteOrTaskType == CommandEnum.EVENT) {
+                throw new BotException("As an IstjBot, I cannot add a special task with no timing attached.");
             }
         }
 
-        // Error handle for modifier message
-        if (modifierMessage.equals("") && (this.getCommandEnum() == CommandEnum.DEADLINE
-                || this.getCommandEnum() == CommandEnum.EVENT)) {
-            throw new BotException("As an IstjBot, I cannot add a special task with no timing attached.");
+        // Extracting modifier date for special tasks
+        if (noteOrTaskType == CommandEnum.DEADLINE || noteOrTaskType == CommandEnum.EVENT) {
+            for (int i = modifier + 1; i < commandInfo.length; i++) {
+                modifierDate += i == commandInfo.length - 1 ? commandInfo[i] : commandInfo[i] + " ";
+            }
         }
 
-        return new String[]{description, modifierMessage};
+        // Error handle for no modifier date for special tasks
+        if (modifierDate.equals("")) {
+            if (noteOrTaskType == CommandEnum.DEADLINE || noteOrTaskType == CommandEnum.EVENT) {
+                throw new BotException("As an IstjBot, I cannot add a special task with no timing attached.");
+            }
+        }
+
+        return new String[]{description, modifierDate};
     }
 }

@@ -1,4 +1,4 @@
-package istjbot.task;
+package istjbot.text;
 
 /**
  * Encapsulates a Todo task with a description.

@@ -1,4 +1,4 @@
-package istjbot.task;
+package istjbot.text;
 
 import static istjbot.command.CommandEnum.DEADLINE;
 import static istjbot.command.CommandEnum.EVENT;
@@ -14,43 +14,43 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class TaskListTest {
-    private TaskList taskList = new TaskList();
+public class TextListTest {
+    private TextList textList = new TextList();
 
     @BeforeEach
     public void setup() {
         // Make use of Stubs?
-        taskList.addTask(TODO, "a todo task", "");
-        taskList.addTask(EVENT, "an event task", "2021-02-03");
-        taskList.addTask(DEADLINE, "a deadline task", "2021-02-05");
+        textList.addTask(TODO, "a todo task", "");
+        textList.addTask(EVENT, "an event task", "2021-02-03");
+        textList.addTask(DEADLINE, "a deadline task", "2021-02-05");
     }
 
     @Test
     public void taskSize_threeEvents_three() {
-        assertEquals(3, taskList.taskListSize());
+        assertEquals(3, textList.taskListSize());
     }
 
     @Test
     public void taskString_indexOne_firstEventToString() {
-        assertEquals("[T][ ] a todo task", taskList.taskString(1));
+        assertEquals("[T][ ] a todo task", textList.taskString(1));
     }
 
     @Test
     public void tasksToTxtString_threeEvents_txtStrings() {
         assertEquals("todo / 0 / a todo task\n"
                 + "event / 0 / an event task / 2021-02-03\n"
-                + "deadline / 0 / a deadline task / 2021-02-05", taskList.tasksToTxtString());
+                + "deadline / 0 / a deadline task / 2021-02-05", textList.textsToTxtString());
     }
 
     @Test
     public void deletedTaskString_indexTwo_secondEventToString() {
-        assertEquals("[E][ ] an event task (at: Feb 3 2021)", taskList.deletedTaskString(2));
+        assertEquals("[E][ ] an event task (at: Feb 3 2021)", textList.deletedTaskString(2));
     }
 
     @Test
     public void searchByDateString_invalidDate_exceptionThrown() {
         Assertions.assertThrows(DateTimeParseException.class, () -> {
-            taskList.searchByDateString("invalid date");
+            textList.searchByDateString("invalid date");
         });
     }
 
@@ -58,13 +58,13 @@ public class TaskListTest {
     @ParameterizedTest
     @ValueSource(strings = {"2021-02-03", "2021-02-05"})
     public void searchByDateString_validDate_someTasks(String dateString) {
-        Assertions.assertFalse(taskList.searchByDateString(dateString).isEmpty());
+        Assertions.assertFalse(textList.searchByDateString(dateString).isEmpty());
     }
 
     @DisplayName("See whether task can be found with existing keyword in the database")
     @ParameterizedTest
     @ValueSource(strings = {"todo", "event", "deadline"})
     public void searchByKeywordString_validKeyword_someTasks(String keyword) {
-        Assertions.assertFalse(taskList.searchByKeywordString(keyword).isEmpty());
+        Assertions.assertFalse(textList.searchByKeywordString(keyword).isEmpty());
     }
 }

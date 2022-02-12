@@ -1,4 +1,4 @@
-package istjbot.task;
+package istjbot.text;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

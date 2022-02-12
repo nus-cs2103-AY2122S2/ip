@@ -9,6 +9,7 @@ public enum CommandEnum {
     TODO,
     DEADLINE,
     EVENT,
+    NOTE,
     DATE,
     FIND,
     MARK,

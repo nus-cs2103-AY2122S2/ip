@@ -2,7 +2,7 @@ package istjbot.command;
 
 import istjbot.exception.BotException;
 import istjbot.storage.Storage;
-import istjbot.task.TaskList;
+import istjbot.text.TextList;
 import istjbot.ui.Ui;
 
 /**
@@ -32,14 +32,14 @@ public class FindCommand extends Command {
     /**
      * Executes the procedure of finding the task(s) with user inputted keyword.
      *
-     * @param tasks TaskList responsible for searching of the task(s).
+     * @param texts TextList responsible for searching of the task(s).
      * @param ui Text part of the User Interface.
      * @param storage Storage.
      * @throws BotException When the keyword is not specified by the user.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TextList texts, Ui ui, Storage storage) throws BotException {
         String keyword = extractKeyword();
-        String searchList = tasks.searchByKeywordString(keyword);
+        String searchList = texts.searchByKeywordString(keyword);
         return ui.showTasksByKeyword(searchList);
     }
 

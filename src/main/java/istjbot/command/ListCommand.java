@@ -2,11 +2,11 @@ package istjbot.command;
 
 import istjbot.exception.BotException;
 import istjbot.storage.Storage;
-import istjbot.task.TaskList;
+import istjbot.text.TextList;
 import istjbot.ui.Ui;
 
 /**
- * Encapsulates the procedure of showing all the tasks currently stored.
+ * Encapsulates the procedure of showing all the tasks or notes currently stored.
  */
 public class ListCommand extends Command {
     /**
@@ -30,23 +30,38 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the procedure of returning all the tasks currently stored by the user.
+     * Executes the procedure of returning all the tasks or notes currently stored by the user.
      *
-     * @param tasks TaskList responsible for returning all the tasks.
+     * @param texts TextList responsible for returning all the tasks or notes.
      * @param ui Text part of the User Interface.
      * @param storage Storage.
-     * @throws BotException When there are unnecessary terms attached other than list.
+     * @throws BotException When there are unnecessary terms attached other than list and type of text.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-        checkForError();
-        String list = tasks.tasksToString();
-        return ui.showTasks(list);
+    public String execute(TextList texts, Ui ui, Storage storage) throws BotException {
+        boolean shouldListNotes = listNotes();
+        String list;
+        if (shouldListNotes) {
+            list = texts.notesToString();
+            return ui.showNotes(list);
+        } else {
+            list = texts.tasksToString();
+            return ui.showTasks(list);
+        }
     }
 
-    private void checkForError() throws BotException {
+    private boolean listNotes() throws BotException {
         String[] commandInfo = this.getFullCommand().split(" ");
-        if (commandInfo.length > 1) {
-            throw new BotException("As an IstjBot, I cannot understand more than list.");
+
+        if (commandInfo.length != 2) {
+            throw new BotException("As an IstjBot, I can only accept 'list notes' or 'list tasks.'");
         }
+
+        if (commandInfo[1].equals("notes")) {
+            return true;
+        } else if (commandInfo[1].equals("tasks")) {
+            return false;
+        }
+
+        throw new BotException("As an IstjBot, I can only show list of tasks or list of notes.");
     }
 }

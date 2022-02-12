@@ -5,6 +5,7 @@ import istjbot.command.ByeCommand;
 import istjbot.command.Command;
 import istjbot.command.CommandEnum;
 import istjbot.command.DateCommand;
+import istjbot.command.DeleteCommand;
 import istjbot.command.FindCommand;
 import istjbot.command.ListCommand;
 import istjbot.command.ModifyCommand;
@@ -29,12 +30,15 @@ public class Parser {
         case TODO:
         case DEADLINE:
         case EVENT:
+        case NOTE:
             return new AddCommand(commandEnum, fullCommand);
 
         case MARK:
         case UNMARK:
-        case DELETE:
             return new ModifyCommand(commandEnum, fullCommand);
+
+        case DELETE:
+            return new DeleteCommand(commandEnum, fullCommand);
 
         case DATE:
             return new DateCommand(commandEnum, fullCommand);

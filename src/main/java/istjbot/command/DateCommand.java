@@ -4,7 +4,7 @@ import java.time.format.DateTimeParseException;
 
 import istjbot.exception.BotException;
 import istjbot.storage.Storage;
-import istjbot.task.TaskList;
+import istjbot.text.TextList;
 import istjbot.ui.Ui;
 
 /**
@@ -34,15 +34,15 @@ public class DateCommand extends Command {
     /**
      * Executes the procedure of finding the task(s) with user inputted date.
      *
-     * @param tasks TaskList responsible for searching of the task(s).
+     * @param texts TextList responsible for searching of the task(s).
      * @param ui Text part of the User Interface.
      * @param storage Storage.
      * @throws BotException When the date user inputted is not a valid one.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TextList texts, Ui ui, Storage storage) throws BotException {
         String dateString = extractDateString();
         try {
-            String searchList = tasks.searchByDateString(dateString);
+            String searchList = texts.searchByDateString(dateString);
             return ui.showTasksByDate(searchList);
         } catch (DateTimeParseException e) {
             throw new BotException("As an IstjBot, I don't think that is a proper date you entered.");

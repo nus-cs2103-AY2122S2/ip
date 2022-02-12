@@ -6,7 +6,7 @@ import istjbot.command.Command;
 import istjbot.exception.BotException;
 import istjbot.parser.Parser;
 import istjbot.storage.Storage;
-import istjbot.task.TaskList;
+import istjbot.text.TextList;
 import istjbot.ui.Ui;
 
 /**
@@ -17,8 +17,8 @@ import istjbot.ui.Ui;
 public class IstjBot {
     /** Storage for saving and loading the tasks to and from an external txt file. */
     private Storage storage;
-    /** TaskList for actual adding, modifying, and searching of tasks. */
-    private TaskList tasks;
+    /** TextList consists of tasks and notes. */
+    private TextList texts;
     /** text-part of the User Interface. */
     private Ui ui;
 
@@ -29,7 +29,7 @@ public class IstjBot {
     /**
      * Constructor for IstjBot.
      * Takes in a String filePath and initializes a new Storage.
-     * TaskList and Ui objects are also initialized.
+     * TextList and Ui objects are also initialized.
      *
      * @param filePath Path of the external file used for loading and saving.
      */
@@ -37,11 +37,11 @@ public class IstjBot {
         try {
             this.ui = new Ui();
             this.storage = new Storage(filePath);
-            this.tasks = new TaskList(storage.load());
+            this.texts = new TextList(storage.load());
         } catch (IOException | BotException e) {
             existsConstructorError = true;
             constructorError = e.getMessage();
-            this.tasks = new TaskList();
+            this.texts = new TextList();
         }
     }
 
@@ -55,7 +55,7 @@ public class IstjBot {
         try {
             Command c = Parser.parse(input);
             isExit = c.isExit();
-            return c.execute(tasks, ui, storage);
+            return c.execute(texts, ui, storage);
         } catch (BotException e) {
             return ui.showError(e.getMessage());
         }
