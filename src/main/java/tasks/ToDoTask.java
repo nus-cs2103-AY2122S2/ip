@@ -3,7 +3,7 @@ package tasks;
 /**
  * This class encapsulates a To-Do Task.
  *
- * This is the most generic task.
+ * This is the most generic task, with no additional addons.
  *
  * @author Ong Han Yang
  */
