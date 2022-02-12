@@ -23,7 +23,7 @@ public class Karen {
      * Receives input from user. Executes the command based on the input and returns the result to be displayed
      * to the GUI.
      *
-     * @param fullInput input by the user
+     * @param fullInput Input by the user
      * @return Response string
      */
     public String getResponse(String fullInput) {

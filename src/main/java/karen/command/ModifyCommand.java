@@ -19,7 +19,7 @@ public class ModifyCommand extends Command {
      * Constructor for ModifyCommand
      *
      * @param inputIndex 0-based index of Task object to be referenced in Storage
-     * @param inputAction action to be applied to Tast at inputIndex in Storage
+     * @param inputAction Action to be applied to Tast at inputIndex in Storage
      */
     public ModifyCommand(int inputIndex, ModifyType inputAction) {
         taskIndex = inputIndex;

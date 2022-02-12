@@ -20,7 +20,7 @@ public class KarenException extends Exception {
     }
 
     /**
-     * Constructor for throwing a new KarenException
+     * Constructor for KarenException for throwing a new KarenException
      *
      * @param invalidMsg Input InvalidMessage types
      */
@@ -30,7 +30,7 @@ public class KarenException extends Exception {
     }
 
     /**
-     * Getter function for InvalidMessage Enum type
+     * Returns invalidMessage Enum type
      *
      * @return InvalidMessage Enum
      */

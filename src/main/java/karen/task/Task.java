@@ -21,21 +21,21 @@ public abstract class Task {
     }
 
     /**
-     * To set done status of Task to true
+     * Sets done status of Task to true
      */
     public void markDone() {
         isDone = true;
     }
 
     /**
-     * To set done status of Task to false
+     * Sets done status of Task to false
      */
     public void markUndone() {
         isDone = false;
     }
 
     /**
-     * To parse isDone attribute of Task object into a String representation.
+     * Parses isDone attribute of Task object into a String representation.
      *
      * @return String representation of done attribute of Task
      */
@@ -44,16 +44,16 @@ public abstract class Task {
     }
 
     /**
-     * To set description of Task.
+     * Sets description of Task.
      *
-     * @param inputDescription
+     * @param inputDescription New description of Task
      */
     public void setDescription(String inputDescription) {
         description = inputDescription;
     }
 
     /**
-     * Getter function for description variable.
+     * Gets description variable in Task
      *
      * @return Description of Task object
      */
@@ -62,7 +62,7 @@ public abstract class Task {
     }
 
     /**
-     * Method to parse Task objects into a String object representation for writing to file.
+     * Parses Task objects into a String object representation for writing to file.
      *
      * @return String representation of attributes or data related to Task for storage
      */
@@ -80,7 +80,7 @@ public abstract class Task {
     }
 
     /**
-     * To get String representation of Task object.
+     * Returns String representation of Task object.
      *
      * For example: [X] example-task
      * @return String representation of Task object

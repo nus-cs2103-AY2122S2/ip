@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
      *
      * @param ui To control outputs related to execution
      * @param storage To access and modify Tasks stored in Storage
-     * @return String result of output from successful execution of Command
+     * @return String Result of output from successful execution of Command
      * @throws KarenException if Task is not within the index of the Storage
      */
     @Override

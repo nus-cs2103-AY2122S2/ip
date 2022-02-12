@@ -38,8 +38,9 @@ public class Storage {
     }
 
     /**
-     * Gets number of tasks in taskList
-     * @return Number of tasks in taskList
+     * Returns number of tasks in taskList
+     *
+     * @return Number of tasks
      */
     public int getTaskCount() {
         return taskList.size();
@@ -121,7 +122,7 @@ public class Storage {
     }
 
     /**
-     * Creates Task object based on letters from data format saved in DATA_PATH.
+     * Returns Task object based on letters from data format saved in DATA_PATH.
      *
      * @param taskType Single letter string to indicate subclass of Task object.
      * @param taskArgs Relevant arguments to instantiate subclasses of Task Objects
@@ -153,10 +154,10 @@ public class Storage {
     }
 
     /**
-     * Getter method for Task objects within taskList based on (0-based) index
+     * Gets Task object within taskList based on (0-based) index passed in
      *
-     * @param index of Task Object inside of taskList
-     * @return Task object at index parameter
+     * @param index Index of Task Object inside taskList
+     * @return Task Object at index parameter
      * @throws IndexOutOfBoundsException if index is not within range of taskList
      */
     public Task getTask(int index) throws IndexOutOfBoundsException {
@@ -164,7 +165,7 @@ public class Storage {
     }
 
     /**
-     * Getter method for taskList
+     * Returns taskList stored in Storage
      *
      * @return list of Task objects
      */

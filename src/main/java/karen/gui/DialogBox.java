@@ -18,7 +18,7 @@ import karen.Main;
 
 /**
  * Code adapted from:
- * https://se-education.org/guides/tutorials/javaFxPart3.html
+ * ttps://se-education.org/guides/tutorials/javaFxPart4.html
  */
 public class DialogBox extends HBox {
     @FXML
@@ -52,8 +52,9 @@ public class DialogBox extends HBox {
 
     /**
      * Displays text and img in a set format by the User.
-     * @param text to be displayed alongside image
-     * @param img to be displayed alongside text
+     *
+     * @param text To display alongside image
+     * @param img To display alongside text
      * @return Formatted image and text by the User
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -62,8 +63,9 @@ public class DialogBox extends HBox {
 
     /**
      * Displays text and img in a set format by Karen.
-     * @param text to be displayed alongside image
-     * @param img to be displayed alongside text
+     *
+     * @param text To display alongside image
+     * @param img To display alongside text
      * @return Formatted image and text by Karen
      */
     public static DialogBox getKarenDialog(String text, Image img) {

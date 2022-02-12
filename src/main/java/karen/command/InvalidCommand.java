@@ -11,7 +11,7 @@ public class InvalidCommand extends Command {
     private InvalidMessage invalidMessage;
 
     /**
-     * Constructor function to override default message of InvalidCommand
+     * Create InvalidCommand objects with custom messages to override default
      *
      * @param inputMessage custom enum message to describe invalid command
      */
@@ -20,14 +20,14 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Constructor function to create InvalidCommand objects with DEFAULT_MESSAGE
+     * Create InvalidCommand objects with DEFAULT_MESSAGE
      */
     public InvalidCommand() {
         invalidMessage = InvalidMessage.INVALID_DEFAULT;
     }
 
     /**
-     * Getter function for getting message describing invalid command
+     * Gets message describing invalid user input
      *
      * @return message that describes invalid command
      */
