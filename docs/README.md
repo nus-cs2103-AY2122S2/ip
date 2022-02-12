@@ -38,7 +38,7 @@ SaiTasker is a **desktop app for managing tasks, optimized for use via a Command
 * Tags are specified by `--` followed by the tag alias. The list of possible tags are shown [here](#tags).
 
 
-There are 3 types of tasks that you can add to the task list.
+**:information_source: There are 3 types of tasks that you can add to the task list.**<br>
   
   1. A `ToDo` task
   2. An `Event` task
@@ -54,7 +54,7 @@ Daily tasks reset at 00:00, weekly tasks reset every Sunday, biweekly tasks rese
 ### Adding a `ToDo`:
 Adds a `ToDo` task to the task list.
   
-Format: `todo TASK_DESCRIPTION`
+Format: `todo [TAG] TASK_DESCRIPTION`
 
 Examples:
 * `todo CS2103T Project`
@@ -124,8 +124,25 @@ Format: `bye`
   
 ## Tags
 Tag | Description | Example
+--- | --------- | ---------------
 --rd | Task recurs daily | `todo --rd Check email`
 --rw | Task recurs weekly | `deadline --rw CS2103T Project /by 12/12/2022 23:59
 --rb | Task recurs biweekly | `event --rb GEQ Tutorial /at CREATE`
 --rm | Task recurs monthly | `todo --rm Revise tutorials`
 
+## FAQ
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and transfer Saitama.txt found in data/ from your old computer to the data/ in your new computer.
+   
+## Command Summary
+Command | Format | Example
+--- | ----------- | -------------
+ToDo | `todo [TAG] TASK_DESCRIPTION` | `todo --rw CS2103T Project`
+Event | `event [TAG] TASK_DESCRIPTION /at LOCATION` | `event --rw Attend CS2107 Tutorial /at COM1-0212`
+Deadline | `deadline [TAG] TASK_DESCRIPTION /by DD/MM/YYYY HH:MM` | `deadline --rw Submit CS2103T Project /by 18/02/2022 10:00`
+List | `list` | `list`
+Delete | `delete TASK_NUMBER` | `delete 2`
+Mark | `mark TASK_NUMBER` | `mark 2`
+Unmark | `unmark TASK_NUMBER` | `unmark 2`
+Find | `find QUERY` | `find WEEKLY`
+Bye | `bye` | `bye`
