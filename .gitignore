@@ -18,5 +18,3 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 Spike.txt
 MANIFEST.MF
-checkstyle.xml
-suppressions.xml
