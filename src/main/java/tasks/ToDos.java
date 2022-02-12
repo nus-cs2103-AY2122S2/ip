@@ -7,7 +7,7 @@ package tasks;
 public class ToDos extends Tasks {
 
     /**
-     * Constructor for Todos.
+     * Constructs Todos.
      * @param task Task that should be recorded.
      * @param marked Boolean flag for whether a task is completed
      */
@@ -16,7 +16,7 @@ public class ToDos extends Tasks {
     }
 
     /**
-     * Construct a string representation of ToDos.
+     * Constructs a string representation of ToDos.
      * @return String representation of ToDos for caching into a pre-constructed file.
      */
     @Override
@@ -26,7 +26,7 @@ public class ToDos extends Tasks {
     }
 
     /**
-     * Message to be displayed for ToDos as a Task in Duke.
+     * Creates message to be displayed for ToDos.
      * @return String representation of ToDos.
      */
     @Override

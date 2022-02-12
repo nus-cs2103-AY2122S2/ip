@@ -8,7 +8,7 @@ package exceptions;
 public class TaskException extends Exception {
 
     /**
-     * Constructor for TaskException.
+     * Constructs TaskException.
      */
     public TaskException() {
         super("OOPS!!!");

@@ -11,7 +11,7 @@ public class WrongInputException extends TaskException {
     }
 
     /**
-     * Message to be displayed when a WrongInputException happens.
+     * Creates message to be displayed when a WrongInputException happens.
      * @return Message as a string.
      */
     @Override

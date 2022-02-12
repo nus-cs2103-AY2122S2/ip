@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class DeadLinesTest {
 
     /**
-     * Test method for cacheString in DeadLines class.
+     * Tests cacheString in DeadLines class.
      */
     @Test
     void testCacheString() {
@@ -32,7 +32,7 @@ class DeadLinesTest {
     }
 
     /**
-     * Test method for toString in DeadLines class.
+     * Tests toString in DeadLines class.
      */
     @Test
     void testToString() {

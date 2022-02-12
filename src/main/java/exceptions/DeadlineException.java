@@ -8,14 +8,14 @@ package exceptions;
 public class DeadlineException extends TaskException {
 
     /**
-     * Constructor for DeadLineException class.
+     * Constructs DeadLineException.
      */
     public DeadlineException() {
         super();
     }
 
     /**
-     * Message to be displayed when a DeadLineException happens.
+     * Creates message to be displayed when a DeadLineException happens.
      * @return Message as a string.
      */
     @Override

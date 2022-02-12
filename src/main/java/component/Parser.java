@@ -15,7 +15,7 @@ public class Parser {
     private final String input;
 
     /**
-     * Constructor for Parser.
+     * Constructs Parser.
      * @param userInput  User input as a type String.
      * @throws TaskException Throws a TaskException when user input
      *                       is in an incorrect format.
@@ -26,7 +26,7 @@ public class Parser {
     }
 
     /**
-     * Execute the command for tasks.
+     * Executes the command for tasks.
      * @param tasks Pass the TaskList into {@link component.Command} class for manipulation.
      */
     public String executeCommand(TaskList tasks) {
@@ -100,7 +100,7 @@ public class Parser {
     }
 
     /**
-     * Helper method for {@link #checkUserInput(String)}.
+     * Helps to check if {@link #checkUserInput(String)} is incorrect.
      * @param command Checks if user input is a command.
      * @return True if input is not a command and false otherwise.
      */

@@ -8,14 +8,14 @@ package exceptions;
 public class EventException extends TaskException {
 
     /**
-     * Constructor for EventException class.
+     * Constructs EventException.
      */
     public EventException() {
         super();
     }
 
     /**
-     * Message to be displayed when an EventException happens.
+     * Creates message to be displayed when an EventException happens.
      * @return Message as a string.
      */
     @Override

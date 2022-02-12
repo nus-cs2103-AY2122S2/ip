@@ -18,7 +18,7 @@ public class Command {
     private final TaskList tasks;
 
     /**
-     * Constructor for Command class.
+     * Constructs Command class.
      * @param userInput User input as a type String.
      * @param t Provides access to TaskList for some manipulation in the Duke program.
      */
@@ -28,7 +28,7 @@ public class Command {
     }
 
     /**
-     * Run command to return duke reply.
+     * Runs command to return duke reply.
      * @return A string representing what Duke replied.
      */
     public String runCommand() {
@@ -66,7 +66,7 @@ public class Command {
     }
 
     /**
-     * Print commands that are available n Duke.
+     * Prints commands that are available n Duke.
      * @return A string representing what Duke replied.
      */
     private String printCommandsAvailable() {

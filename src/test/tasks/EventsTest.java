@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class EventsTest {
 
     /**
-     * Test method for cacheString in Events class.
+     * Tests cacheString in Events class.
      */
     @Test
     void cacheString() {
@@ -32,7 +32,7 @@ class EventsTest {
     }
 
     /**
-     * Test method for toString in Events class.
+     * Tests toString in Events class.
      */
     @Test
     void testToString() {

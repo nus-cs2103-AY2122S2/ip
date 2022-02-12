@@ -8,14 +8,14 @@ package exceptions;
 public class ToDosException extends TaskException {
 
     /**
-     * Constructor for TodosException
+     * Constructs TodosException
      */
     public ToDosException() {
         super();
     }
 
     /**
-     * Message to be displayed when a TodosException happens.
+     * Creates message to be displayed when a TodosException happens.
      * @return Message as a string.
      */
     @Override

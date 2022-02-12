@@ -8,7 +8,7 @@ public class Events extends Tasks {
     private final String date;
 
     /**
-     * Constructor for Events.
+     * Constructs Events.
      * @param task Task that should be recorded.
      * @param marked Boolean flag for whether a task is completed.
      * @param date The date where the event will happen.
@@ -19,7 +19,7 @@ public class Events extends Tasks {
     }
 
     /**
-     * Construct a string representation of an Event.
+     * Constructs a string representation of an Event.
      * @return String representation of Event for caching into a pre-constructed file.
      */
     @Override
@@ -29,7 +29,7 @@ public class Events extends Tasks {
     }
 
     /**
-     * Message to be displayed for Event as a Task in Duke.
+     * Creates message to be displayed for Event.
      * @return String representation of an Event.
      */
     @Override

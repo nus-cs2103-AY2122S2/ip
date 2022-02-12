@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 class TaskTest {
 
     /**
-     * Test method for setMarked in Tasks class.
+     * Tests setMarked in Tasks class.
      */
     @Test
     void testSetMarked() {
@@ -25,7 +25,7 @@ class TaskTest {
     }
 
     /**
-     * Test method for getTask in Tasks class.
+     * Tests getTask in Tasks class.
      */
     @Test
     void testGetTask() {
@@ -36,7 +36,7 @@ class TaskTest {
     }
 
     /**
-     * Test method for returnDate in Tasks class.
+     * Tests returnDate in Tasks class.
      */
     @Test
     void testReturnDate() {

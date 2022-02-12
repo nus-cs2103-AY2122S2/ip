@@ -22,7 +22,7 @@ public class Storage {
     private final String storageLocation;
 
     /**
-     * Constructor for Storage.
+     * Constructs Storage.
      * @param pathName Relative path to the file.
      */
     public Storage(String pathName) {
@@ -48,6 +48,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Modifies the TaskList
+     * @param list TaskList to be modified.
+     * @param storageContent TaskList to be stored.
+     */
     private void modifyList(ArrayList<Tasks> list, Scanner storageContent) {
         while (storageContent.hasNext()) {
             String nextLineOfContent = storageContent.nextLine();

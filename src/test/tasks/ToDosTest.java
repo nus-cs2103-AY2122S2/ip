@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class ToDosTest {
 
     /**
-     * Test method for cacheString in ToDos class.
+     * Tests cacheString in ToDos class.
      */
     @Test
     void testCacheString() {
@@ -31,7 +31,7 @@ class ToDosTest {
     }
 
     /**
-     * Test method for toString in ToDos class.
+     * Tests toString in ToDos class.
      */
     @Test
     void testToString() {

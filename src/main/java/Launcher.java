@@ -5,7 +5,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * Main driver method for the entire application.
+     * Runs entire application.
      * @param args Command line argument for main.
      */
     public static void main(String[] args) {

@@ -8,7 +8,7 @@ public class DeadLines extends Tasks {
     private final String date;
 
     /**
-     * Constructor for DeadLines.
+     * Constructs DeadLines.
      * @param task Task that should be recorded.
      * @param marked Boolean flag for whether a task is completed.
      * @param date Date for task to be done by.
@@ -19,7 +19,7 @@ public class DeadLines extends Tasks {
     }
 
     /**
-     * Construct a string representation of DeadLine.
+     * Constructs a string representation of DeadLine.
      * @return String representation of DeadLine for caching into a pre-constructed file.
      */
     @Override
@@ -29,7 +29,7 @@ public class DeadLines extends Tasks {
     }
 
     /**
-     * Message to be displayed for DeadLine as a Task in Duke.
+     * Creates message to be displayed for DeadLine.
      * @return String representation of DeadLine.
      */
     @Override

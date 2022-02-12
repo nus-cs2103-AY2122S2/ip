@@ -9,6 +9,7 @@ import exceptions.TaskException;
 public class Ui {
 
     /**
+     * Generates Duke reply.
      * @param tasks TaskList that is manipulated by the {@link component.Command} class.
      * @param storage Storage that is manipulated by the {@link component.Command} class.
      * @param userInput input that is given by the user.
@@ -21,6 +22,14 @@ public class Ui {
         }
     }
 
+    /**
+     * Creates duke reply and check for exception.
+     * @param tasks TaskList that is manipulated by the {@link component.Command} class.
+     * @param storage Storage that is manipulated by the {@link component.Command} class.
+     * @param userInput input that is given by the user.
+     * @return Duke reply.
+     * @throws TaskException Exception that is thrown if user input is in incorrect format.
+     */
     private String createDukeReply(TaskList tasks, Storage storage, String userInput) throws TaskException {
         Parser parser = new Parser(userInput);
         String dukeReply = parser.executeCommand(tasks);
@@ -30,7 +39,7 @@ public class Ui {
 
 
     /**
-     * Initialise the Duke Ui.
+     * Initializes the Duke Ui.
      */
     public String initUi() {
         //Statement to be printed when duke is initialised.

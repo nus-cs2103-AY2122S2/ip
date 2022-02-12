@@ -26,7 +26,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructor for Duke
+     * Constructs Duke
      */
     public Duke() {
         this.ui = new Ui();

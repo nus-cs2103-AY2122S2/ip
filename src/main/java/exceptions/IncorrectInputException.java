@@ -7,14 +7,14 @@ package exceptions;
 public class IncorrectInputException extends TaskException {
 
     /**
-     * Constructor for IncorrectInputException.
+     * Constructs IncorrectInputException.
      */
     public IncorrectInputException() {
         super();
     }
 
     /**
-     * Message to be displayed when a IncorrectInputException happens.
+     * Creates message to be displayed when a IncorrectInputException happens.
      * @return Message as a string.
      */
     @Override

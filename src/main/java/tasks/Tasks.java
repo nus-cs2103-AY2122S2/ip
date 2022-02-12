@@ -14,7 +14,7 @@ public abstract class Tasks {
     private Boolean isMarked;
 
     /**
-     * Constructor for Tasks.
+     * Constructs Tasks.
      * @param task Task that should be recorded.
      * @param marked Boolean flag for whether a task is completed.
      */
@@ -55,7 +55,7 @@ public abstract class Tasks {
 
 
     /**
-     * Abstract method to specify how a String representation of Task should be cached into
+     * Creates a String representation of Task should be cached into
      * a file.
      * @return
      */

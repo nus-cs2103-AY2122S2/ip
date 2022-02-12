@@ -13,6 +13,10 @@ public class Main extends Application {
 
     private final Duke duke = new Duke();
 
+    /**
+     * Starts the interface.
+     * @param stage Stage to be set onto the interface.
+     */
     @Override
     public void start(Stage stage) {
         try {

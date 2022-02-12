@@ -13,7 +13,7 @@ public class TaskList implements Iterable<Tasks> {
     private final ArrayList<Tasks> list;
 
     /**
-     * Constructor for TaskList.
+     * Constructs TaskList.
      * @param list Arraylist that contains the Tasks in Duke.
      */
     public TaskList(ArrayList<Tasks> list) {
@@ -21,7 +21,7 @@ public class TaskList implements Iterable<Tasks> {
     }
 
     /**
-     * Getter method for TaskList.
+     * Gets TaskList.
      * @param index 0-based index for users to get the task from the TaskList.
      * @return Task from the TaskList.
      */
@@ -47,7 +47,7 @@ public class TaskList implements Iterable<Tasks> {
     }
 
     /**
-     * Size of TaskList.
+     * Returns the size of TaskList.
      * @return Integer representing size of TaskList.
      */
     public int listSize() {
@@ -64,6 +64,12 @@ public class TaskList implements Iterable<Tasks> {
         return dukeReply.toString();
     }
 
+    /**
+     * Creates Duke reply.
+     * @param description Description of the task to find.
+     * @param count The number of tasks that matches the description.
+     * @return Duke reply to find command.
+     */
     private StringBuilder createDukeReply(String description, int count) {
         StringBuilder dukeReply = new StringBuilder();
         for (Tasks task : list) {
@@ -76,7 +82,7 @@ public class TaskList implements Iterable<Tasks> {
     }
 
     /**
-     * Iterator method to allow for-each loop of TaskList.
+     * Iterates TaskList.
      * @return An iterator for Tasks.
      */
     @Override

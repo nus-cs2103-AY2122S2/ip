@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage;
 
     /**
-     * Constructor method for MainWindow.
+     * Constructs MainWindow.
      */
     public MainWindow() {
         InputStream daUserPath = this.getClass().getResourceAsStream("/images/DaUser.png");
@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Initialize height for FXML window.
+     * Initializes height for FXML window.
      */
     @FXML
     public void initialize() {
@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Set the duke instance in the dialog container.
+     * Sets the duke instance in the dialog container.
      * @param d duke instance.
      */
     public void setDuke(Duke d) {
