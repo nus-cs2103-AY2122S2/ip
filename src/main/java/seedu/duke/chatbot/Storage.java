@@ -83,12 +83,15 @@ public class Storage {
             TaskList taskList = new TaskList();
             Scanner sc = new Scanner(myObj);
             StringBuilder sb = new StringBuilder();
+
             while (sc.hasNext()) {
                 String taskDetails = sc.nextLine();
                 Task taskToAdd = getTaskFromSummary(taskDetails);
                 taskList = taskList.add(taskToAdd);
             }
+
             sc.close();
+
             return taskList;
         } catch (FileNotFoundException e) {
             throw new LoadingException();
