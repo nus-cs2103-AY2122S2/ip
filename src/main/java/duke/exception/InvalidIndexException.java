@@ -7,6 +7,7 @@ public class InvalidIndexException extends DukeException {
 
     /**
      * Constructor for InvalidIndexException.
+     *
      * @param indexRange the String of valid index range 1 to max_index.
      */
     public InvalidIndexException(String indexRange) {

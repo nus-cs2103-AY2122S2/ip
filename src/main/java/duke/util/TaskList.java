@@ -16,6 +16,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList.
+     *
      * @param taskList an ArrayList which is abstracted into the TaskList.
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -25,6 +26,7 @@ public class TaskList {
 
     /**
      * Adds a task into the task list.
+     *
      * @param task the input task which will be added into the task list.
      * @return the String which will be prints out the task that has been added and the current tasks in the list.
      */
@@ -37,6 +39,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the task list.
+     *
      * @param index the index of the task to be deleted.
      * @return the String to be printed.
      * @throws InvalidIndexException if the index is out of bounds.
@@ -55,6 +58,7 @@ public class TaskList {
 
     /**
      * Marks a task as completed in the task list.
+     *
      * @param index the index of the task to be marked as completed.
      * @return Pair containing the marked Task and the String to be printed.
      * @throws InvalidIndexException if the index is out of bounds.
@@ -74,6 +78,7 @@ public class TaskList {
 
     /**
      * Marks a task as incomplete in the task list.
+     *
      * @param index the index of the task to be marked as incomplete.
      * @return Pair containing the unmarked Task and the String to be printed.
      * @throws InvalidIndexException if the index is out of bounds.
@@ -93,6 +98,7 @@ public class TaskList {
 
     /**
      * List of all the tasks currently in the task list.
+     *
      * @return the String to be printed.
      */
     public String list() {
@@ -115,6 +121,7 @@ public class TaskList {
 
     /**
      * Finds a task with partial-match to taskName in task list.
+     *
      * @param taskName the task to find in task list.
      * @return the String to be printed.
      */

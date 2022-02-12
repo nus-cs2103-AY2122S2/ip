@@ -27,6 +27,7 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for a dialog box.
+     *
      * @param text the message.
      * @param img the image of duke or user.
      */
@@ -56,6 +57,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a new user dialogue box.
+     *
      * @param text the user's message.
      * @param img user's image.
      * @return a new dialog box based on user message.
@@ -66,6 +68,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a new duke dialogue box.
+     *
      * @param text the duke's message.
      * @param img duke's image.
      * @return a new dialog box based on duke message.

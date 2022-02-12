@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * A constructor for the Storage class.
+     *
      * @param filepath the relative filepath to store and load tasks from.
      */
     public Storage(String filepath) {
@@ -33,6 +34,7 @@ public class Storage {
 
     /**
      * Loads the tasks from disk.
+     *
      * @return ArrayList which contain the tasks that have been saved onto the disk.
      */
     public ArrayList<Task> load() {
@@ -68,6 +70,7 @@ public class Storage {
 
     /**
      * Adds a new task onto storage.
+     *
      * @param addedTask the task to be added onto storage.
      */
     public void saveAddedTask(Task addedTask) {
@@ -82,6 +85,7 @@ public class Storage {
 
     /**
      * Replaces a task in storage with the given task.
+     *
      * @param index the index of the stored task to be replaced.
      * @param updatedTask the updated task. If null then the task is to be deleted.
      */
@@ -112,7 +116,8 @@ public class Storage {
     }
 
     /**
-     *  Changes the task at the given line number with the given task.
+     * Changes the task at the given line number with the given task.
+     *
      * @param reader reader io
      * @param writer writer io
      * @param updatedTask the task to be updated in save file. If null then delete the task in save file.

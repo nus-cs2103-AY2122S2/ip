@@ -11,6 +11,7 @@ public abstract class Command {
 
     /**
      * Executes the command.
+     *
      * @param taskList the task list
      * @param storage the storage that is being used.
      * @return a String consisting of Duke's response message.
@@ -21,7 +22,8 @@ public abstract class Command {
     public abstract String exec(TaskList taskList, Storage storage) throws DukeException;
 
     /**
-     * Method that checks if Duke should exit.
+     * Checks if Duke should exit.
+     *
      * @return false for all Commands other than Exit Command.
      */
     public boolean shouldAbort() {

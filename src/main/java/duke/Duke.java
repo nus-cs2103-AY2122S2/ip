@@ -19,6 +19,7 @@ public class Duke {
 
     /**
      * Constructor for duke.
+     *
      * @param filepath the relative path to store task list on disk.
      */
     public Duke(String filepath) {
@@ -28,12 +29,18 @@ public class Duke {
         this.parser = new Parser();
     }
 
+    /**
+     * Checks if Duke has exited.
+     *
+     * @return true if duke has exited, false otherwise.
+     */
     public boolean hasAborted() {
         return this.shouldAbort;
     }
 
     /**
      * Passes the given user input to duke and gets its response.
+     *
      * @param input the user input.
      * @return the response from Duke.
      */

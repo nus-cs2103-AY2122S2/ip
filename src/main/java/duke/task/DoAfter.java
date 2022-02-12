@@ -9,6 +9,7 @@ public class DoAfter extends Task {
 
     /**
      * Constructor for event task.
+     *
      * @param activity the activity that needs to be done.
      * @param doAfterTime the location of the event.
      */

@@ -48,10 +48,11 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Setter for Duke.
-     * @param d the duke task manager to be set into MainWindow.
+     *
+     * @param duke the duke task manager to be set into MainWindow.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**

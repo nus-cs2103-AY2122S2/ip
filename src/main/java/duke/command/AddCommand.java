@@ -13,6 +13,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand.
+     *
      * @param task the task to be added onto the task list.
      */
     public AddCommand(Task task) {

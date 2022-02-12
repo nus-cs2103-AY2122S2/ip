@@ -9,6 +9,7 @@ public class Event extends Task {
 
     /**
      * Constructor for event task.
+     *
      * @param activity the activity that needs to be done.
      * @param eventLocation the location of the event.
      */

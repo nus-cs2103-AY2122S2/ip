@@ -44,6 +44,7 @@ public class Parser {
 
     /**
      * Parses a saved task on disk into a task.
+     *
      * @param savedTask the saved task.
      * @return the parsed task.
      */
@@ -92,6 +93,7 @@ public class Parser {
 
     /**
      * Parses user input into a command.
+     *
      * @param command the user input.
      * @return a command that can be executed.
      * @throws DukeException if the user input is invalid.
@@ -139,6 +141,7 @@ public class Parser {
 
     /**
      * Parses the given user input into a Mark Command.
+     *
      * @param userInput the user input to be parsed.
      * @return a Mark Command.
      * @throws InvalidCommandFormatException if Mark Command format by userInput is invalid.
@@ -157,6 +160,7 @@ public class Parser {
 
     /**
      * Parses the given user input into a Unmark Command.
+     *
      * @param userInput the user input to be parsed.
      * @return a Unmark Command.
      * @throws InvalidCommandFormatException if the Unmark Command format by the userInput is invalid.
@@ -175,6 +179,7 @@ public class Parser {
 
     /**
      * Parses the given user input into an Add Command for a To-Do task.
+     *
      * @param userInput the user input to be parsed.
      * @return a Add Command.
      * @throws InvalidCommandFormatException if the user did not input an activity To-Do.
@@ -194,6 +199,7 @@ public class Parser {
 
     /**
      * Parses the given user input into an Add Command for a Deadline task.
+     *
      * @param userInput the user input to be parsed.
      * @return an Add Command.
      * @throws InvalidCommandFormatException if the Deadline Command format by the userInput is invalid.
@@ -217,6 +223,7 @@ public class Parser {
 
     /**
      * Parses the given user input into an Add Command for an Event task.
+     *
      * @param userInput the user input to be parsed.
      * @return an Add Command.
      * @throws InvalidCommandFormatException if the Event Command format by the userInput is invalid.
@@ -237,6 +244,7 @@ public class Parser {
 
     /**
      * Parses the given user input into an Add Command for a DoAfter task.
+     *
      * @param userInput the user input to be parsed.
      * @return an Add Command.
      * @throws InvalidCommandFormatException if the Event Command format by the userInput is invalid.
@@ -257,6 +265,7 @@ public class Parser {
 
     /**
      * Parses the given user input into a Delete Command.
+     *
      * @param userInput the user input to be parsed.
      * @return a Delete Command.
      * @throws InvalidCommandFormatException if the Delete Command format by the userInput is invalid.
@@ -275,6 +284,7 @@ public class Parser {
 
     /**
      * Parses the given user input into a Find Command.
+     *
      * @param userInput the user input to be parsed.
      * @return a Find Command.
      * @throws InvalidCommandFormatException if the Find Command format by the userInput is invalid.

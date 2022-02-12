@@ -10,12 +10,14 @@ public class FindCommand extends Command {
 
     /**
      * Constructor for Find command.
+     *
      * @param findTask the task to be found.
      */
     public FindCommand(String findTask) {
         this.findTask = findTask;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String exec(TaskList taskList, Storage storage) throws DukeException {
         return taskList.find(findTask);

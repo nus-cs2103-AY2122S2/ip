@@ -16,6 +16,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Constructor to mark a task as incomplete.
+     *
      * @param index the index of the task to be marked as incomplete.
      */
     public UnmarkCommand(int index) {

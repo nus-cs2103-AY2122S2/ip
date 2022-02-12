@@ -13,6 +13,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for the delete command.
+     *
      * @param index the index of the task to be deleted.
      */
     public DeleteCommand(int index) {

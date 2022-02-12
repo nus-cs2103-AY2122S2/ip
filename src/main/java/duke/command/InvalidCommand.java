@@ -12,6 +12,7 @@ public class InvalidCommand extends Command {
 
     /**
      * Constructor for an invalid user command.
+     *
      * @param errorMessage the error message describing the invalid command.
      */
     public InvalidCommand(String errorMessage) {

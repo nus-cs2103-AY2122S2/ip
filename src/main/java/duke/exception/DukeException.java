@@ -9,6 +9,7 @@ public abstract class DukeException extends Exception {
 
     /**
      * Constructor for custom exception.
+     *
      * @param errorMessage descriptor for the exception.
      */
     public DukeException(String errorMessage) {
@@ -19,6 +20,7 @@ public abstract class DukeException extends Exception {
 
     /**
      * Getter for error message.
+     *
      * @return errorMessage - string descriptor for the exception.
      */
     @Override

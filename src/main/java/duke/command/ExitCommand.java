@@ -20,7 +20,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Method that checks if Duke should exit.
+     * Checks if Duke should exit.
+     *
      * @return true since this is the Exit Command.
      */
     @Override

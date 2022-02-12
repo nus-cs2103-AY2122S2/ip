@@ -18,6 +18,7 @@ public class Main extends Application {
 
     /**
      * The entry point to all javafx applications.
+     *
      * @param stage the primary stage for this application.
      */
     @Override

@@ -16,6 +16,7 @@ public class MarkCommand extends Command {
 
     /**
      * Constructor to mark a task as complete in the task list.
+     *
      * @param index the index of the task to be marked as complete.
      */
     public MarkCommand(int index) {

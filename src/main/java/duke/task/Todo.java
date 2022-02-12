@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for a to-do task.
+     *
      * @param activity the activity that needs to be done.
      */
     public Todo(String activity) {
