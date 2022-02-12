@@ -7,7 +7,7 @@ Currently, the name of the Duke in this program is "Enkel".
 ## Syntaxes of Commands
 
 You can view this by typing `help` to Enkel.  
-All keywords must be lowercase.
+All keywords must be in lowercase.
 
 **To add a task:**
 1. `todo <description>`
