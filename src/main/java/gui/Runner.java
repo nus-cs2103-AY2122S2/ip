@@ -143,7 +143,7 @@ public class Runner extends Application {
      * @param stage the stage to run the GUI on.
      */
     private void styleObjects(Stage stage) {
-        stage.setTitle("Cat Translator v2.103.0.3");
+        stage.setTitle("Fluffers! Your own personal task manager!");
         stage.setResizable(false);
         body.setPrefSize(350, 600);
         body.setBackground(new Background(new BackgroundFill(
@@ -249,6 +249,7 @@ public class Runner extends Application {
     private Node[] rcvMessageFromFluffers(String input) {
         Label textToAdd = generateLabel(fluffers.getReply(input));
         HBox messageAndPic = new HBox();
+
         messageAndPic.getChildren().addAll(new ImageView(fluffersPicSmall), textToAdd);
 
         AnchorPane anchorPane = new AnchorPane(messageAndPic);
