@@ -30,6 +30,7 @@ public class Deadline extends Task {
      */
     @Override
     public String export() {
+        assert this.by != null : "No date!";
         return "D " + "| " + (isMarked ? 1 : 0) + " | " + this.getName() + " | " + this.by;
     }
     /**

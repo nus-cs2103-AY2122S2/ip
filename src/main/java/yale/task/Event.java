@@ -32,6 +32,7 @@ public class Event extends Task {
      */
     @Override
     public String export() {
+        assert this.at != null : "No date!";
         return "E " + "| " + (isMarked ? 1 : 0) + " | " + this.getName() + " | " + this.at;
     }
     /**

@@ -36,7 +36,8 @@ public class TaskList {
      */
     public String listOut() {
         String output = "";
-        for (int i = 0; i < list.size(); i++) {
+        int listSize = list.size();
+        for (int i = 0; i < listSize; i++) {
             output += i + 1 + "."
                     + list.get(i) + "\n";
         }
@@ -50,7 +51,8 @@ public class TaskList {
      */
     public String exportOut() {
         String output = "";
-        for (int i = 0; i < list.size(); i++) {
+        int listSize = list.size();
+        for (int i = 0; i < listSize; i++) {
             output += list.get(i).export() + "\n";
         }
         return output;
@@ -117,9 +119,11 @@ public class TaskList {
      * @param list List of Task objects.
      */
     public String listFeature(String command, TaskList list) {
-        if (list.getSize() == 0) {
+        boolean emptyList = list.getSize() == 0;
+        if (emptyList) {
             return "You have no tasks at the moment!";
         } else {
+            assert list.getSize() != 0 : "List size should be more than 0";
             return "Here are the tasks in your list\n"
                     + list.listOut();
         }
@@ -134,13 +138,17 @@ public class TaskList {
         try {
             String[] commandArray = command.split(" ");
             int itemNo = Integer.parseInt(commandArray[1]);
+            boolean isExceed = itemNo > list.getSize();
+            boolean isInvalid = itemNo < 1;
+            int taskNumber = itemNo - 1;
             // Edge cases
-            if (itemNo > list.getSize() || itemNo < 1) {
+            if (isExceed || isInvalid) {
                 return "Error: That task does not exist!";
             } else {
+                assert itemNo <= list.getSize() : "Task number should be within list size";
                 String noted = "Noted. I've removed this task:\n   "
-                        + list.getTask(itemNo - 1).toString();
-                list.deleteTask(itemNo - 1);
+                        + list.getTask(taskNumber).toString();
+                list.deleteTask(taskNumber);
                 return noted + "\nNow you have " + list.getSize() + " tasks in the list.";
             }
         } catch (NumberFormatException e) {
@@ -160,16 +168,19 @@ public class TaskList {
             String[] commandArray = command.split(" ");
             String markStatus = commandArray[0];
             int itemNo = Integer.parseInt(commandArray[1]);
-            if (itemNo > list.getSize() || itemNo < 1) { // Edge cases
+            boolean isExceed = itemNo > list.getSize();
+            boolean isInvalid = itemNo < 1;
+            int taskNumber = itemNo - 1;
+            if (isExceed || isInvalid) { // Edge cases
                 return "Error: That task does not exist!";
             } else if (markStatus.equals("mark")) { // Mark
-                list.getTask(itemNo - 1).markTask();
+                list.getTask(taskNumber).markTask();
                 return "Nice! I've marked this task as done:\n"
-                        + list.getTask(itemNo - 1).toString();
+                        + list.getTask(taskNumber).toString();
             } else { // Unmark
-                list.getTask(itemNo - 1).unmarkTask();
+                list.getTask(taskNumber).unmarkTask();
                 return "OK, I've marked this task as not done yet:\n"
-                        + list.getTask(itemNo - 1).toString();
+                        + list.getTask(taskNumber).toString();
             }
         } catch (NumberFormatException e) {
             return "Error: Please enter a valid task number";
@@ -249,16 +260,22 @@ public class TaskList {
      * @param list List of Task objects.
      */
     public String findFeature(String command, TaskList list) {
-        String taskName = command.split("find ", 2)[1]; // Retrieve task name
+        String inputName = command.split("find ", 2)[1]; // Retrieve task name
         int count = 1;
         String output = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < list.getSize(); i++) {
-            if (list.getTask(i).name.contains(taskName)) {
+        int listSize = list.getSize();
+        for (int i = 0; i < listSize; i++) {
+            Task task = list.getTask(i);
+            String taskName = task.name;
+            boolean isMatched = taskName.contains(inputName);
+            if (isMatched) {
                 output += count + "." + list.getTask(i).toString() + "\n";
                 count += 1;
             }
         }
-        if (output.equals("Here are the matching tasks in your list:\n") || taskName.equals(" ")) {
+        boolean isNoMatch = output.equals("Here are the matching tasks in your list:\n")
+                || inputName.equals(" ");
+        if (isNoMatch) {
             return "There are no matching tasks!";
         } else {
             return output;
