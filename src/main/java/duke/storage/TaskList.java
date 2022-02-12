@@ -1,18 +1,6 @@
-package duke.storage;
-import duke.duke.Duke;
-import duke.ui.Parser;
-import duke.ui.DukeException;
-import duke.ui.InputHandler;
-import duke.storage.Storage;
-import duke.storage.TaskList;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Task;
 import java.util.ArrayList;
 public class TaskList {
-    public ArrayList<Task> list;
+    ArrayList<Task> list;
 
     /**
      * Constructor for TaskList. Initialises an empty ArrayList<Task>

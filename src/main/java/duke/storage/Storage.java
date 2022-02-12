@@ -141,7 +141,7 @@ public class Storage {
     }
 
     /**
-     * Get task
+     *
      * @param idx index of task to be gotten
      * @return task that is requested
      */
@@ -150,7 +150,7 @@ public class Storage {
     }
 
     /**
-     * Size of tasklist
+     *
      * @return size of task list
      */
     public int taskListSize() {

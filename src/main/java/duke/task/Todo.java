@@ -15,11 +15,6 @@ import duke.task.Deadline;
  */
 
 public class Todo extends Task {
-
-    /**
-     * Constructor for Todo
-     * @param name Name of Todo
-     */
     public Todo (String name) {
         super(name);
     }

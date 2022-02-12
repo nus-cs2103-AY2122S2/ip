@@ -22,7 +22,7 @@ public class Task {
     public String name;
 
     /**
-     * Constructor for Task. Is called in subclasses Todo, Event and Deadline
+     * Constructor
      * @param name name of the task
      */
     public Task (String name) {
@@ -31,7 +31,7 @@ public class Task {
     }
 
     /**
-     * Marks task as done
+     * markTask as done
      */
     public void setMarkedTask () {
         String markedMessage = "Nice! I've marked this task as done:\n";
@@ -40,7 +40,7 @@ public class Task {
     }
 
     /**
-     * Sets task to be unmarked
+     * unmarkTask
      */
     public void setUnmarkedTask() {
         String unmarkedMessage = "OK, I've marked this task as not done yet:\n";
@@ -49,7 +49,7 @@ public class Task {
     }
 
     /**
-     * Whether task has been marked
+     *
      * @return boolean on whether task is marked
      */
     public boolean hasBeenMarked() {
@@ -57,7 +57,7 @@ public class Task {
     }
 
     /**
-     * Converts date to String format for printing
+     *
      * @param date LocalDate for Deadline/Event tasks
      * @return String format: converts from yyyy-mm-dd format to Aug dd, yyyy format
      */
@@ -66,7 +66,7 @@ public class Task {
     }
 
     /**
-     * Converts time to String format for printing
+     *
      * @param time LocalTime for Deadline/Event tasks
      * @return String format: converts hh:mm format to hh:mm am/pm format
      */
