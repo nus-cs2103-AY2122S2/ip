@@ -87,12 +87,10 @@ public class Duke extends Application {
             Parser.RESULT parseResult = parser.parseInput(input);
             switch (parseResult) {
             case BYE:
-                //ui.sayGoodbye();
                 storage.overwriteFile(tasks.getTasks());
                 response = "Goodbye";
                 break;
             case LIST:
-                //ui.listTasks(tasks);
                 response = ui.listTasksAsString(tasks);
                 break;
             case MARK: {
