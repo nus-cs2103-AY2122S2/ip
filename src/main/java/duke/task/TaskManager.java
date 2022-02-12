@@ -103,7 +103,7 @@ public class TaskManager {
     }
 
     /**
-     * Write the current tasks back to the storage.
+     * Writes the current tasks back to the storage.
      *
      * @param storage The destination storage
      */

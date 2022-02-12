@@ -51,7 +51,7 @@ public class Duke {
     }
 
     /**
-     * The main method to be called.
+     * Runs the application in command line interface.
      * It initializes the task manager and cleans up when the program exits.
      *
      * @param args Not used.
