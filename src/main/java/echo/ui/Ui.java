@@ -125,11 +125,11 @@ public class Ui {
         return "Commands: \n"
                 + "- list \n"
                 + "- todo <description> \n"
-                + "- deadline <description> /by <time> \n"
-                + "- event <description> /at <time> \n"
-                + "- mark <task number> \n"
-                + "- unmark <task number> \n"
-                + "- delete <task number> \n"
+                + "- deadline <description> /by <date_time> \n"
+                + "- event <description> /at <date_time> \n"
+                + "- mark <task_number> \n"
+                + "- unmark <task_number> \n"
+                + "- delete <task_number> \n"
                 + "- find <description> \n"
                 + "- bye";
     }
