@@ -33,7 +33,7 @@ public class FindCommand extends Command {
 
             int matchCount = 0;
             for (int i = 0; i < tasks.getSize(); i++) {
-                String taskData = tasks.get(i).getTaskData().toLowerCase();
+                String taskData = tasks.get(i).getDescription().toLowerCase();
                 if (taskData.contains(keyword)) {
                     matchCount++;
                     output = Ui.append(output, matchCount + "." + tasks.getTaskStatement(i));

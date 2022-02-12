@@ -87,6 +87,15 @@ public class Task {
     }
 
     /**
+     * Getter for description.
+     *
+     * @return task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Returns the task data for a task, for Storage to save and load.
      *
      * @return the Task Data in String for Storage to parse and load.
