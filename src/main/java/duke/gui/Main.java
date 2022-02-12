@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
  */
+//Solution adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class Main extends Application {
 
     private final Duke duke = new Duke("data/data.txt");

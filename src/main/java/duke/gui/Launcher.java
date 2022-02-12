@@ -5,6 +5,7 @@ import javafx.application.Application;
 /**
  * Launcher for the Duke application.
  */
+//Solution adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class Launcher {
 
     /**
