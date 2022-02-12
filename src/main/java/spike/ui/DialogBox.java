@@ -49,15 +49,43 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the dialog box containing user message
+     *
+     * @param text user text message
+     * @param img user profile picture
+     * @return dialog box
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
         dialogBox.getChildren().get(0).setStyle("-fx-background-color: #a9a9a9; -fx-background-radius: 10;");
         return dialogBox;
     }
 
+    /**
+     * Returns the dialog box containing bot message
+     *
+     * @param text bot text message
+     * @param img bot profile picture
+     * @return dialog box
+     */
     public static DialogBox getSpikeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.getChildren().get(0).setStyle("-fx-background-color: #3cb371; -fx-background-radius: 10;");
+        db.flip();
+        return db;
+    }
+
+    /**
+     * Returns the dialog box containing bot error message
+     *
+     * @param text error text message
+     * @param img bot profile picture
+     * @return dialog box
+     */
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.getChildren().get(0).setStyle("-fx-background-color: #b22222; -fx-background-radius: 10;");
         db.flip();
         return db;
     }

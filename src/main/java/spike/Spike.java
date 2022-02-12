@@ -54,16 +54,16 @@ public class Spike {
      * @param input input text from user
      * @return bot response text
      */
-    public String getResponseCommand(String input) {
+    public Command getResponseCommand(String input) {
         Command command;
         command = new Parser().parseCommand(input, tasks);
-        String executionResult = command.execute(tasks);
-        assert executionResult != "" : "Execution response should not be empty";
+        // String executionResult = command.execute(tasks);
+        assert command != null : "Command returned should not be empty";
         if (!(command instanceof FindCommand || command instanceof IncorrectCommand
                 || command instanceof ListCommand)) {
             saveChanges();
         }
-        return executionResult;
+        return command;
     }
 
     /**

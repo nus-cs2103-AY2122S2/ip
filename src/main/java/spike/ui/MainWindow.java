@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import spike.Spike;
 import spike.command.Command;
+import spike.command.IncorrectCommand;
 import spike.command.RemindCommand;
 import spike.task.TaskList;
 
@@ -56,9 +57,12 @@ public class MainWindow extends AnchorPane {
     }
     private void remindUser(TaskList tasks) {
         Command remindCommand = new RemindCommand(1);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getSpikeDialog(remindCommand.execute(tasks), spikeImage)
-        );
+        String result = remindCommand.execute(tasks);
+        if (!result.equals("")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getSpikeDialog(remindCommand.execute(tasks), spikeImage)
+            );
+        }
     }
 
     public void setSpike(Spike s) {
@@ -79,11 +83,13 @@ public class MainWindow extends AnchorPane {
             userInput.clear();
             return;
         }
-        String response = spike.getResponseCommand(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getSpikeDialog(response, spikeImage)
-        );
+        Command responseCommand = spike.getResponseCommand(input);
+        String response = responseCommand.execute(spike.getTasks());
+        DialogBox user = DialogBox.getUserDialog(input, userImage);
+        DialogBox bot = responseCommand instanceof IncorrectCommand
+                        ? DialogBox.getErrorDialog(response, spikeImage)
+                        : DialogBox.getSpikeDialog(response, spikeImage);
+        dialogContainer.getChildren().addAll(user, bot);
         userInput.clear();
     }
 

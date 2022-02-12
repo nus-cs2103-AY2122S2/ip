@@ -29,18 +29,21 @@ public class RemindCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         AtomicInteger i = new AtomicInteger(1);
-        StringBuilder result = new StringBuilder(MSG_REMINDER);
+        StringBuilder result = new StringBuilder();
         tasks.getTasks().stream().forEach(task -> {
-            if (task instanceof Deadline && withRange(task)) {
+            if (task instanceof Deadline && withinRange(task)) {
                 result.append(i + "." + task + "\n");
             }
             i.getAndIncrement();
         });
+        if (!result.toString().equals("")) {
+            result.insert(0, MSG_REMINDER);
+        }
         return result.toString().trim();
     }
 
 
-    private static boolean withRange(Task task) {
+    private static boolean withinRange(Task task) {
         boolean isBefore = task.getDateTime().isBefore(LocalDateTime.now().plusDays(withinDays));
         boolean isAfter = task.getDateTime().isAfter(LocalDateTime.now());
         return isBefore && isAfter;
