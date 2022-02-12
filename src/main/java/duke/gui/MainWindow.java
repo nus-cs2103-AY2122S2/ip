@@ -31,7 +31,6 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
