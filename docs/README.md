@@ -1,5 +1,29 @@
 # User Guide
 Duke is an application for **managing and running your tasks**. Structure of user guide adapted from [AB3 User Guide](https://github.com/se-edu/addressbook-level3/blob/master/docs/UserGuide.md).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick start
+
+1. Ensure you have Java `11` or above installed in your Computer.
+
+2. Download the latest `duke.jar` from [here](https://github.com/lawwm/ip/releases).
+
+3. Copy the file to the folder you want to use as the _home folder_ for your Duke.
+
+4. Double-click the file to start the app.
+
+5. Type the command in the command box and press Send to execute it. 
+      Some example commands you can try:
+
+    * **`list`** : Lists all contacts.
+
+    * **`todo buy food`** : Adds a Task named `buy food` to Duke.
+
+    * **`delete`**`3` : Deletes the 3rd task shown in the current list.
+
+    * **`bye`** : Exits the app.
+--------------------------------------------------------------------------------------------------------------------
 ## Features 
 
 ### Listing all tasks : `list`
