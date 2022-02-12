@@ -50,13 +50,15 @@ public class Duke {
                 } else if (instruct.equals("list")) {
                     TaskList.reportList();
                 } else {
-                    String[] details = instruct.split(" ");
+                    String[] details = instruct.split(" ", 2);
                     if (details[0].equals("mark")) {
                         TaskList.markAsDone(Integer.parseInt(details[1]));
                     } else if (details[0].equals("unmark")) {
                         TaskList.markNotDone(Integer.parseInt(details[1]));
                     } else if (details[0].equals("delete")) {
                         TaskList.deleteTask(Integer.parseInt(details[1]));
+                    } else if (details[0].equals("find")) {
+                        TaskList.findTasks(details[1]);
                     } else {
                         String taskType = details[0];
                         if (!parser.isValidCommand(taskType)) {
