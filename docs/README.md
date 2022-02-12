@@ -24,13 +24,13 @@ to execute it. e.g typing `help` and pressing Enter will display a detailed guid
     - `event (task description) /at (location)`
     
 
-[^1]: Todo
+[^1]: *Todo-*
 A **task** that you ought to do, without any strict deadlines.
 
-[^2]: DEADLINE.
+[^2]: *Deadline-*
 A **task** with a *deadline*
 
-[^3]: Event
+[^3]: *Event-*
 A **task** with a specific *location*.
 
 ### Deleting a Task
