@@ -1,5 +1,6 @@
 package athena.parser;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -11,6 +12,7 @@ import athena.commands.EventCommand;
 import athena.commands.FindCommand;
 import athena.commands.ListCommand;
 import athena.commands.MarkCommand;
+import athena.commands.ReminderCommand;
 import athena.commands.ShutdownCommand;
 import athena.commands.TodoCommand;
 import athena.commands.UnmarkCommand;
@@ -21,10 +23,15 @@ import athena.exceptions.InputException;
  * Encapsulates helper methods to parse user input given to Athena.
  */
 public class Parser {
+    public static final int DAYS_IN_WEEK = 7;
     private static final DateTimeFormatter INPUT_FORMATTER =
             DateTimeFormatter.ofPattern("d/M/yyyy Hmm");
     private static final String DEADLINE_DATE_KEYWORD = "/by";
     private static final String EVENT_DATE_KEYWORD = "/at";
+    private static final String TODAY = "today";
+    private static final String TOMORROW = "tomorrow";
+    private static final String THIS_WEEK = "this week";
+    private static final String NEXT_WEEK = "next week";
 
     /**
      * Returns a Command object based on the given input, which encapsulates the user
@@ -64,6 +71,10 @@ public class Parser {
             return new FindCommand(getSearchPhraseFromArgs(commandArgs));
         case "list":
             return new ListCommand();
+            // No fallthrough necessary
+        case "remind":
+            return new ReminderCommand(getStartDateFromArgs(commandArgs),
+                    getEndDateFromArgs(commandArgs));
             // No fallthrough necessary
         case "bye":
             return new ShutdownCommand();
@@ -129,5 +140,57 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new InputException(InputErrorCode.INVALID_TASK_DATETIME);
         }
+    }
+
+    private static LocalDate getStartDateFromArgs(String args) throws InputException {
+        switch (args.strip()) {
+        case TODAY:
+        case THIS_WEEK:
+            return LocalDate.now();
+        // No fallthrough needed
+        case TOMORROW:
+            return LocalDate.now().plusDays(1);
+        // No fallthrough needed
+        case NEXT_WEEK:
+            return getStartingDateOfNextWeek();
+        // No fallthrough needed
+        default:
+            throw new InputException(InputErrorCode.INVALID_REMINDER_PHRASE);
+            // No fallthrough needed
+        }
+    }
+
+    private static LocalDate getEndDateFromArgs (String args) throws InputException {
+        switch (args.strip()) {
+        case TODAY:
+            return LocalDate.now();
+            // No fallthrough needed
+        case TOMORROW:
+            return LocalDate.now().plusDays(1);
+            // No fallthrough needed
+        case THIS_WEEK:
+            return getDateOfEndOfWeek();
+            // No fallthrough needed
+        case NEXT_WEEK:
+            return getDateOfEndOfWeek().plusDays(DAYS_IN_WEEK);
+            // No fallthrough needed
+        default:
+            throw new InputException(InputErrorCode.INVALID_REMINDER_PHRASE);
+            // No fallthrough needed
+        }
+    }
+
+    private static int getNumDaysToEndOfWeek(LocalDate date) {
+        return DAYS_IN_WEEK - date.getDayOfWeek().getValue();
+    }
+
+    private static LocalDate getDateOfEndOfWeek() {
+        LocalDate currDate = LocalDate.now();
+        return currDate.plusDays(getNumDaysToEndOfWeek(currDate));
+    }
+
+    private static LocalDate getStartingDateOfNextWeek() {
+        LocalDate currDate = LocalDate.now();
+        return currDate.plusDays(getNumDaysToEndOfWeek(currDate) + 1);
     }
 }

@@ -1,5 +1,7 @@
 package athena.tasks;
 
+import java.time.LocalDate;
+
 /**
  * Represents a single task object on a task list.
  */
@@ -34,6 +36,16 @@ public abstract class Task {
     public abstract String getIcon();
 
     /**
+     * Returns true if the task falls within the given time period.
+     * If the task has no attached datetime information, always returns false.
+     *
+     * @param startDate The startDate of the time period.
+     * @param endDate The endDate of the time period
+     * @return True if task falls within given time period, including the endDate.
+     */
+    public abstract boolean isFallingBetweenInclusive(LocalDate startDate, LocalDate endDate);
+
+    /**
      * Returns the task object in a save-friendly format, for easy
      * saving and loading.
      *
@@ -43,7 +55,6 @@ public abstract class Task {
         String isDoneString = (isDone ? "1" : "0");
         return String.join(SAVE_SEPARATOR, getIcon(), isDoneString, name);
     }
-
 
     /**
      * Returns a string representation of the task.

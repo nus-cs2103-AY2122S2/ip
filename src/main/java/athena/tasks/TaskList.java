@@ -1,8 +1,10 @@
 package athena.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Encapsulates a task list that keeps track of multiple tasks and supports
@@ -115,10 +117,20 @@ public class TaskList {
     }
 
     public List<Integer> getTaskNumbersContainingPhrase(String searchPhrase) {
+        Predicate<Task> taskPredicate = (task) -> task.toString().contains(searchPhrase);
+        return getTaskNumbersMeetingPredicate(taskPredicate);
+    }
+
+    public List<Integer> getTaskNumbersWithinTimeWindow(LocalDate startDate, LocalDate endDate) {
+        Predicate<Task> taskPredicate = (task) -> task.isFallingBetweenInclusive(startDate, endDate);
+        return getTaskNumbersMeetingPredicate(taskPredicate);
+    }
+
+    private List<Integer> getTaskNumbersMeetingPredicate(Predicate<Task> predicate) {
         ArrayList<Integer> taskNumbers = new ArrayList<>();
         for (int i = 1; i <= getNumberOfTasks(); i++) {
             Task task = tasks.get(i - 1);
-            if (task.toString().contains(searchPhrase)) {
+            if (predicate.test(task)) {
                 taskNumbers.add(i);
             }
         }

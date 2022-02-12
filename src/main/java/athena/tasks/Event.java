@@ -1,5 +1,6 @@
 package athena.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -49,6 +50,23 @@ public class Event extends Task {
     @Override
     public String getIcon() {
         return "E";
+    }
+
+    /**
+     * Returns true if the event start falls within the given time period.
+     *
+     * @param startDate The startDate of the time period.
+     * @param endDate The endDate of the time period.
+     * @return True if event falls within given time period, inclusive of endDate.
+     */
+    @Override
+    public boolean isFallingBetweenInclusive(LocalDate startDate, LocalDate endDate) {
+        LocalDate eventDate = eventDateTime.toLocalDate();
+        if (eventDate.isBefore(startDate) || eventDate.isAfter(endDate)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
