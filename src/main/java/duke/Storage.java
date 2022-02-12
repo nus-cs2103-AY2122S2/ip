@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 /**
  * A class to manage the saving and loading of files in the <code>Duke</code> program
@@ -98,6 +101,17 @@ public class Storage {
         }
 
         try {
+            File f = new File(filepath);
+            if (!f.exists()) {
+                File dir = f.getParentFile();
+                if (!dir.exists()) {
+                    dir.mkdir();
+                }
+
+                f.createNewFile();
+
+            }
+
             FileWriter fw = new FileWriter(filepath);
             fw.write(saveFormat);
             fw.close();
@@ -115,6 +129,18 @@ public class Storage {
         }
 
         try {
+            File f = new File(filepath);
+            if (!f.exists()) {
+                File dir = f.getParentFile();
+                System.out.println(dir);
+                if (!dir.exists()) {
+                    dir.mkdir();
+                }
+
+                f.createNewFile();
+
+            }
+
             FileWriter fw = new FileWriter(filepath);
             fw.write(saveFormattedNotes);
             fw.close();
