@@ -122,7 +122,7 @@ OK, I've marked this task as not done yet:
 
 ----------------------------------------------------------------------------------------
 
-### `find {keyword}` - Find tasks on the list that contains keyword
+### `find {keyword}` - Finds tasks on the list that contains keyword
 
 Example of usage:
 
@@ -137,7 +137,7 @@ Here are the matching tasks in your list:
 
 ----------------------------------------------------------------------------------------
 
-### `update {number} {section} {content}` - Update task section with new content
+### `update {number} {section} {content}` - Updates task section with new content
 
 Example of usage:
 
