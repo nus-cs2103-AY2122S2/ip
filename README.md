@@ -20,7 +20,7 @@ Duke is a basic Todo List with a built-in interface for users to interact with.
 ## Instructions
 ***
 
-###Commands and their purpose
+##Commands and their purpose
 1. ``list`` shows the list of tasks that has yet to be done.
 2. ``mark <integer>`` marks the task as completed.  
 3. ``unmark <integer>`` un-marks the task as not completed.
