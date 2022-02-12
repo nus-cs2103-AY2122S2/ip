@@ -4,6 +4,8 @@ import java.time.format.DateTimeParseException;
 
 public class Todo extends Task {
 
+    protected boolean status;
+
     /**
      * @param isDone Whether the task is done.
      * @param description Description of the task.

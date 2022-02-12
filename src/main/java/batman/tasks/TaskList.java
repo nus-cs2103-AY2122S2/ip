@@ -12,7 +12,7 @@ public class TaskList {
     private static ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public TaskList(List<Task> tasks) {
@@ -36,7 +36,6 @@ public class TaskList {
      *
      * @param command An array of strings containing the
      *                details of a task.
-     * @return String object of added task.
      */
     public static String addTask(String[] command) {
         try {

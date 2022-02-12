@@ -5,12 +5,12 @@ import batman.ui.Ui;
 
 public class Duke {
 
-    private final Ui ui;
-    private final Storage storage;
+    private Ui ui;
+    private Storage storage;
     private TaskList taskList;
 
     /**
-     * Creates a chatbot that assists in
+     * Duke class, a chatbot that assists in
      * keeping track of tasks a person may have.
      *
      * @param filePath Path to indicate where the
@@ -26,13 +26,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Gets response from application and parse user's
-     * input to return a String result.
-     *
-     * @param input User's input.
-     * @return String object of result from user's input.
-     */
     public String getResponse(String input) {
         try {
             ui.greeting();

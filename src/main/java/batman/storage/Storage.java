@@ -19,7 +19,7 @@ public class Storage {
     private static Path path;
 
     /**
-     * Stores and loads tasks in specified file.
+     * Storage for tasks.
      *
      * @param filePath Path to indicate where the
      *                 storage of the tasks will be located at.
@@ -61,7 +61,7 @@ public class Storage {
     /**
      * Returns tasks from specified file.
      *
-     * @return ArrayList of existing tasks.
+     * @return
      */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -76,6 +76,7 @@ public class Storage {
                 tasks.add(new Event(item[1].equals("1"), item[2], item[3]));
                 break;
             default:
+                assert item[1].equals("T");
                 tasks.add(new Todo(item[1].equals("1"), item[2]));
             }
         }
