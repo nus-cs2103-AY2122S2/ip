@@ -1,6 +1,6 @@
 # User Guide
 
-# Requirements
+## Requirements
 - [ ] Java 11 Runtime
 - [ ] Comic Sans MS Bold font installed
 
