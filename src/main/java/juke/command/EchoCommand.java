@@ -7,8 +7,17 @@ import juke.exception.JukeMissingArgumentException;
  * Command for echo.
  */
 public class EchoCommand extends Command {
+    /**
+     * String to echo.
+     */
     private String message;
 
+    /**
+     * Checks if the parameters and arguments are valid.
+     * Requires the string to echo.
+     *
+     * @return This command.
+     */
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -24,6 +33,12 @@ public class EchoCommand extends Command {
         return this;
     }
 
+    /**
+     * Tries to execute the command, updating the result.
+     * Echos a string.
+     *
+     * @return This command.
+     */
     @Override
     public Command execute() {
         if (this.isSuccessful()) {

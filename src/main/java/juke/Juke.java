@@ -34,11 +34,14 @@ public class Juke extends Application {
         CommandHandler.registerCommands();
     }
 
+    /**
+     * Runs the GUI implementation of Juke.
+     *
+     * @param stage JavaFX stage of the application.
+     */
     @Override
     public void start(Stage stage) {
         this.gui.initializeUiComponents(stage);
-        this.gui.formatUiComponents(stage);
-        this.gui.handleEventListeners(stage);
     }
 
     /**
@@ -96,7 +99,7 @@ public class Juke extends Application {
     }
 
     /**
-     * Entry point main method for Juke CLI.
+     * Runs the CLI implementation of Juke.
      *
      * @param args Run arguments, unused.
      */

@@ -5,7 +5,7 @@ package juke.task;
  */
 public class Todo extends Task {
     /**
-     * Construtor that initializes task with description.
+     * Constructor that initializes task with description.
      *
      * @param description Description.
      */

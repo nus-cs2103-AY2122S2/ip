@@ -7,7 +7,16 @@ import juke.exception.JukeInvalidParameterException;
 import juke.exception.JukeMissingArgumentException;
 import juke.task.Task;
 
+/**
+ * Command to find tasks matching a string.
+ */
 public class FindCommand extends Command {
+    /**
+     * Checks if the parameters and arguments are valid.
+     * Requires a string to query.
+     *
+     * @return This command.
+     */
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -23,6 +32,12 @@ public class FindCommand extends Command {
         return this;
     }
 
+    /**
+     * Tries to execute the command, updating the result.
+     * Finds the tasks with a matching string as the query.
+     *
+     * @return This command.
+     */
     @Override
     public Command execute() {
         if (this.isSuccessful()) {

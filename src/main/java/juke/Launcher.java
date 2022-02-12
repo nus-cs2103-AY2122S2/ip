@@ -3,11 +3,11 @@ package juke;
 import javafx.application.Application;
 
 /**
- * Launcher class for Juke application.
+ * Launcher class for the Juke application.
  */
 public class Launcher {
     /**
-     * Entry point main method for the Juke application.
+     * Runs the Juke application.
      * Runs Juke CLI if 'cli' is given as the first argument.
      *
      * @param args Arguments.

@@ -15,8 +15,8 @@ public class Event extends Task {
     /**
      * Constructor to initialize task with a description and a starting time.
      *
-     * @param description
-     * @param time
+     * @param description Description.
+     * @param time Time.
      */
     public Event(String description, String time) throws JukeParseException {
         super(description);

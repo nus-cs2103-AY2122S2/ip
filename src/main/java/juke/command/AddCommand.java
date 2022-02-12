@@ -8,13 +8,32 @@ import juke.task.Event;
 import juke.task.TaskType;
 import juke.task.Todo;
 
+/**
+ * Command for adding tasks.
+ */
 public class AddCommand extends Command {
+    /**
+     * Task type of the task to add.
+     */
     private TaskType type;
 
+    /**
+     * Constructor to initialize command with the task type.
+     *
+     * @param type Type of task.
+     */
     public AddCommand(TaskType type) {
         this.type = type;
     }
 
+    /**
+     * Checks if the parameters and arguments are valid.
+     * Event tasks require '-at'.
+     * Deadline tasks require '-by'.
+     * Todo tasks do no require any additional parameters.
+     *
+     * @return This command.
+     */
     @Override
     public Command checkParametersAndArguments() {
         switch (this.type) {
@@ -70,6 +89,12 @@ public class AddCommand extends Command {
         return this;
     }
 
+    /**
+     * Tries to execute the command, updating the result.
+     * Adds the task to the task list.
+     *
+     * @return This command.
+     */
     @Override
     public Command execute() {
         if (this.isSuccessful()) {
@@ -104,6 +129,11 @@ public class AddCommand extends Command {
         return this;
     }
 
+    /**
+     * Returns the task type of the command.
+     *
+     * @return Task type.
+     */
     public TaskType getType() {
         return this.type;
     }

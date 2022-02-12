@@ -71,7 +71,9 @@ public abstract class Command {
      * @return Boolean result.
      */
     public boolean hasArgument(String param) {
-        //TODO Currently does not handle missing parameter case.
+        if (this.paramArgs.get(param) == null) {
+            return false;
+        }
         return this.paramArgs.get(param).isPresent();
     }
 

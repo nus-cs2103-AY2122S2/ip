@@ -15,8 +15,8 @@ public class Deadline extends Task {
     /**
      * Constructor to initialize a task with a description and a deadline.
      *
-     * @param description
-     * @param time
+     * @param description Description.
+     * @param time Time.
      */
     public Deadline(String description, String time) throws JukeParseException {
         super(description);

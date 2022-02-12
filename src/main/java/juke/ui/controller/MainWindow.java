@@ -60,6 +60,6 @@ public class MainWindow extends AnchorPane {
      */
     public void addJukeDialog(String text) {
         this.dialogContainer.getChildren().add(
-            DialogBox.getJukeDialog(text, this.jukeImage));
+            DialogBox.getJukeDialog(gui.getResponse(text), this.jukeImage));
     }
 }

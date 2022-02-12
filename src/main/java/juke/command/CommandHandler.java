@@ -23,15 +23,15 @@ public class CommandHandler {
      * Initializes the commands.
      */
     public static void registerCommands() {
-        COMMANDS.put("echo", () -> new EchoCommand());
-        COMMANDS.put("bye", () -> new ExitCommand());
-        COMMANDS.put("list", () -> new ListCommand());
+        COMMANDS.put("echo", EchoCommand::new);
+        COMMANDS.put("bye", ExitCommand::new);
+        COMMANDS.put("list", ListCommand::new);
         EnumSet.allOf(TaskStatus.class)
                 .forEach(status -> COMMANDS.put(status.getCommandName(), () -> new MarkCommand(status)));
         EnumSet.allOf(TaskType.class)
                 .forEach(type -> COMMANDS.put(type.getCommandName(), () -> new AddCommand(type)));
-        COMMANDS.put("delete", () -> new DeleteCommand());
-        COMMANDS.put("find", () -> new FindCommand());
+        COMMANDS.put("delete", DeleteCommand::new);
+        COMMANDS.put("find", FindCommand::new);
     }
 
     /**

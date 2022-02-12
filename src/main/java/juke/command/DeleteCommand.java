@@ -5,7 +5,16 @@ import juke.exception.JukeInvalidTaskIndexException;
 import juke.exception.JukeMissingArgumentException;
 import juke.task.Task;
 
+/**
+ * Command for deleting tasks.
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Checks if the parameters and arguments are valid.
+     * Requires an integer relating to the index of the task to delete.
+     *
+     * @return This command.
+     */
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -21,6 +30,12 @@ public class DeleteCommand extends Command {
         return this;
     }
 
+    /**
+     * Tries to execute the command, updating the result.
+     * Deletes the given task from the task list.
+     *
+     * @return This command.
+     */
     @Override
     public Command execute() {
         if (this.isSuccessful()) {

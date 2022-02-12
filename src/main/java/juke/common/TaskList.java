@@ -12,6 +12,9 @@ import juke.task.Task;
  * Abstraction for list of tasks.
  */
 public class TaskList implements Iterable<Task> {
+    /**
+     * Internal list for tasks.
+     */
     private final ArrayList<Task> taskList;
 
     /**
