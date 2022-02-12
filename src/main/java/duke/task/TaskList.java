@@ -95,6 +95,15 @@ public class TaskList {
     }
 
     /**
+     * Checks if the specified task exists in the TaskList.
+     * @param i the index of the task provided
+     * @return true if task exists, false otherwise
+     */
+    public boolean containsTask(int i) {
+        return i >= 0 && i < listSize();
+    }
+
+    /**
      * Filters the TaskList by a specified keyword.
      * @param keyword the specified keyword
      * @return a new TaskList with tasks matching the keyword

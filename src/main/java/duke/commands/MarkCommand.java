@@ -33,7 +33,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (targetIndex >= tasks.listSize() || targetIndex < 0) {
+        if (!tasks.containsTask(targetIndex)) {
             throw new InvalidTaskException();
         }
 

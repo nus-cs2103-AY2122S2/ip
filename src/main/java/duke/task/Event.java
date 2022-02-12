@@ -12,8 +12,8 @@ public class Event extends Task {
     private static final DateTimeFormatter TIME_OUT = DateTimeFormatter.ofPattern("hh:mm a");
     protected LocalDate d;
     protected LocalTime t;
-    private final boolean hasDate;
-    private final boolean hasTime;
+    private boolean hasDate;
+    private boolean hasTime;
 
     /**
      * Creates a new event with a date.
@@ -25,7 +25,6 @@ public class Event extends Task {
         super(description);
         this.d = d;
         hasDate = true;
-        hasTime = false;
     }
 
     /**
@@ -37,7 +36,6 @@ public class Event extends Task {
     public Event(String description, LocalTime t) {
         super(description);
         this.t = t;
-        hasDate = false;
         hasTime = true;
     }
 
@@ -148,6 +146,43 @@ public class Event extends Task {
         }
 
         return e;
+    }
+
+    /**
+     * Edits the date of the event.
+     *
+     * @param d the date of the event
+     */
+    @Override
+    public void editDate(LocalDate d) {
+        this.d = d;
+        hasDate = true;
+        hasTime = false;
+    }
+
+    /** Edits the time of the event
+     *
+     * @param t the time of the event
+     */
+    @Override
+    public void editTime(LocalTime t) {
+        this.t = t;
+        hasDate = false;
+        hasTime = true;
+    }
+
+    /**
+     * Edits the date and time of the event
+     *
+     * @param d the date of the event
+     * @param t the time of the event
+     */
+    @Override
+    public void editDateTime(LocalDate d, LocalTime t) {
+        this.d = d;
+        this.t = t;
+        hasDate = true;
+        hasTime = true;
     }
 
     /**
