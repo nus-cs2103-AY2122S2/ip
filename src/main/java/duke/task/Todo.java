@@ -1,5 +1,10 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import duke.exceptions.InvalidEditException;
+
 /**
  * Represents a todo.
  */
@@ -55,6 +60,40 @@ public class Todo extends Task {
     @Override
     public boolean isHasTime() {
         return false;
+    }
+
+    /**
+     * Edits the date of the todo.
+     *
+     * @param date the new date
+     * @throws InvalidEditException as todo does not support date
+     */
+    @Override
+    public void editDate(LocalDate date) throws InvalidEditException {
+        throw new InvalidEditException("todo tasks do not support a date!");
+    }
+
+    /**
+     * Edits the time of the todo.
+     *
+     * @param time the new time
+     * @throws InvalidEditException as todo does not support time
+     */
+    @Override
+    public void editTime(LocalTime time) throws InvalidEditException {
+        throw new InvalidEditException("todo tasks do not support a time!");
+    }
+
+    /**
+     * Edits the date and time of the todo.
+     *
+     * @param date the new date
+     * @param time the new time
+     * @throws InvalidEditException as todo does not support date and time
+     */
+    @Override
+    public void editDateTime(LocalDate date, LocalTime time) throws InvalidEditException {
+        throw new InvalidEditException("todo tasks do not support a date and time!");
     }
 
     /**

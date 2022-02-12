@@ -1,5 +1,10 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import duke.exceptions.InvalidEditException;
+
 /**
  * Represents a user's task.
  */
@@ -61,9 +66,48 @@ public abstract class Task {
      */
     public abstract boolean isHasTime();
 
+    /**
+     * Checks if the task contains a given keyword.
+     *
+     * @param keyword the given keyword
+     * @return true if task contains keyword, false otherwise
+     */
     public boolean hasKeyword(String keyword) {
         return description.contains(keyword);
     }
+
+    /**
+     * Edits the description of the task.
+     * @param description the updated description
+     */
+    public void editDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Edits the date of the task.
+     *
+     * @param date the new date
+     * @throws InvalidEditException if task does not support date
+     */
+    public abstract void editDate(LocalDate date) throws InvalidEditException;
+
+    /**
+     * Edits the time of the task.
+     *
+     * @param time the new time
+     * @throws InvalidEditException if task does not support time
+     */
+    public abstract void editTime(LocalTime time) throws InvalidEditException;
+
+    /**
+     * Edits the date and time of the task.
+     *
+     * @param date the new date
+     * @param time the new time
+     * @throws InvalidEditException if task does not support date and time
+     */
+    public abstract void editDateTime(LocalDate date, LocalTime time) throws InvalidEditException;
 
     /**
      * Produces a string representation of the task.

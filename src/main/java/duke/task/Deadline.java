@@ -12,8 +12,8 @@ public class Deadline extends Task {
     private static final DateTimeFormatter TIME_OUT = DateTimeFormatter.ofPattern("hh:mm a");
     protected LocalDate d;
     protected LocalTime t;
-    private final boolean hasDate;
-    private final boolean hasTime;
+    private boolean hasDate;
+    private boolean hasTime;
 
     /**
      * Creates a new deadline with a date.
@@ -149,6 +149,43 @@ public class Deadline extends Task {
         }
 
         return d;
+    }
+
+    /**
+     * Edits the date of the deadline.
+     *
+     * @param d the date of the deadline
+     */
+    @Override
+    public void editDate(LocalDate d) {
+        this.d = d;
+        hasDate = true;
+        hasTime = false;
+    }
+
+    /** Edits the time of the deadline
+     *
+     * @param t the time of the deadline
+     */
+    @Override
+    public void editTime(LocalTime t) {
+        this.t = t;
+        hasDate = false;
+        hasTime = true;
+    }
+
+    /**
+     * Edits the date and time of the deadline
+     *
+     * @param d the date of the deadline
+     * @param t the time of the deadline
+     */
+    @Override
+    public void editDateTime(LocalDate d, LocalTime t) {
+        this.d = d;
+        this.t = t;
+        hasDate = true;
+        hasTime = true;
     }
 
     /**

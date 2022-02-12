@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
+import duke.commands.EditCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.IncorrectCommand;
@@ -193,33 +194,33 @@ public class Parser {
         } else if (at.length() == 0) {
             return new IncorrectCommand("You left the date/time of the event empty!");
         }
-            assert desc.length() > 0 && at.length() > 0 : "description and at should exist";
+        assert desc.length() > 0 && at.length() > 0 : "description and at should exist";
 
-            Parser.Format f = Parser.parseDateTime(at);
+        Parser.Format f = Parser.parseDateTime(at);
 
-            switch (f) {
-            case DATETIME:
-                String[] s = at.split(" ");
-                return new AddCommand(
-                        new Event(desc,
-                                LocalDate.parse(s[0], DATE_IN),
-                                LocalTime.parse(s[1], TIME_IN)));
-            case DATE:
-                return new AddCommand(
-                        new Event(desc,
-                                LocalDate.parse(at, DATE_IN)));
-            case TIME:
-                return new AddCommand(
-                        new Event(desc,
-                                LocalTime.parse(at, TIME_IN)));
-            case INVALID:
-            default:
-                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
-                        + "    yyyy-MM-dd HHmm\n"
-                        + "    yyyy-MM-dd\n"
-                        + "    or HHmm");
-            }
+        switch (f) {
+        case DATETIME:
+            String[] s = at.split(" ");
+            return new AddCommand(
+                    new Event(desc,
+                            LocalDate.parse(s[0], DATE_IN),
+                            LocalTime.parse(s[1], TIME_IN)));
+        case DATE:
+            return new AddCommand(
+                    new Event(desc,
+                            LocalDate.parse(at, DATE_IN)));
+        case TIME:
+            return new AddCommand(
+                    new Event(desc,
+                            LocalTime.parse(at, TIME_IN)));
+        case INVALID:
+        default:
+            return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+                    + "    yyyy-MM-dd HHmm\n"
+                    + "    yyyy-MM-dd\n"
+                    + "    or HHmm");
         }
+    }
 
     /**
      * Parses input in the context of a delete command.
@@ -314,6 +315,66 @@ public class Parser {
         return new FindCommand(parsedReq);
     }
 
+    private Command prepareEdit(String request) {
+        assert !request.equals("") : "request should not be empty";
+        assert request.contains("update") : "request is a update";
+
+        if (request.strip().equals("edit")) {
+            return new IncorrectCommand("Please specify the task that you would like to update.");
+        }
+
+        String next = request.substring(4).strip();
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(String.valueOf(next.charAt(0)));
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand("Please specify the task you would like to update.");
+        }
+
+        String edits = next.substring(1).strip();
+        if (edits.length() == 0) {
+            return new IncorrectCommand("You did not specify any edits!");
+        }
+
+        if (edits.startsWith("desc/")) {
+            String description = edits.substring(5);
+            if (description.contains("desc/") || description.contains("dt/")) {
+                return new IncorrectCommand("Please input only one edit at a time!");
+            }
+            return new EditCommand(taskIndex, description);
+        } else if (edits.startsWith("dt/")) {
+            String dateTime = edits.substring(3).strip();
+            if (dateTime.contains("desc/") || dateTime.contains("dt/")) {
+                return new IncorrectCommand("Please input only one edit at a time!");
+            }
+            Format f = Parser.parseDateTime(dateTime);
+
+            switch (f) {
+            case DATETIME:
+                String[] dateTimeArray = dateTime.split(" ");
+                String date = dateTimeArray[0];
+                String time = dateTimeArray[1];
+                return new EditCommand(taskIndex,
+                        LocalDate.parse(date, DATE_IN),
+                        LocalTime.parse(time, TIME_IN));
+            case DATE:
+                return new EditCommand(taskIndex,
+                        LocalDate.parse(dateTime, DATE_IN));
+            case TIME:
+                return new EditCommand(taskIndex,
+                        LocalTime.parse(dateTime, TIME_IN));
+            case INVALID:
+            default:
+                return new IncorrectCommand("Please enter the date and/or time in the specified format:\n"
+                        + "    yyyy-MM-dd HHmm\n"
+                        + "    yyyy-MM-dd\n"
+                        + "    or HHmm");
+            }
+        }
+
+        return new IncorrectCommand("Prefix your edit with desc/ for descriptions and dt/ for date and/or time");
+    }
+
     /**
      * Parses input into a command for execution.
      *
@@ -339,6 +400,8 @@ public class Parser {
             return prepareDelete(input);
         } else if (input.startsWith("find")) {
             return prepareFind(input);
+        } else if (input.startsWith("edit")) {
+            return prepareEdit(input);
         }
 
         return new IncorrectCommand("My apologies, but it seems that I do not understand your request.");
