@@ -249,6 +249,7 @@ public class Runner extends Application {
     private Node[] rcvMessageFromFluffers(String input) {
         Label textToAdd = generateLabel(fluffers.getReply(input));
         HBox messageAndPic = new HBox();
+
         messageAndPic.getChildren().addAll(new ImageView(fluffersPicSmall), textToAdd);
 
         AnchorPane anchorPane = new AnchorPane(messageAndPic);
