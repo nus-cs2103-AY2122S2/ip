@@ -15,7 +15,7 @@ class ParserTest {
     }
 
     @Test
-    void testGetTaskIndex() {
+    void testGetTaskIndex() throws MyBossException {
         String[] input = {"mark", "3"};
         int expected = 2;
         assertEquals(expected, Parser.getTaskIndex(input));

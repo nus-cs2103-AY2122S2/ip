@@ -25,6 +25,17 @@ public class ToDo extends Task {
     }
 
     /**
+     * Creates a ToDo task Object of the specified name and whether task is done.
+     *
+     * @param taskName name of task.
+     * @param isDone whether task is done.
+     * @param priorityLevel priority level of the task.
+     */
+    public ToDo(String taskName, boolean isDone, Priority priorityLevel) {
+        super(taskName, "T", isDone, priorityLevel);
+    }
+
+    /**
      * Returns string output of a ToDo Object when marked as done or not done.
      *
      * @param isDone whether task is to be marked as done or not done.
@@ -49,9 +60,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[" + this.getTaskType() + "]"
-                + "[" + (getIsDone() ? "X" : " ") + "] "
-                + this.getTaskName() + "\n";
+        return super.toString() + "\n";
     }
 
     @Override

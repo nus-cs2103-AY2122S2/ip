@@ -10,6 +10,7 @@ public class Task {
     private boolean isDone;
     private String taskName;
     private String taskType;
+    private Priority priorityLevel;
 
     /**
      * Creates a Task Object with the specified task name and task type.
@@ -21,6 +22,7 @@ public class Task {
         this.isDone = false;
         this.taskName = taskName;
         this.taskType = taskType;
+        this.priorityLevel = Priority.LOW;
     }
 
     /**
@@ -34,6 +36,21 @@ public class Task {
         this.taskName = taskName;
         this.taskType = taskType;
         this.isDone = isDone;
+        this.priorityLevel = Priority.LOW;
+    }
+
+    /**
+     * Creates a Task Object with the specified task name, task type and whether task is done.
+     *
+     * @param taskName name of task.
+     * @param taskType type of task.
+     * @param isDone whether task is done.
+     */
+    public Task(String taskName, String taskType, boolean isDone, Priority priorityLevel) {
+        this.taskName = taskName;
+        this.taskType = taskType;
+        this.isDone = isDone;
+        this.priorityLevel = priorityLevel;
     }
 
     public String getTaskName() {
@@ -42,6 +59,29 @@ public class Task {
 
     public String getTaskType() {
         return taskType;
+    }
+
+    public Priority getPriorityLevel() {
+        return this.priorityLevel;
+    }
+
+    public void changePriorityLevel(String priorityLevelString) throws MyBossException {
+        this.priorityLevel = convertPriorityLevel(priorityLevelString);
+    }
+
+    /**
+     * Returns the priority level converted from string.
+     *
+     * @param priorityLevelString string representation of the priority level to be converted.
+     * @return priority converted from string.
+     * @throws MyBossException if priority argument is invalid.
+     */
+    public Priority convertPriorityLevel(String priorityLevelString) throws MyBossException {
+        try {
+            return Priority.valueOf(priorityLevelString.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new MyBossException("Priority argument invalid!");
+        }
     }
 
     public boolean getIsDone() {
@@ -74,8 +114,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] "
-                + this.taskName + "\n";
+        return "[" + this.priorityLevel + "]"
+                + "[" + this.taskType + "]"
+                + "[" + (isDone ? "X" : " ") + "] "
+                + this.taskName;
     }
 
     @Override
@@ -89,6 +131,28 @@ public class Task {
         Task task = (Task) o;
         return isDone == task.isDone
                 && Objects.equals(taskName, task.taskName)
-                && Objects.equals(taskType, task.taskType);
+                && Objects.equals(taskType, task.taskType)
+                && priorityLevel == task.priorityLevel;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isDone, taskName, taskType, priorityLevel);
+    }
+}
+
+enum Priority {
+    HIGH ("High"),
+    MED("Med"),
+    LOW ("Low");
+
+    private final String priorityLevel;
+
+    Priority(String priorityLevel) {
+        this.priorityLevel = priorityLevel;
+    }
+
+    public String toString() {
+        return priorityLevel;
     }
 }

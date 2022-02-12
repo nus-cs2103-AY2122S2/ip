@@ -26,9 +26,15 @@ public class Parser {
      * @param userCmd user command.
      * @return index of task.
      */
-    public static int getTaskIndex(String[] userCmd) {
+    public static int getTaskIndex(String[] userCmd) throws MyBossException {
         assert userCmd[1] != null : "There should be a second argument in the command";
-        return Integer.parseInt(userCmd[1]) - 1;
+        String remainingUserInput = userCmd[1];
+        String secondArgument = remainingUserInput.split(" ")[0];
+        try {
+            return Integer.parseInt(secondArgument) - 1;
+        } catch (NumberFormatException e) {
+            throw new MyBossException("Second argument for priority command is invalid!");
+        }
     }
 
     /**
@@ -68,5 +74,9 @@ public class Parser {
         String taskName = userCmd.substring(0, userCmd.indexOf("/at") - 1);
         String timeRange = userCmd.substring(userCmd.indexOf("/at") + 4);
         return new String[] {taskName, timeRange};
+    }
+
+    public static String getPriorityLevel(String remainingUserCmd) {
+        return remainingUserCmd.split(" ")[1];
     }
 }
