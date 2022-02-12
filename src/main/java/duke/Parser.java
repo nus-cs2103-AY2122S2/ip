@@ -107,7 +107,7 @@ public class Parser {
     private static boolean isInvalidDetails(String[] taskDetails) {
         boolean isTooShort = taskDetails.length == 1;
         boolean hasNoDescription = isEmptyString(taskDetails[0]);
-        boolean hasNoDate = isEmptyString(taskDetails[1]);
+        boolean hasNoDate = isTooShort ? true : isEmptyString(taskDetails[1]);
         return isTooShort || hasNoDescription || hasNoDate;
     }
 
