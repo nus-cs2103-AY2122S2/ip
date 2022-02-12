@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -22,14 +23,13 @@ public class DeleteCommand extends Command {
      * @param tasks current list of tasks
      */
     @Override
-    public String execute(TaskList tasks) {
-        if (index <= tasks.size()) {
-            String response = "Noted. I've removed this task:\n  " + tasks.get(index);
-            tasks.remove(index);
-            return response;
-        } else {
-            return "Index is invalid";
+    public String execute(TaskList tasks) throws DukeException {
+        if (index > tasks.size() || index <= 0) {
+            throw new DukeException("Index out of bound");
         }
+        String response = "Noted. I've removed this task:\n  " + tasks.get(index);
+        tasks.remove(index);
+        return response;
     }
 
     /**

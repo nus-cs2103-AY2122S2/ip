@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -22,9 +23,9 @@ public class MarkCommand extends Command {
      * @param tasks current list of tasks
      */
     @Override
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks) throws DukeException {
         if (index > tasks.size() || index <= 0) {
-            return "Index out of bound";
+            throw new DukeException("Index out of bound");
         }
         tasks.set(index, tasks.get(index).mark());
         return "Nice! I've marked this task as done:\n  "

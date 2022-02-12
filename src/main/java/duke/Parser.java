@@ -26,24 +26,25 @@ public class Parser {
      * @throws DukeException if the input does not have a correct format
      */
     public static Command parse(String input) throws DukeException {
-        input.trim();
+        input = input.trim();
         String[] splited = input.split(" ", 2);
-        String firstWord = splited[0];
+        String firstWord = splited[0].trim();
         String remaining = "";
         if (splited.length == 2) {
             remaining = splited[1];
         }
+        remaining = remaining.trim();
         if (input.equals("bye")) {
             return new ByeCommand();
         } else if (input.equals("list")) {
             return new ListCommand();
         } else if (input.equals("help")) {
             return new HelpCommand();
-        } else if (input.matches("delete [1-9]+\\d*")) {
+        } else if (input.matches("delete *-?\\d+")) {
             return new DeleteCommand(Integer.parseInt(remaining));
-        } else if (input.matches("mark [1-9]+\\d*")) {
+        } else if (input.matches("mark *-?\\d+")) {
             return new MarkCommand(Integer.parseInt(remaining));
-        } else if (input.matches("unmark [1-9]+\\d*")) {
+        } else if (input.matches("unmark *-?\\d+")) {
             return new UnmarkCommand(Integer.parseInt(remaining));
         } else if (firstWord.equals("find")) {
             if (remaining.equals("")) {
@@ -53,8 +54,8 @@ public class Parser {
         } else if (firstWord.equals("edit")) {
             if (remaining.equals("")) {
                 throw new DukeException("Must specify what to edit");
-            } else if (!remaining.matches("[1-9]+\\d* .+")) {
-                throw new DukeException("Must specify which item to edit");
+            } else if (!remaining.matches("-?\\d+ .+")) {
+                throw new DukeException("Invalid format");
             }
             String[] indexText = remaining.split(" ", 2);
             return new EditCommand(Integer.parseInt(indexText[0]), indexText[1]);
@@ -70,8 +71,8 @@ public class Parser {
             } else if (desc_by[0].length() == 0) {
                 throw new DukeException("The description of a deadline cannot be empty");
             }
-            DukeDateTime datetime = DukeDateTime.parse(desc_by[1]);
-            return new DeadlineCommand(desc_by[0], datetime);
+            DukeDateTime datetime = DukeDateTime.parse(desc_by[1].trim());
+            return new DeadlineCommand(desc_by[0].trim(), datetime);
         } else if (firstWord.equals("event")) {
             String[] desc_at = remaining.split(" /at ", 2);
             if (desc_at.length < 2) {
@@ -79,8 +80,8 @@ public class Parser {
             } else if (desc_at[0].length() == 0) {
                 throw new DukeException("The description of an event cannot be empty");
             }
-            DukeDateTime datetime = DukeDateTime.parse(desc_at[1]);
-            return new EventCommand(desc_at[0], datetime);
+            DukeDateTime datetime = DukeDateTime.parse(desc_at[1].trim());
+            return new EventCommand(desc_at[0].trim(), datetime);
         } else {
             return new UnrecognizedCommand();
         }

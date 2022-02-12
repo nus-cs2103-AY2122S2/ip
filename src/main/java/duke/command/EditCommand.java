@@ -28,7 +28,7 @@ public class EditCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        if (index <= 0 || index > tasks.size()) {
+        if (index > tasks.size() || index <= 0) {
             throw new DukeException("Index out of bound");
         }
         String[] description = input.split(" ", 2);
@@ -50,6 +50,9 @@ public class EditCommand extends Command {
         }
         Command c = Parser.parse(fullInput);
         c.execute(tasks);
+        if (tasks.get(index).isDone()) {
+            tasks.set(tasks.size(), tasks.get(tasks.size()).mark());
+        }
         tasks.set(index, tasks.get(tasks.size()));
         tasks.remove(tasks.size());
         return "Ok, I've updated the task:\n  " + index + ". " + tasks.get(index);
