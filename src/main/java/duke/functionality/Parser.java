@@ -15,6 +15,7 @@ public class Parser {
     public static final String ERROR_UNKNOWN = "OOPS, I'm sorry, but I don't know what that means :-(";
     public static final String ERROR_DESCRIPTION = "OOPS, The description of a command cannot be empty.";
     public static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-MM-dd HHmm";
+    public static final String ERROR_FORGET_SPACE = "You forgot a space somewhere...";
     private static final int INDEX_AFTER_MARK_COMMAND = 5;
     private static final int INDEX_AFTER_UNMARK_COMMAND = 7;
     private static final int INDEX_AFTER_TODO_COMMAND = 5;
@@ -61,6 +62,8 @@ public class Parser {
             }
         } catch (IndexOutOfBoundsException error) {
             throw new DukeException(ERROR_DESCRIPTION);
+        } catch (NumberFormatException error) {
+            throw new DukeException(ERROR_FORGET_SPACE);
         }
         return output;
     }
