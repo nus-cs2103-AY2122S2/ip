@@ -4,7 +4,7 @@ Welcome! Spark is a friendly chatbot that helps you keep track of your todos, de
 Here's how you can interact with him 😁
 
 ## Features
-- list your tasks
+- [list your tasks](#`todo`-Add-a-task)
 - add a `todo`
 - add a `deadline`
 - add an `event`
