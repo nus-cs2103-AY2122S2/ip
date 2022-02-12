@@ -62,6 +62,6 @@ public class Event extends Action {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy, H:m")) + ")";
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 }

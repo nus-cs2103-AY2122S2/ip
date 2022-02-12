@@ -64,6 +64,6 @@ public class Deadline extends Action {
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy, H:m")) + ")";
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 }
