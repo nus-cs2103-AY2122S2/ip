@@ -1,7 +1,6 @@
 package duke.Commands;
 
 import duke.*;
-import duke.Commands.Commands;
 
 public class MarkCommand extends Commands {
 
