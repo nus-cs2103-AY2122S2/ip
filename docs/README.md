@@ -25,7 +25,8 @@ Duke is an application for **managing and running your tasks**. Structure of use
     * **`bye`** : Exits the app.
 
 6. Have fun using Duke!
---------------------------------------------------------------------------------------------------------------------
+
+
 ## Features 
 
 ### Listing all tasks : `list`
