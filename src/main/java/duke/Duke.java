@@ -11,7 +11,7 @@ public class Duke {
     private static final Storage storage = new Storage("../data");
 
     public String getResponse(String input) {
-        String output = "";
+        String output;
         Command c= ui.read(input);
         output = c.execute(tasks, ui, storage);
         return output;
