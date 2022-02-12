@@ -21,7 +21,8 @@ public class ListCommand extends Command {
         StringBuilder text = new StringBuilder();
         text.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.getSize(); i++) {
-            text.append("    ").append(i + 1).append(". ")
+            String index = String.valueOf(i + 1);
+            text.append("    ").append(String.format("%1$3s", index)).append(". ")
                     .append(tasks.getByIndex(i))
                     .append("\n");
         }

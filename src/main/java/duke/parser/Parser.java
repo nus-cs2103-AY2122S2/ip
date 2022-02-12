@@ -16,11 +16,13 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.PriorityCommand;
 import duke.command.SearchCommand;
 import duke.command.UnmarkCommand;
 import duke.data.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Priority;
 import duke.task.ToDo;
 import duke.ui.Ui;
 
@@ -57,6 +59,8 @@ public class Parser {
             return prepareSearchDate(input);
         case "find":
             return prepareFind(input);
+        case "priority":
+            return preparePriority(input);
         default:
             return new ErrorCommand("I'm sorry, but I don't know what that means");
         }
@@ -186,6 +190,32 @@ public class Parser {
             return new FindCommand(keyword);
         } catch (IndexOutOfBoundsException e) {
             return new ErrorCommand("Please put in keyword");
+        }
+    }
+
+    private static Command preparePriority(List<String> input) {
+        try {
+            int index = Integer.parseInt(input.get(1)) - 1;
+            Priority priority;
+            String priorityText = input.get(2);
+            switch (priorityText) {
+            case "low":
+                priority = Priority.LOW;
+                break;
+            case "normal":
+                priority = Priority.NORMAL;
+                break;
+            case "high":
+                priority = Priority.HIGH;
+                break;
+            default:
+                return new ErrorCommand("Invalid priority");
+            }
+            return new PriorityCommand(index, priority);
+        } catch (IndexOutOfBoundsException e) {
+            return new ErrorCommand("Missing Index");
+        } catch (NumberFormatException e) {
+            return new ErrorCommand("Invalid Index");
         }
     }
 }

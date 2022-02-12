@@ -48,7 +48,8 @@ public class FindCommand extends Command {
         StringBuilder searchText = new StringBuilder();
         if (checkKeyword(tasks, i, keyword)) {
             isFound = true;
-            searchText.append("    ").append(i + 1).append(". ")
+            String index = String.valueOf(i + 1);
+            searchText.append("    ").append(String.format("%1$3s", index)).append(". ")
                     .append(tasks.getByIndex(i)).append("\n");
         }
         return searchText.toString();

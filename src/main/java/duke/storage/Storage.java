@@ -14,6 +14,7 @@ import java.util.Scanner;
 import duke.data.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Priority;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
@@ -69,26 +70,35 @@ public class Storage {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             switch (input.get(0)) {
             case "T":
-                ToDo newTodo = new ToDo(input.get(2).trim());
+                ToDo newTodo = new ToDo(input.get(3).trim());
                 taskList.add(newTodo);
+                int todoIndex = taskList.indexOf(newTodo);
                 if (input.get(1).equals("1")) {
-                    taskList.set(taskList.indexOf(newTodo), newTodo.mark());
+                    newTodo = newTodo.mark();
+                    taskList.set(todoIndex, newTodo);
                 }
+                handlePriority(taskList, input, todoIndex, newTodo);
                 break;
             case "D":
-                Deadline newDeadline = new Deadline(input.get(2).trim(),
-                        LocalDate.parse(input.get(3).trim(), formatter));
+                Deadline newDeadline = new Deadline(input.get(3).trim(),
+                        LocalDate.parse(input.get(4).trim(), formatter));
                 taskList.add(newDeadline);
+                int deadLineIndex = taskList.indexOf(newDeadline);
                 if (input.get(1).equals("1")) {
-                    taskList.set(taskList.indexOf(newDeadline), newDeadline.mark());
+                    newDeadline = newDeadline.mark();
+                    taskList.set(deadLineIndex, newDeadline.mark());
                 }
+                handlePriority(taskList, input, deadLineIndex, newDeadline);
                 break;
             case "E":
-                Event newEvent = new Event(input.get(2).trim(), LocalDate.parse(input.get(3).trim(), formatter));
+                Event newEvent = new Event(input.get(3).trim(),
+                        LocalDate.parse(input.get(4).trim(), formatter));
                 taskList.add(newEvent);
+                int eventIndex = taskList.indexOf(newEvent);
                 if (input.get(1).equals("1")) {
-                    taskList.set(taskList.indexOf(newEvent), newEvent.mark());
+                    taskList.set(eventIndex, newEvent.mark());
                 }
+                handlePriority(taskList, input, eventIndex, newEvent);
                 break;
             default:
                 assert false : input.get(0);
@@ -107,5 +117,22 @@ public class Storage {
             ui.showIoException();
         }
         assert false;
+    }
+
+    private void handlePriority(ArrayList<Task> taskList, List<String> input, int taskIndex, Task newTask) {
+        switch (input.get(2)) {
+        case "HIGH":
+            newTask = newTask.setPriority(Priority.HIGH);
+            taskList.set(taskIndex, newTask.setPriority(Priority.HIGH));
+            break;
+        case "NORM":
+            taskList.set(taskIndex, newTask.setPriority(Priority.NORMAL));
+            break;
+        case "LOW ":
+            taskList.set(taskIndex, newTask.setPriority(Priority.LOW));
+            break;
+        default:
+            assert false : "Unknown priority";
+        }
     }
 }
