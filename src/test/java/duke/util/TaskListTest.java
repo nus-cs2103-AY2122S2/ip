@@ -24,4 +24,12 @@ class TaskListTest {
         taskList.delete(0);
         assertEquals(taskArrayList.size(), taskList.getCount());
     }
+
+    @Test
+    void testTaskListGetTask_getTaskStub_correctTaskStub() {
+        TaskStub taskStub = new TaskStub("TestTaskStub");
+        taskArrayList.add(taskStub);
+        taskList.add(taskStub);
+        assertEquals(taskArrayList.get(0), taskList.getTask(0));
+    }
 }
