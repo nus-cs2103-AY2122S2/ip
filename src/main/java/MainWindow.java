@@ -35,6 +35,7 @@ public class MainWindow extends AnchorPane {
         assert daUserPath != null : "daUser path not suppose to be null!";
         assert daDukePath != null : "daDuke path not suppose to be null!";
 
+        // Creates image based on the path provided.
         userImage = new Image(daUserPath);
         dukeImage = new Image(daDukePath);
     }
