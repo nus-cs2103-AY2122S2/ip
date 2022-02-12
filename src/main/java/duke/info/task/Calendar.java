@@ -23,6 +23,16 @@ public class Calendar {
         this.calendar = calendar;
     }
 
+
+    /**
+     * Gets the Task at the specified index in the Calendar
+     * @param indexToGet - the 1-based index of the Task to get
+     * @return - the Task at the specified indexToGet
+     */
+    public Task getTaskAtIndex(int indexToGet) {
+        return calendar.get(indexToGet - 1);
+    }
+
     /**
      * Adds the task specified in taskToAdd to the ArrayList in calendar
      * @param taskToAdd - the Task to be added to the Calendar

@@ -74,6 +74,14 @@ public abstract class Task {
     }
 
     /**
+     * Returns a boolean value that is true if and only if the task is complete
+     * @return true if isComplete is true and false otherwise
+     */
+    public boolean getIsComplete() {
+        return this.isComplete;
+    }
+
+    /**
      * Returns a string presentation of the action in the Task as specified by action.
      * @return - the string representation of the action required for the task
      */
