@@ -18,8 +18,8 @@ public class EventTask extends Task {
      * @param date Event date of the task.
      * @throws TsohgException If something wrong happens.
      */
-    public EventTask(String name, String date) throws TsohgException {
-        super(name);
+    public EventTask(String name, String date, boolean priority) throws TsohgException {
+        super(name, priority);
         try {
             this.date = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
@@ -34,7 +34,8 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         String dateOutput = String.format("(at: %s)", date.format(pattern));
-        return String.format("[E][%s] %s %s", getStatusIcon(), name, dateOutput);
+        return String.format("[E][%s][%s] %s %s", getPriority(), getStatusIcon(),
+                name, dateOutput);
     }
 
     /**
@@ -43,7 +44,8 @@ public class EventTask extends Task {
      */
     @Override
     public String toStore() {
-        return String.format("E | %d | %s | %s", this.isDone ? 1 : 0, this.name, this.date);
+        return String.format("E | %d | %d | %s | %s",
+                this.isHighPriority ? 1 : 0, this.isDone ? 1 : 0, name, date);
     }
 
 }

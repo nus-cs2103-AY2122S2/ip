@@ -18,8 +18,8 @@ public class DeadlineTask extends Task {
      * @param date Deadline of the task.
      * @throws TsohgException If something wrong happens.
      */
-    public DeadlineTask(String name, String date) throws TsohgException {
-        super(name);
+    public DeadlineTask(String name, String date, boolean priority) throws TsohgException {
+        super(name, priority);
         try {
             this.date = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
@@ -34,7 +34,8 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         String dateOutput = String.format("(by: %s)", date.format(pattern));
-        return String.format("[D][%s] %s %s", getStatusIcon(), name, dateOutput);
+        return String.format("[D][%s][%s] %s %s", getPriority(), getStatusIcon(),
+                name, dateOutput);
     }
 
     /**
@@ -43,6 +44,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toStore() {
-        return String.format("D | %d | %s | %s", this.isDone ? 1 : 0, this.name, this.date);
+        return String.format("D | %d | %d | %s | %s", isHighPriority ? 1 : 0, isDone ? 1 : 0,
+                name, date);
     }
 }
