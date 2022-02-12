@@ -24,7 +24,15 @@ public class Ui {
      * Return the logo and greet user
      */
     public String greet() {
-        return "Hello, I am B.H. How can I help you?\n" + LOGO + this.getLine();
+        return echo("Hello, I am B.H. How can I help you?");
+    }
+
+    public String sayBye() {
+        return echo("GoodBye! Thanks for using B.H!");
+    }
+
+    public String sayWrongInput() {
+        return echo("Wrong input, please try again");
     }
 
     /**
