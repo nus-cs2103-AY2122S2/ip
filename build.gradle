@@ -39,11 +39,11 @@ javafx {
 
 
 application {
-    mainClassName = "duke.main.Duke"
+    mainClassName = "duke.main.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "burp"
     archiveClassifier = null
 }
 
