@@ -96,4 +96,12 @@ public class Ui {
                 .append("Now you have " + TaskList.getSize() + " tasks in the list.");
         return output.toString();
     }
+
+    String outputChangeTaskPriority(Task task) {
+        StringBuilder output = new StringBuilder();
+        output.append("Noted. I've changed the priority of this task:\n")
+                .append(INDENT + "   " + task)
+                .append("Now you have " + TaskList.getSize() + " tasks in the list.");
+        return output.toString();
+    }
 }

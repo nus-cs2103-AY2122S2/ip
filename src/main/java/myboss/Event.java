@@ -53,6 +53,22 @@ public class Event extends Task {
         this.timeRange = timeRange;
     }
 
+    /**
+     * Creates an Event Object with the specified task name, date, time range, whether task is done
+     * and priority level.
+     *
+     * @param taskName name of the task.
+     * @param date date of the task.
+     * @param timeRange time range of the task.
+     * @param isDone whether the task is done.
+     * @param priorityLevel priority level of the task.
+     */
+    public Event(String taskName, String date, String timeRange, boolean isDone, Priority priorityLevel) {
+        super(taskName, "E", isDone, priorityLevel);
+        this.eventDate = LocalDate.parse(date);
+        this.timeRange = timeRange;
+    }
+
     public String getTimeRange() {
         return timeRange;
     }
@@ -88,9 +104,7 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
         String eventDateFormatted = eventDate.format(formatter);
-        return "[" + this.getTaskType() + "]"
-                + "[" + (getIsDone() ? "X" : " ") + "] "
-                + this.getTaskName()
+        return super.toString()
                 + " (at: " + eventDateFormatted + " " + this.timeRange + ")"
                 + "\n";
     }

@@ -54,21 +54,27 @@ public class MyBoss {
                 return getMarkOrDeleteOutput(command, currTaskIndex);
             case "todo":
                 ToDo newToDo = new ToDo(remainingUserInput);
-                return handleTaskEvent(newToDo);
+                return handleAddTask(newToDo);
             case "deadline":
                 String[] parsedDeadline = Parser.parseDeadlineUserCmd(remainingUserInput);
                 String deadlineName = parsedDeadline[0];
                 String timeBy = parsedDeadline[1];
                 Deadline newDeadline = new Deadline(deadlineName, timeBy);
-                return handleTaskEvent(newDeadline);
+                return handleAddTask(newDeadline);
             case "event":
                 String[] parsedEvent = Parser.parseEventUserCmd(remainingUserInput);
                 String eventName = parsedEvent[0];
                 String timeRange = parsedEvent[1];
                 Event newEvent = new Event(eventName, timeRange);
-                return handleTaskEvent(newEvent);
+                return handleAddTask(newEvent);
             case "find":
                 return ui.outputFoundTasks(tasks.findTasks(remainingUserInput));
+            case "priority":
+                int currTaskIdx = Parser.getTaskIndex(userCmdSplit);
+                String priorityLevelString = Parser.getPriorityLevel(remainingUserInput);
+                Task currTask = tasks.get(currTaskIdx);
+                currTask.changePriorityLevel(priorityLevelString);
+                return ui.outputChangeTaskPriority(currTask);
             default:
                 throw new MyBossException(Ui.UNKNOWN_COMMAND_EXCEPTION_MSG);
 
@@ -99,7 +105,7 @@ public class MyBoss {
         }
     }
 
-    String handleTaskEvent(Task task) throws MyBossException {
+    String handleAddTask(Task task) throws MyBossException {
         tasks.addTask(task);
         storage.appendTaskToFile(task);
         return ui.addTaskOutput(task);

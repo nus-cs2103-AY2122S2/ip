@@ -34,6 +34,19 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(deadline);
     }
 
+    /**
+     * Creates a Deadline Task Object with the specified task name, deadline and whether task is done.
+     *
+     * @param taskName name of the task.
+     * @param deadline deadline of task
+     * @param isDone whether task is done.
+     * @param priorityLevel priority level of the task.
+     */
+    public Deadline(String taskName, String deadline, boolean isDone, Priority priorityLevel) {
+        super(taskName, "D", isDone, priorityLevel);
+        this.deadline = LocalDate.parse(deadline);
+    }
+
     public LocalDate getDeadline() {
         return this.deadline;
     }
@@ -65,9 +78,7 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
         String deadlineFormatted = deadline.format(formatter);
-        return "[" + this.getTaskType() + "]"
-                + "[" + (getIsDone() ? "X" : " ") + "] "
-                + this.getTaskName()
+        return super.toString()
                 + " (by: " + deadlineFormatted + ")"
                 + "\n";
     }

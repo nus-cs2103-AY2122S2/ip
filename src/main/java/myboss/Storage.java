@@ -33,7 +33,11 @@ public class Storage {
     public boolean appendTaskToFile(Task task) throws MyBossException {
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            String stringToAppend = task.getTaskType() + "|" + task.getIsDone() + "|" + task.getTaskName();
+            String stringToAppend = task.getPriorityLevel().toString().toUpperCase() + "|";
+            stringToAppend = stringToAppend
+                    + task.getTaskType() + "|"
+                    + task.getIsDone() + "|"
+                    + task.getTaskName();
             switch (task.getTaskType()) {
             case "E":
                 // typecasting because only an event would have taskType "E"
@@ -114,17 +118,18 @@ public class Storage {
             while (s.hasNext()) {
                 String currLine = s.nextLine();
                 String[] currLineSplit = currLine.split("\\|");
-                String taskType = currLineSplit[0];
-                boolean isDone = currLineSplit[1].equals("true");
-                String taskName = currLineSplit[2];
+                Priority priorityLevel = Priority.valueOf(currLineSplit[0]);
+                String taskType = currLineSplit[1];
+                boolean isDone = currLineSplit[2].equals("true");
+                String taskName = currLineSplit[3];
 
                 if (taskType.equals("E")) {
                     tempTaskList.add(new Event(taskName,
-                            currLineSplit[3], currLineSplit[4], isDone));
+                            currLineSplit[4], currLineSplit[5], isDone, priorityLevel));
                 } else if (taskType.equals("D")) {
-                    tempTaskList.add(new Deadline(taskName, currLineSplit[3], isDone));
+                    tempTaskList.add(new Deadline(taskName, currLineSplit[4], isDone, priorityLevel));
                 } else {
-                    tempTaskList.add(new ToDo(taskName, isDone));
+                    tempTaskList.add(new ToDo(taskName, isDone, priorityLevel));
                 }
             }
         } catch (FileNotFoundException e) {
