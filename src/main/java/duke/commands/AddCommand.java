@@ -30,6 +30,7 @@ public class AddCommand extends Command {
      * @throws DukeException If format of the task is wrong.
      */
     public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+        assert taskToAdd != null : "No task to add in AddCommand!";
         taskManager.addTask(taskToAdd);
         save(storage, ui, taskManager);
         return ui.showAddedTask(taskToAdd, taskManager.size());

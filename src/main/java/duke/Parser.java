@@ -59,6 +59,7 @@ public class Parser {
 
         String taskName = fields[0].strip();
         String dateString = fields[1].strip();
+        assert !dateString.equals("") : "No date supplied!";
         LocalDateTime date = Parser.parseDateTime(dateString);
 
         if (date == null) {
@@ -84,6 +85,7 @@ public class Parser {
 
         String taskName = fields[0].strip();
         String dateString = fields[1].strip();
+        assert !dateString.equals("") : "No date supplied!";
         LocalDateTime date = Parser.parseDateTime(dateString);
 
         if (date == null) {
@@ -169,6 +171,8 @@ public class Parser {
             t.markDone();
         }
 
+        assert t != null : "No task parsed!";
+
         return t;
     }
 
@@ -210,6 +214,7 @@ public class Parser {
 
     public static AddCommand newAddCommand(String input) throws DukeException{
         Task taskToAdd = Parser.parseToTask(input);
+        assert taskToAdd != null : "Failed to parse user input to task!";
         return new AddCommand(taskToAdd);
     }
 
@@ -224,6 +229,7 @@ public class Parser {
 
     public static FindCommand newFindCommand(String keyword) {
         keyword = keyword.strip();
+        assert !keyword.equals("") : "No keyword supplied!";
         return new FindCommand(keyword);
     }
 
@@ -257,6 +263,7 @@ public class Parser {
 
             if (input.contains("/date")) {
                 String inputDate = input.split("/date")[1];
+                assert !inputDate.equals("") : "No date supplied!";
                 LocalDateTime date = Parser.parseDateTime(inputDate);
 
                 if (date != null) {

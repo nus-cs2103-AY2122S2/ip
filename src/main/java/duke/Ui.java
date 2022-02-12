@@ -146,9 +146,6 @@ public class Ui {
     }
 
     // Update Messages
-    public String showNoDate() {
-        return "No Date entered!";
-    }
     public String showNoName() {
         return "No Name entered!";
     }

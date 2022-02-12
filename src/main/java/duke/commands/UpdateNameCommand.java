@@ -35,6 +35,8 @@ public class UpdateNameCommand extends UpdateCommand {
      */
     public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
 
+        assert newName != null : "New name is null in UpdateNameCommand!";
+
         if (newName.strip().equals("")) {
             return ui.showNoName();
         }

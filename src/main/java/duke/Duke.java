@@ -46,7 +46,10 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
+            assert !this.hasExited : "Program has already exited!";
             Command command = Parser.parse(input);
+            assert command != null : "Command is null!";
+
             this.hasExited = command.isExit();
             return command.execute(storage, ui, manager);
         } catch (DukeException e) {
