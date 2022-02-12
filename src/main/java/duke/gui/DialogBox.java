@@ -63,7 +63,9 @@ public class DialogBox extends HBox {
      * @return a new dialog box based on user message.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color:blue;");
+        return db;
     }
 
     /**
@@ -76,6 +78,12 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        String[] splitStr = text.split(" ", 2);
+        if (splitStr[0].equals("ERROR:")) {
+            db.setStyle("-fx-background-color:red;");
+        } else {
+            db.setStyle("-fx-background-color:black;");
+        }
         return db;
     }
 }

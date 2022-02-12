@@ -8,7 +8,7 @@ import duke.util.Storage;
 import duke.util.TaskList;
 
 /**
- * It represents the Duke task list.
+ * It represents the Duke task manager.
  */
 public class Duke {
 
