@@ -120,6 +120,115 @@ public class Parser {
     }
 
     /**
+     * Parse action command.
+     *
+     * @param input the input
+     * @return the command
+     * @throws DukeException the duke exception
+     */
+    public static Command parseAction(String input) throws DukeException {
+        boolean isDigit = !Character.isDigit(input.charAt(input.length() - 1));
+        int markDigit = Character.getNumericValue(input.charAt(input.length() - 1));
+        if (input.startsWith("mark")) {
+            // detect digit
+            if (isDigit) {
+                throw new DukeException("☹ OOPS!!! The mark cannot be done.");
+            }
+            return new MarkCommand(markDigit);
+        } else if (input.startsWith("unmark")) {
+            // detect unmark
+            if (isDigit) {
+                throw new DukeException("☹ OOPS!!! The unmark cannot be done.");
+            }
+            return new UnmarkCommand(markDigit);
+        } else {
+            // detect delete
+            if (isDigit) {
+                throw new DukeException("☹ OOPS!!! The delete cannot be done.");
+            }
+            return new DeleteCommand(markDigit);
+        }
+    }
+
+    /**
+     * Generate todo command.
+     *
+     * @param input the input
+     * @return the command
+     * @throws DukeException the duke exception
+     */
+    public static Command generateTodo(String input) throws DukeException {
+        String description = getDescription(input, "T");
+        if (isEmpty(description)) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        Tag newTag = addTag(input);
+        return new AddCommand(description, "T", newTag);
+    }
+
+    /**
+     * Generate deadline command.
+     *
+     * @param input the input
+     * @return the command
+     * @throws DukeException the duke exception
+     */
+    public static Command generateDeadline(String input) throws DukeException {
+        if (isEmpty(input.substring(8))) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        if (!input.contains("/by")) {
+            throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
+        }
+        int byPos = input.indexOf("/by");
+        String description = getDescription(input, "D");
+        String byDateTime;
+        if (!input.contains("#")) {
+            byDateTime = input.substring(byPos + 4);
+        } else {
+            byDateTime = input.substring(byPos + 4, getTagPos(input) - 1);
+        }
+        if (isValidDate(byDateTime)) {
+            LocalDateTime dateTime = LocalDateTime.parse(byDateTime, dateFormat);
+            Tag newTag = addTag(input);
+            return new AddCommand(description, "D", dateTime, newTag);
+        } else {
+            throw new DukeException("☹ OOPS!!! The date time is not of correct format dd/MM/yyyy HHmm.");
+        }
+    }
+
+    /**
+     * Generate event command.
+     *
+     * @param input the input
+     * @return the command
+     * @throws DukeException the duke exception
+     */
+    public static Command generateEvent(String input) throws DukeException {
+        if (isEmpty(input.substring(5))) {
+            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+        }
+        if (!input.contains("/at")) {
+            throw new DukeException("☹ OOPS!!! The date of a event cannot be empty.");
+        }
+        int atPos = input.indexOf("/at");
+        String description = getDescription(input, "E");
+        String atDateTime;
+        if (!input.contains("#")) {
+            atDateTime = input.substring(atPos + 4);
+        } else {
+            atDateTime = input.substring(atPos + 4, getTagPos(input) - 1);
+        }
+        if (isValidDate(atDateTime)) {
+            Tag newTag = addTag(input);
+            LocalDateTime dateTime = LocalDateTime.parse(atDateTime, dateFormat);
+            return new AddCommand(description, "E", dateTime, newTag);
+        } else {
+            throw new DukeException("☹ OOPS!!! The date time is not of correct format dd/MM/yyyy HHmm.");
+        }
+    }
+
+    /**
      * Parse command.
      *
      * @param input the input
@@ -141,85 +250,17 @@ public class Parser {
             return new FindCommand(findDetail);
         } else {
             if (input.startsWith("mark") || input.startsWith("unmark") || input.startsWith("delete")) {
-                boolean isDigit = !Character.isDigit(input.charAt(input.length() - 1));
-                int markDigit = Character.getNumericValue(input.charAt(input.length() - 1));
-                if (input.startsWith("mark")) {
-                    // detect digit
-                    if (isDigit) {
-                        throw new DukeException("☹ OOPS!!! The mark cannot be done.");
-                    }
-                    return new MarkCommand(markDigit);
-                }
-                if (input.startsWith("unmark")) {
-                    // detect unmark
-                    if (isDigit) {
-                        throw new DukeException("☹ OOPS!!! The unmark cannot be done.");
-                    }
-                    return new UnmarkCommand(markDigit);
-                }
-                if (input.startsWith("delete")) {
-                    // detect delete
-                    if (isDigit) {
-                        throw new DukeException("☹ OOPS!!! The delete cannot be done.");
-                    }
-                    return new DeleteCommand(markDigit);
-                }
+                return parseAction(input);
             } else if (input.startsWith("todo")) {
                 // generate
-                String description = getDescription(input, "T");
-                if (isEmpty(description)) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                Tag newTag = addTag(input);
-                return new AddCommand(description, "T", newTag);
+                return generateTodo(input);
             } else if (input.startsWith("deadline")) {
-                if (isEmpty(input.substring(8))) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                }
-                if (!input.contains("/by")) {
-                    throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
-                }
-                int byPos = input.indexOf("/by");
-                String description = getDescription(input, "D");
-                String byDateTime;
-                if (!input.contains("#")) {
-                    byDateTime = input.substring(byPos + 4);
-                } else {
-                    byDateTime = input.substring(byPos + 4, getTagPos(input) - 1);
-                }
-                if (isValidDate(byDateTime)) {
-                    LocalDateTime dateTime = LocalDateTime.parse(byDateTime, dateFormat);
-                    Tag newTag = addTag(input);
-                    return new AddCommand(description, "D", dateTime, newTag);
-                } else {
-                    throw new DukeException("☹ OOPS!!! The date time is not of correct format dd/MM/yyyy HHmm.");
-                }
+                return generateDeadline(input);
             } else if (input.startsWith("event")) {
-                if (isEmpty(input.substring(5))) {
-                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-                }
-                if (!input.contains("/at")) {
-                    throw new DukeException("☹ OOPS!!! The date of a event cannot be empty.");
-                }
-                int atPos = input.indexOf("/at");
-                String description = getDescription(input, "E");
-                String atDateTime;
-                if (!input.contains("#")) {
-                    atDateTime = input.substring(atPos + 4);
-                } else {
-                    atDateTime = input.substring(atPos + 4, getTagPos(input) - 1);
-                }
-                if (isValidDate(atDateTime)) {
-                    Tag newTag = addTag(input);
-                    LocalDateTime dateTime = LocalDateTime.parse(atDateTime, dateFormat);
-                    return new AddCommand(description, "E", dateTime, newTag);
-                } else {
-                    throw new DukeException("☹ OOPS!!! The date time is not of correct format dd/MM/yyyy HHmm.");
-                }
+                return generateEvent(input);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
-        return null;
     }
 }

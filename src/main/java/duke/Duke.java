@@ -9,9 +9,6 @@ import duke.helptool.Ui;
 
 /**
  * The type Duke.
- *
- * @author Dai Tianle
- * @version 1.0
  */
 public class Duke {
     private TaskList tasks;
@@ -19,9 +16,9 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Create a chatterbot with record file located at filePath
+     * Instantiates a new Duke with file storage at filePath.
      *
-     * @param filePath The file's storage path
+     * @param filePath the file path
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -35,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Generate response text based on user input
+     * Gets response.
      *
      * @param input the input
      * @return the response
