@@ -1,13 +1,14 @@
 package duke;
 
 /**
- * Represent a event task
+ * Represents a event task
  * It corresponds to a event represent by a string of task and the time
  */
 public class Event extends Task {
 
     /**
      * Constructor of event
+     *
      * @param task description of the task
      * @param time time of the event
      */
@@ -17,6 +18,7 @@ public class Event extends Task {
 
     /**
      * Override Task.saveFormat by adding the time of deadline
+     *
      * @return String in the standard saving format
      */
     @Override
@@ -26,6 +28,7 @@ public class Event extends Task {
 
     /**
      * Override Task.toString() by adding the date and convert into standard format
+     *
      * @return String in the standard printing format
      */
     @Override

@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * Execute user commands
+ * Executes user commands
  */
 public class Parser {
     private Ui ui;
@@ -11,7 +11,8 @@ public class Parser {
     private Storage storage;
 
     /**
-     * Constructor of Parser
+     * Constructs a Parser
+     *
      * @param ui the ui of Duke
      * @param taskList the tasklist to store all the tasks
      * @param storage the storage to save all the tasks
@@ -29,9 +30,10 @@ public class Parser {
      * if input starts with todo, deadline or event, create a corresponding task and add to list
      * if input starts with delete, delete the corresponding task
      * if input starts with check, check all the task on the same date
+     *
      * @param input User command
      * @return String after the execution of user command
-     * @throws DukeException if wrong input is detected
+     * @throws DukeException If wrong input is detected
      */
     String execute(String input) throws DukeException {
         String output;

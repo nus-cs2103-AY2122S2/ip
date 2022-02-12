@@ -7,7 +7,8 @@ package duke;
 public class Deadline extends Task{
 
     /**
-     * Construtor of deadline
+     * Construts a deadline
+     *
      * @param task description of the task
      * @param time time of the deadline
      */
@@ -16,7 +17,8 @@ public class Deadline extends Task{
     }
 
     /**
-     * Override Task.saveFormat by adding the time of deadline
+     * Overrides Task.saveFormat by adding the time of deadline
+     *
      * @return String in the standard saving format
      */
     @Override
@@ -25,7 +27,8 @@ public class Deadline extends Task{
     }
 
     /**
-     * Override Task.toString() by adding the date and convert into standard format
+     * Overrides Task.toString() by adding the date and convert into standard format
+     *
      * @return String in the standard printing format
      */
     @Override
