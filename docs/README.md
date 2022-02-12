@@ -62,15 +62,13 @@ Here at the list of commands and what they do:
 ...
 ```
 
-### Saving your Tasks
-Your tasks will be saved in the file. Fret not!
+## FAQ
+**Q**: How do I save my tasks after updating it?
+
+**A**: Your tasks will automatically be saved in the file. Fret not!
 
 ![This is an image](../src/main/resources/images/DaDuke.png)
 
-## Download now for **FREE**! 
-The app's interface is:
-- user-friendly
-- aeshetically pleasing, and
-- **VERY FAST!**
 
-Enjoy managing your tasks!
+
+###Enjoy managing your tasks!
