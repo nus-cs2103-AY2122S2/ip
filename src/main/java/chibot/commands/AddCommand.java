@@ -45,64 +45,102 @@ public class AddCommand extends Command {
      *
      * @param tl The TaskList from each task will be added/deleted.
      * @param sge The Storage which stores/removes tasks from the hard-disk.
-     * @return A String of the task added.
-     * @throws ChiException If there are problems in the task description or date formatting.
+     * @return A confirmation String of the task added.
+     * @throws ChiException If the command somehow does not equate to any of the given ones.
      */
     @Override
     public String execute(TaskList tl, Storage sge) throws ChiException {
         try {
             switch(command) {
             case "todo":
-                if (validateMessageBody(this.description, command)) {
-                    throw new ChiException("This todo has some problems nyan!");
-                } else {
-                    String s = this.description;
-                    Task newTask = new Todo(s, false);
-                    // Add task to list
-                    tl.addTask(newTask);
-                    sge.updateFile(newTask, tl, "todo");
-                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
-                            newTask, tl.getSize());
-                }
+                return handleTodoCommand(tl, sge);
                 // FallThrough
             case "deadline":
-                if (validateMessageBody(this.description, command)) {
-                    throw new ChiException("This deadline has some problems nyan!");
-                } else {
-                    Task newTask;
-                    String s = getDescription(this.description, "deadline");
-                    LocalDate ld = getDeadlineDate(this.description);
-                    LocalTime lt = getDeadlineTiming(this.description);
-                    newTask = new Deadline(s, ld, lt, false);
-                    tl.addTask(newTask);
-                    sge.updateFile(newTask, tl, "deadline");
-                    assert tl.getSize() > 0 : "After adding, there should not be 0 tasks";
-                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
-                            newTask, tl.getSize());
-                }
+                return handleDeadlineCommand(tl, sge);
                 // FallThrough
             case "event":
-                if (validateMessageBody(this.description, command)) {
-                    throw new ChiException("This event has some problems nyan!");
-                } else {
-                    Task newTask;
-                    String s = getDescription(this.description, "event");
-                    LocalDate ld = getEventDate(this.description);
-                    LocalTime lt = getEventTimingStart(this.description);
-                    LocalTime lt1 = getEventTimingEnd(this.description);
-                    newTask = new Event(s, ld, lt, lt1, false);
-                    tl.addTask(newTask);
-                    sge.updateFile(newTask, tl, "deadline");
-                    assert tl.getSize() > 0 : "After adding, there should not be 0 tasks";
-                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
-                            newTask, tl.getSize());
-                }
+                return handleEventCommand(tl, sge);
                 // FallThrough
             default:
                 throw new ChiException("Oopsies something went wrong while parsing!");
             }
         } catch (IOException e) {
             throw new ChiException("Hey something went wrong with the IO nyan!");
+        }
+    }
+
+    /**
+     * Deals with the adding of a new Todo task.
+     *
+     * @param tl The TaskList from each task will be added/deleted.
+     * @param sge The Storage which stores/removes tasks from the hard-disk.
+     * @return A confirmation String of the task added.
+     * @throws ChiException If there are problems in the task description or date formatting.
+     * @throws IOException If there are problems adding the file to hard-disk.
+     */
+    public String handleTodoCommand(TaskList tl, Storage sge) throws ChiException, IOException {
+        if (validateMessageBody(this.description, command)) {
+            throw new ChiException("This todo has some problems nyan!");
+        } else {
+            Task newTask = new Todo(this.description, false);
+            // Add task to list
+            tl.addTask(newTask);
+            sge.updateFile(newTask, tl, "todo");
+            return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                    newTask, tl.getSize());
+        }
+    }
+
+    /**
+     * Deals with the adding of a new Deadline task.
+     *
+     * @param tl The TaskList from each task will be added/deleted.
+     * @param sge The Storage which stores/removes tasks from the hard-disk.
+     * @return A confirmation String of the task added.
+     * @throws ChiException If there are problems in the task description or date formatting.
+     * @throws IOException If there are problems adding the file to hard-disk.
+     */
+    public String handleDeadlineCommand(TaskList tl, Storage sge) throws ChiException, IOException {
+        if (validateMessageBody(this.description, command)) {
+            throw new ChiException("This deadline has some problems nyan!");
+        } else {
+            Task newTask;
+            String s = getDescription(this.description, "deadline");
+            LocalDate ld = getDeadlineDate(this.description);
+            LocalTime lt = getDeadlineTiming(this.description);
+            newTask = new Deadline(s, ld, lt, false);
+            tl.addTask(newTask);
+            sge.updateFile(newTask, tl, "deadline");
+            assert tl.getSize() > 0 : "After adding, there should not be 0 tasks";
+            return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                    newTask, tl.getSize());
+        }
+    }
+
+    /**
+     * Deals with the adding of a new Event task.
+     *
+     * @param tl The TaskList from each task will be added/deleted.
+     * @param sge The Storage which stores/removes tasks from the hard-disk.
+     * @return A confirmation String of the task added.
+     * @throws ChiException If there are problems in the task description or date formatting.
+     * @throws IOException If there are problems adding the file to hard-disk.
+     */
+    public String handleEventCommand(TaskList tl, Storage sge) throws ChiException, IOException {
+        if (validateMessageBody(this.description, command)) {
+            throw new ChiException("This event has some problems nyan!");
+        } else {
+            Task newTask;
+            String s = getDescription(this.description, "event");
+            LocalDate ld = getEventDate(this.description);
+            LocalTime lt = getEventTimingStart(this.description);
+            LocalTime lt1 = getEventTimingEnd(this.description);
+            newTask = new Event(s, ld, lt, lt1, false);
+            tl.addTask(newTask);
+            sge.updateFile(newTask, tl, "deadline");
+            assert tl.getSize() > 0 : "After adding, there should not be 0 tasks";
+            return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                    newTask, tl.getSize());
         }
     }
 
@@ -120,47 +158,67 @@ public class AddCommand extends Command {
             return false;
             // FallThrough
         case "deadline":
-            String[] separateBys = msg.split("/by");
-            if (separateBys.length != 2 || separateBys[0].equals("")) {
-                return true;
-            }
-            try {
-                String datetime = msg.split("/by")[1].trim();
-                LocalDateTime.parse(datetime, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
-                return false;
-            } catch (DateTimeParseException e) {
-                return true;
-            }
+            return validateDeadlineMessage(msg);
             // FallThrough
         case "event":
-            String[] separateAts = msg.split("/at");
-            if (separateAts.length != 2 || separateAts[0].equals("")) {
-                return true;
-            }
-            try {
-                String dateTime = msg.split("/at")[1].trim();
-                int numberOfDateTimeTokens = dateTime.split(" ").length;
-                int numberOfTimingsSpecified = dateTime.split(" ")[1].split("-").length;
-
-                if (numberOfDateTimeTokens != 2 || numberOfTimingsSpecified != 2) {
-                    return true;
-                }
-
-                String datePortion = dateTime.split(" ")[0].trim();
-                String startTiming = dateTime.split(" ")[1].split("-")[0].trim();
-                String endTiming = dateTime.split(" ")[1].split("-")[1].trim();
-
-                LocalDate.parse(datePortion, DateTimeFormatter.ofPattern(DATE_FORMAT));
-
-                LocalTime t1 = LocalTime.parse(startTiming, DateTimeFormatter.ofPattern(TIME_FORMAT));
-                LocalTime t2 = LocalTime.parse(endTiming, DateTimeFormatter.ofPattern(TIME_FORMAT));
-
-                return t1.isAfter(t2);
-            } catch (DateTimeParseException e) {
-                return true;
-            }
+            return validateEventMessage(msg);
             // FallThrough
         default:
+            return true;
+        }
+    }
+
+    /**
+     * Checks if the deadline message is of a proper format.
+     *
+     * @param msg The deadline message sent.
+     * @return A boolean of whether it was properly formatted.
+     */
+    public boolean validateDeadlineMessage(String msg) {
+        String[] separateBys = msg.split("/by");
+        if (separateBys.length != 2 || separateBys[0].equals("")) {
+            return true;
+        }
+        try {
+            String datetime = msg.split("/by")[1].trim();
+            LocalDateTime.parse(datetime, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+            return false;
+        } catch (DateTimeParseException e) {
+            return true;
+        }
+    }
+
+    /**
+     * Checks if the event message is of a proper format.
+     *
+     * @param msg The event message sent.
+     * @return A boolean of whether it was properly formatted.
+     */
+    public boolean validateEventMessage(String msg) {
+        String[] separateAts = msg.split("/at");
+        if (separateAts.length != 2 || separateAts[0].equals("")) {
+            return true;
+        }
+        try {
+            String dateTime = msg.split("/at")[1].trim();
+            int numberOfDateTimeTokens = dateTime.split(" ").length;
+            int numberOfTimingsSpecified = dateTime.split(" ")[1].split("-").length;
+
+            if (numberOfDateTimeTokens != 2 || numberOfTimingsSpecified != 2) {
+                return true;
+            }
+
+            String datePortion = dateTime.split(" ")[0].trim();
+            String startTiming = dateTime.split(" ")[1].split("-")[0].trim();
+            String endTiming = dateTime.split(" ")[1].split("-")[1].trim();
+
+            LocalDate.parse(datePortion, DateTimeFormatter.ofPattern(DATE_FORMAT));
+
+            LocalTime t1 = LocalTime.parse(startTiming, DateTimeFormatter.ofPattern(TIME_FORMAT));
+            LocalTime t2 = LocalTime.parse(endTiming, DateTimeFormatter.ofPattern(TIME_FORMAT));
+
+            return t1.isAfter(t2);
+        } catch (DateTimeParseException e) {
             return true;
         }
     }
@@ -181,7 +239,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Get the date component of deadline tasks.
+     * Gets the date component of deadline tasks.
      *
      * @param msg The message from user.
      * @return A LocalDate of date specified.
@@ -193,7 +251,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Get the time component of deadline tasks.
+     * Gets the time component of deadline tasks.
      *
      * @param msg The message from user.
      * @return A LocalTime of time specified.
@@ -205,7 +263,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Get the date component of event tasks.
+     * Gets the date component of event tasks.
      *
      * @param msg The message from user.
      * @return A LocalDate of date specified.
@@ -217,7 +275,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Get the starting time component of event tasks.
+     * Gets the starting time component of event tasks.
      *
      * @param msg The message from user.
      * @return A LocalTime of time specified.
@@ -230,7 +288,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Get the ending time component of event tasks.
+     * Gets the ending time component of event tasks.
      *
      * @param msg The message from user.
      * @return A LocalTime of time specified.
