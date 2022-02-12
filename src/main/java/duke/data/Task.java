@@ -14,6 +14,9 @@ public class Task {
         this.type = type;
     }
 
+    /**
+     * Mark this task as done.
+     */
     public void mark() {
         this.marked = true;
     }
