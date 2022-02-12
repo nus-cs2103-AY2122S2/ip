@@ -10,15 +10,19 @@ public class Duke{
 
     /**
      * Constructor of Duke
-     * @throws DukeException if read file wrongly
+     *
+     * @throws DukeException If read file wrongly
      */
     public Duke() throws DukeException {
         this.bh = new BH();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response from BH
+     *
+     * @param input User command
+     * @return Response from BH
+     * @throws DukeException If invalid input is detected
      */
     public String getResponse(String input) throws DukeException {
         return this.bh.run(input);

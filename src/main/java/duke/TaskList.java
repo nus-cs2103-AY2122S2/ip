@@ -10,8 +10,9 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * Constructor of TaskList
-     * @param list the old list of tasks
+     * Constructs a TaskList
+     *
+     * @param list Old list of tasks
      */
     TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -56,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * check all task in the list having same date as the input
+     * Checks all task in the list having same date as the input
      *
      * @param date the date to check
      * @return String of all tasks on the same date
@@ -73,8 +74,9 @@ public class TaskList {
     }
 
     /**
-     * check all tasks in the list contains the input word
-     * @param word the word to check
+     * Checks all tasks in the list contains the input word
+     *
+     * @param word The word to check
      * @return String of all tasks contains the word
      */
     String checkWord(String word) {

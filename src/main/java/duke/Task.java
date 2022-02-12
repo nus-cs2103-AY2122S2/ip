@@ -28,7 +28,8 @@ public class Task {
     }
 
     /**
-     * Constructor of task
+     * Constructs a task
+     *
      * @param task Description of the task
      * @param type Type of the task
      * @param time time of the task
@@ -43,7 +44,8 @@ public class Task {
     }
 
     /**
-     * Check if the description of task contains certain word
+     * Checks if the description of task contains certain word
+     *
      * @param word The word wish to check
      * @return Boolean of whether the word is contained in task
      */
@@ -51,20 +53,21 @@ public class Task {
         return this.task.contains(word);
     }
     /**
-     * Mark the task as done
+     * Marks the task as done
      */
     void mark() {
         this.isDone = true;
     }
 
     /**
-     * Unmark the task as not done
+     * Unmarks the task as not done
      */
     void unMark() {
         this.isDone = false;
     }
     /**
-     * Return the date of the task
+     * Returns the date of the task
+     *
      * @return Date of the task
      */
     LocalDate getDate() {
@@ -72,7 +75,8 @@ public class Task {
     }
 
     /**
-     * Return the task to standard saving format
+     * Returns the task to standard saving format
+     *
      * @return String in standard saving format
      */
 
@@ -85,11 +89,10 @@ public class Task {
     }
 
     /**
-     * If the task is done, return a string contains type of task + [X] + description of task
-     * Else change the [X] to [ ]
+     * Returns a String to represent the task
+     *
      * @return String contains type of task, isDone status and description of task
      */
-
     @Override
     public String toString() {
         if (this.isDone) {

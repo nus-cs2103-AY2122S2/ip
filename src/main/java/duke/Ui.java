@@ -12,7 +12,8 @@ public class Ui {
             + "|____/  |_|  |_| |_|\n";
 
     /**
-     * Return a line
+     * Returns a line
+     *
      * @return A String of line
      */
     public String getLine() {
@@ -23,11 +24,20 @@ public class Ui {
      * Return the logo and greet user
      */
     public String greet() {
-        return "Hello, I am B.H. How can I help you?\n" + LOGO + this.getLine();
+        return echo("Hello, I am B.H. How can I help you?");
+    }
+
+    public String sayBye() {
+        return echo("GoodBye! Thanks for using B.H!");
+    }
+
+    public String sayWrongInput() {
+        return echo("Wrong input, please try again");
     }
 
     /**
-     * surround the input with two lines
+     * Surrounds the input with two lines
+     *
      * @param input String to be surrounded
      * @return String of input surrounded with two lines
      */
