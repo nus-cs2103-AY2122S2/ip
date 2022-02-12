@@ -44,7 +44,7 @@ public class Task {
     }
 
     /**
-     * String representation of task for saving.
+     * Returns string representation of task for saving.
      *
      * @return String representation of task for saving.
      */
@@ -54,7 +54,7 @@ public class Task {
     }
 
     /**
-     * String representation of task.
+     * Returns string representation of task.
      *
      * @return String representation of task.
      */

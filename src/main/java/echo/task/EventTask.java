@@ -23,7 +23,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * String representation of EventTask for saving.
+     * Returns string representation of EventTask for saving.
      *
      * @return String representation of EventTask for saving.
      */
@@ -34,7 +34,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * String representation of EventTask.
+     * Returns string representation of EventTask.
      *
      * @return String representation of EventTask.
      */

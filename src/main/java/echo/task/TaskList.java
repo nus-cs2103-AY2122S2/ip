@@ -70,7 +70,7 @@ public class TaskList {
     }
 
     /**
-     * String representation of task for saving.
+     * Returns string representation of task for saving.
      *
      * @param i Task index.
      */
@@ -147,7 +147,7 @@ public class TaskList {
     }
 
     /**
-     * String representation of task list.
+     * Returns string representation of task list.
      *
      * @return String representation of task list.
      */

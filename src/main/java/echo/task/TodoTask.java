@@ -15,7 +15,7 @@ public class TodoTask extends Task {
     }
 
     /**
-     * String representation of TodoTask for saving.
+     * Returns string representation of TodoTask for saving.
      *
      * @return String representation of TodoTask for saving.
      */
@@ -25,7 +25,7 @@ public class TodoTask extends Task {
     }
 
     /**
-     * String representation of TodoTask.
+     * Returns string representation of TodoTask.
      *
      * @return String representation of TodoTask.
      */

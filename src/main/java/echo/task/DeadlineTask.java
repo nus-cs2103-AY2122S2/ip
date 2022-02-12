@@ -23,7 +23,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * String representation of DeadlineTask for saving.
+     * Returns string representation of DeadlineTask for saving.
      *
      * @return String representation of DeadlineTask for saving.
      */
@@ -34,7 +34,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * String representation of DeadlineTask.
+     * Returns string representation of DeadlineTask.
      *
      * @return String representation of DeadlineTask.
      */

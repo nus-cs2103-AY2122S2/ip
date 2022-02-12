@@ -48,7 +48,6 @@ public class Parser {
                 // Fallthrough
             case EventCommand.COMMAND:
                 String[] splitSlash = input.split("/");
-
                 String desc = getDescription(splitSlash[0], command);
 
                 // If second input (description) is not specified.
@@ -86,7 +85,6 @@ public class Parser {
                     throw new EchoException("Please specify the task number. Eg. mark 1");
                 }
 
-                // Parses second input into an int, throws NumberFormatException if it's not an int.
                 try {
                     int taskIndex = Integer.parseInt(splitSpace[1]) - 1;
                     if (command.equals(MarkCommand.COMMAND)) {
@@ -97,7 +95,6 @@ public class Parser {
                         return prepareDeleteCommand(taskIndex);
                     }
                 } catch (NumberFormatException nfe) {
-                    // Second input provided by user is not an int.
                     throw new EchoException("Second input must be an integer. Eg. mark 1");
                 }
 

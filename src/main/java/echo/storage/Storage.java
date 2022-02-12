@@ -52,15 +52,10 @@ public class Storage {
      */
     public TaskList load() throws FileNotFoundException, EchoException {
         File file = new File(FILE_PATH);
-
         Scanner s = new Scanner(file);
-
         TaskList tasks = new TaskList();
-
-        // Directory that the file is located in.
         File directory = file.getParentFile();
 
-        // Creates the directory if it does not exist.
         if (!directory.exists()) {
             directory.mkdir();
         }
@@ -72,19 +67,16 @@ public class Storage {
                 String type = splitVerticalBar[0];
                 String desc = splitVerticalBar[2];
 
-                // Adds task to tasks based on type.
                 switch (type) {
                 case "T":
                 case "D":
                 case "E":
                     if (type.equals("T")) {
                         tasks.add(new TodoTask(desc));
+                    } else if (type.equals("D")) {
+                        tasks.add(new DeadlineTask(desc, getLocalDateTime(splitVerticalBar)));
                     } else {
-                        if (type.equals("D")) {
-                            tasks.add(new DeadlineTask(desc, getLocalDateTime(splitVerticalBar)));
-                        } else {
-                            tasks.add(new EventTask(desc, getLocalDateTime(splitVerticalBar)));
-                        }
+                        tasks.add(new EventTask(desc, getLocalDateTime(splitVerticalBar)));
                     }
 
                     // Marks tasks based on second input, 0 or 1.
