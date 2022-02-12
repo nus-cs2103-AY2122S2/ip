@@ -39,6 +39,42 @@ public class Event extends Task {
     }
 
     /**
+     * Used to update the Event object with a new Note.
+     * @param event which contains information to transfer over to new event
+     * @param newNoteList which contains the updated information to store to event
+     */
+    public Event(Event event, NoteList newNoteList) {
+        super(event, newNoteList);
+    }
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task editNoteList(int indexOfNote, String noteContent) {
+        NoteList newNoteList = super.getNotes().editNote(indexOfNote, noteContent);
+        return new Event(this, newNoteList);
+    }
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task addNoteToNoteList(Note newNote) {
+        NoteList newNoteList = super.getNotes().addNote(newNote);
+        return new Event(this, newNoteList);
+    }
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task deleteNoteFromNoteList(int indexOfNote) {
+        NoteList newNoteList = super.getNotes().deleteNote(indexOfNote);
+        return new Event(this, newNoteList);
+    }
+
+    /**
      * {inheritDoc}.
      */
     @Override

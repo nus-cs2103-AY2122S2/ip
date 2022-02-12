@@ -28,7 +28,6 @@ public class DeleteCommand extends Command {
         TaskList newTaskList = taskList.delete(index);
         Task taskToRemove = taskList.getTasks().get(index);
         String lineToRemove = storage.createSummaryFromTask(taskToRemove);
-        Ui.showDeleteResult(newTaskList, taskToRemove);
         storage.convertTaskListToFile(newTaskList);
         return newTaskList;
     }

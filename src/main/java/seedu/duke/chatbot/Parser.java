@@ -1,28 +1,15 @@
 package seedu.duke.chatbot;
 
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.FindCommand;
-import seedu.duke.command.ListCommand;
-import seedu.duke.command.MarkCommand;
-import seedu.duke.command.UnmarkCommand;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.IncompleteCommandException;
-import seedu.duke.exceptions.NoCommandException;
-import seedu.duke.exceptions.NoDateException;
-import seedu.duke.exceptions.NoValidTaskIndexException;
-import seedu.duke.task.Deadline;
-import seedu.duke.task.Event;
-import seedu.duke.task.Task;
-import seedu.duke.task.TaskList;
-import seedu.duke.task.ToDo;
+import seedu.duke.command.*;
+import seedu.duke.exceptions.*;
+import seedu.duke.task.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
+
+//Duke can only handle 10 to dos
 
 /**
  * Handles commands from users in String and filters the information needed to create {@link Command}.
@@ -67,6 +54,22 @@ public class Parser {
         } else if (command.startsWith("find")) {
             String searchString = this.parseForSearch(command);
             return new FindCommand(searchString);
+        } else if (command.startsWith("add note")) {
+            String noteContent = this.parseForAddNoteContent(command);
+            int indexTaskToEdit = this.parseForAddNoteTaskIndex(command);
+            return new AddNoteCommand(noteContent, indexTaskToEdit);
+        } else if (command.startsWith("show note")) {
+            int indexTaskToShow = this.parseForShowNoteTaskIndex(command);
+            return new ShowNoteCommand(indexTaskToShow);
+        } else if (command.startsWith("clear note")) {
+            int indexTaskToDelete = this.parseForDeleteNoteTaskIndex(command);
+            int indexNoteToDelete = this.parseForDeleteNoteIndex(command);
+            return new DeleteNoteCommand(indexTaskToDelete,indexNoteToDelete);
+        } else if (command.startsWith("edit note")) {
+            int indexTaskToEdit = this.parseForEditNoteTaskIndex(command);
+            int indexNoteToEdit = this.parseForEditNoteIndex(command);
+            String noteContent = this.parseForEditNoteContent(command);
+            return new EditNoteCommand(indexTaskToEdit,indexNoteToEdit,noteContent);
         } else {
             throw new NoCommandException();
         }
@@ -79,7 +82,7 @@ public class Parser {
      * @throws DukeException if an invalid task number is given from user
      */
     int parseForMark(String command) throws DukeException {
-        int indexAfterCommand = 5;
+        int indexInCommand = 5;
         //command is given as "mark 5" so index 5 is where "5" is at
 
         if (command.length() <= 5) { //e.g. mark vs "mark 1" (correct)
@@ -87,9 +90,7 @@ public class Parser {
         }
 
         //-1 because index in taskList is 0 based but command uses 1-based index
-        int indexOfTaskToMark = Integer
-                .parseInt(command
-                        .substring(indexAfterCommand, indexAfterCommand + 1)) - 1;
+        int indexOfTaskToMark =  this.parseForTaskIndex(command, indexInCommand);
 
         return indexOfTaskToMark;
     }
@@ -101,16 +102,14 @@ public class Parser {
      * @throws DukeException if an invalid task number is given from user
      */
     int parseForUnmark(String command) throws DukeException {
-        int indexAfterCommand = 7;
+        int indexInCommand = 7;
         //command is given as "unmark 5" so index 7 is where the task index to parse, "5" is at
 
         if (command.length() <= 7) { //e.g. "unmark " vs "unmark 1" (correct)
             throw new NoValidTaskIndexException();
         }
 
-        int indexToUnmark = Integer
-                .parseInt(command
-                        .substring(indexAfterCommand)) - 1;
+        int indexToUnmark = this.parseForTaskIndex(command, indexInCommand);
 
         return indexToUnmark;
     }
@@ -122,8 +121,8 @@ public class Parser {
      * @throws DukeException if an invalid task number is given from user
      */
     int parseForDelete(String command) throws DukeException {
-        int indexTaskName = 7;
-        //command is given as "delete <taskIndex>" so taskIndex is at index 7
+        int indexInCommand = 7;
+        //command is given as "delete <task number>" so task number is at index 7
 
         if (command.length() <= 7) { //e.g. "delete " vs "delete 1" (correct)
             throw new NoValidTaskIndexException();
@@ -131,9 +130,7 @@ public class Parser {
         //+1 in substring is in case of extra space at the end
         //-1 is because 1 based index is used in command
 
-        int indexToUnmark = Integer
-                .parseInt(command
-                        .substring(indexTaskName, indexTaskName + 1)) - 1;
+        int indexToUnmark = this.parseForTaskIndex(command, indexInCommand);
 
         return indexToUnmark;
     }
@@ -257,5 +254,99 @@ public class Parser {
     String parseForSearch(String command) {
         int indexToStart = 5; //command is given as "find <keyword>", the keyword starts at index 5
         return command.substring(5);
+    }
+
+    String parseForAddNoteContent(String command) throws DukeException {
+        //command is given as "add note to task <task number> <note content>"
+        //e.g. add note to 1 remind groupmates"
+        int indexToStart = 19;
+        return this.parseForContent(command, indexToStart);
+    }
+
+    int parseForAddNoteTaskIndex(String command) throws DukeException {
+        //command is given as "add note to <task number> <note content>"
+        //e.g. add note 1 remind groupmates"
+        try {
+            int indexInCommand = 17;
+            return this.parseForTaskIndex(command, indexInCommand);
+        } catch (NumberFormatException |  IndexOutOfBoundsException e) {
+            throw new DukeException("Problem with getting index to add note to");
+        }
+    }
+
+    int parseForShowNoteTaskIndex(String command) throws DukeException {
+        //command is given as "show note from task <task number>"
+        //e.g. show note 1
+        try {
+            int indexInCommand = 20;
+            return this.parseForTaskIndex(command, indexInCommand);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new IncompleteCommandException();
+        }
+    }
+
+    int parseForDeleteNoteTaskIndex(String command) throws DukeException {
+        //command is given as "clear note <notenumber> from <tasknumber>"
+        try {
+            int indexInCommand = 23;
+            return this.parseForTaskIndex(command, indexInCommand);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Can't seem to get the task index to delete note");
+        }
+    }
+
+    int parseForDeleteNoteIndex(String command) throws DukeException {
+        //command is given as "clear note <notenumber> from task <taskNumber>"
+        try {
+            int indexInCommand = 11;
+            return this.parseForTaskIndex(command, indexInCommand);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Can't seem to get the note index to delete note");
+        }
+    }
+
+    int parseForEditNoteTaskIndex(String command) throws DukeException {
+        //command is given as "edit note <notenumber> from task <tasknumber> <noteContent>"
+        try {
+            int indexInCommand = 22;
+            return this.parseForTaskIndex(command, indexInCommand);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Can't seem to get the task index to edit note");
+        }
+    }
+
+    int parseForEditNoteIndex(String command) throws DukeException {
+        //command is given as "edit note <notenumber> from task <tasknumber> <noteContent>"
+        try {
+            int indexInCommand = 10;
+            return this.parseForTaskIndex(command, indexInCommand);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Can't seem to get the note index to edit note");
+        }
+    }
+
+    String parseForEditNoteContent(String command) throws DukeException {
+        //command is given as "edit note <notenumber> from task <tasknumber> <noteContent>"
+        int indexToStart = 24;
+        return this.parseForContent(command, indexToStart);
+    }
+
+    /**
+     * To return an integer containing the task index to execute on from a command.
+     * @param command which is a string containing information on what to execute
+     * @param indexInCommand which contains the location in command to parse for
+     * @return index of concern
+     */
+    int parseForTaskIndex(String command, int indexInCommand) {
+        return Integer
+                .parseInt(command.substring(indexInCommand, indexInCommand + 1)) - 1;
+    }
+
+    String parseForContent(String command, int indexContent) throws DukeException {
+        try {
+            return command.substring(indexContent);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Problem with getting content");
+        }
     }
 }

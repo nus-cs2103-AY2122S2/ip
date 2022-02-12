@@ -18,9 +18,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Used to update the Deadline object with a new Note.
+     * @param deadline which contains information to transfer over to new deadline
+     * @param newNoteList which contains the updated information to store to deadline
+     */
+    public Deadline(Deadline deadline, NoteList newNoteList) {
+        super(deadline, newNoteList);
+    }
+
+    /**
      * Used to help adjust the done status.
      * @param oldDeadline to extract task name and date
-     * @param done for specified boolean
+     * @param isDone for specified boolean
      */
     Deadline(Deadline oldDeadline, boolean isDone) {
         super(oldDeadline.getTaskName(), isDone, oldDeadline.getDate());
@@ -28,6 +37,34 @@ public class Deadline extends Task {
 
     public Deadline(String taskName, boolean isDone, LocalDateTime date) {
         super(taskName,isDone, date);
+    }
+
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task editNoteList(int indexOfNote, String noteContent) {
+        NoteList newNoteList = super.getNotes().editNote(indexOfNote, noteContent);
+        return new Deadline(this, newNoteList);
+    }
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task addNoteToNoteList(Note newNote) {
+        NoteList newNoteList = super.getNotes().addNote(newNote);
+        return new Deadline(this, newNoteList);
+    }
+
+    /**
+     * {inheritDoc}.
+     */
+    @Override
+    public Task deleteNoteFromNoteList(int indexOfNote) {
+        NoteList newNoteList = super.getNotes().deleteNote(indexOfNote);
+        return new Deadline(this, newNoteList);
     }
 
     /**
