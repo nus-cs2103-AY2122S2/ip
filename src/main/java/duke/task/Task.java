@@ -89,7 +89,7 @@ public class Task {
     }
 
     /**
-     * Format and returns a string of the task for storage.
+     * Formats and returns a string of the task for storage.
      *
      * @return Formatted string of the task.
      */
