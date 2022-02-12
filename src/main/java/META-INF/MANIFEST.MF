@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Main-Class: spark.Launcher
+Class-Path: commons-codec-1.5.jar javafx-graphics-14-win.jar javafx-base
+ -14-mac.jar javafx-fxml-14-mac.jar javafx-fxml-14-linux.jar antlr-runti
+ me-3.2.jar javafx-base-14.jar javafx-base-14-linux.jar javafx-fxml-14-w
+ in.jar javafx-controls-14-win.jar antlr-2.7.7.jar javafx-controls-14-ma
+ c.jar javafx-graphics-14-linux.jar backport-util-concurrent-3.1.jar jav
+ afx-graphics-14-mac.jar natty-0.6.jar stringtemplate-3.2.jar ical4j-1.0
+ .2.jar javafx-controls-14.jar commons-logging-1.1.1.jar javafx-base-14-
+ win.jar commons-lang-2.6.jar javafx-graphics-14.jar javafx-controls-14-
+ linux.jar
+
