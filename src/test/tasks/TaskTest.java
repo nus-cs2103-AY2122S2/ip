@@ -17,11 +17,11 @@ class TaskTest {
     @Test
     void testSetMarked() {
         Tasks t = new ToDos("hello", false);
-        assertFalse(t.getMarked());
+        assertFalse(t.getIsMarked());
         t.setMarked();
-        assertTrue(t.getMarked());
+        assertTrue(t.getIsMarked());
         t.setUnmarked();
-        assertFalse(t.getMarked());
+        assertFalse(t.getIsMarked());
     }
 
     /**

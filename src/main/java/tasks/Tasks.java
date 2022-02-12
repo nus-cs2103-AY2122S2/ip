@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 public abstract class Tasks {
 
     private final String task;
-    private Boolean marked;
+    private Boolean isMarked;
 
     /**
      * Constructor for Tasks.
@@ -20,21 +20,21 @@ public abstract class Tasks {
      */
     public Tasks(String task, Boolean marked) {
         this.task = task;
-        this.marked = marked;
+        this.isMarked = marked;
     }
 
     /**
-     * Sets {@link #marked} to true.
+     * Sets {@link #isMarked} to true.
      */
     public void setMarked() {
-        this.marked = true;
+        this.isMarked = true;
     }
 
     /**
-     * Sets {@link #marked} to false.
+     * Sets {@link #isMarked} to false.
      */
     public void setUnmarked() {
-        this.marked = false;
+        this.isMarked = false;
     }
 
     /**
@@ -46,11 +46,11 @@ public abstract class Tasks {
     }
 
     /**
-     * Gets {@link #marked}.
-     * @return {@link #marked}.
+     * Gets {@link #isMarked}.
+     * @return {@link #isMarked}.
      */
-    public boolean getMarked() {
-        return this.marked;
+    public boolean getIsMarked() {
+        return this.isMarked;
     }
 
 

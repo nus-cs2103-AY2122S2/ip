@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
         InputStream daUserPath = this.getClass().getResourceAsStream("/images/DaUser.png");
         InputStream daDukePath = this.getClass().getResourceAsStream("/images/DaDuke.png");
 
-        // checks if both userPath and dukePath is not null using assertions.
+        //Checks if both userPath and dukePath is not null using assertions.
         assert daUserPath != null : "daUser path not suppose to be null!";
         assert daDukePath != null : "daDuke path not suppose to be null!";
 

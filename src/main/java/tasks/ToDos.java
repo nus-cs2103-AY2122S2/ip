@@ -21,7 +21,7 @@ public class ToDos extends Tasks {
      */
     @Override
     public String cacheString() {
-        String s = getMarked() ? "1" : "0";
+        String s = getIsMarked() ? "1" : "0";
         return "T" + "|" + s + "|" + this.getTask();
     }
 
@@ -31,7 +31,7 @@ public class ToDos extends Tasks {
      */
     @Override
     public String toString() {
-        if (this.getMarked()) {
+        if (this.getIsMarked()) {
             return "[T]" + "[X" + "] " + this.getTask();
         } else {
             return "[T]" + "[ " + "] " + this.getTask();

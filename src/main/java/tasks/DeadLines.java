@@ -24,7 +24,7 @@ public class DeadLines extends Tasks {
      */
     @Override
     public String cacheString() {
-        String s = getMarked() ? "1" : "0";
+        String s = getIsMarked() ? "1" : "0";
         return "D" + "|" + s + "|" + this.getTask() + "|" + returnDate(this.date);
     }
 
@@ -34,7 +34,7 @@ public class DeadLines extends Tasks {
      */
     @Override
     public String toString() {
-        if (this.getMarked()) {
+        if (this.getIsMarked()) {
             return "[D]" + "[X" + "] " + this.getTask() + " (by: " + returnDate(this.date) + ")";
         } else {
             return "[D]" + "[ " + "] " + this.getTask() + " (by: " + returnDate(this.date) + ")";

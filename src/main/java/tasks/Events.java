@@ -24,7 +24,7 @@ public class Events extends Tasks {
      */
     @Override
     public String cacheString() {
-        String s = getMarked() ? "1" : "0";
+        String s = getIsMarked() ? "1" : "0";
         return "E" + "|" + s + "|" + this.getTask() + "|" + returnDate(this.date);
     }
 
@@ -34,7 +34,7 @@ public class Events extends Tasks {
      */
     @Override
     public String toString() {
-        if (this.getMarked()) {
+        if (this.getIsMarked()) {
             return "[E]" + "[X" + "] " + this.getTask() + " (at: " + returnDate(this.date) + ")";
         } else {
             return "[E]" + "[ " + "] " + this.getTask() + " (at: " + returnDate(this.date) + ")";
