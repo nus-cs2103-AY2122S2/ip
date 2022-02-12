@@ -8,10 +8,9 @@ import java.util.MissingFormatArgumentException;
  */
 public class Duke {
 
-    private Commands cmd;
-    private DukeUi ui;
-    private DukeStorage storage;
     private DukeHistory history;
+    private DukeStorage storage;
+    private DukeUi ui;
     private String response;
 
     /**
@@ -20,10 +19,9 @@ public class Duke {
      * @param filePath A String representing a given filePath.
      */
     public Duke(String filePath) {
-        cmd = new Commands();
-        ui = new DukeUi();
-        storage = new DukeStorage();
         history = new DukeHistory();
+        storage = new DukeStorage();
+        ui = new DukeUi();
 
         String[] arr = filePath.split("\\\\");
         try {
@@ -39,147 +37,47 @@ public class Duke {
      * @return DukeLCH's response.
      */
     public String run(String input) {
-        //ui.printGreeting();
+        DukeParser parser = new DukeParser(history, storage, ui);
         String[] tokens = input.split("\\s");
         String keyword = tokens[0];
         switch (keyword) {
         case "bye":
-            try {
-                assert(tokens.length == 1);
-                response = cmd.bye();
-                storage.update(history);
-                break;
-            } catch (AssertionError ex) {
-                response = ui.printFoundArgumentError();
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.byeCommand(tokens);
+            break;
         case "list":
-            try {
-                assert (tokens.length == 1);
-                response = cmd.list(history);
-                break;
-            } catch (AssertionError ex) {
-                response = ui.printFoundArgumentError();
-                break;
-            }
+            response = parser.listCommand(tokens);
+            break;
         case "mark": {
-            try {
-                int index = Integer.parseInt(tokens[1]) - 1;
-                assert(index > 0 && index <= (history.getSize() - 1));
-                response = cmd.mark(index, history);
-                storage.update(history);
-                break;
-            } catch (NumberFormatException | AssertionError ex) {
-                response = ui.printInvalidArgumentError();
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.markCommand(tokens);
+            break;
         }
         case "unmark": {
-            try {
-                int index = Integer.parseInt(tokens[1]) - 1;
-                assert(index > 0 && index <= (history.getSize() - 1));
-                response = cmd.unmark(index, history);
-                storage.update(history);
-                break;
-            } catch (NumberFormatException | AssertionError ex) {
-                response = ui.printInvalidArgumentError();
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.unmarkCommand(tokens);
+            break;
         }
         case "todo": {
-            try {
-                assert(tokens.length > 1);
-                response = cmd.todo(tokens, history);
-                storage.update(history);
-                break;
-            } catch (AssertionError ex) {
-                response = ui.printMissingArgumentError(keyword);
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.todoCommand(tokens);
+            break;
         }
         case "deadline": {
-            try {
-                assert(tokens.length > 1);
-                response = cmd.deadline(tokens, history);
-                storage.update(history);
-                break;
-            } catch (AssertionError ex) {
-                response = ui.printMissingArgumentError(keyword);
-                break;
-            } catch (DukeException ex) {
-                response = ui.printMissingDateTimeArgumentError(keyword);
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.deadlineCommand(tokens);
+            break;
         }
         case "event": {
-            try {
-                assert(tokens.length > 1);
-                response = cmd.event(tokens, history);
-                storage.update(history);
-                break;
-            } catch (AssertionError ex) {
-                response = ui.printMissingArgumentError(keyword);
-                break;
-            } catch (DukeException ex) {
-                response = ui.printMissingDateTimeArgumentError(keyword);
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.eventCommand(tokens);
+            break;
         }
         case "delete": {
-            try {
-                int index = Integer.parseInt(tokens[1]) - 1;
-                assert(index > 0 && index <= (history.getSize() - 1));
-                response = cmd.delete(index, history);
-                storage.update(history);
-                break;
-            } catch (NumberFormatException | AssertionError ex) {
-                response = ui.printInvalidArgumentError();
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.deleteCommand(tokens);
+            break;
         }
         case "update": {
-            try {
-                storage.update(history);
-                response = "";
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.updateCommand(tokens);
+            break;
         }
         case "find": {
-            try {
-                assert(tokens.length > 1);
-                response = cmd.find(tokens, history);
-                break;
-            } catch (AssertionError ex) {
-                response = ui.printMissingArgumentError(keyword);
-                break;
-            } catch (DukeException e) {
-                response = ui.printFoundNothing();
-                break;
-            }
+            response = parser.findCommand(tokens);
+            break;
         }
         default:
             try {
