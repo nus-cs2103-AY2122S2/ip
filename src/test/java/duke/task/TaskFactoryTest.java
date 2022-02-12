@@ -15,16 +15,11 @@ import duke.testutil.StreamUtils;
 
 public class TaskFactoryTest {
     @Test
-    public void testInflate_valid_success() throws IOException {
+    public void testInflateType_valid_success() throws IOException {
         byte[] reference = StreamUtils.buildOutputStream((dOut) -> {
             dOut.writeUTF("Test Description 1");
             dOut.writeBoolean(true);
             dOut.writeUTF("2022-12-12T13:00");
-        });
-
-        byte[] reference2 = StreamUtils.buildOutputStream((dOut) -> {
-            dOut.writeUTF("Test 2");
-            dOut.writeBoolean(false);
         });
 
         // Test Factory
@@ -46,6 +41,14 @@ public class TaskFactoryTest {
             assertTrue(task.isDone());
             assertEquals("Test Description 1", task.getDescription());
         }, reference);
+    }
+
+    @Test
+    public void testInflateDoneState_valid_success() throws IOException {
+        byte[] reference2 = StreamUtils.buildOutputStream((dOut) -> {
+            dOut.writeUTF("Test 2");
+            dOut.writeBoolean(false);
+        });
 
         StreamUtils.buildInputStream((dIn) -> {
             Task task = TaskFactory.inflate(TaskType.TODO, dIn);

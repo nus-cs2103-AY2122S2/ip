@@ -59,7 +59,7 @@ public class TaskTest {
     }
 
     @Test
-    public void testSerialize_valid_success() throws IOException {
+    public void testSerialize_validNotDone_success() throws IOException {
         byte[] actual = StreamUtils.buildOutputStream((dOut) -> {
             Task t1 = new TaskStub("Test Description 1");
             t1.serialize(dOut);
@@ -72,14 +72,17 @@ public class TaskTest {
         });
 
         assertArrayEquals(reference, actual);
+    }
 
-        actual = StreamUtils.buildOutputStream((dOut) -> {
+    @Test
+    public void testSerialize_validDone_success() throws IOException {
+        byte[] actual = StreamUtils.buildOutputStream((dOut) -> {
             Task t1 = new TaskStub("Test 2");
             t1.setDone(true);
             t1.serialize(dOut);
         });
 
-        reference = StreamUtils.buildOutputStream((dOut) -> {
+        byte[] reference = StreamUtils.buildOutputStream((dOut) -> {
             dOut.writeShort(TaskStub.getTypeId());
             dOut.writeUTF("Test 2");
             dOut.writeBoolean(true);

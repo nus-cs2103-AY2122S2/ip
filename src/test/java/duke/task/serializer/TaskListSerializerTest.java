@@ -39,7 +39,6 @@ public class TaskListSerializerTest {
             TaskList list = TaskListSerializer.inflate(new ByteArrayInputStream(data));
             assertEquals(4, list.getTaskCount());
         }
-
     }
 
     @Test
