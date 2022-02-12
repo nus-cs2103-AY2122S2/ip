@@ -16,6 +16,7 @@ import spike.task.TaskList;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+//Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class MainWindow extends AnchorPane {
     private static final String GREETING_OLD_USER =
             "Welcome back! Enter 'list' command to see your task list.";
