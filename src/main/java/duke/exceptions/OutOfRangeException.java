@@ -9,7 +9,7 @@ public class OutOfRangeException extends DukeException {
     }
 
     /**
-     * Error messsge from exception
+     * returns error message from exception
      * @return String containing details of error
      */
     @Override

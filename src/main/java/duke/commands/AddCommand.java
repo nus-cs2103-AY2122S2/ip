@@ -29,7 +29,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Method to get the modified task list after command execution
+     * returns the modified task list after command execution
      * @return TaskList
      */
     @Override
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Method to see if command ends the main program loop
+     * returns true boolean if command execution ends program
      * @return true if it ends main program
      */
     @Override
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Method to execute the add command
+     * executes the add command
      * Adds respective task type depending on input
      * @param tasks tasks list to be modified
      * @param ui to help with printing of messages

@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Method to get the modified task list after command execution
+     * returns the modified task list after command execution
      * @return TaskList
      */
     @Override
@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Method to see if command ends the main program loop
+     * returns true boolean if command execution ends program
      * @return true if it ends main program
      */
     @Override
@@ -34,7 +34,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * method to execute the find command
+     * executes the find command
      * Finds all tasks that contain the keyword
      * @param tasks tasks list to be modified
      * @param ui to help with printing of messages

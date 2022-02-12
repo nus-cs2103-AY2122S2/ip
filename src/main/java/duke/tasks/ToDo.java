@@ -7,7 +7,6 @@ public class ToDo extends Task {
 
     /**
      * Constructor for ToDo task
-     *
      * @param detail details of task to be added
      */
     public ToDo(String detail) {
@@ -16,7 +15,6 @@ public class ToDo extends Task {
 
     /**
      * Returns the due date of the task
-     *
      * @return Date if applicable
      */
     @Override
@@ -25,8 +23,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Getter function for a string representation for the type of task
-     *
+     * returns a string representation for the type of task
      * @return String representing the type of task
      */
     @Override
@@ -35,7 +32,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Update the details of the task
+     * Updates the details of the task
      */
     @Override
     public void updateDetail(String update) {
@@ -50,13 +47,12 @@ public class ToDo extends Task {
     }
 
     /**
-     * Function to return string representation of Task with mark status date and detail
-     *
+     * returns string representation of Task with mark status date and detail
      * @return String representation of Task
      */
     @Override
     public String toString() {
-        if (marked) {
+        if (isMarked) {
             return "[T][X] " + detail;
         } else {
             return "[T][ ] " + detail;

@@ -16,7 +16,7 @@ public class TaskList {
     }
 
     /**
-     * Getter function for size of list
+     * returns size of list
      * @return size of the list
      */
     public int size() {

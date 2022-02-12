@@ -7,7 +7,7 @@ package duke.tasks;
  */
 public abstract class Task {
     protected String detail;
-    protected boolean marked;
+    protected boolean isMarked;
 
     /**
      * Constructor for the base Task class
@@ -15,7 +15,7 @@ public abstract class Task {
      */
     public Task(String detail) {
         this.detail = detail;
-        this.marked = false;
+        this.isMarked = false;
     }
 
     /**
@@ -44,14 +44,14 @@ public abstract class Task {
      * Marks the task as done
      */
     public void mark() {
-        this.marked = true;
+        this.isMarked = true;
     }
 
     /**
      * Marks the task as not done
      */
     public void unmark() {
-        this.marked = false;
+        this.isMarked = false;
     }
 
     /**
@@ -67,7 +67,7 @@ public abstract class Task {
      * @return 1 or 0 representing status of the task
      */
     public String getMark() {
-        if (marked) {
+        if (isMarked) {
             return "1";
         } else {
             return "0";

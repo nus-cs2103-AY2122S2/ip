@@ -25,8 +25,7 @@ public class UpdateCommand extends Command{
     }
 
     /**
-     * Method to get the modified task list after command execution
-     *
+     * returns the modified task list after command execution
      * @return TaskList
      */
     @Override
@@ -35,8 +34,7 @@ public class UpdateCommand extends Command{
     }
 
     /**
-     * Method to see if command ends the main program loop
-     *
+     * returns true boolean if command execution ends program
      * @return true if it ends main program
      */
     @Override
@@ -45,9 +43,8 @@ public class UpdateCommand extends Command{
     }
 
     /**
-     * Method to execute the bye command
+     * executes the bye command
      * Prints bye message and saves the tasks created from the program loop to a text file
-     *
      * @param tasks   tasks list to be modified
      * @param ui      to help with printing of messages
      * @param storage To deal with saving of task list

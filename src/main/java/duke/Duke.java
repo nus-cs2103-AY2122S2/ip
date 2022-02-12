@@ -34,10 +34,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns welcome message
+     * @return welcome message
+     */
     public String getWelcome() {
         return ui.welcomeMessage();
     }
 
+    /**
+     * Returns response from user input
+     * executes user input as a command
+     * @param input for desired command
+     * @return response from running command
+     */
     public String getResponse(String input) {
         Command cmd;
         String output = " ";

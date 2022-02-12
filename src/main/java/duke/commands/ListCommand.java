@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     public ListCommand() {}
 
     /**
-     * Method to get the modified task list after command execution
+     * returns the modified task list after command execution
      * @return TaskList
      */
     @Override
@@ -22,7 +22,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Method to see if command ends the main program loop
+     * returns true boolean if command execution ends program
      * @return true if it ends main program
      */
     @Override
@@ -31,7 +31,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Method to execute the list command
+     * executes the list command
      * Lists out all tasks stored in the task list
      * @param tasks tasks list to be modified
      * @param ui to help with printing of messages
