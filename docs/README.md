@@ -68,4 +68,9 @@ Your tasks will be saved in the file. Fret not!
 ![This is an image](../src/main/resources/images/DaDuke.png)
 
 ## Download now for **FREE**! 
-The app's interface is user-friendly, aeshetically pleasing, and **VERY FAST**
+The app's interface is:
+- user-friendly
+- aeshetically pleasing, and
+- **VERY FAST!**
+
+Enjoy managing your tasks!
