@@ -97,47 +97,56 @@ public class Storage {
 
         //Writing to empty txt file
         try {
-            FileWriter fileWriter = new FileWriter(path, false);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            for (Task t: tasks) {
-                String taskToAppend = "";
-
-                //Identify task type
-                if (t instanceof Todo) {
-                    taskToAppend += "T~";
-                } else if (t instanceof Deadline) {
-                    taskToAppend += "D~";
-                } else if (t instanceof Event) {
-                    taskToAppend += "E~";
-                }
-
-                //Identify if task is done
-                if (t.getDone()) {
-                    taskToAppend += "X~";
-                } else {
-                    taskToAppend += " ~";
-                }
-                taskToAppend += t.getTaskName() + "~";
-                if (t instanceof Deadline) {
-                    Deadline tempTask = (Deadline) t;
-                    String date = tempTask.getDate().toString();
-                    if (tempTask.getTime() != null) {
-                        date += "~" + tempTask.getTime().toString();
-                    }
-                    taskToAppend += date.trim();
-                } else if (t instanceof Event) {
-                    Event tempTask = (Event) t;
-                    String date = tempTask.getDate().toString();
-                    if (tempTask.getTime() != null) {
-                        date += "~" + tempTask.getTime().toString();
-                    }
-                    taskToAppend += date.trim();
-                }
-                printWriter.println(taskToAppend);
-            }
-            printWriter.close();
+            writeToFile(tasks);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
+    }
+
+    /**
+     * Abstracted method to write to storage file
+     * @param tasks arraylist of tasks
+     * @throws IOException
+     */
+    public static void writeToFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter fileWriter = new FileWriter(path, false);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        for (Task t: tasks) {
+            String taskToAppend = "";
+
+            //Identify task type
+            if (t instanceof Todo) {
+                taskToAppend += "T~";
+            } else if (t instanceof Deadline) {
+                taskToAppend += "D~";
+            } else if (t instanceof Event) {
+                taskToAppend += "E~";
+            }
+
+            //Identify if task is done
+            if (t.getDone()) {
+                taskToAppend += "X~";
+            } else {
+                taskToAppend += " ~";
+            }
+            taskToAppend += t.getTaskName() + "~";
+            if (t instanceof Deadline) {
+                Deadline tempTask = (Deadline) t;
+                String date = tempTask.getDate().toString();
+                if (tempTask.getTime() != null) {
+                    date += "~" + tempTask.getTime().toString();
+                }
+                taskToAppend += date.trim();
+            } else if (t instanceof Event) {
+                Event tempTask = (Event) t;
+                String date = tempTask.getDate().toString();
+                if (tempTask.getTime() != null) {
+                    date += "~" + tempTask.getTime().toString();
+                }
+                taskToAppend += date.trim();
+            }
+            printWriter.println(taskToAppend);
+        }
+        printWriter.close();
     }
 }

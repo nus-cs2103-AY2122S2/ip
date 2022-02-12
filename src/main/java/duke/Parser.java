@@ -37,90 +37,120 @@ public class Parser {
             taskList.reset();
             System.out.println(RESET_MSG);
         } else if (input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
-            //Check if input == unmark or delete or mark
-            String[] splitString = input.split("\\s+");
-            String instr = splitString[0];
-            if (splitString.length < 2) {
-                System.out.println("Did you miss out the index in your input?");
-            } else {
-                //Make sure the string input contains at least 2 parts, command and index
-                assert splitString.length >= 2;
-                try {
-                    int index = Integer.parseInt(splitString[1]);
-                    if (instr.equals("unmark")) {
-                        taskList.unmarkTask(index);
-                    } else if (instr.equals("mark")) {
-                        taskList.markTask(index);
-                    } else if (instr.equals("delete")) {
-                        taskList.deleteTask(index);
-                    } else {
-                        throw new DukeException(INVALID_CMD);
-                    }
-                } catch (DukeException e) {
-                    System.out.println(e);
-                }
-            }
+            cliModifyTasks(input, taskList);
         } else if (input.contains("find")) { //input is find
-            String[] splitString = input.split(" ", 2);
-            if (splitString.length < 2) {
-                throw new DukeException("Please input the keyword(s) for find");
-            }
-            assert splitString.length >= 2;
-            String command = splitString[0];
-            String text = splitString[1];
-            if (command.equals("find")) {
-                taskList.find(text);
-            } else {
-                throw new DukeException(INVALID_CMD);
-            }
+            cliFindTasks(input, taskList);
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
-            //input is a new type of task
-            //identify type of task
-            String[] stringArray = input.split(" ", 2);
-
-            //task has no task detail/name
-            if (stringArray.length < 2) {
-                throw new DukeException("Description of task cannot be empty!");
-            }
-
-            assert stringArray.length >= 2;
-            String taskType = stringArray[0];
-            String taskDetails = stringArray[1];
-
-            Task newTask = new Task("");
-
-            if (taskType.equals("todo")) {
-                newTask = new Todo(taskDetails);
-            } else if (taskType.equals("deadline")) {
-                String[] stringSplit = taskDetails.split("/by");
-                if (stringSplit.length < 2) {
-                    throw new DukeException(MISSING_DATETIME + " Missed out a /by?");
-                }
-                String details = stringSplit[0].trim();
-                String dateTime = stringSplit[1].trim();
-                newTask = new Deadline(details, dateTime);
-            } else if (taskType.equals("event")) {
-                String[] splitString = taskDetails.split("/at");
-                if (splitString.length < 2) {
-                    throw new DukeException(MISSING_DATETIME + " Missed out a /at?");
-                }
-                String details = splitString[0].trim();
-                String dateTime = splitString[1].trim();
-                newTask = new Event(details, dateTime);
-            }
-
-            for (Task t : taskList.getTasks()) {
-                if (t.toString().equals(newTask.toString())) {
-                    throw new DukeException("This task already exists!");
-                }
-            }
-
-            taskList.addTask(newTask);
+            cliAddTasks(input, taskList);
         } else {
             throw new DukeException("no such task type");
         }
         Ui.printSeparator();
         return false;
+    }
+
+    /**
+     * Abstracted method in charge of unmark, mark and delete modifications to tasklist
+     * @param input String input
+     * @param taskList current tasklist by reference
+     * @throws DukeException on invalid command
+     */
+    public void cliModifyTasks(String input, TaskList taskList) throws DukeException {
+        //Check if input == unmark or delete or mark
+        String[] splitString = input.split("\\s+");
+        String instr = splitString[0];
+        if (splitString.length < 2) {
+            System.out.println("Did you miss out the index in your input?");
+        } else {
+            //Make sure the string input contains at least 2 parts, command and index
+            assert splitString.length >= 2;
+            try {
+                int index = Integer.parseInt(splitString[1]);
+                if (instr.equals("unmark")) {
+                    taskList.unmarkTask(index);
+                } else if (instr.equals("mark")) {
+                    taskList.markTask(index);
+                } else if (instr.equals("delete")) {
+                    taskList.deleteTask(index);
+                } else {
+                    throw new DukeException(INVALID_CMD);
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    /**
+     * Abstracted method in charge of find command that returns the resultant tasks and their indices
+     * @param input String input contains find command together with keywords
+     * @param taskList current tasklist by reference
+     * @throws DukeException on invalid command
+     */
+    public void cliFindTasks(String input, TaskList taskList) throws DukeException {
+        String[] splitString = input.split(" ", 2);
+        if (splitString.length < 2) {
+            throw new DukeException("Please input the keyword(s) for find");
+        }
+        assert splitString.length >= 2;
+        String command = splitString[0];
+        String text = splitString[1];
+        if (command.equals("find")) {
+            taskList.find(text);
+        } else {
+            throw new DukeException(INVALID_CMD);
+        }
+    }
+
+    /**
+     * Abstracted method for adding different types of tasks to the tasklist
+     * @param input String input containing task type, task name, as well as their additional details
+     * @param taskList current tasklist by reference
+     * @throws DukeException on empty task name, missing date and time, duplicate task
+     */
+    public void cliAddTasks(String input, TaskList taskList) throws DukeException {
+        //input is a new type of task
+        //identify type of task
+        String[] stringArray = input.split(" ", 2);
+
+        //task has no task detail/name
+        if (stringArray.length < 2) {
+            throw new DukeException("Description of task cannot be empty!");
+        }
+
+        assert stringArray.length >= 2;
+        String taskType = stringArray[0];
+        String taskDetails = stringArray[1];
+
+        Task newTask = new Task("");
+
+        if (taskType.equals("todo")) {
+            newTask = new Todo(taskDetails);
+        } else if (taskType.equals("deadline")) {
+            String[] stringSplit = taskDetails.split("/by");
+            if (stringSplit.length < 2) {
+                throw new DukeException(MISSING_DATETIME + " Missed out a /by?");
+            }
+            String details = stringSplit[0].trim();
+            String dateTime = stringSplit[1].trim();
+            newTask = new Deadline(details, dateTime);
+        } else if (taskType.equals("event")) {
+            String[] splitString = taskDetails.split("/at");
+            if (splitString.length < 2) {
+                throw new DukeException(MISSING_DATETIME + " Missed out a /at?");
+            }
+            String details = splitString[0].trim();
+            String dateTime = splitString[1].trim();
+            newTask = new Event(details, dateTime);
+        }
+
+        for (Task t : taskList.getTasks()) {
+            if (t.toString().equals(newTask.toString())) {
+                throw new DukeException("This task already exists!");
+            }
+        }
+
+        taskList.addTask(newTask);
     }
 
     /**
