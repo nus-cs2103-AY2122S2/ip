@@ -5,8 +5,6 @@ package tsohg;
  */
 public class Tsohg {
 
-    private Storage storage;
-    private TaskList tasks;
     private Ui ui;
 
     /**
@@ -15,15 +13,20 @@ public class Tsohg {
      */
     Tsohg(String filePath) {
         try {
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage);
+            Storage storage = new Storage(filePath);
+            TaskList tasks = new TaskList(storage);
             ui = new Ui(tasks);
         } catch (TsohgException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public String takeInput(String input){
+    /**
+     * Process the given input, then return the response.
+     * @param input The given input.
+     * @return The response of the input.
+     */
+    public String takeInput(String input) {
         try {
             return ui.takeInput(input);
         } catch (TsohgException e) {

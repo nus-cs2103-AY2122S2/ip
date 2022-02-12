@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private Tsohg tsohg = new Tsohg("data.txt");
+    private final Tsohg tsohg = new Tsohg("data.txt");
 
     @Override
     public void start(Stage stage) {

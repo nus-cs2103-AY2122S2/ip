@@ -11,6 +11,12 @@ public class Ui {
         this.tasks = tasks;
     }
 
+    /**
+     * Process the given input, then return the response.
+     * @param input The given input.
+     * @return The response of the input.
+     * @throws TsohgException when user input is invalid.
+     */
     public String takeInput(String input) throws TsohgException {
         String[] splitInput = input.split("\\s+", 2);
         String command = splitInput[0];

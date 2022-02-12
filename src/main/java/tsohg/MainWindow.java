@@ -2,7 +2,6 @@ package tsohg;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,9 +21,12 @@ public class MainWindow extends VBox {
 
     private Tsohg tsohg;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ghost.jpeg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpeg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ghost.jpeg"));
 
+    /**
+     * Initialize the Main Window
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
