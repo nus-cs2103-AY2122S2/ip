@@ -1,5 +1,9 @@
 # Fluffers User Guide
 
+## Description
+
+Fluffers is a task manager chatbot! She can help you keep track of tasks and whether they have been completed or not.
+
 ## Quick Start
 
 1. Install Java 11 or higher
