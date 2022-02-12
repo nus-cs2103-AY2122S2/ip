@@ -82,6 +82,7 @@ public class DateHandler {
      */
     public DateHandler(String date, int dummyVariable) {
 
+        assert date.contains(SPACE) : "wrong format of date";
         String[] strings = date.split(SPACE);
 
         for (int i = 0; i < strings.length / 2; i++) {

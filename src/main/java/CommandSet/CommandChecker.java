@@ -106,6 +106,7 @@ public class CommandChecker {
                 }
             }
 
+            assert message.contains(SPACE) : "wrong format of command";
             String command = message.split(SPACE, 2)[START_INDEX].toLowerCase();
 
             // check if the command says mark or unmarked.

@@ -56,6 +56,8 @@ public class AddCommand extends Command {
      */
     public static void add(TaskList taskList, String text) {
 
+        assert text.contains(SPACE) : "Must contain a space to differentiate task from type of task";
+
         String[] splitText = text.split(SPACE, 2);
         String type = splitText[START_INDEX].toUpperCase();
         String message = splitText[1];
