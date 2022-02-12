@@ -60,6 +60,7 @@ public class TaskList {
     public TaskList getUpcomingTasks(int daysFromToday) {
         LocalDate today = LocalDate.now();
         LocalDate endDate = today.plusDays(daysFromToday + 1);
+
         ArrayList upcomingTasks = tasks.stream()
                 .filter(task -> task instanceof ScheduledTask)
                 .map(scheduledTask -> (ScheduledTask) scheduledTask)
@@ -88,7 +89,7 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i+1).append(".").append(tasks.get(i)).append("\n");
+            sb.append(i + 1).append(".").append(tasks.get(i)).append("\n");
         }
         return tasks.size() == 0 ? "Task list is empty.\n" : sb.toString();
     }

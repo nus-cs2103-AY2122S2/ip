@@ -55,7 +55,7 @@ public class Storage {
             }
             fillTaskListWithData(taskList, taskData);
         } catch (IOException e) {
-           throw new DukeException(e.getMessage());
+            throw new DukeException(e.getMessage());
         }
     }
 
@@ -78,8 +78,8 @@ public class Storage {
                 taskList.addTask(new Event(currTask[2], eventDate));
                 break;
             default:
-                throw new DukeException
-                        (String.format("txt file supplied has unknown character %s ", currTask[0]));
+                throw new DukeException(
+                        String.format("txt file supplied has unknown character %s ", currTask[0]));
             }
             if (currTask[1].equals(TASK_DONE)) {
                 markLatestTaskDone(taskList);
@@ -115,7 +115,7 @@ public class Storage {
 
     private String makeStringToSave(TaskList taskList) throws DukeException {
         StringBuilder tasksToSave = new StringBuilder();
-        for (int i = 1; i < taskList.getLength()+1; i++) {
+        for (int i = 1; i < taskList.getLength() + 1; i++) {
             Task currTask = taskList.getTask(i);
             assert currTask != null : "task retrieved from taskList cannot be null";
 
