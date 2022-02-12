@@ -5,7 +5,7 @@ package spike.exception;
  */
 public class SpikeException extends Exception {
     /**
-     * Convenience construction using error message.
+     * Constructor using error message.
      *
      * @param str
      */

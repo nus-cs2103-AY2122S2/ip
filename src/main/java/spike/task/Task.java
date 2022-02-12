@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     * Retrieve the task status icon.
+     * Retrieves the task status icon.
      *
      * @return status icon
      */
