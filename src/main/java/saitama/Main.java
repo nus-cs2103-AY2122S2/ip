@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import saitama.ui.MainWindow;
@@ -24,6 +25,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setResizable(false);
             stage.setScene(scene);
+            stage.setTitle("SaiTasker");
+            stage.getIcons().add(new Image("images/logo.png"));
             fxmlLoader.<MainWindow>getController().setSaitama(saitama);
             stage.show();
         } catch (IOException e) {

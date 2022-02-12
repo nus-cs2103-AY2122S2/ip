@@ -4,11 +4,13 @@ import static java.time.temporal.TemporalAdjusters.next;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 
 import saitama.tags.RecurFrequency;
 
@@ -107,7 +109,11 @@ public class Deadline extends Task {
             break;
         case MONTHLY:
             int dayOfMonth = by.getDayOfMonth();
-            newDate = today.withDayOfMonth(dayOfMonth);
+            try {
+                newDate = today.withDayOfMonth(dayOfMonth);
+            } catch (DateTimeException e) {
+                newDate = today.with(TemporalAdjusters.lastDayOfMonth());
+            }
             break;
         default:
             assert false; //recurFrequency can only take the enumerated forms, or null

@@ -1,6 +1,5 @@
 D false null 2022-02-12 CS2105 Assignment 1 /by 18/02/2022 23:59
 T false --rd 2022-02-12 Check emails 
-D true --rw 2022-02-12 CS2105 Tutorial /by 11/02/2022 12:00
 D true --rw 2022-02-12 CS2107 Tutorial /by 12/02/2022 09:00
 E false --rb 2022-02-12 GEQ Tutorial /at CREATE
-T true --rm 2022-01-12 Revise Tutorials
+D true --rm 2022-01-12 CS2107 Tutorial /by 30/01/2022 09:00
