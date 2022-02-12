@@ -1,4 +1,6 @@
-# User Guide
+# Abby
+
+[![Java CI](https://github.com/domlimm/ip/actions/workflows/gradle.yml/badge.svg)](https://github.com/domlimm/ip/actions/workflows/gradle.yml)
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/domlimm/ip/master/docs/Ui.png" />
