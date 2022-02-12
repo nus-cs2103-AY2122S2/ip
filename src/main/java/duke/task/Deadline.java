@@ -6,30 +6,17 @@ import java.time.format.DateTimeFormatter;
 /**
  * Encapsulates a task that has a deadline.
  */
-public class Deadline extends Task {
-
-    private LocalDate deadline;
+public class Deadline extends ScheduledTask {
 
     /**
      * Initialises a Deadline task with a specified
      * description and deadline.
      *
-     * @param description the description of this Deadline task
-     * @param time the deadline of this Deadline task
+     * @param description the description of this Deadline task.
+     * @param deadline the deadline of this Deadline task as a date.
      */
-    public Deadline(String description, LocalDate time) {
-        super(description);
-        this.deadline = time;
-    }
-
-    /**
-     * Returns the deadline of this Deadline task as a String
-     * in yyyy-MM-dd format.
-     *
-     * @return the deadline as a String in yyyy-MM-dd format
-     */
-    public String getDeadline() {
-        return this.deadline.toString();
+    public Deadline(String description, LocalDate deadline) {
+        super(description, deadline);
     }
 
     /**
@@ -43,7 +30,7 @@ public class Deadline extends Task {
         sb.append("[D]")
                 .append(super.toString())
                 .append(" (by: ")
-                .append(this.deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy")))
+                .append(getDate().format(DateTimeFormatter.ofPattern("dd MMM yyyy")))
                 .append(")");
         return sb.toString();
     }

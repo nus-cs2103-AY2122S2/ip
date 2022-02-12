@@ -122,19 +122,16 @@ public class Storage {
             String description = currTask.getDescription();
             assert description != null : "description should not be null";
             assert description.strip() != "" : "description should not be an empty String or have whitespace only";
-
-            String done = currTask.isDone()
-                          ? TASK_DONE + DELIMITER
-                          : TASK_NOT_DONE + DELIMITER;
+            String done = currTask.isDone() ? TASK_DONE + DELIMITER : TASK_NOT_DONE + DELIMITER;
 
             if (currTask instanceof Todo) {
                 tasksToSave.append(TODO_IDENTIFIER).append(DELIMITER).append(done).append(description);
             } else if (currTask instanceof Deadline) {
                 tasksToSave.append(DEADLINE_IDENTIFIER).append(DELIMITER).append(done).append(description)
-                        .append(DELIMITER).append(((Deadline) currTask).getDeadline());
+                        .append(DELIMITER).append(((Deadline) currTask).getDate());
             } else if (currTask instanceof Event) {
                 tasksToSave.append(EVENT_IDENTIFIER).append(DELIMITER).append(done).append(description)
-                        .append(DELIMITER).append(((Event) currTask).getStartTime());
+                        .append(DELIMITER).append(((Event) currTask).getDate());
             } else {
                 throw new DukeException("Unable to save unknown task type");
             }
