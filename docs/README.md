@@ -67,7 +67,7 @@ Here at the list of commands and what they do:
 
 **A**: Your tasks will automatically be saved in the file. Fret not!
 
-![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+![This is an image](https://janald99.github.io/ip/Ui.png)
 
 
 
