@@ -11,8 +11,8 @@ import duke.command.MarkCommand;
 import duke.command.SortCommand;
 import duke.main.DukeException;
 import duke.task.DeadLine;
-import duke.task.Events;
-import duke.task.ToDos;
+import duke.task.Event;
+import duke.task.ToDo;
 
 /**
  * Parser to read user commands and ensure that it is syntactically and semantically valid.
@@ -102,11 +102,11 @@ public class Parser {
 
         String taskName = getTaskString(input);
         if (input[0].equals("todo")) {
-            return new AddCommand(new ToDos(taskName));
+            return new AddCommand(new ToDo(taskName));
         } else if (input[0].equals("deadline")) {
             return new AddCommand(new DeadLine(taskName, input[input.length - 2], input[input.length - 1]));
         } else if (input[0].equals("event")) {
-            return new AddCommand(new Events(taskName, input[input.length - 3],
+            return new AddCommand(new Event(taskName, input[input.length - 3],
                     input[input.length - 2], input[input.length - 1]));
         } else {
             throw new DukeException(NO_SUCH_COMMAND);

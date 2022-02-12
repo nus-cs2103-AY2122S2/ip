@@ -44,13 +44,13 @@ public class DeadLine extends Task {
 
     @Override
     public int compareTo(Task task) {
-        if (task instanceof ToDos) {
+        if (task instanceof ToDo) {
             return -1;
         } else if (task instanceof DeadLine) {
             DeadLine deadline = (DeadLine) task;
             return this.doByDate.compareTo(deadline.doByDate);
         } else {
-            Events event = (Events) task;
+            Event event = (Event) task;
             return this.doByDate.compareTo(event.doByDate);
         }
     }

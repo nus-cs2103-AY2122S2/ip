@@ -7,12 +7,12 @@ import java.time.LocalDate;
  * Represents a task that the user wants to do.
  *
  */
-public class ToDos extends Task {
-    public ToDos(String objective) {
+public class ToDo extends Task {
+    public ToDo(String objective) {
         super(objective);
     }
 
-    public ToDos(String objective, boolean done) {
+    public ToDo(String objective, boolean done) {
         super(objective, done);
     }
 
@@ -24,8 +24,8 @@ public class ToDos extends Task {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof ToDos) {
-            ToDos t = (ToDos) o;
+        if (o instanceof ToDo) {
+            ToDo t = (ToDo) o;
             return this.objective.equals(t.objective) && (this.done == t.done);
         } else {
             return false;

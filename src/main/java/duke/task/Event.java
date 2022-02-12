@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that the user wants to do on a specific date and between a starting and ending time.
  *
  */
-public class Events extends Task {
+public class Event extends Task {
     protected LocalDate doByDate;
     protected LocalTime doFromTime;
     protected LocalTime doBytime;
@@ -20,7 +20,7 @@ public class Events extends Task {
      * @param from Time by which task should start.
      * @param to Time by which task should end.
      */
-    public Events(String objective, String date, String from, String to) {
+    public Event(String objective, String date, String from, String to) {
         super(objective);
         this.doByDate = LocalDate.parse(date);
         this.doFromTime = LocalTime.parse(from);
@@ -35,7 +35,7 @@ public class Events extends Task {
      * @param from Time by which task should start.
      * @param by Time by which task should end.
      */
-    public Events(String objective, Boolean done, String date, String from, String by) {
+    public Event(String objective, Boolean done, String date, String from, String by) {
         super(objective, done);
         this.doByDate = LocalDate.parse(date);
         this.doFromTime = LocalTime.parse(from);
@@ -49,8 +49,8 @@ public class Events extends Task {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Events) {
-            Events e = (Events) o;
+        if (o instanceof Event) {
+            Event e = (Event) o;
             return this.doByDate.equals(e.doByDate)
                     && this.doFromTime.equals(e.doFromTime) && this.doBytime.equals(e.doBytime)
                     && this.objective.equals(e.objective) && this.done == e.done;
@@ -61,13 +61,13 @@ public class Events extends Task {
 
     @Override
     public int compareTo(Task task) {
-        if (task instanceof ToDos) {
+        if (task instanceof ToDo) {
             return -1;
         } else if (task instanceof DeadLine) {
             DeadLine deadline = (DeadLine) task;
             return this.doByDate.compareTo(deadline.doByDate);
         } else {
-            Events event = (Events) task;
+            Event event = (Event) task;
             return this.doByDate.compareTo(event.doByDate);
         }
     }
