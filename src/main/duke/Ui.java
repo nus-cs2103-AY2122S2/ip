@@ -82,4 +82,8 @@ public class Ui {
             return response.toString();
         }
     }
+
+    public String respondUndo(TaskList taskList) {
+        return "Undo task successfully!\n" + this.respondList(taskList);
+    }
 }

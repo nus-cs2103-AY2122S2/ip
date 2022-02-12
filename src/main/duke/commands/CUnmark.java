@@ -23,6 +23,7 @@ public class CUnmark extends Command{
         try {
             Task unmarkTask = taskList.getTask(this.getUnmarkIndex());
             unmarkTask.setIsDone(false);
+            super.runCommand(ui, taskList);
             return ui.respondUnmark(unmarkTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");

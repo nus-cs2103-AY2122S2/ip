@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -73,6 +75,7 @@ public class Storage {
                 String[] taskStringArray = taskString.split("~");
                 this.addToTasks(taskStringArray, taskList);
             }
+            taskList.updateStack();
             dukeReader.close();
         } catch (IOException e) {
             System.out.printf("Error while trying to read save file: ", e.getMessage());
@@ -96,14 +99,18 @@ public class Storage {
             break;
         case "D":
             try {
-                taskList.addTask(new Deadline(description, taskStringArray[3], isDone));
+                LocalDateTime newDueDate = LocalDateTime.parse(taskStringArray[3],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                taskList.addTask(new Deadline(description, newDueDate, isDone));
             } catch (DateTimeParseException e){
                 throw new DukeException("Save file date time not in this format YYYY-MM-DD 0000");
             }
             break;
         case "E":
             try {
-                taskList.addTask(new Event(description, taskStringArray[3], isDone));
+                LocalDateTime newDateTime = LocalDateTime.parse(taskStringArray[3],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+                taskList.addTask(new Event(description, newDateTime, isDone));
             } catch (DateTimeParseException e){
                 throw new DukeException("Save file date time not in this format YYYY-MM-DD 0000");
             }

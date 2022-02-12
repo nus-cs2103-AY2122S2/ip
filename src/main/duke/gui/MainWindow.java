@@ -8,6 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
+import main.duke.DukeException;
+import main.duke.commands.Command;
+
+import java.util.concurrent.CompletableFuture;
 
 public class MainWindow extends AnchorPane{
 
@@ -34,11 +38,10 @@ public class MainWindow extends AnchorPane{
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -46,5 +49,15 @@ public class MainWindow extends AnchorPane{
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        CompletableFuture.runAsync(() -> {
+        try {
+            if (Command.getIsExit()) {
+                Thread.sleep(200);
+                System.exit(0);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }});
+        assert (userInput.equals(null));
     }
 }

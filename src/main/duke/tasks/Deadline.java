@@ -8,18 +8,23 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
     protected LocalDateTime dueDate;
 
-    public Deadline(String description, String dueDate) {
+    public Deadline(String description, LocalDateTime dueDate) {
         super(description, TaskType.DEADLINE);
-        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        this.dueDate = dueDate;
     }
 
-    public Deadline(String description, String dueDate, boolean isDone) {
+    public Deadline(String description, LocalDateTime dueDate, boolean isDone) {
         super(description, TaskType.DEADLINE, isDone);
-        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        this.dueDate = dueDate;
     }
 
     public LocalDateTime getDueDate() {
         return this.dueDate;
+    }
+
+    @Override
+    public Task clone() {
+        return new Deadline(this.getDescription(), this.getDueDate(), this.getIsDone());
     }
 
     @Override

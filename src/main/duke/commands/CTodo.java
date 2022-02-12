@@ -1,5 +1,6 @@
 package main.duke.commands;
 
+import main.duke.DukeException;
 import main.duke.TaskList;
 import main.duke.Ui;
 import main.duke.enums.CommandType;
@@ -19,9 +20,10 @@ public class CTodo extends Command{
     }
 
     @Override
-    public String runCommand(Ui ui, TaskList taskList) {
+    public String runCommand(Ui ui, TaskList taskList) throws DukeException {
         Task newToDo = new ToDo(this.getDescription());
         taskList.addTask(newToDo);
+        super.runCommand(ui, taskList);
         return ui.respondAddTask(newToDo, taskList);
     }
 }

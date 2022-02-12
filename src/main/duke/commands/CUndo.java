@@ -5,15 +5,15 @@ import main.duke.TaskList;
 import main.duke.Ui;
 import main.duke.enums.CommandType;
 
-public class CBye extends Command {
+public class CUndo extends Command {
 
-    public CBye() {
-        super(CommandType.BYE);
+    public CUndo() {
+        super(CommandType.UNDO);
     }
 
     @Override
     public String runCommand(Ui ui, TaskList taskList) throws DukeException {
-        Command.exitDuke();
-        return ui.respondBye();
+        taskList.undo();
+        return ui.respondUndo(taskList);
     }
 }

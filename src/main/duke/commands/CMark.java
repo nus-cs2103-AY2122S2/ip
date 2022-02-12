@@ -23,6 +23,7 @@ public class CMark extends Command{
         try {
             Task markTask = taskList.getTask(this.getMarkIndex());
             markTask.setIsDone(true);
+            super.runCommand(ui, taskList);
             return ui.respondMark(markTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");

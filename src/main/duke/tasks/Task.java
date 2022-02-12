@@ -1,5 +1,6 @@
 package main.duke.tasks;
 
+import main.duke.DukeException;
 import main.duke.enums.TaskType;
 
 public abstract class Task {
@@ -29,8 +30,15 @@ public abstract class Task {
         return (isDone ? "X" : " ");
     }
 
-    public void setIsDone(boolean isDone) {
+    public void setIsDone(boolean isDone) throws DukeException {
+        if (this.isDone == isDone) {
+            throw new DukeException("This task is already marked/unmarked.");
+        }
         this.isDone = isDone;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**
@@ -42,6 +50,8 @@ public abstract class Task {
                 this.getStatusIcon() == "X" ? 1 : 0,
                 this.getDescription());
     }
+
+    public abstract Task clone();
 
     @Override
     public String toString() {

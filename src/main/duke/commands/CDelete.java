@@ -23,6 +23,7 @@ public class CDelete extends Command{
         try {
             Task deleteTask = taskList.getTask(this.getDeleteIndex());
             taskList.deleteTask(this.getDeleteIndex());
+            super.runCommand(ui, taskList);
             return ui.respondDeleteTask(deleteTask, taskList);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please check that you have entered the correct index.");

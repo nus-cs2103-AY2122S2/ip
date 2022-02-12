@@ -8,18 +8,22 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task{
     protected LocalDateTime eventTime;
 
-    public Event(String description, String eventTime) {
+    public Event(String description, LocalDateTime eventTime) {
         super(description, TaskType.Event);
-        this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        this.eventTime = eventTime;
     }
 
-    public Event(String description, String eventTime, boolean isDone) {
+    public Event(String description, LocalDateTime eventTime, boolean isDone) {
         super(description, TaskType.Event, isDone);
-        this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        this.eventTime = eventTime;
     }
 
     public LocalDateTime getEventTime() {
         return this.eventTime;
+    }
+
+    public Task clone() {
+        return new Event(this.getDescription(), this.getEventTime(), this.getIsDone());
     }
 
     @Override

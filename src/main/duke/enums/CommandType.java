@@ -10,4 +10,5 @@ public enum CommandType {
     TODO,
     UNMARK,
     FIND,
+    UNDO,
 }
