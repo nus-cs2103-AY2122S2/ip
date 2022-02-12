@@ -6,7 +6,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * An encapsulation of a Task to be done, that can be marked as completed.
+     * Encapsulates tasks to be done, that can be marked as completed.
      *
      * @param description Description of task.
      */
