@@ -36,7 +36,7 @@ public class DukeList {
 
     /**
      * Mark specified task as done.
-     * @param x index of task to mark
+     * @param x Index of task to mark
      */
     public void mark(int x) {
         tasks.get(x - 1).mark();
@@ -90,7 +90,7 @@ public class DukeList {
      */
     public String todayTask() {
         String day = "\nDuke: Here are the tasks due today\n";
-        boolean b = true;
+        boolean hasNoTask = true;
         for (Task t: tasks) {
             boolean isCorrectDate = true;
             boolean isDeadlineEvent = false;
@@ -104,11 +104,11 @@ public class DukeList {
                 isCorrectDate = checkDate(e.getDate());
             }
             if (isCorrectDate && isDeadlineEvent) {
-                b = false;
+                hasNoTask = false;
                 day = day + "     " + t + "\n";
             }
         }
-        if (b) {
+        if (hasNoTask) {
             day += "      NO TASK DUE TODAY";
         }
         return day;

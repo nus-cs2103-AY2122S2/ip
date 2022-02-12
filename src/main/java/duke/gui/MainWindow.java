@@ -69,6 +69,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * adapt from https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
+     */
     private void closing() {
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished( event -> exit() );
