@@ -37,7 +37,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        // setClipView(displayPicture);
         displayPicture.setImage(img);
     }
 
