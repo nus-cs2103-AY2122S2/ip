@@ -86,31 +86,44 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
             Scanner fileRead = new Scanner(dataFile);
             while (fileRead.hasNextLine()) {
-                String currLine = fileRead.nextLine();
-                String[] info = currLine.split(" \\| ");
-                Task task = null;
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
-                switch (info[0]) {
-                case "T":
-                    task = new ToDo(info[2]);
-                    break;
-                case "E":
-                    task = new Event(info[2], LocalDateTime.parse(info[3], dtf));
-                    break;
-                case "D":
-                    task = new Deadline(info[2], LocalDateTime.parse(info[3], dtf));
-                    break;
-                default:
-                    break;
-                }
-                tasks.add(task);
-                if (info[1].equals("1")) {
-                    task.markAsDone();
+                try {
+                    String currLine = fileRead.nextLine();
+                    parseTaskString(tasks, currLine);
+                } catch (Exception e) {
+                    return new ArrayList<>();
                 }
             }
             return tasks;
         } catch (FileNotFoundException e) {
             return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Parses the current line of task string
+     *
+     * @param tasks the task list read in so far
+     */
+    private void parseTaskString(ArrayList<Task> tasks, String currLine) throws ArrayIndexOutOfBoundsException {
+        String[] info = currLine.split(" \\| ");
+        Task task = null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
+        switch (info[0]) {
+        case "T":
+            task = new ToDo(info[2]);
+            break;
+        case "E":
+            task = new Event(info[2], LocalDateTime.parse(info[3], dtf));
+            break;
+        case "D":
+            task = new Deadline(info[2], LocalDateTime.parse(info[3], dtf));
+            break;
+        default:
+            break;
+        }
+        tasks.add(task);
+        if (info[1].equals("1")) {
+            task.markAsDone();
         }
     }
 

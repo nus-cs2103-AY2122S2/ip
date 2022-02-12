@@ -31,8 +31,9 @@ public class FindCommand extends Command {
         assert keyword != null : "Keyword should not be null";
         AtomicInteger i = new AtomicInteger(1);
         StringBuilder result = new StringBuilder(MSG_MATCHING_TASK);
+        String searchTerm = keyword.toLowerCase(); // case-insensitive search
         tasks.getTasks().stream().forEach(task -> {
-            if (task.toString().contains(keyword)) {
+            if (task.toString().toLowerCase().contains(searchTerm)) {
                 result.append(i + "." + task + "\n");
             }
             i.getAndIncrement();

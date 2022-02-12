@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import spike.task.Deadline;
+import spike.task.Event;
 import spike.task.Task;
 import spike.task.TaskList;
 
@@ -31,7 +32,7 @@ public class RemindCommand extends Command {
         AtomicInteger i = new AtomicInteger(1);
         StringBuilder result = new StringBuilder();
         tasks.getTasks().stream().forEach(task -> {
-            if (task instanceof Deadline && withinRange(task)) {
+            if ((task instanceof Deadline || task instanceof Event) && withinRange(task)) {
                 result.append(i + "." + task + "\n");
             }
             i.getAndIncrement();
