@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import duke.data.DukeException;
+import duke.task.TaskList;
 
 public class Ui {
     private static final String DIVIDER = "    ____________________________________________________________";
@@ -114,5 +115,24 @@ public class Ui {
 
     public static String getExitMessage() {
         return EXIT_MSG;
+    }
+
+    /**
+     * Returns specific message for list.
+     *
+     * @param tasks input TaskList.
+     * @param message input of header message.
+     */
+    public void displayTaskList(TaskList tasks, String message) {
+        StringBuilder text = new StringBuilder();
+        text.append(message);
+        for (int i = 0; i < tasks.getSize(); i++) {
+            String index = String.valueOf(i + 1);
+            text.append("    ").append(String.format("%1$3s", index)).append(". ")
+                    .append(tasks.getByIndex(i))
+                    .append("\n");
+        }
+        text.delete(text.length() - 1, text.length());
+        showMessage(text.toString());
     }
 }
