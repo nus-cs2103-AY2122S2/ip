@@ -28,7 +28,7 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         input = input.trim();
         String[] splited = input.split(" ", 2);
-        String firstWord = splited[0].trim();
+        String firstWord = splited[0];
         String remaining = "";
         if (splited.length == 2) {
             remaining = splited[1];
@@ -40,11 +40,20 @@ public class Parser {
             return new ListCommand();
         } else if (input.equals("help")) {
             return new HelpCommand();
-        } else if (input.matches("delete *-?\\d+")) {
+        } else if (firstWord.equals("delete")) {
+            if (!remaining.matches("-?\\d+")) {
+                throw new DukeException("Must specify which task to delete");
+            }
             return new DeleteCommand(Integer.parseInt(remaining));
-        } else if (input.matches("mark *-?\\d+")) {
+        } else if (firstWord.equals("mark")) {
+            if (!remaining.matches("-?\\d+")) {
+                throw new DukeException("Must specify which task to mark");
+            }
             return new MarkCommand(Integer.parseInt(remaining));
-        } else if (input.matches("unmark *-?\\d+")) {
+        } else if (firstWord.equals("unmark")) {
+            if (!remaining.matches("-?\\d+")) {
+                throw new DukeException("Must specify which task to unmark");
+            }
             return new UnmarkCommand(Integer.parseInt(remaining));
         } else if (firstWord.equals("find")) {
             if (remaining.equals("")) {
@@ -67,7 +76,7 @@ public class Parser {
         } else if (firstWord.equals("deadline")) {
             String[] desc_by = remaining.split(" /by ", 2);
             if (desc_by.length < 2) {
-                throw new DukeException("Must specify a deadline");
+                throw new DukeException("Incorrect format");
             } else if (desc_by[0].length() == 0) {
                 throw new DukeException("The description of a deadline cannot be empty");
             }
@@ -76,7 +85,7 @@ public class Parser {
         } else if (firstWord.equals("event")) {
             String[] desc_at = remaining.split(" /at ", 2);
             if (desc_at.length < 2) {
-                throw new DukeException("Must specify a time for the event");
+                throw new DukeException("Incorrect format");
             } else if (desc_at[0].length() == 0) {
                 throw new DukeException("The description of an event cannot be empty");
             }
