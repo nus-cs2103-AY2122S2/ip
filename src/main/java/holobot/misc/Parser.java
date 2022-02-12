@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
-import holobot.exception.DukeException;
+import holobot.exception.HoloBotException;
 import holobot.exception.InvalidCommand;
 import holobot.exception.InvalidDateTime;
 import holobot.exception.InvalidIndex;
@@ -26,9 +26,8 @@ public class Parser {
      *
      * @param userInput Command entered by the user.
      */
-    public static String parse(String userInput, TaskList listOfTasks) throws DukeException {
-        String[] wordsArray = userInput.trim().split(" ");
-        List<String> wordsList = Arrays.asList(wordsArray);
+    public static String parse(String userInput, TaskList listOfTasks) throws HoloBotException {
+        List<String> wordsList = separateInput(userInput);
         String firstWord = wordsList.get(0);
 
         switch (firstWord) {
@@ -68,13 +67,7 @@ public class Parser {
             } else if (!isInteger(wordsList.get(1))) {
                 throw new InvalidCommand("The argument MUST contain a single integer.");
             } else {
-                int currTaskId = Integer.parseInt(wordsList.get(1));
-                if (currTaskId > 0 & currTaskId <= listOfTasks.getNumberOfTasks()) {
-                    return listOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
-                } else {
-                    throw new InvalidIndex("The specified task ID is out of range. "
-                            + "Please enter a number from 0 to " + listOfTasks.getNumberOfTasks() + ".");
-                }
+                return markTask(wordsList, listOfTasks);
             }
         case("unmark"):
             if (wordsList.size() != 2) {
@@ -82,13 +75,7 @@ public class Parser {
             } else if (!isInteger(wordsList.get(1))) {
                 throw new InvalidCommand("The argument MUST contain a single integer.");
             } else {
-                int currTaskId = Integer.parseInt(wordsList.get(1));
-                if (currTaskId > 0 & currTaskId <= listOfTasks.getNumberOfTasks()) {
-                    return listOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
-                } else {
-                    throw new InvalidIndex("The specified task ID is out of range. "
-                            + "Please enter a number from 0 to " + listOfTasks.getNumberOfTasks() + ".");
-                }
+                return unmarkTask(wordsList, listOfTasks);
             }
 
         case("delete"):
@@ -97,13 +84,7 @@ public class Parser {
             } else if (!isInteger(wordsList.get(1))) {
                 throw new InvalidCommand("The argument MUST contain a single integer.");
             } else {
-                int currTaskId = Integer.parseInt(wordsList.get(1));
-                if (currTaskId > 0 & currTaskId <= listOfTasks.getNumberOfTasks()) {
-                    return listOfTasks.delete(currTaskId); // Valid taskID, proceed to unmark task
-                } else {
-                    throw new InvalidIndex("The specified task ID is out of range. "
-                            + "Please enter a number from 0 to " + listOfTasks.getNumberOfTasks() + ".");
-                }
+                return deleteTask(wordsList, listOfTasks);
             }
         case ("find"):
             if (wordsList.size() > 1) {
@@ -125,7 +106,18 @@ public class Parser {
     }
 
     /**
-     * Create a new Deadline Task.
+     * Converts the user input string into a List of strings, partitioned by a whitespace character.
+     *
+     * @param userInput String specified by the user.
+     * @return A list of Strings.
+     */
+    private static List<String> separateInput(String userInput) {
+        String[] wordsArray = userInput.trim().split(" ");
+        return Arrays.asList(wordsArray);
+    }
+
+    /**
+     * Creates a new Deadline Task.
      *
      * @param wordsList User input.
      * @param listOfTasks Current TaskList.
@@ -163,7 +155,7 @@ public class Parser {
     }
 
     /**
-     * Create a new Deadline Task.
+     * Creates a new Deadline Task.
      *
      * @param wordsList User input.
      * @param listOfTasks Current TaskList.
@@ -181,13 +173,11 @@ public class Parser {
             dateTime += wordsList.get(i);
             dateTime += " ";
         }
-
         dateTime = removeLastChar(dateTime);
         String[] dateTimeArray = dateTime.split(" ");
         if (dateTimeArray.length > 3 || dateTimeArray.length < 1) {
             throw new InvalidCommand("Incorrect number of arguments supplied :(");
         }
-
         // Parse user input into LocalDate/LocalTime if it is in the correct format.
         LocalDate newDate = convertDate(dateTimeArray[0]);
         LocalTime newStartTime = null;
@@ -198,11 +188,61 @@ public class Parser {
         if (dateTimeArray.length > 2) { // Optional end time input
             newEndTime = convertTime(dateTimeArray[2]);
         }
-
         DateTimeChecker.checkDateTime(newDate, newStartTime, newEndTime);
-
         return listOfTasks.event(removeLastChar(desc), newDate, newStartTime, newEndTime);
     }
+
+    /**
+     * Marks a task if the index specified is valid.
+     *
+     * @param wordsList User input.
+     * @param listOfTasks Current TaskList.
+     * @return Success Message after task has been marked.
+     */
+    private static String markTask(List<String> wordsList, TaskList listOfTasks) {
+        int currTaskId = Integer.parseInt(wordsList.get(1));
+        if (currTaskId > 0 & currTaskId <= listOfTasks.getNumberOfTasks()) {
+            return listOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
+        } else {
+            throw new InvalidIndex("The specified task ID is out of range. "
+                    + "Please enter a number from 0 to " + listOfTasks.getNumberOfTasks() + ".");
+        }
+    }
+
+    /**
+     * Unmarks a task if the index specified is valid.
+     *
+     * @param wordsList User input.
+     * @param listOfTasks Current TaskList.
+     * @return Success Message after task has been unmarked.
+     */
+    private static String unmarkTask(List<String> wordsList, TaskList listOfTasks) {
+        int currTaskId = Integer.parseInt(wordsList.get(1));
+        if (currTaskId > 0 & currTaskId <= listOfTasks.getNumberOfTasks()) {
+            return listOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
+        } else {
+            throw new InvalidIndex("The specified task ID is out of range. "
+                    + "Please enter a number from 0 to " + listOfTasks.getNumberOfTasks() + ".");
+        }
+    }
+
+    /**
+     * Deletes a task if the index specified is valid.
+     *
+     * @param wordsList User input.
+     * @param listOfTasks Current TaskList.
+     * @return Success Message after task has been deleted.
+     */
+    private static String deleteTask(List<String> wordsList, TaskList listOfTasks) {
+        int currTaskId = Integer.parseInt(wordsList.get(1));
+        if (currTaskId > 0 & currTaskId <= listOfTasks.getNumberOfTasks()) {
+            return listOfTasks.delete(currTaskId); // Valid taskID, proceed to unmark task
+        } else {
+            throw new InvalidIndex("The specified task ID is out of range. "
+                    + "Please enter a number from 0 to " + listOfTasks.getNumberOfTasks() + ".");
+        }
+    }
+
     /**
      * Tests if the input string represents an integer value.
      *

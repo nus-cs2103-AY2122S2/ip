@@ -26,7 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setTitle("HoloBot");
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(holoBot);
+            fxmlLoader.<MainWindow>getController().setHoloBot(holoBot);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

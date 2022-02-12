@@ -1,7 +1,5 @@
 package holobot.gui;
 
-import java.io.FileNotFoundException;
-
 import holobot.HoloBot;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -31,17 +29,25 @@ public class MainWindow extends AnchorPane {
 
     // Image Credit to kelsoji (https://www.pinterest.com/kelsoji)
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Rushia.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Pekora.png"));
+    private Image holoBotImage = new Image(this.getClass().getResourceAsStream("/images/Pekora.png"));
 
+    /**
+     * Initialises Holobot with a scrollPane.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(HoloBot d) throws FileNotFoundException {
+    /**
+     * Displays the welcome message.
+     *
+     * @param d The HoloBot object
+     */
+    public void setHoloBot(HoloBot d) {
         holoBot = d;
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hi! I am HoloBot :D\n"
-                + "How may I help you?", dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getHoloBotDialog("Hi! I am HoloBot :D\n"
+                + "How may I help you?", holoBotImage));
     }
 
     /**
@@ -54,7 +60,7 @@ public class MainWindow extends AnchorPane {
         String response = holoBot.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getHoloBotDialog(response, holoBotImage)
         );
         userInput.clear();
         if (response.equals("See you again, peko!")) {

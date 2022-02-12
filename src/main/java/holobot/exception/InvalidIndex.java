@@ -6,7 +6,7 @@ package holobot.exception;
  *
  * @author Terng Yan Long
  */
-public class InvalidIndex extends DukeException {
+public class InvalidIndex extends HoloBotException {
     private final String errorMessage;
 
     /**

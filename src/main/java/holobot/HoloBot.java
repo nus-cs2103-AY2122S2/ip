@@ -1,14 +1,14 @@
 package holobot;
 
-import holobot.exception.DukeException;
+import holobot.exception.HoloBotException;
 import holobot.misc.Parser;
 import holobot.misc.Storage;
 import holobot.misc.TaskList;
 
 /**
- * KoroBot is a chatbot that tracks the list of tasks on hand.
+ * HoloBot is a chatbot that tracks the list of tasks on hand.
  * @author Terng Yan Long
- * @version 9.0
+ * @version 10.0
  * @since 1.0
  */
 public class HoloBot {
@@ -32,7 +32,7 @@ public class HoloBot {
     public String getResponse(String userInput) {
         try {
             return Parser.parse(userInput, listOfTasks);
-        } catch (DukeException e) {
+        } catch (HoloBotException e) {
             return e.toString();
         }
     }

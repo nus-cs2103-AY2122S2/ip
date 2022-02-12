@@ -5,13 +5,13 @@ package holobot.exception;
  *
  * @author Terng Yan Long
  */
-public class DukeException extends RuntimeException {
+public class HoloBotException extends RuntimeException {
     /**
-     * Instantiates a new instance of DukeException.
+     * Instantiates a new instance of HoloBotException.
      *
      * @param errorMessage The error message that is related to the exception.
      */
-    public DukeException(String errorMessage) {
+    public HoloBotException(String errorMessage) {
         super(errorMessage);
     }
 }

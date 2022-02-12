@@ -50,11 +50,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box for the user.
+     *
+     * @param text Text in the dialog box.
+     * @param img Image of the user.
+     * @return A new DialogBox.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Creates a dialog box for HoloBot.
+     *
+     * @param text Text in the dialog box.
+     * @param img Image of the user.
+     * @return A new DialogBox.
+     */
+    public static DialogBox getHoloBotDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(Region.USE_PREF_SIZE);
         db.flip();

@@ -52,14 +52,6 @@ public class TaskList {
     }
 
     /**
-     * Adds 1 to the numberOfTasks.
-     * Mostly used when a Task is being added to the TaskList.
-     */
-    public void incrementTasks() {
-        numberOfTasks++;
-    }
-
-    /**
      * Adds the task into the TaskList.
      *
      * @param task Task to be added.
@@ -68,6 +60,7 @@ public class TaskList {
         listOfTasks.add(task);
         numberOfTasks++;
     }
+
     /**
      * Iterates through the list and prints out each task that is on the list.
      */
@@ -172,7 +165,7 @@ public class TaskList {
     }
 
     /**
-     * Search for and print all tasks that contains the keyword specified by the user.
+     * Searches for and prints all tasks that contains the keyword specified by the user.
      *
      * @param searchTarget Keyword specified by the user.
      */
@@ -210,7 +203,7 @@ public class TaskList {
     }
 
     /**
-     * Save the tasks in the hard disk automatically whenever the task list changes.
+     * Saves the tasks in the hard disk automatically whenever the task list changes.
      */
     private void writeToFile() {
         String filePath = Storage.DATA_PATH;
@@ -227,19 +220,12 @@ public class TaskList {
     }
 
     /**
-     * Search for and print all tasks that happens on the specified date.
+     * Searches for and prints all tasks that happens on the specified date.
      *
      * @param date Date specified by the user.
      */
     public String schedule(String date) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate convertedDate;
-
-        try {
-            convertedDate = LocalDate.parse(date, format);
-        } catch (DateTimeParseException | NullPointerException e) {
-            throw new InvalidDateTime("Please enter date in this format: <yyyy-MM-dd>");
-        }
+        LocalDate convertedDate = convertDate(date);
 
         StringBuilder listOfEvent = new StringBuilder();
         listOfEvent.append("You have the following events on ").append(date).append(" :\n");
@@ -251,20 +237,83 @@ public class TaskList {
 
         for (Task currTask : listOfTasks) {
             if (currTask instanceof Event) {
-                if (((Event) currTask).getDate().isEqual(convertedDate)) {
-                    String currString = eventCount + ". " + currTask;
-                    listOfEvent.append(currString).append("\n");
-                    eventCount++;
-                }
+                eventCount = addEventToList(listOfEvent, (Event) currTask, convertedDate, eventCount);
             } else if (currTask instanceof Deadline) {
-                if (((Deadline) currTask).getDate().isEqual(convertedDate)) {
-                    String currString = deadlineCount + ". " + currTask;
-                    listOfDeadline.append(currString).append("\n");
-                    deadlineCount++;
-                }
+                deadlineCount = addDeadlineToList(listOfDeadline, (Deadline) currTask, convertedDate, deadlineCount);
             }
         }
+        return printSchedule(eventCount, deadlineCount, listOfEvent, listOfDeadline);
+    }
 
+    /**
+     * Converts the date String into a LocalDate variable if the input string is of the right format.
+     *
+     * @param date Date string input by user.
+     * @return LocalDate variable.
+     */
+    private LocalDate convertDate(String date) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate convertedDate;
+        try {
+            convertedDate = LocalDate.parse(date, format);
+        } catch (DateTimeParseException | NullPointerException e) {
+            throw new InvalidDateTime("Please enter date in this format: <yyyy-MM-dd>");
+        }
+        return convertedDate;
+    }
+
+    /**
+     * Checks if the currTask is on the same date as convertedDate.
+     * If the dates match, the currTask will be appended to the StringBuilder.
+     *
+     * @param listOfEvent Current list of Events in the form of a StringBuilder.
+     * @param currTask Current task that we are checking.
+     * @param convertedDate LocalDate that is specified by the user.
+     * @param eventCount Current number of tasks that matches the date specified by the user.
+     * @return The updated eventCount.
+     */
+    private int addEventToList(StringBuilder listOfEvent, Event currTask, LocalDate convertedDate, int eventCount) {
+        if (currTask.getDate().isEqual(convertedDate)) {
+            String currString = eventCount + ". " + currTask;
+            listOfEvent.append(currString).append("\n");
+            return eventCount + 1;
+        } else {
+            return eventCount;
+        }
+    }
+
+    /**
+     * Checks if the currTask is on the same date as convertedDate.
+     * If the dates match, the currTask will be appended to the StringBuilder.
+     *
+     * @param listOfDeadline Current list of Deadline in the form of a StringBuilder.
+     * @param currTask Current task that we are checking.
+     * @param convertedDate LocalDate that is specified by the user.
+     * @param deadlineCount Current number of tasks that matches the date specified by the user.
+     * @return The updated eventCount.
+     */
+    private int addDeadlineToList(StringBuilder listOfDeadline, Deadline currTask,
+                                  LocalDate convertedDate, int deadlineCount) {
+        if (currTask.getDate().isEqual(convertedDate)) {
+            String currString = deadlineCount + ". " + currTask;
+            listOfDeadline.append(currString).append("\n");
+            return deadlineCount + 1;
+        } else {
+            return deadlineCount;
+        }
+    }
+
+    /**
+     * Prints the lists of tasks that corresponds to the user specified date.
+     *
+     * @param eventCount Number of Event Tasks that matched the user specified date.
+     * @param deadlineCount Number of Deadline Tasks that matched the user specified date.
+     * @param listOfEvent List of Event Tasks that matched the user specified date.
+     * @param listOfDeadline List of Deadline Tasks that matched the user specified date.
+     * @return A String to be printed onto the GUI and displayed to the user.
+     */
+    private String printSchedule(int eventCount, int deadlineCount,
+                                 StringBuilder listOfEvent, StringBuilder listOfDeadline) {
         if (eventCount == 1 && deadlineCount == 1) {
             return "No results found :(";
         } else if (eventCount == 1) {

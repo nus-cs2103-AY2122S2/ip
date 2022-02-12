@@ -5,7 +5,7 @@ package holobot.exception;
  *
  * @author Terng Yan Long
  */
-public class InvalidDateTime extends DukeException {
+public class InvalidDateTime extends HoloBotException {
     private final String errorMessage;
 
     /**

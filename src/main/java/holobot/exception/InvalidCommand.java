@@ -5,11 +5,11 @@ package holobot.exception;
  *
  * @author Terng Yan Long
  */
-public class InvalidCommand extends DukeException {
+public class InvalidCommand extends HoloBotException {
     private final String errorMessage;
 
     /**
-     * Instantiates a new instance of duke.exception.InvalidCommand.
+     * Instantiates a new instance of holobot.exception.InvalidCommand.
      *
      * @param errorMessage The error message that is related to the exception.
      */

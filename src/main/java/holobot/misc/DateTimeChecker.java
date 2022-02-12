@@ -13,7 +13,7 @@ import holobot.exception.InvalidDateTime;
  */
 public class DateTimeChecker {
     /**
-     * Check if date/time specified is in the present.
+     * Checks if date/time specified is in the present.
      *
      * @param newDate Date to be tested.
      * @param newStartTime Start time to be tested.
