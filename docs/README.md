@@ -4,12 +4,15 @@
     <img src="https://raw.githubusercontent.com/domlimm/ip/master/docs/Ui.png" />
 </div>
 
+<br>
+
 Abby is a <b>desktop application that serves as a task manager for managing tasks via a Command Line Interface</b>
 (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Abby can get your tasks managed much more efficiently and quick as compared to
 traditional GUI applications.
 
 ## Features
+
 | Feature | Description                                                   |
 |---------|---------------------------------------------------------------|
 | Add     | Add a new Task. Types available: `Todo`, `Deadline`, `Event`  |
