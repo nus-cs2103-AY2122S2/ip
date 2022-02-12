@@ -1,6 +1,9 @@
 package duke;
 
+import duke.Commands.*;
+
 import java.io.IOException;
+import java.util.MissingFormatArgumentException;
 
 public class DukeParser {
 
@@ -18,7 +21,7 @@ public class DukeParser {
         StringBuilder response = new StringBuilder();
         try {
             assert (tokens.length == 1);
-            response.append(new byeCommand(history, tokens, ui).validateAndExecute());
+            response.append(new ByeCommand(history, tokens, ui).validateAndExecute());
             updateStorage();
             return response.toString();
         } catch (AssertionError ex1) {
@@ -32,7 +35,7 @@ public class DukeParser {
         StringBuilder response = new StringBuilder();
         try {
             assert (tokens.length == 1);
-            response.append(new listCommand(history, tokens, ui).validateAndExecute());
+            response.append(new ListCommand(history, tokens, ui).validateAndExecute());
             updateStorage();
             return response.toString();
         } catch (AssertionError ex1) {
@@ -46,12 +49,12 @@ public class DukeParser {
         StringBuilder response = new StringBuilder();
         try {
             assert (tokens.length > 1);
-            response.append(new markCommand(history, tokens, ui).validateAndExecute());
+            response.append(new MarkCommand(history, tokens, ui).validateAndExecute());
             updateStorage();
             return response.toString();
         } catch (AssertionError ex1) {
             return ui.printMissingArgumentError(tokens[0]);
-        } catch (IOException e) {
+        } catch (IOException ex2) {
             return failedToUpdateStorage(response);
         }
     }
@@ -60,12 +63,12 @@ public class DukeParser {
         StringBuilder response = new StringBuilder();
         try {
             assert (tokens.length > 1);
-            response.append(new unmarkCommand(history, tokens, ui).validateAndExecute());
+            response.append(new UnmarkCommand(history, tokens, ui).validateAndExecute());
             updateStorage();
             return response.toString();
         } catch (AssertionError ex1) {
             return ui.printMissingArgumentError(tokens[0]);
-        } catch (IOException e) {
+        } catch (IOException ex2) {
             return failedToUpdateStorage(response);
         }
     }
@@ -74,12 +77,12 @@ public class DukeParser {
         StringBuilder response = new StringBuilder();
         try {
             assert (tokens.length > 1);
-            response.append(new todoCommand(history, tokens, ui).validateAndExecute());
+            response.append(new TodoCommand(history, tokens, ui).validateAndExecute());
             updateStorage();
             return response.toString();
         } catch (AssertionError ex1) {
             return ui.printMissingArgumentError(tokens[0]);
-        } catch (IOException e) {
+        } catch (IOException ex2) {
             return failedToUpdateStorage(response);
         }
     }
@@ -88,13 +91,69 @@ public class DukeParser {
         StringBuilder response = new StringBuilder();
         try {
             assert (tokens.length > 1);
-            response.append(new deadlineCommand(history, tokens, ui).validateAndExecute());
+            response.append(new DeadlineCommand(history, tokens, ui).validateAndExecute());
             updateStorage();
             return response.toString();
         } catch (AssertionError ex1) {
             return ui.printMissingArgumentError(tokens[0]);
-        } catch (IOException e) {
+        } catch (IOException ex2) {
             return failedToUpdateStorage(response);
+        }
+    }
+
+    public String eventCommand(String[] tokens) {
+        StringBuilder response = new StringBuilder();
+        try {
+            assert (tokens.length > 1);
+            response.append(new EventCommand(history, tokens, ui).validateAndExecute());
+            updateStorage();
+            return response.toString();
+        } catch (AssertionError ex1) {
+            return ui.printMissingArgumentError(tokens[0]);
+        } catch (IOException ex2) {
+            return failedToUpdateStorage(response);
+        }
+    }
+
+    public String deleteCommand(String[] tokens) {
+        StringBuilder response = new StringBuilder();
+        try {
+            assert (tokens.length > 1);
+            response.append(new DeleteCommand(history, tokens, ui).validateAndExecute());
+            updateStorage();
+            return response.toString();
+        } catch (AssertionError ex1) {
+            return ui.printMissingArgumentError(tokens[0]);
+        } catch (IOException ex2) {
+            return ui.printWriteError();
+        }
+    }
+
+    public String updateCommand(String[] tokens) {
+        StringBuilder response = new StringBuilder();
+        try {
+            assert (tokens.length == 1);
+            response.append(new UpdateCommand(history, tokens, ui).validateAndExecute());
+            updateStorage();
+            return response.toString();
+        } catch (AssertionError ex1) {
+            return ui.printFoundArgumentError();
+        } catch (IOException ex2) {
+            return failedToUpdateStorage(response);
+        }
+    }
+
+    public String findCommand(String[] tokens) {
+        StringBuilder response = new StringBuilder();
+        try {
+            assert (tokens.length > 1);
+            response.append(new FindCommand(history, tokens, ui).validateAndExecute());
+            updateStorage();
+            return response.toString();
+        } catch (AssertionError ex1) {
+            return ui.printMissingArgumentError(tokens[0]);
+        } catch (IOException ex2) {
+            return ui.printWriteError();
         }
     }
 

@@ -1,10 +1,13 @@
-package duke;
+package duke.Commands;
 
-public class markCommand extends Commands {
+import duke.*;
+import duke.Commands.Commands;
+
+public class UnmarkCommand extends Commands {
 
     private int index;
 
-    public markCommand(DukeHistory history, String[] userInput, DukeUi ui) {
+    public UnmarkCommand(DukeHistory history, String[] userInput, DukeUi ui) {
         super(history, userInput, ui);
     }
 
@@ -22,7 +25,7 @@ public class markCommand extends Commands {
 
     @Override
     public void validate() throws IndexOutOfBoundsException {
-        this.index = Integer.parseInt(userInput[1]);
+        this.index = Integer.parseInt(userInput[1]) - 1;
         if (this.index < 0 || this.index > history.getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
@@ -30,16 +33,16 @@ public class markCommand extends Commands {
 
     /**
      * A method that, when called, checks the validity of a given entry index before getting the inputted instance
-     * of DukeHistory to mark that entry in its records as done.
+     * of DukeHistory to unmark that entry in its records.
      *
-     * @return Mark response.
+     * @return Unmark response.
      */
     @Override
     public String execute() throws DukeException {
-        history.getTask(index).isMarked();
+        history.getTask(index).isUnmarked();
         StringBuilder tasking = accessHistory();
         return "_______________________________________________________\n"
-                + "Well done! You have completed the task:\n"
+                + "A reminder that the following task has not been done:\n"
                 + "    " + tasking.toString()
                 + "_______________________________________________________\n";
 

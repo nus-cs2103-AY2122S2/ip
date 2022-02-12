@@ -43,77 +43,41 @@ public class Duke {
         switch (keyword) {
         case "bye":
             response = parser.byeCommand(tokens);
+            break;
         case "list":
             response = parser.listCommand(tokens);
+            break;
         case "mark": {
             response = parser.markCommand(tokens);
+            break;
         }
         case "unmark": {
             response = parser.unmarkCommand(tokens);
+            break;
         }
         case "todo": {
             response = parser.todoCommand(tokens);
+            break;
         }
         case "deadline": {
             response = parser.deadlineCommand(tokens);
+            break;
         }
         case "event": {
-            try {
-                if (tokens.length <= 1) {
-                    throw new MissingFormatArgumentException("no argument detected");
-                }
-                response = cmd.event(tokens, history);
-                storage.update(history);
-                break;
-            } catch (MissingFormatArgumentException ex) {
-                response = ui.printMissingArgumentError(keyword);
-                break;
-            } catch (DukeException ex) {
-                response = ui.printMissingDateTimeArgumentError(keyword);
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.eventCommand(tokens);
+            break;
         }
         case "delete": {
-            try {
-                int index = Integer.parseInt(tokens[1]);
-                response = cmd.delete(index - 1, history);
-                storage.update(history);
-                break;
-            } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException ex) {
-                response = ui.printInvalidArgumentError();
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.deleteCommand(tokens);
+            break;
         }
         case "update": {
-            try {
-                storage.update(history);
-                response = "";
-                break;
-            } catch (IOException e) {
-                response = ui.printWriteError();
-                break;
-            }
+            response = parser.updateCommand(tokens);
+            break;
         }
         case "find": {
-            try {
-                if (tokens.length <= 1) {
-                    throw new MissingFormatArgumentException("no argument detected");
-                }
-                response = cmd.find(tokens, history);
-                break;
-            } catch (MissingFormatArgumentException ex) {
-                response = ui.printMissingArgumentError(keyword);
-                break;
-            } catch (DukeException e) {
-                response = ui.printFoundNothing();
-                break;
-            }
+            response = parser.findCommand(tokens);
+            break;
         }
         default:
             try {

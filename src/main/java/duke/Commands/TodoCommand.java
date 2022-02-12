@@ -1,8 +1,13 @@
-package duke;
+package duke.Commands;
 
-public class todoCommand extends Commands {
+import duke.Commands.Commands;
+import duke.DukeHistory;
+import duke.DukeUi;
+import duke.ToDos;
 
-    public todoCommand(DukeHistory history, String[] userInput, DukeUi ui) {
+public class TodoCommand extends Commands {
+
+    public TodoCommand(DukeHistory history, String[] userInput, DukeUi ui) {
         super(history, userInput, ui);
     }
 

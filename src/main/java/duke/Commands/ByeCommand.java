@@ -1,8 +1,11 @@
-package duke;
+package duke.Commands;
 
-public class listCommand extends Commands {
+import duke.DukeHistory;
+import duke.DukeUi;
 
-    public listCommand(DukeHistory history, String[] userInput, DukeUi ui) {
+public class ByeCommand extends Commands {
+
+    public ByeCommand(DukeHistory history, String[] userInput, DukeUi ui) {
         super(history, userInput, ui);
     }
 
@@ -27,15 +30,14 @@ public class listCommand extends Commands {
     }
 
     /**
-     * Generates a response to "list" command.
+     * Generates a response to "bye" command.
      *
      * @return Response.
      */
     @Override
     public String execute() {
-        String border = "_______________________________________________________\n";
-        return border
-                + "These are your tasks that we have in our records:\n"
-                + history.printAll() + border;
+        return "_______________________________________________________\n"
+                + "Goodbye. I hope to be of service to you again soon!\n"
+                + "_______________________________________________________\n";
     }
 }

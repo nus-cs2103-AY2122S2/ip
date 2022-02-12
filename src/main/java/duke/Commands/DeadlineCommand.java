@@ -1,14 +1,19 @@
-package duke;
+package duke.Commands;
+
+import duke.Commands.Commands;
+import duke.Deadlines;
+import duke.DukeHistory;
+import duke.DukeUi;
 
 import java.util.MissingFormatArgumentException;
 import java.util.MissingResourceException;
 
-public class deadlineCommand extends Commands {
+public class DeadlineCommand extends Commands {
 
     private String description;
-    private int timeStart;
+    private int timeStart = -1;
 
-    public deadlineCommand(DukeHistory history, String[] userInput, DukeUi ui) {
+    public DeadlineCommand(DukeHistory history, String[] userInput, DukeUi ui) {
         super(history, userInput, ui);
     }
 
@@ -31,20 +36,30 @@ public class deadlineCommand extends Commands {
         checkForDateAndTime();
     }
 
+    @Override
+    public String execute() {
+        String date = generateDate(userInput[this.timeStart + 1]);
+        String time = generateTime(userInput[this.timeStart + 2]);
+        Deadlines tempDeadline = history.addDeadline(description, date, time);
+        return "_______________________________________________________\n"
+                + "Understood, adding this task now:\n"
+                + "    " + tempDeadline.getDeadline()
+                + "Currently you have " + history.getSize() + " tasks in our records.\n"
+                + "_______________________________________________________\n";
+    }
+
     public void generateDescriptionAndGetLabel() {
-        int timeStart = -1;
-        StringBuilder description = new StringBuilder();
+        StringBuilder tempDescription = new StringBuilder();
         for (int i = 1; i < userInput.length; i++) {
             if (userInput[i].equals("/by")) {
-                timeStart = i;
+                this.timeStart = i;
                 break;
             } else {
-                description.append(userInput[i]);
+                tempDescription.append(userInput[i]);
             }
-            description.append(" ");
+            tempDescription.append(" ");
         }
-        this.description = description.toString();
-        this.timeStart = timeStart;
+        this.description = tempDescription.toString();
     }
 
     public void checkForLabel() throws MissingFormatArgumentException {
@@ -57,18 +72,6 @@ public class deadlineCommand extends Commands {
         if (userInput.length - this.timeStart < 3 ) {
             throw new MissingResourceException("No date and/or time", "timedate", "key");
         }
-    }
-
-    @Override
-    public String execute() {
-        String date = generateDate(userInput[this.timeStart + 1]);
-        String time = generateTime(userInput[this.timeStart + 2]);
-        Deadlines tempDeadline = history.addDeadline(description, date, time);
-        return "_______________________________________________________\n"
-                + "Understood, adding this task now:\n"
-                + "    " + tempDeadline.getDeadline()
-                + "Currently you have " + history.getSize() + " tasks in our records.\n"
-                + "_______________________________________________________\n";
     }
 
     public String generateDate(String date) {

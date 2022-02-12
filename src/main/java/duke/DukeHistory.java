@@ -77,17 +77,12 @@ public class DukeHistory {
      *  @param description A String description interpreted by Commands.event().
      * @param date A String date interpreted by Commands.convertToDukeDate().
      * @param time A String time interpreted by Commands.convertToDukeTime().
-     * @return Event_task response.
+     * @return Event_task.
      */
-    public String addEvent(String description, String date, String time) {
+    public Event addEvent(String description, String date, String time) {
         Event tempEvent = new Event(description, date, time);
         records.add(tempEvent);
-        String msg = "_______________________________________________________\n"
-                + "Understood, adding this task now:\n"
-                + "    " + tempEvent.getEvent()
-                + "Currently you have " + records.size() + " tasks in our records.\n"
-                + "_______________________________________________________\n";
-        return msg;
+        return tempEvent;
     }
 
     /**
@@ -154,27 +149,9 @@ public class DukeHistory {
      * @param index An integer indicating the desired entry to delete.
      * @return Delete response.
      */
-    public String deleteTask(int index) {
-        StringBuilder description = new StringBuilder();
+    public Task deleteTask(int index) {
         Task temp = records.remove(index);
-        if (temp instanceof ToDos) {
-            ToDos tempToDos = (ToDos) temp;
-            description.append(tempToDos.getToDo());
-        } else if (temp instanceof Deadlines) {
-            Deadlines tempDeadlines = (Deadlines) temp;
-            description.append(tempDeadlines.getDeadline());
-        } else if (temp instanceof Event) {
-            Event tempEvent = (Event) temp;
-            description.append(tempEvent.getEvent());
-        } else {
-            System.out.println("Error occurred while deleting " + temp.getTask());
-        }
-        String msg = "_______________________________________________________\n"
-                + "Understood, removing this task now:\n"
-                + "    " + description
-                + "Now you have " + records.size() + " tasks in our records.\n"
-                + "_______________________________________________________\n";
-        return msg;
+        return temp;
     }
 
     /**
