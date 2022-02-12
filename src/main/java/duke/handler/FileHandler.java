@@ -42,41 +42,51 @@ public class FileHandler {
             FileHandler.createFolder();
         }
         try {
-            String input = Files.readString(FileHandler.PATH);
-            String[] tasks = input.split("\\r?\\n");
-            for (int i = 0; i < tasks.length; i++) {
-                String[] taskInfo = tasks[i].split("\\|");
-                boolean completed = taskInfo[1].equals(COMPLETED);
-                switch (taskInfo[0]) {
-                case "T":
-                    list.addTask(new Todo(completed, taskInfo[2]));
-                    break;
-                case "D":
-                    if (taskInfo.length == 4) {
-                        list.addTask(new Deadline(completed, taskInfo[2],
-                                Time.convertToDate(taskInfo[3]), ""));
-                    } else {
-                        list.addTask(new Deadline(completed, taskInfo[2],
-                                Time.convertToDate(taskInfo[3]), taskInfo[4]));
-                    }
-                    break;
-                case "E":
-                    if (taskInfo.length == 4) {
-                        list.addTask(new Event(completed, taskInfo[2],
-                                Time.convertToDate(taskInfo[3]), ""));
-                    } else {
-                        list.addTask(new Event(completed, taskInfo[2],
-                                Time.convertToDate(taskInfo[3]), taskInfo[4]));
-                    }
-                    break;
-                default:
-                    throw new ArrayIndexOutOfBoundsException();
-                }
-            }
+            readParser(list);
         } catch (IOException err) {
             System.out.println("Path specified incorrectly.");
         } catch (ArrayIndexOutOfBoundsException err) {
             FileHandler.createFolder();
+        }
+    }
+
+    /**
+     * Parses the saved file and formats the text.
+     *
+     * @param list The list to write to.
+     * @throws IOException If the file path cannot be found.
+     */
+    public static void readParser(Tasklist list) throws IOException {
+        String input = Files.readString(FileHandler.PATH);
+        String[] tasks = input.split("\\r?\\n");
+        for (int i = 0; i < tasks.length; i++) {
+            String[] taskInfo = tasks[i].split("\\|");
+            boolean completed = taskInfo[1].equals(COMPLETED);
+            switch (taskInfo[0]) {
+            case "T":
+                list.addTask(new Todo(completed, taskInfo[2]));
+                break;
+            case "D":
+                if (taskInfo.length == 4) {
+                    list.addTask(new Deadline(completed, taskInfo[2],
+                            Time.convertToDate(taskInfo[3]), ""));
+                } else {
+                    list.addTask(new Deadline(completed, taskInfo[2],
+                            Time.convertToDate(taskInfo[3]), taskInfo[4]));
+                }
+                break;
+            case "E":
+                if (taskInfo.length == 4) {
+                    list.addTask(new Event(completed, taskInfo[2],
+                            Time.convertToDate(taskInfo[3]), ""));
+                } else {
+                    list.addTask(new Event(completed, taskInfo[2],
+                            Time.convertToDate(taskInfo[3]), taskInfo[4]));
+                }
+                break;
+            default:
+                throw new ArrayIndexOutOfBoundsException();
+            }
         }
     }
 

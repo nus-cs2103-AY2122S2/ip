@@ -8,7 +8,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * Entry point of the application
+     * Launches the application
      *
      * @param args Arguments to be passed into the program, if any.
      */
