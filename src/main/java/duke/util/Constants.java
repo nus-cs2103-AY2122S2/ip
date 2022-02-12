@@ -19,4 +19,6 @@ public class Constants {
 
     public static final String TEMP_FILE_NAME = "temp.txt";
 
+    public static final int DELAY = 400;
+
 }
