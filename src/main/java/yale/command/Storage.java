@@ -36,19 +36,20 @@ public class Storage {
             File f = new File(this.filePath); // create a File for the given file path
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
             boolean hasTask = s.hasNext();
-            if (!hasTask) {
-                return "You have no saved tasks.";
+            if (!s.hasNext()) {
+                System.out.println("You have no saved tasks.");
             } else {
                 String output = "";
-                while (hasTask) {
+                while (s.hasNext()) {
                     output += s.nextLine() + "\n";
                 }
                 return output;
             }
+            return "";
         } catch (IOException e) {
             new File("data").mkdirs();
+            return "";
         }
-        return "";
     }
 
     /**
