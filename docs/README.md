@@ -1,29 +1,59 @@
 # User Guide
 
+Duke is a desktop app for managing tasks via a 
+Graphical User Interface (GUI). Duke has easy to learn commands
+that support key features for a task manager app. 
+
 ## Features 
 
-### Feature-ABC
+### Adding tasks
+Duke app is able to add 3 types of tasks:
 
-Description of the feature.
+Todo (Tasks that needs to be completed by no specific date)\
+   Format: `todo TASK_NAME`\
+   Example: `todo read book`
 
-### Feature-XYZ
 
-Description of the feature.
+Deadline (Tasks that needs to be completed by a specific date)\
+   Format: `deadline TASK_NAME /by YYYY-MM-DD`\
+   Example: `deadline finish essay /by 2019-12-11`
 
-## Usage
 
-### `Keyword` - Describe action
+Event (Tasks that needs to be completed on a specific date and/or time)\
+   Format: `event TASK_NAME /at DATE`\
+   Example: `event attend meeting /at Mon 12-3PM`
+ 
+ 
+### Marking/Un-marking tasks
+Duke app is able to mark tasks as completed and unmark tasks as not completed yet.
 
-Describe the action and its outcome.
+Format: `mark TASK_NUMBER`, `unmark TASK_NUMBER`
 
-Example of usage: 
+### Deleting tasks
+Duke app can delete any tasks currently stored in your list.
 
-`keyword (optional arguments)`
+Format: `delete TASK_NUMBER`
 
-Expected outcome:
+### Listing tasks
+Duke app can list out all tasks stored, displaying their type, status of completion, description and due date if 
+applicable.
 
-Description of the outcome.
+Format: `list`
 
-```
-expected output
-```
+### Finding tasks
+Duke app search for and list out all tasks where their description matches/contains a given keyword.
+
+Format: `find KEYWORD`\
+Example: `find book`
+
+### Undo command
+Duke app can undo commands from users up till the point where Duke is 
+started up each time.
+
+Format: `undo`
+
+### Clear command
+Duke app will clear all its saved data. This action cannot be undone.
+
+Format: `clear`
+
