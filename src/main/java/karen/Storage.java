@@ -86,6 +86,8 @@ public class Storage {
                 br.close();
             } catch (IOException err) {
                 // do nothing
+            } catch (NullPointerException err) {
+                // do nothing; silently resume
             }
         }
         return taskList;
@@ -117,6 +119,8 @@ public class Storage {
                 writer.close();
             } catch (IOException err) {
                 // do nothing
+            } catch (NullPointerException err) {
+                // do nothing; silently resume
             }
         }
     }
