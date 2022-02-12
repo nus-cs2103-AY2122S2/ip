@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.Comparator;
 
+//Solution below adapted from https://stackoverflow.com/questions/27784735/class-to-store-multiple-comparators
 public enum TaskComparator implements Comparator<Task> {
     ObjComparator {
         @Override
