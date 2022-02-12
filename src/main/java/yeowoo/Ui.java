@@ -1,4 +1,4 @@
-package duke;
+package yeowoo;
 
 public class Ui {
     private String welcomeMessage;
@@ -14,7 +14,7 @@ public class Ui {
                         + "(____()'`; \n"
                         + "/,    /` \n"
                         + "\\\\\"--\\\\\n"
-                        + "Woof, I am (supposed to look like) a dog bot.\n"
+                        + "Woof, I am Yeowoo the dog chat bot.\n"
                         + "What do you want from me?";
 
         byeMessage = "Bye! Hope not to see you again :)";

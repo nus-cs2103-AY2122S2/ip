@@ -1,6 +1,6 @@
 package tasks;
 
-import duke.DukeException;
+import yeowoo.YeowooException;
 
 public class ToDo extends Task {
     /**
@@ -17,9 +17,9 @@ public class ToDo extends Task {
      *
      * @param saveFormat Data saved in tasks list file.
      * @param blean A Boolean value set to True to differentiate the creation of task from saved list and user input.
-     * @throws DukeException If the format is not followed or there are missing information.
+     * @throws YeowooException If the format is not followed or there are missing information.
      */
-    public ToDo(String saveFormat, boolean blean) throws DukeException {
+    public ToDo(String saveFormat, boolean blean) throws YeowooException {
         super(saveFormat);
         try {
             String[] strArr = description.split(",");
@@ -29,7 +29,7 @@ public class ToDo extends Task {
             }
             super.saveFormat = strArr[0] + "," + strArr[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException();
+            throw new YeowooException();
         }
     }
     /**

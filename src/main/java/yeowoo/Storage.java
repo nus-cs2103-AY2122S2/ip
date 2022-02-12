@@ -1,4 +1,4 @@
-package duke;
+package yeowoo;
 
 import java.io.File;
 import java.io.FileWriter;

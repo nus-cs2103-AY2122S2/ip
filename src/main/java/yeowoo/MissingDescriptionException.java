@@ -1,4 +1,4 @@
-package duke;
+package yeowoo;
 
 public class MissingDescriptionException extends Exception {
     public MissingDescriptionException() {

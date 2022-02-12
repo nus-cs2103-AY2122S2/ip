@@ -1,4 +1,4 @@
-package duke;
+package yeowoo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tasks.TaskList;
@@ -9,7 +9,7 @@ public class ParserTest {
     public void loadTest() throws MissingDescriptionException, InvalidTaskException {
         try {
             Assertions.assertEquals("Invalid command!", new Parser(new TaskList()).parse("mark paper"));
-        } catch (DukeException e) {
+        } catch (YeowooException e) {
             assertEquals("Invalid command!", e.getMessage());
         }
     }

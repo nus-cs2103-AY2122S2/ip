@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.DukeException;
-import duke.Storage;
+import yeowoo.YeowooException;
+import yeowoo.Storage;
 
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();
@@ -18,9 +18,9 @@ public class TaskList {
     /**
      * Constructor for TaskList.
      * @param file The file to load the saved lists of tasks from.
-     * @throws DukeException
+     * @throws YeowooException
      */
-    public TaskList(Storage storage, File file) throws DukeException {
+    public TaskList(Storage storage, File file) throws YeowooException {
         this.storage = storage;
         try {
             Scanner s = new Scanner(file);

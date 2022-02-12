@@ -3,7 +3,7 @@ package tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import duke.DukeException;
+import yeowoo.YeowooException;
 
 public class Event extends Task {
     private String[] dateAndTime;
@@ -14,9 +14,9 @@ public class Event extends Task {
      * Creates a Deadline task and sets its date and time accordingly from user input.
      *
      * @param description Description of the event task generated from user input.
-     * @throws DukeException If the input format is not followed or there are missing information.
+     * @throws YeowooException If the input format is not followed or there are missing information.
      */
-    public Event(String description) throws DukeException {
+    public Event(String description) throws YeowooException {
         super(description);
         try {
             String[] strArr = description.split("/at ");
@@ -26,7 +26,7 @@ public class Event extends Task {
             time = dateAndTime[1];
             super.saveFormat = "E," + this.description + "," + date + "," + time;
         } catch (Exception e) {
-            throw new DukeException();
+            throw new YeowooException();
         }
     }
 
@@ -35,9 +35,9 @@ public class Event extends Task {
      *
      * @param saveFormat Data saved in tasks list file.
      * @param isSaved A Boolean value set to True to differentiate the creation of task from saved list and user input.
-     * @throws DukeException If the format is not followed or there are missing information.
+     * @throws YeowooException If the format is not followed or there are missing information.
      */
-    public Event(String saveFormat, boolean isSaved) throws DukeException {
+    public Event(String saveFormat, boolean isSaved) throws YeowooException {
         super(saveFormat);
         String[] strArr = description.split(",");
         assert strArr.length == 5;

@@ -1,4 +1,4 @@
-package duke;
+package yeowoo;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,7 +9,7 @@ import tasks.Task;
 import tasks.TaskList;
 import tasks.ToDo;
 
-public class Duke {
+public class Yeowoo {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -17,14 +17,14 @@ public class Duke {
     private List<Task> tasks;
 
     /**
-     * Constructor for Duke.
+     * Constructor for Yeowoo.
      */
-    public Duke() {
+    public Yeowoo() {
         ui = new Ui();
         storage = new Storage("Data/tasks.txt");
         try {
             taskList = new TaskList(storage, storage.load());
-        } catch (DukeException e) {
+        } catch (YeowooException e) {
             ui.showLoadingError();
             taskList = new TaskList();
         } finally {
@@ -34,16 +34,16 @@ public class Duke {
     };
 
     /**
-     * Initialises duke.Duke the chat-bot along with its necessary classes and files.
+     * Initialises duke.Yeowoo the chat-bot along with its necessary classes and files.
      *
      * @param filePath Path directory of the saved file containing the list of tasks.
      */
-    public Duke(String filePath) {
+    public Yeowoo(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage, storage.load());
-        } catch (DukeException e) {
+        } catch (YeowooException e) {
             ui.showLoadingError();
             taskList = new TaskList();
         }
@@ -132,7 +132,7 @@ public class Duke {
      * @return A string detailing the task being added to list of tasks.
      * @throws IOException
      */
-    public String addTaskCommand(String command) throws IOException, DukeException {
+    public String addTaskCommand(String command) throws IOException, YeowooException {
         String[] temp = command.split(" ");
         String firstWord = temp[0];
         switch (firstWord) {
@@ -146,7 +146,7 @@ public class Duke {
             Deadline deadline = new Deadline(command.substring(9));
             return taskList.addTask(deadline);
         default:
-            throw new DukeException();
+            throw new YeowooException();
         }
     }
 

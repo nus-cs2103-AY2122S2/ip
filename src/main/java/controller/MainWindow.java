@@ -3,7 +3,7 @@ package controller;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import duke.Duke;
+import yeowoo.Yeowoo;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Yeowoo yeowoo;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Dog.png"));
@@ -41,18 +41,18 @@ public class MainWindow extends AnchorPane {
                 .getDukeDialog("Woof! I am Yeowoo the Shiba Inu! How can I help you?\n", dukeImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Yeowoo d) {
+        yeowoo = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Yeowoo's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
-        String response = duke.handleCommand(input);
+        String response = yeowoo.handleCommand(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
