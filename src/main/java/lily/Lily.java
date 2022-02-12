@@ -13,11 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * Main class which runs an interactive CLI-based chatbot which manages your todos
- * A GUI using FXML
+ * Main class that runs an interactive CLI-based chatbot which manages tasks.
  * 
  * @author Hong Yi En, Ian
  * @version Feb 2022 (AY21/22 Sem 2)
+ * TODO: Display welcome message in start(). Currently is dead code.
  */
 public class Lily extends Application {
 
@@ -44,8 +44,7 @@ public class Lily extends Application {
 
 
     /**
-     * Previous driver method of the application before GUI introduced.
-     * Used for unit tests only
+     * Drives the CLI application for unit tests.
      * 
      * @param args Contents of the main driver.
      */
@@ -62,8 +61,7 @@ public class Lily extends Application {
     }
 
     /**
-     * Launcher calls this method to start the GUI
-     * Can we extract this as a separate class?
+     * Starts the GUI when called by the Launcher
      *
      * @param stage is the window that is being displayed
      */
@@ -76,6 +74,7 @@ public class Lily extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setLily(new Lily());
 
+            // TODO: Make this work
             // greet the user and list their task list if they have one saved.
             // MainWindow.display(ui.showWelcome(tasks));
             stage.show();

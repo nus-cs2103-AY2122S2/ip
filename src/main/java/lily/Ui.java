@@ -12,7 +12,7 @@ import java.util.LinkedList;
  */
 public class Ui {
     private static final String LS = System.lineSeparator();
-    private final boolean COULD_LOAD;
+    private final boolean CAN_LOAD;
     private String output;
 
     /**
@@ -21,7 +21,7 @@ public class Ui {
      * @param loadSuccess Whether a save file was loaded.
      */
     public Ui(boolean loadSuccess) {
-        COULD_LOAD = loadSuccess;
+        CAN_LOAD = loadSuccess;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Ui {
                 + LS;
         String welcomeMessage = logo;
 
-        if (COULD_LOAD) {
+        if (CAN_LOAD) {
             welcomeMessage += "sup, welcome back" + LS
                     + "here's your list from the last time" + LS
                     + LS
@@ -111,9 +111,11 @@ public class Ui {
     }
 
     /**
-     * PROBLEM: needs to print this cuz the app wont print before closing.
      * Prints the exit message and closes the scanner.
+     * 
+     * @deprecated
      */
+    @Deprecated
     public void closeUi() {
         output = "finally. what took you so long? (´-ω-`)" + LS
                 + LS

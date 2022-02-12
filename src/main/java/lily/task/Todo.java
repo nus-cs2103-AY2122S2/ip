@@ -8,7 +8,7 @@ package lily.task;
  */
 public class Todo extends Task {
     /**
-     * Create a Todo object.
+     * Creates a Todo object.
      * 
      * @param s The description of what is due.
      */

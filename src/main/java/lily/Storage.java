@@ -21,7 +21,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Create a new Storage manager.
+     * Creates a new Storage manager.
      * 
      * @param fp The filepath to load from and save to.
      */

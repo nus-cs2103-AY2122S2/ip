@@ -5,7 +5,7 @@ import lily.LilyException;
 import java.io.Serializable;
 
 /**
- * A parent class which Todo, Events and Deadlines derive from
+ * A parent class which Todo, Events and Deadlines derive from.
  * 
  * @author Hong Yi En, Ian
  * @version Jan 2022 (AY21/22 Sem 2)
@@ -15,7 +15,7 @@ public class Task implements Serializable{
     private boolean isDone;    
 
     /**
-     * Create a Task.
+     * Creates a Task.
      * 
      * @param description What the Task is about.
      */
@@ -34,7 +34,7 @@ public class Task implements Serializable{
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      * 
      * @return this task after it is done
      * @throws LilyException If user has finished the task already.
@@ -49,7 +49,7 @@ public class Task implements Serializable{
     }
 
     /**
-     * Mark the task as undone.
+     * Unmarks the task as undone.
      * 
      * @return this task after it is undone
      * @throws LilyException If user hasn't done the task yet.

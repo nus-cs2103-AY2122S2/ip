@@ -27,8 +27,9 @@ public class LilyException extends Exception {
     public static final String ERROR_NO_DESC_EVENT = "You gotta tell me what the event is about!";
     public static final String FORMAT_DATE = "can you say the date again in this form: year-mm-dd";
     public static final String FORMAT_IDX = "eh can you type its number instead?";
+
     /**
-     * Creates a LilyException, which is an exception specific to Lily.
+     * Creates a LilyException, which is an exception specific to the Lily application.
      * 
      * @param msg What the exception is about.
      */

@@ -25,7 +25,7 @@ public class Parser {
     }
 
     /**
-     * Read's user's input for parsing.
+     * Reads user's input for parsing.
      *
      * @param s The sentence the user had input.
      */
@@ -34,8 +34,7 @@ public class Parser {
     }
 
     /**
-     * The main loop of interacting with the user.
-     * Decodes the input and calls the relevant functions.
+     * Decodes the user's input and calls the relevant functions.
      */
     public void parse(String sentence) {
         try {

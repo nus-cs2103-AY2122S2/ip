@@ -16,7 +16,7 @@ public class Deadline extends Task {
     private LocalDate by;
 
     /**
-     * Create a Deadline object.
+     * Creates a Deadline object.
      * 
      * @param s The description of what is due.
      * @param by When the task is due, in the format of "yyyy-mm-dd".

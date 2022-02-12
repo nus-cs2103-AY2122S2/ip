@@ -102,7 +102,7 @@ public class TaskList {
     }
 
     /**
-     * Abstraction for similar operations on tasks.
+     * Conducts any operation on any type of task.
      * 
      * @param idx of the item in the taskList
      * @param op operation which should be done on the item
@@ -189,7 +189,7 @@ public class TaskList {
     }
 
     /**
-     * Abstraction for adding tasks.
+     * Adds any type of task to the taskList.
      * 
      * @param t The type of task being added.
      * @param desc of the task.

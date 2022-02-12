@@ -13,7 +13,7 @@ import lily.LilyException;
 import java.util.Objects;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Provides the layout for the other controls. Controller for MainWindow. 
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -45,7 +45,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input 
+     * and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -63,17 +64,6 @@ public class MainWindow extends AnchorPane {
 
         if (input.equals("bye")) {
             Lily.exitApplication();
-            /*
-            Please don't mark me down for dead code, this is for future features.
-            Enable this if you can get the close message in UI to work
-            try {
-                Thread.sleep(3000); // apparently this pauses the printing
-            } catch (InterruptedException ie) {
-                lily.displayError(LilyException.ERROR_QUIT_INTERRUPT);
-            } finally {
-                Lily.exitApplication();
-            }
-             */
         }
     }
 

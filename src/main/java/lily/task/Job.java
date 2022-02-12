@@ -12,7 +12,7 @@ public class Job extends Task {
     private double duration;
 
     /**
-     * Create an Event object.
+     * Creates a Job object.
      * 
      * @param s The description of what is happening.
      * @param dur How long the task will take
@@ -28,9 +28,9 @@ public class Job extends Task {
     }
 
     /**
-     * Returns the Event as a String.
+     * Returns the Job as a String.
      * 
-     * @return Deadline in the form of "[E][ ] Description (at: due)".
+     * @return Deadline in the form of "[J][ ] Description (needs: dur)".
      */
     @Override
     public String toString() {
