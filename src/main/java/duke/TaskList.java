@@ -100,6 +100,13 @@ public class TaskList {
         Ui.lineTwo();
     }
 
+
+    public String returnMatching() {
+        String string = "Here are the matching tasks:";
+        System.out.println(string);
+        return string;
+    }
+
     /**
      * Method to find a task.
      * @param desc description of the task to be found.
@@ -107,7 +114,7 @@ public class TaskList {
      */
     public void find(String desc, ArrayList<Task> list) {
         Ui.lineTwo();
-        System.out.println("Here are the matching tasks:");
+        returnMatching();
         for(int i = 0; i < list.size(); i++) {
             if(list.get(i).description.contains(desc)) {
                 System.out.println(i + 1 + ". " + list.get(i));
