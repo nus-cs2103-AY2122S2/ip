@@ -27,6 +27,9 @@ public class FindCommand extends Command {
      * @return True after printing search results.
      */
     public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+
+        assert !keyword.equals("") : "No keyword supplied!";
+
         ArrayList<Task> results = new ArrayList<>(
                 new ArrayList<>(taskManager.getTaskList())
                         .stream()

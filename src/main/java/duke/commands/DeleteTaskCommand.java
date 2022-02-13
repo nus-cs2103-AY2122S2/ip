@@ -25,6 +25,7 @@ public class DeleteTaskCommand extends Command {
      * @return true if command executed successfully, false otherwise.
      */
     public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+
         if (taskManager.size() == 0) {
             return ui.showDeleteEmptyList();
         }
