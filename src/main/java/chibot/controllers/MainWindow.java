@@ -80,6 +80,13 @@ public class MainWindow extends AnchorPane {
                 PauseTransition pt = new PauseTransition(Duration.seconds(3));
                 pt.setOnFinished(e -> Platform.exit());
                 pt.play();
+            } else if (input.equalsIgnoreCase("help")) {
+               response = chi.getResponse("help");
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getChiDialog(response, chiImage),
+                        HelpDialogBox.getChiHelpDialog(chiImage)
+                );
             } else {
                 response = chi.getResponse(input);
                 dialogContainer.getChildren().addAll(
@@ -91,7 +98,7 @@ public class MainWindow extends AnchorPane {
         } catch (ChiException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getChiDialog(e.getMessage(), chiImage)
+                    DialogBox.getChiErrorDialog(e.getMessage(), chiImage)
             );
             userInput.clear();
         } catch (IOException e) {

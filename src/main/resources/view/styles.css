@@ -18,3 +18,17 @@
     -fx-background-repeat: no-repeat;
 }
 
+.chiMsg #dialogLabel {
+    -fx-background-color: pink;
+}
+
+.chiMsgError #dialogLabel {
+    -fx-background-color: #b80f0a;
+    -fx-text-fill: white;
+}
+
+#link {
+    -fx-background-color: pink;
+    -fx-background-radius: 5px;
+    -fx-border-color: transparent;
+}
