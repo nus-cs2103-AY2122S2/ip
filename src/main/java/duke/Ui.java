@@ -7,7 +7,7 @@ package duke;
  */
 public class Ui {
 
-    protected static final String HELP = "Here are the list of commands:\n"
+    protected static final String COMMANDS_lIST = "Here are the list of commands:\n"
         + "|list [index]|: Show all the tasks currently in the list\n"
         + "|mark [index]|: Mark a task as done\n"
         + "|unmark [index]|: Mark a task as undone\n"
@@ -43,7 +43,7 @@ public class Ui {
      * @return the chatbot response
      */
     public String processUserInput(TaskList tasks, Storage storage, String input) {
-        if (input.equals("bye")) {
+        if (input.equalsIgnoreCase("bye")) {
             return "Farewell then!";
         }
 

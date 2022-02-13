@@ -20,54 +20,54 @@ public class Parser {
      * @throws DukeException throws if the format of the message was incorrect, or if the message was not understood
      */
     public String processMessage(String message, TaskList tasks, Storage storage) throws DukeException {
-        if (isExitCommand(message)) {
+        if (isExitCommand(message)) { //todo: consider splitting the method and message as was the case before
             return null;
         }
-        String returnMessage = null;
+        String confirmationMessage = null;
         String currentMessage = getFirstWord(message);
         Task currentTask;
         switch (currentMessage) {
         case "help":
-            returnMessage = Ui.HELP;
+            confirmationMessage = Ui.COMMANDS_lIST;
             break;
         case "list":
-            returnMessage = getListAsString(tasks);
+            confirmationMessage = getListAsString(tasks);
             break;
         case "sort":
             sortList(message, tasks, storage);
-            returnMessage = getSortMessage(tasks);
+            confirmationMessage = confirmSort(tasks);
             break;
         case "mark":
-            returnMessage = changeTaskMark(message, ConfirmCodes.MARK, tasks);
+            confirmationMessage = changeTaskMarkAndConfirmation(message, ConfirmCodes.MARK, tasks);
             break;
         case "unmark":
-            returnMessage = changeTaskMark(message, ConfirmCodes.UNMARK, tasks);
+            confirmationMessage = changeTaskMarkAndConfirmation(message, ConfirmCodes.UNMARK, tasks);
             break;
         case "delete":
-            returnMessage = deleteTask(message, tasks, storage);
+            confirmationMessage = deleteTaskAndConfirmation(message, tasks, storage);
             break;
         case "find":
-            returnMessage = getResultsOfFind(message, tasks);
+            confirmationMessage = getResultsOfFind(message, tasks);
             break;
         case "todo":
             currentTask = parseMessageContents(message, TaskTypes.TODO);
             addTask(currentTask, storage, tasks);
-            returnMessage = addTaskMessage(currentTask, tasks);
+            confirmationMessage = addTaskMessage(currentTask, tasks);
             break;
         case "deadline":
             currentTask = parseMessageContents(message, TaskTypes.DEADLINE);
             addTask(currentTask, storage, tasks);
-            returnMessage = addTaskMessage(currentTask, tasks);
+            confirmationMessage = addTaskMessage(currentTask, tasks);
             break;
         case "event":
             currentTask = parseMessageContents(message, TaskTypes.EVENT);
             addTask(currentTask, storage, tasks);
-            returnMessage = addTaskMessage(currentTask, tasks);
+            confirmationMessage = addTaskMessage(currentTask, tasks);
             break;
         default:
             throwInvalidInput();
         }
-        return returnMessage;
+        return confirmationMessage;
     }
 
     /**
@@ -79,7 +79,6 @@ public class Parser {
      */
     @SuppressWarnings("checkstyle:Regexp")
     private Task parseMessageContents(String message, TaskTypes type) throws DukeException {
-        assert (message != null) : "message should not be null";
         String[] messageArr = getMessageArray(message, type);
         assert messageArr != null : "Message Array is not supposed to be null";
         throwIfWrongFormat(message, messageArr, type);
@@ -192,7 +191,7 @@ public class Parser {
     private String unmarkTaskMessage(Task task) {
         return "Alright then! I've marked that task as not done:" + "\n\t" + task;
     }
-    private String getSortMessage(TaskList tasks) {
+    private String confirmSort(TaskList tasks) {
         return "Alright then! I've sorted the tasks accordingly: \n" + tasks;
     }
 
@@ -208,7 +207,7 @@ public class Parser {
     }
 
     private String getFirstWord(String message) {
-        if (!message.contains(" ")) { //if the message is only one word
+        if (!message.contains(" ")) { //check if the message contains only one word
             return message.toLowerCase();
         } else {
             return message.substring(0, message.indexOf(" ")).toLowerCase();
@@ -247,7 +246,7 @@ public class Parser {
     }
 
     private String getTimeBeginString(String[] messageArr, TaskTypes type) {
-        if (type == TaskTypes.EVENT || (type == TaskTypes.DEADLINE && containsTimeString(messageArr))) {
+        if (type == TaskTypes.EVENT || (type == TaskTypes.DEADLINE && hasTimeParameter(messageArr))) {
             return messageArr[2];
         } else {
             return null;
@@ -266,15 +265,17 @@ public class Parser {
             return "Provided are the tasks currently in your list:\n" + listOfTasks;
         }
     }
-
-    private String changeTaskMark(String message, ConfirmCodes code, TaskList tasks) throws DukeException {
+    private String changeTaskMarkAndConfirmation(
+        String message, ConfirmCodes code, TaskList tasks) throws DukeException {
         int index = getIndexFromMessage(message); //get the index
         Task currentTask = tasks.getTaskAtIndex(index);
         switch (code) {
         case MARK:
+            throwIfMarked(currentTask);
             currentTask.markDone();
             return markTaskMessage(currentTask);
         case UNMARK:
+            throwIfNotMarked(currentTask);
             currentTask.markUndone();
             return unmarkTaskMessage(currentTask);
         default:
@@ -284,7 +285,7 @@ public class Parser {
         return null;
     }
 
-    private String deleteTask(String message, TaskList tasks, Storage storage) throws DukeException {
+    private String deleteTaskAndConfirmation(String message, TaskList tasks, Storage storage) throws DukeException {
         int index = getIndexFromMessage(message);
         Task currentTask = tasks.removeTask(index);
         storage.modifyStorage(currentTask, ConfirmCodes.DELETION, tasks);
@@ -307,7 +308,7 @@ public class Parser {
         return message.equalsIgnoreCase("bye");
     }
 
-    private boolean containsTimeString(String[] messageArr) {
+    private boolean hasTimeParameter(String[] messageArr) {
         return messageArr.length == 3;
     }
 
@@ -366,6 +367,17 @@ public class Parser {
         int indexOfSpace = message.indexOf(" ");
         if (keyword.length() < 1 || indexOfSpace == -1) {
             throw new DukeException("Pardon me, but the body of this command should not be empty");
+        }
+    }
+    private void throwIfMarked(Task currentTask) throws DukeException {
+        if (currentTask.isDone) {
+            throw new DukeException("Pardon me, but the task has already been marked.");
+        }
+    }
+
+    private void throwIfNotMarked(Task currentTask) throws DukeException {
+        if (!currentTask.isDone) {
+            throw new DukeException("Pardon me, but the task is already not marked.");
         }
     }
 

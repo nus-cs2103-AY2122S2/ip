@@ -25,8 +25,8 @@ public class ToDo extends Task {
     @Override
     public int compareTo(Task t1) {
         if (t1 instanceof ToDo) {
-            boolean checkIsDone = this.isDone == t1.isDone;
-            if (checkIsDone) {
+            boolean isMarked = this.isDone == t1.isDone;
+            if (isMarked) {
                 return this.description.compareTo(t1.description);
             } else {
                 if (t1.isDone) {

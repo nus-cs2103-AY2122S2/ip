@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 
 /**
  * Custom control DialogBox class for Duke
@@ -43,22 +44,25 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.setAsDukeBox();
         return db;
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Sets this Dialog box to be in the style of a response box
+     * 1. Flips the dialog box such that the ImageView is on the left and text on the right.
+     * 2. Flips the label position to accommodate the dialog box flip
      */
-    private void flip() {
+    private void setAsDukeBox() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
 
         for (Node n : getChildren()) {
-            if (n instanceof Label) {
+            if (n instanceof Label) { //locate the label of the Dialog Box
                 Label l = (Label) n;
                 l.setTranslateX(5);
+                l.setTextFill(Paint.valueOf("#881111"));
             }
         }
         setAlignment(Pos.TOP_LEFT);

@@ -22,16 +22,16 @@ public class ParserTest {
             //do nothing
         }
 
-        Boolean check = false;
+        Boolean hasThrown = false;
 
         try {
             parser.processMessage("deadline do stuff /by 20222-01-01", new TaskList(),
                 storage);
         } catch (DukeException d) {
-            check = true;
+            hasThrown = true;
         }
 
-        assertTrue(check);
+        assertTrue(hasThrown);
     }
 
     @Test
