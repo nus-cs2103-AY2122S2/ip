@@ -24,3 +24,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 Your Personal Assistant Chatbot that helps you keep track of the important things in life
 ```
+
+## Acknowledgements
+Credit list of package(s) used:
+1. [JavaWuzzy](https://github.com/xdrop/fuzzywuzzy): fuzzy search for task finding

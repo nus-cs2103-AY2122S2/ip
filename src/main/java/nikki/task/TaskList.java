@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 import nikki.NikkiException;
 
 /**
@@ -143,7 +144,10 @@ public class TaskList {
         return new TaskList(
                 this.tasks
                         .stream()
-                        .filter(task -> task.getName().contains(search))
+                        .filter(task -> {
+                            int similarity = FuzzySearch.partialRatio(search, task.getName());
+                            return similarity >= 75;
+                        })
                         .collect(Collectors.toList()));
     }
 

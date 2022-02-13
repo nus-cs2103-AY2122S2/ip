@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
      * @param nikki Nikki object to interact with
      */
     public void setNikki(Nikki nikki) {
-        nikki = nikki;
+        this.nikki = nikki;
         nikkiSpeak(nikki.getIntroduction());
     }
 
