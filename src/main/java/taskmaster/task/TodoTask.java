@@ -1,11 +1,11 @@
 package taskmaster.task;
 
+
 /**
  * This class encapsulates the information necessary for a Todo task.
  */
 
 public class TodoTask extends Task {
-
     /**
      *  Constructor for a TodoTask
      *

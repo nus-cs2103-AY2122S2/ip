@@ -9,7 +9,6 @@ import taskmaster.commands.HelpCommands;
 import taskmaster.commands.ListCommands;
 import taskmaster.commands.MarkCommands;
 
-
 /**
  * This class encapsulates a Parser Object which parses text input into a command.
  */

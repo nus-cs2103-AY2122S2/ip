@@ -1,4 +1,5 @@
 package taskmaster.task;
+
 /**
  * This class encapsulates the information necessary for a user task.
  */
@@ -74,4 +75,11 @@ public abstract class Task {
     public boolean containsKeyword(String keyword) {
         return this.taskName.toLowerCase().contains(keyword);
     }
+
+
+    public String addTag(String tag) {
+        return "Successfully added tag: \n" + tag + " to " + taskName + "\n";
+    }
+
 }
+

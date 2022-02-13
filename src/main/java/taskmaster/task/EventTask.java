@@ -1,12 +1,13 @@
 package taskmaster.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 
 /**
  * This class encapsulates the information necessary for an Event task.
  */
 public class EventTask extends Task {
+
     /** Time and Date of Event. **/
     private final LocalDateTime EVENT_DATE;
 
@@ -20,7 +21,6 @@ public class EventTask extends Task {
     public EventTask(String taskName, LocalDateTime eventDate) {
         super(taskName);
         this.EVENT_DATE = eventDate;
-
     }
 
     /**
