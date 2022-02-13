@@ -1,7 +1,6 @@
 package nikki;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import nikki.command.Command;
 import nikki.command.CommandParser;
@@ -44,14 +43,13 @@ public class Nikki {
             storage = new Storage(filename);
             tasks = storage.loadTasks();
         } catch (IOException | NikkiException e) {
-            // ui.warning("[!] Error reading file - initializing task list as empty list");
             tasks = new TaskList();
         }
 
     }
 
     /**
-     * Interaction method to pass input to Nikki and get response
+     * Responds to input passed by user to input
      *
      * @param input input from user
      * @return response from Nikki
@@ -70,9 +68,8 @@ public class Nikki {
      * Handles behaviours according to the command passed and responds with a message
      *
      * @param action command from user
-     * @throws NikkiException general exception for invalid user command: invalid command, arguments, etc.
-     *
      * @return Response message from Nikki
+     * @throws NikkiException general exception for invalid user command: invalid command, arguments, etc.
      */
     private String handleActionAndRespond(Command action) throws NikkiException {
         String response = "";

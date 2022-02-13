@@ -1,8 +1,8 @@
 package nikki.task;
 
-import nikki.NikkiException;
-
 import java.time.format.DateTimeFormatter;
+
+import nikki.NikkiException;
 
 /**
  * Class to encapsulate basic properties and methods of a Task
@@ -21,7 +21,7 @@ public class Task {
     private String name;
 
     /** Status of completion of Task */
-    private Boolean done;
+    private Boolean isDone;
 
     /** Tag of Task */
     private char tag = ' ';
@@ -41,10 +41,10 @@ public class Task {
      * Default tag is ' '
      *
      * @param name name of Task
-     * @param done status of completion of Task
+     * @param isDone status of completion of Task
      */
-    public Task(String name, Boolean done) {
-        this(name, ' ', done);
+    public Task(String name, Boolean isDone) {
+        this(name, ' ', isDone);
     }
 
     /**
@@ -63,12 +63,12 @@ public class Task {
      *
      * @param name name of Task
      * @param tag tag of Task
-     * @param done status of completion of Task
+     * @param isDone status of completion of Task
      */
-    public Task(String name, char tag, Boolean done) {
+    public Task(String name, char tag, Boolean isDone) {
         this.name = name;
         this.tag = tag;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Task {
      */
     public Boolean mark() {
         if (!this.isDone()) {
-            this.done = true;
+            this.isDone = true;
             return true;
         }
 
@@ -92,7 +92,7 @@ public class Task {
      */
     public Boolean unmark() {
         if (this.isDone()) {
-            this.done = false;
+            this.isDone = false;
             return true;
         }
 
@@ -120,10 +120,10 @@ public class Task {
     /**
      * Returns the state (done) of the Task
      *
-     * @return duke.task is done or not
+     * @return Task is done or not
      */
     public Boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**

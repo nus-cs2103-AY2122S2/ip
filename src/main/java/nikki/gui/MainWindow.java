@@ -14,6 +14,8 @@ import nikki.Nikki;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final Font FONT = new Font("Arial", 17);
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,13 +25,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private final Font FONT = new Font("Arial", 18);
-
     private Nikki nikki;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/peko.PNG"));
     private Image nikkiImage = new Image(this.getClass().getResourceAsStream("/images/fbk.JPG"));
 
+    /**
+     * Initializes window GUI settings
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -37,15 +40,27 @@ public class MainWindow extends AnchorPane {
         sendButton.setFont(FONT);
     }
 
-    public void setNikki(Nikki d) {
-        nikki = d;
+    /**
+     * Sets the Nikki object for this window instance
+     * @param nikki Nikki object to interact with
+     */
+    public void setNikki(Nikki nikki) {
+        nikki = nikki;
         nikkiSpeak(nikki.getIntroduction());
     }
 
+    /**
+     * Adds the message in a user dialog box
+     * @param message message from user
+     */
     private void userSpeak(String message) {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(message, userImage));
     }
 
+    /**
+     * Adds the message in a Nikki dialog box
+     * @param message message from Nikki
+     */
     private void nikkiSpeak(String message) {
         dialogContainer.getChildren().add(DialogBox.getNikkiDialog(message, nikkiImage));
     }

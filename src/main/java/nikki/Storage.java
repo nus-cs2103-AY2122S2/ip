@@ -35,7 +35,6 @@ public class Storage {
      * @throws IOException cannot create directories/file
      */
     private void createIfNotExist() throws IOException {
-        // Create file if it doesn't exist
         if (this.file.exists()) {
             return;
         }
@@ -75,6 +74,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads a TaskList from a Scanner object.
+     * Each line of the Scanner should represent a Task
+     *
+     * @param scanner Scanner object to load from
+     * @return loaded TaskList
+     * @throws NikkiException when format error is present in a Scanner line
+     */
     private TaskList loadTaskListFromScanner(Scanner scanner) throws NikkiException {
         TaskList taskList = new TaskList();
         for (int lineCount = 1; scanner.hasNextLine(); lineCount++) {
