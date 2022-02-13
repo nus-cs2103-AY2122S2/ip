@@ -1,5 +1,6 @@
 # ChiBot User Guide
-##Getting Started
+## Getting Started
+
 To start using ChiBot, download the `jar` from this [link](https://github.com/WJunHong/ip).
 
 
