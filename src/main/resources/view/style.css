@@ -1,0 +1,91 @@
+* {
+   -color-background: #573c41;
+   -color-background-dark: #35282b;
+   -color-primary: #f1c15b;
+   -color-primary-dark: #bc8610;
+   -color-text: #ffffff;
+}
+
+#button-send {
+    -fx-background-color: -color-primary;
+    -fx-text-fill: -color-background;
+    -fx-font-weight: 700;
+    -fx-font-size: 1.3em;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+#button-send:hover {
+    -fx-background-color: -color-primary-dark;
+}
+
+#text-input-chat {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-background-color: -color-background-dark;
+    -fx-border-color: -color-primary;
+    -fx-border-width: 2px;
+    -fx-text-fill: -color-text;
+}
+
+#main-scrollpane, #main-scrollpane-content {
+    -fx-background-color: -color-background;
+}
+
+.scroll-bar:vertical {
+    -fx-padding: 10px 2px;
+    -fx-background-color: -color-background-dark;
+}
+
+.scroll-bar:vertical .track{
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -color-primary;
+    -fx-background-insets: 3.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+.scroll-bar:vertical .thumb:hover, .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: -color-primary-dark;
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0.0 10.0 0.0 0.0;
+}
+
+ .scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0.0 0.15em;
+}
+
+.chat-row {
+    -fx-background-color: -color-background;
+}
+
+.chat-bubble {
+    -fx-background-color: -color-primary;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-font-family: 'Sans-Serif';
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 500;
+}
+
+.chat-bubble-arrow {
+    -fx-shape: 'M20 50 M0 0 l20 -20 l-20 -20 l0 40 z';
+    -fx-background-color: -color-primary;
+}
+
+.chat-bubble-arrow.inverted {
+    -fx-shape: 'M20 50 M20 0 l-20 -20 l20 -20 l0 40 z';
+}
+
+.chat-profile-picture {
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+}

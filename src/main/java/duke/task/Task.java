@@ -13,6 +13,7 @@ import duke.util.Serializable;
  */
 public abstract class Task implements Serializable {
     protected static final String FORMAT_DATETIME = "d MMM yyyy '-' hh:mm a";
+    private static final String CHECKMARK_EMOJI = "\u2714";
 
     private final TaskType type;
     private String description;
@@ -60,10 +61,10 @@ public abstract class Task implements Serializable {
     /**
      * Returns an icon associated with the current completion status of the task.
      *
-     * @return X if the task is completed, single whitespace otherwise.
+     * @return Checkmark Emoji if the task is completed, single whitespace otherwise.
      */
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " ");
+        return (this.isDone ? CHECKMARK_EMOJI : " ");
     }
 
     /**

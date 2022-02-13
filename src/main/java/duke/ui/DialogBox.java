@@ -7,12 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * Represents a row in the chat window in the Ui.
@@ -21,7 +23,9 @@ public class DialogBox extends HBox {
     @FXML
     private Label chat;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
+    @FXML
+    private Label chatArrow;
 
     /**
      * Creates a new instance of <code>DialogBox</code>. Sole constructor for <code>DialogBox</code>.
@@ -41,7 +45,8 @@ public class DialogBox extends HBox {
         }
 
         chat.setText(text);
-        displayPicture.setImage(image);
+        ImagePattern pattern = new ImagePattern(image);
+        displayPicture.setFill(pattern);
     }
 
     /**
@@ -52,6 +57,8 @@ public class DialogBox extends HBox {
         Collections.reverse(current);
         getChildren().setAll(current);
         setAlignment(Pos.TOP_LEFT);
+        chatArrow.getStyleClass().add("inverted");
+        HBox.setMargin(chatArrow, new Insets(10, 0, 0, 10));
     }
 
     /**

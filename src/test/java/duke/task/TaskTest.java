@@ -39,6 +39,7 @@ public class TaskTest {
 
     @Test
     public void testMarking_markUnmark_success() {
+        final String checkmarkEmoji = "\u2714";
         Task t1 = new TaskStub("Test Description 1");
         assertFalse(t1.isDone());
         assertEquals(" ", t1.getStatusIcon());
@@ -47,8 +48,9 @@ public class TaskTest {
 
         t1.setDone(true);
         assertTrue(t1.isDone());
-        assertEquals("X", t1.getStatusIcon());
-        assertEquals(String.format("[%s][X] %s", TaskStub.getShorthand(), "Test Description 1"),
+        assertEquals(checkmarkEmoji, t1.getStatusIcon());
+        assertEquals(String.format("[%s][%s] %s", TaskStub.getShorthand(), checkmarkEmoji,
+                        "Test Description 1"),
                 t1.getReadableString());
 
         t1.setDone(false);
