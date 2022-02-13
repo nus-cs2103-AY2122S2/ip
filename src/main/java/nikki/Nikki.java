@@ -14,6 +14,9 @@ import nikki.task.Todo;
  * Main class that abstracts the implementation of task list chatbot
  */
 public class Nikki {
+    /** Status of Nikki (stopped or not) */
+    private boolean isStopped = false;
+
     /** List of Tasks */
     private TaskList tasks;
 
@@ -56,6 +59,9 @@ public class Nikki {
      */
     public String interact(String input) {
         try {
+            if (isStopped) {
+                throw new NikkiException("I've already stopped");
+            }
             Command action = cmd.parseCommand(input);
             String response = handleActionAndRespond(action);
             return response;
@@ -82,6 +88,7 @@ public class Nikki {
             } catch (IOException e) {
                 response += "Oh... I can't save your tasks to file";
             }
+            isStopped = true;
             break;
 
         case "list":
@@ -159,5 +166,13 @@ public class Nikki {
      */
     public String getIntroduction() {
         return introduction;
+    }
+
+    /**
+     * Getter for status of Nikki
+     * @return boolean value for whether Nikki has stopped
+     */
+    public boolean isStopped() {
+        return isStopped;
     }
 }

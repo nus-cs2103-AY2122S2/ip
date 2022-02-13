@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import nikki.Nikki;
 
 /**
@@ -78,5 +79,19 @@ public class MainWindow extends AnchorPane {
         nikkiSpeak(response);
 
         userInput.clear();
+
+        if (nikki.isStopped()) {
+            closeWindow();
+        }
+    }
+
+    /**
+     * Closes the MainWindow and exits the program.
+     */
+    private void closeWindow() {
+        // Gets the handle to the window object
+        Stage stage = (Stage) this.userInput.getScene().getWindow();
+        stage.close();
+        System.exit(0);
     }
 }
