@@ -1,6 +1,9 @@
 package dazz;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import dazz.exception.InvalidTaskIndexException;
 import dazz.task.Task;
@@ -85,10 +88,30 @@ public class TaskList {
     }
 
     /**
-     * Prints the <code>Task</code> in this <code>TaskList</code>.
+     * Lists out the <code>Task</code> in this <code>TaskList</code>.
+     * @return <code>String</code> The string representation of the <code>Task</code>.
      */
-    public void list() {
-        tasks.forEach(x -> System.out.println("\t" + x));
+    public String list() {
+        return IntStream.rangeClosed(1, tasks.size())
+                .mapToObj(x -> x + ". " + tasks.get(x - 1))
+                .collect(Collectors.joining("\n"));
+    }
+
+    /**
+     * Searches <code>Task</code> description that matches the keyword.
+     * @param keyword The search criteria.
+     * @return <code>String</code> The string representation of the <code>Task</code>
+     * description contains the keyword.
+     */
+    public String search(String keyword) {
+        List<Task> filteredTasks = tasks.stream()
+                .filter(x -> x.getDescription().toLowerCase(Locale.ROOT).contains(keyword))
+                .collect(Collectors.toList());
+
+        return IntStream
+                .rangeClosed(1, filteredTasks.size())
+                .mapToObj(x -> x + ". " + filteredTasks.get(x - 1))
+                .collect(Collectors.joining("\n"));
     }
 
     /**

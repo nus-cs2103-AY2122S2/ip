@@ -44,12 +44,12 @@ test {
 }
 
 application {
-    mainClassName = "dazz.Dazz"
+    mainClassName = "dazz.gui.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "dazz"
-    archiveVersion = "0.2"
+    archiveVersion = "v0.2"
     archiveClassifier = null
 }
 

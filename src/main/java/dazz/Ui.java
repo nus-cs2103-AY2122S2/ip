@@ -3,11 +3,9 @@ package dazz;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import dazz.exception.ErrorType;
@@ -134,11 +132,7 @@ public class Ui {
         if (taskList.getSize() == 0) {
             showListMessage = showListMessage + "\nYou have no task in your list.";
         } else {
-            List<Task> tasks = taskList.getTasks();
-            String taskNames = IntStream.rangeClosed(1, tasks.size())
-                    .mapToObj(x -> x + ". " + tasks.get(x - 1))
-                    .collect(Collectors.joining("\n"));
-            showListMessage = showListMessage + taskNames;
+            showListMessage = showListMessage + taskList.list();
         }
         return showListMessage;
     }
@@ -150,14 +144,12 @@ public class Ui {
      * @return The message of the list of <code>Task</code> found.
      */
     public String messageForSearches(TaskList taskList, String search) {
-        String finalSearch = search.toLowerCase(Locale.ROOT);
+        String toLowerCaseSearch = search.toLowerCase(Locale.ROOT);
         String searchesMessage = "Here are the matching tasks in your list:\n";
-        List<Task> tasks = taskList.getTasks();
-        String filteredTaskDescriptions = tasks.stream()
-                .map(Task::toString)
-                .filter(x -> x.toLowerCase(Locale.ROOT).contains(finalSearch))
-                .collect(Collectors.joining("\n"));
-        return searchesMessage + filteredTaskDescriptions;
+        String noTask = "No matches found.";
+        String searchResult = taskList.search(toLowerCaseSearch);
+        boolean isEmptyString = searchResult.equals("");
+        return !isEmptyString ? searchesMessage + searchResult : searchesMessage + noTask;
     }
 
     /**
