@@ -54,8 +54,10 @@ public class TaskList {
      */
     public String getTasksMsg() {
         StringBuilder allTasks = new StringBuilder();
+        int taskIndex = 1;
         for (Task t: this.tasks) {
-            allTasks.append(t.toString()).append("\n");
+            allTasks.append(taskIndex).append(". ").append(t.toString()).append("\n");
+            taskIndex++;
         }
         return allTasks.length() == 0 ? "Chi could not find any tasks, add one to get started nyan!"
                 : allTasks.toString();

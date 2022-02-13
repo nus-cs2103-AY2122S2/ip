@@ -26,7 +26,7 @@ public class TaskListStub extends TaskList {
      */
     @Override
     public String getTasksMsg() {
-        return testTasks.get(0) + "\n" + testTasks.get(1);
+        return "1. " + testTasks.get(0) + "\n" + "2. " + testTasks.get(1);
     }
 
     @Override

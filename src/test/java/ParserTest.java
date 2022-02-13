@@ -17,7 +17,7 @@ class ParserTest {
         TaskListStub tls = new TaskListStub();
         StorageStub ss = new StorageStub("/somePath.txt");
         try {
-            assertEquals("list item 1\nlist item 2", p.processMessage("list", tls, ss));
+            assertEquals("1. list item 1\n2. list item 2", p.processMessage("list", tls, ss));
         } catch (ChiException e) {
             throw new ChiException("Not supposed to happen");
         } catch (IOException e) {

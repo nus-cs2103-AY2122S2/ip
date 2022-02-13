@@ -41,7 +41,7 @@ public class HelpDialogBox extends HBox {
             e.printStackTrace();
         }
 
-        hyperlink.setText("https://github.com/WJunHong/ip");
+        hyperlink.setText("https://wjunhong.github.io/ip/");
         displayPicture.setImage(img);
         hyperlink.setOnAction(t -> new Main().getHostServices().showDocument(hyperlink.getText()));
     }

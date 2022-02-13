@@ -1,8 +1,8 @@
 package chibot.ui;
 
 import chibot.exception.ChiException;
-import chibot.storage.Storage;
 import chibot.parser.Parser;
+import chibot.storage.Storage;
 import chibot.tasklist.TaskList;
 
 import java.io.IOException;

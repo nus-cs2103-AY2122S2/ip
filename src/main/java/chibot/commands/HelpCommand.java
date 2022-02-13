@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
      * @throws ChiException If the user wants help on an invalid command.
      */
     @Override
-    public String execute(TaskList tl, Storage sge) throws ChiException  {
+    public String execute(TaskList tl, Storage sge) throws ChiException {
         if (tokens.length == 1) {
             return printGenericHelpMessage();
         } else {
@@ -69,18 +69,18 @@ public class HelpCommand extends Command {
             return "Type \"delete index\" to remove a task at the index!\n E.g. delete 1";
             // Fallthrough
         case "find":
-            return "Type \"find word1 word2 ...\" to find tasks which match ALL specified words! " +
-                    "\nE.g. find new beach";
+            return "Type \"find word1 word2 ...\" to find tasks which match ALL specified words! "
+                    + "\nE.g. find new beach";
             // Fallthrough
         case "todo":
             return "Type \"todo task\" to create new todo task!\nE.g. todo write essay tonight";
         case "deadline":
-            return "Type \"deadline description /by Y-M-D H:M\" to create new deadline!" +
-                    "\nE.g.deadline finish report /by 2022-03-10 14:55";
+            return "Type \"deadline description /by Y-M-D H:M\" to create new deadline!"
+                    + "\nE.g.deadline finish report /by 2022-03-10 14:55";
             // Fallthrough
         case "event":
-            return "Type \"event <description> /at Y-M-D H:M-H:M\" to " +
-                    "create new event!\n E.g. event visit girlfriend /at 2022-10-10 12:00-18:00"
+            return "Type \"event <description> /at Y-M-D H:M-H:M\" to "
+                    + "create new event!\nE.g. event visit girlfriend /at 2022-10-10 12:00-18:00"
                     + "\nMake sure the timings are progressive!";
             // Fallthrough
         case "exit":

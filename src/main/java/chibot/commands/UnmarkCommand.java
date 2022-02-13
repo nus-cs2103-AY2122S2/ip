@@ -58,7 +58,7 @@ public class UnmarkCommand extends Command {
      * @param tl The TaskList.
      * @return A boolean of whether the message body is valid.
      */
-    public boolean validateMessageBody(String msg, TaskList tl)  {
+    public boolean validateMessageBody(String msg, TaskList tl) {
         try {
             String[] words = msg.split(" ");
             if (words.length > 1) {

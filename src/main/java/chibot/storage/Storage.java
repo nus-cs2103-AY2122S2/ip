@@ -136,7 +136,7 @@ public class Storage {
             // Fallthrough
         case "todo":
             fw = new FileWriter(dataFilePath, true);
-            fw.write(task.convertToFileFormat());
+            fw.write(task.convertToFileFormat() + "\n");
             fw.close();
             break;
         default:

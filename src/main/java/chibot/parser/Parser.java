@@ -29,7 +29,7 @@ public class Parser {
      */
     public String processMessage(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
         String[] messageFragments = msg.trim().split(" ");
-        if (messageFragments.length == 0) {
+        if (msg.trim().equals("")) {
             throw new ChiException("Hey it's not like I want you to...but can you type something nyan!");
         } else {
             // Check if message is valid command

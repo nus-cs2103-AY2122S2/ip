@@ -218,7 +218,7 @@ public class AddCommand extends Command {
             LocalTime t2 = LocalTime.parse(endTiming, DateTimeFormatter.ofPattern(TIME_FORMAT));
 
             return t1.isAfter(t2);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             return true;
         }
     }

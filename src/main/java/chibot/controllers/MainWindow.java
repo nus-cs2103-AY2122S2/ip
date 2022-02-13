@@ -32,6 +32,9 @@ public class MainWindow extends AnchorPane {
 
     private Chi chi;
 
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImg.png"));
+    private final Image chiImage = new Image(this.getClass().getResourceAsStream("/images/chisan.png"));
+
     /**
      * Constructor of the class.
      *
@@ -48,9 +51,6 @@ public class MainWindow extends AnchorPane {
             e.printStackTrace();
         }
     }
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImg.png"));
-    private Image chiImage = new Image(this.getClass().getResourceAsStream("/images/chisan.png"));
 
     /**
      * Places introduction message when window opens.
