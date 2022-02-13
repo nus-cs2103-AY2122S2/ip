@@ -48,6 +48,7 @@ public class DeadlineCommand extends Command {
         if (!duplicated.equals(deadlineTask)) {
             result += "This task has been added before!\n";
             result += duplicated.toString();
+            assert duplicated.getDescription().equals(deadlineTask.getDescription());
             result += "\n please enter another task";
             return result;
         }
