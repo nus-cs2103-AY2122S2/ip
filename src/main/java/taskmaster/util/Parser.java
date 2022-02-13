@@ -8,7 +8,6 @@ import taskmaster.commands.FindCommands;
 import taskmaster.commands.HelpCommands;
 import taskmaster.commands.ListCommands;
 import taskmaster.commands.MarkCommands;
-import taskmaster.commands.TagCommands;
 
 /**
  * This class encapsulates a Parser Object which parses text input into a command.
@@ -41,8 +40,6 @@ public class Parser {
             return new ByeCommands();
         case "help":
             return new HelpCommands();
-        case "tag":
-            return new TagCommands(input);
         default:
             return new DefaultCommands(input);
         }
