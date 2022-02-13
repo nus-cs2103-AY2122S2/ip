@@ -33,5 +33,3 @@ public class Main {
 }
 
 ```
-
-## User Guide
