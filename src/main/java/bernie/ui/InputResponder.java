@@ -25,6 +25,7 @@ public class InputResponder {
                 "To exit, type: bye";
     }
 
+
     /**
      * Returns the message when user exits out of the program
      * @return String, the message

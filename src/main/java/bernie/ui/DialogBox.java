@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 
 /**
@@ -27,7 +28,18 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private static final String USER = "user";
+    private static final String BERNIE = "bernie";
+    private static final String USER_STYLE = "-fx-label-padding: 10 20; " +
+            "-fx-background-insets: 5; " +
+            "-fx-background-radius: 20; " +
+            "-fx-background-color: #ADD8E6";
+    private static final String BERNIE_STYLE = "-fx-label-padding: 10 20; " +
+            "-fx-background-insets: 5; " +
+            "-fx-background-radius: 20; " +
+            "-fx-background-color: #D3D3D3";
+
+    private DialogBox(String text, Image img, String type) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,11 +49,17 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        if (type.equals(USER)) {
+            dialog.setStyle(USER_STYLE);
+        } else if (type.equals(BERNIE)) {
+            dialog.setStyle(BERNIE_STYLE);
+        }
         dialog.setText(text);
         displayPicture.setImage(img);
         double radius = displayPicture.getFitWidth() / 2;
         Circle clip = new Circle(radius, radius, radius);
         displayPicture.setClip(clip);
+        setMinHeight(Region.USE_PREF_SIZE);
     }
 
     /**
@@ -55,11 +73,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, USER);
     }
 
     public static DialogBox getBernieDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, BERNIE);
         db.flip();
         return db;
     }
