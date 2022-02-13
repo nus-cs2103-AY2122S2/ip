@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
  * Represents Duke main class
  */
 public class Duke {
-
     private VBox dialogContainer;
     private Storage storage;
     private TaskList tasks;

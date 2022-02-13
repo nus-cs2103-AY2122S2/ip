@@ -17,7 +17,7 @@ public class Parser {
      * @return command to be carried out
      * @throws DukeException if input command is invalid
      */
-    static public Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.startsWith("bye")) {
             return new ExitCommand();
         } else if (fullCommand.startsWith("list")) {
@@ -51,7 +51,7 @@ public class Parser {
      * @return command to be carried out
      * @throws DukeException if description of input command is empty
      */
-    static public Command splitCommand(String fullCommand) throws DukeException {
+     public static Command splitCommand(String fullCommand) throws DukeException {
         if (fullCommand.split(" ").length == 1) {
             throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", fullCommand.split(" ")[0]));
         }

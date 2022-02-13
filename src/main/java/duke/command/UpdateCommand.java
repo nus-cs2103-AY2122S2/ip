@@ -5,8 +5,6 @@ import duke.main.Storage;
 import duke.main.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
 
 /**
  * Represents update command
