@@ -40,7 +40,6 @@ public abstract class Command {
     }
 
     /**
-     * An abstract method to be implemented by sub-classes.
      * Executes the command.
      */
     public abstract void executeCommand();

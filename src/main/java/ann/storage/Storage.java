@@ -71,7 +71,7 @@ public class Storage {
     }
 
     /**
-     * Create a new file with the given filename in the given folder.
+     * Creates a new file with the given filename in the given folder.
      *
      * @param folderName a String which is the name of the folder.
      * @param fileName a String which is the name of the file.
