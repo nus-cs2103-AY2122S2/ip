@@ -208,12 +208,10 @@ public class Parser {
             String dateToCompare = dateToFind.format(dateOutputFormatter);
 
             TaskList tempTaskList = new TaskList();
-
             int size = taskList.size();
 
             for (int i = 0; i < size; i++) {
                 Task currentTask = taskList.get(i);
-
                 if (!currentTask.getType().equals("T") && currentTask.getDate().equals(dateToCompare)) {
                     tempTaskList.add(currentTask);
                 }
