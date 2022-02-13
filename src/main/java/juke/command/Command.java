@@ -35,7 +35,7 @@ public abstract class Command {
      * Constructor that initializes the command.
      */
     public Command() {
-        this.paramArgs.put("", Optional.empty());
+        paramArgs.put("", Optional.empty());
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class Command {
      * @return Boolean result.
      */
     public boolean hasParameter(String param) {
-        return this.paramArgs.containsKey(param);
+        return paramArgs.containsKey(param);
     }
 
     /**
@@ -71,8 +71,10 @@ public abstract class Command {
      * @return Boolean result.
      */
     public boolean hasArgument(String param) {
-        //TODO Currently does not handle missing parameter case.
-        return this.paramArgs.get(param).isPresent();
+        if (!paramArgs.containsKey(param)) {
+            return false;
+        }
+        return paramArgs.get(param).isPresent();
     }
 
     /**
@@ -83,13 +85,13 @@ public abstract class Command {
      * @return Argument.
      */
     public String getArgument(String param) {
-        if (this.hasParameter(param)) {
-            return this.paramArgs.get(param).orElseGet(() -> {
-                this.result = Result.error(new JukeInvalidParameterException(param));
+        if (hasParameter(param)) {
+            return paramArgs.get(param).orElseGet(() -> {
+                result = Result.error(new JukeInvalidParameterException(param));
                 return "";
             });
         } else {
-            this.result = Result.error(new JukeInvalidParameterException(param));
+            result = Result.error(new JukeInvalidParameterException(param));
             return "";
         }
     }
@@ -112,7 +114,7 @@ public abstract class Command {
      * @return Boolean result.
      */
     public boolean hasDefaultArgument() {
-        return this.hasArgument(DEFAULT_PARAMETER);
+        return hasArgument(DEFAULT_PARAMETER);
     }
 
     /**
@@ -122,8 +124,8 @@ public abstract class Command {
      * @return Default argument.
      */
     public String getDefaultArgument() {
-        return this.paramArgs.get(DEFAULT_PARAMETER).orElseGet(() -> {
-            this.result = Result.error(new JukeException("Missing default argument."));
+        return paramArgs.get(DEFAULT_PARAMETER).orElseGet(() -> {
+            result = Result.error(new JukeException("Missing default argument."));
             return "";
         });
     }
@@ -140,10 +142,10 @@ public abstract class Command {
         if (args != null && !args.isBlank()) {
             option = Optional.of(args);
         }
-        if (this.paramArgs.containsKey(param)) {
-            this.paramArgs.replace(param, option);
+        if (paramArgs.containsKey(param)) {
+            paramArgs.replace(param, option);
         } else {
-            this.paramArgs.put(param, option);
+            paramArgs.put(param, option);
         }
         return this;
     }
@@ -156,9 +158,9 @@ public abstract class Command {
      */
     public Command removeParameter(String param) {
         if (param == null || param.isBlank()) {
-            this.paramArgs.replace("", Optional.empty());
+            paramArgs.replace("", Optional.empty());
         } else {
-            this.paramArgs.remove(param);
+            paramArgs.remove(param);
         }
         return this;
     }
@@ -169,7 +171,7 @@ public abstract class Command {
      * @return Result.
      */
     public Result getResult() {
-        return this.result;
+        return result;
     }
 
     /**
@@ -179,7 +181,7 @@ public abstract class Command {
      * @return Boolean result.
      */
     public boolean isSuccessful() {
-        return this.result instanceof Result.Success;
+        return result instanceof Result.Success;
     }
 
     /**
@@ -189,7 +191,7 @@ public abstract class Command {
      * @return Boolean result.
      */
     public boolean isErroneous() {
-        return this.result instanceof Result.Error;
+        return result instanceof Result.Error;
     }
 
     /**
@@ -199,6 +201,6 @@ public abstract class Command {
      * @return Boolean result.
      */
     public boolean isEmpty() {
-        return this.result instanceof Result.Empty;
+        return result instanceof Result.Empty;
     }
 }

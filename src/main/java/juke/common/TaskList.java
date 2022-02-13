@@ -12,6 +12,9 @@ import juke.task.Task;
  * Abstraction for list of tasks.
  */
 public class TaskList implements Iterable<Task> {
+    /**
+     * Internal list for tasks.
+     */
     private final ArrayList<Task> taskList;
 
     /**
@@ -80,6 +83,12 @@ public class TaskList implements Iterable<Task> {
         return this.taskList.size();
     }
 
+    /**
+     * Lists the tasks in the task list.
+     *
+     * @return String array of task descriptions.
+     * @throws JukeEmptyTaskListException Throws if task list is empty.
+     */
     public String[] list() throws JukeEmptyTaskListException {
         if (this.taskList.size() == 0) {
             throw new JukeEmptyTaskListException();

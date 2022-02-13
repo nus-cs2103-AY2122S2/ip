@@ -15,12 +15,13 @@ public class Deadline extends Task {
     /**
      * Constructor to initialize a task with a description and a deadline.
      *
-     * @param description
-     * @param time
+     * @param description Description.
+     * @param time Time.
      */
     public Deadline(String description, String time) throws JukeParseException {
-        super(description);
+        super(description, TaskType.DEADLINE);
         this.date = new DateTimeHandler(time);
+        assert getTaskIcon() == TaskType.DEADLINE.getTaskIcon();
     }
 
     /**
@@ -29,17 +30,8 @@ public class Deadline extends Task {
      * @return Deadline.
      */
     public String getTime() {
+        assert date.getDateTime() != null;
         return this.date.getDateTime();
-    }
-
-    /**
-     * Returns the task icon.
-     *
-     * @return Task icon.
-     */
-    @Override
-    public String getTaskIcon() {
-        return TaskType.DEADLINE.getTaskIcon();
     }
 
     /**

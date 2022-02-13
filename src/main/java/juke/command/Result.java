@@ -6,8 +6,16 @@ import juke.exception.JukeException;
  * Abstraction for the result of the execution of a command.
  */
 public abstract class Result {
+    /**
+     * Messages to store.
+     */
     private String[] messages;
 
+    /**
+     * Internal constructor to initialize a result.
+     *
+     * @param messages Messages to store.
+     */
     private Result(String... messages) {
         this.messages = messages;
     }
@@ -73,8 +81,16 @@ public abstract class Result {
      * A command execution with an error.
      */
     public static class Error extends Result {
+        /**
+         * Exception in the error.
+         */
         private Exception exception;
 
+        /**
+         * Constructor to initialize an error result with an exception.
+         *
+         * @param exception Exception.
+         */
         private Error(Exception exception) {
             super(exception.getMessage());
             this.exception = exception;
@@ -96,10 +112,19 @@ public abstract class Result {
      * A result before command execution.
      */
     public static class Empty extends Result {
+        /**
+         * Singleton instance of empty.
+         */
         private static final Result EMPTY_INSTANCE = new Empty();
 
+        /**
+         * Singleton exception of an empty result.
+         */
         private static final JukeException EMPTY_EXCEPTION = new JukeException("Result is empty.");
 
+        /**
+         * Constructor to initialize an empty result.
+         */
         private Empty() {
             super((String[]) null);
         }

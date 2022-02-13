@@ -12,6 +12,9 @@ import juke.command.CommandHandler;
 import juke.exception.JukeInvalidCommandException;
 import juke.ui.Gui;
 
+/**
+ * Main window controller for JavaFX.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -60,6 +63,6 @@ public class MainWindow extends AnchorPane {
      */
     public void addJukeDialog(String text) {
         this.dialogContainer.getChildren().add(
-            DialogBox.getJukeDialog(text, this.jukeImage));
+            DialogBox.getJukeDialog(gui.getResponse(text), this.jukeImage));
     }
 }

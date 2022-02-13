@@ -4,8 +4,16 @@ import juke.exception.JukeEmptyTaskListException;
 import juke.exception.JukeException;
 import juke.exception.JukeInvalidParameterException;
 
+/**
+ * Command to list all the tasks in the task list.
+ */
 public class ListCommand extends Command {
-
+    /**
+     * Checks if the parameters and arguments are valid.
+     * Does not require any arguments.
+     *
+     * @return This command.
+     */
     @Override
     public Command checkParametersAndArguments() {
         for (String param : this.paramArgs.keySet()) {
@@ -21,6 +29,12 @@ public class ListCommand extends Command {
         return this;
     }
 
+    /**
+     * Tries to execute the command, updating the result.
+     * Lists the tasks in the task list.
+     *
+     * @return This command.
+     */
     @Override
     public Command execute() {
         if (this.isSuccessful()) {

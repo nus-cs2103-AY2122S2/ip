@@ -1,5 +1,8 @@
 package juke.exception;
 
+/**
+ * Exception to handle an error in parsing data.
+ */
 public class JukeParseException extends JukeException {
     /**
      * Constructor to initialize exception with a cause of error.

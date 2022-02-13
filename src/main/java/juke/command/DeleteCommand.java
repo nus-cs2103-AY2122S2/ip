@@ -5,44 +5,59 @@ import juke.exception.JukeInvalidTaskIndexException;
 import juke.exception.JukeMissingArgumentException;
 import juke.task.Task;
 
+/**
+ * Command for deleting tasks.
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Checks if the parameters and arguments are valid.
+     * Requires an integer relating to the index of the task to delete.
+     *
+     * @return This command.
+     */
     @Override
     public Command checkParametersAndArguments() {
-        for (String param : this.paramArgs.keySet()) {
-            if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeInvalidParameterException(param));
+        for (String param : paramArgs.keySet()) {
+            if (!isDefaultParameter(param)) {
+                result = Result.error(new JukeInvalidParameterException(param));
                 return this;
             }
         }
-        if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeMissingArgumentException("delete"));
+        if (!hasDefaultArgument()) {
+            result = Result.error(new JukeMissingArgumentException("delete"));
             return this;
         }
         return this;
     }
 
+    /**
+     * Tries to execute the command, updating the result.
+     * Deletes the given task from the task list.
+     *
+     * @return This command.
+     */
     @Override
     public Command execute() {
-        if (this.isSuccessful()) {
+        if (isSuccessful()) {
             return this;
         }
-        this.checkParametersAndArguments();
-        if (this.isErroneous()) {
+        checkParametersAndArguments();
+        if (isErroneous()) {
             return this;
         }
         try {
-            int index = Integer.parseInt(this.getDefaultArgument()) - 1;
+            int index = Integer.parseInt(getDefaultArgument()) - 1;
             if (index < 0 || index >= juke.getTaskList().size()) {
                 this.result = Result.error(new JukeInvalidTaskIndexException());
                 return this;
             }
-            Task task = this.juke.getTaskList().remove(index);
-            this.result = Result.success(String.format("Successfully deleted task: %s.", task.getDescription()));
+            Task task = juke.getTaskList().remove(index);
+            result = Result.success(String.format("Successfully deleted task: %s.", task.getDescription()));
         } catch (NumberFormatException e) {
-            this.result = Result.error(e);
+            result = Result.error(e);
             return this;
         }
-        this.juke.getStorage().saveTasks();
+        juke.getStorage().saveTasks();
         return this;
     }
 }

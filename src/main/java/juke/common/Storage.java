@@ -15,8 +15,13 @@ import juke.task.Task;
 import juke.task.TaskStatus;
 import juke.task.Todo;
 
+/**
+ * Handles file storage including input and output.
+ */
 public class Storage {
-
+    /**
+     * Path name to the data file.
+     */
     private static final String PATH_NAME = "data/juke.txt";
 
     /**
@@ -24,13 +29,24 @@ public class Storage {
      */
     private final Juke juke;
 
-    private File file = new File(PATH_NAME);;
+    /**
+     * File instance of the data file.
+     */
+    private File file = new File(PATH_NAME);
 
+    /**
+     * Constructor that initializes the storage class.
+     *
+     * @param instance Instance of juke.
+     */
     public Storage(Juke instance) {
         this.juke = instance;
         this.initializeFile();
     }
 
+    /**
+     * Initializes the file, making directories and the file if it is not present.
+     */
     private void initializeFile() {
         try {
             if (this.file.getParentFile().mkdirs()) {
@@ -44,6 +60,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks from the data file to the task list.
+     */
     public void loadTasks() {
         ArrayList<String[]> parseArr = this.parse();
         for (String[] args : parseArr) {
@@ -61,6 +80,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks from the task list to the data file.
+     */
     public void saveTasks() {
         ArrayList<String[]> writeArr = new ArrayList<>();
         for (Task task : this.juke.getTaskList()) {
@@ -72,6 +94,11 @@ public class Storage {
         this.write(writeArr);
     }
 
+    /**
+     * Parses the file format into string components.
+     *
+     * @return An array list of string components.
+     */
     public ArrayList<String[]> parse() {
         ArrayList<String[]> array = new ArrayList<>();
         try {
@@ -86,6 +113,13 @@ public class Storage {
         return array;
     }
 
+    /**
+     * Writes data to the file.
+     * Returns true if successful, false otherwise.
+     *
+     * @param array Array of string components to write.
+     * @return Boolean result.
+     */
     public boolean write(ArrayList<String[]> array) {
         try {
             FileWriter out = new FileWriter(file);
@@ -101,6 +135,13 @@ public class Storage {
         return true;
     }
 
+    /**
+     * Decodes a line of string components into a task.
+     *
+     * @param args String components.
+     * @return Task.
+     * @throws JukeException Throws if string component is incorrect.
+     */
     public Task decode(String[] args) throws JukeException {
         Task task = null;
         if (args.length > 2) {
@@ -135,6 +176,12 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Encodes a task into string components.
+     *
+     * @param task Task to encode.
+     * @return String components.
+     */
     public String[] encode(Task task) {
         String[] args = null;
         if (task instanceof Todo) {
