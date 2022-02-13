@@ -13,7 +13,6 @@ import seedu.duke.Duke;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -24,6 +23,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/me.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
 
@@ -36,6 +36,10 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

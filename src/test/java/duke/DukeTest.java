@@ -35,8 +35,8 @@ public class DukeTest {
     @Test
     public void eventTask() {
         Todo t = new Todo("1");
-        assertEquals("[T][ ] 1", t.toString());
-        assertEquals("T\t1\tfalse", t.toFile());
+        assertEquals("[T][0][ ] 1", t.toString());
+        assertEquals("T\t1\tfalse\t0", t.toFile());
     }
 
     @Test
