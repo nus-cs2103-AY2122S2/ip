@@ -23,6 +23,7 @@ public class Duke {
         Storage storage = new Storage();
         TaskList taskList = new TaskList();
         ArrayList<Task> lists = new ArrayList<Task>();
+        boolean isOver = false;
         int num = 0;
 
         storage.loadFromFile(lists);
@@ -79,7 +80,9 @@ public class Duke {
             }
         }
             while (num == 0) ;
+            isOver = true;
             storage.writeToFile(lists);
+            assert isOver;
     }
 }
 
