@@ -15,16 +15,17 @@ including time-sensitive tasks such as deadlines and events.
   * [Find by Keyword](#find-by-keyword)
   * [Sort the List](#sort-the-list)
     * [List of Conditions](#list-of-conditions)
-#Quick Start
+
+# Quick Start
 * Make sure you have Java 11 installed in your computer
 * Download the latest `Wensleydale` release from [here](https://github.com/AAlghrairy/ip/releases)
 * Copy the file to the folder you wish to use as the main folder (Application will create data directories in that file)
 * Double-click the file to start the app
 
-#Example of Usage
+# Example of Usage
 ![Ui.png](/ip/Ui.png)
 
-#Features
+# Features
 
 ### Command List
 
