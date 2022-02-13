@@ -289,3 +289,5 @@ Command:
 <br />
 
 ### Unrecognized Command
+
+Duke will notify the user if an unrecognized command is inputted with a message in regard to the issue.

@@ -44,7 +44,7 @@ public class FileHandler {
         try {
             readParser(list);
         } catch (IOException err) {
-            System.out.println("Path specified incorrectly.");
+            System.out.println("No storage file detected. Will create one.");
         } catch (ArrayIndexOutOfBoundsException err) {
             FileHandler.createFolder();
         }
