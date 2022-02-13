@@ -91,9 +91,6 @@ public class Deadline extends Task {
     @Override
     public String getDate() {
         String d = this.by.split(" ")[0].replace("-", " ");
-//        DateTimeFormatter f = DateTimeFormatter.ofPattern(this.dateFormat, Locale.ENGLISH);
-//        LocalDate temp = LocalDate.parse("Dec 22 2022", f);
-//        System.out.println(temp);
         if (this.isValidDate()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.dateFormat, Locale.ENGLISH);
             this.date = LocalDate.parse(d, formatter);

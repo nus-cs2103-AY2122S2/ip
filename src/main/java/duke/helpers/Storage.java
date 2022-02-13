@@ -102,7 +102,9 @@ public class Storage {
                 String mark = t.getStatusIcon();
                 String desc = t.getDescription();
                 String dateTime = (t.getDate().replace(" ", "-") + " " + t.getTime()).trim();
-                if (command.equals("D") | command.equals("E")) {
+                boolean isDeadline = command.equals("D");
+                boolean isEvent = command.equals("E");
+                if ( isDeadline | isEvent ) {
                     toSave = String.join(separator, command, mark, desc, dateTime);
                 } else {
                     toSave = String.join(separator, command, mark, desc);
