@@ -13,6 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Dialog box controller for JavaFX.
+ */
 public class DialogBox extends HBox {
 
     @FXML

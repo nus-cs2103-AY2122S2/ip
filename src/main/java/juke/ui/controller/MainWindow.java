@@ -12,6 +12,9 @@ import juke.command.CommandHandler;
 import juke.exception.JukeInvalidCommandException;
 import juke.ui.Gui;
 
+/**
+ * Main window controller for JavaFX.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

@@ -1,8 +1,6 @@
 package juke;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import juke.command.CommandHandler;
 import juke.common.Storage;
@@ -26,11 +24,11 @@ public class Juke extends Application {
      * Constructor that initializes the application.
      */
     public Juke() {
-        this.taskList = new TaskList();
-        this.textUi = new TextUi();
-        this.gui = new Gui();
-        this.storage = new Storage(this);
-        this.hasExited = false;
+        taskList = new TaskList();
+        textUi = new TextUi();
+        gui = new Gui();
+        storage = new Storage(this);
+        hasExited = false;
         CommandHandler.registerCommands();
     }
 
@@ -41,17 +39,17 @@ public class Juke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        this.gui.initializeUiComponents(stage);
+        gui.initializeUiComponents(stage);
     }
 
     /**
      * Runs Juke CLI.
      */
     private void run() {
-        this.textUi.greet();
-        this.storage.loadTasks();
-        while (!this.hasExited) {
-            this.textUi.runUiLoop();
+        textUi.greet();
+        storage.loadTasks();
+        while (!hasExited) {
+            textUi.runUiLoop();
         }
     }
 
@@ -59,7 +57,7 @@ public class Juke extends Application {
      * Begins the process of exiting Juke.
      */
     public void exit() {
-        this.hasExited = true;
+        hasExited = true;
     }
 
     /**
@@ -68,7 +66,7 @@ public class Juke extends Application {
      * @return TaskList.
      */
     public TaskList getTaskList() {
-        return this.taskList;
+        return taskList;
     }
 
     /**
@@ -77,7 +75,7 @@ public class Juke extends Application {
      * @return Ui.
      */
     public TextUi getUi() {
-        return this.textUi;
+        return textUi;
     }
 
     /**
@@ -86,7 +84,7 @@ public class Juke extends Application {
      * @return Storage.
      */
     public Storage getStorage() {
-        return this.storage;
+        return storage;
     }
 
     /**

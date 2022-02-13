@@ -36,56 +36,59 @@ public class AddCommand extends Command {
      */
     @Override
     public Command checkParametersAndArguments() {
-        switch (this.type) {
+        switch (type) {
         case EVENT:
-            if (this.hasParameter("at")) {
-                if (!this.hasArgument("at")) {
-                    this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
+            assert type.getCommandName() == TaskType.EVENT.getCommandName();
+            if (hasParameter("at")) {
+                if (!hasArgument("at")) {
+                    result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
                     return this;
                 }
             } else {
-                this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
+                result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
                 return this;
             }
             break;
         case DEADLINE:
-            if (this.hasParameter("by")) {
-                if (!this.hasArgument("by")) {
-                    this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
+            assert type.getCommandName() == TaskType.DEADLINE.getCommandName();
+            if (hasParameter("by")) {
+                if (!hasArgument("by")) {
+                    result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
                     return this;
                 }
             } else {
-                this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
+                result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
                 return this;
             }
             break;
         default:
         }
-        for (String param : this.paramArgs.keySet()) {
-            if (!this.isDefaultParameter(param)) {
-                switch (this.type) {
+        for (String param : paramArgs.keySet()) {
+            if (!isDefaultParameter(param)) {
+                switch (type) {
                 case EVENT:
                     if (!param.equals("at")) {
-                        this.result = Result.error(new JukeInvalidParameterException(param));
+                        result = Result.error(new JukeInvalidParameterException(param));
                         return this;
                     }
                     break;
                 case DEADLINE:
                     if (!param.equals("by")) {
-                        this.result = Result.error(new JukeInvalidParameterException(param));
+                        result = Result.error(new JukeInvalidParameterException(param));
                         return this;
                     }
                     break;
                 default:
-                    this.result = Result.error(new JukeInvalidParameterException(param));
+                    result = Result.error(new JukeInvalidParameterException(param));
                     return this;
                 }
             }
         }
-        if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeMissingArgumentException(this.type.getCommandName()));
+        if (!hasDefaultArgument()) {
+            result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
             return this;
         }
+        assert hasDefaultArgument() == true;
         return this;
     }
 
@@ -97,35 +100,36 @@ public class AddCommand extends Command {
      */
     @Override
     public Command execute() {
-        if (this.isSuccessful()) {
+        if (isSuccessful()) {
             return this;
         }
-        this.checkParametersAndArguments();
-        if (this.isErroneous()) {
+        checkParametersAndArguments();
+        if (isErroneous()) {
             return this;
         }
+        assert result instanceof Result.Empty;
         try {
-            switch (this.type) {
+            switch (type) {
             case TODO:
-                this.juke.getTaskList().add(new Todo(this.getDefaultArgument()));
+                juke.getTaskList().add(new Todo(getDefaultArgument()));
                 break;
             case EVENT:
-                this.juke.getTaskList().add(new Event(this.getDefaultArgument(),
-                        this.getArgument("at")));
+                juke.getTaskList().add(new Event(getDefaultArgument(),
+                        getArgument("at")));
                 break;
             case DEADLINE:
-                this.juke.getTaskList().add(new Deadline(this.getDefaultArgument(),
-                        this.getArgument("by")));
+                juke.getTaskList().add(new Deadline(getDefaultArgument(),
+                        getArgument("by")));
                 break;
             default:
             }
-            this.result = Result.success(String.format("New %s added: %s.",
-                    this.type.getCommandName(), this.getDefaultArgument()));
+            result = Result.success(String.format("New %s added: %s.",
+                    type.getCommandName(), getDefaultArgument()));
         } catch (JukeParseException e) {
-            this.result = Result.error(e);
+            result = Result.error(e);
             return this;
         }
-        this.juke.getStorage().saveTasks();
+        juke.getStorage().saveTasks();
         return this;
     }
 
@@ -135,6 +139,6 @@ public class AddCommand extends Command {
      * @return Task type.
      */
     public TaskType getType() {
-        return this.type;
+        return type;
     }
 }

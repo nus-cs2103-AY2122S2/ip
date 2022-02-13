@@ -19,8 +19,9 @@ public class Event extends Task {
      * @param time Time.
      */
     public Event(String description, String time) throws JukeParseException {
-        super(description);
+        super(description, TaskType.EVENT);
         this.date = new DateTimeHandler(time);
+        assert getTaskIcon() == TaskType.EVENT.getTaskIcon();
     }
 
     /**
@@ -29,17 +30,8 @@ public class Event extends Task {
      * @return Start time.
      */
     public String getTime() {
+        assert this.date.getDateTime() != null;
         return this.date.getDateTime();
-    }
-
-    /**
-     * Returns the task icon.
-     *
-     * @return Task icon.
-     */
-    @Override
-    String getTaskIcon() {
-        return TaskType.EVENT.getTaskIcon();
     }
 
     /**
