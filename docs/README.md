@@ -3,7 +3,7 @@
 *Let Duke help you manage your todos, events, deadlines and notes, so 
 you never have to do it yourself!*
 
-![Duke Image](../docs/Ui.png)
+![Duke Image](https://aditi2313.github.io/ip/Ui.png)
 
 ## Table of Contents
 1. [Application Features](#application-features)
