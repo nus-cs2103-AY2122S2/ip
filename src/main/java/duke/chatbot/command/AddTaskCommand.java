@@ -34,7 +34,7 @@ public class AddTaskCommand extends TaskListCommand {
         ArrayList<String> response = new ArrayList<>();
         response.add("The following new task has been added:");
         response.add(newTask.getDescription());
-        response.add(String.format("You now have %d tasks!", taskList.getSize()));
+        response.add(String.format("You now have %d task(s)!", taskList.getSize()));
         return response;
     }
 
