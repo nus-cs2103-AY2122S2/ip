@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.File;
 import java.io.IOException;
 
 import duke.controller.MainWindow;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("save.txt");
 
     /**
      * Starts the Duke GUI with JavaFX.

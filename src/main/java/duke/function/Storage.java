@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,14 +26,17 @@ public class Storage {
      * The path to the save file
      */
     private String filePath;
+    private String fileName;
 
     /**
      * Initializes a new storage instance
      *
-     * @param filePath The path to the save file
+     * @param fileName The name of the file
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String fileName) {
+        String currentDirectory = System.getProperty("user.dir");
+        this.filePath = Path.of(currentDirectory + File.separator + "data").toAbsolutePath().toString();
+        this.fileName = fileName;
     }
 
     /**
@@ -44,7 +48,7 @@ public class Storage {
      */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<Task>();
-        File file = new File(this.filePath);
+        File file = new File(this.filePath + File.separator + this.fileName);
 
         if (file.exists()) {
             try {
@@ -91,7 +95,9 @@ public class Storage {
      */
     public void save(TaskList tasks) throws DukeException {
         try {
-            FileWriter fileWriter = new FileWriter(this.filePath);
+            File file = new File(this.filePath);
+            file.mkdir();
+            FileWriter fileWriter = new FileWriter(this.filePath + File.separator + this.fileName);
             for (Task task : tasks.getTasks()) {
                 StringBuilder taskString = new StringBuilder();
 
@@ -139,6 +145,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             throw new DukeException("Unable to save tasks *quack*");
         }
     }

@@ -29,8 +29,7 @@ public class Duke {
     /**
      * Returns a Duke application that loads previously saved tasks.
      */
-    public Duke() {
-        String filePath = "src/main/data/save.txt";
+    public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
