@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.TodoException;
+import duke.extension.CheckDuplicate;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.ui.Ui;
@@ -32,12 +33,19 @@ public class TodoCommand extends Command {
         String result = "";
         String[] parts = input.split(" ");
         if (parts.length == 1) {
-            return "☹ OOPS!!! The description of a todo cannot be empty.(please insert again)";
+            return "☹ OOPS!!! The description of a todoTask cannot be empty.(please insert again)";
         }
         String todoDesription = input.substring(5);
-        Task todo = new Todo(todoDesription);
-        taskList.add(todo);
-        result += ui.showTodoTaskAdded(todo, taskList);
+        Task todoTask = new Todo(todoDesription);
+        Task duplicated = CheckDuplicate.checkDuplicate(todoTask, taskList);
+        if (!duplicated.equals(todoTask)) {
+            result += "This task has been added before!\n";
+            result += duplicated.toString();
+            result += "\n please enter another task";
+            return result;
+        }
+        taskList.add(todoTask);
+        result += ui.showTodoTaskAdded(todoTask, taskList);
         storage.saveFile(taskList);
         return result;
     }
