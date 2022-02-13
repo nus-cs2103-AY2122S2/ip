@@ -27,7 +27,7 @@ public class Ui {
         return echo("Hello, I am B.H. How can I help you?");
     }
 
-    public String sayBye() {
+    public static String sayBye() {
         return echo("GoodBye! Thanks for using B.H!");
     }
 
