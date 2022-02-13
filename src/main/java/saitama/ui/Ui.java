@@ -12,7 +12,7 @@ public class Ui {
      * @return The save message.
      */
     public String showExit() {
-        String reply = String.format("OK...\nYour tasks have been saved!\nGoodbye!");
+        String reply = String.format("OK...\nGoodbye!");
         return reply;
     }
 

@@ -1,7 +1,9 @@
 package saitama.parser;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import saitama.commands.AddCommand;
@@ -13,6 +15,7 @@ import saitama.commands.ListCommand;
 import saitama.commands.MarkCommand;
 import saitama.commands.UnmarkCommand;
 import saitama.exceptions.EmptyDescriptionException;
+import saitama.exceptions.FileCorruptException;
 import saitama.exceptions.InvalidCommandException;
 import saitama.exceptions.InvalidDateTimeException;
 import saitama.exceptions.InvalidFormatException;
@@ -29,6 +32,18 @@ import saitama.tasks.ToDo;
  * Interprets the user input.
  */
 public class Parser {
+
+    public static final String EMPTY_EVENT_DESCRIPTION_MESSAGE = "The description of the event task cannot be empty!";
+    public static final String EMPTY_DEADLINE_DESCRIPTION_MESSAGE = "The description of the deadline "
+            + "task cannot be empty!";
+    public static final String INVALID_EVENT_FORMAT_MESSAGE = "You need to specify event name and event "
+            + "location!\nFormat: event <task name> /at <location>";
+    public static final String INVALID_DEADLINE_FORMAT_MESSAGE = "You need to specify the task name and deadline!\n"
+            + "Format: deadline <task name> /by <dd/mm/yyyy hh:mm>";
+    public static final String MISSING_LOCATION_MESSAGE = "Your event location cannot be empty!";
+    public static final String INVALID_DATE_FORMAT_MESSAGE = "Please enter a valid deadline format! "
+            + "<dd/mm/yyyy hh:mm>";
+
     /**
      * Returns a Command object corresponding to the input given by the user.
      *
@@ -132,7 +147,7 @@ public class Parser {
         if (splitCommand.length < 2) {
             throw new MissingQueryException();
         }
-        String query = splitCommand[1];
+        String query = splitCommand[1].toUpperCase();
         return new FindCommand(query);
     }
 
@@ -151,8 +166,8 @@ public class Parser {
         if (splitCommand.length < 2 || splitCommand[1].trim().equals("")) {
             throw new EmptyDescriptionException(String.format("The description of %s cannot be empty!", taskType));
         }
-        String taskArguments = splitCommand[1];
 
+        String taskArguments = splitCommand[1];
         RecurFrequency recurFrequency = getRecurFrequency(tags);
 
         assert taskType.equals("TODO") || taskType.equals("DEADLINE") || taskType.equals("EVENT")
@@ -187,18 +202,17 @@ public class Parser {
             throws InvalidFormatException, EmptyDescriptionException {
         String[] taskArgumentsList = taskArguments.split(" /at ", 2);
         if (taskArgumentsList.length < 2) {
-            throw new InvalidFormatException("You need to specify event name and event location!\n"
-                    + "Format: event <task name> /at <location>");
+            throw new InvalidFormatException(INVALID_EVENT_FORMAT_MESSAGE);
         }
 
         String taskDescription = taskArgumentsList[0];
         if (taskDescription.trim().equals("")) {
-            throw new EmptyDescriptionException("The description of the event task cannot be empty!");
+            throw new EmptyDescriptionException(EMPTY_EVENT_DESCRIPTION_MESSAGE);
         }
 
         String location = taskArgumentsList[1];
         if (location.trim().equals("")) {
-            throw new InvalidFormatException("Your event location cannot be empty!");
+            throw new InvalidFormatException(MISSING_LOCATION_MESSAGE);
         }
 
         Task newTask = new Event(taskDescription, location, recurFrequency);
@@ -220,13 +234,12 @@ public class Parser {
             throws InvalidFormatException, EmptyDescriptionException, InvalidDateTimeException {
         String[] taskArgumentsList = taskArguments.split(" /by ", 2);
         if (taskArgumentsList.length < 2) {
-            throw new InvalidFormatException("You need to specify "
-                    + "the task name and deadline!\nFormat: deadline <task name> /by <dd/mm/yyyy hh:mm>");
+            throw new InvalidFormatException(INVALID_DEADLINE_FORMAT_MESSAGE);
         }
 
         String taskDescription = taskArgumentsList[0];
         if (taskDescription.trim().equals("")) {
-            throw new EmptyDescriptionException("The description of the deadline task cannot be empty!");
+            throw new EmptyDescriptionException(EMPTY_DEADLINE_DESCRIPTION_MESSAGE);
         }
 
         LocalDateTime deadline = processDateTime(taskArgumentsList[1]);
@@ -319,7 +332,7 @@ public class Parser {
     public static LocalDateTime processDateTime(String by) throws InvalidFormatException, InvalidDateTimeException {
         String[] dateTime = by.split(" ", 2);
         if (dateTime.length < 2) {
-            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+            throw new InvalidFormatException(INVALID_DATE_FORMAT_MESSAGE);
         }
 
         String date = dateTime[0];
@@ -328,7 +341,7 @@ public class Parser {
         String[] splitTime = time.split(":");
 
         if (splitDate.length < 3 || splitTime.length < 2) {
-            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+            throw new InvalidFormatException(INVALID_DATE_FORMAT_MESSAGE);
         }
 
         try {
@@ -340,9 +353,24 @@ public class Parser {
             LocalDateTime deadline = LocalDateTime.of(year, month, day, hour, minute);
             return deadline;
         } catch (NumberFormatException e) {
-            throw new InvalidFormatException("Please enter a valid deadline format! <dd/mm/yyyy hh:mm>");
+            throw new InvalidFormatException(INVALID_DATE_FORMAT_MESSAGE);
         } catch (DateTimeException e) {
             throw new InvalidDateTimeException();
+        }
+    }
+
+    /**
+     * Returns the LocalDate given a string in DD-MM-YYYY format.
+     *
+     * @param date The date to be processed in DD-MM-YYYY format.
+     * @return The LocalDate of the date.
+     * @throws FileCorruptException if the date is invalid.
+     */
+    public static LocalDate processDate(String date) throws FileCorruptException {
+        try {
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new FileCorruptException();
         }
     }
 }

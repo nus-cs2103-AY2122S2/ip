@@ -9,6 +9,11 @@ import java.util.HashMap;
 public enum RecurFrequency implements Tag {
     WEEKLY("--rw"), BIWEEKLY("--rb"), DAILY("--rd"), MONTHLY("--rm");
 
+    public static final String DAILY_LABEL = "(Daily)";
+    public static final String WEEKLY_LABEL = "(Weekly)";
+    public static final String BIWEEKLY_LABEL = "(Biweekly)";
+    public static final String MONTHLY_LABEL = "(Monthly)";
+    public static final String UNKNOWN_LABEL = "??";
     private static HashMap<String, RecurFrequency> tagMap = new HashMap<>();
     private String tag;
 
@@ -20,10 +25,10 @@ public enum RecurFrequency implements Tag {
     }
 
     /**
-     * Gets the RecursiveTag corresponding to the given tag, if it exists. Otherwise, returns null.
+     * Gets the RecursiveTag corresponding to the given String tag, if it exists. Otherwise, returns null.
      *
      * @param tag
-     * @return The RecursiveTag corresponding to the given tag, if it exists. Otherwise, returns null.
+     * @return The RecursiveTag corresponding to the given String tag, if it exists. Otherwise, returns null.
      */
     public static RecurFrequency get(String tag) {
         if (tagMap.containsKey(tag)) {
@@ -33,6 +38,11 @@ public enum RecurFrequency implements Tag {
         }
     }
 
+    /**
+     * Returns the string label of the RecurFrequency.
+     *
+     * @return the string label of the RecurFrequency.
+     */
     @Override
     public String toString() {
         return this.tag;
@@ -46,15 +56,15 @@ public enum RecurFrequency implements Tag {
     public String getLabel() {
         switch (this) {
         case DAILY:
-            return "(Daily)";
+            return DAILY_LABEL;
         case WEEKLY:
-            return "(Weekly)";
+            return WEEKLY_LABEL;
         case BIWEEKLY:
-            return "(Biweekly)";
+            return BIWEEKLY_LABEL;
         case MONTHLY:
-            return "(Monthly)";
+            return MONTHLY_LABEL;
         default:
-            return "??";
+            return UNKNOWN_LABEL;
         }
     }
 }

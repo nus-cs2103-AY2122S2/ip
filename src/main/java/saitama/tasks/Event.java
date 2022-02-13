@@ -17,7 +17,7 @@ public class Event extends Task {
      *
      * @param description The details of the event task.
      * @param at The event location.
-     * @param recurFrequency The frequency recurrence of the event task.
+     * @param recurFrequency The frequency of recurrence of the event task.
      */
     public Event(String description, String at, RecurFrequency recurFrequency) {
         super(description, recurFrequency);
@@ -30,7 +30,7 @@ public class Event extends Task {
      * @param description The description of the event task.
      * @param at The event location.
      * @param isDone Whether the task is done.
-     * @param recurFrequency The frequency recurrence of the event task.
+     * @param recurFrequency The frequency of recurrence of the event task.
      * @param lastResetDate The last reset date of the task.
      */
     public Event(String description, String at, boolean isDone,

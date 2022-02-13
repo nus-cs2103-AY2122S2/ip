@@ -12,6 +12,11 @@ import saitama.ui.Ui;
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Initialises the AddCommand.
+     *
+     * @param task The Task to add.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
@@ -19,7 +24,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(task);
-        assert taskList.getTask(taskList.numOfTasks()).equals(task) : "Add command failed to add task!";
+        storage.save(taskList.toArrayList());
         return ui.showAddTask(task, taskList);
     }
 

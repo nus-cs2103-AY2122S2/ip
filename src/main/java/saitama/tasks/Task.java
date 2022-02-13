@@ -55,7 +55,7 @@ public abstract class Task {
     protected String getStatusIcon() {
         String tick = "\u2713";
         String cross = "\u2718";
-        return (isDone ? tick : cross); // mark done task with X
+        return (isDone ? tick : cross);
     }
 
     /**

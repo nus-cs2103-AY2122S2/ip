@@ -26,7 +26,7 @@ public class Deadline extends Task {
      *
      * @param description The details of the deadline task.
      * @param by The deadline of the task.
-     * @param recurFrequency The frequency of recurrence the deadline task.
+     * @param recurFrequency The frequency of recurrence of the deadline task.
      */
     public Deadline(String description, LocalDateTime by, RecurFrequency recurFrequency) {
         super(description, recurFrequency);
@@ -39,7 +39,7 @@ public class Deadline extends Task {
      * @param description The details of the deadline task.
      * @param by The deadline of the task.
      * @param isDone Whether the task is done.
-     * @param recurFrequency The frequency recurrence of the deadline task.
+     * @param recurFrequency The frequency of recurrence of the deadline task.
      * @param lastResetDate The last reset date of the task.
      */
     public Deadline(String description, LocalDateTime by, boolean isDone,
@@ -90,7 +90,7 @@ public class Deadline extends Task {
      * Returns the new date of the deadline given the old deadline.
      *
      * @param by The old deadline.
-     * @return The date of the new deadline.
+     * @return The LocalDate of the new deadline.
      */
     private LocalDate getNewDeadlineDate(LocalDateTime by) {
         LocalDate today = LocalDate.now();

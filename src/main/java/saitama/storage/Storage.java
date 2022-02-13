@@ -24,6 +24,7 @@ import saitama.tasks.ToDo;
  */
 public class Storage {
 
+    public static final String TASK_CANNOT_SAVE_MESSAGE = "Task list cannot be saved!";
     private String filePath;
 
     /**
@@ -60,7 +61,7 @@ public class Storage {
                 String taskType = data[0];
                 boolean isDone = getIsDone(data[1]);
                 RecurFrequency recurFrequency = RecurFrequency.get(data[2]);
-                LocalDate lastResetDate = LocalDate.parse(data[3]);
+                LocalDate lastResetDate = Parser.processDate(data[3]);
                 String taskArguments = data[4];
 
                 addTaskToList(taskList, taskType, isDone, recurFrequency, lastResetDate, taskArguments);
@@ -200,7 +201,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Task list cannot be saved!");
+            System.out.println(TASK_CANNOT_SAVE_MESSAGE);
         }
     }
 }

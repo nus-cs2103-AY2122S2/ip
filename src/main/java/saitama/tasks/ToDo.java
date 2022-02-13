@@ -14,7 +14,7 @@ public class ToDo extends Task {
      * Initialises an undone to do task.
      *
      * @param description The details of the to do task.
-     * @param recurFrequency The frequency recurrence of the event task.
+     * @param recurFrequency The frequency of recurrence of the event task.
      */
     public ToDo(String description, RecurFrequency recurFrequency) {
         super(description, recurFrequency);
@@ -25,7 +25,7 @@ public class ToDo extends Task {
      *
      * @param description The details of the to do task.
      * @param isDone Whether the task is done.
-     * @param recurFrequency The frequency recurrence of the event task.
+     * @param recurFrequency The frequency of recurrence of the event task.
      * @param lastResetDate The last reset date of the task.
      */
     public ToDo(String description, boolean isDone, RecurFrequency recurFrequency, LocalDate lastResetDate) {

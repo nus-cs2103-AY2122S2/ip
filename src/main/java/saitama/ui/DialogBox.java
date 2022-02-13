@@ -53,10 +53,24 @@ public class DialogBox extends HBox {
         dialog.setFont(Font.font("Calibri Light", 15));
     }
 
+    /**
+     * Returns a DialogBox with the given text and image.
+     *
+     * @param text The text in the dialog box.
+     * @param img The profile picture of the speaker.
+     * @return A DialogBox with the given text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a flipped DialogBox with the given text and image.
+     *
+     * @param text Saitama's reply.
+     * @param img Saitama's picture.
+     * @return A flipped DialogBox with the given text and image.
+     */
     public static DialogBox getSaitamaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

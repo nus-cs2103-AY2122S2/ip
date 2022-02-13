@@ -84,7 +84,7 @@ public class TaskList {
     public List<Task> search(String query) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : taskList) {
-            if (task.toString().contains(query)) {
+            if (task.toString().toUpperCase().contains(query)) {
                 matchingTasks.add(task);
             }
         }
