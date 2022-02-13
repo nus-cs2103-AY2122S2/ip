@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -59,6 +60,12 @@ public class DialogBox extends HBox {
                 DIALOG_STYLE_PREFIX, color));
     }
 
+    public void setErrorTextColor() {
+        dialog.setStyle(String.format("%s -fx-background-color: %s;",
+                DIALOG_STYLE_PREFIX, "ORANGE"));
+        dialog.setTextFill(Color.WHITE);
+    }
+
     public static DialogBox getUserDialog(String l, Image iv) {
         DialogBox db = new DialogBox(l, iv);
         db.setDialogBackgroundColour(USER_DIALOG_COLOUR);
@@ -69,6 +76,12 @@ public class DialogBox extends HBox {
         DialogBox db = new DialogBox(l, iv);
         db.flip();
         db.setDialogBackgroundColour(DUKE_DIALOG_COLOUR);
+        return db;
+    }
+
+    public static DialogBox getDukeErrorDialog(String l, Image iv) {
+        DialogBox db = getDukeDialog(l, iv);
+        db.setErrorTextColor();
         return db;
     }
 }

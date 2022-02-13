@@ -7,6 +7,7 @@ package duke.command;
 public class CommandResult {
     private String message = null;
     private boolean isModified = false;
+    private boolean isError = false;
 
     public CommandResult() {
 
@@ -27,6 +28,18 @@ public class CommandResult {
         this.isModified = isModified;
     }
 
+    /**
+     * Alternative Constructor for an error message.
+     * @param message Resulting message after executing the command.
+     * @param isModified Boolean to show if the task list has been modified or not.
+     * @param isError Boolean to show if the result is an error.
+     */
+    public CommandResult(String message, boolean isModified, boolean isError) {
+        this.message = message;
+        this.isModified = isModified;
+        this.isError = isError;
+    }
+
     @Override
     public String toString() {
         if (message == null) {
@@ -36,6 +49,10 @@ public class CommandResult {
     }
 
     public boolean isModified() {
-        return this.isModified;
+        return isModified;
+    }
+
+    public boolean isError() {
+        return isError;
     }
 }

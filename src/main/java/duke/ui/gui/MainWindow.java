@@ -3,6 +3,7 @@ package duke.ui.gui;
 import java.util.Objects;
 
 import duke.Duke;
+import duke.command.CommandResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -58,25 +59,41 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = submitInput(input);
+        if (input.isEmpty()) {
+            userInput.clear();
+            return;
+        }
+        CommandResult response = submitInput(input);
+        String message = response.toString();
+        boolean isError = response.isError();
         addUserDialog(input);
-        addDukeDialog(response);
+        if (isError) {
+            addDukeErrorDialog(message);
+        } else {
+            addDukeDialog(message);
+        }
         userInput.clear();
     }
 
-    private String submitInput(String input) {
+    private CommandResult submitInput(String input) {
         return duke.getResponse(input);
     }
 
     private void addUserDialog(String text) {
-        dialogContainer.getChildren().addAll(
+        dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(text, userImage)
         );
     }
 
     private void addDukeDialog(String text) {
-        dialogContainer.getChildren().addAll(
+        dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(text, dukeImage)
+        );
+    }
+
+    private void addDukeErrorDialog(String text) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeErrorDialog(text, dukeImage)
         );
     }
 }

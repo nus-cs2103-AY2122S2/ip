@@ -35,6 +35,18 @@ public class Duke {
     }
 
     /**
+     * The main entry point to the application.
+     * Creates an instance of Duke and starts the application.
+     */
+    public static void main(String[] args) {
+        if (args.length > 0 && args[0].equals("--cmd")) { // Command Line mode
+            new Duke().run_cmd();
+        } else { // GUI mode
+            Application.launch(duke.ui.GraphicsUi.class, args);
+        }
+    }
+
+    /**
      * Returns a welcome message which differs depending on the task list file.
      *
      * @return A welcome message.
@@ -47,19 +59,7 @@ public class Duke {
         return WELCOME_MESSAGE + "Task List file not found... starting fresh.";
     }
 
-    /**
-     * The main entry point to the application.
-     * Creates an instance of Duke and starts the application.
-     */
-    public static void main(String[] args) {
-        if (args.length > 0 && args[0].equals("--cmd")) { // Command Line mode
-            new Duke().run_cmd();
-        } else { // GUI mode
-            Application.launch(duke.ui.GraphicsUi.class, args);
-        }
-    }
-
-    public String getResponse(String string) {
+    public CommandResult getResponse(String string) {
         Command parsedCommand = parser.parseCommand(string);
         CommandResult runCommand = parsedCommand.runCommand();
 
@@ -72,7 +72,7 @@ public class Duke {
             fh.exportTasks(taskList.getList());
         }
 
-        return runCommand.toString();
+        return runCommand;
     }
 
     /**
