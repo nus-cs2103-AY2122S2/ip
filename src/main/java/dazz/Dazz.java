@@ -55,9 +55,6 @@ public class Dazz {
         try {
             Command responseCommand = Parser.parse(input);
             String response = responseCommand.execute(taskList, ui, storage);
-            if (responseCommand.isExit()) {
-                response = response + "\n Click on 'X' to close the window";
-            }
             return response;
         } catch (DazzException e) {
             return e.getMessage();

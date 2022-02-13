@@ -26,13 +26,16 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dazzImage = new Image(this.getClass().getResourceAsStream("/images/DaDazz.png"));
 
+    /**
+     * Initializes Dazz window that has a dialog box with Dazz's greeting
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDazzDialog("Hello from Dazz! What can I do for you?\n\n" +
-                        "If you're a new user, please type 'help' to see\n" +
-                        "the list of commands available.", dazzImage)
+                DialogBox.getDazzDialog("Hello from Dazz! What can I do for you?\n\n"
+                        + "If you're a new user, please type 'help' to see\n"
+                        + "the list of commands available.", dazzImage)
         );
     }
 

@@ -1,5 +1,6 @@
 package dazz;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class CommandMapper {
@@ -51,12 +52,20 @@ public class CommandMapper {
      */
     public static boolean putAlias(String newAlias, String command) {
         boolean hasAlias = commandDictionary.containsKey(newAlias);
-        if (hasAlias) {
+        boolean isValid = isValidCommand(command);
+        if (hasAlias || !isValid) {
             return false;
         } else {
             commandDictionary.put(newAlias, command);
             return true;
         }
+    }
+
+    private static boolean isValidCommand(String command) {
+        String[] commands = new String[]{
+            ALIAS, BYE, DEADLINE, DELETE, EVENT,
+            FIND, HELP, LIST, MARK, UNMARK, TODO};
+        return Arrays.asList(commands).contains(command);
     }
 
 }

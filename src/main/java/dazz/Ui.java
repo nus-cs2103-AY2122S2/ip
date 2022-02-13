@@ -63,7 +63,8 @@ public class Ui {
      * @return Exit message.
      */
     public String messageForExit() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!\n"
+                + "Click on 'X' to close the window.";
     }
 
     /**
@@ -164,8 +165,8 @@ public class Ui {
      * @return The application guide.
      */
     public String messageForHelp() {
-        String helpMessage = "Here are the list of commands available:\n" +
-                "Note that items inside <> are to be specified by you!\n\n";
+        String helpMessage = "Here are the list of commands available:\n"
+                + "Note that items inside <> are to be specified by you!\n\n";
         String instructions = Stream.of(Instruction.values())
                 .map(Instruction::get)
                 .collect(Collectors.joining("\n\n"));
