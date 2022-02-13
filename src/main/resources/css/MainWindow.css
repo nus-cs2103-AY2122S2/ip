@@ -1,7 +1,23 @@
+#dialogContainer {
+    -fx-background-color: #2C3531;
+}
+
+#userInput {
+    -fx-background-color: #2C3531;
+    -fx-text-fill: #D1E8E2;
+}
+
+#sendButton {
+    -fx-background-color: #116466
+}
+
+#scrollPane {
+    -fx-background-color: #2C3531
+}
+
 .scroll-bar:horizontal .track,
-.scroll-bar:vertical .track{
+.scroll-bar:vertical .track {
     -fx-background-color :#2C3531;
-    -fx-border-color :transparent;
     -fx-background-radius : 0.0em;
     -fx-border-radius :2.0em;
 }

@@ -33,8 +33,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        scrollPane.getStylesheets().add(this.getClass().getResource("/css/MainWindow.css").toExternalForm());
-        scrollPane.setStyle("-fx-background-color: #2C3531");
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(Ui.showUiForStart(), dukeImage)
         );
