@@ -1,4 +1,4 @@
-##User Guide for Your Interactive Todo List
+## User Guide for Your Interactive Todo List
 
 Welcome to the user guide for Your Interactive Todo List!
 
