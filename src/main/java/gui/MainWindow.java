@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
         DialogBox botDialogBox = DialogBox.getDukeDialog(response, dukeImage);
         dialogContainer.getChildren().addAll(userDialogBox, botDialogBox);
         userInput.clear();
-        if (duke.HasExited()) {
+        if (duke.hasExited()) {
             Platform.exit();
         }
     }

@@ -91,6 +91,12 @@ public class Ui {
         return "There are no tasks in your task list to unmark";
     }
 
+    /**
+     * Returns a list displaying all tasks.
+     *
+     * @param tm The TaskManager containing the tasks.
+     * @return A string listing the tasks in taskManager.
+     */
     public String showList(TaskManager tm) {
         int i = 1;
         String s = doubleLine + "\n";
@@ -107,6 +113,13 @@ public class Ui {
         s += doubleLine;
         return s;
     }
+
+    /**
+     * Returns a list displaying the results of tasks that was found.
+     *
+     * @param tm The TaskManager containing the results of the find command.
+     * @return A string listing the find results.
+     */
     public String showFindResults(TaskManager tm) {
         int i = 1;
         String s = doubleLine + "\n";
@@ -125,11 +138,26 @@ public class Ui {
     }
 
     // Add/Delete Messages
+    /**
+     * Returns a string showing the task that was added.
+     *
+     * @param t The task that was added.
+     * @param numberOfTasks The number of tasks left.
+     * @return A string describing the added task.
+     */
     public String showAddedTask(Task t, int numberOfTasks) {
         return String.format("Got it. I've added this task:\n"
                 + "\t%s\n"
                 + "Now you have %d tasks in the list.", t.toString(), numberOfTasks);
     }
+
+    /**
+     * Returns a string showing the task that was deleted.
+     *
+     * @param t The task that was deleted.
+     * @param numberOfTasks The number of tasks left.
+     * @return A string describing the deleted task.
+     */
     public String showDeletedTask(Task t, int numberOfTasks) {
         return String.format("Noted. I have removed this task:\n"
                 + "\t%s\n"

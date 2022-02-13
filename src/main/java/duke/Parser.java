@@ -4,7 +4,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteTaskCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkDoneCommand;
+import duke.commands.MarkUndoneCommand;
+import duke.commands.SortByDateCommand;
+import duke.commands.SortByNameCommand;
+import duke.commands.UpdateCommand;
+import duke.commands.UpdateDateCommand;
+import duke.commands.UpdateNameCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -208,11 +220,25 @@ public class Parser {
         throw new DukeException("Invalid Command!");
     }
 
-    public static AddCommand newAddCommand(String input) throws DukeException{
+    /**
+     * Parses the user input into an add command.
+     *
+     * @param input The user input specifying the task to add.
+     * @return The command to add the task specified by the user.
+     * @throws DukeException If the user input fails to parse to a Task.
+     */
+    public static AddCommand newAddCommand(String input) throws DukeException {
         Task taskToAdd = Parser.parseToTask(input);
         return new AddCommand(taskToAdd);
     }
 
+    /**
+     * Parses the user input into a delete command.
+     *
+     * @param index The user input to parse.
+     * @return The command to delete the task specified with an index.
+     * @throws DukeException If an invalid index is entered.
+     */
     public static DeleteTaskCommand newDeleteTaskCommand(String index) throws DukeException {
         try {
             int indexToDelete = Integer.parseInt(index.strip());
@@ -222,29 +248,56 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input into a find command.
+     *
+     * @param keyword The keyword to search the tasks for.
+     * @return The command to find tasks containing the keyword.
+     */
     public static FindCommand newFindCommand(String keyword) {
         keyword = keyword.strip();
         return new FindCommand(keyword);
     }
 
-    public static MarkDoneCommand newMarkDoneCommand(String index) throws DukeException {
+    /**
+     * Parses the user input into a mark done command.
+     *
+     * @param input The user input to parse.
+     * @return The command to mark the task as done.
+     * @throws DukeException If an invalid index is entered.
+     */
+    public static MarkDoneCommand newMarkDoneCommand(String input) throws DukeException {
         try {
-            int indexToMark = Integer.parseInt(index.strip()) - 1;
+            int indexToMark = Integer.parseInt(input.strip()) - 1;
             return new MarkDoneCommand(indexToMark);
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number entered! Please enter an integer");
         }
     }
 
-    public static MarkUndoneCommand newMarkUndoneCommand(String index) throws DukeException {
+    /**
+     * Parses the user input into a mark undone command.
+     *
+     * @param input The user input to parse.
+     * @return The command to mark the task as undone.
+     * @throws DukeException If an invalid index is entered.
+     */
+    public static MarkUndoneCommand newMarkUndoneCommand(String input) throws DukeException {
         try {
-            int indexToMark = Integer.parseInt(index.strip()) - 1;
+            int indexToMark = Integer.parseInt(input.strip()) - 1;
             return new MarkUndoneCommand(indexToMark);
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number entered! Please enter an integer");
         }
     }
 
+    /**
+     * Parses the user input into an update command.
+     *
+     * @param input The user input to parse.
+     * @return The command to update the name or date of the task.
+     * @throws DukeException If an invalid index is entered.
+     */
     public static UpdateCommand newUpdateCommand(String input) throws DukeException {
 
         try {
@@ -252,7 +305,7 @@ public class Parser {
 
             if (input.contains("/name")) {
                 String newName = input.split("/name")[1];
-                return new UpdateNameCommand(indexToUpdate,newName);
+                return new UpdateNameCommand(indexToUpdate, newName);
             }
 
             if (input.contains("/date")) {
@@ -260,9 +313,9 @@ public class Parser {
                 LocalDateTime date = Parser.parseDateTime(inputDate);
 
                 if (date != null) {
-                    return new UpdateDateCommand(indexToUpdate,date);
+                    return new UpdateDateCommand(indexToUpdate, date);
                 } else {
-                    return new UpdateDateCommand(indexToUpdate,inputDate);
+                    return new UpdateDateCommand(indexToUpdate, inputDate);
                 }
             }
 

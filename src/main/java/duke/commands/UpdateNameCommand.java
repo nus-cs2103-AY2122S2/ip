@@ -3,7 +3,6 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
-import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 /**
@@ -30,10 +29,9 @@ public class UpdateNameCommand extends UpdateCommand {
      * @param storage The storage to save the TaskManager to if required.
      * @param ui The Ui to display the output of the command to.
      * @param taskManager The TaskManager containing the tasks.
-     * @return
-     * @throws DukeException
+     * @return The output of the command.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
 
         if (newName.strip().equals("")) {
             return ui.showNoName();
