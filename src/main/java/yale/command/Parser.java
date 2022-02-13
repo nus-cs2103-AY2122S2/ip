@@ -34,6 +34,8 @@ public class Parser {
             return list.deadlineFeature(command, list);
         } else if (command.contains("event")) {
             return list.eventFeature(command, list);
+        } else if (command.contains("between")) {
+            return list.doWithinPeriodFeature(command, list);
         } else if (command.contains("find")) {
             return list.findFeature(command, list);
         } else {
