@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     /**
-     * String to represent the date and time of deadline.
+     * String to represent the date of the deadline.
      */
     protected LocalDate by;
 

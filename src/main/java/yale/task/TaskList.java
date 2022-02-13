@@ -84,9 +84,15 @@ public class TaskList {
                 String at = tokens[3];
                 Event newEvent = new Event(name, isMarked, at);
                 list.add(newEvent);
+            } else if (tokens[0].equals("DW")) {
+                String startPeriod = tokens[3];
+                String endPeriod = tokens[4];
+                DoWithinPeriod newDoWithinPeriod = new DoWithinPeriod(name, isMarked, startPeriod, endPeriod);
+                list.add(newDoWithinPeriod);
             }
         }
     }
+
     /**
      * Getter method to retrieve Item
      * from specific position in the list.
@@ -249,6 +255,25 @@ public class TaskList {
                     + "Now you have " + list.getSize() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
             return "Error: The description of an event cannot be empty.";
+        } catch (DateTimeException e) {
+            return "Error: Invalid date entered.";
+        }
+    }
+
+    public String doWithinPeriodFeature(String command, TaskList list) {
+        try {
+            String removeEvent = command.split("period ", 2)[1]; // Remove period word
+            String task = removeEvent.split(" /between ", 2)[0]; // Retrieve task name
+            String dates = removeEvent.split(" /between ", 2)[1]; // Retrieve date
+            String startPeriod = dates.split(" and ", 2)[0];
+            String endPeriod = dates.split(" and ", 2)[1];
+            DoWithinPeriod newDoWithinPeriod = new DoWithinPeriod(task, false, startPeriod, endPeriod);
+            list.addToList(newDoWithinPeriod);
+            return "Got it! I've added this task:\n    "
+                    + newDoWithinPeriod.toString() + "\n"
+                    + "Now you have " + list.getSize() + " tasks in the list.";
+        } catch (IndexOutOfBoundsException e) {
+            return "Error: The description of a DoWithinPeriod cannot be empty.";
         } catch (DateTimeException e) {
             return "Error: Invalid date entered.";
         }
