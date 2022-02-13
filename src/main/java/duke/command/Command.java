@@ -5,7 +5,7 @@ import java.io.IOException;
 import duke.dukeexceptions.DukeException;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
+import duke.ui.Ui;
 
 /**
  * An abstract class Command
@@ -18,6 +18,10 @@ public abstract class Command {
         this.input = input;
     }
 
+    public Command() {
+
+    }
+
     /**
      * Execute the command according to the user's input
      *
@@ -25,7 +29,7 @@ public abstract class Command {
      * @param ui ui class that helps to print suitable command
      * @param storage storage that manage saving and loading data
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
 
     /**
      * Check if the command is ByeCommand

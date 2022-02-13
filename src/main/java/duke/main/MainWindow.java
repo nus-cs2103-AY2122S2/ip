@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -47,9 +50,8 @@ public class MainWindow extends AnchorPane {
         String response = null;
         try {
             response = duke.getResponse(input);
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             System.out.println(e);
-//            e.printStackTrace();
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import duke.dukeexceptions.DukeException;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
+import duke.ui.Ui;
 
 public class FindCommand extends Command {
 
@@ -17,13 +17,14 @@ public class FindCommand extends Command {
 
     /**
      * Find the keyword from the user's input and any matched task will be listed
-     *
-     * @param taskList currentTaskList
+     *  @param taskList currentTaskList
      * @param ui       ui class that helps to print suitable command
      * @param storage  storage that manage saving and loading data
+     * @return a response to user input
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        String result = "";
         String keywords = input.substring(5);
         ArrayList<String> searchedTaskList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
@@ -31,7 +32,7 @@ public class FindCommand extends Command {
                 searchedTaskList.add((i + 1) + "." + taskList.get(i).toString());
             }
         }
-        ui.showFoundTask(searchedTaskList);
-
+        result += ui.showFoundTask(searchedTaskList);
+        return result;
     }
 }

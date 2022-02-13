@@ -5,7 +5,7 @@ import java.io.IOException;
 import duke.dukeexceptions.DukeException;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
+import duke.ui.Ui;
 
 
 
@@ -21,11 +21,13 @@ public class ByeCommand extends Command {
      * @param storage storage that manage saving and loading data
      * @throws DukeException an error message
      * @throws IOException error saving to the file
+     * @return a response to user input
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
-        ui.bye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        String result = ui.bye();
         storage.saveFile(taskList);
+        return result;
     }
 
     /**
