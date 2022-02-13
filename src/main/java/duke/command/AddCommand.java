@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import duke.Storage;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -39,8 +39,8 @@ public class AddCommand implements Command {
      * @throws IOException If directory or file cannot be found.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
-        boolean isAddCommand = DukeCommand.getTaskTypeMap().get(taskType).equals("ADD_COMMAND");
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws BingChillingException {
+        boolean isAddCommand = BingChillingCommand.getTaskTypeMap().get(taskType).equals("ADD_COMMAND");
         assert isAddCommand : taskType;
         String[] taskInformation = fullCommand.split(taskType + " ", 2);
         switch (taskType) {

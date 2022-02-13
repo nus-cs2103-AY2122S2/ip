@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.task.Task;
 
 /**
@@ -32,14 +32,14 @@ public class Storage {
     /**
      * Creates a folder in a directory and then a file in it.
      *
-     * @throws DukeException If directory cannot be found.
+     * @throws BingChillingException If directory cannot be found.
      */
-    public void createNewFolderAndTextFile() throws DukeException {
+    public void createNewFolderAndTextFile() throws BingChillingException {
         try {
             Files.createDirectories(dirPath);
             Files.createFile(filePath);
         } catch (IOException error) {
-            throw new DukeException("File at " + error.getMessage()
+            throw new BingChillingException("File at " + error.getMessage()
                     + " could not be created");
         }
     }
@@ -50,13 +50,13 @@ public class Storage {
      * @param textToAdd Information of the task to be added to the file.
      * @throws IOException If the directory or file cannot be found.
      */
-    public void appendToFile(String textToAdd) throws DukeException {
+    public void appendToFile(String textToAdd) throws BingChillingException {
         try {
             FileWriter fw = new FileWriter(filePath.toString(), true);
             fw.write(textToAdd);
             fw.close();
         } catch (IOException error) {
-            throw new DukeException("File at " + error.getMessage()
+            throw new BingChillingException("File at " + error.getMessage()
                     + " could not be appended");
         }
     }
@@ -69,13 +69,13 @@ public class Storage {
      * @param data       The content of the task in the file.
      * @throws IOException If directory or file cannot be found.
      */
-    public void setInFile(int lineNumber, String data) throws DukeException {
+    public void setInFile(int lineNumber, String data) throws BingChillingException {
         try {
             List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
             lines.set(lineNumber - 1, data);
             Files.write(filePath, lines, StandardCharsets.UTF_8);
         } catch (IOException error) {
-            throw new DukeException("File at " + error.getMessage()
+            throw new BingChillingException("File at " + error.getMessage()
                     + " could not be found");
         }
     }
@@ -87,7 +87,7 @@ public class Storage {
      * @param taskList The task list.
      * @throws IOException If directory or file cannot be found.
      */
-    public void writeToFile(List<Task> taskList) throws DukeException {
+    public void writeToFile(List<Task> taskList) throws BingChillingException {
         try {
             StringBuilder stringBuilder = new StringBuilder();
             for (Task task : taskList) {
@@ -98,7 +98,7 @@ public class Storage {
             fw.write(stringBuilder.toString());
             fw.close();
         } catch (IOException err) {
-            throw new DukeException("File at " + err.getMessage()
+            throw new BingChillingException("File at " + err.getMessage()
                     + " could not be written to");
         }
     }
@@ -107,17 +107,17 @@ public class Storage {
      * Loads the contents of the file and store it as a list of strings.
      *
      * @return List of type String.
-     * @throws DukeException If there is an error reading the file.
+     * @throws BingChillingException If there is an error reading the file.
      * @throws IOException   If there is an error reading the file.
      */
-    public List<String> loadFileContents() throws DukeException {
+    public List<String> loadFileContents() throws BingChillingException {
         List<String> data;
         try {
             Files.readAllLines(filePath, StandardCharsets.UTF_8);
             data = Files.readAllLines(filePath, StandardCharsets.UTF_8);
             return data;
         } catch (IOException err) {
-            throw new DukeException("File at " + err.getMessage()
+            throw new BingChillingException("File at " + err.getMessage()
                     + " could not be loaded");
         }
     }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.Storage;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.ui.MessageUi;
 
 /**
@@ -21,7 +21,7 @@ public class TaskList {
     /**
      * Constructor for the TaskList class.
      *
-     * @throws DukeException
+     * @throws BingChillingException
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -31,11 +31,11 @@ public class TaskList {
      * Constructor for when there is a text file in the specified directory.
      *
      * @param data String list containing the information of task list.
-     * @throws DukeException If task list is not found.
+     * @throws BingChillingException If task list is not found.
      */
-    public TaskList(List<String> data) throws DukeException {
+    public TaskList(List<String> data) throws BingChillingException {
         if (data == null) {
-            throw new DukeException("Oops Ekud could not find the file");
+            throw new BingChillingException("Oops Ekud could not find the file");
         } else {
             tasks = new ArrayList<>();
             for (String d : data) {
@@ -77,9 +77,9 @@ public class TaskList {
      *
      * @param tasks   Existing task list.
      * @param storage Storage class.
-     * @throws DukeException If text file is not found.
+     * @throws BingChillingException If text file is not found.
      */
-    public void clearTaskList(TaskList tasks, Storage storage) throws DukeException {
+    public void clearTaskList(TaskList tasks, Storage storage) throws BingChillingException {
         tasks.tasks = new ArrayList<>();
         storage.writeToFile(tasks.tasks);
     }
@@ -107,9 +107,9 @@ public class TaskList {
      * @param ui      MessageUi class.
      * @param storage Storage class.
      * @return Task added message.
-     * @throws DukeException If text file cannot be found.
+     * @throws BingChillingException If text file cannot be found.
      */
-    public String addToList(Task task, MessageUi ui, Storage storage) throws DukeException {
+    public String addToList(Task task, MessageUi ui, Storage storage) throws BingChillingException {
         tasks.add(task);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(task.taskDescriptionForFile()

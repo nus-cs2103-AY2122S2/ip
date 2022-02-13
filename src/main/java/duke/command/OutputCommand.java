@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.task.TaskList;
 import duke.ui.MessageUi;
 
@@ -35,9 +35,9 @@ public class OutputCommand implements Command {
      * @param ui      Ui object.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws BingChillingException {
         if (tasks.getTaskSize() == 0) {
-            throw new DukeException(ui.showEmptyListMessage());
+            throw new BingChillingException(ui.showEmptyListMessage());
         } else {
             return ui.showListMessage(tasks);
         }

@@ -1,18 +1,14 @@
 package duke.gui;
 
-import java.awt.*;
 import java.io.IOException;
 
 import duke.Duke;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 /**
@@ -22,7 +18,7 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/ekud.txt");
 
-    public Main() throws DukeException, IOException {
+    public Main() throws BingChillingException, IOException {
     }
 
     @Override

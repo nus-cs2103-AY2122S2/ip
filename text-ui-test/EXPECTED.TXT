@@ -25,4 +25,4 @@ Noted. I've removed this task:
 [T][X] join sports club
 Now you have 2 tasks in the list.
 How can Ekud help you with?
-duke.exception.DukeException: duke.task.Task is already marked as not done!
+duke.exception.BingChillingException: duke.task.Task is already marked as not done!

@@ -1,20 +1,14 @@
 package duke.gui;
 
 import duke.Duke;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.ui.AlertUi;
 import duke.ui.MessageUi;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
-
-import java.awt.*;
 
 
 /**
@@ -27,20 +21,12 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
-    @FXML
-    private Stage stage;
-    @FXML
-    private Label welcomeMessage;
-    @FXML
-    private Label taskMessage;
 
     private Duke duke;
     private MessageUi messageUi = new MessageUi();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Ekud.png"));
+    private Image botImage = new Image(this.getClass().getResourceAsStream("/images/Ekud.png"));
 
     public MainWindow() {
     }
@@ -52,10 +38,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        welcomeMessage.setText(new MessageUi().showWelcomeMessage());
-        welcomeMessage.setWrapText(true);
-        taskMessage.setText(duke.getFileLoadingMessage());
-        taskMessage.setWrapText(true);
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(messageUi.showWelcomeMessage(), botImage),
+                DialogBox.getDukeDialog(duke.getFileLoadingMessage(), botImage));
     }
 
     /**
@@ -69,11 +53,11 @@ public class MainWindow extends AnchorPane {
             String response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getDukeDialog(response, botImage)
             );
             return;
-        } catch (DukeException e) {
-            AlertUi.makeErrorAlert("DukeException", e.getMessage());
+        } catch (BingChillingException e) {
+            AlertUi.makeErrorAlert("BingChillingException", e.getMessage());
         } finally {
             userInput.clear();
             return;

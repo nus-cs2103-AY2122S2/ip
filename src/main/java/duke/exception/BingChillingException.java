@@ -3,9 +3,9 @@ package duke.exception;
 /**
  * Represents an exception which is thrown by Ekud.
  */
-public class DukeException extends Exception {
+public class BingChillingException extends Exception {
 
-    public DukeException(String message) {
+    public BingChillingException(String message) {
         super(message);
     }
 }

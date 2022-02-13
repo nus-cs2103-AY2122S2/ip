@@ -3,7 +3,7 @@ package duke.command;
 import java.time.LocalDate;
 
 import duke.Storage;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.MessageUi;
@@ -32,9 +32,9 @@ public class PostponeCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws BingChillingException {
         if (position < 1 || position > tasks.getTaskSize()) {
-            throw new DukeException("Task do not exist!");
+            throw new BingChillingException("Task do not exist!");
         } else {
             Task task = tasks.getTask(position);
             assert task.getType().equals("deadline") || task.getType().equals("event");

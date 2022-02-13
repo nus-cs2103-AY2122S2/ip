@@ -1,10 +1,11 @@
 package duke.command;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import duke.Storage;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.MessageUi;
@@ -22,6 +23,7 @@ public class FindCommand implements Command {
 
     /**
      * Constructor for this class.
+     *
      * @param fullCommand User's input.
      */
     public FindCommand(String fullCommand) {
@@ -31,22 +33,23 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
-        String find = splitFullCommand[1];
-        List<Task> taskList = tasks.getTaskList();
-        List<Task> l = new ArrayList<>();
-        for (Task t : taskList) {
-            if (t.toString().contains(find)) {
-                l.add(t);
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws BingChillingException {
+        String taskDescription = splitFullCommand[1];
+        List<String> taskData = storage.loadFileContents();
+        List<Task> foundTasks = new ArrayList<>();
+        for (int i = 0; i < taskData.size(); i++) {
+            String description = taskData.get(i).split(" , ")[2];
+            if (description.contains(taskDescription)) {
+                foundTasks.add(tasks.getTask(i + 1));
             }
         }
-        if (l.isEmpty()) {
+        if (foundTasks.isEmpty()) {
             return ("No match found!");
         } else {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < l.size(); i++) {
-                stringBuilder.append(i + 1 + "." + l.get(i).toString() + "\n");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                stringBuilder.append(i + 1 + "." + foundTasks.get(i).toString() + "\n");
             }
             return stringBuilder.toString();
         }

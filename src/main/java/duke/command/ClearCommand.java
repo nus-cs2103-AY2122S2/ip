@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.task.TaskList;
 import duke.ui.AlertUi;
 import duke.ui.MessageUi;
@@ -15,7 +15,7 @@ import javafx.scene.control.ButtonType;
 public class ClearCommand implements Command {
 
     @Override
-    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, MessageUi ui) throws BingChillingException {
         try {
             Alert alert = AlertUi.makeConfirmationAlert("Clear task list?",
                     ui.showClearListConfirmationMessage());
@@ -24,8 +24,8 @@ public class ClearCommand implements Command {
             }
             AlertUi.makeInformationAlert("Task list cleared", ui.showClearListMessage());
             return ui.showClearListMessage();
-        } catch (DukeException error) {
-            throw new DukeException(error.getMessage());
+        } catch (BingChillingException error) {
+            throw new BingChillingException(error.getMessage());
         }
     }
 }

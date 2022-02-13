@@ -1,5 +1,5 @@
 package command;
-import duke.command.DukeCommand;
+import duke.command.BingChillingCommand;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ public class CommandsTest {
 
     @Test
     public void testCommandTypeMapping() {
-        HashMap<String, String> h = DukeCommand.getTaskTypeMap();
+        HashMap<String, String> h = BingChillingCommand.getTaskTypeMap();
         assertEquals("ADD_COMMAND", h.get("todo"));
         assertEquals("ADD_COMMAND", h.get("event"));
         assertEquals("ADD_COMMAND", h.get("deadline"));

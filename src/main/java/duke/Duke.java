@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.Command;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.task.TaskList;
 import duke.ui.MessageUi;
 
@@ -18,15 +18,15 @@ public class Duke {
     /**
      * Constructor for Duke class.
      * @param filePath Directory of text file.
-     * @throws DukeException
+     * @throws BingChillingException
      */
-    public Duke(String filePath) throws DukeException {
+    public Duke(String filePath) throws BingChillingException {
         ui = new MessageUi();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadFileContents());
             canLoad = true;
-        } catch (DukeException error) {
+        } catch (BingChillingException error) {
             tasks = new TaskList();
             storage.createNewFolderAndTextFile();
             canLoad = false;
@@ -48,11 +48,11 @@ public class Duke {
         }
     }
 
-    public String getResponse(String input) throws DukeException {
+    public String getResponse(String input) throws BingChillingException {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, storage, ui);
-        } catch (DukeException error) {
+        } catch (BingChillingException error) {
             throw error;
         }
     }

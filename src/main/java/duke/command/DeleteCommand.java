@@ -3,7 +3,7 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
-import duke.exception.DukeException;
+import duke.exception.BingChillingException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.MessageUi;
@@ -33,19 +33,19 @@ public class DeleteCommand implements Command {
      * Executes a valid Ekud command that delete a task from the task list.
      * The position of which the task is supplied by the user, of which
      * if the postion is < 1 or more than the number of tasks in the task list,
-     * a DukeException would be thrown.
+     * a BingChillingException would be thrown.
      *
      * @param tasks   Task object.
      * @param storage Storage object.
      * @param ui      Ui object.
-     * @throws DukeException If position < 1 or more than number of tasks in task list.
+     * @throws BingChillingException If position < 1 or more than number of tasks in task list.
      * @throws IOException   If directory or file cannot be found.
      */
     @Override
     public String execute(TaskList tasks, Storage storage,
-                        MessageUi ui) throws DukeException {
+                        MessageUi ui) throws BingChillingException {
         if (index < 0 || index > tasks.getTaskSize()) {
-            throw new DukeException("Task do not exist!");
+            throw new BingChillingException("Task do not exist!");
         } else {
             Task task = tasks.getTask(index);
             tasks.removeTask(index);

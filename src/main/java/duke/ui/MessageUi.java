@@ -36,7 +36,7 @@ public class MessageUi {
      * @return Can find file message.
      */
     public String showFileFoundMessage(TaskList tasks) {
-        return "Task list successfully loaded\n"
+        return "Bing Chilling has loaded your task.\n"
                 + "You currently have " + tasks.getTaskSize() + " task(s) in your list.";
     }
 
@@ -46,7 +46,7 @@ public class MessageUi {
      * @return Exit message.
      */
     public String showExitMessage() {
-        return "Goodbye, feel free to use Ekud anytime!";
+        return "Bing Chilling bids farewell!";
     }
 
     /**
@@ -55,7 +55,7 @@ public class MessageUi {
      * @return Task added message.
      */
     public String showAddTaskMessage(TaskList taskList, Task task) {
-        return "Got it. I've added this task: \n"
+        return "Bing Chilling has added this task: \n"
                 + task.toString() + "\nNow you have "
                 + taskList.getTaskSize() + " tasks in the list.";
     }
@@ -66,7 +66,7 @@ public class MessageUi {
      * @return Task mark message.
      */
     public String showMarkMessage(Task task) {
-        return "Nice! I've marked this task as done: \n" + task.toString();
+        return "Okie, Bing Chilling has marked this task as done: \n" + task.toString();
     }
 
     /**
@@ -75,11 +75,11 @@ public class MessageUi {
      * @return Task unmark message.
      */
     public String showUnMarkMessage(Task task) {
-        return "OK, I've marked this task as not done yet: \n" + task.toString();
+        return "Okie, Bing Chilling has marked this task as not done: \n" + task.toString();
     }
 
     public String showPostponeMessage(Task task) {
-        return "Nice! I've postponed this task: \n" + task.toString();
+        return "Aite! Bing Chilling has postponed this task: \n" + task.toString();
     }
 
     /**
@@ -88,7 +88,7 @@ public class MessageUi {
      * @return Task delete message.
      */
     public String showDeleteMessage(Task task, int taskSize) {
-        return "Noted. I've removed this task:\n"
+        return "Orite, Bing Chilling has removed this task:\n"
                 + task.toString() + "\nNow you have "
                 + taskSize + " tasks in the list.";
     }
@@ -99,7 +99,7 @@ public class MessageUi {
      * @return Empty task list message.
      */
     public String showEmptyListMessage() {
-        return "You do not have any tasks in your list!";
+        return "You have not yet added any task!";
     }
 
     /**
@@ -121,7 +121,7 @@ public class MessageUi {
      * @return Clear task list confirmation message.
      */
     public String showClearListConfirmationMessage() {
-        return "Are you sure you want Ekud to clear your task list?";
+        return "Do you want Bing Chilling to clear your task list?";
     }
 
     /**
@@ -130,7 +130,15 @@ public class MessageUi {
      * @return Task list cleared message.
      */
     public String showClearListMessage() {
-        return "Got it, Ekud has cleared your task list";
+        return "Got it, Bing Chilling has cleared your task list";
+    }
+
+    public String showInvalidCommandMessage() {
+        return "Bing Chilling does not recognise the command";
+    }
+
+    public String showInvalidFormatMessage() {
+        return "Bing Chilling does not recognise the command format";
     }
 }
 

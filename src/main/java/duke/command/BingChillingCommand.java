@@ -5,10 +5,10 @@ import java.util.HashMap;
 
 /**
  * Represents valid Ekud commands. Ekud commands are categorised into
- * those needing a description and those without. A DukeCommand object
+ * those needing a description and those without. A BingChillingCommand object
  * will provide method necessarily to check if a user input is a valid command.
  */
-public class DukeCommand {
+public class BingChillingCommand {
 
     private enum DukeCommands {
         TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE, FIND, CLEAR, POSTPONE
