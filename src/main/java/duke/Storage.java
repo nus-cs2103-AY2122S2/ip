@@ -17,15 +17,13 @@ public class Storage {
     private static String path;
     private static String fileDir;
 
+
     /**
      * Constructor for Storage class
-     *
-     * @param path the path to the storage file from root
-     * @param fileDir the path to the storage directory from root
      */
-    public Storage(String path, String fileDir) {
-        this.path = path;
-        this.fileDir = fileDir;
+    public Storage() {
+        this.path = System.getProperty("user.dir") + File.separator + "data" + File.separator + "data.txt";
+        this.fileDir = System.getProperty("user.dir") + File.separator + "data";
     }
 
     /**

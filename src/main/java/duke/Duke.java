@@ -16,9 +16,9 @@ public class Duke {
     /**
      * Constructor for Duke class
      */
-    public Duke(String path, String fileDir) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(path, fileDir);
+        this.storage = new Storage();
         this.parser = new Parser();
 
         //Reading arraylist from data.txt
@@ -57,7 +57,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke("c:/data/data.txt", "c:/data").run();
+        new Duke().run();
     }
 
     public String getResponse(String input) throws DukeException, IOException {
