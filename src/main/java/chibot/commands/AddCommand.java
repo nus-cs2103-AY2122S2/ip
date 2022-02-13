@@ -233,8 +233,10 @@ public class AddCommand extends Command {
     public String getDescription(String msg, String type) {
         if (type.equals("deadline")) {
             return msg.split("/by")[0].trim();
-        } else {
+        } else if (type.equals("event")) {
             return msg.split("/at")[0].trim();
+        } else {
+            return "";
         }
     }
 

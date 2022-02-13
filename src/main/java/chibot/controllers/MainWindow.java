@@ -81,7 +81,7 @@ public class MainWindow extends AnchorPane {
                 pt.setOnFinished(e -> Platform.exit());
                 pt.play();
             } else if (input.equalsIgnoreCase("help")) {
-               response = chi.getResponse("help");
+                response = chi.getResponse("help");
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage),
                         DialogBox.getChiDialog(response, chiImage),

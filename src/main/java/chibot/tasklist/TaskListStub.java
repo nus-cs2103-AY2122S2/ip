@@ -28,4 +28,9 @@ public class TaskListStub extends TaskList {
     public String getTasksMsg() {
         return testTasks.get(0) + "\n" + testTasks.get(1);
     }
+
+    @Override
+    public int getSize() {
+        return 2;
+    }
 }

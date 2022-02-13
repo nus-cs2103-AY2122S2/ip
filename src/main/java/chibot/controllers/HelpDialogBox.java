@@ -11,9 +11,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
 
 import java.io.IOException;
 import java.util.Collections;
@@ -46,13 +43,7 @@ public class HelpDialogBox extends HBox {
 
         hyperlink.setText("https://github.com/WJunHong/ip");
         displayPicture.setImage(img);
-        hyperlink.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent t) {
-                new Main().getHostServices().showDocument(hyperlink.getText());
-            }
-        });
+        hyperlink.setOnAction(t -> new Main().getHostServices().showDocument(hyperlink.getText()));
     }
 
     /**
@@ -66,10 +57,10 @@ public class HelpDialogBox extends HBox {
     }
 
     /**
-     * Creates a DialogBox for Chi.
+     * Creates a HelpDialogBox for Chi.
      *
      * @param img Image for representing Chi.
-     * @return A new DialogBox.
+     * @return A new HelpDialogBox.
      */
     public static HelpDialogBox getChiHelpDialog(Image img) {
         var db = new HelpDialogBox(img);

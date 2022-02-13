@@ -57,7 +57,8 @@ public class TaskList {
         for (Task t: this.tasks) {
             allTasks.append(t.toString()).append("\n");
         }
-        return allTasks.toString();
+        return allTasks.length() == 0 ? "Chi could not find any tasks, add one to get started nyan!"
+                : allTasks.toString();
     }
 
     /**
