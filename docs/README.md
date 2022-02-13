@@ -9,6 +9,15 @@ Everyone is busy. Everyone has a lot on their mind. We aren't computers and we c
 ## Product Screenshot
 ![Your Interactive Todo List](./Ui.png)
 
+## How to start using it
+
+1. Download the jar file in releases
+2. Put it into a directory
+3. Open command line
+4. Go to the path where you put the jar file
+5. type ```java -jar duke.jar```
+6. Application runs
+
 ## Commands
 
 Here we will list the commands that you need to know in order to use this application
