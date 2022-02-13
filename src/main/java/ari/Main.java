@@ -2,6 +2,7 @@ package ari;
 
 import java.io.IOException;
 
+import ari.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

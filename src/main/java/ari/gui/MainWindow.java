@@ -1,5 +1,6 @@
-package ari;
+package ari.gui;
 
+import ari.Ari;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
