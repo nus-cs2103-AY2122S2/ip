@@ -99,7 +99,7 @@ public class Ui {
 
         } else if (cmd.startsWith(Ui.Commands.DELETE.command)) {
             try {
-                int taskNumber = Integer.parseInt(cmd.split("")[1]);
+                int taskNumber = Integer.parseInt(cmd.split(" ")[1]);
                 response = parser.deleteTask(taskNumber);
             } catch (Exception e) {
                 return "The format should be \"delete [insert task number]\"\n" +
