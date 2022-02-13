@@ -20,7 +20,7 @@ A todo, event or deadline.
 ### View all tasks
 View the list of tasks you have created and keep them on track!
 ### Update your tasks
-Mark and unmask your tasks as completed.
+Mark and unmark your tasks as completed.
 ### Remove a task
 Delete a task that is no longer needed.
 ### Search for tasks
