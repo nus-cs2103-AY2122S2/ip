@@ -326,12 +326,14 @@ public class Parser {
                 }
             }
 
+            throw new DukeException("Invalid format entered! " +
+                    "Please enter \"/date\" to change date or \"/name\" to change name");
+
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number entered! Please enter an integer");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Invalid format entered! Please enter an integer");
+            throw new DukeException("No name or date entered!");
         }
-        return null;
     }
 
 

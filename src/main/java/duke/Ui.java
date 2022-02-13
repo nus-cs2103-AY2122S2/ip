@@ -8,9 +8,9 @@ import duke.tasks.Task;
 public class Ui {
 
     private static final String line =
-            "-----------------------------------------------------";
+            "------------------------------------------------";
     private static final String doubleLine =
-            "=====================================================";
+            "================================================";
     private Scanner scanner = new Scanner(System.in);
     private PrintStream writer = System.out;
 
@@ -31,11 +31,9 @@ public class Ui {
                 + "\"mark <number>\": mark the corresponding entry in your task list as done\n"
                 + "\"unmark <number>\": mark the corresponding entry in your task list as not done\n"
                 + "\"update <number> /date <new date>\": Updates the task number with a new date\n"
-                + "\"update <number> /name <new name>\": Updates the task number with a new name\n";
+                + "\"update <number> /name <new name>\": Updates the task number with a new name ";
 
-        return line + "\n"
-                + helpMenu + "\n"
-                + line;
+        return helpMenu;
     }
     public String showBanner() {
         String logo = " ____        _        \n"
@@ -45,12 +43,11 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         String intro = "I am a Personal Assistant Chatbot that helps you to keep track of various things.\n"
-                + "Let's get started.\n";
+                + "Let's get started.";
 
         return "Hello from" + "\n"
                 + logo + "\n"
-                + intro + "\n"
-                + line;
+                + intro + " ";
     }
     public String showBye() {
         String bye = "Bye. Hope to see you again soon!";
