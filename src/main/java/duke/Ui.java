@@ -49,13 +49,19 @@ public class Ui {
         lineOne();
     }
 
+    public static String byeMessage() {
+        String string = "See you soon! Have a good day ^_^";
+        System.out.println(string);
+        return string;
+    }
+
     /**
      * Method to exit the chatbot.
      * @return an int to signify the end of the program.
      */
     public static int exitHalloumi() {
         lineOne();
-        System.out.println("See you soon! Have a good day ^_^");
+        byeMessage();
         lineOne();
         return 1;
     }
