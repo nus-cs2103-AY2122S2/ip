@@ -1,0 +1,25 @@
+bleh
+todo return book
+todo /desc borrow book
+deadline /desc return book
+deadline /desc return book /by not a date
+deadline /desc return book /by 2022-1-1 0530
+event /desc project meeting
+event /desc project meeting /at not a date
+event /desc project meeting /at 2022-12-23 1300
+event /desc project meeting /at 2022-12-23 1300 /dur not a time
+event /desc project meeting /at 2022-12-23 1300 /dur 3h15m
+list
+mark /id 1
+list
+mark /id 2
+list
+unmark /id 1
+list
+unmark /id 2
+list
+delete /id 2
+list
+delete /id 1
+list
+bye
