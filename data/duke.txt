@@ -1,3 +1,4 @@
-T| |stuff
-T| |stuff
-T| |more stuff
+T| |buy milk
+D|X|return book|2022-02-01
+E| |project meeting|2022-02-26|12:00|14:30
+D| |submit paper|2022-03-05
