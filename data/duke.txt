@@ -1,2 +1,5 @@
 E | 0 | end of year party | Dec 31 2022 23:59
 D | 0 | homework | May 2 2022 23:59
+T | 0 | shop for books
+E | 0 | housewarming | Mar 15 2022 13:00
+T | 0 | shop for shirts
