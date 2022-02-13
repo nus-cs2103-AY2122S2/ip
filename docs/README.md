@@ -91,8 +91,7 @@ Bye. Hope to see you again soon!
 --------------------------------------------------------------------------------------------------------------------
 ##Command Summary
 
-
-Action | Format, Examples
+|Action | Format, Examples |
 --------|------------------
 **Add To-Do** | `todo TASK` <br> e.g., `todo eat dinner`
 **Add Event** | `event TASK /at YYYY-MM-DD` <br> e.g., `event breakfast /at 2022-01-01`
