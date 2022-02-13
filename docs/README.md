@@ -4,19 +4,18 @@ Charizard is a **desktop app for managing tasks** (CLI) while still having the b
 ## Summary of feature commands
 If you would to have a quick summary of feature usage without diving into the detailed usages, the table below serves as a quick guide.
 
-Action | Format, Examples
---------|------------------
-**Add Todo** | `todo <name of todo> [/p PRIORITY]` <br> e.g., `todo Apply for internship`
-**Add Deadline** | `deadline <name of deadline> /by <date> [/p PRIORITY]` <br> e.g., `deadline CS3243 Project 1 /by 2022/02/18 2359 /p medium`
-**Add Event** | `event <name of event> /at <date> [/p PRIORITY]` <br> e.g., `event CS2103T Meeting /at 2022/02/15 2100 /p low`
-**Delete** | `delete INDEX`<br> e.g., `delete 1 `
-**Mark** | `mark INDEX`<br> e.g., `mark 1`
-**Unmark** | `unmark INDEX`<br> e.g., `unmark 1`
-**List** | `list`
-**Sort** | `sort`
-**Change Priority** | `priority INDEX PRIORITY` <br> e.g., `priority 1 high`
-**Find** | `find KEYWORD`<br> e.g., `find CS2103T`
-
+| Action              | Format, Examples                                                                                                            |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| **Add Todo**        | `todo <name of todo> [/p PRIORITY]` <br> e.g., `todo Apply for internship`                                                  |
+| **Add Deadline**    | `deadline <name of deadline> /by <date> [/p PRIORITY]` <br> e.g., `deadline CS3243 Project 1 /by 2022/02/18 2359 /p medium` |
+| **Add Event**       | `event <name of event> /at <date> [/p PRIORITY]` <br> e.g., `event CS2103T Meeting /at 2022/02/15 2100 /p low`              |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 1 `                                                                                        |
+| **Mark**            | `mark INDEX`<br> e.g., `mark 1`                                                                                             |
+| **Unmark**          | `unmark INDEX`<br> e.g., `unmark 1`                                                                                         |
+| **List**            | `list`                                                                                                                      |
+| **Sort**            | `sort`                                                                                                                      |
+| **Change Priority** | `priority INDEX PRIORITY` <br> e.g., `priority 1 high`                                                                      |
+| **Find**            | `find KEYWORD`<br> e.g., `find CS2103T`                                                                                     |
 
 ## Features 
 1. _Add tasks_ such as `todo` `deadline` or `event` tasks to Charizard's burning list.
@@ -51,7 +50,23 @@ Expected outcome:
 * Charizard adds a new `event` task with name _CS2103T Project Meeting_ at _February 15 2022 2100hrs_ with _HIGH_ priority.
 * If the input is in an invalid format, Charizard will respond to you with the format he expects.
 
+Examples of error respond messages:
+```
+Charizard remembers this move but cannot recognize the format.
+Try using:"deadline <task_name> /by <deadline> [/p <priority>]".
+```
+```
+Date and time must be in yyyy/MM/dd HHmm format.
+```
+```
+Priority must be "HIGH", "MEDIUM" or "LOW"
+```
+```
+Please specify the name of new task to be burnt
+```
+
 ### Deleting a Task : `delete`
+
 Deletes the specified Task from Charizard's burning wish list.
 
 Format: `delete INDEX`
@@ -66,7 +81,17 @@ Expected outcome:
 * If Charizard's burning wish list has at least 1 task, the 1st task will be deleted.
 * If Charizard's burning wish list has no task, or the input is invalid, Charizard will respond to you with the format he expects.
 
+Examples of error respond messages:
+```
+Charizard's can only remember numbers. Try specifying a task number.
+(Use "list" command to see the tasks and their corresponding task number).
+```
+```
+Task number does not exist. Charizard is confused..
+```
+
 ### Finding a Task : `find`
+
 Finds a task whose name contains a substring of the given input.
 
 Format: `find KEYWORD`
@@ -80,7 +105,13 @@ Expected outcome:
 * Charizard will display a list of all tasks with names matching `CS2103T`.
 * If no tasks match `CS21O3T`, Charizard displays an empty list of tasks.
 
+Example of error respond message (if `KEYWORD` is empty):
+```
+Please specify the name of task to find
+```
+
 ### Listing all Tasks : `list`
+
 Shows a list of all tasks in Charizard's burning wish list.
 
 Format: `list`
@@ -89,6 +120,7 @@ Expected outcome:
 * Charizard will display all tasks in its burning wish list.
 
 ### Marking and Unmarking a Task : `mark` and `unmark`
+
 Marks a task in Charizard's burning wish list that is ready to be burnt by Charizard. Charizard will happily burnt the task.
 
 Alternatively, unmark a task that was previously marked. Charizard will be shocked that the task was not burnt completely.
@@ -108,7 +140,17 @@ Expected outcome:
 * If Charizard's burning wish list has less than 1 task, Charizard will tell you that the index is invalid.
 * If `INDEX` is not an integer, Charizard will respond to you with the format he expects.
 
+Examples of error respond messages:
+```
+Charizard's can only remember numbers. Try specifying a task number.
+(Use "list" command to see the tasks and their corresponding task number).
+```
+```
+Task number does not exist. Charizard is confused..
+```
+
 ### Sorting tasks based on priority : `sort`
+
 Sorts tasks in Charizard's burning wish list based on priority of tasks, in the order of HIGH->MEDIUM->LOW priority.
 
 Format: `sort`
@@ -119,6 +161,7 @@ Expected outcome:
 * Charizard will sort all tasks in its burning wish list from highest to lowest priority and displays all of them.
 
 ### Change priority of a Task : `priority`
+
 Changes the priority of a task in Charizard's burning wish list.
 
 Format: `priority INDEX PRIORITY`
@@ -135,7 +178,24 @@ Expected outcome:
 * If Charizard's burning wish list has less than 1 task, Charizard will tell you that the index is invalid.
 * If `INDEX` is not an integer, or `PRIORITY` is not a valid priority, Charizard will respond to you with the format he expects.
 
+Examples of error respond messages:
+```
+Charizard's can only remember numbers. Try specifying a task number.
+(Use "list" command to see the tasks and their corresponding task number).
+```
+```
+Charizard remembers this move but cannot recognize the format.
+Try using:"priority <task_number> <priority>".
+```
+```
+Task number does not exist. Charizard is confused..
+```
+```
+Priority must be "HIGH", "MEDIUM" or "LOW"
+```
+
 ### Exiting and Saving : `bye`
+
 Disables the input field and send button and exits the program after 3 seconds. Saves the data into `data/tasks.txt` before exiting the program.
 
 :exclamation: **Caution:** If you close the program or window without `bye` command, your changes will not be saved.
