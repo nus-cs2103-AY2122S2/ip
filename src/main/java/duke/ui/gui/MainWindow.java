@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
             .getResourceAsStream("/images/robot.png")));
 
     /**
-     * Initialization code of the Main Window
+     * Initializes the Main Window.
      */
     @FXML
     public void initialize() {

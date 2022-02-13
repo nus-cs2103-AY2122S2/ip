@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Deadline extends TaskWithDate {
     /**
-     * Default constructor for Deadline.
+     * Creates a Deadline task.
      *
      * @param name Task name or description.
      * @param deadline String representation of date.
@@ -17,6 +17,7 @@ public class Deadline extends TaskWithDate {
     }
 
     /**
+     * Creates a Deadline task.
      * Alternative constructor for Deadline used for importing existing task.
      *
      * @param name Task name or description.

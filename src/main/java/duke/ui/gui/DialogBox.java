@@ -55,23 +55,45 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Sets the dialog's background color.
+     *
+     * @param color Color in web format (eg. #FFFFFF).
+     */
     public void setDialogBackgroundColour(String color) {
         dialog.setStyle(String.format("%s -fx-background-color: %s;",
                 DIALOG_STYLE_PREFIX, color));
     }
 
+    /**
+     * Sets the dialog's background and text color to a predefined one for errors.
+     */
     public void setErrorTextColor() {
         dialog.setStyle(String.format("%s -fx-background-color: %s;",
                 DIALOG_STYLE_PREFIX, "ORANGE"));
         dialog.setTextFill(Color.WHITE);
     }
 
+    /**
+     * Creates a new User dialog.
+     *
+     * @param l Message to be shown in the dialog.
+     * @param iv Profile image next to the dialog
+     * @return Returns a new User dialog.
+     */
     public static DialogBox getUserDialog(String l, Image iv) {
         DialogBox db = new DialogBox(l, iv);
         db.setDialogBackgroundColour(USER_DIALOG_COLOUR);
         return db;
     }
 
+    /**
+     * Creates a new Duke dialog.
+     *
+     * @param l Message to be shown in the dialog.
+     * @param iv Profile image next to the dialog
+     * @return Returns a new Duke dialog.
+     */
     public static DialogBox getDukeDialog(String l, Image iv) {
         DialogBox db = new DialogBox(l, iv);
         db.flip();
@@ -79,6 +101,14 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Creates a new Duke Error dialog.
+     * Dialog is modified slightly with a different background and text color to highlight errors.
+     *
+     * @param l Message to be shown in the dialog.
+     * @param iv Profile image next to the dialog
+     * @return Returns a new Duke dialog.
+     */
     public static DialogBox getDukeErrorDialog(String l, Image iv) {
         DialogBox db = getDukeDialog(l, iv);
         db.setErrorTextColor();

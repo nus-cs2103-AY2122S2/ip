@@ -140,7 +140,7 @@ class ImportTaskParameters {
     private final String description;
     private final String date;
 
-    public ImportTaskParameters(String input) {
+    protected ImportTaskParameters(String input) {
         String[] inputArray = input.split("`");
         type = inputArray[0];
         isDone = inputArray[1].equals("X");
@@ -155,19 +155,19 @@ class ImportTaskParameters {
     }
 
     // Getter functions
-    public String getType() {
+    protected String getType() {
         return type;
     }
 
-    public boolean getIsDone() {
+    protected boolean getIsDone() {
         return isDone;
     }
 
-    public String getDescription() {
+    protected String getDescription() {
         return description;
     }
 
-    public String getDate() {
+    protected String getDate() {
         return date;
     }
 }

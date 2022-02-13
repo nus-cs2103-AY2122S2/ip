@@ -6,6 +6,11 @@ package duke.command;
 public class ErrorCommand extends Command {
     private final String message;
 
+    /**
+     * Creates an ErrorCommand object.
+     *
+     * @param message Error message that will be displayed to the user.
+     */
     public ErrorCommand(String message) {
         this.message = message;
     }

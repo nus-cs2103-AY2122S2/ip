@@ -7,10 +7,10 @@ public abstract class AddCommand extends TaskListCommand {
     protected Task taskObj;
 
     /**
-     * Default constructor for AddCommand.
+     * Creates an AddCommand object.
      *
-     * @param taskList Provided task list where tasks are added to.
-     * @param taskObj The task that will be added to the task list.
+     * @param taskList Task list where tasks will be added to.
+     * @param taskObj Task that will be added to the list.
      */
     public AddCommand(TaskList taskList, Task taskObj) {
         super(taskList);

@@ -11,6 +11,13 @@ import duke.taskobjects.Event;
 public class AddEventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";
 
+    /**
+     * Creates an AddEventCommand object.
+     *
+     * @param taskList Task list where the Event Task will be added to.
+     * @param description Description of the task.
+     * @param date Date of the task.
+     */
     public AddEventCommand(TaskList taskList, String description, LocalDate date) {
         super(taskList, new Event(description, date));
     }

@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Event extends TaskWithDate {
     /**
-     * Default constructor for Event.
+     * Creates an Event task.
      *
      * @param name Task name or description.
      * @param time String representation of date.
@@ -17,6 +17,7 @@ public class Event extends TaskWithDate {
     }
 
     /**
+     * Creates an Event task.
      * Alternative constructor for Event used for importing existing task.
      *
      * @param name Task name or description.

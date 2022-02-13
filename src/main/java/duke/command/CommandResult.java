@@ -9,8 +9,10 @@ public class CommandResult {
     private boolean isModified = false;
     private boolean isError = false;
 
+    /**
+     * Creates a CommandResult object.
+     */
     public CommandResult() {
-
     }
 
     public CommandResult(String message) {
@@ -18,7 +20,7 @@ public class CommandResult {
     }
 
     /**
-     * Alternative Constructor for CommandResult.
+     * Creates a CommandResult object with a modified boolean.
      *
      * @param message Resulting message after executing the command.
      * @param isModified Boolean to show if the task list has been modified or not.
@@ -29,7 +31,8 @@ public class CommandResult {
     }
 
     /**
-     * Alternative Constructor for an error message.
+     * Creates a CommandResult object with an error boolean.
+     *
      * @param message Resulting message after executing the command.
      * @param isModified Boolean to show if the task list has been modified or not.
      * @param isError Boolean to show if the result is an error.

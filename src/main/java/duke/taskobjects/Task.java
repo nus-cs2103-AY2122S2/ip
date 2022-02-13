@@ -1,14 +1,14 @@
 package duke.taskobjects;
 
 /**
- * An abstract class representing a Task
+ * An abstract class representing a Task.
  */
 public abstract class Task {
     private String taskName;
     private boolean isDone;
 
     /**
-     * Default constructor for a Task.
+     * Creates a Task object.
      * By default, task is marked as undone.
      *
      * @param taskName Task name or description.
@@ -19,6 +19,7 @@ public abstract class Task {
     }
 
     /**
+     * Creates a Task object.
      * Alternative constructor for a Task.
      * Takes in an additional boolean used for importing existing Tasks.
      *
@@ -60,7 +61,7 @@ public abstract class Task {
     }
 
     /**
-     * Gets the current status of the task along with it's description.
+     * Returns the current status of the task along with its description.
      *
      * @return String representation of the current status of the task.
      */

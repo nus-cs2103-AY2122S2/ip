@@ -12,7 +12,7 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
-     * Default constructor for TaskList.
+     * Creates a TaskList object.
      * Takes in no argument and creates an empty task list.
      */
     public TaskList() {
@@ -20,6 +20,7 @@ public class TaskList {
     }
 
     /**
+     * Creates a TaskList object.
      * Alternative constructor for TaskList.
      * Takes in an {@code ArrayList<Task>} and sets it as a task list.
      *

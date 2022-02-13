@@ -16,9 +16,9 @@ public class PostponeTaskCommand extends TaskListCommand {
     private final LocalDate newDate;
 
     /**
-     * Default constructor for PostponeTaskCommand.
+     * Creates a PostponeTaskCommand object.
      *
-     * @param taskList Provided task list where a task's date will be postponed.
+     * @param taskList Task list where a task's date will be postponed.
      * @param taskNo The task with the same ID will be marked as done.
      * @param newDate New date for event or postpone tasks
      */

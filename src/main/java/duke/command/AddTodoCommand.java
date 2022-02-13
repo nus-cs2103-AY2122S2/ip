@@ -9,6 +9,12 @@ import duke.taskobjects.Todo;
 public class AddTodoCommand extends AddCommand {
     public static final String COMMAND_WORD = "todo";
 
+    /**
+     * Creates an AddTodoCommand Object.
+     *
+     * @param taskList Task list where the Todo Task will be added to.
+     * @param description Description of the task.
+     */
     public AddTodoCommand(TaskList taskList, String description) {
         super(taskList, new Todo(description));
     }

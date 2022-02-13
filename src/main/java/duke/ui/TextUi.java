@@ -6,7 +6,7 @@ import java.util.Scanner;
 import duke.command.CommandResult;
 
 /**
- * TextUi object that handles terminal Input and Output of the program
+ * TextUi object that handles terminal Input and Output of the program.
  */
 public class TextUi {
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your personal assistant\nWhat can I do for you?";
@@ -21,9 +21,8 @@ public class TextUi {
     private final PrintStream out;
 
     /**
-     * Default constructor for TextUi
-     *
-     * When instantiated, it prints the Logo
+     * Creates a TextUi object.
+     * When instantiated, it prints the Logo.
      */
     public TextUi() {
         this.in = new Scanner(System.in);
@@ -32,37 +31,39 @@ public class TextUi {
     }
 
     /**
-     * Gets the next line of user input
-     * @return A String representation of one line of user input
+     * Gets the next line of user input.
+     *
+     * @return A String representation of one line of user input.
      */
     public String getInput() {
         return in.nextLine();
     }
 
     /**
-     * Prints the introduction message
+     * Prints the introduction message.
      */
     public void printIntro() {
         printMessage(generateIntro());
     }
 
     /**
-     * Prints the welcome message along with the Logo
+     * Prints the welcome message along with the Logo.
      */
     public void printLogo() {
         printMessage("Hello from\n" + LOGO);
     }
 
     /**
-     * Prints the goodbye message
+     * Prints the goodbye message.
      */
     public void printGoodbye() {
         printMessage(generateGoodbye());
     }
 
     /**
-     * Prints the result from the given {@code CommandResult}
-     * @param result The provided {@code CommandResult}
+     * Prints the result from the given {@code CommandResult}.
+     *
+     * @param result The provided {@code CommandResult}.
      */
     public void printResults(CommandResult result) {
         printMessage(generateResponse(result.toString()));

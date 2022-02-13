@@ -12,9 +12,9 @@ public class DeleteCommand extends TaskListCommand {
     private final int taskNo;
 
     /**
-     * Default constructor for DeleteCommand.
+     * Creates a DeleteCommand object.
      *
-     * @param taskList Provided task list where a task will be removed from.
+     * @param taskList Task list where a task will be removed from.
      * @param taskNo The task with the same ID will be removed from the task list.
      */
     public DeleteCommand(TaskList taskList, int taskNo) {

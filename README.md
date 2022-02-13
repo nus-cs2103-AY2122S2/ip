@@ -2,7 +2,7 @@
 Duke Task List Assistant helps you keep track of your tasks and more!
 
 ## Description
-An advanced task list assistant that is flexible and expandable. (Runs in Command Line and GUI modes)
+An advanced task list assistant that is flexible and expandable. (Runs in Command Line and GUI mode)
 
 ```
 Hello from
@@ -39,6 +39,8 @@ Command List: _(for CMD mode)_ 📜
 - mark (task number)
 - unmark (task number)
 - find (keyword)
+- delete (task number)
+- postpone (task number) (date in YYYY-MM-DD format)
 - exit
 
 Some example commands:

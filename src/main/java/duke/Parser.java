@@ -30,7 +30,7 @@ public class Parser {
     private TaskList taskList;
 
     /**
-     * Main parse command that takes in user input and returns a {@code Command} type.
+     * Parses user input and returns the appropriate {@code Command} and result.
      * It also checks for erroneous input.
      *
      * @param input User input.
@@ -70,6 +70,16 @@ public class Parser {
         default:
             return new ErrorCommand("Unknown command: " + command);
         }
+    }
+
+    /**
+     * Sets the task list used in the current Parser instance.
+     *
+     * Used for {@code Command}s and certain result printing.
+     * @param taskList Task list used for modification or reference when {@code Command}s are executed.
+     */
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     private Command generateMarkAsDoneCommand(String[] inputArray) {
@@ -206,16 +216,6 @@ public class Parser {
         return new PostponeCommandCheckResults(taskNo, newDate);
     }
 
-    /**
-     * Sets the task list used in the current Parser instance.
-     *
-     * Used for {@code Command}s and certain result printing.
-     * @param taskList Task list used for modification or reference when {@code Command}s are executed.
-     */
-    public void setTaskList(TaskList taskList) {
-        this.taskList = taskList;
-    }
-
     private Pair<Boolean, String> checkForInvalidIndex(String[] strArr) {
         try {
             int taskNo = Integer.parseInt(strArr[1]) - 1;
@@ -242,7 +242,9 @@ class PostponeCommandCheckResults {
     private final LocalDate newDate;
 
     /**
-     * Constructor for PostponeCommandCheckResults when isSuccessful = false
+     * Creates a PostPoneCommandCheckResults object.
+     * Constructor for PostponeCommandCheckResults when isSuccessful = false.
+     *
      * @param errorMessage Error message
      */
     public PostponeCommandCheckResults(String errorMessage) {
@@ -252,6 +254,13 @@ class PostponeCommandCheckResults {
         newDate = null;
     }
 
+    /**
+     * Creates a PostPoneCommandCheckResults object.
+     * Constructor for PostponeCommandCheckResults when isSuccessful = true.
+     *
+     * @param taskNo Task number.
+     * @param newDate New date to be appended to the task.
+     */
     public PostponeCommandCheckResults(int taskNo, LocalDate newDate) {
         this.isSuccessful = true;
         this.errorMessage = "";

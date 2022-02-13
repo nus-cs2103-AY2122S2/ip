@@ -10,7 +10,7 @@ public abstract class TaskWithDate extends Task {
     private LocalDate date;
 
     /**
-     * Default constructor for TaskWithDate.
+     * Creates a TaskWithDate object.
      *
      * @param name Task name or description.
      * @param date Additional date variable.
@@ -21,6 +21,7 @@ public abstract class TaskWithDate extends Task {
     }
 
     /**
+     * Creates a TaskWithDate object.
      * Alternative constructor used for importing existing tasks.
      *
      * @param name Task name or description.

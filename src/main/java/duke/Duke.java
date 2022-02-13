@@ -12,7 +12,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 
 public class Duke {
-    // Global Variables
     private static final String FILENAME = "task.txt";
     private static final String WELCOME_MESSAGE = "Welcome to your Task List Assistant!\n\n";
 
@@ -23,7 +22,8 @@ public class Duke {
     private final boolean fileExistsAtStart;
 
     /**
-     * Default constructor for Duke. Initializes the main brains and other objects.
+     * Creates a new Duke object.
+     * Initializes the main variables and other objects.
      */
     public Duke() {
         fh = new Storage(FILENAME);
@@ -35,8 +35,8 @@ public class Duke {
     }
 
     /**
-     * The main entry point to the application.
      * Creates an instance of Duke and starts the application.
+     * The main entry point to the application.
      */
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("--cmd")) { // Command Line mode
@@ -59,6 +59,12 @@ public class Duke {
         return WELCOME_MESSAGE + "Task List file not found... starting fresh.";
     }
 
+    /**
+     * Sends user input to Parser and returns the result to the GUI.
+     *
+     * @param string User input.
+     * @return Results of the Command.
+     */
     public CommandResult getResponse(String string) {
         Command parsedCommand = parser.parseCommand(string);
         CommandResult runCommand = parsedCommand.runCommand();
@@ -77,7 +83,6 @@ public class Duke {
 
     /**
      * Starts the main logic of the program (command line mode).
-     *
      * Instantiates TextUi, Storage, TaskList, and Parser objects and starts input loop.
      */
     public void run_cmd() {
