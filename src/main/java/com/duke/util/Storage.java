@@ -24,6 +24,7 @@ public class Storage {
      * @return List of Task
      */
     public ArrayList<Task> load() {
+        assert(path != null);
         File f = new File(path);
         ArrayList<Task> arr = new ArrayList<>();
         try {
@@ -57,6 +58,7 @@ public class Storage {
      */
     public void save(TaskList arr) {
         try {
+            assert(path != null);
             FileWriter fw = new FileWriter(path);
             StringBuilder text = new StringBuilder();
             for (int i=0; i<arr.getCount(); i++) {
