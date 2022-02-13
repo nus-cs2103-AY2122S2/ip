@@ -20,10 +20,10 @@ public class DoWithinPeriod extends Task {
      * @param name     Name of task.
      * @param isMarked Boolean of whether task is marked.
      */
-    public DoWithinPeriod(String name, boolean isMarked, LocalDate startPeriod, LocalDate endPeriod) {
+    public DoWithinPeriod(String name, boolean isMarked, String startPeriod, String endPeriod) {
         super(name, isMarked);
-        this.startPeriod = startPeriod;
-        this.endPeriod = endPeriod;
+        this.startPeriod = LocalDate.parse(startPeriod);
+        this.endPeriod = LocalDate.parse(endPeriod);
     }
 
     /**
@@ -35,7 +35,7 @@ public class DoWithinPeriod extends Task {
     public String export() {
         assert this.startPeriod != null : "No start date!";
         assert this.endPeriod != null : "No end date!";
-        return "DW" + "| " + (isMarked ? 1 : 0) + " | " + this.getName()
+        return "DW " + "| " + (isMarked ? 1 : 0) + " | " + this.getName()
                 + " | " + this.startPeriod + " | " + this.endPeriod;
     }
 
@@ -46,9 +46,9 @@ public class DoWithinPeriod extends Task {
     @Override
     public String toString() {
         return "[DW]" + super.toString()
-                + " (between: "
+                + "\n (between: "
                 + this.startPeriod.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + "and" + this.endPeriod.format(DateTimeFormatter.ofPattern("MMM d yyy"))
+                + " and " + this.endPeriod.format(DateTimeFormatter.ofPattern("MMM d yyy"))
                 + ")";
     }
 }
