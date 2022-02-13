@@ -4,7 +4,7 @@ BingChilling is a **desktop app for managing tasks. optimized for use via a Comm
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Adding a to do task : `todo`](#adding-a-to-do-task-:-`task`) 
+  * [Adding a to do task : `todo`](#adding-a-to-do-task)
 
 ## Quick Start
 
