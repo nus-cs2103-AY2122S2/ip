@@ -10,49 +10,71 @@ import tasks.TaskList;
 import tasks.ToDo;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Ui {
 
-    public void displayHelloMessage() {
-        display("Hello! I'm Duke\nWhat can I do for you?");
+    public String displayHelloMessage() {
+        String string = "Hello! I'm Duke\nWhat can I do for you?";
+        display(string);
         displayLine();
+        return string;
     }
 
     public void displayLine() {
         display("--------------------------------------------------");
     }
 
-    public void displayByeMessage() {
+    public String displayByeMessage() {
         displayLine();
-        display("Bye. Hope to see you soon.");
+        String string = "Bye. Hope to see you soon.";
+        display(string);
         displayLine();
+        return string;
     }
 
-    public void displayMessage(String command) {
+    public String displayMessage(String command) {
+        String string = "added:" + command;
         displayLine();
-        display("added:" + command);
+        display(string);
         displayLine();
+        return string;
     }
 
     public void display(Object object) {
         System.out.println(object);
     }
 
-    public void displayList() {
+    public String displayTaskAdded() {
+        String string = "Here are the tasks in your list:";
+        display(string);
+        return string;
+    }
+
+    public ArrayList<String> displayList() {
         displayLine();
-        display("Here are the tasks in your list:");
+        ArrayList<String> string = new ArrayList<>();
+        displayTaskAdded();
         for (int i = 1; i <= TaskList.dukeList.size(); i++) {
+            string.add(i + ". " + TaskList.dukeList.get(i - 1));
             display((i) + ". " + TaskList.dukeList.get(i - 1));
         }
         displayLine();
+        return string;
+    }
+
+    public String addAsMarked() {
+        String string = "OK, I've marked this task as not done yet:";
+        display(string);
+        return string;
     }
 
     public void displayIncompleteTask(Task complete) {
         displayLine();
-        display("OK, I've marked this task as not done yet:");
+        addAsMarked();
         display(complete);
         displayLine();
     }
@@ -64,7 +86,17 @@ public class Ui {
         displayLine();
     }
 
+    public String markAsAdded() {
+        String string = "Got it. I've added this task:";
+        display(string);
+        return string;
+    }
 
+    public String stringFound() {
+        String string = "Here are the matching tasks in your list:";
+        display(string);
+        return string;
+    }
 
     public void executeCommand(String command, String description) throws DukeException, IOException {
         try {
@@ -85,7 +117,7 @@ public class Ui {
             } else {
                 if (command.equals("event")) {
                     displayLine();
-                    display("Got it. I've added this task:");
+                    markAsAdded();
                     String[] descriptionAndTime = description.split("/"); //gives by 2019-12-09
                     String eventDescription = (descriptionAndTime[0].split(" ", 2))[1];//
                     LocalDate localDate = LocalDate.parse((descriptionAndTime[1].split(" ", 3))[1]);
@@ -96,7 +128,7 @@ public class Ui {
                     display(newEvent);
                 } else if (command.equals("deadline")) {
                     displayLine();
-                    display("Got it. I've added this task:");
+                    markAsAdded();
                     String[] descriptionAndTime = description.split("/"); //gives by 2019-12-09
                     String deadlineDescription = (descriptionAndTime[0].split(" ", 2))[1];//
                     LocalDate localDate = LocalDate.parse((descriptionAndTime[1].split(" ", 3))[1]);
@@ -113,7 +145,7 @@ public class Ui {
                             temp.add(task);
                         }
                     }
-                    System.out.println("Here are the matching tasks in your list:");
+                    stringFound();
                     for (int i = 0; i < temp.size(); i++) {
                         System.out.println(i+1 + "." + " " + temp.get(i));
                     }
@@ -123,7 +155,7 @@ public class Ui {
                         throw new DukeToDoEmptyException();
                     }
                     displayLine();
-                    display("Got it. I've added this task:");
+                    markAsAdded();
                     ToDo newTodo = new ToDo(description.substring(1));
                     TaskList.dukeList.add(newTodo);
                     display(newTodo);
