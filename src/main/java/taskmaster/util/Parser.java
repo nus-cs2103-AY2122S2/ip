@@ -14,10 +14,12 @@ import taskmaster.commands.MarkCommands;
  */
 public class Parser {
     /**
-     * Method to help user perform the task that has been
-     * entered based on the input.
+     * Parse the input that has been entered
+     * and return the command parsed.
      *
-     * @param input Input the user entered.
+     * @param input the user entered.
+     *
+     * @return the command that has been parsed.
      */
     public static Commands parse(String input) {
         //Split the strings based on the whitespace to make identifying the command easier.

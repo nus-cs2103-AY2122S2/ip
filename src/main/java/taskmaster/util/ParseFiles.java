@@ -113,12 +113,14 @@ public class ParseFiles {
 
 
     /**
-     *  ParseTask reads each line from the file and categorizes
-     *  the task based on their respective task type.
+     * Reads each line from the file and categorizes
+     * the task based on their respective task type.
      *
-     * @param str Line from the file that is to be read.
+     * @param str the task in saved text format.
      *
-     * @return Newly created Task.
+     * @return task that has been parsed.
+     *
+     * @throws TaskmasterExceptions if unable to read the task.
      */
     public Task parseTask(String str) throws TaskmasterExceptions {
         //Container file for returning Task
