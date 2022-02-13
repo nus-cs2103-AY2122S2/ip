@@ -44,6 +44,8 @@ public class Parser {
                 return handleDelete(taskList, inputArgs);
             } else if (command.equals("find")) {
                 return handleFind(taskList, inputArgs);
+            } else if (command.equals("schedule")) {
+                return handleSchedule(taskList, inputArgs);
             } else if (command.equals("deadline")) {
                 return handleDeadline(taskList, inputArgs);
             } else if (command.equals("event")) {
@@ -169,6 +171,50 @@ public class Parser {
             for (int i = 0; i < size; i++) {
                 Task currentTask = taskList.get(i);
                 if (currentTask.getName().contains(keyword)) {
+                    tempTaskList.add(currentTask);
+                }
+            }
+
+            int tempSize = tempTaskList.size();
+            if (tempSize == 0) {
+                return "I NEVER FIND ANYTHING! YOU DARE MAKE ME WASTE MY TIME AH?? VERY GOOD!";
+            } else {
+                String output = "NEED ME HELP YOU FIND AH? VERY GOOD! THIS WEEKEND YOU WATCH OUT!\n";
+                output += tempTaskList.printTasks();
+                return output;
+            }
+        }
+    }
+
+    /**
+     * Handles logic for schedule command.
+     * Looks for and displays tasks falling on date.
+     *
+     * @param taskList Current list of tasks.
+     * @param inputArgs String array made up of individual words from input.
+     * @return Output of command.
+     * @throws DukeException If keyword missing.
+     */
+    private static String handleSchedule(TaskList taskList, String[] inputArgs) throws DukeException {
+        if (checkIncompleteness(inputArgs)) {
+            throw new DukeException("WHAT DATE YOU TRYING TO FIND? WAKE UP YOUR BLOODY IDEA!");
+        } else {
+            DateTimeFormatter dateInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dateOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            String date = inputArgs[1];
+            // Converts String to Date.
+            LocalDate dateToFind = LocalDate.parse(date, dateInputFormatter);
+            // Converts Date back to another String format for comparison.
+            String dateToCompare = dateToFind.format(dateOutputFormatter);
+
+            TaskList tempTaskList = new TaskList();
+
+            int size = taskList.size();
+
+            for (int i = 0; i < size; i++) {
+                Task currentTask = taskList.get(i);
+
+                if (!currentTask.getType().equals("T") && currentTask.getDate().equals(dateToCompare)) {
                     tempTaskList.add(currentTask);
                 }
             }

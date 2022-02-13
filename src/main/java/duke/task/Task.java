@@ -121,7 +121,7 @@ public class Task {
      */
     public String getDate() {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        return date.format(outputFormatter).toString();
+        return date.format(outputFormatter);
     }
 
     /**
