@@ -120,6 +120,13 @@ public class TaskList {
     }
 
     /**
+     * Clears all Task objects from TaskList
+     */
+    private void clearTaskList() {
+        list.clear();
+    }
+
+    /**
      * Calls listOut() method if there are any tasks in the list.
      * @param command User input of type String.
      * @param list List of Task objects.
@@ -134,6 +141,18 @@ public class TaskList {
                     + list.listOut();
         }
     }
+
+    /**
+     * Removes all Task objects from Tasklist list.
+     * @param list TaskList containing Task objects.
+     * @return String response indicating clearance.
+     */
+    public String clearListFeature(TaskList list) {
+        list.clearTaskList();
+        String cleared = "Your list has been cleared.";
+        return cleared + "\nNow you have "
+                + list.getSize() + " tasks in the list.";
+    }   
 
     /**
      * Deletes a specific task from the list

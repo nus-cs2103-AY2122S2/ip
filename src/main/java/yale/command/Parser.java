@@ -22,6 +22,8 @@ public class Parser {
     public String performAction(String command, TaskList list) {
         if (command.equals("bye")) {
             return "Bye. Hope to see you again soon!";
+        } else if (command.equals("clear")) {
+            return list.clearListFeature(list);
         } else if (command.equals("list")) {
             return list.listFeature(command, list);
         } else if (command.contains("delete")) {
