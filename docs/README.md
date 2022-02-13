@@ -7,6 +7,17 @@ Duke is a task manager that keeps track of various types of tasks and compiles i
 
 ##Features
 ### 1. [Add Todo](#todo---adds-todo-task)
+### 2. [Add Deadline](#deadline---adds-deadline-task)
+### 3. [Add Event](#event---adds-event-task)
+### 4. [Add Do Afterwards](#do_after---adds-do-afterwards-task)
+### 5. [List current tasks](#list---lists-current-tasks)
+### 6. [Mark a task as complete](#mark---mark-a-task-as-complete)
+### 7. [Mark a task as incomplete](#unmark---mark-a-task-as-incomplete)
+### 8. [Delete a task](#delete---delete-a-task)
+### 9. [Find a task](#find---find-a-task)
+### 10. [Exit](#bye---close-the-application)
+
+
 
 ## Commands 
 ### `todo` - Adds Todo task
@@ -24,7 +35,7 @@ Got it. I've added this task:
 Now you've got 1 task in the list.
 ```
 
-### deadline task
+### `deadline` - Adds deadline task
 
 Add a simple task with a deadline.\
 Format Syntax:```deadline [task] /by [yyyy-dd-mm]```
@@ -40,7 +51,7 @@ Got it. I've added this task:
 Now you've got 2 task in the list.
 ```
 
-### event task
+### `event` - Adds event task
 
 Add a simple task with a location.\
 Format Syntax:```event [task] /at [location]```
@@ -56,7 +67,7 @@ Got it. I've added this task:
 Now you've got 3 task in the list.
 ```
 
-### do_after task
+### `do_after` - Adds Do Afterwards task
 
 Add a simple task to do after another task.\
 Format Syntax:```do_after [task] /after [task]```
@@ -72,7 +83,7 @@ Got it. I've added this task:
 Now you've got 4 task in the list.
 ```
 
-### list
+### `list` - Lists current tasks
 
 Show all the current tasks you have in the list.\
 Format Syntax:```list```
@@ -86,7 +97,7 @@ Here are the tasks in your list:
 4. [A][X] cry (after finals)
 ```
 
-### mark
+### `mark` - Mark a task as complete
 
 Marks a task at the given index as completed.\
 Format Syntax:```mark [index]```
@@ -101,7 +112,7 @@ Nice! I've marked this task as done:
 [D][X] homework assignment (by Feb 14 2022)
 ```
 
-### unmark
+### `unmark` - Mark a task as incomplete
 
 Marks a task at the given index as in-complete.\
 Format Syntax:```unmark [index]```
@@ -116,7 +127,7 @@ Oof! I've marked this task as undone:
 [D][ ] homework assignment (by Feb 14 2022)
 ```
 
-### delete
+### `delete` - Delete a task
 
 Deletes a task at the given index in the task list.\
 Format Syntax:```delete [index]```
@@ -132,7 +143,7 @@ Noted. I've removed this task:
 Now you have 3 tasks in the list.
 ```
 
-### find
+### `find` - Find a task
 
 Finds a task in the list.\
 Format Syntax:```find [task]```
@@ -147,7 +158,7 @@ Here are the matching tasks in your list:
 1. [A][X] cry (after finals)
 ```
 
-### bye
+### `bye` - Close the application
 
 Closes the application.\
 Format Syntax:```bye```
