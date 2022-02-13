@@ -4,7 +4,20 @@ BingChilling is a **desktop app for managing tasks. optimized for use via a Comm
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Adding a to do task : `todo`](#adding-a-to-do-task)
+  * [Adding a to do task : `todo`](#adding-a-to-do-task--todo)
+  * [Adding an event task : `event`](#adding-an-event-task--event)
+  * [Adding a deadline task : `deadline`](#adding-a-deadline-task--deadline)
+  * [Locating tasks by description : `find`](#locating-tasks-by-description--find)
+  * [Listing all task : `list`](#listing-all-task--list)
+  * [Marking a task as done : `mark`](#marking-a-task-as-done--mark)
+  * [Marking a task as not done : `unmark`](#marking-a-task-as-not-done--unmark)
+  * [Postponing a task : `postpone`](#postponing-a-task--postpone)
+  * [Deleting a task : `delete`](#deleting-a-task--delete)
+  * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  * [Exiting the program : `bye`](#exiting-the-program--bye)
+  * [Saving the data](#saving-the-data)
+  * [Editing the data file](#editing-the-data-file)
+* [Command summary](#command-summary)
 
 ## Quick Start
 
@@ -22,7 +35,7 @@ Example of usage:
 
 * `todo buy groceries`
 * `todo watch webcast` 
-###  Adding a to do task : `event`
+###  Adding an event task : `event`
 
 Adds an event task into the task list with the specified date.
 Format: `event TASK /at DATE`
