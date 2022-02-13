@@ -1,10 +1,33 @@
-public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+import duke.BH;
+import duke.DukeException;
+
+/**
+ * create a new BH object and start running the program
+ */
+public class Duke{
+    public BH bh;
+
+    /**
+     * Constructor of Duke
+     *
+     * @throws DukeException If read file wrongly
+     */
+    public Duke() throws DukeException {
+        this.bh = new BH();
     }
+
+    /**
+     * Gets the response from BH
+     *
+     * @param input User command
+     * @return Response from BH
+     * @throws DukeException If invalid input is detected
+     */
+    public String getResponse(String input) throws DukeException {
+        return this.bh.run(input);
+    }
+
+
 }
+
