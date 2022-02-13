@@ -1,36 +1,23 @@
-# Duke Task List Assistant 
-Duke Task List Assistant helps you keep track of your tasks and more!
+# Task List Assistant 
+Task List Assistant helps you keep track of your tasks and more!
 
 ## Description
-An advanced task list assistant that is flexible and expandable. (Runs in Command Line and GUI mode)
+An advanced task list assistant that is flexible and expandable.
 
-```
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-<---------------------------------------------------------->
-Hello! I'm Duke, your personal assistant
-What can I do for you?
-<---------------------------------------------------------->
-```
+![image](docs/Ui.png)
 
 ### Features 👓
-Currently Supported Types of Tasks:
+Currently Supported Types of Tasks: 😊
 - Todo Task (normal task with a description)
 - Event Task (event task with a date)
 - Deadline Task (deadline task with a deadline)
 - Supports exporting and importing the task list with a file
-- GUI Support Coming Soon! 😊
 
 ### Downloads 🔽
 - [Releases](https://github.com/Kidsnd274/ip/releases)
 
 ### Usage ⌨
-Command List: _(for CMD mode)_ 📜
+Command List: 📜
 - list
 - delete (task number)
 - todo (description)
@@ -59,40 +46,34 @@ list
 quit
 ```
 
-GUI Mode:
-> COMING SOON! 😊
-
-Exporting and importing tasklists:
+Exporting and importing task lists:
 1. Duke saves to task.txt for every modification to the task list
 2. Duke will immediately import tasks from task.txt on startup
 
 ### Some code snippets: 👩‍💻
 Startup run code:
 ```java
- public void run() {
-     // Setting up the goods
-     ui = new TextUi();
-     fh = new Storage(FILENAME);
-     taskList = new TaskList(fh.importTasks());
-     parser = new Parser();
-     parser.setTaskList(taskList);
+ public CommandResult getResponse(String string) {
+     Command parsedCommand = parser.parseCommand(string);
+     CommandResult runCommand = parsedCommand.runCommand();
 
-     ui.printIntro();
-
-     // Starting input loop
-     while (true) {
-         String input = ui.getInput();
-         if (processInput(input)) {
-             break;
-         }
+     if (ExitCommand.isExitCommand(parsedCommand)) { // Checking for exit
+     Platform.exit();
      }
-     ui.printGoodbye();
- }
+
+     // Flush to disk if modified
+     if (runCommand.isModified()) {
+     fh.exportTasks(taskList.getList());
+     }
+
+     return runCommand;
+     }
+}
  ```
 ~~Hi~~ Bye **(Honestly don't know what I'm supposed to add to bold, italic and strikethrough)**
 
 ## Credits:
-User Icon: <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
+User Icon: <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>\
 Robot Icon: <a href="https://www.flaticon.com/free-icons/robot" title="robot icons">Robot icons created by Good Ware - Flaticon</a>
 
 
