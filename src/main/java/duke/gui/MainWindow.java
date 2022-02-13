@@ -51,18 +51,19 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String welcomeMessage = "Hello!! I am Friendly Friend, your humble personal chatbot.\n"
-                + "What can I do for you?";
+                + "What can I do for you?\n";
         String cannotSeeFullListAdvice = "PS - If you cannot see your tasks, please go to " +
                 "help -> my tasks";
         String helpMessage = "If you are new to this app, please type help to see full list of " +
                 "commands";
-        String fileLocationWarning = "Please create a file with the path\n C:/repos/ip/data/tasks.txt" +
+        String fileLocationWarning = "Windows Users: Please create a file with the path\n C:/repos/ip/data/tasks.txt" +
                 " or there will be errors using the app.";
+        String fileLocationWarningForNonWindowUsers = "For other users: Please also create the required path based on your own OS.";
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeMessage, dukeImage),
-                DialogBox.getDukeDialog(cannotSeeFullListAdvice, dukeImage),
+                DialogBox.getDukeDialog(welcomeMessage + cannotSeeFullListAdvice, dukeImage),
                 DialogBox.getDukeDialog(helpMessage, dukeImage),
-                DialogBox.getDukeDialog(fileLocationWarning, dukeImage)
+                DialogBox.getDukeDialog(fileLocationWarning, dukeImage),
+                DialogBox.getDukeDialog(fileLocationWarningForNonWindowUsers, dukeImage)
         );
     }
 
