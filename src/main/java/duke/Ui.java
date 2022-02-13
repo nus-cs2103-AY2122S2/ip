@@ -20,20 +20,16 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-<<<<<<< HEAD
-    public String displayHelloMessage() {
-        String string = "Hello! I'm Duke\nWhat can I do for you?";
-        display(string);
-=======
     /**
      *  Method to display the welcome message.
      */
-    public void displayHelloMessage() {
-        display("Hello! I'm Duke\nWhat can I do for you?");
->>>>>>> branch-A-JavaDoc
-        displayLine();
+    public String displayHelloMessage() {
+        String string = "Hello! I'm Duke\nWhat can I do for you?";
+        display(string);
         return string;
     }
+
+
 
     /**
      * Method to display the breaker line.
@@ -42,14 +38,12 @@ public class Ui {
         display("--------------------------------------------------");
     }
 
-<<<<<<< HEAD
-    public String displayByeMessage() {
-=======
+
+
     /**
      * Method to display the bye message.
      */
-    public void displayByeMessage() {
->>>>>>> branch-A-JavaDoc
+    public String displayByeMessage() {
         displayLine();
         String string = "Bye. Hope to see you soon.";
         display(string);
@@ -57,7 +51,6 @@ public class Ui {
         return string;
     }
 
-<<<<<<< HEAD
     public String displayMessage(String command) {
         String string = "added:" + command;
         displayLine();
@@ -66,30 +59,27 @@ public class Ui {
         return string;
     }
 
-=======
+
     /**
      * Method to display any object.
      * @param object Object to be displayed.
      */
->>>>>>> branch-A-JavaDoc
     public void display(Object object) {
         System.out.println(object);
     }
 
-<<<<<<< HEAD
+
     public String displayTaskAdded() {
         String string = "Here are the tasks in your list:";
         display(string);
         return string;
     }
 
-    public ArrayList<String> displayList() {
-=======
     /**
      * Method to display the list to the user
      */
-    public void displayList() {
->>>>>>> branch-A-JavaDoc
+    public ArrayList<String> displayList() {
+
         displayLine();
         ArrayList<String> string = new ArrayList<>();
         displayTaskAdded();
@@ -135,14 +125,12 @@ public class Ui {
         return string;
     }
 
-<<<<<<< HEAD
     public String stringFound() {
         String string = "Here are the matching tasks in your list:";
         display(string);
         return string;
     }
 
-=======
     /**
      * Method to execute command after parsing.
      * @param command The input by the user.
@@ -150,7 +138,6 @@ public class Ui {
      * @throws DukeException Throws exception if command is invalid
      * @throws IOException Throws invalid if file does not exist
      */
->>>>>>> branch-A-JavaDoc
     public void executeCommand(String command, String description) throws DukeException, IOException {
         try {
             if (command.equals("list")) {
