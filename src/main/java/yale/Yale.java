@@ -26,7 +26,7 @@ public class Yale {
     private TaskList list;
 
     /**
-     * Constructor method
+     * Constructor method.
      */
     public Yale() {
         ui = new Ui();
@@ -44,8 +44,11 @@ public class Yale {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Takes in the user input and responds to it accordingly,
+     * as well as writes the necessary data into a specified file
+     * for storage.
+     * @param input User input of type String.
+     * @return Customised String response to each user input
      */
     public String getResponse(String input) {
         String output = parser.performAction(input, list);
