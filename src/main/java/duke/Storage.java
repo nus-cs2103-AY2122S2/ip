@@ -21,7 +21,7 @@ public class Storage {
     private Path filePath;
 
     /**
-     * Coonstructor for the Storage class.
+     * Constructor for the Storage class.
      * @param path Directory of the text file.
      */
     public Storage(String path) {
@@ -104,7 +104,7 @@ public class Storage {
     }
 
     /**
-     * Load the contents of the file and store it as a list of strings.
+     * Loads the contents of the file and store it as a list of strings.
      *
      * @return List of type String.
      * @throws DukeException If there is an error reading the file.

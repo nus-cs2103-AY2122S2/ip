@@ -15,7 +15,7 @@ public class MessageUi {
      * @return Welcome message.
      */
     public String showWelcomeMessage() {
-        return "Ello, my name is Ekud, your personal task tracking bot.";
+        return "I'm BING CHILLING bot";
     }
 
     /**
@@ -25,8 +25,8 @@ public class MessageUi {
      * @return Cannot find file message.
      */
     public String showFileNotFoundMessage() {
-        return "Oh no, looks like I have some trouble finding your task list.\n"
-                + "Fred not, Ekud has created the file for you!";
+        return "Bing Chilling could not locate your task list, \n"
+                + "and has created one for you.";
     }
 
     /**

@@ -10,9 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 
 /**
@@ -31,6 +32,8 @@ public class MainWindow extends AnchorPane {
     private Stage stage;
     @FXML
     private Label welcomeMessage;
+    @FXML
+    private Label taskMessage;
 
     private Duke duke;
     private MessageUi messageUi = new MessageUi();
@@ -48,8 +51,10 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        welcomeMessage.setText(new MessageUi().showWelcomeMessage() + " " + duke.getFileLoadingMessage());
+        welcomeMessage.setText(new MessageUi().showWelcomeMessage());
         welcomeMessage.setWrapText(true);
+        taskMessage.setText(duke.getFileLoadingMessage());
+        taskMessage.setWrapText(true);
     }
 
     /**

@@ -48,7 +48,7 @@ public class AddCommand implements Command {
             ToDo toDoTask = new ToDo(taskInformation[1]);
             return tasks.addToList(toDoTask, ui, storage);
         case "deadline":
-            String by = taskInformation[1].split("/at ", 2)[1];
+            String by = taskInformation[1].split("/by ", 2)[1];
             LocalDate deadlineDate = LocalDate.parse(by,
                     Task.getInputDateFormat());
             Deadline deadlineTask = new Deadline(taskInformation[1].split("/by ")[0], deadlineDate);

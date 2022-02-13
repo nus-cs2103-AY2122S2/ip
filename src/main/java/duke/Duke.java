@@ -34,9 +34,8 @@ public class Duke {
     }
 
     /**
-     * If file can be successfully loaded into the task list, a successful loading
-     * of file to task list will be shown to the user. Otherwise, a file not found
-     * message will be shown to the user.
+     * Returns a load successful message if task list is able to load data from file,
+     * Otherwise, a file not found message will be shown to the user.
      * @return Successful file found message if file can be found, else unsuccessful file
      * found, and file creation message.
      */
