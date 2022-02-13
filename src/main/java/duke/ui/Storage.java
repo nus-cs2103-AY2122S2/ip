@@ -53,13 +53,14 @@ public class Storage {
      * @throws DukeException if the required directory or file is missing
      */
     public Storage load() throws DukeException {
-        Path directoryExists = Paths.get("../../repos/ip/data/tasks.txt");
+        String home = System.getProperty("user.home");
+        Path directoryExists = Paths.get(home, "FFdata");
         //check if directory exists
         if (!Files.exists(directoryExists)) {
-            throw new DukeException("Missing ../../repos/ip/data");
+            throw new DukeException("Missing ~/FFdata");
         }
         if (!file.exists()) {
-            throw new DukeException("Missing ../../repos/ip/data/tasks.txt");
+            throw new DukeException("Missing ~/FFdata/tasks.txt");
         }
         return this;
     }

@@ -12,7 +12,7 @@ public class Ui {
      *                  of missing directory or file.
      */
     public void showLoadingError(DukeException dukeError) {
-        System.out.println("LOADING ERROR" + dukeError.getMessage());
+        System.out.println("LOADING ERROR: " + dukeError.getMessage());
     }
 
 }

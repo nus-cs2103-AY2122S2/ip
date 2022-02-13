@@ -1,6 +1,8 @@
 package duke.gui;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import duke.ui.Duke;
 
@@ -19,7 +21,18 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final Duke duke = new Duke("../../repos/ip/data/tasks.txt");
+    private final Duke duke;
+
+    /**
+     * Constructs a Main object.
+     * duke variable is created with the file path: ~/FFdata/tasks.txt
+     * , where ~ means the home directory.
+     */
+    public Main() {
+        String home = System.getProperty("user.home");
+        Path filePath = Paths.get(home, "FFdata", "tasks.txt");
+        duke = new Duke(filePath.toString());
+    }
 
     @Override
     public void start(Stage stage) {
