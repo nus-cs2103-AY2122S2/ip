@@ -17,6 +17,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -50,7 +51,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+
+        Circle imgCircle = new Circle(50, 50, 50);
         displayPicture.setImage(img);
+        displayPicture.setClip(imgCircle);
+
         this.setBackground(new Background(BACKGROUND_COLOR));
         this.setPadding(new Insets(5, 5, 5, 5));
     }

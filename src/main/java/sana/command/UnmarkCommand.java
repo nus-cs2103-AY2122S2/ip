@@ -15,7 +15,7 @@ public class UnmarkCommand extends Command {
     @Override
     public String executeCommand(String[] args, TaskList taskList) {
         try {
-            int taskIndex = Integer.parseInt(args[1]);
+            int taskIndex = Integer.parseInt(args[1]) - 1;
             boolean indexOutOfTaskListBounds = taskIndex < 0 || taskIndex >= taskList.taskAmt();
             if (indexOutOfTaskListBounds) {
                 throw new OutOfBoundsTaskException();

@@ -30,6 +30,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setSana(sana);
+            stage.setTitle("Sana");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
