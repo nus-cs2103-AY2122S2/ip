@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,36 +15,48 @@ import tasks.Tasks;
 import tasks.ToDos;
 
 /**
- * A class that belongs to the DukeComponent Package.
+ * A class that belongs to the component package.
  * This class deals with loading tasks from a pre-constructed file and saving tasks to the file
- * from the Duke program.
+ * from the Nexus program.
  */
 public class Storage {
-    private final String storageLocation;
+    /**
+     * Default path name to retrieve the data from previous instance of bobo.
+     */
+    private static final String DEFAULT_STORAGE_DIRECTORY = "data/";
+
+    /**
+     * Default file name to retrieve the data from previous instance of bobo.
+     */
+    private static final String DEFAULT_FILE_NAME = "bobo.txt";
+
+    /**
+     * Path to storage file.
+     */
+    private final String storagePath;
 
     /**
      * Constructs Storage.
-     * @param pathName Relative path to the file.
      */
-    public Storage(String pathName) {
-        this.storageLocation = Paths.get(System.getProperty("user.dir"), pathName).toString();
+    public Storage() {
+        String pathName = DEFAULT_STORAGE_DIRECTORY + DEFAULT_FILE_NAME;
+        this.storagePath = Paths.get(System.getProperty("user.dir"), pathName).toString();
     }
 
     /**
-     * Loads the content of the file to a TaskList so that it could be passed to Duke.
-     * @return TaskList that is updated with contents from the previous Duke instances.
+     * Loads the content of the file to a TaskList so that it could be passed to Nexus.
+     * @return TaskList that is updated with contents from the previous Nexus instances.
      */
     public ArrayList<Tasks> load() {
         ArrayList<Tasks> list = new ArrayList<Tasks>();
-        File storageFile = new File(storageLocation);
+        File storageFile = new File(storagePath);
 
         try {
             Scanner storageContent = new Scanner(storageFile);
             modifyList(list, storageContent);
             storageContent.close();
         } catch (FileNotFoundException e) {
-            System.out.println("There is no cache, "
-                    + "duke will be initialised as per normal.");
+            forceCreateFile();
         }
         return list;
     }
@@ -83,9 +96,9 @@ public class Storage {
      * Writes the Tasks into the file for storage.
      * @param arr TaskList containing all the Tasks required for storage.
      */
-    public void addTask(TaskList arr) {
+    public void updateStorage(TaskList arr) {
         try {
-            File f = new File(storageLocation);
+            File f = new File(storagePath);
             FileWriter fw = new FileWriter(f);
             for (Tasks t : arr) {
                 fw.write(t.cacheString() + System.lineSeparator());
@@ -93,6 +106,22 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             System.out.println("Something went wrong " + e.getMessage());
+        }
+    }
+
+    /**
+     * Creates a new File at {@link #storagePath}.
+     */
+    private void forceCreateFile() {
+        try {
+            Files.createDirectories(Paths.get(DEFAULT_STORAGE_DIRECTORY));
+            File newFile = new File(storagePath);
+            boolean isCreated = newFile.createNewFile();
+            if (isCreated) {
+                System.out.println("There is no storage, new file is created");
+            }
+        } catch (IOException error) {
+            System.out.println("There is no storage, new file could not be created:" + error);
         }
     }
 }

@@ -46,7 +46,7 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        //logic for flipping the dialog box in Duke interface.
+        //logic for flipping the dialog box in Nexus interface.
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
@@ -64,12 +64,12 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Gets Duke dialog.
-     * @param text Text that is replied by Duke.
-     * @param img Image of Duke.
-     * @return Duke dialog.
+     * Gets Nexus dialog.
+     * @param text Text that is replied by Nexus.
+     * @param img Image of Nexus.
+     * @return Nexus dialog.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getNexusDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

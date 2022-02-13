@@ -8,8 +8,8 @@ import exceptions.ToDosException;
 import exceptions.WrongInputException;
 
 /**
- * A class that belongs to the DukeComponent Package.
- * This class encapsulates the Parser logic from users in Duke.
+ * A class that belongs to the component package.
+ * This class encapsulates the Parser logic from users in Nexus.
  */
 public class Parser {
     private final String input;
@@ -42,7 +42,7 @@ public class Parser {
     private void checkUserInput(String userInput) throws TaskException {
         String[] wordsSplitByEmptySpace = userInput.split(" ");
         String firstWord = wordsSplitByEmptySpace[0];
-        if (firstWord.equals("mark") || firstWord.equals("unmark")) {
+        if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete")) {
             checkForWrongInputException(wordsSplitByEmptySpace);
         }
 

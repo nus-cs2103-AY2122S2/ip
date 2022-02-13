@@ -6,9 +6,9 @@ This is a greenfield Java project for CS2103T Software Engineering.
 > Good programmers write code that humans can understand.”
 > -Martin Fowler.
 
-## What is Duke?
+## What is Nexus?
 ***
-Duke is a basic Todo List with a built-in interface for users to interact with. 
+Nexus is a basic Todo List with a built-in interface for users to interact with. 
 
 **Features include:**
 - [x] ~~Adding new Tasks~~ **IMPROVED! Able to add specific tasks such as: Todo, Deadlines and Events!**

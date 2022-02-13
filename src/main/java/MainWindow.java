@@ -19,25 +19,25 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
 
-    private Duke duke;
+    private Nexus nexus;
 
     private final Image userImage;
-    private final Image dukeImage;
+    private final Image nexusImage;
 
     /**
      * Constructs MainWindow.
      */
     public MainWindow() {
         InputStream daUserPath = this.getClass().getResourceAsStream("/images/DaUser.png");
-        InputStream daDukePath = this.getClass().getResourceAsStream("/images/DaDuke.png");
+        InputStream daNexusPath = this.getClass().getResourceAsStream("/images/DaNexus.png");
 
-        //Checks if both userPath and dukePath is not null using assertions.
+        //Checks if both userPath and nexusPath is not null using assertions.
         assert daUserPath != null : "daUser path not suppose to be null!";
-        assert daDukePath != null : "daDuke path not suppose to be null!";
+        assert daNexusPath != null : "daNexus path not suppose to be null!";
 
         // Creates image based on the path provided.
         userImage = new Image(daUserPath);
-        dukeImage = new Image(daDukePath);
+        nexusImage = new Image(daNexusPath);
     }
 
     /**
@@ -49,28 +49,28 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets the duke instance in the dialog container.
-     * @param d duke instance.
+     * Sets the Nexus instance in the dialog container.
+     * @param d Nexus instance.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setNexus(Nexus d) {
+        nexus = d;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(d.initUi(), dukeImage)
+                DialogBox.getNexusDialog(d.initUi(), nexusImage)
         );
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Nexus's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
-        //handle user input and places userImage and dukeImage in the scene.
+        //handle user input and places userImage and nexusImage in the scene.
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = nexus.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getNexusDialog(response, nexusImage)
         );
         userInput.clear();
 

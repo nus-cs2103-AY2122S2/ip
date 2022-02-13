@@ -9,7 +9,7 @@ public class Launcher {
      * @param args Command line argument for main.
      */
     public static void main(String[] args) {
-        //Launches the duke application with a GUI.
+        //Launches the Nexus application with a GUI.
         Application.launch(Main.class, args);
     }
 }

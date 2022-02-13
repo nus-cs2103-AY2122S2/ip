@@ -6,15 +6,15 @@ import java.util.Iterator;
 import tasks.Tasks;
 
 /**
- * A class that belongs to DukeComponent Package.
- * This class encapsulates the logic of Task List in Duke.
+ * A class that belongs to component package.
+ * This class encapsulates the logic of Task List in Nexus.
  */
 public class TaskList implements Iterable<Tasks> {
     private final ArrayList<Tasks> list;
 
     /**
      * Constructs TaskList.
-     * @param list Arraylist that contains the Tasks in Duke.
+     * @param list Arraylist that contains the Tasks in Nexus.
      */
     public TaskList(ArrayList<Tasks> list) {
         this.list = list;
@@ -60,25 +60,25 @@ public class TaskList implements Iterable<Tasks> {
      */
     public String findDescription(String description) {
         int count = 1;
-        StringBuilder dukeReply = createDukeReply(description, count);
-        return dukeReply.toString();
+        StringBuilder nexusReply = createNexusReply(description, count);
+        return nexusReply.toString();
     }
 
     /**
-     * Creates Duke reply.
+     * Creates Nexus reply.
      * @param description Description of the task to find.
      * @param count The number of tasks that matches the description.
-     * @return Duke reply to find command.
+     * @return Nexus reply to find command.
      */
-    private StringBuilder createDukeReply(String description, int count) {
-        StringBuilder dukeReply = new StringBuilder();
+    private StringBuilder createNexusReply(String description, int count) {
+        StringBuilder nexusReply = new StringBuilder();
         for (Tasks task : list) {
             if (task.getTask().contains(description)) {
-                dukeReply.append(count).append(".").append(task).append("\n");
+                nexusReply.append(count).append(".").append(task).append("\n");
                 count++;
             }
         }
-        return dukeReply;
+        return nexusReply;
     }
 
     /**

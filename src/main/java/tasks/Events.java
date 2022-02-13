@@ -2,7 +2,7 @@ package tasks;
 
 /**
  * A class that belongs to the Tasks Package.
- * This class encapsulates the logic of how Events should be represented in Duke.
+ * This class encapsulates the logic of how Events should be represented in Nexus.
  */
 public class Events extends Tasks {
     private final String date;

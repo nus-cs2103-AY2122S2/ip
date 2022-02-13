@@ -7,8 +7,8 @@ import tasks.ToDos;
 
 
 /**
- * A class that belongs to the DukeComponent Package.
- * This class encapsulates the possible user commands from Duke.
+ * A class that belongs to the component package.
+ * This class encapsulates the possible user commands from Nexus.
  */
 public class Command {
     private final String userInput;
@@ -20,7 +20,7 @@ public class Command {
     /**
      * Constructs Command class.
      * @param userInput User input as a type String.
-     * @param t Provides access to TaskList for some manipulation in the Duke program.
+     * @param t Provides access to TaskList for some manipulation in the Nexus program.
      */
     public Command(String userInput, TaskList t) {
         this.userInput = userInput;
@@ -28,8 +28,8 @@ public class Command {
     }
 
     /**
-     * Runs command to return duke reply.
-     * @return A string representing what Duke replied.
+     * Runs command to return Nexus reply.
+     * @return A string representing what Nexus replied.
      */
     public String runCommand() {
         String[] wordSplit = userInput.split(" ");
@@ -42,7 +42,7 @@ public class Command {
 
         switch (action) {
         case "help":
-            // Shows the commands that are available in duke.
+            // Shows the commands that are available in Nexus.
             return printCommandsAvailable();
         case "list":
             return printList();
@@ -66,79 +66,79 @@ public class Command {
     }
 
     /**
-     * Prints commands that are available n Duke.
-     * @return A string representing what Duke replied.
+     * Prints commands that are available n Nexus.
+     * @return A string representing what Nexus replied.
      */
     private String printCommandsAvailable() {
-        String openingStatement = "Here are some of the available commands in Duke: \n";
+        String openingStatement = "Here are some of the available commands in Nexus: \n";
         String commands = "1. list\n2. mark"
-                + "\n3. unmark\n4. todo\n 5.deadline\n 6. event\n "
-                + "7. event\n 8. delete\n 9. find\n 10. bye";
+                + "\n3. unmark\n4. todo\n5.deadline\n6. event\n"
+                + "7. delete\n8. find\n9. bye";
         return openingStatement + commands;
     }
 
     /**
      * Finds Task that matches that description from the TaskList.
      * @param description Description to be used for matching.
-     * @return A string representing what Duke replied.
+     * @return A string representing what Nexus replied.
      */
     private String find(String description) {
-        String dukeReply = "Here are the matching task in your list: ";
+        String nexusReply = "Here are the matching task in your list: ";
         String resultOfFind = tasks.findDescription(description);
-        return dukeReply + "\n" + resultOfFind;
+        return nexusReply + "\n" + resultOfFind;
     }
 
 
     /**
      * Deletes the task in the TaskList.
      * @param index 0-based index for deletion of Task in the TaskList.
-     * @return A string representing what Duke replied.
+     * @return A string representing what Nexus replied.
      */
     private String deleteTask(int index) {
-        String dukeReply = "Noted. I've removed this task:" + "\n" + tasks.remove(index);
+        String nexusReply = "Noted. I've removed this task:" + "\n" + tasks.remove(index);
         String additionalStatement = String.format("Now you have %d tasks in the list.", tasks.listSize());
-        return dukeReply + "\n" + additionalStatement;
+        return nexusReply + "\n" + additionalStatement;
     }
 
     /**
      * Marks the task in the TaskList.
      * @param index 0-based index for users to mark the Task in the TaskList.
-     * @return A string representing what Duke replied.
+     * @return A string representing what Nexus replied.
      */
     private String mark(int index) {
-        String dukeReply = "Nice! I've marked this task as done:";
+        String nexusReply = "Nice! I've marked this task as done:";
         Tasks retrievedTask = tasks.getTask(index);
         retrievedTask.setMarked();
-        return dukeReply + "\n" + retrievedTask;
+        return nexusReply + "\n" + retrievedTask;
     }
 
     /**
      * Un-marks the task in the TaskList.
      * @param index  0-based index for users to unmark the task in the TaskList.
-     * @return A string representing what Duke replied.
+     * @return A string representing what Nexus replied.
      */
     private String unmark(int index) {
-        String dukeReply = "OK, I've marked this task as not done yet:";
+        String nexusReply = "OK, I've marked this task as not done yet:";
         Tasks retrievedTask = tasks.getTask(index);
         retrievedTask.setUnmarked();
-        return dukeReply + "\n" + retrievedTask;
+        return nexusReply + "\n" + retrievedTask;
     }
 
     /**
      * Adds task to the TaskList.
      * @param newTask Task to be added.
-     * @return A string representing what Duke replied.
+     * @return A string representing what Nexus replied.
      */
     private String addTask(Tasks newTask) {
         tasks.addTask(newTask);
-        String dukeReply = "Got it. I've added this task:" + "\n" + " " + newTask;
+        String nexusReply = "Got it. I've added this task:" + "\n" + " " + newTask;
         String amountOfTaskInList = String.format("Now you have %d tasks in the list.", tasks.listSize());
-        return dukeReply + "\n" + amountOfTaskInList;
+        return nexusReply + "\n" + amountOfTaskInList;
     }
 
     /**
      * Prints the TaskList in the Ui.
-     * @return A string representing what Duke replied.
+     * @return A string representing what Nexus replied.
      */
     private String printList() {
         StringBuilder result = new StringBuilder("Here are the tasks in your list:");
@@ -152,7 +152,7 @@ public class Command {
 
     /**
      * Prints the bye Ui for the user.
-     * @return A string representing what Duke replied.
+     * @return A string representing what Nexus replied.
      */
     private String sayBye() {
         return "Bye. Hope to see you again soon!";

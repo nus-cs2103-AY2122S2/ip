@@ -7,11 +7,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Nexus using FXML.
  */
 public class Main extends Application {
 
-    private final Duke duke = new Duke();
+    private final Nexus nexus = new Nexus();
 
     /**
      * Starts the interface.
@@ -24,12 +24,12 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
 
-            stage.setTitle("Dodo");
+            stage.setTitle("Nexus");
             // Set the scene of the interface.
             stage.setScene(scene);
 
-            // Set duke into the interface.
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            // Set Nexus into the interface.
+            fxmlLoader.<MainWindow>getController().setNexus(nexus);
 
             // show the interface onto user's screen.
             stage.show();
