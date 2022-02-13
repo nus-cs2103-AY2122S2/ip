@@ -2,7 +2,7 @@
 
 ## Quick Start
 1. Ensure you have Java ```11``` or above installed in your computer.
-2. Download the latest ```ip.jar``` [here](https://github.com/DALIN-Prog/ip).
+2. Download the latest ```dazz-v0.2.jar``` [here](https://github.com/DALIN-Prog/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for your Dazz program.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
    - Alternatively, open your Command Prompt (for Windows) or Terminal (for Mac) and navigate to the folder where ```ip.jar``` is located. Run the command ```java -jar ip.jar```.
