@@ -4,17 +4,18 @@ import task.TaskList;
 import tsundere.Storage;
 
 /**
- * Lists all tasks from tasklist and uses UI to print it.
+ * Lists all upcoming deadlines from tasklist.
  */
-public class ListCommand extends Command {
+public class RemindCommand extends Command {
+
     /**
-     * Lists all tasks from tasklist and uses UI to print it.
+     * Lists all upcoming deadlines from tasklist.
      *
      * @param t TaskList for managing and adding tasks.
      * @param s Storage for saving to file.
      */
     public String execute(TaskList t, Storage s) {
-        return (t.listTasks());
+        return (t.remindTasks());
     }
 
     /**

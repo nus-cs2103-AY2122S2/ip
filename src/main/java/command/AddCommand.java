@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     protected Type type;
     protected String body;
     /**
-     * Create a new AddCommand.
+     * Creates a new AddCommand.
      *
      * @param s string to determine Type of command.
      * @param body string description of the task.
@@ -79,7 +79,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Check if the input format is correct then return new Deadline
+     * Checks if the input format is correct then return new Deadline
      *
      * @return a new Deadline
      * @throws TsundereException if format is incorrect
@@ -96,7 +96,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Check if the input format is correct then return new Event
+     * Checks if the input format is correct then return new Event
      *
      * @return a new Event
      * @throws TsundereException if format is incorrect

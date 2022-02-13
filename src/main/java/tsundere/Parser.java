@@ -7,6 +7,7 @@ import command.ExitCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
+import command.RemindCommand;
 
 /**
  * Parses input into commands.
@@ -32,6 +33,8 @@ public class Parser {
             return new ExitCommand();
         } else if (us.contains("LIST")) {
             return new ListCommand();
+        } else if (us.contains("REMIND")) {
+            return new RemindCommand();
         } else if (us.contains("UNMARK")) {
             String commandArgs = checkFormat(s, " ", INSULT + "unmark 1");
             int num = Integer.parseInt(commandArgs);
@@ -72,7 +75,7 @@ public class Parser {
      */
     public static String checkFormat(String input, String toSplit, String errorOutput) throws TsundereException {
         String[] splitStr;
-        splitStr = input.split(toSplit);
+        splitStr = input.split(toSplit, 2);
         if (splitStr.length < MIN_SPACE_NUM) {
             throw new TsundereException(errorOutput);
         }

@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    protected Boolean useLocalDate = false;
+    protected Boolean isLocalDate = false;
     protected LocalDate by;
     protected String strBy;
 
@@ -24,7 +24,7 @@ public class Deadline extends Task {
         strBy = strBy.trim();
         try {
             this.by = LocalDate.parse(strBy);
-            useLocalDate = true;
+            isLocalDate = true;
         } catch (DateTimeParseException e) {
             this.strBy = strBy;
         }
@@ -47,7 +47,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (useLocalDate) {
+        if (isLocalDate) {
             return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
             return "[D]" + super.toString() + " (by: " + strBy + ")";

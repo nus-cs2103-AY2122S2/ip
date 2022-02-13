@@ -59,4 +59,13 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    /**
+     * Returns true if isDone, false not isDone.
+     *
+     * @return true if isDone, false not isDone.
+     */
+    public boolean getIsDone() {
+        return this.isDone;
+    }
 }

@@ -116,6 +116,34 @@ public class TaskList {
     }
 
     /**
+     * Returns a string with the upcoming deadlines.
+     *
+     * @return a string with the upcoming deadlines.
+     */
+    public String remindTasks() {
+        if (count == FIRST_INDEX) {
+            return "You got no upcoming deadlines!!";
+        }
+
+        String s = "Better do it fast! Your upcoming deadline: ";
+
+        int num = 0;
+        for (int i = FIRST_INDEX; i < count; i++) {
+            if (!tasks.get(i).getIsDone() && tasks.get(i) instanceof Deadline) {
+                num++;
+                s += "\n" + num + ". " + tasks.get(i).toString();
+            }
+        }
+
+        if (num == 0) {
+            return "You got no upcoming deadlines!!";
+        }
+
+        return s;
+    }
+
+
+    /**
      * Converts the list of tasks to string for file IO.
      *
      * @return a string of all the tasks in correct format for the save file.
