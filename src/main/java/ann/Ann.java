@@ -43,6 +43,7 @@ public class Ann {
 
     public String getResponse(String text) {
         Command command = Parser.parse(text);
+        command.setTaskList(tasks);
         executeCommand(command);
         return command.getMessage();
     }
