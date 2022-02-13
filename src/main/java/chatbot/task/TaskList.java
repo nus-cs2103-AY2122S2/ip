@@ -61,10 +61,10 @@ public class TaskList extends ArrayList<Task> implements Serializable {
     }
 
     /**
-     * Find all tasks in the list containing the specified keyword.
+     * Returns all tasks in the list containing the specified keyword.
      *
      * @param keyword the keyword to search for in the list
-     * @return an array containing the found tasks
+     * @return an array containing all tasks in the list containing the specified keyword
      */
     public Task[] find(String keyword) {
         ArrayList<Task> tasks = new ArrayList<>();

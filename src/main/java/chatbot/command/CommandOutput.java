@@ -6,7 +6,7 @@ package chatbot.command;
 public class CommandOutput {
     public final String output;
     public final String sfxFile;
-    public final boolean terminate;
+    public final boolean isTerminated;
 
     /**
      * Constructs a command with a specified output and sfx file.
@@ -17,7 +17,7 @@ public class CommandOutput {
     public CommandOutput(String output, String sfxFile) {
         this.output = output;
         this.sfxFile = sfxFile;
-        this.terminate = false;
+        this.isTerminated = false;
     }
 
     /**
@@ -25,11 +25,11 @@ public class CommandOutput {
      *
      * @param output    the command output
      * @param sfxFile   the sfx file
-     * @param terminate the terminate flag
+     * @param isTerminated the terminate flag
      */
-    public CommandOutput(String output, String sfxFile, boolean terminate) {
+    public CommandOutput(String output, String sfxFile, boolean isTerminated) {
         this.output = output;
         this.sfxFile = sfxFile;
-        this.terminate = terminate;
+        this.isTerminated = isTerminated;
     }
 }

@@ -79,7 +79,7 @@ public class MainWindow {
         Ui.playSound(output.sfxFile);
         userInput.clear();
 
-        if (output.terminate && terminateCallback != null) {
+        if (output.isTerminated && terminateCallback != null) {
             terminateCallback.run();
         }
     }
