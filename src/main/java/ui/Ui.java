@@ -2,17 +2,17 @@ package ui;
 
 import command.Command;
 import exception.DukeException;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import storage.Storage;
 import task.TaskList;
 
@@ -25,16 +25,19 @@ public class Ui extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private final Image user = new Image(this.getClass().getResourceAsStream("/DaUser.jpg"));
-    private final Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/User.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/Objection.jpg"));
 
     private final Storage storage;
     private final TaskList taskList;
+    private UiFormatter uiFormatter;
 
     /** Uses Ui, Storage and TaskList. */
     public Ui() throws DukeException {
         storage = new Storage();
         taskList = new TaskList();
+        uiFormatter = new UiFormatter();
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -55,23 +58,44 @@ public class Ui extends Application {
         stage.setScene(scene);
         stage.show();
 
+        // Start message
+        initialise();
+
         //Adding functionality
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput(stage));
+        userInput.setOnAction((event) -> handleUserInput(stage));
     }
 
-    private void handleUserInput() { //set up to handle UI
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+    private void initialise() {
+        String introduction = uiFormatter.helloMessage();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(introduction, duke, "Phoenix"));
+    }
+
+    private void handleUserInput(Stage stage) {
+        String input = userInput.getText();
+        if (input.trim().equals("bye")) {
+            exit(stage);
+            return;
+        }
+        String response = getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(input, user, "User"),
+                DialogBox.getDukeDialog(response, duke, "Phoenix")
         );
         userInput.clear();
+    }
+
+    private void exit(Stage stage) {
+        String exitMessage = uiFormatter.exitMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog("bye", user, "User"),
+                DialogBox.getDukeDialog(exitMessage, duke, "Phoenix"));
+
+        // @@author MonthPython28-reused
+        // Reused from https://github.com/jonfoocy/ip/blob/master/src/main/java/MainWindow.java
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        delay.setOnFinished((event) -> stage.close());
+        delay.play();
     }
 
     private String getResponse(String input) {

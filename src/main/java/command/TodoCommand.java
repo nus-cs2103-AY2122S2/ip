@@ -27,7 +27,7 @@ public class TodoCommand extends Command {
     public String execute(Storage storage, TaskList taskList) throws DukeException {
         taskList.add(new Todo(this.message, false, priorityLevel));
         storage.writeToFile(taskList);
-        return "Got it. I've added this task: \n"
+        return "TAKE THAT!\nI've added this task: \n"
                 + taskList.get(taskList.size() - 1)
                 + "\nNow you have " + taskList.size() + " tasks in the list.";
     }

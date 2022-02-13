@@ -20,7 +20,7 @@ public class UiFormatter {
      */
     public void formatGui(Stage stage, AnchorPane mainLayout, ScrollPane scrollPane,
                           VBox dialogContainer, TextField userInput, Button sendButton, Scene scene) {
-        stage.setTitle("Duke");
+        stage.setTitle("Ace Attorney Bot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -53,14 +53,14 @@ public class UiFormatter {
      * @return String of message with format applied
      */
     public static String formatExceptionMessage(String message) {
-        return "OOPS!!! " + message;
+        return "OBJECTION!\n" + message;
     }
 
     /** Returns the hello message when the bot starts.
      * @return Hello message.
      * */
-    public String hello() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+    public String helloMessage() {
+        return "The defense is ready, Your Honour!\nTestify by typing commands, so I can cross-examine the witness.";
     }
 
     /**
@@ -68,6 +68,6 @@ public class UiFormatter {
      * @return Goodbye message.
      */
     public String exitMessage() {
-        return "Bye. Hope to see you again soon!";
+        return "Court is adjourned! See you next trial.";
     }
 }

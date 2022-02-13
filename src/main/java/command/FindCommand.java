@@ -25,9 +25,9 @@ public class FindCommand extends Command {
             }
         }
         if (parsedTaskList.size() == 0) {
-            return "Couldn't find any relevant tasks!";
+            return "OBJECTION!\nYour Honour, I couldn't find any relevant tasks!";
         } else {
-            return "Here are the matching tasks in your list: \n"
+            return "TAKE THAT!\nLook at these matching tasks in your list: \n"
                     + parsedTaskList;
         }
     }

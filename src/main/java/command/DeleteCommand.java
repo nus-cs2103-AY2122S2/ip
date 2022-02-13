@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
         String taskDescription = taskList.get(this.serialNumber - 1).getDescription();
         taskList.delete(this.serialNumber);
         storage.writeToFile(taskList);
-        return "Noted. I've removed this task:\n"
+        return "HOLD IT!\nI've removed this task:\n"
                 + taskDescription
                 + "\nNow you have " + taskList.size() + " tasks in the list.";
     }

@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command {
             throw new DukeException("Have you entered the date in yyyy-mm-dd format?");
         }
         storage.writeToFile(taskList);
-        return "Got it. I've added this task: \n"
+        return "TAKE THAT!\nI've added this task: \n"
                 + taskList.get(taskList.size() - 1)
                 + "\nNow you have " + taskList.size() + " tasks in the list.";
     }

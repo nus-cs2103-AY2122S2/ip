@@ -14,7 +14,7 @@ public class ParserTest {
             Command c = Parser.parse("todo         ");
             fail(); // the test should not reach this line
         } catch (Exception e) {
-            String errorMessage = "OOPS!!! Can't find any info after your command! Have you typed it correctly?";
+            String errorMessage = "OBJECTION!\nCan't find any info after your command! Have you typed it correctly?";
             assertEquals(errorMessage, e.getMessage());
         }
     }
