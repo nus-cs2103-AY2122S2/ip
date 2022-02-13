@@ -91,6 +91,7 @@ Bye. Hope to see you again soon!
 --------------------------------------------------------------------------------------------------------------------
 ##Command Summary
 
+
 Action | Format, Examples
 --------|------------------
 **Add To-Do** | `todo TASK` <br> e.g., `todo eat dinner`
