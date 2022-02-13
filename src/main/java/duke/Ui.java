@@ -15,20 +15,41 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Class that defines the Ui of the app
+ */
 public class Ui {
 
+<<<<<<< HEAD
     public String displayHelloMessage() {
         String string = "Hello! I'm Duke\nWhat can I do for you?";
         display(string);
+=======
+    /**
+     *  Method to display the welcome message.
+     */
+    public void displayHelloMessage() {
+        display("Hello! I'm Duke\nWhat can I do for you?");
+>>>>>>> branch-A-JavaDoc
         displayLine();
         return string;
     }
 
+    /**
+     * Method to display the breaker line.
+     */
     public void displayLine() {
         display("--------------------------------------------------");
     }
 
+<<<<<<< HEAD
     public String displayByeMessage() {
+=======
+    /**
+     * Method to display the bye message.
+     */
+    public void displayByeMessage() {
+>>>>>>> branch-A-JavaDoc
         displayLine();
         String string = "Bye. Hope to see you soon.";
         display(string);
@@ -36,6 +57,7 @@ public class Ui {
         return string;
     }
 
+<<<<<<< HEAD
     public String displayMessage(String command) {
         String string = "added:" + command;
         displayLine();
@@ -44,10 +66,17 @@ public class Ui {
         return string;
     }
 
+=======
+    /**
+     * Method to display any object.
+     * @param object Object to be displayed.
+     */
+>>>>>>> branch-A-JavaDoc
     public void display(Object object) {
         System.out.println(object);
     }
 
+<<<<<<< HEAD
     public String displayTaskAdded() {
         String string = "Here are the tasks in your list:";
         display(string);
@@ -55,6 +84,12 @@ public class Ui {
     }
 
     public ArrayList<String> displayList() {
+=======
+    /**
+     * Method to display the list to the user
+     */
+    public void displayList() {
+>>>>>>> branch-A-JavaDoc
         displayLine();
         ArrayList<String> string = new ArrayList<>();
         displayTaskAdded();
@@ -72,6 +107,10 @@ public class Ui {
         return string;
     }
 
+    /**
+     *  Method to display the unmarking of a task.
+     * @param complete The task that is to be unmarked.
+     */
     public void displayIncompleteTask(Task complete) {
         displayLine();
         addAsMarked();
@@ -79,6 +118,10 @@ public class Ui {
         displayLine();
     }
 
+    /**
+     * Method to display the marking of a task
+     * @param incomplete The task to be marked complete
+     */
     public void displayTaskCompletion(Task incomplete) {
         displayLine();
         display("Nice! I've marked this task as done:");
@@ -92,12 +135,22 @@ public class Ui {
         return string;
     }
 
+<<<<<<< HEAD
     public String stringFound() {
         String string = "Here are the matching tasks in your list:";
         display(string);
         return string;
     }
 
+=======
+    /**
+     * Method to execute command after parsing.
+     * @param command The input by the user.
+     * @param description The description of the task
+     * @throws DukeException Throws exception if command is invalid
+     * @throws IOException Throws invalid if file does not exist
+     */
+>>>>>>> branch-A-JavaDoc
     public void executeCommand(String command, String description) throws DukeException, IOException {
         try {
             if (command.equals("list")) {
