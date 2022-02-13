@@ -27,6 +27,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private HBox displayPictureBox;
 
     private DialogBox(String text, Image img) {
         try {
@@ -41,7 +43,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         Circle clip = new Circle(CIRCLE_CENTER_X, CIRCLE_CENTER_Y, CIRCLE_RADIUS);
-        displayPicture.setClip(clip);
+        displayPictureBox.setClip(clip);
     }
 
     /**
