@@ -46,7 +46,7 @@ public class Ui {
                 "Task feature example commands:\n" +
                 "1. Creating todos: task new todo <todo description>\n" +
                 "2. Creating deadlines: task new deadline <deadline description> by <date in YYYY-MM-DD format>\n" +
-                "3. Creating events: task new event <event description> by <date in YYYY-MM-DD format>\n" +
+                "3. Creating events: task new event <event description> on <date in YYYY-MM-DD format>\n" +
                 "4. Viewing task list: task list\n" +
                 "5. Marking tasks as complete: task mark <index number of task to mark>\n" +
                 "6. Marking tasks as incomplete: task unmark: <index number of task to unmark>\n" +
@@ -58,7 +58,7 @@ public class Ui {
                 "2. Viewing all notes: note list\n" +
                 "3. Finding a note by keyword: note find <keyword>\n" +
                 "4. Deleting a note by index number: note delete <index number>\n" +
-                "5. Deleting all tasks: note delete all\n\n" +
+                "5. Deleting all notes: note delete all\n\n" +
                 "Other commands:\n" +
                 "1. Viewing this help section: help\n" +
                 "2. Closing duke conversation: bye";
