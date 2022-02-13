@@ -44,6 +44,8 @@ public class Ui {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Megumin");
+            
             this.mainWindowController = fxmlLoader.getController();
             this.mainWindowController.setInputHandler(inputHandler);
         } catch (IOException e) {
