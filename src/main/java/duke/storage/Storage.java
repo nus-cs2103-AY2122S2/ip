@@ -34,12 +34,12 @@ public class Storage {
         try {
             Path dir = Paths.get(HOME + dirPath);
 
-            // check if /ip/data directory exists, if not create
+            // check if /ip/data directories exists, if not create
             if (!Files.exists(dir)) {
-                Files.createDirectory(dir);
+                Files.createDirectories(dir);
             }
 
-            // check if the file in /ip/data exists, if not create
+            // check if the save file in /ip/data exists, if not create
             Path p = Paths.get(HOME + dirPath + "/duke.txt");
             if (!Files.exists(p)) {
                 Files.createFile(p);
