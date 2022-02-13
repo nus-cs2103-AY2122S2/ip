@@ -266,7 +266,7 @@ public class TaskList {
             String task = removeEvent.split(" /between ", 2)[0]; // Retrieve task name
             String dates = removeEvent.split(" /between ", 2)[1]; // Retrieve date
             String startPeriod = dates.split(" and ", 2)[0];
-            String endPeriod = dates.split(" and ", 2)[0];
+            String endPeriod = dates.split(" and ", 2)[1];
             DoWithinPeriod newDoWithinPeriod = new DoWithinPeriod(task, false, startPeriod, endPeriod);
             list.addToList(newDoWithinPeriod);
             return "Got it! I've added this task:\n    "
