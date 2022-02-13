@@ -30,6 +30,6 @@ public class ErrorCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage(err);
+        ui.showMessage("\uD83D\uDE15 " + err);
     }
 }

@@ -32,7 +32,8 @@ public class DialogBox extends HBox {
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            Ui ui = new Ui();
+            ui.showMessage(e.getMessage());
         }
         dialog.setText(text);
         displayPicture.setImage(img);
@@ -46,6 +47,9 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        if (text.startsWith("\uD83D\uDE15")) {
+            db.changeErrorColor();
+        }
         return db;
     }
 
@@ -66,5 +70,16 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    private void changeErrorColor() {
+        dialog.setStyle("-fx-text-fill:black;"
+                + "-fx-font-family: 'Lucida Console';"
+                + "-fx-font-size: 12;"
+                + "-fx-padding: 10;"
+                + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);"
+                + "-fx-background-radius: 15;"
+                + "-fx-background-color: lightpink"
+        );
     }
 }
