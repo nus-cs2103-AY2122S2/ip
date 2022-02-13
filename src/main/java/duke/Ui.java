@@ -39,7 +39,7 @@ public class Ui {
     String run(String cmd) {
 
         Parser parser = new Parser(tasks);
-        String response;
+        String response = "";
 
         if (cmd.startsWith(Ui.Commands.LIST.command)) {
             response = parser.listTasks();
@@ -126,6 +126,10 @@ public class Ui {
             help += "[find] | example: find book\n";
             return help;
 
+        } else if (cmd.equals("bye")) {
+
+            // exits application
+            System.exit(0);
         } else {
             response = "OOPS!!! I'm sorry, " +
                     "but I don't know what that means :-(";
