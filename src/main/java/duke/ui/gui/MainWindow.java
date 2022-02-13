@@ -1,5 +1,7 @@
 package duke.ui.gui;
 
+import java.util.Objects;
+
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,14 +26,25 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/user.png")));
+    private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/robot.png")));
 
+    /**
+     * Initialization code of the Main Window
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    /**
+     * Prints the welcome message.
+     */
+    public void printWelcomeMessage() {
+        String welcomeMessage = duke.getWelcomeMessage();
+        addDukeDialog(welcomeMessage);
     }
 
     public void setDuke(Duke duke) {
@@ -45,11 +58,25 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        String response = submitInput(input);
+        addUserDialog(input);
+        addDukeDialog(response);
         userInput.clear();
+    }
+
+    private String submitInput(String input) {
+        return duke.getResponse(input);
+    }
+
+    private void addUserDialog(String text) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(text, userImage)
+        );
+    }
+
+    private void addDukeDialog(String text) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(text, dukeImage)
+        );
     }
 }

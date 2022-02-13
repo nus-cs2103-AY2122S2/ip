@@ -1,8 +1,12 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.command.CommandResult;
 import duke.command.ExitCommand;
+import duke.misc.Pair;
+import duke.taskobjects.Task;
 import duke.ui.TextUi;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -10,20 +14,37 @@ import javafx.application.Platform;
 public class Duke {
     // Global Variables
     private static final String FILENAME = "task.txt";
+    private static final String WELCOME_MESSAGE = "Welcome to your Task List Assistant!\n\n";
 
-    private TaskList taskList;
-    private Storage fh;
+    private final TaskList taskList;
+    private final Storage fh;
     private TextUi ui;
-    private Parser parser;
+    private final Parser parser;
+    private final boolean fileExistsAtStart;
 
     /**
      * Default constructor for Duke. Initializes the main brains and other objects.
      */
     public Duke() {
         fh = new Storage(FILENAME);
-        taskList = new TaskList(fh.importTasks());
+        Pair<Boolean, ArrayList<Task>> loadTaskListFileResults = fh.loadTaskListFile();
+        fileExistsAtStart = loadTaskListFileResults.first();
+        taskList = new TaskList(loadTaskListFileResults.second());
         parser = new Parser();
         parser.setTaskList(taskList);
+    }
+
+    /**
+     * Returns a welcome message which differs depending on the task list file.
+     *
+     * @return A welcome message.
+     */
+    public String getWelcomeMessage() {
+        if (fileExistsAtStart) {
+            return WELCOME_MESSAGE
+                    + "Existing Task List file loaded...\n" + taskList.listAll();
+        }
+        return WELCOME_MESSAGE + "Task List file not found... starting fresh.";
     }
 
     /**

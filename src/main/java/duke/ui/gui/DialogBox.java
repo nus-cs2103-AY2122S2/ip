@@ -6,17 +6,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -25,6 +20,11 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final int CIRCLE_SIZE = 32;
+    private static final String USER_DIALOG_COLOUR = "#ACB9C2";
+    private static final String DUKE_DIALOG_COLOUR = "#8F9AA1";
+    private static final String DIALOG_STYLE_PREFIX = "-fx-background-radius: 10; -fx-padding: 8; ";
+
     @FXML
     private Label dialog;
     @FXML
@@ -40,9 +40,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        displayPicture.setClip(new Circle(50, 50, 50));
-        this.setBackground(new Background(new BackgroundFill(Color.AQUA,
-                CornerRadii.EMPTY, Insets.EMPTY)));
+        int circleRadius = CIRCLE_SIZE / 2;
+        displayPicture.setClip(new Circle(circleRadius, circleRadius, circleRadius));
 
         dialog.setText(text);
         displayPicture.setImage(img);
@@ -55,17 +54,21 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    public void setDialogBackgroundColour(String color) {
+        dialog.setStyle(String.format("%s -fx-background-color: %s;",
+                DIALOG_STYLE_PREFIX, color));
+    }
+
     public static DialogBox getUserDialog(String l, Image iv) {
         DialogBox db = new DialogBox(l, iv);
-
-        return new DialogBox(l, iv);
+        db.setDialogBackgroundColour(USER_DIALOG_COLOUR);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String l, Image iv) {
         DialogBox db = new DialogBox(l, iv);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.GREENYELLOW,
-                CornerRadii.EMPTY, Insets.EMPTY)));
+        db.setDialogBackgroundColour(DUKE_DIALOG_COLOUR);
         return db;
     }
 }

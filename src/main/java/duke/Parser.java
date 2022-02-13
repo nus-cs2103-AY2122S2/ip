@@ -17,6 +17,7 @@ import duke.command.MarkAsUndoneCommand;
 import duke.command.PostponeTaskCommand;
 import duke.exceptions.NullDateProvidedException;
 import duke.exceptions.TaskNoDateException;
+import duke.misc.Pair;
 import duke.taskobjects.Task;
 import duke.taskobjects.TaskWithDate;
 
@@ -231,24 +232,6 @@ public class Parser {
             return new Pair<>(true, "Invalid number entered, index out of bounds");
         }
         return new Pair<>(false, "");
-    }
-}
-
-class Pair<T, V> {
-    private final T first;
-    private final V second;
-
-    protected Pair(T first, V second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    public T first() {
-        return first;
-    }
-
-    public V second() {
-        return second;
     }
 }
 

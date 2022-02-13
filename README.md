@@ -89,8 +89,9 @@ Startup run code:
  ```
 ~~Hi~~ Bye **(Honestly don't know what I'm supposed to add to bold, italic and strikethrough)**
 
-
-
+## Credits:
+User Icon: <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
+Robot Icon: <a href="https://www.flaticon.com/free-icons/robot" title="robot icons">Robot icons created by Good Ware - Flaticon</a>
 
 
 
