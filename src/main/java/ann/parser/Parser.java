@@ -34,25 +34,25 @@ public class Parser {
      * @return a Command.
      */
     public static Command parse(String input) {
-        if (input.toLowerCase().equals("bye")) {
+        if (input.equalsIgnoreCase("bye")) {
             return new ExitCommand();
-        } else if (input.toLowerCase().equals("list")) {
+        } else if (input.equalsIgnoreCase("list")) {
             return new ListCommand();
         } else if (input.length() < 3) {
             return new IncorrectCommand(INVALID_COMMAND_WARNING);
-        } else if (input.substring(0, 3).toLowerCase().equals("add")) {
+        } else if (input.substring(0, 3).equalsIgnoreCase("add")) {
             return handleAdd(input.substring(3));
         } else if (input.length() < 4) {
             return new IncorrectCommand(INVALID_COMMAND_WARNING);
-        } else if (input.substring(0, 4).toLowerCase().equals("find")) {
+        } else if (input.substring(0, 4).equalsIgnoreCase("find")) {
             return handleFind(input.substring(4));
-        } else if (input.substring(0, 4).toLowerCase().equals("mark")) {
+        } else if (input.substring(0, 4).equalsIgnoreCase("mark")) {
             return handleMark(input.substring(4));
         } else if (input.length() < 6) {
             return new IncorrectCommand(INVALID_COMMAND_WARNING);
-        } else if (input.substring(0, 6).toLowerCase().equals("unmark")) {
+        } else if (input.substring(0, 6).equalsIgnoreCase("unmark")) {
             return handleUnmark(input.substring(6));
-        } else if (input.substring(0, 6).toLowerCase().equals("delete")) {
+        } else if (input.substring(0, 6).equalsIgnoreCase("delete")) {
             return handleDelete(input.substring(6));
         } else {
             return new IncorrectCommand(INVALID_COMMAND_WARNING);
