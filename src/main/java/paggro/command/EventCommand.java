@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import paggro.exception.PaggroException;
 import paggro.lister.Lister;
@@ -39,49 +40,74 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(Lister lister, Ui ui, Storage storage) throws PaggroException {
-        String[] desArr = this.getParameters().split(" /", 2);
+        ArrayList<String> args = checkParameters(getParameters());
         Task task;
-        try {
-            String des = desArr[0];
-            String dateTimeString = desArr[1];
-            String[] dateTimeArr = dateTimeString.split(" ");
-            String dateString = dateTimeArr[0];
-            String timeString = null;
-            LocalDate date = LocalDate.parse(dateString);
-            NotableDate nDate = lister.checkDate(date);
-            if (dateTimeArr.length > 1) {
-                timeString = dateTimeArr[1];
-                try {
-                    LocalTime time = LocalTime.parse(timeString);
-                    task = (new Event(des, nDate, time, false));
-                } catch (DateTimeParseException e) {
-                    final String timeInputError = "Really? =.= Time inputs must be in this format:\n"
-                            + "      HH:MM";
-                    throw new PaggroException(FOUR_SPACE + timeInputError);
-                }
-            } else {
-                task = new Event(des, nDate, false);
-            }
-            nDate.addTask(task);
-        } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
-            final String eventFormatError = "Really? =.= The use of the event command must be as follows:\n"
-                    + "      event <DESCRIPTION> /<DATE AND/OR TIME>";
-            throw new PaggroException(FOUR_SPACE + eventFormatError);
-        } catch (DateTimeParseException e) {
-            final String dateInputError = "Really? =.= Date inputs must be in this format:\n"
-                    + "      YYYY-MM-DD";
-            throw new PaggroException((FOUR_SPACE + dateInputError));
+        String description = args.get(0);
+        String dateStr = args.get(1);
+        LocalDate localDate = parseDate(dateStr);
+        NotableDate notableDate = lister.checkDate(localDate);
+        String timeStr = args.get(2);
+        LocalTime localTime;
+        if (timeStr != null) {
+            localTime = parseTime(timeStr);
+            task = new Event(description, notableDate, localTime, false);
+        } else {
+            task = new Event(description, notableDate, false);
         }
 
+        notableDate.addTask(task);
         lister.add(task);
         assert lister.getTasks().size() > 0 : "Tasks should have at least one item";
 
         try {
             storage.addToStorage(task);
         } catch (IOException e) {
-            throw new PaggroException("    Could not add to paggro.txt =.=");
+            throw new PaggroException(FOUR_SPACE + "Could not add to paggro.txt =.=");
         }
 
         return ui.showAdded(task) + "\n" + ui.showNumber(lister.getTasks().size());
+    }
+
+    private ArrayList<String> checkParameters(String parameters) throws PaggroException {
+        String[] desArr = this.getParameters().split(" /", 2);
+        ArrayList<String> args = new ArrayList<>();
+        try {
+            args.add(desArr[0]);
+            String dateTimeString = desArr[1];
+            String[] dateTimeArr = dateTimeString.split(" ");
+            args.add(dateTimeArr[0]);
+            String timeString = null;
+            if (dateTimeArr.length > 1) {
+                timeString = dateTimeArr[1];
+            }
+            args.add(timeString);
+        } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
+            final String eventFormatError = "Really? =.= The use of the event command must be as follows:\n"
+                    + "      event <DESCRIPTION> /<DATE AND/OR TIME>";
+            throw new PaggroException(FOUR_SPACE + eventFormatError);
+        }
+        return args;
+    }
+
+    private LocalDate parseDate(String dateStr) throws PaggroException {
+        try {
+            LocalDate date = LocalDate.parse(dateStr);
+            return date;
+        } catch (DateTimeParseException e) {
+            final String dateInputError = "Really? =.= Date inputs must be in this format:\n"
+                    + "      YYYY-MM-DD";
+            throw new PaggroException(FOUR_SPACE + dateInputError);
+        }
+    }
+
+    private LocalTime parseTime(String timeStr) throws PaggroException {
+        try {
+            LocalTime time = LocalTime.parse(timeStr);
+            return time;
+        } catch (DateTimeParseException e) {
+            final String timeInputError = "Really? =.= Time inputs must be in this format:\n"
+                    + "      HH:MM";
+            throw new PaggroException(FOUR_SPACE + timeInputError);
+        }
     }
 }
