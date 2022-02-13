@@ -174,7 +174,7 @@ public class Parser {
             int deleteIndex = Integer.parseInt(input.get(1)) - 1;
             return new DeleteCommand(deleteIndex);
         } catch (IndexOutOfBoundsException | NumberFormatException ex) {
-            DukeException exception = new DukeException("OOPS!!! invalid index.");
+            DukeException exception = new DukeException("invalid index.");
             return new ErrorCommand(exception.toString());
         }
     }

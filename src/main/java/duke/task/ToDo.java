@@ -13,7 +13,7 @@ public class ToDo extends Task {
     /**
      * Changes done status.
      *
-     * @param task tasks for to-do.
+     * @param task   tasks for to-do.
      * @param isDone done status.
      */
     public ToDo(String task, boolean isDone) {
@@ -23,8 +23,8 @@ public class ToDo extends Task {
     /**
      * Changes done status by generating new to-do.
      *
-     * @param task tasks for to-do.
-     * @param isDone done status.
+     * @param task     tasks for to-do.
+     * @param isDone   done status.
      * @param priority priority status.
      */
     public ToDo(String task, boolean isDone, Priority priority) {

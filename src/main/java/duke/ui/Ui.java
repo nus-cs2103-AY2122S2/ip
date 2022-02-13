@@ -46,6 +46,10 @@ public class Ui {
         return WELCOME_MSG;
     }
 
+    public static String getExitMessage() {
+        return EXIT_MSG;
+    }
+
     /**
      * Returns error message.
      */
@@ -82,7 +86,7 @@ public class Ui {
      * Returns index message.
      */
     public void showInvalidIndex() {
-        DukeException exception = new DukeException("OOPS!!! invalid index.");
+        DukeException exception = new DukeException("invalid index.");
         out.println(output(exception.toString()));
         outputString = exception.toString();
     }
@@ -113,14 +117,10 @@ public class Ui {
         return outputString;
     }
 
-    public static String getExitMessage() {
-        return EXIT_MSG;
-    }
-
     /**
      * Returns specific message for list.
      *
-     * @param tasks input TaskList.
+     * @param tasks   input TaskList.
      * @param message input of header message.
      */
     public void displayTaskList(TaskList tasks, String message) {

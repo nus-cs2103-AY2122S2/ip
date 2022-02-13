@@ -10,4 +10,10 @@ public class TodoTest {
         ToDo todo = new ToDo("ABC");
         assertEquals("T | 0 | NORM | ABC", todo.saveData());
     }
+
+    @Test
+    public void todo_mark_success() {
+        ToDo todo = new ToDo("123");
+        assertEquals("[T][\u2713][NORM] 123", todo.mark().toString().trim());
+    }
 }

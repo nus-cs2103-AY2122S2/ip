@@ -20,8 +20,8 @@ public class Event extends Task {
     /**
      * Changes done status by generating new Task.
      *
-     * @param task tasks for event.
-     * @param at   time at.
+     * @param task   tasks for event.
+     * @param at     time at.
      * @param isDone done status.
      */
     public Event(String task, LocalDate at, boolean isDone) {
@@ -32,9 +32,9 @@ public class Event extends Task {
     /**
      * Changes status by generating new Deadline.
      *
-     * @param task tasks for task.
-     * @param isDone done status.
-     * @param at   time at.
+     * @param task     tasks for task.
+     * @param isDone   done status.
+     * @param at       time at.
      * @param priority priority status.
      */
     public Event(String task, LocalDate at, boolean isDone, Priority priority) {

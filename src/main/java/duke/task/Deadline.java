@@ -20,8 +20,8 @@ public class Deadline extends Task {
     /**
      * Changes done status by generating new Deadline.
      *
-     * @param task tasks for deadline.
-     * @param by   time by.
+     * @param task   tasks for deadline.
+     * @param by     time by.
      * @param isDone done status.
      */
     public Deadline(String task, LocalDate by, boolean isDone) {
@@ -32,9 +32,9 @@ public class Deadline extends Task {
     /**
      * Changes status by generating new Deadline.
      *
-     * @param task tasks for task.
-     * @param isDone done status.
-     * @param by   time by.
+     * @param task     tasks for task.
+     * @param isDone   done status.
+     * @param by       time by.
      * @param priority priority status.
      */
     public Deadline(String task, LocalDate by, boolean isDone, Priority priority) {

@@ -13,7 +13,7 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     *  Connects Ui Storage and TaskList Main class of the Duke application
+     * Connects Ui Storage and TaskList Main class of the Duke application
      *
      * @param filePath the file location.
      */

@@ -21,7 +21,7 @@ public class Task {
     /**
      * Changes status by generating new Task.
      *
-     * @param task tasks for task.
+     * @param task   tasks for task.
      * @param isDone done status.
      */
     public Task(String task, boolean isDone) {
@@ -33,8 +33,8 @@ public class Task {
     /**
      * Changes status by generating new Task.
      *
-     * @param task tasks for task.
-     * @param isDone done status.
+     * @param task     tasks for task.
+     * @param isDone   done status.
      * @param priority priority status.
      */
     public Task(String task, boolean isDone, Priority priority) {
