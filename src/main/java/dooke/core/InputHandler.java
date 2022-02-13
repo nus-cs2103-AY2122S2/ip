@@ -294,7 +294,7 @@ public class InputHandler {
     }
 
     /**
-     * Initializer method for reading the file to add to the task list.
+     * Reads the file to add to the task list.
      *
      * @param file The file to be read.
      * @throws IOException Throws an exception if not able to read/obtain the file.
@@ -349,7 +349,7 @@ public class InputHandler {
     }
 
     /**
-     * Method to save the tasks at the end of the session.
+     * Saves the tasks at the end of the session.
      *
      * @param filePath The path of the file where the content needs to be saved.
      * @throws IOException Throws an exception in the event that there is no file to be written to.

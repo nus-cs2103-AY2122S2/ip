@@ -19,7 +19,7 @@ public class Main extends Application {
     private Dooke dooke = new Dooke();
 
     /**
-     * Override start method for starting the gui application.
+     * Overrides start method for starting the gui application.
      * @param stage The stage of the javafx application.
      */
     @Override

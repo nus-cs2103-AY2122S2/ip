@@ -23,7 +23,8 @@ public class Dooke {
     }
 
     /**
-     * Wrapper method to obtain the output for a input command.
+     * Obtains the output for an input command.
+     *
      * @param input The input command.
      * @return The resulting response.
      */
@@ -32,7 +33,8 @@ public class Dooke {
     }
 
     /**
-     * Method to check whether the input command is bye or not.
+     * Checks whether the input command is bye or not.
+     *
      * @param input THe input command.
      * @return Boolean value related to the equality of the command to bye.
      */
@@ -41,7 +43,8 @@ public class Dooke {
     }
 
     /**
-     * Method for the welcome message.
+     * Obtains the welcome message.
+     *
      * @return The welcome message.
      */
     public String welcome() {

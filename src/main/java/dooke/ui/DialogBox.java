@@ -28,7 +28,6 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for the DialogBox class.
-     *
      * @param text The text that would go into the dialog box.
      * @param image The accompanying image.
      */
@@ -57,7 +56,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Method for obtaining the user's dialog box.
+     * Obtains the user's dialog box.
      *
      * @param text The text for the dialog box.
      * @param image The accompanying image.
@@ -68,7 +67,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Method for obtaining the dooke's dialog box.
+     * Obtains the Dooke's dialog box.
      *
      * @param text The text for the dialog box.
      * @param image The accompanying image.

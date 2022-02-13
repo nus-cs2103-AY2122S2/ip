@@ -12,7 +12,6 @@ import dooke.utilities.OutputFormatter;
 
 /**
  * Manager class to handle input/output data.
- *
  * @author s7manth
  * @version 0.2
  */
@@ -29,7 +28,7 @@ public class IoManager {
 
 
     /**
-     * Constructor for the IOManager class.
+     * Constructor for the IoManager class.
      */
     private IoManager() {
         this(System.in, new PrintWriter(System.out));
@@ -37,7 +36,7 @@ public class IoManager {
     }
 
     /**
-     *
+     * Constructor for the IoManager class.
      * @param inputStream The input stream used to take inputs from the user.
      * @param printWriter The print writer used to display appropriate output to the user.
      */
@@ -48,8 +47,7 @@ public class IoManager {
     }
 
     /**
-     * Factory method to obtain an instance of IoManager.
-     *
+     * Obtains an instance of IoManager.
      * @return An instance of IoManager class.
      */
     public static IoManager getInstance() {
@@ -58,8 +56,7 @@ public class IoManager {
 
 
     /**
-     * Factory method to obtain an instance of IOManager with a specified input stream and print writer.
-     *
+     * Obtains an instance of IOManager with a specified input stream and print writer.
      * @param inputStream The input stream used to take inputs from the user.
      * @param printWriter The print writer used to display appropriate output to the user.
      * @return An instance of the IOManager class with the specified input stream and print writer.
@@ -90,7 +87,6 @@ public class IoManager {
 
     /**
      * Displays text in an appropriate manner on the console.
-     *
      * @param content The string to be displayed.
      */
     private void display(String content) {
@@ -100,6 +96,10 @@ public class IoManager {
         printWriter.flush();
     }
 
+    /**
+     * Gets the welcome message.
+     * @return The welcome message.
+     */
     public String getWelcomeMessage() {
         return outputWrapper(welcomeMessage);
     }
@@ -152,8 +152,7 @@ public class IoManager {
     }
 
     /**
-     * Wrapper method to obtain response for input commands.
-     *
+     * Obtains the response for input commands.
      * @param input The input command to be executed.
      * @return The response by Dooke.
      */

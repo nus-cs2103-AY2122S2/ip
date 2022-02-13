@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
             .getResourceAsStream("/images/dooke.png")));
 
     /**
-     * The initializer method to load the fxml components.
+     * Loads the fxml components.
      */
     @FXML
     public void initialize() {
@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Method for Dooke's initial setup.
+     * Sets up Dooke for the initial run.
      * @param dooke Instance of Dooke.
      */
     public void setDooke(Dooke dooke) {
