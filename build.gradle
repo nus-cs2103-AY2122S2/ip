@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    String javaFxVersion = '17.0.2'
+    String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.main.Launcher"
 }
 
 shadowJar {
@@ -61,6 +61,6 @@ run{
 }
 
 javafx {
-    version = "17"
+    version = "11"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }

@@ -48,7 +48,7 @@ public class Storage {
         while (sc.hasNextLine()) {
             Task task;
             String line = sc.nextLine();
-            String[] splitLine  = line.split(" | ");
+            String[] splitLine  = line.split(" \\| ");
             if (splitLine[0].equals("T")) {
                 task = new Todo(splitLine[2]);
             } else if (splitLine[0].equals("D")) {
@@ -74,7 +74,8 @@ public class Storage {
      */
     public void save(ArrayList<Task> tasks) throws DukeException {
         try {
-            File file = new File("./data/duke.txt");
+            File file = new File(filePath);
+            file.getParentFile().mkdirs();
             FileWriter fw = new FileWriter(file);
             for (Task task: tasks) {
                 fw.write(task.getFileFormat() + "\n");
