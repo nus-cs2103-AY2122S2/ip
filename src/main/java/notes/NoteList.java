@@ -40,7 +40,7 @@ public class NoteList {
         }
         Note newNote = new Note(note);
         this.notes.add(newNote);
-        return "Got it!! :D I've added this note:\n" + note + "\n to your list of notes.";
+        return "Got it! I've added this note:\n" + note + "\n to your list of notes.";
     }
 
     /**

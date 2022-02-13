@@ -18,15 +18,33 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public String createNewTask(String[] inputStringsArray) throws DukeException {
-        switch (inputStringsArray[2]) {
-        case "todo":
-        case "deadline":
-        case "event":
-            return addToList(inputStringsArray);
-        default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
+    public String createNewTask(String[] stringsToAdd, Boolean containsBy, String returnString) throws DukeException {
+        Task task;
+        if (stringsToAdd[2].equals("todo")) {
+            if (containsBy) {
+                throw new DukeException("Todo cannot have a due date. Create an deadline or event instead!");
+            } else {
+                task = new Todo(returnString);
+            }
+        } else if (stringsToAdd[2].equals("deadline")) {
+            if (!containsBy) {
+                throw new DukeException("A deadline needs a due date. Create a todo instead!");
+            } else {
+                task = new Deadline(returnString, stringsToAdd[stringsToAdd.length - 1]);
+            }
+        } else if (stringsToAdd[2].equals("event")) {
+            if (!containsBy) {
+                throw new DukeException("An event needs a due date. Create a todo instead!");
+            } else {
+                task = new Event(returnString, stringsToAdd[stringsToAdd.length - 1]);
+            }
+        } else {
+            throw new DukeException("Tasks can either be Todos, Deadlines or Events." +
+                    "Enter 'help' if you're confused!");
         }
+        tasks.add(task);
+        return "Got it!! :D I've added this task:\n" + " [" + task.symbol() + "][] " +
+                returnString + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -55,7 +73,6 @@ public class TaskList {
             throw new DukeException("OOPS!! The description of a " +
                     stringsToAdd[0] + " cannot be empty.");
         } else {
-            Task task;
             String returnString = "";
             boolean containsBy = false;
             for (int i = 3; i < stringsToAdd.length; i++) {
@@ -66,28 +83,7 @@ public class TaskList {
                     returnString = returnString + stringsToAdd[i] + " ";
                 }
             }
-            if (stringsToAdd[2].equals("todo")) {
-                if (containsBy) {
-                    throw new DukeException("Todo cannot have a due date. Create an deadline or event instead :)");
-                } else {
-                    task = new Todo(returnString);
-                }
-            } else if (stringsToAdd[2].equals("deadline")) {
-                if (!containsBy) {
-                    throw new DukeException("A deadline needs a due date. Create a todo instead.");
-                } else {
-                    task = new Deadline(returnString, stringsToAdd[stringsToAdd.length - 1]);
-                }
-            } else {
-                if (!containsBy) {
-                    throw new DukeException("An event needs a due date. Create a todo instead.");
-                } else {
-                    task = new Event(returnString, stringsToAdd[stringsToAdd.length - 1]);
-                }
-            }
-            tasks.add(task);
-            return "Got it!! :D I've added this task:\n" + " [" + task.symbol() + "][] " +
-                    returnString + "\nNow you have " + tasks.size() + " tasks in the list.";
+            return createNewTask(stringsToAdd, containsBy, returnString);
         }
     }
 
@@ -99,7 +95,7 @@ public class TaskList {
         int num = Integer.parseInt(number);
         tasks.get(num - 1).setAsDone();
         Task temp = tasks.get(num - 1);
-        return "Nice! :P I've marked this task as done:\n [" + temp.symbol() + "][" +
+        return "Nice! I've marked this task as done:\n [" + temp.symbol() + "][" +
                 temp.getStatusIcon() + "] " + temp;
     }
 
@@ -111,7 +107,7 @@ public class TaskList {
         int num = Integer.parseInt(number);
         tasks.get(num - 1).setAsNotDone();
         Task temp = tasks.get(num - 1);
-        return "OK ._. , I've marked this task as not done yet:\n [" + temp.symbol() + "][" +
+        return "OK , I've marked this task as not done yet:\n [" + temp.symbol() + "][" +
                 temp.getStatusIcon() + "] " + temp;
     }
 
@@ -150,7 +146,7 @@ public class TaskList {
                 }
             }
         }
-        String returnString = "Here are the matching tasks in your list:\n";
+        String returnString = "Here are the tasks I could find in your list that match the keyword:\n";
         for (int i = 0; i < foundTasks.size(); i++) {
             returnString = returnString + (i + 1) + ". [" + foundTasks.get(i).symbol() + "]["
                     + foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";

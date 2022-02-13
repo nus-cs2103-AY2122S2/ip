@@ -33,8 +33,11 @@ public class Parser {
             return noteParser(inputStringsArray, storage);
         case "help":
             return Ui.userHelp();
+        case "bye":
+            System.exit(0);
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
+            throw new DukeException("OOPS! I'm sorry, but I don't know what that command means.\n" +
+                    "Enter 'help' if you need it!");
         }
     }
 
@@ -51,7 +54,7 @@ public class Parser {
             storage.updateTaskData(tasks);
             return unmarked;
         case "new":
-            String added = tasks.createNewTask(inputStringsArray);;
+            String added = tasks.addToList(inputStringsArray);;
             storage.updateTaskData(tasks);
             return added;
         case "delete":
@@ -61,7 +64,8 @@ public class Parser {
         case "find":
             return tasks.find(inputStringsArray[2]);
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
+            throw new DukeException("Not sure what that task command means...\n" +
+                    "Enter 'help' if you need it!");
         }
     }
 
@@ -80,7 +84,8 @@ public class Parser {
         case "find":
             return notes.find(inputStringsArray[2]);
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
+            throw new DukeException("Not sure what that note command means...\n" +
+                    "Enter 'help if you need it!");
         }
     }
 

@@ -32,10 +32,10 @@ public class Duke extends Application {
     private TaskList tasks;
     private NoteList notes;
     private final Parser parser;
-    private static final String TASK_FILE_PATH = "data.txt";
-    private static final String NOTE_FILE_PATH = "data1.txt";
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private static final String TASK_FILE_PATH = "tasklistdata.txt";
+    private static final String NOTE_FILE_PATH = "notelistdata.txt";
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
 
     public Duke() {
         storage = new Storage(TASK_FILE_PATH, NOTE_FILE_PATH);
@@ -61,17 +61,12 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * Main method.
-     * @param args not used.
-     */
     public static void main(String[] args) {}
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
+    /**
+     * Creates the container for the content of the chat to scroll.
+     */
+    public void setContainer(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -86,8 +81,13 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
+        formatWindow(stage, mainLayout);
+    }
 
-        //Step 2. Formatting the window to look as expected
+    /**
+     * Formatting the window to look as expected.
+     */
+    public void formatWindow(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -115,8 +115,14 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
-        //Part 3. Add functionality to handle user input.
+    @Override
+    public void start(Stage stage) {
+        //Setting up required components
+        setContainer(stage);
+
+        //Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -150,11 +156,6 @@ public class Duke extends Application {
      * @returns Duke's response by running the bot.
      */
     public String getResponse(String userInput) {
-        String[] inputStringArray = userInput.split(" ");
-        if (!inputStringArray[0].equals("bye")) {
-            return new Duke().run(userInput);
-        }
-        assert userInput == "bye" : "User input should be bye";
-        return "Bye. Hope to see you again soon! :))";
+        return new Duke().run(userInput);
     }
 }
