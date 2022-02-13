@@ -5,11 +5,12 @@ package ari.command;
  */
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
+    public static final String BYE_MESSAGE = "Have a nice day Master";
 
     @Override
     public String execute() {
         // Print out goodbye message
-        return "Have a nice day Master";
+        return ByeCommand.BYE_MESSAGE;
     }
 
     /**
