@@ -1,0 +1,128 @@
+
+package contact;
+
+import task.Task;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ContactList {
+
+    private List<Contact> contacts = new ArrayList<>();
+
+    public String listContacts() {
+        String list = "";
+        int index = 1;
+        for (Contact c: contacts) {
+            list += index + ". " + c.getName() + "\n";
+
+        }
+
+        return "This is the list of contacts:\n" + list;
+    }
+
+    public void addContact(String name) {
+        contacts.add(new Contact(name));
+    }
+
+    public String showContact(int index) {
+        try {
+            Contact c = contacts.get(index - 1);
+            String pn = c.getPhoneNumber();
+            if (pn == null) {
+                return "There is no contact saved for this person!";
+            } else {
+                return c.getName() + "\nPhone Number: " + pn;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return "Please key in a valid index";
+        }
+    }
+
+    public String execute(String command, String description) {
+        switch (command) {
+        case "add":
+            return processAdd(description);
+
+        case "update":
+            return processUpdate(description);
+
+        case "delete":
+            return processDelete(description);
+
+        case "list":
+            return processList();
+
+
+        default:
+            return "This command does not exists!\nUse 'commandlist' to list out the commands";
+
+        }
+    }
+
+    private String processAdd(String description) {
+        try {
+            String name = description.split(" ")[0];
+            String number = description.split(" ")[1];
+            for (Contact c: contacts) {
+                if (c.getName().equals(name)) {
+                    return "Name already exists! Please use another name!";
+                }
+            }
+            contacts.add(new Contact(name, number));
+            return "Contact added: " + name;
+
+        } catch (IndexOutOfBoundsException e) {
+            return "Please input your number in the format 'add {name} {number}";
+        }
+
+    }
+
+
+    private String processUpdate(String description) {
+        try {
+            String name = description.split(" ")[0];
+            String number = description.split(" ")[1];
+            for (Contact c: contacts) {
+                if (c.getName().equals(name)) {
+                    c.updateContactNumber(number);
+                    return "Contact updated: " + name;
+                }
+            }
+            return "Contact not found!";
+
+        } catch (IndexOutOfBoundsException e) {
+            return "Please input your number in the format 'update {name} {number}";
+        }
+
+    }
+
+    private String processDelete(String description) {
+        try {
+            int index = Integer.parseInt(description);
+            Contact c = contacts.get(index - 1);
+            contacts.remove(index - 1);
+            return "Contact " + c.getName() + " removed!";
+        } catch (IndexOutOfBoundsException e) {
+            return "You can't do that! It's not on the contacts!";
+        } catch (NumberFormatException e) {
+            return "Please input the index of the contact that you want to delete!";
+        }
+    }
+
+    private String processList() {
+        StringBuilder lists = new StringBuilder();
+        for (int i = 0; i < contacts.size(); i++) {
+            if (i != 0) {
+                lists.append("\n");
+            }
+            lists.append(String.format("%d. %s", i + 1, contacts.get(i).toString()));
+
+        }
+        return "Here are the list of your contacts:\n" + lists.toString();
+    }
+
+    public List<Contact> getContactList() {
+        return contacts;
+    }
+}

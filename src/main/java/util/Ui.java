@@ -1,6 +1,7 @@
 
 package util;
 
+import contact.ContactList;
 import task.TaskList;
 
 
@@ -23,6 +24,22 @@ public class Ui {
         return tasks.execute(task, item);
 
 
+    }
+
+    public String processContacts(String input, ContactList contacts) {
+        parser.parse(input);
+        String task = parser.getTask();
+        String item = parser.getItem();
+
+        return contacts.execute(task, item);
+    }
+
+    public String manageContacts() {
+        return "Switched to manage contacts!";
+    }
+
+    public String manageTasks() {
+        return "Switched to manage tasks!";
     }
 
     /**

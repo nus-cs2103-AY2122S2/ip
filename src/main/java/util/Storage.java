@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+import contact.Contact;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -15,13 +16,16 @@ import task.Todo;
 
 public class Storage {
 
-    private final File file;
+    private final File taskFilePath;
+    private final File contactFilePath;
 
     /**
-     * @param filePath String of path to file
+     * @param taskFilePath String of path to file to store task
+     * @param contactFilePath String of path to file to store contacts
      */
-    public Storage(String filePath) {
-        this.file = new File(filePath);
+    public Storage(String taskFilePath, String contactFilePath) {
+        this.taskFilePath = new File(taskFilePath);
+        this.contactFilePath = new File(contactFilePath);
 
     }
 
@@ -30,12 +34,21 @@ public class Storage {
      * @param tasks ArrayList of tasks
      */
 
-    public void loadFile(List<Task> tasks) throws FileNotFoundException {
-        Scanner sc = new Scanner(file);
+    public void loadTaskFile(List<Task> tasks) throws FileNotFoundException {
+        Scanner sc = new Scanner(taskFilePath);
         while (sc.hasNext()) {
             String s = sc.nextLine();
             Task t = parseTextFile(s);
             tasks.add(t);
+        }
+    }
+
+    public void loadContacts(List<Contact> contacts) throws FileNotFoundException {
+        Scanner sc = new Scanner(contactFilePath);
+        while (sc.hasNext()) {
+            String s = sc.nextLine();
+            Contact c = parseContact(s);
+            contacts.add(c);
         }
     }
 
@@ -64,16 +77,33 @@ public class Storage {
         return t;
     }
 
+    private static Contact parseContact(String s) {
+        String[] strarr = s.split(" ");
+        return new Contact(strarr[0], strarr[1]);
+    }
+
     /**
      * writes the tasks into text file before ending the program
      * @param tasks ArrayList of tasks
      */
 
-    public void writeToFile(List<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(this.file);
+    public void writeToTaskFile(List<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(this.taskFilePath);
         StringBuilder s = new StringBuilder();
         for (Task t: tasks) {
             s.append(t.storageString()).append("\n");
+        }
+
+
+        fw.write(s.toString());
+        fw.close();
+    }
+
+    public void writeToContactFile(List<Contact> contacts) throws IOException {
+        FileWriter fw = new FileWriter(this.contactFilePath);
+        StringBuilder s = new StringBuilder();
+        for (Contact c: contacts) {
+            s.append(c.storageString()).append("\n");
         }
 
 

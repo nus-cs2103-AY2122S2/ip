@@ -143,7 +143,7 @@ public class TaskList {
             lists.append(String.format("%d. %s", i + 1, get(i).toString()));
 
         }
-        return lists.toString();
+        return "Here is the list of your tasks:\n" + lists;
     }
 
     private String processMark(String description) {
@@ -158,6 +158,8 @@ public class TaskList {
                     + get(index - 1).toString();
         } catch (IndexOutOfBoundsException e) {
             return "You can't do that! It's not in the list!";
+        } catch (NumberFormatException e) {
+            return "Please input the index of task that you want to mark";
         }
     }
 
@@ -173,6 +175,8 @@ public class TaskList {
                     + get(index - 1).toString();
         } catch (IndexOutOfBoundsException e) {
             return "You can't do that! It's not in the list!";
+        } catch (NumberFormatException e) {
+            return "Please input the index of task that you want to unmark";
         }
     }
 
@@ -185,6 +189,8 @@ public class TaskList {
             return removeTaskResponse(t, this.size());
         } catch (IndexOutOfBoundsException e) {
             return "You can't do that! It's not on the list!";
+        } catch (NumberFormatException e) {
+            return "Please input the index of task that you want to delete";
         }
     }
 
