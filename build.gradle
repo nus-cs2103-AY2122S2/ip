@@ -14,7 +14,7 @@ targetCompatibility = 1.11
 
 jar {
     manifest {
-        attributes 'Main-Class': 'li.zhongfu.cs2103.chatbot.Duke'
+        attributes 'Main-Class': 'li.zhongfu.cs2103.chatbot.Main'
     }
 }
 
