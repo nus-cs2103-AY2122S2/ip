@@ -45,4 +45,8 @@ public class TaskList {
     public void markAsUndone(int index) {
         this.taskList.get(index).markAsUndone();
     }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
 }
