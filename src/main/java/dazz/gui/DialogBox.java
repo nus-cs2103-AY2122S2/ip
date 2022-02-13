@@ -52,12 +52,14 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color: " + "#e6ffec");
         db.setMinHeight(Region.USE_PREF_SIZE);
         return db;
     }
 
     public static DialogBox getDazzDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color: " + "#ece5dd");
         db.setMinHeight(Region.USE_PREF_SIZE);
         db.flip();
         return db;

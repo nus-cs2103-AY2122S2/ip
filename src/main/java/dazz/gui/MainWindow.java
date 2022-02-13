@@ -29,6 +29,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDazzDialog("Hello from Dazz! What can I do for you?\n\n" +
+                        "If you're a new user, please type 'help' to see\n" +
+                        "the list of commands available.", dazzImage)
+        );
     }
 
     public void setDazz(Dazz dazz) {

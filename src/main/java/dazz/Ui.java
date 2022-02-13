@@ -156,8 +156,7 @@ public class Ui {
                 .map(Task::toString)
                 .filter(x -> x.toLowerCase(Locale.ROOT).contains(finalSearch))
                 .collect(Collectors.joining("\n"));
-        searchesMessage = searchesMessage + filteredTaskDescriptions;
-        return searchesMessage;
+        return searchesMessage + filteredTaskDescriptions;
     }
 
     /**
@@ -165,9 +164,12 @@ public class Ui {
      * @return The application guide.
      */
     public String messageForHelp() {
-        return Stream.of(Instruction.values())
+        String helpMessage = "Here are the list of commands available:\n" +
+                "Note that items inside <> are to be specified by you!\n\n";
+        String instructions = Stream.of(Instruction.values())
                 .map(Instruction::get)
                 .collect(Collectors.joining("\n\n"));
+        return helpMessage + instructions;
     }
 
     /**
@@ -179,7 +181,7 @@ public class Ui {
      */
     public String messageForMapping(boolean hasUpdated, String alias, String command) {
         String successMapping = "Nice! Your alias for " + command + " is " + alias;
-        String failureMapping = "Oops!! Your alias does not work!";
+        String failureMapping = "OOPS!! Your alias does not work!";
         return hasUpdated ? successMapping : failureMapping;
     }
 

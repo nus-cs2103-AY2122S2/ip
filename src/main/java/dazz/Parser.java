@@ -91,7 +91,6 @@ public class Parser {
         return new String[]{wordArr[0].trim(), wordArr[1].trim()};
     }
 
-    // alias todo /as t
     private static String[] extractCommandAndAlias(String input) throws IncompleteCommandException {
         String trimmedInput = input.trim();
 
@@ -104,6 +103,7 @@ public class Parser {
         if (wordArr.length < 2 || wordArr[1].trim().equals("")) {
             throw new IncompleteCommandException();
         }
+
         return new String[]{wordArr[0].trim(), wordArr[1].trim()};
     }
 
