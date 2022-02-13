@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
-import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 /**
@@ -43,39 +42,38 @@ public class UpdateDateCommand extends UpdateCommand {
      * @param storage The storage to save the TaskManager to if required.
      * @param ui The Ui to display the output of the command to.
      * @param taskManager The TaskManager containing the tasks.
-     * @return
-     * @throws DukeException
+     * @return The output of the command.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException{
+    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
 
-            if (taskManager.size() == 0) {
-                return ui.showMarkEmptyList();
-            }
+        if (taskManager.size() == 0) {
+            return ui.showMarkEmptyList();
+        }
 
-            if (indexToUpdate < 0 || indexToUpdate >= taskManager.size()) {
-                return ui.showUpdateOutOfBounds();
-            }
+        if (indexToUpdate < 0 || indexToUpdate >= taskManager.size()) {
+            return ui.showUpdateOutOfBounds();
+        }
 
-            Task toUpdate = taskManager.getTask(indexToUpdate);
+        Task toUpdate = taskManager.getTask(indexToUpdate);
 
-            if (toUpdate.getType() == 'T') {
-                return ui.showIncompatibleType();
-            }
+        if (toUpdate.getType() == 'T') {
+            return ui.showIncompatibleType();
+        }
 
-            boolean isSuccess;
+        boolean isSuccess;
 
-            if (newDate != null) {
-                /* Recognizable date format entered */
-                isSuccess = toUpdate.updateDate(newDate);
-            } else {
-                isSuccess = toUpdate.updateDate(newDateString);
-            }
+        if (newDate != null) {
+            /* Recognizable date format entered */
+            isSuccess = toUpdate.updateDate(newDate);
+        } else {
+            isSuccess = toUpdate.updateDate(newDateString);
+        }
 
-            if (!isSuccess) {
-                return ui.showSameDateError();
-            }
+        if (!isSuccess) {
+            return ui.showSameDateError();
+        }
 
-            save(storage, ui, taskManager);
-            return ui.showUpdateSuccess(toUpdate);
+        save(storage, ui, taskManager);
+        return ui.showUpdateSuccess(toUpdate);
     }
 }

@@ -8,7 +8,7 @@ import duke.exceptions.DukeException;
 /**
  * Represents a command to mark a task as done.
  */
-public class MarkDoneCommand extends Command{
+public class MarkDoneCommand extends Command {
     private int indexToMark;
 
     public MarkDoneCommand(int index) {

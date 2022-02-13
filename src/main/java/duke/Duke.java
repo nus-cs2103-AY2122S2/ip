@@ -54,7 +54,7 @@ public class Duke {
         }
     }
 
-    public boolean HasExited() {
+    public boolean hasExited() {
         return this.hasExited;
     }
     public static void main(String[] args) {
