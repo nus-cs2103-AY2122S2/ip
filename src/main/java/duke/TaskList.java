@@ -105,7 +105,7 @@ public class TaskList {
     }
 
     /**
-     * Get number of tasks in current tasklist
+     * Returns number of tasks in current tasklist
      *
      * @return int value of size of tasklist
      */

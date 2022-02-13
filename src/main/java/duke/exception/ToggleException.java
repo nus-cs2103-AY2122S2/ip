@@ -7,15 +7,15 @@ package duke.exception;
 public class ToggleException extends RonException {
     public static final String MARKED_MESSAGE = "Task is already marked.";
     public static final String UNMARKED_MESSAGE = "Task is already unmarked.";
-    private static boolean marked;
+    private static boolean isMarked;
 
-    public ToggleException(boolean marked) {
-        this.marked = marked;
+    public ToggleException(boolean isMarked) {
+        this.isMarked = isMarked;
     }
 
     @Override
     public String toString() {
-        if (this.marked) {
+        if (this.isMarked) {
             return super.toString() + MARKED_MESSAGE;
         }
         return super.toString() + UNMARKED_MESSAGE;
