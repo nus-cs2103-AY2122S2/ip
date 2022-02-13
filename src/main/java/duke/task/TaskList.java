@@ -49,6 +49,8 @@ public class TaskList {
      * @return Task specified by n.
      */
     public Task get(int n) {
+        assert (n > 0 && n < taskList.size()) : "WHAT TASK YOU REFERRING TO AH? HELLO YOU BETTER WAKE UP YOUR IDEA!";
+
         return taskList.get(n);
     }
 
