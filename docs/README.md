@@ -38,7 +38,7 @@ Now you've got 1 task in the list.
 ### `deadline` - Adds deadline task
 
 Add a simple task with a deadline.\
-Format Syntax:```deadline [task] /by [yyyy-dd-mm]```
+Format Syntax:```deadline [task] /by [yyyy-mm-dd]```
 
 Example:
 
