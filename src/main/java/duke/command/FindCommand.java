@@ -10,8 +10,8 @@ import duke.ui.Ui;
 public class FindCommand extends Commands {
 
     public static final String COMMAND_WORDS = "find";
-    public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
-    public static final String FAILURE_MESSAGE = "    'Find' Command Executed Unsuccessfully";
+    public static final String SUCCESS_MESSAGE = "";
+    public static final String FAILURE_MESSAGE = "";
 
     private static final boolean IS_EXIT = false;
     private final String arguments;
@@ -42,7 +42,6 @@ public class FindCommand extends Commands {
      */
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println(tasks.queryTasks(arguments));
-        return new CommandResult(SUCCESS_MESSAGE);
+        return new CommandResult(tasks.queryTasks(arguments));
     }
 }

@@ -10,7 +10,8 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Commands {
     public static final String COMMAND_WORDS = "bye";
-    public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
+    public static final String SUCCESS_MESSAGE = "    Hope to see you again soon :(\n" + "    Let's play video game the next time!";
+                                                        ;
     public static final String FAILURE_MESSAGE = "    'Bye' Command Executed Unsuccessfully";
     private static final boolean IS_EXIT = true;
 
@@ -22,8 +23,6 @@ public class ExitCommand extends Commands {
      */
     @Override
     public boolean isExit() {
-        System.out.println("    Hope to see you again soon :(");
-        System.out.println("    Let's play video game the next time!");
         return IS_EXIT;
     }
 
