@@ -9,7 +9,7 @@ public abstract class Task {
     protected boolean isFiltered;
 
     /**
-     * Construct a task with the specified description.
+     * Constructs a task with the specified description.
      * All task by default are set to not done.
      *
      * @param description The specified description for the task.
@@ -41,6 +41,13 @@ public abstract class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Sets this task as done based on stored value in file.
+     */
+    public void setDoneStatus(int value) {
+        this.isDone = value == 1;
     }
 
     /**

@@ -7,6 +7,7 @@ public enum CommandAction {
     DEADLINE(ActionType.ADD, "description,by"),
     TODO(ActionType.ADD, "description"),
     EVENT(ActionType.ADD, "description,at"),
+    RECUR(ActionType.ADD, "task,every,next"),
     MARK(ActionType.UPDATE, "index"),
     UNMARK(ActionType.UPDATE, "index"),
     DELETE(ActionType.UPDATE, "index"),

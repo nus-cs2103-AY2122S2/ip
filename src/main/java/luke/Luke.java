@@ -50,14 +50,10 @@ public class Luke {
                 Command cmd = Parser.parse(inputs[0]);
                 assert(taskList != null);
                 cmd.execute(taskList);
-                if (Integer.parseInt(inputs[1].strip()) == 1) {
-                    taskList.get(i).markAsDone();
-                }
+                taskList.get(i).setDoneStatus(Integer.parseInt(inputs[1].strip()));
             }
-        } catch (FileNotFoundException e) {
-            System.err.println(e.getMessage());
-        } catch (NumberFormatException e) {
-            System.err.println(e.getMessage());
+        } catch (FileNotFoundException | IndexOutOfBoundsException | IllegalArgumentException e) {
+            e.getStackTrace();
         }
     }
 
