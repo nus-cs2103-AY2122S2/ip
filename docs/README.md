@@ -1,12 +1,4 @@
-# User Guide
-<<<<<<< HEAD
----
-## Quick start
----
-## Features 
-
-### `todo` : Adding a to do task
-=======
+# User Guidee
 
 BingChilling is a **desktop app for managing tasks. optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BingChilling can get your contact management tasks done faster than traditional GUI apps.
 
@@ -34,7 +26,6 @@ BingChilling is a **desktop app for managing tasks. optimized for use via a Comm
 ## Features 
 
 ### Adding a to do task : `todo`
->>>>>>> adb8c406de95db7c7dcb41f1dac18486200ba6cc
 
 Adds a to do task into the task list.
 
@@ -44,72 +35,6 @@ Example of usage:
 
 * `todo buy groceries`
 * `todo watch webcast` 
-<<<<<<< HEAD
-###  Adding a to do task : `todo`
-
-Adds an event task into the task list with the specified date.
-Format: `event TASK /at DATE`
-* Date must be in the format of DD/MM/YYYY
-
-Example of usage: 
-
-* `event wedding /at 20/8/2029`
-* `event career fest /at 12/3/2001` 
-
-### Adding a deadline task : `deadline`
-
-Adds an event task into the task list.
-
-Format: `deadline <task> /by DATE`
-* The date **must be of the format** `DD/MM/YYYY` e.g. `1/7/2021`
-
-Example of usage: 
-
-* `deadline assignment /by 20/8/2029`
-* `deadline return book /by 12/3/2001` 
-
-### Adding an event task : `event`
-
-Adds an event task into the task list.
-
-Format: `event TASK /at DATE`
-* The date **must be of the format** `DD/MM/YYYY` e.g. `1/7/2021`
-
-Example of usage: 
-
-* `event wedding /at 20/8/2029`
-* `event career fest /at 12/3/2001` 
-
-### Locating tasks by description : `find`
-
-Finds tasks whose descriptions contain any of the given keywords.
-
-Format: `find KEY_WORD`
-* The search is case-sensitive. e.g `chill` will not match `CHILL`
-* The order of the keywords matter. e.g. `river water` will not match `water river`
-* Only the description is searched.
-* Only substrings will be matched e.g. `Darker` will not match `Dark` but `Dark` will match `Darker`
-* Tasks matching at least one keyword will be returned e.g. `join school` will return `join school choir`, `join school band`.
-
-Examples of usage:
-* `find career fair`
-### Listing all task : `list`
-
-Shows a list of all the task in the task list.
-
-Format: `list`
-
-### Marking a task as done : `mark`
-
-Marks a task with `X` that indicates it is done.
-
-Format: `mark INDEX`
-* Marks a task in the task list at the specified INDEX. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, …​
-* Can only mark a task which is not yet marked.
-
-Example of usage: 
-
-=======
 ###  Adding an event task : `event`
 
 Adds an event task into the task list with the specified date.
@@ -162,7 +87,6 @@ Format: `mark INDEX`
 
 Example of usage: 
 
->>>>>>> adb8c406de95db7c7dcb41f1dac18486200ba6cc
 * `mark 1`
   * Marks the first task in the task list as done.
   
@@ -241,8 +165,4 @@ BingChilling data are saved as a text file [JAR file location]/data/ekud.txt. Ad
 | unmark | `unmark 1` |
 | postpone | `postone 1 12/12/1212` |
 | delete | `delete 1` |
-<<<<<<< HEAD
 | bye | `bye` |
-=======
-| bye | `bye` |
->>>>>>> adb8c406de95db7c7dcb41f1dac18486200ba6cc
