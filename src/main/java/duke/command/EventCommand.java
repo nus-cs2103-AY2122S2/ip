@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.dukeexceptions.DukeException;
 //import duke.dukeexceptions.EventException;
+import duke.extension.CheckDuplicate;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.ui.Ui;
@@ -31,17 +32,24 @@ public class EventCommand extends Command {
         String result = "";
         String[] parts = input.split(" ");
         if (parts.length == 1) {
-            return "The format should be: event <description> /at <date>\n";
+            return "The format should be: eventTask <description> /at <date>\n";
         }
         String[] split1 = input.split("/at ");
         if (split1.length == 1) {
-            return "You need to tell me your event date\n e.g event <description> /at <date>\n";
+            return "You need to tell me your eventTask date\n e.g eventTask <description> /at <date>\n";
         }
         String eventDesription = split1[0].substring(6);
         String eventDate = split1[1];
-        Task event = new Event(eventDesription, eventDate);
-        taskList.add(event);
-        result += ui.showEventTaskAdded(event, taskList);
+        Task eventTask = new Event(eventDesription, eventDate);
+        Task duplicated = CheckDuplicate.checkDuplicate(eventTask, taskList);
+        if (!duplicated.equals(eventTask)) {
+            result += "This task has been added before!\n";
+            result += duplicated.toString();
+            result += "\n please enter another task";
+            return result;
+        }
+        taskList.add(eventTask);
+        result += ui.showEventTaskAdded(eventTask, taskList);
         storage.saveFile(taskList);
         return result;
     }

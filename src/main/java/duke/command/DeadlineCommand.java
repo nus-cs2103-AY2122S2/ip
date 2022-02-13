@@ -4,6 +4,7 @@ import java.io.IOException;
 
 //import duke.dukeexceptions.DeadlineException;
 import duke.dukeexceptions.DukeException;
+import duke.extension.CheckDuplicate;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.ui.Ui;
@@ -42,9 +43,16 @@ public class DeadlineCommand extends Command {
         }
         String deadlineDesription = split1[0].substring(9);
         String deadlineDate = split1[1];
-        Task deadline = new Deadline(deadlineDesription, deadlineDate);
-        taskList.add(deadline);
-        result += ui.showDeadlineTaskAdded(deadline, taskList);
+        Task deadlineTask = new Deadline(deadlineDesription, deadlineDate);
+        Task duplicated = CheckDuplicate.checkDuplicate(deadlineTask, taskList);
+        if (!duplicated.equals(deadlineTask)) {
+            result += "This task has been added before!\n";
+            result += duplicated.toString();
+            result += "\n please enter another task";
+            return result;
+        }
+        taskList.add(deadlineTask);
+        result += ui.showDeadlineTaskAdded(deadlineTask, taskList);
         storage.saveFile(taskList);
         return result;
     }
