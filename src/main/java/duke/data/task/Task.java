@@ -1,9 +1,9 @@
 package duke.data.task;
 
+import java.util.UUID;
+
 import duke.data.exception.IllegalValueException;
 import duke.data.tag.Tag;
-
-import java.util.UUID;
 
 /**
  * A task class.

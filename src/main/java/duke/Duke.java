@@ -5,8 +5,6 @@ import java.io.IOException;
 import duke.commands.Command;
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
-import duke.data.exception.IllegalValueException;
-import duke.data.exception.ResourceNotFoundException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;

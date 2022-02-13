@@ -1,8 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.data.exception.IllegalValueException;
 import org.junit.jupiter.api.Test;
 
+import duke.data.exception.IllegalValueException;
 import duke.data.task.TodoTask;
 
 /**

@@ -3,7 +3,7 @@ package duke.data.exception;
 /**
  * Exception that occurs when an invalid value is provided.
  */
-public class IllegalValueException extends DukeException{
+public class IllegalValueException extends DukeException {
     /**
      * Constructs an invalid value exception.
      *

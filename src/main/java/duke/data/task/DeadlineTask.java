@@ -1,9 +1,9 @@
 package duke.data.task;
 
-import duke.data.exception.IllegalValueException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.data.exception.IllegalValueException;
 
 /**
  * A deadline task that has a deadline property.
@@ -28,7 +28,8 @@ public class DeadlineTask extends Task {
      * @param done completion status of the task.
      * @param id id of the task.
      */
-    public DeadlineTask(String description, String deadline, boolean done, String id, String tag) throws IllegalValueException {
+    public DeadlineTask(String description, String deadline, boolean done, String id,
+                        String tag) throws IllegalValueException {
         super(description, done, id, tag);
         this.deadline = LocalDate.parse(deadline);
         this.deadlineString = this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));

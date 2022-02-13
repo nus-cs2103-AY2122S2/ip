@@ -3,9 +3,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.format.DateTimeParseException;
 
-import duke.data.exception.IllegalValueException;
 import org.junit.jupiter.api.Test;
 
+import duke.data.exception.IllegalValueException;
 import duke.data.task.EventTask;
 
 /**
