@@ -47,6 +47,12 @@ public class SortCommand extends Command {
                     return 1;
                 } else if (o1.getPriorityText().equals("LOW ") && o2.getPriorityText().equals("NORM")) {
                     return 1;
+                } else if (o1.getPriorityText().equals("NORM") && o2.getPriorityText().equals("LOW ")) {
+                    return -1;
+                } else if (o1.getPriorityText().equals("HIGH") && o2.getPriorityText().equals("NORM")) {
+                    return -1;
+                } else if (o1.getPriorityText().equals("HIGH") && o2.getPriorityText().equals("LOW ")) {
+                    return -1;
                 } else {
                     return 0;
                 }
