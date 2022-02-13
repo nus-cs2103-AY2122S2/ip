@@ -52,17 +52,17 @@ public class Parser {
         case "todo":
             currentTask = parseMessageContents(message, TaskTypes.TODO);
             addTask(currentTask, storage, tasks);
-            confirmationMessage = addTaskMessage(currentTask, tasks);
+            confirmationMessage = confirmationTaskAddtion(currentTask, tasks);
             break;
         case "deadline":
             currentTask = parseMessageContents(message, TaskTypes.DEADLINE);
             addTask(currentTask, storage, tasks);
-            confirmationMessage = addTaskMessage(currentTask, tasks);
+            confirmationMessage = confirmationTaskAddtion(currentTask, tasks);
             break;
         case "event":
             currentTask = parseMessageContents(message, TaskTypes.EVENT);
             addTask(currentTask, storage, tasks);
-            confirmationMessage = addTaskMessage(currentTask, tasks);
+            confirmationMessage = confirmationTaskAddtion(currentTask, tasks);
             break;
         default:
             throwInvalidInput();
@@ -174,7 +174,7 @@ public class Parser {
         return null; //should not reach here
     }
 
-    private String addTaskMessage(Task task, TaskList tasks) {
+    private String confirmationTaskAddtion(Task task, TaskList tasks) {
         return "Alright then! I've added the task to your list:" + "\n\t" + task + "\n"
             + getTaskCountMessage(tasks);
     }
