@@ -8,3 +8,4 @@ T | 0 | Donkey Kong
 D | 0 | Supper | 8/2/2022 1314
 T | 0 | Donkey Kong
 D | 0 | Supper | 13/2/2022 1935
+T | 0 |  me
