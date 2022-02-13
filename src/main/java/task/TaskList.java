@@ -18,7 +18,8 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public String createNewTask(String[] stringsToAdd, Boolean containsBy, String returnString) throws DukeException {
+    public String createNewTask(String[] stringsToAdd, Boolean containsBy, Boolean containsOn, String returnString)
+            throws DukeException {
         Task task;
         if (stringsToAdd[2].equals("todo")) {
             if (containsBy) {
@@ -28,13 +29,13 @@ public class TaskList {
             }
         } else if (stringsToAdd[2].equals("deadline")) {
             if (!containsBy) {
-                throw new DukeException("A deadline needs a due date. Create a todo instead!");
+                throw new DukeException("A deadline needs a due date. Create a todo/event instead!");
             } else {
                 task = new Deadline(returnString, stringsToAdd[stringsToAdd.length - 1]);
             }
         } else if (stringsToAdd[2].equals("event")) {
-            if (!containsBy) {
-                throw new DukeException("An event needs a due date. Create a todo instead!");
+            if (!containsOn) {
+                throw new DukeException("An event needs a date. Create a todo/deadline instead!");
             } else {
                 task = new Event(returnString, stringsToAdd[stringsToAdd.length - 1]);
             }
@@ -75,15 +76,19 @@ public class TaskList {
         } else {
             String returnString = "";
             boolean containsBy = false;
+            boolean containsOn = false;
             for (int i = 3; i < stringsToAdd.length; i++) {
                 if (stringsToAdd[i].equals("by")) {
                     containsBy = true;
+                    break;
+                } else if (stringsToAdd[i].equals("on")) {
+                    containsOn = true;
                     break;
                 } else {
                     returnString = returnString + stringsToAdd[i] + " ";
                 }
             }
-            return createNewTask(stringsToAdd, containsBy, returnString);
+            return createNewTask(stringsToAdd, containsBy, containsOn, returnString);
         }
     }
 
