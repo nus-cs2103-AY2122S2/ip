@@ -43,7 +43,7 @@ public class Ui {
         result += "Here are all your tasks:\n";
         for (int i = 0; i < taskList.size(); i++) {
 //            System.out.println((i + 1) + "." + taskList.get(i).toString());
-            result += (i + 1) + ". " + taskList.get(i).toString() + "\n";
+            result += (i + 1) + "." + taskList.get(i).toString();
         }
         return result;
     }
