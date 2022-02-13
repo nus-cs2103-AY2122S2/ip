@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.data.exception.IllegalValueException;
 import org.junit.jupiter.api.Test;
 
 import duke.data.task.TodoTask;
@@ -13,11 +14,12 @@ public class TodoTaskTest {
      * and its methods work correctly.
      */
     @Test
-    public void todoTask_constructor() {
+    public void todoTask_constructor() throws IllegalValueException {
+        String todoTag = "Meal";
         String todoDesc = "Eat chicken";
-        String todoDone = "[T][X] Eat chicken";
-        String todoUndone = "[T][ ] Eat chicken";
-        TodoTask task = new TodoTask(todoDesc);
+        String todoDone = "[T][X] Eat chicken <Meal>";
+        String todoUndone = "[T][ ] Eat chicken <Meal>";
+        TodoTask task = new TodoTask(todoDesc, todoTag);
 
         // instantiates with correct description and is undone
         assertEquals(task.toString(), todoUndone);

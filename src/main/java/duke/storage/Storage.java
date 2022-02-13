@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.data.exception.IllegalValueException;
 import duke.data.exception.ResourceNotFoundException;
 import duke.data.task.DeadlineTask;
 import duke.data.task.EventTask;
@@ -54,7 +55,7 @@ public class Storage {
      * @return a list of tasks.
      * @throws FileNotFoundException if the file cannot be found.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws FileNotFoundException, IllegalValueException {
         ArrayList<Task> taskListFromStore = new ArrayList<>();
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -64,17 +65,18 @@ public class Storage {
             String type = currentLineSplit[1];
             int done = Integer.parseInt(currentLineSplit[2]);
             String description = currentLineSplit[3];
+            String tagName = currentLineSplit[4];
 
             if (type.equals("T")) {
-                TodoTask task = new TodoTask(description, done == 1, id);
+                TodoTask task = new TodoTask(description, done == 1, id, tagName);
                 taskListFromStore.add(task);
             } else if (type.equals("D")) {
                 String deadline = currentLineSplit[4];
-                DeadlineTask task = new DeadlineTask(description, deadline, done == 1, id);
+                DeadlineTask task = new DeadlineTask(description, deadline, done == 1, id, tagName);
                 taskListFromStore.add(task);
             } else if (type.equals("E")) {
                 String deadline = currentLineSplit[4];
-                EventTask task = new EventTask(description, deadline, done == 1, id);
+                EventTask task = new EventTask(description, deadline, done == 1, id, tagName);
                 taskListFromStore.add(task);
             }
         }

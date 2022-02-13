@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import duke.commands.Command;
 import duke.data.TaskList;
+import duke.data.exception.DukeException;
+import duke.data.exception.IllegalValueException;
 import duke.data.exception.ResourceNotFoundException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -28,7 +30,7 @@ public class Duke {
         try {
             this.storage = new Storage();
             this.taskList = new TaskList(storage.load());
-        } catch (ResourceNotFoundException | IOException e) {
+        } catch (DukeException | IOException e) {
             ui.send(e.getMessage());
             this.taskList = new TaskList();
         }

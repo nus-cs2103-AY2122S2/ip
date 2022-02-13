@@ -1,5 +1,7 @@
 package duke.data.task;
 
+import duke.data.exception.IllegalValueException;
+
 /**
  * A todo task.
  */
@@ -11,8 +13,8 @@ public class TodoTask extends Task {
      * @param done completion status of the task.
      * @param id id of the task.
      */
-    public TodoTask(String description, boolean done, String id) {
-        super(description, done, id);
+    public TodoTask(String description, boolean done, String id, String tag) throws IllegalValueException {
+        super(description, done, id, tag);
     }
 
     /**
@@ -20,8 +22,8 @@ public class TodoTask extends Task {
      *
      * @param description description of the task.
      */
-    public TodoTask(String description) {
-        super(description);
+    public TodoTask(String description, String tag) throws IllegalValueException {
+        super(description, tag);
     }
 
     /**
@@ -31,6 +33,6 @@ public class TodoTask extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + " <" + super.getTagName() + ">";
     }
 }
