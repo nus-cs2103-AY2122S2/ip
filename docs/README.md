@@ -22,9 +22,7 @@ Using a search function, you can find any tasks in the list
 
 ## Usage
 
-### `help` - Brings you to a help page on the web
-
-![FF GUIDE](https://user-images.githubusercontent.com/77189033/153693063-fc7bf720-6ef6-444d-b1d7-fe5ff51e15e0.jpg)
+### `help` - Brings you to a help page on the web (This page)
 
 ### `list` - Lists out all the items in the tasklist
 
