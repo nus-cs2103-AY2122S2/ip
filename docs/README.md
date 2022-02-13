@@ -2,7 +2,7 @@
 
 BingChilling is a **desktop app for managing tasks. optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BingChilling can get your contact management tasks done faster than traditional GUI apps.
 
-* [Quick Start](#Quick Start)
+* [Quick Start](#quick-start)
 
 ## Quick Start
 
