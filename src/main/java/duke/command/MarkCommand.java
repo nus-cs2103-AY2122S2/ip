@@ -3,10 +3,9 @@ package duke.command;
 import java.io.IOException;
 
 import duke.dukeexceptions.DukeException;
-import duke.dukeexceptions.MarkException;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 
 
@@ -27,19 +26,21 @@ public class MarkCommand extends Command {
      * @throws IOException error saving to the file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        String result = "";
         try {
             String[] parts = input.split(" ");
             int index = Integer.parseInt(parts[1]) - 1;
             Task markTask = taskList.get(index);
             if (markTask.isDone()) {
-                ui.showMarkTaskAsAlreadyDone(markTask);
+                result += ui.showMarkTaskAsAlreadyDone(markTask);
             } else {
-                ui.showMarkTaskAsDone(markTask);
+                result += ui.showMarkTaskAsDone(markTask);
             }
             storage.saveFile(taskList);
+            return result;
         } catch (IndexOutOfBoundsException e) {
-            throw new MarkException("You have entered invalid task or that task does not exist!");
+            return "You have entered invalid task or that task does not exist!";
         }
     }
 }

@@ -1,6 +1,8 @@
 package duke.main;
 import java.io.IOException;
 
+import duke.dukeexceptions.DukeException;
+import duke.parser.Parser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,8 +25,6 @@ import javafx.scene.image.Image;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-
 
     private Duke duke = new Duke("data/tasks.txt");
     private ScrollPane scrollPane;
@@ -95,13 +95,26 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-//        Part 3. Add functionality to handle user input.
+        //Part 3. Add functionality to handle user input.
+
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -115,12 +128,12 @@ public class Main extends Application {
         return textToAdd;
     }
 
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException, IOException {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImg),
-                DialogBox.getDukeDialog(dukeText, dukeImg) 
+                DialogBox.getDukeDialog(dukeText, dukeImg)
         );
         userInput.clear();
     }
@@ -129,10 +142,7 @@ public class Main extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        if (input.equals("bye")) {
-            return "Bye Bye!";
-        }
-        return "Duke heard: " + input;
+    private String getResponse(String input) throws DukeException, IOException {
+        return duke.getResponse(input);
     }
 }

@@ -3,7 +3,7 @@ package duke.command;
 import duke.dukeexceptions.DukeException;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
+import duke.ui.Ui;
 
 public class ListCommand extends Command {
     public ListCommand(String input) {
@@ -17,9 +17,10 @@ public class ListCommand extends Command {
      * @param ui ui class that helps to print suitable command
      * @param storage storage that manage saving and loading data
      * @throws DukeException an error message
+     * @return a string of response
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showAllTasks(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.showAllTasks(taskList);
     }
 }

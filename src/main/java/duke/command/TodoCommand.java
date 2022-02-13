@@ -6,7 +6,7 @@ import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.TodoException;
 import duke.main.Storage;
 import duke.main.TaskList;
-import duke.main.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -25,17 +25,20 @@ public class TodoCommand extends Command {
      * @param storage storage that manage saving and loading data
      * @throws DukeException an error message
      * @throws IOException error saving to the file
+     * @return a response to user input
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        String result = "";
         String[] parts = input.split(" ");
         if (parts.length == 1) {
-            throw new TodoException("☹ OOPS!!! The description of a todo cannot be empty.(please insert again)");
+            return "☹ OOPS!!! The description of a todo cannot be empty.(please insert again)";
         }
         String todoDesription = input.substring(5);
         Task todo = new Todo(todoDesription);
         taskList.add(todo);
-        ui.showTodoTaskAdded(todo, taskList);
+        result += ui.showTodoTaskAdded(todo, taskList);
         storage.saveFile(taskList);
+        return result;
     }
 }
