@@ -7,9 +7,12 @@ import seedu.storage.TaskList;
  */
 public class ByeCommand extends Command {
 
+    private boolean state;
+
     @Override
     public void input(String input) {
-        //not in use
+        // input is not in use in this scenario
+        state = true;
     }
 
     /**
@@ -21,7 +24,7 @@ public class ByeCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         // Task list is not in use in this scenario
-        isExit = true;
+        isExit = state;
         return "Good Bye!";
     }
 }

@@ -1,5 +1,6 @@
 package seedu.commands;
 
+import seedu.duke.DukeException;
 import seedu.storage.TaskList;
 
 /**
@@ -7,9 +8,20 @@ import seedu.storage.TaskList;
  */
 public class ListCommand extends Command {
 
+    private boolean priority;
+
     @Override
-    public void input(String input) {
-        // not in use
+    public void input(String input) throws DukeException {
+        switch (input) {
+        case "":
+            priority = false;
+            break;
+        case "priority":
+            priority = true;
+            break;
+        default:
+            throw new DukeException("I think you misspelled 'priority'.");
+        }
     }
 
     /**
@@ -20,6 +32,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
+        if (priority) {
+            tasks.sort();
+        }
         return tasks.toString();
     }
 }

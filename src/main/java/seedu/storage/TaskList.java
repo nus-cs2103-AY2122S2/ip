@@ -58,9 +58,8 @@ public class TaskList {
         }
     }
 
-    public String sort() {
+    public void sort() {
         Collections.sort(TASKS);
-        return "Task list has been sorted!";
     }
 
     /**
@@ -101,7 +100,8 @@ public class TaskList {
 
         for (int i = 0; i < TASKS.size(); i++) {
             out.append("\t\t");
-            out.append(i + 1 + ". ");
+            out.append(i + 1);
+            out.append(". ");
             out.append(TASKS.get(i).toString());
             out.append("\n");
         }
