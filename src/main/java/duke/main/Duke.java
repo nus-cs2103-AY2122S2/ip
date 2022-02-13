@@ -30,7 +30,7 @@ public class Duke {
         }
     }
 
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         if (isExit) {
             return "";
         } else {
