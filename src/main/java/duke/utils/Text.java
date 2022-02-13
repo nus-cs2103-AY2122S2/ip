@@ -24,6 +24,9 @@ public class Text {
     public static final String TEXT_TASK_ADDED = "Got it! I've added this task:\n   %s\n"
             + "Now you have %s tasks in the list.";
 
+    public static final String TEXT_ALL_TASKS_ADDED = "Got it! I've added all the recurring tasks to the calendar\n"
+            + "Now you have %s tasks in the list.";
+
     public static final String TEXT_MARKED = "Nice! I've marked this task as complete:\n   %s";
 
     public static final String TEXT_UNMARKED = "Ok!! I've marked this task as incomplete:\n   %s";

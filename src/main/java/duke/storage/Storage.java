@@ -87,7 +87,6 @@ public class Storage {
      * @throws IOException - if there was an error saving file using I/O
      */
     public void save(Calendar calendar) throws IOException {
-        System.out.println("Saving");
         FileWriter fw = new FileWriter(filePath);
         fw.write(calendar.saveFormat());
         fw.close();

@@ -8,6 +8,7 @@ import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
+import duke.commands.RecurringEventCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
 import duke.info.exception.InvalidCommandException;
@@ -34,6 +35,17 @@ public class Parser {
         }
 
         switch(command) {
+        case "recurring":
+            // format: recurring event hello /at 2 Dec 2019 /interval 7 /ends 1 Jan 2021
+            String[] splitEndDate = splitCommand[1].split(" /ends ", 2);
+            String endDate = splitEndDate[1];
+            String[] splitInterval = splitEndDate[0].split(" /interval ", 2);
+            int interval = Integer.valueOf(splitInterval[1]);
+            String[] splitDate = splitInterval[0].split(" /at ", 2);
+            String date = splitDate[1];
+            String[] splitAction = splitDate[0].split(" ", 2);
+            String event = splitAction[1];
+            return new RecurringEventCommand(event, date, interval, endDate);
         case "bye":
             return new ExitCommand();
         case "list":

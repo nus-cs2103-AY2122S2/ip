@@ -42,6 +42,14 @@ public class Calendar {
     }
 
     /**
+     * Adds all the tasks in the specified ArrayList tasksToAdd to calendar
+     * @param tasksToAdd - the ArrayList of Tasks to be added to the calendar
+     */
+    public void addAll(ArrayList<Task> tasksToAdd) {
+        calendar.addAll(tasksToAdd);
+    }
+
+    /**
      * Removes the task at the index specified by indexToRemove from the ArrayList
      * in calendar. The index is converted from 0-indexing in the ArrayList to a
      * natural 1-indexing
@@ -114,11 +122,14 @@ public class Calendar {
      */
     public String saveFormat() {
         String product = "";
-        for (int i = 0; i < this.calendar.size() - 1; i++) {
+        if (this.calendar.size() == 1) {
+            product += this.calendar.get(0).saveFormat();
+            return product;
+        }
+        for (int i = 0; i < this.calendar.size(); i++) {
             product += this.calendar.get(i).saveFormat();
             product += "\n";
         }
-        product += this.calendar.get(this.calendar.size() - 1).saveFormat();
         return product;
     }
 
