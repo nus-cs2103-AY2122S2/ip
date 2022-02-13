@@ -33,7 +33,7 @@ public class TaskList {
     public String addTask(Task task) {
         assert task != null;
         this.taskList.add(task);
-        return "Got it. I've added this task\n" + task.printTask() + "\n" + "Now you've got " + taskList.size()
+        return "Got it. I've added this task:\n" + task.printTask() + "\n" + "Now you've got " + taskList.size()
                 + " tasks in the list.";
     }
 
@@ -72,7 +72,7 @@ public class TaskList {
         }
         assert markTask != null;
         markTask.setMarked(true);
-        return Map.entry(markTask, "Nice! I've marked this task as done\n"
+        return Map.entry(markTask, "Nice! I've marked this task as done:\n"
                 + markTask.printTask());
     }
 
@@ -92,7 +92,7 @@ public class TaskList {
         }
         assert unmarkTask != null;
         unmarkTask.setMarked(false);
-        return Map.entry(unmarkTask, "Oof! I've marked this task as undone\n"
+        return Map.entry(unmarkTask, "Oof! I've marked this task as undone:\n"
                 + unmarkTask.printTask());
     }
 
@@ -145,7 +145,7 @@ public class TaskList {
         }
 
         StringBuilder printStr = new StringBuilder();
-        printStr.append("Here are the marching tasks in your list:\n");
+        printStr.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < foundTasks.size(); i++) {
             int num = i + 1;
             printStr.append(num);
