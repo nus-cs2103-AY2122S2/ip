@@ -7,7 +7,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Format the to-do class to a style used in local files for saving
+     * Formats the to-do class to a style used in local files for saving
      *
      * @return the formatted string for saving
      */
@@ -17,7 +17,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Format the to-do class to a style used for output
+     * Formats the to-do class to a style used for output
      *
      * @return the formatted string for output
      */

@@ -6,7 +6,7 @@ import pyke.util.TaskList;
 
 public class ListCommand extends Command {
     /**
-     *
+     * Constructs the default ListCommand
      *
      * @param taskList the class store the tasks info
      * @param ui the interface for output information

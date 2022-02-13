@@ -16,7 +16,7 @@ public class DelCommand extends Command {
     }
 
     /**
-     * Execute a command that delete a task.
+     * Executes a command that delete a task.
      * Then it will write the list to the local file and output certain info about this operation.
      *
      * @param taskList the class store the tasks info

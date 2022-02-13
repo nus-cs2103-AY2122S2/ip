@@ -6,6 +6,7 @@ public class Task {
 
     /**
      * The default constructor
+     *
      * @param description
      */
     public Task(String description) {
@@ -25,7 +26,7 @@ public class Task {
         return description.contains(keyword);
     }
     /**
-     * Format the task class to a style used in local files for saving
+     * Formats the task class to a style used in local files for saving
      *
      * @return the formatted string for saving
      */
@@ -38,7 +39,7 @@ public class Task {
     }
 
     /**
-     * Format the task class to a style used for output
+     * Formats the task class to a style used for output
      *
      * @return the formatted string for output
      */

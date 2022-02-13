@@ -8,6 +8,7 @@ public class Deadline extends Task {
 
     /**
      * The default constructor
+     *
      * @param description
      * @param by
      */
@@ -17,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Format the deadline class to a style used in local files for saving
+     * Formats the deadline class to a style used in local files for saving
      *
      * @return the formatted string for saving
      */
@@ -27,7 +28,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Format the deadline class to a style used for output
+     * Formats the deadline class to a style used for output
      *
      * @return the formatted string for output
      */

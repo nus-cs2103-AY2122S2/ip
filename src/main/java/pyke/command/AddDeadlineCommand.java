@@ -18,6 +18,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * The default constructor for Deadine class
+     *
      * @param taskName
      * @param ddl the deadline for the task in String format
      */
@@ -27,7 +28,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Execute a command that adds a deadline task.
+     * Executes a command that adds a deadline task.
      * Then it will write the list to the local file
      * and output certain info about this operation.
      *
@@ -71,7 +72,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * To know if this command will exit the program
+     * Knows if this command will exit the program
      *
      * @return true if this method will exit the program
      */

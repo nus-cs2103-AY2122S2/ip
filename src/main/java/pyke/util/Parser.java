@@ -45,7 +45,7 @@ public class Parser {
         }
     }
     /**
-     * Parse the commands into a string of tokens.
+     * Parses the commands into a string of tokens.
      * Then dispatch the commands according to the first word
      *
      * @param command inputed by the user

@@ -36,8 +36,9 @@ public class Pyke {
 
 
     /**
-     * The method to initialize the ui component
+     * Initializes the ui component
      * It will load the local file into taskList.
+     *
      * @return the message to be sent after initialization
      */
     public String uiInit() {
@@ -50,8 +51,9 @@ public class Pyke {
     }
 
     /**
-     * The runtime processing command component for GUI application
+     * Returns runtime processing command component for GUI application
      * For an input given, it will evaluate and run the command and return corresponding results
+     *
      * @param input the user input received from GUI controller
      * @return the corresponding output from running the input command
      */
@@ -83,17 +85,17 @@ public class Pyke {
 
     public void run() {
         ui.sayGreeting();
-        boolean exitFlag = false;
+        boolean isExit = false;
         try {
             storage.init(taskList);
         } catch (IOException e) {
             ui.outputException("Oops, seems like there is an error when reading local saved files");
         }
-        while (!exitFlag) {
+        while (!isExit) {
             try {
                 Command c = parser.parseCommand(ui.getCommand());
                 c.execute(taskList, ui, storage);
-                exitFlag = c.isExit();
+                isExit = c.isExit();
             } catch (InvalidCommandException e) {
                 ui.outputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (InvalidNumberException e) {

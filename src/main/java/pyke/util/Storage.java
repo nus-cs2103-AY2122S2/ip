@@ -20,6 +20,7 @@ public class Storage {
 
     /**
      * The default constructor
+     *
      * @param dir the file directory
      * @param fileName
      */
@@ -54,7 +55,7 @@ public class Storage {
         taskList.addTask(temp);
     }
     /**
-     * Initialte the taskList by the local file.
+     * Initializes the taskList by the local file.
      * If such file or directory does not exist, it will attempt to create one
      *
      * @param taskList the class that stores info and operations about taskss
@@ -90,7 +91,7 @@ public class Storage {
     }
 
     /**
-     * This operation will write every tasks in a taskList into a local file
+     * Writes every task in a taskList into a local file
      *
      * @param taskList the class that stores all tasks
      * @throws IOException if there is an error when writing to local files

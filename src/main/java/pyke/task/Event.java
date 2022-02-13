@@ -8,6 +8,7 @@ public class Event extends Task {
 
     /**
      * The default constructor
+     *
      * @param description
      * @param eventTime
      */
@@ -17,7 +18,7 @@ public class Event extends Task {
     }
 
     /**
-     * Format the event class to a style used in local files for saving
+     * Formats the event class to a style used in local files for saving
      *
      * @return the formatted string for saving
      */
@@ -27,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * Format the event class to a style used for output
+     * Formats the event class to a style used for output
      *
      * @return the formatted string for output
      */

@@ -19,6 +19,7 @@ public class AddEventCommand extends Command {
 
     /**
      * The default constructor
+     *
      * @param taskName
      * @param eventTime
      */

@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Convert the plain output text to chat-box style with indentation for output
+     * Converts the plain output text to chat-box style with indentation for output
      *
      * @param text : String (output text)
      * @return chat-box style output text : String
@@ -36,7 +36,7 @@ public class Ui {
     }
 
     /**
-     * read a line of String from users' input
+     * reads a line of String from users' input
      *
      * @return the command in String
      */
@@ -66,7 +66,7 @@ public class Ui {
         System.out.println(convertToChatBox(HELP));
     }
     /**
-     * Output text in a chat-box style
+     * Outputs text in a chat-box style
      *
      * @param text the original text for output
      */
@@ -75,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * Output exception information in a chat-box style
+     * Outputs exception information in a chat-box style
      *
      * @param exceptionInfo the original info about exceptions
      */

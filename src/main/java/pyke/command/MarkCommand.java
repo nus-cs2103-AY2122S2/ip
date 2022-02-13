@@ -9,7 +9,7 @@ import pyke.util.Storage;
 import pyke.util.TaskList;
 
 public class MarkCommand extends Command {
-    private boolean markType;
+    private boolean isMark;
     private int taskId;
 
     /**
@@ -18,7 +18,7 @@ public class MarkCommand extends Command {
      * @param taskId
      */
     public MarkCommand(boolean markType, int taskId) {
-        this.markType = markType;
+        this.isMark = markType;
         this.taskId = taskId;
     }
 
@@ -35,9 +35,9 @@ public class MarkCommand extends Command {
         if (taskId <= 0 || taskId > taskList.getSize()) {
             throw new InvalidNumberException();
         } else {
-            taskList.setTaskStatus(taskId - 1, markType);
+            taskList.setTaskStatus(taskId - 1, isMark);
             storage.saveFile(taskList);
-            if (!markType) {
+            if (!isMark) {
                 ui.outputText("OK, I've marked this task as not done yet: \n  "
                         + taskList.getTaskOutputStyle(taskId - 1));
             } else {
@@ -52,9 +52,9 @@ public class MarkCommand extends Command {
         if (taskId <= 0 || taskId > taskList.getSize()) {
             throw new InvalidNumberException();
         } else {
-            taskList.setTaskStatus(taskId - 1, markType);
+            taskList.setTaskStatus(taskId - 1, isMark);
             storage.saveFile(taskList);
-            if (!markType) {
+            if (!isMark) {
                 return ui.outputUiText("OK, I've marked this task as not done yet: \n  "
                         + taskList.getTaskOutputStyle(taskId - 1));
             } else {
