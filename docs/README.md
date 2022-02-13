@@ -1,10 +1,10 @@
-#Taskmaster :skull:
+# Taskmaster :skull:
 
-#User Guide
+# User Guide
 
-##Features 
+## Features 
 
-##Create tasks
+## Create tasks
 The 3 main types of tasks:
 
 **ToDo Tasks**: Tasks that do not have any due dates or a specific date or time that it is happening on. 
@@ -14,26 +14,26 @@ The 3 main types of tasks:
 **Event Tasks** : Tasks that occur at a specific time and date.
 
 
-##Marking and unmarking a task
+## Marking and unmarking a task
 - Users can **mark** tasks as "done" after completing it. Likewise, users can also **unmark** a task as "undone".
 
-##Deleting a task
+## Deleting a task
 - Users can delete tasks if they wish to.
 
-##List all tasks
+## List all tasks
 - Users can list out all their tasks.
 
-##Searching for tasks by name
+## Searching for tasks by name
 - Users search for tasks that match a certain keyword or a date.
 
-##Saving tasks
+## Saving tasks
 - Tasks are saved after closing the application.
 
-##Help
+## Help
 - Users can list out the list of commands.
 
 
-#Usage
+# Usage
 ### `list` - Display the list of tasks in the task list
 Display all the tasks that have been added into the task list.
 
