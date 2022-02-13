@@ -146,5 +146,63 @@ public class Ui {
     public String taskNotFound() {
         return "Sorry! There are no matching tasks found.";
     }
+
+    public String getHelpMessage() {
+        return "To find out more about commands, please type \"help {commandName}\"\n"
+                + "commandNames include: event, todo, deadline, find, mark, unmark, list";
+    }
+
+    public String getHelpMessage(String keyword) {
+        return parseKeyword(keyword);
+    }
+
+    private String parseKeyword(String keyword) {
+        String response = "";
+        switch (keyword) {
+        case "list":
+            response = "The command \"list\" accepts no arguments.\n"
+                    + "It will list out all the task in the current tasklist";
+            break;
+        case "mark":
+            response = "The command \"mark\" accepts one integer argument.\n"
+                    + "It will mark the task at the index specified.\n"
+                    + "use the command \"list\" to find the index of a task.";
+            break;
+        case "unmark":
+            response = "The command \"unmark\" accepts one integer argument.\n"
+                    + "It will unmark the task at the index specified.\n"
+                    + "use the command \"list\" to find the index of a task.";
+            break;
+        case "delete":
+            response = "The command \"delete\" accepts one integer argument.\n"
+                    + "It will delete the task at the index specified.\n"
+                    + "use the command \"list\" to find the index of a task.";
+            break;
+        case "todo":
+            response = "The command \"todo\" accepts one String argument.\n"
+                    + "It will add a new todo task.\n"
+                    + "e.g. todo buy bread";
+            break;
+        case "event":
+            response = "The command \"event\" accepts one String argument.\n"
+                    + "It will add a new event task.\n"
+                    + "Example format: event christmas dinner /at 2022-12-25";
+            break;
+        case "deadline":
+            response = "The command \"deadline\" accepts one String argument.\n"
+                    + "It will add a new deadline task.\n"
+                    + "Example format: deadline prepare christmas dinner /by 2022-12-25";
+            break;
+        case "find":
+            response = "The command \"find\" accepts one String argument.\n"
+                    + "It will return a list of tasks containing the given String.\n"
+                    + "e.g. find bread";
+            break;
+        default:
+            response = getHelpMessage();
+            break;
+        }
+        return response;
+    }
 }
 
