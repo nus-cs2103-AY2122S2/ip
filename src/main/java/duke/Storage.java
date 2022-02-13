@@ -60,18 +60,18 @@ public class Storage {
             String[] tSplit = Parser.splitForwardSlash(input);
             String[] splitT = Parser.splitBracket(tSplit[0]);
             switch(splitT[0]) {
-                case "[T":
-                    t = new ToDo(tSplit[1]);
-                    break;
-                case "[E":
-                    t = new Event(tSplit[1], tSplit[2]);
-                    break;
-                case "[D":
-                    t = new Deadline(tSplit[1], LocalDate.parse(tSplit[2]));
-                    break;
-                default:
-                    t = new Task("eee");
-                    break;
+            case "[T":
+                t = new ToDo(tSplit[1]);
+                break;
+            case "[E":
+                t = new Event(tSplit[1], tSplit[2]);
+                break;
+            case "[D":
+                t = new Deadline(tSplit[1], LocalDate.parse(tSplit[2]));
+                break;
+            default:
+                t = new Task("eee");
+                break;
             }
             if(splitT[1].equals("[X")) {
                 t.done();
