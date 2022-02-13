@@ -49,7 +49,7 @@ You now have 1 task(s)!
 ```
 ---
 
-### `event [description] /at [time]` - Adds a TODO to task list
+### `event [description] /at [time]` - Adds an Event to task list
 
 Parameters:
 - description (required): Description of event to add
@@ -68,7 +68,7 @@ You now have 2 task(s)!
 ```
 ---
 
-### `deadline [description] /by [date]` - Adds a TODO to task list
+### `deadline [description] /by [date]` - Adds a Deadline to task list
 
 Parameters:
 - description (required): Description of deadline to add
