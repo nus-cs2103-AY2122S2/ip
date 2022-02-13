@@ -3,6 +3,8 @@
 BingChilling is a **desktop app for managing tasks. optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BingChilling can get your contact management tasks done faster than traditional GUI apps.
 
 * [Quick Start](#quick-start)
+* [Features](#features)
+  * [Adding a to do task : `todo`](#adding-a-to-do-task-:-todo)   
 
 ## Quick Start
 
@@ -10,7 +12,7 @@ BingChilling is a **desktop app for managing tasks. optimized for use via a Comm
 ---
 ## Features 
 
-### `todo` : Adding a to do task
+### Adding a to do task : `todo`
 
 Adds a to do task into the task list.
 
@@ -20,11 +22,11 @@ Example of usage:
 
 * `todo buy groceries`
 * `todo watch webcast` 
-###  Adding a to do task : `todo`
+###  Adding a to do task : `event`
 
 Adds an event task into the task list with the specified date.
 Format: `event TASK /at DATE`
-* Date must be in the format of DD/MM/YYYY
+* The date **must be of the format** `DD/MM/YYYY` e.g. `1/7/2021`
 
 Example of usage: 
 
@@ -42,18 +44,6 @@ Example of usage:
 
 * `deadline assignment /by 20/8/2029`
 * `deadline return book /by 12/3/2001` 
-
-### Adding an event task : `event`
-
-Adds an event task into the task list.
-
-Format: `event TASK /at DATE`
-* The date **must be of the format** `DD/MM/YYYY` e.g. `1/7/2021`
-
-Example of usage: 
-
-* `event wedding /at 20/8/2029`
-* `event career fest /at 12/3/2001` 
 
 ### Locating tasks by description : `find`
 
