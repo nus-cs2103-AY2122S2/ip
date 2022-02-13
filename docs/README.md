@@ -2,7 +2,7 @@ TaskJamie is a desktop app used to keep track of tasks. It provides a Graphical 
 # User Guide (Set up)
 
 1. Ensure that you have Java `11` or above installed in your Computer.
-2. Download the latest `duke.jar` from  [here](https://github.com/ChanWeiJie/ip/releases/tag/A-Jar2)
+2. Download the latest `duke.jar` from  [here](https://github.com/ChanWeiJie/ip/releases/tag/A-Release)
 3. Copy the file to the folder you want to use as the _home folder_ for your TaskJamie.
 4. Double-click the file to start the app. The GUI should not appear similar to the one found [here](https://chanweijie.github.io/ip/Ui.png). This is because
 the app does not contain any sample data. 
