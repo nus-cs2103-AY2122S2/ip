@@ -48,18 +48,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        if (type.equals(USER)) {
-            dialog.setStyle(USER_STYLE);
-        } else if (type.equals(BERNIE)) {
-            dialog.setStyle(BERNIE_STYLE);
-        }
-        dialog.setText(text);
-        displayPicture.setImage(img);
-        double radius = displayPicture.getFitWidth() / 2;
-        Circle clip = new Circle(radius, radius, radius);
-        displayPicture.setClip(clip);
-        setMinHeight(Region.USE_PREF_SIZE);
+        setDialog(type, text);
+        setDisplayPic(img);
     }
 
     /**
@@ -70,6 +60,28 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    /**
+     * Initializes the text for the dialog box as well as the style
+     * @param type either USER or BERNIE
+     * @param text Text to be put into the dialog box
+     */
+    private void setDialog(String type, String text) {
+        dialog.setText(text);
+        if (type.equals(USER)) {
+            dialog.setStyle(USER_STYLE);
+        } else if (type.equals(BERNIE)) {
+            dialog.setStyle(BERNIE_STYLE);
+        }
+    }
+
+    private void setDisplayPic(Image img) {
+        displayPicture.setImage(img);
+        double radius = displayPicture.getFitWidth() / 2;
+        Circle clip = new Circle(radius, radius, radius);
+        displayPicture.setClip(clip);
+        setMinHeight(Region.USE_PREF_SIZE);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
