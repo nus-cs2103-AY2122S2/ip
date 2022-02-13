@@ -30,6 +30,7 @@ public class PriorityCommand extends Command {
         Task task = tasks.get(idx);
         assert task != null: "Need to have task before continuing";
         task.setPriority(priority);
+        tasks.sort();
         return "Task: " + task.toString() + " has a new priority!";
     }
 }

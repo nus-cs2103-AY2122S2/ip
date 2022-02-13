@@ -35,19 +35,8 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
 
-        if (Paths.get(FILE.getParent()).toFile().mkdirs()) {
-            System.out.println("Info: Parent directory created.");
-        } else {
-            System.out.println("Info: Parent directory found.");
-        }
-
-        if (createFile()) {
-            System.out.println("Info: " + FILE.getAbsolutePath() + " created.\n");
-        } else {
-            System.out.println("Info: Save file found.\n");
-        }
-
-        assert FILE.exists(): "No save file exists at all";
+        Paths.get(FILE.getParent()).toFile().mkdirs();
+        createFile();
 
         try {
             Scanner sc = new Scanner(FILE);
@@ -83,9 +72,10 @@ public class Storage {
         }
     }
 
-    private boolean createFile() throws DukeException {
+    private void createFile() throws DukeException {
         try {
-            return FILE.createNewFile();
+            FILE.createNewFile();
+            assert FILE.exists(): "No save file exists at all";
         } catch (IOException e) {
             throw new DukeException("File creation error. So, cannot save.");
         }
