@@ -1,4 +1,2 @@
-event 1 cs2103t tutorial/at 2022-02-05
-deadline 0 cs2103t gui/by 2022-02-06
-todo 1 this
-todo 0 this
+event 1 CS2103T Tutorial/at 2022-02-16
+deadline 0 CS2103T iP submission/by 2022-02-17
