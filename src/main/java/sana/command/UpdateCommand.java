@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import sana.TaskList;
 import sana.exception.IncompatibleTaskException;
 import sana.exception.OutOfBoundsTaskException;
+import sana.exception.SanaException;
 import sana.exception.UnknownCommandException;
 import sana.task.Deadline;
 import sana.task.Event;
@@ -50,8 +51,7 @@ public class UpdateCommand extends Command {
 
             return sanaResponse.updateTask(taskToUpdate)
                     + sanaResponse.printTaskInList(taskList.getTask(taskIndex));
-        } catch (OutOfBoundsTaskException | UnknownCommandException
-                | IncompatibleTaskException e) {
+        } catch (SanaException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
             return sanaResponse.taskNumberFormatError();
