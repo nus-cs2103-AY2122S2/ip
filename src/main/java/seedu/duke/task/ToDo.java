@@ -12,21 +12,12 @@ public class ToDo extends Task {
     }
 
     /**
-     * used to construct a ToDo with a specified boolean.
-     * @param oldToDo for a ToDo object
-     * @param isDone to specify a boolean
-     */
-    ToDo(ToDo oldToDo, boolean isDone) {
-        super(oldToDo.getTaskName(), isDone, null);
-    }
-
-    /**
      * Used to create a ToDo object.
      * @param taskName for name of task
      * @param isDone to denote whether the task is complete
      */
-    public ToDo(String taskName, boolean isDone) {
-        super(taskName, isDone, null);
+    public ToDo(String taskName, boolean isDone, NoteList notes) {
+        super(taskName, isDone, null, notes);
     }
 
     /**
@@ -71,7 +62,7 @@ public class ToDo extends Task {
      */
     @Override
     public Task changeTaskStatus(boolean status) {
-        return new ToDo(this, status);
+        return new ToDo(this.getTaskName(), status, new NoteList());
     }
 
     /**

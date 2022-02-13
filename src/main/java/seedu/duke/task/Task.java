@@ -42,6 +42,13 @@ public abstract class Task {
         this.notes = new NoteList();
     }
 
+    Task(String name, boolean doneStatus, LocalDateTime date, NoteList notes) {
+        this.taskName = name;
+        this.isDone = doneStatus;
+        this.date = date;
+        this.notes = notes;
+    }
+
     /**
      * Constructor used when editing note.
      */

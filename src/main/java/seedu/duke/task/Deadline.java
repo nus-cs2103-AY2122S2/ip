@@ -35,8 +35,8 @@ public class Deadline extends Task {
         super(oldDeadline.getTaskName(), isDone, oldDeadline.getDate());
     }
 
-    public Deadline(String taskName, boolean isDone, LocalDateTime date) {
-        super(taskName,isDone, date);
+    public Deadline(String taskName, boolean isDone, LocalDateTime date, NoteList notes) {
+        super(taskName,isDone, date,notes);
     }
 
 

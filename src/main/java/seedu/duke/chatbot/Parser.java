@@ -121,18 +121,22 @@ public class Parser {
      * @throws DukeException if an invalid task number is given from user
      */
     int parseForDelete(String command) throws DukeException {
-        int indexInCommand = 7;
-        //command is given as "delete <task number>" so task number is at index 7
+        try {
+            int indexInCommand = 7;
+            //command is given as "delete <task number>" so task number is at index 7
 
-        if (command.length() <= 7) { //e.g. "delete " vs "delete 1" (correct)
-            throw new NoValidTaskIndexException();
+            if (command.length() <= 7) { //e.g. "delete " vs "delete 1" (correct)
+                throw new NoValidTaskIndexException();
+            }
+            //+1 in substring is in case of extra space at the end
+            //-1 is because 1 based index is used in command
+
+            int indexToUnmark = this.parseForTaskIndex(command, indexInCommand);
+
+            return indexToUnmark;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Problem with parseForDelete");
         }
-        //+1 in substring is in case of extra space at the end
-        //-1 is because 1 based index is used in command
-
-        int indexToUnmark = this.parseForTaskIndex(command, indexInCommand);
-
-        return indexToUnmark;
     }
 
     /**

@@ -28,7 +28,7 @@ public class AddNoteCommand extends Command {
         Task taskToAdd = taskList.getTasks().get(taskIndex);
         Task editedTask = taskToAdd.addNoteToNoteList(new Note(noteContent));
         TaskList newTaskList = taskList.replace(taskIndex, editedTask);
-        //storage.convertTaskListToFile(newTaskList);
+        storage.convertTaskListToFile(newTaskList);
         return newTaskList;
     }
 

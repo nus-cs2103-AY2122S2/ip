@@ -34,8 +34,8 @@ public class Event extends Task {
      * @param isDone for whether the task is done
      * @param date for start and end date or time of event
      */
-    public Event(String taskName, boolean isDone, LocalDateTime date) {
-        super(taskName,isDone, date);
+    public Event(String taskName, boolean isDone, LocalDateTime date, NoteList notes) {
+        super(taskName,isDone, date, notes);
     }
 
     /**
