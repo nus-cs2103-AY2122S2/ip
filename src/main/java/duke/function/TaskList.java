@@ -108,18 +108,18 @@ public class TaskList {
     public TaskList filterByKeyword(String keyword) {
         TaskList newTaskList = new TaskList();
         for (Task task : this.getTasks()) {
-            boolean nameContains = task
+            boolean containsName = task
                     .getName()
                     .toLowerCase()
                     .contains(keyword.toLowerCase());
-            boolean tagContains = task
+            boolean containsTag = task
                     .getTags()
                     .stream()
                     .map((tag) -> tag.toLowerCase())
                     .collect(Collectors.toList())
                     .contains(keyword.toLowerCase());
 
-            if (nameContains || tagContains) {
+            if (containsName || containsTag) {
                 newTaskList.add(task);
             }
         }

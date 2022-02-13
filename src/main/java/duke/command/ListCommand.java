@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     /**
      * If tags should be printed.
      */
-    private boolean printTags;
+    private boolean shouldPrintTags;
     /**
      * Initializes the help command with the user input.
      *
@@ -21,9 +21,9 @@ public class ListCommand extends Command {
         super(fullCommand);
         String[] fullCommandSplit = fullCommand.split(" ");
         if (fullCommandSplit.length > 1 && fullCommandSplit[1].equals("--tags")) {
-            this.printTags = true;
+            this.shouldPrintTags = true;
         } else {
-            this.printTags = false;
+            this.shouldPrintTags = false;
         }
     }
 
@@ -36,7 +36,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (printTags) {
+        if (shouldPrintTags) {
             return tasks.toStringTags(ui);
         } else {
             return tasks.toString(ui);

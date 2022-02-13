@@ -67,8 +67,6 @@ public class Parser {
             break;
         }
 
-//        assert command != null;
-
         return command;
 
     }
