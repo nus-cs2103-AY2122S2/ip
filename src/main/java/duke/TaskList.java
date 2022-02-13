@@ -159,6 +159,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find tasks using keyword.
+     * 
+     * @param input
+     * @throws DukeException
+     */
     protected static void find(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
         if (arr.get(1) == "") {
