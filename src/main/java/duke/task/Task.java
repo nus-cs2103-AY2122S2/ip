@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Task {
     private String name;
-    private boolean isDone;
+    private boolean done;
     private LocalDate date;
     private LocalTime time;
     private LocalTime timeFrom;
@@ -26,7 +26,7 @@ public class Task {
     public Task(String type, String name) {
         this.type = type;
         this.name = name;
-        this.isDone = false;
+        this.done = false;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Task {
         this.name = name;
         this.date = date;
         this.time = time;
-        this.isDone = false;
+        this.done = false;
     }
 
     /**
@@ -62,21 +62,21 @@ public class Task {
         this.date = date;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
-        this.isDone = false;
+        this.done = false;
     }
 
     /**
      * Marks task.
      */
     public void mark() {
-        this.isDone = true;
+        this.done = true;
     }
 
     /**
      * Unmarks task.
      */
     public void unmark() {
-        this.isDone = false;
+        this.done = false;
     }
 
     /**
@@ -96,7 +96,7 @@ public class Task {
      * @return String representing if task is completed.
      */
     public String getDone() {
-        if (isDone) {
+        if (done) {
             return "1";
         } else {
             return "0";
@@ -166,7 +166,7 @@ public class Task {
     public String toString() {
         String str = "[";
 
-        if (this.isDone) {
+        if (this.done) {
             str += "X";
         } else {
             str += " ";
