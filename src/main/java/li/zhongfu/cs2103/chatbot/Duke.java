@@ -210,8 +210,8 @@ public class Duke {
                     return;
 
                 default:
-                    throw new DukeException("I don't know what that means!"
-                            + "Try: todo, deadline, event, list, delete, mark, unmark, reload, save, bye");
+                    throw new DukeException("I don't know what that means! "
+                            + "Try: todo, deadline, event, list, find, delete, mark, unmark, reload, save, bye");
                 }
             } catch (DukeException e) {
                 this.ui.printDialog(e.getMessage().split("\n"));
