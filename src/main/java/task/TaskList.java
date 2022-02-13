@@ -44,7 +44,7 @@ public class TaskList {
                     "Enter 'help' if you're confused!");
         }
         tasks.add(task);
-        return "Got it!! :D I've added this task:\n" + " [" + task.symbol() + "][] " +
+        return "Got it! I've added this task:\n" + " [" + task.symbol() + "][] " +
                 returnString + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
