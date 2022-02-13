@@ -3,6 +3,8 @@ Welcome to the user guide for Poogie! Poogie is **a desktop app for tracking you
 Command-Line Interface (CLI)**. Poogie helps you in your everyday life by acting as your personal assistant, such that 
 you can focus on the things that matter.
 
+---
+
 ## Quick Start
 1. If you do not have Java installed on your computer, head down to the 
 [Java download site](https://www.java.com/en/download/) and follow the instructions to get Java version 11 and above
@@ -10,6 +12,8 @@ installed on your system.
 2. Once you have Java installed, grab a copy of the latest JAR file for Poogie
 [here](https://github.com/tobihy/ip/releases).
 3. Double-click on the JAR file to get started! A program should appear in a few seconds.
+
+---
 
 ## Features
 
@@ -33,19 +37,20 @@ Using keywords, search through your list of tasks and never lose track of your s
 
 Made a mistake? Fret not, make the appropriate changes easily.
 
+---
+
 ## Usage
 Arguments in Egyptian braces `{}` are to be **supplied by the user**.
+<br><br>
 
-### `todo` - add a *todo*
+### Add a *todo*: `todo`
 
 Add a *todo* to your list of tasks.
 
 Format: `todo {description of task}`
+<br><br>
 
-Examples of usage:
-- `todo clean up room`
-
-### `deadline` - add a *deadline*
+### Add a *deadline*: `deadline`
 
 Add a *deadline* to your list of tasks. 
 
@@ -56,13 +61,9 @@ formats:
 - `HHmm` if including only time, where HHmm is the time in 24-hour format
 
 Format: `deadline {description of deadline} /by {date and/or time}`
+<br><br>
 
-Examples of usage:
-- `deadline submit report /by 2022-03-05 1300`
-- `deadline cook dinner /by 1900`
-- `deadline return book to library /by 2022-02-22`
-
-### `event` - add an *event*
+### Add an *event*: `event`
 
 Add an *event* to your list of tasks.
 
@@ -73,31 +74,30 @@ formats:
 - `HHmm` if including only time, where HHmm is the time in 24-hour format
 
 Format: `event {description of event} /at {date and/or time}`
+<br><br>
 
-Examples of usage:
-- `event project zoom meeting /at 2022-02-18 2000`
-- `event sam's birthday /at 2022-12-26`
-- `event visit to ryan's house /at 1830`
-
-### `mark` - mark a task as done
+### Mark a task as done: `mark`
 
 Mark a task as done in your list of tasks.
 
 Format: `mark {task number}`
+<br><br>
 
-### `unmark` - mark a task as undone
+### Mark a task as undone: `unmark`
 
 Mark a task as undone in your list of tasks.
 
 Format: `unmark {task number}`
+<br><br>
 
-### `delete` - delete a task
+### Delete a task: `delete`
 
 Delete a task from your list of tasks.
 
 Format: `delete {task number}`
+<br><br>
 
-### `edit` - edit a task
+### Edit a task: `edit`
 
 Edit a task on your list of tasks.
 
@@ -108,12 +108,26 @@ For edits concerning date and/or time, you must provide them in the following fo
 
 Note that you can only make a **single edit** at a time. (multiple edits coming soon!)
 
-Format:
-- `edit {task number} desc/{new description of task}`
-- `edit {task number} dt/{date and/or time}`
+Format: `edit {task number} desc/{new description}` `edit {task number} dt/{date and/or time}`
+<br><br>
 
-### `bye` - exit the program
+### Exit the program: `bye`
 
 Exits the program.
 
 Format: `bye`
+
+---
+
+## Command Summary
+
+| Command  | Format                                                                                | Examples                                                                                                                              |
+|----------|---------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| todo     | todo {description of task}                                                            | `todo clean up room`                                                                                                                  |
+| deadline | deadline {description of deadline} /by {date and/or time}                             | `deadline submit report /by 2022-03-05`<br/>`deadline cook dinner /by 1900`<br/>`deadline return book /by 2022-02-22`                 |
+| event    | event {description of event} /at {date and/or time}                                   | `event project zoom meeting /at 2022-02-18 2000`<br/>`event sam's birthday /at 2022-12-26`<br/>`event visit to ryan's house /at 1830` |
+| mark     | mark {task number}                                                                    | `mark 1`                                                                                                                              |
+| unmark   | unmark {task number}                                                                  | `unmark 1`                                                                                                                            |
+| delete   | delete {task number}                                                                  | `delete 1`                                                                                                                            |
+| edit     | edit {task number} desc/{new description}<br>edit {task number} dt/{date and/or time} | `edit 1 desc/sweep room`<br/>`edit 2 dt/2022-03-06 1500`<br/>`edit 3 dt/1900`                                                         |
+| bye      | bye                                                                                   | `bye`                                                                                                                                 |
