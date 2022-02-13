@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnknownCommand;
@@ -74,6 +75,13 @@ public class Parser {
             break;
         case "find":
             command = new FindCommand(strArr[1]);
+            break;
+        case "help":
+            if (strArr.length == 1) {
+                command = new HelpCommand();
+            } else {
+                command = new HelpCommand(strArr[1]);
+            }
             break;
         default:
             command = new UnknownCommand();
