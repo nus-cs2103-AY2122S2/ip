@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Pyke pyke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image pykeImage = new Image(this.getClass().getResourceAsStream("/images/DaPyke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image pykeImage = new Image(this.getClass().getResourceAsStream("/images/DaPyke.jpg"));
 
     /**
      * The initialization method for the MainWindow component
