@@ -100,7 +100,10 @@ public class TaskList {
         Ui.lineTwo();
     }
 
-
+    /**
+     * Method that returns a string.
+     * @return String
+     */
     public String returnMatching() {
         String string = "Here are the matching tasks:";
         System.out.println(string);
