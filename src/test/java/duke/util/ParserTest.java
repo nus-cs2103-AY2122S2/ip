@@ -1,19 +1,19 @@
 package duke.util;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
-    public void getCommand_Todo_success() {
+    public void getCommandTodoTest() {
         String originalInput = "todo buy shampoo";
         Parser parserUnderTest = new Parser(originalInput);
         assertEquals("todo", parserUnderTest.getCommand());
     }
 
     @Test
-    public void inputArray_Todo_success() {
+    public void inputArrayTodoTest() {
         String originalInput = "todo buy shampoo";
         Parser parserUnderTest = new Parser(originalInput);
         String[] expected = new String[3];
