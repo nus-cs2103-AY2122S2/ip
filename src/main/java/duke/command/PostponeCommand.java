@@ -33,9 +33,7 @@ public class PostponeCommand implements Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage, MessageUi ui) throws DukeException {
-        System.out.println("postpone execute");
         if (position < 1 || position > tasks.getTaskSize()) {
-            System.out.println("postpone OOB");
             throw new DukeException("Task do not exist!");
         } else {
             Task task = tasks.getTask(position);

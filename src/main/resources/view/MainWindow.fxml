@@ -11,9 +11,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.gui.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" promptText="What are you bing chilling on?" style="-fx-background-radius: 10px; -fx-background-image: url ('/images/background2.png');" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" opacity="0.9" prefHeight="557.0" prefWidth="400.0" style="-fx-background-image: url(&quot;images/background.jpg&quot;); -fx-background: transparent; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-size: 600, 400;" vvalue="1.0">
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" promptText="How can Bing Chilling help?" style="-fx-background-radius: 10px; -fx-background-image: url ('/images/background2.png');" AnchorPane.bottomAnchor="1.0" />
+        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-radius: 10px; -fx-background-color: aquamarine; -fx-border-color: black; -fx-border-radius: 10px; -fx-border-image-width: 10px;" text="Send" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" opacity="0.9" prefHeight="557.0" prefWidth="400.0" style="-fx-background-image: url(&quot;images/background2.jpg&quot;); -fx-background: transparent; -fx-background-repeat: no-repeat; -fx-background-position: center; -fx-background-size: 600, 400;" vvalue="1.0">
             <content>
                 <VBox fx:id="dialogContainer" prefWidth="400.0" style="-fx-alignment: center; -fx-padding: 10px;">
                <children>

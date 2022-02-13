@@ -201,7 +201,7 @@ public class Parser {
                 if (!(fullCommand.contains(" /by "))) {
                     throw new DukeException("I'm so very sorry, "
                             + "please use the /by command for an deadline input");
-                } else if (fullCommand.split(" /by ", 2).length == 2) {
+                } else if (fullCommand.split(" /by ", 2).length == 1) {
                     throw new DukeException("I'm so very sorry, the description of a "
                             + splitCommand[0] + " cannot be empty.");
                 } else if (fullCommand.split(" /by ")[0].split("deadline").length == 0) {
