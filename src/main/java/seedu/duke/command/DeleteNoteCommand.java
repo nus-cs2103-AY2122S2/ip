@@ -26,7 +26,7 @@ public class DeleteNoteCommand extends Command {
         Task taskToAdd = taskList.getTasks().get(taskIndex);
         Task editedTask = taskToAdd.deleteNoteFromNoteList(noteIndex);
         TaskList newTaskList = taskList.replace(taskIndex, editedTask);
-        //storage.convertTaskListToFile(newTaskList);
+        storage.convertTaskListToFile(newTaskList);
         return newTaskList;
     }
 

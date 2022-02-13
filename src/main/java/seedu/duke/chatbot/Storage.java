@@ -117,7 +117,8 @@ public class Storage {
             }
         } else {
             //create a function getTaskNameForToDo
-            taskName = taskDetails.substring(4, taskDetails.indexOf("notes/"));
+            //-1 is because <taskName>|notes/
+            taskName = taskDetails.substring(4, taskDetails.indexOf("notes/") - 1);
             return new ToDo(taskName, doneStatus, noteList);
         }
     }
@@ -125,8 +126,8 @@ public class Storage {
     String getTaskNameForTasksWithDates(String taskDetails) throws DukeException {
         try {
             int indexOfDate = taskDetails.indexOf("date/");
-            int indexTaskNameStart = 4; //"T 1 <taskName> date/", "D 0 <taskName> date/"
-            String taskName = taskDetails.substring(4, indexOfDate);
+            int indexTaskNameStart = 4; //"T|1|<taskName>|date/", "D 0 <taskName> date/"
+            String taskName = taskDetails.substring(4, indexOfDate - 1);
             return taskName;
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Problem in getTaskNameForTasksWithDates()");
@@ -136,7 +137,7 @@ public class Storage {
     LocalDateTime createDateTimeFromSummary(String taskDetails) throws DukeException {
         try {
             int indexOfDate = taskDetails.indexOf("date/");
-            //-1 because <datetime> notes/ --> got spacing we want to get rid of
+            //-1 because <datetime>|notes/<number of notes> --> got spacing we want to get rid of
             String date = taskDetails.substring(indexOfDate + 5, taskDetails.indexOf("notes/") - 1); //"date/<datetime>"
             LocalDateTime dateObj = this.getLocalDateTimeFromDate(date);
             return dateObj;
@@ -158,13 +159,13 @@ public class Storage {
             if (numberOfNotes == 0) {
                 return new NoteList();
             } else {
-                int indexStartOfNoteContent = indexOfNumberOfNotes + 2; //<number of notes> <content of note 1>
+                int indexStartOfNoteContent = indexOfNumberOfNotes + 2; //<number of notes>|<content of note 1>
                 taskDetails = taskDetails.substring(indexStartOfNoteContent);
                 int endIndexOfNoteContent = taskDetails.indexOf("/END/");
                 ArrayList<Note> notes = new ArrayList();
                 for (int i = 0; i < numberOfNotes; i++) {
                     if (i != 0) {
-                        indexStartOfNoteContent = endIndexOfNoteContent + 6; // /END/ <nextNoteContent>/END/
+                        indexStartOfNoteContent = endIndexOfNoteContent + 6; // /END/|<nextNoteContent>/END/
                         taskDetails = taskDetails.substring(indexStartOfNoteContent); //"<<nextNoteContent>/END/..."
                         endIndexOfNoteContent = taskDetails.indexOf("/END/");
                     }
@@ -189,20 +190,20 @@ public class Storage {
     public String createSummaryFromTask(Task task) {
         String taskType = task.getTaskType();
 
-        String  summary = taskType + " ";
+        String  summary = taskType + "|";
 
-        summary += (task.isDone()) ? "1 " : "0 ";
+        summary += (task.isDone()) ? "1|" : "0|";
 
-        summary += task.getTaskName() + "//";
+        summary += task.getTaskName() + "|";
 
         if (taskType.equals("E") || taskType.equals("D")) {
             LocalDateTime date = task.getDate();
             String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            summary += "date/" + dateString; //24 Dec 2019 --> 2019-12-24
+            summary += "date/" + dateString + "|"; //24 Dec 2019 --> 2019-12-24
         }
 
         //add notes notes/<number of notes> <content of note 1> <content of note 2> ...
-        summary += " " + task.getNotes().convertToSummary();
+        summary += task.getNotes().convertToSummary();
 
         return summary + "\n";
     }

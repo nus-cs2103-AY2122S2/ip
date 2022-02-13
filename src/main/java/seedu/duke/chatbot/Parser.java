@@ -45,7 +45,7 @@ public class Parser {
         } else if (command.startsWith("event")) {
             Task newTask = this.parseForEvent(command);
             return new AddCommand(newTask);
-        } else if (command.startsWith("delete")) {
+        } else if (command.startsWith("delete") && command.length() == 8) {
             //command is given as "delete <taskIndex>"
             int index = this.parseForDelete(command);
             return new DeleteCommand(index);

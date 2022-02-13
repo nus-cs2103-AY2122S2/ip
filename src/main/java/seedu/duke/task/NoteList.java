@@ -44,9 +44,9 @@ public class NoteList {
     }
 
     public String convertToSummary() {
-        String result = String.format("notes/%d ",notes.size());
+        String result = String.format("notes/%d|",notes.size());
         for (int i = 0; i < this.notes.size(); i++) {
-            result += this.notes.get(i).toString() + "/END/ ";
+            result += this.notes.get(i).toString() + "/END/|";
         }
         return result;
     }
