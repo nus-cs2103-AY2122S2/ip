@@ -30,7 +30,7 @@ public class Storage {
      * @throws DukeException If file does not exist.
      */
     public Storage(String path) throws DukeException {
-        this.path = path;
+        this.path = System.getProperty("user.dir") + "/" + path;
 
         // Splits pathname into relative path and filename
         String filename = path.substring(path.lastIndexOf("/") + 1);
