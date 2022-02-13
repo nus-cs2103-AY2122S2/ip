@@ -17,6 +17,7 @@ public class FindCommand extends Command {
     /**
      * Constructs a new FindCommand Class with
      * variable, match.
+     *
      * @param match matching keyword
      */
     public FindCommand(String match) {
@@ -28,9 +29,10 @@ public class FindCommand extends Command {
      * from the taskList.
      * Executes a method from taskList to find a matching
      * task with the word from the task.
+     *
      * @param taskList a list of the current tasks
-     * @param ui user interface
-     * @param storage file storage
+     * @param ui       user interface
+     * @param storage  file storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -40,6 +42,7 @@ public class FindCommand extends Command {
 
     /**
      * Returns false for non-Exit commands.
+     *
      * @return false
      */
     @Override

@@ -11,9 +11,10 @@ public class HelpCommand extends Command {
 
     /**
      * Returns a string "Help has arrived!"
+     *
      * @param taskList a list of the current tasks taskList
-     * @param ui user interface
-     * @param storage file storage
+     * @param ui       user interface
+     * @param storage  file storage
      * @return "Help has arrived"
      */
     @Override
@@ -23,6 +24,7 @@ public class HelpCommand extends Command {
 
     /**
      * Returns false for non-Exit Commands
+     *
      * @return false
      */
     @Override

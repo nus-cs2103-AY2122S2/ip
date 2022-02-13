@@ -133,7 +133,7 @@ public class MainWindow extends AnchorPane {
      * Leads the user away to the help page
      */
     private void provideAboutFunctionality() throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://nicksunwork.wixsite.com/dukeguide"));
+        Desktop.getDesktop().browse(new URI("http://NicsunXnus.github.io/ip/"));
     }
 
     /**

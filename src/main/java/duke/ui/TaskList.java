@@ -13,6 +13,24 @@ public class TaskList {
     private final ArrayList<Action> list = new ArrayList<>();
 
     /**
+     * Empty constructor is triggered if the file location is missing.
+     */
+    public TaskList() {
+
+    }
+
+    /**
+     * Constructs a new TaskList object and
+     * updates the current list with data
+     * from the previous session.
+     *
+     * @param storage contains the file from previous session
+     */
+    public TaskList(Storage storage) {
+        ReadFile.readFile(storage.getFile(), list);
+    }
+
+    /**
      * Executes the adding of the task
      * onto the list.
      *

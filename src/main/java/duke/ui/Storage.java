@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.action.Action;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,16 +20,22 @@ public class Storage {
     /**
      * Constructs a new Storage object with a
      * given file path.
+     *
      * @param filePath file path location
      */
     public Storage(String filePath) {
         file = new File(filePath);
     }
 
+    public File getFile() {
+        return file;
+    }
+
     /**
      * Writes the input text to the file
      * given by its file path.
-     * @param filePath the path of the file
+     *
+     * @param filePath  the path of the file
      * @param textToAdd the text to add to the file
      * @throws IOException if file path is not found
      */
@@ -41,6 +48,7 @@ public class Storage {
     /**
      * Returns the same storage object after verifying
      * the existence of the required directory and file.
+     *
      * @return this storage object
      * @throws DukeException if the required directory or file is missing
      */
@@ -59,6 +67,7 @@ public class Storage {
     /**
      * Executes the writing of the contents of the
      * taskLst onto the file.
+     *
      * @param taskList the taskList containing a list of the
      *                 tasks
      */

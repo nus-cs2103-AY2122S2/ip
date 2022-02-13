@@ -33,6 +33,7 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.setUnDone(taskNo);
         assert taskList.getAction(taskNo).getStatus().equals(" ") : "task status should be blank";
+        storage.save(taskList);
         String statement = "Ok, I have marked this task as not done yet:\n  ";
         return statement + taskList.getAction(taskNo);
     }

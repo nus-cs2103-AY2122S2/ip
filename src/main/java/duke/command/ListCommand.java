@@ -18,9 +18,10 @@ public class ListCommand extends Command {
      * Executes a method from taskList which prints
      * out the contents from the taskList with numeric
      * notation.
+     *
      * @param taskList a list of the current tasks
-     * @param ui user interface
-     * @param storage file storage
+     * @param ui       user interface
+     * @param storage  file storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -29,6 +30,7 @@ public class ListCommand extends Command {
 
     /**
      * Returns false for non-Exit commands.
+     *
      * @return false
      */
     @Override

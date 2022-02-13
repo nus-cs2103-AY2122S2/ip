@@ -14,21 +14,23 @@ public class Action {
      * Constructs the Action class by taking in a
      * String variable, string. Sets the isDone variable
      * to false by default.
+     *
      * @param string task
      */
     public Action(String string) {
-         act = string;
-         isDone = false;
+        act = string;
+        isDone = false;
     }
 
     /**
      * Constructs the Action class by taking in a
      * String variable, string and a boolean
      * variable, status.
+     *
      * @param string task
      * @param status done status of task
      */
-    public Action(String string, boolean status)  {
+    public Action(String string, boolean status) {
         act = string;
         isDone = status;
     }
@@ -36,6 +38,7 @@ public class Action {
     /**
      * Returns the mark status of the Action/Task:
      * An "X" if marked done, else a whitespace.
+     *
      * @return mark status
      */
     public String getStatus() {
@@ -44,6 +47,7 @@ public class Action {
 
     /**
      * Returns the task
+     *
      * @return task
      */
     public String getTask() {
@@ -54,6 +58,7 @@ public class Action {
      * Returns a new Action object signifying that
      * it has been marked as done. The isDone variable
      * is now given a true value.
+     *
      * @return marked Action
      */
     public Action setDone() {
@@ -64,6 +69,7 @@ public class Action {
      * Returns a new Action object signifying that
      * it has been unmarked as not done. The isDone variable
      * is now given a false value.
+     *
      * @return unmarked Action
      */
     public Action setUnDone() {
@@ -73,6 +79,7 @@ public class Action {
     /**
      * Returns a String representation of this Action
      * object.
+     *
      * @return string representation
      */
     @Override

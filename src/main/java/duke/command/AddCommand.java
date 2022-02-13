@@ -21,6 +21,7 @@ public class AddCommand extends Command {
     /**
      * Constructs a new AddCommand object with
      * String variables, command and details.
+     *
      * @param command command etc; deadline ,event, todo
      * @param details details of the task etc; anything after the command
      */
@@ -48,9 +49,10 @@ public class AddCommand extends Command {
      * Executes the adding of a task onto the taskList
      * as well as saving the contents of the taskList
      * onto the file.
+     *
      * @param taskList a list of the current tasks
-     * @param ui user interface
-     * @param storage file storage
+     * @param ui       user interface
+     * @param storage  file storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -64,6 +66,7 @@ public class AddCommand extends Command {
 
     /**
      * Returns false for non-ExitCommands.
+     *
      * @return false
      */
     @Override

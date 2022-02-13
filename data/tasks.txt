@@ -1,0 +1,4 @@
+[T][X] abc
+[D][ ] cde (by: Oct 10 2020, 10:10)
+[E][X] def (at: Oct 10 2020, 10:10)
+[T][ ] bathe
