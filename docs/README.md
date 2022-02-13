@@ -1,7 +1,7 @@
 # User Guide
 Charizard is a **desktop app for managing tasks** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a _Pokemon Fan_ who is keen on letting _Charizard_ burn away your tasks for you, ***this is the app*** for you!
 
-<img src = "Ui.png.PNG" width = "350" alt="Oops, unable to load image!">
+<img src = "Ui.png" width = "350" alt="Oops, unable to load image!">
 
 ## Table of Contents
 - [Summary of feature commands](#summary-of-feature-commands)
