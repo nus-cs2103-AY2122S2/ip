@@ -2,7 +2,7 @@ package duke;
 
 import java.io.IOException;
 
-import duke.UI.MainWindow;
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -39,8 +39,6 @@ public class Main extends Application {
 
     @Override
     public void stop() throws IOException, InterruptedException {
-        //System.out.println("For debugging: stop() method called!");
-
         //Gives time for user to see goodbye message
         Thread.sleep(888);
 

@@ -1,0 +1,13 @@
+.dialogContainer {
+    -fx-background-image: url('../images/wallpaper.jpeg');
+    -fx-background-size: cover;
+}
+
+.dialogBubble {
+    -fx-background-color: #F6CF57;
+    -fx-background-radius: 20px;
+}
+
+.dp {
+    -fx-padding: 0 1em 0 1em;
+}

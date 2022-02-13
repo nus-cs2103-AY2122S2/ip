@@ -1,4 +1,4 @@
-package duke.UI;
+package duke.ui;
 
 import java.io.IOException;
 
@@ -39,7 +39,6 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         dialogContainer.getChildren().add(DialogBox.getPikachuDialog(
                 UI.printGreeting() + "\n", pikachuImage));
-
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

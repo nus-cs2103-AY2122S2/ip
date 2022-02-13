@@ -18,7 +18,8 @@ public class Duke {
     }
 
     /**
-     * Method that GUI calls to respond to user input.
+     * Gets response to user input.
+     * Called by GUI.
      *
      * @param input Input from user.
      * @return Output from chatbot after parsing input.
