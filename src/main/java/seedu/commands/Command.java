@@ -21,7 +21,7 @@ public abstract class Command {
      * @param inst the input task to be executed on
      * @throws DukeException Throws if mistakes were found
      */
-    public abstract void input(String inst) throws DukeException;
+    public abstract void validate(String inst) throws DukeException;
     public abstract String execute(TaskList tasks) throws DukeException;
 
     /**

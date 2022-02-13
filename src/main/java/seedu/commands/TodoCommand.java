@@ -12,7 +12,7 @@ public class TodoCommand extends Command {
     private String description;
 
     @Override
-    public void input(String input) throws DukeException {
+    public void validate(String input) throws DukeException {
         description = checkExist(input);
     }
 

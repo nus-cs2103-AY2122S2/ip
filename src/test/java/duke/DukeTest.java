@@ -26,10 +26,10 @@ public class DukeTest {
     @Test
     public void parseDeadline() {
         DeadlineCommand d = new DeadlineCommand();
-        assertThrows(DukeException.class, () -> d.input(""));
-        assertThrows(DukeException.class, () -> d.input("notAString"));
-        assertThrows(DukeException.class, () -> d.input("task /by notADate"));
-        assertThrows(DukeException.class, () -> d.input("task /by 1-2-2020 7pm"));
+        assertThrows(DukeException.class, () -> d.validate(""));
+        assertThrows(DukeException.class, () -> d.validate("notAString"));
+        assertThrows(DukeException.class, () -> d.validate("task /by notADate"));
+        assertThrows(DukeException.class, () -> d.validate("task /by 1-2-2020 7pm"));
     }
 
     @Test

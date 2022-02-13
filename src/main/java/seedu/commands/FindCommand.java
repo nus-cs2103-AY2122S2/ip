@@ -11,7 +11,7 @@ public class FindCommand extends Command {
     private String search;
 
     @Override
-    public void input(String inst) throws DukeException {
+    public void validate(String inst) throws DukeException {
         search = checkExist(inst);
     }
 

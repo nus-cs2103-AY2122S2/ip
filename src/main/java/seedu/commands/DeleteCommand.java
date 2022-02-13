@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     private int idx;
 
     @Override
-    public void input(String inst) throws DukeException {
+    public void validate(String inst) throws DukeException {
         idx = super.checkInt(inst) - 1;
     }
 

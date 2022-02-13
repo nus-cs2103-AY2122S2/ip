@@ -9,7 +9,7 @@ import seedu.storage.TaskList;
 public class ByeCommand extends Command {
 
     @Override
-    public void input(String input) throws DukeException {
+    public void validate(String input) throws DukeException {
         if (!input.equals("")) {
             throw new DukeException("Your 'bye' command is a bit too long.");
         }

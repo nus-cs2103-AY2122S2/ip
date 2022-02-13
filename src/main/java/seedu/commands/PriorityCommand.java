@@ -13,7 +13,7 @@ public class PriorityCommand extends Command {
     private int priority;
     
     @Override
-    public void input(String inst) throws DukeException {
+    public void validate(String inst) throws DukeException {
         checkExist(inst);
         String[] arr = inst.split(" ", 2);
         

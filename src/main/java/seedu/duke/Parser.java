@@ -48,10 +48,10 @@ public class Parser {
         Command cmd = CONVERTER.get(cmds[0].trim());
 
         if (cmds.length == 2) {
-            cmd.input(cmds[1].trim());
+            cmd.validate(cmds[1].trim());
         } else {
             assert cmds.length == 1: "Array not suppose to contain 2 items";
-            cmd.input("");
+            cmd.validate("");
         }
 
         return cmd;

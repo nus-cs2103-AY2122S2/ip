@@ -15,7 +15,7 @@ public class EventCommand extends Command {
     private LocalDateTime dateTime;
 
     @Override
-    public void input(String inst) throws DukeException {
+    public void validate(String inst) throws DukeException {
         checkExist(inst);
         String[] task = inst.trim().split("/at", 2);
 

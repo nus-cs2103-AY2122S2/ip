@@ -9,7 +9,7 @@ import seedu.storage.TaskList;
 public class ListCommand extends Command {
 
     @Override
-    public void input(String input) throws DukeException {
+    public void validate(String input) throws DukeException {
         if (!input.equals("")) {
             throw new DukeException("You have added unnecessary instructions in your list command.");
         }
