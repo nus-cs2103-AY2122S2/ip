@@ -1,11 +1,11 @@
 # Duke Task Manager User Guide
 Duke is a task manager that keeps track of various types of tasks and compiles it into a list for your convenience.
 
-##Quick Setup
+## Quick Setup
 1. Install Java 11 or above on your device.
 2. Run ```java -jar duke.jar```
 
-##Features
+## Features
 ### 1. [Add Todo](#todo---adds-todo-task)
 ### 2. [Add Deadline](#deadline---adds-deadline-task)
 ### 3. [Add Event](#event---adds-event-task)
