@@ -42,8 +42,11 @@ public class AddCommand extends Command {
         case DEADLINE:
             task = new Deadline(taskComponents[0], taskComponents[1]);
             break;
-        default:
+        case TODO:
             task = new Task(taskComponents[0]);
+            break;
+        default:
+            assert false : "An illegal task type scenario is handled by the Parser";
         }
     }
 

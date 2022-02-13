@@ -19,7 +19,7 @@ import ann.data.TaskList;
  * @version 0.1
  */
 public class Storage {
-    private static final String DEFAULT_STORAGE_FOLDER_NAME = "data";
+    private static final String DEFAULT_STORAGE_FOLDER_NAME = "storageFolder";
     private static final String DEFAULT_STORAGE_FILE_NAME = "ann.txt";
     private File file;
     private String folderName;
