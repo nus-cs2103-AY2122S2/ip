@@ -61,6 +61,7 @@ public class Deadline extends Task {
     @Override
     public String saveData() {
         int isDone = super.getDoneStatus();
+        assert by != null : "save error: missing date";
         return Type.D + " | " + isDone + " | " + super.getPriorityText() + " | " + super.getTask() + " | " + by;
     }
 

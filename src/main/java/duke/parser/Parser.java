@@ -140,8 +140,11 @@ public class Parser {
                 eventAt.append(input.get(i)).append(" ");
             }
             LocalDate date = convertDate(eventAt.toString().trim());
-            assert date != null;
-            return new AddEventCommand(new Event(event.toString(), date));
+            if (date == null) {
+                return new ErrorCommand("date parse error");
+            } else {
+                return new AddEventCommand(new Event(event.toString(), date));
+            }
         }
     }
 
@@ -164,8 +167,11 @@ public class Parser {
                 deadlineBy.append(input.get(i)).append(" ");
             }
             LocalDate date = convertDate(deadlineBy.toString().trim());
-            assert date != null : "No date provided";
-            return new AddDeadlineCommand(new Deadline(deadline.toString(), date));
+            if (date == null) {
+                return new ErrorCommand("date parse error");
+            } else {
+                return new AddDeadlineCommand(new Deadline(deadline.toString(), date));
+            }
         }
     }
 
@@ -184,7 +190,7 @@ public class Parser {
         if (date != null) {
             return new SearchCommand(date);
         }
-        return new ErrorCommand("Search error");
+        return new ErrorCommand("Search error invalid date");
     }
 
     private static Command prepareFind(List<String> input) {

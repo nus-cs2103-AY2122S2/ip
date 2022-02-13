@@ -61,6 +61,7 @@ public class Event extends Task {
     @Override
     public String saveData() {
         int isDone = super.getDoneStatus();
+        assert at != null : "save error: missing date";
         return Type.E + " | " + isDone + " | " + super.getPriorityText() + " | " + super.getTask() + " | " + at;
     }
 
