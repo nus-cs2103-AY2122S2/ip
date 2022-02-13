@@ -37,7 +37,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DateTimeParser.toString(this.date) + ")";
+        return "[E]" + super.toString() + "\n\t(at: " + DateTimeParser.toString(this.date) + ")";
     }
 
     @Override

@@ -1,5 +1,6 @@
 package luke.parser;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,24 +18,32 @@ import luke.commands.InvalidCommand;
 import luke.commands.ListCommand;
 import luke.commands.MarkCommand;
 import luke.commands.ReadCommand;
+import luke.commands.RecurCommand;
 import luke.commands.TodoCommand;
 import luke.commands.UnmarkCommand;
 import luke.commands.UpdateCommand;
 import luke.data.tasks.Deadline;
 import luke.data.tasks.Event;
+import luke.data.tasks.RecurDeadline;
+import luke.data.tasks.RecurEvent;
+import luke.data.tasks.RecurTodo;
+import luke.data.tasks.RecurringTask;
 import luke.data.tasks.Todo;
 
 /**
  * Implements the parser class which parses user input and returns commands to execute.
  */
 public class Parser {
-    private static final String INVALID_DATE_FORMAT_MESSAGE = "The force does not comprehend the date.";
+    private static final String INVALID_DATE_FORMAT_MESSAGE = "The force does not comprehend the date:\n%s";
     private static final String INVALID_NUMBER_FORMAT_MESSAGE = "The force cannot convert the value to a number.";
     private static final String EMPTY_DESCRIPTION_MESSAGE = "The description of %s cannot be empty.";
-    private static final String MISSING_ARGUMENT_MESSAGE = "%s require the %s argument.";
+    private static final String MISSING_ARGUMENT_MESSAGE = "%s command requires the %s argument.";
+    private static final String INVALID_NUMBER_OF_ARGUMENT_MESSAGE = "%s has invalid number of arguments.";
     private static final String MISSING_KEYWORD_MESSAGE = "find command requires a keyword argument.";
     private static final String MISSING_INDEX_MESSAGE = "The index of %s cannot be empty.";
     private static final String COMMAND_NOT_FOUND = "Command not found.";
+    private static final String RECUR_ERROR_MESSAGE = "recur command encountered an error:\n";
+    private static final String COMMAND_NOT_SUPPORTED = "Command not supported.";
     /* Map of accepted user commands tied to the respective command action type. */
     private static Map<String, CommandAction> commandActionMap = new HashMap<>() {{
             put("bye", CommandAction.EXIT);
@@ -46,6 +55,7 @@ public class Parser {
             put("deadline", CommandAction.DEADLINE);
             put("delete", CommandAction.DELETE);
             put("find", CommandAction.FIND);
+            put("recur", CommandAction.RECUR);
         }};
 
     /**
@@ -57,10 +67,7 @@ public class Parser {
     public static Command parse(String input) {
         String[] inputs = input.split(" ", 2);
         try {
-            if (!commandActionMap.containsKey(inputs[0])) {
-                return new InvalidCommand();
-            }
-            CommandAction cmdAction = commandActionMap.get(inputs[0]);
+            CommandAction cmdAction = commandActionMap.getOrDefault(inputs[0], CommandAction.INVALID);
             assert(cmdAction != null);
             switch (cmdAction.getCommandActionType()) {
             case NO_ACTION:
@@ -77,7 +84,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new InvalidCommand(INVALID_NUMBER_FORMAT_MESSAGE);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand(INVALID_DATE_FORMAT_MESSAGE);
+            return new InvalidCommand(String.format(INVALID_DATE_FORMAT_MESSAGE, e.getMessage()));
         } catch (IllegalArgumentException e) {
             return new InvalidCommand(e.getMessage());
         }
@@ -138,8 +145,10 @@ public class Parser {
      */
     private static AddCommand prepareAddCommand(CommandAction cmdAction, String[] args) {
         assert(cmdAction.getCommandActionType() == ActionType.ADD);
-        if (args.length < 2) {
-            throw new IllegalArgumentException(String.format(EMPTY_DESCRIPTION_MESSAGE, args[0]));
+        verifyAddCommand(cmdAction, args);
+
+        if (cmdAction == CommandAction.RECUR) {
+            return prepareRecurCommand(args);
         }
 
         Map<String, String> argsMap = parseAddArguments(cmdAction, args);
@@ -155,6 +164,43 @@ public class Parser {
         }
     }
 
+    private static AddCommand prepareRecurCommand(String[] args) {
+        Map<String, String> argsMap = parseRecurArguments(args);
+        String taskCommand = argsMap.get("task");
+        String[] taskArgs = taskCommand.split(" ", 2);
+        CommandAction cmdAction = commandActionMap.getOrDefault(taskArgs[0], CommandAction.INVALID);
+        try {
+            verifyAddCommand(cmdAction, taskArgs);
+            argsMap.putAll(parseAddArguments(cmdAction, taskArgs));
+            RecurringTask recurringTask;
+            switch (cmdAction) {
+            case DEADLINE:
+                recurringTask = new RecurDeadline(argsMap);
+                break;
+            case EVENT:
+                recurringTask = new RecurEvent(argsMap);
+                break;
+            case TODO:
+                recurringTask = new RecurTodo(argsMap);
+                break;
+            default:
+                throw new IllegalArgumentException(COMMAND_NOT_SUPPORTED);
+            }
+            return new RecurCommand(recurringTask);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(RECUR_ERROR_MESSAGE + e.getMessage());
+        }
+    }
+
+    private static void verifyAddCommand(CommandAction cmdAction, String[] args) {
+        if (cmdAction.getCommandActionType() != ActionType.ADD) {
+            throw new IllegalArgumentException(COMMAND_NOT_SUPPORTED);
+        }
+        if (args.length < 2) {
+            throw new IllegalArgumentException(String.format(INVALID_NUMBER_OF_ARGUMENT_MESSAGE, args[0]));
+        }
+    }
+
 
     /**
      * Parses and returns the arguments tied to the add commands.
@@ -166,8 +212,8 @@ public class Parser {
      */
     private static Map<String, String> parseAddArguments(CommandAction cmdAction, String[] args)
             throws IllegalArgumentException {
-        assert(cmdAction.getCommandActionType() == ActionType.ADD);
         assert(args.length == 2);
+        assert(cmdAction.getCommandActionType() == ActionType.ADD);
 
         //add description argument identifier
         args[1] = "description " + args[1];
@@ -178,6 +224,29 @@ public class Parser {
         verifyArguments(args[0], actualArgs, expectedArgs);
 
         for (int i = 0; i < expectedArgs.length; i++) {
+            String[] argValuePair = actualArgs[i].split(" ", 2);
+            argsMap.put(argValuePair[0], argValuePair[1]);
+        }
+
+        return argsMap;
+    }
+
+    private static Map<String, String> parseRecurArguments(String[] args) {
+        assert(args.length == 2);
+        Map<String, String> argsMap = new HashMap<>();
+
+        // Add next argument
+        if (!args[1].contains("/next")) {
+            args[1] += " /next " + DateTimeParser.toCommandString(LocalDateTime.now());
+        }
+
+        String[] actualArgs = args[1].split("/(?=every|next)");
+
+        actualArgs[0] = "task " + actualArgs[0];
+        String[] expectedArgs = CommandAction.RECUR.getArgumentKeys().split(",");
+        verifyArguments("recur", actualArgs, expectedArgs);
+
+        for (int i = 0; i < actualArgs.length; i++) {
             String[] argValuePair = actualArgs[i].split(" ", 2);
             argsMap.put(argValuePair[0], argValuePair[1]);
         }
