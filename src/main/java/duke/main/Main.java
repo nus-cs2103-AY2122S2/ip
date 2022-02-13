@@ -120,7 +120,7 @@ public class Main extends Application {
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImg),
-                DialogBox.getDukeDialog(dukeText, dukeImg)
+                DialogBox.getDukeDialog(dukeText, dukeImg) 
         );
         userInput.clear();
     }
