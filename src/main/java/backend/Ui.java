@@ -35,6 +35,10 @@ public class Ui {
         return "OK! Added this event:\n" + input;
     }
 
+    public static String within(String input){
+        return "OK! Added this doWithin task:\n" + input;
+    }
+
     public static String find(){
         return "Here are the matching tasks in your list:";
     }

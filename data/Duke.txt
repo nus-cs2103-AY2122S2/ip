@@ -1,5 +1,2 @@
 E | X | project meeting | Dec 02 2019
-T |   | b
-T |   | b
-T |   | b
-T |   | b
+W |   | t | Oct 15 2019 | Oct 16 2019

@@ -1,7 +1,8 @@
 package backend;
+import tasks.DoWithin;
+import tasks.Task;
 import tasks.Deadline;
 import tasks.Event;
-import tasks.Task;
 import tasks.Todo;
 
 import java.util.ArrayList;
@@ -158,6 +159,21 @@ public class TaskList {
                 output = output + counter + ". " + tasks.get(i).toString();
                 counter += 1;
             }
+        }
+        return output;
+    }
+
+    public static String addWithin(String description, String start, String end) {
+        String output;
+        try {
+            if (description.isBlank() || start.isBlank() || end.isBlank()) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            DoWithin currentWithin = new DoWithin(description, start, end);
+            tasks.add(currentWithin);
+            output =  Ui.within(currentWithin.toString());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            output = Ui.emptyDescription();
         }
         return output;
     }

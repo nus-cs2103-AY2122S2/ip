@@ -82,14 +82,24 @@ public class InputDecoder {
 
         case EVENT:
             String eventContent = commandSections[1];
-            String[] segments = eventContent.split(" /at ");
-            String eventDescription = segments[0];
-            String eventTime = segments[1];
+            String[] eventSegments = eventContent.split(" /at ");
+            String eventDescription = eventSegments[0];
+            String eventTime = eventSegments[1];
             return TaskList.addEvent(eventDescription, eventTime);
 
         case FIND:
             String keyword = commandSections[1];
             return TaskList.find(keyword);
+
+        case WITHIN:
+            String withinContent = commandSections[1];
+            String[] withinSegments = withinContent.split(" /within ");
+            String withinDescription = withinSegments[0];
+            String[] withinStartEnd = withinSegments[1].split(" ");
+            String withinStart = withinStartEnd[0];
+            String withinEnd = withinStartEnd[1];
+            return TaskList.addWithin(withinDescription, withinStart, withinEnd);
+
 
         default:
             return "Sorry I didnt understand you!";
