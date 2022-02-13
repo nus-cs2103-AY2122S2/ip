@@ -19,7 +19,7 @@ Format for `event`: `event DESCRIPTION /at DATE START_TIME END_TIME`
 
 Format for `deadline`: `deadline DESCRIPTION /by DATE TIME`
 
-**NOTES** the following are the format for the date and any of the mentioned time
+**NOTE** the following are the format for the date and any of the mentioned time
 - `TIME`: `hhmm`
 - `DATE`: `yyyy-mm-dd`
 
@@ -53,7 +53,7 @@ TaskJamie would tell you how many tasks are left in the list. Eg: `Now you have 
 
 ## Listing all tasks: `list`
 
-Shows a list of all tasks in the address book.
+Shows a list of all tasks recorded by TaskJamie.
 
 Format : `list`
 
