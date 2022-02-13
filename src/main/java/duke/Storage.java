@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.misc.Pair;
 import duke.taskobjects.Deadline;
 import duke.taskobjects.Event;
 import duke.taskobjects.Task;
@@ -30,12 +31,15 @@ class Storage {
         return Files.exists(pathToFile);
     }
 
-    protected ArrayList<Task> importTasks() {
+    protected Pair<Boolean, ArrayList<Task>> loadTaskListFile() {
         if (!doesFileExist()) {
             System.out.println("Existing file not found, starting fresh...");
-            return new ArrayList<>();
+            return new Pair<>(doesFileExist(), new ArrayList<>());
         }
+        return new Pair<>(doesFileExist(), importTasks());
+    }
 
+    private ArrayList<Task> importTasks() {
         Scanner s;
         try {
             s = new Scanner(pathToFile);

@@ -1,6 +1,9 @@
 package duke.ui.gui;
 
+import java.util.Objects;
+
 import duke.Duke;
+import duke.command.CommandResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,14 +27,25 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/user.png")));
+    private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/robot.png")));
 
+    /**
+     * Initialization code of the Main Window
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    /**
+     * Prints the welcome message.
+     */
+    public void printWelcomeMessage() {
+        String welcomeMessage = duke.getWelcomeMessage();
+        addDukeDialog(welcomeMessage);
     }
 
     public void setDuke(Duke duke) {
@@ -45,11 +59,41 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (input.isEmpty()) {
+            userInput.clear();
+            return;
+        }
+        CommandResult response = submitInput(input);
+        String message = response.toString();
+        boolean isError = response.isError();
+        addUserDialog(input);
+        if (isError) {
+            addDukeErrorDialog(message);
+        } else {
+            addDukeDialog(message);
+        }
         userInput.clear();
+    }
+
+    private CommandResult submitInput(String input) {
+        return duke.getResponse(input);
+    }
+
+    private void addUserDialog(String text) {
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(text, userImage)
+        );
+    }
+
+    private void addDukeDialog(String text) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(text, dukeImage)
+        );
+    }
+
+    private void addDukeErrorDialog(String text) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeErrorDialog(text, dukeImage)
+        );
     }
 }

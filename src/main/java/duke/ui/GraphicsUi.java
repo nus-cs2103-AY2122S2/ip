@@ -11,7 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GraphicsUi extends Application {
-    private Duke duke = new Duke();
+    private static final String WINDOW_TITLE = "Task List Assistant";
+    private final Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
@@ -22,13 +23,15 @@ public class GraphicsUi extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
 
-            // Fomatting Stage
-            stage.setTitle("Duke");
+            // Formatting Stage
+            stage.setTitle(WINDOW_TITLE);
             stage.setResizable(false);
             stage.setMinHeight(600.0);
             stage.setMinWidth(400.0);
 
             stage.show();
+            // Print welcome message
+            fxmlLoader.<MainWindow>getController().printWelcomeMessage();
         } catch (IOException e) {
             e.printStackTrace();
         }

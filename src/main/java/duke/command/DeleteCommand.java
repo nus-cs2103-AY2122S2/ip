@@ -25,9 +25,9 @@ public class DeleteCommand extends TaskListCommand {
     @Override
     public CommandResult runCommand() {
         Task currentTask = taskList.get(taskNo);
+        taskList.remove(taskNo);
         String message = String.format("Removed this task:\n%s\nYou currently have %d tasks",
                 currentTask.getCurrentStatus(), taskList.size());
-        taskList.remove(taskNo);
         return new CommandResult(message, true);
     }
 }

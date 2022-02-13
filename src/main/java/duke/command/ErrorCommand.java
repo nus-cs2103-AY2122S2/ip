@@ -12,6 +12,6 @@ public class ErrorCommand extends Command {
 
     @Override
     public CommandResult runCommand() {
-        return new CommandResult(message);
+        return new CommandResult(message, false, true);
     }
 }
