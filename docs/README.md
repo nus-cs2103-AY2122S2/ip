@@ -1,7 +1,5 @@
 # User Guide
 
-##
-
 ## Quick Start
 1. Ensure you have Java ```11``` or above installed in your computer.
 2. Download the latest ```ip.jar``` [here](https://github.com/DALIN-Prog/ip).
@@ -15,9 +13,9 @@
 
    - ```exit``` : Exits the app.
 
-6. Refer to the [Features]() below for details of each command.
+6. Refer to the [Features](https://github.com/DALIN-Prog/ip/tree/master/docs#features) below for details of each command.
 
-##
+---
 
 ## Features
 
@@ -210,12 +208,10 @@ Expected outcome:
 Bye. Hope to see you again soon!
 Click on 'X' to close the window
 ```
+---
 
-#
+## Command summary
 
-Command summary
-
-##
 
 |   Action   | Format, Examples                                                                    |
 |:----------:|:------------------------------------------------------------------------------------|
@@ -229,3 +225,5 @@ Command summary
 |    help    | `help`                                                                              |
 |   alias    | `alias COMM /as SHORT`<br/>e.g.`alias help /as h`                                   |
 |    bye     | `bye`                                                                               |
+
+---
