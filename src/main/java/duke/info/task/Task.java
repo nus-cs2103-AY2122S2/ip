@@ -3,6 +3,7 @@ package duke.info.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 public abstract class Task {
 
@@ -41,8 +42,9 @@ public abstract class Task {
         this.action = action;
         this.type = type;
         this.isComplete = isComplete;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d LLL yyyy");
         try {
-            this.date = LocalDate.parse(dateString);
+            this.date = LocalDate.parse(dateString, dtf);
             this.dateString = null;
         } catch (DateTimeParseException e) {
             this.date = null;
@@ -98,6 +100,14 @@ public abstract class Task {
     }
 
     /**
+     * Returns LocalDate representing the date of the event
+     * @return - the LocalDate object representing the date
+     */
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    /**j
      * Returns a string representation of the date of the task. If the date is saved as a
      * LocalDate object, it is returned as the format "d MMM yyyy". Otherwise the raw
      * dateString is returned

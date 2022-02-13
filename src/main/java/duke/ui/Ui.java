@@ -46,7 +46,7 @@ public class Ui {
     }
 
     /**
-     * Prints the loading error as specified in
+     * Returns the loading error as specified in
      * Text.java in the duke.utils package
      */
     public void showLoadingError() {
@@ -56,55 +56,71 @@ public class Ui {
     }
 
     /**
-     * Prints the error message specified by errorMessage
+     * Returns the error message specified by errorMessage
      * @param errorMessage - the error message to print
+     * @return the error message
      */
     public String showError(String errorMessage) {
         return errorMessage;
     }
 
     /**
-     * Prints the goodbye message as specified in Text.java
-     * in the duke.utils.package
+     * Returns the goodbye message
+     * @return the goodbye message
      */
     public String showGoodbye() {
         return Text.TEXT_GOODBYE_MESSAGE;
     }
 
     /**
-     * Prints the toString() format of the specified calendar
+     * Returns the toString() format of the specified calendar
      * object
      * @param calendar - the calendar to be printed
+     * @return string format of calendar to be printed
      */
     public String showCalendar(Calendar calendar) {
         return calendar.toString();
     }
 
     /**
-     * Prints the success message indicating the task was
+     * Returns the success message indicating the task was
      * successfully added to the calendar. Also displays
      * the total number of tasks in the calendar after the
      * addition.
      * @param addedTask - the task that was added
      * @param numOfTasks - the total number of tasks
+     * @return success message showing task was added
      */
     public String showTaskAdded(Task addedTask, int numOfTasks) {
         return String.format(Text.TEXT_TASK_ADDED, addedTask, numOfTasks);
     }
 
     /**
-     * Prints the success message indicating the specified
+     * Returns the success message indicating all tasks in the list
+     * were successfully added to the calendar. Also displays the total
+     * number of tasks in the calendar after the additions
+     * @param numOfTasks - the total number of tasks
+     * @return success message showing all tasks were added
+     */
+    public String showAllTasksAdded(int numOfTasks) {
+        return String.format(Text.TEXT_ALL_TASKS_ADDED, numOfTasks);
+    }
+
+    /**
+     * Returns the success message indicating the specified
      * task was marked as complete in the calendar.
      * @param taskString - toString() of the task marked complete
+     * @return success message showing task was marked as complete
      */
     public String showTaskComplete(String taskString) {
         return String.format(Text.TEXT_MARKED, taskString);
     }
 
     /**
-     * Prints the success message indicating the specified task
+     * Returns the success message indicating the specified task
      * was marked as yet to be completed in the calendar.
      * @param taskString - toString() of the task marked incomplete
+     * @return success message showing task was marked as incomplete
      */
     public String showTaskIncomplete(String taskString) {
         return String.format(Text.TEXT_UNMARKED, taskString);
@@ -114,6 +130,7 @@ public class Ui {
      * Prints the success message indicating the specified task has
      * been deleted from the calendar.
      * @param taskString - toString() of the task that was deleted
+     * @return success message showing task was deleted
      */
     public String showTaskDeleted(String taskString) {
         return String.format(Text.TEXT_DELETED, taskString);

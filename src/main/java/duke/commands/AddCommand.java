@@ -29,6 +29,7 @@ public abstract class AddCommand extends Command {
      * @param calendar - the calendar used in the program
      * @param ui - the ui handler for the program
      * @param storage - the storage handler for the program
+     * @return success message if complete or error message if execution failed
      */
     @Override
     public String execute(Calendar calendar, Ui ui, Storage storage) {

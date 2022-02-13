@@ -1,5 +1,9 @@
 package duke.info.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 public class Event extends Task {
 
     /**
@@ -12,6 +16,29 @@ public class Event extends Task {
         super(event, "event", isComplete, date);
     }
 
+    /**
+     * Returns an ArrayList of all recurrences of the Event at the specified interval until the specified endDate
+     * @param interval - interval between recurrences
+     * @param endDate - endDate of recurrences
+     * @return
+     */
+    public ArrayList<Task> getRecurrences(int interval, String endDate) {
+        LocalDate start = this.getDate();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d LLL yyyy");
+        LocalDate end = LocalDate.parse(endDate, dtf);
+        ArrayList<Task> recurringEvents = new ArrayList<>();
+        recurringEvents.add(this);
+        String dateString = "";
+        int count = 0;
+        while (end.isAfter(start)) {
+            start = start.plusDays(interval);
+            dateString = start.format(dtf);
+            System.out.println(dateString);
+            recurringEvents.add(new Event(this.getAction(), dateString, this.getIsComplete()));
+            count++;
+        }
+        return recurringEvents;
+    }
     /**
      * Returns the save format of the Event. The string contains the save format representation from
      * the task superclass, followed by the string representation of the date as obtained from the
