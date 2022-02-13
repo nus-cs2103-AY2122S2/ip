@@ -146,7 +146,7 @@ public class TaskList {
                         .stream()
                         .filter(task -> {
                             int similarity = FuzzySearch.partialRatio(search, task.getName());
-                            return similarity >= 0.8;
+                            return similarity >= 75;
                         })
                         .collect(Collectors.toList()));
     }
