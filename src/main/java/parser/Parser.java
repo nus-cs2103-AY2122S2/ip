@@ -54,7 +54,7 @@ public class Parser {
             storage.updateTaskData(tasks);
             return unmarked;
         case "new":
-            String added = tasks.addToList(inputStringsArray);;
+            String added = tasks.addToList(inputStringsArray);
             storage.updateTaskData(tasks);
             return added;
         case "delete":
