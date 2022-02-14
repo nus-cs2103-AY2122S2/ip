@@ -40,6 +40,7 @@ class TaskList {
      *
      * @param taskNo
      */
+    /** Changes task status to done*/
     public void markDone(int taskNo) {
         tasks.get(taskNo).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
@@ -51,6 +52,7 @@ class TaskList {
      *
      * @param taskNo
      */
+    /** Changes task status to not done yet*/
     public void unmark(int taskNo) {
         tasks.get(taskNo).unmark();
         System.out.println("OK, I've marked this task as not done yet:");
