@@ -1,8 +1,8 @@
 package apollo.tasks;
 
-import apollo.parser.Parser;
-
 import java.time.LocalDateTime;
+
+import apollo.parser.Parser;
 
 /**
  * Class for {@code Deadline} tasks.
@@ -32,6 +32,6 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("%s (by: %s)",
                 super.toString(),
-                this.time.format(Parser.formatter));
+                this.time.format(Parser.FORMATTER));
     }
 }

@@ -1,16 +1,17 @@
 package apollo.commands;
 
-import apollo.exceptions.ApolloOutOfBoundsException;
-import apollo.tasks.Task;
-import apollo.tasks.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import apollo.exceptions.ApolloOutOfBoundsException;
+import apollo.tasks.Task;
+import apollo.tasks.TaskList;
 
 public class AddCommandTest {
 

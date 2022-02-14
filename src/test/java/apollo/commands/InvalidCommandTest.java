@@ -1,9 +1,10 @@
 package apollo.commands;
 
-import apollo.exceptions.ApolloOutOfBoundsException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import apollo.exceptions.ApolloOutOfBoundsException;
 
 public class InvalidCommandTest {
     @Test

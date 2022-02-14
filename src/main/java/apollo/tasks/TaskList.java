@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * List of {@code Task} objects.
  * Implements {@code java.io.Serializable} interface.
  */
-public class TaskList implements java.io.Serializable{
+public class TaskList implements java.io.Serializable {
 
     private final ArrayList<Task> taskList;
 

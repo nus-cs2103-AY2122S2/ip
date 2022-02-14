@@ -1,11 +1,11 @@
 package apollo.tasks;
 
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test @Order(4)
@@ -37,7 +37,7 @@ public class TaskTest {
     }
 
     @Test @Order(2)
-    void testToString_Task() {
+    void testToString_task() {
         LocalDateTime dateTime = LocalDateTime.of(2022, 1, 20, 0, 0);
 
         Task todo = new Task("task", Task.Type.TODO);

@@ -1,14 +1,15 @@
 package apollo.commands;
 
-import apollo.exceptions.ApolloOutOfBoundsException;
-import apollo.tasks.TaskList;
-import apollo.tasks.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import apollo.exceptions.ApolloOutOfBoundsException;
+import apollo.tasks.TaskList;
+import apollo.tasks.Todo;
 
 public class DeleteCommandTest {
 
@@ -37,7 +38,7 @@ public class DeleteCommandTest {
 
     @Test
     void execute_outOfBoundsIndex_exceptionThrown() {
-        Exception exception = assertThrows(ApolloOutOfBoundsException.class, () ->{
+        Exception exception = assertThrows(ApolloOutOfBoundsException.class, () -> {
             Command error = new DeleteCommand(4);
             error.execute();
         });

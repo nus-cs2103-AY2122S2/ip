@@ -39,7 +39,7 @@ public class FindCommand extends Command {
      * @return Tasks containing keyword.
      */
     @Override
-    public String execute()  {
+    public String execute() {
         for (int i = 0; i < taskList.taskCount(); i++) {
             if (taskList.getTaskDescription(i).toLowerCase().contains(keyword)) {
                 appendToResults(taskList.getTaskString(i));

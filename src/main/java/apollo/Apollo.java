@@ -1,18 +1,18 @@
 package apollo;
 
+import java.time.LocalTime;
+
 import apollo.commands.Command;
 import apollo.commands.ExitCommand;
 import apollo.exceptions.ApolloException;
 import apollo.exceptions.ApolloIoException;
 import apollo.parser.Parser;
 import apollo.tasks.TaskList;
-import apollo.ui.gui.Gui;
-import apollo.ui.Welcome;
 import apollo.ui.Ui;
+import apollo.ui.Welcome;
+import apollo.ui.gui.Gui;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import java.time.LocalTime;
 
 /**
  * Main class for program.

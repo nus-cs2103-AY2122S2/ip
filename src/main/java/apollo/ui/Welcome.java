@@ -1,8 +1,8 @@
 package apollo.ui;
 
-import java.time.LocalTime;
-
 import static apollo.messages.Messages.LINE_FEED;
+
+import java.time.LocalTime;
 
 /**
  * Class containing Welcome message.
@@ -23,19 +23,21 @@ public class Welcome {
         LocalTime eighteenThirty = LocalTime.of(18, 30);
 
         // check if the time is after four and either before or exactly eleven
-        if (now.isAfter(four) &&
-                (now.isBefore(eleven) || now.equals(eleven)))
+        if (now.isAfter(four)
+                && (now.isBefore(eleven) || now.equals(eleven))) {
             return "morning";
             // check if the time is after eleven and either before or exactly fifteen
-        else if (now.isAfter(eleven) &&
-                (now.isBefore(fifteen) || now.equals(fifteen)))
+        } else if (now.isAfter(eleven)
+                && (now.isBefore(fifteen) || now.equals(fifteen))) {
             return "afternoon";
             // check if the time is after fifteen and either before or exactly eighteen thirty
-        else if (now.isAfter(fifteen) &&
-                (now.isBefore(eighteenThirty) || now.equals(eighteenThirty)))
+        } else if (now.isAfter(fifteen)
+                && (now.isBefore(eighteenThirty) || now.equals(eighteenThirty))) {
             return "evening";
             // otherwise, it's night
-        else return "night";
+        } else {
+            return "night";
+        }
     }
 
     /**

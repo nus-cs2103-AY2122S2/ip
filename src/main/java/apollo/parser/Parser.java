@@ -1,12 +1,19 @@
 package apollo.parser;
 
-import apollo.commands.*;
-import apollo.exceptions.ApolloIllegalArgumentException;
-import apollo.tasks.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import apollo.commands.AddCommand;
+import apollo.commands.Command;
+import apollo.commands.DeleteCommand;
+import apollo.commands.ExitCommand;
+import apollo.commands.FindCommand;
+import apollo.commands.InvalidCommand;
+import apollo.commands.ListCommand;
+import apollo.commands.MarkCommand;
+import apollo.exceptions.ApolloIllegalArgumentException;
+import apollo.tasks.Task;
 
 /**
  * Parses user inputs for commands.
@@ -14,7 +21,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     private static final String PATTERN = "dd-MM-yyyy HH:mm";
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PATTERN);
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(PATTERN);
 
     /**
      * Parses supplied arguments for date and time.
@@ -27,7 +34,7 @@ public class Parser {
     private LocalDateTime parseDateTime(String[] args) throws ApolloIllegalArgumentException {
         try {
             String dateTimeString = parseArgs(args)[1].trim();
-            return LocalDateTime.parse(dateTimeString, formatter);
+            return LocalDateTime.parse(dateTimeString, FORMATTER);
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new ApolloIllegalArgumentException(
                     "Please add date and time in this format: " + PATTERN);
@@ -65,6 +72,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input for recognised commands.
+     *
+     * @param userInput String of full user input.
+     * @return Command object.
+     * @throws ApolloIllegalArgumentException If user input contains invalid information.
+     */
     public Command parseCommand(String userInput)
             throws ApolloIllegalArgumentException {
         String[] args = userInput.trim().split(" ", 2);
