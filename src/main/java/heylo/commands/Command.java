@@ -21,19 +21,26 @@ public class Command {
     public Command(String input) {
         String[] inputArgs = input.trim().split(" ", 2);
         String[] extraArgs = input.trim().split("/", 2);
+
+        assert inputArgs.length > 0 : "User command (first input word) not parsed successfully";
         this.command = inputArgs[0];
+        assert !command.equals("") : "Empty command should not be run";
 
         boolean isArgumentGiven = inputArgs.length > 1;
         boolean isExtraInfoGiven = extraArgs.length > 1 && extraArgs[0].length() > 0;
 
         if (isArgumentGiven && isExtraInfoGiven) {
             this.argument = inputArgs[1].substring(0, inputArgs[1].indexOf("/"));
+            assert !argument.equals("") : "Argument not parsed successfully";
+
             boolean isExtraInfoValid = extraArgs[1].trim().split(" ", 2).length > 1;
             if (isExtraInfoValid) {
                 this.extraInfo = extraArgs[1].trim().split(" ", 2)[1];
+                assert !extraInfo.equals("") : "Extra info not parsed successfully";
             }
         } else if (isArgumentGiven) {
             this.argument = inputArgs[1];
+            assert !argument.equals("") : "Argument not parsed successfully";
         }
     }
 
@@ -104,6 +111,7 @@ public class Command {
             str.append(" Sorry, I don't understand what that means.\n");
             break;
         }
+        assert !str.toString().equals("") : "Running user command should not return empty output";
         return str.toString();
     }
 }
