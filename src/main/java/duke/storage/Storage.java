@@ -31,7 +31,8 @@ public class Storage {
     public TaskList load() throws IOException {
         File directory = new File(Constants.DATA_DIRECTORY);
         if (!directory.exists()) {
-            directory.mkdirs();
+            boolean hasDirectory = directory.mkdirs();
+            assert hasDirectory;
         }
 
         File dataFile = new File(directory, Constants.FILE_NAME);
@@ -42,6 +43,8 @@ public class Storage {
     }
 
     private void populateData(File dataFile) throws IOException {
+        assert dataFile != null;
+
         Scanner sc = new Scanner(dataFile);
         while (sc.hasNext()) {
             String[] line = sc.nextLine().strip().split(" <> ");

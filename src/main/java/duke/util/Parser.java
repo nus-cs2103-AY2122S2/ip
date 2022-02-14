@@ -16,10 +16,11 @@ public class Parser {
 
         String command = input[0];
         boolean isValidArgument = input.length == 2;
-        boolean isValidCommand = Constants.TASKS.contains(command) && !isValidArgument;
+        boolean isInvalidCommand = Constants.TASKS.contains(command) && !isValidArgument;
 
-        assert isValidCommand;
-
+        if (isInvalidCommand) {
+            throw new InvalidArgumentException();
+        }
         switch (command) {
         case "bye":
             return new ExitCommand();

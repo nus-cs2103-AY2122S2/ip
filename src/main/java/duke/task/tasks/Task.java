@@ -36,6 +36,8 @@ public abstract class Task {
      * @return String containing the information of the changed task.
      */
     public String switchMark(String instr) {
+        assert instr != null;
+
         if ((instr.equals("mark") && !isDone)|| (instr.equals("unmark") && isDone)) {
             this.isDone = !this.isDone;
         }

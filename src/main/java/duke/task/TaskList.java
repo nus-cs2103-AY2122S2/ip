@@ -31,6 +31,8 @@ public class TaskList {
      * @return String to be printed by the Ui containing information of the task.
      */
     public String addTask(Task newTask) {
+        assert newTask != null;
+
         tasks.add(newTask);
         index = tasks.size();
         String output = "Got it. I've added this task:\n  " +
@@ -75,7 +77,9 @@ public class TaskList {
      * @throws InvalidTaskNumberException If id > index or id <= 0 (can't modify)
      */
     public String mark(int id, String instr) throws InvalidTaskNumberException {
-        assert id <= index && id > 0;
+        if (id <= 0 || id > index) {
+            throw new InvalidTaskNumberException();
+        }
 
         String out = tasks.get(id - 1).switchMark(instr);
         return out;
@@ -97,7 +101,9 @@ public class TaskList {
      * @throws InvalidTaskNumberException If id > index or id <= 0 (can't remove)
      */
     public String remove(int id) throws InvalidTaskNumberException {
-        assert id <= index && id > 0;
+        if (id <= 0 || id > index) {
+            throw new InvalidTaskNumberException();
+        }
 
         Task removed = tasks.remove(id - 1);
         index--;
@@ -107,6 +113,8 @@ public class TaskList {
     }
 
     public String findKeyWord(String word) {
+        assert word != null;
+
         String output = "Here are the matching tasks in your list:";
         for (int i = 0; i < index; i++) {
             if (tasks.get(i).hasWord(word)) {
