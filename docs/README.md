@@ -1,6 +1,7 @@
 # User Guide
 
-![](banner.png)
+![](Ui.png)
+
 ## Features 
 
 ### Add and delete tasks
@@ -31,11 +32,6 @@ every start of `Alfred`.
 `Alfred` uses emojis to make the user interface more readable. Here is a legend
 for reference.
 
-### Find tasks by keywords
-
-`Alfred` allows you to find a task by using a matching keyword. Think of it
-as a quick (internal) google to find tasks with similar names.
-
 #### Task types
 * 📚 `ToDo`
 * 📆 `Event` 
@@ -46,6 +42,13 @@ as a quick (internal) google to find tasks with similar names.
 * ✔️ `Completed` 
 * ❌ `Incomplete`
 
+### Find tasks by keywords
+
+`Alfred` allows you to find a task by using a matching keyword. Think of it
+as a quick (internal) google to find tasks with similar names.
+
+
+
 ## Usage
 
 ### How to use UI
@@ -53,10 +56,7 @@ as a quick (internal) google to find tasks with similar names.
 Key in commands in the text box. Your input will be shown on the right,
 in white, while the responses will be shown in blue, on the left.
 
-Worry not, `Alfred` provides guidance if your commands are slightly off.
-
-![](Ui.png)
-
+![](ui_guide.png)
 
 ### `list` lists all tasks being tracked
 
