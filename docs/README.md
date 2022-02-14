@@ -1,6 +1,3 @@
-# Taskmaster
-
-
 # User Guide
 Taskmaster is a **desktop application for managing tasks via a Command Line Interface** (CLI) while having the
 benefits of a Graphical User Interface (GUI). Taskmaster is simple, user-friendly, and it aims to help record and

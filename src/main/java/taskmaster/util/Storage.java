@@ -70,11 +70,11 @@ public class Storage {
         File directory = new File(dir);
         boolean doesDirExist = directory.exists();
         boolean doesDataFileExist = DATA_FILE.exists();
-        if (doesDirExist) {
+        if (!doesDirExist) {
             createDirectory();
         }
         try {
-            if (doesDataFileExist) {
+            if (!doesDataFileExist) {
                 createFile();
             }
             Scanner reader = new Scanner(DATA_FILE);

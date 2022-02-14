@@ -53,7 +53,7 @@ public class Taskmaster {
             result += "Loading data file: Success\n";
         } catch (TaskmasterExceptions e) {
             ui.displayErrorMessage(e.getMessage());
-            result += "Loading data file: Fail\n";
+            result += "Loading data file: Fail! Data File has not been created\n";
         }
         return result;
     }
