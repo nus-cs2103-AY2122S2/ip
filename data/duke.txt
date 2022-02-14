@@ -5,3 +5,9 @@ T,0,join sports club
 E,1,reunion dinner,31 jan 6pm
 D,1,assignment 1,2019-10-15
 T,0,eat sandwich
+T,0,eat
+
+E,0,valentine's day dinner,14 feb 7pm
+
+T,0,read book
+
