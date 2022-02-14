@@ -1,15 +1,17 @@
 package com.duke.command;
 
+import com.duke.exception.DukeException;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
+import com.duke.task.Todo;
 import com.duke.util.Storage;
 
 public class AddToDoCommand extends Command {
 
-    private Task task;
+    private String input;
 
-    public AddToDoCommand(Task task) {
-        this.task = task;
+    public AddToDoCommand(String input) {
+        this.input = input;
     }
 
     /**
@@ -18,8 +20,13 @@ public class AddToDoCommand extends Command {
      * @param storage Storage used by Duke
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
-        tasks.add(task);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String[] ls = input.split(" ", 2);
+        if (ls.length <= 1) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        String des = ls[1];
+        tasks.add(new Todo(des));
         return "Got itm I've added this tasks:\n " + tasks.get(tasks.getCount()-1)
                 + "\n" + "Now you have " + tasks.getCount() + " tasks in the list.";
     }

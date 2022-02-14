@@ -23,33 +23,17 @@ public class Parser {
         } else if (input.equals("list")) {
             return new ListCommand().execute(tasks, storage);
         } else if (input.split(" ")[0].equals("mark")) {
-            int pos = Integer.parseInt(input.split(" ")[1]);
-            return new MarkCommand(pos).execute(tasks, storage);
+            return new MarkCommand(input).execute(tasks, storage);
         } else if (input.split(" ")[0].equals("todo")) {
-            String[] ls = input.split(" ", 2);
-            if (ls.length <= 1) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            String des = ls[1];
-            return new AddToDoCommand(new Todo(des)).execute(tasks, storage);
+            return new AddToDoCommand(input).execute(tasks, storage);
         } else if (input.split(" ")[0].equals("deadline")) {
-            try {
-                String des = input.split(" /", 2)[0].split(" ", 2)[1];
-                String date = input.split("/", 2)[1].split(" ", 2)[1];
-                return new AddDeadlineCommand(new Deadline(des, date)).execute(tasks, storage);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("\t " + "The date format should be YYYY-MM-DD");
-            }
+            return new AddDeadlineCommand(input).execute(tasks, storage);
         } else if (input.split(" ")[0].equals("event")) {
-            String des = input.split(" /", 2)[0].split(" ", 2)[1];
-            String date = input.split("/", 2)[1].split(" ", 2)[1];
-            return new AddEventCommand(new Event(des, date)).execute(tasks, storage);
+            return new AddEventCommand(input).execute(tasks, storage);
         } else if (input.split(" ")[0].equals("delete")) {
-            int pos = Integer.parseInt(input.split(" ")[1]);
-            return new DeleteCommand(pos).execute(tasks, storage);
+            return new DeleteCommand(input).execute(tasks, storage);
         } else if (input.split(" ")[0].equals("find")) {
-            String keyword = input.split(" ", 2)[1];
-            return new FindCommand(keyword).execute(tasks, storage);
+            return new FindCommand(input).execute(tasks, storage);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

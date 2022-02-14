@@ -8,10 +8,10 @@ import com.duke.task.TaskList;
  */
 public class MarkCommand extends Command {
 
-    private int pos;
+    private String input;
 
-    public MarkCommand(int pos) {
-        this.pos = pos;
+    public MarkCommand(String input) {
+        this.input = input;
     }
 
     /**
@@ -21,6 +21,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
+        int pos = Integer.parseInt(input.split(" ")[1]);
         tasks.get(pos-1).markAsDone();
         return "Nice! I've marked this task as done:\n" + "\t  " + tasks.get(pos-1);
     }
