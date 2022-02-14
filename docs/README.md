@@ -19,9 +19,9 @@ users to unmark the task if they made a mistake when marking the task.
 Users can delete tasks from Duke if there are too many tasks in the task list. 
 
 
-## Usage
- 
-###`todo` - Add a todo task
+## Usage 
+
+### `todo` - Add a todo task
 
 Adds a todo to the task list. Useful for tasks with no imminent deadlines. 
 
@@ -37,7 +37,7 @@ Duke will add the todo to the task list
 You now have a total of 9 tasks in your list! Subarashii!
 ```
 
-###`event` - Add an event task
+### `event` - Add an event task
 
 Adds an event to the task list. Useful for tasks that happens on a specific date.
 
@@ -53,7 +53,7 @@ Duke will add the event to the task list
 You now have a total of 9 tasks in your list! Subarashii!
 ```
 
-###`deadline` - Add an event task
+### `deadline` - Add an event task
 
 Adds a deadline to the task list. Useful for tasks that needs to be completed by a specific date.
 
@@ -69,7 +69,7 @@ Duke will add the deadline to the task list
 You now have a total of 9 tasks in your list! Subarashii!
 ```
 
-###`mark` - Mark a task
+### `mark` - Mark a task
 
 Marks a task as completed. 
 
@@ -86,7 +86,7 @@ Duke will mark the first task as completed.
  [T][X] paynow money to friend
 ```
 
-###`unmark` - Unmark a task
+### `unmark` - Unmark a task
 
 Unmarks a completed task.
 
@@ -103,7 +103,7 @@ Duke will unmark the first task.
  [T][ ] paynow money to friend
 ```
 
-###`delete` - Deletes a task
+### `delete` - Deletes a task
 
 Deletes a task in the list.
 
@@ -121,7 +121,7 @@ Duke will delete the first task in the list.
 ```
 
 
-###`list` - list all tasks in the task list
+### `list` - list all tasks in the task list
 
 List tasks in the task list.
 
@@ -139,7 +139,7 @@ Duke will list all tasks in the task list.
 
 
 
-###`undo` - Undo the latest command
+### `undo` - Undo the latest command
 
 Undoes the latest command the user has keyed in.
 
@@ -155,7 +155,7 @@ Duke will undo the latest command and revert the state of the task list.
  Add has been undone!
 ```
 
-###`bye` - Exits the program
+### `bye` - Exits the program
 
 Exits the Duke program.
 
