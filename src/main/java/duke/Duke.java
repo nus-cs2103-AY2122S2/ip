@@ -136,7 +136,6 @@ public class Duke {
             Task taskToDelete = taskList.get(taskToDeleteNumber - 1);
             taskList.remove(taskToDeleteNumber - 1);
             displayTaskDelete(taskToDelete);
-
             break;
         default:
             System.out.println("I am unable to comprehend your request. Please try again");

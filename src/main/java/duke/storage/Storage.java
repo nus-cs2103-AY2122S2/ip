@@ -21,6 +21,7 @@ public class Storage {
             if (Files.notExists(DATA_PATH)) {
                 if(Files.notExists(DATA_PATH.getParent())) {
                     Files.createDirectory(DATA_PATH.getParent());
+                    System.out.println("Creating");
                 }
                 Files.createFile(DATA_PATH);
             }
@@ -53,18 +54,18 @@ public class Storage {
             BufferedReader saveFilereader = new BufferedReader(new FileReader(DATA_PATH.toString()));
             while ((strCurrentLine = saveFilereader.readLine()) != null) {
                 switch (strCurrentLine.charAt(0)) {
-                case 'T':
+                case 'T' -> {
                     currentTask = Todo.createFromData(strCurrentLine);
                     tasklist.add(currentTask);
-                    break;
-                case 'E':
+                }
+                case 'E' -> {
                     currentTask = Event.createFromData(strCurrentLine);
                     tasklist.add(currentTask);
-                    break;
-                case 'D':
+                }
+                case 'D' -> {
                     currentTask = Deadline.createFromData(strCurrentLine);
                     tasklist.add(currentTask);
-                    break;
+                }
                 }
             }
             saveFilereader.close();
