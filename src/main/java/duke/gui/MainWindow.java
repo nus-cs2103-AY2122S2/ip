@@ -27,6 +27,8 @@ import java.io.IOException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 /**
@@ -56,14 +58,12 @@ public class MainWindow extends AnchorPane {
                 "help -> my tasks";
         String helpMessage = "If you are new to this app, please type help to see full list of " +
                 "commands";
-        String fileLocationWarning = "Windows Users: Please create a file with the path\n C:/repos/ip/data/tasks.txt" +
-                " or there will be errors using the app.";
-        String fileLocationWarningForNonWindowUsers = "For other users: Please also create the required path based on your own OS.";
+        String fileLocationWarning = "Please create a file with the path:\n~/FFdata/tasks.txt" +
+                " or there will be\nerrors using the app.";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage + cannotSeeFullListAdvice, dukeImage),
                 DialogBox.getDukeDialog(helpMessage, dukeImage),
-                DialogBox.getDukeDialog(fileLocationWarning, dukeImage),
-                DialogBox.getDukeDialog(fileLocationWarningForNonWindowUsers, dukeImage)
+                DialogBox.getDukeDialog(fileLocationWarning, dukeImage)
         );
     }
 
@@ -141,7 +141,9 @@ public class MainWindow extends AnchorPane {
      * Opens task file in directory C:/repos/ip/data/tasks.txt
      */
     private void openTaskFile() throws IOException {
-        Desktop.getDesktop().open(new File("C:/repos/ip/data/tasks.txt"));
+        String home = System.getProperty("user.home");
+        Path filePath = Paths.get(home, "FFdata", "tasks.txt");
+        Desktop.getDesktop().open(filePath.toFile());
     }
 
 
