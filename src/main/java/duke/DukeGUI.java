@@ -91,8 +91,9 @@ public class DukeGUI extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userInputText = userInput.getText();
+        Label userText = new Label(userInputText);
+        Label dukeText = new Label(getResponse(userInputText));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
