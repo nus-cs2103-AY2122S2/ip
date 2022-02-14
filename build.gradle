@@ -33,7 +33,7 @@ checkstyle {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 run{
@@ -55,6 +55,5 @@ test {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    archiveName = "duke.jar"
 }
