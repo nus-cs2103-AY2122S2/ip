@@ -1,15 +1,19 @@
 package com.duke.command;
 
+import com.duke.exception.DukeException;
+import com.duke.task.Deadline;
 import com.duke.task.Task;
 import com.duke.task.TaskList;
 import com.duke.util.Storage;
 
+import java.time.format.DateTimeParseException;
+
 public class AddDeadlineCommand extends Command {
 
-    private Task task;
+    private String input;
 
-    public AddDeadlineCommand(Task task) {
-        this.task = task;
+    public AddDeadlineCommand(String input) {
+        this.input = input;
     }
 
     /**
@@ -18,9 +22,16 @@ public class AddDeadlineCommand extends Command {
      * @param storage Storage used by Duke
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
-        tasks.add(task);
-        return "Got itm I've added this tasks:\n " + tasks.get(tasks.getCount()-1)
-                + "\n" + "Now you have " + tasks.getCount() + " tasks in the list.";
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        try {
+            String des = input.split(" /", 2)[0].split(" ", 2)[1];
+            String date = input.split("/", 2)[1].split(" ", 2)[1];
+            tasks.add(new Deadline(des, date));
+            return "Got itm I've added this tasks:\n " + tasks.get(tasks.getCount()-1)
+                    + "\n" + "Now you have " + tasks.getCount() + " tasks in the list.";
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\t " + "The date format should be YYYY-MM-DD");
+        }
+
     }
 }
