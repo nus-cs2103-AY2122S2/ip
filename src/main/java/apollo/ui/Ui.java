@@ -1,10 +1,10 @@
 package apollo.ui;
 
+import static apollo.messages.Messages.LINE_FEED;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
-
-import static apollo.messages.Messages.LINE_FEED;
 
 /**
  * Class for {@code Ui}, user interface for Apollo.

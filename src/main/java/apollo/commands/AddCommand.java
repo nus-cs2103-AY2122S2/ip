@@ -1,11 +1,11 @@
 package apollo.commands;
 
+import java.time.LocalDateTime;
+
 import apollo.tasks.Deadline;
 import apollo.tasks.Event;
 import apollo.tasks.Task;
 import apollo.tasks.Todo;
-
-import java.time.LocalDateTime;
 
 /**
  * Adds a {@code Task} to the taskList.
@@ -49,6 +49,8 @@ public class AddCommand extends Command {
         case EVENT:
             newTask = new Event(description, dateTime);
             break;
+        default:
+            return "Unknown task type.";
         }
 
         taskList.addTask(newTask);

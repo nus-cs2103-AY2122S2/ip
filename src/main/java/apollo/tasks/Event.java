@@ -1,8 +1,8 @@
 package apollo.tasks;
 
-import apollo.parser.Parser;
-
 import java.time.LocalDateTime;
+
+import apollo.parser.Parser;
 
 /**
  * Class for {@code Event} tasks.
@@ -32,6 +32,6 @@ public class Event extends Task {
     public String toString() {
         return String.format("%s (at: %s)",
                 super.toString(),
-                this.period.format(Parser.formatter));
+                this.period.format(Parser.FORMATTER));
     }
 }

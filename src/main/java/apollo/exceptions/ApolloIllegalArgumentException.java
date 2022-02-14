@@ -5,7 +5,7 @@ package apollo.exceptions;
  * Thrown when arguments supplied are illegal.
  * Extends {@code ApolloException} superclass.
  */
-public class ApolloIllegalArgumentException extends ApolloException{
+public class ApolloIllegalArgumentException extends ApolloException {
 
     /**
      * Constructor for {@code ApolloIllegalArgumentException}.
