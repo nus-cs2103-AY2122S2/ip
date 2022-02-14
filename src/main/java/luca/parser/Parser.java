@@ -1,6 +1,5 @@
 package luca.parser;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -38,6 +37,42 @@ public class Parser {
     /** Default time given for deadline if not time was inputted. */
     private static final String DEFAULT_DEADLINE_TIME = "T06:00:00";
 
+    /** Defines the common lower bound for input tokens. */
+    private static final int COMMON_LOWER_BOUND = 2;
+
+    /** Defines the common upper bound for input tokens. */
+    private static final int COMMON_UPPER_BOUND = 3;
+
+    /**
+     * Checks whether the input tokens surpasses the lower bounds needed for command.
+     *
+     * @param length length of input tokens.
+     * @param bounds number of tokens needed to define the command.
+     * @param errorDescription description given for the error.
+     * @throws InvalidArgumentException if the number of input tokens less than bounds.
+     */
+    private static void checkCommandLowerBound(int length, int bounds, String errorDescription)
+            throws InvalidArgumentException {
+        if (length < bounds) {
+            throw new InvalidArgumentException(":-( OOPS!!! " + errorDescription);
+        }
+    }
+
+    /**
+     * Checks whether the input tokens surpasses the upper bounds needed for command.
+     *
+     * @param length length of input tokens.
+     * @param bounds number of tokens needed to define the command.
+     * @param errorDescription description given for the error.
+     * @throws InvalidArgumentException if the number of input tokens more than bounds.
+     */
+    private static void checkCommandUpperBound(int length, int bounds, String errorDescription)
+            throws InvalidArgumentException {
+        if (length < bounds) {
+            throw new InvalidArgumentException(":-( OOPS!!! " + errorDescription);
+        }
+    }
+
     /**
      * Parses input tokens and creates Mark command.
      *
@@ -46,10 +81,8 @@ public class Parser {
      * @throws DukeException if there are invalid arguments.
      */
     private static Command parseMarkCommand(String[] tokens) throws DukeException {
-        if (tokens.length < 2) {
-            throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
-                    + "the task to be marked.");
-        }
+        checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND,
+                "Please indicate the task to be marked.");
         try {
             int point = Integer.parseInt(tokens[1]);
             return new MarkCommand(point);
@@ -67,10 +100,8 @@ public class Parser {
      * @throws DukeException if there are invalid arguments.
      */
     private static Command parseUnmarkCommand(String[] tokens) throws DukeException {
-        if (tokens.length < 2) {
-            throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
-                    + "the task to be unmasked.");
-        }
+        checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND,
+                "Please indicate the task to be unmarked.");
         try {
             int point = Integer.parseInt(tokens[1]);
             return new UnmarkCommand(point);
@@ -88,11 +119,8 @@ public class Parser {
      * @throws DukeException if there are invalid arguments.
      */
     private static Command parseTodoCommand(String[] tokens) throws DukeException {
-        if (tokens.length < 2) {
-            throw new InvalidArgumentException(":-( OOPS!!! The description of "
-                    + "ToDo cannot be empty.");
-        }
-
+        checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND,
+                "The description of ToDo cannot be empty.");
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 1; i < tokens.length; i++) {
             stringBuilder.append(tokens[i] + " ");
@@ -109,11 +137,8 @@ public class Parser {
      * @throws if there are invalid arguments.
      */
     private static Command parseDeleteCommand(String[] tokens) throws DukeException {
-        if (tokens.length < 2) {
-            throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
-                    + "the task to be deleted.");
-        }
-
+        checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND,
+                "Please indicate the task to be deleted.");
         try {
             int point = Integer.parseInt(tokens[1]);
             return new DeleteCommand(point);
@@ -131,24 +156,19 @@ public class Parser {
      * @throws DukeException if there are invalid arguments.
      */
     private static Command parseDeadlineCommand(String[] tokens) throws DukeException {
-        if (tokens.length < 2) {
-            throw new InvalidArgumentException(":-( OOPS!!! The description of "
-                    + "deadline cannot be empty.");
-        }
+        checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND,
+                "The description of deadline cannot be empty.");
         StringBuilder stringBuilder = new StringBuilder();
-        Boolean foundKeyword = false;
+        Boolean hasFoundKeyword = false;
         LocalDateTime dateTime = null;
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
-            if (!foundKeyword) {
+            if (!hasFoundKeyword) {
                 if (tokens[i].equals("/by")) {
                     description = stringBuilder.toString().trim();
-                    foundKeyword = true;
+                    hasFoundKeyword = true;
                 } else {
-                    stringBuilder.append(tokens[i]);
-                    if (i != tokens.length - 1) {
-                        stringBuilder.append(" ");
-                    }
+                    stringBuilder.append(tokens[i] + " ");
                 }
             } else {
                 try {
@@ -161,9 +181,10 @@ public class Parser {
                 } catch (NumberFormatException | DateTimeParseException exception) {
                     throw new InvalidDateTimeFormatException(INVALID_DEADLINE_ERROR_MESSAGE);
                 }
+                break;
             }
         }
-        if (!foundKeyword) {
+        if (!hasFoundKeyword) {
             throw new InvalidArgumentException(":-( OOPS!!! Due date/time of deadline cannot be empty.");
         }
 
@@ -173,6 +194,8 @@ public class Parser {
         return new CreateDeadlineCommand(description, dateTime);
     }
 
+
+
     /**
      * Parses input tokens and creates a CreateEventCommand.
      *
@@ -181,25 +204,22 @@ public class Parser {
      * @throws DukeException if there are invalid arguments.
      */
     private static Command parseEventCommand(String[] tokens) throws DukeException {
-        if (tokens.length < 2) {
-            throw new InvalidArgumentException(":-( OOPS!!! The description of "
-                    + "event cannot be empty.");
-        }
+        checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND,
+                "The description of event cannot be empty.");
+
         StringBuilder stringBuilder = new StringBuilder();
-        Boolean foundKeyword = false;
+        Boolean hasFoundKeyword = false;
         LocalDateTime start = null;
         LocalDateTime end = null;
         String description = "";
+
         for (int i = 1; i < tokens.length; i++) {
-            if (!foundKeyword) {
+            if (!hasFoundKeyword) {
                 if (tokens[i].equals("/at")) {
                     description = stringBuilder.toString().trim();
-                    foundKeyword = true;
+                    hasFoundKeyword = true;
                 } else {
-                    stringBuilder.append(tokens[i]);
-                    if (i != tokens.length - 1) {
-                        stringBuilder.append(" ");
-                    }
+                    stringBuilder.append(tokens[i] + " ");
                 }
             } else {
                 try {
@@ -212,24 +232,19 @@ public class Parser {
                 } catch (NumberFormatException | DateTimeParseException exception) {
                     throw new InvalidDateTimeFormatException(INVALID_EVENT_ERROR_MESSAGE);
                 }
-                i += 2;
+                break;
             }
-
         }
 
         if (start == null || end == null) {
             throw new InvalidDateTimeFormatException(INVALID_EVENT_ERROR_MESSAGE);
         }
-
-        if (!foundKeyword) {
+        if (!hasFoundKeyword) {
             throw new InvalidArgumentException(":-( OOPS!!! Start-End date/time of event "
                     + "cannot be empty.");
         }
 
         assert description.length() > 0 : "Description is missing.";
-        assert start != null : "Start date and time is missing.";
-        assert end != null : "End date and time is missing.";
-
         return new CreateEventCommand(description, start, end);
     }
 
@@ -239,14 +254,12 @@ public class Parser {
      * @param stringDate date as a string.
      * @param stringTime time as a string.
      * @return LocalDateTime object
-     * @throws NumberFormatException if integer is not given.
-     * @throws DateTimeException if the date format is incorrect.
+     * @throws NumberFormatException if integer is not given
      */
     private static LocalDateTime parseDateTime(String stringDate, String stringTime)
-            throws NumberFormatException, DateTimeException {
-        int time;
+            throws NumberFormatException, DateTimeParseException {
 
-        time = Integer.parseInt(stringTime);
+        int time = Integer.parseInt(stringTime);
         assert time > 0 : "Value given for time is negative.";
 
         String hours;
@@ -262,6 +275,7 @@ public class Parser {
         } else {
             minutes = "0" + (time % 100);
         }
+
         return LocalDateTime.parse(stringDate + "T" + hours + ":" + minutes + ":00");
     }
 
@@ -273,11 +287,8 @@ public class Parser {
      * @throws InvalidArgumentException if there are incorrect number of arguments.
      */
     private static Command parseFindCommand(String[] tokens) throws InvalidArgumentException {
-        if (tokens.length != 2) {
-            throw new InvalidArgumentException(":-( OOPS!!! Please enter only one keyword "
-                    + "following the find command");
-        }
-
+        checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND, "Please enter only one keyword "
+                + "following the find command");
         return new FindCommand(tokens[1]);
     }
 
@@ -290,11 +301,10 @@ public class Parser {
      *                                  invalid arguments or unkown keywords.
      */
     private static Command parseSortCommand(String[] tokens) throws InvalidArgumentException {
-        if (tokens.length < 2 || tokens.length > 3) {
-            throw new InvalidArgumentException(":-( OOPS!!! Please enter the task type and order"
-                    + "following the sort command\n"
-                    + "eg: sort deadline desc");
-        }
+        String errorDescription = "Please enter the task type and order following the sort command"
+                + " eg: sort deadline desc";
+        checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND, errorDescription);
+        checkCommandUpperBound(tokens.length, COMMON_UPPER_BOUND, errorDescription);
 
         TaskType taskType;
         switch (tokens[1].toLowerCase()) {
@@ -329,7 +339,7 @@ public class Parser {
     }
 
     /**
-     * Parse through the command and creates a command accordingly.
+     * Parses through the command and creates a command accordingly.
      *
      * @param input user input string.
      * @return Command to be run.

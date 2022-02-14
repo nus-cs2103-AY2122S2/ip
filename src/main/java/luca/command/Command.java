@@ -20,8 +20,7 @@ public abstract class Command {
     }
 
     /**
-     * Abstract method to implement the functionality of the command
-     * of the command of the child classes.
+     * Executes the command functionality.
      *
      * @param taskList list of tasks.
      * @param storage storage used by chat bot.

@@ -32,7 +32,7 @@ public class Storage {
     }
 
     /**
-     * Create the file and necessary folder to store tasks.
+     * Creates the file and necessary folder to store tasks.
      *
      * @throws FileIoException if unable to create file or folder.
      */
@@ -46,7 +46,7 @@ public class Storage {
     }
 
     /**
-     * Parse tokens to identify and mark or unmark tasks.
+     * Parses tokens to identify and mark or unmark tasks.
      *
      * @param task  task to be marked or unmarked.
      * @param tokens tokens to parsed.
@@ -67,7 +67,7 @@ public class Storage {
     }
 
     /**
-     * Parse input and create a ToDo task.
+     * Parses input and create a ToDo task.
      *
      * @param tokens input to be parsed.
      * @return ToDo task.
@@ -77,7 +77,7 @@ public class Storage {
     }
 
     /**
-     * Parse input and create Event task.
+     * Parses input and create Event task.
      *
      * @param tokens input to be parsed.
      * @return Event task.
@@ -89,7 +89,7 @@ public class Storage {
     }
 
     /**
-     * Parse input and create Deadline task.
+     * Parses input and create Deadline task.
      *
      * @param tokens input to be parsed.
      * @return Deadline task.
@@ -100,7 +100,7 @@ public class Storage {
     }
 
     /**
-     * Read and load the Task from the File.
+     * Reads and loads the Task from the File.
      * Outputs the list of tasks.
      *
      * @return ArrayList of loaded Tasks.
