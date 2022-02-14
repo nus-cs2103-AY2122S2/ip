@@ -78,7 +78,7 @@ Examples:
 * `deadline Submit CS2103T Project /by 18/02/2022 10:00`
 * `deadline --rw Submit CS2103T Project /by 18/02/2022 10:00`
 
-<div markdown="span" class="alert alert-warning">:exclamation: NOTE: DATE is in DD/MM/YYYY format, whereas TIME should be in HH:MM format.
+<div markdown="span" class="alert alert-warning">:exclamation: **NOTE**: DATE is in DD/MM/YYYY format, whereas TIME should be in HH:MM format.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **NOTE:**
