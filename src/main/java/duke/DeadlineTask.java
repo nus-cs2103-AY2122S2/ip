@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
  *
  * @author sibinhho99-nus
  */
-public class TaskDeadlines extends Task {
+public class DeadlineTask extends Task {
     private LocalDate doneBy;
 
     /**
@@ -17,7 +17,7 @@ public class TaskDeadlines extends Task {
      * @param name the name of the task.
      * @param doneBy the deadline of the task.
      */
-    public TaskDeadlines(boolean isDone, String name, String doneBy) throws DateTimeParseException {
+    public DeadlineTask(boolean isDone, String name, String doneBy) throws DateTimeParseException {
         super(isDone, name);
         this.doneBy = LocalDate.parse(doneBy);
     }

@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
  *
  * @author sibinhho99-nus
  */
-public class TaskEvents extends Task {
+public class EventTask extends Task {
     private LocalDate startAt;
 
     /**
@@ -17,7 +17,7 @@ public class TaskEvents extends Task {
      * @param name the name of the task.
      * @param startAt the start of the event.
      */
-    public TaskEvents(boolean isDone, String name, String startAt) throws DateTimeParseException {
+    public EventTask(boolean isDone, String name, String startAt) throws DateTimeParseException {
         super(isDone, name);
         this.startAt = LocalDate.parse(startAt);
     }
