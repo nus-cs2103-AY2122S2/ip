@@ -1,6 +1,6 @@
 # User Guide for Jarvis 
 
-![image](images/Ui.png)
+![image](images/Ui.PNG)
 
 ## Features
 
