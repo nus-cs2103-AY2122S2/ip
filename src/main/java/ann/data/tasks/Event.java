@@ -49,8 +49,6 @@ public class Event extends Task {
      */
     public static Event createEventFromStorage(String content, String dateAndTime, boolean isDone) {
         assert !content.isBlank() : "All Events in storage should have a non-empty description";
-        assert InputPattern.isValidDateTimeString(dateAndTime) : "All Events in storage "
-                + "should have the correct date-time format";
         Event event = new Event(content, isDone);
         parseDateAndTime(event, dateAndTime);
         return event;
@@ -64,8 +62,8 @@ public class Event extends Task {
      * @param dateAndTime
      */
     private static void parseDateAndTime(Event event, String dateAndTime) {
-        event.date = dateAndTime.substring(0, 11);
-        event.time = dateAndTime.substring(12);
+        event.date = dateAndTime.substring(0, 11).trim();
+        event.time = dateAndTime.substring(11).trim();
     }
 
     /**

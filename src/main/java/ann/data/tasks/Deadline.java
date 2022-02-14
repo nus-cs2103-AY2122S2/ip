@@ -49,8 +49,6 @@ public class Deadline extends Task {
      */
     public static Deadline createDeadlineFromStorage(String content, String dateAndTime, boolean isDone) {
         assert !content.isBlank() : "All Deadlines in storage should have a non-empty description";
-        assert InputPattern.isValidDateTimeString(dateAndTime) : "All Deadlines in storage "
-                + "should have the correct date-time format";
         Deadline ddl = new Deadline(content, isDone);
         parseDateAndTime(ddl, dateAndTime);
         return ddl;
@@ -77,8 +75,8 @@ public class Deadline extends Task {
      * @param dateAndTime the String representing the date and time of ddl.
      */
     private static void parseDateAndTime(Deadline ddl, String dateAndTime) {
-        ddl.date = dateAndTime.substring(0, 11);
-        ddl.time = dateAndTime.substring(12);
+        ddl.date = dateAndTime.substring(0, 11).trim();
+        ddl.time = dateAndTime.substring(11).trim();
     }
 
     /**
