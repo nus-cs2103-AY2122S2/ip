@@ -28,10 +28,9 @@ public class Tsohg {
      */
     public String takeInput(String input) {
         try {
-            return ui.takeInput(input);
+            return ui.takeInput(input).trim();
         } catch (TsohgException e) {
             return e.getMessage();
         }
     }
-
 }

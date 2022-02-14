@@ -12,6 +12,29 @@ public class Ui {
     }
 
     /**
+     * Return the welcome message when the user
+     * first started the app.
+     * @return the welcome message
+     */
+    public static String welcomeMessage() {
+        String art = "                      .-.\n"
+                + "         heehee      /aa \\_\n"
+                + "                   __\\-  / )                 .-.\n"
+                + "         .-.      (__/    /        haha    _/oo \\\n"
+                + "       _/ ..\\       /     \\               ( \\v  /__\n"
+                + "      ( \\  u/__    /       \\__             \\/   ___)\n"
+                + "       \\    \\__)   \\_.-._._   )  .-.       /     \\\n"
+                + "       /     \\             `-`  / ee\\_    /       \\_\n"
+                + "    __/       \\               __\\  o/ )   \\_.-.__   )\n"
+                + "   (   _._.-._/     hoho     (___   \\/           '-'\n"
+                + "jgs '-'                        /     \\\n"
+                + "                             _/       \\    teehee\n"
+                + "                            (   __.-._/\n";
+        String greet = "Heee hooo I'm Tsohg! How can I help you?";
+        return art + "\n" + greet;
+    }
+
+    /**
      * Process the given input, then return the response.
      * @param input The given input.
      * @return The response of the input.

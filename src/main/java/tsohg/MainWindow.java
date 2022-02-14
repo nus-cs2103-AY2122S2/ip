@@ -21,8 +21,8 @@ public class MainWindow extends VBox {
 
     private Tsohg tsohg;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpeg"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ghost.jpeg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ghost.png"));
 
     /**
      * Initialize the Main Window
@@ -30,6 +30,10 @@ public class MainWindow extends VBox {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        String welcome = Ui.welcomeMessage();
+
+        dialogContainer.getChildren().addAll(DialogBox.getTsohgDialog(welcome, dukeImage));
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();

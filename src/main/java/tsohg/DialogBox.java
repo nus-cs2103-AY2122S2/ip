@@ -9,10 +9,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +24,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private TextFlow dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -31,11 +34,13 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        dialog.setText(text);
+        Text textObj = new Text(text);
+        textObj.setFill(Color.rgb(238, 238, 238));
+        dialog.getChildren().add(textObj);
         displayPicture.setImage(img);
     }
 
