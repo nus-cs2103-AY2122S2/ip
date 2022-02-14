@@ -104,12 +104,15 @@ Note regarding command format:
 ![help](help.PNG)
 
 ***
+
 ## FAQ
 Q: How do I transfer my data to another Computer?
 
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Nexus home folder.
+
 ***
 ## Command Summary
+
  Command      | Description                                                                 
 --------------|-----------------------------------------------------------------------------
  **list**     | List all new or modified files                                              
