@@ -93,13 +93,13 @@ public class Ui {
      */
     public String identifyTask(ParsedInput command, Task task) {
         if (command.getCommand().equals("recur")) {
-            return String.format("%s    %s", Commands.RECUR.toString(), task.toString());
+            return String.format("%s      %s", Commands.RECUR.toString(), task.toString());
         }
 
         if (task.getIsDone()) {
-            return String.format("%s    %s", Commands.MARK.toString(), task.toString());
+            return String.format("%s      %s", Commands.MARK.toString(), task.toString());
         } else {
-            return String.format("%s    %s", Commands.UNMARK.toString(), task.toString());
+            return String.format("%s      %s", Commands.UNMARK.toString(), task.toString());
         }
     }
 
@@ -111,7 +111,7 @@ public class Ui {
      * @return String to be printed which illustrates identity of the new task.
      */
     public String sayAddTask(Task task, int numOfTask) {
-        return String.format("%s    %s    Now you have %d tasks in the list.",
+        return String.format("%s      %s    Now you have %d tasks in the list.",
                 Commands.ADD.toString(), task.toString(), numOfTask);
     }
 
@@ -128,9 +128,9 @@ public class Ui {
             Scanner sc = new Scanner(file);
             for (int i = 0; sc.hasNext(); i++) {
                 if (i == 0) {
-                    output = output + sc.nextLine();
+                    output = output + "  " + sc.nextLine();
                 } else {
-                    output = output + "\n" + sc.nextLine();
+                    output = output + "\n  " + sc.nextLine();
                 }
 
             }
@@ -151,7 +151,7 @@ public class Ui {
         String output = Commands.MATCH.toString();
         for (int i = 0; i < tasks.getTaskList().size(); i++) {
             Task task = tasks.getTaskList().get(i);
-            output = output + String.format("    %s", task.toString());
+            output = output + String.format("      %s", task.toString());
         }
         return output;
     }
