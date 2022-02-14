@@ -35,8 +35,8 @@ public class MarkCommand extends Command {
             throw new ApolloOutOfBoundsException();
         }
 
-        String doneStatus = isDone ? "done" : "not done";
         Task task = taskList.markTask(index, isDone);
+        String doneStatus = isDone ? "done" : "not done";
         return String.format("I have marked the following task as %s\n\t%s",
                 doneStatus, task);
     }

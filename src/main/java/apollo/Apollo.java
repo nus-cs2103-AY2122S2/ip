@@ -53,6 +53,7 @@ public class Apollo extends Application {
     private static void run() {
         ui = new Ui();
         ui.printMessage(Welcome.getLogo() + Welcome.greet(isLoaded, LocalTime.now()));
+
         Command command = null;
         do {
             String userCommand = ui.getUserCommand();
