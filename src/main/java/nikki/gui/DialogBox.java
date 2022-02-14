@@ -9,10 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 /**
@@ -36,9 +40,21 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setFont(new Font("Source Code Pro", 16));
+        dialog.setFont(new Font("Verdana", 14));
         dialog.setText(text);
+
         displayPicture.setImage(img);
+
+        // @@author DavidTan0527-reused
+        // Reused from https://stackoverflow.com/questions/20489908/border-radius-and-shadow-on-imageview
+        // with some minor modifications
+        Rectangle clip = new Rectangle(
+                displayPicture.getFitWidth(), displayPicture.getFitHeight()
+        );
+        clip.setArcWidth(displayPicture.getFitWidth());
+        clip.setArcHeight(displayPicture.getFitHeight());
+        displayPicture.setClip(clip);
+        // @@author
     }
 
     /**

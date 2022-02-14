@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<fx:root
-    alignment="BOTTOM_RIGHT"
-    spacing="15"
-    maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-    prefWidth="450.0" type="javafx.scene.layout.HBox"
-    xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="600.0" minHeight="-Infinity" minWidth="400.0" spacing="12.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="dialog" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" style="-fx-background-color: #4ee827; -fx-background-radius: 20px; -fx-padding: 15px 20px;" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex magna, suscipit non nunc vitae, pulvinar accumsan velit. Nulla facilisi. Donec placerat blandit lacus vel egestas. Donec porttitor nunc tincidunt tortor blandit tempor. Vestibulum vestibulum vestibulum purus, id faucibus odio. Etiam in efficitur est. In sed varius erat. Aliquam aliquam metus urna, a convallis mauris ullamcorper vel. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque tincidunt luctus commodo." wrapText="true">
+         <HBox.margin>
+            <Insets top="24.0" />
+         </HBox.margin></Label>
+        <ImageView fx:id="displayPicture" cache="true" cacheHint="QUALITY" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fbk.JPG" />
+         </image>
+         <HBox.margin>
+            <Insets top="24.0" />
+         </HBox.margin>
+      </ImageView>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets left="12.0" right="12.0" />
     </padding>
 </fx:root>
