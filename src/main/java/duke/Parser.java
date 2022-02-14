@@ -20,7 +20,7 @@ public class Parser {
      * @throws DukeException throws if the format of the message was incorrect, or if the message was not understood
      */
     public String processMessage(String message, TaskList tasks, Storage storage) throws DukeException {
-        if (isExitCommand(message)) { //todo: consider splitting the method and message as was the case before
+        if (isExitCommand(message)) {
             return null;
         }
         String confirmationMessage = null;
@@ -89,22 +89,25 @@ public class Parser {
 
         LocalDate date = parseDateFromString(dateString, type);
         LocalTime timeBegin = parseTimeFromString(timeBeginString, type);
+        Task currentTask = null;
         switch (type) {
         case TODO:
-            return new ToDo(description);
+            currentTask = new ToDo(description);
+            break;
         case DEADLINE:
-            return new Deadline(description, date, timeBegin);
+            currentTask = new Deadline(description, date, timeBegin);
+            break;
         case EVENT:
             String timeEndString = getTimeEndString(messageArr);
             LocalTime timeEnd = parseTimeFromString(timeEndString, TaskTypes.EVENT);
             assert timeEnd != null;
             throwIfEndTimeBeforeStartTime(timeBegin, timeEnd);
-            return new Event(description, date, timeBegin, timeEnd);
+            currentTask = new Event(description, date, timeBegin, timeEnd);
+            break;
         default:
             throwInvalidTypeDeclaration();
         }
-        assert false : "Runtime should not reach here";
-        return null; //should not reach here
+        return currentTask;
     }
 
     private int getIndexFromMessage(String message) throws DukeException {
