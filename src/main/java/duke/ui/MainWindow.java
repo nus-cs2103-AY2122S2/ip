@@ -49,12 +49,12 @@ public class MainWindow extends AnchorPane {
             duke.initializeStorageSystem();
         } catch (DukeException e) {
             dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(e.getMessage(), dukeImage)
+                    DialogBox.getDukeDialog(e.getMessage(), dukeImage, true)
             );
         }
 
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage)
+                DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage, false)
         );
     }
 
@@ -75,9 +75,11 @@ public class MainWindow extends AnchorPane {
 
                 Image dukeImage = new Image(this.getClass().getResourceAsStream(duke.getBotImagePath()));;
 
+                boolean isWarning = response.startsWith("!!!");
+
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(response, dukeImage)
+                        DialogBox.getDukeDialog(response, dukeImage, isWarning)
                 );
                 userInput.clear();
             }

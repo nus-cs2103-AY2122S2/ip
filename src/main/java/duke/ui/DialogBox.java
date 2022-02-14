@@ -64,10 +64,11 @@ public class DialogBox extends HBox {
      * @param img the image of the bot.
      * @return a new dialog box object.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, boolean isWarning) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+        db.setBackground(new Background(new BackgroundFill(
+                isWarning ? Color.LIGHTPINK : Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         return db;
     }
 

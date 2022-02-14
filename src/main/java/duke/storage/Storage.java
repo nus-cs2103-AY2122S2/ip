@@ -76,8 +76,9 @@ public class Storage {
             File file = new File(filePath);
             sc = new Scanner(file);
 
-            TaskList taskList = loadTaskList();
+            TaskList taskList = decodeTaskList();
 
+            // Decode user profile information
             String profileInfoArg = sc.nextLine();
 
             if (!profileInfoArg.equals(String.format("[%s]", UserProfile.STORAGE_HEADER))) {
@@ -105,7 +106,7 @@ public class Storage {
         }
     }
 
-    private TaskList loadTaskList() throws IOException {
+    private TaskList decodeTaskList() throws IOException {
         TaskList taskList = new TaskList();
 
         String data = sc.nextLine();

@@ -10,14 +10,18 @@
     <children>
         <Label fx:id="dialog" alignment="TOP_RIGHT" text="Label" textAlignment="RIGHT" wrapText="true">
          <HBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
          </HBox.margin></Label>
-      <Pane minHeight="110.0" minWidth="110.0" prefWidth="110.0" style="-fx-background-color: gray;">
+      <Pane minHeight="75.0" minWidth="75.0" prefHeight="75.0" prefWidth="75.0" style="-fx-background-radius: 15; -fx-background-color: gray;">
          <children>
-              <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane blendMode="SRC_ATOP" layoutX="1.0" layoutY="1.0" minHeight="73.0" minWidth="73.0" prefHeight="73.0" prefWidth="73.0" style="-fx-background-radius: 14; -fx-background-color: black;">
+               <children>
+                    <ImageView fx:id="displayPicture" blendMode="SRC_ATOP" cache="true" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
          </children>
          <HBox.margin>
-            <Insets />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </HBox.margin>
       </Pane>
     </children>
