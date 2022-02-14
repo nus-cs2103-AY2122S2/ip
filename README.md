@@ -11,18 +11,19 @@
   * [Customisation](#customisation)
 
 ## Setup
-1. Download the .jar file [here](https://github.com/jetrz/ip/releases/tag/A-Jar).
+1. Download the .jar file [here](https://github.com/jetrz/ip/releases/tag/A-Release).
 2. Open your local terminal and navigate to the folder which you saved the .jar file in, and run the following command:
 ```
-java -jar ip.jar
+java -jar duke.jar
 ```
 3. That's it! Have fun with Pikachu!
 
 ## Features
 - [x] To-dos, Deadline and Event task types implemented
 - [x] Marking tasks as done/not done
+- [x] Sorting tasks chronologically
 - [x] Searching for tasks by name
-- [ ] Interactive GUI (coming soon)
+- [x] Interactive GUI
 
 ## Customisation
 Want to customize your own Pikachu? Modify the following functions in the UI.java file to control what Pikachu says! 
