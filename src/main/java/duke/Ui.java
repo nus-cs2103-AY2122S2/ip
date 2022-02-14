@@ -24,8 +24,8 @@ public class Ui {
      * @return String entered by user
      */
     public String readCommand() {
-        Scanner myObj = new Scanner(System.in);
-        return myObj.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
     /**

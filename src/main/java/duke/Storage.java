@@ -33,11 +33,11 @@ public class Storage {
                     file.createNewFile();
                 }
             }
-            Scanner myObj = new Scanner(file);
+            Scanner scanner = new Scanner(file);
             boolean doneOrNot = false;
             ArrayList<Task> tasks = new ArrayList<>();
-            while (myObj.hasNext()) {
-                String fullCommand = myObj.nextLine();
+            while (scanner.hasNext()) {
+                String fullCommand = scanner.nextLine();
                 String[] arrOfStr = fullCommand.split(" ", 5);
                 String command = arrOfStr[0];
                 if (Integer.parseInt(arrOfStr[2]) == 1) {
