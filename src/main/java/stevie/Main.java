@@ -27,10 +27,10 @@ public class Main extends Application {
             AnchorPane ap = new AnchorPane();
             fxmlLoader.setRoot(ap);
             fxmlLoader.load();
-
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setStevie(stevie);
+            stage.setTitle("Stevie");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

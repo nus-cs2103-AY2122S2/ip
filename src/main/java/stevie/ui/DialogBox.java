@@ -26,10 +26,15 @@ import javafx.scene.paint.Color;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final Background BACKGROUND;
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    static {
+        BACKGROUND = new Background(
+                new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(10), new Insets(6)));
+    }
 
     private DialogBox(String text, Image img) {
         try {
@@ -62,7 +67,7 @@ public class DialogBox extends HBox {
     public static DialogBox getStevieDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(Region.USE_PREF_SIZE);
-        db.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(10), new Insets(6))));
+        db.setBackground(BACKGROUND);
         db.flip();
         return db;
     }
