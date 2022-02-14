@@ -63,6 +63,8 @@ public class Duke {
     }
 
     public List<Message> init() {
+        assert !init : "Attempting to init Duke more than once";
+
         List<Message> messages = new ArrayList<>();
         try {
             this.tasks = TaskList.loadFromStorage(this.storage);

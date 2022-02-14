@@ -140,6 +140,8 @@ public class TaskList {
                             o instanceof Object ? o.getClass().getName() : "null"));
                 }
             }
+
+            assert tasks.size() == objs.size() : "TaskList task count != number of objects retrieved from storage";
         } catch (ClassCastException e) {
             throw new StorageException("Got invalid type from Storage!", e);
         }
