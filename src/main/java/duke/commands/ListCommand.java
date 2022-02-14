@@ -13,9 +13,8 @@ public class ListCommand extends Command<String> {
      * Constructor of this class to initialise this command to list out.
      *
      * @param list of tasks by user
-     * @throws DukeException thrown when command cannot be executed
      */
-    public ListCommand(TaskList list) throws DukeException {
+    public ListCommand(TaskList list) {
         this.list = list;
     }
 

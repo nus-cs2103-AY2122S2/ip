@@ -21,9 +21,8 @@ public class FindCommand extends Command<String> {
      *
      * @param list list to search from
      * @param echo the details of find search
-     * @throws DukeException when find command cannot be executed
      */
-    public FindCommand(TaskList list, String[] echo) throws DukeException {
+    public FindCommand(TaskList list, String[] echo) {
         this.list = list;
         this.echo = echo;
     }

@@ -8,7 +8,7 @@ import duke.exception.DukeException;
  * @param <T>
  */
 public abstract class Command<T> {
-    public String execute() throws DukeException, DukeException {
+    public String execute() throws DukeException {
         return "";
     }
 

@@ -25,7 +25,7 @@ public class Ui {
      */
     public String readCommand() {
         Scanner cmd = new Scanner(System.in);
-        while (cmd.hasNext()) {
+        if (cmd.hasNext()) {
             return cmd.nextLine();
         }
         return null;

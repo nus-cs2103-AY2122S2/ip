@@ -28,7 +28,6 @@ public class DeleteCommand extends Command<String> {
      * @param list task list to be delete from
      * @param echo the input details by user to delete a task
      * @param storage store of which list to delete from
-     * @throws DukeException
      */
     public DeleteCommand(TaskList list, String[] echo, Storage storage) {
         this.list = list;

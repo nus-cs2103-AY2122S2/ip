@@ -25,9 +25,8 @@ public class AddEventCommand extends Command<String> {
      * @param list list of tasks to add this event to
      * @param echo the input details of what to be added
      * @param storage store of the list to be added to
-     * @throws DukeException when task cannot be added
      */
-    public AddEventCommand(TaskList list, String[] echo, Storage storage) throws DukeException {
+    public AddEventCommand(TaskList list, String[] echo, Storage storage) {
         this.list = list;
         this.echo = echo;
         this.storage = storage;

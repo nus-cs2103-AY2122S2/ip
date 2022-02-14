@@ -28,9 +28,8 @@ public class MarkCommand extends Command<String> {
      * @param list the list from which to get the task
      * @param echo the input of user to mark a specific task
      * @param storage store of where the task list can be found
-     * @throws DukeException
      */
-    public MarkCommand(TaskList list, String[] echo, Storage storage) throws DukeException {
+    public MarkCommand(TaskList list, String[] echo, Storage storage) {
         this.list = list;
         this.echo = echo;
         this.storage = storage;

@@ -20,7 +20,7 @@ public class UnmarkCommand extends Command<String> {
     private final String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";
     private String response = "";
     private int targetIndex;
-    private int size;
+    private final int size;
 
     /**
      * Constructor for this class to know where to unmark.
@@ -28,9 +28,8 @@ public class UnmarkCommand extends Command<String> {
      * @param list the list from which to get the task
      * @param echo the input of user to unmark a specific task
      * @param storage store of where the task list can be found
-     * @throws DukeException
      */
-    public UnmarkCommand(TaskList list, String[] echo, Storage storage) throws DukeException {
+    public UnmarkCommand(TaskList list, String[] echo, Storage storage) {
         this.list = list;
         this.echo = echo;
         this.storage = storage;
