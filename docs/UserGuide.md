@@ -223,7 +223,7 @@ Every change in each task is recorded in a file called duke.txt. When the progra
 
 ### Exit
 Exits the programme.
-*Command: delete TASK_NUMBER*
+*Command: exit*
    
 
 ## FAQ
