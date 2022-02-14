@@ -5,3 +5,22 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+what is your command?
+Added: borrow book
+Added: return book
+Added: project meeting
+[T][ ] borrow book
+[D][ ] return book (by: Oct 15 2019)
+[E][ ] project meeting (at: Oct 20 2019)
+Nice! I've marked this task as done:
+[D][X] return book (by: Oct 15 2019)
+Task not yet completed!
+[T][ ] borrow book
+[D][X] return book (by: Oct 15 2019)
+[E][ ] project meeting (at: Oct 20 2019)
+Oh no! one more thing that needs to be done:
+[D][ ] return book (by: Oct 15 2019)
+[T][ ] borrow book
+[D][ ] return book (by: Oct 15 2019)
+[E][ ] project meeting (at: Oct 20 2019)
+Bye. See you later!

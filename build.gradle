@@ -1,0 +1,30 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+}
+
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls',  'javafx.fxml' ]
+}
+
+application {
+    mainClassName = "duke.Launcher"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.Launcher'
+    }
+}

@@ -1,0 +1,3 @@
+T , true , create todo , null
+D , false , create deadline , 2020-02-02
+E , false , create event , 2020-01-01
