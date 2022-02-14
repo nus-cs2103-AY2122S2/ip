@@ -1,9 +1,11 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import duke.dukeexceptions.DukeDateExceptions;
 import duke.dukeexceptions.DukeException;
+
 
 
 /**
@@ -14,17 +16,20 @@ public class Event extends Task {
     private static final String TYPE = "E";
     private String info;
     private LocalDateTime dateInfo;
+    private LocalTime endTime;
 
     /**
      * Constructor of Events
      * @param name name of the event.
-     * @param dateInfo extra dateInfo of the event.
+     * @param info extra dateInfo of the event.
      */
-    public Event(String name, String dateInfo) throws DukeException {
+    public Event(String name, String info) throws DukeException {
         super(name);
-        this.info = dateInfo;
+        this.info = info;
         try {
-            this.dateInfo = LocalDateTime.parse(dateInfo, Task.DATE_TIME_FORMAT_IN);
+            String[] times = info.split("-");
+            this.endTime = LocalTime.parse(times[1], Task.TIME_FORMAT_IN);
+            this.dateInfo = LocalDateTime.parse(times[0], Task.DATE_TIME_FORMAT_IN);
         } catch (Exception e) {
             throw new DukeDateExceptions("");
         }
@@ -34,13 +39,14 @@ public class Event extends Task {
      * Constructor for the event class
      * @param name name of the event.
      * @param marked is event marked.
-     * @param dateInfo string representation of the date.
+     * @param info string representation of the date.
      */
     public Event(String name, boolean marked, String info) {
         super(name);
         this.info = info;
-        this.dateInfo = LocalDateTime.parse(info, Task.DATE_TIME_FORMAT_IN);;
-        this.isMarked = marked;
+        String[] times = info.split("-");
+        this.endTime = LocalTime.parse(times[1], Task.TIME_FORMAT_IN);
+        this.dateInfo = LocalDateTime.parse(times[0], Task.DATE_TIME_FORMAT_IN);
     }
 
     @Override
@@ -51,7 +57,8 @@ public class Event extends Task {
     @Override
     public String display() {
         return "[" + TYPE + "] " + "[" + markDisplay() + "] "
-                + this.name + " (at " + dateInfo.format(Task.DATE_TIME_FORMAT_OUT) + ")";
+                + this.name + " (at " + dateInfo.format(Task.DATE_TIME_FORMAT_OUT) + " - "
+                + endTime.format(Task.TIME_FORMAT_OUT) + ")";
     }
 
 }

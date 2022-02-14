@@ -26,17 +26,18 @@ Add any of the 3 type of task!
 
 Format:
 1. `todo <NAME>`
-2. `deadline <NAME> /by <DATE_TIME>`
-3. `event <NAME> /by <DATE_TIME>`
+2. `deadline <NAME> /by <DATE> <TIME>`
+3. `event <NAME> /by <DATE> <TIME>-<TIME>`
 
-Note: 
-    `<DATE_TIME>` is formatted as `dd/mm/yyyy hhmm`
+Note:
+- `<DATE>` is formatted as `dd/mm/yyyy`
+- `<TIME>` is formatted as `hhmm`
 
 Sample usage:
 ```
     todo a
     deadline b /by 2/12/2019 1800
-    event c /at 2/12/2019 1800
+    event c /at 2/12/2019 1800-1900
 ```
 
 Expected Output:
@@ -48,11 +49,11 @@ Expected Output:
 ```
 `deadline b /by 2/12/2019 1800`
 ```
-    [D][] b (by Dec 2 2019)
+    [D][] b (by Dec 2 2019 6:00PM)
 ```
-`event c /at 2/12/2019 1800`
+`event c /at 2/12/2019 1800-1900`
 ```
-    [D][] c (at Dec 2 2019)
+    [E][] c (at Dec 2 2019 6:00PM - 7:00PM)
 ```
 
 ### Feature- Delete Task

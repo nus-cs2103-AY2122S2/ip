@@ -7,8 +7,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Task {
 
-    public static final DateTimeFormatter DATE_TIME_FORMAT_IN = DateTimeFormatter.ofPattern("d/M/y kkmm");
-    public static final DateTimeFormatter DATE_TIME_FORMAT_OUT = DateTimeFormatter.ofPattern("MMM d y");
+    public static final DateTimeFormatter DATE_TIME_FORMAT_IN = DateTimeFormatter.ofPattern("d/M/y HHmm");
+    public static final DateTimeFormatter DATE_TIME_FORMAT_OUT = DateTimeFormatter.ofPattern("MMM d y h:mma");
+    public static final DateTimeFormatter TIME_FORMAT_IN = DateTimeFormatter.ofPattern("HHmm");
+    public static final DateTimeFormatter TIME_FORMAT_OUT = DateTimeFormatter.ofPattern("h:mma");
     protected boolean isMarked = false;
 
     protected String name;
