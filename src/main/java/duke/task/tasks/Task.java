@@ -4,7 +4,7 @@ package duke.task.tasks;
  * Represent task to be done.
  * Abstract class and cannot be instantiated
  */
-public abstract class Task {
+public abstract class Task implements ITask {
     private final String taskName;
     private boolean isDone;
 
@@ -57,6 +57,10 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), taskName);
@@ -75,9 +79,5 @@ public abstract class Task {
 
     String getTaskName() {
         return this.taskName;
-    }
-
-    boolean isDone() {
-        return this.isDone;
     }
 }

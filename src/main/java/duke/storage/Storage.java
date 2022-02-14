@@ -1,10 +1,7 @@
 package duke.storage;
 
 import duke.task.TaskList;
-import duke.task.tasks.Deadline;
-import duke.task.tasks.Event;
-import duke.task.tasks.Task;
-import duke.task.tasks.ToDo;
+import duke.task.tasks.*;
 import duke.util.Constants;
 
 import java.io.File;
@@ -82,7 +79,7 @@ public class Storage {
 
         PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
 
-        for (Task task : taskList.listTasks()) {
+        for (ITask task : taskList.listTasks()) {
             pw.write(task.encode());
         }
 

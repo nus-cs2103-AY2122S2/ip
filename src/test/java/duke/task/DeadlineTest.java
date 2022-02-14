@@ -1,41 +1,40 @@
 package duke.task;
 
 import duke.task.tasks.Deadline;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DeadlineTest {
-    @Test
-    public void getStatusIconTest() {
-        Deadline deadline = new Deadline("eat", "2019-12-12");
-        String icon = deadline.getStatusIcon();
-        assertEquals(icon, " ");
+    public static Deadline deadlineNotDone;
 
-        Deadline checkedDeadline = new Deadline("eat", true,"2019-12-12" );
-        icon = checkedDeadline.getStatusIcon();
+    @BeforeAll
+    public static void initializeTest() {
+        deadlineNotDone = new Deadline("eat", "2019-12-12");
+    }
+
+    @Test
+    public void switchMark_markTask_success() {
+        deadlineNotDone.switchMark("mark");
+        assertTrue(deadlineNotDone.isDone());
+    }
+
+    @Test
+    public void getStatusIcon_markedTask_success() {
+        String icon = deadlineNotDone.getStatusIcon();
         assertEquals(icon, "X");
     }
 
     @Test
-    public void markTest() {
-        Deadline deadline = new Deadline("eat", "2019-12-12");
-        String icon = deadline.getStatusIcon();
-        assertEquals(icon, " ");
-
-        deadline.switchMark("mark");
-        icon = deadline.getStatusIcon();
-        assertEquals(icon, "X");
+    public void switchMark_unmarkTask_success() {
+        deadlineNotDone.switchMark("unmark");
+        assertFalse(deadlineNotDone.isDone());
     }
 
     @Test
-    public void unmarkTest() {
-        Deadline checkedDeadline = new Deadline("eat", true,"2019-12-12" );
-        String icon = checkedDeadline.getStatusIcon();
-        assertEquals(icon, "X");
-
-        checkedDeadline.switchMark("unmark");
-        icon = checkedDeadline.getStatusIcon();
+    public void getStatusIcon_unmarkedTask_success() {
+        String icon = deadlineNotDone.getStatusIcon();
         assertEquals(icon, " ");
     }
 }

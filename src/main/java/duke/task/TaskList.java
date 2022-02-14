@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.InvalidTaskNumberException;
+import duke.task.tasks.ITask;
 import duke.task.tasks.Task;
 
 import java.sql.Array;
@@ -12,14 +13,13 @@ import java.util.List;
  * removing tasks, updating tasks
  */
 public class TaskList {
-    private List<Task> tasks;
-    private int index = 0;
+    private List<ITask> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<ITask> tasks) {
         this.tasks = tasks;
     }
 
@@ -30,13 +30,12 @@ public class TaskList {
      * @param newTask new task to be added into the list
      * @return String to be printed by the Ui containing information of the task.
      */
-    public String addTask(Task newTask) {
+    public String addTask(ITask newTask) {
         assert newTask != null;
 
         tasks.add(newTask);
-        index = tasks.size();
         String output = "Got it. I've added this task:\n  " +
-                newTask + "\nnow you have " + this.index + " tasks in the list";
+                newTask + "\nnow you have " + tasks.size() + " tasks in the list";
         return output;
     }
 
@@ -46,7 +45,7 @@ public class TaskList {
      * @return number of tasks inside the list
      */
     public int getNumberOfTasks() {
-        return this.index;
+        return tasks.size();
     }
 
     /**
@@ -63,7 +62,7 @@ public class TaskList {
         return output;
     }
 
-    public List<Task> listTasks() {
+    public List<ITask> listTasks() {
         return tasks;
     }
 
@@ -77,7 +76,7 @@ public class TaskList {
      * @throws InvalidTaskNumberException If id > index or id <= 0 (can't modify)
      */
     public String mark(int id, String instr) throws InvalidTaskNumberException {
-        if (id <= 0 || id > index) {
+        if (id <= 0 || id > tasks.size()) {
             throw new InvalidTaskNumberException();
         }
 
@@ -86,8 +85,8 @@ public class TaskList {
     }
 
     public TaskList cloneSelf() {
-        ArrayList<Task> copyArray = new ArrayList<>();
-        for (Task task: tasks) {
+        ArrayList<ITask> copyArray = new ArrayList<>();
+        for (ITask task: tasks) {
             copyArray.add(task.cloneSelf());
         }
         return new TaskList(copyArray);
@@ -101,14 +100,13 @@ public class TaskList {
      * @throws InvalidTaskNumberException If id > index or id <= 0 (can't remove)
      */
     public String remove(int id) throws InvalidTaskNumberException {
-        if (id <= 0 || id > index) {
+        if (id <= 0 || id > tasks.size()) {
             throw new InvalidTaskNumberException();
         }
 
-        Task removed = tasks.remove(id - 1);
-        index--;
+        ITask removed = tasks.remove(id - 1);
         String out = "Noted, I have removed this task:\n  "
-                + removed + "\nnow you have " + index + " tasks in the list.";
+                + removed + "\nnow you have " + tasks.size() + " tasks in the list.";
         return out;
     }
 
@@ -116,7 +114,7 @@ public class TaskList {
         assert word != null;
 
         String output = "Here are the matching tasks in your list:";
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).hasWord(word)) {
                 output += String.format("\n%d.%s", i + 1, tasks.get(i));
             }
