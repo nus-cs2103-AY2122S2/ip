@@ -25,7 +25,7 @@ public class Task {
      * Set the time of the task.
      * @param time The time that the task should be done.
      **/
-    public void setTime(String time) {
+    public void setTime(String time) throws ArrayIndexOutOfBoundsException {
         time = identifyTime(time);
         if(this.type == Type.EVENT)
         this.time = "(at: " + time + ")";
@@ -42,7 +42,7 @@ public class Task {
         return this.name.contains(prefix);
     }
 
-    private String identifyTime(String time) {
+    private String identifyTime(String time) throws ArrayIndexOutOfBoundsException {
         String result = time;
         String[] dayAndTime = time.split(" ", 2);
         String[] split = dayAndTime[0].split("[-/]", 3);
@@ -115,8 +115,7 @@ public class Task {
                 throw new NumberFormatException("");
             }
         } catch (NumberFormatException e) {
-            suggest();
-            return result;
+            throw new ArrayIndexOutOfBoundsException();
         }
         return result + "  " + (dayAndTime.length == 2 ? dayAndTime[1] : "");
     }
