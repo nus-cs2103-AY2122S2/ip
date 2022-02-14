@@ -70,6 +70,8 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    //@@Genuine Coder hsiaojietng-reused
+    //This source teaches about the creation of a new window pop up using JavaFX https://www.youtube.com/watch?v=ZzwvQ6pa_tk
     @FXML
     private void handleStatisticsAction(ActionEvent event) {
         try {

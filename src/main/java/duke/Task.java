@@ -31,6 +31,7 @@ public abstract class Task implements Comparable<Task> {
     }
 
     public Character getType() {
+
         return type;
     }
 

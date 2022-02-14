@@ -29,6 +29,8 @@ public class Statistic extends AnchorPane implements Initializable {
         setUpPieChart();
     }
 
+    //@@Da9el00 hsiaojietng-reused
+    //The source creates a Pie Chart based on fruits data hardcoded from https://gist.github.com/Da9el00/9c1e63a5ba8c84e0219bb7e59d7a5bad
     private void setUpPieChart() {
         ObservableList<PieChart.Data> pieChartData = observableArrayList(
                 new PieChart.Data("Todos", toDoTasks),
@@ -44,6 +46,7 @@ public class Statistic extends AnchorPane implements Initializable {
                 ));
         pieChart.getData().addAll(pieChartData);
     }
+    //@@Da9el00
 
     private void setNumOfTasks(ArrayList<Task> tasks) {
         for (Task task : tasks) {
@@ -63,6 +66,5 @@ public class Statistic extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
