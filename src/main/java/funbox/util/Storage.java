@@ -154,16 +154,30 @@ public class Storage {
 
             switch (type) {
             case "todo":
-                taskList.add(new ToDo(description, type));
+                ToDo todo = new ToDo(description, type);
+
+                if (isTask(3, taskSplit)) {
+                    addTagsToTask(3, taskSplit, todo);
+                }
+
+                taskList.add(todo);
                 break;
             case "event":
                 LocalDate eventDate = parser.stringToLocalDate(taskSplit[3]);
                 String eventTime = parser.getTime(taskSplit[3]);
-                taskList.add(new Event(description, eventDate, eventTime, type));
+                Event event = new Event(description, eventDate, eventTime, type);
+                if (isTask(4, taskSplit)) {
+                    addTagsToTask(4, taskSplit, event);
+                }
+                taskList.add(event);
                 break;
             case "deadline":
                 LocalDate deadlineDate = parser.stringToLocalDate(taskSplit[3]);
                 String deadlineTime = parser.getTime(taskSplit[3]);
+                Deadline deadline = new Deadline(description, deadlineDate, deadlineTime, type);
+                if (isTask(4, taskSplit)) {
+                    addTagsToTask(4, taskSplit, deadline);
+                }
                 taskList.add(new Deadline(description, deadlineDate, deadlineTime, type));
                 break;
             }
@@ -173,6 +187,16 @@ public class Storage {
         }
 
         return taskList;
+    }
+
+    private boolean isTask(int index, String[] arr) {
+        return index <= (arr.length - 1);
+    }
+
+    private void addTagsToTask(int index, String[] tags, Task task) {
+        for (int i = index; i < tags.length; i++) {
+            task.addTag(tags[i]);
+        }
     }
 
     private boolean isTaskDone(String x) {
@@ -342,8 +366,42 @@ public class Storage {
         }
     }
 
+    public void addTagToTask(int index, String tag) throws IOException {
+        String tempFileUrl = "data/temp.txt";
+        createTempFile(tempFileUrl);
+        File tempFile = new File(tempFileUrl);
+        File file = new File(this.FILE_URL);
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        FileWriter fw = new FileWriter(tempFileUrl, true);
+
+        String task;
+        int counter = 0;
+
+        while (true) {
+            task = br.readLine();
+            if (task == null) {
+                br.close();
+                fw.close();
+                File temp = file;
+                file.delete();
+                tempFile.renameTo(temp);
+                break;
+            }
+
+            if (counter != index) {
+                fw.write(task + "\n");
+            } else {
+                task = task.concat(DELIMITER).concat(tag);
+                fw.write(task + "\n");
+            }
+
+            counter++;
+        }
+    }
+
     private String parseTask(String prefix, String task) {
-        return prefix.concat(task);
+        return prefix.concat(DELIMITER).concat(task);
     }
 
     private String parseTask(String prefix, String task, String time, String date) {

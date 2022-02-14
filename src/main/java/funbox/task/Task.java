@@ -4,6 +4,8 @@ package funbox.task;
 //Reused from https://nus-cs2103-ay2122s2.github.io/website/admin/ip-w2.html
 // with minor modifications
 
+import java.util.ArrayList;
+
 /**
  * The task class represents the task user's wants to do
  */
@@ -11,6 +13,7 @@ public class Task {
     public String description;
     public boolean isDone;
     public String type;
+    public ArrayList<String> tags;
 
     /**
      * Constructor for the Task.
@@ -22,6 +25,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.type = type;
+        this.tags = new ArrayList<String>();
     }
 
     /**
@@ -52,6 +56,33 @@ public class Task {
      */
     public void presetDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Shows the current tags of the task.
+     *
+     * @return Returns all tags of the task.
+     */
+    public String showTags() {
+        String result = "";
+        int lth = tags.size();
+        for (int i = 0; i < lth; i++) {
+            if (i == lth - 1) {
+                result = result.concat(tags.get(i));
+            } else {
+                result = result.concat(tags.get(i)).concat(",");
+            }
+        }
+        return result == "" ? "No tags found!" : result;
+    }
+
+    /**
+     * Add tag to task.
+     *
+     * @param tag The tags to be added to the task.
+     */
+    public void addTag(String tag) {
+        tags.add("#".concat(tag));
     }
 
     /**
