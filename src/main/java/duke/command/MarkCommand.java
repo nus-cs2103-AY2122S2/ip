@@ -19,18 +19,18 @@ public class MarkCommand extends Command {
             + "please select a valid task to unmark using the task's number";
 
     private int taskNumber;
-    private boolean toMark;
+    private boolean isMarked;
 
     /**
      * Constructor to the mark or unmark command.
      *
      * @param taskNumber Task number to mark or unmark
-     * @param toMark Boolean to indicate to mark or unmark the task
+     * @param isMarked Boolean to indicate to mark or unmark the task
      * @throws DukeException If the task number given is empty or not an integer
      */
-    public MarkCommand(String taskNumber, boolean toMark) throws DukeException {
+    public MarkCommand(String taskNumber, boolean isMarked) throws DukeException {
         if (taskNumber.equals("")) {
-            if (toMark) {
+            if (isMarked) {
                 throw new DukeException(ERROR_EMPTY_MARK);
             } else {
                 throw new DukeException(ERROR_EMPTY_UNMARK);
@@ -38,9 +38,9 @@ public class MarkCommand extends Command {
         }
         try {
             this.taskNumber = Integer.parseInt(taskNumber);
-            this.toMark = toMark;
+            this.isMarked = isMarked;
         } catch (NumberFormatException e) {
-            if (toMark) {
+            if (isMarked) {
                 throw new DukeException(ERROR_INVALID_MARK);
             } else {
                 throw new DukeException(ERROR_INVALID_UNMARK);
@@ -58,7 +58,7 @@ public class MarkCommand extends Command {
     @Override
     public String execute(List<Task> tasks, Ui ui) throws DukeException {
         if (this.taskNumber > tasks.size() || this.taskNumber <= 0) {
-            if (this.toMark) {
+            if (this.isMarked) {
                 throw new DukeException(ERROR_INVALID_MARK);
             } else {
                 throw new DukeException(ERROR_INVALID_UNMARK);
@@ -66,7 +66,7 @@ public class MarkCommand extends Command {
         }
         String message;
         Task thisTask = tasks.get(this.taskNumber - 1);
-        if (toMark) {
+        if (isMarked) {
             thisTask.markAsDone();
             message = MESSAGE_MARK;
         } else {

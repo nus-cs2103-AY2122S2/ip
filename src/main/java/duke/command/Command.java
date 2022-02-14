@@ -12,7 +12,7 @@ import duke.task.Task;
 public abstract class Command {
 
     /**
-     * Abstract method for execution of every command.
+     * Sends an execution step for every issued command
      *
      * @param tasks Task list
      * @param ui UI object

@@ -58,18 +58,12 @@ public class UpdateCommand extends Command {
             throw new DukeException(ERROR_INVALID_TASK_NUMBER);
         }
         Task thisTask = tasks.get(taskNumber - 1);
-        String message = "";
         if (editParams.length < 2) {
             throw new DukeException(ERROR_INVALID_FORMAT);
         }
 
         if (editParams[0].equals("/title")) {
-            String editedTitle = editParams[1];
-            for (int i = 2; i < editParams.length; i++) {
-                editedTitle += " " + editParams[i];
-            }
-            thisTask.setTitle(editedTitle);
-            message = MESSAGE_UPDATE;
+            editTitle(thisTask);
         } else if (editParams[0].equals("/date") || editParams[0].equals("/time")) {
             checkDateTimeUpdatability(thisTask);
             if (editParams.length != 2) {
@@ -77,36 +71,50 @@ public class UpdateCommand extends Command {
             }
             if (editParams[0].equals("/date")) {
                 try {
-                    if (thisTask instanceof EventTask) {
-                        EventTask event = (EventTask) thisTask;
-                        event.setEventDate(editParams[1]);
-                    }
-                    if (thisTask instanceof DeadlineTask) {
-                        DeadlineTask deadlineTask = (DeadlineTask) thisTask;
-                        deadlineTask.setDeadlineDate(editParams[1]);
-                    }
-                    message = MESSAGE_UPDATE;
+                    setDeadlineOrEventDate(thisTask);
                 } catch (DateTimeParseException e) {
                     throw new DukeException(ERROR_INVALID_FORMAT);
                 }
             } else if (editParams[0].equals("/time")) {
                 try {
-                    if (thisTask instanceof EventTask) {
-                        EventTask event = (EventTask) thisTask;
-                        event.setEventTime(editParams[1]);
-                    }
-                    if (thisTask instanceof DeadlineTask) {
-                        DeadlineTask deadlineTask = (DeadlineTask) thisTask;
-                        deadlineTask.setDeadlineTime(editParams[1]);
-                    }
-                    message = MESSAGE_UPDATE;
+                    setDeadlineOrEventTime(thisTask);
                 } catch (DateTimeParseException e) {
                     throw new DukeException(ERROR_INVALID_FORMAT);
                 }
             }
         }
         Storage.saveToFile(tasks);
-        return ui.getTaskLine(thisTask, message);
+        return ui.getTaskLine(thisTask, MESSAGE_UPDATE);
+    }
+
+    private void setDeadlineOrEventDate(Task task) {
+        if (task instanceof EventTask) {
+            EventTask event = (EventTask) task;
+            event.setEventDate(editParams[1]);
+        }
+        if (task instanceof DeadlineTask) {
+            DeadlineTask deadlineTask = (DeadlineTask) task;
+            deadlineTask.setDeadlineDate(editParams[1]);
+        }
+    }
+
+    private void setDeadlineOrEventTime(Task task) {
+        if (task instanceof EventTask) {
+            EventTask event = (EventTask) task;
+            event.setEventTime(editParams[1]);
+        }
+        if (task instanceof DeadlineTask) {
+            DeadlineTask deadlineTask = (DeadlineTask) task;
+            deadlineTask.setDeadlineTime(editParams[1]);
+        }
+    }
+
+    private void editTitle(Task task) {
+        String editedTitle = editParams[1];
+        for (int i = 2; i < editParams.length; i++) {
+            editedTitle += " " + editParams[i];
+        }
+        task.setTitle(editedTitle);
     }
 
     private void checkDateTimeUpdatability(Task task) throws DukeException {

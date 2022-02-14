@@ -22,7 +22,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Override method to ensure command exits the loop on the main method.
+     * Returns if the function should exit when called
      *
      * @return Always true as command should exit
      */

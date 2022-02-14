@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.List;
-import java.util.Scanner;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -47,28 +46,5 @@ public class Duke extends Application {
         } catch (DukeException e) {
             return e.getMessage();
         }
-    }
-
-    /**
-     * Driver function in order to start Duke.
-     * Uses Scanner to parse commands.
-     */
-    public static void run() {
-        UI.showWelcome();
-        boolean isExit = false;
-        Scanner sc = new Scanner(System.in);
-        List<Task> taskList = Storage.loadFromFile(FILE_PATH);
-        while (!isExit) {
-            try {
-                String commandLine = sc.nextLine();
-                Command c = Parser.parse(commandLine);
-                c.execute(taskList, UI);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                UI.printContent(e.getMessage());
-            }
-        }
-        UI.showExitMessage();
-        sc.close();
     }
 }

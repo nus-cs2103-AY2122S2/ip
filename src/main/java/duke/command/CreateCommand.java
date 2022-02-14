@@ -61,13 +61,7 @@ public class CreateCommand extends Command {
             newTask = new TodoTask(this.args);
             tasks.add(newTask);
         } else if (taskType == TaskType.DEADLINE) {
-            if (!args.contains("/by")) {
-                throw new DukeException(ERROR_EMPTY_DEADLINETASK_DEADLINE);
-            }
-            String[] subSplit = args.split("/by");
-            if (subSplit.length == 1) {
-                throw new DukeException(ERROR_EMPTY_DEADLINETASK_DEADLINE);
-            }
+            String[] subSplit = deadlineErrorChecks();
             String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
             try {
                 newTask = createNewDeadlineTask(subSplit[0].trim(), dateTimeSplit);
@@ -76,13 +70,7 @@ public class CreateCommand extends Command {
             }
             tasks.add(newTask);
         } else if (taskType == TaskType.EVENT) {
-            if (!args.contains("/at")) {
-                throw new DukeException(ERROR_EMPTY_EVENT_TIME);
-            }
-            String[] subSplit = args.split("/at");
-            if (subSplit.length == 1) {
-                throw new DukeException(ERROR_EMPTY_EVENT_TIME);
-            }
+            String[] subSplit = eventErrorChecks();
             String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
             assert (dateTimeSplit.length == 1 || dateTimeSplit.length == 2);
             try {
@@ -94,6 +82,28 @@ public class CreateCommand extends Command {
         }
         Storage.saveToFile(tasks);
         return ui.getAddDeleteTaskSuccess(tasks, newTask, MESSAGE_TASKADD);
+    }
+
+    private String[] deadlineErrorChecks() throws DukeException {
+        if (!args.contains("/by")) {
+            throw new DukeException(ERROR_EMPTY_DEADLINETASK_DEADLINE);
+        }
+        String[] subSplit = args.split("/by");
+        if (subSplit.length == 1) {
+            throw new DukeException(ERROR_EMPTY_DEADLINETASK_DEADLINE);
+        }
+        return subSplit;
+    }
+
+    private String[] eventErrorChecks() throws DukeException {
+        if (!args.contains("/at")) {
+            throw new DukeException(ERROR_EMPTY_EVENT_TIME);
+        }
+        String[] subSplit = args.split("/at");
+        if (subSplit.length == 1) {
+            throw new DukeException(ERROR_EMPTY_EVENT_TIME);
+        }
+        return subSplit;
     }
 
     private DeadlineTask createNewDeadlineTask(String title, String[] dateTime) throws DukeException {
