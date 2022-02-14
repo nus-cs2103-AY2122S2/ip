@@ -50,7 +50,7 @@ public class AddCommand extends Command {
             newTask = new Event(description, dateTime);
             break;
         default:
-            return "Unknown task type.";
+            assert false : "Unknown task type.";
         }
 
         taskList.addTask(newTask);

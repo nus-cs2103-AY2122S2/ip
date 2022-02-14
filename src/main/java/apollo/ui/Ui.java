@@ -47,6 +47,7 @@ public class Ui {
      * @param message To print to PrintStream.
      */
     public void printMessage(String message) {
+        assert !message.isEmpty() : "Printing empty message.";
         String border = "\t_______________________________"
                 + "_________________________________________\n";
         String wrapMessage = border + "\t "

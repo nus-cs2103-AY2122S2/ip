@@ -14,6 +14,7 @@ public class ListCommand extends Command {
      * @return Indexed list in string representation.
      */
     private String getIndexedList() {
+        assert taskList.taskCount() != 0 : "Indexing empty taskList.";
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < taskList.taskCount(); i++) {
             stringBuilder.append("\n").append(i + 1).append(".");
