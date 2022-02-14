@@ -125,7 +125,7 @@ public class Storage {
     }
 
     private TaskType getTaskType(String[] taskStrings) throws BaronException {
-        assert taskStrings.length == 3 || taskStrings.length == 4 : "taskStrings.length must be 3 or 4";
+        assert (taskStrings.length == 3) || (taskStrings.length == 4) : "taskStrings.length must be 3 or 4";
         switch (taskStrings[0]) {
         case "T":
             return TaskType.TODO;
@@ -139,7 +139,7 @@ public class Storage {
     }
 
     private boolean getIsDone(String[] taskStrings) throws BaronException {
-        assert taskStrings.length == 3 || taskStrings.length == 4 : "taskStrings.length must be 3 or 4";
+        assert (taskStrings.length == 3) || (taskStrings.length == 4) : "taskStrings.length must be 3 or 4";
         switch (taskStrings[1]) {
         case "0":
             return false;
@@ -151,12 +151,12 @@ public class Storage {
     }
 
     private String getDescription(String[] taskStrings) {
-        assert taskStrings.length == 3 || taskStrings.length == 4 : "taskStrings.length must be 3 or 4";
+        assert (taskStrings.length == 3) || (taskStrings.length == 4) : "taskStrings.length must be 3 or 4";
         return taskStrings[2];
     }
 
     private LocalDateTime getAdditionalInfo(String[] taskStrings) throws BaronException {
-        assert taskStrings.length == 3 || taskStrings.length == 4 : "taskStrings.length must be 3 or 4";
+        assert (taskStrings.length == 3) || (taskStrings.length == 4) : "taskStrings.length must be 3 or 4";
         if (taskStrings.length == 3) {
             return null;
         }
