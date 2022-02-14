@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import heylo.storage.FilesReader;
 import heylo.storage.FilesWriter;
+import heylo.util.PriorityLevel;
 
 /**
  * Represents a task added by the user.
@@ -13,6 +14,7 @@ public abstract class Task {
     private static int taskCount = 0;
     protected String description;
     protected boolean isDone;
+    protected PriorityLevel priority;
 
     /**
      * Sets description of child task classes.
@@ -61,6 +63,21 @@ public abstract class Task {
             str.append(" This task does not exist.\n");
         }
         assert !taskList.get(index).isDone : "Mark as not done failed";
+        return str.toString();
+    }
+
+    public static String markPriority(int index, PriorityLevel priority) {
+        StringBuilder str = new StringBuilder();
+        try {
+            taskList.get(index).priority = priority;
+            str.append(" Getting your priorities straight!\n");
+            str.append("  ")
+                    .append(taskList.get(index).toString())
+                    .append("\n");
+        } catch (IndexOutOfBoundsException e) {
+            str.append(" This task does not exist.\n");
+        }
+        assert taskList.get(index).priority != null : "Setting priority failed";
         return str.toString();
     }
 
@@ -151,19 +168,22 @@ public abstract class Task {
                 Todo todo = (Todo) task;
                 FilesWriter.writeToFile("T : "
                         + (todo.isDone ? "1 : " : "0 : ")
-                        + todo.description + "\n");
+                        + todo.description + " : "
+                        + (todo.priority != null ? todo.priority : "NONE") + "\n");
             } else if (task instanceof Event) {
                 Event event = (Event) task;
                 FilesWriter.writeToFile("E : "
                         + (event.isDone ? "1 : " : "0 : ")
                         + event.description + " : "
-                        + event.duration + "\n");
+                        + event.duration + " : "
+                        + (event.priority != null ? event.priority : "NONE") + "\n");
             } else if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 FilesWriter.writeToFile("D : "
                         + (deadline.isDone ? "1 : " : "0 : ")
                         + deadline.description + " : "
-                        + deadline.deadline + "\n");
+                        + deadline.deadline + " : "
+                        + (deadline.priority != null ? deadline.priority : "NONE") + "\n");
             }
         }
     }
@@ -180,14 +200,17 @@ public abstract class Task {
         case "T":
             Todo todo = new Todo(input[2]);
             todo.isDone = Integer.parseInt(input[1]) == 1;
+            todo.priority = PriorityLevel.valueOf(input[3]);
             return todo;
         case "E":
             Event event = new Event(input[2], input[3]);
             event.isDone = Integer.parseInt(input[1]) == 1;
+            event.priority = PriorityLevel.valueOf(input[4]);
             return event;
         case "D":
             Deadline deadline = new Deadline(input[2], input[3]);
             deadline.isDone = Integer.parseInt(input[1]) == 1;
+            deadline.priority = PriorityLevel.valueOf(input[4]);
             return deadline;
         default:
             return null;
@@ -259,6 +282,20 @@ public abstract class Task {
         return this.isDone ? "[X]" : "[ ]";
     }
 
+    public String getPriorityIcon() {
+        assert this.priority != null;
+        switch (this.priority) {
+        case LOW:
+            return "* ";
+        case MEDIUM:
+            return "** ";
+        case HIGH:
+            return "*** ";
+        default:
+            return "";
+        }
+    }
+
     /**
      * Converts the task to string format.
      *
@@ -266,6 +303,9 @@ public abstract class Task {
      */
     @Override
     public String toString() {
+        if (priority != null) {
+            return (this.getStatusIcon() + " " + getPriorityIcon() + this.description);
+        }
         return (this.getStatusIcon() + " " + this.description);
     }
 }
