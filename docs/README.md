@@ -39,7 +39,7 @@ Creates an Event task that is stored in the Local Task List & saved to the drive
 
 Example of usage:
 
-`event meet Sam /at 2022-02-02`
+`event Zoom meeting /at 2022-02-02`
 
 Expected outcome:
 
@@ -72,14 +72,21 @@ Marks/Unmarks a task as done/not done accordingly. Its status is accordingly upd
 Example of usage:
 
 `mark 1`
+`unmark 1`
 
 Expected outcome:
 
 ```
 Okay, marking this task as done:
-[T][X] buy newspaper 
+[T][X] cook lunch 
 ```
+
 ![mark](images/mark.PNG)
+
+```
+Okay, marking this task as not done yet:
+[T][ ] buy newspaper
+```
 
 ![unmark](images/Unmark.PNG)
 
@@ -89,13 +96,13 @@ Describe the action and its outcome.
 
 Example of usage:
 
-`delete 1`
+`delete 2`
 
 Expected outcome:
 
 ```
 Okay, I've deleted this task:
-[T][X] buy newspaper 
+[T][ ] buy coffee 
 ```
 ![deleting a task](images/delete.PNG)
 
@@ -111,6 +118,7 @@ Expected outcome:
 
 ```
 Here are the matching tasks in your list:
-5. [T][ ] buy coffee
+6. [T][ ] buy coffee
+7. [T][ ] grind coffee
 ```
 ![finding a task](images/find.PNG)
