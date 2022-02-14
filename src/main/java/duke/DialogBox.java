@@ -59,6 +59,7 @@ public class DialogBox extends HBox {
         DialogBox dialogBox = new DialogBox(text, img);
         dialogBox.setMinHeight(Region.USE_PREF_SIZE);
         dialogBox.dialog.setTextFill(Color.web(Ui.TERTIARY_COLOR));
+        dialogBox.dialog.setStyle("-fx-border-color: " + Ui.TERTIARY_COLOR);
         return dialogBox;
     }
 

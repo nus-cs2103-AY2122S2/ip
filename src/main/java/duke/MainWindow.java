@@ -36,6 +36,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(Ui.showUiForStart(), dukeImage)
         );
+        userInput.setStyle("-fx-text-fill: " + Ui.PRIMARY_COLOR);
     }
 
     public void setDuke(Duke d) {

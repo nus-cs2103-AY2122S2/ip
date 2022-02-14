@@ -3,16 +3,20 @@
 }
 
 #userInput {
-    -fx-background-color: #2C3531;
+    -fx-background-color: #D1E8E2;
     -fx-text-fill: #D1E8E2;
 }
 
 #sendButton {
-    -fx-background-color: #116466
+    -fx-background-color: #116466;
 }
 
 #scrollPane {
-    -fx-background-color: #2C3531
+    -fx-background-color: #2C3531;
+}
+
+#mainPane {
+    -fx-background-color: #2C3531;
 }
 
 .scroll-bar:horizontal .track,
