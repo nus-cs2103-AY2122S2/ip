@@ -12,6 +12,8 @@ No Face is a Studio Ghibli themed task manager for all Ghibli fans out there!
 
 [Image of Totoro used in Programme](https://www.redbubble.com/shop/pixel+rat)
 
+[Image of Spirited Away background used in Programme](https://wallpaperaccess.com/spirited-away-ipad)
+
 [Image on this website](https://www.polygon.com/animation-cartoons/2020/5/29/21273972/best-studio-ghibli-movies-scenes)
 
 Code references:
