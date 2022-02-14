@@ -95,8 +95,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Mimic the input that user typed
+     *
+     * @param input the command the user wants.
+     * @return say back of what user inputted
      */
     public String getResponse(String input) {
         return "Duke heard: " + input;
@@ -105,7 +107,7 @@ public class Duke {
     /**
      * Method that initialises this Duke class and run() the bot.
      *
-     * @param args
+     * @param args standard values to initiate duke
      */
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
