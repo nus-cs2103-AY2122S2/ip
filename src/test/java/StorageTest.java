@@ -12,7 +12,7 @@ import saitama.tasks.ToDo;
 
 class StorageTest {
 
-    private String filePath = "data/Text.txt";
+    private String filePath = "data/Test.txt";
     private Storage storage = new Storage(filePath);
     private Task toDo = new ToDo("Eat", null);
     private ArrayList<Task> test = new ArrayList<>();

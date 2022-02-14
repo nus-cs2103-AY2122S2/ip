@@ -44,14 +44,14 @@ SaiTasker is a **desktop app for managing tasks, optimized for use via a Command
   2. An `Event` task
   3. A `Deadline` task
   
-Each of these task types can be recurring or non recurring. To add a recurring task, you will need to tag it with one of the following tags shown [here](#tags).
+Each of these task types can be recurring or non-recurring. To add a recurring task, you will need to tag it with one of the following tags shown [here](#tags).
 
 <div markdown="span" class="alert alert-warning">:exclamation: **NOTE:**
 Daily tasks reset at 00:00, weekly tasks reset every Sunday, biweekly tasks reset every second Sunday, and monthly tasks reset every first day of the month. 
 </div>
 
   
-### Adding a `ToDo`:
+### Adding a todo: `ToDo`
 Adds a `ToDo` task to the task list.
   
 Format: `todo [TAG] TASK_DESCRIPTION`
@@ -60,7 +60,7 @@ Examples:
 * `todo CS2103T Project`
 * `todo --rw CS2103T Project`
 
-### Adding an `Event`:
+### Adding an event: `Event`
 Adds an `Event` task to the task list.
   
 Format: `event [TAG] TASK_DESCRIPTION /at LOCATION`
@@ -69,10 +69,13 @@ Examples:
 * `event Attend CS2107 Tutorial /at COM1-0212`  
 * `event --rw Attend CS2107 Tutorial /at COM1-0212`
   
-### Adding a `Deadline`:
+### Adding a deadline: `Deadline`
 Adds a `Deadline` task to the task list.
   
-Format: `deadline [TAG] TASK_DESCRIPTION /by DD/MM/YYYY HH:MM`
+Format: `deadline [TAG] TASK_DESCRIPTION /by DATE TIME`
+
+<div markdown="span" class="alert alert-warning">:exclamation: NOTE: DATE is in DD/MM/YYYY format, whereas TIME should be in HH:MM format.
+</div>
 
 Examples:
 * `deadline Submit CS2103T Project /by 18/02/2022 10:00`
@@ -81,54 +84,58 @@ Examples:
 <div markdown="span" class="alert alert-warning">:exclamation: **NOTE:**
 For monthly recurring deadline tasks, if DD of the deadline exceeds the last day of the new month, then the DD of the deadline becomes the last day of the new month.
 </div>
-  
-### `List` your tasks:
-Lists your current tasks in the task list.
+
+### Listing your tasks: `List`
+Lists your current tasks.
   
 Format: `list`
   
-### `Delete` a task:
-Deletes the numbered task in the task list.
+### Deleting a task: `Delete`
+Deletes the task with the corresponding `TASK_NUMBER`.
   
 Format: `delete TASK_NUMBER`
   
 Example:
 * `delete 2`
   
-### `Mark` a task:
-Marks the numbered task in the list as done.
+### Marking a task: `Mark`
+Marks the task with the corresponding `TASK_NUMBER` as done.
   
 Format: `mark TASK_NUMBER`
   
 Example:
 * `mark 2`
   
-### `Unmark` a task:
-Marks the numbered task in the list as not done.
+### Unmarking a task: `Unmark`
+Marks the task with the corresponding `TASK_NUMBER` as not done.
   
 Format: `unmark TASK_NUMBER`
   
 Example:
 * `unmark 2`
   
-### `Find` a task:
-Searches the task list and returns the list of tasks that contain the `QUERY`
+### Finding a task: `Find`
+Shows a list of tasks that contain the `QUERY`
   
 Format: `find QUERY`
   
 Example:
 * `find (WEEKLY)`
   
-### Exiting the app `Bye`:
+### Exiting the app: `Bye`
 Format: `bye`
   
 ## Tags
-| Tag  | Description          | Example                                             |
-|------|----------------------|-----------------------------------------------------|
-| --rd | Task recurs daily    | `todo --rd Check email`                             |
-| --rw | Task recurs weekly   | `deadline --rw CS2103T Project /by 12/12/2022 23:59 |
-| --rb | Task recurs biweekly | `event --rb GEQ Tutorial /at CREATE`                |
-| --rm | Task recurs monthly  | `todo --rm Revise tutorials`                        |
+| Tag  | Description          | Example                                              |
+|------|----------------------|------------------------------------------------------|
+| --rd | Task recurs daily    | `todo --rd Check email`                              |
+| --rw | Task recurs weekly   | `deadline --rw CS2103T Project /by 12/12/2022 23:59` |
+| --rb | Task recurs biweekly | `event --rb GEQ Tutorial /at CREATE`                 |
+| --rm | Task recurs monthly  | `todo --rm Revise tutorials`                         |
+
+<div markdown="span" class="alert alert-warning">:exclamation: **NOTE:**
+If more than 1 tag is specified, only the first tag will be read.
+</div>
 
 ## FAQ
 **Q**: How do I transfer my data to another Computer?<br>
