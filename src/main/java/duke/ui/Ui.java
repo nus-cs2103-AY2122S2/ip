@@ -7,11 +7,6 @@ import duke.parser.Parser;
 
 public class Ui {
 
-    /** Say welcome to the user!  */
-    public static String welcome() {
-        return "Hello! I am xpz\nWhat can I do for you?\n";
-    }
-
     /** Read in the user input and pass it to Parser to return a command.  */
     public Command read(String input) {
         try {

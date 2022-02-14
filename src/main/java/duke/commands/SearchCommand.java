@@ -20,7 +20,7 @@ public class SearchCommand extends Command{
      **/
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.respond("Here's are matching tasks in your list\n" + tasks.search(prefix));
+        return "Here's are matching tasks in your list\n" + tasks.search(prefix);
     }
 
     @Override
