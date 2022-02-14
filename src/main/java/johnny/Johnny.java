@@ -143,7 +143,7 @@ public class Johnny extends Application{
 
         return textToAdd;
     }
-    
+
 
     public static void main(String[] args) throws InvalidArgumentsException, EmptyDescriptionException, NoDateException {
         launch();
