@@ -1,13 +1,15 @@
-# Project Description
+#User Guide
+***
+## Project Description
 
 This is a greenfield Java project for CS2103T Software Engineering.
 
 >  “Any fool can write code that a computer can understand.
 > Good programmers write code that humans can understand.”
 > -Martin Fowler.
-
-## What is Nexus?
 ***
+## What is Nexus?
+
 ![ui](Nexus.PNG)
 > Nexus is a basic Todo List with a built-in interface for users to interact with.
 ***
