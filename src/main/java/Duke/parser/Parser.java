@@ -23,10 +23,11 @@ public class Parser {
     /**
      * Handles the user inputs.
      *
-     * @param command the command includes keyword and description.
+     * @param input the command includes keyword and description.
      * @return the respective commands.
      */
-    public static Command parse(String command) {
+    public static Command parse(String input) {
+        String command = input.concat(" ");
         String[] commandList = command.split(" ", 2);
         assert commandList.length == 2 : "the length should be 2!";
         String firstWord = commandList[0].toLowerCase();
