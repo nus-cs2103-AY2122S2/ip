@@ -56,12 +56,22 @@ public class Message {
     }
 
     /**
-     * Generate the message to warn that duplicate tasks have been detected.
+     * Generates the message to warn that duplicate tasks have been detected.
      *
      * @param taskType the type of task.
      * @return the message to warn that duplicate tasks have been detected.
      */
     public static String generateDuplicateTaskMessage(TaskType taskType) {
         return String.format("This %s has already been recorded.", taskType.getCommand());
+    }
+
+    /**
+     * Generates the message to prompt user to specify date/time using the specified command keyword.
+     *
+     * @param commandKeyword the command keyword that the user should use to specify date/time.
+     * @return the message to prompt user to specify date/time using the specified command keyword.
+     */
+    public static String getMissingDateTimeMessage(String commandKeyword) {
+        return String.format("Please specify a date/time by the %s keyword.", commandKeyword);
     }
 }

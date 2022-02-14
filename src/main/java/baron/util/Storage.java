@@ -85,67 +85,78 @@ public class Storage {
     }
 
     private Task parseTaskString(String taskString) throws BaronException {
-        String[] taskStringArray = taskString.split(Storage.FILE_DELIMITER, 4);
-        if (taskStringArray.length < 3 || taskStringArray.length > 4) {
+        String[] taskStrings = taskString.split(Storage.FILE_DELIMITER, 4);
+
+        if (taskStrings.length < 3 || taskStrings.length > 4) {
             throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
-        } else {
-            TaskType taskType;
-            boolean isDone;
-            String description = taskStringArray[2];
-            LocalDateTime additionalInfo = null;
-
-            switch (taskStringArray[0]) {
-            case "T":
-                taskType = TaskType.TODO;
-                break;
-            case "D":
-                taskType = TaskType.DEADLINE;
-                break;
-            case "E":
-                taskType = TaskType.EVENT;
-                break;
-            default:
-                throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
-            }
-
-            if (taskStringArray[1].equals("1")) {
-                isDone = true;
-            } else if (taskStringArray[1].equals("0")) {
-                isDone = false;
-            } else {
-                throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
-            }
-
-            if (taskStringArray.length == 4) {
-                additionalInfo = DateTimeUtil.getDateTime(taskStringArray[3]);
-            }
-
-            Task newTask;
-
-            if (taskType == TaskType.TODO) {
-                if (additionalInfo != null) {
-                    throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
-                } else {
-                    newTask = new ToDo(description);
-                }
-            } else {
-                if (additionalInfo == null) {
-                    throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
-                } else {
-                    if (taskType == TaskType.DEADLINE) {
-                        newTask = new Deadline(description, additionalInfo);
-                    } else {
-                        newTask = new Event(description, additionalInfo);
-                    }
-                }
-            }
-
-            if (isDone) {
-                newTask.mark();
-            }
-
-            return newTask;
         }
+
+        assert (taskStrings.length >= 3) && (taskStrings.length <= 4) : "taskStrings.length must be from 3 to 4";
+
+        TaskType taskType = getTaskType(taskStrings);
+        boolean isDone = getIsDone(taskStrings);
+        String description = getDescription(taskStrings);
+        LocalDateTime additionalInfo = getAdditionalInfo(taskStrings);
+
+        Task newTask;
+
+        if (taskType == TaskType.TODO) {
+            if (additionalInfo != null) {
+                throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
+            } else {
+                newTask = new ToDo(description);
+            }
+        } else {
+            if (additionalInfo == null) {
+                throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
+            } else {
+                if (taskType == TaskType.DEADLINE) {
+                    newTask = new Deadline(description, additionalInfo);
+                } else {
+                    newTask = new Event(description, additionalInfo);
+                }
+            }
+        }
+
+        if (isDone) {
+            newTask.mark();
+        }
+        return newTask;
+    }
+
+    private TaskType getTaskType(String[] taskStrings) throws BaronException {
+        switch (taskStrings[0]) {
+        case "T":
+            return TaskType.TODO;
+        case "D":
+            return TaskType.DEADLINE;
+        case "E":
+            return TaskType.EVENT;
+        default:
+            throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
+        }
+    }
+
+    private boolean getIsDone(String[] taskStrings) throws BaronException {
+        switch (taskStrings[1]) {
+        case "0":
+            return false;
+        case "1":
+            return true;
+        default:
+            throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
+        }
+    }
+
+    private String getDescription(String[] taskStrings) {
+        return taskStrings[2];
+    }
+
+    private LocalDateTime getAdditionalInfo(String[] taskStrings) throws BaronException {
+        if (taskStrings.length == 3) {
+            return null;
+        }
+        return DateTimeUtil.getDateTime(taskStrings[3]);
     }
 
     private void createFileIfNotExists() throws BaronException {

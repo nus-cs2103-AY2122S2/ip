@@ -81,40 +81,29 @@ public class TaskManager {
         Task newTask;
         if (taskType == TaskType.TODO) {
             newTask = new ToDo(commandArg);
-        } else if (taskType == TaskType.DEADLINE) {
-            String[] commandArgs = commandArg.split(" /by ", 2);
-            if (commandArgs.length == 1) {
-                if (commandArgs[0].startsWith("/by")) {
-                    throw new BaronException(Message.generateEmptyDescMessage(taskType));
-                }
-                throw new BaronException("Please specify a deadline by the /by keyword.");
-            } else if (commandArgs.length == 0) {
-                throw new BaronException(Message.generateEmptyDescMessage(taskType));
-            }
-
-            assert commandArgs.length == 2 : "commandArgs.length should be only up to 2";
-            LocalDateTime localDateTime = DateTimeUtil.getDateTime(commandArgs[1]);
-            newTask = new Deadline(commandArgs[0], localDateTime);
         } else {
-            String[] commandArgs = commandArg.split(" /at ", 2);
+            String commandKeyword = (taskType == TaskType.DEADLINE) ? "/by" : "/at";
+            String[] commandArgs = commandArg.split(String.format(" %s ", commandKeyword), 2);
             if (commandArgs.length == 1) {
-                if (commandArgs[0].startsWith("/at")) {
+                if (commandArgs[0].startsWith(commandKeyword)) {
                     throw new BaronException(Message.generateEmptyDescMessage(taskType));
                 }
-                throw new BaronException("Please specify a date by the /at keyword.");
+                throw new BaronException(Message.getMissingDateTimeMessage(commandKeyword));
             } else if (commandArgs.length == 0) {
                 throw new BaronException(Message.generateEmptyDescMessage(taskType));
             }
-
             assert commandArgs.length == 2 : "commandArgs.length should be only up to 2";
             LocalDateTime localDateTime = DateTimeUtil.getDateTime(commandArgs[1]);
-            newTask = new Event(commandArgs[0], localDateTime);
+            if (taskType == TaskType.DEADLINE) {
+                newTask = new Deadline(commandArgs[0], localDateTime);
+            } else {
+                newTask = new Event(commandArgs[0], localDateTime);
+            }
         }
 
         if (this.taskList.contains(newTask)) {
             throw new BaronException(Message.generateDuplicateTaskMessage(taskType));
         }
-
         this.taskList.add(newTask);
         this.previousTaskList = this.getAllTasks();
         return newTask;
