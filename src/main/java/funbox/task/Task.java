@@ -70,7 +70,7 @@ public class Task {
             if (i == lth - 1) {
                 result = result.concat(tags.get(i));
             } else {
-                result = result.concat(tags.get(i)).concat(",");
+                result = result.concat(tags.get(i)).concat(" ");
             }
         }
         return result == "" ? "No tags found!" : result;

@@ -26,6 +26,15 @@ public class TagCommand extends Command {
         this.parser = new Parser();
     }
 
+    //@@Jonas K-reused
+    //Reused from https://stackoverflow.com/questions/237159/
+    // whats-the-best-way-to-check-if-a-string-represents-an-integer-in-java
+    /**
+     * Check if String can be parsed to integer.
+     *
+     * @param str The string used to check if its parsable.
+     * @return Returns true if string can be parsed to integer, else false.
+     */
     public static boolean isInteger(String str) {
         if (str == null) {
             return false;
@@ -70,9 +79,15 @@ public class TagCommand extends Command {
         }
 
         int index = Integer.parseInt(resultsArr[0]);
+        int currIndex = index - 1;
 
-        boolean isGreaterThanList = (index - 1) > taskList.getSize();
-        boolean isNegative = (index - 1) < 0;
+        boolean isGreaterThanList = currIndex > taskList.getSize();
+        boolean isNegative = currIndex < 0;
+        boolean isEmptyList = taskList.getSize() == 0;
+
+        if (isEmptyList) {
+            return "Task list is empty";
+        }
 
         if (isGreaterThanList) {
             throw new FunBoxExceptions("The index entered is larger than the list!");
@@ -82,7 +97,7 @@ public class TagCommand extends Command {
             throw new FunBoxExceptions("The index cannot be negative!");
         }
 
-        int currIndex = index - 1;
+
         String tag = parser.concatFormat(resultsArr, 1);
         taskList.addTagToTask(currIndex, tag);
         storage.addTagToTask(currIndex, tag);

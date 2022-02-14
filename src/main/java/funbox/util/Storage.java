@@ -221,7 +221,7 @@ public class Storage {
         FileWriter fw = new FileWriter(tempFileUrl, true);
 
         String task;
-        int counter = 1;
+        int counter = 0;
 
         while (true) {
             task = br.readLine();

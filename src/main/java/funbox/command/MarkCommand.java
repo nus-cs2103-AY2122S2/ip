@@ -34,9 +34,15 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions, IOException {
         String result = "";
+        int currIndex = index - 1;
 
-        boolean isGreaterThanList = (index - 1) > taskList.getSize();
-        boolean isNegative = (index - 1) < 0;
+        boolean isGreaterThanList = currIndex > taskList.getSize();
+        boolean isNegative = currIndex < 0;
+        boolean isEmptyList = taskList.getSize() == 0;
+
+        if (isEmptyList) {
+            return "Task list is empty";
+        }
 
         if (isGreaterThanList) {
             throw new FunBoxExceptions("The index entered is larger than the list!");
@@ -46,7 +52,6 @@ public class MarkCommand extends Command {
             throw new FunBoxExceptions("The index cannot be negative!");
         }
 
-        int currIndex = index - 1;
         taskList.setTaskDone(currIndex);
         result = ui.printMarkDone().concat(taskList.getTask(ui, currIndex));
         storage.markTask(currIndex);
