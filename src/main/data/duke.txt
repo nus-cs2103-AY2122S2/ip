@@ -2,6 +2,5 @@ E# #meeting#Dec-21-2020 12:22 pm
 D# #meet#Dec-21-2222
 T# #bake
 T# #hw
-T#X#v
 D# #hw#Dec-12-2001
-E# #k#Nov-12-2001 12:22 pm
+T# #go to the vet
