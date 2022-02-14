@@ -1,5 +1,5 @@
 # User Guide
-####FunBox is an application that helps a person keep track of various tasks.
+#### FunBox is an application that helps a person keep track of various tasks.
 
 ### Table of content
 1. [Features](#features)
