@@ -35,13 +35,13 @@ To create a `ToDo` task:
 
 Note: The command is case-sensitive. Use `todo` so that the command can be processed.
 
-1. type in 'todo (argument)' where argument is the task with the description you are creating.
+1. type in `todo (argument)` where argument is the task with the description you are creating.
 
 2. Hit 'Enter' or click the send button.
 
 Example of usage:
 
-`todo homework'
+`todo homework`
 
 Expected outcome
 
@@ -59,7 +59,7 @@ To create a `Deadline` task:
 
 Note: The command is case-sensitive. Use `deadline` so that the command can be processed.
 
-1. type in 'deadline (argument) /by (due date)' where argument is the task with the description you are creating and due date is the date you have to complete the task by. `due date` have to be in the form "YYYY-MM-DD" where Y represent the year digit, M represent the month digit and D represent the days digit
+1. type in `deadline (argument) /by (due date)` where argument is the task with the description you are creating and due date is the date you have to complete the task by. `due date` have to be in the form "YYYY-MM-DD" where Y represent the year digit, M represent the month digit and D represent the days digit
 
 2. Hit 'Enter' or click the send button.
 
@@ -75,7 +75,7 @@ Got it. I've added this task:
   [D][] gym (by: Jan 22 2022)
 Now you have 1 tasks in your list.
 ```
-Now you have added the deadline task 'gym' with a due date of 'Jan 22 2022' to your list which now has a total of 1 task.
+Now you have added the deadline task `gym` with a due date of `Jan 22 2022` to your list which now has a total of 1 task.
 
 ### `event` - Creates and add the event task into your list.
 
@@ -98,7 +98,7 @@ Got it. I've added this task:
   [E][] party (on: Mar 15 2022)
 Now you have 1 tasks in your list.
 ```
-Now you have added the event task 'party' that occurs on the date of 'Jan 22 2022' to your list which now has a total of 1 task.
+Now you have added the event task `party` that occurs on the date of `Jan 22 2022` to your list which now has a total of 1 task.
 
 ### Reccuring events - events that recur in the task list when it is recured using `recur`.
 
@@ -106,14 +106,14 @@ Note: **ONLY** deadline and event tasks can be recurred.
 
 To add a recurring task:
 
-1. type in '(task) (description) /(preposition) (data) /recur (number) (days/months/weeks/years)' 
+1. type in `(task) (description) /(preposition) (data) /recur (number) (days/months/weeks/years)`. 
 where:
  - `task` - 'event' or 'deadline'.
  - `description` - description of the task. 
  - `preposition` - `on` for recurring events, `by` for recurring deadlines.
- - `date` - date in the form of "YYYY-MM-DD" where Y represent the year digit, M represent the month digit and D represent the days digit
- - `number` - the number for the recurring period
- - `days/months/weeks/years` - the label to indicate how long the recurring period is. `days` is for days,`weeks` is for weeks, `months is for months, `years` is for years.
+ - `date` - date in the form of "YYYY-MM-DD" where Y represent the year digit, M represent the month digit and D represent the days digit.
+ - `number` - the number for the recurring period.
+ - `days/months/weeks/years` - the label to indicate how long the recurring period is. `days` is for days,`weeks` is for weeks, `months` is for months, `years` is for years.
 
 2. Hit 'Enter' or click the send button.
 
@@ -128,7 +128,7 @@ Got it. I've added this task:
   [E][] project meeting every 1 weeks (on Jan 15 2022)
 ```
 
-The event task with description 'project meeting', recurring period of '1 weeks' and the first meeting date of 'Jan 15 2022' is created.
+The event task with description `project meeting`, recurring period of `1 weeks` and the first meeting date of `Jan 15 2022` is created.
 
 ### `delete` - Deletes an existing task in the list.
 
@@ -148,13 +148,13 @@ Expeceted outcome
 Noted. I've removed this task:
   [T][] homework
 ```
-The 1st task in the list (which is a todo task with description 'homework' in this case) is now deleted from the list.
+The 1st task in the list (which is a todo task with description `homework` in this case) is now deleted from the list.
 
 ### `marking` or `unmarking` - Marks or unmarks the task in the list
 
 To mark a task as done:
 
-1. type in 'mark (index)' where index is the index number of the task in the list.
+1. type in `mark (index)` where index is the index number of the task in the list.
 
 2. Hit 'Enter' or click the send button.
 
@@ -169,7 +169,7 @@ Nice! I've marked this task as done:
   [T][X] homework
 ```
 
-The 1st task in the list (which is a todo task with description 'homework' in this case) is now marked as compeleted.
+The 1st task in the list (which is a todo task with description `homework` in this case) is now marked as compeleted.
 
 
 Example of usage of `unmark`:
@@ -183,7 +183,7 @@ Ok! I've marked this task as not done yet:
   [T][] homework
 ```
 
-The 1st task in the list (which is a todo task with description 'homework' in this case) is now marked as not completed.
+The 1st task in the list (which is a todo task with description `homework` in this case) is now marked as not completed.
 
 ### `Find` - Find the tasks in your list.
 
@@ -191,7 +191,7 @@ Note: The command is case-sensitive. Use `find` so that the command can be proce
 
 To find tasks in  your list: 
 
-1. type in 'find (argument)' where argument is the task with the description you are finding for.
+1. type in `find (argument)` where argument is the task with the description you are finding for.
 
 2. Hit 'Enter' or click the send button.
 
@@ -206,7 +206,7 @@ Here are the matching tasks in your list:
   [T][] attend cousin'wedding
   [E][] attend best friend's wedding (on Mar 02 2022)
 ```
-You will see tasks that have task descriptions containing the word 'wedding'.
+You will see tasks that have task descriptions containing the word `wedding`.
 
 ### `list` - Lists all the tasks in the list.
 
@@ -253,4 +253,4 @@ I have recurred the task to as follow:
   [E][] project meeting every 1 weeks (on: June 15 2022)
 ```
 
-The task(in this case an event task) has a recurring period of 1 week. The task now has recurred 1 week. Originally the task is printed as ("[E][] project meeting every 1 weeks (on: June 08 2022).
+The task(in this case an `event` task) has a recurring period of 1 week. The task now has recurred 1 week. Originally the task is printed as (`[E][] project meeting every 1 weeks (on: June 08 2022)`.
