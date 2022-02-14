@@ -31,7 +31,10 @@ public class TaskList {
     String getList() {
         String s = "";
         for (int i = 0; i < this.getListSize(); i++) {
-            s = s + (i + 1) + ". " + this.list.get(i) + "\n";
+            s = s + (i + 1) + ". " + this.list.get(i);
+            if (i != this.getListSize() - 1) {
+                s = s + "\n";
+            }
         }
         return s;
     }

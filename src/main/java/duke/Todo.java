@@ -17,6 +17,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + this.tag;
+        return super.toString() + "  " + this.tag;
     }
 }

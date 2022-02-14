@@ -1,5 +1,8 @@
+package gui;
+
 import duke.DukeException;
 import duke.Ui;
+import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,12 +31,12 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/pikachu.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pokeBall2.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/bh2.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bh.png"));
 
     @FXML
     public void initialize() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hi, how can I help you?", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.echo("Hi, how can I help you?"), dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

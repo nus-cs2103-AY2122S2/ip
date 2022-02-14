@@ -1,6 +1,4 @@
-
-import duke.BH;
-import duke.DukeException;
+package duke;
 
 /**
  * create a new BH object and start running the program
@@ -30,4 +28,3 @@ public class Duke{
 
 
 }
-

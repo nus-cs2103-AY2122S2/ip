@@ -4,7 +4,8 @@ package duke;
  * Deals with interactions with the user
  */
 public class Ui {
-    private static final String LINE = "\n---------------------\n";
+    private static final String LINE = "\n------------------------------------------------\n";
+    private static final String USER_LINE = "\n**************************************************\n";
     private static final String LOGO = " ____         _   _     \n"
             + "|  _ \\       | | | |\n"
             + "| |_| |      | |-| |\n"
@@ -43,5 +44,16 @@ public class Ui {
      */
     public static String echo(String input) {
         return LINE + input + LINE;
+    }
+
+
+    /**
+     * Surrounds the input with two lines of stars
+     *
+     * @param input String to be surrounded
+     * @return String of input surrounded with two lines
+     */
+    public static String userEcho(String input) {
+        return USER_LINE + input + USER_LINE;
     }
 }
