@@ -113,7 +113,7 @@ Nice! I've marked this task as done:
   [E][X] attend workshop (at: Sep 19 2021)
 ```
 
-### Mark a Task as done
+### Unmark a Task as not done
 Task can be set into undone by giving the Task index.
 
 Format:
