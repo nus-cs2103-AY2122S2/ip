@@ -44,6 +44,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         this.setMinHeight(Region.USE_PREF_SIZE);
+        this.setStyle("-fx-background-color:black;");
     }
 
     /**
@@ -64,9 +65,7 @@ public class DialogBox extends HBox {
      * @return a new dialog box based on user message.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color:blue;");
-        return db;
+        return new DialogBox(text, img);
     }
 
     /**
@@ -82,8 +81,6 @@ public class DialogBox extends HBox {
         String[] splitStr = text.split(" ", 2);
         if (splitStr[0].equals("ERROR:")) {
             db.setStyle("-fx-background-color:red;");
-        } else {
-            db.setStyle("-fx-background-color:black;");
         }
         return db;
     }
