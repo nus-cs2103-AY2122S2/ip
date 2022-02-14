@@ -8,7 +8,7 @@ public class ToDo extends Task {
      * @param taskName which specifies name of task
      */
     public ToDo(String taskName) {
-        super(taskName);
+        super(taskName, false, null, null, new NoteList());
     }
 
     /**
@@ -17,7 +17,7 @@ public class ToDo extends Task {
      * @param isDone to denote whether the task is complete
      */
     public ToDo(String taskName, boolean isDone, NoteList notes) {
-        super(taskName, isDone, null, notes);
+        super(taskName, isDone, null, null, notes);
     }
 
     /**

@@ -25,10 +25,14 @@ public class AddCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
-        TaskList newTaskList = taskList.add(taskToAdd);
-        String lineToAdd = storage.createSummaryFromTask(this.taskToAdd);
-        storage.addLine(lineToAdd);
-        return newTaskList;
+        try {
+            TaskList newTaskList = taskList.add(taskToAdd);
+            String lineToAdd = storage.createSummaryFromTask(this.taskToAdd);
+            storage.addLine(lineToAdd);
+            return newTaskList;
+        } catch (NullPointerException e) {
+            throw new DukeException("Problem is in executing add command");
+        }
     }
 
     /**

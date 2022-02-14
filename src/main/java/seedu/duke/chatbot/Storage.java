@@ -97,10 +97,11 @@ public class Storage {
      * @return {@link Task} created based on information in string from database.
      */
     Task getTaskFromSummary(String taskDetails) throws DukeException {
+        //getToDoFromSummary()...
         assert taskDetails.length() != 0 : "Storage getTaskFromSummary - Task details are empty";
-            //taskType is the first letter - e.g. "T"
+        //taskType is the first letter - e.g. "T"
         String taskType = taskDetails.substring(0, 1);
-            //start from index 2
+        //start from index 2
         boolean doneStatus = Integer.parseInt(taskDetails.substring(2, 3)) == 1;
 
         NoteList noteList = this.createNoteListFromSummary(taskDetails);
@@ -109,11 +110,14 @@ public class Storage {
         //only tasks with dates have 'date/<datestring>'
         if (taskDetails.contains("date/")) {
             taskName = this.getTaskNameForTasksWithDates(taskDetails);
-            LocalDateTime dateObj = this.createDateTimeFromSummary(taskDetails);
             if (taskType.equals("E")) {
-                return new Event(taskName, doneStatus, dateObj, noteList);
+                //date/2022-02-14 08:20/to2022-02-14 09:50
+                LocalDateTime startDate = this.createEventStartDateTimeFromSummary(taskDetails);
+                LocalDateTime endDate = this.createEventEndDateTimeFromSummary(taskDetails);
+                return new Event(taskName, doneStatus, endDate, startDate, noteList);
             } else {
-                return new Deadline(taskName, doneStatus, dateObj, noteList);
+                LocalDateTime endDate = this.createDateTimeFromSummary(taskDetails);
+                return new Deadline(taskName, doneStatus, endDate, noteList);
             }
         } else {
             //create a function getTaskNameForToDo
@@ -121,12 +125,27 @@ public class Storage {
             taskName = taskDetails.substring(4, taskDetails.indexOf("notes/") - 1);
             return new ToDo(taskName, doneStatus, noteList);
         }
+
+    }
+
+    LocalDateTime createEventEndDateTimeFromSummary(String taskDetails) {
+        int indexEndDate = taskDetails.indexOf("/to") + 3;
+        String endDateString = taskDetails.substring(indexEndDate,taskDetails.indexOf("|notes/"));
+        LocalDateTime endDate = this.getLocalDateTimeFromDate(endDateString);
+        return endDate;
+    }
+
+    LocalDateTime createEventStartDateTimeFromSummary(String taskDetails) throws DukeException {
+        int indexOfDate = taskDetails.indexOf("date/");
+        String date = taskDetails.substring(indexOfDate + 5, taskDetails.indexOf("/to")); //"date/<datetime>"
+        LocalDateTime dateObj = this.getLocalDateTimeFromDate(date);
+        return dateObj;
     }
 
     String getTaskNameForTasksWithDates(String taskDetails) throws DukeException {
         try {
             int indexOfDate = taskDetails.indexOf("date/");
-            int indexTaskNameStart = 4; //"T|1|<taskName>|date/", "D 0 <taskName> date/"
+            int indexTaskNameStart = 4; //"T|1|<taskName>|date/",
             String taskName = taskDetails.substring(4, indexOfDate - 1);
             return taskName;
         } catch (StringIndexOutOfBoundsException e) {
@@ -196,13 +215,21 @@ public class Storage {
 
         summary += task.getTaskName() + "|";
 
-        if (taskType.equals("E") || taskType.equals("D")) {
-            LocalDateTime date = task.getDate();
+        if (taskType.equals("D")) {
+            LocalDateTime date = task.getEndDate();
             String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             summary += "date/" + dateString + "|"; //24 Dec 2019 --> 2019-12-24
         }
 
-        //add notes notes/<number of notes> <content of note 1> <content of note 2> ...
+        if (taskType.equals("E")) {
+            LocalDateTime startDate = task.getStartDate();
+            String dateString = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            summary += "date/" + dateString + "/to"; //24 Dec 2019 --> 2019-12-24
+            LocalDateTime endDate = task.getEndDate();
+            String endDateString = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            summary += endDateString + "|";
+        }
+
         summary += task.getNotes().convertToSummary();
 
         return summary + "\n";

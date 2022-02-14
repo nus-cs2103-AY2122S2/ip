@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * @param date for end date
      */
     public Deadline(String taskName, LocalDateTime date) {
-        super(taskName, false, date);
+        super(taskName, false, date,null, new NoteList());
     }
 
     /**
@@ -32,13 +32,12 @@ public class Deadline extends Task {
      * @param isDone for specified boolean
      */
     Deadline(Deadline oldDeadline, boolean isDone) {
-        super(oldDeadline.getTaskName(), isDone, oldDeadline.getDate());
+        super(oldDeadline.getTaskName(), isDone, oldDeadline.getEndDate(), null, new NoteList());
     }
 
     public Deadline(String taskName, boolean isDone, LocalDateTime date, NoteList notes) {
-        super(taskName,isDone, date,notes);
+        super(taskName,isDone, date, null, notes);
     }
-
 
     /**
      * {inheritDoc}.
@@ -88,6 +87,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + String.format(" (by: %s)",this.getFormattingDateString());
+                + String.format(" (by: %s)",this.getFormattingDateString(this.getEndDate()));
     }
 }

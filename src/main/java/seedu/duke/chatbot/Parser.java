@@ -221,7 +221,7 @@ public class Parser {
      */
     Task parseForEvent(String command) throws DukeException {
         int indexTaskName = 6;
-        //command is given as "event <taskname> /at <date>" so index 7 is where the task index to parse, "5" is at
+        //command is given as "event <taskname> /at <startDate> /to <endDate>" so index 7 is where the task index to parse, "5" is at
 
         if (command.length() <= 6) { //e.g. "event " vs "event project meeting /at Mon 2-4pm"
             throw new IncompleteCommandException();
@@ -237,17 +237,23 @@ public class Parser {
         String taskName = command
                 .substring(indexTaskName, dateMarkerIndex);
 
-        //command is given as "event <taskname> /at <date>" so <date> can be found
+        //command is given as "event <taskname> /at <startDate> /to <endDate>" so <date> can be found
         // +4 away from index of "/"
-        int indexStartOfDate = dateMarkerIndex + 4;  //"/at <date>"
-        if (indexStartOfDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
+        int indexStartDate = dateMarkerIndex + 4;  //"/at <date>"
+        if (indexStartDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
             throw new NoDateException();
         }
 
-        String dateString = command.substring(indexStartOfDate);
-        LocalDateTime date = this.getLocalDateTimeFromDate(dateString);
+        int indexOfTo = command.indexOf("/to");
 
-        return new Event(taskName, date);
+        String startDateString = command.substring(indexStartDate, indexOfTo - 1); // /at <date> /to
+        LocalDateTime startDate = this.getLocalDateTimeFromDate(startDateString);
+
+        int indexEndDate = indexOfTo + 4; ///to <endDate>
+        String endDateString = command.substring(indexEndDate);
+        LocalDateTime endDate = this.getLocalDateTimeFromDate(endDateString);
+
+        return new Event(taskName, endDate, startDate);
     }
 
     /**

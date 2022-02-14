@@ -13,10 +13,9 @@ public class Event extends Task {
     /**
      * Creates an event.
      * @param taskName for name of task
-     * @param date for start and end date
      */
-    public Event(String taskName, LocalDateTime date) {
-        super(taskName, false, date);
+    public Event(String taskName, LocalDateTime endDate, LocalDateTime startDate) {
+        super(taskName, false, endDate, startDate, new NoteList());
     }
 
     /**
@@ -25,17 +24,18 @@ public class Event extends Task {
      * @param isDone which is a boolean to denote whether the task is complete
      */
     Event(Event oldEvent, boolean isDone) {
-        super(oldEvent.getTaskName(), isDone, oldEvent.getDate());
+        super(oldEvent.getTaskName(), isDone, oldEvent.getEndDate(),
+                oldEvent.getStartDate(),oldEvent.getNotes());
     }
 
     /**
      * Creates an event.
      * @param taskName for task name
      * @param isDone for whether the task is done
-     * @param date for start and end date or time of event
      */
-    public Event(String taskName, boolean isDone, LocalDateTime date, NoteList notes) {
-        super(taskName,isDone, date, notes);
+    public Event(String taskName, boolean isDone, LocalDateTime endDate,
+                 LocalDateTime startDate, NoteList notes) {
+        super(taskName,isDone, endDate, startDate, notes);
     }
 
     /**
@@ -96,6 +96,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + String.format(" (at: %s)",this.getFormattingDateString());
+                + String.format(" (at: %s to %s)",
+                this.getFormattingDateString(this.getStartDate()),
+                this.getFormattingDateString(this.getEndDate()));
     }
 }
