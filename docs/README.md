@@ -3,6 +3,8 @@ Welcome to Duke! Your task Manager for all todo items, deadlines and events.
 
 > Duke aims to also be your motivational assistant by giving you a daily quote of the day to boost your spirits!
 
+![Sample Image for Duke](./Ui.png)
+
 ## Features 
 
 ### Todo, Deadlines, Events
@@ -133,4 +135,18 @@ Expected outcome:
 ```
 I have removed [D][] Return Book to Library (By: Feb 20 2022)
 ```
+
+### `bye` - exits from program and saves your tasks!
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+```
+Bye. Hope I've motivated you as much as I could have, and SMILE :D
+Closing this window now!
+```
+
 
