@@ -31,7 +31,7 @@ public class Deadline extends Task implements Comparable<Task> {
      */
     @Override
     public String getSaveFormat() {
-        return "D," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "," + this.by.toString();
+        return "D," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "," + this.by.toString() + "\n";
     }
 
     @Override

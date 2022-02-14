@@ -96,10 +96,10 @@ public class Storage {
             for (int i = 0; i < this.content.size(); i++) {
                 if (!updatedDetails.isEmpty() && this.content.get(i).equals(oldDetails)) {
                     this.content.set(i, updatedDetails);
-                    sb.append(this.content.get(i) + System.lineSeparator());
+                    sb.append(this.content.get(i) + "\n");
                 }
                 else if (!updatedDetails.isEmpty() || !this.content.get(i).equals(oldDetails)) {
-                    sb.append(this.content.get(i) + System.lineSeparator());
+                    sb.append(this.content.get(i) + "\n");
                 } else if (updatedDetails.isEmpty()) {
                     indexToRemoveAt = i;
                 }

@@ -8,6 +8,6 @@
     -fx-max-width: 180;
 }
 
-#dialogContainer {
-    -fx-background-image:url('../images/maplestory.jpg')
+.scroll-pane .viewport {
+    -fx-background-image:url('../images/maplestory.jpg');
 }
