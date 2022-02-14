@@ -8,7 +8,7 @@ This is a greenfield Java project for CS2103T Software Engineering.
 
 ## What is Nexus?
 ***
-![ui](Ui.PNG)
+![ui](Nexus.PNG)
 > Nexus is a basic Todo List with a built-in interface for users to interact with.
 ***
 ## Instructions
