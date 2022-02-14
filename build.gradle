@@ -48,9 +48,9 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "DukeLauncher"
+    archiveBaseName = "BotLauncher"
     archiveClassifier = null
-    archiveVersion = "0.1"
+    archiveVersion = "0.4"
     mainClassName = "Launcher"
 }
 
