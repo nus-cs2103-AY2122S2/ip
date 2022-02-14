@@ -112,7 +112,7 @@ public class Storage {
                 assert fileExists;
             }
             save(tasks);
-            String successMsg = "Successfully saved current tasks.";
+            String successMsg = "Successfully saved current tasks. " + root;
             return successMsg;
         } catch (IOException e) {
             return e.getMessage();
