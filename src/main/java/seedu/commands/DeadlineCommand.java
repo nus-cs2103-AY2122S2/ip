@@ -6,9 +6,6 @@ import seedu.duke.DukeException;
 import seedu.storage.TaskList;
 import seedu.task.Deadline;
 
-/**
- * The Deadline Command
- */
 public class DeadlineCommand extends Command {
 
     private String description;
@@ -28,16 +25,11 @@ public class DeadlineCommand extends Command {
         }
     }
 
-    /**
-     * Creates and adds a new task to the list
-     *
-     * @param tasks The task list in question
-     * @return A string showing the task was actually added
-     */
+
     @Override
     public String execute(TaskList tasks) {
-        Deadline t = new Deadline(description, dateTime);
-        tasks.add(t);
-        return "New deadline: " + t.toString() + " added!";
+        Deadline task = new Deadline(description, dateTime);
+        tasks.add(task);
+        return super.print("New Deadline:", task);
     }
 }

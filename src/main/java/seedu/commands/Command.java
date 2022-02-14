@@ -6,14 +6,13 @@ import java.time.format.DateTimeParseException;
 
 import seedu.duke.DukeException;
 import seedu.storage.TaskList;
+import seedu.task.Task;
 
-/**
- * Contains the bare minimum functions that all commands should contain
- */
 public abstract class Command {
 
     protected static boolean isExit = false;
     private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+    protected final int INDEX_OFFSET = 1;
 
     /**
      * Checks if input instruction follows format
@@ -34,7 +33,13 @@ public abstract class Command {
     public int checkInt(String str) throws DukeException {
         checkExist(str);
         try {
-            return Integer.parseInt(str);
+            int num = Integer.parseInt(str);
+
+            if (num < 0) {
+                throw new DukeException("Number should not be less than 0");
+            } else {
+                return num;
+            }
         } catch (NumberFormatException e) {
             throw new DukeException("That is not a number.");
         }
@@ -72,5 +77,14 @@ public abstract class Command {
 
     public static boolean isExit() {
         return isExit;
+    }
+
+    public String print(String type, Task task) {
+        StringBuilder out = new StringBuilder(type + "\n");
+        out.append("\tType: " + task.getType() + "\n");
+        out.append("\tPriority: " + task.getPriority() + "\n");
+        out.append("\tCompleted?: " + task.getCompleted() + "\n");
+        out.append("\tDescription: " + task.getDescription() + "\n\n");
+        return out.toString();
     }
 }

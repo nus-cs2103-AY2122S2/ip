@@ -21,7 +21,7 @@ public class PriorityCommand extends Command {
             throw new DukeException("Either no index or no priority level");
         }
 
-        idx = checkInt(arr[0]) - 1;
+        idx = checkInt(arr[0]) - INDEX_OFFSET;
         priority = checkInt(arr[1]);
     }
 
@@ -31,6 +31,6 @@ public class PriorityCommand extends Command {
         assert task != null: "Need to have task before continuing";
         task.setPriority(priority);
         tasks.sort();
-        return "Task: " + task.toString() + " has a new priority!";
+        return super.print("Priority Changed:", task);
     }
 }

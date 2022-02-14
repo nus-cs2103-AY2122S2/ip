@@ -2,9 +2,6 @@ package seedu.task;
 
 import java.time.LocalDateTime;
 
-/**
- * The Deadline Class of Task
- */
 public class Deadline extends Task {
 
     private LocalDateTime deadline;
@@ -21,8 +18,14 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getDescription() {
+        return super.getDescription() + " by" + deadline.format(DATE_FORMAT);
+    }
+
+
+    @Override
     public String toFile() {
-        return super.toFile() + "\t" + deadline.format(DATE_FORMAT);
+            return super.toFile() + "\t" + deadline.format(DATE_FORMAT);
     }
 
     @Override

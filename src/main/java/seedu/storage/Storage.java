@@ -15,10 +15,6 @@ import seedu.task.Event;
 import seedu.task.Task;
 import seedu.task.Todo;
 
-
-/**
- * Long term storage for the data in the task list
- */
 public class Storage {
 
     private final File FILE;
@@ -27,12 +23,6 @@ public class Storage {
         FILE = Paths.get(filePath).toFile();
     }
 
-    /**
-     * Reads contents of save file and initialises list.
-     *
-     * @return Arraylist of tasks read from save file.
-     * @throws DukeException Throws any error occurred during reading process.
-     */
     public ArrayList<Task> load() throws DukeException {
 
         Paths.get(FILE.getParent()).toFile().mkdirs();
@@ -81,12 +71,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Saves entire list into the save file.
-     *
-     * @param tasks Arraylist of tasks to be saved
-     * @throws DukeException Throws error occurred when saving
-     */
     public void saveAll(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(FILE);

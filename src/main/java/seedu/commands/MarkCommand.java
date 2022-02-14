@@ -13,7 +13,7 @@ public class MarkCommand extends Command {
 
     @Override
     public void validate(String inst) throws DukeException {
-        idx = super.checkInt(inst) - 1;
+        idx = super.checkInt(inst) - INDEX_OFFSET;
     }
 
     /**
@@ -28,6 +28,6 @@ public class MarkCommand extends Command {
         Task task = tasks.get(idx);
         assert task != null: "Need to have task before continuing";
         task.mark();
-        return "Task: " + task.toString() + " is marked!";
+        return super.print("Marked:", task);
     }
 }

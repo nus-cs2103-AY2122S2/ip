@@ -2,9 +2,6 @@ package seedu.task;
 
 import java.time.LocalDateTime;
 
-/**
- * The Event Class of Task
- */
 public class Event extends Task {
 
     private LocalDateTime atDateTime;
@@ -18,6 +15,11 @@ public class Event extends Task {
     public Event(String description, boolean isCompleted, LocalDateTime atDateTime, int priority) {
         super(description, isCompleted, priority, TYPE);
         this.atDateTime = atDateTime;
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + " at " + atDateTime.format(DATE_FORMAT);
     }
 
     @Override

@@ -6,9 +6,6 @@ import seedu.duke.DukeException;
 import seedu.storage.TaskList;
 import seedu.task.Event;
 
-/**
- * The Event Command
- */
 public class EventCommand extends Command {
 
     private String description;
@@ -28,17 +25,10 @@ public class EventCommand extends Command {
         }
     }
 
-    /**
-     * Creates and adds a new event to the list
-     *
-     * @param tasks The task list in question
-     * @return A string representation of the newly created task
-     * @throws DukeException Throws if error are found
-     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        Event t = new Event(description, dateTime);
-        tasks.add(t);
-        return "New event:" + t.toString() + "added!";
+        Event task = new Event(description, dateTime);
+        tasks.add(task);
+        return super.print("New Event:", task);
     }
 }
