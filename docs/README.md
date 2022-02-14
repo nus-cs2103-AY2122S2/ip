@@ -44,7 +44,7 @@ Note regarding command format:
 
 
 ### 3. Unmark the task as not completed:``unmark`` 
-**format:  `unmark`<integer>`**
+**format: `unmark <integer>`**
 - An un-marked task would look something like `[T][ ] <description>` when `list` is called.
 
 **Example:**
