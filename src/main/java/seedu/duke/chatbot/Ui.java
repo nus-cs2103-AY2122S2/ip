@@ -84,12 +84,10 @@ public class Ui {
     /**
      * Indicates to user that their command to delete a {@link Task} is successful.
      * @param taskList which is the {@link TaskList} that the {@link Task} was deleted from
-     * @param taskToRemove which is the {@link Task} that was deleted
      */
-    public static String showDeleteResult(TaskList taskList, Task taskToRemove) {
+    public static String showDeleteResult(TaskList taskList) {
         return String
-                .format("Got it, I've deleted this task: \n %s\nNow you have %d task in the list",
-                        taskToRemove.toString(),
+                .format("Got it, I've deleted the task!\nNow you have %d task in the list",
                         taskList.getNumberOfTasks());
     }
 
@@ -138,7 +136,7 @@ public class Ui {
      */
     public static String showAddNoteResult(TaskList taskList, Task updatedTask) {
         return String
-                .format("Got it, I've added a note to task %s\nUse 'show note <taskNumber>' to see the note",
+                .format("Got it, I've added a note to task %s\nUse 'show note from <taskNumber>' to see the note",
                         updatedTask.toString());
     }
 

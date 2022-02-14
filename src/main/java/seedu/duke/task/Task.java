@@ -15,31 +15,16 @@ public abstract class Task {
      * done records if a task has been marked as complete.
      */
     private final boolean isDone;
-    private final LocalDateTime date;
+    private final LocalDateTime endDate;
+    private final LocalDateTime startDate;
     private final NoteList notes;
 
-    /**
-     * Constructor for a task.
-     * @param name refers to the task name
-     */
-    Task(String name) {
-        this.taskName = name;
-        this.isDone = false;
-        //do null pointer exception check
-        this.date = null;
-        this.notes = new NoteList();
-    }
-
-    /**
-     * Constructor for a task that consists of task name and boolean done for task status.
-     * @param name refers to the task name
-     * @param doneStatus refers to the boolean that tracks if a task is complete
-     */
-    Task(String name, boolean doneStatus, LocalDateTime date) {
+    Task(String name, boolean doneStatus, LocalDateTime endDate, LocalDateTime startDate, NoteList notes) {
         this.taskName = name;
         this.isDone = doneStatus;
-        this.date = date;
-        this.notes = new NoteList();
+        this.endDate = endDate;
+        this.startDate = startDate;
+        this.notes = notes;
     }
 
     /**
@@ -48,8 +33,13 @@ public abstract class Task {
     Task(Task oldTask, NoteList newNoteList) {
         this.taskName = oldTask.getTaskName();
         this.isDone = oldTask.isDone();
-        this.date = oldTask.getDate();
+        this.endDate = oldTask.getEndDate();
+        this.startDate = oldTask.getStartDate();
         this.notes = newNoteList;
+    }
+
+    public LocalDateTime getStartDate() {
+        return this.startDate;
     }
 
     /**
@@ -64,13 +54,13 @@ public abstract class Task {
         return this.taskName;
     }
 
-    public LocalDateTime getDate() {
-        return this.date;
+    public LocalDateTime getEndDate() {
+        return this.endDate;
     }
 
-    public String getFormattingDateString() {
+    public String getFormattingDateString(LocalDateTime date) {
         try {
-            String indicator = (this.date.getHour() >= 12) ? "pm" : "am";
+            String indicator = (date.getHour() >= 12) ? "pm" : "am";
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm ")) + indicator;
         } catch (NullPointerException e) {
             return "";

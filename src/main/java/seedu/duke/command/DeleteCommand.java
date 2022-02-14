@@ -25,8 +25,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
-        TaskList newTaskList = taskList.delete(index);
         Task taskToRemove = taskList.getTasks().get(index);
+        TaskList newTaskList = taskList.delete(index);
         String lineToRemove = storage.createSummaryFromTask(taskToRemove);
         storage.convertTaskListToFile(newTaskList);
         return newTaskList;
@@ -37,8 +37,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String getResponseAfterCommand(TaskList taskList) {
-        Task deletedTask = taskList.getTasks().get(index);
-        return Ui.showDeleteResult(taskList, deletedTask);
+        return Ui.showDeleteResult(taskList);
     }
 
     /**

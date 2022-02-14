@@ -1,3 +1,4 @@
-T 0 have fun  
-T 0 have fun 
-T 0 boo 
+E|0|fix bug again|date/2022-02-14 08:20/to2022-02-14 09:50|notes/0|
+T|0|have fun|notes/2|hello again/END/|hello GOODBYE/END/|
+D|0|fix bugs|date/2022-02-14 08:22|notes/0|
+E|1|fix big bug |date/2022-12-09 08:25/to2022-12-09 09:25|notes/0|

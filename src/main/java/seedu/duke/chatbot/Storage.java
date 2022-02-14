@@ -3,21 +3,14 @@ package seedu.duke.chatbot;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.LoadingException;
 import seedu.duke.exceptions.UnableToUpdateDatabaseException;
-import seedu.duke.task.Deadline;
-import seedu.duke.task.Event;
-import seedu.duke.task.Task;
-import seedu.duke.task.TaskList;
-import seedu.duke.task.ToDo;
+import seedu.duke.task.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -103,31 +96,110 @@ public class Storage {
      * @param taskDetails which is the summarised string of the task
      * @return {@link Task} created based on information in string from database.
      */
-    Task getTaskFromSummary(String taskDetails) {
-        //taskType is the first letter - e.g. "T"f
-        assert taskDetails.length() !=0 : "Storage getTaskFromSummary - Task details are empty";
+    Task getTaskFromSummary(String taskDetails) throws DukeException {
+        //getToDoFromSummary()...
+        assert taskDetails.length() != 0 : "Storage getTaskFromSummary - Task details are empty";
+        //taskType is the first letter - e.g. "T"
+        String taskType = taskDetails.substring(0, 1);
+        //start from index 2
+        boolean doneStatus = Integer.parseInt(taskDetails.substring(2, 3)) == 1;
 
-        String taskType = taskDetails.substring(0,1);
-        //start from index 2 to skip space
-        boolean doneStatus = Integer.parseInt(taskDetails.substring(2,3)) == 1;
+        NoteList noteList = this.createNoteListFromSummary(taskDetails);
 
         String taskName;
-        //only tasks with dates have '/'
-        if (taskDetails.contains("/")) {
-            int indexOfSlash = taskDetails.indexOf("/");
-            taskName = taskDetails.substring(4,indexOfSlash - 1);
-            String date = taskDetails.substring(indexOfSlash + 2); //"/ Sunday"
-            LocalDateTime dateObj = this.getLocalDateTimeFromDate(date);
+        //only tasks with dates have 'date/<datestring>'
+        if (taskDetails.contains("date/")) {
+            taskName = this.getTaskNameForTasksWithDates(taskDetails);
             if (taskType.equals("E")) {
-                return new Event(taskName, doneStatus, dateObj);
+                //date/2022-02-14 08:20/to2022-02-14 09:50
+                LocalDateTime startDate = this.createEventStartDateTimeFromSummary(taskDetails);
+                LocalDateTime endDate = this.createEventEndDateTimeFromSummary(taskDetails);
+                return new Event(taskName, doneStatus, endDate, startDate, noteList);
             } else {
-                return new Deadline(taskName, doneStatus, dateObj);
+                LocalDateTime endDate = this.createDateTimeFromSummary(taskDetails);
+                return new Deadline(taskName, doneStatus, endDate, noteList);
             }
         } else {
-            taskName = taskDetails.substring(4);
-            return new ToDo(taskName, doneStatus);
+            //create a function getTaskNameForToDo
+            //-1 is because <taskName>|notes/
+            taskName = taskDetails.substring(4, taskDetails.indexOf("notes/") - 1);
+            return new ToDo(taskName, doneStatus, noteList);
+        }
+
+    }
+
+    LocalDateTime createEventEndDateTimeFromSummary(String taskDetails) {
+        int indexEndDate = taskDetails.indexOf("/to") + 3;
+        String endDateString = taskDetails.substring(indexEndDate,taskDetails.indexOf("|notes/"));
+        LocalDateTime endDate = this.getLocalDateTimeFromDate(endDateString);
+        return endDate;
+    }
+
+    LocalDateTime createEventStartDateTimeFromSummary(String taskDetails) throws DukeException {
+        int indexOfDate = taskDetails.indexOf("date/");
+        String date = taskDetails.substring(indexOfDate + 5, taskDetails.indexOf("/to")); //"date/<datetime>"
+        LocalDateTime dateObj = this.getLocalDateTimeFromDate(date);
+        return dateObj;
+    }
+
+    String getTaskNameForTasksWithDates(String taskDetails) throws DukeException {
+        try {
+            int indexOfDate = taskDetails.indexOf("date/");
+            int indexTaskNameStart = 4; //"T|1|<taskName>|date/",
+            String taskName = taskDetails.substring(4, indexOfDate - 1);
+            return taskName;
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Problem in getTaskNameForTasksWithDates()");
         }
     }
+
+    LocalDateTime createDateTimeFromSummary(String taskDetails) throws DukeException {
+        try {
+            int indexOfDate = taskDetails.indexOf("date/");
+            //-1 because <datetime>|notes/<number of notes> --> got spacing we want to get rid of
+            String date = taskDetails.substring(indexOfDate + 5, taskDetails.indexOf("notes/") - 1); //"date/<datetime>"
+            LocalDateTime dateObj = this.getLocalDateTimeFromDate(date);
+            return dateObj;
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Problem in getTaskNameForTasksWithDates()");
+        }
+    }
+
+    NoteList createNoteListFromSummary(String taskDetails) throws DukeException {
+        //add notes notes/<number of notes> <content of note 1>/END/ <content of note 2>/END/ ...
+        try {
+            int indexOfNoteStart = taskDetails.indexOf("notes/");
+            int indexOfNumberOfNotes = indexOfNoteStart + 6; //e.g. notes/5
+
+            assert indexOfNumberOfNotes + 1 < taskDetails.length() : "Index exceeds length in createNoteListFromSummary";
+
+            int numberOfNotes = this.parseForNumberOfNotes(taskDetails, indexOfNumberOfNotes);
+
+            if (numberOfNotes == 0) {
+                return new NoteList();
+            } else {
+                int indexStartOfNoteContent = indexOfNumberOfNotes + 2; //<number of notes>|<content of note 1>
+                taskDetails = taskDetails.substring(indexStartOfNoteContent);
+                int endIndexOfNoteContent = taskDetails.indexOf("/END/");
+                ArrayList<Note> notes = new ArrayList();
+                for (int i = 0; i < numberOfNotes; i++) {
+                    if (i != 0) {
+                        indexStartOfNoteContent = endIndexOfNoteContent + 6; // /END/|<nextNoteContent>/END/
+                        taskDetails = taskDetails.substring(indexStartOfNoteContent); //"<<nextNoteContent>/END/..."
+                        endIndexOfNoteContent = taskDetails.indexOf("/END/");
+                    }
+                    String noteContent = taskDetails.
+                            substring(0, endIndexOfNoteContent);
+
+                    notes.add(new Note(noteContent));
+                }
+                return new NoteList(notes);
+            }
+        } catch(NumberFormatException | StringIndexOutOfBoundsException e) {
+            throw new DukeException("Problem with translating summary into notelist");
+        }
+    }
+
 
     /**
      * Creates a summary string for the {@link Task} to be saved in the database.
@@ -136,20 +208,33 @@ public class Storage {
      */
     public String createSummaryFromTask(Task task) {
         String taskType = task.getTaskType();
-        String  summary = taskType + " ";
 
-        summary += (task.isDone()) ? "1 " : "0 ";
+        String  summary = taskType + "|";
 
-        summary += task.getTaskName() + " ";
+        summary += (task.isDone()) ? "1|" : "0|";
 
-        if (taskType.equals("E") || taskType.equals("D")) {
-            LocalDateTime date = task.getDate();
+        summary += task.getTaskName() + "|";
+
+        if (taskType.equals("D")) {
+            LocalDateTime date = task.getEndDate();
             String dateString = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            summary += "/ " + dateString; //24 Dec 2019 --> 2019-12-24
+            summary += "date/" + dateString + "|"; //24 Dec 2019 --> 2019-12-24
         }
+
+        if (taskType.equals("E")) {
+            LocalDateTime startDate = task.getStartDate();
+            String dateString = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            summary += "date/" + dateString + "/to"; //24 Dec 2019 --> 2019-12-24
+            LocalDateTime endDate = task.getEndDate();
+            String endDateString = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            summary += endDateString + "|";
+        }
+
+        summary += task.getNotes().convertToSummary();
 
         return summary + "\n";
     }
+
 
     /**
      *Used to add the summary string of a task to be saved into the database.
@@ -160,6 +245,7 @@ public class Storage {
         assert lineContent.length() != 0 : "Storage: addLine - Cannot load empty line into database";
         File file = new File(this.fileName);
         try {
+            //referenced from https://mkyong.com/java/how-to-write-to-file-in-java-bufferedwriter-example/
             BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
             bw.append(lineContent);
             bw.close();
@@ -177,10 +263,7 @@ public class Storage {
     public void convertTaskListToFile(TaskList taskList) throws DukeException {
         //rewrite to a new file
         File file = new File(this.fileName);
-        if (file.delete()) {
-            //need to make Duke talk first
-            Ui.showCompleteUpdateOfFile();
-        } else {
+        if (!file.delete()) {
             throw new UnableToUpdateDatabaseException();
         }
         for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
@@ -204,5 +287,11 @@ public class Storage {
             return null;
         }
     }
+
+    int parseForNumberOfNotes(String input, int index) throws DukeException {
+        return Integer
+                    .parseInt(input.substring(index, index + 1));
+    }
+
 }
 

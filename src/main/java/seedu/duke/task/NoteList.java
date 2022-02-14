@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class NoteList {
     private final ArrayList<Note> notes;
 
-    NoteList() {
+    public NoteList() {
         this.notes = new ArrayList<>();
     }
 
-    NoteList(ArrayList notes) {
+    public NoteList(ArrayList notes) {
         this.notes = notes;
     }
 
@@ -41,6 +41,14 @@ public class NoteList {
         ArrayList<Note> newNotes = this.copyNoteList();
         newNotes.set(noteIndex,editedNote);
         return new NoteList(newNotes);
+    }
+
+    public String convertToSummary() {
+        String result = String.format("notes/%d|",notes.size());
+        for (int i = 0; i < this.notes.size(); i++) {
+            result += this.notes.get(i).toString() + "/END/|";
+        }
+        return result;
     }
 
     @Override
