@@ -28,12 +28,6 @@ public class  DialogBox extends HBox {
     @FXML
     private Circle imageCircle;
 
-    /**
-     * Constructor for DialogBox.
-     *
-     * @param text Display the user text.
-     * @param img Display the user image.
-     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,9 +43,6 @@ public class  DialogBox extends HBox {
         imageCircle.setFill(new ImagePattern(img));
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -60,7 +51,7 @@ public class  DialogBox extends HBox {
     }
 
     /**
-     * Display the user dialog.
+     * Displays the user dialog.
      *
      * @param text Gets the user text.
      * @param img Gets the user image.
@@ -73,7 +64,7 @@ public class  DialogBox extends HBox {
     }
 
     /**
-     * Display the bot's dialog.
+     * Displays the bot dialog.
      *
      * @param text Gets the bot's text.
      * @param img Gets the bot's image.

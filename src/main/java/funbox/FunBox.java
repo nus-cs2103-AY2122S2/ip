@@ -21,7 +21,7 @@ public class FunBox  {
     private final TaskList taskList = storage.getTaskList();
 
     /**
-     * Get input from the user and return a Result.
+     * Gets input from the user and return a Result.
      */
     public Result getResponse(String input) {
         String result;
