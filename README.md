@@ -1,24 +1,27 @@
-# Duke project template
+# Mike
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> “The bad news is time flies. The good news is you’re the pilot”
 
-## Setting up in Intellij
+Mike is a *simple task manager* bot. It is
+- Easy to learn and use
+- Fast (if you can type fast)
+- FREE 💵
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+It can:
+1. Add tasks (3 types - todos, deadlines, events) to a list
+2. Perform basic functions on the list
+3. Store the list in hard drive for future reference.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-2. Open the project into Intellij as follows:
-   1. Click `Open`.
-   2. Select the project directory, and click `OK`.
-   3. If there are any further prompts, accept the defaults.
-3. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-4. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+To use it,
+- [x] Download the jar file
+- [ ] Run the jar file with java
+- [ ] Add your tasks!
+
+Know [Java](https://docs.oracle.com/en/java/)? Feel free to fork it and edit code as you please!
+```java
+public class Main {
+    public static void main(String[] args) {
+        //Your code here
+    }
+}
+```
