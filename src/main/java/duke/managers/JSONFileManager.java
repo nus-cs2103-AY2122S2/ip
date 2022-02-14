@@ -125,19 +125,19 @@ public class JSONFileManager {
             if (symbol.equals(Todo.getSymbol())) {
                 String description = jsonObject.getString("description");
                 boolean isDone = jsonObject.getBoolean("isDone");
-                wordList.storeTodo(description, isDone,false);
+                wordList.storeTodo(description, isDone);
             } else if (symbol.equals(Deadline.getSymbol())) {
                 String description = jsonObject.getString("description");
                 boolean isDone = jsonObject.getBoolean("isDone");
                 String datetimeString = jsonObject.getString("datetime");
                 LocalDateTime datetime = DateTimeManager.parseString(datetimeString);
-                wordList.storeDeadline(description, datetime, isDone,false);
+                wordList.storeDeadline(description, datetime, isDone);
             } else if (symbol.equals(Event.getSymbol())) {
                 String description = jsonObject.getString("description");
                 boolean isDone = jsonObject.getBoolean("isDone");
                 String datetimeString = jsonObject.getString("datetime");
                 LocalDateTime datetime = DateTimeManager.parseString(datetimeString);
-                wordList.storeEvent(description, datetime, isDone,false);
+                wordList.storeEvent(description, datetime, isDone);
             }
         }
         return wordList;

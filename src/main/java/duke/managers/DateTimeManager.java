@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DateTimeManager {
     static String localDateTimeFormat = "dd/MM/yyyy HHmm";
-    static String localDateTimeString = "E, dd MMM yyyy HH:mm";
+    static String localDateTimeString = "EEEE, dd MMM yyyy HH:mm";
 
     static public LocalDateTime parseString(String dateTimeString) {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern(localDateTimeFormat);

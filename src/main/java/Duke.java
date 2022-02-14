@@ -6,6 +6,7 @@ import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.EmptyInputException;
 import duke.managers.JSONFileManager;
 import duke.tasks.WordList;
+import duke.tasks.WordListItem;
 import duke.ui.DukeUI;
 
 import java.util.Scanner;
@@ -67,6 +68,7 @@ public class Duke {
     }
 
     public void processInput(InputType inputType, String[] value) {
+        WordListItem wordListItem;
         switch(inputType) {
             case LIST:
                 wordList.printList();
@@ -78,18 +80,22 @@ public class Duke {
                 wordList.unmarkItem(Integer.parseInt(value[0]));
                 break;
             case TODO:
-                wordList.storeTodo(value[0], false, true);
+                wordListItem = wordList.storeTodo(value[0], false);
+                ui.echoAddedItem(wordListItem, wordList);
                 break;
             case DEADLINE:
-                wordList.storeDeadline(value[0], DateTimeManager.parseString(value[1]), false, true);
+                wordListItem = wordList.storeDeadline(value[0], DateTimeManager.parseString(value[1]), false);
+                ui.echoAddedItem(wordListItem, wordList);
                 break;
             case EVENT:
-                wordList.storeEvent(value[0], DateTimeManager.parseString(value[1]), false, true);
+                wordListItem = wordList.storeEvent(value[0], DateTimeManager.parseString(value[1]), false);
+                ui.echoAddedItem(wordListItem, wordList);
                 break;
             case BYE:
                 break;
             case DELETE:
-                wordList.removeItem(Integer.parseInt(value[0]));
+                wordListItem = wordList.removeItem(Integer.parseInt(value[0]));
+                ui.echoRemovedItem(wordListItem, wordList);
             case NONE:
                 break;
         }

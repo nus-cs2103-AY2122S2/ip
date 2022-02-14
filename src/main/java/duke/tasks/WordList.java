@@ -16,53 +16,31 @@ public class WordList {
         this.wordList = new ArrayList<>();
     }
 
-    private void echoAddedItem(WordListItem wordListItem) {
-        System.out.println("  ------------------------------------");
-        System.out.println("  Got it. I've added this task: ");
-        System.out.println("    " + wordListItem);
-        System.out.println("  You currently have " + this.length() + " tasks in your list");
-        System.out.println("  ------------------------------------");
-    }
-
-    private void echoRemovedItem(WordListItem wordListItem) {
-        System.out.println("  ------------------------------------");
-        System.out.println("  Noted. I've removed this task: ");
-        System.out.println("    " + wordListItem);
-        System.out.println("  You currently have " + this.length() + " tasks in your list");
-        System.out.println("  ------------------------------------");
-    }
-
-    public void storeTodo(String word, boolean isDone, boolean echo) {
-        WordListItem todo = new Todo(word);
+    public Todo storeTodo(String word, boolean isDone) {
+        Todo todo = new Todo(word);
         if (isDone) {
             todo.markItem();
         }
         this.wordList.add(todo);
-        if (echo) {
-            echoAddedItem(todo);
-        }
+        return todo;
     }
 
-    public void storeDeadline(String word, LocalDateTime datetime, boolean isDone, boolean echo) {
-        WordListItem deadline = new Deadline(word, datetime);
+    public Deadline storeDeadline(String word, LocalDateTime datetime, boolean isDone) {
+        Deadline deadline = new Deadline(word, datetime);
         if (isDone) {
             deadline.markItem();
         }
         this.wordList.add(deadline);
-        if (echo) {
-            echoAddedItem(deadline);
-        }
+        return deadline;
     }
 
-    public void storeEvent(String word, LocalDateTime datetime, boolean isDone, boolean echo) {
-        WordListItem event = new Event(word, datetime);
+    public Event storeEvent(String word, LocalDateTime datetime, boolean isDone) {
+        Event event = new Event(word, datetime);
         if (isDone) {
             event.markItem();
         }
         this.wordList.add(event);
-        if (echo) {
-            echoAddedItem(event);
-        }
+        return event;
     }
 
     public void markItem(int itemNumber) {
@@ -77,9 +55,9 @@ public class WordList {
         System.out.println("  " + this.wordList.get(itemNumber - 1));
     }
 
-    public void removeItem(int itemNumber) {
+    public WordListItem removeItem(int itemNumber) {
         WordListItem wordListItem = this.wordList.remove(itemNumber - 1);
-        echoRemovedItem(wordListItem);
+        return wordListItem;
     }
 
     public void printList() {
