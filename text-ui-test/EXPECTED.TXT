@@ -1,7 +1,49 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Duke!
+What can I do for you?
+-------------------
+Got it! I've added this task:
+[T] [ ]  Work
+Now you have 1 tasks in the list
+-------------------
+-------------------
+Got it! I've added this task:
+[E] [ ]  Party  (at: Monday)
+Now you have 2 tasks in the list
+-------------------
+-------------------
+Got it! I've added this task:
+[D] [ ]  Homework  (by: Sunday)
+Now you have 3 tasks in the list
+-------------------
+-------------------
+1. [T] [ ]  Work
+2. [E] [ ]  Party  (at: Monday)
+3. [D] [ ]  Homework  (by: Sunday)
+-------------------
+-------------------
+Nice! I've marked this task as done:
+[T] [X]  Work
+-------------------
+-------------------
+Got it! I've removed this task:
+[T] [X]  Work
+Now you have 2 tasks in the list
+-------------------
+-------------------
+Got it! I've removed this task:
+[D] [ ]  Homework  (by: Sunday)
+Now you have 1 tasks in the list
+-------------------
+-------------------
+ERROR: PLEASE ENTER A VALID NUMBER TO MARK/UNMARK/DELETE
+-------------------
+-------------------
+ERROR: PLEASE ENTER A VALID NUMBER TO MARK/UNMARK/DELETE
+-------------------
+-------------------
+1. [E] [ ]  Party  (at: Monday)
+-------------------
+-------------------
+ERROR: NO SUCH COMMAND FOUND
+-------------------
+Bye! Hope to see you again soon
