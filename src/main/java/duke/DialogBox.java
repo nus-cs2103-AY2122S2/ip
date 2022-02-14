@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -35,6 +36,15 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        if (text.split("\\n").length > 1) {
+            dialog.setTextAlignment(TextAlignment.JUSTIFY);
+            System.out.println(text.split("\\n").length);
+            dialog.setMinSize(200, Math.max((text.split("\\n").length) * 32.5, 100));
+        } else {
+            dialog.setMinSize(text.length() * 2, 10);
+            dialog.setPrefWidth(text.length() * 20);
+        }
+
         displayPicture.setImage(img);
     }
 

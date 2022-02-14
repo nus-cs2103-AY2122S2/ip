@@ -43,7 +43,7 @@ public class Duke extends Application {
             stage.setScene(scene);
             stage.show();
 
-            Ui.print("Aye. Hi there young lad...");
+            Ui.print("Aye... how can i help you?");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -22,6 +22,6 @@ public class ToDoTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", this.isDone ? "X" : " ", this.taskName);
+        return String.format("[T][%s] %s", this.isDone ? "\u2714" : "\u2716", this.taskName);
     }
 }

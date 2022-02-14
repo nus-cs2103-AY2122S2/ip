@@ -67,6 +67,9 @@ public class Storage {
                 sb.append(sc.nextLine());
             }
             sc.close();
+            if(sb.length() == 0) {
+                return -1;
+            }
             for (String taskString : sb.toString().split(";")) {
                 addTaskFromString(taskString, taskList);
             }

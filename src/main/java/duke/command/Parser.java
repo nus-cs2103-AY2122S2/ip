@@ -53,30 +53,33 @@ public class Parser {
                 switch (args[1]) {
                 case "/on":
                     Ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
-                            DateTimeFormatter.ofPattern("dd/M/yyyy")), 0));
+                            DateTimeFormatter.ofPattern("dd/M/yyyy")), 0),
+                            "Here are the tasks:");
                     break;
                 case "/before":
                     Ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
-                            DateTimeFormatter.ofPattern("dd/M/yyyy")), 1));
+                            DateTimeFormatter.ofPattern("dd/M/yyyy")), 1),
+                            "Here are the tasks:");
                     break;
                 case "/after":
                     Ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2],
-                            DateTimeFormatter.ofPattern("dd/M/yyyy")), 2));
+                            DateTimeFormatter.ofPattern("dd/M/yyyy")), 2),
+                            "Here are the tasks:");
                     break;
                 default:
                     break;
                 }
             } else {
-                Ui.print(taskList.getList());
+                Ui.print(taskList.getList(), "Here are the tasks in your list:");
             }
             return 0;
         case "mark":
             taskList.getTask(Integer.parseInt(args[1]) - 1).mark();
-            Ui.print("Task marked as done: ", " " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
+            Ui.print("Task marked as done: ", "    " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
             return 1;
         case "unmark":
             taskList.getTask(Integer.parseInt(args[1]) - 1).unmark();
-            Ui.print("Task as not done yet: ", " " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
+            Ui.print("Task as not done yet: ", "    " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
             return 1;
         case "todo":
             taskList.addTask((inputString).substring(5).trim(), false, null, 0);
@@ -166,17 +169,18 @@ public class Parser {
         case "event":
             String flag = action.equals("deadline") ? "/by" : "/at";
             int actionLength = action.equals("deadline") ? 9 : 6;
-            String taskName = inputString.substring(actionLength).split(flag)[0].trim();
 
             if (args.length == 1) {
                 throw new DukeException("Task Name must be provided!");
             }
+            String taskName = inputString.substring(actionLength).split(flag)[0].trim();
+
             if (taskList.hasDuplicate(taskName)) {
                 throw new DukeException("Duplicate Task Name!");
             }
             if (Arrays.stream(args).noneMatch(flag::equals)) {
                 throw new DukeException(String
-                        .format("%s flag not detected. Please specify date using %s!", flag, flag));
+                        .format("%s flag not detected.\n\nPlease specify date using %s!", flag, flag));
             }
             if (inputString.trim().split(flag).length == 1) {
                 throw new DukeException(String.format("Please specify deadline date after %s!", flag));

@@ -50,9 +50,7 @@ public class Ui {
      */
     public static void print(String ... args) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("    %s%n", "========================"));
-        Arrays.asList(args).forEach((x) -> sb.append(String.format("    %s%n", x)));
-        sb.append(String.format("    %s%n", "========================"));
+        Arrays.asList(args).forEach((x) -> sb.append(String.format("    %s\n", x)));
         print(sb.toString());
     }
 
@@ -67,13 +65,11 @@ public class Ui {
      */
     public static void print(ArrayList<Task> arr) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("    %s%n", "========================"));
         if (arr.size() == 0) {
             sb.append("    Nothing to show!");
         } else {
             arr.forEach((x) -> sb.append(String.format("    %d. %s%n", arr.indexOf(x) + 1, x.toString())));
         }
-        sb.append(String.format("    %s%n", "========================"));
         print(sb.toString());
     }
 
@@ -89,14 +85,12 @@ public class Ui {
      */
     public static void print(ArrayList<Task> arr, String header) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("    %s%n", "========================"));
-        sb.append(String.format("    %s", header));
+        sb.append(String.format("    %s\n", header));
         if (arr.size() == 0) {
             sb.append("    Nothing to show!");
         } else {
-            arr.forEach((x) -> sb.append(String.format("    %d. %s%n", arr.indexOf(x) + 1, x.toString())));
+            arr.forEach((x) -> sb.append(String.format("    %d. %s\n", arr.indexOf(x) + 1, x.toString())));
         }
-        sb.append(String.format("    %s%n", "========================"));
         print(sb.toString());
     }
 
