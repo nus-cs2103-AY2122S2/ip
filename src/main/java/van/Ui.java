@@ -11,7 +11,13 @@ public class Ui {
     }
 
     public void exitMessage() {
-        System.out.println("Bye");
+        builder.setLength(0);
+        builder.append("bye\n");
+    }
+
+    public void deleteMessage() {
+        builder.setLength(0);
+        builder.append("Task deleted\n");
     }
 
     public void invalidMessage(String message) {

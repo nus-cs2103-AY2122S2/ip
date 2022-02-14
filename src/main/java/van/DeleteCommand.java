@@ -29,6 +29,7 @@ public class DeleteCommand implements Command {
                 throw new VanException("Task number out of range");
             }
             taskList.deleteTask(taskNumber);
+            ui.deleteMessage();
         } catch (VanException ex) {
             System.out.println(ex);
         }
