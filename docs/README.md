@@ -73,6 +73,7 @@ Example of usage:
 
 Expected outcome:  Jerry adds a Event with the specified name and date.
 Example:
+
 ![](./assets/event.png)
 
 ### `list` - List tasks
