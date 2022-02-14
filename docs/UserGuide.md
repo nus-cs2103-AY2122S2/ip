@@ -223,17 +223,22 @@ Every change in each task is recorded in a file called duke.txt. When the progra
 
 ### Exit
 Exits the programme.
-*Command: exit*
-   
-
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
+*Command: bye*
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Command | Description |
+| --- | --- |
+| todo TASK_NAME | adds a todo with specified task name |
+| deadline TASK_NAME /by YYYY-MM-DD hh:mm | adds a deadline to the task list |
+| event TASK_NAME /at YYYY-MM-DD hh:mm /to YYYY-MM-DD hh:mm | adds a event to the task list |
+| list | displays all tasks |
+| mark TASK_NUMBER | marks specified task as done |
+| unmark TASK_NUMBER | unmarks specified task |
+| find KEY_WORD | returns only tasks that have the keyword | 
+| delete TASK_NUMBER | deletes specified task from list | 
+| add note to task TASK_NUMBER NOTE_MESSAGE | adds a note to specified task | 
+| show note from task TASK_NUMBER| shows notes that have been added to specified task |
+| edit note NOTE_NUMBER from task TASK_NUMBER NEW_NOTE_MESSAGE | edits a note from specified task | 
+| delete note NOTE_NUMBER from task TASK_NUMBER | deletes a note from specified task | 
+| exit | closes the program |
