@@ -60,24 +60,36 @@ public class Ui {
                     "Now you have " + tasks.getCount() + " tasks in your list.\n";
         }
         else if(commandTag.equals(Parser.ADD_DEADLINE)) {
-
             Task newTask = new Deadline(parseOutput.get(1),
                     LocalDate.parse(parseOutput.get(2)), false);
+
+            String clashes = tasks.checkForClash(LocalDate.parse(parseOutput.get(2)));
 
             tasks.add(newTask);
 
             output = "Got it! I've added this task:\n" + newTask + "\n" +
                     "Now you have " + tasks.getCount() + " tasks in your list.\n";
+
+            if(clashes != "") {
+                output += "FYI, you have scheduled the following tasks on the same day:\n"
+                        + clashes;
+            }
         }
         else if(commandTag.equals(Parser.ADD_EVENT)) {
 
             Task newTask = new Event(parseOutput.get(1),
                     LocalDate.parse(parseOutput.get(2)), false);
 
+            String clashes = tasks.checkForClash(LocalDate.parse(parseOutput.get(2)));
             tasks.add(newTask);
 
             output = "Got it! I've added this task:\n" + newTask + "\n" +
                     "Now you have " + tasks.getCount() + " tasks in your list.\n";
+
+            if(clashes != "") {
+                output += "FYI, you have scheduled the following tasks on the same day:\n"
+                        + clashes;
+            }
         }
         else {
             output = "Sorry, I didn't quite get that";

@@ -1,5 +1,6 @@
 package johnny;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class InputList {
@@ -39,6 +40,26 @@ public class InputList {
      */
     public void add(Task newTask) {
         tasks.add(newTask);
+    }
+
+    public String checkForClash(LocalDate date) {
+        String out = "";
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i) instanceof Todo) {
+                continue;
+            } else {
+                if(tasks.get(i) instanceof Deadline &&
+                        ((Deadline) tasks.get(i)).getDueDate().equals(date)) {
+                    out += String.valueOf(i + 1) + ". " +
+                            tasks.get(i).toString() + "\n";
+                } else if(tasks.get(i) instanceof Event
+                        && ((Event) tasks.get(i)).getEventDate().equals(date)) {
+                    out += String.valueOf(i + 1) + ". " +
+                            tasks.get(i).toString() + "\n";
+                }
+            }
+        }
+        return out;
     }
 
     /**
