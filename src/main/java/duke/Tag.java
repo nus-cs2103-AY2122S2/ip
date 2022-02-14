@@ -4,7 +4,7 @@ package duke;
  * Represents tag for tasks.
  */
 public class Tag {
-    String tagName;
+    private String tagName;
 
     /**
      * Constructs tag object.

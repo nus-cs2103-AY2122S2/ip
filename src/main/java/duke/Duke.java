@@ -19,14 +19,14 @@ public class Duke {
     String getResponse(String input) throws DukeException, IOException {
         return reply(input);
     }
+
     /**
-     * Main method to run Duke.
      *
-     * @param
+     * @param userInput
+     * @return String representation of duke reply.
      * @throws IOException
-     * @throws DukeException
      */
-    public String reply(String userInput) throws IOException, DukeException {
+    public String reply(String userInput) throws IOException {
         Ui ui = new Ui();
         ui.greet();
 
@@ -64,7 +64,7 @@ public class Duke {
                 try {
                     Parser.userCommandValidator(userCommand);
                 } catch (DukeException e) {
-                   return "OOPS!!! I'm sorry, but I don't know what that means.";
+                    return "OOPS!!! I'm sorry, but I don't know what that means.";
                 }
 
                 switch (userCommand) {
@@ -182,6 +182,8 @@ public class Duke {
                     return Parser.parserFind(taskLists, userInputTask);
                 case "tag":
                     return Parser.parserTag(taskLists, userInputArr, storage);
+                default:
+                    return "OOPS!!! I'm sorry, but I don't know what that means.";
                 }
             }
         }

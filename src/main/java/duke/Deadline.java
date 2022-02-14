@@ -70,7 +70,8 @@ public class Deadline extends Task {
     public String toStringForSave() {
         return tag == null
                ? "D " + super.toStringForSave() + " # " + this.deadlineDate + " " + this.time
-               : "D " + super.toStringForSave() + " # " + this.deadlineDate + " " + this.time + " " + this.tag.toString();
+               : "D " + super.toStringForSave() + " # " + this.deadlineDate + " " + this.time + " "
+                + this.tag.toString();
     }
 
     /**

@@ -37,7 +37,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-//        dialog.getStylesheets().add(String.valueOf(this.getClass().getResource("/view/userdialogbox.css")));
         displayPicture.setImage(img);
     }
 

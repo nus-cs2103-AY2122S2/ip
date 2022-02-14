@@ -131,6 +131,8 @@ public class Storage {
                 // add eventTask to todoList
                 todoList.add(eventTask);
                 break;
+            default:
+                break;
             }
         }
         return todoList;

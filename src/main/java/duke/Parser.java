@@ -29,7 +29,8 @@ public class Parser {
      * @param userInputTask user input task.
      * @throws DukeException
      */
-    static String parserTodo(TaskList taskLists, String userInputTask, Storage storage) throws DukeException, IOException {
+    static String parserTodo(TaskList taskLists, String userInputTask, Storage storage)
+            throws DukeException, IOException {
         Parser.taskDescriptionValidator("todo", userInputTask);
 
         // adding task to todoList

@@ -62,8 +62,8 @@ public class TaskList {
 
         int initialTaskListsLength = taskLists.size();
         taskLists.remove(num - 1);
-        assert taskLists.size() == initialTaskListsLength - 1 : "length of current tasklist should " +
-                "decrease by one";
+        assert taskLists.size() == initialTaskListsLength - 1 : "length of current tasklist should "
+                + "decrease by one";
 
         TaskList tempTaskList = new TaskList(taskLists);
         storage.save(tempTaskList);
@@ -82,7 +82,7 @@ public class TaskList {
         // display to do task
         String output = "    Got it. I've added this task:\n";
         String addOn = "        " + task.toString() + "\n";
-        String taskAmount =  "    " + displayTaskAmount;
+        String taskAmount = "    " + displayTaskAmount;
 
         return output + addOn + taskAmount;
     }
