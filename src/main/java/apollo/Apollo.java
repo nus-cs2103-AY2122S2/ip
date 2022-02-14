@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 public class Apollo extends Application {
 
     private static TaskList taskList;
-    private static Ui ui;
     private static boolean isLoaded;
 
     /**
@@ -51,7 +50,8 @@ public class Apollo extends Application {
      * Runs main response loop of the program while waiting for exit signal.
      */
     private static void run() {
-        ui = new Ui();
+        assert taskList != null : "taskList did not initialise.";
+        Ui ui = new Ui();
         ui.printMessage(Welcome.getLogo() + Welcome.greet(isLoaded, LocalTime.now()));
 
         Command command = null;
@@ -68,6 +68,7 @@ public class Apollo extends Application {
     }
 
     public static String getResponse(String userCommand) {
+        assert taskList != null : "taskList did not initialise.";
         try {
             Command command = new Parser().parseCommand(userCommand);
             String outcome = command.execute();

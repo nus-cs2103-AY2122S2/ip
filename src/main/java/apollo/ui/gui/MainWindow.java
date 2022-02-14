@@ -1,6 +1,5 @@
 package apollo.ui.gui;
 
-import static apollo.messages.Messages.EXIT_MESSAGE;
 import static apollo.messages.Messages.MISSING_GUI_IMAGE;
 
 import java.io.InputStream;
@@ -67,12 +66,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = Apollo.getResponse(input);
 
-        if (response.equals(EXIT_MESSAGE)) {
+        if (input.equals("exit")) {
             gui.stop();
+        } else if (input.equals("")) {
+            return;
         }
 
+        String response = Apollo.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, apolloImage)
