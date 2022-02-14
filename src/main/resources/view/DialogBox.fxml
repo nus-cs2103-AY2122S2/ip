@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.TextFlow?>
+
+<fx:root alignment="TOP_RIGHT" prefWidth="600.0" spacing="20.0" style="-fx-background-color: transparent;" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextFlow fx:id="dialog" maxHeight="0" style="-fx-background-color: #393e46#393e46; -fx-background-radius: 12px; -fx-text-fill: #eeeeee;">
+         <padding>
+            <Insets bottom="8.0" left="12.0" right="12.0" top="8.0" />
+         </padding></TextFlow>
+      <ImageView fx:id="displayPicture" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: transparent;">
+         <image>
+            <Image url="@../images/cat.png" />
+         </image></ImageView>
+   </children>
+</fx:root>
