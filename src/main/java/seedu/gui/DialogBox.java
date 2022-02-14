@@ -44,7 +44,6 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        setStyle("-fx-font: 20 arial;");
     }
 
     /**
