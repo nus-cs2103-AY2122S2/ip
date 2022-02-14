@@ -1,8 +1,11 @@
 package yeowoo;
-import org.junit.jupiter.api.Test;
-import tasks.TaskList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import tasks.TaskList;
+
 public class TaskListTest {
     @Test
     public void fileNotFoundTest() throws YeowooException {

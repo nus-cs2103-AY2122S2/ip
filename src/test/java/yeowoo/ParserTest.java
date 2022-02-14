@@ -1,9 +1,11 @@
 package yeowoo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import tasks.TaskList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
     @Test
     public void loadTest() throws MissingDescriptionException, InvalidTaskException {
