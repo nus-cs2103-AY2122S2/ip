@@ -35,6 +35,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //Solution below adapted from
+        //https://stackoverflow.com/questions/45258138/round-corners-in-java-fx-pane
         dialog.setText(text);
         displayPicture.setImage(img);
         Rectangle clip = new Rectangle();

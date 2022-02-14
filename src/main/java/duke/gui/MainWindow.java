@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     *
      */
     @FXML
     private void handleUserInput() {
@@ -60,6 +61,9 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        //@@author zunedz-reused
+        //Reused from github.com/vishandi/ip
+        //  with minor modifications
         if (isExit) {
             TimerTask closingPlatform = new TimerTask() {
                 @Override
@@ -71,5 +75,6 @@ public class MainWindow extends AnchorPane {
             Timer timer = new Timer();
             timer.schedule(closingPlatform, DELAY);
         }
+        //@@author
     }
 }
