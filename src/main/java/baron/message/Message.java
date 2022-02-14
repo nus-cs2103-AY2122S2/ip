@@ -41,7 +41,7 @@ public class Message {
      * @return the message that warns that the description of a {@code TaskType} cannot be empty.
      */
     public static String generateEmptyDescMessage(TaskType taskType) {
-        return "The description of a " + taskType.getCommand() + " cannot be empty.";
+        return "The description of " + taskType.getCommand() + " cannot be empty.";
     }
 
     /**
