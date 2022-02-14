@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + "(at: " + this.date.format(formatter) + ")";
+        return super.toString() + "(at: " + this.date.format(formatter) + ")" + this.tag;
     }
 
 }

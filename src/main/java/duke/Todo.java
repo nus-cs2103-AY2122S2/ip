@@ -14,4 +14,9 @@ public class Todo extends Task {
         super(task, "T"
         );
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + this.tag;
+    }
 }

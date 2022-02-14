@@ -26,7 +26,7 @@ public class Task {
         this.type = type;
         this.date = LocalDate.now();
         this.time = this.date.toString();
-        this.tag = "";
+        this.tag = " ";
     }
 
     /**
@@ -43,6 +43,7 @@ public class Task {
         this.time = time;
         String timeArr[] = time.split(" ");
         this.date = LocalDate.parse(timeArr[1]);
+        this.tag = " ";
     }
 
     /**
@@ -95,7 +96,7 @@ public class Task {
     }
 
     public void untag() {
-        this.tag = "";
+        this.tag = " ";
     }
 
     /**
@@ -106,9 +107,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[" + this.type + "] [X] " + this.task + "   " + this.tag;
+            return "[" + this.type + "] [X] " + this.task + "   ";
         } else {
-            return "[" + this.type + "] [ ] " + this.task + "   " + this.tag;
+            return "[" + this.type + "] [ ] " + this.task + "   ";
         }
     }
 }
