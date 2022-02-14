@@ -1,6 +1,7 @@
 package sana.command;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import sana.TaskList;
 import sana.exception.IncompatibleTaskException;
@@ -55,6 +56,8 @@ public class UpdateCommand extends Command {
             return e.getMessage();
         } catch (NumberFormatException e) {
             return sanaResponse.taskNumberFormatError();
+        } catch (DateTimeParseException e) {
+            return sanaResponse.dateFormatError();
         }
     }
 }

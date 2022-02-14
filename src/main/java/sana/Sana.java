@@ -14,9 +14,6 @@ import sana.exception.UnknownCommandException;
 
 /**
  * Sana is a BIG program!
- *
- * @author  Jan Alfenson Tan
- * @version 8.0
  */
 public class Sana {
 

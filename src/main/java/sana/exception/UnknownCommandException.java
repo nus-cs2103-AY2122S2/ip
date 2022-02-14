@@ -3,9 +3,6 @@ package sana.exception;
 /**
  * This class represents the sana.exception thrown by Sana when she receives
  * an unknown command
- *
- * @author Jan
- * @version 1.0
  */
 public class UnknownCommandException extends SanaException {
     /** The message Sana says when she receives an unknown command */
