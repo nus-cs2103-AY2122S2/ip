@@ -7,7 +7,7 @@ Start talking to **ENCIK NOW!**
 
 ## Starting the App
 1. Ensure you have Java 11 installed.
-2. Download **ENCIK** from [HERE](https://github.com/nus-cs2103-AY2122S2/ip).
+2. Download **ENCIK** from [HERE](https://github.com/arcornior/ip/releases).
 3. Save **ENCIK** in a directory of your choosing.
 4. Run **ENCIK** with  `java -jar duke.jar`.
 5. Add your task!
