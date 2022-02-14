@@ -43,7 +43,10 @@ public class ListCommand extends Command {
             reply.append(ui.preListReply() + "\n");
         }
         for (int i = 1; i <= tasks.size(); i++) {
-            reply.append(ui.say(String.format("\t %o . %s\n", i, tasks.getTask(i - 1).printStatus())));
+            if (i == 1) {
+                reply.append("\n");
+            }
+            reply.append(ui.say(String.format("%o. %s\n", i, tasks.getTask(i - 1).printStatus())));
         }
         reply.append(ui.postListFace());
         return reply.toString();

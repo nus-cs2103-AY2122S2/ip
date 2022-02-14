@@ -24,10 +24,9 @@ public class PriorityCommand extends Command {
         Task current = tasks.getTask(index);
         current.setTaskPriority(priority);
         StringBuilder reply = new StringBuilder("Bob: The following task's priority has been set to ")
-                .append("\t")
                 .append(priority.toUpperCase())
                 .append("!\n")
-                .append(current.printStatus());
+                .append("\t" + current.printStatus());
         store.updateStore(tasks);
         return reply.toString();
     }

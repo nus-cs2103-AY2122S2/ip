@@ -41,13 +41,13 @@ public class PriorityListCommand extends ListCommand {
                 continue;
             }
             if (i != 3) {
-                reply.append("\t" + Task.Priority.values()[i].name() + "\n");
+                reply.append("\n" + Task.Priority.values()[i].name() + "\n");
             } else {
-                reply.append("\t" + "NO PRIORITY\n");
+                reply.append("\n" + "NO PRIORITY\n");
             }
             List<Task> pList = priorityLists.get(i);
             pList.forEach(x -> {
-                reply.append(String.format("\t %o . %s\n", pList.indexOf(x) + 1,
+                reply.append(String.format("%o. %s\n", pList.indexOf(x) + 1,
                         x.printStatus()));
             });
         }
