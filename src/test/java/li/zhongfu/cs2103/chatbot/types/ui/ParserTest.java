@@ -11,6 +11,8 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import li.zhongfu.cs2103.chatbot.types.parser.Parser;
+
 
 public class ParserTest {
     private Parser parser;

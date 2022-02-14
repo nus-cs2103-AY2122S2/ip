@@ -1,4 +1,4 @@
-package li.zhongfu.cs2103.chatbot.types.ui;
+package li.zhongfu.cs2103.chatbot.types.parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +30,7 @@ public class Parser {
 
     /**
      * Creates a new Parser instance that uses the given DateTimeFormatter to parse date-time strings.
-     * 
+     *
      * @param dateTimeFormatter DateTimeFormatter to be used for parsing date-time strings
      */
     public Parser(DateTimeFormatter dateTimeFormatter) {
@@ -79,10 +79,21 @@ public class Parser {
         return args;
     }
 
+    public ParserResult parseInput(String input) {
+        String[] parts = input.split("\\s+", 2); // split into command and args
+        String cmd = parts[0];
+        if (parts.length == 1) { // only command
+            return new ParserResult(cmd, new HashMap<>());
+        } else { // length is 2
+            Map<String, String> args = this.parseArgString(parts[1]);
+            return new ParserResult(cmd, args);
+        }
+    }
+
     // er, probably not the best place for this, but whatever
     /**
      * Parses a LocalDateTime from a given date-time string.
-     * 
+     *
      * @param dateTimeString a string containing a date and time to be parsed
      * @return a parsed date/time in the form of a LocalDateTime instances
      * @throws DateTimeParseException if dateTimeString contains an unrecognized date-time format
