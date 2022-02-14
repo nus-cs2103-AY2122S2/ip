@@ -15,3 +15,13 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# the saved lists
+/data/saved-taskList.txt
+/data/
+
+# Just incase any class files are outside of the /out folder
+*.class
+
+# ignore .jar files
+*.jar

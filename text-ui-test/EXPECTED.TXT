@@ -1,7 +1,185 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Activating Cat Translator 2000...
+Waking chatbots.Fluffers up...
+
+Meow! (Hello!)
+    /\_____/\
+   /  o   o  \
+  ( ==  ^  == )
+   )         (
+  (           )
+ ( (  )   (  ) )
+(__(__)___(__)__)
+Meow! (I don't understand what you said!)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+
+------------------
+Meow! (There is no task 1!)
+
+Meow! (There is no task 2!)
+
+Meow! (There is no task 3!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (Okay, added this task:
+[T][ ] sample task
+There are 1 tasks in the list now.)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing spaces in the command!)
+
+Meow! (Okay, added this task:
+[D][ ] task (by: end of year)
+There are 2 tasks in the list now.)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing spaces in the command!)
+
+Meow! (Okay, added this task:
+[E][ ] event (at: 9 Aug)
+There are 3 tasks in the list now.)
+
+Meow! (Okay, this task is done:
+[T][X] sample task)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [D][ ] task (by: end of year)
+3. [E][ ] event (at: 9 Aug)
+------------------
+Meow! (Okay, this task is done:
+[D][X] task (by: end of year))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [D][X] task (by: end of year)
+3. [E][ ] event (at: 9 Aug)
+------------------
+Meow! (Okay, this task is done:
+[E][X] event (at: 9 Aug))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [D][X] task (by: end of year)
+3. [E][X] event (at: 9 Aug)
+------------------
+Meow! (Okay, this task needs to be done:
+[D][ ] task (by: end of year))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [D][ ] task (by: end of year)
+3. [E][X] event (at: 9 Aug)
+------------------
+Meow! (Okay, this task needs to be done:
+[T][ ] sample task)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][ ] sample task
+2. [D][ ] task (by: end of year)
+3. [E][X] event (at: 9 Aug)
+------------------
+Meow! (Okay, this task needs to be done:
+[E][ ] event (at: 9 Aug))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][ ] sample task
+2. [D][ ] task (by: end of year)
+3. [E][ ] event (at: 9 Aug)
+------------------
+Meow! (There is no task 0!)
+
+Meow! (There is no task -1!)
+
+Meow! (There is no task 0!)
+
+Meow! (Okay, this task is done:
+[T][X] sample task)
+
+Meow! (Okay, this task is done:
+[E][X] event (at: 9 Aug))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [D][ ] task (by: end of year)
+3. [E][X] event (at: 9 Aug)
+------------------
+Meow! (Okay, I've removed this task:
+[D][ ] task (by: end of year)
+There are 2 tasks left in the list!)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [E][X] event (at: 9 Aug)
+------------------
+Meow! (Okay, this task needs to be done:
+[E][ ] event (at: 9 Aug))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [E][ ] event (at: 9 Aug)
+------------------
+Meow! (Okay, I've removed this task:
+[T][X] sample task
+There are 1 tasks left in the list!)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [E][ ] event (at: 9 Aug)
+------------------
+Meooow~ (Bye bye! See you again next time!)
+      |\      _,,,---,,_
+ZZZzz /,`.-'`'    -.  ;-;;,_
+     |,4-  ) )-,_. ,\ (  `'-'
+    '---''(_/--'  `-'\_)
 

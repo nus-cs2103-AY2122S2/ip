@@ -1,0 +1,51 @@
+hi
+list
+mark 1
+unmark 2
+delete 3
+todo
+todo 
+todo sample task
+deadline
+deadline 
+deadline no by here
+deadline  /by 
+deadline a /by 
+deadline  /by a
+deadline a/by
+deadline a/byb
+deadline task /by end of year
+event
+event 
+event no at here
+event  /at 
+event a /at 
+event  /at a
+event a/at
+event a/atb
+event event /at 9 Aug
+mark 1
+list
+mark 2
+list
+mark 3
+list
+unmark 2
+list
+unmark 1
+list
+unmark 3
+list
+mark 0
+unmark -1
+delete 0
+mark 1
+mark 3
+list
+delete 2
+list
+unmark 2
+list
+delete 1
+list
+bye
