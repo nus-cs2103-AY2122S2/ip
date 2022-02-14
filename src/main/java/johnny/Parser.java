@@ -6,7 +6,7 @@ public class Parser {
 
     private String input;
 
-    public static String TERMINATE = "TERMINATE";
+    public static String SAVE = "SAVE";
     public static String PRINT_LIST = "PRINT_LIST";
     public static String MARK = "MARK";
     public static String UNMARK = "UNMARK";
@@ -43,8 +43,8 @@ public class Parser {
         String[] tags = input.split(" ", 2);
         ArrayList<String> result = new ArrayList<>();
 
-        if(input.equals("bye")) {
-            result.add(TERMINATE);
+        if(input.equals("save")) {
+            result.add(SAVE);
         } else if(input.equals("list")) {
             result.add(PRINT_LIST);
         } else if(input.length() >= 5 && input.substring(0, 5).equals("mark ") && isNumeric(input.substring(5))) {

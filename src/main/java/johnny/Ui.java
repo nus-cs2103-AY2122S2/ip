@@ -15,74 +15,78 @@ public class Ui {
         this.store = store;
     }
 
-    public void handleUi() throws InvalidArgumentsException, EmptyDescriptionException, NoDateException, DateTimeException{
-        System.out.println("Hello! I'm Johnny \n" + "What can I do for you?");
-        Scanner sc = new Scanner(System.in);
-        String input;
-        while(true) {
-            input = sc.nextLine();
-            Parser parser = new Parser(input);
-            ArrayList<String> parseOutput = parser.parse();
-            String commandTag = parseOutput.get(0);
+    public String handleUi(String input) throws InvalidArgumentsException, EmptyDescriptionException, NoDateException, DateTimeException{
+//        System.out.println("Hello! I'm Johnny \n" + "What can I do for you?");
+//        Scanner sc = new Scanner(System.in);
 
-            if(commandTag.equals(Parser.TERMINATE)) {
-                tasks.writeToFile(this.store);
+//        input = sc.nextLine();
+        Parser parser = new Parser(input);
+        ArrayList<String> parseOutput = parser.parse();
+        String commandTag = parseOutput.get(0);
+        String output;
 
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
-            else if(commandTag.equals(Parser.PRINT_LIST)) {
-                System.out.println("Here are the tasks in your list:");
-                tasks.printList();
-            }
-            else if(commandTag.equals(Parser.MARK)) {
-                tasks.mark(Integer.parseInt(parseOutput.get(1)));
-            }
-            else if(commandTag.equals(Parser.UNMARK)) {
-                tasks.unmark(Integer.parseInt(parseOutput.get(1)));
-            }
-            else if(commandTag.equals(Parser.DELETE)) {
-                tasks.delete(Integer.parseInt(parseOutput.get(1)));
-            }
-            else if(commandTag.equals(Parser.FIND_EVENT)) {
-                System.out.println("Here are the matching tasks in your list:");
-                tasks.searchEventAndPrint(parseOutput.get(1));
-            }
-            else if(commandTag.equals(Parser.ADD_TODO)) {
+        if(commandTag.equals(Parser.SAVE)) {
+            tasks.writeToFile(this.store);
 
-                Task newTask = new Todo(parseOutput.get(1), false);
-                tasks.add(newTask);
-
-                System.out.println("Got it! I've added this task:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + tasks.getCount() + " tasks in your list.");
-            }
-            else if(commandTag.equals(Parser.ADD_DEADLINE)) {
-
-                Task newTask = new Deadline(parseOutput.get(1),
-                        LocalDate.parse(parseOutput.get(2)), false);
-
-                tasks.add(newTask);
-
-                System.out.println("Got it! I've added this task:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + tasks.getCount() + " tasks in your list.");
-            }
-            else if(commandTag.equals(Parser.ADD_EVENT)) {
-
-                Task newTask = new Event(parseOutput.get(1),
-                        LocalDate.parse(parseOutput.get(2)), false);
-
-                tasks.add(newTask);
-
-                System.out.println("Got it! I've added this task:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + tasks.getCount() + " tasks in your list.");
-            }
-            else {
-                throw new InvalidArgumentsException(input);
-            }
+            output = "Your changes have been saved!";
+            //break;
         }
+        else if(commandTag.equals(Parser.PRINT_LIST)) {
+            output = "Here are the tasks in your list:\n"
+                + tasks.getList();
+        }
+        else if(commandTag.equals(Parser.MARK)) {
+            int index = Integer.parseInt(parseOutput.get(1));
+            tasks.mark(index);
+            output = "Nice! I've marked this task as done:\n" +
+                    tasks.get(index - 1).toString() + "\n";
+        }
+        else if(commandTag.equals(Parser.UNMARK)) {
+            int index = Integer.parseInt(parseOutput.get(1));
+            tasks.unmark(index);
+            output = "OK, I've marked this task as not done yet:\n" +
+                    tasks.get(index - 1).toString() + "\n";
+        }
+        else if(commandTag.equals(Parser.DELETE)) {
+            int index = Integer.parseInt(parseOutput.get(1));
+            tasks.delete(index);
+            output = "Noted. I've removed this task:\n" +
+                    tasks.get(index - 1).toString() + "\n";
+        }
+        else if(commandTag.equals(Parser.FIND_EVENT)) {
+            String matches = tasks.searchEvent(parseOutput.get(1));
+            output = "Here are the matching tasks in your list:\n" + matches;
+        }
+        else if(commandTag.equals(Parser.ADD_TODO)) {
+            Task newTask = new Todo(parseOutput.get(1), false);
+            tasks.add(newTask);
+            output = "Got it! I've added this task:\n" + newTask + "\n" +
+                    "Now you have " + tasks.getCount() + " tasks in your list.\n";
+        }
+        else if(commandTag.equals(Parser.ADD_DEADLINE)) {
+
+            Task newTask = new Deadline(parseOutput.get(1),
+                    LocalDate.parse(parseOutput.get(2)), false);
+
+            tasks.add(newTask);
+
+            output = "Got it! I've added this task:\n" + newTask + "\n" +
+                    "Now you have " + tasks.getCount() + " tasks in your list.\n";
+        }
+        else if(commandTag.equals(Parser.ADD_EVENT)) {
+
+            Task newTask = new Event(parseOutput.get(1),
+                    LocalDate.parse(parseOutput.get(2)), false);
+
+            tasks.add(newTask);
+
+            output = "Got it! I've added this task:\n" + newTask + "\n" +
+                    "Now you have " + tasks.getCount() + " tasks in your list.\n";
+        }
+        else {
+            output = "Sorry, I didn't quite get that";
+        }
+        return output;
     }
 }
 

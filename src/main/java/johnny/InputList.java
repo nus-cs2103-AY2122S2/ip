@@ -24,11 +24,13 @@ public class InputList {
      * Prints the current list of tasks
      *
      */
-    public void printList() {
+
+    public String getList() {
+        String output = "";
         for(int i = 0; i < tasks.size(); i++) {
-            System.out.print(i + 1);
-            System.out.println(". " + tasks.get(i).toString());
+            output += String.valueOf(i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
+        return output;
     }
 
     /**
@@ -46,8 +48,6 @@ public class InputList {
      * @param index  Index of task to delete
      */
     public void delete(int index) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.get(index - 1).toString());
         tasks.remove(index - 1);
     }
 
@@ -59,8 +59,10 @@ public class InputList {
      */
     public void mark(int index) {
         tasks.get(index - 1).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.get(index - 1).toString());
+    }
+
+    public Task get(int index) {
+        return tasks.get(index);
     }
 
     /**
@@ -71,17 +73,16 @@ public class InputList {
      */
     public void unmark(int index) {
         tasks.get(index - 1).markAsUndone();
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(tasks.get(index - 1).toString());
     }
 
-    public void searchEventAndPrint(String searchString) {
+    public String searchEvent(String searchString) {
+        String out = "";
         for(int i = 0; i < tasks.size(); i++) {
             if(tasks.get(i).getDescription().contains(searchString)) {
-                System.out.print(i + 1);
-                System.out.println(". " + tasks.get(i).toString());
+                out += String.valueOf(i + 1) + ". " + tasks.get(i).toString() + "\n";
             }
         }
+        return out;
     }
 
     /**
