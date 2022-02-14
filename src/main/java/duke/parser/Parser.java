@@ -10,7 +10,7 @@ import duke.exception.DukeWrongInputFormatException;
 public class Parser {
 
     /**
-     * Parse the command given by the user.
+     * Parses the command given by the user.
      *
      * @param command Command given by user.
      * @return duke.command.Command based on what the user gave.
