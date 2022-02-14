@@ -5,21 +5,23 @@ import java.time.format.DateTimeFormatter;
 /**
  * Task Parent Class that all subtasks are expected to follow
  */
-public class Task implements Comparable<Task> {
+public abstract class Task implements Comparable<Task> {
 
     protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
     private boolean isCompleted;
     private String description;
     private int priority;
+    private String type;
 
-    public Task(String description) {
-        this(description, false, 0);
+    public Task(String description, String type) {
+        this(description, false, 0, type);
     }
 
-    public Task(String description, boolean isCompleted, int priority) {
+    public Task(String description, boolean isCompleted, int priority, String type) {
         this.isCompleted = isCompleted;
         this.description = description;
         this.priority = priority;
+        this.type = type;
     }
 
     public void mark() {
@@ -56,12 +58,12 @@ public class Task implements Comparable<Task> {
      * @return A string representation of the task to be formatted for the save file
      */
     public String toFile() {
-        return description + "\t" + isCompleted + "\t" + priority;
+        return type + "\t" + description + "\t" + isCompleted + "\t" + priority;
     }
 
     @Override
     public String toString() {
-        return "[" + priority + "][" + getCompleted() + "] " + description;
+        return "[" + type + "][" + priority + "][" + getCompleted() + "] " + description;
     }
 
     /**

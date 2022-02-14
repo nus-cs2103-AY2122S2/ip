@@ -5,21 +5,13 @@ package seedu.task;
  */
 public class Todo extends Task {
 
+    private static final String TYPE = "T";
+
     public Todo(String description) {
-        super(description);
+        super(description, TYPE);
     }
 
     public Todo(String description, boolean isCompleted, int priority) {
-        super(description, isCompleted, priority);
-    }
-
-    @Override
-    public String toFile() {
-        return "T\t" + super.toFile();
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
+        super(description, isCompleted, priority, TYPE);
     }
 }
