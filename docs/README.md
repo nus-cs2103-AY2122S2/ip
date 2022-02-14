@@ -22,16 +22,17 @@ Creates Todo Type task with the specified name.
 Example of usage: 
 
 `todo buy book`
+
 `todo go swimming`
 
 Expected outcome:
 
+```
 Jerry adds a Todo Task with the specified name.
 
 ```
-expected output
-```
 Example:
+
 ![](./assets/todo.png)
 
 ### `deadline` - Adds a Deadline Type Task
@@ -45,10 +46,9 @@ Example of usage:
 
 Expected outcome:
 
-Jerry adds a DeadlineTask with the specified name.
-
 ```
-expected output
+Jerry adds a DeadlineTask with the specified name.
 ```
 Example:
+
 ![](./assets/deadline.png)
