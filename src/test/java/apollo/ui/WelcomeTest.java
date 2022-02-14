@@ -6,40 +6,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalTime;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WelcomeTest {
-
-    private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    private static final PrintStream stdout = System.out;
-
-    @BeforeAll
-    static void setUp() {
-        System.setOut(new PrintStream(outputStream));
-    }
-
-    @Test
-    void printLogo() {
-        String logo = "Hello from\n"
-                + "\t   @@@%      @@@@@@*.      :@@@@@.    %@@@@@+    @@@@@@        #@@@@=       \n"
-                + "\t   @@@@=     @@@@@@@@@    @@@@@@@@#   @@@@@@*    @@@@@@.     -@@@@@@@@      \n"
-                + "\t   @@@@@     @@@@@@@@@*  %@@@@@@@@@+  @@@@@@*    @@@@@@.    .@@@@@@@@@@     \n"
-                + "\t  #@@@@@     +@@@@+@@@@  @@@@%+%@@@@   @@@@       @@@@      @@@@@**@@@@=    \n"
-                + "\t  @@@@@@+     %@@@  @@@ =@@@#   @@@@:  @@@@       @@@@      @@@@    @@@@    \n"
-                + "\t  @@@.@@@     #@@@ @@@@ %@@@     @@@#  @@@@       @@@%      @@@*    @@@@    \n"
-                + "\t .@@@ @@@     *@@@@@@@= @@@@     @@@@  @@@@       @@@#      @@@-    @@@@    \n"
-                + "\t =@@@@@@@*    *@@@@@@%  @@@@     @@@@  @@@@       @@@*      @@@-    @@@@    \n"
-                + "\t @@@@@@@@@    +@@@@%    #@@@.    @@@+  @@@@  @@%  @@@+  @@* @@@@    @@@@    \n"
-                + "\t @@@-:-@@@.   +@@@      -@@@@   @@@@   @@@@  @@@  @@@=  @@% @@@@*  *@@@%    \n"
-                + "\t @@@.  @@@#   +@@@       @@@@@@@@@@@  -@@@@-=@@@ -@@@*-*@@% #@@@@@@@@@@.    \n"
-                + "\t@@@@@:@@@@@@ @@@@@@@     =@@@@@@@@@   @@@@@@@@@@ @@@@@@@@@%  @@@@@@@@@%     \n"
-                + "\t@@@@@-@@@@@@ @@@@@@@      =@@@@@@@-   @@@@@@@@@@ @@@@@@@@@%   @@@@@@@@      \n"
-                + "\t@%#*+:+%#*+= -=+++++        =%@%=     --======== --=======-    :*@@*.       \n";
-        Welcome.printLogo();
-        assertEquals(outputStream.toString(), logo.replace("\n", System.lineSeparator()));
-    }
 
     @Test
     void welcomeMessage_morning() {
@@ -95,10 +64,5 @@ public class WelcomeTest {
         assertEquals(nightLoad, Welcome.greet(true, night2));
         assertEquals(nightNoLoad, Welcome.greet(false, night1));
         assertEquals(nightNoLoad, Welcome.greet(false, night2));
-    }
-
-    @AfterAll
-    static void tearDown() {
-        System.setOut(stdout);
     }
 }

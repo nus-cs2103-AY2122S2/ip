@@ -1,7 +1,9 @@
 package apollo.commands;
 
+import static apollo.messages.Messages.NO_TASK_FOUND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import jdk.dynalink.NamedOperation;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +40,6 @@ class FindCommandTest {
     @Test
     void execute_noMatches_foundNothing() throws ApolloOutOfBoundsException {
         Command find = new FindCommand("noMatch");
-        String expected = "I could not find any related tasks. ";
-        assertEquals(expected, find.execute());
+        assertEquals(NO_TASK_FOUND, find.execute());
     }
 }

@@ -21,9 +21,10 @@ public class Apollo extends Application {
 
     private static TaskList taskList;
     private static Ui ui;
+    private static boolean isLoaded;
 
     /**
-     * Main method to start runnning the program.
+     * Starts running the program.
      *
      * @param args Arguments supplied to program (not used).
      */
@@ -33,11 +34,9 @@ public class Apollo extends Application {
     }
 
     /**
-     * Initialises the program and greets the user.
+     * Initialises the program
      */
     private static void initialise() {
-        ui = new Ui();
-        boolean isLoaded;
         try {
             taskList = Storage.load();
             isLoaded = true;
@@ -45,16 +44,15 @@ public class Apollo extends Application {
             taskList = new TaskList();
             isLoaded = false;
         }
-
         Command.setTaskList(taskList);
-        Welcome.printLogo();
-        ui.printMessage(Welcome.greet(isLoaded, LocalTime.now()));
     }
 
     /**
-     * Main response loop to run program while waiting for exit signal.
+     * Runs main response loop of the program while waiting for exit signal.
      */
     private static void run() {
+        ui = new Ui();
+        ui.printMessage(Welcome.getLogo() + Welcome.greet(isLoaded, LocalTime.now()));
         Command command = null;
         do {
             String userCommand = ui.getUserCommand();
@@ -68,7 +66,7 @@ public class Apollo extends Application {
         } while (!ExitCommand.isExit(command));
     }
 
-    public String getResponse(String userCommand) {
+    public static String getResponse(String userCommand) {
         try {
             Command command = new Parser().parseCommand(userCommand);
             String outcome = command.execute();
@@ -80,15 +78,9 @@ public class Apollo extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Gui gui = new Gui();
-        try {
-            taskList = Storage.load();
-        } catch (ApolloIoException e) {
-            taskList = new TaskList();
-        }
-
-        Command.setTaskList(taskList);
-        gui.start(primaryStage);
+        initialise();
+        gui.start(primaryStage, Welcome.greet(isLoaded, LocalTime.now()));
     }
 }

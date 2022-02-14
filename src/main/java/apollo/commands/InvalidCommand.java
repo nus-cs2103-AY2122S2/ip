@@ -1,5 +1,7 @@
 package apollo.commands;
 
+import static apollo.messages.Messages.INVALID_COMMAND;
+
 /**
  * Default destination for unknown commands.
  * Extends {@code Command} superclass.
@@ -13,6 +15,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public String execute() {
-        return "Apologies, I do not understand that. ";
+        return INVALID_COMMAND;
     }
 }

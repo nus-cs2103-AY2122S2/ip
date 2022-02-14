@@ -1,5 +1,9 @@
 package apollo.parser;
 
+import static apollo.messages.Messages.INSUFFICIENT_ARGUMENTS;
+import static apollo.messages.Messages.INVALID_DATETIME_FORMAT;
+import static apollo.messages.Messages.INVALID_INDEX;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -37,7 +41,7 @@ public class Parser {
             return LocalDateTime.parse(dateTimeString, FORMATTER);
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new ApolloIllegalArgumentException(
-                    "Please add date and time in this format: " + PATTERN);
+                    INVALID_DATETIME_FORMAT + PATTERN);
         }
     }
 
@@ -50,7 +54,7 @@ public class Parser {
      */
     private String[] parseArgs(String[] args) throws ApolloIllegalArgumentException {
         if (args.length < 2) {
-            throw new ApolloIllegalArgumentException("Insufficient Arguments. ");
+            throw new ApolloIllegalArgumentException(INSUFFICIENT_ARGUMENTS);
         }
 
         return args[1].split(" */(at|by) *", 2);
@@ -68,7 +72,7 @@ public class Parser {
         try {
             return Integer.parseInt(parseArgs(args)[0].trim()) - 1;
         } catch (NumberFormatException e) {
-            throw new ApolloIllegalArgumentException("Invalid index entered. ");
+            throw new ApolloIllegalArgumentException(INVALID_INDEX);
         }
     }
 

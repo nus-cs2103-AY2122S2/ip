@@ -1,5 +1,6 @@
 package apollo.commands;
 
+import static apollo.messages.Messages.EMPTY_TASKLIST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
@@ -40,7 +41,6 @@ public class ListCommandTest {
     @Test
     void execute_noTasks_printEmptyList() throws ApolloOutOfBoundsException {
         Command list = new ListCommand();
-        String expected = "You currently have no tasks. ";
-        assertEquals(expected, list.execute());
+        assertEquals(EMPTY_TASKLIST, list.execute());
     }
 }

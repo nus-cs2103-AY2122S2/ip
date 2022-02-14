@@ -1,5 +1,7 @@
 package apollo.commands;
 
+import static apollo.messages.Messages.EXIT_MESSAGE;
+
 /**
  * Signals for an exit.
  * Extends {@code Command} superclass.
@@ -13,7 +15,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute() {
-        return "See you next time. \nI am always available when you need me. ";
+        return EXIT_MESSAGE;
     }
 
     /**

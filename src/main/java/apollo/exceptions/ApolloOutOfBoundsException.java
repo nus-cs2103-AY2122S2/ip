@@ -1,6 +1,6 @@
 package apollo.exceptions;
 
-import static apollo.messages.Messages.OUT_OF_BOUNDS_EXCEPTION;
+import static apollo.messages.Messages.OUT_OF_BOUNDS;
 
 /**
  * Thrown when attempting to access indexes outside of bounds.
@@ -21,6 +21,6 @@ public class ApolloOutOfBoundsException extends ApolloException {
      * Constructor with default error message.
      */
     public ApolloOutOfBoundsException() {
-        this(OUT_OF_BOUNDS_EXCEPTION);
+        this(OUT_OF_BOUNDS);
     }
 }

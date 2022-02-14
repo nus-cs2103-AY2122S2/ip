@@ -1,5 +1,6 @@
 package apollo.commands;
 
+import static apollo.messages.Messages.EXIT_MESSAGE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,8 +14,7 @@ public class ExitCommandTest {
     @Test
     void execute() throws ApolloOutOfBoundsException {
         Command exit = new ExitCommand();
-        String expected = "See you next time. \nI am always available when you need me. ";
-        assertEquals(expected, exit.execute());
+        assertEquals(EXIT_MESSAGE, exit.execute());
     }
 
     @Test

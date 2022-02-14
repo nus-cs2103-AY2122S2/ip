@@ -1,5 +1,9 @@
 package apollo;
 
+import static apollo.messages.Messages.LOAD_ERROR;
+import static apollo.messages.Messages.SAVE_CREATE_ERROR;
+import static apollo.messages.Messages.SAVE_WRITE_ERROR;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -31,7 +35,7 @@ public class Storage {
                 Files.createFile(DATA_PATH);
             }
         } catch (IOException e) {
-            throw new ApolloIoException("Cannot create save. ");
+            throw new ApolloIoException(SAVE_CREATE_ERROR);
         }
     }
 
@@ -49,7 +53,7 @@ public class Storage {
                     new ObjectOutputStream(Files.newOutputStream(DATA_PATH));
             objStream.writeObject(taskList);
         } catch (IOException e) {
-            throw new ApolloIoException("Cannot write to save file. ");
+            throw new ApolloIoException(SAVE_WRITE_ERROR);
         }
     }
 
@@ -65,7 +69,7 @@ public class Storage {
                     new ObjectInputStream(Files.newInputStream(DATA_PATH));
             return (TaskList) objStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new ApolloIoException("Cannot load save file. ");
+            throw new ApolloIoException(LOAD_ERROR);
         }
     }
 }

@@ -43,7 +43,7 @@ public class Welcome {
     /**
      * Prints program logo.
      */
-    public static void printLogo() {
+    public static String getLogo() {
         String logo = "\t   @@@%      @@@@@@*.      :@@@@@.    %@@@@@+    @@@@@@        #@@@@=       \n"
                 + "\t   @@@@=     @@@@@@@@@    @@@@@@@@#   @@@@@@*    @@@@@@.     -@@@@@@@@      \n"
                 + "\t   @@@@@     @@@@@@@@@*  %@@@@@@@@@+  @@@@@@*    @@@@@@.    .@@@@@@@@@@     \n"
@@ -58,7 +58,7 @@ public class Welcome {
                 + "\t@@@@@:@@@@@@ @@@@@@@     =@@@@@@@@@   @@@@@@@@@@ @@@@@@@@@%  @@@@@@@@@%     \n"
                 + "\t@@@@@-@@@@@@ @@@@@@@      =@@@@@@@-   @@@@@@@@@@ @@@@@@@@@%   @@@@@@@@      \n"
                 + "\t@%#*+:+%#*+= -=+++++        =%@%=     --======== --=======-    :*@@*.       ";
-        System.out.println(("Hello from\n" + logo).replace("\n", LINE_FEED));
+        return ("Hello from\n" + logo).replace("\n", LINE_FEED);
     }
 
     /**

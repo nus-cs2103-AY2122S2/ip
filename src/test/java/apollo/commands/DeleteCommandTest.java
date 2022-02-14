@@ -1,5 +1,6 @@
 package apollo.commands;
 
+import static apollo.messages.Messages.OUT_OF_BOUNDS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -42,7 +43,6 @@ public class DeleteCommandTest {
             Command error = new DeleteCommand(4);
             error.execute();
         });
-        String errorExpected = "Index is not on the list. ";
-        assertEquals(errorExpected, exception.getMessage());
+        assertEquals(OUT_OF_BOUNDS, exception.getMessage());
     }
 }

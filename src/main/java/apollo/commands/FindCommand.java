@@ -1,5 +1,7 @@
 package apollo.commands;
 
+import static apollo.messages.Messages.NO_TASK_FOUND;
+
 /**
  * Finds a {@code Task} from the taskList that contains the keyword.
  * Extends {@code Command} superclass.
@@ -47,7 +49,7 @@ public class FindCommand extends Command {
         }
 
         if (index == 1) {
-            return "I could not find any related tasks. ";
+            return NO_TASK_FOUND;
         }
         return results.toString();
     }

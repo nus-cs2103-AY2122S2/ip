@@ -1,5 +1,7 @@
 package apollo.commands;
 
+import static apollo.messages.Messages.EMPTY_TASKLIST;
+
 /**
  * Lists {@code Tasks} in taskList.
  * Extends {@code Command} superclass.
@@ -28,7 +30,7 @@ public class ListCommand extends Command {
     @Override
     public String execute() {
         if (taskList.taskCount() == 0) {
-            return "You currently have no tasks. ";
+            return EMPTY_TASKLIST;
         }
 
         return String.format("These are your current tasks. %s",
