@@ -13,6 +13,8 @@ import duke.tasks.TaskList;
 public class FindCommand extends Command<String> {
     private TaskList list;
     private String[] echo;
+    private final String err = "Oh no! The description of find cannot be empty... Try again :)\n";
+    private String response = "Here are the matching tasks in your list:\n";
 
     /**
      * Constructor for find class to execute the finding of tasks with specific keywords.
@@ -33,28 +35,28 @@ public class FindCommand extends Command<String> {
      * @throws DukeException thrown when no findings
      */
     public String execute() throws DukeException {
-        String err = "Oh no! The description of find cannot be empty... Try again :)\n";
-        String response = "";
-        if (echo.length == 1) {
-            assert false : "The task to find is not specified";
-            throw new DukeException(err);
-        }
-        String description = echo[1];
-        if (description.isEmpty()) {
-            assert false : "The task to delete is not specified";
-            throw new DukeException(err);
-        }
+        checkValidity(echo.length == 1);
+        String keyword = echo[1];
+        checkValidity(keyword.isEmpty());
+        prepareResponse(keyword);
+        return response;
+    }
+    private void prepareResponse(String keyword) {
         int n = 1;
-        List<Task> filteredList = list.taskListToList().stream().filter(x -> x.toString().contains(description))
+        List<Task> filteredList = list.taskListToList().stream().filter(x -> x.toString().contains(keyword))
                 .collect(Collectors.toList());
-        response = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < filteredList.size(); i++) {
-            String taskDetail = filteredList.get(i).toString();
-            response = response + n + "." + taskDetail + "\n";
+        for (Task task : filteredList) {
+            String taskDetail = task.toString();
+            response += n + "." + taskDetail + "\n";
             n = n + 1;
 
         }
-        return response;
+    }
+    private void checkValidity(boolean bool) throws DukeException {
+        if (bool) {
+            assert false : "The task to find is not specified";
+            throw new DukeException(err);
+        }
     }
 
     /**

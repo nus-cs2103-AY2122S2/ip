@@ -15,6 +15,8 @@ public class AddTodoCommand extends Command<String> {
     private TaskList list;
     private String[] echo;
     private Storage storage;
+    private final String err = "Oh no! The description of todo cannot be empty... Try again :)\n";
+    private String response = "";
 
     /**
      * Constructor to initialise the adding of to do task.
@@ -37,27 +39,28 @@ public class AddTodoCommand extends Command<String> {
      * @throws DukeException thrown when to do cannot be created
      */
     public String execute() throws DukeException {
-        String err = "Oh no! The description of todo cannot be empty... Try again :)\n";
-        String response = "";
-        if (echo.length == 1) {
-            assert false : "The description for to do is empty";
-            throw new DukeException(err);
-        }
+        checkValidity(echo.length == 1);
         String description = echo[1];
-        if (description.isEmpty()) {
-            assert false : "The description for to do event is empty";
-            throw new DukeException(err);
-        }
+        checkValidity(description.isEmpty());
         Todo curr = new Todo(description);
         list.addTask(curr);
         response = Ui.showAddResponse(curr.toString(), list.getSize());
         assert response != null;
+        saveToFile(list);
+        return response;
+    }
+    private void checkValidity(boolean bool) throws DukeException {
+        if (bool) {
+            assert false : "The description for to do event is empty";
+            throw new DukeException(err);
+        }
+    }
+    private void saveToFile(TaskList list) {
         try {
             storage.writeToFile(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return response;
     }
 
     /**

@@ -15,6 +15,12 @@ public class UnmarkCommand extends Command<String> {
     private final TaskList list;
     private final String[] echo;
     private final Storage storage;
+    private final String err = "Oh no! Which task do you wish to unmark? Try again :)\n";
+    private final String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
+    private final String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";
+    private String response = "";
+    private int targetIndex;
+    private int size;
 
     /**
      * Constructor for this class to know where to unmark.
@@ -28,6 +34,7 @@ public class UnmarkCommand extends Command<String> {
         this.list = list;
         this.echo = echo;
         this.storage = storage;
+        this.size = list.getSize();
     }
 
     /**
@@ -36,27 +43,15 @@ public class UnmarkCommand extends Command<String> {
      * @throws DukeException thrown when the input format is wrong
      */
     public String execute() throws DukeException {
-        String err = "Oh no! Which task do you wish to unmark? Try again :)\n";
-        String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
-        String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";
-        String response = "";
-        int targetIndex;
-        int size = list.getSize();
-        if (echo.length == 1) {
-            assert false : "Task to unmark is not specified";
-            throw new DukeException(err);
-        }
+        checkValidity(echo.length == 1);
         String taskNum = echo[1];
-        if (taskNum.isEmpty()) {
-            assert false : "Task to unmark is not specified";
-            throw new DukeException(err);
-        }
-        try {
-            targetIndex = Integer.parseInt(taskNum);
-        } catch (Exception e) {
-            assert false : "Task to unmark is not specified in words";
-            throw new DukeException(wrongFormat);
-        }
+        checkValidity(taskNum.isEmpty());
+        setTargetIndex(taskNum);
+        unmarkTaskIndex();
+        saveToFile(list);
+        return response;
+    }
+    private void unmarkTaskIndex() throws DukeException {
         if (targetIndex > size || targetIndex <= 0) {
             assert false : "Task to unmark is not in list";
             throw new DukeException(wrongNumber);
@@ -69,12 +64,27 @@ public class UnmarkCommand extends Command<String> {
             response = Ui.showUnmarkRes(status, description);
             assert response != null;
         }
+    }
+    private void setTargetIndex(String taskNum) throws DukeException {
+        try {
+            targetIndex = Integer.parseInt(taskNum);
+        } catch (Exception e) {
+            assert false : "Task to unmark is not specified in words";
+            throw new DukeException(wrongFormat);
+        }
+    }
+    private void checkValidity(boolean bool) throws DukeException {
+        if (bool) {
+            assert false : "Task to unmark is not specified";
+            throw new DukeException(err);
+        }
+    }
+    private void saveToFile(TaskList list) {
         try {
             storage.writeToFile(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return response;
     }
 
     /**

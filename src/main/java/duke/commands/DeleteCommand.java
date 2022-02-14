@@ -15,6 +15,12 @@ public class DeleteCommand extends Command<String> {
     private TaskList list;
     private String[] echo;
     private Storage storage;
+    private final String err = "Oh no! Which task do you wish to delete? Try again :)\n";
+    private final String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
+    private final String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";
+    private String response = "";
+    private int targetIndex;
+    private int size;
 
     /**
      * Constructor that initialises this command to run.
@@ -24,10 +30,11 @@ public class DeleteCommand extends Command<String> {
      * @param storage store of which list to delete from
      * @throws DukeException
      */
-    public DeleteCommand(TaskList list, String[] echo, Storage storage) throws DukeException {
+    public DeleteCommand(TaskList list, String[] echo, Storage storage) {
         this.list = list;
         this.echo = echo;
         this.storage = storage;
+        this.size = list.getSize();
     }
 
     /**
@@ -36,27 +43,15 @@ public class DeleteCommand extends Command<String> {
      * @throws DukeException when the task to delete cannot be found
      */
     public String execute() throws DukeException {
-        String err = "Oh no! Which task do you wish to delete? Try again :)\n";
-        String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
-        String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";
-        String response = "";
-        int targetIndex;
-        int size = list.getSize();
-        if (echo.length == 1) {
-            assert false : "The task to delete is not specified";
-            throw new DukeException(err);
-        }
+        checkValidity(echo.length == 1);
         String taskNum = echo[1];
-        if (taskNum.isEmpty()) {
-            assert false : "The task to delete is not specified";
-            throw new DukeException(err);
-        }
-        try {
-            targetIndex = Integer.parseInt(taskNum);
-        } catch (Exception e) {
-            assert false : "The task to delete is not specified in words";
-            throw new DukeException(wrongFormat);
-        }
+        checkValidity(taskNum.isEmpty());
+        setTargetIndex(taskNum);
+        deleteTaskIndex();
+        saveToFile(list);
+        return response;
+    }
+    private void deleteTaskIndex() throws DukeException {
         if (targetIndex > size || targetIndex <= 0) {
             assert false : "The task to delete is not present";
             throw new DukeException(wrongNumber);
@@ -66,12 +61,27 @@ public class DeleteCommand extends Command<String> {
             response = Ui.showDeleteResponse(curr.toString(), size - 1);
             assert response != null;
         }
+    }
+    private void setTargetIndex(String taskNum) throws DukeException {
+        try {
+            targetIndex = Integer.parseInt(taskNum);
+        } catch (Exception e) {
+            assert false : "The task to delete is not specified in words";
+            throw new DukeException(wrongFormat);
+        }
+    }
+    private void checkValidity(boolean bool) throws DukeException {
+        if (bool) {
+            assert false : "The task to delete is not specified";
+            throw new DukeException(err);
+        }
+    }
+    private void saveToFile(TaskList list) {
         try {
             storage.writeToFile(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return response;
     }
 
     /**
