@@ -26,15 +26,27 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private DialogBox(String text, Image img, Boolean isDuke) {
+        if (isDuke) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+                fxmlLoader.setController(this);
+                fxmlLoader.setRoot(this);
+                fxmlLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBoxUser.fxml"));
+                fxmlLoader.setController(this);
+                fxmlLoader.setRoot(this);
+                fxmlLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
 
         dialog.setText(text);
         displayPicture.setImage(img);
@@ -51,12 +63,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String l, Image iv) {
-        var userDialogBox = new DialogBox(l, iv);
+        var userDialogBox = new DialogBox(l, iv, false);
         return userDialogBox;
     }
 
     public static DialogBox getDukeDialog(String l, Image iv) {
-        var dukeDialogBox = new DialogBox(l, iv);
+        var dukeDialogBox = new DialogBox(l, iv, true);
         dukeDialogBox.flip();
         dukeDialogBox.setMinHeight(Control.USE_PREF_SIZE);
         return dukeDialogBox;

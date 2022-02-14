@@ -39,8 +39,9 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Obtain Duke's response per users provided instruction
+     * @param userTaskString
+     * @return string representing Dukes' response
      */
     public String getResponse(String userTaskString) {
         String dukeResponse = null;

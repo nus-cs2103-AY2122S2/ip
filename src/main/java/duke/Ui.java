@@ -8,7 +8,7 @@ public class Ui {
     /**
      * Welcome Message when Duke Starts up
      *
-     * @return Welcome message
+     * @return string of the welcome message
      */
     public static String printWelcomeMessage() {
         Quote quoteOfTheDay = new Quote();
@@ -42,7 +42,7 @@ public class Ui {
      * Print statement for when system exits
      */
     public void printBye() {
-        this.print("Bye. Hope I've motivated you as much as I could have, and SMILE :D\nPlease close the window!");
+        this.print("Bye. Hope I've motivated you as much as I could have, and SMILE :D\nClosing this window now!");
     }
 
     /**
