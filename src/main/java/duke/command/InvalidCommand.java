@@ -23,7 +23,7 @@ public class InvalidCommand extends Command {
      * @throws DukeException
      */
     public void executeTask(TaskList taskList, FileManager fileManager) throws DukeException {
-        taskList.getUi().throwDukeException("Invalid Input! Please either add in a Todo, Deadline or Event!");
+        taskList.getUi().throwDukeException("Invalid Input!");
     }
 
 }

@@ -55,7 +55,7 @@ application { //Points to main application name
 
 shadowJar {
 //    archiveBaseName = "duke"
-    archiveBaseName = "duke.gui.Launcher"
+    archiveBaseName = "Duke"
     archiveClassifier = null
 }
 
