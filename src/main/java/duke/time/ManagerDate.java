@@ -31,7 +31,7 @@ public class ManagerDate {
     /**
      * Sole constructor.
      *
-     * @param date - date in DDMMYYYY format
+     * @param date in DDMMYYYY format
      */
     public ManagerDate(String date) {
         this.day = Integer.parseInt(date.substring(0, 2));
@@ -58,21 +58,20 @@ public class ManagerDate {
     }
 
     /**
-     * This method returns the validity of the date
+     * Returns the validity of the date
      *
-     * @return boolean - whether date is valid
+     * @return boolean whether date is valid
      */
     public boolean isDateValid() {
         return this.isValid;
     }
 
     /**
-     * This method returns a more user-friendly format of
-     * the input date. Date validity should be checked
-     * before using this method.
+     * Returns a more readable format of
+     * the input date.
      *
-     * @param date date in DDMMYYYY format
-     * @return boolean - whether date is valid
+     * @param date in DDMMYYYY format
+     * @return boolean whether date is valid
      */
     public static String formatDate(String date) {
         String[] nameOfMonths = {"January", "February", "March", "April",

@@ -1,27 +1,27 @@
 package duke.tasks;
 
 /**
- * The TaskToDo class contains basic attributes
- * and behaviours of a ToDo Task. It extends
+ * The ToDoTask class contains basic attributes
+ * and behaviours of a todo task. It extends
  * from the Task class.
  *
  * @author  Melvin Chan Zijun
  */
-public class TaskToDo extends Task {
+public class ToDoTask extends Task {
     /**
      * Sole constructor.
      *
-     * @param name - name of task
+     * @param name name of task
      */
-    public TaskToDo(String name) {
+    public ToDoTask(String name) {
         super(name);
     }
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the prefix of TaskToDo.
+     * Returns the prefix of todo task.
      *
-     * @return String - prefix of the TaskToDo
+     * @return String prefix of todo task
      */
     @Override
     public String getPrefix() {
@@ -30,9 +30,8 @@ public class TaskToDo extends Task {
 
     /**
      * Overrides the abstract method of its parent class.
-     * Always returns "00000000".
      *
-     * @return String - "00000000"
+     * @return String always returns "00000000"
      */
     @Override
     public String getDate() {
@@ -41,9 +40,8 @@ public class TaskToDo extends Task {
 
     /**
      * Overrides the abstract method of its parent class.
-     * Always returns "0000".
      *
-     * @return String - "0000"
+     * @return String always returns "0000
      */
     @Override
     public String getTime() {
@@ -53,7 +51,7 @@ public class TaskToDo extends Task {
     /**
      * Overrides the toString() method of the parent.
      *
-     * @return String - String of this TaskToDo
+     * @return String todo task in String form
      */
     @Override
     public String toString() {

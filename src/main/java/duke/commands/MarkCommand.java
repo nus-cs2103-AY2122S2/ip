@@ -6,14 +6,14 @@ import duke.system.TaskList;
 import duke.system.Ui;
 
 /**
- * The CommandUnmark class contains basic attributes and
- * behaviours of a Unmark Command.
+ * The MarkCommand class contains basic attributes and
+ * behaviours of a mark command.
  *
  * @author  Melvin Chan Zijun
  */
-public class CommandUnmark extends Command {
+public class MarkCommand extends Command {
     /**
-     * Index of Task to be unmarked
+     * Index of Task
      */
     private final int taskNum;
 
@@ -23,10 +23,10 @@ public class CommandUnmark extends Command {
      * the input from String into int. Checks whether
      * the String input can be parsed into an int.
      *
-     * @param str - raw task number input from the user
-     * @throws DukeException - str cannot be parsed into an int
+     * @param str raw task number input from the user
+     * @throws DukeException if str is not an int
      */
-    public CommandUnmark(String str) throws DukeException {
+    public MarkCommand(String str) throws DukeException {
         try {
             this.taskNum = Integer.parseInt(str);
         } catch (NumberFormatException e) {
@@ -36,21 +36,20 @@ public class CommandUnmark extends Command {
 
     /**
      * Overrides method in parent class.
-     * This method models the execution of an Unmark Command.
-     * The TaskList unmarks the task, the Storage saves it
-     * and the Ui lets the user know that the task was
-     * executed successfully.
+     * Executes the mark command, saves the data and returns
+     * a message to let user know that execution was
+     * successful.
      *
-     * @param tasks - for TaskList to unmark Task
-     * @param ui - to let user know that execution was successful
-     * @param storage - to save updated TaskList
+     * @param tasks duke's task list
+     * @param ui duke's ui
+     * @param storage duke's storage
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.unmark(this.taskNum);
+            tasks.mark(this.taskNum);
             storage.save(tasks);
-            return ui.showTaskUnmarked();
+            return ui.showTaskMarked();
         } catch (DukeException e) {
             return ui.showException(e);
         }

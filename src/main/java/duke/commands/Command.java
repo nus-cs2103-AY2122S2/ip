@@ -1,13 +1,12 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
 import duke.system.Storage;
 import duke.system.TaskList;
 import duke.system.Ui;
 
 /**
  * The abstract Command class contains basic
- * behaviours of a Command.
+ * behaviours of a command.
  *
  * @author  Melvin Chan Zijun
  */
@@ -19,17 +18,8 @@ public abstract class Command {
      * @param tasks - TaskList for tasks related methods
      * @param ui - Ui for I/O related methods
      * @param storage - Storage for data saving method
+     * @return String message informing user about the
+     *                success of execution
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
-     * Method that returns false for all Command objects,
-     * except of the CommandExit object.
-     *
-     * @return boolean - false unless this is a
-     *                   CommandExit object
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

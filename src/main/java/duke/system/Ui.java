@@ -8,7 +8,7 @@ import duke.exceptions.DukeException;
  */
 public class Ui {
     /**
-     * This method prints the greeting message.
+     * Returns greeting message.
      */
     public String showGreeting() {
         return "Hello! I'm Duke\n"
@@ -16,7 +16,7 @@ public class Ui {
     }
 
     /**
-     * This method prints a tutorial on the available commands.
+     * Returns a list of the available commands.
      */
     public String showTutorial() {
         return "Here are my features!\n"
@@ -41,38 +41,37 @@ public class Ui {
     }
 
     /**
-     * This method prints a confirmation that a task has been added.
+     * Returns message that the task has been added.
      */
     public String showTaskAdded() {
         return "Task has been added!";
     }
 
     /**
-     * This method prints a confirmation that a task has been marked.
+     * Returns message that the task has been marked.
      */
     public String showTaskMarked() {
         return "Task has been marked!";
     }
 
     /**
-     * This method prints a confirmation that a task has been unmarked.
+     * Returns message that the task has been unmarked.
      */
     public String showTaskUnmarked() {
         return "Task has been unmarked!";
     }
 
     /**
-     * This method prints a confirmation that a task has been deleted.
+     * Returns message that the task has been deleted.
      */
     public String showTaskDeleted() {
         return "Task has been deleted!";
     }
 
     /**
-     * This method prints all the tasks in the tasklist.
+     * Returns all the tasks in the task list.
      *
-     * @param tasks - list of tasks in tasklist consolidated
-     *                into a single String
+     * @param tasks duke's task list
      */
     public String showList(String tasks) {
         if (tasks.isBlank()) {
@@ -83,10 +82,9 @@ public class Ui {
     }
 
     /**
-     * This method prints all the tasks that contains the keyword from the user.
+     * Returns all the tasks that contains the keyword from the user.
      *
-     * @param tasks - list of tasks in tasklist containing keyword
-     *                from the user consolidated into a single String
+     * @param tasks list of tasks containing keyword
      */
     public String showResult(String tasks) {
         if (tasks.isBlank()) {
@@ -97,30 +95,30 @@ public class Ui {
     }
 
     /**
-     * This method prints a confirmation that the tasklist has been cleared.
+     * Returns message that the task list has been cleared.
      */
     public String showClear() {
         return "TaskList has been cleared!";
     }
 
     /**
-     * This method prints the message DukeException that has been thrown.
+     * Returns message from DukeException that has been thrown.
      *
-     * @param e - a DukeException that was thrown
+     * @param e a DukeException that was thrown
      */
     public String showException(DukeException e) {
-        return e.toString();
+        return e.getMessage();
     }
 
     /**
-     * This method prints the message that there was an error loading old data.
+     * Returns message that there was an error loading old data.
      */
     public String showLoadingError() {
         return "Error loading old data!";
     }
 
     /**
-     * This method prints the exit message.
+     * Returns the exit message.
      */
     public String showExit() {
         return "Bye! Hope to see you again soon!";

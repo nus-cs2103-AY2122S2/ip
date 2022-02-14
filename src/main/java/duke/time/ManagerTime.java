@@ -9,13 +9,13 @@ package duke.time;
  */
 public class ManagerTime {
     /**
-     * time in twenty-four-hour format
+     * Time in twenty-four-hour format
      */
-    private final String format24;
+    private final String format24hr;
     /**
-     * time in twelve-hour format
+     * Time in twelve-hour format
      */
-    private final String format12;
+    private final String format12hr;
     /**
      * flag to indicate whether time is valid
      */
@@ -24,7 +24,7 @@ public class ManagerTime {
     /**
      * Sole constructor.
      *
-     * @param time - time in HHMM format
+     * @param time in HHMM format
      */
     public ManagerTime(String time) {
         int hour = Integer.parseInt(time.substring(0, 2));
@@ -36,7 +36,7 @@ public class ManagerTime {
             }
         }
 
-        this.format24 = time;
+        this.format24hr = time;
 
         String postfix = "";
 
@@ -51,36 +51,36 @@ public class ManagerTime {
                 hour -= 12;
             }
 
-            this.format12 = String.format("%d:%02d%s", hour, minute, postfix);
+            this.format12hr = String.format("%d:%02d%s", hour, minute, postfix);
         } else {
-            this.format12 = "";
+            this.format12hr = "";
         }
     }
 
     /**
-     * This method returns the validity of the time
+     * Returns the validity of the time
      *
-     * @return boolean - whether time is valid
+     * @return boolean whether time is valid
      */
     public boolean isTimeValid() {
         return this.isValid;
     }
 
     /**
-     * This method returns the time in twelve-hour format
+     * Returns the time in twelve-hour format
      *
-     * @return time in twelve-hour format
+     * @return String time in twelve-hour format
      */
-    public String getFormat12() {
-        return this.format12;
+    public String getFormat12hr() {
+        return this.format12hr;
     }
 
     /**
-     * This method returns the time in twenty-four-hour format
+     * Returns the time in twenty-four-hour format
      *
-     * @return time in twenty-four-hour format
+     * @return String time in twenty-four-hour format
      */
-    public String getFormat24() {
-        return this.format24;
+    public String getFormat24hr() {
+        return this.format24hr;
     }
 }

@@ -6,14 +6,14 @@ import duke.system.TaskList;
 import duke.system.Ui;
 
 /**
- * The CommandDelete class contains basic attributes and
- * behaviours of a Delete Command.
+ * The DeleteCommand class contains basic attributes and
+ * behaviours of a delete command.
  *
  * @author  Melvin Chan Zijun
  */
-public class CommandDelete extends Command {
+public class DeleteCommand extends Command {
     /**
-     * Index of Task to be unmarked
+     * Index of task
      */
     private final int taskNum;
 
@@ -24,9 +24,9 @@ public class CommandDelete extends Command {
      * the String input can be parsed into an int.
      *
      * @param str - raw task number input from the user
-     * @throws DukeException - str cannot be parsed into an int
+     * @throws DukeException - if str is not an int
      */
-    public CommandDelete(String str) throws DukeException {
+    public DeleteCommand(String str) throws DukeException {
         try {
             this.taskNum = Integer.parseInt(str);
         } catch (NumberFormatException e) {
@@ -36,14 +36,15 @@ public class CommandDelete extends Command {
 
     /**
      * Overrides method in parent class.
-     * This method models the execution of a Delete Command.
-     * The TaskList deletes the task, the Storage saves it
-     * and the Ui lets the user know that the task was
-     * executed successfully.
+     * Executes the clear command, saves the data and returns
+     * a message to let user know that execution was
+     * successful.
      *
-     * @param tasks - for TaskList to delete Task
-     * @param ui - to let user know that execution was successful
-     * @param storage - to save updated TaskList
+     * @param tasks duke's task list
+     * @param ui duke's ui
+     * @param storage duke's storage
+     * @return String message of either successful or
+     *                unsuccessful execution
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

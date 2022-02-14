@@ -1,4 +1,4 @@
-package duke.system;
+package duke.javafx;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -52,16 +52,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns user dialog box
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.rgb(95,107, 118), new CornerRadii(35),
+        db.setBackground(new Background(new BackgroundFill(Color.rgb(95, 107, 118), new CornerRadii(35),
             new Insets(10, 10, 10, 50))));
         return db;
     }
 
+    /**
+     * Returns duke's dialog box
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.rgb(66,80, 97), new CornerRadii(35),
+        db.setBackground(new Background(new BackgroundFill(Color.rgb(66, 80, 97), new CornerRadii(35),
                 new Insets(10, 50, 10, 10))));
         db.flip();
         return db;

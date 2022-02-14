@@ -1,4 +1,4 @@
-package duke.system;
+package duke.javafx;
 
 import duke.main.Duke;
 import javafx.fxml.FXML;
@@ -8,8 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,12 +24,17 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialize main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        assert userImage != null;
+        assert dukeImage != null;
     }
 
     public void setDuke(Duke d) {
@@ -39,10 +42,9 @@ public class MainWindow extends AnchorPane {
 
         String greeting = duke.getGreeting();
         String tutorial = duke.getTutorial();
-        DialogBox dbGreeting = DialogBox.getUserDialog(greeting, dukeImage);
+        DialogBox dbGreeting = DialogBox.getDukeDialog(greeting, dukeImage);
         DialogBox dbTutorial = DialogBox.getDukeDialog(tutorial, dukeImage);
         dialogContainer.getChildren().addAll(dbGreeting, dbTutorial);
-
     }
 
     /**

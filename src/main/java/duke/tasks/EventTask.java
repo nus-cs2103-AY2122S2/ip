@@ -4,41 +4,41 @@ import duke.time.ManagerDate;
 import duke.time.ManagerTime;
 
 /**
- * The TaskEvent class contains basic attributes
- * and behaviours of a Event Task. It extends
+ * The EventTask class contains basic attributes
+ * and behaviours of an event task. It extends
  * from the Task class.
  *
  * @author  Melvin Chan Zijun
  */
-public class TaskEvent extends Task {
+public class EventTask extends Task {
     /**
-     * Date of Task.
+     * date of Task.
      */
     private final String date;
 
     /**
-     * Time of Task.
+     * time of Task.
      */
     private final String time;
 
     /**
      * Sole constructor.
      *
-     * @param name - name of task
-     * @param date - date of task
-     * @param time - time of task
+     * @param name name of task
+     * @param date date of task
+     * @param time time of task
      */
-    public TaskEvent(String name, String date, String time) {
+    public EventTask(String name, String date, String time) {
         super(name);
         this.date = date;
-        this.time = new ManagerTime(time).getFormat24();
+        this.time = new ManagerTime(time).getFormat24hr();
     }
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the prefix of TaskEvent.
+     * Returns the prefix of event task.
      *
-     * @return String - prefix of the TaskEvent
+     * @return String prefix of the TaskEvent
      */
     @Override
     public String getPrefix() {
@@ -47,9 +47,9 @@ public class TaskEvent extends Task {
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the date of TaskEvent.
+     * Returns the date of event task.
      *
-     * @return String - prefix of the TaskEvent
+     * @return String prefix of the TaskEvent
      */
     @Override
     public String getDate() {
@@ -58,9 +58,9 @@ public class TaskEvent extends Task {
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the time of TaskEvent.
+     * Returns the time of event task.
      *
-     * @return String - prefix of this TaskEvent
+     * @return String prefix of event task
      */
     @Override
     public String getTime() {
@@ -70,7 +70,7 @@ public class TaskEvent extends Task {
     /**
      * Overrides the toString() method of the parent.
      *
-     * @return String - String of this TaskEvent
+     * @return String event task in String form
      */
     @Override
     public String toString() {

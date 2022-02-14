@@ -22,7 +22,7 @@ import duke.tasks.TaskCreator;
  */
 public class Storage {
     /**
-     * The file path for the directory where the data will
+     * File path for the directory where the data will
      * be stored.
      */
     private final String filePath;
@@ -30,23 +30,22 @@ public class Storage {
     /**
      * Sole constructor.
      *
-     * @param filePath - the file path of the directory where
-     *                   the data of duke will be stored
+     * @param filePath the file path of the directory where
+     *                 the data of duke will be stored
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * This method creates the directory which the data from
+     * Creates the directory which the data from
      * the current session of duke will be stored in.
      * If directory already exists, user will be notified.
      * The text file tasks.txt will be created in the directory.
      *
-     * @return ArrayList - returns an arraylist of tasks loaded
-     *                           from tasks.txt
-     * @throws DukeException - if unsuccessful creation of directory
-     *                         or file
+     * @return ArrayList tasks loaded from data
+     * @throws DukeException if unsuccessful creation of directory
+     *                       or file
      */
     public ArrayList<Task> load() throws DukeException {
         File dukeFile = new File(this.filePath);
@@ -77,12 +76,11 @@ public class Storage {
      * This method reads the tasks.txt and adds the exisiting tasks
      * on the file into a arraylist and returns it.
      *
-     * @param filePath - the file path of the directory where
-     *                   the data of duke will be stored
-     * @return ArrayList - returns an arraylist of tasks loaded
-     *                           from tasks.txt
-     * @throws DukeException - if FileNotFoundException or
-     *                         IOException is caught
+     * @param filePath path of the directory where
+     *                 the data of duke will be stored
+     * @return ArrayList tasks loaded from data
+     * @throws DukeException if FileNotFoundException or
+     *                       IOException is caught
      */
     public ArrayList<Task> read(File filePath) throws DukeException {
         try {
@@ -92,8 +90,6 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
 
             while (numOfTasks != 0) {
-                // convert taskAsText into its string array form,
-                // with 4 elements, being the prefix, completedState, name and date
                 numOfTasks--;
                 String taskAsText = br.readLine();
                 Task currentTask = create(taskAsText);
@@ -111,10 +107,10 @@ public class Storage {
      * This method takes in the data form of a task
      * and returns the Task object.
      *
-     * @param taskAsData - data form of a task
-     * @return Task - returns the Task object
+     * @param taskAsData data form of a task
+     * @return Task new task object
      */
-    public Task create(String taskAsData) {
+    public Task create(String taskAsData) throws DukeException {
         String[] taskAsArray = taskAsData.split("/");
 
         char prefix = taskAsArray[0].charAt(0);
@@ -128,15 +124,21 @@ public class Storage {
                 name,
                 date,
                 time);
-        return taskCreator.createTask();
+        try {
+            Task task = taskCreator.createTask();
+            return task;
+        } catch (DukeException e) {
+            throw e;
+        }
+
+
     }
 
     /**
-     * This method overwrites the tasks.txt with the given
-     * list of tasks in String form.
+     * Overwrites saved data with new data of task list
      *
-     * @param tasks - the list of tasks in String form
-     * @throws DukeException - if IOException is caught
+     * @param tasks duke's task list
+     * @throws DukeException if IOException is caught
      */
     public void save(TaskList tasks) throws DukeException {
         try {

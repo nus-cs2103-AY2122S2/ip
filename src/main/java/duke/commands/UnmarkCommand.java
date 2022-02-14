@@ -6,14 +6,14 @@ import duke.system.TaskList;
 import duke.system.Ui;
 
 /**
- * The CommandMark class contains basic attributes and
- * behaviours of a Mark Command.
+ * The UnmarkCommand class contains basic attributes and
+ * behaviours of a unmark command.
  *
  * @author  Melvin Chan Zijun
  */
-public class CommandMark extends Command {
+public class UnmarkCommand extends Command {
     /**
-     * Index of Task to be marked
+     * Index of Task to be unmarked
      */
     private final int taskNum;
 
@@ -26,7 +26,7 @@ public class CommandMark extends Command {
      * @param str - raw task number input from the user
      * @throws DukeException - str cannot be parsed into an int
      */
-    public CommandMark(String str) throws DukeException {
+    public UnmarkCommand(String str) throws DukeException {
         try {
             this.taskNum = Integer.parseInt(str);
         } catch (NumberFormatException e) {
@@ -36,21 +36,20 @@ public class CommandMark extends Command {
 
     /**
      * Overrides method in parent class.
-     * This method models the execution of a Mark Command.
-     * The TaskList marks the task, the Storage saves it
-     * and the Ui lets the user know that the task was
-     * executed successfully.
+     * Executes the unmark command, saves the data and returns
+     * a message to let user know that execution was
+     * successful.
      *
-     * @param tasks - for TaskList to mark Task
-     * @param ui - to let user know that execution was successful
-     * @param storage - to save updated TaskList
+     * @param tasks duke's task list
+     * @param ui duke's ui
+     * @param storage duke's storage
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.mark(this.taskNum);
+            tasks.unmark(this.taskNum);
             storage.save(tasks);
-            return ui.showTaskMarked();
+            return ui.showTaskUnmarked();
         } catch (DukeException e) {
             return ui.showException(e);
         }

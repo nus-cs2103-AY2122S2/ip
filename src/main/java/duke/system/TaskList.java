@@ -81,22 +81,21 @@ public class TaskList {
     }
 
     /**
-     * This method returns the size of the arraylist
+     * Returns the size of the arraylist
      *
-     * @return int - size of arraylist
+     * @return int size of arraylist
      */
     public int getNumOfTasks() {
         return tasks.size();
     }
 
     /**
-     * This method consolidates all tasks in the arraylist into
-     * a String in the format to be displayed to the user.
+     * Consolidates all tasks in the task list into
+     * the format to be displayed to the user.
      *
-     * @return String - the String form of all the task
-     *                  in the list
-     * @throws DukeException - if arraylist is empty or
-     *                         i is out of range
+     * @return String all tasks in task list
+     * @throws DukeException if arraylist is empty or
+     *                       i is out of range
      */
     public String tasksAsString() throws DukeException {
         String taskAsString = "";
@@ -111,13 +110,12 @@ public class TaskList {
     }
 
     /**
-     * This method consolidates all tasks in the arraylist into
-     * a String in the format to be stored as data.
+     * Consolidates all tasks in the arraylist into
+     * the format to be stored as data.
      *
-     * @return String - the data form of all the task
-     *                  in the list
-     * @throws DukeException - if arraylist is empty or
-     *                         i is out of range
+     * @return String all tasks in task list in their data form
+     * @throws DukeException if arraylist is empty or
+     *                       i is out of range
      */
     public String taskAsData() throws DukeException {
         String taskAsData = "";
@@ -138,15 +136,12 @@ public class TaskList {
     }
 
     /**
-     * This method changes the completed state of a task from
-     * incomplete to complete. Only works for tasks that are
-     * incomplete.
+     * Marks an incomplete task as complete.
      *
-     * @param i - the acutal index of task in
-     *            the arraylist is i - 1
-     * @throws DukeException - if arraylist is empty,
-     *                         i is out of range or
-     *                         task is already marked
+     * @param i index of task as shown from the list command
+     * @throws DukeException if arraylist is empty,
+     *                       i is out of range or
+     *                       task is already marked
      */
     public void mark(int i) throws DukeException {
         if (this.isEmpty()) {
@@ -159,15 +154,12 @@ public class TaskList {
     }
 
     /**
-     * This method changes the completed state of a task from
-     * complete to incomplete. Only works for tasks that are
-     * complete.
+     * Marks a complete task as incomplete.
      *
-     * @param i - the acutal index of task in
-     *            the arraylist is i - 1
-     * @throws DukeException - if arraylist is empty,
-     *                         i is out of range or
-     *                         task is already unmarked
+     * @param i index of task as shown from the list command
+     * @throws DukeException if arraylist is empty,
+     *                       i is out of range or
+     *                       task is already unmarked
      */
     public void unmark(int i) throws DukeException {
         if (this.isEmpty()) {
@@ -184,13 +176,10 @@ public class TaskList {
      * that contains the given keyword into a String in the
      * format to be displayed to the user.
      *
-     * @param keyword - the tasks that contains the keyword
-     *                  in their name should be returned
-     * @return String - the String form of all the task
-     *                  in the list that contains the
-     *                  keyword
-     * @throws DukeException - if arraylist is empty or
-     *                         i is out of range
+     * @param keyword input from user
+     * @return String all the tasks containing the keyword
+     * @throws DukeException if arraylist is empty or
+     *                       i is out of range
      */
     public String find(String keyword) throws DukeException {
         String taskAsString = "";
@@ -207,7 +196,7 @@ public class TaskList {
     }
 
     /**
-     * This method removes all tasks in the arraylist.
+     * Removes all tasks in the arraylist.
      * Use with caution.
      */
     public void clear() {
@@ -215,11 +204,10 @@ public class TaskList {
     }
 
     /**
-     * This method returns a boolean value of
-     * whether the arraylist is empty.
+     * Returns a boolean value of whether the arraylist is empty.
      *
-     * @return - true if list is empty
-     *           and false otherwise
+     * @return true if list is empty
+     *         and false otherwise
      */
     public boolean isEmpty() {
         return this.tasks.isEmpty();

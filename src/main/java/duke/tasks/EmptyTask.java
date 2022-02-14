@@ -1,26 +1,26 @@
 package duke.tasks;
 
 /**
- * The TaskEmpty class contains basic attributes
- * and behaviours of an TaskEmpty. It extends
+ * The EmptyTask class contains basic attributes
+ * and behaviours of an empty task. It extends
  * from the Task class. This is returned in cases
  * where a Task is not created due to DukeException.
  *
  * @author  Melvin Chan Zijun
  */
-public class TaskEmpty extends Task {
+public class EmptyTask extends Task {
     /**
      * Sole constructor.
      */
-    public TaskEmpty() {
+    public EmptyTask() {
         super("EMPTY");
     }
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the prefix of TaskEmpty.
+     * Returns the prefix of empty task.
      *
-     * @return String - prefix of the TaskEmpty
+     * @return String prefix of empty task
      */
     @Override
     public String getPrefix() {
@@ -29,9 +29,9 @@ public class TaskEmpty extends Task {
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the date of TaskEmpty.
+     * Returns the date of empty task.
      *
-     * @return String - date of the TaskEmpty
+     * @return String date of the empty task
      */
     @Override
     public String getDate() {
@@ -40,9 +40,9 @@ public class TaskEmpty extends Task {
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the time of TaskEmpty.
+     * Returns the time of empty task.
      *
-     * @return String - time of this TaskEmpty
+     * @return String time of this empty task
      */
     @Override
     public String getTime() {
@@ -53,7 +53,7 @@ public class TaskEmpty extends Task {
      * Overrides method of its parent class.
      * Always returns true.
      *
-     * @return boolean - true
+     * @return boolean true
      */
     @Override
     public boolean isEmptyTask() {

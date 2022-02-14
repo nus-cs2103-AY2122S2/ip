@@ -6,12 +6,12 @@ import duke.system.TaskList;
 import duke.system.Ui;
 
 /**
- * The CommandFind class contains basic attributes and
- * behaviours of a Find Command.
+ * The FindCommand class contains basic attributes and
+ * behaviours of a find command.
  *
  * @author  Melvin Chan Zijun
  */
-public class CommandFind extends Command {
+public class FindCommand extends Command {
     /**
      * Keyword used for the search
      */
@@ -22,21 +22,18 @@ public class CommandFind extends Command {
      *
      * @param keyword - raw task number input from the user
      */
-    public CommandFind(String keyword) {
+    public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
     /**
      * Overrides method in parent class.
-     * This method models the execution of a Find Command.
-     * The TaskList searches for the tasks with the keyword in their name,
-     * and returns all the tasks in a single consolidated String.
-     * The Ui then prints the resulting String.
+     * Executes the find command, returns the result
      *
-     * @param tasks - to search TaskList for tasks with names that
-     *                contain the keyword
-     * @param ui - to print all the tasks that contains the keyword
-     * @param storage - not used
+     * @param tasks duke's task list
+     * @param ui duke's ui
+     * @param storage duke's storage
+     * @return String search result
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

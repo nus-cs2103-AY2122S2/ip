@@ -4,41 +4,41 @@ import duke.time.ManagerDate;
 import duke.time.ManagerTime;
 
 /**
- * The TaskDeadline class contains basic attributes
- * and behaviours of a Deadline Task. It extends
+ * The DeadlineTask class contains basic attributes
+ * and behaviours of a deadline task. It extends
  * from the Task class.
  *
  * @author  Melvin Chan Zijun
  */
-public class TaskDeadline extends Task {
+public class DeadlineTask extends Task {
     /**
-     * Date of Task.
+     * date of Task.
      */
     private final String date;
 
     /**
-     * Time of Task.
+     * time of Task.
      */
     private final String time;
 
     /**
      * Sole constructor.
      *
-     * @param name - name of task
-     * @param date - date of task
-     * @param time - time of task
+     * @param name name of task
+     * @param date date of task
+     * @param time time of task
      */
-    public TaskDeadline(String name, String date, String time) {
+    public DeadlineTask(String name, String date, String time) {
         super(name);
         this.date = date;
-        this.time = new ManagerTime(time).getFormat24();
+        this.time = new ManagerTime(time).getFormat24hr();
     }
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the prefix of TaskDeadline.
+     * Returns the prefix of deadline task.
      *
-     * @return String - prefix of the TaskDeadline
+     * @return String prefix of deadline task
      */
     @Override
     public String getPrefix() {
@@ -47,9 +47,9 @@ public class TaskDeadline extends Task {
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the date of TaskDeadline.
+     * Returns the date of deadline task.
      *
-     * @return String - prefix of the TaskDeadline
+     * @return String date of deadline task
      */
     @Override
     public String getDate() {
@@ -58,9 +58,9 @@ public class TaskDeadline extends Task {
 
     /**
      * Overrides the abstract method of its parent class.
-     * Returns the time of TaskDeadline.
+     * Returns the time of deadline task.
      *
-     * @return String - prefix of this TaskDeadline
+     * @return String time of this deadline task
      */
     @Override
     public String getTime() {
@@ -70,7 +70,7 @@ public class TaskDeadline extends Task {
     /**
      * Overrides the toString() method of the parent.
      *
-     * @return String - String of this TaskDeadline
+     * @return String deadline task in String form
      */
     @Override
     public String toString() {

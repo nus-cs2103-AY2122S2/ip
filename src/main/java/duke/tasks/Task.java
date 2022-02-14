@@ -30,21 +30,21 @@ public abstract class Task {
     /**
      * Abstract method that returns prefix of the Task
      *
-     * @return String - prefix of the Task
+     * @return String prefix of task
      */
     public abstract String getPrefix();
 
     /**
      * Abstract method that returns date of the Task
      *
-     * @return String - date of the Task
+     * @return String date of task
      */
     public abstract String getDate();
 
     /**
      * Abstract method that returns time of the Task
      *
-     * @return String - time of the Task
+     * @return String time of task
      */
     public abstract String getTime();
 
@@ -65,7 +65,7 @@ public abstract class Task {
     /**
      * Returns the completion state of the Task.
      *
-     * @return boolean - completion state of Task
+     * @return boolean completion state of task
      */
     public boolean isMarked() {
         return this.isCompleted;
@@ -75,8 +75,8 @@ public abstract class Task {
      * Returns true if task is an EmptyTask.
      * Otherwise, always return false.
      *
-     * @return boolean - false unless this is an EmptyTask,
-     *                   then true
+     * @return boolean false unless this is an EmptyTask,
+     *                 otherwise true
      */
     public boolean isEmptyTask() {
         return false;
@@ -85,7 +85,7 @@ public abstract class Task {
     /**
      * Returns the name of the Task.
      *
-     * @return String - name of Task
+     * @return String name of task
      */
     public String getName() {
         return this.name;
@@ -94,7 +94,7 @@ public abstract class Task {
     /**
      * Overrides the default toString() method.
      *
-     * @return String - String of each Task
+     * @return String task in String form
      */
     @Override
     public String toString() {

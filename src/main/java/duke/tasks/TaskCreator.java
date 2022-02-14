@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.exceptions.DukeException;
+
 /**
  * The TaskCreator class creates Task objects
  * from parameters passed into it.
@@ -8,38 +10,38 @@ package duke.tasks;
  */
 public class TaskCreator {
     /**
-     * Prefix of Task.
+     * Prefix of task.
      */
     private final char prefix;
 
     /**
-     * Whether the task is complete. Set to false by default
+     * Whether the task is complete.
      */
     private final boolean isCompleted;
 
     /**
-     * Name of Task.
+     * Name of task.
      */
     private final String name;
 
     /**
-     * Date of Task.
+     * Date of task.
      */
     private final String date;
 
     /**
-     * Time of Task.
+     * Time of task.
      */
     private final String time;
 
     /**
      * Sole constructor.
      *
-     * @param prefix - prefix of Task
-     * @param isCompleted - task completion state
-     * @param name - name of task
-     * @param date - date of task
-     * @param time - time of task
+     * @param prefix prefix of task
+     * @param isCompleted task completion state
+     * @param name name of task
+     * @param date date of task
+     * @param time time of task
      */
     public TaskCreator(char prefix, boolean isCompleted,
                        String name, String date, String time) {
@@ -51,31 +53,22 @@ public class TaskCreator {
     }
 
     /**
-     * This method creates a new Task with the class variables as
-     * the parameters for the Task to be created. If isCompleted
-     * is true, the newly created Task will be marked before being
-     * returned.
+     * Return a new task based on the variables of this class
      *
-     * @return Task - the type of Task returned depends on the
-     *                prefix stored in this TaskCreator
+     * @return Task the type of Task returned depends on the
+     *              prefix stored in this TaskCreator
      */
-    public Task createTask() {
+    public Task createTask() throws DukeException {
         Task task;
         if (prefix == 'D') {
-            task = new TaskDeadline(this.name, this.date, this.time);
+            task = new DeadlineTask(this.name, this.date, this.time);
         } else if (prefix == 'E') {
-            task = new TaskEvent(this.name, this.date, this.time);
+            task = new EventTask(this.name, this.date, this.time);
         } else if (prefix == 'T') {
-            task = new TaskToDo(this.name);
+            task = new ToDoTask(this.name);
         } else {
-            System.out.println("Help!\n"
-                    + "Weird looking task found in Duke's memory!\n"
-                    + "Please go to Duke's memory to check!\n"
-                    + "(Found a task that is not a Deadline, Event or ToDo\n"
-                    + "in data/duke.txt)\n");
-            task = new TaskEmpty();
+            throw new DukeException("Data is corrupted! Task List will now be reset!");
         }
-
         if (this.isCompleted && !task.isEmptyTask()) {
             task.mark();
         }
