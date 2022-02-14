@@ -41,7 +41,7 @@ public class RecurPeriod {
                 return new RecurPeriod(Period.ofDays(integerPeriod), periodAsString);
             } else if (periodAsStrings[1].contains("years")) {
                 return new RecurPeriod(Period.ofYears(integerPeriod), periodAsString);
-            } else if (periodAsStrings[1].contains("week")) {
+            } else if (periodAsStrings[1].contains("weeks")) {
                 return new RecurPeriod(Period.ofWeeks(integerPeriod), periodAsString);
             } else {
                 return null;
