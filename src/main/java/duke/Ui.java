@@ -37,10 +37,8 @@ public class Ui {
      * @param task Newly added task
      */
     public static void printAddTask(Task task) {
-        System.out.println(Ui.line());
         System.out.println("Added:");
         System.out.println(task.toString());
-        System.out.println(Ui.line());
     }
 
     /**
@@ -48,9 +46,7 @@ public class Ui {
      */
     public static void printIntro() {
         String INTRO = "Duke initialised";
-        System.out.println(Ui.line());
         System.out.println(INTRO);
-        System.out.println(Ui.line());
     }
 
     /**
@@ -58,9 +54,7 @@ public class Ui {
      */
     public static void printExit() {
         String EXIT = "Duke terminated";
-        System.out.println(Ui.line());
         System.out.println(EXIT);
-        System.out.println(Ui.line());
     }
 
     /**
@@ -69,9 +63,7 @@ public class Ui {
      * @param formattedTaskList Formatted task list from the task list array
      */
     public static void printTaskList(String formattedTaskList) {
-        System.out.println(Ui.line());
         System.out.println(formattedTaskList);
-        System.out.println(Ui.line());
     }
 
     /**
@@ -80,10 +72,8 @@ public class Ui {
      * @param task Task
      */
     public static void printMarkTask(Task task) {
-        System.out.println(Ui.line());
         System.out.println("Task marked as done:");
         System.out.println(task.toString());
-        System.out.println(Ui.line());
     }
 
     /**
@@ -92,10 +82,8 @@ public class Ui {
      * @param task Task
      */
     public static void printDeleteTask(Task task) {
-        System.out.println(Ui.line());
         System.out.println("Task deleted:");
         System.out.println(task.toString());
-        System.out.println(Ui.line());
     }
 
     /**
@@ -104,10 +92,8 @@ public class Ui {
      * @param task Task
      */
     public static void printUnmarkTask(Task task) {
-        System.out.println(Ui.line());
         System.out.println("Task marked as not done:");
         System.out.println(task.toString());
-        System.out.println(Ui.line());
     }
 
     /**
@@ -118,13 +104,11 @@ public class Ui {
 
     public static void printFindTask(ArrayList<Task> taskList) {
         String FOUND = "Matching tasks:";
-        System.out.println(Ui.line());
         System.out.println(FOUND);
 
         for (Task t : taskList) {
             System.out.println(t.toString());
         }
 
-        System.out.println(Ui.line());
     }
 }
