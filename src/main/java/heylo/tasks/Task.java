@@ -40,6 +40,7 @@ public abstract class Task {
         } catch (IndexOutOfBoundsException e) {
             str.append(" This task does not exist.\n");
         }
+        assert taskList.get(index).isDone : "Mark as done failed";
         return str.toString();
     }
 
@@ -59,6 +60,7 @@ public abstract class Task {
         } catch (IndexOutOfBoundsException e) {
             str.append(" This task does not exist.\n");
         }
+        assert !taskList.get(index).isDone : "Mark as not done failed";
         return str.toString();
     }
 
@@ -93,6 +95,9 @@ public abstract class Task {
             }
         }
 
+        assert !task.description.isBlank() : "Task description should not be blank";
+        taskList.add(task);
+
         if (taskCount == 0) {
             str.append(" Added! Now you have 1 item in your tasks list.\n");
         } else {
@@ -100,11 +105,13 @@ public abstract class Task {
                     .append(taskCount + 1)
                     .append(" items in your tasks list.\n");
         }
-        taskList.add(task);
         str.append("  ")
                 .append(taskList.get(taskCount).toString())
                 .append("\n");
         taskCount++;
+
+        assert taskCount > 0 : "Task count should be greater than 0 after adding to list";
+
         return str.toString();
     }
 
@@ -224,7 +231,7 @@ public abstract class Task {
     }
 
     /**
-     * Prints all the existing tasks as a numbered list.
+     * Returns all the existing tasks as a numbered list.
      */
     public static String getAllTasks() {
         StringBuilder str = new StringBuilder();
