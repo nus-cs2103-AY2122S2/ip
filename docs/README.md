@@ -24,6 +24,7 @@ Duke is your personal assistant to keep track of tasks.
 > - All date inputs has to be in the yyyy-mm-dd format, e.g. 2022-10-21.
 > - Extraneous parameters for commands that do not take in parameters (such as list and exit) will be ignored.
     e.g. if the command specifies `bye 123`, it will be interpreted as `bye`.
+
 ### Listing all tasks: `list`
 Shows a list of all the tasks in the task list.
 
