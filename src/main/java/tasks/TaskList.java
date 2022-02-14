@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import yeowoo.YeowooException;
 import yeowoo.Storage;
+import yeowoo.YeowooException;
 
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();

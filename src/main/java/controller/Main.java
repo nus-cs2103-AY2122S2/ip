@@ -2,12 +2,12 @@ package controller;
 
 import java.io.IOException;
 
-import yeowoo.Yeowoo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import yeowoo.Yeowoo;
 
 /**
  * A GUI for Yeowoo using FXML.
