@@ -10,6 +10,7 @@ import sana.command.UnmarkCommand;
 import sana.command.UpdateCommand;
 import sana.exception.SanaException;
 import sana.exception.UnknownCommandException;
+import sana.gui.Main;
 
 
 /**
@@ -29,6 +30,9 @@ public class Sana {
     /** generates responses from sana */
     private SanaResponse sanaResponse;
 
+    /** main stage for sana GUI */
+    private Main mainStage;
+
     /**
      * Constructor for the Sana class
      */
@@ -37,7 +41,15 @@ public class Sana {
         this.sanaResponse = new SanaResponse();
         this.taskMem = new Memory();
         this.userTasks = new TaskList(taskMem.memToList());
+    }
 
+    /**
+     * Sets the main stage
+     *
+     * @param stage stage to be set
+     */
+    public void setMainStage(Main stage) {
+        this.mainStage = stage;
     }
 
     /**

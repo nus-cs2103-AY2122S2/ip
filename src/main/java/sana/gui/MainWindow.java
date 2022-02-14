@@ -50,5 +50,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, sanaImage)
         );
         userInput.clear();
+        if (response.equals("See you next time!\n")) {
+            exitProgram();
+        }
+    }
+
+    private void exitProgram() {
+        try {
+            Thread.sleep(1000);
+            System.exit(0);
+        } catch (InterruptedException e) {
+            exitProgram();
+        }
     }
 }
