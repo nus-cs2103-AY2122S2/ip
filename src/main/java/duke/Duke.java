@@ -56,7 +56,7 @@ public class Duke extends Application {
 
             // Builds the stage
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Duke");
+            primaryStage.setTitle("Waldo");
             primaryStage.setMinHeight(600.0);
             primaryStage.setMinWidth(400.0);
             primaryStage.setResizable(false);
