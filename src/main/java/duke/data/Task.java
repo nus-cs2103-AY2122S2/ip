@@ -4,12 +4,12 @@ import duke.common.Type;
 
 public class Task {
     private final String name;
-    private boolean marked;
+    private boolean isMarked;
     private final Type type;
     private String time = "";
 
     public Task(String name, Type type) {
-        this.marked = false;
+        this.isMarked = false;
         this.name = name;
         this.type = type;
     }
@@ -18,7 +18,7 @@ public class Task {
      * Mark this task as done.
      */
     public void mark() {
-        this.marked = true;
+        this.isMarked = true;
     }
 
     /**
@@ -133,6 +133,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + type + "][" + (marked? "X" : " ") + "] " + name + time;
+        return "[" + type + "][" + (isMarked ? "X" : " ") + "] " + name + time;
     }
 }
