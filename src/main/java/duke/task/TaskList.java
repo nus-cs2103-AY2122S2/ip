@@ -1,6 +1,5 @@
 package duke.task;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
  * A class to contain all tasks of the user.
