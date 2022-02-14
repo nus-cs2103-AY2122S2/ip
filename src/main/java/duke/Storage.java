@@ -12,11 +12,8 @@ import java.util.ArrayList;
 class Storage {
     private static String HOME = System.getProperty("user.home");
     private ArrayList<Task> taskArray;
-    private String path;
-
-    Storage(String path) {
-        this.taskArray = new ArrayList<Task>();
-        this.path = path;
+    Storage() {
+        taskArray = new ArrayList<Task>();
     }
 
     /**
@@ -27,10 +24,9 @@ class Storage {
     public File load() {
         FileClass fc = new FileClass(); //file class
         String homePath = HOME + "/data";
-        path = HOME + path;
         fc.createDirectory(homePath); //create directory first
-        fc.createFile(path); //create a file in the /home/data/tasks.txt
-        File file = new File(path);
+        fc.createFile(homePath); //create a file in the /home/data/tasks.txt
+        File file = new File(homePath);
         return file;
     }
 

@@ -3,27 +3,23 @@ package duke;
 import java.util.ArrayList;
 
 class Ui {
-    private static final String DIVIDER = "=======================================";
     Ui() {
     }
-    public void showGoodbyeMessage() {
+    public String showGoodbyeMessage() {
         String endMessage = "Bye. Hope to see you again soon!";
-        System.out.println(endMessage);
-        System.out.println(DIVIDER);
+        return endMessage;
     }
 
-    public void showWelcomeMessage() {
+    public String showWelcomeMessage() {
         String startMessage = "Hello! I'm Duke\n"
                 + "What can I do for you?";
-        System.out.println(startMessage);
-        System.out.println(DIVIDER);
+        return startMessage;
     }
 
-    public void showListMessage(TaskList tasklist) {
+    public String showListMessage(TaskList tasklist) {
         if (tasklist.getTaskArray().isEmpty()) {
             String listMessage = "The list is empty";
-            System.out.println(listMessage);
-            System.out.println(DIVIDER);
+            return listMessage;
         } else {
             String listMessage = "Here are the tasks in your list: \n";
             for (int i = 0; i < tasklist.getTaskArray().size(); i++) {
@@ -31,72 +27,63 @@ class Ui {
                 listMessage = listMessage + index + "."
                         + tasklist.getTaskArray().get(i) + "\n";
             }
-            System.out.println(listMessage);
-            System.out.println(DIVIDER);
+            return listMessage;
         }
     }
 
-    public void showFindMessage(ArrayList<Task> taskArray) {
+    public String showFindMessage(ArrayList<Task> taskArray) {
         if (taskArray.isEmpty()) {
             String listMessage = "There are no matching tasks in your list.";
-            System.out.println(listMessage);
-            System.out.println(DIVIDER);
+            return listMessage;
         } else {
             String listMessage = "Here are the matching tasks in your list: \n";
             for (int i = 0; i < taskArray.size(); i++) {
                 String index = String.valueOf(i + 1);
                 listMessage = listMessage + index + "." + taskArray.get(i) + "\n";
             }
-            System.out.println(listMessage);
-            System.out.println(DIVIDER);
+            return listMessage;
         }
     }
 
-    public void showAddedMessage(Task task, String no0fTask) {
+    public String showAddedMessage(Task task, String no0fTask) {
         String messageTask = "Got it. I've added this task: \n";
         String taskString = task.toString();
-        System.out.println(messageTask + taskString + "\n"
-                + "Now you have " + no0fTask + " tasks in the list.");
-        System.out.println(DIVIDER);
+        String output = messageTask + taskString + "\n"
+                + "Now you have " + no0fTask + " tasks in the list.";
+        return output;
     }
 
-    public void showDeletedMessage(Task task, String noOfTask) {
+    public String showDeletedMessage(Task task, String noOfTask) {
         String messageTask = "Noted. I've removed this task: \n";
         String taskString = task.toString();
-        System.out.println(messageTask + taskString
+        String output = messageTask + taskString
                 + "\n" + "Now you have " + noOfTask
-                + " tasks in the list.");
-        System.out.println(DIVIDER);
+                + " tasks in the list.";
+        return output;
     }
 
-    public void showDeleteError() {
-        System.out.println("There are no tasks to be deleted!");
-        System.out.println(DIVIDER);
+    public String showDeleteError() {
+        return "There are no tasks to be deleted!";
     }
 
-    public void showInvalidInput() {
-        System.out.println("The input is not valid :(");
-        System.out.println(DIVIDER);
+    public String showInvalidInput() {
+        return "The input is not valid :(";
     }
 
-    public void showTodoError() {
-        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-        System.out.println(DIVIDER);
+    public String showTodoError() {
+        return "☹ OOPS!!! The description of a todo cannot be empty.";
     }
 
-    public void showDeadlineError() {
-        System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-        System.out.println(DIVIDER);
+    public String showDeadlineError() {
+        return "☹ OOPS!!! The description of a deadline cannot be empty.";
     }
 
-    public void showEventError() {
-        System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
-        System.out.println(DIVIDER);
+    public String showEventError() {
+        return "☹ OOPS!!! The description of a event cannot be empty.";
     }
 
-    public void showDefaultMessage() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println(DIVIDER);
+    public String showDefaultMessage() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
 

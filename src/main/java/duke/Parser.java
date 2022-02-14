@@ -21,34 +21,37 @@ class Parser {
      *
      * @param input Input given by the user .
      */
-    public void execute(String input) {
+    public String execute(String input) {
         String[] checkCase = input.split(" ");
         switch (checkCase[0].toLowerCase()) {
         case ("list"):
-            ui.showListMessage(taskList);
-            break;
+            return ui.showListMessage(taskList);
 
         case ("mark"):
             try {
                 int index = Integer.parseInt(checkCase[1]) - 1;
                 Task tasks = taskList.getTaskArray().get(index);
-                System.out.println(tasks.marking(checkCase[0].toLowerCase()));
+                String output = tasks.marking(checkCase[0].toLowerCase());
                 taskList.getTaskArray().set(index, tasks);
+                return output;
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showInvalidInput();
+                return ui.showInvalidInput();
+            } catch (IndexOutOfBoundsException e) {
+                return ui.showInvalidInput();
             }
-            break;
 
         case ("unmark"):
             try {
                 int index = Integer.parseInt(checkCase[1]) - 1;
                 Task tasks = taskList.getTaskArray().get(index);
-                System.out.println(tasks.marking(checkCase[0].toLowerCase()));
+                String output = tasks.marking(checkCase[0].toLowerCase());
                 taskList.getTaskArray().set(index, tasks);
+                return output;
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showInvalidInput();
+                return ui.showInvalidInput();
+            } catch (IndexOutOfBoundsException e) {
+                return ui.showInvalidInput();
             }
-            break;
 
         case ("todo"):
 
@@ -59,11 +62,10 @@ class Parser {
                 Todo todoTask = new Todo(stringSliced);
                 taskList.addTask(todoTask);
                 String noOfTask = String.valueOf(taskList.getTaskArray().size());
-                ui.showAddedMessage(todoTask, noOfTask);
+                return ui.showAddedMessage(todoTask, noOfTask);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showTodoError();
+                return ui.showTodoError();
             }
-            break;
 
         case ("deadline"):
 
@@ -78,11 +80,10 @@ class Parser {
                 Deadline deadlineTask = new Deadline(stringSliced, convertedTime);
                 taskList.addTask(deadlineTask);
                 String noOfTask = String.valueOf(taskList.getTaskArray().size());
-                ui.showAddedMessage(deadlineTask, noOfTask);
+                return ui.showAddedMessage(deadlineTask, noOfTask);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showDeadlineError();
+                return ui.showDeadlineError();
             }
-            break;
 
         case ("event"):
 
@@ -97,12 +98,11 @@ class Parser {
                 Event eventTask = new Event(stringSliced, convertedTime);
                 taskList.addTask(eventTask);
                 String noOfTask = String.valueOf(taskList.getTaskArray().size());
-                ui.showAddedMessage(eventTask, noOfTask);
+                return ui.showAddedMessage(eventTask, noOfTask);
 
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showEventError();
+                return ui.showEventError();
             }
-            break;
 
         case("delete"):
 
@@ -111,25 +111,21 @@ class Parser {
                 Task task = taskList.getTaskArray().get(index);
                 taskList.deleteTask(index);
                 String noOfTask = String.valueOf(taskList.getTaskArray().size());
-                ui.showDeletedMessage(task, noOfTask);
+                return ui.showDeletedMessage(task, noOfTask);
             } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showDeleteError();
+                return ui.showDeleteError();
             }
-            break;
 
         case("find"):
             String findCondition = "find ";
             String stringSliced = input.substring(findCondition.length());
-            ui.showFindMessage(taskList.findTask(stringSliced));
-            break;
+            return ui.showFindMessage(taskList.findTask(stringSliced));
 
         case("bye"):
-            ui.showGoodbyeMessage();
-            break;
+            return ui.showGoodbyeMessage();
 
         default:
-            ui.showDefaultMessage();
-            break;
+            return ui.showDefaultMessage();
         }
     }
 

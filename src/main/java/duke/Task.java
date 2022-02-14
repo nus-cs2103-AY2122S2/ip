@@ -46,14 +46,12 @@ class Task {
         if (mark.equals("mark")) {
             setAsMarked();
             String messageMarked = "Nice! I've marked this task as done: \n"
-                    + this.toString() + "\n "
-                    + "=======================================";
+                    + this.toString() + "\n ";
             return messageMarked;
         } else {
             setAsUnmarked();
             String messageUnmarked = "OK, I've marked this task as not done yet: \n"
-                    + this.toString() + "\n "
-                    + "=======================================";
+                    + this.toString() + "\n ";
             return messageUnmarked;
 
         }
