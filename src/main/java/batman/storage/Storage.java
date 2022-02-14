@@ -76,7 +76,8 @@ public class Storage {
                 tasks.add(new Event(item[1].equals("1"), item[2], item[3]));
                 break;
             default:
-                tasks.add(new Todo(item[1].equals("1"), item[2]));
+                String date = item[3].split("Date Added: ")[1];
+                tasks.add(new Todo(item[1].equals("1"), item[2], date));
             }
         }
         assert tasks != null;

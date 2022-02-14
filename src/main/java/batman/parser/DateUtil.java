@@ -14,10 +14,24 @@ public class DateUtil {
             .toFormatter();
     private static final DateTimeFormatter STRING_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
-    public static LocalDateTime stringToDate(String dateTime) throws DateTimeParseException {
-        return LocalDateTime.parse(dateTime, FORMATTER);
+    /**
+     * Converts String of datetime to a DateTime object.
+     *
+     * @param str user's input datetime.
+     * @return LocalDateTime object.
+     * @throws DateTimeParseException check if the datetime string
+     *                                  matches the given format.
+     */
+    public static LocalDateTime stringToDate(String str) throws DateTimeParseException {
+        return LocalDateTime.parse(str, FORMATTER);
     }
 
+    /**
+     * Converts DateTime object to String.
+     *
+     * @param dateTime user's input datetime.
+     * @return String object.
+     */
     public static String dateToString(LocalDateTime dateTime) {
         return dateTime.format(STRING_FORMATTER);
     }
