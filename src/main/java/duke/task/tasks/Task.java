@@ -38,7 +38,7 @@ public abstract class Task implements ITask {
     public String switchMark(String instr) {
         assert instr != null;
 
-        if ((instr.equals("mark") && !isDone)|| (instr.equals("unmark") && isDone)) {
+        if ((instr.equals("mark") && !isDone) || (instr.equals("unmark") && isDone)) {
             this.isDone = !this.isDone;
         }
         if (isDone) {
@@ -72,7 +72,7 @@ public abstract class Task implements ITask {
      * @return String representation of the task in the storage.
      */
     public String encode() {
-        return String.format("%d <> %s", isDone? 1: 0, taskName);
+        return String.format("%d <> %s", isDone ? 1 : 0, taskName);
     }
 
     public abstract Task cloneSelf();

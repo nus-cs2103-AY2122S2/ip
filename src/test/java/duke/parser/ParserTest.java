@@ -12,7 +12,7 @@ public class ParserTest {
     void parse_validInput_success() {
         String command = "todo a b c";
         try {
-            assertTrue(new Parser().parse(command) instanceof AddCommand);
+            assertTrue(Parser.parse(command) instanceof AddCommand);
         } catch (Exception e) {
             fail();
         }
@@ -22,7 +22,7 @@ public class ParserTest {
     void parse_invalidInput_throwNoCommandException() {
         String command = "notACommand test";
         try {
-            new Parser().parse(command);
+            Parser.parse(command);
             fail();
         } catch (Exception e) {
             assertEquals("Oops! try another command!", e.getMessage());
@@ -33,7 +33,7 @@ public class ParserTest {
     void parse_invalidArgument_throwInvalidArgumentException() {
         String command = "todo";
         try {
-            new Parser().parse(command);
+            Parser.parse(command);
             fail();
         } catch (Exception e) {
             assertEquals("Oops! please check your input's argument again!", e.getMessage());

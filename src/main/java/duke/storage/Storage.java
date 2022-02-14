@@ -19,7 +19,7 @@ public class Storage {
     private TaskList taskList = new TaskList();
 
     /**
-     * Load the data into tasklist if present, else create a new directory
+     * Loads the data into tasklist if present, else create a new directory
      * to store the data and return empty tasklist.
      *
      * @return TaskList loaded from existing data
@@ -63,7 +63,7 @@ public class Storage {
     }
 
     /**
-     * Update the data with the updated taskList. Create a temp file
+     * Updates the data with the updated taskList. Create a temp file
      * to be written by the new data, replace the old data with temp
      *
      * @param taskList update taskList

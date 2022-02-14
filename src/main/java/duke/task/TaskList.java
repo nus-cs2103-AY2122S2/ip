@@ -2,9 +2,7 @@ package duke.task;
 
 import duke.exception.InvalidTaskNumberException;
 import duke.task.tasks.ITask;
-import duke.task.tasks.Task;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +32,8 @@ public class TaskList {
         assert newTask != null;
 
         tasks.add(newTask);
-        String output = "Got it. I've added this task:\n  " +
-                newTask + "\nnow you have " + tasks.size() + " tasks in the list";
+        String output = "Got it. I've added this task:\n  " + newTask
+                + "\nnow you have " + tasks.size() + " tasks in the list";
         return output;
     }
 

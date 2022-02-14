@@ -4,6 +4,10 @@ import duke.stack.CallStack;
 import duke.task.TaskList;
 import duke.task.tasks.Task;
 
+/**
+ * Represents a command that
+ * will execute addition to the tasklist
+ */
 public class AddCommand extends Command {
     private final Task task;
 

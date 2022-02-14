@@ -4,6 +4,10 @@ import duke.stack.CallStack;
 import duke.task.TaskList;
 import duke.exception.InvalidTaskNumberException;
 
+/**
+ * Represents unmark command that
+ * will unmark a task in the tasklist
+ */
 public class UnmarkCommand extends Command {
     private final int id;
 

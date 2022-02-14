@@ -3,6 +3,10 @@ package duke.util;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents various constants that
+ * are used throughout the program
+ */
 public class Constants {
     public static final String HORIZONTAL_LINE = "____________________________________________________________";
 

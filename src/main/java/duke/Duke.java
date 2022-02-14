@@ -1,8 +1,8 @@
 package duke;
 
-import com.sun.tools.jconsole.JConsoleContext;
+import java.util.Scanner;
+
 import duke.command.Command;
-import duke.command.UndoCommand;
 import duke.stack.CallStack;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -10,8 +10,6 @@ import duke.ui.Ui;
 import duke.util.Constants;
 import duke.util.Parser;
 
-import java.awt.*;
-import java.util.Scanner;
 
 /**
  * Duke driver class, contains the main method to initiate
@@ -45,7 +43,7 @@ public class Duke {
     }
 
     /**
-     * Run the Duke chatbot to accept user input.
+     * Runs Duke chatbot to accept user input.
      * Process user's input and stopped when user input "bye"
      */
     public void run() {

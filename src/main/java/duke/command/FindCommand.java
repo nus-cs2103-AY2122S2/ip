@@ -3,6 +3,10 @@ package duke.command;
 import duke.stack.CallStack;
 import duke.task.TaskList;
 
+/**
+ * Represents a find command that
+ * will search a keyword in the tasklist
+ */
 public class FindCommand extends Command {
     private final String keyWord;
 
