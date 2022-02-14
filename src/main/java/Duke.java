@@ -3,19 +3,7 @@ import Duke.Processing.Parser;
 import Duke.Processing.Storage;
 import Duke.Processing.TaskList;
 import Duke.UI.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 public class Duke {
 
@@ -37,9 +25,8 @@ public class Duke {
     }
 
     public void run() {
-        ui.startmessage();
         String task = ui.read();
-        while(!task.equalsIgnoreCase("bye")) {
+        while(!task.equals("bye")) {
             ui.divider();
             try {
                 Parser.use(task, this.tasks);
@@ -53,32 +40,26 @@ public class Duke {
         } catch (DukeException e) {
             ui.errorMessage(e);
         }
-        ui.endmessage();
+        System.exit(0);
     }
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Takes in the user input and returns the appropriate response
+     *
+     * @param input is the user input
+     * @return A string output
      */
     public String getResponse(String input) {
-        return "I'll add the following to the list\n " + input;
+        String output;
+        try {
+            output = Parser.use(input, this.tasks);
+            this.storage.write(this.tasks);
+        } catch (DukeException e) {
+            output = ui.errorMessage(e);
+        }
+        return output;
     }
 
 
-
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
     public static void main(String[] args) {
         new Duke("Previously.txt").run();
     }

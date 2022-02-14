@@ -25,46 +25,59 @@ public class TaskList {
         return this.tasklist.size();
     }
 
-    public void list() {
-        System.out.println(LIST);
-        for (Task task : tasklist) {
-            System.out.println(task);
+    public String list() {
+        String output = LIST;
+        for (int i = 0; i < tasklist.size(); i++) {
+            output += ((i + 1) + ") " + this.tasklist.get(i) + "\n");
         }
+        return output;
     }
     /**
      * Marks a task as done
      *
      * @param num the array location of the item to be marked as done
+     * @return a String output
      */
-    public void mark(String num) {
+    public String mark(String num) {
         int act = Integer.parseInt(num) - 1;
         Task marking = this.tasklist.get(act);
         marking.isDone = true;
         this.tasklist.set(act, marking);
-        System.out.println(MARK);
+        String output = MARK + "\n";
+        output += marking.getDescription();
+        return output;
     }
 
     /**
      * Marks a task as undone
      *
      * @param num the array location of the item to be marked as undone
+     * @return a String output
      */
-    public void unmark(String num) {
+    public String unmark(String num) {
         int act = Integer.parseInt(num) - 1;
         Task unmarking = this.tasklist.get(act);
         unmarking.isDone = false;
         this.tasklist.set(act, unmarking);
         System.out.println(UNMARK);
+        String output = UNMARK + "\n";
+        output += unmarking.getDescription();
+        return output;
     }
     /**
      * Adds a Todo task to the Tasklist
      *
      * @param item The todo task to be added
+     * @return a String output
      */
-    public void addTodo(String item) {
+    public String addTodo(String item) {
         todo newtodo = new todo(item);
+        int size = tasklist.size();
         this.tasklist.add(newtodo);
-        System.out.println(ADDED + newtodo);
+        String output = ADDED + "\n";
+        assert tasklist.size() == size + 1: "Item not added";
+        output += newtodo.toString();
+        return output;
     }
     /**
      * Adds a general Task to the Tasklist
@@ -72,7 +85,9 @@ public class TaskList {
      * @param task the task to be added to the Tasklist
      */
     public void addTask(Task task) {
+        int size = tasklist.size();
         this.tasklist.add(task);
+        assert tasklist.size() == size + 1: "Item not added";
     }
 
     public Task get(int i) {
@@ -83,61 +98,81 @@ public class TaskList {
      * Adds a deadline Task to the Tasklist
      *
      * @param item the deadline task to be added to the Tasklist
+     * @return a String output
      */
-    public void addDeadline(String[] item) throws DukeException{
+    public String addDeadline(String[] item) throws DukeException{
         Deadline newDeadline = new Deadline(item[0], Parser.convert1(item[1]));
-        //System.out.println(newDeadline);
+        int size = tasklist.size();
         this.tasklist.add(newDeadline);
-        System.out.println(ADDED + newDeadline);
+        String output = ADDED + "\n";
+        assert tasklist.size() == size + 1: "Item not added";
+        output += newDeadline.toString();
+        return output;
     }
 
     /**
      * Adds a Event Task to the Tasklist
      *
      * @param item the Event task to be added to the Tasklist
+     * @return a String output
      */
-    public void addEvent(String[] item) throws DukeException{
-        //System.out.println(item[1]);
+    public String addEvent(String[] item) throws DukeException{
         Event newEvent = new Event(item[0], Parser.convert1(item[1]));
-        //System.out.println(newEvent);
+        int size = tasklist.size();
         this.tasklist.add(newEvent);
-        System.out.println(ADDED + newEvent);
+        String output = ADDED + "\n";
+        assert tasklist.size() == size + 1: "Item not added";
+        output += newEvent.toString();
+        return output;
     }
 
     /**
      * Deletes a general task from the Tasklist
      *
      * @param num the location in the array of the Tasklist to be deleted
+     * @return a String output
      */
-    public void delete(String num) throws DukeException {
+    public String delete(String num) throws DukeException {
+        String output = "";
         try {
             int index = Integer.parseInt(num) - 1;
+            Task deleted = tasklist.get(index);
             this.tasklist.remove(index);
-            System.out.println(DELETED + "1 item");
+            String description = deleted.getDescription();
+            output += DELETED + "\n" + description;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No such item exists");
         }
+        return output;
     }
     /**
      * Allows the user to find a list of tasks that contain a fixed String
      *
-     * @param name Does smth
+     * @param name is the name of the task I am finding
+     * @return a String output
      */
-    public void find(String name) {
+    public String find(String name) {
+        String output = "";
         int size = tasklist.size();
+        assert size != 0 : "Tasklist is empty";
+        String item = "";
         int counter = 0;
         for (int i = 0; i < size; i++) {
             Task checking = tasklist.get(i);
-            String testname = checking.getDescription();
-            if (testname.contains(name)) {
-                System.out.println(checking);
-                counter++;
+            String[] testname = checking.getDescription().split(" ");
+            for (int j = 0; j < testname.length; j++) {
+                if(testname[j].equalsIgnoreCase(name)) {
+                    item += checking.toString();
+                    counter++;
+                }
             }
         }
         if (counter == 0) {
-            System.out.println(NOTHING);
+            output += NOTHING;
         } else {
-            System.out.println(FOUND);
+            output += FOUND;
         }
+        output += item;
+        return output;
     }
 }
