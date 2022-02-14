@@ -21,10 +21,13 @@ public class Parser {
      * Returns task name to find from find command.
      */
     public static String getTaskToFindName(String command) {
-        assert command.contains("find");
-        assert command.substring(5).length() >= 1;
+        int START_OF_NAME_INDEX = 5;
+        String nameToFind = command.substring(START_OF_NAME_INDEX);
 
-        return command.substring(5);
+        assert command.contains("find");
+        assert nameToFind.length() >= 1;
+
+        return nameToFind;
     }
 
     /**
@@ -46,7 +49,7 @@ public class Parser {
         String temp = command.substring(6);
         String name = temp.split("/")[0].trim();
         String startAt = temp.split("/")[1].substring(3).trim();
-        return new TaskEvents(false, name, startAt);
+        return new EventTask(false, name, startAt);
     }
 
     /**
@@ -61,7 +64,7 @@ public class Parser {
         String temp = command.substring(9);
         String name = temp.split("/")[0].trim();
         String doneBy = temp.split("/")[1].substring(3).trim();
-        return new TaskDeadlines(false, name, doneBy);
+        return new DeadlineTask(false, name, doneBy);
     }
 
     /**
@@ -72,6 +75,6 @@ public class Parser {
 
         // Extract name from todo command, eg. todo borrow book
         String name = command.substring(5);
-        return new TaskToDos(false, name);
+        return new TodoTask(false, name);
     }
 }

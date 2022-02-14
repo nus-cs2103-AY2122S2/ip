@@ -5,13 +5,13 @@ package duke;
  *
  * @author sibinhho99-nus
  */
-public class TaskToDos extends Task {
+public class TodoTask extends Task {
     /**
      * Constructor for task of todo type.
      * @param isDone whether the task is done.
      * @param name the name of the task.
      */
-    public TaskToDos(boolean isDone, String name) {
+    public TodoTask(boolean isDone, String name) {
         super(isDone, name);
     }
 

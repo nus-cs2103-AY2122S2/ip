@@ -39,7 +39,7 @@ public class Storage {
                 doneBy = line.split(" \\(by: ")[1];
                 doneBy = doneBy.substring(0, doneBy.length() - 1); // removes end bracket
 
-                taskList.add(new TaskDeadlines(isDone, name, doneBy));
+                taskList.add(new DeadlineTask(isDone, name, doneBy));
             } else if (line.split("\\.")[1].charAt(1) == 'E') {
                 boolean isDone = line.charAt(6) == 'X';
 
@@ -49,10 +49,10 @@ public class Storage {
                 startAt = line.split(" \\(at: ")[1];
                 startAt = startAt.substring(0, startAt.length() - 1); // removes end bracket
 
-                taskList.add(new TaskEvents(isDone, name, startAt));
+                taskList.add(new EventTask(isDone, name, startAt));
             } else { // T
                 boolean isDone = line.charAt(6) == 'X';
-                taskList.add(new TaskToDos(isDone, line.substring(9)));
+                taskList.add(new TodoTask(isDone, line.substring(9)));
             }
         }
     }
