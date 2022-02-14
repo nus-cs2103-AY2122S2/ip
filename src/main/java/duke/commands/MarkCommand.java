@@ -23,7 +23,7 @@ public class MarkCommand extends Command {
 
             Task t = tasks.get(i);
             t.mark();
-            return ui.respond("Nice! I've marked this task as done:\n  " + t);
+            return "Nice! I've marked this task as done:\n  " + t;
     }
 
     @Override

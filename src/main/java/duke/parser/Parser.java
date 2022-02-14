@@ -13,15 +13,22 @@ public class Parser {
      **/
     public static Command parse(String input) throws AssertionError {
         assert input.length() < 1000;
+        if (input.equals("hi")) {
+            return new WelcomeCommand();
+        }
         if (input.equals("bye")) {
             return new ExitCommand();
-        } else if (input.equals("list")) {
+        }
+        if (input.equals("list")) {
             return new ListCommand();
-        } else if (input.startsWith("mark ") && (input.length() == 6 || input.length() == 7)) {
+        }
+        if (input.startsWith("mark ") && (input.length() == 6 || input.length() == 7)) {
             return parseMark(input);
-        } else if ((input.startsWith("delete ") && (input.length() == 8 || input.length() == 9))) {
+        }
+        if ((input.startsWith("delete ") && (input.length() == 8 || input.length() == 9))) {
             return parseDelete(input);
-        } else if ((input.startsWith("find ") && input.length() > 5)) {
+        }
+        if ((input.startsWith("find ") && input.length() > 5)) {
             String prefix = input.split("\\s+")[1];
             return new SearchCommand(prefix);
         } else {

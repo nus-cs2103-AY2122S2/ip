@@ -23,8 +23,8 @@ public class DeleteCommand extends Command {
 
         Task t = tasks.get(i);
         tasks.remove(t);
-        return ui.respond("Noted. I've removed this task: \n  " +
-                t + "\n     Now you have " + tasks.size() + " tasks in the list.");
+        return "Noted. I've removed this task: \n  " +
+                t + "\n     Now you have " + tasks.size() + " tasks in the list.";
     }
 
     @Override

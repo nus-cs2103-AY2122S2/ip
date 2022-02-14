@@ -4,21 +4,20 @@ import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-public class ListCommand extends Command {
-
+public class WelcomeCommand extends Command {
     /**
-     * List out all the tasks in the list.
+     * Say welcome to the user.
      * @param tasks The list containing all the tasks
      * @param ui User interface
      * @param storage Class that manages storage
      **/
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return tasks.listing();
+        return "Hello! I am xpz\nWhat can I do for you?\n";
     }
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof ListCommand;
+        return o instanceof WelcomeCommand;
     }
 }
