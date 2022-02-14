@@ -169,4 +169,5 @@ BingChilling data are saved as a text file [JAR file location]/data/ekud.txt. Ad
 | unmark | `unmark 1` |
 | postpone | `postone 1 12/12/1212` |
 | delete | `delete 1` |
+| clear | `clear` |
 | bye | `bye` |
