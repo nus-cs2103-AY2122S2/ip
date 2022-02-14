@@ -78,7 +78,7 @@ public class Parser {
         String ans = "";
         try {
             if (isCommand(input, Command.BYE)) {
-                ans = "\tBye. Hope to see you again soon!";
+                ans = "Bye. Hope to see you again soon!";
             } else if (isCommand(input, Command.LIST)) {
                 ans = TaskList.getTaskList();
             } else if (isCommand(input, Command.DELETE)) {

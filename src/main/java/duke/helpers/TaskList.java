@@ -55,9 +55,9 @@ public class TaskList {
         if (index >= 0 && index < len()) {
             Task t = getTask(index);
             tasks.remove(t);
-            ans += "Noted. I've removed this task:\n\t\t"
+            ans += "Noted. I've removed this task:\n"
                     + t.toString()
-                    + "\n\tNow you have "
+                    + "\nNow you have "
                     + getNumOfTasks()
                     + " in the list.";;
         } else {
@@ -71,13 +71,13 @@ public class TaskList {
      * Prints the TaskList as a formatted String.
      */
     public static String getTaskList() {
-        String ans = "\tHere are the tasks in your list:\n";
+        String ans = "Here are the tasks in your list:\n";
         for (int i = 0; i < len(); i++) {
             Task t = tasks.get(i);
             if (i == len() - 1) {
-                ans += String.format("\t%d.%s", i + 1, t.toString());
+                ans += String.format("%d.%s", i + 1, t.toString());
             } else {
-                ans += String.format("\t%d.%s \n", i + 1, t.toString());
+                ans += String.format("%d.%s \n", i + 1, t.toString());
             }
         }
         return ans;
@@ -97,10 +97,10 @@ public class TaskList {
             Task t = getTask(index);
             if (strArr[0].equals("mark")) {
                 t.markDone();
-                ans += "Nice! I've marked this task as done:\n\t\t" + t.toString();
+                ans += "Nice! I've marked this task as done:\n" + t.toString();
             } else {
                 t.markUndone();
-                ans += "OK, I've marked this task as not done yet:\n\t\t" + t.toString();
+                ans += "OK, I've marked this task as not done yet:\n" + t.toString();
             }
         } else {
             throw new InvalidIndexException();
@@ -121,9 +121,9 @@ public class TaskList {
         ToDo t = new ToDo(desc);
         addTask(t);
         Storage.saveToFile(tasks);
-        ans += "Got it. I've added this task:\n\t\t"
+        ans += "Got it. I've added this task:\n"
                 + t.toString()
-                + "\n\tNow you have "
+                + "\nNow you have "
                 + getNumOfTasks()
                 + " in the list.";
         return ans;
@@ -146,9 +146,9 @@ public class TaskList {
         }
         addTask(t);
         Storage.saveToFile(tasks);
-        ans += "Got it. I've added this task:\n\t\t"
+        ans += "Got it. I've added this task:\n"
                 + t.toString()
-                + "\n\tNow you have "
+                + "\nNow you have "
                 + getNumOfTasks()
                 + " in the list.";
         return ans;
@@ -171,9 +171,9 @@ public class TaskList {
         }
         addTask(t);
         Storage.saveToFile(tasks);
-        ans += "Got it. I've added this task:\n\t\t"
+        ans += "Got it. I've added this task:\n"
                 + t.toString()
-                + "\n\tNow you have "
+                + "\nNow you have "
                 + getNumOfTasks()
                 + " in the list.";
         return ans;
@@ -218,11 +218,11 @@ public class TaskList {
     public static String getMatchedTasks(String input) {
         boolean isMatched = false;
         String keyword = input.substring(5);
-        String ans = "\tHere are the matching tasks in your list:";
+        String ans = "Here are the matching tasks in your list:";
         for (int i = 0; i < len(); i++) {
             Task t = tasks.get(i);
             if (t.matchDescription(keyword)) {
-                ans += String.format("\n\t%d.%s", i + 1, t.toString());
+                ans += String.format("\n%d.%s", i + 1, t.toString());
                 isMatched = true;
             }
         }
