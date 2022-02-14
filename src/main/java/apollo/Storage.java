@@ -32,6 +32,7 @@ public class Storage {
                 if (!Files.exists(DATA_PATH.getParent())) {
                     Files.createDirectory(DATA_PATH.getParent());
                 }
+
                 Files.createFile(DATA_PATH);
             }
         } catch (IOException e) {

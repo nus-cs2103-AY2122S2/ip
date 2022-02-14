@@ -53,6 +53,7 @@ public class Apollo extends Application {
         assert taskList != null : "taskList did not initialise.";
         Ui ui = new Ui();
         ui.printMessage(Welcome.getLogo() + Welcome.greet(isLoaded, LocalTime.now()));
+
         Command command = null;
         do {
             String userCommand = ui.getUserCommand();

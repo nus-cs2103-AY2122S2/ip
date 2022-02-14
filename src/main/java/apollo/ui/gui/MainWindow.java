@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Gui gui;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image apolloImage = new Image(this.getClass().getResourceAsStream("/images/apollo.png"));
+    private Image userImage;
+    private Image apolloImage;
 
     /**
      * Initialises the main window and greeting message.
@@ -43,8 +43,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(greeting, apolloImage)
         );
         try {
-            userImage = loadImage("/images/user.png");
-            apolloImage = loadImage("/images/apollo.png");
+            String userImagePath = "/images/user.png";
+            String apolloImagePath = "/images/apollo.png";
+            userImage = loadImage(userImagePath);
+            apolloImage = loadImage(apolloImagePath);
         } catch (ApolloIoException e) {
             System.out.println(e.getMessage());
         }

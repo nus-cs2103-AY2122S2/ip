@@ -26,17 +26,21 @@ public class Welcome {
         if (now.isAfter(four)
                 && (now.isBefore(eleven) || now.equals(eleven))) {
             return "morning";
-            // check if the time is after eleven and either before or exactly fifteen
+        // check if the time is after eleven and either before or exactly fifteen
         } else if (now.isAfter(eleven)
                 && (now.isBefore(fifteen) || now.equals(fifteen))) {
             return "afternoon";
-            // check if the time is after fifteen and either before or exactly eighteen thirty
+        // check if the time is after fifteen and either before or exactly eighteen thirty
         } else if (now.isAfter(fifteen)
                 && (now.isBefore(eighteenThirty) || now.equals(eighteenThirty))) {
             return "evening";
-            // otherwise, it's night
-        } else {
+        // check if the time is after eighteen thirty and either before or exactly four
+        } else if (now.isAfter(eighteenThirty)
+                && now.isBefore(four) || now.equals(four)) {
             return "night";
+        // otherwise, welcome to the limbo
+        } else {
+            return "limbo";
         }
     }
 
