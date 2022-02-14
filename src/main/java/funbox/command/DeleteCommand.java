@@ -7,16 +7,49 @@ import funbox.util.TaskList;
 import funbox.util.Storage;
 
 public class DeleteCommand extends Command {
-    int index;
+    String index = "";
 
     /**
      * Constructor for DeleteCommand.
      *
      * @param index The position of the tasks on the list to be deleted.
      */
-    public DeleteCommand(int index) {
+    public DeleteCommand(String index) {
         super(false);
         this.index = index;
+    }
+
+    //@@Jonas K-reused
+    //Reused from https://stackoverflow.com/questions/237159/
+    // whats-the-best-way-to-check-if-a-string-represents-an-integer-in-java
+    /**
+     * Check if String can be parsed to integer.
+     *
+     * @param str The string used to check if its parsable.
+     * @return Returns true if string can be parsed to integer, else false.
+     */
+    public static boolean isInteger(String str) {
+        if (str == null) {
+            return false;
+        }
+        int length = str.length();
+        if (length == 0) {
+            return false;
+        }
+        int i = 0;
+        if (str.charAt(0) == '-') {
+            if (length == 1) {
+                return false;
+            }
+            i = 1;
+        }
+        for (; i < length; i++) {
+            char c = str.charAt(i);
+            if (c < '0' || c > '9') {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -34,7 +67,12 @@ public class DeleteCommand extends Command {
         assert ui != null : "ui should not be null";
 
         String result = "";
-        int currIndex = index - 1;
+
+        if (index == "" || !(isInteger(index))) {
+            return ui.showError("`delete` command should follow this format: delete <index>");
+        }
+
+        int currIndex = Integer.parseInt(index) - 1;
 
         boolean isGreaterThanList = currIndex > taskList.getSize();
         boolean isNegative = currIndex < 0;

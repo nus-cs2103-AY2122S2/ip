@@ -39,11 +39,11 @@ public class Parser {
         case "deadline":
             return new DeadlineCommand(description);
         case "delete":
-            return new DeleteCommand(Integer.parseInt(description));
+            return new DeleteCommand(description);
         case "mark":
-            return new MarkCommand(Integer.parseInt(description));
+            return new MarkCommand(description);
         case "unmark":
-            return new UnmarkCommand(Integer.parseInt(description));
+            return new UnmarkCommand(description);
         case "filter":
             return new FilterCommand(description);
         case "find":

@@ -164,7 +164,7 @@ public class TaskList {
 
             for (int i = 0; i < deadlineSize; i++) {
                 Deadline temp = (Deadline) deadlineList.get(i);
-                if (temp.time.equals(date)) {
+                if (temp.date.equals(date)) {
                     counter++;
                     result += ui.printTask(counter, temp);
                 }
