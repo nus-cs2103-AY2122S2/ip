@@ -206,36 +206,10 @@ public class TaskList {
      * @return a String which contains the Tasks whose description matches the given keyword(s).
      */
     public String findTask(String keyWords) {
-        String keyWordsInLowerCase = keyWords.toLowerCase();
+        String[] keyWordsInLowerCase = keyWords.toLowerCase().split(" ");
         ArrayList<String> matchingTasks = new ArrayList<>();
-        switch (keyWordsInLowerCase) {
-        case "event":
-            for (Task t : list) {
-                if (t instanceof Event) {
-                    matchingTasks.add(t.toString());
-                }
-            }
-            break;
-        case "deadline":
-            for (Task t : list) {
-                if (t instanceof Deadline) {
-                    matchingTasks.add(t.toString());
-                }
-            }
-            break;
-        case "todo":
-            for (Task t : list) {
-                if (!(t instanceof Deadline || t instanceof Event)) {
-                    matchingTasks.add(t.toString());
-                }
-            }
-            break;
-        default:
-            for (Task t : list) {
-                if (t.toString().toLowerCase().contains(keyWordsInLowerCase)) {
-                    matchingTasks.add(t.toString());
-                }
-            }
+        for (int i = 0; i < keyWordsInLowerCase.length; i++) {
+            addMatchingTasks(matchingTasks, keyWordsInLowerCase[i]);
         }
         int numMatchingTasks = matchingTasks.size();
         if (numMatchingTasks == 0) {
@@ -251,6 +225,41 @@ public class TaskList {
                 i++;
             }
             return "Here are the matching tasks in your list:\n" + matchingTasksString;
+        }
+    }
+
+    private void addMatchingTasks(ArrayList<String> tasks, String kw) {
+        switch (kw) {
+        case "event":
+        case "events":
+            for (Task t : list) {
+                if (t instanceof Event) {
+                    tasks.add(t.toString());
+                }
+            }
+            break;
+        case "deadline":
+        case "deadlines":
+            for (Task t : list) {
+                if (t instanceof Deadline) {
+                    tasks.add(t.toString());
+                }
+            }
+            break;
+        case "todo":
+        case "todos":
+            for (Task t : list) {
+                if (!(t instanceof Deadline || t instanceof Event)) {
+                    tasks.add(t.toString());
+                }
+            }
+            break;
+        default:
+            for (Task t : list) {
+                if (t.toString().toLowerCase().contains(kw)) {
+                    tasks.add(t.toString());
+                }
+            }
         }
     }
 }
