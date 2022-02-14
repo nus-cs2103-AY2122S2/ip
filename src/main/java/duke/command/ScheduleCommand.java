@@ -28,7 +28,7 @@ public class ScheduleCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
         TaskList newTaskList = tasks.findSameSchedule(this.date);
-        String message = "Here is your Schedule for " + this.date + "\n";
+        String message = "Here is your schedule for: " + this.date + "\n";
         int counter = 1;
         for (int i = 0; i < newTaskList.getListSize(); i++) {
             String output = counter + "." + newTaskList.getTask(i);
@@ -36,7 +36,7 @@ public class ScheduleCommand extends Command {
             message += output + "\n";
         }
         if (counter == 1) {
-            message = "You have no Schedule on " + this.date + "\n";
+            message = "You have no schedule on:" + this.date + "\n";
         }
         return message;
     }

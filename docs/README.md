@@ -14,10 +14,9 @@ the app does not contain any sample data.
 Adds a task into TaskJame.
 
 Format for `todo`: `todo DESCRIPTION`
-
+Format for `deadline`: `deadline DESCRIPTION /by DATE TIME`
 Format for `event`: `event DESCRIPTION /at DATE START_TIME END_TIME`
 
-Format for `deadline`: `deadline DESCRIPTION /by DATE TIME`
 
 **NOTE** the following are the format for the date and any of the mentioned time
 - `TIME`: `hhmm`
@@ -26,14 +25,27 @@ Format for `deadline`: `deadline DESCRIPTION /by DATE TIME`
 Example of usage: 
 - `todo run`
 - `deadline return book /by 2022-05-28 2000`
-- `event book sale /at 2022-05-27 0800`		  
+- `event book sale /at 2022-05-27 0800 2000`		  
 
-Expected outcome: 
-
-TaskJamie would record that task and save it. 
-TaskJamie should show a message `Got it. I've added this task: task_description` 
-and TaskJamie would tell you how many tasks are in the list. Eg: `Now you have x tasks in your list.`
-
+Expected outcome:  
+- After running `todo run`
+```
+"Got it. I've added this task:
+[T][] run
+Now you have 1 tasks in the list."
+```
+- After running `deadline return book /by 2022-05-28 2000`
+```
+"Got it. I've added this task:
+[D][] return book (by: May 28 2022 8:00PM)
+Now you have 2 tasks in the list."
+```
+- After running `event book sale /at 2022-05-27 0800 2000`
+```
+"Got it. I've added this task:
+[D][] book sale (at: May 27 2022 8:00AM to 8:00PM)
+Now you have 3 tasks in the list."
+```
 
 ## Deleting a task : `delete`
 
@@ -45,18 +57,27 @@ Format : `delete INDEX`
 
 Example of usage: `delete 1`
 
-Expected outcome: 
-TaskJamie will remove the task at index 1.
-TaskJamie should show a message `Got it. I've removed this task: task_description`and 
-TaskJamie would tell you how many tasks are left in the list. Eg: `Now you have x tasks in your list.`
-
+Expected outcome:  
+**Assuming the first task is `todo run`**
+```
+"Noted. I've removed this task:
+[T][] run
+Now you have 0 tasks in the list."
+```
 
 ## Listing all tasks: `list`
 
 Shows a list of all tasks recorded by TaskJamie.
 
-Format : `list`
+Format : `list`  
 
+Expected outcome:
+```
+"Here are the tasks in your list:
+1. task 1
+2. deadline 1
+3. event 1 "
+```
 
 ## Checking/Unchecking a task on the list : `unmark`, `mark`
 
@@ -73,11 +94,16 @@ Example usage :
 - `unmark 1` 
 
 Expected outcome:
- 
-TaskJamie will mark the task at index 1.
-TaskJamie should show a message `Nice! I've marked this task as done: task_description`
-and TaskJamie would Mark and `X` on that task to signify that the task is done. The negation is true as well (for unmark).
+**Assuming the first task is `todo run`**
+```
+If its mark 1 : 
+"Nice I've marked this task as done:
+[T][X] run"
 
+If its unmark 1 :
+"Nice I've marked this task as not done yet:
+[T][] run"
+```
 
 ## Listing all `events` and `deadlines` from a particular `date`: `schedule`
 
@@ -87,11 +113,14 @@ Format : `schedule DATE`
 
 - As stated above, the format for `DATE` would be **`yyyy-mm-dd`**
 
-Example usage : `schedule 2022-05-29`
+Example usage : `schedule 2022-05-28`
 
-Expected outcome: 
-TaskJamie will list all the task that are associated with the given date and 
-should show a message `Here is your Schedule for DATE`.
+Expected outcome:  
+**Assuming only task is `deadline return book /by 2022-05-28 2000`**
+```
+"Here is your Schedule for: 2022-05-28
+1.[D][] return book (by: May 28 2022 8:00PM)
+```
 
 ## Exiting the program : `bye`
 
