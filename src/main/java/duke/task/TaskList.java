@@ -101,7 +101,7 @@ public class TaskList {
     public String toString() {
         String output = "";
         for (int i = 0; i < taskArr.size(); i++) {
-            output += String.format("      %d. %s\n", i + 1, taskArr.get(i).toString());
+            output += String.format("    %d. %s\n", i + 1, taskArr.get(i).toString());
         }
         return output;
     }

@@ -67,7 +67,7 @@ public class Parser {
 
         String[] inputArgs = input.trim().split(" ", 2);
 
-        switch (inputArgs[0]) {
+        switch (inputArgs[0].toLowerCase()) {
         case TodoCommand.COMMAND_WORD:
             return handleTodo(inputArgs);
         case DeadlineCommand.COMMAND_WORD:
