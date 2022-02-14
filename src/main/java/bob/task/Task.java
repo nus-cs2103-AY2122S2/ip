@@ -42,7 +42,7 @@ public abstract class Task implements Serializable, Comparable<Task> {
             taskPriority = Priority.MEDIUM;
         } else if (priority.equalsIgnoreCase(Priority.LOW.name())) {
             taskPriority = Priority.LOW;
-        } else {
+        } else if (priority.equalsIgnoreCase(Priority.NONE.name())){
             taskPriority = Priority.NONE;
         }
     }
