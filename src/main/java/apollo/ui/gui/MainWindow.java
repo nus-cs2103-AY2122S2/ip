@@ -38,9 +38,6 @@ public class MainWindow extends AnchorPane {
     public void initialize(String greeting, Gui gui) {
         this.gui = gui;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(greeting, apolloImage)
-        );
         try {
             String userImagePath = "/images/user.png";
             String apolloImagePath = "/images/apollo.png";
@@ -49,6 +46,9 @@ public class MainWindow extends AnchorPane {
         } catch (ApolloIoException e) {
             System.out.println(e.getMessage());
         }
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(greeting, apolloImage)
+        );
     }
 
     private Image loadImage(String path) throws ApolloIoException {
