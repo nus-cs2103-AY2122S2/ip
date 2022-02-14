@@ -310,14 +310,18 @@ public class Pikachu {
     public String findTasks(String str) {
         String result = "Here are the matching tasks in your list:\n";
         int count = 1;
-        String[] split2 = str.split(" ", 2);
-        for (Task t : inputList) {
-            //Current task does not contain the keyword
-            if (!t.getName().contains(split2[1])) continue;
-            result += ("   " + count + ". " + t + "\n");
-            count += 1;
+        try {
+            String[] split2 = str.split(" ", 2);
+            for (Task t : inputList) {
+                //Current task does not contain the keyword
+                if (!t.getName().contains(split2[1])) continue;
+                result += ("   " + count + ". " + t + "\n");
+                count += 1;
+            }
+            return result;
+        } catch (Exception e) {
+            return "Please specify a keyword!";
         }
-        return result;
     }
 }
 
