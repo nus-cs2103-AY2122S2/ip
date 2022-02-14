@@ -37,7 +37,7 @@ public class DialogBox extends HBox {
     private static final String BERNIE_STYLE = "-fx-label-padding: 10 20; " +
             "-fx-background-insets: 5; " +
             "-fx-background-radius: 20; " +
-            "-fx-background-color: #D3D3D3";
+            "-fx-background-color: #EBECF0";
 
     private DialogBox(String text, Image img, String type) {
         try {

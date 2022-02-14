@@ -3,6 +3,7 @@ package bernie.ui;
 import bernie.Bernie;
 import bernie.commands.CommandHandler;
 import bernie.storage.Storage;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,8 +11,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,6 +26,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button helpButton;
 
     private Bernie bernie;
 
@@ -58,9 +61,21 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         // Exit app if user inputs bye
-        if (response == "See ya!") {
-            Platform.exit();
+        if (response.equals("See ya!")) {
+            handleExit();
         }
+    }
+
+    /**
+     * Displays the various commands that the user can type in
+     */
+    @FXML
+    private void handleHelpInput() {
+        InputResponder responder = bernie.getCommandHandler().getInputResponder();
+        String helpMsg = responder.showHelpMsg();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBernieDialog(helpMsg, bernieImage)
+        );
     }
 
     private void handleStartUp(String greetMsg, String loadMsg) {
@@ -70,5 +85,14 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getBernieDialog(loadMsg, bernieImage)
         );
+    }
+
+    /**
+     * Runs when user types bye, delays the exit
+     */
+    private void handleExit() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(e -> Platform.exit());
+        delay.play();
     }
 }

@@ -13,8 +13,15 @@ public class InputResponder {
      * @return String, the message
      */
     public String greet() {
-        return "Hello, I'm Bernie your task manager!\n" +
-                "In case you forgot, here's how to create tasks:\n" +
+        return "Hello, I'm Bernie your task manager!\n";
+    }
+
+    /**
+     * Shows the various commands that a user can input
+     * @return String, the message
+     */
+    public String showHelpMsg() {
+        return "In case you forgot, here's how to create tasks:\n" +
                 "For tasks to do: todo <description>\n" +
                 "For deadlines: deadline <description> /by yyyy-mm-dd\n" +
                 "For events: event <description> /at <time>\n" +
@@ -24,7 +31,6 @@ public class InputResponder {
                 "To get deadlines not done, type: remind\n" +
                 "To exit, type: bye";
     }
-
 
     /**
      * Returns the message when user exits out of the program

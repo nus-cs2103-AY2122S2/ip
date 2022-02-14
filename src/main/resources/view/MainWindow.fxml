@@ -5,15 +5,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bernie.ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bernie.ui.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" style="-fx-focus-color: transparent;"/>
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #ADD8E6; -fx-font-size: 16; -fx-focus-color: transparent;" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0" style="-fx-focus-color: transparent;">
+        <TextField fx:id="userInput" layoutX="97.0" layoutY="557.0" onAction="#handleUserInput" prefHeight="33.0" prefWidth="278.0" style="-fx-focus-color: transparent; -fx-background-radius: 20;" AnchorPane.bottomAnchor="10.0" />
+        <Button fx:id="sendButton" layoutX="311.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="32.0" prefWidth="65.0" style="-fx-background-color: #ADD8E6; -fx-font-size: 13; -fx-focus-color: transparent; -fx-background-radius: 20;" text="Send" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-focus-color: transparent; -fx-background-color: transparent;" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" style="-fx-background-color: #F9F9F9; -fx-focus-color: transparent; -fx-background-image: url(./images/bg.jpeg);"/>
+                <VBox fx:id="dialogContainer" alignment="TOP_CENTER" prefHeight="555.0" prefWidth="388.0" style="-fx-focus-color: transparent; -fx-background-color: #FFFFFF; -fx-border-color: none; " />
             </content>
         </ScrollPane>
+        <Button fx:id="helpButton" layoutX="21.0" layoutY="557.0" mnemonicParsing="false" onAction="#handleHelpInput" prefHeight="32.0" prefWidth="57.0" style="-fx-background-color: #EBECF0; -fx-font-size: 13; -fx-focus-color: transparent; -fx-background-radius: 20;" text="Help">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
