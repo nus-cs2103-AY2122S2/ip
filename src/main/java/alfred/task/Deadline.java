@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    protected static final String type = "D";
+    protected static final String TYPE = "D";
+    private static final String SYMBOL = "\u26A0";
     private final LocalDateTime dateTime;
     private final String dateAndTime;
     private final String description;
@@ -42,14 +43,14 @@ public class Deadline extends Task {
      */
     @Override
     public String taskToSaveString() {
-        String mark = this.isCompleted ? Task.COMPLETION_MARK : Task.INCOMPLETE_MARK;
-        return String.join(Task.FORMAT_SPLIT, Deadline.type, mark, this.description,
+        String mark = this.isCompleted ? Task.FORMAT_COMPLETION_MARK : Task.FORMAT_INCOMPLETE_MARK;
+        return String.join(Task.FORMAT_SPLIT, Deadline.TYPE, mark, this.description,
                 this.dateAndTime);
     }
 
     @Override
     public String toString() {
-        return "[" + Deadline.type + "]" + super.toString() + " (by: "
+        return " " + Deadline.SYMBOL + " " + super.toString() + " (by: "
                 + Task.localDateTimeToString(this.dateTime) + ")";
 
     }

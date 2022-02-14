@@ -13,10 +13,12 @@ import java.util.regex.Pattern;
 public abstract class Task {
     // class constants
     public static final String FORMAT_SPLIT = "`";
-    protected static final String COMPLETION_MARK = "X";
-    protected static final String INCOMPLETE_MARK = " ";
+    public static final String FORMAT_COMPLETION_MARK = "X";
+    public static final String FORMAT_INCOMPLETE_MARK = "O";
+    protected static final String COMPLETION_MARK = "\u2714";
+    protected static final String INCOMPLETE_MARK = "\u274C";
     private static final DateTimeFormatter dateTimeFormatter =
-            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.MEDIUM);
+            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT);
 
 
     // instance attributes
@@ -90,13 +92,13 @@ public abstract class Task {
         String[] arguments = input.split(Task.FORMAT_SPLIT);
         arguments = Arrays.stream(arguments).map(s -> s.trim()).toArray(String[]::new);
         String command = arguments[0];
-        boolean marked = arguments[1].equals(Task.COMPLETION_MARK);
+        boolean marked = arguments[1].equals(Task.FORMAT_COMPLETION_MARK);
         switch (command) {
-        case ToDo.type:
+        case ToDo.TYPE:
             return new ToDo(marked, arguments[2]);
-        case Event.type:
+        case Event.TYPE:
             return new Event(marked, arguments[2], arguments[3]);
-        case Deadline.type:
+        case Deadline.TYPE:
             return new Deadline(marked, arguments[2], arguments[3]);
         default:
             throw new RuntimeException("Invalid command saved!");
@@ -121,6 +123,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.markIfComplete() + "] " + this.description;
+        return " " + this.markIfComplete() + "  " + this.description;
     }
 }

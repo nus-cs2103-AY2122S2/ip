@@ -1,4 +1,5 @@
-T` ` thing
-D` ` some deadline`2022-10-22T10:00:00
-E` ` some event`2022-09-26T11:00:00
-E` ` some different event`2022-09-26T11:00:00
+T`X` Water plants
+T`X` Call Amy
+T`O` Revise for test
+D`O` Homework`2022-10-22T10:00:00
+E`O` Dinner`2022-09-26T11:00:00

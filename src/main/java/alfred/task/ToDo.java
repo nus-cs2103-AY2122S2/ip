@@ -5,7 +5,8 @@ package alfred.task;
  * Encapsulates a T0D0 task.
  */
 public class ToDo extends Task {
-    protected static final String type = "T";
+    protected static final String TYPE = "T";
+    private static final String SYMBOL = "\uD83D\uDCDA";
     private final String description;
 
     /**
@@ -31,13 +32,13 @@ public class ToDo extends Task {
      */
     @Override
     public String taskToSaveString() {
-        String mark = this.isCompleted ? Task.COMPLETION_MARK : Task.INCOMPLETE_MARK;
-        return String.join(Task.FORMAT_SPLIT, ToDo.type, mark, this.description);
+        String mark = this.isCompleted ? Task.FORMAT_COMPLETION_MARK : Task.FORMAT_INCOMPLETE_MARK;
+        return String.join(Task.FORMAT_SPLIT, ToDo.TYPE, mark, this.description);
     }
 
     @Override
     public String toString() {
-        return "[" + ToDo.type + "]" + super.toString();
+        return " " + ToDo.SYMBOL + " " + super.toString();
     }
 
     @Override

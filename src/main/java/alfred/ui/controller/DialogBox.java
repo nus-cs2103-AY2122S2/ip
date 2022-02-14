@@ -1,7 +1,5 @@
 package alfred.ui.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
 import javafx.collections.FXCollections;
@@ -12,13 +10,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
