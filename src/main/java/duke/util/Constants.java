@@ -30,7 +30,7 @@ public class Constants {
             "1. list: list out all of your tasks\n" +
             "2. todo <task>: add a todo task into your task list\n" +
             "3. deadline <task> /by <deadline>: add a deadline into your task list\n" +
-            "4. even <task> /at <time>: add an event into your task list\n" +
+            "4. event <task> /at <time>: add an event into your task list\n" +
             "5. mark <inde>: mark a task at specified index as done\n" +
             "6. unmark <index>: unmark a task at specified index as not done yet\n" +
             "7. delete <index>: delete a task at sepcified index\n" +
