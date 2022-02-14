@@ -101,5 +101,5 @@ Format: `update TASK_INDEX /name NEW_NAME` or `update TASK_INDEX /date NEW_DATE`
 Examples:
 
 - `update 1 /name read library book` will update `todo read book` to `todo read library book`
-- `update 3 /date 2022-04-04` will update `deadline return book by 4th March 2022` to `deadline return book by 4th April 2022`<br><br>
+- `update 3 /date 2022-04-04` will update `deadline return book by 4th March 2022` to `deadline return book by 4th April 2022`
 
