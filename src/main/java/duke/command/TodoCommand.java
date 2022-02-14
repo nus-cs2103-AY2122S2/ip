@@ -36,10 +36,23 @@ public class TodoCommand extends Command<String> {
      */
     @Override
     public void runCommand() {
-        String splicedString = inputText.substring(5);
-        ToDo freshTodo = new ToDo(splicedString);
-        taskList.addTask(freshTodo);
+        ToDo freshToDo = toDoCreator();
+        taskList.addTask(freshToDo);
         storage.writeToFile(taskList);
-        ui.showAddTodo(freshTodo, taskList);
+        ui.showAddTodo(freshToDo, taskList);
+    }
+
+    public ToDo toDoCreator() {
+        if (inputText.contains("/pri")) {
+            String[] splicedString = inputText.split(" /pri ");
+            String description = splicedString[0].substring(5);
+            String priority = splicedString[1];
+            ToDo freshToDo = new ToDo(description, priority);
+            return freshToDo;
+        } else {
+            String splicedString = inputText.substring(5);
+            ToDo freshTodo = new ToDo(splicedString, "");
+            return freshTodo;
+        }
     }
 }

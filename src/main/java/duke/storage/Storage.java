@@ -94,25 +94,28 @@ public class Storage {
             }
 
             if (taskType == 'T') {
-                ToDo freshTodo = new ToDo(currTask.substring(9));
+                char priorityLevel = currTask.charAt(9);
+                ToDo freshTodo = new ToDo(currTask.substring(12), Character.toString(priorityLevel));
                 if (isDone) {
                     freshTodo.setDone(true);
                 }
                 taskList.add(freshTodo);
             } else if (taskType == 'D') {
+                char priorityLevel = currTask.charAt(9);
                 String[] splicedString = currTask.split(" \\(by: ");
-                String description = splicedString[0].substring(9);
+                String description = splicedString[0].substring(12);
                 String date = splicedString[1].substring(0, splicedString[1].length() - 1);
-                Deadline freshDeadline = new Deadline(description, date, true);
+                Deadline freshDeadline = new Deadline(description, date, Character.toString(priorityLevel),true);
                 if (isDone) {
                     freshDeadline.setDone(true);
                 }
                 taskList.add(freshDeadline);
             } else {
+                char priorityLevel = currTask.charAt(9);
                 String[] splicedString = currTask.split(" \\(at: ");
-                String description = splicedString[0].substring(9);
+                String description = splicedString[0].substring(12);
                 String date = splicedString[1].substring(0, splicedString[1].length() - 1);
-                Event freshEvent = new Event(description, date, true);
+                Event freshEvent = new Event(description, date, Character.toString(priorityLevel),true);
                 if (isDone) {
                     freshEvent.setDone(true);
                 }

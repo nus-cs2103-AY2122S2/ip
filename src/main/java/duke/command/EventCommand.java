@@ -35,12 +35,27 @@ public class EventCommand extends Command<String> {
      */
     @Override
     public void runCommand() {
-        String[] splicedString = inputText.split(" /at ");
-        String splicedDescription = splicedString[0].substring(6);
-        String dueDate = splicedString[1];
-        Event freshEvent = new Event(splicedDescription, dueDate, false);
+        Event freshEvent = eventCreator();
         taskList.addTask(freshEvent);
         storage.writeToFile(taskList);
         ui.showAddEvent(freshEvent, taskList);
+    }
+
+    public Event eventCreator() {
+        if (inputText.contains("/pri")) {
+            String[] splicedString = inputText.split(" /at ");
+            String splicedDescription = splicedString[0].substring(6);
+            String[] splicedDetails = splicedString[1].split(" /pri ");
+            String dueDate = splicedDetails[0];
+            String priorityLevel = splicedDetails[1];
+            Event freshEvent = new Event(splicedDescription, dueDate, priorityLevel, false);
+            return freshEvent;
+        } else {
+            String[] splicedString = inputText.split(" /at ");
+            String splicedDescription = splicedString[0].substring(6);
+            String dueDate = splicedString[1];
+            Event freshEvent = new Event(splicedDescription, dueDate, "", false);
+            return freshEvent;
+        }
     }
 }

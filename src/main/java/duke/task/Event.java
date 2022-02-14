@@ -14,10 +14,11 @@ public class Event extends Task {
      * Constructor for Event object
      * @param description description of task
      * @param dueDate due date of task
+     * @param priority priority level
      * @param fromDisk boolean to determine if object was created from hard disk or from commandline
      */
-    public Event(String description, String dueDate, boolean fromDisk) {
-        super(description);
+    public Event(String description, String dueDate, String priority, boolean fromDisk) {
+        super(description, priority);
         if (fromDisk) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hhmma");
             LocalDateTime parsedDate = LocalDateTime.parse(dueDate, formatter);

@@ -35,13 +35,26 @@ public class DeadlineCommand extends Command<String> {
      */
     @Override
     public void runCommand() {
-        String[] splicedString = inputText.split(" /by ");
-        String splicedDescription = splicedString[0].substring(9);
-        String dueDate = splicedString[1];
-        Deadline freshDeadline = new Deadline(splicedDescription, dueDate, false);
+        Deadline freshDeadline = deadlineCreator();
         taskList.addTask(freshDeadline);
         storage.writeToFile(taskList);
         ui.showAddDeadline(freshDeadline, taskList);
+    }
+
+    public Deadline deadlineCreator() {
+        String[] splicedString = inputText.split(" /by ");
+        String splicedDescription = splicedString[0].substring(9);
+        if (inputText.contains("/pri")) {
+            String[] splicedDetails = splicedString[1].split(" /pri ");
+            String dueDate = splicedDetails[0];
+            String priorityLevel = splicedDetails[1];
+            Deadline freshDeadline = new Deadline(splicedDescription, dueDate, priorityLevel, false);
+            return freshDeadline;
+        } else {
+            String dueDate = splicedString[1];
+            Deadline freshDeadline = new Deadline(splicedDescription, dueDate, "", false);
+            return freshDeadline;
+        }
     }
 }
 
