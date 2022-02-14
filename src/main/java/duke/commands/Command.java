@@ -55,7 +55,7 @@ public class Command {
 
     private static int formatNumber(String userInput) throws DukeException {
         if (!isInteger(userInput)) {
-            throw new DukeException("☹ OOPS!!! Please enter a appropriate integer\n");
+            throw new DukeException("OOPS!!! Please enter a appropriate integer\n");
         }
         return Integer.parseInt(userInput) - 1;
     }
@@ -64,7 +64,7 @@ public class Command {
         int index = formatNumber(userInput);
 
         if (index < 0 || index > listOfTasks.size() - 1) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
+            throw new DukeException("OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
 
         Task removedTask = listOfTasks.remove(index);
@@ -89,7 +89,7 @@ public class Command {
     private static String markTask(String userInput, TaskList listOfTasks) throws DukeException {
         int index = formatNumber(userInput);
         if (index < 0 || index > listOfTasks.size() - 1) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
+            throw new DukeException("OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
 
         assert index > 0 && index < listOfTasks.size() : "index is not in range";
@@ -103,7 +103,7 @@ public class Command {
     private static String unmarkTask(String userInput, TaskList listOfTasks) throws DukeException {
         int index = formatNumber(userInput);
         if (index < 0 || index > listOfTasks.size() - 1) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the number you provided is invalid\n");
+            throw new DukeException("OOPS!!! I'm sorry, but the number you provided is invalid\n");
         }
 
         assert index > 0 && index < listOfTasks.size() : "index is not in range";
@@ -184,7 +184,7 @@ public class Command {
                 toPrint = help();
                 break;
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, "
+                throw new DukeException("OOPS!!! I'm sorry, "
                         + "but I don't know what that means :-(\n");
             }
         } catch (DukeException e) {

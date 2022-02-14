@@ -22,7 +22,7 @@ public class Parser {
 
     private static int processNumber(String userInput) throws DukeException {
         if (!isInteger(userInput)) {
-            throw new DukeException("☹ OOPS!!! Please enter a appropriate integer\n");
+            throw new DukeException("OOPS!!! Please enter a appropriate integer\n");
         }
         return Integer.parseInt(userInput) - 1;
     }
@@ -31,7 +31,7 @@ public class Parser {
         if (inputMessage.length() <= 4) {
 
             throw new DukeException(
-                    "☹ OOPS!!! I'm sorry, but you need to provide a description "
+                    "OOPS!!! I'm sorry, but you need to provide a description "
                             + "for the find task\n");
         }
 
@@ -43,7 +43,7 @@ public class Parser {
     private static String[] parseTodo(String inputMessage) throws DukeException {
         if (inputMessage.length() <= 4) {
             throw new DukeException(
-                    "☹ OOPS!!! I'm sorry, but you need to provide a description "
+                    "OOPS!!! I'm sorry, but you need to provide a description "
                             + "for the Todo task\n");
         }
 
@@ -59,11 +59,11 @@ public class Parser {
             msg = temp.split(" /at");
             if (msg.length != 2) { // If the split message's length is not 2, the format is incorrect
                 throw new DukeException(
-                        "☹ OOPS!!! I'm sorry, the duke.Tasks.Event description cannot be empty\n");
+                        "OOPS!!! I'm sorry, the duke.Tasks.Event description cannot be empty\n");
             }
         } else {
         throw new DukeException(
-                "☹ OOPS!!! I'm sorry, but you need to use the following format:\n"
+                "OOPS!!! I'm sorry, but you need to use the following format:\n"
                         + "event {description} /at {yyyy/MM/dd HH:mm}\n");
         }
         msg = new String[] {"event", msg[0], msg[1]};
@@ -75,7 +75,7 @@ public class Parser {
         msg = inputMessage.split(" ");
         if (msg.length != 2) { // If the split message's length is not 2, the format is incorrect
             throw new DukeException(
-                    "☹ OOPS!!! I'm sorry, but you need to enter a number as well!\n");
+                    "OOPS!!! I'm sorry, but you need to enter a number as well!\n");
         }
         return msg;
     }
@@ -87,13 +87,13 @@ public class Parser {
             msg = temp.split(" /by");
             if (msg.length != 2) { // If the split message's length is not 2, the format is incorrect
                 throw new DukeException(
-                        "☹ OOPS!!! I'm sorry, the Deadline description cannot be empty\n");
+                        "OOPS!!! I'm sorry, the Deadline description cannot be empty\n");
             }
 
             msg = new String[] {"deadline", msg[0], msg[1]};
         } else {
             throw new DukeException(
-                    "☹ OOPS!!! I'm sorry, but you need to use the following format:\n"
+                    "OOPS!!! I'm sorry, but you need to use the following format:\n"
                             + "deadline {description} /by {yyyy/MM/dd HH:mm}\n");
         }
         return msg;

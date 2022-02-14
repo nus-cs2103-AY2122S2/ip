@@ -8,9 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 /**
@@ -35,7 +38,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setImage(DialogBox.getRoundedImage(img, 200));
     }
 
     /**
@@ -47,6 +50,15 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
+
+    private static Image getRoundedImage(Image image, int rad) {
+        Circle clip = new Circle(image.getWidth() / 2, image.getHeight() / 2, rad);
+        ImageView imageView = new ImageView(image);
+        imageView.setClip(clip);
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        return imageView.snapshot(parameters, null);
+    };
 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);

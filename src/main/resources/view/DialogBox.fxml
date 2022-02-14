@@ -10,7 +10,7 @@
     <children>
       <Text fx:id="dialog" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font name="Times New Roman" size="13.0" />
+            <Font name="Rockwell Extra Bold" size="13.0" />
          </font>
       </Text>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
