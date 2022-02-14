@@ -35,17 +35,36 @@ public class DialogBox extends HBox {
         displayPicture.setClip(c);
         dialog.setText(text);
         if (isUser) {
-            dialog.setStyle("-fx-background-color: GAINSBORO;"
-                    + "-fx-background-radius: 25;"
-                    + "-fx-padding: 15 15 15 15");
+            setUserDbStyle();
         } else {
-            dialog.setStyle("-fx-background-color: DODGERBLUE; "
-                    + "-fx-background-radius: 25;"
-                    + "-fx-padding: 15 15 15 15");
+            setBobDbStyle();
         }
+        setImageSize(img);
+    }
+
+    private void setBobDbStyle() {
+        dialog.setStyle("-fx-background-color: GAINSBORO;"
+                + "-fx-background-radius: 25;"
+                + "-fx-padding: 15 15 15 15");
+    }
+
+    private void setUserDbStyle() {
+        dialog.setStyle("-fx-background-color: DODGERBLUE; "
+                + "-fx-background-radius: 25;"
+                + "-fx-padding: 15 15 15 15");
+    }
+
+    private void setImageSize(Image img) {
         displayPicture.setFitWidth(120.0);
         displayPicture.setFitHeight(120.0);
         displayPicture.setImage(img);
+    }
+
+    private void setErrorStyle() {
+        dialog.setStyle("-fx-background-color: LIGHTPINK;"
+                + "-fx-background-radius: 25;"
+                + "-fx-padding: 15 15 15 15;"
+                + "-fx-font-weight: bold");
     }
 
     private void flip() {
@@ -62,6 +81,12 @@ public class DialogBox extends HBox {
     public static DialogBox getBobDialog(String text, Image img) {
         var db = new DialogBox(text, img, false);
         db.flip();
+        return db;
+    }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = getBobDialog(text, img);
+        db.setErrorStyle();
         return db;
     }
 }
