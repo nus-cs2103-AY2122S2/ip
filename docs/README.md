@@ -167,5 +167,5 @@ All tasks that have `Lecture` in the description will be displayed.
 
 ```
 Here are the matching tasks in your list:
- 2.[E][ ] CS2103T Lecture (at: Feb-18-2022 1400)
+2.[E][ ] CS2103T Lecture (at: Feb-18-2022 1400)
 ```
