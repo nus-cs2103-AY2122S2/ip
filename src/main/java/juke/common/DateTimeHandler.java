@@ -109,7 +109,7 @@ public class DateTimeHandler {
     }
 
     /**
-     * Returns dat and time in the right format.
+     * Returns date and time in the right format.
      *
      * @return Formatted date and time string.
      */

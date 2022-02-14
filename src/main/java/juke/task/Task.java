@@ -3,7 +3,7 @@ package juke.task;
 /**
  * Abstraction for a task.
  */
-public abstract class Task {
+public abstract class Task implements Cloneable {
     /**
      * Task description.
      */
@@ -91,4 +91,14 @@ public abstract class Task {
     public String toString() {
         return this.getTaskIcon() + " " + this.getStatusIcon() + " " + this.getDescription();
     }
+
+    /**
+     * Returns a clone of this task.
+     * Implemented in sub-classes.
+     *
+     * @return Clone of this task.
+     * @throws CloneNotSupportedException Should not throw error.
+     */
+    @Override
+    public abstract Object clone() throws CloneNotSupportedException;
 }

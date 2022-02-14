@@ -32,6 +32,7 @@ public class CommandHandler {
                 .forEach(type -> COMMANDS.put(type.getCommandName(), () -> new AddCommand(type)));
         COMMANDS.put("delete", DeleteCommand::new);
         COMMANDS.put("find", FindCommand::new);
+        COMMANDS.put("clone", CloneCommand::new);
     }
 
     /**
