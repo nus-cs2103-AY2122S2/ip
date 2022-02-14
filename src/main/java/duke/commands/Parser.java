@@ -36,6 +36,11 @@ public class Parser {
         }
 
         String [] msg = inputMessage.split("find ");
+        if (msg.length < 1) {
+            throw new DukeException(
+                    "OOPS!!! I'm sorry, but you need to provide a description "
+                            + "for the find task\n");
+        }
         msg[0] = "find";
         return msg;
     }
