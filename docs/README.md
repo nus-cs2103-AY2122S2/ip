@@ -110,13 +110,13 @@ Q: How do I transfer my data to another Computer?
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Nexus home folder.
 ***
 ## Command Summary
-| Command  | Description                                                                 |
-|----------|-----------------------------------------------------------------------------|
-| list     | List all new or modified files                                              |
-| mark     | Marks the task as completed.                                                |
-| unmark   | Unmark task as not completed.                                               |
-| todo     | Creates a new task that user has to do.                                     |
-| deadline | Creates a new deadline and a date in which the task has to be completed by. |
-| find     | Finds tasks that matches the description.                                   |
-| delete   | Deletes the specific task from the list.                                    |
-| help     | Shows the list of commands available in Nexus.                              | 
+ Command      | Description                                                                 
+--------------|-----------------------------------------------------------------------------
+ **list**     | List all new or modified files                                              
+ **mark**     | Marks the task as completed.                                                
+ **unmark**   | Unmark task as not completed.                                               
+ **todo**     | Creates a new task that user has to do.                                     
+ **deadline** | Creates a new deadline and a date in which the task has to be completed by. 
+ **find**     | Finds tasks that matches the description.                                   
+ **delete**   | Deletes the specific task from the list.                                    
+ **help**     | Shows the list of commands available in Nexus.                               
