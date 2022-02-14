@@ -1,6 +1,7 @@
 # Ghibli Task Manager User Guide
 
 This project is a Studio-Ghibli Themed Task Manager that helps you to manage your todos, deadlines and events.
+![ip_photo](https://user-images.githubusercontent.com/83572953/153879638-4a6054ae-2034-48ed-82a0-a9fc6b565783.jpg)
 
 ## List of Features
 
