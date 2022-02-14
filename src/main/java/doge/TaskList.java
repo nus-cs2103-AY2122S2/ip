@@ -1,8 +1,8 @@
 package doge;
 
-import doge.task.Task;
-
 import java.util.ArrayList;
+
+import doge.task.Task;
 
 /**
  * Represents the list of tasks input by the user.

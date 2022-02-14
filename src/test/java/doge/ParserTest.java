@@ -1,16 +1,16 @@
 package doge;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 import doge.command.Command;
 import doge.exception.DogeException;
 import doge.stub.DeadlineCommandStub;
+import doge.stub.StorageStub;
 import doge.stub.TaskListStub;
 import doge.stub.UiStub;
-import doge.stub.StorageStub;
 
 
 public class ParserTest {

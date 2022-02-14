@@ -3,13 +3,11 @@ package doge;
 import java.io.File;
 import java.io.IOException;
 
-import doge.Doge;
 import doge.command.ByeCommand;
 import doge.exception.DogeException;
 import doge.view.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;

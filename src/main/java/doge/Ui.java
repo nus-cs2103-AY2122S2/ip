@@ -1,8 +1,8 @@
 package doge;
 
-import doge.command.Command;
-
 import java.util.Scanner;
+
+import doge.command.Command;
 
 /**
  * Responsible for the interactions between Doge bot and the user.
@@ -28,8 +28,8 @@ public class Ui {
      */
     public String greet() {
         System.out.println("Oh it's you again...");
-        System.out.println("What kind of trouble would you " +
-                "inconvenience me with this time?");
+        System.out.println("What kind of trouble would you "
+                + "inconvenience me with this time?");
         return "Oh it's you again...\nWhat kind of trouble would you inconvenience me with this time?";
     }
 

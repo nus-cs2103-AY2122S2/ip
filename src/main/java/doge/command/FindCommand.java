@@ -9,7 +9,7 @@ import doge.exception.DogeException;
  * Represents the "find" command. Doge will filter out tasks that matches the corresponding character sequence.
  */
 public class FindCommand extends Command {
-    String message;
+    private String message;
 
     /**
      * Constructor for class Find.

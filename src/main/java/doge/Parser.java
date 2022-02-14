@@ -10,9 +10,7 @@ import doge.command.ListCommand;
 import doge.command.MarkCommand;
 import doge.command.TodoCommand;
 import doge.command.UnmarkCommand;
-
 import doge.exception.DogeException;
-
 import doge.task.Deadline;
 import doge.task.Event;
 import doge.task.Todo;

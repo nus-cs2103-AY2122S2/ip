@@ -1,26 +1,22 @@
 package doge;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
 import doge.exception.DogeException;
-import doge.DateTime;
 import doge.task.Deadline;
 import doge.task.Event;
 import doge.task.Task;
 import doge.task.Todo;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
 
 /**
  * Represents the local storage that stores the TaskList.
@@ -30,7 +26,8 @@ public class Storage {
     /**
      * Constructor for class Storage
      */
-    public Storage()  {
+    public Storage() {
+
     }
 
     /**
@@ -68,7 +65,7 @@ public class Storage {
         }
 
         try {
-            File f = new File( "./data/doge.txt");
+            File f = new File("./data/doge.txt");
             ArrayList<Task> temp = new ArrayList<>();
 
             if (f.createNewFile()) {
@@ -76,7 +73,7 @@ public class Storage {
             } else {
                 Scanner s = new Scanner(f);
                 while (s.hasNextLine()) {
-                    String[] curr = s.nextLine().split( "\\|");
+                    String[] curr = s.nextLine().split("\\|");
                     String taskStatus = curr.length > 1 ? curr[1].trim() : null;
                     String[] dateTime;
                     Task currTask;
@@ -111,6 +108,7 @@ public class Storage {
                         }
                         temp.add(currTask);
                         break;
+                    default:
                     }
                 }
             }

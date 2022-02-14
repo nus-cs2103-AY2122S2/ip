@@ -1,11 +1,11 @@
 package doge;
 
-import doge.exception.DogeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import doge.exception.DogeException;
 
 /**
  * Represents a class for parsing Date and Time

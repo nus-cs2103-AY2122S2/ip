@@ -3,16 +3,6 @@ package doge;
 import doge.command.Command;
 import doge.exception.DogeException;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 /**
  * Represents the Doge bot where it encapsulates the storage space, user interface and task list.
  */

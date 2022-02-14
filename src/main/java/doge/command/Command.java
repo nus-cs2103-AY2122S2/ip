@@ -14,15 +14,28 @@ public abstract class Command {
     protected String details;
     protected boolean isExit;
 
+    /**
+     * Constructor for Command class.
+     */
     public Command() {
 
     }
 
+    /**
+     * Another constructor for Command class.
+     *
+     * @param d details associated with a command
+     */
     public Command(String d) {
         this.details = d;
         this.isExit = false;
     }
 
+    /**
+     * Another constructor for Command class.
+     *
+     * @param task the task associated with the command
+     */
     public Command(Task task) {
         this.task = task;
         this.isExit = false;

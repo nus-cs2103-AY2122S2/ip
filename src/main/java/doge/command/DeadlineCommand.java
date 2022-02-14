@@ -1,5 +1,7 @@
 package doge.command;
 
+import java.time.LocalDateTime;
+
 import doge.DateTime;
 import doge.Storage;
 import doge.TaskList;
@@ -7,8 +9,6 @@ import doge.Ui;
 import doge.exception.DeadlineException;
 import doge.exception.DogeException;
 import doge.task.Task;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents the "deadline" command. Doge bot will add a task of "deadline" type into the TaskList.

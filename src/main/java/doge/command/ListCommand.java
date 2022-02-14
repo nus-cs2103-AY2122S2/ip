@@ -1,5 +1,7 @@
 package doge.command;
 
+import java.time.LocalDateTime;
+
 import doge.DateTime;
 import doge.Storage;
 import doge.TaskList;
@@ -9,8 +11,6 @@ import doge.exception.ListTasksDueException;
 import doge.task.Deadline;
 import doge.task.Event;
 import doge.task.Task;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents the "list" command. User can either list all tasks or only tasks that are due within a specified
@@ -73,6 +73,12 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * Either lists all tasks or tasks that are due by a certain period if stated.
+     *
+     * @param tasks the list of tasks
+     * @return the list of tasks as a String
+     */
     public String list(TaskList tasks) {
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -81,7 +87,17 @@ public class ListCommand extends Command {
         return output.toString();
     }
 
-    public boolean checkDateTime(String limiter, LocalDateTime currDateTime, LocalDateTime dueDateTime) throws DogeException {
+    /**
+     * Checks the current date and time against the due date and time.
+     *
+     * @param limiter determines the limits of the occurrence
+     * @param currDateTime the current date and time
+     * @param dueDateTime the due date and time
+     * @return a boolean to indicate whether the current date and time are within limits of the due date and time
+     * @throws DogeException if the limiter specified is invalid
+     */
+    public boolean checkDateTime(String limiter, LocalDateTime currDateTime, LocalDateTime dueDateTime)
+            throws DogeException {
         assert currDateTime != null : "current date/time is null";
         assert dueDateTime != null : "due date/time is null";
 
