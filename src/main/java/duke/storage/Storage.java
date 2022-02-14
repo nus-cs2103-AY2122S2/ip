@@ -20,6 +20,7 @@ import duke.tasks.Todo;
  */
 public class Storage {
     private static String filePath;
+    private final ArrayList<Task> list;
 
     /**
      * Constructor of storage class to store filepath of file.
@@ -28,6 +29,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         Storage.filePath = filePath;
+        this.list = new ArrayList<>();
     }
 
     /**
@@ -55,65 +57,74 @@ public class Storage {
      * @throws FileNotFoundException thrown when the file to load form does not exist
      */
     public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException {
-        ArrayList<Task> list = new ArrayList<>();
         try {
             File f = new File(filePath);
-            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            Scanner s = new Scanner(f);
             while (s.hasNext()) {
-                String currTask = s.nextLine();
-                String typeOfTask = Character.toString(currTask.charAt(1));
-                boolean isMarked = false;
-                if (isTaskMarked(currTask)) {
-                    isMarked = true;
-                }
-                switch (typeOfTask) {
-                case "T": {
-                    Todo curr = new Todo(currTask.substring(7));
-                    if (isMarked) {
-                        curr.mark();
-                    }
-                    assert curr != null : "to do should be created";
-                    list.add(curr);
-                    break;
-                }
-                case "D": {
-                    String[] info = currTask.split(" \\(by: ");
-                    String description = info[0].substring(7);
-                    String date = info[1].substring(0, info[1].length() - 1); //Oct 12 2020 1 pm
-
-                    Deadline curr = new Deadline(description, date);
-                    if (isMarked) {
-                        curr.mark();
-                    }
-                    assert curr != null : "deadline should be created";
-                    list.add(curr);
-                    break;
-                }
-                case "E": {
-                    String[] info = currTask.split(" \\(at: ");
-                    String description = info[0].substring(7);
-                    String date = info[1].substring(0, info[1].length() - 1);
-                    Event curr = new Event(description, date);
-                    if (isMarked) {
-                        curr.mark();
-                    }
-                    assert curr != null : "event should be created";
-                    list.add(curr);
-                    break;
-                }
-                default:
-                    throw new DukeException("file contains wrong task format");
-                }
+                execute(s.nextLine());
             }
         } catch (Exception err) {
-            File myObj = new File(filePath);
-            try {
-                myObj.createNewFile();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            createFile();
         }
         return list;
+    }
+    private void execute(String currTask) throws DukeException {
+        String typeOfTask = Character.toString(currTask.charAt(1));
+        switch (typeOfTask) {
+        case "T": {
+            createToDo(currTask);
+            break;
+        }
+        case "D": {
+            createDeadline(currTask);
+            break;
+        }
+        case "E": {
+            createEvent(currTask);
+            break;
+        }
+        default:
+            throw new DukeException("file contains wrong task format");
+        }
+    }
+    private void createEvent(String currTask) throws DukeException {
+        String[] info = currTask.split(" \\(at: ");
+        String description = info[0].substring(7);
+        String date = info[1].substring(0, info[1].length() - 1);
+        Event curr = new Event(description, date);
+        if (isTaskMarked(currTask)) {
+            curr.mark();
+        }
+        assert curr != null : "event should be created";
+        list.add(curr);
+    }
+    private void createDeadline(String currTask) throws DukeException {
+        String[] info = currTask.split(" \\(by: ");
+        String description = info[0].substring(7);
+        String date = info[1].substring(0, info[1].length() - 1); //Oct 12 2020 1 pm
+
+        Deadline curr = new Deadline(description, date);
+        if (isTaskMarked(currTask)) {
+            curr.mark();
+        }
+        assert curr != null : "deadline should be created";
+        list.add(curr);
+    }
+    private void createToDo(String currTask) {
+        Todo curr = new Todo(currTask.substring(7));
+        if (isTaskMarked(currTask)) {
+            curr.mark();
+        }
+        assert curr != null : "to do should be created";
+        list.add(curr);
+    }
+    private void createFile() {
+        File myObj = new File(filePath);
+        try {
+            myObj.createNewFile();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
     private boolean isTaskMarked(String task) {
         return Character.toString(task.charAt(4)).equals("X");
