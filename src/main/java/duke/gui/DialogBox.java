@@ -38,8 +38,8 @@ public class DialogBox extends HBox {
         }
 
         // Apply effect to ImageView
-        // set a clip to apply rounded border to the original image.
         Rectangle clip = new Rectangle(
+                // set a clip to apply rounded border to the original image.
                 displayPicture.getFitWidth(), displayPicture.getFitHeight()
         );
         clip.setArcWidth(20);
