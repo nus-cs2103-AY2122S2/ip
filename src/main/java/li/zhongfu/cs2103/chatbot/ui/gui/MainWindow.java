@@ -23,6 +23,9 @@ import li.zhongfu.cs2103.chatbot.types.message.Message;
 import li.zhongfu.cs2103.chatbot.types.message.QuitMessage;
 import li.zhongfu.cs2103.chatbot.types.message.SystemMessage;
 
+/**
+ * Controller class for Duke main window.
+ */
 public class MainWindow extends BorderPane {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     @FXML
@@ -41,8 +44,14 @@ public class MainWindow extends BorderPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setAndInitDuke(Duke d) {
-        duke = d;
+    /**
+     * Sets the current Duke instance to {@code duke} and initializes the instance, displaying the messages received
+     * if any.
+     *
+     * @param duke the Duke instance to be used
+     */
+    public void setAndInitDuke(Duke duke) {
+        this.duke = duke;
         List<Node> nodes = dialogContainer.getChildren();
         handleMessages(nodes, duke.init());
     }
@@ -57,6 +66,15 @@ public class MainWindow extends BorderPane {
         handleMessages(nodes, duke.handleInput(input));
     }
 
+    /**
+     * Handle messages returned from Duke: displays messages as system messages or chat bubbles, or quits the
+     * application as required.
+     * 
+     * If a {@code QuitMessage} is present, then the application only quits 1.5s after processing the message.
+     *
+     * @param dialogContainerChildren the {@code List} containing the children of the dialog VBox
+     * @param messages the messages to be handled
+     */
     private void handleMessages(List<Node> dialogContainerChildren, List<Message> messages) {
         for (Message msg : messages) {
             if (msg instanceof ChatMessage) {

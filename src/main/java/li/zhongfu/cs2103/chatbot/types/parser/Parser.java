@@ -44,8 +44,6 @@ public class Parser {
         this(DEFAULT_DATE_TIME_FORMATTER);
     }
 
-    // i'm literally just doing this because they said i had to
-    // maybe one day it'll support different formats
     /**
      * Parses a string in the form {@code positional argument /arg1 foo bar /arg2 baz bax /arg3}
      * and returns a {@code Map<String, String>} containing the parsed arguments, e.g.:
@@ -79,6 +77,12 @@ public class Parser {
         return args;
     }
 
+    /**
+     * Parses the given {@code String} and returns a {@code ParserResult} containing the parsed result.
+     *
+     * @param input the string to be parsed
+     * @return a {@code ParserResult} containing the parsed result
+     */
     public ParserResult parseInput(String input) {
         String[] parts = input.split("\\s+", 2); // split into command and args
         String cmd = parts[0];
@@ -90,7 +94,6 @@ public class Parser {
         }
     }
 
-    // er, probably not the best place for this, but whatever
     /**
      * Parses a LocalDateTime from a given date-time string.
      *

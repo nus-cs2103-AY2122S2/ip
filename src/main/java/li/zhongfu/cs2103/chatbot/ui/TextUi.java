@@ -41,6 +41,11 @@ public class TextUi {
         this.duke = duke;
     }
 
+    /**
+     * Initializes the Duke instance and runs the REPL.
+     *
+     * @throws IOException if an error occurs e.g. while reading user input or loading saved tasks
+     */
     public void run() throws IOException {
         printMotd();
         List<Message> messages = duke.init();
@@ -94,6 +99,11 @@ public class TextUi {
         this.printDialog(line.split("\n"));
     }
 
+    /**
+     * Runs the REPL loop for Duke.
+     * 
+     * @throws IOException if an error occurs e.g. while reading user input or loading saved tasks
+     */
     private void loop() throws IOException {
         while (true) {
             String input = br.readLine();
@@ -106,6 +116,13 @@ public class TextUi {
         }
     }
 
+    /**
+     * Handles messages received from Duke: formats and prints messages out depending on message type, and exits the
+     * program if a {@code QuitMessage} is received.
+     *
+     * @param messages the messages to be handled
+     * @throws QuitException used to signal that the application should exit if a {@code QuitMessage} is received
+     */
     private void handleMessages(List<Message> messages) throws QuitException {
         for (Message msg : messages) {
             if (msg instanceof ChatMessage) {
@@ -119,30 +136,6 @@ public class TextUi {
             }
         }
     }
-
-    /**
-     * Parses user input as a command and returns a ParserResult with the user input.
-     *
-     * @return a ParserResult containing the user input
-     */
-    //public ParserResult getInput() throws IOException {
-    //    String input = this.br.readLine();
-    //    return this.parser.parseInput(input);
-    //}
-
-    // i know this really really really doesn't belong here
-    // but i kinda can't be arsed
-    // todo fix this when you implement... idk... command objects, handlers, whatever
-    /**
-     * Parses a LocalDateTime from a given date-time string.
-     *
-     * @param dateTimeString a string containing a date and time to be parsed
-     * @return a parsed date/time in the form of a LocalDateTime instances
-     * @throws DateTimeParseException if dateTimeString contains an unrecognized date-time format
-     */
-    //public LocalDateTime parseDateTime(String dateTimeString) throws DateTimeParseException {
-    //    return this.parser.parseDateTime(dateTimeString);
-    //}
 }
 
 class QuitException extends Exception {

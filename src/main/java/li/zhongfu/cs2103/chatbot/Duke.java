@@ -62,6 +62,11 @@ public class Duke {
         this(botName, "data/tasks.dat");
     }
 
+    /**
+     * Initializes this Duke instance: loads saved tasks if available, and prints out welcome messages.
+     *
+     * @return messages to be displayed
+     */
     public List<Message> init() {
         List<Message> messages = new ArrayList<>();
         try {
@@ -85,6 +90,13 @@ public class Duke {
         return messages;
     }
 
+    /**
+     * Handles user input, performs necessary actions, and returns the resulting messages.
+     *
+     * @param input the input string entered by the user
+     * @return the messages to be displayed as a result of performing the actions dictated by the user
+     * @throws IOException if an error occurs e.g. while loading or saving tasks
+     */
     public List<Message> handleInput(String input) throws IOException {
         if (!init) {
             throw new RuntimeException("Duke not initialized yet");
@@ -236,7 +248,6 @@ public class Duke {
 
 class DukeException extends Exception {
     DukeException() {
-
     }
 
     DukeException(String message) {
