@@ -8,6 +8,7 @@ import static apollo.messages.Messages.NO_TASK_FOUND;
  */
 public class FindCommand extends Command {
 
+    public static final String HELP_FIND_COMMAND = "Finds all tasks with KEYWORD: find <KEYWORD>";
     private final String keyword;
     private int index;
     private final StringBuilder results;

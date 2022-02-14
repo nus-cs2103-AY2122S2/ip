@@ -3,7 +3,6 @@ package apollo.commands;
 import static apollo.messages.Messages.NO_TASK_FOUND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import jdk.dynalink.NamedOperation;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
