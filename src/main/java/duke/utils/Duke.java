@@ -38,7 +38,6 @@ public class Duke {
      */
     public String getResponse(String input) {
 
-        // Input received via GUI cannot be null;
         assert input != null : "assertion error";
 
         try {

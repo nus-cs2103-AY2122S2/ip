@@ -13,10 +13,10 @@ import duke.utils.Ui;
  */
 public abstract class Task implements Serializable {
 
-    /** Store a string description of the task **/
+    /** Stores a string description of the task **/
     protected String description;
 
-    /** Store whether the task has been completed **/
+    /** Stores whether the task has been completed **/
     protected boolean isFinished;
 
 
@@ -32,7 +32,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Mark this instance of task
+     * Marks this instance of task
      * as completed
      *
      * @return Message confirming the task has been marked as completed
@@ -44,7 +44,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Mark this instance of task
+     * Marks this instance of task
      * as not completed
      *
      * @return Message confirming the task has been marked as not completed
@@ -73,7 +73,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Return the completion status of
+     * Returns the completion status of
      * this task
      *
      * @return Completion status of this task
