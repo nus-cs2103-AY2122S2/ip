@@ -47,8 +47,8 @@ public class Parser {
             return new DeleteCommand(taskId);
         case "undo":
             return new UndoCommand();
-            case "help":
-                return new HelpCommand();
+        case "help":
+            return new HelpCommand();
         default:
             throw new CommandNotFoundException();
         }
