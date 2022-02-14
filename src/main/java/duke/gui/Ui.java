@@ -55,7 +55,7 @@ public class Ui {
     }
 
     public void deleteTask(Task task) {
-        dukeResponse += "Okay, I've deleted this task" + task.toString() + "\n";
+        dukeResponse += "Okay, I've deleted this task: \n" + task.toString() + "\n";
     }
 
     /**

@@ -12,6 +12,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
+/**
+ * Represents the Task Reminder functionality.
+ */
 public class RemindersTask extends TimerTask {
     private Predicate<Task> predicate;
     private String tasks = new String("");
@@ -21,8 +24,7 @@ public class RemindersTask extends TimerTask {
      */
     public void run() {
         Platform.runLater(() -> {
-            //setTypeOfReminder(ReminderPredicates.TODAY);
-            setTypeOfReminder(ReminderPredicates.OVERDUE);
+            setTypeOfReminder(ReminderPredicates.OVERDUE_OR_UPCOMING);
             List<Task> dueRems = getDueTasks();
             showNotifications(dueRems); // shows the multiple notifications in an alert dialog
         });

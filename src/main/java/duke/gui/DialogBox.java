@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -37,8 +38,8 @@ public class DialogBox extends HBox {
         }
 
         // Apply effect to ImageView
-        // set a clip to apply rounded border to the original image.
         Rectangle clip = new Rectangle(
+                // set a clip to apply rounded border to the original image.
                 displayPicture.getFitWidth(), displayPicture.getFitHeight()
         );
         clip.setArcWidth(20);
@@ -47,6 +48,7 @@ public class DialogBox extends HBox {
 
         // sets the chat box & image
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 
