@@ -15,7 +15,7 @@ public class TaskListTest {
         TaskList tasks = new TaskList(taskList);
 
         tasks.setTaskAsDone(1);
-        assertEquals(taskList.get(0).toString(), "[X] todo eat");
+        assertEquals(taskList.get(0).toString(), "[✅] todo eat");
     }
 
 }

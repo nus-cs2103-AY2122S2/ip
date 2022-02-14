@@ -37,7 +37,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.getStylesheets().add(String.valueOf(this.getClass().getResource("/view/dialogbox.css")));
+//        dialog.getStylesheets().add(String.valueOf(this.getClass().getResource("/view/userdialogbox.css")));
         displayPicture.setImage(img);
     }
 
@@ -52,13 +52,16 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.getStylesheets().add(String.valueOf(db.getClass().getResource("/view/userdialogbox.css")));
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(Region.USE_PREF_SIZE);
         db.flip();
+        db.getStylesheets().add(String.valueOf(db.getClass().getResource("/view/dukedialogbox.css")));
         return db;
     }
 }

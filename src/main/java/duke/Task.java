@@ -65,7 +65,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + this.description;
+        return (isDone ? "[✅] " : "[ ] ") + this.description;
     }
 
     public Task tag(Tag taskTag) {
