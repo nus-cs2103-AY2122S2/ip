@@ -1,6 +1,5 @@
 package doge.view;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -23,7 +22,7 @@ public class DogeDialogBox extends HBox {
     private DogeDialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(new File("./src/main/resource/view/DogeDialogBox.fxml").toURI().toURL());
+                    new FXMLLoader(MainWindow.class.getResource("/view/DogeDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

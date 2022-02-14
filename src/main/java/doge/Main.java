@@ -1,6 +1,5 @@
 package doge;
 
-import java.io.File;
 import java.io.IOException;
 
 import doge.command.ByeCommand;
@@ -19,7 +18,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(new File("./src/main/resource/view/MainWindow.fxml").toURI().toURL());
+                    new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             stage.setScene(new Scene(ap));
             stage.setTitle("Doge");

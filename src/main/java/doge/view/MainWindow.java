@@ -1,7 +1,5 @@
 package doge.view;
 
-import java.io.File;
-
 import doge.Doge;
 import doge.Parser;
 import doge.command.ByeCommand;
@@ -30,8 +28,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Doge doge;
-    private Image userImg = new Image(new File("./src/main/resource/images/user.png").toURI().toString());
-    private Image dogeImg = new Image(new File("./src/main/resource/images/doge.jpg").toURI().toString());
+    private Image userImg = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dogeImg = new Image(this.getClass().getResourceAsStream("/images/doge.jpg"));
 
     @FXML
     public void initialize() {
