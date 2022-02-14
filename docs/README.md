@@ -95,7 +95,7 @@ Bye. Hope to see you again soon!
 --------|------------------
 **Add To-Do** | `todo TASK` <br> e.g., `todo eat dinner`
 **Add Event** | `event TASK /at YYYY-MM-DD` <br> e.g., `event breakfast /at 2022-01-01`
-**Add Event** | `deadline TASK /by YYYY-MM-DD` <br> e.g., `deadline eat breakfast /by 2022-01-01`
+**Add Deadline** | `deadline TASK /by YYYY-MM-DD` <br> e.g., `deadline eat breakfast /by 2022-01-01`
 **Mark** | `mark INDEX`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX`<br> e.g., `unmark 3`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
