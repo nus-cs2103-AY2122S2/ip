@@ -98,7 +98,7 @@ Note regarding command format:
 ### 8. Delete the specific task from the list:``delete`` 
 **format: ``delete <integer>``**
 
-###8. Show the list of commands available in Nexus:``help``
+### 9. Show the list of commands available in Nexus:``help``
 **format: ``help``**
 
 ![help](help.PNG)
