@@ -35,6 +35,12 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
+    
+    public void sayHello() {
+        String welcome = mcBotGui.getResponse("hi");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcome, mcBotImage));
+    }
 
     public void setMcBotGui(McBotGui mb) {
         mcBotGui = mb;
@@ -58,7 +64,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, mcBotImage)
         );
         userInput.clear();
+        checkToEnd(isEnd);
         
+    }
+
+    private void checkToEnd(boolean isEnd) {
         //code snippet from https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
         if (isEnd) {
             Task<Void> sleeper = new Task<>() {

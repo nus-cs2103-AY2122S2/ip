@@ -46,6 +46,8 @@ public class McBotGui {
             try {
                 String keyCommand = parser.getKeyCommand();
                 switch(keyCommand) {
+                case "hi": 
+                    return gui.welcomeLine();
                 case "bye":
                     return executeBye();
                 case "list":

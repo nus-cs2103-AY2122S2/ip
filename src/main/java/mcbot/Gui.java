@@ -22,14 +22,11 @@ public class Gui {
      * Method to return the welcome line.
      */
     public String welcomeLine() {
-        String logo = "\n"
-                + "___  ___    ______       _\n"
-                + "|  \\/  |    | ___ \\     | |\n"
-                + "| .  . | ___| |_/ / ___ | |_\n"
-                + "| |\\/| |/ __| ___ \\/ _ \\| __|\n"
-                + "| |  | | (__| |_/ / (_) | |_\n"
-                + "\\_|  |_/\\___\\____/ \\___/ \\__|\n"
-                + "\n\n";
+        String logo = "\n" +
+                "  __  __    ___      _   \n" +
+                " |  \\/  |__| _ ) ___| |_ \n" +
+                " | |\\/| / _| _ \\/ _ \\  _|\n" +
+                " |_|  |_\\__|___/\\___/\\__|\n";
         return logo + "\n" + "Ahoy! Me name be McBot.\nTell me lad, what do you want?";
     }
 
