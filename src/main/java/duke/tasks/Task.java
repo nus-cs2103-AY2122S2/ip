@@ -18,7 +18,13 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (this.markedDone ? "X" : " ") + "] " + this.content;
+        String markedDoneIndicator = this.markedDone ? "X" : " ";
+        return String.format("[%s] %s", markedDoneIndicator, this.content);
+    }
+
+    public String toSaveData() {
+        String markedDoneIndicator = this.markedDone ? "1" : "0";
+        return String.format("%s|%s", markedDoneIndicator, this.content);
     }
 
 }
