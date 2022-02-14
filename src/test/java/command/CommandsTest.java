@@ -1,10 +1,12 @@
 package command;
-import duke.command.BingChillingCommand;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.command.BingChillingCommand;
 
 public class CommandsTest {
 
@@ -14,10 +16,11 @@ public class CommandsTest {
         assertEquals("ADD_COMMAND", h.get("todo"));
         assertEquals("ADD_COMMAND", h.get("event"));
         assertEquals("ADD_COMMAND", h.get("deadline"));
-        assertEquals("DELETE_COMMAND",h.get("delete"));
-        assertEquals("MARK_COMMAND",h.get("mark"));
-        assertEquals("UNMARK_COMMAND",h.get("unmark"));
-        assertEquals("OUTPUT_COMMAND",h.get("list"));
-
+        assertEquals("DELETE_COMMAND", h.get("delete"));
+        assertEquals("MARK_COMMAND", h.get("mark"));
+        assertEquals("UNMARK_COMMAND", h.get("unmark"));
+        assertEquals("OUTPUT_COMMAND", h.get("list"));
+        assertEquals("POSTPONE_COMMAND", h.get("postpone"));
+        assertEquals("CLEAR_COMMAND", h.get("clear"));
     }
 }

@@ -4,8 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
-import duke.command.*;
+import duke.command.AddCommand;
 import duke.command.BingChillingCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.MarkCommand;
+import duke.command.OutputCommand;
+import duke.command.PostponeCommand;
+import duke.command.UnmarkCommand;
 import duke.exception.BingChillingException;
 import duke.task.Task;
 import duke.ui.MessageUi;
@@ -170,9 +179,9 @@ public class Parser {
                 }
                 break;
             case "event":
-                boolean hasWrongEventTaskFormat = !(fullCommand.contains(" /at ")) ||
-                        fullCommand.split(" /at ", 2).length == 1 ||
-                        fullCommand.split(" /at ")[0].split("event").length == 0;
+                boolean hasWrongEventTaskFormat = !(fullCommand.contains(" /at "))
+                        || fullCommand.split(" /at ", 2).length == 1
+                        || fullCommand.split(" /at ")[0].split("event").length == 0;
                 if (hasWrongEventTaskFormat) {
                     throw new BingChillingException(invalidFormatMessage);
                 }
@@ -181,9 +190,9 @@ public class Parser {
                 LocalDate.parse(eventDate, Task.getInputDateFormat());
                 break;
             case "deadline":
-                boolean hasWrongDeadlineTaskFormat = !(fullCommand.contains(" /by ")) ||
-                        fullCommand.split(" /by ", 2).length == 1 ||
-                        fullCommand.split(" /by ")[0].split("deadline").length == 0;
+                boolean hasWrongDeadlineTaskFormat = !(fullCommand.contains(" /by "))
+                        || fullCommand.split(" /by ", 2).length == 1
+                        || fullCommand.split(" /by ")[0].split("deadline").length == 0;
                 if (hasWrongDeadlineTaskFormat) {
                     throw new BingChillingException(invalidFormatMessage);
                 }

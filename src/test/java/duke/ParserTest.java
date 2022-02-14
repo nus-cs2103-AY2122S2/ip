@@ -1,39 +1,40 @@
 package duke;
 
-import duke.exception.BingChillingException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import duke.exception.BingChillingException;
+import duke.ui.MessageUi;
+
 public class ParserTest {
+    private MessageUi messageUi;
 
     @Test
-    public void testInvalidInput() {
+    public void testInvalidCommand() {
         try {
             Parser.parse("invalid input");
         } catch (BingChillingException err) {
-            assertEquals("I'm so very sorry, " +
-                            "please make sure you enter a valid Ekud command",
-                    err.getMessage());
+            assertEquals("Bing Chilling does not recognise the command", err.getMessage());
         }
     }
 
     @Test
-    public void testEmptyInPut() {
+    public void testEmptyCommand() {
         try {
             Parser.parse("");
         } catch (BingChillingException err) {
-            assertEquals("☹ OOPS!!! Please input a command",
+            assertEquals("Bing Chilling does not recognise the command",
                     err.getMessage());
         }
     }
 
     @Test
-    public void testEmptyDescription() {
+    public void testInvalidFormatCommand() {
         try {
-            Parser.parse("todo");
+            Parser.parse("todo three");
         } catch (BingChillingException err) {
-            assertEquals("I'm so very sorry, the description of a todo cannot be empty.",
+            assertEquals("Bing Chilling does not recognise the command format",
                     err.getMessage());
         }
     }

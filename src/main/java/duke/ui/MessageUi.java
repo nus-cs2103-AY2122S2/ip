@@ -133,10 +133,20 @@ public class MessageUi {
         return "Got it, Bing Chilling has cleared your task list";
     }
 
+    /**
+     * Outputs a message when an invalid command is supplied.
+     *
+     * @return Invalid command message.
+     */
     public String showInvalidCommandMessage() {
         return "Bing Chilling does not recognise the command";
     }
 
+    /**
+     * Outputs a message when a command that is of the incorrect format is supplied.
+     *
+     * @return Incorrect command format message.
+     */
     public String showInvalidFormatMessage() {
         return "Bing Chilling does not recognise the command format";
     }
