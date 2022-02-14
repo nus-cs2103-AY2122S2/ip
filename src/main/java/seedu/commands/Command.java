@@ -80,11 +80,10 @@ public abstract class Command {
     }
 
     public String print(String type, Task task) {
-        StringBuilder out = new StringBuilder(type + "\n");
-        out.append("\tType: " + task.getType() + "\n");
-        out.append("\tPriority: " + task.getPriority() + "\n");
-        out.append("\tCompleted?: " + task.getCompleted() + "\n");
-        out.append("\tDescription: " + task.getDescription() + "\n\n");
-        return out.toString();
+        return type + "\n" +
+                "\tType: " + task.getType() + "\n" +
+                "\tPriority: " + task.getPriority() + "\n" +
+                "\tCompleted?: " + task.getCompleted() + "\n" +
+                "\tDescription: " + task.getDescription() + "\n\n";
     }
 }

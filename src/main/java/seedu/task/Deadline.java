@@ -19,7 +19,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " by" + deadline.format(DATE_FORMAT);
+        return super.getDescription() + " by " + deadline.format(DATE_FORMAT);
     }
 
 

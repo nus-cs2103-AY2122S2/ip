@@ -33,10 +33,10 @@ public class DukeTest {
     }
 
     @Test
-    public void eventTask() {
-        Todo t = new Todo("1");
-        assertEquals("[T][0][ ] 1", t.toString());
-        assertEquals("T\t1\tfalse\t0", t.toFile());
+    public void TodoTask() {
+        Todo t = new Todo("task");
+        assertEquals("T\t1\tNo\ttask", t.toString());
+        assertEquals("T\ttask\tfalse\t1", t.toFile());
     }
 
     @Test
