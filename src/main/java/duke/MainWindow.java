@@ -3,6 +3,7 @@ package duke;
 import duke.command.Parser;
 import duke.io.Storage;
 import duke.task.TaskList;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -52,6 +53,8 @@ public class MainWindow extends AnchorPane {
         int runResult = Parser.run(userInput.getText(), taskList);
         if (runResult == 1) {
             Storage.saveFile("data", "duke.txt", taskList);
+        } else if (runResult == -1) {
+            Platform.exit();
         }
         userInput.clear();
     }
