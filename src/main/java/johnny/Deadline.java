@@ -25,6 +25,7 @@ public class Deadline extends Task {
     }
 
     public LocalDate getDueDate() {
+        assert dueDate != null;
         return dueDate;
     }
 
