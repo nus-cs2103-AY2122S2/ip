@@ -23,7 +23,6 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
@@ -36,6 +35,18 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Creates a dialog box that contains Duke's greeting and appends it to the dialog container.
+     */
+    @FXML
+    private void greet() {
+        String greeting = duke.greet();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, dukeImage)
+        );
+        userInput.clear();
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -44,7 +55,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getUserDialog(input),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();

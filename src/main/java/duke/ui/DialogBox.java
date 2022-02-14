@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 
 /**
  * An example of a custom control using FXML.
@@ -39,6 +40,19 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    private DialogBox(String text) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setText(text);
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -46,11 +60,22 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        dialog.setStyle("-fx-background-color: #213040; -fx-padding: 4 8; -fx-background-radius: 8 8 8 0;");
+        dialog.setTextFill(Paint.valueOf("#fcfcfc"));
+        setAlignment(Pos.BOTTOM_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    /**
+     * Remove the image avatar.
+     */
+    private void removeImage() {
+        getChildren().remove(displayPicture);
+    }
+
+    public static DialogBox getUserDialog(String text) {
+        var db = new DialogBox(text);
+        db.removeImage();
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {

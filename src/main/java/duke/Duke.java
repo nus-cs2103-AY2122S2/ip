@@ -69,6 +69,13 @@ public class Duke {
     }
 
     /**
+     * Greets the user.
+     */
+    public String greet() {
+        return ui.greet();
+    }
+
+    /**
      * The main method, starts the GUI.
      *
      * @param args the command line arguments

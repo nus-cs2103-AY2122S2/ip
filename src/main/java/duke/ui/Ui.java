@@ -26,14 +26,14 @@ public class Ui {
     /**
      * Prints out the default greeting.
      */
-    public void greet() {
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String s = String.format("%s%nHello! I'm Duke\nWhat can I do for you?%n", logo);
-        send(s);
+        String greeting = String.format("%s%nHello! I'm Duke\nWhat can I do for you?%n", logo);
+        return greeting;
     }
 
     /**
