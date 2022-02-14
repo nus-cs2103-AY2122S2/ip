@@ -4,7 +4,7 @@
 
 ### Jerry is a task manager
 Jerry is here to help you track your events!
-All you have to do is to tell Jerry what is happening and when.
+All you have to do is to tell Jerry what is happening.
 
 ### Jerry has a good sense of time
 Jerry can look up for tasks based on a specified date! 
@@ -41,7 +41,7 @@ Example:
 ### `deadline` - Adds a Deadline Type Task
 Syntax
 ```
-deadline [taskName] /at [deadlineDate]
+deadline [taskName] /by [deadlineDate]
 ```
 Creates Deadline Type task with the specified name and date.
 
@@ -113,7 +113,7 @@ Example of usage:
 
 Expected outcome: Jerry displays task(s) with "toto" within its name
 
-![](./asset/find.png)
+![](./assets/find.png)
 
 ### `mark` - Mark Task as done
 Syntax
@@ -128,7 +128,7 @@ Example of usage:
 
 Expected outcome: Jerry marks the specified task as done
 
-![](./mark/mark.png)
+![](./assets/mark.png)
 
 ### `unmark` - Unmark Task as done
 ```
