@@ -1,4 +1,4 @@
-package duke.Exception;
+package duke.exception;
 
 /**
  * Custom exception class for any Duke specific exceptions.

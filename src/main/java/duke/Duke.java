@@ -1,10 +1,10 @@
 package duke;
 
 
-import duke.Commands.Command;
-import duke.Commands.Parser;
-import duke.Storage.Storage;
-import duke.Tasks.TaskList;
+import duke.commands.Command;
+import duke.commands.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
@@ -25,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * Function to enable the bot and start interaction with the user.
+     * Enables the bot and starts interaction with the user.
      */
     public void run() {
         this.ui.greet();

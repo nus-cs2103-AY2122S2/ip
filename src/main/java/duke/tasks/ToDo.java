@@ -1,6 +1,6 @@
-package duke.Tasks;
+package duke.tasks;
 
-import duke.Exception.DukeException;
+import duke.exception.DukeException;
 
 /**
  * Inherits from Task and is the implementation of a simple Todo.

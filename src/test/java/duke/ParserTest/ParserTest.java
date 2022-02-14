@@ -1,6 +1,6 @@
 package duke.ParserTest;
 
-import duke.Commands.Parser;
+import duke.commands.Parser;
 
 import org.junit.jupiter.api.Test;
 

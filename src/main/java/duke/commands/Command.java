@@ -1,11 +1,11 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.Exception.DukeException;
-import duke.Tasks.Deadlines;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.TaskList;
-import duke.Tasks.ToDo;
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
 
 /**
  * Class responsible for executing the command from the userInput.
@@ -30,7 +30,7 @@ public class Command {
     }
 
     private static String addDeadline(String task, String deadline, TaskList listOfTasks) throws DukeException {
-        Task newTask = new Deadlines(task, deadline);
+        Task newTask = new Deadline(task, deadline);
         listOfTasks.add(newTask);
         return taskAddedMessage(newTask, listOfTasks);
     }

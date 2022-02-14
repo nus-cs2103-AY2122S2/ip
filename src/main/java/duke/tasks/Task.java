@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Task {
     private String task;
-    private Boolean done;
+    private Boolean isDone;
     public String initials;
 
     /**
@@ -20,21 +20,21 @@ public class Task {
      */
     public Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
-     * Function to mark the current task as done.
+     * Marks the task as done.
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
-     * function to mark the current task as not done.
+     * Marks the current task as not done.
      */
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Task {
     public String toString() {
         String string;
 
-        if (this.done) {
+        if (this.isDone) {
             string = "[X] " + task;
         } else {
             string = "[ ] " + task;
@@ -73,7 +73,7 @@ public class Task {
         ArrayList<String> out = new ArrayList<>();
 
         out.add(this.initials);
-        if (done) {
+        if (isDone) {
             out.add("1");
         } else {
             out.add("0");

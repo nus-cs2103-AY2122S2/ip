@@ -1,11 +1,11 @@
-package duke.Storage;
+package duke.storage;
 
-import duke.Exception.DukeException;
-import duke.Tasks.Deadlines;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.TaskList;
-import duke.Tasks.ToDo;
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -60,29 +60,7 @@ public class Storage {
                                                         + File.separator + this.filename));
             st = reader.readLine();
             while (st != null) {
-                String[] compactTask = st.split("-");
-                switch (compactTask[0]) {
-                case "T":
-                    task = new ToDo(compactTask[2]);
-                    if (compactTask[1].equals("1")) {
-                        task.mark();
-                    }
-                    break;
-                case "D":
-                    task = new Deadlines(compactTask[2], compactTask[3]);
-                    if (compactTask[1].equals("1")) {
-                        task.mark();
-                    }
-                    break;
-                case "E":
-                    task = new Event(compactTask[2], compactTask[3]);
-                    if (compactTask[1].equals("1")) {
-                        task.mark();
-                    }
-                    break;
-                default:
-                    throw new DukeException("Incorrect format in Memory!");
-                }
+                task = parseStorage(st);
                 listOfTasks.add(task);
                 st = reader.readLine();
             }
@@ -94,6 +72,28 @@ public class Storage {
             ex.printStackTrace();
         }
         return listOfTasks;
+    }
+
+    private Task parseStorage(String storedTask) throws DukeException {
+        Task task;
+        String[] compactTask = storedTask.split("-");
+        switch (compactTask[0]) {
+        case "T":
+            task = new ToDo(compactTask[2]);
+            break;
+        case "D":
+            task = new Deadline(compactTask[2], compactTask[3]);
+            break;
+        case "E":
+            task = new Event(compactTask[2], compactTask[3]);
+            break;
+        default:
+            throw new DukeException("Incorrect format in Memory!");
+        }
+        if (compactTask[1].equals("1")) {
+            task.mark();
+        }
+        return task;
     }
 
     /**

@@ -1,13 +1,13 @@
-package duke.Tasks;
+package duke.tasks;
 
-import duke.Exception.DukeException;
+import duke.exception.DukeException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
  * Inherits from Task and is the implementation of a Deadline task which contains a description and a deadline.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
     LocalDateTime deadline;
 
     /**
@@ -17,7 +17,7 @@ public class Deadlines extends Task {
      * @param deadline Deadline of the task
      * @throws DukeException if the format of the deadline is not correct or description is empty
      */
-    public Deadlines(String task, String deadline) throws DukeException {
+    public Deadline(String task, String deadline) throws DukeException {
         super(task);
         if (deadline == null) {
             throw new DukeException("Try Again with correct format!\n");
