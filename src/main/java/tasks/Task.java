@@ -6,10 +6,10 @@ import exceptions.DukeException;
 /** A class that functions as an abstraction of a task. */
 public abstract class Task {
 
-    public static final String UNKNOWN_INPUT_ERROR_STRING = "I don't think I know what this is!";
-    public static final String BAD_DESCRIPTION_ERROR_STRING = "Description cannot be empty!";
-    public static final String INVALID_TASK_NUM_ERROR_STRING = "Not a valid task number!";
-    public static final String TASK_NUM_DOES_NOT_EXIST_ERROR_STRING = "Task %d does not exist!";
+    public static final String UNKNOWN_INPUT_ERROR_STRING = "I'm sorry, Dave. I'm afraid I can't do that.";
+    public static final String BAD_DESCRIPTION_ERROR_STRING = "Description cannot be empty.";
+    public static final String INVALID_TASK_NUM_ERROR_STRING = "Not a valid task number.";
+    public static final String TASK_NUM_DOES_NOT_EXIST_ERROR_STRING = "Task %d does not exist.";
 
     public enum TaskType {
         TODO,

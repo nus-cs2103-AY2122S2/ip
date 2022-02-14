@@ -18,8 +18,8 @@ public class Ui {
             + INDENT + "| | | | | | | |/ / _ \\\n"
             + INDENT + "| |_| | |_| |   <  __/\n"
             + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String[] OPENING_MESSAGE = new String[] {"Hello! I'm Duke! What can I do for you?"};
-    private static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String[] OPENING_MESSAGE = new String[] {"Hello. I am HAL 4500."};
+    private static final String CLOSING_MESSAGE = "Hope to see you again soon.";
     private static final String[] helpStrings = new String[] {
         "Commands:",
         "'todo [some activity]' - add a todo",
@@ -37,6 +37,8 @@ public class Ui {
     private final Scanner sc = new Scanner(System.in);
     private final Tasklist tasklist;
     private final Parser parser;
+
+    private boolean wasError = false;
 
     /**
      * Constructor method to create a new tasklist and parser.
@@ -92,7 +94,7 @@ public class Ui {
     public String[] displayTasks() {
         String[] result;
         if (tasklist.getNumTasks() == 0) {
-            result = new String[] {"You have no tasks!"};
+            result = new String[] {"You have no tasks."};
         } else {
             result = new String[1 + tasklist.getNumTasks()];
             result[0] = "Here are the tasks in your list:";
@@ -111,7 +113,7 @@ public class Ui {
     public String[] displayFoundTasks(ArrayList<Task> foundTasks) {
         String[] result;
         if (foundTasks.size() == 0) {
-            result = new String[] {"No tasks are found!"};
+            result = new String[] {"No tasks are found."};
         } else {
             result = new String[1 + foundTasks.size()];
             result[0] = "Here are the matching tasks in your list:";
@@ -139,6 +141,7 @@ public class Ui {
      */
 
     public String[] handle(String userInput) {
+        wasError = false;
         String[] result = {};
         try {
             if (userInput.equals("help")) { // help
@@ -169,8 +172,17 @@ public class Ui {
             }
             tasklist.saveTasks();
         } catch (DukeException err) {
+            wasError = true;
             result = new String[] {err.getMessage()};
         }
         return result;
+    }
+
+    /**
+     * Getter for wasError field.
+     * @return true if the previous input led to an error.
+     */
+    public boolean handledError() {
+        return this.wasError;
     }
 }

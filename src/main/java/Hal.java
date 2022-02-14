@@ -2,14 +2,14 @@ import user.Ui;
 
 
 /** The main Duke class, that allows the user to save tasks. */
-public class Duke {
+public class Hal {
 
     private final Ui ui;
 
     /**
      * Constructor for the Duke class.
      */
-    public Duke() {
+    public Hal() {
         ui = new Ui();
     }
 
@@ -20,10 +20,11 @@ public class Duke {
      * @return Response depending on what the user inputs.
      */
     public String getResponse(String input) {
-        if (input.equals("")) {
-            return input;
-        }
         String[] result = ui.handle(input);
         return String.join("\n", result);
+    }
+
+    public boolean handledError() {
+        return ui.handledError();
     }
 }

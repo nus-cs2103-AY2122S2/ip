@@ -23,16 +23,26 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private String errorBoxPath = "/view/ErrorBox.fxml";
+    private String defaultDialogBoxPath = "/view/DialogBox.fxml";
+    private String userInputBoxPath = "/view/UserBox.fxml";
+
+    private DialogBox(String text, Image img, boolean isError, boolean isUser) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader;
+            if (isError) {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource(errorBoxPath));
+            } else if (isUser) {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource(userInputBoxPath));
+            } else {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource(defaultDialogBoxPath));
+            }
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -48,12 +58,19 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, false, true);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getReturnDialog(String text, Image img) {
+        var db = new DialogBox(text, img, false, false);
         db.flip();
         return db;
     }
+
+    public static DialogBox getErrorDialogue(String text, Image img) {
+        var db = new DialogBox(text, img, true, true);
+        db.flip();
+        return db;
+    }
+
 }

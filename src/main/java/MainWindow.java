@@ -6,14 +6,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import tasks.Task;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
 
-    private static final String greetingMessage = "Hello! I'm Duke!";
-    private static final String offerHelpMessage = "Type 'help' for a list of possible commands!";
+    private static final String greetingMessage = "Hello. I am HAL 4500.";
+    private static final String offerHelpMessage = "Type 'help' for a list of possible commands.";
 
     @FXML
     private ScrollPane scrollPane;
@@ -24,26 +25,27 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Hal hal;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImage.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeImage.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/AstronautImage.png"));
+    private Image halImage = new Image(this.getClass().getResourceAsStream("/images/CameraImage.png"));
+    private Image halIcon = new Image(this.getClass().getResourceAsStream("/images/Hal9000Image.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setHal(Hal h) {
+        hal = h;
     }
 
     /**
      * Displays some greeting messages.
      */
     public void displayGreeting() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingMessage, dukeImage));
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(offerHelpMessage, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getReturnDialog(greetingMessage, halImage));
+        dialogContainer.getChildren().add(DialogBox.getReturnDialog(offerHelpMessage, halImage));
     }
 
     /**
@@ -53,11 +55,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (input.equals("")) {
+            return;
+        }
+        String response = hal.getResponse(input);
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        if (hal.handledError()) {
+            dialogContainer.getChildren().add(DialogBox.getErrorDialogue(response, halImage));
+        } else {
+            dialogContainer.getChildren().add(DialogBox.getReturnDialog(response, halImage));
+        }
         userInput.clear();
     }
 
@@ -68,7 +75,9 @@ public class MainWindow extends AnchorPane {
      * @return The Stage with edited settings.
      */
     public Stage changeSettings(Stage stage) {
-        stage.setTitle("Duke!");
+        stage.setTitle("HAL 4500");
+        stage.setResizable(false);
+        stage.getIcons().add(halIcon);
         return stage;
     }
 }
