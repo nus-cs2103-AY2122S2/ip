@@ -79,7 +79,7 @@ Format: `mark INDEX`
 ### `unmark` - Mark a task as undone
 Marks a task with the specified numbering as undone.
 
-Task marked as undone will have `[ ]` displayed in front of task description when listed.
+Task marked as undone will have `[]` displayed in front of task description when listed.
 
 Format: `unmark INDEX`
 - The index must be a **positive integer** 1, 2, 3,...
@@ -88,7 +88,7 @@ Format: `unmark INDEX`
 ### `list` - List down all tasks
 Prints all tasks and their completion status.
 - `[X]` indicates the task is marked as done
-- `[ ]` indicates the task is not markes as done yet
+- `[]` indicates the task is not markes as done yet
 
 Format: `list`
 
