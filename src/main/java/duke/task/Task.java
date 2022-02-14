@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public abstract class Task implements Serializable {
     private String taskName;
-    private boolean status;
+    private boolean isDone;
 
     /**
      * A constructor to store information about the task name.
@@ -16,21 +16,21 @@ public abstract class Task implements Serializable {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.status = false;
+        this.isDone = false;
     }
 
     /**
      * Marks this Task as complete.
      */
     public void markDone() {
-        this.status = true;
+        this.isDone = true;
     }
 
     /**
      * Marks this Task as incomplete.
      */
     public void markUndone() {
-        this.status = false;
+        this.isDone = false;
     }
 
     /**
@@ -47,7 +47,7 @@ public abstract class Task implements Serializable {
      * @return
      */
     public boolean isComplete() {
-        return this.status;
+        return this.isDone;
     }
 
     /**

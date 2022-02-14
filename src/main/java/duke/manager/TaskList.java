@@ -51,7 +51,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieves, without removing, a Task from the TaskList.
+     * Returns without removing a Task from the TaskList.
      *
      * @param taskNo Index of the Task to be retrieved.
      * @return The Task to be retrieved.
