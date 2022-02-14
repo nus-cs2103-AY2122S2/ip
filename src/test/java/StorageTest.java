@@ -1,24 +1,22 @@
-import dukeclasses.DukeException;
-import dukeclasses.Storage;
-import dukeclasses.Task;
-import dukeclasses.ToDo;
-import dukeclasses.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import java.time.LocalDate;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import dukeclasses.DukeException;
+import dukeclasses.Event;
+import dukeclasses.Storage;
+import dukeclasses.Task;
+import dukeclasses.ToDo;
 
 public class StorageTest {
 
@@ -81,7 +79,7 @@ public class StorageTest {
         }
 
         for (int i = 0; i < 3; i++) {
-            String expectedOutput =  String.format("    %s", tasks.get(i).toString());
+            String expectedOutput = String.format("    %s", tasks.get(i).toString());
             assertEquals(sc.nextLine().concat("\n"), expectedOutput);
         }
 
@@ -120,7 +118,7 @@ public class StorageTest {
         } catch (FileNotFoundException errorMessage) {
             fail();
         }
-        String expectedOutput =  String.format("    %s", event.toString());
+        String expectedOutput = String.format("    %s", event.toString());
         assertEquals(sc.nextLine().concat("\n"), expectedOutput);
         sc.close();
     }

@@ -1,11 +1,17 @@
-import dukeclasses.*;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import dukeclasses.Deadline;
+import dukeclasses.DukeException;
+import dukeclasses.Event;
+import dukeclasses.Task;
+import dukeclasses.TaskList;
+import dukeclasses.ToDo;
 
 public class TaskListTest {
 
@@ -16,7 +22,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void addTask_newTask_ListOfSize1() {
+    public void addTask_newTask_listOfSize1() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         ToDo todo = new ToDo("do homework");
         taskList.addTask(todo);
@@ -25,7 +31,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTask_ListOfSize3_ListOfSize1() {
+    public void deleteTask_listOfSize3_listOfSize1() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
 
         ToDo todo = new ToDo("do homework");
@@ -48,7 +54,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void updateTask_UnmarkListOf3Task_ListWith1MarkedAnd2UnmarkedTask() {
+    public void updateTask_unmarkListOf3Task_listWith1MarkedAnd2UnmarkedTask() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
 
         ToDo todo = new ToDo("do homework");

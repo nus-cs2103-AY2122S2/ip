@@ -2,15 +2,7 @@ package dukeclasses;
 
 import java.time.LocalDate;
 
-/**
- * Represents a wrapper class after user input is processed.Created if user input is valid.
- */
-public class ParsedCommand {
-    private String command;
-    private Integer index;
-    private LocalDate dueDate;
-    private String task;
-    private RecurPeriod recurPeriod;
+public class ParsedCommand extends ParsedInput {
 
     /**
      * Constructor for ParsedCommand for commands that only need String to be instantiated.
@@ -18,11 +10,7 @@ public class ParsedCommand {
      * @param command String , usually the command, that is used to instantiated Tasks.
      */
     public ParsedCommand(String command) {
-        this.command = command;
-        this.index = null;
-        this.dueDate = null;
-        this.task = null;
-        this.recurPeriod = null;
+        super(command);
     }
 
     /**
@@ -33,11 +21,7 @@ public class ParsedCommand {
      *              to modify the indexed task in the TaskList.
      */
     public ParsedCommand(String command, Integer index) {
-        this.command = command;
-        this.index = index;
-        this.dueDate = null;
-        this.task = null;
-        this.recurPeriod = null;
+        super(command, index);
     }
 
     /**
@@ -48,11 +32,7 @@ public class ParsedCommand {
      *             is used to identify the task in the task list.
      */
     public ParsedCommand(String command, String task) {
-        this.command = command;
-        this.index = null;
-        this.dueDate = null;
-        this.task = task;
-        this.recurPeriod = null;
+        super(command, task);
     }
 
     /**
@@ -62,67 +42,13 @@ public class ParsedCommand {
      * @param dueDate LocalDate, usually the dateline of the task, that
      *             is used to identify the task in the task list.
      */
-    public ParsedCommand(String command, String task, LocalDate dueDate) {
-        this.command = command;
-        this.index = null;
-        this.dueDate = dueDate;
-        this.task = task;
-        this.recurPeriod = null;
-    }
+    /*public ParsedCommand(String command, String task, LocalDate dueDate) {
+        super(command, task, dueDate, null);
+    }*/
 
 
     public ParsedCommand(String command, String task, LocalDate dueDate, RecurPeriod recurPeriod) {
-        this.command = command;
-        this.index = null;
-        this.dueDate = dueDate;
-        this.task = task;
-        this.recurPeriod = recurPeriod;
-    }
-
-    /**
-     * Returns the command the user gave.
-     *
-     * @return String that represents the command the user gave.
-     */
-    public String getCommand() {
-        return this.command;
-    }
-
-    /**
-     * Returns the index the user gave.
-     *
-     * @return Integer that represents the index the user gave.
-     */
-    public Integer getIndex() {
-        return this.index;
-    }
-
-    /**
-     * Returns the due date the user gave.
-     *
-     * @return LocalDate that represents the due date of the
-     *         task which is given by the user.
-     */
-    public LocalDate getDueDate() {
-        return this.dueDate;
-    }
-
-    /**
-     * Returns the description of the task.
-     *
-     * @return String that represents the description of the task.
-     */
-    public String getTask() {
-        return this.task;
-    }
-
-    /**
-     * Returns the recurPeriod of the task.
-     *
-     * @return RecurPeriod that represents the recurPeriod of the task.
-     */
-    public RecurPeriod getRecurPeriod() {
-        return this.recurPeriod;
+        super(command, task, dueDate, recurPeriod);
     }
 
 }

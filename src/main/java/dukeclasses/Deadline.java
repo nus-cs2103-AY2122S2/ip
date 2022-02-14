@@ -27,9 +27,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Increases the dateline based on the recurring period in RecurPeriod.
+     */
     public void recur() {
         if (isRecurring) {
             deadline = deadline.plus(recurPeriod.getPeriod());
+            super.setDone(false);
         }
     }
 
@@ -41,7 +45,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy" ));
+        String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String output = "";
         if (super.getIsDone()) {
             output = "[D][X]";

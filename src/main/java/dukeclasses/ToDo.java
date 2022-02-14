@@ -3,7 +3,7 @@ package dukeclasses;
 /**
  * Represents a Task item which needs to be completed. It can be marked as done or unmarked as not done.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Class constructor to instantiate an instance of ToDo.

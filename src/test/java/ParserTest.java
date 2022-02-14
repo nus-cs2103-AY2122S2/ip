@@ -1,17 +1,17 @@
-import dukeclasses.DukeException;
-import dukeclasses.Parser;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import dukeclasses.DukeException;
+import dukeclasses.Parser;
 
 public class ParserTest {
 
     @Test
-    public void parse_blankInput_DukeExceptionThrown() {
+    public void parse_blankInput_dukeExceptionThrown() {
         try {
-            assertEquals(" ",  Parser.parse(" ", 1).getCommand());
+            assertEquals(" ", Parser.parseUserInput(" ", 1).getCommand());
             fail();
         } catch (DukeException errorMessage) {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());
@@ -19,51 +19,51 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_InvalidInput_DukeExceptionThrown() {
+    public void parse_invalidInput_dukeExceptionThrown() {
         try {
-            assertEquals(" ",  Parser.parse(" ", -1).getCommand());
+            assertEquals(" ", Parser.parseUserInput(" ", -1).getCommand());
             fail();
         } catch (DukeException errorMessage) {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());
         }
 
         try {
-            assertEquals("deadline",  Parser.parse("deadline tmr ", 1).getCommand());
+            assertEquals("deadline", Parser.parseUserInput("deadline tmr ", 1).getCommand());
             fail();
         } catch (DukeException errorMessage) {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());
         }
 
         try {
-            assertEquals("delete",  Parser.parse("delete t", 1).getCommand());
+            assertEquals("delete", Parser.parseUserInput("delete t", 1).getCommand());
             fail();
         } catch (DukeException errorMessage) {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());
         }
 
         try {
-            assertEquals("deleted",  Parser.parse("deleted 1", 1).getCommand());
+            assertEquals("deleted", Parser.parseUserInput("deleted 1", 1).getCommand());
             fail();
         } catch (DukeException errorMessage) {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());
         }
 
         try {
-            assertEquals("listed",  Parser.parse("listed", 1).getCommand());
+            assertEquals("listed", Parser.parseUserInput("listed", 1).getCommand());
             fail();
         } catch (DukeException errorMessage) {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());
         }
 
         try {
-            assertEquals("event",  Parser.parse("event homework /by Tmr", 1).getCommand());
+            assertEquals("event", Parser.parseUserInput("event homework /by Tmr", 1).getCommand());
             fail();
         } catch (DukeException errorMessage) {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());
         }
 
         try {
-            assertEquals("event",  Parser.parse("event homework /by 202-11-10", 1).getCommand());
+            assertEquals("event", Parser.parseUserInput("event homework /by 202-11-10", 1).getCommand());
             fail();
         } catch (DukeException errorMessage) {
             assertEquals("    Invalid input detected. Please check your input", errorMessage.getMessage());

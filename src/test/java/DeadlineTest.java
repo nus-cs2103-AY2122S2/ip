@@ -1,10 +1,10 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dukeclasses.Deadline;
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Test;
 
+import dukeclasses.Deadline;
 
 public class DeadlineTest {
     @Test

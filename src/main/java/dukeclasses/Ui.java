@@ -91,7 +91,7 @@ public class Ui {
      * @param task Task which will have its details printed.
      * @return String to be printed which illustrates identity of the task.
      */
-    public String identifyTask(ParsedCommand command, Task task) {
+    public String identifyTask(ParsedInput command, Task task) {
         if (command.getCommand().equals("recur")) {
             return String.format("%s    %s", Commands.RECUR.toString(), task.toString());
         }
@@ -112,7 +112,7 @@ public class Ui {
      */
     public String sayAddTask(Task task, int numOfTask) {
         return String.format("%s    %s    Now you have %d tasks in the list.",
-                Commands.ADD.toString(), task.toString(),  numOfTask);
+                Commands.ADD.toString(), task.toString(), numOfTask);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Ui {
             Scanner sc = new Scanner(file);
             for (int i = 0; sc.hasNext(); i++) {
                 if (i == 0) {
-                    output = output  + sc.nextLine();
+                    output = output + sc.nextLine();
                 } else {
                     output = output + "\n" + sc.nextLine();
                 }

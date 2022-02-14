@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * Constructor to instantiate an instance of TaskList.
      *
-     * @param tasks ArrayList</Task> that represents the list of tasks the user had logged previously.
+     * @param tasks ArrayList<Task></Task> that represents the list of tasks the user had logged previously.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -42,6 +42,11 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Recurs the task located in the given index.
+     * @param index Index where the task that will recur is located in the ArrayList.
+     * @return Task that was recurred.
+     */
     public Task recur(int index) {
         Task task = tasks.get(index);
         if (task instanceof ToDo) {
@@ -59,9 +64,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the taskList in the form of an ArrayList</Task>
+     * Returns the taskList in the form of an ArrayList<Task></Task>
      *
-     * @return Data of task in the form of an ArrayList</Task>
+     * @return Data of task in the form of an ArrayList<Task></Task>
      */
     public ArrayList<Task> getTaskList() {
         return this.tasks;
@@ -82,7 +87,7 @@ public class TaskList {
      * @param index Integer of the task to be deleted in the taskList.
      * @return Task that was deleted.
      */
-    public Task deleteTask(int index) throws DukeException{
+    public Task deleteTask(int index) throws DukeException {
         if (index > tasks.size() - 1) {
             throw new DukeException();
         } else {
@@ -90,7 +95,12 @@ public class TaskList {
         }
     }
 
-    public TaskList findInTaskList(String taskDescriptionToFind){
+    /**
+     * Finds task whose taskDescription contains the String given in the input
+     * @param taskDescriptionToFind String to find in the taskDescriptions of the tasks in the List.
+     * @return TaskList which contains tasks whose taskDescription contains the String given in the input.
+     */
+    public TaskList findInTaskList(String taskDescriptionToFind) {
         TaskList findTaskList = new TaskList();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);

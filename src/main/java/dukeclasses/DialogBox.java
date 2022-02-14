@@ -2,11 +2,13 @@ package dukeclasses;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * Represents a box used in the printing of conversation in the GUI.
@@ -29,6 +31,7 @@ public class DialogBox extends HBox {
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
+        setPadding(new Insets(10, 0, 10, 0));
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
@@ -48,6 +51,7 @@ public class DialogBox extends HBox {
      * Creates dialogBox for user
      */
     public static DialogBox getUserDialog(Label label, ImageView imageToView) {
+        label.setTextFill(Color.WHITE);
         return new DialogBox(label, imageToView);
     }
 
@@ -55,6 +59,7 @@ public class DialogBox extends HBox {
      * Creates dialogBox for Duke
      */
     public static DialogBox getDukeDialog(Label label, ImageView imageToView) {
+        label.setTextFill(Color.WHITE);
         DialogBox dialogBox = new DialogBox(label, imageToView);
         dialogBox.flip();
         return dialogBox;

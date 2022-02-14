@@ -1,10 +1,10 @@
 package dukeclasses;
 
 public enum Commands {
-    HI{
+    HI {
         @Override
         public String toString() {
-            return "    Hello! I'm Duke\n    What can I do for you?\n";
+            return "    Hello! I'm Cygnus\n    What can I do for you?\n";
         }
     },
     BYE {
@@ -45,13 +45,13 @@ public enum Commands {
     },
     MATCH {
         @Override
-        public String toString(){
+        public String toString() {
             return "    Here are the matching tasks in your list:\n";
         }
     },
     RECUR {
         @Override
-        public String toString(){
+        public String toString() {
             return "    I have recurred the task to as follow:\n";
         }
     }

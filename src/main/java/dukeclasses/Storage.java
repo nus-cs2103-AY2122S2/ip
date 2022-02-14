@@ -4,14 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,9 +25,9 @@ public class Storage {
     }
 
     /**
-     * Loads data of the storage file into an ArrayList</Task>. Usually called at the start of Duke.
+     * Loads data of the storage file into an ArrayList<Task></Task>. Usually called at the start of Duke.
      *
-     * @return ArrayList</Task> that represents the data of the storage file given in the file path.
+     * @return ArrayList<Task></Task> that represents the data of the storage file given in the file path.
      * @throws DukeException If data in storage file is corrupted and not able to be converted to
      *                       individual tasks.
      */
@@ -72,22 +66,23 @@ public class Storage {
      *
      * @param file File that represents the storage file.
      * @param tasks ArrayList that represent the tasks in the storage file.
-     * @return ArrayList</Task> that represents the tasks in the storage file.
+     * @return ArrayList<Task></Task> that represents the tasks in the storage file.
      * @throws DukeException If file object given to Scanner class does not exist or if
      *                       error occur during processing of storage file.
      */
     private ArrayList<Task> readFileIntoArrayList(File file, ArrayList<Task> tasks) throws DukeException {
-        assert file != null: "command should not be null.";
-        assert tasks != null: "command Task should not be null.";
+        assert file != null : "command should not be null.";
+        assert tasks != null : "command Task should not be null.";
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                Task task = Parser.parseDataToGetTask(sc.nextLine());
+                ParsedData parsedData = Parser.parseDataToParsedData(sc.nextLine());
+                Task task = parsedData.convertToTask();
                 tasks.add(task);
             }
             sc.close();
             return tasks;
-        } catch (DukeException|FileNotFoundException error) {
+        } catch (DukeException | FileNotFoundException error) {
             throw new DukeException();
         }
     }
@@ -95,7 +90,7 @@ public class Storage {
     /**
      * Updates the storage file.
      *
-     * @param dataArrList ArrayList</Task> that represents the updated taskList.
+     * @param dataArrList ArrayList<Task></Task> that represents the updated taskList.
      * @throws DukeException If file is not writeable.
      */
     public void updateStorageFile(ArrayList<Task> dataArrList) throws DukeException {

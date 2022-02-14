@@ -1,14 +1,16 @@
-import dukeclasses.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import dukeclasses.Event;
 
 public class EventTest {
 
     @Test
     public void testEventIdentify() {
-        assertEquals("[E][ ] do homework (by: Oct 15 2011)\n",
+        assertEquals("[E][ ] do homework (on: Oct 15 2011)\n",
             new Event("do homework", LocalDate.parse("2011-10-15"), null).toString());
     }
 
@@ -16,9 +18,9 @@ public class EventTest {
     public void testSetIsDone() {
         Event event = new Event("do homework", LocalDate.parse("2011-10-15"), null);
         event.setDone(true);
-        assertEquals("[E][X] do homework (by: Oct 15 2011)\n", event.toString());
+        assertEquals("[E][X] do homework (on: Oct 15 2011)\n", event.toString());
         event.setDone(false);
-        assertEquals("[E][ ] do homework (by: Oct 15 2011)\n", event.toString());
+        assertEquals("[E][ ] do homework (on: Oct 15 2011)\n", event.toString());
     }
 
     @Test

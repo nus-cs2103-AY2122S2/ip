@@ -28,13 +28,13 @@ public class Event extends Task {
         }
     }
 
-    public boolean getIsRecurring() {
-        return this.isRecurring;
-    }
-
+    /**
+     * Increases the dateline based on the recurring period in RecurPeriod.
+     */
     public void recur() {
         if (isRecurring) {
             deadline = deadline.plus(recurPeriod.getPeriod());
+            super.setDone(false);
         }
     }
     /**
@@ -45,7 +45,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy" ));
+        String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String output = "";
         if (super.getIsDone()) {
             output = "[E][X]";
@@ -54,10 +54,10 @@ public class Event extends Task {
             output = "[E][ ]";
         }
         if (isRecurring) {
-            return String.format("%s %s every %s (by: %s)\n",
+            return String.format("%s %s every %s (on: %s)\n",
                     output, super.getDescription(), recurPeriod.toString(), dateString);
         } else {
-            return String.format("%s %s (by: %s)\n", output, super.getDescription(), dateString);
+            return String.format("%s %s (on: %s)\n", output, super.getDescription(), dateString);
         }
     }
 

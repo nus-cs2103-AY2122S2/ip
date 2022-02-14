@@ -1,9 +1,10 @@
-import dukeclasses.DukeException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import dukeclasses.RecurPeriod;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import dukeclasses.DukeException;
+import dukeclasses.RecurPeriod;
 
 public class RecurPeriodTest {
     @Test
