@@ -4,6 +4,8 @@ import heylo.tasks.Deadline;
 import heylo.tasks.Event;
 import heylo.tasks.Task;
 import heylo.tasks.Todo;
+import heylo.util.PriorityLevel;
+
 
 /**
  * Represents a commands input by the user in the command line.
@@ -106,6 +108,38 @@ public class Command {
                 break;
             }
             str.append(Task.findInList(argument));
+            break;
+        case "low":
+            if (argument == null) {
+                str.append(" Please enter the task number as well!\n");
+                str.append(" Command format: low task-number\n");
+                break;
+            }
+            str.append(Task.markPriority(Integer.parseInt(argument) - 1, PriorityLevel.LOW));
+            break;
+        case "med":
+            if (argument == null) {
+                str.append(" Please enter the task number as well!\n");
+                str.append(" Command format: med task-number\n");
+                break;
+            }
+            str.append(Task.markPriority(Integer.parseInt(argument) - 1, PriorityLevel.MEDIUM));
+            break;
+        case "high":
+            if (argument == null) {
+                str.append(" Please enter the task number as well!\n");
+                str.append(" Command format: high task-number\n");
+                break;
+            }
+            str.append(Task.markPriority(Integer.parseInt(argument) - 1, PriorityLevel.HIGH));
+            break;
+        case "no-p":
+            if (argument == null) {
+                str.append(" Please enter the task number as well!\n");
+                str.append(" Command format: no-p task-number\n");
+                break;
+            }
+            str.append(Task.markPriority(Integer.parseInt(argument) - 1, PriorityLevel.NONE));
             break;
         default:
             str.append(" Sorry, I don't understand what that means.\n");

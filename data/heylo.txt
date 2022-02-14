@@ -1,11 +1,14 @@
-T : 0 : this
-T : 1 : that todo
-T : 0 : more
-T : 0 : sth
-T : 1 : this
-T : 0 : that
-T : 0 : more
-T : 1 : sth
-T : 1 : fifth
-E : 0 : that  : 2020-02-02
-E : 0 : sth  : 2020-02-02
+T : 0 : this : NONE
+T : 0 : that : NONE
+T : 0 : more : HIGH
+T : 0 : lala : HIGH
+T : 0 : mie : NONE
+T : 0 : far : NONE
+T : 0 : near : MEDIUM
+T : 0 : lalal : NONE
+T : 0 : gui : NONE
+E : 0 : 2020  : 2000-02-02 : NONE
+E : 0 : 2020  : 2020-02-02 : HIGH
+D : 0 : 2939  : 3030-03-03 : MEDIUM
+D : 0 : ddhf  : 3030-03-03 : NONE
+T : 0 : better gui : LOW
