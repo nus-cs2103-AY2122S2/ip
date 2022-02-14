@@ -27,10 +27,12 @@ public class Parser {
      * @throws InvalidCommandException if an invalid command is provided.
      */
     public Command parse(String scannedInput) throws InvalidCommandException {
-        String[] input = scannedInput.split(" ", 3);
+        String[] input = scannedInput.split(" ", 2);
         String command = input[0];
-        String tagName = input.length > 1 ? input[1] : "";
-        String arguments = input.length > 2 ? input[2] : "";
+        String arguments = input.length > 1 ? input[1] : "";
+        String[] splitArguments = arguments.split("/t");
+        String args = splitArguments[0].trim();
+        String tagName = splitArguments.length > 1 ? splitArguments[1].trim() : "";
 
         switch (command) {
         case "bye":
@@ -44,12 +46,12 @@ public class Parser {
             int taskToUnmark = Integer.parseInt(arguments);
             return new UpdateCommand(false, taskToUnmark);
         case "todo":
-            return new AddCommand(arguments, tagName);
+            return new AddCommand(args, tagName);
         case "deadline":
-            String[] deadlineArgsArray = arguments.split(" /by ");
+            String[] deadlineArgsArray = args.split(" /by ");
             return new AddCommand(deadlineArgsArray[0], deadlineArgsArray[1], tagName, "DEADLINE");
         case "event":
-            String[] eventArgsArray = arguments.split(" /at ");
+            String[] eventArgsArray = args.split(" /at ");
             return new AddCommand(eventArgsArray[0], eventArgsArray[1], tagName, "EVENT");
         case "find":
             return new FindCommand(arguments);

@@ -31,7 +31,7 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String description, String deadline, boolean done, String id,
                         String tag) throws IllegalValueException {
         super(description, done, id, tag);
-        this.deadline = LocalDate.parse(deadline);
+        this.deadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("MMM dd yyyy"));
         this.deadlineString = this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
@@ -64,6 +64,9 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
+        if (super.tag == null) {
+            return "[D]" + super.toString() + " " + "(by: " + this.deadlineString + ")";
+        }
         return "[D]" + super.toString() + " " + "(by: " + this.deadlineString + ")" + " <" + super.getTagName() + ">";
     }
 }

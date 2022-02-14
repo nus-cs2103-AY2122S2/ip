@@ -40,7 +40,9 @@ public class Task {
         this.description = description;
         this.done = done;
         this.id = id;
-        this.tag = new Tag(tagName);
+        if (tagName != "") {
+            this.tag = new Tag(tagName);
+        }
     }
 
     /**
@@ -52,7 +54,9 @@ public class Task {
         this.description = description;
         this.done = false;
         this.id = UUID.randomUUID().toString();
-        this.tag = new Tag(tagName);
+        if (tagName != "") {
+            this.tag = new Tag(tagName);
+        }
     }
 
     public String getId() {
@@ -85,6 +89,9 @@ public class Task {
     }
 
     public String getTagName() {
+        if (this.tag == null) {
+            return "";
+        }
         return this.tag.toString();
     }
 

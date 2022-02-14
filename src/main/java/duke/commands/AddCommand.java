@@ -53,25 +53,25 @@ public class AddCommand extends Command {
         Task task;
         String taskToString;
 
-        if (type.getCommand() == "todo") {
+        if (type.getCommand().equals("todo")) {
             if (this.description == "") {
                 throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
             }
             task = super.taskList.addTodoTask(description, tagName);
             taskToString = String.format("%s|T|0|%s|%s%n", task.getId(), task.getDescription(), task.getTagName());
-        } else if (type.getCommand() == "deadline") {
+        } else if (type.getCommand().equals("deadline")) {
             if (this.description == "" || this.deadline == "") {
                 throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
             }
             task = super.taskList.addDeadlineTask(description, deadline, tagName);
-            taskToString = String.format("%s|T|0|%s|%s%n", task.getId(),
+            taskToString = String.format("%s|D|0|%s|%s|%s%n", task.getId(),
                     task.getDescription(), ((DeadlineTask) task).getDeadline(), task.getTagName());
-        } else if (type.getCommand() == "event") {
+        } else if (type.getCommand().equals("event")) {
             if (this.description == "" || this.deadline == "") {
                 throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
             }
             task = super.taskList.addEventTask(description, deadline, tagName);
-            taskToString = String.format("%s|T|0|%s|%s%n", task.getId(),
+            taskToString = String.format("%s|E|0|%s|%s|%s%n", task.getId(),
                     task.getDescription(), ((EventTask) task).getDeadline(), task.getTagName());
         } else {
             throw new InvalidParameterException("Invalid parameter provided");

@@ -65,17 +65,20 @@ public class Storage {
             String type = currentLineSplit[1];
             int done = Integer.parseInt(currentLineSplit[2]);
             String description = currentLineSplit[3];
-            String tagName = currentLineSplit[4];
+
 
             if (type.equals("T")) {
+                String tagName = currentLineSplit.length > 4 ? currentLineSplit[4] : "";
                 TodoTask task = new TodoTask(description, done == 1, id, tagName);
                 taskListFromStore.add(task);
             } else if (type.equals("D")) {
                 String deadline = currentLineSplit[4];
+                String tagName = currentLineSplit.length > 5 ? currentLineSplit[5] : "";
                 DeadlineTask task = new DeadlineTask(description, deadline, done == 1, id, tagName);
                 taskListFromStore.add(task);
             } else if (type.equals("E")) {
                 String deadline = currentLineSplit[4];
+                String tagName = currentLineSplit.length > 5 ? currentLineSplit[5] : "";
                 EventTask task = new EventTask(description, deadline, done == 1, id, tagName);
                 taskListFromStore.add(task);
             }

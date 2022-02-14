@@ -2,6 +2,7 @@ package duke.data.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.data.exception.IllegalValueException;
 
@@ -29,9 +30,9 @@ public class EventTask extends Task {
      * @param id id of the task.
      */
     public EventTask(String description, String deadline, boolean done, String id,
-                     String tag) throws IllegalValueException {
+                     String tag) throws IllegalValueException, DateTimeParseException {
         super(description, done, id, tag);
-        this.deadline = LocalDate.parse(deadline);
+        this.deadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("MMM dd yyyy"));
         this.deadlineString = this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
@@ -64,6 +65,9 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
+        if (super.tag == null) {
+            return "[E]" + super.toString() + " " + "(by: " + this.deadlineString + ")";
+        }
         return "[E]" + super.toString() + " " + "(by: " + this.deadlineString + ")" + " <" + super.getTagName() + ">";
     }
 }

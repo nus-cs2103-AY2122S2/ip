@@ -33,6 +33,9 @@ public class TodoTask extends Task {
      */
     @Override
     public String toString() {
+        if (super.tag == null) {
+            return "[T]" + super.toString();
+        }
         return "[T]" + super.toString() + " <" + super.getTagName() + ">";
     }
 }
