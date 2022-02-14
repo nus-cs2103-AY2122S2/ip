@@ -33,6 +33,10 @@ public class Task {
         return " | " + isDoneNumber + " | " + description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;

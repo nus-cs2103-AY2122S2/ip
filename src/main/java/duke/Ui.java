@@ -94,4 +94,11 @@ public class Ui {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(task);
     }
+
+    public void showFound(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list: ");
+        for(int i = 0; i < tasks.getSize(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+    }
 }

@@ -41,4 +41,14 @@ public class TaskList {
     public void unmark(int number) {
         tasks.get(number - 1).markAsUndone();
     }
+
+    public TaskList find(String word) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for(Task task : tasks) {
+            if(task.getDescription().contains(word)) {
+                matchingTasks.add(task);
+            }
+        }
+        return new TaskList(matchingTasks);
+    }
 }
