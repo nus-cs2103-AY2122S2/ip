@@ -6,4 +6,4 @@ D true --rm 2022-02-13 CS2107 Tutorial /by 28/02/2022 09:00
 D true --rb 2022-02-13 TEST /by 25/02/2022 10:00
 D false --rw 2022-02-13 cs2011 /by 01/01/1111 10:00
 D false null 2022-02-14 cs2103 /by 20/12/2022 23:00
-T false --rw 2022-02-14 eat
+T true --rw 2022-02-14 eat

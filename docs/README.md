@@ -74,12 +74,12 @@ Adds a `Deadline` task to the task list.
   
 Format: `deadline [TAG] TASK_DESCRIPTION /by DATE TIME`
 
-<div markdown="span" class="alert alert-warning">:exclamation: NOTE: DATE is in DD/MM/YYYY format, whereas TIME should be in HH:MM format.
-</div>
-
 Examples:
 * `deadline Submit CS2103T Project /by 18/02/2022 10:00`
 * `deadline --rw Submit CS2103T Project /by 18/02/2022 10:00`
+
+<div markdown="span" class="alert alert-warning">:exclamation: NOTE: DATE is in DD/MM/YYYY format, whereas TIME should be in HH:MM format.
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **NOTE:**
 For monthly recurring deadline tasks, if DD of the deadline exceeds the last day of the new month, then the DD of the deadline becomes the last day of the new month.
@@ -126,12 +126,12 @@ Example:
 Format: `bye`
   
 ## Tags
-| Tag  | Description          | Example                                              |
-|------|----------------------|------------------------------------------------------|
-| --rd | Task recurs daily    | `todo --rd Check email`                              |
-| --rw | Task recurs weekly   | `deadline --rw CS2103T Project /by 12/12/2022 23:59` |
-| --rb | Task recurs biweekly | `event --rb GEQ Tutorial /at CREATE`                 |
-| --rm | Task recurs monthly  | `todo --rm Revise tutorials`                         |
+| Tag    | Description          | Example                                              |
+|--------|----------------------|------------------------------------------------------|
+| `--rd` | Task recurs daily    | `todo --rd Check email`                              |
+| `--rw` | Task recurs weekly   | `deadline --rw CS2103T Project /by 12/12/2022 23:59` |
+| `--rb` | Task recurs biweekly | `event --rb GEQ Tutorial /at CREATE`                 |
+| `--rm` | Task recurs monthly  | `todo --rm Revise tutorials`                         |
 
 <div markdown="span" class="alert alert-warning">:exclamation: **NOTE:**
 If more than 1 tag is specified, only the first tag will be read.
