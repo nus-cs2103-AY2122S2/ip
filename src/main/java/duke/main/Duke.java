@@ -58,13 +58,4 @@ public class Duke {
     public String getGreeting() {
         return ui.showGreeting();
     }
-
-    /**
-     * Returns tutorial message
-     *
-     * @return String tutorial message
-     */
-    public String getTutorial() {
-        return ui.showTutorial();
-    }
 }
