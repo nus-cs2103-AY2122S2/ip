@@ -46,7 +46,7 @@ public class Storage {
                     taskList.add(new Event(words[2], LocalDate.parse(words[3]), words[1].equals("true")));
                 }
             }
-
+        assert taskList != null;
         return taskList;
     }
 
