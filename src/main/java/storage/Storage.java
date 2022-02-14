@@ -58,7 +58,7 @@ public class Storage {
             }
             return tasks;
         } catch (IOException e) {
-            throw new DukeException("File does not exist.");
+            throw new DukeException("Could not reach file.");
         }
     }
 
@@ -79,7 +79,7 @@ public class Storage {
             }
             return notes;
         } catch (IOException e) {
-            throw new DukeException("File does not exist.");
+            throw new DukeException("Could not reach file.");
         }
     }
 
@@ -97,7 +97,7 @@ public class Storage {
             }
             taskPath.close();
         } catch (IOException e) {
-            System.out.println("File does not exist.");
+            System.out.println("Could not reach file.");
         }
     }
 
@@ -114,7 +114,7 @@ public class Storage {
             }
             notePath.close();
         } catch (IOException e) {
-            System.out.println("File does not exist.");
+            System.out.println("Could not reach file.");
         }
     }
 }

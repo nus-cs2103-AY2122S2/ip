@@ -17,6 +17,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Main class from which the bot is run.
  */
@@ -38,13 +41,20 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
 
     public Duke() {
+        File taskFile = new File(TASK_FILE_PATH);
+        File noteFile = new File(NOTE_FILE_PATH);
+        try {
+            taskFile.createNewFile();
+            noteFile.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Could not create file.");
+        }
         storage = new Storage(TASK_FILE_PATH, NOTE_FILE_PATH);
         try {
             tasks = new TaskList(storage.setUpTaskData());
             notes = new NoteList(storage.setUpNoteData());
         } catch (DukeException e) {
-            tasks = new TaskList();
-            notes = new NoteList();
+            System.out.println("Could not set up data.");
         }
         ui = new Ui(tasks, notes);
         parser = new Parser(tasks, notes);

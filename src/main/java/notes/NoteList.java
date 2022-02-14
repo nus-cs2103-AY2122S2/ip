@@ -6,10 +6,6 @@ public class NoteList {
 
     public ArrayList<Note> notes;
 
-    public NoteList() {
-        this.notes = new ArrayList<>();
-    }
-
     public NoteList(ArrayList<Note> notes) {
         this.notes = notes;
     }
