@@ -12,7 +12,7 @@
 Here is a sample image of what you should expect:
 ![Image of UI](./Ui.png)
 4. You may type help to get a list of all available commands and their respective syntax.
-5. Otherwise, refer to [Usage](##Usage) below for details on using each command.
+5. Otherwise, refer to [Usage](#usage) below for details on using each command.
 
 ## Features 
 
