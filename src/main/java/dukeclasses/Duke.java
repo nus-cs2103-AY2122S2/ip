@@ -31,8 +31,11 @@ import javafx.util.Duration;
  */
 public class Duke extends Application {
     private static final String TEXT_DATA_FILE_PATH = "data.txt";
+    //Image Credits: taken from https://maplestory.fandom.com/wiki/Mihile/Job
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/Mihile.png"));
+    //Image Credits: taken from https://maplestory.fandom.com/wiki/Cygnus
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/Cygnus.png"));
+    //Image Credits: taken from https://www.space.com/26552-a-deep-look-space-wallpaper.html
     private final Image backgroundImage = new Image(
             this.getClass().getResource("/images/background.jpg").toString());
 
