@@ -8,9 +8,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class eventTest {
+public class deadlineTest {
     @Test
-    @DisplayName("Event String")
+    @DisplayName("Deadline String")
     public void EventString() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String item = "read";

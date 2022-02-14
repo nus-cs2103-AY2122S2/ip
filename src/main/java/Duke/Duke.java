@@ -1,8 +1,11 @@
+package Duke;
+
 import Duke.Exception.DukeException;
 import Duke.Processing.Parser;
 import Duke.Processing.Storage;
 import Duke.Processing.TaskList;
 import Duke.UI.Ui;
+import javafx.application.Platform;
 
 
 public class Duke {
@@ -26,6 +29,7 @@ public class Duke {
 
     public void run() {
         String task = ui.read();
+        System.out.println(task);
         while(!task.equals("bye")) {
             ui.divider();
             try {
@@ -40,7 +44,7 @@ public class Duke {
         } catch (DukeException e) {
             ui.errorMessage(e);
         }
-        System.exit(0);
+        Platform.exit();
     }
     /**
      * Takes in the user input and returns the appropriate response
