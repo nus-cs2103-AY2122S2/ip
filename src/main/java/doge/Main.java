@@ -24,6 +24,7 @@ public class Main extends Application {
                     new FXMLLoader(new File("./src/main/resource/view/MainWindow.fxml").toURI().toURL());
             AnchorPane ap = fxmlLoader.load();
             stage.setScene(new Scene(ap));
+            stage.setTitle("Doge");
             fxmlLoader.<MainWindow>getController().setDoge(this.doge);
             stage.show();
         } catch (IOException e) {

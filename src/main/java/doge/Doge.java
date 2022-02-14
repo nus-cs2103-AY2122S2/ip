@@ -20,11 +20,6 @@ public class Doge {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
     /**
      * Constructor for class Doge.

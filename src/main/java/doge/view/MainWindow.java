@@ -72,7 +72,7 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImg),
-                DialogBox.getDogeDialog(dogeText, dogeImg)
+                DogeDialogBox.getDogeDialog(dogeText, dogeImg)
         );
         userInput.clear();
     }

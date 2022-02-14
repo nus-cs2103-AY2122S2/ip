@@ -1,9 +1,5 @@
 package doge.view;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,19 +11,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+public class DogeDialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DogeDialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(new File("./src/main/resource/view/DialogBox.fxml").toURI().toURL());
+            FXMLLoader fxmlLoader =
+                    new FXMLLoader(new File("./src/main/resource/view/DogeDialogBox.fxml").toURI().toURL());
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -39,15 +40,9 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.CENTER_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DogeDialogBox getDogeDialog(String text, Image img) {
+        var db = new DogeDialogBox(text, img);
+        return db;
     }
 
 }

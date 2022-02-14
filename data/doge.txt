@@ -1,6 +1,6 @@
 
 T | X | borrow book
 D | X | return book | DEADLINE: 20-Mar-2022 20:00
-E |   | read book | AT: 19-Mar-2022 18:00
-T | X | eat
-T |   | go home
+E | X | read book | AT: 19-Mar-2022 18:00
+E | X | eat lunch with friends at deck | AT: 20-Apr-2022 13:30
+D |   | finish cs2103 assignment | DEADLINE: 20-Apr-2022 19:00
