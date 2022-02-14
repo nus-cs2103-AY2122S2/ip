@@ -125,7 +125,7 @@ public class InputResponder {
      */
     public String showFoundTasksMsg(TaskList tasks, String description) {
         StringBuilder s = new StringBuilder();
-        return s.append("We found these tasks in your list:\n")
+        return s.append("I found these tasks in your list:\n")
                 .append(tasks.findTasks(description))
                 .toString();
     }

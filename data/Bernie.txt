@@ -2,3 +2,5 @@
 2. [T][ ] eating dinner
 3. [D][ ] wash the floor (by: Feb 21 2022)
 4. [D][ ] buy the book (by: Feb 10 2022)
+5. [T][ ] something
+6. [T][ ] another thing
