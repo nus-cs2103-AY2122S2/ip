@@ -10,9 +10,9 @@ public class ParserTest {
     @Test
     public void loadTest() throws MissingDescriptionException, InvalidTaskException {
         try {
-            Assertions.assertEquals("Invalid command!", new Parser(new TaskList()).parse("mark paper"));
+            Assertions.assertEquals("Invalid task number!", new Parser(new TaskList()).parse("mark paper"));
         } catch (YeowooException e) {
-            assertEquals("Invalid command!", e.getMessage());
+            assertEquals("Invalid task number!", e.getMessage());
         }
     }
 }
