@@ -1,5 +1,7 @@
 package alfred.ui.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
 import javafx.collections.FXCollections;
@@ -9,12 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -23,17 +27,22 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
-    private TextArea dialog;
+    private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private static final String alfredXml = "/view/AlfredDialogBox.fxml";
+    private static final String userXml = "/view/UserDialogBox.fxml";
+    private static final String defaultXml = "/view/DialogBox.fxml";
+
+    private DialogBox(String text, Image img, String xmlPath) {
         try {
             FXMLLoader fxmlLoader =
-                    new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+                    new FXMLLoader(MainWindow.class.getResource(xmlPath));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,8 +77,8 @@ public class DialogBox extends HBox {
      * @param img  Image to be wrapped.
      * @return DialogBox object.
      */
-    public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getAlfredDialog(String text, Image img) {
+        var db = new DialogBox(text, img, DialogBox.alfredXml);
         db.flip();
         return db;
     }
@@ -81,8 +90,8 @@ public class DialogBox extends HBox {
      * @param img  Image to be wrapped.
      * @return DialogBox object.
      */
-    public static DialogBox getAlfredDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img, DialogBox.userXml);
     }
 }
 
