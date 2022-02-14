@@ -44,7 +44,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        setBackground(new Background(new BackgroundFill(Color.PALETURQUOISE, CornerRadii.EMPTY, Insets.EMPTY)));
+        setStyle("-fx-font: 20 arial;");
     }
 
     /**
@@ -55,7 +55,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        setBackground(new Background(new BackgroundFill(Color.PLUM, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
