@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 import baron.Baron;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -12,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -69,13 +72,34 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (!input.isBlank()) {
-            String response = baron.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getBaronDialog(response, baronImage)
+        if (input.isBlank()) {
+            return;
+        }
+
+        String response = this.baron.getResponse(input);
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, this.userImage),
+                DialogBox.getBaronDialog(response, this.baronImage)
+        );
+        this.userInput.clear();
+        exitIfBye(input);
+    }
+
+    /**
+     * Exits the application if the specified input is "bye".
+     *
+     * @param input user input.
+     */
+    private void exitIfBye(String input) {
+        if (input.strip().equals("bye")) {
+            this.sendButton.setDisable(true);
+            this.userInput.setDisable(true);
+            this.dialogContainer.getChildren().add(
+                    DialogBox.getBaronDialog("This app will close in 2s...", this.baronImage)
             );
-            userInput.clear();
+            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
+            pauseTransition.setOnFinished(e -> Platform.exit());
+            pauseTransition.play();
         }
     }
 }

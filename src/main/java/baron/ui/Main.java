@@ -21,6 +21,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         Scene scene = new Scene(new MainWindow(this.baron));
         stage.setScene(scene);
+        stage.setTitle("Baron");
         stage.show();
     }
 }

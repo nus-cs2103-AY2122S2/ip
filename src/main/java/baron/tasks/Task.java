@@ -23,7 +23,7 @@ public abstract class Task {
      * @return "X" if the task is done, " " otherwise.
      */
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " ");
+        return (this.isDone ? "\u2713" : "\u2718");
     }
 
     /**
