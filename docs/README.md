@@ -19,8 +19,8 @@ including time-sensitive tasks such as deadlines and events.
 # Quick Start
 * Make sure you have Java 11 installed in your computer
 * Download the latest `Wensleydale` release from [here](https://github.com/AAlghrairy/ip/releases)
-* Copy the file to the folder you wish to use as the main folder (Application will create data directories in that file)
-* Double-click the file to start the app
+* Copy the file to the folder you wish to use as the main folder (application will create directories in that folder)
+* Double-click the file to start the application
 
 # Example of Usage
 ![Ui.png](/ip/Ui.png)
@@ -35,25 +35,25 @@ Format: `help`
 
 ### List of Tasks
 
-List all the tasks currently in your task list.
+Lists all the tasks currently in your task list.
 
 Format: `list`
 
 ### Basic Task
 
-Add a basic 'ToDo' task.
+Adds a basic 'ToDo' task.
 
 Format: `todo [description]`
 
 ### Deadline
 
-Add a task with a specific deadline and/or time.
+Adds a task with a specific deadline and/or time.
 
 Format: `deadline [Description] /by yyyy-mm-dd (optionally add /HH:mm for time)`
 
 ### Event
 
-Add an event task that starts and ends between a specified time.
+Adds an event task that starts and ends between a specified time.
 
 Format: `event [Description] /at yyyy-mm-dd/HH:mm/HH:mm`
 
@@ -68,7 +68,7 @@ Format: `unmark [index]`
 
 ### Delete
 
-Remove a task from the list.
+Removes a task from the list.
 
 Format: `delete [index]`
 
@@ -85,6 +85,6 @@ Sorts the list of tasks based on the given condition.
 Format: `sort [condition]`
 ###### List of Conditions:
 
-***Sort list chronologically:*** `chronologically`  
-***Sort list alphabetically:*** `alphabetically`  
-***Sort list by marked tasks:*** `done`
+***By chronological order:*** `chronologically`  
+***By alphabetical order:*** `alphabetically`  
+***By marked tasks:*** `done`
