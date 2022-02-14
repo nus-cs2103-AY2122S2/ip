@@ -9,6 +9,7 @@ import apollo.tasks.Task;
  */
 public class MarkCommand extends Command {
 
+    public static final String HELP_MARK_COMMAND = "Mark or unmark tasks at 1-base INDEX: mark|unmark <INDEX>";
     private final boolean isDone;
     private final int index;
 

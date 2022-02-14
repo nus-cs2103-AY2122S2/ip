@@ -8,6 +8,8 @@ import static apollo.messages.Messages.EMPTY_TASKLIST;
  */
 public class ListCommand extends Command {
 
+    public static final String HELP_LIST_COMMAND = "Lists all current tasks: list";
+
     /**
      * Prefixes each list item with index.
      *

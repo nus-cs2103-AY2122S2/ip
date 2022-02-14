@@ -13,6 +13,7 @@ import apollo.commands.Command;
 import apollo.commands.DeleteCommand;
 import apollo.commands.ExitCommand;
 import apollo.commands.FindCommand;
+import apollo.commands.HelpCommand;
 import apollo.commands.InvalidCommand;
 import apollo.commands.ListCommand;
 import apollo.commands.MarkCommand;
@@ -24,7 +25,7 @@ import apollo.tasks.Task;
  */
 public class Parser {
 
-    private static final String PATTERN = "dd-MM-yyyy HH:mm";
+    public static final String PATTERN = "dd-MM-yyyy HH:mm";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(PATTERN);
 
     /**
@@ -113,6 +114,8 @@ public class Parser {
         case "find":
             description = parseArgs(args)[0].trim();
             return new FindCommand(description);
+        case "help":
+            return new HelpCommand(args);
         default:
             return new InvalidCommand();
         }

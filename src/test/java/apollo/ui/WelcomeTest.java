@@ -2,8 +2,6 @@ package apollo.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,7 @@
 package apollo.commands;
 
+import static apollo.parser.Parser.PATTERN;
+
 import java.time.LocalDateTime;
 
 import apollo.tasks.Deadline;
@@ -13,6 +15,11 @@ import apollo.tasks.Todo;
  */
 public class AddCommand extends Command {
 
+    public static final String HELP_ADD_TODO = "Add Todo to taskList: todo <DESCRIPTION>";
+    public static final String HELP_ADD_DEADLINE = "Add Deadline to taskList: deadline <DESCRIPTION> /by " + PATTERN;
+    public static final String HELP_ADD_EVENT = "Add Event to taskList: event <DESCRIPTION> /at " + PATTERN;
+    public static final String HELP_ADD_COMMAND = "Add a task using: \n\n"
+            + HELP_ADD_TODO + "\n" + HELP_ADD_DEADLINE + "\n" + HELP_ADD_EVENT;
     private final String description;
     private final LocalDateTime dateTime;
     private final Task.Type taskType;
@@ -57,5 +64,9 @@ public class AddCommand extends Command {
         return String.format("I've added this task:\n  %s\n"
                         + "There's a total of %d tasks now. ",
                 newTask, taskList.taskCount());
+    }
+
+    public static String getHelp() {
+        return null;
     }
 }
