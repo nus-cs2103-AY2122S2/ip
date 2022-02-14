@@ -1,29 +1,182 @@
-# User Guide
+# Duke User Guide
 
-## Features 
+## Features
+#### Add tasks 
+Duke allows users add tasks to the task list. 
+There are three main types of tasks: 
+- Todos 
+- Events 
+- Deadlines 
 
-### Feature-ABC
+#### View tasks
+Duke allows users to view the tasks in the task list. 
 
-Description of the feature.
+#### Mark/Unmark tasks 
+Duke allows users to mark a task when the task is completed. Duke also allows
+users to unmark the task if they made a mistake when marking the task. 
 
-### Feature-XYZ
+#### Delete tasks 
+Users can delete tasks from Duke if there are too many tasks in the task list. 
 
-Description of the feature.
 
 ## Usage
+ 
+###`todo` - Add a todo task
 
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
+Adds a todo to the task list. Useful for tasks with no imminent deadlines. 
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo paynow money to friend`
 
 Expected outcome:
 
-Description of the outcome.
+Duke will add the todo to the task list
 
 ```
-expected output
+You now have a total of 9 tasks in your list! Subarashii!
 ```
+
+###`event` - Add an event task
+
+Adds an event to the task list. Useful for tasks that happens on a specific date.
+
+Example of usage:
+
+`event company dinner /at 12-12-2022`
+
+Expected outcome:
+
+Duke will add the event to the task list
+
+```
+You now have a total of 9 tasks in your list! Subarashii!
+```
+
+###`deadline` - Add an event task
+
+Adds a deadline to the task list. Useful for tasks that needs to be completed by a specific date.
+
+Example of usage:
+
+`deadline company dinner /by 12-12-2022`
+
+Expected outcome:
+
+Duke will add the deadline to the task list
+
+```
+You now have a total of 9 tasks in your list! Subarashii!
+```
+
+###`mark` - Mark a task
+
+Marks a task as completed. 
+
+Example of usage:
+
+`mark 1`
+
+Expected outcome:
+
+Duke will mark the first task as completed.
+
+```
+ Sugoi! I have marked this task as done!
+ [T][X] paynow money to friend
+```
+
+###`unmark` - Unmark a task
+
+Unmarks a completed task.
+
+Example of usage:
+
+`unmark 1`
+
+Expected outcome:
+
+Duke will unmark the first task.
+
+```
+ Daijoubu! I have unmarked this task for you!
+ [T][ ] paynow money to friend
+```
+
+###`delete` - Deletes a task
+
+Deletes a task in the list.
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+Duke will delete the first task in the list.
+
+```
+ Otsukaresamadeshita! You have finally completed one task!
+ [T][ ] paynow money to friend
+```
+
+
+###`list` - list all tasks in the task list
+
+List tasks in the task list.
+
+Example of usage:
+
+`list`
+
+Expected outcome:
+
+Duke will list all tasks in the task list. 
+
+```
+ 1. [T][ ] paynow money to friend
+```
+
+
+
+###`undo` - Undo the latest command
+
+Undoes the latest command the user has keyed in.
+
+Example of usage:
+
+`undo`
+
+Expected outcome:
+
+Duke will undo the latest command and revert the state of the task list.
+
+```
+ Add has been undone!
+```
+
+###`bye` - Exits the program
+
+Exits the Duke program.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+Duke will terminate the program and say farewell to the user.
+
+```
+ Sayonara! Hope to see you again soon!
+```
+
+
+
+
+
+
+
+
+
+
