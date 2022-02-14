@@ -1,14 +1,14 @@
 package bobby.command;
 
 import bobby.Storage;
-import bobby.task.TaskList;
 import bobby.Ui;
+import bobby.exception.InvalidCommandException;
+import bobby.task.TaskList;
 
 /**
  * Represents a command that Bobby cannot understand
  */
 public class InvalidCommand extends Command {
-    private String errorType;
     /**
      * Creates an InvalidCommand object.
      */
@@ -21,14 +21,11 @@ public class InvalidCommand extends Command {
      * @param tasks TaskList object containing a list of Tasks.
      * @param ui Ui object to allow for Bobby to print messages.
      * @param storage Storage object that handles the reading/writing of TaskList into a specified file.
-     * @return Bobby's reply to the command.
+     * @return Nothing, throws an exception for parent class to handle.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        assert tasks != null : "TaskList cannot be null";
-        assert ui != null : "Ui cannot be null";
-        assert storage != null : "Storage cannot be null";
-        return ui.invalidMessage();
+        throw new InvalidCommandException("invalid");
     }
 
     /**

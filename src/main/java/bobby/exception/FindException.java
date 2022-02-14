@@ -1,13 +1,25 @@
 package bobby.exception;
 
+/**
+ * Represents a 'delete' exception
+ */
 public class FindException extends BobbyException {
+    /* Flag to indicate the type of message to be sent */
     private String errType;
 
+    /**
+     * Constructor for FindException
+     *
+     * @param message short message to indicate error type.
+     */
     public FindException(String message) {
         super(message);
         errType = message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String errorString;

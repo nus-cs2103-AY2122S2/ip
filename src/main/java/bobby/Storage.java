@@ -19,6 +19,13 @@ public class Storage {
         this.bobbyFile = dataFile;
     }
 
+    /**
+     * Loads the saved tasks.
+     *
+     * @return A list of tasks
+     * @throws StorageException If loading fails
+     * @throws FileNotFoundException If the file cannot be found at the specified location.
+     */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> loadTasks() throws StorageException, FileNotFoundException {
         ArrayList<Task> tasks;
@@ -34,6 +41,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves and stores the current list of tasks as a file.
+     *
+     * @param tasks The list of tasks to be stored.
+     */
     public void saveTasks(ArrayList<Task> tasks) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(bobbyFile));

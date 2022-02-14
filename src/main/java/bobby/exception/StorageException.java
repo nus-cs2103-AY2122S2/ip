@@ -1,13 +1,25 @@
 package bobby.exception;
 
+/**
+ * Represents a 'storage' exception
+ */
 public class StorageException extends BobbyException {
+    /* Flag to indicate the type of message to be sent */
     private String errType;
 
+    /**
+     * Constructor for MarkException
+     *
+     * @param message short message to indicate error type.
+     */
     public StorageException(String message) {
         super(message);
         errType = message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String errorMsg;

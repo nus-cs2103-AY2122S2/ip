@@ -1,13 +1,25 @@
 package bobby.exception;
 
+/**
+ * Represents an 'event' exception
+ */
 public class EventException extends BobbyException {
+    /* Flag to indicate the type of message to be sent */
     private String errType;
 
+    /**
+     * Constructor for EventException
+     *
+     * @param message short message to indicate error type.
+     */
     public EventException(String message) {
         super(message);
         this.errType = message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String errorMsg;

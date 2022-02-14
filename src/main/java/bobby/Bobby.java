@@ -45,7 +45,7 @@ public class Bobby {
             } catch (BobbyException e) {
                 System.out.println(e.getMessage());
             } finally {
-                ui.printLongLine(2);
+                ui.printLongLine(1);
             }
         }
     }
@@ -65,14 +65,10 @@ public class Bobby {
      * @param input The string command
      * @return The reply message from Bobby
      */
-    public static String getResponse(String input) {
+    public static String getResponse(String input) throws BobbyException {
         String replyMessage;
-        try {
-            Command c = Parser.parse(input.trim());
-            replyMessage = c.execute(tasks, ui, storage);
-        } catch (BobbyException e) {
-            replyMessage = e.toString();
-        }
+        Command c = Parser.parse(input.trim());
+        replyMessage = c.execute(tasks, ui, storage);
         return replyMessage;
     }
 }

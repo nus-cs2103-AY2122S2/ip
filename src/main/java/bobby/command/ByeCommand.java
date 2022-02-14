@@ -3,6 +3,7 @@ package bobby.command;
 import bobby.Storage;
 import bobby.Ui;
 import bobby.task.TaskList;
+import javafx.application.Platform;
 
 /**
  * Represents a 'bye' command.
@@ -28,6 +29,7 @@ public class ByeCommand extends Command {
         assert ui != null : "Ui cannot be null";
         assert storage != null : "Storage cannot be null";
         storage.saveTasks(tasks.getTaskList());
+        Platform.exit();
         return ui.goodbyeMessage();
     }
 

@@ -16,6 +16,11 @@ public class Main extends Application {
 
     private Bobby bobby = new Bobby();
 
+    /**
+     * Sets the stage for JavaFX and starts the program.
+     *
+     * @param stage The stage to be set.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -24,6 +29,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.setTitle("Bobby");
             fxmlLoader.<MainWindow>getController().setBobby(bobby);
             fxmlLoader.<MainWindow>getController().setStage(stage);
             stage.show();

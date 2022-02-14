@@ -12,6 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -26,7 +29,15 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img, String dir) {
+    /**
+     * Constructor for DialogBox
+     *
+     * @param text The text message to be displayed in the dialog box.
+     * @param img The image to be displayed in the dialog box.
+     * @param isUser Determines if image is to be on the left or right.
+     * @param isErrorBox Determines if the font is to be bold or not.
+     */
+    private DialogBox(String text, Image img, boolean isUser, boolean isErrorBox) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,8 +48,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setTextAlignment(dir.equals("right") ? TextAlignment.RIGHT : TextAlignment.LEFT);
+        dialog.setTextAlignment(isUser ? TextAlignment.RIGHT : TextAlignment.LEFT);
+        if (isErrorBox) {
+            dialog.setFont(Font.font("Verdana", FontWeight.BOLD, 13));
+        }
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50, 50, 50));
     }
 
     /**
@@ -51,15 +66,43 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box for the user.
+     *
+     * @param text The text message to be displayed in the dialog box.
+     * @param img The user image.
+     * @return The user dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img, "right");
-        db.setStyle("-fx-background: transparent; -fx-background-color: #B0E0E6; ");
+        var db = new DialogBox(text, img, true, false);
+        db.setStyle(db.getStyle() + "-fx-background-color: #B0E0E6");
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, "left");
-        db.setStyle("-fx-background: transparent; -fx-background-color: #66CDAA; ");
+    /**
+     * Creates a dialog box for Bobby.
+     *
+     * @param text The text message to be displayed in the dialog box.
+     * @param img The Bobby image.
+     * @return The Bobby dialog box.
+     */
+    public static DialogBox getBobbyDialog(String text, Image img) {
+        var db = new DialogBox(text, img, false, false);
+        db.setStyle(db.getStyle() + "-fx-background-color: #66CDAA");
+        db.flip();
+        return db;
+    }
+
+    /**
+     * Creates a dialog box for the Error.
+     *
+     * @param text The text message to be displayed in the dialog box.
+     * @param img The Bobby image.
+     * @return The Error dialog box.
+     */
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img, false, true);
+        db.setStyle(db.getStyle() + "-fx-background-color: #FF6347");
         db.flip();
         return db;
     }

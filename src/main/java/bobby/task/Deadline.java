@@ -3,19 +3,29 @@ package bobby.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Deadline object.
+ */
 public class Deadline extends Task {
-    private String by;
-    private LocalDate date;
+    private final LocalDate date;
 
-    public Deadline(String taskName, String by) {
+    /**
+     * Constructor for Deadline Task.
+     *
+     * @param taskName The name of the task.
+     * @param byDate The date tied to the Deadline task.
+     */
+    public Deadline(String taskName, String byDate) {
         super(taskName);
-        this.by = by.substring(by.indexOf(" ") + 1);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        date = LocalDate.parse(LocalDate.parse(by, formatter).format(formatter2));
+        date = LocalDate.parse(LocalDate.parse(byDate, formatter).format(formatter2));
         super.setDate(date);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
