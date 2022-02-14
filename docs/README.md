@@ -26,7 +26,7 @@ that support key features for a task manager app.
  
  
 ### Marking/Un-marking tasks
-* Duke app is able to mark tasks as completed and unmark tasks as not completed yet.
+* Duke app is able to mark tasks as completed and unmark tasks as not completed yet.\
 Format: `mark TASK_NUMBER`, `unmark TASK_NUMBER`
 
 ### Deleting tasks
