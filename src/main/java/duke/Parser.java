@@ -11,6 +11,8 @@ public class Parser {
      */
     public static int getDeleteIndex(String command) {
         assert command.contains("delete");
+        assert command.split(" ")[1].length() >= 1;
+
         // Gets index to delete from delete command
         return Integer.parseInt(command.split(" ")[1]) - 1;
     }
@@ -20,6 +22,8 @@ public class Parser {
      */
     public static String getTaskToFindName(String command) {
         assert command.contains("find");
+        assert command.substring(5).length() >= 1;
+
         return command.substring(5);
     }
 
