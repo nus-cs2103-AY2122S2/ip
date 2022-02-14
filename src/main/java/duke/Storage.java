@@ -71,13 +71,13 @@ public class Storage {
             Task taskToAdd;
             char taskType = taskString.charAt(3);
             boolean isDone = (taskString.charAt(6) == 'X');
+            DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             if (taskType == 'E') { // task is an event
                 int indexOfDate = descWithDate.indexOf("(at: ");
                 String desc = descWithDate.substring(0, indexOfDate);
                 String date = descWithDate.substring(
                         indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
-                DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
-                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 LocalDateTime at = LocalDateTime.parse(date, displayFormat);
                 taskToAdd = new Event(desc, at.format(inputFormat));
             } else if (taskType == 'D') { // task is a deadline
@@ -85,8 +85,6 @@ public class Storage {
                 String desc = descWithDate.substring(0, indexOfDate);
                 String date = descWithDate.substring(
                         indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
-                DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
-                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 LocalDateTime by = LocalDateTime.parse(date, displayFormat);
                 taskToAdd = new Deadline(desc, by.format(inputFormat));
             } else { // task is a todo
