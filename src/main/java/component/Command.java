@@ -96,6 +96,10 @@ public class Command {
      */
     private String deleteTask(int index) {
         String nexusReply = "Noted. I've removed this task:" + "\n" + tasks.remove(index);
+        //Guard clause
+        if (index < 1 || index >= tasks.listSize()) {
+            return nexusReply;
+        }
         String additionalStatement = String.format("Now you have %d tasks in the list.", tasks.listSize());
         return nexusReply + "\n" + additionalStatement;
     }
@@ -107,6 +111,10 @@ public class Command {
      */
     private String mark(int index) {
         String nexusReply = "Nice! I've marked this task as done:";
+        //Guard clause
+        if (index < 1 || index >= tasks.listSize()) {
+            return nexusReply;
+        }
         Tasks retrievedTask = tasks.getTask(index);
         retrievedTask.setMarked();
         return nexusReply + "\n" + retrievedTask;
@@ -119,6 +127,10 @@ public class Command {
      */
     private String unmark(int index) {
         String nexusReply = "OK, I've marked this task as not done yet:";
+        //Guard clause
+        if (index < 1 || index >= tasks.listSize()) {
+            return nexusReply;
+        }
         Tasks retrievedTask = tasks.getTask(index);
         retrievedTask.setUnmarked();
         return nexusReply + "\n" + retrievedTask;

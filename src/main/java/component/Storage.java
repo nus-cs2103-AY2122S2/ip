@@ -28,7 +28,7 @@ public class Storage {
     /**
      * Default file name to retrieve the data from previous instance of bobo.
      */
-    private static final String DEFAULT_FILE_NAME = "bobo.txt";
+    private static final String DEFAULT_FILE_NAME = "Nexus.txt";
 
     /**
      * Path to storage file.
