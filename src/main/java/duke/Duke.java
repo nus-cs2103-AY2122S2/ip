@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
+
     public static void main() {
         // Init UI
         Ui ui = new Ui();

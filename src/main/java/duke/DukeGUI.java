@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 
@@ -28,6 +31,10 @@ public class DukeGUI extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    // Stream for Duke to output to and DukeGUI to read from
+    private static ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    public static PrintStream outputStream = new PrintStream(baos);
 
     public static void main() {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
@@ -86,15 +93,23 @@ public class DukeGUI extends Application {
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException {
         String userInputText = userInput.getText();
         Label userText = new Label(userInputText);
         Label dukeText = new Label(getResponse(userInputText));
@@ -104,10 +119,19 @@ public class DukeGUI extends Application {
         );
         userInput.clear();
     }
-    private String getResponse(String input) {
+
+    private String getResponse(String input) throws IOException {
+        // Let Duke read from System.in
         ByteArrayInputStream byteInput = new ByteArrayInputStream(input.getBytes());
         System.setIn(byteInput);
         Duke.main();
-        return "default";
+
+        // Let DukeGUI read from System.out
+        String output = DukeGUI.baos.toString();
+        DukeGUI.baos = new ByteArrayOutputStream();
+        DukeGUI.outputStream = new PrintStream(DukeGUI.baos);
+
+        return output;
+
     }
 }

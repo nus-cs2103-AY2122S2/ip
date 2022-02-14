@@ -8,7 +8,9 @@ public class Ui {
 
     public Ui() {
         this.sc = new Scanner(System.in);
+        System.setOut(DukeGUI.outputStream);
     }
+
 
     /**
      * Waits for user input and returns it
