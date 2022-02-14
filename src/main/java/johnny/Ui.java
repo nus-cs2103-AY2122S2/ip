@@ -3,7 +3,6 @@ package johnny;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
 
@@ -16,10 +15,7 @@ public class Ui {
     }
 
     public String handleUi(String input) throws InvalidArgumentsException, EmptyDescriptionException, NoDateException, DateTimeException{
-//        System.out.println("Hello! I'm Johnny \n" + "What can I do for you?");
-//        Scanner sc = new Scanner(System.in);
 
-//        input = sc.nextLine();
         Parser parser = new Parser(input);
         ArrayList<String> parseOutput = parser.parse();
         String commandTag = parseOutput.get(0);
