@@ -24,7 +24,7 @@ public class Ui {
         "event <name of task> /at <date* or timestamp* of task>\n     -- Add an event to your task list",
         "delete <task or contact> <index>\n     -- Delete a task or contact by its index",
         "get <date*>\n     -- View the tasks that you have on the specified date",
-        "find <keyword>\n     -- View the tasks that you match the specified keyword",
+        "find <keyword>\n     -- View the tasks in your task list that match the specified keyword",
         "mark <index of task>\n     -- Mark a task as completed in your task list",
         "unmark <index of task>\n     -- Unmark a task in your task list",
         "clear\n     -- Clear the screen",
