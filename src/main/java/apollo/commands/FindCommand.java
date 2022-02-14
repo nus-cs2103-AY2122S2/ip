@@ -30,6 +30,7 @@ public class FindCommand extends Command {
      * @param result Task containing keyword.
      */
     private void appendToResults(String result) {
+        assert !result.isEmpty() : "Null result added.";
         results.append("\n").append(index).append(".");
         results.append(result);
         index++;

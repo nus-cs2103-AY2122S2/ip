@@ -36,6 +36,7 @@ public class Parser {
      * @throws ApolloIllegalArgumentException If args in wrong format to parse date and time.
      */
     private LocalDateTime parseDateTime(String[] args) throws ApolloIllegalArgumentException {
+        assert args != null && args.length == 2 : "Invalid args supplied.";
         try {
             String dateTimeString = parseArgs(args)[1].trim();
             return LocalDateTime.parse(dateTimeString, FORMATTER);
@@ -69,6 +70,7 @@ public class Parser {
      * @throws ApolloIllegalArgumentException If invalid Integer is supplied.
      */
     private int parseIndex(String[] args) throws ApolloIllegalArgumentException {
+        assert args != null : "Null arguments supplied.";
         try {
             return Integer.parseInt(parseArgs(args)[0].trim()) - 1;
         } catch (NumberFormatException e) {
