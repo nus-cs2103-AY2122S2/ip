@@ -7,6 +7,7 @@ This is a greenfield Java project for CS2103T Software Engineering.
 >  “Any fool can write code that a computer can understand.
 > Good programmers write code that humans can understand.”
 > -Martin Fowler.
+
 ***
 ## What is Nexus?
 
@@ -64,7 +65,7 @@ Note regarding command format:
 
 
 ### 5. Creates a new deadline and a date in which the task has to be completed by: `deadline` 
-**format: `deadline`<description> /by <date>`**
+**format: `deadline <description> /by <date>`**
 
 - Deadline tasks would look something like `[D][ ] <description> (by: <date>)` when `list` is called.
 - They are represented by a `[D]` in the task list.
