@@ -1,18 +1,17 @@
 package yeowoo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import tasks.TaskList;
 
 public class ParserTest {
     @Test
-    public void loadTest() throws MissingDescriptionException, InvalidTaskException {
-        try {
-            Assertions.assertEquals("Invalid task number!", new Parser(new TaskList()).parse("mark paper"));
-        } catch (YeowooException e) {
-            assertEquals("Invalid task number!", e.getMessage());
-        }
+    public void loadTest() {
+        Throwable exception = assertThrows(InvalidTaskException.class, () ->
+                new Parser(new TaskList()).parse("mark paper"));
+        assertEquals("Invalid task number!", exception.getMessage());
     }
+
 }
