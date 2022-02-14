@@ -41,10 +41,8 @@ public class MainWindow extends AnchorPane {
         duke = d;
         assert duke != null;
         String greeting = duke.getGreeting();
-        String tutorial = duke.getTutorial();
         DialogBox dbGreeting = DialogBox.getDukeDialog(greeting, dukeImage);
-        DialogBox dbTutorial = DialogBox.getDukeDialog(tutorial, dukeImage);
-        dialogContainer.getChildren().addAll(dbGreeting, dbTutorial);
+        dialogContainer.getChildren().addAll(dbGreeting);
     }
 
     /**
