@@ -12,7 +12,7 @@ public class Deadline extends Task {
     protected LocalDate deadline;
 
     /**
-     * Create a task with a deadline.
+     * Creates a task with a deadline.
      *
      * @param description String description of the task.
      * @param deadline    String date of the deadline.

@@ -1,7 +1,5 @@
 package heylo.commands;
 
-import java.util.Scanner;
-
 import heylo.tasks.Deadline;
 import heylo.tasks.Event;
 import heylo.tasks.Task;
@@ -41,72 +39,71 @@ public class Command {
 
     /**
      * Runs relevant function based on parsed command
-     *
-     * @param sc Scanner used for command input for being closed on exit
      */
-    public void run(Scanner sc) {
+    public String run() {
         if (command.equals("")) {
-            return;
+            return "";
         }
+
+        StringBuilder str = new StringBuilder();
 
         switch (command) {
         case "bye":
             Task.saveTasks();
-            System.out.println(" See you again! :)");
-            sc.close();
+            str.append(" See you again! :)\n");
             System.exit(0);
             break;
         case "list":
-            Task.printAllTasks();
+            str.append(Task.getAllTasks());
             break;
         case "mark":
             if (argument == null) {
-                System.out.println(" Please enter the task number as well!");
-                System.out.println(" Command format: mark task-number");
+                str.append(" Please enter the task number as well!\n");
+                str.append(" Command format: mark task-number\n");
                 break;
             }
-            Task.markAsDone(Integer.parseInt(argument) - 1);
+            str.append(Task.markAsDone(Integer.parseInt(argument) - 1));
             break;
         case "unmark":
             if (argument == null) {
-                System.out.println(" Please enter the task number as well!");
-                System.out.println(" Command format: unmark task-number");
+                str.append(" Please enter the task number as well!\n");
+                str.append(" Command format: unmark task-number\n");
                 break;
             }
-            Task.markAsNotDone(Integer.parseInt(argument) - 1);
+            str.append(Task.markAsNotDone(Integer.parseInt(argument) - 1));
             break;
         case "todo":
             Todo todo = new Todo(argument);
-            Task.addToList(todo);
+            str.append(Task.addToList(todo));
             break;
         case "event":
             Event event = new Event(argument, extraInfo);
-            Task.addToList(event);
+            str.append(Task.addToList(event));
             break;
         case "deadline":
             Deadline deadline = new Deadline(argument, extraInfo);
-            Task.addToList(deadline);
+            str.append(Task.addToList(deadline));
             break;
         case "delete":
             if (argument == null) {
-                System.out.println(" Please enter the task number as well!");
-                System.out.println(" Command format: delete task-number");
+                str.append(" Please enter the task number as well!\n");
+                str.append(" Command format: delete task-number\n");
                 break;
             }
-            Task.removeFromList(Integer.parseInt(argument) - 1);
+            str.append(Task.removeFromList(Integer.parseInt(argument) - 1));
             break;
         case "find":
             if (argument == null) {
-                System.out.println(" Please enter what you want to look for as well!");
-                System.out.println(" Command format: find required-word(s)");
+                str.append(" Please enter what you want to look for as well!\n");
+                str.append(" Command format: find required-word(s)\n");
                 break;
             }
-            Task.findInList(argument);
+            str.append(Task.findInList(argument));
             break;
         default:
-            System.out.println(" Sorry, I don't understand what that means.");
+            str.append(" Sorry, I don't understand what that means.\n");
             break;
         }
-        System.out.println("__________________________________________________________");
+        return str.toString();
     }
 }
