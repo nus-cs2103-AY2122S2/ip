@@ -10,8 +10,6 @@ import duke.DukeException;
  */
 public class Event extends Task {
 
-    protected LocalDate atDate;
-
     /**
      * Initializes the Event task with a task description, its regex, & boolean representing if it's done.
      * @param description String of task description.
@@ -22,10 +20,19 @@ public class Event extends Task {
     public Event(String description, String at, boolean done) throws DukeException {
         super(description, done);
         try {
-            this.atDate = LocalDate.parse(at);
+            super.date = LocalDate.parse(at);
         } catch (DateTimeParseException e) {
             throw new DukeException("Date was incorrectly formatted! Please format it as yyyy-mm-dd");
         }
+    }
+
+    /**
+     * Getter method to return the description of an Event.
+     * @return A String representing the description of an Event.
+     */
+    @Override
+    public String getDescription() {
+        return this.description + ", " + super.date.toString();
     }
 
     /**
@@ -35,7 +42,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + this.atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + super.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -45,7 +52,7 @@ public class Event extends Task {
     @Override
     public String toStringSaveData() {
         return String.join(" | ", "E",
-                String.valueOf(done ? 1 : 0), description, this.atDate.toString());
+                String.valueOf(done ? 1 : 0), description, super.date.toString());
     }
 
 }

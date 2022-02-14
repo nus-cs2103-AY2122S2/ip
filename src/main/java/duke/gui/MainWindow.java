@@ -27,8 +27,10 @@ public class MainWindow extends AnchorPane {
     private Ui ui;
     private String userName;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/da-user.jpg"),
+            79, 79, false, false);
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/elon-musk.jpg"),
+            79, 79, true, false);
 
     /**
      * Sets up the Main Window with a welcome message box from Duke.

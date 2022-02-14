@@ -86,7 +86,7 @@ public class Storage {
      * @param taskList ArrayList of user's current existing tasks to save to disk.
      */
     public void updateFileContents(TaskList taskList) {
-        ArrayList<Task> externalTaskList = taskList.getTasks();
+        ArrayList<Task> externalTaskList = TaskList.getTasks();
         // write & update save data with current tasklist
         try {
             FileWriter fw = new FileWriter(taskFilePath);

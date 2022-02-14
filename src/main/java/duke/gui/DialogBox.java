@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -35,6 +36,16 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Apply effect to ImageView
+        // set a clip to apply rounded border to the original image.
+        Rectangle clip = new Rectangle(
+                displayPicture.getFitWidth(), displayPicture.getFitHeight()
+        );
+        clip.setArcWidth(20);
+        clip.setArcHeight(20);
+        displayPicture.setClip(clip);
+
+        // sets the chat box & image
         dialog.setText(text);
         displayPicture.setImage(img);
     }

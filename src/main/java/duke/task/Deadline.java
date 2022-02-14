@@ -10,8 +10,6 @@ import duke.DukeException;
  */
 public class Deadline extends Task {
 
-    protected LocalDate by;
-
     /**
      * Initializes the Deadline task with a task description, its regex & a boolean indicating if it's done.
      * @param description String of task description.
@@ -22,10 +20,19 @@ public class Deadline extends Task {
     public Deadline(String description, String by, boolean done) throws DukeException {
         super(description, done);
         try {
-            this.by = LocalDate.parse(by);
+            super.date = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new DukeException("Date was incorrectly formatted! Please format it as yyyy-mm-dd");
         }
+    }
+
+    /**
+     * Getter method to return the description of a Deadline.
+     * @return A String representing the description of a Deadline.
+     */
+    @Override
+    public String getDescription() {
+        return this.description + ", " + super.date.toString();
     }
 
     /**
@@ -34,7 +41,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + super.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -43,7 +50,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toStringSaveData() {
-        return String.join(" | ", "D", String.valueOf(done ? 1 : 0), description, this.by.toString());
+        return String.join(" | ", "D", String.valueOf(done ? 1 : 0), description, super.date.toString());
     }
 
 }

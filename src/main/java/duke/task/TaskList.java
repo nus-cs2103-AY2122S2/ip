@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private static ArrayList<Task> taskList;
 
     /**
      * Initializes the current taskList with an external ArrayList.
@@ -63,7 +63,7 @@ public class TaskList {
      * A getter method to return the current entire taskList.
      * @return ArrayList containing existing tasks.
      */
-    public ArrayList<Task> getTasks() {
+    public static ArrayList<Task> getTasks() {
         return taskList;
     }
 
