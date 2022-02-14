@@ -19,7 +19,6 @@ Currently Supported Types of Tasks: 😊
 ### Usage ⌨
 Command List: 📜
 - list
-- delete (task number)
 - todo (description)
 - event (description) /at (date in YYYY-MM-DD format)
 - deadline (description) /by (date in YYYY-MM-DD format)
