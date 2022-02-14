@@ -113,6 +113,23 @@ Nice! I've marked this task as done:
   [E][X] attend workshop (at: Sep 19 2021)
 ```
 
+### Mark a Task as done
+Task can be set into undone by giving the Task index.
+
+Format:
+
+`unmark [index]`
+
+Example:
+
+`unmark 1`
+
+Output:
+```
+OK, I've unmarked this task as not done yet:
+  [E][X] attend workshop (at: Sep 19 2021)
+```
+
 ### Delete a Task
 Delete a Task by specifying its index.
 
@@ -165,6 +182,7 @@ Duke application will be closed.
 |event   |`event [description] /at [time]`<br>e.g.,`event attend workshop /at 2021-09-19`|
 |todo    |`todo [description]`<br>e.g.,`todo buy pens`|
 |delete  |`delete [index]`<br>e.g., `delete 1`|
-|mark    |`mark [index]`<br>e.g., `done 1`|
+|mark    |`mark [index]`<br>e.g., `mark 1`|
+|unmark  |`unmark [index]`<br>e.g., `unmark 1`|
 |undo    |`undo`|
 |bye     |`bye`|
