@@ -25,27 +25,28 @@ public class Duke {
         }
     }
     public Duke() {
+
     }
 
-    public void run() {
-        String task = ui.read();
-        System.out.println(task);
-        while(!task.equals("bye")) {
-            ui.divider();
-            try {
-                Parser.use(task, this.tasks);
-            } catch (DukeException e) {
-                ui.errorMessage(e);
-            }
-            task = ui.read();
-        }
-        try {
-            this.storage.write(tasks);
-        } catch (DukeException e) {
-            ui.errorMessage(e);
-        }
-        Platform.exit();
-    }
+//    public void run() {
+//        String task = ui.read();
+//        System.out.println(task);
+//        while(!task.equals("bye")) {
+//            ui.divider();
+//            try {
+//                Parser.use(task, this.tasks);
+//            } catch (DukeException e) {
+//                ui.errorMessage(e);
+//            }
+//            task = ui.read();
+//        }
+//        try {
+//            this.storage.write(tasks);
+//        } catch (DukeException e) {
+//            ui.errorMessage(e);
+//        }
+//        Platform.exit();
+//    }
     /**
      * Takes in the user input and returns the appropriate response
      *
@@ -64,8 +65,8 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
-        new Duke("Previously.txt").run();
-    }
+//    public static void main(String[] args) {
+//        new Duke("Previously.txt")
+//    }
         
 }
