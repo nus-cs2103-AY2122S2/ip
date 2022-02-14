@@ -171,13 +171,11 @@ Example of output:
   ```
    Got it! I've deleted the note from [T][] buy gift for my bestie
   ```
-   
-Example of task list after edit note:
+Example of task list after clear note:
   ```
    [T][] buy gift for my bestie :
-  ```  
-   
-###Search for a task 
+  ```
+### Search for a task 
    
 *Command: find KEY_WORDS*
    
@@ -190,7 +188,7 @@ Example of output:
    Here are the matched tasks:
    1.[T][] buy gift for my bestie
   ```
-###Delete 
+### Delete 
    
 *Command: delete TASK_NUMBER*
    
@@ -205,18 +203,15 @@ Example of output:
   ```
 Example of task list after command:
   ```
-   Here is your to-do:
-   1.[D][ ] book venue for party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
-   2.[E][ ] birthday party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
+  Here is your to-do:
+  1.[D][ ] book venue for party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
+  2.[E][ ] birthday party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
   ```
 ### Storing tasks in database
+Every change in each task is recorded in a file called duke.txt. When the programme is run again, previous task lists will be available for viewing and use.
 
-   Every change in each task is recorded in a file called duke.txt. When the programme is run again, previous task lists will be available for viewing and use.
-  
 ### Exit
-
-   Exits the programme.
-   
-   *Command: delete TASK_NUMBER*
+Exits the programme.
+*Command: delete TASK_NUMBER*
    
 
