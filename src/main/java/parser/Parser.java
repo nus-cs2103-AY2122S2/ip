@@ -11,9 +11,14 @@ import ui.Ui;
  */
 public class Parser {
 
-    TaskList tasks;
-    NoteList notes;
+    private TaskList tasks;
+    private NoteList notes;
 
+    /**
+     * Parser class constructor
+     * @param tasks maintains the tasks added to the task list.
+     * @param notes maintains the notes added to the note list.
+     */
     public Parser(TaskList tasks, NoteList notes) {
         this.tasks = tasks;
         this.notes = notes;
@@ -22,7 +27,7 @@ public class Parser {
     /**
      * Calls appropriate TaskList methods for each command and updates storage.
      * @param inputStringsArray string array containing user instructions.
-     * @param storage Storage object that deals with storage updation.
+     * @param storage Storage object that deals with storage updates.
      * @throws DukeException If user input message does not make sense.
      */
     public String userCommand(String[] inputStringsArray, Storage storage) throws DukeException {
@@ -34,13 +39,19 @@ public class Parser {
         case "help":
             return Ui.userHelp();
         case "bye":
-            System.exit(0);
+            return "Bye! See you soon!";
         default:
-            throw new DukeException("OOPS! I'm sorry, but I don't know what that command means.\n" +
-                    "Enter 'help' if you need it!");
+            throw new DukeException("OOPS! I'm sorry, but I don't know what that command means.\n"
+                    + "Enter 'help' if you need it!");
         }
     }
 
+    /**
+     * Handles method calls based on task related user commands.
+     * @param inputStringsArray string array containing user instructions.
+     * @param storage Storage object that deals with storage updates.
+     * @throws DukeException If user input message does not make sense.
+     */
     public String taskParser(String[] inputStringsArray, Storage storage) throws DukeException {
         switch (inputStringsArray[1]) {
         case "list":
@@ -64,11 +75,17 @@ public class Parser {
         case "find":
             return tasks.find(inputStringsArray[2]);
         default:
-            throw new DukeException("Not sure what that task command means...\n" +
-                    "Enter 'help' if you need it!");
+            throw new DukeException("Not sure what that task command means...\n"
+                    + "Enter 'help' if you need it!");
         }
     }
 
+    /**
+     * Handles method calls based on note related user commands
+     * @param inputStringsArray string array containing user instructions.
+     * @param storage Storage object that deals with storage updates.
+     * @throws DukeException If user input message does not make sense.
+     */
     public String noteParser(String[] inputStringsArray, Storage storage) throws DukeException {
         switch (inputStringsArray[1]) {
         case "list":
@@ -84,8 +101,8 @@ public class Parser {
         case "find":
             return notes.find(inputStringsArray[2]);
         default:
-            throw new DukeException("Not sure what that note command means...\n" +
-                    "Enter 'help if you need it!");
+            throw new DukeException("Not sure what that note command means...\n"
+                    + "Enter 'help if you need it!");
         }
     }
 

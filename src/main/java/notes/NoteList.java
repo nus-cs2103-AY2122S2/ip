@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class NoteList {
 
-    public ArrayList<Note> notes;
+    private ArrayList<Note> notes;
 
     public NoteList(ArrayList<Note> notes) {
         this.notes = notes;
@@ -50,8 +50,8 @@ public class NoteList {
         } else {
             int num = Integer.parseInt(number);
             Note note = notes.get(num - 1);
-            String tempString = "Noted. I've removed this note:\n" + note.toString() +
-                    "\nNow you have " + (this.notes.size() - 1) + " notes left in your note list";
+            String tempString = "Noted. I've removed this note:\n" + note.toString()
+                    + "\nNow you have " + (this.notes.size() - 1) + " notes left in your note list";
             this.notes.remove(num - 1);
             return tempString;
         }
@@ -78,6 +78,13 @@ public class NoteList {
             returnString = returnString + (i + 1) + ". " + foundNotes.get(i).toString() + "\n";
         }
         return returnString;
+    }
+
+    /**
+     * Getter for notes
+     */
+    public ArrayList<Note> getNotes() {
+        return this.notes;
     }
 
 }

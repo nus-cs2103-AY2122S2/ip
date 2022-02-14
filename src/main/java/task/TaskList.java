@@ -1,19 +1,27 @@
 package task;
 
-import exception.DukeException;
 import java.util.ArrayList;
+
+import exception.DukeException;
 
 /**
  * Interface that stores list of tasks and contains methods that manipulate it.
  */
 public class TaskList {
 
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Creates new tasks based on if a todo, deadline or event is entered by the user.
+     * @param stringsToAdd contains user input string array.
+     * @param containsBy indicates if a deadline by date has been entered.
+     * @param containsOn indicated if an event on date has been entered.
+     * @param returnString contains the description of the task entered by the user.
+     */
     public String createNewTask(String[] stringsToAdd, Boolean containsBy, Boolean containsOn, String returnString)
             throws DukeException {
         Task task;
@@ -36,12 +44,12 @@ public class TaskList {
                 task = new Event(returnString, stringsToAdd[stringsToAdd.length - 1]);
             }
         } else {
-            throw new DukeException("Tasks can either be Todos, Deadlines or Events." +
-                    "Enter 'help' if you're confused!");
+            throw new DukeException("Tasks can either be Todos, Deadlines or Events."
+                    + "Enter 'help' if you're confused!");
         }
         tasks.add(task);
-        return "Got it! I've added this task:\n" + " [" + task.symbol() + "][] " +
-                returnString + "\nNow you have " + tasks.size() + " tasks in the list.";
+        return "Got it! I've added this task:\n" + " [" + task.symbol() + "][] "
+                + returnString + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -50,8 +58,8 @@ public class TaskList {
     public String displayList() {
         String returnString = "";
         for (int i = 0; i < tasks.size(); i++) {
-            returnString = returnString + (i + 1) + ". [" + tasks.get(i).symbol() + "][" +
-                    tasks.get(i).getStatusIcon() + "] " + tasks.get(i).displayTime() + "\n";
+            returnString = returnString + (i + 1) + ". [" + tasks.get(i).symbol() + "]["
+                    + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).displayTime() + "\n";
         }
         if (returnString.equals("")) {
             return "Seems like you haven't added any tasks to your list yet...";
@@ -67,8 +75,8 @@ public class TaskList {
      */
     public String addToList(String[] stringsToAdd) throws DukeException {
         if (stringsToAdd.length < 4) {
-            throw new DukeException("OOPS!! The description of a " +
-                    stringsToAdd[0] + " cannot be empty.");
+            throw new DukeException("OOPS!! The description of a "
+                    + stringsToAdd[0] + " cannot be empty.");
         } else {
             String returnString = "";
             boolean containsBy = false;
@@ -96,8 +104,8 @@ public class TaskList {
         int num = Integer.parseInt(number);
         tasks.get(num - 1).setAsDone();
         Task temp = tasks.get(num - 1);
-        return "Nice! I've marked this task as done:\n [" + temp.symbol() + "][" +
-                temp.getStatusIcon() + "] " + temp;
+        return "Nice! I've marked this task as done:\n [" + temp.symbol() + "]["
+                + temp.getStatusIcon() + "] " + temp;
     }
 
     /**
@@ -108,8 +116,8 @@ public class TaskList {
         int num = Integer.parseInt(number);
         tasks.get(num - 1).setAsNotDone();
         Task temp = tasks.get(num - 1);
-        return "OK , I've marked this task as not done yet:\n [" + temp.symbol() + "][" +
-                temp.getStatusIcon() + "] " + temp;
+        return "OK , I've marked this task as not done yet:\n [" + temp.symbol() + "]["
+                + temp.getStatusIcon() + "] " + temp;
     }
 
     /**
@@ -118,14 +126,14 @@ public class TaskList {
      */
     public String delete(String number) {
         if (number.equals("all")) {
-            this.tasks =  new ArrayList<>();
+            this.tasks = new ArrayList<>();
             return "All right! I have deleted all tasks in your list.";
         } else {
             int num = Integer.parseInt(number);
             Task temp = tasks.get(num - 1);
-            String tempString = "Noted. I've removed this task:\n [" + temp.symbol() + "][" +
-                    temp.getStatusIcon() + "] " + temp +
-                    "\nNow you have " + (tasks.size() - 1) + " tasks left in this list";
+            String tempString = "Noted. I've removed this task:\n [" + temp.symbol() + "]["
+                    + temp.getStatusIcon() + "] " + temp
+                    + "\nNow you have " + (tasks.size() - 1) + " tasks left in this list";
             tasks.remove(num - 1);
             return tempString;
         }
@@ -153,5 +161,12 @@ public class TaskList {
                     + foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";
         }
         return returnString;
+    }
+
+    /**
+     * Getter for tasks
+     */
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 }

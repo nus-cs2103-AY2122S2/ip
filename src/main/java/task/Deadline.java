@@ -7,8 +7,13 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
 
-    LocalDate date;
+    private LocalDate date;
 
+    /**
+     * Deadline class constructor
+     * @param details provides description of the deadline being created.
+     * @param date provides the date when the deadline is due.
+     */
     public Deadline(String details, String date) {
         super(details);
         this.date = LocalDate.parse(date);

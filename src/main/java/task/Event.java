@@ -7,8 +7,13 @@ import java.time.LocalDate;
  */
 public class Event extends Task {
 
-    LocalDate date;
+    private LocalDate date;
 
+    /**
+     * Event class constructor
+     * @param details provides description of the event being created.
+     * @param date provides the date of when the event is.
+     */
     public Event(String details, String date) {
         super(details);
         this.date = LocalDate.parse(date);

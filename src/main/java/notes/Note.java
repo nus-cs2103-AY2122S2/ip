@@ -2,7 +2,7 @@ package notes;
 
 public class Note {
 
-    String description;
+    protected String description;
 
     public Note(String description) {
         this.description = description;

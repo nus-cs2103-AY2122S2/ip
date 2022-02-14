@@ -1,30 +1,32 @@
+import java.io.File;
+import java.io.IOException;
+
 import exception.DukeException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import notes.NoteList;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Main class from which the bot is run.
  */
 public class Duke extends Application {
 
+    private static final String TASK_FILE_PATH = "tasklistdata.txt";
+    private static final String NOTE_FILE_PATH = "notelistdata.txt";
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -35,11 +37,12 @@ public class Duke extends Application {
     private TaskList tasks;
     private NoteList notes;
     private final Parser parser;
-    private static final String TASK_FILE_PATH = "tasklistdata.txt";
-    private static final String NOTE_FILE_PATH = "notelistdata.txt";
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
 
+    /**
+     * Duke constructor which creates new files for data to be stored.
+     */
     public Duke() {
         File taskFile = new File(TASK_FILE_PATH);
         File noteFile = new File(NOTE_FILE_PATH);

@@ -3,7 +3,7 @@ package task;
 /** Abstract class that distinguishes between different Tasks.
  *  Holds a description and the status of whether a task is done or not done.
  */
-abstract public class Task {
+public abstract class Task {
     protected String details;
     protected boolean isDone;
 
@@ -17,7 +17,7 @@ abstract public class Task {
      * @return String "X" or " ".
      */
     public String getStatusIcon() {
-        return (isDone? "X" : " ");
+        return (isDone ? "X" : " ");
     }
 
     /**
@@ -38,13 +38,13 @@ abstract public class Task {
      * Returns character symbol that represents task type.
      * @return String 'D', 'E' or 'T'.
      */
-    abstract public String symbol();
+    public abstract String symbol();
 
     /**
      * Returns task details along with full string representation of the date if any.
      * @return details of the task.
      */
-    abstract public String displayTime();
+    public abstract String displayTime();
 
     /**
      * Returns details of the task.

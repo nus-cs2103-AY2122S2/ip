@@ -1,27 +1,33 @@
 package storage;
 
-import exception.DukeException;
-import notes.Note;
-import notes.NoteList;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-import task.TaskList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import exception.DukeException;
+import notes.Note;
+import notes.NoteList;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+
 /**
  * Interface that deals with pushing or pulling tasks from the storage.
  */
 public class Storage {
 
-    String taskPath;
-    String notePath;
+    private String taskPath;
+    private String notePath;
 
+    /**
+     * Storage class constructor.
+     * @param taskPath provides path for the task data file.
+     * @param notePath provides path for the note data file.
+     */
     public Storage(String taskPath, String notePath) {
         this.taskPath = taskPath;
         this.notePath = notePath;
@@ -91,9 +97,10 @@ public class Storage {
         try {
             FileWriter taskPath = new FileWriter(this.taskPath);
             taskPath.flush();
-            for (int i = 0; i < taskList.tasks.size(); i++) {
-                taskPath.write(taskList.tasks.get(i).symbol() + "/" + taskList.tasks.get(i).getStatusIcon() +
-                        "/" + taskList.tasks.get(i).toString() + "\n");
+            for (int i = 0; i < taskList.getTasks().size(); i++) {
+                taskPath.write(taskList.getTasks().get(i).symbol() + "/"
+                        + taskList.getTasks().get(i).getStatusIcon() + "/"
+                        + taskList.getTasks().get(i).toString() + "\n");
             }
             taskPath.close();
         } catch (IOException e) {
@@ -109,8 +116,8 @@ public class Storage {
         try {
             FileWriter notePath = new FileWriter(this.notePath);
             notePath.flush();
-            for (int i = 0; i < noteList.notes.size(); i++) {
-                notePath.write(noteList.notes.get(i).toString() + "\n");
+            for (int i = 0; i < noteList.getNotes().size(); i++) {
+                notePath.write(noteList.getNotes().get(i).toString() + "\n");
             }
             notePath.close();
         } catch (IOException e) {
