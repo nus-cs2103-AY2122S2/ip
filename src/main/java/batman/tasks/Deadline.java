@@ -37,11 +37,53 @@ public class Deadline extends Task {
         this(false, description, by);
     }
 
+    /**
+     * Returns Task's details to store in file.
+     *
+     * @return String object of task.
+     */
     @Override
     public String appendToFile() {
         return "D|" + (super.isDone ? "1" : "0") + "|" + super.description + "|" + DateUtil.dateToString(by) + "\n";
     }
 
+    /**
+     * Returns details of task's date and time.
+     *
+     * @return LocalDateTime object
+     */
+    @Override
+    public LocalDateTime getDateTime() {
+        return by;
+    }
+
+    /**
+     * Returns task's type.
+     *
+     * @return String object of task's type.
+     */
+    @Override
+    public String taskType() {
+        return "D";
+    }
+
+    /**
+     * Checks if keyword is found in tasks.
+     *
+     * @param keyword Total number of tasks.
+     * @return Boolean object of whether matched tasks exists.
+     */
+    @Override
+    public boolean contains(String keyword) {
+        String task = taskType() + description + DateUtil.dateToString(by);
+        return task.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    /**
+     * Returns status icon and description of tasks.
+     *
+     * @return String object of task's details.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + DateUtil.dateToString(by) + ")";

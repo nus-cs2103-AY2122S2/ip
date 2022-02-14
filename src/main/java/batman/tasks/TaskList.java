@@ -2,6 +2,7 @@ package batman.tasks;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import batman.exception.DukeException;
@@ -11,56 +12,55 @@ public class TaskList {
 
     private static ArrayList<Task> tasks;
 
+    /**
+     * Creates a new ArrayList to store tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates and stores existing tasks in ArrayList.
+     *
+     * @param tasks Existing ArrayList of tasks.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
 
+    /**
+     * Returns current task by index.
+     *
+     * @param index An integer specifying an index in the list.
+     */
     public Task get(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Returns size of list.
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Returns an ArrayList of tasks.
+     */
     public ArrayList<Task> getTaskList() {
         return tasks;
     }
 
     /**
-     * Adds tasks depending on what type of task it is.
+     * Adds tasks to list.
      *
-     * @param command An array of strings containing the
-     *                details of a task.
+     * @param t Task object
      * @return String object of added task.
      */
-    public static String addTask(String[] command) {
+    public static String addTask(Task t) {
         try {
-            String task;
-            Task t;
-            String description;
-            String details;
-            task = command[1];
-            switch (command[0]) {
-            case "deadline":
-                description = task.split(" /")[0];
-                details = task.split("/by ")[1];
-                t = new Deadline(description, details);
-                break;
-            case "event":
-                description = task.split(" /")[0];
-                details = task.split("/at ")[1];
-                t = new Event(description, details);
-                break;
-            default:
-                description = task;
-                t = new Todo(description);
-            }
             tasks.add(t);
+            Collections.sort(tasks);
             return printTask(t);
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Missing argument(s) for tasks\n"
@@ -90,33 +90,40 @@ public class TaskList {
     }
 
     /**
-     * Toggles the status of the task.
+     * Marks the status of the task.
      *
-     * @param action Mark/Unmark task.
      * @param index The index of an existing task in the list.
-     * @return StringBuilder object of the task's changed status.
+     * @return String object of the task's changed status.
      */
-    public static StringBuilder toggleStatus(String action, int index) {
-        StringBuilder sb = new StringBuilder();
+    public static String markStatus(int index) {
         try {
             if (index >= tasks.size() || index < 0) {
                 throw new DukeException(Error.LIST_ERROR);
             }
-            switch (action) {
-            case "mark":
-                tasks.get(index).markDone();
-                sb.append("Alfred, mark it as done!\n  ")
-                        .append(tasks.get(index).toString()).append("\n");
-                break;
-            default:
-                tasks.get(index).unmarkDone();
-                sb.append("Make up your mind. Alfred, unmark it!\n  ")
-                        .append(tasks.get(index).toString()).append("\n");
-                break;
-            }
-            return sb;
+            tasks.get(index).markDone();
+            return "Alfred, mark it as done!\n  "
+                    + tasks.get(index).toString() + "\n";
         } catch (DukeException e) {
-            return sb.append(printList()).append(e.listError());
+            return printList() + e.listError();
+        }
+    }
+
+    /**
+     * Unmarks the status of the task.
+     *
+     * @param index The index of an existing task in the list.
+     * @return String object of the task's changed status.
+     */
+    public static String unmarkStatus(int index) {
+        try {
+            if (index >= tasks.size() || index < 0) {
+                throw new DukeException(Error.LIST_ERROR);
+            }
+            tasks.get(index).unmarkDone();
+            return "Make up your mind. Alfred, unmark it!\n  "
+                    + tasks.get(index).toString() + "\n";
+        } catch (DukeException e) {
+            return printList() + e.listError();
         }
     }
 
@@ -124,29 +131,25 @@ public class TaskList {
      * Finds tasks using given keyword.
      *
      * @param keyword A word given by user.
-     * @return StringBuilder object of the tasks found.
+     * @return String object of the tasks found.
      */
-    public static StringBuilder findTask(String keyword) {
-        StringBuilder sb = new StringBuilder();
-        ArrayList<Task> temp = new ArrayList<>();
+    public static String findTask(String keyword) {
+        String result = "";
         for (Task t : tasks) {
             if (t.contains(keyword)) {
-                temp.add(t);
+                int index = tasks.indexOf(t) + 1;
+                result += index + ". " + t + "\n";
             }
         }
-        if (temp.size() == 0) {
-            sb.append("No matching tasks in your list.\n");
+        if (result.isEmpty()) {
+            return "No matching tasks in your list.\n";
         } else {
-            sb.append("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < temp.size(); i++) {
-                sb.append(i + 1).append(". ").append(temp.get(i)).append("\n");
-            }
+            return "Here are the matching tasks in your list:\n" + result;
         }
-        return sb;
     }
 
     /**
-     * Prints all existing tasks.
+     * Returns String object of all existing tasks.
      *
      * @return String object of task list.
      */
@@ -161,6 +164,12 @@ public class TaskList {
         return s.toString();
     }
 
+    /**
+     * Returns String object of added task.
+     *
+     * @param t Task object
+     * @return String object of task.
+     */
     private static String printTask(Task t) {
         return "Got it. Task added:\n  " + t + "\n" + t.printNoOfTasks(tasks.size()) + "\n";
     }
