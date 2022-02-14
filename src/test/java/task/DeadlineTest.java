@@ -1,12 +1,12 @@
 package task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
-    public void symbolTest(){
+    public void symbolTest() {
         Deadline testDeadline = new Deadline("Complete 21003 ip tasks", "2021-01-30");
         assertEquals(testDeadline.symbol(), "D");
     }
