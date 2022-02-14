@@ -1,29 +1,54 @@
-# User Guide
+# Jerry User Guide
 
 ## Features 
 
-### Feature-ABC
+### Add Tasks
+Jerry is here to help you track your events!
+All you have to do is to tell Jerry what is happening and when.
 
-Description of the feature.
+### Search by Date
+Jerry can look up for tasks based on a specified date! 
 
-### Feature-XYZ
-
-Description of the feature.
+### Reliable Jerry
+Jerry has an excellent memory! 
+He will always remember what you have told him.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Adds a Todo Type Task
 
-Describe the action and its outcome.
+Creates Todo Type task with the specified name.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo buy book`
+`todo go swimming`
 
 Expected outcome:
 
-Description of the outcome.
+Jerry adds a Todo Task with the specified name.
 
 ```
 expected output
 ```
+Example:
+![](./assets/todo.png)
+
+### `deadline` - Adds a Deadline Type Task
+
+Creates Deadline Type task with the specified name and date.
+
+Example of usage: 
+
+`deadline buy toto /by 11/11/2022`
+`todo go swimming /by 10/10/2022`
+
+Expected outcome:
+
+Jerry adds a DeadlineTask with the specified name.
+
+```
+expected output
+```
+Example:
+![](./assets/deadline.png)
