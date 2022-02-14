@@ -83,8 +83,9 @@ public class TagCommand extends Command {
         }
 
         int currIndex = index - 1;
-        taskList.addTagToTask(currIndex, resultsArr[1]);
-        storage.addTagToTask(currIndex, resultsArr[1]);
+        String tag = parser.concatFormat(resultsArr, 1);
+        taskList.addTagToTask(currIndex, tag);
+        storage.addTagToTask(currIndex, tag);
 
         return taskList.getTask(ui, currIndex);
     }
