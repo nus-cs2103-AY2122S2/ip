@@ -1,6 +1,7 @@
 package duke.user;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import duke.task.TaskList;
 
@@ -36,9 +37,11 @@ public class UserProfile {
 
     @Override
     public String toString() {
-        String info = String.format("      Current tasks: %d\n", taskList.size());
-        info += String.format("      Task completed: %d\n", numOfTaskCompleted);
-        info += String.format("      Date joined: %s\n", dateJoined.toString());
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
+
+        String info = String.format("    Current tasks: %d\n", taskList.size());
+        info += String.format("    Task completed: %d\n", numOfTaskCompleted);
+        info += String.format("    Date joined: %s\n", dateJoined.format(dateFormat));
 
         return info;
     }
