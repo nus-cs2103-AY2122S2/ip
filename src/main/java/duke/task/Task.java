@@ -55,7 +55,7 @@ public class Task {
     }
 
     /**
-     * Return the task priority as a string.
+     * Returns the task priority as a string.
      *
      * @return The task priority as a string.
      */
@@ -71,7 +71,7 @@ public class Task {
     }
 
     /**
-     * Changing the task status to DONE.
+     * Changes the task status to DONE.
      *
      */
     public void mark() {
@@ -129,7 +129,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + priorityToString() + "]" + "[" + statusToString() + "] " + description;
+        return "[" + priorityToString() + "] " + "[" + statusToString() + "] " + description;
     }
 
     public LocalDateTime parseDateTime(String s) {

@@ -1,5 +1,7 @@
 package duke.util;
 
+import java.util.Arrays;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -18,12 +20,12 @@ import duke.command.UnmarkCommand;
 public class Parser {
     /**
      * Parses the command.
-     * @param fullCommand The command.
+     * @param command The command.
      * @return A Command object.
      * @throws DukeException when the command is invalid.
      */
-    public static Command parse(String fullCommand) throws DukeException {
-        switch (fullCommand) {
+    public static Command parse(String command) throws DukeException {
+        switch (command) {
         case "bye":
             return new ByeCommand();
         case "list":
@@ -31,21 +33,25 @@ public class Parser {
         case "todo":
             throw new DukeException("The description of a todo cannot be empty.");
         default:
-            String[] commandArr = fullCommand.split(" ");
+            String[] commandArr = command.split(" ");
             if (commandArr.length > 1) {
                 String type = commandArr[0];
-                String description = commandArr[1];
+                String description = String.join(" ", Arrays.copyOfRange(commandArr, 1, commandArr.length));
                 switch (type) {
                 case "find":
                     return new FindCommand(description);
                 case "todo":
                     return new ToDoCommand(description);
                 case "deadline":
-                    String by = fullCommand.split(" /by ")[1];
-                    return new DeadlineCommand(description, by);
+                    String[] deadlineArr = description.split(" /by ");
+                    String deadlineDesc = deadlineArr[0];
+                    String by = deadlineArr[1];
+                    return new DeadlineCommand(deadlineDesc, by);
                 case "event":
-                    String at = fullCommand.split(" /at ")[1];
-                    return new EventCommand(description, at);
+                    String[] eventArr = description.split(" /at ");
+                    String eventDesc = eventArr[0];
+                    String at = eventArr[1];
+                    return new EventCommand(eventDesc, at);
                 default:
                     int index = Integer.parseInt(description) - 1;
                     switch (type) {

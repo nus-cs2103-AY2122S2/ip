@@ -37,7 +37,7 @@ public class Ui {
      * @return Welcome message.
      */
     public String welcome(TaskList tasks) {
-        String greeting = "Hello! I'm Duke.";
+        String greeting = "Hello! I'm Sparrow.";
         if (tasks.isEmpty()) {
             return greeting + " What can I do for you?";
         }
