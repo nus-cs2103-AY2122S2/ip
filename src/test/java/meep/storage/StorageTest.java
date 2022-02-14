@@ -33,14 +33,6 @@ public class StorageTest {
         expected.addTask(deadline);
         expected.addTask(event);
 
-        //not working in CI
-        //String filePath = "/src/test/java/Meep/test.txt";
-        //String home = System.getProperty("user.dir");
-        //String path = home + filePath;
-
-        //List<Task> tasks = storage.readTaskFile(path);
-        //ListTask result = new ListTask(tasks);
-
         ListTask result = new ListTask();
         result.addTask(todo);
         result.addTask(deadline);

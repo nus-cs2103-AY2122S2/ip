@@ -1,4 +1,4 @@
-package meep.testui;
+package meep.textui;
 
 /**
  * Container for user visible messages.

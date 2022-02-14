@@ -1,4 +1,4 @@
-package meep.testui;
+package meep.textui;
 
 import java.io.InputStream;
 import java.io.PrintStream;

@@ -27,6 +27,86 @@ import meep.ui.Messages;
  */
 public class Parser {
     /**
+     * Parses user input command.
+     *
+     * @param userInput the user input.
+     * @param tasks     the tasks lsit.
+     * @return the command.
+     * @throws InvalidInputException If the input is invalid.
+     */
+    public Command parseUserInput(String userInput, List<Task> tasks) throws InvalidInputException {
+        boolean isEmptyInput = userInput.trim().length() == 0;
+        if (isEmptyInput) {
+            throw new InvalidInputException(Messages.MESSAGE_EMPTY_INPUT);
+        }
+
+        String[] arr = userInput.split(" ", 2);
+        switch (arr[0]) {
+        case ExitCommand.COMMAND_WORD:
+            if (isValidCommandLength(ExitCommand.COMMAND_LENGTH, arr)) {
+                return new ExitCommand();
+            }
+            break;
+        case HelpCommand.COMMAND_WORD:
+            if (isValidCommandLength(HelpCommand.COMMAND_LENGTH, arr)) {
+                return new HelpCommand();
+            }
+            break;
+        case ListCommand.COMMAND_WORD:
+            if (isValidCommandLength(ListCommand.COMMAND_LIST_LENGTH, arr)) {
+                // list without date
+                return new ListCommand();
+            } else if (isValidCommandLength(ListCommand.COMMAND_LIST_DATE_LENGTH, arr)) {
+                // list with date given
+                return new ListCommand(true, parseDate(arr[1]));
+            }
+            break;
+        case MarkCommand.COMMAND_WORD:
+            if (isValidCommandLength(MarkCommand.COMMAND_LENGTH, arr)) {
+                int index = parseListIndex(arr[1], tasks);
+                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
+                return new MarkCommand(index);
+            }
+            break;
+        case UnmarkCommand.COMMAND_WORD:
+            if (isValidCommandLength(UnmarkCommand.COMMAND_LENGTH, arr)) {
+                int index = parseListIndex(arr[1], tasks);
+                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
+                return new UnmarkCommand(index);
+            }
+            break;
+        case DeleteCommand.COMMAND_WORD:
+            if (isValidCommandLength(DeleteCommand.COMMAND_LENGTH, arr)) {
+                int index = parseListIndex(arr[1], tasks);
+                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
+                return new DeleteCommand(index);
+            }
+            break;
+        case AddCommand.COMMAND_TODO:
+            ToDo todo = parseTodoCommand(arr);
+            return new AddCommand(todo);
+            // Fallthrough
+        case AddCommand.COMMAND_DEADLINE:
+            Deadline deadline = parseDeadlineCommand(arr);
+            return new AddCommand(deadline);
+            // Fallthrough
+        case AddCommand.COMMAND_EVENT:
+            Event event = parseEventCommand(arr);
+            return new AddCommand(event);
+            // Fallthrough
+        case FindCommand.COMMAND_WORD:
+            if (isValidCommandLength(FindCommand.COMMAND_LENGTH, arr)) {
+                return new FindCommand(arr[1]);
+            }
+            break;
+
+        default:
+            throw new InvalidInputException(Messages.MESSAGE_INVALID_FORMAT);
+        }
+        throw new InvalidInputException(Messages.MESSAGE_INVALID_FORMAT);
+    }
+
+    /**
      * Checks task title is empty or not.
      *
      * @param task the task.
@@ -124,96 +204,55 @@ public class Parser {
         return length == input.length;
     }
 
-
     /**
-     * Parses user input command.
+     * Parses input to ToDo command.
      *
-     * @param userInput the user input.
-     * @param tasks     the tasks lsit.
-     * @return the command.
-     * @throws InvalidInputException If the input is invalid.
+     * @param arr the input array.
+     * @return the ToDo Command.
+     * @throws InvalidInputException If the input format is invalid.
      */
-    public Command parseUserInput(String userInput, List<Task> tasks) throws InvalidInputException {
-        boolean isEmptyInput = userInput.trim().length() == 0;
-        if (isEmptyInput) {
-            throw new InvalidInputException(Messages.MESSAGE_EMPTY_INPUT);
-        }
-
-        String[] arr = userInput.split(" ", 2);
-        switch (arr[0]) {
-        case ExitCommand.COMMAND_WORD:
-            if (isValidCommandLength(ExitCommand.COMMAND_LENGTH, arr)) {
-                return new ExitCommand();
-            }
-            break;
-        case HelpCommand.COMMAND_WORD:
-            if (isValidCommandLength(HelpCommand.COMMAND_LENGTH, arr)) {
-                return new HelpCommand();
-            }
-            break;
-        case ListCommand.COMMAND_WORD:
-            if (isValidCommandLength(ListCommand.COMMAND_LIST_LENGTH, arr)) {
-                // list without date
-                return new ListCommand();
-            } else if (isValidCommandLength(ListCommand.COMMAND_LIST_DATE_LENGTH, arr)) {
-                // list with date given
-                return new ListCommand(true, parseDate(arr[1]));
-            }
-            break;
-        case MarkCommand.COMMAND_WORD:
-            if (isValidCommandLength(MarkCommand.COMMAND_LENGTH, arr)) {
-                int index = parseListIndex(arr[1], tasks);
-                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
-                return new MarkCommand(index);
-            }
-            break;
-        case UnmarkCommand.COMMAND_WORD:
-            if (isValidCommandLength(UnmarkCommand.COMMAND_LENGTH, arr)) {
-                int index = parseListIndex(arr[1], tasks);
-                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
-                return new UnmarkCommand(index);
-            }
-            break;
-        case DeleteCommand.COMMAND_WORD:
-            if (isValidCommandLength(DeleteCommand.COMMAND_LENGTH, arr)) {
-                int index = parseListIndex(arr[1], tasks);
-                assert index >= 0 && index < tasks.size() : Messages.MESSAGE_OUTBOUND_NUMBER;
-                return new DeleteCommand(index);
-            }
-            break;
-        case AddCommand.COMMAND_TODO:
-            if (isValidCommandLength(AddCommand.COMMAND_LENGTH, arr)) {
-                String taskTitle = checkEmptyTask(arr[1]);
-                assert taskTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
-                return new AddCommand(new ToDo(taskTitle));
-            }
-            break;
-        case AddCommand.COMMAND_DEADLINE:
-            String[] deadline = parseTaskFormat(arr[1]);
-            assert deadline.length == 2 : Messages.MESSAGE_INVALID_COMMAND_LENGTH;
-            String deadlineDate = checkPrepositionFormat(deadline[1], AddCommand.COMMAND_DEADLINE);
-            String deadlineTitle = checkEmptyTask(deadline[0]);
-            assert deadlineTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
-            return new AddCommand(new Deadline(deadlineTitle, parseDate(deadlineDate)));
-            // Fallthrough
-        case AddCommand.COMMAND_EVENT:
-            String[] event = parseTaskFormat(arr[1]);
-            assert event.length == 2 : Messages.MESSAGE_INVALID_COMMAND_LENGTH;
-            String eventDate = checkPrepositionFormat(event[1], AddCommand.COMMAND_EVENT);
-            String eventTitle = checkEmptyTask(event[0]);
-            assert eventTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
-            return new AddCommand(new Event(eventTitle, parseDate(eventDate)));
-            // Fallthrough
-        case FindCommand.COMMAND_WORD:
-            if (isValidCommandLength(FindCommand.COMMAND_LENGTH, arr)) {
-                return new FindCommand(arr[1]);
-            }
-            break;
-
-        default:
+    private ToDo parseTodoCommand(String[] arr) throws InvalidInputException {
+        if (isValidCommandLength(AddCommand.COMMAND_LENGTH, arr)) {
+            String taskTitle = checkEmptyTask(arr[1]);
+            assert taskTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
+            return new ToDo(taskTitle);
+        } else {
             throw new InvalidInputException(Messages.MESSAGE_INVALID_FORMAT);
         }
-        throw new InvalidInputException(Messages.MESSAGE_INVALID_FORMAT);
+    }
+
+    /**
+     * Parses input to Deadline command.
+     *
+     * @param arr the input array.
+     * @return the Deadline Command.
+     * @throws InvalidInputException If the input format is invalid.
+     */
+    private Deadline parseDeadlineCommand(String[] arr) throws InvalidInputException {
+        String[] deadline = parseTaskFormat(arr[1]);
+        assert deadline.length == 2 : Messages.MESSAGE_INVALID_COMMAND_LENGTH;
+        String deadlineDate = checkPrepositionFormat(deadline[1], AddCommand.COMMAND_DEADLINE);
+        String deadlineTitle = checkEmptyTask(deadline[0]);
+        assert deadlineTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
+
+        return new Deadline(deadlineTitle, parseDate(deadlineDate));
+    }
+
+    /**
+     * Parses input to Event command.
+     *
+     * @param arr the input array.
+     * @return the Event Command.
+     * @throws InvalidInputException If the input format is invalid.
+     */
+    private Event parseEventCommand(String[] arr) throws InvalidInputException {
+        String[] event = parseTaskFormat(arr[1]);
+        assert event.length == 2 : Messages.MESSAGE_INVALID_COMMAND_LENGTH;
+        String eventDate = checkPrepositionFormat(event[1], AddCommand.COMMAND_EVENT);
+        String eventTitle = checkEmptyTask(event[0]);
+        assert eventTitle.length() > 0 : Messages.MESSAGE_EMPTY_TASK;
+
+        return new Event(eventTitle, parseDate(eventDate));
     }
 
     /**

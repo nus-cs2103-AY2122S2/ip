@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import meep.commands.FindCommand;
 import meep.ui.Messages;
 
 /**
@@ -89,24 +88,26 @@ public class ListTask {
      * Finds tasks according to given keyword.
      *
      * @param keyword the keyword user given to search.
+     * @return if find matched task, return it in string format.
+     * Otherwise, return empty string.
      */
     public String findTasks(String keyword) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(System.lineSeparator());
 
         int i = 1;
-        int total = 0;
+        int totalMatchedTasks = 0;
         for (Task task : tasks) {
             String input = task.toString().substring(7);
             if (input.toLowerCase().contains(keyword.toLowerCase())) {
                 stringBuilder.append("     " + i + ".  "
                         + task.toString() + System.lineSeparator());
-                total++;
+                totalMatchedTasks++;
             }
             i++;
         }
 
-        if (total == 0) {
+        if (totalMatchedTasks == 0) {
             return "";
         } else {
             return stringBuilder.toString();

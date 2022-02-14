@@ -70,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Read task date file.
+     * Reads task date file.
      *
      * @param path the path of the file.
      * @return the list of tasks.

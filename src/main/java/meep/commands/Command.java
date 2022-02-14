@@ -16,10 +16,10 @@ public class Command {
     }
 
     /**
-     * Execute method should be implemented by child classes.
+     * Executes method should be implemented by child classes.
      *
      * @param tasks the task list.
-     * @return None
+     * @return Exception that the method not supposed to be used.
      */
     public String execute(ListTask tasks) {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
