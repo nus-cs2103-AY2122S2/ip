@@ -37,8 +37,9 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns response from executing the command
+     *
+     * @return String message from execution or error
      */
     public String getResponse(String input) {
         try {
@@ -49,10 +50,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns greeting message
+     *
+     * @return String greeting message
+     */
     public String getGreeting() {
         return ui.showGreeting();
     }
 
+    /**
+     * Returns tutorial message
+     *
+     * @return String tutorial message
+     */
     public String getTutorial() {
         return ui.showTutorial();
     }

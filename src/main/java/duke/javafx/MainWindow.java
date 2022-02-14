@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-
+        assert duke != null;
         String greeting = duke.getGreeting();
         String tutorial = duke.getTutorial();
         DialogBox dbGreeting = DialogBox.getDukeDialog(greeting, dukeImage);
