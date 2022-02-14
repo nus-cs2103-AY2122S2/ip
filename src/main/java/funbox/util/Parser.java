@@ -3,18 +3,10 @@ package funbox.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import funbox.command.ByeCommand;
-import funbox.command.Command;
-import funbox.command.DeadlineCommand;
-import funbox.command.DeleteCommand;
-import funbox.command.EventCommand;
-import funbox.command.FilterCommand;
-import funbox.command.FindCommand;
-import funbox.command.ListCommand;
-import funbox.command.MarkCommand;
-import funbox.command.ToDoCommand;
-import funbox.command.UnmarkCommand;
+import funbox.command.*;
 import funbox.exception.FunBoxExceptions;
+
+import javax.swing.text.html.HTML;
 
 /**
  * Deal with parsing and making sense of the user commands.
@@ -56,6 +48,8 @@ public class Parser {
             return new FilterCommand(description);
         case "find":
             return new FindCommand(description);
+        case "tag":
+            return new TagCommand(description);
         default:
             throw new FunBoxExceptions("ERROR! I do not know what the commands means :<");
         }

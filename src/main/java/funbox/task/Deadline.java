@@ -33,6 +33,6 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                + " " + time + ")";
+                + " " + time + ")\nTags: " + super.showTags();
     }
 }

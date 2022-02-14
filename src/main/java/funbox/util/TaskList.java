@@ -62,6 +62,15 @@ public class TaskList {
     }
 
     /**
+     * Add tags to the task on the list.
+     * @param index The index of the task on the list.
+     * @param tag The tag to be added to the task.
+     */
+    public void addTagToTask(int index, String tag) {
+        this.taskList.get(index).addTag(tag);
+    }
+
+    /**
      * Gets the task on the list.
      *
      * @param ui Interface which interact with users.
