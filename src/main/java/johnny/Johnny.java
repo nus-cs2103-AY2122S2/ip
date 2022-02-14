@@ -35,18 +35,6 @@ public class Johnny extends Application{
 
     }
 
-    public Johnny(String filepath) {
-        store = new Storage(filepath);
-
-        try {
-            tasks = new InputList(store.readTasks());
-        } catch (IOException e) {
-            e.getMessage();
-        }
-
-        ui = new Ui(this.tasks, this.store);
-    }
-
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -139,19 +127,8 @@ public class Johnny extends Application{
             output = e.getMessage() +
                     "--- Invalid date entered. Please enter in format 'yyyy-mm-dd'";
         }
+        assert output != null;
         return output;
-    }
-
-    /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**
