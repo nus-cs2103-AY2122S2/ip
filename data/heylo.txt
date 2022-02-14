@@ -1,14 +1,5 @@
-T : 0 : this : NONE
-T : 0 : that : NONE
-T : 0 : more : HIGH
-T : 0 : lala : HIGH
-T : 0 : mie : NONE
-T : 0 : far : NONE
-T : 0 : near : MEDIUM
-T : 0 : lalal : NONE
-T : 0 : gui : NONE
-E : 0 : 2020  : 2000-02-02 : NONE
-E : 0 : 2020  : 2020-02-02 : HIGH
-D : 0 : 2939  : 3030-03-03 : MEDIUM
-D : 0 : ddhf  : 3030-03-03 : NONE
-T : 0 : better gui : LOW
+T : 1 : Learn React : NONE
+E : 0 : BitHacks  : 2022-02-26 : NONE
+D : 0 : Submit iP  : 2022-02-18 : HIGH
+D : 0 : AI project 1  : 2022-02-20 : MEDIUM
+T : 0 : Midterm prep : LOW

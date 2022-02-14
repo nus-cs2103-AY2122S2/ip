@@ -39,10 +39,10 @@ public abstract class Task {
             str.append("  ")
                     .append(taskList.get(index).toString())
                     .append("\n");
+            assert taskList.get(index).isDone : "Mark as done failed";
         } catch (IndexOutOfBoundsException e) {
             str.append(" This task does not exist.\n");
         }
-        assert taskList.get(index).isDone : "Mark as done failed";
         return str.toString();
     }
 
@@ -59,10 +59,10 @@ public abstract class Task {
             str.append("  ")
                     .append(taskList.get(index).toString())
                     .append("\n");
+            assert !taskList.get(index).isDone : "Mark as not done failed";
         } catch (IndexOutOfBoundsException e) {
             str.append(" This task does not exist.\n");
         }
-        assert !taskList.get(index).isDone : "Mark as not done failed";
         return str.toString();
     }
 
@@ -74,10 +74,10 @@ public abstract class Task {
             str.append("  ")
                     .append(taskList.get(index).toString())
                     .append("\n");
+            assert taskList.get(index).priority != null : "Setting priority failed";
         } catch (IndexOutOfBoundsException e) {
             str.append(" This task does not exist.\n");
         }
-        assert taskList.get(index).priority != null : "Setting priority failed";
         return str.toString();
     }
 
@@ -245,7 +245,7 @@ public abstract class Task {
 
         for (int i = 0; i < foundCount; i++) {
             str.append("   ")
-                    .append(i + 1)
+                    .append(foundIndexes[i] + 1)
                     .append(".")
                     .append(taskList.get(foundIndexes[i]).toString())
                     .append("\n");
@@ -279,7 +279,7 @@ public abstract class Task {
      * @return String done status.
      */
     public String getStatusIcon() {
-        return this.isDone ? "[X]" : "[ ]";
+        return this.isDone ? "[X]" : "[   ]";
     }
 
     public String getPriorityIcon() {
