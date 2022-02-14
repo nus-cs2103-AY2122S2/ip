@@ -6,14 +6,15 @@ import stevie.task.TaskList;
 import stevie.undo.UndoHistory;
 
 public class HelpCommand extends Command {
-    private static final String helpString = "\"list\": to display your activities.\n"
-            + "\"bye\": to end our session.\n"
-            + "\"mark <i>\" to mark the i-th task as done.\n"
-            + "\"unmark <i>\" to unmark the i-th task as done.\n"
-            + "\"delete <i>\" to delete the i-th task.\n"
-            + "\"todo <task_name>\" to add a todo task.\n"
-            + "\"deadline <task_name> /by <date>\" to add a deadline.\n"
-            + "\"event <event_name> /at <date>\" to add an event.\n"
+    private static final String helpString = "-\"list\": to display your activities.\n"
+            + "-\"bye\": to end our session.\n"
+            + "-\"mark <i>\" to mark the i-th task as done.\n"
+            + "-\"unmark <i>\" to unmark the i-th task as done.\n"
+            + "-\"delete <i>\" to delete the i-th task.\n"
+            + "-\"todo <task_name>\" to add a todo task.\n"
+            + "-\"deadline <task_name> /by <date>\" to add a deadline.\n"
+            + "-\"event <event_name> /at <date>\" to add an event.\n"
+            + "-\"undo\" to undo the previous command.\n"
             + "Date should in format of dd/mm/yyyy HH:mm";
 
     /**
