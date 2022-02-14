@@ -4,13 +4,16 @@ import command.Command;
 import exception.DukeException;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import storage.Storage;
@@ -67,6 +70,11 @@ public class Ui extends Application {
     }
 
     private void initialise() {
+        Label acknowledgement = new Label("UI design inspired by @jon-foocy");
+        acknowledgement.setTextFill(Color.PURPLE);
+        dialogContainer.getChildren().add(acknowledgement);
+        dialogContainer.setAlignment(Pos.TOP_CENTER);
+
         String introduction = uiFormatter.helloMessage();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(introduction, duke, "Phoenix"));
     }
