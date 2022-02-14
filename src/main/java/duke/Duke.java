@@ -35,6 +35,15 @@ public class Duke {
     }
 
     /**
+     * Returns a formatted start up message to be displayed.
+     *
+     * @return Start up message string.
+     */
+    public String showStartUpMessage() {
+        return this.ui.formatStartUpMessage();
+    }
+
+    /**
      * Executes the instructions given by user until a Command.BYE is issued by the user.
      */
     private String executeInstruction(String input) {

@@ -7,15 +7,10 @@ public class Ui {
     private static final String LINE = "\t____________________________________________________________";
 
     /**
-     * Prints a hardcoded start up message to the console to indicate to the user that the program has started.
+     * Formats a hardcoded start up message to the console to indicate to the user that the program has started.
      */
     public String formatStartUpMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello I'm\n" + logo + "\n" + "What can I do for you?\n" + LINE;
+        return "Hello I'm\n\n" + "\tDUKE\n\n" + "What can I do for you?\n";
     }
 
     /**
