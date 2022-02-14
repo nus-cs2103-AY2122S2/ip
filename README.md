@@ -1,36 +1,57 @@
-# Duke project template
+# Ghibli Task Manager User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This project is a Studio-Ghibli Themed Task Manager that helps you to manage your todos, deadlines and events.
 
-## Setting up in Intellij
+## List of Features
 
-Prerequisites: JDK 11 (use the exact version), update Intellij to the most recent version.
+- [x] Add 3 types of Tasks: ToDo, Deadline and Event
+- [x] Mark task as done
+- [x] Unmark task
+- [x] Add notes to task
+- [x] Edit note added to task
+- [x] Delete note added to task
+- [x] Search for certain tasks based on key words 
+- [x] Delete tasks 
+- [x] Storing of tasks for easy access in next use
+- [x] Exiting the program
 
-1. **Ensure Intellij JDK 11 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
-1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
-1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   > Task :compileJava
-   > Task :processResources NO-SOURCE
-   > Task :classes
+## Feature Details 
+
+### Add Tasks
+
+#### Add ToDo
+A ToDo is a task with a task name.
+
+**Command: todo <task name>**
    
-   > Task :Duke.main()
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+Examples of input:
+   '''
+   todo buy gift for my bestie 
+   // output : [T][ ] buy gift for my bestie
+   '''
+
+#### Add Deadline
+A Deadline is a task that has a end date and time. 
+
+**Command: deadline <task name> /by YYYY-MM-DD hh:mm**
    
-   What is your name?
-   ```
-   Type some word and press enter to let the execution proceed to the end.
+Examples of input:
+   '''
+   deadline book venue for party /by 2022-02-14 21:20
+   // output : [D][ ] book venue for party (by: Feb. 14 2022 09:20 pm)
+   '''
 
-## Build automation using Gradle
+#### Add Event
+An Event is a task that has a start date and time as well as a end date and time. 
 
-* This project uses Gradle for build automation and dependency management. It includes a basic build script as well (i.e. the `build.gradle` file).
-* If you are new to Gradle, refer to the [Gradle Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/gradle.html).
-
+**Command: event <task name> /at YYYY-MM-DD hh:mm /to YYYY-MM-DD hh:mm**
+   
+Examples of input:
+   '''
+   event birthday party /at 2022-02-28 19:15 /to 2022-02-28 22:15
+   // output : [D][ ] book venue for party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
+   '''
+   
 ## Testing
 
 ### I/O redirection tests
