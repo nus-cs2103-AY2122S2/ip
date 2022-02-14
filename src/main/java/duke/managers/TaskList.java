@@ -188,7 +188,8 @@ public class TaskList {
     public void remindUserTasks(LocalDate reminderEndDate) {
         int numberOfTasks = this.userTaskList.size();
         String remindEndDateFormatted = reminderEndDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        String message = String.format("Here are the upcoming deadlines that you have before %s:", remindEndDateFormatted);
+        String message = String.format("Here are the upcoming "
+                + "deadlines that you have before %s:", remindEndDateFormatted);
         ui.println(message);
         int counter = 1;
         for (int i = 1; i <= numberOfTasks; i++) {

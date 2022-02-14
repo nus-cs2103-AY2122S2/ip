@@ -3,8 +3,6 @@ package duke.gui;
 import duke.Duke;
 import duke.Ui;
 import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,7 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private String byeResponse = "Bye. Hope I've motivated you as much as I could have, and SMILE :D\nClosing this window now!\n";
+    private String byeResponse = "Bye. Hope I've motivated you as much as I could have,"
+            + " and SMILE :D\nClosing this window now!\n";
 
     /**
      * Initialises the dialog container with the welcome message of duke.
