@@ -21,7 +21,7 @@ public class Storage {
     public void record(String info) {
         try {
             makeDirectory();
-            FileWriter myWriter = new FileWriter("../data/record.txt");
+            FileWriter myWriter = new FileWriter(path);
             myWriter.write(info);
             myWriter.close();
         } catch (IOException e) {
@@ -39,7 +39,7 @@ public class Storage {
     }
 
     private void creatFile() throws IOException {
-        File file = new File("../data/record.txt");
+        File file = new File(path);
         if (!file.createNewFile())  {
             if (file.delete()) {
                 creatFile();

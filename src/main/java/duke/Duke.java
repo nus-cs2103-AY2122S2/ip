@@ -8,13 +8,19 @@ import duke.ui.Ui;
 public class Duke {
     private static final Ui ui = new Ui();
     private static final TaskList tasks = new TaskList();
-    private static final Storage storage = new Storage("../data");
+    private static final Storage storage = new Storage("./data/record.txt");
+    private boolean isExit = false;
 
     public String getResponse(String input) {
         String output;
         Command c= ui.read(input);
         output = c.execute(tasks, ui, storage);
+        isExit = c.isExit();
         return output;
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 
 }
