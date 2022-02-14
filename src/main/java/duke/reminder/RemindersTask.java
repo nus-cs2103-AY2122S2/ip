@@ -21,8 +21,7 @@ public class RemindersTask extends TimerTask {
      */
     public void run() {
         Platform.runLater(() -> {
-            //setTypeOfReminder(ReminderPredicates.TODAY);
-            setTypeOfReminder(ReminderPredicates.OVERDUE);
+            setTypeOfReminder(ReminderPredicates.OVERDUE_AND_UPCOMING);
             List<Task> dueRems = getDueTasks();
             showNotifications(dueRems); // shows the multiple notifications in an alert dialog
         });
