@@ -114,8 +114,9 @@ public class Parser {
             String[] inputStringArray = inputText.split(" /by ");
             try {
                 String[] taskNameArray = inputStringArray[0].split(" ");
-                for (int i = 1; i < taskNameArray.length; i++) {
-                    taskName += taskNameArray[i];
+                taskName += taskNameArray[1];
+                for (int i = 2; i < taskNameArray.length; i++) {
+                    taskName += " " + taskNameArray[i];
                 }
             } catch (ArrayIndexOutOfBoundsException exception) {
                 throw new DukeException(missingTaskInfo);
@@ -144,8 +145,9 @@ public class Parser {
         } else { // is a to-do task
             try {
                 String[] taskNameArray = inputText.split(" ");
-                for (int i = 1; i < taskNameArray.length; i++) {
-                    taskName += taskNameArray[i];
+                taskName += taskNameArray[1];
+                for (int i = 2; i < taskNameArray.length; i++) {
+                    taskName += " " + taskNameArray[i];
                 }
             } catch (StringIndexOutOfBoundsException exception) {
                 throw new DukeException(missingTaskInfo);
