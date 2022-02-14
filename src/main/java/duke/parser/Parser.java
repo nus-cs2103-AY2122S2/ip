@@ -32,9 +32,11 @@ public class Parser {
         if ((input.startsWith("find ") && input.length() > 5)) {
             String prefix = input.split("\\s+")[1];
             return new SearchCommand(prefix);
-        } else {
-            return parseAdd(input);
         }
+        if (input.startsWith("view schedule ")) {
+            return new ViewSchedulesCommand(input.split("\\s+")[2]);
+        }
+        return parseAdd(input);
     }
 
     private static Command parseMark(String input) {

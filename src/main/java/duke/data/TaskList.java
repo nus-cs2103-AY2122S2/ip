@@ -41,7 +41,23 @@ public class TaskList {
                 count++;
             }
         }
-        return result + "found " + count + " matching results.";
+        return result + "found " + count + " matching result(s).";
+    }
+
+    public String searchTime(String prefix) {
+        prefix = Task.identifyTime(prefix);
+        String result = "";
+        int count = 0;
+        for (Task t : list) {
+            if (t.matchTime(prefix)) {
+                result = result + t + "\n";
+                count++;
+            }
+        }
+        if (result.length() < 1) {
+            return "You don't have any tasks on that day!";
+        }
+        return result + "found " + count + " task(s).";
     }
 
     /** Listing out all the tasks in the list.  */
