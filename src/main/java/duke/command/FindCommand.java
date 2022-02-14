@@ -45,7 +45,8 @@ public class FindCommand extends Command {
 
         // if there are tasks that match the searchKey
         if (tasksMatchingSearchKey) {
-            ui.addText("Here " + ((filteredTaskList.size() > 1)? "are" : "is") + " the matching task" + ((filteredTaskList.size() > 1) ? "s" : "" ) + " in your list: ");
+            ui.addText("Here " + ((filteredTaskList.size() > 1) ? "are" : "is")
+                    + " the matching task" + ((filteredTaskList.size() > 1) ? "s" : "") + " in your list: ");
             for (Task task: filteredTaskList) {
                 ui.listTask(originalTaskList.indexOf(task), task);
             }
