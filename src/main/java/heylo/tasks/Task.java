@@ -29,14 +29,18 @@ public abstract class Task {
      *
      * @param index int Index of the task in the displayed list of tasks.
      */
-    public static void markAsDone(int index) {
+    public static String markAsDone(int index) {
+        StringBuilder str = new StringBuilder();
         try {
             taskList.get(index).isDone = true;
-            System.out.println(" Well done!");
-            System.out.println("  " + taskList.get(index).toString());
+            str.append(" Well done!\n");
+            str.append("  ")
+                    .append(taskList.get(index).toString())
+                    .append("\n");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(" You have not added any tasks yet.");
+            str.append(" This task does not exist.\n");
         }
+        return str.toString();
     }
 
     /**
@@ -44,14 +48,18 @@ public abstract class Task {
      *
      * @param index int Index of the task in the displayed list of tasks.
      */
-    public static void markAsNotDone(int index) {
+    public static String markAsNotDone(int index) {
+        StringBuilder str = new StringBuilder();
         try {
             taskList.get(index).isDone = false;
-            System.out.println(" Oops! Fixed that for you.");
-            System.out.println("  " + taskList.get(index).toString());
+            str.append(" Oops! Fixed that for you.\n");
+            str.append("  ")
+                    .append(taskList.get(index).toString())
+                    .append("\n");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(" You have not added any tasks yet.");
+            str.append(" This task does not exist.\n");
         }
+        return str.toString();
     }
 
     /**
@@ -59,39 +67,45 @@ public abstract class Task {
      *
      * @param task Task added by user.
      */
-    public static void addToList(Task task) {
+    public static String addToList(Task task) {
+        StringBuilder str = new StringBuilder();
         if (task.description == null) {
-            System.out.println(" Please enter the description as well!");
-            System.out.println(" Command format: task-type task-description /by task-duration OR /at task-deadline");
-            return;
+            str.append(" Please enter the description as well!\n");
+            str.append(" Command format: task-type task-description /by task-duration OR /at task-deadline\n");
+            return str.toString();
         }
 
         if (task instanceof Event) {
             Event event = (Event) task;
             if (event.duration == null) {
-                System.out.println(" Please enter the duration as well!");
-                System.out.println(" Command format: task-type task-description /by YYYY-MM-DD");
-                return;
+                str.append(" Please enter the duration as well!\n");
+                str.append(" Command format: task-type task-description /by YYYY-MM-DD\n");
+                return str.toString();
             }
         }
 
         if (task instanceof Deadline) {
             Deadline taskWithDeadline = (Deadline) task;
             if (taskWithDeadline.deadline == null) {
-                System.out.println(" Please enter the deadline as well!");
-                System.out.println(" Command format: task-type task-description /at YYYY-MM-DD");
-                return;
+                str.append(" Please enter the deadline as well!\n");
+                str.append(" Command format: task-type task-description /at YYYY-MM-DD\n");
+                return str.toString();
             }
         }
 
         if (taskCount == 0) {
-            System.out.println(" Added! Now you have 1 item in your tasks list.");
+            str.append(" Added! Now you have 1 item in your tasks list.\n");
         } else {
-            System.out.println(" Added! Now you have " + (taskCount + 1) + " items in your tasks list.");
+            str.append(" Added! Now you have ")
+                    .append(taskCount + 1)
+                    .append(" items in your tasks list.\n");
         }
         taskList.add(task);
-        System.out.println("  " + taskList.get(taskCount).toString());
+        str.append("  ")
+                .append(taskList.get(taskCount).toString())
+                .append("\n");
         taskCount++;
+        return str.toString();
     }
 
     /**
@@ -99,16 +113,18 @@ public abstract class Task {
      *
      * @param index int Index of the task in the displayed list of tasks.
      */
-    public static void removeFromList(int index) {
+    public static String removeFromList(int index) {
+        StringBuilder str = new StringBuilder();
         try {
             String outputTask = "  " + taskList.get(index).toString();
             taskList.remove(index);
-            System.out.println(" Okay, I've deleted this task.");
-            System.out.println(outputTask);
+            str.append(" Okay, I've deleted this task.\n");
+            str.append(outputTask).append("\n");
             taskCount--;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(" This task does not exist.");
+            str.append(" This task does not exist.\n");
         }
+        return str.toString();
     }
 
     /**
@@ -174,10 +190,11 @@ public abstract class Task {
     /**
      * Prints the list of tasks in the task list.
      */
-    public static void findInList(String subString) {
+    public static String findInList(String subString) {
+        StringBuilder str = new StringBuilder();
         if (taskCount == 0) {
-            System.out.println(" You have not added any tasks yet.");
-            return;
+            str.append(" You have not added any tasks yet.\n");
+            return str.toString();
         }
 
         int[] foundIndexes = new int[taskCount];
@@ -191,29 +208,39 @@ public abstract class Task {
         }
 
         if (foundCount == 0) {
-            System.out.println(" Sorry, I couldn't find any matching tasks :(");
+            str.append(" Sorry, I couldn't find any matching tasks :(\n");
         } else {
-            System.out.println(" Here are the tasks you may be looking for!");
+            str.append(" Here are the tasks you may be looking for!\n");
         }
 
         for (int i = 0; i < foundCount; i++) {
-            System.out.println("   " + (i + 1) + "."
-                    + taskList.get(foundIndexes[i]).toString());
+            str.append("   ")
+                    .append(i + 1)
+                    .append(".")
+                    .append(taskList.get(foundIndexes[i]).toString())
+                    .append("\n");
         }
+        return str.toString();
     }
 
     /**
      * Prints all the existing tasks as a numbered list.
      */
-    public static void printAllTasks() {
+    public static String getAllTasks() {
+        StringBuilder str = new StringBuilder();
         if (taskCount == 0) {
-            System.out.println(" You have not added any tasks yet.");
-            return;
+            str.append(" You have not added any tasks yet.\n");
+            return str.toString();
         }
-        System.out.println(" Here are your tasks. Make things happen!");
+        str.append(" Here are your tasks. Make things happen!\n");
         for (int i = 0; i < taskCount; i++) {
-            System.out.println("   " + (i + 1) + "." + taskList.get(i).toString());
+            str.append("   ")
+                    .append(i + 1)
+                    .append(".")
+                    .append(taskList.get(i).toString())
+                    .append("\n");
         }
+        return str.toString();
     }
 
     /**
