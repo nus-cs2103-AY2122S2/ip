@@ -145,7 +145,7 @@ Example of usage:
 
 Expected outcome:
 
-Task will be unmarked
+Task will be unmarked.
 
 ```
 No problem, I've marked this task as undone:
