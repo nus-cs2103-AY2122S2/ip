@@ -13,7 +13,7 @@
 
    - ```exit``` : Exits the app.
 
-6. Refer to the [Features](https://github.com/DALIN-Prog/ip/tree/master/docs#features) below for details of each command.
+6. Refer to the [Features](https://dalin-prog.github.io/ip/#features) below for details of each command.
 
 ---
 
