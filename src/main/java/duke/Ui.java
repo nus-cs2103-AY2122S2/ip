@@ -6,7 +6,7 @@ package duke;
  * @author Jet Tan
  */
 public class Ui {
-    private static final String BORDER = "________________________________\n";
+    private static final String BORDER = "\n";
 
     /**
      * Returns the border for wrapping bot messages.
