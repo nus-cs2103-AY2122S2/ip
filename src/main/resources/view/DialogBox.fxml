@@ -6,6 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
+<!--@@author xpzmichael-reused-->
+<!--Reused from https://github.com/yl-ang/ip/blob/master/src/main/resources/view/DialogBox.fxml-->
+
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="398.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox maxHeight="-Infinity">
