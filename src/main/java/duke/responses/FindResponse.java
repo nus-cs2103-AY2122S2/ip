@@ -19,7 +19,7 @@ public class FindResponse implements Response {
         uiResponse += Response.DIVIDER + "\n";
         uiResponse += "Here are the matching tasks in your list:\n";
         for (int i = 0; i < iterate.taskLength(); i++) {
-            uiResponse += i + " " + iterate.getTask(i).display() + "\n";
+            uiResponse += i + 1 + " " + iterate.getTask(i).display() + "\n";
         }
         uiResponse += Response.DIVIDER + "\n";
         return uiResponse;
