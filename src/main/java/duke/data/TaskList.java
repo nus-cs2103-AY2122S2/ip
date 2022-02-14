@@ -51,6 +51,9 @@ public class TaskList {
             s += (i + 1) + ".";
             s += list.get(i) + "\n";
         }
+        if (s.length() <= 1) {
+            s = "You have a empty list!";
+        }
         return s;
     }
 }

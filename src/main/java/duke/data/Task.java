@@ -120,11 +120,6 @@ public class Task {
         return result + "  " + (dayAndTime.length == 2 ? dayAndTime[1] : "");
     }
 
-    private void suggest() {
-        System.out.println("\nI would appreciate if you write date in the form of yyyy-mm-dd time\n" +
-                "(eg: 2022-01-27 6pm)");
-    }
-
     @Override
     public boolean equals(Object o) {
         return o instanceof Task && o.toString().equals(this.toString());
