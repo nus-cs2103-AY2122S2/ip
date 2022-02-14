@@ -42,7 +42,15 @@ public class Task {
         return this.name.contains(prefix);
     }
 
-    private String identifyTime(String time) throws ArrayIndexOutOfBoundsException {
+    public boolean matchTime(String prefix) {
+        return this.time.contains(prefix);
+    }
+
+    /**
+     * Transfer a time format to another format.
+     * @param time the time in String.
+     **/
+    public static String identifyTime(String time) throws ArrayIndexOutOfBoundsException {
         String result = time;
         String[] dayAndTime = time.split(" ", 2);
         String[] split = dayAndTime[0].split("[-/]", 3);
