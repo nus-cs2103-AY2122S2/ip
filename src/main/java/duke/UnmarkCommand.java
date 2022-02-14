@@ -24,7 +24,7 @@ public class UnmarkCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
             int taskIdx = taskNum - 1;
             if (taskIdx >= tasks.size() || taskIdx < 0) {
@@ -32,11 +32,11 @@ public class UnmarkCommand extends Command {
                         + tasks.size() + " tasks)");
             }
             tasks.set(taskIdx, tasks.get(taskIdx).unmark());
-            ui.showMessage("Nice! I've marked this task as not done yet:\n  "
-                    + tasks.get(taskIdx));
             storage.update(tasks);
+            return "Nice! I've marked this task as not done yet:\n  "
+                    + tasks.get(taskIdx);
         } catch (DukeException e) {
-            ui.showMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 }

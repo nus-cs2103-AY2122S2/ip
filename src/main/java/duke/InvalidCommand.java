@@ -18,7 +18,7 @@ public class InvalidCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage(this.getFirstWord());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return this.getFirstWord();
     }
 }

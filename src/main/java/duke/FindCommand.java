@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         int taskCount = 0;
         StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
         for (Task task : tasks.getList()) {
@@ -34,9 +34,9 @@ public class FindCommand extends Command {
             }
         }
         if (taskCount == 0) {
-            ui.showMessage("Uh-oh! There are no matching tasks in your list!");
+            return "Uh-oh! There are no matching tasks in your list!";
         } else {
-            ui.showMessage(String.valueOf(output));
+            return output.toString();
         }
     }
 }

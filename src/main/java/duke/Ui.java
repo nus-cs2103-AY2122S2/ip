@@ -57,14 +57,14 @@ public class Ui {
      *
      * @param message a String representing the given message to printed.
      */
-    public void showMessage(String message) {
-        System.out.println(message);
+    public String showMessage(String message) {
+        return message;
     }
 
     /**
      * Prints out the goodbye message.
      */
-    public void showGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 }

@@ -18,13 +18,15 @@ public class ListCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.isEmpty()) {
-            ui.showMessage("Uh-oh! List is empty!");
+            return "Uh-oh! List is empty!";
         } else {
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
-                ui.showMessage((i + 1) + "." + tasks.get(i));
+                sb.append(i + 1).append(".").append(tasks.get(i)).append("\n");
             }
+            return sb.toString();
         }
     }
 }

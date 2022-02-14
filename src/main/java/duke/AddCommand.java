@@ -41,39 +41,41 @@ public class AddCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
+            StringBuilder sb = new StringBuilder();
             LocalDate parsedTime;
             String formattedTime;
             switch (this.getFirstWord()) {
             case "todo":
                 Task taskTodo = new Todo(this.description);
                 tasks.add(taskTodo);
-                ui.showMessage("Got it. I've added this task:");
-                ui.showMessage("  " + taskTodo);
-                ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
+                sb.append("Got it. I've added this task:\n");
+                sb.append("  ").append(taskTodo);
+                sb.append("Now you have ").append(tasks.size()).append(" tasks in the list.");
                 break;
             case "deadline":
                 Task taskDeadline = new Deadline(this.description, this.time);
                 tasks.add(taskDeadline);
-                ui.showMessage("Got it. I've added this task:");
-                ui.showMessage("  " + taskDeadline);
-                ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
+                sb.append("Got it. I've added this task:\n");
+                sb.append("  ").append(taskDeadline).append("\n");
+                sb.append("Now you have ").append(tasks.size()).append(" tasks in the list.");
                 break;
             case "event":
                 Task taskEvent = new Event(this.description, this.time);
                 tasks.add(taskEvent);
-                ui.showMessage("Got it. I've added this task:");
-                ui.showMessage("  " + taskEvent);
-                ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
+                sb.append("Got it. I've added this task:\n");
+                sb.append("  ").append(taskEvent).append("\n");
+                sb.append("Now you have ").append(tasks.size()).append(" tasks in the list.");
                 break;
             default:
                 // pass through
                 break;
             }
             storage.update(tasks);
+            return sb.toString();
         } catch (DateTimeParseException e) {
-            System.out.println("Please type a valid date! (Format: YYYY-MM-DD)");
+            return "Please type a valid date! (Format: YYYY-MM-DD)";
         }
     }
 }
