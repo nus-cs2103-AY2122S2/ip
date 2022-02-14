@@ -65,7 +65,7 @@ public class TaskList {
         tasks.get(i).prioritise(p);
     }
     /**
-     * Filter the tasks according to a keyword.
+     * Filters the tasks according to a keyword.
      */
     public TaskList filter(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
@@ -81,7 +81,7 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1).append(".").append(tasks.get(i));
+            sb.append(i + 1).append(". ").append(tasks.get(i));
         }
         return sb.toString();
     }
