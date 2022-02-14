@@ -56,6 +56,10 @@ public class Task {
         return " | " + isDoneNumber + " | " + description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * to String method for Task
      * @return string representing task
