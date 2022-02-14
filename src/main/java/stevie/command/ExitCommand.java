@@ -9,7 +9,8 @@ import stevie.undo.UndoHistory;
  * ExitCommand is used to terminate session with Stevie/
  */
 public class ExitCommand extends Command {
-    private static final String endMessage = "Bye! Hope to see you again!";
+    private static final String endMessage = "Bye! Hope to see you again!\n"
+            + "Exiting in 3 seconds...";
     /**
      * Ui outputs a response string to let user know that session is terminating.
      *

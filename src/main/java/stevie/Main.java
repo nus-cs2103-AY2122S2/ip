@@ -24,7 +24,10 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
+            AnchorPane ap = new AnchorPane();
+            fxmlLoader.setRoot(ap);
+            fxmlLoader.load();
+
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setStevie(stevie);

@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Stevie stevie;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/stock1.jpeg"));
-    private Image stevieImage = new Image(this.getClass().getResourceAsStream("/images/stock2.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/you.png"));
+    private Image stevieImage = new Image(this.getClass().getResourceAsStream("/images/stevie.png"));
 
     @FXML
     public void initialize() {
@@ -65,11 +65,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getStevieDialog(response, stevieImage)
         );
-        userInput.clear();
-        if (response.equals("Bye! Hope to see you again!")) {
-            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        if (response.equals("Bye! Hope to see you again!\nExiting in 3 seconds...")) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
             pause.setOnFinished(event -> Platform.exit());
             pause.play();
         }
+        userInput.clear();
     }
 }
