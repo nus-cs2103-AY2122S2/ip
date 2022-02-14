@@ -13,6 +13,7 @@ import apollo.commands.Command;
 import apollo.commands.DeleteCommand;
 import apollo.commands.ExitCommand;
 import apollo.commands.FindCommand;
+import apollo.commands.HelpCommand;
 import apollo.commands.InvalidCommand;
 import apollo.commands.ListCommand;
 import apollo.commands.MarkCommand;
@@ -24,7 +25,7 @@ import apollo.tasks.Task;
  */
 public class Parser {
 
-    private static final String PATTERN = "dd-MM-yyyy HH:mm";
+    public static final String PATTERN = "dd-MM-yyyy HH:mm";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(PATTERN);
 
     /**
@@ -36,6 +37,7 @@ public class Parser {
      * @throws ApolloIllegalArgumentException If args in wrong format to parse date and time.
      */
     private LocalDateTime parseDateTime(String[] args) throws ApolloIllegalArgumentException {
+        assert args != null && args.length == 2 : "Invalid args supplied.";
         try {
             String dateTimeString = parseArgs(args)[1].trim();
             return LocalDateTime.parse(dateTimeString, FORMATTER);
@@ -69,6 +71,7 @@ public class Parser {
      * @throws ApolloIllegalArgumentException If invalid Integer is supplied.
      */
     private int parseIndex(String[] args) throws ApolloIllegalArgumentException {
+        assert args != null : "Null arguments supplied.";
         try {
             return Integer.parseInt(parseArgs(args)[0].trim()) - 1;
         } catch (NumberFormatException e) {
@@ -111,6 +114,8 @@ public class Parser {
         case "find":
             description = parseArgs(args)[0].trim();
             return new FindCommand(description);
+        case "help":
+            return new HelpCommand(args);
         default:
             return new InvalidCommand();
         }

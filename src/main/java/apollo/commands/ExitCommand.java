@@ -8,6 +8,8 @@ import static apollo.messages.Messages.EXIT_MESSAGE;
  */
 public class ExitCommand extends Command {
 
+    public static final String HELP_EXIT_COMMAND = "Exit apollo: exit";
+
     /**
      * Sends farewell message before exiting program.
      *

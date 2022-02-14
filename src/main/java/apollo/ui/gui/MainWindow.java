@@ -1,6 +1,5 @@
 package apollo.ui.gui;
 
-import static apollo.messages.Messages.EXIT_MESSAGE;
 import static apollo.messages.Messages.MISSING_GUI_IMAGE;
 
 import java.io.InputStream;
@@ -27,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Gui gui;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image apolloImage = new Image(this.getClass().getResourceAsStream("/images/apollo.png"));
+    private Image userImage;
+    private Image apolloImage;
 
     /**
      * Initialises the main window and greeting message.
@@ -43,8 +42,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(greeting, apolloImage)
         );
         try {
-            userImage = loadImage("/images/user.png");
-            apolloImage = loadImage("/images/apollo.png");
+            String userImagePath = "/images/user.png";
+            String apolloImagePath = "/images/apollo.png";
+            userImage = loadImage(userImagePath);
+            apolloImage = loadImage(apolloImagePath);
         } catch (ApolloIoException e) {
             System.out.println(e.getMessage());
         }
@@ -65,12 +66,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = Apollo.getResponse(input);
 
-        if (response.equals(EXIT_MESSAGE)) {
+        if (input.equals("exit")) {
             gui.stop();
+        } else if (input.equals("")) {
+            return;
         }
 
+        String response = Apollo.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, apolloImage)

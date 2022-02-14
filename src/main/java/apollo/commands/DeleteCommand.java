@@ -9,6 +9,7 @@ import apollo.tasks.Task;
  */
 public class DeleteCommand extends Command {
 
+    public static final String HELP_DELETE_COMMAND = "Delete task at 1-base INDEX: delete <INDEX>";
     private final int index;
 
     /**
@@ -27,7 +28,6 @@ public class DeleteCommand extends Command {
      * @throws ApolloOutOfBoundsException If index supplied is out of bounds.
      */
     @Override
-
     public String execute() throws ApolloOutOfBoundsException {
         if (index < 0 || index >= taskList.taskCount()) {
             throw new ApolloOutOfBoundsException();
