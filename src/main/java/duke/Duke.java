@@ -11,7 +11,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
 import java.util.InputMismatchException;
 
 /**
@@ -62,7 +64,13 @@ public class Duke extends Application {
         try {
             String command = input.trim();
 
-            if (parser.getType(command).equals("bye")) {
+            if (parser.getType(command).equals("help")) {
+                String HELP_URL = "https://github.com/sibinhho99-nus/ip";
+                Desktop d = Desktop.getDesktop();
+                d.browse(new URI(HELP_URL));
+
+                return ("Please see the help page opened for more information!\n");
+            } else if (parser.getType(command).equals("bye")) {
                 return ("Bye. Hope to see you again soon!");
             } else if (parser.getType(command).equals("list")) {
                 return (pastTasks.toString());
