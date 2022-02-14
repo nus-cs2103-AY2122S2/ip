@@ -38,7 +38,7 @@ public class Duke extends Application {
 
             Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", taskList);
 
-            stage.setTitle("Duke");
+            stage.setTitle("Jerry");
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
