@@ -9,14 +9,14 @@ import org.junit.jupiter.api.Test;
 public class ToDoTest {
     @Test
     public void toString_basic_success() {
-        assertEquals("[T][ ] todo test", new ToDo("todo test").toString());
+        assertEquals("[T][\u2718] todo test", new ToDo("todo test").toString());
     }
 
     @Test
     public void toString_marked_xInSecondBox() {
         ToDo toDo = new ToDo("todo test");
         assertTrue(toDo.mark());
-        assertEquals("[T][X] todo test", toDo.toString());
+        assertEquals("[T][\u2713] todo test", toDo.toString());
     }
 
     @Test
@@ -33,14 +33,14 @@ public class ToDoTest {
 
     @Test
     public void getStatusIcon_unmark_space() {
-        assertEquals(" ", new ToDo("todo test").getStatusIcon());
+        assertEquals("\u2718", new ToDo("todo test").getStatusIcon());
     }
 
     @Test
     public void getStatusIcon_mark_outputX() {
         ToDo toDo = new ToDo("todo test");
         assertTrue(toDo.mark());
-        assertEquals("X", toDo.getStatusIcon());
+        assertEquals("\u2713", toDo.getStatusIcon());
     }
 
     @Test
