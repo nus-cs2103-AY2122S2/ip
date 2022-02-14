@@ -2,12 +2,11 @@ package li.zhongfu.cs2103.chatbot;
 
 import java.io.IOException;
 
-import li.zhongfu.cs2103.chatbot.ui.TextUi;
+import javafx.application.Application;
+import li.zhongfu.cs2103.chatbot.ui.GraphicalUi;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Duke duke = new Duke("Duke");
-        TextUi ui = new TextUi(duke);
-        ui.run();
+        Application.launch(GraphicalUi.class, args);
     }
 }
