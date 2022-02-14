@@ -34,25 +34,25 @@ Note:
 
 Sample usage:
 ```
-    todo return book
-    deadline return book /by 2/12/2019 1800
-    event return book /at 2/12/2019 1800
+    todo a
+    deadline b /by 2/12/2019 1800
+    event c /at 2/12/2019 1800
 ```
 
 Expected Output:
 
-`todo return book`
+`todo a`
 
 ```
-    [T][] return book
+    [T][] a
 ```
-`deadline return book /by 2/12/2019 1800`
+`deadline b /by 2/12/2019 1800`
 ```
-    [D][] return book (by Dec 2 2019)
+    [D][] b (by Dec 2 2019)
 ```
-`event return book /at 2/12/2019 1800`
+`event c /at 2/12/2019 1800`
 ```
-    [D][] return book (at Dec 2 2019)
+    [D][] c (at Dec 2 2019)
 ```
 
 ### Feature- Delete Task

@@ -28,11 +28,12 @@ public class EventCommand extends Command {
     @Override
     public Response execute() throws DukeException {
         String[] stringCmdUnits = stringCmd.split(" /at ");
-        String taskName = stringCmdUnits[1];
+        String taskName = stringCmdUnits[0].replace("event ", "");
+        String dateInfo = stringCmdUnits[1];
         if (taskList.checkIfPresent(taskName)) {
             return new DuplicateTaskResponse(taskName);
         }
-        Task tempTask = new Event(stringCmdUnits[0].replace("event ", ""), taskName);
+        Task tempTask = new Event(taskName, dateInfo);
         Integer oldTaskListLength = taskList.taskLength();
         this.taskList.addTask(tempTask);
         assert taskList.taskLength() == oldTaskListLength + 1 : "Add Event Task to list";

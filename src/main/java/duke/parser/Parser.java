@@ -1,15 +1,6 @@
 package duke.parser;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.TodoCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 
 import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.ForeignException;
@@ -44,6 +35,8 @@ public class Parser {
         String[] stringCmdUnits = stringCmd.split(" ");
         String stringFirstCmd = stringCmdUnits[0];
         switch (stringFirstCmd) {
+        case "start":
+            return new StartCommand();
         case "bye":
             return new ByeCommand();
         case "delete":

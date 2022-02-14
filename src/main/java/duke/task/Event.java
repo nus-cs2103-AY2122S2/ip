@@ -36,9 +36,10 @@ public class Event extends Task {
      * @param marked is event marked.
      * @param dateInfo string representation of the date.
      */
-    public Event(String name, boolean marked, String dateInfo) {
+    public Event(String name, boolean marked, String info) {
         super(name);
-        this.dateInfo = this.dateInfo = LocalDateTime.parse(dateInfo, Task.DATE_TIME_FORMAT_IN);;
+        this.info = info;
+        this.dateInfo = LocalDateTime.parse(info, Task.DATE_TIME_FORMAT_IN);;
         this.isMarked = marked;
     }
 
