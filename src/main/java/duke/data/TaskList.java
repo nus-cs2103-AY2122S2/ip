@@ -2,6 +2,7 @@ package duke.data;
 
 import java.util.ArrayList;
 
+import duke.data.exception.IllegalValueException;
 import duke.data.task.DeadlineTask;
 import duke.data.task.EventTask;
 import duke.data.task.Task;
@@ -42,9 +43,9 @@ public class TaskList {
      * @param input the content of a todo task.
      * @return the added todo task.
      */
-    public Task addTodoTask(String input) {
+    public Task addTodoTask(String input, String tagName) throws IllegalValueException {
         int taskListBeforeAddition = taskList.size();
-        TodoTask newTask = new TodoTask(input);
+        TodoTask newTask = new TodoTask(input, tagName);
         taskList.add(newTask);
         assert taskListBeforeAddition + 1 == taskList.size() : "Task should be added to task list";
         return newTask;
@@ -57,9 +58,9 @@ public class TaskList {
      * @param deadline the deadline of a deadline task.
      * @return the added deadline task.
      */
-    public Task addDeadlineTask(String input, String deadline) {
+    public Task addDeadlineTask(String input, String deadline, String tagName) throws IllegalValueException {
         int taskListBeforeAddition = taskList.size();
-        DeadlineTask newTask = new DeadlineTask(input, deadline);
+        DeadlineTask newTask = new DeadlineTask(input, deadline, tagName);
         taskList.add(newTask);
         assert taskListBeforeAddition + 1 == taskList.size() : "Task should be added to task list";
         return newTask;
@@ -72,9 +73,9 @@ public class TaskList {
      * @param deadline the deadline of an event task.
      * @return the added event task.
      */
-    public Task addEventTask(String input, String deadline) {
+    public Task addEventTask(String input, String deadline, String tagName) throws IllegalValueException {
         int taskListBeforeAddition = taskList.size();
-        EventTask newTask = new EventTask(input, deadline);
+        EventTask newTask = new EventTask(input, deadline, tagName);
         taskList.add(newTask);
         assert taskListBeforeAddition + 1 == taskList.size() : "Task should be added to task list";
         return newTask;

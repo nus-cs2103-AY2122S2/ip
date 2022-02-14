@@ -3,6 +3,8 @@ package duke.data.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.data.exception.IllegalValueException;
+
 /**
  * A event task that has a deadline property.
  */
@@ -26,8 +28,9 @@ public class EventTask extends Task {
      * @param done completion status of the task.
      * @param id id of the task.
      */
-    public EventTask(String description, String deadline, boolean done, String id) {
-        super(description, done, id);
+    public EventTask(String description, String deadline, boolean done, String id,
+                     String tag) throws IllegalValueException {
+        super(description, done, id, tag);
         this.deadline = LocalDate.parse(deadline);
         this.deadlineString = this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
@@ -39,8 +42,8 @@ public class EventTask extends Task {
      * @param description
      * @param deadline
      */
-    public EventTask(String description, String deadline) {
-        super(description);
+    public EventTask(String description, String deadline, String tagName) throws IllegalValueException {
+        super(description, tagName);
         this.deadline = LocalDate.parse(deadline);
         this.deadlineString = this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
@@ -61,6 +64,6 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " " + "(by: " + this.deadlineString + ")";
+        return "[E]" + super.toString() + " " + "(by: " + this.deadlineString + ")" + " <" + super.getTagName() + ">";
     }
 }

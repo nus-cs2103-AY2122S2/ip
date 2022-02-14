@@ -2,6 +2,9 @@ package duke.data.task;
 
 import java.util.UUID;
 
+import duke.data.exception.IllegalValueException;
+import duke.data.tag.Tag;
+
 /**
  * A task class.
  */
@@ -22,16 +25,22 @@ public class Task {
     protected String id;
 
     /**
+     * Tag of the task.
+     */
+    protected Tag tag;
+
+    /**
      * Constructs a task from given description, id and completion status.
      *
      * @param description description of the task.
      * @param done completion status of the task.
      * @param id id of the task.
      */
-    public Task(String description, boolean done, String id) {
+    public Task(String description, boolean done, String id, String tagName) throws IllegalValueException {
         this.description = description;
         this.done = done;
         this.id = id;
+        this.tag = new Tag(tagName);
     }
 
     /**
@@ -39,10 +48,11 @@ public class Task {
      *
      * @param description description of a task.
      */
-    public Task(String description) {
+    public Task(String description, String tagName) throws IllegalValueException {
         this.description = description;
         this.done = false;
         this.id = UUID.randomUUID().toString();
+        this.tag = new Tag(tagName);
     }
 
     public String getId() {
@@ -72,6 +82,10 @@ public class Task {
     public void markUndone() {
         this.done = false;
         assert !this.done;
+    }
+
+    public String getTagName() {
+        return this.tag.toString();
     }
 
     /**

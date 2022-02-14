@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.io.IOException;
 
+import duke.data.exception.IllegalValueException;
 import duke.data.exception.InvalidParameterException;
 import duke.data.task.DeadlineTask;
 import duke.data.task.EventTask;
@@ -13,6 +14,7 @@ import duke.data.task.Task;
 public class AddCommand extends Command {
     protected String description;
     protected String deadline;
+    protected String tagName;
     protected CommandType type;
 
     /**
@@ -22,9 +24,10 @@ public class AddCommand extends Command {
      * @param deadline deadline of the task to be created.
      * @param type type of the task to be created.
      */
-    public AddCommand(String description, String deadline, String type) {
+    public AddCommand(String description, String deadline, String tagName, String type) {
         this.description = description;
         this.deadline = deadline;
+        this.tagName = tagName;
         this.type = CommandType.valueOf(type);
     }
 
@@ -33,8 +36,9 @@ public class AddCommand extends Command {
      *
      * @param description description of the task to be created.
      */
-    public AddCommand(String description) {
+    public AddCommand(String description, String tagName) {
         this.description = description;
+        this.tagName = tagName;
         this.type = CommandType.TODO;
     }
 
@@ -45,31 +49,30 @@ public class AddCommand extends Command {
      * @throws InvalidParameterException if the parameter supplied is invalid.
      * @throws IOException if the task cannot be added to the storage.
      */
-    public String execute() throws InvalidParameterException, IOException {
+    public String execute() throws InvalidParameterException, IOException, IllegalValueException {
         Task task;
         String taskToString;
-
 
         if (type.getCommand() == "todo") {
             if (this.description == "") {
                 throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
             }
-            task = super.taskList.addTodoTask(description);
-            taskToString = String.format("%s|T|0|%s%n", task.getId(), task.getDescription());
+            task = super.taskList.addTodoTask(description, tagName);
+            taskToString = String.format("%s|T|0|%s|%s%n", task.getId(), task.getDescription(), task.getTagName());
         } else if (type.getCommand() == "deadline") {
             if (this.description == "" || this.deadline == "") {
                 throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
             }
-            task = super.taskList.addDeadlineTask(description, deadline);
-            taskToString = String.format("%s|T|0|%s%n", task.getId(),
-                    task.getDescription(), ((DeadlineTask) task).getDeadline());
+            task = super.taskList.addDeadlineTask(description, deadline, tagName);
+            taskToString = String.format("%s|T|0|%s|%s%n", task.getId(),
+                    task.getDescription(), ((DeadlineTask) task).getDeadline(), task.getTagName());
         } else if (type.getCommand() == "event") {
             if (this.description == "" || this.deadline == "") {
                 throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
             }
-            task = super.taskList.addEventTask(description, deadline);
-            taskToString = String.format("%s|T|0|%s%n", task.getId(),
-                    task.getDescription(), ((EventTask) task).getDeadline());
+            task = super.taskList.addEventTask(description, deadline, tagName);
+            taskToString = String.format("%s|T|0|%s|%s%n", task.getId(),
+                    task.getDescription(), ((EventTask) task).getDeadline(), task.getTagName());
         } else {
             throw new InvalidParameterException("Invalid parameter provided");
         }
