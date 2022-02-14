@@ -7,12 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -42,6 +48,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        Circle clip = new Circle(40, 40, 40);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -50,9 +58,18 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
-        tmp.get(1).setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10px; -fx-padding: 0 0 0 10");
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+    }
+
+    private void setBackground(boolean isUser) {
+        String backgroundColor = isUser ? "#e75480" : "#f0efeb";
+        String textColor = isUser ? "#FFF" : "#000";
+        Color textColorFill = Color.web(textColor);
+        Background dukeBackground = new Background(new BackgroundFill(
+                Color.web(backgroundColor), new CornerRadii(20), new Insets(5, 3, 3, 2)));
+        this.dialog.setBackground(dukeBackground);
+        this.dialog.setTextFill(textColorFill);
     }
 
     /**
@@ -62,7 +79,9 @@ public class DialogBox extends HBox {
      * @return the user Dialog
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox box = new DialogBox(text, img);
+        box.setBackground(true);
+        return box;
     }
 
 
@@ -75,6 +94,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setBackground(false);
         return db;
     }
 }
