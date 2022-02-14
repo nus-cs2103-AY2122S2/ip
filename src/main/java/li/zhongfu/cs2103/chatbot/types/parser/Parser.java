@@ -63,7 +63,7 @@ public class Parser {
      * @param argString a string containing unparsed arguments
      * @return a Map containing parsed arguments
      */
-    public Map<String, String> parseArgString(String argString) {
+    private Map<String, String> parseArgString(String argString) {
         Map<String, String> args = new HashMap<>();
         String[] parts = argString.split("(^|\\s+)/");
         args.put("", parts[0].strip());
