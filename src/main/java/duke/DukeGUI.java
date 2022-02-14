@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+
 
 public class DukeGUI extends Application {
 
@@ -32,6 +35,7 @@ public class DukeGUI extends Application {
 
     @Override
     public void start(Stage stage) {
+
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -101,6 +105,9 @@ public class DukeGUI extends Application {
         userInput.clear();
     }
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        ByteArrayInputStream byteInput = new ByteArrayInputStream(input.getBytes());
+        System.setIn(byteInput);
+        Duke.main();
+        return "default";
     }
 }

@@ -2,10 +2,11 @@ package duke;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main() {
         // Init UI
         Ui ui = new Ui();
 
@@ -26,25 +27,16 @@ public class Duke {
             e.printStackTrace();
         }
 
-
-        // Printing Duke's intro
-        Ui.printIntro();
-
         // Reading and processing inputs
         Parser Parser = new Parser();
-        while (true) {
-            // Creating the appropriate command
-            Command nextCommand = Parser.makeCommand(ui.getNextLine());
-            nextCommand.execute();
+        String nextLine = ui.getNextLine();
+        Command nextCommand = Parser.makeCommand(nextLine);
+        nextCommand.execute();
 
-            if (nextCommand instanceof ByeCommand) {
-                // Check for exit command
-                break;
-            }
-        }
 
         try {
             Storage.saveTaskList();
+            TaskList.taskList = new ArrayList<Task>(); // Reset task list
         } catch (IOException e) {
             e.printStackTrace();
         }
