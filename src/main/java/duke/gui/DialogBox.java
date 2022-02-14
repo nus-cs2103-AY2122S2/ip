@@ -78,10 +78,6 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        String[] splitStr = text.split(" ", 2);
-        if (splitStr[0].equals("ERROR:")) {
-            db.setStyle("-fx-background-color:red;");
-        }
         return db;
     }
 }

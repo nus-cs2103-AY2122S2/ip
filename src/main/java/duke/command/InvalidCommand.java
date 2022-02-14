@@ -8,7 +8,7 @@ import duke.util.TaskList;
  */
 public class InvalidCommand extends Command {
 
-    private String errorMessage = "ERROR: ";
+    private final String errorMessage;
 
     /**
      * Constructor for an invalid user command.
@@ -16,7 +16,7 @@ public class InvalidCommand extends Command {
      * @param errorMessage the error message describing the invalid command.
      */
     public InvalidCommand(String errorMessage) {
-        this.errorMessage += errorMessage;
+        this.errorMessage = errorMessage;
     }
 
     /** {@inheritDoc} */
