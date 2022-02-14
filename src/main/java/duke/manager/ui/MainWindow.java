@@ -27,12 +27,13 @@ public class MainWindow extends AnchorPane {
             + ", date has to be in yyyy-mm-dd format)\n"
             + "5. delete x (deletes the task by the task number shown when you list them out. x is a number)\n"
             + "6. mark x (marks the task, by the task number, as done. x is a number)\n"
-            + "7. find word (lists out all the tasks that contain the word in their taskname)\n"
-            + "8. update tasktype x /details taskname /date date, (date has to be in yyyy-mm-dd format) "
+            + "7. unmark x (marks the task, by the task number, as not done. x in a number)\n"
+            + "8. find word (lists out all the tasks that contain the word in their taskname)\n"
+            + "9. update tasktype x /details taskname /date date, (date has to be in yyyy-mm-dd format) "
             + "(updates the task indicated by the task number and then updates it with the new details"
             + ", details or the at or by can be excluded for events and"
             + "deadlines but you cannot exclude both.\n"
-            + "9. bye (exits the program)";
+            + "10. bye (exits the program)";
     @FXML
     private ScrollPane scrollPane;
     @FXML
