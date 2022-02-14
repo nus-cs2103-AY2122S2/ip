@@ -1,8 +1,6 @@
 package duke;
 
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidArgumentException;
-import duke.storage.Storage;
 import duke.tasks.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -11,16 +9,10 @@ public class Duke {
 
     private static ArrayList<Task> taskList;
     private static Scanner getUserInput;
-    private static Storage storage;
 
-    private static void initialize() {
-        try {
-            taskList = Storage.loadTasklist();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
+    private static void initialize(){
+        taskList = new ArrayList<Task>();
         getUserInput = new Scanner(System.in);
-        storage = new Storage();
     }
 
     public static void displayTaskList() {
@@ -61,34 +53,40 @@ public class Duke {
         String[] parsedUserInput = userInput.split(" ", 2);
         switch (parsedUserInput[0].toLowerCase()) {
         case "" :
+            commandProcessor();
             break;
         case "bye":
             System.out.println("Till we meet again");
-            return;
+            break;
         case "list":
             displayTaskList();
+            commandProcessor();
             break;
         case "mark":
-            int taskToMarkNumber = Integer.parseInt(parsedUserInput[1].trim());
+            int taskToMarkNumber = Integer.parseInt(parsedUserInput[1]);
             if (taskToMarkNumber > taskList.size()) {
                 System.out.println("I am afraid that's an invalid task! Please check your task number");
+                commandProcessor();
                 break;
             }
             Task taskToMark = taskList.get(taskToMarkNumber - 1);
             taskToMark.markAsDone();
             System.out.println("Duly noted. The following task has been marked as done");
             System.out.println(taskToMark.toString());
+            commandProcessor();
             break;
         case "unmark":
             int taskToUnmarkNumber = Integer.parseInt(parsedUserInput[1]);
             if (taskToUnmarkNumber > taskList.size()) {
                 System.out.println("I am afraid that's an invalid task! Please check your task number");
+                commandProcessor();
                 break;
             }
             Task taskToUnmark = taskList.get(taskToUnmarkNumber - 1);
             taskToUnmark.markAsNotDone();
             System.out.println("Very well. The following task has been marked as undone");
             System.out.println(taskToUnmark.toString());
+            commandProcessor();
             break;
         case "todo":
             try {
@@ -99,6 +97,7 @@ public class Duke {
             } catch (DukeInvalidArgumentException e) {
                 System.out.println(e.getMessage());
             }
+            commandProcessor();
             break;
         case "deadline":
             try {
@@ -109,6 +108,7 @@ public class Duke {
             } catch (DukeInvalidArgumentException e) {
                 System.out.println(e.getMessage());
             }
+            commandProcessor();
             break;
         case "event":
             try {
@@ -119,29 +119,24 @@ public class Duke {
             } catch (DukeInvalidArgumentException e) {
                 System.out.println(e.getMessage());
             }
+            commandProcessor();
             break;
         case "delete":
             int taskToDeleteNumber = Integer.parseInt(parsedUserInput[1]);
             if (taskToDeleteNumber > taskList.size()) {
                 System.out.println("I am afraid that's an invalid task! Please check your task number");
+                commandProcessor();
                 break;
             }
             Task taskToDelete = taskList.get(taskToDeleteNumber - 1);
             taskList.remove(taskToDeleteNumber - 1);
             displayTaskDelete(taskToDelete);
-
+            commandProcessor();
             break;
         default:
             System.out.println("I am unable to comprehend your request. Please try again");
-
+            commandProcessor();
         }
-        try {
-            storage.saveTasklist(taskList);
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-        commandProcessor();
-
     }
 
     public static void main(String[] args) {
