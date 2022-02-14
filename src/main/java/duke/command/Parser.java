@@ -125,7 +125,8 @@ public class Parser {
      * @param taskList The list of task to be checked with.
      */
 
-    static void validate(String inputString, String action, String[] args, TaskList taskList) throws DukeException {
+    public static void validate(String inputString, String action, String[] args, TaskList taskList)
+            throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         switch(action) {
         case "list":
@@ -180,7 +181,7 @@ public class Parser {
             }
             if (Arrays.stream(args).noneMatch(flag::equals)) {
                 throw new DukeException(String
-                        .format("%s flag not detected.\n\nPlease specify date using %s!", flag, flag));
+                        .format("%s flag not detected.\nPlease specify date using %s!", flag, flag));
             }
             if (inputString.trim().split(flag).length == 1) {
                 throw new DukeException(String.format("Please specify deadline date after %s!", flag));
