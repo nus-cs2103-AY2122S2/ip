@@ -154,29 +154,7 @@ public class Johnny extends Application{
         return textToAdd;
     }
 
-    /**
-     * Starts running the program by calling
-     * the Ui.handleUi() method
-     *
-     */
-    public void run() {
-//        try {
-//            ui.handleUi();
-//        } catch (InvalidArgumentsException e) {
-//            System.out.println(e.errorMessage());
-//        } catch (EmptyDescriptionException e) {
-//            System.out.println(e.errorMessage());
-//        } catch (NoDateException e) {
-//            System.out.println(e.errorMessage());
-//        } catch (DateTimeException e) {
-//            System.out.println(e.getMessage() +
-//                    "--- Invalid date entered. Please enter in format 'yyyy-mm-dd'");
-//        }
-//    }
-    }
     public static void main(String[] args) throws InvalidArgumentsException, EmptyDescriptionException, NoDateException {
-//        new Johnny("tasklist.txt").run();
-
         launch();
     }
 
