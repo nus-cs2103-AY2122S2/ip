@@ -29,23 +29,24 @@ public class TaskList {
     public TaskList() { }
 
     /**
-     * Method that takes in a taskId and deletes the task from the tasks arraylist
-     * @param taskId id of task
-     * @throws DukeException if the task cannot be found in the list
+     * Returns a success string after a successful deletion of a task from the taskList
+     * If the taskId is invalid, an exception will be thrown.
+     * @param taskId Index of task.
+     * @throws DukeException If the task cannot be found in the list.
      */
     public static String deleteTask(int taskId) throws DukeException {
         Task preview = tasks.get(taskId - 1);
-        // System.out.println(tasks.size());
         tasks.remove(taskId - 1);
         Storage.writeToDukeFile();
         return ui.showDeleteMsg(preview);
     }
 
     /**
-     * Method that takes in a taskId and marks it as done in the tasks arraylist
-     * @param taskId id of task
-     * @param mark boolean indicating whether to mark the task as done
-     * @throws DukeException if the task has yet to be done
+     * Returns a success string after marking a particular task in the task list.
+     * If the taskId provided to the function is invalid, a TaskException will be thrown.
+     * @param taskId Index of task.
+     * @param mark Boolean indicating whether to mark the task as done.
+     * @throws DukeException If the task has yet to be done.
      */
     public static String markTask(int taskId, boolean mark) throws DukeException {
         Task toSet = tasks.get(taskId - 1);
@@ -82,7 +83,8 @@ public class TaskList {
     }
 
     /**
-     * Method that displays the list of tasks to the console
+     * Returns a string displaying all the current tasks in the task list.
+     * Will return an empty message if there are no tasks in the task list.
      */
     public static String listTasks() {
         if (tasks.size() == 0) {
@@ -96,8 +98,9 @@ public class TaskList {
     }
 
     /**
-     * Method that takes in a list of tasks and displays the list of tasks to the console
-     * @param tasks list of tasks
+     * Returns a string displaying all the tasks provided by the tasks arraylist.
+     * Will return an empty message if there are no tasks in the tasks list.
+     * @param tasks An arraylist of tasks.
      */
     public static String listTasks(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
@@ -111,15 +114,16 @@ public class TaskList {
     }
 
     /**
-     * Method that returns the size/length of tasks
-     * @return Integer that indicates the size/length of tasks
+     * Returns the size of the task list that is saved in the system.
+     * @return Integer that indicates the size/length of tasks.
      */
     public static Integer getTaskSize() {
         return tasks.size();
     }
 
     /**
-     * Method that takes in a keyword and prints out the list of tasks that contains the keyword
+     * Returns a string of tasks that matches the keyword that the user has inputted into the system.
+     * Returns an empty message if no matching tasks can be found.
      * @param keyWord task keyword
      */
     public static String findTask(String keyWord) {
@@ -135,7 +139,7 @@ public class TaskList {
     }
 
     /**
-     * Method that is used to get tasks stored in Duke
+     * Returns the task list that is stored in the system.
      * @return an arraylist of tasks
      */
     public ArrayList<Task> getTasks() {
@@ -143,11 +147,14 @@ public class TaskList {
     }
 
     /**
-     * Method that is used to undo a delete command
-     * @param taskId id of the task
-     * @param removedTask the type of task that is removed
-     * @return a message stating the successful undo of a delete command
-     * @throws DukeException when there are problems writing to duke file
+     * Returns a success message after the successful undo of a delete command.
+     * If there are no more commands to undo, it will throw an UndoException.
+     * Additionally, it will throw a DukeException if there are problems writing to the Duke file.
+     * @param taskId Index of the task.
+     * @param removedTask The type of task that is removed.
+     * @return A message stating the successful undo of a delete command.
+     * @throws DukeException When there are problems writing to duke file or there are
+     * issues with undoing the previous command.
      */
     public static String addTaskBack(Integer taskId, Task removedTask) throws DukeException {
         try {
@@ -160,9 +167,12 @@ public class TaskList {
     }
 
     /**
-     * Method to undo an add command
-     * @return a message stating the successful undo of an add command
-     * @throws DukeException when there are problems writing to duke file
+     * Returns a success message after the successful undo of a todo/event/deadline command.
+     *  f there are no more commands to undo, it will throw an UndoException.
+     * Additionally, it will throw a DukeException if there are problems writing to the Duke file.
+     * @return a message stating the successful undo of an add command.
+     * @throws DukeException when there are problems writing to duke file or there are issues with
+     * undoing the previous command.
      */
     public String deleteLastTask() throws DukeException {
         try {

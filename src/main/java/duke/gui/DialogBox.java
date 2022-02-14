@@ -62,7 +62,11 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    private void setBackground(boolean isUser) {
+    /**
+     * Method that alters the design of the dialog box depending on the type of user
+     * @param isUser Boolean to indicate if the person is a user or Duke
+     */
+    private void setDesign(boolean isUser) {
         String backgroundColor = isUser ? "#e75480" : "#f0efeb";
         String textColor = isUser ? "#FFF" : "#000";
         Color textColorFill = Color.web(textColor);
@@ -80,7 +84,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox box = new DialogBox(text, img);
-        box.setBackground(true);
+        box.setDesign(true);
         return box;
     }
 
@@ -94,7 +98,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setBackground(false);
+        db.setDesign(false);
         return db;
     }
 }
