@@ -5,9 +5,11 @@ This project is a Studio-Ghibli Themed Task Manager that helps you to manage you
 ## List of Features
 
 - [x] Add 3 types of Tasks: ToDo, Deadline and Event
+- [x] Display task list
 - [x] Mark task as done
 - [x] Unmark task
 - [x] Add notes to task
+- [x] Show notes added to a task
 - [x] Edit note added to task
 - [x] Delete note added to task
 - [x] Search for certain tasks based on key words 
@@ -22,35 +24,158 @@ This project is a Studio-Ghibli Themed Task Manager that helps you to manage you
 #### Add ToDo
 A ToDo is a task with a task name.
 
-**Command: todo <task name>**
+*Command: todo TASK_NAME*
    
-Examples of input:
-   '''
+Example of input:
+   ```
    todo buy gift for my bestie 
-   // output : [T][ ] buy gift for my bestie
-   '''
+   ```
+Example of output:
+   ```
+   [T][ ] buy gift for my bestie
+   ```
 
 #### Add Deadline
 A Deadline is a task that has a end date and time. 
 
-**Command: deadline <task name> /by YYYY-MM-DD hh:mm**
+*Command: deadline TASK_NAME /by YYYY-MM-DD hh:mm*
    
-Examples of input:
-   '''
+Example of input:
+   ```
    deadline book venue for party /by 2022-02-14 21:20
-   // output : [D][ ] book venue for party (by: Feb. 14 2022 09:20 pm)
-   '''
+   ```
+Example of output:
+   ```
+   [D][ ] book venue for party (by: Feb. 14 2022 09:20 pm)
+   ```
 
 #### Add Event
 An Event is a task that has a start date and time as well as a end date and time. 
 
-**Command: event <task name> /at YYYY-MM-DD hh:mm /to YYYY-MM-DD hh:mm**
+*Command: event TASK_NAME /at YYYY-MM-DD hh:mm /to YYYY-MM-DD hh:mm*
    
 Examples of input:
-   '''
+   ```
    event birthday party /at 2022-02-28 19:15 /to 2022-02-28 22:15
-   // output : [D][ ] book venue for party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
-   '''
+   ```
+Example of output:
+  ```
+  [E][ ] birthday party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
+  ```
+   
+### Display Task List
+
+Use command ```list``` to see all tasks you have added.
+
+*Command: list*
+   
+Examples of input:
+   ```
+   list
+   ```
+Example of output:
+  ```
+   Here is your to-do:
+   1.[T][ ] buy gift for my bestie
+   2.[D][ ] book venue for party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
+   3.[E][ ] birthday party (at: Feb. 28 2022 07:15 pm to Feb. 28 2022 10:15 pm)
+  ```
+### Mark and Unmark Task 
+
+#### Mark Task as Complete
+
+Use command ```mark``` to mark a task as done. Task number of 1 refers to first task in the list.
+
+*Command: mark <task number>*
+   
+Examples of input:
+   ```
+   mark 1
+   ```
+Example of output:
+  ```
+   Nice! I've marked this task as done: [T][X] buy gift for my bestie
+  ```
+#### Unmark Task 
+
+Use command ```unmark``` to unmark a task to change its status back to undone.
+
+*Command: unmark TASK_NUMBER*
+   
+Examples of input:
+   ```
+   unmark 1
+   ```
+Example of output:
+  ```
+   OK, I've marked this task as not done yet: [T][] buy gift for my bestie
+  ```
+
+### Notes 
+
+#### Add note
+
+*Command: add note to task TASK_NUMBER NOTE_MESSAGE*
+   
+Examples of input:
+   ```
+   add note to task 1 maybe a plant would be good?
+   ```
+Example of output:
+  ```
+   Got it, I've added a note to task [T][] buy gift for my bestie
+   Use 'show note from <taskNumber>' to see the note
+  ```
+#### Show note
+
+*Command: show note from task TASK_NUMBER*
+   
+Examples of input:
+   ```
+   show note from task 1
+   ```
+Example of output:
+  ```
+   [T][] buy gift for my bestie :
+   Note 1: maybe a plant would be good?
+  ```
+### Edit note
+
+*Command: edit note NOTE_NUMBER from task TASK_NUMBER NEW_NOTE_MESSAGE*
+   
+Examples of input:
+   ```
+   edit note 1 from task 1 maybe a cactus would be good?
+   ```
+Example of output:
+  ```
+   Got it! I've edited the note from [T][] buy gift for my bestie
+  ```
+   
+Example of task list after edit note:
+  ```
+   [T][] buy gift for my bestie :
+   Note 1: maybe a cactus would be good?
+  ```
+ ### Clear note
+
+Deletes a note from a task.
+   
+*Command: clear note NOTE_NUMBER from task TASK_NUMBER*
+   
+Examples of input:
+   ```
+   clear note 1 from task 1
+   ```
+Example of output:
+  ```
+   Got it! I've deleted the note from [T][] buy gift for my bestie
+  ```
+   
+Example of task list after edit note:
+  ```
+   [T][] buy gift for my bestie :
+  ```  
    
 ## Testing
 
