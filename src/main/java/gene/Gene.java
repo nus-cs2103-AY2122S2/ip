@@ -1,10 +1,11 @@
 package gene;
-import java.util.Scanner;
 
 import gene.command.Command;
+import gene.component.LocationList;
+import gene.component.LocationStorage;
 import gene.component.Parser;
-import gene.component.Storage;
 import gene.component.TaskList;
+import gene.component.TaskStorage;
 import gene.component.Ui;
 import gene.exception.UnrecognizedCommandException;
 import javafx.scene.Scene;
@@ -24,8 +25,10 @@ import javafx.scene.layout.VBox;
  */
 public class Gene {
     private final Ui geneUi;
-    private final Storage geneStorage;
-    private final TaskList geneList;
+    private final TaskStorage geneTaskStorage;
+    private final LocationStorage geneLocationStorage;
+    private final TaskList geneTasks;
+    private final LocationList geneLocs;
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/EvilGene.png"));
     private final Image gene = new Image(this.getClass().getResourceAsStream("/images/Gene.png"));
 
@@ -40,8 +43,10 @@ public class Gene {
      */
     public Gene() {
         this.geneUi = new Ui();
-        this.geneStorage = new Storage("gene.txt");
-        this.geneList = new TaskList(geneStorage);
+        this.geneTaskStorage = new TaskStorage("geneTasks.txt");
+        this.geneLocationStorage = new LocationStorage("geneLocs.txt");
+        this.geneTasks = new TaskList(geneTaskStorage);
+        this.geneLocs = new LocationList(geneLocationStorage);
     }
 
     /**
@@ -50,8 +55,10 @@ public class Gene {
      */
     public Gene(String filePath) {
         this.geneUi = new Ui();
-        this.geneStorage = new Storage(filePath);
-        this.geneList = new TaskList(geneStorage);
+        this.geneTaskStorage = new TaskStorage(filePath);
+        this.geneLocationStorage = new LocationStorage(filePath);
+        this.geneTasks = new TaskList(geneTaskStorage);
+        this.geneLocs = new LocationList(geneLocationStorage);
     }
 
     /**
@@ -62,18 +69,19 @@ public class Gene {
      * todo extract greeting in order to print upon GUI startup
      */
     void run() {
-        geneList.initFile();
+        geneTasks.initFile();
     }
 
     void initFile() {
-        geneList.initFile();
+        geneTasks.initFile();
+        geneLocs.initFile();
         System.out.println("File inilization process started");
     }
 
     String handleUserInput(String nextLine) {
         try {
             Command currCommand = Parser.parseCommand(nextLine);
-            return currCommand.execute(geneList, geneUi, geneStorage);
+            return currCommand.execute(geneTasks, geneUi, geneTaskStorage, geneLocs, geneLocationStorage);
         } catch (UnrecognizedCommandException e) {
             return e.getMessage();
         } catch (Exception e) {

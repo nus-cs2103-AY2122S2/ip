@@ -2,7 +2,7 @@ package gene.component;
 
 import java.util.ArrayList;
 
-import gene.task.Task;
+import gene.location.Location;
 
 /**
  * The task list class. handles all of gene's task list actions.
@@ -11,38 +11,38 @@ import gene.task.Task;
  * @version 1.0
  * @since 2022-01-12
  */
-public class TaskList {
-    private ArrayList<Task> itemList = new ArrayList<>(0);
-    private final TaskStorage geneTaskStorage;
+public class LocationList {
+    private ArrayList<Location> itemList = new ArrayList<>(0);
+    private final LocationStorage geneLocsStorage;
 
     /**
      * Constructor for taskList
      *
-     * @param geneTaskStorage
+     * @param geneLocsStorage
      */
-    public TaskList(TaskStorage geneTaskStorage) {
-        this.geneTaskStorage = geneTaskStorage;
+    public LocationList(LocationStorage geneLocsStorage) {
+        this.geneLocsStorage = geneLocsStorage;
     }
 
     /**
      * read file and initialize arraylist: if dont have existing file, create.
      */
     public void initFile() {
-        geneTaskStorage.createDirectory();
-        geneTaskStorage.createFile();
-        this.itemList = geneTaskStorage.readFile();
+        geneLocsStorage.createDirectory();
+        geneLocsStorage.createFile();
+        this.itemList = geneLocsStorage.readFile();
     }
 
     /**
      * wrapper for array list set
      *
      * @param index
-     * @param targetTask
+     * @param targetLoc
      */
-    public void set(int index, Task targetTask) {
+    public void set(int index, Location targetLoc) {
         assert (index >= 0);
         assert (index < itemList.size());
-        this.itemList.set(index, targetTask);
+        this.itemList.set(index, targetLoc);
     }
 
     /**
@@ -50,7 +50,7 @@ public class TaskList {
      *
      * @param index
      */
-    public Task get(int index) {
+    public Location get(int index) {
         assert (index >= 0);
         assert (index < itemList.size());
         return this.itemList.get(index);
@@ -59,10 +59,10 @@ public class TaskList {
     /**
      * wrapper for array list add
      *
-     * @param targetTask
+     * @param targetLoc
      */
-    public void add(Task targetTask) {
-        this.itemList.add(targetTask);
+    public void add(Location targetLoc) {
+        this.itemList.add(targetLoc);
     }
 
     /**

@@ -4,9 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import gene.component.Storage;
-import gene.component.TaskList;
-import gene.component.Ui;
+import gene.component.*;
 import gene.exception.BadDeadlineException;
 import gene.exception.BadDescriptionException;
 import gene.task.DeadlineTask;
@@ -43,19 +41,21 @@ public class AddCommand extends Command {
      * The execute method for the add command, which holds all the instructions
      * for when this command is to be executed.
      *
-     * @param tasks the list of tasks
-     * @param userInt the Ui class object
-     * @param storage the storage class object
+     * @param geneTasks the list of tasks
+     * @param geneUi the Ui class task object
+     * @param geneTaskStorage the tastorage class object
+     * @param geneLocs the list of locations
+     * @param geneLocationStorage the location storage class object
      */
     @Override
-    public String execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage) {
         switch (this.taskType) {
         case "todo":
-            return addTodo(taskBody, userInt, storage, tasks);
+            return addTodo(taskBody, geneUi, geneTaskStorage, geneTasks);
         case "deadline":
-            return addDeadline(taskBody, userInt, storage, tasks);
+            return addDeadline(taskBody, geneUi, geneTaskStorage, geneTasks);
         case "event":
-            return addEvent(taskBody, userInt, storage, tasks);
+            return addEvent(taskBody, geneUi, geneTaskStorage, geneTasks);
         default:
             return "Add command mismatch";
         }
@@ -79,11 +79,11 @@ public class AddCommand extends Command {
      *
      * @param taskKey un formatted task body
      * @param userInt Gene's Ui
-     * @param storage Gene's storage
+     * @param taskStorage Gene's storage
      * @param itemList Gene's item list
      */
-    public String addTodo(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
-        storage.writeToFile(taskKey, "T", false);
+    public String addTodo(String taskKey, Ui userInt, TaskStorage taskStorage, TaskList itemList) {
+        taskStorage.writeToFile(taskKey, "T", false);
         String taskTitle = "";
         try {
             taskTitle = descriptionSplit("todo", taskKey);
@@ -110,10 +110,10 @@ public class AddCommand extends Command {
      *
      * @param taskKey un formatted task body
      * @param userInt Gene's Ui
-     * @param storage Gene's storage
+     * @param taskStorage Gene's storage
      * @param itemList Gene's item list
      */
-    public String addEvent(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
+    public String addEvent(String taskKey, Ui userInt, TaskStorage taskStorage, TaskList itemList) {
         String taskTitle = "";
         try {
             taskTitle = descriptionSplit("event", taskKey);
@@ -131,7 +131,7 @@ public class AddCommand extends Command {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
-            storage.writeToFile(taskKey, "E", false);
+            taskStorage.writeToFile(taskKey, "E", false);
             itemList.add(newTask);
             return Ui.showLine()
                     + "Got it. I've added this task:\n"
@@ -170,10 +170,10 @@ public class AddCommand extends Command {
      *
      * @param taskKey un formatted task body
      * @param userInt Gene's Ui
-     * @param storage Gene's storage
+     * @param taskStorage Gene's storage
      * @param itemList Gene's item list
      */
-    public String addDeadline(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
+    public String addDeadline(String taskKey, Ui userInt, TaskStorage taskStorage, TaskList itemList) {
         String[] tokens = taskKey.split("deadline ");
         String taskTitle = "";
         try {
@@ -192,7 +192,7 @@ public class AddCommand extends Command {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
-            storage.writeToFile(taskKey, "D", false);
+            taskStorage.writeToFile(taskKey, "D", false);
             itemList.add(newTask);
             return Ui.showLine()
                     + "Got it. I've added this task:\n"

@@ -10,16 +10,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import gene.task.DeadlineTask;
-import gene.task.EventTask;
-import gene.task.Task;
-import gene.task.TodoTask;
+import gene.location.Location;
 
 /**
  * The storage class. handles all storage/file actions.
@@ -28,8 +24,8 @@ import gene.task.TodoTask;
  * @version 1.0
  * @since 2022-01-12
  */
-public class Storage {
-    private final ArrayList<Task> itemList = new ArrayList<>(0);
+public class LocationStorage {
+    private final ArrayList<Location> itemList = new ArrayList<>(0);
     private Path absolutePath;
     private final Path folderPath;
     private final String fileName;
@@ -42,7 +38,7 @@ public class Storage {
      *
      * @param fileName string for the name of file to save user input
      */
-    public Storage(String fileName) {
+    public LocationStorage(String fileName) {
         String currentDir = System.getProperty("user.dir");
         Path currentPath = Path.of(currentDir + File.separator + "data");
         this.folderPath = currentPath.toAbsolutePath();
@@ -92,7 +88,7 @@ public class Storage {
      *
      * @return full list of existing tasks from the target file
      */
-    public ArrayList<Task> readFile() { // to do / here / 0
+    public ArrayList<Location> readFile() { // to do / here / 0
         try {
             FileReader fileReader = new FileReader(this.absolutePath.toString());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -105,23 +101,6 @@ public class Storage {
                 boolean isMarked = tokens[tokens.length - 1].equals("1");
                 switch(tokens[0]) {
                 case "todo":
-                    String todoTitle = tokens[1];
-                    this.itemList.add(new TodoTask(todoTitle, isMarked));
-                    break;
-                case "event":
-                    String eventTitle = tokens[1];
-                    String eventDeadline = tokens[2];
-                    this.itemList.add(new EventTask(eventTitle,
-                            LocalDateTime.parse(eventDeadline,
-                                    formatter), isMarked));
-                    break;
-                case "deadline":
-                    String deadlineTitle = tokens[1];
-                    String deadlineDeadline = tokens[2];
-                    this.itemList.add(new DeadlineTask(deadlineTitle,
-                            LocalDateTime.parse(deadlineDeadline,
-                                    formatter), isMarked));
-                    break;
                 default:
                     break;
                 }
@@ -206,10 +185,10 @@ public class Storage {
      * optimises for less storage space. (Instead of UX)
      *
      * @param taskKey
-     * @param taskType
+     * @param locationType
      * @param isMarked
      */
-    public void writeToFile(String taskKey, String taskType, boolean isMarked) {
+    public void writeToFile(String taskKey, String locationType, boolean isMarked) {
         String mark = isMarked ? "1" : "0";
         String toWrite = "";
         try {
@@ -219,27 +198,8 @@ public class Storage {
             if (this.targetFile.length() > 0) {
                 newLine = "\n";
             }
-            switch(taskType) {
-            case "T":
-                String[] todoTokens = taskKey.split("todo "); //  to do / sleep / 1
-                toWrite = "todo / " + todoTokens[1] + " / " + mark;
-                bufferedWriter.append(newLine + toWrite);
-                break;
-            case "E":
-                String[] eventTokens = taskKey.split("event "); // event / sleep / 2/12/2020 1900
-                toWrite = eventTokens[1];
-                String[] eSplit = toWrite.split(" /at ");
-                toWrite = String.join(" / ", eSplit );
-                toWrite = "event / " + toWrite + " / " + mark;
-                bufferedWriter.append(newLine + toWrite);
-                break;
-            case "D":
-                String[] deadlineTokens = taskKey.split("deadline ");
-                toWrite = deadlineTokens[1];
-                String[] dSplit = toWrite.split(" /by ");
-                toWrite = String.join(" / ", dSplit );
-                toWrite = "deadline / " + toWrite + " / " + mark;
-                bufferedWriter.append(newLine + toWrite);
+            switch(locationType) {
+            case "L":
                 break;
             default:
                 break;

@@ -1,8 +1,6 @@
 package gene.command;
 
-import gene.component.Storage;
-import gene.component.TaskList;
-import gene.component.Ui;
+import gene.component.*;
 import gene.task.Task;
 
 /**
@@ -28,23 +26,25 @@ public class DeleteCommand extends Command {
      * The execute command which holds the instructions for when the command is
      * executed. Removes tasks from Gene's list as well as storage.
      *
-     * @param tasks the list of tasks
-     * @param userInt the Ui class object
-     * @param storage the storage class object
+     * @param geneTasks the list of tasks
+     * @param geneUi the Ui class task object
+     * @param geneTaskStorage the tastorage class object
+     * @param geneLocs the list of locations
+     * @param geneLocationStorage the location storage class object
      */
     @Override
-    public String execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage) {
         try {
             String[] tokens = taskBody.split(" ");
             String strIndex = tokens[1]; //error here
             int index = Integer.parseInt(strIndex);
-            Task targetTask = tasks.get(index);
-            tasks.remove(index); //error if empty
-            storage.deleteLineToFile(index); //error if empty
+            Task targetTask = geneTasks.get(index);
+            geneTasks.remove(index); //error if empty
+            geneTaskStorage.deleteLineToFile(index); //error if empty
             return Ui.showLine()
                     + "Noted. I've removed this task:\n"
                             + "  " + targetTask + "\n"
-                            + "Now you have " + tasks.size() + " tasks in the list."
+                            + "Now you have " + geneTasks.size() + " tasks in the list."
                             + "\n"
                             + Ui.showLine();
         } catch (Exception err) {

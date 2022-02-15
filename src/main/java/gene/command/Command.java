@@ -1,8 +1,6 @@
 package gene.command;
 
-import gene.component.Storage;
-import gene.component.TaskList;
-import gene.component.Ui;
+import gene.component.*;
 
 /**
  * The abstract command class. From this class, the add, delete, exit, edit
@@ -15,13 +13,15 @@ import gene.component.Ui;
 public abstract class Command {
     /**
      * abstract execute class that holds the instructions to be carried out
-     * for each command
+     * for each command todo: change all execute methods to have varargs
      *
-     * @param tasks the list of tasks
-     * @param userInt the Ui class object
-     * @param storage the storage class object
+     * @param geneTasks the list of tasks
+     * @param geneUi the Ui class task object
+     * @param geneTaskStorage the tastorage class object
+     * @param geneLocs the list of locations
+     * @param geneLocationStorage the location storage class object
      */
-    public abstract String execute(TaskList tasks, Ui userInt, Storage storage);
+    public abstract String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage);
 
     /**
      * to distinguish whether a command is an exit command

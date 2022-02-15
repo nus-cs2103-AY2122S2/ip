@@ -1,8 +1,6 @@
 package gene.command;
 
-import gene.component.Storage;
-import gene.component.TaskList;
-import gene.component.Ui;
+import gene.component.*;
 
 /**
  * The exit command class. Exits the program
@@ -18,12 +16,14 @@ public class ExitCommand extends Command {
      * to be executed. Nothing happens other than the goodbye statement
      * being printed
      *
-     * @param tasks the list of tasks
-     * @param userInt the Ui class object
-     * @param storage the storage class object
+     * @param geneTasks the list of tasks
+     * @param geneUi the Ui class task object
+     * @param geneTaskStorage the tastorage class object
+     * @param geneLocs the list of locations
+     * @param geneLocationStorage the location storage class object
      */
     @Override
-    public String execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage) {
         return Ui.showLine()
                 + "Bye. Hope to see you again soon!"
                 + "\n"

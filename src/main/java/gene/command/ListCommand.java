@@ -1,8 +1,6 @@
 package gene.command;
 
-import gene.component.Storage;
-import gene.component.TaskList;
-import gene.component.Ui;
+import gene.component.*;
 
 public class ListCommand extends Command {
 
@@ -11,20 +9,23 @@ public class ListCommand extends Command {
      * to be executed. For this command, all the tasks present in Gene's
      * taskList will be printed.
      *
-     * @param tasks the list of tasks
-     * @param userInt the Ui class object
-     * @param storage the storage class object
+     * @param geneTasks the list of tasks
+     * @param geneUi the Ui class task object
+     * @param geneTaskStorage the tastorage class object
+     * @param geneLocs the list of locations
+     * @param geneLocationStorage the location storage class object
      */
     @Override
-    public String execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList geneTasks, Ui geneUi,
+                          TaskStorage geneTaskStorage,
+                          LocationList geneLocs,
+                          LocationStorage geneLocationStorage) {
         StringBuilder initList = new StringBuilder();
-
-        for (int i = 1; i < tasks.size() + 1; i++) { //to edit in tasklist
+        for (int i = 1; i < geneTasks.size() + 1; i++) { //to edit in tasklist
             initList.append(i).append(".");
-            initList.append(tasks.get(i - 1));
+            initList.append(geneTasks.get(i - 1));
             initList.append("\n");
         }
-        
         return Ui.showLine() + initList.toString() + Ui.showLine();
     }
 

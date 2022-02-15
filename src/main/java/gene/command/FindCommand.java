@@ -2,9 +2,7 @@ package gene.command;
 
 import java.util.ArrayList;
 
-import gene.component.Storage;
-import gene.component.TaskList;
-import gene.component.Ui;
+import gene.component.*;
 import gene.task.Task;
 
 
@@ -25,17 +23,19 @@ public class FindCommand extends Command {
      * to be executed. For this command, all the tasks present in Gene's
      * taskList that matches the given keyword will be printed.
      *
-     * @param tasks the list of tasks
-     * @param userInt the Ui class object
-     * @param storage the storage class object
+     * @param geneTasks the list of tasks
+     * @param geneUi the Ui class task object
+     * @param geneTaskStorage the tastorage class object
+     * @param geneLocs the list of locations
+     * @param geneLocationStorage the location storage class object
      */
     @Override
-    public String execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage) {
         ArrayList<Task> tempTask = new ArrayList<>();
 
-        for (int i = 0; i < tasks.size(); i++) { //to edit in tasklist
-            if (tasks.get(i).containsKeyword(this.keyword)) {
-                tempTask.add(tasks.get(i));
+        for (int i = 0; i < geneTasks.size(); i++) { //to edit in tasklist
+            if (geneTasks.get(i).containsKeyword(this.keyword)) {
+                tempTask.add(geneTasks.get(i));
             }
         }
 
@@ -46,7 +46,7 @@ public class FindCommand extends Command {
         } else {
             for (int i = 1; i < tempTask.size() + 1; i++) { //to edit in tasklist
                 initList.append(i).append(".");
-                initList.append(tasks.get(i - 1));
+                initList.append(geneTasks.get(i - 1));
                 initList.append("\n");
             }
 

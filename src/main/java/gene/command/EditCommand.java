@@ -1,8 +1,6 @@
 package gene.command;
 
-import gene.component.Storage;
-import gene.component.TaskList;
-import gene.component.Ui;
+import gene.component.*;
 import gene.task.Task;
 
 /**
@@ -34,16 +32,18 @@ public class EditCommand extends Command {
      * for when this command is to be executed. Whether or not to mark or unmark
      * depends on the mark variable of the edit command instance.
      *
-     * @param tasks the list of tasks
-     * @param userInt the Ui class object
-     * @param storage the storage class object
+     * @param geneTasks the list of tasks
+     * @param geneUi the Ui class task object
+     * @param geneTaskStorage the tastorage class object
+     * @param geneLocs the list of locations
+     * @param geneLocationStorage the location storage class object
      */
     @Override
-    public String execute(TaskList tasks, Ui userInt, Storage storage) {
+    public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage) {
         String[] tokens = this.taskBody.split(" ");
         String strIndex = tokens[1]; //error here
         int index = Integer.parseInt(strIndex);
-        Task targetTask = tasks.get(index); //have to edit tasklist
+        Task targetTask = geneTasks.get(index); //have to edit tasklist
         Task newTask;
         if (this.mark.equals("1")) {
             newTask = targetTask.markTask();
@@ -62,8 +62,8 @@ public class EditCommand extends Command {
                     + "\n"
                     + Ui.showLine();
         }
-        tasks.set(index, newTask);
-        storage.updatesToFile(index, mark);
+        geneTasks.set(index, newTask);
+        geneTaskStorage.updatesToFile(index, mark);
         return toPrint;
     }
 
