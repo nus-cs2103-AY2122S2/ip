@@ -27,6 +27,9 @@ public class AddCommand extends Command {
     // starting index of a list or a char in string.
     private static final int TASK_TYPE_INDEX = 0;
 
+    // stores the value of empty task list.
+    private static final int EMPTY_TASKLIST = 0;
+
     // used to differentiate between constructors.
     private static final int DUMMY_VARIABLE = 1;
 
@@ -88,8 +91,19 @@ public class AddCommand extends Command {
             break;
         }
 
+
+        // get the date and find the tasks due on that date
+        TaskList clashes = taskList.getTasksDueOn(task.getDate());
+
         taskList.add(task);
-        Ui.printAdded(task.getTask(), taskList.numOfTasks());
+
+        if (clashes.numOfTasks() == EMPTY_TASKLIST) { // no clashes.
+            Ui.printAdded(task.getTask(), taskList.numOfTasks());
+        } else {
+            Ui.printClashes(clashes);
+        }
+
+
 
     }
 

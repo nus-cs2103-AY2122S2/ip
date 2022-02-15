@@ -2,6 +2,7 @@ package tasks;
 
 import exceptions.MissingTimeArgumentException;
 import helper.DateHandler;
+import java.time.LocalDate;
 
 /**
  * <h1>Event</h1>
@@ -48,6 +49,7 @@ public class Event extends Task {
 
     /**
      * Constructor for event class.
+     *
      * @param message the text given by the user.
      * returns a new instance of Event class.
      */
@@ -63,6 +65,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event class.
+     *
      * @param str string output of Event.
      * @param dummyVariable int to differentiate from other constructor.
      */
@@ -78,6 +81,7 @@ public class Event extends Task {
 
     /**
      * checks if there are any events before date.
+     *
      * @param date the string given by user.
      * @return return if there is an event before date; false otherwise.
      */
@@ -88,6 +92,7 @@ public class Event extends Task {
 
     /**
      * checks if there are any events on date.
+     *
      * @param date the string given by user.
      * @return return if there is an event on date; false otherwise.
      */
@@ -97,7 +102,29 @@ public class Event extends Task {
     }
 
     /**
+     * checks if there are any events on date.
+     *
+     * @param date the string given by user.
+     * @return return if there is an event on date; false otherwise.
+     */
+    @Override
+    public boolean isOnDate(LocalDate date) {
+        return this.time.isOnDate(date);
+    }
+
+    /**
+     * returns the date on which the event occurs.
+     *
+     * @return the date associated with task as LocalDate.
+     */
+    @Override
+    public LocalDate getDate() {
+        return this.time.getDate();
+    }
+
+    /**
      * correctArgument checks if the function is valid.
+     *
      * @param text the task input given by user.
      * @return true if correct.
      * @throws MissingTimeArgumentException if the user missed time argument out.
@@ -117,6 +144,7 @@ public class Event extends Task {
 
     /**
      * checks if the string is a Event task.
+     *
      * @param str the string representation of the task.
      * @return true if  the task is Event.
      */
@@ -126,6 +154,7 @@ public class Event extends Task {
 
     /**
      * toString returns the string representation of the Event object.
+     *
      * @return the string representation of the instance.
      */
     @Override

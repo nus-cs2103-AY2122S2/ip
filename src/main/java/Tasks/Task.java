@@ -1,5 +1,7 @@
 package tasks;
 
+import java.time.LocalDate;
+
 /**
  * <h1>Task</h1>
  * <p>
@@ -73,14 +75,26 @@ public class Task {
 
     /**
      * returns the task to be performed.
+     *
      * @return the task.
      */
     public String getTask() {
         return this.task;
     }
 
+
+    /**
+     * returns the date on which the task is due or the day event occurs.
+     *
+     * @return the date associated with task as LocalDate.
+     */
+    public LocalDate getDate() {
+        return LocalDate.MIN;
+    }
+
     /**
      * checks if the task is due before date.
+     *
      * @param date the string given by user.
      * @return false trivially, as Tasks do not have deadlines, or event date.
      */
@@ -90,6 +104,7 @@ public class Task {
 
     /**
      * checks if the task is on date.
+     *
      * @param date the string given by the user
      * @return false trivially, as tasks do not have dates associated with them.
      */
@@ -98,7 +113,18 @@ public class Task {
     }
 
     /**
+     * checks if the task is on date.
+     *
+     * @param date the string given by the user
+     * @return false trivially, as tasks do not have dates associated with them.
+     */
+    public boolean isOnDate(LocalDate date) {
+        return false;
+    }
+
+    /**
      * checks if the task contains word.
+     *
      * @param word the word to check for.
      * @return true if task contains the word; false otherwise.
      */
@@ -108,6 +134,7 @@ public class Task {
 
     /**
      * toSting method returns the string representation of the object.
+     *
      * @return the string representing the task instance.
      */
     @Override

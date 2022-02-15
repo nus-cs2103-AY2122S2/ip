@@ -174,10 +174,29 @@ public class DateHandler {
      * checks if the date is same.
      *
      * @param onDate the date given.
-     * @return return true if onDate matches the date of instance; false otherwise.
+     * @return true if onDate matches the date of instance; false otherwise.
      */
     public boolean isOnDate(String onDate) {
         return this.date.equals(LocalDate.parse(onDate.trim()));
+    }
+
+    /**
+     * checks if the date is same.
+     *
+     * @param onDate the date given.
+     * @return true if onDate matches the date of instance; false otherwise.
+     */
+    public boolean isOnDate(LocalDate onDate) {
+        return this.date.equals(onDate);
+    }
+
+    /**
+     * gets the date stored.
+     *
+     * @return date as LocalDate.
+     */
+    public LocalDate getDate() {
+        return this.date;
     }
 
     /**

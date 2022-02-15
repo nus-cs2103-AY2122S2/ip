@@ -259,6 +259,23 @@ public class Ui {
         }
     }
 
+    /**
+     * prints the list of tasks that are clashing, with the newly added one.
+     *
+     * @param taskList the list of tasks that are clashing.
+     */
+    public static void printClashes(TaskList taskList) {
+        String str = "I've found that the newly added task clashes with the previous ones \n"
+                + taskList.toString();
+        try {
+            FileWriter writer = new FileWriter(PATH_TEMP_FILE);
+            writer.write(str);
+            writer.close();
+        } catch (IOException e) {
+            Ui.printMessage(Ui.getError() + e.toString());
+        }
+    }
+
 
     /**
      * reads the text written to the file.

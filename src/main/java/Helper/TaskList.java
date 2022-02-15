@@ -1,7 +1,7 @@
 package helper;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-
 import tasks.Task;
 
 /**
@@ -85,6 +85,23 @@ public class TaskList {
      */
     public TaskList getTasksDueOn(String date) {
         DateHandler.checkValidDate(date);
+        TaskList dueTasks = new TaskList();
+        for (int i = 0; i < this.numOfTasks(); i++) {
+            Task task = this.get(i);
+            if (task.isOnDate(date)) {
+                dueTasks.add(task);
+            }
+        }
+        return dueTasks;
+    }
+
+    /**
+     * checks the tasks that are due on date.
+     *
+     * @param date the due date.
+     * @return a TaskList instance representing the same.
+     */
+    public TaskList getTasksDueOn(LocalDate date) {
         TaskList dueTasks = new TaskList();
         for (int i = 0; i < this.numOfTasks(); i++) {
             Task task = this.get(i);

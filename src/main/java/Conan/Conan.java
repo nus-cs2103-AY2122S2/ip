@@ -1,13 +1,6 @@
 package conan;
 
-import commandset.AddCommand;
-import commandset.ByeCommand;
-import commandset.CommandChecker;
-import commandset.Commands;
-import commandset.DeleteCommand;
-import commandset.DueCommand;
-import commandset.FindCommand;
-import commandset.Marking;
+import commandset.*;
 import exceptions.IllegalCommandException;
 import exceptions.InvalidYesOrNoException;
 import helper.CarryOn;
@@ -139,7 +132,7 @@ public class Conan {
                 FindCommand.findTasksContaining(message, this.taskList);
                 break;
             case LIST:
-                Ui.printMessage(this.taskList.toString());
+                ListCommand.list(this.taskList);
                 break;
             case MARK:
                 Marking.markTask(message, this.taskList);

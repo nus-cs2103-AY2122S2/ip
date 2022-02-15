@@ -3,6 +3,8 @@ package tasks;
 import exceptions.MissingTimeArgumentException;
 import helper.DateHandler;
 
+import java.time.LocalDate;
+
 /**
  * <h1>Deadline</h1>
  * <p>
@@ -49,6 +51,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline class.
+     *
      * @param message the text given by the user.
      * return an instance of deadline.
      */
@@ -64,6 +67,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline class.
+     *
      * @param str string output of Deadline.
      * @param dummyVariable int to differentiate from other constructor.
      */
@@ -79,6 +83,7 @@ public class Deadline extends Task {
 
     /**
      * correctArgument checks if the function is valid.
+     *
      * @param text the task input given by user.
      * @return true if correct.
      * @throws MissingTimeArgumentException if the user missed time argument out.
@@ -98,6 +103,7 @@ public class Deadline extends Task {
 
     /**
      * checks if the task deadline is due before date.
+     *
      * @param date the string given by user.
      * @return return if the task is due before date; false otherwise.
      */
@@ -108,6 +114,7 @@ public class Deadline extends Task {
 
     /**
      * checks if the task deadline is due on date.
+     *
      * @param date the string given by user.
      * @return return if the task is due on date; false otherwise.
      */
@@ -117,7 +124,29 @@ public class Deadline extends Task {
     }
 
     /**
+     * checks if the task deadline is due on date.
+     *
+     * @param date the string given by user.
+     * @return return if the task is due on date; false otherwise.
+     */
+    @Override
+    public boolean isOnDate(LocalDate date) {
+        return this.deadline.isOnDate(date);
+    }
+
+    /**
+     * returns the date on which the task is due.
+     *
+     * @return the date associated with task as LocalDate.
+     */
+    @Override
+    public LocalDate getDate() {
+        return this.deadline.getDate();
+    }
+
+    /**
      * checks if the string is a Deadline task.
+     *
      * @param str the string representation of the task.
      * @return true if  the task is Deadline.
      */
@@ -127,6 +156,7 @@ public class Deadline extends Task {
 
     /**
      * returns the string representation of the Deadline object.
+     *
      * @return the string representation of the instance.
      */
     @Override

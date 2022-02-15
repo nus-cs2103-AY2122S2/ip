@@ -47,6 +47,8 @@ public class Todo extends Task {
         return str.substring(START_INDEX, SYMBOL.length()).contains(SYMBOL);
     }
 
+
+
     /**
      * returns the string representation of the Todo object.
      * @return the string representation of the instance.
