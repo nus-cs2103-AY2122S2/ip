@@ -2,17 +2,31 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a command to add an event task to the chatbot task list.
+ */
 public class CommandEvent extends Command {
     private String commandDescription;
     private ArrayList<Task> tasks;
     private String[] split;
 
+    /**
+     * Constructor for a CommandEvent object.
+     *
+     * @param commandDescription The whole user input String.
+     * @param tasks The task list associated with this instance of the chatbot.
+     */
     public CommandEvent(String commandDescription, ArrayList<Task> tasks) {
         this.commandDescription = commandDescription;
         this.tasks = tasks;
         split = commandDescription.split(" ");
     }
 
+    /**
+     * Handles the execution of a event command.
+     *
+     * @return A String message regarding the execution status of the event command.
+     */
     @Override
     public String execute() {
         String output = "";

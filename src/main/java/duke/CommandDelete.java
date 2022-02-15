@@ -2,17 +2,31 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a command to delete a task from the chatbots task list.
+ */
 public class CommandDelete extends Command {
     private String commandDescription;
     private ArrayList<Task> tasks;
     private String[] split;
 
+    /**
+     * Constructor for a CommandDelete object.
+     *
+     * @param commandDescription The whole user input String.
+     * @param tasks The task list associated with this instance of the chatbot.
+     */
     public CommandDelete(String commandDescription, ArrayList<Task> tasks) {
         this.commandDescription = commandDescription;
         this.tasks = tasks;
         split = commandDescription.split(" ");
     }
 
+    /**
+     * Handles the execution of a delete command.
+     *
+     * @return A String message regarding the execution status of the delete command.
+     */
     @Override
     public String execute() {
         String output = "";

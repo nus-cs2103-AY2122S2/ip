@@ -2,17 +2,31 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a command to add a deadline task to the chatbot task list.
+ */
 public class CommandDeadline extends Command {
     private String commandDescription;
     private ArrayList<Task> tasks;
     private String[] split;
 
+    /**
+     * Constructor for a CommandDeadline object.
+     *
+     * @param commandDescription The whole user input String.
+     * @param tasks The task list associated with this instance of the chatbot.
+     */
     public CommandDeadline(String commandDescription, ArrayList<Task> tasks) {
         this.commandDescription = commandDescription;
         this.tasks = tasks;
         split = commandDescription.split(" ");
     }
 
+    /**
+     * Handles the execution of a deadline command.
+     *
+     * @return A String message regarding the execution status of the deadline command.
+     */
     @Override
     public String execute() {
         String output = "";

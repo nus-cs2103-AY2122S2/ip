@@ -1,11 +1,22 @@
 package duke;
 
+/**
+ * Represents the command to get help in the chatbot.
+ */
 public class CommandHelp extends Command {
 
+    /**
+     * Constructor for a CommandHelp object.
+     */
     public CommandHelp() {
 
     }
 
+    /**
+     * Handles the execution of a help command.
+     *
+     * @return A String message displaying list of commands available.
+     */
     @Override
     public String execute() {
         return "try the following commands:\n"
