@@ -143,6 +143,7 @@ public class Ui {
      * @param input String value to be printed.
      */
     public void print(String input) {
+        assert !input.isEmpty() : "Assertion failed on Ui.printMessage(): inputTxt is empty";
         dialogBox.getChildren().addAll(DialogBox.getDukeDialog(input, dukeImage));
     }
 }

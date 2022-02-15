@@ -50,6 +50,7 @@ public class Storage {
      * @see IOException
      */
     public void writeToFile(TaskList tasks) throws IOException {
+        assert file.exists() : "Assertion failed on Storage.writeToFile(): duke.txt does not exist";
         FileWriter fw = new FileWriter(PATH);
         StringBuilder result = new StringBuilder();
         for (Task task : tasks.getTaskList()) {
