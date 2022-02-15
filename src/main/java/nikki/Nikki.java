@@ -97,7 +97,7 @@ public class Nikki {
 
         case "find":
             String pattern = action.getArgs();
-            response = ui.getListReport(tasks.searchTasks(pattern));
+            response = ui.getListReport(tasks.searchTasks(pattern.toLowerCase()));
             break;
 
         case "mark":
@@ -146,6 +146,10 @@ public class Nikki {
             tasks.addTask(event);
             response = ui.getNewTaskResponse(event);
             response += ui.getTaskCountReport(tasks.size());
+            break;
+
+        case "clear":
+            tasks.clear();
             break;
 
         default:

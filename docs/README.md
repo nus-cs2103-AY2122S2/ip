@@ -86,13 +86,14 @@ Format: `list`
 
 ### Find tasks: `find`
 Finds tasks in the list whose names (partially) matches the user input.
-> Slight typos will **not** affect the search.
+> - Search is **case insensitive**.
+> - Slight typos will **not** affect the search.
 
 Format: `find PATTERN`
 
 Examples:
 - `find comp`  returns `fix computer`, `competition prep`
-- `find project` returns `science project`, `project meeting`
+- `find Project` returns `science project`, `project meeting`
 - `find prject` returns `science project`, `project meeting`
 
 <br>
@@ -133,6 +134,13 @@ updated.
 
 Examples:
 - `delete 1`
+
+<br>
+
+### Clearing the list: `clear`
+Clears all tasks from the list.
+
+Format: `clear`
 
 <br>
 

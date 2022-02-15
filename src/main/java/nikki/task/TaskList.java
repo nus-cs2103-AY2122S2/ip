@@ -52,6 +52,13 @@ public class TaskList {
     }
 
     /**
+     * Clears the TaskList.
+     */
+    public void clear() {
+        this.tasks.clear();
+    }
+
+    /**
      * Checks if index is in range of current List
      *
      * @param index index to check

@@ -40,6 +40,7 @@ public class CommandParser {
             "event <description> /at <d/M/yyyy>"
         },
         { "delete", "delete (\\d+)", "delete <task number>" },
+        { "clear", "clear", "clear" },
     };
 
     /**
