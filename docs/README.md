@@ -32,24 +32,28 @@ Expected outcome:
 format: `deadline <description of deadline> /by <YYYY-MM-dd HH:mm>`  
 Usage: `deadline code that /by 2020-11-21 20:01`  
 Expected outcome:  
+
 ![](images/deadline.png)
 
 ### `mark` - Mark task as completed
 Format: `mark <index of task to mark>`  
 Usage: `mark 1`  
 Expected outcome:  
+
 ![](images/mark.png)
 
 ### `unmark` - Unmarks task that was previously marked as completed
 Format: `unmark <index of task to mark>`  
 Usage: `unmark 1`  
 Expected outcome:  
+
 ![](images/unmark.png)
 
 ### `delete` - Delete a task
 Format: `delete <index of task to be deleted>`  
 Usage: `delete 1`  
 Expected outcome:  
+
 ![](images/delete.png)
 
 ### `find` - find all tasks that contain a keyword
@@ -62,5 +66,6 @@ Expected outcome:
 Format: `list`  
 Usage: `list`  
 Expected outcome:  
+
 ![](images/list.png)
 
