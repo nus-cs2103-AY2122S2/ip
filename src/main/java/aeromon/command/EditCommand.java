@@ -2,7 +2,6 @@ package aeromon.command;
 
 import aeromon.AeromonException;
 import aeromon.Storage;
-import aeromon.Ui;
 import aeromon.task.Task;
 import aeromon.TaskArrayList;
 
@@ -16,7 +15,7 @@ public class EditCommand extends Command {
 
     private static final String MARK_MESSAGE = "Naisu! You've completed: \n";
     private static final String UNMARK_MESSAGE = "OI! What happened to completing: \n";
-    private static final String DELETE_MESSAGE = "check your delete message \n";
+    private static final String DELETE_MESSAGE = "Okies! I have deleted: \n";
 
     public enum EditType { MARK, UNMARK, DELETE}
 
@@ -31,7 +30,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public String execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
+    public String execute(TaskArrayList taskArrayList, Storage storage) throws AeromonException {
 
         if (taskNum < 1 || taskNum > taskArrayList.getSize()) {
             throw new AeromonException("Nani is that task number, sir?\n");

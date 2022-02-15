@@ -2,7 +2,6 @@ package aeromon.command;
 
 import aeromon.AeromonException;
 import aeromon.Storage;
-import aeromon.Ui;
 import aeromon.TaskArrayList;
 
 /**
@@ -13,7 +12,7 @@ public class ByeCommand extends Command {
     private static final String FAREWELL_MESSAGE = "Buai Buai! Ciao for now!";
 
     @Override
-    public String execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
+    public String execute(TaskArrayList taskArrayList, Storage storage) throws AeromonException {
         return FAREWELL_MESSAGE;
     }
 

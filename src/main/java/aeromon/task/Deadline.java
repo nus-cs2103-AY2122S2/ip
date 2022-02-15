@@ -8,8 +8,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate by;
+
+    private static final String DEADLINE_STRING_FORMAT = "[D]%1$s (by: %2$s)";
+    private static final String DEADLINE_OUTPUT_FORMAT = "D / %1$s / %2$s";
 
     /**
      * Constructs the Deadline object.
@@ -23,11 +26,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%1$s (by: %2$s)", super.toString(), by.format(dateTimeFormatter));
+        return String.format(DEADLINE_STRING_FORMAT, super.toString(), by.format(DATE_TIME_FORMATTER));
     }
 
     @Override
     public String toOutputFormat() {
-        return String.format("D / %1$s / %2$s", super.toOutputFormat(), by.format(dateTimeFormatter));
+        return String.format(DEADLINE_OUTPUT_FORMAT, super.toOutputFormat(), by.format(DATE_TIME_FORMATTER));
     }
 }

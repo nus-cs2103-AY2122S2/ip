@@ -8,6 +8,11 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    private static final String TASK_STRING_FORMAT = "[%1$s] %2$s";
+    private static final String TASK_OUTPUT_FORMAT = "%d / %s";
+    private static final String DONE_ICON = "X";
+    private static final String NOT_DONE_ICON = " ";
+
     /**
      * Constructs the Task object.
      * @param description the task name.
@@ -22,7 +27,7 @@ public class Task {
      * @return "X" if the task is done, " " otherwise
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? DONE_ICON : NOT_DONE_ICON);
     }
 
     /**
@@ -49,7 +54,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%1$s] %2$s", getStatusIcon(), description);
+        return String.format(TASK_STRING_FORMAT, getStatusIcon(), description);
     }
 
     /**
@@ -58,6 +63,6 @@ public class Task {
      */
     public String toOutputFormat() {
         int status = this.isDone ? 1 : 0;
-        return String.format("%d / %s", status, this.description);
+        return String.format(TASK_OUTPUT_FORMAT, status, this.description);
     }
 }

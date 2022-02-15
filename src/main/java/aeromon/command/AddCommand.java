@@ -2,7 +2,6 @@ package aeromon.command;
 
 import aeromon.AeromonException;
 import aeromon.Storage;
-import aeromon.Ui;
 import aeromon.task.Deadline;
 import aeromon.task.Event;
 import aeromon.TaskArrayList;
@@ -33,7 +32,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
+    public String execute(TaskArrayList taskArrayList, Storage storage) throws AeromonException {
 
         switch(taskType) {
         case TODO:
