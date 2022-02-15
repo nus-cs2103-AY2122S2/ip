@@ -115,6 +115,7 @@ public class Parser {
     String getEventName() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/at");
+        assert indexOfBy >= 0 : "index should be more than or equal to 0";
         String name = userInputCommandRemoved.substring(0, indexOfBy - 1);
         return name;
     }
