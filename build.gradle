@@ -43,11 +43,11 @@ test {
 }
 
 application {
-    mainClassName = "Cleese"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "cleese"
+    archiveBaseName = "Cleese"
     archiveClassifier = null
 }
 
