@@ -56,7 +56,7 @@ public class TaskArrayList {
     }
 
     /**
-     * Deleted the task in the current TaskArrayList according to the index.
+     * Deletes the task in the current TaskArrayList according to the index.
      * @param i the index of the Task object to delete.
      * @return the deleted Task object.
      */
