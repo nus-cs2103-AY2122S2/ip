@@ -20,20 +20,28 @@ public class Ui {
      */
     public String showTutorial() {
         return "Here are my features!\n"
-                + "To add a ToDo task, input: ToDo/<name>\n"
-                + "To add a Event task, input: Event/<name>/<date>/<time>\n"
-                + "To add a Deadline task, input: Deadline/<name>/<date>/<time>\n"
-                + "To list all tasks, input: list\n"
-                + "To mark a task as completed, "
+                + "To add a ToDo task,\n"
+                + "input: ToDo/<name>\n"
+                + "To add a Event task,\n"
+                + "input: Event/<name>/<date>/<time>\n"
+                + "To add a Deadline task,\n"
+                + "input: Deadline/<name>/<date>/<time>\n"
+                + "To list all tasks,\n"
+                + "input: list\n"
+                + "To mark a task as completed,\n"
                 + "input: mark/<task number based on the most recent list call>\n"
-                + "To unmark a task as completed, "
+                + "To unmark a task as completed,\n"
                 + "input: mark/<task number based on the most recent list call>\n"
-                + "To delete a task, "
+                + "To delete a task,\n"
                 + "input: delete/<task number based on the most recent list call>\n"
-                + "To search for a task by keyword, input: Find/<keyword>\n"
-                + "To clear the tasklist, input: Clear\n"
-                + "To exit duke, input: exit\n"
-                + "To view this manual again, input: help\n"
+                + "To search for a task by keyword,\n"
+                + "input: Find/<keyword>\n"
+                + "To clear the task list,\n"
+                + "input: Clear\n"
+                + "To exit duke,\n"
+                + "input: exit\n"
+                + "To view this manual again,\nhelp"
+                + "input: help\n"
                 + "The first word of each command is not case-sensitive!\n"
                 + "The format of the date should be in the format DDMMYYYY!\n"
                 + "The format of the time should be in the format HHMM!\n"
@@ -77,7 +85,7 @@ public class Ui {
         if (tasks.isBlank()) {
             return "There is nothing in the TaskList!";
         } else {
-            return "Here is a List of your Tasks:\n" + tasks;
+            return "Here is a list of your tasks:\n" + tasks;
         }
     }
 
@@ -107,7 +115,7 @@ public class Ui {
      * @param e a DukeException that was thrown
      */
     public String showException(DukeException e) {
-        return e.getMessage();
+        return "/e " + e.getMessage();
     }
 
     /**

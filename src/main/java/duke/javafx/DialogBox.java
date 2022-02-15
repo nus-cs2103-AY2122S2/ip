@@ -66,9 +66,22 @@ public class DialogBox extends HBox {
      * Returns duke's dialog box
      */
     public static DialogBox getDukeDialog(String text, Image img) {
+        boolean isError = text.startsWith("/e ");
+
+        if (isError) {
+            text = text.substring(3);
+        }
+
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.rgb(66, 80, 97), new CornerRadii(35),
-                new Insets(10, 50, 10, 10))));
+
+        if (isError) {
+            db.setBackground(new Background(new BackgroundFill(Color.rgb(249, 159, 201), new CornerRadii(35),
+                    new Insets(10, 50, 10, 10))));
+        } else {
+            db.setBackground(new Background(new BackgroundFill(Color.rgb(66, 80, 97), new CornerRadii(35),
+                    new Insets(10, 50, 10, 10))));
+        }
+
         db.flip();
         return db;
     }
