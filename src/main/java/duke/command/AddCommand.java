@@ -42,8 +42,8 @@ public class AddCommand extends Command {
             throw new DukeException("☹ OOPS!!! The description cannot be empty.");
         }
         if (!details.contains("/")) {
-            throw new DukeException("☹ OOPS!!! The date of a " + cmd + " cannot be empty. "
-                    + "Use /at and type the date with the format yyyy-mm-dd after it");
+            throw new DukeException("☹ OOPS!!! The date of a " + cmd + " cannot be empty.\n"
+                    + "Use /at and type the date(yyyy-mm-dd) after it");
         }
         try {
             String[] detailsArray = details.split("/");
@@ -56,8 +56,8 @@ public class AddCommand extends Command {
             }
         } catch (
                 DateTimeParseException | ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-            throw new DukeException("Wrong date format./n"
-                    + " Please use /at and type the date with the format yyyy-mm-dd after it");
+            throw new DukeException("Wrong date format.\n"
+                    + "Please use /at and type the date(yyyy-mm-dd) after it");
         }
     }
 

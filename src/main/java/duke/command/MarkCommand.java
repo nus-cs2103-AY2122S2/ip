@@ -43,11 +43,11 @@ public class MarkCommand extends Command {
         try {
             Task taskToMark = tasks.getCurrentTasks().get(id - 1);
             if (this.isMark) {
-                taskToMark.mark();
+                taskToMark.setComplete();
                 storage.saveToFile(tasks.getCurrentTasks(), false);
                 return ui.notifyMarkedTaskMessage(taskToMark, true);
             } else {
-                taskToMark.unmark();
+                taskToMark.setIncomplete();
                 storage.saveToFile(tasks.getCurrentTasks(), false);
                 return ui.notifyMarkedTaskMessage(taskToMark, false);
             }

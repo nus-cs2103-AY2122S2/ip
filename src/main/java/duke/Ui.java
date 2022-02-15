@@ -70,9 +70,9 @@ public class Ui {
      */
     public String notifyMarkedTaskMessage(Task t, boolean isComplete) {
         if (isComplete) {
-            return "Task " + t + " has been marked complete.";
+            return "Task:\n" + t + "\nhas been marked complete.";
         } else {
-            return "Task " + t + " has been marked incomplete.";
+            return "Task:\n" + t + "\nhas been marked incomplete.";
         }
     }
 
