@@ -2,6 +2,7 @@ package duke;
 
 import java.util.Objects;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        String botName = "Duke, the Task Master";
+        String botName = "Alfred, the Task Master";
         String greeting = "Greetings, I am " + botName + ".\n"
                 + "I'm here to help you with your... tasks, obviously!";
 
@@ -64,10 +64,15 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        //TODO: Show exit message before closing
-        if (Parser.isExit()) {
-            Stage stage = (Stage) dialogContainer.getScene().getWindow();
-            stage.close();
+        if (duke.getExitCondition()) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Platform.exit();
+            }).start();
         }
     }
 }

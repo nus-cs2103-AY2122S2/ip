@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 
 /**
  * An instance of Duke, which helps control Storage, TaskList, and UI, managing the application.
@@ -10,6 +11,7 @@ public class Duke {
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
+    private boolean isExit;
 
     /**
      * Instantiates a new Duke.
@@ -44,7 +46,19 @@ public class Duke {
         // ensures cmd is not null so that it can be executed
         assert cmd != null;
         String response = cmd.execute(tasks, ui, storage);
-        Parser.setIsExit(cmd.isExit());
+        isExit = isExitCommand(cmd);
         return response;
+    }
+
+    /**
+     * Checks whether an exit command has been executed.
+     * @return true if an {@code ExitCommand} has been executed, false otherwise
+     */
+    public boolean getExitCondition() {
+        return this.isExit;
+    }
+
+    private boolean isExitCommand(Command cmd) {
+        return cmd instanceof ExitCommand;
     }
 }

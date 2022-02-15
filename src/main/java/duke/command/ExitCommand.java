@@ -27,13 +27,4 @@ public class ExitCommand extends Command {
         }
         return ui.close();
     }
-
-    /**
-     * Returns `true` so that the program can proceed to gracefully close.
-     * @return true to signal the application to close.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

@@ -17,14 +17,4 @@ public abstract class Command {
      * @return a string to indicate what has been executed
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
-
-
-    /**
-     * Returns `true` if the `Command` is `ExitCommand`.
-     *
-     * @return `true` if the `Command` is `ExitCommand`
-     */
-    public boolean isExit() {
-        return false;
-    };
 }

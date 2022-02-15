@@ -20,25 +20,6 @@ import duke.task.ToDo;
  * An instance of Parser, used to parse user input to the respective commands.
  */
 public class Parser {
-    private static boolean isExit = false;
-
-    /**
-     * Is exit boolean.
-     *
-     * @return the boolean
-     */
-    public static boolean isExit() {
-        return isExit;
-    }
-
-    /**
-     * Sets is exit.
-     *
-     * @param flag the flag
-     */
-    public static void setIsExit(boolean flag) {
-        isExit = flag;
-    }
 
     /**
      * Parses `String` to `Integer`.

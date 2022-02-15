@@ -20,3 +20,4 @@ text-ui-test/test1.in
 date/*
 */.*
 src/main/java/META-INF/*
+*.jar
