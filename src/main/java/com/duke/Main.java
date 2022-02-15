@@ -24,8 +24,16 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+
+            stage.setTitle("Duke");
+            stage.setResizable(false);
+            stage.setMinHeight(600.0);
+            stage.setMinWidth(400.0);
+
+            stage.setOnCloseRequest(e -> duke.saveToStorage());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

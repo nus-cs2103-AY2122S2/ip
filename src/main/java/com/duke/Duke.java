@@ -26,4 +26,8 @@ public class Duke {
             return e.getMessage();
         }
     }
+
+    public void saveToStorage() {
+        storage.save(tasks);
+    }
 }
