@@ -6,15 +6,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="59.0" prefWidth="395.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label fx:id="dialog" prefHeight="104.0" prefWidth="258.0" text="Label" wrapText="true">
+    <Label fx:id="dialog" alignment="CENTER" contentDisplay="TOP" prefHeight="78.0" prefWidth="303.0" text="Label" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Baskerville Old Face" size="11.0" />
-         </font></Label>
-    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+         </font>
          <HBox.margin>
-            <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin></Label>
+    <ImageView fx:id="displayPicture" fitHeight="69.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets bottom="5.0" right="5.0" />
          </HBox.margin></ImageView>
   </children>
   <padding>
