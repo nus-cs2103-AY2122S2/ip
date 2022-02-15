@@ -22,8 +22,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 /**
- * This control represents a dialog box consisting of an
- * ImageView to represent the speaker's face and a label
+ * This control represents a dialog box consisting of a
+ * Circle to represent the speaker's avatar and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
@@ -43,12 +43,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        ImagePattern imagePattern = new ImagePattern(img);
-        displayPicture.setFill(imagePattern);
+        displayPicture.setFill(new ImagePattern(img));
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the Circle is on the left and text on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
