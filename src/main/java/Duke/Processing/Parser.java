@@ -5,6 +5,7 @@ import java.util.Date;
 import Duke.Exception.DukeException;
 
 public class Parser {
+    private static final String BYE = "Welcome Home John";
     /**
      * Converts the String for a new task to a date
      *
@@ -40,40 +41,45 @@ public class Parser {
      *
      * @param  input the type of command the user has input
      * @param  tasklist the current Tasklist that contains tasks.
+     * @return A string output
      */
 
-    public static void use(String input, TaskList tasklist) throws DukeException{
+    public static String use(String input, TaskList tasklist) throws DukeException{
+        String output;
         try {
             if(input.equalsIgnoreCase("list")) {
-                tasklist.list();
+                output = tasklist.list();
             } else if(input.startsWith("todo")) {
                 String item = input.substring(5);
-                tasklist.addTodo(item);
+                output = tasklist.addTodo(item);
             } else if(input.startsWith("deadline")) {
                 String item = input.substring(9);
                 String[] split = item.split(" /by ");
-                tasklist.addDeadline(split);
+                output = tasklist.addDeadline(split);
             } else if (input.startsWith("Event")) {
                 String item = input.substring(6);
                 String[] split = item.split(" /at ");
-                tasklist.addEvent(split);
+                output = tasklist.addEvent(split);
             } else if (input.startsWith("mark")) {
                 String num = input.substring(5);
-                tasklist.mark(num);
+                output = tasklist.mark(num);
             } else if (input.startsWith("unmark")) {
                 String num = input.substring(7);
-                tasklist.unmark(num);
+                output = tasklist.unmark(num);
             } else if (input.startsWith("delete")) {
                 String num = input.substring(7);
-                tasklist.delete(num);
+                output = tasklist.delete(num);
             } else if (input.startsWith("find")) {
                 String name = input.substring(5);
-                tasklist.find(name);
+                output = tasklist.find(name);
+            } else if (input.equals("bye")) {
+                output = BYE;
             } else {
                 throw new DukeException("I'm not sure we can do that");
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("We don't even have that many things to do");
         }
+        return  output;
     }
 }

@@ -1,6 +1,7 @@
 package Duke.UI;
 import Duke.Exception.DukeException;
 
+import javax.print.DocFlavor;
 import java.util.Scanner;
 public class Ui {
     static final String logo = " ____        _        \n"
@@ -8,9 +9,9 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-    static final String intro = "Wake up, I need you \n";
-    static final String seperator = "_____________________________________________\n";
-    static final String bye = "Welcome Home John";
+    static final String INTRO = "Wake up, I need you \n";
+    static final String SEPERATOR = "_____________________________________________\n";
+    static final String BYE = "Welcome Home John";
     Scanner sc;
 
     public Ui() {
@@ -23,27 +24,33 @@ public class Ui {
 
     /**
      * Outputs a welcome message to the user at the start of Duke
+     *
+     * @return a String output
      */
-    public void startmessage() {
-        String message = logo + intro + seperator;
-        System.out.println(message);
+    public String startmessage() {
+        String message = logo + INTRO + SEPERATOR;
+        return message;
     }
     /**
      * Outputs an end message to the user at the end of Duke
+     *
+     * @return a String output
      */
-    public void endmessage() {
-        System.out.println(bye);
+    public String endmessage() {
+        return BYE;
     }
 
     /**
      * Outputs an error message to the user in the event of a caught exception
+     *
+     * @return a String output
      */
-    public void errorMessage(DukeException error) {
-        System.out.println(error.getMessage());
+    public String errorMessage(DukeException error) {
+        return error.getMessage();
     }
 
     public void divider() {
-        System.out.println(seperator);
+        System.out.println(SEPERATOR);
     }
 
 }
