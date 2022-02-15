@@ -23,7 +23,7 @@ Adds a ToDo, Event or Deadline task into the Bobby's list.
 
 The format for the date must be: dd-mm-yyyy
 
-###Example of usage 
+### Example of usage 
 
 `todo buy groceries`
 
@@ -31,7 +31,7 @@ The format for the date must be: dd-mm-yyyy
 
 `deadline Renew passport!! / 31-03-2022`
 
-###Outcome
+### Outcome
 
 Bobby replies with a confirmation message that he added your task into the list
 and tells you how many tasks are currently in your list. 
@@ -55,7 +55,7 @@ Bobby will list out your current tasks.
 Events and Deadlines displayed first before To-Do's. 
 Events and Deadlines sorted by default with the earliest date first.
 
-###Example of usage
+### Example of usage
 `list`
 
 ### Outcome
@@ -63,62 +63,62 @@ Bobby shows your current tasks.
 
 ![list_example .png](list.png)
 
-##Find
+## Find
 
 Find tasks that contains the provided keyword.
 
-###Example of usage
+### Example of usage
 `find passport`
 
 `find buy`
 
 `find n`
 
-###Outcome
+### Outcome
 Bobby will search through all your tasks for the keyword and displays them to you.
 
 The output list will be sorted by default as well.
 
 ![find_example.png](find.png)
 
-##Mark
+## Mark
 
 Bobby helps you to mark the task with the given index as done.
 
-###Example of usage
+### Example of usage
 
 `mark 3`
 
-###Outcome
+### Outcome
 Bobby marks the task as done by putting an `X` beside the task 
 
 ![mark_example.png](mark.png)
 
-##Unmark
+## Unmark
 
 Bobby helps you to unmark the task with the given index as not done.
 
-###Example of usage
+### Example of usage
 
 `unmark 3`
 
-###Outcome
+### Outcome
 Bobby unmarks the task as not done by removing the `X` beside the task.
 
 
 ![unmark_example.png](unmark.png)
 
-##Delete
+## Delete
 
 Bobby removes the task from your list.
 
-###Example of usage
+### Example of usage
 
 `delete 3`
 
 `delete all`
 
-###Outcome
+### Outcome
 Bobby removes the task with the given index from your list.
 
 If `delete all`, bobby removes the whole list!
