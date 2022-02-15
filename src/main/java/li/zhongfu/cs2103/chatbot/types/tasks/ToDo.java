@@ -6,7 +6,7 @@ package li.zhongfu.cs2103.chatbot.types.tasks;
 public class ToDo extends Task {
     /**
      * Creates a new to-do task item.
-     * 
+     *
      * @param name the name of the task item
      */
     public ToDo(String name) {
@@ -15,7 +15,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a string representation of this to-do item.
-     * 
+     *
      * @returns a string representation of this to-do item
      */
     @Override

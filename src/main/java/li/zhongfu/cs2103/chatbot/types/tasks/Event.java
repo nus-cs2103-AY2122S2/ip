@@ -11,7 +11,7 @@ public class Event extends Task {
 
     /**
      * Creates a new event item.
-     * 
+     *
      * @param name the name of the event
      * @param eventTime the date and time of the event
      */
@@ -22,7 +22,7 @@ public class Event extends Task {
 
     /**
      * Returns the date and time of the event.
-     * 
+     *
      * @returns the date and time of the event
      */
     public LocalDateTime getEventTime() {
@@ -31,7 +31,7 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of this event item.
-     * 
+     *
      * @returns a string representation of this event item
      */
     @Override
@@ -44,7 +44,7 @@ public class Event extends Task {
 
     /**
      * Indicates whether the Object {@code o} is equal to this Event.
-     * 
+     *
      * @param o the Object to compare this Event against
      * @returns true if {@code o} is equal to this Event, false otherwise
      */
@@ -59,7 +59,7 @@ public class Event extends Task {
 
     /**
      * Returns a hash code value for this Event.
-     * 
+     *
      * @returns a hash code value for this Event
      */
     @Override
