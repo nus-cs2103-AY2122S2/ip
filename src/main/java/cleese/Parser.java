@@ -7,6 +7,8 @@ import task.Deadline;
 import task.TaskList;
 import exceptions.InvalidInputException;
 import exceptions.NoDescException;
+import ui.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -36,46 +38,38 @@ public class Parser {
 
         switch (command) {
         case "bye":
-            ui.printGoodByeMessage();
             try {
                 storage.saveToFile(taskList);
             } catch (Exception e) {
-                System.out.println("Error faced when trying to save to file");
+                return "Error faced when trying to save to file";
             }
-            ui.printLine();
-            return "bye";
+            return ui.goodByeResponse();
         case "list":
-            taskList.printTaskList();
-            ui.printLine();
-            return "list";
+            return ui.listResponse(taskList);
         case "mark":
         case "unmark":
             int selectedTaskNum =  Integer.parseInt(parameters);
             Task selectedTask = taskList.get(selectedTaskNum-1);
+            String response = "";
 
             if (command.equals("mark")) {
                 selectedTask.setDone();
-                ui.printMarkedMessage(selectedTask);
+                response = ui.markedMessageResponse(selectedTask);
             }
 
             if (command.equals("unmark")) {
                 selectedTask.setUndone();
-                ui.printUnmarkedMessage(selectedTask);
+                response = ui.unmarkedMessageResponse(selectedTask);
             }
-
-            ui.printLine();
-            return "mark/unmark";
+            return response;
         case "delete":
             int taskToDeleteIndex = Integer.parseInt(parameters) - 1;
             Task taskToDelete = taskList.get(taskToDeleteIndex);
             taskList.removeFromTaskList(taskToDelete);
-            ui.printRemovedAck(taskToDelete, taskList);
-            ui.printLine();
-            return "delete";
+            return ui.removedAckResponse(taskToDelete, taskList);
         case "todo":
         case "event":
         case "deadline":
-            System.out.println(parameters);
             // detects empty description for todo tasks
             if (parameters.isEmpty()) {
                 throw new NoDescException("todo");
@@ -101,14 +95,10 @@ public class Parser {
                 }
             }
             taskList.add(newTask);
-            ui.printAddedAck(newTask, taskList);
-            ui.printLine();
-            return "tasks";
+            return ui.addedAckResponse(newTask, taskList);
         case "find":
-            ui.printFindMessage();
-            taskList.find(parameters);
-            ui.printLine();
-            return "find";
+            String foundTasks = taskList.find(parameters);
+            return ui.findMessageResponse(foundTasks);
         default:
             throw new InvalidInputException("Invalid Input");
         }

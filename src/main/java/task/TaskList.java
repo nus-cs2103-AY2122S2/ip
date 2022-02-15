@@ -34,23 +34,25 @@ public class TaskList {
     }
 
     /**
-     * Iterates through every Task in the TasksList and prints all Tasks that contain the keyword
+     * Iterates through every Task in the TasksList and returns a String with all the Tasks that contain the keyword
      * @param keyword string that is used to search for a match in the TasksList
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
+        String foundTasks = "";
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).toString().contains(keyword)) {
-                System.out.print(String.format("%d. %s \n", i+1, taskList.get(i).toString()));
+                foundTasks += String.format("%d. %s \n", i+1, taskList.get(i).toString());
             }
         }
+        return foundTasks;
     }
 
-    /**
-     * Prints every Task in the TasksList witch each task occupying a new line
-     */
-    public void printTaskList() {
+    @Override
+    public String toString() {
+        String taskListToString = "";
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.print(String.format("%d. %s \n", i+1, taskList.get(i).toString()));
+            taskListToString += String.format("%d. %s \n", i+1, taskList.get(i).toString());
         }
+        return taskListToString;
     }
 }

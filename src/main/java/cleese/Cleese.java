@@ -2,17 +2,24 @@ package cleese;
 
 import task.TaskList;
 import exceptions.NoDescException;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import ui.MainWindow;
+import ui.Ui;
 
-public class Cleese {
+public class Cleese extends Application {
     private static Ui ui;
     private static Parser parser;
     private static Storage storage;
     private static TaskList taskList;
 
-    public static void main(String[] args) {
+    public static void initialize() {
         String filePath = "./src/TaskListDB.txt";
         ui = new Ui();
         parser = new Parser();
@@ -24,23 +31,31 @@ public class Cleese {
         } catch (FileNotFoundException e) {
             File fileName = new File("./src/TaskListDB.txt");
         }
-        // Print welcome message
-        ui.printWelcomeMessage();
-        ui.printLine();
-        // Scanner object to detect input from CLI
-        Scanner scanner = new Scanner(System.in);
-        // Loop to keep getting input until bye
-        String response = "default";
-        while (!response.equals("bye")) {
-            try {
-                response = parser.handleCommand(scanner.nextLine(), taskList, ui, storage);
-            } catch(NoDescException error) {
-                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                ui.printLine();
-            } catch(Exception error) {
-                System.out.println("☹ OOPS!!! I'm sorry but I don't know what that means :-(");
-                ui.printLine();
-            }
+    }
+
+    public String getResponse(String input) {
+        String response;
+        try {
+            response = parser.handleCommand(input, taskList, ui, storage);
+        } catch (NoDescException error) {
+            response = "OOPS!!! The description of a todo cannot be empty.";
+        } catch (Exception error) {
+            response = "OOPS!!! I'm sorry but I don't know what that means :-(";
+        }
+        return response;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Cleese.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(this);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
