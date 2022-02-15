@@ -1,4 +1,4 @@
-# <p align="center"><b> Duke Pro User Guide </b></p>
+# <b> Duke Pro User Guide </b>
 
 > <p align="center">What did I need to do again? - <s>You</s> Me, <b>everyday</b> </p>
 <p> Ever forgot what you needed to do? :frowning_face: Now you won't! :relieved: </p>
@@ -21,7 +21,7 @@ Features supported:
 - [x] View Tasks
 - [x] Graphical User Interface
 
-## <p align="center"><b> Features </b></p>
+## <b> Features </b>
 
 ### [Add Tasks](#adding-tasks-back-to-features)
 <p> Add new tasks to your task list.</p>
@@ -44,7 +44,7 @@ Features supported:
 ### [Find Tasks](#find-tasks-back-to-features)
 <p> View all tasks that contains the keyword.</p>
 
-## <p align="center"><b> Usage </b></p>
+## <b> Usage </b>
 
 ### <u>Adding Tasks [(Back to features)](#-features-)</u>
 * #### `todo <Task Name>`
