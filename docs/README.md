@@ -160,14 +160,14 @@ BingChilling data are saved as a text file [JAR file location]/data/ekud.txt. Ad
 
 | Action   | Format, Examples |
 | -        | - |
-| todo     | `todo TASK` |
-| event    | `event TASK /at DATE`|
-| deadline | `deadline TASK /by DATE`|
-| find | `find career fair` |
+| todo     | `todo TASK` eg. `todo buy milk` |
+| event    | `event TASK /at DATE` eg. `event sports day /at 12/3/2021` |
+| deadline | `deadline TASK /by DATE` eg. `deadline assignment /by 11/4/2022` |
+| find | `find KEYWORD` eg. `find career fair` |
 | list | `list` |
-| mark | `mark 1` |
-| unmark | `unmark 1` |
-| postpone | `postone 1 12/12/1212` |
-| delete | `delete 1` |
+| mark | `mark INDEX` eg. `mark 1` |
+| unmark | `mark INDEX` eg. `unmark 1` |
+| postpone | `postpone INDEX DATE` eg. `postone 1 12/12/1212` |
+| delete | `delete INDEX` eg. `delete 1` |
 | clear | `clear` |
 | bye | `bye` |
