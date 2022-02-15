@@ -1,29 +1,43 @@
-# User Guide
+# DukeBot User Guide
 
-## Features 
+## What is DukeBot?
+Welcome! Duke is a personal bot helper to help keep track of your tasks :smile:
 
-### Feature-ABC
-
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+## Command format for DukeBot
+- Add a task
+    1. Todo task
+  ````
+  todo <description>
+  ````
+    2. Event task
+  ````
+  event <description> /at <dd/mm/yyyy> <time AM/PM>
+  ````
+    3. Deadline task
+   ````
+   deadline <description> /by <dd/mm/yyyy> <time AM/PM>
+   ````
+- List all the tasks you have
+   ````
+   list
+   ````
+- Delete a task
+   ````
+   delete <task number>
+   ````
+- Mark a task
+   ````
+   mark <task number>
+   ````
+- Unmark a task
+   ````
+   unmark <task number>
+   ````
+- Find a task
+   ````
+   find <description/keyword>
+   ````
+- Exit and save the program
+   ````
+   bye
+   ````
