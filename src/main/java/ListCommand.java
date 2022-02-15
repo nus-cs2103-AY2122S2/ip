@@ -5,6 +5,7 @@ public class ListCommand extends Command {
      * @param ui
      * @param storage
      */
+    /** Lists out all the commands*/
     public String execute(TaskList taskList, Ui ui, Storage storage) {
 
        return ui.printTasks(taskList);

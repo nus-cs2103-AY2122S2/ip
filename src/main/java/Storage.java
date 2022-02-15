@@ -15,6 +15,7 @@ class Storage {
      * @throws IOException
      * @throws DukeException
      */
+    /** Creates a storage file*/
    public Storage(String path) throws IOException, DukeException {
        String[] splits = path.split("/");
        File dir = new File(splits[0]);
@@ -38,6 +39,7 @@ class Storage {
      * @param taskList
      * @throws IOException
      */
+    /** Saves tasks to the storage file*/
     public void writeTasks(TaskList taskList ) throws IOException {
 
         StringBuilder textToAdd = new StringBuilder();
@@ -64,6 +66,14 @@ class Storage {
                         .append(((Event) curr).getAt())
                         .append(System.lineSeparator());
             }
+            else {
+                textToAdd.append("A ")
+                        .append(curr.isDone() ? "1 " : "0 ")
+                        .append(curr.getName())
+                        .append(System.lineSeparator())
+                        .append(((DoAfterTask) curr).getAfter())
+                        .append(System.lineSeparator());
+            }
         }
         fw.write(textToAdd.toString());
         fw.close();
@@ -75,6 +85,8 @@ class Storage {
      * @return
      * @throws FileNotFoundException
      */
+    /** Prints out tasks from the storage file*/
+
     public ArrayList<Task> readTasks( ) throws FileNotFoundException {
       ArrayList<Task> tasks = new ArrayList<>();
 

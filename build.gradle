@@ -43,8 +43,12 @@ test {
     }
 }
 
+checkstyle {
+    toolVersion = '8.29'
+}
+
 application {
-    mainClassName =  "SampleLauncher"
+    mainClassName = "SampleLauncher"
 }
 
 shadowJar {
@@ -52,9 +56,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-checkstyle {
-    toolVersion = '8.29'
-}
 
 run{
     standardInput = System.in

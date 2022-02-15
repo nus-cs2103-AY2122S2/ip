@@ -8,6 +8,7 @@ public class AddCommand extends Command {
      * @param toAdd
      */
     public AddCommand(Task toAdd) {
+
         this.toAdd = toAdd;
     }
 
@@ -18,6 +19,7 @@ public class AddCommand extends Command {
      * @param storage
      * @throws IOException
      */
+    /** Adds a new command to the TaskList*/
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.addTask(this.toAdd);
         storage.writeTasks(taskList);

@@ -5,6 +5,7 @@ public class ExitCommand extends Command {
      * @param ui
      * @param storage
      */
+    /** Changes status of a  command to the exit*/
     public String execute(TaskList taskList, Ui ui, Storage storage) {
 
         super.toggleExit();

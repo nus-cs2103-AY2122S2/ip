@@ -89,10 +89,12 @@ public class Ui {
     }
 
     public String readCommand() {
+
         return this.sc.nextLine();
     }
 
     public void closeScanner() {
+
         this.sc.close();
     }
 }
