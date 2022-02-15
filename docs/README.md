@@ -91,7 +91,7 @@ Note that the keyword doesn't have to match by a whole word.
 
 Usage: `sort [by] (order)`
 
-[by] can either be `date` | `name` | `type`
+[by] can either be `date`, `name` or `type`
 
 For sorting by date and name, you can specify `asc` or `dsc` to sort by ascending or descending order.
 
