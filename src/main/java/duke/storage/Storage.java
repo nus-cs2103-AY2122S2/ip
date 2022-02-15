@@ -53,11 +53,14 @@ public class Storage {
                 String[] temp = scanner.nextLine().split("\\|");
                 Task task;
 
-                if (temp[0].equals("D")) {
+                switch (temp[0]) {
+                case "D":
                     task = new Deadline(temp[2], LocalDate.parse(temp[3]));
-                } else if (temp[0].equals("E")) {
+                    break;
+                case "E":
                     task = new Event(temp[2], LocalDate.parse(temp[3]));
-                } else {
+                    break;
+                default:
                     task = new Todo(temp[2]);
                 }
 

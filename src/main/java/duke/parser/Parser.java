@@ -81,6 +81,7 @@ public class Parser {
         Task task = null;
 
         try {
+            Task task;
             String[] strings = userInput[1].split("/");
 
             if (userInput[1].equals("")) {
@@ -97,7 +98,12 @@ public class Parser {
             case TODO:
                 task = new Todo(userInput[1].strip());
                 break;
+            default:
+                task = null;
             }
+
+            taskList.add(task);
+            return "Got it, I have added " + task.getUserInput() + " to the list!\n";
         } catch (DukeException e) {
             return e.getMessage();
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -105,13 +111,6 @@ public class Parser {
         } catch (DateTimeParseException e) {
             return "OOPS!!! Duke could not understand given date! Please enter in yyyy-mm-dd format!";
         }
-
-        if (task != null) {
-            TaskList taskList = new TaskList();
-            taskList.add(task);
-            return "Got it, I have added " + task.getUserInput() + " to the list!\n";
-        }
-        return "";
     }
 
     /**

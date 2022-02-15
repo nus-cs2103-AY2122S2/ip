@@ -7,9 +7,9 @@ import java.time.LocalDate;
  */
 public class Task {
     private boolean isMarked;
-    private String description;
-    private String charId;
-    private LocalDate date;
+    private final String description;
+    private final String charId;
+    private final LocalDate date;
 
     /**
      * Creates a Task object with the relevant details.
