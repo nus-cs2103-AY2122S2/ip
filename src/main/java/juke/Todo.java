@@ -1,4 +1,4 @@
-package duke;
+package juke;
 
 /**
  * Represents the todo tasks input by the user

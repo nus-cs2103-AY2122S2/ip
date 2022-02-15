@@ -1,5 +1,5 @@
 
-package duke;
+package juke;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +17,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class Duke extends Application {
+public class Juke extends Application {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;

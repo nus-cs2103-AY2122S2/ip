@@ -1,4 +1,4 @@
-package duke;
+package juke;
 /**
  * Represents the event tasks input by the user
  */

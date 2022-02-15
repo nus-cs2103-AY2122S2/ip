@@ -1,4 +1,4 @@
-package duke;
+package juke;
 
 /**
  * Represents the tasks that the user inputs into the program, which is defined by

@@ -1,4 +1,4 @@
-package duke;
+package juke;
 
 public class Outputs {
 
