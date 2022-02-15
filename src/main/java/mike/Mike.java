@@ -147,6 +147,7 @@ public class Mike {
         String command = parser.getCommand();
         try {
             switch (command) {
+            case "ls":
             case "list":
                 message = printList();
                 break;
@@ -162,15 +163,18 @@ public class Mike {
                 int removeIndex = parser.getIndex();
                 message = removeTask(removeIndex);
                 break;
+            case "t":
             case "todo":
                 String todoName = parser.getTodoName();
                 message = addTodo(todoName);
                 break;
+            case "d":
             case "deadline":
                 String deadlineName = parser.getDeadlineName();
                 String deadlineDate = parser.getDeadlineDate();
                 message = addDeadline(deadlineName, deadlineDate);
                 break;
+            case "e":
             case "event":
                 String eventName = parser.getEventName();
                 String eventDate = parser.getEventDate();
