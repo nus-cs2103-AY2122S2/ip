@@ -15,6 +15,9 @@ import tasks.Task;
  */
 public class DeleteCommand extends Command {
 
+    // stores space.
+    private static final String SPACE = " ";
+
     /**
      * Constructor for DeleteCommand.
      * returns an instance of DeleteCommand.
@@ -32,7 +35,8 @@ public class DeleteCommand extends Command {
      */
     public static void delete(TaskList taskList, String message) {
 
-        String[] arr = message.split(" ");
+        assert message.contains(SPACE) : "Must contain space to find the task number.";
+        String[] arr = message.split(SPACE);
         int num = Integer.valueOf(arr[1]);
         if (num > 0 && num <= taskList.numOfTasks()) {
             Task task = taskList.remove(num - 1);
