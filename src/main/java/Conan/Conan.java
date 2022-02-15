@@ -15,9 +15,6 @@ import helper.Storage;
 import helper.TaskList;
 import helper.Ui;
 
-
-
-
 /**
  * <h1>Conan</h1>
  * <p>
@@ -64,7 +61,7 @@ public class Conan {
         String previousUser = EMPTY_STR_FILLER;
 
         if (storage.isFilePresent()) {
-            // the firstline of the file contains the username.
+            // the first line of the file contains the username.
             previousUser = storage.getPreviousUser();
         }
 
@@ -118,7 +115,6 @@ public class Conan {
     public CarryOn tell(String message) {
         CarryOn carryOn = CarryOn.NEXT;
         try {
-
             message = message.trim();
             Commands userCommand = CommandChecker.findAndCheck(message);
 
@@ -128,7 +124,6 @@ public class Conan {
                 break;
             case BYE:
                 ByeCommand.executeBye(this.username, this.storage, this.taskList);
-                Ui.printFarewell(this.username);
                 carryOn = CarryOn.STOP;
                 break;
             case DELETE:

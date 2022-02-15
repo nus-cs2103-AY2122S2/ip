@@ -121,11 +121,9 @@ public class DateHandler {
      * @throw WrongTimeArgumentException if the user inputs an invalid time.
      */
     public static void checkValidDate(String userDate) {
-
         // handle time checking
         if (userDate.contains(SPACE)) {
             String hourMinute = userDate.split(SPACE, LIMIT)[TIME_IDX].trim();
-
             if (hourMinute.length() != TIME_LENGTH) {
                 throw new WrongTimeArgumentException(userDate);
             }
@@ -135,7 +133,6 @@ public class DateHandler {
                     throw new WrongTimeArgumentException(userDate);
                 }
             }
-
             userDate = userDate.substring(START_INDEX, DATE_LENGTH).trim();
         }
 
@@ -154,11 +151,11 @@ public class DateHandler {
         }
 
         for (int i = 0; i < DATE_LENGTH; i++) {
-            if (i != firstSeparatorIdx && i != secondSeparatorIdx) {
-                if (!Character.isDigit(userDate.charAt(i))) {
+            boolean notFirstSeparator = i != firstSeparatorIdx;
+            boolean notSecondSeparator = i != secondSeparatorIdx;
+            boolean isNotDigit = !Character.isDigit(userDate.charAt(i));
+            if (notFirstSeparator && notSecondSeparator && isNotDigit) {
                     throw new WrongDateArgumentException(userDate);
-
-                }
             }
         }
     }

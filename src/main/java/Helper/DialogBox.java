@@ -47,6 +47,7 @@ public class DialogBox extends HBox {
      * flips the order of the image and label.
      */
     private void flip() {
+
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);

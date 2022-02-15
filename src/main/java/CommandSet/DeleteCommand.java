@@ -15,9 +15,12 @@ import tasks.Task;
  */
 public class DeleteCommand extends Command {
 
-    // stores space.
+    // stores the value of space.
     private static final String SPACE = " ";
 
+    // the index of the task number in the split array.
+    private static final int TASK_NUM_IDX = 1;
+  
     /**
      * Constructor for DeleteCommand.
      * returns an instance of DeleteCommand.
@@ -37,9 +40,10 @@ public class DeleteCommand extends Command {
 
         assert message.contains(SPACE) : "Must contain space to find the task number.";
         String[] arr = message.split(SPACE);
-        int num = Integer.valueOf(arr[1]);
+        int num = Integer.valueOf(arr[TASK_NUM_IDX]);
+
         if (num > 0 && num <= taskList.numOfTasks()) {
-            Task task = taskList.remove(num - 1);
+            Task task = taskList.remove(num - 1);  // to adjust with index starting with 0.
             Ui.printRemoved(task);
         } else {
             throw new FaultyTaskNumberException(num);

@@ -14,6 +14,15 @@ import helper.Ui;
  */
 public class Marking extends Command {
 
+    // stores the value of space.
+    private static final String SPACE = " ";
+
+    // the index of the task number in the split array.
+    private static final int TASK_NUM_IDX = 1;
+
+    // smallest task number
+    private static final int TASK_START_NUM = 1;
+
     /**
      * Constructor for Marking.
      * returns an instance of Marking.
@@ -30,11 +39,13 @@ public class Marking extends Command {
      * @throws FaultyTaskNumberException if the user inputs an invalid task number.
      */
     public static void markTask(String message, TaskList taskList) {
-        String[] arr = message.split(" ");
-        int num = Integer.valueOf(arr[1]);
-        if (num <= taskList.numOfTasks() && num > 0) {
-            taskList.get(num - 1).markDone();
-            Ui.printTaskCompleted(taskList.get(num - 1));
+
+        String[] arr = message.split(SPACE);
+        int num = Integer.valueOf(arr[TASK_NUM_IDX]);
+
+        if (num <= taskList.numOfTasks() && num >= TASK_START_NUM) {
+            taskList.get(num - 1).markDone();                // to adjust with index starting with 0.
+            Ui.printTaskCompleted(taskList.get(num - 1));    // to adjust with index starting with 0.
         } else {
             throw new FaultyTaskNumberException(num);
         }
@@ -48,11 +59,13 @@ public class Marking extends Command {
      * @throws FaultyTaskNumberException if the user inputs an invalid task number.
      */
     public static void unmarkTask(String message, TaskList taskList) {
-        String[] arr = message.split(" ");
-        int num = Integer.valueOf(arr[1]);
+
+        String[] arr = message.split(SPACE);
+        int num = Integer.valueOf(arr[TASK_NUM_IDX]);
+
         if (num > 0 && num <= taskList.numOfTasks()) {
-            taskList.get(num - 1).unMarkDone();
-            Ui.printUnmarked(taskList.get(num - 1));
+            taskList.get(num - 1).unMarkDone();         // to adjust with index starting with 0.
+            Ui.printUnmarked(taskList.get(num - 1));    // to adjust with index starting with 0.
         } else {
             throw new FaultyTaskNumberException(num);
         }

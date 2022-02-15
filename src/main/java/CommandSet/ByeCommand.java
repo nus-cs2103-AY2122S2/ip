@@ -2,6 +2,7 @@ package commandset;
 
 import helper.Storage;
 import helper.TaskList;
+import helper.Ui;
 
 /**
  * <h1>ByeCommand</h1>
@@ -32,5 +33,6 @@ public class ByeCommand extends Command {
 
         String toStore = username + "\n" + taskList.getTasks();
         storage.storeTasks(toStore);
+        Ui.printFarewell(username);
     }
 }

@@ -20,9 +20,6 @@ public class Task {
     // symbol for task done.
     private static final String DONE = "[X]";
 
-    // symbol for task not done.
-    private static final String NOT_DONE = "[ ]";
-
     // stores the start index value.
     private static final int START_INDEX = 0;
 
