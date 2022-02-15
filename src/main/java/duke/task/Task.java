@@ -22,7 +22,8 @@ public class Task {
     public String name;
 
     /**
-     * Constructor
+     * Constructor for Task
+     *
      * @param name name of the task
      */
     public Task (String name) {
@@ -31,6 +32,8 @@ public class Task {
     }
 
     /**
+     * Marks current Task object as done
+     *
      * markTask as done
      */
     public void setMarkedTask () {
@@ -38,6 +41,8 @@ public class Task {
     }
 
     /**
+     * Unmarks current Task object
+     *
      * unmarkTask
      */
     public void setUnmarkedTask() {
@@ -45,6 +50,7 @@ public class Task {
     }
 
     /**
+     * Returns whether current Task object has been marked
      *
      * @return boolean on whether task is marked
      */
@@ -53,24 +59,27 @@ public class Task {
     }
 
     /**
-     * Converts date to String format for printing
+     * Converts date to String format for display
+     *
      * @param date LocalDate for Deadline/Event tasks
-     * @return String format: converts from yyyy-mm-dd format to Aug dd, yyyy format
+     * @return String format: converts from yyyy-mm-dd format to mmm dd yyyy format, eg: Aug 21 2022
      */
     public String dateConverterToString(LocalDate date) {
         return DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date);
     }
 
     /**
-     * Converts time to String format for printing
+     * Converts time to String format for display
+     *
      * @param time LocalTime for Deadline/Event tasks
-     * @return String format: converts hh:mm format to hh:mm am/pm format
+     * @return String format: converts hh:mm format to hh:mm am/pm format eg: 1:30pm
      */
     public String timeConverterToString(LocalTime time) {
         return DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).format(time);
     }
 
     /**
+     * String representation of Task
      *
      * @return String version of task, with marked and name. E.g. [X] Task vs [✓] Task
      */

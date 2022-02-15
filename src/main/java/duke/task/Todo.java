@@ -20,6 +20,7 @@ public class Todo extends Task {
     }
 
     /**
+     * String representation of Todo
      *
      * @return String of Todo task, eg: [T][X] Todo
      */
