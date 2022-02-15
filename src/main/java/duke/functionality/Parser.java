@@ -16,7 +16,8 @@ public class Parser {
     public static final String ERROR_DESCRIPTION = "OOPS, The description of a command cannot be empty.";
     public static final String ERROR_MISSING_DATE = "OOPS, check again if you have the date and the description.";
     public static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-mm-dd";
-    public static final String ERROR_FORGET_SPACE = "You forgot a space somewhere...";
+    public static final String ERROR_FORGET_SPACE = "Something is wrong in the format of command, check user guide...";
+    public static final String ERROR_TASK_NOT_EXIST = "Task does not exist...";
     private static final int INDEX_AFTER_MARK_COMMAND = 5;
     private static final int INDEX_AFTER_UNMARK_COMMAND = 7;
     private static final int INDEX_AFTER_TODO_COMMAND = 5;
@@ -43,7 +44,7 @@ public class Parser {
             } else if (input.startsWith("unmark")) {
                 String taskNumber = input.substring(INDEX_AFTER_UNMARK_COMMAND);
                 output = taskList.unmarkTask(taskNumber);
-            } else if (input.startsWith("todo")) {
+            } else if (input.startsWith("todo ")) {
                 String description = input.substring(INDEX_AFTER_TODO_COMMAND);
                 output = taskList.addToDoTask(description);
             } else if (input.startsWith("deadline")) {
@@ -55,7 +56,7 @@ public class Parser {
             } else if (input.startsWith("delete")) {
                 String taskNumber = input.substring(INDEX_AFTER_DELETE_COMMAND);
                 output = taskList.deleteTask(taskNumber);
-            } else if (input.startsWith("find")) {
+            } else if (input.startsWith("find ")) {
                 String description = input.substring(INDEX_AFTER_FIND_COMMAND);
                 output = taskList.findTask(taskList, description);
             } else {
@@ -67,6 +68,8 @@ public class Parser {
             throw new DukeException(ERROR_MISSING_DATE);
         } catch (NumberFormatException error) {
             throw new DukeException(ERROR_FORGET_SPACE);
+        } catch (IndexOutOfBoundsException error) {
+            throw new DukeException(ERROR_TASK_NOT_EXIST);
         }
         return output;
     }
