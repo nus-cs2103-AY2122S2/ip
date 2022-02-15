@@ -27,10 +27,7 @@ public class Parser {
             StringBuilder sb = new StringBuilder();
 
             switch (words[0]) {
-            case "bye" -> System.out.println("    Bye!! See you again soon!!");
-
-            // if user requests to list their tasks
-            case "list" -> {
+                case "list" -> {
                 wf.flush();
                 sb = new StringBuilder();
                 sb.append("    Here are the tasks on your lists:\n");
@@ -125,10 +122,7 @@ public class Parser {
                     }
                 }
                 return sb.toString();
-
             }
-
-            // user add a todo task
             case "todo" -> {
                 words = command.split(" ", 2);
                 if (words.length < 2) {
@@ -143,7 +137,6 @@ public class Parser {
                     return sb.toString();
                 }
             }
-            // user add a event task
             case "event" -> {
                 sb = new StringBuilder();
                 words = findDate(command.split(" "));
@@ -164,15 +157,11 @@ public class Parser {
                 wf.println("D 0 " + words[0] + " | " + words[1]);
                 sb.append("\n    Now you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
                 return sb.toString();
-
             }
-            // user add items to list
                 default -> {
                     return "Sorry! I don't know what that means :'(";
                 }
             }
-        wf.close();
-        return  "    Sorry! I don't know what that means :'(";
     }
 
     /**
