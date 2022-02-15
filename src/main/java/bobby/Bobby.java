@@ -32,7 +32,6 @@ public class Bobby {
      * Driver method for Bobby
      */
     public void run() {
-        ui.printLogo();
         ui.printGreeting();
         while (true) {
             try {
