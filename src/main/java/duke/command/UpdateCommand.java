@@ -10,7 +10,6 @@ import duke.util.Ui;
  * Represents the update command to update a task's description.
  */
 public class UpdateCommand extends Command {
-    private static final String TWO_SPACES = "  ";
     private final int taskNum;
     private final String updatedDescription;
 
@@ -37,7 +36,7 @@ public class UpdateCommand extends Command {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
             Task updatedTask = taskList.update(this.taskNum, this.updatedDescription);
-            ui.setResponse("Done! This is the updated task:\n" + Ui.showIndent() + TWO_SPACES + updatedTask);
+            ui.setResponse("Done! This is the updated task:\n" + Ui.showIndent() + updatedTask);
             storage.saveToHardDisk(taskList);
         } else {
             throw new DukeException("Invalid task number. There are " + currentTotalTasks + " tasks in the list.");

@@ -8,7 +8,6 @@ import duke.task.Task;
  * Represents the list of tasks.
  */
 public class TaskList {
-    private static final String TWO_SPACES = "  ";
     private ArrayList<Task> tasks;
     private int totalTasks;
 
@@ -149,7 +148,7 @@ public class TaskList {
             Task task = tasks.get(n);
             if (task.hasKeyword(keyword)) {
                 count++;
-                list += "\n" + TWO_SPACES + count + "." + task;
+                list += "\n" + Ui.showIndent() + count + "." + task;
             }
         }
 

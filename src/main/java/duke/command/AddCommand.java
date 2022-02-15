@@ -33,9 +33,9 @@ public class AddCommand extends Command {
         taskList.add(this.task);
         assert taskList.getTotalTasks() > 0 : "Task list should have at least one task.";
 
-        ui.setResponse("Got it! I've added this task:\n  "
+        ui.setResponse("Got it! I've added this task:\n"
                 + Ui.showIndent() + this.task + "\n"
-                + Ui.showIndent() + taskList.getListStatus());
+                + taskList.getListStatus());
 
         storage.saveToHardDisk(taskList);
     }

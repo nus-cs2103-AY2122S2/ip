@@ -167,8 +167,8 @@ public class Parser {
         }
         String[] descrArr = description.split(" " + keyword + " ");
         if (descrArr.length == 1) {
-            throw new DukeException("Oops, please provide description in this format:\n" + Ui.showIndent()
-                + "description " + keyword + " yyyy-mm-dd HH:mm");
+            throw new DukeException("Oops, please provide description in this format:\n"
+                + "<description> " + keyword + " <date as yyyy-mm-dd> <time as HH:mm>");
         }
         return descrArr;
     }

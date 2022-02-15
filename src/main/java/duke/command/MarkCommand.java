@@ -10,7 +10,6 @@ import duke.util.Ui;
  * Represents the mark command to mark a task as done.
  */
 public class MarkCommand extends Command {
-    private static final String TWO_SPACES = "  ";
     private final int taskNum;
 
     /**
@@ -34,7 +33,7 @@ public class MarkCommand extends Command {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
             Task taskMarked = taskList.mark(this.taskNum);
-            ui.setResponse("Nice! You've completed this task:\n" + Ui.showIndent() + TWO_SPACES + taskMarked);
+            ui.setResponse("Nice! You've completed this task:\n" + Ui.showIndent() + taskMarked);
             storage.saveToHardDisk(taskList);
         } else {
             throw new DukeException("Invalid task number. There are " + currentTotalTasks + " tasks in the list.");
