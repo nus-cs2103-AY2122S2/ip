@@ -27,39 +27,45 @@ eye too!
    to your OS:
 
    <details>
-     <summary>Windows</summary>
+      <summary>Windows</summary>
+      <p>
    
-   1. In the windows search bar, type in "command prompt" and press Enter.
-   2. Type in `java -version` and press `Enter`.
-      1. If the version is displayed, this means Java is installed.
-      You just need to check whether the *version complies*.
-      2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
-      Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
-      
+         1. In the windows search bar, type in "command prompt" and press Enter.
+         2. Type in `java -version` and press `Enter`.
+            1. If the version is displayed, this means Java is installed.
+            You just need to check whether the *version complies*.
+            2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
+            Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
+         
+      </p>
    </details>
       
    <details>
      <summary>MacOS</summary>
+      <p>
 
-   1. Press `cmd + space` to bring up Spotlight Search. Type `terminal` and press `Enter` to open the terminal app.
-   2. Type in `java -version` and press `Enter`.
-      1. If the version is displayed, this means Java is installed.
-         You just need to check whether the *version complies*.
-      2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
-         Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
+         1. Press `cmd + space` to bring up Spotlight Search. Type `terminal` and press `Enter` to open the terminal app.
+         2. Type in `java -version` and press `Enter`.
+            1. If the version is displayed, this means Java is installed.
+               You just need to check whether the *version complies*.
+            2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
+               Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
       
+      </p>   
    </details>
    
    <details>
-     <summary>Linux</summary>
+      <summary>Linux</summary>
+      <p>
 
-   1. Open a new terminal window.
-   2. Type in `java -version` and press `Enter`.
-      1. If the version is displayed, this means Java is installed.
-         You just need to check whether the *version complies*.
-      2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
-         Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
+         1. Open a new terminal window.
+         2. Type in `java -version` and press `Enter`.
+            1. If the version is displayed, this means Java is installed.
+               You just need to check whether the *version complies*.
+            2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
+               Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
       
+      </p>
    </details>
       
 2. Download the latest version of `nikki.jar` [here](https://github.com/DavidTan0527/ip/releases/).
@@ -67,20 +73,25 @@ eye too!
 4. Double-click to start the app. A window similar to the picture below should pop up.
 <img src="assets/start.png" style="margin: 0 auto;" width="570" height="758" />
 5. Type each of the following commands in the chat box and press Enter to execute it. Some examples you can try:
+
    1. `todo buy fruits` : Add a ToDo called "buy fruits"
    2. `todo wash clothes` : Add a ToDo called "wash clothes"
    3. `mark 2` : Mark second task as done
    4. `list` : Show everything in the list
    5. `bye` : Save the list and exit the program
+
 6. Refer to the [Features](#features) section below to learn about more commands.
 
 ---
 
 ## Features 
+{% include note.html content="Words in `UPPER_CASE` are the parameters supplied by the user and
+should be changed for the desired value." %}
 
 ### Adding a ToDo: `todo`
+Adds a ToDo task to the list.
 
-Description of the feature.
+Format: `todo TASKNAME`
 
 Example of usage:
 
@@ -95,8 +106,7 @@ expected output
 ```
 
 ### Adding an Event: `event`
-
-Description of the feature.
+Adds a 
 
 ### Adding a Deadline: `deadline`
 
