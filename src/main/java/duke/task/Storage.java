@@ -56,33 +56,34 @@ public class Storage {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] lineSplit = line.split(" \\| ");
-
-                boolean isDone = lineSplit[1].equals("1");
-                LocalDateTime dateTime;
-                String description = lineSplit[2];
-
-                switch (lineSplit[0]) {
-                case "T":
-                    tasks.add(new ToDo(description, isDone));
-                    break;
-                case "E":
-                    dateTime = LocalDateTime.parse(lineSplit[3]);
-                    Duration duration = Duration.parse(lineSplit[4]);
-                    tasks.add(new Event(description, dateTime, duration, isDone));
-                    break;
-                case "D":
-                    dateTime = LocalDateTime.parse(lineSplit[3]);
-                    tasks.add(new Deadline(description, dateTime, isDone));
-                    break;
-                default:
-                    throw new DukeException("Invalid save data");
-                }
+                tasks.add(parseTask(line));
             }
         } catch (FileNotFoundException e) {
             return tasks;
         }
 
         return tasks;
+    }
+
+    private Task parseTask(String saveData) {
+        String[] lineSplit = saveData.split(" \\| ");
+
+        boolean isDone = lineSplit[1].equals("1");
+        LocalDateTime dateTime;
+        String description = lineSplit[2];
+
+        switch (lineSplit[0]) {
+        case "T":
+            return new ToDo(description, isDone);
+        case "E":
+            dateTime = LocalDateTime.parse(lineSplit[3]);
+            Duration duration = Duration.parse(lineSplit[4]);
+            return new Event(description, dateTime, duration, isDone);
+        case "D":
+            dateTime = LocalDateTime.parse(lineSplit[3]);
+            return new Deadline(description, dateTime, isDone);
+        default:
+            throw new DukeException("Invalid save data");
+        }
     }
 }
