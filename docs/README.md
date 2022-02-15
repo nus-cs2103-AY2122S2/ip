@@ -164,4 +164,3 @@ Example: `bye`
   <tr>
     <td>bye</td>
     <td><code>bye</code></td>
-</table>
