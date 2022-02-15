@@ -1,0 +1,14 @@
+#dialogContainer {
+    -fx-background-image: url("../images/fightscene.jpg");
+    -fx-background-position: center center;
+}
+
+#sendButton {
+    -fx-background-color: #F0E68C;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: black;
+    -fx-font-family: "Arial";
+    -fx-font-size: 15px;
+    -fx-padding: 5 20;
+}
