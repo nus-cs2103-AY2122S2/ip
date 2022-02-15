@@ -1,6 +1,12 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
@@ -16,9 +22,17 @@ public class Storage {
      *
      * @param filePath the filepath used to store data and load data
      */
-    Storage(Path filePath) {
-        this.file = filePath.toFile();
-        this.list = new ArrayList<Task>();
+    Storage(Path filePath, Path dirPath) throws DukeException {
+        try {
+            if (!filePath.toFile().exists()) {
+                dirPath.toFile().mkdirs();
+                Files.createFile(filePath);
+            }
+            this.file = filePath.toFile();
+            this.list = new ArrayList<Task>();
+        } catch (IOException e) {
+            throw new DukeException("Loading error");
+        }
     }
 
     /**

@@ -11,6 +11,8 @@ import java.util.Scanner;
 public class BH {
     private static final Path FILEPATH = Paths.get(System.getProperty("user.home"),
             "Downloads", "NUS", "CS2103", "ip", "data", "duke.txt");
+    private static final Path DIRPATH = Paths.get(System.getProperty("user.home"),
+            "Downloads", "NUS", "CS2103", "ip", "data");
     //"/Users/brandonrhan/Downloads/NUS/CS2103/ip/data/duke.txt";
     private TaskList taskList;
     private Storage storage;
@@ -24,7 +26,7 @@ public class BH {
      * @throws DukeException If the filepath is invalid
      */
     public BH() throws DukeException {
-        this.storage = new Storage(FILEPATH);
+        this.storage = new Storage(FILEPATH, DIRPATH);
         this.taskList = new TaskList(this.storage.load());
         this.ui = new Ui();
         this.parser = new Parser(this.ui, this.taskList, this.storage);
