@@ -83,12 +83,16 @@ public class TaskList {
     }
 
     /**
-     * Replaces internal task list with a shallow copy of input task list.
+     * Replaces internal task list with a deep copy of input task list.
      *
      * @param taskList Task list to be copied.
      */
     public void copy(TaskList taskList) {
-        this.tasks = new ArrayList<>(taskList.tasks);
+        TaskList newTaskList = new TaskList();
+        for (Task task : taskList.tasks) {
+            newTaskList.add(task.copy());
+        }
+        this.tasks = new ArrayList<>(newTaskList.tasks);
     }
 
     @Override

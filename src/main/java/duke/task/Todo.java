@@ -27,6 +27,16 @@ public class Todo extends Task {
     }
 
     /**
+     * Creates a copy of the todo task.
+     *
+     * @return Copy of the todo task.
+     */
+    @Override
+    public Todo copy() {
+        return new Todo(this.description, this.isMarked);
+    }
+
+    /**
      * Reformats and returns string representation of todo task.
      *
      * @return Reformatted string representation of todo task.

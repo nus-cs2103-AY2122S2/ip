@@ -37,6 +37,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Creates a copy of the deadline task.
+     *
+     * @return Copy of the deadline task.
+     */
+    @Override
+    public Deadline copy() {
+        return new Deadline(this.description, this.isMarked, this.byTime);
+    }
+
+    /**
      * Reformats and returns string representation of deadline task.
      *
      * @return Reformatted string representation of deadline task.

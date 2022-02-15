@@ -37,6 +37,16 @@ public class Event extends Task {
     }
 
     /**
+     * Creates a copy of the event task.
+     *
+     * @return Copy of the event task.
+     */
+    @Override
+    public Event copy() {
+        return new Event(this.description, this.isMarked, this.atTime);
+    }
+
+    /**
      * Reformats and returns string representation of event task.
      *
      * @return Reformatted string representation of event task.

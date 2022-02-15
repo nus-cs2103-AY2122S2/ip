@@ -53,6 +53,13 @@ public abstract class Task {
     public abstract String toData();
 
     /**
+     * Creates a copy of the task.
+     *
+     * @return Copy of the task.
+     */
+    public abstract Task copy();
+
+    /**
      * Computes and returns baseline string representation of task.
      *
      * @return Computed baseline string representation of task.
