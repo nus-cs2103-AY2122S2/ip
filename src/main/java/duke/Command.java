@@ -9,7 +9,7 @@ import java.text.ParseException;
 abstract class Command {
 
     abstract String runCommand(TaskList taskList, Ui ui, Storage storage)
-            throws IOException, ParseException;
+            throws IOException, ParseException, DukeException;
 
     @Override
     public String toString() {

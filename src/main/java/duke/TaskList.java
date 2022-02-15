@@ -22,8 +22,12 @@ public class TaskList {
      * To delete a task in the list of tasks.
      * @param index the index of the task to be deleted.
      */
-    public void deleteTask(int index) {
-        taskArrayList.remove(index);
+    public void deleteTask(int index) throws DukeException {
+        try {
+            taskArrayList.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("No such task");
+        }
     }
 
     /**
@@ -80,8 +84,14 @@ public class TaskList {
      * @param index the index of the task to be retrieved.
      * @return the task that is requested.
      */
-    public Task getTask(int index) {
-        return taskArrayList.get(index);
+    public Task getTask(int index) throws DukeException {
+        Task toReturn;
+        try {
+            toReturn = taskArrayList.get(index);
+            return toReturn;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task does not exist");
+        }
     }
 
     /**

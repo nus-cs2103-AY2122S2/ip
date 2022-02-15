@@ -1,5 +1,7 @@
 package duke;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -25,14 +27,30 @@ public class HelpCommand extends Command {
                 + "(eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM)\n"
                 + "    4. Type list to see what are the tasks on hand.\n";
 
-        String messageToWindow = "Hello. You can run a few commands with this machine.\n"
-                + "1. Type todo to create a task at hand. (eg. todo homework today $HIGH)\n"
-                + "2. Type event to create an event. \n(eg. event Career Fair /at 26/01/2022 10:00 AM $LOW)\n"
-                + "3. Type deadline to create an deadline. \n"
-                + "(eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM $MEDIUM)\n"
-                + "4. Type list to see what are the tasks on hand.\n";
+        String messagetoUI = "Help window is opened separately";
 
         ui.outputMessage(message);
-        return messageToWindow;
+        OpenHelpWindow();
+        return messagetoUI;
+    }
+
+    /**
+     * Open help information on another window.
+     */
+    private void OpenHelpWindow() {
+        int width = 400;
+        String title = "Help";
+
+        Runnable r = () -> {
+            String html = "<html><body width='%1s'><h1>Commands Available</h1>"
+                    + "<p>Hello. You can run a few commands with this machine. "
+                    + "<p>1. Type todo to create a task at hand. (eg. todo homework today $HIGH) "
+                    + "<p>2. Type event to create an event. (eg. event Career Fair /at 26/01/2022 10:00 AM $LOW)"
+                    + "<p>3. Type deadline to create an deadline. (eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM $MEDIUM)"
+                    + "<p>4. Type list to see what are the tasks on hand.";
+            JOptionPane.showMessageDialog(null, String.format(html, width, width),
+                    title, JOptionPane.INFORMATION_MESSAGE,null);
+        };
+        SwingUtilities.invokeLater(r);
     }
 }

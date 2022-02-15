@@ -136,7 +136,7 @@ public class Duke extends Application {
             String returnMessage = c.runCommand(taskList, ui, storage);
             return returnMessage;
         } catch (DukeException e) {
-            return "Error, please try again";
+            return e.getMessage();
         }
 
     }

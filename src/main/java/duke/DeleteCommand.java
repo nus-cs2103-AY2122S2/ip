@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
      * @param storage The file system for reading and writing into the database.
      */
     @Override
-    String runCommand(TaskList taskList, Ui ui, Storage storage) {
+    String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String indentation = "    ";
         Task t = taskList.getTask(index);
         taskList.deleteTask(index);
