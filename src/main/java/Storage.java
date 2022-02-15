@@ -10,16 +10,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.nio.file.Path;
 
 public class Storage {
 
-    private static final File FOLDER_PATH = new File("../../../data");
-    private static final File DATA_PATH = new File("../../../data/data.txt");
+    String currentDir = System.getProperty("user.dir");
+    Path currentPath = Path.of(currentDir + File.separator + "data");
+    private final File FOLDER_PATH = new File(currentPath.toString());
+    private final File DATA_PATH = new File(currentPath.toString() + File.separator + "duke.txt");
 
     public Storage(){}
 
     @SuppressWarnings("Unchecked")
-    public static void readFile() {
+    public void readFile() {
         ArrayList<Task> toDoList = new ArrayList<>();
         try {
             if (FOLDER_PATH.mkdir()) {
@@ -50,36 +53,7 @@ public class Storage {
         }
     }
 
-    //    @SuppressWarnings("Unchecked")
-//    public static ArrayList<Task> load() {
-//        ArrayList<Task> toDoList = new ArrayList<>();
-//        try {
-//
-//            if (FOLDER_PATH.mkdir()) {
-//                Ui.print("Folder is created!\n");
-//            } else {
-//                Ui.print("Folder already exists.\n");
-//            }
-//            if (DATA_PATH.createNewFile()) {
-//                Ui.print("File is created!\n");
-//            } else {
-//                Ui.print("File already exists.\n");
-//                FileInputStream reader = new FileInputStream(DATA_PATH);
-//                ObjectInputStream listInput = new ObjectInputStream(reader);
-//                try {
-//                    toDoList = (ArrayList<Task>) listInput.readObject();
-//                    listInput.close();
-//                } catch (ClassNotFoundException e) {
-//                    Ui.print("class not found\n");
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return toDoList;
-//    }
-
-    public static void writeToFile() {
+    public void writeToFile() {
         try {
 //            FileWriter fw = new FileWriter("data.txt",false);
             FileOutputStream writer = new FileOutputStream(DATA_PATH);
@@ -93,19 +67,7 @@ public class Storage {
             System.out.println("unable to write file");
         }
     }
-//    public static void save() {
-//        try {
-//            FileOutputStream writer = new FileOutputStream(DATA_PATH);
-//            ObjectOutputStream saveList = new ObjectOutputStream(writer);
-//            saveList.writeObject(TaskList.getToDoList());
-//            saveList.close();
-//            Ui.print("your list has been saved!\n");
-//        } catch (FileNotFoundException e) {
-//            Ui.print("file not found");
-//        } catch (IOException e) {
-//            Ui.print("failed to write to file");
-//        }
-//    }
+
 }
 
 //@@author
