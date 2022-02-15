@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    public static final String type = "D";
     public static final String DELIMITER = " /by ";
     protected LocalDate byDate;
     protected LocalTime byTime;
@@ -35,8 +36,8 @@ public class Deadline extends Task {
      *
      * @return Returns the task type in String.
      */
-    protected String getType() {
-        return "D";
+    public String getType() {
+        return type;
     }
 
     /**

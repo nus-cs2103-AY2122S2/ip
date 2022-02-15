@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     public static final String DELIMITER = " /at ";
+    public static final String type = "E"; // Represents the event task type.
     protected LocalDate atDate;
     protected LocalTime atTime;
 
@@ -36,7 +37,7 @@ public class Event extends Task {
      * @return Returns the task type in String.
      */
     public String getType() {
-        return "E";
+        return type;
     }
 
     /**

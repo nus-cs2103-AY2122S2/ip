@@ -2,9 +2,12 @@ package duke.io;
 
 import duke.exception.DukeException;
 import duke.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.Ui.Ui;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,9 +29,8 @@ public class Storage {
     private final File file;
     private final Parser parser;
 
-    private final String event = "E"; // Represents the event task type.
-    private final String deadline = "D"; // Represents the deadline  task type.
-    private final String todo = "T"; // Represents the todo task type.
+     // Represents the deadline  task type.
+     // Represents the todo task type.
 
     /**
      * Load the storage instance from local storage if exist else create a new instance.
@@ -80,10 +82,10 @@ public class Storage {
                 boolean isDone = inputLine[1].equals("1");
                 String description = inputLine[2];
                 switch (type) {
-                    case todo:
+                    case ToDo.type:
                         taskList.addToDo(description, isDone);
                         break;
-                    case event:
+                    case Event.type:
                         dateTimeInput = inputLine[3].split(" ");
                         if (dateTimeInput.length != 2) {
                             throw new DukeException(Ui.MSG_FILEREADERROR);
@@ -92,7 +94,7 @@ public class Storage {
                         time = parser.formatTime(date, dateTimeInput[1]);
                         taskList.addEvent(description, isDone, date, time);
                         break;
-                    case deadline:
+                    case Deadline.type:
                         dateTimeInput = inputLine[3].split(" ");
                         if (dateTimeInput.length != 2) {
                             throw new DukeException(Ui.MSG_FILEREADERROR);

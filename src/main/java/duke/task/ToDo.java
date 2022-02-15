@@ -7,6 +7,9 @@ package duke.task;
  * @version 1.0
  */
 public class ToDo extends Task {
+
+    public static final  String type = "T";
+
     /**
      * Constructor to create a ToDo.
      *
@@ -22,8 +25,8 @@ public class ToDo extends Task {
      *
      * @return Returns the task type in String.
      */
-    protected String getType() {
-        return "T";
+    public String getType() {
+        return type;
     }
 
     @Override

@@ -36,7 +36,7 @@ public abstract class Task {
      *
      * @return Returns the task type in String.
      */
-    protected abstract String getType();
+    public abstract String getType();
 
     private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done duke.task with X
