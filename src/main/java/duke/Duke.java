@@ -30,7 +30,8 @@ public class Duke {
         try {
             this.storage = new Storage(this.tasks);
         } catch (IOException e) {
-            ui.formatFeedbackMessage("\n\tError reading from duke.txt\n");
+            // error message not meant for the user.
+            System.out.println(ui.formatFeedbackMessage("\n\tError reading from duke.txt\n"));
         }
     }
 
