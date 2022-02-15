@@ -61,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task to be completed in the list.
+     * Marks the task to be completed in the list.
      *
      * @param input Input given by the user.
      * @return A string reply that notifies the user that the task is marked.
@@ -83,7 +83,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark the task in the list.
+     * Unmarks the task in the list.
      *
      * @param input Input given by the user.
      * @return A string reply that notifies the user that the task is unmarked.
