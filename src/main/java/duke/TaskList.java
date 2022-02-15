@@ -28,8 +28,8 @@ public class TaskList {
     }
 
     /**
-     * Mark or un-mark the respective index of the task in the ArrayList given by the input.
      * Returns a string of an acknowledgement if successful, else returns an edge case warning.
+     * Marks or un-marks the respective index of the task in the ArrayList given by the input.
      *
      * @param input The respective index of the ArrayList needed to be mark or unmarked.
      * @param arr The ArrayList with the current list of tasks.
@@ -197,7 +197,7 @@ public class TaskList {
      * @return Help Text
      */
     public String help() {
-        String helpString = "Oh I see you need help! Fret not! I'm here to help. \n"
+        return "Oh I see you need help! Fret not! I'm here to help. \n"
                 + "Ok, so we have several options that you can type. Let's go over them. \n"
                 + "\n"
                 + "1. ToDo \n"
@@ -218,6 +218,5 @@ public class TaskList {
                 + "For example, type in delete 1 to delete the first item in the list \n"
                 + "\n"
                 + "I hope that answers your questions!";
-        return helpString;
     }
 }

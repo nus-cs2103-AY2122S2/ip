@@ -68,7 +68,7 @@ public class Storage {
     //@@author
 
     /**
-     * Will invoke save command to save the current list into data/duke.ser to be loaded in future
+     * Invokes save command to save the current list into data/duke.ser to be loaded in future
      * sessions. Then, it will bid farewell to the user.
      *
      * @param arr The list of tasks that Duke has for the current session.
