@@ -143,7 +143,7 @@ public class Parser {
                     throw new DukeException("unknown error occurred");
                 }
             } else if (Command.CommandType.TODO.equals(firstArg)) {
-                String content = inputCommand.substring(4);
+                String content = inputCommand.substring(5);
                 Task taskObj = new ToDo(content, ui);
                 return new AddCommand(taskObj, inputArray);
             } else if (Command.CommandType.MARK.equals(firstArg)) {
