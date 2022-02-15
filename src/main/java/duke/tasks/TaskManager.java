@@ -163,6 +163,10 @@ public class TaskManager {
         return this.uiManager.exit();
     }
 
+    public String welcome() {
+        return uiManager.welcome(size());
+    }
+
     /**
      * @return a String representation of the list of Task Objects
      */

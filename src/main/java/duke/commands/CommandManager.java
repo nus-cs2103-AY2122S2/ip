@@ -39,7 +39,7 @@ public class CommandManager {
      * Saves task list into a ser file upon exit.
      */
     public void run() {
-        uiManager.welcome();
+       uiManager.start();
         try {
             this.listLoader.loadList();
             uiManager.printList(taskManager);
@@ -65,6 +65,8 @@ public class CommandManager {
                 return taskManager.exit();
             case "list":
                 return uiManager.printList(taskManager);
+            case "hello":
+                return taskManager.welcome();
             case "todo":
                 AddTaskCommand todo = new AddTaskCommand(this.uiManager, this.taskManager, command[1], Type.TODO);
                 return todo.execute();

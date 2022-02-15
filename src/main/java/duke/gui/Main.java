@@ -24,6 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Larry Bot");
             fxmlLoader.<MainWindow>getController().setLauncher(commandManager);
             stage.show();
         } catch (IOException e) {
