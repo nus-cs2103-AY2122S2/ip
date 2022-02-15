@@ -246,9 +246,7 @@ public class Juke extends Application {
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
-        sendButton.setStyle("-fx-font: Courier;" +
-                "-fx-font-family: Courier;" +
-                "-fx-font-size: 20;" +
+        sendButton.setStyle("-fx-font-size: 20;" +
                 "-fx-text-fill: #FF69B4;" +
                 "-fx-background-color: #89cff0 ; " +
                 "-fx-background-radius: 10");
@@ -286,8 +284,8 @@ public class Juke extends Application {
 
         userInput.setPrefSize(280, 50);
         userInput.setTranslateX(10);
-        userInput.setStyle("-fx-font: Courier;" +
-                "-fx-font-family: Courier;" +
+        userInput.setStyle(
+                "-fx-font-family: Times;" +
                 "-fx-font-size: 20;" +
                 "-fx-text-fill: #a87bab;" +
                 "-fx-background-color: #89cff0 ; " +
