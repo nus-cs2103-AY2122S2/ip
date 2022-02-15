@@ -1,24 +1,250 @@
-# Duke project template
+# ConnorBot User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+**ConnorBot v1.1.0** is a desktop application that manages your tasks and keeps track of them for you. It comes with a Graphical User Interface (GUI) that looks beautiful and organised, making your task management efficient and easy to do. 
 
-## Setting up in Intellij
+## Features 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### Listing all tasks
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+* [`list`](#list---lists-all-tasks)
+
+### Adding a task
+
+* [`todo`](#todo---adds-a-todo-task)
+* [`deadline`](#deadline---adds-a-deadline-task)
+* [`event`](#event---adds-an-event-task)
+
+### Deleting a task
+
+* [`delete`](#delete---deletes-a-task)
+
+### Clearing all tasks
+
+* [`clear`](#clear---clears-all-tasks)
+
+### Marking/Unmarking a task
+
+* [`mark`](#mark---marks-a-task-as-completed)
+* [`unmark`](#unmark---unmarks-a-task)
+
+### Finding a task
+
+* [`find`](#find---finds-a-task)
+
+### Sorting tasks
+
+* [`sort`](#sort---sorts-tasks)
+
+### Exiting the program
+
+* [`exit`](#exit---exits-the-program)
+
+## Usage
+
+### `list` - Lists all tasks
+
+Shows a list of all current tasks recorded in ConnorBot.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+```
+Here are your current tasks:
+    1. [T][ ] Call Mom
+	2. [E][ ] Wedding Party (At: Mar 14 2022 8:30PM)
+	...
+```
+
+### `todo` - Adds a ToDo task
+
+Adds a ToDo task into the task list.
+
+Format:
+
+`todo {task}`
+
+Example of usage:
+
+`todo Call Mom`
+
+Expected outcome:
+
+```
+Alright, I've added a new task:
+    [T][ ] Laundry
+You have 3 tasks.
+```
+
+### `deadline` - Adds a Deadline task
+
+Adds a Deadline task into the task list.
+
+Format:
+
+`deadline {task} /by {DD-MM-YYYY HH:MM}`
+
+Example of usage:
+
+`deadline Assignment /by 15-05-2022 15:30`
+
+Expected outcome:
+
+```
+Alright, I've added a new task:
+    [D][ ] Assignment (By: May 15 2022 3:00PM)
+You have 4 tasks.
+```
+
+### `event` - Adds an Event task
+
+Adds a Event task into the task list.
+
+Format:
+
+`event {task} /at {DD-MM-YYYY HH:MM}`
+
+Example of usage:
+
+`event Birthday Party /at 13-04-2022 10:00`
+
+Expected outcome:
+
+```
+Alright, I've added a new task:
+    [E][ ] Birthday Party (At: Apr 13 2022 10:00AM)
+You have 5 tasks.
+```
+
+### `delete` - Deletes a task
+
+Deletes a task using its index from the task list.
+
+Format:
+
+`delete {index}`
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+```
+Alright, I've deleted the task:
+    [T][ ] Call Mom
+```
+
+### `clear` - Clears all tasks
+
+Clears all tasks from the task list.
+
+Example of usage:
+
+`clear`
+
+Expected outcome:
+
+```
+Poof! All your tasks are cleared!
+```
+
+### `mark` - Marks a task as completed
+
+Marks a task as completed using its index in the task list.
+
+Format:
+
+`mark {index}`
+
+Example of usage:
+
+`mark 3`
+
+Expected outcome:
+
+```
+Good job! I've marked the following task as completed:
+    [D][X] Assignment (By: May 15 2022 3:00PM)
+```
+
+### `unmark` - Unmarks a task
+
+Unmarks a task as uncompleted using its index in the task list.
+
+Format:
+
+`unmark {index}`
+
+Example of usage:
+
+`unmark 3`
+
+Expected outcome:
+
+```
+Understood. I've unmarked the following task:
+    [D][ ] Assignment (By: May 15 2022 3:00PM)
+```
+
+### `find` - Finds a task
+
+Finds a task name in the task list by a keyword. All tasks that contain the keyword will be shown. The keyword can be more than one word or part of a word. The search is case-insensitive.
+
+Format:
+
+`find {keyword}`
+
+Example of usage:
+
+`find party`
+
+Expected outcome:
+
+```
+Here are the matching tasks in your list:
+    [E][ ] Wedding Party (At: Mar 14 2022 8:30PM)
+    [E][ ] Birthday Party (At: Apr 13 2022 10:00AM)
+```
+
+### `sort` - Sorts tasks
+
+Sorts tasks by the given argument. Currenetly there are two ways to sort:
+* `type` sorts tasks by their type, ToDos, Deadlines and Events in that order.
+* `time` sorts tasks by chronological order. Todos are put at the end since they do not have a specified time.
+
+Format:
+
+`sort type`
+`sort time`
+
+Example of usage:
+
+`sort time`
+
+Expected outcome:
+
+```
+Sorting tasks chronologically...
+Here are your current tasks:
+    1. [E][ ] Wedding Party (At: Mar 14 2022 8:30PM)
+    2. [E][ ] Birthday Party (At: Apr 13 2022 10:00AM)
+    3. [D][ ] Assignment (By: May 15 2022 3:00PM)
+    4. [T][ ] Laundry	
+```
+
+### `exit` - Exits the program
+
+Disables any further input, bids farewell to the user, and closes itself after 2 seconds.
+
+Example of usage:
+
+`exit`
+
+Expected outcome:
+
+```
+Farewell. See you next time!
+```
