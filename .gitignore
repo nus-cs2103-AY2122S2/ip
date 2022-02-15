@@ -3,15 +3,14 @@
 /out/
 /*.iml
 
-# Gradle build files
-/.gradle/
-/build/
-src/main/resources/docs/
-
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
+*.class
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Ignore Gradle build output directory
+build
