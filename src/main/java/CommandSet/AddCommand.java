@@ -92,17 +92,25 @@ public class AddCommand extends Command {
         }
 
 
-        // get the date and find the tasks due on that date
-        TaskList clashes = taskList.getTasksDueOn(task.getDate());
+        // checks if there has been a similar task
+        TaskList similarTasks = taskList.getTasksContaining(task.getTask());
 
-        taskList.add(task);
-
-        if (clashes.numOfTasks() == EMPTY_TASKLIST) { // no clashes.
-            Ui.printAdded(task.getTask(), taskList.numOfTasks());
+        if (similarTasks.numOfTasks() != EMPTY_TASKLIST) {
+            Ui.printFoundSimilarTask(similarTasks);
         } else {
-            Ui.printClashes(clashes);
-        }
 
+            // checks for any possible clashes.
+            TaskList clashes = taskList.getTasksDueOn(task.getDate());
+
+            // add the task.
+            taskList.add(task);
+
+            if (clashes.numOfTasks() == EMPTY_TASKLIST) { // no clashes.
+                Ui.printAdded(task.getTask(), taskList.numOfTasks());
+            } else {
+                Ui.printClashes(clashes);
+            }
+        }
 
 
     }

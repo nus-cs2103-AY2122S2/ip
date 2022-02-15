@@ -276,6 +276,23 @@ public class Ui {
         }
     }
 
+    /**
+     * prints a warning that similar task has been found.
+     *
+     * @param taskList the list of use tasks.
+     */
+    public static void printFoundSimilarTask(TaskList taskList) {
+        String str = "Found similar task(s), please delete them if you want to add the new task."
+                + taskList.toString();
+        try {
+            FileWriter writer = new FileWriter(PATH_TEMP_FILE);
+            writer.write(str);
+            writer.close();
+        } catch (IOException e) {
+            Ui.printMessage(Ui.getError() + e.toString());
+        }
+    }
+
 
     /**
      * reads the text written to the file.

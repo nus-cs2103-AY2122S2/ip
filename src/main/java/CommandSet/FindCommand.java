@@ -34,6 +34,6 @@ public class FindCommand extends Command {
         } else {
             Ui.printMessage(tasksContainingWord.toString());
         }
-
     }
+
 }
