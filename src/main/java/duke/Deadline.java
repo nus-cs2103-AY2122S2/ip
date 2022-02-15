@@ -10,7 +10,7 @@ public class Deadline extends Task {
     private final LocalDate by;
 
     /**
-     * Construct an instance of a deadline, which is unmarked by default.
+     * Constructs an instance of a deadline, which is unmarked by default.
      *
      * @param description A string representing the task description.
      * @param by A String representing a time in the format of "yyyy-mm-dd"
@@ -21,7 +21,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Construct an instance of a marked or unmarked deadline.
+     * Constructs an instance of a marked or unmarked deadline.
      *
      * @param description A string representing the task description.
      * @param by A String representing a time in the format of "yyyy-mm-dd".

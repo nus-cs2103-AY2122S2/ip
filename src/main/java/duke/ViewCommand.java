@@ -25,7 +25,7 @@ public class ViewCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, PlaceList places, Ui ui,
-                          Storage storageTask, Storage storagePlace) throws IOException{
+                          Storage storageTask, Storage storagePlace) throws IOException {
         try {
             int placeIdx = idx - 1;
             if (placeIdx >= places.size() || placeIdx < 0) {

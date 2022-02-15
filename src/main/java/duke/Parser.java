@@ -55,8 +55,8 @@ public class Parser {
                 return new UnmarkCommand(firstWord, taskNum);
             case "deadline":
                 description = command.substring(firstWord.length() + 1);
-                assert !description.contains("(") || !description.contains(")") :
-                        "Please don't use brackets in the deadline name";
+                assert !description.contains("(") || !description.contains(")")
+                        : "Please don't use brackets in the deadline name";
                 description = description.split(" /by ")[0];
                 time = command.split(" /by ")[1];
                 return new AddCommand(firstWord, description, time);
@@ -68,8 +68,8 @@ public class Parser {
                 return new AddCommand(firstWord, description);
             case "event":
                 description = command.substring(firstWord.length() + 1);
-                assert !description.contains("(") || !description.contains(")") :
-                        "Please don't use brackets in the event name";
+                assert !description.contains("(") || !description.contains(")")
+                        : "Please don't use brackets in the event name";
                 description = description.split(" /at ")[0];
                 time = command.split(" /at ")[1];
                 return new AddCommand(firstWord, description, time);
@@ -84,8 +84,8 @@ public class Parser {
                     throw new DukeException("Uh-oh! There is nothing to add here!");
                 }
                 description = command.substring(firstWord.length() + 1);
-                assert !description.contains("[") || !description.contains("]") :
-                        "Please don't use brackets in the place name";
+                assert !description.contains("[") || !description.contains("]")
+                        : "Please don't use brackets in the place name";
                 String name = description.split(" /desc ")[0];
                 description = command.split(" /desc ")[1];
                 return new AddPlaceCommand(firstWord, name, description);

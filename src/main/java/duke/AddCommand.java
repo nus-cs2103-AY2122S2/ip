@@ -41,7 +41,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, PlaceList places, Ui ui,
-                          Storage storageTask, Storage storagePlace) throws IOException{
+                          Storage storageTask, Storage storagePlace) throws IOException {
         try {
             Task task;
             switch (this.getFirstWord()) {
@@ -74,8 +74,8 @@ public class AddCommand extends Command {
      * @return a string representing the response to the user input after successful addition of the task.
      */
     public String getOutput(String task, int size) {
-        return "Got it. I've added this task:\n" +
-                "  " + task + "\n" +
-                "Now you have " + size + " tasks in the list.";
+        return "Got it. I've added this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 }

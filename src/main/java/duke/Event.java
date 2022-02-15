@@ -10,7 +10,7 @@ public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Construct an instance of an event, which is unmarked by default.
+     * Constructs an instance of an event, which is unmarked by default.
      *
      * @param description A string representing the task description.
      * @param at A String representing a time in the format of "yyyy-mm-dd"
@@ -21,7 +21,7 @@ public class Event extends Task {
     }
 
     /**
-     * Construct an instance of a marked or unmarked event.
+     * Constructs an instance of a marked or unmarked event.
      *
      * @param description A string representing the task description.
      * @param at A String representing a time in the format of "yyyy-mm-dd".

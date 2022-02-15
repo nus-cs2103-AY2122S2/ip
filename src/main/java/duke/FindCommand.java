@@ -25,7 +25,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, PlaceList places, Ui ui,
-                          Storage storageTask, Storage storagePlace) throws IOException{
+                          Storage storageTask, Storage storagePlace) throws IOException {
         int taskCount = 0;
         StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
         for (Task task : tasks.getList()) {

@@ -116,8 +116,8 @@ public class TaskList {
         while (line != null) {
             assert line.length() >= 8 : "Please enter a valid file path";
             String taskType = String.valueOf(line.charAt(1));
-            assert taskType.equals("T") || taskType.equals("E") || taskType.equals("D") :
-                    "Please enter a valid file path";
+            assert taskType.equals("T") || taskType.equals("E") || taskType.equals("D")
+                    : "Please enter a valid file path";
             boolean isMarked = String.valueOf(line.charAt(4)).equals("X");
             if (taskType.equals("T")) {
                 Task task = new Todo(line.substring(7));

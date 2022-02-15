@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, PlaceList places, Ui ui,
-                          Storage storageTask, Storage storagePlace) throws IOException{
+                          Storage storageTask, Storage storagePlace) throws IOException {
         try {
             int taskIdx = taskNum - 1;
             if (taskIdx >= tasks.size() || taskIdx < 0) {

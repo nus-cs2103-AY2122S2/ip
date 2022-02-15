@@ -30,12 +30,12 @@ public class AddPlaceCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, PlaceList places, Ui ui,
-                          Storage storageTask, Storage storagePlace) throws IOException{
+                          Storage storageTask, Storage storagePlace) throws IOException {
         Place place = new Place(this.name, this.description);
         places.add(place);
         storagePlace.update(places);
-        return "Got it. I've added this place:\n" +
-                "  " + place.getName() + "\n" +
-                "Now you have " + places.size() + " places in the list.";
+        return "Got it. I've added this place:\n"
+                + "  " + place.getName() + "\n"
+                + "Now you have " + places.size() + " places in the list.";
     }
 }
