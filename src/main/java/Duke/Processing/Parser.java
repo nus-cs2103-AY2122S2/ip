@@ -70,7 +70,7 @@ public class Parser {
                 output = tasklist.delete(num);
             } else if (input.startsWith("find")) {
                 String name = input.substring(5);
-                output = tasklist.find(name);
+                output = tasklist.findS(name);
             } else if (input.equals("clear")) {
                 output = tasklist.clear();
             } else {

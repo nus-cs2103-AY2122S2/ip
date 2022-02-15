@@ -161,7 +161,8 @@ public class TaskList {
      * @param name is the name of the task I am finding
      * @return a String output
      */
-    public String find(String name) {
+
+    public String findS(String name) {
         String output = "";
         int size = tasklist.size();
         assert size != 0 : "Tasklist is empty";
@@ -169,12 +170,10 @@ public class TaskList {
         int counter = 0;
         for (int i = 0; i < size; i++) {
             Task checking = tasklist.get(i);
-            String[] testname = checking.getDescription().split(" ");
-            for (int j = 0; j < testname.length; j++) {
-                if(testname[j].equalsIgnoreCase(name)) {
-                    item += checking + "\n";
-                    counter++;
-                }
+            String description = checking.getDescription();
+            if(description.contains(name)) {
+                output += checking.toString() + "\n";
+                counter++;
             }
         }
         if (counter == 0) {
@@ -185,7 +184,6 @@ public class TaskList {
         output += item;
         return output;
     }
-
     public String clear() {
         tasklist.clear();
         return "All items are off the table";
