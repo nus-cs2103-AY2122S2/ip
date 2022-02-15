@@ -1,6 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -176,7 +175,7 @@ public class Parser {
      *
      * @return A boolean depending on whether the bye command has been executed.
      */
-    public boolean checkByeCommand() {
+    public boolean byeCommandHasExecuted() {
         return isByeCommand;
     }
 }

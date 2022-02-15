@@ -24,7 +24,7 @@ public class ParserTest {
     public void byeCommandTest() {
         Parser parser = initialiseParserWithTaskListStub();
         assertEquals("goodbye!\n", parser.parse("bye"));
-        assertTrue(parser.checkByeCommand());
+        assertTrue(parser.byeCommandHasExecuted());
     }
 
     @Test

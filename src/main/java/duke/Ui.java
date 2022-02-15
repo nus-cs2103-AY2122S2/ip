@@ -32,7 +32,7 @@ public class Ui {
         while (true) {
             String returnMessage = parser.parse(userInput);
             System.out.print(ANSI_BLUE + returnMessage + ANSI_RESET);
-            if (parser.checkByeCommand()) {
+            if (parser.byeCommandHasExecuted()) {
                 break;
             }
             userInput = sc.nextLine();
