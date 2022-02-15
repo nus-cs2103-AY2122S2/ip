@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" alignment="TOP_RIGHT" text="Label" textAlignment="RIGHT" wrapText="true">
+         <HBox.margin>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </HBox.margin></Label>
+      <Pane minHeight="75.0" minWidth="75.0" prefHeight="75.0" prefWidth="75.0" style="-fx-background-radius: 15; -fx-background-color: gray;">
+         <children>
+            <Pane blendMode="SRC_ATOP" layoutX="1.0" layoutY="1.0" minHeight="73.0" minWidth="73.0" prefHeight="73.0" prefWidth="73.0" style="-fx-background-radius: 14; -fx-background-color: black;">
+               <children>
+                    <ImageView fx:id="displayPicture" blendMode="SRC_ATOP" cache="true" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+         </children>
+         <HBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </HBox.margin>
+      </Pane>
+    </children>
+</fx:root>
