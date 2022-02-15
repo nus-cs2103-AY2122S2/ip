@@ -40,7 +40,7 @@ public class MarkCommand extends Command {
             this.response = new Response(ui.getResponseMessage("mark"),
                     ui.getTaskMessage(task));
         } else {
-            ui.showInvalidRange();
+            this.response = new Response(ui.getInvalidRange());
         }
     }
 

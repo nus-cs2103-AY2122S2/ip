@@ -177,7 +177,7 @@ public class Ui {
     /**
      * Displays invalid TaskList index range message.
      */
-    public String showInvalidRange() {
+    public String getInvalidRange() {
         return "Invalid number. Try again!";
     }
 

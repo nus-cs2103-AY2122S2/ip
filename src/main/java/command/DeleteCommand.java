@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
                 throw new DukeException(e.getMessage());
             }
         } else {
-            this.response = new Response(ui.showInvalidRange());
+            this.response = new Response(ui.getInvalidRange());
         }
     }
 

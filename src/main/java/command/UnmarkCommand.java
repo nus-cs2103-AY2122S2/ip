@@ -41,7 +41,7 @@ public class UnmarkCommand extends Command {
                 this.response = new Response(ui.getResponseMessage("unmark"),
                         ui.getTaskMessage(task));
             } else {
-                ui.showInvalidRange();
+                this.response = new Response(ui.getInvalidRange());
             }
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
