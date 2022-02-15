@@ -73,6 +73,7 @@ public class Duke extends Application {
             ui.showError(e);
             this.taskList = new TaskList();
         }
+        this.taskStack = new TaskStack();
     }
 
     /**

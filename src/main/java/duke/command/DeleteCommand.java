@@ -44,14 +44,16 @@ public class DeleteCommand extends Command {
 
         if (taskList.isValidIndex(index)) {
             task = taskList.get(index);
+
+            TaskList copiedTaskList = new TaskList();
+            copiedTaskList.copy(taskList);
+            taskStack.push(copiedTaskList);
+            
             taskList.remove(index);
         } else {
             throw new DukeException("INVALID INDEX");
         }
 
-        TaskList copiedTaskList = new TaskList();
-        copiedTaskList.copy(taskList);
-        taskStack.push(copiedTaskList);
         storage.writeToFile(taskList);
         String output = "TASK REMOVED:\n"
                 + task + "\n"
