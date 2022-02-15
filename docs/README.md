@@ -4,7 +4,7 @@
 
 ### `todo`: Adds a ToDo task
 
-Adds a ToDo task to Echo.
+Adds a ToDo task to Duke.
 
 Format:
 `todo <description>`
@@ -13,7 +13,7 @@ e.g.
 
 ### `deadline`: Adds a Deadline task
 
-Adds a Deadline task to Echo.
+Adds a Deadline task to Duke.
 
 Format:
 `deadline <description> /by <date_time>`
@@ -23,7 +23,7 @@ e.g.
 
 ### `event`: Adds an Event task
 
-Adds an Event task to Echo
+Adds an Event task to Duke.
 
 Format: `event <description> /at <date_time>`
 
@@ -32,7 +32,7 @@ e.g.
 
 ## List all tasks
 
-### `list`Displays all tasks in Echo.
+### `list`: Displays all tasks in Duke.
 
 Format:
 `list`
@@ -56,9 +56,9 @@ e.g. `delete 1`(delete task 1)
 
 ##  Find tasks matching a keyword
 
-### `find`:Displays all tasks matching a keyword.
+### `find`: Displays all tasks matching a keyword.
 
-Format: `find <description>`
+Format: `find <keyword>`
 
 e.g. `find book`(find any task containing keyword _**book**_ )
 

@@ -23,7 +23,7 @@ e.g.
 
 ### `event`: Adds an Event task
 
-Adds an Event task to Duke
+Adds an Event task to Duke.
 
 Format: `event <description> /at <date_time>`
 
@@ -32,7 +32,7 @@ e.g.
 
 ## List all tasks
 
-### `list`Displays all tasks in Echo.
+### `list`: Displays all tasks in Duke.
 
 Format:
 `list`
@@ -56,9 +56,9 @@ e.g. `delete 1`(delete task 1)
 
 ##  Find tasks matching a keyword
 
-### `find`:Displays all tasks matching a keyword.
+### `find`: Displays all tasks matching a keyword.
 
-Format: `find <description>`
+Format: `find <keyword>`
 
 e.g. `find book`(find any task containing keyword _**book**_ )
 
