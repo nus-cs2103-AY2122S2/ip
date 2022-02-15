@@ -12,10 +12,10 @@ import connor.task.TaskList;
  * Main class for Connor program to start running.
  *
  * @author jaysmyname
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class Connor {
-    public static final String CURRENT_VERSION = "Version 1.0.0";
+    public static final String CURRENT_VERSION = "Version 1.1.0";
     public static final String LINE = "_".repeat(66);
     public static final String INDENT = " ".repeat(4);
     public static final String INPUT_HERE = ">>> ";
