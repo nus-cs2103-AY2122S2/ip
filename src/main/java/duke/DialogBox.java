@@ -86,4 +86,4 @@ public class DialogBox extends HBox {
         displayPicture.setFitWidth(90);
         displayPicture.setFitHeight(90);
     }
- }
+}
