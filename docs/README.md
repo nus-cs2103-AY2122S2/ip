@@ -20,6 +20,11 @@ Productivilisation is your own personal task tracker chatbot!
 
 ## Quick Start
 
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the Productivilisation.jar from [here](https://github.com/DannyDakota/ip/releases/tag/A-Release).
+3. Copy the file to the folder you want to use as the home folder.
+4. Double-click the file to start being productive!
+
 ## Features
 
 
