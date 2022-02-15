@@ -88,7 +88,7 @@ Task not done =(
 ```
 
 ### `find [keyword]` - Find tasks with a specific keyword
-Lists all tasks with descriptions containining the specific keyword or phrase. 
+Lists all tasks containining the specific keyword or phrase. 
 
 Example: `find iP`
 
