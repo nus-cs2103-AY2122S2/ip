@@ -128,10 +128,10 @@ public class Parser {
                 int index = Integer.parseInt(segments[1]);
                 return new UnmarkCommand(index);
             } catch (NumberFormatException e) {
-                throw new InvalidArgumentException("Not a valid number");
+                throw new InvalidArgumentException("The index number provided is not a valid number");
             }
         } else {
-            throw new MissingArgumentException("Missing task number");
+            throw new MissingArgumentException("Missing task index number");
         }
     }
 
@@ -148,10 +148,10 @@ public class Parser {
                 int index = Integer.parseInt(segments[1]);
                 return new DeleteCommand(index);
             } catch (NumberFormatException e) {
-                throw new InvalidArgumentException("Not a valid number");
+                throw new InvalidArgumentException("The index number provided is not a valid number");
             }
         } else {
-            throw new MissingArgumentException("Missing task number");
+            throw new MissingArgumentException("Missing task index number");
         }
     }
 
@@ -187,15 +187,15 @@ public class Parser {
                     Date time = parseTimeFromString(taskArguments[1]);
                     return new AddCommand(new Event(title, time));
                 } catch (ParseException e) {
-                    throw new InvalidArgumentException("Incorrect time format");
+                    throw new InvalidArgumentException("The time format is incorrect");
                 }
             } else if (!taskArguments[0].isBlank()) {
-                throw new MissingArgumentException("Missing name");
+                throw new MissingArgumentException("Missing name for the event");
             } else {
-                throw new MissingArgumentException("Missing time");
+                throw new MissingArgumentException("Missing time for the event");
             }
         } else {
-            throw new MissingArgumentException("Missing name and time");
+            throw new MissingArgumentException("Missing name and time for the event");
         }
     }
 
@@ -215,15 +215,15 @@ public class Parser {
                     Date time = parseTimeFromString(taskArguments[1]);
                     return new AddCommand(new Deadline(title, time));
                 } catch (ParseException e) {
-                    throw new InvalidArgumentException("Incorrect time format");
+                    throw new InvalidArgumentException("The time format is incorrect");
                 }
             } else if (!taskArguments[0].isBlank()) {
-                throw new MissingArgumentException("Missing name");
+                throw new MissingArgumentException("Missing name for the deadline");
             } else {
-                throw new MissingArgumentException("Missing time");
+                throw new MissingArgumentException("Missing time for the deadline");
             }
         } else {
-            throw new MissingArgumentException("Missing name and time");
+            throw new MissingArgumentException("Missing name and time for the deadline");
         }
     }
 
