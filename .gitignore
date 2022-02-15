@@ -13,5 +13,11 @@ src/main/resources/docs/
 *.iml
 bin/
 
+#class files after compilation
+*.class
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/Bob.txt
+src/main/java/bob/Bob.txt
+
