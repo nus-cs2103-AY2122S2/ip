@@ -1,3 +1,6 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
@@ -7,8 +10,6 @@ import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
 import duke.parser.Parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test
@@ -16,6 +17,9 @@ public class ParserTest {
         assertEquals(LocalDate.of(2022, 1, 23), Parser.parseDate("2022-01-23"));
     }
 
+    /**
+     * Tests Parser class parseDate() method.
+     */
     @Test
     public void testParseDate_fail() {
         try {
