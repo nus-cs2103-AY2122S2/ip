@@ -6,6 +6,9 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
+/**
+ * Command used to make chatbot edit a note attached to a Task.
+ */
 public class EditNoteCommand extends Command {
     private final int taskIndex;
     private final String noteContent;

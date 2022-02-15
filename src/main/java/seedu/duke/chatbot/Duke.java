@@ -31,6 +31,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns a response to the user based on user input.
+     * @param input which contains user input
+     * @return a string response to be shown to user
+     */
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input); //read the full command and return the command

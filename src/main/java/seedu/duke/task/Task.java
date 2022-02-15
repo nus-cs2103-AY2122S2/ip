@@ -38,10 +38,6 @@ public abstract class Task {
         this.notes = newNoteList;
     }
 
-    public LocalDateTime getStartDate() {
-        return this.startDate;
-    }
-
     /**
      * Checks whether the task has been completed.
      * @return boolean of this done.
@@ -50,41 +46,14 @@ public abstract class Task {
         return isDone;
     }
 
+    /**
+     * Returns the task name of a task.
+     * @return String containing task name
+     */
     public String getTaskName() {
         return this.taskName;
     }
 
-    public LocalDateTime getEndDate() {
-        return this.endDate;
-    }
-
-    public String getFormattingDateString(LocalDateTime date) {
-        try {
-            String indicator = (date.getHour() >= 12) ? "pm" : "am";
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm ")) + indicator;
-        } catch (NullPointerException e) {
-            return "";
-        }
-    }
-
-    public NoteList getNotes() {
-        return this.notes;
-    }
-
-    public String getNoteResult() {
-        return this.notes.toString();
-    }
-
-    /**
-     * Edits the note in each task.
-     * @param noteContent contains the new note content to update
-     * @return an updated Task
-     */
-    public abstract Task editNoteList(int indexOfNote, String noteContent);
-
-    public abstract Task addNoteToNoteList(Note newNote);
-
-    public abstract Task deleteNoteFromNoteList(int indexOfNote);
     /**
      * Marks task as done.or undone.
      * @return new Task with done attribute as the boolean parameter
@@ -94,9 +63,68 @@ public abstract class Task {
     public abstract String getTaskType();
 
     /**
-     * prints task.
-     * @return String with task type, status and name
+     * Returns the end date of a Deadline or Event task.
+     * @return LocalDateTime representing the end date
      */
+    public LocalDateTime getEndDate() {
+        return this.endDate;
+    }
+
+    /**
+     * Returns the start date for Event task.
+     * @return LocalDateTime representing start date.
+     */
+    public LocalDateTime getStartDate() {
+        return this.startDate;
+    }
+
+    /**
+     * Returns time in 12 hour format.
+     * @param date which contain the time in 24hr format
+     * @return a string with the date and time in 12hr format
+     */
+    public String getFormattingDateString(LocalDateTime date) {
+        try {
+            String indicator = (date.getHour() >= 12) ? "pm" : "am";
+            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm ")) + indicator;
+        } catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    /**
+     * Returns the NoteList of a Task.
+     * @return NoteList
+     */
+    public NoteList getNotes() {
+        return this.notes;
+    }
+
+    public String getNoteResult() {
+        return this.notes.toString();
+    }
+
+    /**
+     * Edits the note in the NoteList.
+     * @param noteContent contains the new note content to update
+     * @return an updated Task
+     */
+    public abstract Task editNoteList(int indexOfNote, String noteContent);
+
+    /**
+     * Adds a note to the NoteList.
+     * @param newNote contains the new Note to add
+     * @return an updated Task
+     */
+    public abstract Task addNoteToNoteList(Note newNote);
+
+    /**
+     * Deletes a note from the NoteList.
+     * @param indexOfNote that contains index of the note to delete in NoteList
+     * @return an updated Task
+     */
+    public abstract Task deleteNoteFromNoteList(int indexOfNote);
+
     @Override
     public String toString() {
         String marked = this.isDone() ? "X" : " ";

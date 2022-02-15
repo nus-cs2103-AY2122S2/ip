@@ -35,6 +35,13 @@ public class Deadline extends Task {
         super(oldDeadline.getTaskName(), isDone, oldDeadline.getEndDate(), null, new NoteList());
     }
 
+    /**
+     * Used when recreating from database.
+     * @param taskName for name of task
+     * @param isDone for status of task
+     * @param date for end date of task
+     * @param notes for notes attached to task
+     */
     public Deadline(String taskName, boolean isDone, LocalDateTime date, NoteList notes) {
         super(taskName,isDone, date, null, notes);
     }
@@ -67,15 +74,16 @@ public class Deadline extends Task {
     }
 
     /**
-     * returns a new Task with the specified attribute 'done' based on boolean 'status'.
-     * @param isDone to provide boolean on whether the task has been marked as done
-     * @return new Task with specified boolean for attribute 'done'
+     * {inheritDoc}.
      */
     @Override
     public Task changeTaskStatus(boolean isDone) {
         return new Deadline(this, isDone);
     }
 
+    /**
+     * {inheritDoc}.
+     */
     @Override
     public String getTaskType() {
         return this.taskType;
