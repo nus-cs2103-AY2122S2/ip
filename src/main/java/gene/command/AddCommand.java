@@ -200,9 +200,6 @@ public class AddCommand extends Command {
         }
 
         try {
-            //Accept string
-            //Parse string to datetime, use formatter here to change reading style
-            //when printing, check date time and print format.
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             storage.writeToFile(taskKey, "D", false);
