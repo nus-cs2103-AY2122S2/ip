@@ -40,6 +40,10 @@ public class Deadline extends Task {
         return type;
     }
 
+    public LocalDate getDate() {
+        return this.byDate;
+    }
+
     /**
      * This method formats the date and time of the event occurring in String.
      *

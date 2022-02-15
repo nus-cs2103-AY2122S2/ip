@@ -1,5 +1,6 @@
 package duke.Ui;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import duke.command.AddCommand;
@@ -8,6 +9,8 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RemindersCommand;
+import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import javafx.scene.image.Image;
@@ -79,6 +82,7 @@ public class Ui {
         out.append(AddCommand.usage());
         out.append(ListCommand.usage());
         out.append(FindCommand.usage());
+        out.append(RemindersCommand.usage());
         out.append(DoneCommand.usage());
         out.append(DeleteCommand.usage());
         out.append(ExitCommand.usage());
@@ -93,7 +97,7 @@ public class Ui {
      */
     public static String taskListMsg(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
-        StringBuffer result = new StringBuffer("Here are the tasks in your list: \n\n");
+        StringBuilder result = new StringBuilder("Here are the tasks in your list: \n\n");
         for (int i = 1; i <= tasks.size(); i++) {
             result.append(String.format("%d.%s", i, tasks.get(i - 1)));
             if (i != tasks.size()) {
@@ -101,6 +105,41 @@ public class Ui {
             }
         }
         return result.toString();
+    }
+
+    /**
+     * Formats the reminders list for printing.
+     *
+     * @param taskList The list of deadlines within the range of the day range specified.
+     * @param dayRange The number of days ahead for task to be included in the reminder.
+     * @return The formatted String to be printed.
+     */
+    public static String reminderListMsg(TaskList taskList, int dayRange) {
+        LocalDate dateLimit = LocalDate.now().plusDays(dayRange);
+        ArrayList<Task> tasks = taskList.getTaskList();
+        int k = 0; // counter for item in list
+        StringBuilder result = new StringBuilder("Here are the upcoming deadlines in " + dayRange + " days : \n\n");
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task curr = tasks.get(i - 1);
+
+            boolean isDeadlineType = curr.getType().equals(Deadline.type);
+            if (!isDeadlineType) {
+                continue;
+            }
+
+            Deadline deadline = (Deadline) curr;
+            boolean isWithinRange = deadline.getDate().compareTo(dateLimit) <= 0;
+            if (isWithinRange) {
+                k++;
+                result.append(String.format("%d.%s", k, curr));
+                if (i != tasks.size()) {
+                    result.append("\n");
+                }
+            }
+        }
+        return k == 0 ?
+                "No deadlines due in " + dayRange + " day(s)!"
+                : result.toString();
     }
 
     /**

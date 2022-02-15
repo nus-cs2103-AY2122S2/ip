@@ -17,7 +17,8 @@ public enum CommandType
     DELETE("delete"),
     FIND("find"),
     HELP("help"),
-    UNDO("undo");
+    UNDO("undo"),
+    REMINDERS("reminders");
 
     private String command;
 

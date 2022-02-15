@@ -16,6 +16,7 @@ import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.RemindersCommand;
 import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -59,6 +60,8 @@ public class Parser {
             case UNDO:
             case DELETE:
                 return formatCmdWithIdSelection(action, inputTxt);
+            case REMINDERS:
+                return formatCmdWithDateSelection(action, inputTxt);
             default:
                 throw new DukeException(Ui.MSG_INVALIDCMD);
             }
@@ -84,6 +87,15 @@ public class Parser {
         } else {
             return new FindCommand(description.toLowerCase());
         }
+    }
+
+    private Command formatCmdWithDateSelection(CommandType commandType, String inputTxt) throws DukeException {
+        String[] formatInputTxt = inputTxt.split(SEPARATOR_INPUT);
+        if (formatInputTxt.length != 2) {
+            throw new DukeException(Ui.MSG_INVLIADCMDFORMAT);
+        }
+        int dayRange = Integer.parseInt(formatInputTxt[1]);
+        return new RemindersCommand(dayRange);
     }
 
     private Command formatCmdWithIdSelection(CommandType commandType, String inputTxt) throws DukeException {
