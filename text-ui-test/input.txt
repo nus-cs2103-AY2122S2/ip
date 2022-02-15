@@ -1,0 +1,34 @@
+list
+todo read book
+todo          
+deadline return book /by 10/03/2022
+deadline submit assignment /by 20/04/2022 2359
+event team meeting /at 12/02/2022 1400
+event party /at 24/06/2022
+deadline wrong format
+deadline emptyDate /by       
+deadline     /by date
+deadline wrongDateFormat /by 12-12-2022
+event wrong format
+event emptyDate /at        
+event     /at date
+event wrongDateFormat /at 12-12-2022
+list
+mark 1
+mark 2
+list
+unmark 2
+list
+unmark 2
+mark 1
+mark 1.1
+mark text
+mark 50
+blah blah
+delete      
+delete 123abc
+delete 50
+delete 1
+list
+delete 1
+bye
