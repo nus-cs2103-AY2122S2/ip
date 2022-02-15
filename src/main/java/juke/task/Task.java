@@ -23,6 +23,7 @@ public abstract class Task implements Cloneable {
      * Constructor to initialize a task with a description.
      *
      * @param description Description.
+     * @param type Task type.
      */
     public Task(String description, TaskType type) {
         this.description = description;
@@ -71,6 +72,17 @@ public abstract class Task implements Cloneable {
         assert description != null;
         assert !description.isBlank();
         return this.description;
+    }
+
+    /**
+     * Sets the description of the task.
+     *
+     * @param description Task description.
+     */
+    public void setDescription(String description) {
+        assert description != null;
+        assert !description.isBlank();
+        this.description = description;
     }
 
     /**

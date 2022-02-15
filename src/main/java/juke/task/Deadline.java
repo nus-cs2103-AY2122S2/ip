@@ -6,12 +6,7 @@ import juke.exception.JukeParseException;
 /**
  * Task with a description and a deadline.
  */
-public class Deadline extends Task {
-    /**
-     * Deadline.
-     */
-    private DateTimeHandler date;
-
+public class Deadline extends TimeTask {
     /**
      * Constructor to initialize a task with a description and a deadline.
      *
@@ -20,8 +15,7 @@ public class Deadline extends Task {
      * @throws JukeParseException Throws if parse error.
      */
     public Deadline(String description, String time) throws JukeParseException {
-        super(description, TaskType.DEADLINE);
-        this.date = new DateTimeHandler(time);
+        super(description, TaskType.DEADLINE, time);
         assert getTaskIcon() == TaskType.DEADLINE.getTaskIcon();
     }
 
@@ -42,16 +36,6 @@ public class Deadline extends Task {
         }
         this.status = task.status;
         assert this != task;
-    }
-
-    /**
-     * Returns the deadline.
-     *
-     * @return Deadline.
-     */
-    public String getTime() {
-        assert date.getDateTime() != null;
-        return this.date.getDateTime();
     }
 
     /**

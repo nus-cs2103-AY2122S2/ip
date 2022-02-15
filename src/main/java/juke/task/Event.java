@@ -6,12 +6,7 @@ import juke.exception.JukeParseException;
 /**
  * Task with a starting time.
  */
-public class Event extends Task {
-    /**
-     * Starting time.
-     */
-    private DateTimeHandler date;
-
+public class Event extends TimeTask {
     /**
      * Constructor to initialize task with a description and a starting time.
      *
@@ -20,8 +15,7 @@ public class Event extends Task {
      * @throws JukeParseException Throws if parse error.
      */
     public Event(String description, String time) throws JukeParseException {
-        super(description, TaskType.EVENT);
-        this.date = new DateTimeHandler(time);
+        super(description, TaskType.EVENT, time);
         assert getTaskIcon() == TaskType.EVENT.getTaskIcon();
     }
 
@@ -42,16 +36,6 @@ public class Event extends Task {
         }
         this.status = task.status;
         assert this != task;
-    }
-
-    /**
-     * Get the starting time.
-     *
-     * @return Start time.
-     */
-    public String getTime() {
-        assert this.date.getDateTime() != null;
-        return this.date.getDateTime();
     }
 
     /**
