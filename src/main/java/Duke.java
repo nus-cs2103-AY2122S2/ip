@@ -12,6 +12,7 @@ public class Duke {
 
         // List to hold tasks
         ArrayList<Task> lst = new ArrayList<Task>();
+        Files.readTasks(lst);
 
         while (!input.equals("bye")) {
 
@@ -50,17 +51,20 @@ public class Duke {
                         }
 
                         // sorting out the types of task
-                        System.out.println("Got it. I've added this task: ");
+
                         if (category.equals("todo")) {
+                            System.out.println("Got it. I've added this task: ");
                             ToDo item = new ToDo(info[1]);
                             lst.add(item);
                             System.out.println(item.toString());
                         } else if (category.equals("deadline")) {
+                            System.out.println("Got it. I've added this task: ");
                             String[] details = info[1].split(" /by ", 0);
                             Deadline item = new Deadline(details[0], details[1]);
                             lst.add(item);
                             System.out.println(item.toString());
                         } else if (category.equals("event")) {
+                            System.out.println("Got it. I've added this task: ");
                             String[] details = info[1].split(" /at ", 0);
                             Event item = new Event(details[0], details[1]);
                             lst.add(item);
@@ -72,7 +76,10 @@ public class Duke {
                         System.out.println("Now you have " + lst.size() + " tasks in the list.");
                     }
 
+                    // Saving List
+                    Files.saveTasks(lst);
                 }
+
             } catch (DukeException e) {
                 System.out.println("ERROR: " + e.getMessage());
             } finally {
