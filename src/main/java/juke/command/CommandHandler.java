@@ -33,6 +33,7 @@ public class CommandHandler {
         COMMANDS.put("delete", DeleteCommand::new);
         COMMANDS.put("find", FindCommand::new);
         COMMANDS.put("clone", CloneCommand::new);
+        COMMANDS.put("edit", EditCommand::new);
     }
 
     /**

@@ -29,6 +29,12 @@ public class CloneCommand extends Command {
         return this;
     }
 
+    /**
+     * Tries to execute the command, updating the result.
+     * Clones the task at the given index.
+     *
+     * @return This command.
+     */
     @Override
     public Command execute() {
         if (this.isSuccessful()) {
@@ -43,6 +49,7 @@ public class CloneCommand extends Command {
             Task task = (Task) juke.getTaskList().get(index).clone();
             assert task instanceof Task;
             juke.getTaskList().add(task);
+            result = Result.success(String.format("Successfully cloned task: %s.", task.getDescription()));
         } catch (NumberFormatException e) {
             this.result = Result.error(e);
             return this;

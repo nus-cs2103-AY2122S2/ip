@@ -88,7 +88,7 @@ public class AddCommand extends Command {
             result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
             return this;
         }
-        assert hasDefaultArgument() == true;
+        assert hasDefaultArgument();
         return this;
     }
 
