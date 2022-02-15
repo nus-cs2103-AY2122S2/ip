@@ -60,6 +60,9 @@ public class Parser {
         case "delete":
             outputMessage = new CommandDelete(userInput, toDoList).execute();
             break;
+        case "find":
+            outputMessage = new CommandFind(userInput, toDoList).execute();
+            break;
         default:
             // If user input does not match any commands
             outputMessage = new CommandUnknown().execute();
