@@ -38,6 +38,15 @@ public class TaskArrayList {
     }
 
     /**
+     * Checks if a Task is already in the current TaskArrayList.
+     * @param task task to be checked.
+     * @return true if the Task exists, false otherwise.
+     */
+    public boolean check(Task task) {
+        return tasks.contains(task);
+    }
+
+    /**
      * Gets the task in the current TaskArrayList according to the index.
      * @param i the index of the Task object to retrieve.
      * @return the respective Task object.

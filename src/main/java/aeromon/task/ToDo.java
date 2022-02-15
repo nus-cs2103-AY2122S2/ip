@@ -25,4 +25,14 @@ public class ToDo extends Task {
     public String toOutputFormat() {
         return String.format(TODO_OUTPUT_FORMAT, super.toOutputFormat());
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof ToDo)) {
+            return false;
+        } else {
+            ToDo obj = (ToDo) object;
+            return this.description.equals(obj.description);
+        }
+    }
 }
