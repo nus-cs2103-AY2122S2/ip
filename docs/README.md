@@ -155,5 +155,5 @@ The data.txt file can be found within the data folder after running Duke O.o at 
 The first line shows the number of tasks in the saved file, and each subsequent line represents a different task in the format of  
 `TASK_PREFIX/TASK_COMPLETION_STATE/TASK_DATE/TASK_TIME`.  
 `TASK_PREFIX` can be either `T`, `D` or `E` to represent todo, deadline and event tasks respectively. (They must be capitalized)  
-'TASK_COMPLETION_STATE' can be either `T` or `F` depending on the completion state of the task. (They must be capitalized)  
-'TASK_DATE' is in the DDMMYYYY format and `TASK_TIME` is in the HHMM 24hr format.  
+`TASK_COMPLETION_STATE` can be either `T` or `F` depending on the completion state of the task. (They must be capitalized)  
+`TASK_DATE` is in the DDMMYYYY format and `TASK_TIME` is in the HHMM 24hr format.  
