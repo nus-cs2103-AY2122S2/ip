@@ -15,6 +15,7 @@ public abstract class Command {
      * @param ui a class that deals with interactions with the user
      * @param store represents the file storage of the program
      * @throws BobException exceptions that tells Bob to let the user know what went wrong
+     * @return a string containing Bob's reply
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage store) throws BobException;
 }
