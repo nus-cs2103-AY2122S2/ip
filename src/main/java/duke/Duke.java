@@ -2,6 +2,9 @@ package duke;
 
 /**
  * create a new BH object and start running the program
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class Duke {
     private BH bh;

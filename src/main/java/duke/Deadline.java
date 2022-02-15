@@ -3,6 +3,9 @@ package duke;
 /**
  * Represent a deadline task
  * It corresponds to a deadline represent by a string of task and the time
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class Deadline extends Task {
 

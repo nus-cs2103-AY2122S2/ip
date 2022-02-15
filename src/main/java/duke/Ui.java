@@ -2,6 +2,9 @@ package duke;
 
 /**
  * Deals with interactions with the user
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class Ui {
     private static final String LINE = "\n------------------------------------------------\n";

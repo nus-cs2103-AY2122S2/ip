@@ -18,6 +18,9 @@ import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class MainWindow extends AnchorPane {
     @FXML

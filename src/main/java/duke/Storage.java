@@ -12,6 +12,9 @@ import java.util.ArrayList;
 
 /**
  * Storage class is used for storing data and loading data
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class Storage {
     private final File file;

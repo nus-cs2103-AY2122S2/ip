@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 /**
  * List to store all the tasks
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class TaskList {
     private ArrayList<Task> list;

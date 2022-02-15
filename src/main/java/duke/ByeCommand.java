@@ -2,6 +2,9 @@ package duke;
 
 /**
  * The command to handle keyword bye
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class ByeCommand extends Command {
 

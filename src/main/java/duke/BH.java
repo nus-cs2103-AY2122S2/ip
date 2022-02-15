@@ -7,6 +7,9 @@ import java.util.Scanner;
 /**
  * Represents a chatbot called BH
  * It is able to read input and proceed with different kind of task and save all the tasks
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class BH {
     private static final Path FILEPATH = Paths.get(System.getProperty("user.home"),

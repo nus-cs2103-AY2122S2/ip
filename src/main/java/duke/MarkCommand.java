@@ -2,6 +2,9 @@ package duke;
 
 /**
  * Command to handle keyword mark
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class MarkCommand extends Command {
 

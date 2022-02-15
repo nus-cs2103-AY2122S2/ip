@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 /**
  * The command to handle keyword check
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class CheckCommand extends Command {
 

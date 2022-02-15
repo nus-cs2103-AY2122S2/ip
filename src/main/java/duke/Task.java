@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represent a task to complete
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class Task {
     public boolean isDone;

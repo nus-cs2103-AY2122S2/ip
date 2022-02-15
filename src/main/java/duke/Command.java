@@ -2,6 +2,9 @@ package duke;
 
 /**
  * Command to handle user input
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public abstract class Command {
     protected Ui ui;

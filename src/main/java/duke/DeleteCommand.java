@@ -2,6 +2,9 @@ package duke;
 
 /**
  * The command to handle keyword delete
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class DeleteCommand extends Command {
 

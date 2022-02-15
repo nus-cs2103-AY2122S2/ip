@@ -2,6 +2,9 @@ package duke;
 
 /**
  * Executes user commands
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class Parser {
     private Ui ui;

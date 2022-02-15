@@ -2,6 +2,9 @@ package duke;
 
 /**
  * Command to handle keyword untag
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class UntagCommand extends Command {
 

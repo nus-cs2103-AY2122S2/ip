@@ -3,6 +3,9 @@ package duke;
 /**
  * Represents a event task
  * It corresponds to a event represent by a string of task and the time
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class Event extends Task {
 

@@ -2,6 +2,9 @@ package duke;
 
 /**
  * The command to handle keyword deadline
+ *
+ * @author brandonrhan
+ * @version 0.0.0
  */
 public class DeadlineCommand extends Command {
 
