@@ -6,7 +6,7 @@ Dream can schedule your tasks faster than traditional GUI apps.
 ## Features
 ### Overview
 - Task Management
-  - View all tasks
+  - List all tasks
   - Add a task
     - Todo task
     - Event task
@@ -18,9 +18,9 @@ Dream can schedule your tasks faster than traditional GUI apps.
 - Help page
 - Exit the application
 
-### Feature - View all tasks
+### Feature - List all tasks
 
-View all the tasks from the task list.
+List all the tasks from the task list.
 
 ### Feature - Add a task
 
@@ -52,7 +52,7 @@ Exit the application.
 
 ## Usage
 
-### `list` - Describe action
+### `list` - List all the tasks from the task list
 
 Type the command to list out all the tasks from the task list.
 
@@ -73,7 +73,7 @@ Here are the tasks in your list:
 Now you have 4 tasks in the list
 ```
 
-### `todo` - Describe action
+### `todo` - Add a Todo task to the task list
 
 Type the command to add a Todo task to the task list.
 
@@ -95,7 +95,7 @@ Got it. I've added this task:
 Now you have 4 tasks in the list
 ```
 
-### `event` - Describe action
+### `event` - Add an Event task to the task list
 
 Type the command to add an Event task to the task list.
 
@@ -117,7 +117,7 @@ Got it. I've added this task:
 Now you have 4 tasks in the list
 ```
 
-### `deadline` - Describe action
+### `deadline` - Add a Deadline task to the task list
 
 Type the command to add a Deadline task to the task list.
 
@@ -139,7 +139,7 @@ Got it. I've added this task:
 Now you have 4 tasks in the list
 ```
 
-### `delete` - Describe action
+### `delete` - Delete a task from the task list
 
 Type the command to delete a task from the task list.
 
@@ -161,7 +161,7 @@ Noted. I've removed this task:
 Now you have 4 tasks in the list
 ```
 
-### `mark` - Describe action
+### `mark` - Mark a task in the task list as done
 
 Type the command to mark a task in the task list as done.
 
@@ -182,7 +182,7 @@ Nice! I've marked this task as done:
 [T][X] buy bread
 ```
 
-### `unmark` - Describe action
+### `unmark` - Mark a task in the task list as undone
 
 Type the command to mark a task in the task list as undone.
 
@@ -203,7 +203,7 @@ Nice! I've marked this task as not done yet:
 [T][] buy bread
 ```
 
-### `find` - Describe action
+### `find` - Find a task from the task list
 
 Type the command to find a task from the task list with a keyword.
 
@@ -224,7 +224,7 @@ Here are the matching tasks in your list:
 1.[T][] buy bread
 ```
 
-### `help` - Describe action
+### `help` - Access the help page
 
 Type the command to access the help page for all the commands.
 
@@ -248,7 +248,7 @@ A help page consisting of all the commands.
 9. Type 'bye' to exit the app
 ```
 
-### `bye` - Describe action
+### `bye` - Exit the application
 
 Type the command to exit the application.
 
