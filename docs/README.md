@@ -199,7 +199,7 @@ Format:
 
 Example of usage:
 
-`find Party`
+`find party`
 
 Expected outcome:
 
