@@ -6,32 +6,36 @@ import juke.exception.JukeParseException;
 /**
  * Task with a description and a deadline.
  */
-public class Deadline extends Task {
-    /**
-     * Deadline.
-     */
-    private DateTimeHandler date;
-
+public class Deadline extends TimeTask {
     /**
      * Constructor to initialize a task with a description and a deadline.
      *
      * @param description Description.
      * @param time Time.
+     * @throws JukeParseException Throws if parse error.
      */
     public Deadline(String description, String time) throws JukeParseException {
-        super(description, TaskType.DEADLINE);
-        this.date = new DateTimeHandler(time);
+        super(description, TaskType.DEADLINE, time);
         assert getTaskIcon() == TaskType.DEADLINE.getTaskIcon();
     }
 
     /**
-     * Returns the deadline.
+     * Copy constructor for cloning.
      *
-     * @return Deadline.
+     * @param task Task to clone.
+     * @throws CloneNotSupportedException Should not throw error.
      */
-    public String getTime() {
-        assert date.getDateTime() != null;
-        return this.date.getDateTime();
+    private Deadline(Deadline task) throws CloneNotSupportedException {
+        super(task.description, TaskType.DEADLINE);
+        try {
+            this.date = new DateTimeHandler(task.date.getDateTime());
+        } catch (JukeParseException e) {
+            // Should not reach here
+            assert false;
+            throw new CloneNotSupportedException();
+        }
+        this.status = task.status;
+        assert this != task;
     }
 
     /**
@@ -42,5 +46,16 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return super.toString() + " (by: " + this.getTime() + ")";
+    }
+
+    /**
+     * Returns a clone of this task.
+     *
+     * @return Clone of this task.
+     * @throws CloneNotSupportedException Should not throw error.
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Deadline(this);
     }
 }
