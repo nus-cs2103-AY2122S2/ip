@@ -4,11 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-
+/**
+ * Represents a Task of type Event which includes the event date.
+ */
 class Event extends Task {
 
     private final LocalDate time;
 
+    /**
+     * Constructor for an Event.
+     *
+     * @param name The name of the task.
+     * @param time The date the task has to be completed by in the format "yyyy-mm-dd".
+     */
     public Event(String name, String time) {
         super(name);
         this.time = LocalDate.parse(time);

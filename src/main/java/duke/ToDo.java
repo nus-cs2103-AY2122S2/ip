@@ -1,7 +1,15 @@
 package duke;
 
+/**
+ * Represents a Task which has a name and no other attributes.
+ */
 class ToDo extends Task {
 
+    /**
+     * Initialise a ToDo object with a name.
+     *
+     * @param name The name given to the ToDo task.
+     */
     public ToDo(String name) {
         super(name);
     }

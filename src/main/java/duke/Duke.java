@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Duke is a chat bot that keeps track of tasks for you.
+ */
 public class Duke {
 
     public static void main(String[] args) {

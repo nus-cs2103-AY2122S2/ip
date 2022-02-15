@@ -9,6 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * The Storage class manages user data.
+ */
 public class Storage {
 
     private static String directoryPath = System.getProperty("user.dir") + "/data/";
@@ -17,14 +20,29 @@ public class Storage {
     private static final File FOLDER_PATH = new File(directoryPath);
     private static final File DATA_PATH = new File(directoryPath + listFile);
 
+    /**
+     * Constructor for a Storage object.
+     */
     public Storage(){
     }
 
+    /**
+     * <p>Method to Suppress unchecked typecasts. Since the file path has been pre-set in this programme, we can be sure
+     * that there will be no errors when typecasting. </p>
+     * @param obj The object to be typecasted.
+     * @param <T> The type to be casted to.
+     * @return An Object of type T.
+     */
     @SuppressWarnings("unchecked")
     public static <T> T castToAnything(Object obj) {
         return (T) obj;
     }
 
+    /**
+     * Loads the users task list from memory.
+     *
+     * @return The latest copy of the users task list.
+     */
     public static ArrayList<Task> load() {
         ArrayList<Task> toDoList = new ArrayList<>();
         try {
@@ -54,6 +72,11 @@ public class Storage {
         return toDoList;
     }
 
+    /**
+     * Saves the users task list to memory.
+     *
+     * @param taskList The list of tasks to be saved.
+     */
     public static void save(TaskList taskList) {
         try {
             FileOutputStream writer = new FileOutputStream(DATA_PATH);

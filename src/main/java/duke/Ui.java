@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * The Ui class is responsible for dealing with all user interactions.
+ */
 public class Ui {
 
     public static final String ANSI_BLUE = "\u001B[34m";
@@ -15,6 +18,11 @@ public class Ui {
     private static final String INITIALIZATION_MESSAGE = "Hello from\n" + LOGO + "enter a command\n" +
                 "use command 'help' to see list of commands";
 
+    /**
+     * Initialise the Parser that will be used to parse all user inputs.
+     *
+     * @param parser The Parser object.
+     */
     public static void initialize(Parser parser) {
 
         System.out.println(ANSI_BLUE + INITIALIZATION_MESSAGE + ANSI_RESET);

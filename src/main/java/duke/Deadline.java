@@ -4,10 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents a Task of type Deadline which includes a due date.
+ */
 class Deadline extends Task {
 
     private final LocalDate dueDate;
 
+    /**
+     * Constructor for a Deadline.
+     *
+     * @param name The name of the task.
+     * @param dueDate The date the task has to be completed by in the format "yyyy-mm-dd".
+     */
     public Deadline(String name, String dueDate) {
         super(name);
         this.dueDate = LocalDate.parse(dueDate);

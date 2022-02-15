@@ -3,15 +3,29 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Takes user inputs from the Ui class and checks their validity.
+ */
 public class Parser {
 
     private boolean isByeCommand = false;
     private TaskList taskList;
 
+    /**
+     * Constructor for a Parser.
+     *
+     * @param taskList The list of tasks referenced by the parser to construct output messages.
+     */
     public Parser(TaskList taskList){
         this.taskList = taskList;
     }
 
+    /**
+     * Returns an output message based on the user input.
+     *
+     * @param userInput The input from the user.
+     * @return A String to output to the user.
+     */
     public String parse(String userInput) {
 
         // Split user input into individual words
@@ -157,6 +171,11 @@ public class Parser {
         return outputMessage;
     }
 
+    /**
+     * Check if the bye command has been executed.
+     *
+     * @return A boolean depending on whether the bye command has been executed.
+     */
     public boolean checkByeCommand() {
         return isByeCommand;
     }
