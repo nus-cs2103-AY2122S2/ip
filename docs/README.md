@@ -94,6 +94,13 @@ Expected outcome:
 ```
 Bye. Hope to see you again soon!
 ```
+
+## Example
+
+Here's how it should look:
+
+![ui-image](../docs/UI.png)
+
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
