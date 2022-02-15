@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import li.zhongfu.cs2103.chatbot.Duke;
 import li.zhongfu.cs2103.chatbot.ui.gui.MainWindow;
 
+/**
+ * The JavaFX Application class used to start Duke.
+ */
 public class GraphicalUi extends Application {
     private Duke duke;
 

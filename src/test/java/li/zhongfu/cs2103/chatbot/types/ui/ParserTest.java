@@ -23,27 +23,14 @@ public class ParserTest {
     }
 
     @Test
-    public void parseArgString_blankString() {
-        Map<String, String> result;
-
-        result = parser.parseArgString("");
-        assertEquals(1, result.size());
-        assertEquals("", result.get(""));
-
-        result = parser.parseArgString("  ");
-        assertEquals(1, result.size());
-        assertEquals("", result.get(""));
-    }
-
-    @Test
     public void parseArgString_posArgOnly() {
         Map<String, String> result;
 
-        result = parser.parseArgString("testing one two");
+        result = parser.parseInput("c testing one two").getArgs();
         assertEquals(1, result.size());
         assertEquals("testing one two", result.get(""));
 
-        result = parser.parseArgString(" with leading and trailing spaces? ");
+        result = parser.parseInput("c  with leading and trailing spaces? ").getArgs();
         assertEquals(1, result.size());
         assertEquals("with leading and trailing spaces?", result.get(""));
     }
@@ -52,15 +39,15 @@ public class ParserTest {
     public void parseArgString_keywordArgs() {
         Map<String, String> result;
 
-        result = parser.parseArgString(" /arg1  val1   /arg2 /arg3 val2");
+        result = parser.parseInput("c  /arg1  val1   /arg2 /arg3 val2").getArgs();
         assertEquals(4, result.size());
         assertEquals("", result.get(""));
         assertEquals("val1", result.get("arg1"));
         assertEquals("", result.get("arg2"));
         assertEquals("val2", result.get("arg3"));
 
-        result = parser.parseArgString(" here's a pos arg /and here are some /more keyword arguments  "
-                + "/and_one_without_a_value   /one_more? why not ");
+        result = parser.parseInput("c  here's a pos arg /and here are some /more keyword arguments  "
+                + "/and_one_without_a_value   /one_more? why not ").getArgs();
         assertEquals(5, result.size());
         assertEquals("here's a pos arg", result.get(""));
         assertEquals("here are some", result.get("and"));
