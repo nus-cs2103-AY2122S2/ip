@@ -26,6 +26,10 @@ public class Storage {
     private final File file;
     private final Parser parser;
 
+    private final String event = "E"; // Represents the event task type.
+    private final String deadline = "D"; // Represents the deadline  task type.
+    private final String todo = "T"; // Represents the todo task type.
+
     /**
      * Load the storage instance from local storage if exist else create a new instance.
      * @param parser
@@ -66,34 +70,35 @@ public class Storage {
         TaskList taskList = new TaskList();
         try {
             Scanner s = new Scanner(this.file);
-            String[] input;
+            String[] dateTimeInput;
             LocalDate date;
             LocalTime time;
             while (s.hasNext()) {
                 String[] inputLine = s.nextLine().split("\\|");
                 String type = inputLine[0];
                 boolean isDone = inputLine[1].equals("1");
+                String description = inputLine[2];
                 switch (type) {
-                    case "T":
-                        taskList.addToDo(inputLine[2],isDone);
+                    case todo:
+                        taskList.addToDo(description, isDone);
                         break;
-                    case "E":
-                        input = inputLine[3].split(" ");
-                        if (input.length != 2) {
+                    case event:
+                        dateTimeInput = inputLine[3].split(" ");
+                        if (dateTimeInput.length != 2) {
                             throw new DukeException(Ui.MSG_FILEREADERROR);
                         }
-                        date = parser.formatDate(input[0]);
-                        time = parser.formatTime(date, input[1]);
-                        taskList.addEvent(inputLine[2],isDone, date, time);
+                        date = parser.formatDate(dateTimeInput[0]);
+                        time = parser.formatTime(date, dateTimeInput[1]);
+                        taskList.addEvent(description, isDone, date, time);
                         break;
-                    case "D":
-                        input = inputLine[3].split(" ");
-                        if (input.length != 2) {
+                    case deadline:
+                        dateTimeInput = inputLine[3].split(" ");
+                        if (dateTimeInput.length != 2) {
                             throw new DukeException(Ui.MSG_FILEREADERROR);
                         }
-                        date = parser.formatDate(input[0]);
-                        time = parser.formatTime(date, input[1]);
-                        taskList.addDeadline(inputLine[2],date,time);
+                        date = parser.formatDate(dateTimeInput[0]);
+                        time = parser.formatTime(date, dateTimeInput[1]);
+                        taskList.addDeadline(description, date, time);
                 }
             }
         } catch (FileNotFoundException | DukeException e) {

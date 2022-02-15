@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    public static final String DELIMITER = " /by ";
     protected LocalDate byDate;
     protected LocalTime byTime;
 
@@ -44,7 +45,8 @@ public class Deadline extends Task {
      * @return Returns formatted date and time in String format.
      */
     protected String getDateTime() {
-        return byDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " + byTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return byDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+                + " " + byTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     /**
@@ -54,7 +56,8 @@ public class Deadline extends Task {
      */
     @Override
     public String formatToSave() {
-        return super.formatToSave() + "|" + byDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " " + byTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return super.formatToSave() + "|" + byDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                + " " + byTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     @Override

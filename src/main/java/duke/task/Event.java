@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
+    public static final String DELIMITER = " /at ";
     protected LocalDate atDate;
     protected LocalTime atTime;
 

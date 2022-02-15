@@ -18,8 +18,15 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.UndoCommand;
 import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Parser {
+
+    public static final String SEPARATOR_REPLACEMENT = "-";
+    public static final String FORMAT_DATE = "dd-MM-yyyy";
+    public static final String FORMAT_TIME = "HH:mm";
+    public static final String SEPARATOR_INPUT = " ";
 
     /**
      * This method formats the user's input into a Command type.
@@ -33,7 +40,7 @@ public class Parser {
                 throw new DukeException(Ui.MSG_EMPTYINPUT);
             }
 
-            String command = inputTxt.split(" ")[0].toUpperCase();
+            String command = inputTxt.split(SEPARATOR_INPUT)[0].toUpperCase();
             CommandType action = CommandType.valueOf(command);
             switch (action) {
             case BYE:
@@ -69,7 +76,7 @@ public class Parser {
     }
 
     private Command formatCmdWithSingleInput(CommandType commandType, String inputTxt) throws DukeException {
-        String description = inputTxt.substring(inputTxt.indexOf(' ')).trim().replaceAll("\\|", "-");
+        String description = inputTxt.substring(inputTxt.indexOf(' ')).trim().replaceAll("\\|", SEPARATOR_REPLACEMENT);
         if (description.isEmpty()) {
             throw new DukeException(Ui.MSG_EMPTYINPUT);
         } else if (commandType.equals(CommandType.TODO)) {
@@ -80,14 +87,14 @@ public class Parser {
     }
 
     private Command formatCmdWithIdSelection(CommandType commandType, String inputTxt) throws DukeException {
-        String[] formatInputTxt = inputTxt.split(" ");
+        String[] formatInputTxt = inputTxt.split(SEPARATOR_INPUT);
         if (formatInputTxt.length != 2) {
             throw new DukeException(Ui.MSG_INVLIADCMDFORMAT);
         }
         int taskId = Integer.parseInt(formatInputTxt[1]) - 1;
         if (commandType.equals(CommandType.DONE)) {
             return new DoneCommand(taskId);
-        } else if (commandType.equals(commandType.UNDO)) {
+        } else if (commandType.equals(CommandType.UNDO)) {
             return new UndoCommand(taskId);
         } else {
             return new DeleteCommand(taskId);
@@ -97,17 +104,17 @@ public class Parser {
     private Command formatCmdWithTime(CommandType commandType, String inputTxt) throws DukeException {
 
         String[] formatInputTxt = commandType.equals(CommandType.DEADLINE)
-                ? inputTxt.split(" /by ")
-                : inputTxt.split(" /at ");
+                ? inputTxt.split(Deadline.DELIMITER)
+                : inputTxt.split(Event.DELIMITER);
         String description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' '))
-                .trim().replaceAll("\\|", "-");
+                .trim().replaceAll("\\|", SEPARATOR_REPLACEMENT);
         String due = formatInputTxt[1].trim();
 
         if (description.isEmpty() || due.isEmpty()) {
             throw new DukeException(Ui.MSG_INVLIADCMDFORMAT);
         }
 
-        String[] dateTime = due.split(" ");
+        String[] dateTime = due.split(SEPARATOR_INPUT);
         if (dateTime.length != 2) {
             throw new DukeException(Ui.MSG_INVALIDDATETIMEFORMAT);
         }
@@ -126,12 +133,12 @@ public class Parser {
      *
      * @param sDate User's date input in String format.
      * @return The formatted date.
-     * @throws DateTimeParseException
+     * @exception  DateTimeParseException
      * @throws DukeException          Invalid date format.
      * @see DateTimeParseException
      */
     public LocalDate formatDate(String sDate) throws DateTimeParseException, DukeException {
-        LocalDate inputDate = LocalDate.parse(sDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        LocalDate inputDate = LocalDate.parse(sDate, DateTimeFormatter.ofPattern(FORMAT_DATE));
         if (inputDate.isBefore(LocalDate.now())) {
             throw new DukeException(Ui.MSG_INVALIDDATETIME);
         } else {
@@ -143,12 +150,12 @@ public class Parser {
      * @param date  Formatted input date.
      * @param sTime User's time input in String format.
      * @return Returns the formatted time.
-     * @throws DateTimeParseException
+     * @exception DateTimeParseException
      * @throws DukeException          Invalid time format.
      * @see DateTimeParseException
      */
     public LocalTime formatTime(LocalDate date, String sTime) throws DateTimeParseException, DukeException {
-        LocalTime inputTime = LocalTime.parse(sTime, DateTimeFormatter.ofPattern("HH:mm"));
+        LocalTime inputTime = LocalTime.parse(sTime, DateTimeFormatter.ofPattern(FORMAT_TIME));
         if (date.equals(LocalDate.now()) && inputTime.isBefore(LocalTime.now())) {
             throw new DukeException(Ui.MSG_INVALIDDATETIME);
         } else {
