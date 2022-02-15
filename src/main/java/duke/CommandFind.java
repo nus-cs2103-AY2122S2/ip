@@ -48,7 +48,7 @@ public class CommandFind extends Command {
         if (hasMatches) {
             return output;
         } else {
-            return "no items match your description.";
+            return "no items match your description.\n";
         }
 
 
