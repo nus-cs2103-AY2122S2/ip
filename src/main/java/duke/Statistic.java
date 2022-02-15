@@ -1,7 +1,6 @@
 package duke;
 
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,8 +11,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static javafx.collections.FXCollections.*;
+import static javafx.collections.FXCollections.observableArrayList;
 
+/**
+ * This is the Statistic class that displays a piechart in a new window that
+ * represents the number of Tasks based on Task type
+ *
+ * @author  Hsiao Jiet
+ * @version 1.0
+ * @since   2022-2-1
+ */
 public class Statistic extends AnchorPane implements Initializable {
     private int toDoTasks = 0;
     private int deadlineTasks = 0;
