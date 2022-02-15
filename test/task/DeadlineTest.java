@@ -15,6 +15,6 @@ class DeadlineTest {
     @Test
     void getSaveFormat() {
         Deadline d = new Deadline("assignment 1", "2022-02-07");
-        assertEquals("D,0,assignment 1,2022-02-07", d.getSaveFormat());
+        assertEquals("D,0,assignment 1,2022-02-07\n", d.getSaveFormat());
     }
 }

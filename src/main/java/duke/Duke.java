@@ -11,6 +11,9 @@ public class Duke {
     private TaskList tasks;
     private UiForGUI ui;
 
+    /**
+     * Constructs a Duke object.
+     */
     public Duke() {
         this("./data/duke.txt");
     }

@@ -14,6 +14,12 @@ public abstract class Command {
     protected String[] tokenizedCommand;
     protected boolean isRun;
 
+    /**
+     * Constructs a Command object.
+     *
+     * @param command the command input by the user.
+     * @param tokenizedCommand the command input by the user that is split by space.
+     */
     public Command(String command, String[] tokenizedCommand) {
         this.command = command;
         this.tokenizedCommand = tokenizedCommand;
@@ -22,6 +28,7 @@ public abstract class Command {
 
     /**
      * Executes the current command.
+     *
      * @param tasks TaskList that stores the current list of tasks.
      * @param ui Ui of the bot application.
      * @param storage Storage to store the list of tasks.

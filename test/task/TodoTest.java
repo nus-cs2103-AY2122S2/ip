@@ -15,6 +15,6 @@ class TodoTest {
     @Test
     void getSaveFormat() {
         Todo t = new Todo("eat");
-        assertEquals("T,0,eat", t.getSaveFormat());
+        assertEquals("T,0,eat\n", t.getSaveFormat());
     }
 }

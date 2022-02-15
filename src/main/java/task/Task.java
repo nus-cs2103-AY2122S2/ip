@@ -7,6 +7,11 @@ public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructs a Task object.
+     *
+     * @param description the description of this task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -55,6 +60,13 @@ public class Task implements Comparable<Task> {
         return this.description;
     }
 
+    /**
+     * Compares 2 Tasks object and returns the position based on
+     * its description in ascending order
+     *
+     * @param o The other Task object
+     * @return
+     */
     @Override
     public int compareTo(Task o) {
         return this.description.compareTo(o.description);

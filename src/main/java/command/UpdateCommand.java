@@ -11,6 +11,12 @@ import task.TaskList;
  * The UpdateCommand class is a type of Command that is used to update a particular task.
  */
 public class UpdateCommand extends Command {
+    /**
+     * Constructs a UpdateCommand object.
+     *
+     * @param command the command input by the user.
+     * @param tokenizedCommand the command input by the user that is split by space.
+     */
     public UpdateCommand(String command, String[] tokenizedCommand) {
         super(command, tokenizedCommand);
     }

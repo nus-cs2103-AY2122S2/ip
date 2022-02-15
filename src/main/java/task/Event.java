@@ -6,6 +6,12 @@ package task;
 public class Event extends Task implements Comparable<Task> {
     protected String at;
 
+    /**
+     * Constructs a Event object.
+     *
+     * @param description the description of this deadline task.
+     * @param at the date of this event task.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
@@ -31,6 +37,14 @@ public class Event extends Task implements Comparable<Task> {
         return "E," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "," + this.at + "\n";
     }
 
+    /**
+     * Compares 2 Tasks object and returns the order of the current Task
+     * based on its type. If the other Task is an Event,
+     * it compares based on its description in ascending order
+     *
+     * @param o The other Task object
+     * @return The order
+     */
     @Override
     public int compareTo(Task o) {
         if (o instanceof Deadline) {

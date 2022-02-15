@@ -6,6 +6,9 @@ import task.TaskList;
  * The DukeException class deals with identifying and throwing Exceptions unique to Duke.
  */
 public class DukeException extends Exception {
+    /**
+     * Constructs a DukeException object.
+     */
     public DukeException() {
 
     }
@@ -64,10 +67,10 @@ public class DukeException extends Exception {
             if (commandSplitBySpace.length > 1) {
                 int indexOfAt = command.indexOf("/at");
                 if (indexOfAt == -1) {
-                    throw new DukeException("☹ OOPS!!! The at of a deadline cannot be empty.");
+                    throw new DukeException("☹ OOPS!!! The at of an event cannot be empty.");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             }
             break;
         default:

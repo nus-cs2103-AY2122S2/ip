@@ -15,6 +15,6 @@ class EventTest {
     @Test
     void getSaveFormat() {
         Event e = new Event("project meeting", "Sat 2pm");
-        assertEquals("E,0,project meeting,Sat 2pm", e.getSaveFormat());
+        assertEquals("E,0,project meeting,Sat 2pm\n", e.getSaveFormat());
     }
 }

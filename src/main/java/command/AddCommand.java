@@ -13,12 +13,19 @@ import task.Todo;
  * The AddCommand class is a type of Command that is used to add new task.
  */
 public class AddCommand extends Command {
+    /**
+     * Constructs a AddCommand object.
+     *
+     * @param command the command input by the user.
+     * @param tokenizedCommand the command input by the user that is split by space.
+     */
     public AddCommand(String command, String[] tokenizedCommand) {
         super(command, tokenizedCommand);
     }
 
     /**
      * Executes the add command and adds the new task to the TaskList and stores it in the Storage as well.
+     *
      * @param tasks TaskList that stores the current list of tasks.
      * @param ui Ui of the bot application.
      * @param storage Storage to store the list of tasks.

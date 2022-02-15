@@ -4,6 +4,11 @@ package task;
  * The Todo class is a type of Task which is used to represent todo.
  */
 public class Todo extends Task implements Comparable<Task> {
+    /**
+     * Constructs a Todo object.
+     *
+     * @param description the description of this todo task.
+     */
     public Todo(String description) {
         super(description);
     }
@@ -28,6 +33,14 @@ public class Todo extends Task implements Comparable<Task> {
         return "T," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "\n";
     }
 
+    /**
+     * Compares 2 Tasks object and returns the order of the current Task
+     * based on its type. If the other Task is an Todo,
+     * it compares based on its description in ascending order
+     *
+     * @param o The other Task object
+     * @return The order
+     */
     @Override
     public int compareTo(Task o) {
         if (o instanceof Deadline || o instanceof Event) {

@@ -18,6 +18,11 @@ public class Storage {
     private String filePath;
     private ArrayList<String> content;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param filePath the file path to the file containing the tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.content = new ArrayList<>();

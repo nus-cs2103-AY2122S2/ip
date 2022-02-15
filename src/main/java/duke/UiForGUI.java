@@ -7,6 +7,9 @@ public class UiForGUI {
     private boolean isResponding;
     private String msg;
 
+    /**
+     * Constructs an UiForGUI object.
+     */
     public UiForGUI() {
         this.isResponding = false;
     }

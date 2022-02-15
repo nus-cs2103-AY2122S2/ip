@@ -13,6 +13,9 @@ import task.TaskList;
  * The Parser class deals with making sense of the user command.
  */
 public class Parser {
+    /**
+     * Constructs a Parser object.
+     */
     public Parser() {
 
     }

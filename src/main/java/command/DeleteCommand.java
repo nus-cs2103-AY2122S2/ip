@@ -11,6 +11,12 @@ import task.TaskList;
  * The DeleteCommand class is a type of Command that is used to delete a particular task.
  */
 public class DeleteCommand extends Command {
+    /**
+     * Constructs a DeleteCommand object.
+     *
+     * @param command the command input by the user.
+     * @param tokenizedCommand the command input by the user that is split by space.
+     */
     public DeleteCommand(String command, String[] tokenizedCommand) {
         super(command, tokenizedCommand);
     }

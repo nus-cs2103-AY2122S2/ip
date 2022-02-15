@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task implements Comparable<Task> {
     protected LocalDate by;
 
+    /**
+     * Constructs a Deadline object.
+     *
+     * @param description the description of this deadline task.
+     * @param by the due date of this deadline task.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by);
@@ -34,6 +40,14 @@ public class Deadline extends Task implements Comparable<Task> {
         return "D," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "," + this.by.toString() + "\n";
     }
 
+    /**
+     * Compares 2 Tasks object and returns the order of the current Task
+     * based on its type. If the other Task is a Deadline, it compares based on its
+     * due date in descending order and description in ascending order
+     *
+     * @param o The other Task object
+     * @return The order
+     */
     @Override
     public int compareTo(Task o) {
         if (o instanceof Deadline) {

@@ -12,12 +12,19 @@ import task.TaskList;
  * The FindCommand class is a type of Command that is used to find the matching tasks.
  */
 public class FindCommand extends Command {
+    /**
+     * Constructs a FindCommand object.
+     *
+     * @param command the command input by the user.
+     * @param tokenizedCommand the command input by the user that is split by space.
+     */
     public FindCommand(String command, String[] tokenizedCommand) {
         super(command, tokenizedCommand);
     }
 
     /**
      * Executes the find command and displays the list of tasks that matches the keyword.
+     *
      * @param tasks TaskList that stores the current list of tasks.
      * @param ui Ui of the bot application.
      * @param storage Storage to store the list of tasks.
