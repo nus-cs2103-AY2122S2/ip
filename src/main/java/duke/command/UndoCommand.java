@@ -14,7 +14,7 @@ public class UndoCommand extends Command {
 
         if (latestTaskList != null) {
             taskList.copy(latestTaskList);
-            output = "LAST TASK UNDONE. CURRENT TASKS:\n" + taskList;
+            output = "LAST TASK UNDONE. CURRENT TASKS:" + taskList;
             storage.writeToFile(taskList);
         } else {
             output = "CAN'T UNDO FURTHER.";
