@@ -130,7 +130,7 @@ Example: `remind 1 2022-02-15 13:16`
   </tr>
   <tr>
     <td>event</td>
-    <td><code>event [description] /by [date]</code></td>
+    <td><code>event [description] /at [date]</code></td>
   </tr>
   <tr>
     <td>list</td>
