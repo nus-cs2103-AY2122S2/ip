@@ -73,7 +73,7 @@ public class Storage {
         case "T":
             ToDo td = new ToDo(data[2]);
             if (data[1].equals("1")) {
-                td.mark();
+                td.setComplete();
             }
             tasks.add(td);
             break;
@@ -81,14 +81,14 @@ public class Storage {
             Deadline deadline = new Deadline(data[2], LocalDate.parse(data[3], formatter));
             tasks.add(deadline);
             if (data[1].equals("1")) {
-                deadline.mark();
+                deadline.setComplete();
             }
             break;
         case "E":
             Event event = new Event(data[2], LocalDate.parse(data[3], formatter));
             tasks.add(event);
             if (data[1].equals("1")) {
-                event.mark();
+                event.setComplete();
             }
             break;
         }

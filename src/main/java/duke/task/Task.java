@@ -21,14 +21,14 @@ public class Task {
     /**
      * Sets the status of the task to true to mark that it has been completed.
      */
-    public void mark() {
+    public void setComplete() {
         this.isComplete = true;
     }
 
     /**
      * Sets the status of the task to false to mark that it hass not been completed.
      */
-    public void unmark() {
+    public void setIncomplete() {
         this.isComplete = false;
     }
 
