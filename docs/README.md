@@ -3,11 +3,23 @@ Duke is a task manager chatbot. Chat with Duke by keying in commands and view Du
 
 ## Features 
 
-### Task manager
-Add tasks. List the added tasks. Delete the tasks. Mark them as done or undone. Find tasks containing a specific keyword.
+### 1. Add tasks
+Duke supports three tasks types: `Todo`, `Deadline` and `Event`.
 
-### Set reminders
-Can't remember tasks? Set a reminder for them at a specific date and time.
+### 2. List tasks
+List all tasks that have been added to Duke!
+
+### 3. Delete tasks
+Don't want to see a task anymore? Delete it!
+
+### 4. Mark and unmark tasks
+Mark tasks as 'done'. Unmark them. Mark them again.
+
+### 5. Find tasks
+Find tasks containing a specific keyword!
+
+### 6. Set reminders
+Can't remember your tasks? Let Duke do it for you!
 
 ## Usage
 
