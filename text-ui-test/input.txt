@@ -1,0 +1,21 @@
+hi
+todo addsomething
+event die
+event die /at later
+event die /at 2021-12-31
+event die /at 2021-31-12
+deadline
+deadline woosh
+deadline woosh /by later
+deadline woosh /by 2021-12-30
+list
+find die
+find die
+mark 2
+mark 0
+mark 1
+unmark 1
+delete 1
+delete 3
+list
+bye
