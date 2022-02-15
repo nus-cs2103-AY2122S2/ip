@@ -214,7 +214,7 @@ public class TaskManager {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < this.getTaskCount(); i++) {
             if (this.taskList.get(i).description.toLowerCase().contains(keyword.toLowerCase())) {
-                output.append("  ").append(i + 1).append(".").append(this.taskList.get(i)).append("\n");
+                output.append("  ").append(i + 1).append(". ").append(this.taskList.get(i)).append("\n");
             }
         }
         return output.toString().stripTrailing();
@@ -261,7 +261,7 @@ public class TaskManager {
     public String toString() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < this.getTaskCount(); i++) {
-            output.append("  ").append(i + 1).append(".").append(this.taskList.get(i));
+            output.append("  ").append(i + 1).append(". ").append(this.taskList.get(i));
 
             if (i != this.getTaskCount() - 1) {
                 output.append("\n");
