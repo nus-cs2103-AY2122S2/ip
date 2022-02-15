@@ -27,6 +27,7 @@ public class Files {
         }
     }
 
+
     public static void readTasks(ArrayList<Task> list) {
         try {
             File file = new File("data/duke.txt");
