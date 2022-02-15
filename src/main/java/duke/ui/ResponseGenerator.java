@@ -28,11 +28,8 @@ public class ResponseGenerator {
      * @return A setup message.
      */
     public String getStartupMessage() {
-        StringBuilder message = new StringBuilder();
-        message.append("Hello! I'm\n");
-        message.append(logo);
-        message.append("\nWhat can I do for you? =)");
-        return message.toString();
+        return new StringBuilder().append("Hello! I'm\n").append(logo)
+                .append("\nWhat can I do for you? =)").toString();
     }
 
     /**
@@ -99,11 +96,8 @@ public class ResponseGenerator {
      * @return The message to be printed when a task is added.
      */
     public String getAddTaskMessage(Task latestTask, int size) {
-        StringBuilder message = new StringBuilder();
-        message.append("added o.O:\n  ");
-        message.append(latestTask.toString());
-        message.append("\nNow there are " + size + " tasks on the list x)");
-        return message.toString();
+        return new StringBuilder().append("added o.O:\n  ").append(latestTask.toString())
+                        .append("\nNow there are ").append(size).append(" tasks on the list x)").toString();
     }
 
     /**

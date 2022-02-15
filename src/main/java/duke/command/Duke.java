@@ -76,48 +76,16 @@ public class Duke {
         } else {
             try {
                 String command = parser.parseCommand(input);
-
                 if (command.equals("mark") || command.equals("unmark")) {
-                    int index = parser.parseNumericalDescription(input, command, taskList.size());
-                    storage.modifyTask(index);
-                    return taskList.markItemDone(index);
-                } else if (command.equals("unmark")) {
-                    int index = parser.parseNumericalDescription(input, command, taskList.size());
-                    storage.modifyTask(index);
-                    return taskList.markItemUndone(index);
+                    return modifyTask(input, command);
                 } else if (command.equals("delete")) {
-                    int index = parser.parseNumericalDescription(input, command, taskList.size());
-                    storage.deleteTask(index);
-                    return taskList.deleteItem(index);
+                    return deleteTask(input);
                 } else if (command.equals("remind")) {
-                    Task task = parser.parseReminderDescription(input, taskList);
-                    long timeElapsed = LocalDateTime.now().until(task.getReminder().getLocalDateTime(),
-                            ChronoUnit.MILLIS);
-                    new Timer().schedule(new TimerTask() {
-                        public void run() {
-                            Platform.runLater(() ->
-                                    mainWindow.showReminder(responseGenerator.getReminderMessage(task)));
-                        }
-                    }, timeElapsed);
-                    return responseGenerator.getAddReminderMessage(task, task.getReminder());
+                    return setReminder(input);
                 } else if (command.equals("find")) {
-                    String query = parser.parseStringDescription(input, command);
-                    return responseGenerator.printFoundItems(taskList.findItems(query));
+                    return findItems(input);
                 } else {
-                    // adding new tasks
-                    if (command.equals("todo")) {
-                        String description = parser.parseStringDescription(input, command);
-                        taskList.addTask(new Todo(description));
-                    } else if (command.equals("deadline")) {
-                        String[] description = parser.parseFormatDescription(input, command, DEADLINE_FORMAT);
-                        taskList.addTask(new Deadline(description[0], description[1]));
-                    } else if (command.equals("event")) {
-                        String[] description = parser.parseFormatDescription(input, command, EVENT_FORMAT);
-                        taskList.addTask(new Event(description[0], description[1]));
-                    }
-                    Task latestTask = taskList.getLast();
-                    storage.addTask(latestTask);
-                    return responseGenerator.getAddTaskMessage(latestTask, taskList.size());
+                    return addTask(input, command);
                 }
             } catch (WrongInputException | IncompleteInputException e) {
                 return responseGenerator.getDukeErrorMessage(e);
@@ -131,5 +99,55 @@ public class Duke {
                 return e.getMessage();
             }
         }
+    }
+
+    private String modifyTask(String input, String command) throws WrongInputException, IOException {
+        int index = parser.parseNumericalDescription(input, command, taskList.size());
+        storage.modifyTask(index);
+        if (command.equals("mark")) {
+            return taskList.markItemDone(index);
+        }
+        return taskList.markItemUndone(index);
+    }
+
+    private String deleteTask(String input) throws WrongInputException, IOException {
+        int index = parser.parseNumericalDescription(input, "delete", taskList.size());
+        storage.deleteTask(index);
+        return taskList.deleteItem(index);
+    }
+
+    private String setReminder(String input) throws WrongInputException {
+        Task task = parser.parseReminderDescription(input, taskList);
+        long timeElapsed = LocalDateTime.now().until(task.getReminder().getLocalDateTime(),
+                ChronoUnit.MILLIS);
+        new Timer().schedule(new TimerTask() {
+            public void run() {
+                Platform.runLater(() ->
+                        mainWindow.showReminder(responseGenerator.getReminderMessage(task)));
+            }
+        }, timeElapsed);
+        return responseGenerator.getAddReminderMessage(task, task.getReminder());
+    }
+
+    private String findItems(String input) throws IncompleteInputException {
+        String query = parser.parseStringDescription(input, "find");
+        return responseGenerator.printFoundItems(taskList.findItems(query));
+    }
+
+    private String addTask(String input, String command) throws IncompleteInputException, WrongInputException,
+            IOException {
+        if (command.equals("deadline")) {
+            String[] description = parser.parseFormatDescription(input, "deadline", DEADLINE_FORMAT);
+            taskList.addTask(new Deadline(description[0], description[1]));
+        } else if (command.equals("event")) {
+            String[] description = parser.parseFormatDescription(input, "event", EVENT_FORMAT);
+            taskList.addTask(new Event(description[0], description[1]));
+        } else {
+            String description = parser.parseStringDescription(input, "todo");
+            taskList.addTask(new Todo(description));
+        }
+        Task latestTask = taskList.getLast();
+        storage.addTask(latestTask);
+        return responseGenerator.getAddTaskMessage(latestTask, taskList.size());
     }
 }
