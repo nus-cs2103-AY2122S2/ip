@@ -115,14 +115,45 @@ Example: `remind 1 2022-02-15 13:16`
 ```
 
 ## Command summary
-Command | Format
--------- | ------------------
-todo | `todo [description]`
-deadline | `deadline [description] /by [date]`
-event | `event [description] /by [date]`
-list | `list`
-delete | `delete [index]`
-mark | `mark [index]`
-unmark | `unmark [index]`
-find | `find [keyword]`
-remind | `remind [index] [date] [time]`
+<table>
+  <tr>
+    <th>Command</th>
+    <th>Format</th>
+  </tr>
+  <tr>
+    <td>todo</td>
+    <td><code>todo [description]</code></td>
+  </tr>
+  <tr>
+    <td>deadline</td>
+    <td><code>deadline [description] /by [date]</code></td>
+  </tr>
+  <tr>
+    <td>event</td>
+    <td><code>event [description] /by [date]</code></td>
+  </tr>
+  <tr>
+    <td>list</td>
+    <td><code>list</code></td>
+  </tr>
+  <tr>
+    <td>delete</td>
+    <td><code>delete [index]</code></td>
+  </tr>
+  <tr>
+    <td>mark</td>
+    <td><code>mark [index]</code></td>
+  </tr>
+  <tr>
+    <td>unmark</td>
+    <td><code>unmark [index]</code></td>
+  </tr>
+  <tr>
+    <td>find</td>
+    <td><code>find [keyword]</code></td>
+  </tr>
+  <tr>
+    <td>remind</td>
+    <td><code>remind [index] [date] [time]</code></td>
+  </tr>
+</table>
