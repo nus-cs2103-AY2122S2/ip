@@ -15,6 +15,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+/*
+ * Code for GUI was referenced from se-education.org
+ * https://se-education.org/guides/tutorials/javaFx.html
+ */
+
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -23,6 +28,11 @@ import javafx.scene.shape.Circle;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+
+    /**
+     * code to make user icon circle was referenced from Ng Jun Kang
+     * https://github.com/ngjunkang/ip.git
+     */
     @FXML
     private Circle displayPicture;
 

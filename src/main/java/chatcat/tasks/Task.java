@@ -61,6 +61,10 @@ public abstract class Task implements Serializable {
         return getStatus() + " " + TASK;
     }
 
+    /*
+     * Logic for duplicate extension was referenced from Ng Jun Kang
+     * https://github.com/ngjunkang/ip.git
+     */
     @Override
     public abstract boolean equals(Object o);
 

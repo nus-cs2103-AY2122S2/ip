@@ -3,8 +3,9 @@ package chatcat.commands;
 import java.util.ArrayList;
 
 import chatcat.tasks.Task;
-import chatcat.util.WriteToFile;
 import chatcat.util.OutputMessage;
+import chatcat.util.SplitInput;
+import chatcat.util.WriteToFile;
 
 /**
  * The default MarkCommand class inherited from {@code Command}.
@@ -34,11 +35,10 @@ public class MarkCommand extends Command {
      * @see WriteToFile
      */
     public void mark() {
-        String[] input = MARK.split(" ");
-        taskID = Integer.parseInt(input[1]) - 1;
-
+        taskID = SplitInput.getIndex(MARK, 1);
         assert taskID < super.tasks.size() : "Index is larger than task list size";
         super.tasks.get(taskID).setDone();
+
         super.writeToFile.toWrite(super.tasks);
     }
 

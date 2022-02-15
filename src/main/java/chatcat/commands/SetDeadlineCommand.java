@@ -7,6 +7,7 @@ import chatcat.tasks.Deadline;
 import chatcat.tasks.Task;
 import chatcat.util.DateTimeUtil;
 import chatcat.util.OutputMessage;
+import chatcat.util.SplitInput;
 import chatcat.util.WriteToFile;
 
 /**
@@ -46,10 +47,10 @@ public class SetDeadlineCommand extends Command {
             throw new ChatCatException(OutputMessage.taskErrorMessage());
         }
 
-        String[] split = DEADLINE.split("/by ");
-        String deadlineStr = split[0].substring(9);
-      
-        DateTimeUtil dateTimeUtil = new DateTimeUtil(split[1]);
+        String deadlineStr = SplitInput.getTask(DEADLINE, "/by ", 9);
+        String time = SplitInput.getTime(DEADLINE, "/by ");
+        DateTimeUtil dateTimeUtil = new DateTimeUtil(time);
+
         deadline = new Deadline(deadlineStr, dateTimeUtil.getTime());
 
         if (this.tasks.contains(deadline)) {

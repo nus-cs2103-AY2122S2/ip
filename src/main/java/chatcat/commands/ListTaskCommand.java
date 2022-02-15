@@ -3,8 +3,8 @@ package chatcat.commands;
 import java.util.ArrayList;
 
 import chatcat.tasks.Task;
-import chatcat.util.WriteToFile;
 import chatcat.util.OutputMessage;
+import chatcat.util.WriteToFile;
 
 /**
  * The default ListTaskCommand class inherited from {@code Command}.

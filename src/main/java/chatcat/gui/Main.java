@@ -11,6 +11,11 @@ import javafx.stage.Stage;
 import chatcat.ChatCat;
 
 /**
+ * Code for GUI was referenced from se-education.org
+ * https://se-education.org/guides/tutorials/javaFx.html
+ */
+
+/**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {

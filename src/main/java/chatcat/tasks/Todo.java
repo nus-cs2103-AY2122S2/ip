@@ -33,6 +33,9 @@ public class Todo extends Task {
      * Checks if this todo {@code Todo} instance is the same as
      * another todo {@code Todo} instance.
      *
+     * Logic for duplicate extension was referenced from Ng Jun Kang
+     * https://github.com/ngjunkang/ip.git
+     *
      * @param o object {@code Object} to compare with this todo {@code Todo} instance.
      * @return true if parameter has the same description as this
      * todo {@code Todo} instance.

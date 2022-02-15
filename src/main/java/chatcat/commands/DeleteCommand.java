@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import chatcat.tasks.Task;
 import chatcat.util.OutputMessage;
+import chatcat.util.SplitInput;
 import chatcat.util.WriteToFile;
 
 /**
@@ -36,10 +37,9 @@ public class DeleteCommand extends Command {
     public void delete() {
         super.tasks = writeToFile.toRead();
 
-        String[] input = INDEX_TO_DELETE.split(" ");
-        int indexToDelete = Integer.parseInt(input[1]) - 1;
-
-        assert indexToDelete < super.tasks.size() : "Index is larger than task list size";
+        int indexToDelete = SplitInput.getIndex(INDEX_TO_DELETE, 1);
+        assert indexToDelete < super.tasks.size() :
+                "Index is larger than task list size";
         removed = tasks.remove(indexToDelete);
 
         writeToFile.toWrite(tasks);
@@ -53,7 +53,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String toString() {
-        return OutputMessage.deleteMessage(removed.toString(), super.tasks.size());
+        return OutputMessage.deleteMessage(
+                removed.toString(), super.tasks.size());
     }
 }
 

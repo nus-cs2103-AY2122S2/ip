@@ -47,7 +47,7 @@ public class TaskList {
     /**
      * Prints out exit message.
      *
-     * return exit message
+     * @return exit message
      */
     public String exitChatCat() {
         return "Bye. Hope to see you again soon!";
@@ -69,7 +69,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark task at specified location.
+     * Unmarks task at specified location.
      *
      * @param str containing the task to be marked.
      * @return unmarked task {@code Task} in String.
@@ -116,10 +116,10 @@ public class TaskList {
     }
 
     /**
-     * Creates a deadline {@code Event} object and appends the object at the end of {@code taskList}.
+     * Creates a event {@code Event} object and appends the object at the end of {@code taskList}.
      *
      * @param str containing the task to be added.
-     * @return created Event task {@code Task} in String.
+     * @return created event task {@code Task} in String.
      * @throws ChatCatException if description of event is empty.
      * @see WriteToFile
      * @see SetEventCommand
@@ -152,6 +152,7 @@ public class TaskList {
      * @param str containing the keyword.
      * @return a representation in string of filtered {@code Task} tasks that includes on keyword.
      * @see FilterCommand
+     * @see WriteToFile
      */
     public String filter(String str) throws ChatCatException {
         FilterCommand filterCommand = new FilterCommand(tasks, writeToFile, str);

@@ -3,8 +3,9 @@ package chatcat.commands;
 import java.util.ArrayList;
 
 import chatcat.tasks.Task;
-import chatcat.util.WriteToFile;
 import chatcat.util.OutputMessage;
+import chatcat.util.SplitInput;
+import chatcat.util.WriteToFile;
 
 /**
  * The default UnmarkCommand class inherited from {@code Command}.
@@ -34,11 +35,10 @@ public class UnmarkCommand extends Command {
      * @see WriteToFile
      */
     public void unmark() {
-        String[] input = UNMARK.split(" ");
-        taskID = Integer.parseInt(input[1]) - 1;
-
+        taskID = SplitInput.getIndex(UNMARK, 1);
         assert taskID < super.tasks.size() : "Index is larger than task list size";
         super.tasks.get(taskID).setUndone();
+
         super.writeToFile.toWrite(super.tasks);
     }
 

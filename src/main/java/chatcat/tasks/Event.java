@@ -38,6 +38,9 @@ public class Event extends Task {
      * Checks if this event {@code Event} instance is the same as
      * another event {@code Event} instance.
      *
+     * Logic for duplicate extension was referenced from Ng Jun Kang
+     * https://github.com/ngjunkang/ip.git
+     *
      * @param o object {@code Object} to compare with this event {@code Event} instance.
      * @return true if parameter has the same description as this
      * event {@code event} instance.
@@ -58,10 +61,10 @@ public class Event extends Task {
         }
 
         Event event = (Event) o;
-        boolean isEventEqual;
+
         boolean isDateEqual = this.time.equals(event.time);
         boolean isEventTypeEqual = this.eventStr.equals(event.eventStr);
-        isEventEqual = isDateEqual && isEventTypeEqual;
+        boolean isEventEqual = isDateEqual && isEventTypeEqual;
 
         return isEventEqual;
     }

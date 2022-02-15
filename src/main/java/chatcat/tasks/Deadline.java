@@ -35,6 +35,9 @@ public class Deadline extends Task {
      * Checks if this deadline {@code Deadline} instance is the same as
      * another deadline {@code Deadline} instance.
      *
+     * Logic for duplicate extension was referenced from Ng Jun Kang
+     * https://github.com/ngjunkang/ip.git
+     *
      * @param o object {@code Object} to compare with this deadline {@code Deadline} instance.
      * @return true if parameter has the same description as this
      * deadline {@code Deadline} instance.
@@ -55,11 +58,10 @@ public class Deadline extends Task {
         }
 
         Deadline deadline = (Deadline) o;
-        boolean isDeadlineEqual;
+
         boolean isDateEqual = this.time.equals(deadline.time);
         boolean isDeadlineTypeEqual = this.deadlineStr.equals(deadline.deadlineStr);
-        isDeadlineEqual = isDateEqual && isDeadlineTypeEqual;
-
+        boolean isDeadlineEqual = isDateEqual && isDeadlineTypeEqual;
         return isDeadlineEqual;
     }
 }

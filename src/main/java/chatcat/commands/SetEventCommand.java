@@ -7,6 +7,7 @@ import chatcat.tasks.Event;
 import chatcat.tasks.Task;
 import chatcat.util.DateTimeUtil;
 import chatcat.util.OutputMessage;
+import chatcat.util.SplitInput;
 import chatcat.util.WriteToFile;
 
 /**
@@ -46,10 +47,10 @@ public class SetEventCommand extends Command {
             throw new ChatCatException(OutputMessage.taskErrorMessage());
         }
 
-        String[] split = EVENT.split("/at ");
-        String eventStr = split[0].substring(6);
-      
-        DateTimeUtil dateTimeUtil = new DateTimeUtil(split[1]);
+        String eventStr = SplitInput.getTask(EVENT, "/at ", 6);
+        String time = SplitInput.getTime(EVENT, "/at ");
+        System.out.println(eventStr);
+        DateTimeUtil dateTimeUtil = new DateTimeUtil(time);
         event = new Event(eventStr, dateTimeUtil.getTime());
 
         if (this.tasks.contains(event)) {

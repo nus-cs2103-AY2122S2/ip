@@ -1,7 +1,7 @@
 package chatcat.chatcatexception;
 
 /**
- * Exception handling for chatcat.ChatCat
+ * Exception handling for ChatCat
  */
 public class ChatCatException extends Exception {
 

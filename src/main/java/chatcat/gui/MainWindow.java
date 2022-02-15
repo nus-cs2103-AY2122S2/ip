@@ -11,6 +11,11 @@ import javafx.scene.layout.VBox;
 import chatcat.ChatCat;
 
 /**
+ * Code for GUI was referenced from se-education.org
+ * https://se-education.org/guides/tutorials/javaFx.html
+ */
+
+/**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import chatcat.chatcatexception.ChatCatException;
 import chatcat.tasks.Task;
+import chatcat.util.SplitInput;
 import chatcat.util.WriteToFile;
 import chatcat.util.OutputMessage;
 
@@ -14,22 +15,22 @@ import chatcat.util.OutputMessage;
  */
 public class FilterCommand extends Command {
     ArrayList<Task> filteredList = new ArrayList<>();
-    final String KEYWORD;
+    final String STR_WITH_KEYWORD;
 
     /**
      * Creates a default FilterCommand {@code Command} object.
      *
      * @param tasks the tasklist {@code ArrayList}.
      * @param writeToFile the class to handle writing of .ser files.
-     * @param KEYWORD keyword to filter list of tasks {@code Task}.
+     * @param STR_WITH_KEYWORD keyword to filter list of tasks {@code Task}.
      */
-    public FilterCommand(ArrayList<Task> tasks, WriteToFile writeToFile, String KEYWORD) {
+    public FilterCommand(ArrayList<Task> tasks, WriteToFile writeToFile, String STR_WITH_KEYWORD) {
         super(tasks, writeToFile);
-        this.KEYWORD = KEYWORD;
+        this.STR_WITH_KEYWORD = STR_WITH_KEYWORD;
     }
 
     /**
-     * Displays the tasks {@code Task} in tasklist
+     * Gets the tasks {@code Task} in tasklist
      * {@code taskList} that includes a specified keyword.
      *
      * @see Task
@@ -37,11 +38,11 @@ public class FilterCommand extends Command {
     public void filter() throws ChatCatException {
         super.tasks = writeToFile.toRead();
 
-        /** Searches the task list and outputs tasks with keyword in filteredList **/
-        String[] input = KEYWORD.split(" ");
+        /* Searches the task list and outputs tasks with keyword in filteredList */
+        String keyword = SplitInput.getKeyword(STR_WITH_KEYWORD);
       
         super.tasks.forEach(task -> {
-            if (task.containsKeyword(input[1])) {
+            if (task.containsKeyword(keyword)) {
                 filteredList.add(task);
             }
         });

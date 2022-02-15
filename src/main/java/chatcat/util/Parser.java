@@ -1,7 +1,6 @@
 package chatcat.util;
 
 import chatcat.tasklist.TaskList;
-
 import chatcat.chatcatexception.ChatCatException;
 
 public class Parser {

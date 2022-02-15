@@ -10,7 +10,7 @@ import chatcat.util.WriteToFile;
  */
 public class Command {
     ArrayList<Task> tasks;
-    WriteToFile writeToFile;
+    final WriteToFile writeToFile;
 
     /**
      * Creates a {@code Command} object.
