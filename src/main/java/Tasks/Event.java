@@ -52,9 +52,12 @@ public class Event extends Task {
      * returns a new instance of Event class.
      */
     public Event(String message) {
+
         super(message.split(SEPARATOR, LIMIT)[TSK_INDEX]);
+
         String str = message.split(SEPARATOR, LIMIT)[ET_IDX];
         DateHandler.checkValidDate(str.split(SPACE, LIMIT)[ET_IDX].trim());
+
         this.time = new DateHandler(str.split(SPACE, LIMIT)[ET_IDX].trim());
     }
 
@@ -64,9 +67,12 @@ public class Event extends Task {
      * @param dummyVariable int to differentiate from other constructor.
      */
     public Event(String str, int dummyVariable) {
+
         super(str.substring(SYMBOL.length(), str.indexOf(TIME_ARGUMENT_OUTPUT)).trim(), DUMMY_VARIABLE);
+
         String temp = str.substring(str.indexOf(TIME_ARGUMENT_OUTPUT) + TIME_ARGUMENT_OUTPUT.length());
         temp = temp.trim().substring(START_INDEX, temp.length() - 1); // removes ")".
+
         this.time = new DateHandler(temp, DUMMY_VARIABLE);
     }
 
@@ -98,9 +104,11 @@ public class Event extends Task {
      */
     public static boolean correctArgument(String text) {
 
-        if (!text.contains(SEPARATOR)
-                || !text.contains(TIME_ARGUMENT)
-                || text.trim().split(TIME_ARGUMENT).length == 1) {
+        boolean isSeparatorAbsent = !text.contains(SEPARATOR);
+        boolean isTimeAbsent = !text.contains(TIME_ARGUMENT);
+        boolean isTimeArgumentAbsent = text.trim().split(TIME_ARGUMENT).length == 1;
+
+        if (isSeparatorAbsent || isTimeAbsent || isTimeArgumentAbsent) {
             throw new MissingTimeArgumentException("Event " + text);
         }
 

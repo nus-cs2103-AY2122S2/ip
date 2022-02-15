@@ -140,9 +140,9 @@ public class TaskList {
 
         String str = "";
         int taskNum = 1;
-
+        String separator = ".";
         for (Task task: this.tasks) {
-            str += (taskNum + "." + task + "\n");
+            str += (taskNum + separator + task + "\n");
             taskNum += 1;
         }
         return str;

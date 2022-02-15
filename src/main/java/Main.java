@@ -1,6 +1,4 @@
 
-import java.util.Scanner;
-
 import conan.Conan;
 import exceptions.EmptyCommandException;
 import exceptions.IllegalCommandException;
@@ -45,56 +43,6 @@ public class Main extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-
-    /**
-     * starts the program.
-     *
-     * @param args parameter to start the main method.
-     */
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-
-        // creates a new instance of conan.
-
-        Conan conan = new Conan();
-        CarryOn carryOn = CarryOn.NEXT;
-        String userInput = sc.nextLine();
-
-        //keep asking the user for name till u get a valid name.
-        while (userInput.trim().equalsIgnoreCase(EMPTY_STRING)) {
-            // Ui.printSeparator();
-            Ui.printAskValidName();
-            userInput = sc.nextLine();
-        }
-
-        // code when a similar user is found.
-        boolean isSimilarPreviousUser = conan.tellName(userInput);
-        if (isSimilarPreviousUser) {
-            userInput = sc.nextLine();
-            while (!conan.continueFromLastTime(userInput)) {
-                userInput = sc.nextLine();
-            }
-        }
-
-        // while the user still wants to type in.
-        while (carryOn == CarryOn.NEXT) {
-
-            try {
-                // get the text from the user.
-                String text = sc.nextLine();
-                // tell conan the text and update if the user wants to continue.
-                if (text.equalsIgnoreCase(EMPTY_STRING)) {
-                    throw new EmptyCommandException(EMPTY_STRING);
-                }
-                carryOn = conan.tell(text);
-            } catch (IllegalCommandException e) {
-                Ui.printMessage(e.toString());
-                //Ui.printSeparator();
-            }
-        }
-    }
 
     /**
      * Starts the user interface.
@@ -181,12 +129,15 @@ public class Main extends Application {
      * @param conan the task manager instance.
      */
     private void handleUserInput(CarryOn[] programStage, Conan conan) {
+
         Label userText = new Label(userInput.getText());
         Label conanText = new Label(getResponse(userInput.getText(), programStage, conan));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
                 DialogBox.getConanDialog(conanText, new ImageView(conanImage))
         );
+
         userInput.clear();
     }
 
@@ -196,11 +147,9 @@ public class Main extends Application {
      * @param input the input given by the user.
      * @param programStage the stage in which the program is currently in.
      * @param conan the task manager instance.
-     * @return
+     * @return appropriate response to the user command.
      */
     private String getResponse(String input, CarryOn[] programStage, Conan conan) {
-
-
 
         if (programStage[0] == CarryOn.USERNAME) {
             if (input.equalsIgnoreCase(EMPTY_STRING)) {
@@ -211,28 +160,25 @@ public class Main extends Application {
             boolean isSimilarPreviousUser = conan.tellName(input);
             if (isSimilarPreviousUser) {
                 programStage[0] = CarryOn.CONTINUE_FROM_LAST_TIME;
-                return Ui.readFile();
             } else {
                 programStage[0] = CarryOn.NEXT;
-                return Ui.readFile();
             }
+            return Ui.readFile();
 
         }
 
         if (programStage[0] == CarryOn.CONTINUE_FROM_LAST_TIME) {
             if (conan.continueFromLastTime(input)) {
                 programStage[0] = CarryOn.NEXT;
-                return Ui.readFile();
-            } else {
-                return Ui.readFile();
             }
+            return Ui.readFile();
         }
 
         if (programStage[0] == CarryOn.NEXT) {
 
             try {
                 if (input.equalsIgnoreCase(EMPTY_STRING)) {
-                    throw new RuntimeException();
+                    throw new EmptyCommandException("");
                 }
                 programStage[0] = conan.tell(input);
                 return Ui.readFile();

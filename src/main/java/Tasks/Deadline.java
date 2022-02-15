@@ -53,9 +53,12 @@ public class Deadline extends Task {
      * return an instance of deadline.
      */
     public Deadline(String message) {
+
         super(message.split(SEPARATOR, LIMIT)[TSK_INDEX]);
+
         String str = message.split(SEPARATOR, LIMIT)[DD_IDX];
         DateHandler.checkValidDate(str.split(SPACE, LIMIT)[DD_IDX]);
+
         this.deadline = new DateHandler(str.split(SPACE, LIMIT)[DD_IDX]);
     }
 
@@ -65,9 +68,12 @@ public class Deadline extends Task {
      * @param dummyVariable int to differentiate from other constructor.
      */
     public Deadline(String str, int dummyVariable) {
+
         super(str.substring(SYMBOL.length(), str.indexOf(TIME_ARGUMENT_OUTPUT)).trim(), DUMMY_VARIABLE);
+
         String temp = str.substring(str.indexOf(TIME_ARGUMENT_OUTPUT) + TIME_ARGUMENT_OUTPUT.length());
         temp = temp.trim().substring(START_INDEX, temp.length() - 1); // removes ")".
+
         this.deadline = new DateHandler(temp, DUMMY_VARIABLE);
     }
 
@@ -78,8 +84,12 @@ public class Deadline extends Task {
      * @throws MissingTimeArgumentException if the user missed time argument out.
      */
     public static boolean correctArgument(String text) {
-        if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT)
-                || text.trim().split(TIME_ARGUMENT).length == 1) {
+
+        boolean isSeparatorAbsent = !text.contains(SEPARATOR);
+        boolean isTimeAbsent = !text.contains(TIME_ARGUMENT);
+        boolean isTimeArgumentAbsent = text.trim().split(TIME_ARGUMENT).length == 1;
+
+        if (isSeparatorAbsent || isTimeAbsent || isTimeArgumentAbsent) {
             throw new MissingTimeArgumentException("Deadline " + text);
         }
 

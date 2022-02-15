@@ -21,6 +21,9 @@ public class CommandChecker {
     // starting index of a list or a char in string.
     private static final int START_INDEX = 0;
 
+    // Stores the split limit.
+    private static final int SPLIT_LIMIT = 2;
+
     // MARK stores the command mark.
     private static final String MARK = "mark";
 
@@ -81,56 +84,76 @@ public class CommandChecker {
 
             // Primary error handling for commands.
             if (!message.contains(SPACE)) {
-                // check if the commands are empty,
-                // or else its invalid command.
-                if (message.equalsIgnoreCase(TODO)) {
-                    throw new MissingTaskArgumentException(TODO);
-                } else if (message.equalsIgnoreCase(DEADLINE)) {
-                    throw new MissingTaskArgumentException(DEADLINE);
-                } else if (message.equalsIgnoreCase(EVENT)) {
-                    throw new MissingTaskArgumentException(EVENT);
-                } else if (message.equalsIgnoreCase(MARK)) {
-                    throw new MissingTaskArgumentException(MARK);
-                } else if (message.equalsIgnoreCase(UNMARK)) {
-                    throw new MissingTaskArgumentException(UNMARK);
-                } else if (message.equalsIgnoreCase(DELETE)) {
-                    throw new MissingTaskArgumentException(DELETE);
-                } else if (message.equalsIgnoreCase(DUE_BEFORE)) {
-                    throw new MissingTaskArgumentException(DUE_BEFORE);
-                } else if (message.equalsIgnoreCase(DUE_ON)) {
-                    throw new MissingTaskArgumentException(DUE_ON);
-                } else if (message.equalsIgnoreCase(FIND)) {
-                    throw new MissingTaskArgumentException(FIND);
-                } else {
-                    throw new IllegalCommandException(message);
-                }
+                throwMissingTaskArgument(message);
             }
 
-            String command = message.split(SPACE, 2)[START_INDEX].toLowerCase();
+            String command = message.split(SPACE, SPLIT_LIMIT)[START_INDEX].toLowerCase();
+            return findCommandType(command);
 
-            // check if the command says mark or unmarked.
-            switch (command) {
-            case MARK:
-                return Commands.MARK;
-            case UNMARK:
-                return Commands.UNMARK;
-            case DELETE:
-                return Commands.DELETE;
-            case DUE_BEFORE:
-                return Commands.DUEBEFORE;
-            case DUE_ON:
-                return Commands.DUEON;
-            case FIND:
-                return Commands.FIND;
-            default:
-                // do nothing
-            }
-
-            return Commands.ADD;
         } catch (IllegalCommandException e) {
             Ui.printMessage(e.toString());
             Ui.printTryAgain();
             return Commands.INVALID;
+        }
+    }
+
+    /**
+     * throws an exception depending on the command type.
+     *
+     * @param command the command entered by the user.
+     * @throws MissingTaskArgumentException if the command is missing the task argument.
+     * @throws IllegalCommandException if the command is not appropriate.
+     */
+    private static void throwMissingTaskArgument(String command) {
+
+        // check if the commands are empty,
+        // or else its invalid command.
+        if (command.equalsIgnoreCase(TODO)) {
+            throw new MissingTaskArgumentException(TODO);
+        } else if (command.equalsIgnoreCase(DEADLINE)) {
+            throw new MissingTaskArgumentException(DEADLINE);
+        } else if (command.equalsIgnoreCase(EVENT)) {
+            throw new MissingTaskArgumentException(EVENT);
+        } else if (command.equalsIgnoreCase(MARK)) {
+            throw new MissingTaskArgumentException(MARK);
+        } else if (command.equalsIgnoreCase(UNMARK)) {
+            throw new MissingTaskArgumentException(UNMARK);
+        } else if (command.equalsIgnoreCase(DELETE)) {
+            throw new MissingTaskArgumentException(DELETE);
+        } else if (command.equalsIgnoreCase(DUE_BEFORE)) {
+            throw new MissingTaskArgumentException(DUE_BEFORE);
+        } else if (command.equalsIgnoreCase(DUE_ON)) {
+            throw new MissingTaskArgumentException(DUE_ON);
+        } else if (command.equalsIgnoreCase(FIND)) {
+            throw new MissingTaskArgumentException(FIND);
+        } else {
+            throw new IllegalCommandException(command);
+        }
+    }
+
+    /**
+     * checks the command type.
+     *
+     * @param command the command entered by the user.
+     * @return command type entered by the user..
+     */
+    private static Commands findCommandType(String command) {
+        // check if the command says mark or unmarked.
+        switch (command) {
+        case MARK:
+            return Commands.MARK;
+        case UNMARK:
+            return Commands.UNMARK;
+        case DELETE:
+            return Commands.DELETE;
+        case DUE_BEFORE:
+            return Commands.DUEBEFORE;
+        case DUE_ON:
+            return Commands.DUEON;
+        case FIND:
+            return Commands.FIND;
+        default:
+            return Commands.ADD;
         }
     }
 
