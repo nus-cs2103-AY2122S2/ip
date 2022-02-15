@@ -9,7 +9,9 @@ import duke.task.TaskList;
  * Used to exit the Ducky chatbot when user calls "bye".
  */
 public class ExitCommand extends Command {
-    static final String BYE_RESPONSE = "Bye~ Hope to see you again soon! *✧･ﾟ:*(*❦ω❦)*:･ﾟ✧*";
+    static final String BYE_RESPONSE = "This window will close in 3 seconds\n"
+            + "Bye~ Hope to see you again soon! *✧･ﾟ:*"
+            + "(*❦ω❦)*:･ﾟ✧*";
 
     /**
      * Constructor method for the ExitCommand.

@@ -1,6 +1,9 @@
 package duke;
 
 import javafx.fxml.FXML;
+import javafx.util.Duration;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -25,13 +28,28 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/gude.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duckling.png"));
 
+    private String welcome = "Hello! I'm Ducky! :)\n" + "I am a task manager.\n"
+                + "Type 'help' for more information on the commands you can give me.\n"
+                + "What can I do for you today?\n"
+                + "✧･ﾟ: *✧･ﾟ:* |\\__( o)> *:･ﾟ✧*:･ﾟ✧";
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcome, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    private void handleExit() {
+        userInput.setDisable(true);
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
     }
 
     /**
@@ -40,7 +58,10 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().toLowerCase(java.util.Locale.ROOT);
+        if (input.equals("bye")) {
+            handleExit();
+        }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
