@@ -3,16 +3,18 @@ package aeromon.command;
 import aeromon.AeromonException;
 import aeromon.Storage;
 import aeromon.Ui;
-import aeromon.task.TaskArrayList;
+import aeromon.TaskArrayList;
 
 /**
  * ByeCommand class handles the exit commands.
  */
 public class ByeCommand extends Command {
 
+    private static final String FAREWELL_MESSAGE = "Buai Buai! Ciao for now!";
+
     @Override
-    public void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
-        ui.print("Buai Buai! Ciao for now!");
+    public String execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
+        return FAREWELL_MESSAGE;
     }
 
     @Override

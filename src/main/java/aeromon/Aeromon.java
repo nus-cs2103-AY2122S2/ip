@@ -1,8 +1,12 @@
 package aeromon;
 
 import aeromon.command.Command;
-import aeromon.command.CommandManager;
-import aeromon.task.TaskArrayList;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
@@ -12,16 +16,24 @@ import java.util.ArrayList;
 public class Aeromon {
 
     private TaskArrayList taskList;
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
+    private Image aeromon = new Image(this.getClass().getResourceAsStream("/images/Aeromon.jpg"));
 
     /**
      * Constructs the Aeromon object.
-     * @param fileLocation the path of storage file for Aeromon.
      */
-    public Aeromon(String fileLocation) {
+    public Aeromon() {
         ui = new Ui();
-        storage = new Storage(fileLocation);
+        storage = new Storage("data/localTasks.txt");
 
         try {
             taskList = new TaskArrayList(storage.getFile());
@@ -32,26 +44,24 @@ public class Aeromon {
     }
 
     /**
-     * Starts and runs the Aeromon bot.
+     * Starts the Aeromon bot by greeting the user with the greeting message.
+     * @return the greeting message in String.
      */
-    public void start() {
-        ui.greet();
-        boolean isBye = false;
-
-        while (!isBye) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = CommandManager.read(fullCommand);
-                command.execute(taskList, ui, storage);
-                isBye = command.isExit();
-            } catch (AeromonException e) {
-                ui.print(e.getMessage());
-            }
-        }
+    public String start() {
+        return "Hey, Aeromon here! Fancy a cup of tea?";
     }
 
-    public static void main(String[] args) {
-        Aeromon aeromon = new Aeromon("data/localTasks.txt");
-        aeromon.start();
+    /**
+     * Gets the response from the CommandManager.
+     * @param input User input.
+     * @return The response String.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = CommandManager.read(input);
+            return command.execute(taskList, ui, storage);
+        } catch (AeromonException exception) {
+            return exception.getMessage();
+        }
     }
 }

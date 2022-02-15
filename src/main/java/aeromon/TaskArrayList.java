@@ -1,4 +1,6 @@
-package aeromon.task;
+package aeromon;
+
+import aeromon.task.Task;
 
 import java.util.ArrayList;
 
@@ -47,7 +49,6 @@ public class TaskArrayList {
      * @return the deleted Task object.
      */
     public Task delete(int i) {
-        System.out.println("");
         return tasks.remove(i);
     }
 

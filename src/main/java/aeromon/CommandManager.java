@@ -1,6 +1,6 @@
-package aeromon.command;
+package aeromon;
 
-import aeromon.AeromonException;
+import aeromon.command.*;
 
 import java.time.LocalDate;
 

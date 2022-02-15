@@ -5,7 +5,7 @@ import aeromon.Storage;
 import aeromon.Ui;
 import aeromon.task.Deadline;
 import aeromon.task.Event;
-import aeromon.task.TaskArrayList;
+import aeromon.TaskArrayList;
 import aeromon.task.ToDo;
 
 import java.time.LocalDate;
@@ -17,6 +17,8 @@ public class AddCommand extends Command {
 
     private TaskType taskType;
     private String[] tokens;
+
+    private static final String STARTING_MESSAGE = "Nicely! I've added for you: \n";
 
     public enum TaskType { TODO, DEADLINE, EVENT };
 
@@ -31,32 +33,28 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
-        ui.print("Nicely! I've added for you:");
+    public String execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
 
         switch(taskType) {
         case TODO:
             ToDo toDo = new ToDo(tokens[0], false);
             taskArrayList.add(toDo);
-            ui.print(toDo.toString());
-            ui.print(taskArrayList.getTasksStatus());
-            break;
+            storage.saveFile(taskArrayList.getTasks());
+            return STARTING_MESSAGE + toDo + taskArrayList.getTasksStatus();
 
         case DEADLINE:
             Deadline deadline = new Deadline(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
             taskArrayList.add(deadline);
-            ui.print(deadline.toString());
-            ui.print(taskArrayList.getTasksStatus());
-            break;
+            storage.saveFile(taskArrayList.getTasks());
+            return STARTING_MESSAGE + deadline + taskArrayList.getTasksStatus();
 
         case EVENT:
             Event event = new Event(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
             taskArrayList.add(event);
-            ui.print(event.toString());
-            ui.print(taskArrayList.getTasksStatus());
-            break;
+            storage.saveFile(taskArrayList.getTasks());
+            return STARTING_MESSAGE + event + taskArrayList.getTasksStatus();
 
         }
-        storage.saveFile(taskArrayList.getTasks());
+        return "Ohnoz I couldn't execute the command, tHerE weRE somE ErrORss!";
     }
 }
