@@ -9,14 +9,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
@@ -33,8 +36,8 @@ public class Duke extends Application {
     private ArrayList<Task> itemList = new ArrayList<>();
 
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/cat.jpeg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/woman.jpeg"));
 
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
@@ -240,18 +243,30 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
 
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
         sendButton = new Button("Send");
+        sendButton.setStyle("-fx-font: Courier;" +
+                "-fx-font-family: Courier;" +
+                "-fx-font-size: 20;" +
+                "-fx-text-fill: #FF69B4;" +
+                "-fx-background-color: #89cff0 ; " +
+                "-fx-background-radius: 10");
+        sendButton.setTranslateX(-5);
+
+        BackgroundFill myBF = new BackgroundFill(Color.HONEYDEW, new CornerRadii(1),
+                new Insets(0.0,0.0,0.0,0.0));// or null for the padding
+//then you set to your node or container or layout
+        dialogContainer.setBackground(new Background(myBF));
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
+        scene.setFill(Color.AQUAMARINE);
         stage.setScene(scene);
         stage.show();
 
@@ -272,10 +287,23 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefSize(280, 50);
+        userInput.setTranslateX(10);
+        userInput.setStyle("-fx-font: Courier;" +
+                "-fx-font-family: Courier;" +
+                "-fx-font-size: 20;" +
+                "-fx-text-fill: #a87bab;" +
+                "-fx-background-color: #89cff0 ; " +
+                "-fx-background-radius: 10");
+//        userInput.
+        //
 
-        sendButton.setPrefWidth(55.0);
 
+        sendButton.setPrefSize(100,50);
+//        sendButton.setPadding(new Insets());
+        sendButton.setBorder(
+                new Border(
+                new BorderStroke(Color.BLUEVIOLET, BorderStrokeStyle.SOLID, new CornerRadii(10), new BorderWidths(3))));
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
         AnchorPane.setBottomAnchor(sendButton, 1.0);
