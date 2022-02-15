@@ -99,7 +99,7 @@ Bye. Hope to see you again soon!
 
 Here's how it should look:
 
-![ui-image](../docs/UI.png)
+![example image](assets/UI.png)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
