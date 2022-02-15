@@ -25,3 +25,6 @@ public class Main {
     }
 }
 ```
+
+Credit:
+JavaFX code used in this project is adapted from that present in the [SE-EDU JavaFX tutorial](https://se-education.org/guides/tutorials/javaFx.html).
