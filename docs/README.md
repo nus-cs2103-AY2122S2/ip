@@ -1,6 +1,3 @@
-Baron ChatBot
---------------------------------------------
-
 # Baron ChatBot User Guide
 
 Baron ChatBot or **BCB** in short, is your personal assistant chatbot to help you keep track of tasks and manage them. Everyone should keep a list of tasks to do, so that they stay on track.
