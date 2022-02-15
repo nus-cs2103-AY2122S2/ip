@@ -8,8 +8,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate at;
+
+    private static final String EVENT_STRING_FORMAT = "[E]%1$s (at: %2$s)";
+    private static final String EVENT_OUTPUT_FORMAT = "E / %1$s / %2$s";
 
     /**
      * Constructs the Event object.
@@ -23,11 +26,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%1$s (at: %2$s)", super.toString(), at.format(dateTimeFormatter));
+        return String.format(EVENT_STRING_FORMAT, super.toString(), at.format(DATE_TIME_FORMATTER));
     }
 
     @Override
     public String toOutputFormat() {
-        return String.format("E / %1$s / %2$s", super.toOutputFormat(), at.format(dateTimeFormatter));
+        return String.format(EVENT_OUTPUT_FORMAT, super.toOutputFormat(), at.format(DATE_TIME_FORMATTER));
     }
 }

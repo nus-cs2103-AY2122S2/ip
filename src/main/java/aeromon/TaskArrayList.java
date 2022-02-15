@@ -11,6 +11,9 @@ public class TaskArrayList {
 
     private ArrayList<Task> tasks;
 
+    private static final String NO_TASK_MESSAGE = "Nicely! No more tasks on the list! Good job! :)";
+    private static final String TASK_MESSAGE = "You currently have %d tasks on the list >.< Jiayous";
+
     /**
      * Constructs the TaskArrayList object.
      * @param tasks the ArrayList with the task objects.
@@ -74,9 +77,11 @@ public class TaskArrayList {
      */
     public String getTaskList() {
         StringBuilder list = new StringBuilder();
+        int index = 1;
 
-        for (int i = 0; i < tasks.size(); i++) {
-            list.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
+        for (Task task : tasks) {
+            list.append(index).append(". ").append(task.toString()).append("\n");
+            index++;
         }
         return list.toString();
     }
@@ -87,9 +92,9 @@ public class TaskArrayList {
      */
     public String getTasksStatus() {
         if (tasks.size() == 0) {
-            return "Nicely! No more tasks on the list! Good job! :)";
+            return NO_TASK_MESSAGE;
         } else {
-            return String.format("You currently have %d tasks on the list >.< Jiayous", tasks.size());
+            return String.format(TASK_MESSAGE, tasks.size());
         }
     }
 

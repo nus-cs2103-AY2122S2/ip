@@ -18,8 +18,8 @@ public class CommandManager {
     public static Command read(String fullCommand) throws AeromonException {
         assert fullCommand != null : "Command is null";
 
-        String[] arr = fullCommand.split(" ", 2);
-        String command = arr[0];
+        String[] parameters = fullCommand.split(" ", 2);
+        String command = parameters[0];
 
         switch (command) {
         case "bye":
@@ -29,38 +29,38 @@ public class CommandManager {
             return new ListCommand();
 
         case "mark": {
-            int taskNum = getTaskNum(arr[1]);
+            int taskNum = getTaskNum(parameters[1]);
             return new EditCommand(EditCommand.EditType.MARK, taskNum);
         }
 
         case "unmark": {
-            int taskNum = getTaskNum(arr[1]);
+            int taskNum = getTaskNum(parameters[1]);
             return new EditCommand(EditCommand.EditType.UNMARK, taskNum);
         }
 
         case "delete": {
-            int taskNum = getTaskNum(arr[1]);
+            int taskNum = getTaskNum(parameters[1]);
             return new EditCommand(EditCommand.EditType.DELETE, taskNum);
         }
 
         case "todo": {
-            return new AddCommand(AddCommand.TaskType.TODO, new String[] { checkDescription("Todo", arr[1]) });
+            return new AddCommand(AddCommand.TaskType.TODO, new String[] { checkDescription("Todo", parameters[1]) });
         }
 
         case "deadline": {
-            String description = checkDescription("Deadline", arr[1]);
-            String[] tokens = description.split(" /by ");
-            return new AddCommand(AddCommand.TaskType.DEADLINE, tokens);
+            String deadlineDescription = checkDescription("Deadline", parameters[1]);
+            String[] deadlineTokens = deadlineDescription.split(" /by ");
+            return new AddCommand(AddCommand.TaskType.DEADLINE, deadlineTokens);
         }
 
         case "event": {
-            String description = checkDescription("Event", arr[1]);
-            String[] tokens = description.split(" /at ");
-            return new AddCommand(AddCommand.TaskType.EVENT, tokens);
+            String eventDescription = checkDescription("Event", parameters[1]);
+            String[] eventTokens = eventDescription.split(" /at ");
+            return new AddCommand(AddCommand.TaskType.EVENT, eventTokens);
         }
 
         case "find": {
-            return new FindCommand(arr[1]);
+            return new FindCommand(parameters[1]);
         }
 
         default:
