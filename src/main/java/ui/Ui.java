@@ -73,8 +73,9 @@ public class Ui {
         welcome.append("5. mark X (mark X task as done)\n");
         welcome.append("6. unmark X (mark X task as undone)\n");
         welcome.append("7. delete X (delete X task from the list)\n");
-        welcome.append("8. help - display command list\n");
-        welcome.append("9. bye - exit Duke bot\n");
+        welcome.append("8. find [search term] - locates task(s)\n");
+        welcome.append("9. help - display command list\n");
+        welcome.append("10. bye - exit Duke bot\n");
         return welcome.toString();
     }
 
