@@ -126,27 +126,17 @@ public class TaskList {
                 }
                 list.add(task);
             } else if (taskType.equals("D")) {
-                String tempDescription = line.split("by: ")[0].substring(7);
-                int tempDescLength = tempDescription.length();
-                String description = tempDescription.substring(0, tempDescLength - 2);
-                String tempTimeBy = line.split("by: ")[1];
-                int endIdx = tempTimeBy.lastIndexOf(")");
-                String timeBy = tempTimeBy.substring(0, endIdx);
+                String[] split = TaskList.splitTask(line, "by: ");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                Task task = new Event(description, LocalDate.parse(timeBy, formatter).toString());
+                Task task = new Deadline(split[0], LocalDate.parse(split[1], formatter).toString());
                 if (isMarked) {
                     task = task.mark();
                 }
                 list.add(task);
             } else {
-                String tempDescription = line.split("at: ")[0].substring(7);
-                int tempDescLength = tempDescription.length();
-                String description = tempDescription.substring(0, tempDescLength - 2);
-                String tempTimeBy = line.split("at: ")[1];
-                int endIdx = tempTimeBy.lastIndexOf(")");
-                String timeBy = tempTimeBy.substring(0, endIdx);
+                String[] split = TaskList.splitTask(line, "at: ");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                Task task = new Event(description, LocalDate.parse(timeBy, formatter).toString());
+                Task task = new Event(split[0], LocalDate.parse(split[1], formatter).toString());
                 if (isMarked) {
                     task = task.mark();
                 }
@@ -156,5 +146,22 @@ public class TaskList {
         }
         file.close();
         return list;
+    }
+
+    /**
+     * Splits the string representing a task into its description and time
+     *
+     * @param task a string representing the task
+     * @param operator the string to split the task
+     * @return a string array consisting the description and time
+     */
+    public static String[] splitTask(String task, String operator) {
+        String tempDescription = task.split(operator)[0].substring(7);
+        int tempDescLength = tempDescription.length();
+        String description = tempDescription.substring(0, tempDescLength - 2);
+        String tempTime = task.split(operator)[1];
+        int endIdx = tempTime.lastIndexOf(")");
+        String time = tempTime.substring(0, endIdx);
+        return new String[]{description, time};
     }
 }

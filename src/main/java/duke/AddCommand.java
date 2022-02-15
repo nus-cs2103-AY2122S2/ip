@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -43,39 +42,32 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         try {
-            StringBuilder sb = new StringBuilder();
-            LocalDate parsedTime;
-            String formattedTime;
+            Task task;
             switch (this.getFirstWord()) {
             case "todo":
-                Task taskTodo = new Todo(this.description);
-                tasks.add(taskTodo);
-                sb.append("Got it. I've added this task:\n");
-                sb.append("  ").append(taskTodo);
-                sb.append("Now you have ").append(tasks.size()).append(" tasks in the list.");
+                task = new Todo(this.description);
                 break;
             case "deadline":
-                Task taskDeadline = new Deadline(this.description, this.time);
-                tasks.add(taskDeadline);
-                sb.append("Got it. I've added this task:\n");
-                sb.append("  ").append(taskDeadline).append("\n");
-                sb.append("Now you have ").append(tasks.size()).append(" tasks in the list.");
+                task = new Deadline(this.description, this.time);
                 break;
             case "event":
-                Task taskEvent = new Event(this.description, this.time);
-                tasks.add(taskEvent);
-                sb.append("Got it. I've added this task:\n");
-                sb.append("  ").append(taskEvent).append("\n");
-                sb.append("Now you have ").append(tasks.size()).append(" tasks in the list.");
+                task = new Event(this.description, this.time);
                 break;
             default:
-                // pass through
-                break;
+                return "Please try again!";
             }
+            String taskString = task.toString();
+            tasks.add(task);
             storage.update(tasks);
-            return sb.toString();
+            return getOutput(taskString, tasks.size());
         } catch (DateTimeParseException e) {
             return "Please type a valid date! (Format: YYYY-MM-DD)";
         }
+    }
+
+    public String getOutput(String task, int size) {
+        return "Got it. I've added this task:\n" +
+                "  " + task + "\n" +
+                "Now you have " + size + " tasks in the list.";
     }
 }
