@@ -18,56 +18,12 @@ eye too!
    - [Deleting a task: `delete`](#deleting-a-task-delete)
    - [Exiting the application: `bye`](#exiting-the-application-bye)
  - [FAQ](#faq)
- - [Summary](#summary)
 
 ---
 
 ## Quick Start
-1. Ensure you have `Java 11` or above installed on your computer. To check so, you may follow the steps below according
-   to your OS:
-
-   <details>
-      <summary>Windows</summary>
-      <p>
-   
-         1. In the windows search bar, type in "command prompt" and press Enter.
-         2. Type in `java -version` and press `Enter`.
-            1. If the version is displayed, this means Java is installed.
-            You just need to check whether the *version complies*.
-            2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
-            Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
-         
-      </p>
-   </details>
-      
-   <details>
-     <summary>MacOS</summary>
-      <p>
-
-         1. Press `cmd + space` to bring up Spotlight Search. Type `terminal` and press `Enter` to open the terminal app.
-         2. Type in `java -version` and press `Enter`.
-            1. If the version is displayed, this means Java is installed.
-               You just need to check whether the *version complies*.
-            2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
-               Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
-      
-      </p>   
-   </details>
-   
-   <details>
-      <summary>Linux</summary>
-      <p>
-
-         1. Open a new terminal window.
-         2. Type in `java -version` and press `Enter`.
-            1. If the version is displayed, this means Java is installed.
-               You just need to check whether the *version complies*.
-            2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
-               Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
-      
-      </p>
-   </details>
-      
+1. Ensure you have `Java 11` or above installed on your computer. If not, you may install it from
+[here](https://www.oracle.com/java/technologies/downloads/#java11).
 2. Download the latest version of `nikki.jar` [here](https://github.com/DavidTan0527/ip/releases/).
 3. Copy the file to any folder you want. Note that the application will also store its data in this folder.
 4. Double-click to start the app. A window similar to the picture below should pop up.
@@ -95,7 +51,9 @@ Format: `todo NAME`
 
 Examples:
 - `todo buy groceries`
-- `todo prepare ingredients for roast chicker`
+- `todo prepare ingredients for roast chicken`
+
+<br>
 
 ### Adding an Event: `event`
 Adds an Event (on a specific date) to the list.
@@ -106,6 +64,8 @@ Examples:
 - `event concert /at 27/2/2022`
 - `event award ceremony /at 6/10/2022`
 
+<br>
+
 ### Adding a Deadline: `deadline`
 Adds an Event (on a specific date) to the list.
 
@@ -115,10 +75,14 @@ Examples:
 - `deadline progress report /by 25/2/2022`
 - `deadline assignment 2 /by 2/3/2022`
 
+<br>
+
 ### Listing all tasks: `list`
 Lists all the tasks in the list. Shows the type, name, completion status of the task, and other possible details.
 
 Format: `list`
+
+<br>
 
 ### Find tasks: `find`
 Finds tasks in the list whose names (partially) matches the user input.
@@ -131,14 +95,78 @@ Examples:
 - `find project` returns `science project`, `project meeting`
 - `find prject` returns `science project`, `project meeting`
 
+<br>
+
 ### Marking a task as done: `mark`
+Marks a task as completed.
+
+Format: `mark INDEX`
+
+`INDEX` denotes what number the task is on the list. If `INDEX` is not a valid number on the list, the list will not be
+updated.
+
+Examples:
+- `mark 2`
+
+<br>
 
 ### Marking a task as not done: `unmark`
+Marks a task as not completed.
+
+Format: `unmark INDEX`
+
+`INDEX` denotes what number the task is on the list. If `INDEX` is not a valid number on the list, the list will not be
+updated.
+
+Examples:
+- `unmark 1`
+
+<br>
 
 ### Deleting a task: `delete`
+Deletes a task from the list.
+
+Format: `delete INDEX`
+
+`INDEX` denotes what number the task is on the list. If `INDEX` is not a valid number on the list, the list will not be
+updated.
+
+Examples:
+- `delete 1`
+
+<br>
 
 ### Exiting the application: `bye`
+Saves the current list to disk and exits the program.
+
+Format: `bye`
+
+<br>
+
+---
 
 ## FAQ
 
-## Summary
+**Q**: Where is the data stored?<br>
+**A**: Through testing, it depends on the launcher used to run the program, the data might be stored in a "temp" folder 
+created by the launcher itself. However, if you open the program in the terminal using `java -jar nikki.jar`, then the
+data will be stored in the same directory as the JAR file is.
+
+<br>
+
+**Q**: How do I find my data if I'm not sure how my launcher behaves?<br>
+**A**: Unfortunately, the developers do not have a good answer, as this is majorly system dependent. However, we
+strongly suggest **not** to modify the data manually, as wrong formats will cause the data to not be loaded correctly.
+So if you were locating the data file to do so, don't.
+
+<br>
+
+**Q**: What happens if the file is corrupted and my data is not loaded correctly?<br>
+**A**: The program will start with an empty list again.
+
+<br>
+
+**Q**: Will my data be saved if I don't exit the program with `bye`?<br>
+**A**: As of `v1.0.1`, the answer is **no**. However, future versions might contain such a feature.
+
+<br>
