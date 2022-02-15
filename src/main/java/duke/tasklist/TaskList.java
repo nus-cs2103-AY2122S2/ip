@@ -35,6 +35,23 @@ public class TaskList {
     }
 
     /**
+     * Checks if the task at hand is a duplicate, return true, false otherwise.
+     *
+     * @param task Task to be added to the list.
+     * @return True if task is a duplicate, false otherwise.
+     */
+    public boolean isTaskDuplicate(Task task) {
+        for (Task tasks: list) {
+            String taskDescription = tasks.getUserInput();
+
+            if (taskDescription.equals(task.getUserInput())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Removes a specific task in the list.
      *
      * @param input Input given by the user.

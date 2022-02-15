@@ -78,7 +78,7 @@ public class Parser {
         assert userInput != null : "User command to be parsed cannot be null.";
         assert type != null : "Command type cannot be null.";
 
-        Task task = null;
+        TaskList taskList = new TaskList();
 
         try {
             Task task;
@@ -102,8 +102,15 @@ public class Parser {
                 task = null;
             }
 
-            taskList.add(task);
-            return "Got it, I have added " + task.getUserInput() + " to the list!\n";
+            boolean isDuplicate = taskList.isTaskDuplicate(task);
+
+            if (isDuplicate) {
+                return "Hmm, you seem to have added this task before.";
+            } else {
+                taskList.add(task);
+                return "Got it, I have added " + task.getUserInput() + " to the list!\n";
+            }
+
         } catch (DukeException e) {
             return e.getMessage();
         } catch (ArrayIndexOutOfBoundsException e) {
