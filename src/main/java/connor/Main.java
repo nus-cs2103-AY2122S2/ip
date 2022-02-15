@@ -26,6 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.setTitle("ConnorBot v1.1.0");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
