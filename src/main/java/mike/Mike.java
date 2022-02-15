@@ -22,43 +22,12 @@ public class Mike {
         loadStoredList();
     }
 
-    /**
-     * Calls various methods relevant to initiating Mike.
-     * These include printing a greeting, loading a previously used list from the hard drive
-     * and initialising the Scanner to read in user inputs.
-     */
-    public void run() {
-        ui.printGreeting();
-        ui.printStartingInstruction();
-        loadStoredList();
-
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            requestNextInput();
-            String inputString = sc.nextLine();
-
-            if (isExitCommand(inputString)) {
-                break;
-            } else {
-                processInput(inputString);
-            }
-            saveToStoredList(); //store the current list in hard drive
-        }
-        sc.close();
-        this.close();
-    }
-
     private void close() {
         ui.printGoodbyeMessage();
     }
 
     private String noCharactersEnteredResponse() {
         return ui.printNoCharactersMessage();
-    }
-
-    private void requestNextInput() {
-        ui.printNextCommandInstruction();
     }
 
     private String printList() {
