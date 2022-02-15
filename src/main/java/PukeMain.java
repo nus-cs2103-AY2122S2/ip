@@ -34,6 +34,7 @@ public class PukeMain extends Application {
                 }
             });
 
+            stage.setTitle("Puke");
             stage.show();
         } catch (IOException | PukeException e) {
             e.printStackTrace();
