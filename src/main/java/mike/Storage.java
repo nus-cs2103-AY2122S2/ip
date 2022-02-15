@@ -22,6 +22,7 @@ public class Storage {
      * @return File object (namely storedList.txt).
      */
     public File loadFile() {
+        assert !this.filePath.isEmpty() : "filePath should not be an empty string";
         File file = new File(filePath);
         return file;
     }

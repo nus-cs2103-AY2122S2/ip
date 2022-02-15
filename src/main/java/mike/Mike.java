@@ -17,7 +17,7 @@ public class Mike {
     public Mike() {
         this.ui = new Ui();
         this.taskList = new TaskList();
-        this.storage = new Storage("storedList.txt"); //hardcoded for now
+        this.storage = new Storage("storedList.txt");
         loadStoredList();
     }
 
