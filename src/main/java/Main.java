@@ -1,5 +1,5 @@
-import duke.Duke;
-import duke.gui.MainWindow;
+import taskie.Taskie;
+import taskie.gui.MainWindow;
 
 import java.io.IOException;
 
@@ -11,11 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Taskie using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/data.bin");
+    private Taskie taskie = new Taskie("data/data.bin");
 
     @Override
     public void start(Stage stage) {
@@ -24,9 +24,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke");
+            stage.setTitle("Taskie");
             stage.getIcons().add(new Image("/images/Icon.png"));
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(taskie);
             fxmlLoader.<MainWindow>getController().greet();
             stage.show();
         } catch (IOException e) {
