@@ -36,7 +36,7 @@ class Task {
 
     /**
      * Changes isDone to true (mark task as done).
-     * 
+     *
      * @return details of task that is marked done.
      */
     public String markTaskDone() {
@@ -46,7 +46,7 @@ class Task {
 
     /**
      * Changes isDone to false (mark task as undone).
-     * 
+     *
      * @return details of task taht is marked undone.
      */
     public String markTaskUndone() {

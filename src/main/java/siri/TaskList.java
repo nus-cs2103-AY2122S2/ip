@@ -38,7 +38,7 @@ class TaskList {
      * @return string to be printed after addItem had been completed.
      */
     public String addItem(Task task) throws SiriException {
-  
+
         if (task instanceof Deadline) {
             Deadline tmp = (Deadline) task;
             deadlineList.add(tmp);
@@ -72,12 +72,12 @@ class TaskList {
     public String deleteItem(ArrayList<Integer> intArr) throws SiriException {
         String printString = "Successfully removed the following task(s):\n";
 
-        for (int i = 0; i< intArr.size(); i++) {
+        for (int i = 0; i < intArr.size(); i++) {
             int index = intArr.get(i);
             if (index < 0 || index >= this.list.size()) {
                 throw new SiriException("Please ENTER number(s) within the number of tasks only!!");
             }
-    
+
             Task removedTask = list.remove(index);
             if (removedTask instanceof Deadline) {
                 Deadline tmp = (Deadline) removedTask;
@@ -89,14 +89,14 @@ class TaskList {
             assert removedTask.equals(list.get(index)) == false : "Task should have been removed, but it is not!!";
             printString = printString + removedTask.getTaskDetails() + "\n";
         }
-        
+
 
         return printString + "You have " + this.list.size() + " tasks remaining!!\n";
     }
 
     /**
      * Prints the TaskList out in order with status of each task.
-     * 
+     *
      * @return string to be printed after print had been completed.
      */
     public String print() {
@@ -113,7 +113,7 @@ class TaskList {
 
     /**
      * Marks item of the given index of tasklist done.
-     * 
+     *
      * @return string to be printed after markItem had been completed.
      */
     public String markItem(ArrayList<Integer> intArr) throws SiriException {
@@ -121,10 +121,10 @@ class TaskList {
             throw new SiriException("There is currently no tasks!!");
         }
 
-        String printString = "Great job for completing the following task(s):\n" ;
+        String printString = "Great job for completing the following task(s):\n";
 
         for (int i = 0; i < intArr.size(); i++) {
-            
+
             int index = intArr.get(i);
             if (index >= this.list.size() || index < 0) {
                 throw new SiriException("Please ENTER a number within the number of tasks!!");
@@ -142,15 +142,15 @@ class TaskList {
      * @param index integer to indicate the item index to be unmarked.
      * @return string to be printed after unmarkItem had been completed.
      */
-    public String unmarkItem(ArrayList<Integer> intArr) throws SiriException{
+    public String unmarkItem(ArrayList<Integer> intArr) throws SiriException {
         if (this.list.size() == 0) {
             throw new SiriException("There is currently no tasks!!");
         }
 
-        String printString = "I've marked the following task(s) as uncompleted:\n" ;
+        String printString = "I've marked the following task(s) as uncompleted:\n";
 
         for (int i = 0; i < intArr.size(); i++) {
-            
+
             int index = intArr.get(i);
             if (index >= this.list.size() || index < 0) {
                 throw new SiriException("Please ENTER a number within the number of tasks!!");
@@ -185,7 +185,7 @@ class TaskList {
 
         if (tmp.size() == 0) {
             return "No event on " + date.format(dtf) + "!!\n";
-        } 
+        }
 
         String printString = tmp.size() + " events on " + date.format(dtf) + ":\n";
         for (int i = 0; i < tmp.size(); i++) {
@@ -218,7 +218,7 @@ class TaskList {
         if (tmp.size() == 0) {
             return "No deadline on " + date.format(dtf) + "!!\n";
         }
-            
+
         String printString = tmp.size() + " deadline item(s) on " + date.format(dtf) + ":\n";
         for (int i = 0; i < tmp.size(); i++) {
             printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
@@ -246,7 +246,7 @@ class TaskList {
         }
 
         if (tmp.size() == 0) {
-            return "No item on the list contains \"" +  keyword + "\"!!\n";
+            return "No item on the list contains \"" + keyword + "\"!!\n";
         }
 
         String printString = "Here are the matching tasks in you list:\n";
@@ -263,7 +263,7 @@ class TaskList {
         if (dlSubSplit2.length == 1 || dlSubSplit2[1].trim().length() == 0) {
             return new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(taskDetails[1].trim()),
                     TaskList.stringToDate(dlSubSplit[1].trim()));
-        } 
+        }
         return new Deadline(dlSubSplit[0].trim(), Boolean.valueOf(taskDetails[1].trim()),
                 TaskList.stringToDate(dlSubSplit2[0]), TaskList.stringToTime(dlSubSplit2[1]));
 

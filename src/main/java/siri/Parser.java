@@ -79,7 +79,7 @@ class Parser {
         return printString;
     }
 
-    private String handleMarkCommand(String[] input) throws SiriException{
+    private String handleMarkCommand(String[] input) throws SiriException {
         if (input.length == 1 || input[1].trim().length() == 0) {
             throw new SiriException("Please ENTER the item number to mark!!");
         }
@@ -104,7 +104,6 @@ class Parser {
         } catch (NumberFormatException nfe) {
             throw new SiriException("Please ENTER a valid item number to unmark!!");
         }
-        
     }
 
     private String handleListCommand(String[] input) throws SiriException {
@@ -132,7 +131,7 @@ class Parser {
 
         if (dlSplit.length == 1 || dlSplit[1].trim().length() == 0) {
             throw new SiriException("deadline has no date/time!! Please ENTER a date/time for deadline!!");
-        } 
+        }
 
         try {
             Deadline dlTask;
@@ -154,13 +153,13 @@ class Parser {
     private String handleEventCommand(String[] input) throws SiriException {
         if (input.length == 1 || input[1].trim().length() == 0) {
             throw new SiriException("event cannot be EMPTY!! Please ENTER something for event!!");
-        } 
+        }
 
         String[] eventSplit = input[1].split(" /at ", 2);
 
         if (eventSplit.length == 1 || eventSplit[1].trim().length() == 0) {
             throw new SiriException("event has no date/time!! Please ENTER a date and time for event!!");
-        } 
+        }
 
         try {
             String[] eventDateTime = eventSplit[1].split(" ", 2);
@@ -178,18 +177,18 @@ class Parser {
             throw new SiriException("event date/time format is wrong!!\n"
                     + "Please ENTER your date time in DD-MM-YYYY  HH:MM format!!");
         }
-        
+
 
     }
 
     private String handleDeleteCommand(String[] input) throws SiriException {
         if (input.length == 1 || input[1].trim().length() == 0) {
             throw new SiriException("Please ENTER the item number to delete!!");
-        } 
-        
+        }
+
         if (this.taskList.size() == 0) {
             throw new SiriException("There is currently no tasks!!");
-        } 
+        }
 
         try {
             ArrayList<Integer> indexArray = this.createMassOpsList(input[1].trim());
@@ -198,13 +197,13 @@ class Parser {
         } catch (NumberFormatException nfe) {
             throw new SiriException("Please ENTER a valid item number to unmark!!");
         }
-        
+
     }
 
     private String handleEPrintCommand(String[] input) throws SiriException {
         if (input.length == 1 || input[1].trim().length() == 0) {
             throw new SiriException("Please ENTER a date!!");
-        } 
+        }
 
         try {
             LocalDate eCheckedDate = Parser.stringToDate(input[1].trim());
@@ -212,13 +211,13 @@ class Parser {
         } catch (DateTimeParseException dtpe) {
             throw new SiriException("Please ENTER your date in DD-MM-YYYY format!!");
         }
-        
+
     }
 
     private String handleDlPrintCommand(String[] input) throws SiriException {
         if (input.length == 1 || input[1].trim().length() == 0) {
             throw new SiriException("Please ENTER a date!!");
-        } 
+        }
 
         try {
             LocalDate dlCheckedDate = Parser.stringToDate(input[1].trim());
@@ -231,7 +230,7 @@ class Parser {
     private String handleFindCommand(String[] input) throws SiriException {
         if (input.length == 1 || input[1].trim().length() == 0) {
             throw new SiriException("Please ENTER a word to find!!");
-        } 
+        }
         return this.taskList.find(input[1].trim());
     }
 
@@ -245,7 +244,7 @@ class Parser {
             }
 
             int index = Integer.parseInt(inputSplit[i].trim()) - 1;
-            
+
             if (indexDuplicateChecker.contains(index)) {
                 throw new SiriException("Please do not ENTER duplicate index!!");
             }

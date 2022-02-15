@@ -38,9 +38,6 @@ public class Siri {
         parser = new Parser(tasks);
     }
 
-    /**
-     * Constructor for Siri Class.
-     */
     // public Siri() {
     //     storage = new Storage();
     //     ui = new Ui("   -----      O    -----      O\n"
@@ -67,8 +64,11 @@ public class Siri {
         new Siri("../data/data.txt").runApp();
     }*/
 
-
-
+    /**
+     * Saves the app data into a file.
+     *
+     * @return good bye message.
+     */
     public String exitApp() {
         String printString = ui.exit();
         storage.save(tasks.saveData());
@@ -79,11 +79,11 @@ public class Siri {
     public String getResponse(String input) {
         String printString;
         try {
-            printString = parser.handleCommand(input);    
+            printString = parser.handleCommand(input);
         } catch (SiriException se) {
             printString = se.getMessage();
         }
-     
+
         return printString;
     }
 

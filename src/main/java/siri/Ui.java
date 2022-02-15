@@ -41,6 +41,6 @@ class Ui {
      * Closes scanner and print exit message.
      */
     public String exit() {
-       return "Bye!! Hope to see you again soon!!\n";
+        return "Bye!! Hope to see you again soon!!\n";
     }
 }

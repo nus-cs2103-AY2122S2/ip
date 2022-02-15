@@ -74,8 +74,8 @@ class Storage {
 
         if (loadedData.trim() == "") {
             throw new SiriException("No data found!!");
-        } 
-        
+        }
+
         assert loadedData != "" : "Loaded data should not be empty!!";
         return loadedData;
 

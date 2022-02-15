@@ -31,7 +31,7 @@ class Event extends Task {
 
     /**
      * Get the Event time.
-     * 
+     *
      * @return the time that the event happens.
      */
     public LocalTime getEventTime() {
@@ -40,7 +40,7 @@ class Event extends Task {
 
     /**
      * Get the Event date.
-     * 
+     *
      * @return the date that the event happens.
      */
     public LocalDate getEventDate() {
@@ -49,7 +49,7 @@ class Event extends Task {
 
     /**
      * Compares time passed with the Event task occurance.
-     * 
+     *
      * @param time the time that the Event task time is comparing to.
      * @return true if time is the same as the Event time
      * and false if the time is not the same as the Event time (ignores format).
