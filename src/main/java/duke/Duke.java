@@ -79,6 +79,7 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
 
+        //Solution below adopted from https://se-education.org/guides/tutorials/javaFx.html
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);

@@ -126,6 +126,7 @@ public class TaskList {
                 }
                 list.add(task);
             } else if (taskType.equals("D")) {
+                // Solution below adopted from https://www.baeldung.com/java-string-to-date
                 String[] split = TaskList.splitTask(line, "by: ");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
                 Task task = new Deadline(split[0], LocalDate.parse(split[1], formatter).toString());
@@ -134,6 +135,7 @@ public class TaskList {
                 }
                 list.add(task);
             } else {
+                // Solution below adopted from https://www.baeldung.com/java-string-to-date
                 String[] split = TaskList.splitTask(line, "at: ");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
                 Task task = new Event(split[0], LocalDate.parse(split[1], formatter).toString());

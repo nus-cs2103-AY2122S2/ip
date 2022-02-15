@@ -24,6 +24,8 @@ public class Storage {
      * @throws IOException if an I/O error occurs.
      */
     public Storage(String filePath) throws IOException {
+
+        // Solution below adopted from https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
         this.filePath = filePath;
         Path newFile;
         java.nio.file.Path path = java.nio.file.Paths.get("data");
@@ -48,6 +50,8 @@ public class Storage {
      * @throws IOException if an I/O error occurs.
      */
     public void update(TaskList tasks) throws IOException {
+
+        // Solution below adopted from https://www.baeldung.com/java-write-to-file
         ArrayList<String> data = new ArrayList<String>();
         for (Task task : tasks.getList()) {
             data.add(task.toString());
@@ -62,6 +66,8 @@ public class Storage {
      * @throws IOException if an I/O error occurs.
      */
     public void update(PlaceList places) throws IOException {
+
+        //
         ArrayList<String> data = new ArrayList<String>();
         for (Place place : places.getList()) {
             data.add(place.toString());
