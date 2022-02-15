@@ -1,9 +1,9 @@
 package duke;
 
-import duke.util.Constants;
-
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
+import duke.util.Constants;
 
 /**
  * Main UI logic of the bot.
@@ -29,8 +29,8 @@ public class Ui {
     public void greetUser() {
         System.out.println(Constants.LINE);
         print("Hello from\n" + Constants.LOGO);
-        print("I am a chat bot and I'm here to help you be productive :)\n" +
-                "What can I do for you today?");
+        print("I am a chat bot and I'm here to help you be productive :)\n"
+                + "What can I do for you today?");
     }
 
     /**

@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.InvalidArgumentException;
-
 import java.util.List;
+
+import duke.exception.InvalidArgumentException;
 
 /**
  * Main abstraction of a Task.

@@ -1,12 +1,12 @@
 package duke;
 
-import duke.exception.InvalidArgumentException;
-import duke.exception.InvalidIndexException;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidIndexException;
+import duke.task.Task;
 
 /**
  * Main layer of abstraction as a container of Task.
@@ -16,7 +16,7 @@ public class TasksList {
 
     /**
      * TasksList constructor method.
-     * Uses ArrayList<Task> as its core.
+     * Uses ArrayList as its core.
      */
     public TasksList() {
         this.tasks = new ArrayList<Task>();
@@ -33,8 +33,9 @@ public class TasksList {
         Task newTask = Task.createTask(instructions);
         tasks.add(newTask);
         String response;
-        response = String.format("Got it. I've added this task\n" + newTask + "\n" +
-                "You have %d tasks in the list", this.tasks.size());
+        response = String.format("Got it. I've added this task\n"
+                + newTask + "\n"
+                + "You have %d tasks in the list", this.tasks.size());
         return response;
     }
 

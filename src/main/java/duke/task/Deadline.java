@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.exception.InvalidArgumentException;
-
-import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.exception.InvalidArgumentException;
 
 /**
  * A Deadline is a specialization of a Task.
@@ -92,6 +92,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMMM d yyyy")) + ")");
+        return String.format("[D]"
+                + super.toString()
+                + "(by: "
+                + by.format(DateTimeFormatter.ofPattern("MMMM d yyyy")) + ")");
     }
 }
