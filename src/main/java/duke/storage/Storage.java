@@ -94,6 +94,19 @@ public class Storage {
     }
 
     /**
+     * Rewrites entire storage based on current taskList
+     * @throws IOException If there is an error with writing to data.txt
+     */
+    public void rewriteData() throws IOException {
+        FileWriter fw = new FileWriter(this.FILEPATH);
+        for (int i = 0; i < this.taskListSize(); i++) {
+            Task task = this.taskList.get(i);
+            fw.write(taskToStringConverter(task));
+        }
+        fw.close();
+    }
+
+    /**
      * Appends a single task to the file
      * @param task task to be added to the data.txt file
      * @throws IOException if there is an error appending the task to data.txt

@@ -77,10 +77,10 @@ public class Task {
     @Override
     public String toString() {
         if (this.isMarked) {
-            String marked = "[✓] ";
+            String marked = "[1] ";
             return marked + this.name;
         } else {
-            String unmarked = "[X] ";
+            String unmarked = "[0] ";
             return unmarked + this.name;
         }
     }

@@ -23,6 +23,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    boolean introductionDone = false;
+
     private Duke duke;
 
     //setting the images
@@ -51,6 +53,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        if (!introductionDone) {
+            String dukeGreeting = "Hello! I'm Duke \nWhat can I do for you?";
+            DialogBox.getDukeDialog(dukeGreeting, dukeImage);
+            introductionDone = true;
+        }
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

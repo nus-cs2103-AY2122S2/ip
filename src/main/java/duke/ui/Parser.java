@@ -38,10 +38,12 @@ public class Parser {
             String[] stringArrayExcludingEvent = Arrays.copyOfRange(splitInput, 1, splitInput.length);
             String stringExcludingEvent = String.join(" ", stringArrayExcludingEvent);
             String[] eventNameAndTimeArray = stringExcludingEvent.split("/at ");
+            assert eventNameAndTimeArray.length > 1 : "Make sure to include the /at command!";
             String eventNameWithExtraSpace = eventNameAndTimeArray[0];
             String eventName = eventNameWithExtraSpace.substring(0, eventNameWithExtraSpace.length() -1);
             String eventTime = eventNameAndTimeArray[1];
             String[] eventTimeArray = eventTime.split(" ");
+
             try {
                 Event newEvent = (eventTimeArray.length > 1) ? new Event(eventName, eventTimeArray[0], eventTimeArray[1]) : new Event(eventName, eventTimeArray[0]);
                 return newEvent;
@@ -56,10 +58,12 @@ public class Parser {
             String[] stringArrayExcludingDeadline = Arrays.copyOfRange(splitInput, 1, splitInput.length);
             String stringExcludingDeadline = String.join(" ", stringArrayExcludingDeadline);
             String[] deadlineNameAndTimeArray = stringExcludingDeadline.split("/by ");
+            assert deadlineNameAndTimeArray.length > 1 : "Make sure to include the /by command!";
             String deadlineNameWithSpace = deadlineNameAndTimeArray[0];
             String deadlineName = deadlineNameWithSpace.substring(0, deadlineNameWithSpace.length() - 1);
             String deadlineTime = deadlineNameAndTimeArray[1];
             String[] deadlineTimeArray = deadlineTime.split(" ");
+
             try {
                 Deadline newDeadline = (deadlineTimeArray.length > 1) ? new Deadline(deadlineName, deadlineTimeArray[0], deadlineTimeArray[1]) : new Deadline(deadlineName, deadlineTimeArray[0]);
                 return newDeadline;
@@ -101,8 +105,10 @@ public class Parser {
             //Marks task by index
             try {
                 int taskToBeMarkedIndex = Integer.parseInt(splitInput[1]) - 1;
+                assert taskToBeMarkedIndex < storage.taskListSize() : "Index too big!";
                 Task taskToBeMarked = storage.get(taskToBeMarkedIndex);
                 taskToBeMarked.setMarkedTask();
+                storage.rewriteData();
                 return markedMessage + taskToBeMarked;
             } catch (NumberFormatException e) {
                 //Addresses the error of a non-integer being passed in
@@ -113,8 +119,10 @@ public class Parser {
             //Unmarks task by index
             try {
                 int taskToBeUnmarkedIndex = Integer.parseInt(splitInput[1]) - 1;
+                assert taskToBeUnmarkedIndex < storage.taskListSize() : "Index too big!";
                 Task taskToBeUnmarked = storage.get(taskToBeUnmarkedIndex);
                 taskToBeUnmarked.setUnmarkedTask();
+                storage.rewriteData();
                 return unmarkedMessage + taskToBeUnmarked;
             } catch (NumberFormatException e) {
                 //Addresses the issue of a non-integer being passed in
@@ -124,9 +132,11 @@ public class Parser {
         case DELETE:
             //Delete task by index
             try {
-                int idx = Integer.parseInt(splitInput[1]) - 1;
-                Task taskToBeDeleted = storage.get(idx);
-                storage.deleteData(idx);
+                int idxOfTaskToBeDeleted = Integer.parseInt(splitInput[1]) - 1;
+                System.out.println(idxOfTaskToBeDeleted);
+                assert idxOfTaskToBeDeleted < storage.taskListSize() : "Index too big!";
+                Task taskToBeDeleted = storage.get(idxOfTaskToBeDeleted);
+                storage.deleteData(idxOfTaskToBeDeleted);
                 return "Noted. I've removed this task:\n" + taskToBeDeleted + "\nNow you have " + storage.taskListSize() + " tasks in the list";
             } catch (NumberFormatException e) {
                 //Addresses the issue of a non-integer being passed in
