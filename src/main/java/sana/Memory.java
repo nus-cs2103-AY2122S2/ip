@@ -47,8 +47,8 @@ public class Memory {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            this.memFile = new File(MEM_PATH);
         }
-        this.memFile = new File(MEM_PATH);
     }
 
     /**
@@ -67,15 +67,20 @@ public class Memory {
         }
         LinkedList<Task> taskList = new LinkedList<>();
 
-        while (s.hasNext()) {
-            String task = s.nextLine();
-            if (task.charAt(0) == 'T') { // a todo sana.task
-                taskList.add(ToDo.memToTask(task));
-            } else if (task.charAt(0) == 'D') { // a Deadline sana.task
-                taskList.add(Deadline.memToTask(task));
-            } else if (task.charAt(0) == 'E') { // an Event sana.task
-                taskList.add(Event.memToTask(task));
+        try {
+            while (s.hasNext()) {
+                String task = s.nextLine();
+                if (task.charAt(0) == 'T') { // a todo sana.task
+                    taskList.add(ToDo.memToTask(task));
+                } else if (task.charAt(0) == 'D') { // a Deadline sana.task
+                    taskList.add(Deadline.memToTask(task));
+                } else if (task.charAt(0) == 'E') { // an Event sana.task
+                    taskList.add(Event.memToTask(task));
+                }
             }
+        } catch (Exception e) {
+            reinitialiseMemory();
+            return new LinkedList<>();
         }
         s.close();
         return taskList;
@@ -94,9 +99,16 @@ public class Memory {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("My memory was messed with while running, I'll reinitialise it :)");
-            initialiseMem();
+            reinitialiseMemory();
         }
+    }
+
+    /**
+     * Deletes and reinitialises the memory
+     */
+    public void reinitialiseMemory() {
+        memFile.delete();
+        initialiseMem();
     }
 
 
