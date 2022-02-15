@@ -28,15 +28,15 @@ public class Task {
     /**
      * Marks the task as completed or incomplete.
      *
-     * @param mark A boolean to mark or unmark a task.
-     * @param show A boolean to print Duke's reply to the user.
+     * @param toMark A boolean to mark or unmark a task.
+     * @param toShow A boolean to print Duke's reply to the user.
      */
-    public String markTask(boolean mark, boolean show) {
-        this.isMarked = mark;
+    public String markTask(boolean toMark, boolean toShow) {
+        this.isMarked = toMark;
         String output;
 
-        if (show) {
-            if (mark) {
+        if (toShow) {
+            if (toMark) {
                 output = "Nice! I've marked this task as done:\n";
             } else {
                 output = "OK, I've marked this task as not done yet:\n";

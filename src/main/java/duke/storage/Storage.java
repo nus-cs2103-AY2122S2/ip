@@ -26,6 +26,9 @@ public class Storage {
      * @param filePath Path in which the text file is stored or to be stored.
      */
     public Storage(String filePath) {
+        assert filePath != null : "Filepath cannot be null.";
+        assert filePath.length() > 0 : "Filepath cannot be empty.";
+
         file = new File(filePath);
 
         try {
@@ -79,6 +82,8 @@ public class Storage {
      * @param list List of tasks created by the user.
      */
     public void saveData(ArrayList<Task> list) {
+        assert list != null : "Task list to be save to text file cannot be null.";
+
         try {
             FileWriter fileWriter = new FileWriter(file);
 

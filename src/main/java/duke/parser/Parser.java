@@ -22,6 +22,9 @@ public class Parser {
      * @return A string reply that corresponds to the command from the user.
      */
     public String parse(String userInput) {
+        assert userInput != null : "User command to be parsed cannot be null.";
+        assert userInput.length() > 0 : "User command to be parsed cannot be empty.";
+
         String[] input = userInput.split(" ", 2);
 
         Type type = getEnumType(input[0]);
@@ -72,7 +75,10 @@ public class Parser {
      * @return A string reply that corresponds to the command from the user.
      */
     private String getTask(String[] userInput, Type type) throws DukeException {
-        TaskList taskList = new TaskList();
+        assert userInput != null : "User command to be parsed cannot be null.";
+        assert type != null : "Command type cannot be null.";
+
+        Task task = null;
 
         try {
             Task task;
@@ -114,6 +120,9 @@ public class Parser {
      * @return An Enum type corresponding to the user's command.
      */
     public Type getEnumType(String input) {
+        assert input != null : "User command to get command type cannot be null.";
+        assert input.length() > 0 : "User command to get command type cannot be empty.";
+
         String temp = input.toLowerCase();
         Type type;
 
