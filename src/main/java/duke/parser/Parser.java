@@ -77,14 +77,8 @@ public class Parser {
         try {
             String[] strings = userInput[1].split("/");
 
-            if (strings.length == 1 && !userInput[0].equals("todo")) {
-                throw new ArrayIndexOutOfBoundsException();
-            }
-
-            if (type == Type.DEADLINE || type == Type.EVENT) {
-                if (userInput[1].equals("")) {
-                    throw new DukeException("OOPS!!! The description of a " + userInput[0] + " cannot be empty.");
-                }
+            if (userInput[1].equals("")) {
+                throw new DukeException("OOPS!!! The description of a " + userInput[0] + " cannot be empty.");
             }
 
             switch (type) {

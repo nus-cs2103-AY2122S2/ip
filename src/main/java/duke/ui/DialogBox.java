@@ -14,6 +14,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 
@@ -41,6 +42,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(Font.font("Verdana", 15));
         displayPicture.setImage(img);
     }
 
@@ -56,9 +58,8 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-
         db.setBackground(new Background(new BackgroundFill(
-                Color.BLANCHEDALMOND,
+                new Color(0.3, 0.4, 0.8, 0.4),
                 null,
                 null
         )));
@@ -70,9 +71,8 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-
         db.setBackground(new Background(new BackgroundFill(
-                Color.AZURE,
+                new Color(0.7, 0.8, 0.9, 0.4),
                 null,
                 null
         )));

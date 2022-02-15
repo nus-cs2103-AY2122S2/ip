@@ -34,6 +34,15 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        showInitialMessage();
+    }
+
+    @FXML
+    private void showInitialMessage() {
+        String input = "Hello! This is Duke, what can I do for you?";
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(input, dukeImage)
+        );
     }
 
     /**
@@ -49,10 +58,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-
-        if (userInput.getText().equals("bye")) {
+        if (input.equals("bye")) {
             duke.saveData();
-            userInput.setEditable(false);
+            userInput.setDisable(true);
             sendButton.setDisable(true);
         }
     }
