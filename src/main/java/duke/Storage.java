@@ -1,13 +1,14 @@
 package duke;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
  * Storage class is used for storing data and loading data
  */
 public class Storage {
-    private final String filePath;
+    private final File file;
     private ArrayList<Task> list;
 
     /**
@@ -15,8 +16,8 @@ public class Storage {
      *
      * @param filePath the filepath used to store data and load data
      */
-    Storage(String filePath) {
-        this.filePath = filePath;
+    Storage(Path filePath) {
+        this.file = filePath.toFile();
         this.list = new ArrayList<Task>();
     }
 
@@ -29,7 +30,7 @@ public class Storage {
      */
     ArrayList<Task> load() throws DukeException {
         try {
-            FileReader reader = new FileReader(filePath);
+            FileReader reader = new FileReader(this.file);
             BufferedReader bufferedReader = new BufferedReader(reader);
             String input = bufferedReader.readLine();
             while (input != null) {
@@ -37,8 +38,7 @@ public class Storage {
                 input = bufferedReader.readLine();
             }
             return this.list;
-        } catch (IOException | ArrayIndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
             throw new DukeException("Loading error");
         }
     }
@@ -79,14 +79,14 @@ public class Storage {
      */
     void save(ArrayList<Task> saveList) {
         try {
-            FileWriter writer = new FileWriter(filePath);
+            FileWriter writer = new FileWriter(this.file);
             BufferedWriter br = new BufferedWriter(writer);
             for (int i = 0; i < saveList.size(); i++) {
                 br.write(saveList.get(i).saveFormat());
                 br.newLine();
             }
             br.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

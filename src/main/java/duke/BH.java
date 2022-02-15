@@ -1,5 +1,7 @@
 package duke;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -7,7 +9,9 @@ import java.util.Scanner;
  * It is able to read input and proceed with different kind of task and save all the tasks
  */
 public class BH {
-    private static final String FILEPATH = "/Users/brandonrhan/Downloads/NUS/CS2103/ip/data/duke.txt";
+    private static final Path FILEPATH = Paths.get(System.getProperty("user.home"),
+            "Downloads", "NUS", "CS2103", "ip", "data", "duke.txt");
+    //"/Users/brandonrhan/Downloads/NUS/CS2103/ip/data/duke.txt";
     private TaskList taskList;
     private Storage storage;
     private Scanner sc = new Scanner(System.in);
