@@ -14,6 +14,7 @@ public class Parser {
      * @return Command to be executed.
      */
     public static Command parse(String command, Ui ui) {
+        assert !command.equals("") : "command should not be an empty string!";
         command = command.strip().replaceAll(" +", " ");
         String firstWord = command.split(" ")[0];
         String description;
