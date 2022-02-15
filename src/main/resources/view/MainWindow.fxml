@@ -12,7 +12,7 @@
           <children>
               <ImageView fitHeight="557.0" fitWidth="400.0" opacity="0.8">
                   <image>
-                      <Image url="@../images/background.jpg" />
+                      <Image url="@../images/background.png" />
                   </image>
               </ImageView>
           </children>
