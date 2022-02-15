@@ -62,11 +62,11 @@ public class Task {
     public String priorityToString() {
         switch (priority) {
         case LOW:
-            return "Low";
+            return "P3";
         case HIGH:
-            return "High";
+            return "P1";
         default:
-            return "Medium";
+            return "P2";
         }
     }
 
