@@ -39,7 +39,7 @@ public class CommandManager {
      * Saves task list into a ser file upon exit.
      */
     public void run() {
-       uiManager.start();
+        uiManager.start();
         try {
             this.listLoader.loadList();
             uiManager.printList(taskManager);

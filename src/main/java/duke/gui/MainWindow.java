@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
         String response = commandManager.runCommand(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response,larryImage)
+                DialogBox.getDukeDialog(response, larryImage)
         );
         userInput.clear();
         if (input.equals("bye")) {
