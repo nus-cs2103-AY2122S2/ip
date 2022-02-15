@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class User {
+public class Ui {
     public static void start() {
         Action.greet();
         Scanner sc = new Scanner(System.in);

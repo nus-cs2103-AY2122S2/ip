@@ -3,7 +3,7 @@ public class Duke {
 
 
         FileReaderWriter.readFile();
-        User.start();
+        Ui.start();
         FileReaderWriter.writeToFile();
 
     }
