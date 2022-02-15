@@ -1,0 +1,26 @@
+hello
+
+todo read book
+todo
+deadline return book /by Jun 6th
+deadline
+deadline return book
+deadline return book /by
+event project meeting /at Aug 6th 2-4pm
+event
+event project meeting
+event project meeting /at
+list
+mark
+mark 1
+unmark 2
+list
+unmark
+unmark 1
+unmark 0
+delete
+todo hello
+delete 1
+list
+delete 1
+bye
