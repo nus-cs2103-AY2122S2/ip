@@ -41,7 +41,7 @@ ChiBot allows users to:
 
 ## Download
 
-To start using ChiBot, download it [here]()
+To start using ChiBot, download it [here](https://github.com/WJunHong/ip/releases)
 
 ## User Guide
 
