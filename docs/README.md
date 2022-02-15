@@ -1,5 +1,6 @@
-# User Guide
+Latest version: `v1.0.2`
 
+# User Guide
 Nikki is a **desktop app for managing tasks**, utilizing a **Command Line Interface (CLI)** for swift operations for
 fast typists, while still having a **Graphical User Interface (GUI)** for your task management to be pleasing to the
 eye too!
@@ -175,6 +176,6 @@ So if you were locating the data file to do so, don't.
 <br>
 
 **Q**: Will my data be saved if I don't exit the program with `bye`?<br>
-**A**: As of `v1.0.1`, the answer is **no**. However, future versions might contain such a feature.
+**A**: As of `v1.0.2`, the answer is **no**. However, future versions might contain such a feature.
 
 <br>
