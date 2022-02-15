@@ -10,6 +10,11 @@ public class Event extends Task{
     }
 
     @Override
+    public Date getDate() {
+        return this.date;
+    }
+
+    @Override
     public String toString() {
         return String.format("E | %s | %s | %s", this.getStatusIcon(), super.toString(),
             this.date);

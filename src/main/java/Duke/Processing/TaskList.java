@@ -1,5 +1,7 @@
 package Duke.Processing;
 import java.util.ArrayList;
+import java.util.Comparator;
+
 import Duke.Exception.DukeException;
 import Duke.tasks.Deadline;
 import Duke.tasks.Event;
@@ -14,6 +16,7 @@ public class TaskList {
     static final String DELETED = "It's wiped off the map\n";
     static final String FOUND = "Here are the tasks that match your request\n";
     static final String NOTHING = "I couldn't find anything that matched\n";
+    static final String FINISHED = "We've done all we set out to do\n";
 
     private final ArrayList<Task> tasklist;
 
@@ -26,9 +29,14 @@ public class TaskList {
     }
 
     public String list() {
-        String output = LIST;
-        for (int i = 0; i < tasklist.size(); i++) {
-            output += ((i + 1) + ") " + this.tasklist.get(i) + "\n");
+        String output = "";
+        if(tasklist.size() == 0) {
+            output = FINISHED;
+        } else {
+            output += LIST;
+            for (int i = 0; i < tasklist.size(); i++) {
+                output += ((i + 1) + ") " + this.tasklist.get(i) + "\n");
+            }
         }
         return output;
     }
@@ -107,6 +115,7 @@ public class TaskList {
         String output = ADDED + "\n";
         assert tasklist.size() == size + 1: "Item not added";
         output += newDeadline.toString();
+        tasklist.sort(Comparator.comparing(task -> task.getDate()));
         return output;
     }
 
@@ -123,6 +132,7 @@ public class TaskList {
         String output = ADDED + "\n";
         assert tasklist.size() == size + 1: "Item not added";
         output += newEvent.toString();
+        tasklist.sort(Comparator.comparing(task -> task.getDate()));
         return output;
     }
 
@@ -162,7 +172,7 @@ public class TaskList {
             String[] testname = checking.getDescription().split(" ");
             for (int j = 0; j < testname.length; j++) {
                 if(testname[j].equalsIgnoreCase(name)) {
-                    item += checking.toString();
+                    item += checking + "\n";
                     counter++;
                 }
             }
@@ -175,4 +185,13 @@ public class TaskList {
         output += item;
         return output;
     }
+
+    public String clear() {
+        tasklist.clear();
+        return "All items are off the table";
+    }
+
+
+
+
 }

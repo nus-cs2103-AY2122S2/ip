@@ -5,7 +5,6 @@ import java.util.Date;
 import Duke.Exception.DukeException;
 
 public class Parser {
-    private static final String BYE = "Welcome Home John";
     /**
      * Converts the String for a new task to a date
      *
@@ -44,7 +43,7 @@ public class Parser {
      * @return A string output
      */
 
-    public static String use(String input, TaskList tasklist) throws DukeException{
+    public static String parse(String input, TaskList tasklist) throws DukeException{
         String output;
         try {
             if(input.equalsIgnoreCase("list")) {
@@ -72,8 +71,8 @@ public class Parser {
             } else if (input.startsWith("find")) {
                 String name = input.substring(5);
                 output = tasklist.find(name);
-            } else if (input.equals("bye")) {
-                output = BYE;
+            } else if (input.equals("clear")) {
+                output = tasklist.clear();
             } else {
                 throw new DukeException("I'm not sure we can do that");
             }

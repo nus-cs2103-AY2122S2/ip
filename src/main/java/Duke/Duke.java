@@ -5,7 +5,6 @@ import Duke.Processing.Parser;
 import Duke.Processing.Storage;
 import Duke.Processing.TaskList;
 import Duke.UI.Ui;
-import javafx.application.Platform;
 
 
 public class Duke {
@@ -28,25 +27,6 @@ public class Duke {
 
     }
 
-//    public void run() {
-//        String task = ui.read();
-//        System.out.println(task);
-//        while(!task.equals("bye")) {
-//            ui.divider();
-//            try {
-//                Parser.use(task, this.tasks);
-//            } catch (DukeException e) {
-//                ui.errorMessage(e);
-//            }
-//            task = ui.read();
-//        }
-//        try {
-//            this.storage.write(tasks);
-//        } catch (DukeException e) {
-//            ui.errorMessage(e);
-//        }
-//        Platform.exit();
-//    }
     /**
      * Takes in the user input and returns the appropriate response
      *
@@ -56,7 +36,7 @@ public class Duke {
     public String getResponse(String input) {
         String output;
         try {
-            output = Parser.use(input, this.tasks);
+            output = Parser.parse(input, this.tasks);
             this.storage.write(this.tasks);
         } catch (DukeException e) {
             output = ui.errorMessage(e);
@@ -64,9 +44,5 @@ public class Duke {
         return output;
     }
 
-
-//    public static void main(String[] args) {
-//        new Duke("Previously.txt")
-//    }
         
 }

@@ -23,7 +23,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            System.out.println("x");
+            //System.out.println("x");
         } catch (IOException e) {
             e.printStackTrace();
         }

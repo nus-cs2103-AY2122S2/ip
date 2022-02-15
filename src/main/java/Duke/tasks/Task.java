@@ -1,4 +1,7 @@
 package Duke.tasks;
+
+import java.util.Date;
+
 public class Task {
     protected String description;
     public boolean isDone;
@@ -10,14 +13,6 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "1" : "0"); // mark done task with X
-    }
-
-    void done() {
-        this.isDone = true;
-    }
-
-    void undone() {
-        this.isDone = false;
     }
 
     String finished() {
@@ -32,6 +27,9 @@ public class Task {
         return this.description;
     }
 
+    public Date getDate() {
+        return new Date(3000,12,30);
+    }
     @Override
     public String toString() {
         return this.description;
