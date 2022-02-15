@@ -91,7 +91,11 @@ public class Ui {
         assert taskObj != null;
         String result = "Adding a task: ";
         result += taskObj.toString() + "\n";
-        result += "Now you got " + (listLength) + " tasks in the list!";
+        if (listLength == 1) {
+            result += "Now you got " + (listLength) + " task in the list!";
+        } else {
+            result += "Now you got " + (listLength) + " tasks in the list!";
+        }
         nextMessage = result;
         return result;
     }
@@ -106,7 +110,11 @@ public class Ui {
         assert taskObj != null;
         String result = "Ok, removing a task: \n";
         result += taskObj.toString() + "\n";
-        result += "Now you got " + (listLength) + " tasks in the list!";
+        if (listLength == 1) {
+            result += "Now you got " + (listLength) + " task in the list!";
+        } else {
+            result += "Now you got " + (listLength) + " tasks in the list!";
+        }
         nextMessage = result;
         return result;
     }
@@ -120,7 +128,7 @@ public class Ui {
     public String showUiForSort(TaskList taskList, TaskList.SortType sortType) {
         assert taskList != null;
         assert taskList.size() != 0;
-        String result = "Sorting your tasks by" + sortType.toString() + ":\n";
+        String result = "Sorting your tasks by " + sortType.toString() + ":\n";
         result += taskList.toString();
         nextMessage = result;
         return result;
@@ -147,7 +155,7 @@ public class Ui {
      * @return String String for adding a tag.
      */
     public String showUiForUntag(String tagName, Task task) {
-        String result = "Deleting the following Tag #" + tagName + " to " + task.toString();
+        String result = "Deleting the following Tag #" + tagName + " from " + task.toString();
         nextMessage = result;
         return result;
     }

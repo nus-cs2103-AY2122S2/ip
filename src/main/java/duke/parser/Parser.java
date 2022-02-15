@@ -112,7 +112,6 @@ public class Parser {
                 }
                 String content = "";
                 int indexOfBy = inputCommand.lastIndexOf("\\by ");
-                System.out.println(indexOfBy);
                 if (indexOfBy == -1) {
                     throw new DukeMissingArgumentException("\\by deadlineTime");
                 } else if (indexOfBy >= 0) {
@@ -144,10 +143,7 @@ public class Parser {
                     throw new DukeException("unknown error occurred");
                 }
             } else if (Command.CommandType.TODO.equals(firstArg)) {
-                String content = "";
-                for (int k = 1; k < inputArray.length; k++) {
-                    content += inputArray[k];
-                }
+                String content = inputCommand.substring(4);
                 Task taskObj = new ToDo(content, ui);
                 return new AddCommand(taskObj, inputArray);
             } else if (Command.CommandType.MARK.equals(firstArg)) {
