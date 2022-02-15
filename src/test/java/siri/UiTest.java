@@ -1,15 +1,21 @@
 package siri;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+
+
+
 
 public class UiTest {
 
+    /**
+     * Test exit function of ui.
+     */
     @Test
     public void exitTest() {
         ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
