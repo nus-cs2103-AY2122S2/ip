@@ -27,7 +27,7 @@ public class DialogBox extends HBox {
     /**
      * Constructor for DialogBox
      * @param text text to set for label of dialog box
-     * @param img image for avatar of user and whey
+     * @param img image for avatar of user and productivilisation
      */
     private DialogBox(String text, Image img) {
         try {

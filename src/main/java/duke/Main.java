@@ -18,7 +18,7 @@ public class Main extends Application {
 
     /**
      * Show the stage for defined javafx configurations
-     * @param stage stage foundation to build whey GUI
+     * @param stage stage foundation to build productivilisation GUI
      */
     @Override
     public void start(Stage stage) {
@@ -28,6 +28,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Productivilisation");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

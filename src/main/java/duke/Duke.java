@@ -54,7 +54,7 @@ public class Duke {
     /**
      * Function to convert system out from Whey to String
      * @param input input from text input
-     * @return string output from whey
+     * @return string output from Productivilisaiton
      */
     public String getResponse(String input) {
         ByteArrayOutputStream responseOutput = new ByteArrayOutputStream();
