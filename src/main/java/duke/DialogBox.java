@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
@@ -42,6 +43,15 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setWrapText(true);
         dialog.setFont(font);
+        dialog.setStyle("-fx-border-color: #3D8DF3;\n"
+                + "-fx-border-width: 1;\n"
+                + "-fx-border-style: solid;\n"
+                + "-fx-padding: 10 20 10 20;\n"
+                + "-fx-background-color: #3D8DF3;\n"
+                + "-fx-background-radius: 10;\n"
+                + "-fx-border-radius: 10;\n"
+                + "-fx-border-insets: 10px;\n"
+                + "-fx-background-insets: 10px");
 
         Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
         clip.setArcWidth(256);
@@ -55,6 +65,16 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
+        dialog.setStyle("-fx-border-color: #F6F6F6;\n"
+                + "-fx-border-width: 1;\n"
+                + "-fx-border-style: solid;\n"
+                + "-fx-padding: 10 20 10 20;\n"
+                + "-fx-background-color: #F6F6F6;\n"
+                + "-fx-background-radius: 10;\n"
+                + "-fx-border-radius: 10;\n"
+                + "-fx-border-insets: 10px;\n"
+                + "-fx-background-insets: 10px");
+        dialog.setTextFill(Paint.valueOf("BLACK"));
     }
 
     /**
@@ -65,7 +85,7 @@ public class DialogBox extends HBox {
      * @return the user dialog
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        var userDb = new DialogBox(text + "    ", img);
+        var userDb = new DialogBox(text, img);
         userDb.setMinHeight(Region.USE_PREF_SIZE);
         return userDb;
     }
