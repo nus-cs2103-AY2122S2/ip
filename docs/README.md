@@ -12,7 +12,7 @@ eye too!
    - [Adding an Event: `event`](#adding-an-event-event)
    - [Adding a Deadline: `deadline`](#adding-a-deadline-deadline)
    - [Listing all tasks: `list`](#listing-all-tasks-list)
-   - [Finding a task: `find`](#finding-a-task-find)
+   - [Finding tasks: `find`](#finding-tasks-find)
    - [Marking a task as done: `mark`](#marking-a-task-as-done-mark)
    - [Marking a task as not done: `unmark`](#unmarking-a-task-as-not-done-unmark)
    - [Deleting a task: `delete`](#deleting-a-task-delete)
@@ -85,36 +85,51 @@ eye too!
 ---
 
 ## Features 
-{% include note.html content="Words in `UPPER_CASE` are the parameters supplied by the user and
-should be changed for the desired value." %}
+> Words in `UPPERCASE` are the parameters to be supplied by the user.<br>
+> e.g. in `todo NAME`, `NAME` is the parameter which can be supplied as `todo shower`.
 
 ### Adding a ToDo: `todo`
-Adds a ToDo task to the list.
+Adds a ToDo to the list.
 
-Format: `todo TASKNAME`
+Format: `todo NAME`
 
-Example of usage:
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+Examples:
+- `todo buy groceries`
+- `todo prepare ingredients for roast chicker`
 
 ### Adding an Event: `event`
-Adds a 
+Adds an Event (on a specific date) to the list.
+
+Format: `event NAME /at DD/MM/YYYY`
+
+Examples:
+- `event concert /at 27/2/2022`
+- `event award ceremony /at 6/10/2022`
 
 ### Adding a Deadline: `deadline`
+Adds an Event (on a specific date) to the list.
 
-Description of the feature.
+Format: `deadline NAME /by DD/MM/YYYY`
+
+Examples:
+- `deadline progress report /by 25/2/2022`
+- `deadline assignment 2 /by 2/3/2022`
 
 ### Listing all tasks: `list`
+Lists all the tasks in the list. Shows the type, name, completion status of the task, and other possible details.
 
-### Find a task: `find`
+Format: `list`
+
+### Find tasks: `find`
+Finds tasks in the list whose names (partially) matches the user input.
+> Slight typos will **not** affect the search.
+
+Format: `find PATTERN`
+
+Examples:
+- `find comp`  returns `fix computer`, `competition prep`
+- `find project` returns `science project`, `project meeting`
+- `find prject` returns `science project`, `project meeting`
 
 ### Marking a task as done: `mark`
 
