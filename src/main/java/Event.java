@@ -1,14 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Event extends Task{
 
+//    protected LocalDate dateTime;
     protected String at;
 
     public Event(String description, String at) {
         super(description);
         this.at = at;
+//        this.dateTime = LocalDate.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+
+    public String infoString() {
+        return "D/" + super.infoString() + "/" + at;
     }
 }
