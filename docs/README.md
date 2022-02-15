@@ -98,7 +98,7 @@ Bye. Hope to see you again soon!
 
 Here's how it should look:
 
-![example image](assets/Ui.png)
+![example image](Ui.png)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
