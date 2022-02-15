@@ -11,6 +11,10 @@ import gene.task.Task;
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructor for find command
+     * @param unparsedKey Raw input string
+     */
     public FindCommand(String unparsedKey) {
         String[] keys = unparsedKey.split("find ");
         this.keyword = keys[1];
@@ -46,11 +50,10 @@ public class FindCommand extends Command {
                 initList.append("\n");
             }
 
-            return          "----------------------------" +
-                            "----------------------------\n" +
-                            "Here are the matching tasks in your list:\n" +
-                            initList.toString() +
-                            "--------------------------------------------------------\n";
+            return Ui.showLine()
+            + "Here are the matching tasks in your list:\n"
+                    + initList.toString()
+                    + Ui.showLine();
         }
     }
 

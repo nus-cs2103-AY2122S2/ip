@@ -56,10 +56,10 @@ public class Gene {
 
     /**
      * This method is the main method that runs the entire program,
-     * it first prints the greeting, followed by initializing a file,
+     * it initializes a file,
      * then takes in user input from the system.
      * Finally, when an exit command is given, the program will be exited.
-     * todo extract greating in order to print upon GUI startup
+     * todo extract greeting in order to print upon GUI startup
      */
     void run() {
         geneList.initFile();

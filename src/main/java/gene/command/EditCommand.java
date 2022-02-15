@@ -13,7 +13,7 @@ import gene.task.Task;
  * @version 1.0
  * @since 2022-01-12
  */
-public class EditCommand extends Command{
+public class EditCommand extends Command {
     private final String taskBody;
     private final String mark;
     private String toPrint;
@@ -48,20 +48,20 @@ public class EditCommand extends Command{
 
         if (this.mark.equals("1")) {
             newTask = targetTask.markTask();
-            toPrint = "----------------------------" +
-                    "----------------------------\n" +
+            toPrint = Ui.showLine()
+                    +
                     "Nice! I've marked this task as done:"
                     + "\n" + "  " + targetTask
                     + "\n"
-                    + "--------------------------------------------------------\n";
+                    + Ui.showLine();
         } else {
             newTask = targetTask.unmarkTask();
-            toPrint = "----------------------------" +
-                    "----------------------------\n" +
+            toPrint = Ui.showLine()
+                    +
                     "OK, I've marked this task as not done yet:"
                     + "\n" + "  " + targetTask
                     + "\n"
-                    + "--------------------------------------------------------\n";
+                    + Ui.showLine();
         }
 
         tasks.set(index, newTask);
