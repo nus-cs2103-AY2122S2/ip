@@ -163,8 +163,8 @@ public class TaskList {
      */
     public void unmark(int i) throws DukeException {
         if (this.isEmpty()) {
-            throw new DukeException("No tasks in TaskList!");
-        } else if (get(i).isMarked()) {
+            throw new DukeException("No tasks in TaskLilisst!");
+        } else if (!get(i).isMarked()) {
             throw new DukeException("Task is already unmarked!");
         } else {
             get(i).unmark();
