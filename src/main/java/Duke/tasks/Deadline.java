@@ -8,6 +8,10 @@ public class Deadline extends Task{
         super(item);
         this.date = date;
     }
+    @Override
+    public Date getDate() {
+        return this.date;
+    }
 
     @Override
     public String toString() {
