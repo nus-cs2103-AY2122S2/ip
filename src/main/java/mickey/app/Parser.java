@@ -49,7 +49,7 @@ public class Parser {
         case "sort":
             return new SortCommand(fullCommand);
         default:
-            throw new MickeyException("\tOh no! This is a disaster! I don't know what that means");
+            throw new MickeyException("Oh no! I don't know what that means");
         }
     }
 }

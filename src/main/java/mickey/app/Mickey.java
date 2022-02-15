@@ -29,30 +29,8 @@ public class Mickey {
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             ui.showLoadingError();
             tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Runs the Mickey program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (MickeyException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
         }
     }
 
@@ -65,7 +43,7 @@ public class Mickey {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (MickeyException e) {
-            return e.toString();
+            return ui.showError(e.getMessage());
         }
     }
 }
