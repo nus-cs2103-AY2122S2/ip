@@ -54,8 +54,7 @@ Expected outcome:
 ```
 Here are your current tasks:
     1. [T][ ] Call Mom
-	2. [E][ ] Wedding Party (At: Mar 14 2022 8:30PM)
-	...
+    2. [E][ ] Wedding Party (At: Mar 14 2022 8:30PM)
 ```
 
 ### `todo` - Adds a ToDo task
