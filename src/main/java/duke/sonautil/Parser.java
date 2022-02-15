@@ -56,6 +56,13 @@ public class Parser {
         } else if (userMessage.startsWith("update") && split[0].equals("update")) {
             String[] updateCommand = processUpdateCommand(userMessage);
             return updateCommand;
+
+        } else if (userMessage.equals("help")) {
+            command[0] = "unknown";
+            throw new DukeException(Ui.showHelpMessage());
+
+        } else if (userMessage.equals("clear")) {
+            command[0] = "clear";
         } else {
             command[0] = "unknown";
             throw new DukeException(Ui.userUnknownInputMessage(userMessage));

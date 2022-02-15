@@ -25,7 +25,7 @@ public class Ui {
      * @return message to user
      */
     public static String showListMessage() {
-        return "Here is your list!";
+        return "Here is your list!\n";
     }
 
     /**
@@ -73,7 +73,8 @@ public class Ui {
      * @return message to user
      */
     public static String userUnknownInputMessage(String s) {
-        return s + "? Sorry, I don't understand what that means.. :(";
+        return s + "? Sorry, I don't understand what that means.. :(\n" +
+                "Send 'help' if you need any, and ILL BE THERE FOR YOU~";
     }
 
     /**
@@ -418,7 +419,6 @@ public class Ui {
         return "Done! Your task is now modified and updated~\n    " + newTask.toString();
     }
 
-
     /**
      * Shows the guide for update command
      *
@@ -431,5 +431,42 @@ public class Ui {
                 "\n- put 'type' to change the task to another category (i.e. todo, deadline, event)\n" +
                 "- put 'name' to change the description of the task\n" +
                 "- put 'date' to change the date (and time) of the task\n";
+    }
+
+    /**
+     * Shows the guide for Sona
+     *
+     * @return message to user
+     */
+    public static String showHelpMessage() {
+        return  "These are what you can make me do for you: \n\n" +
+                "*~*~*~*~*~*~*~*~*~*~*~*~*\n\n" +
+                "There are 3 ways to add tasks:\n" +
+                "    1. todo [your task]\n    2. deadline [your task]/[due date & time]\n    " +
+                "3. event [your task]/[due date & time]\n" +
+                "Simply replace those in brackets to whatever you need, please don't include '[]'.\n" +
+                "* Note that the dates must be in the format of YYYY-MM-DD HHMM, and time is optional!\n\n" +
+                "*~*~*~*~*~*~*~*~*~*~*~*~*\n\n" +
+                "Other commands:\n" +
+                "    1. list --> I will list out all the tasks you have added\n" +
+                "    2. mark [task #] -> I will mark this task as done\n" +
+                "    3. unmark [task #] -> I will mark this task as not done\n" +
+                "    4. delete [task #] -> I will delete this task for you\n" +
+                "    5. schedule [YYYY-MM-DD] -> I will list out all your tasks on this day\n" +
+                "    6. find [keyword] -> I will list all the tasks that has this keyword\n" +
+                "    7. clear -> I will clear all the tasks in your list\n" +
+                "    8. bye -> I will save all your tasks and say byebye to you~!\n\n" +
+                "*~*~*~*~*~*~*~*~*~*~*~*~*\n\n" +
+                "Special command: update -> Send 'update guide' to find out more!";
+
+    }
+
+    /**
+     * Shows success message for clearing
+     *
+     * @return message to user
+     */
+    public static String clearSuccessMessage() {
+        return "Done~ your list is now empty (and there is no turning back)!";
     }
 }

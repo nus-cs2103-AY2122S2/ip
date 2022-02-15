@@ -58,6 +58,10 @@ public class Storage {
             break;
         case "update":
             editTask(Integer.parseInt(command[1]), command[2], command[3]);
+        case "clear":
+            File oldFile = new File(path);
+            oldFile.delete();
+            createNewFile();
         default:
         }
     }

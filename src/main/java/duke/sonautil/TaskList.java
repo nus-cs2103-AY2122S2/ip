@@ -89,6 +89,9 @@ public class TaskList {
             return executeFindCommand(command);
         case "update":
             return executeUpdateCommand(command);
+        case "clear":
+            clearTask();
+            return Ui.clearSuccessMessage();
         case "unknown":
             //fallthrough
         default:
@@ -355,6 +358,14 @@ public class TaskList {
         assert (taskIndex <= taskAddedIndex && taskIndex >= 0);
         list.remove(taskIndex);
         taskAddedIndex--;
+    }
+
+    /**
+     * Clears the task list
+     */
+    private void clearTask() {
+        list.clear();
+        taskAddedIndex = 0;
     }
 
 }
