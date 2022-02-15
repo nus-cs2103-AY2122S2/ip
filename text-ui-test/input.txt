@@ -1,0 +1,28 @@
+list
+event
+todo
+deadline
+todo borrow book
+event pokemon release
+event pokemon release /
+event pokemon release /at 28-01-2022
+list
+read book
+deadline return book
+deadline return book /
+deadline return book /by 25-01-2022
+list
+mark 0
+mark 2
+mark 2
+mark 6
+list
+unmark 0
+unmark 2
+unmark 2
+unmark 6
+delete -1
+delete 1
+delete 10
+list
+bye
