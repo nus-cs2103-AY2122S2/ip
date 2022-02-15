@@ -23,6 +23,9 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Duke extends Application {
+
+
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -33,6 +36,8 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     static boolean isGoodbye = false;
+
+    //Mostly reused from https://se-education.org/guides/tutorials/javaFxPart1.html
 
     @Override
     public void start(Stage stage) {
@@ -123,7 +128,7 @@ public class Duke extends Application {
 
         if (isGoodbye) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished( event -> Platform.exit());
+            delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
     }

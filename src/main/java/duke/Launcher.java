@@ -1,5 +1,7 @@
 package duke;
 
+// Reused from https://se-education.org/guides/tutorials/javaFxPart1.html
+
 import javafx.application.Application;
 
 /**

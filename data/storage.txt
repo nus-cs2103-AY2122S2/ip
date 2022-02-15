@@ -5,4 +5,3 @@ T,0,blahla
 T,1,asdfasdf
 D,0,asdfafsd , 2/2/22
 D,1,asdfasdf , 2/22/22
-E,1,adfas , 23/3/33
