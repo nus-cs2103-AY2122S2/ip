@@ -1,9 +1,6 @@
 package duke.ui;
-import duke.duke.Duke;
-import duke.ui.DukeException;
-import duke.ui.InputHandler;
+
 import duke.storage.Storage;
-import duke.storage.TaskList;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
@@ -17,6 +14,9 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class Parser {
+
+    String defaultErrorMessage = ":( OOPS!!! I'm sorry, but I don't know what that means! Possible commands: todo [task]," +
+            " event [task] /at [time], deadline [task] /by [time], mark [index], unmark [index], delete [index], bye";
 
     /**
      * Parses input from InputHandler and returns a new Task to be added to TaskList. Handles event, deadline, todo commands
@@ -70,8 +70,7 @@ public class Parser {
             }
 
         default:
-            throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means! Possible commands: todo [task], event [task] /at [time],"
-                    + " deadline [task] /by [time], mark [index], unmark [index], delete [index], bye");
+            throw new DukeException(defaultErrorMessage);
         }
     }
 
@@ -83,38 +82,44 @@ public class Parser {
      * @throws DukeException Handles unrecognised commands
      * @throws IOException Handles IO Errors
      */
-    public void parse(InputHandler.CommandType type, Storage storage, String[] splitInput) throws DukeException, IOException {
+    public String parse(InputHandler.CommandType type, Storage storage, String[] splitInput) throws DukeException, IOException {
+
+        String wrongMarkFormatErrorMessage = "Make sure mark is in the format: mark [index]!";
+        String wrongUnmarkFormatErrorMessage = "Make sure unmark is in the format: unmark [index]!";
+        String wrongDeleteFormatErrorMessage = "Make sure delete is in the format delete [index]!";
+        String cannotFindTaskMessage = "Uh oh! No task matches the description you've given :(";
+
+        String listCommandStringIntro = "Here are the tasks in your list:\n";
+        String markedMessage = "Nice! I've marked this task as done:\n";
+        String unmarkedMessage = "OK, I've marked this task as not done yet:\n";
+
         switch (type) {
         case LIST:
-            System.out.println("Here are the tasks in your list:");
-            System.out.println(storage.list());
-            break;
+            return listCommandStringIntro + storage.list();
 
         case MARK:
             //Marks task by index
             try {
                 int taskToBeMarkedIndex = Integer.parseInt(splitInput[1]) - 1;
                 Task taskToBeMarked = storage.get(taskToBeMarkedIndex);
-                System.out.println("Nice! I've marked this task as done:\n");
                 taskToBeMarked.setMarkedTask();
+                return markedMessage + taskToBeMarked;
             } catch (NumberFormatException e) {
                 //Addresses the error of a non-integer being passed in
-                System.out.println("Make sure mark is in the format: mark [index]!");
+                throw new DukeException(wrongMarkFormatErrorMessage);
             }
-            break;
 
         case UNMARK:
             //Unmarks task by index
             try {
                 int taskToBeUnmarkedIndex = Integer.parseInt(splitInput[1]) - 1;
                 Task taskToBeUnmarked = storage.get(taskToBeUnmarkedIndex);
-                System.out.println("OK, I've marked this task as not done yet:\n");
                 taskToBeUnmarked.setUnmarkedTask();
+                return unmarkedMessage + taskToBeUnmarked;
             } catch (NumberFormatException e) {
                 //Addresses the issue of a non-integer being passed in
-                System.out.println("Make sure mark is in the format: mark [index]!");
+                throw new DukeException(wrongUnmarkFormatErrorMessage);
             }
-            break;
 
         case DELETE:
             //Delete task by index
@@ -122,12 +127,11 @@ public class Parser {
                 int idx = Integer.parseInt(splitInput[1]) - 1;
                 Task taskToBeDeleted = storage.get(idx);
                 storage.deleteData(idx);
-                System.out.println("Noted. I've removed this task:\n" + taskToBeDeleted + "\nNow you have " + storage.taskListSize() + " tasks in the list");
+                return "Noted. I've removed this task:\n" + taskToBeDeleted + "\nNow you have " + storage.taskListSize() + " tasks in the list";
             } catch (NumberFormatException e) {
                 //Addresses the issue of a non-integer being passed in
-                System.out.println("Make sure mark is in the format: mark [index]!");
+                throw new DukeException(wrongDeleteFormatErrorMessage);
             }
-            break;
 
         case FIND:
             //Removes the find command and iterates through the TaskList to find a task name that contains the keyword
@@ -135,26 +139,27 @@ public class Parser {
             String nameOfKeyWord = String.join(" ", stringArrayExcludingFind);
             ArrayList<Task> arrayOfTasks = storage.accessTaskList().list;
             ArrayList<Integer> indexOfFoundObjects = new ArrayList<>();
+
             for (int i = 0; i < arrayOfTasks.size(); i++) {
                 Task currentTask = arrayOfTasks.get(i);
                 if (currentTask.name.contains(nameOfKeyWord)) {
                     indexOfFoundObjects.add(i);
                 }
             }
+            String outputString = "";
             if (!indexOfFoundObjects.isEmpty()) {
                 //Task found and print
                 for (int j = 0; j < indexOfFoundObjects.size(); j++) {
-                    System.out.println((j + 1) + "." + storage.get(indexOfFoundObjects.get(j)));
+                    outputString += (j + 1) + "." + storage.get(indexOfFoundObjects.get(j));
                 }
-                break;
+                return outputString;
             } else {
                 //Unable to find
-                System.out.println("Uh oh! No task matches the description you've given :(");
+                throw new DukeException(cannotFindTaskMessage);
             }
 
         default:
-            throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means! Possible commands: todo [task], event [task] /at [time],"
-                    + " deadline [task] /by [time], mark [index], unmark [index], delete [index], bye");
+            throw new DukeException(defaultErrorMessage);
         }
     }
 

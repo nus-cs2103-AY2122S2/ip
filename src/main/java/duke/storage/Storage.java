@@ -107,8 +107,8 @@ public class Storage {
     }
 
     /**
-     * Used when delete [index] is called for Duke. Deletes the entire file and rewrites it based on the new taskListay
-     * Amends the current stored taskListay as well
+     * Used when delete [index] is called for Duke. Deletes the entire file and rewrites it based on the new taskList
+     * Amends the current stored TaskList as well
      * @param idx index of task to be deleted
      * @throws IOException if there is an error rewriting data.txt
      */
@@ -157,6 +157,10 @@ public class Storage {
         return this.taskList.size();
     }
 
+    /**
+     * Allows external access to TaskList
+     * @return TaskList
+     */
     public TaskList accessTaskList() {
         return this.taskList;
     }

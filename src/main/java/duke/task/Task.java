@@ -34,18 +34,14 @@ public class Task {
      * markTask as done
      */
     public void setMarkedTask () {
-        String markedMessage = "Nice! I've marked this task as done:\n";
         this.isMarked = true;
-        System.out.println(markedMessage + "  " + this);
     }
 
     /**
      * unmarkTask
      */
     public void setUnmarkedTask() {
-        String unmarkedMessage = "OK, I've marked this task as not done yet:\n";
         this.isMarked = false;
-        System.out.println(unmarkedMessage + "  " + this);
     }
 
     /**
@@ -57,7 +53,7 @@ public class Task {
     }
 
     /**
-     *
+     * Converts date to String format for printing
      * @param date LocalDate for Deadline/Event tasks
      * @return String format: converts from yyyy-mm-dd format to Aug dd, yyyy format
      */
@@ -66,7 +62,7 @@ public class Task {
     }
 
     /**
-     *
+     * Converts time to String format for printing
      * @param time LocalTime for Deadline/Event tasks
      * @return String format: converts hh:mm format to hh:mm am/pm format
      */

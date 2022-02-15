@@ -41,7 +41,9 @@ public class InputHandler {
      * @return boolean representing isChatEnded variable in main. If "bye" command is given, a true boolean is returned, else false is returned
      * @throws DukeException Invalid input types, or unrecognisable commands
      */
-    public boolean handleInput(String input) throws DukeException, IOException {
+    public String handleInput(String input) throws DukeException, IOException {
+        String endMessage = "Bye. Hope to see you again soon!";
+
         String[] splitInput = input.split(" ");
         String inputCommand = splitInput[0];
         Parser parser = new Parser();
@@ -51,8 +53,8 @@ public class InputHandler {
             if (splitInput.length > 1) {
                 Todo newTodo = (Todo) parser.parse(CommandType.TODO, splitInput);
                 this.storage.writeData(newTodo);
-                printAddTaskMessage(newTodo);
-                return false;
+                return addTaskMessage(newTodo);
+
             } else {
                 throw new DukeException(":( OOPS!!! The description of a todo cannot be empty. Correct usage: todo [task]");
             }
@@ -61,8 +63,7 @@ public class InputHandler {
             if (splitInput.length > 3) {
                 Event newEvent = (Event) parser.parse(CommandType.EVENT, splitInput);
                 this.storage.writeData(newEvent);
-                printAddTaskMessage(newEvent);
-                return false;
+                return addTaskMessage(newEvent);
 
             } else {
                 throw new DukeException(":( OOPS!!! The description of a event cannot be empty. Correct usage: event [task] /at [time]");
@@ -72,8 +73,7 @@ public class InputHandler {
             if (splitInput.length > 3) {
                 Deadline newDeadline = (Deadline) parser.parse(CommandType.DEADLINE, splitInput);
                 this.storage.writeData(newDeadline);
-                printAddTaskMessage(newDeadline);
-                return false;
+                return addTaskMessage(newDeadline);
             } else {
                 throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty. " +
                         "Correct usage: deadline [task] /by [time]");
@@ -82,8 +82,8 @@ public class InputHandler {
         case "list":
             //Confirms that input command is simply "list"
             if (splitInput.length == 1) {
-                parser.parse(CommandType.LIST, this.storage, splitInput);
-                return false;
+                return parser.parse(CommandType.LIST, this.storage, splitInput);
+
             } else {
                 throw new DukeException("Wrong usage of list! Correct usage: list");
             }
@@ -91,9 +91,7 @@ public class InputHandler {
         case "mark":
             //Confirms that input is in the format mark [index]
             if (splitInput.length == 2) {
-
-                parser.parse(CommandType.MARK, this.storage, splitInput);
-                return false;
+                return parser.parse(CommandType.MARK, this.storage, splitInput);
 
             } else {
                 throw new DukeException("Wrong usage of mark! Correct usage: mark [index]");
@@ -102,8 +100,8 @@ public class InputHandler {
         case "unmark":
             //Confirms that input is in the format mark [index]
             if (splitInput.length == 2) {
-                parser.parse(CommandType.UNMARK, this.storage, splitInput);
-                return false;
+                return parser.parse(CommandType.UNMARK, this.storage, splitInput);
+
             } else {
                 throw new DukeException("Wrong usage of unmark! Correct usage: unmark [index]");
             }
@@ -111,22 +109,22 @@ public class InputHandler {
         case "delete":
             //Confirms that input is in the format mark [index]
             if (splitInput.length == 2) {
-                parser.parse(CommandType.DELETE, this.storage, splitInput);
-                return false;
+                return parser.parse(CommandType.DELETE, this.storage, splitInput);
+
             } else {
                 throw new DukeException("Wrong usage of delete! Correct usage: delete [index]");
             }
 
         case "find":
             if (splitInput.length > 1) {
-                parser.parse(CommandType.FIND, this.storage, splitInput);
-                return false;
+                return parser.parse(CommandType.FIND, this.storage, splitInput);
+
             } else {
                 throw new DukeException("Uh oh! It seems like you did not specify what to find");
             }
 
         case "bye":
-            return true;
+            return endMessage;
 
 
 
@@ -142,8 +140,9 @@ public class InputHandler {
      * Prints out the task name that has been added as well as the number of tasks in the list
      * @param task The task that has been added
      */
-    public void printAddTaskMessage(Task task) {
-        System.out.println("Got it. I've added this task:\n" + task + "\nNow you have " + this.storage.taskListSize() + " tasks in the list." );
+    public String addTaskMessage(Task task) {
+        return "Got it. I've added this task:\n" + task + "\nNow you have " + this.storage.taskListSize() +
+                " tasks in the list." ;
     }
 
     enum CommandType {
