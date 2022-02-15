@@ -114,6 +114,11 @@ Example: `remind 1 2022-02-15 13:16`
 !Reminder! cs2103 iP by Feb 18 2022
 ```
 
+### `bye` - Exit the program
+Exits the program.
+
+Example: `bye`
+
 ## Command summary
 <table>
   <tr>
@@ -156,4 +161,7 @@ Example: `remind 1 2022-02-15 13:16`
     <td>remind</td>
     <td><code>remind [index] [date] [time]</code></td>
   </tr>
+  <tr>
+    <td>bye</td>
+    <td><code>bye</code></td>
 </table>
