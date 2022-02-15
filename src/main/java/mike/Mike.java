@@ -10,7 +10,7 @@ public class Mike {
     private TaskList taskList;
     private final Ui ui;
     private final Storage storage;
-    //TODO: consider making Mike immutable (return Mike with new list each time)
+
     /**
      * Constructor for Mike.
      */
@@ -69,7 +69,7 @@ public class Mike {
      * Returns true if user has input the exit command ("bye").
      *
      * @param userInput
-     * @return true if userInput is "bye"; else returns false
+     * @return true if userInput is "bye"; else returns false.
      */
     public boolean isExitCommand(String userInput) {
         Parser parser = new Parser(userInput);
@@ -93,6 +93,7 @@ public class Mike {
      * Adds a task of type "To-do" to the list
      *
      * @param str The name of the task to be added to the list.
+     * @return String to be output to the user by Mike.
      */
     private String addTodo(String str) {
         Todo todo = new Todo(str);
@@ -104,6 +105,7 @@ public class Mike {
      *
      * @param name The name of the task and its deadline in the format "taskName /by deadline".
      * @param date The date of the deadline represented as a String.
+     * @return String to be output to the user by Mike.
      */
     private String addDeadline(String name, String date) {
         try {
@@ -121,6 +123,7 @@ public class Mike {
      *
      * @param name The name of the task and the time of the event in the format "taskName /at eventTime".
      * @param scheduledDate The date of the event represented as a String.
+     * @return String to be output to the user by Mike.
      */
     private String addEvent(String name, String scheduledDate) {
         try {
@@ -137,6 +140,7 @@ public class Mike {
      * Marks the task (specified by its index in the list) as "done".
      *
      * @param indexFromUser The index of the task (as seen by the user) to be marked in the list.
+     * @return String to be output to the user by Mike.
      */
     private String mark(int indexFromUser) {
         return ui.printReply(taskList.markInListWithMessage(indexFromUser));
@@ -146,6 +150,7 @@ public class Mike {
      * Marks the task (specified by its index in the list) as "not done".
      *
      * @param indexFromUser The index of the task (as seen by the user) to be unmarked in the list.
+     * @return String to be output to the user by Mike.
      */
     private String unmark(int indexFromUser) {
         return ui.printReply(taskList.unmarkInListWithMessage(indexFromUser));
