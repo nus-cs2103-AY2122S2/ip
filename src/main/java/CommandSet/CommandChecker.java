@@ -92,8 +92,7 @@ public class CommandChecker {
             return findCommandType(command);            
 
         } catch (IllegalCommandException e) {
-            Ui.printMessage(e.toString());
-            Ui.printTryAgain();
+            Ui.printMessage(e.toString() + "\nPlease try again!");
             return Commands.INVALID;
         }
     }

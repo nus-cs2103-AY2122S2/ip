@@ -36,8 +36,7 @@ public class Ui {
             writer.write(greeting);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -57,8 +56,7 @@ public class Ui {
             writer.write("Goodbye, " + username + farewell);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -76,8 +74,7 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -96,7 +93,6 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
             Ui.printMessage(e.toString());
         }
     }
@@ -114,8 +110,7 @@ public class Ui {
             writer.write(ask + username);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -129,8 +124,7 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -146,8 +140,7 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -156,15 +149,15 @@ public class Ui {
      *
      * @param task the task that was added.
      */
-    public static void printAdded(String task) {
-        String str = "I have added: " + task + ", to your list of tasks";
+    public static void printAdded(String task, int numTasks) {
+        String str = "I have added: " + task + ", to your list of tasks.\n"
+                + "Number of tasks up to now: " + numTasks;
         try {
             FileWriter writer = new FileWriter(PATH_TEMP_FILE);
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -180,8 +173,7 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -195,8 +187,7 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -212,8 +203,7 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -229,24 +219,16 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
     /**
-     * prints error.
+     * gets error string.
+     * @return String error.
      */
-    public static void printError() {
-        String str = "Error...";
-        try {
-            FileWriter writer = new FileWriter(PATH_TEMP_FILE);
-            writer.write(str);
-            writer.close();
-        } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
-        }
+    public static String getError() {
+         return "Error...\n";
     }
 
     /**
@@ -259,8 +241,7 @@ public class Ui {
             writer.write(str);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -274,8 +255,7 @@ public class Ui {
             writer.write(message);
             writer.close();
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 

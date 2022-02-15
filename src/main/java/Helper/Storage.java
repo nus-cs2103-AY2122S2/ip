@@ -121,8 +121,7 @@ public class Storage {
             writer.close();
 
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 
@@ -141,8 +140,7 @@ public class Storage {
             writer.close();
 
         } catch (IOException e) {
-            Ui.printError();
-            Ui.printMessage(e.toString());
+            Ui.printMessage(Ui.getError() + e.toString());
         }
     }
 }

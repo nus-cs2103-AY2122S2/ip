@@ -150,10 +150,9 @@ public class Conan {
             default:
                 // do nothing.
             }
-            // Ui.printAsk();
+
         } catch (IllegalCommandException e) {
-            Ui.printMessage(e.toString());
-            //Ui.printTryAgain();
+            Ui.printMessage(e.toString() + "\nPlease try again!");
         } finally {
             return carryOn;
         }
