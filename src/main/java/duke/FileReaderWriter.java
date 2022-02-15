@@ -1,6 +1,7 @@
 //@@author SimJM-reused
 //Reused from https://github.com/garethkoh/ip/blob/master/src/main/java/Storage.java
 // with minor modifications
+package duke;
 
 import java.io.File;
 import java.io.FileInputStream;
