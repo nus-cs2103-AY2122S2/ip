@@ -41,6 +41,10 @@ public class EventCommand extends Command<String> {
         ui.showAddEvent(freshEvent, taskList);
     }
 
+    /**
+     * Creates an event object based on whether priority was specified
+     * @return Event object
+     */
     public Event eventCreator() {
         if (inputText.contains("/pri")) {
             String[] splicedString = inputText.split(" /at ");

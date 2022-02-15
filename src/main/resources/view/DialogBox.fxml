@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" fillHeight="false" minHeight="120.0"
-         prefWidth="280.0" type="javafx.scene.layout.HBox"
-         xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" fillHeight="false" prefWidth="280.0"
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" style="-fx-background-color: #0000EE; -fx-background-radius: 15;
-        -fx-border-color: white; -fx-border-radius: 15;
-        -fx-label-padding: 5; -fx-max-height: 400; -fx-max-width: 400;"
-               text="Label" textFill="WHITE" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER" style="-fx-background-color: #66cd00;
+        -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15; -fx-label-padding: 5;
+         -fx-max-height: 400; -fx-max-width: 400;" text="Label" textFill="#58526b" wrapText="true">
             <font>
-                <Font name="Verdana" size="12.0" />
+                <Font name="Copperplate" size="13.0" />
             </font></Label>
-        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="107.0" pickOnBounds="true"
-                   smooth="false">
-         <HBox.margin>
-            <Insets />
-         </HBox.margin></ImageView>
+        <ImageView fx:id="displayPicture" blendMode="DARKEN" fitHeight="100.0" fitWidth="107.0" pickOnBounds="true" smooth="false" />
     </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
 </fx:root>

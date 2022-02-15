@@ -54,8 +54,14 @@ public class Ui {
      * @param list current list of task
      */
     public void showAddDeadline(Deadline freshDeadline, TaskList list) {
-        System.out.println("   " + "ALRIGHTY. I've added this task:\n"
-                + "    " + freshDeadline + "\n" +  "   Now you have " + list.getSize() + " tasks in the list.");
+        System.out.println("   "
+                + "ALRIGHTY. I've added this task:\n"
+                + "    "
+                + freshDeadline
+                + "\n"
+                + "   Now you have "
+                + list.getSize()
+                + " tasks in the list.");
     }
 
     /**
@@ -64,8 +70,14 @@ public class Ui {
      * @param list current list of task
      */
     public void showAddEvent(Event freshEvent, TaskList list) {
-        System.out.println("   " + "ALRIGHTY. I've added this task:\n"
-                + "    " + freshEvent + "\n" +  "   Now you have " + list.getSize() + " tasks in the list.");
+        System.out.println("   "
+                + "ALRIGHTY. I've added this task:\n"
+                + "    "
+                + freshEvent
+                + "\n"
+                + "   Now you have "
+                + list.getSize()
+                + " tasks in the list.");
     }
 
     /**
@@ -74,7 +86,13 @@ public class Ui {
      * @param list current list of task
      */
     public void showAddTodo(ToDo freshTodo, TaskList list) {
-        System.out.println("   " + "ALRIGHTY. I've added this task:\n"
-                + "    " + freshTodo + "\n" +  "   Now you have " + list.getSize() + " tasks in the list.");
+        System.out.println("   "
+                + "ALRIGHTY. I've added this task:\n"
+                + "    "
+                + freshTodo
+                + "\n"
+                + "   Now you have "
+                + list.getSize()
+                + " tasks in the list.");
     }
 }

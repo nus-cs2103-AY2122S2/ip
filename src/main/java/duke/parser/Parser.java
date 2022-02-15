@@ -1,9 +1,9 @@
 package duke.parser;
 
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.command.*;
 import duke.ui.Ui;
 
 /**

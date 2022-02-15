@@ -33,11 +33,11 @@ public class UnmarkCommand extends Command<String> {
     public void runCommand() {
         int taskNumber = intSearch(inputText) - 1;
         if (taskNumber < taskList.getSize() && taskNumber >= 0) {
-            assert taskNumber < taskList.getSize(): "condition falsely returning true";
-            assert taskNumber >= 0: "condition falsely returning true";
+            assert taskNumber < taskList.getSize() : "condition falsely returning true";
+            assert taskNumber >= 0 : "condition falsely returning true";
             Task intendedTask = taskList.getTask(taskNumber);
             intendedTask.setDone(false);
-            assert intendedTask.getDone() == false: "Method not working";
+            assert intendedTask.getDone() == false : "Method not working";
             storage.writeToFile(taskList);
             System.out.println("  " + "AIYO! I've marked this task as not done yet:\n"
                     + "    " + intendedTask);

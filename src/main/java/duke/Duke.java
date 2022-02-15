@@ -40,16 +40,16 @@ public class Duke {
      */
     public void run(String input) {
         DukeManager dukeManager = new DukeManager();
-            try {
-                String testCommand = dukeManager.test(input);
-                Command<String> newTask = Parser.parseCommand(testCommand, taskList, storage, ui);
-                if (!newTask.isRunning()) {
-                    System.exit(0);
-                }
-            } catch (DukeException e) {
-                System.out.print(e.getMessage() + "\n");
+        try {
+            String testCommand = dukeManager.test(input);
+            Command<String> newTask = Parser.parseCommand(testCommand, taskList, storage, ui);
+            if (!newTask.isRunning()) {
+                System.exit(0);
             }
+        } catch (DukeException e) {
+            System.out.print(e.getMessage() + "\n");
         }
+    }
 
     /**
      * Function to convert system out from Whey to String

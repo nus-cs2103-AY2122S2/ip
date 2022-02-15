@@ -42,6 +42,10 @@ public class TodoCommand extends Command<String> {
         ui.showAddTodo(freshToDo, taskList);
     }
 
+    /**
+     * Creates a ToDo object based on whether priority was specified
+     * @return ToDo object
+     */
     public ToDo toDoCreator() {
         if (inputText.contains("/pri")) {
             String[] splicedString = inputText.split(" /pri ");

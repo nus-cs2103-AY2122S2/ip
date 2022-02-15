@@ -2,8 +2,6 @@ package duke.task;
 
 import duke.exception.DukeException;
 
-import java.util.Locale;
-
 /**
  * Task class
  */
@@ -36,7 +34,13 @@ public class Task {
 
     }
 
-    public String determinePriority(String priority) throws DukeException{
+    /**
+     * Determine priority of the task
+     * @param priority priority level based on specified string
+     * @return string conforming to enum class
+     * @throws DukeException if string provided does not specify priority
+     */
+    public String determinePriority(String priority) throws DukeException {
         String upperCasePriority = priority.toUpperCase();
         if (upperCasePriority.equals("LOW") || upperCasePriority.equals("L")) {
             return "LOW";
@@ -44,7 +48,7 @@ public class Task {
             return "MEDIUM";
         } else if (upperCasePriority.equals("HIGH") || upperCasePriority.equals("H")) {
             return "HIGH";
-        } else if (priority.equals(" ") || priority.equals("")){
+        } else if (priority.equals(" ") || priority.equals("")) {
             return "EMPTY";
         } else {
             throw new DukeException("Incorrect priority level format!");

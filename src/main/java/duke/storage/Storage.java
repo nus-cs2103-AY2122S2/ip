@@ -105,7 +105,8 @@ public class Storage {
                 String[] splicedString = currTask.split(" \\(by: ");
                 String description = splicedString[0].substring(12);
                 String date = splicedString[1].substring(0, splicedString[1].length() - 1);
-                Deadline freshDeadline = new Deadline(description, date, Character.toString(priorityLevel),true);
+                Deadline freshDeadline = new
+                        Deadline(description, date, Character.toString(priorityLevel), true);
                 if (isDone) {
                     freshDeadline.setDone(true);
                 }
@@ -115,7 +116,7 @@ public class Storage {
                 String[] splicedString = currTask.split(" \\(at: ");
                 String description = splicedString[0].substring(12);
                 String date = splicedString[1].substring(0, splicedString[1].length() - 1);
-                Event freshEvent = new Event(description, date, Character.toString(priorityLevel),true);
+                Event freshEvent = new Event(description, date, Character.toString(priorityLevel), true);
                 if (isDone) {
                     freshEvent.setDone(true);
                 }
