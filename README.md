@@ -22,8 +22,8 @@ Here is how ChiBot looks like:
 
 ChiBot comes with an array of features to help you keep to the task at hand.
 
-### Different types of tasks
-Use different tasks for different occasions:
+### Differentiate tasks
+Use different tasks types to keep track of different occasions:
 1. Todo: For keeping track of generic things you need to get done
 2. Deadline: For keeping track on when to get important things done by
 3. Event: For remembering where you have to be and when
@@ -45,7 +45,7 @@ To start using ChiBot, download it [here]()
 
 ## User Guide
 
-If you are ever stuck, use our [User Guide]()
+If you are ever stuck, use our [User Guide](https://wjunhong.github.io/ip/)
 
 ## Developer Guide
 
