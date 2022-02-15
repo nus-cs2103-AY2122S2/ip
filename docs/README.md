@@ -35,6 +35,7 @@ eye too!
       You just need to check whether the *version complies*.
       2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
       Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
+      
    </details>
       
    <details>
@@ -46,6 +47,7 @@ eye too!
          You just need to check whether the *version complies*.
       2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
          Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
+      
    </details>
    
    <details>
@@ -57,6 +59,7 @@ eye too!
          You just need to check whether the *version complies*.
       2. If nothing displays, an error message appears, or your version is incompatible, you may install the correct
          Java version [here](https://www.oracle.com/java/technologies/downloads/#java11).
+      
    </details>
       
 2. Download the latest version of `nikki.jar` [here](https://github.com/DavidTan0527/ip/releases/).
