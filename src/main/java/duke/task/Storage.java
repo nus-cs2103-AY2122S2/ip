@@ -49,17 +49,18 @@ public class Storage {
      */
     public TaskList loadTasks() {
         TaskList tasks = new TaskList();
+        Scanner scanner;
 
         try {
             File file = new File(FILE_NAME);
-            Scanner scanner = new Scanner(file);
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                tasks.add(parseTask(line));
-            }
+            scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
             return tasks;
+        }
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            tasks.add(parseTask(line));
         }
 
         return tasks;
