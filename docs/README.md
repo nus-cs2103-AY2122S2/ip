@@ -115,14 +115,14 @@ Example: `remind 1 2022-02-15 13:16`
 ```
 
 ## Command summary
-| Command | Format |
-| --- | --- |
-| todo | `todo [description]` |
-| deadline | `deadline [description] /by [date]` |
-| event | `event [description] /by [date]` |
-| list | `list` |
-| delete | `delete [index]` |
-| mark | `mark [index]` |
-| unmark | `unmark [index]` |
-| find | `find [keyword]` |
-| remind | `remind [index] [date] [time]` |
+Command | Format
+-------- | ------------------
+todo | `todo [description]`
+deadline | `deadline [description] /by [date]`
+event | `event [description] /by [date]`
+list | `list`
+delete | `delete [index]`
+mark | `mark [index]`
+unmark | `unmark [index]`
+find | `find [keyword]`
+remind | `remind [index] [date] [time]`
