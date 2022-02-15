@@ -145,7 +145,7 @@ public class Ui {
     public String showAddedTask(Task t, int numberOfTasks) {
         return String.format("Got it. I've added this task:\n"
                 + "\t%s\n"
-                + "Now you have %d tasks in the list.", t.toString(), numberOfTasks);
+                + "Now you have %d tasks in the list. ", t.toString(), numberOfTasks);
     }
 
     /**
@@ -158,56 +158,56 @@ public class Ui {
     public String showDeletedTask(Task t, int numberOfTasks) {
         return String.format("Noted. I have removed this task:\n"
                 + "\t%s\n"
-                + "There are now %d tasks in your task list\n", t, numberOfTasks);
+                + "There are now %d tasks in your task list\n ", t, numberOfTasks);
     }
     public String showDeleteEmptyList() {
-        return "There are no tasks in your task list to delete.";
+        return "There are no tasks in your task list to delete. ";
     }
     public String showDeleteFailed() {
-        return "Delete Task Failed";
+        return "Delete Task Failed ";
     }
     public String showDeleteOutOfBounds(int limit) {
-        return String.format("Invalid number entered! The number entered must be between 1 and %s", limit);
+        return String.format("Invalid number entered! The number entered must be between 1 and %s ", limit);
     }
 
     // Update Messages
     public String showNoName() {
-        return "No Name entered!";
+        return "No Name entered! ";
     }
     public String showUpdateOutOfBounds() {
-        return "Invalid number entered! No tasks updated.";
+        return "Invalid number entered! No tasks updated. ";
     }
     public String showUpdateSuccess(Task t) {
-        return String.format("+++ Nice! I've updated this task:\n... %s", t);
+        return String.format("+++ Nice! I've updated this task:\n... %s ", t);
     }
     public String showIncompatibleType() {
-        return "No date information is associated with this task.";
+        return "No date information is associated with this task. ";
     }
     public String showSameDateError() {
-        return "Updated Date is the same as the old date!";
+        return "Updated Date is the same as the old date! ";
     }
     public String showSameNameError() {
-        return "Updated name is the same as the old name!";
+        return "Updated name is the same as the old name! ";
     }
 
     // Save/Load Files
     public String showInitializeDefaults() {
-        return "...Initializing Defaults...";
+        return "...Initializing Defaults... ";
     }
     public String showLoadFilePath(String filePath) {
         return "Loading task from: " + filePath;
     }
     public String showFileReadError() {
-        return "Error Reading from file!";
+        return "Error Reading from file! ";
     }
     public String showLoadingComplete() {
-        return "Loading Completed!";
+        return "Loading Completed! ";
     }
     public String showSavingComplete() {
-        return "Saving Completed!";
+        return "Saving Completed! ";
     }
     public String showSavingFailed() {
-        return "Saving Failed!";
+        return "Saving Failed! ";
     }
 
     public String getUserInputLine() {

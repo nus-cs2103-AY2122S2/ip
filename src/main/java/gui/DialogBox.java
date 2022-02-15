@@ -32,13 +32,13 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
-            this.dialog.setStyle("-fx-padding: 10;" +
-                    "-fx-border-style: solid inside;" +
-                    "-fx-border-width: 2;" +
-                    "-fx-border-insets: 2;" +
-                    "-fx-border-radius: 5;" +
-                    "-fx-border-color: black;" +
-                    "-fx-background-color: beige;");
+            this.dialog.setStyle("-fx-padding: 10;"
+                    + "-fx-border-style: solid inside;"
+                    + "-fx-border-width: 2;"
+                    + "-fx-border-insets: 2;"
+                    + "-fx-border-radius: 5;"
+                    + "-fx-border-color: black;"
+                    + "-fx-background-color: beige;");
         } catch (IOException e) {
             e.printStackTrace();
         }

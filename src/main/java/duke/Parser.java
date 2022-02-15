@@ -246,7 +246,7 @@ public class Parser {
      */
     public static DeleteTaskCommand newDeleteTaskCommand(String index) throws DukeException {
         try {
-            int indexToDelete = Integer.parseInt(index.strip());
+            int indexToDelete = Integer.parseInt(index.strip()) - 1;
             return new DeleteTaskCommand(indexToDelete);
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number entered! Please enter an integer");
