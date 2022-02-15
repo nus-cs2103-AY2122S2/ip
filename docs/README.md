@@ -1,5 +1,5 @@
 # User Guide
-Duke is a task manager chatbot. Chat with Duke by keying in commands and view Duke's replies :handshake:
+Duke is a task manager chatbot. Chat with Duke by keying in commands and view Duke's replies!
 
 ## Features 
 
