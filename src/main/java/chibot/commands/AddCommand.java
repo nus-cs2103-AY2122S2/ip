@@ -80,7 +80,7 @@ public class AddCommand extends Command {
      */
     public String handleTodoCommand(TaskList tl, Storage sge) throws ChiException, IOException {
         if (validateMessageBody(this.description, command)) {
-            throw new ChiException("This todo has some problems nyan!");
+            throw new ChiException("This todo has some problems nyan! Make sure:\n1.Description is not empty");
         } else {
             Task newTask = new Todo(this.description, false);
             // Add task to list
@@ -102,7 +102,8 @@ public class AddCommand extends Command {
      */
     public String handleDeadlineCommand(TaskList tl, Storage sge) throws ChiException, IOException {
         if (validateMessageBody(this.description, command)) {
-            throw new ChiException("This deadline has some problems nyan!");
+            throw new ChiException("This deadline has some problems nyan! Make sure:\n"
+                    + "1.Description is not empty\n2.Datetime is not missing\n3.Datetime is formatted properly");
         } else {
             Task newTask;
             String s = getDescription(this.description, "deadline");
@@ -128,7 +129,8 @@ public class AddCommand extends Command {
      */
     public String handleEventCommand(TaskList tl, Storage sge) throws ChiException, IOException {
         if (validateMessageBody(this.description, command)) {
-            throw new ChiException("This event has some problems nyan!");
+            throw new ChiException("This event has some problems nyan! Make sure:\n"
+                    + "1.Description is not empty\n2.Datetime is not missing\n3.Datetime is formatted properly");
         } else {
             Task newTask;
             String s = getDescription(this.description, "event");

@@ -20,6 +20,10 @@ public enum Keywords {
     UNMARK("unmark"),
     HELP("help");
 
+    /** A String containing all commands supported by ChiBot */
+    public static final String listOfCommands = "\n1.list\n2.todo\n3.deadline\n4.event\n5.mark\n6.unmark\n7.delete"
+            + "\n8.find\n9.help\n10.bye";
+
     /** mapping of keywords to their respective enum instances */
     private final HashMap<String, Keywords> keywordMappings = new HashMap<>();
 
@@ -48,7 +52,8 @@ public enum Keywords {
                 return userKeyword;
             }
         }
-        throw new ChiException("Command not found nyan!");
+        throw new ChiException("Command not found nyan! Please enter one of the following commands:\n"
+                + listOfCommands + "\n\nIf you need help, type: help <command> to find out how to use it!");
     }
 
 }

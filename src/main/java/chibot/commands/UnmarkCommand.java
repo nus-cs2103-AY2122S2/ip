@@ -38,7 +38,8 @@ public class UnmarkCommand extends Command {
             String msg = String.join(" ", tokens);
             boolean isValidMarkCommand = validateMessageBody(msg, tl);
             if (!isValidMarkCommand) {
-                throw new ChiException("Hey there is something wrong with this unmark command nyan!");
+                throw new ChiException("Hey there is something wrong with this unmark command nyan! Make sure:\n"
+                        + "1.You only insert 1 integer value\n2.A valid task number to unmark");
             }
             int index = getIndexInMessage(msg);
             Task doneTask = tl.getTask(index);

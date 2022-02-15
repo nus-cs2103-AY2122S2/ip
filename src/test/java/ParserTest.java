@@ -33,7 +33,9 @@ class ParserTest {
         try {
             String s = p.processMessage("allahu", tls, ss);
         } catch (ChiException e) {
-            assertEquals("Command not found nyan!", e.toString());
+            assertEquals("Command not found nyan! Please enter one of the following commands:\n"
+                    + Keywords.listOfCommands
+                    + "\n\nIf you need help, type: help <command> to find out how to use it!", e.toString());
         } catch (IOException e) {
             throw new IOException(e.getMessage());
         }

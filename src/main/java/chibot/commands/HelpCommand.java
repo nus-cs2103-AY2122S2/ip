@@ -86,10 +86,13 @@ public class HelpCommand extends Command {
         case "exit":
             return "To exit ChiBot, simply type \"bye\"! Don't worry, Chi will be waiting for you to return!";
             // Fallthrough
+        case "help":
+            return "To seek help, type \"help <command>\"!\nE.g. help list\nAlternatively, just type \"help\"!";
         default:
             break;
         }
-        throw new ChiException("Chi can't help you with that weird command nyan!");
+        throw new ChiException("Chi can't help you with that weird command nyan!\nPlease enter one of these commands:"
+                + Keywords.listOfCommands);
     }
 
 

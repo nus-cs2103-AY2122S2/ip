@@ -66,7 +66,7 @@ public class Parser {
             } else if (isNumericCommand && tokens.length < MIN_COMMAND_LENGTH) {
                 throw new ChiException("Hey can you specify a number nyan!");
             } else if (res.equals(Keywords.LIST) && tokens.length > LIST_COMMAND_LENGTH) {
-                throw new ChiException("Hey this command doesn't take in so many arguments nyan!");
+                throw new ChiException("Hey this command doesn't take in so many keywords nyan!");
             } else if (res.equals(Keywords.HELP) && tokens.length > MAX_HELP_COMMAND_LENGTH) {
                 throw new ChiException("Hey Chi-san can only help you with one thing at a time nyan!");
             }
