@@ -5,17 +5,13 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" style="-fx-background-color : red; -fx-border-width: 10;" text="Label" textFill="#1a1a1a" wrapText="true">
+        <Label fx:id="dialog" style="-fx-background-color : gold; -fx-border-width: 10;" text="Label" textFill="#1a1a1a" wrapText="true">
          <effect>
             <Blend />
-         </effect>
-         <font>
-            <Font size="18.0" />
-         </font></Label>
+         </effect></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
