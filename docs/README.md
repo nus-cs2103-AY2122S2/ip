@@ -1,6 +1,26 @@
 # User Guide
 ![](https://github.com/robinrojh/ip/blob/master/docs/Ui.PNG)
 
+Duke chatbot provides a way to record and save your tasks efficiently!
+
+- ![Features](https://robinrojh.github.io/ip/#features)
+- ![Usage](https://robinrojh.github.io/ip/#usage)
+  - ![Add, Delete, and View](https://robinrojh.github.io/ip/#adding-and-deleting-tasks)
+    - ![todo](https://robinrojh.github.io/ip/#todo---adding-a-todo-object)
+    - ![deadline](https://robinrojh.github.io/ip/#deadline---adding-a-deadline-object)
+    - ![event](https://robinrojh.github.io/ip/#event---adding-an-event-object)
+    - ![delete](https://robinrojh.github.io/ip/#delete---delete-a-task)
+    - ![list](https://robinrojh.github.io/ip/#list---list-all-your-tasks)
+  - ![Mark Your Tasks](https://robinrojh.github.io/ip/#marking-tasks)
+    - ![mark](https://robinrojh.github.io/ip/#mark---mark-the-task-as-completed)
+    - ![unmark]()
+  - ![Useful Features](https://robinrojh.github.io/ip/#useful-features)
+    - ![find](https://robinrojh.github.io/ip/#find---find-a-task-in-the-list-based-on-a-keyword)
+    - ![sort](https://robinrojh.github.io/ip/#sort---sort-the-list-based-on-date-or-content)
+  - ![Tagging Your Tasks](https://robinrojh.github.io/ip/#useful-features)
+    - ![tag](https://robinrojh.github.io/ip/#tag---tag-a-task-with-a-keyword)
+    - ![untag](https://robinrojh.github.io/ip/#untag---untag-the-task)
+
 ## Features 
 
 ### Add, Delete, and View Your Tasks.
@@ -101,6 +121,24 @@ Expected outcome:
 Ok, removing a task: [T][ ] hello world
 Now you got 0 tasks in the list!
 ```
+#### `list` - List all your tasks!
+Lists all of your tasks that you have added until now.
+
+Usage: `list`
+
+Example:
+```
+todo hello world
+deadline CS stuff \by 2022-12-25 1800
+event meet up with friends \at 2022-02-23 1830
+list
+```
+Expected outcome:
+```
+1: [T][ ] hello world
+2: [D][ ] CS stuff (by: 18:00 Sunday, 12-25-2022)
+3: [E][ ] meet up with friends (at: 18:30 Wednesday, 02-23-2022)
+```
 ---
 ### Marking Tasks
 #### `mark` - Mark the task as completed
@@ -137,24 +175,6 @@ I've unmarked this task: [T][ ] hello world
 ```
 ---
 ### Useful Features
-#### `list` - List all your tasks!
-Lists all of your tasks that you have added until now.
-
-Usage: `list`
-
-Example:
-```
-todo hello world
-deadline CS stuff \by 2022-12-25 1800
-event meet up with friends \at 2022-02-23 1830
-list
-```
-Expected outcome:
-```
-1: [T][ ] hello world
-2: [D][ ] CS stuff (by: 18:00 Sunday, 12-25-2022)
-3: [E][ ] meet up with friends (at: 18:30 Wednesday, 02-23-2022)
-```
 #### `find` - Find a task in the list based on a keyword
 Finds a task based on the given keyword. Case sensitive.
 
