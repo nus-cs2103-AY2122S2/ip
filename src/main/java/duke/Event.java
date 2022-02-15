@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 /**
@@ -17,7 +18,7 @@ class Event extends Task {
      * @param name The name of the task.
      * @param time The date the task has to be completed by in the format "yyyy-mm-dd".
      */
-    public Event(String name, String time) {
+    public Event(String name, String time) throws DateTimeParseException {
         super(name);
         this.time = LocalDate.parse(time);
     }

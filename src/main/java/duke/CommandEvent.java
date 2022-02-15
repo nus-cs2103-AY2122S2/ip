@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class CommandEvent extends Command {
@@ -26,10 +27,15 @@ public class CommandEvent extends Command {
                 String[] divide = item.split("/");
                 String name = divide[0];
                 String time = divide[1];
-                Event e = new Event(name.trim(), time.substring(3));
-                tasks.add(e);
-                output = String.format("task added:\n%s\n", e);
-                output += String.format("you now have %d tasks\n", tasks.size());
+                try{
+                    Event e = new Event(name.trim(), time.substring(3));
+                    tasks.add(e);
+                    output = String.format("task added:\n%s\n", e);
+                    output += String.format("you now have %d tasks\n", tasks.size());
+                } catch (DateTimeParseException e) {
+                    output = "date must be in the format yyyy-mm-dd\n";
+                }
+
             } catch (IndexOutOfBoundsException e) {
                 output = "event description must contain a date!\n";
             }

@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 /**
@@ -17,7 +18,7 @@ class Deadline extends Task {
      * @param name The name of the task.
      * @param dueDate The date the task has to be completed by in the format "yyyy-mm-dd".
      */
-    public Deadline(String name, String dueDate) {
+    public Deadline(String name, String dueDate) throws DateTimeParseException {
         super(name);
         this.dueDate = LocalDate.parse(dueDate);
     }
