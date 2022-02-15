@@ -36,15 +36,15 @@ The format for the date must be: dd-mm-yyyy
 Bobby replies with a confirmation message that he added your task into the list
 and tells you how many tasks are currently in your list. 
 
-###`todo`: 
+### `todo`: 
 
 ![todo_example.png](todo.png)
 
-###`event`:
+### `event`:
 
 ![event_example.png](event.png)
 
-###`deadline`:
+### `deadline`:
 
 ![deadline_example.png](deadline.png)
 
