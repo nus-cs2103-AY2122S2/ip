@@ -52,6 +52,12 @@ application {
     mainClassName = "duke.gui.Launcher"
 }
 
+jar {
+    manifest {
+        attributes "Main-Class": "duke.gui.Launcher"
+    }
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null

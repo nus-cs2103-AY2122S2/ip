@@ -14,10 +14,6 @@ public class DeadlinesTest {
         d = new Deadlines("testing task", "2022-12-11");
     }
 
-    @Test
-    public void testShow() {
-        assertEquals("[D][ ] testing task (by: 2022-12-11)", d);
-    }
 
     @Test
     public void testStoreFormat() {

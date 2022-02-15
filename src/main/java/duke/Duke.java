@@ -19,7 +19,7 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("./src/main/data.txt");
+        this.storage = new Storage("./data/data.txt");
         this.list = new DukeList(storage);
     }
 

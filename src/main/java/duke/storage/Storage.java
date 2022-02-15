@@ -30,6 +30,8 @@ public class Storage {
      */
     public List<Task> load() {
         File data = new File(filePath);
+        File directory = new File(data.getParentFile().getAbsolutePath());
+        directory.mkdirs();
         try {
             if (data.createNewFile()) {
                 return new ArrayList<Task>();

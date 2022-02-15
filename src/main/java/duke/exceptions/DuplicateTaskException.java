@@ -5,6 +5,6 @@ package duke.exceptions;
  */
 public class DuplicateTaskException extends DukeException {
     public DuplicateTaskException(int index) {
-        super("Duplicate task detected! See Task " + index );
+        super("Duplicate task detected! See Task " + index);
     }
 }
