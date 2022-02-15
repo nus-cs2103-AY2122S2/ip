@@ -10,20 +10,31 @@ public class Deadline extends Task {
     private final String endDate;
     private final LocalDate date;
 
-    private static final String taskType = "D";
+    private final static String taskType = "D";
 
     private static LocalDate convertToDate(String endDate) {
         return LocalDate.parse(endDate);
     }
 
-    public Deadline(String name, String endDate) {
-        super(name);
+    /**
+     * Constructor for Deadline
+     * @param name
+     * @param endDate
+     * @param isDone
+     */
+    public Deadline(String name, String endDate, boolean isDone) {
+        super(name, isDone);
         this.endDate = endDate;
         this.date = convertToDate(endDate);
     }
 
-    public Deadline(String name, String endDate, boolean isDone) {
-        super(name, isDone);
+    /**
+     * Constructor for Deadline where isDone without isDone parameter
+     * @param name
+     * @param endDate
+     */
+    public Deadline(String name, String endDate) {
+        super(name);
         this.endDate = endDate;
         this.date = convertToDate(endDate);
     }
