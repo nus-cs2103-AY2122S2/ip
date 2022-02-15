@@ -79,7 +79,7 @@ public class Storage {
                     throw new DukeException("Invalid save data");
                 }
             }
-        } catch (FileNotFoundException ignored) {
+        } catch (FileNotFoundException e) {
             return tasks;
         }
 
