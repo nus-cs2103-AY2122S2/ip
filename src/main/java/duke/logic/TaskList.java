@@ -85,6 +85,11 @@ public class TaskList {
         return stringifiedData;
     }
 
+    /**
+     * Replaces internal task list with a shallow copy of input task list.
+     *
+     * @param taskList Task list to be copied.
+     */
     public void copy(TaskList taskList) {
         this.tasks = new ArrayList<>(taskList.tasks);
     }

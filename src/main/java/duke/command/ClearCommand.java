@@ -17,10 +17,10 @@ public class ClearCommand extends Command {
      * associated with the list of tasks.
      *
      * @param taskList  List of tasks that is to be cleared.
-     * @param ui        UI responsible for displaying the response message.
+     * @param ui        UI responsible for displaying response from Duke.
      * @param storage   Storage responsible for truncating local file.
      * @param taskStack Stack of tasks to use with undo command.
-     * @return <code>true</code> upon successful execution.
+     * @return String response from Duke upon successful execution.
      * @throws DukeException If file truncation is unsuccessful.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage, TaskStack taskStack) throws DukeException {

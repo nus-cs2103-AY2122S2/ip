@@ -6,7 +6,19 @@ import duke.logic.TaskList;
 import duke.logic.TaskStack;
 import duke.logic.Ui;
 
+/**
+ * Represents a command that undoes the last command.
+ */
 public class UndoCommand extends Command {
+    /**
+     * Undoes the last command by retrieving the latest copy of the task list from the stack of
+     * task lists.
+     *
+     * @param taskList List of tasks to be replaced.
+     * @param ui       UI responsible for displaying response from Duke.
+     * @param storage  Storage responsible for reading and writing to local file.
+     * @return String response from Duke upon successful execution.
+     */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage, TaskStack taskStack) throws DukeException {
         String output;

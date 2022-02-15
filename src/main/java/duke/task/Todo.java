@@ -26,6 +26,11 @@ public class Todo extends Task {
         return "T | " + this.isMarked + " | " + this.description;
     }
 
+    /**
+     * Reformats and returns string representation of todo task.
+     *
+     * @return Reformatted string representation of todo task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

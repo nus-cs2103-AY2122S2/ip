@@ -39,9 +39,9 @@ public class MarkCommand extends Command {
      * response message, and writes to a local file associated with the list of tasks.
      *
      * @param taskList List of tasks that is to be operated on.
-     * @param ui       UI responsible for displaying response message.
+     * @param ui       UI responsible for displaying response from Duke.
      * @param storage  Storage responsible for reading and writing to local file.
-     * @return <code>true</code> upon successful execution.
+     * @return String response from Duke upon successful execution.
      * @throws DukeException If write to file is unsuccessful.
      */
     @Override

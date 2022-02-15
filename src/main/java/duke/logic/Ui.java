@@ -67,6 +67,12 @@ public class Ui {
         return "BYE!!!";
     }
 
+    /**
+     * Wraps input text with horizontal line above and below.
+     *
+     * @param text Text to be wrapped.
+     * @return Wrapped input text.
+     */
     private String wrap(String text) {
         String line = "____________________________________________________________\n";
         return line + text + "\n" + line;

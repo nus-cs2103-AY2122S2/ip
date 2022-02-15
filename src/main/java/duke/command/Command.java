@@ -16,9 +16,9 @@ public abstract class Command {
      * Performs a unique execution for a specific command.
      *
      * @param taskList List of tasks that is to be operated on.
-     * @param ui       UI responsible for displaying response message.
+     * @param ui       UI responsible for displaying response from Duke.
      * @param storage  Storage responsible for reading and writing to local file.
-     * @return boolean value that determines process termination.
+     * @return String response from Duke upon successful execution.
      * @throws DukeException If operation is unsuccessful.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage,

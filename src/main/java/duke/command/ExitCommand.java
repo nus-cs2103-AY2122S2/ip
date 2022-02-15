@@ -15,9 +15,9 @@ public class ExitCommand extends Command {
      * Displays an exit message.
      *
      * @param taskList List of tasks ignored.
-     * @param ui       UI responsible for displaying exit message.
+     * @param ui       UI responsible for displaying response from Duke.
      * @param storage  Storage ignored.
-     * @return <code>false</code> upon successful execution.
+     * @return String response from Duke upon successful execution.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage, TaskStack taskStack) {

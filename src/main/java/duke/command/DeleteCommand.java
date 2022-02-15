@@ -33,9 +33,9 @@ public class DeleteCommand extends Command {
      * response message, and writes to a local file associated with the list of tasks.
      *
      * @param taskList List of tasks that is to have a task removed.
-     * @param ui       UI responsible for displaying response message.
+     * @param ui       UI responsible for displaying response from Duke.
      * @param storage  Storage responsible for writing to local file.
-     * @return <code>true</code> upon successful execution.
+     * @return String response from Duke upon successful execution.
      * @throws DukeException If write to file is unsuccessful.
      */
     @Override
@@ -48,7 +48,7 @@ public class DeleteCommand extends Command {
             TaskList copiedTaskList = new TaskList();
             copiedTaskList.copy(taskList);
             taskStack.push(copiedTaskList);
-            
+
             taskList.remove(index);
         } else {
             throw new DukeException("INVALID INDEX");

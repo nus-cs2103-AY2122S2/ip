@@ -30,9 +30,9 @@ public class FindCommand extends Command {
      * Displays the filtered list of tasks that only contains the associated keyword.
      *
      * @param taskList List of tasks that is to be filtered.
-     * @param ui       UI responsible for displaying filtered list of tasks.
+     * @param ui       UI responsible for displaying response from Duke.
      * @param storage  Storage ignored.
-     * @return <code>true</code> upon successful execution.
+     * @return String response from Duke upon successful execution.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage, TaskStack taskStack) {

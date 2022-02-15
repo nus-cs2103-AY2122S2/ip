@@ -36,6 +36,11 @@ public class Event extends Task {
         return "E | " + this.isMarked + " | " + this.description + " | " + this.atTime;
     }
 
+    /**
+     * Reformats and returns string representation of event task.
+     *
+     * @return Reformatted string representation of event task.
+     */
     @Override
     public String toString() {
         String atTimeFormatted = this.atTime.format(DateTimeFormatter.ofPattern(

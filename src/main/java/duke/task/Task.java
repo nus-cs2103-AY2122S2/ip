@@ -52,6 +52,11 @@ public abstract class Task {
      */
     public abstract String toData();
 
+    /**
+     * Computes and returns baseline string representation of task.
+     *
+     * @return Computed baseline string representation of task.
+     */
     @Override
     public String toString() {
         return "[" + (isMarked ? "X" : " ") + "] " + this.description;

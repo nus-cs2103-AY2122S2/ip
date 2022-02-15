@@ -36,6 +36,11 @@ public class Deadline extends Task {
         return "D | " + this.isMarked + " | " + this.description + " | " + this.byTime;
     }
 
+    /**
+     * Reformats and returns string representation of deadline task.
+     *
+     * @return Reformatted string representation of deadline task.
+     */
     @Override
     public String toString() {
         String byTimeFormatted = this.byTime.format(DateTimeFormatter.ofPattern(
