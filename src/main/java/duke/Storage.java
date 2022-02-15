@@ -99,7 +99,6 @@ public class Storage {
 
         try {
             while ((line = buffReader.readLine()) != null) {
-                assertTrue(line.contains("-")); //Assumes each line of Task information are seperated by "-"
                 String[] arrOfString = line.split(" - ");
                 readTasks.add(createTaskFromText(arrOfString));
             }

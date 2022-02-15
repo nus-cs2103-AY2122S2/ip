@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
-import java.util.Locale;
 
 /**
  * This is the Parser class that obtains a sentence as input that
@@ -15,7 +14,6 @@ import java.util.Locale;
  * @version 1.0
  * @since   2022-2-1
  */
-
 public class Parser {
     protected String userInput;
     protected TaskList tasks;
@@ -126,7 +124,7 @@ public class Parser {
      * Based on supplied command by user input, run the command
      * @param input by the user for Duke to process
      */
-    public String parseInput(String input) throws DukeException, IOException {
+    public String parseInput(String input) {
         userInput = input;
         splitUserInput();
         Commands action;

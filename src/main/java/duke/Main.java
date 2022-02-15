@@ -31,7 +31,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            assertTrue(Files.exists(Path.of("src/main/resources/duke/view/MainWindow.fxml"))); //Assumes there is this file in the project
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/duke/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
