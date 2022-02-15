@@ -46,6 +46,7 @@ public class Storage {
      * @see IOException
      */
     public void writeToFile(TaskList tasks) throws IOException {
+        assert file.exists() : "Assertion failed on Storage.writeToFile(): duke.txt does not exist";
         FileWriter fw = new FileWriter(PATH);
         StringBuilder result = new StringBuilder();
         for (Task task : tasks.getTaskList()) {
@@ -74,26 +75,26 @@ public class Storage {
                 String type = inputLine[0];
                 boolean isDone = inputLine[1].equals("1");
                 switch (type) {
-                    case "T":
-                        taskList.addToDo(inputLine[2],isDone);
-                        break;
-                    case "E":
-                        input = inputLine[3].split(" ");
-                        if (input.length != 2) {
-                            throw new DukeException(Ui.MSG_FILEREADERROR);
-                        }
-                        date = parser.formatDate(input[0]);
-                        time = parser.formatTime(date, input[1]);
-                        taskList.addEvent(inputLine[2],isDone, date, time);
-                        break;
-                    case "D":
-                        input = inputLine[3].split(" ");
-                        if (input.length != 2) {
-                            throw new DukeException(Ui.MSG_FILEREADERROR);
-                        }
-                        date = parser.formatDate(input[0]);
-                        time = parser.formatTime(date, input[1]);
-                        taskList.addDeadline(inputLine[2],date,time);
+                case "T":
+                    taskList.addToDo(inputLine[2], isDone);
+                    break;
+                case "E":
+                    input = inputLine[3].split(" ");
+                    if (input.length != 2) {
+                        throw new DukeException(Ui.MSG_FILEREADERROR);
+                    }
+                    date = parser.formatDate(input[0]);
+                    time = parser.formatTime(date, input[1]);
+                    taskList.addEvent(inputLine[2], isDone, date, time);
+                    break;
+                case "D":
+                    input = inputLine[3].split(" ");
+                    if (input.length != 2) {
+                        throw new DukeException(Ui.MSG_FILEREADERROR);
+                    }
+                    date = parser.formatDate(input[0]);
+                    time = parser.formatTime(date, input[1]);
+                    taskList.addDeadline(inputLine[2], date, time);
                 }
             }
         } catch (FileNotFoundException | DukeException e) {
