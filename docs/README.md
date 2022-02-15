@@ -152,7 +152,7 @@ BingChilling data are saved in the hard disk automatically after any command tha
 ### Editing the data file
 BingChilling data are saved as a text file [JAR file location]/data/ekud.txt. Advanced users are welcome to update data directly by editing that data file.
 
-  ` :warning: If your changes to the data file makes its format invalid, Bing Chilling will discard all data and start with an empty data file at the next run.`
+` ⚠️ If your changes to the data file makes its format invalid, Bing Chilling will discard all data and start with an empty data file at the next run.`
 
 ---
 
