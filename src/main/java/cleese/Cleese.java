@@ -42,6 +42,7 @@ public class Cleese extends Application {
         } catch (Exception error) {
             response = "OOPS!!! I'm sorry but I don't know what that means :-(";
         }
+        assert response.getClass() == String.class;
         return response;
     }
 
