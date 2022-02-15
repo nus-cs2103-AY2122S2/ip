@@ -76,7 +76,7 @@ public class TaskCard extends HBox {
      * Deletes the Task shown in this card.
      */
     @FXML
-    public void handleDelete() {
+    private void handleDelete() {
         duke.deleteTask(index);
         window.update();
     }
@@ -85,7 +85,7 @@ public class TaskCard extends HBox {
      * Marks the Task shown in this card as done or not done.
      */
     @FXML
-    public void handleMark() {
+    private void handleMark() {
         if (markButton.isSelected()) {
             duke.markTask(index);
         } else {
