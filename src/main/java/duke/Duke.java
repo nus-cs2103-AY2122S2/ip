@@ -5,8 +5,6 @@ import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-import java.nio.file.Paths;
-
 public class Duke {
     private static final Ui ui = new Ui();
     private static final TaskList tasks = new TaskList();
