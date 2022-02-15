@@ -2,7 +2,7 @@ import java.util.*;
 import java.lang.String;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         System.out.println("Hello there, I'm Duke! Let's chat!");
 
@@ -31,25 +31,32 @@ public class Duke {
 
                 // add task
                 } else {
-                    System.out.println("Got it. I've added this task: ");
+
+                    // Throw Exception for missing details
+                    String[] info = input.split(" ", 2);
+                    if (info.length ==  1) {
+                        throw new DukeException("The task description of type " + category + " cannot be empty.");
+                    }
+
                     // sorting out the types of task
+                    System.out.println("Got it. I've added this task: ");
                     if (category.equals("todo")) {
-                        String info = input.split(" ", 2)[1];
-                        ToDo item = new ToDo(info);
+                        ToDo item = new ToDo(info[1]);
                         lst.add(item);
                         System.out.println(item.toString());
                     } else if (category.equals("deadline")) {
-                        String[] info = input.split(" ", 2)[1].split(" /by ",0);
-                        Deadline item = new Deadline(info[0], info[1]);
+                        String[] details = info[1].split(" /by ",0);
+                        Deadline item = new Deadline(details[0], details[1]);
                         lst.add(item);
                         System.out.println(item.toString());
                     } else if  (category.equals("event")) {
-                        String[] info = input.split(" ", 2)[1].split(" /at ",0);
-                        Event item = new Event(info[0], info[1]);
+                        String[] details = info[1].split(" /at ",0);
+                        Event item = new Event(details[0], details[1]);
                         lst.add(item);
                         System.out.println(item.toString());
                     } else {
-                        System.out.println("Error: Missing type");
+                        // Invalid/ Missing type
+                        throw new DukeException("Missing type of event/ Invalid command");
                     }
                 System.out.println("Now you have " + lst.size() + " tasks in the list.");
                 }
