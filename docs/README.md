@@ -22,11 +22,11 @@ To add a task,
 3. Fill in the required fields and press the enter key.
 4. The new task will be displayed in the task window.
 
-|    Field    |       Format       |                                                                 Remarks                                                                  |                   Example Inputs                   |
-|:-----------:|:------------------:|:----------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------:|
-| Description |        N/A         |                                                                   N/A                                                                    |                    Return book                     |
-|    Time     |   yyyy-m-d hhmm    |                                                 Time is optional. <br/>Defaults to 0000.                                                 | 2022-11-25 <br/>2022-5-17 1430 <br/>2022-12-3 0530 |
-|  Duration   | [Hours]h[Minutes]m | Replace [Hours] and [Minutes] with the desired values.<br/>Duration is valid as long as at least 1 of [Hours] or [Minutes] is specified. |       1h<br/>5m<br/>1h15m<br/>12h<br/>12h30m       |
+|    Field    |       Format       |                                                                   Remarks                                                                    |                   Example Inputs                   |
+|:-----------:|:------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------:|
+| Description |        N/A         |                                                                     N/A                                                                      |                    Return book                     |
+|    Time     |   yyyy-m-d hhmm    |                                                   Time is optional. <br/>Defaults to 0000.                                                   | 2022-11-25 <br/>2022-5-17 1430 <br/>2022-12-3 0530 |
+|  Duration   | [Hours]h[Minutes]m | Replace [Hours] and [Minutes] <br/> with the desired values.<br/>Duration is valid if at least 1 of <br/> [Hours] or [Minutes] is specified. |       1h<br/>5m<br/>1h15m<br/>12h<br/>12h30m       |
 
 ### Deleting Tasks
 
