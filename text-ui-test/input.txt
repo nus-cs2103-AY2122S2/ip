@@ -1,0 +1,22 @@
+todo buy lunch
+deadline submit assignment /by 2022-01-29 14:00
+event project meeting /at 2022-01-25 10:30
+list
+mark 1
+mark 3
+list
+unmark 3
+list
+todo
+deadline
+event
+mark
+blah
+delete
+delete 2
+delete 4
+deadline send email /by 2022/01/29 14:00
+event tutorial /at 2022-01-25, 2pm
+find lunch
+find meeting
+bye
