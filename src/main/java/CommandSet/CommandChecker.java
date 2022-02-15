@@ -87,8 +87,9 @@ public class CommandChecker {
                 throwMissingTaskArgument(message);
             }
 
+            assert message.contains(SPACE) : "wrong format of command";
             String command = message.split(SPACE, SPLIT_LIMIT)[START_INDEX].toLowerCase();
-            return findCommandType(command);
+            return findCommandType(command);            
 
         } catch (IllegalCommandException e) {
             Ui.printMessage(e.toString());

@@ -52,6 +52,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
+        // modified from https://se-education.org/guides/tutorials/javaFxPart3.html
         // Step 1 : the container for the content of the chat to scroll;
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();

@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
 
     // the index of the task number in the split array.
     private static final int TASK_NUM_IDX = 1;
-
+  
     /**
      * Constructor for DeleteCommand.
      * returns an instance of DeleteCommand.
@@ -38,8 +38,10 @@ public class DeleteCommand extends Command {
      */
     public static void delete(TaskList taskList, String message) {
 
+        assert message.contains(SPACE) : "Must contain space to find the task number.";
         String[] arr = message.split(SPACE);
         int num = Integer.valueOf(arr[TASK_NUM_IDX]);
+
         if (num > 0 && num <= taskList.numOfTasks()) {
             Task task = taskList.remove(num - 1);  // to adjust with index starting with 0.
             Ui.printRemoved(task);

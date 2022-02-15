@@ -62,10 +62,13 @@ public class AddCommand extends Command {
      * @throws MissingTimeArgumentException if the user missed time argument out.
      */
     public static void add(TaskList taskList, String text) {
-
+  
+        assert text.contains(SPACE) : "Must contain a space to differentiate task from type of task";
+      
         String[] splitText = text.split(SPACE, SPLIT_LIMIT);
         String type = splitText[TASK_TYPE_INDEX].toUpperCase();
         String message = splitText[TASK_DESC_IDX];
+
         Task task;
 
         switch (type) {

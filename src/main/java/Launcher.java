@@ -17,6 +17,7 @@ public class Launcher {
      * @param args parameter to start the main method.
      */
     public static void main(String[] args) {
+        // modified from https://se-education.org/guides/tutorials/javaFxPart1.html
         Application.launch(Main.class, args);
     }
 }
