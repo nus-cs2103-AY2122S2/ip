@@ -22,7 +22,7 @@ public class TessUi {
     private static final String UNMARK_STRUCTURE = "Seems like you have successfully undone your done task\n"
             + INDENT_ONE + "%s";
     private static final String FILTER_STRUCTURE = "Here are the tasks filtered by %s:\n"
-            + INDENT_ONE + "%s";
+            + "%s";
     private static final String SCHEDULE_STRUCTURE = "Here are the tasks scheduled on %s:\n"
             + INDENT_ONE + "%s";
     private static final String ARCHIVE_STRUCTURE = "The following task has been archived~\n" + INDENT_ONE;

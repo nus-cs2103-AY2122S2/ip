@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * An example of a custom control using FXML.
@@ -35,6 +36,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        setMinHeight(Region.USE_PREF_SIZE);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -44,6 +46,7 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        tmp.get(0).setStyle("-fx-background-color: #77B6E6");
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);

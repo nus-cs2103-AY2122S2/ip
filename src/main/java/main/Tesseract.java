@@ -52,5 +52,7 @@ public class Tesseract {
         return ui.sayBye();
     }
 
-
+    public String admitBug() {
+        return ui.admitBug();
+    }
 }
