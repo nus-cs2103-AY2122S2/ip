@@ -1,4 +1,5 @@
-# Larry Bot User Guide
+
+#Larry Bot User Guide
 
 ## Features 
 
@@ -97,7 +98,7 @@ Bye. Hope to see you again soon!
 
 Here's how it should look:
 
-![example image](assets/UI.png)
+![example image](assets/Ui.png)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
