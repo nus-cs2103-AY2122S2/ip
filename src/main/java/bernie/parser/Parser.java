@@ -188,13 +188,27 @@ public class Parser {
             if (taskType.equals(Type.TODO) || taskType.equals(Type.FIND)) {
                 final int DESCRIPTION_INDEX = 1;
                 description = parsedArr[DESCRIPTION_INDEX];
+                checkEmptyDescription(description);
             } else {
                 final int DESCRIPTION_PART_INDEX = 0;
                 description = extractDescriptionFromType(taskType, parsedArr[DESCRIPTION_PART_INDEX]);
+                checkEmptyDescription(description);
             }
             checkDescriptionNotNumber(description);
             return description;
         } catch (IndexOutOfBoundsException e) {
+            String emptyDescriptionMsg = "Where's the description?";
+            throw new InvalidArgumentException(emptyDescriptionMsg);
+        }
+    }
+
+    /**
+     * Checks if the description contains only white spaces
+     * @param description String, parsed by Parser
+     * @throws InvalidArgumentException for blank description
+     */
+    void checkEmptyDescription(String description) throws InvalidArgumentException {
+        if (description.isBlank()) {
             String emptyDescriptionMsg = "Where's the description?";
             throw new InvalidArgumentException(emptyDescriptionMsg);
         }
