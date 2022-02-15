@@ -1,0 +1,18 @@
+deadline do homework /by no idea :-p
+deadline CS2201 Team Meeting /by 2021-01-23
+list
+todo borrow book
+event project meeting
+event project meeting /at Mon 2-4pm
+list
+mark 1
+mark 1
+unmark 1
+unmark 1
+unmark 0
+mark 0
+delete 1
+delete 0
+delete 10
+list
+bye
