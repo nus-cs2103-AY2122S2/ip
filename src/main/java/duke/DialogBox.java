@@ -19,8 +19,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
-import javax.swing.*;
-
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -47,7 +45,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        SetTextWithColour(text, img);
+        setTextWithColour(text, img);
 
         //@@author tiewweijian-reused
         //Reused from https://github.com/jonfoocy/ip/blob/master/src/main/java/DialogBox.java with modifications
@@ -64,7 +62,7 @@ public class DialogBox extends HBox {
 
     }
 
-    private void SetTextWithColour(String text, Image img) {
+    private void setTextWithColour(String text, Image img) {
         dialog.setText(text);
         displayPicture.setImage(img);
 
