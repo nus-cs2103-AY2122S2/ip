@@ -1,4 +1,4 @@
-T|true|mop floor
+T|false|mop floor
 T|true|clean table
 D|false|Assignment 1 |2022-02-15
 E|false|Presentation |2022-02-17
