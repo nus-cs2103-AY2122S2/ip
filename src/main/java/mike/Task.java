@@ -40,6 +40,10 @@ abstract class Task {
         return taskName.contains(search);
     }
 
+    /**
+     * Returns a String representing the name of the task.
+     * @return String name of task for user.
+     */
     @Override
     public String toString() {
         return String.format("name of task: %s", this.name);
