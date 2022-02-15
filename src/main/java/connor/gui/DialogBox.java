@@ -23,6 +23,11 @@ import javafx.scene.shape.Circle;
  * Represents a box of dialog with text and an image.
  */
 public class DialogBox extends HBox {
+    private static final String lightBlue = "#A3ECFF";
+    private static final String darkBlue = "#254791";
+    private static final String white = "#FFFFFF";
+    private static final String black = "#000000";
+
     @FXML
     private Label dialog;
     @FXML
@@ -50,8 +55,13 @@ public class DialogBox extends HBox {
         avatar.setClip(getCircleClip());
         if (isUser) {
             dialog.setAlignment(Pos.CENTER_RIGHT);
+            dialog.setBackground(getColorBackground(darkBlue));
+            dialog.setTextFill(Paint.valueOf(white));
+        } else {
+            dialog.setBackground(getColorBackground(lightBlue));
+            dialog.setTextFill(Paint.valueOf(black));
         }
-        this.setBackground(getColorBackground("#D3D3D3"));
+
     }
 
     /**

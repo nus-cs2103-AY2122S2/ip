@@ -13,8 +13,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Connor connor;
-
     /**
      * Starts the GUI.
      *
@@ -25,11 +23,9 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = loader.load();
-            //this.connor = new Connor(Connor.getFilePath());
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setResizable(false);
-            //loader.<MainWindow>getController().setConnor(connor);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

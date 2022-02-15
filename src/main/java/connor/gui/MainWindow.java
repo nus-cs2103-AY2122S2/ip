@@ -1,16 +1,23 @@
 package connor.gui;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import connor.Connor;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow.
@@ -21,6 +28,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private VBox dialogContainer;
     @FXML
+    private Pane background;
+    @FXML
     private TextField userInput;
     @FXML
     private Button sendButton;
@@ -29,6 +38,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserAvatar.png"));
     private Image connorImage = new Image(this.getClass().getResourceAsStream("/images/ConnorAvatar.png"));
+    private Image mountainImage = new Image(this.getClass().getResourceAsStream("/images/Mountain.png"));
 
     /**
      * Initializes the main window.
@@ -45,6 +55,19 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getConnorDialog(startup, connorImage)
         );
+        setBackgroundBackground();
+    }
+
+    private void setBackgroundBackground() {
+        double width = this.getWidth();
+        double height = this.getHeight();
+        BackgroundImage bi = new BackgroundImage(
+                mountainImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(width, height, false, false, true, true));
+        background.setBackground(new Background(bi));
     }
 
     public void setConnor(Connor c) {
@@ -57,6 +80,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.isBlank()) {
+            userInput.clear();
+            return;
+        }
         String response = connor.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
@@ -73,15 +100,12 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void exit() {
-        // Disable input, wait 1 second and then close the program.
+        this.userInput.setPromptText("Goodbye!");
         this.userInput.setDisable(true);
         this.sendButton.setDisable(true);
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        javafx.application.Platform.exit();
+        PauseTransition pt = new PauseTransition(new Duration(2000));
+        pt.setOnFinished(a -> javafx.application.Platform.exit());
+        pt.play();
     }
 
 
