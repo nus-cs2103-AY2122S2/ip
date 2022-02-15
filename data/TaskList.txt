@@ -1,0 +1,10 @@
+T | 0 | NORM | add an extension
+T | 0 | NORM | borrow book
+E | 0 | LOW  | group meeting | 2022-12-21
+T | 1 | LOW  | join sports club
+D | 0 | HIGH | pr review | 2022-02-06
+E | 0 | HIGH | project meeting | 2022-12-20
+E | 0 | LOW  | project meeting | 2022-12-21
+D | 1 | LOW  | quiz | 2022-02-06
+T | 0 | NORM | read book
+D | 1 | HIGH | return book | 2022-12-20
