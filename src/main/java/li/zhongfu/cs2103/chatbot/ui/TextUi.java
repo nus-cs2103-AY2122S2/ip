@@ -91,7 +91,7 @@ public class TextUi {
     }
 
     /**
-     * Print the given string in a dialog.
+     * Prints the given string in a dialog.
      *
      * @param line the string to be printed
      */
@@ -101,7 +101,7 @@ public class TextUi {
 
     /**
      * Runs the REPL loop for Duke.
-     * 
+     *
      * @throws IOException if an error occurs e.g. while reading user input or loading saved tasks
      */
     private void loop() throws IOException {
