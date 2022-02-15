@@ -1,7 +1,5 @@
 # The User Guide for Puke
 
-Note that Puke requires Java 11 to run
-
 
 What is stopping you from being productive?  
 
@@ -14,12 +12,7 @@ and cat photos of course
 
 ### Manage Tasks
 
-Puke allows you to manage THREE types of tasks:
-- Todo
-- Deadline
-- Event  
-
-Comes with operations such as adding, deleting, marking, sorting, and much more!  
+Puke allows you to manage THREE types of tasks: Todo, Deadline and Event. Comes with operations such as adding, deleting, marking, sorting, and much more! The complete list of features is below.
 
 ### Cat Therapy
 
