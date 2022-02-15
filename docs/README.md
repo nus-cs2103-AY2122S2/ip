@@ -1,8 +1,7 @@
 # <p align="center"><b> Duke Pro User Guide </b></p>
-<hr>
 
 > <p align="center">What did I need to do again? - <s>You</s> Me, <b>everyday</b> </p>
-## Ever forgot what you needed to do? :frowning_face: Now you won't! :relieved:
+<p> Ever forgot what you needed to do? :frowning_face: Now you won't! :relieved: </p>
 
 With Duke Pro, you now have an easy way to remember tasks, deadlines and important events.
 It is:
@@ -23,7 +22,6 @@ Features supported:
 - [x] Graphical User Interface
 
 ## <p align="center"><b> Features </b></p>
-<hr>
 
 ### [Add Tasks](#adding-tasks-back-to-features)
 <p> Add new tasks to your task list.</p>
@@ -47,7 +45,6 @@ Features supported:
 <p> View all tasks that contains the keyword.</p>
 
 ## <p align="center"><b> Usage </b></p>
-<hr>
 
 ### <u>Adding Tasks [(Back to features)](#-features-)</u>
 * #### `todo <Task Name>`
@@ -131,6 +128,7 @@ Here is your task list:
 5.[E][ ] family dinner (by: Next Monday)
 ================================================
 ```
+<br>
 
 ### <u>Sort Tasks [(Back to features)](#-features-)</u>
 
@@ -193,6 +191,7 @@ Noted. I have removed this task:
     [D][ ] pick up parcel (by: this friday)
 There are now 4 tasks in your task list
 ```
+<br>
 
 ### <u>Mark Tasks [(Back to features)](#-features-)</u>
 
@@ -230,6 +229,7 @@ The mark will be removed if it is present. If the task has not been marked yet, 
     This task has not been marked as done yet:
     [E][ ] son's birthday (by: 10 Jan 2022, 11:00AM)
 ```
+<br>
 
 ### <u>Update Tasks [(Back to features)](#-features-)</u>
 
@@ -289,5 +289,6 @@ Here are the matching tasks in your list:
 2.[D][ ] buy gift for son (by: 26 Apr 2022, 1:00PM)
 ================================================
 ```
+<hr>
 
 [Back to top](#-duke-pro-user-guide-)
