@@ -33,4 +33,14 @@ public class Event extends Task {
     public String toOutputFormat() {
         return String.format(EVENT_OUTPUT_FORMAT, super.toOutputFormat(), at.format(DATE_TIME_FORMATTER));
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Event)) {
+            return false;
+        } else {
+            Event obj = (Event) object;
+            return this.description.equals(obj.description) && this.at.equals(obj.at);
+        }
+    }
 }
