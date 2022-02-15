@@ -50,7 +50,7 @@ public class AddTodoCommand extends Command<String> {
     }
     private void checkValidity(boolean bool) throws DukeException {
         if (bool) {
-            assert false : "The description for to do event is empty";
+            assert bool : "The description for to do event is empty";
             throw new DukeException(err);
         }
     }

@@ -1,6 +1,7 @@
 package duke.commands;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
@@ -52,7 +53,7 @@ public class UnmarkCommand extends Command<String> {
     }
     private void unmarkTaskIndex() throws DukeException {
         if (targetIndex > size || targetIndex <= 0) {
-            assert false : "Task to unmark is not in list";
+            assert targetIndex > size : "Task to unmark is not in list";
             throw new DukeException(wrongNumber);
         } else {
             Task curr = list.getTask(targetIndex - 1);
@@ -68,13 +69,13 @@ public class UnmarkCommand extends Command<String> {
         try {
             targetIndex = Integer.parseInt(taskNum);
         } catch (Exception e) {
-            assert false : "Task to unmark is not specified in words";
+            assert Pattern.matches("[a-zA-Z]+", taskNum) : "Task to unmark is not specified in words";
             throw new DukeException(wrongFormat);
         }
     }
     private void checkValidity(boolean bool) throws DukeException {
         if (bool) {
-            assert false : "Task to unmark is not specified";
+            assert bool : "Task to unmark is not specified";
             throw new DukeException(err);
         }
     }

@@ -89,7 +89,7 @@ public class Duke {
             }
             response = c.execute();
         } catch (DukeException e) {
-            return e.getMessage();
+            response = e.getMessage();
         }
         return response;
     }

@@ -53,7 +53,7 @@ public class FindCommand extends Command<String> {
     }
     private void checkValidity(boolean bool) throws DukeException {
         if (bool) {
-            assert false : "The task to find is not specified";
+            assert bool : "The task to find is not specified";
             throw new DukeException(err);
         }
     }

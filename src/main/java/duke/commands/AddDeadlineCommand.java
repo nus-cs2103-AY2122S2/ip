@@ -47,20 +47,20 @@ public class AddDeadlineCommand extends Command<String> {
         checkFormat(details.length == 1);
         Deadline curr = new Deadline(details[0], details[1]);
         list.addTask(curr);
-        response = Ui.showAddResponse(curr.toString(), list.getSize());
+        response += Ui.showAddResponse(curr.toString(), list.getSize());
         assert response != null;
         saveToFile(list);
         return response;
     }
     private void checkFormat(boolean bool) throws DukeException {
         if (bool) {
-            assert false : "The format for this deadline should be: deadline example /by yyyy-MM-DD";
+            assert bool : "The format for this deadline should be: deadline example /by yyyy-MM-DD";
             throw new DukeException(wrongFormat);
         }
     }
     private void checkValidity(boolean bool) throws DukeException {
         if (bool) {
-            assert false : "There is no description for this deadline";
+            assert bool : "There is no description for this deadline";
             throw new DukeException(err);
         }
     }

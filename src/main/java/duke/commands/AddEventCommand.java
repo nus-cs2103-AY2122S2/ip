@@ -53,13 +53,13 @@ public class AddEventCommand extends Command<String> {
     }
     private void checkFormat(boolean bool) throws DukeException {
         if (bool) {
-            assert false : "The format for event should be: event example /at YYYY-MM-DD";
+            assert bool : "The format for event should be: event example /at YYYY-MM-DD";
             throw new DukeException(wrongFormat);
         }
     }
     private void checkValidity(boolean bool) throws DukeException {
         if (bool) {
-            assert false : "The description for event is empty";
+            assert bool : "The description for event is empty";
             throw new DukeException(err);
         }
     }
