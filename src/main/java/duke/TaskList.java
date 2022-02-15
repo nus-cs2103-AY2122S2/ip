@@ -25,7 +25,7 @@ class TaskList {
 
     /**
      * Deletes a task from the current storage.
-     * @param index Index of a specifc task to be deleted.
+     * @param index Index of a specific task to be deleted.
      */
     public void deleteTask(int index) { //might need to change
         this.getTaskArray().remove(index);
@@ -35,6 +35,7 @@ class TaskList {
      * Returns an ArrayList which is used to store tasks which contains
      * the specific keyword.
      * @param keyword Keyword used to find matching tasks in the list.
+     * @return all String in the Tasklist which contains the matching keywords.
      */
     public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> containsInput = new ArrayList<Task>();
@@ -48,13 +49,15 @@ class TaskList {
 
     /**
      * Shows a list of tasks from the current storage.
+     * @return String which contains all the tasks in the current storage.
      */
-    public void showTask() {
-        Ui.showListMessage(this);
+    public String showTask() {
+        return Ui.showListMessage(this);
     }
 
     /**
      * Returns an ArrayList which contains different tasks.
+     * @return the arrayList<Task>
      */
     public ArrayList<Task> getTaskArray() {
         return storage.getList();

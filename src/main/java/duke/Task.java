@@ -19,6 +19,7 @@ class Task {
 
     /**
      * Returns the status of a specific task.
+     * returns String which symbolises whether it has been marked.
      */
     public String getStatusIcon() {
         return (isDone.get(0) ? "[X]" : "[ ]"); // mark done task with X // if done is "X" then " "
@@ -39,26 +40,30 @@ class Task {
     }
 
     /**
-     * Returns a String which is based on the status icon of the task.
-     * @param mark Mark the status of a specific task.
+     * Returns a String which indicates that the task has been marked.
+     * @return String which indicates that the task has been marked.
      */
-    public String marking(String mark) {
-        if (mark.equals("mark")) {
-            setAsMarked();
-            String messageMarked = "Nice! I've marked this task as done: \n"
-                    + this.toString() + "\n ";
-            return messageMarked;
-        } else {
-            setAsUnmarked();
-            String messageUnmarked = "OK, I've marked this task as not done yet: \n"
-                    + this.toString() + "\n ";
-            return messageUnmarked;
+    public String mark() {
+        setAsMarked();
+        String messageMarked = "Nice! I've marked this task as done: \n"
+                + this.toString() + "\n ";
+        return messageMarked;
+    }
 
-        }
+    /**
+     * Returns a String which indicates that the task has been unmarked.
+     * @return String which indicates that the task has been unmarked.
+     */
+    public String unmark() {
+        setAsUnmarked();
+        String messageUnmarked = "OK, I've marked this task as not done yet: \n"
+                + this.toString() + "\n ";
+        return messageUnmarked;
     }
 
     /**
      * Returns a String of given Task.
+     * @return String of the task.
      */
     public String toString() {
         return getStatusIcon() + " " + this.description;
@@ -66,6 +71,7 @@ class Task {
 
     /**
      * Returns the initial of the task.
+     * @return initial of the task.
      */
     public String getInitial() {
         return "Task";
@@ -73,6 +79,7 @@ class Task {
 
     /**
      * Returns the description a specific task.
+     * @return description of the task.
      */
     public String getDescription() {
         return description;

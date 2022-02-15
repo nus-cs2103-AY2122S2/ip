@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * Represents the main class of the program.
+ * Represents the main class of the program in order to start the Application.
  */
 public class Duke extends Application {
 
@@ -37,6 +37,8 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         storage.load();
+
+        //Taken from JavaFX Tutorial @SE-EDU/guides
         //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -140,8 +142,6 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
-
-        //Taken from StackOverflow
         if (input.equals(ui.showGoodbyeMessage())) {
             storage.writeFile();
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
@@ -153,9 +153,7 @@ public class Duke extends Application {
         Label dukeText = new Label(ui.showWelcomeMessage());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
     }
-    /**
-     * You should have your own function to generate a response to user input.
-     */
+
     private String getResponse(String input) {
         Parser parser = new Parser(taskList);
         String result = parser.execute(input);
