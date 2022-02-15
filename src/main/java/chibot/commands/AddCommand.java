@@ -156,8 +156,7 @@ public class AddCommand extends Command {
     public boolean validateMessageBody(String msg, String type) {
         switch(type) {
         case "todo":
-            // No specification for todos to have any format
-            return false;
+            return validateTodoMessage(msg);
             // FallThrough
         case "deadline":
             return validateDeadlineMessage(msg);
@@ -171,6 +170,16 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Checks if the todo message is of a proper format.
+     *
+     * @param msg The todo message sent.
+     * @return A boolean of whether it was properly formatted.
+     */
+    public boolean validateTodoMessage(String msg) {
+        return msg.contains("\\|");
+    }
+
+    /**
      * Checks if the deadline message is of a proper format.
      *
      * @param msg The deadline message sent.
@@ -178,7 +187,7 @@ public class AddCommand extends Command {
      */
     public boolean validateDeadlineMessage(String msg) {
         String[] separateBys = msg.split("/by");
-        if (separateBys.length != 2 || separateBys[0].equals("")) {
+        if (separateBys.length != 2 || separateBys[0].equals("") || separateBys[0].contains("\\|")) {
             return true;
         }
         try {
@@ -198,7 +207,7 @@ public class AddCommand extends Command {
      */
     public boolean validateEventMessage(String msg) {
         String[] separateAts = msg.split("/at");
-        if (separateAts.length != 2 || separateAts[0].equals("")) {
+        if (separateAts.length != 2 || separateAts[0].equals("") || separateAts[0].contains("\\|")) {
             return true;
         }
         try {

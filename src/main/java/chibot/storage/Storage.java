@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -59,20 +60,18 @@ public class Storage {
             splitTask[i] = splitTask[i].trim();
         }
         if (splitTask[0].equals("T")) {
-            if (splitTask[1].equals("1")) {
-                return new Todo(splitTask[2], true);
-            } else if (splitTask[1].equals("0")) {
-                return new Todo(splitTask[2], false);
+            if (validateDataFileTodo(splitTask)) {
+                return new Todo(splitTask[2], splitTask[1].equals("1"));
             }
         } else if (splitTask[0].equals("D")) {
-            if (splitTask.length == 5) {
+            if (validateDataFileDeadline(splitTask)) {
                 return new Deadline(splitTask[2], LocalDate.parse(splitTask[3],
                         DateTimeFormatter.ofPattern(DATE_FORMAT)),
                         LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern(TIME_FORMAT)),
                         splitTask[1].equals("1"));
             }
         } else {
-            if (splitTask.length == 6) {
+            if (validateDataFileEvent(splitTask)) {
                 return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern(DATE_FORMAT)),
                         LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern(TIME_FORMAT)),
                         LocalTime.parse(splitTask[5], DateTimeFormatter.ofPattern(TIME_FORMAT)),
@@ -81,6 +80,71 @@ public class Storage {
         }
         return null;
     }
+
+    /**
+     * Checks if the todo was corrupted in the data file.
+     *
+     * @param tokens Array of words separated by | delimiter in the data file entry.
+     * @return A boolean of whether the todo was corrupted.
+     */
+    public boolean validateDataFileTodo(String[] tokens) {
+        if (tokens.length != 3) {
+            return false;
+        } else if (!(tokens[1].equals("0") || tokens[1].equals("1"))) {
+            return false;
+        } else return !tokens[2].trim().equals("");
+    }
+
+    /**
+     * Checks if the deadline was corrupted in the data file.
+     *
+     * @param tokens Array of words separated by | delimiter in the data file entry.
+     * @return A boolean of whether the deadline was corrupted.
+     */
+    public boolean validateDataFileDeadline(String[] tokens) {
+        if (tokens.length != 5) {
+            return false;
+        } else if (!(tokens[1].equals("0") || tokens[1].equals("1"))) {
+            return false;
+        } else if (tokens[2].trim().equals("")) {
+            return false;
+        } else {
+            try {
+                LocalDate.parse(tokens[3], DateTimeFormatter.ofPattern(DATE_FORMAT));
+                LocalTime.parse(tokens[4], DateTimeFormatter.ofPattern(TIME_FORMAT));
+                return true;
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+        }
+
+    }
+
+    /**
+     * Checks if the event was corrupted in the data file.
+     *
+     * @param tokens Array of words separated by | delimiter in the data file entry.
+     * @return A boolean of whether the event was corrupted.
+     */
+    public boolean validateDataFileEvent(String[] tokens) {
+        if (tokens.length != 6) {
+            return false;
+        } else if (!(tokens[1].equals("0") || tokens[1].equals("1"))) {
+            return false;
+        } else if (tokens[2].trim().equals("")) {
+            return false;
+        } else {
+            try {
+                LocalDate.parse(tokens[3], DateTimeFormatter.ofPattern(DATE_FORMAT));
+                LocalTime.parse(tokens[4], DateTimeFormatter.ofPattern(TIME_FORMAT));
+                LocalTime.parse(tokens[5], DateTimeFormatter.ofPattern(TIME_FORMAT));
+                return true;
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+        }
+    }
+
     /**
      * Extracts the tasks stored in the data file.
      *
@@ -96,6 +160,9 @@ public class Storage {
             while (s.hasNext()) {
                 String task = s.nextLine();
                 Task t = convertFileDataToTask(task);
+                if (t == null) {
+                    continue;
+                }
                 loadedTasks.add(t);
             }
             return loadedTasks;
