@@ -1,0 +1,5 @@
+D | 0 | homework | May 2 2022 23:59
+T | 0 | shop for books
+E | 0 | housewarming | Mar 15 2022 13:00
+T | 1 | shop for shirts
+D | 0 | 2103 IP  | Feb 18 2022 23:59

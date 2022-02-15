@@ -1,0 +1,31 @@
+todo borrow book
+list
+event project meeting /at 05/05/2022 23:5
+list
+deadline return book /by 05/05/2022 23:5
+list
+mark 2
+list
+mark 1
+list
+unmark 2
+list
+todo
+event
+deadline
+event /at
+deadline /by
+event hello /at
+deadline hello /by
+event /at monday 5pm
+deadline /by monday 5pm
+mark
+unmark
+mark 5
+unmark 7 7
+mark a
+delete
+delete 3
+delete 1
+delete 4
+bye
