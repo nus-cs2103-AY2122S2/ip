@@ -10,8 +10,9 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.task.Task;
 import duke.task.TaskList;
-
-
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.fxml.FXMLLoader;
 
 public class Ui {
 
@@ -53,6 +54,9 @@ public class Ui {
             + "(Hint: Type help and hit enter for assistance)\n"
             + "What can I do for you?";
 
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final VBox dialogBox;
+
 
     /**
      * Represents messages, formatter of messages and printer for Duke application.
@@ -60,8 +64,12 @@ public class Ui {
      * @author Zheng Teck
      * @version 1.0
      */
-    private Ui() {
+    public Ui(VBox c) {
+        this.dialogBox = c;
+    }
 
+    public void welcomeMsg() {
+        dialogBox.getChildren().addAll(DialogBox.getDukeDialog(MSG_WELCOME, dukeImage));
     }
 
     /**
@@ -135,7 +143,7 @@ public class Ui {
      *
      * @param input String value to be printed.
      */
-//    public static void print(String input) {
-//        System.out.println(MSG_LINE_SEPARATOR + input + "\n" + MSG_LINE_SEPARATOR);
-//    }
+    public void print(String input) {
+        dialogBox.getChildren().addAll(DialogBox.getDukeDialog(input, dukeImage));
+    }
 }
