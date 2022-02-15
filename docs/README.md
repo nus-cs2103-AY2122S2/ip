@@ -71,7 +71,7 @@ eye too!
 2. Download the latest version of `nikki.jar` [here](https://github.com/DavidTan0527/ip/releases/).
 3. Copy the file to any folder you want. Note that the application will also store its data in this folder.
 4. Double-click to start the app. A window similar to the picture below should pop up.
-<img src="assets/start.png" style="margin: 0 auto;" width="570" height="758" />
+![Startup Screen](assets/start.png)
 5. Type each of the following commands in the chat box and press Enter to execute it. Some examples you can try:
 
    1. `todo buy fruits` : Add a ToDo called "buy fruits"
