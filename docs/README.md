@@ -2,7 +2,7 @@
 Ace is a desktop application that helps you manage and keep track of tasks.
 Ace utilises a Command Line Interface (CLI), which is much faster than the typical Graphical User Interface (GUI).
 
-##Quick Start
+## Quick Start
 1. Download the Ace program.
 2. Double-click the jar file to start using the app.
 3. Begin adding and managing tasks! Below are all features to get you started.
