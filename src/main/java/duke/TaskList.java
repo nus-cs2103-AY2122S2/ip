@@ -66,6 +66,7 @@ public class TaskList {
      * @return the Task that is removed.
      */
     public Task remove(int taskNum) {
+        assert taskNum < this.size() && taskNum > 0 : "Please provide a valid index";
         return list.remove(taskNum);
     }
 
@@ -77,6 +78,7 @@ public class TaskList {
      * @return the Task that was replaced.
      */
     public Task set(int idx, Task task) {
+        assert task != null : "A proper task should be set!";
         return list.set(idx, task);
     }
 
@@ -87,6 +89,7 @@ public class TaskList {
      * @return true if the task has been added.
      */
     public boolean add(Task task) {
+        assert task != null : "A proper task should be added!";
         return list.add(task);
     }
 
@@ -111,14 +114,18 @@ public class TaskList {
         BufferedReader file = new BufferedReader(new FileReader(fileName));
         String line = file.readLine();
         while (line != null) {
+            assert line.length() >= 8 : "Please enter a valid file path";
+            String taskType = String.valueOf(line.charAt(1));
+            assert taskType.equals("T") || taskType.equals("E") || taskType.equals("D") :
+                    "Please enter a valid file path";
             boolean isMarked = String.valueOf(line.charAt(4)).equals("X");
-            if (String.valueOf(line.charAt(1)).equals("T")) {
+            if (taskType.equals("T")) {
                 Task task = new Todo(line.substring(7));
                 if (isMarked) {
                     task = task.mark();
                 }
                 list.add(task);
-            } else if (String.valueOf(line.charAt(1)).equals("D")) {
+            } else if (taskType.equals("D")) {
                 String tempDescription = line.split("by: ")[0].substring(7);
                 int tempDescLength = tempDescription.length();
                 String description = tempDescription.substring(0, tempDescLength - 2);
@@ -131,7 +138,7 @@ public class TaskList {
                     task = task.mark();
                 }
                 list.add(task);
-            } else if (String.valueOf(line.charAt(1)).equals("E")) {
+            } else {
                 String tempDescription = line.split("at: ")[0].substring(7);
                 int tempDescLength = tempDescription.length();
                 String description = tempDescription.substring(0, tempDescLength - 2);

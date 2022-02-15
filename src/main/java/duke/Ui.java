@@ -58,6 +58,7 @@ public class Ui {
      * @param message a String representing the given message to printed.
      */
     public String showMessage(String message) {
+        assert !message.equals("") : "There should be a message!";
         return message;
     }
 
