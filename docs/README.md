@@ -26,22 +26,22 @@ Features supported:
 ### [Add Tasks](#adding-tasks)
 <p> Add new tasks to your task list.</p>
 
-### [List all task](#list-all-tasks)
+### [List all task](#listing-tasks)
 <p> View your tasks in a list.</p>
 
-### [Sort Tasks](#sort-tasks)
+### [Sort Tasks](#sorting-tasks)
 <p> Sort your task list by name or by date.</p> 
 
-### [Delete Tasks](#delete-tasks)
+### [Delete Tasks](#deleting-tasks)
 <p> Delete tasks in your task list.</p>
 
-### [Mark Tasks](#mark-tasks)
+### [Mark Tasks](#marking-tasks)
 <p> Mark the specific task as done or not done.</p>
 
-### [Update Tasks](#update-tasks)
+### [Update Tasks](#updating-tasks)
 <p> Change the date or name of your task.</p>
 
-### [Find Tasks](#find-tasks)
+### [Find Tasks](#finding-tasks)
 <p> View all tasks that contains the keyword.</p>
 
 ## <b> Usage </b>
@@ -107,7 +107,7 @@ Now you have 5 tasks in the list.
 ```
 <br>
 
-### <u>List all tasks</u>
+### <u>Listing tasks</u>
 
 * #### `list`
 View all added tasks as a list. <br>
@@ -130,7 +130,7 @@ Here is your task list:
 ```
 <br>
 
-### <u>Sort Tasks</u>
+### <u>Sorting Tasks</u>
 
 * #### `list name`
 Sorts all tasks by name in lexicographical order, and displays them in a list. <br>
@@ -175,7 +175,7 @@ Here is your task list:
 ```
 <br>
 
-### <u>Delete Tasks</u>
+### <u>Deleting Tasks</u>
 
 * #### `delete <Task Number>`
 Deletes the specified task from the task list. <br>
@@ -193,7 +193,7 @@ There are now 4 tasks in your task list
 ```
 <br>
 
-### <u>Mark Tasks</u>
+### <u>Marking Tasks</u>
 
 * #### `mark <Task Number>`
 Marks the specified task as done. <br>
@@ -231,7 +231,7 @@ The mark will be removed if it is present. If the task has not been marked yet, 
 ```
 <br>
 
-### <u>Update Tasks</u>
+### <u>Updating Tasks</u>
 
 * #### `unmark <Task Number> /name <New Name>`
 Changes the name of the task specified. <br>
@@ -271,7 +271,7 @@ If the task is a todo (no date field), no changes will be made and an error mess
 No date information is associated with this task.
 ```
 
-### <u>Find Tasks</u>
+### <u>Finding Tasks</u>
 
 * #### `find <keyword>`
 Find all tasks that contain the keyword to be searched in their name. <br>
