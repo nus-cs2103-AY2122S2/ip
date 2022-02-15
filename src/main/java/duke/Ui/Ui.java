@@ -12,7 +12,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.fxml.FXMLLoader;
 
 public class Ui {
 
