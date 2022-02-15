@@ -1,7 +1,5 @@
 package mike;
 
-import java.util.Locale;
-
 abstract class Task {
     protected final String name;
     protected final boolean isDone;
@@ -39,7 +37,7 @@ abstract class Task {
     public boolean containsSearchWords(String searchWords) {
         String taskName = this.name.toLowerCase();
         String search = searchWords.toLowerCase();
-        return taskName.indexOf(search) != -1;
+        return taskName.contains(search);
     }
 
     @Override

@@ -36,10 +36,10 @@ public class Ui {
      *
      * @param str The string that is to be printed
      */
-    public void printReply(String str) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Mike: " + str);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String printReply(String str) {
+        String messageBorder = "~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        String message = "Mike: " + str;
+        return String.format("%s\n%s\n%s", messageBorder, message, messageBorder);
     }
 
     /**
@@ -60,7 +60,7 @@ public class Ui {
     /**
      * Prints a message informing the user that their input does not contain any characters.
      */
-    public void printNoCharactersMessage() {
-        printReply("Hey! You didn't enter any characters!");
+    public String printNoCharactersMessage() {
+        return printReply("Hey! You didn't enter any characters!");
     }
 }

@@ -19,6 +19,7 @@ public class Mike {
         this.ui = new Ui();
         this.taskList = new TaskList();
         this.storage = new Storage("storedList.txt"); //hardcoded for now
+        loadStoredList();
     }
 
     /**
@@ -52,17 +53,17 @@ public class Mike {
         ui.printGoodbyeMessage();
     }
 
-    private void noCharactersEnteredResponse() {
-        ui.printNoCharactersMessage();
+    private String noCharactersEnteredResponse() {
+        return ui.printNoCharactersMessage();
     }
 
     private void requestNextInput() {
         ui.printNextCommandInstruction();
     }
 
-    private void printList() {
+    private String printList() {
         String listForPrint = taskList.getListForPrint();
-        ui.printReply(listForPrint);
+        return ui.printReply(listForPrint);
     }
 
     /**
@@ -80,13 +81,13 @@ public class Mike {
         taskList.addToList(task);
     }
 
-    private void addToListWithReply(Task task) {
+    private String addToListWithReply(Task task) {
         taskList.addToList(task);
-        ui.printReply(taskList.addToListReply(task));
+        return ui.printReply(taskList.addToListReply(task));
     }
 
-    private void removeTask(int removeIndex) {
-        ui.printReply(taskList.removeFromListWithMessage(removeIndex));
+    private String removeTask(int removeIndex) {
+        return ui.printReply(taskList.removeFromListWithMessage(removeIndex));
     }
 
     /**
@@ -94,9 +95,9 @@ public class Mike {
      *
      * @param str The name of the task to be added to the list.
      */
-    private void addTodo(String str) {
+    private String addTodo(String str) {
         Todo todo = new Todo(str);
-        addToListWithReply(todo);
+        return addToListWithReply(todo);
     }
 
     /**
@@ -105,14 +106,15 @@ public class Mike {
      * @param name The name of the task and its deadline in the format "taskName /by deadline".
      * @param date The date of the deadline represented as a String.
      */
-    private void addDeadline(String name, String date) {
+    private String addDeadline(String name, String date) {
         try {
             Deadline deadline = new Deadline(name, date);
-            addToListWithReply(deadline);
+            return addToListWithReply(deadline);
         } catch(DateTimeParseException e) {
             e.printStackTrace();
             System.out.println("**Enter dates in the format yyyy-mm-dd**");
         }
+        return "You probably keyed in a deadline with the wrong format";
     }
 
     /**
@@ -121,14 +123,15 @@ public class Mike {
      * @param name The name of the task and the time of the event in the format "taskName /at eventTime".
      * @param scheduledDate The date of the event represented as a String.
      */
-    private void addEvent(String name, String scheduledDate) {
+    private String addEvent(String name, String scheduledDate) {
         try {
             Event event = new Event(name, scheduledDate);
-            addToListWithReply(event);
+            return addToListWithReply(event);
         } catch(DateTimeParseException e) {
             e.printStackTrace();
             System.out.println("**Enter dates in the format yyyy-mm-dd**");
         }
+        return "You probably keyed in an event with the wrong format";
     }
 
     /**
@@ -136,8 +139,8 @@ public class Mike {
      *
      * @param indexFromUser The index of the task (as seen by the user) to be marked in the list.
      */
-    private void mark(int indexFromUser) {
-        ui.printReply(taskList.markInListWithMessage(indexFromUser));
+    private String mark(int indexFromUser) {
+        return ui.printReply(taskList.markInListWithMessage(indexFromUser));
     }
 
     /**
@@ -145,79 +148,87 @@ public class Mike {
      *
      * @param indexFromUser The index of the task (as seen by the user) to be unmarked in the list.
      */
-    private void unmark(int indexFromUser) {
-        ui.printReply(taskList.unmarkInListWithMessage(indexFromUser));
+    private String unmark(int indexFromUser) {
+        return ui.printReply(taskList.unmarkInListWithMessage(indexFromUser));
     }
 
-    private void findInList(String searchWords) {
+    private String findInList(String searchWords) {
         String listForPrint = taskList.findTasksInListForPrint(searchWords);
-        ui.printReply(listForPrint);
+        return ui.printReply(listForPrint);
     }
 
     /**
      * Processes the user's input then and responds accordingly.
      *
      * @param userInput String input from user as scanned in by Scanner.
+     * @return String response from Mike
      */
-    private void processInput(String userInput) {
+    protected String processInput(String userInput) {
         Parser parser = new Parser(userInput);
 
         if (parser.isBlank()) {
-            noCharactersEnteredResponse();
+            return noCharactersEnteredResponse();
         }
+        String message = "-No message-";
 
         String command = parser.getCommand();
         try {
             switch (command) {
             case "list":
-                printList();
+                message = printList();
                 break;
             case "mark":
                 int markIndex = parser.getIndex();
-                mark(markIndex);
+                message = mark(markIndex);
                 break;
             case "unmark":
                 int unmarkIndex = parser.getIndex();
-                unmark(unmarkIndex);
+                message = unmark(unmarkIndex);
                 break;
             case "remove":
                 int removeIndex = parser.getIndex();
-                removeTask(removeIndex);
+                message = removeTask(removeIndex);
                 break;
             case "todo":
                 String todoName = parser.getTodoName();
-                addTodo(todoName);
+                message = addTodo(todoName);
                 break;
             case "deadline":
                 String deadlineName = parser.getDeadlineName();
                 String deadlineDate = parser.getDeadlineDate();
-                addDeadline(deadlineName, deadlineDate);
+                message = addDeadline(deadlineName, deadlineDate);
                 break;
             case "event":
                 String eventName = parser.getEventName();
                 String eventDate = parser.getEventDate();
-                addEvent(eventName, eventDate);
+                message = addEvent(eventName, eventDate);
                 break;
             case "find":
                 String searchWords = parser.getSearchWords();
-                findInList(searchWords);
+                message = findInList(searchWords);
                 break;
             default:
-                String invalidCommandMessage =
-                        String.format("\n**Mike: I don't understand the command \"%s\"**",
-                                parser.getUserInput());
-                throw new UnsupportedOperationException(invalidCommandMessage);
+                throw new UnsupportedOperationException("Invalid command, UnsupportedOperationException");
             }
         } catch(UnsupportedOperationException e) {
             e.printStackTrace();
+            String invalidCommandMessage =
+                    String.format("\n**Mike: I don't understand the command \"%s\"**",
+                            parser.getUserInput());
+            message = invalidCommandMessage;
         } catch(StringIndexOutOfBoundsException e) {
             e.printStackTrace();
-            System.out.println("**Mike: Hmm, you may have entered the command arguments incorrectly.**\n"
-                    + "**Tip: Enter dates in the format yyyy-mm-dd**");
+            String stringIndexOutOfBoundsMessage =
+                    "**Mike: Hmm, you may have entered the command arguments incorrectly.**\n"
+                    + "**Tip: Enter dates in the format yyyy-mm-dd**";
+            message = stringIndexOutOfBoundsMessage;
         } catch(IndexOutOfBoundsException e) {
             e.printStackTrace();
-            System.out.println("**Mike: That item number doesn't exist on your list :/**");
+            String indexOutOfBoundsMessage = "**Mike: That item number doesn't exist on your list :/**";
+            message = indexOutOfBoundsMessage;
         }
+        saveToStoredList();
+        return message;
     }
 
     /**

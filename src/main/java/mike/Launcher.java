@@ -1,3 +1,5 @@
+package mike;
+
 import javafx.application.Application;
 
 /**

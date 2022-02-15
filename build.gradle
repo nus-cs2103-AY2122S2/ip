@@ -44,12 +44,8 @@ test {
 }
 
 application {
-    mainClassName = "mike.Main"
+    mainClassName = "mike.Launcher"
 }
-
-//application {
-//    mainClassName = "Launcher"
-//}
 
 shadowJar {
     archiveBaseName = "duke"

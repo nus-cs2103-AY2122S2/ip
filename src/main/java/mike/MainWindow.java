@@ -1,3 +1,5 @@
+package mike;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,7 +20,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Mike mike;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PlaceholderAvatar.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mike.jpg"));
@@ -28,8 +30,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setMike(Mike d) {
+        mike = d;
     }
 
     /**
@@ -39,7 +41,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = mike.processInput(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
