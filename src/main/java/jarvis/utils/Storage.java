@@ -19,7 +19,21 @@ public class Storage {
     private static final String ROOT_FOLDER = System.getProperty("user.dir");
     private static final String DATA_DIR = "data";
     private static final String FILENAME = "duke.txt";
+    private static final Path FOLDER_PATH = Paths.get(ROOT_FOLDER, DATA_DIR);
     private static final Path FILE_PATH = Paths.get(ROOT_FOLDER, DATA_DIR, FILENAME);
+
+    /**
+     * Constructor for the storage object.
+     */
+    public Storage() {
+        if (!fileExist()) {
+            try {
+                initFile();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
     /**
      * Checks if the file exists.
@@ -36,9 +50,12 @@ public class Storage {
      *
      * @throws IOException file already exists
      */
-    public Boolean initFile() throws IOException {
+    public void initFile() throws IOException {
+        File folder = new File(FOLDER_PATH.toString());
         File file = new File(FILE_PATH.toString());
-        return file.createNewFile();
+        if (!folder.mkdir() || !file.createNewFile()) {
+            throw new IOException("File could not be created");
+        }
     }
 
     /**
@@ -72,14 +89,6 @@ public class Storage {
      * @param taskList a list of Duke.tasks
      */
     public void writeData(ArrayList<Task> taskList) {
-        if (!fileExist()) {
-            try {
-                initFile();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH.toString()))) {
             for (Task t : taskList) {
                 bw.write(t.toCsv(DELIMITER) + "\n");
