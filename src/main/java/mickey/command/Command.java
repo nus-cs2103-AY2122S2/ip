@@ -71,7 +71,6 @@ public abstract class Command {
      */
     String getDate() throws MickeyException {
         String[] split = splitArgs();
-        System.out.println(Arrays.toString(split));
         if (split.length == 1 || split[1].length() == 0) {
             throw new MickeyException("\tOops! Pluto must have eaten the date.");
         }
