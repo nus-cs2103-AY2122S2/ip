@@ -1,0 +1,41 @@
+package duke;
+
+import java.util.ArrayList;
+
+public class CommandEvent extends Command {
+    private String commandDescription;
+    private ArrayList<Task> tasks;
+    private String[] split;
+
+    public CommandEvent(String commandDescription, ArrayList<Task> tasks) {
+        this.commandDescription = commandDescription;
+        this.tasks = tasks;
+        split = commandDescription.split(" ");
+    }
+
+    @Override
+    public String execute() {
+        String output = "";
+        try {
+            // Check if description is empty
+            String check = split[1];
+            try {
+                // Take the substring of user input after event
+                String item = commandDescription.substring(6);
+                // Divide the substring into task name and date
+                String[] divide = item.split("/");
+                String name = divide[0];
+                String time = divide[1];
+                Event e = new Event(name.trim(), time.substring(3));
+                tasks.add(e);
+                output = String.format("task added:\n%s\n", e);
+                output += String.format("you now have %d tasks\n", tasks.size());
+            } catch (IndexOutOfBoundsException e) {
+                output = "event description must contain a date!\n";
+            }
+        } catch (IndexOutOfBoundsException e) {
+            output = "event description cannot be empty!\n";
+        }
+        return output;
+    }
+}
