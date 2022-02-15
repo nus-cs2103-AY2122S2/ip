@@ -34,7 +34,6 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaPuke.jpg"));
-    private Image catBG = new Image(this.getClass().getResourceAsStream("/images/CatBG.jpg"));
 
     /**
      * Initializes the stage with a welcome message.
