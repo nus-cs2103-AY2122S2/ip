@@ -26,22 +26,25 @@ public class Parser {
     public String getResponse() throws IOException {
             StringBuilder sb = new StringBuilder();
 
-//         "bye" to end the program
             switch (words[0]) {
             case "bye" -> System.out.println("    Bye!! See you again soon!!");
 
             // if user requests to list their tasks
             case "list" -> {
+                wf.flush();
                 sb = new StringBuilder();
-
-                sb.append("    Here are the tasks in your lists:");
+                sb.append("    Here are the tasks on your lists:\n");
                 int n = 1;
                 for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
                     Task t = tasks.get(i);
                     String by = "";
-                    if (t.getType().equals("D") || t.getType().equals("E"))
-                        by = t.getBy().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
-                    sb.append("    ").append(n).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append(by).append("\n");
+                    if (t.getType().equals("D") || t.getType().equals("E")) {
+                        by = dateTimeFormatter(t.getBy());
+                        sb.append("    ").append(n).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("on " ).append(by).append("\n");
+                    }
+                    else {
+                        sb.append("    ").append(n).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("\n");
+                    }
                     n++;
                 }
                 return sb.toString();
@@ -62,13 +65,14 @@ public class Parser {
                 return "    Alright! I've marked this as done:\n      [" + temp.getDone() + "] " + temp.desc;
             }
             case "unmark" -> {
-                wf.flush(); // need to flush first cause updates were stored in buffer
+                wf.flush();
                 int n = Integer.parseInt(words[1]) - 1;
                 assert n <= tasks.getNumberOfTasks();
                 tasks.set(n, tasks.get(n).unmark());
                 Task temp = tasks.get(n);
                 if (!(temp instanceof ToDo)) {
-                    String date = temp.getBy().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                    LocalDateTime dateTime = temp.getBy();
+                    String date = dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
                     tasks.updateTask(n + 1, tasks.get(n).type + " 0 " + tasks.get(n).desc + " | " + date);
                 } else
                     tasks.updateTask(n + 1, tasks.get(n).type + " 0 " + tasks.get(n).desc);
@@ -77,29 +81,28 @@ public class Parser {
                         "    Alright! I've marked this as not done:\n      [" + temp.getDone() + "] " + temp.desc;
             }
             case "delete" -> {
-                wf.flush(); // need to flush first cause updates were stored in buffer
-                int n = Integer.parseInt(words[1]) - 1; // the task number to be deleted
+                wf.flush();
+                int n = Integer.parseInt(words[1]) - 1; // task number to be deleted
                 assert n <= tasks.getNumberOfTasks();
                 Task t = tasks.get(n);
                 tasks.remove(n);
                 tasks.deleteTask(n + 1);
+
                 String by = "";
                 if (t.getBy() != null) {
-                    by = t.getBy().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
-
+                    by = dateTimeFormatter(t.getBy());
                 }
-                return"    Alright! This task has been deleted:\n      [" + t.getType() + "]["
+                return "    Alright! This task has been deleted:\n      [" + t.getType() + "]["
                         + t.getDone() + "] " + t.desc + by;
 
             }
             case "find" -> {
-                wf.flush(); // need to flush first cause updates were stored in buffer
+                wf.flush();
                 String key = words[1]; // keyword to be found
                 int[] ind = new int[tasks.getNumberOfTasks()]; // indexes of task with keyword
                 int noOfMatched = 0;
                 for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
                     String[] split = tasks.get(i).desc.split(" ");
-
                     for(String s : split) {
                         if(s.equals(key)) {
                             ind[noOfMatched] = i;
@@ -113,11 +116,16 @@ public class Parser {
                 for(int i = 0; i < noOfMatched; i++) {
                     Task t = tasks.get(ind[i]);
                     String by = "";
-                    if (t.getType().equals("D") || t.getType().equals("E"))
-                        by = t.getBy().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
-                    sb.append("    ").append(i).append(1).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append(by).append("\n");
-                    return sb.toString();
+                    if (t.getType().equals("D") || t.getType().equals("E")) {
+                        by = dateTimeFormatter(t.getBy());
+                        sb.append("    ").append(i+1).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("on " ).append(by).append("\n");
+                    }
+                    else {
+                        sb.append("    ").append(i+1).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("\n");
+                    }
                 }
+                return sb.toString();
+
             }
 
             // user add a todo task
@@ -160,8 +168,7 @@ public class Parser {
             }
             // user add items to list
                 default -> {
-                    return sb.toString();
-
+                    return "Sorry! I don't know what that means :'(";
                 }
             }
         wf.close();
@@ -169,7 +176,7 @@ public class Parser {
     }
 
     /**
-     * Returns the date and time seperately from user's input command.
+     * Returns the date and time separately from user's input command.
      *
      * @param full Command input by user.
      * @return Array of strings representing the date and time.
@@ -191,11 +198,15 @@ public class Parser {
         // get the time
         end[0] = sb.toString();
         sb = new StringBuilder();
-        // }
         sb.append(full[i + 1]).append(" ");
         sb.append(full[i + 2]);
 
         end[1] = sb.toString();
+
         return end;
+    }
+
+    public String dateTimeFormatter(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm"));
     }
 }

@@ -86,7 +86,7 @@ public class Storage {
                     count++;
                     if(words[i].equals("|"))
                         break;
-                    sb.append(words[i]).append(" "); // get the description
+                    sb.append(words[i]).append(" ");
                 }
                 String description = sb.toString();
                 sb = new StringBuilder();

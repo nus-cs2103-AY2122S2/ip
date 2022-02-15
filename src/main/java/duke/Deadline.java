@@ -25,9 +25,4 @@ public class Deadline extends Task {
     public Task unmark() {
         return new Deadline(this.desc, this.by, false);
     }
-
-//    @Override
-//    public String toString() {
-//        return "[D]" + super.toString() + " (by: " + by + ")";
-//    }
 }
