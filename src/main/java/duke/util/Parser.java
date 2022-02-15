@@ -53,7 +53,7 @@ public class Parser {
                     String at = eventArr[1];
                     return new EventCommand(eventDesc, at);
                 default:
-                    int index = Integer.parseInt(description) - 1;
+                    int index = Integer.parseInt(description.split(" ")[0]) - 1;
                     switch (type) {
                     case "mark":
                         return new MarkCommand(index);
