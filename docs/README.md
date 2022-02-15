@@ -32,14 +32,14 @@ e.g.
 
 ## List all tasks
 
-###`list`Displays all tasks in Echo.
+### `list`Displays all tasks in Echo.
 
 Format:
 `list`
 
 ## Mark a task as done
 
-###`mark`: Marks a task as completed
+### `mark`: Marks a task as completed
 
 
 Format: `mark <task_number>`
@@ -47,7 +47,7 @@ Format: `mark <task_number>`
 e.g. `mark 1`(marks task 1 as done)
 ## Deletes a specific task.
 
-###`delete`: Deletes a task
+### `delete`: Deletes a task
 
 Format: `delete <task_number>`
 
@@ -56,7 +56,7 @@ e.g. `delete 1`(delete task 1)
 
 ##  Find tasks matching a keyword
 
-###`find`:Displays all tasks matching a keyword.
+### `find`:Displays all tasks matching a keyword.
 
 Format: `find <description>`
 
@@ -68,7 +68,7 @@ Format: `bye`
 
 ## View Schedule
 
-###View all the tasks on a certain date
+### View all the tasks on a certain date
 
 Format: `view schedule <yyyy-mm-dd>`
 
