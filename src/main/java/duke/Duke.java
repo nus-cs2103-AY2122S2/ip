@@ -22,7 +22,6 @@ public class Duke {
     private static TaskList taskList;
     private static Storage storage;
     private static final Parser parser = new Parser();
-    private static final Scanner sc = new Scanner(System.in);
 
     /**
      * Initialization of Duke application.
@@ -32,13 +31,12 @@ public class Duke {
         try {
             taskList = storage.importTasks();
         } catch (IOException e) {
-            Ui.print(Ui.MSG_FILEREADERROR);
+            // Error
         }
     }
 
     public String getResponse(String inputTxt) {
         try {
-            inputTxt = sc.nextLine();
             Command c = parser.parse(inputTxt);
             return c.execute(taskList, storage);
         } catch (DukeException e) {
@@ -52,7 +50,6 @@ public class Duke {
      * Initiation of the Duke application.
      */
     public static void main(String[] args) {
-        // new Duke().run();
         Application.launch(Main.class, args);
     }
 }

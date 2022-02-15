@@ -96,10 +96,8 @@ public class Storage {
                         taskList.addDeadline(inputLine[2],date,time);
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException e) {
             this.file.createNewFile();
-        } catch (DukeException e) {
-            Ui.print(e.getMessage());
         }
         return taskList;
     }

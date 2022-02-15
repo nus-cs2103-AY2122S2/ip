@@ -56,17 +56,16 @@ public class Parser {
                 throw new DukeException(Ui.MSG_INVALIDCMD);
             }
         } catch (DukeException e) {
-            Ui.print(e.getMessage());
+            return new InvalidCommand(e.getMessage());
         } catch (NumberFormatException e) {
-            Ui.print(Ui.MSG_INVALDTASKIDFORMAT);
+            return new InvalidCommand(Ui.MSG_INVALDTASKIDFORMAT);
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException | IllegalArgumentException e) {
-            Ui.print(Ui.MSG_INVLIADCMDFORMAT);
+            return new InvalidCommand(Ui.MSG_INVLIADCMDFORMAT);
         } catch (IndexOutOfBoundsException e) {
-            Ui.print(Ui.MSG_INVALIDTASKID);
+            return new InvalidCommand(Ui.MSG_INVALIDTASKID);
         } catch (DateTimeParseException e) {
-            Ui.print(Ui.MSG_INVALIDDATETIMEFORMAT);
+            return new InvalidCommand(Ui.MSG_INVALIDDATETIMEFORMAT);
         }
-        return new InvalidCommand();
     }
 
     private Command formatCmdWithSingleInput(CommandType commandType, String inputTxt) throws DukeException {

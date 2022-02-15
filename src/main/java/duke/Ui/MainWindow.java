@@ -49,4 +49,10 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    public void welcomeGreeting() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.MSG_WELCOME, dukeImage)
+        );
+    }
 }

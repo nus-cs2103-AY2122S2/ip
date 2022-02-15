@@ -11,6 +11,12 @@ import duke.task.TaskList;
  */
 public class InvalidCommand extends Command {
 
+    private String errorMsg;
+
+    public InvalidCommand (String s) {
+        this.errorMsg = s;
+    }
+
     /**
      * No execution is required for an invalid command.
      *
@@ -18,7 +24,7 @@ public class InvalidCommand extends Command {
      * @param storage  Storage of task in local persistent disk.
      */
     public String execute(TaskList taskList, Storage storage) {
-        return "";
+        return this.errorMsg;
     }
 
 }
