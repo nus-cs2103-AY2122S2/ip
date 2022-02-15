@@ -6,7 +6,7 @@ package duke.command;
  */
 public abstract class Command<String> {
 
-    private boolean systemRunning = true;
+    private boolean isRunning = true;
 
     /**
      * abstract method for runCommand to be implemented by subclasses
@@ -18,7 +18,7 @@ public abstract class Command<String> {
      * @param isRunning boolean to change the status of program
      */
     public void changeRunning(boolean isRunning) {
-        systemRunning = isRunning;
+        this.isRunning = isRunning;
     }
 
     /**
@@ -26,6 +26,6 @@ public abstract class Command<String> {
      * @return boolean to check status of program
      */
     public boolean isRunning() {
-        return systemRunning;
+        return isRunning;
     }
 }
