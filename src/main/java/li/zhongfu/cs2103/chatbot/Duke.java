@@ -156,15 +156,19 @@ public class Duke {
             case "todo":
             case "deadline":
             case "event":
+            case "t":
+            case "d":
+            case "e":
                 Task task;
                 if (!result.hasNonblankPosArg()) { // including strings with only whitespaces
                     throw new DukeException("Task name cannot be empty!");
                 }
 
-                if ("deadline".equals(cmd)) {
+                if ("deadline".equals(cmd) || "d".equals(cmd)) {
                     if (!result.hasNonblankArg("by")) {
                         throw new DukeException(String.format(
-                                "You need a time for your deadline! Try: deadline %s /by 1 jan 2050 12:15",
+                                "You need a time for your deadline! Try: %s %s /by 1 jan 2050 12:15",
+                                cmd,
                                 result.getPosArg()));
                     }
 
@@ -172,13 +176,15 @@ public class Duke {
                         task = new Deadline(result.getPosArg(), this.parser.parseDateTime(result.getArg("by")));
                     } catch (DateTimeParseException e) {
                         throw new DukeException(String.format(
-                                "Unknown date format! Try: deadline %s /by 1 jan 2050 12:15",
+                                "Unknown date format! Try: %s %s /by 1 jan 2050 12:15",
+                                cmd,
                                 result.getPosArg()));
                     }
-                } else if ("event".equals(cmd)) {
+                } else if ("event".equals(cmd) || "e".equals(cmd)) {
                     if (!result.hasNonblankArg("at")) {
                         throw new DukeException(String.format(
-                                "You need a time for your event! Try: event %s /at 1 jan 2050 12:15",
+                                "You need a time for your event! Try: %s %s /at 1 jan 2050 12:15",
+                                cmd,
                                 result.getPosArg()));
                     }
 
@@ -186,7 +192,8 @@ public class Duke {
                         task = new Event(result.getPosArg(), this.parser.parseDateTime(result.getArg("at")));
                     } catch (DateTimeParseException e) {
                         throw new DukeException(String.format(
-                                "Unknown date format! Try: event %s /at 1 jan 2050 12:15",
+                                "Unknown date format! Try: %s %s /at 1 jan 2050 12:15",
+                                cmd,
                                 result.getPosArg()));
                     }
                 } else {
