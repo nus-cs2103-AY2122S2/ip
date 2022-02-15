@@ -147,7 +147,7 @@ public class Ui {
      * @return Unrecognized command message
      */
     public String showIncorrectMessage () {
-        return "OOPS!!! I'm sorry, but I don't know what that means :(";
+        return "OOPS!!! I'm sorry, but I don't know what that means :(\nType \"help\" to get a list of commands!";
     }
 
     /**
