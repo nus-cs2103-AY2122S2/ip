@@ -1,11 +1,11 @@
 package gene.component;
 
-import gene.task.DeadlineTask;
-import gene.task.EventTask;
-import gene.task.Task;
-import gene.task.TodoTask;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -15,6 +15,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import gene.task.DeadlineTask;
+import gene.task.EventTask;
+import gene.task.Task;
+import gene.task.TodoTask;
 
 /**
  * The storage class. handles all storage/file actions.
@@ -99,20 +104,26 @@ public class Storage {
                 String[] tokens = line.split(" / ");
                 boolean isMarked = tokens[tokens.length - 1].equals("1");
                 switch(tokens[0]) {
-                    case "todo":
-                        String todoTitle = tokens[1];
-                        this.itemList.add(new TodoTask(todoTitle, isMarked));
-                        break;
-                    case "event":
-                        String eventTitle = tokens[1];
-                        String eventDeadline = tokens[2];
-                        this.itemList.add(new EventTask(eventTitle, LocalDateTime.parse(eventDeadline, formatter), isMarked));
-                        break;
-                    case "deadline":
-                        String deadlineTitle = tokens[1];
-                        String deadlineDeadline = tokens[2];
-                        this.itemList.add(new DeadlineTask(deadlineTitle, LocalDateTime.parse(deadlineDeadline, formatter), isMarked));
-                        break;
+                case "todo":
+                    String todoTitle = tokens[1];
+                    this.itemList.add(new TodoTask(todoTitle, isMarked));
+                    break;
+                case "event":
+                    String eventTitle = tokens[1];
+                    String eventDeadline = tokens[2];
+                    this.itemList.add(new EventTask(eventTitle,
+                            LocalDateTime.parse(eventDeadline,
+                                    formatter), isMarked));
+                    break;
+                case "deadline":
+                    String deadlineTitle = tokens[1];
+                    String deadlineDeadline = tokens[2];
+                    this.itemList.add(new DeadlineTask(deadlineTitle,
+                            LocalDateTime.parse(deadlineDeadline,
+                                    formatter), isMarked));
+                    break;
+                default:
+                    break;
                 }
             }
             fileReader.close();
@@ -229,6 +240,8 @@ public class Storage {
                 toWrite = String.join(" / ", dSplit );
                 toWrite = "deadline / " + toWrite + " / " + mark;
                 bufferedWriter.append(newLine + toWrite);
+                break;
+            default:
                 break;
             }
             bufferedWriter.close();

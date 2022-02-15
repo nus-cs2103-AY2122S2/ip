@@ -40,6 +40,8 @@ public class TaskList {
      * @param targetTask
      */
     public void set(int index, Task targetTask) {
+        assert (index >= 0);
+        assert (index < itemList.size());
         this.itemList.set(index, targetTask);
     }
 
@@ -49,6 +51,8 @@ public class TaskList {
      * @param index
      */
     public Task get(int index) {
+        assert (index >= 0);
+        assert (index < itemList.size());
         return this.itemList.get(index);
     }
 
@@ -76,6 +80,8 @@ public class TaskList {
      * @param index
      */
     public void remove(int index) {
+        assert (index >= 0);
+        assert (index < itemList.size());
         this.itemList.remove(index);
     }
 }

@@ -41,13 +41,12 @@ public class DeleteCommand extends Command {
             Task targetTask = tasks.get(index);
             tasks.remove(index); //error if empty
             storage.deleteLineToFile(index); //error if empty
-            return          "----------------------------" +
-                            "----------------------------\n" +
-                            "Noted. I've removed this task:\n"
+            return Ui.showLine()
+                    + "Noted. I've removed this task:\n"
                             + "  " + targetTask + "\n"
                             + "Now you have " + tasks.size() + " tasks in the list."
                             + "\n"
-                            + "--------------------------------------------------------";
+                            + Ui.showLine();
         } catch (Exception err) {
             System.out.println("File and list is already empty");
         }

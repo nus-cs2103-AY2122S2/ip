@@ -93,13 +93,13 @@ public class AddCommand extends Command {
         Task newTask = new TodoTask(taskTitle);
         itemList.add(newTask);
 
-        return "----------------------------" +
-                        "----------------------------\n" +
-                        "Got it. I've added this task:\n"
+        return Ui.showLine()
+                + "Got it. I've added this task:\n"
                         + "  " + newTask + "\n"
-                        + "Now you have " + itemList.size() + " tasks in the list."
+                        + "Now you have " + itemList.size()
+                + " tasks in the list."
                         + "\n"
-                        + "--------------------------------------------------------\n";
+                        + Ui.showLine();
     }
 
     /**
@@ -133,13 +133,12 @@ public class AddCommand extends Command {
             Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             storage.writeToFile(taskKey, "E", false);
             itemList.add(newTask);
-            return          "----------------------------" +
-                            "----------------------------\n" +
-                            "Got it. I've added this task:\n"
+            return Ui.showLine()
+                    + "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
                             + "Now you have " + itemList.size() + " tasks in the list."
                             + "\n"
-                            + "--------------------------------------------------------\n";
+                            + Ui.showLine();
         } catch (DateTimeParseException err) {
             return
                     "Bad date time format used, please use this date time format instead: "
@@ -195,13 +194,12 @@ public class AddCommand extends Command {
             Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             storage.writeToFile(taskKey, "D", false);
             itemList.add(newTask);
-            return        "----------------------------" +
-                            "----------------------------\n" +
-                            "Got it. I've added this task:\n"
+            return Ui.showLine()
+                    + "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
                             + "Now you have " + itemList.size() + " tasks in the list."
                             + "\n"
-                            + "--------------------------------------------------------\n";
+                            + Ui.showLine();
         } catch (DateTimeParseException err) {
             return err.getMessage();
         }

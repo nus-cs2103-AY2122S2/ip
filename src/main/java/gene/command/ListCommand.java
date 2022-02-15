@@ -25,10 +25,7 @@ public class ListCommand extends Command {
             initList.append("\n");
         }
         
-        return          "----------------------------" +
-                        "----------------------------\n" +
-                initList.toString() +
-                        "--------------------------------------------------------\n";
+        return Ui.showLine() + initList.toString() + Ui.showLine();
     }
 
     /**

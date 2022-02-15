@@ -11,7 +11,7 @@ import gene.component.Ui;
  * @version 1.0
  * @since 2022-01-12
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * The execute methods contains the instruction(s) for when the command is
@@ -24,11 +24,10 @@ public class ExitCommand extends Command{
      */
     @Override
     public String execute(TaskList tasks, Ui userInt, Storage storage) {
-        return "--------------------------------" +
-                "------------------------\n"
+        return Ui.showLine()
                 + "Bye. Hope to see you again soon!"
                 + "\n"
-                + "--------------------------------------------------------";
+                + Ui.showLine();
     }
 
     /**
