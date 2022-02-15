@@ -18,7 +18,7 @@ Users would be able to create 3 different types of tasks that they can track.
 Users would be able to clear the entire list in one command.
 - `clear`
 
->❗️ Use at your own discretion.
+> ❗️ Use at your own discretion.
 
 ---
 
@@ -35,7 +35,7 @@ Users would be able to remove task(s) that they no longer want to keep track of 
 Users would be able to exit from the application using the user-input box.
 - `exit`
 
->⚠️ Users are recommended to exit doing so in order to save the changes they have made to their list.
+> ⚠️ Users are recommended to exit doing so in order to save the changes they have made to their list.
 
 ---
 
