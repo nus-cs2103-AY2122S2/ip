@@ -11,15 +11,15 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 /**
- * Represents a Storage object that tracks and stores tasks that the user has keyed in
- * previously
+ * Represents a Storage object that tracks and stores the tasks that the user has keyed in
+ * previous interactions with the GUI.
  */
 public class Storage {
     private static final ArrayList<Task> tasks = new ArrayList<>();
@@ -27,9 +27,11 @@ public class Storage {
     protected String filePath;
 
     /**
-     * Instantiates a storage object given a directory path and a file path
-     * @param directoryPath directoryPath to storage file
-     * @param filePath filePath to stroage file
+     * Instantiates a storage object given a directory path and a file path.
+     * The directory path and file path provides the information of where the
+     * storage file should be stored.
+     * @param directoryPath Directory path to storage file.
+     * @param filePath File path to storage file.
      */
     public Storage(String directoryPath, String filePath) {
         this.directoryPath = directoryPath;
@@ -37,13 +39,17 @@ public class Storage {
     }
 
     /**
-     * Instantiates an empty storage object
+     * Default constructor of a Storage object.
+     * This constructor does not take in any arguments.
      */
     public Storage() {}
 
+
     /**
-     * Method that takes in a list of tasks and writes it into the storage file
-     * @throws DukeException if the file cannot be found in the directory
+     * Method that takes in a list of tasks and writes it into the storage file.
+     * Throws an exception if the program is unable to find the file that it needs
+     * to write the tasks to.
+     * @throws DukeException if the file cannot be found in the directory path provided.
      */
     public static void writeToDukeFile() throws DukeException {
         try {
@@ -58,9 +64,10 @@ public class Storage {
     }
 
     /**
-     * Method that reads from the file and outputs a list of tasks that have been read from the list
-     * @return a list of tasks in the storage file object
-     * @throws DukeException if unable to read content from duke file/file does not exist
+     * Method that reads from the file and outputs a list of tasks that have been read from the storage file.
+     * @return List of tasks that have been stored in the storage file object.
+     * @throws DukeException if the program is unable to read content from duke file or if the file does not exist
+     * at the location specified.
      */
     public ArrayList<Task> readFromDukeFile() throws DukeException {
         createDirectory();
@@ -69,58 +76,70 @@ public class Storage {
             while (readFile.hasNextLine()) {
                 Task taskToAdd;
                 String taskData = readFile.nextLine();
-                String[] taskArray = taskData.split(",");
-                String taskInput = taskArray[0].toUpperCase(Locale.ROOT);
-                switch (taskInput) {
-                case "E":
-                    if (taskArray.length == 4) {
-                        taskToAdd = new Event(taskArray[2], taskArray[3]);
-                        if (taskArray[1].equals("1")) {
-                            taskToAdd.markIsDone();
-                        }
-                        tasks.add(taskToAdd);
-                    } else {
-                        throw new DukeException("Unable to read file format!");
-                    }
-                    break;
-                case "T":
-                    if (taskArray.length == 3) {
-                        taskToAdd = new Todo(taskArray[2]);
-                        if (taskArray[1].equals("1")) {
-                            taskToAdd.markIsDone();
-                        }
-                        tasks.add(taskToAdd);
-                    } else {
-                        throw new DukeException("Unable to read file format!");
-                    }
-                    break;
-                case "D":
-                    if (taskArray.length == 4) {
-                        taskToAdd = new Deadline(taskArray[2], taskArray[3]);
-                        if (taskArray[1].equals("1")) {
-                            taskToAdd.markIsDone();
-                        }
-                        tasks.add(taskToAdd);
-                    } else {
-                        throw new DukeException("Unable to read file format!");
-                    }
-                    break;
-                default:
-                    assert false : taskInput;
-                    throw new DukeException("No valid tasks found in file!");
+                String[] taskDataArray = taskData.split(",");
+                String taskInput = taskDataArray[0].toUpperCase(Locale.ROOT);
+
+                taskToAdd = parseTaskInput(taskInput, taskDataArray);
+                if (taskToAdd == null) {
+                    throw new DukeException("Sumimasen! We had some problems reading your file!");
                 }
+
+                if (taskDataArray[1].equals("1")) {
+                    taskToAdd.markIsDone();
+                }
+                tasks.add(taskToAdd);
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("File cannot be found!");
         }
-
         return tasks;
     }
 
 
     /**
-     * Method that creates a directory for the storage file if it does not exist
-     * @throws DukeException Error with creating Directory/File
+     * Returns a task based on the stored file format of the task.
+     * Throws an exception if the file is corrupted or if the tasks have been stored
+     * in a format that is unreadable by the parser.
+     * @param taskInput Stored file format of the task.
+     * @param taskDataArray Array containing the information of the task.
+     * @return A task that is generated based on the information in the taskArray as well as
+     * the task input.
+     * @throws DukeException if the parser is unable to convert the file format of the task
+     * to a Task object.
+     */
+    private Task parseTaskInput(String taskInput, String[] taskDataArray) throws DukeException {
+        switch (taskInput) {
+        case "E":
+            if (taskDataArray.length == 4) {
+                return new Event(taskDataArray[2], taskDataArray[3]);
+            } else {
+                return null;
+            }
+        case "T":
+            if (taskDataArray.length == 3) {
+                return new Todo(taskDataArray[2]);
+            } else {
+                return null;
+            }
+        case "D":
+            if (taskDataArray.length == 4) {
+                return new Deadline(taskDataArray[2], taskDataArray[3]);
+            } else {
+                return null;
+            }
+        default:
+            assert false : taskInput;
+            return null;
+        }
+    }
+
+
+    /**
+     * Method that creates a directory for the storage file if it does not exist.
+     * Throws an exception if there is already an existing directory that contains
+     * the file.
+     * @throws DukeException if there is an error that occurs when trying to create the
+     * directory.
      */
     public void createDirectory() throws DukeException {
         boolean isDirectoryExists = new File(this.directoryPath).exists();
@@ -145,10 +164,15 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Returns a string that is shown to the user when the application first launches.
+     * It contains all the tasks that have been saved in duke from the user's previous
+     * interactions with the Duke GUI.
+     * @return A string containing all the list of tasks that has been stored in Duke.
+     */
     public String getStorageTasks() {
         if (tasks.size() == 0) {
-            return "No tasks in file!";
+            return "No duke.tasks in file!";
         } else {
             return "Here is the list of tasks we have saved! \n" + TaskList.listTasks(tasks);
         }

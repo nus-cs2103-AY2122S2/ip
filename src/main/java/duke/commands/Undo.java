@@ -4,27 +4,30 @@ import duke.Storage;
 import duke.TextUi;
 import duke.exceptions.DukeException;
 import duke.exceptions.UndoException;
-import tasks.TaskList;
+import duke.tasks.TaskList;
 
 /**
- * Represents a command that allows the user to undo the most recent command
+ * Represents a command that allows the user to undo the most recent command.
+ * Commands that can be undone: AddDeadline, AddEvent, AddTodo, Delete, Mark, Unmark.
  */
 public class Undo extends Command {
     private final Command previousCommand;
 
     /**
-     * Instantiates an undo command
-     * @param previousCommand stored previous command that we need to undo
+     * Instantiates an undo command.
+     * @param previousCommand The command that the system needs to undo.
      */
     public Undo(Command previousCommand) {
         this.previousCommand = previousCommand;
     }
+
     /**
-     * Method that executes a command to undo the most recent command the user has keyed in
-     * @param taskList a taskList containing all existing tasks
-     * @param ui a ui object
-     * @param storage a storage object that is able to read and write to storage file
-     * @return message after a task has been marked
+     * Returns a success message after the most recent command has been undone.
+     * Throws an error if there are no previous commands left to undo.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @param ui A UI object that is used to print the System's response.
+     * @param storage A storage object that is able to read and write to storage file.
+     * @return A success message after a particular task has successfully been undone.
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) throws DukeException {

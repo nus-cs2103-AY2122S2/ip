@@ -3,22 +3,22 @@ package duke.commands;
 import duke.Storage;
 import duke.TextUi;
 import duke.exceptions.DukeException;
-import tasks.Event;
-import tasks.Task;
-import tasks.TaskList;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * Represents a command that allows user to add an event task
- * to the task list
+ * to the task list.
  */
 public class AddEvent extends Command {
     private final String description;
     private final String dateTime;
 
     /**
-     * Initialize the AddEvent Command
-     * @param description Description of the event task
-     * @param dateTime Duedate of the event task
+     * Initialize an AddEvent Command.
+     * @param description Description of the event task.
+     * @param dateTime Due date of the event task.
      */
     public AddEvent(String description, String dateTime) {
         this.description = description;
@@ -26,11 +26,11 @@ public class AddEvent extends Command {
     }
 
     /**
-     * Method that executes a command to add an event to the task list.
-     * @param taskList a taskList containing all existing tasks
-     * @param ui a ui object
-     * @param storage a storage object that is able to read and write to storage file
-     * @return message after an event has successfully been added to the task list
+     * Returns a success string after a successful execution of an add event command.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @param ui A UI object that is used to print the System's response.
+     * @param storage A storage object that is able to read and write to storage file.
+     * @return Message after an event has successfully been added to the task list.
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
@@ -46,14 +46,14 @@ public class AddEvent extends Command {
     }
 
     /**
-     * Method that undoes an add event command
-     * @param taskList tasks that are stored in Duke
-     * @return message after an add event command has been undone
-     * @throws DukeException in the event that the action is unable to be written into
-     * storage file
+     * Returns a success message after a successful undo of an AddEvent Command.
+     * Throws a DukeException when there errors undoing the command.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @return Success message after an AddEvent command has been undone.
+     * @throws DukeException if the program is unable to undo the command.
      */
     @Override
     public String undo(TaskList taskList) throws DukeException {
-        return taskList.deleteLastTask();
+        return TaskList.deleteLastTask();
     }
 }

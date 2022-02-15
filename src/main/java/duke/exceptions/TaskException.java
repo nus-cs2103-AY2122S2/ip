@@ -1,24 +1,25 @@
 package duke.exceptions;
 
 /**
- * Represents an exception that is thrown when there are errors when processing tasks
- * that the users have keyed into Duke
+ * Represents a task exception that is thrown when there are errors
+ * when processing tasks that the users have keyed into Duke.
  */
 public class TaskException extends DukeException {
     private final String errorCode;
 
     /**
-     * Initializes a Task exception
+     * Initializes a Task Exception.
      * @param errorCode Takes in an errorCode that will determine the message
-     *                  that gets printed out.
+     * that gets printed out.
      */
     public TaskException(String errorCode) {
         this.errorCode = errorCode;
     }
 
     /**
-     * Method that returns the error message to show to the user
-     * @return Error Message given a particular error code
+     * Returns the detail message of the error that has occurred when processing
+     * the tasks.
+     * @return Detail message of a TaskException.
      */
     @Override
     public String getMessage() {

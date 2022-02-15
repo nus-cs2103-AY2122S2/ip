@@ -3,22 +3,22 @@ package duke.commands;
 import duke.Storage;
 import duke.TextUi;
 import duke.exceptions.DukeException;
-import tasks.Deadline;
-import tasks.Task;
-import tasks.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * Represents a command that allows user to add a deadline task
- * to the task list
+ * to the task list.
  */
 public class AddDeadline extends Command {
     private final String description;
     private final String date;
 
     /**
-     * Initialize the AddDeadline Command
-     * @param description Description of the deadline task
-     * @param date Duedate of the deadline task
+     * Initialize an AddDeadline Command.
+     * @param description Description of the deadline task.
+     * @param date Duedate of the deadline task.
      */
     public AddDeadline(String description, String date) {
         this.description = description;
@@ -26,11 +26,11 @@ public class AddDeadline extends Command {
     }
 
     /**
-     * Method that executes a command to add a deadline to the task list.
-     * @param taskList a taskList containing all existing tasks
-     * @param ui a ui object
-     * @param storage a storage object that is able to read and write to storage file
-     * @return message after a deadline has successfully been added to the task list
+     * Returns a success string after a successful execution of an add deadline command.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @param ui A UI object that is used to print the System's response.
+     * @param storage A storage object that is able to read and write to storage file.
+     * @return Message after a deadline has successfully been added to the task list.
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
@@ -46,14 +46,14 @@ public class AddDeadline extends Command {
     }
 
     /**
-     * Method that undoes an add deadline command
-     * @param taskList tasks that are stored in Duke
-     * @return message after an add deadline command has been undone
-     * @throws DukeException in the event that the action is unable to be written into
-     * storage file
+     * Returns a success message after a successful undo of an AddDeadline Command.
+     * Throws a DukeException when there errors undoing the command.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @return Success message after an AddDeadline command has been undone.
+     * @throws DukeException if the program is unable to undo the command.
      */
     @Override
     public String undo(TaskList taskList) throws DukeException {
-        return taskList.deleteLastTask();
+        return TaskList.deleteLastTask();
     }
 }

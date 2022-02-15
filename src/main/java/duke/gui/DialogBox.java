@@ -32,9 +32,9 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Initialize a DialogBox with a text label and a corresponding image
-     * @param text text label
-     * @param img user icon avatar
+     * Initialize a DialogBox with a text label and a corresponding image.
+     * @param text Text label.
+     * @param img Image corresponding to the user type.
      */
     private DialogBox(String text, Image img) {
         try {
@@ -63,8 +63,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Method that alters the design of the dialog box depending on the type of user
-     * @param isUser Boolean to indicate if the person is a user or Duke
+     * Method that alters the design of the dialog box depending on the type of user.
+     * @param isUser Boolean to indicate if the person is a user or Duke.
      */
     private void setDesign(boolean isUser) {
         String backgroundColor = isUser ? "#e75480" : "#f0efeb";
@@ -77,10 +77,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Method that returns the userDialog of the chatbox to the gui
-     * @param text text label
-     * @param img user avatar
-     * @return the user Dialog
+     * Method that returns the dialog box of the user.
+     * On the JavaFX application, it is the user on the right of the screen.
+     * @param text Text label.
+     * @param img User image.
+     * @return User dialog box.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox box = new DialogBox(text, img);
@@ -90,10 +91,11 @@ public class DialogBox extends HBox {
 
 
     /**
-     * Method that returns the dukeDialog of the chatbox to the gui
-     * @param text text label
-     * @param img duke avatar
-     * @return the duke Dialog
+     * Method that returns the dialog box of Duke.
+     * On the JavaFX application, it is the user on the left of the screen.
+     * @param text Text label.
+     * @param img Duke's image.
+     * @return Duke's dialog box.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

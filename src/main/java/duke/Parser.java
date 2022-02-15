@@ -14,10 +14,10 @@ import duke.commands.Unmark;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
 import duke.exceptions.TaskException;
-import tasks.TaskList;
+import duke.tasks.TaskList;
 
 /**
- * Represents a parser object that parses commands that the user types into the GUI
+ * Represents a parser object that parses commands that the user types into the GUI.
  */
 public class Parser {
     private Command previousCommand;
@@ -35,13 +35,16 @@ public class Parser {
     }
 
     /**
-     * Method that takes in a command Type and index and performs the appropriate task action
-     * @param commandType type of command user has inputted (i.e. bye, list...)
-     * @param index taskId
-     * @throws DukeException if task cannot be found within the tasklist
-     * @throws NumberFormatException if taskId is not a number.
+     * Returns a command based on the command type that the user has keyed in.
+     * This method is specific to command types that require index manipulation.
+     * (For e.g. Delete, mark and un-mark commands).
+     * @param commandType Type of command the the user has keyed in.
+     * @param index Index of a task.
+     * @throws TaskException if task index provided is not a number or if the task cannot be
+     * found within the task list.
+     * @throws InvalidCommandException if the commandType provided is invalid.
      */
-    public Command taskAction(CommandType commandType, String... index) throws DukeException, NumberFormatException {
+    private Command taskAction(CommandType commandType, String... index) throws InvalidCommandException, TaskException {
         String taskIdParameter = index[0];
         try {
             int taskId = Integer.parseInt(taskIdParameter);
@@ -76,10 +79,13 @@ public class Parser {
     }
 
     /**
-     * Method that parses the string input and performs the correct action
-     * @param input user input into the command lines
-     * @return a Command that can be executed to perform an action
-     * @throws DukeException if the command is invalid
+     * Returns a command based on the input the user has parsed into the system.
+     * Throws an exception if the input that the user has parsed is unreadable
+     * by the system.
+     * @param input Input that the user has keyed into the GUI commandline.
+     * @return A command that can be executed to perform an action.
+     * @throws DukeException if the string input provided by the user cannot
+     * be interpreted by the system.
      */
     public Command parseInput(String input) throws DukeException {
         String[] inputArray = input.split(" ");
@@ -89,35 +95,33 @@ public class Parser {
             return parseSingleCommand(commandType);
         }
 
-        if (inputArray.length > 1) {
-            StringBuilder taskDetailsBuilder = new StringBuilder();
 
-            for (int i = 1; i < inputArray.length; i++) {
-                if (i != inputArray.length - 1) {
-                    taskDetailsBuilder.append(inputArray[i]).append(" ");
-                } else {
-                    taskDetailsBuilder.append(inputArray[i]);
-                }
+        StringBuilder taskDetailsBuilder = new StringBuilder();
+
+        for (int i = 1; i < inputArray.length; i++) {
+            if (i != inputArray.length - 1) {
+                taskDetailsBuilder.append(inputArray[i]).append(" ");
+            } else {
+                taskDetailsBuilder.append(inputArray[i]);
             }
-            String taskDetails = taskDetailsBuilder.toString();
-
-
-            return parseMultiCommand(commandType, inputArray[1], taskDetails);
         }
+        String taskDetails = taskDetailsBuilder.toString();
 
-        assert false;
-        throw new InvalidCommandException();
+
+        return parseMultiCommand(commandType, inputArray[1], taskDetails);
     }
 
     /**
-     * Method that helps to parse multi-commands (for eg. todo 1, event eat /at 12-12-2021)
-     * @param commandType CommandType that user has keyed in
-     * @param taskId index of task (used for mark, find, delete)
-     * @param taskDetails details of task (used for todo, event, deadline)
-     * @return a Command that can be executed to perform the multi command action
-     * @throws DukeException when the command is invalid
+     * Returns a command for an input that contains more than 1 input words.
+     * These commands include mark, find, delete, as well as all add commands.
+     * @param commandType CommandType of the command.
+     * @param taskId Index of task (used for mark, find, delete).
+     * @param taskDetails Details of task (used for todo, event, deadline).
+     * @return A Command that can be executed. This command is dependent on the commandType
+     * that has been provided to the method.
+     * @throws DukeException if the commandType that has been provided is an invalid command.
      */
-    public Command parseMultiCommand(CommandType commandType, String taskId, String taskDetails) throws DukeException {
+    private Command parseMultiCommand(CommandType commandType, String taskId, String taskDetails) throws DukeException {
         String description = "";
         String date = "";
         String dateTime = "";
@@ -170,13 +174,16 @@ public class Parser {
 
     }
 
+
     /**
-     * Method that helps to parse single-commands (for eg. list, bye)
-     * @param commandType Command that the user has keyed in
-     * @return a Command that can be executed to perform the multi command action
-     * @throws DukeException when the command is invalid
+     * Returns a command for an input that contains only one input word.
+     * These commands are specific to list, bye and undo.
+     * @param commandType CommandType of the command.
+     * @return A Command that can be executed. This command is dependent on the commandType
+     * that has been provided to the method.
+     * @throws DukeException if the commandType that has been provided is an invalid command.
      */
-    public Command parseSingleCommand(CommandType commandType) throws DukeException {
+    private Command parseSingleCommand(CommandType commandType) throws DukeException {
         switch (commandType) {
         case UNDO:
             return new Undo(previousCommand);

@@ -1,9 +1,9 @@
 package duke;
 
-import tasks.Task;
+import duke.tasks.Task;
 
-/** Represents a TextUI Object that contains methods
- * that alters the text display of the GUI
+/** Represents a TextUI Object that contains the automated responses
+ * that Duke will return the user depending on their input.
  */
 public class TextUi {
     private static final String DIVIDER = "===================================================";
@@ -14,35 +14,35 @@ public class TextUi {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
-     * Instantiates a ui object
+     * Instantiates a ui object.
      */
     public TextUi() {}
 
     /**
-     * Method that greets the user when the file first runs
+     * Method that greets the user when the file first runs.
      */
     public String greeting() {
         return "Konnichiwassup from\n" + LOGO + showDivider() + "\nWhat do you need help with?\n";
     }
 
     /**
-     * Method that shows a divider to the user
+     * Method that shows a divider to the user.
      */
     public String showDivider() {
         return DIVIDER;
     }
 
     /**
-     * Method that says bye to the user
+     * Method that says bye to the user.
      */
     public String sayBye() {
         return "Sayonara! Hope to see you again soon!";
     }
 
     /**
-     * Method that tells the user a task has been deleted from the task list
-     * @param preview task that has been deleted from the task list
-     * @return delete task message
+     * Method that informs the user when a task has been deleted from the task list.
+     * @param preview Task that has been deleted from the task list.
+     * @return Message that informs the user of a successful deletion of a task.
      */
     public String showDeleteMsg(Task preview) {
         return "Otsukaresamadeshita! You have finally completed one task.\n"
@@ -50,9 +50,9 @@ public class TextUi {
     }
 
     /**
-     * Method that tells the user a task has been added to the task list
-     * @param taskListSize updated number of tasks
-     * @return add task message
+     * Method that informs the user when a task has been added to the task list.
+     * @param taskListSize Updated number of tasks. (Inclusive of the new task added)
+     * @return Message that informs the user of a successful addition of a task.
      */
     public String showAddMsg(Integer taskListSize) {
         return "You now have a total of "
@@ -61,9 +61,9 @@ public class TextUi {
 
 
     /**
-     * Method that tells the user that Duke has marked a task as done
-     * @param preview task that has been marked
-     * @return mark task message
+     * Method that informs the user when Duke has marked a task as completed.
+     * @param preview Task that has been marked as completed.
+     * @return Message that informs the user that a task has been marked as completed.
      */
     public String showMarkDoneMsg(Task preview) {
         return "Sugoi! I have marked this task as done!\n"
@@ -71,9 +71,9 @@ public class TextUi {
     }
 
     /**
-     * Method that tells the user that Duke has unmarked a task as undone
-     * @param preview task that has been unmarked
-     * @return unmark task message
+     * Method that informs the user when Duke has unmarked a task as not completed.
+     * @param preview Task that has been unmarked as not completed.
+     * @return Message that informs the user that a task has been unmarked as not completed.
      */
     public String showMarkUndoneMsg(Task preview) {
         return "Daijoubu! I have unmarked this task for you!\n"
@@ -81,26 +81,26 @@ public class TextUi {
     }
 
     /**
-     * Method that tells the user that they have found tasks in the task list
-     * @param tasks List of tasks found
-     * @return Found task string
+     * Method that displays all tasks that matches the user's description of the task.
+     * @param tasks List of tasks found.
+     * @return Message that shows the user all the tasks that the program has found.
      */
     public String showFindTaskMsg(String tasks) {
         return "This is what we found! \n" + tasks;
     }
 
     /**
-     * Method that tells the user that their task list is empty
-     * @return Empty Tasklist String
+     * Method that warns the user that their task list is empty.
+     * @return A string indicating that the user's task list is empty.
      */
     public String showEmptyMsg() {
         return "Empty Much!";
     }
 
     /**
-     * Method that tells the user that an action has been undone
-     * @param action The command that has been undone
-     * @return Action undone string
+     * Method that tells the user that their most recent command has been undone.
+     * @param action The type of command that has been undone. (For eg. Add, Delete ... )
+     * @return A string telling the user the task that has been undone.
      */
     public String showUndoMsg(String action) {
         return action + " has been undone!";

@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 import duke.exceptions.DukeException;
 
 /**
- * Represents an event task
+ * Represents an event task. An event is something that happens on a specific date.
  */
 public class Event extends Task {
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -17,10 +17,11 @@ public class Event extends Task {
     protected LocalDateTime atTime;
 
     /**
-     * Instantiates a new Event object
-     * @param description of Event
-     * @param at (duedate of event)
-     * @throws DukeException if the date format parsed is incorrect
+     * Instantiates a new Event object.
+     * An exception is thrown if the program fails to parse the date/datetime provided.
+     * @param description Description of the event. (E.g. company meeting)
+     * @param at Date/Datetime of the event.
+     * @throws DukeException if the program is unable to parse the date/datetime field.
      */
     public Event(String description, String at) throws DukeException {
         super(description);
@@ -35,8 +36,9 @@ public class Event extends Task {
     }
 
     /**
-     * Method that converts an event to its storage file format
-     * @return A string that describes an event with its storage file format
+     * Method that converts a event to its storage file format.
+     * This format is what you will see in the storage file stored in the data folder.
+     * @return A string that describes a deadline with its storage file format.
      */
     @Override
     public String toFileFormat() {
@@ -47,10 +49,10 @@ public class Event extends Task {
         }
     }
 
-
     /**
-     * Method that converts an event to its display/string format
-     * @return A string that describes an event with its display format
+     * Method that converts an event to its UI format.
+     * This format is what will be shown to the user on the GUI.
+     * @return A string that describes a deadline with its UI format.
      */
     @Override
     public String toString() {
@@ -62,9 +64,10 @@ public class Event extends Task {
     }
 
     /**
-     * A method that takes in a string and checks if its in dateTime format
-     * @param dateTimeString duedate string
-     * @return A boolean that indicates if the string is in dateTime format
+     * A method that takes in a string and checks if its in dateTime format.
+     * Exception will be thrown if LocalDateTime library is unable to parse the string.
+     * @param dateTimeString Date/Datetime of the task in string form.
+     * @return A boolean that indicates if the string is in dateTime format.
      */
     private boolean isDateTimeFormat(String dateTimeString) {
         try {
@@ -77,9 +80,10 @@ public class Event extends Task {
     }
 
     /**
-     * A method that takes in a string and check if its in date format
-     * @param dateString duedate string
-     * @return A boolean that indicates if a string is in date format
+     * A method that takes in a string and check if its in date format.
+     * Exception will be thrown if LocalDate library is unable to parse the string.
+     * @param dateString Date/Datetime of the task in string form.
+     * @return A boolean that indicates if a string is in date format.
      */
     private boolean isDateFormat(String dateString) {
         try {
@@ -92,9 +96,9 @@ public class Event extends Task {
     }
 
     /**
-     * Takes in a dateTime object and converts it to the correct string display format
-     * @param dateTime dateTime object
-     * @return Formatted string containing details of the dateTime object
+     * Returns a string representing a formatted date-time given a LocalDateTime object.
+     * @param dateTime LocalDateTime object.
+     * @return String format of the LocalDateTime object.
      */
     public String formatDateTime(LocalDateTime dateTime) {
         String day = dateTime.getDayOfMonth() < 10
@@ -114,9 +118,9 @@ public class Event extends Task {
     }
 
     /**
-     * Takes in a date object and converts it to the correct string display format
-     * @param date date object
-     * @return Formatted string containing details of the Date object
+     * Returns a string representing a formatted date given a LocalDate object.
+     * @param date LocalDate object.
+     * @return String format of the LocalDate object.
      */
     public String formatDate(LocalDate date) {
         String day = date.getDayOfMonth() < 10

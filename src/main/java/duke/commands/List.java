@@ -3,24 +3,30 @@ package duke.commands;
 import duke.Storage;
 import duke.TextUi;
 import duke.exceptions.UndoException;
-import tasks.TaskList;
+import duke.tasks.TaskList;
 
 /**
- * Represents a command that allows users to list tasks in the task list
+ * Represents a command that lists tasks that have been stored in Duke.
  */
 public class List extends Command {
     /**
-     * Method that executes a command to list tasks from the task list.
-     * @param taskList a taskList containing all existing tasks
-     * @param ui a ui object
-     * @param storage a storage object that is able to read and write to storage file
-     * @return list of tasks stored in the task list
+     * Returns a success string containing the list of items that are present in the task list.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @param ui A UI object that is used to print the System's response.
+     * @param storage A storage object that is able to read and write to storage file.
+     * @return A string containing the list of tasks that is stored in Duke.
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
-        return taskList.listTasks();
+
+        return TaskList.listTasks();
     }
 
+    /**
+     * Returns an UndoException since a list command cannot be undone.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @throws UndoException since the program is unable to undo a list command.
+     **/
     @Override
     public String undo(TaskList taskList) throws UndoException {
         throw new UndoException("NOTHING");

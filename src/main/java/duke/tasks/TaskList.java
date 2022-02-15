@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -20,7 +20,7 @@ public class TaskList {
      *
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+        TaskList.tasks = tasks;
     }
 
     /**
@@ -174,7 +174,7 @@ public class TaskList {
      * @throws DukeException when there are problems writing to duke file or there are issues with
      * undoing the previous command.
      */
-    public String deleteLastTask() throws DukeException {
+    public static String deleteLastTask() throws DukeException {
         try {
             tasks.remove(tasks.size() - 1);
             Storage.writeToDukeFile();

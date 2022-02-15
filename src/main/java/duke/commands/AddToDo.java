@@ -3,31 +3,32 @@ package duke.commands;
 import duke.Storage;
 import duke.TextUi;
 import duke.exceptions.DukeException;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.Todo;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 /**
  * Represents a command that allows user to add a todo task
- * to the task list
+ * to the task list.
  */
 public class AddToDo extends Command {
     private final String taskDetails;
 
     /**
-     * Initialize the AddEvent Command
-     * @param taskDetails description of task
+     * Initialize the AddToDo Command.
+     * @param taskDetails Description of task.
      */
     public AddToDo(String taskDetails) {
         this.taskDetails = taskDetails;
     }
 
+
     /**
-     * Method that executes a command to add a todo to the task list.
-     * @param taskList a taskList containing all existing tasks
-     * @param ui a ui object
-     * @param storage a storage object that is able to read and write to storage file
-     * @return message after a todo has successfully been added to the task list
+     * Returns a success string after a successful execution of an add to-do command.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @param ui A UI object that is used to print the System's response.
+     * @param storage A storage object that is able to read and write to storage file.
+     * @return Message after a to-do has successfully been added to the task list.
      */
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
@@ -36,21 +37,21 @@ public class AddToDo extends Command {
                 throw new DukeException("Todo command is invalid!");
             }
             Task todo = new Todo(taskDetails);
-            return taskList.addTask(todo);
+            return TaskList.addTask(todo);
         } catch (DukeException e) {
             return e.getMessage();
         }
     }
 
     /**
-     * Method that undoes an add todo command
-     * @param taskList tasks that are stored in Duke
-     * @return message after an add todo command has been undone
-     * @throws DukeException in the event that the action is unable to be written into
-     * storage file
+     * Returns a success message after a successful undo of an AddTodo Command.
+     * Throws a DukeException when there errors undoing the command.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @return Success message after an AddTodo command has been undone.
+     * @throws DukeException if the program is unable to undo the command.
      */
     @Override
     public String undo(TaskList taskList) throws DukeException {
-        return taskList.deleteLastTask();
+        return TaskList.deleteLastTask();
     }
 }

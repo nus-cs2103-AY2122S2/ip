@@ -2,7 +2,7 @@ package duke;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
-import tasks.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Represents a Duke chat bot
@@ -15,9 +15,11 @@ public class Duke {
 
 
     /**
-     * Instantiates a duke.Duke object with a directoryPath and filePath of the storage file
-     * @param directoryPath directoryPath to storage file
-     * @param filePath filePath to storage file
+     * Instantiates a Duke chat bot.
+     * It requires a directory path and file path to locate the storage file.
+     * The storage file contains the tasks that the user has keyed in before.
+     * @param directoryPath Directory path to storage file.
+     * @param filePath File path to storage file.
      */
     public Duke(String directoryPath, String filePath) {
         TaskList tasks1;
@@ -32,7 +34,10 @@ public class Duke {
     }
 
     /**
-     * Method that returns the response from running the Duke Program
+     * Method that returns the response from running the Duke Program.
+     * This response could either be a success string that has executed what the user
+     * has typed in or an error message if the program is unable to run the text
+     * that the user has keyed in.
      */
     public String getResponse(String input) {
         try {

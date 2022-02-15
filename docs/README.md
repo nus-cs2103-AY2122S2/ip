@@ -1,29 +1,29 @@
 # Duke User Guide
 
 ## Features
-#### Add tasks 
-Duke allows users add tasks to the task list. 
-There are three main types of tasks: 
+#### Add duke.tasks 
+Duke allows users add duke.tasks to the task list. 
+There are three main types of duke.tasks: 
 - Todos 
 - Events 
 - Deadlines 
 
-#### View tasks
-Duke allows users to view the tasks in the task list. 
+#### View duke.tasks
+Duke allows users to view the duke.tasks in the task list. 
 
-#### Mark/Unmark tasks 
+#### Mark/Unmark duke.tasks 
 Duke allows users to mark a task when the task is completed. Duke also allows
 users to unmark the task if they made a mistake when marking the task. 
 
-#### Delete tasks 
-Users can delete tasks from Duke if there are too many tasks in the task list. 
+#### Delete duke.tasks 
+Users can delete duke.tasks from Duke if there are too many duke.tasks in the task list. 
 
 
 ## Usage 
 
 ### `todo` - Add a todo task
 
-Adds a todo to the task list. Useful for tasks with no imminent deadlines. 
+Adds a todo to the task list. Useful for duke.tasks with no imminent deadlines. 
 
 Example of usage: 
 
@@ -34,12 +34,12 @@ Expected outcome:
 Duke will add the todo to the task list
 
 ```
-You now have a total of 9 tasks in your list! Subarashii!
+You now have a total of 9 duke.tasks in your list! Subarashii!
 ```
 
 ### `event` - Add an event task
 
-Adds an event to the task list. Useful for tasks that happens on a specific date.
+Adds an event to the task list. Useful for duke.tasks that happens on a specific date.
 
 Example of usage:
 
@@ -50,12 +50,12 @@ Expected outcome:
 Duke will add the event to the task list
 
 ```
-You now have a total of 9 tasks in your list! Subarashii!
+You now have a total of 9 duke.tasks in your list! Subarashii!
 ```
 
 ### `deadline` - Add an event task
 
-Adds a deadline to the task list. Useful for tasks that needs to be completed by a specific date.
+Adds a deadline to the task list. Useful for duke.tasks that needs to be completed by a specific date.
 
 Example of usage:
 
@@ -66,7 +66,7 @@ Expected outcome:
 Duke will add the deadline to the task list
 
 ```
-You now have a total of 9 tasks in your list! Subarashii!
+You now have a total of 9 duke.tasks in your list! Subarashii!
 ```
 
 ### `mark` - Mark a task
@@ -121,9 +121,9 @@ Duke will delete the first task in the list.
 ```
 
 
-### `list` - list all tasks in the task list
+### `list` - list all duke.tasks in the task list
 
-List tasks in the task list.
+List duke.tasks in the task list.
 
 Example of usage:
 
@@ -131,7 +131,7 @@ Example of usage:
 
 Expected outcome:
 
-Duke will list all tasks in the task list. 
+Duke will list all duke.tasks in the task list. 
 
 ```
  1. [T][ ] paynow money to friend

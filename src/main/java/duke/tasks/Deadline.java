@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 import duke.exceptions.DukeException;
 
 /**
- * Represents a deadline task
+ * Represents a deadline task. A deadline is something that needs to be completed by a
+ * specific date.
  */
 public class Deadline extends Task {
 
@@ -17,13 +18,12 @@ public class Deadline extends Task {
     protected LocalDate by;
     protected LocalDateTime byTime;
 
-
-
     /**
-     * Instantiates a new Deadline object
-     * @param description of the deadline
-     * @param by (duedate of the task)
-     * @throws DukeException if the date parsed is of an incorrect format
+     * Instantiates a new Deadline object.
+     * An exception is thrown if the program fails to parse the date/datetime provided.
+     * @param description Description of the deadline. (E.g. company meeting)
+     * @param by Date/Datetime of the deadline.
+     * @throws DukeException if the program is unable to parse the date/datetime field.
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
@@ -38,10 +38,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Method that converts a deadline to its storage file format
-     * @return A string that describes a deadline with its storage file format
+     * Method that converts a deadline to its storage file format.
+     * This format is what you will see in the storage file stored in the data folder.
+     * @return A string that describes a deadline with its storage file format.
      */
-
     @Override
     public String toFileFormat() {
         if (by != null) {
@@ -52,8 +52,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Method that converts a deadline to its display/string format
-     * @return A string that describes a deadline with its display format
+     * Method that converts a deadline to its UI format.
+     * This format is what will be shown to the user on the GUI.
+     * @return A string that describes a deadline with its UI format.
      */
     @Override
     public String toString() {
@@ -65,39 +66,41 @@ public class Deadline extends Task {
     }
 
     /**
-     * A method that takes in a string and checks if its in dateTime format
-     * @param dateTimeString duedate string
-     * @return A boolean that indicates if the string is in dateTime format
+     * A method that takes in a string and checks if its in dateTime format.
+     * Exception will be thrown if LocalDateTime library is unable to parse the string.
+     * @param dateTimeString Date/Datetime of the task in string form.
+     * @return A boolean that indicates if the string is in dateTime format.
      */
     private boolean isDateTimeFormat(String dateTimeString) {
         try {
             LocalDateTime.parse(dateTimeString, dateTimeFormat);
             return true;
         } catch (Exception e) {
-            System.out.println("Checking DateTime Format!");
+            // Empty catch block as the dateString could also be in date format
         }
         return false;
     }
 
     /**
-     * A method that takes in a string and check if its in date format
-     * @param dateString duedate string
-     * @return A boolean that indicates if a string is in date format
+     * A method that takes in a string and check if its in date format.
+     * Exception will be thrown if LocalDate library is unable to parse the string.
+     * @param dateString Date/Datetime of the task in string form.
+     * @return A boolean that indicates if a string is in date format.
      */
     private boolean isDateFormat(String dateString) {
         try {
             LocalDate.parse(dateString, dateFormat);
             return true;
         } catch (Exception e) {
-            System.out.println("Checking Date Format!");
+            // Empty catch block as the dateString could also be in datetime format
         }
         return false;
     }
 
     /**
-     * Takes in a dateTime object and converts it to the correct string display format
-     * @param dateTime dateTime object
-     * @return Formatted string containing details of the dateTime object
+     * Returns a string representing a formatted date-time given a LocalDateTime object.
+     * @param dateTime LocalDateTime object.
+     * @return String format of the LocalDateTime object.
      */
     public String formatDateTime(LocalDateTime dateTime) {
         String day = dateTime.getDayOfMonth() < 10
@@ -117,9 +120,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Takes in a date object and converts it to the correct string display format
-     * @param date date object
-     * @return Formatted string containing details of the Date object
+     * Returns a string representing a formatted date given a LocalDate object.
+     * @param date LocalDate object.
+     * @return String format of the LocalDate object.
      */
     public String formatDate(LocalDate date) {
         String day = date.getDayOfMonth() < 10

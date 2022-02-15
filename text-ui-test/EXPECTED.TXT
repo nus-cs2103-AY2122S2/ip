@@ -5,7 +5,7 @@ Konnichiwassup from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Here is the list of tasks we have saved!
+Here is the list of duke.tasks we have saved!
 Empty much!
 
 
@@ -14,22 +14,22 @@ ______________________________________
 What do you need help with?
 
 Added as per your request: [T][ ] something
-You now have a total of 1 tasks in your list! Subarashii!
+You now have a total of 1 duke.tasks in your list! Subarashii!
 
 ______________________________________
 
 Added as per your request: [D][ ] test test  (by: Sunday)
-You now have a total of 2 tasks in your list! Subarashii!
+You now have a total of 2 duke.tasks in your list! Subarashii!
 
 ______________________________________
 
 Added as per your request: [E][ ] drink coffee  (at: Sunday 2-4pm)
-You now have a total of 3 tasks in your list! Subarashii!
+You now have a total of 3 duke.tasks in your list! Subarashii!
 
 ______________________________________
 
 Added as per your request: [T][ ] list
-You now have a total of 4 tasks in your list! Subarashii!
+You now have a total of 4 duke.tasks in your list! Subarashii!
 
 ______________________________________
 

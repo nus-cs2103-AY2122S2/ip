@@ -1,24 +1,27 @@
 package duke.exceptions;
 
-/** Represents a duke exception that is thrown
- * when duke-related errors occur
+/** An exception that is thrown when there are problems running
+ *  the Duke program.
  */
 public class DukeException extends Exception {
 
     /**
-     * Instantiates a DukeException object
-     * @param errorMessage returns an error message
+     * Instantiates a DukeException.
+     * @param errorMessage The detail message.
+     * The detail message is saved for later retrieval by the Throwable.getMessage() method.
      */
     public DukeException(String errorMessage) {
         super(errorMessage);
     }
 
-    public DukeException() {
-    }
+    /**
+     * Default constructor that instantiates a DukeException without an error message.
+     */
+    public DukeException() {}
 
     /**
-     * Method that returns the string representation of the error
-     * @return A string of the error message
+     * Returns the detail message of the error that has occurred in the program.
+     * @return Detail message of a DukeException.
      */
     @Override
     public String toString() {

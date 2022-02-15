@@ -16,6 +16,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke("./data", "./data/duke.txt");
 
+    /**
+     * Main entry point for the Duke JavaFX application.
+     * @param stage Top-level JavaFX container.
+     */
     @Override
     public void start(Stage stage) {
         try {
