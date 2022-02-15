@@ -21,15 +21,15 @@ public class InputResponder {
      * @return String, the message
      */
     public String showHelpMsg() {
-        return "In case you forgot, here's how to create tasks:\n" +
-                "For tasks to do: todo <description>\n" +
-                "For deadlines: deadline <description> /by yyyy-mm-dd\n" +
-                "For events: event <description> /at <time>\n" +
-                "To mark/unmark a task: mark/unmark <taskNumber>\n" +
-                "To delete a task: delete <taskNumber>\n" +
-                "To find a task: find <description>\n" +
-                "To get deadlines not done, type: remind\n" +
-                "To exit, type: bye";
+        return "In case you forgot, here's how to create tasks:\n"
+                + "For tasks to do: todo <description>\n"
+                + "For deadlines: deadline <description> /by yyyy-mm-dd\n"
+                + "For events: event <description> /at <time>\n"
+                + "To mark/unmark a task: mark/unmark <taskNumber>\n"
+                + "To delete a task: delete <taskNumber>\n"
+                + "To find a task: find <description>\n"
+                + "To get deadlines not done, type: remind\n"
+                + "To exit, type: bye";
     }
 
     /**

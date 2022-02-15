@@ -58,12 +58,12 @@ public class MarkCommand extends Command {
     }
 
     private String getTaskNum() {
-        final int TASK_NUM_INDEX = 1;
-        return parsedArr[TASK_NUM_INDEX];
+        final int taskNumIndex = 1;
+        return parsedArr[taskNumIndex];
     }
 
     private String getAction() {
-        final int ACTION_INDEX = 0;
-        return parsedArr[ACTION_INDEX];
+        final int actionIndex = 0;
+        return parsedArr[actionIndex];
     }
 }

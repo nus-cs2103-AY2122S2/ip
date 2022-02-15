@@ -26,6 +26,10 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Returns a boolean expression whether the list is empty
+     * @return boolean
+     */
     public boolean isEmpty() {
         assert tasks.size() >= 0;
         return tasks.size() == 0;
@@ -67,21 +71,21 @@ public class TaskList {
         String description;
         LocalDate by;
         String at;
-        final int DESCRIPTION_INDEX = 0;
-        final int TIME_INDEX = 1;
+        final int descriptionIndex = 0;
+        final int timeIndex = 1;
         switch (taskType) {
         case TODO:
-            description = parsedArr[DESCRIPTION_INDEX];
+            description = parsedArr[descriptionIndex];
             newTask = new ToDo(description);
             break;
         case DEADLINE:
-            description = parsedArr[DESCRIPTION_INDEX];
-            by = LocalDate.parse(parsedArr[TIME_INDEX]);
+            description = parsedArr[descriptionIndex];
+            by = LocalDate.parse(parsedArr[timeIndex]);
             newTask = new Deadline(description, by);
             break;
         case EVENT:
-            description = parsedArr[DESCRIPTION_INDEX];
-            at = parsedArr[TIME_INDEX];
+            description = parsedArr[descriptionIndex];
+            at = parsedArr[timeIndex];
             newTask = new Event(description, at);
             break;
         default:
@@ -190,20 +194,20 @@ public class TaskList {
         String description;
         String by;
         String at;
-        int DESCRIPTION_INDEX = 0;
-        int TIME_INDEX = 1;
+        final int descriptionIndex = 0;
+        final int timeIndex = 1;
         switch (type) {
         case "todo":
-            description = taskArgs[DESCRIPTION_INDEX];
+            description = taskArgs[descriptionIndex];
             newTask = new ToDo(description);
             if (isDone.equals("X")) {
                 newTask.markDone();
             }
             break;
         case "deadline":
-            description = taskArgs[DESCRIPTION_INDEX];
+            description = taskArgs[descriptionIndex];
             // need convert Jan 28 2022 to 2022-01-28 LocalDate
-            by = taskArgs[TIME_INDEX];
+            by = taskArgs[timeIndex];
             LocalDate localDate = LocalDate.parse(by);
             newTask = new Deadline(description, localDate);
             if (isDone.equals("X")) {
@@ -211,8 +215,8 @@ public class TaskList {
             }
             break;
         case "event":
-            description = taskArgs[DESCRIPTION_INDEX];
-            at = taskArgs[TIME_INDEX];
+            description = taskArgs[descriptionIndex];
+            at = taskArgs[timeIndex];
             newTask = new Event(description, at);
             if (isDone.equals("X")) {
                 newTask.markDone();

@@ -79,6 +79,7 @@ public class CommandHandler {
                 break;
             case REMIND:
                 executeOutputMsg = inputResponder.showDeadlinesMsg(tasks);
+                break;
             default:
                 break;
             }
@@ -108,22 +109,22 @@ public class CommandHandler {
     }
 
     private String getIsDone(String[][] args) {
-        final int DONE_STATUS_ARR_INDEX = 2;
-        final int DONE_STATUS_INDEX = 0;
-        String isDone = args[DONE_STATUS_ARR_INDEX][DONE_STATUS_INDEX];
+        final int doneStatusArrIndex = 2;
+        final int doneStatusIndex = 0;
+        String isDone = args[doneStatusArrIndex][doneStatusIndex];
         return isDone;
     }
 
     private String getTypeForInit(String[][] args) {
-        final int TYPE_ARR_INDEX = 1;
-        final int TYPE_INDEX = 0;
-        String type = args[TYPE_ARR_INDEX][TYPE_INDEX];
+        final int typeArrIndex = 1;
+        final int typeIndex = 0;
+        String type = args[typeArrIndex][typeIndex];
         return type;
     }
 
     private String[] getTaskArgsForInit(String[][] args) {
-        final int TASK_ARGS_INDEX = 0;
-        String[] taskArgs = args[TASK_ARGS_INDEX];
+        final int taskArgsIndex = 0;
+        String[] taskArgs = args[taskArgsIndex];
         return taskArgs;
     }
 }

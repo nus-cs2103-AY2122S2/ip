@@ -114,8 +114,8 @@ public class Parser {
         case DELETE:
             parsedArr = input.split(" ");
             checkMarkOrDeleteInput(parsedArr, Type.DELETE);
-            final int TASK_NUM_INDEX = 1;
-            parsedArr = new String[]{ parsedArr[TASK_NUM_INDEX] };
+            final int taskNumIndex = 1;
+            parsedArr = new String[]{ parsedArr[taskNumIndex] };
             break;
         case FIND:
             parsedArr = input.split("find ");
@@ -134,10 +134,10 @@ public class Parser {
      * @throws InvalidArgumentException if user attempts to marks a marked task or unmark an unmarked task
      */
     void checkValidMarkAction(String[] parsedArr) throws InvalidArgumentException {
-        final int ACTION_INDEX = 0;
-        final int TASK_NUM_INDEX = 1;
-        String action = parsedArr[ACTION_INDEX];
-        int taskIndex = Integer.parseInt(parsedArr[TASK_NUM_INDEX]) - 1;
+        final int actionIndex = 0;
+        final int taskNumIndex = 1;
+        String action = parsedArr[actionIndex];
+        int taskIndex = Integer.parseInt(parsedArr[taskNumIndex]) - 1;
         if (action.equals("mark")) {
             tasks.getTask(taskIndex).checkMark();
         } else if (action.equals("unmark")) {
@@ -156,8 +156,8 @@ public class Parser {
         boolean isFullInput = parsedArr.length == 2;
         if (isFullInput) {
             try {
-                final int TASK_NUM_INDEX = 1;
-                String taskNum = parsedArr[TASK_NUM_INDEX];
+                final int taskNumIndex = 1;
+                String taskNum = parsedArr[taskNumIndex];
                 Integer.parseInt(taskNum);
                 tasks.checkTaskExists(taskNum);
             } catch (NumberFormatException nfe) {
@@ -186,12 +186,12 @@ public class Parser {
         String description;
         try {
             if (taskType.equals(Type.TODO) || taskType.equals(Type.FIND)) {
-                final int DESCRIPTION_INDEX = 1;
-                description = parsedArr[DESCRIPTION_INDEX];
+                final int descriptionIndex = 1;
+                description = parsedArr[descriptionIndex];
                 checkEmptyDescription(description);
             } else {
-                final int DESCRIPTION_PART_INDEX = 0;
-                description = extractDescriptionFromType(taskType, parsedArr[DESCRIPTION_PART_INDEX]);
+                final int descriptionPartIndex = 0;
+                description = extractDescriptionFromType(taskType, parsedArr[descriptionPartIndex]);
                 checkEmptyDescription(description);
             }
             checkDescriptionNotNumber(description);
@@ -222,9 +222,9 @@ public class Parser {
      * @return String, the description
      */
     private String extractDescriptionFromType(Type taskType, String parsedPart) {
-        final int DESCRIPTION_INDEX = 1;
+        final int descriptionIndex = 1;
         final String typePart = taskType.name().toLowerCase() + " ";
-        return parsedPart.split(typePart)[DESCRIPTION_INDEX];
+        return parsedPart.split(typePart)[descriptionIndex];
     }
 
     /**
@@ -254,8 +254,8 @@ public class Parser {
     String getTime(String[] parsedArr, Type taskType) throws InvalidArgumentException {
         try {
             if (taskType.equals(Type.DEADLINE)) {
-                final int TIME_INDEX = 1;
-                LocalDate checkValid = LocalDate.parse(parsedArr[TIME_INDEX]);
+                final int timeIndex = 1;
+                LocalDate checkValid = LocalDate.parse(parsedArr[timeIndex]);
             }
             return parsedArr[1];
         } catch (IndexOutOfBoundsException e) {
@@ -310,8 +310,8 @@ public class Parser {
      * @return String, the task type
      */
     String parseTaskInLine(String[] splitArr) {
-        final int LETTER_PART_INDEX = 1;
-        String letter = extractLetter(splitArr[LETTER_PART_INDEX]);
+        final int letterPartIndex = 1;
+        String letter = extractLetter(splitArr[letterPartIndex]);
         String type = null;
         switch (letter) {
         case "T":
@@ -345,8 +345,8 @@ public class Parser {
      *          or X (indicates done)
      */
     String isDoneStatusInLine(String[] splitArr) {
-        final int DONE_STATUS_PART_INDEX = 2;
-        return extractDoneStatus(splitArr[DONE_STATUS_PART_INDEX]);
+        final int doneStatusPartIndex = 2;
+        return extractDoneStatus(splitArr[doneStatusPartIndex]);
     }
 
     /**
@@ -365,17 +365,17 @@ public class Parser {
      * @return String[], args for creating event
      */
     String[] parseEventInLine(String[] splitArr) {
-        final int PARSING_PART_INDEX = 2;
-        final String SPLIT_SEP_AT = " \\(at: ";
-        final String SPLIT_SEP_DESCRIPTION = ".] ";
-        final int DESCRIPTION_PART_INDEX = 0;
-        final int DESCRIPTION_INDEX = 1;
-        final int TIMING_AT_INDEX = 1;
+        final int parsingPartIndex = 2;
+        final String splitSepAt = " \\(at: ";
+        final String splitSepDescription = ".] ";
+        final int descriptionPartIndex = 0;
+        final int descriptionIndex = 1;
+        final int timingAtIndex = 1;
 
-        String parsingPart = splitArr[PARSING_PART_INDEX];
-        String[] parsedArr = parsingPart.split(SPLIT_SEP_AT);
-        String description = parsedArr[DESCRIPTION_PART_INDEX].split(SPLIT_SEP_DESCRIPTION)[DESCRIPTION_INDEX];
-        String at = removeEndBracket(parsedArr[TIMING_AT_INDEX]);
+        String parsingPart = splitArr[parsingPartIndex];
+        String[] parsedArr = parsingPart.split(splitSepAt);
+        String description = parsedArr[descriptionPartIndex].split(splitSepDescription)[descriptionIndex];
+        String at = removeEndBracket(parsedArr[timingAtIndex]);
         return new String[]{ description, at };
     }
 
@@ -386,17 +386,17 @@ public class Parser {
      * @return String[], args for creating deadline
      */
     String[] parseDeadlineInLine(String[] splitArr) {
-        final int PARSING_PART_INDEX = 2;
-        final String SPLIT_SEP_AT = " \\(by: ";
-        final String SPLIT_SEP_DESCRIPTION = ".] ";
-        final int DESCRIPTION_PART_INDEX = 0;
-        final int DESCRIPTION_INDEX = 1;
-        final int DEADLINE_INDEX = 1;
+        final int parsingPartIndex = 2;
+        final String splitSepAt = " \\(by: ";
+        final String splitSepDescription = ".] ";
+        final int descriptionPartIndex = 0;
+        final int descriptionIndex = 1;
+        final int deadlineIndex = 1;
 
-        String parsingPart = splitArr[PARSING_PART_INDEX];
-        String[] parsedArr = parsingPart.split(SPLIT_SEP_AT);
-        String description = parsedArr[DESCRIPTION_PART_INDEX].split(SPLIT_SEP_DESCRIPTION)[DESCRIPTION_INDEX];
-        String by = removeEndBracket(parsedArr[DEADLINE_INDEX]);
+        String parsingPart = splitArr[parsingPartIndex];
+        String[] parsedArr = parsingPart.split(splitSepAt);
+        String description = parsedArr[descriptionPartIndex].split(splitSepDescription)[descriptionIndex];
+        String by = removeEndBracket(parsedArr[deadlineIndex]);
         String byInLocalDateFormat = changeDateFormat(by);
         return new String[]{ description, byInLocalDateFormat };
     }
@@ -408,11 +408,11 @@ public class Parser {
      * @return String[], args for creating todo
      */
     String[] parseToDoInLine(String[] splitArr) {
-        final int PARSING_PART_INDEX = 2;
-        final String SPLIT_SEP_DESCRIPTION = ".] ";
-        final int DESCRIPTION_INDEX = 1;
-        String parsingPart = splitArr[PARSING_PART_INDEX];
-        String description = parsingPart.split(SPLIT_SEP_DESCRIPTION)[DESCRIPTION_INDEX];
+        final int parsingPartIndex = 2;
+        final String splitSepDescription = ".] ";
+        final int descriptionIndex = 1;
+        String parsingPart = splitArr[parsingPartIndex];
+        String description = parsingPart.split(splitSepDescription)[descriptionIndex];
         return new String[]{ description };
     }
 
@@ -432,14 +432,14 @@ public class Parser {
      * @return date in yyyy-mm-dd format
      */
     String changeDateFormat(String date) {
-        final int MONTH_INDEX = 0;
-        final int DAY_INDEX = 1;
-        final int YEAR_INDEX = 2;
-        final String WHITESPACE = " ";
-        String[] splitArr = date.split(WHITESPACE);
-        String year = splitArr[YEAR_INDEX];
-        String day = splitArr[DAY_INDEX];
-        String month = splitArr[MONTH_INDEX];
+        final int monthIndex = 0;
+        final int dayIndex = 1;
+        final int yearIndex = 2;
+        final String whitespace = " ";
+        String[] splitArr = date.split(whitespace);
+        String year = splitArr[yearIndex];
+        String day = splitArr[dayIndex];
+        String month = splitArr[monthIndex];
         String numericMonth = null;
         switch (month) {
         case "Jan":

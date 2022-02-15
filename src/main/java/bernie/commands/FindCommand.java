@@ -43,8 +43,8 @@ public class FindCommand extends Command {
     }
 
     private String getDescription() {
-        final int DESCRIPTION_INDEX = 0;
-        String description = parsedArr[DESCRIPTION_INDEX];
+        final int descriptionIndex = 0;
+        String description = parsedArr[descriptionIndex];
         return description;
     }
 }

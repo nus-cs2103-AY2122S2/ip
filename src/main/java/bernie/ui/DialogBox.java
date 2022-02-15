@@ -22,22 +22,21 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String USER = "user";
+    private static final String BERNIE = "bernie";
+    private static final String USER_STYLE = "-fx-label-padding: 10 20; "
+            + "-fx-background-insets: 5; "
+            + "-fx-background-radius: 20; "
+            + "-fx-background-color: #ADD8E6";
+    private static final String BERNIE_STYLE = "-fx-label-padding: 10 20; "
+            + "-fx-background-insets: 5; "
+            + "-fx-background-radius: 20; "
+            + "-fx-background-color: #EBECF0";
     @FXML
     private Label dialog;
 
     @FXML
     private ImageView displayPicture;
-
-    private static final String USER = "user";
-    private static final String BERNIE = "bernie";
-    private static final String USER_STYLE = "-fx-label-padding: 10 20; " +
-            "-fx-background-insets: 5; " +
-            "-fx-background-radius: 20; " +
-            "-fx-background-color: #ADD8E6";
-    private static final String BERNIE_STYLE = "-fx-label-padding: 10 20; " +
-            "-fx-background-insets: 5; " +
-            "-fx-background-radius: 20; " +
-            "-fx-background-color: #EBECF0";
 
     private DialogBox(String text, Image img, String type) {
         try {

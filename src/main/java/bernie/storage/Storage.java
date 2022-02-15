@@ -79,13 +79,13 @@ public class Storage {
                      BufferedReader reader) throws IOException {
         while (true) {
             String line = reader.readLine();
-            final String NO_TASKS = "NOTHING! :D";
+            String noTasks = "NOTHING! :D";
             if (line == null) {
                 break;
             }
             // previously made text file, but text file has no tasks
-            if (line.equals(NO_TASKS)) {
-                s.append(NO_TASKS);
+            if (line.equals(noTasks)) {
+                s.append(noTasks);
                 break;
             }
             commandHandler.initTaskOnLoad(line);
@@ -112,7 +112,7 @@ public class Storage {
                 assert fileExists;
             }
             save(tasks);
-            String successMsg = "Successfully saved current tasks. " + root;
+            String successMsg = "Successfully saved current tasks.";
             return successMsg;
         } catch (IOException e) {
             return e.getMessage();

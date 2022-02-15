@@ -26,6 +26,7 @@ public class MainApp extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("Bernie");
+            stage.setResizable(false);
             stage.getIcons().add(bernieImg);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setBernie(bernie);

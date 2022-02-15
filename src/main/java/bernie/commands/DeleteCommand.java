@@ -48,8 +48,8 @@ public class DeleteCommand extends Command {
     }
 
     private String getTaskNum() {
-        final int TASK_NUM_INDEX = 0;
-        String taskNum = parsedArr[TASK_NUM_INDEX];
+        final int taskNumIndex = 0;
+        String taskNum = parsedArr[taskNumIndex];
         return taskNum;
     }
 }
