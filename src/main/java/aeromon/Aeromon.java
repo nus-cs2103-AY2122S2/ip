@@ -57,6 +57,8 @@ public class Aeromon {
      * @return The response String.
      */
     public String getResponse(String input) {
+        assert input != null : "Input is null";
+
         try {
             Command command = CommandManager.read(input);
             return command.execute(taskList, ui, storage);
