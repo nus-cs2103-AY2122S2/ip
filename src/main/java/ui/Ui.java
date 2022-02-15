@@ -70,7 +70,7 @@ public class Ui extends Application {
     }
 
     private void initialise() {
-        Label acknowledgement = new Label("UI design inspired by @jon-foocy");
+        Label acknowledgement = new Label("UI design inspired by @jonfoocy");
         acknowledgement.setTextFill(Color.PURPLE);
         dialogContainer.getChildren().add(acknowledgement);
         dialogContainer.setAlignment(Pos.TOP_CENTER);
