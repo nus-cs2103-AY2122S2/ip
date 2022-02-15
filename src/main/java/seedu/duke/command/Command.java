@@ -6,8 +6,9 @@ import seedu.duke.task.TaskList;
 
 import java.io.IOException;
 
-
-
+/**
+ * Used to make different commands to be executed by chatbot.
+ */
 public abstract class Command {
     /**
      *Executes a command.

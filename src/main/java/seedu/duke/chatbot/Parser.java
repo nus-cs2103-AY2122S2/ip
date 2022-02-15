@@ -9,8 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 
-//Duke can only handle 10 to dos
-
 /**
  * Handles commands from users in String and filters the information needed to create {@link Command}.
  */
@@ -84,14 +82,11 @@ public class Parser {
     int parseForMark(String command) throws DukeException {
         int indexInCommand = 5;
         //command is given as "mark 5" so index 5 is where "5" is at
-
         if (command.length() <= 5) { //e.g. mark vs "mark 1" (correct)
             throw new NoValidTaskIndexException();
         }
-
         //-1 because index in taskList is 0 based but command uses 1-based index
         int indexOfTaskToMark =  this.parseForTaskIndex(command, indexInCommand);
-
         return indexOfTaskToMark;
     }
 
@@ -102,13 +97,11 @@ public class Parser {
      * @throws DukeException if an invalid task number is given from user
      */
     int parseForUnmark(String command) throws DukeException {
-        int indexInCommand = 7;
         //command is given as "unmark 5" so index 7 is where the task index to parse, "5" is at
-
+        int indexInCommand = 7;
         if (command.length() <= 7) { //e.g. "unmark " vs "unmark 1" (correct)
             throw new NoValidTaskIndexException();
         }
-
         int indexToUnmark = this.parseForTaskIndex(command, indexInCommand);
 
         return indexToUnmark;
@@ -122,20 +115,16 @@ public class Parser {
      */
     int parseForDelete(String command) throws DukeException {
         try {
-            int indexInCommand = 7;
             //command is given as "delete <task number>" so task number is at index 7
-
+            int indexInCommand = 7;
             if (command.length() <= 7) { //e.g. "delete " vs "delete 1" (correct)
                 throw new NoValidTaskIndexException();
             }
-            //+1 in substring is in case of extra space at the end
-            //-1 is because 1 based index is used in command
-
             int indexToUnmark = this.parseForTaskIndex(command, indexInCommand);
 
             return indexToUnmark;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Problem with parseForDelete");
+            throw new DukeException("Problem with deleting task :(");
         }
     }
 
@@ -146,13 +135,11 @@ public class Parser {
      * @throws DukeException if an incomplete command is given from user
      */
     Task parseForTodo(String command) throws DukeException {
-        int indexTaskName = 5;
         //command is given as "todo <taskName>" so task name starts at index 5
-
+        int indexTaskName = 5;
         if (command.length() <= 5) {
             throw new IncompleteCommandException();
         }
-
         String taskName = command.substring(indexTaskName);
 
         return new ToDo(taskName);
@@ -170,7 +157,7 @@ public class Parser {
             LocalDateTime date = LocalDateTime.from(ta);
             return date;
         } catch (DateTimeParseException e) {
-            return null;
+            throw new DukeException("Unable to get date properly :(");
         }
     }
 
@@ -181,36 +168,39 @@ public class Parser {
      * @throws DukeException if an incomplete command is given from user
      */
     Task parseForDeadline(String command) throws DukeException {
-        int indexTaskName = 9;
         //command is given as "deadline <taskname> /by <date>" so index 9 is where task name starts
-
+        int indexTaskName = 9;
         if (command.length() <= 9) { //e.g. "deadline " vs "deadline return book /by Sunday" (correct)
             throw new IncompleteCommandException();
         }
-
         //command is given as "deadline <taskname> /at <date>" so find "/by"
         // to find where to cut the string for <date>
         int dateMarkerIndex = command.indexOf("/by");
-
         if (dateMarkerIndex == -1) { // "/" does not exist
             throw new NoDateException();
         }
-
         String taskName = command
-                .substring(indexTaskName, dateMarkerIndex);
-        //command is given as "deadline <taskname> /by <date>" so <date> can be found
-        // +4 away from index of "/"
+                .substring(indexTaskName, dateMarkerIndex - 1); //-1 because TASK_NAME /by, so there is a spacing
+        LocalDateTime date = this.createDateForDeadline(command, dateMarkerIndex);
+        return new Deadline(taskName, date);
+    }
+
+    /**
+     * Creates a LocalDateTime object that represents the end date for Deadline object.
+     * @param command which contains the input
+     * @param dateMarkerIndex which is the index of the marker in command for where date is stored
+     * @return LocalDateTime object that represents end date
+     * @throws DukeException if command is wrong
+     */
+    LocalDateTime createDateForDeadline(String command, int dateMarkerIndex) throws DukeException {
+        //command is given as "deadline <taskname> /by <date>" so +4 away from index of "/"
         int indexStartOfDate = dateMarkerIndex + 4;  //"/by yyyy-mm-dd hh:mm"
         if (indexStartOfDate >= command.length()) {
-            //e.g."deadline /" is invalid ; "deadline /by " is also invalid
-            // because there is no date after "/by"
             throw new NoDateException();
         }
-
         String dateString = command.substring(indexStartOfDate);
         LocalDateTime date = this.getLocalDateTimeFromDate(dateString);
-
-        return new Deadline(taskName, date);
+        return date;
     }
 
     /**
@@ -222,38 +212,58 @@ public class Parser {
     Task parseForEvent(String command) throws DukeException {
         int indexTaskName = 6;
         //command is given as "event <taskname> /at <startDate> /to <endDate>" so index 7 is where the task index to parse, "5" is at
-
         if (command.length() <= 6) { //e.g. "event " vs "event project meeting /at Mon 2-4pm"
             throw new IncompleteCommandException();
         }
-
         //command is given as "event <taskname> /at <date>" so find "/at"
-        // to find where to cut the string for <date>
         int dateMarkerIndex = command.indexOf("/at");
         if (dateMarkerIndex == -1) {
             throw new NoDateException();
         }
         //+2 is because of "at " that occurs before the date then +1 for a space "at "
         String taskName = command
-                .substring(indexTaskName, dateMarkerIndex);
+                .substring(indexTaskName, dateMarkerIndex - 1); // taskName /at
 
+        LocalDateTime startDate = this.createStartDateForEvent(command, dateMarkerIndex);
+        LocalDateTime endDate = this.createEndDateForEvent(command);
+
+        return new Event(taskName, endDate, startDate);
+    }
+
+    /**
+     * Create start date for event based on user input.
+     * @param command that provides user input
+     * @param dateMarkerIndex that provides location of where start date is
+     * @return LocalDateTime referring to start date for event
+     * @throws DukeException if date cannot be obtained
+     */
+    LocalDateTime createStartDateForEvent(String command, int dateMarkerIndex) throws DukeException {
         //command is given as "event <taskname> /at <startDate> /to <endDate>" so <date> can be found
         // +4 away from index of "/"
         int indexStartDate = dateMarkerIndex + 4;  //"/at <date>"
         if (indexStartDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
             throw new NoDateException();
         }
-
         int indexOfTo = command.indexOf("/to");
 
         String startDateString = command.substring(indexStartDate, indexOfTo - 1); // /at <date> /to
         LocalDateTime startDate = this.getLocalDateTimeFromDate(startDateString);
 
+        return startDate;
+    }
+
+    /**
+     * Create end date for event based on user input.
+     * @param command that provides user input
+     * @return LocalDateTime referring to end date for event
+     * @throws DukeException if date cannot be obtained
+     */
+    LocalDateTime createEndDateForEvent(String command) throws DukeException {
+        int indexOfTo = command.indexOf("/to");
         int indexEndDate = indexOfTo + 4; ///to <endDate>
         String endDateString = command.substring(indexEndDate);
         LocalDateTime endDate = this.getLocalDateTimeFromDate(endDateString);
-
-        return new Event(taskName, endDate, startDate);
+        return endDate;
     }
 
     /**
@@ -266,6 +276,12 @@ public class Parser {
         return command.substring(5);
     }
 
+    /**
+     * Parses a command that seeks to add a note to a Task.
+     * @param command is a string like "add note to task TASK_NUMBER NOTE_CONTENT"
+     * @return a string that contains the NOTE_CONTENT
+     * @throws DukeException if NOTE_CONTENT cannot be retrieved
+     */
     String parseForAddNoteContent(String command) throws DukeException {
         //command is given as "add note to task <task number> <note content>"
         //e.g. add note to 1 remind groupmates"
@@ -273,6 +289,12 @@ public class Parser {
         return this.parseForContent(command, indexToStart);
     }
 
+    /**
+     * Parses a command that seeks to add a note to a Task by finding the index of task to add to.
+     * @param command is a string like "add note to task TASK_NUMBER NOTE_CONTENT"
+     * @return a int that contains the index of the Task to add the note to
+     * @throws DukeException if index cannot be retrieved
+     */
     int parseForAddNoteTaskIndex(String command) throws DukeException {
         //command is given as "add note to <task number> <note content>"
         //e.g. add note 1 remind groupmates"
@@ -284,6 +306,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a command that seeks to show the notes attached to a Task.
+     * @param command is a string like "show note from task TASK_NUMBER"
+     * @return a int that contains the index of the Task to show the notes of
+     * @throws DukeException if index of task cannot be retrieved
+     */
     int parseForShowNoteTaskIndex(String command) throws DukeException {
         //command is given as "show note from task <task number>"
         //e.g. show note 1
@@ -295,6 +323,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a command that seeks to delete a note from a Task.
+     * @param command is a string like "clear note NOTE_NUMBER from task TASK_NUMBER"
+     * @return a int that contains the index of the note to delete from the Note List
+     * @throws DukeException if index cannot be retrieved
+     */
     int parseForDeleteNoteTaskIndex(String command) throws DukeException {
         //command is given as "clear note <notenumber> from <tasknumber>"
         try {
@@ -305,6 +339,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a command that seeks to delete a note from a Task.
+     * @param command is a string like "clear note NOTE_NUMBER from task TASK_NUMBER"
+     * @return a int that contains the index of the task to delete the note from
+     * @throws DukeException if index cannot be retrieved
+     */
     int parseForDeleteNoteIndex(String command) throws DukeException {
         //command is given as "clear note <notenumber> from task <taskNumber>"
         try {
@@ -315,6 +355,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a command that seeks to edit a note from a task.
+     * @param command is a string like "edit note NOTE_NUMBER from task TASK_NUMBER"
+     * @return a int that contains the index of the note to edit from the Note List
+     * @throws DukeException if index cannot be retrieved
+     */
     int parseForEditNoteTaskIndex(String command) throws DukeException {
         //command is given as "edit note <notenumber> from task <tasknumber> <noteContent>"
         try {
@@ -325,6 +371,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a command that seeks to edit a note from a task.
+     * @param command is a string like "edit note NOTE_NUMBER from task TASK_NUMBER"
+     * @return a int that contains the index of the task to edit from the task list
+     * @throws DukeException if index cannot be retrieved
+     */
     int parseForEditNoteIndex(String command) throws DukeException {
         //command is given as "edit note <notenumber> from task <tasknumber> <noteContent>"
         try {
@@ -335,6 +387,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a command that seeks to edit a note from a task by finding the content of the note.
+     * @param command is a string like "edit note NOTE_NUMBER from task TASK_NUMBER"
+     * @return a String that contains the new note content
+     * @throws DukeException if content cannot be retrieved
+     */
     String parseForEditNoteContent(String command) throws DukeException {
         //command is given as "edit note <notenumber> from task <tasknumber> <noteContent>"
         int indexToStart = 24;
@@ -352,6 +410,12 @@ public class Parser {
                 .parseInt(command.substring(indexInCommand, indexInCommand + 1)) - 1;
     }
 
+    /**
+     * Parses for content.
+     * @param command is a string that contains content to be retrieved.
+     * @return a int that contains the index of where the content starts in the command
+     * @throws DukeException if content cannot be retrieved
+     */
     String parseForContent(String command, int indexContent) throws DukeException {
         try {
             return command.substring(indexContent);

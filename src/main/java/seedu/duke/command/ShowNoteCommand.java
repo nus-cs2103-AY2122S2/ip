@@ -6,6 +6,9 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
+/**
+ * Used when user wants to check the notes attached to a task.
+ */
 public class ShowNoteCommand extends Command {
     private final int taskIndex;
 

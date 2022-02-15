@@ -1,5 +1,8 @@
 package seedu.duke.task;
 
+/**
+ * A Task that has no end date or start date.
+ */
 public class ToDo extends Task {
     private final String taskType = "T";
 

@@ -33,13 +33,7 @@ public class Ui {
      * @return the name of user to personalise interaction after welcome
      */
     public static String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        return "Hello from\n" + logo;
+        return "Hello from No Face. No gold, only productivity today. What can I do?";
     }
 
     /**
@@ -140,19 +134,36 @@ public class Ui {
                         updatedTask.toString());
     }
 
+    /**
+     * Used to show result after Show Note Command.
+     * @param taskList is the updated tasklist after command is executed
+     * @param taskToShow is the task contains the notes to be shown
+     * @return a string to be printed to user
+     */
     public static String showNote(TaskList taskList, Task taskToShow) {
         return String
                 .format("%s:\n%s",
                         taskToShow.toString(),taskToShow.getNoteResult());
     }
 
+    /**
+     * Used to show result after Clear Note Command.
+     * @param taskList is the updated task list after command is executed
+     * @param updatedTask is the task that had the note deleted from it
+     * @return a string to be printed to user
+     */
     public static String showDeleteNoteResult(TaskList taskList, Task updatedTask) {
         return String.format("Got it! I've deleted the note from %s",updatedTask.toString());
     }
 
+    /**
+     * Used to show result after Edit Note Command.
+     * @param taskList is the updated tasklist after command is executed
+     * @param updatedTask is the task that had the note edited
+     * @return a string to be printed to user
+     */
     public static String showEditNoteResult(TaskList taskList, Task updatedTask) {
         return String.format("Got it! I've edited the note from %s",updatedTask.toString());
     }
-
 
 }

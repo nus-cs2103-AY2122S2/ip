@@ -22,9 +22,11 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            //@@author {@isabelteo}-reused
+            // apply CSS : referenced from Olivia Johansen's project at https://github.com/oliviajohansen
             scene.getStylesheets().addAll(this.getClass().getResource("/view/application.css").toExternalForm());
+           //@@author
             stage.setScene(scene);
-            //apply CSS : referenced from Olivia Johansen's project at https://github.com/oliviajohansen
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

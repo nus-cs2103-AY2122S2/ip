@@ -2,8 +2,6 @@ package seedu.duke.task;
 
 import java.time.LocalDateTime;
 
-//fix the dateTime for event
-
 /**
  * Used when user wants to create a {@link Task} with start and end date or time.
  */
