@@ -29,6 +29,8 @@ public class TaskList {
      * @param task Task to be added to the list.
      */
     public void add(Task task) {
+        assert task != null : "Task to be added cannot be null.";
+
         list.add(task);
     }
 
@@ -39,6 +41,9 @@ public class TaskList {
      * @return A string reply that indicates the removal of task from the list.
      */
     public String delete(String input) {
+        assert input != null : "Input from user to delete a task cannot be null.";
+        assert input.length() > 0 : "Input from user to delete a task  cannot be empty.";
+
         try {
             int i = Integer.parseInt(input.strip()) - 1;
 
@@ -67,6 +72,9 @@ public class TaskList {
      * @return A string reply that notifies the user that the task is marked.
      */
     public String markTask(String input) {
+        assert input != null : "Input from user to mark a task cannot be null.";
+        assert input.length() > 0 : "Input from user to mark a task cannot be empty.";
+
         try {
             int i = Integer.parseInt(input.strip()) - 1;
 
@@ -89,6 +97,9 @@ public class TaskList {
      * @return A string reply that notifies the user that the task is unmarked.
      */
     public String unMarkTask(String input) {
+        assert input != null : "Input from user to unmark a task cannot be null.";
+        assert input.length() > 0 : "Input from user to unmark a task cannot be empty.";
+
         try {
             int i = Integer.parseInt(input.strip()) - 1;
 
@@ -127,6 +138,8 @@ public class TaskList {
      * @param data Tasks from the text file to be populated into the list.
      */
     public void fetchData(ArrayList<Task> data) {
+        assert data != null : "Data from text file cannot be null.";
+
         list.clear();
         list.addAll(data);
     }
@@ -138,6 +151,8 @@ public class TaskList {
      * @return A string reply consisting of all the tasks that corresponds to the keyword in the list.
      */
     public String find(String input) {
+        assert input != null : "Input from user to find a task cannot be null.";
+
         int i = 0;
         StringBuilder listBuilder = new StringBuilder();
 

@@ -31,6 +31,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert input != null : "Input from user to get a response cannot be null.";
+        assert input.length() > 0 : "Input from user to get a response cannot be empty.";
+
         String response = parser.parse(input);
 
         return "Duke: \n\n" + response;

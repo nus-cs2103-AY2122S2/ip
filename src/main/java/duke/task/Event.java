@@ -19,6 +19,9 @@ public class Event extends Task {
     public Event(String description, LocalDate date) {
         super(description, "E", date);
         this.date = date;
+        assert description != null : "Description of event cannot be null.";
+        assert description.length() > 0 : "Body of event cannot be empty.";
+        assert date != null : "Event date cannot be null.";
     }
 
     /**
