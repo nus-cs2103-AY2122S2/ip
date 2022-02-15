@@ -20,47 +20,47 @@ Need a program written by java to help you keep track of your tasks ? ChatCat is
 Format: `todo <description of task>`  
 Usage: `todo code this`  
 #### Expected outcome:
-![](images/todo.png)
+![](assets/todo.png)
 
 ### `event` - Add event task
 format: `event <description of event> /at <YYYY-MM-dd HH:mm>`  
 Usage: `event code now /at 2020-11-21 20:01`  
 #### Expected outcome:
-![](images/event.png)
+![](assets/event.png)
 
 ### `deadline` - Add deadline task
 format: `deadline <description of deadline> /by <YYYY-MM-dd HH:mm>`  
 Usage: `deadline code that /by 2020-11-21 20:01`  
 #### Expected outcome:
-![](images/deadline.png)
+![](assets/deadline.png)
 
 ### `mark` - Mark task as completed
 Format: `mark <index of task to mark>`  
 Usage: `mark 1`  
 #### Expected outcome:
-![](images/mark.png)
+![](assets/mark.png)
 
 ### `unmark` - Unmarks task that was previously marked as completed
 Format: `unmark <index of task to mark>`  
 Usage: `unmark 1`  
 #### Expected outcome:
-![](images/unmark.png)
+![](assets/unmark.png)
 
 ### `delete` - Delete a task
 Format: `delete <index of task to be deleted>`  
 Usage: `delete 1`  
 #### Expected outcome:
-![](images/delete.png)
+![](assets/delete.png)
 
 ### `find` - find all tasks that contain a keyword
 Format: `find <keyword>`  
 Usage: `find that`  
 #### Expected outcome:  
-![](images/find.png)
+![](assets/find.png)
 
 ### `list` - List all tasks
 Format: `list`  
 Usage: `list`  
 #### Expected outcome:
-![](images/list.png)
+![](assets/list.png)
 
