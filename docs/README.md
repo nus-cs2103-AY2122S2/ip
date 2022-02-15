@@ -195,7 +195,7 @@ Adds the event task regardless of whether the task is a duplicate
 
 Example of usage:
 
-`event birthday celebration /at 2022-03-12`
+`fevent birthday celebration /at 2022-03-12`
 
 Expected outcome:
 
