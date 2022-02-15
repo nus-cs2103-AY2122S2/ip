@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private Image dukeIcon = new Image(this.getClass().getResourceAsStream("/images/DaIcon.png"));
 
     @Override
     public void start(Stage stage) {
@@ -23,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
 
             stage.setTitle("Koro Task Manager");
+            stage.getIcons().add(dukeIcon);
             stage.setResizable(false);
             stage.setScene(scene);
 
