@@ -33,6 +33,6 @@ public class FindCommand extends Command {
             return (new BaronException("Please provide a keyword!")).toString();
         }
         return "Here are the matching tasks in your list:\n"
-                + (new TaskManager(this.taskManager.filterDescByKeyword(this.keyword))).toString();
+                + this.taskManager.filterDescByKeyword(this.keyword);
     }
 }

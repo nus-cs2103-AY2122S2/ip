@@ -204,20 +204,20 @@ public class TaskManager {
     }
 
     /**
-     * Filters the task list in this {@code TaskManager} by the specified {@code keyword}.
+     * Filters the task list in this {@code TaskManager} by the specified {@code keyword}, and returns its string
+     * representation. This filter is not case-sensitive.
      *
      * @param keyword the keyword to filter the task list by.
-     * @return the filtered task list.
+     * @return the string representation of the filtered task list.
      */
-    public ArrayList<Task> filterDescByKeyword(String keyword) {
-        ArrayList<Task> filteredTaskList = new ArrayList<>();
-        this.taskList.forEach((task -> {
-            if (task.description.contains(keyword)) {
-                filteredTaskList.add(task);
+    public String filterDescByKeyword(String keyword) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < this.getTaskCount(); i++) {
+            if (this.taskList.get(i).description.toLowerCase().contains(keyword.toLowerCase())) {
+                output.append("  ").append(i + 1).append(".").append(this.taskList.get(i)).append("\n");
             }
-        }));
-
-        return filteredTaskList;
+        }
+        return output.toString().stripTrailing();
     }
 
     /**
