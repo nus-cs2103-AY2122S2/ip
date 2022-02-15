@@ -24,3 +24,41 @@ Format:
 - `todo TASK_DESC`
 - TASK_DESC cannot be empty.
 
+Example:
+- `todo study for quiz`
+
+### Add Event
+Format:
+- `event TASK_DESC /at YYYY-MM-DD`
+- TASK_DESC and YYYY-MM-DD cannot be empty.
+
+Example:
+- `event engineering quiz /at 2022-03-03`
+
+### Add Deadline
+Format:
+- `deadline TASK_DESC /by YYYY-MM-DD`
+- TASK_DESC and YYYY-MM-DD cannot be empty.
+
+Example:
+- `deadline engineering homework /by 2022-03-05`
+
+### Mark task
+Format:
+- `mark TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+Example:
+- `mark 2`
+
+### Unmark task
+Format:
+- `ummark TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+Example:
+- `ummark 2`
+
+
+
+
