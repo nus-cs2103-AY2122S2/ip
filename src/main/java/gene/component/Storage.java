@@ -99,20 +99,20 @@ public class Storage {
                 String[] tokens = line.split(" / ");
                 boolean isMarked = tokens[tokens.length - 1].equals("1");
                 switch(tokens[0]) {
-                case "todo":
-                    String todoTitle = tokens[1];
-                    this.itemList.add(new TodoTask(todoTitle, isMarked));
-                    break;
-                case "event":
-                    String eventTitle = tokens[1];
-                    String eventDeadline = tokens[2];
-                    this.itemList.add(new EventTask(eventTitle, LocalDateTime.parse(eventDeadline, formatter), isMarked));
-                    break;
-                case "deadline":
-                    String deadlineTitle = tokens[1];
-                    String deadlineDeadline = tokens[2];
-                    this.itemList.add(new DeadlineTask(deadlineTitle, LocalDateTime.parse(deadlineDeadline, formatter), isMarked));
-                    break;
+                    case "todo":
+                        String todoTitle = tokens[1];
+                        this.itemList.add(new TodoTask(todoTitle, isMarked));
+                        break;
+                    case "event":
+                        String eventTitle = tokens[1];
+                        String eventDeadline = tokens[2];
+                        this.itemList.add(new EventTask(eventTitle, LocalDateTime.parse(eventDeadline, formatter), isMarked));
+                        break;
+                    case "deadline":
+                        String deadlineTitle = tokens[1];
+                        String deadlineDeadline = tokens[2];
+                        this.itemList.add(new DeadlineTask(deadlineTitle, LocalDateTime.parse(deadlineDeadline, formatter), isMarked));
+                        break;
                 }
             }
             fileReader.close();
@@ -122,7 +122,6 @@ public class Storage {
         }
 
         this.targetFile = new File(this.absolutePath.toString());
-        assert targetFile.exists();
 
         return this.itemList;
     }

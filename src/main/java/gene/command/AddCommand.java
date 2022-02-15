@@ -49,10 +49,6 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui userInt, Storage storage) {
-        assert tasks != null;
-        assert userInt != null;
-        assert storage != null;
-
         switch (this.taskType) {
         case "todo":
             return addTodo(taskBody, userInt, storage, tasks);
