@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +20,21 @@ import mickey.task.ToDo;
  * Storage object to perform task load and store from tasks.txt file.
  */
 public class Storage {
+    /** Name of the file containing saved tasks. */
+    private final String fileName;
+
     /** Path of the file containing saved tasks. */
     private final String filePath;
 
     /**
      * Constructor.
      *
-     * @param filePath path of the file containing saved tasks.
+     * @param fileName path of the file containing saved tasks.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String fileName) {
+        String wd = System.getProperty("user.dir");
+        this.filePath = Path.of(wd + File.separator + "data").toAbsolutePath().toString();
+        this.fileName = fileName;
     }
 
     /**
@@ -39,7 +45,7 @@ public class Storage {
      */
     public List<Task> load() throws MickeyException {
         List<Task> tasks = new ArrayList<>();
-        File f = new File(filePath);
+        File f = new File(this.filePath + File.separator + this.fileName);
         if (f.exists()) {
             try {
                 Scanner sc = new Scanner(f);
@@ -80,7 +86,9 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter(filePath);
+            File f = new File(this.filePath);
+            f.mkdir();
+            FileWriter fw = new FileWriter(this.filePath + File.separator + this.fileName);
             for (Task t : tasks.getTasks()) {
                 StringBuilder newTask = new StringBuilder();
                 if (t instanceof ToDo) {

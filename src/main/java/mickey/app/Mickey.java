@@ -9,7 +9,7 @@ import mickey.task.TaskList;
 public class Mickey {
 
     /** Path of storage file. */
-    private static final String filePath = "src/main/data/save.txt";
+    private static final String fileName = "save.txt";
 
     /** Storage to save and load previous tasks. */
     private final Storage storage;
@@ -25,7 +25,7 @@ public class Mickey {
      */
     public Mickey() {
         ui = new Ui();
-        storage = new Storage(Mickey.filePath);
+        storage = new Storage(Mickey.fileName);
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
