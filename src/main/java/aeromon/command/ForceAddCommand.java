@@ -9,10 +9,11 @@ import aeromon.task.ToDo;
 
 import java.time.LocalDate;
 
+/**
+ * ForceAddCommand class handles the forceAdd commands which adds the task into the taskArrayList,
+ * regardless of whether the task is a duplicate task.
+ */
 public class ForceAddCommand extends AddCommand {
-
-    private AddCommand.TaskType taskType;
-    private String[] tokens;
 
     private static final String STARTING_MESSAGE = "Nicely! I've added for you: \n";
 
@@ -29,7 +30,9 @@ public class ForceAddCommand extends AddCommand {
     @Override
     public String execute(TaskArrayList taskArrayList, Storage storage) throws AeromonException {
 
-        switch(taskType) {
+        String[] tokens = super.getTokens();
+
+        switch(super.getTaskType()) {
             case TODO:
                 ToDo toDo = new ToDo(tokens[0], false);
 

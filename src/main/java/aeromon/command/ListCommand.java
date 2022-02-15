@@ -5,7 +5,7 @@ import aeromon.Storage;
 import aeromon.TaskArrayList;
 
 /**
- * ListCommand class handles the command that lists out the current tasks in the TaskArrayList.
+ * ListCommand class handles the list command that lists out the current tasks in the TaskArrayList.
  */
 public class ListCommand extends Command {
 

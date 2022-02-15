@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+//@@author cashewnade-reused
+//Reused from https://se-education.org/guides/tutorials/javaFx.html
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -31,6 +34,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Aeromon object.
+     * @param aeromon the Aeromon object.
+     */
     public void setAeromon(Aeromon aeromon) {
         this.aeromon = aeromon;
     }

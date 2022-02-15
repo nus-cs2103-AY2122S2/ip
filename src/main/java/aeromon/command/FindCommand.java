@@ -2,11 +2,11 @@ package aeromon.command;
 
 import aeromon.AeromonException;
 import aeromon.Storage;
-import aeromon.task.Task;
 import aeromon.TaskArrayList;
+import aeromon.task.Task;
 
 /**
- * FindCommand class handles commands to search for tasks using the keywords.
+ * FindCommand class handles find commands to search for tasks using the keywords.
  */
 public class FindCommand extends Command {
 

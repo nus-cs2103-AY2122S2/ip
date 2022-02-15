@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+//@@author cashewnade-reused
+//Reused from https://se-education.org/guides/tutorials/javaFx.html
+
 /**
  * A GUI for Aeromon using FXML.
  */

@@ -2,15 +2,15 @@ package aeromon.command;
 
 import aeromon.AeromonException;
 import aeromon.Storage;
+import aeromon.TaskArrayList;
 import aeromon.task.Deadline;
 import aeromon.task.Event;
-import aeromon.TaskArrayList;
 import aeromon.task.ToDo;
 
 import java.time.LocalDate;
 
 /**
- * AddCommand class that identifies the task type and adds it into the tastlist.
+ * AddCommand class that identifies the task type and adds it into the taskArrayList.
  */
 public class AddCommand extends Command {
 
@@ -75,5 +75,17 @@ public class AddCommand extends Command {
 
         }
         return "Ohnoz I couldn't execute the command, tHerE weRE somE ErrORss!";
+    }
+
+    /**
+     * Gets the task type.
+     * @return the task type.
+     */
+    public TaskType getTaskType() {
+        return this.taskType;
+    }
+
+    public String[] getTokens() {
+        return this.tokens;
     }
 }

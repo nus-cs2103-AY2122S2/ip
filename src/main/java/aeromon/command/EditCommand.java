@@ -2,11 +2,11 @@ package aeromon.command;
 
 import aeromon.AeromonException;
 import aeromon.Storage;
-import aeromon.task.Task;
 import aeromon.TaskArrayList;
+import aeromon.task.Task;
 
 /**
- * EditCommand handles the commands which edit the tasks in the TaskArrayList.
+ * EditCommand handles the edit commands which edit the tasks in the TaskArrayList.
  */
 public class EditCommand extends Command {
 

@@ -5,7 +5,7 @@ import aeromon.Storage;
 import aeromon.TaskArrayList;
 
 /**
- * ByeCommand class handles the exit commands.
+ * ByeCommand class handles the bye commands.
  */
 public class ByeCommand extends Command {
 
