@@ -71,6 +71,7 @@ public class Gene {
     }
 
     String handleUserInput(String nextLine) {
+        assert nextLine != null;
         try {
             Command currCommand = Parser.parseCommand(nextLine);
             return currCommand.execute(geneList, geneUi, geneStorage);

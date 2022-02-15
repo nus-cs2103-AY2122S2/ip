@@ -34,6 +34,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui userInt, Storage storage) {
+        assert tasks != null;
+        assert userInt != null;
+        assert storage != null;
         try {
             String[] tokens = taskBody.split(" ");
             String strIndex = tokens[1]; //error here
