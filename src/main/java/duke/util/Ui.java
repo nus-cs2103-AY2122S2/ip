@@ -16,7 +16,7 @@ public class Ui {
     private static final String HELP = "Typing 'help me!' will show ye all commands available, yarr.\n";
     private static final String HELP_MESSAGE =
             "These are the list of commands available and format to type them matey:\n";
-    private static final String LINE = "___________________________________________________________\n";
+    private static final String NEW_LINE = "\n";
     private static final String REQUEST_NEXT_COMMAND = "Aye, Aye. Your next command:";
     private static final String REQUEST_NEXT_COMMAND_ANGRY =
             "Aye Aye, better get it right this time. Your next command:";
@@ -60,7 +60,7 @@ public class Ui {
      * Prints a message to request for user to input next command
      */
     public String requestNextCommand() {
-        return LINE + REQUEST_NEXT_COMMAND;
+        return NEW_LINE + REQUEST_NEXT_COMMAND;
     }
 
     /**
@@ -86,7 +86,7 @@ public class Ui {
                 .append(MarkCommand.COMMAND_WORD).append(": ").append(MarkCommand.COMMAND_EXAMPLE).append("\n")
                 .append("todo").append(": ").append("todo Add new tasks to list").append("\n")
                 .append(UnmarkCommand.COMMAND_WORD).append(": ").append(UnmarkCommand.COMMAND_EXAMPLE).append("\n");
-        return HELP_MESSAGE + commandsAndFormatting;
+        return HELP_MESSAGE + NEW_LINE + commandsAndFormatting;
     }
 
     /**
@@ -101,13 +101,6 @@ public class Ui {
      */
     public String showWelcome() {
         return WELCOME_MESSAGE + HELP + WELCOME_QUESTION;
-    }
-
-    /**
-     * Prints a LINE separator.
-     */
-    public String showLine() {
-        return LINE;
     }
 
     /**

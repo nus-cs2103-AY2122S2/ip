@@ -11,7 +11,7 @@ import duke.util.Ui;
 public class ByeCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
-    public static final String COMMAND_EXAMPLE = "bye dave";
+    public static final String COMMAND_EXAMPLE = "bye dave!";
 
     public ByeCommand() {
         super(COMMAND_WORD, COMMAND_EXAMPLE);

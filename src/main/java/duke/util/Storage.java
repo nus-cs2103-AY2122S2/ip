@@ -64,7 +64,7 @@ public class Storage {
     }
 
     /**
-     * Save all tasks into a file
+     * Saves all tasks into a file
      *
      * @param taskList list of tasks
      */

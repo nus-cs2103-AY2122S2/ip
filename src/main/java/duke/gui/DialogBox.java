@@ -2,6 +2,7 @@ package duke.gui;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +14,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 /**
  * An example of a custom control using FXML.
@@ -26,6 +31,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a default dialog box
+     *
+     * @param text text to be displayed in the dialog box
+     * @param img user image
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -34,6 +45,33 @@ public class DialogBox extends HBox {
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        dialog.getStyleClass().add("normal-msg");
+        dialog.setText(text);
+        displayPicture.setImage(img);
+        double imgCenter = displayPicture.getFitHeight() / 2;
+        displayPicture.setClip(new Circle(imgCenter, imgCenter, imgCenter));
+    }
+
+    /**
+     * Creates a dialog box with the specified font type
+     *
+     * @param text      text to be displayed in the dialog box
+     * @param img       image of user
+     * @param fontType  custom font type
+     */
+    private DialogBox(String text, Image img, String fontType) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (fontType.equalsIgnoreCase("error")) {
+            dialog.getStyleClass().add("error-msg");
         }
         dialog.setText(text);
         displayPicture.setImage(img);
@@ -58,6 +96,12 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getDukeDialogCustom(String text, Image img, String fontType) {
+        var db = new DialogBox(text, img, fontType);
         db.flip();
         return db;
     }

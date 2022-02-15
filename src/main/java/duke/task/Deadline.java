@@ -32,7 +32,7 @@ public class Deadline extends Task {
                 this.time = dateSplit[1];
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("\tInvalid date! Date format to be of type yyyy-mm-dd\n");
+            throw new DukeException("Invalid date! Date format to be of type yyyy-mm-dd\n");
         }
     }
 

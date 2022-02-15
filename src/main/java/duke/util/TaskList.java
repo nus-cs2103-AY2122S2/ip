@@ -183,7 +183,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task in list of tasks as done
+     * Marks a task in list of tasks as done
      *
      * @param taskIndex taskIndex 0-based index of task number.
      * @return message to tell user that task has been marked
@@ -199,7 +199,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task in list of tasks as not done
+     * Marks a task in list of tasks as not done
      *
      * @param taskIndex 0-based index of task number.
      * @return message to tell user that task has been unmarked

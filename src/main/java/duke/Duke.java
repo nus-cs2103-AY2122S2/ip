@@ -52,7 +52,7 @@ public class Duke {
             }
             return output;
         } catch (DukeException e) {
-            throw new DukeException("I'm sorry matey, that's an invalid input. Please try again :'(\n");
+            throw new DukeException(e.getMessage());
         }
     }
 }

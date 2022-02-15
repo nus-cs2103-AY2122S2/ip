@@ -32,15 +32,15 @@ public class MainWindow extends AnchorPane {
     private Stage stage;
     private static final Ui ui = new Ui();
 
-    private final Image userImage = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private final Image dukeImage = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
-    private final Image welcomeGif = new Image(
+    private final Image USER_IMAGE = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/elizabeth_swan.png")));
+    private final Image DUKE_IMAGE = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow.png")));
+    private final Image WELCOME_GIF = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_welcome.gif")));
-    private final Image exitGif = new Image(
+    private final Image EXIT_GIF = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_adios.gif")));
-    private final Image errorPhoto = new Image(
+    private final Image ERROR_PHOTO = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_disgusted.jpg")));
 
     @FXML
@@ -51,12 +51,14 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d, Stage stage) {
         duke = d;
         this.stage = stage;
+
         // Send welcome message
-        ImageView iv = new ImageView(welcomeGif);
+        ImageView iv = new ImageView(WELCOME_GIF);
         iv.setFitHeight(229);
-        iv.setFitWidth(540);
+        iv.setFitWidth(576);
+        iv.setCache(true);
         dialogContainer.getChildren().add(iv);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.showWelcome(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.showWelcome(), DUKE_IMAGE));
     }
 
     /**
@@ -66,6 +68,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (isEmptyInput(input)) {
+            return;
+        }
+
         try {
             String response = duke.getResponse(input);
             if (response.equals("exit")) {
@@ -74,34 +80,32 @@ public class MainWindow extends AnchorPane {
                 return;
             }
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog("Adventurer said: " + input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getUserDialog("Adventurer said: " + input, USER_IMAGE),
+                    DialogBox.getDukeDialog(response, DUKE_IMAGE)
             );
         } catch (DukeException e) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog("Adventurer replies: " + input, userImage),
-                    DialogBox.getDukeDialog(e.getMessage(), dukeImage)
+                    DialogBox.getUserDialog("Adventurer reply: " + input, USER_IMAGE),
+                    DialogBox.getDukeDialogCustom(e.getMessage(), DUKE_IMAGE, "error")
             );
-            // Show error gif
-            ImageView iv = new ImageView(errorPhoto);
-            iv.setFitHeight(300);
-            iv.setFitWidth(500);
-            dialogContainer.getChildren().add(iv);
         }
+
         userInput.clear();
     }
 
     /**
      * Handles the termination of the chat-bot
+     *
+     * @param input user input
      */
     private void handleExit(String input) {
         String response = ui.showExitMessage();
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog("Adventurer said: " + input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog("Adventurer said: " + input, USER_IMAGE),
+                DialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         // Show exit gif
-        ImageView iv = new ImageView(exitGif);
+        ImageView iv = new ImageView(EXIT_GIF);
         iv.setFitHeight(208);
         iv.setFitWidth(500);
         dialogContainer.getChildren().add(iv);
@@ -111,5 +115,14 @@ public class MainWindow extends AnchorPane {
         sendButton.setOnAction(event -> stage.close());
     }
 
+    /**
+     * Checks if user input is empty
+     *
+     * @param input user input
+     * @return true if user has not typed in any input
+     */
+    private boolean isEmptyInput(String input) {
+        return input.equalsIgnoreCase("");
+    }
 }
 

@@ -19,6 +19,8 @@ import duke.task.Todo;
  */
 public class Parser {
 
+    private static final String SAD_FACE = "\uD83D\uDE1E";
+
     /**
      * Parses the String input and returns the appropriate command.
      *
@@ -52,7 +54,7 @@ public class Parser {
         case ("todo"):
             return prepareToDo(splitCommand);
         default:
-            throw new DukeException("OOPS!!! I'm sorry matey, but I don't know what that means :-(\n");
+            throw new DukeException("OOPS!!! I'm sorry matey, but I don't know what that means " + SAD_FACE + "\n");
         }
     }
 
@@ -65,7 +67,7 @@ public class Parser {
      */
     private static Command prepareDelete(String[] splitCommand) throws DukeException {
         if (splitCommand.length == 1) {
-            throw new DukeException("\tAaaarrrrgggghhhh you can't delete nuthin' matey!\n");
+            throw new DukeException("Aaaarrrrgggghhhh you can't delete nuthin' matey!\n");
         }
         int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
         return new DeleteCommand(taskIndex);
@@ -80,7 +82,7 @@ public class Parser {
      */
     private static Command prepareFind(String[] splitCommand) throws DukeException {
         if (splitCommand.length == 1) {
-            throw new DukeException("\tAaaarrrrgggghhhh you can't find nuthin' matey!\n");
+            throw new DukeException("Aaaarrrrgggghhhh you can't find nuthin' matey!\n");
         }
         return new FindCommand(splitCommand[1]);
     }
@@ -94,7 +96,7 @@ public class Parser {
      */
     private static Command prepareMark(String[] splitCommand) throws DukeException {
         if (splitCommand.length == 1) {
-            throw new DukeException("\tAaaarrrrgggghhhh you can't mark nuthin' matey!\n");
+            throw new DukeException("Aaaarrrrgggghhhh you can't mark nuthin' matey!\n");
         }
         int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
         return new MarkCommand(taskIndex);
@@ -109,7 +111,7 @@ public class Parser {
      */
     private static Command prepareUnmark(String[] splitCommand) throws DukeException {
         if (splitCommand.length == 1) {
-            throw new DukeException("\tAaaarrrrgggghhhh you can't unmark nuthin' matey!\n");
+            throw new DukeException("Aaaarrrrgggghhhh you can't unmark nuthin' matey!\n");
         }
         int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
         return new UnmarkCommand(taskIndex);
@@ -124,7 +126,7 @@ public class Parser {
      */
     private static Command prepareDeadline(String[] splitCommand) throws DukeException {
         if (splitCommand.length == 1) {
-            throw new DukeException("\tAaaarrrrgggghhhh deadline description can't be empty matey!\n");
+            throw new DukeException("Aaaarrrrgggghhhh deadline description can't be empty matey!\n");
         }
         String[] furtherSplitCommand = splitCommand[1].split(" /by ", 2);
         try {
@@ -144,7 +146,7 @@ public class Parser {
      */
     private static Command prepareEvent(String[] splitCommand) throws DukeException {
         if (splitCommand.length == 1) {
-            throw new DukeException("\tAaaarrrrgggghhhh event description can't be empty matey!\n");
+            throw new DukeException("Aaaarrrrgggghhhh event description can't be empty matey!\n");
         }
         String[] furtherSplitCommand = splitCommand[1].split(" /at ", 2);
         try {
@@ -164,7 +166,7 @@ public class Parser {
      */
     private static Command prepareToDo(String[] splitCommand) throws DukeException {
         if (splitCommand.length == 1) {
-            throw new DukeException("\tAaaarrrrgggghhhh todo description can't be empty matey!\n");
+            throw new DukeException("Aaaarrrrgggghhhh todo description can't be empty matey!\n");
         }
         return new AddCommand(new Todo(splitCommand[1]));
     }

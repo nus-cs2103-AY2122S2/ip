@@ -25,14 +25,16 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            fxmlLoader.setRoot(ap);
+
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke, stage);
-            stage.show();
 
             // Set name of application and picture for icon
-            stage.setTitle("Duke");
+            stage.setTitle("Cap'n Dave");
             stage.getIcons().add(appImage);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
