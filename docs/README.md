@@ -17,7 +17,8 @@ Example: `todo destory death star`
 
 ### Adding a deadline task: `deadline`
 
-Adds a task with a specified deadline, `DATETIME` specified in `DD/MM/YYYY HH:mm` format. Other acceptable formats can be found [in the appendix](#acceptable-datetime-format).
+Adds a task with a specified deadline, `DATETIME` specified in `DD/MM/YYYY HH:mm` format.   
+Other acceptable formats can be found [in the appendix](#acceptable-datetime-format).
 
 Format: `deadline DESCRIPTION /by DATETIME`
 
@@ -25,7 +26,8 @@ Example: `deadline buy weapons /by 15/04/2022 23:59`
 
 ### Adding a event task: `event`
 
-Adds a task with a specified date and time of an event, `DATETIME` specified in `DD/MM/YYYY HH:mm` format. Other acceptable formats can be found [in the appendix](#acceptable-datetime-format).
+Adds a task with a specified date and time of an event, `DATETIME` specified in `DD/MM/YYYY HH:mm` format.   
+Other acceptable formats can be found [in the appendix](#acceptable-datetime-format).
 
 Format: `event DESCRIPTION /at DATETIME`
 
@@ -38,9 +40,12 @@ Adds a recurring task of todo, deadline or event. The acceptable recurrence patt
 Format: `recur TASK /every RECURRENCE_PATTERN`
 
 Example: 
-1. `recur todo train jedi /every day`: creates a recurring todo task every day based on the date the task is created.
-1. `recur deadline test jedi /by 14/04/2022 23:59 /every month`: creates a recurring deadline task every month starting from 14/04/2022 23:59.
-1. `recur event Luke's birthday /at 25/09/2022 00:00 /every year`: creates a recurring event task every year starting from 25/09/2022 00:00.
+1. `recur todo train jedi /every day`
+    - creates a recurring todo task every day based on the date the task is created.
+1. `recur deadline test jedi /by 14/04/2022 23:59 /every month`
+    - creates a recurring deadline task every month starting from 14/04/2022 23:59.
+1. `recur event Luke's birthday /at 25/09/2022 00:00 /every year`
+    - creates a recurring event task every year starting from 25/09/2022 00:00.
 
 ### Listing all tasks: `list`
 
@@ -82,7 +87,8 @@ Example: `find weapons`: Lists all tasks which contains the word `weapons`.
 
 ### Exiting the program: `bye`
 
-Disables the user input text field and send button. The program will automatically close after 3 seconds.
+Disables the user input text field and send button.  
+The program will automatically close after 3 seconds.
 
 Format: `bye`
 
