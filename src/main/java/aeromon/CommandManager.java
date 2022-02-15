@@ -59,6 +59,22 @@ public class CommandManager {
             return new AddCommand(AddCommand.TaskType.EVENT, eventTokens);
         }
 
+        case "ftodo": {
+            return new ForceAddCommand(AddCommand.TaskType.TODO, new String[] { checkDescription("Todo", parameters[1]) });
+        }
+
+        case "fdeadline": {
+            String deadlineDescription = checkDescription("Deadline", parameters[1]);
+            String[] deadlineTokens = deadlineDescription.split(" /by ");
+            return new ForceAddCommand(AddCommand.TaskType.DEADLINE, deadlineTokens);
+        }
+
+        case "fevent": {
+            String eventDescription = checkDescription("Event", parameters[1]);
+            String[] eventTokens = eventDescription.split(" /at ");
+            return new ForceAddCommand(AddCommand.TaskType.EVENT, eventTokens);
+        }
+
         case "find": {
             return new FindCommand(parameters[1]);
         }

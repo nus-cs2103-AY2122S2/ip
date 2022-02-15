@@ -33,4 +33,14 @@ public class Deadline extends Task {
     public String toOutputFormat() {
         return String.format(DEADLINE_OUTPUT_FORMAT, super.toOutputFormat(), by.format(DATE_TIME_FORMATTER));
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Deadline)) {
+            return false;
+        } else {
+            Deadline obj = (Deadline) object;
+            return this.description.equals(obj.description) && this.by.equals(obj.by);
+        }
+    }
 }
