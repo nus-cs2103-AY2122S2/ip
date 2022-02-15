@@ -41,7 +41,7 @@ public class Duke {
                 isExit = command.isExit();
             } catch (DukeException de) {
 
-                ui.printDukeException(de);
+                de.getMessage();
 
             } catch (IOException ie) {
                 ui.printUpdateIoError(ie);
@@ -62,7 +62,7 @@ public class Duke {
         } catch (IOException ie) {
             ui.printUpdateIoError(ie);
         }
-        return "Failed?";
+        return "Unknown Command?";
     }
 
 

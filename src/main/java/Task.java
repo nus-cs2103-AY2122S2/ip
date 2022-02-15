@@ -41,8 +41,12 @@ public class Task {
     public void unmark() {
         this.isDone = false;
         
-        
     }
+
+    public int getLength() {
+        return description.length();
+    }
+
  
     public boolean isDone() {
         return this.isDone;
