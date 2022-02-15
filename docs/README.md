@@ -8,7 +8,13 @@ Larry Bot is your personal virtual assistant for your scheduling needs!
 
 Want to test it out? Click [here](https://github.com/pyk595/ip/releases) to download the jar file!
 
+Run the program by typing `java -jar larry.jar` in the directory you placed the jar file.
+
 Here are some things you can do:
+
+### Say Hello
+
+Say `hello` to Larry! He will remind you about your previous tasks.
 
 ### Add Tasks
 
@@ -93,6 +99,7 @@ Bye. Hope to see you again soon!
 
 |Action | Format, Examples |
 --------|------------------
+**Welcome** | `hello`
 **Add To-Do** | `todo TASK` <br> e.g., `todo eat dinner`
 **Add Event** | `event TASK /at YYYY-MM-DD` <br> e.g., `event breakfast /at 2022-01-01`
 **Add Deadline** | `deadline TASK /by YYYY-MM-DD` <br> e.g., `deadline eat breakfast /by 2022-01-01`
