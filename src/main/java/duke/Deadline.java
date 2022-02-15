@@ -22,7 +22,7 @@ public class Deadline extends Task {
     private LocalDateTime datetime;
 
     /**
-     * Creation of Deadline Task
+     * Creates Deadline Task
      *
      * @param description String of task description
      * @param time String representing when task is due
@@ -61,5 +61,14 @@ public class Deadline extends Task {
         details[TASK_INDEX] = TaskType.DEADLINE.toString();
         details[TIME_INDEX] = time;
         return details;
+    }
+
+    /**
+     * Getter method that returns Datetime of Deadline
+     *
+     * @return Datetime of Deadline
+     */
+    public LocalDateTime getDatetime() {
+        return this.datetime;
     }
 }

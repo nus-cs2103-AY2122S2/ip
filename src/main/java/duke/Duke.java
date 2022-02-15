@@ -2,6 +2,8 @@ package duke;
 
 import java.util.Arrays;
 
+import javafx.stage.Stage;
+
 /**
  * Class to get response from user inputs
  */
@@ -12,6 +14,7 @@ public class Duke {
     static final int TIME_INDEX = 2;
 
     private final TaskList list = DataStore.loadData();
+    private Stage stage;
 
     /**
      * You should have your own function to generate a response to user input.
@@ -52,6 +55,12 @@ public class Duke {
         case FIND:
             output = handleFind(parsedInputs[DESCRIPTION_INDEX]);
             break;
+        case SORT:
+            output = handleSort();
+            break;
+        case BYE:
+            handleBye();
+            break;
         default:
             break;
         }
@@ -62,6 +71,10 @@ public class Duke {
 
         // Return String
         return output;
+    }
+
+    private void handleBye() {
+        stage.close();
     }
 
     private String handleFind(String search) {
@@ -153,5 +166,13 @@ public class Duke {
         return output;
     }
 
+    private String handleSort() {
+        list.sort();
+        return "List has been updated, here is the new order: \n" + handleList();
+    }
 
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }

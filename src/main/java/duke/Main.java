@@ -17,6 +17,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Solution adapted from @jonahtanjz on github
+        duke.setStage(stage);
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

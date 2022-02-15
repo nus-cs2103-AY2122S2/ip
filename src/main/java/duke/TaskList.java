@@ -187,4 +187,8 @@ public class TaskList {
         }
         return output;
     }
+
+    public void sort() {
+        tasks.sort(new TaskComparator());
+    }
 }

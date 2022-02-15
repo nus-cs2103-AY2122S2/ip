@@ -18,7 +18,7 @@ public class Task {
     protected Boolean isCompleted = false;
 
     /**
-     * Creation of new task
+     * Creates new task
      *
      * @param description description of task to be completed
      */

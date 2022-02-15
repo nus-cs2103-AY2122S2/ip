@@ -42,6 +42,8 @@ public class Parser {
             return Command.DELETE;
         case "find":
             return Command.FIND;
+        case "sort":
+            return Command.SORT;
         default:
             throw new CommandNotFoundException("Unrecognised Command");
         }

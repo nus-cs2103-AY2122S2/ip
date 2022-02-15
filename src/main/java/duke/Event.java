@@ -22,7 +22,7 @@ public class Event extends Task {
     private LocalDateTime datetime;
 
     /**
-     * Creation of Event Task
+     * Creates Event Task
      *
      * @param description String of task description
      * @param time String representing when task is occurring
@@ -62,5 +62,14 @@ public class Event extends Task {
         details[TASK_INDEX] = TaskType.EVENT.toString();
         details[TIME_INDEX] = time;
         return details;
+    }
+
+    /**
+     * Getter method that returns Datetime of Event
+     *
+     * @return Datetime of Event
+     */
+    public LocalDateTime getDatetime() {
+        return this.datetime;
     }
 }
