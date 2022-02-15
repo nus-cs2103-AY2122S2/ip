@@ -80,7 +80,7 @@ public class AddCommand extends Command {
      */
     public String handleTodoCommand(TaskList tl, Storage sge) throws ChiException, IOException {
         if (validateMessageBody(this.description, command)) {
-            throw new ChiException("This todo has some problems nyan! Make sure:\n1.Description is not empty");
+            throw new ChiException("This todo has some problems nyan! Make sure:\n1.Description is not empty or has |");
         } else {
             Task newTask = new Todo(this.description, false);
             // Add task to list
@@ -103,7 +103,8 @@ public class AddCommand extends Command {
     public String handleDeadlineCommand(TaskList tl, Storage sge) throws ChiException, IOException {
         if (validateMessageBody(this.description, command)) {
             throw new ChiException("This deadline has some problems nyan! Make sure:\n"
-                    + "1.Description is not empty\n2.Datetime is not missing\n3.Datetime is formatted properly");
+                    + "1.Description is not empty or has |"
+                    + "\n2.Datetime is not missing\n3.Datetime is formatted properly");
         } else {
             Task newTask;
             String s = getDescription(this.description, "deadline");
@@ -130,7 +131,8 @@ public class AddCommand extends Command {
     public String handleEventCommand(TaskList tl, Storage sge) throws ChiException, IOException {
         if (validateMessageBody(this.description, command)) {
             throw new ChiException("This event has some problems nyan! Make sure:\n"
-                    + "1.Description is not empty\n2.Datetime is not missing\n3.Datetime is formatted properly");
+                    + "1.Description is not empty or has |"
+                    + "\n2.Datetime is not missing\n3.Datetime is formatted properly");
         } else {
             Task newTask;
             String s = getDescription(this.description, "event");
@@ -176,7 +178,7 @@ public class AddCommand extends Command {
      * @return A boolean of whether it was properly formatted.
      */
     public boolean validateTodoMessage(String msg) {
-        return msg.contains("\\|");
+        return msg.contains("|");
     }
 
     /**
@@ -187,7 +189,7 @@ public class AddCommand extends Command {
      */
     public boolean validateDeadlineMessage(String msg) {
         String[] separateBys = msg.split("/by");
-        if (separateBys.length != 2 || separateBys[0].equals("") || separateBys[0].contains("\\|")) {
+        if (separateBys.length != 2 || separateBys[0].equals("") || separateBys[0].contains("|")) {
             return true;
         }
         try {
@@ -207,7 +209,7 @@ public class AddCommand extends Command {
      */
     public boolean validateEventMessage(String msg) {
         String[] separateAts = msg.split("/at");
-        if (separateAts.length != 2 || separateAts[0].equals("") || separateAts[0].contains("\\|")) {
+        if (separateAts.length != 2 || separateAts[0].equals("") || separateAts[0].contains("|")) {
             return true;
         }
         try {
