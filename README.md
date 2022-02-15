@@ -8,3 +8,18 @@ A desktop task management application that has the benefits of a Graphical User 
 2. Download the latest release here.
 3. Copy the .jar file into the folder you've chosen as the application's home folder.
 4. Double-click the .jar file to start the application.
+
+## Features
+- Add tasks
+- Delete tasks
+- View tasks
+- Mark/Unmark tasks as done
+- Find tasks
+
+## Usages
+Tasks are categorized as either a Todo, Event or Deadline.
+
+### Add Todo
+Format:
+- `todo TASK_DESC>`
+- TASK_DESC cannot be empty.
