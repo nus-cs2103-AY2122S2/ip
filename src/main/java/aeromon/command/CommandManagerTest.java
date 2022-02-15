@@ -1,6 +1,7 @@
 package aeromon.command;
 
 import aeromon.AeromonException;
+import aeromon.CommandManager;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

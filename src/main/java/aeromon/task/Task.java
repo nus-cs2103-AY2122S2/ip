@@ -30,7 +30,6 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
-        System.out.println("Naisu! You've completed: \n" + this);
     }
 
     /**
@@ -38,7 +37,6 @@ public class Task {
      */
     public void markAsNotDone() {
         isDone = false;
-        System.out.println("OI! What happened to completing: \n" + this);
     }
 
     /**

@@ -3,7 +3,7 @@ package aeromon.command;
 import aeromon.AeromonException;
 import aeromon.Storage;
 import aeromon.Ui;
-import aeromon.task.TaskArrayList;
+import aeromon.TaskArrayList;
 
 /**
  * Abstract class that executes the commands.
@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage the Storage of Aeromon.
      * @throws AeromonException when an error occurs during execution.
      */
-    public abstract void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException;
+    public abstract String execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException;
 
     /**
      * Checks if the command is a ByeCommand.
