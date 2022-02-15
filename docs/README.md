@@ -13,8 +13,8 @@ eye too!
    - [Adding a Deadline: `deadline`](#adding-a-deadline-deadline)
    - [Listing all tasks: `list`](#listing-all-tasks-list)
    - [Finding a task: `find`](#finding-a-task-find)
-   - [Marking a task as done: `mark`](#marking-a-task-mark)
-   - [Marking a task as not done: `unmark`](#unmarking-a-task-unmark)
+   - [Marking a task as done: `mark`](#marking-a-task-as-done-mark)
+   - [Marking a task as not done: `unmark`](#unmarking-a-task-as-not-done-unmark)
    - [Deleting a task: `delete`](#deleting-a-task-delete)
    - [Exiting the application: `bye`](#exiting-the-application-bye)
  - [FAQ](#faq)
@@ -62,7 +62,7 @@ eye too!
 2. Download the latest version of `nikki.jar` [here](https://github.com/DavidTan0527/ip/releases/).
 3. Copy the file to any folder you want. Note that the application will also store its data in this folder.
 4. Double-click to start the app. A window similar to the picture below should pop up.
-<img src="assets/start.png" width="570" height="758" />
+<img src="assets/start.png" style="margin: 0 auto;" width="570" height="758" />
 5. Type each of the following commands in the chat box and press Enter to execute it. Some examples you can try:
    1. `todo buy fruits` : Add a ToDo called "buy fruits"
    2. `todo wash clothes` : Add a ToDo called "wash clothes"
