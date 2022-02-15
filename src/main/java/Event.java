@@ -24,7 +24,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-//        return String.format("[%s][%s] %s (at:%s)", sym, super.getStatusIcon(), super.getDescription(), this.dayAndTime);
         return String.format("[%s][%s] %s (at:%s)", sym, super.getStatusIcon(), super.getDescription(),
                     this.dayAndTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
     }
