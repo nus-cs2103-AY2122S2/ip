@@ -10,7 +10,7 @@ Need a program written by java to help you keep track of your tasks ? ChatCat is
 6. Lists all tasks in task list
 
 ## Tasks
-###There are 3 tasks that you can add into ChatCat
+### There are 3 tasks that you can add into ChatCat
 1. Todo - A task with only a description
 2. Deadline - A task that has both a description and deadline
 3. Event - A task that has both a description and event date
