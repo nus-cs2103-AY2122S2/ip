@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Locale;
+
 /**
  * A class responsible for breaking down commands into the command type,
  * and constructing the commands to be executed.
@@ -18,119 +20,75 @@ public class Parser {
         command = command.strip().replaceAll(" +", " ");
         String firstWord = command.split(" ")[0];
         String description;
-        switch (firstWord) {
-        case "bye":
-            try {
+        int taskNum;
+        String time;
+        try {
+            switch (firstWord) {
+            case "bye":
                 if (!command.equals("bye")) {
                     throw new DukeException("No words should be after 'bye'.");
                 }
                 return new ExitCommand(firstWord);
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
-            break;
-        case "list":
-            try {
+            case "list":
                 if (!command.equals("list")) {
                     throw new DukeException("No words should be after 'list'.");
                 }
                 return new ListCommand(firstWord);
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
-            break;
-        case "delete":
-            try {
+            case "delete":
                 if (command.equals("delete")) {
                     throw new DukeException("Please type what you want to delete!");
                 }
                 description = command.substring(firstWord.length() + 1);
-                int taskNum = Integer.parseInt(description);
+                taskNum = Integer.parseInt(description);
                 return new DeleteCommand(firstWord, taskNum);
-            } catch (NumberFormatException e) {
-                ui.showMessage("Please input an integer!");
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
-            break;
-        case "mark":
-            try {
+            case "mark":
                 if (command.equals("mark")) {
                     throw new DukeException("Please type what you want to mark!");
                 }
                 description = command.substring(firstWord.length() + 1);
-                int taskNum = Integer.parseInt(description);
+                taskNum = Integer.parseInt(description);
                 return new MarkCommand(firstWord, taskNum);
-            } catch (NumberFormatException e) {
-                ui.showMessage("Please input an integer!");
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
-            break;
-        case "unmark":
-            try {
+            case "unmark":
                 if (command.equals("unmark")) {
                     throw new DukeException("Please type what you want to unmark!");
                 }
                 description = command.substring(firstWord.length() + 1);
-                int taskNum = Integer.parseInt(description);
+                taskNum = Integer.parseInt(description);
                 return new UnmarkCommand(firstWord, taskNum);
-            } catch (NumberFormatException e) {
-                ui.showMessage("Please input an integer!");
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
-            break;
-        case "deadline":
-            try {
+            case "deadline":
                 description = command.substring(firstWord.length() + 1);
                 description = description.split(" /by ")[0];
-                String time = command.split(" /by ")[1];
+                time = command.split(" /by ")[1];
                 return new AddCommand(firstWord, description, time);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showMessage("Eh? Did you mistype the format?");
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("Uh-oh! There's no deadline here!");
-            }
-            break;
-        case "todo":
-            try {
+            case "todo":
                 if (command.equals("todo")) {
                     throw new DukeException("Uh-oh! There is nothing to do here!");
                 }
                 description = command.substring(firstWord.length() + 1);
                 return new AddCommand(firstWord, description);
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
-            break;
-        case "event":
-            try {
+            case "event":
                 description = command.substring(firstWord.length() + 1);
                 description = description.split(" /at ")[0];
-                String time = command.split(" /at ")[1];
+                time = command.split(" /at ")[1];
                 return new AddCommand(firstWord, description, time);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showMessage("Eh? Did you mistype the format?");
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("Uh-oh! There's no event here!");
-            }
-            break;
-        case "find":
-            try {
+            case "find":
                 if (command.equals("find")) {
                     throw new DukeException("Uh-oh! There is nothing to find here!");
                 }
                 description = command.substring(firstWord.length() + 1);
                 return new FindCommand(firstWord, description);
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
+            default:
+                return new InvalidCommand("Please try again!");
             }
-            break;
-        default:
-            // pass through
-            break;
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
+        } catch (NumberFormatException e) {
+            return new InvalidCommand("Please input an integer!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new InvalidCommand("Eh? Did you mistype the format?");
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand("Uh-oh! There's no description here!");
         }
-        return new InvalidCommand("Please try again!");
+
     }
 }

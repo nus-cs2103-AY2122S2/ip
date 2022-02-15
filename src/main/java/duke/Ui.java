@@ -18,27 +18,27 @@ public class Ui {
     /**
      * Prints a line.
      */
-    public void showLine() {
-        System.out.println("__________________________________________________");
+    public String showLine() {
+        return "__________________________________________________";
     }
 
     /**
      * Prints the duke greeting.
      */
-    public void showGreeting() {
+    public String showGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        return "Hello from\n" + logo;
     }
 
     /**
      * Prints an error message if there is no pre-existing data found.
      */
-    public void showLoadingError() {
-        System.out.println("No pre-existing data found!");
+    public String showLoadingError() {
+        return "No pre-existing data found!";
     }
 
     /**
