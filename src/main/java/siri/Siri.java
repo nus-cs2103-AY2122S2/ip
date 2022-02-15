@@ -38,32 +38,6 @@ public class Siri {
         parser = new Parser(tasks);
     }
 
-    // public Siri() {
-    //     storage = new Storage();
-    //     ui = new Ui("   -----      O    -----      O\n"
-    //             + " /   _   \\   __   |       \\   __\n"
-    //             + " |  | |__|  |  |  |   O   |  |  |\n"
-    //             + " |   ----\\  |  |  |       /  |  |\n"
-    //             + "  \\ __   |  |  |  |   ---    |  |\n"
-    //             + " |---|   |  |  |  |       \\  |  |\n"
-    //             + "  \\______/  |__|  |___|\\___\\ |__|\n");
-
-    //     try {
-    //         tasks = new TaskList(storage.load());
-    //         Ui.startUpSavedData();
-    //         ui.startUp();
-    //     } catch (SiriException se) {
-    //         tasks = new TaskList();
-    //         ui.startUp();
-    //     }
-
-    //     parser = new Parser(tasks);
-    // }
-
-    /*public static void main(String[] args) {
-        new Siri("../data/data.txt").runApp();
-    }*/
-
     /**
      * Saves the app data into a file.
      *

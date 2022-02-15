@@ -11,12 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UiTest {
 
     @Test
-    public void separatorTest() {
+    public void exitTest() {
         ByteArrayOutputStream outputContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputContent));
-        String expectedOutput = "====================\n";
-        Ui.separator();
-        assertEquals(expectedOutput, outputContent.toString());
+        String expectedOutput = "Bye!! Hope to see you again soon!!\n";
+        Ui ui = new Ui("Test");
+        ui.exit();
+        assertEquals(expectedOutput, ui.exit());
     }
 
 }

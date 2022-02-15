@@ -30,7 +30,7 @@ class Event extends Task {
     }
 
     /**
-     * Get the Event time.
+     * Gets the Event time.
      *
      * @return the time that the event happens.
      */
@@ -39,7 +39,7 @@ class Event extends Task {
     }
 
     /**
-     * Get the Event date.
+     * Gets the Event date.
      *
      * @return the date that the event happens.
      */

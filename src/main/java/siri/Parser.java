@@ -23,7 +23,7 @@ class Parser {
     }
 
     /**
-     * Method to handle the command being passed in.
+     * Processes commands passed in.
      *
      * @param command String representation of the command that is passed in.
      * @return String to be printed after executing the command.
