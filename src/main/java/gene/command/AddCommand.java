@@ -84,16 +84,11 @@ public class AddCommand extends Command {
      */
     public String addTodo(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
         storage.writeToFile(taskKey, "T", false);
-        String[] tokens = taskKey.split("todo ");
         String taskTitle = "";
         try {
-            if (tokens.length < 2) {
-                throw new BadDescriptionException("todo"); //type
-            } else {
-                taskTitle = tokens[1];
-            }
-        } catch (BadDescriptionException err) {
-            return err.getMessage();
+            taskTitle = descriptionSplit("todo", taskKey);
+        } catch (BadDescriptionException e) {
+            e.printStackTrace();
         }
         Task newTask = new TodoTask(taskTitle);
         itemList.add(newTask);
@@ -119,31 +114,20 @@ public class AddCommand extends Command {
      * @param itemList Gene's item list
      */
     public String addEvent(String taskKey, Ui userInt, Storage storage, TaskList itemList) {
-        String[] tokens = taskKey.split("event ");
         String taskTitle = "";
         try {
-            if (tokens.length < 2) {
-                throw new BadDescriptionException("event");
-
-            } else {
-                taskTitle = tokens[1];
-            }
-        } catch (BadDescriptionException err) {
-            return err.getMessage();
+            taskTitle = descriptionSplit("event", taskKey);
+        } catch (BadDescriptionException e) {
+            e.printStackTrace();
         }
-        String[] secondSplit = taskTitle.split(" /at ");
-        taskTitle = secondSplit[0];
         String deadline = "";
         try {
-            if (secondSplit.length < 2) {
-                throw new BadDeadlineException("event");
-            } else {
-                deadline = secondSplit[1];
-            }
+            String[] combinedTask = deadlineSplit(" /at ", taskTitle, "event");
+            taskTitle = combinedTask[0];
+            deadline = combinedTask[1];
         } catch (BadDeadlineException err) {
-            return err.getMessage();
+            err.printStackTrace();
         }
-
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
@@ -163,6 +147,22 @@ public class AddCommand extends Command {
         }
     }
 
+    private String[] deadlineSplit(String s, String taskTitle, String taskType) throws BadDeadlineException {
+        String[] secondSplit = taskTitle.split(s);
+        if (secondSplit.length < 2) {
+            throw new BadDeadlineException(taskType);
+        }
+        return secondSplit;
+    }
+
+    private String descriptionSplit(String keySplit, String taskKey) throws BadDescriptionException {
+        String[] tokens = taskKey.split(keySplit);
+        if (tokens.length < 2) {
+            throw new BadDescriptionException(keySplit);
+        }
+        return tokens[1];
+    }
+
     /**
      * The method that adds a deadline task
      * First, the task title and date time in String format is extracted.
@@ -178,31 +178,19 @@ public class AddCommand extends Command {
         String[] tokens = taskKey.split("deadline ");
         String taskTitle = "";
         try {
-            if (tokens.length < 2) {
-                throw new BadDescriptionException("deadline");
-            } else {
-                taskTitle = tokens[1];
-            }
-        } catch (BadDescriptionException err) {
-            return err.getMessage();
+            taskTitle = descriptionSplit("deadline", taskKey);
+        } catch (BadDescriptionException e) {
+            e.printStackTrace();
         }
-        String[] secondSplit = taskTitle.split(" /by ");
-        taskTitle = secondSplit[0];
         String deadline = "";
         try {
-            if (secondSplit.length < 2) {
-                throw new BadDeadlineException("deadline");
-            } else {
-                deadline = secondSplit[1];
-            }
+            String[] combinedTask = deadlineSplit(" /by ", taskTitle, "deadline");
+            taskTitle = combinedTask[0];
+            deadline = combinedTask[1];
         } catch (BadDeadlineException err) {
-            return err.getMessage();
+            err.printStackTrace();
         }
-
         try {
-            //Accept string
-            //Parse string to datetime, use formatter here to change reading style
-            //when printing, check date time and print format.
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             storage.writeToFile(taskKey, "D", false);
