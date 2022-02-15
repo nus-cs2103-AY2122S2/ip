@@ -43,12 +43,14 @@ public class AddCommand extends Command {
             return STARTING_MESSAGE + toDo + taskArrayList.getTasksStatus();
 
         case DEADLINE:
+            assert tokens.length == 2 : "Wrong number of tokens";
             Deadline deadline = new Deadline(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
             taskArrayList.add(deadline);
             storage.saveFile(taskArrayList.getTasks());
             return STARTING_MESSAGE + deadline + taskArrayList.getTasksStatus();
 
         case EVENT:
+            assert tokens.length == 2 : "Wrong number of tokens";
             Event event = new Event(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
             taskArrayList.add(event);
             storage.saveFile(taskArrayList.getTasks());

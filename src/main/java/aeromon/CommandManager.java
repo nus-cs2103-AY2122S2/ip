@@ -16,6 +16,8 @@ public class CommandManager {
      * @throws AeromonException when an error occurs during the reading process.
      */
     public static Command read(String fullCommand) throws AeromonException {
+        assert fullCommand != null : "Command is null";
+
         String[] arr = fullCommand.split(" ", 2);
         String command = arr[0];
 
@@ -75,6 +77,8 @@ public class CommandManager {
      * @throws AeromonException if the description or date is empty, or if the date format is wrong.
      */
     public static String checkDescription(String taskType, String description) throws AeromonException {
+        assert description != null : "Description is null";
+
         String s = description.trim();
 
         if (s.isEmpty()) {
@@ -103,12 +107,14 @@ public class CommandManager {
 
     /**
      * Gets the task number from the command.
-     * @param s The command to read from.
+     * @param string The command to read from.
      * @return The task number.
      * @throws AeromonException when the task number is an invalid number.
      */
-    public static int getTaskNum(String s) throws AeromonException {
-        String taskNum = s.trim();
+    public static int getTaskNum(String string) throws AeromonException {
+        assert string != null : "Task Number is null";
+
+        String taskNum = string.trim();
 
         if (taskNum.isEmpty()) {
             throw new AeromonException("Why is the task number empty?");
