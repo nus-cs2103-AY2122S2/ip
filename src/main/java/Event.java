@@ -3,23 +3,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-/**
- * Represents a Task of type Event, includes the date.
- */
-
 public class Event extends Task {
     private final String sym = "E";
+//    private String dayAndTime;
     private final LocalDate dayAndTime;
 
-    /**
-     * Constructor for Event
-     * @param description - description of the task
-     * @param dayAndTime - The deadline of the task in this format "yyyy-mm-dd"
-     */
 
     Event (String description, String dayAndTime)  throws DateTimeException {
         super(description);
         this.dayAndTime = LocalDate.parse(dayAndTime);
+    }
+
+    String getSym() {
+        return this.sym;
     }
 
     @Override
