@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
-        dialogContainer.setSpacing(50);
+        dialogContainer.setSpacing(-10);
     }
 
     /**
@@ -58,22 +58,26 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(userInput.getText());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
 
-        if (duke.getExitCondition()) {
-            new Thread(() -> {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Platform.exit();
-            }).start();
+        if (!input.isEmpty() || !input.isBlank()) {
+            String response = duke.getResponse(userInput.getText());
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+
+            // quite ugly but I don't think there's a workaround
+            if (duke.getExitCondition()) {
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Platform.exit();
+                }).start();
+            }
         }
     }
 }
