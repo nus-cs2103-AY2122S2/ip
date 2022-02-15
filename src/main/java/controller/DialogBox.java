@@ -37,7 +37,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
-        dialog.setPrefWidth(270);
+        dialog.setPrefWidth(250);
         if (isUser) {
             dialog.setStyle("-fx-background-color: #E6E9EF;");
         } else {
