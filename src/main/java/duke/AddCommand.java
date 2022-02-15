@@ -40,7 +40,8 @@ public class AddCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, PlaceList places, Ui ui,
+                          Storage storageTask, Storage storagePlace) throws IOException{
         try {
             Task task;
             switch (this.getFirstWord()) {
@@ -58,13 +59,20 @@ public class AddCommand extends Command {
             }
             String taskString = task.toString();
             tasks.add(task);
-            storage.update(tasks);
+            storageTask.update(tasks);
             return getOutput(taskString, tasks.size());
         } catch (DateTimeParseException e) {
             return "Please type a valid date! (Format: YYYY-MM-DD)";
         }
     }
 
+    /**
+     * Generates the output based on the task and list size
+     *
+     * @param task the String representation of the task.
+     * @param size an integer representing the size of the task list.
+     * @return a string representing the response to the user input after successful addition of the task.
+     */
     public String getOutput(String task, int size) {
         return "Got it. I've added this task:\n" +
                 "  " + task + "\n" +

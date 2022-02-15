@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Locale;
-
 /**
  * A class responsible for breaking down commands into the command type,
  * and constructing the commands to be executed.
@@ -57,6 +55,8 @@ public class Parser {
                 return new UnmarkCommand(firstWord, taskNum);
             case "deadline":
                 description = command.substring(firstWord.length() + 1);
+                assert !description.contains("(") || !description.contains(")") :
+                        "Please don't use brackets in the deadline name";
                 description = description.split(" /by ")[0];
                 time = command.split(" /by ")[1];
                 return new AddCommand(firstWord, description, time);
@@ -68,6 +68,8 @@ public class Parser {
                 return new AddCommand(firstWord, description);
             case "event":
                 description = command.substring(firstWord.length() + 1);
+                assert !description.contains("(") || !description.contains(")") :
+                        "Please don't use brackets in the event name";
                 description = description.split(" /at ")[0];
                 time = command.split(" /at ")[1];
                 return new AddCommand(firstWord, description, time);
@@ -77,6 +79,35 @@ public class Parser {
                 }
                 description = command.substring(firstWord.length() + 1);
                 return new FindCommand(firstWord, description);
+            case "addplace":
+                if (command.equals("addplace")) {
+                    throw new DukeException("Uh-oh! There is nothing to add here!");
+                }
+                description = command.substring(firstWord.length() + 1);
+                assert !description.contains("[") || !description.contains("]") :
+                        "Please don't use brackets in the place name";
+                String name = description.split(" /desc ")[0];
+                description = command.split(" /desc ")[1];
+                return new AddPlaceCommand(firstWord, name, description);
+            case "delplace":
+                if (command.equals("delplace")) {
+                    throw new DukeException("Please type what you want to delete!");
+                }
+                description = command.substring(firstWord.length() + 1);
+                taskNum = Integer.parseInt(description);
+                return new DeletePlaceCommand(firstWord, taskNum);
+            case "viewplaces":
+                if (!command.equals("viewplaces")) {
+                    throw new DukeException("No words should be after 'viewplaces'.");
+                }
+                return new ViewPlacesCommand(firstWord);
+            case "view":
+                if (command.equals("view")) {
+                    throw new DukeException("Please type what you want to view!");
+                }
+                description = command.substring(firstWord.length() + 1);
+                int placeNum = Integer.parseInt(description);
+                return new ViewCommand(firstWord, placeNum);
             default:
                 return new InvalidCommand("Please try again!");
             }
@@ -89,6 +120,5 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand("Uh-oh! There's no description here!");
         }
-
     }
 }

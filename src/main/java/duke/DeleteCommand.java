@@ -24,7 +24,8 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, PlaceList places, Ui ui,
+                          Storage storageTask, Storage storagePlace) throws IOException{
         try {
             int taskIdx = taskNum - 1;
             if (taskIdx >= tasks.size() || taskIdx < 0) {
@@ -32,7 +33,7 @@ public class DeleteCommand extends Command {
                         + tasks.size() + " tasks)");
             }
             Task deletedTask = tasks.remove(taskIdx);
-            storage.update(tasks);
+            storageTask.update(tasks);
             return "Noted. I've removed this task:\n  "
                     + deletedTask
                     + "\n Now you have " + tasks.size() + " tasks in the list.";

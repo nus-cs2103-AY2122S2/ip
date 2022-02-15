@@ -40,9 +40,13 @@ public abstract class Command {
      * Executes the command
      *
      * @param tasks TaskList to be altered.
+     * @param places PlaceList to be altered.
      * @param ui Ui for reading user input and displaying output.
-     * @param storage Storage to read pre-existing tasks, and update tasks to hard disk.
+     * @param storageTask Storage to read pre-existing tasks, and update tasks to hard disk.
+     * @param storagePlace Storage to read pre-existing places, and update places to hard disk.
+     * @return a String representing the response to the user input.
      * @throws IOException if an I/O error occurs.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, PlaceList places, Ui ui,
+                                   Storage storageTask, Storage storagePlace) throws IOException;
 }

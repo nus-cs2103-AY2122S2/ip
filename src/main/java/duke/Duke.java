@@ -23,8 +23,10 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
-    private Storage storage;
+    private Storage storageTask;
+    private Storage storagePlace;
     private TaskList tasks;
+    private PlaceList places;
     private Ui ui;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -43,20 +45,31 @@ public class Duke extends Application {
     /**
      * Constructs an instance of Duke.
      *
-     * @param filePath A string representing the path to the file to save tasks to.
+     * @param filePathTask A string representing the path to the file to save tasks to.
+     * @param filePathPlace A string representing the path to the file to save places to.
      * @throws IOException if an I/O error occurs.
      */
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePathTask, String filePathPlace) throws IOException {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storageTask = new Storage(filePathTask);
         try {
-            if (storage.load().equals("")) {
+            if (storageTask.load().equals("")) {
                 throw new DukeException("");
             }
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storageTask.load());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+        }
+        storagePlace = new Storage(filePathPlace);
+        try {
+            if (storagePlace.load().equals("")) {
+                throw new DukeException("");
+            }
+            places = new PlaceList(storagePlace.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            places = new PlaceList();
         }
     }
 
@@ -176,17 +189,17 @@ public class Duke extends Application {
         if (input.equals("bye")) {
             Platform.exit();
         }
-        return new Duke("data/tasks.txt").run(input);
+        return new Duke("data/tasks.txt", "data/places.txt").run(input);
     }
 
     /**
      * Runs the task tracker.
      *
+     * @param fullCommand a string representing the user input.
      * @throws IOException if an I/O error occurs.
      */
     public String run(String fullCommand) throws IOException {
-        boolean isExit = false;
         Command command = Parser.parse(fullCommand, ui);
-        return command.execute(tasks, ui, storage);
+        return command.execute(tasks, places, ui, storageTask, storagePlace);
     }
 }

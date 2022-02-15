@@ -32,7 +32,7 @@ public class Storage {
             if (!directoryExists) {
                 java.nio.file.Files.createDirectories(path);
             }
-            Path dukeFile = path.resolve("tasks.txt");
+            Path dukeFile = path.resolve(filePath.substring(5));
             newFile = Files.createFile(dukeFile);
             this.fileName = "";
         } catch (FileAlreadyExistsException e) {
@@ -51,6 +51,20 @@ public class Storage {
         ArrayList<String> data = new ArrayList<String>();
         for (Task task : tasks.getList()) {
             data.add(task.toString());
+        }
+        java.nio.file.Files.write(Paths.get(this.filePath), data, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Updates the save file with the new place list.
+     *
+     * @param places A PlaceList containing the updated places.
+     * @throws IOException if an I/O error occurs.
+     */
+    public void update(PlaceList places) throws IOException {
+        ArrayList<String> data = new ArrayList<String>();
+        for (Place place : places.getList()) {
+            data.add(place.toString());
         }
         java.nio.file.Files.write(Paths.get(this.filePath), data, StandardCharsets.UTF_8);
     }

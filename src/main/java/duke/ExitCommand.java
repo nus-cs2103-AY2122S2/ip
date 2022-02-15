@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * Represents an exit command, terminating the program.
  */
@@ -18,7 +20,8 @@ public class ExitCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, PlaceList places, Ui ui,
+                          Storage storageTask, Storage storagePlace) throws IOException {
         return ui.showGoodbye();
     }
 }

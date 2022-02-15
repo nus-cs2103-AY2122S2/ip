@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * Represents an invalid command.
  */
@@ -18,7 +20,8 @@ public class InvalidCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, PlaceList places, Ui ui,
+                          Storage storageTask, Storage storagePlace) throws IOException {
         return this.getFirstWord();
     }
 }

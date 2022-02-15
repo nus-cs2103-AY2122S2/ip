@@ -3,16 +3,16 @@ package duke;
 import java.io.IOException;
 
 /**
- * Represents a list command.
+ * Represents a view places command.
  */
-public class ListCommand extends Command {
+public class ViewPlacesCommand extends Command {
 
     /**
-     * Constructs an instance of the ListCommand class.
+     * Constructs an instance of the ViewPlacesCommand class.
      *
-     * @param command A string containing the word "list".
+     * @param command A string containing the word "viewplaces".
      */
-    public ListCommand(String command) {
+    public ViewPlacesCommand(String command) {
         super(command);
     }
 
@@ -22,12 +22,12 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, PlaceList places, Ui ui,
                           Storage storageTask, Storage storagePlace) throws IOException {
-        if (tasks.isEmpty()) {
+        if (places.isEmpty()) {
             return "Uh-oh! List is empty!";
         } else {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < tasks.size(); i++) {
-                sb.append(i + 1).append(".").append(tasks.get(i)).append("\n");
+            for (int i = 0; i < places.size(); i++) {
+                sb.append(i + 1).append(". ").append(places.get(i).getName()).append("\n");
             }
             return sb.toString();
         }
