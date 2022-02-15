@@ -23,33 +23,20 @@ public class DateTimeHandler {
      * List of acceptable date time patterns.
      */
     private final List<String> dateTimePatterns = List.of(
-            "dd[[-][/][:][ ]]MM[[-][/][:][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "dd[[-][/][:][ ]]MM[[-][/][:][ ]]uu[ HH[[-][:][ ]]mm]",
+            "dd[[-][/][ ]]MM[[-][/][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "dd[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "d[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "dd[[-][ ]]MMM[[-][ ]]uu[ HH[[-][:][ ]]mm]",
-            "d[[-][ ]]MMM[[-][ ]]uu[ HH[[-][:][ ]]mm]",
             "dd[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "d[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "dd[[-][ ]]mmmm[[-][ ]]uu[ hh[[-][:][ ]]mm]",
-            "d[[-][ ]]MMMM[[-][ ]]uu[ HH[[-][:][ ]]mm]",
-            "d[[-][ ]]MMMM[[-][ ]]uuu[ HH[[-][:][ ]]mm]",
+            "d[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "dd[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "d[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "dd[[-][ ]]MMM[[-][ ]]uu[ HH[[-][:][ ]]mm]",
-            "d[[-][ ]]MMM[[-][ ]]uu[ HH[[-][:][ ]]MM]",
             "dd[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "d[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "dd[[-][ ]]MMMM[[-][ ]]uu[ HH[[-][:][ ]]mm]",
-            "d[[-][ ]]MMMM[[-][ ]]uu[ HH[[-][:][ ]]mm]",
             "MMM[[-][ ]]dd[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "MMM[[-][ ]]d[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "MMM[[-][ ]]dd[[-][ ]]uu[ HH[[-][:][ ]]mm]",
-            "MMM[[-][ ]]d[[-][ ]]uu[ HH[[-][:][ ]]mm]",
             "MMMM[[-][ ]]dd[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "MMMM[[-][ ]]d[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "MMMM[[-][ ]]dd[[-][ ]]uu[ HH[[-][:][ ]]mm]",
-            "MMMM[[-][ ]]d[[-][ ]]uu[ HH[[-][:][ ]]mm]");
+            "MMMM[[-][ ]]d[[-][ ]]uuuu[ HH[[-][:][ ]]mm]");
 
     /**
      * Formatter for date time inputs.
@@ -73,6 +60,21 @@ public class DateTimeHandler {
     }
 
     /**
+     * Constructor that initializes to a default value (1 January 2000, 00:00).
+     */
+    public DateTimeHandler() {
+        initializeFormatters();
+        try {
+            dateTime = LocalDateTime.parse("010102000 0000", inputFormatter);
+        } catch (DateTimeParseException e) {
+            // Should not reach here
+            assert false;
+            e.printStackTrace();
+        }
+        assert dateTime != null;
+    }
+
+    /**
      * Initializes the date and time formatters.
      */
     private void initializeFormatters() {
@@ -83,7 +85,7 @@ public class DateTimeHandler {
                         (builder, other) -> builder.appendOptional(other.toFormatter()))
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 8)
                 .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-                .parseDefaulting(ChronoField.SECOND_OF_DAY, 0)
+                .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
                 .toFormatter()
                 .withResolverStyle(ResolverStyle.STRICT);
         outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
@@ -103,7 +105,6 @@ public class DateTimeHandler {
         try {
             this.dateTime = LocalDateTime.parse(string, inputFormatter);
         } catch (DateTimeParseException e) {
-            e.printStackTrace();
             throw new JukeParseException("date and time");
         }
     }
