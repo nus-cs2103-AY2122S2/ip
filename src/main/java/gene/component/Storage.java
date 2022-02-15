@@ -131,9 +131,7 @@ public class Storage {
         } catch (Exception err) {
             err.printStackTrace();
         }
-
         this.targetFile = new File(this.absolutePath.toString());
-
         return this.itemList;
     }
 

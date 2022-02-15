@@ -45,7 +45,6 @@ public class EditCommand extends Command {
         int index = Integer.parseInt(strIndex);
         Task targetTask = tasks.get(index); //have to edit tasklist
         Task newTask;
-
         if (this.mark.equals("1")) {
             newTask = targetTask.markTask();
             toPrint = Ui.showLine()
@@ -63,12 +62,9 @@ public class EditCommand extends Command {
                     + "\n"
                     + Ui.showLine();
         }
-
         tasks.set(index, newTask);
         storage.updatesToFile(index, mark);
-
         return toPrint;
-
     }
 
     /**
