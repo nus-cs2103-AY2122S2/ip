@@ -1,11 +1,6 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
@@ -137,5 +132,26 @@ public class Storage {
                 break;
         }
         return newT;
+    }
+
+    /**
+     * Creates "data" folder and "duke.txt" file to store Tasks after terminating program
+     */
+    public void createDukeTextFile() throws IOException {
+        //Create data folder first
+        String currentDir = System.getProperty("user.dir");
+        File data = new File(currentDir + "/data");
+        data.mkdir();
+
+        //Create duke.txt file
+        File duke = new File(currentDir + "/duke");
+        try {
+            duke.createNewFile();
+            fileWriter = new FileWriter(duke);
+            saveAllTasks(tasks);
+            closeWriteFile();
+        } catch (IOException err) {
+            throw new IOException();
+        }
     }
 }

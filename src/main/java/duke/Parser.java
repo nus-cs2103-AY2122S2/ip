@@ -124,7 +124,7 @@ public class Parser {
      * Based on supplied command by user input, run the command
      * @param input by the user for Duke to process
      */
-    public String parseInput(String input) {
+    public String parseInput(String input) throws IOException {
         userInput = input;
         splitUserInput();
         Commands action;
@@ -349,9 +349,9 @@ public class Parser {
     }
 
     /**
-     * Saves all content into file and stops the program
+     * Saves all content into duke.txt file and stops the program
      */
-    public String terminateAndSaveProgram(Storage storage) {
+    public String terminateAndSaveProgram(Storage storage) throws IOException {
         StringBuilder successMessage = new StringBuilder();
         String byeMessage = "Bye. Hope to see you again soon!\n";
         successMessage.append(byeMessage);
@@ -359,8 +359,9 @@ public class Parser {
             storage.saveAllTasks(tasks);
             storage.closeWriteFile();
             return successMessage.toString();
-        } catch (IOException e) {
-            return e.getMessage();
+        } catch (IOException e) { //no data file
+            storage.createDukeTextFile();
+            return "Duke text file created for you!";
         }
     }
 }
