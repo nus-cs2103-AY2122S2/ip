@@ -150,6 +150,7 @@ public class Nikki {
 
         case "clear":
             tasks.clear();
+            response = ui.getClearedListResponse();
             break;
 
         default:

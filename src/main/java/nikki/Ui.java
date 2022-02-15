@@ -63,4 +63,13 @@ public class Ui {
         return "Updated the following task\n"
                 + "\t" + task.nameWithStatus();
     }
+
+    /**
+     * Logs the clearing of tasks from the list
+     *
+     * @return formatted String
+     */
+    public String getClearedListResponse() {
+        return "Task list cleared";
+    }
 }
