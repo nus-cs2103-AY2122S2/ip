@@ -4,42 +4,40 @@
 
 ## Features 
 
-[Listing all tasks](#-listing-all-tasks-list)
-
 ### Listing all tasks
 
-* [`list`](#list-lists-all-tasks)
+* [`list`](#list---lists-all-tasks)
 
 ### Adding a task: `todo`, `deadline`, and `event`
 
-* [`todo`](#todo-adds-a-todo-task)
-* [`deadline`](#deadline-adds-a-deadline-task)
-* [`event`](#event-adds-an-event-task)
+* [`todo`](#todo---adds-a-todo-task)
+* [`deadline`](#deadline---adds-a-deadline-task)
+* [`event`](#event---adds-an-event-task)
 
 ### Deleting a task: `delete`
 
-* [`delete`](#delete-deletes-a-task)
+* [`delete`](#delete---deletes-a-task)
 
 ### Clearing all tasks: `clear`
 
-* [`clear`](#clear-clears-all-tasks)
+* [`clear`](#clear---clears-all-tasks)
 
 ### Marking/Unmarking a task: `mark` and `unmark`
 
-* [`mark`](#mark-marks-a-task-as-completed)
-* [`unmark`](#unmark-unmarks-a-task)
+* [`mark`](#mark---marks-a-task-as-completed)
+* [`unmark`](#unmark---unmarks-a-task)
 
 ### Finding a task: `find`
 
-* [`find`](#find-finds-a-task)
+* [`find`](#find---finds-a-task)
 
 ### Sorting tasks: `sort`
 
-* [`sort`](#sort-sorts-tasks)
+* [`sort`](#sort---sorts-tasks)
 
 ### Exiting the program: `exit` or `bye`
 
-* [`exit`](#exit-exits-the-program)
+* [`exit`](#exit---exits-the-program)
 
 ## Usage
 
