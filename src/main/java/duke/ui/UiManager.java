@@ -32,11 +32,17 @@ public class UiManager {
         return this.LINE;
     }
 
+    public void start() {
+        System.out.println("> Larry started successfully");
+    }
+
     /**
      * Prints a formatted welcome message.
      */
-    public void welcome() {
-        System.out.println("> Larry started successfully");
+    public String welcome(int i) {
+        String message = "Hello there! Let me check if you list saved...\n";
+        message += String.format("you currently have %d task(s)!", i);
+        return message;
     }
 
     /**
