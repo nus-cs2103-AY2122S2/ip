@@ -15,6 +15,11 @@ public class Todo extends Task {
         );
     }
 
+    /**
+     * Represents a Todo object using String
+     *
+     * @return String contains detail of the Todo
+     */
     @Override
     public String toString() {
         return super.toString() + "  " + this.tag;

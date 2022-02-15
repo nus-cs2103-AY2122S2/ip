@@ -1,11 +1,19 @@
 package duke;
 
+/**
+ * The command to handle keyword event
+ */
 public class EventCommand extends Command {
 
     EventCommand(Ui ui, TaskList taskList, Storage storage, String detail) {
         super(ui, taskList, storage, detail);
     }
 
+    /**
+     * Creates a event and adds into the taskList
+     *
+     * @return Details of the new event and total number of task in taskList
+     */
     @Override
     String runCommand() {
         String[] detailArray = detail.split(" ", 2);

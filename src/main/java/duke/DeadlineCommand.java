@@ -1,11 +1,19 @@
 package duke;
 
+/**
+ * The command to handle keyword deadline
+ */
 public class DeadlineCommand extends Command {
 
     DeadlineCommand(Ui ui, TaskList taskList, Storage storage, String detail) {
         super(ui, taskList, storage, detail);
     }
 
+    /**
+     * Creates a deadline and adds into the taskList
+     *
+     * @return Details of the new deadline and total number of task in taskList
+     */
     @Override
     String runCommand() {
         String[] detailArray = detail.split(" ", 2);

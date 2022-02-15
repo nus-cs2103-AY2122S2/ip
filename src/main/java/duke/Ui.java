@@ -22,16 +22,26 @@ public class Ui {
     }
 
     /**
-     * Return the logo and greet user
+     * Returns the logo and greet user
      */
     public String greet() {
         return echo("Hello, I am B.H. How can I help you?");
     }
 
+    /**
+     * Returns goodbye message
+     *
+     * @return Goodbye message
+     */
     public static String sayBye() {
         return echo("GoodBye! Thanks for using B.H!");
     }
 
+    /**
+     * Returns wrong input warning
+     *
+     * @return Wrong input warning
+     */
     public String sayWrongInput() {
         return echo("Wrong input, please try again");
     }

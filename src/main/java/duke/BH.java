@@ -39,13 +39,13 @@ public class BH {
 
 
     /**
-     * create a new BH object and start running the program
+     * creates a new BH object and start running the program
      */
-    public static class Duke{
+    public static class Duke {
         public BH bh;
 
         /**
-         * Constructor of Duke
+         * Constructs a Duke
          *
          * @throws DukeException If read file wrongly
          */

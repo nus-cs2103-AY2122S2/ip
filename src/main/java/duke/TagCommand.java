@@ -1,11 +1,19 @@
 package duke;
 
+/**
+ * Command to handle keyword tag
+ */
 public class TagCommand extends Command {
 
     TagCommand(Ui ui, TaskList taskList, Storage storage, String detail) {
         super(ui, taskList, storage, detail);
     }
 
+    /**
+     * Tags the given task
+     *
+     * @return Details of the tagged task
+     */
     @Override
     String runCommand() {
         String[] detailArray = detail.split(" ", 3);

@@ -22,15 +22,10 @@ public class Parser {
     }
 
     /**
-     * if input starts with list, print out all tasks in the list
-     * if input starts with mark, mark the task as done
-     * if input starts with unmark, unmark the task as not done
-     * if input starts with todo, deadline or event, create a corresponding task and add to list
-     * if input starts with delete, delete the corresponding task
-     * if input starts with check, check all the task on the same date
+     * Executes the user input and return the result after running the corresponding commands
      *
      * @param input User command
-     * @return String after the execution of user command
+     * @return Result after the execution of user command
      * @throws DukeException If wrong input is detected
      */
     String execute(String input) throws DukeException {

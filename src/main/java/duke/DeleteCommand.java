@@ -1,11 +1,19 @@
 package duke;
 
+/**
+ * The command to handle keyword delete
+ */
 public class DeleteCommand extends Command {
 
     DeleteCommand(Ui ui, TaskList taskList, Storage storage, String detail) {
         super(ui, taskList, storage, detail);
     }
 
+    /**
+     * Deletes a task from taskList
+     *
+     * @return Details of the task deleted
+     */
     @Override
     String runCommand() {
         String[] detailArray = detail.split(" ", 2);

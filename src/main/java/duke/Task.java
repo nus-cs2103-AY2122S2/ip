@@ -7,13 +7,13 @@ import java.time.format.DateTimeFormatter;
  * Represent a task to complete
  */
 public class Task {
-    boolean isDone;
-    protected final String task;
-    protected final String type;
-    protected final String time;
-    protected LocalDate date;
-    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-    protected String tag;
+    public boolean isDone;
+    public String task;
+    public String type;
+    public String time;
+    public LocalDate date;
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+    public String tag;
 
     /**
      * Constructor of task
@@ -55,6 +55,7 @@ public class Task {
     boolean containsWord(String word) {
         return this.task.contains(word);
     }
+
     /**
      * Marks the task as done
      */
@@ -68,6 +69,7 @@ public class Task {
     void unMark() {
         this.isDone = false;
     }
+
     /**
      * Returns the date of the task
      *
@@ -91,10 +93,18 @@ public class Task {
         }
     }
 
+    /**
+     * Adds tag to the task
+     *
+     * @param tag the tag to be added
+     */
     public void tag(String tag) {
         this.tag = tag;
     }
 
+    /**
+     * Removes all tags of the task
+     */
     public void untag() {
         this.tag = " ";
     }

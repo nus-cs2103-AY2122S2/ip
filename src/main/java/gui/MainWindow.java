@@ -34,18 +34,26 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/bh2.jpeg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bh.png"));
 
+    /**
+     * Initializes BH and greets users
+     */
     @FXML
     public void initialize() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.echo("Hi, how can I help you?"), dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * sets duke
+     *
+     * @param d the duke object to be set
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing BH's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

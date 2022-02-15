@@ -1,11 +1,19 @@
 package duke;
 
+/**
+ * Command to handle keyword unmark
+ */
 public class UnmarkCommand extends Command {
 
     UnmarkCommand(Ui ui, TaskList taskList, Storage storage, String detail) {
         super(ui, taskList, storage, detail);
     }
 
+    /**
+     * Unmarks the given task
+     *
+     * @return Details of the given task
+     */
     @Override
     String runCommand() {
         String[] detailArray = detail.split(" ", 2);

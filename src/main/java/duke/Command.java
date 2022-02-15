@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command to handle user input
+ */
 public abstract class Command {
     protected Ui ui;
     protected TaskList taskList;

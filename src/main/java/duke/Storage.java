@@ -43,7 +43,13 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Creates a different task object according user input
+     *
+     * @param input Details of the task to be created
+     * @return A Todo, Event or DeadLine object
+     * @throws DukeException If the input is not valid
+     */
     private Task createTaskByType(String input) throws DukeException {
         Task newTask;
         String[] task = input.split(" ### ");

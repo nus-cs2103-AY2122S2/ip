@@ -28,6 +28,11 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Gets all task in the taskList
+     *
+     * @return String contains all tasks in the list
+     */
     String getList() {
         String s = "";
         for (int i = 0; i < this.getListSize(); i++) {

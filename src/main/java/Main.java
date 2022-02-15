@@ -21,7 +21,7 @@ public class Main extends Application {
     }
 
     /**
-     * Start the GUI
+     * Starts the GUI
      * @param stage the stage of the GUI
      */
     @Override
