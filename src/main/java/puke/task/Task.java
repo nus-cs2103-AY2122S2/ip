@@ -83,7 +83,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (this.isDone() ? "X" : " ") // get the icon according to the status
+        return "[" + (this.isDone() ? "✔" : "✘") // get the icon according to the status
                 + "] " + this.name;
     }
 }

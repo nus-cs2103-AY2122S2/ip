@@ -1,14 +1,21 @@
 package puke.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import puke.Puke;
+
+import java.io.InputStream;
 
 /**
  * Controller for puke.ui.MainWindow. Provides the layout for the other controls.
@@ -27,6 +34,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaPuke.jpg"));
+    private Image catBG = new Image(this.getClass().getResourceAsStream("/images/CatBG.jpg"));
 
     /**
      * Initializes the stage with a welcome message.
@@ -37,6 +45,9 @@ public class MainWindow extends AnchorPane {
 
         String welcomeMessage = "Hello! I'm Puke, your friendly neighbourhood chatbot! "
                 + "What do you want to do?\n\nType 'help' to view available commands!";
+
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.valueOf("#f9f7f5"), new CornerRadii(1),
+                new Insets(0.0,0.0,0.0,0.0))));
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)

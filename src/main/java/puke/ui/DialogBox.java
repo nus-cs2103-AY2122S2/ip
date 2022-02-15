@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -26,6 +27,8 @@ public class DialogBox extends HBox {
     private Text dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private StackPane stackPane;
 
     private DialogBox(String text, Image img) {
         try {
@@ -40,7 +43,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
-        Circle circle = new Circle(50);
+        Circle circle = new Circle(35);
         circle.setCenterX(displayPicture.getFitWidth() / 2);
         circle.setCenterY(displayPicture.getFitHeight() / 2);
         displayPicture.setClip(circle);
@@ -55,6 +58,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         dialog.setTextAlignment(TextAlignment.LEFT);
+        stackPane.setStyle("-fx-background-color: #cebaac; -fx-background-radius: 30;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -63,7 +67,6 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #d5c4b8");
         db.flip();
         return db;
     }
