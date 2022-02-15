@@ -10,7 +10,6 @@ public class Mike {
     private TaskList taskList;
     private final Ui ui;
     private final Storage storage;
-
     //TODO: consider making Mike immutable (return Mike with new list each time)
     /**
      * Constructor for Mike.
@@ -18,7 +17,7 @@ public class Mike {
     public Mike() {
         this.ui = new Ui();
         this.taskList = new TaskList();
-        this.storage = new Storage("storedList.txt"); //hardcoded for now
+        this.storage = new Storage("storedList.txt");
         loadStoredList();
     }
 

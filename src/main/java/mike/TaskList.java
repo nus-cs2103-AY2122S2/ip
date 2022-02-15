@@ -81,6 +81,7 @@ public class TaskList {
      */
     String markInListWithMessage(int indexFromUser) {
         int indexInList = indexFromUser - 1;
+        assert indexInList >= 0 : "index should be more than or equal to 0";
         Task oldTask = this.listOfTasks.get(indexInList);
         Task newTask = oldTask.markAsDone();
         this.listOfTasks.set(indexInList, newTask);
@@ -98,6 +99,7 @@ public class TaskList {
      */
     String unmarkInListWithMessage(int indexFromUser) {
         int indexInList = indexFromUser - 1;
+        assert indexInList >= 0 : "index should be more than or equal to 0";
         Task oldTask = this.listOfTasks.get(indexInList);
         Task newTask = oldTask.markAsUndone();
         this.listOfTasks.set(indexInList, newTask);
@@ -186,24 +188,20 @@ public class TaskList {
             String todoName = splitString[2];
             Todo todo = new Todo(todoName, isDone);
             return todo;
-        //break;
         case "D":
             isDone = Boolean.parseBoolean(splitString[1]);
             String deadlineName = splitString[2];
             String endDate = splitString[3];
             Deadline deadline = new Deadline(deadlineName, endDate, isDone);
             return deadline;
-        //break;
         case "E":
             isDone = Boolean.parseBoolean(splitString[1]);
             String eventName = splitString[2];
             String eventTime = splitString[3];
             Event event = new Event(eventName, eventTime, isDone);
             return event;
-        //break;
         default:
             return new Todo("Fallthrough occurred!!");
-        //break;
         }
     }
 }
