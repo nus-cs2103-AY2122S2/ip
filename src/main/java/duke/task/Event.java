@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.exception.InvalidArgumentException;
-
 import java.util.Arrays;
 import java.util.List;
+
+import duke.exception.InvalidArgumentException;
 
 /**
  * An Event is a specialization of a Task.
