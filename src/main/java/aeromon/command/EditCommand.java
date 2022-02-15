@@ -42,18 +42,18 @@ public class EditCommand extends Command {
                 Task markTask = taskArrayList.get(index);
                 markTask.markAsDone();
                 storage.saveFile(taskArrayList.getTasks());
-                return MARK_MESSAGE + markTask + "\n";
+                return MARK_MESSAGE + markTask + "\n" + taskArrayList.getTasksStatus();
 
             case UNMARK:
                 Task unmarkTask = taskArrayList.get(index);
                 unmarkTask.markAsNotDone();
                 storage.saveFile(taskArrayList.getTasks());
-                return UNMARK_MESSAGE + unmarkTask + "\n";
+                return UNMARK_MESSAGE + unmarkTask + "\n" + taskArrayList.getTasksStatus();
 
             case DELETE:
                 Task deleteTask = taskArrayList.delete(index);
                 storage.saveFile(taskArrayList.getTasks());
-                return DELETE_MESSAGE + deleteTask + "\n";
+                return DELETE_MESSAGE + deleteTask + "\n" + taskArrayList.getTasksStatus();
 
             }
             return "Ohnoz I couldn't execute the command, tHerE weRE somE ErrORss!";
