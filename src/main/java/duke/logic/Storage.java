@@ -81,7 +81,7 @@ public class Storage {
     public TaskList readFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc;
-        
+
         try {
             sc = new Scanner(this.file);
         } catch (IOException e) {

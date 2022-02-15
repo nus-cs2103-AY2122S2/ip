@@ -9,14 +9,14 @@ import java.util.LinkedList;
  */
 public class TaskStack {
     /**
+     * Maximum capacity for stack of tasks lists.
+     */
+    private static final int MAX_SIZE = 10;
+
+    /**
      * Internally stored stack of task lists.
      */
     private final LinkedList<TaskList> taskLists;
-
-    /**
-     * Maximum capacity for stack of tasks lists.
-     */
-    private final int MAX_SIZE = 10;
 
     /**
      * Constructor for a task stack.

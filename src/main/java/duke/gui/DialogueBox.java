@@ -11,9 +11,9 @@ import javafx.scene.shape.Circle;
  * Represents a dialogue box in Duke GUI.
  */
 public class DialogueBox extends HBox {
+    private static final int IMAGE_SIZE = 80;
     private Label text;
     private ImageView displayPicture;
-    private static final int IMAGE_SIZE = 80;
 
     /**
      * Constructor for a dialogue box.
