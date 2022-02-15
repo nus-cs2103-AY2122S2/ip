@@ -9,9 +9,9 @@ import duke.tasklist.TaskList;
  */
 public class Duke {
 
-    private Parser parser;
-    private Storage storage;
-    private TaskList taskList;
+    private final Parser parser;
+    private final Storage storage;
+    private final TaskList taskList;
 
     /**
      * Creates a Duke object that takes in a filepath for reading and writing of data.
