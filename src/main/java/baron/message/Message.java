@@ -1,5 +1,6 @@
 package baron.message;
 
+import baron.exceptions.BaronException;
 import baron.tasks.TaskType;
 
 /**
@@ -50,9 +51,13 @@ public class Message {
      * @param taskCount the number of tasks.
      * @return the message that warns that the task index is out of bound and thus invalid.
      */
-    public static String generateTaskIndexOutOfBoundMessage(int taskCount) {
+    public static String generateTaskIndexOutOfBoundMessage(int taskCount) throws BaronException {
         assert taskCount >= 0 : "taskCount should be >= 0";
-        return "The task index is invalid, only accepts 1 to " + taskCount + ".";
+        if (taskCount == 0) {
+            throw new BaronException(Message.MESSAGE_NO_TASK);
+        }
+        String partialMessage = (taskCount == 1) ? "" : " to " + taskCount;
+        return "The task index is invalid, only accepts 1" + partialMessage + ".";
     }
 
     /**
