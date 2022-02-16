@@ -40,6 +40,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds task into task list.
+     *
+     * @param task The given task.
+     */
     public void addTask(Task task) {
         assert task != null : "Cannot add empty task to task list";
         tasks.add(task);
