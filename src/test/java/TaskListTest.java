@@ -1,3 +1,4 @@
+import chibot.exception.ChiException;
 import chibot.task.TaskStub;
 import chibot.tasklist.TaskList;
 
@@ -8,10 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TaskListTest {
 
     @Test
-    void taskCanBeAdded_newTask_newTaskExistsInList() {
-        TaskList t = new TaskList();
-        t.addTask(new TaskStub(""));
-        assertEquals("forT1", t.getTask(0).toString());
+    void taskCanBeAdded_newTask_newTaskExistsInList() throws ChiException {
+        try {
+            TaskList t = new TaskList();
+            t.addTask(new TaskStub(""));
+            assertEquals("forT1", t.getTask(0).toString());
+        } catch (ChiException e) {
+            throw new ChiException("This should not happen");
+        }
     }
 
     @Test

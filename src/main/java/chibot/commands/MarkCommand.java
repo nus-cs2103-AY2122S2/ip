@@ -39,7 +39,7 @@ public class MarkCommand extends Command {
             boolean isValidMarkCommand = validateMessageBody(msg, tl);
             if (!isValidMarkCommand) {
                 throw new ChiException("Hey there is something wrong with this mark command nyan! Make sure:\n"
-                        + "1.You only insert 1 integer value\n2.A valid task number");
+                        + "1.You only insert 1 integer value\n2.Insert valid task number\n3.List is not empty");
             }
             int index = getIndexInMessage(msg);
             Task doneTask = tl.getTask(index);
@@ -65,7 +65,7 @@ public class MarkCommand extends Command {
                 return false;
             }
             int s = Integer.parseInt(words[0]);
-            return s >= 0 && s <= tl.getSize();
+            return s > 0 && s <= tl.getSize();
         } catch (NumberFormatException e) {
             return false;
         }

@@ -40,7 +40,8 @@ public class DeleteCommand extends Command {
             boolean isValidMarkCommand = validateMessageBody(msg, tl);
             if (!isValidMarkCommand) {
                 throw new ChiException("Hey there is something wrong with this delete command nyan! Make sure:\n"
-                        + "1.You only insert 1 integer value\n2.A valid task number to delete");
+                        + "1.You only insert 1 integer value\n2.Insert valid task number to delete"
+                        + "\n3.List is not empty");
             }
             int index = getIndexInMessage(msg);
             assert index != tl.getSize() : "The index should never equal size";
@@ -68,7 +69,7 @@ public class DeleteCommand extends Command {
                 return false;
             }
             int s = Integer.parseInt(words[0]);
-            return s >= 0 && s <= tl.getSize();
+            return s > 0 && s <= tl.getSize();
         } catch (NumberFormatException e) {
             return false;
         }
