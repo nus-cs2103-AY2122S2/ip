@@ -116,7 +116,7 @@ Expected outcome:
 
 ### `bye` - Exit
 
-Exits the application.
+Pauses for 1 sec then exits the application.
 
 Example of usage: `bye`
 
