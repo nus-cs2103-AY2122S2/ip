@@ -41,7 +41,7 @@ public class TaskList implements Serializable {
     public String remove(int idx) throws DukeException {
         try {
             return tasks.remove(idx).toString();
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid input! This task number does not exist.");
         }
     }
@@ -59,7 +59,7 @@ public class TaskList implements Serializable {
             Task task = tasks.get(idx);
             task.setCompleted(isMark);
             return task.toString();
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid input! This task number does not exist.");
         }
     }

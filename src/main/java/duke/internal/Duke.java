@@ -74,9 +74,9 @@ public class Duke {
             if (command.getModify()) {
                 storage.save(taskList);
             }
-            return new GuiFeedback(ui.getFormattedMessage(output), command.getExit());
+            return new GuiFeedback(ui.getFormattedMessage(output), command.getExit(), false);
         } catch (DukeException e) {
-            return new GuiFeedback(ui.getFormattedMessage(e.getMessage()), false);
+            return new GuiFeedback(ui.getFormattedMessage(e.getMessage()), false, true);
         }
     }
 

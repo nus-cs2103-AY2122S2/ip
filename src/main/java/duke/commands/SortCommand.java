@@ -61,7 +61,9 @@ public class SortCommand extends Command {
         try {
             sortType = SortType.valueOfLabel(tokens[1]);
         } catch (Exception exception) {
-            throw new DukeException("Please enter a valid way to sort the task!");
+            String errorStr = "Please enter a valid way to sort the task!\n"
+                    + "e.g. sort alphabetical";
+            throw new DukeException(errorStr);
         }
 
         if (sortType == null) {

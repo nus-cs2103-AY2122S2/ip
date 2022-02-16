@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 import duke.exceptions.DukeException;
@@ -61,12 +62,28 @@ public class Event extends Task implements Timable {
      */
     protected static Event createTask(String[] tokens) throws DukeException {
         String description = createDescription(tokens);
+        LocalDate date = null;
+        LocalTime[] timings = null;
+        boolean error = false;
+        String errorMsg = "";
         if (description.equals("")) {
-            throw new DukeException("The description of an event task cannot be empty!");
+            error = true;
+            errorMsg += "The description of an event task cannot be empty!\n";
         }
 
-        LocalDate date = createDate(tokens);
-        LocalTime[] timings = createTime(tokens);
+        try {
+            date = createDate(tokens);
+            timings = createTime(tokens);
+        } catch (IllegalArgumentException e) {
+            error = true;
+            errorMsg += e.getMessage() + "\n";
+        }
+        if (error) {
+            errorMsg += "Please enter your command in the form of - "
+                    + "event <task information> /at <date> <start time>-<end time>\n";
+            errorMsg += "e.g. event buy book /at 2015-05-05 06:00-07:00";
+            throw new DukeException(errorMsg.trim());
+        }
         LocalTime startTime = timings[0];
         LocalTime endTime = timings[1];
 
@@ -87,7 +104,7 @@ public class Event extends Task implements Timable {
         return description.trim();
     }
 
-    private static LocalDate createDate(String[] tokens) throws DukeException {
+    private static LocalDate createDate(String[] tokens) throws IllegalArgumentException {
         int idx = 0;
         for (; idx < tokens.length; idx++) {
             if (tokens[idx].equals("/at")) {
@@ -98,11 +115,11 @@ public class Event extends Task implements Timable {
             String dateString = tokens[idx + 1];
             return LocalDate.parse(dateString);
         } catch (Exception e) {
-            throw new DukeException("Please specify a valid date!");
+            throw new IllegalArgumentException("Invalid date entered!");
         }
     }
 
-    private static LocalTime[] createTime(String[] tokens) throws DukeException {
+    private static LocalTime[] createTime(String[] tokens) throws IllegalArgumentException {
         int idx = 0;
         for (; idx < tokens.length; idx++) {
             if (tokens[idx].equals("/at")) {
@@ -115,7 +132,7 @@ public class Event extends Task implements Timable {
             LocalTime endTime = LocalTime.parse(timeString[1]);
             return new LocalTime[]{startTime, endTime};
         } catch (Exception e) {
-            throw new DukeException("Please specify a valid start time and end time! (hh:mm)");
+            throw new IllegalArgumentException("Invalid time entered!");
         }
     }
 }

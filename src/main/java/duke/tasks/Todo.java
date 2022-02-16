@@ -33,7 +33,9 @@ public class Todo extends Task {
     protected static Todo createTask(String[] tokens) throws DukeException {
         String description = createDescription(tokens);
         if (description.equals("")) {
-            throw new DukeException("The description of a todo task cannot be empty!");
+            String errorMsg = "The description of a todo task cannot be empty!\n"
+                    + "Please enter your command in the form of - todo <task information>";
+            throw new DukeException(errorMsg);
         }
         return new Todo(description);
     }
