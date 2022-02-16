@@ -2,10 +2,8 @@ package duke.parser;
 
 import duke.commands.*;
 import duke.exceptions.DukeInvalidArgumentException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class Parser {
     private String[] parseArguments(String[] arguments) throws DukeInvalidArgumentException {

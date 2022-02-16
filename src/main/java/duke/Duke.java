@@ -3,16 +3,11 @@ package duke;
 import duke.commands.Command;
 import duke.commands.ExitCommand;
 import duke.exceptions.DukeException;
-import duke.exceptions.DukeInvalidArgumentException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.*;
 import duke.ui.TextUI;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 

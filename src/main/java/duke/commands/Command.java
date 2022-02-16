@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.DukeInvalidArgumentException;
 import duke.exceptions.DukeUnsupportedOperationException;
 import duke.tasks.TaskList;
 

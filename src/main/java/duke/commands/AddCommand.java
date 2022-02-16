@@ -4,9 +4,7 @@ import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
-
 import java.time.LocalDateTime;
-import java.util.Locale;
 
 public class AddCommand extends Command{
     private String taskType;
