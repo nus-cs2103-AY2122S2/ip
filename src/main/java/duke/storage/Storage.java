@@ -22,17 +22,19 @@ import duke.task.Todo;
  */
 public class Storage {
     private static final String HOME = System.getProperty("user.home");
+    private static final String filePath = "/poogie.txt";
     private static File saveFile;
-
+    private final String directoryPath;
     /**
      * Checks if a data folder and save file exists in the specified directory.
      * If not, create the folder and save file.
      *
-     * @param dirPath the path of the data folder, relative to user's home directory
+     * @param directoryPath the path of the data folder, relative to user's home directory
      */
-    public Storage(String dirPath) throws DukeException {
+    public Storage(String directoryPath) throws DukeException {
+        this.directoryPath = directoryPath;
         try {
-            Path dir = Paths.get(HOME + dirPath);
+            Path dir = Paths.get(HOME + directoryPath);
 
             // check if /ip/data directories exists, if not create
             if (!Files.exists(dir)) {
@@ -40,14 +42,14 @@ public class Storage {
             }
 
             // check if the save file in /ip/data exists, if not create
-            Path p = Paths.get(HOME + dirPath + "/duke.txt");
+            Path p = Paths.get(HOME + directoryPath + filePath);
             if (!Files.exists(p)) {
                 Files.createFile(p);
             }
 
             saveFile = new File(p.toString());
         } catch (IOException e) {
-            throw new DukeException("There was a problem with creating a save file at " + HOME + dirPath + ". "
+            throw new DukeException("There was a problem with creating a save file at " + HOME + directoryPath + ". "
                     + "Please ensure that I have access to the directory.");
         }
     }
@@ -93,7 +95,7 @@ public class Storage {
      */
     public void save(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(HOME + "/ip/data/duke.txt");
+            FileWriter fw = new FileWriter(HOME + directoryPath + filePath);
             for (int i = 0; i < tasks.listSize(); i++) {
                 fw.write(tasks
                         .getTask(i)
@@ -112,7 +114,7 @@ public class Storage {
      */
     public void append(String textToAppend) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(HOME + "/ip/data/duke.txt",
+            FileWriter fw = new FileWriter(HOME + directoryPath + filePath,
                     true);
             fw.write(textToAppend + "\n");
             fw.close();
