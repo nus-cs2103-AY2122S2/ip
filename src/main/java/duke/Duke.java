@@ -1,8 +1,6 @@
 package duke;
 
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import javafx.application.Application;
@@ -31,17 +29,6 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            list = new TaskList(storage.load());
-        } catch (IOException e) {
-            System.out.println("error");
-            System.out.println(e.getMessage());
-        }
-    }
 
     public Duke() {
         ui = new Ui();
@@ -109,16 +96,13 @@ public class Duke extends Application {
                 }
             }
         } else if (command.equals("bye")) {
+            boolean isSuccess = false;
             try {
-                FileWriter fw = new FileWriter("prince.txt");
-                for (Integer i = 0; i < list.size(); i++) {
-                    fw.write(list.get(i).toString());
-                    fw.write(System.lineSeparator());
-                }
-                fw.close();
+                isSuccess = storage.store(list);
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                out += e.getMessage();
             }
+            assert isSuccess;
             out += ("See you later alligator :)");
         } else if (command.equals("list")) {
             out = list.printList();
@@ -167,24 +151,8 @@ public class Duke extends Application {
         } else {
             throw new DukeException("I'm not sure what that means");
         }
+        assert !out.equals("");
         return out;
-    }
-
-    private void run() {
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            try {
-                String command = sc.nextLine();
-                handle(command);
-                ui.printDivider();
-                if (command.equals("bye")) {
-                    break;
-                }
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
-        }
     }
 
     /**
@@ -293,10 +261,7 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
+
     private String getResponse(String input) {
         try {
             return handle(input);
