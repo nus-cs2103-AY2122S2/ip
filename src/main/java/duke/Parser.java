@@ -21,6 +21,8 @@ public class Parser {
         String[] split = input.split(" ");
         if (input.equals("bye")) {
             return RESULT.BYE;
+        } else if (input.equals("help")) {
+            return RESULT.HELP;
         } else if (input.equals("list")) {
             return RESULT.LIST;
         } else if (split[0].equals("mark")) {
@@ -149,7 +151,7 @@ public class Parser {
      * Enum which holds all the various user commands
      */
     public enum RESULT {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, ERROR, FIND, SNOOZE
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, ERROR, FIND, SNOOZE, HELP
     }
 
 }

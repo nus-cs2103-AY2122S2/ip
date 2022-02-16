@@ -1,14 +1,21 @@
 package duke;
 
 
+import duke.command.Command;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.SnoozeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.EventCommand;
+import duke.command.TodoCommand;
+import duke.command.DeleteCommand;
+import duke.command.HelpCommand;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import duke.task.TaskList;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Todo;
+
 
 
 /**
@@ -83,6 +90,7 @@ public class Duke extends Application {
 
     private String getResponse(String input) {
         String response = "What?";
+        Command command = null;
         try {
             Parser.RESULT parseResult = parser.parseInput(input);
             switch (parseResult) {
@@ -93,86 +101,41 @@ public class Duke extends Application {
             case LIST:
                 response = ui.listTasksAsString(tasks);
                 break;
-            case MARK: {
-                int index = parser.parseIndex(input);
-                if (index < tasks.getTasks().size()) {
-                    tasks.markTaskDone(index);
-                    response = "Nice! I've marked this task as done:\n" + tasks.getTask(index).toString();
-                } else {
-                    throw new DukeException("No such task exists.");
-                }
-                storage.overwriteFile(tasks.getTasks());
+            case MARK:
+                command = new MarkCommand(parser,input,tasks,storage);
                 break;
-            }
             case UNMARK: {
-                int index = parser.parseIndex(input);
-                if (index < tasks.getTasks().size()) {
-                    tasks.markTaskNotDone(index);
-                    response = "Nice! I've marked this task as not done:\n" + tasks.getTask(index).toString();
-                } else {
-                    throw new DukeException("No such task exists.");
-                }
-                storage.overwriteFile(tasks.getTasks());
+                command = new UnmarkCommand(parser,input,tasks,storage);
                 break;
             }
             case DELETE:
-                int index = parser.parseIndex(input);
-                if (index < tasks.getTasks().size()) {
-                    Task removedTask = tasks.removeTask(index);
-                    response = "Nice! I've removed this task:\n" + removedTask.toString();
-                } else {
-                    throw new DukeException("No such task exists.");
-                }
-                storage.overwriteFile(tasks.getTasks());
+                command = new DeleteCommand(parser,input,tasks,storage);
                 break;
-            case TODO: {
-                Todo newTodo = new Todo(parser.parseTodo(input));
-                tasks.addTask(newTodo);
-                response = "Got it. I've added this task:\n" + newTodo + "\n" + "Now you have " + tasks.getTasks()
-                        .size() + " tasks in the list.";
-                storage.overwriteFile(tasks.getTasks());
+            case TODO:
+                command = new TodoCommand(parser,input,tasks,storage);
                 break;
-            }
             case DEADLINE:
-                String[] deadlineInput = parser.parseDeadline(input);
-                Deadline newDeadline = new Deadline(deadlineInput[0], deadlineInput[1]);
-                tasks.addTask(newDeadline);
-                response = "Got it. I've added this task:\n" + newDeadline + "\n" + "Now you have " + tasks.getTasks()
-                        .size() + " tasks in the list.";
-                storage.overwriteFile(tasks.getTasks());
+                command = new DeadlineCommand(parser,input,tasks,storage);
                 break;
             case EVENT:
-                String[] eventInput = parser.parseEvent(input);
-                Event newEvent = new Event(eventInput[0], eventInput[1]);
-                tasks.addTask(newEvent);
-                response = "Got it. I've added this task:\n" + newEvent + "\n" + "Now you have " + tasks.getTasks()
-                        .size() + " tasks in the list.";
-                storage.overwriteFile(tasks.getTasks());
+                command = new EventCommand(parser,input,tasks,storage);
                 break;
             case FIND: {
                 String word = parser.parseFind(input);
                 response = ui.listTasksAsString(tasks.findTasks(word));
                 break;
             }
-            case SNOOZE: {
-                int snoozeIndex = parser.parseIndex(input);
-                Task selectedTask = tasks.getTask(snoozeIndex);
-                boolean isSuccessful = false;
-                if (selectedTask instanceof Event) {
-                    isSuccessful = ((Event)selectedTask).snooze();
-                }
-                if (selectedTask instanceof Deadline) {
-                    isSuccessful = ((Deadline)selectedTask).snooze();
-                }
-                if (isSuccessful) {
-                    response = "Task snoozed by 10min!\n" + selectedTask.toString();
-                } else {
-                    throw new DukeException("Sorry! This task can't be snoozed!");
-                }
+            case SNOOZE:
+                command = new SnoozeCommand(parser,input,tasks,storage);
                 break;
-            }
+            case HELP:
+                command = new HelpCommand(parser,input,tasks,storage);
+                break;
             case ERROR:
                 throw new DukeException("Sorry :( I don't know what this means.");
+            }
+            if (command != null) {
+                response = command.execute();
             }
             return response;
         } catch (DukeException e) {
