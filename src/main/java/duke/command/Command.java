@@ -10,7 +10,7 @@ import duke.util.Storage;
  * <p>All future commands are to inherit from this class.</p>
  */
 public abstract class Command {
-    protected String key;
+    private String key;
 
     /**
      * Constructor for command to init values.

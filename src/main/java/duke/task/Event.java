@@ -57,7 +57,7 @@ public class Event extends Task {
      */
     @Override
     public String saveFileFormat() {
-        return EVENT_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" + this.eventDate.format(
+        return EVENT_SYMBOL + "|" + getIsDone() + "|" + getTaskDescription() + "|" + this.eventDate.format(
                 DateTimeFormatter.ofPattern(DATE_FORMAT)) + "|" + this.eventTime.format(
                 DateTimeFormatter.ofPattern(TIME_FORMAT)) + "\n";
     }
@@ -76,8 +76,8 @@ public class Event extends Task {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
         st.nextToken(); // remove the type symbol
-        isDone = Boolean.parseBoolean(st.nextToken());
-        taskDescription = st.nextToken();
+        setIsDone(Boolean.parseBoolean(st.nextToken()));
+        setTaskDescription(st.nextToken());
         eventDate = LocalDate.parse(st.nextToken(), dateFormatter);
         eventTime = LocalTime.parse(st.nextToken(), timeFormatter);
     }

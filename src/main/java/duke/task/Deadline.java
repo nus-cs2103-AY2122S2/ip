@@ -57,7 +57,7 @@ public class Deadline extends Task {
      */
     @Override
     public String saveFileFormat() {
-        return DEADLINE_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|"
+        return DEADLINE_SYMBOL + "|" + getIsDone() + "|" + getTaskDescription() + "|"
                 + this.deadlineDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) + "|"
                 + this.deadlineTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT)) + "\n";
     }
@@ -76,8 +76,8 @@ public class Deadline extends Task {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
         st.nextToken(); // remove the type symbol
-        isDone = Boolean.parseBoolean(st.nextToken());
-        taskDescription = st.nextToken();
+        setIsDone(Boolean.parseBoolean(st.nextToken()));
+        setTaskDescription(st.nextToken());
         deadlineDate = LocalDate.parse(st.nextToken(), dateFormatter);
         deadlineTime = LocalTime.parse(st.nextToken(), timeFormatter);
     }

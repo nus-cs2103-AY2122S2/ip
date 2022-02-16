@@ -36,7 +36,7 @@ public class Todo extends Task {
      */
     @Override
     public String saveFileFormat() {
-        return TODO_SYMBOL + "|" + isDone + "|" + taskDescription + "\n";
+        return TODO_SYMBOL + "|" + getIsDone() + "|" + getTaskDescription() + "\n";
     }
 
     /**
@@ -50,8 +50,8 @@ public class Todo extends Task {
         StringTokenizer st = new StringTokenizer(data, "|");
 
         st.nextToken(); // remove the type symbol
-        isDone = Boolean.parseBoolean(st.nextToken());
-        taskDescription = st.nextToken();
+        setIsDone(Boolean.parseBoolean(st.nextToken()));
+        setTaskDescription(st.nextToken());
     }
 
     /**
