@@ -3,7 +3,6 @@ package duke.gui;
 import duke.Duke;
 import duke.Ui;
 import duke.exception.DukeException;
-import duke.gui.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
