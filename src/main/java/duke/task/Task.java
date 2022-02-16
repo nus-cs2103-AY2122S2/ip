@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
+import duke.common.Messages;
 
 /**
  * A class that represents a task.
@@ -54,7 +55,7 @@ public class Task {
         } else if (Deadline.class.equals(this.getClass())) {
             return "D";
         } else {
-            throw new DukeException("Unknown Task");
+            throw new DukeException(Messages.MESSAGE_ERROR_INVALID_TASK_TYPE);
         }
 
     }

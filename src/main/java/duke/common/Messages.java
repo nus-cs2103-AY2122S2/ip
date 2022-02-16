@@ -15,4 +15,5 @@ public class Messages {
            + " that means :-(";
     public static final String MESSAGE_ERROR_EMPTY_TITLE = "OOPS!!! The description of a todo cannot be empty.";
     public static final String MESSAGE_ERROR_INVALID_DATETIME_FORMAT = "Invalid date time format.";
-}
+    public static final String MESSAGE_ERROR_INVALID_TASK_TYPE = "Invalid task type";
+} 
