@@ -23,6 +23,13 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    private static final String TITLE = "Duke";
+    private static final String APPLICATION_ICON = "/images/Icon.png";
+    private static final String BACKGROUND_IMAGE = "/images/Background.png";
+
+    private static final double MIN_HEIGHT = 600.0;
+    private static final double MIN_WIDTH = 400.0;
+
     @Override
     public void start(Stage stage) {
         try {
@@ -35,17 +42,17 @@ public class Main extends Application {
             stage.show();
 
             //modify window
-            stage.setTitle("Duke");
+            stage.setTitle(TITLE);
             stage.setResizable(false);
-            stage.setMinHeight(600.0);
-            stage.setMinWidth(400.0);
+            stage.setMinHeight(MIN_HEIGHT);
+            stage.setMinWidth(MIN_WIDTH);
             Image icon = new Image(
-                    Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Icon.png")));
+                    Objects.requireNonNull(this.getClass().getResourceAsStream(APPLICATION_ICON)));
             stage.getIcons().add(icon);
 
             //set background
             Image img = new Image(
-                    Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Background.png")));
+                    Objects.requireNonNull(this.getClass().getResourceAsStream(BACKGROUND_IMAGE)));
             BackgroundImage bImg = new BackgroundImage(img,
                     BackgroundRepeat.NO_REPEAT,
                     BackgroundRepeat.NO_REPEAT,
