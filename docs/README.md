@@ -1,32 +1,32 @@
 # User Guide
 Duke is a **desktop app for managing tasks**, designed for best use through **command line interface**(CLI). It is fast to learn and easy to use.
-  - [Quick start](#quick-start)
-  - [Features](#features)
-    - [Adding a todo task](#adding-a-todo-task)
-    - [Adding a deadline task](#adding-a-deadline-task)
-    - [Adding an event task](#adding-an-event-task)
-    - [Listing tasks](#listing-tasks)
-    - [Finding tasks](#finding-tasks)
-    - [Marking a task](#marking-a-task)
-    - [Unmarking a task](#unmarking-a-task)
-    - [Deleting a task](#deleting-a-task)
-    - [Clearing all tasks](#clearing-all-tasks)
-    - [Creating command alias](#creating-command-alias)
-    - [Exiting the app](#exiting-the-app)
-  - [Usage summary](#usage-summary).
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Adding a todo task](#adding-a-todo-task)
+  - [Adding a deadline task](#adding-a-deadline-task)
+  - [Adding an event task](#adding-an-event-task)
+  - [Listing tasks](#listing-tasks)
+  - [Finding tasks](#finding-tasks)
+  - [Marking a task](#marking-a-task)
+  - [Unmarking a task](#unmarking-a-task)
+  - [Deleting a task](#deleting-a-task)
+  - [Clearing all tasks](#clearing-all-tasks)
+  - [Creating command alias](#creating-command-alias)
+  - [Exiting the app](#exiting-the-app)
+- [Usage summary](#usage-summary).
 
 ## Quick Start
-  1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your computer.
-  2. Download Duke's latest version [here](https://github.com/1001mei/ip/releases).
-  3. Copy the file to the folder you want to use as the home folder for your Duke.
-  4. Double-click the file to start the app.
-  5. Type your command in the dialog box and press Enter to execute it. Some examples you can try:
-      - `todo read book` : adds a todo task "read book"
-      - `mark 1` : marks the first task as done
-      - `list` : displays all tasks in the list
-      - `bye` : exits the app
-  6. Interested to know what other things you can do with Duke? Refer to the [Features](#features) section below.
-  7. Prefer to learn command syntaxes first? Refer to the [Usage summary](#usage-summary) section below.
+1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) or above installed on your computer.
+2. Download Duke's latest version [here](https://github.com/1001mei/ip/releases).
+3. Copy the file to the folder you want to use as the home folder for your Duke.
+4. Double-click the file to start the app.
+5. Type your command in the dialog box and press Enter to execute it. Some examples you can try:
+    - `todo read book` : adds a todo task "read book"
+    - `mark 1` : marks the first task as done
+    - `list` : displays all tasks in the list
+    - `bye` : exits the app
+6. Interested to know what other things you can do with Duke? Refer to the [Features](#features) section below.
+7. Prefer to learn command syntaxes first? Refer to the [Usage summary](#usage-summary) section below.
 
 ## Features 
 ### Adding a todo task
@@ -112,6 +112,7 @@ Saves all changes to disk and exits the app.
 Command format: `bye`
 
 ## Usage summary
+
 | Command | Shortcut | Format | Example |
 | --- | --- | --- | --- |
 | todo | t | todo [task name] | todo read book |
