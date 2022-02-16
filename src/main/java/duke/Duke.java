@@ -37,6 +37,8 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         storage.load();
+
+        //taken from JavaFX SE-Edu Tutorial
         //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -157,6 +159,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      */
     private String getResponse(String input) {
+        assert input != null : "input cannot be null!";
         Parser parser = new Parser(taskList);
         String result = parser.execute(input);
         return result;
