@@ -12,6 +12,7 @@ public class Event extends Task {
      *
      * @param input descriptor of task
      * @param time duration of event
+     * @param taskNum number representing the task in the list
      * @param isReading flag to check if input is being read from file data
      */
     public Event(String input, String time, int taskNum, boolean isReading) {

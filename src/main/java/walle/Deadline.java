@@ -12,6 +12,7 @@ public class Deadline extends Task {
      *
      * @param input descriptor of task
      * @param deadline deadline to complete task
+     * @param taskNum number representing the task in the list
      * @param isReading flag to check if input is being read from file data
      */
     public Deadline(String input, String deadline, int taskNum, boolean isReading) {

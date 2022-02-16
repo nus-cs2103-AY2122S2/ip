@@ -66,6 +66,13 @@ public class Task {
         return String.format("%s---%s---%s---%s\n", this.type, this.isDone, this.name, this.time);
     }
 
+    /**
+     * Set date of task to DD MMM YYYY HH:MM format
+     *
+     * @param input input date of task
+     * @param isReading flag to check if data is being read from file or user input
+     * @return true if successfully set to specified format. False otherwise
+     */
     private boolean setDate(String input, boolean isReading) {
         try {
             if ((this.type.equals("D") || this.type.equals("E")) && input != null) {

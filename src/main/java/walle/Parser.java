@@ -52,6 +52,13 @@ public class Parser {
         return s;
     }
 
+    /**
+     * parses input to mark/unmark specified task
+     *
+     * @param input user input
+     * @param taskList tasklist that task resides
+     * @return output to display to GUI
+     */
     public static String parseMarkTask(String input, TaskList taskList) {
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
@@ -64,18 +71,39 @@ public class Parser {
         return taskList.markTask(taskNum, true);
     }
 
+    /**
+     * parses input to find specified task
+     *
+     * @param input user input
+     * @param taskList tasklist that task resides
+     * @return output to display to GUI
+     */
     public static String parseFind(String input, TaskList taskList) {
         int firstIndexOfFindInput = 6;
         String keyword = input.substring(firstIndexOfFindInput);
         return taskList.findTask(keyword);
     }
 
+    /**
+     * parses input to delete specified task
+     *
+     * @param input user input
+     * @param taskList tasklist that task resides
+     * @return output to display to GUI
+     */
     public static String parseDelete(String input, TaskList taskList) {
         int firstIndexOfNumericalInput = 7;
         int numericalInput = Integer.parseInt(input.substring(firstIndexOfNumericalInput));
-        return taskList.deleteTask(numericalInput, taskList);
+        return taskList.deleteTask(numericalInput);
     }
 
+    /**
+     * Parses input to create a task
+     *
+     * @param input user input
+     * @param taskList tasklist to add task to
+     * @return output to display to GUI
+     */
     public static String parseTask(String input, TaskList taskList) {
         Task task = parseCreateNewTask(input, taskList);
         if (task == null) {
@@ -111,6 +139,14 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Parse input and return a ToDo
+     *
+     * @param input user input
+     * @param list tasklist to add ToDo
+     * @return ToDo created based on user input
+     * @throws EmptyDescriptorException
+     */
     public static ToDo parseToDo(String input, TaskList list) throws EmptyDescriptorException {
         String[] inputArr = input.split(" ");
         if (inputArr.length == 1) {
@@ -120,6 +156,14 @@ public class Parser {
         return new ToDo(nameOfTask, list.getSize(), false);
     }
 
+    /**
+     * Parse input and return a Deadline
+     *
+     * @param input user input
+     * @param list tasklist to add Deadline
+     * @return Deadline created based on user input
+     * @throws EmptyDescriptorException
+     */
     public static Deadline parseDeadline(String input, TaskList list) throws EmptyDescriptorException {
         String[] inputArr = input.split("/by ");
         if (inputArr.length == 1) {
@@ -130,6 +174,14 @@ public class Parser {
         return new Deadline(nameOfDeadline, timeOfDeadline, list.getSize(), false);
     }
 
+    /**
+     * Parse input and return an Event
+     *
+     * @param input user input
+     * @param list tasklist to add Event
+     * @return Event created based on user input
+     * @throws EmptyDescriptorException
+     */
     public static Event parseEvent(String input, TaskList list) throws EmptyDescriptorException {
         String[] inputArr = input.split("/at ");
         if (inputArr.length == 1) {

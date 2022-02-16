@@ -9,6 +9,7 @@ public class ToDo extends Task {
      * Constructor of Todo.
      *
      * @param input descriptor of task
+     * @param taskNum number representing the task in the list
      * @param isReading flag to check if input is being read from file data
      */
     public ToDo(String input,int taskNum, boolean isReading){

@@ -1,8 +1,7 @@
 package walle;
 
 /**
- * This is the main duke.Walle program that will be able to process a duke.Task of 3 types: todo, deadline and task
- * duke.Walle is able to list, delete and mark/unmark tasks as done/undone.
+ * Main Walle program
  *
  * @author Toh Zhan Qing
  */

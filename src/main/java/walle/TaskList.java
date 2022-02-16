@@ -30,7 +30,7 @@ public class TaskList {
      * @param num index (starts from 1) to delete
      * @return String output of deleted Task
      */
-    public String deleteTask(int num, TaskList taskList) {
+    public String deleteTask(int num) {
         if (num > 0 && num <= tasklist.size()) {
             num--;
             String s = Ui.printRemovedThisTask(num, this);
@@ -84,6 +84,12 @@ public class TaskList {
         return Ui.printMatchTasks(matchTasks.tasklist);
     }
 
+    /**
+     * Searches the TaskList to find if input task name exists
+     *
+     * @param keyword name of task to search for
+     * @return task number if same task name is found in the tasklist. -1 otherwise
+     */
     public int findDuplicateTask(String keyword) {
         assert tasklist != null : "Invalid: TaskList is not initialised!";
         for (int i=0; i < tasklist.size(); i++) {
@@ -94,6 +100,12 @@ public class TaskList {
         return -1;
     }
 
+    /**
+     * Attempts to add task to TaskList
+     *
+     * @param task task to add to TaskList
+     * @return -1 if successful. taskNumber of duplicate task in the TaskList if unsuccessful
+     */
     public int addTaskToList(Task task) {
         assert task.name != null : "Invalid: TaskName is null!";
         int dupTaskNum = findDuplicateTask(task.name);
