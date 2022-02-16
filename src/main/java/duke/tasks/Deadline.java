@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 import duke.exceptions.DukeException;
@@ -82,13 +83,29 @@ public class Deadline extends Task implements Timable {
     protected static Deadline createTask(String[] tokens) throws DukeException {
 
         String description = createDescription(tokens);
+        LocalDate date = null;
+        LocalTime time = null;
+        String errorMsg = "";
+        boolean error = false;
 
         if (description.equals("")) {
-            throw new DukeException("The description of a deadline task cannot be empty!");
+            error = true;
+            errorMsg += "The description of a deadline task cannot be empty!\n";
         }
 
-        LocalDate date = createDate(tokens);
-        LocalTime time = createTime(tokens);
+        try {
+            date = createDate(tokens);
+            time = createTime(tokens);
+        } catch (IllegalArgumentException e) {
+            error = true;
+            errorMsg += e.getMessage() + "\n";
+        }
+        if (error) {
+            errorMsg += "Please enter your command in the form of - "
+                    + "deadline <task information> /by <date> <time>(optional)\n";
+            errorMsg += "e.g. deadline buy book /by 2015-05-05 06:00";
+            throw new DukeException(errorMsg.trim());
+        }
 
         if (time == null) {
             return new Deadline(description, date);
@@ -111,7 +128,7 @@ public class Deadline extends Task implements Timable {
         return item.trim();
     }
 
-    private static LocalDate createDate(String[] tokens) throws DukeException {
+    private static LocalDate createDate(String[] tokens) throws IllegalArgumentException {
         int idx = 0;
         for (; idx < tokens.length; idx++) {
             if (tokens[idx].equals("/by")) {
@@ -122,11 +139,11 @@ public class Deadline extends Task implements Timable {
             String dateString = tokens[idx + 1];
             return LocalDate.parse(dateString);
         } catch (Exception e) {
-            throw new DukeException("Please specify a valid date!");
+            throw new IllegalArgumentException("Invalid date entered!");
         }
     }
 
-    private static LocalTime createTime(String[] tokens) throws DukeException {
+    private static LocalTime createTime(String[] tokens) throws IllegalArgumentException {
         int idx = 0;
         for (; idx < tokens.length; idx++) {
             if (tokens[idx].equals("/by")) {
@@ -142,7 +159,7 @@ public class Deadline extends Task implements Timable {
             String timeString = tokens[timeIndex];
             return LocalTime.parse(timeString);
         } catch (Exception e) {
-            throw new DukeException("Please specify a valid time! (hh:mm)");
+            throw new IllegalArgumentException("Invalid time entered!");
         }
     }
 }

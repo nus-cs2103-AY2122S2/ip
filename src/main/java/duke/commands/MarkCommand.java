@@ -39,7 +39,9 @@ public class MarkCommand extends Command {
         try {
             index = Integer.parseInt(tokens[1]) - 1;
         } catch (Exception exception) {
-            throw new DukeException("Invalid input! Please enter the number of the task you want to mark/unmark.");
+            String outputMsg = "Invalid input! Please enter the number of the task you want to " + tokens[0]
+                    + "\ne.g. " + tokens[0] + " 1";
+            throw new DukeException(outputMsg.trim());
         }
         this.index = index;
     }

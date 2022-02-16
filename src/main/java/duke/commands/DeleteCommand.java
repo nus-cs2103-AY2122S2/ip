@@ -34,7 +34,8 @@ public class DeleteCommand extends Command {
         try {
             index = Integer.parseInt(tokens[1]) - 1;
         } catch (Exception exception) {
-            throw new DukeException("Invalid input! Please enter the number of the task you want to delete.");
+            throw new DukeException("Invalid input! Please enter the number of the task you want to delete.\n"
+                    + "e.g. delete 1");
         }
         this.index = index;
     }

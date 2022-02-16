@@ -35,7 +35,9 @@ public class FindCommand extends Command {
     @Override
     public void handleParam(String[] tokens) throws DukeException {
         if (tokens.length < 2) {
-            throw new DukeException("Invalid input! Please specify a description for the tasks to search!");
+            String errorStr = "Invalid input! Please specify a description for the tasks to search!\n"
+                    + "e.g. find book";
+            throw new DukeException(errorStr);
         }
         String searchString = "";
         for (String token : tokens) {

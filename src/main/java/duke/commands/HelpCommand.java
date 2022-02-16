@@ -8,18 +8,18 @@ import duke.tasks.TaskList;
  */
 public class HelpCommand extends Command {
 
-    protected static final String COMMAND_INFO = "Here are all my commands:\n\n"
-            + "1. help (displays all commands)\n\n"
-            + "2. list (displays all the created tasks)\n\n"
-            + "3. todo <task information>\n\n"
-            + "4. deadline <task information> /by <date yyyy-mm-dd> <time hh:mm>\n\n"
-            + "5. event <task information> /at <date yyyy-mm-dd> <start time hh:mm>-<end time hh:mm>\n\n"
-            + "6. delete <valid task number> (deletes the task with the given task number)\n\n"
-            + "7. mark <valid task number> (marks the task with the given task number as done)\n\n"
-            + "8. mark <valid task number> (unmark the task with the given task number as undone)\n\n"
-            + "9. find <search info> (displays all tasks with info similar to the provided details)\n\n"
-            + "10. sort <sort function> (sorts all tasks according to the function provided)\n\n"
-            + "11. bye (exits the program)";
+    protected static final String COMMAND_INFO = "Here are all my commands:\n"
+            + "1. help - displays all commands\n"
+            + "2. list - displays all the created tasks\n"
+            + "3. todo - adds a todo task\n"
+            + "4. deadline - adds a deadline task\n"
+            + "5. event - adds an event task\n"
+            + "6. delete - deletes an existing task\n"
+            + "7. mark - marks an existing task as completed\n"
+            + "8. unmark - marks an existing task as not completed\n"
+            + "9. find - displays all tasks that matches a provided substring\n"
+            + "10. sort - sorts all tasks according to a function\n"
+            + "11. bye - exits the program";
 
     /**
      * Constructor of a help command.
