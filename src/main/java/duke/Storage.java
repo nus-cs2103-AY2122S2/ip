@@ -24,7 +24,7 @@ public class Storage {
     }
 
     /**
-     * The CreateFile method creates a new txt file to track the list of task if the file has not been created.
+     * Creates a new txt file to track the list of task if the file has not been created.
      */
     private void CreateFile() {
         try {
@@ -38,7 +38,7 @@ public class Storage {
     }
 
     /**
-     * The savTasks method saves the list of tasks that are currently being tracked into a txt file.
+     * Saves the list of tasks that are currently being tracked into a txt file.
      * @param list contains the Tasks that are currently being tracked.
      */
     public void saveTasks(List<Task> list) {
@@ -61,7 +61,7 @@ public class Storage {
     }
 
     /**
-     * The loadTasks method retrieves the list of tasks that were being tracked previously by the application.
+     * Retrieves the list of tasks that were being tracked previously by the application.
      * @return returns the list of task that were being tracked previously.
      */
     public List<String> loadTasks() throws DukeException {

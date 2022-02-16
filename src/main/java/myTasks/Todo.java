@@ -1,7 +1,7 @@
 package myTasks;
 
 /**
- * Creates a task without restrictions.
+ * A task without restrictions.
  */
 public class Todo extends Task {
     public Todo(String description) {

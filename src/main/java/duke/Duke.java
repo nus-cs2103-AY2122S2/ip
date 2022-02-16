@@ -13,7 +13,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Method Duke initializes the application by loading files and checking for errors.
+     * Initializes the application by loading files and checking for errors.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -26,7 +26,7 @@ public class Duke {
     }
 
     /**
-     * Method run starts the application.
+     * Start the application.
      */
     public void run() {
         Scanner input = new Scanner(System.in);

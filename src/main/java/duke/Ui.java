@@ -41,45 +41,28 @@ public class Ui {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             case "list":
-                System.out.println("Here are the tasks in your list:");
                 ShowTasks.showList(taskCount, list);
                 break;
             case "find":
-                System.out.println("Here are the matching tasks in your list:");
                 ShowTasks.find(taskCount, tempList[1], list);
                 break;
             case "todo":
-                CreateTask.todo(tempList[1], list);
-                System.out.println(list.get(taskCount).toString());
-                System.out.println("Got it. I've added this task:");
-                printAndSave(taskCount + 1);
+                CreateTask.todo(tempList[1], list, taskCount);
                 break;
             case "deadline":
-                CreateTask.deadline(tempList[1], list);
-                System.out.println(list.get(taskCount).toString());
-                printAndSave(taskCount + 1);
-                System.out.println("Got it. I've added this task:");
+                CreateTask.deadline(tempList[1], list, taskCount);
                 break;
             case "event":
-                CreateTask.event(tempList[1], list);
-                System.out.println(list.get(taskCount).toString());
-                printAndSave(taskCount + 1);
-                System.out.println("Got it. I've added this task:");
+                CreateTask.event(tempList[1], list, taskCount);
                 break;
             case "mark":
-                MarkTask.mark(tempList[1], list);
-                printAndSave(taskCount);
-                System.out.println("Nice! I've marked this task as done:");
+                MarkTask.mark(tempList[1], list, taskCount);
                 break;
             case "unmark":
-                MarkTask.unmark(tempList[1], list);
-                printAndSave(taskCount);
-                System.out.println("OK, I've marked this task as not done yet:");
+                MarkTask.unmark(tempList[1], list, taskCount);
                 break;
             case "delete":
-                System.out.println("Noted. I've removed this task:");
-                DeleteTask.delete(tempList[1], list);
-                printAndSave(taskCount - 1);
+                DeleteTask.delete(tempList[1], list, taskCount);
                 break;
         }
         System.out.println("------------------------------------------------------------");
@@ -88,7 +71,7 @@ public class Ui {
     /**
      * Shows the number of task being track.
      */
-    private static void printAndSave(int taskCount) {
+    public static void printAndSave(int taskCount) {
         if (taskCount + 1 == 1) {
             System.out.println("You have " + (taskCount) + " task in the list.");
         } else {
