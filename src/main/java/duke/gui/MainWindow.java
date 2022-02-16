@@ -20,13 +20,13 @@ import javafx.scene.layout.VBox;
 //Solution adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class MainWindow extends AnchorPane {
     @FXML
+    public Button sendButton;
+    @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button button;
 
     private Duke duke;
 

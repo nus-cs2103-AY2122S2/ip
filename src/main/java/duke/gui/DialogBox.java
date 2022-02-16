@@ -44,7 +44,6 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         this.setMinHeight(Region.USE_PREF_SIZE);
-        this.setStyle("-fx-background-color:black;");
     }
 
     /**
