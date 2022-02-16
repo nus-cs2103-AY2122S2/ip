@@ -1,6 +1,6 @@
 # User Guide
 
-<img src="../docs/Ui.png" width="310" height="500">
+<img src="https://wxliong.github.io/ip/Ui.png" width="310" height="500">
 
 ## Features 
 
