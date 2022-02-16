@@ -1,24 +1,46 @@
-# Duke project template
+# PaggroBot
+> "I never took a day off in my 20s. Not one." - Bill Gates ([source](https://www.keepinspiring.me/hard-work-quotes/))
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+##PaggroBot pushes you to work hard and complete the tasks that you need to do. It's
 
-## Setting up in Intellij
+- text-based
+- easy to learn
+- ~~FAST~~ SUPER FAST to use
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+##All you need to do is,
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. download it from [here](url).
+2. double-click it.
+3. add your tasks.
+4. let it manage your tasks for you 😒
+
+##And it is **FREE!**
+
+###Features:
+
+- [x] Managing tasks
+- [x] Managing deadlines
+- [ ] Tagging tasks
+
+##If you are a Java programmer, you can use it to practice Java too! Here's the main method:
+```java
+public static void main(String[] args) throws IOException {
+        new PaggroBot("../../../data/paggro.txt").run();
+}
+```
+
+##Commands:
+1. deadline - creates new deadline task
+2. event - creates new event task
+3. todo - creates new todo task
+4. mark - marks a task as complete
+5. unmark - unmarks a task as not complete
+6. delete - deletes a task at a given index
+7. find - list down tasks that contain a given string
+8. tag - tags a task at a given index
+9. list - list down all tasks
+10. listOnDate - list down all tasks on a given date
+11. listTag - list down all tasks with a given tag
+12. bye - closes PaggroBot
+
+##What are you waiting for? Download PaggroBot NOW!!!!
