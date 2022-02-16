@@ -32,27 +32,6 @@ public class Ultoi {
         }
     }
 
-    /*
-     * Starts a chat session.
-     *
-    public void run() {
-        ui.showWelcomeMsg();
-
-        for ( ; ; ) {
-            try {
-                String input = ui.readInput();
-                Command cmd = Parser.parse(input);
-                cmd.execute(this.ui, this.tasks, this.storage);
-                if (Parser.isBye(input)) {
-                    return;
-                }
-            } catch (UltoiException e) {
-                return ui.showError(e);
-            }
-        }
-    }
-    */
-
     /**
      * Returns the welcome message of Ultoi.
      *
@@ -73,16 +52,4 @@ public class Ultoi {
             return ui.showError(e);
         }
     }
-
-    /*
-     * Drives the execution of Ultoi bot.
-     *
-     * @param args User input.
-     *
-    public static void main(String[] args) {
-        Path filePath = Paths.get(System.getProperty("user.home"),
-                "iP", "data", "Ultoi.txt");
-        new Ultoi(filePath).run();
-    }
-    */
 }

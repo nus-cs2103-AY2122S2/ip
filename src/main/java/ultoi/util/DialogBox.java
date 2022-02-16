@@ -43,10 +43,18 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    private void altSide() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         tmp.get(0).setStyle("-fx-background-color: #323141; -fx-background-radius: 6px");
+        FXCollections.reverse(tmp);
+        this.getChildren().setAll(tmp);
+    }
+
+    private void altError() {
+        this.setAlignment(Pos.TOP_LEFT);
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        tmp.get(0).setStyle("-fx-background-color: #323141; -fx-background-radius: 6px; -fx-text-fill: #ffff00");
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
     }
@@ -57,7 +65,13 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUltoiDialog(String text, Image image) {
         var db = new DialogBox(text, image);
-        db.flip();
+        db.altSide();
+        return db;
+    }
+
+    public static DialogBox getUltoiErrorDialog(String text, Image image) {
+        var db = new DialogBox(text, image);
+        db.altError();
         return db;
     }
 }

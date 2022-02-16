@@ -32,12 +32,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        /*
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUltoiDialog(ultoi.showWelcomeMsg(), ultoiImage)
-        );
-        */
-
     }
 
     /**
@@ -59,7 +53,9 @@ public class MainWindow extends AnchorPane {
         String ultoiText = ultoi.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getUltoiDialog(ultoiText, ultoiImage)
+                (!ultoiText.contains(UltoiException.EXCEPTION_FACE))
+                        ? DialogBox.getUltoiDialog(ultoiText, ultoiImage)
+                        : DialogBox.getUltoiErrorDialog(ultoiText, ultoiImage)
         );
         userInput.clear();
     }
