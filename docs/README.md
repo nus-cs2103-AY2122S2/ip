@@ -7,6 +7,7 @@ Walle is a simple application that can record and keep track of the tasks you wa
 
 ![Screenshot of Walle](Ui.png)
 
+You can click [here](https://github.com/tzhan98/ip/releases) to get the latest version of Walle
 ________________________________________________________________________________________________________________________
 ## Features 
 
@@ -29,7 +30,7 @@ There are 3 types of tasks you can add
 - deadline
 - event
 
---**Adding a todo**
+ - **Adding a todo**
 
 Example of usage: 
 
@@ -45,7 +46,7 @@ Expected outcome:
      Now you have 5 tasks in the list.
 ```
 
---**Adding a deadline**
+ - **Adding a deadline**
 
 Example of usage:
 
@@ -68,7 +69,7 @@ Expected outcome:
        [D][ ] return sci book (by: 17 Feb 2022 07:00 PM)
      Now you have 7 tasks in the list.
 ```
---**Adding a event**
+ - **Adding a event**
 
 Example of usage:
 
@@ -171,7 +172,7 @@ Expected outcome:
     Now you have 5 task on the list.  
 ```
 
-### Find task 
+###[Find task](https://tzhan98.github.io/ip/#features)
 Walle will search for task based on input keywords
 
 Example of usage:
