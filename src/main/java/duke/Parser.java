@@ -1,9 +1,6 @@
 package duke;
 public class Parser {
 
-    public Parser() {
-    }
-
     /**
      * Accepts the commands of the user input and resolves them. It searches the command string
      * and for the keyword and links them to all the tasks provided in TaskList. This will
