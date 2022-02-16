@@ -31,7 +31,7 @@ public class Gui {
     }
 
     /**
-     * Method to return loading error if file is not found. 
+     * Method to return loading error if file is not found.
      */
     public String showLoadingError() {
         return "File not found. I will create one for you";

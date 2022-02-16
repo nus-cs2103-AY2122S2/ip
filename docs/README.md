@@ -40,14 +40,14 @@ Can't find your task in your endless list? Use the find feature!
 
 List down all your task saved in the list.
 
-### `mark [num]` - mark the task as complete 
+### `mark [num]` - Mark the task as complete 
 
 Mark the task that is numbered as `[num]` as completed.
 
 Example of usage:
 `mark 2`
 
-### `unmark [num]` - unmark the task
+### `unmark [num]` - Unmark the task
 
 Unmark the task that is numbered as `[num]` as incomplete.
 
@@ -71,7 +71,8 @@ Example of usage:
 
 ### `event [TaskName] /at [DD/MM/YYYY] (HHHH)` - Adds a event task
 
-Adds a event task to the list.
+Adds an event task to the list.
+⚠️ Events created cannot have the same date & time 
 
 Example of usage:
 `event Important Task /by 12/03/2022 2359`
