@@ -15,6 +15,7 @@ public class Parser {
 
     /**
      * Checks if input is 'bye'
+     *
      * @param input input entered by user into Walle
      * @return String to output to gui
      */
@@ -29,6 +30,7 @@ public class Parser {
 
     /**
      * Checks and processes user input (provided that it is not 'bye')
+     *
      * @param input user input into Walle (after making sure it is not 'bye')
      * @param taskList current tasklist
      * @return String to output
@@ -119,6 +121,7 @@ public class Parser {
 
     /**
      * Parse through input and create a new task
+     *
      * @param input user input into Walle
      * @return task based on input parameters
      */
@@ -193,6 +196,7 @@ public class Parser {
     }
     /**
      * Parse data in file data
+     *
      * @param input one line of file data in the form of (Task_Type---Task_status---Task_name---date)
      * @return task based on file data information provided
      */

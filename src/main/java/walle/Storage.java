@@ -22,6 +22,7 @@ public class Storage {
 
     /**
      * Write all current information in Tasklist to disk
+     *
      * @param taskList tasklist to write all data to file to
      */
     public static void writeAllToFile(TaskList taskList) {
@@ -32,8 +33,7 @@ public class Storage {
                 fw.write(taskList.get().get(i).getDataRepresentation());
             }
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -72,8 +72,7 @@ public class Storage {
             saveData = pathToFile.toFile();
             tasklist = new TaskList();
             readSavedData(tasklist);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return tasklist;
@@ -81,6 +80,7 @@ public class Storage {
 
     /**
      * reads information from disk to taskList
+     *
      * @param taskList tasklist to read save data from
      * @throws FileNotFoundException when file is not found
      */

@@ -48,11 +48,9 @@ public class Task {
                 Storage.addLineToFile(this.getDataRepresentation());
                 printFirstAddition += Ui.printTotalTasks(number);
             }
-        }
-        catch (EmptyDescriptorException e) {
+        } catch (EmptyDescriptorException e) {
             Ui.printEmptyDescriptionException();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -60,6 +58,7 @@ public class Task {
 
     /**
      * Gets string representation of how task will be formatted into disk
+     *
      * @return string representation of how task will be formatted into disk
      */
     public String getDataRepresentation() {
@@ -83,8 +82,7 @@ public class Task {
                 this.time = lt.format(out);
             }
             return true;
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             if (!isReading) {
                 System.out.println("Note that dates should be in <<DD-MM-YYYY HHMM>> format");
             }
