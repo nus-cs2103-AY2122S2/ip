@@ -29,6 +29,7 @@ public class Ui {
      * Starts conversation with user by combining Parser and Storage.
      * @param parser Instance of Parser to process user commands.
      * @param storage Instance of storage to update data in storage
+     * @param userInput String input entered by the user.
      * @throws DukeException If invalid input message is entered.
      */
     public String startConversation(Parser parser, Storage storage, String userInput) throws DukeException {
