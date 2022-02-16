@@ -37,7 +37,8 @@ She will not ~~forget~~ what you have completed or yet to complete, unless you t
 - [`unmark`](#unmark)
 - [`find`](#find)
 - [`delete`](#delete)
-- [`bye`](#bye) 
+- [`bye`](#bye)
+- [`palces`](#places)
 - **[All Commands](#all-commands)**
 
 ## `commands` 
@@ -72,12 +73,16 @@ Expected outcome:
 - [x] Application adds a todo task into the list
 
 ## `event`
-A **event** task type with a simple description of the task, the date and time of the event 
+A **event** task type with a simple description of the task, the date and time of the event \
+You can add in an optional location to this event so that Mum can remind you where this event will take place
 #### Usage
 Key in this into the text box and press enter or click the enter button. \
-`event` `SPACE` `description` `SPACE` `/at` `date` `SPACE` `time`
+`event` `SPACE` `description` `SPACE` `/at` `date` `SPACE` `time` \
+or \
+`event` `SPACE` `description` `SPACE` `/at` `date` `SPACE` `time` `SPACE` `@` `location`
 ```
-event farmer's market /at 2022-02-02 08:00
+event farmer's market /at 2022-02-02 08:00 
+event farmer's market /at 2022-02-02 08:00 @Changi
 ```
 Expected outcome:
 - [x] Application adds an event task into the list with a date and time
@@ -147,6 +152,16 @@ bye
 Expected outcome:
 - [x] Application closes
 
+## `places`
+search tasks that are happening at this place
+#### Usage
+Key in this into the text box and press enter or click the enter button.
+```
+places orchard
+```
+Expected outcome:
+- [x] tasks with location in Orchard will be listed out.
+
 ## All Commands
 |Commands | Format |
 |---------|--------|
@@ -160,4 +175,5 @@ Expected outcome:
 |**Find** | `find`< space >`keyword` |
 |**Delete** | `delete`< space >`index` |
 |**Bye** | `bye` |
+|**Places** | `places` or `places`< space >`location` |
 

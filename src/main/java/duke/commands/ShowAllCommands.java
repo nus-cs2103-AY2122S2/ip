@@ -28,7 +28,7 @@ public class ShowAllCommands extends Command<String> {
             response += "todo    | One of the 3 tasks type. eg: todo_<yourtask>\n";
             // Fallthrough
         case EVENT:
-            response += "event   | One of the 3 tasks type. eg: event_<yourtask>_/at_<YYYY-MM-DD HH:MM >LOCATION>\n";
+            response += "event   | One of the 3 tasks type. eg: event_<yourtask>_/at_<YYYY-MM-DD HH:MM @location>\n";
             // Fallthrough
         case DEADLINE:
             response += "deadline| One of the 3 tasks type. eg: deadline_<yourtask>_/by_<YYYY-MM-DD HH:MM>\n";
