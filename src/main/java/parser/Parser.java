@@ -25,8 +25,8 @@ public class Parser {
     }
 
     /**
-     * Calls appropriate TaskList methods for each command and updates storage.
-     * @param inputStringsArray string array containing user instructions.
+     * Divides note and task commands entered by the user.
+     * @param inputStringsArray string array containing the user command.
      * @param storage Storage object that deals with storage updates.
      * @throws DukeException If user input message does not make sense.
      */
@@ -38,8 +38,6 @@ public class Parser {
             return noteParser(inputStringsArray, storage);
         case "help":
             return Ui.userHelp();
-//        case "bye":
-//            System.exit(0);
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that command means.\n"
                     + "Enter 'help' if you need it!");
@@ -116,5 +114,4 @@ public class Parser {
                     + "Enter 'help if you need it!");
         }
     }
-
 }

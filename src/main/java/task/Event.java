@@ -16,6 +16,7 @@ public class Event extends Task {
      * Event class constructor
      * @param details provides description of the event being created.
      * @param date provides the date of when the event is.
+     * @throws DukeException when user has not entered a valid date.
      */
     public Event(String details, String date) throws DukeException {
         super(details);

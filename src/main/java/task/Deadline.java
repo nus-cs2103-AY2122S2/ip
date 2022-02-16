@@ -16,6 +16,7 @@ public class Deadline extends Task {
      * Deadline class constructor
      * @param details provides description of the deadline being created.
      * @param date provides the date when the deadline is due.
+     * @throws DukeException when user has not entered a valid date.
      */
     public Deadline(String details, String date) throws DukeException {
         super(details);

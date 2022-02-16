@@ -17,10 +17,12 @@ public class TaskList {
 
     /**
      * Creates new tasks based on if a todo, deadline or event is entered by the user.
+     * @param taskType indicates if a task is a todo, deadline or event.
      * @param stringsToAdd contains user input string array.
      * @param containsBy indicates if a deadline by date has been entered.
      * @param containsOn indicated if an event on date has been entered.
      * @param returnString contains the description of the task entered by the user.
+     * @throws DukeException when user has not entered a valid date for the task.
      */
     public String createNewTask(String taskType, String[] stringsToAdd, Boolean containsBy, Boolean containsOn,
                                 String returnString) throws DukeException {
@@ -60,6 +62,7 @@ public class TaskList {
 
     /**
      * Prints all tasks in the task list.
+     * @returns String containing all tasks in the list.
      */
     public String displayList() {
         String returnString = "";
@@ -76,8 +79,8 @@ public class TaskList {
 
     /**
      * Adds a new task to the task list.
-     * @param stringsToAdd array that contains details of the task user wants to add to the task list.
-     * @throws DukeException If input string does not comply with todo, deadline or event formats.
+     * @param stringsToAdd array that contains user command.
+     * @throws DukeException If input string is not a todo, deadline or event.
      */
     public String addToList(String[] stringsToAdd) throws DukeException {
         String taskType;
@@ -117,6 +120,7 @@ public class TaskList {
     /**
      * Marks a specific task in the task list as completed.
      * @param inputStringsArray String number that specifies task number in task list to mark as completed.
+     * @throws DukeException when user has not entered a valid list index.
      */
     public String mark(String[] inputStringsArray) throws DukeException {
         try {
@@ -133,6 +137,7 @@ public class TaskList {
     /**
      * Marks a specific task in the task list as not completed.
      * @param inputStringsArray String number that specifies task number in task list to mark as not completed.
+     * @throws DukeException when user has not entered a valid list index.
      */
     public String unmark(String[] inputStringsArray) throws DukeException {
         try {
@@ -149,6 +154,7 @@ public class TaskList {
     /**
      * Deletes all or specific tasks from the task list based on string input.
      * @param inputStringsArray string that specifies if a specific task number or all tasks are to be deleted.
+     * @throws DukeException when user has not entered a valid list index.
      */
     public String delete(String[] inputStringsArray) throws DukeException {
         try {
@@ -173,6 +179,7 @@ public class TaskList {
     /**
      * Prints tasks in the task list that contain a specified keyword.
      * @param inputStringsArray keyword used to filer tasks in task list.
+     * @throws DukeException when user has not entered a keyword.
      */
     public String find(String[] inputStringsArray) throws DukeException {
         try {

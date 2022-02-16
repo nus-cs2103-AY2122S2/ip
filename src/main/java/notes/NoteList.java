@@ -30,6 +30,7 @@ public class NoteList {
     /**
      * Adds a new note to the note list.
      * @param stringNoteArray String note that needs to be added to the note list.
+     * @throws DukeException when note description is empty.
      */
     public String addToList(String[] stringNoteArray) throws DukeException {
         String note = "";
@@ -48,6 +49,7 @@ public class NoteList {
     /**
      * Deletes all or specific notes from the note list based on string input.
      * @param inputStringsArray string that specifies if a specific note number or all notes to be deleted.
+     * @throws DukeException when user has not entered a valid list index.
      */
     public String delete(String[] inputStringsArray) throws DukeException {
         try {
@@ -71,6 +73,7 @@ public class NoteList {
     /**
      * Prints notes in the note list that contain a specified keyword.
      * @param inputStringsArray keyword used to filer notes in task list.
+     * @throws DukeException when user has not entered a keyword to filter using.
      */
     public String find(String[] inputStringsArray) throws DukeException {
         try {

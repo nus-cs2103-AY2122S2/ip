@@ -3,7 +3,6 @@ import java.io.IOException;
 
 import exception.DukeException;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,8 +25,8 @@ import ui.Ui;
  */
 public class Duke extends Application {
 
-    private static final String TASK_FILE_PATH = "tasklistdata.txt";
-    private static final String NOTE_FILE_PATH = "notelistdata.txt";
+    private static final String TASK_FILE_PATH = "/data/tasklistdata.txt";
+    private static final String NOTE_FILE_PATH = "/data/notelistdata.txt";
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -65,7 +64,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the bot by combining Parser, Storage, TaskList and Ui and handling main.Duke exceptions.
+     * Starts the bot by combining Parser, Storage, TaskList and Ui and handling Duke exceptions.
      */
     public String run(String userInput) {
         try {
@@ -131,6 +130,9 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
+    /**
+     * Starts the conversation between the user and the bot.
+     */
     @Override
     public void start(Stage stage) {
         //Setting up required components
