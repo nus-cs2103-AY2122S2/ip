@@ -48,7 +48,6 @@ application {
 }
 
 shadowJar {
-    mainClassName = "duke.command.Launcher"
     archiveBaseName = "duke"
     archiveClassifier = null
 }
