@@ -12,7 +12,7 @@ import duke.exceptions.DukeException;
  * Parser is a functionality class that helps Duke to understand what the user inputs are.
  */
 public class Parser {
-    public static final String ERROR_UNKNOWN = "I don't know what that means! Command does not exist or your format is wrong!";
+    public static final String ERROR_UNKNOWN = "I don't know what that means! Command don't exist or format is wrong!";
     public static final String ERROR_DESCRIPTION = "OOPS, The description of a command cannot be empty.";
     public static final String ERROR_MISSING_DATE = "OOPS, check again if you have the date and the description.";
     public static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-mm-dd";

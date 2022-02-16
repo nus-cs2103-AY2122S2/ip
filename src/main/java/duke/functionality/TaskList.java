@@ -64,7 +64,7 @@ public class TaskList {
             output = output + (i + 1 + "." + this.taskList.get(i)) + "\n";
         }
 
-        if(this.taskList.size() == 0) {
+        if (this.taskList.size() == 0) {
             output = EMPTY_LIST;
         }
 
@@ -136,7 +136,7 @@ public class TaskList {
         Todo todoTask = new Todo(description);
         boolean isThereDuplicates = false;
 
-        for(int i = 0; i < this.taskList.size(); i++) {
+        for (int i = 0; i < this.taskList.size(); i++) {
             Task taskInList = this.taskList.get(i);
             if (taskInList instanceof Todo
                     && ((Todo) taskInList).equalsTo(todoTask)) {
@@ -170,7 +170,7 @@ public class TaskList {
         Deadline deadlineTask = new Deadline(arr[0], Parser.convertDate(arr[1]));
         boolean isThereDuplicates = false;
 
-        for(int i = 0; i < this.taskList.size(); i++) {
+        for (int i = 0; i < this.taskList.size(); i++) {
             Task taskInList = this.taskList.get(i);
             if (taskInList instanceof Deadline
                     && ((Deadline) taskInList).equalsTo(deadlineTask)) {
@@ -204,7 +204,7 @@ public class TaskList {
         Event eventTask = new Event(arr[0], Parser.convertDate(arr[1]));
         boolean isThereDuplicates = false;
 
-        for(int i = 0; i < this.taskList.size(); i++) {
+        for (int i = 0; i < this.taskList.size(); i++) {
             Task taskInList = this.taskList.get(i);
             if (taskInList instanceof Event
                     && ((Event) taskInList).equalsTo(eventTask)) {
