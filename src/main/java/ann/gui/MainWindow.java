@@ -1,8 +1,11 @@
 package ann.gui;
 
-import ann.Ann;
+import ann.AnnBot;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -20,7 +23,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-    private Ann ann;
+    private AnnBot annBot;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image annImage = new Image(this.getClass().getResourceAsStream("/images/ann.png"));
 
@@ -29,8 +32,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setAnn(Ann a) {
-        ann = a;
+    public void setAnn(AnnBot a) {
+        annBot = a;
     }
 
     /**
@@ -40,13 +43,38 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = ann.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getAnnDialog(response, annImage)
-        );
+        String response = annBot.getResponse(input);
+        boolean isExitCommand = annBot.isExitCommand(input);
         userInput.clear();
+        if (isExitCommand) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage)
+            );
+            handleExitCommand(response);
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getAnnDialog(response, annImage)
+            );
+        }
     }
 
+    private void handleExitCommand(String response) {
+        if (showConfirmationAlert("Are you sure you want to exit?")) {
+            showInformationAlert(response);
+            Platform.exit();
+            System.exit(0);
+        }
+    }
 
+    private void showInformationAlert(String response) {
+        final Alert alert = new Alert(Alert.AlertType.INFORMATION, response);
+        alert.showAndWait();
+    }
+
+    private boolean showConfirmationAlert(String content) {
+        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION, content, ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        return alert.getResult() == ButtonType.YES;
+    }
 }
