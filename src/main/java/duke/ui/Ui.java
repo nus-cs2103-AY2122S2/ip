@@ -9,10 +9,6 @@ import duke.task.Task;
  * User Interface class, print beautiful output to user
  */
 public class Ui {
-    private final String lines = "____________________________"
-                                         + "________________________________\n";
-    private final String endline = "___________________________"
-                                           + "_________________________________\n";
 
     /**
      * constructor
@@ -169,20 +165,6 @@ public class Ui {
      */
     public String showError(String message) {
         return message;
-    }
-
-    /**
-     * Shows line
-     */
-    public void showLine() {
-        System.out.println(lines);
-    }
-
-    /**
-     * Shows endline
-     */
-    public void showEndline() {
-        System.out.println(endline);
     }
 
     /**

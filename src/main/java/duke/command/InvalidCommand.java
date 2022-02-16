@@ -27,6 +27,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }
