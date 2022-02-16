@@ -40,7 +40,7 @@ public class Task {
      * @return Returns a checked box if task is marked.
      */
     public String getStatusIcon() {
-        return (isMarked ? "[X]" : "[ ]");
+        return (isMarked ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]");
     }
 
     /**
