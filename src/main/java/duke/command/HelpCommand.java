@@ -25,8 +25,10 @@ public class HelpCommand extends Command {
                 + "\"unmark [taskId]\" unmarks the specified task as done\n"
                 + "\"delete [taskId]\" deletes the specified task\n"
                 + "\"todo [name]\" creates a todo task with specified name\n"
-                + "\"deadline [name] /by[YYYY-MM-DD] [HH:mm]\" creates a deadline task with specified name,date,time(optional)\n"
-                + "\"event [name] /at[YYYY-MM-DD] [HH:mm]\" creates a event task with specified name,date,time(optional)\n";
+                + "\"deadline [name] /by[YYYY-MM-DD] [HH:mm]\" creates a "
+                + "deadline task with specified name,date,time(optional)\n"
+                + "\"event [name] /at[YYYY-MM-DD] [HH:mm]\" creates a event task with specified "
+                + "name,date,time(optional)\n";
         return response;
     }
 }

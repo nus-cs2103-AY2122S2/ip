@@ -79,15 +79,14 @@ public class DialogContainer {
 
     void addChatBox(String userText, String dukeText) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(new Label(userText), new ImageView(user)),
-                DialogBox.getDukeDialog(new Label(dukeText), new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
 
         userInput.clear();
     }
 
     void addDukeChatBox(String text) {
-        Label dukeText = new Label(text);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, duke));
     }
 }

@@ -27,14 +27,14 @@ public class Duke extends Application {
     private final Storage storage;
     private TaskList tasks;
     private final Parser parser;
-    private DialogContainer dialogContainer;
+    //private DialogContainer dialogContainer;
 
     /**
      * Default constructor for Duke
      */
     public Duke() {
         ui = new Ui();
-        dialogContainer = new DialogContainer();
+        // dialogContainer = new DialogContainer();
         parser = new Parser();
         storage = new Storage("save.txt");
         try {
@@ -60,35 +60,9 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        dialogContainer.init(stage);
-
-        dukeSayMessage("Hello! I am Duke :)");
-
-        dialogContainer.sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        dialogContainer.userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        String userText = dialogContainer.userInput.getText();
-        String dukeText = getResponse(dialogContainer.userInput.getText());
-
-        dialogContainer.addChatBox(userText, dukeText);
-    }
-
-    private void dukeSayMessage(String text) {
-        dialogContainer.addDukeChatBox(text);
-    }
-
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         String response = "What?";
         Command command = null;
         try {
