@@ -112,6 +112,9 @@ public class Parser {
                         + "unmark <input task number> - to mark task as not done\n"
                         + "delete <input task number> - to delete task from tasks\n";
                 break;
+            case "find":
+                Action.find(inputArr[1]);
+                break;
             default:
                 output = "invalid command! Use 'help' for help";
         }

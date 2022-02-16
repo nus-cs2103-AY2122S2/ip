@@ -15,6 +15,10 @@ public class TaskBank {
         bank.remove(index);
     }
 
+    public static int getSize() {
+        return bank.size();
+    }
+
     public static ArrayList<Task> getBank() {
         return bank;
     }

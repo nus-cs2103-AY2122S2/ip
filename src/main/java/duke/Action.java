@@ -32,4 +32,28 @@ public class Action {
             System.out.println(output);
         }
     }
+
+    public static void find(String keyword) {
+        boolean hasMatches = false;
+        String output = "";
+        if (keyword.equals("")) {
+            output = "find description cannot be empty!\n";
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < TaskBank.getSize(); i++) {
+                Task t = TaskBank.getBank().get(i);
+                if (t.getDescription().contains(keyword)) {
+                    hasMatches = true;
+                    output += String.format("%d. %s\n", i + 1, t);
+                }
+            }
+        }
+
+        if (hasMatches) {
+            System.out.println(output);
+        } else {
+            System.out.println("no results found");
+        }
+    }
+
 }
