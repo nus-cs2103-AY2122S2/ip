@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
 import duke.task.Todo;
 
 public class TodoTest {
@@ -13,7 +14,7 @@ public class TodoTest {
     }
 
     @Test
-    public void extractFileDataMarkTrue() {
+    public void extractFileDataMarkTrue() throws DukeException {
         Todo todo = new Todo();
         todo.extractDataFromLine("T|true|Help someone");
 
@@ -21,7 +22,7 @@ public class TodoTest {
     }
 
     @Test
-    public void extractFileDataMarkFalse() {
+    public void extractFileDataMarkFalse() throws DukeException {
         Todo todo = new Todo();
         todo.extractDataFromLine("T|false|Buy a new printer");
 

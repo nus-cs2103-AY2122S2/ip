@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
 import duke.task.Event;
 
 public class EventTest {
@@ -26,7 +27,7 @@ public class EventTest {
     }
 
     @Test
-    public void extractFileDataMarkTrue() {
+    public void extractFileDataMarkTrue() throws DukeException {
         Event event = new Event();
         String data = "T|true|Cycling Competition|Dec 12 2022|09:05 AM";
 
@@ -35,7 +36,7 @@ public class EventTest {
     }
 
     @Test
-    public void extractFileDataMarkFalse() {
+    public void extractFileDataMarkFalse() throws DukeException {
         Event event = new Event();
         String data = "T|false|Swim meet|Nov 1 2022|05:15 AM";
 

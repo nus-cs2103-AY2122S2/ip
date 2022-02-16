@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 
 public class DeadlineTest {
@@ -26,7 +27,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void extractFileDataMarkTrue() {
+    public void extractFileDataMarkTrue() throws DukeException {
         Deadline deadline = new Deadline();
         String data = "T|true|Cycle 15km|Dec 12 2022|09:05 AM";
 
@@ -35,7 +36,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void extractFileDataMarkFalse() {
+    public void extractFileDataMarkFalse() throws DukeException {
         Deadline deadline = new Deadline();
         String data = "T|false|Swim 5km|Nov 1 2022|05:15 AM";
 

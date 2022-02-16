@@ -18,6 +18,8 @@ public class Storage {
     private static final String FILE_LOADING_ERROR_MSG =
             "HEY! File load data cannot be read or may be corrupted! Your prev save may be gone, start anew.";
     private static final String CANNOT_WRITE_TO_FILE_MSG = "Cannot write data to file. What's up with that?";
+    private static final String CANNOT_CREATE_OBJ = "Objection creation issue while trying to read data.";
+
     private final String fileDirPath;
     private final String fullFilePath;
     private File file;
@@ -82,7 +84,7 @@ public class Storage {
                 T newTask = factory.apply(nextLine); // create the proper obj type
 
                 if (newTask == null) {
-                    continue;
+                    throw new DukeException(CANNOT_CREATE_OBJ);
                 }
 
                 newTask.extractDataFromLine(nextLine);
@@ -90,8 +92,8 @@ public class Storage {
             }
 
             scanner.close();
-
-        } catch (IOException exception) {
+        } catch (IOException | DukeException exception) {
+            list.clear(); //clear list if issue with loading data
             throw new DukeException(FILE_LOADING_ERROR_MSG);
         }
     }

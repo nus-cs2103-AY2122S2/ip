@@ -3,7 +3,11 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
+
+import duke.exception.DukeException;
 
 /**
  * Event are tasks that start at a specific time and ends at a specific time.
@@ -17,6 +21,8 @@ public class Event extends Task {
 
     private static final String DEFAULT_DATE = "2020-12-12";
     private static final String DEFAULT_TIME = "11:59 PM";
+
+    private static final String PARSE_FILE_ERROR = "Error reading event data from file";
 
     private LocalDate eventDate;
     private LocalTime eventTime;
@@ -67,19 +73,24 @@ public class Event extends Task {
      *
      * @param data The string to extract data and initialize data from.
      *             Data format: E|true/false|taskDescription|MMM d yyyy|hh:mm a
+     * @throws DukeException If there are issues extracting data from line.
      */
     @Override
-    public void extractDataFromLine(String data) {
+    public void extractDataFromLine(String data) throws DukeException {
         StringTokenizer st = new StringTokenizer(data, "|");
 
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
-        st.nextToken(); // remove the type symbol
-        setIsDone(Boolean.parseBoolean(st.nextToken()));
-        setTaskDescription(st.nextToken());
-        eventDate = LocalDate.parse(st.nextToken(), dateFormatter);
-        eventTime = LocalTime.parse(st.nextToken(), timeFormatter);
+        try {
+            st.nextToken(); // remove the type symbol
+            setIsDone(Boolean.parseBoolean(st.nextToken()));
+            setTaskDescription(st.nextToken());
+            eventDate = LocalDate.parse(st.nextToken(), dateFormatter);
+            eventTime = LocalTime.parse(st.nextToken(), timeFormatter);
+        } catch (DateTimeParseException | NoSuchElementException execption) {
+            throw new DukeException(PARSE_FILE_ERROR);
+        }
     }
 
     /**

@@ -1,6 +1,9 @@
 package duke.task;
 
+import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
+
+import duke.exception.DukeException;
 
 /**
  * Tasks without any date/time attached to it.
@@ -9,6 +12,7 @@ import java.util.StringTokenizer;
  */
 public class Todo extends Task {
     public static final char TODO_SYMBOL = 'T';
+    private static final String PARSE_FILE_ERROR = "Error reading todo data from file";
 
     /**
      * Default constructor for Todo.
@@ -46,12 +50,16 @@ public class Todo extends Task {
      *             Data format: T|true/false|taskDescription
      */
     @Override
-    public void extractDataFromLine(String data) {
+    public void extractDataFromLine(String data) throws DukeException {
         StringTokenizer st = new StringTokenizer(data, "|");
 
-        st.nextToken(); // remove the type symbol
-        setIsDone(Boolean.parseBoolean(st.nextToken()));
-        setTaskDescription(st.nextToken());
+        try {
+            st.nextToken(); // remove the type symbol
+            setIsDone(Boolean.parseBoolean(st.nextToken()));
+            setTaskDescription(st.nextToken());
+        } catch (NoSuchElementException execption) {
+            throw new DukeException(PARSE_FILE_ERROR);
+        }
     }
 
     /**
