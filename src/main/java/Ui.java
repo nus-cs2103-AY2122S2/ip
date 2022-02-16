@@ -19,43 +19,20 @@ public class Ui {
         System.out.println(logo);
     }
 
+    public String readCommand() {
 
-
-    public void printIntroduction() {
-        printDukeLogo();
-        System.out.println("Hello! I'm Duke.\n" + "What can I do for you?");
-
+        return this.sc.nextLine();
     }
 
-    public void printExitMessage() {
-        System.out.println("Bye. Hope to see you again soon!\n");
-        printDukeLogo();
-    }
-
-    public void printStorageIoError() {
-        System.out.println("OOPS! An error occurred while attempting to create/retrieve storage file.");
-
-    }
-
-    public void printUpdateIoError(IOException ie) {
-        System.out.println("OOPS! An error occurred while attempting to update storage file:\n"
-                + ie.getMessage());
-
-    }
-
-    public void printDukeException(DukeException de) {
-        System.out.println("OOPS! " + de.getMessage());
-
-    }
 
     public String printTasks(TaskList tasks) {
         ArrayList<Task> taskList = tasks.getTasks();
-        StringBuilder toReturn = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 1; i <= taskList.size(); i++) {
-            toReturn.append(i).append(". ").append(taskList.get(i - 1).toString());
+            sb.append(i).append(". ").append(taskList.get(i - 1).toString());
         }
-          return  toReturn.toString();
+          return sb.toString();
     }
 
     public String printNumTasks(TaskList taskList) {
@@ -63,24 +40,24 @@ public class Ui {
 
     }
 
-    public String printAddTaskMessage(Task added, TaskList taskList) {
-        String toReturn = "Got it. I've added this task:\n" + added.toString();
-        toReturn += printNumTasks(taskList);
-        return toReturn;
+    public String printAddTask(Task added, TaskList taskList) {
+        String temp = "Got it. I've added this task:\n" + added.toString();
+        temp += printNumTasks(taskList);
+        return temp;
     }
 
-    public String printMarkDone(Task marked) {
+    public String printMark(Task marked) {
         return "This task is marked as done:\n" + marked.toString();
 
     }
 
-    public String printDeleteTask(Task deleted, TaskList taskList) {
+    public String printDelete(Task deleted, TaskList taskList) {
         String toReturn = "This task has been removed:\n" + deleted.toString();
         toReturn += printNumTasks(taskList);
-        return  toReturn;
+        return toReturn;
     }
 
-    public String printSomeTasks(ArrayList<Task> tasks) {
+    public String printReq(ArrayList<Task> tasks) {
         StringBuilder toReturn = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
             toReturn.append(i).append(". ").append(tasks.get(i - 1).toString());
@@ -88,12 +65,8 @@ public class Ui {
         return toReturn.toString();
     }
 
-    public String readCommand() {
 
-        return this.sc.nextLine();
-    }
-
-    public void closeScanner() {
+    public void closeSc() {
 
         this.sc.close();
     }

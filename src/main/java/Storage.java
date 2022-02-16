@@ -114,7 +114,7 @@ class Storage {
                     System.out.println("Problem encountered when reading file: task unknown");
             }
         }
-        return  tasks;
+        return tasks;
     }
 
 }
