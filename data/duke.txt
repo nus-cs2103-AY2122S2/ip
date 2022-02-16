@@ -1,7 +1,7 @@
-T 0 aa
-E 1 woejowwfjoe  | 20-02-2000 1200
-T 0 woejoefjofw
-T 0 owejfowjf
-T 0 eojfewojweoefw
-T 0 weofewofjwefewof
-T 0 ojfowejfeow
+T 0 read chapter 5 of bio
+E 0 sam's bday | 22-02-2022 1200
+T 0 find mum's pan
+T 0 clean the room
+D 0 assign. 5 | 03-03-2022 2359
+T 0 buy dog food
+T 0 drink 5L of water

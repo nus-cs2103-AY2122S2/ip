@@ -11,8 +11,7 @@ import java.util.Arrays;
 public class Parser {
     public String[] words; // user input split by spaces to get words
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-    FileWriter fw = new FileWriter("data/duke.txt", true);
-    PrintWriter wf = new PrintWriter(fw);
+
     TaskList tasks = null;
     Storage storage = null;
     String command = null;
@@ -23,14 +22,16 @@ public class Parser {
         this.command = command;
         this.storage = storage;
     }
+
     public String getResponse() throws IOException {
             StringBuilder sb = new StringBuilder();
-
+            FileWriter fw = new FileWriter("data/duke.txt", true);
+            PrintWriter wf = new PrintWriter(fw);
             switch (words[0]) {
                 case "list" -> {
                 wf.flush();
                 sb = new StringBuilder();
-                sb.append("    Here are the tasks on your lists:\n");
+                sb.append("    Here are the tasks on your list:\n");
                 int n = 1;
                 for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
                     Task t = tasks.get(i);
@@ -47,7 +48,7 @@ public class Parser {
                 return sb.toString();
             }
             case "mark" -> {
-                wf.flush(); // need to flush first cause updates were stored in buffer
+                wf.flush();
                 int n = Integer.parseInt(words[1]) - 1;
                 assert n <= tasks.getNumberOfTasks();
                 tasks.set(n, tasks.get(n).mark());
@@ -109,7 +110,7 @@ public class Parser {
                     }
                 }
                 sb = new StringBuilder();
-                sb.append("    Here are the matching tasks in your list:\n");
+                sb.append("    Here are the matching tasks on your list:\n");
                 for(int i = 0; i < noOfMatched; i++) {
                     Task t = tasks.get(ind[i]);
                     String by = "";
@@ -133,6 +134,7 @@ public class Parser {
                     tasks.add(new ToDo(words[1]));
                     sb.append("      [T][ ] ").append(words[1]);
                     wf.println("T 0 " + words[1]);
+                    wf.close();
                     sb.append("\n    Now you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
                     return sb.toString();
                 }
@@ -144,6 +146,7 @@ public class Parser {
                 tasks.add(new Event(words[0], LocalDateTime.parse(words[1], formatter)));
                 sb.append("      [E][ ] ").append(words[0]);
                 wf.println("E 0 " + words[0] + " | " + words[1]);
+                wf.close();
                 sb.append("\n    Now you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
                 return sb.toString();
             }
@@ -155,6 +158,7 @@ public class Parser {
                 tasks.add(new Deadline(words[0], LocalDateTime.parse(words[1], formatter)));
                 sb.append("      [D][ ] ").append(words[0]);
                 wf.println("D 0 " + words[0] + " | " + words[1]);
+                wf.close();
                 sb.append("\n    Now you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
                 return sb.toString();
             }

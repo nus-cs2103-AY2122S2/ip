@@ -49,6 +49,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (input.equals("bye")) {
+
             System.exit(0);
 
         } else {

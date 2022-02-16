@@ -38,8 +38,7 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        storage = new Storage("data/duke.txt");
-        tasks = new TaskList(storage.load(), storage.getNumberOfTasks());
+
 
         //Step 1. Formatting the window to look as expected.
 
@@ -141,13 +140,15 @@ public class Duke extends Application {
     }
 
     String getResponse(String input) throws IOException {
+        storage = new Storage("data/duke.txt");
+        tasks = new TaskList(storage.load(), storage.getNumberOfTasks());
         Parser p = new Parser(input, tasks, storage);
-
         return p.getResponse();
     }
 
     public static void main(String[] args) throws IOException {
         new Duke("data/duke.txt");
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             String s = "";
