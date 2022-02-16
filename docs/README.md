@@ -1,6 +1,6 @@
 # User Guide For YQ Chatbot
 
-*YQ Chatbot simplifies the way you manage your tasks so that you can focus on what matters.*
+*YQ Chatbot simplifies the way you manage your tasks so that you can focus on what's important to you.*
 
 ![YQ Chatbot Image](https://yuqitanyq.github.io/ip/Ui.png)
 
