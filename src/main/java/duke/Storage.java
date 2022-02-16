@@ -20,6 +20,7 @@ class Storage {
      * Loads the different tasks from a specific file.
      * If the file does not exist at the given path,
      * a new file will then be created.
+     * @return the loaded file.
      */
     public File load() {
         FileClass fc = new FileClass(); //file class
@@ -54,6 +55,7 @@ class Storage {
     }
     /**
      * Returns an ArrayList which contains different tasks.
+     * @return an ArrayList<Task>
      */
     public ArrayList<Task> getList() {
         return this.taskArray;

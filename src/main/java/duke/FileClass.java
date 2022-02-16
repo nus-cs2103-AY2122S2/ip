@@ -44,7 +44,7 @@ class FileClass {
      */
     //taken from W3.3c File Access
     public void writeFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // initialise the file writer
+        FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAdd + "\r\n");
         fw.close();
     }
@@ -58,9 +58,9 @@ class FileClass {
      * @throws IOException If the path directory is invalid.
      */
     public void createDirectory(String filePath) {
-        File f = new File(filePath); //initialise the file
+        File f = new File(filePath);
         Path path = Paths.get(filePath);
-        if (!f.exists()) { //meaning f doesnt exist
+        if (!f.exists()) {
             try {
                 Files.createDirectory(path);
             } catch (IOException e) {
