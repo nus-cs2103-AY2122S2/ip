@@ -13,6 +13,8 @@ import duke.tasks.TaskList;
 public class PlacesCommand extends Command<String> {
     private TaskList list;
     private String[] echo;
+    private String response = "Here are the locations in your list:\n";
+    private String location = "";
 
     /**
      * Constructor for find class to execute the finding of places with specific keywords.
@@ -23,6 +25,9 @@ public class PlacesCommand extends Command<String> {
      */
     public PlacesCommand(TaskList list, String[] echo) throws DukeException {
         this.list = list;
+        if (!echo[0].equalsIgnoreCase("places")) {
+            throw new DukeException("Oh no! I fear I don't understand! Try again!\n");
+        }
         this.echo = echo;
     }
 
@@ -33,24 +38,24 @@ public class PlacesCommand extends Command<String> {
      * @throws DukeException thrown when no findings
      */
     public String execute() throws DukeException {
-        String response = "";
-        String location = "";
         if (echo.length > 1) {
             location = echo[1];
         }
+        prepareResponse(location);
+        return response;
+    }
+    private void prepareResponse(String location) {
         int n = 1;
         String finalLocation = location;
         List<Task> filteredList = list.taskListToList().stream().filter(x -> (x.toString().contains("E")
                 && x.isPlaceValid() && x.toString().contains(finalLocation)))
                 .collect(Collectors.toList());
-        response = "Here are the locations in your list:\n";
-        for (int i = 0; i < filteredList.size(); i++) {
-            String taskDetail = filteredList.get(i).toString();
-            response = response + n + "." + taskDetail + "\n";
+        for (Task task : filteredList) {
+            String taskDetail = task.toString();
+            response += n + "." + taskDetail + "\n";
             n = n + 1;
 
         }
-        return response;
     }
 
     /**

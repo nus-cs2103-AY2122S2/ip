@@ -24,17 +24,23 @@ public class Event extends Task {
      */
     public Event(String description, String dueDate) throws DukeException {
         super(description);
-        boolean isLocationAdded = dueDate.contains(" >");
-        if (isLocationAdded) {
-            this.place = dueDate.split(" >")[1];
-            this.date = dueDate.split(" >")[0];
-        } else {
-            this.date = dueDate;
-        }
+        setPlace(dueDate);
         try {
             this.setDueDateTime(dueDate);
         } catch (Exception e) {
             throw new DukeException("Wrong Date and Time format. yyyy-mm-dd HH:MM\n");
+        }
+    }
+    private void setPlace(String dueDate) throws DukeException {
+        if (dueDate.contains(" @") && dueDate.endsWith("@")) {
+            throw new DukeException("Location is not added... Please try again.\n");
+        } else if (dueDate.contains(" @") && !dueDate.endsWith("@")) {
+            this.place = dueDate.split(" @")[1];
+            this.date = dueDate.split(" @")[0];
+        } else if (!dueDate.contains(" @")) {
+            this.date = dueDate;
+        } else {
+            throw new DukeException("Wrong event format");
         }
     }
 
@@ -83,7 +89,7 @@ public class Event extends Task {
     @Override
     public String getTaskData() {
         if (isPlaceValid()) {
-            String location = " >" + place;
+            String location = " @" + place;
             return "[E]" + super.toString() + " (at: " + this.date + location + ")";
         } else {
             return "[E]" + super.toString() + " (at: " + this.date + ")";
@@ -99,7 +105,8 @@ public class Event extends Task {
     public String toString() {
         if (isPlaceValid()) {
             String location = " | location: " + place;
-            return "[E]" + super.toString() + " (at: " + this.dateToString() + " " + this.timeToString() + location + ")";
+            return "[E]" + super.toString() + " (at: " + this.dateToString() + " "
+                    + this.timeToString() + location + ")";
         } else {
             return "[E]" + super.toString() + " (at: " + this.dateToString() + " " + this.timeToString() + ")";
         }

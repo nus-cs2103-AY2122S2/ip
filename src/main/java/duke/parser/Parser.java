@@ -36,19 +36,19 @@ public class Parser {
             return new ShowAllCommands();
         } else if (echo.equalsIgnoreCase("list")) {
             return new ListCommand(listOfTasks);
-        } else if (echo.toLowerCase().contains("todo")) {
+        } else if (echo.toLowerCase().contains("todo ")) {
             return new AddTodoCommand(listOfTasks, echo.split(" ", 2), storage);
-        } else if (echo.toLowerCase().contains("event")) {
+        } else if (echo.toLowerCase().contains("event ")) {
             return new AddEventCommand(listOfTasks, echo.split(" ", 2), storage);
-        } else if (echo.toLowerCase().contains("deadline")) {
+        } else if (echo.toLowerCase().contains("deadline ")) {
             return new AddDeadlineCommand(listOfTasks, echo.split(" ", 2), storage);
-        } else if (echo.toLowerCase().contains("unmark")) {
+        } else if (echo.toLowerCase().contains("unmark ")) {
             return new UnmarkCommand(listOfTasks, echo.split(" ", 2), storage);
-        } else if (echo.toLowerCase().contains("mark")) {
+        } else if (echo.toLowerCase().contains("mark ")) {
             return new MarkCommand(listOfTasks, echo.split(" ", 2), storage);
-        } else if (echo.toLowerCase().contains("delete")) {
+        } else if (echo.toLowerCase().contains("delete ")) {
             return new DeleteCommand(listOfTasks, echo.split(" ", 2), storage);
-        } else if (echo.toLowerCase().contains("find")) {
+        } else if (echo.toLowerCase().contains("find ")) {
             return new FindCommand(listOfTasks, echo.split(" ", 2));
         } else if (echo.toLowerCase().contains("places")) {
             return new PlacesCommand(listOfTasks, echo.split(" ", 2));
