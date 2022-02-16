@@ -2,13 +2,18 @@
 
 ## Features 
 
-### Feature-ABC
+### Manage your tasks effectively in a virtual tasklist
 
-Description of the feature.
+Johnny accepts and stores three different kinds of tasks 
+- Todos, Deadlines and Events
 
-### Feature-XYZ
+### Smart scheduling clash detection
 
-Description of the feature.
+Johnny will alert you when it detects a scheduling clash
+
+### Search for task
+
+Look for a specific task in Johnny's database using a text query
 
 ## Usage
 
