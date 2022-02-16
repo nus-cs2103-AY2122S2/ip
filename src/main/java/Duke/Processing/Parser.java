@@ -11,9 +11,8 @@ public class Parser {
      * @param  date the String the user inputs
      * @return      the String in a date format the system can recognise
      */
-    static Date convert1(String date) throws DukeException {
+    static Date convertString(String date) throws DukeException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        //System.out.println(date);
         try {
             return  formatter.parse(date);
         } catch (ParseException e) {
@@ -26,9 +25,8 @@ public class Parser {
      * @param  date the String the user inputs
      * @return      the String in a date format the system can recognise
      */
-    static Date convert2(String date) throws DukeException {
+    static Date convertDate(String date) throws DukeException {
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
-        //System.out.println(date);
         try {
             return formatter.parse(date);
         } catch (ParseException e) {
