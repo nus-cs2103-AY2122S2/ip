@@ -82,9 +82,16 @@ public class TaskList {
     }
 
     public static void findTasks(String keywords) {
-        List<String> allKeywords = Arrays.stream(keywords.split(",")).sequential().map(String::trim).collect(Collectors.toList());
-        ArrayList<Task> matchingTasks = manager.stream().filter(x -> allKeywords.stream().anyMatch(y -> x.description.contains(y))).collect(Collectors.toCollection(ArrayList<Task>::new));
-        System.out.println("Here are the tasks found: ");
+        List<String> allKeywords = Arrays.stream(keywords.split(",")).sequential()
+                .map(String::trim)
+                .collect(Collectors.toList());
+
+        ArrayList<Task> matchingTasks = manager.stream()
+                .filter(x -> allKeywords.stream()
+                        .anyMatch(y -> x.description.contains(y)))
+                .collect(Collectors.toCollection(ArrayList<Task>::new));
+
+        System.out.println("Here are the relevant tasks found~ ");
         matchingTasks.forEach(System.out::println);
     }
 }
