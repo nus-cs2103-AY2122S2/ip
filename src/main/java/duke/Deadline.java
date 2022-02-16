@@ -31,7 +31,9 @@ public class Deadline extends Task {
      */
     public String getDate() {
         try {
-            LocalDate date = LocalDate.parse(deadlineDateTime.substring(3, 13));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate date = LocalDate.parse(deadlineDateTime.substring(3, 13), formatter);
+            System.out.println(date.toString());
             DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
             return date.format(newFormat);
         } catch (DateTimeException e) {

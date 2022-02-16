@@ -17,6 +17,10 @@ public class Main extends Application {
     private Duke duke = new Duke();
     private Image icon = new Image(this.getClass().getResourceAsStream("/images/genieicon.png"));
 
+    /**
+     * Sets the GUI when chatbot initialises
+     * @param stage skeleton to be created from
+     */
     @Override
     public void start(Stage stage) {
         try {

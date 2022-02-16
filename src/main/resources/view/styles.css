@@ -1,0 +1,6 @@
+#scrollPane .viewport {
+    -fx-background-image: url("/images/background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+
+}

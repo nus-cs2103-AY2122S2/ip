@@ -11,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -28,6 +27,11 @@ public class DialogBox extends HBox {
     @FXML
     private Circle displayPicture;
 
+    /**
+     * constructor for creating dialog box
+     * @param text text to be printed
+     * @param img image to be shown
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -54,10 +58,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     *
+     * get user dialog from input
+     * @param text userr input
+     * @param img user profile picture
+     * @return dialog box to be shown in GUI
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     *
+     * get chatbot response for input
+     * @param text response by chatbot
+     * @param img chatbot profile picture
+     * @return dialog box to be shown in GUI
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

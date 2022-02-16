@@ -32,6 +32,11 @@ public class Storage {
         }
     }
 
+    /**
+     * restore list from memory into chatbot
+     * @param storeList arraylist to be populated
+     * @throws FileNotFoundException when there is no such file in memory
+     */
     private static void restoreFromFile(ArrayList<Task> storeList) throws FileNotFoundException {
         File f = new File(getNewFilePath());
         try (Scanner s = new Scanner(f)) {

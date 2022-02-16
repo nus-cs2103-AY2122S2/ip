@@ -50,9 +50,9 @@ public class TaskList {
             assert Integer.parseInt(command.substring(7)) <= storeList.size() : command.substring(7);
             try {
                 Task t = storeList.get(Integer.parseInt(command.substring(7)) - 1);
-                storeList.remove(Integer.parseInt(command.substring(7)));
-                return "Yes master. The task " + t.toString() + " has been removed " + "\n" + "Now you have "
-                        + storeList.size() + " tasks left master";
+                storeList.remove(Integer.parseInt(command.substring(7)) - 1);
+                return "Yes master. The task " + "\n" + t.toString() + "\n" + " has been removed " + "\n"
+                        + "Now you have " + storeList.size() + " tasks left master";
             } catch (IndexOutOfBoundsException e) {
                 return "Master, you only have " + storeList.size() + " tasks now." + "\n"
                         + "Please choose another task number";
@@ -78,7 +78,7 @@ public class TaskList {
         } else {
             Task tobeUnmark = storeList.get(taskNumber - 1);
             tobeUnmark.setUnmark();
-            return "You probably need more genies to help you. This task has been marked as not done"
+            return "You probably need more genies to help you. This task has been marked as not done" + "\n"
                     + tobeUnmark.toString();
         }
     }
@@ -101,7 +101,7 @@ public class TaskList {
         } else {
             Task tobeMark = storeList.get(taskNumber - 1);
             tobeMark.setMark();
-            return "You could have gotten me to help you. This task has been marked done" + tobeMark.toString();
+            return "You could have gotten me to help you. This task has been marked done" + "\n" + tobeMark.toString();
         }
     }
 
@@ -122,7 +122,7 @@ public class TaskList {
             String atTime = command.substring(slash + 1);
             Event event = new Event(newTask, atTime);
             storeList.add(event);
-            return "Added to my brain master:" + event.toString() + " " + printSizeOfList(storeList);
+            return "Added to my brain master:" + "\n" + event.toString() + "\n" + printSizeOfList(storeList);
         }
     }
 
@@ -165,7 +165,7 @@ public class TaskList {
                 String endTime = command.substring(slash + 1);
                 Deadline deadline = new Deadline(newTask, endTime);
                 storeList.add(deadline);
-                return "Added to my brain master:" + "\n" + deadline.toString() + printSizeOfList(storeList);
+                return "Added to my brain master:" + "\n" + deadline.toString() + "\n" + printSizeOfList(storeList);
             }
         }
     }
