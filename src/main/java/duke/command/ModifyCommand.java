@@ -32,6 +32,8 @@ public class ModifyCommand implements Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         String command = this.commandAndDetails[0];
         int taskNumber = Integer.parseInt(this.commandAndDetails[1]);
+        assert taskNumber >= 0 : "Task number should not be negative";
+        assert taskNumber < taskList.size() : "Invalid task number! You have " + taskList.size() + " task(s).";
         String response = "";
         switch (command) {
         case "mark":
