@@ -53,7 +53,7 @@ public class Ui {
         StringBuilder toReturn = new StringBuilder();
 
         for (int i = 1; i <= taskList.size(); i++) {
-            toReturn.append(i).append(". ").append(taskList.get(i - 1).toString());
+            toReturn.append(i).append(" . ").append(taskList.get(i - 1).toString()).append(System.lineSeparator());
         }
           return  toReturn.toString();
     }
@@ -77,7 +77,7 @@ public class Ui {
     public String printDeleteTask(Task deleted, TaskList taskList) {
         String toReturn = "This task has been removed:\n" + deleted.toString();
         toReturn += printNumTasks(taskList);
-        return  toReturn;
+        return toReturn;
     }
 
     public String printSomeTasks(ArrayList<Task> tasks) {

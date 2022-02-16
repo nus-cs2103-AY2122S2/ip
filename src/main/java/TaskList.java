@@ -61,17 +61,25 @@ class TaskList {
 
     /**
      * Finds the tasks that contains the keyword provided.
-     * @param keyword Keyword for searching a task.
+     * @param inputs Keyword for searching tasks.
      * @return An ArrayList of the Tasks that contains the specific keyword.
      */
-    public ArrayList<Task> findTasks(String keyword) {
-        ArrayList<Task> relatedTasks = new ArrayList<>();
-        for (Task current : this.tasks) {
-            String taskName = current.getName();
-            if (taskName.contains(keyword)) {
-                relatedTasks.add(current);
+    public ArrayList<Task> findTasks(String[] inputs) {
+        ArrayList<Task> resultTasks = new ArrayList<>();
+        ArrayList<Integer> noTasks = new ArrayList<>();
+        for (String current : inputs) {
+            for (int i = 0; i < this.tasks.size(); i++) {
+                Task check = this.tasks.get(i);
+                String name = check.getName();
+                if (name.contains(current)) {
+                    noTasks.add(i);
+                }
             }
+
         }
-        return relatedTasks;
+        for (int found : noTasks) {
+            resultTasks.add(this.tasks.get(found));
+        }
+        return resultTasks;
     }
 }
