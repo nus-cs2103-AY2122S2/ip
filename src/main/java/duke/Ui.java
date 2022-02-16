@@ -17,9 +17,9 @@ public class Ui {
      * Constructor for Ui
      */
     public Ui() {
-        System.out.println("Hello I'm\n" + prince);
-        System.out.println("How can I help you today?");
-        System.out.println(divider);
+        //System.out.println("Hello I'm\n" + prince);
+        //System.out.println("How can I help you today?");
+        //System.out.println(divider);
     }
 
     /**
@@ -35,8 +35,7 @@ public class Ui {
      *
      * @param e The DukeException that was thrown
      */
-    void showError(DukeException e) {
-        System.out.println(e.getMessage());
-        System.out.println(divider);
+    String showError(DukeException e) {
+        return (e.getMessage() + "\n");
     }
 }

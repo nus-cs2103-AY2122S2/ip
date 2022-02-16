@@ -61,14 +61,15 @@ public class TaskList {
      * Prints the task list.
      *
      */
-    void printList() {
+    String printList() {
         if (tasks.size() == 0) {
-            System.out.println("Congrats there's nothing on your list!");
+            return ("Congrats there's nothing on your list!");
         } else {
-            System.out.println("Here's everything on your list rn:");
+            String out = ("Here's everything on your list rn:\n");
             for (Integer i = 1; i <= tasks.size(); i++) {
-                System.out.println(i.toString() + " " + tasks.get(i - 1));
+                out += (i.toString() + " " + tasks.get(i - 1) + "\n");
             }
+            return out;
         }
     }
 
