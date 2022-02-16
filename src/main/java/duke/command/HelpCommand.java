@@ -10,10 +10,22 @@ import duke.util.Storage;
 public class HelpCommand extends Command {
     public static final String HELP_COMMAND = "help";
 
+    /**
+     * Constructor for help command.
+     */
     public HelpCommand() {
         super(HELP_COMMAND);
     }
 
+    /**
+     * Returns all the commands Duke have.
+     *
+     * @param input User input
+     * @param taskList User tasklist.
+     * @param storage Storage to store the updated tasklist.
+     * @return Returns all the commands Duke have.
+     * @throws DukeException Does not have an exception.
+     */
     @Override
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         String helpStatement = "";
