@@ -1,5 +1,6 @@
 package commandset;
 
+import helper.DateHandler;
 import helper.TaskList;
 import helper.Ui;
 
@@ -14,6 +15,9 @@ import helper.Ui;
  * @author Saravanan Anuja Harish
  */
 public class DueCommand extends Command {
+
+    // the size of task list if no tasks are present.
+    private static final int EMPTY = 0;
 
     // stores the command for due before.
     private static final String DUE_BEFORE = "due-before";
@@ -37,7 +41,14 @@ public class DueCommand extends Command {
      */
     public static void getTasksDueOn(String date, TaskList taskList) {
         date = date.substring(DUE_ON.length()).trim();
-        Ui.printMessage(taskList.getTasksDueOn(date).toString());
+        TaskList dueTasks = taskList.getTasksDueOn(date);
+        date = new DateHandler(date).toString();
+
+        if (dueTasks.numOfTasks() != EMPTY) {
+            Ui.printMessage("The following Tasks are due on " + date + ":\n" + dueTasks.toString());
+        } else {
+            Ui.printMessage("Seems like you are free on " + date);
+        }
     }
 
 
@@ -49,6 +60,14 @@ public class DueCommand extends Command {
      */
     public static void getTasksDueBefore(String date, TaskList taskList) {
         date = date.substring(DUE_BEFORE.length()).trim();
-        Ui.printMessage(taskList.getTasksDueBefore(date).toString());
+        TaskList dueTasks = taskList.getTasksDueBefore(date);
+        date = new DateHandler(date).toString();
+
+        if (dueTasks.numOfTasks() != EMPTY) {
+            Ui.printMessage("The following Tasks are due before " + date + ":\n" +dueTasks.toString());
+        } else {
+            Ui.printMessage("Seems like you are free before " + date);
+        }
+
     }
 }

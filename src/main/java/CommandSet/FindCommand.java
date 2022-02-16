@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     private static final String FIND = "find";
 
     // stores the value of no tasks.
-    private static final int NO_TASK = 0;
+    private static final int EMPTY = 0;
 
     /**
      * checks for tasks containing the word given by user.
@@ -29,10 +29,11 @@ public class FindCommand extends Command {
     public static void findTasksContaining(String word, TaskList taskList) {
         word = word.substring(FIND.length()).trim();
         TaskList tasksContainingWord = taskList.getTasksContaining(word);
-        if (tasksContainingWord.numOfTasks() == NO_TASK) {
+
+        if (tasksContainingWord.numOfTasks() == EMPTY) {
             Ui.printNoTasksFound(word);
         } else {
-            Ui.printMessage(tasksContainingWord.toString());
+            Ui.printMessage("The following tasks contain, " + word + ":" + tasksContainingWord.toString());
         }
     }
 
