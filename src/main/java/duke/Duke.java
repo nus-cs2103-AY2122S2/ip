@@ -21,7 +21,7 @@ public class Duke {
         try {
             ui = new Ui();
 
-            storage = new Storage("/ip/data");
+            storage = new Storage("/poogie/data");
             assert storage != null : "storage should exist";
 
             tasks = new TaskList(storage.load());
