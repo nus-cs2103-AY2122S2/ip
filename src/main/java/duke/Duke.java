@@ -7,36 +7,34 @@ import duke.task.TaskList;
 import duke.ui.TextUi;
 
 public class Duke {
+    public static final String DEFAULT_FILE_NAME = "tasks.txt";
+
     private Storage storage;
     private TaskList tasks;
-    private TextUi ui;
 
     public Duke(String fileName) {
         try {
-            ui = new TextUi();
             storage = new Storage(fileName);
             tasks = new TaskList(storage.loadALlTasks());
         } catch (DukeException e) {
-            ui.showLoadingError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
-    public void run() {
-        ui.showWelcome(storage.getPath());
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public Duke() {
+        this(DEFAULT_FILE_NAME);
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

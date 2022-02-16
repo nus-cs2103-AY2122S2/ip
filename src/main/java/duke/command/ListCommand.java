@@ -13,13 +13,11 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
-            for (int i = 0; i < tasks.getSize(); i++) {
-                ui.showToUser((i + 1) + ". " + tasks.getTask(i));
-            }
+            return TextUi.showTasks(tasks);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return TextUi.showError(e.getMessage());
         }
     }
 }

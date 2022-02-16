@@ -16,12 +16,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             tasks.deleteTask(taskId);
-            ui.showExecutionMessage(Messages.MESSAGE_DELETE);
+            return TextUi.showExecutionMessage(Messages.MESSAGE_DELETE);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return TextUi.showError(e.getMessage());
         }
     }
 }

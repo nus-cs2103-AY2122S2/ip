@@ -18,7 +18,7 @@ public class MarkTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             tasks.markTask(taskId, isDone);
             String message;
@@ -27,9 +27,9 @@ public class MarkTaskCommand extends Command {
             } else {
                 message = Messages.MESSAGE_UNMARKED;
             }
-            ui.showExecutionMessage(message);
+            return TextUi.showExecutionMessage(message);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return TextUi.showError(e.getMessage());
         }
     }
 }

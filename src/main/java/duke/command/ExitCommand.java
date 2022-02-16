@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         storage.saveAllTasks(tasks);
-        ui.showExecutionMessage(Messages.MESSAGE_GOOD_BYE);
+        return TextUi.showExecutionMessage(Messages.MESSAGE_GOOD_BYE);
     }
 }
