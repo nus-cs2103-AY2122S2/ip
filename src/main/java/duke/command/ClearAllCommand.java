@@ -10,10 +10,10 @@ import duke.utils.Ui;
 /**
  * The type Delete all command.
  */
-public class DeleteAllCommand extends Command {
+public class ClearAllCommand extends Command {
 
     /**
-     * Delete all tasks in the task list.
+     * Clear all tasks in the task list.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on
@@ -26,16 +26,16 @@ public class DeleteAllCommand extends Command {
             assert taskList.getTaskSet().isEmpty() && taskList.getTaskList().isEmpty();
             storage.writeFile(taskList);
             assert storage.loadFile().isEmpty();
-            return ui.deletedAll();
+            return ui.clearAll();
         } catch (Exception e) {
-            throw new CortanaException("Something went wrong when attempting to delete all tasks.");
+            throw new CortanaException("Something went wrong when attempting to clear all tasks.");
         }
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj != null) {
-            return obj instanceof DeleteAllCommand;
+            return obj instanceof ClearAllCommand;
         } else {
             return false;
         }

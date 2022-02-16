@@ -32,6 +32,7 @@ public class ViewSchedulesCommand extends Command {
 
     /**
      * List all the tasks on the given date in chronological order.
+     * If a task does not have time, it will be placed at the bottom of the schedule.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

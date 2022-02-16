@@ -57,7 +57,7 @@ public class Ui {
      *
      * @return deleted all tasks prompt
      */
-    public String deletedAll() {
+    public String clearAll() {
         return "All tasks have been removed!";
     }
 

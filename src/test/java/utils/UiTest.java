@@ -47,7 +47,7 @@ public class UiTest {
     @DisplayName("Deleted all message should be shown")
     public void showDeletedAllMessage() {
         String deletedAll = "All tasks have been removed!";
-        assertEquals(deletedAll, ui.deletedAll());
+        assertEquals(deletedAll, ui.clearAll());
     }
 
     @Test
@@ -154,7 +154,7 @@ public class UiTest {
             Parser.parse("deadline book ticket by 2022-01-25");
             fail();
         } catch (CortanaException e) {
-            assertEquals("Please specify the deadline time with the /by keyword!",
+            assertEquals("Please specify the DEADLINE time with the /by keyword!",
                     ui.showErrorMessage(e.getMessage()));
         }
     }
@@ -166,7 +166,7 @@ public class UiTest {
             Parser.parse("event conference at 2022-01-25");
             fail();
         } catch (CortanaException e) {
-            assertEquals("Please specify the event time with the /at keyword!",
+            assertEquals("Please specify the EVENT time with the /at keyword!",
                     ui.showErrorMessage(e.getMessage()));
         }
     }

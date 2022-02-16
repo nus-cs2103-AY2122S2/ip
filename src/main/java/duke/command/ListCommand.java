@@ -11,7 +11,7 @@ import duke.utils.Ui;
 public class ListCommand extends Command {
 
     /**
-     * List all the tasks.
+     * List all the tasks in the task list.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

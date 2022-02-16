@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Delete a specific task in the task list.
+     * If the given index is not within 1 and the total number of tasks, exception will be thrown.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

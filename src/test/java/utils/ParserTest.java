@@ -10,8 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import duke.command.AddCommand;
+import duke.command.ClearAllCommand;
 import duke.command.Command;
-import duke.command.DeleteAllCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
@@ -91,10 +91,10 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to DeleteAllCommand")
-    public void parsedToDeleteAllCommand() {
+    public void parsedToClearAllCommand() {
         try {
-            DeleteAllCommand deleteAllCommand = new DeleteAllCommand();
-            Command parsedCommand = Parser.parse("delete all");
+            ClearAllCommand deleteAllCommand = new ClearAllCommand();
+            Command parsedCommand = Parser.parse("clear all");
             assertEquals(deleteAllCommand, parsedCommand);
         } catch (CortanaException e) {
             System.out.println(e.getMessage());

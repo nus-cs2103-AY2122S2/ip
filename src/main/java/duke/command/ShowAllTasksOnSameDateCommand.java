@@ -34,6 +34,8 @@ public class ShowAllTasksOnSameDateCommand extends Command {
 
     /**
      * List all the tasks in the given date/time.
+     * If time is not specified by user, all tasks on the same date will be shown.
+     * If time is specified by user, only tasks on the same date and time will be shown.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

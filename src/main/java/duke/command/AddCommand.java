@@ -28,7 +28,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add a task to the task list.
+     * Add the given task to the task list.
+     * If the task already exists, task will not be added and exception will be thrown.
      *
      * @param taskList the task list to operate on
      * @param ui the ui to operate on

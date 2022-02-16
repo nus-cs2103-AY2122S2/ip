@@ -11,6 +11,7 @@ import duke.utils.Ui;
 public abstract class Command {
     /**
      * Execute the corresponding command.
+     * This is an abstract method, all children will have corresponding implementations.
      *
      * @param tasks the TaskList tasks
      * @param ui       the ui
