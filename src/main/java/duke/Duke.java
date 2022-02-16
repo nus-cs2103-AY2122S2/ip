@@ -50,6 +50,11 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        String output = parser.parse(input, taskslist, storage);
+        return output;
+    }
+
     public static void main(String[] args) {
         new Duke().run();
     }
