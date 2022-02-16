@@ -46,6 +46,8 @@ class Ui {
     }
 
     public String showAddedMessage(Task task, String no0fTask) {
+        assert task != null : "Task cannot be null";
+        assert no0fTask != null : "noOfTask cannot be null";
         String messageTask = "Got it. I've added this task: \n";
         String taskString = task.toString();
         String output = messageTask + taskString + "\n"
@@ -54,6 +56,8 @@ class Ui {
     }
 
     public String showDeletedMessage(Task task, String noOfTask) {
+        assert task != null : "Task cannot be null";
+        assert noOfTask != null : "noOfTask cannot be null";
         String messageTask = "Noted. I've removed this task: \n";
         String taskString = task.toString();
         String output = messageTask + taskString

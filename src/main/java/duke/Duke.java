@@ -155,6 +155,7 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
+        assert input != null : "input cannot be null!";
         Parser parser = new Parser(taskList);
         String result = parser.execute(input);
         return result;
