@@ -58,9 +58,7 @@ public class Parser {
                 String deadline = "";
                 for (int i = 1; i < inputArr.length; i++) {
                     if (inputArr[i].equals("/by")) {
-                        for (int j = i + 1; j < inputArr.length; j++) {
-                            deadline = deadline + " " + inputArr[j];
-                        }
+                        deadline = inputArr[i + 1];
                         break;
                     } else {
                         remainingWordsDeadline = remainingWordsDeadline + " " + inputArr[i];
@@ -77,9 +75,7 @@ public class Parser {
                 String dayAndTime = "";
                 for (int i = 1; i < inputArr.length; i++) {
                     if (inputArr[i].equals("/at")) {
-                        for (int j = i + 1; j < inputArr.length; j++) {
-                            dayAndTime = dayAndTime + " " + inputArr[j];
-                        }
+                        dayAndTime = inputArr[i + 1];
                         break;
                     } else {
                         remainingWordsEvent = remainingWordsEvent + " " + inputArr[i];
