@@ -3,6 +3,7 @@ package duke.ui;
 import java.util.Objects;
 
 import duke.Duke;
+import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -26,10 +27,16 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private static final String USER_IMAGE = "/images/DaUser.png";
+    private static final String DUKE_IMAGE = "/images/DaDuke.png";
+    private static final String DUKE_ERROR_IMAGE = "/images/DaDukeError.png";
+
     private final Image userImage = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
+            Objects.requireNonNull(this.getClass().getResourceAsStream(USER_IMAGE)));
     private final Image dukeImage = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
+            Objects.requireNonNull(this.getClass().getResourceAsStream(DUKE_IMAGE)));
+    private final Image dukeErrorImage = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream(DUKE_ERROR_IMAGE)));
 
     /**
      * Initializes the scollpane of the main window.
@@ -51,10 +58,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = "";
+        Image dukeResponseImage = null;
+
+        try {
+            response = duke.getResponse(input);
+            dukeResponseImage = dukeImage;
+        } catch (DukeException error) {
+            response = error.getMessage();
+            dukeResponseImage = dukeErrorImage;
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeResponseImage)
         );
         userInput.clear();
     }

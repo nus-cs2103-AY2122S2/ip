@@ -85,18 +85,12 @@ public class Duke {
      *
      * @param input User input.
      * @return Duke response.
+     * @throws DukeException If there are issues with command execution.
      */
-    public String getResponse(String input) {
-        String response = "";
+    public String getResponse(String input) throws DukeException {
+        Command command = parser.parse(input);
 
-        try {
-            Command command = parser.parse(input);
-            response = command.execute(input, taskList, storage);
-        } catch (DukeException error) {
-            return error.getMessage();
-        }
-
-        return response;
+        return command.execute(input, taskList, storage);
     }
 
     /**

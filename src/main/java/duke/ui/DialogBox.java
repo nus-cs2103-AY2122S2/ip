@@ -26,9 +26,11 @@ public class DialogBox extends HBox {
     @FXML
     private Circle displayPicture;
 
+    private static final String fxmlFile = "/view/DialogBox.fxml";
+
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(fxmlFile));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
