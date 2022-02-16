@@ -16,7 +16,7 @@ public class Storage {
     static Parser parser;
     TaskList tasklist = null;
 
-    public Storage(){
+    public Storage() {
         tasklist = load();
     }
 

@@ -14,7 +14,7 @@ public class Walle {
         initialise();
     }
 
-    public String getResponse(String input){
+    public String getResponse(String input) {
         return Parser.parseIsBye(input, tasklist);
     }
 

@@ -19,7 +19,7 @@ public class Parser {
      * @return String to output to gui
      */
     public static String parseIsBye(String input, TaskList taskList) {
-        if (input.equals("bye")){
+        if (input.equals("bye")) {
             Platform.exit();
             return Ui.printBye();
         } else {
@@ -44,7 +44,7 @@ public class Parser {
             s = parseMarkTask(input, taskList);
         } else if (input.startsWith("event") || input.startsWith("todo") || input.startsWith("deadline")) {
             s = parseTask(input, taskList);
-        } else if (input.startsWith("find ")){
+        } else if (input.startsWith("find ")) {
             s = parseFind(input, taskList);
         } else {
             s = Ui.printWhatDoesThatMean();
@@ -62,7 +62,7 @@ public class Parser {
     public static String parseMarkTask(String input, TaskList taskList) {
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
-        if (taskNum < 0 || taskNum > taskList.get().size()){
+        if (taskNum < 0 || taskNum > taskList.get().size()) {
             return Ui.printNoSuchTask();
         }
         if (input.startsWith("unmark")) {
@@ -127,7 +127,7 @@ public class Parser {
         try {
             if (input.startsWith("todo")) {
                 task = parseToDo(input, taskList);
-            } else if (input.startsWith("deadline")){
+            } else if (input.startsWith("deadline")) {
                 task = parseDeadline(input, taskList);
             } else {
                 task = parseEvent(input, taskList);
@@ -197,7 +197,7 @@ public class Parser {
      * @return task based on file data information provided
      */
     public static Task parseFileData(String input, TaskList list) {
-        if (input == null || input == ""){
+        if (input == null || input == "") {
             return null;
         }
         String[] stringArr = input.split("---");

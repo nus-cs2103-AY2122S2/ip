@@ -35,10 +35,10 @@ public class TaskList {
             num--;
             String s = Ui.printRemovedThisTask(num, this);
             this.tasklist.remove(num);
-            for(int i = num; i <tasklist.size(); i++) {
+            for (int i = num; i < tasklist.size(); i++) {
                 this.tasklist.get(i).decrementNum();
             }
-            s += Ui.printTotalTasks(this.tasklist.size()-1);
+            s += Ui.printTotalTasks(this.tasklist.size() - 1);
             Storage.writeAllToFile(this);
             return s;
         } else {
@@ -76,7 +76,7 @@ public class TaskList {
      */
     public String findTask(String keyword) {
         TaskList matchTasks = new TaskList();
-        for(int i = 0; i < tasklist.size(); i++) {
+        for (int i = 0; i < tasklist.size(); i++) {
             if (this.tasklist.get(i).name.contains(keyword) || this.tasklist.get(i).time.contains(keyword)) {
                 matchTasks.tasklist.add(tasklist.get(i));
             }
@@ -92,7 +92,7 @@ public class TaskList {
      */
     public int findDuplicateTask(String keyword) {
         assert tasklist != null : "Invalid: TaskList is not initialised!";
-        for (int i=0; i < tasklist.size(); i++) {
+        for (int i = 0; i < tasklist.size(); i++) {
             if (this.tasklist.get(i).name.equals(keyword)) {
                 return i;
             }
@@ -109,7 +109,7 @@ public class TaskList {
     public int addTaskToList(Task task) {
         assert task.name != null : "Invalid: TaskName is null!";
         int dupTaskNum = findDuplicateTask(task.name);
-        if (dupTaskNum != -1) {
+        if (dupTaskNum != - 1) {
             return dupTaskNum + 1;
         }
         tasklist.add(task);
