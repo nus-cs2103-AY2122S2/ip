@@ -29,7 +29,7 @@ public class Duke {
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         } catch (ClassNotFoundException | IOException e) {
-            Ui.generalErrorMessage();
+            System.out.println(new DukeException("loading failed"));
         }
     }
 
@@ -65,6 +65,21 @@ public class Duke {
         } catch (IOException e) {
             tasks = new TaskList();
         }
+        System.out.flush();
+        System.setOut(old);
+        return outPuts.toString();
+    }
+
+    /**
+     * Give greeting message
+     * @return greeting by duke
+     */
+    String getGreeting() {
+        ByteArrayOutputStream outPuts = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(outPuts);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        Ui.greeting();
         System.out.flush();
         System.setOut(old);
         return outPuts.toString();

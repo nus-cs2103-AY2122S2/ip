@@ -6,13 +6,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="212.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="Infinity" minHeight="220.0"  prefWidth="500.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <children>
-        <Label fx:id="dialog" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="178.0" prefWidth="291.0" text="Label" wrapText="true">
-         <font>
-            <Font size="11.0" />
-         </font></Label>
-        <ImageView fx:id="displayPicture" fitHeight="122.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="dialog" maxWidth="500" style="-fx-background-color: #90eea9; -fx-background-radius: 8px; -fx-padding: 8;" text="Label" textFill="black" wrapText="true">
+            <HBox.margin>
+                <Insets left="4.0" right="4.0" />
+            </HBox.margin>
+            <font>
+                <Font size="11.0" />
+            </font></Label>
+        <ImageView fx:id="displayPicture" fitHeight="109.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+            <HBox.margin>
+                <Insets left="4.0" right="4.0" />
+            </HBox.margin>
+        </ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

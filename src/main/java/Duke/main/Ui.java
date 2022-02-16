@@ -6,18 +6,17 @@ package Duke.main;
 public class Ui {
     public static final String LINE = "_______________________^_^__________________________________\n";
     public static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____  \n"
+            + "| | | | | | | |/ / _ \\ \n"
+            + "| |_| | |_| |   <  __/ \n"
+            + "|____/ \\__,_|_|\\_\\___| \n";
 
     /**
      * greeting message
      */
     public static void greeting() {
         System.out.println("Hello from\n" + LOGO);
-        System.out.println(LINE + "Hello! I'm Duke\n"
-                + "What can I do for you?\n" + LINE);
+        System.out.println("What can I do for you?\n" + LINE);
     }
 
     /**
@@ -52,7 +51,7 @@ public class Ui {
      * mark/unmark error message
      */
     public static void markErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! this task number is invalid\n"
+        System.out.println(LINE + "OOPS!!! this task number is invalid\n"
                 + "enter: 'list' for all available task\n" + LINE);
     }
 
@@ -74,7 +73,7 @@ public class Ui {
      * delete task error message
      */
     public static void deadlineErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! deadline task need to be in this format:\n"
+        System.out.println(LINE + "OOPS!!! deadline task need to be in this format:\n"
                 + "(deadline description /by yyyy-mm-dd)\n" + LINE);
     }
 
@@ -82,7 +81,7 @@ public class Ui {
      * event error message
      */
     public static void eventErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! event task need to be in this format:\n"
+        System.out.println(LINE + "OOPS!!! event task need to be in this format:\n"
                 + "(event description /at yyyy-mm-dd)\n" + LINE);
     }
 
@@ -90,7 +89,7 @@ public class Ui {
      * local date error message
      */
     public static void localDateErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! the Date need to be in this format:\n"
+        System.out.println(LINE + "OOPS!!! the Date need to be in this format:\n"
                 + "yyyy-mm-dd\n" + LINE);
     }
 
@@ -105,21 +104,21 @@ public class Ui {
      * task not found message
      */
     public static void notFoundMessage() {
-        System.out.println(LINE + "☹ OOPS!!! There are no task matching to this description\n" + LINE);
+        System.out.println(LINE + "OOPS!!! There are no task matching to this description\n" + LINE);
     }
 
     /**
      * find error message
      */
     public static void findErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! please indicate keywords to search\n" + LINE);
+        System.out.println(LINE + "OOPS!!! please indicate keywords to search\n" + LINE);
     }
 
     /**
      * general error message
      */
     public static void generalErrorMessage() {
-        System.out.println(LINE + "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n"
+        System.out.println(LINE + "OOPS!!! I'm sorry, but I don't know what that means :-( \n"
                 + "for command format please enter: help\n"
                 + "please try again\n" + LINE);
     }
