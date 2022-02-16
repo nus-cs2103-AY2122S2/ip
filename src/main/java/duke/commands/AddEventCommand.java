@@ -15,10 +15,9 @@ public class AddEventCommand extends Command {
     
     public static final String COMMAND_WORD = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the task list. "
-            + "Parameters: DESCRIPTION /at TIME\n\t\t"
-            + "Example: " + COMMAND_WORD
-            + " Lecture /at 2022-02-01";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the task list.\n\t"
+            + "Parameters: DESCRIPTION /at TIME\n\t"
+            + "Example: " + COMMAND_WORD + " Lecture /at 2022-02-01";
 
     private final Task toAdd;
 
