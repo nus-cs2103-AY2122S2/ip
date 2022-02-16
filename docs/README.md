@@ -39,13 +39,12 @@ Ducky can help save your tasks in a text file after you exit the GUI.
 ### `help` - Viewing help
 
 Shows a message on the different functionalities Ducky can do.
-Example of usage:
 
-`keyword (optional arguments)`
+Example of usage: 
+`help`
 
 Expected outcome:
-
-Description of the outcome.
+Shows a list of commands that the user can do with Ducky.
 
 ```
 > Type 'list' to see what you have in your task list
@@ -62,73 +61,158 @@ Description of the outcome.
     - x is the word in task description to be found
 ```
 
+
 ### `todo` - Adding a todo
+Adds a todo type task to Ducky.
 
-Examples:
+Format: `todo <description>`
 
-- `todo cs2103 week 5 homework`
-- `todo skipping`
+Example of usage:
+
+`todo homework 5`
+
+Expected outcome: Ducky adds a todo task to the list.
+
+```
+I have added the following todo:
+[T][ ] homework 5
+You now have 2 tasks
+```
 
 ### `event` - Adding an event
 
 Adds an event task with the given description and event date to Ducky.
 
+Format: `event <description> /at <time>`
+
+Example of usage:
+
 - `event line dancing /at monday`
-- `event graduation /at weds`
-- `event track and field /at 12 march 2022`
+- `event line dancing /at mon`
+- `event line dancing /at 21 february 2022`
+
+Expected outcome: Ducky adds the event to the list
+
+```
+I have added the following event:
+[E][ ] line dancing (at: 21 February 2022)
+You now have 3 tasks
+```
 
 ### `deadline` - Adding a deadline
 
 Adds a deadline task with the given description and due date to Ducky.
 
+Format: `deadline <description> /by <time>`
+
+Example of usage:
+
 - `deadline buy groceries /by monday`
-- `deadline study for cs /by weds`
-- `deadline run 2.4km /by 12 march 2022`
+- `deadline buy groceries for cs /by mon`
+- `deadline buy groceries /by 21 february 2022`
+
+Expected outcome: Ducky adds the deadline to the list.
+
+```
+I have added the following deadline:
+[D][ ] buy groceries (at: 21 February 2022)
+You now have 4 tasks
+```
 
 ### `delete` - Deleting a task
 
 Deletes a task with the given index in Ducky.
 
-- `delete 8`
-- `delete 2`
+Format: `delete <index of task>`
+
+Example of usage:
+- `delete 4`
+
+Expected outcome: Ducky deletes the task from the list and shows what was deleted.
+
+```
+I have removed this from your tasks:
+[D][ ] buy groceries (at: 21 February 2022)
+You now have 3 tasks
+```
 
 ### `list` - Show all tasks
 
 Shows all the tasks that Ducky has recorded.
 
+Example of usage:
+- `list`
+
+Expected outcome: Ducky shows the list of tasks you have added.
+
+```
+Here are your tasks:
+1. [T][ ] walk the dog
+2. [T][ ] homework 5
+3. [E][ ] line dancing (at: 21 February 2022)
+```
+
 ### `find` - Find a task
 
 Finds a task with the given key phrases in Ducky.
 
-- `find graduation`
-- `find groceries`
+Format: `find <keyword>`
 
-### Mark a task - `mark`
+Example of usage:
+- `find dancing`
+
+Expected outcome: Ducky finds the task with the word "dancing".
+
+```
+Here are the tasks that contains "dancing":
+
+1. [E][ ] line dancing (at: 21 February 2022)
+```
+
+### `mark` - Mark a task
 
 Marks a task with the given index as done from Ducky.
 
-- `mark 8`
-- `mark 2`
+Format: `mark <index>`
 
-### Unmark a task - `Unmark`
+Example of usage:
+- `mark 3`
+
+Expected outcome: Ducky marks the third task in the list.
+
+```
+Ok, I have marked the following task:
+[E][X] line dancing (at: 21 February 2022)
+```
+
+### `unmark` - Unmark a task
 
 Unmarks a task with the given index as done from Ducky.
 
-- `unmark 8`
-- `unmark 2`
+Format: `unmark <index>`
 
-### `Keyword` - Describe action
+Example of usage:
+- `unmark 3`
 
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
+Expected outcome: Ducky unmarks the third task in the list.
 
 ```
-expected output
+Sure, I have unmarked the following task:
+[E][ ] line dancing (at: 21 February 2022)
+```
+### `bye` - Exit Ducky
+
+Exits Ducky and saves the tasks to the duke.txt file.
+
+Format: `bye`
+
+Example of usage:
+- `bye`
+
+Expected outcome: Ducky says bye and hopes to see you again. 🥺
+
+```
+Your tasks have been saved in duke.txt
+This window will close in 3 seconds
+Bye~ Hope to see you again soon!*✧･ﾟ:*(*❦ω❦)*:･ﾟ✧*
 ```
