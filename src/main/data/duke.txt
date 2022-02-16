@@ -1,1 +1,3 @@
-T | 0 | hw
+T | 0 | These are some dummy tasks for you to try out my features!
+T | 0 | Send 'help' for a complete user guide
+T | 0 | Send 'clear' to empty this task list
