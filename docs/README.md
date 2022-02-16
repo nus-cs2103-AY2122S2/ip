@@ -28,7 +28,7 @@ you never have to do it yourself!*
    - [Asking for help](#asking-for-help)
    - [Closing the application](#closing-the-application)
 
-##Setting up Duke
+## Setting up Duke
 1. Make sure you have Java 11 installed.
 2. Download the `Main.jar` file from releases. You can find the link to the GitHub page above.
 3. Create a new folder in a working directory of your choice and name it `Duke`.
