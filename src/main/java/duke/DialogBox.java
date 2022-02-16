@@ -13,7 +13,7 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
+    public DialogBox(Label l, ImageView iv, boolean isDuke) {
         text = l;
         displayPicture = iv;
 
@@ -22,7 +22,11 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        if (isDuke) {
+            this.getChildren().addAll(text, displayPicture);
+        } else {
+            this.getChildren().addAll(text);
+        }
     }
 
     private void flip() {
@@ -33,11 +37,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        return new DialogBox(l, iv, false);
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+        var db = new DialogBox(l, iv, true);
         db.flip();
         return db;
     }
