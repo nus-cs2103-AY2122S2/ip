@@ -141,14 +141,12 @@ public class Save {
                 inputsToBeProcessed.add("mark " + this.count);
             }
             break;
-        case F:
+        default:
             inputsToBeProcessed.add("fixed " + name + " /needs " + date);
             this.count++;
             if (status.equals("1")) {
                 inputsToBeProcessed.add("mark " + this.count);
             }
-            break;
-        default:
         }
     }
 
