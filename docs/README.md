@@ -17,7 +17,7 @@
     - [Usage example of unmark](#usage-example-of-unmark)
     - [Usage example of find](#usage-example-of-find)
 
-##How to launch application
+## How to launch application
 1. Make sure that you have Java 11 installed.
 2. Choose a desired directory of choice, for example your desktop.
 3. Create an empty folder, for example, "chatbot".
