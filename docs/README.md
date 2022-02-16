@@ -108,3 +108,18 @@ Description of the outcome:
 Task is removed.
 Now you have 2 left!
 ```
+
+### 8. `find` : Find all tasks in task list with matching keyword or deadline
+Example of usage:
+- `find` book
+- `find` 2022-12-20
+
+Expected outcome:
+- Tasks in the `.txt` storage file with the word book will be listed
+
+Description of the outcome:
+```
+Here you go!
+[T][] Read a book
+Did you find the task you were looking for?
+```
