@@ -3,7 +3,7 @@
 > Waaaaaaaaaaaaaaaaaaaaaaaaaaall-E - Wall e
 
 Walle is a simple application that can record and keep track of the tasks you want to do
-~~Also, it's Walle so who woudn't like it?!~~ `:robot:`
+~~Also, it's Walle so who woudn't like it?!~~ 
 
 ![Screenshot of Walle](Ui.png)
 
@@ -12,7 +12,7 @@ ________________________________________________________________________________
 
 ### Check out the awesome stuff that Walle can do
 
- - [x] [Add tasks](/https://tzhan98.github.io/ip/#add-tasks)
+ - [x] [Add tasks](https://tzhan98.github.io/ip/#add-tasks)
  - [x] [Mark/Unmark tasks](https://tzhan98.github.io/ip/#markunmark-tasks)
  - [x] [List all tracked tasks](https://tzhan98.github.io/ip/#list)
  - [x] [Detect duplicates](https://tzhan98.github.io/ip/#detect-duplicates)
@@ -53,7 +53,7 @@ deadline \<name of task\> /by \<date to complete task\>
 
     `deadline return math book /by Sunday`
 
-you can also use 'DD-MM-YYYY HHMM' format for <date to complete task>
+you can also use 'DD-MM-YYYY HHMM' format for \<date to complete task\>
 
     `deadline return sci book /by 17-02-2022 1900`
 
@@ -72,11 +72,11 @@ Expected outcome:
 
 Example of usage:
 
-event <name of task> /at <time of event>
+event \<name of task\> /at \<time of event\>
 
     `event project meeting /at Mon 2-4pm`
 
-you can also use 'DD-MM-YYYY HHMM' format for <time of event>
+you can also use 'DD-MM-YYYY HHMM' format for \<time of event\>
 
     `event lunch with mom /at 17-02-2022 1900`
 
@@ -99,21 +99,21 @@ Walle is able to mark or unmark tasks
 
 Example of usage:
 
- mark <task number>
+ mark \<task number\>
     `mark 2`
 
 Expected outcome:
 
 ```
      Nice! I've marked this task as done: 
-       [X] return book
+       [T][X] return book
 ```
 
  - **unmarking tasks**
 
 Example of usage:
 
- unmark <task number>
+ unmark \<task number\>
 
     `unmark 2`
 
@@ -121,7 +121,7 @@ Expected outcome:
 
 ```
      OK, I've marked this task as not done yet:
-       [ ] return book
+       [T][ ] return book
 ```
 
 ### list
@@ -160,7 +160,7 @@ Walle will delete a specified task number listed in the tasklist
 
 Example of usage:
 
-delete <task number>
+delete \<task number\>
 
     `delete 3`
 
