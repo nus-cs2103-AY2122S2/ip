@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class HelpPage {
     private final ArrayList<String> helpPage;
 
+    /**
+     * HelpPage's constructor
+     *
+     */
     public HelpPage() {
         this.helpPage = new ArrayList<>();
         helpPage.add("1. Type 'todo <description>' to add a todo task\n");

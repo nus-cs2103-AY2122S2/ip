@@ -299,7 +299,12 @@ public class TaskList {
         return returnMessage.toString();
     }
 
-    public String ListOfCommands() {
+    /**
+     * A method to list out all the commands for this application.
+     *
+     * @return A string of preset message of all the commands available.
+     */
+    public String listOfCommands() {
         HelpPage helpPage = new HelpPage();
         return helpPage.toString();
     }

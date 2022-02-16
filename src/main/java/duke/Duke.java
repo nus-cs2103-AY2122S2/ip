@@ -228,7 +228,7 @@ public class Duke extends Application {
 
             // show the list of commands
             if (command.equals("help")) {
-                return taskList.ListOfCommands();
+                return taskList.listOfCommands();
             }
 
             // Invalid command inputs result
