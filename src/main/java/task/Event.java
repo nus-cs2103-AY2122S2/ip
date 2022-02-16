@@ -34,7 +34,7 @@ public class Event extends Task implements Comparable<Task> {
      */
     @Override
     public String getSaveFormat() {
-        return "E," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "," + this.at + "\n";
+        return "E," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "," + this.at;
     }
 
     /**

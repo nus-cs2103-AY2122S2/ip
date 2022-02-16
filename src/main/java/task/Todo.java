@@ -30,7 +30,7 @@ public class Todo extends Task implements Comparable<Task> {
      */
     @Override
     public String getSaveFormat() {
-        return "T," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat() + "\n";
+        return "T," + ((isDone ? "1" : "0")) + "," + super.getSaveFormat();
     }
 
     /**

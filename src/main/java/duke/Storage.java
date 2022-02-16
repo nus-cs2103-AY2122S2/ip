@@ -87,24 +87,26 @@ public class Storage {
      */
     public void updateSavedTasks(String oldDetails, String updatedDetails) throws DukeException {
         try {
-            if (oldDetails.isEmpty()) {
-                this.content.add(updatedDetails);
-                FileWriter fw = new FileWriter(this.filePath, true);
-                fw.write(updatedDetails);
-                fw.close();
-                return;
-            }
-
             FileWriter fw = new FileWriter(this.filePath);
             StringBuilder sb = new StringBuilder();
             int indexToRemoveAt = 0;
+            if (oldDetails.isEmpty()) {
+                this.content.add(updatedDetails);
+            }
             for (int i = 0; i < this.content.size(); i++) {
-                if (!updatedDetails.isEmpty() && this.content.get(i).equals(oldDetails)) {
-                    this.content.set(i, updatedDetails);
-                    sb.append(this.content.get(i) + "\n");
+                // for adding
+                if (oldDetails.isEmpty() && this.content.get(i).equals(updatedDetails)) {
+                    sb.append(this.content.get(i) + System.lineSeparator());
                 }
+                // for updating
+                else if (!updatedDetails.isEmpty() && this.content.get(i).equals(oldDetails)) {
+                    this.content.set(i, updatedDetails);
+                    sb.append(this.content.get(i) + System.lineSeparator());
+                }
+                // for staying the same
                 else if (!updatedDetails.isEmpty() || !this.content.get(i).equals(oldDetails)) {
-                    sb.append(this.content.get(i) + "\n");
+                    sb.append(this.content.get(i) + System.lineSeparator());
+                // for removal
                 } else if (updatedDetails.isEmpty()) {
                     indexToRemoveAt = i;
                 }

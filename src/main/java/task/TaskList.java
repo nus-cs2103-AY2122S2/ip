@@ -10,11 +10,19 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private boolean isSorted;
 
+    /**
+     * Constructs a TaskList object.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.isSorted = false;
     }
 
+    /**
+     * Constructs a TaskList object with existing tasks.
+     *
+     * @param tasks existing tasks to be stored.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }

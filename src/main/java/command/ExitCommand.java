@@ -1,5 +1,8 @@
 package command;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Storage;
 import duke.Ui;
 import duke.UiForGUI;
@@ -30,5 +33,13 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, UiForGUI ui, Storage storage) {
         this.isRun = false;
         ui.showGoodbye();
+        Timer timer = new Timer();
+        TimerTask exitApp = new TimerTask() {
+            public void run() {
+                System.exit(0);
+            };
+        };
+        // exits the app after 3 seconds
+        timer.schedule(exitApp, 3 * 1000);
     }
 }
