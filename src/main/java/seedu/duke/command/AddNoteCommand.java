@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-
 import seedu.duke.chatbot.Storage;
 import seedu.duke.chatbot.Ui;
 import seedu.duke.exceptions.DukeException;
@@ -15,6 +14,11 @@ public class AddNoteCommand extends Command {
     private final int taskIndex;
     private final String noteContent;
 
+    /**
+     * Construct the Add Note command.
+     * @param noteContent which contains the note content to be added
+     * @param index for index of task to have the note added to
+     */
     public AddNoteCommand(String noteContent, int index) {
         this.taskIndex = index;
         this.noteContent = noteContent;
@@ -38,7 +42,7 @@ public class AddNoteCommand extends Command {
     @Override
     public String getResponseAfterCommand(TaskList taskList) {
         Task updatedTask = taskList.getTasks().get(taskIndex);
-        return Ui.showAddNoteResult(taskList,updatedTask);
+        return Ui.showAddNoteResult(taskList, updatedTask);
     }
 
     /**

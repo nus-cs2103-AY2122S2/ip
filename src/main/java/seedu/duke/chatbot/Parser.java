@@ -1,13 +1,32 @@
 package seedu.duke.chatbot;
 
-import seedu.duke.command.*;
-import seedu.duke.exceptions.*;
-import seedu.duke.task.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
+
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.AddNoteCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DeleteNoteCommand;
+import seedu.duke.command.EditNoteCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.FindCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.MarkCommand;
+import seedu.duke.command.ShowNoteCommand;
+import seedu.duke.command.UnmarkCommand;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.IncompleteCommandException;
+import seedu.duke.exceptions.NoCommandException;
+import seedu.duke.exceptions.NoDateException;
+import seedu.duke.exceptions.NoValidTaskIndexException;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.TaskList;
+import seedu.duke.task.ToDo;
 
 /**
  * Handles commands from users in String and filters the information needed to create {@link Command}.
@@ -43,11 +62,10 @@ public class Parser {
         } else if (command.startsWith("event")) {
             Task newTask = this.parseForEvent(command);
             return new AddCommand(newTask);
-        } else if (command.startsWith("delete") && command.length() == 8) {
-            //command is given as "delete <taskIndex>"
+        } else if (command.startsWith("delete")) {
             int index = this.parseForDelete(command);
             return new DeleteCommand(index);
-        } else if (command.startsWith("bye")) {
+        } else if (command.startsWith("bye") && command.length() == 3) {
             return new ExitCommand();
         } else if (command.startsWith("find")) {
             String searchString = this.parseForSearch(command);
@@ -62,12 +80,12 @@ public class Parser {
         } else if (command.startsWith("clear note")) {
             int indexTaskToDelete = this.parseForDeleteNoteTaskIndex(command);
             int indexNoteToDelete = this.parseForDeleteNoteIndex(command);
-            return new DeleteNoteCommand(indexTaskToDelete,indexNoteToDelete);
+            return new DeleteNoteCommand(indexTaskToDelete, indexNoteToDelete);
         } else if (command.startsWith("edit note")) {
             int indexTaskToEdit = this.parseForEditNoteTaskIndex(command);
             int indexNoteToEdit = this.parseForEditNoteIndex(command);
             String noteContent = this.parseForEditNoteContent(command);
-            return new EditNoteCommand(indexTaskToEdit,indexNoteToEdit,noteContent);
+            return new EditNoteCommand(indexTaskToEdit, indexNoteToEdit, noteContent);
         } else {
             throw new NoCommandException();
         }
@@ -80,14 +98,18 @@ public class Parser {
      * @throws DukeException if an invalid task number is given from user
      */
     int parseForMark(String command) throws DukeException {
-        int indexInCommand = 5;
-        //command is given as "mark 5" so index 5 is where "5" is at
-        if (command.length() <= 5) { //e.g. mark vs "mark 1" (correct)
-            throw new NoValidTaskIndexException();
+        try {
+            int indexInCommand = 5;
+            //command is given as "mark 5" so index 5 is where "5" is at
+            if (command.length() <= 5) { //e.g. mark vs "mark 1" (correct)
+                throw new NoValidTaskIndexException();
+            }
+            //-1 because index in taskList is 0 based but command uses 1-based index
+            int indexOfTaskToMark = Integer.parseInt(command.substring(indexInCommand)) - 1;
+            return indexOfTaskToMark;
+        } catch (NumberFormatException e) {
+            throw new IncompleteCommandException();
         }
-        //-1 because index in taskList is 0 based but command uses 1-based index
-        int indexOfTaskToMark =  this.parseForTaskIndex(command, indexInCommand);
-        return indexOfTaskToMark;
     }
 
     /**
@@ -97,14 +119,18 @@ public class Parser {
      * @throws DukeException if an invalid task number is given from user
      */
     int parseForUnmark(String command) throws DukeException {
-        //command is given as "unmark 5" so index 7 is where the task index to parse, "5" is at
-        int indexInCommand = 7;
-        if (command.length() <= 7) { //e.g. "unmark " vs "unmark 1" (correct)
-            throw new NoValidTaskIndexException();
-        }
-        int indexToUnmark = this.parseForTaskIndex(command, indexInCommand);
+        try {
+            //command is given as "unmark 5" so index 7 is where the task index to parse, "5" is at
+            int indexInCommand = 7;
+            if (command.length() <= 7) { //e.g. "unmark " vs "unmark 1" (correct)
+                throw new NoValidTaskIndexException();
+            }
+            int indexToUnmark = Integer.parseInt(command.substring(indexInCommand)) - 1;
 
-        return indexToUnmark;
+            return indexToUnmark;
+        } catch (NumberFormatException e) {
+            throw new IncompleteCommandException();
+        }
     }
 
     /**
@@ -120,11 +146,10 @@ public class Parser {
             if (command.length() <= 7) { //e.g. "delete " vs "delete 1" (correct)
                 throw new NoValidTaskIndexException();
             }
-            int indexToUnmark = this.parseForTaskIndex(command, indexInCommand);
-
-            return indexToUnmark;
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Problem with deleting task :(");
+            int indexToDelete = Integer.parseInt(command.substring(indexInCommand)) - 1;
+            return indexToDelete;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("Problem with deleting :(");
         }
     }
 
@@ -193,8 +218,10 @@ public class Parser {
      * @throws DukeException if command is wrong
      */
     LocalDateTime createDateForDeadline(String command, int dateMarkerIndex) throws DukeException {
-        //command is given as "deadline <taskname> /by <date>" so +4 away from index of "/"
-        int indexStartOfDate = dateMarkerIndex + 4;  //"/by yyyy-mm-dd hh:mm"
+        //command is given as "deadline <taskname> /by <date>"
+        // so +4 away from index of "/"
+        int indexStartOfDate = dateMarkerIndex + 4;
+        //"/by yyyy-mm-dd hh:mm"
         if (indexStartOfDate >= command.length()) {
             throw new NoDateException();
         }
@@ -211,7 +238,8 @@ public class Parser {
      */
     Task parseForEvent(String command) throws DukeException {
         int indexTaskName = 6;
-        //command is given as "event <taskname> /at <startDate> /to <endDate>" so index 7 is where the task index to parse, "5" is at
+        //command is given as "event <taskname>
+        // /at <startDate> /to <endDate>" so index 7 is the task index location
         if (command.length() <= 6) { //e.g. "event " vs "event project meeting /at Mon 2-4pm"
             throw new IncompleteCommandException();
         }
@@ -238,14 +266,13 @@ public class Parser {
      * @throws DukeException if date cannot be obtained
      */
     LocalDateTime createStartDateForEvent(String command, int dateMarkerIndex) throws DukeException {
-        //command is given as "event <taskname> /at <startDate> /to <endDate>" so <date> can be found
-        // +4 away from index of "/"
-        int indexStartDate = dateMarkerIndex + 4;  //"/at <date>"
-        if (indexStartDate >= command.length()) { //e.g."deadline /" is invalid ; "deadline /by "
-            throw new NoDateException();
-        }
+        //command is given as "event <taskname> /at <startDate>
+        // /to <endDate>" so <date> can be found +4 away from index of "/"
+        int indexStartDate = dateMarkerIndex + 4; //"/at <date>"
         int indexOfTo = command.indexOf("/to");
-
+        if (indexStartDate >= command.length() || indexOfTo == -1) { //e.g."deadline /" is invalid ; "deadline /by "
+            throw new IncompleteCommandException();
+        }
         String startDateString = command.substring(indexStartDate, indexOfTo - 1); // /at <date> /to
         LocalDateTime startDate = this.getLocalDateTimeFromDate(startDateString);
 
@@ -260,6 +287,9 @@ public class Parser {
      */
     LocalDateTime createEndDateForEvent(String command) throws DukeException {
         int indexOfTo = command.indexOf("/to");
+        if (indexOfTo == -1) {
+            throw new IncompleteCommandException();
+        }
         int indexEndDate = indexOfTo + 4; ///to <endDate>
         String endDateString = command.substring(indexEndDate);
         LocalDateTime endDate = this.getLocalDateTimeFromDate(endDateString);
@@ -296,12 +326,13 @@ public class Parser {
      * @throws DukeException if index cannot be retrieved
      */
     int parseForAddNoteTaskIndex(String command) throws DukeException {
-        //command is given as "add note to <task number> <note content>"
+        //command is given as
+        // "add note to <task number> <note content>"
         //e.g. add note 1 remind groupmates"
         try {
             int indexInCommand = 17;
             return this.parseForTaskIndex(command, indexInCommand);
-        } catch (NumberFormatException |  IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException("Problem with getting index to add note to");
         }
     }

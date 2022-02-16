@@ -1,26 +1,25 @@
 package seedu.duke;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.task.Deadline;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import seedu.duke.task.Deadline;
 
 public class DeadlineTest {
-    Deadline deadline;
+    private Deadline deadline;
 
     @BeforeEach
     void setUp() {
         TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse("2018-09-12 18:14");
         LocalDateTime date = LocalDateTime.from(ta);
-        deadline = new Deadline("testing",date);
+        deadline = new Deadline("testing", date);
     }
 
     @Test
@@ -32,9 +31,9 @@ public class DeadlineTest {
     }
 
     @Test
-    @DisplayName("toString should be correct")
+    @DisplayName("getTaskName() should return testing")
     void testToString() {
-        assertEquals("[D][ ] testing (by: Sep 12 2018 06:14 pm)",
-                deadline.toString());
+        assertEquals("testing",
+                deadline.getTaskName());
     }
 }

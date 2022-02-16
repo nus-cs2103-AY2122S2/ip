@@ -1,10 +1,11 @@
 package seedu.duke.command;
 
 import seedu.duke.chatbot.Storage;
+import seedu.duke.chatbot.Ui;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.IncompleteCommandException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
-import seedu.duke.chatbot.Ui;
 
 /**
  * Executes the deleting of a {@link Task} from {@link TaskList}.
@@ -25,6 +26,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
+        if (index > taskList.getNumberOfTasks() - 1 || index < 0) {
+            throw new IncompleteCommandException();
+        }
         Task taskToRemove = taskList.getTasks().get(index);
         TaskList newTaskList = taskList.delete(index);
         String lineToRemove = storage.createSummaryFromTask(taskToRemove);

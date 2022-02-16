@@ -4,8 +4,8 @@ package seedu.duke.task;
  * Attached to a Task via a NoteList
  */
 public class Note {
+    private static final String EMPTY_NOTE = "";
     private final String taskNotes;
-    private static String EMPTY_NOTE = "";
 
     /**
      * Used to create an empty note.

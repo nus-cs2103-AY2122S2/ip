@@ -45,11 +45,12 @@ application {
 
 shadowJar {
     archiveBaseName = "NoFace"
+    archiveVersion = "0.3"
     archiveClassifier = null
 }
 
 checkstyle {
-    toolVersion = '8.32'
+    toolVersion = '8.29'
 }
 
 run{

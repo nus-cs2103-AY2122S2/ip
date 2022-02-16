@@ -1,13 +1,13 @@
 package seedu.duke.gui;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.duke.chatbot.Duke;
-
-import java.io.IOException;
 
 /**
  * A GUI for Duke using FXML.
@@ -25,7 +25,7 @@ public class Main extends Application {
             //@@author {@isabelteo}-reused
             // apply CSS : referenced from Olivia Johansen's project at https://github.com/oliviajohansen
             scene.getStylesheets().addAll(this.getClass().getResource("/view/application.css").toExternalForm());
-           //@@author
+            //@@author
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

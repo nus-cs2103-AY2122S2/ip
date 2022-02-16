@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.chatbot.Storage;
 import seedu.duke.chatbot.Ui;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.IncompleteCommandException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
@@ -26,6 +27,9 @@ public class MarkCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
+        if (index < 0 || index > taskList.getNumberOfTasks() - 1) {
+            throw new IncompleteCommandException();
+        }
         TaskList newTaskList = taskList.mark(this.index);
         storage.convertTaskListToFile(newTaskList);
         return newTaskList;

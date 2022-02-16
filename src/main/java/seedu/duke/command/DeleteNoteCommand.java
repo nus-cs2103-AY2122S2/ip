@@ -13,6 +13,11 @@ public class DeleteNoteCommand extends Command {
     private final int taskIndex;
     private final int noteIndex;
 
+    /**
+     * Used to construct a command to delete a note from a task.
+     * @param taskIndex for task to delete note from
+     * @param noteIndex for note to delete
+     */
     public DeleteNoteCommand(int taskIndex, int noteIndex) {
         this.taskIndex = taskIndex;
         this.noteIndex = noteIndex;
@@ -36,7 +41,7 @@ public class DeleteNoteCommand extends Command {
     @Override
     public String getResponseAfterCommand(TaskList taskList) {
         Task updatedTask = taskList.getTasks().get(taskIndex);
-        return Ui.showDeleteNoteResult(taskList,updatedTask);
+        return Ui.showDeleteNoteResult(taskList, updatedTask);
     }
 
     /**
