@@ -50,7 +50,7 @@ public class ListCommand extends Command {
         ArrayList<String> taskSet = taskList.list();
         String output = "Here are the tasks in your list:" + "\n";
         for (int i = 0; i < taskSet.size(); i++) {
-            output += i + 1 + ". " + taskSet.get(i) + "\n\n";
+            output += i + 1 + ". " + taskSet.get(i) + "\n";
         }
         return output.trim();
     }
