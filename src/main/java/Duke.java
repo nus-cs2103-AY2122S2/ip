@@ -25,8 +25,8 @@ import ui.Ui;
  */
 public class Duke extends Application {
 
-    private static final String TASK_FILE_PATH = "/data/tasklistdata.txt";
-    private static final String NOTE_FILE_PATH = "/data/notelistdata.txt";
+    private static final String TASK_FILE_PATH = "tasklistdata.txt";
+    private static final String NOTE_FILE_PATH = "notelistdata.txt";
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
