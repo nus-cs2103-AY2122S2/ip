@@ -1,24 +1,26 @@
 package Duke.tasks;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Event extends Task{
-    Date date;
+    LocalDateTime date;
 
-    public Event(String item, Date date) {
+    public Event(String item, LocalDateTime date) {
         super(item);
         this.date = date;
     }
 
     @Override
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 
     String convertDate() {
-        DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HHmm");
-        String date = dateFormat.format(this.date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy HHmm");
+        String date = this.date.format(formatter);
         return  date;
     }
 

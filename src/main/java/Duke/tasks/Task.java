@@ -1,5 +1,6 @@
 package Duke.tasks;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Task {
@@ -27,8 +28,9 @@ public class Task {
         return this.description;
     }
 
-    public Date getDate() {
-        return new Date(3000,12,30);
+    public LocalDateTime getDate() {
+        LocalDateTime localDateTime = LocalDateTime.MAX;
+        return  localDateTime;
     }
     @Override
     public String toString() {

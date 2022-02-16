@@ -110,7 +110,7 @@ public class TaskList {
      * @return a String output
      */
     public String addDeadline(String[] item) throws DukeException{
-        Deadline newDeadline = new Deadline(item[0], Parser.convertString(item[1]));
+        Deadline newDeadline = new Deadline(item[0], Parser.convertDate(item[1]));
         int size = tasklist.size();
         this.tasklist.add(newDeadline);
         String output = ADDED + "\n";
@@ -127,7 +127,7 @@ public class TaskList {
      * @return a String output
      */
     public String addEvent(String[] item) throws DukeException{
-        Event newEvent = new Event(item[0], Parser.convertString(item[1]));
+        Event newEvent = new Event(item[0], Parser.convertDate(item[1]));
         int size = tasklist.size();
         this.tasklist.add(newEvent);
         String output = ADDED + "\n";
