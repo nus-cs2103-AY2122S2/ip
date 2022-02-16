@@ -27,7 +27,7 @@ class TaskList {
      * Deletes a task from the current storage.
      * @param index Index of a specifc task to be deleted.
      */
-    public void deleteTask(int index) { //might need to change
+    public void deleteTask(int index) {
         this.getTaskArray().remove(index);
     }
 
