@@ -1,4 +1,5 @@
-package duke;
+package duke.modules;
+
 
 /**
  * Duke is a chat bot that keeps track of tasks for you.
@@ -12,6 +13,17 @@ public class Duke {
         Ui.initialize(parser);
         Storage.save(taskList);
 
+    }
+
+    public Duke() {
+
+    }
+
+
+
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
 

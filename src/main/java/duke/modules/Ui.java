@@ -1,4 +1,4 @@
-package duke;
+package duke.modules;
 
 import java.util.Scanner;
 
@@ -29,15 +29,15 @@ public class Ui {
 
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
-        while (true) {
+
             String returnMessage = parser.parse(userInput);
             System.out.print(ANSI_BLUE + returnMessage + ANSI_RESET);
-            if (parser.byeCommandHasExecuted()) {
-                break;
-            }
-            userInput = sc.nextLine();
-        }
+
        sc.close();
+    }
+
+    public static String getInitializationMessage() {
+        return INITIALIZATION_MESSAGE;
     }
 
     public static void print(String message) {

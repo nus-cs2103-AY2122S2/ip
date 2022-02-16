@@ -1,4 +1,4 @@
-package duke;
+package duke.modules;
 
 /**
  * Represents the command to get help in the chatbot.

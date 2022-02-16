@@ -1,4 +1,4 @@
-package duke;
+package duke.modules;
 
 /**
  * Represents any invalid command passed to the chatbot by the user.

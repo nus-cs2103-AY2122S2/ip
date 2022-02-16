@@ -1,4 +1,4 @@
-package duke;
+package duke.modules;
 
 /**
  * Represents a Task which has a name and no other attributes.

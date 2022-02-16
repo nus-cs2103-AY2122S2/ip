@@ -1,4 +1,4 @@
-package duke;
+package duke.modules;
 
 /**
  * Represents a chatbot command.
