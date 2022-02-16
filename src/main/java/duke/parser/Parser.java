@@ -11,6 +11,7 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.ReminderCommand;
+import duke.commands.HelpCommand;
 import duke.commands.RemoveCommand;
 import duke.commands.UnmarkCommand;
 import duke.exceptions.DukeException;
@@ -47,10 +48,13 @@ public class Parser {
             return new FindCommand(userInput);
         case REMINDER:
             return new ReminderCommand(userInput);
+        case HELP:
+            return new HelpCommand();
         case BYE:
             return new ByeCommand();
         default:
-            throw new DukeException("Invalid input");
+            throw new DukeException("I don't know what does that mean! </3\n"
+                    + "\nSend me the help keyword for the list of commands!");
         }
     }
 
@@ -58,7 +62,7 @@ public class Parser {
      * Types of valid commands
      */
     public enum CommandType {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, REMOVE, FIND, REMINDER, BYE, NULL
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, REMOVE, FIND, REMINDER, HELP, BYE, NULL
     }
 
     /**
@@ -88,6 +92,8 @@ public class Parser {
             return CommandType.FIND;
         case "reminder":
             return CommandType.REMINDER;
+        case "help":
+            return CommandType.HELP;
         case "bye":
             return CommandType.BYE;
         default:

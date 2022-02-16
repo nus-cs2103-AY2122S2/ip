@@ -20,7 +20,10 @@ public class Ui {
      * @return String response
      */
     public static String printWelcomeMessage() {
-        String response = "Hello I'm Duke! \nWhat can I do for you?";
+        String response = "Hey "
+                + System.getProperty("user.name")
+                + "! What can I do for you today? :D\n"
+                + "\nYou can type keyword 'help' for the list of commands!";
         return response;
     }
 
@@ -49,7 +52,7 @@ public class Ui {
      * @return String response
      */
     public static String printMarkSuccess(Task task) {
-        String response = "Nice! I've marked this task as complete:\n" + task;
+        String response = "Awesome great job! I've marked this task as complete:\n" + task;
         return response;
     }
 
@@ -92,9 +95,25 @@ public class Ui {
 
     /** Print result header for find command */
     public static String printReminderResultHeader(LocalDate date, ArrayList<Task> tasks) {
-        String response = "Reminder to do your task(s) on "
+        String response = "Found them!\nReminder to do your task(s) on "
                 + "\"" + date + "\"" + ":"
                 + printTasks(tasks);
+
+        return response;
+    }
+
+    /** Print result header for find command */
+    public static String printHelpCommands() {
+        String response = "Here are the commands available for you!\n"
+                + "1. todo\n"
+                + "2. event\n"
+                + "3. deadline\n"
+                + "4. mark/unmark\n"
+                + "5. find\n"
+                + "6. list\n"
+                + "7. reminder\n"
+                + "8. help\n"
+                + "9. bye\n";
 
         return response;
     }
@@ -121,7 +140,7 @@ public class Ui {
      * @return response
      */
     public static String printRemoveTask(String removedTask) {
-        String response = "Noted. I've removed this task:\n  " + removedTask.toString();
+        String response = "Noted. I've removed this task:\n" + removedTask.toString();
 
         return response;
     }
