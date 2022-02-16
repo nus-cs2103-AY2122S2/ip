@@ -1,13 +1,12 @@
 package commands;
 
-import myTasks.Deadline;
-import myTasks.Event;
-import myTasks.Task;
-import myTasks.Todo;
-
 import java.util.List;
 
 import duke.Ui;
+import mytasks.Deadline;
+import mytasks.Event;
+import mytasks.Task;
+import mytasks.Todo;
 
 /**
  * CreateTask class contain methods to create new tasks for the user to track.
@@ -31,7 +30,7 @@ public class CreateTask {
      * @param list list of tasks that are currently being tracked.
      */
     public static void deadline(String description, List<Task> list, int taskCount) {
-        String[] restOfPara  = description.split("/by ", 2);
+        String[] restOfPara = description.split("/by ", 2);
         list.add(new Deadline(restOfPara[0], restOfPara[1]));
         System.out.println(list.get(taskCount).toString());
         System.out.println("Got it. I've added this task:");

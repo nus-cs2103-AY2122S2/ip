@@ -1,7 +1,10 @@
-import myTasks.Deadline;
-import org.junit.jupiter.api.Test;
+package taskstest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import mytasks.Deadline;
 
 public class DeadlineTest {
     @Test

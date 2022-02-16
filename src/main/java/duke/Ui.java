@@ -1,16 +1,21 @@
 package duke;
 
-import myTasks.TaskList;
-import myTasks.Task;
-
-import commands.*;
-
 import java.util.List;
+
+import commands.CreateTask;
+import commands.DeleteTask;
+import commands.MarkTask;
+import commands.ShowTasks;
+import mytasks.Task;
+import mytasks.TaskList;
 
 /**
  * Initializes the user interface that interacts with the user.
  */
 public class Ui {
+    /**
+     * Initializes the user interface.
+     */
     public Ui() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -24,8 +29,8 @@ public class Ui {
      * Indicate to the user that their command has been successfully executed or if there is any error along the way.
      */
     public void allTasks(String inputText, TaskList tasks) {
-        int taskCount = tasks.list.size();
-        List<Task> list = tasks.list;
+        List<Task> list = tasks.getList();
+        int taskCount = list.size();
         String[] tempList = inputText.split(" ", 2);
 
         try {
@@ -37,33 +42,34 @@ public class Ui {
 
         System.out.println("------------------------------------------------------------");
         switch (tempList[0]) {
-            case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            case "list":
-                ShowTasks.showList(taskCount, list);
-                break;
-            case "find":
-                ShowTasks.find(taskCount, tempList[1], list);
-                break;
-            case "todo":
-                CreateTask.todo(tempList[1], list, taskCount);
-                break;
-            case "deadline":
-                CreateTask.deadline(tempList[1], list, taskCount);
-                break;
-            case "event":
-                CreateTask.event(tempList[1], list, taskCount);
-                break;
-            case "mark":
-                MarkTask.mark(tempList[1], list, taskCount);
-                break;
-            case "unmark":
-                MarkTask.unmark(tempList[1], list, taskCount);
-                break;
-            case "delete":
-                DeleteTask.delete(tempList[1], list, taskCount);
-                break;
+        case "bye":
+            System.out.println("Bye. Hope to see you again soon!");
+            break;
+        case "list":
+            ShowTasks.showList(taskCount, list);
+            break;
+        case "find":
+            ShowTasks.find(taskCount, tempList[1], list);
+            break;
+        case "todo":
+            CreateTask.todo(tempList[1], list, taskCount);
+            break;
+        case "deadline":
+            CreateTask.deadline(tempList[1], list, taskCount);
+            break;
+        case "event":
+            CreateTask.event(tempList[1], list, taskCount);
+            break;
+        case "mark":
+            MarkTask.mark(tempList[1], list, taskCount);
+            break;
+        case "unmark":
+            MarkTask.unmark(tempList[1], list, taskCount);
+            break;
+        case "delete":
+            DeleteTask.delete(tempList[1], list, taskCount);
+            break;
+        default:
         }
         System.out.println("------------------------------------------------------------");
     }

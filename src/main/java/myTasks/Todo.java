@@ -1,4 +1,4 @@
-package myTasks;
+package mytasks;
 
 /**
  * A task without restrictions.

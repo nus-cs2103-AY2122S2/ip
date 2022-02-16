@@ -1,8 +1,8 @@
 package duke;
 
-import myTasks.TaskList;
-
 import java.util.Scanner;
+
+import mytasks.TaskList;
 
 /**
  * An application that tracks the tasks that you must complete.
@@ -18,8 +18,9 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        tasks = new TaskList();
         try {
-            tasks = new TaskList(storage.loadTasks());
+            tasks.loadList(storage.loadTasks());
         } catch (DukeException e) {
             tasks = new TaskList();
         }
@@ -36,7 +37,7 @@ public class Duke {
             inputText = input.nextLine();
 
             ui.allTasks(inputText, tasks);
-            storage.saveTasks(tasks.list);
+            storage.saveTasks(tasks.getList());
         }
     }
 

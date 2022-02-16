@@ -1,23 +1,22 @@
 package duke;
 
-import myTasks.Deadline;
-import myTasks.Event;
-import myTasks.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import mytasks.Deadline;
+import mytasks.Event;
+import mytasks.Task;
 
 /**
  * The Storage class methods to save and retrieve information from the task list.
  */
 public class Storage {
-    String filepath;
+    private String filepath;
 
     public Storage(String filepath) {
         this.filepath = filepath;
@@ -26,7 +25,7 @@ public class Storage {
     /**
      * Creates a new txt file to track the list of task if the file has not been created.
      */
-    private void CreateFile() {
+    private void createFile() {
         try {
             File myObj = new File(this.filepath);
             if (myObj.createNewFile()) {
@@ -45,13 +44,15 @@ public class Storage {
         try {
             FileWriter myWriter = new FileWriter(this.filepath);
             for (Task task : list) {
-                String completed = task.isDone ? "1|" : "0|";
+                String completed = task.getIsDone() ? "1|" : "0|";
                 if (task instanceof Deadline) {
-                    myWriter.write("D|" + completed + task.description + "|" + ((Deadline) task).dateTime + "\n");
+                    myWriter.write("D|" + completed + task.getDescription() + "|"
+                            + ((Deadline) task).returnDateTime() + "\n");
                 } else if (task instanceof Event) {
-                    myWriter.write("E|" + completed + task.description + "|" + ((Event) task).dateTime + "\n");
+                    myWriter.write("E|" + completed + task.getDescription() + "|"
+                            + ((Event) task).returnDateTime() + "\n");
                 } else {
-                    myWriter.write("T|" + completed + task.description + "\n");
+                    myWriter.write("T|" + completed + task.getDescription() + "\n");
                 }
             }
             myWriter.close();
@@ -75,7 +76,7 @@ public class Storage {
             myReader.close();
             System.out.println("Files Loaded Successfully\n");
         } catch (FileNotFoundException e) {
-            CreateFile();
+            createFile();
             throw new DukeException("No file found. Creating new file...");
         }
         return list;

@@ -1,12 +1,12 @@
-package myTasks;
+package mytasks;
 
 /**
  * Task is the parent class of Deadline, Event and Todo. Task contains information such as the task itself and whether
  * it has been completed.
  */
 public class Task {
-    public String description;
-    public boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Creates a new task with the task description. Set the completion of the task to not done as default .
@@ -35,6 +35,22 @@ public class Task {
      */
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    /**
+     * Get description for the task.
+     * @return description of the task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Get status of whether the task has been completed.
+     * @return status of whether the task has been completed.
+     */
+    public boolean getIsDone() {
+        return isDone;
     }
 
     public String toString() {

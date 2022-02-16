@@ -1,10 +1,9 @@
 package commands;
 
-import myTasks.Task;
-
 import java.util.List;
 
 import duke.Ui;
+import mytasks.Task;
 
 /**
  * The MarkTask class contains methods to indicate if the task is complete.

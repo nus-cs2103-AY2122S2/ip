@@ -1,10 +1,9 @@
 package commands;
 
-import myTasks.Task;
-
 import java.util.List;
 
 import duke.Ui;
+import mytasks.Task;
 
 /**
  * The DeleteTask class removes a task that is currently in the task list.

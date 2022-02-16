@@ -1,8 +1,8 @@
 package commands;
 
-import myTasks.Task;
-
 import java.util.List;
+
+import mytasks.Task;
 
 /**
  * ShowTasks class displays the tasks that are currently being tracked.
@@ -30,7 +30,7 @@ public class ShowTasks {
         System.out.println("Here are the matching tasks in your list:");
         int count = 0;
         for (int i = 0; i < taskCount; i++) {
-            for (String word : list.get(i).description.split(" ")) {
+            for (String word : list.get(i).getDescription().split(" ")) {
                 if (word.equals(keyword)) {
                     count++;
                     System.out.println((i + 1) + "." + list.get(i).toString());
