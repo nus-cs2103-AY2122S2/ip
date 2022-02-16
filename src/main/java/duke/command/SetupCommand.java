@@ -31,7 +31,7 @@ public class SetupCommand extends Command {
             taskList.clear();
         }
 
-        ui.showMessage("Hello! I am Duke");
+        ui.showMessage("Hello! I am Duke.");
         ui.showMessage("How can I help you?");
     }
 }
