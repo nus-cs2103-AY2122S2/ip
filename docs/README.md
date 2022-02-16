@@ -7,7 +7,11 @@ Walle is a simple application that can record and keep track of the tasks you wa
 
 ![Screenshot of Walle](Ui.png)
 
-You can click [here](https://github.com/tzhan98/ip/releases) to get the latest version of Walle
+## Downloading Walle
+
+1. You can click [here](https://github.com/tzhan98/ip/releases) to get the latest version of Walle
+2. Download the latest Walle.jar
+3. Double-click on Walle.jar to run it
 
 ________________________________________________________________________________________________________________________
 ## Features 
