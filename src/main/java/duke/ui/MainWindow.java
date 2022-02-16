@@ -15,7 +15,7 @@ import javafx.util.Duration;
 
 public class MainWindow extends AnchorPane {
 
-    private static double exitDelayInSeconds = 1;
+    private static final double exitDelayInSeconds = 1;
 
     @FXML
     private ScrollPane scrollPane;
@@ -31,9 +31,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /**
+     * Initialises the main window by setting the scroll pane and the background.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setStyle("-fx-background-color: #c7d2e9;");
     }
 
     public void setDuke(Duke d) {
@@ -60,4 +64,6 @@ public class MainWindow extends AnchorPane {
             exitAfterDelay.play();
         }
     }
+
+
 }

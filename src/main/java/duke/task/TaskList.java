@@ -89,7 +89,7 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1).append(".").append(tasks.get(i)).append("\n");
+            sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         return tasks.size() == 0 ? "Task list is empty.\n" : sb.toString();
     }

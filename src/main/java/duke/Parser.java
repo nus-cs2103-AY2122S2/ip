@@ -68,7 +68,7 @@ public class Parser {
             case REMIND:
                 return new RemindCommand(parseNumberOfDays(details));
             default:
-                throw new DukeException(String.format("Sorry, the command '%s' is not supported.", commandString));
+                throw new DukeException(String.format("Sorry, I don't know what you mean by '%s'.", userInput));
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Please specify dates in the yyyy-mm-dd format");

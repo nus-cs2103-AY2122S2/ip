@@ -44,7 +44,7 @@ public class Ui {
     public String showLoadedData(TaskList taskList) {
         assert taskList.getLength() >= 0 : "taskList.getLength() should return an int not less than 0";
         if (taskList.getLength() != 0) {
-            return "I've retrieved your latest task list data\n" + showTaskList(taskList);
+            return "I've retrieved your latest task list data. " + showTaskList(taskList);
         }
         return "";
     }
@@ -66,7 +66,7 @@ public class Ui {
      * @return a message from duke indicating an invalid command was received.
      */
     public String showCommandError(String errorMessage) {
-        return "Oops, there might be an error in the command entered:\n" + errorMessage;
+        return "Oops, there might be an error in the command entered:\n\"" + errorMessage + "\"";
     }
 
     /**

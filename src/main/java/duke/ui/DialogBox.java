@@ -9,11 +9,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -22,12 +24,18 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
+    private static final String commonDialogStyles = "-fx-font-family: \"Courier New\"; "
+            + "-fx-font-size: 12; " + "-fx-background-radius: 7; " + "-fx-padding: 7;";
+    private static final String dukeDialogBackgroundStyles = "-fx-background-color: #d6e7d6;";
+    private static final String userDialogBackgroundStyles = "-fx-background-color: #ead8eb;";
+
+
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private StackPane chatBubble;
 
     private DialogBox(String text, Image img) {
         try {
@@ -41,6 +49,14 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(createClippingCircle(img));
+    }
+
+    private Circle createClippingCircle(Image img) {
+        double centerX = displayPicture.getX() + displayPicture.getFitWidth() / 2;
+        double centerY = displayPicture.getY() + displayPicture.getFitHeight() / 2;
+        double radius = displayPicture.getFitWidth() / 2;
+        return new Circle(centerX, centerY, radius);
     }
 
     /**
@@ -54,12 +70,16 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialog = new DialogBox(text, img);
+        userDialog.chatBubble.setStyle(commonDialogStyles + userDialogBackgroundStyles);
+        userDialog.dialog.setTextAlignment(TextAlignment.RIGHT);
+        return userDialog;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        DialogBox dukeDialog = new DialogBox(text, img);
+        dukeDialog.flip();
+        dukeDialog.chatBubble.setStyle(commonDialogStyles + dukeDialogBackgroundStyles);
+        return dukeDialog;
     }
 }
