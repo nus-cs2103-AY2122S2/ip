@@ -107,7 +107,7 @@ class Parser {
     }
 
     private String handleListCommand(String[] input) throws SiriException {
-        if (input.length != 1 || input[1].trim().length() != 0) {
+        if (input.length != 1 && input[1].trim().length() != 0) {
             throw new SiriException("OPPS!! list does not take in any parameter!!");
         }
         return this.taskList.print();

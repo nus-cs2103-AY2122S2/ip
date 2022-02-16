@@ -10,6 +10,8 @@ public class Siri {
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
+    private String startUpString;
+    private boolean isInitialised = false;
 
     /**
      * Constructor for Siri class.
@@ -18,24 +20,39 @@ public class Siri {
      */
     public Siri(String filePath) {
         storage = new Storage(filePath);
-        ui = new Ui("   -----      O    -----      O\n"
-                + " /   _   \\   __   |       \\   __\n"
-                + " |  | |__|  |  |  |   O   |  |  |\n"
-                + " |   ----\\  |  |  |       /  |  |\n"
-                + "  \\ __   |  |  |  |   ---    |  |\n"
-                + " |---|   |  |  |  |       \\  |  |\n"
-                + "  \\______/  |__|  |___|\\___\\ |__|\n");
+        ui = new Ui("   -----      O      -----       O\n"
+                + " /***-***\\   __  |*******\\  __\n"
+                + " |***| |__|    |**| |***O***| |**|\n"
+                + " |***----\\   |**|  |*******/ |**|\n"
+                + "  \\ __****|  |**|  |***---     |**|\n"
+                + " |---|****|  |**|  |******\\    |**|\n"
+                + "  \\_____/   |_|   |__|\\___\\  |_|\n");
 
         try {
             tasks = new TaskList(storage.load());
-            Ui.startUpSavedData();
-            ui.startUp();
         } catch (SiriException se) {
             tasks = new TaskList();
-            ui.startUp();
+        }
+
+        startUpString = ui.startUp();
+
+        if (tasks.size() > 0) {
+            startUpString = startUpString + Ui.startUpSavedData();
         }
 
         parser = new Parser(tasks);
+    }
+
+    public void setInitialised() {
+        isInitialised = true;
+    }
+
+    public String getStartUpString() {
+        return startUpString;
+    }
+
+    public boolean checkInitialised() {
+        return isInitialised;
     }
 
     /**
@@ -50,15 +67,8 @@ public class Siri {
         return printString;
     }
 
-    public String getResponse(String input) {
-        String printString;
-        try {
-            printString = parser.handleCommand(input);
-        } catch (SiriException se) {
-            printString = se.getMessage();
-        }
-
-        return printString;
+    public String getResponse(String input) throws SiriException {
+        return parser.handleCommand(input);
     }
 
 }

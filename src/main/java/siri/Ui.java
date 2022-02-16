@@ -10,7 +10,7 @@ class Ui {
      * Class method to print the start up message.
      */
     public String startUp() {
-        return "Hello from" + this.logo + "\n";
+        return "Hello from\n" + this.logo + "\n";
     }
 
     /**
