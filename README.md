@@ -1,4 +1,8 @@
-# User Guide
+# Pyke
+
+## Introduction
+
+Pyke is a smart chat bot that is embedded with a task manager.
 
 ## Table of contents
 1. [Quick start](#quickstart)
