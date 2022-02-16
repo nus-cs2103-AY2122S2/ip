@@ -7,6 +7,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
 
 group 'org.example'
@@ -25,6 +26,12 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+}
+
+checkstyle {
+    toolVersion = '9.3'
+    showViolations = true
+    ignoreFailures = false
 }
 
 repositories {

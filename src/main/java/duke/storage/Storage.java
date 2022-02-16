@@ -100,6 +100,7 @@ public class Storage {
      * Writes all currently stored tasks into storage.
      *
      * @param listOfTasks TaskList containing the list of tasks to be written to storage
+     * @return String containing the task in the storage format
      */
     public String writeToStorage(TaskList listOfTasks) {
         try {

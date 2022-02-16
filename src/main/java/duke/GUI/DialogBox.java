@@ -58,7 +58,7 @@ public class DialogBox extends HBox {
         SnapshotParameters parameters = new SnapshotParameters();
         parameters.setFill(Color.TRANSPARENT);
         return imageView.snapshot(parameters, null);
-    };
+    }
 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);

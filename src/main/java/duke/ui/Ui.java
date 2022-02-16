@@ -17,14 +17,17 @@ public class Ui  {
     }
 
     /**
-     * Function for printing the greeting to it user.
+     * Returns the string for greeting the user.
+     *
+     * @return String containing the greeting by Duke.
      */
     public String greet() {
         return encloseWithin("Hello! I'm duke.Duke\nWhat can I do for you?\n");
     }
 
     /**
-     * Function for printing the goodbye after the user has finished using the application.
+     * Returns the string for saying goodbye to the user.
+     * @return String containing the goodbye message.
      */
     public String sayGoodbye() {
         String goodbye = encloseWithin("Bye. Hope to see you again soon!\n");
