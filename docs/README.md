@@ -22,7 +22,7 @@ Example:
 
 Adds a task that need to be done before a specific date/time.
 
-Format: `deadline DESC /by YYYY-MM-DD\`
+Format: `deadline DESC /by YYYY-MM-DD`
 
 Example:
 
