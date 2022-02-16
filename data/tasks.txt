@@ -6,3 +6,5 @@ MONEYCHANGE 3.00 false mike
 TODO eat false
 TODO drink false
 TODO shower false
+MONEYCHANGE -5.00 false Simon
+MONEYCHANGE -5.00 false Simon
