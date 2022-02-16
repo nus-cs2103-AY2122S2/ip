@@ -45,7 +45,7 @@ public class DukeException extends Exception {
             checkValidEvent(input);
             break;
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("MEOW!!! I don't know what that means :-(");
         }
     }
 
@@ -56,11 +56,11 @@ public class DukeException extends Exception {
      */
     private void checkValid(String[] input, int tasks) throws DukeException {
         if (input.length == 1) {
-            throw new DukeException("☹ OOPS!!! Please enter a task number.");
+            throw new DukeException("MEOW!!! Please enter a task number.");
         }
         int taskNum = Integer.parseInt(input[1]);
         if (!(taskNum <= tasks && taskNum > 0)) {
-            throw new DukeException("☹ OOPS!!! Task number does not exist.");
+            throw new DukeException("MEOW!!! Task number does not exist.");
         }
     }
 
@@ -70,11 +70,11 @@ public class DukeException extends Exception {
      */
     private void checkValidFind(String[] input) throws DukeException {
         if (input.length == 1) {
-            throw new DukeException("☹ OOPS!!! Please enter a task to find.");
+            throw new DukeException("MEOW!!! Please enter a task to find.");
         } else {
             String[] task = input[1].split(" ");
             if (task.length > 1) {
-                throw new DukeException("☹ OOPS!!! Sorry you can only search for single words.");
+                throw new DukeException("MEOW!!! Sorry you can only search for single words.");
             }
         }
     }
@@ -85,7 +85,7 @@ public class DukeException extends Exception {
      */
     private void checkValidTodo(String[] input) throws DukeException {
         if (input.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
+            throw new DukeException("MEOW!!! The description of a task cannot be empty.");
         }
     }
 
@@ -95,13 +95,13 @@ public class DukeException extends Exception {
      */
     private void checkValidDeadline(String[] input) throws DukeException {
         if (input.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
+            throw new DukeException("MEOW!!! The description of a task cannot be empty.");
         } else {
             String[] dateTime = input[1].split("/by ", 2);
             if (dateTime[0].equals("")) {
-                throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("MEOW!!! The description of a deadline cannot be empty.");
             } else if (dateTime.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please enter a deadline for the task using /by.");
+                throw new DukeException("MEOW!!! Please enter a deadline for the task using /by.");
             }
             checkValidDate(dateTime[1]);
         }
@@ -113,13 +113,13 @@ public class DukeException extends Exception {
      */
     private void checkValidEvent(String[] input) throws DukeException {
         if (input.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
+            throw new DukeException("MEOW!!! The description of a task cannot be empty.");
         } else {
             String[] dateTime = input[1].split("/at ", 2);
             if (dateTime[0].equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("MEOW!!! The description of a event cannot be empty.");
             } else if (dateTime.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please enter a timeframe for the task using /at.");
+                throw new DukeException("MEOW!!! Please enter a timeframe for the task using /at.");
             }
             checkValidDate(dateTime[1]);
         }
@@ -134,11 +134,11 @@ public class DukeException extends Exception {
         try {
             LocalDateTime d2 = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hha"));
             if (d2.isBefore(d1)) {
-                throw new DukeException("☹ OOPS!!! Please enter a valid date from "
+                throw new DukeException("MEOW!!! Please enter a valid date from "
                         + d1.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hha")) + " and onwards.");
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! Please enter a valid date and time in the format yyyy-mm-dd hha "
+            throw new DukeException("MEOW!!! Please enter a valid date and time in the format yyyy-mm-dd hha "
                     + "(Example: 2022-10-10 10PM)");
         }
     }
