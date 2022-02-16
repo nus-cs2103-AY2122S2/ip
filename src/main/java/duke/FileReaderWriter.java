@@ -61,7 +61,6 @@ public class FileReaderWriter {
      */
     public static void writeToFile() {
         try {
-//            FileWriter fw = new FileWriter("data.txt",false);
             FileOutputStream writer = new FileOutputStream(DATA_PATH);
             ObjectOutputStream saveList = new ObjectOutputStream(writer);
             saveList.writeObject(TaskBank.getBank());
