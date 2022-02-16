@@ -12,12 +12,12 @@ ________________________________________________________________________________
 
 ### Check out the awesome stuff that Walle can do
 
- - [x] [Add tasks](/#add-tasks---add-task-to-walle)
- - [x] [Mark/Unmark tasks](/#markunmark-tasks)
- - [x] List all tracked tasks
+ - [x] [Add tasks](/https://tzhan98.github.io/ip/#add-tasks)
+ - [x] [Mark/Unmark tasks](https://tzhan98.github.io/ip/#markunmark-tasks)
+ - [x] [List all tracked tasks](https://tzhan98.github.io/ip/#list)
  - [x] [Detect duplicates](https://tzhan98.github.io/ip/#detect-duplicates)
  - [x] [Delete tasks](https://tzhan98.github.io/ip/#delete-task)
- - [x] [Find tasks](/#find-task)
+ - [x] [Find tasks](https://tzhan98.github.io/ip/#find-task)
 
 ________________________________________________________________________________________________________________________
 ## Usage of Walle
@@ -33,7 +33,7 @@ There are 3 types of tasks you can add
 
 Example of usage: 
 
-todo <name of task>
+todo \<name of task\>
 
     `todo borrow book`
 
@@ -49,7 +49,7 @@ Expected outcome:
 
 Example of usage:
 
-deadline <name of task> /by <date to complete task>
+deadline \<name of task\> /by \<date to complete task\>
 
     `deadline return math book /by Sunday`
 
@@ -93,7 +93,7 @@ Expected outcome:
 ```
 
 ### Mark/Unmark tasks
-Walle will be able to mark or unmark tasks
+Walle is able to mark or unmark tasks
 
  - **marking tasks**
 
@@ -176,7 +176,7 @@ Walle will search for task based on input keywords
 
 Example of usage:
 
-find _ _<task name>_ _
+find \<task name\>
 
     `find dinner`
 
