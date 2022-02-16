@@ -66,10 +66,27 @@ public class TaskList {
     /**
      * Filters task list based on the task type.
      *
-     * @param taskType The class type in the task list
-     * @return A filtered task list based on the supplied task type.
+     * @param taskType The task type to be filtered.
+     * @return A filtered and sortable task list based on the supplied task type.
      */
-    public ArrayList<? extends Sortable> filterTasks(TaskType taskType) throws DukeException {
+    public TaskList filterTasks(TaskType taskType) throws DukeException {
+        ArrayList<Task> filteredTask = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.hasSameTaskType(taskType)) {
+                // Only sortable task will make it through this block
+                filteredTask.add(task);
+            }
+        }
+        return new TaskList(filteredTask);
+    }
+
+    /**
+     * Filters sortable task list based on the task type.
+     *
+     * @param taskType The sortable task type to be filtered.
+     * @return A filtered and sortable task list based on the supplied task type.
+     */
+    public ArrayList<? extends Sortable> filterSortableTasks(TaskType taskType) throws DukeException {
         ArrayList<Sortable> filteredTask = new ArrayList<>();
         for (Task task : this.tasks) {
             if (task.hasSameTaskType(taskType)) {
@@ -112,7 +129,7 @@ public class TaskList {
      * @return A filtered task list based on the supplied task type.
      */
     public TaskList sortTasks(TaskType taskType) throws DukeException {
-        ArrayList<? extends Sortable> filteredTasks = this.filterTasks(taskType);
+        ArrayList<? extends Sortable> filteredTasks = this.filterSortableTasks(taskType);
         if (taskType == TaskType.DEADLINE) {
             @SuppressWarnings("unchecked")
             ArrayList<Deadline> deadlineTasks = (ArrayList<Deadline>) filteredTasks;
