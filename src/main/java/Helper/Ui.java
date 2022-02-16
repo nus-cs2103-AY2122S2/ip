@@ -114,6 +114,7 @@ public class Ui {
         }
     }
 
+
     /**
      * asks the user to enter a valid name.
      */
@@ -128,21 +129,6 @@ public class Ui {
         }
     }
 
-    /**
-     * prints the number of tasks the users has to do.
-     *
-     * @param num the number of tasks.
-     */
-    public static void printNumOfTasks(int num) {
-        String str = "Number of tasks up to now: " + num;
-        try {
-            FileWriter writer = new FileWriter(PATH_TEMP_FILE);
-            writer.write(str);
-            writer.close();
-        } catch (IOException e) {
-            Ui.printMessage(Ui.getError() + e.toString());
-        }
-    }
 
     /**
      * prints that task was added successfully to the list of tasks.
@@ -168,20 +154,6 @@ public class Ui {
      */
     public static void printRemoved(Task task) {
         String str = "The following task has been removed from the list :" + "\n" + task.toString();
-        try {
-            FileWriter writer = new FileWriter(PATH_TEMP_FILE);
-            writer.write(str);
-            writer.close();
-        } catch (IOException e) {
-            Ui.printMessage(Ui.getError() + e.toString());
-        }
-    }
-
-    /**
-     * asks the user to try again.
-     */
-    public static void printTryAgain() {
-        String str = "Please try again!";
         try {
             FileWriter writer = new FileWriter(PATH_TEMP_FILE);
             writer.write(str);
