@@ -1,0 +1,25 @@
+todo read book
+list
+mark 1
+list
+deadline return book /by 2022/01/26 0200
+event project meeting /at 2022/01/26 0200
+list
+unmark anything
+unmark 4
+unmark 1
+list
+todo
+mark anything
+mark -1
+deadline /by 2022/01/26 0200
+deadline 2103T level-6 /by Sunday 2359 /by 2022/01/27 1200
+deadline 2103T level-6
+event
+list
+delete 0
+delete anything
+delete
+delete 1
+list
+bye
