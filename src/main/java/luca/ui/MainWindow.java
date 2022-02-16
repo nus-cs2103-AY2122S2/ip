@@ -1,5 +1,6 @@
 package luca.ui;
 
+import com.sun.prism.paint.Stop;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
 import javafx.util.Duration;
 import luca.Luca;
 
@@ -36,7 +40,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
 
     /** Image used to represent the chat bot. */
-    private Image lucaImage = new Image(this.getClass().getResourceAsStream("/images/luca.jpg"));
+    private Image lucaImage = new Image(this.getClass().getResourceAsStream("/images/luca.png"));
 
     /**
      * Binds the scroll pane to the dialog container and inserts
@@ -47,6 +51,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
                 DialogBox.getLucaWelcome(lucaImage));
+        dialogContainer.getStyleClass().add("dialog-container");
     }
 
     /**

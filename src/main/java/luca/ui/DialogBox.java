@@ -13,6 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import luca.Luca;
 
 /**
  * Controller for DialogBox containing text and image.
@@ -34,7 +38,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        dialog.getStyleClass().add("dialog");
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -57,7 +61,11 @@ public class DialogBox extends HBox {
      * @return User Dialog Box.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.dialog.setFont(Font.font("Comic Sans Ms", FontWeight.BOLD, 11));
+        dialogBox.dialog.setTextFill(Color.WHITE);
+        dialogBox.dialog.getStyleClass().add("user-dialog");
+        return dialogBox;
     }
 
     /**
@@ -68,9 +76,19 @@ public class DialogBox extends HBox {
      * @return Luca Response Dialog Box.
      */
     public static DialogBox getLucaDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        String[] messages = text.split(Luca.ERROR_PREFIX, 2);
+        DialogBox dialogBox;
+        if (messages.length == 2) { // Error message
+            dialogBox = new DialogBox(messages[1], img);
+            dialogBox.dialog.setTextFill(Color.ORANGE);
+        } else {
+            dialogBox = new DialogBox(text, img);
+            dialogBox.dialog.setTextFill(Color.WHITE);
+        }
+        dialogBox.dialog.setFont(Font.font("Comic Sans Ms", 11));
+        dialogBox.dialog.getStyleClass().add("luca-dialog");
+        dialogBox.flip();
+        return dialogBox;
     }
 
     /**
@@ -80,6 +98,6 @@ public class DialogBox extends HBox {
      * @return welcome Dialog Box.
      */
     public static DialogBox getLucaWelcome(Image img) {
-        return getLucaDialog("Hi I am Luca!\nHow may I help you?", img);
+        return getLucaDialog("Hi! I am Luca!\nHow may I help you?", img);
     }
 }

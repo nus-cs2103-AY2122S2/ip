@@ -11,6 +11,9 @@ import luca.task.TaskList;
  */
 public class Luca {
 
+    /** Prefix to identify for error messages */
+    public static final String ERROR_PREFIX = "ERROR:";
+
     /** Handles loading and saving of tasks. */
     private Storage storage;
 
@@ -46,7 +49,7 @@ public class Luca {
             Command command = Parser.parse(fullCommand);
             response = command.execute(tasks, storage);
         } catch (DukeException exception) {
-            response = exception.getMessage();
+            response = ERROR_PREFIX + exception.getMessage();
         }
         assert response.length() > 0 : "Empty response from chat bot.";
 
