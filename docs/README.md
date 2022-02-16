@@ -12,12 +12,12 @@ ________________________________________________________________________________
 
 ### Check out the awesome stuff that Walle can do
 
-[x] Add tasks
-[x] Mark/Unmark tasks
-[x] List all tracked tasks
-[x] Detect duplicates
-[x] Delete tasks
-[x] Find tasks
+ - [x] [Add tasks](/#add-tasks---add-task-to-walle)
+ - [x] [Mark/Unmark tasks](/#markunmark-tasks---mark-or-unmark-selected-task)
+ - [x] List all tracked tasks
+ - [x] Detect duplicates
+ - [x] Delete tasks
+ - [x] Find tasks
 
 ________________________________________________________________________________________________________________________
 ## Usage of Walle
@@ -29,9 +29,10 @@ There are 3 types of tasks you can add
 - deadline
 - event
 
+--**Adding a todo**
 Example of usage: 
 
-    todo <name of task>
+todo <name of task>
     `todo borrow book`
 
 Expected outcome:
@@ -42,12 +43,13 @@ Expected outcome:
      Now you have 5 tasks in the list.
 ```
 
+--**Adding a deadline**
 Example of usage:
 
-    deadline <name of task> /by <date to complete task>
+deadline <name of task> /by <date to complete task>
     `deadline return math book /by Sunday`
-    you can also use 'DD-MM-YYYY HHMM' format for <date to complete task>
-    'deadline return sci book /by 17-02-2022 1900'
+you can also use 'DD-MM-YYYY HHMM' format for <date to complete task>
+    `deadline return sci book /by 17-02-2022 1900`
 
 Expected outcome:
 
@@ -60,13 +62,13 @@ Expected outcome:
        [D][ ] return sci book (by: 17 Feb 2022 07:00 PM)
      Now you have 7 tasks in the list.
 ```
-
+--**Adding a event**
 Example of usage:
 
-    event <name of task> /at <time of event>
+event <name of task> /at <time of event>
     `event project meeting /at Mon 2-4pm`
-    you can also use 'DD-MM-YYYY HHMM' format for <time of event>
-    'event lunch with mom /at 17-02-2022 1900'
+you can also use 'DD-MM-YYYY HHMM' format for <time of event>
+    `event lunch with mom /at 17-02-2022 1900`
 
 Expected outcome:
 
@@ -80,12 +82,14 @@ Expected outcome:
      Now you have 8 tasks in the list.
 ```
 
-### Mark/Unmark tasks - Mark or unmark selected task
+### Mark/Unmark tasks
+Walle will be able to mark or unmark tasks
 
+ - **marking tasks**
 Example of usage:
 
-    mark <task number>
-    'mark 2'
+ mark <task number>
+    `mark 2`
 
 Expected outcome:
 
@@ -94,10 +98,11 @@ Expected outcome:
        [X] return book
 ```
 
+ - **unmarking tasks**
 Example of usage:
 
-    unmark <task number>
-    'unmark 2'
+ unmark <task number>
+    `unmark 2`
 
 Expected outcome:
 
@@ -107,6 +112,7 @@ Expected outcome:
 ```
 
 ### list - List all current tasks
+Walle will list all current tasks in tasklist
 
 Example of usage:
 
@@ -121,11 +127,13 @@ Expected outcome:
      3. [T][ ] buy bread
 ```
 
-### Detect duplicates - Walle will detect duplicate entries and reject input
+### Detect duplicates
+Walle will detect duplicate entries and reject input
 
 Example of usage: 
 
-    'todo have dinner' when there exists a todo with the task name 'have dinner'
+    'todo have dinner'
+when there already exists a todo with the task name 'have dinner'
 
 Expected outcome:
 
@@ -133,12 +141,13 @@ Expected outcome:
     BEEP! Error! There is a duplicate task (task Number 6)
 ```
 
-### Delete task - Delete specified task
+### Delete task
+Walle will delete a specified task number listed in the tasklist
 
 Example of usage:
 
-    delete <task number>
-    'delete 3'
+delete <task number>
+    `delete 3`
 
 Expected outcome:
 
@@ -147,12 +156,13 @@ Expected outcome:
     Now you have 5 task on the list.  
 ```
 
-### Find task - search for task with keyword
+### Find task 
+Walle will search for task based on input keywords
 
 Example of usage:
 
-    find <task number>
-    'find dinner'
+find <task name>
+    `find dinner`
 
 Expected outcome:
 
