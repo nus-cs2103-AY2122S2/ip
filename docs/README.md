@@ -95,6 +95,7 @@ Expected outcome:
 ```
 
 ### Mark/Unmark tasks
+
 Walle is able to mark or unmark tasks
 
  - **Marking tasks**
@@ -127,6 +128,7 @@ Expected outcome:
 ```
 
 ### list
+
 Walle will list all current tasks in tasklist
 
 Example of usage:
@@ -143,6 +145,7 @@ Expected outcome:
 ```
 
 ### Detect duplicates
+
 Walle will detect duplicate entries and reject input
 
 Example of usage: 
@@ -158,6 +161,7 @@ Expected outcome:
 ```
 
 ### Delete task
+
 Walle will delete a specified task number listed in the tasklist
 
 Example of usage:
@@ -174,6 +178,7 @@ Expected outcome:
 ```
 
 ###Find task
+
 Walle will search for task based on input keywords
 
 Example of usage:
@@ -190,4 +195,5 @@ Expected outcome:
     5. [T][ ] have dinner with mom
 ```
 [back to top](https://tzhan98.github.io/ip/)
+
 ________________________________________________________________________________________________________________________
