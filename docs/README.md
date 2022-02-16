@@ -44,6 +44,10 @@ User Guide for using **DukeGenie** to keep track of tasks
 
 -Allows the user to find tasks matching a keyword
 
+## Feature- Update task
+
+-Allows the user to update task description
+
 
 ## Usage
 
@@ -183,4 +187,18 @@ Expected outcome:
 
 ```
 
+### `update` - update task description
 
+
+Example of usage:
+
+`update 1 report`
+
+Expected outcome:
+
+*task 1* description will be updated to report
+
+```
+Task number 1 description has been updated to report
+
+```

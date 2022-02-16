@@ -225,7 +225,7 @@ public class TaskList {
                 return "Invalid description Master";
             }
             taskToBeUpdated.setDescription(updatedDescription);
-            return "The task number " + taskNumberToUpdate + " description has been updated to " + updatedDescription;
+            return "Task number " + taskNumberToUpdate + " description has been updated to " + updatedDescription;
 
         } catch (IndexOutOfBoundsException e) {
             return "Oh no, you only have " + storeList.size() + " items. Please choose again Master";
