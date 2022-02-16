@@ -20,15 +20,14 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-    private Duke duke = new Duke();
-
     private static final String TITLE = "Duke";
     private static final String APPLICATION_ICON = "/images/Icon.png";
     private static final String BACKGROUND_IMAGE = "/images/Background.png";
 
     private static final double MIN_HEIGHT = 600.0;
     private static final double MIN_WIDTH = 400.0;
+
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {

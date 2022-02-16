@@ -21,12 +21,12 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String fxmlFile = "/view/DialogBox.fxml";
+
     @FXML
     private Label dialog;
     @FXML
     private Circle displayPicture;
-
-    private static final String fxmlFile = "/view/DialogBox.fxml";
 
     private DialogBox(String text, Image img) {
         try {

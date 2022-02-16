@@ -28,12 +28,6 @@ import duke.util.Storage;
  * Duke chatbot behavior and data.
  */
 public class Duke {
-    private final TaskList taskList;
-    private final Ui ui;
-    private final Parser parser;
-    private boolean isRunning;
-    private Storage storage;
-
     //command keywords
     private static final String BYE_COMMAND = "bye";
     private static final String FIND_COMMAND = "find";
@@ -48,6 +42,12 @@ public class Duke {
     //file paths
     private static final String STORAGE_FILE_NAME = "data.txt";
     private static final String DIR_FILE_NAME = "./data/";
+
+    private final TaskList taskList;
+    private final Ui ui;
+    private final Parser parser;
+    private boolean isRunning;
+    private Storage storage;
 
     /**
      * Duke constructor. Initializes values.
@@ -83,7 +83,7 @@ public class Duke {
 
         // init parser
         HashMap<String, Command> commands = new HashMap<String, Command>();
-        commands.put(BYE_COMMAND, new ByeCommand(BYE_COMMAND ));
+        commands.put(BYE_COMMAND, new ByeCommand(BYE_COMMAND));
         commands.put(FIND_COMMAND, new FindCommand(FIND_COMMAND));
         commands.put(LIST_COMMAND, new ListCommand(LIST_COMMAND));
         commands.put(MARK_COMMAND, new EditTaskMarkCommand(MARK_COMMAND, true));

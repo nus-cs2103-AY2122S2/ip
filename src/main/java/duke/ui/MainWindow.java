@@ -19,6 +19,12 @@ import javafx.util.Duration;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String USER_IMAGE = "/images/DaUser.png";
+    private static final String DUKE_IMAGE = "/images/DaDuke.png";
+    private static final String DUKE_ERROR_IMAGE = "/images/DaDukeError.png";
+
+    private static final int CLOSE_APPLICATION_TIME = 1;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -29,12 +35,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
-    private static final String USER_IMAGE = "/images/DaUser.png";
-    private static final String DUKE_IMAGE = "/images/DaDuke.png";
-    private static final String DUKE_ERROR_IMAGE = "/images/DaDukeError.png";
-
-    private static final int CLOSE_APPLICATION_TIME = 1;
 
     private final Image userImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream(USER_IMAGE)));
