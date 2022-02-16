@@ -1,3 +1,4 @@
+import Duke.tasks.Deadline;
 import Duke.tasks.Event;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -11,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class deadlineTest {
     @Test
     @DisplayName("Deadline String")
-    public void EventString() throws ParseException {
+    public void DeadlineString() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String item = "read";
         Date date = format.parse("18/01/1999");
-        Event test = new Event(item, date);
-        assertEquals("E | 0 | read | Mon Jan 18 00:00:00 SGT 1999",
+        Deadline test = new Deadline(item, date);
+        assertEquals("D | 0 | read | Mon 18/01/1999 0000",
                 test.toString());
     }
 }

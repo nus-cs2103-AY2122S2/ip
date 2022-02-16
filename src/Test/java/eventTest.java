@@ -16,7 +16,7 @@ public class eventTest {
         String item = "read";
         Date date = format.parse("18/01/1999");
         Event test = new Event(item, date);
-        assertEquals("E | 0 | read | Mon Jan 18 00:00:00 SGT 1999",
+        assertEquals("E | 0 | read | Mon 18/01/1999 0000",
                 test.toString());
     }
 }
