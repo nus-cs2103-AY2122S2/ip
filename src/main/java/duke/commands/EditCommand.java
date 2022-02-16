@@ -12,19 +12,20 @@ import duke.ui.Ui;
  * Edits a task from the TaskList.
  */
 public class EditCommand extends Command {
+    private static final String EXECUTE_PREFIX_MESSAGE = "I have edited the task for you: ";
+
     private enum EditType {
         DESCRIPTION,
         DATE,
         TIME,
         DATETIME
     }
+
     private final int target;
     private String description;
     private LocalDate d;
     private LocalTime t;
     private final EditType type;
-
-    private static final String EXECUTE_PREFIX_MESSAGE = "I have edited the task for you: ";
 
     /**
      * Creates a new command to edit description.
@@ -99,6 +100,8 @@ public class EditCommand extends Command {
         case DATETIME:
             tasks.getTask(target).editDateTime(d, t);
             break;
+        default:
+            throw new DukeException("An error has occurred while executing edit.");
         }
         storage.save(tasks);
 

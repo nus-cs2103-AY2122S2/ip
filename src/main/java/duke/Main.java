@@ -1,9 +1,8 @@
 package duke;
 
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import duke.ui.MainWindow;
 
 /**
  * Entry point of the Duke application.

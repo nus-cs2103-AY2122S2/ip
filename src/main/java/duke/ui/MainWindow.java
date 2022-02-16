@@ -4,6 +4,13 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import duke.Duke;
+import duke.Main;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,14 +22,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import duke.Duke;
-import duke.Main;
-import duke.commands.Command;
-import duke.exceptions.DukeException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.task.TaskList;
 
 /**
  * This control represents the main window of the GUI, consisting of an AnchorPane which contains a dialogue container,

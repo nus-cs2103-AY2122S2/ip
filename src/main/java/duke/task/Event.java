@@ -62,7 +62,8 @@ public class Event extends Task {
     private String getDate() {
         assert hasDate : "event should have date";
 
-        return d.format(DATE_OUT);    }
+        return d.format(DATE_OUT);
+    }
 
     /**
      * Retrieves the time of the event.
