@@ -35,15 +35,19 @@ Example:
 
 Format: `list`
 
+_Note:_  
+_- List is sorted in chronological order._  
+_- Todo tasks are by default at the top of the list._
+
 ### Deleting a task: `delete` 
 
 > Deletes a task according to the index in the list.  
 
 Format: `delete INDEX`  
 Example: `delete 3`  
-```
-Note: Deletes only if the index exists
-```
+
+_Note: Deletes only if the index exists_
+
 
 ### Finding keyword within task: `find` 
 
@@ -60,9 +64,9 @@ Example:
 
 Format: `mark INDEX`  
 Example: `mark 3` 
-```
-Note: Marks only if the index exists
-```
+
+_Note: Marks only if the index exists_
+
 
 ### Unmarking a task: `unmark` 
 
@@ -70,9 +74,9 @@ Note: Marks only if the index exists
 
 Format: `unmark INDEX`  
 Example: `unmark 3` 
-```
-Note: Unmarks only if the index exists
-```
+
+_Note: Unmarks only if the index exists_
+
 ### Exiting the program: `bye`
 
 > Program displays exit message and closes after 3 seconds.
