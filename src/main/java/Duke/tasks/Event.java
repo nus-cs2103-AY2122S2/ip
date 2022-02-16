@@ -18,6 +18,7 @@ public class Event extends Task{
         return this.date;
     }
 
+    
     String convertDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy HHmm");
         String date = this.date.format(formatter);

@@ -13,14 +13,14 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "1" : "0"); // mark done task with X
+        return (isDone ? "X" : "O"); // mark done task with X
     }
 
     String finished() {
         if(this.isDone) {
-            return "1";
+            return "X";
         } else {
-            return "0";
+            return "O";
         }
     }
 

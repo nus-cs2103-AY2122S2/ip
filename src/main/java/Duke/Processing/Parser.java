@@ -1,14 +1,12 @@
 package Duke.Processing;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import Duke.Exception.DukeException;
 
 public class Parser {
+
+    static final String DATEEROR = "Wrong date time format\n";
     /**
      * Converts the String for a new task to a date
      *
@@ -20,16 +18,22 @@ public class Parser {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             return LocalDateTime.parse(date, format);
         } catch (DateTimeParseException error) {
-            throw new DukeException("Wrong date format");
+            throw new DukeException(DATEEROR);
         }
     }
 
+    /**
+     * Converts the String for a previously created task
+     *
+     * @param  date the String the user inputs
+     * @return      the String in a date format the system can recognise
+     */
     public static LocalDateTime convertDate2(String date) throws DukeException {
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy HHmm");
             return LocalDateTime.parse(date, format);
         } catch (DateTimeParseException error) {
-            throw new DukeException("Wrong date format");
+            throw new DukeException(DATEEROR);
         }
     }
     /**

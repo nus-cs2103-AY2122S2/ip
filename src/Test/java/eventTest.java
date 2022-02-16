@@ -1,21 +1,20 @@
 import Duke.tasks.Event;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class eventTest {
     @Test
     @DisplayName("Event String")
-    public void EventString() throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    public void EventString() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String item = "read";
-        Date date = format.parse("18/01/1999");
-        Event test = new Event(item, date);
+        LocalDateTime localDateTime = LocalDateTime.parse("18/01/1999 0000", format);
+        Event test = new Event(item, localDateTime);
         assertEquals("E | 0 | read | Mon 18/01/1999 0000",
                 test.toString());
     }
