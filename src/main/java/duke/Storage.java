@@ -60,6 +60,8 @@ public class Storage {
             PrintWriter printWriter = new PrintWriter(new FileWriter(this.file, false));
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.getTask(i);
+                assert task instanceof Deadline || task instanceof Event || task instanceof Deadline
+                        : "Invalid task type.";
                 if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
                     printWriter.println("D | " + deadline.getStatusIcon() + " | " + deadline.getDescription()
@@ -92,9 +94,12 @@ public class Storage {
             while (currentLine != null) {
                 String[] taskDetails = currentLine.split(" \\| ");
                 Task task;
-                if (currentLine.charAt(0) == 'D') {
+                char taskType = currentLine.charAt(0);
+                assert taskType == 'D' || taskType == 'E' || taskType == 'T'
+                        : "Task type in storage file is invalid";
+                if (taskType == 'D') {
                     task = new Deadline(taskDetails[2], taskDetails[3]);
-                } else if (currentLine.charAt(0) == 'E') {
+                } else if (taskType == 'E') {
                     task = new Event(taskDetails[2], taskDetails[3]);
                 } else {
                     task = new Todo(taskDetails[2]);

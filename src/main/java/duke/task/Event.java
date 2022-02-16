@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -26,7 +28,7 @@ public class Event extends Task {
      *
      * @return the parsed date and time.
      */
-    public String getParsedDateAndTime() {
+    public String getParsedDateAndTime() throws DukeException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm:ss");
         try {
             LocalDateTime localDateTime = LocalDateTime.parse(this.dateAndTime);
@@ -34,7 +36,7 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             System.out.println("Invalid Date/Time format!");
         }
-        return LocalDateTime.now().format(dateTimeFormatter);
+        throw new DukeException("Invalid Date/Time format! Please use /by YYYY-MM-DDTHH:mm:ss format");
 
     }
 
@@ -54,6 +56,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + this.getStatusIcon() + " " + super.description + " (at: " + this.getParsedDateAndTime() + ")";
+        try {
+            return "[E]" + this.getStatusIcon() + " " + super.description + " (at: " + this.getParsedDateAndTime() + ")";
+        } catch (DukeException e) {
+            System.out.println("Task date format is invalid.");
+        }
+        return "[E]" + this.getStatusIcon() + " " + super.description;
     }
 }
