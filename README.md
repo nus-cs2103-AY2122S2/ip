@@ -1,5 +1,6 @@
 # Duke project template
 
+This is a desktop application for users to keep track of various task they would like do. They are various functions that 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
 ## Setting up in Intellij

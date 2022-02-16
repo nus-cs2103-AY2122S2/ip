@@ -1,10 +1,12 @@
 package commands;
 
 import java.util.List;
+import javafx.application.Platform;
 
 import duke.DukeException;
 import mytasks.Task;
 import mytasks.TaskList;
+
 
 /**
  * Initializes the user interface that interacts with the user.
@@ -37,6 +39,7 @@ public class Command {
         switch (tempList[0]) {
         case "bye":
             sb.append("Bye. Hope to see you again soon!\n");
+            Platform.exit();
             break;
         case "list":
             sb.append(ShowTasks.showList(taskCount, list));
