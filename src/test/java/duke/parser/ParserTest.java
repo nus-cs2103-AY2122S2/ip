@@ -31,7 +31,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_emptyInput_returnsIncorrectCommand() {
+    public void parse_emptyInput_returnsErrorMessage() {
         String[] emptyInputs = {"", " ", "\n \n"};
         String errorMessage = "Please provide me with the command that you would like to execute!";
         for (String s : emptyInputs) {
@@ -53,6 +53,19 @@ public class ParserTest {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_unknownInput_returnsErrorMessage() {
+        String[] unknownInputs = {"hello", "remark", "update", "lol", "hi"};
+        String errorMessage = "My apologies, but it seems that I do not understand your request.";
+        for (String s : unknownInputs) {
+            try {
+                assertEquals(parser.parseCommand(s).execute(tasks, ui, storage), errorMessage);
+            } catch (DukeException e) {
+                assertEquals(e.getMessage(), errorMessage);
+            }
         }
     }
 }
