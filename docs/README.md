@@ -3,7 +3,7 @@
 > Waaaaaaaaaaaaaaaaaaaaaaaaaaall-E - Wall e
 
 Walle is a simple application that can record and keep track of the tasks you want to do
-~~Also, it's Walle so who woudn't like it?!~~ :robot:
+~~Also, it's Walle so who woudn't like it?!~~ `:robot:`
 
 ![Screenshot of Walle](Ui.png)
 
@@ -13,16 +13,16 @@ ________________________________________________________________________________
 ### Check out the awesome stuff that Walle can do
 
  - [x] [Add tasks](/#add-tasks---add-task-to-walle)
- - [x] [Mark/Unmark tasks](/#markunmark-tasks---mark-or-unmark-selected-task)
+ - [x] [Mark/Unmark tasks](/#markunmark-tasks)
  - [x] List all tracked tasks
- - [x] Detect duplicates
- - [x] Delete tasks
- - [x] Find tasks
+ - [x] [Detect duplicates](https://tzhan98.github.io/ip/#detect-duplicates)
+ - [x] [Delete tasks](https://tzhan98.github.io/ip/#delete-task)
+ - [x] [Find tasks](/#find-task)
 
 ________________________________________________________________________________________________________________________
 ## Usage of Walle
 
-### Add tasks - add task to Walle
+### Add tasks
 
 There are 3 types of tasks you can add
 - todo
@@ -30,9 +30,11 @@ There are 3 types of tasks you can add
 - event
 
 --**Adding a todo**
+
 Example of usage: 
 
 todo <name of task>
+
     `todo borrow book`
 
 Expected outcome:
@@ -44,11 +46,15 @@ Expected outcome:
 ```
 
 --**Adding a deadline**
+
 Example of usage:
 
 deadline <name of task> /by <date to complete task>
+
     `deadline return math book /by Sunday`
+
 you can also use 'DD-MM-YYYY HHMM' format for <date to complete task>
+
     `deadline return sci book /by 17-02-2022 1900`
 
 Expected outcome:
@@ -63,11 +69,15 @@ Expected outcome:
      Now you have 7 tasks in the list.
 ```
 --**Adding a event**
+
 Example of usage:
 
 event <name of task> /at <time of event>
+
     `event project meeting /at Mon 2-4pm`
+
 you can also use 'DD-MM-YYYY HHMM' format for <time of event>
+
     `event lunch with mom /at 17-02-2022 1900`
 
 Expected outcome:
@@ -86,6 +96,7 @@ Expected outcome:
 Walle will be able to mark or unmark tasks
 
  - **marking tasks**
+
 Example of usage:
 
  mark <task number>
@@ -99,9 +110,11 @@ Expected outcome:
 ```
 
  - **unmarking tasks**
+
 Example of usage:
 
  unmark <task number>
+
     `unmark 2`
 
 Expected outcome:
@@ -111,7 +124,7 @@ Expected outcome:
        [ ] return book
 ```
 
-### list - List all current tasks
+### list
 Walle will list all current tasks in tasklist
 
 Example of usage:
@@ -133,6 +146,7 @@ Walle will detect duplicate entries and reject input
 Example of usage: 
 
     'todo have dinner'
+
 when there already exists a todo with the task name 'have dinner'
 
 Expected outcome:
@@ -147,6 +161,7 @@ Walle will delete a specified task number listed in the tasklist
 Example of usage:
 
 delete <task number>
+
     `delete 3`
 
 Expected outcome:
@@ -161,7 +176,8 @@ Walle will search for task based on input keywords
 
 Example of usage:
 
-find <task name>
+find _ _<task name>_ _
+
     `find dinner`
 
 Expected outcome:
