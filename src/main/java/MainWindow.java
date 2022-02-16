@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+
 /**
  * Controller for Duke.MainWindow. Provides the layout for the other controls.
  */
@@ -33,8 +34,15 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        startMessage();
     }
 
+
+    private void startMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("How can I help Chief?", dukeImage)
+        );
+    }
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
