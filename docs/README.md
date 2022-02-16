@@ -10,7 +10,7 @@
 
 ### Set a priority!
 
- Give your tasks some sense of urgency
+ + Give your tasks some sense of urgency
  
 ### Complete your tasks!
  
@@ -32,7 +32,7 @@ Example of usage: `list`
 
 Expected outcome:
 
-
+![alt-text](list.PNG)
 
 ### `mark` - Marks a task
 
@@ -42,8 +42,7 @@ Example of usage: `mark 2`
 
 Expected outcome:
 
-
-
+![alt-text](mark.PNG)
 
 ### `unmark` - Unmarks a task
 
@@ -53,8 +52,7 @@ Example of usage: `unmark 2`
 
 Expected outcome:
 
-
-
+![alt-text](unmark.PNG)
 
 ### `todo` - Create a new Todo Task
 
@@ -64,8 +62,7 @@ Example of usage: `todo mop the floor`
 
 Expected outcome:
 
-
-
+![alt-text](todo.PNG)
 
 ### `event` - Create a new Event Task
 
@@ -75,8 +72,7 @@ Example of usage: `event mop the floor /at 20/02/2022 07:00 PM`
 
 Expected outcome:
 
-
-
+![alt-text](event.PNG)
 
 ### `deadline` - Create a new Deadline Task
 
@@ -86,8 +82,7 @@ Example of usage: `event submit assignment /by 01/02/2022 08:02 PM`
 
 Expected outcome:
 
-
-
+![alt-text](deadline.PNG)
 
 ### `find` - Shows all tasks
 
@@ -97,8 +92,7 @@ Example of usage: `find floor`
 
 Expected outcome:
 
-
-
+![alt-text](find.PNG)
 
 ### `delete` - Deletes a task
 
@@ -108,8 +102,7 @@ Example of usage: `delete 1`
 
 Expected outcome:
 
-
-
+![alt-text](delete.PNG)
 
 ### `priority` - Sets a priority level on task
 
@@ -119,8 +112,7 @@ Example of usage: `priority 2 2`
 
 Expected outcome:
 
-
-
+![alt-text](priority.PNG)
 
 ### `bye` - Exit
 
@@ -130,5 +122,4 @@ Example of usage: `bye`
 
 Expected outcome:
 
-
-
+![alt-text](bye.PNG)

@@ -1,7 +1,6 @@
 package seedu.storage;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import seedu.duke.DukeException;
