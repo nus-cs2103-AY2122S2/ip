@@ -27,10 +27,10 @@ public class Parser {
     }
 
     /**
-     * Read user input and execute commands according to user input
+     * Reads user input and execute commands according to user input.
      *
      * @param input User input.
-     * @return Duke's reply to user input.
+     * @return  Duke's reply to user input.
      * @throws IOException  If user inputs invalid command.
      */
     public String readUserInput(String input) throws IOException {

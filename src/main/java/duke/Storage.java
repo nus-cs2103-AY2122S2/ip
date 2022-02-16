@@ -21,7 +21,7 @@ public class Storage {
     private final String filePath;
 
     /**
-     * Construct a Storage object to load and save file to local drive.
+     * Constructs a Storage object to load and save file to local drive.
      *
      * @param filePath  Filepath of where to load/save file from/to.
      */
@@ -30,9 +30,9 @@ public class Storage {
     }
 
     /**
-     * Load file and read data line by line.
-     * Convert the data to Task objects.
-     * Return an ArrayList containing the Task objects.
+     * Loads file and reads data line by line.
+     * Converts the data to Task objects.
+     * Returns an ArrayList containing the Task objects.
      *
      * @return  ArrayList containing the Task objects.
      * @throws IOException  If fail to read the file.
