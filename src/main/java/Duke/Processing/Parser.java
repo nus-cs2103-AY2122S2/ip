@@ -28,7 +28,6 @@ public class Parser {
      */
     static Date convert2(String date) throws DukeException {
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
-        //System.out.println(date);
         try {
             return formatter.parse(date);
         } catch (ParseException e) {
