@@ -1,5 +1,8 @@
 package seedu.duke.gui;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-
-import java.io.IOException;
-import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.
@@ -39,7 +39,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
 
         //make profile picture circular : referenced from Olivia Johansen's project at https://github.com/oliviajohansen
-        Circle circle = new Circle( 40,50,33);
+        Circle circle = new Circle(40, 50, 33);
         displayPicture.setClip(circle);
         displayPicture.setImage(img);
     }

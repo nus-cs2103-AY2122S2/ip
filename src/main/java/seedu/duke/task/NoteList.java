@@ -23,9 +23,9 @@ public class NoteList {
      * @return a updated NoteList
      */
     NoteList editNote(int indexOfNote, String newNoteContent) {
-         Note noteToEdit = this.notes.get(indexOfNote);
-         Note editedNote = noteToEdit.editNoteContent(newNoteContent);
-         return this.replace(indexOfNote, editedNote);
+        Note noteToEdit = this.notes.get(indexOfNote);
+        Note editedNote = noteToEdit.editNoteContent(newNoteContent);
+        return this.replace(indexOfNote, editedNote);
     }
 
     /**
@@ -66,7 +66,7 @@ public class NoteList {
      */
     NoteList replace(int noteIndex, Note editedNote) {
         ArrayList<Note> newNotes = this.copyNoteList();
-        newNotes.set(noteIndex,editedNote);
+        newNotes.set(noteIndex, editedNote);
         return new NoteList(newNotes);
     }
 
@@ -75,7 +75,7 @@ public class NoteList {
      * @return String that contains information needed to reconstruct NoteList
      */
     public String convertToSummary() {
-        String result = String.format("notes/%d|",notes.size());
+        String result = String.format("notes/%d|", notes.size());
         for (int i = 0; i < this.notes.size(); i++) {
             result += this.notes.get(i).toString() + "/END/|";
         }
@@ -86,7 +86,7 @@ public class NoteList {
     public String toString() {
         String result = "";
         for (int i = 0; i < this.notes.size(); i++) {
-            result += String.format("Note %d: ", i+1) + this.notes.get(i).toString() + "\n";
+            result += String.format("Note %d: ", i + 1) + this.notes.get(i).toString() + "\n";
         }
         return result;
     }

@@ -30,7 +30,7 @@ public class ShowNoteCommand extends Command {
     @Override
     public String getResponseAfterCommand(TaskList taskList) {
         Task taskToShow = taskList.getTasks().get(taskIndex);
-        return Ui.showNote(taskList,taskToShow);
+        return Ui.showNote(taskList, taskToShow);
     }
 
     /**

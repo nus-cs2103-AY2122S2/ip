@@ -23,7 +23,7 @@ public class Event extends Task {
      */
     Event(Event oldEvent, boolean isDone) {
         super(oldEvent.getTaskName(), isDone, oldEvent.getEndDate(),
-                oldEvent.getStartDate(),oldEvent.getNotes());
+                oldEvent.getStartDate(), oldEvent.getNotes());
     }
 
     /**
@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     public Event(String taskName, boolean isDone, LocalDateTime endDate,
                  LocalDateTime startDate, NoteList notes) {
-        super(taskName,isDone, endDate, startDate, notes);
+        super(taskName, isDone, endDate, startDate, notes);
     }
 
     /**

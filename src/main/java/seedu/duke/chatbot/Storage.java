@@ -1,17 +1,27 @@
 package seedu.duke.chatbot;
 
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.LoadingException;
-import seedu.duke.exceptions.UnableToUpdateDatabaseException;
-import seedu.duke.task.*;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.LoadingException;
+import seedu.duke.exceptions.UnableToUpdateDatabaseException;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Note;
+import seedu.duke.task.NoteList;
+import seedu.duke.task.Task;
+import seedu.duke.task.TaskList;
+import seedu.duke.task.ToDo;
 
 /**
  * Handles updating of database, a txt file, whenever {@link TaskList} is updated.
@@ -44,7 +54,6 @@ public class Storage {
     TaskList getOldTaskList() throws DukeException {
         File file = this.getDatabaseFile();
         TaskList oldTaskList = this.createTaskListFromDatabase(file);
-        System.out.println(Ui.showWelcome());
         return oldTaskList;
     }
 
@@ -105,7 +114,8 @@ public class Storage {
      */
     Task getTaskFromSummary(String taskDetails) throws DukeException {
         assert taskDetails.length() != 0 : "Storage getTaskFromSummary - Task details are empty";
-        String taskType = taskDetails.substring(0, 1);  //taskType is the first letter - e.g. "T"
+        //taskType is the first letter - e.g. "T"
+        String taskType = taskDetails.substring(0, 1);
         boolean doneStatus = Integer.parseInt(taskDetails.substring(2, 3)) == 1;
         NoteList noteList = this.createNoteListFromSummary(taskDetails);
 
@@ -114,9 +124,9 @@ public class Storage {
         }
         String taskName = this.getTaskNameForTasksWithDates(taskDetails);
         if (taskType.equals("E")) {
-            return this.createEventFromSummary(taskDetails,taskName,doneStatus,noteList);
+            return this.createEventFromSummary(taskDetails, taskName, doneStatus, noteList);
         } else {
-            return this.createDeadlineFromSummary(taskDetails,taskName,doneStatus,noteList);
+            return this.createDeadlineFromSummary(taskDetails, taskName, doneStatus, noteList);
         }
     }
 
@@ -170,9 +180,9 @@ public class Storage {
      * @param taskDetails which is the information from database on the task
      * @return LocalDateTime representing the end date and time for an Event
      */
-    LocalDateTime createEventEndDateTimeFromSummary(String taskDetails) {
+    LocalDateTime createEventEndDateTimeFromSummary(String taskDetails) throws DukeException {
         int indexEndDate = taskDetails.indexOf("/to") + 3; // /to<endDate> in command
-        String endDateString = taskDetails.substring(indexEndDate,taskDetails.indexOf("|notes/"));
+        String endDateString = taskDetails.substring(indexEndDate, taskDetails.indexOf("|notes/"));
         LocalDateTime endDate = this.getLocalDateTimeFromDate(endDateString);
         return endDate;
     }
@@ -230,14 +240,13 @@ public class Storage {
      * @param string which contains information in "yyyy-MM-dd HH:mm"
      * @return LocalDateTime with the correct date information
      */
-    LocalDateTime getLocalDateTimeFromDate(String string) {
+    LocalDateTime getLocalDateTimeFromDate(String string) throws DukeException {
         try {
             TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(string);
             LocalDateTime date = LocalDateTime.from(ta);
             return date;
         } catch (DateTimeParseException e) {
-            System.out.println("Error generating date string");
-            return null;
+            throw new DukeException("Error generating date string");
         }
     }
 
@@ -261,7 +270,7 @@ public class Storage {
             } else {
                 return this.recreateNoteList(taskDetails, indexOfNumberOfNotes, numberOfNotes);
             }
-        } catch(NumberFormatException | StringIndexOutOfBoundsException e) {
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             throw new DukeException("Problem with translating summary into note list");
         }
     }
@@ -286,8 +295,7 @@ public class Storage {
                 endIndexOfNoteContent = taskDetails.indexOf("/END/");
             }
 
-            String noteContent = taskDetails.
-                    substring(0, endIndexOfNoteContent);
+            String noteContent = taskDetails.substring(0, endIndexOfNoteContent);
 
             notes.add(new Note(noteContent));
         }
@@ -307,14 +315,13 @@ public class Storage {
      */
     public String createSummaryFromTask(Task task) {
         String taskType = task.getTaskType();
-        String  summary = taskType + "|";
+        String summary = taskType + "|";
         summary += (task.isDone()) ? "1|" : "0|";
         summary += task.getTaskName() + "|";
 
         if (taskType.equals("D")) {
             summary = this.createSummaryFromDeadline(task, summary);
-        }
-        else if (taskType.equals("E")) {
+        } else if (taskType.equals("E")) {
             summary = this.createSummaryFromEvent(task, summary);
         }
 

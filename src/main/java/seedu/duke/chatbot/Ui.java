@@ -1,10 +1,10 @@
 package seedu.duke.chatbot;
 
-import seedu.duke.task.Task;
-import seedu.duke.task.TaskList;
-
 import java.io.File;
 import java.util.Scanner;
+
+import seedu.duke.task.Task;
+import seedu.duke.task.TaskList;
 
 /**
  * Handles all interactions with the user.
@@ -42,7 +42,6 @@ public class Ui {
      * @return errorMessage to be said by chatbot
      */
     public static String showError(String errorMessage) {
-        System.out.println(errorMessage);
         return errorMessage;
     }
 
@@ -59,8 +58,8 @@ public class Ui {
      * Used to indicate to user that a file that acts as database has been created.
      * @param myObj which is the file that was created
      */
-     public static String showFileCreated(File myObj) {
-         return "File Created: " + myObj.getName();
+    public static String showFileCreated(File myObj) {
+        return "File Created: " + myObj.getName();
     }
 
     /**
@@ -143,7 +142,7 @@ public class Ui {
     public static String showNote(TaskList taskList, Task taskToShow) {
         return String
                 .format("%s:\n%s",
-                        taskToShow.toString(),taskToShow.getNoteResult());
+                        taskToShow.toString(), taskToShow.getNoteResult());
     }
 
     /**
@@ -153,7 +152,8 @@ public class Ui {
      * @return a string to be printed to user
      */
     public static String showDeleteNoteResult(TaskList taskList, Task updatedTask) {
-        return String.format("Got it! I've deleted the note from %s",updatedTask.toString());
+        return String.format("Got it! I've deleted the note from %s",
+                updatedTask.toString());
     }
 
     /**
@@ -163,7 +163,7 @@ public class Ui {
      * @return a string to be printed to user
      */
     public static String showEditNoteResult(TaskList taskList, Task updatedTask) {
-        return String.format("Got it! I've edited the note from %s",updatedTask.toString());
+        return String.format("Got it! I've edited the note from %s", updatedTask.toString());
     }
 
 }

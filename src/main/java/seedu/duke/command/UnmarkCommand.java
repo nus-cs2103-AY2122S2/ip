@@ -1,10 +1,11 @@
 package seedu.duke.command;
 
 import seedu.duke.chatbot.Storage;
+import seedu.duke.chatbot.Ui;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.IncompleteCommandException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
-import seedu.duke.chatbot.Ui;
 
 /**
  * Created when user wants to unmark a {@link Task} from done to undone.
@@ -25,6 +26,9 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Storage storage) throws DukeException {
+        if (index < 0 || index > taskList.getNumberOfTasks() - 1) {
+            throw new IncompleteCommandException();
+        }
         TaskList newTaskList = taskList.unmark(this.index);
         storage.convertTaskListToFile(newTaskList);
         return newTaskList;

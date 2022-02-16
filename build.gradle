@@ -29,17 +29,28 @@ test {
     }
 }
 
+jar {
+    manifest {
+        attributes "Main-Class": "seedu.duke.gui.Launcher"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 application {
     mainClassName = "seedu.duke.gui.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "NoFace"
+    archiveVersion = "0.3"
     archiveClassifier = null
 }
 
 checkstyle {
-    toolVersion = '8.32'
+    toolVersion = '8.29'
 }
 
 run{

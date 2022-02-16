@@ -1,18 +1,19 @@
 package seedu.duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.task.ToDo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 class TaskListTest {
-    TaskList taskList;
+    private TaskList taskList;
 
     @BeforeEach
     void setUp() {

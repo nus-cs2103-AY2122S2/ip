@@ -1,22 +1,21 @@
 package seedu.duke.chatbot;
 
+import java.io.IOException;
+
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.task.TaskList;
-
-import java.io.IOException;
-
 
 /**
  * Functions as the chatbot by taking in inputs.
  * Also helps in giving out specified outputs.
  */
 public class Duke {
+    private static final String FILE_PATH = "data/";
+    private static final String FILE_NAME = "duke.txt";
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
-    private static final String FILE_PATH = "data/";
-    private static final String FILE_NAME = "duke.txt";
 
     /**
      * Creates the chatbot.

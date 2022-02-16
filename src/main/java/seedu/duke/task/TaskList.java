@@ -1,11 +1,11 @@
 package seedu.duke.task;
 
+import java.util.ArrayList;
+
 import seedu.duke.chatbot.Ui;
+import seedu.duke.exceptions.CommandAlreadyDoneException;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.NoValidTaskIndexException;
-import seedu.duke.exceptions.TaskAlreadyMarkedException;
-
-import java.util.ArrayList;
 
 /**
  * TaskList is used to track all tasks taken in by Duke.
@@ -70,7 +70,7 @@ public class TaskList {
     public TaskList mark(int index) throws DukeException {
         Task taskToUpdate = this.tasks.get(index);
         if (taskToUpdate.isDone()) {
-            throw new TaskAlreadyMarkedException();
+            throw new CommandAlreadyDoneException();
         }
 
         Task newTask = taskToUpdate.changeTaskStatus(true);
@@ -93,7 +93,7 @@ public class TaskList {
 
         Task taskToUpdate = this.tasks.get(index);
         if (!taskToUpdate.isDone()) { //if task is already unmarked
-            throw new TaskAlreadyMarkedException();
+            throw new CommandAlreadyDoneException();
         }
 
         Task newTask = taskToUpdate.changeTaskStatus(false);
@@ -162,7 +162,7 @@ public class TaskList {
      */
     public TaskList replace(int taskIndex, Task updatedTask) {
         ArrayList<Task> updatedTasks = this.copyTaskList();
-        updatedTasks.set(taskIndex,updatedTask);
+        updatedTasks.set(taskIndex, updatedTask);
         return new TaskList(updatedTasks);
     }
 

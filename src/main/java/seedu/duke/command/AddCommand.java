@@ -17,7 +17,7 @@ public class AddCommand extends Command {
      * @param taskToAdd is the {@link Task} to be added to the {@link TaskList}
      */
     public AddCommand(Task taskToAdd) {
-        this.taskToAdd =  taskToAdd;
+        this.taskToAdd = taskToAdd;
     }
 
     /**
