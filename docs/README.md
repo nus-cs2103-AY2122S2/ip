@@ -177,7 +177,7 @@ Expected outcome:
     Now you have 5 task on the list.  
 ```
 
-###Find task
+### Find task
 
 Walle will search for task based on input keywords
 
