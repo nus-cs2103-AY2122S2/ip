@@ -10,6 +10,6 @@ public class ExceptionHandler extends Exception {
 
     @Override
     public String toString() {
-        return " ☹ OOPS!!!" + getMessage();
+        return " ☹ OOPSIESSS!!!" + getMessage();
     }
 }

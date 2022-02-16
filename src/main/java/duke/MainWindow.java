@@ -1,3 +1,5 @@
+
+
 package duke;
 
 import javafx.application.Platform;
@@ -26,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/baby-pooh2.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/peppa.png"));
 
     /**
      * initialises MainWindow GUI
