@@ -1,13 +1,15 @@
 package duke.admin;
 
 import duke.tasks.Task;
+import duke.tasks.Trigger;
 
 /**
  * Ui is a class that manages the bulk of the user interaction required by the
  * program.
  */
 public class Ui {
-
+    private static final Trigger noChangeTrigger = new Trigger("n0 cH4Ng3$ d#t3CtEd");
+    
     /**
      * Prints out a welcome message when the user boots the program.
      */
@@ -70,20 +72,19 @@ public class Ui {
      * @return a string to inform the user that the mark is changed.
      */
     public static String showChangeMarkMessage(Task task, boolean toMark) {
-        return toMark ? "Nice! I've marked this task as done:\n" + task.toString()
-                : "OK, I've marked this task as not done yet:\n" + task.toString();
-    }
+        if (task.toString().equals(noChangeTrigger.toString())) {
+            String message = "The task is already ";
+            String messageSuffix = toMark ? "marked." : "unmarked.";
 
-    /**
-     * Returns a message to inform the user that the task is already marked or unmarked.
-     * @param toMark if the command wishes to mark the task or not
-     * @return a message to inform the user that the task is already marked or unmarked
-     */
-    public static String showNoChangeMarkMessage(boolean toMark) {
-        String message = "The task is already ";
-        String messageSuffix = toMark ? "marked." : "unmarked.";
+            return message + messageSuffix;
+        } else {
+            String taskDescription = task.toString();
+            String messagePrefix = toMark ? "Nice! I've marked this task as done:\n"
+                    : "OK, I've marked this task as not done yet:\n";
 
-        return message + messageSuffix;
+            return messagePrefix + taskDescription;
+        }
+
     }
 
     /**

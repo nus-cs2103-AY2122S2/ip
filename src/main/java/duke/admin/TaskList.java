@@ -7,6 +7,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+import duke.tasks.Trigger;
 
 /**
  * TaskList class manages the task list and the actions that can be performed on
@@ -14,6 +15,7 @@ import duke.tasks.ToDo;
  */
 public class TaskList {
     private static final String BUFFER = " xxx ";
+    private static final Trigger noChangeTrigger = new Trigger("n0 cH4Ng3$ d#t3CtEd");
     private ArrayList<Task> tasks;
 
     /**
@@ -122,7 +124,11 @@ public class TaskList {
             searchResultString = searchResultString + result + System.lineSeparator();
         }
 
-        return searchResultString;
+        if (searchResultString.equals("")) {
+            return "There's nothing that contains the keyword!";
+        } else {
+            return "These are the matching tasks:\n" + searchResultString;
+        }
     }
 
     /**
@@ -142,9 +148,11 @@ public class TaskList {
 
         if (isChangingMark) {
             taskToChange.toggleMark();
+            return taskToChange;
+        } else {
+            return noChangeTrigger;
         }
 
-        return taskToChange;
     }
 
     /**
