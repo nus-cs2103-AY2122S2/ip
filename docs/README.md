@@ -89,7 +89,13 @@ Syntax: `delete INDEX [OTHER_INDEX]`
 
 Example: `delete 2`, `delete 2 3 5 7`, `delete all`
 
-Picture here.
+Delete a single task
+
+![Delete Single](Images/delete-single.png)
+
+Delete all tasks
+
+![Delete All](Images/delete-all.png)
 
 ### Mark a task - `mark`
 
@@ -141,4 +147,4 @@ Syntax: `find KEYWORD [OTHER_KEYWORDS]`
 -   The order of the keywords does not matter `assignment quiz` will have the same results as `quiz assignment`.
 -   The keywords searched is case-insensitive `assignment` and `assiGnmenT` will return the same results
 
-Picture here.
+![Find](Images/find.png)
