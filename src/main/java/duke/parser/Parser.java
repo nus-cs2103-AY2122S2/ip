@@ -12,10 +12,13 @@ import duke.command.AddTodoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FilterTaskCommand;
 import duke.command.FindTaskCommand;
 import duke.command.ListCommand;
 import duke.command.MarkTaskCommand;
+import duke.command.SortTaskCommand;
 import duke.common.Messages;
+import duke.common.TaskType;
 
 public class Parser {
     private static final String DEFAULT_DATE_FORMAT = "d/MM/yyyy HHmm";
@@ -41,6 +44,12 @@ public class Parser {
             userInput = String.join(" ",
                     Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
             return new FindTaskCommand(userInput);
+        case "sort":
+            String sortType = userInputArr.length < 2 ? "" : userInputArr[1];
+            return prepareSortTasksCommand(sortType);
+        case "filter":
+            String filterType = userInputArr.length < 2 ? "" : userInputArr[1];
+            return prepareFilterTasksCommand(filterType);
         case "list":
             return new ListCommand();
         case "bye":
@@ -114,6 +123,22 @@ public class Parser {
         String dueBy = taskArr[1];
 
         return new AddDeadlineCommand(title, parseDateTime(dueBy));
+    }
+
+    private static Command prepareSortTasksCommand(String userInput) throws DukeException {
+        TaskType taskType = TaskType.parseTaskType(userInput);
+        if (taskType == TaskType.TASK || taskType == TaskType.TODO || taskType == TaskType.INVALID) {
+            throw new DukeException(Messages.MESSAGE_ERROR_INVALID_SORT_TYPE);
+        }
+        return new SortTaskCommand(taskType);
+    }
+
+    private static Command prepareFilterTasksCommand(String userInput) throws DukeException {
+        TaskType taskType = TaskType.parseTaskType(userInput);
+        if (taskType == TaskType.TASK || taskType == TaskType.INVALID) {
+            throw new DukeException(Messages.MESSAGE_ERROR_INVALID_FILTER_TYPE);
+        }
+        return new FilterTaskCommand(taskType);
     }
 
     private static boolean validateCommandInput(String[] inputWithDate) {

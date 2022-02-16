@@ -1,9 +1,11 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
+import duke.common.TaskType;
 
 /**
  * A class that represents a task list.
@@ -62,10 +64,45 @@ public class TaskList {
     }
 
     /**
+     * Filters task list based on the task type.
+     *
+     * @param taskType The task type to be filtered.
+     * @return A filtered and sortable task list based on the supplied task type.
+     */
+    public TaskList filterTasks(TaskType taskType) throws DukeException {
+        ArrayList<Task> filteredTask = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.hasSameTaskType(taskType)) {
+                // Only sortable task will make it through this block
+                filteredTask.add(task);
+            }
+        }
+        return new TaskList(filteredTask);
+    }
+
+    /**
+     * Filters sortable task list based on the task type.
+     *
+     * @param taskType The sortable task type to be filtered.
+     * @return A filtered and sortable task list based on the supplied task type.
+     */
+    public ArrayList<? extends Sortable> filterSortableTasks(TaskType taskType) throws DukeException {
+        ArrayList<Sortable> filteredTask = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.hasSameTaskType(taskType)) {
+                // Only sortable task will make it through this block
+                filteredTask.add((Sortable) task);
+            }
+        }
+        return filteredTask;
+    }
+
+    /**
      * Deletes a task object from the task list based on the id supplied.
      *
      * @param taskId The id of the targeted task.
-     * @throws DukeException
+     * @throws DukeException If the task id is out of the task list index range,
+     * it throws a DukeException.
      */
     public void deleteTask(int taskId) throws DukeException {
         try {
@@ -83,6 +120,33 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e.getMessage());
         }
+    }
+
+    /**
+     * Filters task list based on the task type.
+     *
+     * @param taskType The class type in the task list
+     * @return A filtered task list based on the supplied task type.
+     */
+    public TaskList sortTasks(TaskType taskType) throws DukeException {
+        ArrayList<? extends Sortable> filteredTasks = this.filterSortableTasks(taskType);
+        if (taskType == TaskType.DEADLINE) {
+            @SuppressWarnings("unchecked")
+            ArrayList<Deadline> deadlineTasks = (ArrayList<Deadline>) filteredTasks;
+            return new TaskList(deadlineTasks.stream()
+                .sorted(Comparator.comparing(Deadline :: getLocalDateTime))
+                .collect(Collectors.toCollection(ArrayList::new)));
+        }
+
+        if (taskType == TaskType.EVENT) {
+            @SuppressWarnings("unchecked")
+            ArrayList<Event> eventTasks = (ArrayList<Event>) filteredTasks;
+
+            return new TaskList(eventTasks.stream()
+                .sorted(Comparator.comparing(Event :: getLocalDateTime))
+                .collect(Collectors.toCollection(ArrayList::new)));
+        }
+        return new TaskList();
     }
 
     public int getSize() {

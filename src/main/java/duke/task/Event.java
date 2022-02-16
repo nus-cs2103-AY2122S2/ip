@@ -4,11 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
+import duke.common.TaskType;
 
 /**
  * A class that represents an event with date.
  */
-public class Event extends Task {
+public class Event extends Task implements Sortable {
     private static final String DEFAULT_DATE_FORMAT = "dd MMMM yyyy HHmm";
     private static final String SAVE_FILE_DATE_FORMAT = "d/MM/yyyy HHmm";
     private final LocalDateTime eventAt;
@@ -20,8 +21,12 @@ public class Event extends Task {
      * @param eventAt The date of the event.
      */
     public Event(String title, LocalDateTime eventAt) {
-        super(title);
+        super(title, TaskType.EVENT);
         this.eventAt = eventAt;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return this.eventAt;
     }
 
     /**

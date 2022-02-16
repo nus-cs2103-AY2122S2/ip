@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.common.TaskType;
+
 /**
  * A class that represents a todo.
  */
@@ -10,7 +12,7 @@ public class Todo extends Task {
      * @param title The title of the todo.
      */
     public Todo(String title) {
-        super(title);
+        super(title, TaskType.TODO);
     }
 
     @Override

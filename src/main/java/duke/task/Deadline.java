@@ -4,11 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
+import duke.common.TaskType;
 
 /**
  * A class that represents a task with deadline.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Sortable {
     private static final String DEFAULT_DATE_FORMAT = "dd MMMM yyyy HHmm";
     private static final String SAVE_FILE_DATE_FORMAT = "d/MM/yyyy HHmm";
     private final LocalDateTime dueBy;
@@ -20,8 +21,12 @@ public class Deadline extends Task {
      * @param dueBy The due date of the deadline.
      */
     public Deadline(String title, LocalDateTime dueBy) {
-        super(title);
+        super(title, TaskType.DEADLINE);
         this.dueBy = dueBy;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return this.dueBy;
     }
 
     /**

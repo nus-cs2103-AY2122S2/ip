@@ -37,7 +37,7 @@ public class TextUi {
      * @return The formatted execution message.
      */
     public static String showExecutionMessage(String message, String taskString, int size) {
-        String displaySize = String.format("Now you have %s task%s in the list.", size, Parser.parseTaskSize(size));
+        String displaySize = String.format("Now you have %s task%s in the list.\n", size, Parser.parseTaskSize(size));
         return showToUser(message, taskString, displaySize);
     }
 
