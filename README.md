@@ -9,8 +9,8 @@ Duke is a spy monkey that helps you manage your calendar so you can focus on wor
 
 All you need to do is,
 
-1. download it from [here](url).
-2. double-click it.
+1. download it from [here](https://github.com/aidanaden/ip/releases/download/A-Release/ip-Duke-0.2.jar).
+2. run the command `java -jar ip-Duke-0.2.jar` (make sure you have java 11 installed)
 3. add your tasks/events and their respective start/end times.
 4. run the `list` command to view your tasks!
 
