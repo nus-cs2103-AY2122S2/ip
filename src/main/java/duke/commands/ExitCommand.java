@@ -16,9 +16,9 @@ public class ExitCommand extends Command{
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         storage.store(tasks.toList());
-        ui.showExit();
+        return ui.showExit();
     }
 
     @Override

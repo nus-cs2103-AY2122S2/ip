@@ -17,7 +17,7 @@ public class Command {
     /**
      * Executes the command.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         throw new DukeException("This method is to be implemented by child classes");
     };
 

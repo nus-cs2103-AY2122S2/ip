@@ -15,14 +15,15 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        System.out.println(
-                "\t" + AddTodoCommand.MESSAGE_USAGE
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        String msg = "\t" + AddTodoCommand.MESSAGE_USAGE
                 + "\n\t" + AddEventCommand.MESSAGE_USAGE
                 + "\n\t" + AddDeadlineCommand.MESSAGE_USAGE
                 + "\n\t" + DeleteCommand.MESSAGE_USAGE
                 + "\n\t" + ListCommand.MESSAGE_USAGE
                 + "\n\t" + HelpCommand.MESSAGE_USAGE
-                + "\n\t" + ExitCommand.MESSAGE_USAGE);
+                + "\n\t" + ExitCommand.MESSAGE_USAGE + "\n";
+        System.out.print(msg);
+        return msg;
     }
 }

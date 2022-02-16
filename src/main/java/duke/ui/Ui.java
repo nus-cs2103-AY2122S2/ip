@@ -51,8 +51,10 @@ public class Ui {
     /**
      * Prints out the goodbye words.
      */
-    public void showExit() {
-        System.out.println("\t Bye. Hope to see you again soon!");
+    public String showExit() {
+        String msg = "\t Bye. Hope to see you again soon!\n";
+        System.out.print(msg);
+        return msg;
     }
 
     /**
@@ -80,9 +82,10 @@ public class Ui {
      *
      * @param tasks a list of all tasks
      */
-    public void list(TaskList tasks) {
-        String msg = tasks.toString();
-        System.out.print("\t Here are the tasks in your list:\n" + msg);
+    public String list(TaskList tasks) {
+        String msg = "\t Here are the tasks in your list:\n" + tasks.toString();
+        System.out.print(msg);
+        return msg;
     }
 
     /**
@@ -90,11 +93,13 @@ public class Ui {
      *
      * @param tasks a list of tasks to be printed
      */
-    public void find(List<Task> tasks) {
-        System.out.println("\t Here are the matching tasks in your list:");
+    public String find(List<Task> tasks) {
+        String msg = "\t Here are the matching tasks in your list:";
         for (Task t : tasks) {
-            System.out.println("\t " + t.toString());
+            msg += "\t " + t.toString() + "\n";
         }
+        System.out.print(msg);
+        return msg;
     }
 
     /**
@@ -102,8 +107,10 @@ public class Ui {
      *
      * @param t a task that has been marked.
      */
-    public void mark(Task t) {
-        System.out.println("\t Nice! I've marked this task as done:\n\t   " + t.toString());
+    public String mark(Task t) {
+        String msg = "\t Nice! I've marked this task as done:\n\t   " + t.toString();
+        System.out.println(msg);
+        return msg;
     }
 
     /**
@@ -111,8 +118,10 @@ public class Ui {
      *
      * @param t a task that has been unmarked.
      */
-    public void unmark(Task t) {
-        System.out.println("\t OK, I've marked this task as not done yet:\n\t   " + t.toString());
+    public String unmark(Task t) {
+        String msg = "\t OK, I've marked this task as not done yet:\n\t   " + t.toString();
+        System.out.println(msg);
+        return msg;
     }
 
     /**
@@ -121,9 +130,11 @@ public class Ui {
      * @param t the task which was just added.
      * @param size the size of the tasklist after removing the above task.
      */
-    public void showAddTask(Task t, int size) {
-        System.out.println("\t Got it. I've added this task:\n\t   " + t.toString()
-                + "\n\t Now you have " + size + " tasks in the list.");
+    public String showAddTask(Task t, int size) {
+        String msg = "\t Got it. I've added this task:\n\t   " + t.toString()
+                + "\n\t Now you have " + size + " tasks in the list.\n";
+        System.out.print(msg);
+        return msg;
     }
         
     /**
@@ -132,8 +143,10 @@ public class Ui {
      * @param t the task to be removed.
      * @param size the size of the task list after removing the above task.
      */
-    public void delete(Task t, int size) {
-        System.out.println("\t Noted. I've removed this task:\n\t   " + t.toString()
-                + "\n\t Now you have " + size + " tasks in the list.");
+    public String delete(Task t, int size) {
+        String msg = "\t Noted. I've removed this task:\n\t   " + t.toString()
+                + "\n\t Now you have " + size + " tasks in the list.\n";
+        System.out.print(msg);
+        return msg;
     }
 }

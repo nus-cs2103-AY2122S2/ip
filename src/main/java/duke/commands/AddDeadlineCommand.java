@@ -27,9 +27,9 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(toAdd);
-        ui.showAddTask(toAdd, tasks.getSize());
+        return ui.showAddTask(toAdd, tasks.getSize());
     }
 
     @Override
