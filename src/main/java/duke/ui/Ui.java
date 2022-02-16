@@ -105,7 +105,7 @@ public class Ui {
     public String showTodoTaskAdded(Task todo, TaskList taskList) {
         String result = "";
         result += "Got it, I have added a TODO task:\n";
-        result += todo.toString();
+        result += todo.toString() + '\n';
         result += "Now you have " + taskList.size() + " tasks in the list.\n";
         return result;
     }
@@ -119,7 +119,7 @@ public class Ui {
     public String showDeadlineTaskAdded(Task deadline, TaskList taskList) {
         String result = "";
         result += "Got it, I have added a DEADLINE task:\n";
-        result += deadline.toString();
+        result += deadline.toString() + '\n';
         result += "Now you have " + taskList.size() + " tasks in the list.\n";
         return result;
     }
@@ -133,7 +133,7 @@ public class Ui {
     public String showEventTaskAdded(Task event, TaskList taskList) {
         String result = "";
         result += "Got it, I have added an EVENT task:\n";
-        result += event.toString();
+        result += event.toString() + '\n';
         result += "Now you have " + taskList.size() + " tasks in the list.\n";
         return result;
     }
