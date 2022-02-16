@@ -1,8 +1,8 @@
-package command;
+package tesseract.command;
 
-import main.Storage;
-import main.TaskList;
-import main.TessUi;
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
 
 /**
  * Represent a command to list all tasks.

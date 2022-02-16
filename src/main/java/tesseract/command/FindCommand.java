@@ -1,8 +1,8 @@
-package command;
+package tesseract.command;
 
-import main.Storage;
-import main.TaskList;
-import main.TessUi;
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
 
 /**
  * Create a command to find tasks according to a keyword.

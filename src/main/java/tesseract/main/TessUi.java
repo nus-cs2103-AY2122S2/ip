@@ -1,4 +1,5 @@
-package main;
+package tesseract.main;
+
 /**
  * Represent the user interface of Tesseract.
  * @author Fan Jue

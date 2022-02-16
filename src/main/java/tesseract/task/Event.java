@@ -1,6 +1,6 @@
-package task;
+package tesseract.task;
 
-import main.Date;
+import tesseract.main.Date;
 
 /**
  * Represent an event, which is a type of task.

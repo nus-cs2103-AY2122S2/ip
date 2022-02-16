@@ -1,12 +1,12 @@
-package main;
+package tesseract.main;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import tesseract.task.Deadline;
+import tesseract.task.Event;
+import tesseract.task.Task;
+import tesseract.task.Todo;
 
 
 /**

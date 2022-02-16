@@ -1,4 +1,4 @@
-package main;
+package tesseract.main;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,13 +27,15 @@ public class Storage {
     protected String path;
     /** A boolean value of whether the storage has been modified */
     protected boolean updated;
+    private final String directory;
 
     /**
      * Create a temporary storage to access memory in hard disk.
      *
      * @param path The path to access memory in the hard disk.
      */
-    public Storage(String path) {
+    public Storage(String dir, String path) {
+        this.directory = dir;
         this.path = path;
         this.file = new File(path);
         this.updated = FALSE;
@@ -53,11 +55,14 @@ public class Storage {
                 tasks.add(sc.nextLine()); // sc.nextLine()).split("@", 4);
             }
         } catch (IOException e) {
+            File direct = new File(directory);
+            direct.mkdir();
             try {
                 this.file.createNewFile();
             } catch (IOException err) {
                 throw new TesseractException(CREATE_FILE_FAILURE);
             }
+            assert this.file.exists();
         }
         return tasks;
     }

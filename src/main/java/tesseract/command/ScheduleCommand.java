@@ -1,9 +1,9 @@
-package command;
+package tesseract.command;
 
-import main.Date;
-import main.Storage;
-import main.TaskList;
-import main.TessUi;
+import tesseract.main.Date;
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
 
 /**
  * Represent a command to display the schedule on a given date.

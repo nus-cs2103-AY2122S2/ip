@@ -1,4 +1,4 @@
-package main;
+package tesseract.main;
 
 /**
  * Represent exceptions specific to Tesseract.

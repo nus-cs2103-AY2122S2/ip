@@ -1,6 +1,7 @@
-package main;
+package tesseract.main;
 
-import command.Command;
+import javafx.application.Application;
+import tesseract.command.Command;
 
 
 
@@ -11,7 +12,8 @@ import command.Command;
  * @since 0.1.0
  */
 public class Tesseract {
-    static final String SCHEDULE_PATH = "src/main/Data/Schedule.txt";
+    private static final String DIRECTORY = "data";
+    private static final String SCHEDULE_PATH = DIRECTORY + "/Schedule.txt";
 
     /** A storage to access memory from hard disk */
     private final Storage storage;
@@ -20,8 +22,11 @@ public class Tesseract {
     /** A UI to interact with user */
     private final TessUi ui;
 
-    Tesseract() {
-        this.storage = new Storage(SCHEDULE_PATH); // try getStorage
+    /**
+     * Constructor of a Tesseract.
+     */
+    public Tesseract() {
+        this.storage = new Storage(DIRECTORY, SCHEDULE_PATH); // try getStorage
         this.ui = new TessUi();
         try {
             taskList = new TaskList(storage.getStorage());
@@ -54,5 +59,9 @@ public class Tesseract {
 
     public String admitBug() {
         return ui.admitBug();
+    }
+
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 }

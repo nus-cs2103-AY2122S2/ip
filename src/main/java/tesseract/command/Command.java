@@ -1,10 +1,10 @@
-package command;
+package tesseract.command;
 
-import main.Date;
-import main.Storage;
-import main.TaskList;
-import main.TessUi;
-import main.TesseractException;
+import tesseract.main.Date;
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
+import tesseract.main.TesseractException;
 
 
 /**

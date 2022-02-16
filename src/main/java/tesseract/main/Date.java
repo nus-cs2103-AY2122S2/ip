@@ -1,4 +1,4 @@
-package main;
+package tesseract.main;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

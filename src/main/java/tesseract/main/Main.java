@@ -1,12 +1,12 @@
-package main;
+package tesseract.main;
 import java.io.IOException;
 
-import GUI.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tesseract.GUI.MainWindow;
 
 /**
  * A GUI for Tesseract using FXML.

@@ -1,9 +1,9 @@
-package command;
+package tesseract.command;
 
-import main.Storage;
-import main.TaskList;
-import main.TessUi;
-import task.Task;
+import tesseract.main.Storage;
+import tesseract.main.TaskList;
+import tesseract.main.TessUi;
+import tesseract.task.Task;
 
 /**
  * Represent a command to archive a task.
