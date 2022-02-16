@@ -18,6 +18,7 @@ public class DeleteTask {
         int taskNum = Integer.parseInt(number) - 1;
         sb.append("Noted. I've removed this task:\n");
         sb.append(list.get(taskNum).toString() + "\n");
+        assert !(taskNum < 0);
         list.remove(taskNum);
         return sb.toString();
     }

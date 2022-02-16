@@ -27,6 +27,7 @@ public class Command {
         int taskCount = list.size();
         String[] tempList = inputText.split(" ", 2);
 
+        assert !(taskCount < 0);
         try {
             new DukeException().invalidChecker(tempList, taskCount);
         } catch (DukeException e) {

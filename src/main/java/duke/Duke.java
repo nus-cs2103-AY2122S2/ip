@@ -12,11 +12,6 @@ public class Duke {
     private Command command;
 
     /**
-     * Default constructor for Duke.
-     */
-    public Duke() {}
-
-    /**
      * Initializes the application by loading files and checking for errors.
      */
     public Duke(String filePath) {
