@@ -1,4 +1,6 @@
 package Duke.tasks;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event extends Task{
@@ -14,9 +16,15 @@ public class Event extends Task{
         return this.date;
     }
 
+    String convertDate() {
+        DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HHmm");
+        String date = dateFormat.format(this.date);
+        return  date;
+    }
+
     @Override
     public String toString() {
         return String.format("E | %s | %s | %s", this.getStatusIcon(), super.toString(),
-            this.date);
+            convertDate());
     }
 }

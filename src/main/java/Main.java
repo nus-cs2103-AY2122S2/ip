@@ -25,6 +25,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Cortana");
             stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/cortana.jpg")));
+            stage.setResizable(false);
             stage.show();
             //System.out.println("x");
         } catch (IOException e) {

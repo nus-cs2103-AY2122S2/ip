@@ -53,7 +53,7 @@ public class TaskList {
         marking.isDone = true;
         this.tasklist.set(act, marking);
         String output = MARK + "\n";
-        output += marking.getDescription();
+        output += marking.toString();
         return output;
     }
 
@@ -70,7 +70,7 @@ public class TaskList {
         this.tasklist.set(act, unmarking);
         System.out.println(UNMARK);
         String output = UNMARK + "\n";
-        output += unmarking.getDescription();
+        output += unmarking.toString();
         return output;
     }
     /**

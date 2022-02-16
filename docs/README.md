@@ -71,7 +71,7 @@ Format:
 `event <description> on <date in dd/MM/yyyy HHmm format>`
 
 Example:
-`event The endless will unleash /at 15/12/2560 HHmm`
+`event The endless will unleash /at 15/12/2560`
 
 ### Marking a task as complete
 

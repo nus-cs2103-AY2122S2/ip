@@ -30,10 +30,8 @@ public class Storage {
             try {
                 File file  = new File(this.filePath);
                 Scanner sc = new Scanner(file);
-                //System.out.println(sc.nextLine());
                 while(sc.hasNextLine()) {
                     String task = sc.nextLine();
-                    //String a = "D | 0 | eat food | Sat Oct 10 00:00:00 SGT 2020";
                     String[] different = task.split(" \\| ", 4);
 
                     Task item;
@@ -73,7 +71,6 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             BufferedWriter br = new BufferedWriter(fw);
             for (int i = 0; i < tasks.size(); i++) {
-                //System.out.println(tasks.get(i) + "output");
                 br.write(tasks.get(i).toString());
                 br.write("\n");
             }
