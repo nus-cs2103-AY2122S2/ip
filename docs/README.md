@@ -43,6 +43,7 @@ To execute the command, simply replace [...] according to your own needs.
 6. `schedule [date]` - list out the tasks happening on this day *(time is not accepted yet!)*
 7. `find [keyword]` - list the tasks that include the specified keyword
 8. `clear` - empty the task list
+9. `bye` - save the list and say bye to Sona!
 
 ###Special command:
 The **update command** edits the specified task. In one command, you can only change the task type, its description OR the date.

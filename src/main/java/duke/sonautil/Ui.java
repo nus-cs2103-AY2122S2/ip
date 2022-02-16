@@ -448,14 +448,14 @@ public class Ui {
                 "* Note that the dates must be in the format of YYYY-MM-DD HHMM, and time is optional!\n\n" +
                 "*~*~*~*~*~*~*~*~*~*~*~*~*\n\n" +
                 "Other commands:\n" +
-                "    1. list --> I will list out all the tasks you have added\n" +
-                "    2. mark [task #] -> I will mark this task as done\n" +
-                "    3. unmark [task #] -> I will mark this task as not done\n" +
-                "    4. delete [task #] -> I will delete this task for you\n" +
-                "    5. schedule [YYYY-MM-DD] -> I will list out all your tasks on this day\n" +
-                "    6. find [keyword] -> I will list all the tasks that has this keyword\n" +
-                "    7. clear -> I will clear all the tasks in your list\n" +
-                "    8. bye -> I will save all your tasks and say byebye to you~!\n\n" +
+                "    1. list --> list out all the tasks added\n" +
+                "    2. mark [task #] -> mark this task as done\n" +
+                "    3. unmark [task #] -> mark this task as not done\n" +
+                "    4. delete [task #] -> delete this task for you\n" +
+                "    5. schedule [YYYY-MM-DD] -> list out all your tasks on this day\n" +
+                "    6. find [keyword] -> list all the tasks that has this keyword\n" +
+                "    7. clear -> clear all the tasks in your list\n" +
+                "    8. bye -> save all your tasks and say byebye to you~!\n\n" +
                 "*~*~*~*~*~*~*~*~*~*~*~*~*\n\n" +
                 "Special command: update -> Send 'update guide' to find out more!";
 
