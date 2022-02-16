@@ -27,7 +27,7 @@ List out all the tasks currently in your task list.
 ### `todo` - Adds todo task
 
 Adds the todo task into your task list, only if the task is not a duplicate.
-Todo tasks are tasks without any date/time attached to it, ie. only descriptions.
+Todo tasks are tasks without any date/time attached to it, i.e. only descriptions.
 
 Example of usage: 
 
@@ -45,6 +45,7 @@ You currently have 1 tasks on the list >.< Jiayous
 
 Adds the deadline task into your task list, only if the task is not a duplicate.
 Deadline tasks are tasks that need to be done before a specific date/time.
+The date format is in yyyy-mm-dd (e.g., 2019-10-15).
 
 Example of usage:
 
@@ -62,6 +63,7 @@ You currently have 2 tasks on the list >.< Jiayous
 
 Adds the event task into your task list, only if the task is not a duplicate.
 Event tasks are tasks that start at a specific time and ends at a specific time.
+The date format is in yyyy-mm-dd (e.g., 2019-10-15).
 
 Example of usage:
 
@@ -176,6 +178,7 @@ You currently have 3 tasks on the list >.< Jiayous
 ### `fdeadline` - Force add the deadline task
 
 Adds the deadline task regardless of whether the task is a duplicate.
+The date format is in yyyy-mm-dd (e.g., 2019-10-15).
 
 Example of usage:
 
@@ -191,7 +194,8 @@ You currently have 4 tasks on the list >.< Jiayous
 
 ### `fevent` - Force add the event task
 
-Adds the event task regardless of whether the task is a duplicate
+Adds the event task regardless of whether the task is a duplicate.
+The date format is in yyyy-mm-dd (e.g., 2019-10-15).
 
 Example of usage:
 
@@ -207,7 +211,7 @@ You currently have 5 tasks on the list >.< Jiayous
 
 ### `bye` - Terminates the Aeromon bot
 
-Ends the chat bot.
+Ends the chatbot and exits the GUI.
 
 Example of usage:
 
