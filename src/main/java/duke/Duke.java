@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.TextUi;
 
 public class Duke {
     public static final String DEFAULT_FILE_NAME = "tasks.txt";
@@ -12,6 +11,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Creates a Duke instance with a filename.
+     * @param fileName The filename for save file.
+     */
     public Duke(String fileName) {
         try {
             storage = new Storage(fileName);
@@ -25,6 +28,12 @@ public class Duke {
         this(DEFAULT_FILE_NAME);
     }
 
+    /**
+     * Retrieves the response after a user input.
+     *
+     * @param fullCommand The user input command.
+     * @return The string of the GUI message.
+     */
     protected String getResponse(String fullCommand) {
         try {
             Command c = Parser.parse(fullCommand);

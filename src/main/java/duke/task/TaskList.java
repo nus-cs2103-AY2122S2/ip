@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import duke.DukeException;
 
+/**
+ * A class that represents a task list.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -16,6 +19,14 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Marks a task in the task list as done or undone.
+     *
+     * @param taskId The id of the targeted task.
+     * @param isDone The mark status of the targeted task.
+     * @throws DukeException If the task id is out of the index bound,
+     * it throws a DukeException.
+     */
     public void markTask(int taskId, boolean isDone) throws DukeException {
         assert taskId > 0 : "Task id should be greater than 0";
         try {
@@ -29,6 +40,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds task into task list.
+     *
+     * @param task The given task.
+     */
     public void addTask(Task task) {
         assert task != null : "Cannot add empty task to task list";
         tasks.add(task);
@@ -37,14 +53,20 @@ public class TaskList {
     /**
      * Filters task list based on the supplied keywords.
      *
-     * @param keywords The keywords to search for in the task list
+     * @param keyword The keywords to search for in the task list
      * @return A filtered task list based on the supplied keywords.
      */
-    public TaskList filterTasks(String keywords) {
-        return new TaskList(this.tasks.stream().filter(task -> task.hasKeywords(keywords))
+    public TaskList filterTasks(String keyword) {
+        return new TaskList(this.tasks.stream().filter(task -> task.hasKeywords(keyword))
                 .collect(Collectors.toCollection(ArrayList::new)));
     }
 
+    /**
+     * Deletes a task object from the task list based on the id supplied.
+     *
+     * @param taskId The id of the targeted task.
+     * @throws DukeException
+     */
     public void deleteTask(int taskId) throws DukeException {
         try {
             assert taskId > 0 : "Task id should be greater than 0";
