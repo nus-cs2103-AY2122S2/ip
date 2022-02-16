@@ -28,7 +28,7 @@ Got it! I've added this task:
 There is 1 task in the list now.    
 ```
 
-###
+
 ### Adding Task: `deadline`
 
 Adds a task that needs to be done by a specific date and time to a list.
@@ -46,7 +46,7 @@ Got it! I've added this task:
 There are 2 tasks in the list now.    
 ```
 
-###
+
 ### Adding Task: `event`
 
 Adds a task that takes place at a specific date and time to a list.
@@ -64,7 +64,7 @@ Got it! I've added this task:
 There are 3 tasks in the list now.    
 ```
 
-###
+
 ### Listing Tasks: `list`
 
 Displays list of all added tasks.
@@ -81,7 +81,7 @@ Here are the tasks in your list:
     3. [E][] interview (at: 21 Feb 2022, 10:00 AM)
 ```
 
-###
+
 ### Deleting Task: `delete`
 
 Deletes the specified task from the list.
@@ -98,7 +98,7 @@ Okay, I've deleted this task:
 There are 2 tasks in the list now.    
 ```
 
-###
+
 ### Marking Task: `mark`
 
 Marks a specified task as complete.
@@ -114,7 +114,7 @@ Nice! You've completed this task:
     [T][X] return book        
 ```
 
-###
+
 ### Unmarking Task: `unmark`
 
 Marks a specified task as complete.
@@ -130,7 +130,7 @@ Okay, I've marked this task as undone:
     [T][] return book        
 ```
 
-###
+
 ### Finding Task: `find`
 
 Find tasks which descriptions contain the specified keyword.
@@ -148,7 +148,7 @@ Here are the matching tasks in your list:
     1. [D][] submit assignment (by: 19 Feb 2022, 1:00 PM)
 ```
 
-###
+
 ### Updating Task: `update`
 
 Updates a task with a given new description.
@@ -166,7 +166,7 @@ Done! This is the updated task:
     [E][] interview (at: 21 Feb 2022, 12:00 PM)
 ```
 
-###
+
 ### Exiting Application: `bye`
 
 Closes the app after goodbye message.
@@ -179,17 +179,4 @@ Expected outcome:
 ```
 "Bye! Hope to see you again soon!"
 ```
-###
-## Command Summary
-| Action | Format                                                                                                                   |
-|--------|--------------------------------------------------------------------------------------------------------------------------|
-| Add    | `todo DESCRIPTION`<br/> `deadline DESCRIPTION /by DATE TIME`<br/> `event DESCRIPTION /at DATE TIME`                      |
-| List   | `list`                                                                                                                   | 
-| Delete | `delete INDEX`                                                                                                           |
-| Mark   | `mark INDEX`                                                                                                             |
-| Unmark | `unmark INDEX`                                                                                                           |
-| Update | `update INDEX DESCRIPTION` <br/> `update INDEX DESCRIPTION /by DATE TIME` <br/> `update INDEX DESCRIPTION /at DATE TIME` |
-| Find   | `find KEYWORD`                                                                                                           |
-| Exit   | `bye`                                                                                                                    |
-
-
+                                                                                                                   |
