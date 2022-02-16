@@ -3,6 +3,7 @@ package duke.commands;
 import duke.system.Storage;
 import duke.system.TaskList;
 import duke.system.Ui;
+import javafx.application.Platform;
 
 /**
  * The ExitCommand class contains the basic
@@ -23,6 +24,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        Platform.exit();
+        System.exit(0);
         return ui.showExit();
     }
 }
