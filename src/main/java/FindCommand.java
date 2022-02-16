@@ -4,15 +4,15 @@ import java.io.IOException;
  * Command to find a Task based on a keyword.
  */
 public class FindCommand extends Command {
-    private final String keyword;
+    private final String[] inputs;
 
     /**
      * Constructor to keep track of the keyword used.
-     * @param keyword Used to find a task.
+     * @param req Used to find a task.
      */
-    public FindCommand(String keyword) {
+    public FindCommand(String ... req) {
 
-        this.keyword = keyword;
+        this.inputs = req;
     }
 
     /**
@@ -23,6 +23,8 @@ public class FindCommand extends Command {
      * @throws IOException
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        return ui.printReq(taskList.findTasks(this.keyword));
+
+        return ui.printSomeTasks(taskList.findTasks(this.inputs));
+
     }
 }

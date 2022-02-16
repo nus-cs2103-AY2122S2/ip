@@ -13,7 +13,7 @@ public abstract class Command {
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
 
-    public void toggleExit() {
+    public void Exit() {
 
         this.exit = !this.exit;
     }

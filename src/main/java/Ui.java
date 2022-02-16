@@ -30,7 +30,9 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 1; i <= taskList.size(); i++) {
-            sb.append(i).append(". ").append(taskList.get(i - 1).toString());
+
+            toReturn.append(i).append(" . ").append(taskList.get(i - 1).toString()).append(System.lineSeparator());
+
         }
           return sb.toString();
     }
