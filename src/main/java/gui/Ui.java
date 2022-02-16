@@ -59,7 +59,6 @@ public class Ui {
         for (int i = 0; i < tasklist.get().size(); i++){
             s += tasklist.get().get(i).toString();
         }
-        s += "__________________________________________________________________";
         return s;
     }
 
@@ -74,7 +73,6 @@ public class Ui {
         for (int i = 0; i < tasklist.size(); i++){
            s += tasklist.get(i).toString();
         }
-        s += "__________________________________________________________________";
         return s;
     }
 

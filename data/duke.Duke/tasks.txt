@@ -1,16 +1,9 @@
-T---false--- eat coke---
-T---false--- eat battery---
 D---false--- buy berries ---Jan 01 2020 07:00 PM
-E---false--- eat berries ---eat death of the universe
 T---true--- test out Duke---
-E---false--- eat mouse---tmr
 D---true--- eat rat ---22222
-T---false--- use phone---
-T---false--- cry---
-T---false--- CS2103T---
 T---false--- Write Diary---
 E---true--- drink water ---Apr 23 2030 05:00 PM
-T---false--- reset laptop---
-T---false--- cry---
-T---false--- cry now---
-D---false--- cry now ---now
+T---true--- reset laptop---
+E---false--- sleep ---16-2-2022 1900
+D---false--- study math ---16 02 2022 07:00 PM
+D---false--- study science ---16-02-2022 07:00 PM

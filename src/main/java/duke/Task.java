@@ -70,16 +70,16 @@ public class Task {
         try {
             if ((this.type.equals("D") || this.type.equals("E")) && input != null) {
                 input = input.replaceAll("/", "-");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
                 LocalDateTime lt = LocalDateTime.parse(input, formatter);
-                DateTimeFormatter out = DateTimeFormatter.ofPattern("MMM dd uuuu hh:mm a");
+                DateTimeFormatter out = DateTimeFormatter.ofPattern("dd-MM-uuuu hh:mm a");
                 this.time = lt.format(out);
             }
             return true;
         }
         catch (DateTimeParseException e){
             if (!isReading) {
-                System.out.println("Note that dates should be in <<YYYY-MM-DD HHMM>> format");
+                System.out.println("Note that dates should be in <<DD-MM-YYYY HHMM>> format");
             }
             this.time = input;
             return false;
