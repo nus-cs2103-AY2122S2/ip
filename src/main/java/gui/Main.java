@@ -12,10 +12,13 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @author Jeffry Lum
+ * Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+ * with minor modifications
+ * @version CS2103T AY21/22 Sem 2
  */
 public class Main extends Application {
-
-
     @Override
     public void start(Stage stage) {
         try {
@@ -24,6 +27,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException | DukeException e) {
