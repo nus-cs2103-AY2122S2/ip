@@ -129,20 +129,19 @@ public class Parser {
      * @param command     The action which the user wishes to execute.
      * @param commandArgs The parameters passed to support the action
      * @param tasks       The task store which the user wishes to update
-     // * @return The updated task from <code>tasks</code>.
      * @throws DukeException             If there is a syntax error in the command or <code>tasks</code> does not have
      *                                   any tasks.
-     // * @throws NumberFormatException     If the provided parameters is not a number.
      * @throws IndexOutOfBoundsException If the provided index exceeds the size of <code>tasks</code> or the index < 0.
      */
-    public static void validateCommand(String command, String commandArgs, TaskStore tasks) throws DukeException,
+    public void validateCommand(String command, String commandArgs, TaskStore tasks) throws DukeException,
             NumberFormatException, IndexOutOfBoundsException {
 
         if (command.equals(BYE) || command.equals(LIST)) {
             return;
         }
 
-        if (tasks.getIsEmpty()) {
+        boolean isMutation = checkIsMutation(command);
+        if (isMutation && tasks.getIsEmpty()) {
             throw new DukeException(EMPTY_LIST_ERROR);
         }
 
@@ -168,5 +167,21 @@ public class Parser {
         default:
             throw new DukeException("I'm sorry, but I don't think there's a delimiter for that..");
         }
+    }
+
+    /**
+     * Checks if a command is a mutation (performs a change to a task in the list).
+     * @param command The command to be performed
+     * @return true if the command is a mutation, else return false.
+     */
+    public boolean checkIsMutation(String command) {
+        String[] mutations = {MARK, UNMARK, DELETE, FIND, TASKS_ON};
+        for (String mutation : mutations) {
+            if (command.equals(mutation)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
