@@ -72,13 +72,19 @@ class TaskList {
     public String deleteItem(ArrayList<Integer> intArr) throws SiriException {
         String printString = "Successfully removed the following task(s):\n";
 
+        ArrayList<Task> deleteItemList = new ArrayList<>();
         for (int i = 0; i < intArr.size(); i++) {
             int index = intArr.get(i);
             if (index < 0 || index >= this.list.size()) {
                 throw new SiriException("Please ENTER number(s) within the number of tasks only!!");
             }
 
-            Task removedTask = list.remove(index);
+            deleteItemList.add(list.get(index));
+        }
+
+        for (int i = 0; i < deleteItemList.size(); i++) {
+            Task removedTask = deleteItemList.get(i);
+            list.remove(removedTask);
             if (removedTask instanceof Deadline) {
                 Deadline tmp = (Deadline) removedTask;
                 deadlineList.remove(tmp);
@@ -86,7 +92,7 @@ class TaskList {
                 Event tmp = (Event) removedTask;
                 eventList.remove(tmp);
             }
-            assert removedTask.equals(list.get(index)) == false : "Task should have been removed, but it is not!!";
+            assert list.contains(removedTask) == false : "Task should have been removed, but it is not!!";
             printString = printString + removedTask.getTaskDetails() + "\n";
         }
 
@@ -187,7 +193,7 @@ class TaskList {
             return "No event on " + date.format(dtf) + "!!\n";
         }
 
-        String printString = tmp.size() + " events on " + date.format(dtf) + ":\n";
+        String printString = tmp.size() + " event(s) on " + date.format(dtf) + ":\n";
         for (int i = 0; i < tmp.size(); i++) {
             printString = printString + (i + 1) + ". " + tmp.get(i).getTaskDetails() + "\n";
         }

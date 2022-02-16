@@ -63,9 +63,11 @@ public class MainWindow extends AnchorPane {
             userInput.clear();
         } catch (SiriException se) {
             response = se.getMessage();
-            dialogContainer.getChildren().add(
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog("You:\n" + input, userImage),
                     DialogBox.getWarningDialog(response)
             );
+            userInput.clear();
         }
 
         if (response == "Bye!!") {

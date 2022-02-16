@@ -81,7 +81,7 @@ public class DialogBox extends HBox {
     public static DialogBox getWarningDialog(String text) {
         var db = new DialogBox(text);
         db.dialog.setFill(Color.RED);
-        db.dialog.setWrappingWidth(320);
+        db.dialog.setWrappingWidth(280);
         db.dialog.setTextAlignment(TextAlignment.CENTER);
         return db;
     }
