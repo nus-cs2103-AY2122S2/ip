@@ -2,6 +2,7 @@ package duke;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.function.Function;
 
 import duke.command.ByeCommand;
@@ -104,7 +105,6 @@ public class Duke {
      */
     public String getResponse(String input) throws DukeException {
         Command command = parser.parse(input);
-
         return command.execute(input, taskList, storage);
     }
 
@@ -142,5 +142,22 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    public boolean getIsRunning() {
+        return isRunning;
+    }
+
+    /**
+     * Checks whether to end Duke or not.
+     *
+     * @param input User input.
+     * @return Whether the command is to end Duke.
+     */
+    public boolean isEndDukeCommand(String input) {
+        StringTokenizer st = new StringTokenizer(input, " ");
+        String command = st.nextToken();
+
+        return command.equals(BYE_COMMAND);
     }
 }

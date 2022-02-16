@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import duke.Duke;
 import duke.exception.DukeException;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -30,6 +33,8 @@ public class MainWindow extends AnchorPane {
     private static final String USER_IMAGE = "/images/DaUser.png";
     private static final String DUKE_IMAGE = "/images/DaDuke.png";
     private static final String DUKE_ERROR_IMAGE = "/images/DaDukeError.png";
+
+    private static final int CLOSE_APPLICATION_TIME = 1;
 
     private final Image userImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream(USER_IMAGE)));
@@ -74,5 +79,20 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeResponseImage)
         );
         userInput.clear();
+
+        if (duke.isEndDukeCommand(input)) {
+            closeApplication();
+        }
+    }
+
+    /**
+     * Closes the application after a set amount of time.
+     */
+    public void closeApplication() {
+        PauseTransition pause = new PauseTransition(Duration.seconds(CLOSE_APPLICATION_TIME));
+        pause.setOnFinished(event -> Platform.exit());
+        pause.play();
+
+        userInput.setDisable(true);
     }
 }
