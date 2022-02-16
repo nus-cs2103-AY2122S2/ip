@@ -11,15 +11,14 @@ import java.util.Locale;
  */
 public class Deadline extends Task {
     private static final String[] DATE_FORMATS = {
-        "dd/MM/yyyy",
-        "dd MM yyyy",
         "MMM dd yyyy",
+        "dd MM yyyy",
         "yyyy/MM/dd",
         "yyyy MM dd",
     };
     private static final String[] TIME_FORMATS = {
-        "HHmm",
         "HH:mm",
+        "HHmm",
     };
     private String by;
     private LocalDate date;
@@ -39,6 +38,14 @@ public class Deadline extends Task {
     }
 
     /**
+     * Checks if time is given by user.
+     *
+     * @return True if time is given by user, False otherwise
+     */
+    public boolean hasTime() {
+        return (this.by.split(" ").length != 1);
+    }
+    /**
      * Checks if time given is in valid format and sets the timeFormat attribute.
      *
      * @return True if time is given in a recognised format, False otherwise
@@ -47,16 +54,12 @@ public class Deadline extends Task {
     public boolean isValidTime() {
         for (String format : TIME_FORMATS) {
             try {
-                if (this.by.split(" ").length != 1) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-                    LocalTime.parse(this.by.split(" ")[1], formatter);
-                    this.timeFormat = format;
-                    return true;
-                } else {
-                    return false;
-                }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+                LocalTime.parse(this.by.split(" ")[1], formatter);
+                this.timeFormat = format;
+                return true;
             } catch (DateTimeParseException e) {
-                System.out.println(e.getMessage());
+                e.getMessage();
             }
         }
         return false;
@@ -77,7 +80,7 @@ public class Deadline extends Task {
                 this.dateFormat = format;
                 return true;
             } catch (DateTimeParseException e) {
-                System.out.println(e.getMessage());
+                e.getMessage();
             }
         }
         return false;
@@ -107,7 +110,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTime() {
-        if (this.isValidTime()) {
+        if (hasTime() && isValidTime()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.timeFormat);
             this.time = LocalTime.parse(this.by.split(" ")[1], formatter);
             return this.time.format(DateTimeFormatter.ofPattern("HH:mm a"));
@@ -123,7 +126,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + (this.getDate() + " " + this.getTime()).trim() + ")";
+        return "[D]" + super.toString() + " (by:  " + (this.getDate() + " " + this.getTime()).trim() + ")";
     }
 }
 

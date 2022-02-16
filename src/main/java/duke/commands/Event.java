@@ -11,22 +11,21 @@ import java.util.Locale;
  */
 public class Event extends Task {
     private static final String[] DATE_FORMATS = {
+        "MMM dd yyyy",
         "dd/MM/yyyy",
         "dd MM yyyy",
         "yyyy/MM/dd",
         "yyyy MM dd",
-        "MMM dd yyyy",
     };
     private static final String[] TIME_FORMATS = {
-        "HHmm",
         "HH:mm",
+        "HHmm",
     };
     private String at;
     private LocalDate date;
     private LocalTime time;
     private String dateFormat;
     private String timeFormat;
-
 
     /**
      * Constructs an Event object.
@@ -40,6 +39,15 @@ public class Event extends Task {
     }
 
     /**
+     * Checks if time is given by user.
+     *
+     * @return True if time is given by user, False otherwise
+     */
+    public boolean hasTime() {
+        return (this.at.split(" ").length != 1);
+    }
+
+    /**
      * Checks if time given is in valid format and sets the timeFormat attribute.
      *
      * @return True if time is given in a recognised format, False otherwise
@@ -48,16 +56,12 @@ public class Event extends Task {
     public boolean isValidTime() {
         for (String format : TIME_FORMATS) {
             try {
-                if (this.at.split(" ").length != 1) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-                    LocalTime.parse(this.at.split(" ")[1], formatter);
-                    this.timeFormat = format;
-                    return true;
-                } else {
-                    return false;
-                }
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+                LocalTime.parse(this.at.split(" ")[1], formatter);
+                this.timeFormat = format;
+                return true;
             } catch (DateTimeParseException e) {
-                System.out.println(e.getMessage());
+                e.getMessage();
             }
         }
         return false;
@@ -70,15 +74,14 @@ public class Event extends Task {
      * @throws DateTimeParseException If parser could not parse the date according to format.
      */
     public boolean isValidDate() {
-        String d = this.at.split(" ")[0].replace("-", " ");
         for (String format : DATE_FORMATS) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
-                LocalDate.parse(d, formatter);
+                LocalDate.parse(this.at.split(" ")[0].replace("-", " "), formatter);
                 this.dateFormat = format;
                 return true;
             } catch (DateTimeParseException e) {
-                System.out.println(e.getMessage());
+                e.getMessage();
             }
         }
         return false;
@@ -108,7 +111,8 @@ public class Event extends Task {
      */
     @Override
     public String getTime() {
-        if (this.isValidTime()) {
+        String[] time = this.at.split(" ");
+        if (hasTime() && isValidTime()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.timeFormat);
             this.time = LocalTime.parse(this.at.split(" ")[1], formatter);
             return this.time.format(DateTimeFormatter.ofPattern("HH:mm a"));
@@ -124,6 +128,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + (this.getDate() + " " + this.getTime()).trim() + ")";
+        return "[E]" + super.toString() + " (at:  " + (this.getDate() + " " + this.getTime()).trim() + ")";
     }
 }

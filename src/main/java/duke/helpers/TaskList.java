@@ -9,6 +9,7 @@ import duke.commands.ToDo;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidIndexException;
+import duke.exceptions.InvalidTimeException;
 
 /**
  * Represents an array of Tasks which the user can perform operations on including adding,
@@ -75,9 +76,9 @@ public class TaskList {
         for (int i = 0; i < len(); i++) {
             Task t = tasks.get(i);
             if (i == len() - 1) {
-                ans += String.format("%d.%s", i + 1, t.toString());
+                ans += String.format("%d.  %s", i + 1, t.toString());
             } else {
-                ans += String.format("%d.%s \n", i + 1, t.toString());
+                ans += String.format("%d.  %s \n", i + 1, t.toString());
             }
         }
         return ans;
@@ -137,12 +138,16 @@ public class TaskList {
      * @throws java.io.IOException If I/O operations fail or is interrupted.
      * @throws InvalidDateException If a date with an invalid format and/or time is given by user.
      */
-    public static String onDeadline(String input, String ans) throws java.io.IOException, InvalidDateException {
+    public static String onDeadline(String input, String ans)
+            throws java.io.IOException, InvalidDateException, InvalidTimeException {
         String desc = input.substring(9, input.indexOf("/by") - 1);
         String by = input.substring(input.indexOf("/by") + 4);
         Deadline t = new Deadline(desc, by);
-        if (!t.isValidDate() && !t.isValidTime()) {
+        if (!t.isValidDate()) {
             throw new InvalidDateException();
+        }
+        if (t.hasTime() && !t.isValidTime()) {
+            throw new InvalidTimeException();
         }
         addTask(t);
         Storage.saveToFile(tasks);
@@ -162,12 +167,17 @@ public class TaskList {
      * @throws java.io.IOException If I/O operations fail or is interrupted.
      * @throws InvalidDateException If a date with an invalid format and/or time is given by user.
      */
-    public static String onEvent(String input, String ans) throws java.io.IOException, InvalidDateException {
+    public static String onEvent(String input, String ans)
+            throws java.io.IOException, InvalidDateException, InvalidTimeException {
         String desc = input.substring(6, input.indexOf("/at") - 1);
         String time = input.substring(input.indexOf("/at") + 4);
         Event t = new Event(desc, time);
-        if (!t.isValidDate() && !t.isValidTime()) {
+        if (!t.isValidDate()) {
+            System.out.println("date is not valid");
             throw new InvalidDateException();
+        }
+        if (t.hasTime() && !t.isValidTime()) {
+            throw new InvalidTimeException();
         }
         addTask(t);
         Storage.saveToFile(tasks);
