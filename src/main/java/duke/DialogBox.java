@@ -61,4 +61,11 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
+    public static DialogBox getWarningDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.getChildren().get(0).setStyle("-fx-background-color: #f56c42; -fx-background-radius: 10;");
+        db.flip();
+        return db;
+    }
 }

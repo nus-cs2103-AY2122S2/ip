@@ -21,12 +21,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
+    private DialogBox dukeWindow;
+    private DialogBox userWindow;
 
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/gude.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duckling.png"));
+    private Image sadDukeImage = new Image(this.getClass().getResourceAsStream("/images/SadDuck.gif"));
 
     private String welcome = "Hello! I'm Ducky! :)\n" + "I am a task manager.\n"
                 + "Type 'help' for more information on the commands you can give me.\n"
@@ -59,13 +61,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText().toLowerCase(java.util.Locale.ROOT);
+        String response = duke.getResponse(input);
+        userWindow = DialogBox.getUserDialog(input, userImage);
+        if (duke.isError) {
+            dukeWindow = DialogBox.getWarningDukeDialog(response, sadDukeImage);
+        } else {
+            dukeWindow = DialogBox.getDukeDialog(response, dukeImage);
+        }
         if (input.equals("bye")) {
             handleExit();
         }
-        String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                userWindow,
+                dukeWindow
         );
         userInput.clear();
     }

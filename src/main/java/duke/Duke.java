@@ -15,6 +15,7 @@ public class Duke {
     private String filename;
     private Ui ui;
     private TaskList tasks;
+    public boolean isError;
 
     /**
      * Constructor method for Duke.
@@ -28,6 +29,7 @@ public class Duke {
         try {
             tasks = storage.readFile(filepath);
         } catch (DukeException e) {
+            isError = true;
             ui.showError(e.getMessage());
         }
     }
@@ -43,8 +45,10 @@ public class Duke {
             Command c = new Parser(input).parse();
             String response = c.execute(tasks, ui, storage);
             storage.saveFile(tasks.formatTasks());
+            isError = false;
             return response;
         } catch (DukeException e) {
+            isError = true;
             return (e.getMessage());
         }
     }
