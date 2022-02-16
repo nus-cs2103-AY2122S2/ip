@@ -1,6 +1,9 @@
 package task;
 
+import exception.DukeException;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class that encapsulates deadline tasks with due dates.
@@ -14,9 +17,13 @@ public class Deadline extends Task {
      * @param details provides description of the deadline being created.
      * @param date provides the date when the deadline is due.
      */
-    public Deadline(String details, String date) {
+    public Deadline(String details, String date) throws DukeException {
         super(details);
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Hmm...have you entered a correct date?");
+        }
     }
 
     /**

@@ -38,8 +38,8 @@ public class Parser {
             return noteParser(inputStringsArray, storage);
         case "help":
             return Ui.userHelp();
-        case "bye":
-            return "Bye! See you soon!";
+//        case "bye":
+//            System.exit(0);
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that command means.\n"
                     + "Enter 'help' if you need it!");
@@ -53,15 +53,21 @@ public class Parser {
      * @throws DukeException If user input message does not make sense.
      */
     public String taskParser(String[] inputStringsArray, Storage storage) throws DukeException {
-        switch (inputStringsArray[1]) {
+        String taskCommand;
+        try {
+            taskCommand = inputStringsArray[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Enter a task command...");
+        }
+        switch (taskCommand) {
         case "list":
             return tasks.displayList();
         case "mark":
-            String marked = tasks.mark(inputStringsArray[2]);
+            String marked = tasks.mark(inputStringsArray);
             storage.updateTaskData(tasks);
             return marked;
         case "unmark":
-            String unmarked = tasks.unmark(inputStringsArray[2]);
+            String unmarked = tasks.unmark(inputStringsArray);
             storage.updateTaskData(tasks);
             return unmarked;
         case "new":
@@ -69,14 +75,13 @@ public class Parser {
             storage.updateTaskData(tasks);
             return added;
         case "delete":
-            String deleted = tasks.delete(inputStringsArray[2]);
+            String deleted = tasks.delete(inputStringsArray);
             storage.updateTaskData(tasks);
             return deleted;
         case "find":
-            return tasks.find(inputStringsArray[2]);
+            return tasks.find(inputStringsArray);
         default:
-            throw new DukeException("Not sure what that task command means...\n"
-                    + "Enter 'help' if you need it!");
+            throw new DukeException("Not sure what that task command means... Enter 'help' if you need it!");
         }
     }
 
@@ -87,7 +92,13 @@ public class Parser {
      * @throws DukeException If user input message does not make sense.
      */
     public String noteParser(String[] inputStringsArray, Storage storage) throws DukeException {
-        switch (inputStringsArray[1]) {
+        String taskCommand;
+        try {
+            taskCommand = inputStringsArray[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Enter a note command...");
+        }
+        switch (taskCommand) {
         case "list":
             return notes.displayList();
         case "new":
@@ -95,11 +106,11 @@ public class Parser {
             storage.updateNoteData(notes);
             return added;
         case "delete":
-            String deleted = notes.delete(inputStringsArray[2]);
+            String deleted = notes.delete(inputStringsArray);
             storage.updateNoteData(notes);
             return deleted;
         case "find":
-            return notes.find(inputStringsArray[2]);
+            return notes.find(inputStringsArray);
         default:
             throw new DukeException("Not sure what that note command means...\n"
                     + "Enter 'help if you need it!");

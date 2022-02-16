@@ -1,6 +1,9 @@
 package task;
 
+import exception.DukeException;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class that encapsulates event tasks with due dates.
@@ -14,9 +17,13 @@ public class Event extends Task {
      * @param details provides description of the event being created.
      * @param date provides the date of when the event is.
      */
-    public Event(String details, String date) {
+    public Event(String details, String date) throws DukeException {
         super(details);
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Hmm...have you entered a correct date?");
+        }
     }
 
     /**

@@ -22,31 +22,37 @@ public class TaskList {
      * @param containsOn indicated if an event on date has been entered.
      * @param returnString contains the description of the task entered by the user.
      */
-    public String createNewTask(String[] stringsToAdd, Boolean containsBy, Boolean containsOn, String returnString)
-            throws DukeException {
-        Task task;
-        if (stringsToAdd[2].equals("todo")) {
-            if (containsBy) {
+    public String createNewTask(String taskType, String[] stringsToAdd, Boolean containsBy, Boolean containsOn,
+                                String returnString) throws DukeException {
+        switch (taskType) {
+        case "todo":
+            if (containsBy || containsOn) {
                 throw new DukeException("Todo cannot have a due date. Create an deadline or event instead!");
             } else {
-                task = new Todo(returnString);
+                return returnAfterAdding(new Todo(returnString), returnString);
             }
-        } else if (stringsToAdd[2].equals("deadline")) {
-            if (!containsBy) {
+        case "deadline":
+            if (!containsBy || stringsToAdd[stringsToAdd.length - 1].equals("by")) {
                 throw new DukeException("A deadline needs a due date. Create a todo/event instead!");
             } else {
-                task = new Deadline(returnString, stringsToAdd[stringsToAdd.length - 1]);
+                return returnAfterAdding(new Deadline(returnString, stringsToAdd[stringsToAdd.length - 1]), returnString);
             }
-        } else if (stringsToAdd[2].equals("event")) {
-            if (!containsOn) {
+        default:
+            if (!containsOn || stringsToAdd[stringsToAdd.length - 1].equals("on")) {
                 throw new DukeException("An event needs a date. Create a todo/deadline instead!");
             } else {
-                task = new Event(returnString, stringsToAdd[stringsToAdd.length - 1]);
+                return returnAfterAdding(new Event(returnString, stringsToAdd[stringsToAdd.length - 1]), returnString);
             }
-        } else {
-            throw new DukeException("Tasks can either be Todos, Deadlines or Events."
-                    + "Enter 'help' if you're confused!");
         }
+    }
+
+    /**
+     * Adds task to task list and informs user that it has been added.
+     * @param task task to be added to the task list.
+     * @param returnString description of the task to be added.
+     * @return String to tell the user that the task has been added to the task list.
+     */
+    public String returnAfterAdding(Task task, String returnString) {
         tasks.add(task);
         return "Got it! I've added this task:\n" + " [" + task.symbol() + "][] "
                 + returnString + "\nNow you have " + tasks.size() + " tasks in the list.";
@@ -74,10 +80,16 @@ public class TaskList {
      * @throws DukeException If input string does not comply with todo, deadline or event formats.
      */
     public String addToList(String[] stringsToAdd) throws DukeException {
-        if (stringsToAdd.length < 4) {
-            throw new DukeException("OOPS!! The description of a "
-                    + stringsToAdd[0] + " cannot be empty.");
-        } else {
+        String taskType;
+        try {
+            taskType = stringsToAdd[2];
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Err what type of task do you want me to create for you?");
+        }
+        switch (taskType) {
+        case "todo":
+        case "deadline":
+        case "event":
             String returnString = "";
             boolean containsBy = false;
             boolean containsOn = false;
@@ -92,50 +104,69 @@ public class TaskList {
                     returnString = returnString + stringsToAdd[i] + " ";
                 }
             }
-            return createNewTask(stringsToAdd, containsBy, containsOn, returnString);
+            if (returnString.equals("")) {
+                throw new DukeException("Task description cannot be empty...");
+            } else {
+                return createNewTask(taskType, stringsToAdd, containsBy, containsOn, returnString);
+            }
+        default:
+            throw new DukeException("A task must be a todo, event or deadline...");
         }
     }
 
     /**
      * Marks a specific task in the task list as completed.
-     * @param number String number that specifies task number in task list to mark as completed.
+     * @param inputStringsArray String number that specifies task number in task list to mark as completed.
      */
-    public String mark(String number) {
-        int num = Integer.parseInt(number);
-        tasks.get(num - 1).setAsDone();
-        Task temp = tasks.get(num - 1);
-        return "Nice! I've marked this task as done:\n [" + temp.symbol() + "]["
-                + temp.getStatusIcon() + "] " + temp;
+    public String mark(String[] inputStringsArray) throws DukeException {
+        try {
+            int num = Integer.parseInt(inputStringsArray[2]);
+            tasks.get(num - 1).setAsDone();
+            Task temp = tasks.get(num - 1);
+            return "Nice! I've marked this task as done:\n [" + temp.symbol() + "]["
+                    + temp.getStatusIcon() + "] " + temp;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Try entering an valid index number?");
+        }
     }
 
     /**
      * Marks a specific task in the task list as not completed.
-     * @param number String number that specifies task number in task list to mark as not completed.
+     * @param inputStringsArray String number that specifies task number in task list to mark as not completed.
      */
-    public String unmark(String number) {
-        int num = Integer.parseInt(number);
-        tasks.get(num - 1).setAsNotDone();
-        Task temp = tasks.get(num - 1);
-        return "OK , I've marked this task as not done yet:\n [" + temp.symbol() + "]["
-                + temp.getStatusIcon() + "] " + temp;
+    public String unmark(String[] inputStringsArray) throws DukeException {
+        try {
+            int num = Integer.parseInt(inputStringsArray[2]);
+            tasks.get(num - 1).setAsNotDone();
+            Task temp = tasks.get(num - 1);
+            return "OK , I've marked this task as not done yet:\n [" + temp.symbol() + "]["
+                    + temp.getStatusIcon() + "] " + temp;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Try entering an valid index number?");
+        }
     }
 
     /**
      * Deletes all or specific tasks from the task list based on string input.
-     * @param number string that specifies if a specific task number or all tasks are to be deleted.
+     * @param inputStringsArray string that specifies if a specific task number or all tasks are to be deleted.
      */
-    public String delete(String number) {
-        if (number.equals("all")) {
-            this.tasks = new ArrayList<>();
-            return "All right! I have deleted all tasks in your list.";
-        } else {
-            int num = Integer.parseInt(number);
-            Task temp = tasks.get(num - 1);
-            String tempString = "Noted. I've removed this task:\n [" + temp.symbol() + "]["
-                    + temp.getStatusIcon() + "] " + temp
-                    + "\nNow you have " + (tasks.size() - 1) + " tasks left in this list";
-            tasks.remove(num - 1);
-            return tempString;
+    public String delete(String[] inputStringsArray) throws DukeException {
+        try {
+            String number = inputStringsArray[2];
+            if (number.equals("all")) {
+                this.tasks = new ArrayList<>();
+                return "All right! I have deleted all tasks in your list.";
+            } else {
+                int num = Integer.parseInt(number);
+                Task temp = tasks.get(num - 1);
+                String tempString = "Noted. I've removed this task:\n [" + temp.symbol() + "]["
+                        + temp.getStatusIcon() + "] " + temp
+                        + "\nNow you have " + (tasks.size() - 1) + " tasks left in this list";
+                tasks.remove(num - 1);
+                return tempString;
+            }
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("Try entering an index number or 'all' for the tasks you want to delete");
         }
     }
 
@@ -143,24 +174,28 @@ public class TaskList {
      * Prints tasks in the task list that contain a specified keyword.
      * @param inputStringsArray keyword used to filer tasks in task list.
      */
-    public String find(String inputStringsArray) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            String details = this.tasks.get(i).details;
-            String[] detailsArray = details.split(" ");
-            for (int j = 0; j < detailsArray.length; j++) {
-                if (detailsArray[j].equals(inputStringsArray)) {
-                    foundTasks.add(this.tasks.get(i));
-                    break;
+    public String find(String[] inputStringsArray) throws DukeException {
+        try {
+            ArrayList<Task> foundTasks = new ArrayList<>();
+            for (int i = 0; i < this.tasks.size(); i++) {
+                String details = this.tasks.get(i).details;
+                String[] detailsArray = details.split(" ");
+                for (int j = 0; j < detailsArray.length; j++) {
+                    if (detailsArray[j].equals(inputStringsArray[2])) {
+                        foundTasks.add(this.tasks.get(i));
+                        break;
+                    }
                 }
             }
+            String returnString = "Here are the tasks I could find in your list that match the keyword:\n";
+            for (int i = 0; i < foundTasks.size(); i++) {
+                returnString = returnString + (i + 1) + ". [" + foundTasks.get(i).symbol() + "]["
+                        + foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";
+            }
+            return returnString;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Enter a keyword to filter tasks by!");
         }
-        String returnString = "Here are the tasks I could find in your list that match the keyword:\n";
-        for (int i = 0; i < foundTasks.size(); i++) {
-            returnString = returnString + (i + 1) + ". [" + foundTasks.get(i).symbol() + "]["
-                    + foundTasks.get(i).getStatusIcon() + "] " + foundTasks.get(i).displayTime() + "\n";
-        }
-        return returnString;
     }
 
     /**

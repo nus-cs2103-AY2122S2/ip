@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import exception.DukeException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -154,11 +155,11 @@ public class Duke extends Application {
      * and then appends them to the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(new Label(userText), new ImageView(user)),
+                DialogBox.getDukeDialog(new Label(dukeText), new ImageView(duke))
         );
         userInput.clear();
     }
