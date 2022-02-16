@@ -105,6 +105,11 @@ public class Duke {
                 sb.append(i + ". " + overdueSoonList.get(i-1).toString() + "\n");
             }
         }
+
+        if (overdueList.size() == 0 && overdueSoonList.size() == 0) {
+            sb.append("\n");
+            sb.append("Damn! You have nothing due soon and nothing overdue! Good job:)");
+        }
         return sb.toString();
     }
 

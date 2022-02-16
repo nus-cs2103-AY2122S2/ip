@@ -52,7 +52,7 @@ public class Ui {
             }
             sb.append(i).append(". ").append(s).append('\n');
         }
-        sb.append("You have " + all.size() + " tasks! Looks nasty, please rest well.");
+        sb.append("You have " + all.size() + " tasks! Please rest well.");
         String ret = sb.toString();
         System.out.println(ret);
         addToPrint(ret);

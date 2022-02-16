@@ -1,6 +1,1 @@
-1. [E][ ] hihih (at:aslkdn)
-2. [E][ ] hi (at:hoho)
-3. [D][ ] hi (by:Dec 24 2022)
-4. [D][ ] duetomorrow (by:Feb 10 2022)
-5. [D][ ] notdue (by:Feb 16 2022)
-6. [D][ ] due2 (by:Feb 15 2022)
+1. [D][ ] Submit internship application (by:Feb 20 2022)
