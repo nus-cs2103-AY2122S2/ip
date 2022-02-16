@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -60,7 +59,7 @@ public class Duke extends Application {
      * @param input The command to be run
      * @throws DukeException if the command is formatted wrongly
      */
-    private String handle(String input) throws DukeException{
+    private String handle(String input) throws DukeException {
         String[] split = input.split(" ");
         String command = split[0];
         String out = "";
@@ -77,21 +76,12 @@ public class Duke extends Application {
             if (split.length == 1) {
                 throw new DukeException("It looks like you're missing the task description");
             } else {
-                String[] arr = input.substring(9).split("/by ");
-                if (arr.length == 1) {
+                //parsedInput is the input string with the deadline and the task description separated
+                String[] parsedInput = input.substring(9).split("/by ");
+                if (parsedInput.length == 1) {
                     throw new DukeException("It seems you haven't included the deadline");
                 } else {
-                    String[] date = arr[1].split("-");
-                    if (date.length != 3) {
-                        throw new DukeException("Your deadline should be in the format yyyy-mm-dd");
-                    }
-                    Deadline d = new Deadline(arr[0],
-                            LocalDate.of(Integer.parseInt(date[0]),
-                                    Integer.parseInt(date[1]),
-                                    Integer.parseInt(date[2])));
-                    list.add(d);
-                    out += ("Got it. I've added: \n" + d.toString() + "\n");
-                    out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
+                    out = handleDeadline(out, parsedInput);
                 }
             }
         } else if (command.equals("event")) {
@@ -170,21 +160,27 @@ public class Duke extends Application {
         return out;
     }
 
-    private void run() {
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            try {
-                String command = sc.nextLine();
-                handle(command);
-                ui.printDivider();
-                if (command.equals("bye")) {
-                    break;
-                }
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
+    /**
+     * Handler for creating a Deadline
+     *
+     * @param out The String to be appended to
+     * @param parsedInput The user's input containing the task description and deadline
+     * @return he string output to be shown to the user
+     * @throws DukeException if  the deadline is not in the correct format
+     */
+    private String handleDeadline(String out, String[] parsedInput) throws DukeException {
+        String[] date = parsedInput[1].split("-");
+        if (date.length != 3) {
+            throw new DukeException("Your deadline should be in the format yyyy-mm-dd");
         }
+        Deadline d = new Deadline(parsedInput[0],
+                LocalDate.of(Integer.parseInt(date[0]),
+                        Integer.parseInt(date[1]),
+                        Integer.parseInt(date[2])));
+        list.add(d);
+        out += ("Got it. I've added: \n" + d.toString() + "\n");
+        out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
+        return out;
     }
 
     /**
