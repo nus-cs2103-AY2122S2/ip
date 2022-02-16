@@ -101,7 +101,7 @@ public class SortCommand extends Command {
         ArrayList<String> taskSet = sortType.sortFunction.apply(taskList);
         String output = "Task list sorted! Here are the tasks in your list:" + "\n";
         for (int i = 0; i < taskSet.size(); i++) {
-            output += i + 1 + ". " + taskSet.get(i) + "\n\n";
+            output += i + 1 + ". " + taskSet.get(i) + "\n";
         }
         return output;
     }

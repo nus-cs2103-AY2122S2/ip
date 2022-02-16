@@ -74,7 +74,7 @@ public class FindCommand extends Command {
         String output = "Here are the matching tasks in your list:" + "\n";
         ArrayList<String> tasksString = taskList.search(searchString);
         for (int i = 0; i < tasksString.size(); i++) {
-            output += i + 1 + ". " + tasksString.get(i) + "\n\n";
+            output += i + 1 + ". " + tasksString.get(i) + "\n";
         }
         return output.trim();
     }
