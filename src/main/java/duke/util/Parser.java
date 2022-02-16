@@ -70,9 +70,9 @@ public class Parser {
             parsedTask = new Event(activity, timeOrPlace);
             break;
         case "D":
-            String tmp = splitStr[3];
+            String dateStr = splitStr[3];
             try {
-                timeOrPlace = SAVED_FORMAT.format(TASK_FORMAT.parse(tmp));
+                timeOrPlace = SAVED_FORMAT.format(TASK_FORMAT.parse(dateStr));
             } catch (ParseException e) { // Corrupted Save File.
                 e.printStackTrace();
             }
