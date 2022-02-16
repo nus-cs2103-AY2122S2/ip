@@ -2,7 +2,7 @@ package chatcat.commands;
 
 import java.util.ArrayList;
 
-import chatcat.chatcatexception.ChatCatException;
+import chatcat.chatcatexception.TaskException;
 import chatcat.tasks.Task;
 import chatcat.tasks.Todo;
 import chatcat.util.DateTimeUtil;
@@ -33,24 +33,24 @@ public class SetTodoCommand extends Command {
     /**
      * Creates a todo {@code Todo} object and appends the object at the end of {@code taskList}.
      *
-     * @throws ChatCatException if description of deadline is empty.
+     * @throws TaskException if description of deadline is empty.
      * @see Todo
      * @see WriteToFile
      * @see DateTimeUtil
      * @see OutputMessage
      */
-    public void setTodo() throws ChatCatException {
+    public void setTodo() throws TaskException {
         String[] input = TODO.split(" ");
 
         if (input.length == 1) {
-            throw new ChatCatException(OutputMessage.taskErrorMessage());
+            throw new TaskException(OutputMessage.taskErrorMessage());
         }
       
         String todoStr = TODO.substring(5);
         todo = new Todo(todoStr);
 
         if (this.tasks.contains(todo)) {
-                throw new ChatCatException(OutputMessage.repeatedTaskErrorMessage());
+                throw new TaskException(OutputMessage.repeatedTaskErrorMessage());
         }
 
         super.tasks.add(todo);

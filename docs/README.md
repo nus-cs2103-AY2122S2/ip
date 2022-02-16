@@ -64,3 +64,8 @@ Usage: `list`
 #### Expected outcome:
 ![](assets/list.png)
 
+### `bye` - Exits ChatCat
+Format: `bye`  
+Usage: `bye`
+#### Expected outcome:
+![](assets/bye.png)

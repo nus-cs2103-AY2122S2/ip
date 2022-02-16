@@ -2,17 +2,12 @@ package chatcat.tasklist;
 
 import java.util.ArrayList;
 
+import chatcat.chatcatexception.InvalidDateException;
+import chatcat.chatcatexception.TaskException;
+import chatcat.chatcatexception.TaskEditException;
+import chatcat.commands.*;
 import chatcat.tasks.Task;
 import chatcat.util.WriteToFile;
-import chatcat.chatcatexception.ChatCatException;
-import chatcat.commands.SetDeadlineCommand;
-import chatcat.commands.SetEventCommand;
-import chatcat.commands.SetTodoCommand;
-import chatcat.commands.ListTaskCommand;
-import chatcat.commands.MarkCommand;
-import chatcat.commands.UnmarkCommand;
-import chatcat.commands.DeleteCommand;
-import chatcat.commands.FilterCommand;
 
 /**
  * Handles writing and reading to list of tasks represented as an {@code ArrayList}.
@@ -37,7 +32,7 @@ public class TaskList {
      * @see WriteToFile
      * @see ListTaskCommand
      */
-    public String listTasks() {
+    public String listTasks() throws TaskEditException {
         ListTaskCommand listTasks = new ListTaskCommand(tasks, writeToFile);
         listTasks.getTaskList();
 
@@ -50,7 +45,8 @@ public class TaskList {
      * @return exit message
      */
     public String exitChatCat() {
-        return "Bye. Hope to see you again soon!";
+        ByeCommand byeCommand = new ByeCommand()
+;       return byeCommand.toString();
     }
 
     /**
@@ -61,10 +57,9 @@ public class TaskList {
      * @see WriteToFile
      * @see MarkCommand
      */
-    public String mark(String str) {
+    public String mark(String str) throws TaskEditException {
         MarkCommand markCommand = new MarkCommand(tasks, writeToFile, str);
         markCommand.mark();
-
         return markCommand.toString();
     }
 
@@ -76,10 +71,9 @@ public class TaskList {
      * @see WriteToFile
      * @see UnmarkCommand
      */
-    public String unmark(String str) {
+    public String unmark(String str) throws TaskEditException  {
         UnmarkCommand unmarkCommand = new UnmarkCommand(tasks, writeToFile, str);
         unmarkCommand.unmark();
-
         return unmarkCommand.toString();
     }
 
@@ -88,14 +82,13 @@ public class TaskList {
      *
      * @param str containing the task to be added.
      * @return created todo task {@code Task} in String.
-     * @throws ChatCatException if description of todo is empty.
+     * @throws TaskException if description of todo is empty.
      * @see WriteToFile
      * @see SetTodoCommand
      */
-    public String setTodo(String str) throws ChatCatException {
+    public String setTodo(String str) throws TaskException {
         SetTodoCommand setTodoCommand = new SetTodoCommand(tasks, writeToFile, str);
         setTodoCommand.setTodo();
-
         return setTodoCommand.toString();
     }
 
@@ -104,14 +97,13 @@ public class TaskList {
      *
      * @param str containing the task to be added.
      * @return created deadline task {@code Task} in String.
-     * @throws ChatCatException if description of deadline is empty.
+     * @throws TaskException if description of deadline is empty.
      * @see WriteToFile
      * @see SetDeadlineCommand
      */
-    public String setDeadline(String str) throws ChatCatException {
+    public String setDeadline(String str) throws TaskException, InvalidDateException {
         SetDeadlineCommand setDeadlineCommand = new SetDeadlineCommand(tasks, writeToFile, str);
         setDeadlineCommand.setDeadline();
-
         return setDeadlineCommand.toString();
     }
 
@@ -120,14 +112,13 @@ public class TaskList {
      *
      * @param str containing the task to be added.
      * @return created event task {@code Task} in String.
-     * @throws ChatCatException if description of event is empty.
+     * @throws TaskException if description of event is empty.
      * @see WriteToFile
      * @see SetEventCommand
      */
-    public String setEvent(String str) throws ChatCatException {
+    public String setEvent(String str) throws TaskException, InvalidDateException {
         SetEventCommand setEventCommand = new SetEventCommand(tasks, writeToFile, str);
         setEventCommand.setEvent();
-
         return setEventCommand.toString();
     }
 
@@ -139,10 +130,9 @@ public class TaskList {
      * @see WriteToFile
      * @see DeleteCommand
      */
-    public String delete(String str) {
+    public String delete(String str) throws TaskEditException {
         DeleteCommand deleteCommand = new DeleteCommand(tasks, writeToFile, str);
         deleteCommand.delete();
-
         return deleteCommand.toString();
     }
 
@@ -154,10 +144,9 @@ public class TaskList {
      * @see FilterCommand
      * @see WriteToFile
      */
-    public String filter(String str) throws ChatCatException {
+    public String filter(String str) throws TaskEditException {
         FilterCommand filterCommand = new FilterCommand(tasks, writeToFile, str);
         filterCommand.filter();
-
         return filterCommand.toString();
     }
 }

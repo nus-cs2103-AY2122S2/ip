@@ -2,6 +2,7 @@ package chatcat.commands;
 
 import java.util.ArrayList;
 
+import chatcat.chatcatexception.TaskEditException;
 import chatcat.tasks.Task;
 import chatcat.util.OutputMessage;
 import chatcat.util.WriteToFile;
@@ -11,7 +12,7 @@ import chatcat.util.WriteToFile;
  *
  * @see Command
  */
-public class ListTaskCommand extends Command{
+public class ListTaskCommand extends Command {
 
     /**
      * Creates a default ListTaskCommand {@code Command} object.
@@ -29,8 +30,12 @@ public class ListTaskCommand extends Command{
      * @see WriteToFile
      * @see Task
      */
-    public void getTaskList() {
+    public void getTaskList() throws TaskEditException {
         tasks = writeToFile.toRead();
+
+        if (tasks.isEmpty()) {
+            throw new TaskEditException(OutputMessage.emptyListErrorMessage());
+        }
     }
 
     /**

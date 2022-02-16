@@ -2,7 +2,8 @@ package chatcat.commands;
 
 import java.util.ArrayList;
 
-import chatcat.chatcatexception.ChatCatException;
+import chatcat.chatcatexception.InvalidDateException;
+import chatcat.chatcatexception.TaskException;
 import chatcat.tasks.Event;
 import chatcat.tasks.Task;
 import chatcat.util.DateTimeUtil;
@@ -18,6 +19,7 @@ import chatcat.util.WriteToFile;
 public class SetEventCommand extends Command {
     final String EVENT;
     Event event;
+    String output;
 
     /**
      * Creates a default SetEventCommand {@code Command} object.
@@ -34,17 +36,21 @@ public class SetEventCommand extends Command {
     /**
      * Creates a event {@code Event} object and appends the object at the end of {@code taskList}.
      *
-     * @throws ChatCatException if description of event is empty.
+     * @throws TaskException if description of event is empty.
      * @see Event
      * @see WriteToFile
      * @see DateTimeUtil
      * @see OutputMessage
      */
-    public void setEvent() throws ChatCatException {
+    public void setEvent() throws TaskException, InvalidDateException {
         String[] input = EVENT.split(" ");
 
         if (input.length == 1) {
-            throw new ChatCatException(OutputMessage.taskErrorMessage());
+            throw new TaskException(OutputMessage.taskErrorMessage());
+        }
+
+        if (!(EVENT.contains("/at "))) {
+            throw new TaskException(OutputMessage.invalidInputMessage());
         }
 
         String eventStr = SplitInput.getTask(EVENT, "/at ", 6);
@@ -54,7 +60,7 @@ public class SetEventCommand extends Command {
         event = new Event(eventStr, dateTimeUtil.getTime());
 
         if (this.tasks.contains(event)) {
-            throw new ChatCatException(OutputMessage.repeatedTaskErrorMessage());
+            throw new TaskException(OutputMessage.repeatedTaskErrorMessage());
         }
 
         super.tasks.add(event);

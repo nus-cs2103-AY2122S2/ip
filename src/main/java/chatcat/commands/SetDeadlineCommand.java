@@ -2,7 +2,8 @@ package chatcat.commands;
 
 import java.util.ArrayList;
 
-import chatcat.chatcatexception.ChatCatException;
+import chatcat.chatcatexception.InvalidDateException;
+import chatcat.chatcatexception.TaskException;
 import chatcat.tasks.Deadline;
 import chatcat.tasks.Task;
 import chatcat.util.DateTimeUtil;
@@ -34,17 +35,21 @@ public class SetDeadlineCommand extends Command {
     /**
      * Creates a deadline {@code Deadline} object and appends the object at the end of {@code taskList}.
      *
-     * @throws ChatCatException if description of deadline is empty.
+     * @throws TaskException if description of deadline is empty.
      * @see Deadline
      * @see WriteToFile
      * @see DateTimeUtil
      * @see OutputMessage
      */
-    public void setDeadline() throws ChatCatException {
+    public void setDeadline() throws TaskException, InvalidDateException {
         String[] input = DEADLINE.split(" ");
 
         if (input.length == 1) {
-            throw new ChatCatException(OutputMessage.taskErrorMessage());
+            throw new TaskException(OutputMessage.taskErrorMessage());
+        }
+
+        if (!(DEADLINE.contains("/by "))) {
+            throw new TaskException(OutputMessage.invalidInputMessage());
         }
 
         String deadlineStr = SplitInput.getTask(DEADLINE, "/by ", 9);
@@ -54,7 +59,7 @@ public class SetDeadlineCommand extends Command {
         deadline = new Deadline(deadlineStr, dateTimeUtil.getTime());
 
         if (this.tasks.contains(deadline)) {
-            throw new ChatCatException(OutputMessage.repeatedTaskErrorMessage());
+            throw new TaskException(OutputMessage.repeatedTaskErrorMessage());
         }
 
         super.tasks.add(deadline);

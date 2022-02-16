@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import chatcat.tasklist.TaskList;
 import chatcat.util.Parser;
+import chatcat.commands.ByeCommand;
 
 public class ChatCat {
     private static TaskList taskList = new TaskList();
@@ -27,7 +28,7 @@ public class ChatCat {
 
         String input = " ";
 
-        while (!parser.isBye(input)) {
+        while (!ByeCommand.isBye(input)) {
             input = br.readLine();
             parser.parseTask(input);
         }

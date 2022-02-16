@@ -49,15 +49,31 @@ public class OutputMessage {
                 "Now you have " + size + " tasks in the list.";
     }
 
-    public static String deleteErrorMessage() {
-        return "Task is Empty!";
-    }
-
     public static String taskErrorMessage() {
         return "OOPS!!! The description of a task cannot be empty.";
     }
 
     public static String repeatedTaskErrorMessage() {
-        return "OOPS!!! The description of the task cannot be empty.";
+        return "OOPS!!! The description of the task cannot be repeated.";
+    }
+
+    public static String invalidInputMessage() {
+        return "OOPS!!! Invalid description of task.";
+    }
+
+    public static String indexErrorMessage() {
+        return "Index is larger than task list size";
+    }
+
+    public static String emptyListErrorMessage() {
+        return "List is Empty!";
+    }
+
+    public static String invalidDateMessage() {
+        return "sorry, this is not a valid time";
+    }
+
+    public static String byeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 }

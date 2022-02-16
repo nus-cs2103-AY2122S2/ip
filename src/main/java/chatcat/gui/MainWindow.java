@@ -1,5 +1,6 @@
 package chatcat.gui;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import chatcat.ChatCat;
+import javafx.util.Duration;
 
 /**
  * Code for GUI was referenced from se-education.org
@@ -34,7 +36,7 @@ public class MainWindow extends AnchorPane {
     private Image chatCatImage = new Image(this.getClass().getResourceAsStream("/images/chatCat.jpeg"));
 
     @FXML
-    public void initialize() {
+    public void initialize()  {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -58,6 +60,14 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getChatCatDialog(response, chatCatImage)
             );
+        }
+
+        if (input.equals("bye")) {
+            PauseTransition wait = new PauseTransition(Duration.seconds(1));
+            wait.setOnFinished(event -> {
+                System.exit(0);
+            });
+            wait.play();
         }
 
         userInput.clear();

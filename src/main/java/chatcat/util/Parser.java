@@ -1,7 +1,10 @@
 package chatcat.util;
 
-import chatcat.tasklist.TaskList;
+import chatcat.chatcatexception.InvalidDateException;
+import chatcat.chatcatexception.TaskEditException;
+import chatcat.chatcatexception.TaskException;
 import chatcat.chatcatexception.ChatCatException;
+import chatcat.tasklist.TaskList;
 
 public class Parser {
 
@@ -45,16 +48,18 @@ public class Parser {
                 output = taskList.filter(input);
                 break;
             default:
-                throw new ChatCatException("OOPS!!! I'm sorry, but I don't know what that means");
+                throw new ChatCatException();
             }
         } catch (ChatCatException wrf) {
-            wrf.printStackTrace();
+            output = wrf.toString();
+        } catch (TaskException t) {
+            output = t.toString();
+        } catch (TaskEditException te) {
+            output = te.toString();
+        } catch (InvalidDateException id) {
+            output = id.toString();
         }
 
         return output;
-    }
-
-    public boolean isBye(String command) {
-        return command.equals("bye");
     }
 }

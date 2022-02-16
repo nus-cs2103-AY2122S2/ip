@@ -2,7 +2,7 @@ package chatcat.commands;
 
 import java.util.ArrayList;
 
-import chatcat.chatcatexception.ChatCatException;
+import chatcat.chatcatexception.TaskEditException;
 import chatcat.tasks.Task;
 import chatcat.util.SplitInput;
 import chatcat.util.WriteToFile;
@@ -35,7 +35,7 @@ public class FilterCommand extends Command {
      *
      * @see Task
      */
-    public void filter() throws ChatCatException {
+    public void filter() throws TaskEditException {
         super.tasks = writeToFile.toRead();
 
         /* Searches the task list and outputs tasks with keyword in filteredList */
@@ -48,7 +48,7 @@ public class FilterCommand extends Command {
         });
 
         if (filteredList.isEmpty()) {
-            throw new ChatCatException(OutputMessage.deleteErrorMessage());
+            throw new TaskEditException(OutputMessage.emptyListErrorMessage());
         }
     }
 

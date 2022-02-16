@@ -49,6 +49,9 @@ public class WriteToFile  {
     //https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
     public ArrayList<Task> toRead() {
         try {
+            if (!file.exists()) {
+                return new ArrayList<>();
+            }
             FileInputStream readData = new FileInputStream(file);
             ObjectInputStream readStream = new ObjectInputStream(readData);
 

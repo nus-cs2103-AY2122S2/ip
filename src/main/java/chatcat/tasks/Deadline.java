@@ -1,5 +1,8 @@
 package chatcat.tasks;
 
+import chatcat.chatcatexception.TaskException;
+import chatcat.util.OutputMessage;
+
 /**
  * The default Deadline class inherited from {@code Task}.
  *

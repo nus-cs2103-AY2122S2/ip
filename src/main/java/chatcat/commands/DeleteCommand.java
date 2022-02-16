@@ -2,6 +2,7 @@ package chatcat.commands;
 
 import java.util.ArrayList;
 
+import chatcat.chatcatexception.TaskEditException;
 import chatcat.tasks.Task;
 import chatcat.util.OutputMessage;
 import chatcat.util.SplitInput;
@@ -34,14 +35,17 @@ public class DeleteCommand extends Command {
      * @see Task
      * @see WriteToFile
      */
-    public void delete() {
+    public void delete() throws TaskEditException{
         super.tasks = writeToFile.toRead();
 
         int indexToDelete = SplitInput.getIndex(INDEX_TO_DELETE, 1);
-        assert indexToDelete < super.tasks.size() :
-                "Index is larger than task list size";
-        removed = tasks.remove(indexToDelete);
 
+        if (indexToDelete > super.tasks.size()) {
+            throw new TaskEditException(OutputMessage.indexErrorMessage());
+        }
+        assert indexToDelete < super.tasks.size() : OutputMessage.indexErrorMessage();
+
+        removed = tasks.remove(indexToDelete);
         writeToFile.toWrite(tasks);
     }
 

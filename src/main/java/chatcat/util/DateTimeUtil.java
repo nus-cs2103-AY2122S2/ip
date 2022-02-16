@@ -1,5 +1,7 @@
 package chatcat.util;
 
+import chatcat.chatcatexception.InvalidDateException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,11 +20,12 @@ public class DateTimeUtil {
             ));
     DateTimeFormatter dateTimeFormatter = dateTimeFormatterBuilder.toFormatter();
 
-    public DateTimeUtil(String time) {
+    public DateTimeUtil(String time) throws InvalidDateException {
         try {
             this.time = LocalDateTime.parse(time, dateTimeFormatter);
         } catch (DateTimeException de) {
-            System.out.println("sorry, this is not a valid time");
+            System.out.println(OutputMessage.invalidDateMessage());
+            throw new InvalidDateException(OutputMessage.invalidDateMessage());
         }
     }
 

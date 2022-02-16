@@ -2,6 +2,7 @@ package chatcat.commands;
 
 import java.util.ArrayList;
 
+import chatcat.chatcatexception.TaskEditException;
 import chatcat.tasks.Task;
 import chatcat.util.OutputMessage;
 import chatcat.util.SplitInput;
@@ -34,11 +35,15 @@ public class UnmarkCommand extends Command {
      * @see Task
      * @see WriteToFile
      */
-    public void unmark() {
+    public void unmark() throws TaskEditException {
         taskID = SplitInput.getIndex(UNMARK, 1);
-        assert taskID < super.tasks.size() : "Index is larger than task list size";
-        super.tasks.get(taskID).setUndone();
 
+        if (taskID > super.tasks.size()) {
+            throw new TaskEditException(OutputMessage.indexErrorMessage());
+        }
+        assert taskID < super.tasks.size() : OutputMessage.indexErrorMessage();
+
+        super.tasks.get(taskID).setUndone();
         super.writeToFile.toWrite(super.tasks);
     }
 
