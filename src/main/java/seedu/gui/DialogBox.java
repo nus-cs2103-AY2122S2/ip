@@ -1,5 +1,7 @@
 package seedu.gui;
 
+import static javafx.scene.paint.Color.LAVENDER;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -17,7 +19,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import static javafx.scene.paint.Color.*;
 
 /**
  * An example of a custom control using FXML.

@@ -2,7 +2,17 @@ package seedu.duke;
 
 import java.util.HashMap;
 
-import seedu.commands.*;
+import seedu.commands.ByeCommand;
+import seedu.commands.Command;
+import seedu.commands.DeadlineCommand;
+import seedu.commands.DeleteCommand;
+import seedu.commands.EventCommand;
+import seedu.commands.FindCommand;
+import seedu.commands.ListCommand;
+import seedu.commands.MarkCommand;
+import seedu.commands.PriorityCommand;
+import seedu.commands.TodoCommand;
+import seedu.commands.UnmarkCommand;
 
 /**
  * The Parser class
@@ -51,7 +61,7 @@ public class Parser {
         if (cmds.length == 2) {
             cmd.validate(cmds[1].trim());
         } else {
-            assert cmds.length == 1: "Array not suppose to contain 2 items";
+            assert cmds.length == 1 : "Array not suppose to contain 2 items";
             cmd.validate("");
         }
 

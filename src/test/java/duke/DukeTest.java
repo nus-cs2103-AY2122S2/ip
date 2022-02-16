@@ -33,7 +33,7 @@ public class DukeTest {
     }
 
     @Test
-    public void TodoTask() {
+    public void testTodoTask() {
         Todo t = new Todo("task");
         assertEquals("T\t1\tNo\ttask", t.toString());
         assertEquals("T\ttask\tfalse\t1", t.toFile());

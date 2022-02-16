@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    private LocalDateTime atDateTime;
     private static final String TYPE = "E";
+    private LocalDateTime atDateTime;
 
     /**
      * Event constructor

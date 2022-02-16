@@ -14,8 +14,8 @@ import seedu.task.Task;
 public abstract class Command {
 
     protected static boolean isExit = false;
-    private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
-    protected final int INDEX_OFFSET = 1;
+    protected static final int INDEX_OFFSET = 1;
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
 
     public abstract void validate(String inst) throws DukeException;
     public abstract String execute(TaskList tasks) throws DukeException;
@@ -89,10 +89,10 @@ public abstract class Command {
      * @return A string to be used in the gui
      */
     public String show(String prefix, Task task) {
-        return prefix + "\n" +
-                "\tType: " + task.getType() + "\n" +
-                "\tPriority: " + task.getPriority() + "\n" +
-                "\tCompleted?: " + task.getCompleted() + "\n" +
-                "\tDescription: " + task.getDescription() + "\n\n";
+        return prefix + "\n"
+                + "\tType: " + task.getType() + "\n"
+                + "\tPriority: " + task.getPriority() + "\n"
+                + "\tCompleted?: " + task.getCompleted() + "\n"
+                + "\tDescription: " + task.getDescription() + "\n\n";
     }
 }

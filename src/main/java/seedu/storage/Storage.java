@@ -20,7 +20,7 @@ import seedu.task.Todo;
  */
 public class Storage {
 
-    private final File FILE;
+    private File file;
 
     /**
      * Constructor
@@ -28,7 +28,7 @@ public class Storage {
      * @param filePath file path of the save file
      */
     public Storage(String filePath) {
-        FILE = Paths.get(filePath).toFile();
+        file = Paths.get(filePath).toFile();
     }
 
     /**
@@ -39,11 +39,11 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
 
-        Paths.get(FILE.getParent()).toFile().mkdirs();
+        Paths.get(file.getParent()).toFile().mkdirs();
         createFile();
 
         try {
-            Scanner sc = new Scanner(FILE);
+            Scanner sc = new Scanner(file);
             ArrayList<Task> tasks = new ArrayList<>();
 
             while (sc.hasNextLine()) {
@@ -56,13 +56,13 @@ public class Storage {
                     tasks.add(new Todo(task[1], isCompleted, priority));
                     break;
                 case "D":
-                    assert task.length == 5: "Task saved incorrectly";
-                    LocalDateTime byDate = LocalDateTime.parse(task[task.length-1], Task.getFormatter());
+                    assert task.length == 5 : "Task saved incorrectly";
+                    LocalDateTime byDate = LocalDateTime.parse(task[task.length - 1], Task.getFormatter());
                     tasks.add(new Deadline(task[1], isCompleted, byDate, priority));
                     break;
                 case "E":
-                    assert task.length == 5: "Task saved incorrectly";
-                    LocalDateTime atDate = LocalDateTime.parse(task[task.length-1], Task.getFormatter());
+                    assert task.length == 5 : "Task saved incorrectly";
+                    LocalDateTime atDate = LocalDateTime.parse(task[task.length - 1], Task.getFormatter());
                     tasks.add(new Event(task[1], isCompleted, atDate, priority));
                     break;
                 default:
@@ -84,8 +84,8 @@ public class Storage {
      */
     private void createFile() throws DukeException {
         try {
-            FILE.createNewFile();
-            assert FILE.exists(): "No save file exists at all";
+            file.createNewFile();
+            assert file.exists() : "No save file exists at all";
         } catch (IOException e) {
             throw new DukeException("File creation error. So, cannot save.");
         }
@@ -99,7 +99,7 @@ public class Storage {
      */
     public void saveAll(ArrayList<Task> tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(FILE);
+            FileWriter fw = new FileWriter(file);
 
             for (Task t : tasks) {
                 fw.write(t.toFile() + "\n");

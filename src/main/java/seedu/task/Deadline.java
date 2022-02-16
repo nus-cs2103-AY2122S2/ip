@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    private LocalDateTime deadline;
     private static final String TYPE = "D";
+    private LocalDateTime deadline;
 
     /**
      * Deadline constructor
@@ -51,7 +51,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toFile() {
-            return super.toFile() + "\t" + deadline.format(DATE_FORMAT);
+        return super.toFile() + "\t" + deadline.format(DATE_FORMAT);
     }
 
     /**
