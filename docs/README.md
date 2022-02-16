@@ -1,29 +1,78 @@
 # User Guide
 
+<img src="../docs/Ui.png" width="310" height="500">
+
 ## Features 
 
-### Feature-ABC
+### Adding Todo task: `todo` 
 
-Description of the feature.
+> Adds a todo task.  
 
-### Feature-XYZ
+Format: `todo <DESCRIPTION>`  
+Example: `todo kill joker` 
 
-Description of the feature.
+### Adding Event task: `event` 
 
-## Usage
+> Adds an event task which includes date and time of event.   
 
-### `Keyword` - Describe action
+Format: `event DESCRIPTION /at DATE TIME`  
+Example: 
+* `event charity ball /at 10/11/2022 19:00` 
+* `event charity ball /at 2022-10-11 19:00` 
 
-Describe the action and its outcome.
+### Adding Deadline task: `deadline` 
 
-Example of usage: 
+> Adds a deadline task which includes date and time of deadline.   
 
-`keyword (optional arguments)`
+Format: `deadline DESCRIPTION /by DATE TIME`  
+Example: 
+* `deadline repair batmobile /by 18/2/2022 23:59` 
+* `deadline repair batmobile /by 2022-2-18 23:59` 
 
-Expected outcome:
+### Listing All Tasks: `list`
 
-Description of the outcome.
+> Displays list of all existing tasks.  
 
+Format: `list`
+
+### Deleting a task: `delete` 
+
+> Deletes a task according to the index in the list.  
+
+Format: `delete INDEX`  
+Example: `delete 3`  
 ```
-expected output
+Note: Deletes only if the index exists
 ```
+
+### Finding keyword in task: `find` 
+
+> Displays tasks that matches the keyword given.
+
+Format: `find`  
+Example: 
+* `find joker` 
+* `find 18 Feb`
+
+### Marking a task: `mark` 
+
+> Mark a task as done. Shows X if done, nothing otherwise.
+
+Format: `mark INDEX`  
+Example: `mark 3` 
+```
+Note: Marks only if the index exists
+```
+
+### Unmarking a task: `mark` 
+
+Format: `unmark INDEX`  
+Example: `unmark 3` 
+```
+Note: Unmarks only if the index exists
+```
+### Exiting the program: `bye`
+
+> Program displays exit message and closes after 3 seconds.
+
+Format: `bye`  
