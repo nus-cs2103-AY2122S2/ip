@@ -34,13 +34,13 @@ public class TaskList {
                 return returnAfterAdding(new Todo(returnString), returnString);
             }
         case "deadline":
-            if (!containsBy || stringsToAdd[stringsToAdd.length - 1].equals("by")) {
+            if (!containsBy || stringsToAdd[stringsToAdd.length - 1].equals("/by")) {
                 throw new DukeException("A deadline needs a due date. Create a todo/event instead!");
             } else {
                 return returnAfterAdding(new Deadline(returnString, stringsToAdd[stringsToAdd.length - 1]), returnString);
             }
         default:
-            if (!containsOn || stringsToAdd[stringsToAdd.length - 1].equals("on")) {
+            if (!containsOn || stringsToAdd[stringsToAdd.length - 1].equals("/on")) {
                 throw new DukeException("An event needs a date. Create a todo/deadline instead!");
             } else {
                 return returnAfterAdding(new Event(returnString, stringsToAdd[stringsToAdd.length - 1]), returnString);
@@ -97,10 +97,10 @@ public class TaskList {
             boolean containsBy = false;
             boolean containsOn = false;
             for (int i = 3; i < stringsToAdd.length; i++) {
-                if (stringsToAdd[i].equals("by")) {
+                if (stringsToAdd[i].equals("/by")) {
                     containsBy = true;
                     break;
-                } else if (stringsToAdd[i].equals("on")) {
+                } else if (stringsToAdd[i].equals("/on")) {
                     containsOn = true;
                     break;
                 } else {
