@@ -77,7 +77,7 @@ public class Storage {
      * Make directory to where the file should be saved.
      */
     public void makeDirectory() {
-        String home = System.getProperty("user.home");
+        String home = System.getProperty("user.dir");
         java.nio.file.Path folderPath = java.nio.file.Paths.get(home, "data");
         File folder = new File(String.valueOf(folderPath));
         folder.mkdir();

@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
+
+import duke.task.Task;
 
 /**
  * Parser class to read what the user inputs.

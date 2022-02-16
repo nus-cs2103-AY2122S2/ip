@@ -16,7 +16,7 @@ public class Duke {
      *
      */
     public Duke() {
-        String home = System.getProperty("user.home");
+        String home = System.getProperty("user.dir");
         java.nio.file.Path filePath = java.nio.file.Paths.get(home, "data", "duke.txt");
         ui = new Ui();
         storage = new Storage(String.valueOf(filePath));
