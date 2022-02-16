@@ -8,7 +8,6 @@ public class Ui {
     private static final String intro = "Hello! I'm Duke! What can I do for you?";
     private static final String indent = "    ";
     private String response;
-    private String errorMsg;
 
     /**
      * Returns the default indentation of output.
@@ -32,7 +31,6 @@ public class Ui {
      * @param message The error message.
      */
     public String showError(String message) {
-        errorMsg = message;
         return message;
     }
 
