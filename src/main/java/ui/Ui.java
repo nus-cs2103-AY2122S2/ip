@@ -33,6 +33,9 @@ public class Ui {
      */
     public String startConversation(Parser parser, Storage storage, String userInput) throws DukeException {
         String[] inputStringArray = userInput.split(" ");
+        if (userInput.equals("bye")) {
+            System.exit(0);
+        }
         return parser.userCommand(inputStringArray, storage);
     }
 
