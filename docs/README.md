@@ -38,7 +38,7 @@ She will not ~~forget~~ what you have completed or yet to complete, unless you t
 - [`find`](#find)
 - [`delete`](#delete)
 - [`bye`](#bye)
-- [`palces`](#places)
+- [`places`](#places)
 - **[All Commands](#all-commands)**
 
 ## `commands` 
