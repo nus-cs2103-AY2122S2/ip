@@ -161,13 +161,16 @@ class Parser {
         String deadline = "deadline ";
         String event = "event ";
         String todo = "todo ";
+        String find = "find ";
         String output;
         if (input.contains(todo)) {
             output = input.substring(todo.length());
         } else if (input.contains(event)) {
             output = input.substring(event.length());
-        } else {
+        } else if (input.contains(deadline)) {
             output = input.substring(deadline.length());
+        } else {
+            output = input.substring(find.length());
         }
         return output;
     }
