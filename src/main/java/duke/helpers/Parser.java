@@ -22,49 +22,49 @@ public class Parser {
      * @throws DukeException If deadline and event commands are missing date and/or time.
      */
     static boolean isCommand(String s, Command command) throws DukeException {
-        boolean res = false;
-        boolean missingDesc = false;
-        boolean missingTime = false;
+        boolean isValidCommand = false;
+        boolean isMissingDesc = false;
+        boolean isMissingTime = false;
         switch (command) {
         case BYE:
-            res = s.equals("bye");
+            isValidCommand = s.equals("bye");
             break;
         case LIST:
-            res = s.equals("list");
+            isValidCommand = s.equals("list");
             break;
         case DELETE:
-            res = Pattern.matches("delete \\d+", s);
+            isValidCommand = Pattern.matches("delete \\d+", s);
             break;
         case TOGGLEMARK:
-            res = Pattern.matches("mark \\d+|unmark \\d+", s);
+            isValidCommand = Pattern.matches("mark \\d+|unmark \\d+", s);
             break;
         case TODO:
-            res = Pattern.matches("todo .+", s);
-            missingDesc = !res && s.equals("todo ");
+            isValidCommand = Pattern.matches("todo .+", s);
+            isMissingDesc = !isValidCommand && s.equals("todo ");
             break;
         case DEADLINE:
-            res = Pattern.matches("deadline .+ /by .+", s);
-            missingDesc = !res && Pattern.matches("deadline\\s+|deadline\\s+/by.*", s);
-            missingTime = !res && !missingDesc && Pattern.matches("deadline .+", s);
+            isValidCommand = Pattern.matches("deadline .+ /by .+", s);
+            isMissingDesc = !isValidCommand && Pattern.matches("deadline\\s+|deadline\\s+/by.*", s);
+            isMissingTime = !isValidCommand && !isMissingDesc && Pattern.matches("deadline .+", s);
             break;
         case EVENT:
-            res = Pattern.matches("event .+ /at .+", s);
-            missingDesc = !res && Pattern.matches("event\\s+|event\\s+/at.*", s);
-            missingTime = !res && !missingDesc && Pattern.matches("event .+", s);
+            isValidCommand = Pattern.matches("event .+ /at .+", s);
+            isMissingDesc = !isValidCommand && Pattern.matches("event\\s+|event\\s+/at.*", s);
+            isMissingTime = !isValidCommand && !isMissingDesc && Pattern.matches("event .+", s);
             break;
         case FIND:
-            res = res = Pattern.matches("find .+", s);
+            isValidCommand = isValidCommand = Pattern.matches("find .+", s);
             break;
         default:
             break;
         }
-        if (missingDesc) {
+        if (isMissingDesc) {
             throw new EmptyDescriptionException(command.toString());
         }
-        if (missingTime) {
+        if (isMissingTime) {
             throw new EmptyTimeException(command.toString());
         }
-        return res;
+        return isValidCommand;
     }
 
     /**

@@ -2,8 +2,6 @@ package duke;
 
 import java.io.IOException;
 
-import javafx.scene.image.Image;
-
 import duke.helpers.Parser;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
@@ -18,8 +16,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duck.png"));
 
     /**
      * Constructs a Duke object where Task data is stored in a given file with given directory.
@@ -38,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructs a Duke object where Task data is stored in a 'duke.txt' file within a 'data' directory.
+     */
     public Duke() {
         String dirPath = "./src/main/data";
         String filePath = "./src/main/data/duke.txt";
@@ -57,7 +56,6 @@ public class Duke {
     public void run() {
         ui.welcome();
         String userInput = "";
-
         while (!userInput.equals("bye")) {
             userInput = ui.readCommand();
             assert(!userInput.equals(""));
@@ -69,20 +67,19 @@ public class Duke {
     /**
      * Creates a Duke object and calls the run method.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String dirPath = "./src/main/data";
         String filePath = "./src/main/data/duke.txt";
         Duke duke = new Duke(dirPath, filePath);
         duke.run();
     }
 
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-            return Parser.parse(input);
+        return Parser.parse(input);
     }
 
 }

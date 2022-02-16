@@ -44,14 +44,11 @@ public class Storage {
         if (!new File(this.dirPath).exists()) {
             Files.createDirectory(Path.of(dirPath));
         }
-
         if (!new File(this.filePath).exists()) {
             File newFile = new File(filePath);
             newFile.createNewFile();
         }
-
         ArrayList<Task> taskArr = new ArrayList<Task>();
-
         try {
             java.nio.file.Path path = java.nio.file.Paths.get("src/main/data/duke.txt");
             BufferedReader reader = java.nio.file.Files.newBufferedReader(path);
@@ -81,7 +78,6 @@ public class Storage {
         } catch (NoSuchFileException e) {
             System.out.println("File not found");
         }
-
         return taskArr;
     }
 
@@ -104,7 +100,7 @@ public class Storage {
                 String dateTime = (t.getDate().replace(" ", "-") + " " + t.getTime()).trim();
                 boolean isDeadline = command.equals("D");
                 boolean isEvent = command.equals("E");
-                if ( isDeadline | isEvent ) {
+                if (isDeadline | isEvent) {
                     toSave = String.join(separator, command, mark, desc, dateTime);
                 } else {
                     toSave = String.join(separator, command, mark, desc);

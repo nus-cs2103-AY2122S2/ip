@@ -13,11 +13,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
-import javax.swing.*;
 
 /**
  * An example of a custom control using FXML.
@@ -29,11 +30,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-//    public static final Image background = new Image("/images/Background.png");
-//    public static final BackgroundImage myBI= new BackgroundImage(background,
-//            BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-//            BackgroundSize.DEFAULT);
 
     private DialogBox(String text, Image img) {
         try {
@@ -72,7 +68,6 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.setLabelBackground(true);
         db.setBackground(Background.EMPTY);
-//        db.setBackground(new Background(myBI));
         return db;
     }
 
