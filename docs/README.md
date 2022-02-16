@@ -6,8 +6,8 @@ Duke is a friendly personal task manager that helps you to manage your task and 
 ### Adding task
 ##### Duke supports 3 type of task
 - Todo, represent by [T]
-- Event represent by [E]
-- Deadline represent by [D]
+- Event, represent by [E]
+- Deadline, represent by [D]
 
 To add a **Todo** task in task list:   **_`todo` (task discription)_**
 
