@@ -1,5 +1,7 @@
 package duke;
 import java.io.*;
+import java.nio.file.Path;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -28,7 +30,7 @@ public class Duke extends Application {
         Ui ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load(), storage.getNumberOfTasks());
+            tasks = new TaskList(storage.load(), storage.getNumberOfTasks(), Path.of(storage.getPath()));
         } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -140,14 +142,14 @@ public class Duke extends Application {
     }
 
     String getResponse(String input) throws IOException {
-        storage = new Storage("data/duke.txt");
-        tasks = new TaskList(storage.load(), storage.getNumberOfTasks());
+        storage = new Storage("data.txt");
+        tasks = new TaskList(storage.load(), storage.getNumberOfTasks(), Path.of(storage.getPath()));
         Parser p = new Parser(input, tasks, storage);
         return p.getResponse();
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt");
+        new Duke("data.txt");
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {

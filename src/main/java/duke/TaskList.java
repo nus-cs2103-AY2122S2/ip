@@ -11,13 +11,16 @@ import java.util.List;
 public class TaskList {
     ArrayList<Task> tasks;
     public int items;
+    public Path path;
 
-    public TaskList(ArrayList<Task> t, int number) {
+    public TaskList(ArrayList<Task> t, int number, Path path) {
         tasks = t;
         items = number;
+        this.path = path;
     }
     public TaskList() {
         tasks = new ArrayList<Task>();
+        path = null;
     }
     public void add(Task task) {
         this.tasks.add(task);
@@ -44,7 +47,7 @@ public class TaskList {
      * @param data    New string to replace the old one.
      */
     public void updateTask(int lineNumber, String data) throws IOException {
-        Path path = Paths.get("data/duke.txt");
+//        Path path = Paths.get("data/duke.txt");
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         lines.set(lineNumber - 1, data);
         Files.write(path, lines, StandardCharsets.UTF_8);
@@ -55,7 +58,7 @@ public class TaskList {
      * @param lineNumber  The line in the file to be deleted.
      */
     public  void deleteTask(int lineNumber) throws IOException {
-        Path path = Paths.get("data/duke.txt");
+//        Path path = Paths.get("data/duke.txt");
         List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         lines.remove(lineNumber - 1);
         Files.write(path, lines, StandardCharsets.UTF_8);

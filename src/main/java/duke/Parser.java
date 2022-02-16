@@ -25,7 +25,7 @@ public class Parser {
 
     public String getResponse() throws IOException {
             StringBuilder sb = new StringBuilder();
-            FileWriter fw = new FileWriter("data/duke.txt", true);
+            FileWriter fw = new FileWriter(storage.getPath(), true);
             PrintWriter wf = new PrintWriter(fw);
             switch (words[0]) {
                 case "list" -> {

@@ -16,10 +16,24 @@ public class Storage {
 
 
     public Storage(String filePath) throws IOException {
-        this.file =  new File(filePath);
         this.fw = new  FileWriter(filePath,true);
         this.wf = new  PrintWriter(fw);
+        filePath = getPath();
         items = 0;
+        file = new File(filePath);
+        file.createNewFile(); // if file already exists will do nothing
+    }
+
+    /**
+     * Gets path.
+     *
+     * @return the path.
+     */
+    public String getPath() {
+        String home = System.getProperty("user.dir");
+        String path = home + "/data.txt";
+        boolean directoryExists = new java.io.File(path).exists();
+        return path;
     }
     /**
      * Writes the string to file and flushes the buffer.
