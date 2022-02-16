@@ -6,8 +6,9 @@ you never have to do it yourself!*
 ![Duke Image](https://aditi2313.github.io/ip/Ui.png)
 
 ## Table of Contents
-1. [Application Features](#application-features)
-2. [Task List command usages](#task-list-command-usages)
+1. [Setting up Duke](#setting-up-duke)
+2. [Application Features](#application-features)
+3. [Task List command usages](#task-list-command-usages)
    - [Viewing task list](#viewing-task-list)
    - [Creating a new todo](#creating-a-new-todo)
    - [Creating a new deadline](#creating-a-new-deadline)
@@ -17,15 +18,29 @@ you never have to do it yourself!*
    - [Deleting a task](#deleting-a-task)
    - [Deleting all tasks](#deleting-all-tasks)
    - [Finding tasks](#finding-tasks)
-3. [Note List command usages](#note-list-command-usages)
+4. [Note List command usages](#note-list-command-usages)
    - [Viewing note list](#viewing-note-list)
    - [Creating a new note](#creating-a-new-note)
    - [Deleting a note](#deleting-a-note)
    - [Deleting all notes](#deleting-all-notes)
    - [Finding notes](#finding-notes)
-4. [General command usages](#general-command-usages)
+5. [General command usages](#general-command-usages)
    - [Asking for help](#asking-for-help)
    - [Closing the application](#closing-the-application)
+
+##Setting up Duke
+1. Make sure you have Java 11 installed.
+2. Download the `Main.jar` file from releases. You can find the link to the GitHub page above.
+3. Create a new folder in a working directory of your choice and name it `Duke`.
+4. Move the `Main.jar` file to the `Duke` folder.
+5. Move into the working directory via Terminal/Command Line by running:
+````
+cd <path_to_the_duke_folder_you_created>
+````
+6. Run Duke using the command:
+````
+java -jar Main.jar
+````
 
 ## Application Features
 1. Create and add new `todos`, `deadlines`, `events` and `notes` to your task and note lists.
@@ -57,20 +72,20 @@ Example:
 `task new deadline` allows you to add a new deadline to your task list.
 
 Format:
-`task new deadline <deadline description> by <date in YYYY-MM-DD format>`
+`task new deadline <deadline description> /by <date in YYYY-MM-DD format>`
 
 Example:
-`task new deadline Submit CS2103T quiz by 2022-02-13`
+`task new deadline Submit CS2103T quiz /by 2022-02-13`
 
 ### Creating a new event
 
 `task new event` allows you to add a new event to your task list.
 
 Format:
-`task new event <event description> on <date in YYYY-MM-DD format>`
+`task new event <event description> /on <date in YYYY-MM-DD format>`
 
 Example:
-`task new event Attend CS seminar on 2020-02-26`
+`task new event Attend CS seminar /on 2020-02-26`
 
 ### Marking a task as complete
 
