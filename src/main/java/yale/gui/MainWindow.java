@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import yale.Yale;
@@ -28,12 +29,18 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image yaleImage = new Image(this.getClass().getResourceAsStream("/images/Yale.png"));
+    private Image sendImage = new Image(this.getClass().getResourceAsStream("/images/send.png"));
+    private ImageView sendIcon = new ImageView(sendImage);
 
     /**
      * Initialise method
      */
     @FXML
     public void initialize() {
+        //Button
+        sendIcon.setFitHeight(20);
+        sendIcon.setFitWidth(20);
+        sendButton.setGraphic(sendIcon);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         Ui.welcomePrompt();
         dialogContainer.getChildren().add(
