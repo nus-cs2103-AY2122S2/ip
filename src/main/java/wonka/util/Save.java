@@ -19,7 +19,7 @@ import wonka.task.Todo;
  * Represents a handler to load a save file, or save to a file.
  */
 public class Save {
-    private static final String DUKE_PATHNAME = "src/main/java/wonka/data/duke.txt";
+    private static final String WONKA_PATHNAME = "src/main/java/wonka/data/wonka.txt";
     private final ArrayList<String> inputsToBeProcessed = new ArrayList<>(100);
     private TaskList tasks = new TaskList(100);
     private int count;
@@ -50,7 +50,7 @@ public class Save {
      */
     public void save() {
         try {
-            FileWriter fw = new FileWriter(DUKE_PATHNAME);
+            FileWriter fw = new FileWriter(WONKA_PATHNAME);
             String textToWrite = simplify();
             fw.write(textToWrite);
             fw.close();
@@ -66,7 +66,7 @@ public class Save {
      */
     public void readAndAdd() {
         try {
-            File file = new File(DUKE_PATHNAME);
+            File file = new File(WONKA_PATHNAME);
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNext()) {
                 String line = fileScanner.nextLine();
@@ -89,9 +89,9 @@ public class Save {
             System.out.println("\t☹ Oops! The path you provided does not exist!");
             System.out.println("\t☹ I have created the file for you!");
             System.out.println("\t____________________________________________________________");
-            File fileDir = new File("src/main/java/Duke/data");
+            File fileDir = new File("src/main/java/wonka/data");
             fileDir.mkdirs();
-            File fileToCreate = new File(fileDir, "duke.txt");
+            File fileToCreate = new File(fileDir, "wonka.txt");
             try {
                 fileToCreate.createNewFile();
             } catch (IOException e1) {
