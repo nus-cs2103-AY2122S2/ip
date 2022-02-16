@@ -1,9 +1,9 @@
-package duke.commands;
+package bro.commands;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import duke.tasks.Task;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
+import bro.tasks.Task;
 
 /**
  * Represents a command to update the name of the task.
@@ -29,32 +29,37 @@ public class UpdateNameCommand extends UpdateCommand {
      * @param storage The storage to save the TaskManager to if required.
      * @param ui The Ui to display the output of the command to.
      * @param taskManager The TaskManager containing the tasks.
-     * @return The output of the command.
+     * @return True if the command executed successfully, false otherwise.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
 
         assert newName != null : "New name is null in UpdateNameCommand!";
 
         if (newName.strip().equals("")) {
-            return ui.showNoName();
+            this.response = ui.showNoName();
+            return false;
         }
 
         if (taskManager.size() == 0) {
-            return ui.showMarkEmptyList();
+            this.response = ui.showMarkEmptyList();
+            return false;
         }
 
         if (indexToUpdate < 0 || indexToUpdate >= taskManager.size()) {
-            return ui.showUpdateOutOfBounds();
+            this.response = ui.showUpdateOutOfBounds();
+            return false;
         }
 
         Task toUpdate = taskManager.getTask(indexToUpdate);
         boolean isSuccess = toUpdate.updateName(newName);
 
         if (!isSuccess) {
-            return ui.showSameNameError();
+            this.response = ui.showSameNameError();
+            return false;
         }
 
         save(storage, ui, taskManager);
-        return ui.showUpdateSuccess(toUpdate);
+        this.response = ui.showUpdateSuccess(toUpdate);
+        return true;
     }
 }

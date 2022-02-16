@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import duke.tasks.Event;
+import bro.tasks.Event;
 
 public class EventTest {
 

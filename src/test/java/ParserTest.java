@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Parser;
-import duke.exceptions.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Todo;
+import bro.Parser;
+import bro.exceptions.BroException;
+import bro.tasks.Deadline;
+import bro.tasks.Event;
+import bro.tasks.Todo;
 
 public class ParserTest {
 
@@ -27,19 +27,19 @@ public class ParserTest {
     public void parseToTask_emptyTaskName_exceptionThrown() {
         try {
             Parser.parseToTask("todo ");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Todo Name is empty!", e.getMessage());
         }
 
         try {
             Parser.parseToTask("deadline  /by 11/11/2011 1500");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Deadline Name is empty!", e.getMessage());
         }
 
         try {
             Parser.parseToTask("event  /at 11/11/2011 1500");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Event Name is empty!", e.getMessage());
         }
     }
@@ -47,25 +47,25 @@ public class ParserTest {
     public void parseToTask_emptyDate_exceptionThrown() {
         try {
             Parser.parseToTask("deadline name /by ");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("No Date Specified!", e.getMessage());
         }
 
         try {
             Parser.parseToTask("deadline name /by");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Wrong format entered! Please enter <Deadline Name> /by <Deadline>", e.getMessage());
         }
 
         try {
             Parser.parseToTask("event name /at");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Wrong format entered! Please enter <Event Name> /at <Event Date>", e.getMessage());
         }
 
         try {
             Parser.parseToTask("event name /at ");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("No Date Specified!", e.getMessage());
         }
     }
@@ -73,28 +73,28 @@ public class ParserTest {
     public void parseToTask_wrongDateFormat_exceptionThrown() {
         try {
             Parser.parseToTask("deadline name /by 11112011 1500");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Invalid Date format! Please enter Date/Time in the form DD/MM/YYYY HHMM",
                     e.getMessage());
         }
 
         try {
             Parser.parseToTask("deadline name /by 11-11-2011 1500");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Invalid Date format! Please enter Date/Time in the form DD/MM/YYYY HHMM",
                     e.getMessage());
         }
 
         try {
             Parser.parseToTask("deadline name /by 11/11/2011 15:00");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Invalid Date format! Please enter Date/Time in the form DD/MM/YYYY HHMM",
                     e.getMessage());
         }
 
         try {
             Parser.parseToTask("deadline name /by 11/11/11 1500");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Invalid Date format! Please enter Date/Time in the form DD/MM/YYYY HHMM",
                     e.getMessage());
         }
@@ -104,14 +104,14 @@ public class ParserTest {
     public void parseToTask_wrongSeparator_exceptionThrown() {
         try {
             Parser.parseToTask("deadline name /at 11/11/2011 1500");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Wrong format entered! Please enter <Deadline Name> /by <Deadline>",
                     e.getMessage());
         }
 
         try {
             Parser.parseToTask("event name /by 11/11/2011 1500");
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Wrong format entered! Please enter <Event Name> /at <Event Date>",
                     e.getMessage());
         }
@@ -139,21 +139,21 @@ public class ParserTest {
         try {
             Parser.parseToTaskFromFile("F\tX\tTask Name\tNone");
             fail();
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Unable to load task from file!", e.getMessage());
         }
 
         try {
             Parser.parseToTaskFromFile("G\tX\tTask Name\tNone");
             fail();
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Unable to load task from file!", e.getMessage());
         }
 
         try {
             Parser.parseToTaskFromFile("\tX\tTask Name\t11/11/2011 1500");
             fail();
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Unable to load task from file!", e.getMessage());
         }
     }

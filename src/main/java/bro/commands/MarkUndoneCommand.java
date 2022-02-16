@@ -1,9 +1,9 @@
-package duke.commands;
+package bro.commands;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import duke.exceptions.DukeException;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
+import bro.exceptions.BroException;
 
 /**
  * Represents a command to mark a task as not done.
@@ -24,26 +24,31 @@ public class MarkUndoneCommand extends Command {
      * @param ui The Ui to display the output to.
      * @param taskManager The TaskManager that contains the Task object.
      * @return true if command executed successfully, false otherwise.
-     * @throws DukeException If index entered is not a number.
+     * @throws BroException If index entered is not a number.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
         try {
             if (taskManager.size() == 0) {
-                return ui.showUnmarkEmptyList();
+                this.response = ui.showUnmarkEmptyList();
+                return false;
             }
 
             if (indexToUnmark < 0 || indexToUnmark >= taskManager.size()) {
-                return ui.showUnmarkOutOfBounds();
+                this.response = ui.showUnmarkOutOfBounds();
+                return false;
             }
             boolean isSuccess = taskManager.markTaskUndone(indexToUnmark);
-            if (isSuccess) {
-                save(storage, ui, taskManager);
-                return ui.showUnmarked(taskManager.getTask(indexToUnmark));
+            if (!isSuccess) {
+                this.response = ui.showUnmarkNotNeeded(taskManager.getTask(indexToUnmark));
+                return false;
             }
-            return ui.showUnmarkNotNeeded(taskManager.getTask(indexToUnmark));
 
+            save(storage, ui, taskManager);
+            this.response = ui.showUnmarked(taskManager.getTask(indexToUnmark));
+            return true;
         } catch (NumberFormatException e) {
-            return "Invalid number entered!";
+            this.response = ui.showInvalidIntegerError();
+            return false;
         }
     }
 }

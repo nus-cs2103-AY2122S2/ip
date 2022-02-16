@@ -1,9 +1,9 @@
-package duke.commands;
+package bro.commands;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import duke.exceptions.DukeException;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
+import bro.exceptions.BroException;
 
 /**
  * Represents a general command entered by the user.
@@ -16,6 +16,8 @@ import duke.exceptions.DukeException;
  * @see SortByNameCommand
  */
 public abstract class Command {
+
+    protected String response = "";
 
     public Command() { }
 
@@ -32,7 +34,7 @@ public abstract class Command {
         try {
             storage.saveTaskManager(taskManager);
             ui.showSavingComplete();
-        } catch (DukeException e) {
+        } catch (BroException e) {
             ui.showSavingFailed();
         }
     }
@@ -44,9 +46,13 @@ public abstract class Command {
      * @param ui The Ui to display the output of the command to.
      * @param taskManager The TaskManager containing the tasks.
      * @return true if the command executes successfully, false otherwise.
-     * @throws DukeException If there is an error encountered during execution.
+     * @throws BroException If there is an error encountered during execution.
      */
-    public abstract String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException;
+    public abstract boolean execute(Storage storage, Ui ui, TaskManager taskManager);
+
+    public String getResponse() {
+        return this.response;
+    }
 
     public boolean isExit() {
         return false;

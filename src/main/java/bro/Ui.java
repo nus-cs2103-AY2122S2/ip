@@ -1,9 +1,9 @@
-package duke;
+package bro;
 
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import duke.tasks.Task;
+import bro.tasks.Task;
 
 public class Ui {
 
@@ -36,19 +36,21 @@ public class Ui {
         return helpMenu;
     }
     public String showBanner() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String newLogo = " ____  _____   ____\n"
+            + "|  _ \\|  __ \\ / __ \\\n"
+            + "| |_) | |__) | |  | |\n"
+            + "|  _ <|  _  /| |  | |\n"
+            + "| |_) | | \\ \\| |__| |\n"
+            + "|____/|_|  \\_\\\\____/\n";
 
-        String intro = "I am a Personal Assistant Chatbot that helps you to keep track of various things.\n"
-                + "Let's get started.";
+        String intro = "You keep forgetting stuff.\n"
+                + "Let's stop that.";
 
-        return "Hello from" + "\n"
-                + logo + "\n"
+        return "What's up" + "\n"
+                + newLogo + "\n"
                 + intro + " ";
     }
+
     public String showBye() {
         String bye = "Bye. Hope to see you again soon!";
 

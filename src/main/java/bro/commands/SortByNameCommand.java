@@ -1,14 +1,13 @@
-package duke.commands;
+package bro.commands;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
+import bro.tasks.Task;
 
 /**
  * Represents a command to display the current tasks in TaskManager, sorted by name.
@@ -24,11 +23,15 @@ public class SortByNameCommand extends Command {
      * @return true after the list is displayed.
      * @see TaskByNameComparator
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
         ArrayList tasks = taskManager.getTaskList();
         Collections.sort(tasks, new TaskByNameComparator());
         save(storage, ui, taskManager);
-        return new ListCommand().execute(storage, ui, taskManager);
+
+        Command list = new ListCommand();
+        list.execute(storage, ui, taskManager);
+        this.response = list.getResponse();
+        return true;
     }
 }
 /**

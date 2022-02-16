@@ -1,22 +1,22 @@
-package duke;
+package bro;
 
-import duke.commands.Command;
-import duke.exceptions.DukeException;
+import bro.commands.Command;
+import bro.exceptions.BroException;
 
-public class Duke {
+public class Bro {
     private TaskManager manager;
     private Ui ui;
     private Storage storage;
     private boolean hasExited = false;
 
-    public Duke(String filePath) {
+    public Bro(String filePath) {
         try {
             storage = new Storage(filePath);
             ui = new Ui();
             ui.showLoadFilePath(storage.getFullPath());
             manager = storage.loadTaskManagerFromFile();
             ui.showLoadingComplete();
-        } catch (DukeException e) {
+        } catch (BroException e) {
             ui.showFileReadError();
             ui.showInitializeDefaults();
             manager = new TaskManager();
@@ -38,7 +38,7 @@ public class Duke {
                 System.out.println(command.execute(storage, ui, manager));
 
                 isExit = command.isExit();
-            } catch (DukeException e) {
+            } catch (BroException e) {
                 ui.showMessage(e.getMessage());
             }
         }
@@ -51,8 +51,9 @@ public class Duke {
             assert command != null : "Command is null!";
 
             this.hasExited = command.isExit();
-            return command.execute(storage, ui, manager);
-        } catch (DukeException e) {
+            command.execute(storage, ui, manager);
+            return command.getResponse();
+        } catch (BroException e) {
             return e.getMessage();
         }
     }
@@ -61,6 +62,6 @@ public class Duke {
         return this.hasExited;
     }
     public static void main(String[] args) {
-        new Duke("duke/data").run();
+        new Bro("bro/data").run();
     }
 }

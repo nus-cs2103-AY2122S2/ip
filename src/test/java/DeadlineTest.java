@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import duke.tasks.Deadline;
+import bro.tasks.Deadline;
 
 public class DeadlineTest {
     private LocalDateTime date;

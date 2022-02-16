@@ -1,9 +1,9 @@
-package duke.commands;
+package bro.commands;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import duke.tasks.Task;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
+import bro.tasks.Task;
 
 /**
  * Represents a command to delete a task.
@@ -24,22 +24,24 @@ public class DeleteTaskCommand extends Command {
      * @param taskManager The TaskManager that contains the Task object.
      * @return true if command executed successfully, false otherwise.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
 
         if (taskManager.size() == 0) {
-            return ui.showDeleteEmptyList();
+            this.response = ui.showDeleteEmptyList();
         }
 
         if (this.indexToDelete < 0 || this.indexToDelete >= taskManager.size()) {
-            return ui.showDeleteOutOfBounds(taskManager.size());
+            this.response = ui.showDeleteOutOfBounds(taskManager.size());
         }
 
         Task toDelete = taskManager.getTask(this.indexToDelete);
         boolean isSuccess = taskManager.deleteTask(this.indexToDelete);
         if (isSuccess) {
             save(storage, ui, taskManager);
-            return ui.showDeletedTask(toDelete, taskManager.size());
+            this.response = ui.showDeletedTask(toDelete, taskManager.size());
+            return true;
         }
-        return ui.showDeleteFailed();
+        this.response = ui.showDeleteFailed();
+        return false;
     }
 }

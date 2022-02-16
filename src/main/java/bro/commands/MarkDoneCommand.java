@@ -1,9 +1,9 @@
-package duke.commands;
+package bro.commands;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import duke.exceptions.DukeException;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
+import bro.exceptions.BroException;
 
 /**
  * Represents a command to mark a task as done.
@@ -24,26 +24,31 @@ public class MarkDoneCommand extends Command {
      * @param ui The Ui to display the output to.
      * @param taskManager The TaskManager that contains the Task object.
      * @return true if command executed successfully, false otherwise.
-     * @throws DukeException If index entered is not a number.
+     * @throws BroException If index entered is not a number.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
         try {
             if (taskManager.size() == 0) {
-                return ui.showMarkEmptyList();
+                this.response = ui.showMarkEmptyList();
+                return false;
             }
 
             if (this.indexToMark < 0 || indexToMark >= taskManager.size()) {
-                return ui.showMarkOutOfBounds();
+                this.response = ui.showMarkOutOfBounds();
+                return false;
             }
             boolean isSuccess = taskManager.markTaskDone(indexToMark);
-            if (isSuccess) {
-                save(storage, ui, taskManager);
-                return ui.showMarked(taskManager.getTask(indexToMark));
+            if (!isSuccess) {
+                this.response = ui.showMarkNotNeeded(taskManager.getTask(indexToMark));
+                return false;
             }
 
-            return ui.showMarkNotNeeded(taskManager.getTask(indexToMark));
+            save(storage, ui, taskManager);
+            this.response = ui.showMarked(taskManager.getTask(indexToMark));
+            return true;
         } catch (NumberFormatException e) {
-            return ui.showInvalidIntegerError();
+            this.response = ui.showInvalidIntegerError();
+            return false;
         }
     }
 }

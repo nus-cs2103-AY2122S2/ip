@@ -16,7 +16,7 @@ ext {
 }
 
 shadowJar {
-    archiveBaseName = "Duke Pro"
+    archiveBaseName = "Bro"
     archiveClassifier = null
 }
 

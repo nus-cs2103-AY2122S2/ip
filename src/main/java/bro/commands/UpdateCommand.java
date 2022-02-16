@@ -1,4 +1,4 @@
-package duke.commands;
+package bro.commands;
 
 /**
  * Represents a general command to update a task.

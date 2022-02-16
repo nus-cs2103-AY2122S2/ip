@@ -1,12 +1,12 @@
-package duke.commands;
+package bro.commands;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import duke.tasks.Task;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
+import bro.tasks.Task;
 
 /**
  * Represents a command to find all tasks containing the specified keyword.
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
      * @param taskManager The Task Manager containing all tasks to search in.
      * @return True after printing search results.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
 
         assert !keyword.equals("") : "No keyword supplied!";
 
@@ -36,6 +36,7 @@ public class FindCommand extends Command {
                         .filter(x -> x.getTaskName().contains(keyword))
                         .collect(Collectors.toList()));
 
-        return ui.showFindResults(new TaskManager(results));
+        this.response = ui.showFindResults(new TaskManager(results));
+        return true;
     }
 }

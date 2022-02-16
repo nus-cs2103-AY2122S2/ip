@@ -1,61 +1,60 @@
-package duke.tasks;
+package bro.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents an Task with a Date.
+ * Represents a Task with a Deadline.
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
-    private LocalDateTime date = null;
+    private LocalDateTime date;
     private String dateString = "";
 
     /**
-     * Constructor for Event class. Takes in a LocalDateTime object as the date instead of a string.
-     * @param taskName The string that represents the name of this event.
-     * @param date The LocalDateTime object that represents the date of this event.
+     * Constructor for Deadline class. Takes in a LocalDateTime object as the date instead of a string.
+     * @param taskName The string that represents the name of this deadline.
+     * @param date The LocalDateTime object that represents its deadline.
      */
-    public Event(String taskName, LocalDateTime date) {
+    public Deadline(String taskName, LocalDateTime date) {
         this.taskName = taskName;
         this.date = date;
     }
-
     /**
-     * Constructor for Event class. Takes in a string describing the date of this event.
-     * @param taskName The string that represents the name of this event.
-     * @param dateString The string that represents the date of this event.
+     * Constructor for Deadline class. Takes in a string describing its deadline.
+     * @param taskName The string that represents the name of this deadline.
+     * @param dateString The string that represents its deadline.
      */
-    public Event(String taskName, String dateString) {
+    public Deadline(String taskName, String dateString) {
         this.taskName = taskName;
         this.dateString = dateString;
     }
 
     public char getType() {
-        return 'E';
+        return 'D';
     }
 
     /**
-     * Gets the LocalDateTime object associated to this event, if it exists.
+     * Returns a String representation of the deadline Task, to be displayed.
+     *
+     * @return The String representation of the deadline task, in the form of:<br>
+     * [&lt;Type&gt;][&lt;Marked&gt;]  &lt;Task Name&gt; (by: &lt;Deadline&gt;)
+     */
+    @Override
+    public String toString() {
+        return String.format("[%c][%c] %s (by: %s)", this.getType(), this.done, this.taskName, this.getDate());
+    }
+
+    /**
+     * Gets the LocalDateTime object associated to this deadline task, if it exists.
      * Returns null if it does not exist.
      *
-     * @return The LocalDateTime object containing the Date of the event, null if it does not exist.
-     * @see Event#getDate()
+     * @return The LocalDateTime object containing the Date of the deadline, null if it does not exist.
+     * @see Deadline#getDate()
      */
     @Override
     public LocalDateTime getDateObj() {
         return this.date;
-    }
-
-    /**
-     * Returns a String representation of the event, to be displayed.
-     *
-     * @return The String representation of the event, in the form of:<br>
-     * [&lt;Type&gt;][&lt;Marked&gt;]  &lt;Task Name&gt; (at: &lt;Date&gt;)
-     */
-    @Override
-    public String toString() {
-        return String.format("[%c][%c] %s (at: %s)", this.getType(), this.done, this.taskName, this.getDate());
     }
 
     /**
@@ -75,24 +74,24 @@ public class Event extends Task {
     }
 
     /**
-     * Returns whether if the given object is equals to this event.
+     * Returns whether if the given object is equals to this deadline task.
      * The given object will be equals to this object if and only if it is of the same task type,
-     * has the same name and has the same date.
+     * has the same name and has the same deadline.
      *
      * @param o The object to be compared to.
      * @return true if they are equivalent.
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Event)) {
+        if (!(o instanceof Deadline)) {
             return false;
         }
 
         @SuppressWarnings("unchecked")
-        Event event = (Event) o;
+        Deadline deadline = (Deadline) o;
 
-        if (event.taskName.equals(this.taskName)) {
-            return event.getDate().equals(this.getDate());
+        if (deadline.taskName.equals(this.taskName)) {
+            return deadline.getDate().equals(this.getDate());
         }
 
         return false;

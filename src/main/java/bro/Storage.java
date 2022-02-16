@@ -1,4 +1,4 @@
-package duke;
+package bro;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
+import bro.exceptions.BroException;
+import bro.tasks.Task;
 
 public class Storage {
     private String filePath = "";
@@ -32,9 +32,9 @@ public class Storage {
      * Loads a TaskManager from the information saved in the file.
      *
      * @return A TaskManager containing all tasks from the saved file.
-     * @throws DukeException If an error is encountered when accessing the saved file.
+     * @throws BroException If an error is encountered when accessing the saved file.
      */
-    public TaskManager loadTaskManagerFromFile() throws DukeException {
+    public TaskManager loadTaskManagerFromFile() throws BroException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         file = new File(filePath);
         try {
@@ -45,16 +45,16 @@ public class Storage {
                     try {
                         Task t = Parser.parseToTaskFromFile(fileInput);
                         tasks.add(t);
-                    } catch (DukeException exception) {
+                    } catch (BroException exception) {
                         continue;
                     }
                 }
                 return new TaskManager(tasks);
             } else {
-                throw new DukeException("Unable to read Task List from file!");
+                throw new BroException("Unable to read Task List from file!");
             }
         } catch (SecurityException | IOException exception) {
-            throw new DukeException("Unable to read Task List from file!");
+            throw new BroException("Unable to read Task List from file!");
         }
     }
 
@@ -63,9 +63,9 @@ public class Storage {
      *
      * @param taskManager The task manager to be saved.
      * @return True if task manager is saved successfully.
-     * @throws DukeException If error is encountered during saving.
+     * @throws BroException If error is encountered during saving.
      */
-    public boolean saveTaskManager(TaskManager taskManager) throws DukeException {
+    public boolean saveTaskManager(TaskManager taskManager) throws BroException {
 
         try {
 
@@ -87,7 +87,7 @@ public class Storage {
             writer.close();
             return true;
         } catch (IOException exception) {
-            throw new DukeException("Unable to save to disk!");
+            throw new BroException("Unable to save to disk!");
         }
     }
 

@@ -1,6 +1,6 @@
 package gui;
 
-import duke.Duke;
+import bro.Bro;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,7 +22,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Bro bro;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
@@ -35,8 +35,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getHelpBanner(dukeImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Bro d) {
+        bro = d;
     }
 
     /**
@@ -47,12 +47,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
 
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = bro.getResponse(input);
         DialogBox userDialogBox = DialogBox.getUserDialog(input, userImage);
         DialogBox botDialogBox = DialogBox.getDukeDialog(response, dukeImage);
         dialogContainer.getChildren().addAll(userDialogBox, botDialogBox);
         userInput.clear();
-        if (duke.hasExited()) {
+        if (bro.hasExited()) {
             Platform.exit();
         }
     }

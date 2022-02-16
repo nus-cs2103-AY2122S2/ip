@@ -1,10 +1,10 @@
-package duke.commands;
+package bro.commands;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
+import bro.exceptions.BroException;
+import bro.tasks.Task;
 
 /**
  * Represents a command to Add a new Task.
@@ -25,12 +25,13 @@ public class AddCommand extends Command {
      * @param ui The Ui to display the output to.
      * @param taskManager The TaskManager that contains the Task object.
      * @return true if command executed successfully, false otherwise.
-     * @throws DukeException If format of the task is wrong.
+     * @throws BroException If format of the task is wrong.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) throws DukeException {
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
         assert taskToAdd != null : "No task to add in AddCommand!";
         taskManager.addTask(taskToAdd);
         save(storage, ui, taskManager);
-        return ui.showAddedTask(taskToAdd, taskManager.size());
+        this.response = ui.showAddedTask(taskToAdd, taskManager.size());
+        return true;
     }
 }

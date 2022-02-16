@@ -3,7 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.Collections;
 
-import duke.Ui;
+import bro.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

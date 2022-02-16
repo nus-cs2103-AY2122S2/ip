@@ -1,16 +1,16 @@
-# <b> Duke Pro User Guide </b>
+# <b> Bro User Guide </b>
 
 > <p align="center">What did I need to do again? - <s>You</s> Me, <b>everyday</b> </p>
 <p> Ever forgot what you needed to do? :frowning_face: Now you won't! :relieved: </p>
 
-With Duke Pro, you now have an easy way to remember tasks, deadlines and important events.
+With <b>Bro</b>, you now have an easy way to remember tasks, deadlines and important events.
 It is:
 * Easy to use
 * Text based
 
 How to start:
-1. [Click here](https://github.com/alexteo98/ip/releases/download/A-BetterGui/Duke.Pro.jar) to download
-2. Double click on "Duke.Pro.jar" to start!
+1. [Click here](https://github.com/alexteo98/ip/releases/download/A-Release/Bro.jar) to download
+2. Double click on "Bro.jar" to start!
 
 Features supported:
 - [x] Add/Remove Tasks
@@ -291,4 +291,4 @@ Here are the matching tasks in your list:
 ```
 <hr>
 
-[Back to top](#-duke-pro-user-guide-)
+[Back to top](#-bro-user-guide-)

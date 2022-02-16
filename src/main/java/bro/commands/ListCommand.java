@@ -1,8 +1,8 @@
-package duke.commands;
+package bro.commands;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
 
 
 /**
@@ -19,7 +19,8 @@ public class ListCommand extends Command {
      * @param taskManager The TaskManager that contains the tasks to be displayed.
      * @return true after the list is displayed.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
-        return ui.showList(taskManager);
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
+        this.response = ui.showList(taskManager);
+        return true;
     }
 }

@@ -1,8 +1,8 @@
-package duke;
+package bro;
 
 import java.util.ArrayList;
 
-import duke.tasks.Task;
+import bro.tasks.Task;
 
 public class TaskManager {
     private ArrayList<Task> tasks = new ArrayList<Task>();

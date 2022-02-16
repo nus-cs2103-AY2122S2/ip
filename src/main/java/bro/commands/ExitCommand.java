@@ -1,8 +1,8 @@
-package duke.commands;
+package bro.commands;
 
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
+import bro.Storage;
+import bro.TaskManager;
+import bro.Ui;
 
 /**
  * Represents a command to cause the application to quit.
@@ -22,7 +22,8 @@ public class ExitCommand extends Command {
      * @param taskManager Not used.
      * @return true after displaying goodbye message to the ui.
      */
-    public String execute(Storage storage, Ui ui, TaskManager taskManager) {
-        return ui.showBye();
+    public boolean execute(Storage storage, Ui ui, TaskManager taskManager) {
+        this.response = ui.showBye();
+        return true;
     }
 }

@@ -1,27 +1,15 @@
-package duke;
+package bro;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteTaskCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.MarkDoneCommand;
-import duke.commands.MarkUndoneCommand;
-import duke.commands.SortByDateCommand;
-import duke.commands.SortByNameCommand;
-import duke.commands.UpdateCommand;
-import duke.commands.UpdateDateCommand;
-import duke.commands.UpdateNameCommand;
-import duke.exceptions.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import bro.commands.*;
+import bro.exceptions.BroException;
+import bro.tasks.Deadline;
+import bro.tasks.Event;
+import bro.tasks.Task;
+import bro.tasks.Todo;
 
 public class Parser {
 
@@ -30,9 +18,9 @@ public class Parser {
      *
      * @param userInput The string entered by the user.
      * @return The task object parsed from the string.
-     * @throws DukeException If a wrong format is entered by the user.
+     * @throws BroException If a wrong format is entered by the user.
      */
-    public static Task parseToTask(String userInput) throws DukeException {
+    public static Task parseToTask(String userInput) throws BroException {
 
         if (userInput.startsWith("todo")) {
             return Parser.newToDo(userInput);
@@ -45,28 +33,28 @@ public class Parser {
             return null;
         }
     }
-    private static Todo newToDo(String s) throws DukeException {
+    private static Todo newToDo(String s) throws BroException {
         String taskName = s.replaceFirst("todo", "").strip();
 
         if (taskName.equals("")) {
-            throw new DukeException("Todo Name is empty!");
+            throw new BroException("Todo Name is empty!");
         }
 
         return new Todo(taskName);
     }
-    private static Event newEvent(String s) throws DukeException {
+    private static Event newEvent(String s) throws BroException {
         String[] fields = s.replaceFirst("event", "").split("/at");
 
         if (fields.length != 2) {
-            throw new DukeException("Wrong format entered! Please enter <Event Name> /at <Event Date>");
+            throw new BroException("Wrong format entered! Please enter <Event Name> /at <Event Date>");
         }
 
         if (fields[0].strip().equals("")) {
-            throw new DukeException("Event Name is empty!");
+            throw new BroException("Event Name is empty!");
         }
 
         if (fields[1].strip().equals("")) {
-            throw new DukeException("No Date Specified!");
+            throw new BroException("No Date Specified!");
         }
 
         String taskName = fields[0].strip();
@@ -80,19 +68,19 @@ public class Parser {
 
         return new Event(taskName, date);
     }
-    private static Deadline newDeadline(String s) throws DukeException {
+    private static Deadline newDeadline(String s) throws BroException {
         String[] fields = s.replaceFirst("deadline", "").split("/by");
 
         if (fields.length != 2) {
-            throw new DukeException("Wrong format entered! Please enter <Deadline Name> /by <Deadline>");
+            throw new BroException("Wrong format entered! Please enter <Deadline Name> /by <Deadline>");
         }
 
         if (fields[0].strip().equals("")) {
-            throw new DukeException("Deadline Name is empty!");
+            throw new BroException("Deadline Name is empty!");
         }
 
         if (fields[1].strip().equals("")) {
-            throw new DukeException("No Date Specified!");
+            throw new BroException("No Date Specified!");
         }
 
         String taskName = fields[0].strip();
@@ -132,9 +120,9 @@ public class Parser {
      *
      * @param fileInput The string representing the Task object stored in the file.
      * @return The Task that is parsed.
-     * @throws DukeException If the input is in the wrong format.
+     * @throws BroException If the input is in the wrong format.
      */
-    public static Task parseToTaskFromFile(String fileInput) throws DukeException {
+    public static Task parseToTaskFromFile(String fileInput) throws BroException {
         // <type>\t<done>\t<name>\t<date>
         char type;
         char done;
@@ -149,12 +137,12 @@ public class Parser {
             done = split[1].toCharArray()[0];
             name = split[2].strip();
             if (name.equals("")) {
-                throw new DukeException("Unable to load task from file!");
+                throw new BroException("Unable to load task from file!");
             }
             dateStr = split[3];
             date = Parser.parseDateTime(split[3]);
         } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException("Unable to load task from file!");
+            throw new BroException("Unable to load task from file!");
         }
 
         switch(type) {
@@ -176,7 +164,7 @@ public class Parser {
             }
             break;
         default:
-            throw new DukeException("Unable to load task from file!");
+            throw new BroException("Unable to load task from file!");
         }
 
         if (done == 'X') {
@@ -193,9 +181,9 @@ public class Parser {
      *
      * @param input The string given by the user.
      * @return A command representing the command to execute.
-     * @throws DukeException If the string entered is not of the correct form.
+     * @throws BroException If the string entered is not of the correct form.
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws BroException {
 
         input = input.strip();
 
@@ -207,6 +195,8 @@ public class Parser {
             return new SortByNameCommand();
         } else if (input.equals("list date")) {
             return new SortByDateCommand();
+        } else if (input.equals("help")) {
+            return new HelpCommand();
         } else if (input.startsWith("mark")) {
             return newMarkDoneCommand(input.replaceFirst("mark", ""));
         } else if (input.startsWith("unmark")) {
@@ -221,7 +211,7 @@ public class Parser {
             return newUpdateCommand(input.replaceFirst("update", ""));
         }
 
-        throw new DukeException("Invalid Command!");
+        throw new BroException("Invalid Command!");
     }
 
     /**
@@ -229,9 +219,9 @@ public class Parser {
      *
      * @param input The user input specifying the task to add.
      * @return The command to add the task specified by the user.
-     * @throws DukeException If the user input fails to parse to a Task.
+     * @throws BroException If the user input fails to parse to a Task.
      */
-    public static AddCommand newAddCommand(String input) throws DukeException {
+    public static AddCommand newAddCommand(String input) throws BroException {
         Task taskToAdd = Parser.parseToTask(input);
         assert taskToAdd != null : "Failed to parse user input to task!";
         return new AddCommand(taskToAdd);
@@ -242,14 +232,14 @@ public class Parser {
      *
      * @param index The user input to parse.
      * @return The command to delete the task specified with an index.
-     * @throws DukeException If an invalid index is entered.
+     * @throws BroException If an invalid index is entered.
      */
-    public static DeleteTaskCommand newDeleteTaskCommand(String index) throws DukeException {
+    public static DeleteTaskCommand newDeleteTaskCommand(String index) throws BroException {
         try {
             int indexToDelete = Integer.parseInt(index.strip()) - 1;
             return new DeleteTaskCommand(indexToDelete);
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid number entered! Please enter an integer");
+            throw new BroException("Invalid number entered! Please enter an integer");
         }
     }
 
@@ -270,14 +260,14 @@ public class Parser {
      *
      * @param input The user input to parse.
      * @return The command to mark the task as done.
-     * @throws DukeException If an invalid index is entered.
+     * @throws BroException If an invalid index is entered.
      */
-    public static MarkDoneCommand newMarkDoneCommand(String input) throws DukeException {
+    public static MarkDoneCommand newMarkDoneCommand(String input) throws BroException {
         try {
             int indexToMark = Integer.parseInt(input.strip()) - 1;
             return new MarkDoneCommand(indexToMark);
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid number entered! Please enter an integer");
+            throw new BroException("Invalid number entered! Please enter an integer");
         }
     }
 
@@ -286,14 +276,14 @@ public class Parser {
      *
      * @param input The user input to parse.
      * @return The command to mark the task as undone.
-     * @throws DukeException If an invalid index is entered.
+     * @throws BroException If an invalid index is entered.
      */
-    public static MarkUndoneCommand newMarkUndoneCommand(String input) throws DukeException {
+    public static MarkUndoneCommand newMarkUndoneCommand(String input) throws BroException {
         try {
             int indexToMark = Integer.parseInt(input.strip()) - 1;
             return new MarkUndoneCommand(indexToMark);
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid number entered! Please enter an integer");
+            throw new BroException("Invalid number entered! Please enter an integer");
         }
     }
 
@@ -302,9 +292,9 @@ public class Parser {
      *
      * @param input The user input to parse.
      * @return The command to update the name or date of the task.
-     * @throws DukeException If an invalid index is entered.
+     * @throws BroException If an invalid index is entered.
      */
-    public static UpdateCommand newUpdateCommand(String input) throws DukeException {
+    public static UpdateCommand newUpdateCommand(String input) throws BroException {
 
         try {
             int indexToUpdate = Integer.parseInt(input.strip().split(" ")[0]) - 1;
@@ -326,13 +316,13 @@ public class Parser {
                 }
             }
 
-            throw new DukeException("Invalid format entered! " +
-                    "Please enter \"/date\" to change date or \"/name\" to change name");
+            throw new BroException("Invalid format entered! "
+                    + "Please enter \"/date\" to change date or \"/name\" to change name");
 
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid number entered! Please enter an integer");
+            throw new BroException("Invalid number entered! Please enter an integer");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("No name or date entered!");
+            throw new BroException("No name or date entered!");
         }
     }
 
