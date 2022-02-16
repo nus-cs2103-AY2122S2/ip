@@ -17,9 +17,6 @@ DukePro frees your mind of having to remember things you need to do. It's,
 - [ ] Reminders (coming soon)
 - [ ] Have a good chat and conversation (possibly)
 
-![sample](https://cdn.pixabay.com/photo/2021/08/21/10/36/mountains-6562436_960_720.jpg "Here's some scenery while you scroll")
-*Don't worry, this is royalty-free. Rest here, weary traveller.*
-
 And best of all, it is **FREE**! 🎉🥳
 
 > :warning: **Warning:** We are not liable for damages incurred while this is in use.
