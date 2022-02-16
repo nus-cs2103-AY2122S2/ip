@@ -10,8 +10,6 @@ import mcbot.task.Task;
  * This class handles outputs of the user.
  */
 public class Gui {
-    private final String frameLine = "==========================================";
-
     /**
      * Constructor for Gui. 
      */
@@ -20,6 +18,8 @@ public class Gui {
 
     /**
      * Method to return the welcome line.
+     * 
+     * @return String to welcome the user.
      */
     public String welcomeLine() {
         String logo = "\n" +
@@ -32,18 +32,11 @@ public class Gui {
 
     /**
      * Method to return loading error if file is not found.
+     * 
+     * @return String to show when file is not found.
      */
     public String showLoadingError() {
         return "File not found. I will create one for you";
-    }
-
-    /**
-     * Method to return goodbye line.
-     * 
-     * @return The string for goodbye line.
-     */
-    public static String byeLine() {
-        return "Arghh! This ain't the last time ye see me lad";
     }
 
     /**
