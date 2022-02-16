@@ -2,7 +2,7 @@
 
 > “Your mind is for having ideas, not holding them.” – David Allen ([source](https://dansilvestre.com/productivity-quotes/))
 
-### Why DukePro?
+## Why DukePro?
 
 DukePro frees your mind of having to remember things you need to do. It's,
 * text-based 🗒️
@@ -11,21 +11,16 @@ DukePro frees your mind of having to remember things you need to do. It's,
 
 > :memo: **Note:** Download this when you can, there's no reason not to.
 
-***
-
-### Features:
+## Features
 - [x] Managing tasks 🎉
 - [ ] Managing deadlines (coming soon)
 - [ ] Reminders (coming soon)
 - [ ] Have a good chat and conversation (possibly)
-- [ ] #739
-- [ ] https://github.com/octo-org/octo-repo/issues/740
-- [ ] Add delight to the experience when all tasks are complete :tada:
 
 ![sample](https://cdn.pixabay.com/photo/2021/08/21/10/36/mountains-6562436_960_720.jpg "Here's some scenery while you scroll")
 *Don't worry, this is royalty-free. Rest here, weary traveller.*
 
-And it is **FREE**!
+And best of all, it is **FREE**! 🎉🥳
 
 > :warning: **Warning:** We are not liable for any damages incurred while this is in use.
 
@@ -35,9 +30,7 @@ All you need to do is,
 3. add your tasks.
 4. let it manage your tasks for you. 😉
 
-***
-
-### For the nerds
+## For the nerds
 
 If you Java programmer, you can use it to practice Java too. Here's the `main` method:
 
