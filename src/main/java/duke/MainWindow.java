@@ -33,7 +33,6 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Image background = new Image(this.getClass().getResourceAsStream("/images/background.png"));
 
 
     @FXML
@@ -42,12 +41,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(greeting, dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        BackgroundImage backgrnd = new BackgroundImage(background,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                new BackgroundSize(1.0, 1.2, true, true, false, false));
-        dialogContainer.setBackground(new Background(backgrnd, null));
 
     }
 

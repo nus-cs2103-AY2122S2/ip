@@ -24,9 +24,12 @@ public class TaskList {
             return "Sorry Master, I have nothing in my brain";
         }
         StringBuffer sb = new StringBuffer();
+        int i = 1;
         for (Task s : storeList) {
+            sb.append(i + ": ");
             sb.append(s.toString());
             sb.append("\n");
+            i++;
         }
         String str = sb.toString();
         return str;
