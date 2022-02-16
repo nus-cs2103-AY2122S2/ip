@@ -1,95 +1,47 @@
-import java.util.*;
+import duke.command.Command;
+import duke.command.DukeException;
+import duke.command.ExitCommand;
+import duke.task.TaskList;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.lang.String;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
 
-        System.out.println("Hello there, I'm Duke! Let's chat!");
+    TaskList tasklist;
+    Ui ui;
+    Storage storage;
 
-        // Start scanner
-        FastIO sc = new FastIO();
-        String input = sc.nextLine();
+    // Constructor
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.tasklist = new TaskList();
+        this.storage = new Storage(filePath);
+        storage.load(tasklist);
+    }
 
-        // List to hold tasks
-        ArrayList<Task> lst = new ArrayList<Task>();
-        Files.readTasks(lst);
-
-        while (!input.equals("bye")) {
-
+    public void run() {
+        Ui ui = new Ui();
+        Ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                // lists tasks
-                if (input.equals("list")) {
-                    System.out.println("Here are the tasks in your list: ");
-                    for (int i = 0; i < lst.size(); i++) {
-                        System.out.println(i + 1 + ". " + lst.get(i).toString());
-                    }
-
-                } else {
-                    // mark/unmark tasks
-                    String[] words = input.split("\\s", 0);
-                    String category = words[0];
-                    if (category.equals("mark")) {
-                        int index = Integer.parseInt(words[1]) - 1;
-                        lst.get(index).mark();
-                        System.out.println("Nice! I've marked this task as done: \n" + lst.get(index).toString());
-                    } else if (category.equals("unmark")) {
-                        int index = Integer.parseInt(words[1]) - 1;
-                        lst.get(index).unmark();
-                        System.out.println("OK, I've marked this task as not done yet: \n" + lst.get(index).toString());
-                    } else if (category.equals("delete")) {
-                        int index = Integer.parseInt(words[1]) - 1;
-                        System.out.println("Noted. I've removed this task: \n" + lst.get(index).toString() + "\nNow you have 4 tasks in the list.");
-                        lst.remove(index);
-
-                        // add task
-                    } else {
-
-                        // Throw Exception for missing details
-                        String[] info = input.split(" ", 2);
-                        if (info.length == 1 && info[0] == "todo" || info[0] == "deadline" || info[0] == "event") {
-                            throw new DukeException("The task description of type " + category + " cannot be empty.");
-                        }
-
-                        // sorting out the types of task
-
-                        if (category.equals("todo")) {
-                            System.out.println("Got it. I've added this task: ");
-                            ToDo item = new ToDo(info[1]);
-                            lst.add(item);
-                            System.out.println(item.toString());
-                        } else if (category.equals("deadline")) {
-                            System.out.println("Got it. I've added this task: ");
-                            String[] details = info[1].split(" /by ", 0);
-                            Deadline item = new Deadline(details[0], details[1]);
-                            lst.add(item);
-                            System.out.println(item.toString());
-                        } else if (category.equals("event")) {
-                            System.out.println("Got it. I've added this task: ");
-                            String[] details = info[1].split(" /at ", 0);
-                            Event item = new Event(details[0], details[1]);
-                            lst.add(item);
-                            System.out.println(item.toString());
-                        } else {
-                            // Invalid/ Missing type
-                            throw new DukeException("Missing type of event/ Invalid command");
-                        }
-                        System.out.println("Now you have " + lst.size() + " tasks in the list.");
-                    }
-
-                    // Saving List
-                    Files.saveTasks(lst);
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasklist, ui, storage);
+                storage.save(tasklist);
+                if (c instanceof ExitCommand) {
+                    isExit = true;
                 }
-
             } catch (DukeException e) {
-                System.out.println("ERROR: " + e.getMessage());
-            } finally {
-                // scan next line
-                input = sc.nextLine();
+                ui.printException(e);
             }
         }
+    }
 
-        // bye command
-        System.out.println("Bye! It was nice having you!");
-        sc.close();
+    public static void main(String[] args) throws DukeException {
+        new Duke("data/duke.txt").run();
     }
 }

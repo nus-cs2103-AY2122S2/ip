@@ -1,11 +1,21 @@
+package duke.util;
+
+import duke.task.*;
+
 import java.io.*;
 import java.util.*;
 
-public class Files {
+public class Storage {
 
-    public static void CreateFile() {
+    protected String filepath;
+
+    public Storage(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public void createFile() {
         try {
-            File file = new File("data/duke.txt");
+            File file = new File(filepath);
             if (file.createNewFile()) {
                 System.out.println("New File created\n");
             }
@@ -14,13 +24,13 @@ public class Files {
         }
     }
 
-    public static void saveTasks(ArrayList<Task> list) {
+    public void save(TaskList list) {
         try {
-            FileWriter writer = new FileWriter("data/duke.txt");
+            FileWriter writer = new FileWriter(filepath);
             for (int i = 0; i < list.size(); i++) {
                 Task tsk = list.get(i);
                 writer.write(tsk.infoString() + "\n");
-                }
+            }
             writer.close();
         } catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());
@@ -28,15 +38,15 @@ public class Files {
     }
 
 
-    public static void readTasks(ArrayList<Task> list) {
+    public void load(TaskList list) {
         try {
-            File file = new File("data/duke.txt");
+            File file = new File(filepath);
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
                 String[] details = task.split("/");
 
-                Task constructed = null;
+                Task constructed;
 
                 if (details[0].equals("T")) {
                     constructed = new ToDo(details[2]);
@@ -55,7 +65,7 @@ public class Files {
             sc.close();
             System.out.println("File Loaded\n");
         } catch (FileNotFoundException e) {
-            CreateFile();
+            createFile();
         }
     }
 }
