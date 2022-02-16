@@ -3,7 +3,10 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 import duke.parser.DukeException;
 import duke.parser.Parser;
@@ -198,7 +201,7 @@ public class TaskStore {
      * Returns a formatted message containing information of the tasks if there is at least 1 match. Else return
      * a message if there are no matching tasks in the list.
      *
-     * @param keyword Keyword to search in all task descriptions.
+     * @param keyword Keywords to search in all task descriptions.
      * @return A message containing all the task information that matches the keyword.
      */
     public String getTaskWithKeyword(String keyword) {
@@ -207,7 +210,9 @@ public class TaskStore {
         // Numbers list from 1
         int count = 1;
         for (Task t : this.tasks) {
-            if (t.getDescription().contains(keyword)) {
+            String descriptionLowercase = t.getDescription().toLowerCase();
+            String keywordLowercase = keyword.toLowerCase();
+            if (descriptionLowercase.contains(keywordLowercase)) {
                 // Task Format: <count>.<task>\n
                 sb.append(String.format("%d.", count++)).append(t).append("\n");
             }
