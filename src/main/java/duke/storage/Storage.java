@@ -30,6 +30,13 @@ public class Storage {
         this(DEFAULT_STORAGE_FILEPATH);
     }
 
+    /**
+     * Creates a Storage instance with a filename.
+     *
+     * @param fileName The filename of the saved file.
+     * @throws DukeException If the path is invalid, it throws
+     * a DukeException.
+     */
     public Storage(String fileName) throws DukeException {
         path = Paths.get(DEFAULT_STORAGE_DIRECTORY + fileName);
         if (isValidPath(path)) {
@@ -37,6 +44,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads all tasks to Duke.
+     *
+     * @return An array list of task.
+     * @throws DukeException If BufferedReader failed, it throws
+     * a DukeException.
+     */
     public ArrayList<Task> loadAllTasks() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<Task>();
         if (isValidPath(path)) {
@@ -79,6 +93,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all tasks as a file.
+     *
+     * @param tasks The tasks for saving.
+     * @throws DukeException If the tasks failed to save, it throws
+     * a DukeException.
+     */
     public void saveAllTasks(TaskList tasks) throws DukeException {
         try {
             if (Files.notExists(path)) {
@@ -101,9 +122,5 @@ public class Storage {
 
     private static boolean isValidPath(Path filePath) {
         return !filePath.toString().endsWith(".txt");
-    }
-
-    public String getPath() {
-        return path.toString();
     }
 }

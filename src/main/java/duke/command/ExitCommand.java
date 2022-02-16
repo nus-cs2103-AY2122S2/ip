@@ -6,13 +6,28 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.TextUi;
 
+/**
+ * A class that exit the Duke programme.
+ */
 public class ExitCommand extends Command {
     private static final boolean IS_EXIT = true;
 
+    /**
+     * Creates a ExitCommand instance.
+     */
     public ExitCommand() {
         super(IS_EXIT);
     }
 
+    /**
+     * Exit Duke and show the execution message on the GUI.
+     *
+     * @param tasks The current task list.
+     * @param storage The current storage of Duke.
+     * @return The string of the GUI message.
+     * @throws DukeException If the storage fail to save all tasks,
+     * it will throw a DukeException.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         storage.saveAllTasks(tasks);

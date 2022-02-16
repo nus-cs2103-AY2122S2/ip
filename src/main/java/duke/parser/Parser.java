@@ -20,6 +20,14 @@ import duke.common.Messages;
 public class Parser {
     private static final String DEFAULT_DATE_FORMAT = "d/MM/yyyy HHmm";
 
+    /**
+     * Parses user input for command.
+     *
+     * @param userInput The user input.
+     * @return The command to be executed based on the user input.
+     * @throws DukeException If the user input is invalid, it throws
+     * a DukeException.
+     */
     public static Command parse(String userInput) throws DukeException {
         String[] userInputArr = userInput.split(" ", 2);
         switch (userInputArr[0]) {
@@ -56,9 +64,9 @@ public class Parser {
      * Parses the datetime string of an event or deadline based on the
      * default date format.
      *
-     * @param dateTime datetime string of the event or deadline
-     * @return localdatetime format of the given datetime
-     * @throws DukeException if datetime string is invalid format
+     * @param dateTime datetime string of the event or deadline.
+     * @return LocalDateTime format of the given datetime.
+     * @throws DukeException if datetime string is invalid format.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         try {
@@ -70,10 +78,10 @@ public class Parser {
     }
 
     /**
-     * Parses the task word as singular or plural noun
+     * Parses the task word as singular or plural noun.
      *
-     * @param size the size of the tasklist
-     * @return task word in singular or plural
+     * @param size the size of the task list.
+     * @return task word in singular or plural.
      */
     public static String parseTaskSize(int size) {
         return size > 1 ? "s" : "";
@@ -111,5 +119,4 @@ public class Parser {
     private static boolean validateCommandInput(String[] inputWithDate) {
         return inputWithDate.length == 2 && !inputWithDate[0].isEmpty() && !inputWithDate[1].isEmpty();
     }
-
 }
