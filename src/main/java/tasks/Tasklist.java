@@ -6,7 +6,6 @@ import exceptions.DukeException;
 import storage.Storage;
 import user.Ui;
 
-
 /** A class that encapsulates the lists of tasks to be completed. */
 public class Tasklist {
 

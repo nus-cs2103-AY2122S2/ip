@@ -1,20 +1,27 @@
+package gui;
+
+import bot.Hal;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import tasks.Task;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
 
-    private static final String greetingMessage = "Hello. I am HAL 4500.";
+    private static final String greetingMessage = "Hello. I am HAL 4500, from 2001: A Space Odyssey."
+            + "\nI can store your tasks, if you want me to.";
     private static final String offerHelpMessage = "Type 'help' for a list of possible commands.";
+    private static final String repoUrl = "https://github.com/leeyiheng12/ip";
 
     @FXML
     private ScrollPane scrollPane;
@@ -23,13 +30,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
+    private Button sendButton, sourceButton;
 
     private Hal hal;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/AstronautImage.png"));
     private Image halImage = new Image(this.getClass().getResourceAsStream("/images/CameraImage.png"));
-    private Image halIcon = new Image(this.getClass().getResourceAsStream("/images/Hal9000Image.png"));
+    private Image halIcon = new Image(this.getClass().getResourceAsStream("/images/HalImage.png"));
 
     @FXML
     public void initialize() {
@@ -66,6 +73,18 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(DialogBox.getReturnDialog(response, halImage));
         }
         userInput.clear();
+    }
+
+    /**
+     * Displays the link to the GitHub repo, and copies it to the user's clipboard.
+     */
+    @FXML
+    private void getSource() {
+        String message = "Find my source code at: " + repoUrl + ".\nCopied URL to your clipboard.";
+        ClipboardContent content = new ClipboardContent();
+        content.putString(repoUrl);
+        Clipboard.getSystemClipboard().setContent(content);
+        dialogContainer.getChildren().add(DialogBox.getReturnDialog(message, halImage));
     }
 
     /**

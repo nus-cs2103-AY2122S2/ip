@@ -2,7 +2,6 @@ package tasks;
 
 import exceptions.DukeException;
 
-
 /** A class that functions as an abstraction of a task. */
 public abstract class Task {
 

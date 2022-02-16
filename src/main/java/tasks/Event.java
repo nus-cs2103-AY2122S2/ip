@@ -6,7 +6,6 @@ import java.time.format.DateTimeParseException;
 
 import exceptions.DukeException;
 
-
 /** A class that functions as an abstraction of an event task. */
 public class Event extends Task {
 

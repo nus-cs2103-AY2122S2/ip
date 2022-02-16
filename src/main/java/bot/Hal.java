@@ -1,5 +1,6 @@
-import user.Ui;
+package bot;
 
+import user.Ui;
 
 /** The main Duke class, that allows the user to save tasks. */
 public class Hal {

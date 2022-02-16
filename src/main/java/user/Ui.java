@@ -7,7 +7,6 @@ import exceptions.DukeException;
 import tasks.Task;
 import tasks.Tasklist;
 
-
 /** A class that handles the interactions with the user. */
 public class Ui {
 

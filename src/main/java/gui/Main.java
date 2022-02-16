@@ -1,5 +1,8 @@
+package gui;
+
 import java.io.IOException;
 
+import bot.Hal;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +16,10 @@ public class Main extends Application {
 
     private final Hal hal = new Hal();
 
+    /**
+     * The start method that overrides the Application's start method, to be executed to display the stage.
+     * @param stage JavaFX stage object to be displayed.
+     */
     @Override
     public void start(Stage stage) {
         try {

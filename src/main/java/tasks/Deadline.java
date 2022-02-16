@@ -6,7 +6,6 @@ import java.time.format.DateTimeParseException;
 
 import exceptions.DukeException;
 
-
 /** A class that functions as an abstraction of a deadline task. */
 public class Deadline extends Task {
 
