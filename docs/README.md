@@ -26,7 +26,7 @@ As of the current versions the following features are available for users.
 - `deadline` (task with compulsory date field and optional time field)
 - `event` (task with compulsory date and time field)
 ___
-##Usage
+## Usage
 
 ### `todo` - adding a todo task
 
@@ -240,11 +240,11 @@ bye
 ````
 ___
 
-##Authors
+## Authors
 - Damith C. Rajapakse - _Module Coordinator_
 - Andy Lam Wei Jie - _Developer of Siri_
 ___
-##Acknowledgements
+## Acknowledgements
 - **Cheng Gang** - [_User Guide references_](https://chenggeng97.github.io/duke/)
 - **FlatIcon.com** - [_Icon images used in the project_](https://www.flaticon.com/)
 - **Apple** - [_Reusing Apple's product name_](https://www.apple.com/sg/siri/)
