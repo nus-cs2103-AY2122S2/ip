@@ -1,5 +1,10 @@
 package duke.task;
 
+import duke.dukeexceptions.DukeDateExceptions;
+import duke.dukeexceptions.DukeException;
+
+
+
 import java.time.LocalDateTime;
 
 /**
@@ -18,21 +23,26 @@ public class Deadline extends Task {
      * @param name name of task.
      * @param dateInfo additional dateInfo of the task.
      */
-    public Deadline(String name, String dateInfo) {
+    public Deadline(String name, String dateInfo) throws DukeException {
         super(name);
-        info = dateInfo;
-        this.dateInfo = LocalDateTime.parse(dateInfo, this.DATE_TIME_FORMAT_IN);
+        try {
+            info = dateInfo;
+            this.dateInfo = LocalDateTime.parse(dateInfo, this.DATE_TIME_FORMAT_IN);
+        } catch (Exception e) {
+            throw new DukeDateExceptions("");
+        }
     }
 
     /***
      * Overloaded Constructor
      * @param name
      * @param marked
-     * @param dateInfo
+     * @param info
      */
-    public Deadline(String name, boolean marked, String dateInfo) {
+    public Deadline(String name, boolean marked, String info) {
         super(name);
-        this.dateInfo = LocalDateTime.parse(dateInfo, this.DATE_TIME_FORMAT_IN);
+        this.info = info;
+        this.dateInfo = LocalDateTime.parse(info, this.DATE_TIME_FORMAT_IN);
         this.isMarked = marked;
     }
 
