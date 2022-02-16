@@ -52,6 +52,7 @@ public class Duke extends Application {
     @Override
     public void start (Stage stage) {
         try {
+            stage.setTitle("Ask@Jamie");
             ui.buildStage(stage);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
