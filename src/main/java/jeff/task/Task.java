@@ -4,7 +4,7 @@ package jeff.task;
  * Task class acts as a format for other Task classes.
  */
 public abstract class Task {
-    
+
     protected String description;
     protected boolean isDone;
 

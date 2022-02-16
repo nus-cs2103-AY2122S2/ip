@@ -1,21 +1,18 @@
 package jeff.storage;
 
-import jeff.main.JeffException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
+import jeff.main.JeffException;
 import jeff.task.Deadline;
 import jeff.task.Event;
 import jeff.task.Task;
 import jeff.task.TaskList;
 import jeff.task.Todo;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.util.Scanner;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Storage class for loading and saving from an external file.
@@ -88,7 +85,10 @@ public class Storage {
                 switch (done) {
                 case "1 ":
                     curr.setMark();
+                    break;
                 case "0 ":
+                    break;
+                default:
                     break;
                 }
                 // After all the necessary information, add it into the TaskList.
@@ -134,6 +134,8 @@ public class Storage {
                     Event tempE = (Event) currTask;
                     suffix = tempE.getDescription() + " | " + tempE.getOriginalDate();
                     break;
+                default:
+                    break;
                 }
                 // Assign string values according to if the Task is done.
                 switch (currTask.getStatusIcon()) {
@@ -142,6 +144,8 @@ public class Storage {
                     break;
                 case " ":
                     str = str + "0 | ";
+                    break;
+                default:
                     break;
                 }
                 // Once all the information is extracted, write it into the file.

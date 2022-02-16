@@ -44,6 +44,9 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Display the goodbye message when requested.
+     */
     public void showBye() {
         System.out.println("Bye, my name is Jeff");
         sc.close();
@@ -69,7 +72,7 @@ public class Ui {
         System.out.println("Here are the matching tasks in your list:\n" + str);
     }
 
-    public void showMark(String currTask){
+    public void showMark(String currTask) {
         System.out.println("Nice! I've marked this task as done:\n" + addPrefix(currTask));
     }
 
@@ -77,12 +80,24 @@ public class Ui {
         System.out.println("OK, I've marked this task as not done yet:\n" + addPrefix(currTask));
     }
 
+    /**
+     * Display the confirmation message when adding a new task.
+     *
+     * @param currTask current task that was added.
+     * @param size amount of tasks in the list.
+     */
     public void showAdded(String currTask, int size) {
         System.out.println("Got it. I've added this task:\n"
                         + addPrefix(currTask) + "\n"
                         + "Now you have " + size + " task(s) in the list.");
     }
 
+    /**
+     * Display the confirmation message when deleting a task.
+     *
+     * @param currTask task that was deleted.
+     * @param size amount of tasks left in the list.
+     */
     public void showDelete(String currTask, int size) {
         System.out.println("Noted. I've removed this task:\n"
                 + addPrefix(currTask) + "\n"
@@ -93,6 +108,9 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Display a message showing users where to get help.
+     */
     public void showHelp() {
         System.out.println("I do not understand your commands\n"
                 + "Please refer to the readme.txt for the available commands\n");

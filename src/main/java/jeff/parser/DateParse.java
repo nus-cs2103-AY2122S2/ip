@@ -1,12 +1,11 @@
 package jeff.parser;
 
-import jeff.main.JeffException;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
-
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import jeff.main.JeffException;
 
 /**
  * DateParse class parse a varying format of dates into a LocalDate object.
@@ -17,23 +16,23 @@ public class DateParse {
     private boolean isFound = false;
 
     // All the available formats Jeff accepts as dates
-    ArrayList<DateTimeFormatter> knownPatterns = new ArrayList<DateTimeFormatter>();
-    DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    DateTimeFormatter format3 = DateTimeFormatter.ofPattern("yyyy-MM-d");
-    DateTimeFormatter format4 = DateTimeFormatter.ofPattern("yyyy/MM/d");
-    DateTimeFormatter format5 = DateTimeFormatter.ofPattern("yyyy-M-d");
-    DateTimeFormatter format6 = DateTimeFormatter.ofPattern("yyyy/M/d");
-    DateTimeFormatter format7 = DateTimeFormatter.ofPattern("yyyy-M-dd");
-    DateTimeFormatter format8 = DateTimeFormatter.ofPattern("yyyy/M/dd");
-    DateTimeFormatter format9 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    DateTimeFormatter format10 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    DateTimeFormatter format11 = DateTimeFormatter.ofPattern("d-MM-yyyy");
-    DateTimeFormatter format12 = DateTimeFormatter.ofPattern("d/MM/yyyy");
-    DateTimeFormatter format13 = DateTimeFormatter.ofPattern("d-M-yyyy");
-    DateTimeFormatter format14 = DateTimeFormatter.ofPattern("d/M/yyyy");
-    DateTimeFormatter format15 = DateTimeFormatter.ofPattern("dd-M-yyyy");
-    DateTimeFormatter format16 = DateTimeFormatter.ofPattern("dd/M/yyyy");
+    private DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    private DateTimeFormatter format3 = DateTimeFormatter.ofPattern("yyyy-MM-d");
+    private DateTimeFormatter format4 = DateTimeFormatter.ofPattern("yyyy/MM/d");
+    private DateTimeFormatter format5 = DateTimeFormatter.ofPattern("yyyy-M-d");
+    private DateTimeFormatter format6 = DateTimeFormatter.ofPattern("yyyy/M/d");
+    private DateTimeFormatter format7 = DateTimeFormatter.ofPattern("yyyy-M-dd");
+    private DateTimeFormatter format8 = DateTimeFormatter.ofPattern("yyyy/M/dd");
+    private DateTimeFormatter format9 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private DateTimeFormatter format10 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private DateTimeFormatter format11 = DateTimeFormatter.ofPattern("d-MM-yyyy");
+    private DateTimeFormatter format12 = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    private DateTimeFormatter format13 = DateTimeFormatter.ofPattern("d-M-yyyy");
+    private DateTimeFormatter format14 = DateTimeFormatter.ofPattern("d/M/yyyy");
+    private DateTimeFormatter format15 = DateTimeFormatter.ofPattern("dd-M-yyyy");
+    private DateTimeFormatter format16 = DateTimeFormatter.ofPattern("dd/M/yyyy");
+    private ArrayList<DateTimeFormatter> knownPatterns = new ArrayList<DateTimeFormatter>();
 
     /**
      * Constructor for DateParse
@@ -60,7 +59,7 @@ public class DateParse {
         knownPatterns.add(format16);
 
         int curr = 0;
-        while((!isFound) && curr < 16) {
+        while ((!isFound) && curr < 16) {
             try {
                 date = LocalDate.parse(str, knownPatterns.get(curr));
                 isFound = true;

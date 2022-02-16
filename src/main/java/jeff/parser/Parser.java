@@ -1,7 +1,5 @@
 package jeff.parser;
 
-import jeff.main.JeffException;
-
 import jeff.command.ByeCommand;
 import jeff.command.Command;
 import jeff.command.DeadlineCommand;
@@ -13,6 +11,7 @@ import jeff.command.ListCommand;
 import jeff.command.MarkCommand;
 import jeff.command.TodoCommand;
 import jeff.command.UnmarkCommand;
+import jeff.main.JeffException;
 
 /**
  * Parser class is used to parse the raw input from the user
