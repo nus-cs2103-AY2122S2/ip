@@ -1,35 +1,35 @@
 # PaggroBot
 > "I never took a day off in my 20s. Not one." - Bill Gates ([source](https://www.keepinspiring.me/hard-work-quotes/))
 
-##PaggroBot pushes you to work hard and complete the tasks that you need to do. It's
+PaggroBot pushes you to work hard and complete the tasks that you need to do. It's
 
 - text-based
 - easy to learn
 - ~~FAST~~ SUPER FAST to use
 
-##All you need to do is,
+All you need to do is,
 
 1. download it from [here](url).
 2. double-click it.
 3. add your tasks.
 4. let it manage your tasks for you 😒
 
-##And it is **FREE!**
+And it is **FREE!**
 
-###Features:
+Features:
 
 - [x] Managing tasks
 - [x] Managing deadlines
 - [ ] Tagging tasks
 
-##If you are a Java programmer, you can use it to practice Java too! Here's the main method:
+- If you are a Java programmer, you can use it to practice Java too! Here's the main method:
 ```java
 public static void main(String[] args) throws IOException {
         new PaggroBot("../../../data/paggro.txt").run();
 }
 ```
 
-##Commands:
+Commands:
 1. deadline - creates new deadline task
 2. event - creates new event task
 3. todo - creates new todo task
@@ -43,4 +43,4 @@ public static void main(String[] args) throws IOException {
 11. listTag - list down all tasks with a given tag
 12. bye - closes PaggroBot
 
-##What are you waiting for? Download PaggroBot NOW!!!!
+#What are you waiting for? Download PaggroBot NOW!!!!
