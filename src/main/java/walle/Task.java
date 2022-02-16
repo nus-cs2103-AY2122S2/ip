@@ -49,7 +49,7 @@ public class Task {
                 printFirstAddition += Ui.printTotalTasks(number);
             }
         }
-        catch (EmptyDescriptorException e){
+        catch (EmptyDescriptorException e) {
             Ui.printEmptyDescriptionException();
         }
         catch (IOException e) {
@@ -84,7 +84,7 @@ public class Task {
             }
             return true;
         }
-        catch (DateTimeParseException e){
+        catch (DateTimeParseException e) {
             if (!isReading) {
                 System.out.println("Note that dates should be in <<DD-MM-YYYY HHMM>> format");
             }
@@ -96,14 +96,14 @@ public class Task {
     /**
      * Marks tasks as done.
      */
-    public void mark(){
+    public void mark() {
         this.isDone = true;
     }
 
     /**
      * Unmarks tasks as not done.
      */
-    public void unmark(){
+    public void unmark() {
         this.isDone = false;
     }
 
@@ -113,7 +113,7 @@ public class Task {
      * @return X if task is done and empty string if task is not done
      */
     public String getStatus() {
-        if (this.isDone){
+        if (this.isDone) {
             return "X";
         } else {
             return " ";
