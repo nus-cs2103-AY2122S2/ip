@@ -12,6 +12,7 @@ import duke.command.DeleteCommand;
 import duke.command.EditTaskMarkCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
@@ -28,20 +29,11 @@ import duke.util.Storage;
  * Duke chatbot behavior and data.
  */
 public class Duke {
-    //command keywords
-    private static final String BYE_COMMAND = "bye";
-    private static final String FIND_COMMAND = "find";
-    private static final String LIST_COMMAND = "list";
-    private static final String MARK_COMMAND = "mark";
-    private static final String UNMARK_COMMAND = "unmark";
-    private static final String TODO_COMMAND = "todo";
-    private static final String DEADLINE_COMMAND = "deadline";
-    private static final String EVENT_COMMAND = "event";
-    private static final String DELETE_COMMAND = "delete";
-
     //file paths
     private static final String STORAGE_FILE_NAME = "data.txt";
     private static final String DIR_FILE_NAME = "./data/";
+
+    public static final String GREETING = "HELLO CHILD. WHAT DO YOU WISH TO CHAT ABOUT?? /help TO TELL ME!";
 
     private final TaskList taskList;
     private final Ui ui;
@@ -83,15 +75,16 @@ public class Duke {
 
         // init parser
         HashMap<String, Command> commands = new HashMap<String, Command>();
-        commands.put(BYE_COMMAND, new ByeCommand(BYE_COMMAND));
-        commands.put(FIND_COMMAND, new FindCommand(FIND_COMMAND));
-        commands.put(LIST_COMMAND, new ListCommand(LIST_COMMAND));
-        commands.put(MARK_COMMAND, new EditTaskMarkCommand(MARK_COMMAND, true));
-        commands.put(UNMARK_COMMAND, new EditTaskMarkCommand(UNMARK_COMMAND, false));
-        commands.put(TODO_COMMAND, new TodoCommand(TODO_COMMAND));
-        commands.put(DEADLINE_COMMAND, new DeadlineCommand(DEADLINE_COMMAND));
-        commands.put(EVENT_COMMAND, new EventCommand(EVENT_COMMAND));
-        commands.put(DELETE_COMMAND, new DeleteCommand(DELETE_COMMAND));
+        commands.put(ByeCommand.BYE_COMMAND, new ByeCommand());
+        commands.put(FindCommand.FIND_COMMAND, new FindCommand());
+        commands.put(ListCommand.LIST_COMMAND, new ListCommand());
+        commands.put(EditTaskMarkCommand.MARK_COMMAND, new EditTaskMarkCommand(true));
+        commands.put(EditTaskMarkCommand.UNMARK_COMMAND, new EditTaskMarkCommand(false));
+        commands.put(TodoCommand.TODO_COMMAND, new TodoCommand());
+        commands.put(DeadlineCommand.DEADLINE_COMMAND, new DeadlineCommand());
+        commands.put(EventCommand.EVENT_COMMAND, new EventCommand());
+        commands.put(DeleteCommand.DELETE_COMMAND, new DeleteCommand());
+        commands.put(HelpCommand.HELP_COMMAND, new HelpCommand());
 
         parser = new Parser(commands);
     }
@@ -131,7 +124,7 @@ public class Duke {
             try {
                 Command command = parser.parse(userResponse);
                 String response = command.execute(userResponse, taskList, storage);
-                if (command.getKey().equals(BYE_COMMAND)) {
+                if (command.getKey().equals(ByeCommand.BYE_COMMAND)) {
                     this.isRunning = false;
                 }
 
@@ -158,6 +151,6 @@ public class Duke {
         StringTokenizer st = new StringTokenizer(input, " ");
         String command = st.nextToken();
 
-        return command.equals(BYE_COMMAND);
+        return command.equals(ByeCommand.BYE_COMMAND);
     }
 }

@@ -11,15 +11,15 @@ public class FindCommand extends Command {
     private static final String NO_INPUT =
             "I can't find the tasks you want if YOU DON'T TELL ME WHAT TO FIND. GIVE ME KEYWORDS!!";
 
+    public static final String FIND_COMMAND = "find";
+
     /**
      * Constructor for find command to init values.
      *
      * <p>Calls superclass Command constructor.</p>
-     *
-     * @param key Key for find command.
      */
-    public FindCommand(String key) {
-        super(key);
+    public FindCommand() {
+        super(FIND_COMMAND);
     }
 
     /**

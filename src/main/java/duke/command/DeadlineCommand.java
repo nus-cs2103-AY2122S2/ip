@@ -25,15 +25,15 @@ public class DeadlineCommand extends TaskCommand {
 
     private static final String INPUT_TIME_FORMAT = "HHmm";
     private static final String DEFAULT_TIME = "2359";
+
+    public static final String DEADLINE_COMMAND = "deadline";
     /**
      * Constructor for command to init values.
      *
      * <p>Calls superclass TaskCommand constructor.</p>
-     *
-     * @param key Keyword to call this command.
      */
-    public DeadlineCommand(String key) {
-        super(key);
+    public DeadlineCommand() {
+        super(DEADLINE_COMMAND);
     }
 
     /**

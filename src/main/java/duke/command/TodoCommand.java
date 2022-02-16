@@ -13,16 +13,15 @@ import duke.util.Storage;
  * to the task list</p>
  */
 public class TodoCommand extends TaskCommand {
+    public static final String TODO_COMMAND = "todo";
 
     /**
      * Constructor for todo command to init values.
      *
      * <p>Calls superclass TaskCommand constructor.</p>
-     *
-     * @param key Key for todo command.
      */
-    public TodoCommand(String key) {
-        super(key);
+    public TodoCommand() {
+        super(TODO_COMMAND);
     }
 
     /**

@@ -50,6 +50,9 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent; ");
+
+        //start greeting
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Duke.GREETING, dukeImage));
     }
 
     public void setDuke(Duke d) {

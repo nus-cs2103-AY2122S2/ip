@@ -26,15 +26,15 @@ public class EventCommand extends TaskCommand {
     private static final String INPUT_TIME_FORMAT = "HHmm";
     private static final String DEFAULT_TIME = "2359";
 
+    public static final String EVENT_COMMAND = "event";
+
     /**
      * Constructor for event command to init values.
      *
      * <p>Calls superclass TaskCommand constructor.</p>
-     *
-     * @param key Keyword to call this command.
      */
-    public EventCommand(String key) {
-        super(key);
+    public EventCommand() {
+        super(EVENT_COMMAND);
     }
 
     /**

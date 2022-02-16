@@ -10,15 +10,15 @@ import duke.util.Storage;
 public class ListCommand extends Command {
     private static final String LIST_STATEMENT = "Here are the tasks in your list: \n";
 
+    public static final String LIST_COMMAND = "list";
+
     /**
      * List Command constructor.
      *
      * <p>Calls superclass Command constructor.</p>
-     *
-     * @param key Keyword to call this command.
      */
-    public ListCommand(String key) {
-        super(key);
+    public ListCommand() {
+        super(LIST_COMMAND);
     }
 
     /**

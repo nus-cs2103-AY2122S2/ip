@@ -12,13 +12,13 @@ public class DeleteCommand extends Command {
     private static final String NO_INPUT = "You need to put the task number you want to delete!";
     private static final String INVALID_INPUT = "Invalid input, you need to give a number/integer";
 
+    public static final String DELETE_COMMAND = "delete";
+
     /**
      * Delete Task Command constructor.
-     *
-     * @param key Keyword to call this command.
      */
-    public DeleteCommand(String key) {
-        super(key);
+    public DeleteCommand() {
+        super(DELETE_COMMAND);
     }
 
     /**

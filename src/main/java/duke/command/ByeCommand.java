@@ -9,6 +9,7 @@ import duke.util.Storage;
  */
 public class ByeCommand extends Command {
     private static final String BYE = "See ya!";
+    public static final String BYE_COMMAND = "bye";
 
     /**
      * Bye Command constructor.
@@ -17,8 +18,8 @@ public class ByeCommand extends Command {
      *
      * @param key Keyword to call this command.
      */
-    public ByeCommand(String key) {
-        super(key);
+    public ByeCommand() {
+        super(BYE_COMMAND);
     }
 
     /**

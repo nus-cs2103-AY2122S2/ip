@@ -15,14 +15,16 @@ public class EditTaskMarkCommand extends Command {
     private static final String UNMARK_TASK = "Alright, I've unmarked the task: \n ";
     private final boolean isMarkDoneTask;
 
+    public static final String MARK_COMMAND = "mark";
+    public static final String UNMARK_COMMAND = "unmark";
+
     /**
      * Edit Task Mark Command constructor.
      *
-     * @param key Keyword to call this command.
      * @param isMarkDoneTask Whether to mark or unmark a task as done.
      */
-    public EditTaskMarkCommand(String key, boolean isMarkDoneTask) {
-        super(key);
+    public EditTaskMarkCommand(boolean isMarkDoneTask) {
+        super(isMarkDoneTask ? MARK_COMMAND : UNMARK_COMMAND);
 
         this.isMarkDoneTask = isMarkDoneTask;
     }
