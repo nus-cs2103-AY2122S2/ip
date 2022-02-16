@@ -18,6 +18,9 @@ DukePro frees your mind of having to remember things you need to do. It's,
 - [ ] Managing deadlines (coming soon)
 - [ ] Reminders (coming soon)
 - [ ] Have a good chat and conversation (possibly)
+- [ ] #739
+- [ ] https://github.com/octo-org/octo-repo/issues/740
+- [ ] Add delight to the experience when all tasks are complete :tada:
 
 ![sample](https://cdn.pixabay.com/photo/2021/08/21/10/36/mountains-6562436_960_720.jpg "Here's some scenery while you scroll")
 *Don't worry, this is royalty-free. Rest here, weary traveller.*
