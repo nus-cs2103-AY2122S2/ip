@@ -53,12 +53,11 @@ public class Event extends Task implements Timable {
     }
 
     /**
-     * The factory function of the Event task. Throws an exception
-     * if the provided tokens does not satisfy the required format to create
-     * an Event task.
-     *
+     * The factory function of the Event task.
      * @param tokens the specification of the Event task which contains
      *               the description and start time to end time of the task.
+     * @throws DukeException when the provided tokens do not satisfy the required format to create
+     *                       an Event task.
      */
     protected static Event createTask(String[] tokens) throws DukeException {
         String description = createDescription(tokens);

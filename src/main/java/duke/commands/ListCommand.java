@@ -16,8 +16,8 @@ public class ListCommand extends Command {
      * does not require any storage of data/ending the program.
      */
     public ListCommand() {
-        modifyData = false;
-        exitProgram = false;
+        isModify = false;
+        isExit = false;
     }
 
     /**

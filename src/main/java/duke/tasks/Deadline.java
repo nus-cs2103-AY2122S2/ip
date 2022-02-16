@@ -73,12 +73,11 @@ public class Deadline extends Task implements Timable {
     }
 
     /**
-     * The factory function of the Deadline task. Throws an exception
-     * if the provided tokens does not satisfy the required format to create
-     * a deadline task.
-     *
+     * The factory function of the Deadline task.
      * @param tokens the specification of the Deadline task which contains
      *               the description and date/time of the task.
+     * @throws DukeException if the provided tokens does not satisfy the required format to create
+     *                       a deadline task.
      */
     protected static Deadline createTask(String[] tokens) throws DukeException {
 

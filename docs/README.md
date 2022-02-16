@@ -10,7 +10,9 @@
 3. Place the downloaded jar file into a empty folder
 4. Run cmd in that folder and enter `java -jar duke.jar`
 5. Leave your task management to **TaskBot** and enjoy your interactions!
+
 ---
+
 ## Features 
 >_Important information:_ 💡
 >- Special `KEYWORD` that are used in commands will be in full caps in the User Guide
@@ -19,6 +21,7 @@
 >- `DESCRIPTION` represents a non empty text
 >- `NUMBER` represents a number
 >- Any `KEYWORD` with a `*` is optional and may be omitted e.g. `TIME*`
+
 ---
 
 ### Adding a todo task - `todo`
@@ -69,8 +72,10 @@ Here are the tasks in your list:
 ### Deleting a task - `delete`
 Deleting and removing a task from the task list
 #### Command Format - `delete NUMBER`
+
 >_Note:_ 💡
 >- You can only enter numbers corresponding to a task number
+
 #### Example - `delete 1`
 #### Expected Outcome -
 ```
@@ -82,8 +87,10 @@ Now you have 2 task(s) in the list.
 ### Marking a task - `mark`
 Marking an existing task in the task list as completed
 #### Command Format - `mark NUMBER`
+
 >_Note:_ 💡
 >- You can only enter numbers corresponding to a task number
+
 #### Example - `mark 1`
 #### Expected Outcome -
 ```
@@ -94,8 +101,10 @@ Done! I've marked this task as done
 ### Unmarking a task - `unmark`
 Marking an existing task in the task list as not completed
 #### Command Format - `unmark NUMBER`
+
 >_Note:_ 💡
 >- You can only enter numbers corresponding to a task number
+
 #### Example - `unmark 1`
 #### Expected Outcome -
 ```
@@ -116,12 +125,14 @@ Here are the matching tasks in your list:
 ---
 ### Sorting the tasks - `sort`
 Sorting the tasks in the task list in a given format
+
 >_Note:_ 💡
 > 
 > `SORTFUNCTION` is a `KEYWORD` unique to this command
 >> This is the list of the available `SORTFUNCTION`
 >> - alphabetical
 >> - chronological
+
 #### Command Format - `sort SORTFUNCTION`
 #### Example - `sort alphabetical`
 #### Expected Outcome -

@@ -25,8 +25,8 @@ public class HelpCommand extends Command {
      * Constructor of a help command.
      */
     public HelpCommand() {
-        modifyData = false;
-        exitProgram = false;
+        isModify = false;
+        isExit = false;
     }
 
     /**

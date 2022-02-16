@@ -21,8 +21,8 @@ public class FindCommand extends Command {
      * does not require any storage of data/ending the program.
      */
     public FindCommand() {
-        modifyData = false;
-        exitProgram = false;
+        isModify = false;
+        isExit = false;
     }
 
     /**

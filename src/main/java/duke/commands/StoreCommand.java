@@ -14,8 +14,8 @@ public abstract class StoreCommand extends Command {
      * requires storage of data to file.
      */
     public StoreCommand() {
-        modifyData = true;
-        exitProgram = false;
+        isModify = true;
+        isExit = false;
     }
     /**
      * Stores the user input entirely for the creation of the task.

@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response.outputString, dukeImage, response.isError)
         );
         userInput.clear();
-        if (response.exitProgram) {
+        if (response.isExit) {
             PauseTransition exitTransition = new PauseTransition(Duration.seconds(1));
             exitTransition.setOnFinished(x -> Platform.exit());
             exitTransition.play();

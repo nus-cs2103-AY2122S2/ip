@@ -21,8 +21,8 @@ public class MarkCommand extends Command {
      * @param isMark determines whether to mark or unmark a task upon command execution.
      */
     public MarkCommand(boolean isMark) {
-        modifyData = true;
-        exitProgram = false;
+        isModify = true;
+        isExit = false;
         this.isMark = isMark;
     }
 

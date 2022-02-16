@@ -8,8 +8,8 @@ import duke.tasks.TaskList;
  */
 public abstract class Command {
 
-    protected boolean exitProgram = false;
-    protected boolean modifyData = false;
+    protected boolean isExit = false;
+    protected boolean isModify = false;
 
     /**
      * Returns a boolean that specifies whether the user input matches the Command.
@@ -42,7 +42,7 @@ public abstract class Command {
      * @return isExit which is the switch that determines if the program ends.
      */
     public boolean getExit() {
-        return exitProgram;
+        return isExit;
     }
 
     /**
@@ -51,6 +51,6 @@ public abstract class Command {
      * @return isExit which is the switch that determines if data should be saved to file.
      */
     public boolean getModify() {
-        return modifyData;
+        return isModify;
     }
 }

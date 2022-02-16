@@ -6,16 +6,16 @@ package duke.ui;
  */
 public class GuiFeedback {
     protected String outputString;
-    protected boolean exitProgram;
+    protected boolean isExit;
     protected boolean isError;
     /**
      * Constructor of GuiFeedback.
      * @param outputString information on any String required to be displayed to the user.
-     * @param exitProgram information on whether the program should exit.
+     * @param isExit information on whether the program should exit.
      */
-    public GuiFeedback(String outputString, boolean exitProgram, boolean isError) {
+    public GuiFeedback(String outputString, boolean isExit, boolean isError) {
         this.outputString = outputString;
-        this.exitProgram = exitProgram;
+        this.isExit = isExit;
         this.isError = isError;
     }
 }

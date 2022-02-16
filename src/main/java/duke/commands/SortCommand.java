@@ -45,8 +45,8 @@ public class SortCommand extends Command {
      * requires storage to file.
      */
     public SortCommand() {
-        modifyData = true;
-        exitProgram = false;
+        isModify = true;
+        isExit = false;
     }
 
     /**

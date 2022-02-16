@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
      * ends the program.
      */
     public ExitCommand() {
-        modifyData = false;
-        exitProgram = true;
+        isModify = false;
+        isExit = true;
     }
 
     /**

@@ -18,8 +18,8 @@ public class DeleteCommand extends Command {
      * requires storage to file.
      */
     public DeleteCommand() {
-        modifyData = true;
-        exitProgram = false;
+        isModify = true;
+        isExit = false;
     }
 
     /**
