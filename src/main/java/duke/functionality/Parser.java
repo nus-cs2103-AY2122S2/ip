@@ -12,11 +12,10 @@ import duke.exceptions.DukeException;
  * Parser is a functionality class that helps Duke to understand what the user inputs are.
  */
 public class Parser {
-    public static final String ERROR_UNKNOWN = "OOPS, I'm sorry, but I don't know what that means :-(";
+    public static final String ERROR_UNKNOWN = "I don't know what that means! Command does not exist or your format is wrong!";
     public static final String ERROR_DESCRIPTION = "OOPS, The description of a command cannot be empty.";
     public static final String ERROR_MISSING_DATE = "OOPS, check again if you have the date and the description.";
     public static final String ERROR_FORMAT_DATE = "Wrong Format... Try yyyy-mm-dd";
-    public static final String ERROR_FORGET_SPACE = "Something is wrong in the format of command, check user guide...";
     public static final String ERROR_TASK_NOT_EXIST = "Task does not exist...";
     private static final int INDEX_AFTER_MARK_COMMAND = 5;
     private static final int INDEX_AFTER_UNMARK_COMMAND = 7;
@@ -38,10 +37,10 @@ public class Parser {
         try {
             if (input.equals("list")) {
                 output = taskList.listItems();
-            } else if (input.startsWith("mark")) {
+            } else if (input.startsWith("mark ")) {
                 String taskNumber = input.substring(INDEX_AFTER_MARK_COMMAND);
                 output = taskList.markTask(taskNumber);
-            } else if (input.startsWith("unmark")) {
+            } else if (input.startsWith("unmark ")) {
                 String taskNumber = input.substring(INDEX_AFTER_UNMARK_COMMAND);
                 output = taskList.unmarkTask(taskNumber);
             } else if (input.startsWith("todo ")) {
@@ -67,7 +66,7 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException error) {
             throw new DukeException(ERROR_MISSING_DATE);
         } catch (NumberFormatException error) {
-            throw new DukeException(ERROR_FORGET_SPACE);
+            throw new DukeException(ERROR_UNKNOWN);
         } catch (IndexOutOfBoundsException error) {
             throw new DukeException(ERROR_TASK_NOT_EXIST);
         }

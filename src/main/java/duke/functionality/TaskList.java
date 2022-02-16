@@ -21,7 +21,7 @@ public class TaskList {
     private static final String REMOVED = "Noted. I've removed this task:\n";
     private static final String ALREADY_MARKED = "Tasked has already been marked...";
     private static final String ALREADY_UNMARKED = "Task has already been unmarked...";
-    private static final String ALREADY_DELETED = "Task has already been deleted...";
+    private static final String ALREADY_DELETED = "There is no such task to be deleted...";
     private static final String MATCH = "Here are the matching tasks in your list:\n";
     private static final String DUPLICATE_MESSAGE = "This is a duplicate task... try again";
     private static final String EMPTY_LIST = "The list is empty... Try adding some tasks!";
