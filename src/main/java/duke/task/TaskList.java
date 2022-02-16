@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import duke.DukeException;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -32,8 +32,8 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public TaskList filterTask(String keywords) {
-        return new TaskList(this.tasks.stream().filter(task -> task.contains(keywords))
+    public TaskList filterTasks(String keywords) {
+        return new TaskList(this.tasks.stream().filter(task -> task.hasKeywords(keywords))
                 .collect(Collectors.toCollection(ArrayList::new)));
     }
 

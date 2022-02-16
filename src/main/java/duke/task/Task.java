@@ -1,10 +1,12 @@
 package duke.task;
 
+import duke.DukeException;
+
 public class Task {
     private final String title;
     private boolean isDone;
 
-    public Task(String title)  {
+    public Task(String title) {
         this.title = title;
         this.isDone = false;
     }
@@ -17,12 +19,12 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getSaveFormat() {
+    public String getSaveFormat() throws DukeException {
         String isDoneSymbol = isDone ? "1" : "0";
         return String.format("%s | %s | %s", getClassSymbol(), isDoneSymbol, title);
     }
 
-    public String getClassSymbol() {
+    public String getClassSymbol() throws DukeException {
         if (Todo.class.equals(this.getClass())) {
             return "T";
         } else if (Event.class.equals(this.getClass())) {
@@ -30,12 +32,12 @@ public class Task {
         } else if (Deadline.class.equals(this.getClass())) {
             return "D";
         } else {
-            return " ";
+            throw new DukeException("Unknown Task");
         }
 
     }
 
-    public boolean contains(String keywords) {
+    public boolean hasKeywords(String keywords) {
         return this.title.contains(keywords);
     }
 

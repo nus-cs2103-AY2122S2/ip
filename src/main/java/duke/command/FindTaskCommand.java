@@ -17,7 +17,7 @@ public class FindTaskCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            TaskList filteredTasks = tasks.filterTask(keywords);
+            TaskList filteredTasks = tasks.filterTasks(keywords);
             return TextUi.showTasks(filteredTasks);
         } catch (DukeException e) {
             return TextUi.showError(e.getMessage());

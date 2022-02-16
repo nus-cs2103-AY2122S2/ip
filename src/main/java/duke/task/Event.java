@@ -1,12 +1,14 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
-    private final LocalDateTime eventAt;
+public class Event extends Task {
     private static final String DEFAULT_DATE_FORMAT = "dd MMMM yyyy HHmm";
     private static final String SAVE_FILE_DATE_FORMAT = "d/MM/yyyy HHmm";
+    private final LocalDateTime eventAt;
 
     public Event(String title, LocalDateTime eventAt) {
         super(title);
@@ -14,7 +16,7 @@ public class Event extends Task{
     }
 
     @Override
-    public String getSaveFormat() {
+    public String getSaveFormat() throws DukeException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern(SAVE_FILE_DATE_FORMAT);
         return String.format("%s | %s", super.getSaveFormat(), this.eventAt.format(format));
     }

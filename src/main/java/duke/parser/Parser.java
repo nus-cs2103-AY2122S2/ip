@@ -1,13 +1,21 @@
 package duke.parser;
 
-import duke.DukeException;
-import duke.command.*;
-import duke.common.Messages;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+
+import duke.DukeException;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindTaskCommand;
+import duke.command.ListCommand;
+import duke.command.MarkTaskCommand;
+import duke.common.Messages;
 
 public class Parser {
     private static final String DEFAULT_DATE_FORMAT = "d/MM/yyyy HHmm";
@@ -15,32 +23,32 @@ public class Parser {
     public static Command parse(String userInput) throws DukeException {
         String[] userInputArr = userInput.split(" ", 2);
         switch (userInputArr[0]) {
-            case "mark":
-                return new MarkTaskCommand(Integer.parseInt(userInputArr[1]) - 1, true);
-            case "unmark":
-                return new MarkTaskCommand(Integer.parseInt(userInputArr[1]) - 1, false);
-            case "delete":
-                return new DeleteCommand(Integer.parseInt(userInputArr[1]) - 1);
-            case "find":
-                userInput = String.join(" ",
-                        Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
-                return new FindTaskCommand(userInput);
-            case "list":
-                return new ListCommand();
-            case "bye":
-                return new ExitCommand();
-            case "todo":
-                return prepareAddTodoCommand(userInputArr[1]);
-            case "event":
-                userInput = String.join(" ",
-                        Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
-                return prepareAddEventCommand(userInput);
-            case "deadline":
-                userInput = String.join(" ",
-                        Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
-                return prepareAddDeadlineCommand(userInput);
-            default:
-                throw new DukeException(Messages.MESSAGE_ERROR_INVALID_COMMAND);
+        case "mark":
+            return new MarkTaskCommand(Integer.parseInt(userInputArr[1]) - 1, true);
+        case "unmark":
+            return new MarkTaskCommand(Integer.parseInt(userInputArr[1]) - 1, false);
+        case "delete":
+            return new DeleteCommand(Integer.parseInt(userInputArr[1]) - 1);
+        case "find":
+            userInput = String.join(" ",
+                    Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
+            return new FindTaskCommand(userInput);
+        case "list":
+            return new ListCommand();
+        case "bye":
+            return new ExitCommand();
+        case "todo":
+            return prepareAddTodoCommand(userInputArr[1]);
+        case "event":
+            userInput = String.join(" ",
+                    Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
+            return prepareAddEventCommand(userInput);
+        case "deadline":
+            userInput = String.join(" ",
+                    Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
+            return prepareAddDeadlineCommand(userInput);
+        default:
+            throw new DukeException(Messages.MESSAGE_ERROR_INVALID_COMMAND);
         }
     }
 

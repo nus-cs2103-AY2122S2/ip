@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
 import duke.parser.Parser;
@@ -9,12 +10,12 @@ import duke.task.Todo;
 
 public class DukeTest {
     @Test
-    public void testTaskSizeParser() {
+    public void testTaskSizeParser_emptyString() {
         assertEquals("", Parser.parseTaskSize(1));
     }
 
     @Test
-    public void testTaskFileFormat() {
+    public void testTaskFileFormat() throws DukeException {
         Task task = new Todo("Todo Test");
         assertEquals("T | 0 | Todo Test", task.getSaveFormat());
     }
