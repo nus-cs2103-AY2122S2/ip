@@ -18,10 +18,22 @@ import java.time.LocalDate;
 
 import java.util.Arrays;
 
+/**
+ * Represents a parser to process the inputs to a chat bot.
+ */
 public class Parser {
     private static final BotException UNSUPPORTED_COMMAND_EXCEPTION =
             new BotException("I'm sorry, but I don't know what that means :-(");
 
+    /**
+     * Returns a command to be executed if the query is a recognised command.
+     * Otherwise, a `BotException` would be thrown.
+     *
+     * @param query the input to be parsed.
+     * @return The command recognised from the query to be executed.
+     * @throws BotException If the command from the query is unrecognised or
+     * syntactically invalid.
+     */
     public Command parse(String query) throws BotException {
         final String[] tokens = query.split(" ", 2);
         final String command = tokens[0];
