@@ -1,9 +1,11 @@
 package jeff.task;
 
-import jeff.main.JeffException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import jeff.main.JeffException;
+
 
 public class EventTest {
 

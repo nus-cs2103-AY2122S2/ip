@@ -1,13 +1,11 @@
 package jeff.command;
 
-import jeff.storage.Storage;
-
-import jeff.task.TaskList;
-
-import jeff.ui.Ui;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import jeff.storage.Storage;
+import jeff.task.TaskList;
+import jeff.ui.Ui;
 
 /**
  * FindCommand class is a Command that contains instructions
@@ -15,15 +13,15 @@ import java.util.regex.Pattern;
  */
 public class FindCommand extends Command {
 
-    private String Description;
+    private String description;
 
     /**
-     * Constructor of MarkCommand that stores the input string to be checked into Description.
+     * Constructor of MarkCommand that stores the input string to be checked into description.
      *
      * @param body String to be found, input from user.
      */
     public FindCommand(String body) {
-        this.Description = body;
+        this.description = body;
     }
 
     /**
@@ -43,7 +41,7 @@ public class FindCommand extends Command {
             int currCounter = 1;
 
             // Store string the user want to find in the list.
-            String toBeFound = Description;
+            String toBeFound = description;
             Pattern pattern = Pattern.compile(toBeFound);
 
             for (int n = 0; n < tasks.size(); n++) {
@@ -57,7 +55,7 @@ public class FindCommand extends Command {
 
                 // If found, store to print it out, else skip.
                 if (isFound) {
-                    String currTaskString = currCounter + "." + tasks.getString(n) + "\n" ;
+                    String currTaskString = currCounter + "." + tasks.getString(n) + "\n";
                     taskStrings.append(Ui.addPrefix(currTaskString));
                     currCounter++;
                 }

@@ -1,13 +1,9 @@
 package jeff.main;
 
 import jeff.command.Command;
-
 import jeff.parser.Parser;
-
 import jeff.storage.Storage;
-
 import jeff.task.TaskList;
-
 import jeff.ui.Ui;
 
 /**
@@ -36,6 +32,9 @@ public class Jeff {
         }
     }
 
+    /**
+     * Setup the starting variables appropriately, parses input and execute them.
+     */
     public void run() {
         ui.showWelcome();
         ui.showLine();
