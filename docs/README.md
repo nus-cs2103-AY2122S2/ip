@@ -9,7 +9,6 @@ You can add task by typing
 todo <your task description>
 event <your task description> /at <event-date>
 deadline <your task description> /by <event-date>
-
 ```
 depends on what type of task you want to add
 
@@ -18,7 +17,6 @@ depends on what type of task you want to add
 You can see all your current task by typing
 ```
 list
-
 ```
 
 ### Mark/ Unmark
@@ -27,7 +25,6 @@ You can mark task as done by typing
 ```
 mark <task-number>
 unmark <task-number>
-
 ```
 
 
@@ -40,3 +37,6 @@ Delete the task number, will show the remaining task available.
 ### `find <keyword>` - Find the task that contains the keyword in its description
 
 Return list of task that contains the keywords
+
+
+#Download now and try it out!
