@@ -1,9 +1,12 @@
 package angela.command;
 
+import java.util.ArrayList;
+
 import angela.datetime.DateTable;
 import angela.task.TaskList;
 import angela.util.BotStorage;
 import angela.util.Ui;
+
 
 /**
  * End chat command
@@ -19,7 +22,7 @@ public class ByeCommand extends Command {
      * @param dateTable  Reference of the <code>DateTable</code> object
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable) {
+    public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable) {
         return ui.endChat();
     }
 

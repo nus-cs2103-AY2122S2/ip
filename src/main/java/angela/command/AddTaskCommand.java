@@ -1,6 +1,7 @@
 package angela.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import angela.datetime.DateTable;
 import angela.exception.BotException;
@@ -63,7 +64,7 @@ public class AddTaskCommand extends Command {
      * @throws IOException If an I/O error occurs
      */
     @Override
-    public String execute(TaskList taskList, Ui ui,
+    public ArrayList<String> execute(TaskList taskList, Ui ui,
             BotStorage botStorage, DateTable dateTable) throws IOException {
         if (type.equals("T") && fullInput.length() == TODO_LENGTH) {
             return exception.printEmptyDescriptionError("todo");

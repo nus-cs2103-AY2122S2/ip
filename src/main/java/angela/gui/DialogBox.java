@@ -1,23 +1,23 @@
 package angela.gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
 /**
@@ -29,6 +29,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private VBox chatDisplay;
 
 
     /**
@@ -37,7 +39,7 @@ public class DialogBox extends HBox {
      * @param text The text need to be display
      * @param img Profile image need to be display need to the text
      */
-    private DialogBox(String text, Image img, boolean isUser) {
+    private DialogBox(ArrayList<String> text, Image img, boolean isUser) {
         try {
             loadFxml();
             setAttribute(text, img, isUser);
@@ -62,7 +64,7 @@ public class DialogBox extends HBox {
      * @param text The text need to be displayed
      * @param img The image need to be displayed
      */
-    private void setAttribute(String text, Image img, boolean isUser) {
+    private void setAttribute(ArrayList<String> text, Image img, boolean isUser) throws IOException {
         setTextLabel(text, isUser);
         setImage(img);
     }
@@ -73,18 +75,16 @@ public class DialogBox extends HBox {
      * @param text The displayed text
      * @param isUser If the dialog belong to user, return true, otherwise false
      */
-    private void setTextLabel(String text, boolean isUser) {
-        dialog.setText(text);
-        CornerRadii cornerRadii = new CornerRadii(1.0);
-        Insets insets = new Insets(35, 5, 10, 15);
-        Color color;
-        if (isUser) {
-            color = Color.rgb(229, 246, 172, 0.96);
-        } else {
-            color = Color.rgb(172, 246, 224, 0.96);
+    private void setTextLabel(ArrayList<String> text, boolean isUser) throws IOException {
+        for (String textString : text) {
+            HBox hBox = new HBox();
+            if (isUser) {
+                hBox = new UserMessage(textString);
+            } else {
+                hBox = new AngelaMessage(textString);
+            }
+            chatDisplay.getChildren().add(hBox);
         }
-        Background background = new Background(new BackgroundFill(color, cornerRadii, insets));
-        dialog.setBackground(background);
     }
 
     /**
@@ -103,7 +103,24 @@ public class DialogBox extends HBox {
      * @param img The displayed image
      */
     private void setImageView(Image img) {
+        Lighting lighting = createLighting();
+        ColorAdjust brightLight = new ColorAdjust(0, 0, .25, .3);
+        brightLight.setInput(lighting);
+        displayPicture.setEffect(brightLight);
         displayPicture.setImage(img);
+    }
+
+    private Lighting createLighting() {
+        // Create ambient light
+        Light.Distant light = new Light.Distant();
+        light.setAzimuth(-135);
+
+        // Create lighting effect
+        Lighting lighting = new Lighting();
+        lighting.setLight(light);
+        lighting.setSurfaceScale(4.0);
+
+        return lighting;
     }
 
     /**
@@ -112,7 +129,7 @@ public class DialogBox extends HBox {
      * @param imageView The image need to enhanced
      */
     private void setSmoothImage(ImageView imageView) {
-        Circle clip = new Circle(40, 40, 55);
+        Circle clip = new Circle(32, 42, 45);
         imageView.setClip(clip);
     }
 
@@ -133,7 +150,7 @@ public class DialogBox extends HBox {
      * @param img User profile image
      * @return New dialog box for user
      */
-    public static DialogBox getUserDialog(String text, Image img) {
+    public static DialogBox getUserDialog(ArrayList<String> text, Image img) {
         return new DialogBox(text, img, true);
     }
 
@@ -144,7 +161,7 @@ public class DialogBox extends HBox {
      * @param img Angela profile image
      * @return New dialog box for Angela
      */
-    public static DialogBox getAngelaDialog(String text, Image img) {
+    public static DialogBox getAngelaDialog(ArrayList<String> text, Image img) {
         var db = new DialogBox(text, img, false);
         db.flip();
         return db;

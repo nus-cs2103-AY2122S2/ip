@@ -1,6 +1,7 @@
 package angela.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import angela.datetime.DateTable;
 import angela.task.TaskList;
@@ -27,7 +28,7 @@ public class FindTaskCommand extends Command {
      * @throws IOException If an I/O error occur
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
+    public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
         return taskList.findTasksByKeyWord(keyWord);
     }

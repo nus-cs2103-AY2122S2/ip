@@ -1,6 +1,7 @@
 package angela;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import angela.command.Command;
 import angela.datetime.DateTable;
@@ -45,8 +46,8 @@ public class Angela {
     /**
      * Runs the bot
      */
-    public String run(String input) {
-        String temp = "";
+    public ArrayList<String> run(String input) {
+        ArrayList<String> temp = new ArrayList<>();
         try {
             Command c = Parser.parse(input);
             temp = c.execute(taskList, ui, botStorage, dateTable);
@@ -66,7 +67,7 @@ public class Angela {
      * @param input The input command
      * @return The display string obtain from the input command
      */
-    public String getResponse(String input) {
+    public ArrayList<String> getResponse(String input) {
         return this.run(input);
     }
 }

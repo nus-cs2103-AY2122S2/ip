@@ -29,7 +29,7 @@ public class DateTable {
      *
      * @param dateString The string version of the date
      */
-    public String getEventOnDate(String dateString) {
+    public ArrayList<String> getEventOnDate(String dateString) {
         LocalDate date = LocalDate.parse(dateString,
                 DateTimeFormatter.ofPattern(DATE_FORMAT));
 

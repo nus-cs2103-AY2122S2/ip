@@ -108,17 +108,17 @@ public class TaskList {
      *
      * @param keyWord The keyword to find the matching task
      */
-    public String findTasksByKeyWord(String keyWord) {
-        StringBuilder reply = new StringBuilder();
-        int numIndex = 0;
+    public ArrayList<String> findTasksByKeyWord(String keyWord) {
+        ArrayList<String> wordArray = new ArrayList<>();
+        int numIndex = -1;
         ArrayList<Task> filterTask = new ArrayList<>();
         storingList.stream().filter(s -> isTaskHasKeyWord(s, keyWord)).forEach(filterTask::add);
         for (Task task : filterTask) {
             numIndex += 1;
             String taskDescription = ui.showSearchResult(numIndex, task);
-            reply.append(taskDescription);
+            wordArray.add(taskDescription);
         }
-        return reply.toString();
+        return wordArray;
     }
 
     /**

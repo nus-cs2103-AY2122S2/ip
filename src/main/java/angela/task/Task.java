@@ -2,6 +2,7 @@ package angela.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Stores the information about the task
@@ -63,13 +64,15 @@ public class Task {
      * @param isComplete New status of the task
      * @return String represent the changed status
      */
-    public String changeTaskStatus(boolean isComplete) {
+    public ArrayList<String> changeTaskStatus(boolean isComplete) {
+        ArrayList<String> wordArray = new ArrayList<>();
         this.isComplete = isComplete;
         if (isComplete) {
-            return MARK_TASK + this;
+            wordArray.add(MARK_TASK + this);
         } else {
-            return UNMARK_TASK + this;
+            wordArray.add(UNMARK_TASK + this);
         }
+        return wordArray;
     }
 
     /**

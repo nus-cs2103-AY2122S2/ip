@@ -1,5 +1,7 @@
 package angela.gui;
 
+import java.util.ArrayList;
+
 import angela.Angela;
 import angela.util.Ui;
 import javafx.animation.PauseTransition;
@@ -12,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
 
 /**
  * Controller for angela.gui.MainWindow. Provides the layout for the other controls.
@@ -55,7 +58,7 @@ public class MainWindow extends AnchorPane {
      * Sets up the displayed text for GUI in the beginning
      */
     private void setUiAtBegin() {
-        String helloText = ui.startChat();
+        ArrayList<String> helloText = ui.startChat();
         DialogBox helloBox = DialogBox.getAngelaDialog(helloText, angelaImage);
         dialogContainer.getChildren().addAll(helloBox);
     }
@@ -64,8 +67,8 @@ public class MainWindow extends AnchorPane {
      * Display upcoming deadlines in GUI
      */
     public void displayUpcomingDeadline() {
-        String nearestDeadlineText = ui.showNearestDeadlines(angela.getDateTable());
-        String upcomingDeadlineText = ui.showUpcomingDeadlines(angela.getDateTable());
+        ArrayList<String> nearestDeadlineText = ui.showNearestDeadlines(angela.getDateTable());
+        ArrayList<String> upcomingDeadlineText = ui.showUpcomingDeadlines(angela.getDateTable());
         DialogBox upcomingDeadlineBox = DialogBox.getAngelaDialog(upcomingDeadlineText, angelaImage);
         DialogBox nearestDeadlineBox = DialogBox.getAngelaDialog(nearestDeadlineText, angelaImage);
         dialogContainer.getChildren().addAll(upcomingDeadlineBox, nearestDeadlineBox);
@@ -81,8 +84,10 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = angela.getResponse(input);
+        String userType = userInput.getText();
+        ArrayList<String> input = new ArrayList<>();
+        input.add(userType);
+        ArrayList<String> response = angela.getResponse(userType);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getAngelaDialog(response, angelaImage)

@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -57,7 +58,7 @@ public class Main extends Application {
         AnchorPane ap = fxmlLoader.load();
         // Assert the input value is not null
         assert(!(ap == null));
-        return new Scene(ap);
+        return new Scene(ap, MIN_WIDTH, MIN_HEIGHT, Color.rgb(160, 244, 255, 0.73));
     }
 
     private void customizeStage(Stage stage, Scene scene, FXMLLoader fxmlLoader) {

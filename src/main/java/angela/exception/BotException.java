@@ -1,5 +1,7 @@
 package angela.exception;
 
+import java.util.ArrayList;
+
 /**
  * Prints error message when user input the wrong command
  */
@@ -11,8 +13,11 @@ public class BotException {
      * @param description The input command type
      * @return The reply string of Angela
      */
-    public String printEmptyDescriptionError(String description) {
-        return " OOPS!!! The description of a " + description + " cannot be empty.";
+    public ArrayList<String> printEmptyDescriptionError(String description) {
+        ArrayList<String> wordArray = new ArrayList<>();
+        wordArray.add(" Sorry I think you have forgotten something? The description of a " + "/"
+                + description.toUpperCase() + " cannot be empty.");
+        return wordArray;
     }
 
     /**
@@ -22,8 +27,11 @@ public class BotException {
      * @param description The input command type
      * @return The reply string of Angela
      */
-    public String printNotNumericError(String description) {
-        return " OOPS!!! The description of a " + description + " must be a number.";
+    public ArrayList<String> printNotNumericError(String description) {
+        ArrayList<String> wordArray = new ArrayList<>();
+        wordArray.add(" Sorry I think you have a typo :< \n"
+                + " The description of a " + "/" + description.toUpperCase() + " must be a number.");
+        return wordArray;
     }
 
     /**
@@ -31,8 +39,10 @@ public class BotException {
      *
      * @return The reply string of Angela
      */
-    public String printWrongSyntaxError() {
-        return " OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public ArrayList<String> printWrongSyntaxError() {
+        ArrayList<String> wordArray = new ArrayList<>();
+        wordArray.add(" Sorry, but I don't know what that means :-(");
+        return wordArray;
     }
 
     /**
@@ -40,7 +50,9 @@ public class BotException {
      *
      * @return The reply string of Angela
      */
-    public String printDateNotFoundError() {
-        return " OOPS!!! You don't have any deadlines/events on this day :-(";
+    public ArrayList<String> printDateNotFoundError() {
+        ArrayList<String> wordArray = new ArrayList<>();
+        wordArray.add(" OOPS!!! You don't have any deadlines/events on this day :-(");
+        return wordArray;
     }
 }

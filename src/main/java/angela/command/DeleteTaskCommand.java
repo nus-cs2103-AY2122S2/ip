@@ -1,6 +1,7 @@
 package angela.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import angela.datetime.DateTable;
 import angela.exception.BotException;
@@ -33,7 +34,7 @@ public class DeleteTaskCommand extends angela.command.Command {
      * @throws IOException If an I/O error occur
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
+    public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
         if (NumericChecker.isNumeric(description)) {
             int taskNumber = Integer.parseInt(description);

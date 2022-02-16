@@ -1,6 +1,7 @@
 package angela.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import angela.datetime.DateTable;
 import angela.exception.BotException;
@@ -41,7 +42,7 @@ public class UpdateMarkCommand extends angela.command.Command {
      * @throws IOException If an I/O error occur
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
+    public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
         String stateDescription = getTaskStatus();
         return printCommandOutput(taskList, ui, botStorage, stateDescription);
@@ -68,7 +69,8 @@ public class UpdateMarkCommand extends angela.command.Command {
      * @return The output display string
      * @throws IOException If an I/O error occur
      */
-    private String printCommandOutput(TaskList taskList, Ui ui, BotStorage botStorage, String stateDescription)
+    private ArrayList<String> printCommandOutput(
+            TaskList taskList, Ui ui, BotStorage botStorage, String stateDescription)
             throws IOException {
         if (NumericChecker.isNumeric(description)) {
             int taskNumber = Integer.parseInt(description);

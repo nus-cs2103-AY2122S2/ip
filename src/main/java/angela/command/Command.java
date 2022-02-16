@@ -1,6 +1,7 @@
 package angela.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import angela.datetime.DateTable;
 import angela.task.TaskList;
@@ -21,7 +22,7 @@ public abstract class Command {
      * @param dateTable  Reference of the <code>DateTable</code> object
      * @throws IOException If an I/O error occur
      */
-    public abstract String execute(TaskList taskList, Ui ui,
+    public abstract ArrayList<String> execute(TaskList taskList, Ui ui,
             BotStorage botStorage, DateTable dateTable) throws IOException;
 
     /**

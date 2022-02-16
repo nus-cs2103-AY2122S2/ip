@@ -22,7 +22,7 @@ public class ShowListCommand extends angela.command.Command {
      * @param dateTable  Reference of the <code>DateTable</code> object
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable) {
+    public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable) {
         ArrayList<Task> storingList = taskList.getStoringList();
         return ui.showTaskList(storingList);
     }

@@ -1,5 +1,7 @@
 package angela.command;
 
+import java.util.ArrayList;
+
 import angela.datetime.DateTable;
 import angela.exception.BotException;
 import angela.task.TaskList;
@@ -20,7 +22,7 @@ public class WrongSyntaxCommand extends angela.command.Command {
      * @param dateTable  Reference of the <code>DateTable</code> object
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable) {
+    public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable) {
         BotException exception = new BotException();
         return exception.printWrongSyntaxError();
     }
