@@ -17,6 +17,7 @@ public class TaskList {
     static final String FOUND = "Here are the tasks that match your request\n";
     static final String NOTHING = "I couldn't find anything that matched\n";
     static final String FINISHED = "We've done all we set out to do\n";
+    static final String TASKS = "list\n todo\n event\n deadline\n mark\n unmark\n delete\n clear\n find\n F find\n bye\n";
 
     private final ArrayList<Task> tasklist;
 
@@ -109,7 +110,7 @@ public class TaskList {
      * @return a String output
      */
     public String addDeadline(String[] item) throws DukeException{
-        Deadline newDeadline = new Deadline(item[0], Parser.convert1(item[1]));
+        Deadline newDeadline = new Deadline(item[0], Parser.convertString(item[1]));
         int size = tasklist.size();
         this.tasklist.add(newDeadline);
         String output = ADDED + "\n";
@@ -126,7 +127,7 @@ public class TaskList {
      * @return a String output
      */
     public String addEvent(String[] item) throws DukeException{
-        Event newEvent = new Event(item[0], Parser.convert1(item[1]));
+        Event newEvent = new Event(item[0], Parser.convertString(item[1]));
         int size = tasklist.size();
         this.tasklist.add(newEvent);
         String output = ADDED + "\n";
@@ -172,7 +173,7 @@ public class TaskList {
             Task checking = tasklist.get(i);
             String description = checking.getDescription();
             if(description.contains(name)) {
-                output += checking.toString() + "\n";
+                output += checking + "\n";
                 counter++;
             }
         }
@@ -189,6 +190,9 @@ public class TaskList {
         return "All items are off the table";
     }
 
+    public String help() {
+        return TASKS;
+    }
 
 
 

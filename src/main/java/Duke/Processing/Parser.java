@@ -12,11 +12,11 @@ public class Parser {
      * @return      the String in a date format the system can recognise
      */
     static Date convertString(String date) throws DukeException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
             return  formatter.parse(date);
         } catch (ParseException e) {
-            throw  new DukeException("what is wrong" + e);
+            throw  new DukeException("Wrong date time format");
         }
     }
     /**
@@ -30,7 +30,7 @@ public class Parser {
         try {
             return formatter.parse(date);
         } catch (ParseException e) {
-            throw  new DukeException("What is wrong " + e);
+            throw  new DukeException("Wrong date time format");
         }
     }
     /**
@@ -53,7 +53,7 @@ public class Parser {
                 String item = input.substring(9);
                 String[] split = item.split(" /by ");
                 output = tasklist.addDeadline(split);
-            } else if (input.startsWith("Event")) {
+            } else if (input.startsWith("event")) {
                 String item = input.substring(6);
                 String[] split = item.split(" /at ");
                 output = tasklist.addEvent(split);
@@ -66,11 +66,13 @@ public class Parser {
             } else if (input.startsWith("delete")) {
                 String num = input.substring(7);
                 output = tasklist.delete(num);
-            } else if (input.startsWith("find")) {
-                String name = input.substring(5);
+            } else if (input.startsWith("F find")) {
+                String name = input.substring(7);
                 output = tasklist.findS(name);
             } else if (input.equals("clear")) {
                 output = tasklist.clear();
+            } else if (input.equalsIgnoreCase("help")) {
+                output = tasklist.help();
             } else {
                 throw new DukeException("I'm not sure we can do that");
             }

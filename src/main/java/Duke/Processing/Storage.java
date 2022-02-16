@@ -42,10 +42,10 @@ public class Storage {
                             item = new todo(different[2]);
                             break;
                         case "D":
-                            item = new Deadline(different[2], Parser.convert2(different[3]));
+                            item = new Deadline(different[2], Parser.convertDate(different[3]));
                             break;
                         case "E":
-                            item = new Event(different[2], Parser.convert2(different[3]));
+                            item = new Event(different[2], Parser.convertDate(different[3]));
                             break;
                         default:
                             throw new DukeException("Unknown type of mission");

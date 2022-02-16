@@ -1,6 +1,0 @@
-E | 0 | eat | Tue Jan 12 00:00:00 SGT 1999
-D | 0 | jump | Sat Oct 10 00:00:00 SGT 2020
-E | 0 | Destory FOB alpha | Sat Dec 12 00:00:00 SGT 2020
-E | 0 | excercise | Tue Feb 15 00:00:00 SGT 2022
-T | 0 | read
-T | 0 | jump

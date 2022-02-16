@@ -14,7 +14,7 @@
                 <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
             </content>
         </ScrollPane>
-        <ImageView fitHeight="557.0" fitWidth="400.0" opacity="0.5">
+        <ImageView fitHeight="557.0" fitWidth="400.0" opacity="0.6">
             <image>
                 <Image url="@../images/background.png" />
             </image>
