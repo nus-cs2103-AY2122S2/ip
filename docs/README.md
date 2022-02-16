@@ -1,96 +1,112 @@
-# User Guide
+# Walle User Guide
+------------------------------------------------------------------------------------------------------------------------
+> Waaaaaaaaaaaaaaaaaaaaaaaaaaall-E - Wall e
+
+Walle is a simple application that can record and keep track of the tasks you want to do
+~~Also, it's Walle so who woudn't like it?!~~ :robot:
+
+![Screenshot of Walle](Ui.png)
+
 ________________________________________________________________________________________________________________________
 ## Features 
 
-### Feature-Add
+### Check out the awesome stuff that Walle can do
 
-walle.Walle is able to add 3 types of tasks: walle.ToDo, walle.Event and walle.Deadline.
+[x] Add tasks
+[x] Mark/Unmark tasks
+[x] List all tracked tasks
+[x] Detect duplicates
+[x] Delete tasks
+[x] Find tasks
 
-### Feature-Mark/Unmark
-
-walle.Walle is able to mark and unmark tasks.
-
-### Feature-list
-
-walle.Walle is able to list out all currently tracked tasks.
-
-### Feature-Bye
-
-walle.Walle is able to exit.
 ________________________________________________________________________________________________________________________
-##Keywords
+## Usage of Walle
 
-### `walle.ToDo` - Adds tasks of type: todo
+### Add tasks - add task to Walle
 
-Adds one task of type 'todo' with following input as task name.
+There are 3 types of tasks you can add
+- todo
+- deadline
+- event
 
 Example of usage: 
 
+    todo <name of task>
     `todo borrow book`
 
 Expected outcome:
 
+```
      Got it. I've added this task: 
        [T][ ] borrow book
      Now you have 5 tasks in the list.
-
-### `walle.Deadline` - Adds tasks of type: deadline
-
-Adds one task of type 'deadline' with following input as task name and input after /by as deadline.
+```
 
 Example of usage:
 
-    `deadline return book /by Sunday`
+    deadline <name of task> /by <date to complete task>
+    `deadline return math book /by Sunday`
+    you can also use 'DD-MM-YYYY HHMM' format for <date to complete task>
+    'deadline return sci book /by 17-02-2022 1900'
 
 Expected outcome:
 
+```
      Got it. I've added this task: 
-       [D][ ] return book (by: Sunday)
+       [D][ ] return math book (by: Sunday)
      Now you have 6 tasks in the list.
-
-### `walle.Event` - Adds tasks of type: event
-
-Adds one task of type 'event' with following input as task name and input after /at as deadline.
+     
+     Got it. I've added this task: 
+       [D][ ] return sci book (by: 17 Feb 2022 07:00 PM)
+     Now you have 7 tasks in the list.
+```
 
 Example of usage:
 
+    event <name of task> /at <time of event>
     `event project meeting /at Mon 2-4pm`
+    you can also use 'DD-MM-YYYY HHMM' format for <time of event>
+    'event lunch with mom /at 17-02-2022 1900'
 
 Expected outcome:
 
+```
      Got it. I've added this task: 
        [E][ ] project meeting (at: Mon 2-4pm)
      Now you have 7 tasks in the list.
 
-### 'mark' - Marks tasks as done
+     Got it. I've added this task: 
+       [E][ ] return sci book (at: 17 Feb 2022 07:00 PM)
+     Now you have 8 tasks in the list.
+```
 
-Expects <mark int> where int is the task number to be marked as done.
+### Mark/Unmark tasks - Mark or unmark selected task
 
 Example of usage:
 
+    mark <task number>
     'mark 2'
 
 Expected outcome:
 
+```
      Nice! I've marked this task as done: 
        [X] return book
-
-### 'unmark' - Marks tasks as not done
-
-Expects <unmark int> where int is the task number to be marked as not done.
+```
 
 Example of usage:
 
+    unmark <task number>
     'unmark 2'
 
 Expected outcome:
 
+```
      OK, I've marked this task as not done yet:
        [ ] return book
+```
 
-### 'list' - List all current tasks
-
-List all current tasks
+### list - List all current tasks
 
 Example of usage:
 
@@ -98,9 +114,51 @@ Example of usage:
 
 Expected outcome:
 
+```
      Here are the tasks in your list:
-     1.[X] read book
-     2.[ ] return book
-     3.[ ] buy bread
+     1. [T][X] read book
+     2. [D][ ] return book (by: 20 Feb 2022 08:00 PM)
+     3. [T][ ] buy bread
+```
 
+### Detect duplicates - Walle will detect duplicate entries and reject input
+
+Example of usage: 
+
+    'todo have dinner' when there exists a todo with the task name 'have dinner'
+
+Expected outcome:
+
+```
+    BEEP! Error! There is a duplicate task (task Number 6)
+```
+
+### Delete task - Delete specified task
+
+Example of usage:
+
+    delete <task number>
+    'delete 3'
+
+Expected outcome:
+
+```
+    BEEP. I've removed this task: [T][X] have dinner 
+    Now you have 5 task on the list.  
+```
+
+### Find task - search for task with keyword
+
+Example of usage:
+
+    find <task number>
+    'find dinner'
+
+Expected outcome:
+
+```
+    Here are the matched tasks in your list:
+    3. [T][X] have dinner with eva
+    5. [T][ ] have dinner with mom
+```
 ________________________________________________________________________________________________________________________

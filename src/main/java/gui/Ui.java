@@ -10,16 +10,7 @@ public class Ui {
     static public String WRONG_DATE_FORMAT = "Note that dates should be in <<YYYY-MM-DD HHMM>> format\n";
 
     public static String printStartup() {
-        String s;
-        String logo =
-                " ____      ____      __   __           \n" +
-                "|_  _|    |_  _|    [  | [  |          \n" +
-                "  \\ \\  /\\  / /,--.   | |  | |   .---.  \n" +
-                "   \\ \\/  \\/ /`'_\\ :  | |  | |  / /__\\\\ \n" +
-                "    \\  /\\  / // | |, | |  | |  | \\__., \n" +
-                "     \\/  \\/  \\'-;__/[___][___]  '.__.' \n" +
-                "                                       \n";
-        s = "Beep Boop. This is \n" + logo;
+        String s = "Beep Boop. This is Walle \n";
         s += "Welcome Captain B. McCrea \n";
         s += "\nWhat can i do for you?";
         return s;
@@ -89,7 +80,7 @@ public class Ui {
      * @return string representation of task that have been removed
      */
     public static String printRemovedThisTask(int num, TaskList taskList) {
-        String s = " BEEP. I've removed this task: ";
+        String s = "BEEP. I've removed this task: ";
         s += String.format("  [%s][%s] %s\n",taskList.tasklist.get(num).type,
                 taskList.tasklist.get(num).getStatus(), taskList.tasklist.get(num).name);
         return s;
@@ -149,7 +140,7 @@ public class Ui {
     }
 
     public static String printNoSuchTask() {
-        return "There exists no such task.\n";
+        return "BEEP! There exists no such task.\n";
     }
 
     public static String printDuplicateTask(int i){

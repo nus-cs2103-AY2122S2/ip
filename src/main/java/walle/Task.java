@@ -72,7 +72,7 @@ public class Task {
                 input = input.replaceAll("/", "-");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
                 LocalDateTime lt = LocalDateTime.parse(input, formatter);
-                DateTimeFormatter out = DateTimeFormatter.ofPattern("dd-MM-uuuu hh:mm a");
+                DateTimeFormatter out = DateTimeFormatter.ofPattern("dd MMM uuuu hh:mm a");
                 this.time = lt.format(out);
             }
             return true;
