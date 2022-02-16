@@ -19,30 +19,32 @@ public class TaskTest {
      */
     @Test
     public void testChangeFormat() throws DukeException{
+        //Create Dummy taglist
+        TagList tagList = new TagList();
 
         // First Testcase
         Task tc1 = new ToDo("Science Assignment", false);
-        assertEquals(tc1.changeFormat(), "T,0,Science Assignment");
+        assertEquals(tc1.changeFormat(tagList), "T,0,Science Assignment");
 
         // Second Testcase
         Task tc2 = new ToDo("Math Assignment", true);
-        assertEquals(tc2.changeFormat(), "T,1,Math Assignment");
+        assertEquals(tc2.changeFormat(tagList), "T,1,Math Assignment");
 
         // Third Testcase
         Task tc3 = new Deadline("Reading Journal", "2020-03-01", false);
-        assertEquals(tc3.changeFormat(), "D,0,Reading Journal,2020-03-01");
+        assertEquals(tc3.changeFormat(tagList), "D,0,Reading Journal,2020-03-01");
 
         // Fourth Testcase
         Task tc4 = new Deadline("History Homework", "2020-03-01", true);
-        assertEquals(tc4.changeFormat(), "D,1,History Homework,2020-03-01");
+        assertEquals(tc4.changeFormat(tagList), "D,1,History Homework,2020-03-01");
 
         // Fifth Testcase
         Task tc5 = new Event("New Year", "2020-03-01", false);
-        assertEquals(tc5.changeFormat(), "E,0,New Year,2020-03-01");
+        assertEquals(tc5.changeFormat(tagList), "E,0,New Year,2020-03-01");
 
         // Sixth Testcase
         Task tc6 = new Event("Christmas", "2020-03-01", true);
-        assertEquals(tc6.changeFormat(), "E,1,Christmas,2020-03-01");
+        assertEquals(tc6.changeFormat(tagList), "E,1,Christmas,2020-03-01");
     }
 
 }

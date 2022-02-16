@@ -14,7 +14,7 @@ public class FileParser extends Parser {
     /**
      * Parses file input.
      *
-     * @param str the string entered by the user.
+     * @param str the string received from the file.
      */
     public FileParser(String str) throws DukeException {
         String[] dataArray = str.split(",");
