@@ -28,9 +28,9 @@ public class Storage {
      * Returns an ArrayList of tasks, if a valid .txt tasks file exist on disk.
      * Otherwise, returns an empty arraylist of tasks.
      *
-     * @throws DukeException if the file was tampered with during the execution of the program.
+     * @return An ArrayList of tasks.
      **/
-    public ArrayList<Task> loadTasks() throws DukeException {
+    public ArrayList<Task> loadTasks() {
 
         ArrayList<Task> allTasks = new ArrayList<>();
 
@@ -42,7 +42,7 @@ public class Storage {
         try {
             didNotExist = TASKS_FILE.createNewFile();
         } catch (IOException err) {
-            throw new DukeException(err.getMessage());
+            didNotExist = true; // just create from scratch
         }
 
         if (!directoryCreated && !didNotExist) { // the file existed
@@ -50,17 +50,18 @@ public class Storage {
                 Scanner s = new Scanner(TASKS_FILE); // create a Scanner using the File as the source
                 Task t;
                 while (s.hasNext()) {
-                    String someTask = s.nextLine();
-                    t = Task.importFromString(someTask);
-                    allTasks.add(t);
+                    try {
+                        String someTask = s.nextLine();
+                        t = Task.importFromString(someTask);
+                        allTasks.add(t);
+                    } catch (DukeException err) {
+                        // ignore this task
+                    }
                 }
-            } catch (FileNotFoundException
-                    | IllegalArgumentException
-                    | ArrayIndexOutOfBoundsException err) { // will not reach here
-                throw new DukeException(err.getMessage());
+            } catch (FileNotFoundException err) {
+                // will not reach here, since we checked that the file exists
             }
         }
-
         return allTasks;
     }
 

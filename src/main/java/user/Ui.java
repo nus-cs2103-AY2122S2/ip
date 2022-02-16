@@ -1,7 +1,6 @@
 package user;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import exceptions.DukeException;
 import tasks.Task;
@@ -10,16 +9,7 @@ import tasks.Tasklist;
 /** A class that handles the interactions with the user. */
 public class Ui {
 
-    private static final String INDENT = "    ";
-    private static final String SEPARATOR = "--------------------------------------------";
-    private static final String LOGO = INDENT + " ____        _        \n"
-            + INDENT + "|  _ \\ _   _| | _____ \n"
-            + INDENT + "| | | | | | | |/ / _ \\\n"
-            + INDENT + "| |_| | |_| |   <  __/\n"
-            + INDENT + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String[] OPENING_MESSAGE = new String[] {"Hello. I am HAL 4500."};
-    private static final String CLOSING_MESSAGE = "Hope to see you again soon.";
-    private static final String[] helpStrings = new String[] {
+    private static final String[] HELP_MESSAGE = new String[] {
         "Commands:",
         "'todo [some activity]' - add a todo",
         "'deadline [some task] /by [dd/mm/yyyy-hh:mm]' - add a deadline",
@@ -33,7 +23,6 @@ public class Ui {
         "'delete [task number]' - delete a task"
     };
 
-    private final Scanner sc = new Scanner(System.in);
     private final Tasklist tasklist;
     private final Parser parser;
 
@@ -46,43 +35,6 @@ public class Ui {
         tasklist = new Tasklist();
         tasklist.loadTasks();
         parser = new Parser();
-    }
-
-    /**
-     * Prints a string with indentation before it.
-     *
-     * @param message The string to be printed with indentation before it.
-     */
-    public static void printIndent(String message) {
-        System.out.println(INDENT + message);
-    }
-
-    /**
-     * Prints a variable number of strings with separators before and after it.
-     *
-     * @param messages An variable number of strings to be printed with separators before and after them.
-     */
-    public static void prettyPrint(String ... messages) {
-        printIndent(SEPARATOR);
-        for (String message : messages) {
-            printIndent(message);
-        }
-        printIndent(SEPARATOR + "\n");
-    }
-
-    /**
-     * Greets the user with a Duke logo and a welcome message.
-     */
-    public void greet() {
-        System.out.println(LOGO);
-        prettyPrint(OPENING_MESSAGE);
-    }
-
-    /**
-     * Greets the user with a goodbye message.
-     */
-    public void sayGoodbye() {
-        prettyPrint(CLOSING_MESSAGE);
     }
 
     /**
@@ -123,14 +75,6 @@ public class Ui {
         return result;
     }
 
-    /**
-     * Reads user input.
-     *
-     * @return The user's input.
-     */
-    public String getInput() {
-        return sc.nextLine();
-    }
 
     /**
      * Handles the user's input, and performs the corresponding action.
@@ -144,7 +88,7 @@ public class Ui {
         String[] result = {};
         try {
             if (userInput.equals("help")) { // help
-                result = helpStrings;
+                result = HELP_MESSAGE;
             } else if (userInput.equals("list")) { // display tasks
                 result = displayTasks();
             } else if (userInput.startsWith("mark ")) { // mark task as done

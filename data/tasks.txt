@@ -1,4 +1,4 @@
-TODO sleep false
+TODO sleep true
 DEADLINE eat false 21/12/1999-12:34
 MONEYCHANGE -5.00 false mark
 MONEYCHANGE -6.00 false don

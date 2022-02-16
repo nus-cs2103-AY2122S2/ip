@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import exceptions.DukeException;
 import storage.Storage;
-import user.Ui;
 
 /** A class that encapsulates the lists of tasks to be completed. */
 public class Tasklist {
@@ -16,11 +15,7 @@ public class Tasklist {
      * Loads the tasks from storage, if exists.
      */
     public void loadTasks() {
-        try {
-            allTasks = storage.loadTasks();
-        } catch (DukeException err) {
-            Ui.prettyPrint(err.toString());
-        }
+        allTasks = storage.loadTasks();
     }
 
     /**
