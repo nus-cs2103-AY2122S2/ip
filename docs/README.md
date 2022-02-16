@@ -8,6 +8,7 @@ You can get Siri by downloading the latest version of _**Siri**_ .jar file under
 As _**Siri**_ is developed under JDK 11, it is recommended that you have Java SE 11 or later installed on your computer before running _**Siri**_.
 
 ___
+
 ## Features
 As of the current versions the following features are available for users.
 
@@ -22,6 +23,7 @@ As of the current versions the following features are available for users.
 - `deadline` (task with compulsory date field and optional time field)
 - `event` (task with compulsory date and time field)
 ___
+
 ## Usage
 
 ### `todo` - adding a todo task
@@ -240,6 +242,7 @@ ___
 - Damith C. Rajapakse - _Module Coordinator_
 - Andy Lam Wei Jie - _Developer of Siri_
 ___
+  
 ## Acknowledgements
 - **Cheng Gang** - [_User Guide references_](https://chenggeng97.github.io/duke/)
 - **FlatIcon.com** - [_Icon images used in the project_](https://www.flaticon.com/)
