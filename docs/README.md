@@ -21,10 +21,10 @@
 1. Make sure that you have Java 11 installed.
 2. Choose a desired directory of choice, for example your desktop.
 3. Create an empty folder, for example, "chatbot".
-4. Place the YQ Chatbot.jar file inside the empty folder.
+4. Place the YQ.Chatbot.jar file inside the empty folder.
 5. Go to your command line/Terminal, and go to the directory which 
 your jar file is located. (In this case, as per step 2, this directory will be the chatbot folder.)
-6. Run the command `java -jar YQ\ Chatbot.jar` in command line/Terminal.  
+6. Run the command `java -jar YQ.Chatbot.jar` in command line/Terminal.  
 
 Alternatively, after step 4, you may double-click the YQ Chatbot.jar file to launch the application.
 However, do take note for Mac users who want to see the tasks saved in the data folder that will be created,
