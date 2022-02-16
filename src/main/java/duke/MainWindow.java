@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.util.Duration;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -38,6 +37,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcome, dukeImage)
         );

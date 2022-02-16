@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke("duke.txt");
+    private static final String STAGE_NAME = "Ducky";
 
     @Override
     public void start(Stage stage) {
@@ -21,7 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Ducky");
+            stage.setTitle(STAGE_NAME);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
