@@ -6,11 +6,20 @@ import seedu.duke.DukeException;
 import seedu.storage.TaskList;
 import seedu.task.Deadline;
 
+/**
+ * The Deadline Command
+ */
 public class DeadlineCommand extends Command {
 
     private String description;
     private LocalDateTime dateTime;
 
+    /**
+     * Checks if the string follows the given format
+     *
+     * @param inst The command the user entered
+     * @throws DukeException The command does not follow the format
+     */
     @Override
     public void validate(String inst) throws DukeException {
         checkExist(inst);
@@ -26,10 +35,16 @@ public class DeadlineCommand extends Command {
     }
 
 
+    /**
+     * Adds deadline task into list
+     *
+     * @param tasks The task list
+     * @return The newly created deadline task
+     */
     @Override
     public String execute(TaskList tasks) {
         Deadline task = new Deadline(description, dateTime);
         tasks.add(task);
-        return super.print("New Deadline:", task);
+        return super.show("New Deadline:", task);
     }
 }

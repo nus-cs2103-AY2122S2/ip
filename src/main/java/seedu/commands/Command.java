@@ -8,27 +8,24 @@ import seedu.duke.DukeException;
 import seedu.storage.TaskList;
 import seedu.task.Task;
 
+/**
+ * The Command abstract class
+ */
 public abstract class Command {
 
     protected static boolean isExit = false;
     private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
     protected final int INDEX_OFFSET = 1;
 
-    /**
-     * Checks if input instruction follows format
-     *
-     * @param inst the input task to be executed on
-     * @throws DukeException Throws if mistakes were found
-     */
     public abstract void validate(String inst) throws DukeException;
     public abstract String execute(TaskList tasks) throws DukeException;
 
     /**
      * Converts string to integer form.
      *
-     * @param str Number in string type
-     * @return An integer.
-     * @throws DukeException Input is not an integer.
+     * @param str A number represented as a string
+     * @return An integer
+     * @throws DukeException Input is not an integer or number is negative
      */
     public int checkInt(String str) throws DukeException {
         checkExist(str);
@@ -48,9 +45,9 @@ public abstract class Command {
     /**
      * Checks whether instruction is blank
      *
-     * @param inst The string directly after the command type from the input.
-     * @return The string directly after the command type from the input.
-     * @throws DukeException There was no string after the command type from the input.
+     * @param inst The string directly after the command type from the input
+     * @return The string directly after the command type from the input
+     * @throws DukeException There was no string after the command type from the input
      */
     public String checkExist(String inst) throws DukeException {
         if (inst.equals("")) {
@@ -75,12 +72,24 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Returns state of the isExit boolean
+     *
+     * @return state of the isExit boolean
+     */
     public static boolean isExit() {
         return isExit;
     }
 
-    public String print(String type, Task task) {
-        return type + "\n" +
+    /**
+     * Returns the task to be shown in the gui
+     *
+     * @param prefix String unique to each command
+     * @param task The task
+     * @return A string to be used in the gui
+     */
+    public String show(String prefix, Task task) {
+        return prefix + "\n" +
                 "\tType: " + task.getType() + "\n" +
                 "\tPriority: " + task.getPriority() + "\n" +
                 "\tCompleted?: " + task.getCompleted() + "\n" +

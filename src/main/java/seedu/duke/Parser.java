@@ -4,23 +4,36 @@ import java.util.HashMap;
 
 import seedu.commands.*;
 
+/**
+ * The Parser class
+ */
 public class Parser {
 
-    private final HashMap<String, Command> CONVERTER = new HashMap<>();
+    private HashMap<String, Command> converter = new HashMap<>();
 
+    /**
+     * A dictionary converting string to their appropriate commands
+     */
     public Parser() {
-        CONVERTER.put("bye", new ByeCommand());
-        CONVERTER.put("todo", new TodoCommand());
-        CONVERTER.put("list", new ListCommand());
-        CONVERTER.put("find", new FindCommand());
-        CONVERTER.put("mark", new MarkCommand());
-        CONVERTER.put("event", new EventCommand());
-        CONVERTER.put("delete", new DeleteCommand());
-        CONVERTER.put("unmark", new UnmarkCommand());
-        CONVERTER.put("deadline", new DeadlineCommand());
-        CONVERTER.put("priority", new PriorityCommand());
+        converter.put("bye", new ByeCommand());
+        converter.put("todo", new TodoCommand());
+        converter.put("list", new ListCommand());
+        converter.put("find", new FindCommand());
+        converter.put("mark", new MarkCommand());
+        converter.put("event", new EventCommand());
+        converter.put("delete", new DeleteCommand());
+        converter.put("unmark", new UnmarkCommand());
+        converter.put("deadline", new DeadlineCommand());
+        converter.put("priority", new PriorityCommand());
     }
 
+    /**
+     * Find and returns the appropriate command based on user input
+     *
+     * @param fullCmd The entire user input
+     * @return A command object corresponding to the input command type
+     * @throws DukeException There is no command or the command input has the wrong type
+     */
     public Command parse(String fullCmd) throws DukeException {
 
         String[] cmds = fullCmd.trim().split(" ", 2);
@@ -29,11 +42,11 @@ public class Parser {
             throw new DukeException("There is no command.");
         }
 
-        if (!CONVERTER.containsKey(cmds[0].trim())) {
+        if (!converter.containsKey(cmds[0].trim())) {
             throw new DukeException("Wrong command.");
         }
 
-        Command cmd = CONVERTER.get(cmds[0].trim());
+        Command cmd = converter.get(cmds[0].trim());
 
         if (cmds.length == 2) {
             cmd.validate(cmds[1].trim());

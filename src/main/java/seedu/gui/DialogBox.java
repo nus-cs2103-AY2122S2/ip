@@ -17,7 +17,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-
 import static javafx.scene.paint.Color.*;
 
 /**
@@ -56,10 +55,24 @@ public class DialogBox extends HBox {
         setBackground(new Background(new BackgroundFill(LAVENDER, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
+    /**
+     * The user dialog box
+     *
+     * @param text Text to be shown
+     * @param img Image to be shown
+     * @return A dialog box to be shown
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * The bot dialog box
+     *
+     * @param text Text to be shown
+     * @param img Image to be shown
+     * @return A dialog box to be shown
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

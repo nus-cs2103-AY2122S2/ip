@@ -15,14 +15,28 @@ import seedu.task.Event;
 import seedu.task.Task;
 import seedu.task.Todo;
 
+/**
+ * The Storage class
+ */
 public class Storage {
 
     private final File FILE;
 
+    /**
+     * Constructor
+     *
+     * @param filePath file path of the save file
+     */
     public Storage(String filePath) {
         FILE = Paths.get(filePath).toFile();
     }
 
+    /**
+     * Parses the save file to be used in the task list
+     *
+     * @return A list of tasks parsed from the save file
+     * @throws DukeException Cannot load save file into the task list
+     */
     public ArrayList<Task> load() throws DukeException {
 
         Paths.get(FILE.getParent()).toFile().mkdirs();
@@ -62,6 +76,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates the save file
+     * Does nothing if save file already exists
+     *
+     * @throws DukeException Cannot create save file
+     */
     private void createFile() throws DukeException {
         try {
             FILE.createNewFile();
@@ -71,6 +91,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the entire list into the save file
+     *
+     * @param tasks The task list to be saved
+     * @throws DukeException Cannot save into the save file
+     */
     public void saveAll(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(FILE);

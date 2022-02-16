@@ -9,10 +9,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.duke.Duke;
 
+/**
+ * The Main class
+ */
 public class Main extends Application {
 
     private Duke duke = new Duke("./data/duke.txt");
 
+    /**
+     * The runner for the gui
+     *
+     * @param stage The stage for the gui
+     */
     @Override
     public void start(Stage stage) {
         try {

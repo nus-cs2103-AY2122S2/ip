@@ -6,53 +6,97 @@ import java.util.Collections;
 import seedu.duke.DukeException;
 import seedu.task.Task;
 
+/**
+ * The task list class
+ */
 public class TaskList {
 
-    private final ArrayList<Task> TASKS;
+    private ArrayList<Task> tasks;
 
+    /**
+     * Constructor
+     */
     public TaskList() {
-        this.TASKS = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Overloaded constructor to initialise an already filled list
+     *
+     * @param taskList The list to be initialised from
+     */
     public TaskList(ArrayList<Task> taskList) {
-        this.TASKS = new ArrayList<>(taskList);
+        this.tasks = new ArrayList<>(taskList);
     }
 
+    /**
+     * Add task to list
+     *
+     * @param task The task to be added to the list
+     */
     public void add(Task task) {
-        TASKS.add(task);
+        tasks.add(task);
     }
 
+    /**
+     * Sort list based on descending priority level
+     */
     public void sort() {
-        Collections.sort(TASKS);
+        Collections.sort(tasks);
     }
 
+    /**
+     * Gets the entire list
+     *
+     * @return The task list
+     */
     public ArrayList<Task> getTasks() {
-        return TASKS;
+        return tasks;
     }
 
+    /**
+     * Removes task from list based on index
+     *
+     * @param idx Index of the task to be deleted
+     * @return The deleted task
+     * @throws DukeException Index not found in list
+     */
     public Task remove(int idx) throws DukeException {
         Task t = get(idx);
-        TASKS.remove(idx);
+        tasks.remove(idx);
         return t;
     }
 
+    /**
+     * Gets the task based on its index
+     *
+     * @param idx Index of the task
+     * @return The task found by the index
+     * @throws DukeException Index not found in list
+     */
     public Task get(int idx) throws DukeException {
         try {
-            return TASKS.get(idx);
+            return tasks.get(idx);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist.");
         }
     }
 
+    /**
+     * Finds all tasks with the given search string
+     *
+     * @param search The search term
+     * @return A list of tasks in string form that contains the search term.
+     */
     public String find(String search) {
         StringBuilder s = new StringBuilder("Found:\n");
 
-        for (int i = 0; i < TASKS.size(); i++) {
-            if (TASKS.get(i).getDescription().contains(search)) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(search)) {
                 s.append("  ");
                 s.append(i + 1);
                 s.append(". ");
-                s.append(TASKS.get(i).toString());
+                s.append(tasks.get(i).toString());
                 s.append("\n");
             }
         }
@@ -60,20 +104,25 @@ public class TaskList {
         return s.toString().trim();
     }
 
+    /**
+     * Returns the tasks of the list
+     *
+     * @return A string representation of the tasks of the list
+     */
     @Override
     public String toString() {
 
-        if (TASKS.isEmpty()) {
+        if (tasks.isEmpty()) {
             return "Empty list";
         }
 
         StringBuilder out = new StringBuilder("Your List:\n");
 
-        for (int i = 0; i < TASKS.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             out.append("  ");
             out.append(i + 1);
             out.append(". ");
-            out.append(TASKS.get(i).toString());
+            out.append(tasks.get(i).toString());
             out.append("\n");
         }
 

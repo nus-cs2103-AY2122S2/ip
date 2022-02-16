@@ -31,12 +31,20 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/man.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
 
+    /**
+     * Initialises the gui
+     */
     @FXML
     public void initialize() {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Welcome to Duke Bot!", dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initialises the duke class
+     *
+     * @param d A duke object
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
