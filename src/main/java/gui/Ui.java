@@ -1,7 +1,7 @@
 package gui;
 
-import duke.Task;
-import duke.TaskList;
+import walle.Task;
+import walle.TaskList;
 
 import java.util.ArrayList;
 
@@ -11,12 +11,16 @@ public class Ui {
 
     public static String printStartup() {
         String s;
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        s = "Hello from\n" + logo;
+        String logo =
+                " ____      ____      __   __           \n" +
+                "|_  _|    |_  _|    [  | [  |          \n" +
+                "  \\ \\  /\\  / /,--.   | |  | |   .---.  \n" +
+                "   \\ \\/  \\/ /`'_\\ :  | |  | |  / /__\\\\ \n" +
+                "    \\  /\\  / // | |, | |  | |  | \\__., \n" +
+                "     \\/  \\/  \\'-;__/[___][___]  '.__.' \n" +
+                "                                       \n";
+        s = "Beep Boop. This is \n" + logo;
+        s += "Welcome Captain B. McCrea \n";
         s += "\nWhat can i do for you?";
         return s;
     }
@@ -31,12 +35,12 @@ public class Ui {
     }
 
     /**
-     * prints when user enters input not recognised by Duke
+     * prints when user enters input not recognised by Walle
      *
      * @return string output when unrecognised input is entered
      */
     public static String printWhatDoesThatMean() {
-        return " OOPS!!! I'm sorry, but I don't know what does that mean :-(";
+        return "BEEP BOOP ERROR!!! I'm sorry, but I don't know what does that mean :-(";
     }
 
     /**
@@ -45,7 +49,7 @@ public class Ui {
      * @return string output of empty descriptor
      */
     public static String printEmptyDescriptionException() {
-        return " OOPS!!! The description of a task cannot be empty.";
+        return "BEEP BOOP ERROR!!! The description of a task cannot be empty.";
     }
 
     /**
@@ -85,7 +89,7 @@ public class Ui {
      * @return string representation of task that have been removed
      */
     public static String printRemovedThisTask(int num, TaskList taskList) {
-        String s = " Noted. I've removed this task: ";
+        String s = " BEEP. I've removed this task: ";
         s += String.format("  [%s][%s] %s\n",taskList.tasklist.get(num).type,
                 taskList.tasklist.get(num).getStatus(), taskList.tasklist.get(num).name);
         return s;
@@ -98,7 +102,7 @@ public class Ui {
      * @return string representation of task that have been marked
      */
     public static String printMarkTaskDone(Task curr) {
-       String s = "Nice! I've marked this task as done: ";
+       String s = "BEEP! I've marked this task as done: ";
        s += String.format("  [%s][%s] %s\n", curr.type, curr.getStatus(), curr.name);
        return s;
     }
@@ -149,6 +153,6 @@ public class Ui {
     }
 
     public static String printDuplicateTask(int i){
-        return String.format("Error: There is a duplicate task (taskNumber %d)\n", i);
+        return String.format("BEEP! Error! There is a duplicate task (taskNumber %d)\n", i);
     }
 }

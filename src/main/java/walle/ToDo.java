@@ -1,7 +1,7 @@
-package duke;
+package walle;
 
 /**
- * This is a type of duke.Task: todo
+ * This is a type of Task: todo
  *
  */
 public class ToDo extends Task {

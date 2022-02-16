@@ -1,9 +1,0 @@
-D---false--- buy berries ---Jan 01 2020 07:00 PM
-T---true--- test out Duke---
-D---true--- eat rat ---22222
-T---false--- Write Diary---
-E---true--- drink water ---Apr 23 2030 05:00 PM
-T---true--- reset laptop---
-E---false--- sleep ---16-2-2022 1900
-D---false--- study math ---16 02 2022 07:00 PM
-D---false--- study science ---16-02-2022 07:00 PM

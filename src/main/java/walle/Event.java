@@ -1,7 +1,7 @@
-package duke;
+package walle;
 
 /**
- * This is a type of duke.Task: duke.Event
+ * This is a type of Task: duke.Event
  *
  */
 public class Event extends Task {

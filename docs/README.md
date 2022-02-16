@@ -4,23 +4,23 @@ ________________________________________________________________________________
 
 ### Feature-Add
 
-duke.Duke is able to add 3 types of tasks: duke.ToDo, duke.Event and duke.Deadline.
+walle.Walle is able to add 3 types of tasks: walle.ToDo, walle.Event and walle.Deadline.
 
 ### Feature-Mark/Unmark
 
-duke.Duke is able to mark and unmark tasks.
+walle.Walle is able to mark and unmark tasks.
 
 ### Feature-list
 
-duke.Duke is able to list out all currently tracked tasks.
+walle.Walle is able to list out all currently tracked tasks.
 
 ### Feature-Bye
 
-duke.Duke is able to exit.
+walle.Walle is able to exit.
 ________________________________________________________________________________________________________________________
 ##Keywords
 
-### `duke.ToDo` - Adds tasks of type: todo
+### `walle.ToDo` - Adds tasks of type: todo
 
 Adds one task of type 'todo' with following input as task name.
 
@@ -34,7 +34,7 @@ Expected outcome:
        [T][ ] borrow book
      Now you have 5 tasks in the list.
 
-### `duke.Deadline` - Adds tasks of type: deadline
+### `walle.Deadline` - Adds tasks of type: deadline
 
 Adds one task of type 'deadline' with following input as task name and input after /by as deadline.
 
@@ -48,7 +48,7 @@ Expected outcome:
        [D][ ] return book (by: Sunday)
      Now you have 6 tasks in the list.
 
-### `duke.Event` - Adds tasks of type: event
+### `walle.Event` - Adds tasks of type: event
 
 Adds one task of type 'event' with following input as task name and input after /at as deadline.
 

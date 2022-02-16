@@ -1,4 +1,4 @@
-package duke;
+package walle;
 
 import org.junit.jupiter.api.Test;
 

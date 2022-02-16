@@ -1,7 +1,7 @@
-package duke;
+package walle;
 
 /**
- * This is a type of duke.Task: deadline
+ * This is a type of Task: deadline
  *
  */
 public class Deadline extends Task {

@@ -1,4 +1,4 @@
-package duke;
+package walle;
 
 import gui.Ui;
 
@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Class task that duke.Duke creates
+ * Class task that duke.Walle creates
  */
 public class Task {
 

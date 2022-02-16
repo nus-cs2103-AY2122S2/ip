@@ -1,0 +1,6 @@
+T---false--- fly to Mars---
+D---false--- study Math ---19-02-2022 07:00 PM
+D---false--- study Science ---16-02-2022 07:00 PM
+E---false--- have supper ---every midnight
+E---false--- snack ---every hour
+E---false--- debug my code ---22-02-2022 12:00 AM

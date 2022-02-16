@@ -1,9 +1,7 @@
-package duke;
+package walle;
 
 import gui.Ui;
 import javafx.application.Platform;
-
-import java.util.ArrayList;
 
 /**
  * This is the class that parses through inputs
@@ -17,7 +15,7 @@ public class Parser {
 
     /**
      * Checks if input is 'bye'
-     * @param input input entered by user into Duke
+     * @param input input entered by user into Walle
      * @return String to output to gui
      */
     public static String parseIsBye(String input, TaskList taskList) {
@@ -31,7 +29,7 @@ public class Parser {
 
     /**
      * Checks and processes user input (provided that it is not 'bye')
-     * @param input user input into Duke (after making sure it is not 'bye')
+     * @param input user input into Walle (after making sure it is not 'bye')
      * @param taskList current tasklist
      * @return String to output
      */
@@ -93,7 +91,7 @@ public class Parser {
 
     /**
      * Parse through input and create a new task
-     * @param input user input into Duke
+     * @param input user input into Walle
      * @return task based on input parameters
      */
     public static Task parseCreateNewTask(String input, TaskList taskList) {

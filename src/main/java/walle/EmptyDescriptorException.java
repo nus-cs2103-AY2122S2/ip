@@ -1,4 +1,4 @@
-package duke;
+package walle;
 
 /**
  * Exception to be thrown if descriptor is empty

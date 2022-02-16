@@ -2,7 +2,7 @@ package gui;
 
 import java.io.IOException;
 
-import duke.Duke;
+import walle.Walle;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,11 +10,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Walle using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Walle walle = new Walle();
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(walle);
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
