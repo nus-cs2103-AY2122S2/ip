@@ -1,10 +1,10 @@
 package mike;
 
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
- * Represents an instance of "Mike" - a simple task tracking bot.
+ * Represents an instance of "Mike" - a simple task manager app.
+ * This class handles the logic behind managing user input.
  */
 public class Mike {
     private TaskList taskList;
@@ -21,41 +21,25 @@ public class Mike {
         loadStoredList();
     }
 
-    private void close() {
-        ui.printGoodbyeMessage();
-    }
-
+    /**
+     * Returns a string with a message for the user when no characters are entered.
+     *
+     * @return String with a message for the user when no characters are entered.
+     */
     private String noCharactersEnteredResponse() {
         return ui.printNoCharactersMessage();
     }
 
     private String printList() {
-        String listForPrint = taskList.getListForPrint();
-        return ui.printReply(listForPrint);
+        return taskList.getListForPrint();
     }
 
-    /**
-     * Returns true if user has input the exit command ("bye").
-     *
-     * @param userInput
-     * @return true if userInput is "bye"; else returns false.
-     */
-    public boolean isExitCommand(String userInput) {
-        Parser parser = new Parser(userInput);
-        return parser.isBye();
+    private String addTaskToList(Task task) {
+        return taskList.addToListWithMessage(task);
     }
 
-    private void addToListWithoutReply(Task task) {
-        taskList.addToList(task);
-    }
-
-    private String addToListWithReply(Task task) {
-        taskList.addToList(task);
-        return ui.printReply(taskList.addToListReply(task));
-    }
-
-    private String removeTask(int removeIndex) {
-        return ui.printReply(taskList.removeFromListWithMessage(removeIndex));
+    private String removeTaskFromList(int removeIndex) {
+        return taskList.removeFromListWithMessage(removeIndex);
     }
 
     /**
@@ -66,7 +50,7 @@ public class Mike {
      */
     private String addTodo(String str) {
         Todo todo = new Todo(str);
-        return addToListWithReply(todo);
+        return addTaskToList(todo);
     }
 
     /**
@@ -79,12 +63,12 @@ public class Mike {
     private String addDeadline(String name, String date) {
         try {
             Deadline deadline = new Deadline(name, date);
-            return addToListWithReply(deadline);
-        } catch(DateTimeParseException e) {
+            return addTaskToList(deadline);
+        } catch (DateTimeParseException e) {
             e.printStackTrace();
-            System.out.println("**Enter dates in the format yyyy-mm-dd**");
         }
-        return "You probably keyed in a deadline with the wrong format";
+        return ("You probably keyed in a deadline with the wrong format\n"
+                + "Enter dates in the format yyyy-mm-dd");
     }
 
     /**
@@ -97,12 +81,12 @@ public class Mike {
     private String addEvent(String name, String scheduledDate) {
         try {
             Event event = new Event(name, scheduledDate);
-            return addToListWithReply(event);
-        } catch(DateTimeParseException e) {
+            return addTaskToList(event);
+        } catch (DateTimeParseException e) {
             e.printStackTrace();
-            System.out.println("**Enter dates in the format yyyy-mm-dd**");
         }
-        return "You probably keyed in an event with the wrong format";
+        return ("You probably keyed in an event with the wrong format\n"
+                + "Enter dates in the format yyyy-mm-dd");
     }
 
     /**
@@ -112,29 +96,29 @@ public class Mike {
      * @return String to be output to the user by Mike.
      */
     private String mark(int indexFromUser) {
-        return ui.printReply(taskList.markInListWithMessage(indexFromUser));
+        return (taskList.markInListWithMessage(indexFromUser));
     }
 
     /**
-     * Marks the task (specified by its index in the list) as "not done".
+     * Unmarks the task (specified by its index in the list) as "done".
      *
      * @param indexFromUser The index of the task (as seen by the user) to be unmarked in the list.
      * @return String to be output to the user by Mike.
      */
     private String unmark(int indexFromUser) {
-        return ui.printReply(taskList.unmarkInListWithMessage(indexFromUser));
+        return (taskList.unmarkInListWithMessage(indexFromUser));
     }
 
     private String findInList(String searchWords) {
         String listForPrint = taskList.findTasksInListForPrint(searchWords);
-        return ui.printReply(listForPrint);
+        return (listForPrint);
     }
 
     /**
      * Processes the user's input then and responds accordingly.
      *
-     * @param userInput String input from user as scanned in by Scanner.
-     * @return String response from Mike
+     * @param userInput String input from user.
+     * @return String response from Mike.
      */
     protected String processInput(String userInput) {
         Parser parser = new Parser(userInput);
@@ -161,7 +145,7 @@ public class Mike {
                 break;
             case "remove":
                 int removeIndex = parser.getIndex();
-                message = removeTask(removeIndex);
+                message = removeTaskFromList(removeIndex);
                 break;
             case "t":
             case "todo":
@@ -184,28 +168,31 @@ public class Mike {
                 String searchWords = parser.getSearchWords();
                 message = findInList(searchWords);
                 break;
+            case "bye":
+                System.exit(0);
+                break;
             default:
                 throw new UnsupportedOperationException("Invalid command, UnsupportedOperationException");
             }
-        } catch(UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException e) {
             e.printStackTrace();
             String invalidCommandMessage =
-                    String.format("\n**Mike: I don't understand the command \"%s\"**",
+                    String.format("I don't understand the command \"%s\"",
                             parser.getUserInput());
             message = invalidCommandMessage;
-        } catch(StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             e.printStackTrace();
             String stringIndexOutOfBoundsMessage =
-                    "**Mike: Hmm, you may have entered the command arguments incorrectly.**\n"
-                    + "**Tip: Enter dates in the format yyyy-mm-dd**";
+                    "Hmm, you may have entered the command arguments incorrectly.\n"
+                    + "Tip: Enter dates in the format yyyy-mm-dd";
             message = stringIndexOutOfBoundsMessage;
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
-            String indexOutOfBoundsMessage = "**Mike: That item number doesn't exist on your list :/**";
+            String indexOutOfBoundsMessage = "That item number doesn't exist on your list :/";
             message = indexOutOfBoundsMessage;
         }
         saveToStoredList();
-        return message;
+        return ui.printReply(message);
     }
 
     /**

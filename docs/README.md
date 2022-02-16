@@ -39,9 +39,9 @@ Syntax: `list`
 
 ### Remove a task
 
-Description: Delete a task from the list of tasks by its index number.
+Description: Remove a task from the list of tasks by its index number.
 
-Syntax: `delete [TASK_INDEX]`
+Syntax: `remove [TASK_INDEX]`
 
 ### Mark a task as done
 
@@ -62,15 +62,27 @@ the keyword specified.
 
 Syntax: `find [KEYWORD]`
 
+### Save the data to hard drive
+
+Description: The program automatically saves the task list to the hard drive
+after each command that changes the data in the task list.
+
+### Exit program
+
+Description: Exit the program and close the window.
+
+Syntax: `bye`
+
 ## Command Cheat Sheet
 
-Command | Syntax
---------|------------------
-**Add a Todo** | `todo [TODO_NAME]` OR `t [TODO_NAME]`
-**Add an Event** | `event [EVENT_NAME] /at [EVENT_DATE]` OR `e [EVENT_NAME] /at [EVENT_DATE]`
-**Add a Deadline** | `deadline [DEADLINE_NAME] /by [DEADLINE_DATE]` OR `d [DEADLINE_NAME] /by [DEADLINE_DATE]`
-**View List** | `list`
-**Delete a Task** | `delete [TASK_INDEX]`
-**Mark a Task** | `mark [TASK_INDEX]`
-**Unmark a Task** | `unmark [TASK_INDEX]`
-**Find Tasks** | `find [KEYWORD]`
+| Command            | Syntax|
+|--------------------|------------------|
+| **Add a Todo**     | `todo [TODO_NAME]` OR `t [TODO_NAME]`|
+| **Add an Event**   | `event [EVENT_NAME] /at [EVENT_DATE]` OR `e [EVENT_NAME] /at [EVENT_DATE]`|
+| **Add a Deadline** | `deadline [DEADLINE_NAME] /by [DEADLINE_DATE]` OR `d [DEADLINE_NAME] /by [DEADLINE_DATE]`|
+| **View List**      | `list`|
+| **Delete a Task**  | `remove [TASK_INDEX]`|
+| **Mark a Task**    | `mark [TASK_INDEX]`|
+| **Unmark a Task**  | `unmark [TASK_INDEX]`|
+| **Find Tasks**     | `find [KEYWORD]`|
+| **Exit Program**   | `bye`|

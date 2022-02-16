@@ -1,9 +1,9 @@
 package mike;
 
 /**
- * Represents a to-do (subclass of task).
+ * Represents a to-do task. A to-do is a task without a date.
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     private static final String taskType = "T";
 
@@ -17,7 +17,7 @@ public class Todo extends Task{
     }
 
     /**
-     * Constructor for to-do including isDone field.
+     * Constructor for to-do.
      *
      * @param name Name of to-do.
      * @param isDone Whether to-do is to be marked as done.
@@ -45,9 +45,9 @@ public class Todo extends Task{
     }
 
     /**
-     * Returns a string representing the to-do that can be stored in the hard drive.
+     * Returns the to-do as a String in a format that can be stored.
      *
-     * @return String representation of to-do for storage.
+     * @return String representation of to-do.
      */
     public String convertToStoredTaskFormat() {
         String doneIndicator = "false";
@@ -59,6 +59,11 @@ public class Todo extends Task{
         return storedListFormat;
     }
 
+    /**
+     * Returns a String representing the to-do object.
+     *
+     * @return String representing the to-do object.
+     */
     @Override
     public String toString() {
         String doneMark;

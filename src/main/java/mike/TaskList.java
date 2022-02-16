@@ -8,23 +8,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles the operations on the list of tasks managed by the app.
+ */
 public class TaskList {
     private final List<Task> listOfTasks;
 
+    /**
+     * Constructor for TaskList
+     */
     public TaskList() {
         this.listOfTasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for TaskList
+     *
+     * @param listOfTasks
+     */
     public TaskList(List<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
 
     /**
-     * Returns a string representation of the tasks to be printed for the user.
+     * Returns a string representation of the tasks that can be output for the user.
      *
      * @return String representing the full list of tasks.
      */
-    String getListForPrint() {
+    protected String getListForPrint() {
         int counter = 1;
         StringBuilder sb = new StringBuilder();
         sb.append("Behold, your list!\n");
@@ -36,21 +47,13 @@ public class TaskList {
     }
 
     /**
-     * Adds the specified task to the list.
-     *
-     * @param task The task to be added to the list.
-     */
-    void addToList(Task task) {
-        this.listOfTasks.add(task);
-    }
-
-    /**
      * Returns a String to be printed acknowledging that the user has added a task to the list.
      *
      * @param task Task that has been added to the list
      * @return String to be printed that acknowledges the new list item.
      */
-    String addToListReply(Task task) {
+    protected String addToListWithMessage(Task task) {
+        this.listOfTasks.add(task);
         String taskName = task.getTaskName();
         String addTaskOutput = "Added \"" + taskName + "\" to the list!";
         int noOfTasks = this.listOfTasks.size();
@@ -64,7 +67,7 @@ public class TaskList {
      * @param removeIndex The index of the task to be removed from the list.
      * @return String to be printed that acknowledges the removal of the list item.
      */
-    String removeFromListWithMessage(int removeIndex) {
+    protected String removeFromListWithMessage(int removeIndex) {
         Task removedTask = this.listOfTasks.remove(removeIndex - 1);
         String taskName = removedTask.getTaskName();
         String removeTaskOutput = "Removed \"" + taskName + "\" from the list!";
@@ -79,7 +82,7 @@ public class TaskList {
      * @param indexFromUser The index of the task to be marked in the list.
      * @return String to be printed that acknowledges the marking of the list item.
      */
-    String markInListWithMessage(int indexFromUser) {
+    protected String markInListWithMessage(int indexFromUser) {
         int indexInList = indexFromUser - 1;
         assert indexInList >= 0 : "index should be more than or equal to 0";
         Task oldTask = this.listOfTasks.get(indexInList);
@@ -97,7 +100,7 @@ public class TaskList {
      * @param indexFromUser The index of the task to be marked in the list.
      * @return String to be printed that acknowledges the unmarking of the list item.
      */
-    String unmarkInListWithMessage(int indexFromUser) {
+    protected String unmarkInListWithMessage(int indexFromUser) {
         int indexInList = indexFromUser - 1;
         assert indexInList >= 0 : "index should be more than or equal to 0";
         Task oldTask = this.listOfTasks.get(indexInList);
@@ -111,9 +114,10 @@ public class TaskList {
 
     /**
      * Returns a String representing the tasks that the user is searching for.
+     *
      * @return String with the tasks the user is looking for.
      */
-    String findTasksInListForPrint(String searchWords) {
+    protected String findTasksInListForPrint(String searchWords) {
         int counter = 1;
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("Behold, the items containing \"%s\"!\n", searchWords));
@@ -126,7 +130,12 @@ public class TaskList {
         return sb.toString();
     }
 
-    String convertToStoredListFormat() {
+    /**
+     * Returns a String representing the TaskList that can be stored.
+     *
+     * @return String representation of TaskList for storage.
+     */
+    protected String convertToStoredListFormat() {
         StringBuilder sb = new StringBuilder();
         for (Task task : listOfTasks) {
             sb.append(task.convertToStoredTaskFormat());
@@ -140,9 +149,9 @@ public class TaskList {
      * Returns a new TaskList from the information in storedList.txt stored in the hard drive.
      *
      * @param file The file in which data about the list of tasks is stored.
-     * @return A new TaskList based on the information in the storedList.txt file.
+     * @return A new TaskList based on the information in the hard drive (storedList.txt file).
      */
-    TaskList convertFromStoredList(File file) {
+    protected TaskList convertFromStoredList(File file) {
         List<Task> storedListOfTasks = new ArrayList<>();
 
         try {
@@ -150,24 +159,23 @@ public class TaskList {
             while (sc.hasNext()) {
                 String input = sc.nextLine();
                 if (input.isEmpty()) {
-                    break; //Todo: this might cause problems later
+                    break;
                 } else {
                     storedListOfTasks.add(convertStringToTask(input));
                 }
             }
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
             try {
-                //create a new file for storedList
                 File newFile = new File("storedList.txt");
                 FileWriter fw = new FileWriter(newFile);
                 fw.write("");
                 fw.close();
-            } catch(IOException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            System.out.println("**storedList.txt not found. " +
-                    "New file \"storedList.txt\" has been created for you.**");
+            System.out.println("**storedList.txt not found. "
+                    + "New file \"storedList.txt\" has been created for you.**");
         }
         return new TaskList(storedListOfTasks);
     }
@@ -201,7 +209,9 @@ public class TaskList {
             Event event = new Event(eventName, eventTime, isDone);
             return event;
         default:
-            return new Todo("Fallthrough occurred!!");
+            assert false : "Error in convertStringToTask() method."
+                    + "Tasks should have been stored with the appropriate format (T, D, or E)";
+            return new Todo("Fallthrough occurred!");
         }
     }
 }

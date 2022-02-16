@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents an event (subclass of task).
+ * Represents an event task. An event is a task with an "at" date.
  */
 public class Event extends Task {
-    private final String eventTime;
+    private final String eventDate;
     private final LocalDate date;
     private static final String taskType = "E";
 
@@ -15,16 +15,29 @@ public class Event extends Task {
         return LocalDate.parse(endDate);
     }
 
-    public Event(String name, String eventTime) {
+    /**
+     * Constructor for event.
+     *
+     * @param name Event name.
+     * @param eventDate Event date.
+     */
+    public Event(String name, String eventDate) {
         super(name);
-        this.eventTime = eventTime;
-        this.date = convertToDate(eventTime);
+        this.eventDate = eventDate;
+        this.date = convertToDate(eventDate);
     }
 
-    public Event(String name, String eventTime, boolean isDone) {
+    /**
+     * Constructor for event.
+     *
+     * @param name Event name.
+     * @param eventDate Event date.
+     * @param isDone Whether event is marked as done.
+     */
+    public Event(String name, String eventDate, boolean isDone) {
         super(name, isDone);
-        this.eventTime = eventTime;
-        this.date = convertToDate(eventTime);
+        this.eventDate = eventDate;
+        this.date = convertToDate(eventDate);
     }
 
     /**
@@ -33,7 +46,7 @@ public class Event extends Task {
      * @return Event object with isDone set to true.
      */
     public Event markAsDone() {
-        return new Event(this.name, this.eventTime, true);
+        return new Event(this.name, this.eventDate, true);
     }
 
     /**
@@ -42,9 +55,14 @@ public class Event extends Task {
      * @return Event object with isDone set to false.
      */
     public Event markAsUndone() {
-        return new Event(this.name, this.eventTime, false);
+        return new Event(this.name, this.eventDate, false);
     }
 
+    /**
+     * Returns the event as a String in a format that can be stored.
+     *
+     * @return String representation of event.
+     */
     public String convertToStoredTaskFormat() {
         String doneIndicator = "false";
         if (super.isDone) {
@@ -55,6 +73,11 @@ public class Event extends Task {
         return storedListFormat;
     }
 
+    /**
+     * Returns a String representing the event object.
+     *
+     * @return String representing the event object.
+     */
     @Override
     public String toString() {
         String doneMark;

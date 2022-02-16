@@ -4,37 +4,38 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a deadline (subclass of task).
+ * Represents a deadline task. A deadline is a task with a "by" date.
  */
 public class Deadline extends Task {
     private final String endDate;
     private final LocalDate date;
-
-    private final static String taskType = "D";
+    private static final String taskType = "D";
 
     private static LocalDate convertToDate(String endDate) {
         return LocalDate.parse(endDate);
     }
 
     /**
-     * Constructor for Deadline
-     * @param name
-     * @param endDate
-     * @param isDone
+     * Constructor for deadline.
+     *
+     * @param name Deadline name.
+     * @param endDate Deadline date.
      */
-    public Deadline(String name, String endDate, boolean isDone) {
-        super(name, isDone);
+    public Deadline(String name, String endDate) {
+        super(name);
         this.endDate = endDate;
         this.date = convertToDate(endDate);
     }
 
     /**
-     * Constructor for Deadline where isDone without isDone parameter
-     * @param name
-     * @param endDate
+     * Constructor for deadline.
+     *
+     * @param name Deadline name.
+     * @param endDate Deadline date.
+     * @param isDone Whether deadline is marked as done.
      */
-    public Deadline(String name, String endDate) {
-        super(name);
+    public Deadline(String name, String endDate, boolean isDone) {
+        super(name, isDone);
         this.endDate = endDate;
         this.date = convertToDate(endDate);
     }
@@ -58,9 +59,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representing the deadline that can be stored in the hard drive.
+     * Returns the deadline as a String in a format that can be stored.
      *
-     * @return String representation of deadline for storage.
+     * @return String representation of deadline.
      */
     public String convertToStoredTaskFormat() {
         String doneIndicator = "false";
@@ -72,6 +73,11 @@ public class Deadline extends Task {
         return storedListFormat;
     }
 
+    /**
+     * Returns a String representing the deadline object.
+     *
+     * @return String representing the deadline object.
+     */
     @Override
     public String toString() {
         String doneMark;

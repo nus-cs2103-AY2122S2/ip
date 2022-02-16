@@ -1,20 +1,34 @@
 package mike;
 
+/**
+ * Represents a task.
+ */
 abstract class Task {
     protected final String name;
     protected final boolean isDone;
 
+    /**
+     * Constructor for task.
+     *
+     * @param name Task name.
+     */
     public Task(String name) {
         this(name, false);
     }
 
+    /**
+     * Constructor for task.
+     *
+     * @param name Task name.
+     * @param isDone Whether task is to be marked as done.
+     */
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
 
     /**
-     * Returns the name of the task as in the name field.
+     * Returns the name of the task.
      *
      * @return Name of task.
      */
@@ -31,8 +45,8 @@ abstract class Task {
     /**
      * Returns true if the task name contains the specified search words.
      *
-     * @param searchWords Words to be searched for as specified by the user.
-     * @return true if the task name contains the search words; else returns false.
+     * @param searchWords Words to be searched for in the task name.
+     * @return Returns true if the task name contains the search words; else returns false.
      */
     public boolean containsSearchWords(String searchWords) {
         String taskName = this.name.toLowerCase();
@@ -41,8 +55,9 @@ abstract class Task {
     }
 
     /**
-     * Returns a String representing the name of the task.
-     * @return String name of task for user.
+     * Returns a String representing the task.
+     *
+     * @return String representing the task.
      */
     @Override
     public String toString() {

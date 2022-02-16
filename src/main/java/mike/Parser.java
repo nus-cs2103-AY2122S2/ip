@@ -7,7 +7,7 @@ public class Parser {
     /**
      * Constructor for Parser.
      *
-     * @param userInput The String input by the user to be parsed.
+     * @param userInput The String to be parsed.
      */
     public Parser(String userInput) {
         this.userInput = userInput.trim(); //Parser trims userInput automatically
@@ -15,9 +15,9 @@ public class Parser {
     }
 
     /**
-     * Returns the user input (after it has been trimmed).
+     * Returns the user input.
      *
-     * @return String representing trimmed user input.
+     * @return User input.
      */
     public String getUserInput() {
         return userInput;
@@ -33,7 +33,7 @@ public class Parser {
     }
 
     /**
-     * Returns the index portion (referencing the list of tasks) of the user input.
+     * Returns the index portion of the user input.
      *
      * @return An integer representing the index of a task in the list.
      */
@@ -60,8 +60,7 @@ public class Parser {
     }
 
     /**
-     * Trims the "command" portion out from the input string and returns the remainder of the string.
-     * This is a helper function for the processInput method.
+     * Removes the "command" portion out from the input string and returns the remainder of the string.
      *
      * @return The input string from the user with the "command" portion removed.
      */
@@ -85,7 +84,7 @@ public class Parser {
      *
      * @return String representing the name of a deadline.
      */
-    String getDeadlineName() {
+    public String getDeadlineName() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/by");
         assert indexOfBy >= 0 : "index should be more than or equal to 0";
@@ -98,7 +97,7 @@ public class Parser {
      *
      * @return String representing the date of a deadline.
      */
-    String getDeadlineDate() {
+    public String getDeadlineDate() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/by");
         int indexOfEndDate = indexOfBy + 4;
@@ -112,7 +111,7 @@ public class Parser {
      *
      * @return String representing the name of an event.
      */
-    String getEventName() {
+    public String getEventName() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/at");
         assert indexOfBy >= 0 : "index should be more than or equal to 0";
@@ -125,7 +124,7 @@ public class Parser {
      *
      * @return String representing the date of an event.
      */
-    String getEventDate() {
+    public String getEventDate() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/at");
         int indexOfEndDate = indexOfBy + 4;
@@ -133,7 +132,12 @@ public class Parser {
         return date;
     }
 
-    String getSearchWords() {
+    /**
+     * Returns the keywords to be searched for from user input.
+     *
+     * @return The keywords to be searched for.
+     */
+    public String getSearchWords() {
         return removeCommandFromString();
         //Todo:fix bug where if user inputs "find", it searches for occurrences of "find".
     }

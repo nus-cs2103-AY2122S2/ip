@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Handles to storage and retrieval of information from the hard drive.
+ */
 public class Storage {
     private final String filePath;
 
@@ -17,7 +20,7 @@ public class Storage {
     }
 
     /**
-     * Loads the file for use by other methods.
+     * Loads the file to be accessed.
      *
      * @return File object (namely storedList.txt).
      */
@@ -28,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Stores the list according to the specified filePath.
+     * Stores the list in the specified filePath.
      *
      * @param listInStorageFormat A String representation of the entire list of tasks.
      */
@@ -38,7 +41,7 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             fw.write(listInStorageFormat);
             fw.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

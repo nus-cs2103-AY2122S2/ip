@@ -16,6 +16,11 @@ public class Main extends Application {
 
     private Mike mike = new Mike();
 
+    /**
+     * Sets up the JavaFX stage.
+     *
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {
