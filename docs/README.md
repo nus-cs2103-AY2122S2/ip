@@ -1,15 +1,11 @@
+[<img src="https://s18955.pcdn.co/wp-content/uploads/2018/02/github.png" width="25"/>](https://github.com/lamwj98/ip)
 # User Guide
 ~~Duke~~ _**Siri**_ is a todo list chatbot that helps you track your day to day tasks so that you can send more brain power on place where it better fits.
-___
-##Getting Siri
+
+## Getting Siri
 You can get Siri by downloading the latest version of _**Siri**_ .jar file under releases.
 
 As _**Siri**_ is developed under JDK 11, it is recommended that you have Java SE 11 or later installed on your computer before running _**Siri**_.
-
-Alternatively, you can clone the repo. Then from the root folder, execute the command:
-```
-gradlew run
-```
 
 ___
 ## Features
