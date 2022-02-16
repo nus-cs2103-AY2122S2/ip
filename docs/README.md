@@ -2,9 +2,11 @@
 > "Be like a duck. Calm on the surface, but always paddling like the dickens underneath." - Micheal Caine ([Source](https://quotecatalog.com/quote/michael-caine-be-like-a-duck-baVAqop#:~:text=%E2%80%9CBe%20like%20a%20duck.,paddling%20like%20the%20dickens%20underneath.%E2%80%9D))
 
 ### Ducky is an interactive tool for you to track your tasks in one place. It's
-- Cute ✧･ﾟ: *✧･ﾟ:* |\__( o)> *:･ﾟ✧*:･ﾟ✧
+- Cute 🐣
 - ~~Easy~~ **Very _easy_** to use
 - Text-based 🧑‍💻
+
+![](Ui.png)
 
 ## Features 
 
