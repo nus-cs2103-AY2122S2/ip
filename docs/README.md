@@ -78,7 +78,7 @@ Expected outcome:
 
 Adds a new Deadline Task to the list and saves the updated list to the save file.
 
-Example of usage: `deadline submit assignment /at 01/02/2022 08:02 PM`
+Example of usage: `deadline submit assignment /by 01/02/2022 08:02 PM`
 
 Expected outcome:
 
