@@ -7,11 +7,13 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+data/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
+META-INF/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
