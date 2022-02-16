@@ -3,10 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 
 import duke.parser.DukeException;
 import duke.parser.Parser;
