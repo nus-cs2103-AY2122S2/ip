@@ -86,7 +86,7 @@ public class Duke extends Application {
                     out += String.format("Sheesh you've now got %d tasks in the list\n", list.size());
                 }
             }
-        } else if (command.equals("bye")) {
+        } else if (command.equals("save")) {
             boolean isSuccess = false;
             try {
                 isSuccess = storage.store(list);
@@ -94,7 +94,7 @@ public class Duke extends Application {
                 out += e.getMessage();
             }
             assert isSuccess;
-            out += ("See you later alligator :)");
+            out += ("Your tasks have been saved successfully :)");
         } else if (command.equals("list")) {
             out = list.printList();
         } else if (command.equals("mark") || command.equals("unmark")) {
@@ -153,13 +153,13 @@ public class Duke extends Application {
                 + "* todo: Adds a task to be done Eg: todo Buy groceries\n"
                 + "* deadline: Adds a task to be done by a certain deadline.\n "
                 + "Use the format yyyy-mm-dd. Eg: deadline Finish studying /by 2022-02-28\n"
-                + "* event: Adds an event occuring at a specific time Eg: event Lecture /at Thursday 2-4pm\n"
+                + "* event: Adds an event occurring at a specific time Eg: event Lecture /at Thursday 2-4pm\n"
                 + "* list: List all the tasks Eg: list\n"
                 + "* mark: Mark a task as done Eg: mark 3\n"
                 + "* unmark: Mark a task as not done Eg: unmark 3\n"
                 + "* delete: Delete a task Eg: delete 4\n"
                 + "* find: Find a task by searching for a substring Eg: find Lecture\n"
-                + "* bye: Quit Prince Eg: bye";
+                + "* save: Saves the tasks that have been added in the current session to local storage";
         return out;
 
     }
@@ -281,8 +281,8 @@ public class Duke extends Application {
 
     private void printWelcome() {
         String welcome = "Hey there! I'm Prince :) \n"
-                + "How can I help you today?"
-                + "(type help if you're confused)";
+                + "How can I help you today?\n"
+                + "(type help if you're confused)\n";
         Label dukeText = new Label(welcome);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))

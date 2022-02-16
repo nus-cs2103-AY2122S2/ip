@@ -1,29 +1,32 @@
-# User Guide
+# Prince - User Guide
 
-## Features 
+- Prince can track 3 types of tasks
+[x] Todo
+[x] Deadline
+[x] Event
 
-### Feature-ABC
-
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
+## Features
+- Add tasks
+- Delete tasks
+- Search for tasks
+- Mark tasks as done
 
 ## Usage
 
-### `Keyword` - Describe action
+### `deadline` - Add a deadline task
 
-Describe the action and its outcome.
+A deadline must have a description and a deadline date.
+The date must be provided in the format yyy-mm-dd.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`deadline Finish CS3243 project /by 2022-02-20`
 
 Expected outcome:
-
-Description of the outcome.
+Creates a new Deadline task
 
 ```
-expected output
+Got it. I've added:
+[D][ ] Finish CS3243 project (by: 20-Feb-2022)
+Sheesh you've now got 4 tasks in the list
 ```
