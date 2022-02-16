@@ -5,9 +5,5 @@
 .text-bubble {
     -fx-background-color: #00FFFF;
     -fx-background-radius: 10px;
-    -fx-border-color: black;
-    -fx-border-width: 2 2 2 2;
-    -fx-border-radius: 10px;
     -fx-padding: 10px;
-    -fx-font-family: 'Roboto Mono', monospace;
 }
