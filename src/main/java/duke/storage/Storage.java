@@ -30,41 +30,38 @@ public class Storage {
         }
     }
 
-    public void saveTasklist(ArrayList<Task> tasklist) throws DukeException {
+    public void saveTasklist(TaskList taskList) throws DukeException {
         initialiseSaveFile();
-        StringBuilder dataToWrite = new StringBuilder();
-        for (Task task : tasklist) {
-            dataToWrite.append(task.toSaveData());
-        }
+        String dataToWrite = taskList.toSaveData();
         try {
             FileWriter saveFileWriter = new FileWriter(DATA_PATH.toString(), false);
-            saveFileWriter.write(dataToWrite.toString());
+            saveFileWriter.write(dataToWrite);
             saveFileWriter.close();
         } catch (IOException e) {
             throw new DukeException("Unable to write into save file");
         }
     }
 
-    public static ArrayList<Task> loadTasklist() throws DukeException{
+    public static TaskList loadTasklist() throws DukeException{
         initialiseSaveFile();
         String strCurrentLine;
         Task currentTask;
-        ArrayList<Task> tasklist = new ArrayList<>();
+        TaskList taskList = new TaskList();
         try {
             BufferedReader saveFilereader = new BufferedReader(new FileReader(DATA_PATH.toString()));
             while ((strCurrentLine = saveFilereader.readLine()) != null) {
                 switch (strCurrentLine.charAt(0)) {
                 case 'T' -> {
                     currentTask = Todo.createFromData(strCurrentLine);
-                    tasklist.add(currentTask);
+                    taskList.addTask(currentTask);
                 }
                 case 'E' -> {
                     currentTask = Event.createFromData(strCurrentLine);
-                    tasklist.add(currentTask);
+                    taskList.addTask(currentTask);
                 }
                 case 'D' -> {
                     currentTask = Deadline.createFromData(strCurrentLine);
-                    tasklist.add(currentTask);
+                    taskList.addTask(currentTask);
                 }
                 }
             }
@@ -73,7 +70,7 @@ public class Storage {
             throw new DukeException("Unable to load save file");
         }
 
-        return tasklist;
+        return taskList;
     }
 
 
