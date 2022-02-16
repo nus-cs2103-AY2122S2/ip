@@ -13,6 +13,8 @@ import juke.task.Deadline;
 import juke.task.Event;
 import juke.task.Task;
 import juke.task.TaskStatus;
+import juke.task.TaskType;
+import juke.task.TimeTask;
 import juke.task.Todo;
 
 /**
@@ -23,6 +25,11 @@ public class Storage {
      * Path name to the data file.
      */
     private static final String PATH_NAME = "data/juke.txt";
+
+    private static final String MKDIRS_MESSAGE = "Directories not found. Creating new directories.";
+    private static final String MISSING_MESSAGE = "File not found.";
+    private static final String CREATE_MESSAGE = "Creating new file.";
+    private static final String FORMAT_ERROR_MESSAGE = "File has incorrect arguments.";
 
     /**
      * Reference to the Juke instance.
@@ -41,7 +48,7 @@ public class Storage {
      */
     public Storage(Juke instance) {
         this.juke = instance;
-        this.initializeFile();
+        initializeFile();
     }
 
     /**
@@ -49,14 +56,26 @@ public class Storage {
      */
     private void initializeFile() {
         try {
-            if (this.file.getParentFile().mkdirs()) {
-                this.juke.getUi().formattedPrint("Directories not found. Creating new directories.");
+            if (file.getParentFile().mkdirs()) {
+                juke.getUi().formattedPrint(MKDIRS_MESSAGE);
             }
-            if (this.file.createNewFile()) {
-                this.juke.getUi().formattedPrint("File not found. Creating new file.");
+            if (file.createNewFile()) {
+                juke.getUi().formattedPrint(MISSING_MESSAGE, CREATE_MESSAGE);
             }
         } catch (IOException | SecurityException e) {
-            this.juke.getUi().formattedPrint(e.getMessage());
+            juke.getUi().formattedPrint(e.getMessage());
+        }
+    }
+
+    /**
+     * Creates a new file if file format is invalid.
+     */
+    private void createNewFileForInvalidData() {
+        try {
+            file.createNewFile();
+            juke.getUi().formattedPrint(FORMAT_ERROR_MESSAGE, CREATE_MESSAGE);
+        } catch (IOException | SecurityException e) {
+            juke.getUi().formattedPrint(e.getMessage());
         }
     }
 
@@ -64,18 +83,23 @@ public class Storage {
      * Loads the tasks from the data file to the task list.
      */
     public void loadTasks() {
-        ArrayList<String[]> parseArr = this.parse();
+        ArrayList<String[]> parseArr = null;
+        try {
+            parseArr = Parser.parseFile(file);
+        } catch (FileNotFoundException e) {
+            // Should not reach here
+            assert false;
+            System.exit(-1);
+        }
         for (String[] args : parseArr) {
+            Task task = null;
             try {
-                Task task = this.decode(args);
-                if (task != null) {
-                    this.juke
-                        .getTaskList()
-                        .add(task);
-                }
+                task = decode(args);
             } catch (JukeException e) {
-                this.juke.getUi().formattedPrint(e.getMessage());
-                System.exit(-1);
+                createNewFileForInvalidData();
+            }
+            if (task != null) {
+                juke.getTaskList().add(task);
             }
         }
     }
@@ -85,54 +109,13 @@ public class Storage {
      */
     public void saveTasks() {
         ArrayList<String[]> writeArr = new ArrayList<>();
-        for (Task task : this.juke.getTaskList()) {
-            String[] args = this.encode(task);
+        for (Task task : juke.getTaskList()) {
+            String[] args = encode(task);
             if (args != null) {
                 writeArr.add(args);
             }
         }
-        this.write(writeArr);
-    }
-
-    /**
-     * Parses the file format into string components.
-     *
-     * @return An array list of string components.
-     */
-    public ArrayList<String[]> parse() {
-        ArrayList<String[]> array = new ArrayList<>();
-        try {
-            Scanner in = new Scanner(this.file);
-            while (in.hasNextLine()) {
-                array.add(in.nextLine().strip().split(";"));
-            }
-            in.close();
-        } catch (FileNotFoundException e) {
-            this.juke.getUi().formattedPrint(e.getMessage());
-        }
-        return array;
-    }
-
-    /**
-     * Writes data to the file.
-     * Returns true if successful, false otherwise.
-     *
-     * @param array Array of string components to write.
-     * @return Boolean result.
-     */
-    public boolean write(ArrayList<String[]> array) {
-        try {
-            FileWriter out = new FileWriter(file);
-            for (String[] args : array) {
-                String str = String.join(";", args);
-                out.write(str + "\n");
-            }
-            out.close();
-        } catch (IOException e) {
-            this.juke.getUi().formattedPrint(e.getMessage());
-            return false;
-        }
-        return true;
+        Parser.writeFile(writeArr, file);
     }
 
     /**
@@ -143,36 +126,65 @@ public class Storage {
      * @throws JukeException Throws if string component is incorrect.
      */
     public Task decode(String[] args) throws JukeException {
-        Task task = null;
-        if (args.length > 2) {
-            boolean mark = Boolean.parseBoolean(args[1]);
-            switch (args[0]) {
-            case "E":
-                if (args.length < 4) {
-                    throw new JukeException("File has incorrect arguments");
-                } else {
-                    task = new Event(args[2], args[3]);
-                }
-                break;
-            case "T":
-                task = new Todo(args[2]);
-                break;
-            case "D":
-                if (args.length < 4) {
-                    throw new JukeException("File has incorrect arguments");
-                } else {
-                    task = new Deadline(args[2], args[3]);
-                }
-                break;
-            default:
-                throw new JukeException("File has incorrect arguments");
-            }
-            if (mark) {
-                task.markAsDone();
-            }
-        } else {
-            throw new JukeException("File has incorrect arguments");
+        boolean hasArgs = args.length > 2;
+        if (!hasArgs) {
+            throwDecodeError();
         }
+        TaskType type = TaskType.getTaskTypeFromShortString(args[0]);
+        if (type == null) {
+            throwDecodeError();
+        }
+        Task task = constructTaskFromArgs(type, args);
+        assert task != null;
+        markDecodedTask(task, args);
+        return task;
+    }
+
+    /**
+     * Marks the decoded task according to the data.
+     *
+     * @param task Task to mark.
+     * @param args Arguments.
+     */
+    private void markDecodedTask(Task task, String[] args) {
+        boolean mark = Boolean.parseBoolean(args[1]);
+        if (mark) {
+            task.markAsDone();
+        }
+    }
+
+    /**
+     * Construct a task from a task type and arguments.
+     * Part of the decode process.
+     *
+     * @param type Task type.
+     * @param args Arguments.
+     * @return Task.
+     * @throws JukeException Throws if there is a decode error.
+     */
+    private Task constructTaskFromArgs(TaskType type, String[] args) throws JukeException {
+        Task task = null;
+        switch (type) {
+        case EVENT:
+            if (args.length < 4) {
+                throwDecodeError();
+            }
+            task = new Event(args[2], args[3]);
+            break;
+        case TODO:
+            task = new Todo(args[2]);
+            break;
+        case DEADLINE:
+            if (args.length < 4) {
+                throwDecodeError();
+            }
+            task = new Deadline(args[2], args[3]);
+            break;
+        default:
+            //Should not reach here
+            throwDecodeError();
+        }
+        assert task != null;
         return task;
     }
 
@@ -183,37 +195,91 @@ public class Storage {
      * @return String components.
      */
     public String[] encode(Task task) {
-        String[] args = null;
-        if (task instanceof Todo) {
-            args = new String[3];
-            args[0] = "T";
-            if (task.getStatus() == TaskStatus.DONE) {
-                args[1] = "true";
-            } else {
-                args[1] = "false";
-            }
-            args[2] = task.getDescription();
-        } else if (task instanceof Event) {
-            args = new String[4];
-            args[0] = "E";
-            if (task.getStatus() == TaskStatus.DONE) {
-                args[1] = "true";
-            } else {
-                args[1] = "false";
-            }
-            args[2] = task.getDescription();
-            args[3] = ((Event) task).getTime();
-        } else if (task instanceof Deadline) {
-            args = new String[4];
-            args[0] = "D";
-            if (task.getStatus() == TaskStatus.DONE) {
-                args[1] = "true";
-            } else {
-                args[1] = "false";
-            }
-            args[2] = task.getDescription();
-            args[3] = ((Deadline) task).getTime();
-        }
+        assert task != null;
+        String[] args = initializeArgsLength(task);
+        assert args != null;
+        encodeTaskShortString(task, args);
+        encodeTaskStatus(task, args);
+        encodeTaskDescription(task, args);
+        encodeTimeTaskDateTime(task, args);
         return args;
+    }
+
+    /**
+     * Returns args to be of the right length.
+     * Part of the encode process.
+     *
+     * @param task Task.
+     * @return String arguments.
+     */
+    private String[] initializeArgsLength(Task task) {
+        switch (task.getTaskType()) {
+        case DEADLINE:
+        case EVENT:
+            return new String[4];
+        case TODO:
+        default:
+            return new String[3];
+        }
+    }
+
+    /**
+     * Encodes the task short string into the arguments.
+     * Part of the encode process.
+     *
+     * @param task Task.
+     * @param args Arguments.
+     */
+    private void encodeTaskShortString(Task task, String[] args) {
+        args[0] = task.getTaskType().getTaskShortString();
+    }
+
+    /**
+     * Encodes the task status into the arguments.
+     * Part of the encode process.
+     *
+     * @param task Task.
+     * @param args Arguments.
+     */
+    private void encodeTaskStatus(Task task, String[] args) {
+        if (task.getStatus() == TaskStatus.DONE) {
+            args[1] = "true";
+        } else {
+            args[1] = "false";
+        }
+    }
+
+    /**
+     * Encodes the task description into the arguments.
+     * Part of the encode process.
+     *
+     * @param task Task.
+     * @param args Arguments.
+     */
+    private void encodeTaskDescription(Task task, String[] args) {
+        args[2] = task.getDescription();
+    }
+
+    /**
+     * Encodes the task date and time into the arguments.
+     * Only executes if task is a time task.
+     * Part of the encode process.
+     *
+     * @param task Task.
+     * @param args Arguments.
+     */
+    private void encodeTimeTaskDateTime(Task task, String[] args) {
+        if (task instanceof TimeTask && args.length > 3) {
+            args[3] = ((TimeTask) task).getTime();
+        }
+    }
+
+    /**
+     * Method to throw decode error exception.
+     *
+     * @throws JukeException Exception.
+     */
+    private void throwDecodeError() throws JukeException {
+        throw new JukeException(FORMAT_ERROR_MESSAGE);
     }
 }

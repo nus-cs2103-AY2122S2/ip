@@ -30,8 +30,8 @@ public class TaskList implements Iterable<Task> {
      * @param tasks Collection of tasks.
      */
     public TaskList(Collection<Task> tasks) {
-        this.taskList = new ArrayList<>();
-        this.taskList.addAll(tasks);
+        taskList = new ArrayList<>();
+        taskList.addAll(tasks);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList implements Iterable<Task> {
      * @return True.
      */
     public boolean add(Task task) {
-        return this.taskList.add(task);
+        return taskList.add(task);
     }
 
     /**
@@ -53,7 +53,7 @@ public class TaskList implements Iterable<Task> {
      */
     public Task remove(int index) {
         try {
-            return this.taskList.remove(index);
+            return taskList.remove(index);
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
@@ -68,7 +68,7 @@ public class TaskList implements Iterable<Task> {
      */
     public Task get(int index) {
         try {
-            return this.taskList.get(index);
+            return taskList.get(index);
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
@@ -80,7 +80,7 @@ public class TaskList implements Iterable<Task> {
      * @return Number of tasks.
      */
     public int size() {
-        return this.taskList.size();
+        return taskList.size();
     }
 
     /**
@@ -90,12 +90,12 @@ public class TaskList implements Iterable<Task> {
      * @throws JukeEmptyTaskListException Throws if task list is empty.
      */
     public String[] list() throws JukeEmptyTaskListException {
-        if (this.taskList.size() == 0) {
+        if (taskList.size() == 0) {
             throw new JukeEmptyTaskListException();
         }
-        String[] strs = new String[this.taskList.size()];
-        for (int i = 0; i < this.taskList.size(); i++) {
-            strs[i] = this.taskList.get(i).toString();
+        String[] strs = new String[taskList.size()];
+        for (int i = 0; i < taskList.size(); i++) {
+            strs[i] = taskList.get(i).toString();
         }
         return strs;
     }
@@ -109,7 +109,7 @@ public class TaskList implements Iterable<Task> {
      */
     public boolean markTask(int index) {
         try {
-            this.taskList.get(index).markAsDone();
+            taskList.get(index).markAsDone();
             return true;
         } catch (IndexOutOfBoundsException e) {
             return false;
@@ -125,7 +125,7 @@ public class TaskList implements Iterable<Task> {
      */
     public boolean unmarkTask(int index) {
         try {
-            this.taskList.get(index).markAsNotDone();
+            taskList.get(index).markAsNotDone();
             return true;
         } catch (IndexOutOfBoundsException e) {
             return false;
@@ -140,7 +140,7 @@ public class TaskList implements Iterable<Task> {
      */
     public List<Task> search(String query) {
         ArrayList<Task> queryList = new ArrayList<>();
-        for (Task task : this.taskList) {
+        for (Task task : taskList) {
             if (task.getDescription().contains(query)) {
                 queryList.add(task);
             }
