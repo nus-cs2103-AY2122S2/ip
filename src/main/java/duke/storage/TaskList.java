@@ -1,17 +1,10 @@
 package duke.storage;
 
-import duke.duke.Duke;
-import duke.ui.Parser;
-import duke.ui.DukeException;
-import duke.ui.InputHandler;
-import duke.storage.Storage;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
 
 import java.util.ArrayList;
 public class TaskList {
+
     public ArrayList<Task> list;
 
     /**
@@ -22,7 +15,8 @@ public class TaskList {
     }
 
     /**
-     * Add Task to TaskList
+     * Adds Task to TaskList
+     *
      * @param task Task to be added
      */
     public void add(Task task) {
@@ -30,7 +24,8 @@ public class TaskList {
     }
 
     /**
-     * Remove Task from TaskList
+     * Removes Task from TaskList
+     *
      * @param index index of Task to be removed
      */
     public void remove(int index) {
@@ -38,7 +33,8 @@ public class TaskList {
     }
 
     /**
-     * Get task by index
+     * Gets task by index
+     *
      * @param index index of Task to be retrieved
      * @return Retrieved Task
      */
@@ -47,7 +43,8 @@ public class TaskList {
     }
 
     /**
-     * Size of tasklist
+     * Returns Size of TaskList
+     *
      * @return integer size of TaskList
      */
     public int size() {

@@ -3,11 +3,9 @@ package duke.duke;
 import duke.ui.DukeException;
 import duke.ui.InputHandler;
 import duke.ui.DialogBox;
-import duke.ui.Parser;
-import duke.ui.InputHandler;
+
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -18,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -31,17 +28,13 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    //images
+
+    //Images for Duke & user
     private Image user = new Image(this.getClass().getResourceAsStream("/images/human.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/bear.jpg"));
 
 
     public static void main(String[] args) throws IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         String dukeGreeting = "Hello! I'm Duke \nWhat can I do for you?";
         String endMessage = "Bye. Hope to see you again soon!";
 
@@ -125,7 +118,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Creates the dialogboxes as well as user and duke's inputs
+     * Creates the dialogboxes as well as handles user and duke's inputs
      */
     private void handleUserInput() {
         String userText = userInput.getText();
@@ -138,7 +131,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Obtains the response of Duke
+     * Returns the Response of Duke to user input
+     *
      * @param input user's input
      * @return Duke's reply to user's input
      */
@@ -158,6 +152,7 @@ public class Duke extends Application {
 
     /**
      * Returns a Label around the text
+     *
      * @param text text for the dialog
      * @return Label object with text
      */
