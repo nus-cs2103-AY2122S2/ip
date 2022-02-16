@@ -103,10 +103,20 @@ public class Storage {
      */
     public void saveFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
+        writeAllTaskToFile(taskList, fileWriter);
+        fileWriter.close();
+    }
+
+    /**
+     * Write all current tasks to the data file
+     * @param taskList current task list.
+     * @param fileWriter the file writer to the data.
+     * @throws IOException error writing the file
+     */
+    private void writeAllTaskToFile(TaskList taskList, FileWriter fileWriter) throws IOException {
         for (int i = 0; i < taskList.size(); i++) {
             fileWriter.write(taskList.get(i).dataFormatOfTask() + "\n");
         }
-        fileWriter.close();
     }
 
 
