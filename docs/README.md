@@ -8,7 +8,7 @@ texting. Talk to Mum! She will cater to you.
 
 ## Quick Start
 1. This application only works on a computer.
-2. Download the working version of Mum [here](http://google.com)
+2. Download the working version of Mum [here](https://github.com/jiale-c/ip/releases)
 3. Open the jar file that you just downloaded.
 4. Start organising your task!
 
