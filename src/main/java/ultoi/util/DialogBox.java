@@ -12,13 +12,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * Represents the controller of a dialog box.
  *
  * @author snoidetx
- * @version 0.0.0
- *
  */
 public class DialogBox extends HBox {
     @FXML
@@ -36,6 +35,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        setMinHeight(Region.USE_PREF_SIZE);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -46,6 +46,7 @@ public class DialogBox extends HBox {
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        tmp.get(0).setStyle("-fx-background-color: #323141; -fx-background-radius: 6px");
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
     }
