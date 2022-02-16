@@ -41,9 +41,9 @@ public class Ui {
      * Prints the 'help' response by Ducky. Usually called when the user says "help".
      */
     public String printHelp() {
-        String helpResponse = "> Type 'list' to see what you have in your task list\n"
-                + "> Type 'todo <message>' to put a todo in your list\n"
-                + "> Type 'deadline <message> /by <deadline>' to put a deadline in your list."
+        String helpResponse = "> Type 'list' to see what you have in your task list"
+                + "\n> Type 'todo <message>' to put a todo in your list"
+                + "\n> Type 'deadline <message> /by <deadline>' to put a deadline in your list."
                 + "\n\t - Deadline must be in 'DD MMMM YYYY' format or given in days."
                 + "\n\t - e.g. mon or monday"
                 + "\n> Type 'event <message> /at <date>' to put an event in your list"

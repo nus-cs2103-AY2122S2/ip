@@ -63,7 +63,7 @@ public class TaskList {
                 output += count + ". " + message;
             } else if (description.contains(detail)) {
                 count++;
-                output += count + ". " + message + "\n";
+                output += "\n" + count + ". " + message;
             }
         }
         return output;

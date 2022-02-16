@@ -12,6 +12,11 @@ public class FindCommand extends Command {
             + "Let's try again (๑•̀ㅁ•́๑)✧\n"
             + "Type 'help' if you need to know how to use this command";
 
+    /**
+     * Constructor of the FindCommand class.
+     *
+     * @param findString string provided by the user that is to be found.
+     */
     public FindCommand(String findString) {
         assert findString != null : "No string was provided to be found";
         findDetail = findString;
@@ -28,7 +33,7 @@ public class FindCommand extends Command {
                 return ("Oops! (・へ・) I could not find anything that matches " + "'" + findDetail + "'\n"
                         + "Please try to search for another word ∑(ﾟ∇ﾟ|||)");
             } else {
-                return ("Here are the tasks that contains " + findDetail + foundTasks);
+                return ("Here are the tasks that contains " + "\"" + findDetail + "\":\n" + foundTasks);
             }
         }
     }

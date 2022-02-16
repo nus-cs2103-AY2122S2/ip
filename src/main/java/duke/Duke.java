@@ -15,7 +15,7 @@ public class Duke {
     private String filename;
     private Ui ui;
     private TaskList tasks;
-    public boolean isError;
+    private boolean isError;
 
     /**
      * Constructor method for Duke.
@@ -51,5 +51,9 @@ public class Duke {
             isError = true;
             return (e.getMessage());
         }
+    }
+
+    public boolean isError() {
+        return isError;
     }
 }

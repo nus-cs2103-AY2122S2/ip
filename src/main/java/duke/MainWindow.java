@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText().toLowerCase(java.util.Locale.ROOT);
         String response = duke.getResponse(input);
         userWindow = DialogBox.getUserDialog(input, userImage);
-        if (duke.isError) {
+        if (duke.isError()) {
             dukeWindow = DialogBox.getWarningDukeDialog(response, sadDukeImage);
         } else {
             dukeWindow = DialogBox.getDukeDialog(response, dukeImage);
