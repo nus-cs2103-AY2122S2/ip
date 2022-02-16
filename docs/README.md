@@ -31,7 +31,7 @@ Example:
 
 ### Listing All Tasks: `list`
 
-> Displays list of all existing tasks.  
+> Displays all existing tasks.  
 
 Format: `list`
 
@@ -45,7 +45,7 @@ Example: `delete 3`
 Note: Deletes only if the index exists
 ```
 
-### Finding keyword in task: `find` 
+### Finding keyword within task: `find` 
 
 > Displays tasks that matches the keyword given.
 
@@ -56,7 +56,7 @@ Example:
 
 ### Marking a task: `mark` 
 
-> Mark a task as done. Shows X if done, nothing otherwise.
+> Marks a task as done. Shows X if done, nothing otherwise.
 
 Format: `mark INDEX`  
 Example: `mark 3` 
@@ -64,7 +64,9 @@ Example: `mark 3`
 Note: Marks only if the index exists
 ```
 
-### Unmarking a task: `mark` 
+### Unmarking a task: `unmark` 
+
+> Unmarks a task as undone. Shows X if done, nothing otherwise. 
 
 Format: `unmark INDEX`  
 Example: `unmark 3` 
