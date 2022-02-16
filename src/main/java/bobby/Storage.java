@@ -70,7 +70,7 @@ public class Storage {
             if (!file.createNewFile()) {
                 loadFile(file, taskArray);
             }
-            assert file.exists():"File not found error.";
+            assert file.exists() : "File not found error.";
         } catch (IOException e) {
             System.out.println("File loading error");
             assert false;
@@ -80,10 +80,11 @@ public class Storage {
 
     /**
      * Writes into the file with current list of tasks.
+     *
      * @param taskArray ArrayList of current tasks to be written into file.
      */
     public void updateFile(ArrayList<Task> taskArray) {
-        assert file.exists(): "file does not exist";
+        assert file.exists() : "file does not exist";
         try {
             FileWriter fw = new FileWriter("bobby.txt");
             for (int i = 0; i < taskArray.size(); i++) {

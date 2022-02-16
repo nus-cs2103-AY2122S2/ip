@@ -12,6 +12,7 @@ public class Bobby {
 
     /**
      * Creates an instance of Bobby.
+     *
      * @param filePath location in a directory where contents will be stored.
      */
     public Bobby(String filePath) {

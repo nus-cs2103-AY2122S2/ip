@@ -16,19 +16,22 @@ public class TaskList {
 
     /**
      * Constructor to create an instance of TaskList.
+     *
      * @param taskArray ArrayList storing Tasks.
      * @param storage used to update the list stored in the .txt file.
      */
     public TaskList(ArrayList<Task> taskArray, Storage storage) {
         this.stateStack = new Stack<State>();
-        stateStack.push(new State(new ArrayList<Task>(taskArray), 0));
+        stateStack.push(new State(new ArrayList<Task>(taskArray)));
         this.taskArray = taskArray;
         this.storage = storage;
     }
 
     /**
      * Adds a Task of type Todo.
+     *
      * @param task description of the task.
+     * @return Program output to confirm execution of command to user.
      * @throws BobbyException if the description of the task is empty.
      */
     public String addToDo(String task) throws BobbyException {
@@ -47,7 +50,9 @@ public class TaskList {
 
     /**
      * Adds a Task of type Deadline.
+     *
      * @param task description of Deadline and when the task has to be completed in YYYY-MM-DD format.
+     * @return Program output to confirm execution of command to user.
      * @throws BobbyException when description is empty or date format is invalid.
      */
     public String addDeadline(String task) throws BobbyException {
@@ -73,7 +78,9 @@ public class TaskList {
 
     /**
      * Adds a Task of type Event.
+     *
      * @param task description of Event and date/time of the Event.
+     * @return Program output to confirm execution of command to user.
      * @throws BobbyException when description or date/time is empty.
      */
     public String addEvent(String task) throws BobbyException {
@@ -99,11 +106,13 @@ public class TaskList {
 
     /**
      * deletes Removes Task of index given in user input from the list.
+     *
      * @param index index of task to be deleted.
+     * @return Program output to confirm execution of command to user.
      * @throws BobbyException when no given index or when index is bigger than list.
      */
     public String delete(int index) throws BobbyException {
-        if (index > taskArray.size() - 1|| index < 0) {
+        if (index > taskArray.size() - 1 || index < 0) {
             throw new BobbyException("Invalid index given to Bobby.");
         }
 
@@ -117,16 +126,19 @@ public class TaskList {
 
     /**
      * Generates a list of current tasks.
+     *
+     * @return List of all the tasks stored in Bobby.
      */
     public String list() {
-        System.out.println("stack size check: " + stateStack.size());
         return Ui.printList(taskArray);
     }
 
 
     /**
      * Marks a task as done.
+     *
      * @param index index of task to be marked as done.
+     * @return Program output to confirm execution of command to user.
      * @throws BobbyException when index given exceeds size of list.
      */
     public String mark(int index) throws BobbyException {
@@ -138,7 +150,7 @@ public class TaskList {
         t.markAsDone();
         storage.updateFile(taskArray);
         updateStateArray();
-        assert t.isDone: "error in mark";
+        assert t.isDone : "error in mark";
 
         return Ui.taskDone(t);
     }
@@ -146,7 +158,9 @@ public class TaskList {
 
     /**
      * Unmarks a task as done.
+     *
      * @param index index of task to be unmarked.
+     * @return Program output to confirm execution of command to user.
      * @throws BobbyException when index given exceeds size of list.
      */
     public String unmark(int index) throws BobbyException {
@@ -158,14 +172,16 @@ public class TaskList {
         t.unmarkAsDone();
         storage.updateFile(taskArray);
         updateStateArray();
-        assert !t.isDone: "error in unmark";
+        assert !t.isDone : "error in unmark";
 
         return Ui.taskNotDone(t);
     }
 
     /**
      * Find a task by searching for a key word.
+     *
      * @param query keyword used to search.
+     * @return List of tasks that matches with given query keyword.
      */
     public String find(String query) {
         boolean isSuccessful = false;
@@ -180,17 +196,22 @@ public class TaskList {
             }
         }
         if (!isSuccessful) {
-            return "Bobby could not find any matching tasks.";
+            return Ui.printNoTasksFound();
         }
         return Ui.printFoundTasks(resultTasks);
     }
 
     private void updateStateArray() {
         ArrayList<Task> taskArrayCopy = new ArrayList<Task>(taskArray);
-        currentState = new State(taskArrayCopy, stateStack.size());
+        currentState = new State(taskArrayCopy);
         stateStack.push(currentState);
     }
 
+    /**
+     * Undo previous change to the list of tasks stored in Bobby.
+     *
+     * @throws BobbyException when there is no more changes to be reversed.
+     */
     public void undo() throws BobbyException {
         if (stateStack.size() <= 1) {
             throw new BobbyException("Bobby cannot Undo any further.");

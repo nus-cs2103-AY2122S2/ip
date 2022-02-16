@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      * Constructor to create an instance of Task.
+     *
      * @param description description of the Task to be done.
      */
     public Task(String description) {

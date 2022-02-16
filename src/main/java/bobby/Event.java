@@ -8,6 +8,7 @@ public class Event extends Task {
 
     /**
      * Constructor to create an instance of Event.
+     *
      * @param description description of the task.
      * @param at date/time of the occurrence of the Event.
      */

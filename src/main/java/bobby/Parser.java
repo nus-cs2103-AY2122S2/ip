@@ -23,6 +23,7 @@ public class Parser {
     /**
      * Converts user input into commands, passes the commands to TaskList
      * to be executed, or terminates the Bobby program.
+     *
      * @param tasks TaskList that handles the execution of commands.
      * @param userInput user input to be parsed.
      */
@@ -87,7 +88,7 @@ public class Parser {
         } catch (BobbyException e) {
             result = e.toString();
         }
-        assert !result.equals(null): "result uninitialized";
+        assert !result.equals(null) : "result uninitialized";
         return result;
     }
 }

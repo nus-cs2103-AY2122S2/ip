@@ -75,4 +75,8 @@ public class Ui {
     public static String printUndoError() {
         return "Bobby cannot Undo any further.";
     }
+
+    public static String printNoTasksFound() {
+        return "Bobby could not find any matching tasks.";
+    }
 }

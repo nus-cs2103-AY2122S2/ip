@@ -2,17 +2,15 @@ package bobby;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a state of the program at any point in time. In current
+ * implementation, State is represented by the arraylist of tasks.
+ */
 public class State {
     private ArrayList<Task> taskArray;
-    private int stateIndex;
 
-    public State (ArrayList<Task> taskArray, int stateIndex) {
+    public State (ArrayList<Task> taskArray) {
         this.taskArray = taskArray;
-        this.stateIndex = stateIndex;
-    }
-
-    public int getStateIndex() {
-        return stateIndex;
     }
 
     public ArrayList<Task> loadState() {
