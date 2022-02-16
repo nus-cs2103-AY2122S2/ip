@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param description - description of the task
      * @param dayAndTime - The date of the task in this format "yyyy-mm-dd"
      */
-    Event (String description, String dayAndTime)  throws DateTimeException {
+    Event (String description, String dayAndTime) throws DateTimeException {
         super(description);
         this.dayAndTime = LocalDate.parse(dayAndTime);
     }

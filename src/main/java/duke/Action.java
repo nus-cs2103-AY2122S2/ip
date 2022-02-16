@@ -13,12 +13,12 @@ public class Action {
      * greets the user
      */
     public static void greet() {
-        String logo  = " ____        _        \n"
+        String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String greet = "Hello! I'm JiaMing aka\n"+ logo + "\nWhat can I do for you?\nTip: use 'help' for help\n";
+        String greet = "Hello! I'm JiaMing aka\n" + logo + "\nWhat can I do for you?\nTip: use 'help' for help\n";
         System.out.println(greet);
     }
 
@@ -46,12 +46,16 @@ public class Action {
      */
     public static void showList(ArrayList<Task> arrlst) {
         System.out.println("Here are the tasks in your list:");
-        for (int i =  0; i < arrlst.size(); i++) {
+        for (int i = 0; i < arrlst.size(); i++) {
             String output = String.format("%d.%s\n", i + 1, arrlst.get(i));
             System.out.println(output);
         }
     }
 
+    /**
+     *  Find keyword in every task inside task bank.
+     * @param keyword The word that is being searched.
+     */
     public static void find(String keyword) {
         boolean hasMatches = false;
         String output = "";

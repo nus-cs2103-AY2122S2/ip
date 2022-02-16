@@ -1,6 +1,3 @@
-//@@author SimJM-reused
-//Reused from https://github.com/garethkoh/ip/blob/master/src/main/java/Storage.java
-// with minor modifications
 
 package duke;
 
@@ -11,18 +8,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.nio.file.Path;
+import java.util.ArrayList;
+
 
 /**
  * Represents a storage that loads and save user data
  */
 public class Storage {
-
-    String currentDir = System.getProperty("user.dir");
-    Path currentPath = Path.of(currentDir + File.separator + "data");
-    private final File FOLDER_PATH = new File(currentPath.toString());
-    private final File DATA_PATH = new File(currentPath.toString() + File.separator + "duke.txt");
+    //@@author SimJM-reused
+    //Reused from https://github.com/garethkoh/ip/blob/master/src/main/java/Storage.java
+    // with minor modifications
+    private String currentDir = System.getProperty("user.dir");
+    private Path currentPath = Path.of(currentDir + File.separator + "data");
+    private final File folderPath = new File(currentPath.toString());
+    private final File dataPath = new File(currentPath.toString() + File.separator + "duke.txt");
 
     /**
      * Constructor for a Storage object
@@ -36,17 +36,17 @@ public class Storage {
     public void readFile() {
         ArrayList<Task> toDoList = new ArrayList<>();
         try {
-            if (FOLDER_PATH.mkdir()) {
+            if (folderPath.mkdir()) {
                 System.out.println("Folder is created!");
             } else {
                 System.out.println("Folder already exists.");
             }
 
-            if (DATA_PATH.createNewFile()) {
+            if (dataPath.createNewFile()) {
                 System.out.println("File is created!");
             } else {
                 System.out.println("File already exists.");
-                FileInputStream reader = new FileInputStream(DATA_PATH);
+                FileInputStream reader = new FileInputStream(dataPath);
                 ObjectInputStream listInput = new ObjectInputStream(reader);
                 try {
                     toDoList = (ArrayList<Task>) listInput.readObject();
@@ -63,15 +63,12 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
-
     /**
      * Save the users tasklist to file
      */
     public void writeToFile() {
         try {
-//            FileWriter fw = new FileWriter("data.txt",false);
-            FileOutputStream writer = new FileOutputStream(DATA_PATH);
+            FileOutputStream writer = new FileOutputStream(dataPath);
             ObjectOutputStream saveList = new ObjectOutputStream(writer);
             saveList.writeObject(TaskBank.getBank());
             saveList.close();
@@ -82,7 +79,5 @@ public class Storage {
             System.out.println("unable to write file");
         }
     }
-
+    //@@author
 }
-
-//@@author

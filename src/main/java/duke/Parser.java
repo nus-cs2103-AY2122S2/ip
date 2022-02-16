@@ -14,7 +14,7 @@ public class Parser {
      * @return A String that describes the command
      */
     public String parse(String input) {
-        String DASH = "____________________________________________________________";
+        String dash = "____________________________________________________________";
         String[] inputArr = input.split(" ");
         String output = "";
         String command = inputArr[0];
@@ -26,7 +26,7 @@ public class Parser {
             break;
         case "bye":
             Action.bye();
-            System.out.println(DASH);
+            System.out.println(dash);
             break;
         case "mark":
             try {
@@ -88,7 +88,6 @@ public class Parser {
                 } else {
                     remainingWordsEvent = remainingWordsEvent + " " + inputArr[i];
                 }
-<<<<<<< HEAD
             }
             Event e = new Event(remainingWordsEvent, dayAndTime);
             taskList.add(e);
@@ -121,29 +120,12 @@ public class Parser {
                     + "unmark <input task number> - to mark task as not done\n"
                     + "delete <input task number> - to delete task from tasks\n";
             break;
+        case "find":
+            Action.find(inputArr[1]);
+            break;
         default:
             output = "invalid command! Use 'help' for help";
-=======
-                break;
-            case "help":
-                output = "Here are all the commands available:\n"
-                        + "list - to list out all the task\n"
-                        + "bye - to end program\n"
-                        + "todo <input something you want to do> - to add something you want to tasks\n"
-                        + "deadline <input what is going be due> /by <input date> - to add a deadline to tasks\n"
-                        + "event <input event description> /at <input date>\n - to add an event to tasks"
-                        + "mark <input task number> - to mark task as done\n"
-                        + "unmark <input task number> - to mark task as not done\n"
-                        + "delete <input task number> - to delete task from tasks\n";
-                break;
-            case "find":
-                Action.find(inputArr[1]);
-                break;
-            default:
-                output = "invalid command! Use 'help' for help";
->>>>>>> branch-Level-9
         }
-
         return output;
     }
 }

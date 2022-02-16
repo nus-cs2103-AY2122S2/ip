@@ -14,7 +14,7 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Parser parser = new Parser();
-        while(true) {
+        while (true) {
             String displayMessage = parser.parse(input);
             System.out.println(displayMessage);
             if (input.equals("bye")) {
