@@ -172,7 +172,7 @@ Expected outcome:
     Now you have 5 task on the list.  
 ```
 
-###[Find task](https://tzhan98.github.io/ip/#features)
+[###Find task](https://tzhan98.github.io/ip/#features)
 Walle will search for task based on input keywords
 
 Example of usage:
