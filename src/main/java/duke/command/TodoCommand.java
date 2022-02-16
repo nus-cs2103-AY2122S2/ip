@@ -19,7 +19,7 @@ public class TodoCommand extends TaskCommand {
      *
      * <p>Calls superclass TaskCommand constructor.</p>
      *
-     * @param key
+     * @param key Key for todo command.
      */
     public TodoCommand(String key) {
         super(key);
@@ -35,7 +35,7 @@ public class TodoCommand extends TaskCommand {
      * @param taskList User tasklist.
      * @param storage Storage to store the updated tasklist.
      * @return New todo task added string description.
-     * @throws DukeException If no task descriptor
+     * @throws DukeException If no task descriptor.
      */
     @Override
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {

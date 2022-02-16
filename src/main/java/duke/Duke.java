@@ -109,7 +109,7 @@ public class Duke {
     }
 
     /**
-     * Main function of Duke.
+     * Starts and run Duke.
      *
      * @param args NIL
      */

@@ -22,7 +22,7 @@ public abstract class Command {
     }
 
     /**
-     * Abstract function for execution of a command behavior.
+     * Execution of a command behavior.
      *
      * @param input User input
      * @param taskList User tasklist.
@@ -33,7 +33,7 @@ public abstract class Command {
     public abstract String execute(String input, TaskList taskList, Storage storage) throws DukeException;
 
     /**
-     * Get description of the task after the command keyword.
+     * Gets description of the task after the command keyword.
      *
      * @param input The full user input.
      * @param emptyDescErrDesc No description print msg.
