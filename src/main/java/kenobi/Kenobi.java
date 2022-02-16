@@ -14,9 +14,9 @@ import java.util.Scanner;
  * The Kenobi program implements a chatbot that manages a list of tasks.
  */
 public class Kenobi {
-    TaskList tasks;
-    Storage storage;
-    Ui ui;
+    private TaskList tasks;
+    private Storage storage;
+    private Ui ui;
 
     /**
      * Constructs an instance of Kenobi with the specified save path for storage.

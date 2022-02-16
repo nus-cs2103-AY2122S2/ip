@@ -4,7 +4,7 @@ package kenobi.command;
  * The MarkCommand class encapsulates the command to mark a Task in a given TaskList as done.
  */
 public class MarkCommand extends Command {
-    int toMarkIndex;
+    private int toMarkIndex;
 
     /**
      * Constructs a MarkCommand with the given index.

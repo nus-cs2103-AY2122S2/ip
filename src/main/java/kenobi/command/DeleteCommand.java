@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
      * @param index
      */
     public DeleteCommand(int index) {
-        toDeleteIndex = index -1;
+        toDeleteIndex = index - 1;
     }
 
     /**

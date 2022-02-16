@@ -4,7 +4,7 @@ package kenobi.command;
  * The UnmarkCommand class encapsulates the command to mark a Task in a given TaskList as undone.
  */
 public class UnmarkCommand extends Command {
-    int toUnmarkIndex;
+    private int toUnmarkIndex;
 
     /**
      * Constructs an UnmarkCommand with the given index.
@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute() {
-        try{
+        try {
             return "I guess you weren't done with this one:\n" + tasks.markTaskAsUndone(toUnmarkIndex);
         } catch (IndexOutOfBoundsException e) {
             return "The archives contain no such task";

@@ -17,8 +17,8 @@ import java.util.Scanner;
  * The Storage class encapsulates the storage functionality of Kenobi.
  */
 public class Storage {
-    boolean isDirty;
-    Path savePath;
+    private boolean isDirty;
+    private Path savePath;
 
     /**
      * Constructs a new Storage with the specified save path.

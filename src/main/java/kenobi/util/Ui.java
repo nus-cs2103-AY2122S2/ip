@@ -40,8 +40,7 @@ public class Ui {
         String prefix = "    ";
         Scanner sc = new Scanner(line);
 
-        while (sc.hasNextLine())
-        {
+        while (sc.hasNextLine()) {
             pw.print(prefix);
             pw.println(sc.nextLine());
         }
