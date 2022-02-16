@@ -31,8 +31,9 @@ public class DialogBox extends HBox {
 
     /**
      * Constructs the DialogBox object.
+     *
      * @param text the text in the DialogBox.
-     * @param img the image in the DialogBox.
+     * @param img  the image in the DialogBox.
      */
     private DialogBox(String text, Image img) {
         try {
@@ -60,8 +61,9 @@ public class DialogBox extends HBox {
 
     /**
      * Gets the user dialog.
+     *
      * @param text the text in the DialogBox.
-     * @param img the image in the DialogBox.
+     * @param img  the image in the DialogBox.
      * @return the new DialogBox object.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -70,8 +72,9 @@ public class DialogBox extends HBox {
 
     /**
      * Gets the Aeromon dialog.
+     *
      * @param text the text in the DialogBox.
-     * @param img the image in the DialogBox.
+     * @param img  the image in the DialogBox.
      * @return the new DialogBox object.
      */
     public static DialogBox getAeromonDialog(String text, Image img) {

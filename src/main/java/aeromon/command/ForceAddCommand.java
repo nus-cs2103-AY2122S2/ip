@@ -32,29 +32,29 @@ public class ForceAddCommand extends AddCommand {
 
         String[] tokens = super.getTokens();
 
-        switch(super.getTaskType()) {
-            case TODO:
-                ToDo toDo = new ToDo(tokens[0], false);
+        switch (super.getTaskType()) {
+        case TODO:
+            ToDo toDo = new ToDo(tokens[0], false);
 
-                taskArrayList.add(toDo);
-                storage.saveFile(taskArrayList.getTasks());
-                return STARTING_MESSAGE + toDo + taskArrayList.getTasksStatus();
+            taskArrayList.add(toDo);
+            storage.saveFile(taskArrayList.getTasks());
+            return STARTING_MESSAGE + toDo + taskArrayList.getTasksStatus();
 
-            case DEADLINE:
-                assert tokens.length == 2 : "Wrong number of tokens";
-                Deadline deadline = new Deadline(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
+        case DEADLINE:
+            assert tokens.length == 2 : "Wrong number of tokens";
+            Deadline deadline = new Deadline(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
 
-                taskArrayList.add(deadline);
-                storage.saveFile(taskArrayList.getTasks());
-                return STARTING_MESSAGE + deadline + taskArrayList.getTasksStatus();
+            taskArrayList.add(deadline);
+            storage.saveFile(taskArrayList.getTasks());
+            return STARTING_MESSAGE + deadline + taskArrayList.getTasksStatus();
 
-            case EVENT:
-                assert tokens.length == 2 : "Wrong number of tokens";
-                Event event = new Event(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
+        case EVENT:
+            assert tokens.length == 2 : "Wrong number of tokens";
+            Event event = new Event(tokens[0].trim(), false, LocalDate.parse(tokens[1]));
 
-                taskArrayList.add(event);
-                storage.saveFile(taskArrayList.getTasks());
-                return STARTING_MESSAGE + event + taskArrayList.getTasksStatus();
+            taskArrayList.add(event);
+            storage.saveFile(taskArrayList.getTasks());
+            return STARTING_MESSAGE + event + taskArrayList.getTasksStatus();
 
         }
         return "Ohnoz I couldn't execute the command, tHerE weRE somE ErrORss!";

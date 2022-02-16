@@ -9,13 +9,14 @@ import java.util.ArrayList;
  */
 public class TaskArrayList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     private static final String NO_TASK_MESSAGE = "Nicely! No more tasks on the list! Good job! :)";
     private static final String TASK_MESSAGE = "You currently have %d tasks on the list >.< Jiayous";
 
     /**
      * Constructs the TaskArrayList object.
+     *
      * @param tasks the ArrayList with the task objects.
      */
     public TaskArrayList(ArrayList<Task> tasks) {
@@ -31,6 +32,7 @@ public class TaskArrayList {
 
     /**
      * Adds a Task to the current TaskArrayList.
+     *
      * @param task task to be added.
      */
     public void add(Task task) {
@@ -39,6 +41,7 @@ public class TaskArrayList {
 
     /**
      * Checks if a Task is already in the current TaskArrayList.
+     *
      * @param task task to be checked.
      * @return true if the Task exists, false otherwise.
      */
@@ -48,6 +51,7 @@ public class TaskArrayList {
 
     /**
      * Gets the task in the current TaskArrayList according to the index.
+     *
      * @param i the index of the Task object to retrieve.
      * @return the respective Task object.
      */
@@ -57,6 +61,7 @@ public class TaskArrayList {
 
     /**
      * Deletes the task in the current TaskArrayList according to the index.
+     *
      * @param i the index of the Task object to delete.
      * @return the deleted Task object.
      */
@@ -66,6 +71,7 @@ public class TaskArrayList {
 
     /**
      * Gets the ArrayList of Task objects.
+     *
      * @return the ArrayList of Task objects.
      */
     public ArrayList<Task> getTasks() {
@@ -74,6 +80,7 @@ public class TaskArrayList {
 
     /**
      * Gets the number of Tasks in the TaskArrayList.
+     *
      * @return the number of Tasks.
      */
     public int getSize() {
@@ -82,6 +89,7 @@ public class TaskArrayList {
 
     /**
      * Gets the TaskArrayList in the preset String format.
+     *
      * @return the Tasks in TaskArrayList in the String format.
      */
     public String getTaskList() {
@@ -97,6 +105,7 @@ public class TaskArrayList {
 
     /**
      * Gets the current TaskArrayList status.
+     *
      * @return the String that shows the number of tasks in the list.
      */
     public String getTasksStatus() {
@@ -109,6 +118,7 @@ public class TaskArrayList {
 
     /**
      * Checks if the current TaskArrayList is empty.
+     *
      * @return true if the TaskArrayList is empty, false otherwise.
      */
     public boolean isEmpty() {

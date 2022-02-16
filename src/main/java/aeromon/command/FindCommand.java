@@ -14,10 +14,11 @@ public class FindCommand extends Command {
     private static final String NOT_FOUND_MESSAGE = "N-n-n-n-no matching tasks found :( \n";
     private static final String ENDING_MESSAGE = "Phew, that was a good search, remember to complete your tasks! \n";
 
-    private String searchString;
+    private final String searchString;
 
     /**
      * Constructs the FindCommand object.
+     *
      * @param searchString the String to search for.
      */
     public FindCommand(String searchString) {

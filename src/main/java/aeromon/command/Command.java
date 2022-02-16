@@ -11,17 +11,10 @@ public abstract class Command {
 
     /**
      * Executes the command itself.
-     * @param taskArrayList  the TaskArrayList of Aeromon.
-     * @param storage the Storage of Aeromon.
+     *
+     * @param taskArrayList the TaskArrayList of Aeromon.
+     * @param storage       the Storage of Aeromon.
      * @throws AeromonException when an error occurs during execution.
      */
     public abstract String execute(TaskArrayList taskArrayList, Storage storage) throws AeromonException;
-
-    /**
-     * Checks if the command is a ByeCommand.
-     * @return if the command is an instance of ByeCommand.
-     */
-    public boolean isExit() {
-        return this instanceof ByeCommand;
-    }
 }

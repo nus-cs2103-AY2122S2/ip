@@ -9,7 +9,7 @@
     <children>
         <Text fx:id="textBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="RIGHT" wrappingWidth="250.0">
             <font>
-                <Font name="SansSerif" size="12.0" />
+                <Font name="SansSerif" size="14.0" />
             </font>
             <HBox.margin>
                 <Insets left="16.0" right="16.0" />

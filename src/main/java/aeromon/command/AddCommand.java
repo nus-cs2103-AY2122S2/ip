@@ -14,20 +14,21 @@ import java.time.LocalDate;
  */
 public class AddCommand extends Command {
 
-    private TaskType taskType;
-    private String[] tokens;
+    private final TaskType taskType;
+    private final String[] tokens;
 
     private static final String STARTING_MESSAGE = "Nicely! I've added for you: \n";
     private static final String DUPLICATE_MESSAGE = "Me thinks the task already exists, I'm not going to add it" +
             "because I don't want you to do the same task twice! Twice! \n" +
             "To add the task regardless, re-enter the command with a 'f' in front, e.g. ftodo outing";
 
-    public enum TaskType { TODO, DEADLINE, EVENT };
+    public enum TaskType {TODO, DEADLINE, EVENT}
 
     /**
      * Constructs the AddCommand object.
+     *
      * @param taskType the type of the Task to be added.
-     * @param tokens a String array that stores information of the task to be added.
+     * @param tokens   a String array that stores information of the task to be added.
      */
     public AddCommand(TaskType taskType, String[] tokens) {
         this.taskType = taskType;
@@ -37,7 +38,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskArrayList taskArrayList, Storage storage) throws AeromonException {
 
-        switch(taskType) {
+        switch (taskType) {
         case TODO:
             ToDo toDo = new ToDo(tokens[0], false);
 
@@ -79,12 +80,17 @@ public class AddCommand extends Command {
 
     /**
      * Gets the task type.
+     *
      * @return the task type.
      */
     public TaskType getTaskType() {
         return this.taskType;
     }
 
+    /**
+     * Gets the tokens.
+     * @return the tokens.
+     */
     public String[] getTokens() {
         return this.tokens;
     }

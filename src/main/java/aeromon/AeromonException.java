@@ -7,6 +7,7 @@ public class AeromonException extends Exception {
 
     /**
      * Constructs the AeromonException object.
+     *
      * @param message the error messgae.
      */
     public AeromonException(String message) {

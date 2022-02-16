@@ -1,12 +1,13 @@
 package aeromon;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 //@@author cashewnade-reused
 //Reused from https://se-education.org/guides/tutorials/javaFx.html
@@ -26,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Aeromon aeromon;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
-    private final Image aeromonImage = new Image(this.getClass().getResourceAsStream("/images/Aeromon.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User-modified.png"));
+    private final Image aeromonImage = new Image(this.getClass().getResourceAsStream("/images/Aeromon-modified.png"));
 
     @FXML
     public void initialize() {
@@ -36,10 +37,12 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Sets the Aeromon object.
+     *
      * @param aeromon the Aeromon object.
      */
     public void setAeromon(Aeromon aeromon) {
         this.aeromon = aeromon;
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.rgb(255, 245, 230), CornerRadii.EMPTY, Insets.EMPTY)));
         dialogContainer.getChildren().add(DialogBox.getAeromonDialog(aeromon.start(), aeromonImage));
     }
 

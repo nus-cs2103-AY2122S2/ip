@@ -15,6 +15,7 @@ public class Task {
 
     /**
      * Constructs the Task object.
+     *
      * @param description the task name.
      */
     public Task(String description, boolean isDone) {
@@ -24,6 +25,7 @@ public class Task {
 
     /**
      * Returns the status icon of the respective task.
+     *
      * @return "X" if the task is done, " " otherwise
      */
     public String getStatusIcon() {
@@ -46,6 +48,7 @@ public class Task {
 
     /**
      * Gets the description of the task.
+     *
      * @return the description.
      */
     public String getDescription() {
@@ -59,6 +62,7 @@ public class Task {
 
     /**
      * Converts the Task object to the output format that is saved in the file.
+     *
      * @return the output String.
      */
     public String toOutputFormat() {

@@ -18,10 +18,11 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private File localTasks;
+    private final File localTasks;
 
     /**
      * Constructs the Storage object.
+     *
      * @param fileLocation the path of the file.
      */
     public Storage(String fileLocation) {
@@ -30,6 +31,7 @@ public class Storage {
 
     /**
      * Scans and returns the list of Tasks retrieved from the file.
+     *
      * @return the ArrayList of Tasks in the file.
      * @throws AeromonException when an error occurs when reading the file.
      */
@@ -96,6 +98,7 @@ public class Storage {
 
     /**
      * Saves the Tasks into the file.
+     *
      * @param tasks the tasks to be saved.
      */
     public void saveFile(ArrayList<Task> tasks) {

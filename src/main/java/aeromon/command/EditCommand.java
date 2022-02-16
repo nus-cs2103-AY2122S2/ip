@@ -10,19 +10,20 @@ import aeromon.task.Task;
  */
 public class EditCommand extends Command {
 
-    private EditType editType;
-    private int taskNum;
+    private final EditType editType;
+    private final int taskNum;
 
     private static final String MARK_MESSAGE = "Naisu! You've completed: \n";
     private static final String UNMARK_MESSAGE = "OI! What happened to completing: \n";
     private static final String DELETE_MESSAGE = "Okies! I have deleted: \n";
 
-    public enum EditType { MARK, UNMARK, DELETE}
+    public enum EditType {MARK, UNMARK, DELETE}
 
     /**
      * Constructs the EditCommand object.
+     *
      * @param editType the type of the Edit command, which is provided by the EditType enum.
-     * @param taskNum the task number to be edited.
+     * @param taskNum  the task number to be edited.
      */
     public EditCommand(EditType editType, int taskNum) {
         this.editType = editType;

@@ -11,6 +11,7 @@ public class CommandManager {
 
     /**
      * Reads the command input and returns the relevant Command object.
+     *
      * @param fullCommand the unprocessed command input.
      * @return command object to be executed.
      * @throws AeromonException when an error occurs during the reading process.
@@ -22,71 +23,72 @@ public class CommandManager {
         String command = parameters[0];
 
         switch (command) {
-        case "bye":
-            return new ByeCommand();
+            case "bye":
+                return new ByeCommand();
 
-        case "list":
-            return new ListCommand();
+            case "list":
+                return new ListCommand();
 
-        case "mark": {
-            int taskNum = getTaskNum(parameters[1]);
-            return new EditCommand(EditCommand.EditType.MARK, taskNum);
-        }
+            case "mark": {
+                int taskNum = getTaskNum(parameters[1]);
+                return new EditCommand(EditCommand.EditType.MARK, taskNum);
+            }
 
-        case "unmark": {
-            int taskNum = getTaskNum(parameters[1]);
-            return new EditCommand(EditCommand.EditType.UNMARK, taskNum);
-        }
+            case "unmark": {
+                int taskNum = getTaskNum(parameters[1]);
+                return new EditCommand(EditCommand.EditType.UNMARK, taskNum);
+            }
 
-        case "delete": {
-            int taskNum = getTaskNum(parameters[1]);
-            return new EditCommand(EditCommand.EditType.DELETE, taskNum);
-        }
+            case "delete": {
+                int taskNum = getTaskNum(parameters[1]);
+                return new EditCommand(EditCommand.EditType.DELETE, taskNum);
+            }
 
-        case "todo": {
-            return new AddCommand(AddCommand.TaskType.TODO, new String[] { checkDescription("Todo", parameters[1]) });
-        }
+            case "todo": {
+                return new AddCommand(AddCommand.TaskType.TODO, new String[]{checkDescription("Todo", parameters[1])});
+            }
 
-        case "deadline": {
-            String deadlineDescription = checkDescription("Deadline", parameters[1]);
-            String[] deadlineTokens = deadlineDescription.split(" /by ");
-            return new AddCommand(AddCommand.TaskType.DEADLINE, deadlineTokens);
-        }
+            case "deadline": {
+                String deadlineDescription = checkDescription("Deadline", parameters[1]);
+                String[] deadlineTokens = deadlineDescription.split(" /by ");
+                return new AddCommand(AddCommand.TaskType.DEADLINE, deadlineTokens);
+            }
 
-        case "event": {
-            String eventDescription = checkDescription("Event", parameters[1]);
-            String[] eventTokens = eventDescription.split(" /at ");
-            return new AddCommand(AddCommand.TaskType.EVENT, eventTokens);
-        }
+            case "event": {
+                String eventDescription = checkDescription("Event", parameters[1]);
+                String[] eventTokens = eventDescription.split(" /at ");
+                return new AddCommand(AddCommand.TaskType.EVENT, eventTokens);
+            }
 
-        case "ftodo": {
-            return new ForceAddCommand(AddCommand.TaskType.TODO, new String[] { checkDescription("Todo", parameters[1]) });
-        }
+            case "ftodo": {
+                return new ForceAddCommand(AddCommand.TaskType.TODO, new String[]{checkDescription("Todo", parameters[1])});
+            }
 
-        case "fdeadline": {
-            String deadlineDescription = checkDescription("Deadline", parameters[1]);
-            String[] deadlineTokens = deadlineDescription.split(" /by ");
-            return new ForceAddCommand(AddCommand.TaskType.DEADLINE, deadlineTokens);
-        }
+            case "fdeadline": {
+                String deadlineDescription = checkDescription("Deadline", parameters[1]);
+                String[] deadlineTokens = deadlineDescription.split(" /by ");
+                return new ForceAddCommand(AddCommand.TaskType.DEADLINE, deadlineTokens);
+            }
 
-        case "fevent": {
-            String eventDescription = checkDescription("Event", parameters[1]);
-            String[] eventTokens = eventDescription.split(" /at ");
-            return new ForceAddCommand(AddCommand.TaskType.EVENT, eventTokens);
-        }
+            case "fevent": {
+                String eventDescription = checkDescription("Event", parameters[1]);
+                String[] eventTokens = eventDescription.split(" /at ");
+                return new ForceAddCommand(AddCommand.TaskType.EVENT, eventTokens);
+            }
 
-        case "find": {
-            return new FindCommand(parameters[1]);
-        }
+            case "find": {
+                return new FindCommand(parameters[1]);
+            }
 
-        default:
-            throw new AeromonException("Nani? Me no understand what you say .-.");
+            default:
+                throw new AeromonException("Nani? Me no understand what you say .-.");
         }
     }
 
     /**
      * Checks if the description of the task is valid.
-     * @param taskType the type of the Task object.
+     *
+     * @param taskType    the type of the Task object.
      * @param description the description of the Task object, for Deadline and Event Tasks,
      *                    the method also checks if the date format is valid.
      * @return the description of the Task.
@@ -123,6 +125,7 @@ public class CommandManager {
 
     /**
      * Gets the task number from the command.
+     *
      * @param string The command to read from.
      * @return The task number.
      * @throws AeromonException when the task number is an invalid number.

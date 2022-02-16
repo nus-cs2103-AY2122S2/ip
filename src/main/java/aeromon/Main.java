@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Aeromon aeromon = new Aeromon();
+    private final Aeromon aeromon = new Aeromon();
 
     @Override
     public void start(Stage stage) {

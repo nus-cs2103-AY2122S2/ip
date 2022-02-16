@@ -33,6 +33,7 @@ public class Aeromon {
 
     /**
      * Starts the Aeromon bot by greeting the user with the greeting message.
+     *
      * @return the greeting message in String.
      */
     public String start() {
@@ -41,6 +42,7 @@ public class Aeromon {
 
     /**
      * Gets the response from the CommandManager.
+     *
      * @param input User input.
      * @return The response String.
      */
