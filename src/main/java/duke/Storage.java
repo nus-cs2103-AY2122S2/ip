@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -46,6 +47,16 @@ public class Storage {
                 }
             }
             return list;
+    }
+
+    boolean store(TaskList list) throws IOException {
+        FileWriter fw = new FileWriter("prince.txt");
+        for (Integer i = 0; i < list.size(); i++) {
+            fw.write(list.get(i).toString());
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
+        return true;
     }
 
 }
