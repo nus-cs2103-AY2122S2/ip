@@ -7,7 +7,7 @@
 3. Copy the file to the folder you want to use as the home folder for your McBot.
 4. Double-click the file to start the app. 
 5. Type the command in the command box and press Enter to execute it.
-6. Refer to the [Features](#Features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ## Features
 
@@ -32,7 +32,7 @@ Mark your task as complete! (Unmarking is possible too).
 Can't find your task in your endless list? Use the find feature! 
 
 ## Usage
-:information_source: Notes about command format:
+ℹ️ Notes about command format:
 - Words in `[Square Brackets]` are parameters that must be given.
 - Items in `(Round Brackets)` are optional.
 
@@ -95,3 +95,5 @@ Example of usage:
 | deadline | adds a deadline task<br/>eg. `deadline Task A /by 12/03/2022`       |
 | event    | adds an event task<br/>eg. `event Task B /at 15/03/2022 1330`       |
 | find     | finds the task that contains the same name<br/>eg. `find That Task` |
+
+[Back to top](#user-guide)
