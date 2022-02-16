@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
@@ -63,6 +64,23 @@ public class TaskList {
     }
 
     /**
+     * Filters task list based on the task type.
+     *
+     * @param taskType The class type in the task list
+     * @return A filtered task list based on the supplied task type.
+     */
+    public ArrayList<? extends Sortable> filterTasks(TaskType taskType) throws DukeException {
+        ArrayList<Sortable> filteredTask = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.hasSameTaskType(taskType)) {
+                // Only sortable task will make it through this block
+                filteredTask.add((Sortable) task);
+            }
+        }
+        return filteredTask;
+    }
+
+    /**
      * Deletes a task object from the task list based on the id supplied.
      *
      * @param taskId The id of the targeted task.
@@ -85,6 +103,33 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e.getMessage());
         }
+    }
+
+    /**
+     * Filters task list based on the task type.
+     *
+     * @param taskType The class type in the task list
+     * @return A filtered task list based on the supplied task type.
+     */
+    public TaskList sortTasks(TaskType taskType) throws DukeException {
+        ArrayList<? extends Sortable> filteredTasks = this.filterTasks(taskType);
+        if (taskType == TaskType.DEADLINE) {
+            @SuppressWarnings("unchecked")
+            ArrayList<Deadline> deadlineTasks = (ArrayList<Deadline>) filteredTasks;
+            return new TaskList(deadlineTasks.stream()
+                .sorted(Comparator.comparing(Deadline :: getLocalDateTime))
+                .collect(Collectors.toCollection(ArrayList::new)));
+        }
+
+        if (taskType == TaskType.EVENT) {
+            @SuppressWarnings("unchecked")
+            ArrayList<Event> eventTasks = (ArrayList<Event>) filteredTasks;
+
+            return new TaskList(eventTasks.stream()
+                .sorted(Comparator.comparing(Event :: getLocalDateTime))
+                .collect(Collectors.toCollection(ArrayList::new)));
+        }
+        return new TaskList();
     }
 
     public int getSize() {
