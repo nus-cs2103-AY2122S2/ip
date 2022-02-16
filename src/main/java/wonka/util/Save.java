@@ -77,7 +77,7 @@ public class Save {
 
                 Type typeEnum = Type.valueOf(type.toUpperCase());
 
-                if (type.equals("D") || type.equals("E")) {
+                if (type.equals("D") || type.equals("E") || type.equals("F")) {
                     String date = tokens[3];
                     addToList(typeEnum, status, name, date);
                 } else {
@@ -141,12 +141,14 @@ public class Save {
                 inputsToBeProcessed.add("mark " + this.count);
             }
             break;
-        default:
+        case F:
             inputsToBeProcessed.add("fixed " + name + " /needs " + date);
             this.count++;
             if (status.equals("1")) {
                 inputsToBeProcessed.add("mark " + this.count);
             }
+            break;
+        default:
         }
     }
 
