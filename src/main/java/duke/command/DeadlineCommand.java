@@ -18,6 +18,8 @@ import duke.util.Storage;
  * to the task list. </p>
  */
 public class DeadlineCommand extends TaskCommand {
+    public static final String DEADLINE_COMMAND = "deadline";
+
     private static final String TASK_FORMAT_WRONG =
             "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
     private static final String DATE_FORMAT_WRONG = "Date format maybe wrong. yy-mm-dd";
@@ -26,7 +28,6 @@ public class DeadlineCommand extends TaskCommand {
     private static final String INPUT_TIME_FORMAT = "HHmm";
     private static final String DEFAULT_TIME = "2359";
 
-    public static final String DEADLINE_COMMAND = "deadline";
     /**
      * Constructor for command to init values.
      *

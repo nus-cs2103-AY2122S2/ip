@@ -9,14 +9,14 @@ import duke.util.Storage;
  * Command to edit the task to be either marked or unmarked.
  */
 public class EditTaskMarkCommand extends Command {
+    public static final String MARK_COMMAND = "mark";
+    public static final String UNMARK_COMMAND = "unmark";
+
     private static final String NO_INPUT = "You need to put the task number you want to delete!";
     private static final String INVALID_INPUT = "Invalid input, you need to give a number/integer";
     private static final String MARK_TASK = "Nice I've marked this task as done: \n";
     private static final String UNMARK_TASK = "Alright, I've unmarked the task: \n ";
     private final boolean isMarkDoneTask;
-
-    public static final String MARK_COMMAND = "mark";
-    public static final String UNMARK_COMMAND = "unmark";
 
     /**
      * Edit Task Mark Command constructor.

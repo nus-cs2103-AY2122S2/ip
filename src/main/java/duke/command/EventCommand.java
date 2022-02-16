@@ -18,6 +18,8 @@ import duke.util.Storage;
  * to the task list.</p>
  */
 public class EventCommand extends TaskCommand {
+    public static final String EVENT_COMMAND = "event";
+
     private static final String TASK_FORMAT_WRONG =
             "Did you remember to put in the date after /at? Or did u remember to add /at?";
     private static final String DATE_FORMAT_WRONG = "duke.task.Event Date format is wrong. yy-mm-dd";
@@ -25,8 +27,6 @@ public class EventCommand extends TaskCommand {
 
     private static final String INPUT_TIME_FORMAT = "HHmm";
     private static final String DEFAULT_TIME = "2359";
-
-    public static final String EVENT_COMMAND = "event";
 
     /**
      * Constructor for event command to init values.

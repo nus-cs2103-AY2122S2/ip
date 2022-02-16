@@ -8,10 +8,10 @@ import duke.util.Storage;
  * Command to find a task by searching for a keyword.
  */
 public class FindCommand extends Command {
+    public static final String FIND_COMMAND = "find";
+
     private static final String NO_INPUT =
             "I can't find the tasks you want if YOU DON'T TELL ME WHAT TO FIND. GIVE ME KEYWORDS!!";
-
-    public static final String FIND_COMMAND = "find";
 
     /**
      * Constructor for find command to init values.

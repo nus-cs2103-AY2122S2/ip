@@ -8,9 +8,9 @@ import duke.util.Storage;
  * List command for Duke to list out all current tasks.
  */
 public class ListCommand extends Command {
-    private static final String LIST_STATEMENT = "Here are the tasks in your list: \n";
-
     public static final String LIST_COMMAND = "list";
+
+    private static final String LIST_STATEMENT = "Here are the tasks in your list: \n";
 
     /**
      * List Command constructor.

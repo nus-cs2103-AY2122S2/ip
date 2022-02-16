@@ -8,8 +8,9 @@ import duke.util.Storage;
  * Bye command for Duke.
  */
 public class ByeCommand extends Command {
-    private static final String BYE = "See ya!";
     public static final String BYE_COMMAND = "bye";
+
+    private static final String BYE = "See ya!";
 
     /**
      * Bye Command constructor.

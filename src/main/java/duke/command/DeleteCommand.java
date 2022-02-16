@@ -9,10 +9,10 @@ import duke.util.Storage;
  * Command to delete a task from a task list.
  */
 public class DeleteCommand extends Command {
+    public static final String DELETE_COMMAND = "delete";
+
     private static final String NO_INPUT = "You need to put the task number you want to delete!";
     private static final String INVALID_INPUT = "Invalid input, you need to give a number/integer";
-
-    public static final String DELETE_COMMAND = "delete";
 
     /**
      * Delete Task Command constructor.
