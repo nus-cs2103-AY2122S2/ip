@@ -13,6 +13,8 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    private boolean isExit = false;
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +25,10 @@ public class Duke {
             ui.displayLoadError();
             tasks = new TaskList();
         }
+    }
+
+    public boolean getIsExit() {
+        return this.isExit;
     }
 
     /**
@@ -245,6 +251,21 @@ public class Duke {
     }
 
     /**
+     * Exit application and saves tasks locally
+     *
+     * @return Returns the exit message to user
+     */
+    public String runExitCommand() {
+        try {
+            storage.saveListOnDisk(tasks);
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+        this.isExit = true;
+        return Ui.displayExitMsg();
+    }
+
+    /**
      * Runs Level 5, 6 & 7 version of the app, Exception handling,
      * Hard disk storage
      *
@@ -282,13 +303,7 @@ public class Duke {
             return runTagCommand(input);
 
         case BYE:
-            try {
-                storage.saveListOnDisk(tasks);
-            } catch (IOException err) {
-                System.out.println("Error occurred while trying to save list data to disk");
-                err.printStackTrace();
-            }
-            return Ui.displayExitMsg();
+            return runExitCommand();
 
         case ERROR:
             return Ui.displayInvalidCommandError();
