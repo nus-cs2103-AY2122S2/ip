@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/gude.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duckling.png"));
-    private Image sadDukeImage = new Image(this.getClass().getResourceAsStream("/images/SadDuck.gif"));
+    private Image sadDukeImage = new Image(this.getClass().getResourceAsStream("/images/SadDuck.png"));
 
     private String welcome = "Hello! I'm Ducky! :)\n" + "I am a task manager.\n"
                 + "Type 'help' for more information on the commands you can give me.\n"
