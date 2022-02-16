@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Aeromon aeromon;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private final Image aeromonImage = new Image(this.getClass().getResourceAsStream("/images/Aeromon.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
+    private final Image aeromonImage = new Image(this.getClass().getResourceAsStream("/images/Aeromon.jpg"));
 
     @FXML
     public void initialize() {
@@ -40,6 +40,7 @@ public class MainWindow extends AnchorPane {
      */
     public void setAeromon(Aeromon aeromon) {
         this.aeromon = aeromon;
+        dialogContainer.getChildren().add(DialogBox.getAeromonDialog(aeromon.start(), aeromonImage));
     }
 
     /**

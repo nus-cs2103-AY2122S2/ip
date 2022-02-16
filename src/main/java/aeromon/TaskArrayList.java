@@ -107,6 +107,10 @@ public class TaskArrayList {
         }
     }
 
+    /**
+     * Checks if the current TaskArrayList is empty.
+     * @return true if the TaskArrayList is empty, false otherwise.
+     */
     public boolean isEmpty() {
         return this.tasks.isEmpty();
     }

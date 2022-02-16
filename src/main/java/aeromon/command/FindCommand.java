@@ -10,8 +10,8 @@ import aeromon.task.Task;
  */
 public class FindCommand extends Command {
 
-    private static final String FOUND_MESSAGE = "N-n-n-n-no matching tasks found :( \n";
-    private static final String NOT_FOUND_MESSAGE = "M-m-m-m-matching tasks found: \n";
+    private static final String FOUND_MESSAGE = "M-m-m-m-matching tasks found: \n";
+    private static final String NOT_FOUND_MESSAGE = "N-n-n-n-no matching tasks found :( \n";
     private static final String ENDING_MESSAGE = "Phew, that was a good search, remember to complete your tasks! \n";
 
     private String searchString;

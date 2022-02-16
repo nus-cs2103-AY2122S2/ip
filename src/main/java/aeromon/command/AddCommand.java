@@ -47,7 +47,7 @@ public class AddCommand extends Command {
 
             taskArrayList.add(toDo);
             storage.saveFile(taskArrayList.getTasks());
-            return STARTING_MESSAGE + toDo + taskArrayList.getTasksStatus();
+            return STARTING_MESSAGE + toDo + "\n" + taskArrayList.getTasksStatus();
 
         case DEADLINE:
             assert tokens.length == 2 : "Wrong number of tokens";
@@ -59,7 +59,7 @@ public class AddCommand extends Command {
 
             taskArrayList.add(deadline);
             storage.saveFile(taskArrayList.getTasks());
-            return STARTING_MESSAGE + deadline + taskArrayList.getTasksStatus();
+            return STARTING_MESSAGE + deadline + "\n" + taskArrayList.getTasksStatus();
 
         case EVENT:
             assert tokens.length == 2 : "Wrong number of tokens";
@@ -71,7 +71,7 @@ public class AddCommand extends Command {
 
             taskArrayList.add(event);
             storage.saveFile(taskArrayList.getTasks());
-            return STARTING_MESSAGE + event + taskArrayList.getTasksStatus();
+            return STARTING_MESSAGE + event + "\n" + taskArrayList.getTasksStatus();
 
         }
         return "Ohnoz I couldn't execute the command, tHerE weRE somE ErrORss!";
