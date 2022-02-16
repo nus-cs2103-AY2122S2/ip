@@ -10,7 +10,7 @@ import duke.task.Todo;
 
 public class TaskTest {
     /**
-     * Tests Task classes getTypeAsPrefix() method.
+     * Tests Task classes' getTypeAsPrefix() method.
      */
     @Test
     public void testGetTypeAsPrefix() {
@@ -22,7 +22,7 @@ public class TaskTest {
     }
 
     /**
-     * Tests Task classes toString() method.
+     * Tests Task classes' toString() method.
      */
     @Test
     public void testToString() {
@@ -37,7 +37,7 @@ public class TaskTest {
     }
 
     /**
-     * Tests Task classes formatForFile() method.
+     * Tests Task classes' formatForFile() method.
      */
     @Test
     public void testFormatForFile() {
