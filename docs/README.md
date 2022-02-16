@@ -78,7 +78,7 @@ todo
 
 <br />
 
-### `deadline` - Adds a task of type todo into the list
+### `deadline` - Adds a task of type deadline into the list
 
 Calling this command adds a task of type deadline to the list of tasks.
 
@@ -117,7 +117,7 @@ deadline report /by 22/2/2022 2pm
 
 <br />
 
-### `event` - Adds a task of type todo into the list
+### `event` - Adds a task of type event into the list
 
 Calling this command adds a task of type event to the list of tasks.
 
