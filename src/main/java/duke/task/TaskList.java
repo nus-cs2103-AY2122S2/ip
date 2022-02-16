@@ -32,6 +32,12 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Filters task list based on the supplied keywords.
+     *
+     * @param keywords The keywords to search for in the task list
+     * @return A filtered task list based on the supplied keywords.
+     */
     public TaskList filterTasks(String keywords) {
         return new TaskList(this.tasks.stream().filter(task -> task.hasKeywords(keywords))
                 .collect(Collectors.toCollection(ArrayList::new)));
