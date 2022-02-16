@@ -23,6 +23,7 @@ public class Ui {
                 + "deadline {task description} /by {DATE}\n"
                 + "event {task description} /at {DATE}\n"
                 + "mark {Task ID}\n"
+                + "unmark {Task ID}\n"
                 + "find {keyword}\n"
                 + "delete {Task ID}\n"
                 + "add-tag {tag description}\n"

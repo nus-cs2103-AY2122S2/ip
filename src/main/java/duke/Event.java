@@ -38,9 +38,9 @@ public class Event extends Task {
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern(customPattern);
         String tempDate = customFormat.format(this.date);
         if (super.isDone) {
-            str += "[X] " + super.desc + " (by: " + tempDate + ")";
+            str += "[X] " + super.desc + " (at: " + tempDate + ")";
         } else {
-            str += "[ ] " + super.desc + " (by: " + tempDate + ")";
+            str += "[ ] " + super.desc + " (at: " + tempDate + ")";
         }
         for (Tag tag: tags) {
             str = str + " " + tag;
