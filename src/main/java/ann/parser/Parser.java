@@ -74,11 +74,11 @@ public class Parser {
             String taskType = input.split(" ")[1].toLowerCase();
             switch (taskType) {
             case "todo":
-                return handleTodo(input.substring(6));
+                return handleTodo(input.substring(5));
             case "event":
-                return handleEvent(input.substring(7));
+                return handleEvent(input.substring(6));
             case "deadline":
-                return handleDeadline(input.substring(10));
+                return handleDeadline(input.substring(9));
             default:
                 return new IncorrectCommand("Oops! Please enter a valid task type!");
             }

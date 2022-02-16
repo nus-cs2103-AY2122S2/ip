@@ -7,9 +7,6 @@ import ann.gui.Ui;
 import ann.parser.Parser;
 import ann.storage.Storage;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -55,7 +52,7 @@ public class AnnBot extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         ui.start(stage, this);
     }
 
@@ -67,8 +64,7 @@ public class AnnBot extends Application {
     public String getResponse(String input) {
         Command command = Parser.parse(input);
         command.setTaskList(tasks);
-        executeCommand(command);
-        return command.getMessage();
+        return executeCommand(command);
     }
 
     public boolean isExitCommand(String input) {
