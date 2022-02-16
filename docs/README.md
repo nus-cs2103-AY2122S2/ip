@@ -3,7 +3,8 @@ Duke is a task manager that keeps track of various types of tasks and compiles i
 
 ## Quick Setup
 1. Install Java 11 or above on your device.
-2. Run ```java -jar duke.jar```
+2. Download the latest release of Duke into an empty folder
+3. Run ```java -jar duke.jar```
 
 ## Features
 ### 1. [Add Todo](#todo---adds-todo-task)
