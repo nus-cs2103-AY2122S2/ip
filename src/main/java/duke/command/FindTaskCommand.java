@@ -15,14 +15,12 @@ public class FindTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             TaskList filteredTasks = tasks.filterTask(keywords);
-            for (int i = 0; i < filteredTasks.getSize(); i++) {
-                ui.showToUser((i + 1) + ". " + filteredTasks.getTask(i));
-            }
+            return TextUi.showTasks(filteredTasks);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return TextUi.showError(e.getMessage());
         }
     }
 }
