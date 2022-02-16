@@ -20,7 +20,7 @@ public class Event extends Task {
      * @param eventAt The date of the event.
      */
     public Event(String title, LocalDateTime eventAt) {
-        super(title);
+        super(title, TaskType.EVENT);
         this.eventAt = eventAt;
     }
 

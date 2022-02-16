@@ -2,11 +2,13 @@ package duke.task;
 
 import duke.DukeException;
 import duke.common.Messages;
+import duke.common.TaskType;
 
 /**
  * A class that represents a task.
  */
 public class Task {
+    private final TaskType taskType;
     private final String title;
     private boolean isDone;
 
@@ -15,9 +17,10 @@ public class Task {
      *
      * @param title The title of the task.
      */
-    public Task(String title) {
+    public Task(String title, TaskType taskType) {
         this.title = title;
         this.isDone = false;
+        this.taskType = taskType;
     }
 
     public void markAsDone() {
@@ -48,20 +51,25 @@ public class Task {
      * it will throw a DukeException.
      */
     public String getClassSymbol() throws DukeException {
-        if (Todo.class.equals(this.getClass())) {
+        assert this.taskType != TaskType.TASK : "TaskType of Task should not appear here.";
+        switch (this.taskType) {
+        case TODO:
             return "T";
-        } else if (Event.class.equals(this.getClass())) {
+        case EVENT:
             return "E";
-        } else if (Deadline.class.equals(this.getClass())) {
+        case DEADLINE:
             return "D";
-        } else {
+        default:
             throw new DukeException(Messages.MESSAGE_ERROR_INVALID_TASK_TYPE);
         }
-
     }
 
     public boolean hasKeywords(String keywords) {
         return this.title.contains(keywords);
+    }
+
+    public boolean hasSameTaskType(TaskType taskType) throws DukeException {
+        return this.getClassSymbol().equals(taskType.getTaskTypeSymbol());
     }
 
     @Override

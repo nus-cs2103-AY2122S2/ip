@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
+import duke.common.TaskType;
 
 /**
  * A class that represents a task list.
@@ -65,7 +66,8 @@ public class TaskList {
      * Deletes a task object from the task list based on the id supplied.
      *
      * @param taskId The id of the targeted task.
-     * @throws DukeException
+     * @throws DukeException If the task id is out of the task list index range,
+     * it throws a DukeException.
      */
     public void deleteTask(int taskId) throws DukeException {
         try {
