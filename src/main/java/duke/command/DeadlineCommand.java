@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.DukeDateTime;
-import duke.task.Task;
 import duke.task.Deadline;
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**

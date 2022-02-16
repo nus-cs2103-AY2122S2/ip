@@ -7,7 +7,7 @@ import duke.DukeDateTime;
  */
 public class Deadline extends Task {
 
-    protected static Icon ICON = Icon.D;
+    protected static final Icon ICON = Icon.D;
     protected final DukeDateTime by;
 
     /**

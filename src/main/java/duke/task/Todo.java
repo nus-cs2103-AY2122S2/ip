@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Todo extends Task {
 
-    protected static Icon ICON = Icon.T;
+    protected static final Icon ICON = Icon.T;
 
     /**
      * Constructs a {@code Todo} object with the specified description

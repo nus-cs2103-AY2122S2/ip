@@ -45,22 +45,22 @@ public class Storage {
         if (records.createNewFile()) {
             return tasks;
         }
-        Scanner sc_file = new Scanner(records);
-        while (sc_file.hasNext()) {
-            String[] record = sc_file.nextLine().split(" ", 3);
+        Scanner fileScanner = new Scanner(records);
+        while (fileScanner.hasNext()) {
+            String[] record = fileScanner.nextLine().split(" ", 3);
             switch (record[0]) {
             case "T":
                 tasks.add(new Todo(record[2]));
                 break;
             case "D":
-                String[] desc_by = record[2].split(" /by ", 2);
-                DukeDateTime by = DukeDateTime.parse(desc_by[1]);
-                tasks.add(new Deadline(desc_by[0], by));
+                String[] descAndBy = record[2].split(" /by ", 2);
+                DukeDateTime by = DukeDateTime.parse(descAndBy[1]);
+                tasks.add(new Deadline(descAndBy[0], by));
                 break;
             case "E":
-                String[] desc_at = record[2].split(" /at ", 2);
-                DukeDateTime at = DukeDateTime.parse(desc_at[1]);
-                tasks.add(new Event(desc_at[0], at));
+                String[] descAndAt = record[2].split(" /at ", 2);
+                DukeDateTime at = DukeDateTime.parse(descAndAt[1]);
+                tasks.add(new Event(descAndAt[0], at));
                 break;
             default:
                 System.out.println("Incorrect record format encountered: "

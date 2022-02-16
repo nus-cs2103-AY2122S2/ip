@@ -74,23 +74,23 @@ public class Parser {
             }
             return new TodoCommand(remaining);
         } else if (firstWord.equals("deadline")) {
-            String[] desc_by = remaining.split(" /by ", 2);
-            if (desc_by.length < 2) {
+            String[] descAndBy = remaining.split(" /by ", 2);
+            if (descAndBy.length < 2) {
                 throw new DukeException("Incorrect format");
-            } else if (desc_by[0].length() == 0) {
+            } else if (descAndBy[0].length() == 0) {
                 throw new DukeException("The description of a deadline cannot be empty");
             }
-            DukeDateTime datetime = DukeDateTime.parse(desc_by[1].trim());
-            return new DeadlineCommand(desc_by[0].trim(), datetime);
+            DukeDateTime datetime = DukeDateTime.parse(descAndBy[1].trim());
+            return new DeadlineCommand(descAndBy[0].trim(), datetime);
         } else if (firstWord.equals("event")) {
-            String[] desc_at = remaining.split(" /at ", 2);
-            if (desc_at.length < 2) {
+            String[] descAndAt = remaining.split(" /at ", 2);
+            if (descAndAt.length < 2) {
                 throw new DukeException("Incorrect format");
-            } else if (desc_at[0].length() == 0) {
+            } else if (descAndAt[0].length() == 0) {
                 throw new DukeException("The description of an event cannot be empty");
             }
-            DukeDateTime datetime = DukeDateTime.parse(desc_at[1].trim());
-            return new EventCommand(desc_at[0].trim(), datetime);
+            DukeDateTime datetime = DukeDateTime.parse(descAndAt[1].trim());
+            return new EventCommand(descAndAt[0].trim(), datetime);
         } else {
             return new UnrecognizedCommand();
         }

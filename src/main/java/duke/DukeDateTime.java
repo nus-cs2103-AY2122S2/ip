@@ -14,6 +14,25 @@ public class DukeDateTime {
     private final LocalTime time;
 
     /**
+     * Constructs a {@code DukeDateTime} object with date but not time component.
+     * @param date A LocalDate object
+     */
+    public DukeDateTime(LocalDate date) {
+        this.date = date;
+        this.time = null;
+    }
+
+    /**
+     * Constructs a {@code DukeDateTime} object with both date and time components.
+     * @param date A LocalDate object
+     * @param time A LocalTime object
+     */
+    public DukeDateTime(LocalDate date, LocalTime time) {
+        this.date = date;
+        this.time = time;
+    }
+
+    /**
      * Obtains an instance of {@code DukeDateTime} from a text string.
      * @param text the text to parse, not null
      * @return the parsed {@code DukeDateTime}, not null
@@ -36,25 +55,6 @@ public class DukeDateTime {
             throw new DukeException("Unrecognized time format. Valid formats:\nyyyy-M-d\nyyyy-M-d H:mm");
         }
         return datetime;
-    }
-
-    /**
-     * Constructs a {@code DukeDateTime} object with date but not time component.
-     * @param date A LocalDate object
-     */
-    public DukeDateTime(LocalDate date) {
-        this.date = date;
-        this.time = null;
-    }
-
-    /**
-     * Constructs a {@code DukeDateTime} object with both date and time components.
-     * @param date A LocalDate object
-     * @param time A LocalTime object
-     */
-    public DukeDateTime(LocalDate date, LocalTime time) {
-        this.date = date;
-        this.time = time;
     }
 
     /**
@@ -82,11 +82,11 @@ public class DukeDateTime {
 
     /**
      * Formats this {@code DukeDateTime} using the specified pattern for date and "H:mm" for time.
-     * @param pattern_date the pattern to use for date, not null
+     * @param patternOfDate the pattern to use for date, not null
      * @return the formatted DukeDateTime string, not null
      */
-    public String format(String pattern_date) {
-        String res = date.format(DateTimeFormatter.ofPattern(pattern_date));
+    public String format(String patternOfDate) {
+        String res = date.format(DateTimeFormatter.ofPattern(patternOfDate));
         if (hasTime()) {
             res += " " + time.format(DateTimeFormatter.ofPattern("H:mm"));
         }

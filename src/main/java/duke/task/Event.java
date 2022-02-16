@@ -7,7 +7,7 @@ import duke.DukeDateTime;
  */
 public class Event extends Task {
 
-    protected static Icon ICON = Icon.E;
+    protected static final Icon ICON = Icon.E;
     protected final DukeDateTime at;
 
     /**
