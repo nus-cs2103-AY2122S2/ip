@@ -1,6 +1,5 @@
 package duke;
 
-
 import duke.command.Command;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -15,7 +14,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import duke.task.TaskList;
-
 
 
 /**
