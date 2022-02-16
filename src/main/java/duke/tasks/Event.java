@@ -13,6 +13,7 @@ public class Event extends Task {
     protected LocalDate dueDate;
     protected LocalTime time;
     protected String date;
+    protected String place = "";
 
     /**
      * Constructor of this Event class.
@@ -23,7 +24,13 @@ public class Event extends Task {
      */
     public Event(String description, String dueDate) throws DukeException {
         super(description);
-        this.date = dueDate;
+        boolean isLocationAdded = dueDate.contains(" >");
+        if (isLocationAdded) {
+            this.place = dueDate.split(" >")[1];
+            this.date = dueDate.split(" >")[0];
+        } else {
+            this.date = dueDate;
+        }
         try {
             this.setDueDateTime(dueDate);
         } catch (Exception e) {
@@ -75,7 +82,12 @@ public class Event extends Task {
      */
     @Override
     public String getTaskData() {
-        return "[E]" + super.toString() + " (at: " + this.date + ")";
+        if (isPlaceValid()) {
+            String location = " >" + place;
+            return "[E]" + super.toString() + " (at: " + this.date + location + ")";
+        } else {
+            return "[E]" + super.toString() + " (at: " + this.date + ")";
+        }
     }
 
     /**
@@ -85,6 +97,20 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateToString() + " " + this.timeToString() + ")";
+        if (isPlaceValid()) {
+            String location = " | location: " + place;
+            return "[E]" + super.toString() + " (at: " + this.dateToString() + " " + this.timeToString() + location + ")";
+        } else {
+            return "[E]" + super.toString() + " (at: " + this.dateToString() + " " + this.timeToString() + ")";
+        }
+    }
+
+    /**
+     * Checks if there is a location added to the event
+     *
+     * @return true when there is a location attached to this event.
+     */
+    public boolean isPlaceValid() {
+        return place.length() >= 1;
     }
 }
