@@ -12,7 +12,7 @@ public class Parser {
      * @return      the String in a date format the system can recognise
      */
     static Date convert1(String date) throws DukeException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         //System.out.println(date);
         try {
             return  formatter.parse(date);
