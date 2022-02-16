@@ -22,7 +22,7 @@ DukePro frees your mind of having to remember things you need to do. It's,
 
 And best of all, it is **FREE**! 🎉🥳
 
-> :warning: **Warning:** We are not liable for any damages incurred while this is in use.
+> :warning: **Warning:** We are not liable for damages incurred while this is in use.
 
 All you need to do is,
 1. download it from [here](https://nus-cs2103-ay2122s2.github.io/website/schedule/week4/project.html).
