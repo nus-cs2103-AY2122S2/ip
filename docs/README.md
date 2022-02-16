@@ -84,7 +84,8 @@ The chatbot automatically checks if the task being added already exists in the l
 If it exists, it will not add it.
 
 ## Usage  
-###Usage example of todo 
+
+### Usage example of todo 
 todo - `todo Watch lectures`
 
 Expected outcome:
@@ -94,7 +95,7 @@ Got it. I've added this task:
   [T][ ] Watch lectures
 Now you have 1 tasks in the list.
 ```  
-###Usage example of event
+### Usage example of event
 event - `event Attend meeting /at 2022-02-15`
 
 Expected outcome:
@@ -104,7 +105,7 @@ Got it. I've added this task:
   [E][ ] Attend meeting (at: Feb 15 2022)
 Now you have 2 tasks in the list.
 ```
-###Usage example of deadline
+### Usage example of deadline
 deadline - `deadline read book /by 2022-02-16`
 
 Expected outcome:
@@ -114,7 +115,7 @@ Got it. I've added this task:
   [D][ ] read book (by: Feb 16 2022)
 Now you have 3 tasks in the list.
 ```
-###Usage example of list
+### Usage example of list
 list - `list`
 
 Expected outcome:
@@ -125,7 +126,7 @@ Here are the tasks in your list:
 2.[E][ ] Attend meeting (at: Feb 15 2022)
 3.[D][ ] read book (by: Feb 16 2022)
 ```
-###Usage example of delete
+### Usage example of delete
 delete - `delete 1`
 
 Expected outcome:
@@ -135,7 +136,7 @@ Noted. I've removed this task:
 1.[T][ ] Watch lectures
 Now you have 2 tasks in the list.
 ```
-###Usage example of mark
+### Usage example of mark
 mark - `mark 1`
 
 Expected outcome:
@@ -144,7 +145,7 @@ Marks the first task as done.
 Nice! I've marked this task as done:
 [E][X] Attend meeting (at: Feb 15 2022)
 ```
-###Usage example of unmark
+### Usage example of unmark
 unmark - `unmark 1`
 
 Expected outcome:
@@ -153,7 +154,7 @@ Unmarks the first task as not done.
 OK, I've marked this task as not done yet:
 [E][] Attend meeting (at: Feb 15 2022)
 ```
-###Usage example of find
+### Usage example of find
 find - `find meeting`
 
 Expected outcome:
