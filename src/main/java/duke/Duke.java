@@ -33,6 +33,21 @@ public class Duke {
     private boolean isRunning;
     private Storage storage;
 
+    //command keywords
+    private static final String BYE_COMMAND = "bye";
+    private static final String FIND_COMMAND = "find";
+    private static final String LIST_COMMAND = "list";
+    private static final String MARK_COMMAND = "mark";
+    private static final String UNMARK_COMMAND = "unmark";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
+    private static final String DELETE_COMMAND = "delete";
+
+    //file paths
+    private static final String STORAGE_FILE_NAME = "data.txt";
+    private static final String DIR_FILE_NAME = "./data/";
+
     /**
      * Duke constructor. Initializes values.
      */
@@ -45,11 +60,11 @@ public class Duke {
         Function<String, Task> taskFactory = (String info) -> {
             Task newTask = null;
             char type = info.charAt(0);
-            if (type == 'T') {
+            if (type == Todo.TODO_SYMBOL) {
                 newTask = new Todo();
-            } else if (type == 'E') {
+            } else if (type == Event.EVENT_SYMBOL) {
                 newTask = new Event();
-            } else if (type == 'D') {
+            } else if (type == Deadline.DEADLINE_SYMBOL) {
                 newTask = new Deadline();
             } else {
                 newTask = null;
@@ -59,7 +74,7 @@ public class Duke {
         };
 
         try {
-            storage = new Storage("data.txt", "./data/");
+            storage = new Storage(STORAGE_FILE_NAME, DIR_FILE_NAME);
             storage.loadFromSave(taskList.getTaskList(), taskFactory);
         } catch (DukeException exception) {
             ui.printError(exception.getMessage());
@@ -67,15 +82,15 @@ public class Duke {
 
         // init parser
         HashMap<String, Command> commands = new HashMap<String, Command>();
-        commands.put("bye", new ByeCommand("bye"));
-        commands.put("find", new FindCommand("find"));
-        commands.put("list", new ListCommand("list"));
-        commands.put("mark", new EditTaskMarkCommand("mark", true));
-        commands.put("unmark", new EditTaskMarkCommand("unmark", false));
-        commands.put("todo", new TodoCommand("todo"));
-        commands.put("deadline", new DeadlineCommand("deadline"));
-        commands.put("event", new EventCommand("event"));
-        commands.put("delete", new DeleteCommand("delete"));
+        commands.put(BYE_COMMAND, new ByeCommand(BYE_COMMAND ));
+        commands.put(FIND_COMMAND, new FindCommand(FIND_COMMAND));
+        commands.put(LIST_COMMAND, new ListCommand(LIST_COMMAND));
+        commands.put(MARK_COMMAND, new EditTaskMarkCommand(MARK_COMMAND, true));
+        commands.put(UNMARK_COMMAND, new EditTaskMarkCommand(UNMARK_COMMAND, false));
+        commands.put(TODO_COMMAND, new TodoCommand(TODO_COMMAND));
+        commands.put(DEADLINE_COMMAND, new DeadlineCommand(DEADLINE_COMMAND));
+        commands.put(EVENT_COMMAND, new EventCommand(EVENT_COMMAND));
+        commands.put(DELETE_COMMAND, new DeleteCommand(DELETE_COMMAND));
 
         parser = new Parser(commands);
     }
@@ -116,7 +131,7 @@ public class Duke {
             try {
                 Command command = parser.parse(userResponse);
                 String response = command.execute(userResponse, taskList, storage);
-                if (command.getKey().equals("bye")) {
+                if (command.getKey().equals(BYE_COMMAND)) {
                     this.isRunning = false;
                 }
 

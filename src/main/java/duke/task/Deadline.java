@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
  * <p>e.g., submit report by 11/10/2019 5pm.</p>
  */
 public class Deadline extends Task {
-    private static final char DEADLINE_SYMBOL = 'D';
+    public static final char DEADLINE_SYMBOL = 'D';
     private static final String DATE_FORMAT = "MMM d yyyy";
     private static final String TIME_FORMAT = "hh:mm a";
 

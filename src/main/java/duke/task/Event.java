@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
  * <p>e.g., team project meeting on 2/10/2019 2-4pm.</p>
  */
 public class Event extends Task {
-    private static final char EVENT_SYMBOL = 'E';
+    public static final char EVENT_SYMBOL = 'E';
     private static final String DATE_FORMAT = "MMM d yyyy";
     private static final String TIME_FORMAT = "hh:mm a";
 

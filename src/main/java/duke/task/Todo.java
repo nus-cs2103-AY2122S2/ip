@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * <p>e.g., visit new theme park.</p>
  */
 public class Todo extends Task {
-    private static final char TODO_SYMBOL = 'T';
+    public static final char TODO_SYMBOL = 'T';
 
     /**
      * Default constructor for Todo.
