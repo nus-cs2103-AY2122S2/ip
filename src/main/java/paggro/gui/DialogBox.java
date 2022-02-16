@@ -7,12 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -37,6 +42,7 @@ public class DialogBox extends HBox {
         super.setSpacing(20);
         dialog.setText(text);
         displayPicture.setImage(img);
+        setBackground();
     }
 
     /**
@@ -57,5 +63,11 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    private void setBackground() {
+        Background paggroBackground = new Background(new BackgroundFill(
+                Color.DARKGREY, new CornerRadii(20), new Insets(8, 8, 8, 8)));
+        this.setBackground(paggroBackground);
     }
 }

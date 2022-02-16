@@ -118,8 +118,8 @@ public class Storage {
                     } else {
                         nDate = dateMap.get(lDate);
                     }
-                    lTime = LocalTime.parse(details[4]);
-                    if (!lTime.equals("")) {
+                    if (!details[4].equals("")) {
+                        lTime = LocalTime.parse(details[4]);
                         task = new Event(des, nDate, lTime, isDone);
                     } else {
                         task = new Event(des, nDate, isDone);
@@ -155,8 +155,8 @@ public class Storage {
                         nDate = dateMap.get(lDate);
                     }
 
-                    lTime = LocalTime.parse(details[4]);
-                    if (!lTime.equals("")) {
+                    if (!details[4].equals("")) {
+                        lTime = LocalTime.parse(details[4]);
                         task = new Deadline(des, nDate, lTime, isDone);
                     } else {
                         task = new Deadline(des, nDate, isDone);

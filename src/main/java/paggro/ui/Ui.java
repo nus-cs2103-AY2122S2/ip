@@ -9,7 +9,6 @@ import paggro.task.Task;
  */
 public class Ui {
     private static final String FOUR_SPACE = "    ";
-    private static final String LINE_SEPARATOR = "   ____________________________________\n";
 
 
     /**
@@ -26,15 +25,6 @@ public class Ui {
      */
     public String showGoodbye() {
         return FOUR_SPACE + "Oh finally. Please don't come back anytime soon. =.=\n";
-    }
-
-    /**
-     * Returns a line separator.
-     *
-     * @return String of line.
-     */
-    public String showLine() {
-        return LINE_SEPARATOR;
     }
 
     /**

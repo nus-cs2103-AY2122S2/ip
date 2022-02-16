@@ -44,14 +44,11 @@ public class PaggroBot {
     public String getResponse(String input) {
         StringBuilder response = new StringBuilder();
         try {
-            response.append(ui.showLine());
             Command cmd = Parser.parse(input);
             response.append(cmd.execute(lister, ui, storage));
             isExit = cmd.isExit();
         } catch (PaggroException e) {
             response.append(ui.showError(e.getMessage()));
-        } finally {
-            response.append(ui.showLine());
         }
         return response.toString();
     }
