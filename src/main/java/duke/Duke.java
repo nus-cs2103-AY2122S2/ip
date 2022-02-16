@@ -27,9 +27,9 @@ public class Duke {
         case "unmark":
             return Ui.unmarkTask(taskList, tagList,
                     Integer.parseInt(parse.getDesc()) - 1);
-        case "lstask":
+        case "list-task":
             return Ui.listTask(taskList);
-        case "lstag":
+        case "list-tag":
             return Ui.listTag(tagList);
         case "todo":
             return Ui.addToDo(taskList, tagList, parse.getDesc(), false);
@@ -44,7 +44,7 @@ public class Duke {
                     Integer.parseInt(parse.getDesc()) - 1);
         case "find":
             return Ui.findTask(taskList, parse.getDesc());
-        case "addtag":
+        case "add-tag":
             return Ui.addTag(tagList, parse.getDesc());
         case "tag":
             String[] indexArray = parse.getDesc().split(" ");

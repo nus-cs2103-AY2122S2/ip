@@ -17,15 +17,15 @@ public class Ui {
     public static String getHelp() {
         String str = "";
         str = str + "List of Available Commands\n"
-                + "lstask\n"
-                + "lstag\n"
+                + "list-task\n"
+                + "list-tag\n"
                 + "todo {task description}\n"
                 + "deadline {task description} /by {DATE}\n"
                 + "event {task description} /at {DATE}\n"
                 + "mark {Task ID}\n"
                 + "find {keyword}\n"
                 + "delete {Task ID}\n"
-                + "addtag {tag description}\n"
+                + "add-tag {tag description}\n"
                 + "tag {Task ID} {Tag ID}\n"
                 + "bye";
         return str;
