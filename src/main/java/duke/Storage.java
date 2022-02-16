@@ -34,7 +34,7 @@ public class Storage {
      * @return String representation of tags formatted for storage
      */
     private String storeTags(ArrayList<String> tags) {
-        Boolean hasTags = tags.size() > 0;
+        boolean hasTags = tags.size() > 0;
         String renderStr = "";
 
         if (!hasTags) {
@@ -44,7 +44,7 @@ public class Storage {
         renderStr += "[";
 
         for (int i = 0; i < tags.size(); i++) {
-            Boolean isLastTag = i == tags.size() - 1;
+            boolean isLastTag = i == tags.size() - 1;
             String tag = tags.get(i);
 
             renderStr += tag;

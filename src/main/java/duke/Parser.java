@@ -21,11 +21,11 @@ public class Parser {
      */
     public static Command parse(String input) {
         String[] inputSplit = input.split(" ");
-        Boolean isNonEmptyCommand = inputSplit.length > 0;
+        boolean isNonEmptyCommand = inputSplit.length > 0;
 
         if (isNonEmptyCommand) {
             String commandString = inputSplit[0];
-            Boolean isValidCommand = inputSplit.length > 1;
+            boolean isValidCommand = inputSplit.length > 1;
 
             if (commandString.equals("bye")) {
                 return Command.BYE;
@@ -101,7 +101,7 @@ public class Parser {
         String[] timingSplit = fullDateString.split("to");
         String[] eventTimings = extractEventDateTimings(timingSplit);
 
-        Boolean missingStartEndTimings = eventTimings.length < 2;
+        boolean missingStartEndTimings = eventTimings.length < 2;
 
         // if user input does NOT contain start and end timing
         // in the given format
@@ -114,7 +114,7 @@ public class Parser {
 
     public static String getDeadlineTiming(String text) {
         String[] inputSplit = text.split("/by");
-        Boolean missingDeadlineTiming = inputSplit.length < 2;
+        boolean missingDeadlineTiming = inputSplit.length < 2;
 
         if (missingDeadlineTiming) {
             return Ui.DEADLINE_INVALID_TIMINGS_ERROR;

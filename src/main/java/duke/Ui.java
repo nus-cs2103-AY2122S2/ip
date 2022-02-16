@@ -68,7 +68,7 @@ public class Ui {
      * @return String of tags
      */
     public static String renderTags(ArrayList<String> tags) {
-        Boolean hasTags = tags.size() > 0;
+        boolean hasTags = tags.size() > 0;
 
         if (!hasTags) {
             return "";
@@ -76,7 +76,7 @@ public class Ui {
 
         String renderStr = " [";
         for (int i = 0; i < tags.size(); i++) {
-            Boolean isLastTag = i == tags.size() - 1;
+            boolean isLastTag = i == tags.size() - 1;
             String tag = tags.get(i);
 
             renderStr += tag;

@@ -42,7 +42,7 @@ public class TaskList {
         return this.tasks.remove(index);
     }
 
-    public Boolean removeTask(Task task) {
+    public boolean removeTask(Task task) {
         return this.tasks.remove(task);
     }
 

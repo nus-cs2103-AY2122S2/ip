@@ -43,7 +43,7 @@ public class Duke {
     public String runMarkCommand(String input) {
         String[] inputSplit = input.split(" ");
 
-        Boolean isValidInput = inputSplit.length == 2;
+        boolean isValidInput = inputSplit.length == 2;
         assert isValidInput : "invalid input command!";
 
         int itemIndex = Integer.parseInt(inputSplit[1]);
@@ -65,7 +65,7 @@ public class Duke {
     public String runUnmarkCommand(String input) {
         String[] inputSplit = input.split(" ");
 
-        Boolean isValidInput = inputSplit.length == 2;
+        boolean isValidInput = inputSplit.length == 2;
         assert isValidInput : "invalid input command!";
 
         int itemIndex = Integer.parseInt(inputSplit[1]);
@@ -150,16 +150,16 @@ public class Duke {
     public String runDeleteCommand(String input) {
         String[] inputSplit = input.split(" ");
 
-        Boolean isValidInput = inputSplit.length == 2;
+        boolean isValidInput = inputSplit.length == 2;
         assert isValidInput : "invalid input command!";
 
         int taskIndex = Integer.parseInt(inputSplit[1]) - 1;
         try {
             Task deletedTask = tasks.removeTaskIndex(taskIndex);
 
-            Boolean taskIsEvent = deletedTask.getEventType() == Type.EVENT;
-            Boolean taskIsDeadline = deletedTask.getEventType() == Type.DEADLINE;
-            Boolean taskIsTodo = deletedTask.getEventType() == Type.TODO;
+            boolean taskIsEvent = deletedTask.getEventType() == Type.EVENT;
+            boolean taskIsDeadline = deletedTask.getEventType() == Type.DEADLINE;
+            boolean taskIsTodo = deletedTask.getEventType() == Type.TODO;
 
             if (taskIsEvent) {
                 Event deletedEvent = (Event) deletedTask;
@@ -193,20 +193,20 @@ public class Duke {
     public String runFindCommand(String input) {
         String[] inputSplit = input.split(" ");
 
-        Boolean isInvalidInput = inputSplit.length < 2;
+        boolean isInvalidInput = inputSplit.length < 2;
         assert isInvalidInput : "invalid input command!";
 
         String searchTerm = inputSplit[1];
-        Boolean isEmptySearchTerm = searchTerm == "";
+        boolean isEmptySearchTerm = searchTerm == "";
 
         if (isEmptySearchTerm) {
             return Ui.INVALID_SEARCH_TERM;
         }
 
         TaskList foundTasks = tasks.findTask(searchTerm);
-        Boolean matchingTaskNotFound = foundTasks.getSize() < 1;
+        boolean isMatchingTaskNotFound = foundTasks.getSize() < 1;
 
-        if (matchingTaskNotFound) {
+        if (isMatchingTaskNotFound) {
             return Ui.SEARCH_TERM_NOT_FOUND;
         }
 
@@ -223,13 +223,13 @@ public class Duke {
     public String runTagCommand(String input) {
         String[] inputSplit = input.split(" ");
 
-        Boolean invalidCommandFormat = inputSplit.length != 3;
-        if (invalidCommandFormat) {
+        boolean isInvalidCommandFormat = inputSplit.length != 3;
+        if (isInvalidCommandFormat) {
             return Ui.INVALID_TAG_TERM;
         }
 
         String tag = inputSplit[2];
-        Boolean isEmptyTag = tag == "";
+        boolean isEmptyTag = tag == "";
         if (isEmptyTag) {
             return Ui.EMPTY_TAG_TERM;
         }
