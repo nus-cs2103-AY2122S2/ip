@@ -7,8 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,6 +48,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setContentDisplay(ContentDisplay.CENTER);
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50, 50, 50));
     }

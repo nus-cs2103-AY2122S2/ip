@@ -46,7 +46,7 @@ public class FindTaskCommand extends Command {
         if (matches.size() == 0) {
             ui.showMessage("There are no matching tasks in your list");
         } else {
-            ui.showMessage("Here are the matching tasks in your list");
+            ui.showMessage("Here are the matching tasks in your list:");
             for (String description : matches) {
                 ui.showMessage(description);
             }
