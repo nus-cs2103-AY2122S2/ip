@@ -1,15 +1,15 @@
 import java.io.IOException;
 
 public class AddCommand extends Command {
-    private final Task toAdd;
+    private final Task Add;
 
     /**
      *
-     * @param toAdd
+     * @param Add
      */
-    public AddCommand(Task toAdd) {
+    public AddCommand(Task Add) {
 
-        this.toAdd = toAdd;
+        this.Add = Add;
     }
 
     /**
@@ -21,8 +21,8 @@ public class AddCommand extends Command {
      */
     /** Adds a new command to the TaskList*/
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        taskList.addTask(this.toAdd);
+        taskList.addTask(this.Add);
         storage.writeTasks(taskList);
-        return ui.printAddTaskMessage(this.toAdd, taskList);
+        return ui.printAddTask(this.Add, taskList);
     }
 }

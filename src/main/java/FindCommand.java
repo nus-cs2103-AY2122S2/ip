@@ -23,6 +23,8 @@ public class FindCommand extends Command {
      * @throws IOException
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+
         return ui.printSomeTasks(taskList.findTasks(this.inputs));
+
     }
 }

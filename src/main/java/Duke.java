@@ -19,10 +19,10 @@ public class Duke {
             storage = new Storage(path);
             tasks = new TaskList(storage.readTasks());
         } catch (IOException ie) {
-            ui.printStorageIoError();
+            System.out.println("OOPS! An error occurred while attempting to create/retrieve storage file.");
             System.exit(0);
         } catch (DukeException de) {
-            ui.printDukeException(de);
+            de.getMessage();
             tasks = new TaskList();
         }
 
@@ -30,7 +30,7 @@ public class Duke {
 
 
     public void run() {
-        ui.printIntroduction();
+        System.out.println("Hello! I'm Duke.\n" + "What can I do for you?");
         boolean isExit = false;
 
         while (!isExit) {
@@ -44,23 +44,25 @@ public class Duke {
                 de.getMessage();
 
             } catch (IOException ie) {
-                ui.printUpdateIoError(ie);
+                System.out.println("OOPS! An error occurred while attempting to update storage file:\n"
+                        + ie.getMessage());
             }
         }
 
-        ui.closeScanner();
-        ui.printExitMessage();
+        ui.closeSc();
+        System.out.println("Bye. Hope to see you again soon!\n");
     }
 
     public String getResponse(String input) {
         try {
-            //String stringCommand = ui.readCommand();
+
             Command command = Parser.parseCommand(input);
             return command.execute(tasks, ui, storage);
         } catch (DukeException de) {
-            ui.printDukeException(de);
+            de.getMessage();
         } catch (IOException ie) {
-            ui.printUpdateIoError(ie);
+            System.out.println("OOPS! An error occurred while attempting to update storage file:\n"
+                    + ie.getMessage());
         }
         return "Unknown Command?";
     }

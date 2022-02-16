@@ -24,6 +24,6 @@ public class DoneCommand extends Command {
         assert this.taskNum > 0 : "Task number must be greater than zero";
         taskList.markDone(this.taskNum - 1);
         storage.writeTasks(taskList);
-        return ui.printMarkDone(taskList.getTasks().get(this.taskNum - 1));
+        return ui.printMark(taskList.getTasks().get(this.taskNum - 1));
     }
 }
