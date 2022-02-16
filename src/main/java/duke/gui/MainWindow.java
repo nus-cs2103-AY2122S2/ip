@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Set the <code>duke</code> object.
+     * Sets the <code>duke</code> object.
      *
      * @param duke a Duke object.
      */

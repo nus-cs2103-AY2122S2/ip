@@ -26,6 +26,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    //@@author 1001mei-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+    //with minor modifications.
     /**
      * Class constructor.
      *
@@ -58,7 +61,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Construct a user DialogBox.
+     * Constructs a user DialogBox.
      *
      * @param text text to be displayed in this dialog box.
      * @param img the image associated with this dialog box.
@@ -69,7 +72,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Construct a Duke DialogBox.
+     * Constructs a Duke DialogBox.
      *
      * @param text text to be displayed in this dialog box.
      * @param img the image associated with this dialog box.
