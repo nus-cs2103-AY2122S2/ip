@@ -19,6 +19,7 @@ public class Main extends Application {
 
     /**
      * Starts the application
+     *
      * @param stage stage object passed in
      */
     @Override

@@ -14,10 +14,12 @@ import duke.task.Deadline;
  * Custom DukeException to be handled by InputHandler
  */
 public class DukeException extends Exception{
+
     private String errorMessage;
 
     /**
      * Constructs a DukeException. DukeException handles wrong inputs by user
+     *
      * @param errorMessage Error message to be printed
      */
     public DukeException (String errorMessage) {
@@ -25,8 +27,12 @@ public class DukeException extends Exception{
     }
 
     /**
+     * Gets error message
+     *
      * @override Returns customised error message for DukeException when input is incorrect
      * @return String errorMessage
      */
-    public String getMessage() {return this.errorMessage;}
+    public String getMessage() {
+        return this.errorMessage;
+    }
 }

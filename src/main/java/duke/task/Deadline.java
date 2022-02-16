@@ -1,14 +1,5 @@
 package duke.task;
-import duke.duke.Duke;
-import duke.ui.Parser;
-import duke.ui.DukeException;
-import duke.ui.InputHandler;
-import duke.storage.Storage;
-import duke.storage.TaskList;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -49,12 +40,14 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of Deadline
+     * Returns String representation of Deadline
      *
-     * @return String of Deadline task, eg [D][X] Deadline (by:XX) vs [D][✓] Deadline (by;XX)
+     * @return String of Deadline task, eg [D][0] Deadline (by: 22 Feb 2022 2:22pm) vs [D][1] Deadline (by: 22 Feb 2022 2:22pm)
      */
     @Override
     public String toString() {
-        String dueDateAndTime = (this.dueTime == null) ? dateConverterToString(this.dueDate) : dateConverterToString(this.dueDate) + " " + timeConverterToString(this.dueTime);
-        return "[D]" + super.toString() + " (by:" + dueDateAndTime + ")"; }
+        String dueDateAndTime = (this.dueTime == null)
+                ? dateConverterToString(this.dueDate)
+                : dateConverterToString(this.dueDate) + " " + timeConverterToString(this.dueTime);
+        return "[D]" + super.toString() + " (by: " + dueDateAndTime + ")"; }
 }

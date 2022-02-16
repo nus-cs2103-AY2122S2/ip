@@ -34,11 +34,14 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        String dukeGreeting = "Hello! I'm Duke ^^ \nWhat can I do for you?";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeGreeting, dukeImage));
     }
 
     /**
      * Sets duke
+     *
      * @param d Duke object passed in
      */
     public void setDuke(Duke d) {
@@ -51,17 +54,18 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        String endMessage = "Bye. Hope to see you again soon!";
+        String sleepErrorMessage = "Issue shutting down Duke! Force shutting down...";
+
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        String endMessage = "Bye. Hope to see you again soon!";
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage));
+
         if (response.equals(endMessage)) {
             Platform.exit();
         }
-        userInput.clear();
 
+        userInput.clear();
     }
 }

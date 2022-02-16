@@ -1,14 +1,4 @@
 package duke.task;
-import duke.duke.Duke;
-import duke.ui.Parser;
-import duke.ui.DukeException;
-import duke.ui.InputHandler;
-import duke.storage.Storage;
-import duke.storage.TaskList;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -50,12 +40,14 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of Event
+     * Returns String representation of Event
      *
-     * @return String of Event task, eg: [E][X] Event (at:) vs [E] [✓] Event (at:)
+     * @return String of Event task, eg: [E][0] Event (at: 22 Feb 2022 2:22pm) vs [E][1] Event (at: 22 Feb 2022 2:22pm)
      */
     @Override
     public String toString() {
-        String dueDateAndTime = (this.dueTime == null) ? dateConverterToString(this.dueDate) : dateConverterToString(this.dueDate) + " " + timeConverterToString(this.dueTime);
-        return "[E]" + super.toString() + " (at:" + dueDateAndTime + ")"; }
+        String dueDateAndTime = (this.dueTime == null)
+                ? dateConverterToString(this.dueDate)
+                : dateConverterToString(this.dueDate) + " " + timeConverterToString(this.dueTime);
+        return "[E]" + super.toString() + " (at: " + dueDateAndTime + ")"; }
 }

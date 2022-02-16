@@ -1,14 +1,5 @@
 package duke.task;
-import duke.duke.Duke;
-import duke.ui.Parser;
-import duke.ui.DukeException;
-import duke.ui.InputHandler;
-import duke.storage.Storage;
-import duke.storage.TaskList;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -33,8 +24,6 @@ public class Task {
 
     /**
      * Marks current Task object as done
-     *
-     * markTask as done
      */
     public void setMarkedTask () {
         this.isMarked = true;
@@ -42,8 +31,6 @@ public class Task {
 
     /**
      * Unmarks current Task object
-     *
-     * unmarkTask
      */
     public void setUnmarkedTask() {
         this.isMarked = false;
@@ -79,17 +66,17 @@ public class Task {
     }
 
     /**
-     * String representation of Task
+     * Returns String representation of Task
      *
-     * @return String version of task, with marked and name. E.g. [X] Task vs [✓] Task
+     * @return String version of task, with marked and name. E.g. [0] Task vs [1] Task
      */
     @Override
     public String toString() {
         if (this.isMarked) {
-            String marked = "[✓] ";
+            String marked = "[1] ";
             return marked + this.name;
         } else {
-            String unmarked = "[X] ";
+            String unmarked = "[0] ";
             return unmarked + this.name;
         }
     }
