@@ -138,12 +138,30 @@ public class Duke extends Application {
                 throw new DukeException("There aren't any tasks search :)");
             }
             String searchString = split[1];
-            list.search(searchString);
+            out = list.search(searchString);
+        } else if (command.equals("help")) {
+            out = handleHelp();
         } else {
             throw new DukeException("I'm not sure what that means");
         }
         assert !out.equals("");
         return out;
+    }
+
+    private String handleHelp() {
+        String out =  "Here is a list of commands to help you get started:\n"
+                + "* todo: Adds a task to be done Eg: todo Buy groceries\n"
+                + "* deadline: Adds a task to be done by a certain deadline.\n "
+                + "Use the format yyyy-mm-dd. Eg: deadline Finish studying /by 2022-02-28\n"
+                + "* event: Adds an event occuring at a specific time Eg: event Lecture /at Thursday 2-4pm\n"
+                + "* list: List all the tasks Eg: list\n"
+                + "* mark: Mark a task as done Eg: mark 3\n"
+                + "* unmark: Mark a task as not done Eg: unmark 3\n"
+                + "* delete: Delete a task Eg: delete 4\n"
+                + "* find: Find a task by searching for a substring Eg: find Lecture\n"
+                + "* bye: Quit Prince Eg: bye";
+        return out;
+
     }
 
     /**
@@ -225,6 +243,8 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        printWelcome();
+
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -253,11 +273,20 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+
+    private void printWelcome() {
+        String welcome = "Hey there! I'm Prince :) \n"
+                + "How can I help you today?"
+                + "(type help if you're confused)";
+        Label dukeText = new Label(welcome);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
     }
 
     /**

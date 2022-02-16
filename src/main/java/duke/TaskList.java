@@ -79,20 +79,22 @@ public class TaskList {
      *
      * @param searchString The string to search for
      */
-    void search(String searchString) {
+    String search(String searchString) {
         ArrayList<Integer> results = new ArrayList<>();
+        String out = "";
         for (Task task : tasks) {
             if (task.toString().contains(searchString)) {
                 results.add(tasks.indexOf(task));
             }
         }
         if (results.size() > 0) {
-            System.out.println("Here's everything that matches your search: ");
+            out += ("Here's everything that matches your search: \n");
             for (int i = 0; i < results.size(); i++) {
-                System.out.println(results.get(i) + " " + tasks.get(results.get(i)));
+                out += (results.get(i) + " " + tasks.get(results.get(i)) + "\n");
             }
         } else {
-            System.out.println("Nothing in the list matches your search :)");
+            out += ("Nothing in the list matches your search :)\n");
         }
+        return out;
     }
 }
