@@ -15,7 +15,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Create a chatterbot.
+     * Constructs a chatterbot.
      * @param filePath The file's storage path.
      */
     public Duke(String filePath) {

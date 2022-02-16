@@ -85,7 +85,7 @@ public class List {
      * Deletes a task from the list and returns it.
      *
      * @param index Index of the task in the list.
-     * @return Returns the task deleted
+     * @return Returns the task deleted.
      * @throws ListException If the index is out of bound.
      */
     public Task delete(int index) throws ListException {
@@ -100,9 +100,8 @@ public class List {
     public Task getLast() {
         return tasks.get(tasks.size() - 1);
     }
-
     /**
-     * Find a set of tasks that matches the description.
+     * Finds a set of tasks that matches the description.
      *
      * @param findDescription Description of the tasks to find.
      * @return Returns a list of the tasks found.
@@ -118,8 +117,8 @@ public class List {
         return new List(findTaskList);
     }
     /**
-     * Sort the tasks in the task list by their task type.
-     * Also sorts deadline tasks and event tasks by their local date time.
+     * Sorts the tasks in the task list by their task type
+     * and sorts deadline tasks and event tasks by their local date time.
      */
     public void sort() {
         Collections.sort(this.getArrayList());
