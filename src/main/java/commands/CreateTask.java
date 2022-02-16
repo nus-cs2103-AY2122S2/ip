@@ -2,7 +2,6 @@ package commands;
 
 import java.util.List;
 
-import duke.Ui;
 import mytasks.Deadline;
 import mytasks.Event;
 import mytasks.Task;
@@ -17,11 +16,12 @@ public class CreateTask {
      * @param description description of the task.
      * @param list list of tasks that are currently being tracked.
      */
-    public static void todo(String description, List<Task> list, int taskCount) {
+    public static String todo(String description, List<Task> list, int taskCount) {
+        StringBuilder sb = new StringBuilder();
         list.add(new Todo(description));
-        System.out.println(list.get(taskCount).toString());
-        System.out.println("Got it. I've added this task:");
-        Ui.printAndSave(taskCount + 1);
+        sb.append(list.get(taskCount).toString() + "\n");
+        sb.append("Got it. I've added this task:\n");
+        return sb.toString();
     }
 
     /**
@@ -29,12 +29,13 @@ public class CreateTask {
      * @param description description of the task.
      * @param list list of tasks that are currently being tracked.
      */
-    public static void deadline(String description, List<Task> list, int taskCount) {
+    public static String deadline(String description, List<Task> list, int taskCount) {
+        StringBuilder sb = new StringBuilder();
         String[] restOfPara = description.split("/by ", 2);
         list.add(new Deadline(restOfPara[0], restOfPara[1]));
-        System.out.println(list.get(taskCount).toString());
-        System.out.println("Got it. I've added this task:");
-        Ui.printAndSave(taskCount + 1);
+        sb.append(list.get(taskCount).toString() + "\n");
+        sb.append("Got it. I've added this task:\n");
+        return sb.toString();
     }
 
     /**
@@ -42,11 +43,12 @@ public class CreateTask {
      * @param description description of the task.
      * @param list list of tasks that are currently being tracked.
      */
-    public static void event(String description, List<Task> list, int taskCount) {
+    public static String event(String description, List<Task> list, int taskCount) {
+        StringBuilder sb = new StringBuilder();
         String[] restOfPara2 = description.split("/at ", 2);
         list.add(new Event(restOfPara2[0], restOfPara2[1]));
-        System.out.println(list.get(taskCount).toString());
-        System.out.println("Got it. I've added this task:");
-        Ui.printAndSave(taskCount + 1);
+        sb.append(list.get(taskCount).toString() + "\n");
+        sb.append("Got it. I've added this task:\n");
+        return sb.toString();
     }
 }

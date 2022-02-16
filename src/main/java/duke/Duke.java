@@ -1,7 +1,6 @@
 package duke;
 
-import java.util.Scanner;
-
+import commands.Command;
 import mytasks.TaskList;
 
 /**
@@ -10,13 +9,17 @@ import mytasks.TaskList;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private Command command;
+
+    /**
+     * Default constructor for Duke.
+     */
+    public Duke() {}
 
     /**
      * Initializes the application by loading files and checking for errors.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
         try {
@@ -29,19 +32,11 @@ public class Duke {
     /**
      * Start the application.
      */
-    public void run() {
-        Scanner input = new Scanner(System.in);
-        String inputText = "";
-
-        while (!inputText.equals("bye")) {
-            inputText = input.nextLine();
-
-            ui.allTasks(inputText, tasks);
-            storage.saveTasks(tasks.getList());
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String run(String inputText) {
+        command = new Command();
+        String temp = command.allTasks(inputText, tasks);
+        storage.saveTasks(tasks.getList());
+        return temp;
     }
 }
+

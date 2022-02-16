@@ -2,7 +2,6 @@ package commands;
 
 import java.util.List;
 
-import duke.Ui;
 import mytasks.Task;
 
 /**
@@ -14,11 +13,12 @@ public class DeleteTask {
      * @param number the task number that is going to be deleted.
      * @param list contains the list of tasks that are currently being tracked.
      */
-    public static void delete(String number, List<Task> list, int taskCount) {
+    public static String delete(String number, List<Task> list, int taskCount) {
+        StringBuilder sb = new StringBuilder();
         int taskNum = Integer.parseInt(number) - 1;
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(list.get(taskNum).toString());
+        sb.append("Noted. I've removed this task:\n");
+        sb.append(list.get(taskNum).toString() + "\n");
         list.remove(taskNum);
-        Ui.printAndSave(taskCount - 1);
+        return sb.toString();
     }
 }
