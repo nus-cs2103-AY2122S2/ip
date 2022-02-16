@@ -28,7 +28,7 @@ public class TaskList {
         if (index < 0 || index >= taskList.size()) {
             throw new ExceptionHandler("Invalid index");
         }
-        return taskList.remove(index - 1);
+        return taskList.remove(index);
     }
 
     public List<Task> getListOfTasks() {

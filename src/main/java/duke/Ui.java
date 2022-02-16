@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner;
-    private String currMessage;
+    private String currMessage = "";
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -46,7 +46,7 @@ public class Ui {
     }
 
     public static String getWelcomeMessage() {
-        return "Hello I'm Duke\n" + "What can I do for you?";
+        return "Hello I'm Duke\n" + "What can I do for you?\n" + "Enter help for commands";
     }
 
     /**
@@ -66,10 +66,6 @@ public class Ui {
     public void println(Task task) {
         System.out.println(task);
         currMessage += task.toString() + "\n";
-    }
-
-    public String dumbMessage() {
-        return "dumb";
     }
     public String getMessage() {
         String str = currMessage;

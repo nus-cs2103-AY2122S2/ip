@@ -56,7 +56,7 @@ public class Task {
     }
 
     public String markString() {
-        return (isDone ? "[X]" : "[]");
+        return (isDone ? "[X] " : "[ ] ");
     }
 
     public void setDone() {
