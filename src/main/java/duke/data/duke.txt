@@ -1,3 +1,0 @@
-T / 1 / task1
-T / 0 / task2
-T / 1 / task 3
