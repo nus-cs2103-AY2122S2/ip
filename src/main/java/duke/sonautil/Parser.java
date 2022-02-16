@@ -1,5 +1,6 @@
 package duke.sonautil;
 
+import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,7 +23,7 @@ public class Parser {
      * @throws DukeException If command is invalid / not understood
      * @throws DateTimeParseException If date/time entered is invalid
      */
-    public String[] processMessage(String userMessage) throws DukeException, DateTimeParseException {
+    public String[] processMessage(String userMessage) throws DukeException, DateTimeException {
         String[] command = new String[4];
         String[] split = userMessage.split(" ");
 
@@ -172,11 +173,11 @@ public class Parser {
             throw new DukeException(Ui.emptyTaskMessage());
         }
         //no slash
-        if (!userMessage.contains("/")) {
+        if (!userMessage.contains("/ ")) {
             throw new DukeException(Ui.deadlineNoSlashMessage());
         }
 
-        String[] taskDetails = userMessage.substring(9).split("/", 2);
+        String[] taskDetails = userMessage.substring(9).split("/ ", 2);
 
         //deadline is empty
         if (taskDetails[1].replaceAll(" ", "").equals("")) {
@@ -226,11 +227,11 @@ public class Parser {
             throw new DukeException(Ui.emptyTaskMessage());
         }
         //no slash
-        if (!userMessage.contains("/")) {
+        if (!userMessage.contains("/ ")) {
             throw new DukeException(Ui.eventNoSlashMessage());
         }
 
-        String[] taskDetails = userMessage.substring(6).split("/", 2);
+        String[] taskDetails = userMessage.substring(6).split("/ ", 2);
 
         //event date is empty
         if (taskDetails[1].replaceAll(" ", "").equals("")) {

@@ -62,7 +62,7 @@ public class Ui {
      */
     public static String dateTimeErrorMessage() {
         return "Oh no... the format or the date/time you entered is wrong! "
-                + "The correct format should be YYYY-MM-DD HHMM\n"
+                + "The correct format should be '/ YYYY-MM-DD HHMM', including the white space and dashes!\n"
                 + "It is not necessary to put in time!\n";
     }
 
@@ -160,7 +160,7 @@ public class Ui {
      * @return message to user
      */
     public static String eventDateEmptyMessage() {
-        return "Oops! You forgot to add the event date after '/'.. try again? :)";
+        return "Oops! You forgot to add the event date after '/ '.. try again? :)";
     }
 
     /**
@@ -169,7 +169,7 @@ public class Ui {
      * @return message to user
      */
     public static String eventNoSlashMessage() {
-        return "When is the event happening? Add '/' and the date after the event to make me record ;)";
+        return "When is the event happening? Add '/ ' and the date after the event to make me record ;)";
     }
 
     /**
@@ -198,7 +198,7 @@ public class Ui {
      * @return message to user
      */
     public static String deadlineDateEmptyMessage() {
-        return "Oops! You forgot to add the due date after '/'.. try again? :)";
+        return "Oops! You forgot to add the due date after '/ '.. try again? :)";
     }
 
     /**
@@ -207,7 +207,7 @@ public class Ui {
      * @return message to user
      */
     public static String deadlineNoSlashMessage() {
-        return "When is the deadline? Add '/' and the date after your task to make me record ;)";
+        return "When is the deadline? Add '/ ' and the date after your task to make me record ;)";
     }
 
     /**
@@ -442,8 +442,8 @@ public class Ui {
         return  "These are what you can make me do for you: \n\n" +
                 "*~*~*~*~*~*~*~*~*~*~*~*~*\n\n" +
                 "There are 3 ways to add tasks:\n" +
-                "    1. todo [your task]\n    2. deadline [your task]/[due date & time]\n    " +
-                "3. event [your task]/[due date & time]\n" +
+                "    1. todo [your task]\n    2. deadline [your task]/ [due date & time]\n    " +
+                "3. event [your task]/ [due date & time]\n" +
                 "Simply replace those in brackets to whatever you need, please don't include '[]'.\n" +
                 "* Note that the dates must be in the format of YYYY-MM-DD HHMM, and time is optional!\n\n" +
                 "*~*~*~*~*~*~*~*~*~*~*~*~*\n\n" +
@@ -467,6 +467,6 @@ public class Ui {
      * @return message to user
      */
     public static String clearSuccessMessage() {
-        return "Done~ your list is now empty (and there is no turning back)!";
+        return "Done~ your list is now empty!";
     }
 }

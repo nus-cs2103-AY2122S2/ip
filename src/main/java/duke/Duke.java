@@ -1,6 +1,7 @@
 package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
 
 import duke.sonautil.DukeException;
@@ -53,7 +54,7 @@ public class Duke {
             return tasks.executeCommand(command);
         } catch (DukeException | IOException e) {
             return e.getMessage();
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeException e) {
             return Ui.dateTimeErrorMessage();
         }
 
