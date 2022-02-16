@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Siri siri = new Siri(System.getProperty("user.dir") + "/data/data.txt");
+    private Siri siri = new Siri(System.getProperty("user.home") + "/siridata/data.txt");
 
     @Override
     public void start(Stage stage) {

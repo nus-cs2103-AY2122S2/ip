@@ -240,6 +240,7 @@ ___
 - Damith C. Rajapakse - _Module Coordinator_
 - Andy Lam Wei Jie - _Developer of Siri_
 ___
+
 ## Acknowledgements
 - **Cheng Gang** - [_User Guide references_](https://chenggeng97.github.io/duke/)
 - **FlatIcon.com** - [_Icon images used in the project_](https://www.flaticon.com/)

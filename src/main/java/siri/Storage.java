@@ -26,17 +26,10 @@ class Storage {
     public Storage(String filePath) {
 
         if (filePath == "") {
-            this.filePath = "data/data.txt";
+            this.filePath = System.getProperty("user.home") + "/siridata/data.txt";
         } else {
             this.filePath = filePath;
         }
-        this.fileDirectoryPath = this.filePath.substring(0, filePath.lastIndexOf('/'));
-        this.directory = new File(fileDirectoryPath);
-        this.dataFile = new File(filePath);
-    }
-
-    public Storage() {
-        this.filePath = "data/data.txt";
         this.fileDirectoryPath = this.filePath.substring(0, filePath.lastIndexOf('/'));
         this.directory = new File(fileDirectoryPath);
         this.dataFile = new File(filePath);
