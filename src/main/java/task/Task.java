@@ -90,7 +90,7 @@ public abstract class Task {
      * @return True if the keyword exists in the task description, false otherwise.
      */
     public boolean isMatch(String keyword) {
-        return (!this.description.contains(keyword));
+        return (this.description.contains(keyword));
     }
 
     /**
