@@ -2,9 +2,17 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a Parser
+ */
 public class Parser {
     Parser() {}
 
+    /**
+     *
+     * @param input The command to carry out
+     * @return A String that describes the command
+     */
     public String parse(String input) {
         String DASH = "____________________________________________________________";
         String[] inputArr = input.split(" ");

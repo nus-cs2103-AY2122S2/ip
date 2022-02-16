@@ -12,12 +12,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * Represents a file writer and file reader
+ */
 public class FileReaderWriter {
     private static final File FOLDER_PATH = new File("/Users/jiamingsim/repos/ip/data");
     private static final File DATA_PATH = new File("/Users/jiamingsim/repos/ip/data/data.txt");
 
     public FileReaderWriter() {}
 
+    /**
+     * read a file
+     */
     @SuppressWarnings("Unchecked")
     public static void readFile() {
         ArrayList<Task> toDoList = new ArrayList<>();
@@ -50,6 +56,9 @@ public class FileReaderWriter {
         }
     }
 
+    /**
+     * writes a file
+     */
     public static void writeToFile() {
         try {
 //            FileWriter fw = new FileWriter("data.txt",false);

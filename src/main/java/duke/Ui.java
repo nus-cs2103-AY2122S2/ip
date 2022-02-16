@@ -2,7 +2,13 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * The Ui class is responsible for dealing with user interactions.
+ */
 public class Ui {
+    /**
+     * Method to start the app
+     */
     public static void start() {
         Action.greet();
         Scanner sc = new Scanner(System.in);

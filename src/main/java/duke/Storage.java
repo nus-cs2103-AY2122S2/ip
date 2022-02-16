@@ -14,6 +14,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.nio.file.Path;
 
+/**
+ * Represents a storage that loads and save user data
+ */
 public class Storage {
 
     String currentDir = System.getProperty("user.dir");
@@ -21,8 +24,14 @@ public class Storage {
     private final File FOLDER_PATH = new File(currentPath.toString());
     private final File DATA_PATH = new File(currentPath.toString() + File.separator + "duke.txt");
 
+    /**
+     * Constructor for a Storage object
+     */
     public Storage(){}
 
+    /**
+     * Loads the users task list from file
+     */
     @SuppressWarnings("Unchecked")
     public void readFile() {
         ArrayList<Task> toDoList = new ArrayList<>();
@@ -55,6 +64,10 @@ public class Storage {
         }
     }
 
+
+    /**
+     * Save the users tasklist to file
+     */
     public void writeToFile() {
         try {
 //            FileWriter fw = new FileWriter("data.txt",false);

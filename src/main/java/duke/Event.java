@@ -15,10 +15,10 @@ public class Event extends Task {
 
     /**
      * Constructor for Event
+     *
      * @param description - description of the task
-     * @param dayAndTime - The deadline of the task in this format "yyyy-mm-dd"
+     * @param dayAndTime - The date of the task in this format "yyyy-mm-dd"
      */
-
     Event (String description, String dayAndTime)  throws DateTimeException {
         super(description);
         this.dayAndTime = LocalDate.parse(dayAndTime);
@@ -26,7 +26,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-//        return String.format("[%s][%s] %s (at:%s)", sym, super.getStatusIcon(), super.getDescription(), this.dayAndTime);
         return String.format("[%s][%s] %s (at:%s)", sym, super.getStatusIcon(), super.getDescription(),
                     this.dayAndTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
     }
