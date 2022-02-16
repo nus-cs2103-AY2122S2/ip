@@ -22,6 +22,7 @@ public class DukeException extends Exception {
      * @param tasks the current number of tasks that is being tracked.
      */
     public void invalidChecker (String[] input, int tasks) throws DukeException {
+        assert !(input.length <= 0);
         switch (input[0]) {
         case "bye":
         case "list":
@@ -29,7 +30,7 @@ public class DukeException extends Exception {
         case "mark":
         case "unmark":
         case "delete":
-            checkValidFind(input, tasks);
+            checkValid(input, tasks);
             break;
         case "find":
             checkValidFind(input);
@@ -53,7 +54,7 @@ public class DukeException extends Exception {
      * @param input information entered by the user.
      * @param tasks the current number of tasks that is being tracked.
      */
-    private void checkValidFind(String[] input, int tasks) throws DukeException {
+    private void checkValid(String[] input, int tasks) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("☹ OOPS!!! Please enter a task number.");
         }

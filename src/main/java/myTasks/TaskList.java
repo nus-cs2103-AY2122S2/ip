@@ -31,9 +31,11 @@ public class TaskList {
             case "D":
                 holder = new Deadline(tempList[2], tempList[3]);
                 break;
-            default:
+            case "E":
                 holder = new Event(tempList[2], tempList[3]);
                 break;
+            default:
+                return;
             }
             if (tempList[1].equals("1")) {
                 holder.markAsDone();

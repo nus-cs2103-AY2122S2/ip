@@ -13,7 +13,7 @@ public class MarkTask {
      * @param number the task number that has been completed.
      * @param list contains the list of tasks that are currently being tracked.
      */
-    public static String mark(String number, List<Task> list, int taskCount) {
+    public static String mark(String number, List<Task> list) {
         StringBuilder sb = new StringBuilder();
         int taskNum = Integer.parseInt(number) - 1;
         list.get(taskNum).markAsDone();
@@ -27,12 +27,12 @@ public class MarkTask {
      * @param number the task number that has not been completed.
      * @param list contains the list of tasks that are currently being tracked.
      */
-    public static String unmark(String number, List<Task> list, int taskCount) {
+    public static String unmark(String number, List<Task> list) {
         StringBuilder sb = new StringBuilder();
         int taskNum = Integer.parseInt(number) - 1;
         list.get(taskNum).markAsNotDone();
         sb.append(list.get(taskNum).toString() + "\n");
-        sb.append("Nice! I've marked this task as done:\n");
+        sb.append("Nice! I've marked this task as not done:\n");
         return sb.toString();
     }
 }

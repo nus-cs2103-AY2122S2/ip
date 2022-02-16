@@ -35,38 +35,38 @@ public class Command {
         }
 
         switch (tempList[0]) {
-            case "bye":
-                sb.append("Bye. Hope to see you again soon!\n");
-                break;
-            case "list":
-                sb.append(ShowTasks.showList(taskCount, list));
-                break;
-            case "find":
-                sb.append(ShowTasks.find(taskCount, tempList[1], list));
-                break;
-            case "todo":
-                sb.append(CreateTask.todo(tempList[1], list, taskCount));
-                printAndSave(taskCount + 1);
-                break;
-            case "deadline":
-                sb.append(CreateTask.deadline(tempList[1], list, taskCount));
-                printAndSave(taskCount + 1);
-                break;
-            case "event":
-                sb.append(CreateTask.event(tempList[1], list, taskCount));
-                printAndSave(taskCount + 1);
-                break;
-            case "mark":
-                sb.append(MarkTask.mark(tempList[1], list, taskCount));
-                break;
-            case "unmark":
-                sb.append(MarkTask.unmark(tempList[1], list, taskCount));
-                break;
-            case "delete":
-                sb.append(DeleteTask.delete(tempList[1], list, taskCount));
-                printAndSave(taskCount - 1);
-                break;
-            default:
+        case "bye":
+            sb.append("Bye. Hope to see you again soon!\n");
+            break;
+        case "list":
+            sb.append(ShowTasks.showList(taskCount, list));
+            break;
+        case "find":
+            sb.append(ShowTasks.find(taskCount, tempList[1], list));
+            break;
+        case "todo":
+            sb.append(CreateTask.createTodo(tempList[1], list, taskCount));
+            printAndSave(taskCount + 1);
+            break;
+        case "deadline":
+            sb.append(CreateTask.createDeadline(tempList[1], list, taskCount));
+            printAndSave(taskCount + 1);
+            break;
+        case "event":
+            sb.append(CreateTask.createEvent(tempList[1], list, taskCount));
+            printAndSave(taskCount + 1);
+            break;
+        case "mark":
+            sb.append(MarkTask.mark(tempList[1], list));
+            break;
+        case "unmark":
+            sb.append(MarkTask.unmark(tempList[1], list));
+            break;
+        case "delete":
+            sb.append(DeleteTask.delete(tempList[1], list));
+            printAndSave(taskCount - 1);
+            break;
+        default:
         }
         return sb.toString();
     }
