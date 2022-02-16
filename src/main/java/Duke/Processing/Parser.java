@@ -1,6 +1,10 @@
 package Duke.Processing;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import Duke.Exception.DukeException;
 
@@ -11,26 +15,21 @@ public class Parser {
      * @param  date the String the user inputs
      * @return      the String in a date format the system can recognise
      */
-    static Date convertString(String date) throws DukeException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static LocalDateTime convertDate(String date) throws DukeException {
         try {
-            return  formatter.parse(date);
-        } catch (ParseException e) {
-            throw  new DukeException("Wrong date time format");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            return LocalDateTime.parse(date, format);
+        } catch (DateTimeParseException error) {
+            throw new DukeException("Wrong date format");
         }
     }
-    /**
-     * Converts the String for a preexisting task to a date
-     *
-     * @param  date the String the user inputs
-     * @return      the String in a date format the system can recognise
-     */
-    static Date convertDate(String date) throws DukeException {
-        SimpleDateFormat formatter = new SimpleDateFormat("EEE dd/MM/yyyy HHmm");
+
+    public static LocalDateTime convertDate2(String date) throws DukeException {
         try {
-            return formatter.parse(date);
-        } catch (ParseException e) {
-            throw  new DukeException("Wrong date time format");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("EEE dd/MM/yyyy HHmm");
+            return LocalDateTime.parse(date, format);
+        } catch (DateTimeParseException error) {
+            throw new DukeException("Wrong date format");
         }
     }
     /**
@@ -77,7 +76,7 @@ public class Parser {
                 throw new DukeException("I'm not sure we can do that");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("We don't even have that many things to do");
+            throw new DukeException("Are you sure that's the correct number");
         }
         return  output;
     }
