@@ -5,3 +5,48 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+
+Please specify an event task as 'event [description] /at [date]'.
+
+Got it. I've added this task:
+[E][ ] borrow book (at: 20-01-2022)
+Now you have 1 tasks in the list.
+
+Nice! I've marked this task as done:
+[E][X] borrow book (at: 20-01-2022)
+
+Please enter a description for the todo task.
+
+Got it. I've added this task:
+[T][ ] read book
+Now you have 2 tasks in the list.
+
+Please specify a deadline task as 'deadline [description] /by [date]'.
+
+Got it. I've added this task:
+[D][ ] return book (by: 2 weeks later)
+Now you have 3 tasks in the list.
+
+Please specify a task using its index in the task list.
+
+Nice! I've marked this task as done:
+[T][X] read book
+
+OK, I've marked this task as not done yet:
+[T][ ] read book
+
+Please specify a valid task index.
+
+Noted. I've removed this task:
+[T][ ] read book
+Now you have 2 tasks in the list.
+
+Here are the tasks in your list:
+1.[E][X] borrow book (at: 20-01-2022)
+2.[D][ ] return book (by: 2 weeks later)
+
+Sorry, the command 'doSomething' is not supported.
+
+Bye. Hope to see you again soon!
