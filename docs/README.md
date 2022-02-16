@@ -8,6 +8,7 @@ Walle is a simple application that can record and keep track of the tasks you wa
 ![Screenshot of Walle](Ui.png)
 
 You can click [here](https://github.com/tzhan98/ip/releases) to get the latest version of Walle
+
 ________________________________________________________________________________________________________________________
 ## Features 
 
@@ -96,7 +97,7 @@ Expected outcome:
 ### Mark/Unmark tasks
 Walle is able to mark or unmark tasks
 
- - **marking tasks**
+ - **Marking tasks**
 
 Example of usage:
 
@@ -110,7 +111,7 @@ Expected outcome:
        [T][X] return book
 ```
 
- - **unmarking tasks**
+ - **Unmarking tasks**
 
 Example of usage:
 
@@ -172,7 +173,7 @@ Expected outcome:
     Now you have 5 task on the list.  
 ```
 
-[###Find task](https://tzhan98.github.io/ip/#features)
+###Find task
 Walle will search for task based on input keywords
 
 Example of usage:
@@ -188,4 +189,5 @@ Expected outcome:
     3. [T][X] have dinner with eva
     5. [T][ ] have dinner with mom
 ```
+[back to top](https://tzhan98.github.io/ip/)
 ________________________________________________________________________________________________________________________
