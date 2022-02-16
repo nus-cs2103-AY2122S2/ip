@@ -15,6 +15,7 @@ public class UltoiUi {
     private static final String LINE_BREAK = "======U======L======T======O======I======";
     private static final String WELCOME_MESSAGE = "Hello! I am Ultoi [ uhl-twah ].\n"
             + "What can I do for you? <O_O>";
+    private static final String LOADING_MESSAGE = "Congrats! Ultoi loads your past tasks!";
     private static final String LOADING_ERROR = "Ultoi fails to load your past tasks. <OoO>";
 
 
@@ -67,6 +68,15 @@ public class UltoiUi {
      */
     public String showWelcomeMsg() {
         return showMsg(WELCOME_MESSAGE);
+    }
+
+    /**
+     * Displays a piece of loading success message.
+     *
+     * @return Loading success message.
+     */
+    public String showLoadingSuccess() {
+        return showMsg(LOADING_MESSAGE);
     }
 
     /**

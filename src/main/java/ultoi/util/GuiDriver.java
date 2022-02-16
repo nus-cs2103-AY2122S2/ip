@@ -1,5 +1,6 @@
 package ultoi.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import ultoi.gui.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
@@ -16,8 +18,18 @@ import javafx.stage.Stage;
 public class GuiDriver extends Application {
     @Override
     public void start(Stage stage) {
-        Path filePath = Paths.get(System.getProperty("user.home"),
-                "iP", "data", "Ultoi.txt");
+        Path fileDir = Paths.get(".", "data");
+        Path filePath = Paths.get(".", "data", "Ultoi.txt");
+        // System.out.println(fileDir.toString());
+        // System.out.println(filePath.toString());
+        
+        try {
+            new File(fileDir.toString()).mkdirs();
+            new File(filePath.toString()).createNewFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Ultoi ultoi = new Ultoi(filePath);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(GuiDriver.class.getResource("/view/MainWindow.fxml"));

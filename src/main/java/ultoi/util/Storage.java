@@ -3,12 +3,10 @@ package ultoi.util;
 import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import ultoi.command.AddCommand;
-import ultoi.task.Task;
+import ultoi.command.MarkCommand;
 
 /**
  * Represents a Storage object that controls the read and write of file from and to hard disk.
@@ -34,15 +32,19 @@ public class Storage {
      * @return List of tasks.
      * @throws UltoiException If not loaded successfully.
      */
-    public List<Task> load() throws UltoiException {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+    public TaskList load() throws UltoiException {
+        TaskList tasks = new TaskList();
 
         try {
             Scanner sc = new Scanner(this.file);
 
             while (sc.hasNextLine()) {
                 String taskStr = sc.nextLine();
-                tasks.add(((AddCommand) Parser.parse(taskStr)).getTask());
+                if (taskStr.startsWith("mark") || taskStr.startsWith("unmark")) {
+                    new MarkCommand(taskStr).execute(tasks);
+                } else {
+                    tasks.addTask(((AddCommand) Parser.parse(taskStr)).getTask());
+                }
             }
         } catch (Exception e) {
             throw UltoiException.failToLoadFileException();

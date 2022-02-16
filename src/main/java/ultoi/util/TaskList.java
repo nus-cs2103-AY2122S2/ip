@@ -102,7 +102,7 @@ public class TaskList {
     }
 
     /**
-     * Find tasks with the given keyword.
+     * Finds tasks with the given keyword.
      *
      * @param keyword Keyword to be found.
      * @return A task list that contains tasks taht contains the keyword.
@@ -145,6 +145,9 @@ public class TaskList {
 
         for (int i = 0; i < size(); i++) {
             str += getTask(i).toInputString();
+            if (getTask(i).isDone()) {
+                str = str + "\nmark " + (i + 1);
+            }
             if (i < size() - 1) {
                 str = str + "\n";
             }

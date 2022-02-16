@@ -62,6 +62,23 @@ public class MarkCommand implements Command {
     }
 
     /**
+     * Executes the command.
+     *
+      * @param tasks Task list.
+     */
+    public void execute(TaskList tasks) {
+        try {
+            if (this.isMark) {
+                tasks.mark(this.index);
+            } else {
+                tasks.unmark(this.index);
+            }
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+    /**
      * Generates a message for the command.
      *
      * @param task Task to be marked.

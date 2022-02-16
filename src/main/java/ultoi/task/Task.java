@@ -10,7 +10,7 @@ import ultoi.util.DateTime;
  */
 public class Task {
     protected String description;
-    protected boolean isDone;
+    private boolean isDone;
 
     /**
      * Creates a new task.
@@ -31,6 +31,15 @@ public class Task {
      */
     public String genDoneSymbol() {
         return isDone ? "X" : " ";
+    }
+
+    /**
+     * Checks whether the task is done.
+     *
+     * @return True if the task is done.
+     */
+    public boolean isDone() {
+        return this.isDone;
     }
 
     /**

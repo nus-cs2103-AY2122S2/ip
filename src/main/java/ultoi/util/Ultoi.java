@@ -14,6 +14,7 @@ public class Ultoi {
     private Storage storage;
     private TaskList tasks;
     private UltoiUi ui;
+    private boolean loadsSuccessfully;
 
     /**
      * Creates a new ultoi.util.Ultoi chatbot.
@@ -23,10 +24,12 @@ public class Ultoi {
     public Ultoi(Path filePath) {
         this.ui = new UltoiUi();
         storage = new Storage(filePath);
+        this.loadsSuccessfully = true;
 
         try {
-            tasks = new TaskList(storage.load());
+            tasks = storage.load();
         } catch (UltoiException e) {
+            this.loadsSuccessfully = false;
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -41,6 +44,25 @@ public class Ultoi {
         return ui.showWelcomeMsg();
     }
 
+    /**
+     * Returns the laoding status.
+     *
+     * @return Loading status.
+     */
+    public String showLoadingStatus() {
+        if (this.loadsSuccessfully) {
+            return ui.showLoadingSuccess();
+        } else {
+            return ui.showLoadingError();
+        }
+    }
+
+    /**
+     * Gets the response from Ultoi based on the user input.
+     *
+     * @param input User input.
+     * @return Response from Ultoi.
+     */
     public String getResponse(String input) {
 
         assert input != null : "User input is null";
