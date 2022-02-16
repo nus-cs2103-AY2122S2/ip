@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308"
          maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" spacing="10.0"
-         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17">
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11">
     <children>
         <Label fx:id="message" layoutX="15.0" layoutY="25.0"
                style="-fx-border-color: BLACK; -fx-background-color: #b7fcfb; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 2; -fx-text-fill: black;"
