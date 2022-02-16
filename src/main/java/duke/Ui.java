@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Handles text to be returned to the user.
  */
@@ -33,21 +31,11 @@ public class Ui {
 
     /**
      * Shows the error message that was caught.
-     * @param errorMessage
+     * @param errorMessage error message that is thrown in exceptions.
      */
     public String showError(String errorMessage) {
         return errorMessage;
     }
-
-    /**
-     * Reads in the user inputs.
-     *
-     * @return The line that was inputted by the user in the CLI.
-     */
-    public String readCommand() {
-        Scanner myObj = new Scanner(System.in);
-        return myObj.nextLine();
-    };
 
     /**
      * Prints the 'help' response by Ducky. Usually called when the user says "help".
@@ -56,11 +44,15 @@ public class Ui {
         String helpResponse = "> Type 'list' to see what you have in your task list\n"
                 + "> Type 'todo <message>' to put a todo in your list\n"
                 + "> Type 'deadline <message> /by <deadline>' to put a deadline in your list."
-                + "\n\t - Deadline must be in 'DD MMMM YYYY' format"
+                + "\n\t - Deadline must be in 'DD MMMM YYYY' format or given in days."
+                + "\n\t - e.g. mon or monday"
                 + "\n> Type 'event <message> /at <date>' to put an event in your list"
-                + "\n\t - Date must be in 'DD MMMM YYYY' format"
+                + "\n\t - Date must be in 'DD MMMM YYYY' format or given in days."
+                + "\n\t - e.g. mon or monday"
                 + "\n> Type 'mark <x>' to mark a task in your list"
-                + "\n> Type 'unmark <x>' to unmark a task in your list";
+                + "\n> Type 'unmark <x>' to unmark a task in your list"
+                + "\n> Type 'find <x>' to find a task in your list"
+                + "\n\t - x is the word in task description to be found";
         ;
         return (helpResponse);
     }
