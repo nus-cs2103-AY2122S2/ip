@@ -1,17 +1,24 @@
 package ann;
 
 import ann.commands.Command;
+import ann.commands.ExitCommand;
 import ann.data.TaskList;
+import ann.gui.Ui;
 import ann.parser.Parser;
 import ann.storage.Storage;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
- * Represents the main component of the program which controls the other components.
+ * Represents the main logic of the app.
  *
  * @author Hong Anh
  * @version 0.1
  */
-public class Ann {
+public class AnnBot extends Application {
     /**
      * Represents the storage component of the program.
      */
@@ -20,32 +27,52 @@ public class Ann {
      * Represents the current task list.
      */
     private TaskList tasks;
+    /**
+     * Represents the manager for the GUI.
+     */
+    private Ui ui;
 
     /**
-     * Creates a new Ann object.
+     * Creates a new AnnBot object.
      *
-     * @throws RuntimeException if the storage cannot be initialized.
      */
-    public Ann() {
+    public AnnBot() {
     }
 
     /**
      * Starts the program by initializing the storage and task list.
      */
-    public void init() {
+    @Override
+    public void init() throws Exception {
+        super.init();
         try {
             this.storage = new Storage();
             this.tasks = new TaskList(storage.load());
+            this.ui = new Ui();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String getResponse(String text) {
-        Command command = Parser.parse(text);
+    @Override
+    public void start(Stage stage) throws Exception {
+        ui.start(stage, this);
+    }
+
+    /**
+     * Returns AnnBot's response to user input.
+     * @param input user input String.
+     * @return AnnBot's response String.
+     */
+    public String getResponse(String input) {
+        Command command = Parser.parse(input);
         command.setTaskList(tasks);
         executeCommand(command);
         return command.getMessage();
+    }
+
+    public boolean isExitCommand(String input) {
+        return ExitCommand.isExit(Parser.parse(input));
     }
 
     /**
