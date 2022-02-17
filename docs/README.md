@@ -1,4 +1,6 @@
 # Duke User Guide
+<img width="278" alt="Ui" src="https://user-images.githubusercontent.com/69782911/154522477-e967f1cc-4352-4db4-a1e4-4f62c222c137.png">
+
 
 ## Features
 #### Add tasks 
@@ -36,7 +38,7 @@ Example of usage:
 
 Expected outcome:
 
-Duke will add the todo to the task list
+Duke will add the todo to the task list.
 
 ```
 We have added [T][] paynow money to friend to the list.
@@ -53,7 +55,7 @@ Example of usage:
 
 Expected outcome:
 
-Duke will add the event to the task list
+Duke will add the event to the task list.
 
 ```
 We have added [E][] company dinner (at: 12-Dec-2022) to the list.
@@ -70,7 +72,7 @@ Example of usage:
 
 Expected outcome:
 
-Duke will add the deadline to the task list
+Duke will add the deadline to the task list.
 
 ```
 We have added [D][] CS3243 assignment (by: 12-Dec-2022) to the list.
