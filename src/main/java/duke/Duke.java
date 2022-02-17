@@ -31,8 +31,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Executes the command and provides feedback to user.
+     *
+     * @param input The command to run.
+     * @return The response message.
      */
     public String getResponse(String input) {
         try {

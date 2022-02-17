@@ -31,9 +31,9 @@ public class Task {
     /**
      * Unmarks a task.
      */
-	public void unmarkAsDone() {
-		this.isDone = false;
-	}
+    public void unmarkAsDone() {
+        this.isDone = false;
+    }
 
     /**
      * Provides the status info and description of a task.
