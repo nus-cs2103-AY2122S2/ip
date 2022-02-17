@@ -1,29 +1,13 @@
-# User Guide
+# Duke
+![workflow](https://github.com/cpwill01/ip/workflows/Java%20CI/badge.svg)
 
-## Features 
+![Ui](./Ui.png)
 
-### Feature-ABC
+Duke is a desktop application for managing your tasks. While it has a GUI,
+users interact with Duke through a Command Line Interface.
 
-Description of the feature.
+If you are interested in using Duke, visit the [User Guide](./UserGuide.md).
 
-### Feature-XYZ
-
-Description of the feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
-```
+**Acknowledgements**
+- The [AddressBook Level-3](https://se-education.org/addressbook-level3/)
+  product website for the structure of this product website and user guide.
