@@ -68,12 +68,8 @@ public class Duke {
         PrintStream old = System.out;
         System.setOut(ps);
         try {
-            storage = new Storage("duke_Saved.txt");
-            tasks = new TaskList(storage.readFromFile());
             Parser p = new Parser(storage, tasks, input);
             p.userCommand();
-        } catch (ClassNotFoundException e) {
-            Ui.generalErrorMessage();
         } catch (IOException e) {
             tasks = new TaskList();
         }
