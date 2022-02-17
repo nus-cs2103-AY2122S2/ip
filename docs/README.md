@@ -20,7 +20,7 @@ Duke is a task tracker that can track three categories of tasks:
 
 ## Usage
 
-### `todo NAME` - creates a Todo task with name NAME
+## `todo NAME` - creates a Todo task with name NAME
 
 Example of usage: 
 
@@ -33,7 +33,7 @@ Creates a new Todo object called work
 *Take note of the space between todo and NAME!
 
 
-### `deadline NAME /by DATE TIME(optional)` - creates a Deadline task with name NAME at DATE and TIME
+## `deadline NAME /by DATE TIME(optional)` - creates a Deadline task with name NAME at DATE and TIME
 
 Example of usage:
 ```
@@ -47,7 +47,7 @@ Creates a new Deadline object with DATE and TIME(optional)
 *Format of time: hh:mm
 
 
-### `event NAME /at DATE TIME(optional)` - creates a Event task with name NAME at DATE and TIME
+## `event NAME /at DATE TIME(optional)` - creates a Event task with name NAME at DATE and TIME
 
 Example of usage:
 ```
@@ -61,7 +61,7 @@ Creates a new Event object with DATE and TIME(optional)
 *Format of time: hh:mm
 
 
-### `list` - lists out all tasks
+## `list` - lists out all tasks
 
 Example of usage:
 ```
@@ -85,7 +85,7 @@ Delete task from tasklist and prints the deleted task
 *Important to delete a valid index - Do not go out of bounds!
 
 
-### `mark INDEX` - marks task as done
+## `mark INDEX` - marks task as done
 
 Example of usage:
 ```
@@ -97,7 +97,7 @@ Marks task and prints the marked task
 *Recommended to use alongside `list` command so that you get the right index
 
 
-### `unmark INDEX` - marks task as undone
+## `unmark INDEX` - marks task as undone
 
 Example of usage:
 ```
@@ -109,7 +109,7 @@ Marks task and prints the marked task
 *Recommended to use alongisde `list` command so that you get the right index
 
 
-### `snooze NAME DATE /t NEWDATE NEWTIME` - changes the date & time of task
+## `snooze NAME DATE /t NEWDATE NEWTIME` - changes the date & time of task
 
 Example of usage:
 ```
@@ -123,7 +123,7 @@ _ _Keeping track of the exact time is difficult_ _, which is why all you need to
 *Getting the exact name and date of the task is important
 
 
-### `bye` - ends the program
+## `bye` - ends the program
 
 Example of usage:
 ```
