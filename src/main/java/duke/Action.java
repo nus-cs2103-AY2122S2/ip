@@ -31,9 +31,10 @@ public class Action {
     /**
      * farewell to user.
      */
-    public static void bye() {
+    public static String bye() {
         String bye = "Bye. Hope to see you again soon!\n";
         System.out.println(bye);
+        return bye;
     }
 
     /**
@@ -54,7 +55,7 @@ public class Action {
      *  Find keyword in every task inside task bank.
      * @param keyword The word that is being searched.
      */
-    public static void find(String keyword) {
+    public static String find(String keyword) {
         boolean hasMatches = false;
         String output = "";
         if (keyword.equals("")) {
@@ -72,8 +73,10 @@ public class Action {
 
         if (hasMatches) {
             System.out.println(output);
+            return output;
         } else {
             System.out.println("no results found");
+            return output;
         }
     }
 

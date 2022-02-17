@@ -137,8 +137,6 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                // DialogBox.getUserDialog(userText, new ImageView(dukeWord)),
-                // DialogBox.getDukeDialog(dukeText, new ImageView(dukeLogo))
                 DialogBox.getUserDialog(userInput.getText(), dukeWord),
                 DialogBox.getDukeDialog(userInput.getText(), dukeLogo)
         );
@@ -153,7 +151,6 @@ public class Duke extends Application {
         Parser parser = new Parser();
         String displayMessage = parser.parse(input);
         return displayMessage;
-        // return "Duke heard: " + input;
     }
 
 
