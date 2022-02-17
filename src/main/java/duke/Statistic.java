@@ -27,11 +27,17 @@ public class Statistic extends AnchorPane implements Initializable {
     private int eventTasks = 0;
     @FXML
     private PieChart pieChart;
+    /**
+     * Sets up the number of tasks for displaying in the Pie Chart from the app
+     */
     @FXML
     public void initDuke(Duke duke) {
         setNumOfTasks(duke.getTasks());
     }
 
+    /**
+     * Starts up this new JavaFX window with the Pie Chart set up with provided data
+     */
     public void initialize() {
         setUpPieChart();
     }
@@ -55,6 +61,11 @@ public class Statistic extends AnchorPane implements Initializable {
     }
     //@@Da9el00
 
+    /**
+     * Sums up number of tasks based on their category (Todo, Deadline or Event)
+     * to be displayed in Pie Chart
+     * @param tasks containing the information of the number of tasks in the app
+     */
     private void setNumOfTasks(ArrayList<Task> tasks) {
         for (Task task : tasks) {
             switch (task.getType()) {

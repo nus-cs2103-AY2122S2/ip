@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  * @since   2022-1-15
  */
-
 public class Event extends Task {
     protected LocalDate at;
 

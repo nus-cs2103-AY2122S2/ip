@@ -14,7 +14,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 /**
  * This is a MainWindow class that acts as the logic behind the
@@ -24,7 +23,6 @@ import java.util.concurrent.ExecutionException;
  * @version 1.0
  * @since   2022-2-1
  */
-
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

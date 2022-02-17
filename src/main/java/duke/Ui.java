@@ -11,7 +11,6 @@ import java.util.Scanner;
  * @version 1.0
  * @since   2022-1-15
  */
-
 public class Ui {
     Parser parser;
     Scanner scanner;

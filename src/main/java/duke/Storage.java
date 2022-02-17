@@ -3,9 +3,6 @@ package duke;
 import java.io.*;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertTrue;
-
-
 /**
  * This is an FileAction class that allows the saving of
  * contents into a pre-specified file
@@ -14,7 +11,6 @@ import static org.junit.Assert.assertTrue;
  * @version 1.0
  * @since   2022-1-25
  */
-
 public class Storage {
     protected String filepath;
     protected FileWriter fileWriter;

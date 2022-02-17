@@ -9,7 +9,6 @@ package duke;
  * @version 1.0
  * @since   2022-1-15
  */
-
 public class ToDo extends Task {
 
     /**

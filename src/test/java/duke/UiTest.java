@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @version 1.0
  * @since   2022-2-4
  */
-
 public class UiTest {
     Ui ui = new Ui();
 

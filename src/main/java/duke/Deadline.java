@@ -3,7 +3,6 @@ package duke;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
-
 /**
  * This is a child class of a type of Task, Deadline.
  * Deadline accepts another variable, 'by' that
@@ -13,7 +12,6 @@ import java.time.LocalDate;
  * @version 1.0
  * @since   2022-1-15
  */
-
 public class Deadline extends Task {
     protected LocalDate by;
 

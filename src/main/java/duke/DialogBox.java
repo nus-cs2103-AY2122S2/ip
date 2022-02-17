@@ -22,7 +22,6 @@ import javafx.scene.layout.HBox;
  * @version 1.0
  * @since   2022-2-3
  */
-
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

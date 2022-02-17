@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * @version 1.0
  * @since   2022-1-15
  */
-
 public class TaskList {
     protected ArrayList<Task> tasks = new ArrayList<>();
 

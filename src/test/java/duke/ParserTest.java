@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @version 1.0
  * @since   2022-2-4
  */
-
 public class ParserTest {
     TaskList tasks = new TaskList();
     Storage storage = new Storage("data/duke.txt", tasks);

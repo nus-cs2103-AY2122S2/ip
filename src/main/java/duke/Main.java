@@ -7,10 +7,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * This is a Main class that acts as the logic behind the starting
@@ -20,7 +16,6 @@ import static org.junit.Assert.assertTrue;
  * @version 1.0
  * @since   2022-2-1
  */
-
 public class Main extends Application {
     private Duke duke = new Duke();
 
