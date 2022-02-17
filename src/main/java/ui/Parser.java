@@ -34,11 +34,14 @@ public class Parser {
             return new ListCommand();
 
         case "todo":
+            Integer priority = null;
+            message = message.trim();
             if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
-            Integer priority = null;
-            if (message.matches(".* :p[1-4]")) {
+
+            String[] splitPriority = message.split(" :p[1-4]", 2);
+            if (splitPriority.length == 2) {
                 priority = Integer.parseInt(message.substring(message.length() - 1));
                 message = message.split(" :p[1-4]", 2)[0].trim();
             }
@@ -49,33 +52,48 @@ public class Parser {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
 
-            priority = null;
-            if (message.matches(".* :p[1-4]")) {
-                priority = Integer.parseInt(message.substring(message.length() - 1));
-                message = message.split(" :p[1-4]", 2)[0].trim();
-            }
             String[] messageWords = message.split("/at ", 2);
             if (messageWords.length == 1 || messageWords[1].isBlank()) {
                 throw new DukeException("Can't find the time! Have you typed it correctly?");
             }
 
-            return new EventCommand(messageWords[0].trim(), messageWords[1].trim(), priority);
+            message = messageWords[0].trim();
+            String date = messageWords[1].trim();
+            priority = null;
+            splitPriority = date.split(" :p[1-4]", 2);
+            if (splitPriority.length == 2) {
+                priority = Integer.parseInt(date.substring(date.length() - 1));
+                date = date.split(" :p[1-4]", 2)[0].trim();
+            }
+
+            if (message.isBlank()) {
+                throw new DukeException("Can't find any task description! Have you typed it correctly?");
+            }
+            return new EventCommand(message, date, priority);
 
         case "deadline":
             if (message.isBlank()) {
                 throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
             }
 
-            priority = null;
-            if (message.matches(".* :p[1-4]")) {
-                priority = Integer.parseInt(message.substring(message.length() - 1));
-                message = message.split(" :p[1-4]", 2)[0].trim();
-            }
             messageWords = message.split("/by ", 2);
             if (messageWords.length == 1 || messageWords[1].isBlank()) {
                 throw new DukeException("Can't find the time! Have you typed it correctly?");
             }
-            return new DeadlineCommand(messageWords[0].trim(), messageWords[1].trim(), priority);
+
+            message = messageWords[0].trim();
+            date = messageWords[1].trim();
+            priority = null;
+            splitPriority = date.split(" :p[1-4]", 2);
+            if (splitPriority.length == 2) {
+                priority = Integer.parseInt(date.substring(date.length() - 1));
+                date = date.split(" :p[1-4]", 2)[0].trim();
+            }
+
+            if (message.isBlank()) {
+                throw new DukeException("Can't find any task description! Have you typed it correctly?");
+            }
+            return new DeadlineCommand(message, date, priority);
 
         case "mark":
             int serialNumber;
