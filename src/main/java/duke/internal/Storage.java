@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -28,8 +29,9 @@ public class Storage {
      * @param filePath the relative path of the file from program root.
      */
     public Storage(String filePath) {
-        String currentDir = System.getProperty("user.dir");
-        this.absoluteFilePath = Paths.get(currentDir, filePath);
+        File currentDir = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile());
+        Path absoluteFilePath = Paths.get(currentDir.getParentFile().getPath(), filePath);
+        this.absoluteFilePath = absoluteFilePath;
     }
 
     /**
