@@ -1,6 +1,7 @@
 # Duke
 
 Duke is a interactive chatbot with UI. 
+> "Your mind is for having ideas, not holding them" - David Allen
 
 Duke is a task tracker that can track three categories of tasks:
 - Todo
