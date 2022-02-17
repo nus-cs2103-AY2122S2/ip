@@ -23,9 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Duke extends Application {
-
-
-
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -34,6 +31,7 @@ public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image knight = new Image(this.getClass().getResourceAsStream("/images/knight.jpg"));
 
     static boolean isGoodbye = false;
 
@@ -69,6 +67,8 @@ public class Duke extends Application {
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
+
+        stage.getIcons().add(knight);
 
         mainLayout.setPrefSize(400.0, 600.0);
 
@@ -133,10 +133,6 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     private String getResponse(String input) {
         Parser p = new Parser(input);
         ParsedAnswer pa = p.parse();
