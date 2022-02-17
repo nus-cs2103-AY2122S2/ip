@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
+import duke.DukeException;
+import duke.data.TaskList;
 import duke.data.task.Task;
 import duke.data.task.Todo;
 import duke.data.task.Event;
@@ -28,7 +30,7 @@ public class Storage {
      * @throws IOException If failed to read the file.
      * @return A list of tasks.
      */
-    public List<Task> load() throws IOException {
+    public List<Task> load() throws IOException, DukeException {
         File f = new File(filePath);
         // create the folder if it does not exist
         if (f.getParentFile().exists() == false) {
@@ -48,6 +50,7 @@ public class Storage {
         while (scanner.hasNextLine()) {
             line = scanner.nextLine();
             splitted = line.split(Pattern.quote(" | "));
+            assert splitted.length == 3 || splitted.length == 4 : "Data file not in the correct format";
 
             if (splitted.length == 4 && splitted[0].equals("D")) {
                 // deadline
@@ -60,9 +63,10 @@ public class Storage {
                 t = new Todo(splitted[2]);
             } else {
                 // TODO: handle exceptions
-                return tasks;
+                throw new DukeException("Data file not in the correct format");
             }
 
+            assert splitted[1].equals("1") || splitted[1].equals("0") : "Data file not in the correct format";
             // marks the task as done if the second parameter is 1
             if (splitted[1].equals("1")) {
                 t.markAsDone();

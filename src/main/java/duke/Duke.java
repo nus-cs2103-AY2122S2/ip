@@ -24,8 +24,8 @@ public class Duke {
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
-            ui.showLoadingError(); // TODO: provide a GUI alternative
+        } catch (DukeException | IOException e) {
+            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
