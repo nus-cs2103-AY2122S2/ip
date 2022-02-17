@@ -6,20 +6,23 @@ This is Daphne, a friendly bot to help you keep track of your tasks!
 
 ![](docs/Ui.png)
 
-## Commands
+## Features
+| Feature   | Description                                                                      | Command (Case Sensitive)                                                  |  
+|-----------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Help      | Lists all commands.                                                              | `help`                                                                    |
+| Hello     | Greets Daphne.                                                                   | `hello`                                                                   |
+| ToDo      | Add a task without any data/time attached to it.                                 | `todo <DESCRIPTION>`                                                      |
+| Deadline  | Add a task that needds to be done before a specific date/time.                   | `deadline <DESCRIPTION> /by <YYYY-MM-DD> <HH:MM>`                         |
+| Event     | Add a task that starts at a specific date/time and ends at a specific date/time. | `event <DESCRIPTION> /at <START DATE> <START TIME> <END DATE> <END TIME>` |
+| Mark      | Mark a task as complete.                                                         | `mark <INDEX>`                                                            |
+| Unmark    | Mark a task as incomplete.                                                       | `unmark <INDEX>`                                                          |
+| Delete    | Delete a task.                                                                   | `delete <INDEX> `                                                         |
+| Reset     | Delete all tasks.                                                                | `reset`                                                                   |
+| Find      | Find a task based on a keyword.                                                  | `find <KEYWORD>`                                                          |
+| List      | List all current tasks.                                                          | `list`                                                                    |
+| UwU       | (⁄˘⁄ ⁄ ω⁄ ⁄ ˘⁄)♡                                                                 | `uwu`                                                                     |
+| OwO       | (。O⁄ ⁄ω⁄ ⁄ O。)                                                                  | `owo`                                                                     |
+| Terminate | Terminate the application.                                                       | `bye`                                                                      |
 
-Here are some things Daphne can do for you.
-
-Hello: `hello`  
-List All Commands: `help`
-Track To-Dos: `todo <desc>`  
-Track Deadlines: `deadline <desc> /by <date> <time>`  
-Track Events: `event <desc> /at <start_date> <start_time> <end_date> <end_time>`
-Mark Tasks: `mark <index>`  
-Unmark Tasks: `unmark <index>`
-Delete Tasks: `delete <index>` (deletes the task at the specified index), `reset` (deletes all tasks)
-Find Tasks: `find <keyword>`  
-List Tasks: `list`  
-UwU: `uwu`  
-OwO: `owo`  
-Terminate Program: `bye`  
+*Dates are required to be in the `YYYY-MM-DD` format.*  
+*Times are required to be in the `HH:MM` or `HH:MM:SS` format.*

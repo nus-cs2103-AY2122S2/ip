@@ -21,15 +21,16 @@ public class HelpCommand extends Command {
 
         String output = "Commands (Case Sensitive):\n";
         output += HelpCommand.TRIGGER + ": list commands\n";
+        output += HelloCommand.TRIGGER + " greet Daphne\n";
 
         output += ToDoCommand.TRIGGER + ": add to-do\n";
         output += DeadlineCommand.TRIGGER + ": add deadline\n";
         output += EventCommand.TRIGGER + ": add event\n";
 
-        output += MarkCommand.TRIGGER + ": mark task as done\n";
-        output += UnmarkCommand.TRIGGER + ": mark task as not done\n";
+        output += MarkCommand.TRIGGER + ": mark task as complete\n";
+        output += UnmarkCommand.TRIGGER + ": mark task as incomplete\n";
 
-        output += ListCommand.TRIGGER + ": list current tasks\n";
+        output += ListCommand.TRIGGER + ": list all current tasks\n";
         output += FindCommand.TRIGGER + ": find task via keyword search\n";
         output += DeleteCommand.TRIGGER + ": delete task\n";
         output += ResetCommand.TRIGGER + ": clear task list\n";

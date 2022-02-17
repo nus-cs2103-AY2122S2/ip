@@ -31,7 +31,7 @@ import javafx.util.Duration;
  */
 public class ChatBot extends Application {
     public static final String APPLICATION_NAME = "Daphne v1.0";
-    public static final String SAVE_FILE = "./data/save_file";
+    public static final String SAVE_FILE = "./daphne/tasks.save";
 
     private final CommandList commandList;
     private final TaskList taskList;
