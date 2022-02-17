@@ -1,0 +1,3 @@
+| T | 0 | homework |
+| D | 0 | submit CS2103 | at 18/2/2022 |
+| E | 0 | attend carrer fair | at 22/2/2022 |

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import angela.exception.BotException;
+
 /**
  * Stores the information about the task
  */
@@ -17,6 +19,7 @@ public class Task {
     private final String type;
     private LocalDate time;
     private String timeCommand;
+    private String fullTypeText = "";
 
     /**
      * Initializes a task object
@@ -29,6 +32,20 @@ public class Task {
         this.description = description.substring(0, slashIndex);
         this.isComplete = false;
         this.type = type;
+        switch (type) {
+        case "T":
+            fullTypeText = "Todo";
+            break;
+        case "D":
+            fullTypeText = "Deadline";
+            break;
+        case "E":
+            fullTypeText = "Event";
+            break;
+        default:
+            BotException exception = new BotException();
+            exception.printWrongSyntaxError();
+        }
     }
 
     /**
@@ -131,9 +148,9 @@ public class Task {
      */
     private String createStatusDisplay() {
         if (isComplete) {
-            return "[X]";
+            return "Done";
         } else {
-            return "[ ]";
+            return "Not Done Yet";
         }
     }
 
@@ -172,8 +189,8 @@ public class Task {
     private String createTimeDueDisplay() {
         String timeCommandString = "";
         if (!this.timeCommand.equals("")) {
-            timeCommandString = "(" + this.timeCommand + ": "
-                    + time.format(DateTimeFormatter.ofPattern(DISPLAY_DATE_FORMAT)) + ")";
+            timeCommandString = this.timeCommand + " "
+                    + time.format(DateTimeFormatter.ofPattern(DISPLAY_DATE_FORMAT));
         }
         return timeCommandString;
     }
@@ -189,7 +206,7 @@ public class Task {
         if (isDatabase) {
             return "| " + type + " | " + done + " | " + description + timeDue;
         } else {
-            return "[" + type + "]" + done + " " + description + timeDue;
+            return " " + fullTypeText + " " + description + timeDue + ": " + done;
         }
     }
 
