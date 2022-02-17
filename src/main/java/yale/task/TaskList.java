@@ -139,7 +139,7 @@ public class TaskList {
             return "You have no tasks at the moment!";
         } else {
             assert list.getSize() != 0 : "List size should be more than 0";
-            return "Here are the tasks in your list\n"
+            return "Here are the tasks in your list:\n"
                     + list.listOut();
         }
     }
@@ -202,11 +202,11 @@ public class TaskList {
                 return "Error: That task does not exist!";
             } else if (markStatus.equals("mark")) { // Mark
                 list.getTask(taskNumber).markTask();
-                return "Nice! I've marked this task as done:\n"
+                return "Nice! I've marked this task as done:\n    "
                         + list.getTask(taskNumber).toString();
             } else { // Unmark
                 list.getTask(taskNumber).unmarkTask();
-                return "OK, I've marked this task as not done yet:\n"
+                return "OK, I've marked this task as not done yet:\n    "
                         + list.getTask(taskNumber).toString();
             }
         } catch (NumberFormatException e) {
@@ -316,7 +316,7 @@ public class TaskList {
                 String taskName = task.name;
                 boolean isMatched = taskName.contains(inputName);
                 if (isMatched) {
-                    output += count + "." + list.getTask(i).toString() + "\n";
+                    output += count + ". " + list.getTask(i).toString() + "\n";
                     count += 1;
                 }
             }
