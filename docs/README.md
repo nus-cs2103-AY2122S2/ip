@@ -3,7 +3,7 @@ jBot is a desktop app for managing tasks, optimized for use via a **Command Line
 
 ## Quick Start
 1. Ensure you have `Java 11` or above installed in your Computer.
-2. Download the latest `jBot.jar` from [here](https://github.com/jessicajacelyn/ip/releases/download/v0.2/jBot.jar).
+2. Download the latest `jBot.jar` from [here](https://github.com/jessicajacelyn/ip/releases/download/A-Release/jBot.jar).
 3. Copy the file to the folder you want to use as the home folder for your jBot.
 4. Double-click the file to start the app. The GUI should appear in a few seconds. 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `list` and pressing Enter will list out the tasks that you have stored on your device.
