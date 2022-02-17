@@ -2,7 +2,9 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+
 
 /**
  * The DukeException class identifies and throws Exceptions unique to Duke.
@@ -132,14 +134,17 @@ public class DukeException extends Exception {
     private void checkValidDate(String dateTime) throws DukeException {
         LocalDateTime d1 = LocalDateTime.now();
         try {
-            LocalDateTime d2 = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hha"));
+            LocalDateTime d2 = LocalDateTime.parse(dateTime, new DateTimeFormatterBuilder()
+                            .parseCaseInsensitive()
+                            .appendPattern("yyyy-MM-dd hha")
+                            .toFormatter());
             if (d2.isBefore(d1)) {
                 throw new DukeException("MEOW!!! Please enter a valid date from "
                         + d1.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hha")) + " and onwards.");
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("MEOW!!! Please enter a valid date and time in the format yyyy-mm-dd hha "
-                    + "(Example: 2022-10-10 10PM)");
+                    + "(Example: 2022-10-10 10pm)");
         }
     }
 }

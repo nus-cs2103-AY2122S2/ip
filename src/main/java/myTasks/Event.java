@@ -2,6 +2,7 @@ package mytasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 /**
  * * Creates a task that will begin at a certain time.
@@ -30,7 +31,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: "
-                + LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hha"))
-                        .format(DateTimeFormatter.ofPattern("MMMM d, yyyy hha")) + ")";
+                + LocalDateTime.parse(dateTime, new DateTimeFormatterBuilder()
+                    .parseCaseInsensitive()
+                    .appendPattern("yyyy-MM-dd hha")
+                    .toFormatter())
+                    .format(DateTimeFormatter.ofPattern("MMMM d, yyyy hha")) + ")";
     }
 }
