@@ -35,18 +35,14 @@ Once you are acquainted you could tell Conan the tasks you want to do.
 #### Tasks
 
 There are four kinds of tasks that Conan can store.
-1. **Todo** - Keeps track of the task that do not have to be completed without sometime.
-
-   Format: todo {Task} in the command line for such commands.
-2. **Event** - Any event that you have to attend a certain date and time, Conan can keep track of that for you. 
-
-   Format: event {Task} /at YYYY-MM-DD HHMM
-3. **Deadline** - Tasks that need to be completed within a time frame. 
-
-   Format: deadline {Task} /by YYYY-MM-DD HHMM
-4. **Task** - any general tasks to keep track of. 
-
-   Format: {Task , more than 2 words}
+1. **Todo** - Keeps track of the task that do not have to be completed without sometime. <br>
+   _Format_: todo {Task} in the command line for such commands.
+2. **Event** - Any event that you have to attend a certain date and time, Conan can keep track of that for you. <br>
+   _Format_: event {Task} /at YYYY-MM-DD HHMM
+3. **Deadline** - Tasks that need to be completed within a time frame. <br>
+   _Format_: deadline {Task} /by YYYY-MM-DD HHMM
+4. **Task** - any general tasks to keep track of. <br>
+   _Format_: {Task , more than 2 words}
 
 **Note**: For Event and Deadline, time argument HHMM is not necessary to enter, however the date must be entered.
 
@@ -232,45 +228,45 @@ public class Launcher {
 
 ## FAQ
 
-**Q.** Can multiple users use the same app? </br>
+**Q.** Can multiple users use the same app? <br>
 **A.** This task manager is designed to track the tasks of a single user, at a time. This means if another user starts
 the app then your tasks will be erased.
 
-**Q.** What happens after I type in the bye command? </br>
+**Q.** What happens after I type in the bye command? <br>
 **A.** Once the bye command is entered, Conan shutdowns, however the window, will still be open, in case you would like
 to review any of the actions performed.
 
-**Q.** What version of java is needed to run Conan? </br>
+**Q.** What version of java is needed to run Conan? <br>
 **A.** You would need to have Java 11, to run Conan on your device.
 
-**Q.** If I try to add a duplicate task what would happen? </br>
+**Q.** If I try to add a duplicate task what would happen? <br>
 **A.** The duplicate task will not be added to the list of tasks, instead a warning will be issued.
 
-**Q.** Can I add a task that clashes with a previously added task? </br>
+**Q.** Can I add a task that clashes with a previously added task? <br>
 **A.** Yes, a warning will be issued, but the task will be added. In case you would like to remove the task, use the
 delete command.
 
-**Q.** What happens if I input an empty Command? </br>
+**Q.** What happens if I input an empty Command? <br>
 **A.** A warning will be issued to indicate that empty command has been entered.
 
-**Q.** Conan window is still open after I entered the bye command, doe this mean I can add more tasks? </br>
+**Q.** Conan window is still open after I entered the bye command, doe this mean I can add more tasks? <br>
 **A.** No, once you have typed, bye, conan program stops, and any command you enter will be not recorded, or carried out
 by conan. Instead, run conan again.
 
 
 ## Glossary
 
-| Action      | Description                                | Format                                                                                                                        |
-| ----------- | ------------------------------------------ |-------------------------------------------------------------------------------------------------------------------------------|
-| Add         | Adds a task to track                       | {Task , more than 2 words} </br> todo {Task} </br> event {Task} /at YYYY-MM-DD HHMM </br> deadline {Task} /by YYYY-MM-DD HHMM |
-| Bye         | Closes the program and stores the tasks    | bye                                                                                                                           |
-| Delete      | Deletes a task from the list of tasks      | delete {Index Number}                                                                                                         |
-| Due on      | Gets tasks that are due on {Date}          | due-on {YYYY-MM-DD}                                                                                                           |
-| Due before  | Gets tasks that are due before {Date}      | due-before {YYYY-MM-DD}                                                                                                       |
-| Find        | Finds tasks that have {Keyword}            | find {keyword}                                                                                                                |
-| List        | Displays the lists of tracks added by user | list                                                                                                                          |
-| Mark        | Marks task at {Index number} as done       | mark {Index Number}                                                                                                           |
-| Unmark      | Marks task at {Index number} as not done   | unmark {Index Number}                                                                                                         |
+| Action      | Description                                | Format                                                                                                                     |
+| ----------- | ------------------------------------------ |----------------------------------------------------------------------------------------------------------------------------|
+| Add         | Adds a task to track                       | {Task , more than 2 words} <br> todo {Task} <br> event {Task} /at YYYY-MM-DD HHMM <br> deadline {Task} /by YYYY-MM-DD HHMM |
+| Bye         | Closes the program and stores the tasks    | bye                                                                                                                        |
+| Delete      | Deletes a task from the list of tasks      | delete {Index Number}                                                                                                      |
+| Due on      | Gets tasks that are due on {Date}          | due-on {YYYY-MM-DD}                                                                                                        |
+| Due before  | Gets tasks that are due before {Date}      | due-before {YYYY-MM-DD}                                                                                                    |
+| Find        | Finds tasks that have {Keyword}            | find {keyword}                                                                                                             |
+| List        | Displays the lists of tracks added by user | list                                                                                                                       |
+| Mark        | Marks task at {Index number} as done       | mark {Index Number}                                                                                                        |
+| Unmark      | Marks task at {Index number} as not done   | unmark {Index Number}                                                                                                      |
 
 ## Setting up in Intellij
 
@@ -281,6 +277,6 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
     1. Click `Open`.
     1. Select the project directory, and click `OK`.
     1. If there are any further prompts, accept the defaults.
-3. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk). </br>
+3. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk). <br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
 
