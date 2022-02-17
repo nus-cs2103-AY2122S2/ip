@@ -59,6 +59,15 @@ Format:
 Example:
 - `ummark 2`
 
+### Delete task
+Format:
+- `delete TASK_INDEX`
+- TASK_INDEX cannot be empty.
+
+### Find task
+Format:
+- `find SEARCH_TERM`
+- SEARCH_TERM cannot be empty.
 
 
 
