@@ -6,6 +6,12 @@ import duke.ui.Ui;
 
 public class ByeCommand extends Command {
 
+    /**
+     * Prints bye message in application
+     * @param taskList list of tasks
+     * @param ui ui of javafx
+     * @return String exit message
+     */
     public String execute(TaskList taskList, Ui ui) {
         Storage.saveData(taskList);
         return ui.printExitMessage();

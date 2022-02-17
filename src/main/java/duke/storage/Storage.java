@@ -3,9 +3,6 @@ package duke.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,6 +20,8 @@ public class Storage {
     private static final java.nio.file.Path PATH = java.nio.file.Paths.get(Storage.HOME,
             "desktop", "ip", "data", "askjamie.txt");
     public static final String FILE_PATH = String.valueOf(PATH);
+
+    /** Constructor for Storage class */
     public Storage() {
         Storage.checkValidPath();
         if (!java.nio.file.Files.exists(Storage.PATH)) {
