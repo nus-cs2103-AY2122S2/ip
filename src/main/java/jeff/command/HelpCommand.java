@@ -16,10 +16,12 @@ public class HelpCommand extends Command {
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
+     * @return points to the readme.txt to help the users.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showHelp();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String response = ui.showHelp();
+        return response;
     }
 
     /**

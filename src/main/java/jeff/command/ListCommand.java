@@ -16,11 +16,13 @@ public class ListCommand extends Command {
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
+     * @return list of all tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String response;
         if (tasks.isEmpty()) {
-            ui.showEmptyList();
+            response = ui.showEmptyList();
         } else {
             StringBuilder taskStrings = new StringBuilder();
             for (int n = 0; n < tasks.size(); n++) {
@@ -28,8 +30,9 @@ public class ListCommand extends Command {
                 String currTaskString = temp + "." + tasks.getString(n) + "\n";
                 taskStrings.append(Ui.addPrefix(currTaskString));
             }
-            ui.showList(taskStrings.toString());
+            response = ui.showList(taskStrings.toString());
         }
+        return response;
     }
 
     /**

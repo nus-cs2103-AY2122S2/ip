@@ -34,15 +34,17 @@ public class EventCommand extends Command {
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
+     * @return confirmation response that a new event has been added.
      * @throws JeffException When no available format is available
      *                       to parse dateInfo or file cannot be saved.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
         Task currTask = new Event(description, dateInfo);
         tasks.add(currTask);
-        ui.showAdded(currTask.toString(), tasks.size());
         storage.save(tasks);
+        String response = ui.showAdded(currTask.toString(), tasks.size());
+        return response;
     }
 
     /**

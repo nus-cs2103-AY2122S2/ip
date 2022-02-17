@@ -30,12 +30,14 @@ public class FindCommand extends Command {
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
+     * @return list of task that matches the user input.
      * @param storage Storage class used to save files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String response;
         if (tasks.isEmpty()) {
-            ui.showEmptyListFound();
+            response = ui.showEmptyListFound();
         } else {
             StringBuilder taskStrings = new StringBuilder();
             int currCounter = 1;
@@ -61,11 +63,12 @@ public class FindCommand extends Command {
                 }
             }
             if (taskStrings.length() == 0) {
-                ui.showNoneFound(toBeFound);
+                response = ui.showNoneFound(toBeFound);
             } else {
-                ui.showFoundList(taskStrings.toString());
+                response = ui.showFoundList(taskStrings.toString());
             }
         }
+        return response;
     }
 
     /**

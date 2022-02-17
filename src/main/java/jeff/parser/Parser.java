@@ -18,7 +18,7 @@ import jeff.main.JeffException;
  * and call the correct Command class while handling exceptions.
  */
 public class Parser {
-
+    private static boolean isExit = false;
     /**
      * Parses the user input and calls the correct command
      *
@@ -40,6 +40,7 @@ public class Parser {
         // Perform the correct instructions according to the keyword.
         switch(keyword) {
         case ("bye"):
+            isExit = true;
             return new ByeCommand();
         case ("list") :
             return new ListCommand();
@@ -126,5 +127,14 @@ public class Parser {
         default:
             return new HelpCommand();
         }
+    }
+
+    /**
+     * Returns if exit is requested.
+     *
+     * @return boolean value of isExit.
+     */
+    public static boolean isExit() {
+        return isExit;
     }
 }

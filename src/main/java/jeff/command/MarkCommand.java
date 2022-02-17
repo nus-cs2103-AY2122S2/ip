@@ -28,11 +28,12 @@ public class MarkCommand extends Command {
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
+     * @return confirmation response that a task has been marked.
      * @throws JeffException When index of task to mark as done is
      *                       out of bounds or file cannot be saved.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
         try {
             tasks.getAt(index);
         } catch (IndexOutOfBoundsException e) {
@@ -42,8 +43,9 @@ public class MarkCommand extends Command {
                     + "please double check the index number");
         }
         tasks.mark(index);
-        ui.showMark(tasks.getString(index));
+        String response = ui.showMark(tasks.getString(index));
         storage.save(tasks);
+        return response;
     }
 
     /**
