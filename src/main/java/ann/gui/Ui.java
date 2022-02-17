@@ -18,8 +18,10 @@ public class Ui {
 
     /**
      * Initializes the GUI.
-     * @param stage
-     * @param annBot
+     * @@author j-lum-reused
+     * Source: from https://se-education.org/guides/tutorials/javaFxPart4.html.
+     * @param stage the top level JavaFX container.
+     * @param annBot represents the main logic of the application.
      */
     public void start(Stage stage, AnnBot annBot) {
         try {
@@ -35,6 +37,8 @@ public class Ui {
         }
     }
 
+    // Solution below adapted from
+    // https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/ui/UiManager.java.
     private void showInitializationErrorAndShutDown(Throwable e) {
         final Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Unable to initialize app... Shutting down...");

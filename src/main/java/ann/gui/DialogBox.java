@@ -15,6 +15,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
+/**
+ * Controller for DialogBox, which can contain the user's input or AnnBot's response and a display picture.
+ * @@author j-lum-reused
+ * Source: https://se-education.org/guides/tutorials/javaFxPart4.html.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

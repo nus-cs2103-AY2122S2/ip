@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 /**
  * Represents the main logic of the app.
+ * Solution below adapted from
+ * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java.
  *
  * @author Hong Anh
  * @version 0.1
