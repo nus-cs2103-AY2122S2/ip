@@ -43,6 +43,15 @@ public class Ui {
         return WELCOME_MESSAGE;
     }
 
+    /**
+     * Returns a string that prompts for the next instruction.
+     *
+     * @return The message.
+     */
+    public static String getPromptMessage() {
+        return PROMPT_INSTRUCTION_MESSAGE;
+    }
+
 
     /**
      * Prints the welcome message to the output stream.

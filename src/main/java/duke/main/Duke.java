@@ -122,4 +122,14 @@ public class Duke {
     public String getGreeting() {
         return Ui.getWelcomeMessage();
     }
+
+    /**
+     * Returns a message that prompts for the next user input.
+     *
+     * @return The message.
+     */
+    public String getPromptMessage() {
+
+        return Ui.getPromptMessage();
+    }
 }

@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        String prompt = duke.getPromptMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -57,6 +58,11 @@ public class MainWindow extends AnchorPane {
             PauseTransition exitTransition = new PauseTransition(Duration.seconds(1));
             exitTransition.setOnFinished(event -> Platform.exit());
             exitTransition.play();
+        } else {
+            // Prompt for next message if the user does not end the application.
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(prompt, dukeImage)
+            );
         }
     }
 
