@@ -14,7 +14,7 @@ public class TaskTest {
     @Test
     public void testDone() {
         Task sub3 = new Task("Return book");
-        sub3.markDone();
+        sub3.markAsDone();
         assertTrue(sub3.isDone());
     }
 
@@ -24,7 +24,7 @@ public class TaskTest {
     public void testStatus() {
         assertEquals("[] Return book", new Task("Return book").toString());
         Task sub6 = new Task("Return book");
-        sub6.markDone();
+        sub6.markAsDone();
         assertEquals("[] Return book", sub6.toString());
     }
 }
