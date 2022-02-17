@@ -1,18 +1,19 @@
 # AnnBot User Guide
 AnnBot is a **desktop app for managing your tasks**. It's optimized for usage via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI).
 
-* Quick Start
-* Features
+* [Quick Start](./README.md#quick-start)
+* [Features](./README.md#features)
     * Adding a task
-      * Adding a deadline
-      * Adding an event
-      * Adding a todo
-    * Deleting a task
-    * Viewing the list of tasks
-    * Finding a task
-    * Marking a task as done
-    * Marking a task as not done
-    * Exiting
+      * [Adding a deadline](./README.md#adding-a-deadline-add-deadline)
+      * [Adding an event](./README.md#adding-an-event-add-event)
+      * [Adding a todo](./README.md#adding-a-todo-add-todo)
+    * [Deleting a task](./README.md#deleting-a-task-delete)
+    * [Viewing the list of tasks](./README.md#viewing-the-list-of-tasks-list)
+    * [Finding a task](./README.md#finding-a-task-find)
+    * [Marking a task as done](./README.md#marking-a-task-as-done-mark)
+    * [Marking a task as not done](./README.md#marking-a-task-as-done-unmark)
+    * [Exiting](./README.md#exiting-bye)
+    
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your PC.
 2. Download the latest `ip.jar` from [here](https://github.com/honganhcs/ip/releases).
@@ -20,6 +21,7 @@ AnnBot is a **desktop app for managing your tasks**. It's optimized for usage vi
 4. Double-click the file to start the app. A GUI similar to the below should appear in a few seconds.
 
 ![AnnBot GUI](./start.png)
+
 ## Features 
 
 ### Adding a deadline: `add deadline`
