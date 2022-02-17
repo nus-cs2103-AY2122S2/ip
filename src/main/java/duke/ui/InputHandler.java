@@ -17,6 +17,15 @@ public class InputHandler {
     private Storage storage;
     private Parser parser;
 
+    //Error messages
+    final String unableToSnoozeErrorMessage = "Wrong usage of snooze! Correct usage: snooze [name]"
+            + " [time](required if deadline/event";
+    final String unableToFindErrorMessage = "Uh oh! It seems like you did not specify what to find";
+    final String unableToDeleteErrorMessage = "Wrong usage of delete! Correct usage: delete [index]";
+    final String unableToUnmarkErrorMessage = "Wrong usage of unmark! Correct usage: unmark [index]";
+    final String unableToMarkErrorMessage = "Wrong usage of mark! Correct usage: mark [index]";
+    final String unableToListErrorMessage = "Wrong usage of list! Correct usage: list";
+
     /**
      * Constructs an InputHandler and loads data into Storage object
      *
@@ -29,7 +38,7 @@ public class InputHandler {
 
 
     /**
-     * Handles input from Duke.java.
+     * Handles input from Duke.java. Breaks up the String input into proper parts and parses them.
      *
      * @param input String input from user input.
      * @return String output from Duke as response to user.
@@ -53,34 +62,40 @@ public class InputHandler {
             if (splitInput.length == 1) {
                 return parser.parse(CommandType.LIST, this.storage, splitInput);
             } else {
-                throw new DukeException("Wrong usage of list! Correct usage: list");
+                throw new DukeException(unableToListErrorMessage);
             }
         case "mark":
             //Confirms that input is in the format mark [index]
             if (splitInput.length == 2) {
                 return this.parser.parse(CommandType.MARK, this.storage, splitInput);
             } else {
-                throw new DukeException("Wrong usage of mark! Correct usage: mark [index]");
+                throw new DukeException(unableToMarkErrorMessage);
             }
         case "unmark":
             //Confirms that input is in the format mark [index]
             if (splitInput.length == 2) {
                 return this.parser.parse(CommandType.UNMARK, this.storage, splitInput);
             } else {
-                throw new DukeException("Wrong usage of unmark! Correct usage: unmark [index]");
+                throw new DukeException(unableToUnmarkErrorMessage);
             }
         case "delete":
             //Confirms that input is in the format mark [index]
             if (splitInput.length == 2) {
                 return this.parser.parse(CommandType.DELETE, this.storage, splitInput);
             } else {
-                throw new DukeException("Wrong usage of delete! Correct usage: delete [index]");
+                throw new DukeException(unableToDeleteErrorMessage);
             }
         case "find":
             if (splitInput.length > 1) {
                 return this.parser.parse(CommandType.FIND, this.storage, splitInput);
             } else {
-                throw new DukeException("Uh oh! It seems like you did not specify what to find");
+                throw new DukeException(unableToFindErrorMessage);
+            }
+        case "snooze":
+            if (splitInput.length > 2) {
+                return parser.parse(CommandType.SNOOZE, this.storage, splitInput);
+            } else {
+                throw new DukeException(unableToSnoozeErrorMessage);
             }
         case "bye":
             return endMessage;
@@ -151,7 +166,7 @@ public class InputHandler {
     }
 
     /**
-     * Types of commands
+     * Types of commands accepted by Duke
      */
     enum CommandType {
         TODO,
@@ -161,7 +176,8 @@ public class InputHandler {
         MARK,
         UNMARK,
         DELETE,
-        FIND
+        FIND,
+        SNOOZE
     }
 }
 

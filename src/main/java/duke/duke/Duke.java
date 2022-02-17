@@ -121,6 +121,7 @@ public class Duke extends Application {
      * Creates the dialogboxes as well as handles user and duke's inputs
      */
     private void handleUserInput() {
+
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogBox.getChildren().addAll(

@@ -122,7 +122,8 @@ public class Storage {
         } else if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
             String mark = (deadline.hasBeenMarked()) ? symbolForMarked : symbolForUnMarked;
-            output = symbolForDeadline + " " + mark + " / " + deadline.name + " / " + deadline.dueDate + " / " + deadline.dueTime + "\n";
+            output = symbolForDeadline + " " + mark + " / " + deadline.name + " / " + deadline.dueDate + " / "
+                    + deadline.dueTime + "\n";
         } else if (task instanceof Event) {
             Event event = (Event) task;
             String mark = (event.hasBeenMarked()) ? symbolForMarked : symbolForUnMarked;

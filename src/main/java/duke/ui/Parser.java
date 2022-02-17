@@ -68,6 +68,8 @@ public class Parser {
             return parseDelete(storage, splitInput);
         case FIND:
             return parseFind(storage, splitInput);
+        case SNOOZE:
+            return parseSnooze(storage, splitInput);
         default:
             throw new DukeException(defaultErrorMessage);
         }
@@ -204,6 +206,7 @@ public class Parser {
         String unmarkedMessage = "OK, I've marked this task as not done yet:\n";
         String wrongMarkFormatErrorMessage = "Make sure mark is in the format: mark [index]!";
         String wrongUnmarkFormatErrorMessage = "Make sure unmark is in the format: unmark [index]!";
+        String invalidCommandTypeErrorMessage = "Invalid CommandType. Should not reach here";
 
         switch (type) {
         case UNMARK:
@@ -230,7 +233,11 @@ public class Parser {
                 throw new DukeException(wrongMarkFormatErrorMessage);
             }
         default:
-            throw new DukeException("Invalid CommandType. Should not reach here");
+            throw new DukeException(invalidCommandTypeErrorMessage);
         }
+    }
+
+    private String parseSnooze(Storage storage, String[] splitInput) {
+        return "snooze";
     }
 }
