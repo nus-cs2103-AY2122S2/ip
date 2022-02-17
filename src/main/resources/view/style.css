@@ -1,0 +1,29 @@
+.dialog {
+    -fx-background-insets: 5;
+    -fx-background-radius: 20px;
+    -fx-label-padding: 15px;
+    -fx-background-color: #d1a874;
+}
+
+.bg {
+    -fx-background-image: url('/images/background.jpg');
+    -fx-background-size: cover;
+}
+
+.container {
+    -fx-background-color: transparent;
+}
+
+.textBox {
+    -fx-background-color: #f1d196;
+    -fx-background-radius: 10px;
+    -fx-prompt-text-fill: dimgrey;
+    -fx-background-insets: 3;
+    -fx-label-padding: 20px;
+}
+
+.button {
+    -fx-background-color: #f1d196;
+    -fx-background-radius: 30px;
+    -fx-background-insets: 3;
+}

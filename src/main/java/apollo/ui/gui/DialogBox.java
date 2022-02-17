@@ -46,7 +46,9 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setMinHeight(Region.USE_PREF_SIZE);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {

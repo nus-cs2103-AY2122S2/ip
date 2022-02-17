@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -24,6 +25,7 @@ public class Gui {
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Apollo");
+            primaryStage.getIcons().add(new Image("/images/apollo.png"));
             fxmlLoader.<MainWindow>getController().initialize(greeting, this);
             primaryStage.show();
         } catch (IOException e) {
