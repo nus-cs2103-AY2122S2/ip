@@ -17,12 +17,14 @@ public class CommandList {
             "mark - mark task as done",
             "unmark - mark task as undone",
             "delete - delete task",
-            "find - find task in task list"};
+            "find - find task in task list",
+            "manage contacts - switch to manage contacts"};
 
         contactCommands = new String[]{"list - list out all your contacts",
             "add - add a contact in the form of '{name} {number}'",
             "update - update a contact in the form of '{name} {number}'",
-            "delete - delete contact"};
+            "delete - delete contact",
+            "manage tasks - switch to manage tasks"};
 
     }
 
