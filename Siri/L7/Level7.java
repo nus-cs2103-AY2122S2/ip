@@ -15,6 +15,7 @@ public class Level7 {
         java.nio.file.Path path = java.nio.file.Paths.get("data", "Siri.txt");
         java.nio.file.Path pathToSiriTxt = path.toAbsolutePath();
         String strPathToSiriTxt = pathToSiriTxt.toString();
+        System.out.println(strPathToSiriTxt);
 
         String line = "    ____________________________________________________________________________________\n";
         //prints a line before and after greeting message upon runnind of
