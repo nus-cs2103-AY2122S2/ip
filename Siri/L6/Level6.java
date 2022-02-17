@@ -89,13 +89,13 @@ public class Level6 {
                     break;
                 }
             } else if (word.equals("delete")) {
-                    int listIndex = sc.nextInt() - 1;
-                    Task tempT = arrList.get(listIndex);
-                    arrList.remove(listIndex);
-                    System.out.println(line + "     Sure. I've removed this task from the list:\n       "
-                            + tempT.toString() + "\n" + "\n"
-                            + "     Number of task(s) in your list: " + arrList.size() + "\n"
-                            + line);
+                int listIndex = sc.nextInt() - 1;
+                Task tempT = arrList.get(listIndex);
+                arrList.remove(listIndex);
+                System.out.println(line + "     Sure. I've removed this task from the list:\n       "
+                        + tempT.toString() + "\n" + "\n"
+                        + "     Number of task(s) in your list: " + arrList.size() + "\n"
+                        + line);
             } else {
                 System.out.println(line + "     Please enter a valid task type with description.       \n" + line);
             }
