@@ -51,12 +51,13 @@ public class Gene {
 
     /**
      * The constructor for the Gene class
-     * @param filePath the name of the file to be initiated to store user input
+     * @param taskFilePath the name of the file to be initiated to store user input
+     * @param locsFilePath the name of the location file to be initiated to store user input
      */
-    public Gene(String filePath) {
+    public Gene(String taskFilePath, String locsFilePath) {
         this.geneUi = new Ui();
-        this.geneTaskStorage = new TaskStorage(filePath);
-        this.geneLocationStorage = new LocationStorage(filePath);
+        this.geneTaskStorage = new TaskStorage(taskFilePath);
+        this.geneLocationStorage = new LocationStorage(locsFilePath);
         this.geneTasks = new TaskList(geneTaskStorage);
         this.geneLocs = new LocationList(geneLocationStorage);
     }
@@ -94,7 +95,7 @@ public class Gene {
      * @param args something
      */
     public static void main(String[] args) {
-        Gene toRun = new Gene("gene.txt");
+        Gene toRun = new Gene("geneTasks.txt", "geneLocs.txt");
         toRun.run();
     }
 }

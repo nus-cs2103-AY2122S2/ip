@@ -3,6 +3,7 @@ package gene.command;
 import java.util.ArrayList;
 
 import gene.component.*;
+import gene.location.Location;
 import gene.task.Task;
 
 
@@ -31,30 +32,45 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage) {
-        ArrayList<Task> tempTask = new ArrayList<>();
+        ArrayList<Task> tempTasks = new ArrayList<>();
+        ArrayList<Location> tempLocs = new ArrayList<>();
 
         for (int i = 0; i < geneTasks.size(); i++) { //to edit in tasklist
             if (geneTasks.get(i).containsKeyword(this.keyword)) {
-                tempTask.add(geneTasks.get(i));
+                tempTasks.add(geneTasks.get(i));
             }
         }
 
-        StringBuilder initList = new StringBuilder();
+        for (int i = 0; i < geneLocs.size(); i++) { //to edit in tasklist
+            if (geneLocs.get(i).containsKeyword(this.keyword)) {
+                tempLocs.add(geneLocs.get(i));
+            }
+        }
 
-        if (tempTask.size() == 0) {
+        StringBuilder taskList = new StringBuilder();
+        StringBuilder locList = new StringBuilder();
+
+        if (tempTasks.size() == 0 && tempLocs.size() == 0) {
             return "Awwman, there are no matching tasks in your list";
-        } else {
-            for (int i = 1; i < tempTask.size() + 1; i++) { //to edit in tasklist
-                initList.append(i).append(".");
-                initList.append(geneTasks.get(i - 1));
-                initList.append("\n");
-            }
-
-            return Ui.showLine()
-            + "Here are the matching tasks in your list:\n"
-                    + initList.toString()
-                    + Ui.showLine();
         }
+        for (int i = 1; i < tempTasks.size() + 1; i++) { //to edit in tasklist
+            taskList.append(i).append(".");
+            taskList.append(geneTasks.get(i - 1));
+            taskList.append("\n");
+        }
+
+        for (int i = 1; i < tempLocs.size() + 1; i++) { //to edit in tasklist
+            locList.append(i).append(".");
+            locList.append(geneTasks.get(i - 1));
+            locList.append("\n");
+        }
+
+        return Ui.showLine() + "\n"
+        + "Here are the matching tasks in your list:\n"
+                + taskList.toString() + "\n"
+                + "And here are the matching locations:\n"
+                + locList.toString()
+                + Ui.showLine();
     }
 
     /**

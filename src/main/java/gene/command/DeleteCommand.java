@@ -1,6 +1,7 @@
 package gene.command;
 
 import gene.component.*;
+import gene.location.Location;
 import gene.task.Task;
 
 /**
@@ -11,7 +12,7 @@ import gene.task.Task;
  * @since 2022-01-12
  */
 public class DeleteCommand extends Command {
-    private final String taskBody;
+    private final String inputBody;
 
     /**
      * The delete command constructor
@@ -19,7 +20,7 @@ public class DeleteCommand extends Command {
      * @param body
      */
     public DeleteCommand(String body) {
-        this.taskBody = body;
+        this.inputBody = body;
     }
 
     /**
@@ -33,22 +34,47 @@ public class DeleteCommand extends Command {
      * @param geneLocationStorage the location storage class object
      */
     @Override
-    public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage) {
+    public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage,
+                          LocationList geneLocs, LocationStorage geneLocationStorage) {
+        String toDelete = "";
+        String strIndex;
+        int index = 1;
         try {
-            String[] tokens = taskBody.split(" ");
-            String strIndex = tokens[1]; //error here
-            int index = Integer.parseInt(strIndex);
-            Task targetTask = geneTasks.get(index);
-            geneTasks.remove(index); //error if empty
-            geneTaskStorage.deleteLineToFile(index); //error if empty
-            return Ui.showLine()
-                    + "Noted. I've removed this task:\n"
-                            + "  " + targetTask + "\n"
-                            + "Now you have " + geneTasks.size() + " tasks in the list."
-                            + "\n"
-                            + Ui.showLine();
+            String[] tokens = inputBody.split(" ");
+            toDelete = tokens[1];
+            strIndex = tokens[2]; //error here
+            index = Integer.parseInt(strIndex);
         } catch (Exception err) {
-            System.out.println("File and list is already empty");
+            return "Seems like you keyed in the wrong string of words...\n"
+                    + "Write it like this instead: " + "delete location/task 0";
+        }
+        try {
+            switch (toDelete) {
+            case "location":
+                Location targetLocation = geneLocs.get(index);
+                geneTasks.remove(index); //error if empty
+                geneTaskStorage.deleteLineToFile(index); //error if empty
+                return Ui.showLine() + "\n"
+                        + "Noted. I've removed this location:\n"
+                        + "  " + targetLocation + "\n"
+                        + "Now you have " + geneLocs.size() + " locations in the list."
+                        + "\n"
+                        + Ui.showLine();
+            case "task":
+                Task targetTask = geneTasks.get(index);
+                geneTasks.remove(index); //error if empty
+                geneTaskStorage.deleteLineToFile(index); //error if empty
+                return Ui.showLine() + "\n"
+                        + "Noted. I've removed this task:\n"
+                        + "  " + targetTask + "\n"
+                        + "Now you have " + geneTasks.size() + " tasks in the list."
+                        + "\n"
+                        + Ui.showLine();
+            default:
+                break;
+            }
+        } catch (Exception err) {
+            return "File and list is already empty";
         }
         return "";
     }

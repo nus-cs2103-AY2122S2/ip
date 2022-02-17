@@ -15,4 +15,5 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
-data/gene.txt
+data/geneLocs.txt
+data/geneTasks.txt

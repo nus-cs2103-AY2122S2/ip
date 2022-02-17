@@ -10,7 +10,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +56,7 @@ public class LocationStorage {
         } catch (IOException err) {
             err.printStackTrace();
         } catch (SecurityException err) {
-            //
+            err.printStackTrace();
         }
     }
 
@@ -92,7 +91,6 @@ public class LocationStorage {
         try {
             FileReader fileReader = new FileReader(this.absolutePath.toString());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 //write to arraylist
@@ -100,7 +98,12 @@ public class LocationStorage {
                 String[] tokens = line.split(" / ");
                 boolean isMarked = tokens[tokens.length - 1].equals("1");
                 switch(tokens[0]) {
-                case "todo":
+                case "location":
+                    String locationName = tokens[1];
+                    String locationPostalCode = tokens[2];
+                    String locationType = tokens[3];
+                    this.itemList.add(new Location(locationName, locationPostalCode, locationType));
+                    break;
                 default:
                     break;
                 }
@@ -121,7 +124,7 @@ public class LocationStorage {
      */
     public void deleteLineToFile(int index) {
         File inputFile = new File(this.absolutePath.toString());
-        File tempFile = new File(this.folderPath.resolve("temp.txt").toString());
+        File tempFile = new File(this.folderPath.resolve("tempLoc.txt").toString());
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -183,14 +186,14 @@ public class LocationStorage {
      * This method handles the writing to target file for hte execution of an
      * add command. This method also parses and formats instructions the kinda
      * optimises for less storage space. (Instead of UX)
-     *
-     * @param taskKey
-     * @param locationType
+     * @param locationName
+     * @param postalCode
+     * @param locType
      * @param isMarked
      */
-    public void writeToFile(String taskKey, String locationType, boolean isMarked) {
+    public void writeToFile(String locationName, String postalCode, String locType, boolean isMarked) {
         String mark = isMarked ? "1" : "0";
-        String toWrite = "";
+        String toWrite = locationName + " / " + postalCode + " / " + locType;
         try {
             FileWriter fw = new FileWriter(this.absolutePath.toString(), true);
             BufferedWriter bufferedWriter = new BufferedWriter(fw);
@@ -198,12 +201,8 @@ public class LocationStorage {
             if (this.targetFile.length() > 0) {
                 newLine = "\n";
             }
-            switch(locationType) {
-            case "L":
-                break;
-            default:
-                break;
-            }
+            toWrite = "location / " + toWrite + " / " + mark;
+            bufferedWriter.append(newLine + toWrite);
             bufferedWriter.close();
         } catch (Exception err) {
             err.printStackTrace();

@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import gene.exception.FileDeletionException;
+import gene.exception.FileRenameException;
 import gene.task.DeadlineTask;
 import gene.task.EventTask;
 import gene.task.Task;
@@ -144,7 +146,7 @@ public class TaskStorage {
      */
     public void deleteLineToFile(int index) {
         File inputFile = new File(this.absolutePath.toString());
-        File tempFile = new File(this.folderPath.resolve("temp.txt").toString());
+        File tempFile = new File(this.folderPath.resolve("tempTask.txt").toString());
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
@@ -165,17 +167,17 @@ public class TaskStorage {
             writer.close();
 
             if (!inputFile.delete()) {
-                System.out.println("cannot delete sia");
+                throw new FileDeletionException();
             };
 
             if (!tempFile.renameTo(inputFile)) {
-                System.out.println(inputFile.getAbsolutePath() + "cannot rename sia");
+                throw new FileRenameException();
             };
 
             this.targetFile = tempFile;
 
         } catch (Exception err) {
-            err.printStackTrace();
+            err.getMessage();
         }
     }
 
@@ -205,7 +207,7 @@ public class TaskStorage {
     /**
      * This method handles the writing to target file for hte execution of an
      * add command. This method also parses and formats instructions the kinda
-     * optimises for less storage space. (Instead of UX)
+     * optimises for less storage space. (Instead of UX) todo use varargs
      *
      * @param taskKey
      * @param taskType

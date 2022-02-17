@@ -1,7 +1,5 @@
 package gene.location;
 
-import java.time.format.DateTimeFormatter;
-
 public class Location {
     private final String locationName;
     private final String postalCode;
@@ -43,7 +41,7 @@ public class Location {
     @Override
     public String toString() {
         String mark = this.isMarked ? "[X]" : "[ ]";
-        String toReturn = "[L]" + mark + " " + this.locationName + ":"
+        String toReturn = "[L]" + mark + " " + this.locationName + ": "
                 + this.postalCode + ", " + this.type;
         return toReturn;
     }

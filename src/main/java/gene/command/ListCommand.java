@@ -3,6 +3,10 @@ package gene.command;
 import gene.component.*;
 
 public class ListCommand extends Command {
+    private final String inputBody;
+    public ListCommand(String body) {
+        this.inputBody = body;
+    }
 
     /**
      * The execute methods contains the instruction(s) for when the command is
@@ -21,12 +25,34 @@ public class ListCommand extends Command {
                           LocationList geneLocs,
                           LocationStorage geneLocationStorage) {
         StringBuilder initList = new StringBuilder();
-        for (int i = 1; i < geneTasks.size() + 1; i++) { //to edit in tasklist
-            initList.append(i).append(".");
-            initList.append(geneTasks.get(i - 1));
-            initList.append("\n");
+        String[] tokens = this.inputBody.split("list "); //error
+        try {
+            String listWhat = tokens[1];
+            switch (listWhat) {
+            case "tasks":
+                for (int i = 1; i < geneTasks.size() + 1; i++) { //to edit in tasklist
+                    initList.append(i).append(".");
+                    initList.append(geneTasks.get(i - 1));
+                    initList.append("\n");
+                }
+                break;
+            case "locations":
+                for (int i = 1; i < geneLocs.size() + 1; i++) { //to edit in tasklist
+                    initList.append(i).append(".");
+                    initList.append(geneLocs.get(i - 1));
+                    initList.append("\n");
+                }
+                break;
+            default:
+                break;
+            }
+        } catch (Exception err) {
+            initList.append("Hey! What do you want me to list?\n"
+                    + "To list locations, type: \"list locations\"\n"
+                    + "To list tasks, type: \"list tasks\"!"
+            );
         }
-        return Ui.showLine() + initList.toString() + Ui.showLine();
+        return Ui.showLine() + "\n" + initList.toString() + Ui.showLine();
     }
 
     /**

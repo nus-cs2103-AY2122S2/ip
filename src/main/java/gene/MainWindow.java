@@ -11,6 +11,16 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String GREETING = "Hello! I'm \n";
+    private static final String LOGO = "  GGGG                      \n"
+            + "G         G     eeee      n  nnn       eeee \n"
+            + "G               e        e   nn        n  e         e\n"
+            + "G     GGG   eeeeee   n           n  eeeeee\n"
+            + "G           G  e             n           n  e     \n"
+            + "G          G    e      e    n            n  e        e\n"
+            + "  GGGG        eeee     n            n    eeee ";
+    private static final String HELP = "\nType \"help\" for the list of commands available.";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -28,6 +38,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getGeneDialog(GREETING + "\n" + LOGO + "\n" + HELP, geneImage));
     }
 
     public void setGene(Gene g) {

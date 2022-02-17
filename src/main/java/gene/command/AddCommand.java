@@ -93,7 +93,7 @@ public class AddCommand extends Command {
         Task newTask = new TodoTask(taskTitle);
         itemList.add(newTask);
 
-        return Ui.showLine()
+        return Ui.showLine() + "\n"
                 + "Got it. I've added this task:\n"
                         + "  " + newTask + "\n"
                         + "Now you have " + itemList.size()
@@ -133,7 +133,7 @@ public class AddCommand extends Command {
             Task newTask = new EventTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             taskStorage.writeToFile(taskKey, "E", false);
             itemList.add(newTask);
-            return Ui.showLine()
+            return Ui.showLine() + "\n"
                     + "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
                             + "Now you have " + itemList.size() + " tasks in the list."
@@ -194,7 +194,7 @@ public class AddCommand extends Command {
             Task newTask = new DeadlineTask(taskTitle, LocalDateTime.parse(deadline, formatter));
             taskStorage.writeToFile(taskKey, "D", false);
             itemList.add(newTask);
-            return Ui.showLine()
+            return Ui.showLine() + "\n"
                     + "Got it. I've added this task:\n"
                             + "  " + newTask + "\n"
                             + "Now you have " + itemList.size() + " tasks in the list."

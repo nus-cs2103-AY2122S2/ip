@@ -1,7 +1,0 @@
-todo / task / 0
-todo / another task / 0
-event / hello / 2/12/1999 1800 / 1
-
-todo / hello / 0
-event / task hello / 2/12/2222 1800 / 0
-event / task / 2/12/2222 1800 / 0

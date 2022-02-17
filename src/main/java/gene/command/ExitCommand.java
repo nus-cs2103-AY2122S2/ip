@@ -24,7 +24,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList geneTasks, Ui geneUi, TaskStorage geneTaskStorage, LocationList geneLocs, LocationStorage geneLocationStorage) {
-        return Ui.showLine()
+        return Ui.showLine() + "\n"
                 + "Bye. Hope to see you again soon!"
                 + "\n"
                 + Ui.showLine();
