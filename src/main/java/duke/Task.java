@@ -23,7 +23,12 @@ public class Task {
      * @return A String "X" if task is done.
      */
     public String getStatusIcon() {
-        return isDone ? "X" : " ";
+        if (isDone) {
+            return "X";
+        } else {
+            assert(isDone == false);
+            return " ";
+        }
     }
 
     /**
