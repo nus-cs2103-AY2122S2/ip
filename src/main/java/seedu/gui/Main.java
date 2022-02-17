@@ -14,7 +14,7 @@ import seedu.duke.Duke;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("./data/duke.txt");
+    private Duke duke = new Duke("data/duke.txt");
 
     /**
      * The runner for the gui

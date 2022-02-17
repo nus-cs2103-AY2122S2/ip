@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
+    private PauseTransition delay;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/man.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
 
@@ -36,8 +36,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Welcome to Duke Bot!", dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        delay = new PauseTransition(Duration.seconds(1));
     }
 
     /**
@@ -47,6 +47,8 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
+        String welcomeMessage = "Welcome to Duke Bot!\nYour save file path is: " + duke.getPath();
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
     /**
@@ -55,6 +57,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
@@ -65,8 +68,12 @@ public class MainWindow extends AnchorPane {
 
         userInput.clear();
 
+
+        //@@author BrendonLau-reused
+        //Reused from https://github.com/BrendonLau/ip/blob/master/src/main/java/duke/MainWindow.java
         if (Command.isExit()) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }

@@ -21,6 +21,7 @@ import seedu.task.Todo;
 public class Storage {
 
     private File file;
+    private String path;
 
     /**
      * Constructor
@@ -29,6 +30,16 @@ public class Storage {
      */
     public Storage(String filePath) {
         file = Paths.get(filePath).toFile();
+        path = Paths.get(filePath).toAbsolutePath().toString();
+    }
+
+    /**
+     * Returns the file path of the save file
+     *
+     * @return The file path of the save file
+     */
+    public String getPath() {
+        return path;
     }
 
     /**

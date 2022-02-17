@@ -12,6 +12,7 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
     private Storage storage;
+    private String path;
 
     /**
      * Constructor
@@ -24,8 +25,9 @@ public class Duke {
 
         try {
             tasks = new TaskList(storage.load());
+            path = storage.getPath();
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            path = e.getMessage();
         }
     }
 
@@ -44,5 +46,14 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Gets the file path of the save file
+     *
+     * @return The file path of the save file
+     */
+    public String getPath() {
+        return path;
     }
 }
