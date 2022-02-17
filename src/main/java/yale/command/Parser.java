@@ -41,7 +41,7 @@ public class Parser {
         } else if (command.contains("find")) {
             return list.findFeature(command, list);
         } else {
-            return "Error: " + command
+            return "Error: " + "'" + command + "'"
                     + " is not a valid command.\nPlease try again.";
         }
     }

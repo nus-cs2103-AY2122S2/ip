@@ -38,7 +38,7 @@ public class TaskList {
         String output = "";
         int listSize = list.size();
         for (int i = 0; i < listSize; i++) {
-            output += i + 1 + "."
+            output += i + 1 + ". "
                     + list.get(i) + "\n";
         }
         return output;
