@@ -21,6 +21,10 @@ public class Storage {
     private static String filePath;
     private static File file;
 
+    /**
+     * Constructor for Storage class
+     * @param filePath for the location where we want to store the state of the program
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
