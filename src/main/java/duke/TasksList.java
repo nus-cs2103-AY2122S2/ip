@@ -52,6 +52,7 @@ public class TasksList {
         }
 
         String response = String.format("Ok, I will remove this task: \n %s", tasks.get(index - 1));
+        assert getSize() > 0;
         tasks.remove(index - 1);
         return response;
     }
@@ -62,7 +63,7 @@ public class TasksList {
      * @return List of tasks with numberings in text format.
      */
     public String list() {
-        StringBuilder response = new StringBuilder("");
+        StringBuilder response = new StringBuilder("Here's the list of task!\n");
 
         if (tasks.size() == 0) {
             return "You have 0 task";
@@ -85,6 +86,7 @@ public class TasksList {
         if (index > this.tasks.size()) {
             throw new InvalidIndexException();
         }
+        assert getSize() > 0;
         String response = tasks.get(index - 1).markAsDone();
         return response;
     }
@@ -100,6 +102,7 @@ public class TasksList {
         if (index > this.tasks.size()) {
             throw new InvalidIndexException();
         }
+        assert getSize() > 0;
         String response = tasks.get(index - 1).markAsNotDone();
         return response;
     }
