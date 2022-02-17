@@ -42,7 +42,8 @@ public class TextUI {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        out.println("Hello from\n" + logo);
+        out.print("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        out.println("\nGreetings from\n" + logo);
         out.println("How may I assist you?");
         out.print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
     }
