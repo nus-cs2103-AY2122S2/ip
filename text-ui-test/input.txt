@@ -1,0 +1,26 @@
+clear
+list
+todo Do Laundry
+deadline Study /by 10-02-2022 23:59
+event Birthday Party/at19-02-2022 10:30
+list
+mark 2
+mark 3
+list
+unmark 2
+list
+mark asdfg
+unmark 66
+list
+todo ppppppppppp
+event Meet Friend /at Sunday 12pm
+event Meet Friend /at 13-02-2022 12:00
+list
+delete 4
+delete 99
+delete asdf
+find party
+find nd
+find xxxxxxxx
+asdfGHJKL
+exit
