@@ -1,0 +1,9 @@
+todo sleep
+event wake up /at 2022-01-26
+event sleep /at tmr
+deadline
+deadline submit homework /by 2022-01-30
+mark 1
+delete 1
+list
+bye
