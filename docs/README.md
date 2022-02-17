@@ -36,9 +36,9 @@ faster than traditional GUI apps.
 ## Features
 >  💡 **Notes about the command format**
 > - Words in `UPPER_CASE` are parameters to be supplied by the user.  
-    >   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo Complete CS2103T Tutorial`.
+>   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo Complete CS2103T Tutorial`.
 > - Items in square brackets are optional.  
-    >   e.g. `todo DESCRIPTION [/t TAGNAME]` can be used as `todo Complete CS2103T Tutorial /t CS2103T`.
+>   e.g. `todo DESCRIPTION [/t TAGNAME]` can be used as `todo Complete CS2103T Tutorial /t CS2103T`.
 
 ### Adding a todo task: `todo`
 Adds a todo task to the task list.  
@@ -87,7 +87,7 @@ Advanced users are welcome to update data directly by editing that data file.
 | Action   | Format, Examples                                                                                       |
 |----------|--------------------------------------------------------------------------------------------------------|
 | Todo     | `todo DESCRIPTION [/t TAGNAME]`   e.g `event CS2103T Lecture /at 2022-10-22`                           |
-| Event    | `event DESCRIPTION /at YYYY-MM-DD [/t TAGNAME]`   e.g `deadline CS3240 Milestone G1 /by 2022-10-22`    |
+| Event    | `event DESCRIPTION /at YYYY-MM-DD [/t TAGNAME]`   e.g `event CS2103T Lecture /at 2022-10-22`           |
 | Deadline | `deadline DESCRIPTION /by YYYY-MM-DD [/t TAGNAME]`   e.g `deadline CS3240 Milestone G1 /by 2022-10-22` |
 | Delete   | `delete INDEX` e.g. `delete 2`                                                                         |
 | List     | `list`                                                                                                 |
