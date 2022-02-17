@@ -13,8 +13,8 @@ Duke is a Task Management app that helps you manage 3 types of tasks: todos, dea
     - [Save the data](#save-the-data)
     - [Exit the app](#exit-the-app)
 - [Command Summary](#command-summary)
-----
 
+<br />
 
 ## Quick Start
 1. Ensure your computer has ***Java 11 or above*** installed.
@@ -25,8 +25,8 @@ Duke is a Task Management app that helps you manage 3 types of tasks: todos, dea
 6. Type a command in the command box and press Enter to execute it.  
    Alternatively, you may also press the Send button instead of pressing Enter.
 8. Refer to [Features](#features) below for details of each command and [Command Summary](#command-summary) for a quick reference table of all commands.
----
 
+<br />
 
 ## Features
 :exclamation::exclamation::exclamation::exclamation:**Important notes about the command format**:exclamation::exclamation::exclamation::exclamation:
@@ -165,7 +165,7 @@ Exits the app.
 
 Format: *bye*
 
----
+<br />
 
 ### Command Summary
 Command | Format | Example
