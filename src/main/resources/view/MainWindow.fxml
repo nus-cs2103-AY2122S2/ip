@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutX="5.0" layoutY="561.0" onAction="#handleUserInput" prefHeight="35.0" prefWidth="313.0" promptText="Enter command for Duke" AnchorPane.bottomAnchor="4.0">
+         <font>
+            <Font name="Baskerville" size="13.0" />
+         </font></TextField>
+        <Button fx:id="sendButton" layoutX="322.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="35.0" prefWidth="74.0" text="Send">
+         <font>
+            <Font name="Baskerville" size="13.0" />
+         </font></Button>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <ImageView fitHeight="558.0" fitWidth="389.0">
+               <image>
+                  <Image url="@../images/download.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: transparent; -fx-background: transparent;" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="395.0" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
