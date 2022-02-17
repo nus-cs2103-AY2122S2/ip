@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -29,9 +30,16 @@ public class Storage {
      * @param filePath the relative path of the file from program root.
      */
     public Storage(String filePath) {
-        File currentDir = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile());
-        Path absoluteFilePath = Paths.get(currentDir.getParentFile().getPath(), filePath);
-        this.absoluteFilePath = absoluteFilePath;
+        URL currentDirUrl = this.getClass().getProtectionDomain().getCodeSource().getLocation();
+        String decodedUrlPath = "";
+        try {
+            decodedUrlPath = java.net.URLDecoder.decode(currentDirUrl.getPath(), StandardCharsets.UTF_8.name());
+        } catch (Exception e) {
+            //There should never be an exception
+            e.printStackTrace();
+        }
+        File appFile = new File(decodedUrlPath);
+        this.absoluteFilePath = Paths.get(appFile.getParentFile().getPath(), filePath);
     }
 
     /**
@@ -72,8 +80,8 @@ public class Storage {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            //A common exception that is thrown for any first time user.
-            //There is no need for any action or output to user.
+            //This exception should not be thrown
+            e.printStackTrace();
         }
 
         try {
