@@ -25,7 +25,7 @@ public class Parser {
             output = Action.showList(taskList);
             break;
         case "bye":
-            Action.bye();
+            output = Action.bye();
             System.out.println(dash);
             break;
         case "mark":
@@ -121,7 +121,7 @@ public class Parser {
                     + "delete <input task number> - to delete task from tasks\n";
             break;
         case "find":
-            Action.find(inputArr[1]);
+            output = Action.find(inputArr[1]);
             break;
         default:
             output = "invalid command! Use 'help' for help";
