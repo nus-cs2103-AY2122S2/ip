@@ -8,7 +8,7 @@
 
 <AnchorPane stylesheets="@style.css" styleClass="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apollo.ui.gui.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="344.0" promptText="Ask Apollo something" styleClass="textBox" AnchorPane.bottomAnchor="1.0" />
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="344.0" promptText="What should I help you with?" styleClass="textBox" AnchorPane.bottomAnchor="1.0" />
         <Button fx:id="sendButton" layoutX="343.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="56.0" styleClass="button" text="Send" />
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" stylesheets="@scroll.css" vvalue="1.0">
             <content>
