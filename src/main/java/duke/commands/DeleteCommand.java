@@ -5,16 +5,16 @@ import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
-public class RemoveCommand extends Command {
+public class DeleteCommand extends Command {
 
     private String userInput;
     private String currTask;
     /**
-     * Removes a task from task list
+     * Deletes a task from task list
      *
      * @param userInput the input from user
      */
-    public RemoveCommand(String userInput) {
+    public DeleteCommand(String userInput) {
         this.userInput = userInput;
     }
 
@@ -25,9 +25,9 @@ public class RemoveCommand extends Command {
             Task removedTask = taskList.getTasks().get(index);
             taskList.getTasks().remove(index);
             currTask = removedTask.toString();
-            return Ui.printRemoveTask(currTask);
+            return Ui.printDeleteTask(currTask);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please enter index of task to be removed");
+            throw new DukeException("Please enter index of task to be deleted");
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please enter index within range 1 to " + taskList.getTasks().size());
         }

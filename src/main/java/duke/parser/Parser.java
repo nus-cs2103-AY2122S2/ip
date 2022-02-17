@@ -12,10 +12,11 @@ import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.ReminderCommand;
 import duke.commands.HelpCommand;
-import duke.commands.RemoveCommand;
+import duke.commands.DeleteCommand;
 import duke.commands.UnmarkCommand;
 import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class Parser {
 
@@ -42,8 +43,8 @@ public class Parser {
             return new AddEventCommand(userInput);
         case TODO:
             return new AddToDoCommand(userInput);
-        case REMOVE:
-            return new RemoveCommand(userInput);
+        case DELETE:
+            return new DeleteCommand(userInput);
         case FIND:
             return new FindCommand(userInput);
         case REMINDER:
@@ -54,7 +55,7 @@ public class Parser {
             return new ByeCommand();
         default:
             throw new DukeException("I don't know what does that mean! </3\n"
-                    + "\nSend me the help keyword for the list of commands!");
+                    + "\n" + Ui.printHelpCommands());
         }
     }
 
@@ -62,7 +63,7 @@ public class Parser {
      * Types of valid commands
      */
     public enum CommandType {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, REMOVE, FIND, REMINDER, HELP, BYE, NULL
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, REMINDER, HELP, BYE, NULL
     }
 
     /**
@@ -86,8 +87,8 @@ public class Parser {
             return CommandType.DEADLINE;
         case "event":
             return CommandType.EVENT;
-        case "remove":
-            return CommandType.REMOVE;
+        case "delete":
+            return CommandType.DELETE;
         case "find":
             return CommandType.FIND;
         case "reminder":

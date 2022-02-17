@@ -109,11 +109,12 @@ public class Ui {
                 + "2. event\n"
                 + "3. deadline\n"
                 + "4. mark/unmark\n"
-                + "5. find\n"
-                + "6. list\n"
-                + "7. reminder\n"
-                + "8. help\n"
-                + "9. bye\n";
+                + "5. delete\n"
+                + "6. find\n"
+                + "7. list\n"
+                + "8. reminder\n"
+                + "9. help\n"
+                + "10. bye\n";
 
         return response;
     }
@@ -135,12 +136,12 @@ public class Ui {
     }
 
     /**
-     * Prints response when task is removed
-     * @param removedTask task to remove
+     * Prints response when task is deleted
+     * @param removedTask task to deleted
      * @return response
      */
-    public static String printRemoveTask(String removedTask) {
-        String response = "Noted. I've removed this task:\n" + removedTask.toString();
+    public static String printDeleteTask(String removedTask) {
+        String response = "Noted. I've deleted this task:\n" + removedTask.toString();
 
         return response;
     }
