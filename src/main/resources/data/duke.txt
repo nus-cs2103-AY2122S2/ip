@@ -1,0 +1,30 @@
+T : 0 : read book
+E : 0 : watch movie : 12pm
+D : 0 : brush teeth : 12am
+E : 0 : watch movie : 12pm
+D : 0 : brush teeth : 2012-04-04
+E : 0 : test deletion : now
+T : 0 : read book
+E : 0 : watch movie : 12pm
+D : 0 : brush teeth : 2012-04-04
+E : 0 : test deletion : now
+T : 0 : read book
+E : 0 : watch movie : 12pm
+D : 0 : brush teeth : 2012-04-04
+E : 0 : test deletion : now
+T : 0 : read book
+E : 0 : watch movie : 12pm
+D : 0 : brush teeth : 2012-04-04
+E : 0 : test deletion : now
+T : 0 : read book
+E : 0 : watch movie : 12pm
+D : 0 : brush teeth : 2012-04-04
+E : 0 : test deletion : now
+T : 0 : read book
+E : 0 : watch movie : 12pm
+D : 0 : brush teeth : 2012-04-04
+E : 0 : test deletion : now
+T : 0 : read book
+E : 0 : watch movie : 12pm
+D : 0 : brush teeth : 2012-04-04
+E : 0 : test deletion : now
