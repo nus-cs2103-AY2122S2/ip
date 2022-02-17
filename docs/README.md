@@ -1,5 +1,7 @@
 # Duke User Guide
 
+<img width="512" alt="Ui" src="https://user-images.githubusercontent.com/74252295/154521574-0579350d-f5ad-44aa-a039-6c542d9e6077.png">
+
 ## Features
 
 ### Viewing Tasks
