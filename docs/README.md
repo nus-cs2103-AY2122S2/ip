@@ -30,7 +30,7 @@ Example of usage:
 
 `todo <description> <$priority level>`
 
-`todo clear laundary $LOW`
+`todo clear laundry $LOW`
 
 Expected outcome:
 A new todo task has been created in the system. The system will show you how many tasks are there left in the system. 

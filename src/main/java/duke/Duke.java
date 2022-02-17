@@ -113,8 +113,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -126,8 +126,12 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Get response of user input.
+     *
+     * @param input string of input from user.
+     * @return returns the string message after running command.
+     * @throws IOException when there is an error opening file.
+     * @throws ParseException when there is error parsing data.
      */
     String getResponse(String input) throws IOException, ParseException {
         try {

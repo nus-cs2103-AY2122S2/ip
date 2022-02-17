@@ -5,13 +5,13 @@ package duke;
  */
 public class Parser {
 
-
     public Parser() {
 
     }
 
     /**
      * To process the command that has been read by the system.
+     *
      * @param command the string that the user has entered into the system.
      * @return an instance of a command for the system to run.
      * @throws DukeException when the user types a command that is not recognised.

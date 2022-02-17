@@ -47,8 +47,6 @@ public class DialogBox extends HBox {
 
         setTextWithColour(text, img);
         setDialogColour(position);
-
-
     }
 
     /**
@@ -70,6 +68,7 @@ public class DialogBox extends HBox {
             dialog.setBackground(new Background(new BackgroundFill(lightGray, cornerRadii, insetsSetting)));
             dialog.setPadding(new Insets(8));
         }
+        dialog.setWrapText(true);
         //@author jonfoocy
     }
 
