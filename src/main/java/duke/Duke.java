@@ -20,8 +20,12 @@ public class Duke {
         this.parser = new Parser();
     }
 
-    public String welcome() {
+    public String greet() {
         return ui.welcomeString();
+    }
+
+    public String showCommandList() {
+        return ui.commandList();
     }
 
     public void run() {

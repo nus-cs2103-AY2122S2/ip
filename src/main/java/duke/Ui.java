@@ -33,8 +33,14 @@ public class Ui {
     public String welcomeString() {
         String welcome = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " +
                 "\nHello! I' Duke " +
-                "\nWhat can I do for you? \n\n" +
-                "List of commands: \n" +
+                "\nWhat can I do for you?" +
+                "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~";;
+
+        return welcome;
+    }
+
+    public String commandList() {
+        String commands = "List of commands: \n" +
                 "1. todo\n" +
                 "2. deadline\n" +
                 "3. event\n" +
@@ -46,7 +52,7 @@ public class Ui {
                 "9. sort \n" +
                 "10. bye" +
                 "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        return welcome;
+        return commands;
     }
 
     public String markString(Task task) {
