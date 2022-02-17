@@ -27,7 +27,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Mnsky");
+            stage.setTitle("MNSKY");
             fxmlLoader.<MainWindow>getController().setMnsky(mnsky);
             fxmlLoader.<MainWindow>getController().displayResponse("hi", false);
             stage.show();
