@@ -1,14 +1,17 @@
 
 package contact;
 
-import task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import util.CommandList;
+
+
 
 public class ContactList {
 
     private List<Contact> contacts = new ArrayList<>();
+    private final CommandList cl = new CommandList();
 
     public String listContacts() {
         String list = "";
@@ -53,11 +56,22 @@ public class ContactList {
         case "list":
             return processList();
 
+        case "commandlist":
+            return processCommandList();
+
 
         default:
             return "This command does not exists!\nUse 'commandlist' to list out the commands";
 
         }
+    }
+
+    private String processCommandList() {
+        StringBuilder commands = new StringBuilder();
+        for (String s: cl.getContactCommands()) {
+            commands.append(s).append("\n");
+        }
+        return "Here are the list of commands:\n" + commands;
     }
 
     private String processAdd(String description) {

@@ -74,7 +74,7 @@ public class TaskList {
 
     private String processCommandList() {
         StringBuilder commands = new StringBuilder();
-        for (String s: cl.getCommands()) {
+        for (String s: cl.getTaskCommands()) {
             commands.append(s).append("\n");
         }
         return "Here are the list of commands:\n" + commands;
