@@ -5,7 +5,7 @@ package van;
  */
 public class Task {
     protected String description;
-    protected boolean done;
+    protected boolean isDone;
     protected Tag tag;
 
     /**
@@ -16,7 +16,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
         this.tag = new Tag();
     }
 
@@ -27,7 +27,7 @@ public class Task {
      * @return String containing details of the task
      */
     public String getStatus() {
-        return done ? "[X] " + description : "[ ] " + description;
+        return isDone ? "[X] " + description : "[ ] " + description;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Task {
      * @return "1" if task is completed and "0" if not
      */
     public String getCompletion() {
-        return done ? "1" : "0";
+        return isDone ? "1" : "0";
     }
 
     /**
@@ -52,14 +52,14 @@ public class Task {
      * changes status of the task to be completed
      */
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * changes the status of the task to be incomplete
      */
     public void setUnDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**

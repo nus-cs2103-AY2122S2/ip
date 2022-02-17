@@ -1,4 +1,7 @@
 .chatbox {
-    -fx-border-style:solid;
-    -fx-border-width:2px;
+    -fx-padding: 5px;
+    -fx-border-width: 2px;
+    -fx-border-colour:black;
+    -fx-border-style: solid;
+    -fx-background-colour: red;
 }
