@@ -12,6 +12,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList) {
+        if (taskList.size() == 0) {
+            return "TAKE THAT!\nThere are no tasks in your list right now.";
+        }
         return "TAKE THAT!\nHere are the tasks in your list:\n" + taskList;
     }
 }
