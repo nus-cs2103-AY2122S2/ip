@@ -103,6 +103,13 @@ public class Duke {
                     DukeException e = new DukeException("bro why la");
                     System.err.println(e.getMessage());
                 } else {
+                    String[] deadlineInput = input.split("/by");
+                    String deadline = deadlineInput[1];
+                    System.out.println("deadline we got : " + deadline);
+
+                    String left = deadlineInput[0];
+                    String description = left.substring(9, left.length() - 1);
+                    // create a new deadline
 
                     // checking for date validity
                     if (isDate(deadline)) {
