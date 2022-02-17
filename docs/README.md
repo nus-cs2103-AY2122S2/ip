@@ -38,7 +38,7 @@ Example of usage:
 
 Expected outcome:
 
-Duke will add the todo to the task list
+Duke will add the todo to the task list.
 
 ```
 We have added [T][] paynow money to friend to the list.
@@ -55,7 +55,7 @@ Example of usage:
 
 Expected outcome:
 
-Duke will add the event to the task list
+Duke will add the event to the task list.
 
 ```
 We have added [E][] company dinner (at: 12-Dec-2022) to the list.
@@ -72,7 +72,7 @@ Example of usage:
 
 Expected outcome:
 
-Duke will add the deadline to the task list
+Duke will add the deadline to the task list.
 
 ```
 We have added [D][] CS3243 assignment (by: 12-Dec-2022) to the list.
