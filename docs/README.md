@@ -14,7 +14,7 @@
 |-----------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | Help      | Lists all commands.                                                              | `help`                                                                    |
 | Hello     | Greets Daphne.                                                                   | `hello`                                                                   |
-| ToDo      | Add a task without any data/time attached to it.                                 | `todo <DESCRIPTION>`                                                      |
+| To Do     | Add a task without any data/time attached to it.                                 | `todo <DESCRIPTION>`                                                      |
 | Deadline  | Add a task that needds to be done before a specific date/time.                   | `deadline <DESCRIPTION> /by <DATE> <TIME>`                                |
 | Event     | Add a task that starts at a specific date/time and ends at a specific date/time. | `event <DESCRIPTION> /at <START DATE> <START TIME> <END DATE> <END TIME>` |
 | Mark      | Mark a task as complete.                                                         | `mark <INDEX>`                                                            |
