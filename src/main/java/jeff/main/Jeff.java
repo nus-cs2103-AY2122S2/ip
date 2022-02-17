@@ -1,6 +1,7 @@
 package jeff.main;
 
 import jeff.command.Command;
+import jeff.note.Note;
 import jeff.parser.Parser;
 import jeff.storage.Storage;
 import jeff.task.TaskList;
@@ -15,6 +16,7 @@ public class Jeff {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Note notes;
 
     /**
      * Constructor for Jeff class.
@@ -23,6 +25,7 @@ public class Jeff {
      */
     public Jeff(String filePath) {
         ui = new Ui();
+        notes = new Note();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -43,7 +46,7 @@ public class Jeff {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, notes, ui, storage);
         } catch (JeffException e) {
             return ui.showError(e.getMessage());
         }

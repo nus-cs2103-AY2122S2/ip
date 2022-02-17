@@ -3,6 +3,7 @@ package jeff.command;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import jeff.note.Note;
 import jeff.storage.Storage;
 import jeff.task.TaskList;
 import jeff.ui.Ui;
@@ -29,12 +30,13 @@ public class FindCommand extends Command {
      * match with the keyword, if so set them up to print.
      *
      * @param tasks TaskList containing all the tasks.
+     * @param notes Contains all the notes.
      * @param ui Ui class for invoking user feedback.
-     * @return list of task that matches the user input.
      * @param storage Storage class used to save files.
+     * @return list of task that matches the user input.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Note notes, Ui ui, Storage storage) {
         String response;
         if (tasks.isEmpty()) {
             response = ui.showEmptyListFound();

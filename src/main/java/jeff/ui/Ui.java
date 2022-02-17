@@ -45,6 +45,22 @@ public class Ui {
         return "OK, I've marked this task as not done yet:\n" + addPrefix(currTask);
     }
 
+    public String showNote(String currNotes) {
+        return "These are your notes:\n" + currNotes;
+    }
+
+    public String showEmptyNote() {
+        return "Your note is currently empty.";
+    }
+
+    public String showNoteCleared() {
+        return "I've clear your note for you!";
+    }
+
+    public String showNoteAdded(String currNote) {
+        return "Added this note for you:\n" + addPrefix(currNote);
+    }
+
     /**
      * Display the confirmation response when adding a new task.
      *

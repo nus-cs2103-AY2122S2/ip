@@ -1,6 +1,7 @@
 package jeff.command;
 
 import jeff.main.JeffException;
+import jeff.note.Note;
 import jeff.storage.Storage;
 import jeff.task.Deadline;
 import jeff.task.Task;
@@ -32,6 +33,7 @@ public class DeadlineCommand extends Command {
      * Creates a new Deadline task and store it into the task list and feedback to the user.
      *
      * @param tasks TaskList containing all the tasks.
+     * @param notes Contains all the notes.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
      * @return confirmation response that a new deadline has been added.
@@ -39,7 +41,7 @@ public class DeadlineCommand extends Command {
      *                       to parse dateInfo or file cannot be saved.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
+    public String execute(TaskList tasks, Note notes, Ui ui, Storage storage) throws JeffException {
         Task currTask = new Deadline(description, dateInfo);
         tasks.add(currTask);
         storage.save(tasks);
