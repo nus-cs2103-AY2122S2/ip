@@ -19,7 +19,7 @@ Before including Mike into your life, please ensure you have the following:
 ### Add a task
 
 Add any form of task to Mike.
-Mike has divided and simplied tasks to the following three simple categories:
+Mike has divided tasks to the following three simple categories:
 1. *todo*
 2. *event*
 3. *deadline*
@@ -35,7 +35,8 @@ Delete it as you please.
 
 ### Tag a task
 
-Mike gives you an option to tag a task with any label you desire 
+Mike gives you an option to tag a task with any label you desire.
+You may choose not to use this feature.
 
 ### Find a task
 
@@ -51,30 +52,34 @@ Mike will display it to you on your command.
 
 ### `todo` - Adds todo task
 
-Adds  
+Adds a task to the task list. 
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo slides for GE project`
 
 Expected outcome:
 
-Description of the outcome.
+Got it. I've added this task:
+[T][] slides for GE project
+Now you have 1 tasks in the list.
 
 ```
 expected output
 ```
 ### `deadline` - Adds deadline task
 
-Describe the action and its outcome.
+Adds a task with a deadline to the task list.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`deadline project 1 /by 2022-02-03 23:59`
 
 Expected outcome:
 
-Description of the outcome.
+Got it. I've added this task:
+[D][] project 1 (by: Feb-03-2022 23:59 PM)
+Now you have 2 tasks in the list.
 
 ```
 expected output
@@ -82,31 +87,36 @@ expected output
 
 ### `event` - Adds event task
 
-Describe the action and its outcome.
+Adds an task with a location to the task list. 
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`event wedding /at Hotel Rainbow`
 
 Expected outcome:
 
-Description of the outcome.
+Got it. I've added this task:
+[E][] wedding (at: Hotel Rainbow)
+Now you have 3 tasks in the list.
 
 ```
 expected output
 ```
 
-### `list` - Displays all tasks in the task list
+### `list` - Displays task list
 
-Describe the action and its outcome.
+Displays all tasks present in the tasklist.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-Description of the outcome.
+Your list has 3 tasks:
+1. [T][] slides for GE project
+2. [D][] project 1 (by: Feb-03-2022 23:59 PM)
+3. [E][] wedding (at: Hotel Rainbow)
 
 ```
 expected output
