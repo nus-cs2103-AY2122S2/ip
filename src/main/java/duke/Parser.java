@@ -43,7 +43,7 @@ public class Parser {
      */
     public static Command parse(String userInput, int taskListLength) throws DukeException {
         String[] inputArr = userInput.split(" ", 2);
-        String commandString = inputArr[0];
+        String commandString = inputArr[0].toLowerCase();
         String details = inputArr.length > 1 ? inputArr[1] : "";
         try {
             switch (commandString) {
@@ -83,7 +83,7 @@ public class Parser {
     }
 
     private static Deadline makeDeadline(String userInput) throws DukeException {
-        String[] deadlineDetails = userInput.split(" /by ", 2);
+        String[] deadlineDetails = userInput.split(" /[Bb][Yy] ", 2);
 
         if (isInvalidDetails(deadlineDetails)) {
             throw new DukeException("Please specify a deadline task as\n"
@@ -94,7 +94,7 @@ public class Parser {
     }
 
     private static Event makeEvent(String userInput) throws DukeException {
-        String[] eventDetails = userInput.split(" /at ", 2);
+        String[] eventDetails = userInput.split(" /[Aa][Tt] ", 2);
 
         if (isInvalidDetails(eventDetails)) {
             throw new DukeException("Please specify an event task as\n"
