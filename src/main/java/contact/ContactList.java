@@ -54,8 +54,15 @@ public class ContactList {
 
     private String processAdd(String description) {
         try {
-            String name = description.split(" ")[0];
-            String number = description.split(" ")[1];
+            String name = "";
+            String[] strarr = description.split(" ");
+            for (int i = 0; i < strarr.length - 1; i++) {
+                name += strarr[i];
+                if (i != strarr.length - 2) {
+                    name += " ";
+                }
+            }
+            String number = description.split(" ")[strarr.length - 1];
             assert !number.equals("");
             for (Contact c: contacts) {
                 if (c.getName().equals(name)) {
@@ -74,8 +81,15 @@ public class ContactList {
 
     private String processUpdate(String description) {
         try {
-            String name = description.split(" ")[0];
-            String number = description.split(" ")[1];
+            String name = "";
+            String[] strarr = description.split(" ");
+            for (int i = 0; i < strarr.length - 1; i++) {
+                name += strarr[i];
+                if (i != strarr.length - 2) {
+                    name += " ";
+                }
+            }
+            String number = description.split(" ")[strarr.length - 1];
             assert !number.equals("");
             for (Contact c: contacts) {
                 if (c.getName().equals(name)) {
