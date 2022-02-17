@@ -59,4 +59,16 @@ public class MainWindow extends AnchorPane {
             exitTransition.play();
         }
     }
+
+    /**
+     * Creates a dialog box that contains the greeting message.
+     */
+    @FXML
+    public void greet() {
+        String greeting = duke.getGreeting();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, dukeImage)
+        );
+        userInput.clear();
+    }
 }

@@ -35,6 +35,16 @@ public class Ui {
     }
 
     /**
+     * Gets the welcome message of duke.
+     *
+     * @return The welcome message.
+     */
+    public static String getWelcomeMessage() {
+        return WELCOME_MESSAGE;
+    }
+
+
+    /**
      * Prints the welcome message to the output stream.
      */
     public void printWelcomeMessage() {

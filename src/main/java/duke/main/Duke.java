@@ -74,6 +74,7 @@ public class Duke {
      */
     private void run() {
 
+        assert ui != null;
         ui.printWelcomeMessage();
 
         boolean isExit = false;
@@ -111,7 +112,14 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
 
-
+    /**
+     * Gets the greeting message.
+     *
+     * @return The greeting message.
+     */
+    public String getGreeting() {
+        return Ui.getWelcomeMessage();
     }
 }
