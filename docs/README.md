@@ -49,6 +49,10 @@ Format: `delete INDEX`
 Finds task whose description contain the given keyword. <br />
 Format: `find KEYWORD`
 
+#### Listing out today's tasks: `today`
+Show a lists of all tasks that will happen today. <br />
+Format: `today`
+
 #### Exiting the program: `bye`
 Exits the program. <br />
 Format: `bye`
