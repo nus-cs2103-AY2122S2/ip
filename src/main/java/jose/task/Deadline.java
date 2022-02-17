@@ -1,10 +1,11 @@
 package jose.task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class representing a task with a deadline.
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
@@ -12,18 +13,20 @@ public class Deadline extends Task {
      * Constructor that sets isDone to false.
      *
      * @param description Task description.
+     * @param by Task deadline.
      */
     public Deadline(String description, String by) {
         super(description);
-        String[] dateTime = by.split(" ");
-        this.by = LocalDateTime.of(LocalDate.parse(dateTime[0]),
-                LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm")));
+        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     /**
      * Constructor that sets all variables.
      *
-     * @param description Task description
+     * @param description Task description.
+     * @param isDone Task status.
+     * @param by Task deadline.
+     * @param priority Task priority.
      */
     public Deadline(String description, boolean isDone, String by, Priority priority) {
         super(description, isDone, priority);

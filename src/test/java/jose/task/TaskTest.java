@@ -7,21 +7,21 @@ import org.junit.jupiter.api.Test;
 public class TaskTest {
     @Test
     public void getStatusIconTest_marked() {
-        assertEquals("[X]", new Task("", true).getStatusIcon());
+        assertEquals("[X]", new Task("", true, Task.Priority.LOW).getStatusIcon());
     }
 
     @Test
     public void getStatusIconTest_unmarked() {
-        assertEquals("[ ]", new Task("", false).getStatusIcon());
+        assertEquals("[ ]", new Task("", false, Task.Priority.LOW).getStatusIcon());
     }
 
     @Test
     public void formatDataTest() {
-        assertEquals("0|test", new Task("test").formatData());
+        assertEquals("1|0|test", new Task("test").formatData());
     }
 
     @Test
     public void toStringTest() {
-        assertEquals("[ ] test", new Task("test").toString());
+        assertEquals("[1][ ] test", new Task("test").toString());
     }
 }

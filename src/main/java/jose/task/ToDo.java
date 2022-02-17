@@ -16,7 +16,9 @@ public class ToDo extends Task {
     /**
      * Constructor that sets all variables.
      *
-     * @param description Task description
+     * @param description Task description.
+     * @param isDone Task status.
+     * @param priority Task priority.
      */
     public ToDo(String description, boolean isDone, Priority priority) {
         super(description, isDone, priority);

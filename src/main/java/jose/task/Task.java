@@ -1,5 +1,7 @@
 package jose.task;
 
+import jose.DukeException;
+
 /**
  * Class that encapsulates a task.
  */
@@ -16,7 +18,7 @@ public class Task {
     }
 
     /**
-     * Constructor that only takes in a description and sets the isDone variable to false by default.
+     * Constructor that only takes in a description and sets the isDone variable to false and low priority by default.
      *
      * @param description Description of a task.
      */
@@ -27,10 +29,11 @@ public class Task {
     }
 
     /**
-     * Constructor that sets both description and task status.
+     * Constructor that sets description, task status and priority.
      *
      * @param description Description of a task.
      * @param isDone Boolean stating whether a task is done.
+     * @param priority A priority enum.
      */
     public Task(String description, boolean isDone, Priority priority) {
         this.description = description;
@@ -64,17 +67,23 @@ public class Task {
 
     /**
      * Method to mark a task as not done.
+     *
+     * @param priority A string representation of a priority value.
+     * @throws DukeException If the given string does not match any priority value.
      */
-    public void changePriority(String priority) {
+    public void changePriority(String priority) throws DukeException {
         switch (priority) {
         case "low":
             this.priority = Priority.LOW;
+            break;
         case "medium":
             this.priority = Priority.MEDIUM;
+            break;
         case "high":
             this.priority = Priority.HIGH;
+            break;
         default:
-            this.priority = Priority.LOW;
+            throw new DukeException("Unknown priority. Please enter 'low', 'medium' or 'high'.");
         }
     }
 

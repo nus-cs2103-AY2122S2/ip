@@ -34,8 +34,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response based on the user's input.
+     *
+     * @param input User input.
+     * @return Jose's response.
      */
     public String getResponse(String input) {
         Task tempTask;
@@ -45,76 +47,87 @@ public class Duke {
 
             switch (command) {
             case BYE:
-                return ui.showExitMessage();
+                return ui.getExitMessage();
             case LIST:
-                return ui.showList(tasks.getTasks());
+                return ui.getList(tasks.getTasks());
+            case HELP:
+                return ui.getHelpMessage();
             case PRIORITY:
                 tempTask = tasks.getTask(parser.getIndex(input));
                 tempTask.changePriority(parser.getPriority(input));
-                updateDataFile();
-                return ui.showPriorityMessage(tempTask);
+                storage.update(tasks);
+                return ui.getPriorityMessage(tempTask);
             case MARK:
                 tempTask = tasks.getTask(parser.getIndex(input));
                 tempTask.mark();
-                updateDataFile();
-                return ui.showMarkMessage(tempTask);
+                storage.update(tasks);
+                return ui.getMarkMessage(tempTask);
             case UNMARK:
                 tempTask = tasks.getTask(parser.getIndex(input));
                 tempTask.unmark();
-                updateDataFile();
-                return ui.showUnmarkMessage(tempTask);
+                storage.update(tasks);
+                return ui.getUnmarkMessage(tempTask);
             case DELETE:
                 tempTask = tasks.getTask(parser.getIndex(input));
-                ui.showDeleteMessage(tempTask);
                 tasks.removeTask(tempTask);
-                updateDataFile();
-                return ui.showDeleteMessage(tempTask) + ui.showRemainingTasks(tasks);
+                storage.update(tasks);
+                return ui.getDeleteMessage(tempTask, tasks);
             case FIND:
-                return ui.showList(tasks.findTasks(input.split(" ", 2)[1]));
+                return ui.getList(tasks.findTasks(parser.getQuery(input)));
             case TODO:
                 tempTask = createTodo(input);
                 tasks.addTask(tempTask);
-                updateDataFile();
-                return ui.showAddMessage(tempTask) + ui.showRemainingTasks(tasks);
+                storage.update(tasks);
+                return ui.getAddMessage(tempTask, tasks);
             case DEADLINE:
                 tempTask = createDeadline(input);
                 tasks.addTask(tempTask);
-                updateDataFile();
-                return ui.showAddMessage(tempTask) + ui.showRemainingTasks(tasks);
+                storage.update(tasks);
+                return ui.getAddMessage(tempTask, tasks);
             case EVENT:
                 tempTask = createEvent(input);
                 tasks.addTask(tempTask);
-                updateDataFile();
-                return ui.showAddMessage(tempTask) + ui.showRemainingTasks(tasks);
+                storage.update(tasks);
+                return ui.getAddMessage(tempTask, tasks);
             default:
-                return "?";
+                return "Nani?! No comprende por favor. Type 'help' for help homer.";
             }
         } catch (DukeException e) {
-            return "Error:" + e.getMessage();
-        } catch (IOException e) {
-            return "Error:" + e.getMessage();
+            return "Error: " + e.getMessage();
         }
     }
 
-    public void updateDataFile() throws IOException {
-        storage.update(tasks);
-    }
-
-    public Task createTodo(String input) {
-        String taskInfo[] = input.split(" ", 2);
+    /**
+     * Returns a newly created todo task based on the user's input.
+     *
+     * @param input User input.
+     * @return A ToDo object.
+     */
+    public ToDo createTodo(String input) {
+        String[] taskInfo = input.split(" ", 2);
         assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
         return new ToDo(taskInfo[1]);
     }
 
-    public Task createDeadline(String input) {
+    /**
+     * Returns a newly created deadline task.
+     *
+     * @param input User input.
+     * @return A Deadline object.
+     */
+    public Deadline createDeadline(String input) {
         String[] taskInfo = input.split(" ", 2)[1].split(" /by ");
-        assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
         return new Deadline(taskInfo[0], taskInfo[1]);
     }
 
-    public Task createEvent(String input) {
+    /**
+     * Returns a newly created even task.
+     *
+     * @param input User input.
+     * @return An event object.
+     */
+    public Event createEvent(String input) {
         String[] taskInfo = input.split(" ", 2)[1].split(" /at ");
-        assert taskInfo.length == 2 : "taskInfo should contain exactly 2 strings";
         return new Event(taskInfo[0], taskInfo[1]);
     }
 }

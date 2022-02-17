@@ -24,7 +24,7 @@ public class Storage {
      */
     public Storage(String filePath) throws IOException {
         file = new File(filePath);
-        
+
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             file.createNewFile();
@@ -54,16 +54,21 @@ public class Storage {
      * Rewrites the data file with the given list of tasks.
      *
      * @param tasks  A list of tasks to be stored in the data file.
-     * @throws IOException If there are any errors when writing to the data file.
+     * @throws DukeException If there are any errors when writing to the data file.
      */
-    public void update(TaskList tasks) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+    public void update(TaskList tasks) throws DukeException {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
-        for (Task t : tasks.getTasks()) {
-            bw.write(t.formatData());
-            bw.newLine();
+            for (Task t : tasks.getTasks()) {
+                bw.write(t.formatData());
+                bw.newLine();
+            }
+
+            bw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            throw new DukeException("Failed to write to data file");
         }
-
-        bw.close();
     }
 }

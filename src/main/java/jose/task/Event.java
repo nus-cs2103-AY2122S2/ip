@@ -1,10 +1,11 @@
 package jose.task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class representing an event task.
+ */
 public class Event extends Task {
     protected LocalDateTime at;
 
@@ -12,18 +13,20 @@ public class Event extends Task {
      * Constructor that sets isDone to false.
      *
      * @param description Task description.
+     * @param at Event timing.
      */
     public Event(String description, String at) {
         super(description);
-        String[] dateTime = at.split(" ");
-        this.at = LocalDateTime.of(LocalDate.parse(dateTime[0]),
-                LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm")));
+        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     /**
      * Constructor that sets all variables.
      *
      * @param description Task description
+     * @param isDone Task status.
+     * @param at Event timing.
+     * @param priority Task priority.
      */
     public Event(String description, boolean isDone, String at, Priority priority) {
         super(description, isDone, priority);
