@@ -3,6 +3,7 @@ package duke;
 /**
  * Represents a command to add task to list
  */
+
 class AddCommand extends Command {
     Task task;
 
