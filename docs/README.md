@@ -60,6 +60,8 @@ Example of usage:
 
 Expected outcome:
 
+Mike will add the todo task to the task list.
+
 ```
 Got it. I've added this task:
 [T][] slides for GE project
@@ -75,6 +77,8 @@ Example of usage:
 `deadline project 1 /by 2022-02-03 23:59`
 
 Expected outcome:
+
+Mike will add the deadline task to the task list.
 
 ```
 Got it. I've added this task:
@@ -92,6 +96,8 @@ Example of usage:
 
 Expected outcome:
 
+Mike will add the event task to the task list.
+
 ```
 Got it. I've added this task:
 [E][] wedding (at: Hotel Rainbow)
@@ -100,13 +106,15 @@ Now you have 3 tasks in the list.
 
 ### `list` - Displays task list
 
-Displays all tasks present in the tasklist.
+Displays all tasks present in the task list.
 
 Example of usage: 
 
 `list`
 
 Expected outcome:
+
+Mike will display all tasks present on the task list.
 
 ```
 Your list has 3 tasks:
@@ -115,36 +123,73 @@ Your list has 3 tasks:
 3. [E][] wedding (at: Hotel Rainbow)
 ```
 
-### `mark` - Describe action
+### `mark` - Mark a task
 
-Describe the action and its outcome.
+Marks a task as done.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`mark 1`
 
 Expected outcome:
+
+Mike will mark the first task on the task list as done.
 
 Description of the outcome.
 
 ```
-expected output
+[T][x] slides for GE project
 ```
 
-### `unmark` - Describe action
+### `unmark` - Unmark a task
 
-Describe the action and its outcome.
+Unmarks a task as undone.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`unmark 1`
 
 Expected outcome:
 
-Description of the outcome.
+Mike will unmark the first task on the task list as undone.
 
 ```
-expected output
+[T][] slides for GE project
+```
+
+### `tag` - Tags a task with a label
+
+Tags a task on the task list with a label.
+
+Example of usage: 
+
+`tag 3 fun`
+
+Expected outcome:
+
+Mike will tag the third task on the task list as fun.
+
+```
+The following task:
+[E][] wedding (at: Hotel Rainbow)
+has been tagged as a fun task.
+```
+
+### `find` - finds tasks with the keyword
+
+Finds tasks on the task list corresponding to the keyword.
+
+Example of usage: 
+
+`find wedding`
+
+Expected outcome:
+
+Mike will search the task list for tasks with the word wedding and display results.
+
+```
+Your list has 1 tasks:
+1.[E][] wedding (at: Hotel Rainbow)
 ```
 
 ### `bye` - Terminates Mike
@@ -160,5 +205,6 @@ Expected outcome:
 Mike will diplay termination message and program will be terminated.
 
 ```
-
+Hope I helped you!
+Program terminated.
 ```
