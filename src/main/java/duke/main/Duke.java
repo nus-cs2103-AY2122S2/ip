@@ -10,7 +10,6 @@ import duke.ui.Ui;
 
 public class Duke {
 
-    // only have Parser and Ui to fix up
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
