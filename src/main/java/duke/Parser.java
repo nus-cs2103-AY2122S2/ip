@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.command.ModifyCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -37,6 +31,11 @@ public class Parser {
                 throw new DukeException("There's too many input!");
             }
             return new ListCommand();
+        case "help":
+            if (commandAndDetails.length > 1) {
+                throw new DukeException("There's too many input!");
+            }
+            return new HelpCommand();
         case "find":
             if (commandAndDetails.length == 1) {
                 throw new DukeException("Enter the keyword of the tasks you want to find.");
