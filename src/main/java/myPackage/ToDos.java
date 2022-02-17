@@ -2,6 +2,7 @@ package myPackage;
 
 public class ToDos extends Task {
     private boolean isDone;
+
     public ToDos(String description) {
         super(description);
         System.out.printf("[T][ ] %s%n", this.description);

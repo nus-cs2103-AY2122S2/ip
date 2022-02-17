@@ -3,10 +3,11 @@ package myPackage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadlines extends Task{
+public class Deadlines extends Task {
     private String deadline;
     private LocalDate localDate;
     private boolean isDone;
+
     public Deadlines(String description, String deadline) {
         super(description);
         isDone = false;
@@ -14,8 +15,7 @@ public class Deadlines extends Task{
             String[] str = deadline.split("by ");
             localDate = LocalDate.parse(str[1]);
             this.deadline = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("not proper date");
             this.deadline = deadline;
         }
@@ -41,7 +41,9 @@ public class Deadlines extends Task{
         return String.format("%s", this.description, deadline);
     }
 
-    public String getOriginalDescription() {return description;}
+    public String getOriginalDescription() {
+        return description;
+    }
 
     @Override
     public String getFullDescription() {
