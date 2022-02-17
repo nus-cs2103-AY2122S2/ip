@@ -26,11 +26,11 @@ public abstract class Command {
     public abstract String execute(TaskList taskList, Storage storage) throws DukeException, IOException;
 
     /**
-     * This method is used to check if this command closes the Duke Application.
+     * This method is used to check if this command is an invalid command.
      *
-     * @return This returns if this command closes the Duke application.
+     * @return This returns if this command is an invalid command.
      */
-    public boolean isExit() {
+    public boolean isInvalid() {
         return false;
     }
 }

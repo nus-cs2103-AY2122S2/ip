@@ -27,4 +27,14 @@ public class InvalidCommand extends Command {
         return this.errorMsg;
     }
 
+    /**
+     * This method is used to check if this command is an invalid command.
+     *
+     * @return This returns if this command is an invalid command.
+     */
+    @Override
+    public boolean isInvalid() {
+        return !super.isInvalid();
+    }
+
 }

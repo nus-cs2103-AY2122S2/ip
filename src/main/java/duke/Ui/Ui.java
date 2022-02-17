@@ -1,7 +1,8 @@
-package duke.Ui;
+package duke.ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
@@ -29,7 +30,7 @@ public class Ui {
             "range. You can use the list command to find the tasks.";
 
     public static final String MSG_INVLIADCMDFORMAT = "OOPS!!! I'm sorry, "
-            + "your formatting for your message isn't right!";
+            + "I don't understand you! :(";
 
     public static final String MSG_TASKALREADYDONE = "OOPS!!! Task already completed!";
 
@@ -50,13 +51,22 @@ public class Ui {
     public static final String MSG_NOMATCH = "OOPS!!! We can't find anything!";
 
     public static final String MSG_EXIT = "Bye! Checkout another cool bot @KatoKatoBot on Telegram.\n"
-            + "Hope to see you again soon!";
+            + "Hope to see you again soon!\n"
+            + "(Click 'Send' to close)";
 
     public static final String MSG_WELCOME = "Hello! I'm DatoDato! Your personal helper bot. :)\n"
             + "(Hint: Type help and hit enter for assistance)\n"
             + "What can I do for you?";
 
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    public static final String MSG_COMMAND = "Your entered the following command: \n";
+
+    public static final String PREFIX_INVALID = "INVALID: ";
+
+    public static boolean isExit = false;
+
+    private final Image dukeImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png")));
+
     private final VBox dialogBox;
 
 
@@ -71,22 +81,21 @@ public class Ui {
     }
 
     public void welcomeMsg() {
-        dialogBox.getChildren().addAll(DialogBox.getDukeDialog(MSG_WELCOME, dukeImage));
+        dialogBox.getChildren().addAll(DialogBox.getDialog(MSG_WELCOME, dukeImage, DialogBoxStyle.BotNormal));
     }
 
     /**
      * Used to generate help page.
      */
     public static String printHelp() {
-        StringBuffer out = new StringBuffer("Hi below are the list of commands available in the current version. \n\n");
-        out.append(AddCommand.usage());
-        out.append(ListCommand.usage());
-        out.append(FindCommand.usage());
-        out.append(RemindersCommand.usage());
-        out.append(DoneCommand.usage());
-        out.append(DeleteCommand.usage());
-        out.append(ExitCommand.usage());
-        return out.toString().trim();
+        String out = "Hi below are the list of commands available in the current version. \n\n" + AddCommand.usage() +
+                ListCommand.usage() +
+                FindCommand.usage() +
+                RemindersCommand.usage() +
+                DoneCommand.usage() +
+                DeleteCommand.usage() +
+                ExitCommand.usage();
+        return out.trim();
     }
 
     /**
@@ -183,6 +192,6 @@ public class Ui {
      */
     public void print(String input) {
         assert !input.isEmpty() : "Assertion failed on Ui.printMessage(): inputTxt is empty";
-        dialogBox.getChildren().addAll(DialogBox.getDukeDialog(input, dukeImage));
+        dialogBox.getChildren().addAll(DialogBox.getDialog(input, dukeImage, DialogBoxStyle.BotError));
     }
 }

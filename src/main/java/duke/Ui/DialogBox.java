@@ -1,4 +1,4 @@
-package duke.Ui;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -25,9 +25,8 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, FXMLLoader fxmlLoader) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -49,13 +48,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
+    public static DialogBox getDialog(String text, Image img, DialogBoxStyle dialogBoxStyle) {
+        FXMLLoader fxmlLoader;
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        switch (dialogBoxStyle) {
+        case UserError:
+            fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogErrorBox.fxml"));
+            break;
+        case BotNormal:
+            fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/BotDialogBox.fxml"));
+            break;
+        case BotError:
+            fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/BotDialogErrorBox.fxml"));
+            break;
+        default:
+            fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+        }
+
+        var db = new DialogBox(text, img, fxmlLoader);
         db.flip();
         return db;
     }
 }
+

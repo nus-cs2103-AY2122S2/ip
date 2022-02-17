@@ -32,13 +32,4 @@ public class ExitCommand extends Command {
                 + "  Usage: bye\n\n";
     }
 
-    /**
-     * This method is used to check if this command closes the Duke Application.
-     *
-     * @return This return true as this command closes the Duke application.
-     */
-    @Override
-    public boolean isExit() {
-        return !super.isExit();
-    }
 }

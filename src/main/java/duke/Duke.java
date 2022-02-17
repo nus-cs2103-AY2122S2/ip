@@ -50,11 +50,14 @@ public class Duke extends Application {
     public String getResponse(String inputTxt) {
         try {
             Command c = parser.parse(inputTxt);
+            if (c.isInvalid()) {
+                return Ui.PREFIX_INVALID + c.execute(taskList, storage).trim();
+            }
             return c.execute(taskList, storage).trim();
         } catch (DukeException e) {
-            return e.getMessage();
+            return Ui.PREFIX_INVALID + e.getMessage();
         } catch (IOException e) {
-            return Ui.MSG_FILEWRITEERROR;
+            return Ui.PREFIX_INVALID + Ui.MSG_FILEWRITEERROR;
         }
     }
 
