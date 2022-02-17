@@ -1,4 +1,4 @@
-package duke.exceptions;
+package michael.exceptions;
 
 /**
  * Exception Handler for Single Worded Input with arguments behind the command.

@@ -1,11 +1,11 @@
-package duke;
+package michael;
 
 import java.time.format.DateTimeParseException;
 // import java.util.Scanner;
 
-import duke.exceptions.AdditionalDescriptionException;
-import duke.exceptions.InvalidCommandException;
-import duke.exceptions.InvalidDescriptionException;
+import michael.exceptions.AdditionalDescriptionException;
+import michael.exceptions.InvalidCommandException;
+import michael.exceptions.InvalidDescriptionException;
 
 /**
  * Ui class handles the input
@@ -15,9 +15,9 @@ import duke.exceptions.InvalidDescriptionException;
 public class Ui {
 
     /**
-     * Constant String from Duke after every command to Duke.
+     * Constant String from Michael after every command to Michael.
      */
-    private static final String FROM_DUKE = "From Duke: \n\t";
+    private static final String FROM_MICHAEL = "From Michael: \n\t";
 
     /**
      * Storage Class to help with loading or saving or file.
@@ -141,7 +141,7 @@ public class Ui {
     }
 
     /**
-     * Method to run Duke.
+     * Method to run Michael.
      */
     public String run(String userInput) {
         String command = "";
@@ -165,7 +165,7 @@ public class Ui {
             System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
             reply = "An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.";
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("That is an invalid task. Please try again!");
+            System.out.println("That is qan invalid task. Please try again!");
             reply = "That is an invalid task. Please try again!";
         } finally {
             System.out.println("__________________________________________");

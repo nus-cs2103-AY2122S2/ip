@@ -1,12 +1,12 @@
-package duke;
+package michael;
 
 import java.util.ArrayList;
 
-import duke.exceptions.MissingKeywordException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import michael.exceptions.MissingKeywordException;
+import michael.tasks.Deadline;
+import michael.tasks.Event;
+import michael.tasks.Task;
+import michael.tasks.ToDo;
 
 /**
  * TaskList class handles the commands to the Tasks that are stored in an ArrayList.
@@ -62,7 +62,7 @@ public class TaskList {
     /**
      * Command to signal to the program to close.
      *
-     * @return Bye string to be used for Duke DialogBox.
+     * @return Bye string to be used for Michael DialogBox.
      */
     public String bye(Storage storage) {
         storage.writeTasksToFile();
@@ -74,7 +74,7 @@ public class TaskList {
     /**
      * Command to list out all of the Tasks in the TaskList.
      *
-     * @return List string to be used for Duke DialogBox.
+     * @return List string to be used for Michael DialogBox.
      */
     public String list() {
         String reply = "";
@@ -99,7 +99,7 @@ public class TaskList {
      * Command to "mark" or "unmark" a Task in the TaskList.
      *
      * @param taskStr String of command inputted by the User.
-     * @return TaskCheck string to be used for Duke DialogBox.
+     * @return TaskCheck string to be used for Michael DialogBox.
      */
     public String taskCheck(String taskStr) {
         String reply = "";
@@ -130,7 +130,7 @@ public class TaskList {
      * Command to add a Todo Task into the TaskList.
      *
      * @param taskStr String of Todo Task instruction.
-     * @return Todo string to be used for Duke DialogBox.
+     * @return Todo string to be used for Michael DialogBox.
      */
     public String todo(String taskStr) {
         // eg to_do borrow book (without the _)
@@ -148,7 +148,7 @@ public class TaskList {
      * Command to add a Deadline Task into the TaskList.
      *
      * @param taskStr String of Deadline Task instruction.
-     * @return Deadline string to be used for Duke DialogBox.
+     * @return Deadline string to be used for Michael DialogBox.
      */
     public String deadline(String taskStr) {
         String reply = "";
@@ -176,7 +176,7 @@ public class TaskList {
      * Command to add a Event Task into the TaskLIst.
      *
      * @param taskStr String of Event Task instruction.
-     * @return Event string to be used for Duke DialogBox.
+     * @return Event string to be used for Michael DialogBox.
      */
     public String event(String taskStr) {
         String reply = "";
@@ -204,7 +204,7 @@ public class TaskList {
      * Command to delete a Task from the TaskList.
      *
      * @param taskStr String of the Task that you are trying to delete.
-     * @return Delete string to be used for Duke DialogBox.
+     * @return Delete string to be used for Michael DialogBox.
      */
     public String delete(String taskStr) {
         String reply = "";
@@ -233,7 +233,7 @@ public class TaskList {
      * Method to help users find tasks of a certain "keyword" in TaskList.
      *
      * @param taskStr Command inputted by users.
-     * @return Find string to be used for Duke DialogBox.
+     * @return Find string to be used for Michael DialogBox.
      */
     public String find(String taskStr) {
         String reply = "";
@@ -258,33 +258,33 @@ public class TaskList {
     /**
      * Manual that users can use if they need help.
      *
-     * @return Help string to be used for Duke DialogBox.
+     * @return Help string to be used for Michael DialogBox.
      */
     public String help() {
         String reply = "Looks like you need some help! \nHere is a list of commands that you can use!\n"
                 + "\n==> Utility commands that you can use!\n"
                 + "- 'save' : "
-                + "\n     = Save all tasks in Duke into a local file.\n"
+                + "\n\t=> Save all tasks in Michael into a local file.\n"
                 + "- 'bye' : "
-                + "\n     = Exit Duke. All will be saved upon this command.\n"
+                + "\n\t=> Exit Michael. All will be saved upon this command.\n"
                 + "- 'list' : "
-                + "\n     = List out all the tasks added into Duke.\n"
+                + "\n\t=> List out all the tasks added into Michael.\n"
                 + "- 'find *keyword*' : "
-                + "\n     = Find all tasks with the *keyword*\n"
+                + "\n\t=> Find all tasks with the *keyword*\n"
                 + "\n==> Commands to add a task!\n"
                 + "- 'todo *todo name*' : "
-                + "\n     = Add a todo task into Duke.\n"
+                + "\n\t=> Add a todo task into Michael.\n"
                 + "- 'event *event name* /at *YYYY-MM-DD HH:MM*' : "
-                + "\n     = Add an event task into Duke.\n"
+                + "\n\t=> Add an event task into Michael.\n"
                 + "- 'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : "
-                + "\n     = Add a deadline task into Duke.\n"
-                + "\n==> Commands to edit a task on Duke.\n"
+                + "\n\t=> Add a deadline task into Michael.\n"
+                + "\n==> Commands to edit a task on Michael.\n"
                 + "- 'mark *task#*' : "
-                + "\n     = Mark a task as completed.\n"
+                + "\n\t=> Mark a task as completed.\n"
                 + "- 'unmark *task#*' : "
-                + "\n     = Un-mark a task as incomplete.\n"
+                + "\n\t=> Un-mark a task as incomplete.\n"
                 + "- 'delete *task#*' : "
-                + "\n     = Delete a task from Duke.";
+                + "\n\t=> Delete a task from Michael.";
         System.out.println(reply);
         return reply;
     }

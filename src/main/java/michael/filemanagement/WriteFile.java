@@ -1,10 +1,10 @@
-package duke.filemanagement;
+package michael.filemanagement;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * To write data into "duke.txt" file.
+ * To write data into "michael.txt" file.
  *
  * @author Justin Ng Jie Ern
  */
@@ -18,7 +18,7 @@ public class WriteFile {
      * Constructor to write data into file.
      */
     public WriteFile() {
-        this.pathName = "duke.txt";
+        this.pathName = "michael.txt";
     }
 
     /**

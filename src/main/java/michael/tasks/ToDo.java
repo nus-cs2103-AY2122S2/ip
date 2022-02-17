@@ -1,4 +1,4 @@
-package duke.tasks;
+package michael.tasks;
 
 /**
  * One of the three tasks that a user can indicate.

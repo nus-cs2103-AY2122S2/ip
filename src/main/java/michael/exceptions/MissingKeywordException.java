@@ -1,4 +1,4 @@
-package duke.exceptions;
+package michael.exceptions;
 
 /**
  * Exception Handler when there is a missing key phrase in the inputs.

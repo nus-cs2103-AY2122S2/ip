@@ -1,15 +1,15 @@
-package duke;
+package michael;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import duke.filemanagement.CreateFile;
-import duke.filemanagement.WriteFile;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import michael.filemanagement.CreateFile;
+import michael.filemanagement.WriteFile;
+import michael.tasks.Deadline;
+import michael.tasks.Event;
+import michael.tasks.Task;
+import michael.tasks.ToDo;
 
 
 /**
@@ -46,7 +46,7 @@ public class Storage {
     /**
      * Method to save the TaskList into a file in the local device.
      *
-     * @return Save string to be used for Duke DialogBox.
+     * @return Save string to be used for Michael DialogBox.
      */
     public String save() {
         writeTasksToFile();
@@ -99,7 +99,7 @@ public class Storage {
     /**
      * Method to load previously saved file in the local device onto the program.
      *
-     * @param fileName File "duke.txt" from the local device
+     * @param fileName File "michael.txt" from the local device
      */
     public void load(String fileName) {
         String command = null;

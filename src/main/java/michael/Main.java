@@ -1,4 +1,4 @@
-package duke;
+package michael;
 
 import java.io.IOException;
 
@@ -9,11 +9,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Michael using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke;
+    private Michael michael;
 
     @Override
     public void start(Stage stage) {
@@ -22,9 +22,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke");
-            duke = new Duke(stage);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Michael");
+            michael = new Michael(stage);
+            fxmlLoader.<MainWindow>getController().setMichael(michael);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

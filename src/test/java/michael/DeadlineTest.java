@@ -1,10 +1,10 @@
-package duke;
+package michael;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.tasks.Deadline;
+import michael.tasks.Deadline;
 
 public class DeadlineTest {
     @Test

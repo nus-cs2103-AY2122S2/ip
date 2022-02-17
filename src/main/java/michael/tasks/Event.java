@@ -1,6 +1,6 @@
-package duke.tasks;
+package michael.tasks;
 
-import duke.filemanagement.Time;
+import michael.filemanagement.Time;
 
 /**
  * One of the three tasks that a user can indicate.

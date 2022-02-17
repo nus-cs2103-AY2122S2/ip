@@ -1,4 +1,4 @@
-package duke.filemanagement;
+package michael.filemanagement;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,13 +18,13 @@ public class CreateFile {
      * Constructor to create the file.
      */
     public CreateFile() {
-        this.fileName = "duke.txt";
+        this.fileName = "michael.txt";
     }
 
     /**
      * Getter function to obtain the name of the file.
      *
-     * @return The file name "duke.txt".
+     * @return The file name "michael.txt".
      */
     public String getFileName() {
         return fileName;
@@ -32,8 +32,8 @@ public class CreateFile {
 
     /**
      * To create the file.
-     * If a file with name "duke.txt" does not exist, then file is created and true is returned.
-     * If a file with name "duke.txt" exists, then nothing is created and false is returned.
+     * If a file with name "michael.txt" does not exist, then file is created and true is returned.
+     * If a file with name "michael.txt" exists, then nothing is created and false is returned.
      *
      * @return True if file does not exist and its created through this function. False if file exists already.
      */

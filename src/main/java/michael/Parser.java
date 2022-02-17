@@ -1,6 +1,6 @@
-package duke;
+package michael;
 
-import duke.exceptions.MissingKeywordException;
+import michael.exceptions.MissingKeywordException;
 
 /**
  * Parser class to handle the inputs of the user

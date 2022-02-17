@@ -1,4 +1,4 @@
-package duke;
+package michael;
 
 import javafx.application.Application;
 

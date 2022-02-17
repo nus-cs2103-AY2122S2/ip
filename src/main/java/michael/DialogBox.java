@@ -1,4 +1,4 @@
-package duke;
+package michael;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -97,13 +97,13 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Method to call to produce a DialogBox from Duke.
+     * Method to call to produce a DialogBox from Michael.
      *
-     * @param text Text associated with Duke DialogBox.
-     * @param img Image of Duke DialogBox.
-     * @return DialogBox for Duke.
+     * @param text Text associated with Michael DialogBox.
+     * @param img Image of Michael DialogBox.
+     * @return DialogBox for Michael.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getMichaelDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         db.setMinHeight(Region.USE_PREF_SIZE);

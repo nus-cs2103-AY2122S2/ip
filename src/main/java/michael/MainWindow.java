@@ -1,4 +1,4 @@
-package duke;
+package michael;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,23 +20,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Michael michael;
 
-    private String logo =
-              " ___             _        \n"
-            + "|   _ \\  _    _ | |  ____ \n"
-            + "|  | |   |  |  |  | | / / _ \\\n"
-            + "|  |_|  |  |_ |  |   <  __/\n"
-            + "|____/ \\___,_|_|\\_\\___|\n\n";
-
-    private String start = "Hello! I am Duke.\n"
+    private String start = "Hello! I am Michael.\n"
             + "Your Personal Assistant.\n\n"
             + "Input 'help' for the Command Manual!!\n\n"
             + "What can I do for you?\n"
             + "__________________________________________";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image michaelImage = new Image(this.getClass().getResourceAsStream("/images/DaMichael.png"));
 
     @FXML
     public void initialize() {
@@ -44,41 +37,40 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Start Up Message when Duke is run.
+     * Start Up Message when Michael is run.
      */
     @FXML
     public void startUpMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(logo, dukeImage),
-                DialogBox.getDukeDialog(start, dukeImage)
+                DialogBox.getMichaelDialog(start, michaelImage)
         );
     }
 
     /**
-     * Setter for Duke.
+     * Setter for Michael.
      *
-     * @param d Duke.
+     * @param d Michael.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setMichael(Michael d) {
+        michael = d;
         startUpMessage();
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Michael's reply and then
+     * appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = michael.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getMichaelDialog(response, michaelImage)
         );
         userInput.clear();
         if (input.equals("bye")) {
-            this.duke.getStage().close();
+            this.michael.getStage().close();
         }
     }
 }
