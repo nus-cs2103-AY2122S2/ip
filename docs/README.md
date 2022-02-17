@@ -15,11 +15,12 @@ including time-sensitive tasks such as deadlines and events.
   * [Find by Keyword](#find-by-keyword)
   * [Sort the List](#sort-the-list)
     * [List of Conditions](#list-of-conditions)
+  * [Saving](#saving)
 
 # Quick Start
-* Make sure you have Java 11 installed in your computer
+* Make sure that you have Java 11 installed in your computer
 * Download the latest `Wensleydale` release from [here](https://github.com/AAlghrairy/ip/releases)
-* Copy the file to the folder you wish to use as the main folder (application will create directories in that folder)
+* Copy the file to the folder you wish to use as the main folder *(application will create directories in that folder)*
 * Double-click the file to start the application
 
 # Example of Usage
@@ -88,3 +89,7 @@ Format: `sort [condition]`
 ***By chronological order:*** `chronologically`  
 ***By alphabetical order:*** `alphabetically`  
 ***By marked tasks:*** `done`
+
+### Saving
+
+The program will automatically save your task-list to the disk, and retrieve the list upon restarting.
