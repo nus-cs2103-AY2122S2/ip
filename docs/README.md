@@ -29,125 +29,60 @@ These are the available commands:
 
 Shows all the current tasks in the task list and their descriptions.
 
-Expected outcome:
-```
-Here are your tasks:
-1. [T][x] Get help with CS2106's content
-2. [E][ ] Project meeting with GES group (at: 05 Mar 2022)
-3. [D][ ] Final version deadline for CS2103T (by: 18 Mar 2022)
-4. [T][ ] Borrow book from library
-```
-
+Expected outcome:\
+![img.png](img.png)
 
 ### `todo (description)` - Adds a Todo Task with a description
 
 Creates a new Todo Task with the inputted description and adds it to the task list.
 
-Example of usage:
-
-`todo Borrow book from library`
-
-Expected outcome:
-```
-Added Borrow book from library, as a Todo Task
-[T][ ] Borrow book from library
-You currently have 4 tasks
-```
+Example of usage:\
+![img_1.png](img_1.png)
 
 ### `event (description) /at (date YYYY-MM-DD)` - Adds an Event Task with a description and date
 
 Creates a new Event Task with the inputted description and date.
 
-Example of usage:
-
-`event John's birthday /at 2022-03-18`
-
-Expected outcome:
-```
-Added John's birthday (at: 18 Mar 2022), as a Event Task
-[E][ ] John's birthday (at: 18 Mar 2022)
-You currently have 5 tasks
-```
+Example of usage:\
+![img_2.png](img_2.png)
 
 ### `deadline (description) /by (date YYYY-MM-DD)` - Adds a Deadline Task with a description and date
 
 Creates a new Deadline Task with the inputted description and date.
 
-Example of usage:
-
-`deadline Book due date /by 2022-03-18`
-
-Expected outcome:
-```
-Added Book due date (by: 18 Mar 2022), as a Deadline Task
-[D][ ] Book due date (by: 18 Mar 2022)
-You currently have 6 tasks
-```
+Example of usage:\
+![img_3.png](img_3.png)
 
 ### `mark (task number)` - Marks a task as done.
 
 Marks a task from the task list as done. Use `list` to check the task's number.
 
-Example of usage:
+Example of usage:\
+![img_4.png](img_4.png)
 
-`mark 3`
-
-Expected outcome:
-```
-Marked as done:
-[D][x] Final version deadline for CS2103T (by: 18 Mar 2022)
-```
+Expected outcome:\
+![img_5.png](img_5.png)
 
 ### `unmark (task number)` - Marks a task as undone.
 
 Marks a task from the task list as undone. Use `list` to check the task's number.
 
-Example of usage:
+Example of usage:\
+![img_6.png](img_6.png)
 
-`unmark 3`
-
-Expected outcome:
-```
-Marked as done:
-[D][ ] Final version deadline for CS2103T (by: 18 Mar 2022)
-```
+Expected outcome:\
+![img_7.png](img_7.png)
 
 ### `delete (task number)` - Removes a task from the task list.
 
 Removes a task from the task list. Use `list` to check the task's number.
 
-Example of usage:
-
-`delete 3`
-
-Expected outcome:
-```
-Removed this task:
-[T][ ] Borrow book from library
-You currently have 3 tasks
-```
+Example of usage:\
+![img_8.png](img_8.png)
 
 ### `postpone (task number) (date YYYY-MM-DD)` - Edit the date in Event and Deadline Tasks.
 
 Edits the date in Event and Deadline Tasks. Use `list` to check the task's number.
 
-Example of usage:
-
-`list`
-
-```Here are your tasks:
-1. [T][x] Get help with CS2106's content
-2. [E][ ] Project meeting with GES group (at: 05 Mar 2022)
-3. [D][x] Final version deadline for CS2103T (by: 18 Mar 2022)
-4. [T][ ] Borrow book from library
-5. [E][ ] John's birthday (at: 18 Mar 2022)
-6. [D][ ] Book due date (by: 18 Mar 2022)
-```
-
-`postpone 6 2022-03-20`
-
-Expected outcome:
-```
-Date changed to 2022-03-20 for task:
-[D][ ] Book due date (by: 20 Mar 2022)
-```
+Example of usage:\
+![img_9.png](img_9.png)
