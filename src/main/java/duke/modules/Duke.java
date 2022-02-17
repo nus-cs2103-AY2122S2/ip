@@ -10,24 +10,13 @@ public class Duke {
     private Storage storage;
 
 
-    public static void main(String[] args) {
-        // load in the TaskList
-        TaskList taskList = new TaskList(new Storage());
-        Parser parser = new Parser(taskList);
-
-        Storage.save(taskList);
-
-    }
-
     public Duke() {
         storage = new Storage();
         taskList = new TaskList(storage);
         parser = new Parser(taskList);
 
     }
-
-
-
+    
     public String getInitMessage() {
         return Ui.getInitializationMessage();
     }
