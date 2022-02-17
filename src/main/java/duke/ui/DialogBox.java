@@ -14,8 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 /**
@@ -35,7 +37,7 @@ public class DialogBox extends HBox {
      * @param text User command or Duke response.
      * @param img User image or Duke image
      */
-    public DialogBox(String text, Image img) {
+    public DialogBox(String text, Image img, Color color, Boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -44,10 +46,18 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         dialog.setFont(Font.font("Verdana", 15));
+        dialog.setMinSize(0, 30);
+        dialog.setPadding(new Insets(10, 15, 10, 15));
+        dialog.setBackground(new Background(new BackgroundFill(
+                color,
+                new CornerRadii(10),
+                null
+        )));
+        Circle clip = new Circle(50, 50, 50);
         displayPicture.setImage(img);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -61,27 +71,19 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(
-                new Color(0.3, 0.4, 0.8, 0.4),
-                null,
-                null
-        )));
-        db.setSpacing(20);
-        db.setPadding(new Insets(10, 0, 10, 0));
+        Color color = new Color(0.2, 0.8, 0.8, .95);
+        DialogBox db = new DialogBox(text, img, color, true);
+        db.setSpacing(12);
+        db.setPadding(new Insets(10, 10, 10, 0));
 
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(
-                new Color(0.7, 0.8, 0.9, 0.4),
-                null,
-                null
-        )));
-        db.setSpacing(20);
-        db.setPadding(new Insets(10, 0, 10, 0));
+        Color color = new Color(0.8, 0.8, 0.8, .95);
+        DialogBox db = new DialogBox(text, img, color, false);
+        db.setSpacing(12);
+        db.setPadding(new Insets(10, 10, 10, 0));
         db.flip();
 
         return db;

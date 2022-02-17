@@ -38,6 +38,8 @@ public class Parser {
                 return "Good bye!";
             case LIST:
                 return taskList.readList();
+            case HELP:
+                return showHelpCommands();
             case MARK:
                 if (input.length == 1 || input[1].equals("")) {
                     throw new DukeException("You are missing the parameter for this mark command!");
@@ -110,7 +112,6 @@ public class Parser {
                 taskList.add(task);
                 return "Got it, I have added " + task.getUserInput() + " to the list!\n";
             }
-
         } catch (DukeException e) {
             return e.getMessage();
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -118,6 +119,23 @@ public class Parser {
         } catch (DateTimeParseException e) {
             return "OOPS!!! Duke could not understand given date! Please enter in yyyy-mm-dd format!";
         }
+    }
+
+    /**
+     * Shows a list of commands that the user could enter.
+     *
+     * @return A string containing all the commands available.
+     */
+    private String showHelpCommands() {
+        return "Here are the list of commands that you can use:\n\n"
+                + "todo:\nCreate a task eg. (todo homework)\n\n"
+                + "event:\nCreate an event that has a starting date eg. (event Birthday Party /at 2022-04-04)\n\n"
+                + "deadline:\nCreate an event with a deadline eg. (deadline Submit assignment /by 2022-02-18)\n\n"
+                + "list:\nList all the current tasks that you have\n\n"
+                + "delete [ITEM NO.]:\nDelete a task that is no longer needed in the list eg. (delete 2)\n\n"
+                + "mark/unmark [ITEM NO.]:\nMark or unmark a task that is completed in the list eg. (mark 2)\n\n"
+                + "find [KEY]:\nFind a task in the list corresponding to the keyword eg. (find homework)\n\n"
+                + "bye:\nExits the application";
     }
 
     /**
@@ -149,6 +167,9 @@ public class Parser {
         case "find":
             type = Type.FIND;
             break;
+        case "help":
+            type = Type.HELP;
+            break;
         case "list":
             type = Type.LIST;
             break;
@@ -174,6 +195,7 @@ public class Parser {
         DELETE,
         EVENT,
         FIND,
+        HELP,
         LIST,
         MARK,
         UNMARK,
