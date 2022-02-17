@@ -24,7 +24,8 @@ public class Ui {
                 + "find [phrase]: gets tasks containing wordido" + LS
                 + "todo [desc]: creates todo" + LS
                 + "deadline [desc] /by [yyyy-MM-dd HHmm]: creates deadline" + LS
-                + "event [desc] /at [yyyy-MM-dd HHmm]: creates event";
+                + "event [desc] /at [yyyy-MM-dd HHmm]: creates event" + LS
+                + "bye: Jose says bye";
     }
 
     /**
