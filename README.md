@@ -100,9 +100,9 @@ A Todo task stores:
 
 *Usage*: We have a CS2103 lecture at 19-02-2022 2PM.
 
-*Format*: `event [Description] /by YYYY-MM-DD HHA`
+*Format*: `event [Description] /at YYYY-MM-DD HHA`
 
-*Examples*: `event CS2103 lecture /by 2022-02-19 2PM`
+*Examples*: `event CS2103 lecture /at 2022-02-19 02PM`
 
 ![eventImg](./docs/event.PNG)
 
