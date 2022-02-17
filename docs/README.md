@@ -35,13 +35,17 @@ Once you are acquainted you could tell Conan the tasks you want to do.
 #### Tasks
 
 There are four kinds of tasks that Conan can store.
-1. **Todo** - Keeps track of the task that do not have to be completed without sometime. </br>
+1. **Todo** - Keeps track of the task that do not have to be completed without sometime.
+
    Format: todo {Task} in the command line for such commands.
-2. **Event** - Any event that you have to attend a certain date and time, Conan can keep track of that for you. </br>
+2. **Event** - Any event that you have to attend a certain date and time, Conan can keep track of that for you. 
+
    Format: event {Task} /at YYYY-MM-DD HHMM
-3. **Deadline** - Tasks that need to be completed within a time frame. </br>
+3. **Deadline** - Tasks that need to be completed within a time frame. 
+
    Format: deadline {Task} /by YYYY-MM-DD HHMM
-4. **Task** - any general tasks to keep track of. </br>
+4. **Task** - any general tasks to keep track of. 
+
    Format: {Task , more than 2 words}
 
 **Note**: For Event and Deadline, time argument HHMM is not necessary to enter, however the date must be entered.
@@ -50,7 +54,7 @@ There are four kinds of tasks that Conan can store.
 
 + **add** : add a task to track.
 
-  _Format_ : refer to [Tasks](README.md#tasks) </br>
+  _Format_ : refer to [Tasks](README.md#tasks) 
 
   _Possible Error Warning_:
     + If an empty task argument is added then task missing exception is raised.
@@ -73,9 +77,9 @@ There are four kinds of tasks that Conan can store.
       > I have added: GEH lecture, to your list of tasks. </br>
        Number of tasks up to now: 4
 
-+ **bye** : To close the program. Conan stores all your tasks so that you can visit them later. </br>
++ **bye** : To close the program. Conan stores all your tasks so that you can visit them later. 
 
-  _Format_: bye </br>
+  _Format_: bye 
 
   _Possible Error Warnings_:
     + NONE
@@ -87,9 +91,9 @@ There are four kinds of tasks that Conan can store.
        Have a great day ahead, enjoy ! (^-^)/ </br>
        Hope to see you next time! 
 
-+ **delete** : Delete that task from the list. </br>
++ **delete** : Delete that task from the list. 
 
-  _Format_: delete {Task Number} </br>
+  _Format_: delete {Task Number} 
 
   _Possible Error Warnings_:
     + If the argument is missing the task number, error is raised.
@@ -104,9 +108,9 @@ There are four kinds of tasks that Conan can store.
       > Task num: 4 isn't present. Type 'list' command to view the task numbers. </br>
        Please try again!
       
-+ **due-on** : To view tasks that are due on this date. </br>
++ **due-on** : To view tasks that are due on this date. 
 
-  _Format_: due-on {YYYY-MM-DD} </br>
+  _Format_: due-on {YYYY-MM-DD} 
 
   _Possible Error Warnings_:
     + Issues a warning id the date argument is empty.
@@ -120,9 +124,9 @@ There are four kinds of tasks that Conan can store.
     + due-on 2022-02-20
       > Seems like you are free on SUNDAY 20 FEBRUARY 2022
 
-+ **due-before** : To view tasks that are due before this date. </br>
++ **due-before** : To view tasks that are due before this date. 
 
-  _Format_: due-before {YYYY-MM-DD} </br>
+  _Format_: due-before {YYYY-MM-DD} 
 
   _Possible Error Warnings_:
     + Issues a warning id the date argument is empty.
@@ -136,9 +140,9 @@ There are four kinds of tasks that Conan can store.
     + due-before 2022-02-25
       > Seems like you are free before FRIDAY 25 FEBRUARY 2022
 
-+ **find** : To find tasks containing that keyword. </br>
++ **find** : To find tasks containing that keyword. 
 
-  _Format_: find {Keyword} </br>
+  _Format_: find {Keyword} 
 
   _Possible Error Warnings_:
     + If the keyword is missing, error is raised.
@@ -150,9 +154,9 @@ There are four kinds of tasks that Conan can store.
     + find monkey
       > No task containing: monkey, was found.
 
-+ **list** : To view the list of tasks lined up. </br>
++ **list** : To view the list of tasks lined up. 
 
-  _Format_: list</br>
+  _Format_: list
 
   _Possible Error Warnings_:
     + If the list is empty _Conan_ tells the user that the list is empty.
@@ -167,9 +171,9 @@ There are four kinds of tasks that Conan can store.
       > No tasks are there! Seems like you are free! </br>
        Do you wanna add some tasks?
 
-+ **mark** : Mark that task as complete. </br>
++ **mark** : Mark that task as complete. 
 
-  _Format_: mark {Task Number} </br>
+  _Format_: mark {Task Number} 
 
   _Possible Error Warnings_:
     + If the argument is missing the task number, error is raised.
@@ -184,9 +188,9 @@ There are four kinds of tasks that Conan can store.
       > Task num: 40 isn't present. Type 'list' command to view the task numbers. </br>
        Please try again!
 
-+ **unmark** : Mark that task as not complete. </br>
++ **unmark** : Mark that task as not complete. 
 
-  _Format_: unmark {Task Number} </br>
+  _Format_: unmark {Task Number} 
 
   _Possible Error Warnings_:
     + If the argument is missing the task number, error is raised.
@@ -229,12 +233,12 @@ public class Launcher {
 ## FAQ
 
 **Q.** Can multiple users use the same app? </br>
-**A.** This task manager is designed to track the tasks of a single user, at a time. This means if another </br>
-user starts the app then your tasks will be erased.
+**A.** This task manager is designed to track the tasks of a single user, at a time. This means if another user starts
+the app then your tasks will be erased.
 
 **Q.** What happens after I type in the bye command? </br>
-**A.** Once the bye command is entered, Conan shutdowns, however the window, will still be open, in case you </br>
-would like to review any of the actions performed.
+**A.** Once the bye command is entered, Conan shutdowns, however the window, will still be open, in case you would like
+to review any of the actions performed.
 
 **Q.** What version of java is needed to run Conan? </br>
 **A.** You would need to have Java 11, to run Conan on your device.
@@ -243,15 +247,15 @@ would like to review any of the actions performed.
 **A.** The duplicate task will not be added to the list of tasks, instead a warning will be issued.
 
 **Q.** Can I add a task that clashes with a previously added task? </br>
-**A.** Yes, a warning will be issued, but the task will be added. In case you would like to remove the task use</br>
-the delete command.
+**A.** Yes, a warning will be issued, but the task will be added. In case you would like to remove the task, use the
+delete command.
 
 **Q.** What happens if I input an empty Command? </br>
 **A.** A warning will be issued to indicate that empty command has been entered.
 
 **Q.** Conan window is still open after I entered the bye command, doe this mean I can add more tasks? </br>
-**A.** No, once you have typed, bye, conan program stops, and any command you enter will be not recorded, or carried </br>
-out by conan. Instead, run conan again.
+**A.** No, once you have typed, bye, conan program stops, and any command you enter will be not recorded, or carried out
+by conan. Instead, run conan again.
 
 
 ## Glossary
