@@ -25,6 +25,10 @@ public class Deadline extends Task {
         super(description);
         this.originalDate = dateInfo;
         String[] str = dateInfo.split(" ", 2);
+        String inputDate = str[0];
+        String inputTime = str[1];
+        assert inputDate.length() >= 8 : "Date input seems shorter than expected, expect 8 or more";
+        assert inputTime.length() >= 4 : "Time input seems shorter than expected, expect 4 or more";
         this.date = new DateParse(str[0]);
         this.time = new TimeParse(str[1]);
         this.dateInfo = this.date.toString() + " " + this.time.toString();
