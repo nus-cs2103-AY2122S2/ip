@@ -181,6 +181,9 @@ public class Duke {
     }
 
     String getResponse(String input) {
+        if (input.equals("bye")) {
+            storage.saveFile(taskList.getToDoList());
+        }
         return "Xzzzbot: " + respond(input);
     }
 
