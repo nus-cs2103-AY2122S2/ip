@@ -67,7 +67,7 @@ public class Storage {
      * @throws IOException On failure of read or write operations.
      */
     public boolean loadList(ArrayList<Task> taskList) {
-        boolean success = false;
+        boolean isSuccess = false;
         try {
             File file = new File(this.directoryPath + this.listFile);
             file.getParentFile().mkdirs();
@@ -112,7 +112,7 @@ public class Storage {
                     + "Please check if you have permission to read from files in the following directory: "
                     + directoryPath);
         }
-        return success;
+        return isSuccess;
     }
 
     public String getDirectoryPath() {
