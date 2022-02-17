@@ -117,7 +117,7 @@ For edits concerning date and/or time, you must provide them in the following fo
 
 Note that you can only make a **single edit** at a time. (multiple edits coming soon!)
 
-Format: `edit {task number} desc/{new description}` `edit {task number} dt/{date and/or time}`
+Format: <br>`edit {task number} desc/{new description}`<br>`edit {task number} dt/{date and/or time}`
 <br><br>
 
 ### Exit the program: `bye`
