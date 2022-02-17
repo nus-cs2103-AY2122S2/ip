@@ -49,7 +49,7 @@ application {
 
 shadowJar {
     archiveBaseName = "apollo"
-    archiveVersion = "0.2"
+    archiveVersion = "1.0"
     archiveClassifier = null
 }
 
