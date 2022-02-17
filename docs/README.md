@@ -65,16 +65,16 @@ There are four kinds of tasks that Conan can store.
 
   _Usage Example_:
     + make pancakes
-      > I have added: make pancakes, to your list of tasks. </br>
+      > I have added: make pancakes, to your list of tasks. <br>
       Number of tasks up to now: 1
     + todo do laundry
-      > I have added: do laundry, to your list of tasks. </br>
+      > I have added: do laundry, to your list of tasks. <br>
        Number of tasks up to now: 2
     + deadline submit cs3243 project /by 2022-02-20
-      > I have added: submit cs3243 project, to your list of tasks. </br>
+      > I have added: submit cs3243 project, to your list of tasks. <br>
        Number of tasks up to now: 3
     + event GEQ lecture /at 2022-02-25 0800
-      > I have added: GEH lecture, to your list of tasks. </br>
+      > I have added: GEH lecture, to your list of tasks. <br>
        Number of tasks up to now: 4
 
 + **bye** : To close the program. Conan stores all your tasks so that you can visit them later. 
@@ -86,9 +86,9 @@ There are four kinds of tasks that Conan can store.
 
   _Usage Examples_:
     + bye
-      > Goodbye, Jules </br>
-       Hope I helped you complete your tasks! </br>
-       Have a great day ahead, enjoy ! (^-^)/ </br>
+      > Goodbye, Jules <br>
+       Hope I helped you complete your tasks! <br>
+       Have a great day ahead, enjoy ! (^-^)/ <br>
        Hope to see you next time! 
 
 + **delete** : Delete that task from the list. 
@@ -102,10 +102,10 @@ There are four kinds of tasks that Conan can store.
 
   _Usage Examples_:
     + delete 2
-      > The following task has been removed from the list : </br>
+      > The following task has been removed from the list : <br>
        [D][ ] return book (by: FRIDAY 1 MARCH 2019)
     + delete 4
-      > Task num: 4 isn't present. Type 'list' command to view the task numbers. </br>
+      > Task num: 4 isn't present. Type 'list' command to view the task numbers. <br>
        Please try again!
       
 + **due-on** : To view tasks that are due on this date. 
@@ -118,8 +118,8 @@ There are four kinds of tasks that Conan can store.
 
   _Usage Examples_:
     + due-on 2022-03-01
-      > The following tasks are due on TUESDAY 1 MARCH 2022: <br/>
-       1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022) </br>
+      > The following tasks are due on TUESDAY 1 MARCH 2022: <br>
+       1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022) <br>
        2.[D][ ] finish cp assignment (by: TUESDAY 1 MARCH 2022)
     + due-on 2022-02-20
       > Seems like you are free on SUNDAY 20 FEBRUARY 2022
@@ -134,8 +134,8 @@ There are four kinds of tasks that Conan can store.
 
   _Usage Examples_:
     + due-before 2022-03-02
-      > The following tasks are due before WEDNESDAY 2 MARCH 2022: </br>
-       1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022) </br>
+      > The following tasks are due before WEDNESDAY 2 MARCH 2022: <br>
+       1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022) <br>
        2.[D][ ] finish cp assignment (by: TUESDAY 1 MARCH 2022) 
     + due-before 2022-02-25
       > Seems like you are free before FRIDAY 25 FEBRUARY 2022
@@ -149,7 +149,7 @@ There are four kinds of tasks that Conan can store.
 
   _Usage Examples_:
     + find assign
-      > The following tasks contain assign: </br>
+      > The following tasks contain assign: <br>
        1.[D][ ] finish cp assignment (by: TUESDAY 1 MARCH 2022)
     + find monkey
       > No task containing: monkey, was found.
@@ -163,12 +163,12 @@ There are four kinds of tasks that Conan can store.
 
   _Usage Example_:
     + list
-      > 1.[T][ ] buy lunch </br>
-       2.[D][ ] return book (by: FRIDAY 1 MARCH 2019) </br>
-       3.[E][X] project team meeting (at: FRIDAY 22 FEBRUARY 2019) </br>
+      > 1.[T][ ] buy lunch <br>
+       2.[D][ ] return book (by: FRIDAY 1 MARCH 2019) <br>
+       3.[E][X] project team meeting (at: FRIDAY 22 FEBRUARY 2019) <br>
        4.[T][ ] buy shoes 
     + list
-      > No tasks are there! Seems like you are free! </br>
+      > No tasks are there! Seems like you are free! <br>
        Do you wanna add some tasks?
 
 + **mark** : Mark that task as complete. 
@@ -185,7 +185,7 @@ There are four kinds of tasks that Conan can store.
       > Great job, on completing this task! \(^_^)/ <br>
        [T][X] edit pics
     + mark 40
-      > Task num: 40 isn't present. Type 'list' command to view the task numbers. </br>
+      > Task num: 40 isn't present. Type 'list' command to view the task numbers. <br>
        Please try again!
 
 + **unmark** : Mark that task as not complete. 
@@ -199,10 +199,10 @@ There are four kinds of tasks that Conan can store.
 
   _Usage Examples_:
     + unmark 2
-      > Sure, I have unmarked this task: </br>
+      > Sure, I have unmarked this task: <br>
        [D][ ] return book (by: FRIDAY 1 MARCH 2019)
     + unmark 19
-      > Task num: 19 isn't present. Type 'list' command to view the task numbers. </br>
+      > Task num: 19 isn't present. Type 'list' command to view the task numbers. <br>
        Please try again!
 
 #### Remembering Tasks
