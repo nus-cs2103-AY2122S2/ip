@@ -36,13 +36,13 @@ Once you are acquainted you could tell Conan the tasks you want to do.
 
 There are four kinds of tasks that Conan can store.
 1. **Todo** - Keeps track of the task that do not have to be completed without sometime. <br>
-   _Format_: todo {Task} in the command line for such commands.
+   _Format_ : todo {Task} in the command line for such commands.
 2. **Event** - Any event that you have to attend a certain date and time, Conan can keep track of that for you. <br>
-   _Format_: event {Task} /at YYYY-MM-DD HHMM
+   _Format_ : event {Task} /at YYYY-MM-DD HHMM
 3. **Deadline** - Tasks that need to be completed within a time frame. <br>
-   _Format_: deadline {Task} /by YYYY-MM-DD HHMM
+   _Format_ : deadline {Task} /by YYYY-MM-DD HHMM
 4. **Task** - any general tasks to keep track of. <br>
-   _Format_: {Task , more than 2 words}
+   _Format_ : {Task , more than 2 words}
 
 **Note**: For Event and Deadline, time argument HHMM is not necessary to enter, however the date must be entered.
 
@@ -52,14 +52,14 @@ There are four kinds of tasks that Conan can store.
 
   _Format_ : refer to [Tasks](README.md#tasks) 
 
-  _Possible Error Warning_:
+  _Possible Error Warning_ :
     + If an empty task argument is added then task missing exception is raised.
     + For Event, if time argument identifier, '/at' is not used time argument missing exception is raised.
     + For Deadline, if time argument identifier, '/by' is not used time argument missing exception is raised.
     + For Event and Deadline, if the Date is not in {YYYY-MM-DD} format, error will be issued.
     + For Event and Deadline, if a time argument is used, it should be of {HHMM} format or else error will be issued.
 
-  _Usage Example_:
+  _Usage Example_ :
     + make pancakes
       > I have added: make pancakes, to your list of tasks. <br>
       Number of tasks up to now: 1
@@ -75,12 +75,12 @@ There are four kinds of tasks that Conan can store.
 
 + **bye** : To close the program. Conan stores all your tasks so that you can visit them later. 
 
-  _Format_: bye 
+  _Format_ : bye 
 
-  _Possible Error Warnings_:
+  _Possible Error Warnings_ :
     + NONE
 
-  _Usage Examples_:
+  _Usage Examples_ :
     + bye
       > Goodbye, Jules <br>
        Hope I helped you complete your tasks! <br>
@@ -89,14 +89,14 @@ There are four kinds of tasks that Conan can store.
 
 + **delete** : Delete that task from the list. 
 
-  _Format_: delete {Task Number} 
+  _Format_ : delete {Task Number} 
 
-  _Possible Error Warnings_:
+  _Possible Error Warnings_ :
     + If the argument is missing the task number, error is raised.
     + If the task index number is invalid, that is if it is less than or equal to 0 or greater than the total number of 
       tasks, an error warning is issued.
 
-  _Usage Examples_:
+  _Usage Examples_ :
     + delete 2
       > The following task has been removed from the list : <br>
        [D][ ] return book (by: FRIDAY 1 MARCH 2019)
@@ -106,13 +106,13 @@ There are four kinds of tasks that Conan can store.
       
 + **due-on** : To view tasks that are due on this date. 
 
-  _Format_: due-on {YYYY-MM-DD} 
+  _Format_ : due-on {YYYY-MM-DD} 
 
-  _Possible Error Warnings_:
+  _Possible Error Warnings_ :
     + Issues a warning id the date argument is empty.
     + Issues a warning if the date is not in {YYYY-MM-DD} format.
 
-  _Usage Examples_:
+  _Usage Examples_ :
     + due-on 2022-03-01
       > The following tasks are due on TUESDAY 1 MARCH 2022: <br>
        1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022) <br>
@@ -122,13 +122,13 @@ There are four kinds of tasks that Conan can store.
 
 + **due-before** : To view tasks that are due before this date. 
 
-  _Format_: due-before {YYYY-MM-DD} 
+  _Format_ : due-before {YYYY-MM-DD} 
 
-  _Possible Error Warnings_:
+  _Possible Error Warnings_ :
     + Issues a warning id the date argument is empty.
     + Issues a warning if the date is not in {YYYY-MM-DD} format.
 
-  _Usage Examples_:
+  _Usage Examples_ :
     + due-before 2022-03-02
       > The following tasks are due before WEDNESDAY 2 MARCH 2022: <br>
        1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022) <br>
@@ -138,12 +138,12 @@ There are four kinds of tasks that Conan can store.
 
 + **find** : To find tasks containing that keyword. 
 
-  _Format_: find {Keyword} 
+  _Format_ : find {Keyword} 
 
-  _Possible Error Warnings_:
+  _Possible Error Warnings_ :
     + If the keyword is missing, error is raised.
 
-  _Usage Examples_:
+  _Usage Examples_ :
     + find assign
       > The following tasks contain assign: <br>
        1.[D][ ] finish cp assignment (by: TUESDAY 1 MARCH 2022)
@@ -152,12 +152,12 @@ There are four kinds of tasks that Conan can store.
 
 + **list** : To view the list of tasks lined up. 
 
-  _Format_: list
+  _Format_ : list
 
-  _Possible Error Warnings_:
+  _Possible Error Warnings_ :
     + If the list is empty _Conan_ tells the user that the list is empty.
 
-  _Usage Example_:
+  _Usage Example_ :
     + list
       > 1.[T][ ] buy lunch <br>
        2.[D][ ] return book (by: FRIDAY 1 MARCH 2019) <br>
@@ -169,14 +169,14 @@ There are four kinds of tasks that Conan can store.
 
 + **mark** : Mark that task as complete. 
 
-  _Format_: mark {Task Number} 
+  _Format_ : mark {Task Number} 
 
-  _Possible Error Warnings_:
+  _Possible Error Warnings_ :
     + If the argument is missing the task number, error is raised.
     + If the task index number is invalid, that is if it is less than or equal to 0 or greater than the total number of
   tasks, an error warning is issued.
 
-  _Usage Examples_: 
+  _Usage Examples_ : 
     + mark 3
       > Great job, on completing this task! \(^_^)/ <br>
        [T][X] edit pics
@@ -186,14 +186,14 @@ There are four kinds of tasks that Conan can store.
 
 + **unmark** : Mark that task as not complete. 
 
-  _Format_: unmark {Task Number} 
+  _Format_ : unmark {Task Number} 
 
-  _Possible Error Warnings_:
+  _Possible Error Warnings_ :
     + If the argument is missing the task number, error is raised.
     + If the task index number is invalid, that is if it is less than or equal to 0 or greater than the total number of 
   tasks, an error warning is issued.
 
-  _Usage Examples_:
+  _Usage Examples_ :
     + unmark 2
       > Sure, I have unmarked this task: <br>
        [D][ ] return book (by: FRIDAY 1 MARCH 2019)
@@ -270,7 +270,7 @@ by conan. Instead, run conan again.
 
 ## Setting up in Intellij
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+_Prerequisites_ : JDK 11, update Intellij to the most recent version.
 
 1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
 2. Open the project into Intellij as follows:
