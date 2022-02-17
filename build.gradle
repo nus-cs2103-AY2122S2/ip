@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "mnsky.Mnsky"
+    mainClassName = "mnsky.Launcher"
 }
 
 shadowJar {
