@@ -1,14 +1,11 @@
 package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exceptions.DukeException;
-import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
@@ -38,32 +35,4 @@ public class DukeTest {
         assertEquals("[D][ ] Some new deadline (by: 2022-12-22)", deadline.toString());
         System.out.println(deadline.toString());
     }
-
-    @Test
-    public void testAddToDo() throws DukeException {
-        System.out.print("Testing testAddToDo(): ");
-        TaskList taskList = new TaskList();
-        boolean output = taskList.addToDoTask("todo");
-        assertFalse(output);
-    }
-
-    @Test
-    public void testAddEvent() throws DukeException {
-        System.out.print("Testing testAddEvent(): ");
-        TaskList taskList = new TaskList();
-        boolean output = taskList.addEventTask("event missing at without /");
-        assertFalse(output);
-    }
-
-    @Test
-    public void testAddDeadline() throws DukeException {
-        System.out.print("Testing testAddDeadline(): ");
-        TaskList taskList = new TaskList();
-        boolean output = taskList.addDeadlineTask("deadline missing by without /");
-        assertFalse(output);
-    }
-
-
-
-
 }
