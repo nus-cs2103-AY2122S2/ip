@@ -11,17 +11,11 @@ import ui.Ui;
  * Represents a user's instruction for the bot to add a new task.
  */
 public class AddCommand extends Command {
-    /**
-     * Represents the command word to add a Todo type of task.
-     */
+    /** Represents the command word to add a Todo type of task. */
     public static final String ADD_TODO_COMMAND = "todo";
-    /**
-     * Represents the command word to add a Deadline type of task.
-     */
+    /** Represents the command word to add a Deadline type of task. */
     public static final String ADD_DEADLINE_COMMAND = "deadline";
-    /**
-     * Represents the command word to add an Event type of task.
-     */
+    /** Represents the command word to add an Event type of task. */
     public static final String ADD_EVENT_COMMAND = "event";
 
     private final Task taskToAdd;

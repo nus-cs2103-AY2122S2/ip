@@ -9,9 +9,7 @@ import tasklist.TaskListException;
  * Represents a user's instruction for the bot to list out all existing tasks.
  */
 public class ListCommand extends Command {
-    /**
-     * Represents the command word to list out all existing tasks.
-     */
+    /** Represents the command word to list out all existing tasks. */
     public static final String COMMAND = "list";
 
     /**

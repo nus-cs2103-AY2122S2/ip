@@ -14,9 +14,7 @@ import java.util.Optional;
  * Represents a user's instruction for the bot to remove an existing task.
  */
 public class DeleteCommand extends Command {
-    /**
-     * Represents the command word to remove an existing task.
-     */
+    /** Represents the command word to remove an existing task. */
     public static final String COMMAND = "delete";
 
     private final int id;

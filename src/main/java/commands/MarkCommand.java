@@ -14,9 +14,7 @@ import java.util.NoSuchElementException;
  * Represents a user's instruction for the bot to mark a task as completed.
  */
 public class MarkCommand extends Command {
-    /**
-     * Represents the command word to mark a task as completed.
-     */
+    /** Represents the command word to mark a task as completed. */
     public static final String COMMAND = "mark";
 
     private final int id;

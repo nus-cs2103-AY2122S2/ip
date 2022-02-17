@@ -14,9 +14,7 @@ import java.util.NoSuchElementException;
  * Represents a user's instruction for the bot to mark a task as uncompleted.
  */
 public class UnmarkCommand extends Command {
-    /**
-     * Represents the command word to mark a task as uncompleted.
-     */
+    /** Represents the command word to mark a task as uncompleted. */
     public static final String COMMAND = "unmark";
 
     private final int id;

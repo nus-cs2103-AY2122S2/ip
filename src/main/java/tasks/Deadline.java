@@ -7,9 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents work that needs to be done by a given deadline.
  */
 public class Deadline extends Task {
-    /**
-     * Represents the expected format of date inputs for deadlines.
-     */
+    /** Represents the expected format of date inputs for deadlines. */
     public static final DateTimeFormatter DATE_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter DATE_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 

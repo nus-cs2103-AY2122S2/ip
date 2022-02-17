@@ -8,9 +8,7 @@ import tasklist.TaskList;
  * Represents a user's instruction for the bot to terminate.
  */
 public class ExitCommand extends Command {
-    /**
-     * Represents the command word to terminate the bot.
-     */
+    /** Represents the command word to terminate the bot. */
     public static final String COMMAND = "bye";
 
     /**
