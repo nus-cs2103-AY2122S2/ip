@@ -23,7 +23,7 @@ public class AddTaskCommand extends Command {
     private final BotException exception = new BotException();
 
     /**
-     * Initialize an Add Task Command
+     * Initializes an Add Task Command
      *
      * @param fullInput Full input from user
      * @param description The description of the task

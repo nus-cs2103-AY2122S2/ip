@@ -19,7 +19,7 @@ public class Task {
     private String timeCommand;
 
     /**
-     * Initialize a task object
+     * Initializes a task object
      *
      * @param description Description of the task
      * @param type Type of the task

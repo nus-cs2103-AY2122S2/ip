@@ -9,7 +9,7 @@ import angela.util.Ui;
 
 
 /**
- * End chat command
+ * Ends chat command
  */
 public class ByeCommand extends Command {
 

@@ -9,7 +9,7 @@ import angela.util.BotStorage;
 import angela.util.Ui;
 
 /**
- * Super class for all the Command classes
+ * Inherits by all the Command classes
  */
 public abstract class Command {
 

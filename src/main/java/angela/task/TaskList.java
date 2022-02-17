@@ -20,7 +20,7 @@ public class TaskList {
     private final DateTable dateTable;
 
     /**
-     * Initialize an empty reference of task list, for testing purposes
+     * Initializes an empty reference of task list, for testing purposes
      */
     public TaskList() {
         this.botStorage = null;
@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Initialize an empty reference of task list with only storage, for testing purposes
+     * Initializes an empty reference of task list with only storage, for testing purposes
      *
      * @param botStorage The input storage reference
      */
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Initialize the task-list object for Duke bot to use
+     * Initializes the task-list object for Duke bot to use
      *
      * @param botStorage The database for offline data storing
      * @param ui The ui interface that interact with user
@@ -70,18 +70,6 @@ public class TaskList {
         }
     }
 
-    public ArrayList<Task> getStoringList() {
-        return this.storingList;
-    }
-
-    public Task getTask(int taskNumber) {
-        return storingList.get(taskNumber - 1);
-    }
-
-    public int getTotalTask() {
-        return this.totalTask;
-    }
-
     /**
      * Adds the task into the storing list
      *
@@ -93,7 +81,7 @@ public class TaskList {
     }
 
     /**
-     * Remove a specific task from the storing list
+     * Removes a specific task from the storing list
      *
      * @param taskNumber The task id
      * @return The removed <code>Task</code>
@@ -134,4 +122,15 @@ public class TaskList {
         return taskString.contains(keyWord);
     }
 
+    public ArrayList<Task> getStoringList() {
+        return this.storingList;
+    }
+
+    public Task getTask(int taskNumber) {
+        return storingList.get(taskNumber - 1);
+    }
+
+    public int getTotalTask() {
+        return this.totalTask;
+    }
 }

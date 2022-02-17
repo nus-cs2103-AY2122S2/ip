@@ -16,7 +16,7 @@ public class Ui {
     private static final String DATE_FORMAT = "MMM d yyyy";
 
     /**
-     * Initialize an Ui interface
+     * Initializes an Ui interface
      */
     public Ui() {
     }
@@ -169,6 +169,7 @@ public class Ui {
 
     /**
      * Returns string represent the nearest deadlines date and its task
+     *
      * @param dateTable Time and task map
      * @return The string array represent the nearest deadlines and tasks
      */

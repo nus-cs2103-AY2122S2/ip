@@ -15,7 +15,7 @@ public class GetTaskFromDateCommand extends angela.command.Command {
     private final String description;
 
     /**
-     * Initialize a Get Task From Date Command
+     * Initializes a Get Task From Date Command
      *
      * @param description The date that we need to find task on
      */
@@ -24,7 +24,7 @@ public class GetTaskFromDateCommand extends angela.command.Command {
     }
 
     /**
-     * Extract the events from the <code>DateTime</code> for a specific date
+     * Extracts the events from the <code>DateTime</code> for a specific date
      * using command description
      *
      * @param taskList   Reference of the <code>TaskList</code> object

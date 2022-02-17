@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
 /**
- * A personalized dialog box for Angela bot
+ * Encapsulates the message for Angela bot
  */
 public class DialogBox extends HBox {
     private static final String RESOURCE = "/view/DialogBox.fxml";
@@ -34,7 +34,7 @@ public class DialogBox extends HBox {
 
 
     /**
-     * Constructor for a dialog box
+     * Constructs a dialog box
      *
      * @param text The text need to be display
      * @param img Profile image need to be display need to the text
@@ -50,6 +50,7 @@ public class DialogBox extends HBox {
 
     /**
      * Loads FXML for the dialog box
+     *
      * @throws IOException If an I/O error occurs
      */
     private void loadFxml() throws IOException {
@@ -61,6 +62,7 @@ public class DialogBox extends HBox {
 
     /**
      * Sets text and image attribute for the dialog box
+     *
      * @param text The text need to be displayed
      * @param img The image need to be displayed
      */
@@ -124,7 +126,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Enhance quality of the image picture
+     * Enhances quality of the image picture
      *
      * @param imageView The image need to enhanced
      */
@@ -134,7 +136,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flip the box from left-hand side to right-hand side
+     * Flips the box from left-hand side to right-hand side
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -144,7 +146,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Create dialog box object of user
+     * Creates dialog box object of user
      *
      * @param text Text need to be displayed on the box
      * @param img User profile image
@@ -155,7 +157,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Create dialog box for Angela
+     * Creates dialog box for Angela
      *
      * @param text Text need to be displayed on the box
      * @param img Angela profile image

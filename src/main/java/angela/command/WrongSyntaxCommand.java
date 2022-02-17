@@ -14,7 +14,7 @@ import angela.util.Ui;
 public class WrongSyntaxCommand extends angela.command.Command {
 
     /**
-     * Prints the wrong syntax messages in terminal
+     * Returns the wrong syntax messages in GUI
      *
      * @param taskList   Reference of the <code>TaskList</code> object
      * @param ui         Reference of the <code>Ui</code> object

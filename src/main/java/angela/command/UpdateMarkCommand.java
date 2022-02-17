@@ -21,7 +21,7 @@ public class UpdateMarkCommand extends angela.command.Command {
     private final BotException exception = new BotException();
 
     /**
-     * Initialize an Update Mark Command
+     * Initializes an Update Mark Command
      *
      * @param description The task id need to be updated
      * @param isDone True if we want to update the task as done, false otherwise
@@ -50,7 +50,7 @@ public class UpdateMarkCommand extends angela.command.Command {
     }
 
     /**
-     * Get status of the task
+     * Returns status of the task
      * @return The status of the task
      */
     private String getTaskStatus() {

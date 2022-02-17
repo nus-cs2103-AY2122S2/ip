@@ -24,7 +24,7 @@ public class BotStorage implements Storage {
     private final boolean isNewUser;
 
     /**
-     * Initialize the database helper for Duke bot
+     * Initializes the database helper for Duke bot
      *
      * @param path Relative path where the database is located
      * @param directory Directory where database is located

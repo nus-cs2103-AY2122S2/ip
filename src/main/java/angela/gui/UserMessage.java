@@ -14,7 +14,7 @@ public class UserMessage extends Message {
     private TextFlow textDisplay;
 
     /**
-     * Constructor of reusable display text message
+     * Constructs reusable display text message
      *
      * @param text The displayed text
      * @throws IOException If an I/O error occurs
@@ -36,6 +36,11 @@ public class UserMessage extends Message {
         fxmlLoader.load();
     }
 
+    /**
+     * Creates personalize text for TextFlow
+     *
+     * @param text The displayed text
+     */
     @Override
     protected void loadText(String text) {
         Text textString = new Text(text);

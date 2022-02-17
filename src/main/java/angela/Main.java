@@ -38,7 +38,7 @@ public class Main extends Application {
     }
 
     /**
-     * Set stage for the GUI
+     * Sets stage for the GUI
      *
      * @param stage Stage needed to be setup
      * @throws IOException If an I/O exception occurs

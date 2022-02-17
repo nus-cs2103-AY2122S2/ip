@@ -21,7 +21,7 @@ public class Angela {
     private final DateTable dateTable;
 
     /**
-     * Initialize the Angela bot
+     * Initializes the Angela bot
      *
      * @param path Relative path where the database is located
      * @param directory Directory where database is located
@@ -62,7 +62,7 @@ public class Angela {
     }
 
     /**
-     * Return the output string generate from the input command
+     * Returns the output string generate from the input command
      *
      * @param input The input command
      * @return The display string obtain from the input command
@@ -71,6 +71,11 @@ public class Angela {
         return this.run(input);
     }
 
+    /**
+     * Checks whether the current user is a new user
+     *
+     * @return True if current user is a new user, false otherwise
+     */
     public boolean isNewUser() {
         return botStorage.isNewUser();
     }

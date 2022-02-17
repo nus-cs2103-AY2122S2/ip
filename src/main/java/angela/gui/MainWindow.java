@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
     private final Image angelaImage = new Image(this.getClass().getResourceAsStream(ANGELA_IMAGE_URL));
 
     /**
-     * Initialize the FXML
+     * Initializes the FXML
      */
     @FXML
     public void initialize() {
@@ -73,7 +73,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Display upcoming deadlines in GUI
+     * Displays upcoming deadlines in GUI
      */
     private void displayUpcomingDeadline() {
         ArrayList<String> nearestDeadlineText = ui.showNearestDeadlines(angela.getDateTable());
@@ -84,7 +84,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Display all the commands and descriptions
+     * Displays all the commands and descriptions
      */
     private void displayHelp() {
         ArrayList<String> helpText = ui.displayAllCommand();

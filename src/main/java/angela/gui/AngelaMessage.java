@@ -11,14 +11,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-
+/**
+ * Displays message created by Angela
+ */
 public class AngelaMessage extends Message {
     private static final String RESOURCE = "/view/AngelaMessage.fxml";
     @FXML
     private TextFlow textDisplay;
 
     /**
-     * Constructor of reusable display text message for Angela
+     * Constructs of reusable display text message for Angela
      *
      * @param text The displayed text
      * @throws IOException If an I/O error occurs
@@ -40,6 +42,10 @@ public class AngelaMessage extends Message {
         fxmlLoader.load();
     }
 
+    /**
+     * Loads text with customize TextFlow
+     * @param text The text needed to be display
+     */
     @Override
     protected void loadText(String text) {
         int highlightIndex = text.indexOf("~");
