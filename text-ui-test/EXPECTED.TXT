@@ -5,3 +5,36 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Got it. I've added this task
+[T][ ] Task 1 testing
+You have 1 tasks in the list
+
+Got it. I've added this task
+[D][ ] Task 2 testing(by: Monday)
+You have 2 tasks in the list
+
+Got it. I've added this task
+[E][ ] Task 3 testing(at: Tuesday)
+You have 3 tasks in the list
+
+1. [T][ ] Task 1 testing
+2. [D][ ] Task 2 testing(by: Monday)
+3. [E][ ] Task 3 testing(at: Tuesday)
+
+Nice!, I have marked this task as done:
+ [T][X] Task 1 testing
+
+Nice!, I have marked this task as done:
+ [E][X] Task 3 testing(at: Tuesday)
+
+1. [T][X] Task 1 testing
+2. [D][ ] Task 2 testing(by: Monday)
+3. [E][X] Task 3 testing(at: Tuesday)
+
+Ok, I have marked this task as not done:
+ [T][ ] Task 1 testing
+
+1. [T][ ] Task 1 testing
+2. [D][ ] Task 2 testing(by: Monday)
+3. [E][X] Task 3 testing(at: Tuesday)
+
