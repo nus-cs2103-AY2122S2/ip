@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exceptions.MissingKeywordException;
+
 /**
  * Parser class to handle the inputs of the user
  *
@@ -27,7 +29,10 @@ public class Parser {
      * @param inst String of a Event Task.
      * @return String Array containing String of details of Event, and String of time of Event.
      */
-    public String[] parseEvent(String inst) {
+    public String[] parseEvent(String inst) throws MissingKeywordException {
+        if (!inst.contains("at")) {
+            throw new MissingKeywordException();
+        }
         String[] taskArr = splitLimitTwo(inst);
         return taskArr[1].split("/at ");
     }
@@ -38,8 +43,10 @@ public class Parser {
      * @param inst String of a Deadline Task.
      * @return String Array containing String of details of Deadline task, and String of time of Deadline.
      */
-    public String[] parseDeadline(String inst) {
-        // deadline return book /by Sunday
+    public String[] parseDeadline(String inst) throws MissingKeywordException {
+        if (!inst.contains("/by")) {
+            throw new MissingKeywordException();
+        }
         String[] taskArr = splitLimitTwo(inst);
         return taskArr[1].split("/by ");
     }
@@ -68,8 +75,19 @@ public class Parser {
         String month = dateArr[0];
         String day = dateArr[1];
         String year = dateArr[2];
-        String monthNum = "";
+        String monthNum = monthParse(month);
         String time = dateTimeArr[1];
+        // YYYY-MM-DD HH:MM
+        return year + "-" + monthNum + "-" + day + " " + time;
+    }
+
+    /**
+     * Helper Method to parse the month String to its equivalent month number.
+     * @param month String of the month
+     * @return String of the equivalent month number.
+     */
+    private String monthParse(String month) {
+        String monthNum = "";
         switch (month) {
         case "Jan":
             monthNum = "01";
@@ -109,10 +127,7 @@ public class Parser {
             break;
         default:
             System.out.println("Month does not exist");
-
         }
-        // YYYY-MM-DD HH:MM
-        return year + "-" + monthNum + "-" + day + " " + time;
+        return monthNum;
     }
-
 }
