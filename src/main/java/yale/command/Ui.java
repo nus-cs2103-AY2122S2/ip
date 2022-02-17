@@ -7,12 +7,13 @@ import java.util.Scanner;
  * with the user.
  */
 public class Ui {
+    private static boolean isSaved = true;
     private static final String LOGO = "-----YALE-----";
     private static final String WELCOME_MESSAGE = "Allow me to introduce myself\n"
             + LOGO + "\nThe name's Yale.";
     private static final String ENTER_COMMAND = "\nEnter command below:";
     private static final String NO_SAVED_TASKS = "\nYou have no saved tasks.";
-    public static boolean hasSavedTasks = true;
+
 
     /**
      * Constructor method.
@@ -25,7 +26,7 @@ public class Ui {
      * to user when program starts.
      */
     public static String welcomePrompt() {
-        if (!hasSavedTasks) {
+        if (!isSaved) {
             return WELCOME_MESSAGE + NO_SAVED_TASKS + ENTER_COMMAND;
         } else {
             return WELCOME_MESSAGE + ENTER_COMMAND;
@@ -36,6 +37,9 @@ public class Ui {
         return ENTER_COMMAND;
     }
 
+    public static boolean isNotSaved() {
+        return isSaved = false;
+    }
 
 
 

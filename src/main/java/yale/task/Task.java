@@ -30,7 +30,7 @@ public class Task {
      * @return String containing name of Task.
      */
     public String getName() {
-        assert this.name != null: "Task should have a name!";
+        assert this.name != null : "Task should have a name!";
         return this.name;
     }
 

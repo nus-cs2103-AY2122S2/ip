@@ -53,12 +53,6 @@ test {
     }
 }
 
-
-shadowJar {
-    archiveBaseName = "Yale"
-    archiveClassifier = null
-}
-
 checkstyle {
     toolVersion = '8.29'
     configFile = rootProject.file("${rootDir}/config/checkstyle/checkstyle.xml")

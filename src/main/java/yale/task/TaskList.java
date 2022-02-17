@@ -1,9 +1,9 @@
 package yale.task;
 
-import yale.command.Ui;
-
 import java.time.DateTimeException;
 import java.util.ArrayList;
+
+import yale.command.Ui;
 
 /**
  * Customised ArrayList class called TaskList
@@ -68,7 +68,7 @@ public class TaskList {
      */
     public void importIn(String fileData) {
         if (fileData.equals("")) {
-            Ui.hasSavedTasks = false;
+            Ui.isNotSaved();
         }
         String[] lines = fileData.split("\n");
         for (int i = 0; i < lines.length; i++) {
@@ -132,6 +132,7 @@ public class TaskList {
      * Calls listOut() method if there are any tasks in the list.
      * @param command User input of type String.
      * @param list List of Task objects.
+     * @return String format of Tasks in list.
      */
     public String listFeature(String command, TaskList list) {
         boolean emptyList = list.getSize() == 0;
@@ -154,12 +155,13 @@ public class TaskList {
         String cleared = "Your list has been cleared.";
         return cleared + "\nNow you have "
                 + list.getSize() + " tasks in the list.";
-    }   
+    }
 
     /**
-     * Deletes a specific task from the list
+     * Deletes a specific task from the list.
      * @param command User input of type String.
      * @param list List of Task objects.
+     * @return String response indicating that Task has been deleted.
      */
     public String deleteFeature(String command, TaskList list) {
         try {
@@ -186,9 +188,10 @@ public class TaskList {
     }
 
     /**
-     * Marks a specific task in the list
+     * Marks a specific task in the list.
      * @param command User input of type String.
      * @param list List of Task objects.
+     * @return String format indicating Task has been marked/unmarked.
      */
     public String markFeature(String command, TaskList list) {
         try {
@@ -217,10 +220,10 @@ public class TaskList {
     }
 
     /**
-     * Creates a ToDo object if the user input contains
-     * "todo" and adds it into the list.
+     * Creates a ToDo object and adds it into the list.
      * @param command User input of type String.
      * @param list List of Task objects.
+     * @return String format indicating ToDo Task has been added to list.
      */
     public String todoFeature(String command, TaskList list) {
         try {
@@ -236,10 +239,10 @@ public class TaskList {
     }
 
     /**
-     * Creates a Deadline object if the user input contains
-     * "deadline" and adds it into the list
+     * Creates a Deadline object and adds it into the list.
      * @param command User input of type String.
      * @param list List of Task objects.
+     * @return String format indicating Deadline Task has been added to list.
      */
     public String deadlineFeature(String command, TaskList list) {
         try {
@@ -259,10 +262,10 @@ public class TaskList {
     }
 
     /**
-     * Creates an Event object if the user input contains
-     * "event" and adds it into the list.
+     * Creates an Event object and adds it into the list.
      * @param command User input of type String.
      * @param list List of Task objects.
+     * @return String format indicating Event Task has been added to list.
      */
     public String eventFeature(String command, TaskList list) {
         try {
@@ -281,6 +284,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a DoWithin object and adds it into the list.
+     * @param command User input of type String.
+     * @param list List of Task objects.
+     * @return String format indicating DoWithin Task has been added to list.
+     */
     public String doWithinPeriodFeature(String command, TaskList list) {
         try {
             String removeEvent = command.split("period ", 2)[1]; // Remove period word
@@ -304,6 +313,7 @@ public class TaskList {
      * Retrieves Task objects that contain the specified keyword.
      * @param command User input of type String.
      * @param list List of Task objects.
+     * @return String response to user.
      */
     public String findFeature(String command, TaskList list) {
         try {
