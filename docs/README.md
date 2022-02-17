@@ -7,6 +7,7 @@ including time-sensitive tasks such as deadlines and events.
 * [Example of Usage](#example-of-usage)
 * [Features](#features)
   * [List of Tasks](#list-of-tasks)
+  * [Saving](#saving)
   * [Basic Task](#basic-task)
   * [Deadline](#deadline)
   * [Event](#event)
@@ -15,7 +16,6 @@ including time-sensitive tasks such as deadlines and events.
   * [Find by Keyword](#find-by-keyword)
   * [Sort the List](#sort-the-list)
     * [List of Conditions](#list-of-conditions)
-  * [Saving](#saving)
 
 # Quick Start
 * Make sure that you have Java 11 installed in your computer
@@ -39,6 +39,10 @@ Format: `help`
 Lists all the tasks currently in your task list.
 
 Format: `list`
+
+### Saving
+
+The program will automatically save your task-list to the disk, and retrieve the list upon restarting the application.
 
 ### Basic Task
 
@@ -89,7 +93,3 @@ Format: `sort [condition]`
 ***By chronological order:*** `chronologically`  
 ***By alphabetical order:*** `alphabetically`  
 ***By marked tasks:*** `done`
-
-### Saving
-
-The program will automatically save your task-list to the disk, and retrieve the list upon restarting.
