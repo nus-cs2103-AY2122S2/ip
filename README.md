@@ -31,15 +31,15 @@ There are a few commands you can run in Duke. These include:
 You can further edit/modify Duke by navigating to the `src` folder which contains all the `java` files
 
 You can run it from Launcher.java:
-```
+<pre>
 public class Launcher {
-```ruby
-    public static void main(String[] args) {
+
+    <b>public static void main(String[] args)</b> {
     
         Application.launch(Main.class,args);
     }
 }
-```
+</pre>
    ```
    Hello from
     ____        _        
