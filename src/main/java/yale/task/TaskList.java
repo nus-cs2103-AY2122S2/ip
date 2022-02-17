@@ -306,26 +306,31 @@ public class TaskList {
      * @param list List of Task objects.
      */
     public String findFeature(String command, TaskList list) {
-        String inputName = command.split("find ", 2)[1]; // Retrieve task name
-        int count = 1;
-        String output = "Here are the matching tasks in your list:\n";
-        int listSize = list.getSize();
-        for (int i = 0; i < listSize; i++) {
-            Task task = list.getTask(i);
-            String taskName = task.name;
-            boolean isMatched = taskName.contains(inputName);
-            if (isMatched) {
-                output += count + "." + list.getTask(i).toString() + "\n";
-                count += 1;
+        try {
+            String inputName = command.split("find ", 2)[1]; // Retrieve task name
+            int count = 1;
+            String output = "Here are the matching tasks in your list:\n";
+            int listSize = list.getSize();
+            for (int i = 0; i < listSize; i++) {
+                Task task = list.getTask(i);
+                String taskName = task.name;
+                boolean isMatched = taskName.contains(inputName);
+                if (isMatched) {
+                    output += count + "." + list.getTask(i).toString() + "\n";
+                    count += 1;
+                }
             }
+            boolean isNoMatch = output.equals("Here are the matching tasks in your list:\n")
+                    || inputName.equals(" ");
+            if (isNoMatch) {
+                return "There are no matching tasks!";
+            } else {
+                return output;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return "Error: You forgot to indicate the task to find!";
         }
-        boolean isNoMatch = output.equals("Here are the matching tasks in your list:\n")
-                || inputName.equals(" ");
-        if (isNoMatch) {
-            return "There are no matching tasks!";
-        } else {
-            return output;
-        }
+
     }
 
 }
