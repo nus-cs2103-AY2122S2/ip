@@ -13,34 +13,12 @@ public class ContactList {
     private List<Contact> contacts = new ArrayList<>();
     private final CommandList cl = new CommandList();
 
-    public String listContacts() {
-        String list = "";
-        int index = 1;
-        for (Contact c: contacts) {
-            list += index + ". " + c.getName() + "\n";
-
-        }
-
-        return "This is the list of contacts:\n" + list;
-    }
-
-    public void addContact(String name) {
-        contacts.add(new Contact(name));
-    }
-
-    public String showContact(int index) {
-        try {
-            Contact c = contacts.get(index - 1);
-            String pn = c.getPhoneNumber();
-            if (pn == null) {
-                return "There is no contact saved for this person!";
-            } else {
-                return c.getName() + "\nPhone Number: " + pn;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            return "Please key in a valid index";
-        }
-    }
+    /**
+     * executes the command and returns a response
+     * @param command command to be executed
+     * @param description description of command
+     * @return response of command executed
+     */
 
     public String execute(String command, String description) {
         switch (command) {
@@ -78,6 +56,7 @@ public class ContactList {
         try {
             String name = description.split(" ")[0];
             String number = description.split(" ")[1];
+            assert !number.equals("");
             for (Contact c: contacts) {
                 if (c.getName().equals(name)) {
                     return "Name already exists! Please use another name!";
@@ -97,6 +76,7 @@ public class ContactList {
         try {
             String name = description.split(" ")[0];
             String number = description.split(" ")[1];
+            assert !number.equals("");
             for (Contact c: contacts) {
                 if (c.getName().equals(name)) {
                     c.updateContactNumber(number);
@@ -113,6 +93,7 @@ public class ContactList {
 
     private String processDelete(String description) {
         try {
+            assert !description.equals("");
             int index = Integer.parseInt(description);
             Contact c = contacts.get(index - 1);
             contacts.remove(index - 1);
@@ -133,7 +114,7 @@ public class ContactList {
             lists.append(String.format("%d. %s", i + 1, contacts.get(i).toString()));
 
         }
-        return "Here are the list of your contacts:\n" + lists.toString();
+        return "Here are the list of your contacts:\n" + lists;
     }
 
     public List<Contact> getContactList() {
