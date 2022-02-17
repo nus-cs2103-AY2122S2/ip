@@ -72,14 +72,19 @@ public class Task {
      * @throws InvalidArgumentException If the user input format is invalid/unknown.
      */
     public static Task createTask(List<String> description) throws InvalidArgumentException {
-        if (description.get(0).equals("todo")) {
+        switch(description.get(0)) {
+        case "todo":
             return Todo.of(description);
-        } else if (description.get(0).equals("deadline")) {
+
+        case "deadline":
             return Deadline.of(description);
-        } else if (description.get(0).equals("event")) {
+
+        case "event":
             return Event.of(description);
+
+        default:
+            throw new InvalidArgumentException();
         }
-        throw new InvalidArgumentException();
     }
 
     /**
