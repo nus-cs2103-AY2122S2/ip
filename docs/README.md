@@ -26,7 +26,7 @@ Duke parses the input and adds the todo task into its memory.
 
 Example of usage:
 
-todo borrow book
+**todo borrow book**
 
 Expected outcome:
 
@@ -42,7 +42,7 @@ Duke parses the input and adds the deadline task into its memory.
 
 Example of usage:
 
-deadline return book /by 2021-04-01
+**deadline return book /by 2021-04-01**
 
 Expected outcome:
 ```
@@ -57,7 +57,7 @@ Duke parses the input and adds the event task into its memory.
 
 Example of usage:
 
-event read book /at 2021-02-22
+**event read book /at 2021-02-22**
 
 Expected outcome:
 ```
@@ -72,7 +72,7 @@ Duke parses the input and adds the event task into its memory.
 
 Example of usage:
 
-doAfterTask read book /after 2021-02-22
+**doAfterTask read book /after 2021-02-22**
 
 Expected outcome:
 ```
@@ -87,7 +87,7 @@ Duke lists all tasks that it is keeping track of.
 
 Example of usage:
 
-list
+**list**
 
 Expected outcome:
 ```
@@ -103,7 +103,7 @@ Duke marks a task as done.
 
 Example usage:
 
-done 1
+**done 1**
 
 Expected outcome:
 ```
@@ -117,7 +117,7 @@ Duke deletes the task from its memory.
 
 Example usage:
 
-delete 1
+**delete 1**
 
 Expected outcome:
 ```
@@ -132,7 +132,7 @@ Duke finds the tasks that contain keyword(s) input from user.
 
 Example usage:
 
-find book
+**find book**
 
 Expected outcome:
 ```
