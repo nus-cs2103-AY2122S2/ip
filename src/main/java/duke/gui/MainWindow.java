@@ -2,13 +2,15 @@ package duke.gui;
 
 import duke.Duke;
 import duke.Ui;
-import duke.exception.DukeException;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MainWindow extends AnchorPane {
 
@@ -35,7 +37,7 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    private void handleUserInput() throws DukeException {
+    private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = duke.getResponse(userText);
         dialogContainer.getChildren().addAll(
@@ -43,5 +45,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
+        if (dukeText.equals(Ui.BYE_MSG)) {
+            handleCloseAction();
+        }
+    }
+
+    private void handleCloseAction() {
+        Stage stage = (Stage) scrollPane.getScene().getWindow();
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> stage.close());
+        delay.play();
     }
 }
