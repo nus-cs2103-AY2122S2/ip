@@ -196,7 +196,12 @@ public class Parser {
             "Now you have " + taskList.size() + " tasks in the list.";
         }
         if (command.equals("find")){
-            String keyword = strArr[1];
+            String keyword;
+            try {
+                keyword = strArr[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeEmptyArgumentException();
+            }
             StringBuilder message = new StringBuilder("Here are the matching tasks in your list:");
             int j = 1;
             for (int i = 1; i <= taskList.size(); i++) {
