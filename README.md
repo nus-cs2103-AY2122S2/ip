@@ -14,9 +14,9 @@ Follow the instructions below to start using Duke-tator **NOW**!
 
 ## Running Duke-tator
 
-1. Download the jar file for Duke-tator.
+1. Download the jar file for [Duke-tator](https://github.com/hsiaojietng/ip/releases/tag/v0.2).
    1. *Optional*: If you want to pre-load data from a text file, please create a text file as duke.txt under a data folder that is in the same location as the jar file.
-2. Double click on the file to start the program.
+2. Double click on the jar file to start the program.
 3. Once the program starts, Duke-tator will provide you with the necessary commands to get you going:
    1. **list** [Displays out the list of tasks provided in the data/duke.txt file. Make sure the tasks are in this format: T - 0 - NameOfTask or D - 0 - NameOfTask - 2020/January/07]
    2. **todo <TaskName>** [Creates a Todo task with provided 'TaskName']

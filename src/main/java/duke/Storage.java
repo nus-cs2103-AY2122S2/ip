@@ -144,10 +144,8 @@ public class Storage {
         data.mkdir();
 
         //Create duke.txt file
-        File duke = new File(currentDir + "/duke");
         try {
-            duke.createNewFile();
-            fileWriter = new FileWriter(duke);
+            fileWriter = new FileWriter(data + "duke");
             saveAllTasks(tasks);
             closeWriteFile();
         } catch (IOException err) {

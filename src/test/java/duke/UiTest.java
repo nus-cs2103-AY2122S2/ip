@@ -17,7 +17,8 @@ public class UiTest {
     /** Runs a test to check the starting message of Duke application */
     @Test
     public void validWelcomeMessage() {
-        String listOfCommands = "todo <Description of Task>\n" +
+        String listOfCommands = "These are some of the instructions I can follow: \n" +
+                "todo <Description of Task>\n" +
                 "deadline <Description of Task> /by <eg. 2020/May/19>\n" +
                 "event <Description of Task> /at <eg. 2020/May/19>\n" +
                 "list\n" +

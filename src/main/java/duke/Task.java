@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * This is an abstract Task class that creates Task instances with a title,
@@ -52,7 +53,7 @@ public abstract class Task implements Comparable<Task> {
      * Allows lexicographical comparison of Task title
      */
     public int compareTo(Task task) {
-        return name.compareTo(task.name);
+        return name.toLowerCase().compareTo(task.name.toLowerCase());
     }
 
     /**
