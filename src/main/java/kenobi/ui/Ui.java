@@ -1,4 +1,4 @@
-package kenobi.util;
+package kenobi.ui;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
