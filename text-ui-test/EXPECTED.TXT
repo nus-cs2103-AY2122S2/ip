@@ -1,7 +1,56 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello I'm
+______       _
+| ___ \     (_)
+| |_/ /_ __  _  _ __    ___  ___
+|  __/| '__|| || '_ \  / __|/ _ \ 
+| |   | |   | || | | || (__|  __/
+\_|   |_|   |_||_| |_| \___|\___|
 
+How can I help you today?
+~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added: 
+[T][ ] buy doge nft
+Sheesh you've now got 1 tasks in the list
+~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added: 
+[D][ ] sell doge nft  (by: Sunday)
+Sheesh you've now got 2 tasks in the list
+~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added: 
+[T][ ] profit
+Sheesh you've now got 3 tasks in the list
+~~~~~~~~~~~~~~~~~~~~~~~
+Here's everything on your list rn:
+1 [T][ ] buy doge nft
+2 [D][ ] sell doge nft  (by: Sunday)
+3 [T][ ] profit
+~~~~~~~~~~~~~~~~~~~~~~~
+Woohoo! I've marked task 2 as done
+[D][X] sell doge nft  (by: Sunday)
+~~~~~~~~~~~~~~~~~~~~~~~
+Woohoo! I've marked task 3 as done
+[T][X] profit
+~~~~~~~~~~~~~~~~~~~~~~~
+Ok boss I've marked task 2 as incomplete
+[D][ ] sell doge nft  (by: Sunday)
+~~~~~~~~~~~~~~~~~~~~~~~
+Here's everything on your list rn:
+1 [T][ ] buy doge nft
+2 [D][ ] sell doge nft  (by: Sunday)
+3 [T][X] profit
+~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added: 
+[E][ ] go out for dinner  (at: Friday night 6-8pm)
+Sheesh you've now got 4 tasks in the list
+~~~~~~~~~~~~~~~~~~~~~~~
+Alrighty I've removed this task
+[T][X] profit
+K you've now got 3 tasks in the list
+~~~~~~~~~~~~~~~~~~~~~~~
+Here's everything on your list rn:
+1 [T][ ] buy doge nft
+2 [D][ ] sell doge nft  (by: Sunday)
+3 [E][ ] go out for dinner  (at: Friday night 6-8pm)
+~~~~~~~~~~~~~~~~~~~~~~~
+See you later alligator :)
+~~~~~~~~~~~~~~~~~~~~~~~
