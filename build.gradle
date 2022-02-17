@@ -48,7 +48,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Cortana"
+    archiveBaseName = "Cortana Todo"
     archiveClassifier = null
 }
 
