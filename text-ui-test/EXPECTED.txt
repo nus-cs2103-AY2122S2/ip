@@ -1,0 +1,73 @@
+----------------------------------------------
+Hello! I am Morty, Rick's assistant.
+What can I do for you, today?
+----------------------------------------------
+----------------------------------------------
+Great, have added the following task for you:
+[T][ ] borrow book
+Now you have 1 task.
+----------------------------------------------
+----------------------------------------------
+Great, have added the following task for you:
+[D][ ] read book (by: Jan 20)
+Now you have 2 duke.tasks.
+----------------------------------------------
+----------------------------------------------
+Great, have added the following task for you:
+[E][ ] book club meeting (at: Jan 22)
+Now you have 3 duke.tasks.
+----------------------------------------------
+----------------------------------------------
+A Deadline Task must have an associated deadline.
+Please try again!
+----------------------------------------------
+----------------------------------------------
+A Deadline Task must have a task name.
+Please try again!
+----------------------------------------------
+----------------------------------------------
+Great, have added the following task for you:
+[D][ ] return book (by: Jan 25)
+Now you have 4 duke.tasks.
+----------------------------------------------
+----------------------------------------------
+You have 4 duke.tasks in the list
+1. [T][ ] borrow book
+2. [D][ ] read book (by: Jan 20)
+3. [E][ ] book club meeting (at: Jan 22)
+4. [D][ ] return book (by: Jan 25)
+----------------------------------------------
+----------------------------------------------
+Well done! I have marked this task as done.
+[T][X] borrow book
+----------------------------------------------
+----------------------------------------------
+Well done! I have marked this task as done.
+[D][X] read book (by: Jan 20)
+----------------------------------------------
+----------------------------------------------
+No worries, I have unmarked this task, good luck!
+[D][ ] read book (by: Jan 20)
+----------------------------------------------
+----------------------------------------------
+You have 4 duke.tasks in the list
+1. [T][X] borrow book
+2. [D][ ] read book (by: Jan 20)
+3. [E][ ] book club meeting (at: Jan 22)
+4. [D][ ] return book (by: Jan 25)
+----------------------------------------------
+----------------------------------------------
+Noted. I have removed the following task:
+[E][ ] book club meeting (at: Jan 22)
+You now have 3 duke.tasks
+----------------------------------------------
+----------------------------------------------
+You have 3 duke.tasks in the list
+1. [T][X] borrow book
+2. [D][ ] read book (by: Jan 20)
+3. [D][ ] return book (by: Jan 25)
+----------------------------------------------
+----------------------------------------------
+Hope you had fun talking to me, and bye!
+Have a nice day ahead!
+----------------------------------------------
