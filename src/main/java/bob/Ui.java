@@ -6,6 +6,8 @@ package bob;
 public class Ui {
     /**
      * Greets the user on program startup.
+     *
+     * @return Greetings to the user.
      */
     public static String greet() {
         return Ui.printLine()
@@ -15,7 +17,9 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when program exits.
+     * Returns UI message when program exits.
+     *
+     * @return UI message when program exits.
      */
     public static String bye() {
         return Ui.printLine()
@@ -24,7 +28,9 @@ public class Ui {
     }
 
     /**
-     * Prints UI message for the list command.
+     * Returns UI message for the list command.
+     *
+     * @return UI message for the list command.
      */
     public static String list() {
         return Ui.printLine()
@@ -32,9 +38,10 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when a task is marked.
+     * Returns UI message when a task is marked.
      *
      * @param task Task to be marked.
+     * @return UI message when a task is marked.
      */
     public static String mark(Task task) {
         return Ui.printLine()
@@ -43,9 +50,10 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when a task is unmarked.
+     * Returns UI message when a task is unmarked.
      *
      * @param task Task to be unmarked.
+     * @return UI message when a task is unmarked.
      */
     public static String unmark(Task task) {
         return Ui.printLine()
@@ -54,10 +62,11 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when a Task is deleted.
+     * Returns UI message when a Task is deleted.
      *
      * @param tasksSize New size of TaskList.
      * @param task      Task to be removed.
+     * @return UI message when a Task is deleted.
      */
     public static String delete(int tasksSize, Task task) {
         return Ui.printLine()
@@ -67,10 +76,11 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when a new Task is added.
+     * Returns UI message when a new Task is added.
      *
      * @param task      Newly added Task.
      * @param tasksSize New size of TaskList.
+     * @return UI message when a new Task is added.
      */
     public static String newTask(Task task, int tasksSize) {
         return Ui.printLine()
@@ -80,7 +90,9 @@ public class Ui {
     }
 
     /**
-     * Prints UI message for a search result.
+     * Returns UI message for a search result.
+     *
+     * @return UI message for a search result.
      */
     public static String find() {
         return Ui.printLine()
@@ -88,19 +100,22 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when an invalid command is given.
+     * Returns UI message when an invalid command is given.
      *
-     * @param cmd Invalid command to be echoed.
+     * @param command Invalid command to be echoed.
+     * @return UI message when an invalid command is given.
      */
-    public static String invalidCommand(String cmd) {
+    public static String invalidCommand(String command) {
         return Ui.printLine()
-                + "I don't understand: " + cmd + "\n"
+                + "I don't understand: " + command + "\n"
                 + "Please repeat!:(\n"
                 + Ui.printLine();
     }
 
     /**
-     * Prints UI message when insufficient arguments are given.
+     * Returns UI message when insufficient arguments are given.
+     *
+     * @return UI message when insufficient arguments are given.
      */
     public static String insufficientArgs() {
         return Ui.printLine()
@@ -109,7 +124,9 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when no such item exists in the TaskList.
+     * Returns UI message when no such item exists in the TaskList.
+     *
+     * @return UI message when no such item exists in the TaskList.
      */
     public static String noSuchItem() {
         return Ui.printLine()
@@ -118,7 +135,9 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when invalid integers are given.
+     * Returns UI message when invalid integers are given.
+     *
+     * @return UI message when invalid integers are given.
      */
     public static String invalidInt() {
         return Ui.printLine()
@@ -127,7 +146,9 @@ public class Ui {
     }
 
     /**
-     * Prints UI message when time is in invalid format.
+     * Returns UI message when time is in invalid format.
+     *
+     * @return UI message when time is in invalid format.
      */
     public static String invalidTimeFormat() {
         return Ui.printLine()
@@ -136,7 +157,9 @@ public class Ui {
     }
 
     /**
-     * Prints a line to format output.
+     * Returns a line to format output.
+     *
+     * @return A line in string format.
      */
     public static String printLine() {
         return "----------------------------------------\n";
