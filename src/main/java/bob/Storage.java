@@ -50,7 +50,6 @@ public class Storage {
 
         try {
             Scanner sc = new Scanner(file);
-
             while (sc.hasNextLine()) {
                 String nextLine = sc.nextLine();
                 String[] tokens = nextLine.strip().split("\\|");
@@ -60,26 +59,15 @@ public class Storage {
 
                 Task newTask;
                 switch (taskType) {
-                case ("T"):
-                    newTask = new ToDo(taskDescription, isDone);
+                case "T":
+                    newTask = newToDo(isDone, taskDescription);
                     break;
-
-                case ("E"):
-                    String[] taskDescriptionTime = taskDescription.split("/at ");
-                    String eventTaskName = taskDescriptionTime[0];
-                    String time = taskDescriptionTime[1];
-
-                    newTask = new Event(eventTaskName, time, isDone);
+                case "E":
+                    newTask = newEvent(isDone, taskDescription);
                     break;
-
-                case ("D"):
-                    String[] taskDescriptionSplit = taskDescription.split("/by ");
-                    String deadlineTaskName = taskDescriptionSplit[0];
-                    String deadline = taskDescriptionSplit[1];
-
-                    newTask = new Deadline(deadlineTaskName, deadline, isDone);
+                case "D":
+                    newTask = newDeadline(isDone, taskDescription);
                     break;
-
                 default:
                     throw new CorruptedEntryException("Saved file has corrupted entries! :(");
                 }
@@ -90,8 +78,25 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return new TaskList(list);
+    }
+
+    private Task newToDo(boolean isDone, String taskDescription) {
+        return new ToDo(taskDescription, isDone);
+    }
+
+    private Task newEvent(boolean isDone, String taskDescription) {
+        String[] taskDescriptionTime = taskDescription.split("/at ");
+        String eventTaskName = taskDescriptionTime[0];
+        String time = taskDescriptionTime[1];
+        return new Event(eventTaskName, time, isDone);
+    }
+
+    private Task newDeadline(boolean isDone, String taskDescription) {
+        String[] taskDescriptionSplit = taskDescription.split("/by ");
+        String deadlineTaskName = taskDescriptionSplit[0];
+        String deadline = taskDescriptionSplit[1];
+        return new Deadline(deadlineTaskName, deadline, isDone);
     }
 
     /**

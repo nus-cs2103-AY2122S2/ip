@@ -16,57 +16,38 @@ public class Parser {
     public static String parse(String userInput, TaskList tasks, Storage storage) {
         String response;
         try {
-            String cmd = userInput.split(" ")[0].strip();
+            String command = userInput.split(" ")[0].strip();
             boolean tasksIsDiff = false;
 
-            switch (cmd) {
+            switch (command) {
             case "list":
                 response = tasks.list();
                 break;
-
             case "mark":
                 //fallthrough
             case "unmark":
                 //fallthrough
             case "delete":
-                int idx = Integer.parseInt(userInput.split(" ")[1]);
-                response = tasks.update(cmd, idx);
+                response = update(command, userInput, tasks);
                 tasksIsDiff = true;
                 break;
-
             case "todo":
-                Task newTodo = new ToDo(userInput.split(" ", 2)[1]);
-                response = tasks.add(newTodo);
+                response = newToDo(userInput, tasks);
                 tasksIsDiff = true;
                 break;
-
             case "deadline":
-                String by = userInput.split("/by ")[1];
-                String deadlineDesc = userInput.split("/by ")[0];
-                deadlineDesc = deadlineDesc.substring(deadlineDesc.indexOf(" ")).strip();
-
-                Task newDeadline = new Deadline(deadlineDesc, by);
-                response = tasks.add(newDeadline);
+                response = newDeadline(userInput, tasks);
                 tasksIsDiff = true;
                 break;
-
             case "event":
-                String time = userInput.split("/at ")[1];
-                String eventDesc = userInput.split("/at ")[0].strip();
-                eventDesc = eventDesc.substring(eventDesc.indexOf(" ")).strip();
-
-                Task newEvent = new Event(eventDesc, time);
-                response = tasks.add(newEvent);
+                response = newEvent(userInput, tasks);
                 tasksIsDiff = true;
                 break;
-
             case "find":
-                String keyword = userInput.split(" ", 2)[1];
-                response = tasks.find(keyword);
+                response = find(userInput, tasks);
                 break;
-
             default:
-                response = Ui.invalidCommand(cmd);
+                response = Ui.invalidCommand(command);
             }
 
             if (tasksIsDiff) {
@@ -83,5 +64,38 @@ public class Parser {
         }
 
         return response;
+    }
+
+    private static String update(String command, String userInput, TaskList tasks) {
+        int idx = Integer.parseInt(userInput.split(" ")[1]);
+        return tasks.update(command, idx);
+    }
+
+    private static String newToDo(String userInput, TaskList tasks) {
+        Task newTodo = new ToDo(userInput.split(" ", 2)[1]);
+        return tasks.add(newTodo);
+    }
+
+    private static String newEvent(String userInput, TaskList tasks) {
+        String time = userInput.split("/at ")[1];
+        String eventDesc = userInput.split("/at ")[0].strip();
+        eventDesc = eventDesc.substring(eventDesc.indexOf(" ")).strip();
+
+        Task newEvent = new Event(eventDesc, time);
+        return tasks.add(newEvent);
+    }
+
+    private static String newDeadline(String userInput, TaskList tasks) {
+        String by = userInput.split("/by ")[1];
+        String deadlineDesc = userInput.split("/by ")[0];
+        deadlineDesc = deadlineDesc.substring(deadlineDesc.indexOf(" ")).strip();
+
+        Task newDeadline = new Deadline(deadlineDesc, by);
+        return tasks.add(newDeadline);
+    }
+
+    private static String find(String userInput, TaskList tasks) {
+        String keyword = userInput.split(" ", 2)[1];
+        return tasks.find(keyword);
     }
 }

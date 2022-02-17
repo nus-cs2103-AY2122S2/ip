@@ -46,7 +46,7 @@ public class TaskList {
     }
 
     /**
-     * Prints the Tasks in the TaskList.
+     * Returns the Tasks in the TaskList.
      */
     public String list() {
         String str = Ui.list();
@@ -60,11 +60,11 @@ public class TaskList {
     /**
      * Updates the TaskList according to the given command.
      *
-     * @param cmd Command to indicate action.
-     * @param idx Index of task to be acted upon.
+     * @param command Command to indicate action.
+     * @param idx     Index of task to be acted upon.
      */
-    public String update(String cmd, int idx) {
-        switch (cmd) {
+    public String update(String command, int idx) {
+        switch (command) {
         case "mark":
             tasks.get(idx - 1).toggleDone();
             return Ui.mark(tasks.get(idx - 1));
