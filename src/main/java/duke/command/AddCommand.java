@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import duke.Ui.Ui;
+import duke.ui.Ui;
 import duke.io.Storage;
 import duke.task.TaskList;
 
