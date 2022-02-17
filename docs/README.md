@@ -1,9 +1,10 @@
 
 # Conan
-**_Conan_** is a task manager, who can help you manage your day easily :v:.
-> "The key is not spending time, but investing it." - Stephen R. Covey [(Source)](https://www.inc.com/dan-scalco/22-time-management-quotes-to-inspire-you-to-achieve-your-goals.html) </br>
+**_Conan_** is a task manager, who can help you manage your day easily.
+> "The key is not spending time, but investing it." - Stephen R. Covey [(Source)](https://www.inc.com/dan-scalco/22-time-management-quotes-to-inspire-you-to-achieve-your-goals.html) 
 
-Conan draws inspiration from [Project Duke](https://nus-cs2103-ay2122s2.github.io/website/se-book-adapted/projectDuke/index.html), that was designed to help learn Software Engineering Techniques.
+Conan draws inspiration from [Project Duke](https://nus-cs2103-ay2122s2.github.io/website/se-book-adapted/projectDuke/index.html),
+that was designed to help learn Software Engineering Techniques.
 
 ## Quick Links
 + [Quick Start](README.md#Quick-Start)
@@ -33,14 +34,14 @@ Once you are acquainted you could tell Conan the tasks you want to do.
 
 #### Tasks
 
-There are :four: kinds of tasks that Conan can store.
+There are four kinds of tasks that Conan can store.
 1. **Todo** - Keeps track of the task that do not have to be completed without sometime. </br>
-   Format: : todo {Task} in the command line for such commands.
-2. **Event** - Any event that you have to attend a certain date and time, Conan can keep track of that for you.</br>
+   Format: todo {Task} in the command line for such commands.
+2. **Event** - Any event that you have to attend a certain date and time, Conan can keep track of that for you. </br>
    Format: event {Task} /at YYYY-MM-DD HHMM
-3. **Deadline** - Tasks that need to be completed within a time frame.</br>
+3. **Deadline** - Tasks that need to be completed within a time frame. </br>
    Format: deadline {Task} /by YYYY-MM-DD HHMM
-4. **Task** - any general tasks to keep track of.</br>
+4. **Task** - any general tasks to keep track of. </br>
    Format: {Task , more than 2 words}
 
 **Note**: For Event and Deadline, time argument HHMM is not necessary to enter, however the date must be entered.
@@ -49,155 +50,155 @@ There are :four: kinds of tasks that Conan can store.
 
 + **add** : add a task to track.
 
-  _Format_ : refer to [Tasks](README.md#tasks)</br>
+  _Format_ : refer to [Tasks](README.md#tasks) </br>
 
-  _Possible Error Warning_:</br>
+  _Possible Error Warning_:
     + If an empty task argument is added then task missing exception is raised.
     + For Event, if time argument identifier, '/at' is not used time argument missing exception is raised.
     + For Deadline, if time argument identifier, '/by' is not used time argument missing exception is raised.
     + For Event and Deadline, if the Date is not in {YYYY-MM-DD} format, error will be issued.
     + For Event and Deadline, if a time argument is used, it should be of {HHMM} format or else error will be issued.
 
-  _Usage Example_:</br>
+  _Usage Example_:
     + make pancakes
-      > I have added: make pancakes, to your list of tasks.</br>
+      > I have added: make pancakes, to your list of tasks. </br>
       Number of tasks up to now: 1
     + todo do laundry
-      > I have added: do laundry, to your list of tasks.</br>
+      > I have added: do laundry, to your list of tasks. </br>
        Number of tasks up to now: 2
     + deadline submit cs3243 project /by 2022-02-20
-      > I have added: submit cs3243 project, to your list of tasks.</br>
+      > I have added: submit cs3243 project, to your list of tasks. </br>
        Number of tasks up to now: 3
     + event GEQ lecture /at 2022-02-25 0800
-      > I have added: GEH lecture, to your list of tasks.</br>
+      > I have added: GEH lecture, to your list of tasks. </br>
        Number of tasks up to now: 4
 
-+ **bye** : To close the program. Conan stores all your tasks so that you can visit them later.</br>
++ **bye** : To close the program. Conan stores all your tasks so that you can visit them later. </br>
 
-  _Format_: bye</br>
+  _Format_: bye </br>
 
-  _Possible Error Warnings_:</br>
+  _Possible Error Warnings_:
     + NONE
 
-  _Usage Examples_:</br>
+  _Usage Examples_:
     + bye
-      > Goodbye, Jules</br>
-       Hope I helped you complete your tasks!</br>
-       Have a great day ahead, enjoy ! (^-^)/</br>
+      > Goodbye, Jules </br>
+       Hope I helped you complete your tasks! </br>
+       Have a great day ahead, enjoy ! (^-^)/ </br>
        Hope to see you next time! 
 
-+ **delete** : Delete that task from the list.</br>
++ **delete** : Delete that task from the list. </br>
 
-  _Format_: delete {Task Number}</br>
+  _Format_: delete {Task Number} </br>
 
-  _Possible Error Warnings_:</br>
+  _Possible Error Warnings_:
     + If the argument is missing the task number, error is raised.
-    + If the task index number is invalid, that is if it is less than or equal to 0 or greater than </br>
-      the total number of tasks, an error warning is issued.
+    + If the task index number is invalid, that is if it is less than or equal to 0 or greater than the total number of 
+      tasks, an error warning is issued.
 
-  _Usage Examples_:</br>
+  _Usage Examples_:
     + delete 2
       > The following task has been removed from the list : </br>
        [D][ ] return book (by: FRIDAY 1 MARCH 2019)
     + delete 4
-      > Task num: 4 isn't present. Type 'list' command to view the task numbers.</br>
+      > Task num: 4 isn't present. Type 'list' command to view the task numbers. </br>
        Please try again!
       
-+ **due-on** : To view tasks that are due on this date.</br>
++ **due-on** : To view tasks that are due on this date. </br>
 
-  _Format_: due-on {YYYY-MM-DD}</br>
+  _Format_: due-on {YYYY-MM-DD} </br>
 
-  _Possible Error Warnings_:</br>
+  _Possible Error Warnings_:
     + Issues a warning id the date argument is empty.
     + Issues a warning if the date is not in {YYYY-MM-DD} format.
 
-  _Usage Examples_:</br>
+  _Usage Examples_:
     + due-on 2022-03-01
-      > The following tasks are due on TUESDAY 1 MARCH 2022:<br/>
-       1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022)</br>
+      > The following tasks are due on TUESDAY 1 MARCH 2022: <br/>
+       1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022) </br>
        2.[D][ ] finish cp assignment (by: TUESDAY 1 MARCH 2022)
     + due-on 2022-02-20
       > Seems like you are free on SUNDAY 20 FEBRUARY 2022
 
-+ **due-before** : To view tasks that are due before this date.</br>
++ **due-before** : To view tasks that are due before this date. </br>
 
-  _Format_: due-before {YYYY-MM-DD}</br>
+  _Format_: due-before {YYYY-MM-DD} </br>
 
-  _Possible Error Warnings_:</br>
+  _Possible Error Warnings_:
     + Issues a warning id the date argument is empty.
     + Issues a warning if the date is not in {YYYY-MM-DD} format.
 
-  _Usage Examples_:</br>
+  _Usage Examples_:
     + due-before 2022-03-02
-      > The following tasks are due before WEDNESDAY 2 MARCH 2022:</br>
-       1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022)</br>
-       2.[D][ ] finish cp assignment (by: TUESDAY 1 MARCH 2022)</br>
+      > The following tasks are due before WEDNESDAY 2 MARCH 2022: </br>
+       1.[E][ ] Finance Seminar (at: TUESDAY 1 MARCH 2022) </br>
+       2.[D][ ] finish cp assignment (by: TUESDAY 1 MARCH 2022) 
     + due-before 2022-02-25
       > Seems like you are free before FRIDAY 25 FEBRUARY 2022
 
-+ **find** : To find tasks containing that keyword.</br>
++ **find** : To find tasks containing that keyword. </br>
 
-  _Format_: find {Keyword}</br>
+  _Format_: find {Keyword} </br>
 
-  _Possible Error Warnings_:</br>
+  _Possible Error Warnings_:
     + If the keyword is missing, error is raised.
 
-  _Usage Examples_:</br>
+  _Usage Examples_:
     + find assign
-      > The following tasks contain assign:</br>
+      > The following tasks contain assign: </br>
        1.[D][ ] finish cp assignment (by: TUESDAY 1 MARCH 2022)
     + find monkey
       > No task containing: monkey, was found.
 
-+ **list** : To view the list of tasks lined up.</br>
++ **list** : To view the list of tasks lined up. </br>
 
   _Format_: list</br>
 
   _Possible Error Warnings_:
     + If the list is empty _Conan_ tells the user that the list is empty.
 
-  _Usage Example_:</br>
+  _Usage Example_:
     + list
       > 1.[T][ ] buy lunch </br>
        2.[D][ ] return book (by: FRIDAY 1 MARCH 2019) </br>
        3.[E][X] project team meeting (at: FRIDAY 22 FEBRUARY 2019) </br>
        4.[T][ ] buy shoes 
     + list
-      > No tasks are there! Seems like you are free!</br>
+      > No tasks are there! Seems like you are free! </br>
        Do you wanna add some tasks?
 
-+ **mark** : Mark that task as complete.</br>
++ **mark** : Mark that task as complete. </br>
 
-  _Format_: mark {Task Number}</br>
+  _Format_: mark {Task Number} </br>
 
-  _Possible Error Warnings_: </br>
+  _Possible Error Warnings_:
     + If the argument is missing the task number, error is raised.
-    + If the task index number is invalid, that is if it is less than or equal to 0 or greater than </br>
-      the total number of tasks, an error warning is issued.
+    + If the task index number is invalid, that is if it is less than or equal to 0 or greater than the total number of
+  tasks, an error warning is issued.
 
-  _Usage Examples_: </br>
+  _Usage Examples_: 
     + mark 3
-      > Great job, on completing this task! \(^_^)/<br>
+      > Great job, on completing this task! \(^_^)/ <br>
        [T][X] edit pics
     + mark 40
-      > Task num: 40 isn't present. Type 'list' command to view the task numbers.</br>
+      > Task num: 40 isn't present. Type 'list' command to view the task numbers. </br>
        Please try again!
 
-+ **unmark** : Mark that task as not complete.</br>
++ **unmark** : Mark that task as not complete. </br>
 
-  _Format_: unmark {Task Number}</br>
+  _Format_: unmark {Task Number} </br>
 
-  _Possible Error Warnings_:</br>
+  _Possible Error Warnings_:
     + If the argument is missing the task number, error is raised.
-    + If the task index number is invalid, that is if it is less than or equal to 0 or greater than </br>
-      the total number of tasks, an error warning is issued.
+    + If the task index number is invalid, that is if it is less than or equal to 0 or greater than the total number of 
+  tasks, an error warning is issued.
 
-  _Usage Examples_:</br>
+  _Usage Examples_:
     + unmark 2
       > Sure, I have unmarked this task: </br>
        [D][ ] return book (by: FRIDAY 1 MARCH 2019)
     + unmark 19
-      > Task num: 19 isn't present. Type 'list' command to view the task numbers.</br>
+      > Task num: 19 isn't present. Type 'list' command to view the task numbers. </br>
        Please try again!
 
 #### Remembering Tasks
