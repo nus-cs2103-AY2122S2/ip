@@ -3,20 +3,20 @@
 Apollo is a **desktop app for managing tasks via Command Line Interface**. 
 A Graphical User Interface have been added. This project is build upon the `Duke` project template. 
 
-- [Quick Start](https://github.com/j4ck990/ip/blob/master/docs/README.md#quick-start)
-- [Commands](https://github.com/j4ck990/ip/blob/master/docs/README.md#commands)
-  - [Show how to use command: `help`](https://github.com/j4ck990/ip/blob/master/docs/README.md#show-how-to-use-command-help)
-  - [Add a new task: `todo`,`deadline`,`event`](https://github.com/j4ck990/ip/blob/master/docs/README.md#add-a-new-task-tododeadlineevent)
-  - [Delete a task: `delete`](https://github.com/j4ck990/ip/blob/master/docs/README.md#delete-a-task-delete)
-  - [Find specific task: `task`](https://github.com/j4ck990/ip/blob/master/docs/README.md#find-specific-task-find)
-  - [List all tasks: `list`](https://github.com/j4ck990/ip/blob/master/docs/README.md#list-all-tasks-list)
-  - [Mark a task as done/not dont: `mark`,`unmark`](https://github.com/j4ck990/ip/blob/master/docs/README.md#mark-a-task-as-donenot-done-markunmark)
-  - [Exit program: `exit`](https://github.com/j4ck990/ip/blob/master/docs/README.md#exit-program-exit)
-- [Additional features](https://github.com/j4ck990/ip/blob/master/docs/README.md#additional-features)
-  - [Save](https://github.com/j4ck990/ip/blob/master/docs/README.md#save)
-  - [Load](https://github.com/j4ck990/ip/blob/master/docs/README.md#load)
-- [Command Summary](https://github.com/j4ck990/ip/blob/master/docs/README.md#command-summary)
-- [Credits](https://github.com/j4ck990/ip/blob/master/docs/README.md#credits)
+- [Quick Start](#quick-start)
+- [Commands](#commands)
+  - [Show how to use command: `help`](#show-how-to-use-command-help)
+  - [Add a new task: `todo`,`deadline`,`event`](#add-a-new-task-tododeadlineevent)
+  - [Delete a task: `delete`](#delete-a-task-delete)
+  - [Find specific task: `task`](#find-specific-task-find)
+  - [List all tasks: `list`](#list-all-tasks-list)
+  - [Mark a task as done/not dont: `mark`,`unmark`](#mark-a-task-as-donenot-done-markunmark)
+  - [Exit program: `exit`](#exit-program-exit)
+- [Additional features](#additional-features)
+  - [Save](#save)
+  - [Load](#load)
+- [Command Summary](#command-summary)
+- [Credits](#credits)
 
 ## Quick Start
 
@@ -24,11 +24,11 @@ A Graphical User Interface have been added. This project is build upon the `Duke
 2. Download the latest `apollo.jar` from here.
 3. Copy the file to the folder you want to use as the home folder for your AddressBook. 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
-   ![](https://github.com/j4ck990/ip/blob/master/docs/Ui.png)
-5. Type the command in the command box and press `Enter` or click `Send` to execute it.
+   ![](https://j4ck990.github.io/ip/Ui.png)
+5. Type the command in the command box and press `Enter` on your keyboard or click `Send` to execute it.
 You can type `help` to see possible commands.
 
-Refer to [Commands](https://github.com/j4ck990/ip/blob/master/docs/README.md#commands) 
+Refer to [Commands](#commands) 
 for details for each command. 
 
 ## Commands
@@ -51,15 +51,15 @@ e.g. `help`
 
 ### Add a new task: `todo`,`deadline`,`event`
 
-##### Adding a todo task: `todo DESCRIPTION`
+#### Adding a todo task: `todo DESCRIPTION`
 Adds a task without any due date and time. <br/>
 e.g. `todo Go to the Gym`
 
-##### Adding a deadline: `deadline DESCRIPTION /by DD-MM-YYYY HH:MM`
+#### Adding a deadline: `deadline DESCRIPTION /by DD-MM-YYYY HH:MM`
 Adds a deadline task with the supplied due date and time. <br/>
 e.g. `deadline Submit assignment /by 20-02-2022 23:59`
 
-##### Adding an event: `event DESCRIPTION /at DD-MM-YYYY HH:MM`
+#### Adding an event: `event DESCRIPTION /at DD-MM-YYYY HH:MM`
 Adds an event task that happens at the supplied date and time. <br/>
 e.g. `event Booster shot /at 2-2-2022 14:00`
 
