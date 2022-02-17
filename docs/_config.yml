@@ -1,4 +1,5 @@
 theme: jekyll-theme-time-machine
+show_downloads: true
 markdown: GFM
 title: Daphne
 description: A cute little task management chat bot.
