@@ -23,6 +23,8 @@ Examples of usage:
 `t play badminton`
 
 Expected output:
+
+
 ![Todo](./Todo.png)
 ![TodoShortform](./TodoShortform.png)
 
@@ -35,6 +37,8 @@ Examples of usage:
 `e reunion dinner /at 2022-02-11`
 
 Expected output:
+
+
 ![Event](./Event.png)
 ![EventShortform](./EventShortform.png)
 
@@ -48,6 +52,8 @@ Examples of usage:
 `d submit assignment /by 2022-03-26`
 
 Expected output: 
+
+
 ![Deadline](./Deadline.png)
 ![DeadlineShortform](./DeadlineShortform.png)
 
@@ -57,6 +63,8 @@ Example of usage:
 `list`
 
 Expected output:
+
+
 ![List](./List.png)
 
 ### 5) `mark {taskNumber}` / `m {taskNumber}` : Mark a task as done
@@ -65,6 +73,8 @@ Example of usage:
 `mark 2`
 
 Expected output:
+
+
 ![Mark](./Mark.png)
 
 
@@ -73,7 +83,9 @@ Expected output:
 Example of usage:
 `unmark 2`
 
-Expected output: 
+Expected output:
+
+
 ![Unmark](./Unmark.png)
 
 
@@ -83,6 +95,8 @@ Example of usage:
 `del 2`
 
 Expected output:
+
+
 ![Del](./Del.png)
 
 ### 8) `find {keyword}` : Finds a task containing a specific keyword
@@ -91,6 +105,8 @@ Example of usage:
 `find assignment`
 
 Expected output: 
+
+
 ![](Find.png)
 
 
