@@ -9,7 +9,7 @@ import tasklist.TaskList;
 import ui.Ui;
 
 /**
- * Represents a chat bot that listens for user inputs to manipulate their tasks.
+ * Represents a chatbot that listens for user inputs to manipulate their tasks.
  */
 public class Bot {
     private final Parser parser;
@@ -17,7 +17,7 @@ public class Bot {
     private final TaskList taskList;
 
     /**
-     * Returns a chat bot whose commands, interface, and data operations, are
+     * Returns a chatbot whose commands, interface, and data operations, are
      * dependent on the arguments supplied.
      *
      * @param parser processes and validates all user inputs.
@@ -31,7 +31,7 @@ public class Bot {
     }
 
     /**
-     * Begins execution of the chat bot by showing an interface that accepts
+     * Begins execution of the chatbot by showing an interface that accepts
      * user inputs, processes them, and reflects the eventual response from
      * the bot.
      */
