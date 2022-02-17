@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
             return new CommandOutput("Error: Invalid arguments\nCommand format: " + FORMAT, Sfx.SFX_ERROR_INVALID_ARGS);
         }
 
-        String output = "Commands:\n";
+        String output = "Commands (Case Sensitive):\n";
         output += HelpCommand.TRIGGER + ": list commands\n";
 
         output += ToDoCommand.TRIGGER + ": add to-do\n";
