@@ -1,3 +1,2 @@
-[T][ ] read
-[D][ ] return (by: Wednesday, February 2, 2022 0700PM)
-[D][ ] watch (by: Wednesday, February 2, 2022)
+[T][ ] read book
+[T][ ] s

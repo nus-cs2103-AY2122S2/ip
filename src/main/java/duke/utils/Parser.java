@@ -222,7 +222,7 @@ public class Parser {
      */
     public static AddCommand parseToAddCommand(String input) throws CortanaException {
         boolean hasDescription = input.toLowerCase()
-                .matches("(^todo\\s.+\\w.*)?(^deadline\\s.+\\w.*)?(^event\\s.+\\w.*)?");
+                .matches("(^todo\\s.*\\w)?(^deadline\\s.*\\w)?(^event\\s.*\\w)?");
         boolean isTodo = input.toLowerCase().matches("^todo(\\s.*)?");
         boolean isDeadline = input.toLowerCase().matches("^deadline(\\s.*)?");
         boolean isEvent = input.toLowerCase().matches("^event(\\s.*)?");

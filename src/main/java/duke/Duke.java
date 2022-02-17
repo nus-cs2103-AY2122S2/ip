@@ -14,6 +14,7 @@ public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+    private boolean isReturnError = false;
 
     /**
      * Instantiates a new Duke.
@@ -29,10 +30,20 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
+            setIsReturnError(false);
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (CortanaException e) {
+            setIsReturnError(true);
             return ui.showErrorMessage(e.getMessage());
         }
+    }
+
+    public boolean getIsReturnError() {
+        return isReturnError;
+    }
+
+    public void setIsReturnError(boolean b) {
+        isReturnError = b;
     }
 }

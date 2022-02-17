@@ -44,12 +44,12 @@ public class MainWindow extends AnchorPane {
         Label welcome = new Label("");
         Image image = new Image("images/Cortana.gif");
         welcome.setGraphic(new ImageView(image));
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, cortanaImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, cortanaImage, false));
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished(event ->
                 dialogContainer.getChildren().add(
                         DialogBox.getDukeDialog(new Label("Hi, my name is Cortana, what can I do for you?"),
-                                cortanaImage)));
+                                cortanaImage, false)));
         delay.play();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
@@ -71,9 +71,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        boolean isReturnError = duke.getIsReturnError();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(new Label(input), userImage),
-                DialogBox.getDukeDialog(new Label(response), cortanaImage)
+                DialogBox.getDukeDialog(new Label(response), cortanaImage, isReturnError)
         );
         userInput.clear();
         if (response.equals("Bye. Hope to see you again soon!")) {

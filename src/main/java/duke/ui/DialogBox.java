@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -25,7 +26,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(Label label, Image img) {
+    private DialogBox(Label label, Image img, boolean isReturnError) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -33,6 +34,9 @@ public class DialogBox extends HBox {
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if (isReturnError) {
+            dialog.setTextFill(Color.RED);
         }
         dialog.setText(label.getText());
         dialog.setGraphic(label.getGraphic());
@@ -51,12 +55,27 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets the user's dialog.
+     *
+     * @param label the label
+     * @param img   the img
+     * @return the user dialog
+     */
     public static DialogBox getUserDialog(Label label, Image img) {
-        return new DialogBox(label, img);
+        return new DialogBox(label, img, false);
     }
 
-    public static DialogBox getDukeDialog(Label label, Image img) {
-        var db = new DialogBox(label, img);
+    /**
+     * Gets the Cortana's reply dialog. Response will be in red color if an error message is displayed.
+     *
+     * @param label         the label
+     * @param img           the img
+     * @param isReturnError whether Cortana replies an error message
+     * @return the duke dialog
+     */
+    public static DialogBox getDukeDialog(Label label, Image img, boolean isReturnError) {
+        var db = new DialogBox(label, img, isReturnError);
         db.flip();
         return db;
     }
