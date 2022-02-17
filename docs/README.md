@@ -17,8 +17,13 @@ Users are able to mark tasks as complete when done. Otherwise, the task remain u
 ### Finding Tasks
 Users are able to search for tasks.
 
+
+
+---
+
 ## Usage
-### `list` - View all tasks
+
+## `list` - View all tasks
 
 Generates a list of current tasks the user has saved.
 
@@ -37,7 +42,7 @@ Here are your tasks:
 ```
 
 
-### `todo` - Add task: Todo
+## `todo` - Add task: Todo
 
 Creates a Todo task, a task which only has a name and no date and time associated with it.
 
@@ -56,7 +61,7 @@ Now you have 3 tasks in the lists
 ```
 
 
-### `deadline` - Add task: Deadline
+## `deadline` - Add task: Deadline
 
 Creates a Deadline task, a task which has a name and a date and/or time associated with it.
 
@@ -68,7 +73,6 @@ Expected outcome:
 
 Duke saves the Deadline task and lets the user know that the task has been read and stored.
 
-
 ```
 Got it. I've added this:
 [D][ ] hw (by: Dec 21 2022 12:22 pm)
@@ -76,7 +80,7 @@ Now you have 4 tasks in the list
 ```
 
 
-### `event` - Add task: Event
+## `event` - Add task: Event
 
 Creates a Event task, a task which has a name and a date and/or time associated with it.
 
@@ -95,7 +99,7 @@ Now you have 5 tasks in the list
 ```
 
 
-### `delete` - Deletes a task
+## `delete` - Deletes a task
 
 Duke deletes a task (specified via task index as seen from `list`) from memory.
 
@@ -114,7 +118,7 @@ Now you have 4 tasks in the list.
 ```
 
 
-### `mark` - Marks a task
+## `mark` - Marks a task
 
 Duke marks a task as completed with an 'X'.
 
@@ -132,7 +136,7 @@ Nice! I've marked this task as done:
 ```
 
 
-### `unmark`- Unmarks a task
+## `unmark`- Unmarks a task
 
 Duke unmarks a task as incomplete with a blank.
 
@@ -150,7 +154,7 @@ OK, I've marked this task as not done yet:
 ```
 
 
-### `find` - Searches task list
+## `find` - Searches task list
 
 Duke finds all task with names containing the search key given by the user.
 
@@ -168,7 +172,7 @@ Here are the matching tasks in your list:
 ```
 
 
-### `bye` - Exits Duke
+## `bye` - Exits Duke
 
 Duke shuts down and rest until the user next calls Duke to work!
 
