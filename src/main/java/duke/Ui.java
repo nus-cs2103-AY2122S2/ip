@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -32,7 +33,18 @@ public class Ui {
     public String welcomeString() {
         String welcome = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " +
                 "\nHello! I' Duke " +
-                "\nWhat can I do for you?" +
+                "\nWhat can I do for you? \n\n" +
+                "List of commands: \n" +
+                "1. todo\n" +
+                "2. deadline\n" +
+                "3. event\n" +
+                "4. list\n" +
+                "5. mark\n" +
+                "6. unmark\n" +
+                "7. find\n" +
+                "8. delete \n" +
+                "9. sort \n" +
+                "10. bye" +
                 "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         return welcome;
     }
@@ -53,17 +65,6 @@ public class Ui {
         return "Got it, I have added this task: \n" + task;
     }
 
-    public void showEmptyMessageError() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("OOPS!!! The description cannot be empty.");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
-
-    public void showDateTimeParseException() {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Date must be in yyyy-mm-dd format!");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
 
     public String saveString() {
         return "File saved!";
@@ -173,11 +174,16 @@ public class Ui {
     }
 
     public LocalDate getTaskDate(String fullCommand) throws InvalidDateException {
-        if (getCommandWord(fullCommand).equals("deadline")) {
-            return LocalDate.parse(fullCommand.substring(fullCommand.indexOf("/by") + 4));
-        } else {
-            return LocalDate.parse(fullCommand.substring(fullCommand.indexOf("/at") + 4));
+        try {
+            if (getCommandWord(fullCommand).equals("deadline")) {
+                return LocalDate.parse(fullCommand.substring(fullCommand.indexOf("/by") + 4));
+            } else {
+                return LocalDate.parse(fullCommand.substring(fullCommand.indexOf("/at") + 4));
+            }
+        } catch (DateTimeParseException e){
+            throw new InvalidDateException("Date must be in yyyy-mm-dd format!");
         }
+
     }
 
     public String findTask(String fullCommand, TaskList taskList) {

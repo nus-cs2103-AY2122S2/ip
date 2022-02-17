@@ -103,7 +103,8 @@ class Parser {
                         "6. unmark\n" +
                         "7. find\n" +
                         "8. delete \n" +
-                        "9. bye";
+                        "9. sort \n" +
+                        "10. bye";
                 throw new InvalidCommandFormatException(generalFormatExceptionString);
         }
     }
