@@ -28,7 +28,7 @@ public class ExitCommand extends Command {
      * @return Returns the formatted String value for printing for the usage guide.
      */
     public static String usage() {
-        return "To close the application, use the bye command.\n"
+        return "To close the application, use the bye command. Then click the send button.\n"
                 + "  Usage: bye\n\n";
     }
 

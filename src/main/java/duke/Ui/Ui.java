@@ -11,6 +11,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.RemindersCommand;
+import duke.command.UndoCommand;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -93,6 +94,7 @@ public class Ui {
                 FindCommand.usage() +
                 RemindersCommand.usage() +
                 DoneCommand.usage() +
+                UndoCommand.usage() +
                 DeleteCommand.usage() +
                 ExitCommand.usage();
         return out.trim();
@@ -108,7 +110,7 @@ public class Ui {
         ArrayList<Task> tasks = taskList.getTaskList();
         StringBuilder result = new StringBuilder("Here are the tasks in your list: \n\n");
         for (int i = 1; i <= tasks.size(); i++) {
-            result.append(String.format("%d.%s", i, tasks.get(i - 1)));
+            result.append(String.format("%d. %s", i, tasks.get(i - 1)));
             if (i != tasks.size()) {
                 result.append("\n");
             }
