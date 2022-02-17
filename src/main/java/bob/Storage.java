@@ -29,10 +29,12 @@ public class Storage {
         File directory = new File(directoryPath);
         try {
             if (!directory.exists()) {
-                directory.mkdir();
+                boolean isMkdirSuccess = directory.mkdir();
+                assert isMkdirSuccess;
             }
             if (!newStorage.file.exists()) {
-                newStorage.file.createNewFile();
+                boolean isCreateFileSuccess = newStorage.file.createNewFile();
+                assert isCreateFileSuccess;
             }
         } catch (IOException e) {
             e.printStackTrace();

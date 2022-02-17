@@ -27,6 +27,7 @@ public class Bob {
      */
     @FXML
     public String getResponse(String input) {
+        assert storage != null && taskList != null;
         return Parser.parse(input, taskList, storage);
     }
 }

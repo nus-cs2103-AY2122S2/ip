@@ -2,6 +2,7 @@ package bob;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with a deadline.
@@ -15,7 +16,7 @@ public class Deadline extends bob.Task {
      * @param description Description of the Deadline instance.
      * @param by          A string representing deadline in parseable format.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
         this.by = LocalDateTime.parse(by);
     }

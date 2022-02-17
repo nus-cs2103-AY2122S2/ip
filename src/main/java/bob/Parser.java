@@ -15,6 +15,8 @@ public class Parser {
      */
     public static String parse(String userInput, TaskList tasks, Storage storage) {
         String response;
+        assert !userInput.isEmpty();
+        assert tasks != null;
         try {
             String command = userInput.split(" ")[0].strip();
             boolean tasksIsDiff = false;
@@ -51,6 +53,7 @@ public class Parser {
             }
 
             if (tasksIsDiff) {
+                assert storage != null;
                 storage.writeTaskListToFile(tasks);
             }
         } catch (ArrayIndexOutOfBoundsException e) {

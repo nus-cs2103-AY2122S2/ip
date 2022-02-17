@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Bob bob;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image bobImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Used by JavaFX to initialize the MainWindow.
@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getBobDialog(Ui.greet(), dukeImage)
+                DialogBox.getBobDialog(Ui.greet(), bobImage)
         );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
@@ -48,13 +48,21 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
+        if (input.isEmpty()) {
+            return;
+        }
+
         if (input.strip().equals("bye")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getBobDialog(Ui.bye(), bobImage)
+            );
             System.exit(0);
         }
         String response = bob.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBobDialog(response, dukeImage)
+                DialogBox.getBobDialog(response, bobImage)
         );
         userInput.clear();
     }
