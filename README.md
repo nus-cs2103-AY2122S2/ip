@@ -1,4 +1,4 @@
-# yale.Yale project template
+# Yale project template
 
 This is a project template for a greenfield Java project. It's named after Yale-NUS. Given below are instructions on how to use it.
 
