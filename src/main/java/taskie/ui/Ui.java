@@ -152,10 +152,21 @@ public class Ui {
                 + "commandNames include: event, todo, deadline, find, mark, unmark, list, delete";
     }
 
+    /**
+     * Returns the help message.
+     *
+     * @param keyword Specifies a specific command to get help with.
+     * @return Help message.
+     */
     public String getHelpMessage(String keyword) {
         return parseKeyword(keyword);
     }
 
+    /**
+     * Maps a command keyword to a unique help message.
+     * @param keyword String to be parsed, should be a command keyword.
+     * @return String help message that corresponds to the provided keyword.
+     */
     private String parseKeyword(String keyword) {
         String response = "";
         switch (keyword) {

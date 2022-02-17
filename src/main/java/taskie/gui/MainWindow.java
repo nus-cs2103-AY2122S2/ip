@@ -57,6 +57,13 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    // Solution below adapted from https://stackoverflow.com/questions/24104313
+
+    /**
+     * Exits the program after a specified delay.
+     *
+     * @param ms The delay to wait before exiting the program in milliseconds.
+     */
     private void exit(int ms) {
         try {
             Thread.sleep(ms);
@@ -66,6 +73,9 @@ public class MainWindow extends AnchorPane {
         Platform.exit();
     }
 
+    /**
+     * Greets the user with greet message.
+     */
     @FXML
     public void greet() {
         dialogContainer.getChildren().addAll(

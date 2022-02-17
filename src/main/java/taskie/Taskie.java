@@ -36,6 +36,7 @@ public class Taskie {
      * Parses user input and executes the appropriate command.
      *
      * @param input user instruction to be executed.
+     * @return String response to be shown to the user.
      */
     public String getResponse(String input) {
         StringBuilder response = new StringBuilder();

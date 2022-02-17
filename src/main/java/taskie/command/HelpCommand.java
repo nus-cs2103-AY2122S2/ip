@@ -4,6 +4,10 @@ import taskie.storage.Storage;
 import taskie.tasklist.TaskList;
 import taskie.ui.Ui;
 
+
+/**
+ * A class that specifies the behavior of a command that provides help to the user.
+ */
 public class HelpCommand extends Command {
     private String keyword;
 
@@ -17,6 +21,14 @@ public class HelpCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the actions of the command.
+     *
+     * @param tasks TaskList to act on.
+     * @param ui Ui to use when printing messages.
+     * @param storage Storage to call for loading and saving tasks.
+     * @param response StringBuilder object to append results to.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, StringBuilder response) {
         if (hasKeyword()) {

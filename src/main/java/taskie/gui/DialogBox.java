@@ -31,6 +31,9 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /**
+     * Initialises the Dialog Box
+     */
     private void initialiseDialogBoxFxml() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -53,10 +56,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the users Dialog Box.
+     *
+     * @param text String message to be displayed in the dialog box.
+     * @param img Image of the user to be displayed.
+     * @return Constructed DialogBox to be shown.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns Taskie's Dialog Box.
+     *
+     * @param text String message to be displayed in the dialog box.
+     * @param img Image of Taskie to be displayed.
+     * @return Constructed DialogBox to be shown.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         assert db != null;
