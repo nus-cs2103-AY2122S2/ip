@@ -26,6 +26,8 @@ Expected output:
 
 
 ![Todo](./Todo.png)
+
+
 ![TodoShortform](./TodoShortform.png)
 
 ### 2) `event {event} /at {YYYY-MM-DD}` / `e {event} / at {YYYY-MM-DD}` : Creates a new Event
@@ -40,6 +42,8 @@ Expected output:
 
 
 ![Event](./Event.png)
+
+
 ![EventShortform](./EventShortform.png)
 
 
@@ -55,6 +59,8 @@ Expected output:
 
 
 ![Deadline](./Deadline.png)
+
+
 ![DeadlineShortform](./DeadlineShortform.png)
 
 ### 4) `list` : List all current tasks
