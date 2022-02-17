@@ -1,3 +1,4 @@
+
 package task;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,7 @@ import java.time.format.FormatStyle;
 public class Deadline extends Task {
 
     protected LocalDateTime ldt;
-    private String by;
+    private final String by;
 
 
     /**

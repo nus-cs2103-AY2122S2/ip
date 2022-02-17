@@ -31,7 +31,7 @@ public class Storage {
 
     /**
      * read the text file and converts the content into an ArrayList of Tasks
-     * @param tasks ArrayList of tasks
+     * @param tasks List of tasks
      */
 
     public void loadTaskFile(List<Task> tasks) throws FileNotFoundException {
@@ -42,6 +42,12 @@ public class Storage {
             tasks.add(t);
         }
     }
+
+    /**
+     * read the text file and converts the content into an ArrayList of Contacts
+     * @param contacts List of contacts
+     * @throws FileNotFoundException throws exception if contactFilePath is not found
+     */
 
     public void loadContacts(List<Contact> contacts) throws FileNotFoundException {
         Scanner sc = new Scanner(contactFilePath);
@@ -84,7 +90,7 @@ public class Storage {
 
     /**
      * writes the tasks into text file before ending the program
-     * @param tasks ArrayList of tasks
+     * @param tasks List of tasks
      */
 
     public void writeToTaskFile(List<Task> tasks) throws IOException {
@@ -98,6 +104,11 @@ public class Storage {
         fw.write(s.toString());
         fw.close();
     }
+
+    /**
+     * writes the contacts into text file before ending the program
+     * @param contacts List of tasks
+     */
 
     public void writeToContactFile(List<Contact> contacts) throws IOException {
         FileWriter fw = new FileWriter(this.contactFilePath);

@@ -7,8 +7,15 @@ import java.time.format.FormatStyle;
 
 public class Event extends Task {
 
-    public String at;
     protected LocalDateTime ldt;
+    private final String at;
+
+
+    /**
+     *
+     * @param description description of Event
+     * @param at time in the form of YYYY-MM-DD HH:mm
+     */
 
 
     public Event(String description, String at) {
