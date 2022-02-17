@@ -129,9 +129,9 @@ public class TaskList {
     public static String findTask(String keyWord) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
-            String taskDescription = task.getDescription().toLowerCase(Locale.ROOT);
+            String taskDescription = task.getDescription().toLowerCase(Locale.ROOT).trim();
             String keyWordDescription = keyWord.toLowerCase(Locale.ROOT);
-            if (taskDescription.matches("\\b" + keyWordDescription + "\\b")) {
+            if (taskDescription.contains(keyWordDescription)) {
                 matchingTasks.add(task);
             }
         }

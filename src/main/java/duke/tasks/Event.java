@@ -5,14 +5,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.exceptions.DukeException;
+import duke.exceptions.TaskException;
 
 /**
  * Represents an event task. An event is something that happens on a specific date.
  */
 public class Event extends Task {
-    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private static final DateTimeFormatter OUTPUT_DATE = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+    private static final DateTimeFormatter OUTPUT_DATETIME = DateTimeFormatter.ofPattern("dd-MMM-yy HH:mm");
+    private static final DateTimeFormatter INPUT_DATE = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter INPUT_DATETIME = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     protected LocalDate at;
     protected LocalDateTime atTime;
 
@@ -21,17 +23,20 @@ public class Event extends Task {
      * An exception is thrown if the program fails to parse the date/datetime provided.
      * @param description Description of the event. (E.g. company meeting)
      * @param at Date/Datetime of the event.
-     * @throws DukeException if the program is unable to parse the date/datetime field.
+     * @throws TaskException if the program is unable to parse the date/datetime field.
      */
-    public Event(String description, String at) throws DukeException {
+    public Event(String description, String at) throws TaskException {
         super(description);
         if (isDateFormat(at)) {
-            this.at = LocalDate.parse(at, dateFormat);
+            this.at = LocalDate.parse(at, INPUT_DATE);
         } else if (isDateTimeFormat(at)) {
-            this.atTime = LocalDateTime.parse(at, dateTimeFormat);
+            this.atTime = LocalDateTime.parse(at, INPUT_DATETIME);
+        } else if (isFileDatetimeFormat(at)) {
+            this.atTime = LocalDateTime.parse(at, OUTPUT_DATETIME);
+        } else if (isFileDateFormat(at)) {
+            this.at = LocalDate.parse(at, OUTPUT_DATE);
         } else {
-            throw new DukeException("The date format parsed is incorrect!" + ""
-                    + "It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!");
+            throw new TaskException("INVALID_DATE_FORMAT");
         }
     }
 
@@ -64,73 +69,83 @@ public class Event extends Task {
     }
 
     /**
-     * A method that takes in a string and checks if its in dateTime format.
-     * Exception will be thrown if LocalDateTime library is unable to parse the string.
-     * @param dateTimeString Date/Datetime of the task in string form.
-     * @return A boolean that indicates if the string is in dateTime format.
-     */
-    private boolean isDateTimeFormat(String dateTimeString) {
-        try {
-            LocalDateTime.parse(dateTimeString, dateTimeFormat);
-            return true;
-        } catch (DateTimeParseException e) {
-            System.out.println("Checking DateTime Format!");
-        }
-        return false;
-    }
-
-    /**
-     * A method that takes in a string and check if its in date format.
+     * A method that takes in a string and check if its in input date format.
      * Exception will be thrown if LocalDate library is unable to parse the string.
      * @param dateString Date/Datetime of the task in string form.
-     * @return A boolean that indicates if a string is in date format.
+     * @return A boolean that indicates if a string is in input date format.
      */
     private boolean isDateFormat(String dateString) {
         try {
-            LocalDate.parse(dateString, dateFormat);
+            LocalDate.parse(dateString, INPUT_DATE);
             return true;
         } catch (DateTimeParseException e) {
-            System.out.println("Checking Date Format!");
+            return false;
         }
-        return false;
+    }
+
+    /**
+     * A method that takes in a string and check if its in output date format.
+     * Exception will be thrown if LocalDate library is unable to parse the string.
+     * @param dateString Date/Datetime of the task in string form.
+     * @return A boolean that indicates if a string is in output date format.
+     */
+    private boolean isFileDateFormat(String dateString) {
+        try {
+            LocalDate.parse(dateString, OUTPUT_DATE);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
+     * A method that takes in a string and checks if its in input dateTime format.
+     * Exception will be thrown if LocalDateTime library is unable to parse the string.
+     * @param dateTimeString Date/Datetime of the task in string form.
+     * @return A boolean that indicates if the string is in input dateTime format.
+     */
+    private boolean isDateTimeFormat(String dateTimeString) {
+        try {
+            LocalDateTime.parse(dateTimeString, INPUT_DATETIME);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
+     * A method that takes in a string and checks if its in output dateTime format.
+     * Exception will be thrown if LocalDateTime library is unable to parse the string.
+     * @param dateTimeString Date/Datetime of the task in string form.
+     * @return A boolean that indicates if the string is in output dateTime format.
+     */
+    private boolean isFileDatetimeFormat(String dateTimeString) {
+        try {
+            LocalDateTime.parse(dateTimeString, OUTPUT_DATETIME);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     /**
      * Returns a string representing a formatted date-time given a LocalDateTime object.
+     * The date will be formatted in dd-MMM-yyyy HH:mm format.
      * @param dateTime LocalDateTime object.
      * @return String format of the LocalDateTime object.
      */
     public String formatDateTime(LocalDateTime dateTime) {
-        String day = dateTime.getDayOfMonth() < 10
-                ? "0" + dateTime.getDayOfMonth()
-                : "" + dateTime.getDayOfMonth();
-        String month = dateTime.getMonthValue() < 10
-                ? "0" + dateTime.getMonthValue()
-                : "" + dateTime.getMonthValue();
-        Integer year = dateTime.getYear();
-        String hour = dateTime.getHour() < 10
-                ? "0" + dateTime.getHour()
-                : "" + dateTime.getHour();
-        String minute = dateTime.getMinute() < 10
-                ? "0" + dateTime.getMinute()
-                : "" + dateTime.getMinute();
-        return day + "-" + month + "-" + year + " " + hour + ":" + minute;
+        return dateTime.format(OUTPUT_DATETIME);
     }
 
     /**
      * Returns a string representing a formatted date given a LocalDate object.
+     * The date will be formatted in dd-MMM-yyyy format.
      * @param date LocalDate object.
      * @return String format of the LocalDate object.
      */
     public String formatDate(LocalDate date) {
-        String day = date.getDayOfMonth() < 10
-                ? "0" + date.getDayOfMonth()
-                : "" + date.getDayOfMonth();
-        String month = date.getMonthValue() < 10
-                ? "0" + date.getMonthValue()
-                : "" + date.getMonthValue();
-        Integer year = date.getYear();
-        return day + "-" + month + "-" + year;
+        return date.format(OUTPUT_DATE);
     }
 
 }

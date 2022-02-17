@@ -130,23 +130,39 @@ public class Parser {
         if (taskDetails.contains("/by")) {
             try {
                 description = taskDetails.split("/by", 2)[0];
-                date = taskDetails.split("/by", 2)[1].substring(1);
+                date = taskDetails.split("/by", 2)[1].substring(1).trim();
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("Missing deadline date or description!");
             }
         } else if (taskDetails.contains("/at")) {
             try {
                 description = taskDetails.split("/at", 2)[0];
-                dateTime = taskDetails.split("/at", 2)[1].substring(1);
+                dateTime = taskDetails.split("/at", 2)[1].substring(1).trim();
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("Missing event date or description!");
             }
         }
 
+        return interpretCommandType(commandType, taskId, description, date, dateTime, taskDetails);
+    }
+
+    /**
+     * Returns a command based on the commandType provided.
+     * @param commandType Type of command that the user has keyed in.
+     * @param taskId Id of task. (For delete, mark and unmark commands)
+     * @param description Description of task. (For add commands)
+     * @param date Date of task. (For event/deadline commands)
+     * @param dateTime Datetime of task. (For event/deadline commands)
+     * @param taskDetails Details of task (For add commands)
+     * @return Command corresponding to the command type of the task.
+     * @throws DukeException if the commandType is invalid.
+     */
+    private Command interpretCommandType(CommandType commandType, String taskId,
+        String description, String date, String dateTime, String taskDetails) throws DukeException {
         Command currentCommand;
         switch (commandType) {
         case FIND:
-            currentCommand = new Find(taskId);
+            currentCommand = new Find(taskDetails);
             previousCommand = currentCommand;
             break;
         case DELETE:
@@ -171,7 +187,6 @@ public class Parser {
             throw new InvalidCommandException();
         }
         return currentCommand;
-
     }
 
 
@@ -186,7 +201,9 @@ public class Parser {
     private Command parseSingleCommand(CommandType commandType) throws DukeException {
         switch (commandType) {
         case UNDO:
-            return new Undo(previousCommand);
+            Command undo = new Undo(previousCommand);
+            previousCommand = null;
+            return undo;
         case BYE:
             return new Bye();
         case LIST:

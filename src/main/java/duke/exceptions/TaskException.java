@@ -37,6 +37,10 @@ public class TaskException extends DukeException {
         case "DONE":
             message = "This task has already been marked done!";
             break;
+        case "INVALID_DATE_FORMAT":
+            message = "The date format parsed is incorrect!"
+                    + " It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!";
+            break;
         default:
             assert false : errorCode;
         }

@@ -11,7 +11,7 @@ import duke.tasks.TaskList;
  * Commands that can be undone: AddDeadline, AddEvent, AddTodo, Delete, Mark, Unmark.
  */
 public class Undo extends Command {
-    private final Command previousCommand;
+    private Command previousCommand;
 
     /**
      * Instantiates an undo command.
@@ -35,6 +35,16 @@ public class Undo extends Command {
             return previousCommand.undo(taskList);
         }
         throw new UndoException("EMPTY_PREVIOUS");
+    }
+
+    /**
+     * Returns an UndoException since a undo command cannot be undone.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @throws UndoException since the program is unable to undo a list command.
+     **/
+    @Override
+    public String undo(TaskList taskList) throws UndoException {
+        throw new UndoException("NOTHING");
     }
 }
 

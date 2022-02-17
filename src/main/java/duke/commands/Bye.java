@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TextUi;
+import duke.exceptions.UndoException;
 import duke.tasks.TaskList;
 
 /**
@@ -19,5 +20,15 @@ public class Bye extends Command {
     @Override
     public String execute(TaskList taskList, TextUi ui, Storage storage) {
         return "bye";
+    }
+
+    /**
+     * Returns an UndoException since a bye command cannot be undone.
+     * @param taskList A taskList containing all existing tasks in Duke.
+     * @throws UndoException since the program is unable to undo a list command.
+     **/
+    @Override
+    public String undo(TaskList taskList) throws UndoException {
+        throw new UndoException("NOTHING");
     }
 }

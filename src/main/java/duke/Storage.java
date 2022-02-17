@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.StorageException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -25,6 +26,7 @@ public class Storage {
     private static final ArrayList<Task> tasks = new ArrayList<>();
     protected String directoryPath;
     protected String filePath;
+    private TextUi ui;
 
     /**
      * Instantiates a storage object given a directory path and a file path.
@@ -59,7 +61,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException exception) {
-            throw new DukeException("duke.Duke file cannot be found!! Make sure it exists in the data folder.");
+            throw new StorageException("FILE_NOT_FOUND");
         }
     }
 
@@ -81,7 +83,7 @@ public class Storage {
 
                 taskToAdd = parseTaskInput(taskInput, taskDataArray);
                 if (taskToAdd == null) {
-                    throw new DukeException("Sumimasen! We had some problems reading your file!");
+                    throw new StorageException("FILE_READ_ERROR");
                 }
 
                 if (taskDataArray[1].equals("1")) {
@@ -90,7 +92,7 @@ public class Storage {
                 tasks.add(taskToAdd);
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("File cannot be found!");
+            throw new StorageException("FILE_NOT_FOUND");
         }
         return tasks;
     }
@@ -138,7 +140,7 @@ public class Storage {
      * Method that creates a directory for the storage file if it does not exist.
      * Throws an exception if there is already an existing directory that contains
      * the file.
-     * @throws DukeException if there is an error that occurs when trying to create the
+     * @throws StorageException if there is an error that occurs when trying to create the
      * directory.
      */
     public void createDirectory() throws DukeException {
@@ -149,18 +151,18 @@ public class Storage {
                 Files.createDirectories(Path.of(this.directoryPath));
                 File dukeFile = new File(this.filePath);
                 if (!dukeFile.createNewFile()) {
-                    throw new IOException("Unable to create file at specified path. It already exists");
+                    throw new IOException();
                 }
             } else {
                 if (!isFileExists) {
                     File dukeFile = new File(this.filePath);
                     if (!dukeFile.createNewFile()) {
-                        throw new IOException("Unable to create file at specified path. It already exists");
+                        throw new IOException();
                     }
                 }
             }
         } catch (Exception e) {
-            throw new DukeException("Error with file/directory initialization!");
+            throw new StorageException("DIRECTORY_CREATION_ERROR");
         }
     }
 
@@ -171,11 +173,9 @@ public class Storage {
      * @return A string containing all the list of tasks that has been stored in Duke.
      */
     public String getStorageTasks() {
-        if (tasks.size() == 0) {
-            return "No duke.tasks in file!";
-        } else {
-            return "Here is the list of tasks we have saved! \n" + TaskList.listTasks(tasks);
-        }
+        String tasksPreview = tasks.size() > 0 ? TaskList.listTasks(tasks) : "-";
+        return "Here is the list of tasks we have saved! \n"
+                + tasksPreview;
     }
 }
 
