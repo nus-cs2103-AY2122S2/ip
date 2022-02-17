@@ -110,9 +110,8 @@ Creates a new deadline task with date and/or time
 tracking for reminder feature. Date and/or time 
 entered after **/by** keyword.
 
-Date Format: yyyy-mm-dd (Year-month-day, in numbers)
-
-Time Format: hh:mm (hours:minutes, 24-hour clock) 
+* Date Format: yyyy-mm-dd (Year-month-day, in numbers)
+* Time Format: hh:mm (hours:minutes, 24-hour clock) 
 
 Example of usage:
 `deadline Do Test /by 2022-02-17`
@@ -128,9 +127,8 @@ Creates a new event task with date and/or time tracking
 for reminder feature. Date and/or time entered after 
 **/at** keyword.
 
-Date Format: yyyy-mm-dd (Year-month-day, in numbers)
-
-Time Format: hh:mm (hours:minutes, 24-hour clock)
+* Date Format: yyyy-mm-dd (Year-month-day, in numbers)
+* Time Format: hh:mm (hours:minutes, 24-hour clock)
 
 Example of usage:
 `event Sunrise /at 2022-02-18 06:00`
