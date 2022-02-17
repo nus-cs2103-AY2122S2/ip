@@ -92,8 +92,9 @@ public class InputHandler {
                 throw new DukeException(unableToFindErrorMessage);
             }
         case "snooze":
-            if (splitInput.length > 2) {
-                return parser.parse(CommandType.SNOOZE, this.storage, splitInput);
+            String splitInputBySlash[] = input.split(" /t ");
+            if (splitInputBySlash.length > 1 && splitInput.length > 5) {
+                return parser.parse(CommandType.SNOOZE, this.storage, splitInputBySlash);
             } else {
                 throw new DukeException(unableToSnoozeErrorMessage);
             }

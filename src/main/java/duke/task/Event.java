@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
  * Overrides toString() from Task
  */
 public class Event extends Task {
-    public LocalDate dueDate;
-    public LocalTime dueTime;
+    private LocalDate dueDate;
+    private LocalTime dueTime;
 
     /**
      * Constructor for Event. Takes in name and date but no time.
@@ -40,6 +40,42 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the LocalDate associated with the Event object
+     *
+     * @return LocalDate object of the dueDate
+     */
+    public LocalDate getDueDate() {
+        return this.dueDate;
+    }
+
+    /**
+     * Returns the dueTime of this Event object
+     *
+     * @return LocalTime object of dueTime
+     */
+    public LocalTime getDueTime() {
+        return this.dueTime;
+    }
+
+    /**
+     * Changes dueDate to new LocalDate
+     *
+     * @param date LocalDate object of new date
+     */
+    public void changeDueDate(LocalDate date) {
+        this.dueDate = date;
+    }
+
+    /**
+     * Changes dueTime to new LocalTime
+     *
+     * @param time LocalTIme object of new time
+     */
+    public void changeDueTime(LocalTime time) {
+        this.dueTime = time;
+    }
+
+    /**
      * Returns String representation of Event
      *
      * @return String of Event task, eg: [E][0] Event (at: 22 Feb 2022 2:22pm) vs [E][1] Event (at: 22 Feb 2022 2:22pm)
@@ -49,5 +85,6 @@ public class Event extends Task {
         String dueDateAndTime = (this.dueTime == null)
                 ? dateConverterToString(this.dueDate)
                 : dateConverterToString(this.dueDate) + " " + timeConverterToString(this.dueTime);
-        return "[E]" + super.toString() + " (at: " + dueDateAndTime + ")"; }
+        return "[E]" + super.toString() + " (at: " + dueDateAndTime + ")";
+    }
 }

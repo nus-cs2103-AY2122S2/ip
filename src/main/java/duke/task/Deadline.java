@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
  * Includes a dueDate attribute. Overrides toString() from Task
  */
 public class Deadline extends Task {
-    public LocalDate dueDate;
-    public LocalTime dueTime;
+    private LocalDate dueDate;
+    private LocalTime dueTime;
 
     /**
      * Constructor for Deadline with date
@@ -40,6 +40,42 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the dueDate of this Deadline object
+     *
+     * @return LocalDate object of dueDate
+     */
+    public LocalDate getDueDate() {
+        return this.dueDate;
+    }
+
+    /**
+     * Returns the dueTime of this Deadline object
+     *
+     * @return LocalTime object of dueTime
+     */
+    public LocalTime getDueTime() {
+        return this.dueTime;
+    }
+
+    /**
+     * Changes dueDate to new LocalDate
+     *
+     * @param date LocalDate object of new date
+     */
+    public void changeDueDate(LocalDate date) {
+        this.dueDate = date;
+    }
+
+    /**
+     * Changes dueTime to new LocalTime
+     *
+     * @param time LocalTIme object of new time
+     */
+    public void changeDueTime(LocalTime time) {
+        this.dueTime = time;
+    }
+
+    /**
      * Returns String representation of Deadline
      *
      * @return String of Deadline task, eg [D][0] Deadline (by: 22 Feb 2022 2:22pm) vs [D][1] Deadline (by: 22 Feb 2022 2:22pm)
@@ -49,5 +85,6 @@ public class Deadline extends Task {
         String dueDateAndTime = (this.dueTime == null)
                 ? dateConverterToString(this.dueDate)
                 : dateConverterToString(this.dueDate) + " " + timeConverterToString(this.dueTime);
-        return "[D]" + super.toString() + " (by: " + dueDateAndTime + ")"; }
+        return "[D]" + super.toString() + " (by: " + dueDateAndTime + ")";
+    }
 }

@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import java.util.Arrays;
@@ -18,6 +20,7 @@ public class Parser {
     String defaultErrorMessage = ":( OOPS!!! I'm sorry, but I don't know what that means! Possible commands: todo [task]," +
             " event [task] /at [time], deadline [task] /by [time], mark [index], unmark [index], delete [index], bye";
     String dateAndTimeErrorMessage = ":( OOPS!!! The correct format for date and time is yyyy-mm-dd and hh:mm";
+    String snoozeErrorMessage = "Unable to find a matching task with that name and date :( Check again?";
 
     /**
      * Parses input from InputHandler and returns a new Task to be added to TaskList. Handles event, deadline, todo commands
@@ -196,7 +199,7 @@ public class Parser {
      *
      * @param type CommandType of task
      * @param storage Storage to be iterated through for task
-     * @param splitInput User's input split by spaces
+     * @param splitInput User's input split by spaces except for snooze which is split by /t
      * @return String of Duke's reply that task has been marked/unmarked
      * @throws DukeException NumberFormatError due to index or invalid CommandType
      * @throws IOException If there is an issue reading/writing from data by Storage
@@ -237,7 +240,51 @@ public class Parser {
         }
     }
 
-    private String parseSnooze(Storage storage, String[] splitInput) {
-        return "snooze";
+    private String parseSnooze(Storage storage, String[] splitInput) throws DukeException, IOException {
+        String[] nameAndPrevTimeArr = splitInput[0].split(" ");
+        String[] newDateAndTimeArr = splitInput[1].split(" ");
+
+        String previousDateString = nameAndPrevTimeArr[nameAndPrevTimeArr.length - 1];
+        LocalDate previousDate = LocalDate.parse(previousDateString);
+        String newDateString = newDateAndTimeArr[newDateAndTimeArr.length - 2];
+        LocalDate newDate = LocalDate.parse(newDateString);
+        String newTimeString = newDateAndTimeArr[newDateAndTimeArr.length - 1];
+        LocalTime newTime = LocalTime.parse(newTimeString);
+
+        String taskName = "";
+        for (int i = 1; i < nameAndPrevTimeArr.length - 1; i++) {
+            if (i == nameAndPrevTimeArr.length - 2) {
+                taskName += nameAndPrevTimeArr[i];
+            } else {
+                taskName += nameAndPrevTimeArr[i] + " ";
+            }
+        }
+
+        for (int j = 0; j < storage.taskListSize(); j++) {
+            if (storage.get(j).name.equals(taskName) && storage.get(j) instanceof Deadline) {
+                Deadline deadlineToBeChanged = (Deadline) storage.get(j);
+                if (deadlineToBeChanged.getDueDate().equals(previousDate)) {
+                    deadlineToBeChanged.changeDueDate(newDate);
+                    deadlineToBeChanged.changeDueTime(newTime);
+                    storage.rewriteData();
+                    return "Changed Deadline " + taskName + " from " + deadlineToBeChanged.dateConverterToString(previousDate)
+                            + " " + deadlineToBeChanged.dateConverterToString(newDate)
+                            + " " + deadlineToBeChanged.timeConverterToString(newTime);
+                }
+            }
+            if (storage.get(j).name.equals(taskName) && storage.get(j) instanceof Event) {
+                Event eventToBeChanged = (Event) storage.get(j);
+                if (eventToBeChanged.getDueDate().equals(previousDate)) {
+                    eventToBeChanged.changeDueDate(newDate);
+                    eventToBeChanged.changeDueTime(newTime);
+                    storage.rewriteData();
+                    return "Changed Event " + taskName + " from " + eventToBeChanged.dateConverterToString(previousDate)
+                            + " " + eventToBeChanged.dateConverterToString(newDate)
+                            + " " + eventToBeChanged.timeConverterToString(newTime);
+                }
+            }
+        }
+        throw new DukeException(snoozeErrorMessage);
+
     }
 }
