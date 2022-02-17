@@ -1,0 +1,30 @@
+todo read book
+deadline return book /by June 6th
+event project meeting /at Aug 6th 2-4pm
+todo join sports club
+mark 1
+mark 4
+todo borrow book
+list
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+deadline do homework /by no idea :-p
+mark
+mark ff
+mark 99
+unmark
+unmark ff
+unmark 99
+todo
+deadline 
+deadline newtask
+deadline newtask /by
+deadline /by tmr
+event
+event newtask
+event newtask /at
+event /at somwhere
+delete 3
+delete 2 
+delete 1
+bye

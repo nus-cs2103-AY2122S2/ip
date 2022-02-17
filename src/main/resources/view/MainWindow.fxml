@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="421.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="duke.MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutY="556.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="3.0" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="421.0" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="411.0" style="-fx-border-color: grey; -fx-border-width: 3px; -fx-background-color: #355C7D;" />
+            </content>
+        </ScrollPane>
+        <Button fx:id="sendButton" layoutX="318.0" layoutY="556.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: F67280;" text="Send" />
+    </children>
+</AnchorPane>

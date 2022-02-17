@@ -5,3 +5,95 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+    ==========================================
+    Hello! I'm Duke,
+    What can I do for you?
+    ==========================================
+    ==========================================
+    Added Task: 
+     [T][ ] read book
+    There are now 1 task(s) in the list.
+    ==========================================
+    ==========================================
+    Added Task: 
+     [D][ ] return book  (by: June 6th)
+    There are now 2 task(s) in the list.
+    ==========================================
+    ==========================================
+    Added Task: 
+     [E][ ] project meeting  (at: Aug 6th 2-4pm)
+    There are now 3 task(s) in the list.
+    ==========================================
+    ==========================================
+    Added Task: 
+     [T][ ] join sports club
+    There are now 4 task(s) in the list.
+    ==========================================
+    ==========================================
+    Task marked as done: 
+     [T][X] read book
+    ==========================================
+    ==========================================
+    Task marked as done: 
+     [T][X] join sports club
+    ==========================================
+    ==========================================
+    Added Task: 
+     [T][ ] borrow book
+    There are now 5 task(s) in the list.
+    ==========================================
+    ==========================================
+    1. [T][X] read book
+    2. [D][ ] return book  (by: June 6th)
+    3. [E][ ] project meeting  (at: Aug 6th 2-4pm)
+    4. [T][X] join sports club
+    5. [T][ ] borrow book
+    ==========================================
+    ==========================================
+    Added Task: 
+     [D][ ] return book  (by: Sunday)
+    There are now 6 task(s) in the list.
+    ==========================================
+    ==========================================
+    Added Task: 
+     [E][ ] project meeting  (at: Mon 2-4pm)
+    There are now 7 task(s) in the list.
+    ==========================================
+    ==========================================
+    Added Task: 
+     [D][ ] do homework  (by: no idea :-p)
+    There are now 8 task(s) in the list.
+    ==========================================
+Task ID must be provided!
+Task ID must be an integer!
+Task ID out of range!
+Task ID must be provided!
+Task ID must be an integer!
+Task ID out of range!
+Task Name must be provided!
+Task Name must be provided!
+/by flag not detected. Please specify deadline date using /by!
+Please specify deadline date after /by!
+Task Name must be provided!
+Task Name must be provided!
+/at flag not detected. Please specify event location using /at!
+Please specify deadline date after /at!
+Task Name must be provided!
+    ==========================================
+    Deleted Task:
+     [E][ ] project meeting  (at: Aug 6th 2-4pm)
+    There are now 7 task(s) in the list.
+    ==========================================
+    ==========================================
+    Deleted Task:
+     [D][ ] return book  (by: June 6th)
+    There are now 6 task(s) in the list.
+    ==========================================
+    ==========================================
+    Deleted Task:
+     [T][X] read book
+    There are now 5 task(s) in the list.
+    ==========================================
+    ==========================================
+    Bye. Hope to see you again soon!
+    ==========================================
