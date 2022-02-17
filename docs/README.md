@@ -31,7 +31,7 @@ Expected outcome:
 Here are the task(s) in your list:
   1. [T][] quiz
 ```
-### Mark a task: `mark` `unmark`
+### Marking a task: `mark` `unmark`
 
 Marks a task as done/not done.
 
@@ -45,7 +45,7 @@ Nice! I've marked this task as done:
   [T][X] quiz
 ```
 
-### Delete a task: `delete`
+### Deleting a task: `delete`
 
 Delete a task for the task list.
 
@@ -60,7 +60,7 @@ Got it. I've removed this task:
 Now you have 0 task(s) in the list.
 ```
 
-### Search for tasks: `find`
+### Searching for tasks: `find`
 
 Search for tasks that contains keywords.
 
@@ -74,7 +74,7 @@ Here are the matching tasks in your list:
   [T][] quiz
 ```
 
-### Exit the program: `bye`
+### Exiting the program: `bye`
 
 Terminates the program.
 
