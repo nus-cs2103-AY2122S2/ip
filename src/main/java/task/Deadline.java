@@ -21,7 +21,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String priorityString = getPriorityLevel() == null ? "" : " Priority " + getPriorityLevel() + ": ";
+        String priorityString = getPriorityLevel() == null ? "" : " (Priority " + getPriorityLevel() + ") ";
         return String.format("[D][%s]%s %s (by %s)", getTaskStatus() ? "X" : " ", priorityString, getDescription(),
                 this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }

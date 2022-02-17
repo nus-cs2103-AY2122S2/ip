@@ -13,7 +13,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String priorityString = getPriorityLevel() == null ? "" : " Priority " + getPriorityLevel() + ": ";
+        String priorityString = getPriorityLevel() == null ? "" : " (Priority " + getPriorityLevel() + ") ";
         return String.format("[T][%s]%s %s", getTaskStatus() ? "X" : " ", priorityString, getDescription());
     }
 }

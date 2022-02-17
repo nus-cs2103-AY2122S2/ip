@@ -21,7 +21,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String priorityString = getPriorityLevel() == null ? "" : " Priority " + getPriorityLevel() + ": ";
+        String priorityString = getPriorityLevel() == null ? "" : " (Priority " + getPriorityLevel() + ") ";
         return String.format("[E][%s]%s %s (at %s)", getTaskStatus() ? "X" : " ", priorityString, getDescription(),
                 this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
