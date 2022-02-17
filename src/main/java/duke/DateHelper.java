@@ -16,7 +16,7 @@ import duke.DateChecker.Dates;
 public class DateHelper {
     private Date formattedDatetime;
     private String dateFormat;
-    private int daysAfter;
+    private int daysAfter = 0;
     private static final String INVALID_DATE = "Oops, please put a valid time format!\n"
             + "Let's try again ~(^.^)~\n"
             + "Type 'help' if you need to know how to use this command";
@@ -58,49 +58,49 @@ public class DateHelper {
         DateChecker dateCheck = new DateChecker(flexInput);
         Dates inputtedDay = dateCheck.getDate(); // This gives the enum date which is like "MONDAY"
         Calendar now = Calendar.getInstance();
-        int weekday = now.get(Calendar.DAY_OF_WEEK);
+        int today = now.get(Calendar.DAY_OF_WEEK);
         switch (inputtedDay) {
         case MONDAY:
-            if (weekday != Calendar.MONDAY) {
-                daysAfter = (Calendar.SATURDAY - weekday + 2) % 7;
-                dateFormat = formatDate(now);
+            if (today != Calendar.MONDAY) {
+                daysAfter = (Calendar.SATURDAY - today + 2) % 7;
             }
+            dateFormat = formatDate(now);
             break;
         case TUESDAY:
-            if (weekday != Calendar.TUESDAY) {
-                daysAfter = (Calendar.SATURDAY - weekday + 3) % 7;
-                dateFormat = formatDate(now);
+            if (today != Calendar.TUESDAY) {
+                daysAfter = (Calendar.SATURDAY - today + 3) % 7;
             }
+            dateFormat = formatDate(now);
             break;
         case WEDNESDAY:
-            if (weekday != Calendar.WEDNESDAY) {
-                daysAfter = (Calendar.SATURDAY - weekday + 4) % 7;
-                dateFormat = formatDate(now);
+            if (today != Calendar.WEDNESDAY) {
+                daysAfter = (Calendar.SATURDAY - today + 4) % 7;
             }
+            dateFormat = formatDate(now);
             break;
         case THURSDAY:
-            if (weekday != Calendar.THURSDAY) {
-                daysAfter = (Calendar.SATURDAY - weekday + 5) % 7;
-                dateFormat = formatDate(now);
+            if (today != Calendar.THURSDAY) {
+                daysAfter = (Calendar.SATURDAY - today + 5) % 7;
             }
+            dateFormat = formatDate(now);
             break;
         case FRIDAY:
-            if (weekday != Calendar.FRIDAY) {
-                daysAfter = (Calendar.SATURDAY - weekday + 6) % 7;
-                dateFormat = formatDate(now);
+            if (today != Calendar.FRIDAY) {
+                daysAfter = (Calendar.SATURDAY - today + 6) % 7;
             }
+            dateFormat = formatDate(now);
             break;
         case SATURDAY:
-            if (weekday != Calendar.SATURDAY) {
-                daysAfter = (Calendar.SATURDAY - weekday) % 7;
-                dateFormat = formatDate(now);
+            if (today != Calendar.SATURDAY) {
+                daysAfter = (Calendar.SATURDAY - today) % 7;
             }
+            dateFormat = formatDate(now);
             break;
         case SUNDAY:
-            if (weekday != Calendar.SUNDAY) {
-                daysAfter = (Calendar.SATURDAY - weekday + 1) % 7;
-                dateFormat = formatDate(now);
+            if (today != Calendar.SUNDAY) {
+                daysAfter = (Calendar.SATURDAY - today + 1) % 7;
             }
+            dateFormat = formatDate(now);
             break;
         case NODAYS:
             dateFormat = flexInput;
