@@ -62,7 +62,7 @@ We have added [E][] company dinner (at: 12-Dec-2022) to the list.
 You now have a total of 9 tasks in your list! Subarashii!
 ```
 
-### `deadline` - Add an event task
+### `deadline` - Add a deadline task
 
 Adds a deadline to the task list. Useful for tasks that needs to be completed by a specific date.
 
@@ -147,7 +147,7 @@ Duke will list all tasks in the task list.
  1. [T][ ] paynow money to friend
 ```
 
-### `find` - Finds matching query in task list
+### `find` - Finds queried task in task list
 
 Duke will look at the descriptions of all the tasks and return a list of tasks 
 containing a matching substring.
@@ -167,7 +167,7 @@ Duke will print out the tasks that it found in the task list.
 
 
 
-### `undo` - Undo the latest command
+### `undo` - Undo the most recent command
 
 Undoes the latest command the user has keyed in.
 
