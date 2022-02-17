@@ -202,4 +202,10 @@ Here are the matching tasks in your list:
 2. [D][] Test Deadline (by: Feb 12 2022)
 ```
 
-<br>
+## Acknowledgements
+
+### Images
+
+1. <a target="_blank" href="https://icons8.com/icon/OMWefuDuoIYL/girl">Girl</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+2. <a target="_blank" href="https://icons8.com/icon/2KR7uRfX3U7q/boy">Boy</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
