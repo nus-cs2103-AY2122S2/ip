@@ -14,11 +14,6 @@ public class Action {
      */
     public static String greet() {
         String logo = "DUKE";
-        // String logo = " ____        _        \n"
-        //        + "|  _ \\ _   _| | _____ \n"
-        //        + "| | | | | | | |/ / _ \\\n"
-        //        + "| |_| | |_| |   <  __/\n"
-        //        + "|____/ \\__,_|_|\\_\\___|\n";
         String greeting = "Hello! I'm JiaMing aka\n" + logo + "\nWhat can I do for you?\nTip: use 'help' for help\n";
         System.out.println(greeting);
         return greeting;
