@@ -3,10 +3,14 @@ package duke;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Arrays;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Parser {
     public String[] words; // user input split by spaces to get words
@@ -38,10 +42,10 @@ public class Parser {
                     String by = "";
                     if (t.getType().equals("D") || t.getType().equals("E")) {
                         by = dateTimeFormatter(t.getBy());
-                        sb.append("    ").append(n).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("on " ).append(by).append("\n");
+                        sb.append(n).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("on " ).append(by).append("\n");
                     }
                     else {
-                        sb.append("    ").append(n).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("\n");
+                        sb.append(n).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("\n");
                     }
                     n++;
                 }
@@ -60,7 +64,7 @@ public class Parser {
                 } else
                     tasks.updateTask(n + 1, tasks.get(n).type + " 1 " + tasks.get(n).desc);
 
-                return "    Alright! I've marked this as done:\n      [" + temp.getDone() + "] " + temp.desc;
+                return "Alright! I've marked this as done:\n      [" + temp.getDone() + "] " + temp.desc;
             }
             case "unmark" -> {
                 wf.flush();
@@ -76,7 +80,7 @@ public class Parser {
                     tasks.updateTask(n + 1, tasks.get(n).type + " 0 " + tasks.get(n).desc);
 
                 return
-                        "    Alright! I've marked this as not done:\n      [" + temp.getDone() + "] " + temp.desc;
+                        "Alright! I've marked this as not done:\n      [" + temp.getDone() + "] " + temp.desc;
             }
             case "delete" -> {
                 wf.flush();
@@ -90,10 +94,37 @@ public class Parser {
                 if (t.getBy() != null) {
                     by = dateTimeFormatter(t.getBy());
                 }
-                return "    Alright! This task has been deleted:\n      [" + t.getType() + "]["
+                return "Alright! This task has been deleted:\n      [" + t.getType() + "]["
                         + t.getDone() + "] " + t.desc + by;
 
             }
+            case "today" -> {
+                wf.flush();
+                int noOfMatched = 0;
+                int dayOfYear = LocalDateTime.now().getDayOfYear();
+
+                int[] ind = new int[tasks.getNumberOfTasks()]; // indexes of task with keyword
+                for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
+                    if (!(tasks.get(i) instanceof ToDo)) {
+                        LocalDateTime date = tasks.get(i).getBy();
+                        if (dayOfYear == date.getDayOfYear()) {
+                            ind[noOfMatched] = i;
+                            noOfMatched++;
+                        }
+                    }
+                }
+                sb = new StringBuilder();
+                sb.append("Here are the tasks you have today:\n");
+                for(int i = 0; i < noOfMatched; i++) {
+                    Task t = tasks.get(ind[i]);
+                    String by = "";
+                    by = dateTimeFormatter(t.getBy());
+                    sb.append(i+1).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("on " ).append(by).append("\n");
+                }
+                return sb.toString();
+            }
+
+
             case "find" -> {
                 wf.flush();
                 String key = words[1]; // keyword to be found
@@ -116,10 +147,10 @@ public class Parser {
                     String by = "";
                     if (t.getType().equals("D") || t.getType().equals("E")) {
                         by = dateTimeFormatter(t.getBy());
-                        sb.append("    ").append(i+1).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("on " ).append(by).append("\n");
+                        sb.append(i+1).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("on " ).append(by).append("\n");
                     }
                     else {
-                        sb.append("    ").append(i+1).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("\n");
+                        sb.append(i+1).append(". [").append(t.getType()).append("][").append(t.getDone()).append("] ").append(t.desc).append("\n");
                     }
                 }
                 return sb.toString();
@@ -127,27 +158,27 @@ public class Parser {
             case "todo" -> {
                 words = command.split(" ", 2);
                 if (words.length < 2) {
-                    return "    Oops!! Description of ToDo can't be empty!!\n ";
+                    return "Oops!! Description of ToDo can't be empty!!\n ";
                 } else {
                     sb = new StringBuilder();
-                    sb.append("    Okay! I've added this task:\n");
+                    sb.append("Okay! I've added this task:\n");
                     tasks.add(new ToDo(words[1]));
                     sb.append("      [T][ ] ").append(words[1]);
                     wf.println("T 0 " + words[1]);
                     wf.close();
-                    sb.append("\n    Now you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
+                    sb.append("\nNow you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
                     return sb.toString();
                 }
             }
             case "event" -> {
                 sb = new StringBuilder();
                 words = findDate(command.split(" "));
-                sb.append("    Okay! I've added this task into the list:\n  ");
+                sb.append("Okay! I've added this task into the list:\n  ");
                 tasks.add(new Event(words[0], LocalDateTime.parse(words[1], formatter)));
                 sb.append("      [E][ ] ").append(words[0]);
                 wf.println("E 0 " + words[0] + " | " + words[1]);
                 wf.close();
-                sb.append("\n    Now you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
+                sb.append("\nNow you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
                 return sb.toString();
             }
             // user add a deadline task
@@ -159,7 +190,7 @@ public class Parser {
                 sb.append("      [D][ ] ").append(words[0]);
                 wf.println("D 0 " + words[0] + " | " + words[1]);
                 wf.close();
-                sb.append("\n    Now you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
+                sb.append("\nNow you have ").append(tasks.getNumberOfTasks()).append(" tasks on your list");
                 return sb.toString();
             }
                 default -> {
