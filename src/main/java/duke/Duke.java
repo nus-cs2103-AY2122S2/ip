@@ -1,0 +1,95 @@
+package duke;
+
+import java.util.Scanner;
+
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
+public class Duke extends Application {
+
+    private static Ui ui;
+
+    private Storage storage;
+    private TaskList tasks;
+
+
+    /**
+     * Duke constructor
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        tasks = new TaskList(storage.loadData());
+    }
+
+    /** Initialize Duke program */
+    public void run() {
+        storage.readFile();
+        ui.printWelcomeMessage();
+        runTillTerminate();
+        ui.printExitMessage();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
+    @Override
+    public void start (Stage stage) {
+        try {
+            stage.setTitle("Ask@Jamie");
+            ui.buildStage(stage);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            storage.saveData(tasks);
+            Platform.exit();
+        }
+        stage.show();
+    }
+
+    private void runTillTerminate() {
+        Parser.CommandType commandType;
+        boolean isExit = false;
+        do {
+            Scanner in = new Scanner(System.in);
+            String userInput = in.nextLine();
+            commandType = Parser.getCommandType(userInput);
+
+            try {
+                Command c = Parser.processUserInput(commandType, userInput, tasks);
+                Parser.processUserInput(commandType, userInput, tasks);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.printInvalidCommand();
+            }
+        } while (!isExit);
+    }
+
+    public String getResponse(String userInput) {
+        try {
+            Parser.CommandType commandType = Parser.getCommandType(userInput);
+            Command c = Parser.processUserInput(commandType, userInput, tasks);
+
+            if (c instanceof ByeCommand) {
+                Platform.exit();
+                storage.saveData(tasks);
+                return ((ByeCommand) c).execute(tasks, ui);
+            }
+            return c.execute(tasks, ui);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+}
