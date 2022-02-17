@@ -3,24 +3,25 @@ package myPackage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Events extends Task{
+public class Events extends Task {
     private String date;
     private LocalDate localDate;
     private boolean isDone;
+
     public Events(String description, String date) {
         super(description);
         isDone = false;
         try {
             String[] str = date.split("by ");
             localDate = LocalDate.parse(str[1]);
-            this.date =  localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        }
-        catch (Exception e) {
+            this.date = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (Exception e) {
             System.out.println("not proper date");
             this.date = date;
         }
         System.out.printf("[E][ ] %s (%s)", this.description, this.date);
     }
+
     public String markAsDone() {
         this.isDone = true;
         return String.format("Nice! I've marked this task as done:\n[E][X] %s%n", this.description);
@@ -45,7 +46,9 @@ public class Events extends Task{
         return String.format("[E][ ] %s (%s)", this.description, date);
     }
 
-    public String getOriginalDescription() {return description;}
+    public String getOriginalDescription() {
+        return description;
+    }
 
     public String getTiming() {
         return this.date;
