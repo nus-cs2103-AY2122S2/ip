@@ -67,6 +67,8 @@ public class DialogBox extends HBox {
      * @param isUser Boolean to indicate if the person is a user or Duke.
      */
     private void setDesign(boolean isUser) {
+        //@@author Tiffanylin21
+        //Reused from : https://github.com/Tiffanylin21/ip/blob/master/src/main/java/duke/view/DialogBox.java
         String backgroundColor = isUser ? "#e75480" : "#f0efeb";
         String textColor = isUser ? "#FFF" : "#000";
         Color textColorFill = Color.web(textColor);

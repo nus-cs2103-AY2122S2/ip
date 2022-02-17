@@ -18,6 +18,11 @@ users to unmark the task if they made a mistake when marking the task.
 #### Delete tasks 
 Users can delete tasks from Duke if there are too many tasks in the task list. 
 
+#### Find tasks 
+Users can find tasks quickly and easily just by keying in a simple search query.
+
+#### Undo recent command 
+Users can undo their most recent command if they made a typo in their task description. 
 
 ## Usage 
 
@@ -135,6 +140,24 @@ Duke will list all tasks in the task list.
 
 ```
  1. [T][ ] paynow money to friend
+```
+
+### `find` - Finds matching query in task list
+
+Duke will look at the descriptions of all the tasks and return a list of tasks 
+containing a matching substring.
+
+Example of usage:
+
+`find eat breakfast`
+
+Expected outcome:
+
+Duke will print out the tasks that it found in the task list.
+
+```
+ This is what we found!
+ 1. [T][] eat breakfast
 ```
 
 
