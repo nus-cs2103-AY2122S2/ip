@@ -149,8 +149,9 @@ Task data are saved as a txt file [JAR file location]/data/listData.txt. Advance
 
 ## Command summary
 
+
 | Action | Format | Examples |
-| ------ | ------ | ------ |
+| --- | --- | --- |
 | Help | ```help [COMMAND_NAME]``` | ```help``` |
 | Chat | ```chat``` | ```chat``` | 
 | List | ```list``` | ```list``` |
