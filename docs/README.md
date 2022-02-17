@@ -60,13 +60,12 @@ Example of usage:
 
 Expected outcome:
 
+```
 Got it. I've added this task:
 [T][] slides for GE project
 Now you have 1 tasks in the list.
+```
 
-```
-expected output
-```
 ### `deadline` - Adds deadline task
 
 Adds a task with a deadline to the task list.
@@ -77,12 +76,10 @@ Example of usage:
 
 Expected outcome:
 
+```
 Got it. I've added this task:
 [D][] project 1 (by: Feb-03-2022 23:59 PM)
 Now you have 2 tasks in the list.
-
-```
-expected output
 ```
 
 ### `event` - Adds event task
@@ -95,12 +92,10 @@ Example of usage:
 
 Expected outcome:
 
+```
 Got it. I've added this task:
 [E][] wedding (at: Hotel Rainbow)
 Now you have 3 tasks in the list.
-
-```
-expected output
 ```
 
 ### `list` - Displays task list
@@ -113,16 +108,14 @@ Example of usage:
 
 Expected outcome:
 
+```
 Your list has 3 tasks:
 1. [T][] slides for GE project
 2. [D][] project 1 (by: Feb-03-2022 23:59 PM)
 3. [E][] wedding (at: Hotel Rainbow)
-
-```
-expected output
 ```
 
-### `Keyword` - Describe action
+### `mark` - Describe action
 
 Describe the action and its outcome.
 
@@ -138,7 +131,7 @@ Description of the outcome.
 expected output
 ```
 
-### `Keyword` - Describe action
+### `unmark` - Describe action
 
 Describe the action and its outcome.
 
