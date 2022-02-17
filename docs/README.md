@@ -1,5 +1,5 @@
 # User Guide
-![](https://github.com/robinrojh/ip/blob/b9e43014c22b3a9c648b591423ab7062520090d2/docs/Ui.png)
+![](https://github.com/robinrojh/ip/blob/27732f14d646011b6160538ace0c375539a547fe/docs/Ui.png)
 
 Duke chatbot provides a way to record and save your tasks efficiently!
 
