@@ -1,10 +1,10 @@
 package duke;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
@@ -14,10 +14,14 @@ import java.nio.file.Files;
  */
 public class Storage {
     
-    private String filepath;
+    private final Path filepath;
+    private final Path directory;
     
-    Storage(String filepath) {
-        this.filepath = filepath;
+    Storage(String file) {
+        String home = System.getProperty("user.home");
+
+        this.filepath = Paths.get(home, "data", file);
+        this.directory = Paths.get(home, "data");
     }
 
     /**
@@ -28,9 +32,9 @@ public class Storage {
      */
     public ArrayList<Task> loadTaskList() throws DukeException {
         try {
-            File f = new File(this.filepath);
-            Scanner sc = new Scanner(f);
-            ArrayList<Task> tasks = new ArrayList<Task>();
+
+            Scanner sc = new Scanner(this.filepath);
+            ArrayList<Task> tasks = new ArrayList<>();
             
             while(sc.hasNext()) {
                 tasks.add(Parser.getTask(sc.nextLine()));
@@ -40,7 +44,7 @@ public class Storage {
             
             return tasks;
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
 
             throw new DukeException("Problem loading data");
 
@@ -49,8 +53,8 @@ public class Storage {
 
     public ArrayList<Note> loadNoteList() throws DukeException {
         try {
-            File f = new File(this.filepath);
-            Scanner sc = new Scanner(f);
+
+            Scanner sc = new Scanner(this.filepath);
             ArrayList<Note> notes = new ArrayList<>();
 
             while(sc.hasNext()) {
@@ -60,7 +64,7 @@ public class Storage {
             sc.close();
 
             return notes;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
 
             throw new DukeException("Problem loading data");
 
@@ -101,18 +105,18 @@ public class Storage {
         }
 
         try {
-            File f = new File(filepath);
-            if (!f.exists()) {
-                File dir = f.getParentFile();
-                if (!dir.exists()) {
-                    dir.mkdir();
-                }
 
-                f.createNewFile();
-
+            if (!Files.exists(this.directory)) {
+                Files.createDirectories(this.directory);
             }
 
-            FileWriter fw = new FileWriter(filepath);
+            if (!Files.exists(this.filepath)) {
+                Files.createFile(this.filepath);
+            }
+
+            File f = this.filepath.toFile();
+
+            FileWriter fw = new FileWriter(f);
             fw.write(saveFormat);
             fw.close();
         } catch (Exception e) {
@@ -129,21 +133,21 @@ public class Storage {
         }
 
         try {
-            File f = new File(filepath);
-            if (!f.exists()) {
-                File dir = f.getParentFile();
-                System.out.println(dir);
-                if (!dir.exists()) {
-                    dir.mkdir();
-                }
 
-                f.createNewFile();
-
+            if (!Files.exists(this.directory)) {
+                Files.createDirectories(this.directory);
             }
 
-            FileWriter fw = new FileWriter(filepath);
+            if (!Files.exists(this.filepath)) {
+                Files.createFile(this.filepath);
+            }
+
+            File f = this.filepath.toFile();
+
+            FileWriter fw = new FileWriter(f);
             fw.write(saveFormattedNotes);
             fw.close();
+
         } catch (Exception e) {
             System.out.println("Error while saving file.\n" + e);
         }
