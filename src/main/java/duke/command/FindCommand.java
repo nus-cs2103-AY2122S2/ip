@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Locale;
+
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -36,7 +38,7 @@ public class FindCommand extends Command {
             Task currTask = taskList.getTask(i);
             assert currTask != null : "task retrieved from taskList cannot be null";
 
-            if (currTask.getDescription().contains(this.searchString)) {
+            if (currTask.getDescription().toLowerCase().contains(this.searchString.toLowerCase())) {
                 findResults.addTask(currTask);
             }
         }

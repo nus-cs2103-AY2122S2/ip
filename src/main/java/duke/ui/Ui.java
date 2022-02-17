@@ -133,6 +133,10 @@ public class Ui {
      * @return the search results of the FindCommand execution.
      */
     public String showFindResult(TaskList findResults) {
+        if (findResults.getLength() == 0) {
+            return "I couldn't find any task matching that keyword.";
+        }
+
         return "Here are the matching tasks in your task list:\n" + findResults;
     }
 
