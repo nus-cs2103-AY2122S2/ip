@@ -13,7 +13,6 @@ public class Todo extends Task {
      */
     public Todo(String title) {
         super(title);
-        System.out.println("added: " + this.toString());
     }
 
     /**

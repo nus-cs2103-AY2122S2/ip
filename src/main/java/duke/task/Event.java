@@ -23,7 +23,6 @@ public class Event extends Task {
         super(title);
         this.date = date;
         this.time = time;
-        System.out.println("added: " + this.toString());
     }
 
     /**

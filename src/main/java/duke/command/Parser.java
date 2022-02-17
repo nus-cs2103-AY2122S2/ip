@@ -24,31 +24,24 @@ public class Parser {
      * @param taskList TaskList is the list of tasks that was created in Duke
      * @return boolean Returns false if user says "bye", returns true otherwise
      */
-    public static boolean parseInput(String input, TaskList taskList) {
+    public static String parseInput(String input, TaskList taskList) {
         String[] inputArray = input.split(" ");
         String[] tempArray = Arrays.copyOfRange(inputArray, 1, inputArray.length);
         String[] command = {inputArray[0], String.join(" ", tempArray)};
         try {
             switch (command[0]) {
-            case ("bye"):
-              return false;
             case ("list"):
-                taskList.listItem();
-                break;
+                return taskList.listItem();
             case ("mark"):
-                taskList.markItem(command);
-                break;
+                return taskList.markItem(command);
             case ("unmark"):
-                taskList.unmarkItem(command);
-                break;
+                return taskList.unmarkItem(command);
             case ("delete"):
-                taskList.deleteItem(command);
-                break;
+                return taskList.deleteItem(command);
             case ("todo"):
             case ("deadline"):
             case ("event"):
-                parseAddItem(command, taskList);
-                break;
+                return parseAddItem(command, taskList);
             case ("find"):
                 taskList.findItem(command[1]);
                 break;
@@ -56,22 +49,22 @@ public class Parser {
                 throw new DukeException("Sorry I don't understand that command");
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            System.out.println("__________________________________");
+            return e.getMessage();
+//            System.out.println("__________________________________");
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println("This index doesn't exist in list");
-            System.out.println("__________________________________");
+            return("This index doesn't exist in list");
         }
-        return true;
+        return "";
     }
 
-    private static void parseAddItem(String[] command, TaskList taskList) throws DukeException {
+    private static String parseAddItem(String[] command, TaskList taskList) throws DukeException {
+        StringBuilder result = new StringBuilder();
         switch (command[0]) {
         case "todo":
             if (command[1].isEmpty()) {
-                throw new DukeException("Please use this format: duke.task.Todo <Activity>");
+                throw new DukeException("Please use this format: todo <Activity>");
             }
-            taskList.addTodo(command[1]);
+            result.append(taskList.addTodo(command[1]));
             break;
         case "deadline":
             try {
@@ -80,9 +73,9 @@ public class Parser {
                 String[] deadlineList = deadline.split(" ");
                 LocalDate date = LocalDate.parse(deadlineList[0].replace("/", "-"));
                 LocalTime time = LocalTime.parse(deadlineList[1]);
-                taskList.addDeadline(title, date, time);
+                result.append(taskList.addDeadline(title, date, time));
             } catch (IndexOutOfBoundsException | DateTimeParseException e){
-                throw new DukeException("Please tell me the deadline in this format: <Activity> /by YYYY/MM/DD HH:MM");
+                throw new DukeException("Please tell me the deadline in this format: deadline <Activity> /by YYYY/MM/DD HH:MM");
             }
             break;
         case "event":
@@ -92,15 +85,14 @@ public class Parser {
                 String[] deadlineList = deadline.split(" ");
                 LocalDate date = LocalDate.parse(deadlineList[0].replace("/", "-"));
                 LocalTime time = LocalTime.parse(deadlineList[1]);
-                taskList.addEvent(title, date, time);
+                result.append(taskList.addEvent(title, date, time));
             } catch (IndexOutOfBoundsException | DateTimeParseException e){
-                throw new DukeException("Please tell me the deadline in this format: <Activity> /at YYYY/MM/DD HH:MM");
+                throw new DukeException("Please tell me the deadline in this format: event <Activity> /at YYYY/MM/DD HH:MM");
             }
             break;
         }
-        System.out.printf("You have %d tasks in your list\n", taskList.getSize());
-        System.out.println("__________________________________");
-
+        result.append(String.format("You have %d tasks in your list\n", taskList.getSize()));
+        return String.valueOf(result);
     }
 
 

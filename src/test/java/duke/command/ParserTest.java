@@ -2,12 +2,13 @@ package duke.command;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class ParserTest {
     @Test
     public void parserTest() {
         TaskList taskList = new TaskList();
-        assertFalse(Parser.parseInput("bye", taskList));
+        assertEquals(Parser.parseInput("todo test", taskList), "added: [T][ ] test\n"+"You have 1 tasks in your list\n");
     }
 }

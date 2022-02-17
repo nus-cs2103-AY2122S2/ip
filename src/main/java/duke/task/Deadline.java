@@ -25,7 +25,6 @@ public class Deadline extends Task {
         super(title);
         this.date = date;
         this.time = time;
-        System.out.println("added: " + this.toString());
     }
 
     /**

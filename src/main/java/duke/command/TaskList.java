@@ -22,18 +22,23 @@ public class TaskList {
     public List<Task> taskArray = new ArrayList<>();
 
     /**
-     * Prints the list of tasks currently added.
+     * Returns list of tasks currently added. as a String
+     *
+     * @return String Representing list of tasks.
      */
-    public void listItem() {
-        System.out.println("__________________________________");
+    public String listItem() {
+        StringBuilder result;
+//        System.out.println("__________________________________");
         if (taskArray.size() == 0) {
-            System.out.println("No items in the list");
+            result = new StringBuilder("No items in the list");
         } else {
+            result = new StringBuilder();
             for (int i = 0; i < taskArray.size(); i++) {
-                System.out.printf("%d. " + taskArray.get(i) + "\n", i + 1);
+                result.append(String.format("%d. ", i+1)).append(taskArray.get(i)).append("\n");
             }
         }
-        System.out.println("__________________________________");
+        return String.valueOf(result);
+//        System.out.println("__________________________________");
     }
 
 
@@ -44,13 +49,13 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
      * @throws NumberFormatException If user gives a string instead of a number
      */
-    public void markItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
+    public String markItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
+        StringBuilder result = new StringBuilder();
         int index = Integer.parseInt(command[1]);
         taskArray.get(index - 1).setChecked();
-        System.out.println("__________________________________");
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(taskArray.get(index-1));
-        System.out.println("__________________________________");
+        result.append("Nice! I've marked this task as done:\n");
+        result.append(taskArray.get(index-1));
+        return String.valueOf(result);
     }
 
     /**
@@ -60,13 +65,13 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
      * @throws NumberFormatException If user gives a string instead of a number
      */
-    public void unmarkItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
+    public String unmarkItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
+        StringBuilder result = new StringBuilder();
         int index = Integer.parseInt(command[1]);
         taskArray.get(index - 1).setUnchecked();
-        System.out.println("__________________________________");
-        System.out.println("OK, I've marked this task as not done yet: ");
-        System.out.println(taskArray.get(index - 1));
-        System.out.println("__________________________________");
+        result.append("OK, I've marked this task as not done yet:\n");
+        result.append(taskArray.get(index - 1));
+        return String.valueOf(result);
     }
 
     /**
@@ -76,30 +81,33 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
      * @throws NumberFormatException If user gives a string instead of a number
      */
-    public void deleteItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
+    public String deleteItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
+        StringBuilder result = new StringBuilder();
         int index = Integer.parseInt(command[1]);
         Task task = taskArray.remove(index - 1);
-        System.out.println("__________________________________");
-        System.out.println("Noted, I've removed this task from the list: ");
-        System.out.println(task);
-        System.out.printf("You have %d tasks left\n", taskArray.size());
-        System.out.println("__________________________________");
+        result.append("Noted, I've removed this task from the list: ");
+        result.append(task).append("\n");
+        result.append(String.format("You have %d tasks left\n", taskArray.size()));
+        return String.valueOf(result);
     }
 
 
-    public void addTodo(String title) {
-        System.out.println("__________________________________");
-        taskArray.add(new Todo(title));
+    public String addTodo(String title) {
+        Todo todo = new Todo(title);
+        taskArray.add(todo);
+        return "added: " + todo.toString() + "\n";
     }
 
-    public void addDeadline(String title, LocalDate date, LocalTime time) {
-        System.out.println("__________________________________");
-        taskArray.add(new Deadline(title, date, time));
+    public String addDeadline(String title, LocalDate date, LocalTime time) {
+        Deadline deadline = new Deadline(title, date, time);
+        taskArray.add(deadline);
+        return "added: " + deadline.toString() + "\n";
     }
 
-    public void addEvent(String title, LocalDate date, LocalTime time) {
-        System.out.println("__________________________________");
-        taskArray.add(new Event(title, date, time));
+    public String addEvent(String title, LocalDate date, LocalTime time) {
+        Event event = new Event(title, date, time);
+        taskArray.add(event);
+        return "added: " + event.toString() + "\n";
     }
 
 
