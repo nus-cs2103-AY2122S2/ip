@@ -8,15 +8,15 @@ Duke is a task tracker that can track three categories of tasks:
 - Event
 
 ## Features 
-1)`todo`
-2)`deadline`
-3)`event`
-4)`list`
-5)`delete`
-6)`mark`
-7)`unmark`
-8)`snooze`
-9)`bye`
+1) `todo`
+2) `deadline`
+3) `event`
+4) `list`
+5) `delete`
+6) `mark`
+7) `unmark`
+8) `snooze`
+9) `bye`
 
 ## Usage
 
