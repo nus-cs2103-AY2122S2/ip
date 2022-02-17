@@ -33,7 +33,11 @@ You can further edit/modify Duke by navigating to the `src` folder which contain
 You can run it from Launcher.java:
 ```
 public class Launcher {
+````
+```
     public static void main(String[] args) {
+    ```
+    ````
         Application.launch(Main.class,args);
     }
 }
