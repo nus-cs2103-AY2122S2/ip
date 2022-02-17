@@ -54,12 +54,12 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="sendButton1" layoutX="877.0" layoutY="702.0" mnemonicParsing="false" onAction="#helpHandleUserInput" prefHeight="25.0" prefWidth="73.0" style="-fx-background-radius: 20; -fx-border-radius: 30; -fx-background-color: #ece5d8;" text="Send">
+                  <Button fx:id="helpTabSendButton" layoutX="877.0" layoutY="702.0" mnemonicParsing="false" onAction="#helpHandleUserInput" prefHeight="25.0" prefWidth="73.0" style="-fx-background-radius: 20; -fx-border-radius: 30; -fx-background-color: #ece5d8;" text="Send">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="userInput1" layoutX="14.0" layoutY="702.0" onAction="#helpHandleUserInput" prefHeight="25.0" prefWidth="844.0" promptText="Please enter a command" style="-fx-background-radius: 100; -fx-background-color: #dcc0ad; -fx-text-fill: black;" />
+                  <TextField fx:id="helpTabUserInput" layoutX="14.0" layoutY="702.0" onAction="#helpHandleUserInput" prefHeight="25.0" prefWidth="844.0" promptText="Please enter a command" style="-fx-background-radius: 100; -fx-background-color: #dcc0ad; -fx-text-fill: black;" />
                </children></AnchorPane>
         </content>
       </Tab>

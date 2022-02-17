@@ -7,8 +7,7 @@ import com.duke.command.CommandResult;
  */
 public class Ui {
     public static final String BOT_NAME = "LUMU";
-    public static final String START_MESSAGE = String.format("Hello I'm\n%s\nWhat can I do for you?", BOT_NAME);
-    public static final String LINE_BREAK = "----------------------------------------";
+    public static final String START_MESSAGE = String.format("Hello I'm %s!\nWhat can I do for you?", BOT_NAME);
 
     public Ui() {
     }

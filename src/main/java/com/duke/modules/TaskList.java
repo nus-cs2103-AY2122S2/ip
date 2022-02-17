@@ -161,7 +161,7 @@ public class TaskList {
         if (taskList.size() != 0) {
             for (int i = 0; i < taskList.size(); i++) {
                 Task currTask = taskList.get(i);
-                if (currTask.getDescription().contains(args)) {
+                if (currTask.getDescription().toLowerCase().contains(args.toLowerCase())) {
                     matchResultsList.add(currTask);
                 }
             }

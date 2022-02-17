@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.duke.Duke;
+import com.duke.modules.Ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
@@ -36,9 +37,9 @@ public class MainTabPaneWindow extends TabPane {
     @FXML
     private Accordion helpList;
     @FXML
-    private TextField userInput1;
+    private TextField helpTabUserInput;
     @FXML
-    private Button sendButton1;
+    private Button helpTabSendButton;
 
 
     private Duke duke;
@@ -57,6 +58,7 @@ public class MainTabPaneWindow extends TabPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         initializeHelpList();
+        showWelcomeMessage();
     }
 
     public void setDuke(Duke d) {
@@ -90,7 +92,7 @@ public class MainTabPaneWindow extends TabPane {
     @FXML
     private void helpHandleUserInput() {
         Image responseImage = dukeImage;
-        String input = userInput1.getText();
+        String input = helpTabUserInput.getText();
         String response = duke.getResponse(input);
 
         if (!detectGuiCommand(response)) {
@@ -105,7 +107,14 @@ public class MainTabPaneWindow extends TabPane {
             );
         }
         userInput.clear();
-        userInput1.clear();
+        helpTabUserInput.clear();
+    }
+
+    private void showWelcomeMessage() {
+        Image responseImage = dukeImage;
+        String welcomeMessage = Ui.START_MESSAGE;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, responseImage));
     }
 
 
@@ -122,7 +131,7 @@ public class MainTabPaneWindow extends TabPane {
         case "<GUI->help>":
             isGuiCommand = true;
             tabPane.getSelectionModel().select(helpTab);
-            userInput1.requestFocus();
+            helpTabUserInput.requestFocus();
             break;
         default:
             if (command.matches("<GUI->help->.*>")) {
@@ -142,7 +151,7 @@ public class MainTabPaneWindow extends TabPane {
             helpList.setExpandedPane(targetBox);
         }
         tabPane.getSelectionModel().select(helpTab);
-        userInput1.requestFocus();
+        helpTabUserInput.requestFocus();
     }
 
     private void initializeHelpList() {
