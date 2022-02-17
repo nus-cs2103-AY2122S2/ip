@@ -24,7 +24,7 @@ Examples:
 
 Examples:
 * `todo CS2103T homework` will result in `[ ][ ] CS2103T homework`
-* `todo Preparation for Hackathon` will result in `[ ][ ] Hackathon`
+* `todo Preparation for Hackathon` will result in `[ ][ ] Preparation for Hackathon`
 
 ### Adding a deadline: `deadline`
 
