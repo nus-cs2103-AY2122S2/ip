@@ -99,6 +99,8 @@ public class Parser {
         case "find":
             String foundTasks = taskList.find(parameters);
             return ui.findMessageResponse(foundTasks);
+        case "help":
+            return ui.helpResponse();
         default:
             throw new InvalidInputException("Invalid Input");
         }

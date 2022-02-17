@@ -53,4 +53,12 @@ public class Ui {
         assert foundTasks != null : "foundTasks was not passed into function";
         return String.format("Here are the matching tasks in your list:\n%s", foundTasks);
     }
+
+    /** Returns the help message that is shown to the user to help in using Cleese */
+    public String helpResponse() {
+        return String.format("Not to worry sir, the commands are\n"
+                                + "Task Creation: todo, event, deadline\n"
+                                + "Task State: list, mark, unmark, delete, find\n"
+                                + "Navigation: bye");
+    }
 }

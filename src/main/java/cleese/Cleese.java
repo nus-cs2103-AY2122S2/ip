@@ -39,9 +39,9 @@ public class Cleese extends Application {
         try {
             response = parser.handleCommand(input, taskList, ui, storage);
         } catch (NoDescException error) {
-            response = "OOPS!!! The description of a todo cannot be empty.";
+            response = "I'm sorry sir, The description of a todo cannot be empty.";
         } catch (Exception error) {
-            response = "OOPS!!! I'm sorry but I don't know what that means :-(";
+            response = "I'm sorry sir, but I don't quite understand";
         }
         assert response.getClass() == String.class;
         return response;
