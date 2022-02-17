@@ -1,0 +1,24 @@
+unknowncommand
+todo
+todo bake bread
+event
+event project /at 10/10-23
+event project meeting /at 2011/11/12
+deadline
+deadline return /by 6-54-34
+deadline return book /by 2022/12/11
+list
+mark -1
+mark 4
+mark 1
+mark 2
+list
+unmark 2
+unmark -1
+unmark 4
+list 
+delete 3
+delete 2
+delete 1
+list
+bye
