@@ -8,7 +8,7 @@ public class Duke {
 
     /**
      * This Chat version is just supposed to take in the commands,
-     * and return them, thats all. Mitran.Di.CHatri. Ton. Udd. Gayi. Laundi.
+     * and return them, thats all.
      */
 
     public static String LINE_BREAK = "---------------";
@@ -28,7 +28,7 @@ public class Duke {
     public static boolean isDate(String date) {
         try {
             LocalDate.parse(date);
-            System.out.println("we have a real date");
+            // System.out.println("we have a real date");
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -149,6 +149,41 @@ public class Duke {
                     System.out.println(LINE_BREAK);
                     System.out.println(e.getMessage());
                 } else {
+
+                    // event project meeting /at Mon 2-4pm
+                    if (command.length == 1) {
+                        DukeException e = new DukeException("OOPS!!! The description of an event cannot be empty.");
+                        System.out.println(LINE_BREAK);
+                        System.out.println(e.getMessage());
+                    } else {
+                        String[] deadlineInput = input.split("/at");
+                        String deadline = deadlineInput[1];
+                        String left = deadlineInput[0];
+                        String description = left.substring(6, left.length() - 1);
+                        // create a new deadline
+                        // checking for date validity
+                        if (isDate(deadline)) {
+
+                            Task newTask = new Events(description, LocalDate.parse(deadline));
+                            tasks.add(newTask);
+                            // adding to the array
+                            ++counter;
+                            System.out.println(LINE_BREAK);
+                            System.out.println("Got it. I added this event already bro: \n" + " " +
+                                    newTask.toString() + "\n");
+                            System.out.println("Now you have " + counter + " tasks in the list. \n");
+                        } else {
+                            // pass normally
+                            Task newTask = new Events(description, deadline);
+                            tasks.add(newTask);
+                            // adding to the array
+                            ++counter;
+                            System.out.println(LINE_BREAK);
+                            System.out.println("Got it. I added this event already bro: \n" + " " +
+                                    newTask.toString() + "\n");
+                            System.out.println("Now you have " + counter + " tasks in the list. \n");
+                        }
+                    }
 
                 }
             } else if (command[0].equals("todo")) {
