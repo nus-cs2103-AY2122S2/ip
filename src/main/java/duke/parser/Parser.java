@@ -40,6 +40,8 @@ public class Parser {
                 return new UnmarkCommand(parseIndex(parsedUserInput[1]));
             case "delete":
                 return new DeleteCommand(parseIndex(parsedUserInput[1]));
+            case "find":
+                return new FindCommand(parsedUserInput[1].trim());
             case "todo":
                 parsedArguments = parseArguments(parsedUserInput);
                 content = parsedArguments[0];

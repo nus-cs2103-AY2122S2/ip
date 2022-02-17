@@ -16,6 +16,10 @@ public class Task {
         this.markedDone = false;
     }
 
+    public String getContent() {
+        return content;
+    }
+
     @Override
     public String toString() {
         String markedDoneIndicator = this.markedDone ? "X" : " ";
