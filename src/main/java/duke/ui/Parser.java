@@ -93,8 +93,6 @@ public class Parser {
      */
     public String[] parseFormatDescription(String input, String command, String format)
             throws WrongInputException, IncompleteInputException {
-        assert input.contains(command);
-        assert input.contains(format);
         try {
             String[] inputs = input.split(" " + format + " ");
             if (inputs.length < 2) {
@@ -155,7 +153,6 @@ public class Parser {
      * @throws IncompleteInputException If the input is incomplete.
      */
     public String parseStringDescription(String input, String command) throws IncompleteInputException {
-        assert input.contains(command);
         String[] inputs = input.split(command + " ");
         if (inputs.length == 1) {
             throw new IncompleteInputException("D: D: D: The description of a " + command
@@ -190,7 +187,6 @@ public class Parser {
                     + " Please reformat in 'remind [task number] [reminder date in YYYY-MM-DD]"
                     + "[reminder time in HH:MM]'!");
         }
-        assert inputs[0].equals("remind");
         try {
             int index = Integer.parseInt(inputs[1]) - 1;
             if (index >= taskList.size() || index < 0) {
