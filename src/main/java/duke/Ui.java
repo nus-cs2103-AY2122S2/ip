@@ -84,8 +84,10 @@ public class Ui {
                 reply = taskList.deadline(command);
             } else if (firstWord.equals("event")) {
                 reply = taskList.event(command);
-            } else { //firstWord.equals("delete")
+            } else if (firstWord.equals("delete")) { //firstWord.equals("delete")
                 reply = taskList.delete(command);
+            } else {
+
             }
 
         } catch (InvalidCommandException e) {
@@ -104,7 +106,7 @@ public class Ui {
             System.out.println("__________________________________________");
             return reply + "\n";
         }
-        //}
+
 
     }
 }
