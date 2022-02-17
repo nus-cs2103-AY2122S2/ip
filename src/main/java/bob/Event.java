@@ -2,6 +2,7 @@ package bob;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with an associated time.
@@ -15,7 +16,7 @@ public class Event extends bob.Task {
      * @param description Description of the Event instance.
      * @param time        A string representing time in parseable format.
      */
-    public Event(String description, String time) {
+    public Event(String description, String time) throws DateTimeParseException {
         super(description);
         this.time = LocalDateTime.parse(time);
     }
@@ -27,7 +28,7 @@ public class Event extends bob.Task {
      * @param time        A string representing time in parseable format.
      * @param isDone      Status of the Event instance.
      */
-    public Event(String description, String time, boolean isDone) {
+    public Event(String description, String time, boolean isDone) throws DateTimeParseException {
         super(description, isDone);
         this.time = LocalDateTime.parse(time);
     }

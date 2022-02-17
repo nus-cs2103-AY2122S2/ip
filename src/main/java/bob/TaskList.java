@@ -42,6 +42,7 @@ public class TaskList {
      * @return Task to be returned.
      */
     public Task get(int idx) {
+        assert 0 <= idx && idx < tasks.size();
         return tasks.get(idx);
     }
 
@@ -64,6 +65,7 @@ public class TaskList {
      * @param idx Index of task to be acted upon.
      */
     public String update(String cmd, int idx) {
+        assert 0 <= idx && idx < tasks.size();
         switch (cmd) {
         case "mark":
             tasks.get(idx - 1).toggleDone();

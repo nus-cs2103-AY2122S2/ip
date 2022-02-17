@@ -47,13 +47,6 @@ public abstract class Task {
     }
 
     /**
-     * Toggles the status of this Task.
-     */
-    public void toggleStatus() {
-        this.isDone = !this.isDone;
-    }
-
-    /**
      * Changes the status of this Task to done.
      */
     public void toggleDone() {
