@@ -1,6 +1,6 @@
 T|0|help dad
 T|1|help sis
-D|0|help mom |2022-10-10 10PM
+D|1|help mom |2022-10-10 10PM
 T|1|help mom
 T|0|clean the house
 D|0|CS2103 assisngment |2022-02-19 11PM

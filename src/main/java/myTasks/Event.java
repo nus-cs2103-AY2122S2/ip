@@ -29,7 +29,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(by: "
+        return "[E]" + super.toString() + "(at: "
                 + LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd hha"))
                         .format(DateTimeFormatter.ofPattern("MMMM d, yyyy hha")) + ")";
     }
