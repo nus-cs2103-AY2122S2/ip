@@ -25,7 +25,7 @@
         </TextField>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="550.0" prefWidth="400.0" style="-fx-background-color: pink;" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="558.0" prefWidth="386.0" />
+                <VBox fx:id="dialogContainer" prefHeight="500.0" prefWidth="386.0" />
             </content>
         </ScrollPane>
     </children>
