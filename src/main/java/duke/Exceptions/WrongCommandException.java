@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package duke.Exceptions;
 
 public class WrongCommandException extends DukeException {
     public WrongCommandException(String exceptionMessage) {

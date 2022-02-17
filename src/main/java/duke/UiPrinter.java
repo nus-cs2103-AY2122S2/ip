@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class UiPrinter {
     public static final String LOGO = " ____        _        \n"
@@ -12,8 +12,7 @@ public class UiPrinter {
      * Prints default greeting from Duke.
      */
     public String printGreeting() {
-        return ("Hello from\n"
-                + "Hello! I'm Duke the blue wizard cat!\n"
+        return ("Hello! I'm Jarvis the blue wizard cat!\n"
                 + "What can I do for you?\n");
     }
 

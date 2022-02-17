@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Printer {
     public static final String LOGO = " ____        _        \n"

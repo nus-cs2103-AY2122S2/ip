@@ -1,10 +1,9 @@
-package Duke;
+package duke;
 
-import Duke.Exceptions.EmptyMessageException;
-import Duke.Exceptions.MissingEnquiryDateException;
-import Duke.Exceptions.WrongCommandException;
-import Duke.Exceptions.WrongDateFormatException;
-import Gui.Launcher;
+import duke.Exceptions.EmptyMessageException;
+import duke.Exceptions.MissingEnquiryDateException;
+import duke.Exceptions.WrongCommandException;
+import duke.Exceptions.WrongDateFormatException;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -29,6 +28,7 @@ public class Duke {
             myPrinter.printExceptions(e);
         }
     }
+
     /**
      * Constructor for Duke
      * Loads existing ListStorage in Disk
@@ -44,12 +44,11 @@ public class Duke {
     }
 
     /**
-     * Main method for Duke. Runs the GUI launcher instead of CLI
+     * duke.Main method for Duke. Runs the GUI launcher instead of CLI
      * @param args
      */
     public static void main(String[] args) {
-        Launcher.main(args);
-        //new Duke("./data/savedTasks.txt").dukeRunner();
+        new Duke("./data/savedTasks.txt").dukeRunner();
     }
 
     /**

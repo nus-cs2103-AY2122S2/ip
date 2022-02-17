@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
-import Duke.Exceptions.EmptyMessageException;
-import Duke.Exceptions.MissingEnquiryDateException;
-import Duke.Exceptions.WrongDateFormatException;
+import duke.Exceptions.EmptyMessageException;
+import duke.Exceptions.MissingEnquiryDateException;
+import duke.Exceptions.WrongDateFormatException;
 
 import java.time.LocalDate;
 
