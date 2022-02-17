@@ -73,17 +73,17 @@ public class Task {
      */
     public static Task createTask(List<String> description) throws InvalidArgumentException {
         switch(description.get(0)) {
-            case "todo":
-                return Todo.of(description);
+        case "todo":
+            return Todo.of(description);
 
-            case "deadline":
-                return Deadline.of(description);
+        case "deadline":
+            return Deadline.of(description);
 
-            case "event":
-                return Event.of(description);
+        case "event":
+            return Event.of(description);
 
-            default:
-                throw new InvalidArgumentException();
+        default:
+            throw new InvalidArgumentException();
         }
     }
 

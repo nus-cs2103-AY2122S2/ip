@@ -31,46 +31,44 @@ public class Parser {
             String response;
             int taskNum;
             switch(instruction[0]) {
-                case "bye":
-                    return "BYE";
+            case "bye":
+                return "BYE";
 
-                case "list":
-                    response = tasksList.list();
-                    return response;
+            case "list":
+                response = tasksList.list();
+                return response;
 
-                case "todo":
+            case "todo":
+            case "event":
+            case "deadline":
+                response = tasksList.addTask(Arrays.asList(instruction));
+                return response;
 
-                case "event":
+            case "save":
+                response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
+                return response;
 
-                case "deadline":
-                    response = tasksList.addTask(Arrays.asList(instruction));
-                    return response;
+            case "find":
+                response = tasksList.findMatchingTasks(Arrays.asList(instruction));
+                return response;
 
-                case "save":
-                    response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
-                    return response;
+            case "mark":
+                taskNum = Integer.parseInt(instruction[1]);
+                response = tasksList.mark(taskNum);
+                return response;
 
-                case "find":
-                    response = tasksList.findMatchingTasks(Arrays.asList(instruction));
-                    return response;
+            case "unmark":
+                taskNum = Integer.parseInt(instruction[1]);
+                response = tasksList.unmark(taskNum);
+                return response;
 
-                case "mark":
-                    taskNum = Integer.parseInt(instruction[1]);
-                    response = tasksList.mark(taskNum);
-                    return response;
+            case "delete":
+                taskNum = Integer.parseInt(instruction[1]);
+                response = tasksList.deleteTask(taskNum);
+                return response;
 
-                case "unmark":
-                    taskNum = Integer.parseInt(instruction[1]);
-                    response = tasksList.unmark(taskNum);
-                    return response;
-
-                case "delete":
-                    taskNum = Integer.parseInt(instruction[1]);
-                    response = tasksList.deleteTask(taskNum);
-                    return response;
-
-                default:
-                    throw new DukeException("Something is wrong!");
+            default:
+                throw new DukeException("Something is wrong!");
             }
         } catch (DukeException e) {
             return e.getMessage();
