@@ -16,15 +16,16 @@ public class ArthurException {
      */
     public static void checkException(String e)
             throws EmptyDescriptionException, InvalidInstructionException {
-        String[] temp = e.split(" ", 2);
-        assert temp.length >= 1 : "Invalid command input";
+        String[] instruction = e.split(" ", 2);
+        assert instruction.length >= 1 : "Invalid command input";
         // Check for valid instructions
-        switch (temp[0]) {
+        switch (instruction[0]) {
         case "bye":
         case "find":
         case "list":
         case "mark":
         case "unmark":
+        case "reminder":
         case "todo":
         case "deadline":
         case "event":
@@ -34,13 +35,16 @@ public class ArthurException {
             throw new InvalidInstructionException();
         }
 
+        boolean isSingleInstruction = instruction[0].equals("list")
+                || instruction[0].equals("bye") || instruction[0].equals("find")
+                || instruction[0].equals("reminder");
         // Check if instructions come with description
-        if (!temp[0].equals("list") && !temp[0].equals("bye") && !temp[0].equals("find")) {
-            if (temp.length < 2 || temp[1].trim().isEmpty()) {
-                throw new EmptyDescriptionException(temp[0]);
-            } else if (temp[0].equals("deadline") && !temp[1].contains("/by")) {
+        if (!isSingleInstruction) {
+            if (instruction.length < 2 || instruction[1].trim().isEmpty()) {
+                throw new EmptyDescriptionException(instruction[0]);
+            } else if (instruction[0].equals("deadline") && !instruction[1].contains("/by")) {
                 throw new InvalidInstructionException(DATE_TIME_NOT_PRESENT_MESSAGE);
-            } else if (temp[0].equals("event") && !temp[1].contains("/at")) {
+            } else if (instruction[0].equals("event") && !instruction[1].contains("/at")) {
                 throw new InvalidInstructionException(DATE_TIME_NOT_PRESENT_MESSAGE);
             }
         }

@@ -4,10 +4,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import arthur.exceptions.InvalidStoredDataFormat;
 import arthur.task.Deadline;
 import arthur.task.Event;
 import arthur.task.Task;
 import arthur.task.Todo;
+import arthur.timings.DateTime;
 
 
 /**
@@ -22,7 +24,7 @@ public class TaskList {
      * Constructs the taskList object
      * @param storage Storage object to use to store files
      */
-    public TaskList(Storage storage) {
+    public TaskList(Storage storage) throws InvalidStoredDataFormat {
         this.taskList = new ArrayList<>();
         this.storage = storage;
         taskFiller();
@@ -145,7 +147,7 @@ public class TaskList {
     /**
      * Copies over tasks in the data file to the taskList.
      */
-    private void taskFiller() {
+    private void taskFiller() throws InvalidStoredDataFormat {
         try {
             Scanner sc = new Scanner(storage.getTasks());
             while (sc.hasNext()) {
@@ -158,13 +160,11 @@ public class TaskList {
                     todo(taskInfo);
                     break;
                 case 'D':
-                    taskInfo = taskInfo.replaceFirst("\\(By:", "/by");
-                    taskInfo = taskInfo.replaceFirst("\\)", "");
+                    taskInfo = deadlineTaskFormat(taskInfo);
                     deadline(taskInfo);
                     break;
                 case 'E':
-                    taskInfo = taskInfo.replaceFirst("\\(At:", "/at");
-                    taskInfo = taskInfo.replaceFirst("\\)", "");
+                    taskInfo = eventTaskFormat(taskInfo);
                     event(taskInfo);
                     break;
                 default:
@@ -214,5 +214,35 @@ public class TaskList {
             }
         }
         return temp.toString();
+    }
+
+    /**
+     * Formats stored deadline task info to user input format
+     * @param input deadline task info stored in data file
+     * @return Formatted version of the task info
+     */
+    public String deadlineTaskFormat(String input) throws InvalidStoredDataFormat {
+        String result = input;
+        result = result.replaceFirst("\\(By:", "/by");
+        result = result.replaceFirst("\\)", "");
+        String[] formatArr = result.split("/by ");
+        formatArr[1] = new DateTime().stringToDateFormat(formatArr[1]);
+        result = String.join("/by ", formatArr);
+        return result;
+    }
+
+    /**
+     * Formats stored event task info to user input format
+     * @param input event task info stored in data file
+     * @return Formatted version of the task info
+     */
+    public String eventTaskFormat(String input) throws InvalidStoredDataFormat {
+        String result = input;
+        result = result.replaceFirst("\\(At:", "/at");
+        result = result.replaceFirst("\\)", "");
+        String[] formatArr = result.split("/at ");
+        formatArr[1] = new DateTime().stringToDateFormat(formatArr[1]);
+        result = String.join("/at ", formatArr);
+        return result;
     }
 }

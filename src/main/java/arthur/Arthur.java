@@ -7,10 +7,11 @@ import java.time.format.DateTimeParseException;
 import arthur.exceptions.ArthurException;
 import arthur.exceptions.EmptyDescriptionException;
 import arthur.exceptions.InvalidInstructionException;
+import arthur.exceptions.InvalidStoredDataFormat;
 
 public class Arthur {
     private static final String DATE_TIME_ERROR_MESSAGE = "Please enter the date/time in format: "
-            + "yyyy-mm-dd hh:mm \n" + "You can also enter time or date only";
+            + "yyyy-mm-dd HH:mm \n" + "You can also enter time or date only";
     private static final String VALID_NUM_ERROR = "Please enter a valid number!";
     private static final String IO_ISSUE_MESSAGE = "Sorry, there seems to be an Issue. \n"
             + "Please restart and try again";
@@ -30,6 +31,8 @@ public class Arthur {
             tasks = new TaskList(storage);
         } catch (DateTimeParseException e) {
             System.out.println(DATE_TIME_ERROR_MESSAGE);
+        } catch (InvalidStoredDataFormat f) {
+            f.getMessage();
         }
     }
 

@@ -7,7 +7,6 @@ import arthur.timings.DateTime;
  * that stores the deadline information for that task.
  */
 public class Deadline extends Task {
-    private final String by;
     private final DateTime timing;
 
     /**
@@ -18,7 +17,6 @@ public class Deadline extends Task {
     public Deadline(String e, String by) {
         super(e);
         timing = new DateTime(by);
-        this.by = timing.getString();
     }
 
     public DateTime getTiming() {
@@ -27,6 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(By: " + this.by + ")";
+        return "[D]" + super.toString() + "(By: "
+                + this.timing.getString() + ")";
     }
 }

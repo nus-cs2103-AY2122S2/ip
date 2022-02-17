@@ -1,11 +1,16 @@
 package arthur.timings;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 import arthur.TaskList;
+import arthur.exceptions.InvalidStoredDataFormat;
 import arthur.task.Deadline;
 import arthur.task.Event;
 import arthur.task.Task;
@@ -16,9 +21,20 @@ import arthur.task.Task;
 public class DateTime {
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("hh:mma");
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final DateFormat STORED_TIME_FORMAT = new SimpleDateFormat("hh:mma");
+    private static final DateFormat STORED_DATE_FORMAT = new SimpleDateFormat("dd MMM yyyy");
+    private static final DateFormat STORED_DATE_TIME_FORMAT = new SimpleDateFormat(
+            "dd MMM yyyy hh:mma");
+    private static final DateFormat USER_TIME_FORMAT = new SimpleDateFormat("HH:mm");
+    private static final DateFormat USER_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private static final DateFormat USER_DATE_TIME_FORMAT = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm");
     private static final String REMINDER_TEMPLATE = "Tasks due today: \n";
     private final String str;
 
+    public DateTime() {
+        this.str = "";
+    }
     /**
      * Converts input string to date and time objects.
      * @param input Formatted user input as string
@@ -28,11 +44,11 @@ public class DateTime {
         // Checks if date is present
         LocalTime time;
         if (input.contains("-")) {
-            String[] tempArr = input.split(" ");
+            String[] dateTimeArr = input.split(" ");
             LocalDate date;
-            if (tempArr.length == 2) {
-                date = LocalDate.parse(tempArr[0]);
-                time = LocalTime.parse(tempArr[1]);
+            if (dateTimeArr.length == 2) {
+                date = LocalDate.parse(dateTimeArr[0]);
+                time = LocalTime.parse(dateTimeArr[1]);
                 this.str = date.format(DATE_FORMAT) + " " + time.format(TIME_FORMAT);
             } else {
                 date = LocalDate.parse(input);
@@ -72,6 +88,37 @@ public class DateTime {
                     result.append(currTask).append("\n");
                 }
             }
+        }
+        return result.toString();
+    }
+
+    /**
+     * Converts string formatted date in storage file to user input format
+     * @param input Stored string version of date
+     * @return User input version of date
+     */
+    public String stringToDateFormat(String input) throws InvalidStoredDataFormat {
+        String[] dateTimeArr = input.split(" ");
+        boolean hasOnlyTime = dateTimeArr.length == 1;
+        boolean hasOnlyDate = dateTimeArr.length == 3;
+        boolean hasBothDateTime = dateTimeArr.length == 4;
+        StringBuilder result = new StringBuilder();
+        try {
+            Date date;
+            if (hasOnlyTime) {
+                date = STORED_TIME_FORMAT.parse(input);
+                result.append(USER_TIME_FORMAT.format(date));
+            } else if (hasOnlyDate) {
+                date = STORED_DATE_FORMAT.parse(input);
+                result.append(USER_DATE_FORMAT.format(date));
+            } else if (hasBothDateTime) {
+                date = STORED_DATE_TIME_FORMAT.parse(input);
+                result.append(USER_DATE_TIME_FORMAT.format(date));
+            } else {
+                throw new InvalidStoredDataFormat();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return result.toString();
     }
