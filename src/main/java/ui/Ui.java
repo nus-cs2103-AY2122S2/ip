@@ -84,6 +84,22 @@ public class Ui {
     }
 
     /**
+     * Format the tasks that were found as a list and display it to a user via the
+     * output source.
+     *
+     * @param tasks the tasks that are found from the keyword search.
+     */
+    public void showFindTasks(Task[] tasks) {
+        this.output.println(this.constructFindResponse(tasks));
+    }
+
+    private String constructFindResponse(Task[] tasks) {
+        final String message = "Here are the matching tasks in your list:\n"
+                + this.constructTaskList(tasks);
+        return this.constructResponse(message);
+    }
+
+    /**
      * Provides a response to the output source after a user has successfully added
      * a new task.
      *

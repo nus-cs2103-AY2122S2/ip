@@ -4,6 +4,7 @@ import bot.BotException;
 
 import commands.Command;
 import commands.ListCommand;
+import commands.FindCommand;
 import commands.MarkCommand;
 import commands.UnmarkCommand;
 import commands.AddCommand;
@@ -42,6 +43,8 @@ public class Parser {
         switch (command) {
         case ListCommand.COMMAND:
             return this.listAction(args);
+        case FindCommand.COMMAND:
+            return this.findAction(args);
         case MarkCommand.COMMAND:
             return this.markAction(args);
         case UnmarkCommand.COMMAND:
@@ -63,6 +66,22 @@ public class Parser {
 
     private Command listAction(String[] args) {
         return new ListCommand();
+    }
+
+    private Command findAction(String[] args) throws BotException {
+        if (args.length < 1) {
+            throw new BotException("Please enter a non-empty keyword to find.");
+        }
+
+        final String[] tokens = args[0].split(" ");
+        if (tokens.length < 1 || tokens[0].trim().isEmpty()) {
+            throw new BotException("Please enter a non-empty keyword to find.");
+        }
+        if (tokens.length > 1) {
+            throw new BotException("Please enter only one keyword to find.");
+        }
+
+        return new FindCommand(tokens[0].trim());
     }
 
     private Command markAction(String[] args) {

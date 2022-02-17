@@ -45,6 +45,23 @@ public class StorageTaskList implements TaskList {
     }
 
     /**
+     * Finds all tasks in the given storage that contains the given keyword
+     * in their description.
+     *
+     * @param keyword the criteria to find the tasks in the given storage by.
+     * @return All Task objects in the given storage whose description contains the given keyword.
+     * @throws TaskListException In no cases at present.
+     */
+    @Override
+    public Task[] find(String keyword) throws TaskListException {
+        return this.tasks
+                .stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .map(task -> task.clone())
+                .toArray(Task[]::new);
+    }
+
+    /**
      * Finds and returns a task as based on its identifier in the given
      * storage. If no task with the given identifier is found, the
      * result returned would encapsulate nothing. Otherwise, it would

@@ -17,6 +17,17 @@ public interface TaskList {
     int size();
 
     /**
+     * Finds all tasks that meet the keyword search criteria in the current
+     * task list.
+     *
+     * @param keyword the criteria to find the tasks in the current task list by.
+     * @return All Task objects in the current task list that satisfies the keyword search criteria.
+     * @throws TaskListException If a failure occurs while finding the tasks that
+     * meet the keyword search criteria in the current task list.
+     */
+    Task[] find(String keyword) throws TaskListException;
+
+    /**
      * Finds and returns a task as based on its identifier in the current task
      * list. If no task with the given identifier is found, the result returned
      * would encapsulate nothing. Otherwise, it would encapsulate the Task object
