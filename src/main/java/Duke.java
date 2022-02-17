@@ -117,7 +117,7 @@ public class Duke {
                         System.out.println("its a date ");
 
                         Task newTask = new Deadlines(description, LocalDate.parse(deadline));
-                        tasks.addToTasks(newTask);
+                        tasks.add(newTask);
                         // adding to the array
                         ++counter;
                         System.out.println(LINE_BREAK);
@@ -131,7 +131,7 @@ public class Duke {
 
                         // pass normally
                         Task newTask = new Deadlines(description, deadline);
-                        tasks.addToTasks(newTask);
+                        tasks.add(newTask);
                         // adding to the array
                         ++counter;
                         System.out.println(LINE_BREAK);
@@ -149,19 +149,7 @@ public class Duke {
                     System.out.println(LINE_BREAK);
                     System.out.println(e.getMessage());
                 } else {
-                    String[] deadlineInput = input.split("/at");
-                    String deadline = deadlineInput[1];
-                    String left = deadlineInput[0];
-                    String description = left.substring(6, left.length() - 1);
-                    // create a new deadline
-                    Task newTask = new Events(description, deadline);
-                    // adding to the array
-                    // list[counter] = newTask;
-                    tasks.add(newTask);
-                    ++counter;
-                    System.out.println(LINE_BREAK);
-                    System.out.println("Got it. I added this event already bro: \n" + " " + newTask.toString() + "\n");
-                    System.out.println("Now you have " + counter + " tasks in the list. \n");
+
                 }
             } else if (command[0].equals("todo")) {
                 // here we declare the new task to be added (TODO)
