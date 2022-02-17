@@ -14,7 +14,19 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    public Duke() {}
+    /**
+     * Constructor of the Duck program, data store in ip/duke_Saved.txt
+     */
+    public Duke() {
+        storage = new Storage("duke_Saved.txt");
+        try {
+            tasks = new TaskList(storage.readFromFile());
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
+        } catch (ClassNotFoundException | IOException e) {
+            System.out.println(new DukeException("loading failed"));
+        }
+    }
 
     /**
      * Constructor of the Duck program
@@ -50,7 +62,7 @@ public class Duke {
      * @param input read user inputs
      * @return response by duke
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         ByteArrayOutputStream outPuts = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(outPuts);
         PrintStream old = System.out;
@@ -74,7 +86,7 @@ public class Duke {
      * Give greeting message
      * @return greeting by duke
      */
-    String getGreeting() {
+    public String getGreeting() {
         ByteArrayOutputStream outPuts = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(outPuts);
         PrintStream old = System.out;

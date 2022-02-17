@@ -59,7 +59,7 @@ public class Parser {
      * execute when user command is list
      */
     public void listCommand() {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         Ui.listMessage();
         for (int i = 1; i <= tasks.getTaskList().size(); i++) {
             System.out.println(i + "." + tasks.getTaskList().get(i - 1));
@@ -71,7 +71,7 @@ public class Parser {
      * execute when user command is mark
      */
     public void markCommand() {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         try {
             int taskNum = Integer.parseInt(inputArr[1]) - 1;
             tasks.getTaskList().get(taskNum).markAsDone();
@@ -88,7 +88,7 @@ public class Parser {
      * execute when user command is unmark
      */
     public void unmarkCommand() {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         try {
             int taskNum = Integer.parseInt(inputArr[1]) - 1;
             tasks.getTaskList().get(taskNum).markAsNotDone();
@@ -103,7 +103,7 @@ public class Parser {
      * execute when user command is unmark
      */
     public void todoCommand() throws IOException {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         ToDo t = new ToDo(inputArr[1]);
         tasks.addTodoTask(t);
         storage.writeToFile(tasks);
@@ -113,9 +113,9 @@ public class Parser {
      * execute when user command is deadline
      */
     public void deadlineCommand() {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         try {
-            String deadlineArr[] = inputArr[1].split("/by ", 2);
+            String[] deadlineArr = inputArr[1].split("/by ", 2);
             Deadline d = new Deadline(deadlineArr[0], deadlineArr[1]);
             tasks.addDeadlineTask(d);
             storage.writeToFile(tasks);
@@ -130,9 +130,9 @@ public class Parser {
      * execute when user command is Event
      */
     public void eventCommand() {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         try {
-            String eventArr[] = inputArr[1].split("/at ", 2);
+            String[] eventArr = inputArr[1].split("/at ", 2);
             Event e = new Event(eventArr[0], eventArr[1]);
             tasks.addEventTask(e);
             storage.writeToFile(tasks);
@@ -147,7 +147,7 @@ public class Parser {
      * execute when user command is delete
      */
     public void deleteCommand() {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         try {
             int taskNum = Integer.parseInt(inputArr[1]) - 1;
             tasks.deleteTask(taskNum);
@@ -161,7 +161,7 @@ public class Parser {
      * execute when user command is find
      */
     public void findCommand() {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         try {
             String str = inputArr[1];
             ArrayList<Task> foundTasks = new ArrayList<Task>();
@@ -203,7 +203,7 @@ public class Parser {
      * Parse the user command and action taken
      */
     public void userCommand() throws IOException {
-        String inputArr[] = input.split(" ", 2);
+        String[] inputArr = input.split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
         assert !inputArr[0].isEmpty() : "Please input your commend";
         if (inputArr[0].equals("bye")) {
