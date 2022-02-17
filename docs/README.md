@@ -1,5 +1,5 @@
 # User Guide
-![UI Showcase](/docs/Ui.png)
+![UI Showcase](./Ui.png)
 
 Duke chatbot provides a way to record and save your tasks efficiently!
 
