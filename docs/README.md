@@ -84,6 +84,7 @@ Task list data are saved as a `.txt` file in `[JAR file location]/data/duke.txt`
 Advanced users are welcome to update data directly by editing that data file.
 
 ## Command Summary
+
 | Action   | Format, Examples                                                                                       |
 |----------|--------------------------------------------------------------------------------------------------------|
 | Todo     | `todo DESCRIPTION [/t TAGNAME]`   e.g `event CS2103T Lecture /at 2022-10-22`                           |
