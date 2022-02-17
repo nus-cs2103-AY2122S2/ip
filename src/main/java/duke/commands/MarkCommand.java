@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -26,6 +27,7 @@ public class MarkCommand extends Command {
             Task task = taskList.getTasks().get(index);
             task.setComplete();
             currTask = task;
+            Storage.saveData(taskList);
             return Ui.printMarkSuccess(currTask);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please enter a number of the item in the list you wish to mark!");

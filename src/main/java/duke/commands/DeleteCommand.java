@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -25,6 +26,7 @@ public class DeleteCommand extends Command {
             Task removedTask = taskList.getTasks().get(index);
             taskList.getTasks().remove(index);
             currTask = removedTask.toString();
+            Storage.saveData(taskList);
             return Ui.printDeleteTask(currTask);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please enter index of task to be deleted");

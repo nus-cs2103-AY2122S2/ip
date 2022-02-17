@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 public class Duke extends Application {
 
-    public static final String FILE_PATH = "data/duke.txt";
     private static Ui ui;
 
     private Storage storage;
@@ -27,13 +26,11 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(FILE_PATH);
+        storage = new Storage();
         tasks = new TaskList(storage.loadData());
     }
 
-    /**
-     * Initialize Duke program
-     */
+    /** Initialize Duke program */
     public void run() {
         storage.readFile();
         ui.printWelcomeMessage();

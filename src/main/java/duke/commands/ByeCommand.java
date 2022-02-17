@@ -1,11 +1,13 @@
 package duke.commands;
 
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 public class ByeCommand extends Command {
 
-    public String execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
+        Storage.saveData(taskList);
         return ui.printExitMessage();
     }
 

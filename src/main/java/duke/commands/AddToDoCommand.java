@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -18,12 +19,12 @@ public class AddToDoCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         try {
-            boolean taskAddedSuccess = tasks.addToDoTask(userInput);
-            System.out.println(taskAddedSuccess);
+            boolean taskAddedSuccess = taskList.addToDoTask(userInput);
             if (taskAddedSuccess) {
-                return Ui.printAddSuccess(tasks);
+                Storage.saveData(taskList);
+                return Ui.printAddSuccess(taskList);
             }
         } catch (DukeException e) {
             return e.getMessage();

@@ -18,27 +18,31 @@ import duke.tasks.ToDo;
 
 public class Storage {
 
-    private final String filePath;
 
-    public Storage(String input) {
-        this.filePath = input;
+    private static final String HOME = System.getProperty("user.home");
+    private static final java.nio.file.Path PATH = java.nio.file.Paths.get(Storage.HOME,
+            "desktop", "ip", "data", "askjamie.txt");
+    public static final String FILE_PATH = String.valueOf(PATH);
+    public Storage() {
+        Storage.checkValidPath();
+        if (!java.nio.file.Files.exists(Storage.PATH)) {
+            Storage.createFolder();
+        }
     }
-
     /**
      * Reads existing task text file from local folder
      * If file does not exist, create new text file
      */
     public void readFile() {
+
         try {
-            Path dataFilePath = Paths.get("data/");
-            Files.createDirectories(dataFilePath);
-            File file = new File(this.filePath);
+            File file = new File(this.FILE_PATH);
 
             if (file.createNewFile()) {
-                System.out.println("New file created at " + filePath);
+                System.out.println("New file created at " + FILE_PATH);
             }
         } catch (IOException e) {
-            System.out.println("Unable to create file " + filePath);
+            System.out.println("Unable to create file " + FILE_PATH);
         }
     }
 
@@ -48,9 +52,10 @@ public class Storage {
      * @param tasks the list of tasks
      * @throws DukeException if TaskList instance from user is invalid
      */
-    public void saveData(TaskList tasks) {
+    public static void saveData(TaskList tasks) {
+        Storage.checkValidPath();
         try {
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(FILE_PATH);
 
             for (Task currTask : tasks.getTasks()) {
                 String description = currTask.getDescription();
@@ -94,7 +99,7 @@ public class Storage {
     public ArrayList<Task> loadData() {
         TaskList taskList = new TaskList();
         try {
-            File file = new File(filePath);
+            File file = new File(FILE_PATH);
             Scanner readFile = new Scanner(file);
             int numTaskAdded = 0;
 
@@ -118,22 +123,40 @@ public class Storage {
                         taskList.addEventTask(command);
                         break;
                     default:
-                        throw new DukeException("Unable to parse file: " + filePath);
+                        throw new DukeException("Unable to parse file: " + FILE_PATH);
                     }
                     if (savedData[1].equals("1")) {
                         taskList.completedTask(numTaskAdded);
                     }
                     numTaskAdded++;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Unable to parse line " + (numTaskAdded + 1) + " of " + filePath);
+                    System.out.println("Unable to parse line " + (numTaskAdded + 1) + " of " + FILE_PATH);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
             }
             System.out.println("Loaded all tasks");
         } catch (IOException e) {
-            System.out.println("Unable to load data from " + filePath);
+            System.out.println("Unable to load data from " + FILE_PATH);
         }
         return taskList.getTasks();
+    }
+
+    /**
+     * Asserts that the paths specified have a value.
+     */
+    public static void checkValidPath() {
+        assert Storage.HOME != null : "Home should be initialized";
+        assert Storage.PATH != null : "Path should be initialized";
+    }
+
+    /**
+     * Creates directory for the output file.
+     */
+    public static void createFolder() {
+        Storage.checkValidPath();
+        java.nio.file.Path path = java.nio.file.Paths.get(Storage.HOME, "desktop", "ip", "data");
+        File file = new File(String.valueOf(path));
+        file.mkdirs();
     }
 }
