@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "seedu.view.Launcher"
 }
 
 shadowJar {
@@ -53,9 +53,9 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.29'
+    toolVersion = '8.1'
 }
 
-run{
+run {
     standardInput = System.in
 }

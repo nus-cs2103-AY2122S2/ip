@@ -1,5 +1,11 @@
 package seedu.duke;
 
+import seedu.exception.DukeException;
+import seedu.task.Deadline;
+import seedu.task.Event;
+import seedu.task.Task;
+import seedu.task.ToDo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

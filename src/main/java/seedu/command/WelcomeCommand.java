@@ -1,7 +1,14 @@
 package seedu.command;
 
+import seedu.duke.Storage;
+import seedu.duke.TaskList;
+
 public class WelcomeCommand extends Command {
-    public static String run() {
+
+    public WelcomeCommand() {
+    }
+
+    public String run(TaskList taskList, Storage storage) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

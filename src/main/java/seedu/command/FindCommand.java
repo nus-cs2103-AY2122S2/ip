@@ -1,15 +1,22 @@
 package seedu.command;
 
-import seedu.duke.DukeException;
-import seedu.duke.Storage;
-import seedu.duke.TaskList;
-
 import java.io.IOException;
 
-public class FindCommand extends Command{
-     public static String run(String keyword, TaskList tasksList) throws DukeException, IOException {
-            String result = "Here are the matching tasks in your list:\n";
-            result += tasksList.findTasks(keyword).toString();
-            return result;
+import seedu.duke.Duke;
+import seedu.duke.Storage;
+import seedu.exception.DukeException;
+import seedu.duke.TaskList;
+
+public class FindCommand extends Command {
+    private final String keyword;
+
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String run(TaskList tasksList, Storage storage) throws DukeException {
+        String result = "Here are the matching tasks in your list:\n";
+        result += tasksList.findTasks(keyword).toString();
+        return result;
     }
 }

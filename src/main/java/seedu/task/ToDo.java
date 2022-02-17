@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.task;
 
 /**
  * Inherits from the Task class.

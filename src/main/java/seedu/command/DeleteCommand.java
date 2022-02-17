@@ -1,19 +1,24 @@
 package seedu.command;
 
-import seedu.duke.DukeException;
-import seedu.duke.Storage;
-import seedu.duke.Task;
-import seedu.duke.TaskList;
-
 import java.io.IOException;
 
+import seedu.exception.DukeException;
+import seedu.duke.Storage;
+import seedu.duke.TaskList;
+
 public class DeleteCommand extends Command {
-    /**
-     * Executes the delete command.
-     *
-     * @return Output message for GUI.
-     */
-    public static String run(int taskId, TaskList tasksList, Storage storage) throws DukeException, IOException {
+    private final int taskId;
+
+    public DeleteCommand(String taskId) {
+        this.taskId = Integer.valueOf(taskId);
+    }
+
+        /**
+         * Executes the delete command.
+         *
+         * @return Output message for GUI.
+         */
+    public String run(TaskList tasksList, Storage storage) {
         String result = "Noted. I've removed this task:\n";
         result += tasksList.getTasks(taskId - 1).toString();
         tasksList.delete(taskId - 1);
