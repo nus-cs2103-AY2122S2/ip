@@ -224,7 +224,7 @@ To get the task number, one can use the `list` command. The task number will be 
 
 Command:
 
-`unmark <taskNumber>`
+`find <taskNumber>`
 
 Example of usage :heavy_check_mark::
 
@@ -259,7 +259,7 @@ Command:
 
 Example of usage :heavy_check_mark::
 
-`find 1`
+`delete 1`
 
 Negative examples of usage :x::
 
