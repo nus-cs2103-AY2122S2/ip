@@ -147,7 +147,7 @@ public class Ui {
             String result = "Here are the matching tasks in the list : \n";
             int counter = 1;
             for (Task task : relevantTasks) {
-                result += counter + ". " + task;
+                result += counter + ". " + task + "\n";
                 counter++;
             }
             return result;
