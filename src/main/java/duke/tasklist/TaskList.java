@@ -33,7 +33,8 @@ public class TaskList {
         list.add(task);
 
         return "Got it, I have added " + task.getUserInput() + " to the list!\n\n"
-                + "Now you have "
+                + task
+                + "\nNow you have "
                 + list.size()
                 + " tasks in the list.";
     }
