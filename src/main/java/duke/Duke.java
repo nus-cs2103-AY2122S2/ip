@@ -128,16 +128,4 @@ public class Duke extends Application{
         }
         return message;
     }
-
-    /**
-     * Runs the program till termination.
-     */
-
-    /**
-     * Entry point of the application
-     * @param args
-     */
-//    public static void main(String[] args){
-//        new Duke("data/tasks.txt").run();
-//    }
 }

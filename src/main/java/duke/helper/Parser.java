@@ -119,10 +119,9 @@ public class Parser {
 
         if (command.equals("todo")) {
             String title;
-            try{
+            try {
                 title = input.substring("todo".length() + 1).trim();
-            }
-            catch (StringIndexOutOfBoundsException e){
+            } catch (StringIndexOutOfBoundsException e){
                 throw new DukeEmptyArgumentException();
             }
             Task task = new Todo(title);
@@ -140,8 +139,7 @@ public class Parser {
             String[] splitArr = input.split("/by", 2);
             try {
                 title = splitArr[0].substring("deadline".length() + 1).trim();
-            }
-            catch (StringIndexOutOfBoundsException e) {
+            } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyArgumentException();
             }
             String time = splitArr[1].trim();
