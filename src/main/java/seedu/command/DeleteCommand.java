@@ -2,7 +2,6 @@ package seedu.command;
 
 import java.io.IOException;
 
-import seedu.exception.DukeException;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 

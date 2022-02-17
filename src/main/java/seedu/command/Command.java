@@ -1,9 +1,6 @@
 package seedu.command;
 
-import java.io.IOException;
-
 import seedu.duke.Storage;
-import seedu.exception.CommandException;
 import seedu.exception.DukeException;
 import seedu.duke.TaskList;
 

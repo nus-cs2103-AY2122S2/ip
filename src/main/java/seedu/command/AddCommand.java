@@ -2,7 +2,6 @@ package seedu.command;
 
 import java.io.IOException;
 
-import seedu.exception.DukeException;
 import seedu.duke.Storage;
 import seedu.task.Deadline;
 import seedu.task.Event;
@@ -38,8 +37,8 @@ public class AddCommand extends Command {
      * Executes the add command to add a new task to the task list and write
      * the modified task list back to the storage.
      *
-     * @param tasksList
-     * @param storage
+     * @param tasksList Current list of tasks
+     * @param storage Storage Object to write tasks
      * @return Output message for GUI.
      */
     public String run(TaskList tasksList, Storage storage) {
