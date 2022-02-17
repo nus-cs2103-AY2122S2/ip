@@ -109,8 +109,9 @@ Apollo tries to load list of tasks from save file location.
 If save file cannot be loaded or does not exist, Apollo starts with an empty list of tasks.
 
 ## Command Summary
+
 Command | Format | Examples
---------- | ---------- | ----------
+--- | --- | ---
 help | `help [COMMAND]` | `help`<br/>`help deadline`
 todo | `todo DESCRIPTION` | `todo Go to the Gym`
 deadline | `deadline DESCRIPTION /by DD-MM-YYYY HH:MM` | `deadline Submit assignment /by 20-02-2022 23:59`
