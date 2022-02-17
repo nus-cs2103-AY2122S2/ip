@@ -38,6 +38,8 @@ public class Parser {
             }
             case ("markdone"):
                 return new DoneCommand(Integer.parseInt(initial[1]));
+            case ("unmark"):
+                return new UndoneCommand(Integer.parseInt(initial[1]));
             case ("find"):
                 return new FindCommand(initial[1].split(" "));
             case ("delete"):

@@ -42,14 +42,11 @@ public class Ui {
     }
 
 
-    public String printNum(TaskList taskList) {
-       return "Now you have " + taskList.getTasks().size() + " tasks in the list.";
 
-    }
 
     public String printAddTask(Task added, TaskList taskList) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Got it. I've added this task: ").append(added.toString()).append(System.lineSeparator()).append(printNum(taskList));
+        sb.append("Got it. I've added this task: ").append(added.toString()).append(System.lineSeparator()).append("Now you have " + taskList.getTasks().size() + " tasks in the list.");
         return  sb.toString();
     }
 
@@ -58,9 +55,14 @@ public class Ui {
 
     }
 
+    public String printUnmark(Task marked) {
+        return "This task is marked as not done:\n" + marked.toString();
+
+    }
+
     public String printDelete(Task deleted, TaskList taskList) {
         StringBuilder sb = new StringBuilder();
-        sb.append("This task has been removed: ").append(deleted.toString()).append(System.lineSeparator()).append(printNum(taskList));
+        sb.append("This task has been removed: ").append(deleted.toString()).append(System.lineSeparator()).append("Now you have " + taskList.getTasks().size() + " tasks in the list.");
 
         return sb.toString();
     }

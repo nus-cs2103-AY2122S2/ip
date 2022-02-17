@@ -73,7 +73,7 @@ public class Duke {
             System.out.println("OOPS! An error occurred in updating storage file:\n"
                     + ie.getMessage());
         }
-        return "Unknown duke.command.Command";
+        return "Unknown Command";
     }
 
 
