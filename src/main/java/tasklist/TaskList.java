@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public interface TaskList {
     int size();
+    Task[] find(String keyword) throws TaskListException;
     Optional<Task> getById(int id) throws TaskListException;
     Task[] get() throws TaskListException;
     void add(Task taskToCreate) throws TaskListException;

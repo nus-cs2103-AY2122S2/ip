@@ -28,6 +28,15 @@ public class StorageTaskList implements TaskList {
     }
 
     @Override
+    public Task[] find(String keyword) throws TaskListException {
+        return this.tasks
+                .stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .map(task -> task.clone())
+                .toArray(Task[]::new);
+    }
+
+    @Override
     public Optional<Task> getById(int id) throws TaskListException {
         try {
             return Optional.of(this.tasks.get(id).clone());
