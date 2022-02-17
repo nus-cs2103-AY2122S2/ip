@@ -2,43 +2,86 @@ package duke.tasks;
 
 import java.util.ArrayList;
 
+/**
+ * ArrayList of Task objects.
+ */
 public class TaskList {
     private final ArrayList<Task> taskList;
 
+    /**
+     * Constructor for TaskList.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Get task at given index.
+     *
+     * @param index Index of task to get.
+     * @return Task at given index.
+     */
     public Task getTask(int index) {
         return taskList.get(index);
     }
 
+    /**
+     * Adds Task to TaskList.
+     *
+     * @param taskToAdd Task to add to TaskList.
+     */
     public void addTask(Task taskToAdd) {
         taskList.add(taskToAdd);
     }
 
+    /**
+     * Deletes Task from Tasklist specified by given index.
+     *
+     * @param indexTaskToDelete Index of Task to delete.
+     * @return Deleted task.
+     */
     public Task deleteTask(int indexTaskToDelete) {
-        taskList.remove(indexTaskToDelete);
-        displayTaskDelete(taskList.get(indexTaskToDelete));
-        return taskList.get(indexTaskToDelete);
+        return taskList.remove(indexTaskToDelete);
     }
 
+    /**
+     * Marks Task from TaskList specified by given index.
+     *
+     * @param indexTaskToMark Index of Task to mark.
+     * @return Marked task
+     */
     public Task markTask(int indexTaskToMark) {
         Task taskToMark = taskList.get(indexTaskToMark);
         taskToMark.markAsDone();
         return taskToMark;
     }
 
+    /**
+     * Unmarks Task from TaskList specified by given index.
+     *
+     * @param indexTaskToUnmark Index of Task to Unmark.
+     * @return Unmarked task
+     */
     public Task unmarkTask(int indexTaskToUnmark) {
         Task taskToUnmark = taskList.get(indexTaskToUnmark);
         taskToUnmark.markAsNotDone();
         return taskToUnmark;
     }
 
+    /**
+     * Returns number of tasks in TaskList.
+     *
+     * @return size of TaskList.
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Formats each Task in TaskList to write into save file.
+     *
+     * @return Data to write into save file.
+     */
     public String toSaveData() {
         StringBuilder dataToWrite = new StringBuilder();
         for (Task task : taskList) {
@@ -46,11 +89,5 @@ public class TaskList {
         }
 
         return dataToWrite.toString();
-    }
-
-    public void displayTaskDelete(Task deletedTask){
-        System.out.println("As you wish. The following task has been removed");
-        System.out.println(deletedTask.toString());
-        System.out.printf("You now have %d item(s) in your list\n", taskList.size());
     }
 }

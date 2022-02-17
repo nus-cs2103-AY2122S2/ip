@@ -9,6 +9,10 @@ import duke.tasks.*;
 import duke.ui.TextUI;
 
 
+/**
+ * Entry point of DUke.
+ * Initializes the application and initiates contact with user.
+ */
 public class Duke {
 
     private static TaskList taskList;
@@ -45,8 +49,7 @@ public class Duke {
             }
         } while (ExitCommand.isRunning());
     }
-
-
+    
     public static void main(String[] args) {
         initialize();
         run();

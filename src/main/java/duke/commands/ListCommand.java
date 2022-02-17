@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Command that displays all Task in TaskList.
+ */
 public class ListCommand extends Command {
     private String displayTaskList() {
         StringBuilder numberedTaskList = new StringBuilder();
@@ -9,6 +12,11 @@ public class ListCommand extends Command {
         return numberedTaskList.toString().trim();
     }
 
+    /**
+     * Checks if TaskList is empty, otherwise displays all Task.
+     *
+     * @return All Task in TaskList and message for completing the command which is displayed to user.
+     */
     @Override
     public String execute() {
         if (taskList.size() == 0) {
