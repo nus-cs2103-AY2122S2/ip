@@ -1,8 +1,8 @@
 package duke.tasks;
 
 public class Task {
-    String content;
-    boolean markedDone = false;
+    private String content;
+    private boolean markedDone = false;
 
     public Task(String content) {
         this.content = content;
