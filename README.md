@@ -19,18 +19,18 @@ It's that simple! :)
 
 ## Commands
 There are a few commands you can run in Duke. These include:
-[X] todo
-[X] deadline
-[X] event
-[X] delete
-[X] list
-[X] find
-[X] bye
+- [X] todo
+- [X] deadline
+- [X] event
+- [X] delete
+- [X] list
+- [X] find
+- [X] bye
 
 ## Using an IDE
 You can further edit/modify Duke by navigating to the `src` folder which contains all the `java` files
 
-You can run it from Launcher.java:
+You can run it from Launcher.java by using __main__:
 <pre>
 public class Launcher {
     <b>public static void main(String[] args)</b> {
