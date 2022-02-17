@@ -7,7 +7,7 @@ package ann.commands;
  * @version 0.1
  */
 public class ExitCommand extends Command {
-
+    public static final String KEYWORD = "bye";
     /**
      * Creates a new ExitCommand.
      */

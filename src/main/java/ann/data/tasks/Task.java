@@ -7,6 +7,8 @@ package ann.data.tasks;
  * @version 0.1
  */
 public class Task {
+    private static final TaskType TASK_TYPE = TaskType.TODO;
+    public static final String KEYWORD = TASK_TYPE.getKeyword();
     protected String content;
     protected boolean isDone;
 

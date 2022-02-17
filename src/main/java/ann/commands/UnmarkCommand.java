@@ -7,6 +7,8 @@ package ann.commands;
  * @version 0.1
  */
 public class UnmarkCommand extends Command {
+    public static final String KEYWORD = "unmark";
+    public static final String FORMAT = KEYWORD + " [task number]";
     private int index;
 
     /**

@@ -12,6 +12,7 @@ import ann.data.tasks.TaskType;
  * @version 0.1
  */
 public class AddCommand extends Command {
+    public static final String KEYWORD = "add";
     /** Represents the type of task being added. */
     private TaskType taskType;
     /** Represents the task being added. */

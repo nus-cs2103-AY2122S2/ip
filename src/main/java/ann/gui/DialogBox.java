@@ -13,7 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
+/**
+ * Controller for DialogBox, which can contain the user's input or AnnBot's response and a display picture.
+ * @@author j-lum-reused
+ * Source: https://se-education.org/guides/tutorials/javaFxPart4.html.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -35,13 +41,14 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
     }
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
