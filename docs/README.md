@@ -33,6 +33,6 @@
 ## Saving
 Data is automatically saved in the directory Daphne is run from.
 ### [Linux](https://pop.system76.com/)
-It is most likely located in `~/daphne/tasks.save`.
+The save file is likely located in `~/daphne/tasks.save`.
 ### [Windows](https://www.microsoft.com/en-sg/windows/windows-11)
-It is most likely located in `[Daphne JAR file location]/daphne/tasks.save`.
+The save file is likely located in `[Daphne JAR file location]/daphne/tasks.save`.
