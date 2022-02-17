@@ -183,7 +183,6 @@ public class Ui {
         } catch (DateTimeParseException e){
             throw new InvalidDateException("Date must be in yyyy-mm-dd format!");
         }
-
     }
 
     public String findTask(String fullCommand, TaskList taskList) {
