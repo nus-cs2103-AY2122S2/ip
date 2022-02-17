@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image bobImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Used by JavaFX to initialize the MainWindow.
+     */
     @FXML
     public void initialize() {
         dialogContainer.getChildren().addAll(
