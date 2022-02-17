@@ -2,6 +2,9 @@ package jose.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import jose.DukeException;
 
 /**
  * A class representing an event task.
@@ -14,10 +17,15 @@ public class Event extends Task {
      *
      * @param description Task description.
      * @param at Event timing.
+     * @throws DukeException If date and time are in the wrong format.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        try {
+            this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Incorrecto date/time format. Use yyyy-MM-dd HHmm eg. 2022-12-31 2359");
+        }
     }
 
     /**

@@ -32,7 +32,7 @@ public class Parser {
             String command = taskInfo[0];
 
             if (taskInfo.length < 2) {
-                throw new DukeException("Incorrect formatido. Type 'help' for help compadre.");
+                throw new DukeException("Unknown commandido o incorrecto formatido. Type 'help' for help compadre.");
             }
             assert taskInfo.length > 1 : "taskInfo should contain at least 2 strings";
             switch (command) {

@@ -4,17 +4,16 @@ Hola soy José. Je suis chatbot.
 
 ## Installation
 
-1. Download and install Java 11. Google it if you have to.
-2. Click the download button above
-3. You just downloaded a jar of ip
-4. Double click it **right now**
+1. Download and install Java 11 [aquí](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html "taco").
+2. Download ~~ip man~~ ip.jar [ici](https://github.com/DaneMarc/ip/releases "enchilada")
+4. Doble click it **right now**
 5. *Enjoy*
 
 ## Usage
 
 ### `help` - The only instruction you really need
 
-Shows you, esteemed user, a list of commands and their corresponding formats for good of humanity.
+Shows you, esteemed user, a list of commands and their corresponding formats for good of mankind.
 
 Example of usage:
 `help`
@@ -36,7 +35,7 @@ bye: Jose says bye
 
 ---
 
-### `list` - The second instruction that you kinda really only need
+### `list` - The second instruction that you really only need
 
 Shows you, esteemed user, your list of tasks.
 

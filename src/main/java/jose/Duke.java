@@ -114,9 +114,15 @@ public class Duke {
      *
      * @param input User input.
      * @return A Deadline object.
+     * @throws DukeException If date and time are in the wrong format.
      */
-    public Deadline createDeadline(String input) {
+    public Deadline createDeadline(String input) throws DukeException {
         String[] taskInfo = input.split(" ", 2)[1].split(" /by ");
+
+        if (taskInfo.length != 2) {
+            throw new DukeException("Incorrecto format. Format: deadline [desc] /by [yyyy-MM-dd HHmm]");
+        }
+
         return new Deadline(taskInfo[0], taskInfo[1]);
     }
 
@@ -125,9 +131,15 @@ public class Duke {
      *
      * @param input User input.
      * @return An event object.
+     * @throws DukeException If date and time are in the wrong format.
      */
-    public Event createEvent(String input) {
+    public Event createEvent(String input) throws DukeException {
         String[] taskInfo = input.split(" ", 2)[1].split(" /at ");
+
+        if (taskInfo.length != 2) {
+            throw new DukeException("Incorrecto format. Format: event [desc] /at [yyyy-MM-dd HHmm]");
+        }
+
         return new Event(taskInfo[0], taskInfo[1]);
     }
 }
