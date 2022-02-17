@@ -9,9 +9,18 @@ import tasklist.TaskList;
 
 import ui.Ui;
 
+/**
+ * Represents the entire chatbot program.
+ */
 public class Duke {
     private static final String APP_PATH = "/test";
 
+    /**
+     * Represents the main entry point to start the chatbot.
+     *
+     * @param args contains the initial command line arguments that are supplied by the user.
+     * @throws Exception If an unhandled or unexpected exception occurs.
+     */
     public static void main(String[] args) throws Exception {
         final Parser parser = new Parser();
         final Ui ui = new Ui(System.in, System.out);
