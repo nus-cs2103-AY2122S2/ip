@@ -6,6 +6,7 @@ including time-sensitive tasks such as deadlines and events.
 * [Quick Start](#quick-Start)
 * [Example of Usage](#example-of-usage)
 * [Features](#features)
+  * [Command List](#command-list)
   * [List of Tasks](#list-of-tasks)
   * [Saving](#saving)
   * [Basic Task](#basic-task)
@@ -30,7 +31,7 @@ including time-sensitive tasks such as deadlines and events.
 
 ### Command List
 
-Displays a list of commands, including their respective format.
+Displays a list of commands, including their respective command format.
 
 Format: `help`
 
