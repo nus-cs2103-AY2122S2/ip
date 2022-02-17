@@ -31,7 +31,7 @@ public class Ui {
      * @throws IOException If the input or output stream fails to initialise.
      */
     public Ui(InputStream inputStream, OutputStream outputStream) throws IOException {
-        this.input = new Scanner(inputStream);;
+        this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
     }
 
