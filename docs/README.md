@@ -32,6 +32,7 @@ Expected outcome:
 Creates a new Todo object called work
 *Take note of the space between todo and NAME!
 
+
 ### `deadline NAME /by DATE TIME(optional)` - creates a Deadline task with name NAME at DATE and TIME
 
 Example of usage:
@@ -44,6 +45,7 @@ Expected outcome:
 Creates a new Deadline object with DATE and TIME(optional)
 *Format of date: yyyy-mm-dd
 *Format of time: hh:mm
+
 
 ### `event NAME /at DATE TIME(optional)` - creates a Event task with name NAME at DATE and TIME
 
@@ -58,6 +60,7 @@ Creates a new Event object with DATE and TIME(optional)
 *Format of date: yyyy-mm-dd
 *Format of time: hh:mm
 
+
 ### `list` - lists out all tasks
 
 Example of usage:
@@ -67,6 +70,7 @@ list
 
 Expected outcome:
 A list of all tasks in their respective formats
+
 
 ### `delete INDEX` - deletes task at specific INDEX
 
@@ -80,6 +84,7 @@ Delete task from tasklist and prints the deleted task
 *Recommended to use alongside `list` command so that you get the right index
 *Important to delete a valid index - Do not go out of bounds!
 
+
 ### `mark INDEX` - marks task as done
 
 Example of usage:
@@ -90,6 +95,7 @@ mark 0
 Expected outcome:
 Marks task and prints the marked task
 *Recommended to use alongside `list` command so that you get the right index
+
 
 ### `unmark INDEX` - marks task as undone
 
@@ -102,6 +108,7 @@ Expected outcome:
 Marks task and prints the marked task
 *Recommended to use alongisde `list` command so that you get the right index
 
+
 ### `snooze NAME DATE /t NEWDATE NEWTIME` - changes the date & time of task
 
 Example of usage:
@@ -112,7 +119,17 @@ snooze meeting 2022-02-12 /t 2022-03-20 23:59
 Expected outcome:
 Sets new task date and time and prints new date and time for task
 
-__Keeping track of the exact time is difficult__, which is why all you need to input is the date of the task and not the time.
+_ _Keeping track of the exact time is difficult_ _, which is why all you need to input is the date of the task and not the time.
 *Getting the exact name and date of the task is important
 
+
+### `bye` - ends the program
+
+Example of usage:
+```
+bye
+```
+
+Expected outcome:
+Duke sends a goodbye message and exits the program, closing the UI
 
