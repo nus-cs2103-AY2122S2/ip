@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
 
     @Override
     String execute(TaskList taskList, Ui ui, Storage storage) {
-        if (this.index < 0 || this.index > taskList.length()) {
+        if (this.index < 0 || this.index >= taskList.length()) {
             return ui.outOfBoundsString();
         } else {
             Task task = taskList.getTask(index);
