@@ -1,3 +1,4 @@
+
 public class ListCommand extends Command {
     /**
      *
@@ -6,7 +7,7 @@ public class ListCommand extends Command {
      * @param storage
      */
     /** Lists out all the commands*/
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String perform(TaskList taskList, Ui ui, Storage storage) {
 
        return ui.printTasks(taskList);
     }

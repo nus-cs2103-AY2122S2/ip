@@ -1,4 +1,6 @@
+
 import java.io.IOException;
+
 
 public class AddCommand extends Command {
     private final Task Add;
@@ -20,9 +22,9 @@ public class AddCommand extends Command {
      * @throws IOException
      */
     /** Adds a new command to the TaskList*/
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String perform(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.addTask(this.Add);
-        storage.writeTasks(taskList);
+        storage.update(taskList);
         return ui.printAddTask(this.Add, taskList);
     }
 }

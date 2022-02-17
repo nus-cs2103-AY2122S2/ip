@@ -1,3 +1,4 @@
+
 public class ExitCommand extends Command {
     /**
      *
@@ -6,7 +7,7 @@ public class ExitCommand extends Command {
      * @param storage
      */
     /** Changes status of a  command to the exit*/
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String perform(TaskList taskList, Ui ui, Storage storage) {
 
         super.Exit();
         return "Bye. See you again";

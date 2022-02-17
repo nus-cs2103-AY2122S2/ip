@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 
 public class Parser {
@@ -12,8 +13,7 @@ public class Parser {
         assert fullCommand.isEmpty() == false : "Command cannot be empty";
         String[] initial = fullCommand.split(" ", 2);
         switch (initial[0]) {
-            case ("bye"):
-                System.out.println("Bye. Hope to see you again soon!\n");
+
             case ("list"):
                 return new ListCommand();
             case ("todo"):
@@ -32,11 +32,13 @@ public class Parser {
             }
             case ("markdone"):
                 return new DoneCommand(Integer.parseInt(initial[1]));
+            case ("find"):
+                return new FindCommand(initial[1].split(" "));
             case ("delete"):
                 return new DeleteCommand(Integer.parseInt(initial[1]));
-            case ("find"):
+            case ("bye"):
+                return new ExitCommand();
 
-                return new FindCommand(first[1].split(" "));
 
             default:
                 throw new DukeException("Unknown command received.");

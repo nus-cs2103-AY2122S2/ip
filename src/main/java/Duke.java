@@ -1,6 +1,6 @@
+
 import java.lang.System;
 import java.io.IOException;
-
 
 
 public class Duke {
@@ -30,6 +30,7 @@ public class Duke {
 
 
     public void run() {
+
         System.out.println("Hello! I'm Duke.\n" + "What can I do for you?");
         boolean isExit = false;
 
@@ -37,14 +38,14 @@ public class Duke {
             try {
                 String stringCommand = ui.readCommand();
                 Command command = Parser.parseCommand(stringCommand);
-                command.execute(tasks, ui, storage);
+                command.perform(tasks, ui, storage);
                 isExit = command.isExit();
             } catch (DukeException de) {
 
                 de.getMessage();
 
             } catch (IOException ie) {
-                System.out.println("OOPS! An error occurred while attempting to update storage file:\n"
+                System.out.println("OOPS! An error occurred in updating storage file:\n"
                         + ie.getMessage());
             }
         }
@@ -57,14 +58,14 @@ public class Duke {
         try {
 
             Command command = Parser.parseCommand(input);
-            return command.execute(tasks, ui, storage);
+            return command.perform(tasks, ui, storage);
         } catch (DukeException de) {
             de.getMessage();
         } catch (IOException ie) {
-            System.out.println("OOPS! An error occurred while attempting to update storage file:\n"
+            System.out.println("OOPS! An error occurred in updating storage file:\n"
                     + ie.getMessage());
         }
-        return "Unknown Command?";
+        return "Unknown Command";
     }
 
 

@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,21 +32,22 @@ public class Ui {
 
         for (int i = 1; i <= taskList.size(); i++) {
 
-            toReturn.append(i).append(" . ").append(taskList.get(i - 1).toString()).append(System.lineSeparator());
+            sb.append(i).append(" . ").append(taskList.get(i - 1).toString()).append(System.lineSeparator());
 
         }
           return sb.toString();
     }
 
-    public String printNumTasks(TaskList taskList) {
+
+    public String printNum(TaskList taskList) {
        return "Now you have " + taskList.getTasks().size() + " tasks in the list.";
 
     }
 
     public String printAddTask(Task added, TaskList taskList) {
-        String temp = "Got it. I've added this task:\n" + added.toString();
-        temp += printNumTasks(taskList);
-        return temp;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task: ").append(added.toString()).append(System.lineSeparator()).append(printNum(taskList));
+        return  sb.toString();
     }
 
     public String printMark(Task marked) {
@@ -54,17 +56,18 @@ public class Ui {
     }
 
     public String printDelete(Task deleted, TaskList taskList) {
-        String toReturn = "This task has been removed:\n" + deleted.toString();
-        toReturn += printNumTasks(taskList);
-        return toReturn;
+        StringBuilder sb = new StringBuilder();
+        sb.append("This task has been removed: ").append(deleted.toString()).append(System.lineSeparator()).append(printNum(taskList));
+
+        return sb.toString();
     }
 
     public String printReq(ArrayList<Task> tasks) {
-        StringBuilder toReturn = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
-            toReturn.append(i).append(". ").append(tasks.get(i - 1).toString());
+            stringBuilder.append(i).append(". ").append(tasks.get(i - 1).toString());
         }
-        return toReturn.toString();
+        return stringBuilder.toString();
     }
 
 

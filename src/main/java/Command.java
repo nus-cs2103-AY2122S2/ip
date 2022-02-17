@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 
 public abstract class Command {
@@ -10,7 +11,7 @@ public abstract class Command {
      * @param storage
      * @throws IOException
      */
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
+    public abstract String perform(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
 
     public void Exit() {

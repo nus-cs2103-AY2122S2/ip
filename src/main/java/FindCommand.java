@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 
 /**
@@ -22,9 +23,9 @@ public class FindCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String perform(TaskList taskList, Ui ui, Storage storage) throws IOException {
 
-        return ui.printSomeTasks(taskList.findTasks(this.inputs));
+        return ui.printReq(taskList.findTasks(this.inputs));
 
     }
 }

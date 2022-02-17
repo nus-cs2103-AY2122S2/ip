@@ -1,3 +1,4 @@
+
 class InvalidArgumentException extends DukeException {
 
     /** States that the input arguments are invalid*/
