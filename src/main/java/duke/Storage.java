@@ -29,6 +29,11 @@ public class Storage {
      */
     public Storage(){}
 
+    @SuppressWarnings("unchecked")
+    public static <T> T castToAnything(Object obj) {
+        return (T) obj;
+    }
+
     /**
      * Loads the users task list from file
      */
@@ -49,12 +54,13 @@ public class Storage {
                 FileInputStream reader = new FileInputStream(dataPath);
                 ObjectInputStream listInput = new ObjectInputStream(reader);
                 try {
-                    toDoList = (ArrayList<Task>) listInput.readObject();
+                    toDoList = castToAnything(listInput.readObject());
                     for (int i = 0; i < toDoList.size(); i++) {
                         TaskBank.getBank().add(toDoList.get(i));
                     }
                     System.out.println("file read and data transferred");
                     listInput.close();
+                    reader.close();
                 } catch (ClassNotFoundException e) {
                     System.out.println("class not found");
                 }

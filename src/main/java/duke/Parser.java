@@ -22,7 +22,7 @@ public class Parser {
 
         switch(command) {
         case "list":
-            Action.showList(taskList);
+            output = Action.showList(taskList);
             break;
         case "bye":
             Action.bye();

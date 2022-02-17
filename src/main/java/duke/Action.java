@@ -12,14 +12,16 @@ public class Action {
     /**
      * greets the user
      */
-    public static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greet = "Hello! I'm JiaMing aka\n" + logo + "\nWhat can I do for you?\nTip: use 'help' for help\n";
-        System.out.println(greet);
+    public static String greet() {
+        String logo = "DUKE";
+        // String logo = " ____        _        \n"
+        //        + "|  _ \\ _   _| | _____ \n"
+        //        + "| | | | | | | |/ / _ \\\n"
+        //        + "| |_| | |_| |   <  __/\n"
+        //        + "|____/ \\__,_|_|\\_\\___|\n";
+        String greeting = "Hello! I'm JiaMing aka\n" + logo + "\nWhat can I do for you?\nTip: use 'help' for help\n";
+        System.out.println(greeting);
+        return greeting;
     }
 
     /**
@@ -44,12 +46,13 @@ public class Action {
      *
      * @param arrlst List of tasks
      */
-    public static void showList(ArrayList<Task> arrlst) {
-        System.out.println("Here are the tasks in your list:");
+    public static String showList(ArrayList<Task> arrlst) {
+        String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < arrlst.size(); i++) {
-            String output = String.format("%d.%s\n", i + 1, arrlst.get(i));
+            output = output + String.format("%d.%s\n", i + 1, arrlst.get(i));
             System.out.println(output);
         }
+        return output;
     }
 
     /**
