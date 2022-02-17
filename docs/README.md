@@ -5,7 +5,9 @@
 ### Manage your tasks effectively in a virtual tasklist
 
 Johnny accepts and stores three different kinds of tasks 
-- Todos, Deadlines and Events
+- Todos
+- Deadlines
+- Events
 
 ### Smart scheduling clash detection
 
