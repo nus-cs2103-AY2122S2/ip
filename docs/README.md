@@ -1,16 +1,36 @@
 # User Guide
 
+## Introduction
+
+Mike is a chatbox designed to assist the user with managing their tasks. 
+
 ## Features 
 
-### Feature-ABC
+### Add a task
 
 Description of the feature.
 
-### Feature-XYZ
+### Update a task
 
 Description of the feature.
 
-## Usage
+### Delete a task
+
+Description of the feature.
+
+### Tag a task
+
+Description of the feature.
+
+### Find a task
+
+Description of the feature.
+
+### View all tasks
+
+Description of the feature.
+
+## Keyword
 
 ### `Keyword` - Describe action
 
