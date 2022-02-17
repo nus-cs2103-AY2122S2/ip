@@ -16,6 +16,13 @@ public class Command {
 
     /**
      * Executes the command.
+     *
+     * @param tasks a task list containing all the tasks.
+     * @param ui an object to help generate response message.
+     * @param storage an object ot help store the data.
+     * @return The response message.
+     * @throws DukeException If the command is not specified.
+     * @throws IOException If facing issue when loading the data file.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         throw new DukeException("This method is to be implemented by child classes");

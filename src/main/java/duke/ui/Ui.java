@@ -19,6 +19,8 @@ public class Ui {
 
     /**
      * Prints out the goodbye words.
+     *
+     * @return The response message.
      */
     public String showExit() {
         String msg = "Bye. Hope to see you again soon!\n";
@@ -28,7 +30,8 @@ public class Ui {
     /**
      * Prints out the error message.
      *
-     * @param errorMsg the message to be printed
+     * @param errorMsg The message to be printed.
+     * @return The response message.
      */
     public void showError(String errorMsg) {
         System.out.println(errorMsg);
@@ -37,7 +40,8 @@ public class Ui {
     /**
      * Lists out the current tasks as well as their status.
      *
-     * @param tasks a list of all tasks
+     * @param tasks A list of all tasks.
+     * @return The response message.
      */
     public String list(TaskList tasks) {
         String msg = "Here are the tasks in your list:\n" + tasks.toString();
@@ -47,7 +51,8 @@ public class Ui {
     /**
      * Shows all the tasks which match the searching keywords.
      *
-     * @param tasks a list of tasks to be printed
+     * @param tasks A list of tasks to be printed.
+     * @return The response message.
      */
     public String find(List<Task> tasks) {
         String msg = "Here are the matching tasks in your list:";
@@ -60,7 +65,8 @@ public class Ui {
     /**
      * Prints the marking message.
      *
-     * @param t a task that has been marked.
+     * @param t A task that has been marked.
+     * @return The response message.
      */
     public String mark(Task t) {
         String msg = "Nice! I've marked this task as done:\n   " + t.toString();
@@ -70,7 +76,8 @@ public class Ui {
     /**
      * Prints the unmarking message.
      *
-     * @param t a task that has been unmarked.
+     * @param t A task that has been unmarked.
+     * @return The response message.
      */
     public String unmark(Task t) {
         String msg = "OK, I've marked this task as not done yet:\n   " + t.toString();
@@ -81,8 +88,9 @@ public class Ui {
     /**
      * Prints out the message after a task is added to the list.
      *
-     * @param t the task which was just added.
-     * @param size the size of the tasklist after removing the above task.
+     * @param t The task which was just added.
+     * @param size The size of the tasklist after removing the above task.
+     * @return The response message.
      */
     public String showAddTask(Task t, int size) {
         String msg = "Got it. I've added this task:\n   " + t.toString()
@@ -93,8 +101,9 @@ public class Ui {
     /**
      * Deletes a task in the specified index.
      *
-     * @param t the task to be removed.
-     * @param size the size of the task list after removing the above task.
+     * @param t The task to be removed.
+     * @param size The size of the task list after removing the above task.
+     * @return The response message.
      */
     public String delete(Task t, int size) {
         String msg = "Noted. I've removed this task:\n   " + t.toString()
