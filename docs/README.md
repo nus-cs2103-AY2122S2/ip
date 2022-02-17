@@ -4,10 +4,10 @@ Duke is a personal assistant chatbot that helps you to keep track of your daily 
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest Duke.jar
+2. Download the latest [duke.jar](https://github.com/nicollegann/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for your application.
 4. Open a command window in that folder.
-5. Run the command `java -jar Duke.jar`. A folder named 'data' containing a file 'duke.txt' will be created in the same 
+5. Run the command `java -jar duke.jar`. A folder named 'data' containing file 'duke.txt' will be created in the same 
 folder to store data from the application.
 
 
@@ -179,4 +179,3 @@ Expected outcome:
 ```
 "Bye! Hope to see you again soon!"
 ```
-                                                                                                                   |
