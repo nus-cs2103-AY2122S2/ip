@@ -66,8 +66,8 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         if (super.tag == null) {
-            return "[E]" + super.toString() + " " + "(by: " + this.deadlineString + ")";
+            return "[E]" + super.toString() + " " + "(at: " + this.deadlineString + ")";
         }
-        return "[E]" + super.toString() + " " + "(by: " + this.deadlineString + ")" + " <" + super.getTagName() + ">";
+        return "[E]" + super.toString() + " " + "(at: " + this.deadlineString + ")" + " <" + super.getTagName() + ">";
     }
 }

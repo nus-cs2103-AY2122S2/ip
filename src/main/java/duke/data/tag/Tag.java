@@ -7,6 +7,7 @@ import duke.data.exception.IllegalValueException;
 
 /**
  * Represents a tag in the task list.
+ * Adapted from AB3 Tag
  */
 public class Tag {
 
