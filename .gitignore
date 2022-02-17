@@ -1,5 +1,5 @@
 # IDEA files
-/.idea/
+/src/main/.idea/
 /out/
 /*.iml
 
