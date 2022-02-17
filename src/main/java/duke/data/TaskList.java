@@ -10,7 +10,7 @@ public class TaskList {
     private List<Task> tasks; 
 
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     public TaskList(List<Task> tasks) {
@@ -29,6 +29,7 @@ public class TaskList {
      * Deletes a task in the specified index.
      *
      * @param index The index of the task to be removed.
+     * @return The deleted task.
      */
     public Task delete(int index) {
         return this.tasks.remove(index);
@@ -37,8 +38,8 @@ public class TaskList {
     /**
      * Marks the task in the specified index as done.
      *
-     * @param index the index of the task
-     * @return the task that has been marked
+     * @param index The index of the task.
+     * @return The task that has been marked.
      */
     public Task mark(int index) {
         Task t = this.tasks.get(index);
@@ -49,8 +50,8 @@ public class TaskList {
     /**
      * Removes the mark of the task in the specified index.
      *
-     * @param index the index of the task
-     * @return the task that has been unmarked
+     * @param index The index of the task.
+     * @return The task that has been unmarked.
      */
     public Task unmark(int index) {
         Task t = this.tasks.get(index);
@@ -61,7 +62,7 @@ public class TaskList {
     /**
      * Gets the number of tasks in the task list。
      *
-     * @return the number of tasks
+     * @return The number of tasks.
      */
     public int getSize() {
         return tasks.size();
@@ -70,7 +71,7 @@ public class TaskList {
     /**
      * Turns the task list to java List.
      *
-     * @return a list of tasks
+     * @return A list of tasks.
      */
     public List<Task> toList() {
         return tasks;
@@ -79,7 +80,7 @@ public class TaskList {
     /**
      * Shows the information of all tasks in the task list.
      *
-     * @return the string representation of task list
+     * @return The string representation of task list.
      */
     public String toString() {
         String msg = "";

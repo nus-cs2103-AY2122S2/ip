@@ -25,7 +25,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
-            ui.showLoadingError();
+            ui.showLoadingError(); // TODO: provide a GUI alternative
             tasks = new TaskList();
         }
     }

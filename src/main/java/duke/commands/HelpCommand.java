@@ -23,7 +23,6 @@ public class HelpCommand extends Command {
                 + "\n" + ListCommand.MESSAGE_USAGE
                 + "\n" + HelpCommand.MESSAGE_USAGE
                 + "\n" + ExitCommand.MESSAGE_USAGE + "\n";
-        System.out.print(msg);
         return msg;
     }
 }

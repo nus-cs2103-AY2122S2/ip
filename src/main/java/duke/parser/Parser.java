@@ -22,10 +22,6 @@ import duke.commands.UnmarkCommand;
 
 public class Parser {
 
-    private enum TaskType {
-        TODO, EVENT, DEADLINE
-    }
-
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     public static final Pattern KEYWORDS_ARGS_FORMAT =
@@ -54,8 +50,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
+     * @param userInput Full user input string.
+     * @return The command based on the user input.
      */
     public Command parse(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -145,8 +141,8 @@ public class Parser {
     /**
      * Parses arguments in the context of the delete person command.
      *
-     * @param args full command args string
-     * @return the prepared command
+     * @param args Full command args string.
+     * @return The prepared command.
      */
     private Command prepareDelete(String args) {
         try {

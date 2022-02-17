@@ -39,8 +39,9 @@ public class FindCommand extends Command{
     /**
      * Retrieves all tasks in the address book whose description contain some of the specified keywords.
      *
-     * @param keywords for searching
-     * @return list of tasks found
+     * @param keywords for searching.
+     * @param tasks The task list containing all the tasks.
+     * @return List of tasks found.
      */
     private List<Task> getTasksWithDescriptionContainingAnyKeyword(Set<String> keywords, TaskList tasks) {
         final List<Task> matchedTasks = new ArrayList<>();

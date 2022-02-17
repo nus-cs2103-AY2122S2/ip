@@ -36,9 +36,9 @@ public class Deadline extends Task {
     /**
      * Compares two objects and checks whether they are the same.
      *
-     * @param obj the other object to compared with
-     * @return true if the two deadlines have the same description, status and time;
-     *         false otherwise
+     * @param obj he other object to be compared with。
+     * @return True if the two deadlines have the same description, status and time;
+     *         False otherwise.
      */
     @Override
     public boolean equals(Object obj) {

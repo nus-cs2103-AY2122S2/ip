@@ -59,9 +59,9 @@ public class Task {
     /**
      * Compares two objects and checks whether they are the same.
      *
-     * @param obj the other object to compared with
-     * @return true if the two tasks have the same description and status;
-     *         false otherwise
+     * @param obj The other object to be compared with.
+     * @return True if the two tasks have the same description and status;
+     *         False otherwise.
      */
     @Override
     public boolean equals(Object obj) {
