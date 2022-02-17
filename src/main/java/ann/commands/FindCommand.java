@@ -3,7 +3,7 @@ package ann.commands;
 public class FindCommand extends Command {
     public static final String KEYWORD = "find";
     public static final String FORMAT = KEYWORD + " [keyword(s)]";
-    private String findKeyWords;
+    private final String findKeyWords;
 
     public FindCommand(String kw) {
         findKeyWords = kw;

@@ -61,8 +61,8 @@ public class Event extends Task {
      * Sets the date and time of the given Event to the result of parsing the given time
      * String (in file format).
      *
-     * @param event
-     * @param dateAndTime
+     * @param event the given Event.
+     * @param dateAndTime the String representing the date and time to be assigned to 'event'.
      */
     private static void parseDateAndTime(Event event, String dateAndTime) {
         event.date = dateAndTime.substring(0, 11).trim();

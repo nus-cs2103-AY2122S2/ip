@@ -9,7 +9,7 @@ package ann.commands;
 public class DeleteCommand extends Command {
     public static final String KEYWORD = "delete";
     public static final String FORMAT = KEYWORD + " [task number]";
-    private int index;
+    private final int index;
 
     /**
      * Creates a new DeleteCommand with the specified task index.

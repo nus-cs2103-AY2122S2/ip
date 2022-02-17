@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  * Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -26,8 +27,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private AnnBot annBot;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image annImage = new Image(this.getClass().getResourceAsStream("/images/ann.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image annImage = new Image(this.getClass().getResourceAsStream("/images/ann.png"));
     private final String welcomeMessage = "Greetings from AnnBot!\nHow can I help you? :)";
     private final Image greetingImage = new Image(this.getClass().getResourceAsStream("/images/greeting.png"));
 

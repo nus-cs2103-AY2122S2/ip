@@ -9,7 +9,7 @@ package ann.commands;
 public class MarkCommand extends Command {
     public static final String KEYWORD = "mark";
     public static final String FORMAT = KEYWORD + " [task number]";
-    private int index;
+    private final int index;
 
     /**
      * Creates a new MarkCommand with the specified task index.
