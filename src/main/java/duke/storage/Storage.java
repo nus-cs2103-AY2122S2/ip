@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -121,9 +123,10 @@ public class Storage {
     private void createFile() {
         File myObj = new File(filePath);
         try {
+            Files.createDirectories(Path.of(filePath.split("/")[0]));
             myObj.createNewFile();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     private boolean isTaskMarked(String task) {
