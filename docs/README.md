@@ -2,17 +2,16 @@
 
 ## Features
 
-
 ### Add
-- Tell Yale your tasks with `todo`, `deadline`, `event` and `period`.
+Tell Yale your tasks with `todo`, `deadline`, `event` and `period`.
 ### View
-- Yale lists out all your tasks for viewing with `list`.
+Yale lists out all your tasks for viewing with `list`.
 ### Mark/Unmark
-- Yale helps you keep track of your tasks with `mark` and `unmark`.
+Yale helps you keep track of your tasks with `mark` and `unmark`.
 ### Find
-- Yale helps you find your desired task with `find`.
+Yale helps you find your desired task with `find`.
 ### Delete
-- Tell Yale to delete a task with `delete`.
+Tell Yale to delete a task with `delete`.
 
 
 

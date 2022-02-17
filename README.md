@@ -17,7 +17,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 Allow me to introduce myself
 -----YALE-----
-The name's yale.Yale.
+The name's Yale.
 
 
 Enter command below:
