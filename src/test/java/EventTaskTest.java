@@ -19,7 +19,7 @@ public class EventTaskTest {
     @Test
     public void eventTask_constructor() throws IllegalValueException {
         String eventTag = "ChickenFiesta";
-        String eventString = "[E][ ] Chicken party (by: Oct 15 2019) <ChickenFiesta>";
+        String eventString = "[E][ ] Chicken party (at: Oct 15 2019) <ChickenFiesta>";
         EventTask task = new EventTask("Chicken party", "2019-10-15", eventTag);
 
         // correctly prints description, formatted date and completion status
