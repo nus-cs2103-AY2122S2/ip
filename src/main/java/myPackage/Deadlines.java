@@ -6,9 +6,10 @@ import java.time.format.DateTimeFormatter;
 public class Deadlines extends Task{
     private String deadline;
     private LocalDate localDate;
-
+    private boolean isDone;
     public Deadlines(String description, String deadline) {
         super(description);
+        isDone = false;
         try {
             String[] str = deadline.split("by ");
             localDate = LocalDate.parse(str[1]);
@@ -21,16 +22,14 @@ public class Deadlines extends Task{
         System.out.printf("[D][ ] %s (%s)", this.description, this.deadline);
     }
 
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("[D][%s] %s%n", this.getStatusIcon(), this.description);
+        return String.format("Nice! I've marked this task as done:\n[D][%s] %s%n", this.getStatusIcon(), this.description);
     }
 
-    public void unmarkAsDone() {
+    public String unmarkAsDone() {
         this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.printf("[D][%s] %s%n", this.getStatusIcon(), this.description);
+        return String.format("OK, I've marked this task as not done yet:\n[D][%s] %s%n", this.getStatusIcon(), this.description);
     }
 
     public String getTaskType() {
@@ -52,4 +51,9 @@ public class Deadlines extends Task{
     public String getTiming() {
         return this.deadline;
     }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
+    }
+
 }

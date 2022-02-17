@@ -1,21 +1,21 @@
 package myPackage;
 
 public class ToDos extends Task {
+    private boolean isDone;
     public ToDos(String description) {
         super(description);
         System.out.printf("[T][ ] %s%n", this.description);
+        isDone = false;
     }
 
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("[T][%s] %s%n", this.getStatusIcon(), this.description);
+        return "Nice! I've marked this task as done:\n" + String.format("[T][%s] %s%n", this.getStatusIcon(), this.description);
     }
 
-    public void unmarkAsDone() {
+    public String unmarkAsDone() {
         this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.printf("[T][%s] %s%n", this.getStatusIcon(), this.description);
+        return "OK, I've marked this task as not done yet:\n" + String.format("[T][%s] %s%n", this.getStatusIcon(), this.description);
     }
 
     public String getTaskType() {
@@ -30,5 +30,9 @@ public class ToDos extends Task {
     @Override
     public String getFullDescription() {
         return String.format("[T][%s] %s%n", this.getStatusIcon(), this.description);
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
     }
 }

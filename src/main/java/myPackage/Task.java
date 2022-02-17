@@ -16,16 +16,14 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("[%s] %s%n", this.getStatusIcon(), this.description);
+        return "";
     }
 
-    public void unmarkAsDone() {
+    public String unmarkAsDone() {
         this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.printf("[%s] %s%n", this.getStatusIcon(), this.description);
+        return "";
     }
 
     public String getDescription() {

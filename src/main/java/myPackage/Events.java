@@ -6,8 +6,10 @@ import java.time.format.DateTimeFormatter;
 public class Events extends Task{
     private String date;
     private LocalDate localDate;
+    private boolean isDone;
     public Events(String description, String date) {
         super(description);
+        isDone = false;
         try {
             String[] str = date.split("by ");
             localDate = LocalDate.parse(str[1]);
@@ -19,16 +21,14 @@ public class Events extends Task{
         }
         System.out.printf("[E][ ] %s (%s)", this.description, this.date);
     }
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("[E][%s] %s%n", this.getStatusIcon(), this.description);
+        return String.format("Nice! I've marked this task as done:\n[E][X] %s%n", this.description);
     }
 
-    public void unmarkAsDone() {
+    public String unmarkAsDone() {
         this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.printf("[E][%s] %s%n", this.getStatusIcon(), this.description);
+        return String.format("OK, I've marked this task as not done yet:\n[E][ ] %s%n", this.description);
     }
 
     public String getTaskType() {
@@ -49,5 +49,9 @@ public class Events extends Task{
 
     public String getTiming() {
         return this.date;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
     }
 }
