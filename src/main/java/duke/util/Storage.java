@@ -17,12 +17,17 @@ public class Storage {
     private static final String FILE_CANNOT_CREATE_MSG = "HEY! File or directory cannot be created!";
     private static final String FILE_LOADING_ERROR_MSG =
             "HEY! File load data cannot be read or may be corrupted! Your prev save may be gone, start anew.";
-    private static final String CANNOT_WRITE_TO_FILE_MSG = "Cannot write data to file. What's up with that?";
+    private static final String CANNOT_WRITE_TO_FILE_MSG = "Cannot save data to file. What's up with that?";
     private static final String CANNOT_CREATE_OBJ = "Objection creation issue while trying to read data.";
 
     private final String fileDirPath;
     private final String fullFilePath;
     private File file;
+
+    public Storage() {
+        fileDirPath = "";
+        fullFilePath = "";
+    }
 
     /**
      * Constructor for Storage.
@@ -113,7 +118,7 @@ public class Storage {
             }
             fileWriter.close();
 
-        } catch (IOException exception) {
+        } catch (Exception exception) {
             throw new DukeException(CANNOT_WRITE_TO_FILE_MSG);
         }
     }

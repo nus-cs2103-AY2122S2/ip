@@ -70,6 +70,7 @@ public class Duke {
             storage = new Storage(STORAGE_FILE_NAME, DIR_FILE_NAME);
             storage.loadFromSave(taskList.getTaskList(), taskFactory);
         } catch (DukeException exception) {
+            storage = new Storage();
             ui.printError(exception.getMessage());
         }
 

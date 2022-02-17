@@ -54,7 +54,12 @@ public abstract class TaskCommand extends Command {
      */
     protected String updateTaskList(Task newTask, TaskList taskList, Storage storage) throws DukeException {
         taskList.addTask(newTask);
-        storage.saveList(taskList.getTaskList());
+
+        try {
+            storage.saveList(taskList.getTaskList());
+        } catch (DukeException exception) {
+            return exception.getMessage() + "\n" + getUpdatedTaskListStr(newTask, taskList);
+        }
 
         return getUpdatedTaskListStr(newTask, taskList);
     }

@@ -58,7 +58,14 @@ public class EditTaskMarkCommand extends Command {
 
         Task updatedTask = taskList.markTask(taskIndex, isMarkDoneTask);
         String cmdDescription = isMarkDoneTask ? MARK_TASK : UNMARK_TASK;
+        String printStatement = cmdDescription + updatedTask.toString();
 
-        return cmdDescription + updatedTask.toString();
+        try {
+            storage.saveList(taskList.getTaskList());
+        } catch (DukeException exception) {
+            printStatement = exception.getMessage() + "\n" + printStatement;
+        }
+
+        return printStatement;
     }
 }
