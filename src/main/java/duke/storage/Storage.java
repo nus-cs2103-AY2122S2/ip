@@ -20,8 +20,9 @@ import duke.task.Todos;
 public class Storage {
     private final String databasePath;
 
-    public Storage(String databasePath) {
-        this.databasePath = databasePath;
+    public Storage() {
+        this.databasePath = "C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"
+                + "Individual_Project/src/main/java/duke/data/DukeDatabase.txt";
     }
 
     /**

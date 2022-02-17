@@ -19,9 +19,8 @@ public class AddCommand extends Commands {
     public static final String COMMAND_TODO = "todo";
     public static final String COMMAND_EVENT = "event";
     public static final String COMMAND_DEADLINE = "deadline";
-    public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
-    public static final String FAILURE_MESSAGE =
-            "    'Add' Command Executed Unsuccessfully";
+    public static final String SUCCESS_MESSAGE = "";
+    public static final String FAILURE_MESSAGE = "";
 
     private static final boolean IS_EXIT = false;
     private final String commandWord;
@@ -83,20 +82,16 @@ public class AddCommand extends Commands {
             }
 
             if (createdTaskList.size() > 0) {
-                if (tasks.addsTask(createdTaskList.get(0), storage)) {
-                    return new CommandResult(SUCCESS_MESSAGE);
-                }
+                return new CommandResult(tasks.addsTask(createdTaskList.get(0), storage));
             }
 
         } catch (IndexOutOfBoundsException err) {
-            System.out
-                    .println("    Addition of tasks unsuccessful, "
-                            + "ensure that you are writing in the correct format.");
+            return new CommandResult("    Addition of tasks unsuccessful, "
+                    + "ensure that you are writing in the correct format.");
         } catch (DateTimeParseException err) {
-            System.out
-                    .println(
-                            "    Addition of tasks unsuccessful, ensure that the date is valid, "
-                                    + "and goes by the format of (YYYY-MM-DD).");
+            return new CommandResult(
+                    "    Addition of tasks unsuccessful, ensure that the date is valid, "
+                            + "and goes by the format of (YYYY-MM-DD).");
         }
         return new CommandResult(FAILURE_MESSAGE);
     }

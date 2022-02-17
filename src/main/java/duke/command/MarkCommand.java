@@ -11,8 +11,8 @@ import duke.ui.Ui;
  */
 public class MarkCommand extends Commands {
     public static final String COMMAND_WORDS = "mark";
-    public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
-    public static final String FAILURE_MESSAGE = "    'Mark' Command Executed Unsuccessfully";
+    public static final String SUCCESS_MESSAGE = "";
+    public static final String FAILURE_MESSAGE = "";
     private static final boolean IS_EXIT = false;
     private final String arguments; // In the form of user duke.command
 
@@ -45,13 +45,9 @@ public class MarkCommand extends Commands {
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String trimmedArgument = arguments.trim();
-            if (tasks.marksTask(storage, (Integer.parseInt(trimmedArgument) - 1), true)) {
-                return new CommandResult(SUCCESS_MESSAGE);
-            }
+            return new CommandResult(tasks.marksTask(storage, (Integer.parseInt(trimmedArgument) - 1), true));
         } catch (IndexOutOfBoundsException err) {
-            System.out.println("    Marking of tasks unsuccessful due to: " + err);
-            return new CommandResult(FAILURE_MESSAGE);
+            return new CommandResult("    Marking of tasks unsuccessful due to: " + err);
         }
-        return new CommandResult(FAILURE_MESSAGE);
     }
 }

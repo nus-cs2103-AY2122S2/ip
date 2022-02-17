@@ -39,11 +39,10 @@ public class ListCommand extends Commands {
      */
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
-        if (tasks.printFileContent() == Boolean.TRUE) {
-            return new CommandResult(SUCCESS_MESSAGE);
-        } else {
-            System.out.println("    Failed to print database content");
+        try {
+            return new CommandResult(tasks.returnFileContent());
+        } catch (Exception err) {
+            return new CommandResult(FAILURE_MESSAGE);
         }
-        return new CommandResult(FAILURE_MESSAGE);
     }
 }

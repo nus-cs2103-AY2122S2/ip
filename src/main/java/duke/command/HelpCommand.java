@@ -11,8 +11,8 @@ import duke.ui.Ui;
 public class HelpCommand extends Commands {
 
     public static final String COMMAND_WORDS = "help";
-    public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
-    public static final String FAILURE_MESSAGE = "    'Help' Command Executed Unsuccessfully";
+    public static final String SUCCESS_MESSAGE = "    Did you accidentally write an incorrect duke.command.";
+    public static final String FAILURE_MESSAGE = "";
     private static final boolean IS_EXIT = false;
 
     /**
@@ -37,7 +37,6 @@ public class HelpCommand extends Commands {
      */
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("    Did you accidentally write an incorrect duke.command.");
         return new CommandResult(SUCCESS_MESSAGE);
     }
 }

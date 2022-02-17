@@ -11,8 +11,8 @@ import duke.ui.Ui;
  */
 public class UnmarkCommand extends Commands {
     public static final String COMMAND_WORDS = "unmark";
-    public static final String SUCCESS_MESSAGE = "    Command Executed Successfully";
-    public static final String FAILURE_MESSAGE = "    'Unmark' Command Executed Unsuccessfully";
+    public static final String SUCCESS_MESSAGE = "";
+    public static final String FAILURE_MESSAGE = "";
     private static final boolean IS_EXIT = false;
     private final String arguments; // In the form of user duke.command
 
@@ -45,15 +45,11 @@ public class UnmarkCommand extends Commands {
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String trimmedArgument = arguments.trim();
-            if (tasks.marksTask(storage, (
-                    Integer.parseInt(trimmedArgument) - 1), false)) {
-                return new CommandResult(SUCCESS_MESSAGE);
-            }
+            return new CommandResult(tasks.marksTask(storage, (
+                        Integer.parseInt(trimmedArgument) - 1), false));
         } catch (IndexOutOfBoundsException err) {
-            System.out.println("    Unmarking of tasks unsuccessful due to: "
+            return new CommandResult(    "Unmarking of tasks unsuccessful due to: "
                     + err);
-            return new CommandResult(FAILURE_MESSAGE);
         }
-        return new CommandResult(FAILURE_MESSAGE);
     }
 }

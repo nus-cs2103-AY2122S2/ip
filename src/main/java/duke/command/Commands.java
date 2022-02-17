@@ -34,6 +34,6 @@ public class Commands {
      * @return A command result with a string reflective of the task's success.
      */
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
-        throw new UnsupportedOperationException("    This method is to be implemented by child classes");
+        return new CommandResult("    This method is to be implemented by child classes");
     }
 }
