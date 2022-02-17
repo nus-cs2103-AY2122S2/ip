@@ -32,7 +32,7 @@ public class Level7 {
 
         while (true) { //will keep querying user for input until user inputs "bye"
             String word = sc.next();
-            sc.skip("\\s");
+            sc.skip("\\s"); //skips 1 whitespace char to avoid scanning it as part of user input
             if (word.equals("bye")) { //prints goodbye text and exit while loop,stop scanner from scanning
                 System.out.println(line + "     Goodbye.\n" + line);
                 break; //end while loop
