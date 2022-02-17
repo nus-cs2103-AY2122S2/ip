@@ -178,3 +178,9 @@ The following will be output on the screen-
 ```
 [T][ ] borrow book
 ```
+
+## Download Release
+
+1. Go to https://github.com/MontyPython28/ip/releases/tag/A-Release
+2. Download `aceattorney.jar`
+3. Go to the Command Line, navigate to the correct directory and type `java -jar aceattorney.jar`
