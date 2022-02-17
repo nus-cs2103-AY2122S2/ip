@@ -19,7 +19,7 @@ It's that simple! :)
 
 ## Commands
 There are a few commands you can run in Duke. These include:
-- [X] todo
+- [x] todo
 - [X] deadline
 - [X] event
 - [X] delete
