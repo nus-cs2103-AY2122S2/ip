@@ -104,3 +104,16 @@ Example of usage:
 
 Expected outcome:
 Shows you that you have successfully marked/unmarked the task. 
+
+
+## Acknowledgements 
+
+### Images 
+Images are used according to pixabay's guidelines: Free for commercial use
+
+[Duke image](https://pixabay.com/vectors/android-robot-152699/)
+
+[Tiger image](https://pixabay.com/vectors/tiger-happy-euphoric-cat-nature-160601/)
+
+### Codes
+`DialogBox.setDialogColour()` was adapted from https://github.com/jonfoocy/ip/blob/master/src/main/java/DialogBox.java with modifications`

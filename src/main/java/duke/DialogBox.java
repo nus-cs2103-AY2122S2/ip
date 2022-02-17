@@ -46,22 +46,38 @@ public class DialogBox extends HBox {
         }
 
         setTextWithColour(text, img);
+        setDialogColour(position);
+
+
+    }
+
+    /**
+     * Changes the text bubble according to the ownership of the message.
+     * @param position assert the text's ownership. (eg. from Bot, or from User)
+     */
+    private void setDialogColour(Position position) {
+        Color lightBlue = Color.LIGHTBLUE;
+        Color lightGray = Color.LIGHTGRAY;
+        CornerRadii cornerRadii = new CornerRadii(15.0);
+        Insets insetsSetting = Insets.EMPTY;
 
         //@@author tiewweijian-reused
         //Reused from https://github.com/jonfoocy/ip/blob/master/src/main/java/DialogBox.java with modifications
         if (position.equals(Position.User)) {
-            dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(15.0),
-                    Insets.EMPTY)));
+            dialog.setBackground(new Background(new BackgroundFill(lightBlue, cornerRadii, insetsSetting)));
             dialog.setPadding(new Insets(8));
         } else if (position.equals(Position.Robot)) {
-            dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(15.0),
-                    Insets.EMPTY)));
+            dialog.setBackground(new Background(new BackgroundFill(lightGray, cornerRadii, insetsSetting)));
             dialog.setPadding(new Insets(8));
         }
         //@author jonfoocy
-
     }
 
+    /**
+     * Chanegs the text colour according to priority level.
+     * @param text the input message that the user is typing
+     * @param img the image of the user
+     */
     private void setTextWithColour(String text, Image img) {
         dialog.setText(text);
         displayPicture.setImage(img);

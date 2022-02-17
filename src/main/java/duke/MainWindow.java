@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.ParseException;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,17 +20,20 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tiger.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/robot.png"));
 
+    /**
+     * Initialise the window.
+     */
     @FXML
     public void initialize() {
+        String welcomeMessage = "Welcome to Duke. Type /help to see the list of commands available.";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        DialogBox dialogBoxWelcome = DialogBox.getDukeDialog(welcomeMessage, dukeImage);
+        dialogContainer.getChildren().add(dialogBoxWelcome);
     }
 
     public void setDuke(Duke d) {
