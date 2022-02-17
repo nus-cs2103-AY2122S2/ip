@@ -1,7 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-// import java.util.
-
 import exception.DukeException;
 
 public class Duke {
@@ -18,6 +18,22 @@ public class Duke {
     public static String LINE_INTRO = "Nah, here's your list";
     public static String MARK_MESSAGE = "Power la Mr Bosssssss, mark alr bro!";
     public static String UNMARK_MESSAGE = "No probs bro, unmarked already!";
+
+    /**
+     * Determines if input string is date or not.
+     * 
+     * @param date
+     * @return boolean
+     */
+    public static boolean isDate(String date) {
+        try {
+            LocalDate.parse(date);
+            System.out.println("we have a real date");
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
 
     public static void main(String[] args) {
 
