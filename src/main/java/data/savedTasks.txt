@@ -1,2 +1,2 @@
-D,1,assignment 1,2022-02-09
-D,1,jog,2022-02-09 09:00PM
+D,1,Assignment 1,2022-02-20
+E,0,Dance party,2022-03-01 9:00PM

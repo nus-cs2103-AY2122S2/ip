@@ -4,6 +4,7 @@ import Duke.Exceptions.EmptyMessageException;
 import Duke.Exceptions.MissingEnquiryDateException;
 import Duke.Exceptions.WrongCommandException;
 import Duke.Exceptions.WrongDateFormatException;
+import Gui.Launcher;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class Duke {
      * Empty constructor for Duke
      */
     public Duke() {
-        myDisk = new Disk("src/main/java/data/savedTasks.txt", myListStorage);
+        myDisk = new Disk("./data/savedTasks.txt", myListStorage);
         try {
             myDisk.loadFromDisk();
         } catch (IOException e) {
@@ -42,8 +43,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for Duke. Runs the GUI launcher instead of CLI
+     * @param args
+     */
     public static void main(String[] args) {
-        new Duke("src/main/java/data/savedTasks.txt").dukeRunner();
+        Launcher.main(args);
+        //new Duke("./data/savedTasks.txt").dukeRunner();
     }
 
     /**
@@ -114,7 +120,7 @@ public class Duke {
                     break;
                 case "bye":
                     commands.cmdBye();
-                    break;
+                    return;
                 default:
                     throw new WrongCommandException("Invalid Command");
                 }
