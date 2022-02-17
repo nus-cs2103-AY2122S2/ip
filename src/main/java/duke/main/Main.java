@@ -24,6 +24,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) {
+        stage.setTitle("Duke");
         try {
             URL filePath = Main.class.getResource("/view/MainWindow.fxml");
             assert filePath != null : "Some resource is missing, unable to proceed.";
