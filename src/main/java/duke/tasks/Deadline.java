@@ -34,11 +34,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("MMM d y - HHmm")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + dueDate.format(DateTimeFormatter.ofPattern("MMM d y - HHmm")) + ")";
     }
 
     @Override
-    public String compactStorageString() {
+    public String toCompactStorageString() {
         String flag = isDone ? "1" : "0";
         return "D" + flag + description + " | " + dueDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }

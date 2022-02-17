@@ -6,10 +6,10 @@ import duke.tasks.TaskList;
 /**
  * Searches for tasks that match the keywords.
  */
-public class FindCommand extends Command{
-    protected String search;
+public class FindCommand extends Command {
     private static final String MESSAGE = "Here are the matching tasks in your list:";
 
+    protected String search;
     /**
      * Constructs a find command.
      *
@@ -22,6 +22,6 @@ public class FindCommand extends Command{
     @Override
     public String execute(TaskList tasks, Storage storage) {
         TaskList result = new TaskList(tasks.findTasks(search));
-        return result.taskListToString();
+        return MESSAGE + "\n" + result.taskListToString();
     }
 }

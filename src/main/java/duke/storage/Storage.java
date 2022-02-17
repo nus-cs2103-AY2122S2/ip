@@ -1,8 +1,5 @@
 package duke.storage;
 
-import duke.DukeException;
-import duke.tasks.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,12 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+
 /**
  * Stores the user data in a text file.
  */
 public class Storage {
-    private final File STORAGE_DIRECTORY = new File("data");
-    private final File STORAGE_FILE = new File("data/tasks.txt");
+    private static final File STORAGE_DIRECTORY = new File("data");
+    private static final File STORAGE_FILE = new File("data/tasks.txt");
 
     /**
      * Constructs a storage pointing to a text file.

@@ -7,9 +7,9 @@ import duke.tasks.TaskList;
  * Sets a task as not done yet.
  */
 public class UnmarkCommand extends Command {
-    protected int index;
     private static final String MESSAGE = "Nice! I've marked this task as not done yet:";
 
+    protected int index;
     /**
      * Constructs an unmark command.
      *

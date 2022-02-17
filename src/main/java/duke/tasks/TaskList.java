@@ -1,9 +1,9 @@
 package duke.tasks;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import duke.DukeException;
 
 /**
  * Represents a list of tasks.
@@ -97,23 +97,28 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Finds upcoming tasks in next two days from current time.
+     *
+     * @return An array list of upcoming tasks.
+     */
     public ArrayList<Task> findUpcomingTask() {
         ArrayList<Task> result = new ArrayList<Task>();
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime endRange = now.plusDays(2);
         for (Task task : tasks) {
-            boolean upcoming = false;
-            boolean withinOneDay = false;
+            boolean isUpcoming = false;
+            boolean isWithinOneDay = false;
 
             if (task instanceof Deadline) {
-                upcoming = ((Deadline) task).dueDate.isAfter(now);
-                withinOneDay = ((Deadline) task).dueDate.isBefore(endRange);
+                isUpcoming = ((Deadline) task).dueDate.isAfter(now);
+                isWithinOneDay = ((Deadline) task).dueDate.isBefore(endRange);
             } else if (task instanceof Event) {
-                upcoming = ((Event) task).eventDate.isAfter(now);
-                withinOneDay = ((Event) task).eventDate.isBefore(endRange);
+                isUpcoming = ((Event) task).eventDate.isAfter(now);
+                isWithinOneDay = ((Event) task).eventDate.isBefore(endRange);
             }
 
-            if (upcoming && withinOneDay) {
+            if (isUpcoming && isWithinOneDay) {
                 result.add(task);
             }
         }
@@ -145,7 +150,7 @@ public class TaskList {
     public String taskListToStorageString() {
         StringBuilder result = new StringBuilder();
         for (Task t : tasks) {
-            result.append(t.compactStorageString() + "\n");
+            result.append(t.toCompactStorageString() + "\n");
         }
         return result.toString();
     }

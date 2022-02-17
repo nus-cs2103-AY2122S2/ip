@@ -1,15 +1,16 @@
 package duke.commands;
 
 import duke.storage.Storage;
-import duke.tasks.TaskList;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * Adds a task to the task list.
  */
 public class AddCommand extends Command {
-    protected Task task;
     private static final String MESSAGE = "Got it. I've added this task:";
+
+    protected Task task;
 
     /**
      * Constructs an add command.

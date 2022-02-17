@@ -2,7 +2,7 @@ package duke;
 
 public class Message {
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke, What can I do for you?";
-    public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
+    public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon! \n(Closing in 3 seconds)";
 
     public static final String ERRORMESSAGE_TODO = "Missing details! Please use the format: todo <description>";
     public static final String ERRORMESSAGE_DEADLINE =

@@ -34,11 +34,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + eventDate.format(DateTimeFormatter.ofPattern("MMM d y - HHmm")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + eventDate.format(DateTimeFormatter.ofPattern("MMM d y - HHmm")) + ")";
     }
 
     @Override
-    public String compactStorageString() {
+    public String toCompactStorageString() {
         String flag = isDone ? "1" : "0";
         return "E" + flag + description + " | " + eventDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }

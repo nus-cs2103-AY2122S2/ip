@@ -1,12 +1,12 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Initializes and starts the duke program.

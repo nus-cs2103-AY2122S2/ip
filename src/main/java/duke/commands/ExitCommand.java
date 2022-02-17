@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 
 /**
- * Exits the program.
+ * Outputs exit message.
  */
 public class ExitCommand extends Command {
     @Override

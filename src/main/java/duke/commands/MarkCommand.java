@@ -7,9 +7,9 @@ import duke.tasks.TaskList;
  * Sets a task as done.
  */
 public class MarkCommand extends Command {
-    protected int index;
     private static final String MESSAGE = "Nice! I've marked this task as done:";
 
+    protected int index;
     /**
      * Constructs a mark command.
      *
