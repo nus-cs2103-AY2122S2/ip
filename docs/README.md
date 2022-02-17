@@ -211,7 +211,7 @@ I can help!
 I can help!
 ```
 
-### undo - Undoes a change to the task list
+### `undo` - Undoes a change to the task list
 
 Undoes the most recent change to the task list. Note that failed edits to the
 task list (such as inputting todo command without any name) do not count as
@@ -231,7 +231,7 @@ state of the task list after undoing, such as in the example below.
 I can help!
 ```
 
-### redo - Redoes an undone change to the task list
+### `redo` - Redoes an undone change to the task list
 
 Redoes the most recent undone change to the task list.
 
