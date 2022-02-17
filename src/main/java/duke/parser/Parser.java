@@ -1,11 +1,16 @@
+package duke.parser;
+
 import java.io.IOException;
-import exception.DukeException;
-import tasks.Deadlines;
-import tasks.Events;
-import tasks.Task;
-import tasks.ToDos;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Deadlines;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDos;
 
 /**
  * Deals with making sense of the user command.

@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Each task will hold the status of done or not done, plus description of the
