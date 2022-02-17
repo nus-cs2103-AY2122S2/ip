@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.RemindCommand;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -13,6 +14,7 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    private static final String paragraphSeparator = "\n\n";
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
@@ -39,17 +41,26 @@ public class Duke {
      */
     public String loadDataAndWelcome() {
         String message = ui.showWelcome();
+        message += getLoadingStatus();
+        message += getReminders();
+        return message;
 
+    }
+
+    /** Returns the loading status after trying to load the data.**/
+    private String getLoadingStatus() {
         try {
             storage.loadData(taskList);
         } catch (DukeException e) {
-            message += ui.showLoadingError(e.getMessage());
-            return message;
+            return paragraphSeparator + ui.showLoadingError(e.getMessage());
         }
+        return paragraphSeparator + ui.showLoadingSuccess();
+    }
 
-        message += ui.showLoadedData(taskList);
-        return message;
-
+    /** Reminds the user if there are tasks due within the next DEFAULT_NUM_DAYS days.**/
+    private String getReminders() {
+        TaskList reminders = taskList.getUpcomingTasks(RemindCommand.DEFAULT_NUM_DAYS);
+        return paragraphSeparator + ui.showRemindResult(reminders, RemindCommand.DEFAULT_NUM_DAYS);
     }
 
     /**

@@ -20,7 +20,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n" + logo + "\nHello! I'm Duke\n";
+        return "Hello from\n" + logo + "\nHello! I'm Duke :)";
     }
 
     /**
@@ -38,15 +38,10 @@ public class Ui {
     /**
      * Gives a message indicating data has been successfully loaded.
      *
-     * @param taskList the task list containing the loaded task data.
      * @return a String containing the latest retrieved task data.
      */
-    public String showLoadedData(TaskList taskList) {
-        assert taskList.getLength() >= 0 : "taskList.getLength() should return an int not less than 0";
-        if (taskList.getLength() != 0) {
-            return "I've retrieved your latest task list data. " + showTaskList(taskList);
-        }
-        return "";
+    public String showLoadingSuccess() {
+        return "I've retrieved your latest task list data. Type 'list' to see the tasks!";
     }
 
     /**
