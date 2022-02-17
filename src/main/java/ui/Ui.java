@@ -15,6 +15,7 @@ public class Ui {
                             + "I'll be in my quarters if you require me");
     }
 
+    /** Returns the list of all the tasks that are currently being tracked by Cleese*/
     public String listResponse(TaskList taskList) {
         assert taskList != null : "taskList was not passed into function";
         return String.format(taskList.toString());

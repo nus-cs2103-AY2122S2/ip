@@ -24,7 +24,8 @@ public class Parser {
      * @throws NoDescException exception thrown when no description is given for a Task
      * @throws InvalidInputException exception thrown when an invalid input is given by the user
      */
-    public String handleCommand(String string, TaskList taskList, Ui ui, Storage storage) throws NoDescException, InvalidInputException {
+    public String handleCommand(String string, TaskList taskList, Ui ui, Storage storage)
+                                throws NoDescException, InvalidInputException {
         // Declare and initialise DateTimeFormatter for expected format for date and time from user input
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         // splits the first word and the rest from the string read from user input

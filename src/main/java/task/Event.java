@@ -9,6 +9,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDateTime setAt;
 
+    /**
+     * Constructor of the Event class
+     * @param description string representing the details of the Event
+     * @param setAt LocalDateTime object representing the time the task is set at
+     */
     public Event(String description, LocalDateTime setAt) {
         super(description);
         this.setAt = setAt;

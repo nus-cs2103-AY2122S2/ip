@@ -20,6 +20,9 @@ public class Cleese extends Application {
     private static Storage storage;
     private static TaskList taskList;
 
+    /**
+     * Initializes the elements needed for the Cleese class to work correctly
+     */
     public static void initialize() {
         String filePath = "./src/TaskListDB.txt";
         ui = new Ui();
