@@ -16,7 +16,7 @@ repositories {
 }
 
 application {
-    mainClassName = "yale.Yale"
+    mainClassName = "yale.gui.Launcher"
 }
 
 dependencies {
@@ -51,6 +51,12 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+}
+
+
+shadowJar {
+    archiveBaseName = "yale"
+    archiveClassifier = null
 }
 
 checkstyle {

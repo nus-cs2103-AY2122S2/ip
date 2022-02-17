@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #89CFF0;" xmlns="http://javafx.com/javafx/14" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yale.gui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #89CFF0;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yale.gui.MainWindow">
     <children>
         <Button fx:id="sendButton" layoutX="357.0" layoutY="557.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #FFC0CB; -fx-background-radius: 100;">
             <font>
