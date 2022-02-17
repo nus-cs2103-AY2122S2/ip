@@ -1,5 +1,6 @@
 package duke.helper;
 
+import duke.Duke;
 import duke.exception.*;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -106,7 +107,12 @@ public class Parser {
             return message.toString();
         }
         if (command.equals("mark")) {
-            int index = Integer.parseInt(strArr[1]) - 1;
+            int index;
+            try {
+                index = Integer.parseInt(strArr[1]) - 1;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeEmptyArgumentException();
+            }
             Task temp;
             try {
                 temp = taskList.get(index);
