@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ParseDukeTxt {
 
     // the arrayList we will keep updating
-    private static ArrayList<Task> res;
+    private static ArrayList<Task> res = new ArrayList<Task>();
 
     /**
      * Handles receiving todo command from duke.txt
@@ -66,7 +66,9 @@ public class ParseDukeTxt {
      * @param addText  text we want to add to the file
      */
     private static void writeToFile(String filePath, String addText) throws IOException {
+        // System.out.println("inside writoto file");
         FileWriter fw = new FileWriter(filePath);
+        // System.out.println("the text to add : " + addText);
         fw.write(addText);
         fw.close();
     }
@@ -133,43 +135,25 @@ public class ParseDukeTxt {
      */
     public static void updateDukeTxt(String filePath, ArrayList<Task> arr) throws IOException {
 
-        // here we need to convert the received ArrayList<Task> arr into
-        // lines to be add to the duke.txt file
-        // its best to delete whatever is in the file,
-        // and then recreate all the lines there,
-        // as we may have updated states of tasks
-
-        // split the toString of each task by " ",
-        // and check the first element, if its [T], [E] or [D]
-
-        // todo / marked / read a book
-        // deadline / unmarked / return the book / June 6th
-        // event / marked / project meeting / August 8th 2-4pm
-
-        // to delete the file, we will overwrite the first line
-        // then we will append to the file after.
-
         int counter = 0;
-        // String filePath = "data/duke.txt";
-
         for (Task item : arr) {
 
             String task = item.toString();
-            String[] taskDetails = task.split(" ");
             String addText = "";
 
-            // note that -->
-            // taskDetails[0] is command type
-            if (taskDetails[0].equals("[T]")) {
-                addText = "todo / " + (item.getIsDone() ? "marked" : "unmarked") + " / " + item.getDescription();
-            } else if (taskDetails[0].equals("[E]")) {
+            if (task.substring(1, 2).equals("T")) {
+                System.out.println(" just came across a todo");
+                addText = "todo/" + (item.getIsDone() ? "marked" : "unmarked") + "/" + item.getDescription() + "\n";
+            } else if (task.substring(1, 2).equals("E")) {
                 Events e = (Events) item;
-                addText = "event / " + (item.getIsDone() ? "marked" : "unmarked") + " / " + item.getDescription()
-                        + " / " + e.at;
-            } else if (taskDetails[0].equals("[D]")) {
+                addText = "event/" + (item.getIsDone() ? "marked" : "unmarked") + "/" +
+                        item.getDescription()
+                        + " / " + e.at + "\n";
+            } else if (task.substring(1, 2).equals("D")) {
                 Deadlines d = (Deadlines) item;
-                addText = "deadlines / " + (item.getIsDone() ? "marked" : "unmarked") + " / " + item.getDescription()
-                        + " / " + d.by;
+                addText = "deadlines/" + (item.getIsDone() ? "marked" : "unmarked") + "/"
+                        + item.getDescription()
+                        + "/" + d.by + "\n";
             }
 
             if (counter == 0) {
@@ -182,4 +166,5 @@ public class ParseDukeTxt {
         }
 
     }
+
 }

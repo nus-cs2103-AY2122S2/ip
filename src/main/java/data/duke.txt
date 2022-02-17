@@ -1,3 +1,2 @@
-todo / marked / read a book 
-deadline / unmarked / return the book / June 6th
-event / marked / project meeting / August 8th 2-4pm
+todo/marked/todo add this
+todo/unmarked/todo one other
