@@ -1,8 +1,8 @@
 package commands;
 
 import tasklist.TaskList;
-
 import tasklist.TaskListException;
+
 import ui.Ui;
 
 public class FindCommand extends Command {
