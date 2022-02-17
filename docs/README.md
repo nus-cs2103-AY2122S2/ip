@@ -194,7 +194,7 @@ Your list has 1 tasks:
 
 ### `bye` - Terminates Mike
 
-Describe the action and its outcome.
+Program will be terminated.
 
 Example of usage: 
 
@@ -202,7 +202,7 @@ Example of usage:
 
 Expected outcome:
 
-Mike will diplay termination message and program will be terminated.
+Mike will display termination message and program will be terminated.
 
 ```
 Hope I helped you!
