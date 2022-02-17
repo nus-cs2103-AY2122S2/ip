@@ -29,13 +29,8 @@ public class Parser {
     public static Command parse(String fullCommand) throws JeffException {
         String[] splitCommand = fullCommand.split(" ", 2);
         String keyword = splitCommand[0];
-
-        // To prevent NullPointerException for when body does not exist.
-        String body = null;
+        String body = checkValidInfo(splitCommand);
         int len = splitCommand.length;
-        if (len > 1) {
-            body = splitCommand[1];
-        }
 
         // Perform the correct instructions according to the keyword.
         switch(keyword) {
@@ -45,84 +40,43 @@ public class Parser {
         case ("list") :
             return new ListCommand();
         case ("mark"):
-            // When no index is given.
-            if (len == 1) {
-                throw new JeffException(" ☹ OOPS!!! Please tell me the task's"
-                        + " index number so that I can mark it as done.");
-            }
+            checkValidFirstEntry(len, " ☹ OOPS!!! Please tell me the task's"
+                    + " index number so that I can mark it as done.");
             return new MarkCommand(body);
         case ("unmark"):
-            // When no index is given.
-            if (len == 1) {
-                throw new JeffException(" ☹ OOPS!!! Please tell me the task's"
-                        + " index number so that I can mark it as not done.");
-            }
+            checkValidFirstEntry(len, " ☹ OOPS!!! Please tell me the task's"
+                    + " index number so that I can mark it as not done.");
             return new UnmarkCommand(body);
         case ("todo"):
-            // When no description is given.
-            if (len == 1) {
-                throw new JeffException(" ☹ OOPS!!! The description of a todo cannot be empty.");
-            }
+            checkValidFirstEntry(len, " ☹ OOPS!!! The description of a todo cannot be empty.");
             return new TodoCommand(body);
         case ("deadline"):
-            // When no description is given.
-            if (len == 1) {
-                throw new JeffException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
+            checkValidFirstEntry(len, " ☹ OOPS!!! The description of a deadline cannot be empty.");
 
             String[] splitBody = body.split(" /by ", 2);
             String description = splitBody[0];
-
-            // To prevent NullPointerException for when body does not exist.
-            String dateInfo = null;
+            String dateInfo = checkValidInfo(splitBody);
             int bodyLength = splitBody.length;
-            if (bodyLength > 1) {
-                dateInfo = splitBody[1];
-            }
 
-            // When no description or dateInfo are given.
-            if (description.equals("") || description.equals(" ")) {
-                throw new JeffException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-            } else if (bodyLength == 1 || dateInfo.equals("") || dateInfo.equals(" ")) {
-                throw new JeffException(" ☹ OOPS!!! Please input a due date for this task");
-            } else {
-                return new DeadlineCommand(description, dateInfo);
-            }
+            checkValidDateTime(bodyLength, dateInfo, " ☹ OOPS!!! Please input a due date for this task");
+            return new DeadlineCommand(description, dateInfo);
         case ("event"):
-            // When no description is given.
-            if (len == 1) {
-                throw new JeffException(" ☹ OOPS!!! The description of a event cannot be empty.");
-            }
+            checkValidFirstEntry(len, " ☹ OOPS!!! The description of a event cannot be empty.");
+
             splitBody = body.split(" /at ", 2);
             description = splitBody[0];
-
-            // To prevent NullPointerException for when body does not exist.
-            dateInfo = null;
+            dateInfo = checkValidInfo(splitBody);
             bodyLength = splitBody.length;
-            if (bodyLength > 1) {
-                dateInfo = splitBody[1];
-            }
 
-            // When no description or dateInfo are given.
-            if (description.equals("") || description.equals(" ")) {
-                throw new JeffException(" ☹ OOPS!!! The description of a event cannot be empty.");
-            } else if (bodyLength == 1 || dateInfo.equals("") || dateInfo.equals(" ")) {
-                throw new JeffException(" ☹ OOPS!!! Please input a due date for this task");
-            } else {
-                return new EventCommand(description, dateInfo);
-            }
+            checkValidDateTime(bodyLength, dateInfo, " ☹ OOPS!!! Please input a event date");
+            return new EventCommand(description, dateInfo);
         case ("delete"):
-            // When no description is given.
-            if (len == 1) {
-                throw new JeffException(" ☹ OOPS!!! Please tell me the task's"
-                        + " index number so that I can delete it from the list.");
-            }
+            checkValidFirstEntry(len, " ☹ OOPS!!! Please tell me the task's"
+                    + " index number so that I can delete it from the list.");
             return new DeleteCommand(body);
         case ("find"):
-            if (len == 1) {
-                throw new JeffException(" ☹ OOPS!!! Please tell me the keyword"
-                        + " so that I know what you are looking for.");
-            }
+            checkValidFirstEntry(len, " ☹ OOPS!!! Please tell me the keyword"
+                    + " so that I know what you are looking for.");
             return new FindCommand(body);
         default:
             return new HelpCommand();
@@ -130,9 +84,49 @@ public class Parser {
     }
 
     /**
+     * Checks if the user did input a value for the body.
+     *
+     * @param length Length of the parsed command.
+     * @param errorMessage Appropriate error message to throw.
+     * @throws JeffException When user left out the body of the command.
+     */
+    private static void checkValidFirstEntry(int length, String errorMessage) throws JeffException {
+        if (length == 1) {
+            throw new JeffException(errorMessage);
+        }
+    }
+
+    /**
+     * Prevent NullPointerException when declaring a variable that doesn't exist.
+     *
+     * @param arr Contains information of the desired return value, if it exist.
+     * @return Desired output if it exists.
+     */
+    private static String checkValidInfo(String[] arr) {
+        if (arr.length > 1) {
+            return arr[1];
+        }
+        return null;
+    }
+
+    /**
+     * Checks if date and time information are given correctly.
+     *
+     * @param length Length of array containing date and time.
+     * @param dateInfo String containing date and time information.
+     * @param errorMessage Appropriate error message to throw.
+     * @throws JeffException When the date time element does not exist, or means nothing.
+     */
+    private static void checkValidDateTime(int length, String dateInfo, String errorMessage) throws JeffException {
+        if (length == 1 || dateInfo.equals("") || dateInfo.equals(" ")) {
+            throw new JeffException(errorMessage);
+        }
+    }
+
+    /**
      * Returns if exit is requested.
      *
-     * @return boolean value of isExit.
+     * @return Boolean value of isExit.
      */
     public static boolean isExit() {
         return isExit;
