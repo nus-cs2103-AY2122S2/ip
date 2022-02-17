@@ -18,14 +18,6 @@ public class Ui {
     }
 
     /**
-     * Returns the bye message.
-     * @return The bye message.
-     */
-    public String printBye() {
-        return "[MNSKY has shut itself down]";
-    }
-
-    /**
      * Returns the message for when an exception occurs.
      * @param e The exception to be printed out.
      * @return The message for when an exception occurs.

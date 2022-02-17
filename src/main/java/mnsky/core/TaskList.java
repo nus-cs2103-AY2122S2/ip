@@ -18,6 +18,7 @@ public class TaskList {
     private static final int PARAMETER_INDEX = 2;
     private static final int MARK_INDEX = 3;
     private ArrayList<Task> tasks;
+    private ArrayList<Task> oldTasks;
     private Stack<ArrayList<Task>> undoHistory;
     private Stack<ArrayList<Task>> redoHistory;
     private String storageDataReadError = "";
@@ -274,11 +275,17 @@ public class TaskList {
     /**
      * Adds the current task list to the undo history and empties the redo history before updating the task list.
      */
-    public void addToUndoHistory() {
-        ArrayList<Task> oldTasks = new ArrayList<>();
+    public void copyToOldTasks() {
+        oldTasks = new ArrayList<>();
         for (Task task : tasks) {
             oldTasks.add(task.copy());
         }
+    }
+
+    /**
+     * Adds the current task list to the undo history and empties the redo history before updating the task list.
+     */
+    public void addToUndoHistory() {
         undoHistory.push(oldTasks);
 
         while (!redoHistory.isEmpty()) {

@@ -63,10 +63,11 @@ public class Mnsky {
      */
     public ArrayList<String> handleWriteCommand(ArrayList<String> parsedInput) throws MnskyException {
         if (isDirectWriteCommand(parsedInput.get(CMD_INDEX))) {
-            taskList.addToUndoHistory();
+            taskList.copyToOldTasks();
         }
 
         ArrayList<String> responses = new ArrayList<>();
+
 
         switch (parsedInput.get(CMD_INDEX)) {
         case "mark":
@@ -101,8 +102,11 @@ public class Mnsky {
             taskList.redo();
             responses.addAll(taskList.getListStrings());
             break;
-        default:
-            throw new MnskyException("[MNSKY had trouble interpreting the command.]");
+        default: // Do nothing
+        }
+
+        if (isDirectWriteCommand(parsedInput.get(CMD_INDEX))) {
+            taskList.addToUndoHistory();
         }
 
         storage.writeToDataFile(taskList);
@@ -137,7 +141,6 @@ public class Mnsky {
                 if (isWriteCommand(parsedInput.get(CMD_INDEX))) {
                     responses.addAll(handleWriteCommand(parsedInput));
                 } else {
-                    System.out.println(parsedInput.get(CMD_INDEX));
                     responses.add("...");
                 }
             }
