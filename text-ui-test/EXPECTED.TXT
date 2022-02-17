@@ -1,7 +1,150 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+-------------------------------------------
+Hello there, I'm Larry!
+-------------------------------------------
+No list saved previously!
+-------------------------------------------
+Got it, I added:
+[T][ ] buy bread
+Now you have 1 item(s) in your list
+-------------------------------------------
+-------------------------------------------
+Here's your list, Good Sir:
+1. [T][ ] buy bread
+-------------------------------------------
+-------------------------------------------
+Got it, I added:
+[T][ ] borrow book
+Now you have 2 item(s) in your list
+-------------------------------------------
+-------------------------------------------
+Got it, I added:
+[D][ ] return book (by: 1 JANUARY 2022)
+Now you have 3 item(s) in your list
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Got it, I added:
+[E][ ] project meeting (at: 1 JANUARY 2022)
+Now you have 4 item(s) in your list
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Done? Checked it off for you:
+[T][X] borrow book
+-------------------------------------------
+-------------------------------------------
+Here's your list, Good Sir:
+1. [T][ ] buy bread
+2. [T][X] borrow book
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+Not done? Let me put it back for you:
+[T][ ] borrow book
+-------------------------------------------
+-------------------------------------------
+Here's your list, Good Sir:
+1. [T][ ] buy bread
+2. [T][ ] borrow book
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+I don't think we have that task!
+Use 'list' to check
+-------------------------------------------
+-------------------------------------------
+Here's your list, Good Sir:
+1. [T][ ] buy bread
+2. [T][ ] borrow book
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+I don't think we have that task!
+Use 'list' to check
+-------------------------------------------
+-------------------------------------------
+Here's your list, Good Sir:
+1. [T][ ] buy bread
+2. [T][ ] borrow book
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+Give me the task number in numbers please!
+-------------------------------------------
+-------------------------------------------
+Here's your list, Good Sir:
+1. [T][ ] buy bread
+2. [T][ ] borrow book
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+These are the tasks labeled book:
 
+[T][ ] borrow book
+[D][ ] return book (by: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+I removed this task for you:
+[D][ ] return book (by: 1 JANUARY 2022)
+Now you have 3 items in your list
+-------------------------------------------
+-------------------------------------------
+Here's your list, Good Sir:
+1. [T][ ] buy bread
+2. [T][ ] borrow book
+3. [E][ ] project meeting (at: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+I don't think we have that task!
+Use 'list' to check
+-------------------------------------------
+-------------------------------------------
+Give me the task number in numbers please!
+-------------------------------------------
+-------------------------------------------
+OOPS!!! You didn't give me a proper 'todo' typed task to include!
+-------------------------------------------
+-------------------------------------------
+OOPS!!! You didn't give me a proper 'deadline' typed task to include!
+-------------------------------------------
+-------------------------------------------
+OOPS!!! You didn't give me a proper 'event' typed task to include!
+-------------------------------------------
+-------------------------------------------
+These are the tasks labeled book:
+
+[T][ ] borrow book
+-------------------------------------------
+-------------------------------------------
+These are the tasks labeled meeting:
+
+[E][ ] project meeting (at: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+OOPS!!! You didn't give me a proper 'find' typed task to include!
+-------------------------------------------
+-------------------------------------------
+These are the tasks labeled nothing:
+
+-------------------------------------------

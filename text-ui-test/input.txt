@@ -1,0 +1,33 @@
+todo buy bread
+list
+todo borrow book
+deadline return book /by 2022-01-01
+deadline return book /by now
+deadline return book /by 2022
+deadline return book /by 2022-01
+event project meeting /at 2022-01-01
+event project meeting /at 2022
+event project meeting /at 2022-01
+event project meeting /at now
+mark 2
+list
+unmark 2
+list
+mark 5
+list
+unmark 5
+list
+mark one
+list
+find book
+delete 3
+list
+delete 10
+delete one
+todo
+deadline
+event
+find book
+find meeting
+find
+find nothing
