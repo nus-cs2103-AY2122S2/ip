@@ -99,7 +99,7 @@ public class StorageTaskList implements TaskList {
     /**
      * Replaces the task with a given identifier from the given storage with a new task.
      *
-     * @param id           the identifier of the task to replace in the given storage.
+     * @param id the identifier of the task to replace in the given storage.
      * @param taskToUpdate the task that will replace the current task with a given identifier in the given storage.
      * @throws TaskListException If the replacement of an existing task with a new one in
      * the given storage fails.
