@@ -69,6 +69,34 @@ public class Storage {
     }
 
     /**
+     * Loads Instructions stored in Text file to the program.
+     *
+     * @param command Which type of task.
+     * @param taskName Name of the task stored in text file.
+     * @param isMarkedBool Boolean whether the task is marked or not.
+     */
+    public void loadInstruction(String command, String taskName, boolean isMarkedBool) {
+        if ("T".equals(command)) {
+            ToDo task = new ToDo(taskName, isMarkedBool, "T");
+            taskList.add(task);
+        } else if ("D".equals(command)) {
+            String[] detailsArr = taskName.split(" \\(by: ");
+            String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
+            String detailsFormat = parser.dateFormatHelper(detail);
+            Deadline task = new Deadline(detailsArr[0], isMarkedBool, "D", detailsFormat);
+            taskList.add(task);
+        } else if ("E".equals(command)) {
+            String[] detailsArr = taskName.split(" \\(at: ");
+            String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
+            String detailsFormat = parser.dateFormatHelper(detail);
+            Event task = new Event(detailsArr[0], isMarkedBool, "E", detailsFormat);
+            taskList.add(task);
+        } else {
+            System.out.println("Should not be in the else block for load function");
+        }
+    }
+
+    /**
      * Method to load previously saved file in the local device onto the program.
      *
      * @param fileName File "duke.txt" from the local device
@@ -85,26 +113,7 @@ public class Storage {
                 String taskName = command.substring(10);
                 String isMarked = commandArr[1].substring(1, 2);
                 boolean isMarkedBool = isMarked.equals("X");
-
-                if ("T".equals(firstWord)) {
-                    ToDo task = new ToDo(taskName, isMarkedBool, "T");
-                    taskList.add(task);
-                } else if ("D".equals(firstWord)) {
-                    String[] detailsArr = taskName.split(" \\(by: ");
-                    String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
-                    String detailsFormat = parser.dateFormatHelper(detail);
-                    Deadline task = new Deadline(detailsArr[0], isMarkedBool, "D", detailsFormat);
-                    taskList.add(task);
-                } else if ("E".equals(firstWord)) {
-                    String[] detailsArr = taskName.split(" \\(at: ");
-                    String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
-                    String detailsFormat = parser.dateFormatHelper(detail);
-                    Event task = new Event(detailsArr[0], isMarkedBool, "E", detailsFormat);
-                    taskList.add(task);
-                } else {
-                    System.out.println("Should not be in the else block for load function");
-
-                }
+                loadInstruction(firstWord, taskName, isMarkedBool);
             }
         } catch (ArrayIndexOutOfBoundsException | IOException e) {
             e.printStackTrace();

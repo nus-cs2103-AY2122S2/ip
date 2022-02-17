@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.exceptions.MissingKeywordException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -161,6 +162,9 @@ public class TaskList {
             System.out.println("You now have " + tasks.size() + " tasks in your list");
             reply = "Added to your tasks: \n\t" + task.toString()
                     + "\nYou now have " + tasks.size() + " tasks in your list";
+        } catch (MissingKeywordException e) {
+            System.out.println("'/by' is not present in the 'deadline' command.");
+            reply = "'/by' is not present in the 'deadline' command.";
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
             reply = "An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.";
@@ -186,6 +190,9 @@ public class TaskList {
             System.out.println("You now have " + tasks.size() + " tasks in your list");
             reply = "Added to your tasks: \n\t" + task.toString()
                     + "\nYou now have " + tasks.size() + " tasks in your list";
+        } catch (MissingKeywordException e) {
+            System.out.println("'/at' is not present in the 'event' command.");
+            reply = "'/at' is not present in the 'event' command.";
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.");
             reply = "An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.";
@@ -255,19 +262,19 @@ public class TaskList {
      */
     public String help() {
         String reply = "Looks like you need some help! Here is a list of commands that you can use!\n"
-                + "\n==> These are the utility commands that you can use!\n"
-                + "- 'save' : Use this to save all tasks that have been added to Duke into a local file.\n"
-                + "- 'bye'  : Use this to exit Duke. All tasks added will be saved upon this command as well.\n"
-                + "- 'list' : Use this to list out all the tasks added into Duke.\n"
-                + "- 'find *keyword*' : Use this to find all tasks with the *keyword*\n"
-                + "\n==> Next are the commands to use when you want to add a task!\n"
-                + "- 'todo *todo name*'  : Use this to add a todo task into Duke.\n"
-                + "- 'event *event name* /at *YYYY-MM-DD HH:MM*'       : Use this to add an event task into Duke.\n"
-                + "- 'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : Use this to add a deadline task into Duke.\n"
-                + "\n==> Lastly, these are the commands to edit a task on Duke.\n"
-                + "- 'mark *task#*' : Use this to mark a task as completed.\n"
-                + "- 'unmark *task#*' : Use this to un-mark a task as incomplete.\n"
-                + "- 'delete *task#*' : Use this to delete a task from Duke.";
+                + "\n==> Utility commands that you can use!\n"
+                + "- 'save' : Save all tasks that have been added to Duke into a local file.\n"
+                + "- 'bye'  : Exit Duke. All tasks added will be saved upon this command as well.\n"
+                + "- 'list' : List out all the tasks added into Duke.\n"
+                + "- 'find *keyword*' : Find all tasks with the *keyword*\n"
+                + "\n==> Commands to add a task!\n"
+                + "- 'todo *todo name*'  : Add a todo task into Duke.\n"
+                + "- 'event *event name* /at *YYYY-MM-DD HH:MM*'       : Add an event task into Duke.\n"
+                + "- 'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : Add a deadline task into Duke.\n"
+                + "\n==> Commands to edit a task on Duke.\n"
+                + "- 'mark *task#*' : Mark a task as completed.\n"
+                + "- 'unmark *task#*' : Un-mark a task as incomplete.\n"
+                + "- 'delete *task#*' : Delete a task from Duke.";
         System.out.println(reply);
         return reply;
     }

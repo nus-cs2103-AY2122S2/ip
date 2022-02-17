@@ -58,22 +58,4 @@ public class Duke {
         String reply = ui.run(input);
         return FROM_DUKE + reply + BREAK_LINE;
     }
-
-    /*
-    /**
-     * Method to run Duke.
-     * /
-    public static void run() {
-    System.out.println(logo + start);
-    TaskList taskList = new TaskList();
-     Storage storage = new Storage(taskList);
-     Ui ui = new Ui(taskList, storage);
-     ui.run();
-    }
-*/
-
-    //public static void main(String[] args) {
-    //     run();
-    //}
 }
-
