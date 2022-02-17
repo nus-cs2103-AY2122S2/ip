@@ -1,23 +1,18 @@
 package duke.gui;
-
 import duke.Duke;
 import duke.Exceptions.EmptyMessageException;
 import duke.Exceptions.WrongDateFormatException;
-import duke.Main;
 import duke.UiPrinter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -35,27 +30,18 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private UiPrinter myUiPrinter = new UiPrinter();
 
-    private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/user_cat.png")));
-    private Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/duke_cat.png")));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_cat.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke_cat.png"));
 
-    /**
-     * Creates a new main window.
-     *
-     * @param stage the stage of the application
-     */
-    public MainWindow(Stage stage) {
+    public MainWindow() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
-            AnchorPane ap = fxmlLoader.load();
-            // fxmlLoader.setRoot(this);
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            stage.setTitle("Jarvis");
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(myUiPrinter.printGreeting(), dukeImage)
             );
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

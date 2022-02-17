@@ -1,7 +1,7 @@
 package duke;
-
 import java.io.IOException;
 
+import duke.gui.DialogBox;
 import duke.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,22 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        MainWindow mainWindow = new MainWindow(stage);
+        MainWindow mainWindow = new MainWindow();
+        Scene scene = new Scene(mainWindow);
         mainWindow.setDuke(duke);
+        stage.setScene(scene);
+        stage.setTitle("Jarvis");
+        stage.setResizable(false);
+        stage.show();
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+//            AnchorPane ap = fxmlLoader.load();
+//            Scene scene = new Scene(ap);
+//            stage.setScene(scene);
+//            fxmlLoader.<MainWindow>getController().setDuke(duke);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }
