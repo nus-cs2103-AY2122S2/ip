@@ -34,7 +34,7 @@ public class Storage {
             File file = new File(filePath);
             return new Scanner(file);
         } catch (IOException e) {
-            File fileDir = new File("src/main/java/duke/data");
+            File fileDir = new File("src/main/data");
             fileDir.mkdirs();
             File fileToCreate = new File(fileDir, "duke.txt");
             Scanner sc = null;

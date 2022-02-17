@@ -100,7 +100,6 @@ public class TaskList {
         } else {
             str.append(ui.showError("\tTask is invalid matey :-(, please try again!\n"));
         }
-        
         return str.toString();
     }
 

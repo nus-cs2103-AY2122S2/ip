@@ -25,7 +25,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("src/main/java/Duke/data/duke.txt");
+        storage = new Storage("src/main/data/duke.txt");
         try { // Load existing task-list
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

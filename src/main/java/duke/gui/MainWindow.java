@@ -1,5 +1,7 @@
 package duke.gui;
 
+import java.util.Objects;
+
 import duke.Duke;
 import duke.exception.DukeException;
 import duke.util.Ui;
@@ -13,12 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.Objects;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final Ui ui = new Ui();
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -30,18 +31,15 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private Stage stage;
-    private static final Ui ui = new Ui();
 
-    private final Image USER_IMAGE = new Image(
+    private final Image userImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/elizabeth_swan.png")));
-    private final Image DUKE_IMAGE = new Image(
+    private final Image dukeImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow.png")));
-    private final Image WELCOME_GIF = new Image(
+    private final Image welcomeGif = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_welcome.gif")));
-    private final Image EXIT_GIF = new Image(
+    private final Image exitGif = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_adios.gif")));
-    private final Image ERROR_PHOTO = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/jack_sparrow_disgusted.jpg")));
 
     @FXML
     public void initialize() {
@@ -53,12 +51,12 @@ public class MainWindow extends AnchorPane {
         this.stage = stage;
 
         // Send welcome message
-        ImageView iv = new ImageView(WELCOME_GIF);
+        ImageView iv = new ImageView(welcomeGif);
         iv.setFitHeight(229);
         iv.setFitWidth(576);
         iv.setCache(true);
         dialogContainer.getChildren().add(iv);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.showWelcome(), DUKE_IMAGE));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.showWelcome(), dukeImage));
     }
 
     /**
@@ -80,13 +78,13 @@ public class MainWindow extends AnchorPane {
                 return;
             }
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog("Adventurer said: " + input, USER_IMAGE),
-                    DialogBox.getDukeDialog(response, DUKE_IMAGE)
+                    DialogBox.getUserDialog("Adventurer said: " + input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
             );
         } catch (DukeException e) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog("Adventurer reply: " + input, USER_IMAGE),
-                    DialogBox.getDukeDialogCustom(e.getMessage(), DUKE_IMAGE, "error")
+                    DialogBox.getUserDialog("Adventurer reply: " + input, userImage),
+                    DialogBox.getDukeDialogCustom(e.getMessage(), dukeImage, "error")
             );
         }
 
@@ -101,11 +99,11 @@ public class MainWindow extends AnchorPane {
     private void handleExit(String input) {
         String response = ui.showExitMessage();
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog("Adventurer said: " + input, USER_IMAGE),
-                DialogBox.getDukeDialog(response, DUKE_IMAGE)
+                DialogBox.getUserDialog("Adventurer said: " + input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
         );
         // Show exit gif
-        ImageView iv = new ImageView(EXIT_GIF);
+        ImageView iv = new ImageView(exitGif);
         iv.setFitHeight(208);
         iv.setFitWidth(500);
         dialogContainer.getChildren().add(iv);

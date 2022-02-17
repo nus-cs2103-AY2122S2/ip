@@ -1,3 +1,0 @@
-T | 0 | Add new tasks into this list! :)
-D | 0 | return book | 2022-04-19 | 2359hrs
-E | 0 | project meeting | 2022-12-31 | 12-6pm
