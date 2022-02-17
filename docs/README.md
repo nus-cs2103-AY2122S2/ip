@@ -17,7 +17,12 @@ Users are able to mark tasks as complete when done. Otherwise, the task remain u
 ### Finding Tasks
 Users are able to search for tasks.
 
+
+
+---
+
 ## Usage
+
 ### `list` - View all tasks
 
 Generates a list of current tasks the user has saved.
@@ -67,7 +72,6 @@ Example of usage:
 Expected outcome:
 
 Duke saves the Deadline task and lets the user know that the task has been read and stored.
-
 
 ```
 Got it. I've added this:
@@ -147,24 +151,6 @@ Duke unmarks a task with index 1 with an ' ' from task list saved in `data` fold
 ```
 OK, I've marked this task as not done yet:
 [T][ ] groceries
-```
-
-
-### `find` - Searches task list
-
-Duke finds all task with names containing the search key given by the user.
-
-Example usage:
-
-`find grocer`
-
-Expected outcome:
-
-Duke shows user a list of tasks with names that contain keyword `meeting`.
-
-```
-Here are the matching tasks in your list:
-1. [T][ ] groceries
 ```
 
 
