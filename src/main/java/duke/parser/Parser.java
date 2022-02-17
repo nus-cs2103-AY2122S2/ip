@@ -109,8 +109,7 @@ public class Parser {
             if (isDuplicate) {
                 return "Hmm, you seem to have added this task before.";
             } else {
-                taskList.add(task);
-                return "Got it, I have added " + task.getUserInput() + " to the list!\n";
+                return taskList.add(task);
             }
         } catch (DukeException e) {
             return e.getMessage();

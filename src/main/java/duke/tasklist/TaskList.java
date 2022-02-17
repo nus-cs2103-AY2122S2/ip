@@ -28,10 +28,14 @@ public class TaskList {
      *
      * @param task Task to be added to the list.
      */
-    public void add(Task task) {
+    public String add(Task task) {
         assert task != null : "Task to be added cannot be null.";
-
         list.add(task);
+
+        return "Got it, I have added " + task.getUserInput() + " to the list!\n\n"
+                + "Now you have "
+                + list.size()
+                + " tasks in the list.";
     }
 
     /**
