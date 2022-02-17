@@ -1,5 +1,6 @@
 package jeff.command;
 
+import jeff.note.Note;
 import jeff.storage.Storage;
 import jeff.task.TaskList;
 import jeff.ui.Ui;
@@ -14,12 +15,13 @@ public class ByeCommand extends Command {
      * Say "bye" to the user.
      *
      * @param tasks TaskList containing all the tasks.
+     * @param notes Contains all the notes.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
      * @return goodbye response.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Note notes, Ui ui, Storage storage) {
         String response = ui.showBye();
         return response;
     }

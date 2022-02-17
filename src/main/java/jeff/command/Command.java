@@ -1,6 +1,7 @@
 package jeff.command;
 
 import jeff.main.JeffException;
+import jeff.note.Note;
 import jeff.storage.Storage;
 import jeff.task.TaskList;
 import jeff.ui.Ui;
@@ -10,7 +11,7 @@ import jeff.ui.Ui;
  */
 public abstract class Command {
 
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws JeffException;
+    public abstract String execute(TaskList tasks, Note notes, Ui ui, Storage storage) throws JeffException;
 
     public abstract boolean isExit();
 }

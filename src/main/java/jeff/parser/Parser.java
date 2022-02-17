@@ -1,6 +1,8 @@
 package jeff.parser;
 
+import jeff.command.AddNoteCommand;
 import jeff.command.ByeCommand;
+import jeff.command.ClearNoteCommand;
 import jeff.command.Command;
 import jeff.command.DeadlineCommand;
 import jeff.command.DeleteCommand;
@@ -8,6 +10,7 @@ import jeff.command.EventCommand;
 import jeff.command.FindCommand;
 import jeff.command.HelpCommand;
 import jeff.command.ListCommand;
+import jeff.command.ListNoteCommand;
 import jeff.command.MarkCommand;
 import jeff.command.TodoCommand;
 import jeff.command.UnmarkCommand;
@@ -78,6 +81,18 @@ public class Parser {
             checkValidFirstEntry(len, " ☹ OOPS!!! Please tell me the keyword"
                     + " so that I know what you are looking for.");
             return new FindCommand(body);
+        case ("note"):
+            checkValidFirstEntry(len, " ☹ OOPS!!! Please tell me what you want"
+                    + " to be added into the notes.");
+            switch(body) {
+            case ("clear"):
+                return new ClearNoteCommand();
+            case ("list"):
+                return new ListNoteCommand();
+            default:
+                break;
+            }
+            return new AddNoteCommand(body);
         default:
             return new HelpCommand();
         }

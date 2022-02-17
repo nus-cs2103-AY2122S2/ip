@@ -1,6 +1,7 @@
 package jeff.command;
 
 import jeff.main.JeffException;
+import jeff.note.Note;
 import jeff.storage.Storage;
 import jeff.task.TaskList;
 import jeff.ui.Ui;
@@ -26,6 +27,7 @@ public class UnmarkCommand extends Command {
      * Marks the Task as not done according to index given by the user if available.
      *
      * @param tasks TaskList containing all the tasks.
+     * @param notes Contains all the notes.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
      * @return confirmation response that a task has been unmarked.
@@ -33,7 +35,7 @@ public class UnmarkCommand extends Command {
      *                       is out of bounds or file cannot be saved.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
+    public String execute(TaskList tasks, Note notes, Ui ui, Storage storage) throws JeffException {
         try {
             tasks.getAt(index);
         } catch (IndexOutOfBoundsException e) {

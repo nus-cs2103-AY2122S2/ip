@@ -1,5 +1,6 @@
 package jeff.command;
 
+import jeff.note.Note;
 import jeff.storage.Storage;
 import jeff.task.TaskList;
 import jeff.ui.Ui;
@@ -14,12 +15,13 @@ public class ListCommand extends Command {
      * Passes the string to print to ui class to print out every entry of the list if any.
      *
      * @param tasks TaskList containing all the tasks.
+     * @param notes Contains all the notes.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
      * @return list of all tasks.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Note notes, Ui ui, Storage storage) {
         String response;
         if (tasks.isEmpty()) {
             response = ui.showEmptyList();
