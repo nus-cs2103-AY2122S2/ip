@@ -24,6 +24,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<DukeMainWindow>getController().setDuke(duke);
+            stage.setTitle("Duke Todo List Chatbot");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -38,96 +38,102 @@ public class TaskList {
 
     /**
      * @param curr Task object to be added
+     * @return feedback footer of new task added
      */
-    public void processNewTask(Task curr) {
+    public String processNewTask(Task curr) {
         tasks.add(curr);
-        ResponseFormatter.printFeedbackFooter("Got it. I've added this task:", curr, tasks);
+        return ResponseFormatter.printFeedbackFooter("Got it. I've added this task:", curr, tasks);
     }
 
-    public void handleBye() {
-        ResponseFormatter.printBye();
+    public String handleBye() {
+        return ResponseFormatter.printBye();
     }
 
-    public void handleList() {
-        ResponseFormatter.printList(tasks);
+    public String handleList() {
+        return ResponseFormatter.printList(tasks);
     }
 
     /**
      * @param inputArray String[] containing the original user input but split by words
+     * @return response
      */
-    public void handleMark(String[] inputArray) {
+    public String handleMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         Task curr = tasks.get(number - 1);
 
         curr.setDone();
-        ResponseFormatter.printFeedbackFooter("Nice! I've marked this task as done:", curr, tasks);
+        return ResponseFormatter.printFeedbackFooter("Nice! I've marked this task as done:", curr, tasks);
     }
 
     /**
      * @param inputArray String[] containing the original user input but split by words
+     * @return response
      */
-    public void handleUnMark(String[] inputArray) {
+    public String handleUnMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         Task curr = tasks.get(number - 1);
 
         curr.setUndone();
-        ResponseFormatter.printFeedbackFooter("OK, I've marked this task as not done yet:", curr, tasks);
+        return ResponseFormatter.printFeedbackFooter("OK, I've marked this task as not done yet:", curr, tasks);
     }
 
     /**
      * @param inputArray    String[] containing the original user input but split by words
      * @param originalInput Original user input captured as a String
+     * @return response
      */
-    public void handleTodo(String[] inputArray, String originalInput) {
+    public String handleTodo(String[] inputArray, String originalInput) {
         try {
             if (inputArray.length <= 1) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
         } catch (DukeException e) {
-            ResponseFormatter.printDukeException(e, "Please try again:");
-            return;
+            return ResponseFormatter.printDukeException(e, "Please try again:");
         }
 
         Task curr = new Todo(originalInput.substring(4));
-        processNewTask(curr);
+        return processNewTask(curr);
     }
 
     /**
      * @param originalInput Original user input captured as a String
+     * @return response
      */
-    public void handleDeadline(String originalInput) {
+    public String handleDeadline(String originalInput) {
         String metaInfo = originalInput.split("/by")[1];
         String strippedCommand = originalInput.substring(8);
         Task curr = null;
         try {
             curr = new Deadline(" " + strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
-            ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!\nPlease try again:");
-            return;
+            return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
+                    + "\nPlease try again:");
         }
-        processNewTask(curr);
+        return processNewTask(curr);
     }
 
     /**
      * @param originalInput Original user input captured as a String
+     * @return response
      */
-    public void handleEvent(String originalInput) {
+    public String handleEvent(String originalInput) {
         String metaInfo = originalInput.split("/at")[1];
         String strippedCommand = originalInput.substring(5);
         Task curr = null;
         try {
             curr = new Event(" " + strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
-            ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!\nPlease try again:");
-            return;
+            return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
+                    + "\nPlease try again:");
         }
-        processNewTask(curr);
+        return processNewTask(curr);
     }
 
     /**
      * @param inputArray String[] containing the original user input but split by words
+     * @return response
      */
-    public void handleDelete(String[] inputArray) {
+    public String handleDelete(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
 
         try {
@@ -135,20 +141,20 @@ public class TaskList {
                 throw new DukeException("Hey! That item does not exist!");
             }
         } catch (DukeException e) {
-            ResponseFormatter.printDukeException(e, "Please try again");
-            return;
+            return ResponseFormatter.printDukeException(e, "Please try again");
         }
 
         Task curr = tasks.get(number - 1);
         tasks.remove(curr);
 
-        ResponseFormatter.printFeedbackFooter("Noted. I've removed this task:", curr, tasks);
+        return ResponseFormatter.printFeedbackFooter("Noted. I've removed this task:", curr, tasks);
     }
 
     /**
      * @param inputArray String[] containing the original user input but split by words
+     * @return search results
      */
-    public void handleFind(String[] inputArray) {
+    public String handleFind(String[] inputArray) {
         String key = inputArray[1];
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : this.tasks) {
@@ -159,9 +165,9 @@ public class TaskList {
         }
 
         if (foundTasks.isEmpty()) {
-            ResponseFormatter.printMessage("No tasks found matching \"" + key + "\" :-(");
+            return ResponseFormatter.printMessage("No tasks found matching \"" + key + "\" :-(");
         } else {
-            ResponseFormatter.printFoundList(foundTasks, key);
+            return ResponseFormatter.printFoundList(foundTasks, key);
         }
     }
 }

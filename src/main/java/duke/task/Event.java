@@ -41,8 +41,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + "(by:" + DateTimeCustomFormatter.getStringFromDate(this.metaInfo) + ")";
-
+        return super.toString() + "(at:" + DateTimeCustomFormatter.getStringFromDate(this.metaInfo) + ")";
     }
 
     /**
