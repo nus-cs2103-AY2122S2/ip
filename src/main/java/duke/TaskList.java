@@ -261,20 +261,30 @@ public class TaskList {
      * @return Help string to be used for Duke DialogBox.
      */
     public String help() {
-        String reply = "Looks like you need some help! Here is a list of commands that you can use!\n"
+        String reply = "Looks like you need some help! \nHere is a list of commands that you can use!\n"
                 + "\n==> Utility commands that you can use!\n"
-                + "- 'save' : Save all tasks that have been added to Duke into a local file.\n"
-                + "- 'bye'  : Exit Duke. All tasks added will be saved upon this command as well.\n"
-                + "- 'list' : List out all the tasks added into Duke.\n"
-                + "- 'find *keyword*' : Find all tasks with the *keyword*\n"
+                + "- 'save' : "
+                + "\n     = Save all tasks in Duke into a local file.\n"
+                + "- 'bye' : "
+                + "\n     = Exit Duke. All will be saved upon this command.\n"
+                + "- 'list' : "
+                + "\n     = List out all the tasks added into Duke.\n"
+                + "- 'find *keyword*' : "
+                + "\n     = Find all tasks with the *keyword*\n"
                 + "\n==> Commands to add a task!\n"
-                + "- 'todo *todo name*'  : Add a todo task into Duke.\n"
-                + "- 'event *event name* /at *YYYY-MM-DD HH:MM*'       : Add an event task into Duke.\n"
-                + "- 'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : Add a deadline task into Duke.\n"
+                + "- 'todo *todo name*' : "
+                + "\n     = Add a todo task into Duke.\n"
+                + "- 'event *event name* /at *YYYY-MM-DD HH:MM*' : "
+                + "\n     = Add an event task into Duke.\n"
+                + "- 'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : "
+                + "\n     = Add a deadline task into Duke.\n"
                 + "\n==> Commands to edit a task on Duke.\n"
-                + "- 'mark *task#*' : Mark a task as completed.\n"
-                + "- 'unmark *task#*' : Un-mark a task as incomplete.\n"
-                + "- 'delete *task#*' : Delete a task from Duke.";
+                + "- 'mark *task#*' : "
+                + "\n     = Mark a task as completed.\n"
+                + "- 'unmark *task#*' : "
+                + "\n     = Un-mark a task as incomplete.\n"
+                + "- 'delete *task#*' : "
+                + "\n     = Delete a task from Duke.";
         System.out.println(reply);
         return reply;
     }
