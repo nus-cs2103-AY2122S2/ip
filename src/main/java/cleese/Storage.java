@@ -1,17 +1,18 @@
 package cleese;
 
-import task.Task;
-import task.Todo;
-import task.Event;
-import task.Deadline;
-import task.TaskList;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 
 /**
  * Handles reading and writing to a specified file during program startup and termination.
@@ -61,6 +62,8 @@ public class Storage {
                 newTask = new Event(taskInfo[2], LocalDateTime.parse(taskInfo[3],
                                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
                 break;
+            default:
+                System.out.println("Invalid Task Prefix");
             }
 
             // if character is "X" mark the task as done

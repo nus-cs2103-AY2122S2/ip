@@ -1,16 +1,16 @@
 package cleese;
 
-import task.Task;
-import task.Todo;
-import task.Event;
-import task.Deadline;
-import task.TaskList;
-import exceptions.InvalidInputException;
-import exceptions.NoDescException;
-import ui.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import exceptions.InvalidInputException;
+import exceptions.NoDescException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+import ui.Ui;
 
 public class Parser {
     /**
@@ -48,8 +48,8 @@ public class Parser {
             return ui.listResponse(taskList);
         case "mark":
         case "unmark":
-            int selectedTaskNum =  Integer.parseInt(parameters);
-            Task selectedTask = taskList.get(selectedTaskNum-1);
+            int selectedTaskNum = Integer.parseInt(parameters);
+            Task selectedTask = taskList.get(selectedTaskNum - 1);
             String response = "";
 
             if (command.equals("mark")) {
@@ -82,7 +82,7 @@ public class Parser {
                 newTask = new Todo(description);
             } else {
                 String descriptionAndSetAt = parameters;
-                String[] split = descriptionAndSetAt.split("/",2);
+                String[] split = descriptionAndSetAt.split("/", 2);
                 String localDateTimeString = split[1].split(" ", 2)[1];
                 LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeString, dateTimeFormatter);
 

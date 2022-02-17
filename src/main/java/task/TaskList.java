@@ -41,7 +41,7 @@ public class TaskList {
         String foundTasks = "";
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).toString().contains(keyword)) {
-                foundTasks += String.format("%d. %s \n", i+1, taskList.get(i).toString());
+                foundTasks += String.format("%d. %s \n", i + 1, taskList.get(i).toString());
             }
         }
         return foundTasks;
@@ -51,7 +51,7 @@ public class TaskList {
     public String toString() {
         String taskListToString = "";
         for (int i = 0; i < taskList.size(); i++) {
-            taskListToString += String.format("%d. %s \n", i+1, taskList.get(i).toString());
+            taskListToString += String.format("%d. %s \n", i + 1, taskList.get(i).toString());
         }
         return taskListToString;
     }

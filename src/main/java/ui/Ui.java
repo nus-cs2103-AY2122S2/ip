@@ -23,13 +23,13 @@ public class Ui {
     /** Returns acknowledgment message as well as task that user has marked as done */
     public String markedMessageResponse(Task task) {
         assert task != null : "task was not passed into function";
-        return String.format("Ok, I've marked this task as done:\n%s",task.toString());
+        return String.format("Ok, I've marked this task as done:\n%s", task.toString());
     }
 
     /** Returns acknowledgment message as well as task that user has marked as undone */
     public String unmarkedMessageResponse(Task task) {
         assert task != null : "task was not passed into function";
-        return String.format("Ok, I've marked this task as not done yet:\n%s",task.toString());
+        return String.format("Ok, I've marked this task as not done yet:\n%s", task.toString());
     }
 
     /** Returns acknowledgment message as well as task that user has added to the TasksList */
@@ -37,7 +37,7 @@ public class Ui {
         assert task != null : "task was not passed into function";
         assert taskList != null : "taskList was not passed into function";
         return String.format("Got it. I've added this task:\n%s\n"
-                                + "Now you have %d tasks in the list",task.toString(),taskList.size());
+                                + "Now you have %d tasks in the list", task.toString(), taskList.size());
     }
 
     /** Returns acknowledgment message as well as task that user has removed from the TasksList */
@@ -45,7 +45,7 @@ public class Ui {
         assert task != null : "task was not passed into function";
         assert taskList != null : "taskList was not passed into function";
         return String.format("Noted. I've removed this task:\n%s\n"
-                                + "Now you have %d tasks in the list",task.toString(),taskList.size());
+                                + "Now you have %d tasks in the list", task.toString(), taskList.size());
     }
 
     /** Returns the acknowledgment message that is shown to the user before the results of find() */

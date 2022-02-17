@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String welcomeMessage = String.format("Good day Sir, this is Cleese, your virtual butler!\n"
                                                 + "And just how may I help you today?");
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage,dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
     public void setDuke(Cleese d) {
