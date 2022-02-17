@@ -134,18 +134,18 @@ public class TaskList {
      */
     public String find(String keyword) {
         String resultStr = "";
-        boolean keywordFound = false;
+        boolean isFound = false;
         int i = 1;
         String lowerCasedKeyword = keyword.toLowerCase();
 
         for (Task t : this.tasks) {
             if (t.description.toLowerCase().contains(lowerCasedKeyword)) {
-                keywordFound = true;
+                isFound = true;
                 resultStr += i++ + ". " + t + "\n      ";
             }
         }
 
-        if (keywordFound) {
+        if (isFound) {
             resultStr = "Here are the matching tasks in your list:\n      " + resultStr;
         } else {
             resultStr = "No matching results found in the list.";
