@@ -1,7 +1,166 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Oh no... I couldn't find the Duke.task list in your hard disk...
+Don't worry! I will create one for you now :)
 
+  *    ,---.    ,-----.  ,--.  ,--.   ,---.      *
+      '   .-'  '  .-.  ' |  ,'.|  |  /  O  \    *
+ *    `.  `-.  |  | |  | |  |' '  | |  .-.  |
+    * .-'    | '  '-'  ' |  | `   | |  | |  |      *
+*     `-----'   `-----'  `--'  `--' `--' `--'   *
+
+Hi! You can call me Sona ^^~
+How can I help you?
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+blah? Sorry, I don't understand what that means.. :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oops... your list is empty! :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oh no..did you forget to put what you need to do? :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+todoread? Sorry, I don't understand what that means.. :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Wokay! I've added this Duke.task:
+[T][ ] read
+Now you have 1 Duke.task(s) in the list
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oh no..did you forget to put what you need to do? :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+When is the event happening? Add '/' and the date after the event to make me record ;)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+When is the event happening? Add '/' and the date after the event to make me record ;)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oops! You forgot to add the event date after '/'.. try again? :)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oh no... the format or the date/time you entered is wrong! The correct format should be YYYY-MM-DD HHMM
+It is not necessary to put in time!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oh no... the format or the date/time you entered is wrong! The correct format should be YYYY-MM-DD HHMM
+It is not necessary to put in time!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Since you did not enter what time is this event happening, I will help you set it at 00:00!
+[E][ ] play (at: Jan 28 2022 00:00)
+Now you have 2 Duke.task(s) in the list
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oh no... the format or the date/time you entered is wrong! The correct format should be YYYY-MM-DD HHMM
+It is not necessary to put in time!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oh no... the format or the date/time you entered is wrong! The correct format should be YYYY-MM-DD HHMM
+It is not necessary to put in time!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Wokay! I've added this Duke.task:
+[E][ ] party  (at: Jan 28 2022 14:00)
+Now you have 3 Duke.task(s) in the list
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oh no..did you forget to put what you need to do? :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+deadlinehomework? Sorry, I don't understand what that means.. :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+When is the deadline? Add '/' and the date after your Duke.task to make me record ;)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Oh no... the format or the date/time you entered is wrong! The correct format should be YYYY-MM-DD HHMM
+It is not necessary to put in time!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Wokay! I've added this Duke.task:
+[D][ ] homework (by: Feb 3 2022 15:00)
+Now you have 4 Duke.task(s) in the list
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Here is your Duke.task list!
+1.[T][ ] read
+2.[E][ ] play (at: Jan 28 2022 00:00)
+3.[E][ ] party  (at: Jan 28 2022 14:00)
+4.[D][ ] homework (by: Feb 3 2022 15:00)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+These are the events/deadlines happening on 2022-01-28:
+1.[E][ ] play (at: Jan 28 2022 00:00)
+2.[E][ ] party  (at: Jan 28 2022 14:00)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+There is nothing happening on this day! Hooray~
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Which Duke.task do you want to mark? Add the number in the end to tell me~
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+mark2? Sorry, I don't understand what that means.. :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Yay! I've marked this Duke.task as done:
+[E][X] play (at: Jan 28 2022 00:00)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+There is no number 0 in your Duke.task list!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Yay! I've marked this Duke.task as done:
+[D][X] homework (by: Feb 3 2022 15:00)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+There is no number 5 in your Duke.task list!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+These are the events/deadlines happening on 2022-01-28:
+1.[E][X] play (at: Jan 28 2022 00:00)
+2.[E][ ] party  (at: Jan 28 2022 14:00)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+unmark2? Sorry, I don't understand what that means.. :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Aw man..I've marked this Duke.task as not done yet:
+[E][ ] play (at: Jan 28 2022 00:00)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+There is no number 0 in your Duke.task list!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Which Duke.task do you want to delete? Add the number in the end to tell me~
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+delete0? Sorry, I don't understand what that means.. :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Done! I've removed this Duke.task:
+[E][ ] party  (at: Jan 28 2022 14:00)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+There is no number 5 in your Duke.task list!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Enter your keyword behind 'find' to let me search for you! :)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+I couldn't find any Duke.task that matches your search! :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Wokay! I've added this Duke.task:
+[T][ ] play game
+Now you have 4 Duke.task(s) in the list
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Here are the tasks that match your search:
+1.[E][ ] play (at: Jan 28 2022 00:00)
+2.[T][ ] play game
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Bye-bye :')  Hope to see you soon!
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*

@@ -1,0 +1,42 @@
+blah
+list
+todo
+todoread
+todo read
+event
+event play
+event play Monday
+event play/
+event play/Monday
+event play/2022-13-28
+event play/2022-01-28
+event party /2022-01-28 14:00
+event party /2022-01-28 14:80
+event party /2022-01-28 1400
+deadline
+deadlinehomework
+deadline homework
+deadline homework/Tuesday
+deadline homework / 2022-02-03 1500
+list
+schedule 2022-01-28
+schedule 2022-01-29
+mark
+mark2
+mark 2
+mark 0
+mark 4
+mark 5
+schedule 2022-01-28
+unmark2
+unmark 2
+unmark 0
+delete
+delete0
+delete 3
+delete 5
+find
+find blah
+todo play game
+find play
+bye
