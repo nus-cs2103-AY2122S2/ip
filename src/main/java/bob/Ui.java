@@ -7,28 +7,28 @@ public class Ui {
     /**
      * Greets the user on program startup.
      */
-    public static void greet() {
-        Ui.printLine();
-        System.out.println("Hello! I'm Bob!\n" + "Loading saved entries...");
-        System.out.println("What can I do for you?");
-        Ui.printLine();
+    public static String greet() {
+        return Ui.printLine()
+                + "Hello! I'm Bob!\n" + "Loading saved entries...\n"
+                + "What can I do for you?\n"
+                + Ui.printLine();
     }
 
     /**
      * Prints UI message when program exits.
      */
-    public static void bye() {
-        Ui.printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        Ui.printLine();
+    public static String bye() {
+        return Ui.printLine()
+                + "Bye. Hope to see you again soon!\n"
+                + Ui.printLine();
     }
 
     /**
      * Prints UI message for the list command.
      */
-    public static void list() {
-        Ui.printLine();
-        System.out.println("Here are the tasks in your list:");
+    public static String list() {
+        return Ui.printLine()
+                + "Here are the tasks in your list:\n";
     }
 
     /**
@@ -36,10 +36,10 @@ public class Ui {
      *
      * @param task Task to be marked.
      */
-    public static void mark(Task task) {
-        Ui.printLine();
-        System.out.println("Nice! I've marked this task as done:\n    " + task);
-        Ui.printLine();
+    public static String mark(Task task) {
+        return Ui.printLine()
+                + "Nice! I've marked this task as done:\n    " + task + "\n"
+                + Ui.printLine();
     }
 
     /**
@@ -47,10 +47,10 @@ public class Ui {
      *
      * @param task Task to be unmarked.
      */
-    public static void unmark(Task task) {
-        Ui.printLine();
-        System.out.println("OK, I've marked this task as not done yet:\n    " + task);
-        Ui.printLine();
+    public static String unmark(Task task) {
+        return Ui.printLine()
+                + "OK, I've marked this task as not done yet:\n" + task + "\n"
+                + Ui.printLine();
     }
 
     /**
@@ -59,11 +59,11 @@ public class Ui {
      * @param tasksSize New size of TaskList.
      * @param task      Task to be removed.
      */
-    public static void delete(int tasksSize, Task task) {
-        Ui.printLine();
-        System.out.println("Noted. I've removed this task:\n    " + task);
-        System.out.println("Now you have " + tasksSize + " tasks in the list.");
-        Ui.printLine();
+    public static String delete(int tasksSize, Task task) {
+        return Ui.printLine()
+                + "Noted. I've removed this task:\n    " + task
+                + "\nNow you have " + tasksSize + " tasks in the list.\n"
+                + Ui.printLine();
     }
 
     /**
@@ -72,19 +72,19 @@ public class Ui {
      * @param task      Newly added Task.
      * @param tasksSize New size of TaskList.
      */
-    public static void newTask(Task task, int tasksSize) {
-        Ui.printLine();
-        System.out.println("Got it. I've added this task:\n    " + task);
-        System.out.println("Now you have " + tasksSize + " tasks in the list.");
-        Ui.printLine();
+    public static String newTask(Task task, int tasksSize) {
+        return Ui.printLine()
+                + "Got it. I've added this task:\n    " + task + "\n"
+                + "Now you have " + tasksSize + " tasks in the list.\n"
+                + Ui.printLine();
     }
 
     /**
      * Prints UI message for a search result.
      */
-    public static void find() {
-        Ui.printLine();
-        System.out.println("Here are the matching tasks in your list:");
+    public static String find() {
+        return Ui.printLine()
+                + "Here are the matching tasks in your list:\n";
     }
 
     /**
@@ -92,53 +92,53 @@ public class Ui {
      *
      * @param cmd Invalid command to be echoed.
      */
-    public static void invalidCommand(String cmd) {
-        Ui.printLine();
-        System.out.println("I don't understand: " + cmd);
-        System.out.println("Please repeat!:(");
-        Ui.printLine();
+    public static String invalidCommand(String cmd) {
+        return Ui.printLine()
+                + "I don't understand: " + cmd + "\n"
+                + "Please repeat!:(\n"
+                + Ui.printLine();
     }
 
     /**
      * Prints UI message when insufficient arguments are given.
      */
-    public static void insufficientArgs() {
-        Ui.printLine();
-        System.out.println("Insufficient arguments for this command! :(");
-        Ui.printLine();
+    public static String insufficientArgs() {
+        return Ui.printLine()
+                + "Insufficient arguments for this command! :(\n"
+                + Ui.printLine();
     }
 
     /**
      * Prints UI message when no such item exists in the TaskList.
      */
-    public static void noSuchItem() {
-        Ui.printLine();
-        System.out.println("There is no such item! :0");
-        Ui.printLine();
+    public static String noSuchItem() {
+        return Ui.printLine()
+                + "There is no such item! :0\n"
+                + Ui.printLine();
     }
 
     /**
      * Prints UI message when invalid integers are given.
      */
-    public static void invalidInt() {
-        Ui.printLine();
-        System.out.println("Please use a valid integer! 12345!");
-        Ui.printLine();
+    public static String invalidInt() {
+        return Ui.printLine()
+                + "Please use a valid integer! 12345!\n"
+                + Ui.printLine();
     }
 
     /**
      * Prints UI message when time is in invalid format.
      */
-    public static void invalidTimeFormat() {
-        Ui.printLine();
-        System.out.println("Please input the time in the correct format! yyyy-mm-ddThh:mm:ss");
-        Ui.printLine();
+    public static String invalidTimeFormat() {
+        return Ui.printLine()
+                + "Please input the time in the correct format! yyyy-mm-ddThh:mm:ss\n"
+                + Ui.printLine();
     }
 
     /**
      * Prints a line to format output.
      */
-    public static void printLine() {
-        System.out.println("----------------------------------------");
+    public static String printLine() {
+        return "----------------------------------------\n";
     }
 }

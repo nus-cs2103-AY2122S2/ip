@@ -30,9 +30,9 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public void add(Task task) {
+    public String add(Task task) {
         tasks.add(task);
-        Ui.newTask(task, tasks.size());
+        return Ui.newTask(task, tasks.size());
     }
 
     /**
@@ -48,13 +48,13 @@ public class TaskList {
     /**
      * Prints the Tasks in the TaskList.
      */
-    public void list() {
-        Ui.list();
+    public String list() {
+        String str = Ui.list();
         int count = 1;
         for (Task entry : tasks) {
-            System.out.println("    " + count++ + "." + entry);
+            str += "    " + count++ + "." + entry + "\n";
         }
-        Ui.printLine();
+        return str + Ui.printLine();
     }
 
     /**
@@ -63,25 +63,23 @@ public class TaskList {
      * @param cmd Command to indicate action.
      * @param idx Index of task to be acted upon.
      */
-    public void update(String cmd, int idx) {
+    public String update(String cmd, int idx) {
         switch (cmd) {
         case "mark":
             tasks.get(idx - 1).toggleDone();
-            Ui.mark(tasks.get(idx - 1));
-            break;
+            return Ui.mark(tasks.get(idx - 1));
 
         case "unmark":
             tasks.get(idx - 1).toggleNotDone();
-            Ui.unmark(tasks.get(idx - 1));
-            break;
+            return Ui.unmark(tasks.get(idx - 1));
 
         case "delete":
-            Ui.delete(tasks.size(), tasks.get(idx - 1));
+            String str = Ui.delete(tasks.size(), tasks.get(idx - 1));
             tasks.remove(idx - 1);
-            break;
+            return str;
 
         default:
-            System.out.println("Invalid command!");
+            return "Invalid command!";
         }
     }
 
@@ -99,14 +97,14 @@ public class TaskList {
      *
      * @param keyword String used to find matching Tasks.
      */
-    public void find(String keyword) {
-        Ui.find();
+    public String find(String keyword) {
+        String str = Ui.find();
         int count = 1;
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
-                System.out.println("    " + count++ + "." + task);
+                str += "    " + count++ + "." + task + "\n";
             }
         }
-        Ui.printLine();
+        return str + Ui.printLine();
     }
 }

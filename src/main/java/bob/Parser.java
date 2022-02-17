@@ -13,14 +13,15 @@ public class Parser {
      * @param tasks     Current task list.
      * @param storage   Storage instance associated with current Bob program.
      */
-    public static void parse(String userInput, TaskList tasks, Storage storage) {
+    public static String parse(String userInput, TaskList tasks, Storage storage) {
+        String response;
         try {
             String cmd = userInput.split(" ")[0].strip();
             boolean tasksIsDiff = false;
 
             switch (cmd) {
             case "list":
-                tasks.list();
+                response = tasks.list();
                 break;
 
             case "mark":
@@ -29,13 +30,13 @@ public class Parser {
                 //fallthrough
             case "delete":
                 int idx = Integer.parseInt(userInput.split(" ")[1]);
-                tasks.update(cmd, idx);
+                response = tasks.update(cmd, idx);
                 tasksIsDiff = true;
                 break;
 
             case "todo":
                 Task newTodo = new ToDo(userInput.split(" ", 2)[1]);
-                tasks.add(newTodo);
+                response = tasks.add(newTodo);
                 tasksIsDiff = true;
                 break;
 
@@ -45,7 +46,7 @@ public class Parser {
                 deadlineDesc = deadlineDesc.substring(deadlineDesc.indexOf(" ")).strip();
 
                 Task newDeadline = new Deadline(deadlineDesc, by);
-                tasks.add(newDeadline);
+                response = tasks.add(newDeadline);
                 tasksIsDiff = true;
                 break;
 
@@ -55,30 +56,32 @@ public class Parser {
                 eventDesc = eventDesc.substring(eventDesc.indexOf(" ")).strip();
 
                 Task newEvent = new Event(eventDesc, time);
-                tasks.add(newEvent);
+                response = tasks.add(newEvent);
                 tasksIsDiff = true;
                 break;
 
             case "find":
                 String keyword = userInput.split(" ", 2)[1];
-                tasks.find(keyword);
+                response = tasks.find(keyword);
                 break;
 
             default:
-                Ui.invalidCommand(cmd);
+                response = Ui.invalidCommand(cmd);
             }
 
             if (tasksIsDiff) {
                 storage.writeTaskListToFile(tasks);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            Ui.insufficientArgs();
+            response = Ui.insufficientArgs();
         } catch (IndexOutOfBoundsException e) {
-            Ui.noSuchItem();
+            response = Ui.noSuchItem();
         } catch (NumberFormatException e) {
-            Ui.invalidInt();
+            response = Ui.invalidInt();
         } catch (DateTimeParseException e) {
-            Ui.invalidTimeFormat();
+            response = Ui.invalidTimeFormat();
         }
+
+        return response;
     }
 }
