@@ -1,0 +1,9 @@
+.viewport {
+    -fx-background-image: url('../images/background.png');
+    -fx-background-size: cover;
+}
+
+#dialog {
+    -fx-background-color: white;
+    -fx-padding: 10;
+}
