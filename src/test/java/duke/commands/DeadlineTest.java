@@ -21,7 +21,7 @@ public class DeadlineTest {
 
     @Test
     public void toString_exampleDeadline_formattedDeadlineReturned() {
-        String s = "[D][ ] do homework (by: Dec 20 2001 13:22 pm)";
+        String s = "[D][   ] do homework (by:  Dec 20 2001 13:22 pm)";
         assertEquals(s, deadline.toString());
     }
 
