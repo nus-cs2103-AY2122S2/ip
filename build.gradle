@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -53,7 +52,7 @@ repositories {
 
 
 application {
-    mainClassName = "Duke.main.Duke"
+    mainClassName = "Duke.main.Launcher"
 }
 
 shadowJar {
@@ -61,9 +60,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-checkstyle {
-    toolVersion = '8.29'
-}
 
 run {
     enableAssertions = true
