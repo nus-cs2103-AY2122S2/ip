@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- * Contains all ui functions.
+ * Represents a Ui
  */
 public class Ui {
     private final Scanner sc;

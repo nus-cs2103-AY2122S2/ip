@@ -3,7 +3,7 @@ package duke;
 import duke.Command;
 
 /**
- * Command to exit Duke
+ * Represents a command to exit Duke
  */
 class ExitCommand extends Command {
 

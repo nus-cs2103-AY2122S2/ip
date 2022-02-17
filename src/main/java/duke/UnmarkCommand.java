@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Command to unmark task
+ * Represents a command to unmark a task
  */
 public class UnmarkCommand extends Command {
     private final int index;

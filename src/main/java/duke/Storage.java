@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- * Class containing UI functions
+ * Represents storage system for tasklist
  */
 
 class Storage {

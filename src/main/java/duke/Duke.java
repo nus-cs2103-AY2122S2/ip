@@ -1,6 +1,6 @@
 package duke;
 /**
- * Class containing Duke and main function
+ * Represents a chatbot Duke
  */
 public class Duke {
     private Storage storage;

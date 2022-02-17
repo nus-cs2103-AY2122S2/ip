@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Command to show all list items in tasklist
+ * Represents a command to show all list items in the task list
  */
 class ListCommand extends Command {
 

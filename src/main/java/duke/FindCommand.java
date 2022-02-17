@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a command to find a specific task in the task list
+ */
 public class FindCommand extends Command {
     FindCommand(String command) {
         super(command);

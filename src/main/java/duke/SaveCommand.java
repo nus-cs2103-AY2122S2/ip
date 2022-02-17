@@ -5,7 +5,7 @@ import duke.Command;
 import java.io.IOException;
 
 /**
- * Command to save tasks into a specified location
+ * Represents a command to save tasks into a specified location
  */
 class SaveCommand extends Command {
 

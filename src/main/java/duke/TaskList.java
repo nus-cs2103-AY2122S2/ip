@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 /**
- * Class containing tasklist and methods
+ * Represents a tasklist
  */
 public class TaskList {
     ArrayList<Task> arrayList;

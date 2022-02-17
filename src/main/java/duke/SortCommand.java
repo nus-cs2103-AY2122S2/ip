@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a command to sort the tasks in the task list by alphabetical order
+ */
 public class SortCommand extends Command {
     SortCommand(String command) {
         super(command);

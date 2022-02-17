@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a parser for commands
+ */
 class Parser {
     private final Ui ui;
 

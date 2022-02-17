@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 
 /**
- * Event task
+ * Represents an event task
  */
 class Event extends Task implements DateTimeInterface {
     private final LocalDate date;

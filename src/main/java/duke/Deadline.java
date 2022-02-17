@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Deadline task
+ * Represents a deadline task
  */
 class Deadline extends Task implements DateTimeInterface {
     private final LocalDate date;

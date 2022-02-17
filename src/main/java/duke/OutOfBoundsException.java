@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents an exception where the index given is out of bounds
+ */
 public class OutOfBoundsException extends DukeException {
 
     OutOfBoundsException(String message) {

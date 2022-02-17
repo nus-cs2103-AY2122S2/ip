@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Abstract command class
+ * Represents an abstract command class
  */
 
 abstract class Command {

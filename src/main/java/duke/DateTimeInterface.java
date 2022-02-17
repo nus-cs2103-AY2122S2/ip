@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Date time interface
+ * Represents a date time interface
  */
 public interface DateTimeInterface {
     public LocalDate getDate();
