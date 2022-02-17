@@ -28,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Jeff jeff;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image jeffImage = new Image(this.getClass().getResourceAsStream("/images/DaJeff.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image jeffImage = new Image(this.getClass().getResourceAsStream("/images/Jeff.png"));
 
     /**
      * Initialised the first message with a greeting.
