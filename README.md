@@ -29,6 +29,14 @@ There are a few commands you can run in Duke. These include:
 ## Using an IDE
 You can further edit/modify Duke by navigating to the `src` folder which contains all the `java` files
 
+You can run it from Launcher.java:
+```
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Main.class,args);
+    }
+}
+```
    ```
    Hello from
     ____        _        
