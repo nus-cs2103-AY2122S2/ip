@@ -156,7 +156,7 @@ public class TaskList {
         String output = Ui.find() + "\n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyword)) {
-                output = output + counter + ". " + tasks.get(i).toString();
+                output = output + counter + ". " + tasks.get(i).toString() + "\n";
                 counter += 1;
             }
         }

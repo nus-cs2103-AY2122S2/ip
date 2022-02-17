@@ -40,7 +40,7 @@ public class Ui {
     }
 
     public static String find(){
-        return "Here are the matching tasks in your list:";
+        return "Matching tasks in your list:";
     }
 
     public static String invalidTask(){
