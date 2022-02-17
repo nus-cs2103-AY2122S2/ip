@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 import tasks.Task;
 
+/**
+ * Represents a text interface for the chatbot.
+ */
 public class Ui {
     private static final String INDENTATION = "    ";
     private static final String DIVIDER = "____________________________________________________________";
@@ -19,15 +22,33 @@ public class Ui {
     private final Scanner input;
     private final PrintStream output;
 
+    /**
+     * Returns a UI object that can output a relevant text interface
+     * for every user operation.
+     *
+     * @param inputStream is the input source to obtain user commands.
+     * @param outputStream is the output source to write text responses.
+     * @throws IOException If the input or output stream fails to initialise.
+     */
     public Ui(InputStream inputStream, OutputStream outputStream) throws IOException {
         this.input = new Scanner(inputStream);;
         this.output = new PrintStream(outputStream);
     }
 
+    /**
+     * Accepts a user's input via the input source.
+     *
+     * @return The user's input to the chatbot.
+     * @throws IOException If a failure occurred when reading a user's input
+     * from the input source.
+     */
     public String readCommand() throws IOException {
         return input.nextLine();
     }
 
+    /**
+     * Greets the user through text written to the output source.
+     */
     public void showWelcome() {
         this.output.println(this.constructWelcomeResponse());
     }
@@ -36,6 +57,9 @@ public class Ui {
         return this.constructResponse(Ui.WELCOME_MESSAGE);
     }
 
+    /**
+     * Bids farewell to a user through text written to the output source.
+     */
     public void showExit() {
         this.output.println(this.constructExitResponse());
     }
@@ -44,6 +68,11 @@ public class Ui {
         return this.constructResponse(Ui.EXIT_MESSAGE);
     }
 
+    /**
+     * Format the given tasks as a list and display it to a user via the output source.
+     *
+     * @param tasks the tasks to be conveyed to a user.
+     */
     public void showList(Task[] tasks) {
         this.output.println(this.constructListResponse(tasks));
     }
@@ -54,6 +83,13 @@ public class Ui {
         return this.constructResponse(message);
     }
 
+    /**
+     * Provides a response to the output source after a user has successfully added
+     * a new task.
+     *
+     * @param task the task that the user has added.
+     * @param totalTasksAfterAdd the total number of tasks left after the addition.
+     */
     public void showAddTask(Task task, int totalTasksAfterAdd) {
         this.output.println(this.constructAddTaskResponse(task, totalTasksAfterAdd));
     }
@@ -64,6 +100,12 @@ public class Ui {
         return this.constructResponse(message);
     }
 
+    /**
+     * Provides a response to the output source after a user has successfully marked
+     * a task as completed.
+     *
+     * @param task the task that the user has marked as completed.
+     */
     public void showMarkTask(Task task) {
         this.output.println(this.constructMarkTaskResponse(task));
     }
@@ -73,6 +115,12 @@ public class Ui {
         return this.constructResponse(message);
     }
 
+    /**
+     * Provides a response to the output source after a user has successfully marked
+     * a task as uncompleted.
+     *
+     * @param task the task that the user has marked as uncompleted.
+     */
     public void showUnmarkTask(Task task) {
         this.output.println(this.constructUnmarkTaskResponse(task));
     }
@@ -82,6 +130,13 @@ public class Ui {
         return this.constructResponse(message);
     }
 
+    /**
+     * Provides a response to the output source after a user has successfully deleted
+     * a task.
+     *
+     * @param task the task that the user has deleted.
+     * @param totalTasksAfterDelete the total number of tasks left after the deletion.
+     */
     public void showDeleteTask(Task task, int totalTasksAfterDelete) {
         this.output.println(this.constructDeleteTaskResponse(task, totalTasksAfterDelete));
     }
@@ -92,6 +147,11 @@ public class Ui {
         return this.constructResponse(response);
     }
 
+    /**
+     * Writes a given error message to the output source.
+     *
+     * @param message the description of an error to be conveyed to the user.
+     */
     public void showError(String message) {
         this.output.println(this.constructErrorResponse(message));
     }
