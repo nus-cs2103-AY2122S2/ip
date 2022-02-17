@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "apollo.Apollo"
+    mainClassName = "apollo.Launcher"
 }
 
 shadowJar {

@@ -34,13 +34,9 @@ public class Welcome {
         } else if (now.isAfter(fifteen)
                 && (now.isBefore(eighteenThirty) || now.equals(eighteenThirty))) {
             return "evening";
-        // check if the time is after eighteen thirty and either before or exactly four
-        } else if (now.isAfter(eighteenThirty)
-                && now.isBefore(four) || now.equals(four)) {
-            return "night";
-        // otherwise, welcome to the limbo
+        // otherwise, it's night
         } else {
-            return "limbo";
+            return "night";
         }
     }
 

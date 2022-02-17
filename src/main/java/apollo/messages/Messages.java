@@ -19,6 +19,6 @@ public class Messages {
 
     public static final String EXIT_MESSAGE = "See you next time. \nI am always available when you need me.";
     public static final String NO_TASK_FOUND = "I could not find any related tasks.";
-    public static final String INVALID_COMMAND = "Apologies, I do not understand that.";
+    public static final String INVALID_COMMAND = "Apologies, I do not understand that.\nFor list of commands: help";
     public static final String EMPTY_TASKLIST = "You currently have no tasks.";
 }

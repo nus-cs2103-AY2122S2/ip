@@ -23,6 +23,7 @@ public class Gui {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
+            primaryStage.setTitle("Apollo");
             fxmlLoader.<MainWindow>getController().initialize(greeting, this);
             primaryStage.show();
         } catch (IOException e) {
