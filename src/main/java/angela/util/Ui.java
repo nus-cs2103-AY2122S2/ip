@@ -23,16 +23,25 @@ public class Ui {
 
     /**
      * Prints out the welcoming text when user initialize the bot
+     *
+     * @return The array list represent the String context
      */
-    public ArrayList<String> startChat() {
+    public ArrayList<String> startChat(boolean isNewUser) {
         ArrayList<String> wordArray = new ArrayList<>();
-        wordArray.add(String.valueOf(TypicalString.HELLO));
-        wordArray.add(" What can I do for you?");
+        if (isNewUser) {
+            wordArray.add(String.valueOf(TypicalString.HELLO_NEW_USER));
+            wordArray.add(" I noticed you are a new user, maybe you can look through the guide below: ");
+        } else {
+            wordArray.add(String.valueOf(TypicalString.HELLO_OLD_USER));
+            wordArray.add(" Let's go through your upcoming deadlines, shall we?");
+        }
         return wordArray;
     }
 
     /**
      * Prints out the goodbye text when user end the bot
+     *
+     * @return The array list represent the String context
      */
     public ArrayList<String> endChat() {
         ArrayList<String> wordArray = new ArrayList<>();
@@ -44,6 +53,7 @@ public class Ui {
      * Prints out all the task in the current list
      *
      * @param storingList Current task list
+     * @return The array list represent the String context
      */
     public ArrayList<String> showTaskList(ArrayList<Task> storingList) {
         ArrayList<String> wordArray = new ArrayList<>();
@@ -61,6 +71,7 @@ public class Ui {
      *
      * @param task   Task that changing state
      * @param isDone State of the task
+     * @return The array list represent the String context
      */
     public ArrayList<String> showTaskMark(Task task, boolean isDone) {
         return task.changeTaskStatus(isDone);
@@ -71,6 +82,7 @@ public class Ui {
      *
      * @param task    Task that just been added in
      * @param numTask Number of tasks after adding
+     * @return The array list represent the String context
      */
     public ArrayList<String> showAllTask(Task task, int numTask) {
         ArrayList<String> wordArray = new ArrayList<>();
@@ -85,12 +97,13 @@ public class Ui {
      *
      * @param task    Task that just been deleted
      * @param numTask Number of tasks left
+     * @return The array list represent the String context
      */
     public ArrayList<String> showDeleteTask(Task task, int numTask) {
         ArrayList<String> wordArray = new ArrayList<>();
-        wordArray.add(" Noted. I've removed this task: ");
+        wordArray.add(" No problem. I will removed this task: ");
         wordArray.add("  " + task);
-        wordArray.add(" Now you have " + numTask + " tasks in the list.");
+        wordArray.add(" Now you have " + numTask + " tasks.");
         return wordArray;
     }
 
@@ -98,10 +111,11 @@ public class Ui {
      * Prints out the list of tasks in a specific date
      *
      * @param eventList Collection of tasks on the date
+     * @return The array list represent the String context
      */
     public ArrayList<String> showDate(ArrayList<Task> eventList) {
         ArrayList<String> wordArray = new ArrayList<>();
-        wordArray.add("You have " + eventList.size() + " deadlines/events in the day:");
+        wordArray.add(" I found" + eventList.size() + " deadlines and events in that day:");
 
         for (int i = 1; i <= eventList.size(); i++) {
             String dateString = i + "." + eventList.get(i - 1);
@@ -115,22 +129,23 @@ public class Ui {
      *
      * @param numIndex        Current number of task that match with the keyword
      * @param task            Task that been matched with keyword
+     * @return The array list represent the String context
      */
-    public String showSearchResult(int numIndex, Task task) {
-        String reply = "";
+    public String showSearchResult(int numIndex, Task... task) {
         if (numIndex == 0) {
-            reply += TypicalString.MATCH_TASK;
+            return String.valueOf(TypicalString.MATCH_TASK);
         } else {
-            reply += " " + numIndex + "." + task;
+            String reply = "";
+            reply += " " + numIndex + "." + task[0];
+            return reply;
         }
-        return reply;
     }
 
     /**
      * Returns string represent list of task in order of time
      *
      * @param dateTable Time and task map
-     * @return The string represent the list of task
+     * @return The string array represent the list of task
      */
     public ArrayList<String> showUpcomingDeadlines(DateTable dateTable) {
         ArrayList<String> wordArray = new ArrayList<>();
@@ -155,7 +170,7 @@ public class Ui {
     /**
      * Returns string represent the nearest deadlines date and its task
      * @param dateTable Time and task map
-     * @return The string represent the nearest deadlines and tasks
+     * @return The string array represent the nearest deadlines and tasks
      */
     public ArrayList<String> showNearestDeadlines(DateTable dateTable) {
         ArrayList<String> wordArray = new ArrayList<>();
@@ -181,10 +196,37 @@ public class Ui {
 
     /**
      * Prints out the error message when loading the bot
+     *
+     * @return The array list represent the String context
      */
     public ArrayList<String> showLoadingError() {
         ArrayList<String> wordArray = new ArrayList<>();
         wordArray.add(" Sorry, some problem have occurred during initialization: ");
+        return wordArray;
+    }
+
+    /**
+     * Returns all the commands with their description
+     *
+     * @return The array string contains all the commands with their descriptions
+     */
+    public ArrayList<String> displayAllCommand() {
+        ArrayList<String> wordArray = new ArrayList<>();
+        wordArray.add("Command syntax and its meaning:");
+        wordArray.add("list: Display all the task that you have accumulated so far");
+        wordArray.add("mark + numberId: Mark a task with numberId as finished");
+        wordArray.add("unmark + numberId: Mark a task with numberId as unfinished");
+        wordArray.add("todo + description: Create a todo task with description");
+        wordArray.add("deadline + description + time: Create a deadline task with "
+                + "description and time, with time use this format '/at D/M/YYYY'");
+        wordArray.add("event + description + time: Create a event task with "
+                + "description and time, with time use this format '/at D/M/YYYY'");
+        wordArray.add("delete + numberId: Delete a task with numberId");
+        wordArray.add("date + time: Find all deadlines and events in time, with time use this format D/M/YYYY");
+        wordArray.add("bye: End the conversation. Don't worry, your tasks will be stored");
+        wordArray.add("find + keyword: Find a task that contains the keyword in description");
+        wordArray.add("And don't worry if you can't remember all these syntax, "
+                + "just type help and this guide will appear again");
         return wordArray;
     }
 
@@ -196,22 +238,28 @@ public class Ui {
         },
         ADDED_TASK {
             public String toString() {
-                return " Got it. I've added this task:";
+                return " Okay. I've noted down this task:";
             }
         },
-        HELLO {
+        HELLO_OLD_USER {
+            @Override
             public String toString() {
-                return " Hello! I'm Angela, your personal task manager assistant";
+                return " It's a pleasure to have you back user";
+            }
+        },
+        HELLO_NEW_USER {
+            public String toString() {
+                return " Welcome! I'm Angela, your personal task manager assistant";
             }
         },
         GOODBYE {
             public String toString() {
-                return " Bye. Hope to see you again soon!";
+                return " Goodbye. See you next time user.";
             }
         },
         MATCH_TASK {
             public String toString() {
-                return " Here are the matching tasks in your list:" + "\n";
+                return " I found these matching tasks with your keyword:";
             }
         }
     }

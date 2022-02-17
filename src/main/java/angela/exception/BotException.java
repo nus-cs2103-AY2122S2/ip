@@ -15,8 +15,8 @@ public class BotException {
      */
     public ArrayList<String> printEmptyDescriptionError(String description) {
         ArrayList<String> wordArray = new ArrayList<>();
-        wordArray.add(" Sorry I think you have forgotten something? The description of a " + "/"
-                + description.toUpperCase() + " cannot be empty.");
+        wordArray.add(" Sorry I think you have forgotten something? ");
+        wordArray.add(" The description of " + "~" + description.toUpperCase() + " cannot be empty.");
         return wordArray;
     }
 
@@ -29,8 +29,8 @@ public class BotException {
      */
     public ArrayList<String> printNotNumericError(String description) {
         ArrayList<String> wordArray = new ArrayList<>();
-        wordArray.add(" Sorry I think you have a typo :< \n"
-                + " The description of a " + "/" + description.toUpperCase() + " must be a number.");
+        wordArray.add(" Sorry I think you have a typo :<");
+        wordArray.add(" The description of " + "~" + description.toUpperCase() + " must be a number.");
         return wordArray;
     }
 
@@ -41,7 +41,7 @@ public class BotException {
      */
     public ArrayList<String> printWrongSyntaxError() {
         ArrayList<String> wordArray = new ArrayList<>();
-        wordArray.add(" Sorry, but I don't know what that means :-(");
+        wordArray.add(" Sorry, but I don't know what you want?");
         return wordArray;
     }
 
@@ -52,7 +52,8 @@ public class BotException {
      */
     public ArrayList<String> printDateNotFoundError() {
         ArrayList<String> wordArray = new ArrayList<>();
-        wordArray.add(" OOPS!!! You don't have any deadlines/events on this day :-(");
+        wordArray.add(" Sorry, you don't have any deadlines or events on this day. ");
+        wordArray.add(" Try another day instead");
         return wordArray;
     }
 }

@@ -21,6 +21,7 @@ public class BotStorage implements Storage {
     private final String path;
     private final String directory;
     private final File database;
+    private final boolean isNewUser;
 
     /**
      * Initialize the database helper for Duke bot
@@ -36,7 +37,7 @@ public class BotStorage implements Storage {
         assert(!(directory.equals("")));
         database = new File(path);
         this.directory = directory;
-        doesDatabaseExists();
+        isNewUser = doesDatabaseExists();
     }
 
     /**
@@ -53,9 +54,9 @@ public class BotStorage implements Storage {
             // Assert that we can create the new database file
             assert(canCreateDirectory);
             assert(canCreateFile);
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -132,5 +133,14 @@ public class BotStorage implements Storage {
      */
     public long getDatabaseLength() {
         return this.database.length();
+    }
+
+    /**
+     * Checks whether the user is new user (not having database file at begin)
+     *
+     * @return True if new user, false otherwise
+     */
+    public boolean isNewUser() {
+        return this.isNewUser;
     }
 }

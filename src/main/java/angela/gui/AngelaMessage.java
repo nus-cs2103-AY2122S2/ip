@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -41,7 +42,7 @@ public class AngelaMessage extends Message {
 
     @Override
     protected void loadText(String text) {
-        int highlightIndex = text.indexOf("/");
+        int highlightIndex = text.indexOf("~");
         int wordStyleIndex = highlightIndex + 1;
         int afterStyleIndex = 0;
         Text[] arrayList = new Text[3];
@@ -52,7 +53,7 @@ public class AngelaMessage extends Message {
             Text endText = new Text(text.substring(afterStyleIndex));
 
             errorText.setFill(Color.RED);
-            errorText.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+            errorText.setFont(Font.font("Helvetica", FontWeight.BOLD, FontPosture.ITALIC, 12));
             arrayList[0] = beginText;
             arrayList[1] = errorText;
             arrayList[2] = endText;

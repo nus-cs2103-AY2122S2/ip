@@ -70,4 +70,8 @@ public class Angela {
     public ArrayList<String> getResponse(String input) {
         return this.run(input);
     }
+
+    public boolean isNewUser() {
+        return botStorage.isNewUser();
+    }
 }

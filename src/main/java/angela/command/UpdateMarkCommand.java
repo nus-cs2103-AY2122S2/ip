@@ -40,6 +40,7 @@ public class UpdateMarkCommand extends angela.command.Command {
      * @param botStorage Reference of the <code>BotStorage</code> object
      * @param dateTable  Reference of the <code>DateTable</code> object
      * @throws IOException If an I/O error occur
+     * @return The array string represent the display text
      */
     @Override
     public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)

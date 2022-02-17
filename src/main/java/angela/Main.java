@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private static final String DIRECTORY = "data";
-    private static final String FILE_NAME = "Duke.txt";
+    private static final String FILE_NAME = "Angela.txt";
     private static final String PATH = DIRECTORY + "/" + FILE_NAME;
     private static final String RESOURCE_PATH = "/view/MainWindow.fxml";
     private static final String BOT_NAME = "Angela";
@@ -70,6 +70,5 @@ public class Main extends Application {
         stage.setScene(scene);
         fxmlLoader.<MainWindow>getController().setAngela(angela);
         stage.show();
-        fxmlLoader.<MainWindow>getController().displayUpcomingDeadline();
     }
 }

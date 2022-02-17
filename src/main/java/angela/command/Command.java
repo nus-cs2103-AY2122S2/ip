@@ -20,6 +20,7 @@ public abstract class Command {
      * @param ui         Reference of the <code>Ui</code> object
      * @param botStorage Reference of the <code>BotStorage</code> object
      * @param dateTable  Reference of the <code>DateTable</code> object
+     * @return The array string represent the display text
      * @throws IOException If an I/O error occur
      */
     public abstract ArrayList<String> execute(TaskList taskList, Ui ui,

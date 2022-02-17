@@ -44,7 +44,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         setScrollPane();
-        setUiAtBegin();
     }
 
     /**
@@ -54,19 +53,29 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    public void setAngela(Angela d) {
+        angela = d;
+        setUiAtBegin(angela.isNewUser());
+    }
+
     /**
      * Sets up the displayed text for GUI in the beginning
      */
-    private void setUiAtBegin() {
-        ArrayList<String> helloText = ui.startChat();
+    private void setUiAtBegin(boolean isNewUser) {
+        ArrayList<String> helloText = ui.startChat(isNewUser);
         DialogBox helloBox = DialogBox.getAngelaDialog(helloText, angelaImage);
         dialogContainer.getChildren().addAll(helloBox);
+        if (!isNewUser) {
+            displayUpcomingDeadline();
+        } else {
+            displayHelp();
+        }
     }
 
     /**
      * Display upcoming deadlines in GUI
      */
-    public void displayUpcomingDeadline() {
+    private void displayUpcomingDeadline() {
         ArrayList<String> nearestDeadlineText = ui.showNearestDeadlines(angela.getDateTable());
         ArrayList<String> upcomingDeadlineText = ui.showUpcomingDeadlines(angela.getDateTable());
         DialogBox upcomingDeadlineBox = DialogBox.getAngelaDialog(upcomingDeadlineText, angelaImage);
@@ -74,8 +83,13 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(upcomingDeadlineBox, nearestDeadlineBox);
     }
 
-    public void setAngela(Angela d) {
-        angela = d;
+    /**
+     * Display all the commands and descriptions
+     */
+    private void displayHelp() {
+        ArrayList<String> helpText = ui.displayAllCommand();
+        DialogBox helpTextBox = DialogBox.getAngelaDialog(helpText, angelaImage);
+        dialogContainer.getChildren().add(helpTextBox);
     }
 
     /**
@@ -93,7 +107,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getAngelaDialog(response, angelaImage)
         );
         userInput.clear();
-        if (input.equals(GOODBYE)) {
+        if (userType.equals(GOODBYE)) {
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
             pauseTransition.setOnFinished(f -> Platform.exit());
             pauseTransition.play();

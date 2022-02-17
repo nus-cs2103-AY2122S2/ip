@@ -9,35 +9,30 @@ import angela.util.BotStorage;
 import angela.util.Ui;
 
 /**
- * Finds task that match with specific keyword
+ * Shows all available command to user
  */
-public class FindTaskCommand extends Command {
-    private final String keyWord;
-
-    public FindTaskCommand(String keyWord) {
-        this.keyWord = keyWord;
-    }
+public class HelpCommand extends Command {
 
     /**
-     * Finds and prints out the task that match with keyword
+     * Extracts all the commands and prints them on GUI
      *
      * @param taskList   Reference of the <code>TaskList</code> object
      * @param ui         Reference of the <code>Ui</code> object
      * @param botStorage Reference of the <code>BotStorage</code> object
      * @param dateTable  Reference of the <code>DateTable</code> object
      * @return The array string represent the display text
-     * @throws IOException If an I/O error occur
+     * @throws IOException If an I/O error occurs
      */
     @Override
-    public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
-            throws IOException {
-        return taskList.findTasksByKeyWord(keyWord);
+    public ArrayList<String> execute(TaskList taskList, Ui ui, BotStorage botStorage,
+            DateTable dateTable) throws IOException {
+        return ui.displayAllCommand();
     }
 
     /**
      * Checks if the command is the exit command
      *
-     * @return False as this is not an exit command
+     * @return True as this is an exit command
      */
     @Override
     public boolean isExit() {

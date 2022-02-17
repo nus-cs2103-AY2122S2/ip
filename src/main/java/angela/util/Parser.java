@@ -7,6 +7,7 @@ import angela.command.Command;
 import angela.command.DeleteTaskCommand;
 import angela.command.FindTaskCommand;
 import angela.command.GetTaskFromDateCommand;
+import angela.command.HelpCommand;
 import angela.command.ShowListCommand;
 import angela.command.UpdateMarkCommand;
 import angela.command.WrongSyntaxCommand;
@@ -90,6 +91,8 @@ public class Parser {
             return new ByeCommand();
         case "find":
             return new FindTaskCommand(description);
+        case "help":
+            return new HelpCommand();
         default:
             return new WrongSyntaxCommand();
         }

@@ -16,6 +16,8 @@ public abstract class Message extends HBox {
 
     protected void loadText(String text) {}
 
+    //@author khoahre123-reused
+    //Reused from https://stackoverflow.com/questions/19612591/javafx-optimal-width-of-textflow-with-word-wrap
     @Override
     protected void layoutChildren() {
         super.layoutChildren();

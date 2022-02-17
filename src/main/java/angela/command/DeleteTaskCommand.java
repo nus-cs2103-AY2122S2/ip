@@ -31,6 +31,7 @@ public class DeleteTaskCommand extends angela.command.Command {
      * @param ui         Reference of the <code>Ui</code> object
      * @param botStorage Reference of the <code>BotStorage</code> object
      * @param dateTable  Reference of the <code>DateTable</code> object
+     * @return The array string represent the display text
      * @throws IOException If an I/O error occur
      */
     @Override

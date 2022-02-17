@@ -110,8 +110,9 @@ public class TaskList {
      */
     public ArrayList<String> findTasksByKeyWord(String keyWord) {
         ArrayList<String> wordArray = new ArrayList<>();
-        int numIndex = -1;
+        int numIndex = 0;
         ArrayList<Task> filterTask = new ArrayList<>();
+        wordArray.add(ui.showSearchResult(numIndex));
         storingList.stream().filter(s -> isTaskHasKeyWord(s, keyWord)).forEach(filterTask::add);
         for (Task task : filterTask) {
             numIndex += 1;
