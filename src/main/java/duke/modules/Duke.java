@@ -8,6 +8,7 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
     private Storage storage;
+    private boolean isByeCommand = false;
 
 
     public Duke() {
@@ -16,7 +17,7 @@ public class Duke {
         parser = new Parser(taskList);
 
     }
-    
+
     public String getInitMessage() {
         return Ui.getInitializationMessage();
     }
@@ -25,8 +26,13 @@ public class Duke {
         String response = Ui.getResponse(input, parser);
         if (parser.byeCommandHasExecuted()) {
             Storage.save(taskList);
+            isByeCommand = true;
         }
         return response;
+    }
+
+    public boolean isByeCommand() {
+        return isByeCommand;
     }
 
 
