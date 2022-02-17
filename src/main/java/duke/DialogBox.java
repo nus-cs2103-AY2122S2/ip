@@ -32,6 +32,8 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
+        assert text != null : "text should hold the String that will be printed in the dialog box";
+        assert img != null : "img should hold the image that will be printed in the dialog box";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);

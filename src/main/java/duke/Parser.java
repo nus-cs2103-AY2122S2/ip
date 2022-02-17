@@ -18,6 +18,7 @@ public class Parser {
      * @return String Array of 2 Strings
      */
     public String[] splitLimitTwo(String inst) {
+        assert inst != null : "There has to be a valid string to split into 2.";
         return inst.split(" ", 2);
     }
 
@@ -28,6 +29,7 @@ public class Parser {
      * @return String Array containing String of details of Event, and String of time of Event.
      */
     public String[] parseEvent(String inst) {
+        assert inst != null : "There has to be a valid Event String to parse.";
         String[] taskArr = splitLimitTwo(inst);
         return taskArr[1].split("/at ");
     }
@@ -39,7 +41,7 @@ public class Parser {
      * @return String Array containing String of details of Deadline task, and String of time of Deadline.
      */
     public String[] parseDeadline(String inst) {
-        // deadline return book /by Sunday
+        assert inst != null : "There has to be a valid Deadline String to parse.";
         String[] taskArr = splitLimitTwo(inst);
         return taskArr[1].split("/by ");
     }
@@ -51,6 +53,7 @@ public class Parser {
      * @return String of details of Todo Task.
      */
     public String parseToDo(String inst) {
+        assert inst != null : "There has to be a valid Todo String to parse.";
         String[] taskArr = splitLimitTwo(inst);
         return taskArr[1];
     }
@@ -62,6 +65,7 @@ public class Parser {
      * @return String in "YYYY-MM-DD HH:MM" format.
      */
     public String dateFormatHelper(String dateTime) {
+        assert dateTime != null : "There has to be a valid date with time String to parse.";
         String[] dateTimeArr = dateTime.split(", ");
         String date = dateTimeArr[0];
         String[] dateArr = date.split(" ");
