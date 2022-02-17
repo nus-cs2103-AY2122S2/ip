@@ -1,13 +1,15 @@
 package duke.helpers;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import duke.commands.Deadline;
 import duke.commands.Event;
@@ -18,9 +20,8 @@ import duke.commands.ToDo;
  * Represents a storage for all Task data a Duke object saves according to user input.
  */
 public class Storage {
-
+    private static String filePath;
     private String dirPath;
-    private String filePath;
 
     /**
      * Constructs a Storage object.
@@ -41,19 +42,27 @@ public class Storage {
      * @throws NoSuchFileException If file for storage of Task data could not be created.
      */
     public ArrayList<Task> loadFileContents() throws IOException {
-        if (!new File(this.dirPath).exists()) {
-            Files.createDirectory(Path.of(dirPath));
+        //@@tobihy-reused
+        //Reused from https://github.com/tobihy/ip/blob/master/src/main/java/duke/storage/Storage.java
+        // with minor modifications
+        Path directoryPath = Paths.get(this.dirPath);
+        if (!Files.exists(directoryPath)) {
+            Files.createDirectories(directoryPath);
         }
-        if (!new File(this.filePath).exists()) {
-            File newFile = new File(filePath);
-            newFile.createNewFile();
+
+        Path fPath = Paths.get(this.filePath);
+        if (!Files.exists(fPath)) {
+            Files.createFile(fPath);
         }
+
         ArrayList<Task> taskArr = new ArrayList<Task>();
+        System.out.println("begin: " + taskArr);
+
         try {
-            java.nio.file.Path path = java.nio.file.Paths.get("src/main/data/duke.txt");
-            BufferedReader reader = java.nio.file.Files.newBufferedReader(path);
+            Scanner reader = new Scanner(new File(filePath));
             String line;
-            while ((line = reader.readLine()) != null) {
+            while (reader.hasNextLine()) {
+                line = reader.nextLine();
                 String[] temp = line.split("#");
                 String command = temp[0];
                 boolean isMarked = temp[1].equals("X");
@@ -75,7 +84,9 @@ public class Storage {
                 }
                 taskArr.add(t);
             }
-        } catch (NoSuchFileException e) {
+            System.out.println("\nend: " + taskArr);
+
+        } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
         return taskArr;
@@ -89,8 +100,7 @@ public class Storage {
      */
     public static ArrayList<Task> saveToFile(ArrayList<Task> taskArr) {
         try {
-            java.nio.file.Path path = java.nio.file.Paths.get("src/main/data/duke.txt");
-            BufferedWriter writer = java.nio.file.Files.newBufferedWriter(path);
+            FileWriter writer = new FileWriter(filePath);
             for (Task t : taskArr) {
                 String toSave;
                 String separator = "#";

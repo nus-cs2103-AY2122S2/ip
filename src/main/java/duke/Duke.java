@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import duke.helpers.Parser;
 import duke.helpers.Storage;
@@ -25,8 +26,8 @@ public class Duke {
      */
     public Duke(String dirPath, String filePath) {
         this.ui = new Ui();
-        this.storage = new Storage(dirPath, filePath);
         try {
+            this.storage = new Storage(dirPath, filePath);
             this.tasks = new TaskList(this.storage.loadFileContents());
         } catch (IOException e) {
             ui.showLoadingError();
@@ -38,11 +39,11 @@ public class Duke {
      * Constructs a Duke object where Task data is stored in a 'duke.txt' file within a 'data' directory.
      */
     public Duke() {
-        String dirPath = "./src/main/data";
-        String filePath = "./src/main/data/duke.txt";
+        String dirPath = Paths.get("").toAbsolutePath() + "/data";
+        String filePath = Paths.get("").toAbsolutePath() + "/data/duke.txt";
         this.ui = new Ui();
-        this.storage = new Storage(dirPath, filePath);
         try {
+            this.storage = new Storage(dirPath, filePath);
             this.tasks = new TaskList(this.storage.loadFileContents());
         } catch (IOException e) {
             ui.showLoadingError();
@@ -68,8 +69,8 @@ public class Duke {
      * Creates a Duke object and calls the run method.
      */
     public static void main(String[] args) {
-        String dirPath = "./src/main/data";
-        String filePath = "./src/main/data/duke.txt";
+        String dirPath = Paths.get("").toAbsolutePath() + "/data";
+        String filePath = Paths.get("").toAbsolutePath() + "/data/duke.txt";
         Duke duke = new Duke(dirPath, filePath);
         duke.run();
     }

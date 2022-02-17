@@ -1,6 +1,8 @@
 package duke.view;
 
 import duke.Duke;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -49,6 +52,20 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        //@@soloplxya-reused
+        //Reused from https://github.com/soloplxya/ip/blob/master/src/main/java/duke/gui/MainWindow.java
+        // with minor modifications
+        if (input.equals("bye")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+            pause.setOnFinished(event -> {
+                Platform.exit();
+                System.exit(0);
+            });
+            pause.play();
+        }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
