@@ -32,9 +32,7 @@ public class AddCommand extends Command{
                 break;
         }
         taskList.addTask(newTask);
-        return String.format("""
-                This task has been added as requested:
-                %s
-                You now have %d item(s) in your list""", newTask, taskList.size());
+        return String.format("This task has been added as requested:\n" +
+                "%s\n" + " You now have %d item(s) in your list", newTask, taskList.size());
     }
 }

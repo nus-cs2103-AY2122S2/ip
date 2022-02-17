@@ -13,14 +13,12 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute() throws DukeInvalidArgumentException {
-        if (index > taskList.size() || index < 0) {
+        if (index > taskList.size() - 1 || index < 0) {
             throw new DukeInvalidArgumentException("I am afraid that's an invalid task!" +
                                                "Please check your task number");
         }
         Task deletedTask = taskList.deleteTask(index);
-        return String.format("""
-                As you wish. The following task has been removed
-                %s
-                You now have %d item(s) in your list""", deletedTask, taskList.size());
+        return String.format("As you wish. The following task has been removed:\n" +
+                "%s\n" + "You now have %d item(s) in your list", deletedTask, taskList.size());
     }
 }

@@ -32,7 +32,7 @@ public class TextUI {
 
     public void printMessage(String message) {
         String textBorder = "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
-        String textToPrint = textBorder + message + "\n" + textBorder;
+        String textToPrint = "\n" + textBorder + message + "\n" + textBorder + "\n";
         out.print(textToPrint);
     }
 
@@ -44,6 +44,7 @@ public class TextUI {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         out.println("Hello from\n" + logo);
         out.println("How may I assist you?");
+        out.print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
     }
 
 }

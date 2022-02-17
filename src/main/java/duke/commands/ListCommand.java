@@ -15,8 +15,6 @@ public class ListCommand extends Command {
             return "Your current task list is empty";
         }
 
-        return String.format("""
-               These are the current tasks in your list:
-               %s""", displayTaskList());
+        return String.format("These are the current tasks in your list:\n%s", displayTaskList());
     }
 }
