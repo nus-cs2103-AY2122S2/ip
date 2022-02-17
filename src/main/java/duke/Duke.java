@@ -187,14 +187,6 @@ public class Duke extends Application {
         return out;
     }
 
-    /**
-     * The main method.
-     * Calls the driver methods to begin the execution of Prince.
-     */
-    public static void main(String[] args) {
-        Application.launch(Duke.class, args);
-    }
-
     @Override
     public void start(Stage stage) throws DukeException {
         //Step 1. Setting up required components
