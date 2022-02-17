@@ -10,6 +10,8 @@ import ann.commands.ListCommand;
 import ann.commands.MarkCommand;
 import ann.commands.UnmarkCommand;
 import ann.data.InputPattern;
+import ann.data.tasks.Deadline;
+import ann.data.tasks.Event;
 import ann.data.tasks.TaskType;
 
 /**
@@ -21,11 +23,10 @@ import ann.data.tasks.TaskType;
 public class Parser {
     private static final String INVALID_COMMAND_WARNING = "Oops! Please enter a valid command!";
     private static final String FORMAT_WARNING = "Oops! Please use the following format:\n";
-    private static final String ADD_DEADLINE_FORMAT = "add deadline [content] /by yyyy-MM-dd HH:mm";
-    private static final String ADD_EVENT_FORMAT = "add event [content] /at yyyy-MM-dd HH:mm";
-    private static final String MARK_FORMAT = "mark [task number]";
-    private static final String UNMARK_FORMAT = "unmark [task number]";
-    private static final String DELETE_FORMAT = "delete [task number]";
+    private static final String MISSING_ADD_CONTENT_WARNING = "Oops! Please specify the task you wish to add!";
+    private static final String MISSING_ADD_TASK_TYPE_WARNING = "Oops! Please enter a valid task type!";
+    private static final String ADD_DEADLINE_FORMAT = AddCommand.KEYWORD + " " + Deadline.INPUT_FORMAT;
+    private static final String ADD_EVENT_FORMAT = AddCommand.KEYWORD + " " + Event.INPUT_FORMAT;
 
     /**
      * Returns a Command which is the result of parsing the user input.
@@ -34,29 +35,50 @@ public class Parser {
      * @return a Command.
      */
     public static Command parse(String input) {
-        if (input.equalsIgnoreCase("bye")) {
+        if (isExitCommand(input)) {
             return new ExitCommand();
-        } else if (input.equalsIgnoreCase("list")) {
+        } else if (isListCommand(input)) {
             return new ListCommand();
-        } else if (input.length() < 3) {
-            return new IncorrectCommand(INVALID_COMMAND_WARNING);
-        } else if (input.substring(0, 3).equalsIgnoreCase("add")) {
-            return handleAdd(input.substring(3));
-        } else if (input.length() < 4) {
-            return new IncorrectCommand(INVALID_COMMAND_WARNING);
-        } else if (input.substring(0, 4).equalsIgnoreCase("find")) {
-            return handleFind(input.substring(4));
-        } else if (input.substring(0, 4).equalsIgnoreCase("mark")) {
-            return handleMark(input.substring(4));
-        } else if (input.length() < 6) {
-            return new IncorrectCommand(INVALID_COMMAND_WARNING);
-        } else if (input.substring(0, 6).equalsIgnoreCase("unmark")) {
-            return handleUnmark(input.substring(6));
-        } else if (input.substring(0, 6).equalsIgnoreCase("delete")) {
-            return handleDelete(input.substring(6));
+        } else if (isAddCommand(input)) {
+            return handleAdd(getSubstringAfterKeyword(input, AddCommand.KEYWORD));
+        } else if (isFindCommand(input)) {
+            return handleFind(getSubstringAfterKeyword(input, FindCommand.KEYWORD));
+        } else if (isMarkCommand(input)) {
+            return handleMark(getSubstringAfterKeyword(input, MarkCommand.KEYWORD));
+        } else if (isUnmarkCommand(input)) {
+            return handleUnmark(getSubstringAfterKeyword(input, UnmarkCommand.KEYWORD));
+        } else if (isDeleteCommand(input)) {
+            return handleDelete(getSubstringAfterKeyword(input, DeleteCommand.KEYWORD));
         } else {
             return new IncorrectCommand(INVALID_COMMAND_WARNING);
         }
+    }
+    private static boolean isExitCommand(String input) {
+        return input.equalsIgnoreCase(ExitCommand.KEYWORD);
+    }
+    private static boolean isListCommand(String input) {
+        return input.equalsIgnoreCase(ListCommand.KEYWORD);
+    }
+    private static boolean isAddCommand(String input) {
+        return hasCommandKeyword(input, AddCommand.KEYWORD);
+    }
+    private static boolean isMarkCommand(String input) {
+        return hasCommandKeyword(input, MarkCommand.KEYWORD);
+    }
+    private static boolean isUnmarkCommand(String input) {
+        return hasCommandKeyword(input, UnmarkCommand.KEYWORD);
+    }
+    private static boolean isDeleteCommand(String input) {
+        return hasCommandKeyword(input, DeleteCommand.KEYWORD);
+    }
+    private static boolean isFindCommand(String input) {
+        return hasCommandKeyword(input, FindCommand.KEYWORD);
+    }
+    private static boolean hasCommandKeyword(String input, String ck) {
+        return input.equals(ck) || input.startsWith(ck + " ");
+    }
+    private static String getSubstringAfterKeyword(String input, String kw) {
+        return input.equals(kw) ? "" : input.substring(kw.length() + 1);
     }
 
     /**
@@ -67,22 +89,28 @@ public class Parser {
      */
     private static Command handleAdd(String input) {
         if (input.isBlank()) {
-            return new IncorrectCommand("Oops! Please specify the task you wish to add!");
-        } else if (input.charAt(0) != ' ') {
-            return new IncorrectCommand(INVALID_COMMAND_WARNING);
+            return new IncorrectCommand(MISSING_ADD_CONTENT_WARNING);
+        } else if (isTodo(input)) {
+            return handleTodo(getSubstringAfterKeyword(input, TaskType.TODO.getKeyword()));
+        } else if (isDeadline(input)) {
+            return handleDeadline(getSubstringAfterKeyword(input, TaskType.DEADLINE.getKeyword()));
+        } else if (isEvent(input)) {
+            return handleEvent(getSubstringAfterKeyword(input, TaskType.EVENT.getKeyword()));
         } else {
-            String taskType = input.split(" ")[1].toLowerCase();
-            switch (taskType) {
-            case "todo":
-                return handleTodo(input.substring(5));
-            case "event":
-                return handleEvent(input.substring(6));
-            case "deadline":
-                return handleDeadline(input.substring(9));
-            default:
-                return new IncorrectCommand("Oops! Please enter a valid task type!");
-            }
+            return new IncorrectCommand(MISSING_ADD_TASK_TYPE_WARNING);
         }
+    }
+    private static boolean isTodo(String input) {
+        return isTaskType(input, TaskType.TODO);
+    }
+    private static boolean isDeadline(String input) {
+        return isTaskType(input, TaskType.DEADLINE);
+    }
+    private static boolean isEvent(String input) {
+        return isTaskType(input, TaskType.EVENT);
+    }
+    private static boolean isTaskType(String input, TaskType tt) {
+        return input.equals(tt.getKeyword()) || input.startsWith(tt.getKeyword() + " ");
     }
 
     /**
@@ -93,14 +121,12 @@ public class Parser {
      */
     private static Command handleMark(String index) {
         if (index.isBlank()) {
-            return new IncorrectCommand(FORMAT_WARNING + MARK_FORMAT);
+            return new IncorrectCommand(FORMAT_WARNING + MarkCommand.FORMAT);
+        } else if (index.matches("^\\d+")) {
+            int i = Integer.parseInt(index);
+            return new MarkCommand(i);
         } else {
-            try {
-                int i = Integer.parseInt(index.substring(1));
-                return new MarkCommand(i);
-            } catch (NumberFormatException nfe) {
-                return new IncorrectCommand(FORMAT_WARNING + MARK_FORMAT);
-            }
+            return new IncorrectCommand(FORMAT_WARNING + MarkCommand.FORMAT);
         }
     }
 
@@ -112,14 +138,12 @@ public class Parser {
      */
     private static Command handleUnmark(String index) {
         if (index.isBlank()) {
-            return new IncorrectCommand(FORMAT_WARNING + UNMARK_FORMAT);
+            return new IncorrectCommand(FORMAT_WARNING + UnmarkCommand.FORMAT);
+        } else if (index.matches("^\\d+")) {
+            int i = Integer.parseInt(index);
+            return new UnmarkCommand(i);
         } else {
-            try {
-                int i = Integer.parseInt(index.substring(1));
-                return new UnmarkCommand(i);
-            } catch (NumberFormatException nfe) {
-                return new IncorrectCommand(FORMAT_WARNING + UNMARK_FORMAT);
-            }
+            return new IncorrectCommand(FORMAT_WARNING + UnmarkCommand.FORMAT);
         }
     }
 
@@ -131,14 +155,12 @@ public class Parser {
      */
     private static Command handleDelete(String index) {
         if (index.isBlank()) {
-            return new IncorrectCommand(FORMAT_WARNING + DELETE_FORMAT);
+            return new IncorrectCommand(FORMAT_WARNING + DeleteCommand.FORMAT);
+        } else if (index.matches("^\\d+")) {
+            int i = Integer.parseInt(index);
+            return new DeleteCommand(i);
         } else {
-            try {
-                int i = Integer.parseInt(index.substring(1));
-                return new DeleteCommand(i);
-            } catch (NumberFormatException nfe) {
-                return new IncorrectCommand(FORMAT_WARNING + DELETE_FORMAT);
-            }
+            return new IncorrectCommand(FORMAT_WARNING + DeleteCommand.FORMAT);
         }
     }
 
@@ -206,11 +228,11 @@ public class Parser {
         }
     }
 
-    private static Command handleFind(String findKeyWords) {
-        if (findKeyWords.isBlank()) {
-            return new IncorrectCommand(FORMAT_WARNING + "find [key word(s)]");
+    private static Command handleFind(String keyWords) {
+        if (keyWords.isBlank()) {
+            return new IncorrectCommand(FORMAT_WARNING + FindCommand.FORMAT);
         } else {
-            return new FindCommand(findKeyWords.trim());
+            return new FindCommand(keyWords.trim());
         }
     }
 }

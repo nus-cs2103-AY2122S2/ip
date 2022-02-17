@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class InputPattern {
     /** Represents the expected format for date and time input */
-    private static final Pattern DATE_TIME_FORMAT = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}");
+    private static final Pattern DATE_TIME_FORMAT_PATTERN = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}");
 
     /**
      * Returns true if the given String has the expected format for date and time.
@@ -19,6 +19,6 @@ public final class InputPattern {
      * @return a boolean which indicates whether dateTime matches the DATE_TIME_FORMAT Pattern.
      */
     public static boolean isValidDateTimeString(String dateTime) {
-        return DATE_TIME_FORMAT.matcher(dateTime).matches();
+        return DATE_TIME_FORMAT_PATTERN.matcher(dateTime).matches();
     }
 }

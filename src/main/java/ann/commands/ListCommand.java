@@ -7,6 +7,7 @@ package ann.commands;
  * @version 0.1
  */
 public class ListCommand extends Command {
+    public static final String KEYWORD = "list";
     /**
      * Creates a new ListCommand.
      */

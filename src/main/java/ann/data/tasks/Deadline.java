@@ -13,6 +13,9 @@ import ann.data.InputPattern;
  * @version 0.1
  */
 public class Deadline extends Task {
+    public static final String INPUT_FORMAT = "deadline [content] /by yyyy-MM-dd HH:mm";
+    private static final TaskType TASK_TYPE = TaskType.DEADLINE;
+    public static final String KEYWORD = TASK_TYPE.getKeyword();
     private String date;
     private String time;
 

@@ -8,7 +8,7 @@ package ann.data.tasks;
  */
 public enum TaskType {
     TODO("todo"), EVENT("event"), DEADLINE("deadline");
-    private final String taskName;
+    private final String keyword;
 
     /**
      * Creates a new TaskType object from the specified task type name.
@@ -16,6 +16,9 @@ public enum TaskType {
      * @param taskName the name of the task type.
      */
     TaskType(String taskName) {
-        this.taskName = taskName;
+        this.keyword = taskName;
+    }
+    public String getKeyword() {
+        return keyword;
     }
 }
