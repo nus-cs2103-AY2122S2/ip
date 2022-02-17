@@ -52,10 +52,10 @@ public class DialogBox extends HBox {
         dialog.setPadding(new Insets(10, 15, 10, 15));
         dialog.setBackground(new Background(new BackgroundFill(
                 color,
-                new CornerRadii(10),
+                new CornerRadii(20),
                 null
         )));
-        Circle clip = new Circle(50, 50, 50);
+        Circle clip = new Circle(35, 35, 35);
         displayPicture.setImage(img);
         displayPicture.setClip(clip);
     }
@@ -74,7 +74,7 @@ public class DialogBox extends HBox {
         Color color = new Color(0.2, 0.8, 0.8, .95);
         DialogBox db = new DialogBox(text, img, color, true);
         db.setSpacing(12);
-        db.setPadding(new Insets(10, 10, 10, 0));
+        db.setPadding(new Insets(10, 10, 15, 20));
 
         return db;
     }
@@ -83,7 +83,7 @@ public class DialogBox extends HBox {
         Color color = new Color(0.8, 0.8, 0.8, .95);
         DialogBox db = new DialogBox(text, img, color, false);
         db.setSpacing(12);
-        db.setPadding(new Insets(10, 10, 10, 0));
+        db.setPadding(new Insets(10, 10, 10, 10));
         db.flip();
 
         return db;

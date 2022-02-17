@@ -40,8 +40,8 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.setBackground(new Background(new BackgroundImage(
-                new Image(this.getClass().getResourceAsStream("/images/background.png")),
-                BackgroundRepeat.NO_REPEAT,
+                new Image(getClass().getResourceAsStream("/images/background.png")),
+                BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT,
                 BackgroundPosition.CENTER,
                 BackgroundSize.DEFAULT
