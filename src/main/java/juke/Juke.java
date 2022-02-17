@@ -151,36 +151,60 @@ public class Juke extends Application {
                             op.border;
                 }
             } else if (splittedString[0].equals("deadline")) { // check for deadline tag
-                if (splittedString.length == 1) { //invalid deadline command
+                if (splittedString.length < 5) { //invalid deadline command
                     return op.border +
-                            "     ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
+                            "     ☹ OOPS!!! Please follow the correct format!\n" +
                             op.instructions +
                             op.border;
                 } else { //valid deadline command
                     Task deadlineTask = new Deadline(reply, "");
                     itemList.add(deadlineTask);
-                    return op.border +
-                            "     Got it. I've added this task: \n" +
-                            "       " + deadlineTask.getDescription() + "\n" +
-                            "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                            op.instructions +
-                            op.border;
+                    if (deadlineTask.getDescription() == "notValidMonth") {
+                        return op.border +
+                                "     Oops, you've entered an invalid month! \n" +
+                                op.instructions +
+                                op.border;
+                    } else if (deadlineTask.getDescription() == "notValidDate") {
+                        return op.border +
+                                "     Oops, you've entered an invalid date! \n" +
+                                op.instructions +
+                                op.border;
+                    } else {
+                        return op.border +
+                                "     Got it. I've added this task: \n" +
+                                "       " + deadlineTask.getDescription() + "\n" +
+                                "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                                op.instructions +
+                                op.border;
+                    }
                 }
             } else if (splittedString[0].equals("event")) { // check for event tag
-                if (splittedString.length == 1) { //invalid event command
+                if (splittedString.length < 5) { //invalid event command
                     return op.border +
-                            "     ☹ OOPS!!! The description of a event cannot be empty.\n" +
+                            "     ☹ OOPS!!! Please follow the correct format!\n" +
                             op.instructions +
                             op.border;
                 } else { //valid event command
                     Task eventTask = new Event(reply, "");
                     itemList.add(eventTask);
-                    return op.border +
-                            "     Got it. I've added this task: \n" +
-                            "       " + eventTask.getDescription() + "\n" +
-                            "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                            op.instructions +
-                            op.border;
+                    if (eventTask.getDescription() == "notValidMonth") {
+                        return op.border +
+                                "     Oops, you've entered an invalid month! \n" +
+                                op.instructions +
+                                op.border;
+                    } else if (eventTask.getDescription() == "notValidDate") {
+                        return op.border +
+                                "     Oops, you've entered an invalid date! \n" +
+                                op.instructions +
+                                op.border;
+                    } else {
+                        return op.border +
+                                "     Got it. I've added this task: \n" +
+                                "       " + eventTask.getDescription() + "\n" +
+                                "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                                op.instructions +
+                                op.border;
+                    }
                 }
             } else if (reply.equals("bye")) { // check for bye
                 System.exit(0);

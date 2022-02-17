@@ -67,12 +67,24 @@ public class Event extends Task {
         String month = digitMonth_to_AlphabeticalMonth(deadLine.split(" ")[1].split("-")[1]);
         String year = deadLine.split(" ")[1].split("-")[2];
         String time = Integer.toString(Integer.parseInt(deadLine.split(" ")[2]) % 1200);
-        if (time.length() < 4 ) {
-            time += "pm";
+        if (month == "notValidMonth") {
+            return month;
+        } else if (Integer.parseInt(date) < 1 || Integer.parseInt(date) > 31) {
+            return "notValidDate";
         } else {
-            time += "am";
+            if (time.length() < 4) {
+                int digitsLeft = 4 - time.length();
+                while (digitsLeft > 0) {
+                    time += "0";
+                    digitsLeft--;
+                }
+                time += "pm";
+            } else {
+                time += "am";
+            }
+
+            String finalDescription = taskAtHand + "(" + "at " + date + " " + month + " " + year + ", " + time + ")";
+            return "[E]" + "[" + super.getStatusIcon() + "] " + finalDescription;
         }
-        String finalDescription = taskAtHand + "(" + "at " + date + " " + month + " " + year + ", " + time + ")";
-        return "[E]" + "[" + super.getStatusIcon() + "] " + finalDescription;
     }
 }
