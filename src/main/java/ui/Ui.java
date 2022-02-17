@@ -54,6 +54,16 @@ public class Ui {
         return this.constructResponse(message);
     }
 
+    public void showFindTasks(Task[] tasks) {
+        this.output.println(this.constructFindResponse(tasks));
+    }
+
+    private String constructFindResponse(Task[] tasks) {
+        final String message = "Here are the matching tasks in your list:\n"
+                + this.constructTaskList(tasks);
+        return this.constructResponse(message);
+    }
+
     public void showAddTask(Task task, int totalTasksAfterAdd) {
         this.output.println(this.constructAddTaskResponse(task, totalTasksAfterAdd));
     }
