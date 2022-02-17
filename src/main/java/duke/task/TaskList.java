@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.exception.DukeException;
-import duke.util.Ui;
+import duke.util.ResponseFormatter;
 
 /**
  * Handles all operations related to the List of Tasks
@@ -41,15 +41,15 @@ public class TaskList {
      */
     public void processNewTask(Task curr) {
         tasks.add(curr);
-        Ui.printFeedbackFooter("Got it. I've added this task:", curr, tasks);
+        ResponseFormatter.printFeedbackFooter("Got it. I've added this task:", curr, tasks);
     }
 
     public void handleBye() {
-        Ui.printBye();
+        ResponseFormatter.printBye();
     }
 
     public void handleList() {
-        Ui.printList(tasks);
+        ResponseFormatter.printList(tasks);
     }
 
     /**
@@ -60,7 +60,7 @@ public class TaskList {
         Task curr = tasks.get(number - 1);
 
         curr.setDone();
-        Ui.printFeedbackFooter("Nice! I've marked this task as done:", curr, tasks);
+        ResponseFormatter.printFeedbackFooter("Nice! I've marked this task as done:", curr, tasks);
     }
 
     /**
@@ -71,7 +71,7 @@ public class TaskList {
         Task curr = tasks.get(number - 1);
 
         curr.setUndone();
-        Ui.printFeedbackFooter("OK, I've marked this task as not done yet:", curr, tasks);
+        ResponseFormatter.printFeedbackFooter("OK, I've marked this task as not done yet:", curr, tasks);
     }
 
     /**
@@ -84,7 +84,7 @@ public class TaskList {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
         } catch (DukeException e) {
-            Ui.printDukeException(e, "Please try again:");
+            ResponseFormatter.printDukeException(e, "Please try again:");
             return;
         }
 
@@ -102,7 +102,7 @@ public class TaskList {
         try {
             curr = new Deadline(" " + strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
-            Ui.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!\nPlease try again:");
+            ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!\nPlease try again:");
             return;
         }
         processNewTask(curr);
@@ -118,7 +118,7 @@ public class TaskList {
         try {
             curr = new Event(" " + strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
-            Ui.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!\nPlease try again:");
+            ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!\nPlease try again:");
             return;
         }
         processNewTask(curr);
@@ -135,14 +135,14 @@ public class TaskList {
                 throw new DukeException("Hey! That item does not exist!");
             }
         } catch (DukeException e) {
-            Ui.printDukeException(e, "Please try again");
+            ResponseFormatter.printDukeException(e, "Please try again");
             return;
         }
 
         Task curr = tasks.get(number - 1);
         tasks.remove(curr);
 
-        Ui.printFeedbackFooter("Noted. I've removed this task:", curr, tasks);
+        ResponseFormatter.printFeedbackFooter("Noted. I've removed this task:", curr, tasks);
     }
 
     /**
@@ -159,9 +159,9 @@ public class TaskList {
         }
 
         if (foundTasks.isEmpty()) {
-            Ui.printMessage("No tasks found matching \"" + key + "\" :-(");
+            ResponseFormatter.printMessage("No tasks found matching \"" + key + "\" :-(");
         } else {
-            Ui.printFoundList(foundTasks, key);
+            ResponseFormatter.printFoundList(foundTasks, key);
         }
     }
 }

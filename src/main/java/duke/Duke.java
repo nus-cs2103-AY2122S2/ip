@@ -5,7 +5,7 @@ import java.util.Scanner;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.util.Parser;
-import duke.util.Ui;
+import duke.util.ResponseFormatter;
 
 
 /**
@@ -14,6 +14,7 @@ import duke.util.Ui;
 public class Duke {
     private Storage storageHandler;
     private TaskList tasks;
+    private String response;
 
     /**
      * Default constructor
@@ -21,6 +22,7 @@ public class Duke {
     public Duke() {
         storageHandler = new Storage();
         tasks = new TaskList();
+        response = "";
     }
 
     /**
@@ -34,6 +36,14 @@ public class Duke {
     }
 
     /**
+     * Returns a String containing what should be printed in the GUI
+     * @return the response string from StringBuilder.toString()
+     */
+    public String getResponse() {
+        return response.toString();
+    }
+
+    /**
      * Main logic for the chatbot
      * Gets called in the main method
      */
@@ -41,8 +51,8 @@ public class Duke {
         storageHandler = new Storage();
         this.tasks = new TaskList(storageHandler.loadTasksFromFile());
 
-        String botName = "Kizer";
-        Ui.printGreeting(botName);
+        String botName = "Duke";
+        ResponseFormatter.printGreeting(botName);
 
         Scanner sc = new Scanner(System.in);
 
@@ -84,7 +94,7 @@ public class Duke {
                 tasks.handleFind(inputArray);
                 break;
             default:
-                Ui.printDontKnowCommand();
+                ResponseFormatter.printDontKnowCommand();
                 break;
             }
         }

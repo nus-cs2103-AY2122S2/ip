@@ -7,11 +7,11 @@ import duke.task.Task;
 /**
  * Represents the User Interface
  */
-public final class Ui {
+public final class ResponseFormatter {
 
-    private static final String BAR = "-".repeat(60);
+    private static final String BAR = "-".repeat(58);
 
-    private Ui() {
+    private ResponseFormatter() {
     }
 
     /**
@@ -20,18 +20,20 @@ public final class Ui {
      * for the actual printing
      *
      * @param message string to be printed
+     * @return formated response
      */
-    public static void printMessage(String message) {
-        System.out.println(BAR + "\n" + message + "\n" + BAR);
+    public static String printMessage(String message) {
+        return BAR + "\n" + message + "\n" + BAR;
     }
 
     /**
      * Prints a greeting with a custom bot name
      * @param botName custom bot name
+     * @return
      */
-    public static void printGreeting(String botName) {
+    public static String printGreeting(String botName) {
         String greeting = "Hello! I'm " + botName + "\nWhat can I do for you?";
-        printMessage(greeting);
+        return printMessage(greeting);
     }
 
     public static void printBye() {
