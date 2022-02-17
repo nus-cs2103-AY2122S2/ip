@@ -16,7 +16,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private String filePath = "./data/duke.txt";
+    private String filePath = "data/duke.txt";
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
