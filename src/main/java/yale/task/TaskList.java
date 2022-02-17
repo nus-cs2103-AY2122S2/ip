@@ -1,5 +1,7 @@
 package yale.task;
 
+import yale.command.Ui;
+
 import java.time.DateTimeException;
 import java.util.ArrayList;
 
@@ -66,7 +68,7 @@ public class TaskList {
      */
     public void importIn(String fileData) {
         if (fileData.equals("")) {
-            return;
+            Ui.hasSavedTasks = false;
         }
         String[] lines = fileData.split("\n");
         for (int i = 0; i < lines.length; i++) {

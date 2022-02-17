@@ -37,14 +37,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        //Button
         sendIcon.setFitHeight(20);
         sendIcon.setFitWidth(20);
         sendButton.setGraphic(sendIcon);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        Ui.welcomePrompt();
-        dialogContainer.getChildren().add(
-                DialogBox.getYaleDialog(Ui.welcomePrompt(), yaleImage));
+        dialogContainer.getChildren().add(DialogBox.getYaleDialog(Ui.welcomePrompt(), yaleImage));
     }
 
     public void setYale(Yale y) {
