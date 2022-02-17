@@ -7,6 +7,7 @@ public class DukeException extends Exception {
 
     /**
      * Instantiates a DukeException.
+     *
      * @param errorMessage The detail message.
      * The detail message is saved for later retrieval by the Throwable.getMessage() method.
      */
@@ -21,6 +22,7 @@ public class DukeException extends Exception {
 
     /**
      * Returns the detail message of the error that has occurred in the program.
+     *
      * @return Detail message of a DukeException.
      */
     @Override

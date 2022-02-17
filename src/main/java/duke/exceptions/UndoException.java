@@ -17,6 +17,7 @@ public class UndoException extends DukeException {
     /**
      * Returns the detail message of the error that has occurred when undoing
      * a command that the user has keyed in.
+     *
      * @return Detail message of an UndoException.
      */
     @Override

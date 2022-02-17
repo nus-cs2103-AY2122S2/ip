@@ -38,6 +38,7 @@ public class Parser {
      * Returns a command based on the command type that the user has keyed in.
      * This method is specific to command types that require index manipulation.
      * (For e.g. Delete, mark and un-mark commands).
+     *
      * @param commandType Type of command the the user has keyed in.
      * @param index Index of a task.
      * @throws TaskException if task index provided is not a number or if the task cannot be
@@ -48,8 +49,8 @@ public class Parser {
         String taskIdParameter = index[0];
         try {
             int taskId = Integer.parseInt(taskIdParameter);
-            boolean withinBoundary = taskId > 0 && taskId < (TaskList.getTaskSize() + 1);
-            if (!(withinBoundary)) {
+            boolean isWithinBoundary = taskId > 0 && taskId < (TaskList.getTaskSize() + 1);
+            if (!(isWithinBoundary)) {
                 throw new TaskException("UNFOUND_TASK");
             }
 
@@ -82,6 +83,7 @@ public class Parser {
      * Returns a command based on the input the user has parsed into the system.
      * Throws an exception if the input that the user has parsed is unreadable
      * by the system.
+     *
      * @param input Input that the user has keyed into the GUI commandline.
      * @return A command that can be executed to perform an action.
      * @throws DukeException if the string input provided by the user cannot
@@ -114,6 +116,7 @@ public class Parser {
     /**
      * Returns a command for an input that contains more than 1 input words.
      * These commands include mark, find, delete, as well as all add commands.
+     *
      * @param commandType CommandType of the command.
      * @param taskId Index of task (used for mark, find, delete).
      * @param taskDetails Details of task (used for todo, event, deadline).
@@ -148,6 +151,7 @@ public class Parser {
 
     /**
      * Returns a command based on the commandType provided.
+     *
      * @param commandType Type of command that the user has keyed in.
      * @param taskId Id of task. (For delete, mark and unmark commands)
      * @param description Description of task. (For add commands)
@@ -196,6 +200,7 @@ public class Parser {
     /**
      * Returns a command for an input that contains only one input word.
      * These commands are specific to list, bye and undo.
+     *
      * @param commandType CommandType of the command.
      * @return A Command that can be executed. This command is dependent on the commandType
      * that has been provided to the method.

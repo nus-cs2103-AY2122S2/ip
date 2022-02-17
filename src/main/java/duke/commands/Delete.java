@@ -15,6 +15,7 @@ public class Delete extends Command {
 
     /**
      * Initialize a Delete Command.
+     *
      * @param taskId The index of the task to be deleted.
      */
     public Delete(Integer taskId) {
@@ -23,6 +24,7 @@ public class Delete extends Command {
 
     /**
      * Returns a success string after a successful deletion of a task in the task list.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @param ui A UI object that is used to print the System's response.
      * @param storage A storage object that is able to read and write to storage file.
@@ -41,6 +43,7 @@ public class Delete extends Command {
     /**
      * Returns a success message after a successful undo of a Delete Command.
      * Throws a DukeException when there errors undoing the command.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @return Success message after a Delete Command has been undone.
      * @throws DukeException if the program is unable to undo the command.

@@ -13,6 +13,7 @@ public class Unmark extends Command {
 
     /**
      * Initialize an unmark Command
+     *
      * @param taskId index of the task to be marked
      */
     public Unmark(Integer taskId) {
@@ -24,6 +25,7 @@ public class Unmark extends Command {
      * in the task list.
      * Returns an error message if there were issues faced when un-marking
      * a task as not completed in task list.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @param ui A UI object that is used to print the System's response.
      * @param storage A storage object that is able to read and write to storage file.
@@ -41,6 +43,7 @@ public class Unmark extends Command {
     /**
      * Returns a success message after a successful undo of a Unmark Command.
      * The task list will be reverted to the state where the task was marked.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @return Message after an un-mark command has been successfully undone.
      */

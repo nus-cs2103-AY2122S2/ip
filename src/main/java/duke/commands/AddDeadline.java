@@ -17,6 +17,7 @@ public class AddDeadline extends Command {
 
     /**
      * Initialize an AddDeadline Command.
+     *
      * @param description Description of the deadline task.
      * @param date Duedate of the deadline task.
      */
@@ -27,6 +28,7 @@ public class AddDeadline extends Command {
 
     /**
      * Returns a success string after a successful execution of an add deadline command.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @param ui A UI object that is used to print the System's response.
      * @param storage A storage object that is able to read and write to storage file.
@@ -48,6 +50,7 @@ public class AddDeadline extends Command {
     /**
      * Returns a success message after a successful undo of an AddDeadline Command.
      * Throws a DukeException when there errors undoing the command.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @return Success message after an AddDeadline command has been undone.
      * @throws DukeException if the program is unable to undo the command.

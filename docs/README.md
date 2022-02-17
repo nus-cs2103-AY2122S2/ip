@@ -39,6 +39,7 @@ Expected outcome:
 Duke will add the todo to the task list
 
 ```
+We have added [T][] paynow money to friend to the list.
 You now have a total of 9 tasks in your list! Subarashii!
 ```
 
@@ -55,6 +56,7 @@ Expected outcome:
 Duke will add the event to the task list
 
 ```
+We have added [E][] company dinner (at: 12-Dec-2022) to the list.
 You now have a total of 9 tasks in your list! Subarashii!
 ```
 
@@ -64,13 +66,14 @@ Adds a deadline to the task list. Useful for tasks that needs to be completed by
 
 Example of usage:
 
-`deadline company dinner /by 12-12-2022`
+`deadline CS3243 assignment /by 12-12-2022`
 
 Expected outcome:
 
 Duke will add the deadline to the task list
 
 ```
+We have added [D][] CS3243 assignment (by: 12-Dec-2022) to the list.
 You now have a total of 9 tasks in your list! Subarashii!
 ```
 

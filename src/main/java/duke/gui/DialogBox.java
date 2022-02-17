@@ -33,6 +33,7 @@ public class DialogBox extends HBox {
 
     /**
      * Initialize a DialogBox with a text label and a corresponding image.
+     *
      * @param text Text label.
      * @param img Image corresponding to the user type.
      */
@@ -64,6 +65,7 @@ public class DialogBox extends HBox {
 
     /**
      * Method that alters the design of the dialog box depending on the type of user.
+     *
      * @param isUser Boolean to indicate if the person is a user or Duke.
      */
     private void setDesign(boolean isUser) {
@@ -81,6 +83,7 @@ public class DialogBox extends HBox {
     /**
      * Method that returns the dialog box of the user.
      * On the JavaFX application, it is the user on the right of the screen.
+     *
      * @param text Text label.
      * @param img User image.
      * @return User dialog box.
@@ -95,6 +98,7 @@ public class DialogBox extends HBox {
     /**
      * Method that returns the dialog box of Duke.
      * On the JavaFX application, it is the user on the left of the screen.
+     *
      * @param text Text label.
      * @param img Duke's image.
      * @return Duke's dialog box.

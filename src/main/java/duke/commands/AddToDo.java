@@ -16,6 +16,7 @@ public class AddToDo extends Command {
 
     /**
      * Initialize the AddToDo Command.
+     *
      * @param taskDetails Description of task.
      */
     public AddToDo(String taskDetails) {
@@ -25,6 +26,7 @@ public class AddToDo extends Command {
 
     /**
      * Returns a success string after a successful execution of an add to-do command.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @param ui A UI object that is used to print the System's response.
      * @param storage A storage object that is able to read and write to storage file.
@@ -46,6 +48,7 @@ public class AddToDo extends Command {
     /**
      * Returns a success message after a successful undo of an AddTodo Command.
      * Throws a DukeException when there errors undoing the command.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @return Success message after an AddTodo command has been undone.
      * @throws DukeException if the program is unable to undo the command.

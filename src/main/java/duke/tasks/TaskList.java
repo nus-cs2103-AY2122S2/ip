@@ -79,7 +79,7 @@ public class TaskList {
     public static String addTask(Task task) throws DukeException {
         tasks.add(task);
         Storage.writeToDukeFile();
-        return ui.showAddMsg(tasks.size());
+        return ui.showAddMsg(tasks.size(), task);
     }
 
     /**

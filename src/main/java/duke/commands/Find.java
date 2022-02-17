@@ -15,6 +15,7 @@ public class Find extends Command {
 
     /**
      * Initialize A Find Command.
+     *
      * @param query A search query that the user has keyed in.
      */
     public Find(String query) {
@@ -23,6 +24,7 @@ public class Find extends Command {
 
     /**
      * Returns a success string after the system has queried the task list given the search query.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @param ui A UI object that is used to print the System's response.
      * @param storage A storage object that is able to read and write to storage file.
@@ -35,6 +37,7 @@ public class Find extends Command {
 
     /**
      * Returns an UndoException since a find command cannot be undone.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @throws DukeException since the program is unable to undo a find command.
      */

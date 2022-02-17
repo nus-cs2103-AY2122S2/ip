@@ -11,6 +11,7 @@ import duke.tasks.TaskList;
 public class List extends Command {
     /**
      * Returns a success string containing the list of items that are present in the task list.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @param ui A UI object that is used to print the System's response.
      * @param storage A storage object that is able to read and write to storage file.
@@ -24,6 +25,7 @@ public class List extends Command {
 
     /**
      * Returns an UndoException since a list command cannot be undone.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @throws UndoException since the program is unable to undo a list command.
      **/

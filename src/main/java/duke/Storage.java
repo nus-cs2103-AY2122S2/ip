@@ -32,6 +32,7 @@ public class Storage {
      * Instantiates a storage object given a directory path and a file path.
      * The directory path and file path provides the information of where the
      * storage file should be stored.
+     *
      * @param directoryPath Directory path to storage file.
      * @param filePath File path to storage file.
      */
@@ -51,6 +52,7 @@ public class Storage {
      * Method that takes in a list of tasks and writes it into the storage file.
      * Throws an exception if the program is unable to find the file that it needs
      * to write the tasks to.
+     *
      * @throws DukeException if the file cannot be found in the directory path provided.
      */
     public static void writeToDukeFile() throws DukeException {
@@ -67,6 +69,7 @@ public class Storage {
 
     /**
      * Method that reads from the file and outputs a list of tasks that have been read from the storage file.
+     *
      * @return List of tasks that have been stored in the storage file object.
      * @throws DukeException if the program is unable to read content from duke file or if the file does not exist
      * at the location specified.
@@ -102,6 +105,7 @@ public class Storage {
      * Returns a task based on the stored file format of the task.
      * Throws an exception if the file is corrupted or if the tasks have been stored
      * in a format that is unreadable by the parser.
+     *
      * @param taskInput Stored file format of the task.
      * @param taskDataArray Array containing the information of the task.
      * @return A task that is generated based on the information in the taskArray as well as
@@ -140,6 +144,7 @@ public class Storage {
      * Method that creates a directory for the storage file if it does not exist.
      * Throws an exception if there is already an existing directory that contains
      * the file.
+     *
      * @throws StorageException if there is an error that occurs when trying to create the
      * directory.
      */
@@ -170,6 +175,7 @@ public class Storage {
      * Returns a string that is shown to the user when the application first launches.
      * It contains all the tasks that have been saved in duke from the user's previous
      * interactions with the Duke GUI.
+     *
      * @return A string containing all the list of tasks that has been stored in Duke.
      */
     public String getStorageTasks() {

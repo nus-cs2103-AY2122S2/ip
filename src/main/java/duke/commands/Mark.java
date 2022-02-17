@@ -14,6 +14,7 @@ public class Mark extends Command {
 
     /**
      * Initialize a Mark Command.
+     *
      * @param taskId Index of the task to be marked.
      */
     public Mark(Integer taskId) {
@@ -25,6 +26,7 @@ public class Mark extends Command {
      * in the task list.
      * Returns an error message if there were issues faced when marking
      * a task as completed in task list.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @param ui A UI object that is used to print the System's response.
      * @param storage A storage object that is able to read and write to storage file.
@@ -42,6 +44,7 @@ public class Mark extends Command {
     /**
      * Returns a success message after a successful undo of a mark Command.
      * The task list will be reverted to the state where the task was unmarked.
+     *
      * @param taskList A taskList containing all existing tasks in Duke.
      * @return Message after a mark command has been successfully undone.
      */

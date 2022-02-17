@@ -9,6 +9,7 @@ public class TaskException extends DukeException {
 
     /**
      * Initializes a Task Exception.
+     *
      * @param errorCode Takes in an errorCode that will determine the message
      * that gets printed out.
      */
@@ -19,6 +20,7 @@ public class TaskException extends DukeException {
     /**
      * Returns the detail message of the error that has occurred when processing
      * the tasks.
+     *
      * @return Detail message of a TaskException.
      */
     @Override

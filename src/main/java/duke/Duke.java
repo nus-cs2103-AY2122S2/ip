@@ -18,6 +18,7 @@ public class Duke {
      * Instantiates a Duke chat bot.
      * It requires a directory path and file path to locate the storage file.
      * The storage file contains the tasks that the user has keyed in before.
+     *
      * @param directoryPath Directory path to storage file.
      * @param filePath File path to storage file.
      */

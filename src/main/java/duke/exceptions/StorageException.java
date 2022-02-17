@@ -17,6 +17,7 @@ public class StorageException extends DukeException {
     /**
      * Returns the detail message of the error that has occurred when trying to
      * read or write from the storage file.
+     *
      * @return Detail message of an StorageException.
      */
     @Override
