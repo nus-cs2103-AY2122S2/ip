@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class TextUI {
+
     private final Scanner in;
     private final PrintStream out;
 
@@ -12,7 +13,7 @@ public class TextUI {
         this(System.in, System.out);
     }
 
-    public TextUI(InputStream in, PrintStream out){
+    public TextUI(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
     }
@@ -26,7 +27,6 @@ public class TextUI {
         while (shouldIgnore(currInput)) {
             currInput = in.nextLine().trim();
         }
-
         return currInput;
     }
 
@@ -47,5 +47,4 @@ public class TextUI {
         out.println("How may I assist you?");
         out.print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
     }
-
 }

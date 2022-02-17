@@ -1,6 +1,7 @@
 package duke.commands;
 
 public class ListCommand extends Command {
+
     private String displayTaskList() {
         StringBuilder numberedTaskList = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
@@ -14,7 +15,6 @@ public class ListCommand extends Command {
         if (taskList.size() == 0) {
             return "Your current task list is empty";
         }
-
         return String.format("These are the current tasks in your list:\n%s", displayTaskList());
     }
 }

@@ -5,6 +5,7 @@ import duke.exceptions.DukeUnsupportedOperationException;
 import duke.tasks.TaskList;
 
 public class Command {
+
     static TaskList taskList;
 
     public static void defineTaskList(TaskList taskList) {

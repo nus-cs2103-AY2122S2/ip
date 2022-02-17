@@ -1,6 +1,7 @@
 package duke.commands;
 
 public class ExitCommand extends Command{
+
     private static boolean isProgramRunning = true;
 
     public static boolean isRunning() {

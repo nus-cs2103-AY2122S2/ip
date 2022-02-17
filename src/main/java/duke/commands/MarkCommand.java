@@ -4,6 +4,7 @@ import duke.exceptions.DukeInvalidArgumentException;
 import duke.tasks.Task;
 
 public class MarkCommand extends Command {
+
     private int index;
 
     public MarkCommand(int index) {
@@ -19,7 +20,5 @@ public class MarkCommand extends Command {
         Task markedTask = taskList.markTask(index);
         return String.format("Duly noted. The following task has been marked as done:\n" +
                 "%s", markedTask);
-
     }
-
 }

@@ -3,6 +3,7 @@ package duke.tasks;
 import java.util.ArrayList;
 
 public class TaskList {
+
     private final ArrayList<Task> taskList;
 
     public TaskList() {
@@ -44,11 +45,10 @@ public class TaskList {
         for (Task task : taskList) {
             dataToWrite.append(task.toSaveData());
         }
-
         return dataToWrite.toString();
     }
 
-    public void displayTaskDelete(Task deletedTask){
+    public void displayTaskDelete(Task deletedTask) {
         System.out.println("As you wish. The following task has been removed");
         System.out.println(deletedTask.toString());
         System.out.printf("You now have %d item(s) in your list\n", taskList.size());

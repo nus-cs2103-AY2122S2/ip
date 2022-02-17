@@ -4,6 +4,7 @@ import duke.exceptions.DukeInvalidArgumentException;
 import duke.tasks.Task;
 
 public class UnmarkCommand extends Command {
+
     private int index;
 
     public UnmarkCommand(int index) {
@@ -19,6 +20,5 @@ public class UnmarkCommand extends Command {
         Task unmarkedTask = taskList.unmarkTask(index);
         return String.format("Very well. The following task has been marked as not done:" +
                 "%s", unmarkedTask);
-
     }
 }

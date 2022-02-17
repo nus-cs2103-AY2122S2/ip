@@ -20,24 +20,21 @@ public class Duke {
         textUI = new TextUI();
         storage = new Storage();
         parser = new Parser();
-
         try {
             taskList = Storage.loadTasklist();
         } catch (DukeException e) {
             taskList = new TaskList();
             System.out.println(e.getMessage());
         }
-
         Command.defineTaskList(taskList);
         textUI.printWelcomeMessage();
     }
 
     private static void run() {
-        Command currCommand = null;
         do {
             String userInputCommand = textUI.getUserCommand();
             try {
-                currCommand = parser.parseCommands(userInputCommand);
+                Command currCommand = parser.parseCommands(userInputCommand);
                 textUI.printMessage(currCommand.execute());
                 storage.saveTasklist(taskList);
             } catch (DukeException e) {

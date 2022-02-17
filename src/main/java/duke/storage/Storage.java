@@ -12,6 +12,7 @@ import java.nio.file.Path;
 
 
 public class Storage {
+
     private static final Path DATA_PATH = Paths.get("data", "duke.txt");
 
     private static void initialiseSaveFile() throws DukeException {
@@ -39,10 +40,10 @@ public class Storage {
         }
     }
 
-    public static TaskList loadTasklist() throws DukeException{
+    public static TaskList loadTasklist() throws DukeException {
         initialiseSaveFile();
         String strCurrentLine;
-        Task currentTask;
+        Task currentTask = null;
         TaskList taskList = new TaskList();
         try {
             BufferedReader saveFilereader = new BufferedReader(new FileReader(DATA_PATH.toString()));
@@ -50,30 +51,24 @@ public class Storage {
                 switch (strCurrentLine.charAt(0)) {
                 case 'T' : {
                     currentTask = Todo.createFromData(strCurrentLine);
-                    taskList.addTask(currentTask);
                     break;
                 }
                 case 'E' : {
                     currentTask = Event.createFromData(strCurrentLine);
-                    taskList.addTask(currentTask);
                     break;
                 }
                 case 'D' : {
                     currentTask = Deadline.createFromData(strCurrentLine);
-                    taskList.addTask(currentTask);
                     break;
                 }
                 }
+                taskList.addTask(currentTask);
             }
             saveFilereader.close();
         } catch (IOException e) {
             throw new DukeException("Unable to load save file");
         }
-
         return taskList;
     }
-
-
-
 }
 

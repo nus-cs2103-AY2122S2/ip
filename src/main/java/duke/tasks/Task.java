@@ -1,29 +1,30 @@
 package duke.tasks;
 
 public class Task {
+
     private String content;
-    private boolean markedDone = false;
+    private boolean isDone = false;
 
     public Task(String content) {
         this.content = content;
     }
 
     public void markAsDone() {
-        this.markedDone = true;
+        this.isDone = true;
     }
 
     public void markAsNotDone() {
-        this.markedDone = false;
+        this.isDone = false;
     }
 
     @Override
     public String toString() {
-        String markedDoneIndicator = this.markedDone ? "X" : " ";
+        String markedDoneIndicator = this.isDone ? "X" : " ";
         return String.format("[%s] %s", markedDoneIndicator, this.content);
     }
 
     public String toSaveData() {
-        String markedDoneIndicator = this.markedDone ? "1" : "0";
+        String markedDoneIndicator = this.isDone ? "1" : "0";
         return String.format("%s|%s", markedDoneIndicator, this.content);
     }
 
