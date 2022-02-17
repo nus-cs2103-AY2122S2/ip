@@ -12,7 +12,7 @@ public class EventTest {
 
     @Test
     public void testCorrectEventString() {
-        String eventExpected = "[E][ ] Eat apple (at: 02-05-2021)";
+        String eventExpected = "[E][ ] Eat apple (at: 02-May-2021)";
         String eventActual = "";
 
         try {
@@ -27,7 +27,7 @@ public class EventTest {
 
     @Test
     public void testWrongEventString() {
-        String eventExpected = "The date format parsed is incorrect!It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!";
+        String eventExpected = "The date format parsed is incorrect! It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!";
         String eventActual = "";
 
         try {
