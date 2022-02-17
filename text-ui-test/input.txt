@@ -1,0 +1,31 @@
+todo read book
+list
+mark 1
+mark 2
+deadline return book /by tomorrow
+list
+mark 2
+list
+event watch lecture /at Friday 2-4pm
+unmark 1
+list
+delete 2
+delete 3
+blah
+todo
+deadline
+event
+deadline finish project
+deadline finish project by tomorrow
+event party
+event party at
+list
+todo read book
+event watch lecture /at Friday 2-4pm
+delete 2
+list
+event watch lecture /at Friday 2-4pm
+deadline watch lecture /by Friday 2-4pm
+mark 3
+list
+bye
