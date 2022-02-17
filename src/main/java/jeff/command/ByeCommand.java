@@ -11,15 +11,17 @@ import jeff.ui.Ui;
 public class ByeCommand extends Command {
 
     /**
-     * Saves the current task list and say "bye" to the user.
+     * Say "bye" to the user.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
+     * @return goodbye response.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String response = ui.showBye();
+        return response;
     }
 
     /**

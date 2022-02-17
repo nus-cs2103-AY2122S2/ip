@@ -28,11 +28,12 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
+     * @return confirmation response that a task has been deleted.
      * @throws JeffException When index of task to delete is
      *                       out of bounds or file cannot be saved.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
         try {
             tasks.getAt(index);
         } catch (IndexOutOfBoundsException e) {
@@ -41,9 +42,10 @@ public class DeleteCommand extends Command {
                     + temp + " is out of bounds,"
                     + "please double check the index number");
         }
-        ui.showDelete(tasks.getString(index), tasks.size() - 1);
+        String response = ui.showDelete(tasks.getString(index), tasks.size() - 1);
         tasks.delete(index);
         storage.save(tasks);
+        return response;
     }
 
     /**

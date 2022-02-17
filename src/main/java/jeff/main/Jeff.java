@@ -33,28 +33,19 @@ public class Jeff {
     }
 
     /**
-     * Setup the starting variables appropriately, parses input and execute them.
+     * Get the response for Jeff to display in the GUI, response can be
+     * either a confirmation that the intended task is done, or in the case an exception
+     * was thrown, display what went wrong.
+     *
+     * @param input user input.
+     * @return Jeff's response.
      */
-    public void run() {
-        ui.showWelcome();
-        ui.showLine();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (JeffException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (JeffException e) {
+            return ui.showError(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new Jeff("data/tasks.txt").run();
     }
 }

@@ -28,11 +28,12 @@ public class UnmarkCommand extends Command {
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui class for invoking user feedback.
      * @param storage Storage class used to save files.
+     * @return confirmation response that a task has been unmarked.
      * @throws JeffException When index of task to mark as not done
      *                       is out of bounds or file cannot be saved.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JeffException {
         try {
             tasks.getAt(index);
         } catch (IndexOutOfBoundsException e) {
@@ -42,8 +43,9 @@ public class UnmarkCommand extends Command {
                     + "please double check the index number");
         }
         tasks.unmark(index);
-        ui.showUnmark(tasks.getString(index));
+        String response = ui.showUnmark(tasks.getString(index));
         storage.save(tasks);
+        return response;
     }
 
     /**
