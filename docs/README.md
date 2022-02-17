@@ -47,19 +47,16 @@ Format: ```help [COMMAND_NAME]```
 Example: 
   - ```help deadline```
   - ```help```
-<br/>
 
 ### Viewing chat tab: `chat`
 Switches the tab to a chat page.
 
 Format: ```chat```
-<br/><br/>
 
 ### Viewing tasklist: `list`
 Shows the tasklist
 
 Format: ```list```
-<br/><br/>
 
 ### Adding a ToDo task: `todo`
 Adds a ToDo task to the tasklist
@@ -69,7 +66,6 @@ Format: ```todo DESCRIPTION```
 Example: 
   - ```todo buy groceries```
   - ```todo go for a run```
-<br/>
 
 ### Adding a Deadline task: `deadline`
 Adds a Deadline task to the tasklist
@@ -79,7 +75,6 @@ Format: ```deadline DESCRIPTION /by DATETIME```
 
 Example: 
   - ```deadline CS2105 Assignment /by 01/03/2022 2359```
-<br/>
 
 ### Adding an Event task: `event`
 Adds an Event task to the tasklist
@@ -88,7 +83,6 @@ Format: ```event DESCRIPTION /at LOCATION```
 
 Example: 
   - ```event party /at Tom's house```
-<br/>
 
 ### Deleting a task: `delete`
 Deletes the specified task from the tasklist.
@@ -100,13 +94,11 @@ Format: ```delete INDEX```
 
 Example: 
   - ```delete 1```
-<br/>
 
 ### Clearing the tasklist: `clearls`
 Deletes all tasks from the tasklist.
 
 Format: ```clearls```
-<br/><br/>
 
 ### Finding tasks: `find`
 Finds tasks whose description contain any of the given keywords.
@@ -117,7 +109,6 @@ Format: ```find KEYWORDS```
 
 Example: 
   - ```find groceries```
-<br/>
 
 ### Marking a task: `mark`
 Marks a specified task from the tasklist as COMPLETED.
@@ -129,7 +120,6 @@ Format: ```mark INDEX```
 
 Example: 
   - ```mark 1```
-<br/>
 
 ### Unmarking a task: `unmark`
 Marks a specified task from the tasklist as NOT COMPLETED.
@@ -141,25 +131,24 @@ Format: ```Unmark INDEX```
 
 Example: 
   - ```unmark 1```
-<br/>
 
 ### Closing the application: `bye`
 Exits the application
 
 Format: ```bye```
-<br/><br/>
 
 ### Saving the data
 Task data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.<br/><br/>
 
 ### Editing the data file
 Task data are saved as a txt file [JAR file location]/data/listData.txt. Advanced users are welcome to update data directly by editing that data file.<br/><br/>
-##
+
 ## FAQ
 **Q**: How do I transfer my data to another Computer?<br/>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 ## Command summary
+
 | Action | Format | Examples |
 | ------ | ------ | ------ |
 | Help | ```help [COMMAND_NAME]``` | ```help``` |
