@@ -1,4 +1,6 @@
 # User Guide
+
+![screenshot](https://tobihy.github.io/ip/Ui.png)
 Welcome to the user guide for Poogie! Poogie is **a desktop app for tracking your daily tasks, optimised for use via 
 Command-Line Interface (CLI)**. Poogie helps you in your everyday life by acting as your personal assistant, such that 
 you can focus on the things that matter.
@@ -97,6 +99,13 @@ Delete a task from your list of tasks.
 Format: `delete {task number}`
 <br><br>
 
+### Find a task: `find`
+
+Find a task in your list of tasks using a keyword.
+
+Format: `find {keyword}`
+<br><br>
+
 ### Edit a task: `edit`
 
 Edit a task on your list of tasks.
@@ -128,6 +137,6 @@ Format: `bye`
 | event    | event {description of event} /at {date and/or time}                                   | `event project zoom meeting /at 2022-02-18 2000`<br/>`event sam's birthday /at 2022-12-26`<br/>`event visit to ryan's house /at 1830` |
 | mark     | mark {task number}                                                                    | `mark 1`                                                                                                                              |
 | unmark   | unmark {task number}                                                                  | `unmark 1`                                                                                                                            |
-| delete   | delete {task number}                                                                  | `delete 1`                                                                                                                            |
+| find     | find {keyword}                                                                        | `find essay`<br/>`find meeting`                                                                                                       |
 | edit     | edit {task number} desc/{new description}<br>edit {task number} dt/{date and/or time} | `edit 1 desc/sweep room`<br/>`edit 2 dt/2022-03-06 1500`<br/>`edit 3 dt/1900`                                                         |
 | bye      | bye                                                                                   | `bye`                                                                                                                                 |
