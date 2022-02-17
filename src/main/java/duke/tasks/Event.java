@@ -25,7 +25,7 @@ public class Event extends Task {
     public static Event createFromData(String savedData) {
         Parser parser = new Parser();
         String[] parsedSavedData = savedData.split("\\|");
-        Event newEvent = new Event(parsedSavedData[2], parser.parseDateTime(parsedSavedData[3]));
+        Event newEvent = new Event(parsedSavedData[2], parser.parseSaveDateTime(parsedSavedData[3]));
         if (parsedSavedData[1].equals("1")) {
             newEvent.markAsDone();
         }

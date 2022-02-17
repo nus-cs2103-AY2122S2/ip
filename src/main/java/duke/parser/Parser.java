@@ -14,8 +14,13 @@ public class Parser {
         return arguments[1].split(" /([Aa][Tt]|[Bb][Yy]) ", 2);
     }
 
-    public LocalDateTime parseDateTime(String datetime) {
+    private LocalDateTime parseDateTime(String datetime) {
         DateTimeFormatter datetimePattern = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return LocalDateTime.parse(datetime, datetimePattern);
+    }
+
+    public LocalDateTime parseSaveDateTime(String datetime) {
+        DateTimeFormatter datetimePattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(datetime, datetimePattern);
     }
 
