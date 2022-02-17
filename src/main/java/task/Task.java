@@ -1,30 +1,22 @@
 package task;
 
 /**
- * Represents a Task, containing its relevant fields
- * and methods.
+ * Represents a task, containing its relevant fields and methods.
  */
 public class Task {
 
-    /**
-     * Name of Task.
-     */
+    /** Name of task. */
     protected String description;
-
-    /**
-     * Status to indicate if the Task is done or not.
-     */
+    /** Status to indicate if the task is done or not. */
     protected boolean isDone;
-    /**
-     * Tag of activity.
-     */
+    /** Tag of task. */
     protected String tag;
 
     /**
-     * Creates Task as per description entered, initializing the
-     * task as undone and tag as null.
+     * Instantiates task with description input.
+     * Sets the task status as false and task tag as null.
      *
-     * @param description Name of Task.
+     * @param description Description of task.
      */
     public Task(String description) {
         this.description = description;
@@ -33,17 +25,12 @@ public class Task {
     }
 
     /**
-     * Creates Task as per saved description, isDone status
-     * and tag.
+     * Instantiates task with task description, task status and task tag
+     * from data retrieved from the stored file.
      *
-     * @param description Name of Task.
-     */
-
-    /**
-     * Creates Task as per saved description, isDone status and tag.
-     * @param status String status retrieved.
-     * @param description Description retrieved.
-     * @param tag Tag retrieved.
+     * @param status Status of task retrieved.
+     * @param description Description of task retrieved.
+     * @param tag Tag of task retrieved.
      */
     public Task(String status, String description, String tag) {
         this.isDone = formatStatus(status);
@@ -52,53 +39,53 @@ public class Task {
     }
 
     /**
-     * Returns String representation of the Task status.
-     * X if done and an empty space otherwise.
+     * Returns string representation of the task status.
+     * If task is done returns X, else an empty space.
      *
-     * @return Task status
+     * @return Task status. If task is done returns X, else an empty space.
      */
     public String getStatusIcon() {
         return this.isDone ? "X" : " ";
     }
 
     /**
-     * Returns String representation of Task description.
+     * Returns task description.
      *
-     * @return String representation of Task description
+     * @return Description of task.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Mark the Task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Mark the Task as undone.
+     * Marks the task as undone.
      */
     public void markAsUnDone() {
         this.isDone = false;
     }
 
     /**
-     * Tag the task as per input.
+     * Tags the task as per tag label.
      *
-     * @param tag Name of tag.
+     * @param tag Tag label.
      */
     public void tag(String tag) {
         this.tag = tag;
     }
 
     /**
-     * Returns the boolean value of whether if the task is
-     * completed or not.
+     * Returns the status of task retrieved from the stored file.
+     * If task is done returns true, else false.
      *
-     * @param no The string containing the status.
-     * @return True if Task is Done, False if not done.
+     * @param no The string value representing the status of the task.
+     * @return Task status. If task is done returns true, else false.
      */
     private Boolean formatStatus(String no) {
         int status = Integer.parseInt(no);
@@ -106,10 +93,10 @@ public class Task {
     }
 
     /**
-     * Returns the string representation with details
-     * on the mark status and description.
+     * Returns the string representation of task with details
+     * on the task status and description to be stored.
      *
-     * @return String representation of Task to save.
+     * @return String representation of task to be stored.
      */
     public String toSave() {
         String status = this.isDone ? ":1:" : ":0:";
@@ -117,14 +104,14 @@ public class Task {
     }
 
     /**
-     * Returns the string representation with details
-     * on the mark status and description.
+     * Returns the string representation of task with details
+     * on the task status and description to be displayed.
      *
-     * @return String representation of Task to display.
+     * @return String representation of Task to be displayed.
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
 }

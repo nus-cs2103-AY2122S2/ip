@@ -3,29 +3,22 @@ package duke;
 import task.TaskList;
 
 /**
- * Representation of Duke.
+ * Represents Mike.
  */
 public class Duke {
 
-    /**
-     * Storage where Duke is saved, read and updated.
-     */
+    /** Storage where Mike is saved, read and updated. */
     private Storage storage;
-    /**
-     * List containing Tasks for Duke to process.
-     */
+    /** List containing Tasks for Mike to process. */
     private TaskList tasks;
-    /**
-     * Parser to handle user inputs.
-     */
+    /** Parser to handle user inputs. */
     private Parser parser;
-    /**
-     * Name of file path to store data.
-     */
+    /** Name of file path to store data. */
     protected final String FILE_PATH = "data/duke.txt";
 
     /**
-     * Creates Duke.
+     * Instantiates Mike with storage,
+     * task list and parser information.
      */
     public Duke() {
         try {
@@ -38,16 +31,16 @@ public class Duke {
     }
 
     /**
-     * Returns Duke response according to
-     * the user command.
+     * Returns Mike response according to
+     * the user command input.
      *
-     * @param command User command.
-     * @return Duke response.
+     * @param command User command input.
+     * @return Mike response.
      */
     public String getResponse(String command) {
         try {
             if (command.equals("bye")) {
-                storage.writeData(tasks.getList());
+                storage.storeData(tasks.getList());
                 return UI.printTerminate();
             } else {
                 return parser.processCommand(command);

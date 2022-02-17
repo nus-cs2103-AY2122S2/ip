@@ -5,29 +5,27 @@ import duke.UI;
 import java.util.ArrayList;
 
 /**
- * Represents a list containing all the Tasks.
+ * Represents a list containing all the tasks and method related to the list.
  */
 public class TaskList {
 
-    /**
-     * List that contains all Tasks.
-     */
+    /** List that contains all tasks. */
     private ArrayList<Task> Tasks;
 
     /**
-     * Creates a TaskList based on an already
-     * existing list or empty list of tasks.
+     * Instantiates the task list with a list of tasks from the stored data.
+     * If no data is present, instantiates the task list with an empty list.
      *
-     * @param list
+     * @param list List of tasks from stored data.
      */
     public TaskList(ArrayList<Task> list) {
         this.Tasks = list;
     }
 
     /**
-     * Returns the TaskList in ArrayList representation.
+     * Returns the task list in ArrayList representation.
      *
-     * @return TaskList in ArrayList representation.
+     * @return Task list in ArrayList representation.
      */
     public ArrayList<Task> getList() {
         return this.Tasks;
@@ -43,10 +41,10 @@ public class TaskList {
     }
 
     /**
-     * Adds Task to the TaskList.
+     * Returns message that task has been added to the task list.
      *
      * @param task Task to be added.
-     * @return Added Task Message.
+     * @return Message that task has been added to the list.
      */
     public String add(Task task) {
         this.Tasks.add(task);
@@ -56,20 +54,20 @@ public class TaskList {
     }
 
     /**
-     * Deletes the Task on the list as per input value.
+     * Returns message that task corresponding to input index has been deleted.
      *
-     * @param no Number of Task to be deleted on the list.
-     * @return Task deleted message.
+     * @param no Index of task.
+     * @return Message that task has been deleted with details on task.
      */
     public String delete(int no) {
         return UI.deleteMessage(this.Tasks.remove(no).toString());
     }
 
     /**
-     * Marks the Task on the list as per the input value.
+     * Returns message that task corresponding to the input index has been marked.
      *
-     * @param no Number of Task to be marked on list.
-     * @return Task marked message.
+     * @param no Index of task.
+     * @return Message that task has been marked with details on task.
      */
     public String mark(int no) {
         this.Tasks.get(no).markAsDone();
@@ -77,10 +75,10 @@ public class TaskList {
     }
 
     /**
-     * Unmark the Task on the list as per the input value.
+     * Returns message that task corresponding to the input index has been unmarked.
      *
-     * @param no Number of Task to be unmarked on list.
-     * @return Task unmarked message.
+     * @param no Index of task.
+     * @return Message that task has been unmarked with details on task.
      */
     public String unMark(int no) {
         this.Tasks.get(no).markAsUnDone();
@@ -88,11 +86,12 @@ public class TaskList {
     }
 
     /**
-     * Tag the Task on the list as the input value and input string.
+     * Returns message that the task corresponding to the input index has
+     * been tagged as per input tag.
      *
-     * @param no Number of Task to be tagged.
-     * @param str
-     * @return Task tagged message.
+     * @param no Index of task to be tagged.
+     * @param str Label of tag.
+     * @return Message that task has been tagged.
      */
     public String tag(int no, String str) {
         this.Tasks.get(no).tag(str);
@@ -100,20 +99,20 @@ public class TaskList {
     }
 
     /**
-     * Prints Tasks on the list.
+     * Returns list with all tasks on the task list.
      *
-     * @return String representation of Tasks on List.
-     * @throws DukeException when list is empty.
+     * @return List of tasks on task list.
+     * @throws DukeException If no task is on the list.
      */
     public String printTaskList() throws DukeException {
         return printList(this.Tasks);
     }
 
     /**
-     * Prints the list of tasks which contain the search String.
+     * Returns the list of tasks which contains the search string.
      *
      * @param str String to search for.
-     * @return String representation of search result.
+     * @return Search result.
      * @throws DukeException If no result is found.
      */
     public String find(String str) throws DukeException {
@@ -130,7 +129,7 @@ public class TaskList {
      * Used only by find() method.
      *
      * @param str String to search for.
-     * @return List of tasks with match, empty list if no match.
+     * @return List of tasks with match, else empty list.
      */
     private ArrayList<Task> generateList(String str) {
         ArrayList<Task> resultList = new ArrayList<>();
@@ -144,11 +143,12 @@ public class TaskList {
     }
 
     /**
-     * Returns whether if the string input is present in sentence.
+     * Returns true if a string is present in sentence and false
+     * if the string is not.
      *
      * @param sentence Sentence to be searched.
-     * @param str String input.
-     * @return Search result. True if String is present in Result.
+     * @param str String input to search against.
+     * @return Outcome of search. If String is present return true, else false.
      */
     private boolean scan(String sentence, String str) {
         boolean isPresent = false;
@@ -162,15 +162,15 @@ public class TaskList {
     }
 
     /**
-     * Prints the Tasks in the input List.
+     * Returns the string representation of the list with all tasks in the task list.
      *
-     * @param list List of Tasks.
-     * @return String Representation of List to be printed.
+     * @param list Task list.
+     * @return String representation of the list of tasks.
      * @throws DukeException If list is empty.
      */
     private String printList(ArrayList<Task> list) throws DukeException {
         int size = list.size();
-        String str = "";
+        String str = "Your list has " + size + " tasks:\n";
         if (size != 0) {
             for (int m = 0; m < size; m++) {
                 str+= m + 1 + "." + list.get(m).toString() + "\n";

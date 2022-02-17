@@ -1,4 +1,7 @@
-T:0: work  :  ooo
-D:0: yy   :  null    :    Feb-09-2022 18
-T:0: work   :  hell
-E:0: eat   :  null    :    lalala
+T:0: work   : fun
+D:0: yy    :   null     :     Feb-09-2022 18
+T:0: work    :   hell
+E:0: eat    :   null     :     lalala
+T:0: slides for GE project : null
+D:0: project 1  : null : Feb-03-2022 23:59 PM
+E:0: wedding  : null : Hotel Rainbow

@@ -14,6 +14,7 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
     String javaFxVersion = '11'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -43,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "gui.Launcher"
 }
 
 shadowJar {
@@ -57,5 +58,4 @@ checkstyle {
 
 run{
     standardInput = System.in
-    enableAssertions = true
 }

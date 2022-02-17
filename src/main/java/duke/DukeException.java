@@ -1,17 +1,17 @@
 package duke;
 
 /**
- * Represents Exceptions specific to Duke.
+ * Represents exceptions that are specific to Mike.
  */
 public class DukeException extends Exception {
 
     /**
-     * Creates custom exception for Duke.
+     * Instantiates DukeException with the given error message.
      *
-     * @param s Error Message.
+     * @param message Error message of DukeException.
      */
-    public DukeException(String s) {
-        super(s);
+    public DukeException(String message) {
+        super(message);
     }
 
 }

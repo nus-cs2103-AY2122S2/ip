@@ -5,15 +5,14 @@ package task;
  */
 public class Event extends Task {
 
-    /**
-     * Event location.
-     */
+    /** Location of event. */
     protected String at;
 
     /**
-     * Creates a Event task.
+     * Instantiates an event task with the description of event
+     * and location of event.
      *
-     * @param description Description of the Event task.
+     * @param description Description of the event task.
      * @param at Event location.
      */
     public Event(String description, String at) {
@@ -22,24 +21,22 @@ public class Event extends Task {
     }
 
     /**
-     * Creates Event based on saved data.
+     * Instantiates an event task with details of the task retrieved
+     * from the stored file.
      *
-     * @param status Status retrieved.
-     * @param description Description retrieved.
-     * @param tag Tag retrieved.
-     * @param at Location retrieved.
+     * @param data Array containing details of event from stored file.
      */
-    public Event(String status, String description, String tag, String at) {
-        super(status, description, tag);
-        this.at = at;
+    public Event(String[] data) {
+        super(data[1], data[2], data[3]);
+        this.at = data[4];
     }
 
     /**
      * Returns the string representation with details
-     * on the task type, mark status, description and
+     * on the task type, task status, task description and
      * event location.
      *
-     * @return String representation of Task to display.
+     * @return String representation of event to be displayed.
      */
     @Override
     public String toString() {
@@ -48,10 +45,10 @@ public class Event extends Task {
 
     /**
      * Returns the string representation with details
-     * on the task type, mark status, description and
+     * on the task type, task status, task description and
      * event location.
      *
-     * @return String representation of Task to save.
+     * @return String representation of event to be stored.
      */
     public String toSave() {
         return "E" + super.toSave() + " : " + at;

@@ -26,7 +26,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Constructs DialogBox for GUI.
+     * Instantiate a DialogBox for GUI with a text and an image.
      *
      * @param text Text to output.
      * @param img Image to output.
@@ -56,7 +56,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns User dialogue to GUI.
+     * Returns user dialogue to GUI.
      *
      * @param text User input.
      * @param img User image.
@@ -67,11 +67,11 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns Duke response to GUI.
+     * Returns Mike response to GUI.
      *
-     * @param text Duke response.
-     * @param img Duke image.
-     * @return Dialogue box with Duke image and text.
+     * @param text Mike response.
+     * @param img Mike image.
+     * @return Dialogue box with Mike image and text.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

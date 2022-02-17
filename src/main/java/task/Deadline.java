@@ -8,14 +8,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    /**
-     * Deadline date.
-     */
+    /** Deadline date.*/
     protected String by;
+
     /**
-     * Creates a Deadline task.
+     * Instantiates a deadline task with task description and deadline.
      *
-     * @param description Description of the Deadline task.
+     * @param description Description of the deadline task.
      * @param by Deadline Date.
      */
     public Deadline(String description, String by) {
@@ -24,23 +23,21 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates Deadline based on saved data.
+     * Instantiates a deadline task with details of the task retrieved
+     * from the stored file.
      *
-     * @param status Status retrieved.
-     * @param description Description retrieved.
-     * @param tag Tag retrieved.
-     * @param by Deadline retrieved.
+     * @param data Array containing details of deadline task from stored file.
      */
-    public Deadline(String status, String description, String tag, String by) {
-        super(status, description, tag);
-        this.by = by;
+    public Deadline(String[] data) {
+        super(data[1],data[2],data[3]);
+        this.by = data[4];
     }
 
     /**
-     * Returns the formatted Date to display from the deadline input.
+     * Returns the formatted date to display from the deadline input.
      *
-     * @param input the input Date as per "yyyy-MM-dd HH:mm"
-     * @return the formatted Date as per "MMM-dd-yyyy HH:mm a"
+     * @param input Input Date as per "yyyy-MM-dd HH:mm"
+     * @return Formatted Date as per "MMM-dd-yyyy HH:mm a"
      */
     private String formatDate(String input) {
         DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -50,10 +47,10 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation with details
-     * on the task type, mark status, description and
+     * on the task type, task status, task description and
      * deadline date.
      *
-     * @return String representation of Task to display.
+     * @return String representation of deadline task to be displayed.
      */
     @Override
     public String toString() {
@@ -62,10 +59,10 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation with details
-     * on the task type, mark status, description and
+     * on the task type, task status, task description and
      * deadline date.
      *
-     * @return String representation of Task to save.
+     * @return String representation of deadline task to be stored.
      */
     @Override
     public String toSave() {

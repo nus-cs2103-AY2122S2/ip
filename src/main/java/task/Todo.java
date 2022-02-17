@@ -6,7 +6,7 @@ package task;
 public class Todo extends Task {
 
     /**
-     * Creates a Todo task.
+     * Instantiates a Todo task with a description.
      *
      * @param description Description of the Todo task.
      */
@@ -15,21 +15,20 @@ public class Todo extends Task {
     }
 
     /**
-     * Creates Todo based on saved data.
+     * Instantiates a todo based on stored data. Data will contain details of
+     * task status, description and tag.
      *
-     * @param status Status retrieved.
-     * @param description Description retrieved.
-     * @param tag Tag retrieved.
+     * @param data Array representation of data retrieved from the stored file.
      */
-    public Todo(String status, String description, String tag) {
-        super(status, description, tag);
+    public Todo(String[] data) {
+        super(data[1], data[2], data[3]);
     }
 
     /**
      * Returns the string representation with details
-     * on the task type, mark status and description.
+     * on the task type, task status and task description.
      *
-     * @return String representation of Task to display.
+     * @return String representation of Task to be displayed.
      */
     @Override
     public String toString() {
@@ -38,9 +37,9 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation with details
-     * on the task type, mark status and description.
+     * on the task type, task status and task description.
      *
-     * @return String representation of Task to save.
+     * @return String representation of task to be stored.
      */
     @Override
     public String toSave() {

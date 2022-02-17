@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * Controller for gui.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -26,12 +26,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    /**Duke to be printed.*/
+    /** Mike to be printed. */
     private Duke duke;
 
-    /**Image of user.*/
+    /** Image of user. */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    /**Image of Duke.*/
+    /** Image of Mike. */
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
@@ -40,8 +40,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates Duke upon command.
-     * @param d Duke object.
+     * Sets up the main window of Mike's GUI.
+     *
+     * @param d Instance of Mike object.
      */
     public void setDuke(Duke d) {
         duke = d;
@@ -50,8 +51,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and
-     * then appends them to the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Mike.
+     * Mike's reply and then appends them to the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -63,7 +65,6 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input, this.userImage),
                     DialogBox.getDukeDialog(response, this.dukeImage)
             );
-
             userInput.setDisable(true);
             sendButton.setDisable(true);
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
@@ -75,7 +76,6 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(response, this.dukeImage)
             );
         }
-
         userInput.clear();
     }
 }
