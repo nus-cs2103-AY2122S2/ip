@@ -1,0 +1,28 @@
+echo after me ah
+list
+todo erase whiteboard
+mark 1
+unmark 1
+todo wash dishes
+todo buy textbooks
+deadline submit modreg /by friday night
+deadline apply internship /by May 2022
+deadline /by idk
+event /at
+event birthday part /at sat 2-3pm
+event 2103 lec /at fri 2pm
+event career fair /at march 2020
+list
+mark 3
+mark 5
+mark 7
+mark
+unmark
+unmark 5
+list
+todo
+event
+deadline
+delete 2
+list
+delete

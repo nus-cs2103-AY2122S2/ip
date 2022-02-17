@@ -1,0 +1,34 @@
+.root {
+    -fx-font-size: 13px;
+    -fx-font-family: "Helvetica";
+}
+
+#dialogLabel {
+    -fx-background-color:  #78d7ae;
+    -fx-background-radius: 5px;
+}
+
+#mainButton {
+    -fx-background-color:  #1879ba
+}
+
+#scrollPane .viewport {
+    -fx-background-image: url("/images/wallpaper.jpeg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+
+.chiMsg #dialogLabel {
+    -fx-background-color: pink;
+}
+
+.chiMsgError #dialogLabel {
+    -fx-background-color: #b80f0a;
+    -fx-text-fill: white;
+}
+
+#link {
+    -fx-background-color: pink;
+    -fx-background-radius: 5px;
+    -fx-border-color: transparent;
+}

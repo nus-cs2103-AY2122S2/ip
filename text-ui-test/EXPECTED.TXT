@@ -1,7 +1,77 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello master I am Chi
+How may I serve you today nyan~?
+Chi-san doesn't understand that nyaan~!
+Here are your list items nyan~:
+Ok! Chi-san has added:
+[T][ ] erase whiteboard
+You have 1 tasks nyan~!
+Great job nyan~!
+[T][X] erase whiteboard
+Let's get it done next time nyan~!
+[T][ ] erase whiteboard
+Ok! Chi-san has added:
+[T][ ] wash dishes
+You have 2 tasks nyan~!
+Ok! Chi-san has added:
+[T][ ] buy textbooks
+You have 3 tasks nyan~!
+Ok! Chi-san has added:
+[D][ ] submit modreg (by: friday night)
+You have 4 tasks nyan~!
+Ok! Chi-san has added:
+[D][ ] apply internship (by: May 2022)
+You have 5 tasks nyan~!
+Hey! This deadline can't be empty nyaan~!
+Hey! This event can't be empty nyaan~!
+Ok! Chi-san has added:
+[E][ ] birthday part (at: sat 2-3pm)
+You have 6 tasks nyan~!
+Ok! Chi-san has added:
+[E][ ] 2103 lec (at: fri 2pm)
+You have 7 tasks nyan~!
+Ok! Chi-san has added:
+[E][ ] career fair (at: march 2020)
+You have 8 tasks nyan~!
+Here are your list items nyan~:
+1. [T][ ] erase whiteboard
+2. [T][ ] wash dishes
+3. [T][ ] buy textbooks
+4. [D][ ] submit modreg (by: friday night)
+5. [D][ ] apply internship (by: May 2022)
+6. [E][ ] birthday part (at: sat 2-3pm)
+7. [E][ ] 2103 lec (at: fri 2pm)
+8. [E][ ] career fair (at: march 2020)
+Great job nyan~!
+[T][X] buy textbooks
+Great job nyan~!
+[D][X] apply internship (by: May 2022)
+Great job nyan~!
+[E][X] 2103 lec (at: fri 2pm)
+Hey! Please choose something to mark nyaan~!
+Hey! Please choose something to unmark nyaan~!
+Let's get it done next time nyan~!
+[D][ ] apply internship (by: May 2022)
+Here are your list items nyan~:
+1. [T][ ] erase whiteboard
+2. [T][ ] wash dishes
+3. [T][X] buy textbooks
+4. [D][ ] submit modreg (by: friday night)
+5. [D][ ] apply internship (by: May 2022)
+6. [E][ ] birthday part (at: sat 2-3pm)
+7. [E][X] 2103 lec (at: fri 2pm)
+8. [E][ ] career fair (at: march 2020)
+Hey! This todo can't be empty nyaan~!
+Hey! This event can't be empty nyaan~!
+Hey! This deadline can't be empty nyaan~!
+Chi-san has removed task:
+ [T][ ] wash dishes
+You now have 7 tasks nyan~!
+Here are your list items nyan~:
+1. [T][ ] erase whiteboard
+2. [T][X] buy textbooks
+3. [D][ ] submit modreg (by: friday night)
+4. [D][ ] apply internship (by: May 2022)
+5. [E][ ] birthday part (at: sat 2-3pm)
+6. [E][X] 2103 lec (at: fri 2pm)
+7. [E][ ] career fair (at: march 2020)
+Hey! Please choose something to delete nyaan~!
