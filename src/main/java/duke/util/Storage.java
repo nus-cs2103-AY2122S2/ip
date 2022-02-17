@@ -24,6 +24,9 @@ public class Storage {
     private final String fullFilePath;
     private File file;
 
+    /**
+     * Default constructor for Storage.
+     */
     public Storage() {
         fileDirPath = "";
         fullFilePath = "";
