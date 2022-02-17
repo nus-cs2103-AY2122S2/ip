@@ -13,9 +13,9 @@ import ann.data.InputPattern;
  * @version 0.1
  */
 public class Event extends Task {
+    public static final String INPUT_FORMAT = "event [content] /at yyyy-MM-dd HH:mm";
     private static final TaskType TASK_TYPE = TaskType.EVENT;
     public static final String KEYWORD = TASK_TYPE.getKeyword();
-    public static final String INPUT_FORMAT = "event [content] /at yyyy-MM-dd HH:mm";
     private String date;
     private String time;
 
