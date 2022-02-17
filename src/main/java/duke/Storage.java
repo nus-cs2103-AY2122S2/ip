@@ -23,10 +23,9 @@ import duke.tasks.Todo;
  * previous interactions with the GUI.
  */
 public class Storage {
+    protected static String directoryPath;
+    protected static String filePath;
     private static final ArrayList<Task> tasks = new ArrayList<>();
-    protected String directoryPath;
-    protected String filePath;
-    private TextUi ui;
 
     /**
      * Instantiates a storage object given a directory path and a file path.
@@ -37,8 +36,8 @@ public class Storage {
      * @param filePath File path to storage file.
      */
     public Storage(String directoryPath, String filePath) {
-        this.directoryPath = directoryPath;
-        this.filePath = filePath;
+        Storage.directoryPath = directoryPath;
+        Storage.filePath = filePath;
     }
 
     /**
@@ -57,7 +56,7 @@ public class Storage {
      */
     public static void writeToDukeFile() throws DukeException {
         try {
-            FileWriter fw = new FileWriter("./data/duke.txt");
+            FileWriter fw = new FileWriter(filePath);
             for (Task task: tasks) {
                 fw.write(task.toFileFormat() + "\n");
             }
@@ -77,7 +76,7 @@ public class Storage {
     public ArrayList<Task> readFromDukeFile() throws DukeException {
         createDirectory();
         try {
-            Scanner readFile = new Scanner(new File(this.filePath));
+            Scanner readFile = new Scanner(new File(filePath));
             while (readFile.hasNextLine()) {
                 Task taskToAdd;
                 String taskData = readFile.nextLine();
@@ -149,18 +148,18 @@ public class Storage {
      * directory.
      */
     public void createDirectory() throws DukeException {
-        boolean isDirectoryExists = new File(this.directoryPath).exists();
-        boolean isFileExists = new File(this.filePath).exists();
+        boolean isDirectoryExists = new File(directoryPath).exists();
+        boolean isFileExists = new File(filePath).exists();
         try {
             if (!isDirectoryExists) {
-                Files.createDirectories(Path.of(this.directoryPath));
-                File dukeFile = new File(this.filePath);
+                Files.createDirectories(Path.of(directoryPath));
+                File dukeFile = new File(filePath);
                 if (!dukeFile.createNewFile()) {
                     throw new IOException();
                 }
             } else {
                 if (!isFileExists) {
-                    File dukeFile = new File(this.filePath);
+                    File dukeFile = new File(filePath);
                     if (!dukeFile.createNewFile()) {
                         throw new IOException();
                     }

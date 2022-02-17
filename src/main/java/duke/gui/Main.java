@@ -10,11 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for duke.Duke using FXML.
+ * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-    private Duke duke = new Duke("./data", "./data/duke.txt");
+    private static final String directoryPath = "./data";
+    private static final String filePath = "./data/duke.txt";
+    private Duke duke = new Duke(directoryPath, filePath);
 
     /**
      * Main entry point for the Duke JavaFX application.
