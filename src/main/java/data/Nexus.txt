@@ -1,0 +1,7 @@
+T|0|online assessment
+D|0|online assessment| sunday
+D|0|homwork| 20-01-22
+D|0|buy grocery| 2022-02-17
+D|0|buy grocery|Feb 17 2022
+E|0|buy grocery| 2022-02-17
+E|0|buy grocery|Feb 17 2022
