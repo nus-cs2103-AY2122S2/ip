@@ -29,6 +29,15 @@ public class TaskBank {
         bank.remove(index);
     }
 
+    /**
+     * Updates a task's description
+     * @param index
+     * @param newDescription
+     */
+    public static void updateTask(int index, String newDescription) {
+        bank.get(index).updateDescription(newDescription);
+    }
+
     public static int getSize() {
         return bank.size();
     }

@@ -123,6 +123,22 @@ public class Parser {
         case "find":
             output = Action.find(inputArr[1]);
             break;
+        case "update":
+            int numToUpdate = Integer.valueOf(inputArr[1]) - 1;
+            String remainingWordsUpdate = "";
+            try {
+                for (int i = 2; i < inputArr.length; i++) {
+                    remainingWordsUpdate = remainingWordsUpdate + " " + inputArr[i];
+                }
+                TaskBank.updateTask(numToUpdate, remainingWordsUpdate);
+                Task d = taskList.get(numToUpdate);
+                output = String.format("Noted. I've updated this task:\n %s\n", d);
+            } catch (NumberFormatException error) {
+                output = "The index you have entered is not a number.\n";
+            } catch (ArrayIndexOutOfBoundsException error) {
+                output = "The index you have entered is out of range.\n";
+            }
+            break;
         default:
             output = "invalid command! Use 'help' for help";
         }

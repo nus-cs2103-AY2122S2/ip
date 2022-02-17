@@ -32,6 +32,14 @@ public class Task {
     }
 
     /**
+     * Changes the description of the task
+     * @param newDescription The new description of the Task.
+     */
+    public void updateDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    /**
      * Returns the description of the task.
      *
      * @return The description of the task.
