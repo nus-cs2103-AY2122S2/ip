@@ -33,6 +33,7 @@ public class Duke {
         TaskList.list = new ArrayList<>();
         Storage.checkFile();
         Storage.load(filePath);
+        assert TaskList.list != null;
     }
 
     private Label getDialogLabel(String text) {
