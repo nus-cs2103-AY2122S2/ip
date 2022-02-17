@@ -27,44 +27,53 @@ public class Parser {
                 throw new InvalidCommandException();
             }
 
-            if (instruction[0].equals("bye")) {
-                return "BYE";
+            //variables needed for switch case.
+            String response;
+            int taskNum;
+            switch(instruction[0]) {
+                case "bye":
+                    return "BYE";
 
-            } else if (instruction[0].equals("list")) {
-                String response = tasksList.list();
-                return response;
+                case "list":
+                    response = tasksList.list();
+                    return response;
 
-            } else if (instruction[0].equals("mark")) {
-                int taskNum = Integer.parseInt(instruction[1]);
-                String response = tasksList.mark(taskNum);
-                return response;
+                case "todo":
 
-            } else if (instruction[0].equals("unmark")) {
-                int taskNum = Integer.parseInt(instruction[1]);
-                String response = tasksList.unmark(taskNum);
-                return response;
+                case "event":
 
-            } else if (instruction[0].equals("delete")) {
-                int taskNum = Integer.parseInt(instruction[1]);
-                String response = tasksList.deleteTask(taskNum);
-                return response;
+                case "deadline":
+                    response = tasksList.addTask(Arrays.asList(instruction));
+                    return response;
 
-            } else if (instruction[0].equals("todo")
-                    || instruction[0].equals("event")
-                    || instruction[0].equals("deadline")) {
-                String response = tasksList.addTask(Arrays.asList(instruction));
-                return response;
+                case "save":
+                    response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
+                    return response;
 
-            } else if (instruction[0].equals("save")) {
-                String response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
-                return response;
-            } else if (instruction[0].equals("find")) {
-                String response = tasksList.findMatchingTasks(Arrays.asList(instruction));
-                return response;
+                case "find":
+                    response = tasksList.findMatchingTasks(Arrays.asList(instruction));
+                    return response;
+
+                case "mark":
+                    taskNum = Integer.parseInt(instruction[1]);
+                    response = tasksList.mark(taskNum);
+                    return response;
+
+                case "unmark":
+                    taskNum = Integer.parseInt(instruction[1]);
+                    response = tasksList.unmark(taskNum);
+                    return response;
+
+                case "delete":
+                    taskNum = Integer.parseInt(instruction[1]);
+                    response = tasksList.deleteTask(taskNum);
+                    return response;
+
+                default:
+                    throw new DukeException("Something is wrong!");
             }
         } catch (DukeException e) {
             return e.getMessage();
         }
-        return "Nothing";
     }
 }
