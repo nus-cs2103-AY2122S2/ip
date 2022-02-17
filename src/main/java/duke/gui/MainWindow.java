@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private UiPrinter myUiPrinter = new UiPrinter();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user_cat.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke_cat.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/man_user.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ai_jarvis_duke.png"));
 
     public MainWindow() {
         try {
