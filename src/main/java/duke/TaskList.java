@@ -94,6 +94,7 @@ public class TaskList {
             }
         } else {
             out += ("Nothing in the list matches your search :)\n");
+            System.out.println("Hmm nothing in the list matches your search :)");
         }
         return out;
     }
