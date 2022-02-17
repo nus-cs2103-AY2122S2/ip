@@ -103,20 +103,36 @@ public class Duke {
                     DukeException e = new DukeException("bro why la");
                     System.err.println(e.getMessage());
                 } else {
-                    String[] deadlineInput = input.split("/by");
-                    String deadline = deadlineInput[1];
-                    String left = deadlineInput[0];
-                    String description = left.substring(9, left.length() - 1);
-                    // create a new deadline
-                    Task newTask = new Deadlines(description, deadline);
-                    // adding to the array
-                    // list[counter] = newTask;
-                    tasks.add(newTask);
-                    ++counter;
-                    System.out.println(LINE_BREAK);
-                    System.out
-                            .println("Got it. I added this deadline already bro: \n" + " " + newTask.toString() + "\n");
-                    System.out.println("Now you have " + counter + " tasks in the list. \n");
+
+                    // checking for date validity
+                    if (isDate(deadline)) {
+
+                        System.out.println("its a date ");
+
+                        Task newTask = new Deadlines(description, LocalDate.parse(deadline));
+                        tasks.addToTasks(newTask);
+                        // adding to the array
+                        ++counter;
+                        System.out.println(LINE_BREAK);
+                        System.out
+                                .println("Got it. I added this deadline already bro: \n" + " " + newTask.toString()
+                                        + "\n");
+                        System.out.println("Now you have " + counter + " tasks in the list. \n");
+                    } else {
+
+                        System.out.println("its not a date");
+
+                        // pass normally
+                        Task newTask = new Deadlines(description, deadline);
+                        tasks.addToTasks(newTask);
+                        // adding to the array
+                        ++counter;
+                        System.out.println(LINE_BREAK);
+                        System.out
+                                .println("Got it. I added this deadline already bro: \n" + " " + newTask.toString()
+                                        + "\n");
+                        System.out.println("Now you have " + counter + " tasks in the list. \n");
+                    }
                 }
             } else if (command[0].equals("event")) {
 
