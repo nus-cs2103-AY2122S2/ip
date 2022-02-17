@@ -302,7 +302,7 @@ You can add tasks into your todo list. A task in `Cortana Todo` can be of the fo
     You have 3 tasks on 2022-02-18:
     (Tasks on this date without time will be placed at the end of the list)
     
-    [E][ ] lectyre (at: Friday, February 18, 2022 0200PM)
+    [E][ ] lecture (at: Friday, February 18, 2022 0200PM)
     [D][ ] homework (by: Friday, February 18, 2022 0700PM)
     [E][ ] group meeting (at: Friday, February 18, 2022)
     ```
