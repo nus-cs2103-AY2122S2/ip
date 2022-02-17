@@ -19,6 +19,7 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private boolean isExit;
+    private boolean hasLoadedSuccessfully;
 
     /**
      * Initialises a Duke task manager bot.
@@ -31,6 +32,7 @@ public class Duke {
         storage = new Storage(dirPath, fileName);
         taskList = new TaskList();
         isExit = false;
+        hasLoadedSuccessfully = false;
     }
 
     /**
@@ -42,7 +44,11 @@ public class Duke {
     public String loadDataAndWelcome() {
         String message = ui.showWelcome();
         message += getLoadingStatus();
-        message += getReminders();
+        if (isNewUser()) {
+            message += paragraphSeparator + ui.welcomeNewUser();
+        } else {
+            message += getReminders();
+        }
         return message;
 
     }
@@ -54,7 +60,16 @@ public class Duke {
         } catch (DukeException e) {
             return paragraphSeparator + ui.showLoadingError(e.getMessage());
         }
+
+        hasLoadedSuccessfully = true;
+        if (taskList.getLength() == 0) {
+            return "";
+        }
         return paragraphSeparator + ui.showLoadingSuccess();
+    }
+
+    private boolean isNewUser() {
+        return hasLoadedSuccessfully && taskList.getLength() == 0;
     }
 
     /** Reminds the user if there are tasks due within the next DEFAULT_NUM_DAYS days.**/

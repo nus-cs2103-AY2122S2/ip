@@ -24,6 +24,16 @@ public class Ui {
     }
 
     /**
+     * Gives the welcome message for a new user.
+     *
+     * @return a message from duke welcoming a new user.
+     */
+    public String welcomeNewUser() {
+        return "I couldn't find any previous task data. If this is a mistake, check that your duke.txt" +
+                " file is in the right folder. \n\nIf you're new here, welcome!";
+    }
+
+    /**
      * Gives an error message when saved data cannot be retrieved.
      *
      * @param errorMessage the details of the error.
