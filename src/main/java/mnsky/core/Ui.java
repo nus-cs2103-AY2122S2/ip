@@ -1,7 +1,5 @@
 package mnsky.core;
 
-import java.util.ArrayList;
-
 import mnsky.exceptions.MnskyException;
 import mnsky.task.Task;
 
@@ -27,7 +25,7 @@ public class Ui {
      * @return The message for when an exception occurs.
      */
     public String printException(MnskyException e) {
-        return "..?\n" + e.getMessage();
+        return "..? " + e.getMessage();
     }
 
     /**
@@ -45,7 +43,7 @@ public class Ui {
      * @return The message for adding a new task to the list.
      */
     public String printAddedTask(Task task) {
-        return String.format("[MNSKY added task %s to their list]\n", task.getName());
+        return String.format("[MNSKY added task %s to their list]", task.getName());
     }
 
     /**
@@ -54,26 +52,6 @@ public class Ui {
      * @return The message for deleting a task.
      */
     public String printDeletedTask(Task task) {
-        return String.format("[MNSKY deleted the task %s from the list.]\n", task.getName());
-    }
-
-    /**
-     * Combines groups of 3 strings in the list of strings into one string, then returns these strings.
-     * @param listStrings The list of strings.
-     * @return The list of strings after combining groups of 3 strings into one string.
-     */
-    public ArrayList<String> printListStrings(ArrayList<String> listStrings) {
-        int group = 3;
-        ArrayList<String> newListStrings = new ArrayList<>();
-        for (int i = 0; i < listStrings.size(); i += group) {
-            StringBuilder sb = new StringBuilder();
-            for (int j = i; j < listStrings.size() && j < i + group; j++) {
-                sb.append(listStrings.get(j));
-                sb.append("\n");
-            }
-            newListStrings.add(sb.toString());
-        }
-
-        return newListStrings;
+        return String.format("[MNSKY deleted the task %s from the list.]", task.getName());
     }
 }

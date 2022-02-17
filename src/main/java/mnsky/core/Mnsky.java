@@ -23,9 +23,9 @@ public class Mnsky {
      * Creates a UI object.
      */
     public Mnsky() {
-        ui = new Ui();
         storage = new Storage("data/MnskyData.txt");
-        taskList = new TaskList(ui, storage);
+        taskList = new TaskList(storage);
+        ui = new Ui();
     }
 
     /**
@@ -95,11 +95,11 @@ public class Mnsky {
             break;
         case "undo":
             taskList.undo();
-            responses.addAll(ui.printListStrings(taskList.getListStrings()));
+            responses.addAll(taskList.getListStrings());
             break;
         case "redo":
             taskList.redo();
-            responses.addAll(ui.printListStrings(taskList.getListStrings()));
+            responses.addAll(taskList.getListStrings());
             break;
         default:
             throw new MnskyException("[MNSKY had trouble interpreting the command.]");
@@ -128,10 +128,10 @@ public class Mnsky {
                 responses.add("bye");
                 break;
             case "list":
-                responses.addAll(ui.printListStrings(taskList.getListStrings()));
+                responses.addAll(taskList.getListStrings());
                 break;
             case "find":
-                responses.addAll(ui.printListStrings(taskList.find(parsedInput.get(IDX_INDEX))));
+                responses.addAll((taskList.find(parsedInput.get(IDX_INDEX))));
                 break;
             default:
                 if (isWriteCommand(parsedInput.get(CMD_INDEX))) {

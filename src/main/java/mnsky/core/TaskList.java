@@ -20,13 +20,13 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private Stack<ArrayList<Task>> undoHistory;
     private Stack<ArrayList<Task>> redoHistory;
+    private String storageDataReadError = null;
 
     /**
      * Creates a TaskList object. Retrieves the storage data if there are no issues with it.
-     * @param ui The ui object, to be used for printing an exception.
      * @param storage The storage object, to be used for retrieving the storage data.
      */
-    public TaskList(Ui ui, Storage storage) {
+    public TaskList(Storage storage) {
         tasks = new ArrayList<>();
         undoHistory = new Stack<>();
         redoHistory = new Stack<>();
@@ -34,9 +34,17 @@ public class TaskList {
         try {
             getStorageData(storage);
         } catch (MnskyException e) {
-            ui.printException(e);
             tasks = new ArrayList<>();
+            storageDataReadError = e.getMessage();
         }
+    }
+
+    /**
+     * Gets the error from reading storage data, if it exists.
+     * @return The error from reading storage data.
+     */
+    public String getStorageDataReadError() {
+        return storageDataReadError;
     }
 
     /**
