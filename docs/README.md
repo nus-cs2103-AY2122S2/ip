@@ -1,8 +1,11 @@
 # User Guide
+Welcome to Duke Bot! A chat bot made to help you track tasks.
+
+![Duke](Ui.png)
 
 ## Quick Start
 1. Ensure you have Java 11 or higher installed in your computer.
-2. Download the latest Duke.jar from [here]()
+2. Download the latest Duke.jar from [here](https://github.com/KeithCZW/ip/releases)
 3. Copy the file to the folder you want to use Duke
 4. Double-click the app to start the app.
 5. Enjoy!
@@ -21,5 +24,5 @@
 | List      | List all current tasks.                                                          | `list`                                                                    |
 | bye       | Says bye. That's it.                                                             | `bye`                                                                     |
 
-Date in format YYYY-MM-DD
-Time in format HH:mm
+- Date in format YYYY-MM-DD
+- Time in format HH:mm
