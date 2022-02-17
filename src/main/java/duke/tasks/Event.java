@@ -39,9 +39,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (localdate == null) {
-            return "[E]" + super.toString() + " (by: " + time + ")";
+            return "[E]" + super.toString() + " (at: " + time + ")";
         } else {
-            return "[E]" + super.toString() + " (by: " + localdate.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy").withLocale(Locale.ENGLISH)) + ")";
+            return "[E]" + super.toString() + " (at: " + localdate.format(DateTimeFormatter.ofPattern("MMM-dd-yyyy").withLocale(Locale.ENGLISH)) + ")";
         }
     }
 

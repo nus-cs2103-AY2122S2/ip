@@ -182,7 +182,7 @@ public class Parser {
             }
             taskList.insert(task);
             return "Got it. I've added this task:" + "\n" +
-                    "   " + task.toString() + "\n" + "Now you have " + taskList.size() + "tasks in the list.";
+                    "   " + task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
         }
         if (command.equals("delete")) {
             int index;
