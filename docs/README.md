@@ -32,7 +32,7 @@ We will be able to see Task:
 
 *Examples*: `list`
 
-![listImg](./docs/list.PNG)
+![listImg](./list.PNG)
  
 ## **2. Find a task using a keyword**
 
@@ -44,7 +44,7 @@ This feature allows the user to search for a group of tasks using keywords.
 
 *Examples*: `find mom`
 
-![findImg](./docs/find.PNG)
+![findImg](./find.PNG)
  
 ## **3. Create a Task**
 
@@ -70,7 +70,7 @@ A Todo task stores:
 
 *Examples*: `todo clean the house`
 
-![todoImg](./docs/todo.PNG)
+![todoImg](./todo.PNG)
 
 ### **3.2 Create a Deadline**
 
@@ -87,7 +87,7 @@ A Todo task stores:
 
 *Examples*: `deadline CS2103 assisngment /by 2022-02-19 11PM`
 
-![deadlineImg](./docs/deadline.PNG)
+![deadlineImg](./deadline.PNG)
 
 ### **3.3 Create an Event**
 
@@ -104,7 +104,7 @@ A Todo task stores:
 
 *Examples*: `event CS2103 lecture /at 2022-02-19 02PM`
 
-![eventImg](./docs/event.PNG)
+![eventImg](./event.PNG)
 
 ## **4. Mark and Unmark**
 
@@ -122,7 +122,7 @@ This feature allows the user indicate that the task has been completed.
 
 *Examples*: `mark 5`
 
-![markImg](./docs/mark.PNG)
+![markImg](./mark.PNG)
 
 ### **4.2 Unmark a Task**
 
@@ -134,7 +134,7 @@ This feature allows the user indicate that the task has not been completed.
 
 *Examples*: `unmark 5`
 
-![unmarkImg](./docs/unmark.PNG)
+![unmarkImg](./unmark.PNG)
    
 ## **5. Delete a Task**
 
@@ -146,7 +146,7 @@ This feature allows the user to delete a task from the list.
 
 *Examples*: `delete 4`
 
-![deleteImg](./docs/delete.PNG)
+![deleteImg](./delete.PNG)
 
 ## **6. Exit the programme**
 
@@ -158,4 +158,4 @@ This feature allows the user to exit the programme.
 
 *Examples*: `bye`
 
-![byeImg](./docs/bye.PNG)
+![byeImg](./bye.PNG)
