@@ -144,7 +144,7 @@ public class Parser {
 
             return tasks;
         } catch (MnskyMissingParameterException e) {
-            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
+            throw new MnskyException("[MNSKY is having trouble parsing the storage data file...]\n");
         }
     }
 

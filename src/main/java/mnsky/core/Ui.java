@@ -4,11 +4,17 @@ import mnsky.exceptions.MnskyException;
 import mnsky.task.Task;
 
 public class Ui {
+    private String storageDataReadError;
+
+    public Ui(String storageDataReadError) {
+        this.storageDataReadError = storageDataReadError;
+    }
+
     /**
      * Prints the greeting message for the chatbot.
      */
     public String printGreeting() {
-        return "Hi, I'm MNSKY.";
+        return storageDataReadError + "Hi, I'm MNSKY.";
     }
 
     /**

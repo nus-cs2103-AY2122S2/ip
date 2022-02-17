@@ -20,7 +20,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private Stack<ArrayList<Task>> undoHistory;
     private Stack<ArrayList<Task>> redoHistory;
-    private String storageDataReadError = null;
+    private String storageDataReadError = "";
 
     /**
      * Creates a TaskList object. Retrieves the storage data if there are no issues with it.
@@ -35,16 +35,8 @@ public class TaskList {
             getStorageData(storage);
         } catch (MnskyException e) {
             tasks = new ArrayList<>();
-            storageDataReadError = e.getMessage();
+            storageDataReadError = e.getMessage() + "\n";
         }
-    }
-
-    /**
-     * Gets the error from reading storage data, if it exists.
-     * @return The error from reading storage data.
-     */
-    public String getStorageDataReadError() {
-        return storageDataReadError;
     }
 
     /**
@@ -200,7 +192,7 @@ public class TaskList {
             Task actualTask;
             assert task.size() > 3;
             switch (task.get(CMD_INDEX)) {
-            case "task":
+            case "todo":
                 actualTask = addTask(task.get(NAME_INDEX));
                 break;
             case "event":
@@ -210,7 +202,7 @@ public class TaskList {
                 actualTask = addDeadline(task.get(NAME_INDEX), task.get(PARAMETER_INDEX));
                 break;
             default:
-                throw new MnskyException("[MNSKY could not remember the storage data...]");
+                throw new MnskyException("[MNSKY is having trouble rebuilding from the parsed storage data file...]");
             }
 
             if (actualTask != null) {
@@ -219,6 +211,14 @@ public class TaskList {
                 }
             }
         }
+    }
+
+    /**
+     * Gets the error from reading storage data, if it exists.
+     * @return The error from reading storage data.
+     */
+    public String getStorageDataReadError() {
+        return storageDataReadError;
     }
 
     /**

@@ -58,7 +58,7 @@ public class Storage {
             bufferedWriter.flush();
             bufferedWriter.close();
         } catch (IOException e) {
-            throw new MnskyException("[MNSKY had trouble committing the task list to its memory!]");
+            throw new MnskyException("[MNSKY is having trouble committing the task list to its memory...]");
         }
     }
 
@@ -78,7 +78,7 @@ public class Storage {
 
             return tasks;
         } catch (FileNotFoundException e) {
-            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
+            throw new MnskyException("[MNSKY is having trouble finding the storage data file...]\n");
         }
     }
 }

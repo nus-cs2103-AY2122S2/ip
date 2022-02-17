@@ -25,7 +25,7 @@ public class Mnsky {
     public Mnsky() {
         storage = new Storage("data/MnskyData.txt");
         taskList = new TaskList(storage);
-        ui = new Ui();
+        ui = new Ui(taskList.getStorageDataReadError());
     }
 
     /**
