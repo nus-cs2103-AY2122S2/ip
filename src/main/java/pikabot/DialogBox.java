@@ -12,7 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+
 
 /**
  * An example of a custom control using FXML.
@@ -35,8 +37,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        Circle clip = new Circle(40, 40, 40);
+
+        displayPicture.setClip(clip);
+
         dialog.setText(text);
         displayPicture.setImage(img);
+
     }
 
     /**
@@ -58,7 +65,9 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
-        userDialog.setStyle("-fx-background-color: #E0F0F3");
+        userDialog.setStyle("-fx-background-color: #E0F0F3;" + "-fx-background-radius: 25;"
+                + "-fx-padding: 5 0 10 0;"
+                + "-fx-border-insets: 0 0 10 0;" + "-fx-background-insets: 0 0 10 0;");
         return userDialog;
     }
 
@@ -71,7 +80,9 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getBotDialog(String text, Image img) {
         var botDialog = new DialogBox(text, img);
-        botDialog.setStyle("-fx-background-color: #FFF2CC");
+        botDialog.setStyle("-fx-background-color: #FFF2CC;" + "-fx-background-radius: 25;"
+                + "-fx-padding: 5 0 10 5;"
+                + "-fx-border-insets: 0 0 10 0;" + "-fx-background-insets: 0 0 10 0;");
         botDialog.flip();
         return botDialog;
     }

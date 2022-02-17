@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        assert(deleteCommand[0].equals("delete"));
+        assert(deleteCommand[0].equals("delete") || deleteCommand[0].equals("del"));
         try {
             Parser.parseIntegerCommand(deleteCommand);
             int taskNumberToDelete = Integer.parseInt(deleteCommand[1]);

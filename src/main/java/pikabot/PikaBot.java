@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import pikabot.command.Command;
 import pikabot.task.Task;
 
-
 /**
  * Runs the whole application PikaBot, an application
  * that serves as a ChatBot to keep track of your tasks.

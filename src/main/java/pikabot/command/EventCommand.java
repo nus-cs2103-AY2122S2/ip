@@ -35,7 +35,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        assert(eventCommand[0].equals("event"));
+        assert(eventCommand[0].equals("event") || eventCommand[0].equals("e"));
         try {
             Event currEvent = Parser.parseEvent(eventCommand);
             taskList.add(currEvent);

@@ -1,5 +1,6 @@
 package pikabot;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -53,5 +54,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getBotDialog(response, bot)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
     }
 }

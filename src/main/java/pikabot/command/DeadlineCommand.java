@@ -35,7 +35,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        assert(deadlineCommand[0].equals("deadline"));
+        assert(deadlineCommand[0].equals("deadline") || deadlineCommand[0].equals("d"));
         try {
             Deadline currDeadline = Parser.parseDeadline(deadlineCommand);
             taskList.add(currDeadline);
