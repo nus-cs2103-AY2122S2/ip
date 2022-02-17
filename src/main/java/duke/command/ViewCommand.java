@@ -63,7 +63,7 @@ public class ViewCommand extends Command {
         sortedTasksOnDate.setTasks(sortedArrayList);
 
         if (sortedTasksOnDate.getNumberOfTasks() == 0) {
-            return ui.printMessage(NO_SCHEDULE);
+            return ui.printMessage(NO_SCHEDULE + viewDate.format(dayOutputFormatter));
         } else {
             String output = "";
             output += LIST_SCHEDULE + viewDate.format(dayOutputFormatter) + COLON;
