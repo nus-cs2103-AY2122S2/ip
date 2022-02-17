@@ -1,24 +1,47 @@
-# Duke project template
+# DookButler
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "When in doubt, whip it out *(a notebook)*" - Anonymous
 
-## Setting up in Intellij
+Have too many things to do, but can't remember them all? Ever wanted a digital butler to keep track of your tasks for you? DookButler is the application for you!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+- lightweight application
+- easy to use commands
+- ~~completes tasks for you irl~~
+- it's also ***F R E E*** 😉
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Features
+
+- `todo` adds a simple task that can be *done* or *not done*
+  - `deadline` is a `todo` task but with a date and time by adding `/by` after the title of the deadline task
+  - `event` is a `todo` task but with a date and time by adding `/at` after the title of the event
+- `list` shows all your current tasks
+  - `mark` and `unmark` along with a *number* will mark a task on the list as *done* or *not done*
+  - `delete` along with a *number* deletes the task on the list
+  - `find` along with part of a task's name will fetch all tasks matching that name
+
+#### Download!
+
+1. Download it [here](https://github.com/Fenway17/ip/releases)
+2. Put the `.jar` file into your desired storage location[^1]
+3. Double-click to run the file *(or use command line terminal)*
+4. Add tasks and Dook will keep track of it for you!
+
+### Development Goals
+
+- [x] Get Dook into a simple to use `.jar` file
+- [ ] Include reminders
+- [ ] Give Dook a pretty user interface
+- [ ] ~~Have Dook do tasks for you irl~~
+
+
+[^1]: 
+    Should you find the need to change where the data is being saved, edit the `FILE_PATH` and `FILE_DIR` in `Duke.java`.
+    ```java
+    public class Duke {
+        ...
+
+        protected static String FILE_PATH = "./data/duke.txt";
+        protected static String FILE_DIR = "./data";
+    
+    ```
+    `FILE_PATH` denotes the actual file, while `FILE_DIR` denotes the folder containing the file.
