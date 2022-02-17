@@ -20,7 +20,7 @@ public class Ui {
     private final PrintStream output;
 
     public Ui(InputStream inputStream, OutputStream outputStream) throws IOException {
-        this.input = new Scanner(inputStream);;
+        this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
     }
 
