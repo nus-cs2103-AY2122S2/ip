@@ -15,9 +15,10 @@ If you are interested in using Duke, visit the [User Guide](./UserGuide.md).
 
 
 ## Useful links
-- [latest version](https://github.com/cpwill01/ip/releases/latest) of Duke
+- [Latest version](https://github.com/cpwill01/ip/releases/latest) of Duke
 - [User Guide](./UserGuide.md)
 
 ## Acknowledgements
-- the [AddressBook Level-3](https://se-education.org/addressbook-level3/)
+- The [AddressBook Level-3](https://se-education.org/addressbook-level3/)
   product website for the structure of this product website and user guide.
+- [User's icon in Duke's GUI](https://stock.adobe.com/sk/search/images?k=inactive+icon)
