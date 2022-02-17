@@ -1,4 +1,6 @@
 # Duke User Guide
+<img width="278" alt="Ui" src="https://user-images.githubusercontent.com/69782911/154522477-e967f1cc-4352-4db4-a1e4-4f62c222c137.png">
+
 
 ## Features
 #### Add tasks 
