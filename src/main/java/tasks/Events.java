@@ -1,3 +1,5 @@
+package tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -19,12 +21,21 @@ public class Events extends Task {
         } catch (DateTimeParseException e) {
             // shouldnt set the date if we didnt receive it in the right format
         }
+    }
 
+    /**
+     * Overloaded constructor to accept localDate.
+     */
+    public Events(String description, LocalDate date) {
+        super(description);
+        this.at = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        String date = (date != null ? date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : at);
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + date + ")";
+        // String date = (date != null ? date.format(DateTimeFormatter.ofPattern("MMM d
+        // yyyy")) : at);
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.getDescription() + " (at: " + at + ")";
     }
 }
