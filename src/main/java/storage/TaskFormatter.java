@@ -13,7 +13,19 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a utility that serialize and deserialize a set of tasks
+ * that is retrieved/persisted from/to the filesystem.
+ */
 public class TaskFormatter {
+    /**
+     * Serializes a set of tasks to the appropriate format for filesystem
+     * storage.
+     *
+     * @param tasks the set of tasks to serialize.
+     * @return A string representing the serialized set of tasks.
+     * @throws TaskFormatterException If any of the given tasks is unsupported.
+     */
     public static String encode(List<? extends Task> tasks) throws TaskFormatterException {
         String encoding = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -58,6 +70,14 @@ public class TaskFormatter {
         return result;
     }
 
+    /**
+     * Deserializes a string representation of the tasks from the filesystem
+     * to a list of Task objects.
+     *
+     * @param str the string representation of a serialized set of tasks.
+     * @return A list of Task objects that are deserialized from the given serialized input.
+     * @throws TaskFormatterException If the serialized input given is of an invalid format.
+     */
     public static List<Task> decode(String str) throws TaskFormatterException {
         final List<Task> decodedTasks = new ArrayList<>();
         if (str.trim().isEmpty()) {

@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents the retrieval/persistence of tasks to the filesystem.
+ */
 public class Storage {
     private static final String TASKS_FILENAME = "tasks";
 
@@ -30,10 +33,25 @@ public class Storage {
         return tasksDir;
     }
 
+    /**
+     * Returns a Storage object that can retrieve and overwrite tasks
+     * from/to the filesystem.
+     *
+     * @param appPath represents the base directory that the tasks data file is in.
+     * @throws StorageOperationException If the base directory doesn't exist and an
+     * exception occurred while automatically creating it.
+     */
     public Storage(String appPath) throws StorageOperationException {
         this.path = Storage.createAppDirIfNotExists(appPath);
     }
 
+    /**
+     * Reads and returns the tasks from the filesystem.
+     *
+     * @return The tasks read from the filesystem.
+     * @throws StorageOperationException If an error occurs when reading the tasks from
+     * the filesystem.
+     */
     public List<Task> load() throws StorageOperationException {
         BufferedReader reader = null;
         try {
@@ -47,6 +65,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites the existing tasks in the filesystem with the given set
+     * of tasks.
+     *
+     * @param tasks the set of tasks to be stored in the filesystem.
+     * @throws StorageOperationException If an error occurs when writing the tasks to
+     * the filesystem.
+     */
     public void save(List<? extends Task> tasks) throws StorageOperationException {
         try {
             Files.writeString(this.path, TaskFormatter.encode(tasks));
