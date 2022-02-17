@@ -1,7 +1,72 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Duke
+What can I do for you?
+----------------------------------
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 tasks in the list.
+----------------------------------
+----------------------------------
+Nice! I've marked this task as done:
+[T][X] borrow book
+----------------------------------
+----------------------------------
+Got it. I've added this task:
+[E][ ] group project meeting (at: Jul 21 2022 14:00)
+Now you have 2 tasks in the list.
+----------------------------------
+----------------------------------
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [E][ ] group project meeting (at: Jul 21 2022 14:00)
+----------------------------------
+----------------------------------
+Got it. I've added this task:
+[D][ ] return book (by: Jul 22 2022 14:00)
+Now you have 3 tasks in the list.
+----------------------------------
+----------------------------------
+OOPS!!! Please input a number. :<
+----------------------------------
+----------------------------------
+Nice! I've marked this task as done:
+[D][X] return book (by: Jul 22 2022 14:00)
+----------------------------------
+----------------------------------
+OK, I've marked this task as not done yet:
+[D][ ] return book (by: Jul 22 2022 14:00)
+----------------------------------
+----------------------------------
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [E][ ] group project meeting (at: Jul 21 2022 14:00)
+3. [D][ ] return book (by: Jul 22 2022 14:00)
+----------------------------------
+----------------------------------
+OOPS!!! The description of a todo cannot be empty. :<
+----------------------------------
+----------------------------------
+Got it. I've added this task:
+[T][ ] hahahha
+Now you have 4 tasks in the list.
+----------------------------------
+----------------------------------
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [E][ ] group project meeting (at: Jul 21 2022 14:00)
+3. [D][ ] return book (by: Jul 22 2022 14:00)
+4. [T][ ] hahahha
+----------------------------------
+----------------------------------
+Noted. I've removed this task:
+[T][ ] hahahha
+Now you have 3 tasks in the list.
+----------------------------------
+----------------------------------
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [E][ ] group project meeting (at: Jul 21 2022 14:00)
+3. [D][ ] return book (by: Jul 22 2022 14:00)
+----------------------------------
+----------------------------------
+Bye. Hope to see you again soon!
+----------------------------------
