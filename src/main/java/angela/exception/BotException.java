@@ -56,4 +56,16 @@ public class BotException {
         wordArray.add(" Try another day instead");
         return wordArray;
     }
+
+    /**
+     * Returns error when Angela can not find any task that match the keyword
+     *
+     * @return The reply string of Angela
+     */
+    public ArrayList<String> printKeywordNotFoundError() {
+        ArrayList<String> wordArray = new ArrayList<>();
+        wordArray.add(" Sorry, I can not find any tasks contains the keyword. ");
+        wordArray.add(" Try another keyword instead");
+        return wordArray;
+    }
 }

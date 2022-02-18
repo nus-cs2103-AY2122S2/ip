@@ -107,6 +107,9 @@ public class TaskList {
             String taskDescription = ui.showSearchResult(numIndex, task);
             wordArray.add(taskDescription);
         }
+        if (numIndex == 0) {
+            return exception.printKeywordNotFoundError();
+        }
         return wordArray;
     }
 

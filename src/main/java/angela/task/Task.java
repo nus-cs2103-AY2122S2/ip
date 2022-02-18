@@ -206,7 +206,7 @@ public class Task {
         if (isDatabase) {
             return "| " + type + " | " + done + " | " + description + timeDue;
         } else {
-            return " " + fullTypeText + " " + description + timeDue + ": " + done;
+            return fullTypeText + " " + description + timeDue + ": " + done;
         }
     }
 

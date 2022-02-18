@@ -60,7 +60,7 @@ public class Ui {
         wordArray.add(" Here are the tasks in your list:");
 
         for (int i = 1; i <= storingList.size(); i++) {
-            String taskString = " " + i + "." + storingList.get(i - 1);
+            String taskString = " " + i + ". " + storingList.get(i - 1);
             wordArray.add(taskString);
         }
         return wordArray;
@@ -115,7 +115,7 @@ public class Ui {
      */
     public ArrayList<String> showDate(ArrayList<Task> eventList) {
         ArrayList<String> wordArray = new ArrayList<>();
-        wordArray.add(" I found" + eventList.size() + " deadlines and events in that day:");
+        wordArray.add(" I found " + eventList.size() + " deadlines and events in that day:");
 
         for (int i = 1; i <= eventList.size(); i++) {
             String dateString = i + "." + eventList.get(i - 1);
