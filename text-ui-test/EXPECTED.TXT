@@ -1,7 +1,61 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+MNSKY: ..?
+[MNSKY is having trouble remembering the previous task list...]
 
+MNSKY: Hi, I'm
+MNSKY: MM      MM  NN      NN   SSSSSSS   KK     KK  YY      YY
+MNSKY: MMMM  MMMM  NNNN    NN  SSSS       KK   KK      YY  YY
+MNSKY: MM  MM  MM  NN  NN  NN    SSSSS    KKKKK          YY
+MNSKY: MM      MM  NN    NNNN       SSSS  KK   KK        YY
+MNSKY: MM      MM  NN      NN  SSSSSSS    KK     KK      YY
+MNSKY: I can help!
+
+> MNSKY: ...
+MNSKY: I can help!
+
+> [MNSKY added task remove abornacee mavee to their list]
+MNSKY: I can help!
+
+> [MNSKY added task finish coding problem four to their list]
+MNSKY: I can help!
+
+> [MNSKY added task the purge to their list]
+MNSKY: I can help!
+
+> [MNSKY added task lol to their list]
+MNSKY: I can help!
+
+> [MNSKY added task submit project to their list]
+MNSKY: I can help!
+
+> [MNSKY added task prayer to their list]
+MNSKY: I can help!
+
+> 1. [T][?] remove abornacee mavee
+2. [D][?] finish coding problem four (by: idk when im free lol)
+3. [E][?] the purge (at: november 31 2022 4:33 pm)
+4. [T][?] lol
+5. [D][?] submit project (by: May 13 2022, 8:00 am)
+6. [E][?] prayer (at: 11:10 pm)
+MNSKY: I can help!
+
+> [D][X] finish coding problem four (by: idk when im free lol)
+MNSKY: I can help!
+
+> [E][X] the purge (at: november 31 2022 4:33 pm)
+MNSKY: I can help!
+
+> [E][?] the purge (at: november 31 2022 4:33 pm)
+MNSKY: I can help!
+
+> [MNSKY deleted the task lol from the list.]
+MNSKY: I can help!
+
+> 1. [T][?] remove abornacee mavee
+2. [D][X] finish coding problem four (by: idk when im free lol)
+3. [E][?] the purge (at: november 31 2022 4:33 pm)
+4. [D][?] submit project (by: May 13 2022, 8:00 am)
+5. [E][?] prayer (at: 11:10 pm)
+MNSKY: I can help!
+
+> MNSKY: I can help!
+[MNSKY has shut itself down]
