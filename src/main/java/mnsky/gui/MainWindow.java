@@ -29,6 +29,8 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image mnskyImage = new Image(this.getClass().getResourceAsStream("/images/mnsky.png"));
+    private Image mnskyDownImage = new Image(this.getClass().getResourceAsStream("/images/mnskyDown.png"));
+    private Image currentMnskyImage = mnskyImage;
 
     /**
      * Initializes the scroll pane to connect it to the height of the dialog container.
@@ -68,13 +70,26 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         }
 
+        boolean isBye = false;
         StringBuilder final_response = new StringBuilder();
         for (String response : responses) {
+            if (response.equals("bye")) {
+                isBye = true;
+                continue;
+            }
+
             final_response.append(response);
             final_response.append('\n');
         }
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(final_response.toString(), mnskyImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(final_response.toString(), currentMnskyImage));
+
+        if (isBye) {
+            mnsky.shutDown();
+            currentMnskyImage = mnskyDownImage;
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog("[MNSKY has shut itself down.]",
+                    currentMnskyImage));
+        }
 
         userInput.clear();
     }

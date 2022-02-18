@@ -19,6 +19,8 @@ public class Mnsky {
     private Ui ui;
     private Storage storage;
 
+    private boolean isShutDown = false;
+
     /**
      * Creates a UI object.
      */
@@ -120,6 +122,11 @@ public class Mnsky {
     public ArrayList<String> getResponses(String input) {
         ArrayList<String> responses = new ArrayList<>();
 
+        if (isShutDown) {
+            responses.add("...");
+            return responses;
+        }
+
         try {
             ArrayList<String> parsedInput = Parser.parseInput(input);
             assert parsedInput.size() >= 1;
@@ -150,5 +157,12 @@ public class Mnsky {
 
         responses.add("I can help!");
         return responses;
+    }
+
+    /**
+     * Shuts down MNSKY so that it will only return a blank response.
+     */
+    public void shutDown() {
+        isShutDown = true;
     }
 }
