@@ -6,7 +6,7 @@ then
     mkdir ../bin
 fi
 
-# delete output from previous run
+# delete duke.output from previous run
 if [ -e "./ACTUAL.TXT" ]
 then
     rm ACTUAL.TXT
@@ -19,14 +19,14 @@ then
     exit 1
 fi
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+# run the program, feed commands from input.txt file and redirect the duke.output to the ACTUAL.TXT
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
-# compare the output to the expected output
+# compare the duke.output to the expected duke.output
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
