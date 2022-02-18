@@ -46,8 +46,8 @@ public class DeleteCommand extends Commands {
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String trimmedArgument = Parser.trim(arguments);
-            return new CommandResult(
-                    tasks.deletesTask(Parser.convertBases(Parser.parseToInt(trimmedArgument)), storage));
+            return new CommandResult(tasks.deleteTaskHandler(Parser.massConvertBases
+                    (Parser.parseToIntArray(trimmedArgument.split(","))), storage));
         } catch (IndexOutOfBoundsException err) {
             return new CommandResult("Pika, deleting the PokeTask was unsuccessful...\n"
                     + err);

@@ -81,7 +81,7 @@ public class Deadlines extends Tasks {
     public String toDatabaseString() {
         return DATAFORMAT_DEADLINE + (this.getCompletion() ?
                 DATA_COMPLETEDTASK : DATA_INCOMPLETEDTASK) + super.getName()
-                + " | " + deadline + "\n";
+                + " | " + deadline;
     }
 
     // toString returning duke.task
@@ -93,7 +93,7 @@ public class Deadlines extends Tasks {
     public String toString() {
         return PRINTFORMAT_DEADLINE + (this.getCompletion() ?
                 PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName()
-                + " (By: " + deadline + ")\n" ;
+                + " (By: " + deadline + ")" ;
     }
 
 }

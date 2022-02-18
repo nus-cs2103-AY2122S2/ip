@@ -51,7 +51,7 @@ public class Todos extends Tasks {
      */
     public String toDatabaseString() {
         return DATAFORMAT_TODO + (this.getCompletion() ?
-                DATA_COMPLETEDTASK : DATA_INCOMPLETEDTASK) + super.getName() + "\n";
+                DATA_COMPLETEDTASK : DATA_INCOMPLETEDTASK) + super.getName();
     }
 
     /**
@@ -60,6 +60,6 @@ public class Todos extends Tasks {
      */
     public String toString() {
         return PRINTFORMAT_TODO + (super.getCompletion() ?
-                PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName() + "\n";
+                PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName() ;
     }
 }

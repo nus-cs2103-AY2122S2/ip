@@ -73,7 +73,7 @@ public class Events extends Tasks {
     public String toDatabaseString() {
         return DATAFORMAT_EVENTS + (this.getCompletion() ?
                 DATACOMPLETED_TASK : DATAINCOMPLETED_TASK) + super.getName()
-                + " | " + timing + "\n";
+                + " | " + timing;
     }
 
     // toString returning event
@@ -84,6 +84,6 @@ public class Events extends Tasks {
     public String toString() {
         return PRINTFORMAT_EVENTS + (super.getCompletion() ?
                 PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName()
-                + " (At: " + timing + ") "+ "\n" ;
+                + " (At: " + timing + ") "+ "" ;
     }
 }
