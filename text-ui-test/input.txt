@@ -1,0 +1,16 @@
+deadline 64 pages of readings /by 9am
+event training session /at 7pm
+todo this ip
+deadline proposal /by thursday
+deadline research /by friday
+event briefing /at 5-6pm
+list
+mark 6
+mark 1
+todo sleep
+list
+unmark 1
+mark 4
+list
+bye
+
