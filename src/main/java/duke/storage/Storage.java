@@ -69,6 +69,7 @@ public class Storage {
      * @return a boolean value indicating the success of writing to the database.
      */
     public boolean hasWriteToDatabase(String textToAdd) {
+        assert !databasePath.equals(""):"The database file could not be found. Try PokeJournal again later";
         try {
             writeToDatabase(textToAdd, false);
         } catch (IOException err) {
@@ -87,6 +88,7 @@ public class Storage {
      * @return a boolean value indicating the success of writing to the database.
      */
     public boolean hasAppendToDatabase(String textToAppend) {
+    assert !databasePath.equals(""):"The database file could not be found. Try PokeJournal again later";
         try {
             writeToDatabase(textToAppend, true);
         } catch (IOException err) {
@@ -146,7 +148,7 @@ public class Storage {
         try {
             return new ArrayList<Tasks>(returnsAllTasks());
         } catch (FileNotFoundException err) {
-            new Ui().showErrorMessage(err, "load");
+            Ui.showErrorMessage(err, "load");
             return new ArrayList<Tasks>();
         }
     }

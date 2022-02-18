@@ -1,5 +1,3 @@
 T |   | 3
-T |   | 5fi er
-T | X | meowmeow
-E |   | tsktsk | sunteccity
 D |   | finish work | 2012-05-06
+T |   | hello
