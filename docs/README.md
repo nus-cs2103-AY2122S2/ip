@@ -249,3 +249,15 @@ the state of the task list after redoing, such as in the example below.
 4. [T][?] lol
 I can help!
 ```
+
+### `bye` - Shut down MNSKY
+
+Causes MNSKY to shut itself down. At this point, it will only give
+blank responses.
+
+Format: `bye`
+
+Example of usage: `bye`
+
+Expected outcome: MNSKY will shut itself down and will only respond with `...`
+if the user sends any input.
