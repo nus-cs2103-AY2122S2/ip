@@ -55,6 +55,7 @@ public class FindCommand extends Command {
             output += LINE_SEPARATOR;
             for (int i = 0; i < foundTasks.getNumberOfTasks(); i++) {
                 output += ui.printMessage(LINE_PREFIX + (i + 1) + "." + foundTasks.getTaskByIndex(i));
+                output += LINE_SEPARATOR;
             }
             return output;
 
