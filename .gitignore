@@ -3,6 +3,11 @@
 /out/
 /*.iml
 
+src/main/java/*.class
+src/main/data.txt
+src/main/out
+src/main/java/META-INF
+
 # Gradle build files
 /.gradle/
 /build/
