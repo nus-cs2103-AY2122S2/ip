@@ -24,21 +24,21 @@ You can find a specific task in your list using keywords.
 
 ## Add a Task
 
-###`todo [TaskName]` 
+### `todo [TaskName]` 
 - Adds a todo task to the list.
 
 Example of usage:
 `todo sleep`
 
 
-###`deadline [TaskName]/by [YYYY-MM-DD]` 
+### `deadline [TaskName]/by [YYYY-MM-DD]` 
 - Adds a deadline task to the list.
 
 Example of usage:
 `deadline CS2040 assignment/by 2020-12-12`
 
 
-###`event [TaskName]/at [YYYY-MM-DD]` 
+### `event [TaskName]/at [YYYY-MM-DD]` 
 - Adds a event task
 
 Example of usage:
@@ -46,13 +46,13 @@ Example of usage:
 
 ## Delete a task
 
-###`delete [TaskID]`
+### `delete [TaskID]`
 - Delete task that is numbered as `[TaskID]` of the list
 
 Example of usage:
 `delete 1`
 
-##Mark or Unmark a task
+## Mark or Unmark a task
 
 ### `mark [TaskID]` 
 - Mark the task that is numbered as `[TaskID]` as completed.
@@ -67,7 +67,7 @@ Example of usage:
 Example of usage:
 `unmark 3`
 
-##Find a task
+## Find a task
 
 ### `find [Keyword]` 
 - Finds the task that contains the `[Keyword]` 
