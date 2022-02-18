@@ -82,7 +82,9 @@ public class Gene {
     String handleUserInput(String nextLine) {
         try {
             Command currCommand = Parser.parseCommand(nextLine);
-            return currCommand.execute(geneTasks, geneUi, geneTaskStorage, geneLocs, geneLocationStorage);
+            String toReturn = currCommand.execute(geneTasks, geneUi, geneTaskStorage, geneLocs, geneLocationStorage);
+            System.out.println(toReturn);
+            return toReturn;
         } catch (UnrecognizedCommandException e) {
             return e.getMessage();
         } catch (Exception e) {

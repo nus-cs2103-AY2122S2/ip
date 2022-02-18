@@ -66,7 +66,7 @@ public class AddLocationCommand extends Command {
         Location newLocation = new Location(locationName, locationPostalCode, locationType);
         geneLocs.add(newLocation);
         geneLocationStorage.writeToFile(locationName, locationPostalCode, locationType, false);
-        return Ui.showLine()
+        return Ui.showLine() + "\n"
                 + "Got it. I've added this location:\n"
                 + "  " + newLocation + "\n"
                 + "Now you have " + geneLocs.size() + " locations in the list."
