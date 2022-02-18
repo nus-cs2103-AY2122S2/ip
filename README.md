@@ -1,3 +1,6 @@
+![Ui png](https://user-images.githubusercontent.com/70706659/154679760-3c8fa8cb-f3cc-4242-9c6b-a3f9c9310ceb.PNG)
+
+
 # Duke
 
 A desktop task management application that has the benefits of a Graphical User Interface (GUI) while being optimized for usage like a Command Line Interface (CLI). This application makes managing your task as easy as counting from 1 to 10.
@@ -15,6 +18,7 @@ A desktop task management application that has the benefits of a Graphical User 
 - View tasks
 - Mark/Unmark tasks as done
 - Find tasks
+- Update tasks
 
 ## Usages
 Tasks are categorized as either a Todo, Event or Deadline.
@@ -64,7 +68,39 @@ Format:
 - `delete TASK_INDEX`
 - TASK_INDEX cannot be empty.
 
+Example:
+- `delete 3`
+
 ### Find task
 Format:
 - `find SEARCH_TERM`
 - SEARCH_TERM cannot be empty.
+
+Example:
+- `find homework`
+
+### Update task
+Can update either only the task description or only the date or both. <br/>
+
+Format: <br/>
+
+Update only task description
+- `update TASK_INDEX TASK_DESC`
+- TASK_INDEX and TASK_DESC cannot be empty.
+
+Example:
+- `update 3 study for quiz`
+
+Update only date
+- `update TASK_INDEX /date YYYY-MM-DD`
+- TASK_INDEX and YYYY-MM-DD cannot be empty.
+
+Example:
+- `update 3 /date 2022-05-01`
+
+Update both task description and date
+- `update TASK_INDEX TASK_DESC /date YYYY-MM-DD`
+- TASK_INDEX, TASK_DESC and YYYY-MM-DD cannot be empty.
+
+Example:
+- `update 3 study for quiz /date 2022-05-01`
