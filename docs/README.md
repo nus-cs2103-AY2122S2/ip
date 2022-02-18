@@ -21,14 +21,10 @@ Shows the current lists of tasks tracked by Cleese
 
 Marks a task with 'X' to show that it has been completed
 
-Example of usage: 
-
-`mark [taskNumber]`
+Example of usage: `mark [taskNumber]`
 
 ### `unmark` - Removes the mark from a task
 
 Removes the 'X' that marks a task as done to show that it has not yet been completed
 
-Example of usage: 
-
-`unmark [taskNumber]`
+Example of usage: `unmark [taskNumber]`
