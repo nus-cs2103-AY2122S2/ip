@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.data.TaskList;
+import duke.data.TasksEditor;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -12,7 +12,7 @@ public class ListCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.list(tasks);
+    public String execute(TasksEditor tasksEditor, Ui ui, Storage storage) {
+        return ui.list(tasksEditor);
     }
 }

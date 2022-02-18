@@ -2,9 +2,9 @@ package duke.commands;
 
 import java.time.LocalDate;
 
+import duke.data.TasksEditor;
 import duke.data.task.Deadline;
 import duke.data.task.Task;
-import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
@@ -27,9 +27,9 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.add(toAdd);
-        return ui.showAddTask(toAdd, tasks.getSize());
+    public String execute(TasksEditor tasksEditor, Ui ui, Storage storage) {
+        tasksEditor.add(toAdd);
+        return ui.showAddTask(toAdd, tasksEditor.getSize());
     }
 
     @Override

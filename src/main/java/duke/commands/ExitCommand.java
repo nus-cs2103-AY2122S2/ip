@@ -2,7 +2,7 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.data.TaskList;
+import duke.data.TasksEditor;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
@@ -16,8 +16,8 @@ public class ExitCommand extends Command{
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        storage.store(tasks.toList());
+    public String execute(TasksEditor tasksEditor, Ui ui, Storage storage) throws IOException {
+        storage.store(tasksEditor.toList());
         return ui.showExit();
     }
 

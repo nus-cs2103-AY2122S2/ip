@@ -2,8 +2,8 @@ package duke.ui;
 
 import java.util.List;
 
+import duke.data.TasksEditor;
 import duke.data.task.Task;
-import duke.data.TaskList;
 
 public class Ui {
 
@@ -40,11 +40,11 @@ public class Ui {
     /**
      * Lists out the current tasks as well as their status.
      *
-     * @param tasks A list of all tasks.
+     * @param tasksEditor An editor to handle task operations.
      * @return The response message.
      */
-    public String list(TaskList tasks) {
-        String msg = "Here are the tasks in your list:\n" + tasks.toString();
+    public String list(TasksEditor tasksEditor) {
+        String msg = "Here are the tasks in your list:\n" + tasksEditor.toString();
         return msg;
     }
 
@@ -108,6 +108,24 @@ public class Ui {
     public String delete(Task t, int size) {
         String msg = "Noted. I've removed this task:\n   " + t.toString()
                 + "\nNow you have " + size + " tasks in the list.";
+        return msg;
+    }
+
+    /**
+     * Undoes the latest operation on the task list.
+     *
+     * @param tasksEditor
+     * @param isSuccessful
+     * @return
+     */
+    public String showUndo(TasksEditor tasksEditor, boolean isSuccessful){
+        String msg;
+        if (isSuccessful) {
+            msg = "I've undone the previous operation\n Here are the tasks in your list:\n"
+                    + tasksEditor.toString();;
+        } else {
+            msg = "Nothing to undo.\n";
+        }
         return msg;
     }
 }

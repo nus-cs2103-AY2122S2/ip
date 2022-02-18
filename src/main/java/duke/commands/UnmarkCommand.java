@@ -1,7 +1,7 @@
 package duke.commands;
 
+import duke.data.TasksEditor;
 import duke.data.task.Task;
-import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -21,8 +21,8 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task t = tasks.unmark(index);
+    public String execute(TasksEditor tasksEditor, Ui ui, Storage storage) {
+        Task t = tasksEditor.unmark(index);
         return ui.unmark(t);
     }
 }

@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import duke.data.TasksEditor;
 import duke.data.task.Task;
-import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
@@ -31,8 +31,8 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        final List<Task> tasksFound = getTasksWithDescriptionContainingAnyKeyword(this.keywords, tasks);
+    public String execute(TasksEditor tasksEditor, Ui ui, Storage storage) {
+        final List<Task> tasksFound = getTasksWithDescriptionContainingAnyKeyword(this.keywords, tasksEditor);
         return ui.find(tasksFound);
     }
 
@@ -40,12 +40,12 @@ public class FindCommand extends Command{
      * Retrieves all tasks in the address book whose description contain some of the specified keywords.
      *
      * @param keywords for searching.
-     * @param tasks The task list containing all the tasks.
+     * @param tasksEditor The task list editor to handle task operations.
      * @return List of tasks found.
      */
-    private List<Task> getTasksWithDescriptionContainingAnyKeyword(Set<String> keywords, TaskList tasks) {
+    private List<Task> getTasksWithDescriptionContainingAnyKeyword(Set<String> keywords, TasksEditor tasksEditor) {
         final List<Task> matchedTasks = new ArrayList<>();
-        for (Task t : tasks.toList()) {
+        for (Task t : tasksEditor.toList()) {
             final Set<String> wordsInName = new HashSet<>(t.getWordsInDescription());
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedTasks.add(t);
