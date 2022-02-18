@@ -1,7 +1,43 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+   -----      O    -----      O
+ /   _   \   __   |       \   __
+ |  | |__|  |  |  |   O   |  |  |
+ |   ----\  |  |  |       /  |  |
+  \ __   |  |  |  |   ---    |  |
+ |---|   |  |  |  |       \  |  |
+  \______/  |__|  |___|\___\ |__|
 
+What can I do for you?
+Got it! I've added this task:
+[T][ ] borrow book
+Total tasks on the list: 1
+Got it! I've added this task:
+[D][ ] return book (by: 5 Mar)
+Total tasks on the list: 2
+Got it! I've added this task:
+[E][ ] project meeting (at: 6 Mar 5pm)
+Total tasks on the list: 3
+Please ENTER a number within the number of tasks!!
+Please ENTER a number within the number of tasks!!
+Great job for completing task:
+[T][X] borrow book
+Great job for completing task:
+[D][X] return book (by: 5 Mar)
+Task marked as uncompleted:
+[T][ ] borrow book
+Task List:
+1. [T][ ] borrow book
+2. [D][X] return book (by: 5 Mar)
+3. [E][ ] project meeting (at: 6 Mar 5pm)
+todo cannot be EMPTY!! Please ENTER something for todo!!
+deadline has no date/time!! Please ENTER a date/time for deadline!!
+Please ENTER the item number to unmark!!
+Please ENTER a valid item number to unmark!!
+OPPS!! list does not take in any parameter!!
+Successfully removed the following task:
+[T][ ] borrow book
+You have 2 tasks remaining!!
+Task List:
+1. [D][X] return book (by: 5 Mar)
+2. [E][ ] project meeting (at: 6 Mar 5pm)
+Bye! Hope to see you again soon!
