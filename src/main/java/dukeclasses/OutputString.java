@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Represents a Ui
  */
-public class Ui {
+public class OutputString {
 
     private static final String STORAGE_LOAD_ERROR = "Storage load failed\n";
     private static final String STORAGE_UPDATE_ERROR = "Fail to update storage\n";
@@ -16,9 +16,9 @@ public class Ui {
     private static final String TASK_NOT_FOUND_ERROR = "Task not found.\n";
 
     /**
-     * Class constructor to initiate Ui
+     * Class constructor to form output strings for the GUI.
      */
-    public Ui(){
+    public OutputString(){
 
     }
 
