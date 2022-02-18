@@ -13,8 +13,14 @@ public class Action {
      * greets the user
      */
     public static String greet() {
-        String logo = "DUKE";
-        String greeting = "Hello! I'm JiaMing aka\n" + logo + "\nWhat can I do for you?\nTip: use 'help' for help\n";
+        String logo = "---------------------------------------------------\n"
+                + "P P P P       A        N      N    D D D         A\n"
+                + "P P P P    A A A    N  N  N    D      D    A A A\n"
+                + "P           A      A    N       N    D D D    A      A\n"
+                + "---------------------------------------------------";
+
+
+        String greeting = "Hello! I am PinkPandaBot aka\n" + logo + "\nWelcome to my ChatBot\nTip: use 'help' for help\n";
         System.out.println(greeting);
         return greeting;
     }
