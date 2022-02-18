@@ -1,5 +1,11 @@
 package seedu.duke;
 
+import seedu.exception.DukeException;
+import seedu.task.Deadline;
+import seedu.task.Event;
+import seedu.task.Task;
+import seedu.task.ToDo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,28 +26,29 @@ public class TaskList {
      * @throws DukeException To catch any errors when creating the tasklist.
      */
     public TaskList(ArrayList<String> taskList) throws DukeException {
-        for (String t : taskList) {
-            String tType = t.substring(0, 7);
-            boolean tIsDone = false;
-            if (tType.charAt(4) == 'X') {
-                tIsDone = true;
+        for (String task : taskList) {
+            String taskType = task.substring(0, 7);
+            boolean taskIsDone = false;
+            String dateTime;
+            if (taskType.charAt(4) == 'X') {
+                taskIsDone = true;
             }
-            switch (tType.charAt(1)) {
+            switch (taskType.charAt(1)) {
             case 'T':
-                String tTodo = t.substring(7);
-                this.taskList.add(new ToDo(tTodo, tIsDone));
+                String taskTodo = task.substring(7);
+                this.taskList.add(new ToDo(taskTodo, taskIsDone));
                 break;
             case 'E':
-                String[] tEvent = t.substring(7).split(" - at: ");
-                this.taskList.add(new Event(tEvent[0], tIsDone,
-                        LocalDate.parse(tEvent[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+                String[] taskEvent = task.substring(7).split(" - at: ");
+                dateTime = LocalDate.parse(taskEvent[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                this.taskList.add(new Event(taskEvent[0], taskIsDone, dateTime));
                 break;
             case 'D':
-                String[] tDeadline = t.substring(7).split(" - by: ");
-                this.taskList.add(new Deadline(tDeadline[0], tIsDone,
-                        LocalDate.parse(tDeadline[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+                String[] taskDeadline = task.substring(7).split(" - by: ");
+                dateTime = LocalDate.parse(taskDeadline[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                        .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                this.taskList.add(new Deadline(taskDeadline[0], taskIsDone, dateTime));
                 break;
             }
         }

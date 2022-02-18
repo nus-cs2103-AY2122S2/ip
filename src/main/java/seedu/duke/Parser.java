@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.command.*;
+import seedu.exception.DukeException;
+
 /**
  * Contains methods to parse user input to be understood based on the
  * type of command made by user.
@@ -8,80 +11,66 @@ package seedu.duke;
  */
 public class Parser {
 
-    /**
-     * Parses the user input to return the first word to determine the type of command.
-     *
-     * @param nextInput Next line of user input read in by the scanner in main class.
-     * @return Returns the first word which is the command type of user input.
-     */
-    public static String getCommand(String nextInput) {
-        String[] words = nextInput.split(" ", 2);
-        return words[0];
+    private String inputCommand;
+
+    public Parser(String inputCommand) {
+        this.inputCommand = inputCommand.toLowerCase();
     }
 
     /**
-     * Parses the user input to return the number of words in the user input separated by " ".
+     * Parses the user input to return the first word to determine the type of command.
      *
-     * @param nextInput Next line of user input read in by the scanner in main class.
-     * @return Returns the number of words in the user input separated by " ".
+     * @return Returns the first word which is the command type of user input.
      */
-    public static int getLength(String nextInput) {
-        String[] words = nextInput.split(" ");
-        return words.length;
+    public Command getCommand() throws DukeException {
+        String commandAction = this.getCommandAction();
+        String commandDetails = this.getCommandDetails();
+
+        switch (commandAction) {
+        case "hi":
+            return new WelcomeCommand();
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "todo":
+        case "event":
+        case "deadline":
+            return new AddCommand(commandAction, commandDetails);
+        case "mark":
+            return new MarkCommand(commandDetails);
+        case "unmark":
+            return new UnmarkCommand(commandDetails);
+        case "delete":
+            return new DeleteCommand(commandDetails);
+        case "find":
+            return new FindCommand(commandDetails);
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :(");
+        }
+    }
+
+    /**
+     * Parses the user input command to retrieve
+     * the command action.
+     *
+     * @return Returns a String of the command action.
+     */
+    public String getCommandAction() {
+        return inputCommand.split(" ", 2)[0];
     }
 
     /**
      * Parses the user input command for a deadline task to retrieve
      * the description and date.
      *
-     * @param nextInput Next line of user input read in by the scanner in main class.
-     * @return Returns a String[] of the description and date for a deadline task.
+     * @return Returns a String of the description.
      */
-    public static String[] getDeadlineDetails(String nextInput) {
-        return nextInput.split(" ", 2)[1].split(" - by: ");
-    }
-
-    /**
-     * Parses the user input command for a todo task to retrieve
-     * the description.
-     *
-     * @param nextInput Next line of user input read in by the scanner in main class.
-     * @return Returns a String[] of the description for a todo task.
-     */
-    public static String getTodoDetails(String nextInput) {
-        return nextInput.split(" ", 2)[1];
-    }
-
-    /**
-     * Parses the user input command for an event task to retrieve
-     * the description and date.
-     *
-     * @param nextInput Next line of user input read in by the scanner in main class.
-     * @return Returns a String[] of the description and date for an event task.
-     */
-    public static String[] getEventDetails(String nextInput) {
-        return nextInput.split(" ", 2)[1].split(" - at: ");
-    }
-
-    /**
-     * Parses the user input command for marking or unmarking a task to retrieve the
-     * task id required.
-     *
-     * @param nextInput Next line of user input read in by the scanner in main class.
-     * @return Returns an integer of the task id to be marked or unmarked.
-     */
-    public static int getTaskId(String nextInput) {
-        return Integer.valueOf(nextInput.split(" ", 2)[1]);
-    }
-
-    /**
-     * Parses the user input command for finding tasks with a specific keyword to return
-     * the search keyword.
-     *
-     * @param nextInput Next line of user input read in by the scanner in main class.
-     * @return Returns a string containing the keyword to be found.
-     */
-    public static String getKeyword(String nextInput) {
-        return nextInput.split(" ", 2)[1];
+    public String getCommandDetails() {
+        try {
+            return inputCommand.split(" ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "";
+        }
     }
 }

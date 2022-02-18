@@ -1,13 +1,19 @@
 package seedu.command;
 
-import seedu.duke.DukeException;
+import java.io.IOException;
+
+import seedu.exception.DukeException;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 
-import java.io.IOException;
+public class UnmarkCommand extends Command {
+    private final int taskId;
 
-public class UnmarkCommand extends Command{
-    public static String run(int taskId, TaskList tasksList, Storage storage) throws DukeException, IOException {
+    public UnmarkCommand(String taskId) {
+        this.taskId = Integer.valueOf(taskId);
+    }
+
+    public String run(TaskList tasksList, Storage storage) throws DukeException {
         tasksList.getTasks(taskId - 1).markUndone();
         try {
             storage.write(tasksList.getTaskList());
