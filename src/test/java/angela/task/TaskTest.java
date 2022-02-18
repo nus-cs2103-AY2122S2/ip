@@ -46,8 +46,8 @@ public class TaskTest {
         Task task1 = new Task("return book /by 2/12/2019", "D");
         Task task2 = new Task("project meeting /at 12/4/2020", "E");
         Task task3 = new Task("borrow book", "T");
-        assertEquals("[D][ ] return book (by: Dec 2 2019)", task1.toString());
-        assertEquals("[E][ ] project meeting (at: Apr 12 2020)", task2.toString());
-        assertEquals("[T][ ] borrow book", task3.toString());
+        assertEquals("Deadline return book by Dec 2 2019: Not Done Yet", task1.toString());
+        assertEquals("Event project meeting at Apr 12 2020: Not Done Yet", task2.toString());
+        assertEquals("Todo borrow book: Not Done Yet", task3.toString());
     }
 }
