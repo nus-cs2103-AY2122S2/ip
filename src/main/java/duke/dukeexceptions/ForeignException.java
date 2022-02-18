@@ -1,6 +1,5 @@
 package duke.dukeexceptions;
 
-
 import duke.responses.Response;
 
 public class ForeignException extends DukeException {

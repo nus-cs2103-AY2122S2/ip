@@ -95,7 +95,7 @@ Here are the tasks in your list:
 ```
 
 
-### Feature-Mark/UnMark
+### Feature- Mark/UnMark
 
 Mark or unmark tasks based on their completeness.
 
@@ -125,7 +125,7 @@ Nice! I've marked this task as not done yet
 1. [T][] CS2103T IP
 ```
 
-### Feature-Mark/UnMark
+### Feature- Mark/UnMark
 
 Find task based on its name.
 
@@ -146,7 +146,7 @@ Here are the matching tasks in your list
 1. [T][X] CS2103T IP
 ```
 
-### Feature-Bye
+### Feature- Bye
 
 Closes Duke program after displaying a exit message
 
@@ -162,3 +162,16 @@ Expected Output:
 ```
 Bye! hope to see you agian
 ```
+### Command Summary
+
+| Action | Format | Example |
+| ------------- | ------------- | ------------- |
+| Todo  | `todo <NAME>`  | `todo a` | 
+| Deadline | `deadline <NAME> /by <DATE> <TIME>`  | `deadline b /by 2/12/2019 1800`  | 
+| Event | `event <NAME> /by <DATE> <TIME>-<TIME>`  | `event c /at 2/12/2019 1800-1900`  | 
+| List | `list` | `list` | 
+| Mark | `mark <INDEX>` | `mark 1` | 
+| Unmark | `unmark <INDEX>` | `unmark 1` | 
+| Remove | `removed <INDEX>` | `remove 1` | 
+| Find | `find` | `find` | 
+| Bye | `bye`  | `bye` | 

@@ -7,9 +7,6 @@ import duke.responses.Response;
 import duke.task.Deadline;
 import duke.task.Task;
 
-import javax.sound.midi.SysexMessage;
-
-
 /**
  * Command that is run when the user inputs a Deadline Task.
  */
