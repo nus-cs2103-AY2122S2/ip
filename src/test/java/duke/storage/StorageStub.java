@@ -57,7 +57,7 @@ public class StorageStub extends Storage {
 
     @Override
     // Append to file method
-    public boolean appendsToDatabase(String textToAppend) throws IOException {
+    public boolean appendsToDatabase(String textToAppend) {
         try {
             FileWriter fw = new FileWriter(super.getDatabasePath(), true); // Append instead of rewriting over
             fw.write(textToAppend);

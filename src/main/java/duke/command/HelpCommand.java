@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public class HelpCommand extends Commands {
 
     public static final String COMMAND_WORDS = "help";
-    public static final String SUCCESS_MESSAGE = "    Did you accidentally write an incorrect duke.command.";
+    public static final String SUCCESS_MESSAGE = "Pika? Check if you have typed in the wrong command pikapika!";
     public static final String FAILURE_MESSAGE = "";
     private static final boolean IS_EXIT = false;
 
