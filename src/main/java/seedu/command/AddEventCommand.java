@@ -12,14 +12,11 @@ import seedu.duke.TaskList;
 public class AddEventCommand extends Command {
     private Event task;
 
-    public AddEventCommand(String taskType, String taskDetails) {
+    public AddEventCommand(String taskDetails) {
         assert taskDetails != null : "AddEventCommand->AddEventCommand: Task details cannot be null.";
-        assert taskType != null : "AddEventCommand->AddEventCommand: Task type cannot be null.";
-        assert taskType.equalsIgnoreCase("event")
-                : "AddDeadlineCommand->AddDeadlineCommand: Task type must be an event task.";
 
-        String description = taskDetails.split(" - at: ")[0];
-        String dateTime = taskDetails.split(" - at: ")[1];
+        String description = taskDetails.split(" /at ")[0];
+        String dateTime = taskDetails.split(" /at ")[1];
         this.task = new Event(description, dateTime);
     }
 

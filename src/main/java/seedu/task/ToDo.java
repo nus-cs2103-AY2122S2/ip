@@ -28,6 +28,11 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
+    @Override
+    public String toWrite() {
+        return "[T]" + super.toString();
+    }
+
     /**
      * Overrides toString() method to print the todo task in a specific format.
      * Calls the toString() method of the inherited task class.

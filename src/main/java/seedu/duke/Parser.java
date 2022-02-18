@@ -35,11 +35,11 @@ public class Parser {
         case "list":
             return new ListTasksCommand();
         case "todo":
-            return new AddToDoCommand(commandAction, commandDetails);
+            return new AddToDoCommand(commandDetails);
         case "event":
-            return new AddEventCommand(commandAction, commandDetails);
+            return new AddEventCommand(commandDetails);
         case "deadline":
-            return new AddDeadlineCommand(commandAction, commandDetails);
+            return new AddDeadlineCommand(commandDetails);
         case "mark":
             return new MarkTaskCommand(commandDetails);
         case "unmark":

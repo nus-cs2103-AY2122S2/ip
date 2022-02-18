@@ -69,6 +69,12 @@ public class Task {
         this.isDone = false;
     }
 
+    public String toWrite() {
+        String marked = "[" + (this.getStatusIcon()) + "]";
+        String output = marked + " " + this.getDescription();
+        return output;
+    }
+
     /**
      * Overrides toString() method to print the task in a specific format.
      *

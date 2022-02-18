@@ -37,6 +37,11 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
+    @Override
+    public String toWrite() {
+        return "[D]" + super.toString() + " - by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
     /**
      * Overrides toString() method to print the deadline task in a specific format.
      * Calls the toString() method of the inherited task class.
@@ -45,6 +50,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " - by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

@@ -12,14 +12,10 @@ import java.io.IOException;
 public class AddToDoCommand extends Command {
     private ToDo task;
 
-    public AddToDoCommand(String taskType, String taskDetails) {
+    public AddToDoCommand(String taskDetails) {
         assert taskDetails != null : "AddToDoCommand->AddToDoCommand: Task details cannot be null.";
-        assert taskType != null : "AddToDoCommand->AddToDoCommand: Task type cannot be null.";
-        assert taskType.equalsIgnoreCase("todo")
-                : "AddToDoCommand->AddToDoCommand: Task type must be a to do task.";
 
-        String description = taskDetails;
-        this.task = new ToDo(description);
+        this.task = new ToDo(taskDetails);
     }
 
     /**

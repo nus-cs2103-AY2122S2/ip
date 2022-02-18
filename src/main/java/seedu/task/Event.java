@@ -46,6 +46,11 @@ public class Event extends Task {
         return at.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
+    @Override
+    public String toWrite() {
+        return "[E]" + super.toString() + " - at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
     /**
      * Overrides toString() method to print the event task in a specific format.
      * Calls the toString() method of the inherited task class.
@@ -54,6 +59,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " - at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

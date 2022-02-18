@@ -63,7 +63,7 @@ public class Storage {
 
         FileWriter fw = new FileWriter(filePath);
         for (Task t : textToAdd) {
-            fw.write(t.toString() + System.lineSeparator());
+            fw.write(t.toWrite() + System.lineSeparator());
         }
         fw.close();
     }

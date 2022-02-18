@@ -12,14 +12,11 @@ import java.io.IOException;
 public class AddDeadlineCommand extends Command {
     private Deadline task;
 
-    public AddDeadlineCommand(String taskType, String taskDetails) {
+    public AddDeadlineCommand(String taskDetails) {
         assert taskDetails != null : "AddDeadlineCommand->AddDeadlineCommand: Task details cannot be null.";
-        assert taskType != null : "AddDeadlineCommand->AddDeadlineCommand: Task type cannot be null.";
-        assert taskType.equalsIgnoreCase("deadline")
-                : "AddDeadlineCommand->AddDeadlineCommand: Task type must be a deadline task.";
 
-        String description = taskDetails.split(" - by: ")[0];
-        String dateTime = taskDetails.split(" - by: ")[1];
+        String description = taskDetails.split(" /by ")[0];
+        String dateTime = taskDetails.split(" /by ")[1];
         this.task = new Deadline(description, dateTime);
     }
 

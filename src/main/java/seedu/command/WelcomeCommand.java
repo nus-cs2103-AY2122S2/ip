@@ -20,6 +20,6 @@ public class WelcomeCommand extends Command {
             return "Something went wrong: " + e.getMessage();
         }
 
-        return "Hello I'm Aven.\n What can I help you with today?\n";
+        return "Hello I'm Calcifer.\n What can I help you with today?\n";
     }
 }
