@@ -9,7 +9,7 @@ public class Ui {
      */
     public static String welcomeUser() {
         return "Hello! I want to be the best sentient PokePlanner! "
-                + "\nCome plan your day with me! \nType 'help' to access the commands!";
+                + "\nCome plan your day with me! \nView the command in the readme!";
     }
 
     /**

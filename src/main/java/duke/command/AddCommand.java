@@ -84,11 +84,11 @@ public class AddCommand extends Commands {
             }
 
         } catch (IndexOutOfBoundsException err) {
-            return new CommandResult("    Addition of tasks unsuccessful, "
+            return new CommandResult("Addition of tasks unsuccessful, "
                     + "ensure that you are writing in the correct format.");
         } catch (DateTimeParseException err) {
             return new CommandResult(
-                    "    Addition of tasks unsuccessful, ensure that the date is valid, "
+                    "Addition of tasks unsuccessful, ensure that the date is valid, "
                             + "and goes by the format of (YYYY-MM-DD).");
         }
         return new CommandResult(FAILURE_MESSAGE);
