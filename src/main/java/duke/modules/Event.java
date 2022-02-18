@@ -25,7 +25,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        if (super.getStatus() == 1) {
+        if (super.getIsCompleted() == true) {
             return "[E][X] " + super.getName() + " (at: "
                     + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")";
         } else {

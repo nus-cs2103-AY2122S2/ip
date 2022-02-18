@@ -7,8 +7,7 @@ import java.io.Serializable;
  */
 class Task implements Serializable {
 
-    // 1 indicates done and 0 indicates not done
-    private int status;
+    private boolean isCompleted;
     private final String name;
 
     /**
@@ -17,17 +16,17 @@ class Task implements Serializable {
      * @param name The name of the task.
      */
     public Task(String name) {
-        this.status = 0;
+        this.isCompleted = false;
         this.name = name;
     }
 
     /**
-     * Returns the status of completion for a task. 1 indicates done and 0 indicates not done.
+     * Returns the status of completion for a task.
      *
-     * @return An integer representing task completion status.
+     * @return A boolean representing task completion status.
      */
-    public int getStatus() {
-        return status;
+    public boolean getIsCompleted() {
+        return isCompleted;
     }
 
     /**
@@ -43,19 +42,19 @@ class Task implements Serializable {
      * Marks the task as done.
      */
     public void mark() {
-        this.status = 1;
+        this.isCompleted = true;
     }
 
     /**
      * Marks the task as not done.
      */
     public void unmark() {
-        this.status = 0;
+        this.isCompleted = false;
     }
 
     @Override
     public String toString() {
-        if (status == 1) {
+        if (isCompleted == true) {
             return "[X] " + name;
         } else {
             return "[ ] " + name;

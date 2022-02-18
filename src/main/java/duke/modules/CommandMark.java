@@ -9,7 +9,7 @@ public class CommandMark extends Command {
 
     private String commandDescription;
     private ArrayList<Task> tasks;
-    String[] split;
+    String[] descriptionStrings;
 
     /**
      * Constructor for a CommandMark object.
@@ -20,7 +20,7 @@ public class CommandMark extends Command {
     public CommandMark(String commandDescription, ArrayList<Task> tasks) {
         this.commandDescription = commandDescription;
         this.tasks = tasks;
-        split = commandDescription.split(" ");
+        descriptionStrings = commandDescription.split(" ");
     }
 
     /**
@@ -33,14 +33,14 @@ public class CommandMark extends Command {
     public String execute() {
         String output = "";
         try {
-            int item = Integer.parseInt(split[1]);
-            try {
-                Task t = tasks.get(item - 1);
-                t.mark();
-                output = String.format("great job! I've marked this task as done: %s\n", t.getName());
-            } catch (IndexOutOfBoundsException e) {
-                output = "the index you have entered does not exist!\n";
+            int itemToMark = Integer.parseInt(descriptionStrings[1]);
+            if (itemToMark - 1 >= tasks.size()) {
+                return "the index you have entered does not exist!\n";
             }
+            Task toMark = tasks.get(itemToMark - 1);
+            toMark.mark();
+            output = String.format("great job! I've marked this task as done: %s\n", toMark.getName());
+
         } catch (IndexOutOfBoundsException e) {
             output = "mark description cannot be empty!\n";
         } catch (NumberFormatException e) {

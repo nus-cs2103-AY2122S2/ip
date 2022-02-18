@@ -45,6 +45,21 @@ public class Storage {
      */
     public static ArrayList<Task> load() {
         ArrayList<Task> toDoList = new ArrayList<>();
+        if (existsSaveFile()) {
+            return loadData();
+        } else {
+            return toDoList;
+        }
+    }
+
+
+    /**
+     * Checks if a storage file exists. If not, create the file.
+     *
+     * @return True if file exists, False if not exists.
+     */
+    public static boolean existsSaveFile() {
+        boolean hasExecuted = false;
         try {
 
             if (FOLDER_PATH.mkdirs()) {
@@ -54,22 +69,47 @@ public class Storage {
             }
             if (DATA_PATH.createNewFile()) {
                 Ui.print("File is created!\n");
+                return false;
             } else {
                 Ui.print("File already exists.\n");
-                try {
-                    FileInputStream reader = new FileInputStream(DATA_PATH);
-                    ObjectInputStream listInput = new ObjectInputStream(reader);
-                    toDoList = castToAnything(listInput.readObject());
-                    listInput.close();
-                    reader.close();
-                } catch (ClassNotFoundException e) {
-                    Ui.print("class not found\n");
-                }
+                return true;
             }
         } catch (IOException e) {
+            hasExecuted = true;
+            // Assume catch statement will never be triggered
+            assert !hasExecuted;
             e.printStackTrace();
+            return false;
         }
-        return toDoList;
+    }
+
+    /**
+     * Loads data from a previous save file.
+     *
+     * @return The saved ArrayList.
+     */
+    public static ArrayList<Task> loadData() {
+        ArrayList<Task> toDoList = new ArrayList<>();
+        boolean hasExecuted = false;
+        try {
+            FileInputStream reader = new FileInputStream(DATA_PATH);
+            ObjectInputStream listInput = new ObjectInputStream(reader);
+            toDoList = castToAnything(listInput.readObject());
+            listInput.close();
+            reader.close();
+            return toDoList;
+        } catch (ClassNotFoundException e) {
+            hasExecuted = true;
+            assert !hasExecuted;
+            Ui.print("class not found\n");
+            return null;
+        } catch (IOException e) {
+            hasExecuted = true;
+            assert !hasExecuted;
+            Ui.print("IOException\n");
+            return null;
+        }
+
     }
 
     /**

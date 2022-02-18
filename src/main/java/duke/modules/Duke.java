@@ -14,7 +14,6 @@ public class Duke {
         storage = new Storage();
         taskList = new TaskList(storage);
         parser = new Parser(taskList);
-
     }
 
     public static String getInitMessage() {

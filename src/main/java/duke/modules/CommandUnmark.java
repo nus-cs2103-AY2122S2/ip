@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class CommandUnmark extends Command {
     private String commandDescription;
     private ArrayList<Task> tasks;
-    String[] split;
+    String[] descriptionStrings;
 
     /**
      * Constructor for a CommandUnmark object.
@@ -19,7 +19,7 @@ public class CommandUnmark extends Command {
     public CommandUnmark(String commandDescription, ArrayList<Task> tasks) {
         this.commandDescription = commandDescription;
         this.tasks = tasks;
-        split = commandDescription.split(" ");
+        descriptionStrings = commandDescription.split(" ");
     }
 
     /**
@@ -31,14 +31,14 @@ public class CommandUnmark extends Command {
     public String execute() {
         String output = "";
         try {
-            int item = Integer.parseInt(split[1]);
-            try {
-                Task t = tasks.get(item - 1);
-                t.unmark();
-                output = String.format("Boo! more work to do: %s\n", t.getName());
-            } catch (IndexOutOfBoundsException e) {
-                output = "the index you have entered does not exist!\n";
+            int itemToUnmark = Integer.parseInt(descriptionStrings[1]);
+            if (itemToUnmark - 1 >= tasks.size()) {
+                return "the index you have entered does not exist!\n";
             }
+            Task toUnmark = tasks.get(itemToUnmark - 1);
+            toUnmark.unmark();
+            output = String.format("Boo! more work to do: %s\n", toUnmark.getName());
+
         } catch (IndexOutOfBoundsException e) {
             output = ("unmark description cannot be empty!\n");
         } catch (NumberFormatException e) {
