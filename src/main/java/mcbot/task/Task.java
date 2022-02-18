@@ -82,7 +82,11 @@ public class Task {
     public String getTaskName() {
         return taskName;
     }
-    
+
+    /**
+     * To String Method to print task.
+     * @return the string of the task.
+     */
     @Override
     public String toString() {
         return "[" + getTaskIcon() + "][" + getStatusIcon() + "] " + taskName;

@@ -101,15 +101,25 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to check if there is clashing of date and time.
+     * @param t the event to be checked against.
+     * @return true if there is a clash and false otherwise.
+     */
     public boolean hasAnomaly(Event t) {
         LocalDate currDate = t.getEventDate();
         LocalTime currTime = t.getEventTime();
-        boolean isAnomalyFound = false;
+        if (currTime == null) {
+            return false;
+        }
         for (Task prevTask: taskList) {
             if (prevTask instanceof Event) {
                 Event prevEvent = (Event) prevTask;
                 LocalDate prevDate = prevEvent.getEventDate();
                 LocalTime prevTime = prevEvent.getEventTime();
+                if (prevTime == null) {
+                    return false;
+                }
                 boolean hasSameDate = currDate.equals(prevDate);
                 boolean hasSameTime = currTime.equals(prevTime);
                 if (hasSameDate && hasSameTime) {

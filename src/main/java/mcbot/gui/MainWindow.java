@@ -31,17 +31,27 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image mcBotImage = new Image(this.getClass().getResourceAsStream("/images/McBot.png"));
 
+    /**
+     * To initialise the Main Window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
-    
+
+    /**
+     * Method for chatbot to say hello at the start.
+     */
     public void sayHello() {
         String welcome = mcBotGui.getResponse("hi");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcome, mcBotImage));
     }
 
+    /**
+     * Method to set the chatbot.
+     * @param mb is the instance of McBotGui.
+     */
     public void setMcBotGui(McBotGui mb) {
         mcBotGui = mb;
     }
@@ -63,11 +73,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, mcBotImage)
         );
+        System.out.println(dialogContainer.getAlignment());
         userInput.clear();
         checkToEnd(isEnd);
         
     }
 
+    /**
+     * Helper method to check if the user ended the program.
+     * @param isEnd is true if the user ended the program.
+     */
     private void checkToEnd(boolean isEnd) {
         //code snippet from https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
         if (isEnd) {

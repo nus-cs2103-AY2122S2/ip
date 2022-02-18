@@ -13,6 +13,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * McBotGui class for the chat-bot.
+ */
 public class McBotGui {
     protected final String FILE_PATH = "data/tasks.txt";
     protected Storage storage;
