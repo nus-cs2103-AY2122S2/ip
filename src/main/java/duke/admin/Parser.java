@@ -28,53 +28,53 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] splitCommand = fullCommand.split(" ", 2); //splits command into action and details
         String action = splitCommand[0];
-        boolean descriptionExist = splitCommand.length > 1;
+        boolean descriptionExists = splitCommand.length > 1;
 
-        if (descriptionExist) {
+        if (descriptionExists) {
             description = splitCommand[1];
         }
 
         switch (action) {
         case "list":
-            if (descriptionExist) {
+            if (descriptionExists) {
                 throw new DukeException("There should not be anything else after list.");
             } else {
                 return new ListCommand();
             }
         case "mark":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("I don't know what to mark!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
                 return new ChangeMarkCommand(index, true);
             }
         case "unmark":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("I don't know what to unmark!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
                 return new ChangeMarkCommand(index, false);
             }
         case "todo":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("The description of a todo cannot be empty.");
             } else {
                 return new AddCommand("T", description);
             }
         case "deadline":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
                 return new AddCommand("D", description);
             }
         case "event":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("The description of an event cannot be empty.");
             } else {
                 return new AddCommand("E", description);
             }
         case "delete":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("I don't know what to delete!! :-(");
             } else {
                 int index = Integer.parseInt(description) - 1;
@@ -83,19 +83,19 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "find":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("The keyword to search for cannot be empty.");
             } else {
                 return new FindCommand(description);
             }
         case "update":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("Improper format to request for an update.");
             } else {
                 return new UpdateCommand(description);
             }
         case "clone":
-            if (!(descriptionExist)) {
+            if (!(descriptionExists)) {
                 throw new DukeException("I don't know which task to clone!");
             } else {
                 int index = Integer.parseInt(description) - 1;
