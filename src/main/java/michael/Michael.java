@@ -52,6 +52,6 @@ public class Michael {
      */
     public String getResponse(String input) {
         String reply = ui.run(input);
-        return FROM_MICHAEL + reply + BREAK_LINE;
+        return FROM_MICHAEL + reply;
     }
 }
