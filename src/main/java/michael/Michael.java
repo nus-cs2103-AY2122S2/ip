@@ -8,7 +8,7 @@ import javafx.stage.Stage;
  * @author Justin Ng Jie Ern
  */
 public class Michael {
-    private static final String FROM_MICHAEL = "OMG IT'S HAPPENING! EVERYBODY STAY CALM! \n\n";
+    public static final String FROM_MICHAEL = "OMG IT'S HAPPENING! EVERYBODY STAY CALM! \n\n";
     private static final String BREAK_LINE = "__________________________________________";
     /**
      * Introduction Message for Michael.

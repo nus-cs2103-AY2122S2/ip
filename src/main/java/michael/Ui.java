@@ -1,7 +1,6 @@
 package michael;
 
 import java.time.format.DateTimeParseException;
-// import java.util.Scanner;
 
 import michael.exceptions.AdditionalDescriptionException;
 import michael.exceptions.InvalidCommandException;
