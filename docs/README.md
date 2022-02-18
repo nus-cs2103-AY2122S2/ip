@@ -7,7 +7,7 @@ Duke is a task manager which, designed using Java, and has a chatting GUI which 
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. Download Java 11 [here](https://www.oracle.com/java/technologies/downloads/)d
 
 2. Download the latest `duke.jar` from [here](https://github.com/chuashihong/ip/releases).
 
@@ -60,44 +60,4 @@ Return list of task that contains the keywords
 
 
 # Download now and try it out!
-=======
-## Features 
 
-### Add task
-
-You can add task by typing
-```
-todo <your task description>
-event <your task description> /at <event-date>
-deadline <your task description> /by <event-date>
-```
-depends on what type of task you want to add
-
-### See all task
-
-You can see all your current task by typing
-```
-list
-```
-
-### Mark/ Unmark
-
-You can mark task as done by typing
-```
-mark <task-number>
-unmark <task-number>
-```
-
-
-## Some other feature
-
-### `delete <task-number>` - Delete the task you do not want to track anymore!
-
-Delete the task number, will show the remaining task available.
-
-### `find <keyword>` - Find the task that contains the keyword in its description
-
-Return list of task that contains the keywords
-
-
-# Download now and try it out!
