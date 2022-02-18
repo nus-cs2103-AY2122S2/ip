@@ -14,5 +14,5 @@ public abstract class Command {
      *
      * @return Output message for GUI.
      */
-    public abstract String run(TaskList tasks, Storage storage) throws DukeException;
+    public abstract String run(TaskList tasksList, Storage storage) throws DukeException;
 }

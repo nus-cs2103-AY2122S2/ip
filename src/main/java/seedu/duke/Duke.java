@@ -13,12 +13,12 @@ import seedu.exception.DukeException;
  * results back to the user.
  */
 public class Duke {
-    private static Storage storage;
-    private static TaskList tasks;
-    private String FILE_PATH = "taskHistory.txt";
+    private Storage storage;
+    private TaskList tasks;
+    private final String FILE_PATH = "taskHistory.txt";
 
     /**
-     * Instantiates the ui, storage and tasklist objects.
+     * Instantiates the storage and tasklist objects.
      * Stores the tasks loaded into the tasklist object.
      *
      */
@@ -38,6 +38,8 @@ public class Duke {
      * Exits the running chat-bot when the 'bye' command is read from user input.
      */
     public String getResponse(String input) throws DukeException {
+        assert input != null : "Duke->getResponse: Input string cannot be null.";
+
         String nextInput = input;
         Command command = new Parser(nextInput).getCommand();
         try {

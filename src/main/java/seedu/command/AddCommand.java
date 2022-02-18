@@ -1,6 +1,8 @@
 package seedu.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import seedu.duke.Storage;
 import seedu.task.Deadline;
@@ -16,18 +18,20 @@ public class AddCommand extends Command {
     private Task task;
 
     public AddCommand(String taskType, String taskDetails) {
+        assert taskDetails != null : "AddCommand->AddCommand: Task details cannot be null.";
+        assert taskType != null : "AddCommand->AddCommand: Task type cannot be null.";
+
         String description;
         String dateTime;
-        switch(taskType) {
-        case "deadline":
+        if (taskType.equalsIgnoreCase("deadline")) {
             description = taskDetails.split(" - by: ")[0];
-            dateTime = taskDetails.split(" ")[1];
+            dateTime = taskDetails.split(" - by: ")[1];
             this.task = new Deadline(description, dateTime);
-        case "event":
+        } else if (taskType.equalsIgnoreCase("event")) {
             description = taskDetails.split(" - at: ")[0];
-            dateTime = taskDetails.split(" ")[1];
+            dateTime = taskDetails.split(" - at: ")[1];
             this.task = new Event(description, dateTime);
-        case "todo":
+        } else if (taskType.equalsIgnoreCase("todo")) {
             description = taskDetails;
             this.task = new ToDo(description);
         }
@@ -42,11 +46,14 @@ public class AddCommand extends Command {
      * @return Output message for GUI.
      */
     public String run(TaskList tasksList, Storage storage) {
+        assert tasksList != null : "AddCommand->run: Tasks list cannot be null.";
+        assert storage != null : "AddCommand->run: Storage cannot be null.";
+
         tasksList.add(task);
         try {
             storage.write(tasksList.getTaskList());
-        } catch (IOException exception) {
-            return "Something went wrong: " + exception.getMessage();
+        } catch (IOException e) {
+            return "Something went wrong: " + e.getMessage();
         }
 
         String result = "Got it. I've added this task:\n";

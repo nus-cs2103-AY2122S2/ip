@@ -14,7 +14,6 @@ import java.util.Scanner;
  * the file located in the file path respectively.
  */
 public class Storage {
-
     private String filePath;
     private File f;
     private Scanner s;
@@ -23,6 +22,8 @@ public class Storage {
      * Stores the file path and creates a new file object.
      */
     public Storage(String filePath) {
+        assert filePath != null : "Storage->Storage: File path string cannot be null.";
+
         this.filePath = filePath;
         this.f = new File(filePath);
     }
@@ -58,6 +59,8 @@ public class Storage {
      * @throws IOException Throws exception for file writer object.
      */
     public void write(ArrayList<Task> textToAdd) throws IOException {
+        assert textToAdd != null : "Storage->write: Text to be written to file cannot be null.";
+
         FileWriter fw = new FileWriter(filePath);
         for (Task t : textToAdd) {
             fw.write(t.toString() + System.lineSeparator());

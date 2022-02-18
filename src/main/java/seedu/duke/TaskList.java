@@ -26,6 +26,8 @@ public class TaskList {
      * @throws DukeException To catch any errors when creating the tasklist.
      */
     public TaskList(ArrayList<String> taskList) throws DukeException {
+        assert taskList != null : "TaskList->TaskList: Tasks list cannot be null.";
+
         for (String task : taskList) {
             String taskType = task.substring(0, 7);
             boolean taskIsDone = false;
@@ -65,6 +67,8 @@ public class TaskList {
      * Adds a new task to the task list.
      */
     public void add(Task t) {
+        assert t != null : "TaskList->add: Task to be added cannot be null.";
+
         this.taskList.add(t);
     }
 
@@ -72,6 +76,9 @@ public class TaskList {
      * Deletes an existing task from the task list.
      */
     public void delete(int taskId) {
+        assert taskId < taskList.size() : "TaskList->delete: Task ID to be deleted does not exist.";
+        assert taskId >= 0 : "TaskList->delete: Task ID to be deleted is invalid.";
+
         taskList.remove(taskId);
     }
 
@@ -99,6 +106,9 @@ public class TaskList {
      * @return Specific task object in the tasks list.
      */
     public Task getTasks(int taskId) {
+        assert taskId < taskList.size() : "TaskList->getTasks: Task ID to be retrieved does not exist.";
+        assert taskId >= 0 : "TaskList->getTasks: Task ID to be retrieved is invalid.";
+
         return taskList.get(taskId);
     }
 
@@ -109,6 +119,8 @@ public class TaskList {
      * @return Returns a new task list object with the specified keyword.
      */
     public TaskList findTasks(String keyword) throws DukeException {
+        assert keyword != null : "TaskList->findTasks: Keyword to search for tasks cannot be null.";
+
         ArrayList<String> result = new ArrayList<String>();
         for (Task t : taskList) {
             if (t.toString().toLowerCase().contains(keyword.toLowerCase())) {

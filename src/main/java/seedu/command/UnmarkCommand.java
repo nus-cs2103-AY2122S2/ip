@@ -10,10 +10,15 @@ public class UnmarkCommand extends Command {
     private final int taskId;
 
     public UnmarkCommand(String taskId) {
+        assert taskId != null : "UnmarkCommand->UnmarkCommand: Task ID cannot be null.";
+
         this.taskId = Integer.valueOf(taskId);
     }
 
     public String run(TaskList tasksList, Storage storage) throws DukeException {
+        assert tasksList != null : "UnmarkCommand->run: Tasks list cannot be null.";
+        assert storage != null : "UnmarkCommand->run: Storage cannot be null.";
+
         tasksList.getTasks(taskId - 1).markUndone();
         try {
             storage.write(tasksList.getTaskList());
