@@ -22,9 +22,9 @@ public class TaskTest {
 
     @Test
     public void testStatus() {
-        assertEquals("[] Return book", new Task("Return book").toString());
+        assertEquals("[ ]Return book", new Task("Return book").toString());
         Task sub6 = new Task("Return book");
         sub6.markAsDone();
-        assertEquals("[] Return book", sub6.toString());
+        assertEquals("[X]Return book", sub6.toString());
     }
 }
