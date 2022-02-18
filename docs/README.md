@@ -1,163 +1,148 @@
 # User Guide
 
+Sparrow is a **desktop app for managing tasks, optimised for use via a Command Line Interface** (CLI) while having the benefits of a Graphical User Interface (GUI). If you can type fast, Sparrow can get your task management tasks done faster than traditional GUI apps.
+
+- [Quick start](#quick-start)
+- [Features](#features)
+    * [Adding tasks](#adding-tasks)
+        + [Adding an event: `event`](#adding-an-event---event-)
+        + [Adding a deadline: `deadline`](#adding-a-deadline---deadline-)
+        + [Adding a to-do: `todo`](#adding-a-to-do---todo-)
+    * [Viewing tasks](#viewing-tasks)
+        + [Viewing all tasks: `list`](#viewing-all-tasks---list-)
+        + [Finding a task: `find`](#finding-a-task---find-)
+    * [Editing tasks](#editing-tasks)
+        + [Marking a task: `mark`](#marking-a-task---mark-)
+        + [Unmarking a task:`unmark`](#unmarking-a-task--unmark-)
+        + [Prioritising a task: `prioritise`](#prioritising-a-task---prioritise-)
+    * [Deleting tasks: `delete`](#deleting-tasks---delete-)
+    * [Saving tasks: `bye`](#saving-tasks---bye-)
+- [Command summary](#command-summary)
+
+## Quick start
+
+1. Ensure you have Java `11` or above installed in your computer.
+
+2. Download the latest `sparrow.jar` from [here](https://github.com/sheimoria/ip/releases/tag/A-Release).
+
+3. Copy the file to the folder you want to use as the *home folder* for your Sparrow.
+
+4. Double-click the file to start the app. A GUI similar to below should appear in a few seconds.
+
+- ![Ui](Ui.png)
+
+5. Type a command in the command box and press Enter to execute it. e.g. typing `todo read book` and pressing Enter will add a to-do "read book" to your tasks.
+   Some example commands you can try:
+
+    - `list`: Lists all your tasks.
+
+    - `todo read book`: Adds a to-do "read book" to your tasks.
+
+    - `delete 1`: Deletes your 1st task.
+
+    - `mark 1`: Marks your 1st task as done.
+
+    - `bye`: Saves all your tasks to the hard disk.
+
+Refer to the [features](#features) section below for the details of each command.
+
 ## Features
 
-### `todo`
+### Adding tasks
 
-Adds a to-do to your list of tasks.
+#### Adding an event: `event`
 
-#### Format
+Adds an event to your tasks.
 
-```
-todo {description}
-```
+Format: `event DESCRIPTION /at YYYY-MM-DD HHMM`
 
-#### Sample input
+Example: `event book sharing /at 2022-02-18 1400`
 
-`todo read book`
+#### Adding a deadline: `deadline`
 
-#### Expected output
+Adds a deadline to your tasks.
 
-```
-Got it. I've added this task:
-[T] [P2] [] read book
-You now have {} tasks in the list.
-```
+Format: `deadline DESCRIPTION /by YYYY-MM-DD HHMM`
 
-### `deadline`
+Example: `deadline return book /by 2022-02-20 2220`
 
-Adds a deadline to your list of tasks.
+#### Adding a to-do: `todo`
 
-#### Format
+Adds a to-do to your tasks.
 
-`deadline {description) /by (datetime in YYYY-MM-DD HHHH)`
+Format: `todo DESCRIPTION`
 
-#### Sample input
+Example: `todo read book`
 
-`deadline return book /by 2022-02-20 2220`
+### Viewing tasks
 
-#### Expected output
+#### Viewing all tasks: `list`
 
-```
-Got it. I've added this task:
-[D] [P2] [] return book (by Feb 20 2220H)
-You now have {} tasks in the list.
-```
+Lists all your tasks.
 
-### `event`
+Format: `list`
 
-Adds an event to your list of tasks.
+#### Finding a task: `find`
 
-#### Format
+Finds your tasks whose descriptions contain the given keyword.
 
-`deadline {description) /by (datetime in YYYY-MM-DD HHHH)`
+Format: `find KEYWORD`
 
-#### Sample input
+Example: `find read book`
 
-`event book sharing /by 2022-02-18 1400`
+### Editing tasks
 
-#### Expected output
+#### Marking a task: `mark`
 
-```
-Got it. I've added this task:
-[D] [P2] [] book sharing (by Feb 20 2220H)
-You now have {} tasks in the list.
-```
+Marks the task at the given index as done.
 
-### `delete`
+Format: `mark INDEX`
 
-Deletes a task
+Example: `mark 1`
 
-#### Format
+#### Unmarking a task:`unmark`
 
-`delete {task number}`
+Unmarks the task at the given index; if the task is not marked already, nothing happens.
 
-#### Sample input
+Format: `unmark INDEX`
 
-`delete 1`
+Example: `unmark 1`
 
-#### Expected output
+#### Prioritising a task: `prioritise`
 
-```
-Noted. I've removed this task:
-...
-You now have ... task(s) in the list.
-```
+Changes the priority level of the task at the given index to the given priority level.
 
-### `mark`
+Format: `prioritise INDEX PRIORITY_LEVEL`
 
-Marks a task as done.
+- `PRIORITY_LEVEL` can be only be `low`, `medium`, or `high`
 
-#### Format
+Example: `prioritise 1 high`
 
-`mark {task number}`
+### Deleting tasks: `delete`
 
-#### Sample input
+Deletes the task at the given index.
 
-`mark 1`
+Format: `delete INDEX`
 
-#### Expected output
+Example: `delete 1`
 
-```
-Nice! I've marked this task as done:
-...
-```
+### Saving tasks: `bye`
 
-### `unmark`
+Saves all your tasks to the hard disk.
 
-Unmark a completed task.
+Format: `bye`
 
-#### Format
+## Command summary
 
-`unmark {task number}`
-
-#### Sample input
-
-`unmark 1`
-
-#### Expected output
-
-```
-OK, I've marked this task as not done yet:
-...
-```
-
-### `find`
-
-Find tasks that contain a keyword.
-
-#### Format
-
-`find {description}`
-
-#### Sample input
-
-`find read book`
-
-#### Expected output
-
-```
-Here are the matching tasks in your list:
-[T] [P1] [] read book
-```
-
-### `prioritise`
-
-Changes a task's priority level.
-
-#### Format
-
-`prioritise {task number} {priority level}`
-
-where `priority level` can be `low`, `medium`, or `high`
-
-#### Sample input
-
-`prioritise 1 high`
-
-#### Expected output
-
-```
-Got it, I've changed the priority of this task:
-1. [T1] [P1] [] read book
-```
+| Command      | Format                                     | Example                                    |
+|--------------|--------------------------------------------|--------------------------------------------|
+| `event`      | `event DESCRIPTION /at YYYY-MM-DD HHMM`    | `event book sharing /at 2022-02-18 1400`   |
+| `deadline`   | `deadline DESCRIPTION /by YYYY-MM-DD HHMM` | `deadline return book /by 2022-02-18 1400` |
+| `todo`       | `todo DESCRIPTION`                         | `todo read book`                           |
+| `list`       | `list`                                     | `list`                                     |
+| `find`       | `find KEYWORD`                             | `find book`                                |
+| `mark`       | `mark INDEX`                               | `mark 1`                                   |
+| `unmark`     | `unmark INDEX`                             | `unmark 1`                                 |
+| `prioritise` | `prioritise INDEX PRIORITY_LEVEL`          | `prioritise 1 high`                        |
+| `delete`     | `delete INDEX`                             | `delete 1`                                 |
+| `bye`        | `bye`                                      | `bye`                                      |
