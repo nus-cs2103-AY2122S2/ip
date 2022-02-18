@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
             storageTask.update(tasks);
             return "Noted. I've removed this task:\n  "
                     + deletedTask
-                    + "\n Now you have " + tasks.size() + " tasks in the list.";
+                    + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (DukeException e) {
             return e.getMessage();
         }

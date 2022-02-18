@@ -36,7 +36,7 @@ public class DeletePlaceCommand extends Command {
             storagePlace.update(places);
             return "Noted. I've removed this place:\n  "
                     + deletedPlace.getName()
-                    + "\n Now you have " + places.size() + " places in the list.";
+                    + "\nNow you have " + places.size() + " places in the list.";
         } catch (DukeException e) {
             return e.getMessage();
         }
