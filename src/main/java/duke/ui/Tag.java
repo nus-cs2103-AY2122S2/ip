@@ -11,15 +11,15 @@ public class Tag implements Markdown {
     public static final String END_PATTERN = "</tag>";
     private static final String DEFAULT_TAG_COLOR = "#ffffff";
     private static final int DEFAULT_TEXT_SIZE = 15;
-    private String tag;
+    private String tagStringContent;
 
-    public Tag(String tag) {
-        this.tag = tag;
+    public Tag(String tagStringContent) {
+        this.tagStringContent = tagStringContent;
     }
 
     @Override
     public Node create() {
-        Label tag = new Label(this.tag);
+        Label tag = new Label(this.tagStringContent);
         tag.setStyle("-fx-background-color: " + DEFAULT_TAG_COLOR + "; "
                 + "-fx-font-weight: bold; "
                 + "-fx-border-radius: 2, 2, 2, 2;"

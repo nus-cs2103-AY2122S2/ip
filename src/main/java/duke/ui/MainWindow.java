@@ -4,6 +4,7 @@ import duke.controller.DukeCommandMatcher;
 import duke.controller.MarkdownParser;
 import duke.utility.Storage;
 import duke.utils.Constants;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -75,16 +76,13 @@ public class MainWindow extends AnchorPane {
             Storage database = new Storage("storage/save.txt");
             DukeCommandMatcher parser = new DukeCommandMatcher(database);
             String response = parser.commandSwitcher(input);
-            MarkdownParser mdParser = new MarkdownParser(response);
-            List<Markdown> markdownList = mdParser.parse();
+            MarkdownParser markdownParser = new MarkdownParser(response);
+            List<Markdown> markdownList = markdownParser.parse();
             DialogBox db;
             if (Objects.equals(response, Constants.EXIT)) {
-                ValidText byeText = new ValidText(Ui.printBye());
-                db = DialogBox.getDukeDialog(Arrays.asList(byeText), dukeImage);
-                userInput.setEditable(false);
-                userInput.setStyle("-fx-background-color: black;");
-                userInput.focusedProperty().removeListener(this.inputFocusListener);
-                userInput.setPromptText("Restart!");
+                ValidText exitText = new ValidText(Ui.printBye());
+                db = DialogBox.getDukeDialog(Arrays.asList(exitText), dukeImage);
+                Platform.exit();
             } else {
                 db = DialogBox.getDukeDialog(markdownList, dukeImage);
             }
