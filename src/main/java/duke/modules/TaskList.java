@@ -41,6 +41,7 @@ public class TaskList {
      * @param task The Task object to be added.
      */
     public void addTask(Task task) {
+        assert task != null;
         toDoList.add(task);
     }
 
