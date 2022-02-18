@@ -1,0 +1,29 @@
+list
+Hello
+todo
+deadline
+event
+todo Breakfast /By morning
+deaDLine lunch/Yb /Byafternoon or im just joking
+EVEnt dinner /bY night/TA /aT night
+list
+mark 4
+unmark 4
+mark 1
+mark 3
+unmark 2
+list
+save
+unmark 3
+mark a
+mark 1a
+mark 1,3
+mark 1.3
+list
+delete 4
+delete 1.3
+delete 1
+ list
+load
+list
+bye

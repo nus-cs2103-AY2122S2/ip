@@ -1,0 +1,29 @@
+.scroll-bar {
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.increment-button > .increment-arrow,
+.decrement-button > .decrement-arrow {
+    -fx-background-color: #653109;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: ba7e36;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent; /*or whatever you want*/
+  }
+
+.scroll-pane {
+    -fx-background-color:transparent;
+}
