@@ -34,6 +34,7 @@ public class Storage {
      * @throws FileNotFoundException If database file can not be found.
      */
     public boolean writesToDatabase(String textToAdd) throws FileNotFoundException {
+        assert !databasePath.equals(""):"The database file could not be found. Try PokeJournal again later";
         try {
             FileWriter fw = new FileWriter(this.databasePath);
             fw.write(textToAdd);
@@ -55,6 +56,7 @@ public class Storage {
      * @throws IOException If writing to the database was unsuccessful.
      */
     public boolean appendsToDatabase(String textToAppend) throws IOException {
+        assert !databasePath.equals(""):"The database file could not be found. Try PokeJournal again later";
         try {
             FileWriter fw = new FileWriter(databasePath, true); // Append instead of rewriting over
             fw.write(textToAppend);
