@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 
 
+/**
+ * This class saves and loads data from save file.
+ */
 public class Storage {
 
     private static final Path DATA_PATH = Paths.get("data", "duke.txt");
@@ -28,6 +31,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes TaskList data to save file.
+     *
+     * @param taskList TaskList to write to save file.
+     * @throws DukeException If there is an error writing to save file.
+     */
     public void saveTasklist(TaskList taskList) throws DukeException {
         initialiseSaveFile();
         String dataToWrite = taskList.toSaveData();
@@ -40,7 +49,13 @@ public class Storage {
         }
     }
 
-    public static TaskList loadTasklist() throws DukeException {
+    /**
+     * Loads TaskList data from save file.
+     *
+     * @return new TaskList recreated from data.
+     * @throws DukeException If data cannot be loaded from save file.
+     */
+    public static TaskList loadTasklist() throws DukeException{
         initialiseSaveFile();
         String strCurrentLine;
         Task currentTask = null;

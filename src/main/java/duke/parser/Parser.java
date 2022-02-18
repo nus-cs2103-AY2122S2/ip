@@ -5,6 +5,9 @@ import duke.exceptions.DukeInvalidArgumentException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses user inputs for commands.
+ */
 public class Parser {
 
     private String[] parseArguments(String[] arguments) throws DukeInvalidArgumentException {
@@ -28,6 +31,13 @@ public class Parser {
         return Integer.parseInt(strIndex.trim()) - 1;
     }
 
+    /**
+     * Parses user input for specified commands.
+     *
+     * @param userInput raw input from user.
+     * @return Command parsed from user input.
+     * @throws DukeInvalidArgumentException If user input invalid arguments.
+     */
     public Command parseCommands(String userInput) throws DukeInvalidArgumentException {
         String[] parsedUserInput = userInput.split(" ", 2);
         String commandType = parsedUserInput[0].toLowerCase();

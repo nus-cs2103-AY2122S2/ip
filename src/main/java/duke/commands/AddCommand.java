@@ -6,18 +6,34 @@ import duke.tasks.Event;
 import duke.tasks.Todo;
 import java.time.LocalDateTime;
 
+/**
+ * Command that adds a Task to the TaskList.
+ */
+
 public class AddCommand extends Command{
 
     private String taskType;
     private String content;
     private LocalDateTime datetime;
 
+    /**
+     * Constructor for AddCommand
+     *
+     * @param taskType string representing subclass of Task to add.
+     * @param content description of Task to add.
+     * @param datetime date and time of task to add.
+     */
     public AddCommand(String taskType, String content, LocalDateTime datetime) {
         this.taskType = taskType;
         this.content = content;
         this.datetime = datetime;
     }
 
+    /**
+     * Creates respective Task depending on taskType which is then added to the TaskList.
+     *
+     * @return Message for completing the command which is displayed to user.
+     */
     @Override
     public String execute() {
         Task newTask = null;
