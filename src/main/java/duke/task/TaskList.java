@@ -104,7 +104,7 @@ public class TaskList {
         String strippedCommand = originalInput.substring(8);
         Task curr = null;
         try {
-            curr = new Deadline(" " + strippedCommand.split("/")[0], metaInfo);
+            curr = new Deadline(strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
             return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
                     + "\nPlease try again:");
@@ -121,7 +121,7 @@ public class TaskList {
         String strippedCommand = originalInput.substring(5);
         Task curr = null;
         try {
-            curr = new Event(" " + strippedCommand.split("/")[0], metaInfo);
+            curr = new Event(strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
             return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
                     + "\nPlease try again:");
