@@ -68,10 +68,16 @@ Format:
 - `delete TASK_INDEX`
 - TASK_INDEX cannot be empty.
 
+Example:
+- `delete 3`
+
 ### Find task
 Format:
 - `find SEARCH_TERM`
 - SEARCH_TERM cannot be empty.
+
+Example:
+- `find homework`
 
 ### Update task
 Can update either only the task description or only the date or both. <br/>
@@ -82,11 +88,19 @@ Update only task description
 - `update TASK_INDEX TASK_DESC`
 - TASK_INDEX and TASK_DESC cannot be empty.
 
+Example:
+- `update 3 study for quiz`
+
 Update only date
-- `update TASK_INDEX /date DATE`
-- TASK_INDEX and DATE cannot be empty.
+- `update TASK_INDEX /date YYYY-MM-DD`
+- TASK_INDEX and YYYY-MM-DD cannot be empty.
+
+Example:
+- `update 3 /date 2022-05-01`
 
 Update both task description and date
-- `update TASK_INDEX TASK_DESC /date DATE`
-- TASK_INDEX, TASK_DESC and DATE cannot be empty.
+- `update TASK_INDEX TASK_DESC /date YYYY-MM-DD`
+- TASK_INDEX, TASK_DESC and YYYY-MM-DD cannot be empty.
 
+Example:
+- `update 3  study for quiz /date 2022-05-01`
