@@ -120,7 +120,7 @@ public class Task implements Comparable<Task> {
      */
     @Override
     public String toString() {
-        return type + "\t" + priority + "\t" + getCompleted() + "\t" + description;
+        return type + " \t" + priority + "\t" + getCompleted() + "\t" + description;
     }
 
     /**
