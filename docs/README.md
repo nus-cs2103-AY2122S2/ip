@@ -2,21 +2,34 @@
 
 ## Introduction
 
-DatoDato is a personal assistant bot that allows you to management your taskings.
+DatoDato is a personal assistant bot that allows you to manage your taskings.
+
+## Setup
+
+1. [Download](https://openjdk.java.net/projects/jdk/11/) and install OpenJRE 11 if you do not have a working installation.
+2. Download the latest JAR release of DatoDato from the GitHub project [release page] (https://github.com/laughingkid-sg/ip/releases).
+3. Run the JAR file to start. 
+
+```
+💡 Please note that the application requires read/write access to the directory it is running in.
+```
 
 ## Features
 
-- Welcome and closing messages
-- Task creation and listing
-- Task completion tracking
-- Task classifation (ToDo, Event, Deadline)
-- Error handling
-- Task deleteion
-- Saving and loading of task(s) from local presistent stroage
-- Date and time formatting for tasks
-- Search of keywords in task
-- Grahpics User Inference
-- List upcoming tasks in given days
+### Taskings
+DatoDato supports 3 different kinds of tasks (ToDo, Event, Deadline). You can simply add, view or remove any of these 3 tasks easily with the GUI interface. Furthermore, DatoDatao allows you to mark your task as complete. 
+
+### Persistent Storage
+DataData autosave your task list so that the next time you run it, it will remember everything for you.
+
+### Search by Keywords 
+Looking for a specific task? Easily use the search function to find what you need.
+
+### Tasks Reminders
+DatoDato is able to remind you about upcoming deadline tasks in a specific number of days.
+
+### Date and Time Support
+Have a problem selecting a date-time? DatoDato supports only the most common date time format to allow you to remain consistent through your taskings.
 
 ## Usage
 
@@ -24,7 +37,7 @@ DatoDato is a personal assistant bot that allows you to management your taskings
 
 ### Section 1 - Adding new taskings
 
-There are three types of task. They are as follows
+There are three types of tasks. They are as follows
 
 ```
 💡 The first pair brackets in the output signifies the type of the task, Todo - T, Event - E and Deadline - D. 
@@ -41,13 +54,13 @@ Example: `todo eat lunch with mum`
 Expected outcome:
 ```
 Got it. I've added this task:
-  [T][] eat lnch with mum
-Now you have 1 tasks in the list.
+  [T][] eat lunch with mum
+Now you have 1 task on the list.
 ```
 
 ### `event`
 
-Event represents tasks happening at a certain time with the description field.
+The event represents tasks happening at a certain time with the description field.
 
 Usage: `event <description> /at <DD-MM-YYYY HH:MM>`
 
@@ -57,12 +70,12 @@ Expected outcome:
 ```
 Got it. I've added this task:
   [E][] project meeting (at: 30 May 2023 13:59)
-Now you have 1 tasks in the list.
+Now you have 1 task on the list.
 ```
 
 ### `deadline`
 
-Deadline represents tasks that are due by certain date time with the description field.
+Deadline represents tasks that are due by a certain date time with the description field.
 
 Usage: `deadline <description> /by <DD-MM-YYYY HH:MM>`
 
@@ -72,7 +85,7 @@ Expected outcome:
 ```
 Got it. I've added this task:
   [D][] do homework (by: 30 May 2023 13:59)
-Now you have 1 tasks in the list.
+Now you have 1 task on the list.
 ```
 
 ### Section 2 - Listing taskings
@@ -88,7 +101,7 @@ Usage: `list`
 Expected outcome:
 ```
 Here are the tasks in your list:
-1. [T][] eat lnch with mum
+1. [T][] eat lunch with mum
 2. [E][] project meeting (at: 30 May 2023 13:59)
 3. [D][] do homework (by: 30 May 2023 13:59)
 ```
@@ -109,7 +122,7 @@ Here are the upcoming deadlines in 7 days:
 
 ### `find`
 
-To find specifics task(s), use the find command.
+To find specific task(s), use the find command.
 
 Usage: `find <search term>`
 
@@ -123,11 +136,11 @@ Here are the matching task(s) in your list:
 
 ### Section 3 - Updating Taskings
 
-There are two types of updates you can do to taskings. You can mark a task as done or undone to update it status and you can completely remove a task.
+There are two types of updates you can do to taskings. You can mark a task as done or undone to update its status and you can completely remove a task.
 
 ```
 💡 Use the `list` command to find the task number
-   A task is consider complete when the second pair bracket consist of a X.
+   A task is considered complete when the second pair bracket consists of an X.
    Example
    Incomplete: [D][ ] do homework (by: 30 May 2023 13:59)
    Completed: [D][X] do homework (by: 30 May 2023 13:59)
@@ -186,7 +199,7 @@ Usage: `bye`
 
 Expected outcome:
 ```
-Bye! Checkout another cool bot @katokatoBot on Telegram.
+Bye! Check out another cool bot @katokatoBot on Telegram.
 Hope to see you again soon!
 (Click 'Send' to close)
 ```
