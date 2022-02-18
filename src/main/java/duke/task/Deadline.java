@@ -35,9 +35,10 @@ public class Deadline extends Task {
      * @return Deadline as a string
      */
     public String toString() {
+        String status = super.isMarked() ? "X" : " ";
         return String.format("[D][%s] %s (by: %s)",
-                super.isMarked(),
+                status,
                 super.getDescription(),
-                DateTimeFormatter.ofPattern("MMM d yyyy"));
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

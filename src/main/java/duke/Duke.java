@@ -21,7 +21,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -55,6 +55,9 @@ public class Duke {
      * Creates and runs Duke instance with a specified file path.
      */
     public static void main(String[] args) {
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "duke", "data.txt");
+        boolean fileExists = java.nio.file.Files.exists(path);
         new Duke("data/tasks.txt").run();
     }
 
@@ -65,7 +68,14 @@ public class Duke {
      * @return Duke's response to user.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String response;
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(tasks, ui, storage, contacts);
+        } catch (DukeException e) {
+            response = ui.showError(e.getMessage());
+        }
+        return response;
     }
 
 }

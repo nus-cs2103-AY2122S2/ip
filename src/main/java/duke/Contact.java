@@ -1,33 +1,28 @@
 package duke;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 /**
  * Represents a contact
  */
 public class Contact {
 
     // Identity fields
-    private Name name;
-    private Telegram telegram;
+    private String name;
+    private String telegram;
 
     /**
      * Constructs contact.
      */
-    public Contact(Name name, Telegram telegram) {
+    public Contact(String name, String telegram) {
         this.name = name;
-        this.telegram = telegram
+        this.telegram = telegram;
     }
 
-    public Name getName() {
+    public String getName() {
         return name;
     }
 
-    public Phone getTelegram() {
-        return phone;
+    public String getTelegram() {
+        return telegram;
     }
 
     /**

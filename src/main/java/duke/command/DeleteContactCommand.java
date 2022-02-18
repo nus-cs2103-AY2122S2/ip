@@ -28,8 +28,9 @@ public class DeleteContactCommand extends Command {
      * @param storage File storage of tasks.
      * @param contacts List of all contacts.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage, ContactList contacts) {
+    public String execute(TaskList tasks, Ui ui, Storage storage, ContactList contacts) {
         contacts.delete(contactNumber);
+        return ui.showContactDeleted();
     }
 
 }

@@ -1,29 +1,30 @@
 package duke.command;
 
+import duke.Contact;
 import duke.ContactList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
 /**
- * Mark command. Marks specified task as done.
+ * Adds a contact to the contact list.
  */
-public class MarkCommand extends Command {
+public class AddContactCommand extends Command {
 
-    private int taskNumber;
+    private Contact contact;
 
     /**
-     * Construct MarkCommand.
+     * Constructs AddCommand.
      *
-     * @param taskNumber Id of task to delete.
+     * @param contact Contact to add to the list.
      */
-    public MarkCommand(int taskNumber) {
+    public AddContactCommand(Contact contact) {
         super();
-        this.taskNumber = taskNumber;
+        this.contact = contact;
     }
 
     /**
-     * Marks task with specified id as done.
+     * Adds the specified task to the list.
      *
      * @param tasks List to add task to.
      * @param ui Interface to display results to.
@@ -31,8 +32,8 @@ public class MarkCommand extends Command {
      * @param contacts List of contacts.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage, ContactList contacts) {
-        tasks.markTask(taskNumber);
-        return ui.showTaskMarked();
+        contacts.add(contact);
+        return ui.showContactAdded(contact);
     }
 
 }

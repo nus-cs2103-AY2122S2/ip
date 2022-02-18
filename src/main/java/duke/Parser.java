@@ -3,8 +3,10 @@ package duke;
 import java.time.LocalDate;
 
 import duke.command.AddCommand;
+import duke.command.AddContactCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.DeleteContactCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
@@ -47,9 +49,9 @@ public class Parser {
         } else if (command.equals("bye")) {
             return parseExitCommand();
         } else if (command.equals("addContact")) {
-            return parseAddContactCommand();
+            return parseAddContactCommand(fullCommand);
         } else if (command.equals("deleteContact")) {
-            return parseDeleteContactCommand();
+            return parseDeleteContactCommand(fullCommand);
         } else {
             throw new DukeException("I don't recognize that command.");
         }
@@ -176,7 +178,8 @@ public class Parser {
         String[] dataArr = dataString.split(" ");
         String name = dataArr[0];
         String telegram = dataArr[1];
-        return new AddContactCommand(name, telegram);
+        Contact contact = new Contact(name, telegram);
+        return new AddContactCommand(contact);
     }
 
 }

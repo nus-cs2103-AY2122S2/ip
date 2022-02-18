@@ -12,7 +12,7 @@ public class TaskList {
     }
 
     public TaskList() {
-
+        this(new ArrayList<Task>());
     }
 
     /**
@@ -76,7 +76,6 @@ public class TaskList {
         String string = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            String status = task.isMarked() ? "X" : " ";
             string += String.format("%d. %s", i, task.toString());
         }
         return string;

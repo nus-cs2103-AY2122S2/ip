@@ -35,9 +35,10 @@ public class Event extends Task {
      * @return Event as a string
      */
     public String toString() {
+        String status = super.isMarked() ? "X" : " ";
         return String.format("[E][%s] %s (at: %s)",
-                super.isMarked(),
+                status,
                 super.getDescription(),
-                DateTimeFormatter.ofPattern("MMM d yyyy"));
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

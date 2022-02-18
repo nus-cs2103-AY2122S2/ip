@@ -23,64 +23,120 @@ public class Ui {
 
     /**
      * Displays welcome message when user starts app.
+     *
+     * @return String to display.
      */
-    public void showWelcome() {
-        System.out.println("Hello from Duke!");
+    public String showWelcome() {
+        return "Hello from Duke!";
     }
 
     /**
      * Shows display when a task is added.
+     *
+     * @return String to display.
      */
-    public void showTaskAdded(Task task) {
-        System.out.println(String.format("added: %s", task.toString()));
+    public String showTaskAdded(Task task) {
+        return String.format("added: %s", task.toString());
     }
 
     /**
      * Shows display when a task is deleted.
+     *
+     * @return String to display.
      */
-    public void showTaskDeleted() {
-        System.out.println("I've deleted this task.");
+    public String showTaskDeleted() {
+        return "I've deleted this task.";
+    }
+
+    /**
+     * Shows display when a task is marked.
+     *
+     * @return String to display.
+     */
+    public String showTaskMarked() {
+        return "I've marked this task.";
+    }
+
+    /**
+     * Shows display when a task is unmarked.
+     *
+     * @return String to display.
+     */
+    public String showTaskUnmarked() {
+        return "I've unmarked this task.";
     }
 
     /**
      * Shows list of all tasks in specified list
      *
-     @param tasks List of all tasks.
+     * @param tasks List of all tasks.
+     * @return String to display.
      */
-    public void showTasks(TaskList tasks) {
-        System.out.println(tasks.toString());
+    public String showTasks(TaskList tasks) {
+        return tasks.toString();
     }
 
-    public void showMessage(String str) {
-        System.out.println(str);
+    /**
+     * Shows display when a contact is added.
+     *
+     * @return String to display.
+     */
+    public String showContactAdded(Contact contact) {
+        return String.format("added: %s", contact.toString());
+    }
+
+    /**
+     * Shows display when a contact is deleted.
+     *
+     * @return String to display.
+     */
+    public String showContactDeleted() {
+        return String.format("Contact deleted sucessfully");
     }
 
     /**
      * Shows display when user exits app.
+     *
+     * @return String to display.
      */
-    public void showExit() {
-        System.out.println("Goodbye!");
+    public String showMessage(String str) {
+        return str;
+    }
+
+    /**
+     * Shows display when user exits app.
+     *
+     * @return String to display.
+     */
+    public String showExit() {
+        return "Goodbye!";
     }
 
     /**
      * Displays specified error message.
+     *
+     * @return String to display.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
      * Shows divider.
+     *
+     * @return String to display.
      */
-    public void showLine() {
-        System.out.println("_____");
+    public String showLine() {
+        return "_____";
     }
 
     /**
      * Shows loading error.
+     *
+     * @return String to display.
      */
-    public void showLoadingError() {
-        System.out.println("Loading error");
+    public String showLoadingError() {
+        return "Loading error";
     }
 
 }

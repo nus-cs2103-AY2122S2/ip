@@ -1,3 +1,7 @@
+package duke;
+
+import java.util.ArrayList;
+
 /**
  * Contact list class
  */
@@ -20,6 +24,15 @@ public class ContactList {
     }
 
     /**
+     * Add contact to list.
+     *
+     * @param contact Contact to add.
+     */
+    public void add(Contact contact) {
+        contacts.add(contact);
+    }
+
+    /**
      * Delete contact with specified id.
      *
      * @param contactNumber Contact id.
@@ -28,6 +41,11 @@ public class ContactList {
         contacts.remove(contactNumber);
     }
 
+    /**
+     * Returns contact list.
+     *
+     * @return String representation of contact list.
+     */
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         for (Contact contact : contacts) {

@@ -41,10 +41,10 @@ public class Storage {
                 String text = data[2];
                 if (data[0].equals("T")) {
                     tasks.add(new Todo(text, status));
-                } else if (data[0].equals("D")) {
+                } else if (type.equals("D")) {
                     LocalDate date = LocalDate.parse(data[3]);
                     tasks.add(new Deadline(text, status, date));
-                } else if (data[0].equals("E")) {
+                } else if (type.equals("E")) {
                     LocalDate date = LocalDate.parse(data[3]);
                     tasks.add(new Event(text, status, date));
                 }
