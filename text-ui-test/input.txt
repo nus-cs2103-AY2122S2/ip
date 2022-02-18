@@ -1,0 +1,16 @@
+todo borrow book
+todo buy milk
+deadline return book /by 2022-03-05
+event project meeting /at 2022-04-26/12:00/14:30
+mark 3
+list
+unmark 3
+blah
+delete 1
+mark 4
+mark /
+event checking errors /by 20222-04-04
+deadline checking more errors /by 2022-04-04/12pm
+find errors
+find milk
+bye
