@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor to create a Deadline Object.
+     *
      * @param name Name of the Task that has a deadline.
      * @param isChecked Boolean of whether the Task has been marked or not.
      * @param taskLabel "D" to represent that this is a Deadline Task.

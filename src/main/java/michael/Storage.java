@@ -102,7 +102,7 @@ public class Storage {
      * @param fileName File "michael.txt" from the local device
      */
     public void load(String fileName) {
-        String command = null;
+        String command = "";
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             while ((command = reader.readLine()) != null) {

@@ -8,9 +8,10 @@ package michael.tasks;
  */
 public class ToDo extends Task {
     /**
-     * Constructor to create a ToDo Object.
+     * Constructor to create a To Do Object.
+     *
      * @param name Name of the ToDo task.
-     * @param isChecked Boolean to check if the task is marked or not
+     * @param isChecked Boolean to check if the task is marked or not.
      * @param taskLabel "T" to represent ToDo.
      */
     public ToDo(String name, boolean isChecked, String taskLabel) {

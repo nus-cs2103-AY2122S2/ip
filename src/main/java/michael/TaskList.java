@@ -66,9 +66,9 @@ public class TaskList {
      */
     public String bye(Storage storage) {
         storage.writeTasksToFile();
-        String bye = "GoodBye! I hope to see you again!\n\nPlease wait as Michael closes!";
-        System.out.println(bye);
-        return bye;
+        String byeMessage = "GoodBye! I hope to see you again!\n\nPlease wait as Michael closes!";
+        System.out.println(byeMessage);
+        return byeMessage;
     }
 
     /**

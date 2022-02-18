@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter;
  * @author Justin Ng Jie Ern
  */
 public class Time {
+    /**
+     * String for the Time Format.
+     */
+    public static final String TIME_FORMAT = "MMM d yyyy, HH:mm";
 
     /**
      * parsedTime for the particular Task
@@ -36,6 +40,6 @@ public class Time {
     @Override
     public String toString() {
 
-        return parsedTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
+        return parsedTime.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 }

@@ -10,6 +10,11 @@ import java.io.IOException;
  */
 public class CreateFile {
     /**
+     * String for the file name.
+     */
+    public static final String MICHAEL_TXT = "michael.txt";
+
+    /**
      * File name for file created in local device.
      */
     private String fileName;
@@ -18,7 +23,7 @@ public class CreateFile {
      * Constructor to create the file.
      */
     public CreateFile() {
-        this.fileName = "michael.txt";
+        this.fileName = MICHAEL_TXT;
     }
 
     /**

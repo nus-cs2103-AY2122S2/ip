@@ -18,7 +18,7 @@ public class WriteFile {
      * Constructor to write data into file.
      */
     public WriteFile() {
-        this.pathName = "michael.txt";
+        this.pathName = CreateFile.MICHAEL_TXT;
     }
 
     /**
