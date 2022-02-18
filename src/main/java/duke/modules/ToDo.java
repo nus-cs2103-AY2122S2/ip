@@ -16,7 +16,7 @@ class ToDo extends Task {
 
     @Override
     public String toString() {
-        if (super.getStatus() == 1) {
+        if (super.getIsCompleted() == true) {
             return "[T][X] " + super.getName();
         } else {
             return "[T][ ] " + super.getName();

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class CommandEvent extends Command {
     private String commandDescription;
     private ArrayList<Task> tasks;
-    private String[] split;
+    private String[] descriptionStrings;
 
     /**
      * Constructor for a CommandEvent object.
@@ -20,7 +20,7 @@ public class CommandEvent extends Command {
     public CommandEvent(String commandDescription, ArrayList<Task> tasks) {
         this.commandDescription = commandDescription;
         this.tasks = tasks;
-        split = commandDescription.split(" ");
+        descriptionStrings = commandDescription.split(" ");
     }
 
     /**
@@ -31,30 +31,25 @@ public class CommandEvent extends Command {
     @Override
     public String execute() {
         String output = "";
-        try {
-            // Check if description is empty
-            String check = split[1];
-            try {
-                // Take the substring of user input after event
-                String item = commandDescription.substring(6);
-                // Divide the substring into task name and date
-                String[] divide = item.split("/");
-                String name = divide[0];
-                String time = divide[1];
-                try{
-                    Event e = new Event(name.trim(), time.substring(3));
-                    tasks.add(e);
-                    output = String.format("task added:\n%s\n", e);
-                    output += String.format("you now have %d tasks\n", tasks.size());
-                } catch (DateTimeParseException e) {
-                    output = "date must be in the format yyyy-mm-dd\n";
-                }
-
-            } catch (IndexOutOfBoundsException e) {
-                output = "event description must contain a date!\n";
-            }
-        } catch (IndexOutOfBoundsException e) {
-            output = "event description cannot be empty!\n";
+        if (descriptionStrings.length < 2) {
+            return "event description cannot be empty!\n";
+        }
+        // Take the substring of user input after event
+        String item = commandDescription.substring(6);
+        // Divide the substring into task name and date
+        String[] nameAndDate = item.split("/");
+        String name = nameAndDate[0];
+        if (nameAndDate.length < 2) {
+            return "event description must contain a date!\n";
+        }
+        String time = nameAndDate[1];
+        try{
+            Event e = new Event(name.trim(), time.substring(3));
+            tasks.add(e);
+            output = String.format("task added:\n%s\n", e);
+            output += String.format("you now have %d tasks\n", tasks.size());
+        } catch (DateTimeParseException e) {
+            output = "date must be in the format yyyy-mm-dd\n";
         }
         return output;
     }

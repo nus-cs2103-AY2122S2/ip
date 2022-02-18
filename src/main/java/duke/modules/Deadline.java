@@ -25,7 +25,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        if (super.getStatus() == 1) {
+        if (super.getIsCompleted() == true) {
             return "[D][X] " + super.getName() + " (by: "
                     + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + ")";
         } else {

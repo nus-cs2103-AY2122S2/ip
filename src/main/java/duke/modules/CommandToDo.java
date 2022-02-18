@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class CommandToDo extends Command {
     private String commandDescription;
     private ArrayList<Task> tasks;
-    private String[] split;
+    private String[] descriptionStrings;
 
     /**
      * Constructor for a CommandDeadline object.
@@ -19,7 +19,7 @@ public class CommandToDo extends Command {
     public CommandToDo(String commandDescription, ArrayList<Task> tasks) {
         this.commandDescription = commandDescription;
         this.tasks = tasks;
-        split = commandDescription.split(" ");
+        descriptionStrings = commandDescription.split(" ");
     }
 
     /**
@@ -30,18 +30,17 @@ public class CommandToDo extends Command {
     @Override
     public String execute() {
         String output = "";
-        try {
-            // Check if description is empty
-            String check = split[1];
-            // Take the substring of user input after todo
-            String name = commandDescription.substring(5);
-            ToDo t = new ToDo(name);
-            tasks.add(t);
-            output = String.format("task added:\n%s\n", t);
-            output += String.format("you now have %d tasks\n", tasks.size());
-        } catch (IndexOutOfBoundsException e) {
-            output = ("the description of a todo cannot be empty!\n");
+        if (descriptionStrings.length < 2) {
+            return "the description of a todo cannot be empty!\n";
         }
+
+        // Take the substring of user input after todo
+        String name = commandDescription.substring(5);
+        ToDo t = new ToDo(name);
+        tasks.add(t);
+        output = String.format("task added:\n%s\n", t);
+        output += String.format("you now have %d tasks\n", tasks.size());
+
         return output;
     }
 }

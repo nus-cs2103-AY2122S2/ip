@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
         if(duke.isByeCommand()) {
             new Timer().schedule(new TimerTask() {
                 public void run () { System.exit(0); }
-            }, 3000);
+            }, 1500);
         }
     }
 }

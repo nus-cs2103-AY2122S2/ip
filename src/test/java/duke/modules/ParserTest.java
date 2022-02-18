@@ -125,6 +125,12 @@ public class ParserTest {
     }
 
     @Test
+    public void deadlineCommandWrongFormat() {
+        Parser parser = initialiseParserWithTaskListStub();
+        assertEquals("date must be in the format yyyy-mm-dd\n", parser.parse("deadline one /by 10-10-2021"));
+    }
+
+    @Test
     public void deadlineCommandSuccess() {
         Parser parser = initialiseParserWithTaskListStub();
         assertEquals("task added:\n"
