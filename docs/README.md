@@ -2,6 +2,8 @@
 
 > "I can help!" - MNSKY, *Fargo* S3E3 "The Law of Non-Contradiction"
 
+MNSKY is a chatbot that can help you remember and manage your tasks.
+
 ## Features 
 
 1) Add tasks to MNSKY's task list
@@ -33,7 +35,21 @@ file if it exists.
 - MNSKY can undo and redo any changes made to the task list, but only within that
 session.
 
-## Usage
+## Setting up MNSKY
+
+1) Make sure you have Java 11 installed on your computer. 
+
+- If not, you can follow the instructions [here](https://java.tutorials24x7.com/blog/how-to-install-java-11-on-windows)
+to install it on Windows.
+
+2) Download the msnky.jar file from [here](https://github.com/Graphcalibur/ip/releases/tag/Release-0.2-Final).
+
+3) Double-click the file to start the app.
+
+4) To interact with MNSKY, simply type commands into the text field and press the `Enter` key
+or click the `Send` button.
+
+## Command Usage
 
 ### `hi` - Prints greeting message
 
