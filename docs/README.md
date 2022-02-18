@@ -123,3 +123,8 @@ Example of usage: `bye`
 Expected outcome:
 
 ![alt-text](bye.PNG)
+
+## Credits
+
+Bot Icon: [Speak icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/speak)
+User Icon: [Language icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/language) 
