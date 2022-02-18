@@ -108,7 +108,13 @@ public class TaskList {
         if (tasks.isEmpty()) {
             return "You don't have tasks listed.";
         } else {
-            StringBuilder message = new StringBuilder("Here are the tasks in your list:");
+            StringBuilder message = new StringBuilder();
+            message.append(String.format("You have %d task", tasks.size()));
+            if (tasks.size() > 1) {
+                message.append("s");
+            }
+            message.append(" in the list:");
+
             for (int i = 0; i < tasks.size(); i++) {
                 message.append(String.format("\n%d.%s", i + 1, tasks.get(i)));
             }

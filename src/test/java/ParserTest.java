@@ -16,7 +16,7 @@ public class ParserTest {
                 new Parser(taskList, new Storage("")).parse("list"));
 
         taskList.readFromFile(new Todo("read book"));
-        assertEquals("Here are the tasks in your list:\n"
+        assertEquals("You have 1 task in the list:\n"
                         + "1.[T][ ] read book",
                 new Parser(taskList, new Storage("")).parse("list"));
     }
