@@ -16,6 +16,7 @@ import seedu.duke.Duke;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+//Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -71,11 +72,13 @@ public class MainWindow extends AnchorPane {
 
         //@@author BrendonLau-reused
         //Reused from https://github.com/BrendonLau/ip/blob/master/src/main/java/duke/MainWindow.java
+        //with minor modifications
         if (Command.isExit()) {
             userInput.setDisable(true);
             sendButton.setDisable(true);
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
+        //@@author
     }
 }

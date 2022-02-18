@@ -12,6 +12,7 @@ import seedu.duke.Duke;
 /**
  * The Main class
  */
+//Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
 public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
