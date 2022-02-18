@@ -1,29 +1,40 @@
-# User Guide
+# Duke, your personal secretary
+> "Give me six hours to chop down a tree and I will spend the first four sharpening the axe." - Abraham Lincoln
 
-## Features 
+Knowing exactly what you have to do will boost your productivity:rocket:!
+**Duke** is a CLI based todo-List app that helps keep you track of what to do at which time, until when.
+You can download the app [here](https://github.com/B1LLP4RK/ip). Image below shows the chat-like interface of the app.
 
-### Feature-ABC
+![Contribution guidelines for this project](./Ui.png)
 
-Description of the feature.
-
-### Feature-XYZ
-
-Description of the feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
-```
-expected output
+## commands
+1. `todo {task name}`
+    - adds a task to the tasklist
+2. `event {event name} \at {when}`
+    - adds a task that starts at a time to the tasklist
+3. `deadline {event name} \by {when}`
+    - adds a task that is due at a particular time to the tasklist
+4. `mark {task number}`/`unmark {task number}`
+    - marks/unmarks a task done
+5. `delete {task number}`
+    - delete a particular task
+6. `find {keyword}`
+    - shows the task containing the keyword, case insensitive
+## development roadmap
+- [x] enable search using a **keyword**
+- [ ] enable changing **task orders**
+- [ ] enable setting **priority** to tasks
+- [ ] enable **priority-based ordering**
+## known issues
+- giving multiple keywords delimited by space for `find` crashes the app (will be fixed soon)
+## patch notes
+- no patch yet
+## to fellow CS students
+Feel free to fork and make pull requests to this project! The code is clean enough for a novice to understand what's going on.:smiley: The main logic is roughly:
+```java
+while (!over) {
+            String userInput = myScanner.nextLine();
+            Command command = Parser.parse(userInput, taskList, over);
+            command.execute();
+}           
 ```
