@@ -78,14 +78,14 @@ public class TaskList {
      */
     public String list() {
         String reply = "";
-        int leng = tasks.size();
-        if (leng == 0) {
+        int length = tasks.size();
+        if (length == 0) {
             System.out.println("There are no pending tasks!");
             reply = "There are no pending tasks!";
         } else {
             System.out.println();
             //reply += "\n";
-            for (int i = 0; i < leng; i++) {
+            for (int i = 0; i < length; i++) {
                 Task task = tasks.get(i);
                 int num = i + 1;
                 System.out.println(num + ": " + task.toString());
@@ -102,7 +102,7 @@ public class TaskList {
      * @return TaskCheck string to be used for Michael DialogBox.
      */
     public String taskCheck(String taskStr) {
-        String reply = "";
+        String reply;
         try {
             String[] taskArr = taskStr.split(" ");
             int index = Integer.parseInt(taskArr[1]) - 1;
@@ -133,7 +133,6 @@ public class TaskList {
      * @return Todo string to be used for Michael DialogBox.
      */
     public String todo(String taskStr) {
-        // eg to_do borrow book (without the _)
         String taskName = parser.parseToDo(taskStr);
         ToDo task = new ToDo(taskName, false, "T");
         this.tasks.add(task);
@@ -151,7 +150,7 @@ public class TaskList {
      * @return Deadline string to be used for Michael DialogBox.
      */
     public String deadline(String taskStr) {
-        String reply = "";
+        String reply;
         try {
             String[] taskDetails = parser.parseDeadline(taskStr);
             String taskName = taskDetails[0];
@@ -179,7 +178,7 @@ public class TaskList {
      * @return Event string to be used for Michael DialogBox.
      */
     public String event(String taskStr) {
-        String reply = "";
+        String reply;
         try {
             String[] taskDetails = parser.parseEvent(taskStr);
             String taskName = taskDetails[0];
@@ -207,7 +206,7 @@ public class TaskList {
      * @return Delete string to be used for Michael DialogBox.
      */
     public String delete(String taskStr) {
-        String reply = "";
+        String reply;
         try {
             String[] taskArr = parser.splitLimitTwo(taskStr);
             String deleteIndStr = taskArr[1];
@@ -236,7 +235,7 @@ public class TaskList {
      * @return Find string to be used for Michael DialogBox.
      */
     public String find(String taskStr) {
-        String reply = "";
+        String reply;
         String[] taskArr = parser.splitLimitTwo(taskStr);
         TaskList foundTasks = new TaskList();
         String keyword = taskArr[1];
@@ -261,30 +260,37 @@ public class TaskList {
      * @return Help string to be used for Michael DialogBox.
      */
     public String help() {
-        String reply = "Looks like you need some help! \nHere is a list of commands that you can use!\n"
-                + "\n==> Utility commands that you can use!\n"
-                + "- 'save' : "
-                + "\n\t=> Save all tasks in Michael into a local file.\n"
-                + "- 'bye' : "
-                + "\n\t=> Exit Michael. All will be saved upon this command.\n"
-                + "- 'list' : "
-                + "\n\t=> List out all the tasks added into Michael.\n"
-                + "- 'find *keyword*' : "
-                + "\n\t=> Find all tasks with the *keyword*\n"
-                + "\n==> Commands to add a task!\n"
-                + "- 'todo *todo name*' : "
-                + "\n\t=> Add a todo task into Michael.\n"
-                + "- 'event *event name* /at *YYYY-MM-DD HH:MM*' : "
-                + "\n\t=> Add an event task into Michael.\n"
-                + "- 'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : "
-                + "\n\t=> Add a deadline task into Michael.\n"
-                + "\n==> Commands to edit a task on Michael.\n"
-                + "- 'mark *task#*' : "
-                + "\n\t=> Mark a task as completed.\n"
-                + "- 'unmark *task#*' : "
-                + "\n\t=> Un-mark a task as incomplete.\n"
-                + "- 'delete *task#*' : "
-                + "\n\t=> Delete a task from Michael.";
+        String reply = "Here is a list of commands that you can use!"
+                + "\n\n==> Utility commands that you can use!"
+                + "\n- 'save' : "
+                + "\n\t=> Save all tasks in Michael into a local file."
+                + "\n- 'bye' : "
+                + "\n\t=> Exit Michael. All will be saved upon this command."
+                + "\n- 'list' : "
+                + "\n\t=> List out all the tasks added into Michael."
+                + "\n- 'find *keyword*' : "
+                + "\n\t=> Find all tasks with the *keyword*"
+                + "\n\t=> Eg. find Jim"
+                + "\n\n==> Commands to add a task!"
+                + "\n- 'todo *todo name*' : "
+                + "\n\t=> Add a todo task into Michael."
+                + "\n\t=> Eg. todo Meet Jim"
+                + "\n- 'event *event name* /at *YYYY-MM-DD HH:MM*' : "
+                + "\n\t=> Add an event task into Michael."
+                + "\n\t=> Eg. event Jim's Birthday Party /at 2022-11-13 12:20"
+                + "\n- 'deadline *deadline name* /by *YYYY-MM-DD HH:MM*' : "
+                + "\n\t=> Add a deadline task into Michael."
+                + "\n\t=> Eg. deadline Buy Jim's Birthday Gift /by 2022-11-11 23:59"
+                + "\n\n==> Commands to edit a task on Michael."
+                + "\n- 'mark *task#*' : "
+                + "\n\t=> Mark a task as completed."
+                + "\n\t=> Eg. mark 1"
+                + "\n- 'unmark *task#*' : "
+                + "\n\t=> Un-mark a task as incomplete."
+                + "\n\t=> Eg. unmark 1"
+                + "\n- 'delete *task#*' : "
+                + "\n\t=> Delete a task from Michael."
+                + "\n\t=> Eg. delete 1";
         System.out.println(reply);
         return reply;
     }

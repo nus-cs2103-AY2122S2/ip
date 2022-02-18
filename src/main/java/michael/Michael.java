@@ -4,29 +4,31 @@ import javafx.stage.Stage;
 
 /**
  * Main class of Michael
- * Prints the introduction text of Michael
  *
  * @author Justin Ng Jie Ern
  */
 public class Michael {
     private static final String FROM_MICHAEL = "From Michael: \n\n";
     private static final String BREAK_LINE = "__________________________________________";
+    /**
+     * Introduction Message for Michael.
+     */
+    public static final String START = "Hello! I am Michael!\n"
+                    + "Welcome to Dunder Mifflin.\n\n"
+                    + "Input 'help' for the Command Manual!!\n\n"
+                    + "What can I do for you?\n"
+                    + BREAK_LINE;
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
     private Stage stage;
 
-    private String start = "Hello! I am Michael.\n"
-            + "Your Personal Assistant.\n\n"
-            + "Input 'help' for the Command Manual!!\n\n"
-            + "What can I do for you?\n"
-            + BREAK_LINE;
-
     /**
      * Constructor for Michael.
      */
     public Michael(Stage stage) {
-        System.out.println(start);
+        System.out.println(START);
         this.taskList = new TaskList();
         this.storage = new Storage(taskList);
         this.ui = new Ui(taskList, storage);

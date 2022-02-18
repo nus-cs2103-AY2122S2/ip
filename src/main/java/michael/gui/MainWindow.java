@@ -1,4 +1,4 @@
-package michael;
+package michael.gui;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import michael.Michael;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,12 +27,6 @@ public class MainWindow extends AnchorPane {
 
     private Michael michael;
 
-    private String start = "Hello! I am Michael.\n"
-            + "Your Personal Assistant.\n\n"
-            + "Input 'help' for the Command Manual!!\n\n"
-            + "What can I do for you?\n"
-            + "__________________________________________";
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image michaelImage = new Image(this.getClass().getResourceAsStream("/images/DaMichael.png"));
 
@@ -46,7 +41,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void startUpMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getMichaelDialog(start, michaelImage)
+                DialogBox.getMichaelDialog(Michael.START, michaelImage)
         );
     }
 
@@ -66,17 +61,18 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-
         String input = userInput.getText();
+        String fromUser = "MICHAEEELLLL!! \n\t";
+        String userMsg = fromUser + input;
         String response = michael.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getUserDialog(userMsg, userImage),
                 DialogBox.getMichaelDialog(response, michaelImage)
         );
         userInput.clear();
 
         if (input.equals("bye")) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
