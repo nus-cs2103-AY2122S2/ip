@@ -160,6 +160,7 @@ Format: `bye`
 
 **A**: Install the app in the other computer and overwrite the empty data file it creates on running the app with data
 from the file that was created by Heylo in your previous computer
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
