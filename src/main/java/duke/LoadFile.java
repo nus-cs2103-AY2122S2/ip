@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.io.File;
 
 /**
  * Loads the data stored in the disk into the current run of the application.
