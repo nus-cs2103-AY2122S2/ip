@@ -1,7 +1,8 @@
 # User Guide
 Duke is a task manager which, designed using Java, and has a chatting GUI which makes it easy and fast to learn to use!
-<<<<<<< HEAD
+
 ![Ui](Ui.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
