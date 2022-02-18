@@ -9,20 +9,21 @@ package duke.task;
 public class Events extends Tasks {
     //Printing Format Constants
     public static final String DATAFORMAT_EVENTS = "E |";
-    public static final String DATACOMPLETED_TASK = " X | " ;
-    public static final String DATAINCOMPLETED_TASK = "   | " ;
+    public static final String DATACOMPLETED_TASK = " X | ";
+    public static final String DATAINCOMPLETED_TASK = "   | ";
 
     //Database Format Constants
     public static final String PRINTFORMAT_EVENTS = "[E]";
-    public static final String PRINT_COMPLETEDTASK = "[X] " ;
-    public static final String PRINT_INCOMPLETEDTASK = "[ ] " ;
+    public static final String PRINT_COMPLETEDTASK = "[X] ";
+    public static final String PRINT_INCOMPLETEDTASK = "[ ] ";
 
     private final String timing; // Timing of event
 
     /**
+     * ne of the two sole constructors of Events.
      *
-     * @param taskName
-     * @param timing
+     * @param taskName The name of the event.
+     * @param timing The deadline of the event.
      */
     public Events(String taskName, String timing) {
         super(taskName);
@@ -30,23 +31,23 @@ public class Events extends Tasks {
     }
 
     /**
+     * One of the two sole constructors of Deadlines.
      *
-     * @param taskName
-     * @param completion
-     * @param timing
+     * @param taskName The name of the task.
+     * @param completion The completion status of the task.
+     * @param timing The deadline of the task.
      */
     public Events(String taskName, boolean completion, String timing) {
         super(taskName, completion);
         this.timing = timing;
     }
 
-    // Get timing of event
     public String getTiming() {
         return "(at: " + timing + ")";
     }
 
     /**
-     * Returns a new completed instance of the task.
+     * Complete a task
      *
      * @return a new instance of the task that has been completed.
      */
@@ -56,7 +57,7 @@ public class Events extends Tasks {
     }
 
     /**
-     * Returns a new uncompleted instance of the task.
+     * Uncomplete the task.
      *
      * @return a new instance of the task that has not been completed.
      */
@@ -65,25 +66,25 @@ public class Events extends Tasks {
         return new Events(super.getName(), false, timing);
     }
 
-    // Format of saving to database
     /**
+     * Present a database format of the task.
      *
-     * @return
+     * @return A String value of the format the task uses to be saved in a database.
      */
     public String toDatabaseString() {
-        return DATAFORMAT_EVENTS + (this.getCompletion() ?
-                DATACOMPLETED_TASK : DATAINCOMPLETED_TASK) + super.getName()
+        return DATAFORMAT_EVENTS + (this.getCompletion()
+                ? DATACOMPLETED_TASK : DATAINCOMPLETED_TASK) + super.getName()
                 + " | " + timing;
     }
 
-    // toString returning event
     /**
+     * Present a print format of the task.
      *
-     * @return
+     * @return A String value of the format when printed.
      */
     public String toString() {
-        return PRINTFORMAT_EVENTS + (super.getCompletion() ?
-                PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName()
-                + " (At: " + timing + ") "+ "" ;
+        return PRINTFORMAT_EVENTS + (super.getCompletion()
+                ? PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName()
+                + " (At: " + timing + ") " + "";
     }
 }

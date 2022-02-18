@@ -12,8 +12,8 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command generalised for the addition of tasks. A <code>AddCommand</code> object corresponds to
- * a command represented by the input command and the arguments by the user e.g., <code>todos, Eat a cake.</code>
+ * Represents a command generalised for the addition of tasks. A AddCommand object corresponds to
+ * a command represented by the input command and the arguments by the user e.g., todos, Eat a cake.
  */
 public class AddCommand extends Commands {
     public static final String COMMAND_TODO = "todo";
@@ -26,9 +26,10 @@ public class AddCommand extends Commands {
     private final String arguments; // In the form of user duke.command
 
     /**
+     * The sole constructor for the AddCommand class.
      *
-     * @param commandWord
-     * @param arguments
+     * @param commandWord The command the user input.
+     * @param arguments The arguments the user input.
      */
     public AddCommand(String commandWord, String arguments) {
         this.commandWord = commandWord;
@@ -47,9 +48,7 @@ public class AddCommand extends Commands {
     }
 
     /**
-     * Executes the creation of a <code>Tasks</code> object to add into the
-     * database. If the creation is successful, a <code>CommandResult</code> containing
-     * a success message is returned, else one containing a failure message is returned.
+     * Create a task and add it into the database.
      *
      * @param tasks An arraylist of tasks reflective of the current state in the database.
      * @param ui A class that controls the user-interface of the user.

@@ -8,25 +8,35 @@ package duke.task;
 public class Todos extends Tasks {
     //Printing Format Constants
     public static final String DATAFORMAT_TODO = "T |";
-    public static final String DATA_COMPLETEDTASK = " X | " ;
-    public static final String DATA_INCOMPLETEDTASK = "   | " ;
+    public static final String DATA_COMPLETEDTASK = " X | ";
+    public static final String DATA_INCOMPLETEDTASK = "   | ";
 
     //Database Format Constants
     public static final String PRINTFORMAT_TODO = "[T]";
-    public static final String PRINT_COMPLETEDTASK = "[X] " ;
-    public static final String PRINT_INCOMPLETEDTASK = "[ ] " ;
+    public static final String PRINT_COMPLETEDTASK = "[X] ";
+    public static final String PRINT_INCOMPLETEDTASK = "[ ] ";
 
-    // Constructor of Todos
+    /**
+     * One of the two sole constructors of Todo.
+     *
+     * @param taskName The name of the task.
+     */
     public Todos(String taskName) {
         super(taskName);
     }
 
+    /**
+     * One of the two sole constructors of Todo.
+     *
+     * @param taskName The name of the task.
+     * @param completion The completion status of the task.
+     */
     public Todos(String taskName, boolean completion) {
         super(taskName, completion);
     }
 
     /**
-     * Returns a new completed instance of the task.
+     * Complete a task.
      *
      * @return a new instance of the task that has been completed.
      */
@@ -36,7 +46,7 @@ public class Todos extends Tasks {
     }
 
     /**
-     * Returns a new uncompleted instance of the task.
+     * ncomplete the task.
      *
      * @return a new instance of the task that has not been completed.
      */
@@ -46,20 +56,22 @@ public class Todos extends Tasks {
     }
 
     /**
+     * Present a database format of the task.
      *
-     * @return
+     * @return A String value of the format the task uses to be saved in a database.
      */
     public String toDatabaseString() {
-        return DATAFORMAT_TODO + (this.getCompletion() ?
-                DATA_COMPLETEDTASK : DATA_INCOMPLETEDTASK) + super.getName();
+        return DATAFORMAT_TODO + (this.getCompletion()
+                ? DATA_COMPLETEDTASK : DATA_INCOMPLETEDTASK) + super.getName();
     }
 
     /**
+     * Present a print format of the task.
      *
-     * @return
+     * @return A String value of the format when printed.
      */
     public String toString() {
-        return PRINTFORMAT_TODO + (super.getCompletion() ?
-                PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName() ;
+        return PRINTFORMAT_TODO + (super.getCompletion()
+                ? PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName();
     }
 }

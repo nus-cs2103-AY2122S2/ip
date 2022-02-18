@@ -22,8 +22,7 @@ public class DeleteCommand extends Commands {
     }
 
     /**
-     * Returns the apt exit instruction after the command is executed.
-     * If the program ends after this is executed, true is returned.
+     * Aid in exiting the program if the command calls for it.
      *
      * @return the apt exit instruction.
      */
@@ -33,9 +32,8 @@ public class DeleteCommand extends Commands {
     }
 
     /**
-     * Executes the deletion of a <code>Tasks</code> object to remove from the
-     * database. If the creation is successful, a <code>CommandResult</code> containing
-     * a success message is returned, else one containing a failure message is returned.
+     * Executes the deletion of a Tasks object to remove from the
+     * database.
      *
      * @param tasks An arraylist of tasks reflective of the current state in the database.
      * @param ui A class that controls the user-interface of the user.

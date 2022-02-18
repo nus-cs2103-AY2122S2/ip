@@ -11,8 +11,9 @@ public class Tasks {
 
     // Constructor for Task
     /**
+     * One of the two sole constructors of a Task.
      *
-     * @param taskName
+     * @param taskName The name of the task.
      */
     public Tasks(String taskName) {
         this.name = taskName;
@@ -20,9 +21,10 @@ public class Tasks {
     }
 
     /**
+     * One of the two sole constructors of Deadlines.
      *
-     * @param taskName
-     * @param completion
+     * @param taskName The name of the task.
+     * @param completion The completion status of the task.
      */
     public Tasks(String taskName, boolean completion) {
         this.name = taskName;
@@ -30,7 +32,7 @@ public class Tasks {
     }
 
     /**
-     * Returns a new completed instance of the task.
+     * Complete a task.
      *
      * @return a new instance of the task that has been completed.
      */
@@ -39,7 +41,7 @@ public class Tasks {
     }
 
     /**
-     * Returns a new uncompleted instance of the task.
+     * Uncomplete the task.
      *
      * @return a new instance of the task that has not been completed.
      */
@@ -47,31 +49,36 @@ public class Tasks {
         return new Tasks(name, false);
     }
 
-    // Get timing of duke.task - overriden in todos and events
     public String getTiming() {
         return "";
     }
 
-    // Get timing of duke.task - overriden in todos and events
     public String getDeadline() {
         return "";
     }
 
-    // Get name of duke.task
     public String getName() {
         return this.name;
     }
 
-    // Get completion status of the duke.task
     Boolean getCompletion() {
         return this.hasCompleted;
     }
 
+    /**
+     * Present a database format of the task.
+     *
+     * @return A String value of the format the task uses to be saved in a database.
+     */
     public String toDatabaseString() {
         return "";
     }
 
-    // toString return tasks
+    /**
+     * Present a print format of the task.
+     *
+     * @return A String value of the format when printed.
+     */
     public String toString() {
         return "";
     }

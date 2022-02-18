@@ -5,19 +5,18 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command used to end the program. An <code>ExitCommand</code> object corresponds to
+ * Represents a command used to end the program. An ExitCommand object corresponds to
  * a command that exits the program.
  */
 public class ExitCommand extends Commands {
     public static final String COMMAND_WORDS = "bye";
-    public static final String SUCCESS_MESSAGE = "    Hope to see you again soon :(\n" + "    Let's play video game the next time!";
-                                                        ;
+    public static final String SUCCESS_MESSAGE = "    Hope to see you again soon :(\n"
+            + "    Let's play video game the next time!";
     public static final String FAILURE_MESSAGE = "    'Bye' Command Executed Unsuccessfully";
     private static final boolean IS_EXIT = true;
 
     /**
-     * Returns the apt exit instruction after the command is executed.
-     * If the program ends after this is executed, true is returned.
+     * Aid in exiting the program if the command calls for it.
      *
      * @return the apt exit instruction.
      */
@@ -27,8 +26,7 @@ public class ExitCommand extends Commands {
     }
 
     /**
-     * Executes the ending of the program. If the program termination is successful, a <code>CommandResult</code>
-     * containing a success message is returned. In this case, a success_message is always returned.
+     * Executes the ending of the program.
      *
      * @param tasks An arraylist of tasks reflective of the current state in the database.
      * @param ui A class that controls the user-interface of the user.

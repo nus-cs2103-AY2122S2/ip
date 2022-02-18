@@ -5,8 +5,8 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command used to list <code>Tasks</code> within the database.
- * A <code>ListCommand</code> object corresponds to a command that returns
+ * Represents a command used to list Tasks within the database.
+ * A ListCommand object corresponds to a command that returns
  * tasks registered by the user during their previous use.
  */
 public class ListCommand extends Commands {
@@ -17,8 +17,7 @@ public class ListCommand extends Commands {
     private static final boolean IS_EXIT = false;
 
     /**
-     * Returns the apt exit instruction after the command is executed.
-     * If the program ends after this is executed, true is returned.
+     * Aid in exiting the program if the command calls for it.
      *
      * @return the apt exit instruction.
      */
@@ -28,9 +27,8 @@ public class ListCommand extends Commands {
     }
 
     /**
-     * Executes the printing of all the <code>Tasks</code> registered by the users during their
-     * previous use. If the command is successful, a <code>CommandResult</code> containing
-     * a success message is returned, else one containing a failure message is returned.
+     * Executes the printing of all the Tasks registered by the users during their
+     * previous use.
      *
      * @param tasks An arraylist of tasks reflective of the current state in the database.
      * @param ui A class that controls the user-interface of the user.

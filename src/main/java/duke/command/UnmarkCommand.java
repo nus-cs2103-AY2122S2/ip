@@ -6,9 +6,9 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command used to un-complete a <code>Tasks</code> object. A <code>UnmarkCommand</code>
+ * Represents a command used to un-complete a Tasks object. A UnmarkCommand
  * object corresponds to a command represented by the input arguments from the
- * user e.g., <code>"1"</code>
+ * user e.g., "1"
  */
 public class UnmarkCommand extends Commands {
     public static final String COMMAND_WORDS = "unmark";
@@ -22,8 +22,7 @@ public class UnmarkCommand extends Commands {
     }
 
     /**
-     * Returns the apt exit instruction after the command is executed.
-     * If the program ends after this is executed, true is returned.
+     * Aid in exiting the program if the command calls for it.
      *
      * @return the apt exit instruction.
      */
@@ -33,8 +32,8 @@ public class UnmarkCommand extends Commands {
     }
 
     /**
-     * Edit and un-complete a <code>Tasks</code> object. If the edit is successful,
-     * a <code>CommandResult</code> containing a success message is returned, else
+     * Edit and un-complete a Tasks object. If the edit is successful,
+     * a CommandResult containing a success message is returned, else
      * one containing a failure message is returned.
      *
      * @param tasks An arraylist of tasks reflective of the current state in the database.
@@ -49,7 +48,7 @@ public class UnmarkCommand extends Commands {
             return new CommandResult(tasks.marksTask(storage,
                         Parser.convertBases(Parser.parseToInt(trimmedArgument)), false));
         } catch (IndexOutOfBoundsException err) {
-            return new CommandResult(    "Pika, unmarking the PokeTask was unsuccessful...\n"
+            return new CommandResult("Pika, unmarking the PokeTask was unsuccessful...\n"
                     + err);
         }
     }

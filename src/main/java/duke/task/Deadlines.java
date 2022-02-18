@@ -5,28 +5,29 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a deadline created by the user that are/will be stored in the database.
- * A <code>Deadlines</code> inherits from <code>Tasks</code> and is represented by its
+ * A Deadlines inherits from Tasks and is represented by its
  * name, completion status, and the deadline of the event e.g.,
- * <code>"Eat lunch", true, "2012-06-03"</code>
+ * "Eat lunch", true, "2012-06-03"
  */
 public class Deadlines extends Tasks {
     //Printing Format Constants
     public static final String DATAFORMAT_DEADLINE = "D |";
-    public static final String DATA_COMPLETEDTASK = " X | " ;
-    public static final String DATA_INCOMPLETEDTASK = "   | " ;
+    public static final String DATA_COMPLETEDTASK = " X | ";
+    public static final String DATA_INCOMPLETEDTASK = "   | ";
 
     //Database Format Constants
     public static final String PRINTFORMAT_DEADLINE = "[D]";
-    public static final String PRINT_COMPLETEDTASK = "[X] " ;
-    public static final String PRINT_INCOMPLETEDTASK = "[ ] " ;
+    public static final String PRINT_COMPLETEDTASK = "[X] ";
+    public static final String PRINT_INCOMPLETEDTASK = "[ ] ";
 
     private final LocalDate deadline; // Deadline to complete deadline duke.task
 
     /**
+     * One of the two sole constructors of Deadlines.
      *
-     * @param taskName
-     * @param deadline
-     * @throws DateTimeParseException
+     * @param taskName The name of the task.
+     * @param deadline The deadline of the task.
+     * @throws DateTimeParseException if an invalid DateTime value is parsed.
      */
     public Deadlines(String taskName, String deadline) throws DateTimeParseException {
         super(taskName);
@@ -34,24 +35,24 @@ public class Deadlines extends Tasks {
     }
 
     /**
+     * One of the two sole constructors of Deadlines.
      *
-     * @param taskName
-     * @param completion
-     * @param deadline
-     * @throws DateTimeParseException
+     * @param taskName The name of the task.
+     * @param completion The completion status of the task.
+     * @param deadline The deadline of the task.
+     * @throws DateTimeParseException if an invalid DateTime value is parsed.
      */
     public Deadlines(String taskName, boolean completion, String deadline) throws DateTimeParseException {
         super(taskName, completion);
         this.deadline = LocalDate.parse(deadline);
     }
 
-    // Get deadline of duke.task
     public String getTiming() {
         return "(by: " + deadline + ")";
     }
 
     /**
-     * Returns a new completed instance of the task.
+     * Complete a task.
      *
      * @return a new instance of the task that has been completed.
      */
@@ -62,7 +63,7 @@ public class Deadlines extends Tasks {
     }
 
     /**
-     * Returns a new uncompleted instance of the task.
+     * Uncomplete the task.
      *
      * @return a new instance of the task that has not been completed.
      */
@@ -72,28 +73,26 @@ public class Deadlines extends Tasks {
                 deadline.toString());
     }
 
-    // Save to database format
-
     /**
+     * Present a database format of the task.
      *
-     * @return
+     * @return A String value of the format the task uses to be saved in a database.
      */
     public String toDatabaseString() {
-        return DATAFORMAT_DEADLINE + (this.getCompletion() ?
-                DATA_COMPLETEDTASK : DATA_INCOMPLETEDTASK) + super.getName()
+        return DATAFORMAT_DEADLINE + (this.getCompletion()
+                ? DATA_COMPLETEDTASK : DATA_INCOMPLETEDTASK) + super.getName()
                 + " | " + deadline;
     }
 
-    // toString returning duke.task
-
     /**
+     * Present a print format of the task.
      *
-     * @return
+     * @return A String value of the format when printed.
      */
     public String toString() {
-        return PRINTFORMAT_DEADLINE + (this.getCompletion() ?
-                PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName()
-                + " (By: " + deadline + ")" ;
+        return PRINTFORMAT_DEADLINE + (this.getCompletion()
+                ? PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName()
+                + " (By: " + deadline + ")";
     }
 
 }

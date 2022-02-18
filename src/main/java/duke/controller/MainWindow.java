@@ -1,7 +1,6 @@
 package duke.controller;
 
 import duke.Duke;
-import duke.controller.DialogBox;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,6 +27,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/PokeTrainer.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/PokeJournalBot.png"));
 
+    /**
+     * The sole initialiser of the MainWindow controller class.
+     */
     @FXML
     public void initialize() {
         dialogContainer.getChildren().addAll(

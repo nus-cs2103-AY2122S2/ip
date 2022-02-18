@@ -5,7 +5,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a general blueprint for a Command. A <code>Commands</code> is a command
+ * Represents a general blueprint for a Command. A Commands is a command
  * blueprint for creation of future commands.
  */
 public class Commands {
@@ -14,8 +14,7 @@ public class Commands {
     private static final boolean IS_EXIT = false;
 
     /**
-     * Returns the apt exit instruction after the command is executed.
-     * If the program ends after this is executed, true is returned.
+     * Aid in exiting the program if the command calls for it.
      *
      * @return the apt exit instruction.
      */
@@ -24,9 +23,8 @@ public class Commands {
     }
 
     /**
-     * Acts as a blueprint method meant to be overrode by future sub-classes that dictates purpose of the command.
-     * If the command is successful, a <code>CommandResult</code> containing a success message is returned, else
-     * one containing a failure message will be returned.
+     * Represents the command provided by the user. This is an abstract class that will be used by future
+     * sub-classes to dictate actions of the program.
      *
      * @param tasks An arraylist of tasks reflective of the current state in the database.
      * @param ui A class that controls the user-interface of the user.
