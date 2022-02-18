@@ -9,8 +9,7 @@ public class Duke {
     private Parser parser;
     private Storage storage;
     private boolean isByeCommand = false;
-
-
+    
     public Duke() {
         storage = new Storage();
         taskList = new TaskList(storage);
@@ -18,7 +17,7 @@ public class Duke {
 
     }
 
-    public String getInitMessage() {
+    public static String getInitMessage() {
         return Ui.getInitializationMessage();
     }
 
