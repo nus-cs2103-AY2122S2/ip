@@ -14,6 +14,7 @@ faster than traditional GUI apps.
    6. [Saving the data](#saving-the-data)
    7. [Editing the data file](#editing-the-data-file)
 3. [Command Summary](#command-summary)
+4. [Acknowledgements](#acknowledgements)
 
 ---
 
