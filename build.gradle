@@ -43,11 +43,11 @@ test {
 }
 
 application {
-    mainClassName = "angela.Main"
+    mainClassName = "angela.gui.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "angela"
+    archiveBaseName = "Angela"
     archiveClassifier = null
 }
 
