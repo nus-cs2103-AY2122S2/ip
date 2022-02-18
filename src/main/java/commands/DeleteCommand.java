@@ -1,14 +1,12 @@
 package commands;
 
-import tasks.Task;
-
-import ui.Ui;
+import java.util.Optional;
 
 import tasklist.TaskList;
 import tasklist.TaskListException;
 import tasklist.TaskListException.TaskNotFoundException;
-
-import java.util.Optional;
+import tasks.Task;
+import ui.Ui;
 
 /**
  * Represents a user's instruction for the bot to remove an existing task.

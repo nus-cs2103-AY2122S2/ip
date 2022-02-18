@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-
 import java.util.Scanner;
 
 import tasks.Task;
@@ -177,9 +176,9 @@ public class Ui {
     }
 
     private String constructResponse(String content) {
-        final String divider = this.INDENTATION + this.DIVIDER + "\n";
+        final String divider = Ui.INDENTATION + Ui.DIVIDER + "\n";
         final String response =
-                this.INDENTATION + " " + content.replaceAll("\n", "\n " + this.INDENTATION) + "\n";
+                Ui.INDENTATION + " " + content.replaceAll("\n", "\n " + Ui.INDENTATION) + "\n";
         return divider + response + divider;
     }
 

@@ -1,15 +1,13 @@
 package tasklist;
 
-import tasklist.TaskListException.TaskNotFoundException;
-
-import storage.Storage;
-
-import tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import storage.Storage;
+import tasklist.TaskListException.TaskNotFoundException;
+import tasks.Task;
 
 /**
  * Represents a set of operations that can be performed on
@@ -57,7 +55,7 @@ public class StorageTaskList implements TaskList {
         return this.tasks
                 .stream()
                 .filter(task -> task.getDescription().contains(keyword))
-                .map(task -> task.clone())
+                .map(Task::clone)
                 .toArray(Task[]::new);
     }
 
@@ -98,7 +96,7 @@ public class StorageTaskList implements TaskList {
             }
         }
 
-        return this.tasks.stream().map((task) -> task.clone()).toArray(Task[]::new);
+        return this.tasks.stream().map(Task::clone).toArray(Task[]::new);
     }
 
     /**

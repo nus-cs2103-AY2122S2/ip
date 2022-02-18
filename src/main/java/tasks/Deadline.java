@@ -11,7 +11,7 @@ public class Deadline extends Task {
     public static final DateTimeFormatter DATE_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter DATE_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Returns a Deadline object that contains the details of the

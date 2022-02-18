@@ -1,8 +1,8 @@
 package tasklist;
 
-import tasks.Task;
-
 import java.util.Optional;
+
+import tasks.Task;
 
 /**
  * Represents a set of operations that can be performed on

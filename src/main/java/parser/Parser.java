@@ -1,23 +1,20 @@
 package parser;
 
-import bot.BotException;
+import java.time.LocalDate;
+import java.util.Arrays;
 
-import commands.Command;
-import commands.ListCommand;
-import commands.FindCommand;
-import commands.MarkCommand;
-import commands.UnmarkCommand;
+import bot.BotException;
 import commands.AddCommand;
+import commands.Command;
 import commands.DeleteCommand;
 import commands.ExitCommand;
-
+import commands.FindCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.UnmarkCommand;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
-
-import java.time.LocalDate;
-
-import java.util.Arrays;
 
 /**
  * Represents a parser to process the inputs to a chat bot.

@@ -1,14 +1,12 @@
 package commands;
 
-import tasks.Task;
-
-import ui.Ui;
+import java.util.NoSuchElementException;
 
 import tasklist.TaskList;
 import tasklist.TaskListException;
 import tasklist.TaskListException.TaskNotFoundException;
-
-import java.util.NoSuchElementException;
+import tasks.Task;
+import ui.Ui;
 
 /**
  * Represents a user's instruction for the bot to mark a task as completed.

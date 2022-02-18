@@ -23,7 +23,7 @@ public class TaskFormatterException extends Exception {
      * Task object type.
      */
     public static class UnsupportedTaskEncodingException extends TaskFormatterException {
-        private static final String MSG = "Unable to encode tasks as unsupported task type(s) is found" ;
+        private static final String MSG = "Unable to encode tasks as unsupported task type(s) is found";
 
         /**
          * Returns an exception which describes the serialization of an unsupported
