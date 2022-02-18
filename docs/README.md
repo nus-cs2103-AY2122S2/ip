@@ -126,5 +126,6 @@ Expected outcome:
 
 ## Credits
 
-Bot Icon: [Speak icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/speak)
-User Icon: [Language icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/language) 
+Bot Icon: [Speak icons created by Freepik - Flaticon](https://www.flaticon.com/free-icon/bilingual_4509776?related_id=4509776&origin=pack)
+
+User Icon: [Language icons created by Freepik - Flaticon](https://www.flaticon.com/free-icon/speaking_4509653?related_id=4509653&origin=pack) 
