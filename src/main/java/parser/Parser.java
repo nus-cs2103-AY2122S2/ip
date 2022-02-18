@@ -44,7 +44,7 @@ public class Parser {
      * @throws DukeException If an error occurs when processing a command
      */
     public static Command parse(String fullCommand) throws DukeException {
-        Commands command;
+        Commands command = null;
         String response = fullCommand.trim();
         String[] responseArray;
         String[] secondSplit;
@@ -69,19 +69,11 @@ public class Parser {
                 case TODO:
                     return new TodoCommand(textContent, priority);
                 case DEADLINE:
-                    try {
-                        secondSplit = textContent.split(" /by ");
-                        return new DeadlineCommand(secondSplit[0], secondSplit[1], priority);
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("date or time was not specified! Try again.");
-                    }
+                    secondSplit = textContent.split(" /by ");
+                    return new DeadlineCommand(secondSplit[0], secondSplit[1], priority);
                 case EVENT:
-                    try {
-                        secondSplit = textContent.split(" /at ");
-                        return new EventCommand(secondSplit[0], secondSplit[1], priority);
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new DukeException("location was not specified! Try again.");
-                    }
+                    secondSplit = textContent.split(" /at ");
+                    return new EventCommand(secondSplit[0], secondSplit[1], priority);
                 case MARK:
                     return new MarkCommand(Integer.parseInt(responseArray[1]));
                 case UNMARK:
@@ -102,6 +94,15 @@ public class Parser {
                 return new IncorrectCommand(e.getMessage());
             } catch (IllegalArgumentException e) {
                 return new IncorrectCommand();
+            } catch (IndexOutOfBoundsException e) {
+                switch (command) {
+                case DEADLINE:
+                    throw new DukeException("date or time was not specified! Try again.");
+                case EVENT:
+                    throw new DukeException("location was not specified! Try again.");
+                default:
+                    break;
+                }
             }
         }
         return new IncorrectCommand();
