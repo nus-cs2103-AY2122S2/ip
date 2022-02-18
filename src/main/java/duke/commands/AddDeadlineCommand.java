@@ -10,7 +10,7 @@ public class AddDeadlineCommand extends Command {
 
     private String userInput;
     /**
-     * Add deadline task to task list
+     * Constructor for AddDeadlineCommand
      *
      * @param userInput the input from user
      */

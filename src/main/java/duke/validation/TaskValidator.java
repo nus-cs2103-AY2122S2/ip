@@ -78,7 +78,7 @@ public class TaskValidator {
         int keywordIndex = words[1].indexOf("/by");
         boolean noKeyword = (keywordIndex == -1);
         if (noKeyword) {
-            throw new DukeException("The time of the deadline task cannot be empty");
+            throw new DukeException("The date of the deadline task cannot be empty");
         }
 
         information[0] = words[1].substring(0, keywordIndex).trim();
@@ -116,7 +116,7 @@ public class TaskValidator {
         int keywordIndex = words[1].indexOf("/at");
         boolean noKeyword = (keywordIndex == -1);
         if (noKeyword) {
-            throw new DukeException("The time of the event task cannot be empty");
+            throw new DukeException("The date of the event task cannot be empty");
         }
 
         information[0] = words[1].substring(0, keywordIndex).trim();

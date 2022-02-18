@@ -11,7 +11,7 @@ public class AddEventCommand extends Command {
     private String userInput;
 
     /**
-     * Add event task to task list
+     * Constructor for AddEventCommand
      *
      * @param userInput the input from user
      */
