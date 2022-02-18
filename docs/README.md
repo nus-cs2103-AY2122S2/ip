@@ -1,29 +1,75 @@
 # User Guide
 
-## Features 
+## Add tasks
 
-### Feature-ABC
+### `todo`: Adds a ToDo task
 
-Description of the feature.
+Adds a ToDo task to Duke.
 
-### Feature-XYZ
+Format:
+`todo <description>`
+e.g.
+- `todo read books`
 
-Description of the feature.
+### `deadline`: Adds a Deadline task
 
-## Usage
+Adds a Deadline task to Duke.
 
-### `Keyword` - Describe action
+Format:
+`deadline <description> /by <date_time>`
 
-Describe the action and its outcome.
+e.g.
+- `deadline do homework /by 2022-3-3 23:59`
 
-Example of usage: 
+### `event`: Adds an Event task
 
-`keyword (optional arguments)`
+Adds an Event task to Duke.
 
-Expected outcome:
+Format: `event <description> /at <date_time>`
 
-Description of the outcome.
+e.g.
+- `event read books /at 2022-2-2 9pm`
 
-```
-expected output
-```
+## List all tasks
+
+### `list`: Displays all tasks in Duke.
+
+Format:
+`list`
+
+## Mark a task as done
+
+### `mark`: Marks a task as completed
+
+
+Format: `mark <task_number>`
+
+e.g. `mark 1`(marks task 1 as done)
+## Deletes a specific task.
+
+### `delete`: Deletes a task
+
+Format: `delete <task_number>`
+
+e.g. `delete 1`(delete task 1)
+
+
+##  Find tasks matching a keyword
+
+### `find`: Displays all tasks matching a keyword.
+
+Format: `find <keyword>`
+
+e.g. `find book`(find any task containing keyword _**book**_ )
+
+## Exit Duke
+
+Format: `bye`
+
+## View Schedule
+
+### View all the tasks on a certain date
+
+Format: `view schedule <yyyy-mm-dd>`
+
+e.g. `view schedule 2022-2-2`

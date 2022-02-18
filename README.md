@@ -1,24 +1,75 @@
-# Duke project template
+# User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Add tasks
 
-## Setting up in Intellij
+### `todo`: Adds a ToDo task
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Adds a ToDo task to Duke.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Format:
+`todo <description>`
+e.g.
+- `todo read books`
+
+### `deadline`: Adds a Deadline task
+
+Adds a Deadline task to Duke.
+
+Format:
+`deadline <description> /by <date_time>`
+
+e.g.
+- `deadline do homework /by 2022-3-3 23:59`
+
+### `event`: Adds an Event task
+
+Adds an Event task to Duke.
+
+Format: `event <description> /at <date_time>`
+
+e.g.
+- `event read books /at 2022-2-2 9pm`
+
+## List all tasks
+
+### `list`: Displays all tasks in Duke.
+
+Format:
+`list`
+
+## Mark a task as done
+
+### `mark`: Marks a task as completed
+
+
+Format: `mark <task_number>`
+
+e.g. `mark 1`(marks task 1 as done)
+## Deletes a specific task.
+
+### `delete`: Deletes a task
+
+Format: `delete <task_number>`
+
+e.g. `delete 1`(delete task 1)
+
+
+##  Find tasks matching a keyword
+
+### `find`: Displays all tasks matching a keyword.
+
+Format: `find <keyword>`
+
+e.g. `find book`(find any task containing keyword _**book**_ )
+
+## Exit Duke
+
+Format: `bye`
+
+## View Schedule
+
+### View all the tasks on a certain date
+
+Format: `view schedule <yyyy-mm-dd>`
+
+e.g. `view schedule 2022-2-2`
