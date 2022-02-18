@@ -4,49 +4,81 @@
 
 MNSKY is a chatbot that can help you remember and manage your tasks.
 
+## Table of Contents
+
+1. [Features](#features)
+
+2. [Setting up MNSKY](#setting-up-mnsky)
+
+3. [Command Usage](#command-usage)
+
+- [hi](#hi---prints-greeting-message)
+
+- [list](#list---prints-the-task-list)
+
+- [todo](#todo---adds-task-to-the-task-list)
+
+- [event](#event---adds-event-to-the-task-list)
+
+- [deadline](#deadline---adds-deadline-to-the-task-list)
+
+- [mark](#mark---marks-a-task)
+
+- [unmark](#unmark---unmarks-a-task)
+
+- [delete](#delete---deletes-a-task)
+
+- [find](#find---deletes-a-task)
+
+- [undo](#undo---undoes-a-change-to-the-task-list)
+
+- [redo](#redo---redoes-an-undone-change-to-the-task-list)
+
+- [bye](#bye---shut-down-mnsky)
+
 ## Features 
 
-1) Add tasks to MNSKY's task list
+1. Add tasks to MNSKY's task list
 
 - Tasks can be added to MNSKY's task list and MNSKY will remember them for you. MNSKY
 can also remember events and deadlines.
 
-2) Mark and unmark tasks
+2. Mark and unmark tasks
 
 - Tasks in MNSKY's task list can be marked or unmarked to indicate whether they have
 been completed or not.
 
-3) Delete tasks
+3. Delete tasks
 
 - Tasks can be deleted from MNSKY's memory.
 
-4) Find tasks given a keyword
+4. Find tasks given a keyword
 
 - MNSKY can search for and print out all tasks which have the keyword in their name.
 
-5) Automatic saving of task list across sessions
+5. Automatic saving of task list across sessions
 
 - MNSKY automatically saves the task list to a data file every time a change is made
 to the task list. On startup, MNSKY will load the task list stored from the data
 file if it exists.
 
-6) Undo and redo and changes you've made
+6. Undo and redo and changes you've made
 
 - MNSKY can undo and redo any changes made to the task list, but only within that
 session.
 
 ## Setting up MNSKY
 
-1) Make sure you have Java 11 installed on your computer. 
+1. Make sure you have Java 11 installed on your computer. 
 
 - If not, you can follow the instructions [here](https://java.tutorials24x7.com/blog/how-to-install-java-11-on-windows)
 to install it on Windows.
 
-2) Download the msnky.jar file from [here](https://github.com/Graphcalibur/ip/releases/tag/Release-0.2-Final).
+2. Download the msnky.jar file from [here](https://github.com/Graphcalibur/ip/releases/tag/Release-0.2-Final).
 
-3) Double-click the file to start the app.
+3. Double-click the file to start the app.
 
-4) To interact with MNSKY, simply type commands into the text field and press the `Enter` key
+4. To interact with MNSKY, simply type commands into the text field and press the `Enter` key
 or click the `Send` button.
 
 ## Command Usage
@@ -83,16 +115,6 @@ Expected outcome: MNSKY will print out the entire task list. An example is shown
 4. [T][?] lol
 I can help!
 ```
-
-### `bye` - Quits MNSKY
-
-Closes the MNSKY program.
-
-Format: `bye`
-
-Example of usage: `bye`
-
-Expected outcome: The MNSKY program will close.
 
 ### `todo` - Adds task to the task list
 
