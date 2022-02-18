@@ -37,12 +37,34 @@ public class Ui {
      * @return Welcome message.
      */
     public String welcome(TaskList tasks) {
-        String greeting = "Hello! I'm Sparrow.";
-        if (tasks.isEmpty()) {
-            return greeting + " What can I do for you?";
-        }
-        assert !tasks.isEmpty() : "There should be saved tasks";
-        return greeting + "\n" + listTasks(tasks);
+        String greeting = "Hello!\n\nYour trusty task manager Sparrow is here!\nWhat can I do for you?\n\n";
+        String help = "For a list of commands, enter 'help'.\n\n";
+        return greeting + help + listTasks(tasks);
+    }
+
+    /**
+     * Prints the list of commands.
+     *
+     * @return the list of commands.
+     */
+    public String help() {
+        return "Here are the formats of all our commands:\n\n"
+                + "Adding tasks:\n"
+                + "event DESCRIPTION /at YYYY-MM-DD HHMM\n"
+                + "deadline DESCRIPTION /by YYYY-MM-DD HHMM\n"
+                + "todo DESCRIPTION\n\n"
+                + "Viewing tasks:\n"
+                + "list\n"
+                + "find KEYWORD\n\n"
+                + "Editing tasks:\n"
+                + "mark INDEX\n"
+                + "unmark INDEX\n"
+                + "prioritise INDEX PRIORITY_LEVEL (high, medium, low)\n\n"
+                + "Deleting tasks:\n"
+                + "delete INDEX\n\n"
+                + "Saving tasks:\n"
+                + "bye\n\n"
+                + "Enjoy!";
     }
 
     /**

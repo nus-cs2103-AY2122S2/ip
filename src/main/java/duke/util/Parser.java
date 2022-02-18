@@ -8,6 +8,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.PrioritiseCommand;
@@ -26,6 +27,8 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeException {
         switch (command) {
+        case "help":
+            return new HelpCommand();
         case "bye":
             return new ByeCommand();
         case "list":
