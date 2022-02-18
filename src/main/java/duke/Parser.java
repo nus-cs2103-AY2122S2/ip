@@ -21,8 +21,8 @@ public class Parser {
      * Returns task name to find from find command.
      */
     public static String getTaskToFindName(String command) {
-        int START_OF_NAME_INDEX = 5;
-        String nameToFind = command.substring(START_OF_NAME_INDEX);
+        int startOfNameIndex = 5;
+        String nameToFind = command.substring(startOfNameIndex);
 
         assert command.contains("find");
         assert nameToFind.length() >= 1;

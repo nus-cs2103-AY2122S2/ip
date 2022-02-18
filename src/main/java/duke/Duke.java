@@ -1,5 +1,10 @@
 package duke;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.util.InputMismatchException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,11 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.util.InputMismatchException;
 
 /**
  * Main class.
@@ -65,9 +65,9 @@ public class Duke extends Application {
             String command = input.trim();
 
             if (parser.getType(command).equals("help")) {
-                String HELP_URL = "https://github.com/sibinhho99-nus/ip";
+                URI helpUri = new URI("https://github.com/sibinhho99-nus/ip");
                 Desktop d = Desktop.getDesktop();
-                d.browse(new URI(HELP_URL));
+                d.browse(helpUri);
 
                 return ("Please see the help page opened for more information!\n");
             } else if (parser.getType(command).equals("bye")) {
@@ -91,15 +91,13 @@ public class Duke extends Application {
                 pastTasks.get(index).mark(true);
 
                 return ("OK, I've marked this task as done:\n  "
-                        + pastTasks.get(index)
-                );
+                        + pastTasks.get(index));
             } else if (parser.getType(command).equals("unmark")) {
                 int index = Integer.parseInt(command.split(" ")[1]) - 1;
                 pastTasks.get(index).mark(false);
 
                 return ("OK, I've marked this task as not done yet:\n  "
-                        + pastTasks.get(index)
-                );
+                        + pastTasks.get(index));
             } else if (parser.getType(command).equals("todo")) {
                 if (command.length() == 4) {
                     throw new InputMismatchException("The description of a todo cannot be empty.");
@@ -158,6 +156,9 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Launches the graphical UI.
+     */
     public void start(Stage stage) {
         //Step 1. Formatting the window to look as expected.
         scrollPane = new ScrollPane();
