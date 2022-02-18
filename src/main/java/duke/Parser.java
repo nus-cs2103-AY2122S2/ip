@@ -47,21 +47,21 @@ public class Parser {
         try {
             if (commandWord.equals("bye")) {
                 return new ByeCommand();
-            } else if (commandWord.equals("list")) {
+            } else if (commandWord.equals("list") || commandWord.equals("l")) {
                 return new ListCommand();
-            } else if (commandWord.equals("mark")) {
+            } else if (commandWord.equals("mark") || commandWord.equals("m")) {
                 return new MarkCommand(commandParameters);
-            } else if (commandWord.equals("unmark")) {
+            } else if (commandWord.equals("unmark") || commandWord.equals("um")) {
                 return new UnmarkCommand(commandParameters);
-            } else if (commandWord.equals("todo")) {
+            } else if (commandWord.equals("todo") || commandWord.equals("t")) {
                 return new AddTaskCommand(commandParameters, "todo");
-            } else if (commandWord.equals("deadline")) {
+            } else if (commandWord.equals("deadline") || commandWord.equals("d")) {
                 return new AddTaskCommand(commandParameters, "deadline");
-            } else if (commandWord.equals("event")) {
+            } else if (commandWord.equals("event") || commandWord.equals("e")) {
                 return new AddTaskCommand(commandParameters, "event");
-            } else if (commandWord.equals("delete")) {
+            } else if (commandWord.equals("delete") || commandWord.equals("del")) {
                 return new DeleteCommand(commandParameters);
-            } else if (commandWord.equals("find")) {
+            } else if (commandWord.equals("find") || commandWord.equals("f")) {
                 return new FindCommand(commandParameters);
             } else {
                 throw new DukeException();
