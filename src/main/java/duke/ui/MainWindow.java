@@ -72,7 +72,7 @@ public class MainWindow extends AnchorPane {
 
     private void handleDukeOutput(String input) {
         try {
-            Storage database = new Storage("data/tasksTable.csv");
+            Storage database = new Storage("storage/save.txt");
             DukeCommandMatcher parser = new DukeCommandMatcher(database);
             String response = parser.commandSwitcher(input);
             MarkdownParser mdParser = new MarkdownParser(response);

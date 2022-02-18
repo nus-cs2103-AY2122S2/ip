@@ -6,6 +6,10 @@ package duke.command;
 public class TypeCommand {
     public Command type;
 
+    /**
+     *
+     * @return type of task (T, E or D)
+     */
     public Command getType() {
         return type;
     }

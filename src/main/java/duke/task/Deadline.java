@@ -12,6 +12,11 @@ public class Deadline extends Task {
         this.taskDeadline = taskDeadline;
     }
 
+    @Override
+    public String getTaskType() {
+        return "D";
+    }
+
     public Deadline(String status, String task, String taskDeadline) {
         super(task, Objects.equals(status, "1") ? true : false);
         this.taskDeadline = taskDeadline;
@@ -27,8 +32,5 @@ public class Deadline extends Task {
         return Optional.of(taskDeadline);
     }
 
-    @Override
-    public String getTaskType() {
-        return "D";
-    }
+
 }
