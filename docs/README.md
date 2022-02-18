@@ -16,30 +16,37 @@ Organising your tasks will never be easier!
 - `event`
 - `deadline`
 
+
 ###List your Tasks
 
 - `list`
+
 
 ###Find a Task
 
 - `find`
 
+
 ###Save all Tasks
 
 - `save`
 
+
 ###Delete a Task
 
 - `delete`
+
 
 ###Mark or Un-mark a Task
 
 - `mark`
 - `unmark`
 
+
 ###Close Michael
 
 - `bye`
+
 
 ###In-Application Manual on how to use Michael
 
