@@ -118,7 +118,8 @@ public class Parser {
                     + "event <input event description> /at <input date>\n - to add an event to tasks"
                     + "mark <input task number> - to mark task as done\n"
                     + "unmark <input task number> - to mark task as not done\n"
-                    + "delete <input task number> - to delete task from tasks\n";
+                    + "delete <input task number> - to delete task from tasks\n"
+                    + "update <task number> <new description> - to change description of task\n";
             break;
         case "find":
             output = Action.find(inputArr[1]);
