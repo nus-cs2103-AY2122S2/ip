@@ -29,12 +29,3 @@ You can download the app [here](https://github.com/B1LLP4RK/ip). Image below sho
 - giving multiple keywords delimited by space for `find` crashes the app (will be fixed soon)
 ## patch notes
 - no patch yet
-## to fellow CS students
-Feel free to fork and make pull requests to this project! The code is clean enough for a novice to understand what's going on.:smiley: The main logic is roughly:
-```java
-while (!over) {
-            String userInput = myScanner.nextLine();
-            Command command = Parser.parse(userInput, taskList, over);
-            command.execute();
-}           
-```
