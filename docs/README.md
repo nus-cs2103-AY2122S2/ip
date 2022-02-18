@@ -140,5 +140,3 @@ Format: <br>
 Exits the program and save all changes made to tasks and contacts
 
 **Note**: If you do not exit, changes made will not be saved.
-**Note**: If IOException detected is returned by Snorlax, create the file
-`data/duke.txt` and `data/contacts.txt` in the same directory as your jar file.

@@ -89,7 +89,7 @@ public class Duke {
                 storage.writeToContactFile(contacts.getContactList());
                 return ui.exit();
             } catch (IOException e) {
-                return "IOException detected";
+                return "Please create the text files data/contacts.txt and data/duke.txt to save the files";
             }
         } else {
             if (isManagingContacts) {
