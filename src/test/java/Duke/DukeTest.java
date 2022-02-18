@@ -1,8 +1,9 @@
 package Duke;
 
 
-import org.junit.jupiter.api.Test;
 import duke.task.Task;
+import duke.task.Todo;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,9 +15,16 @@ public class DukeTest {
 
 
     @Test
-    public void toString_unmarked() {
-        Task task = new Task("taskName");
-        assertEquals(task.toString(), "[ ] taskName");
+    public void unmarked_task_test() {
+        Task task = new Task("task");
+        assertEquals(task.toString(), "[ ] task");
     }
+
+    @Test
+    public void todo_task_test(){
+        Task task = new Todo("task");
+        assertEquals(task.getTaskType(), "T");
+    }
+
 
 }

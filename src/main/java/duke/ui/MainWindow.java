@@ -86,7 +86,6 @@ public class MainWindow extends AnchorPane {
                 userInput.focusedProperty().removeListener(this.inputFocusListener);
                 userInput.setPromptText("Restart!");
             } else {
-                assert response != Constants.EXIT : response;
                 db = DialogBox.getDukeDialog(markdownList, dukeImage);
             }
             dialogContainer.getChildren().add(db);

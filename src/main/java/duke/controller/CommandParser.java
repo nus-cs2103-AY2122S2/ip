@@ -25,7 +25,6 @@ public class CommandParser implements Parser<TypeCommand> {
     @Override
     public TypeCommand parse() throws DukeException {
         String[] commandUserInput = input.trim().split("\\s+", 2);
-        assert commandUserInput.length > 0 : "the command is null";
         String command = commandUserInput[0];
 
         for (Command commandType : Command.values()) {

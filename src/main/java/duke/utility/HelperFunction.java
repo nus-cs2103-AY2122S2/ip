@@ -10,9 +10,7 @@ public class HelperFunction {
         String[] sentences = output.split("\n");
         for (String sentence: sentences) {
             if (sentence.length() < duke.utils.Constants.WIDTH) {
-                System.out.println(sentence);
             } else {
-                assert sentence.length() >= duke.utils.Constants.WIDTH : "sentence length: " + sentence.length();
                 displaySentence(sentence);
             }
         }

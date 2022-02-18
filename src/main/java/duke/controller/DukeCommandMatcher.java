@@ -102,6 +102,7 @@ public class DukeCommandMatcher {
     public String handleTodo(TypeCommand command) {
         String description = ((DescriptionCommand) command).getDescription();
         Todo todo = new Todo(description);
+        assert (todo.getTaskType() == "T");
         return handleAdd(todo);
     }
 
@@ -109,7 +110,7 @@ public class DukeCommandMatcher {
         String description = ((DescriptionCommand) command).getDescription();
         String time = TIME_FORMATTER.format(((TimeCommand) command).getTime());
         Deadline deadline = new Deadline(description, time);
-        System.out.println("deadline time: " + deadline.getTask());
+        assert (deadline.getTaskType() == "D");
         return handleAdd(deadline);
     }
 
@@ -118,12 +119,14 @@ public class DukeCommandMatcher {
         String startTime = TIME_FORMATTER.format(((DurationCommand) command).getStartTime());
         String endTime = TIME_FORMATTER.format(((DurationCommand) command).getEndTime());
         Event event = new Event(description, startTime + DURATION_SYMBOL + endTime);
+        assert (event.getTaskType() == "E");
         return handleAdd(event);
     }
 
     public String handleDelete(TypeCommand command) throws DukeException {
         String index = ((DescriptionCommand) command).getDescription();
         int deleting = Integer.parseInt(index) - 1;
+        assert (deleting > 0);
         return taskList.deleteTasks(deleting);
     }
 
