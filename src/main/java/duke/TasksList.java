@@ -7,6 +7,7 @@ import java.util.List;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
+import duke.task.Deadline;
 
 /**
  * Main layer of abstraction as a container of Task.
@@ -73,6 +74,40 @@ public class TasksList {
             response.append(String.format((i + 1) + ". " + tasks.get(i) + "\n"));
         }
         return response.toString();
+    }
+
+    public String getTasksUnder(List<String> instructions) throws InvalidArgumentException {
+        if (instructions.size() != 3) {
+            throw new InvalidArgumentException();
+        }
+
+        int inputNumber = Integer.parseInt(instructions.get(1));
+        String timeIdentifier = instructions.get(2);
+
+        StringBuilder response = new StringBuilder("Reminder! Here's your task that is due in under ");
+        response.append(inputNumber + " ");
+        response.append(timeIdentifier + "\n");
+
+        StringBuilder deadlineString = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getType() == "Deadline") {
+                assert tasks.get(i) instanceof Deadline;
+
+                Deadline deadline = (Deadline)tasks.get(i);
+                if (deadline.happensBefore(inputNumber, timeIdentifier)) {
+                    deadlineString.append(String.format((i + 1) + ". " + deadline + "\n"));
+                }
+
+            }
+        }
+
+        if (deadlineString.toString().equals("")) {
+            return String.format("Congratulations! You do not have any tasks due in under "
+                    + inputNumber
+                    + " "
+                    + timeIdentifier);
+        }
+        return response.toString() + deadlineString.toString();
     }
 
     /**

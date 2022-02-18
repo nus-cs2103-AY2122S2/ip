@@ -58,6 +58,11 @@ public class Todo extends Task {
         return String.format(status + " todo " + getName());
     }
 
+    @Override
+    public String getType() {
+        return "Todo";
+    }
+
     /**
      * Returns text representing the todo task for User.
      *

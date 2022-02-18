@@ -20,5 +20,6 @@ public class Constants {
     public static final String DIR_PATH = "./data";
     public static final String STORAGE_PATH = "./data/duke.txt";
     public static final List<String> COMMANDS = List.of("list", "bye", "mark", "unmark", "delete",
-            "todo", "event", "deadline", "save", "find");
+            "todo", "event", "deadline", "save", "find", "reminder");
+
 }
