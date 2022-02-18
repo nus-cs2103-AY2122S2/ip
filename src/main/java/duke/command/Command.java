@@ -574,7 +574,6 @@ class HelpCommand extends Command {
                 .concat(deadlineHelp)
                 .concat(eventHelp)
                 .concat(byeHelp);
-        System.out.println(result);
         return result;
     }
 }
