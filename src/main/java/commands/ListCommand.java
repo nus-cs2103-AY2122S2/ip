@@ -1,9 +1,8 @@
 package commands;
 
-import ui.Ui;
-
 import tasklist.TaskList;
 import tasklist.TaskListException;
+import ui.Ui;
 
 /**
  * Represents a user's instruction for the bot to list out all existing tasks.

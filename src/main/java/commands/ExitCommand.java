@@ -1,8 +1,7 @@
 package commands;
 
-import ui.Ui;
-
 import tasklist.TaskList;
+import ui.Ui;
 
 /**
  * Represents a user's instruction for the bot to terminate.

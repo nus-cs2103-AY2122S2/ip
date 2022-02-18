@@ -1,17 +1,15 @@
 package storage;
 
-import tasks.Task;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import storage.TaskFormatterException.IllegalDecodingInputException;
+import storage.TaskFormatterException.UnsupportedTaskEncodingException;
 import tasks.Deadline;
 import tasks.Event;
+import tasks.Task;
 import tasks.Todo;
-
-import storage.TaskFormatterException.UnsupportedTaskEncodingException;
-import storage.TaskFormatterException.IllegalDecodingInputException;
-
-import java.time.LocalDate;
-
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Represents a utility that serialize and deserialize a set of tasks
@@ -100,17 +98,17 @@ public class TaskFormatter {
 
         Task task;
         switch (tokens[0].trim()) {
-            case "T":
-                task = new Todo(tokens[2].trim());
-                break;
-            case "D":
-                task = new Deadline(tokens[2].trim(), LocalDate.parse(tokens[3].trim(), Deadline.DATE_INPUT_FORMAT));
-                break;
-            case "E":
-                task = new Event(tokens[2].trim(), tokens[3].trim());
-                break;
-            default:
-                throw new IllegalDecodingInputException();
+        case "T":
+            task = new Todo(tokens[2].trim());
+            break;
+        case "D":
+            task = new Deadline(tokens[2].trim(), LocalDate.parse(tokens[3].trim(), Deadline.DATE_INPUT_FORMAT));
+            break;
+        case "E":
+            task = new Event(tokens[2].trim(), tokens[3].trim());
+            break;
+        default:
+            throw new IllegalDecodingInputException();
         }
 
         if (tokens[1].trim().equals("1")) {

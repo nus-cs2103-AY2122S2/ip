@@ -1,15 +1,13 @@
 package storage;
 
-import tasks.Task;
-
 import java.io.BufferedReader;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import tasks.Task;
 
 /**
  * Represents the retrieval/persistence of tasks to the filesystem.
@@ -18,6 +16,18 @@ public class Storage {
     private static final String TASKS_FILENAME = "tasks";
 
     private final Path path;
+
+    /**
+     * Returns a Storage object that can retrieve and overwrite tasks
+     * from/to the filesystem.
+     *
+     * @param appPath represents the base directory that the tasks data file is in.
+     * @throws StorageOperationException If the base directory doesn't exist and an
+     * exception occurred while automatically creating it.
+     */
+    public Storage(String appPath) throws StorageOperationException {
+        this.path = Storage.createAppDirIfNotExists(appPath);
+    }
 
     private static Path createAppDirIfNotExists(String appPath) throws StorageOperationException {
         final Path appDir = Paths.get("./" + appPath);
@@ -31,18 +41,6 @@ public class Storage {
         }
 
         return tasksDir;
-    }
-
-    /**
-     * Returns a Storage object that can retrieve and overwrite tasks
-     * from/to the filesystem.
-     *
-     * @param appPath represents the base directory that the tasks data file is in.
-     * @throws StorageOperationException If the base directory doesn't exist and an
-     * exception occurred while automatically creating it.
-     */
-    public Storage(String appPath) throws StorageOperationException {
-        this.path = Storage.createAppDirIfNotExists(appPath);
     }
 
     /**

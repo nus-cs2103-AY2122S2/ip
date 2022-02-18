@@ -1,10 +1,8 @@
 package commands;
 
-import tasks.Task;
-
 import tasklist.TaskList;
 import tasklist.TaskListException;
-
+import tasks.Task;
 import ui.Ui;
 
 /**
