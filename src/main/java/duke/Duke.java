@@ -21,6 +21,8 @@ public class Duke {
             }
         }
 
+        assert(f.isFile()) : "File should exist";
+
         // Init saved tasks
         try {
             Storage.loadTasks();
@@ -38,6 +40,7 @@ public class Duke {
         try {
             Storage.saveTaskList();
             TaskList.taskList = new ArrayList<Task>(); // Reset task list
+            assert (TaskList.taskList.size() == 0) : "New tasklist should be empty";
         } catch (IOException e) {
             e.printStackTrace();
         }
