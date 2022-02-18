@@ -1,12 +1,12 @@
 # User Guide
 
-Welcome to DukeBot's User Guide.
+Welcome to Duke's User Guide.
 
 ## Features 
 
-DukeBot's features are designed to allow you to keep track of your tasks
+Duke's features are designed to allow you to keep track of your tasks
 
-Currently with DukeBot, you can perform the following:
+Currently with Duke, you can perform the following:
 1. Add a Task 
 2. Delete a Task
 3. Mark a Task as complete or incomplete
