@@ -63,7 +63,7 @@ public class UI {
      *
      * @param text Description of deleted task.
      */
-    public static String deleteMessage(String text) {
+    public static String printDeleteMessage(String text) {
         String deleted = "Noted. I've removed this task from\nboth the list and your life:\n";
         return deleted + text;
     }

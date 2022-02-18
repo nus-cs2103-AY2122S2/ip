@@ -9,24 +9,40 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
  * Represents the storage space to read past data from the file and write data to file.
  */
 public class Storage {
-    /**
-     * The filePath where data is stored.
-     */
-    private String filePath;
+
+    /** Name of directory where data is to be stored. */
+    protected static final String DIRECTORY_NAME = "data";
+    /** Name of file where data is to be stored. */
+    protected static final String FILE_NAME = "/mike.txt";
+    /** File where data is to be stored. */
+    protected File storageFile;
 
     /**
-     * Instantiate storage with the given file path.
+     * Instantiates storage class with the directory and files required
+     * to read and write the data of mike.
      *
-     * @param filePath Location of file.
+     * @throws IOException If there is an error with the file path.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() throws IOException {
+        Path directoryPath = Paths.get(DIRECTORY_NAME);
+        if (!Files.exists(directoryPath)) {
+            Files.createDirectories(directoryPath);
+        }
+        Path filePath = Paths.get(DIRECTORY_NAME + FILE_NAME);
+        if (!Files.exists(filePath)) {
+            Files.createFile(filePath);
+        }
+        storageFile = new File(filePath.toString());
     }
 
     /**
@@ -38,9 +54,8 @@ public class Storage {
      */
     public ArrayList<Task> readData() throws Exception {
         try {
-            File file = new File(filePath);
             ArrayList<Task> startingList = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(storageFile));
             String line = reader.readLine();
 
             while (line != null) {
@@ -57,7 +72,6 @@ public class Storage {
                 }
                 line = reader.readLine();
             }
-
             return startingList;
         } catch (Exception e) {
             throw new DukeException(UI.ERROR_CANNOT_READ);
@@ -72,7 +86,7 @@ public class Storage {
      */
     public void storeData(ArrayList<Task> list) throws Exception {
         try {
-            FileWriter fileWriter = new FileWriter(filePath);
+            FileWriter fileWriter = new FileWriter(storageFile);
             for (int n = 0; n < list.size(); n++) {
                 fileWriter.write(list.get(n).toSave() + "\n");
             }

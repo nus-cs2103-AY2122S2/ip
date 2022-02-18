@@ -60,7 +60,7 @@ public class TaskList {
      * @return Message that task has been deleted with details on task.
      */
     public String delete(int no) {
-        return UI.deleteMessage(this.Tasks.remove(no).toString());
+        return UI.printDeleteMessage(this.Tasks.remove(no).toString());
     }
 
     /**

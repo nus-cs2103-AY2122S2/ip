@@ -13,8 +13,6 @@ public class Duke {
     private TaskList tasks;
     /** Parser to handle user inputs. */
     private Parser parser;
-    /** Name of file path to store data. */
-    protected final String FILE_PATH = "data/duke.txt";
 
     /**
      * Instantiates Mike with storage,
@@ -22,7 +20,7 @@ public class Duke {
      */
     public Duke() {
         try {
-            storage = new Storage(this.FILE_PATH);
+            storage = new Storage();
             tasks = new TaskList(this.storage.readData());
             parser = new Parser(this.tasks);
         } catch (Exception e) {
