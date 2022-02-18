@@ -32,12 +32,14 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     /**
-     * Initialises the main window by setting the scroll pane and the background.
+     * Initialises the main window by setting the scroll pane and the styles.
      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.setStyle("-fx-background-color: #c7d2e9;");
+        userInput.setStyle("-fx-font-family: \"Courier New\";");
+        sendButton.setStyle("-fx-font-family: \"Courier New\";");
     }
 
     public void setDuke(Duke d) {

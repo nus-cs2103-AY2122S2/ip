@@ -29,8 +29,8 @@ public class Ui {
      * @return a message from duke welcoming a new user.
      */
     public String welcomeNewUser() {
-        return "I couldn't find any previous task data. If this is a mistake, check that your duke.txt" +
-                " file is in the right folder. \n\nIf you're new here, welcome!";
+        return "I couldn't find any previous task data. If this is a mistake, check that your duke.txt"
+                + " file is in the right folder. \n\nIf you're new here, welcome!";
     }
 
     /**
