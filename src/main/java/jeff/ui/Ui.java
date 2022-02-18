@@ -54,7 +54,7 @@ public class Ui {
     }
 
     public String showNoteCleared() {
-        return "I've clear your note for you!";
+        return "I've cleared all your note for you!";
     }
 
     public String showNoteAdded(String currNote) {

@@ -57,11 +57,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getJeffDialog(response, jeffImage)
         );
-        userInput.clear();
         if (Parser.isExit()) {
+            //@@author James_D-reused
+            //Reused from https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
+            // with minor modifications
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
+            //@@author
         }
+        userInput.clear();
     }
 }
