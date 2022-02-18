@@ -1,95 +1,111 @@
 package duke.utility;
 
-import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-/**
- * Store data for tasks list
- */
+
 public class Storage {
 
-    String filePath;
+    private String path;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String path) {
+        this.path = path;
     }
 
-    public List<Task> load() throws DukeException {
-        List<Task> taskList = new ArrayList<>();
-        File file = new File(this.filePath);
-
-        if(file.exists()){
-            try{
-                Scanner sc = new Scanner(file);
-                while(sc.hasNextLine()){
-                    String[] taskLine = sc.nextLine().split(",");
-                    Task t;
-                    if(taskLine[0].equals("T")){
-                        t = new Todo(taskLine[2]);
-                    } else if(taskLine[0].equals("D")){
-                        t = new Deadline(taskLine[2], LocalDateTime.parse(taskLine[3]));
-                    } else  if(taskLine[0].equals("E")){
-                        t = new Event(taskLine[2],LocalDateTime.parse(taskLine[3]));
-                    } else {
-                        throw new DukeException("cannot read the line");
-                    }
-                    if(taskLine[1].equals("X")){
-                        t.setMarked(true);
-                    }
-                    taskList.add(t);
+    public List<Task> readAllTasks() {
+        List<Task> tasks = new ArrayList<>();
+        try {
+            File databaseFile = new File(path);
+            databaseFile.getParentFile().mkdirs();
+            databaseFile.createNewFile();
+            BufferedReader reader = new BufferedReader(new FileReader(databaseFile));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Task task;
+                String[] taskStr = line.split(",");
+                task = storageLineParser(taskStr);
+                tasks.add(task);
+            }
+        } catch (IOException e) {
+            System.err.println("Read error! ");
+        }
+        return tasks;
+    }
+    public List<Task> query(String queryKey) {
+        List<Task> tasks = new ArrayList<>();
+        try {
+            File file = new File(path);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Task task;
+                if (line.contains(queryKey)) {
+                    String[] taskStr = line.split(",");
+                    task = storageLineParser(taskStr);
+                    tasks.add(task);
                 }
+            }
+        } catch (IOException e) {
+            System.err.println("Read got errors");
+        }
+        return tasks;
+    }
 
-            } catch (FileNotFoundException e) {
-                throw new DukeException("file cannot be found!");
+    public Task storageLineParser(String[] taskString) {
+        Task t;
+        switch (taskString[0]) {
+            case "T": {
+                t = new Todo(taskString[2], taskString[1]);
+                break;
+            }
+            case "E": {
+                t = new Event(taskString[1], taskString[2], taskString[3]);
+                break;
+            }
+            case "D": {
+                t = new Deadline(taskString[1], taskString[2], taskString[3]);
+                break;
+            }
+            default: {
+                t = null;
+                break;
             }
         }
-        return taskList;
+        return t;
     }
 
-    public void save(TaskList tasks) throws DukeException {
+    public void update(List<Task> tasks) {
         try {
-            File file;
-            FileWriter writer = new FileWriter(this.filePath);
-            for(Task t : tasks.getTasks()) {
-                String result = "";
-                if(t instanceof Todo) {
-                    result += "T,";
-                } else if(t instanceof Event) {
-                    result += "E,";
-                } else if(t instanceof Deadline) {
-                    result += "D,";
-                }
-                if (t.isMarked()) {
-                    result += "X,";
-                } else {
-                    result += "O,";
-                }
-                result += t.getName();
-                result += ",";
-                if(t instanceof Deadline) {
-                    Deadline d = (Deadline) t;
-                    result += d.getTime();
-                    result += ",";
-                } else if(t instanceof Event) {
-                    Event e = (Event) t;
-                    result += e.getTime();
-                    result += ",";
-                }
-                writer.write(result);
-                writer.write(System.lineSeparator());
+            File file = new File(path);
+            FileWriter writer = new FileWriter(file);
+            for (Task task: tasks) {
+                String[] formatTask = formatTask(task);
+                writer.append(String.join(",", formatTask));
+                writer.append('\n');
             }
+            writer.flush();
             writer.close();
         } catch (IOException e) {
-            throw new DukeException("cannot save tasks");
+            System.err.println("Creation error! ");
         }
     }
+
+    public String[] formatTask(Task task) {
+        String[] formatTask = new String[] {
+                task.getTaskType(),
+                task.getStatus() ? "1" : "0",
+                task.getTask(),
+                task.getTime().isEmpty() ? "" : task.getTime().get()
+        };
+        return formatTask;
+    }
+
+
+
 }

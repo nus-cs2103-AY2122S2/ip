@@ -1,65 +1,75 @@
 package duke.task;
 
-import duke.utility.UI;
+import duke.exception.DukeException;
+import duke.exception.TaskOutOfBoundException;
+import duke.ui.Ui;
+import duke.utility.Storage;
 
-import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * List of Tasks Class
+ * Public class for task list.
  */
 public class TaskList {
 
-    List<Task> tasks;
+    public static TaskList taskList;
+    public Storage storage;
+    public List<Task> tasks;
 
-    public TaskList() {
-        this.tasks = new ArrayList<>();
+    private TaskList(Storage db) {
+        this.storage = db;
+        tasks = storage.readAllTasks();
     }
 
-    public TaskList(List<Task> tasks) {
-        this.tasks = tasks;
+    public static synchronized TaskList getCurrentList(Storage database) {
+        if (taskList == null) {
+            taskList = new TaskList(database);
+        }
+        return taskList;
     }
 
-    public List<Task> getTasks() {
-        return this.tasks;
+    public String addTasks(Task task) {
+        tasks.add(task);
+        int size = tasks.size();
+        String msg = Ui.printAddTask(task, size);
+        storage.update(tasks);
+        return msg;
     }
 
-    public Integer getSize() {
-        return this.tasks.size();
+    public String deleteTasks(int index) throws TaskOutOfBoundException {
+        try {
+            String message = Ui.printDelete(tasks.get(index), tasks.size() - 1);
+            tasks.remove(index);
+            storage.update(tasks);
+            return message;
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskOutOfBoundException("Not inside the range of task list!", index + 1);
+        }
     }
 
-    public Task getByNumber(int number) {
-        return this.tasks.get(number - 1);
-    }
-
-    public Task deleteByNumber(int number) {
-        return tasks.remove(number - 1);
-    }
-
-    public void add(Task task) {
-        this.tasks.add(task);
-    }
-
-    public void printTasks(UI ui) {
+    public String ListTasks() throws DukeException {
         if (tasks.size() == 0) {
-            System.out.println("You currently do not have any tasks");
-        } else {
-            ui.print("These are your tasks: ");
-            for (int i = 1; i <= this.getSize(); i++) {
-                Task task = this.getByNumber(i);
-                ui.print(String.format("%d. %s", i, task.toString()));
-            }
+            return Ui.printNoTaskReminder();
         }
+        return Ui.printAllTask(tasks, true);
     }
 
-    public TaskList filterByKeyword(String keyword) {
-        TaskList newOne = new TaskList();
-        for(Task t : this.getTasks()) {
-            if(t.getName().toLowerCase().contains(keyword)) {
-                newOne.add(t);
-            }
+    public String query(String key) throws DukeException {
+        List<Task> tasks = storage.query(key);
+        return Ui.printAllTask(tasks, false);
+    }
+
+    public String markTask(int index) throws TaskOutOfBoundException {
+        try {
+            Task t = this.tasks.get(index);
+            t.setStatus(true);
+            String message = Ui.printDoneTask(t);
+            storage.update(tasks);
+            return message;
+        } catch (IndexOutOfBoundsException e) {
+            throw new TaskOutOfBoundException("Not inside the range of the task list!", index + 1);
         }
-        return newOne;
     }
 
 }

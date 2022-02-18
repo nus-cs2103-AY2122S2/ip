@@ -1,37 +1,55 @@
 package duke.task;
 
-/**
- * Task class
- */
+import java.util.Optional;
+
 public class Task {
 
-    String taskName;
-    boolean isMarked;
+    private String task;
+    private Boolean status;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
-        this.isMarked = false;
+    public Task(String task) {
+        this.task = task;
+        this.status = false;
     }
 
-    public boolean isMarked() {
-        return this.isMarked;
+    public Task(String task, boolean status) {
+        this.task = task;
+        this.status = status;
     }
 
-    public String getName() {
-        return this.taskName;
+    public String getTaskType() {
+        return "task";
     }
 
-    public void setMarked(boolean isMarked) {
-        this.isMarked = isMarked;
+    public String getTask() {
+        return task;
     }
 
-    @Override
-    public String toString() {
-        String status = isMarked ? "X" : " ";
-        return String.format("[%s] %s", status, this.taskName);
+    public Optional<String> getTime() {
+        return Optional.empty();
     }
 
+    public Boolean getStatus() {
+        return status;
+    }
 
+    public void setTask(String task) {
+        this.task = task;
+    }
 
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
+    @Override public String toString() {
+        return "[" + iconToString() + "] " + this.task;
+    }
+
+    public Character iconToString() {
+        if (this.status) {
+            return '\u2705';
+        } else {
+            return '\u26cc';
+        }
+    }
 }

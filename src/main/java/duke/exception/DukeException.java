@@ -1,15 +1,15 @@
 package duke.exception;
 
 /**
- * Exception class for handling exceptions
+ * Exception class for handling exceptions in Duke
  */
 public class DukeException extends Exception{
 
     /**
      * constructor for DukeException
-     * @param errMessage
+     * @param e
      */
-    public DukeException(String errMessage){
-        super(errMessage);
+    public DukeException(String e){
+        super(e);
     }
 }
