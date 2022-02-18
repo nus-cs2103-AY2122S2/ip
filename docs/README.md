@@ -50,6 +50,10 @@ Clears all tasks.
 
 ## Usage
 
+### Usage `save`
+Duke does not save automatically.
+Please `save` frequently to avoid loss of information.
+
 ### Usage `list`
 Lists all the tasks in the format of 
 `[task type][completed] task description (time)`.
@@ -62,6 +66,3 @@ Lists all the tasks in the format of
   2.[D][X] assignment (by: 23 Feb 2023)
   3.[E][ ] class (at: 2-4pm)
   ```
-### Usage `save`
-Duke does not save automatically. 
-Please `save` frequently to avoid loss of information. 
