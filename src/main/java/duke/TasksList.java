@@ -6,8 +6,8 @@ import java.util.List;
 
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidIndexException;
-import duke.task.Task;
 import duke.task.Deadline;
+import duke.task.Task;
 
 /**
  * Main layer of abstraction as a container of Task.
@@ -93,7 +93,7 @@ public class TasksList {
             if (tasks.get(i).getType() == "Deadline") {
                 assert tasks.get(i) instanceof Deadline;
 
-                Deadline deadline = (Deadline)tasks.get(i);
+                Deadline deadline = (Deadline) tasks.get(i);
                 if (deadline.happensBefore(inputNumber, timeIdentifier)) {
                     deadlineString.append(String.format((i + 1) + ". " + deadline + "\n"));
                 }

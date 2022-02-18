@@ -39,15 +39,23 @@ public class Deadline extends Task {
      */
     private Boolean isValid(String date) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate.parse(date, formatter);
         } catch (DateTimeParseException e) {
-            System.out.println("UNABLE");
             return false;
         }
         return true;
     }
 
+    /**
+     * Checks whether this deadline is within the time range given.
+     * This is to categorize whether deadline should be reminded or not.
+     *
+     * @param inputNumber User input number.
+     * @param timeIdentifier time id which consists of day, week, or month.
+     * @return True if deadline is within the time range given.
+     * @throws InvalidArgumentException if timeIdentifier is invalid.
+     */
     public Boolean happensBefore(int inputNumber, String timeIdentifier) throws InvalidArgumentException {
         if (this.getStatus()) {
             return false;
