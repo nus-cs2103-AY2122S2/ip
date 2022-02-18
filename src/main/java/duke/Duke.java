@@ -30,7 +30,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         run(input);
-
+        assert !response.isEmpty() : "Response for Duke cannot be empty!";
         return response;
     }
 
