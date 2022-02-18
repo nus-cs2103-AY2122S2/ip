@@ -179,11 +179,11 @@ public class TaskList {
         return Ui.returnListTaskRes(listInPrintFormat(taskList));
     }
 
-    private int arrayCounter(int[] array) {
+    int arrayCounter(int[] array) {
         return array.length;
     }
 
-    private int fileContentCounterZeroed() {
+    int fileContentCounterZeroed() {
         return taskList.size() - ZERO_BASEDINDEX;
     }
 }
