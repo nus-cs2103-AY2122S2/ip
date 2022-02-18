@@ -30,50 +30,55 @@ public class Parser {
             //variables needed for switch case.
             String response;
             int taskNum;
+
             switch(instruction[0]) {
             case "bye":
                 return Constants.BYE;
 
             case "list":
                 response = tasksList.list();
-                return response;
+                break;
 
             case "todo":
             case "event":
             case "deadline":
                 response = tasksList.addTask(Arrays.asList(instruction));
-                return response;
+                break;
 
             case "save":
                 response = storage.exportData(tasksList.toStorageStrings(), tasksList.list());
-                return response;
+                break;
 
             case "find":
                 response = tasksList.findMatchingTasks(Arrays.asList(instruction));
-                return response;
+                break;
 
             case "mark":
                 taskNum = Integer.parseInt(instruction[1]);
                 response = tasksList.mark(taskNum);
-                return response;
+                break;
 
             case "unmark":
                 taskNum = Integer.parseInt(instruction[1]);
                 response = tasksList.unmark(taskNum);
-                return response;
+                break;
 
             case "delete":
                 taskNum = Integer.parseInt(instruction[1]);
                 response = tasksList.deleteTask(taskNum);
-                return response;
+                break;
 
             case "reminder":
                 response = tasksList.getTasksUnder(Arrays.asList(instruction));
-                return response;
+                break;
 
             default:
                 throw new DukeException("Something is wrong!");
             }
+
+            //save after every command
+            storage.exportData(tasksList.toStorageStrings(), tasksList.list());
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
