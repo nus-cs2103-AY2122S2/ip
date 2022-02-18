@@ -26,6 +26,10 @@ public class ListCommand extends Command {
         String formattedTaskList = "";
         int taskListSize = taskList.size();
 
+        if (taskListSize == 0) {
+            return "No tasks in list";
+        }
+
         for (Task i : taskList) {
             String item = String.valueOf(indexCounter) + ". " + i.toString();
             formattedTaskList += Duke.newLine(item);

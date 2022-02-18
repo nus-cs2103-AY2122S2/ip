@@ -2,28 +2,61 @@
 
 ## Features 
 
-### Feature-ABC
+### Feature - Add Todo Task
 
-Description of the feature.
+Add a todo task to the list
 
-### Feature-XYZ
+Example of usage:
+`todo (task)`
+`t (task)`
 
-Description of the feature.
+### Feature - Add Deadline Task
 
-## Usage
+Add a deadline task to the list
 
-### `Keyword` - Describe action
+Example of usage:
+`deadline (task) /by (date in YYYY-MM-DD format)`
+`d (task) /by (date in YYYY-MM-DD format)`
 
-Describe the action and its outcome.
+### Feature - Add Event Task
 
-Example of usage: 
+Add an event task to the list
 
-`keyword (optional arguments)`
+Example of usage:
+`event (task) /at (event location)`
+`e (task) /at (event location)`
 
-Expected outcome:
+### Feature - List tasks
 
-Description of the outcome.
+Lists the current tasklist
 
-```
-expected output
-```
+Example of usage:
+`list`
+`l`
+
+### Feature - Mark and unmark tasks
+
+Mark and unmark tasks as done
+
+Example of usage:
+`mark (index of task in list)`
+`unmark (index of task in list)`
+`m (index)`
+`um (index)`
+
+### Feature - Remove tasks
+
+Remove tasks from list
+
+Example of usage:
+`delete (index of task in list)`
+`del (index)`
+
+### Feature - Find tasks
+
+Find tasks in list based on matching text
+
+Example of usage:
+`find (text to search)`
+`f (text)`
+

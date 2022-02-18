@@ -22,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 
 public class DukeGUI extends Application {
 
+    //@@author {nus-cs2103-AY2122S2}-reused
     // User images
     private Image user = new Image(this.getClass().getResourceAsStream("/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/DaDuke.png"));
@@ -119,6 +120,7 @@ public class DukeGUI extends Application {
         );
         userInput.clear();
     }
+    //@@author
 
     private String getResponse(String input) throws IOException {
         // Let Duke read from System.in

@@ -10,5 +10,6 @@ public class ByeCommand extends Command {
     @Override
     public void execute() {
         Ui.printExit();
+        System.exit(2);
     }
 }
