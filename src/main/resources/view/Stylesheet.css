@@ -6,8 +6,8 @@
     -fx-background-radius: 25;
     -fx-border-radius: 25;
     -fx-padding: 15;
-    -fx-border-insets: 5;
-    -fx-background-insets: 5;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 }
 
 .user-dialog {
