@@ -11,13 +11,15 @@ import myPackage.TaskList;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
 
+/**
+ * The main class for Dukebot. In charge of setting up saved files.
+ */
 
 public class Duke {
     private ScrollPane scrollPane;
@@ -44,6 +46,11 @@ public class Duke {
         return textToAdd;
     }
 
+    /**
+     * Gets a response from the chatbot.
+     * @param input input from user to chatbot.
+     * @return response from chatbot.
+     */
     public String getResponse(String input) {
         return Parser.parseCommand(input);
     }

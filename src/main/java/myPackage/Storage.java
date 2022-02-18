@@ -9,7 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-
+/**
+ * Storage class for storing and loading files to Duke.
+ */
 public class Storage {
 
     public static void checkFile() throws IOException {
@@ -19,7 +21,6 @@ public class Storage {
             File f = new File("data/duke.txt");
             if (!f.createNewFile()) {
                 System.out.println("file created");
-                ;
             } else {
                 System.out.println("save file found");
             }
@@ -36,15 +37,15 @@ public class Storage {
             if (str.length() > 0) {
                 String[] stringArray = str.split("\\|");
                 switch (stringArray[0]) {
-                    case ("T") : {
+                    case ("T"): {
                         TaskList.list.add(new ToDos(stringArray[2]));
                         break;
                     }
-                    case ("D") : {
+                    case ("D"): {
                         TaskList.list.add(new Deadlines(stringArray[2], stringArray[3]));
                         break;
                     }
-                    case ("E") : {
+                    case ("E"): {
                         TaskList.list.add(new Events(stringArray[2], stringArray[3]));
                         break;
                     }
@@ -63,9 +64,7 @@ public class Storage {
             Path filePath = Paths.get("data/duke.txt");
             String s = "";
             for (int i = 0; i < TaskList.list.size(); i++) {
-                s += TaskList.list.get(i).getTaskType() + "|" + TaskList.list.get(i).getStatusIcon() + "|"
-                        + TaskList.list.get(i).getOriginalDescription() + "|" + TaskList.list.get(i).getTiming()
-                        + System.lineSeparator();
+                s += TaskList.list.get(i).getTaskType() + "|" + TaskList.list.get(i).getStatusIcon() + "|" + TaskList.list.get(i).getOriginalDescription() + "|" + TaskList.list.get(i).getTiming() + System.lineSeparator();
             }
             writeToFile("data/duke.txt", s);
         } catch (IOException e) {

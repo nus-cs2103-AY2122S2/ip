@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import static myPackage.TaskList.listCount;
 
+/**
+ * Parser class to parse input from user
+ */
 public class Parser {
     public static String parseCommand(String inputFromUser) {
         Scanner input = new Scanner(System.in);

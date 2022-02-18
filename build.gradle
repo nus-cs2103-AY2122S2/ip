@@ -48,7 +48,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName =  "Launcher"
+    archiveBaseName = "Launcher"
     archiveClassifier = null
 }
 
@@ -66,13 +66,13 @@ jar {
 //    toolVersion = '8.29'
 //}
 
-run{
+run {
     standardInput = System.in
 }
 
 javafx {
     version = "17"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 mainClassName = 'Launcher'
