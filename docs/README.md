@@ -18,6 +18,7 @@ A desktop task management application that has the benefits of a Graphical User 
 - View tasks
 - Mark/Unmark tasks as done
 - Find tasks
+- Update tasks
 
 ## Usages
 Tasks are categorized as either a Todo, Event or Deadline.
@@ -72,5 +73,20 @@ Format:
 - `find SEARCH_TERM`
 - SEARCH_TERM cannot be empty.
 
+### Update task
+Can update either only the task description or only the date or both. <br/>
 
+Format: <br/>
+
+Update only task description
+- `update TASK_INDEX TASK_DESC`
+- TASK_INDEX and TASK_DESC cannot be empty.
+
+Update only date
+- `update TASK_INDEX /date DATE`
+- TASK_INDEX and DATE cannot be empty.
+
+Update both task description and date
+- `update TASK_INDEX TASK_DESC /date DATE`
+- TASK_INDEX, TASK_DESC and DATE cannot be empty.
 
