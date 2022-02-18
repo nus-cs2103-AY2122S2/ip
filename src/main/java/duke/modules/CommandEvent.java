@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class CommandEvent extends Command {
     private String commandDescription;
+    private TaskList taskList;
     private ArrayList<Task> tasks;
     private String[] descriptionStrings;
 
@@ -15,11 +16,12 @@ public class CommandEvent extends Command {
      * Constructor for a CommandEvent object.
      *
      * @param commandDescription The whole user input String.
-     * @param tasks The task list associated with this instance of the chatbot.
+     * @param taskList The task list associated with this instance of the chatbot.
      */
-    public CommandEvent(String commandDescription, ArrayList<Task> tasks) {
+    public CommandEvent(String commandDescription, TaskList taskList) {
         this.commandDescription = commandDescription;
-        this.tasks = tasks;
+        this.taskList = taskList;
+        this.tasks = taskList.getToDoList();
         descriptionStrings = commandDescription.split(" ");
     }
 
@@ -45,9 +47,14 @@ public class CommandEvent extends Command {
         String time = nameAndDate[1];
         try{
             Event e = new Event(name.trim(), time.substring(3));
-            tasks.add(e);
-            output = String.format("task added:\n%s\n", e);
-            output += String.format("you now have %d tasks\n", tasks.size());
+            if (taskList.canAddTask(e)) {
+                tasks.add(e);
+                output = String.format("task added:\n%s\n", e);
+                output += String.format("you now have %d tasks\n", tasks.size());
+            } else {
+                output = "duplicate task! check that all your tasks have unique names\n";
+            }
+
         } catch (DateTimeParseException e) {
             output = "date must be in the format yyyy-mm-dd\n";
         }

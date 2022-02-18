@@ -49,13 +49,13 @@ public class Parser {
             outputMessage = new CommandMark(userInput, toDoList).execute();
             break;
         case "todo":
-            outputMessage = new CommandToDo(userInput, toDoList).execute();
+            outputMessage = new CommandToDo(userInput, taskList).execute();
             break;
         case "deadline":
-            outputMessage = new CommandDeadline(userInput, toDoList).execute();
+            outputMessage = new CommandDeadline(userInput, taskList).execute();
             break;
         case "event":
-            outputMessage = new CommandEvent(userInput, toDoList).execute();
+            outputMessage = new CommandEvent(userInput, taskList).execute();
             break;
         case "delete":
             outputMessage = new CommandDelete(userInput, toDoList).execute();

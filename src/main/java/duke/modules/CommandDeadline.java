@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class CommandDeadline extends Command {
     private String commandDescription;
+    private TaskList taskList;
     private ArrayList<Task> tasks;
     private String[] descriptionStrings;
 
@@ -15,11 +16,12 @@ public class CommandDeadline extends Command {
      * Constructor for a CommandDeadline object.
      *
      * @param commandDescription The whole user input String.
-     * @param tasks The task list associated with this instance of the chatbot.
+     * @param taskList The task list associated with this instance of the chatbot.
      */
-    public CommandDeadline(String commandDescription, ArrayList<Task> tasks) {
+    public CommandDeadline(String commandDescription, TaskList taskList) {
         this.commandDescription = commandDescription;
-        this.tasks = tasks;
+        this.taskList = taskList;
+        this.tasks = taskList.getToDoList();
         descriptionStrings = commandDescription.split(" ");
     }
 
@@ -47,9 +49,14 @@ public class CommandDeadline extends Command {
         String dueDate = nameAndDate[1];
         try {
             Deadline d = new Deadline(name.trim(), dueDate.substring(3));
-            tasks.add(d);
-            output = String.format("task added:\n%s\n", d);
-            output += String.format("you now have %d tasks\n", tasks.size());
+            if (taskList.canAddTask(d)) {
+                tasks.add(d);
+                output = String.format("task added:\n%s\n", d);
+                output += String.format("you now have %d tasks\n", tasks.size());
+            } else {
+                output = "duplicate task! check that all your tasks have unique names\n";
+            }
+
         } catch (DateTimeParseException e ) {
             output = "date must be in the format yyyy-mm-dd\n";
         }

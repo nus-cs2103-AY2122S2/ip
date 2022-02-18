@@ -40,9 +40,14 @@ public class TaskList {
      *
      * @param task The Task object to be added.
      */
-    public void addTask(Task task) {
+    public boolean canAddTask(Task task) {
         assert task != null;
-        toDoList.add(task);
+        for (int i = 0; i < toDoList.size(); i++) {
+            if (task.getName().equals(toDoList.get(i).getName())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

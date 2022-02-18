@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class CommandToDo extends Command {
     private String commandDescription;
+    private TaskList taskList;
     private ArrayList<Task> tasks;
     private String[] descriptionStrings;
 
@@ -14,11 +15,12 @@ public class CommandToDo extends Command {
      * Constructor for a CommandDeadline object.
      *
      * @param commandDescription The whole user input String.
-     * @param tasks The task list associated with this instance of the chatbot.
+     * @param taskList The task list associated with this instance of the chatbot.
      */
-    public CommandToDo(String commandDescription, ArrayList<Task> tasks) {
+    public CommandToDo(String commandDescription, TaskList taskList) {
         this.commandDescription = commandDescription;
-        this.tasks = tasks;
+        this.taskList = taskList;
+        this.tasks = taskList.getToDoList();
         descriptionStrings = commandDescription.split(" ");
     }
 
@@ -37,9 +39,14 @@ public class CommandToDo extends Command {
         // Take the substring of user input after todo
         String name = commandDescription.substring(5);
         ToDo t = new ToDo(name);
-        tasks.add(t);
-        output = String.format("task added:\n%s\n", t);
-        output += String.format("you now have %d tasks\n", tasks.size());
+        if (taskList.canAddTask(t)) {
+            tasks.add(t);
+            output = String.format("task added:\n%s\n", t);
+            output += String.format("you now have %d tasks\n", tasks.size());
+        } else {
+            output = "duplicate task! check that all your tasks have unique names\n";
+        }
+
 
         return output;
     }
