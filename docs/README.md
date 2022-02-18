@@ -7,12 +7,6 @@ It is designed with JavaFX giving Michael a fun and unique Graphic User Interfac
 
 Organising your tasks will never be easier!
 
-###All you need to do is:
-1. Download it [here](https://github.com/Justinnje/ip)
-2. Double Click the executable file
-3. Add your tasks
-4. Save your tasks
-5. Let Michael manage your tasks for you!
 <hr>
 
 ## Features
@@ -76,6 +70,7 @@ You now have 4 tasks in your list
 Adds an Event task into the TaskList.
 
 * Note: Time should be in a YYYY-MM-DD HH:MM format. 
+  * Single digit numbers should be appended with `0` at the front
   * For example: January should be `01` not just `1`
 
 Format: `event (task name) /at YYYY-MM-DD HH:MM`
@@ -96,7 +91,8 @@ You now have 5 tasks in your list
 Adds a Deadline task into the TaskList.
 
 * Note: Time should be in a YYYY-MM-DD HH:MM format.
-    * For example: January should be `01` not just `1`
+  * Single digit numbers should be appended with `0` at the front
+  * For example: January should be `01` not just `1`
 
 Format: `deadline (task name) /by YYYY-MM-DD HH:MM`
 
