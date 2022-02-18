@@ -1,24 +1,31 @@
-# Duke project template
+# Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+**Duke schedules your events, deadlines, etc and helps you organise better**
 
-## Setting up in Intellij
+It is:
+1. Text based
+2. User friendly
+3. Easy to modify
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Here's how you can use it:
+- Download it [Github pages](https://github.com/rahulprasad01/ip)
+- Add and modify tasks
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## It is free to use.
+
+Feature:
+
+- [x] Managing events
+- [x] Managing deadlines
+- [x] Set tasks to be done after a certain date
+
+
+* * If you Java programmer, you can use it to practice Java too. Here's the Launcher method:
+
+```
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+}
+```
