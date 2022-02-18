@@ -5,7 +5,9 @@ package duke;
  */
 public class Task {
     private String description;
+    private final String sym = "task";
     private boolean isDone;
+    private String dayString;
 
     /**
      * Constructor for a task.
@@ -15,6 +17,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.dayString = "";
     }
 
     /**
@@ -29,6 +32,20 @@ public class Task {
             assert(isDone == false);
             return " ";
         }
+    }
+
+    /**
+     * Retreives the symbol of Task
+     */
+    public String getSym() {
+        return sym;
+    }
+
+    /**
+     * Retreives the day of Task
+     */
+    public String getDayString() {
+        return dayString;
     }
 
     /**

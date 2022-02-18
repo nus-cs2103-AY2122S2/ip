@@ -14,6 +14,13 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Retreives the symbol of Task
+     */
+    public String getSym() {
+        return sym;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s][%s]%s", sym, super.getStatusIcon(), super.getDescription());

@@ -7,11 +7,18 @@ import java.util.ArrayList;
  */
 public class TaskBank {
     private static ArrayList<Task> bank = new ArrayList<Task>();
+    // private static Storage storage;
 
     /**
      * Construtor for TaskBank
      */
-    public TaskBank() {}
+    public TaskBank(Storage storage) {
+        // this.storage = storage;
+        ArrayList<Task> memory = storage.readFile();
+        for (int i = 0; i < bank.size(); i++) {
+            bank.add(memory.get(i));
+        }
+    }
 
     /**
      * Adds a task to the task bank

@@ -12,6 +12,7 @@ import java.time.format.FormatStyle;
 public class Event extends Task {
     private final String sym = "E";
     private final LocalDate dayAndTime;
+    private String dayString;
 
     /**
      * Constructor for Event
@@ -22,6 +23,21 @@ public class Event extends Task {
     Event (String description, String dayAndTime) throws DateTimeException {
         super(description);
         this.dayAndTime = LocalDate.parse(dayAndTime);
+        this.dayString = dayAndTime;
+    }
+
+    /**
+     * Retreives the symbol of Task
+     */
+    public String getSym() {
+        return sym;
+    }
+
+    /**
+     * Retreives the day of Task
+     */
+    public String getDayString() {
+        return dayString;
     }
 
     @Override

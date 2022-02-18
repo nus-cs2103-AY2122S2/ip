@@ -19,8 +19,8 @@ public class Action {
                 + "P P P P    A A A    N  N  N    D      D    A A A\n"
                 + "P           A      A    N       N    D D D    A      A\n"
                 + "---------------------------------------------------";
-        String greeting = "Hello! I am PinkPandaBot aka\n" + logo + "\nWelcome to my ChatBot\nTip: use 'help' for help\n";
-        System.out.println(greeting);
+        String greeting = "Hello! I am PinkPandaBot aka\n" + logo
+                            + "\nWelcome to my ChatBot\nTip: use 'help' for help\n";
         return greeting;
     }
 
@@ -38,7 +38,6 @@ public class Action {
      */
     public static String bye() {
         String bye = "Bye. Hope to see you again soon!\n";
-        System.out.println(bye);
         return bye;
     }
 
@@ -51,7 +50,6 @@ public class Action {
         String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < arrlst.size(); i++) {
             output = output + String.format("%d.%s\n", i + 1, arrlst.get(i));
-            System.out.println(output);
         }
         return output;
     }

@@ -26,7 +26,6 @@ public class Parser {
             break;
         case "bye":
             output = Action.bye();
-            System.out.println(dash);
             break;
         case "mark":
             try {
@@ -120,7 +119,6 @@ public class Parser {
                     + "unmark <input task number> - to mark task as not done\n"
                     + "delete <input task number> - to delete task from tasks\n"
                     + "update <input task number> <new description> - to update description of task";
-
             break;
         case "find":
             output = Action.find(inputArr[1]);

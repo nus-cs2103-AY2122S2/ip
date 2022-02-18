@@ -10,6 +10,7 @@ import java.time.format.FormatStyle;
 public class Deadline extends Task {
     private final String sym = "D";
     private LocalDate day;
+    private String dayString;
 
     /**
      * Constructor for a Deadline
@@ -20,6 +21,21 @@ public class Deadline extends Task {
     Deadline (String description, String day) {
         super(description);
         this.day = LocalDate.parse(day);
+        this.dayString = day;
+    }
+
+    /**
+     * Retreives the symbol of Task
+     */
+    public String getSym() {
+        return sym;
+    }
+
+    /**
+     * Retreives the day of Task
+     */
+    public String getDayString() {
+        return dayString;
     }
 
     @Override

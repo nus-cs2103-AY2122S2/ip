@@ -1,22 +1,21 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
-
 
 /**
  * Represents a storage that loads and save user data
  */
 public class Storage {
     //@@author SimJM-reused
-    //Reused from https://github.com/garethkoh/ip/blob/master/src/main/java/Storage.java
+    //Reused from https://github.com/eugenechiaay/ip/blob/master/src/main/java/gene/component/TaskStorage.java
     // with minor modifications
     private String currentDir = System.getProperty("user.dir");
     private Path currentPath = Path.of(currentDir + File.separator + "data");
@@ -27,18 +26,6 @@ public class Storage {
      * Constructor for a Storage object
      */
     public Storage(){}
-
-    /**
-     * <p>Method to Suppress unchecked typecasts. Since the file path has been pre-set in this programme, we can be sure
-     * that there will be no errors when typecasting. </p>
-     * @param obj The object to be typecasted.
-     * @param <T> The type to be casted to.
-     * @return An Object of type T.
-     */
-    @SuppressWarnings("unchecked")
-    public <T> T castToAnything(Object obj) {
-        return (T) obj;
-    }
 
     /**
      * Loads the users task list from file
@@ -58,17 +45,45 @@ public class Storage {
             } else {
                 System.out.println("File already exists.");
                 try {
-                    FileInputStream reader = new FileInputStream(dataPath);
-                    ObjectInputStream listInput = new ObjectInputStream(reader);
-                    toDoList = castToAnything(listInput.readObject());
-                    // for (int i = 0; i < toDoList.size(); i++) {
-                    //     TaskBank.getBank().add(toDoList.get(i));
-                    // }
+                    FileReader fileReader = new FileReader(dataPath);
+                    BufferedReader bufferedReader = new BufferedReader(fileReader);
+                    String line = "";
+                    while ((line = bufferedReader.readLine()) != null) {
+                        String[] tokens = line.split(" / ");
+                        String taskDescription = tokens[1];
+                        switch(tokens[0]) {
+                        case "todo":
+                            Todo todo = new Todo(taskDescription);
+                            toDoList.add(todo);
+                            break;
+                        case "deadline":
+                            String dateDeadline = tokens[2];
+                            Deadline deadline = new Deadline(taskDescription, dateDeadline);
+                            String isDone = tokens[3];
+                            if (isDone.equals("X")) {
+                                deadline.markAsDone();
+                            }
+                            toDoList.add(deadline);
+                            break;
+                        case "event":
+                            String dateEvent = tokens[2];
+                            Event event = new Event(taskDescription, dateEvent);
+                            String isMarked = tokens[3];
+                            if (isMarked.equals("X")) {
+                                event.markAsDone();
+                            }
+                            toDoList.add(event);
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                    fileReader.close();
+                    bufferedReader.close();
                     System.out.println("file read and data transferred");
-                    listInput.close();
-                    reader.close();
-                } catch (ClassNotFoundException e) {
-                    System.out.println("class not found");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         } catch (IOException e) {
@@ -76,15 +91,38 @@ public class Storage {
         }
         return toDoList;
     }
+
     /**
      * Save the users tasklist to file
      */
     public void writeToFile(ArrayList<Task> bank) {
         try {
-            FileOutputStream writer = new FileOutputStream(dataPath);
-            ObjectOutputStream saveList = new ObjectOutputStream(writer);
-            saveList.writeObject(bank);
-            saveList.close();
+            FileWriter fileWriter = new FileWriter(dataPath);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (int i = 0; i < bank.size(); i++) {
+                Task t = bank.get(i);
+                String taskSym = t.getSym();
+                String toWrite = "";
+                switch(taskSym) {
+                case "T":
+                    toWrite = "todo / " + t.getDescription() + " / " + t.getStatusIcon() + "\n";
+                    bufferedWriter.append(toWrite);
+                    break;
+                case "D":
+                    toWrite = "deadline / " + t.getDescription() + " / " + t.getDayString() + " / "
+                            + t.getStatusIcon() + "\n";
+                    bufferedWriter.append(toWrite);
+                    break;
+                case "E":
+                    toWrite = "event / " + t.getDescription() + " / " + t.getDayString() + " / "
+                            + t.getStatusIcon() + "\n";
+                    bufferedWriter.append(toWrite);
+                    break;
+                default:
+                    break;
+                }
+            }
+            bufferedWriter.close();
             System.out.println("saved successfully!");
         } catch (FileNotFoundException e) {
             System.out.println("file not found");
