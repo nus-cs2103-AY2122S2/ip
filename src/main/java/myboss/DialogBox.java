@@ -12,10 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -43,7 +40,7 @@ public class DialogBox extends HBox {
 
         dialog.setFont(Font.font("Verdana", 11));
         dialog.setText(text);
-        Circle dpClip = new Circle(50,50,49);
+        Circle dpClip = new Circle(50, 50, 49);
         displayPicture.setClip(dpClip);
         displayPicture.setImage(img);
     }
@@ -61,13 +58,17 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.dialog.setTextAlignment(TextAlignment.RIGHT);
-        db.setStyle("-fx-background-color: #c8c4ca; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;");
+        db.setStyle("-fx-background-color: #c8c4ca; "
+                + "-fx-border-radius: 10 10 10 10; "
+                + "-fx-background-radius: 10 10 10 10;");
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #948d99; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;");
+        db.setStyle("-fx-background-color: #948d99; "
+                + "-fx-border-radius: 10 10 10 10; "
+                + "-fx-background-radius: 10 10 10 10;");
         db.flip();
         return db;
     }

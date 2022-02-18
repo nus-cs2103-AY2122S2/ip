@@ -28,7 +28,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        //dialogContainer.setStyle("-fx-background-color: #948d99;"); //#c8c4ca
     }
 
     public void setMyBoss(MyBoss d) {
