@@ -1,26 +1,37 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
- * Event for duke.task class
+ * Public class for event tasks.
  */
 public class Event extends Task {
-    public LocalDateTime time;
 
-    public Event(String description, LocalDateTime time){
-        super(description);
-        this.time = time;
+    private String eventDuration;
+
+    public Event(String task, String eventDuration) {
+        super(task);
+        this.eventDuration = eventDuration;
     }
 
-    public LocalDateTime getTime(){
-        return this.time;
+    public Event(String status, String task, String eventDuration) {
+        super(task, Objects.equals(status, "1") ? true : false);
+        this.eventDuration = eventDuration;
+    }
+
+    @Override
+    public String getTaskType() {
+        return "E";
+    }
+
+    @Override
+    public Optional<String> getTime() {
+        return Optional.of(eventDuration);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " at " + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[E]" + super.toString() + " (" + eventDuration + ")";
     }
-
 }
