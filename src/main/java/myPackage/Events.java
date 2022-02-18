@@ -10,7 +10,7 @@ public class Events extends Task {
 
     public Events(String description, String date) {
         super(description);
-        isDone = false;
+        this.isDone = false;
         try {
             String[] str = date.split("by ");
             localDate = LocalDate.parse(str[1]);
@@ -55,6 +55,6 @@ public class Events extends Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (this.isDone ? "X" : " ");
     }
 }

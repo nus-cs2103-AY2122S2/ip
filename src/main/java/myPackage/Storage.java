@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -13,6 +14,8 @@ public class Storage {
 
     public static void checkFile() throws IOException {
         try {
+            Path path = Paths.get("data");
+            Files.createDirectories(path);
             File f = new File("data/duke.txt");
             if (!f.createNewFile()) {
                 System.out.println("file created");

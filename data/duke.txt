@@ -1,15 +1,5 @@
-D| |deadline troll |by troll
-D| |deadline lol |by lol
-D| |deadline lol |28
-D| |deadline troll |2019-12-01
-T| |todo lol /by 2019-12-01|
-D| |deadline todo |Jan 2 2009
-T| |todo list|
+T| |todo 2|
+T| |todo 3|
 T| |todo lol|
 T| |todo troll|
-D| |deadline troll |by 02-02-1222
-T| |todo troll /by 40-40-4040|
-D| |deadline troll |by 20-20-1999
-D| |deadline troll |by 123123
-T| |todo troll|
-T| |todo troll|
+D| |deadline lol |by 02-01-2222
