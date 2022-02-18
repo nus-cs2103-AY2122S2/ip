@@ -1,13 +1,12 @@
 package CleeseTest;
 
-import cleese.*;
-
+import cleese.Parser;
+import cleese.Storage;
 import task.TaskList;
-import org.junit.jupiter.api.Test;
 import ui.Ui;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 
 public class CleeseTest {
     private Parser parser = new Parser();
@@ -18,7 +17,7 @@ public class CleeseTest {
     @Test
     public void testListCommand() {
         try {
-            assertEquals(parser.handleCommand("list", taskList,ui,storage),"list" );
+            assertEquals(parser.handleCommand("list", taskList, ui, storage), "list");
         } catch (Exception e) {
             fail();
         }
@@ -26,7 +25,7 @@ public class CleeseTest {
     @Test
     public void testByeCommand() {
         try {
-            assertEquals(parser.handleCommand("bye", taskList,ui,storage),"bye" );
+            assertEquals(parser.handleCommand("bye", taskList, ui, storage), "bye");
         } catch (Exception e) {
             fail();
         }
