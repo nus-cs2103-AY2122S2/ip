@@ -28,6 +28,7 @@ and open the **_Angela_**, and you are good to go.
 2. Download the latest `angela.jar` from [here](https://github.com/khoahre123/ip/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for **_Angela_**.
 4. Double-click the file to start the app. There will be guide for newcomers when **_Angela_** started.
+
 ## Features
 
 ### **_Note about the command format_**
@@ -36,6 +37,7 @@ and open the **_Angela_**, and you are good to go.
 - `time` means when the tasks are happening, and is written with format `/at D/M/YYYY`.
 - `find_date` means the date you want to find tasks, and is written with format `D/M/YYYY`.
 - `keyword` means the keyword that you think the task contain (eg: "hom" in "homework)
+
 ### Viewing help: `help`
 **_Angela_** shows all commands and their respective descriptions to the user.
 This is helpful for beginners and users who forgot the syntax of a command.
@@ -43,6 +45,7 @@ This is helpful for beginners and users who forgot the syntax of a command.
 Format: `help`
 
 _**Expected outcome:**_
+
 ![](HelpCommand.png)
 
 ### View all tasks: `list`
@@ -52,6 +55,7 @@ Hence, you can easily view back what those tasks are and their status simply by 
 Format: `list`
 
 _**Expected outcome:**_
+
 ![](ListCommand.png)
 
 ### Change tasks status: `mark` \ `unmark`
@@ -66,6 +70,7 @@ Example of usage:
 -  `unmark 2`: Mark the second task in the list as **not finished**.
 
 _**Expected outcome:**_
+
 ![](Mark_UnmarkCommand.png)
 
 ### Create todo task: `todo`
@@ -79,6 +84,7 @@ Example of usage:
 - `todo watch lecture`: Create a `todo` task with "watch lecture" as its context.
 
 _**Expected outcome:**_
+
 ![](TodoCommand.png)
 
 ### Create deadline task: `deadline`
@@ -94,6 +100,7 @@ Example of usage:
 "19/2/2022" and have "gacha promo" as its content.
 
 _**Expected outcome:**_
+
 ![](DeadlineCommand.png)
 
 ### Create event: `event`
@@ -109,6 +116,7 @@ at 1/3/2022.
 at 8/3/2022.
 
 _**Expected outcome:**_
+
 ![](EventCommand.png)
 
 ### Delete task: `delete`
@@ -122,7 +130,9 @@ Example of usage:
 - `delete 9`: Delete the ninth task in the list.
 
 _**Expected outcome:**_
+
 ![](DeleteCommand.png)
+
 ### Find all tasks in a date: `date`
 You want to find which deadlines or events that you need to do in tomorrow? Rather than 
 going through every one of them in your memory, you just simply ask **_Angela_** and 
@@ -149,6 +159,7 @@ Example of usage:
 - `find play game`: Find all tasks have "play game" in their description.
 
 _**Expected outcome:**_
+
 ![](FindCommand.png)
 
 ### End the program: `bye`
@@ -159,6 +170,7 @@ store in an external database for future open.
 Format: `bye`
 
 _**Expected outcome:**_
+
 ![](ByeCommand.png)
 
 ## FAQ
