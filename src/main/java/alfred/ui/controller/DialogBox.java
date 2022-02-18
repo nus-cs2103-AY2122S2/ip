@@ -80,7 +80,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Wrapped text and image into DialogBox.
+     * Wraps text and image into DialogBox.
      *
      * @param text Text to be wrapped.
      * @param img  Image to be wrapped.

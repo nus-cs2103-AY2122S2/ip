@@ -2,7 +2,10 @@
 
 ![](Ui.png)
 
-## Features 
+## Table of contents
+[1. Features](#features)
+
+## Features
 
 ### Add and delete tasks
 
