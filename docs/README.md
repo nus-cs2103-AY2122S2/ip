@@ -103,4 +103,4 @@ Update both task description and date
 - TASK_INDEX, TASK_DESC and YYYY-MM-DD cannot be empty.
 
 Example:
-- `update 3  study for quiz /date 2022-05-01`
+- `update 3 study for quiz /date 2022-05-01`
