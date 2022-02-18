@@ -23,8 +23,10 @@ public class Duke {
             storage = new Storage();
             tasks = new TaskList(this.storage.readData());
             parser = new Parser(this.tasks);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (DukeException dukeException) {
+            System.out.println(dukeException.getMessage());
+        } catch (Exception exception) {
+            System.out.println(UI.ERROR_CREATION);
         }
     }
 
@@ -43,8 +45,10 @@ public class Duke {
             } else {
                 return parser.processCommand(command);
             }
-        } catch (Exception e) {
-            return e.getMessage();
+        } catch (DukeException dukeException) {
+            return dukeException.getMessage();
+        } catch (Exception exception) {
+            return UI.ERROR_INVALID;
         }
     }
 }

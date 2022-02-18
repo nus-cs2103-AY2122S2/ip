@@ -15,6 +15,8 @@ public class UI {
     public static final String ERROR_CANNOT_SAVE = "There appears to be an issue,\nwhen saving the data.";
     /** Error message to inform user that file cannot be read. */
     public static final String ERROR_CANNOT_READ = "There appears to be an issue,\nwhen reading the data.";
+    /** Error message to inform user that mike could not be created. */
+    public static final String ERROR_CREATION = "Something went wrong.\nMike cannot be created.";
     /** Error message to inform user that list is empty. */
     public static final String ERROR_EMPTY_LIST = "I don't see any tasks on the list\nYou appear to be a free man!";
     /** Error message to inform user that there is description entered. */
