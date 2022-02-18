@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -32,6 +33,16 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        //Solution below adapted from
+        //https://stackoverflow.com/questions/45258138/round-corners-in-java-fx-pane
+        Rectangle clip = new Rectangle();
+        clip.setWidth(150);
+        clip.setHeight(80);
+        clip.setArcHeight(30);
+        clip.setArcWidth(30);
+        displayPicture.setClip(clip);
+
     }
 
     /**

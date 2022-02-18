@@ -22,4 +22,9 @@ public class Constants {
     public static final List<String> COMMANDS = List.of("list", "bye", "mark", "unmark", "delete",
             "todo", "event", "deadline", "save", "find", "reminder");
 
+    public static final String GREETINGS_GUI = "Hello There, my name is none other than \nDUKE!\n"
+            + "I am a chat bot and I'm here to help you be productive :)\n"
+            + "What can I do for you today?\n";
+    public static final String BYE = "Bye. Hope to see you again soon!\n"
+            + "Let your heart ablaze!\n";
 }

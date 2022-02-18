@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.util.Constants;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainWindow extends AnchorPane {
@@ -28,6 +32,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Constants.GREETINGS_GUI, dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -47,5 +52,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        //Solution below adapted from
+        //https://stackoverflow.com/questions/2258066/java-run-a-function-after-a-specific-number-of-seconds
+
+        if (response.equals(Constants.BYE)) {
+            new Timer().schedule(
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            System.exit(0);
+                        }
+                    }, 5000
+            );
+        }
     }
 }

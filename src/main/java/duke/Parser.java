@@ -32,7 +32,7 @@ public class Parser {
             int taskNum;
             switch(instruction[0]) {
             case "bye":
-                return "BYE";
+                return Constants.BYE;
 
             case "list":
                 response = tasksList.list();

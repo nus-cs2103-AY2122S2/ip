@@ -37,6 +37,6 @@ public class Ui {
      * Prints goodbye message before the app ends.
      */
     public void finalBye() {
-        print("Bye. Hope to see you again soon!");
+        print(Constants.BYE);
     }
 }

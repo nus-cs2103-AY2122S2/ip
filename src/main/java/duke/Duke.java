@@ -3,6 +3,7 @@ package duke;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
+import duke.util.Constants;
 
 /**
  * Main logic of the bot.
@@ -22,6 +23,13 @@ public class Duke {
         this.taskslist = new TasksList();
         this.storage = new Storage();
         this.parser = new Parser();
+
+        try {
+            String response = taskslist.importStorageStrings(storage.importData());
+            ui.print(response);
+        } catch (DukeException e) {
+            ui.print(e.getMessage());
+        }
     }
 
     /**
@@ -44,7 +52,7 @@ public class Duke {
             String instruction = sc.nextLine();
             String log = parser.parse(instruction, taskslist, storage);
             ui.print(log);
-            if (log == "BYE") {
+            if (log.equals(Constants.BYE)) {
                 return;
             }
         }
