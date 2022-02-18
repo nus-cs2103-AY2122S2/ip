@@ -74,18 +74,22 @@ public class TaskList {
      * @param word
      */
     public String find(String word) {
-        boolean hasWord = false;
-        String response = "";
-        for (int i = 0; i < listOfInputs.size(); i++) {
-            if (listOfInputs.get(i).getDescription().contains(word)) {
-                response = response + listOfInputs.get(i).message() + "\n";
-                hasWord = true;
+        if (word.equals(" ") || word.trim().length() < 1) {
+            return "Invalid word, please give an alphabet instead.";
+        } else {
+            boolean hasWord = false;
+            String response = "";
+            for (int i = 0; i < listOfInputs.size(); i++) {
+                if (listOfInputs.get(i).getDescription().contains(word)) {
+                    response = response + listOfInputs.get(i).message() + "\n";
+                    hasWord = true;
+                }
+                if (i == listOfInputs.size() - 1 && !hasWord) {
+                    response = "No task with the word: " + word;
+                }
             }
-            if (i == listOfInputs.size() - 1 && !hasWord) {
-                response = "No task with the word: " + word;
-            }
+            return response;
         }
-        return response;
     }
 
     /**
@@ -190,6 +194,11 @@ public class TaskList {
      * @return delete message
      */
     public String delete(String str) {
+        try {
+            int value = Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return "Please write the NUMBER of task to be deleted. Kindly refer to the list";
+        }
         int currNo = Integer.parseInt(str) - 1;
         try {
             DukeException d = new DukeException();
@@ -198,10 +207,10 @@ public class TaskList {
             System.err.println(e);
             return "You only have " + listOfInputs.size() + " tasks. Please input a number again.";
         }
-            listOfInputs.remove(currNo);
-            Delete deleteTemp = new Delete(listOfInputs.get(currNo).getDescription());
-            String message = deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.";
-            return message;
+        listOfInputs.remove(currNo);
+        Delete deleteTemp = new Delete(listOfInputs.get(currNo).getDescription());
+        String message = deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.";
+        return message;
     }
 
     /**

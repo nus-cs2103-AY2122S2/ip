@@ -74,7 +74,6 @@ public class DukeException extends Exception {
             throw new DukeException("Please format your date as DD/MM/YYYY");
         }
     }
-
     /**
      * @param dateStr
      * @return whether the date is in a valid format
