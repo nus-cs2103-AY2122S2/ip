@@ -1,5 +1,5 @@
 # PokeJournal
-> ""The world's greatest Pokémon Master is waiting for me!" -- Ash Ketchum
+> "The world's greatest Pokémon Master is waiting for me!" -- Ash Ketchum
 
 ## User Guide
 
