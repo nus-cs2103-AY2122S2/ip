@@ -97,6 +97,10 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getGreeting(duke)
+        );
     }
 
     /**
@@ -115,11 +119,6 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         String input = userInput.getText();
-
-        if (input.equals("bye")) {
-            Platform.exit();
-            System.exit(0);
-        }
 
         String response = getResponse(input);
         dialogContainer.getChildren().addAll(

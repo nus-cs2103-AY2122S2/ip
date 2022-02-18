@@ -35,10 +35,10 @@ public class Task {
         if (!isDone) {
             isDone = true;
             return "Nice! I've marked this task as done: \n"
-                    + toString();
+                    + this;
         } else {
             return "This task is already done! \n"
-                    + toString();
+                    + this;
         }
     }
 
@@ -51,10 +51,10 @@ public class Task {
         if (isDone) {
             isDone = false;
             return "OK, I've marked this task as not done yet: \n"
-                    + toString();
+                    + this;
         } else {
             return "This task has not been completed! \n"
-                    + toString();
+                    + this;
         }
     }
 

@@ -9,10 +9,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -35,8 +40,26 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
         displayPicture.setImage(img);
+        Rectangle clip = new Rectangle();
+        clip.setWidth(100.0f);
+        clip.setHeight(100.0f);
+
+        clip.setArcWidth(30);
+        clip.setArcHeight(30);
+        clip.setStroke(Color.BLACK);
+        displayPicture.setClip(clip);
+
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        WritableImage image = displayPicture.snapshot(parameters, null);
+
+        displayPicture.setClip(null);
+        displayPicture.setEffect(new DropShadow(10, Color.BLACK));
+
+
+        dialog.setText(text);
+        displayPicture.setImage(image);
     }
 
     /**
@@ -59,4 +82,10 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    public static DialogBox getGreeting(Image img) {
+        var db = new DialogBox("Hello! I'm Duke. \n" + "How can I be of assistance? \n"
+                + "PS: Enter 'commands' to view all available commands.", img);
+        db.flip();
+        return db;
+    }
 }

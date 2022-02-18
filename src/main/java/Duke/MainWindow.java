@@ -1,6 +1,7 @@
 package duke;
 
 import javafx.application.Platform;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -27,6 +28,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getGreeting(dukeImage)
+        );
     }
 
     public void setTestUi(Duke d) {
@@ -41,9 +45,23 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        if (input.equals("bye")) {
-            Platform.exit();
-            System.exit(0);
+        if (input.toLowerCase().equals("bye")) {
+            Thread thread = new Thread(() -> {
+                Runnable updater = () -> {
+                    Platform.exit();
+                    System.exit(0);
+                };
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println("Error in printing goodbye message");
+                }
+
+                // UI update is run on the Application thread
+                Platform.runLater(updater);
+            });
+            thread.start();
         }
 
         String response = duke.getResponse(input);

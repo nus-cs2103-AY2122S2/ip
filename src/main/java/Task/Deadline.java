@@ -1,7 +1,5 @@
 package task;
 
-import java.util.ArrayList;
-
 public class Deadline extends Task {
 
     protected String by;

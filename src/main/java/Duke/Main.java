@@ -28,12 +28,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void stop() throws IOException, InterruptedException {
-        //System.out.println("For debugging: stop() method called!");
-
-        //Gives time for user to see goodbye message
-        Thread.sleep(10000);
-    }
 }
