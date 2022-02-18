@@ -152,6 +152,24 @@ Output:
 Ok, I will remove this task:
    [T][X] Submit CS2103 Assignment
 ```
+### Save the tasks to external file
+Save your tasks deliberately for future uses
+
+Format:
+
+`save`<br>
+
+Note: The tasks will automatically be saved on every changes. this command serves as a way for the user to deliberately save.
+
+Example
+`save`
+
+Output:
+```aidl
+The following tasks will be saved:
+Here's the list of task!
+1. [T][] coding
+```
 
 ### Get a Simple Reminder of Upcoming Task
 Get a list of upcoming task before a specified time range.
