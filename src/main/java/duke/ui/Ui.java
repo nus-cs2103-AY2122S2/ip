@@ -58,15 +58,15 @@ public class Ui {
     public static String printListCommands() {
         String commandList =
                 "You can use the following commands for Duke \n"
-                 + "\n1, Todo + task name: \n Create todo task \n"
-                + "\n2, Deadline + task name + /date: \n Create deadline task \n"
-                + "\n3, Event + task name + /date ~ date: \n Create event task \n"
-                + "\n4, Find + task index: \n Find task by index from the list \n"
-                + "\n5, Delete + task index: \n Delete task by index from the list \n"
+                 + "\n1, Todo  \"task name\" : \n Create a todo task \n"
+                + "\n2, Deadline  \"task name\"  /\"date\": \n Create a deadline task \n"
+                + "\n3, Event  \"task name\"  / \"date\" ~ \"date\": \n Create an event task \n"
+                + "\n4, Find  \"task index\": \n Find task by index from the list \n"
+                + "\n5, Delete  \"task index\": \n Delete task by index from the list \n"
                 + "\n6, List: \n List out all existing tasks \n"
                 + "\n7, Help: \n List out all commands for Duke \n"
-                + "\n8, Done + task index:  \n Mark the task by index as done. \n"
-                + "\n9, Bye: \n Exist Duke ";
+                + "\n8, Done  \"task index\":  \n Mark the task by index as done. \n"
+                + "\n9, Bye: \n Close application ";
         return commandList;
     }
 
