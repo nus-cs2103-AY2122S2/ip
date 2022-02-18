@@ -1,29 +1,41 @@
-# User Guide
+# **Your Best Friend Pikachu!**
 
-## Features 
+![Alt Text](https://c.tenor.com/9jn_TYgvSyQAAAAC/pikachu-pokemon.gif)
+> #### _"Pika pika!"_
 
-### Feature-ABC
+#### Pikachu helps you keep organised by recording your daily tasks and displaying them on command!
 
-Description of the feature.
+## Table of Contents
+  * [Setup](#setup)
+  * [Features](#features)
+  * [Customisation](#customisation)
 
-### Feature-XYZ
-
-Description of the feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe the action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-Description of the outcome.
-
+## Setup
+1. Download the .jar file [here](https://github.com/jetrz/ip/releases/tag/A-Release).
+2. Open your local terminal and navigate to the folder which you saved the .jar file in, and run the following command:
 ```
-expected output
+java -jar duke.jar
+```
+3. That's it! Have fun with Pikachu!
+
+## Features
+- [x]  To-dos, Deadline and Event task types implemented
+- [x]  Marking tasks as done/not done
+- [x]  Searching for tasks by name
+- [x]  Interactive GUI
+
+## Customisation
+Want to customize your own Pikachu? Modify the following functions in the UI.java file to control what Pikachu says! 
+```java
+public static void printGreeting() {
+    //Your customized greeting here!
+}
+
+public static void printCommands() {
+    //Your customized command list here!
+}
+
+public static void printGoodbye() {
+    //Your customized goodbye here!
+}
 ```
