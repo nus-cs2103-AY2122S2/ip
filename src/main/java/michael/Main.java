@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import michael.gui.MainWindow;
@@ -24,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Michael");
+            stage.getIcons().add(new Image("/images/TitleImg.png"));
             michael = new Michael(stage);
             fxmlLoader.<MainWindow>getController().setMichael(michael);
             stage.show();
