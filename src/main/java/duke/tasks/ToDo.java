@@ -34,8 +34,8 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         assert this.description != null;
-        return this.isDone ? "!!!DONE!!! To do -" + this.description
-                : "Todo - " + this.description;
+        return this.isDone ? "!!!DONE!!! To do - " + this.description
+                : "To do - " + this.description;
     }
 
     @Override

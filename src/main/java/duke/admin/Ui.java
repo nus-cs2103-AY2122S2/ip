@@ -9,7 +9,7 @@ import duke.tasks.Trigger;
  */
 public class Ui {
     private static final Trigger noChangeTrigger = new Trigger("n0 cH4Ng3$ d#t3CtEd");
-    
+
     /**
      * Prints out a welcome message when the user boots the program.
      */
