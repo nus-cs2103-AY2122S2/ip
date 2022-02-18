@@ -95,8 +95,7 @@ unmark <task-number>
 
 Delete the task number, will show the remaining task available.
 
-### `find
-<keyword>` - Find the task that contains the keyword in its description
+### `find <keyword>` - Find the task that contains the keyword in its description
 
 Return list of task that contains the keywords
 
