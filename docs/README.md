@@ -20,9 +20,9 @@
 ## 2. Quick Start
 
 1. Ensure you have Java `11` installed in your computer
-2. Download the latest `ip.jar`
+2. Download the latest `duke.jar` [here](https://github.com/hieunm1821/ip/releases/tag/A-Release)
 3. Copy the file to the folder you want to use as _home folder_ for Duke.
-4. Launch the `jar` file using `java -jar ip.jar` to start the app.
+4. Launch the `jar` file using `java -jar duke.jar` to start the app.
 5. Type the valid command into the chat box.
 
 ## 3. Features 
