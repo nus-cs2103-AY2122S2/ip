@@ -1,6 +1,4 @@
 # Duke
-
-# Duke
 >*"Life can be ~~easier~~ MUCH easier with a good task manager." -- me*
 
 Duke frees your mind of having to remember things you need to do. It's,
