@@ -196,7 +196,7 @@ public class TaskList {
                     if (date != null) {
                         if (date.toString().contains(input)
                                 || date.format(DateTimeFormatter.ofPattern("MMM d yyyy")).contains(input)) {
-                            listBuilder.append(++i).append(".  ").append(task).append("\n");
+                            listBuilder.append(++i).append(". ").append(task).append("\n");
                         }
                     }
                 }

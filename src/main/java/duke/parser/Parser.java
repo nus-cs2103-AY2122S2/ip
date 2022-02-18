@@ -84,7 +84,7 @@ public class Parser {
 
         try {
             Task task;
-            String[] strings = userInput[1].split("/");
+            String[] strings;
 
             if (userInput[1].equals("")) {
                 throw new DukeException("OOPS!!! The description of a " + userInput[0] + " cannot be empty.");
@@ -92,10 +92,13 @@ public class Parser {
 
             switch (type) {
             case DEADLINE:
-                task = new Deadline(strings[0], LocalDate.parse(strings[1].substring(3)));
+                strings = userInput[1].split(" /by ");
+                System.out.println(LocalDate.parse(strings[1]));
+                task = new Deadline(strings[0], LocalDate.parse(strings[1]));
                 break;
             case EVENT:
-                task = new Event(strings[0], LocalDate.parse(strings[1].substring(3)));
+                strings = userInput[1].split(" /at ");
+                task = new Event(strings[0], LocalDate.parse(strings[1]));
                 break;
             case TODO:
                 task = new Todo(userInput[1].strip());
