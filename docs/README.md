@@ -45,13 +45,13 @@ Example of usage: `todo [task description]`
 
 Deadline tasks can be marked and unmarked. They also have a deadline to be completed by.
 
-Example of usage: `deadline [task description] \by [date time]`
+Example of usage: `deadline [task description] /by [date time]`
 
 ### `event` - Creates a Event task for Cleese to track
 
 Event tasks can be marked and unmarked. They also have a time they are scheduled at.
 
-Example of usage: `event [task description] \by [date time]`
+Example of usage: `event [task description] /at [date time]`
 
 ### `find` - Looks for tasks that contain the keyword you are looking for
 
