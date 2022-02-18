@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.InvalidEditException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -87,25 +89,30 @@ public class EditCommand extends Command {
      * @throws DukeException if there were any errors during execution
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (!tasks.containsTask(target)) {
+            throw new InvalidEditException("the task does not exist.");
+        }
+
+        Task targetTask = tasks.getTask(target);
         switch (type) {
         case DESCRIPTION:
-            tasks.getTask(target).editDescription(description);
+            targetTask.editDescription(description);
             break;
         case DATE:
-            tasks.getTask(target).editDate(d);
+            targetTask.editDate(d);
             break;
         case TIME:
-            tasks.getTask(target).editTime(t);
+            targetTask.editTime(t);
             break;
         case DATETIME:
-            tasks.getTask(target).editDateTime(d, t);
+            targetTask.editDateTime(d, t);
             break;
         default:
             throw new DukeException("An error has occurred while executing edit.");
         }
         storage.save(tasks);
 
-        return EXECUTE_PREFIX_MESSAGE + "\n" + tasks.getTask(target);
+        return EXECUTE_PREFIX_MESSAGE + "\n" + targetTask;
     }
 
     @Override
