@@ -105,9 +105,17 @@ public class TaskList {
      * @throws InvalidArgumentException if the pointer is not in valid range.
      */
     public Task markTaskAsDone(int pointer) throws InvalidArgumentException {
-        if (pointer < 0 || pointer > this.size()) {
-            throw new InvalidArgumentException("Invalid pointer: Please enter a value between 1 and "
-                    + size() + ".");
+        if (this.size() == 0) {
+            throw new InvalidArgumentException("There are no tasks to be marked.");
+        }
+
+        if (pointer <= 0 || pointer > this.size()) {
+            if (this.size() == 1) {
+                throw new InvalidArgumentException("Only valid index to be marked is 1.");
+            } else {
+                throw new InvalidArgumentException("Invalid pointer: Please enter a value between 1 and "
+                        + size() + ".");
+            }
         }
         Task task = this.get(pointer - 1);
         task.markAsDone();
@@ -123,9 +131,17 @@ public class TaskList {
      * @throws InvalidArgumentException if the pointer is not in valid range.
      */
     public Task unmarkTaskAsDone(int pointer) throws InvalidArgumentException {
-        if (pointer < 0 || pointer > this.size()) {
-            throw new InvalidArgumentException("Invalid pointer: Please enter a value between 1 and "
-                    + size() + ".");
+        if (this.size() == 0) {
+            throw new InvalidArgumentException("There are no tasks to be unmarked.");
+        }
+
+        if (pointer <= 0 || pointer > this.size()) {
+            if (this.size() == 1) {
+                throw new InvalidArgumentException("Only valid index to be unmarked is 1.");
+            } else {
+                throw new InvalidArgumentException("Invalid pointer: Please enter a value between 1 and "
+                        + size() + ".");
+            }
         }
         Task task = this.get(pointer - 1);
         task.unmarkAsDone();

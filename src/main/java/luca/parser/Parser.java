@@ -28,11 +28,11 @@ public class Parser {
     /** Error message when the event date time format is invalid. */
     private static final String INVALID_EVENT_ERROR_MESSAGE = "Please enter the date and "
             + "start and end times in the following format:\n"
-            + " yyyy-mm-dd HHMM HHMM in the 24 hour format";
+            + " yyyy-mm-dd HHMM HHMM in the 24 hour format.";
 
     /** Error message when the Deadline date time format is invalid. */
     private static final String INVALID_DEADLINE_ERROR_MESSAGE = "Please enter the date/time in "
-            + "the following format:\n yyyy-mm-dd HHMM in the 24 hour format";
+            + "the following format:\n yyyy-mm-dd [HHMM] in the 24 hour format.";
 
     /** Default time given for deadline if not time was inputted. */
     private static final String DEFAULT_DEADLINE_TIME = "T06:00:00";
@@ -188,6 +188,10 @@ public class Parser {
             throw new InvalidArgumentException(":-( OOPS!!! Due date/time of deadline cannot be empty.");
         }
 
+        if (description.equals("")) {
+            throw new InvalidArgumentException(":-( OOPS!!! Description of deadline cannot be empty.");
+        }
+
         assert description.length() > 0 : "Description is missing.";
         assert dateTime != null : "Date and Time is missing.";
 
@@ -239,9 +243,18 @@ public class Parser {
         if (start == null || end == null) {
             throw new InvalidDateTimeFormatException(INVALID_EVENT_ERROR_MESSAGE);
         }
+
         if (!hasFoundKeyword) {
             throw new InvalidArgumentException(":-( OOPS!!! Start-End date/time of event "
                     + "cannot be empty.");
+        }
+
+        if (description.equals("")) {
+            throw new InvalidArgumentException(":-( OOPS!!! Description of event cannot be empty.");
+        }
+
+        if (start.isAfter(end)) {
+            throw new InvalidArgumentException(":-( OOPS!!! Start time cannot be after the end time.");
         }
 
         assert description.length() > 0 : "Description is missing.";
@@ -290,6 +303,34 @@ public class Parser {
         checkCommandLowerBound(tokens.length, COMMON_LOWER_BOUND, "Please enter only one keyword "
                 + "following the find command");
         return new FindCommand(tokens[1]);
+    }
+
+    /**
+     * Parses input tokens and creates a ListCommand.
+     *
+     * @param tokens input tokens to be parsed.
+     * @return ListCommand.
+     * @throws InvalidArgumentException if there are incorrect number of arguments.
+     */
+    private static Command parseListCommand(String[] tokens) throws InvalidArgumentException {
+        if (tokens.length != 1) {
+            throw new InvalidArgumentException("Command \"list\" does not need any other keywords.");
+        }
+        return new ListCommand();
+    }
+
+    /**
+     * Parses input tokens and creates a ExitCommand.
+     *
+     * @param tokens input tokens to be parsed.
+     * @return ExitCommand.
+     * @throws InvalidArgumentException if there are incorrect number of arguments.
+     */
+    private static Command parseExitCommand(String[] tokens) throws InvalidArgumentException {
+        if (tokens.length != 1) {
+            throw new InvalidArgumentException("Command \"bye\" does not need any other keywords.");
+        }
+        return new ExitCommand();
     }
 
     /**
@@ -353,7 +394,7 @@ public class Parser {
         Command command;
         switch (tokens[0]) {
         case "list":
-            command = new ListCommand();
+            command = parseListCommand(tokens);
             break;
         case "mark":
             command = parseMarkCommand(tokens);
@@ -374,7 +415,7 @@ public class Parser {
             command = parseDeleteCommand(tokens);
             break;
         case "bye":
-            command = new ExitCommand();
+            command = parseExitCommand(tokens);
             break;
         case "find":
             command = parseFindCommand(tokens);
