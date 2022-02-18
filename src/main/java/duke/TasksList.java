@@ -89,13 +89,15 @@ public class TasksList {
         response.append(timeIdentifier + "\n");
 
         StringBuilder deadlineString = new StringBuilder();
+        int counter = 1;
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getType() == "Deadline") {
                 assert tasks.get(i) instanceof Deadline;
 
                 Deadline deadline = (Deadline) tasks.get(i);
                 if (deadline.happensBefore(inputNumber, timeIdentifier)) {
-                    deadlineString.append(String.format((i + 1) + ". " + deadline + "\n"));
+                    deadlineString.append(String.format((counter) + ". " + deadline + "\n"));
+                    counter++;
                 }
 
             }
