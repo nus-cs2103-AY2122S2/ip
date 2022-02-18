@@ -22,12 +22,13 @@ public class MainWindow extends AnchorPane {
 
     private MyBoss myBoss;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Student.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/MyBoss.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //dialogContainer.setStyle("-fx-background-color: #948d99;"); //#c8c4ca
     }
 
     public void setMyBoss(MyBoss d) {

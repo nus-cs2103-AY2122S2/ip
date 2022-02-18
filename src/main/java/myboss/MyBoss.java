@@ -51,7 +51,9 @@ public class MyBoss {
                 // fallthrough
             case "delete":
                 int currTaskIndex = Parser.getTaskIndex(userCmdSplit);
-                return getMarkOrDeleteOutput(command, currTaskIndex);
+                String res = getMarkOrDeleteOutput(command, currTaskIndex);
+                storage.updateFile(tasks.getTaskList());
+                return res;
             case "todo":
                 ToDo newToDo = new ToDo(remainingUserInput);
                 return handleAddTask(newToDo);
@@ -100,7 +102,6 @@ public class MyBoss {
         } else if (command.equals("unmark")) {
             return ui.outputUnmarked(currTask);
         } else {
-            storage.updateFile(tasks.getTaskList());
             return ui.outputDeleteTask(tasks.deleteTask(currTaskIndex));
         }
     }

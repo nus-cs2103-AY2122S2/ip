@@ -9,11 +9,11 @@ import java.util.List;
 public class Ui {
     static final String INDENT = "    ";
 
-    static final String UNKNOWN_COMMAND_EXCEPTION_MSG = " OOPS!!! I'm sorry, but I don't know what that means :-(";
-    static final String MISSING_TIME_ARGUMENT_EXCEPTION_MSG = "OOPS!!! Argument after missing /at or /by!!!";
-    static final String MISSING_ARGUMENT_EXCEPTION_MSG = "OOPS!!! I think you're missing some arguments!";
-    static final String WRONG_DATE_FORMAT_EXCEPTION_MSG = "Date must be of format yyyy-mm-dd!";
-    static final String INDEX_OUT_OF_BOUNDS_EXCEPTION_MSG = "OOPS!!! Index out of bounds!";
+    static final String UNKNOWN_COMMAND_EXCEPTION_MSG = "OOPS!!! Someone typed something wrong!";
+    static final String MISSING_TIME_ARGUMENT_EXCEPTION_MSG = "Argument after missing /at or /by!!!";
+    static final String MISSING_ARGUMENT_EXCEPTION_MSG = "You're missing some arguments!";
+    static final String WRONG_DATE_FORMAT_EXCEPTION_MSG = "Date must be of format yyyy-mm-dd! (/ﾟДﾟ)/";
+    static final String INDEX_OUT_OF_BOUNDS_EXCEPTION_MSG = "Index out of bounds!";
     static final String APPEND_TO_FILE_EXCEPTION_MSG = "Error appending task to text file!";
     static final String FILE_NOT_FOUND_EXCEPTION_MSG = "Error file not found!";
     static final String FILE_CREATION_EXCEPTION_MSG = "An Error has occurred with file creation!";
@@ -27,7 +27,7 @@ public class Ui {
      */
     public String outputTaskList(ArrayList<Task> taskList) {
         StringBuilder tempOut = new StringBuilder("");
-        tempOut.append("Here are the tasks in your list:\n");
+        tempOut.append("Here are the tasks you should be doing:\n");
         for (int i = 0; i < taskList.size(); i++) {
             tempOut.append(INDENT).append((i + 1) + ".").append(taskList.get(i).toString());
         }
