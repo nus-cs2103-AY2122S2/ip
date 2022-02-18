@@ -1,0 +1,16 @@
+hi
+todo borrow book
+deadline sell book /by Sunday
+deadline sell book /at 2022-01-01 1800
+deadline sell book /by 2022-01-01 1800
+event get rich /by 2022-04-20 0400
+event get rich /at 2022-04-20 0400
+list
+mark 4
+list
+unmark 4
+delete 4
+delete 4
+delete 4
+list
+bye
