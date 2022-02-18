@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import duke.dukeexceptions.DukeException;
 import duke.parser.Parser;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,8 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-
+import javafx.util.Duration;
 
 
 /**
@@ -128,6 +128,11 @@ public class Main extends Application {
 
     private void handleUserInput() throws DukeException, IOException {
         String userText = userInput.getText();
+        if (userText.equals("bye")) {
+            exitDuke();
+            userInput.clear();
+            return;
+        }
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImg),
@@ -136,6 +141,21 @@ public class Main extends Application {
         userInput.clear();
     }
 
+    /**
+     * exit the application
+     */
+    private void exitDuke() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Bye, See you again! Come visit me again!", dukeImg)
+        );
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.2));
+        Stage stage = (Stage) dialogContainer.getScene().getWindow();
+        pause.setOnFinished(event ->
+                stage.close()
+        );
+        pause.play();
+        return;
+    }
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
