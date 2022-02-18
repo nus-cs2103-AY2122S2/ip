@@ -67,6 +67,10 @@ public class Parser {
                 response = tasksList.deleteTask(taskNum);
                 return response;
 
+            case "reminder":
+                response = tasksList.getTasksUnder(Arrays.asList(instruction));
+                return response;
+
             default:
                 throw new DukeException("Something is wrong!");
             }

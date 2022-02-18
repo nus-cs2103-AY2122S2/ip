@@ -63,6 +63,11 @@ public class Event extends Task {
         return String.format(status + " event " + getName() + " /at " + at);
     }
 
+    @Override
+    public String getType() {
+        return "Event";
+    }
+
     /**
      * Returns text representing the event task for User.
      *

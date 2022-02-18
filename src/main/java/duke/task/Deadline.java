@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Deadline extends Task {
     Deadline(String name, String by) {
         super(name);
         if (isValid(by)) {
-            this.by = LocalDate.parse(by);
+            this.by = LocalDate.parse(by, DateTimeFormatter.ofPattern("d/M/yyyy"));
         } else {
             this.by = LocalDate.now();
         }
@@ -38,11 +39,38 @@ public class Deadline extends Task {
      */
     private Boolean isValid(String date) {
         try {
-            LocalDate.parse(date);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+            LocalDate.parse(date, formatter);
         } catch (DateTimeParseException e) {
+            System.out.println("UNABLE");
             return false;
         }
         return true;
+    }
+
+    public Boolean happensBefore(int inputNumber, String timeIdentifier) throws InvalidArgumentException {
+        if (this.getStatus()) {
+            return false;
+        }
+        int timeMultiplier;
+        switch(timeIdentifier) {
+        case "day":
+        case "days":
+            timeMultiplier = 1;
+            break;
+        case "week":
+        case "weeks":
+            timeMultiplier = 7;
+            break;
+        case "month":
+        case "months":
+            timeMultiplier = 30;
+            break;
+        default:
+            throw new InvalidArgumentException();
+        }
+        int numOfDays = inputNumber * timeMultiplier;
+        return ChronoUnit.DAYS.between(LocalDate.now(), by) <= numOfDays;
     }
 
     /**
@@ -83,6 +111,11 @@ public class Deadline extends Task {
     public String toStorageString() {
         String status = getStatus() ? "X" : ".";
         return String.format(status + " deadline " + getName() + " /by " + by);
+    }
+
+    @Override
+    public String getType() {
+        return "Deadline";
     }
 
     /**

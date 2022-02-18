@@ -115,6 +115,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String getType() {
+        return "Task";
+    }
+
     /**
      * Returns the tasks in text format for storage.
      * The text format follows the initial user input.
