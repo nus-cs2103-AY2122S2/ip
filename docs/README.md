@@ -16,46 +16,39 @@ Organising your tasks will never be easier!
 - `event`
 - `deadline`
 
-
-###List your Tasks
+### List your Tasks
 
 - `list`
 
-
-###Find a Task
+### Find a Task
 
 - `find`
 
-
-###Save all Tasks
+### Save all Tasks
 
 - `save`
 
-
-###Delete a Task
+### Delete a Task
 
 - `delete`
 
-
-###Mark or Un-mark a Task
+### Mark or Un-mark a Task
 
 - `mark`
 - `unmark`
 
-
-###Close Michael
+### Close Michael
 
 - `bye`
 
-
-###In-Application Manual on how to use Michael
+### In-Application Manual on how to use Michael
 
 - `help`
 <hr>
 
 
 ## Usage
-###`todo` - Adds a Todo Task into Michael
+### `todo` - Adds a Todo Task into Michael
 
 Adds a Todo task into the TaskList
 
@@ -72,7 +65,7 @@ Added to your tasks:
 You now have 4 tasks in your list
 ```
 
-###`event` - Adds an Event Task into Michael
+### `event` - Adds an Event Task into Michael
 
 Adds an Event task into the TaskList.
 
@@ -93,7 +86,7 @@ Added to your tasks:
 You now have 5 tasks in your list
 ```
 
-###`deadline` - Adds a Deadline Task into Michael
+### `deadline` - Adds a Deadline Task into Michael
 
 Adds a Deadline task into the TaskList.
 
@@ -114,7 +107,7 @@ Added to your tasks:
 You now have 3 tasks in your list
 ```
 
-###`list` - List out all tasks that are saved to Michael
+### `list` - List out all tasks that are saved to Michael
 
 List out all tasks that are saved to Michael.
 
@@ -129,7 +122,7 @@ OMG IT'S HAPPENING! EVERYBODY STAY CALM!
 3: [T][ ] Meet Jim
 ```
 
-###`find` - Find a Task in Michael
+### `find` - Find a Task in Michael
 
 Find a Task stored in Michael.
 
@@ -147,7 +140,7 @@ OMG IT'S HAPPENING! EVERYBODY STAY CALM!
 2: [D][ ] Buy Jim's Birthday Gift  (by: Nov 11 2022, 23:59)
 ```
 
-###`save` - Save all tasks that are added to Michael
+### `save` - Save all tasks that are added to Michael
 
 Writes all tasks that are added to Michal to a Text file named `michael.txt`
 
@@ -160,7 +153,7 @@ OMG IT'S HAPPENING! EVERYBODY STAY CALM!
 Your Tasks has been saved into your device!
 ```
 
-###`delete` - Delete a Task in Michael
+### `delete` - Delete a Task in Michael
 
 Delete a task with the corresponding task number
 
@@ -178,7 +171,7 @@ You now have 2 tasks in your list
 ```
 
 
-###`mark` - Mark a Task in Michael
+### `mark` - Mark a Task in Michael
 
 Marks a task with the corresponding task number
 
@@ -194,7 +187,7 @@ Nice! I've marked this task as done:
 	[D][X] Buy Jim's Birthday Gift  (by: Nov 11 2022, 23:59)
 ```
 
-###`unmark` - Un-mark a Task in Michael
+### `unmark` - Un-mark a Task in Michael
 
 Un-marks a task with the corresponding task number
 
@@ -210,7 +203,7 @@ Alright, I've marked this task as not done yet:
 	[D][ ] Buy Jim's Birthday Gift  (by: Nov 11 2022, 23:59)
 ```
 
-###`bye` - Closes Michael
+### `bye` - Closes Michael
 
 Closes the program Michael. 
 
@@ -229,10 +222,9 @@ GoodBye! I hope to see you again!
 Please wait as Michael closes!
 ```
 
-###`help` - In-Application Manual to help navigate
+### `help` - In-Application Manual to help navigate
 
 Manual of all the commands that can be used in Michael.
-
 
 Format: `help`
 
