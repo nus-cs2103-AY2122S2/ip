@@ -3,17 +3,16 @@ package seedu.command;
 import java.io.IOException;
 
 import seedu.duke.Storage;
-import seedu.exception.DukeException;
 import seedu.duke.TaskList;
 
-public class ListCommand extends Command {
+public class ListTasksCommand extends Command {
 
-    public ListCommand() {
+    public ListTasksCommand() {
     }
 
     public String run(TaskList tasksList, Storage storage) {
-        assert tasksList != null : "ListCommand->run: Tasks list cannot be null.";
-        assert storage != null : "ListCommand->run: Storage cannot be null.";
+        assert tasksList != null : "ListTasksCommand->run: Tasks list cannot be null.";
+        assert storage != null : "ListTasksCommand->run: Storage cannot be null.";
 
         try {
             storage.write(tasksList.getTaskList());
