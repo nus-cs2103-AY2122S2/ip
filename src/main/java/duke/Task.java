@@ -9,10 +9,18 @@ import java.util.ArrayList;
  */
 class Task {
     protected String description;
+    protected String time;
     protected ArrayList<Boolean> isDone;
 
     public Task(String description) {
         this.description = description;
+        this.isDone = new ArrayList<Boolean>();
+        isDone.add(false);
+    }
+
+    public Task(String description, String time) {
+        this.description = description;
+        this.time = time;
         this.isDone = new ArrayList<Boolean>();
         isDone.add(false);
     }
@@ -83,5 +91,9 @@ class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    public String getTime() {
+        return this.time;
     }
 }

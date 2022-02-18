@@ -18,4 +18,10 @@ class Event extends Task {
     public String getInitial() {
         return "[E]";
     }
+
+    @Override
+    public String getTime() {
+        String timeFormat = "hh:mm AM";
+        return at.substring(at.length() - timeFormat.length());
+    }
 }

@@ -57,7 +57,7 @@ class TaskList {
 
     /**
      * Returns an ArrayList which contains different tasks.
-     * @return the arrayList<Task>
+     * @return an arrayList which contains tasks.
      */
     public ArrayList<Task> getTaskArray() {
         return storage.getList();

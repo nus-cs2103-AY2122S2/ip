@@ -11,11 +11,17 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + "(by: " + by + ")";
     }
 
     @Override
     public String getInitial() {
         return "[D]";
+    }
+
+    @Override
+    public String getTime() {
+        String timeFormat = "hh:mm AM";
+        return by.substring(by.length() - timeFormat.length());
     }
 }

@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -108,9 +109,13 @@ class Parser {
             }
 
         case("find"):
-            String findCondition = "find ";
-            String stringSliced = input.substring(findCondition.length());
+            String stringSliced = parseString(input);
             return ui.showFindMessage(taskList.findTask(stringSliced));
+
+        case("view"):
+            String parsedDate = parseString(input);
+            String convertedDate = convertDate(parsedDate);
+            return ui.showScheduleMessage(taskList, convertedDate);
 
         case("bye"):
             return ui.showGoodbyeMessage();
@@ -162,17 +167,27 @@ class Parser {
         String event = "event ";
         String todo = "todo ";
         String find = "find ";
+        String view = "view ";
+        String deadlineCondition = "/by";
+        String eventCondition = "/at ";
         String output;
         if (input.contains(todo)) {
             output = input.substring(todo.length());
         } else if (input.contains(event)) {
-            output = input.substring(event.length());
+            output = input.substring(event.length(), input.indexOf(eventCondition));
         } else if (input.contains(deadline)) {
-            output = input.substring(deadline.length());
-        } else {
+            output = input.substring(deadline.length(), input.indexOf(deadlineCondition));
+        } else if (input.contains(find)) {
             output = input.substring(find.length());
+        } else {
+            output = input.substring(view.length());
         }
         return output;
+    }
+    public String convertDate(String date) {
+        LocalDate convertedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/y"));
+        String result = convertedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return result;
     }
 
 

@@ -142,6 +142,10 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+        //Reused from https://stackoverflow.com/questions/27334455/
+        // how-to-close-a-stage-after-a-certain-amount-of-time-javafx
+        //with minor modifications
+        //@authors: James_D
         if (input.equals(ui.showGoodbyeMessage())) {
             storage.writeFile();
             PauseTransition delay = new PauseTransition(Duration.seconds(5));

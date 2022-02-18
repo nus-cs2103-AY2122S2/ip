@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 class Ui {
     Ui() {
@@ -32,17 +33,17 @@ class Ui {
     }
 
     public String showFindMessage(ArrayList<Task> taskArray) {
+        String listMessage;
         if (taskArray.isEmpty()) {
-            String listMessage = "There are no matching tasks in your list.";
-            return listMessage;
+            listMessage = "There are no matching tasks in your list.";
         } else {
-            String listMessage = "Here are the matching tasks in your list: \n";
+            listMessage = "Here are the matching tasks in your list: \n";
             for (int i = 0; i < taskArray.size(); i++) {
                 String index = String.valueOf(i + 1);
                 listMessage = listMessage + index + "." + taskArray.get(i) + "\n";
             }
-            return listMessage;
         }
+        return listMessage;
     }
 
     public String showAddedMessage(Task task, String no0fTask) {
@@ -64,6 +65,23 @@ class Ui {
                 + "\n" + "Now you have " + noOfTask
                 + " tasks in the list.";
         return output;
+    }
+
+    public String showScheduleMessage(TaskList taskList, String dateTime) {
+        ArrayList<Task> tasks = taskList.findTask(dateTime);
+        Collections.sort(tasks, new TimeComparator());
+        String listMessage;
+        if (tasks.isEmpty()) {
+            listMessage = "There are no tasks on the day " + dateTime + ".";
+        } else {
+            listMessage = "Your task for the day, " + dateTime + ": \n";
+            for (int i = 0; i < tasks.size(); i++) {
+                String index = String.valueOf(i + 1);
+                listMessage = listMessage + index + "."
+                        + tasks.get(i) + "\n";
+            }
+        }
+        return listMessage;
     }
 
     public String showDeleteError() {
