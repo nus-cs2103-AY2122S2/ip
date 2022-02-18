@@ -5,11 +5,11 @@ import duke.task.TaskList;
 import java.util.LinkedList;
 
 public class CallStack {
-    private static int MAX_CAPACITY;
+    private int maxCapacity;
     private final LinkedList<TaskList> stateStack;
 
     public CallStack(int maxSize) {
-        MAX_CAPACITY = maxSize;
+        maxCapacity = maxSize;
         stateStack = new LinkedList<>();
     }
 
@@ -18,7 +18,7 @@ public class CallStack {
     }
 
     public void pushState(TaskList newState) {
-        if (stateStack.size() == MAX_CAPACITY) {
+        if (stateStack.size() == maxCapacity) {
             stateStack.poll();
         }
         stateStack.push(newState.cloneSelf());
