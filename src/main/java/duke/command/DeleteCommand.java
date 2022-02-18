@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -14,7 +15,7 @@ public class DeleteCommand extends Commands {
     public static final String FAILURE_MESSAGE = "";
 
     private static final boolean IS_EXIT = false;
-    private String arguments; // In the form of user duke.command
+    private final String arguments; // In the form of user duke.command
 
     public DeleteCommand(String arguments) {
         this.arguments = arguments;
@@ -44,11 +45,12 @@ public class DeleteCommand extends Commands {
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            String trimmedArgument = arguments.trim();
-            return new CommandResult(tasks.deletesTask((Integer.parseInt(trimmedArgument) - 1),
-                    storage));
+            String trimmedArgument = Parser.trim(arguments);
+            return new CommandResult(
+                    tasks.deletesTask(Parser.convertBases(Parser.parseToInt(trimmedArgument)), storage));
         } catch (IndexOutOfBoundsException err) {
-            return new CommandResult("    Deleting of tasks unsuccessful due to: " + err);
+            return new CommandResult("Pika, deleting the PokeTask was unsuccessful...\n"
+                    + err);
         }
     }
 }

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +14,7 @@ import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Tasks;
 import duke.task.Todos;
+import duke.ui.Ui;
 
 /**
  * Represents a storage tool in-charge of reading, writing and appendign to the database.
@@ -21,8 +25,40 @@ public class Storage {
     private final String databasePath;
 
     public Storage() {
-        this.databasePath = "C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"
-                + "Individual_Project/src/main/java/duke/data/DukeDatabase.txt";
+        Path dataFolderAbsPath = Paths.get("src/main/java/duke/data");
+        boolean hasDirectoryExist = Files.exists(dataFolderAbsPath);
+        if (!hasDirectoryExist) {
+            new File(dataFolderAbsPath.toAbsolutePath().toString()).mkdir();
+        }
+
+        Path dataAbsPath = Paths.get("src/main/java/duke/data/DukeDatabase.txt");
+        boolean hasDataFileExist = Files.exists(dataAbsPath);
+        if(!hasDataFileExist) {
+            new File(dataAbsPath.toAbsolutePath().toString());
+        }
+
+        this.databasePath = dataAbsPath.toAbsolutePath().toString();
+        //this.databasePath = "C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"+ "Individual_Project/src/main/java/duke/data/DukeDatabase.txt";
+    }
+
+    public void createDatabaseFile() {
+        Path dataFolderAbsPath = Paths.get("src/main/java/duke/data/");
+        boolean hasDirectoryExist = Files.exists(dataFolderAbsPath);
+        if (!hasDirectoryExist) {
+            new File(dataFolderAbsPath.toString()).mkdir();
+        }
+
+        Path dataAbsPath = Paths.get("src/main/java/duke/data/DukeDatabase.txt");
+        boolean hasDataFileExist = Files.exists(dataAbsPath);
+        if(!hasDataFileExist) {
+            new File(dataAbsPath.toString());
+        }
+    }
+
+    public void writeToDatabase(String textToAppend, boolean isAppendOrWrite) throws IOException {
+        FileWriter fw = new FileWriter(databasePath, isAppendOrWrite); // Append instead of rewriting over
+        fw.write(textToAppend);
+        fw.close();
     }
 
     /**
@@ -31,18 +67,16 @@ public class Storage {
      *
      * @param textToAdd Text that will re-write the database.
      * @return a boolean value indicating the success of writing to the database.
-     * @throws FileNotFoundException If database file can not be found.
      */
-    public boolean writesToDatabase(String textToAdd) throws FileNotFoundException {
+    public boolean hasWriteToDatabase(String textToAdd) {
         try {
-            FileWriter fw = new FileWriter(this.databasePath);
-            fw.write(textToAdd);
-            fw.close();
-            return true;
+            writeToDatabase(textToAdd, false);
         } catch (IOException err) {
-            System.out.println("    An unexpected error writing to the database.");
+            createDatabaseFile();
+            Ui.showErrorMessage(err, "writesToDatabase");
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -51,19 +85,16 @@ public class Storage {
      *
      * @param textToAppend Text that will re-write the database.
      * @return a boolean value indicating the success of writing to the database.
-     * @throws FileNotFoundException If database file can not be found.
-     * @throws IOException If writing to the database was unsuccessful.
      */
-    public boolean appendsToDatabase(String textToAppend) throws IOException {
+    public boolean hasAppendToDatabase(String textToAppend) {
         try {
-            FileWriter fw = new FileWriter(databasePath, true); // Append instead of rewriting over
-            fw.write(textToAppend);
-            fw.close();
-            return true;
+            writeToDatabase(textToAppend, true);
         } catch (IOException err) {
-            System.out.println("    An unexpected error appending to the database file.");
+            createDatabaseFile();
+            Ui.showErrorMessage(err, "textToAppend");
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -72,44 +103,34 @@ public class Storage {
      * else it returns one that is empty.
      *
      * @return an arraylist with all the Tasks stored in the database.
-     * @throws FileNotFoundException if database file cannot be found.
      */
     ArrayList<Tasks> returnsAllTasks() throws FileNotFoundException {
         ArrayList<Tasks> taskList = new ArrayList<Tasks>();
-        try {
-            File f = new File(databasePath);
-            Scanner sc = new Scanner(f);
-
-            while (sc.hasNextLine()) {
-                String taskData = sc.nextLine();
-                String[] taskDataSplit = taskData.split(" \\| ");
-
-                switch (taskDataSplit[0]) {
-                case "T":
-                    taskList.add(new Todos(taskDataSplit[2],
-                            taskDataSplit[1].equals("X")));
-                    break;
-
-                case "E":
-                    taskList.add(new Events(taskDataSplit[2],
-                            taskDataSplit[1].equals("X"),
-                                    taskDataSplit[3]));
-                    break;
-
-                case "D":
-                    taskList.add(new Deadlines(taskDataSplit[2],
-                            taskDataSplit[1].equals("X"),
-                                    taskDataSplit[3]));
-                    break;
-
-                default:
-                    break;
-                }
+        File databaseFile = new File(databasePath);
+        Scanner sc = new Scanner(databaseFile);
+        while (sc.hasNextLine()) {
+            String taskData = sc.nextLine();
+            String[] taskDataSplit = taskData.split(" \\| ");
+            switch (taskDataSplit[0]) {
+            case "T":
+                taskList.add(new Todos(taskDataSplit[2],
+                        taskDataSplit[1].equals("X")));
+                break;
+            case "E":
+                taskList.add(new Events(taskDataSplit[2],
+                        taskDataSplit[1].equals("X"),
+                        taskDataSplit[3]));
+                break;
+            case "D":
+                taskList.add(new Deadlines(taskDataSplit[2],
+                        taskDataSplit[1].equals("X"),
+                        taskDataSplit[3]));
+                break;
+            default:
+                break;
             }
-            sc.close();
-        } catch (FileNotFoundException err) {
-            System.out.println("    The database got corrupted by unrecognisable file formats.");
         }
+        sc.close();
         return taskList;
     }
 
@@ -120,16 +141,14 @@ public class Storage {
      * else it returns one that is empty.
      *
      * @return an arraylist with all the Tasks stored in the database.
-     * @throws FileNotFoundException if database file cannot be found.
      */
-    public ArrayList<Tasks> load() throws FileNotFoundException {
-        ArrayList<Tasks> taskList = new ArrayList<Tasks>();
+    public ArrayList<Tasks> load() {
         try {
-            taskList.addAll(returnsAllTasks());
-        } catch (FileNotFoundException error) {
-            System.out.println("    Database loading failed.");
+            return new ArrayList<Tasks>(returnsAllTasks());
+        } catch (FileNotFoundException err) {
+            new Ui().showErrorMessage(err, "load");
+            return new ArrayList<Tasks>();
         }
-        return taskList;
     }
 
     public String getDatabasePath() {
