@@ -1,6 +1,9 @@
-package duke.tasks;
+package duke.task;
 
 import org.junit.jupiter.api.Test;
+
+import duke.tasks.Deadlines;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -9,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeadlineTest {
     @Test
     public void testDeadlines() {
-        assertEquals("[D][ ] finish assignment (by: Jan 1st)", new Deadline("finish assignemnt", "Jan 1st").toString());
+        assertEquals("[D][ ] finish assignment (by: Jan 1st)",
+                new Deadlines("finish assignemnt", "Jan 1st").toString());
     }
 }

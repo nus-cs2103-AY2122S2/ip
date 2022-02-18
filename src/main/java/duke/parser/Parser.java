@@ -193,7 +193,7 @@ public class Parser {
 
             return "event";
         } else if (command[0].equals("todo")) {
-            // here we declare the new task to be added (TODO)
+            // here we declare the new task to be added (todos)
             if (command.length == 1) {
                 DukeException e = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 System.out.println(LINE_BREAK);

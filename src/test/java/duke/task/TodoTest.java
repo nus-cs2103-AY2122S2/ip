@@ -1,6 +1,9 @@
-package duke.tasks;
+package duke.task;
 
 import org.junit.jupiter.api.Test;
+
+import duke.tasks.ToDos;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -9,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TodoTest {
     @Test
     public void testStringResult() {
-        assertEquals("[T][ ] go for lunch", new Todo("go for lunch").toString());
+        assertEquals("[T][ ] go for lunch", new ToDos("go for lunch").toString());
     }
 
 }
