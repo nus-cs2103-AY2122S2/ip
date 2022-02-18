@@ -9,6 +9,10 @@ public class DurationCommand extends DescriptionCommand {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
+    /**
+     *
+     * @return date time of a task
+     */
     public LocalDateTime getStartTime() {
         return startTime;
     }

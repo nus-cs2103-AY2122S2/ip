@@ -6,45 +6,49 @@ import duke.utils.Pair;
 
 import java.time.LocalDateTime;
 
-
 /**
  * class for parse user's input
  */
 public class CommandParser implements Parser<TypeCommand> {
-    private static final String TIME_DELIMITER = "/";
+    private static final String TIME_SPLITTER = "/";
     private String input;
 
     public CommandParser(String input) {
         this.input = input;
     }
 
+    /**
+     * Method to determine what type of command user input
+     * @return TypeCommand
+     * @throws DukeException
+     */
     @Override
     public TypeCommand parse() throws DukeException {
-        String[] commandAndRest = input.trim().split("\\s+", 2);
-        assert commandAndRest.length > 0 : "the command is empty";
-        String command = commandAndRest[0];
+        String[] commandUserInput = input.trim().split("\\s+", 2);
+        assert commandUserInput.length > 0 : "the command is null";
+        String command = commandUserInput[0];
 
         for (Command commandType : Command.values()) {
             if (commandType.matchPattern(command)) {
                 switch (commandType) {
                     case EXIT:
-                        return handleSimpleMetaCommand(Command.EXIT);
+                        return handleSimpleCommand(Command.EXIT);
                     case LIST:
-                        return handleSimpleMetaCommand(Command.LIST);
+                        return handleSimpleCommand(Command.LIST);
                     case DONE:
-                        return handleNumberContentMetaCommand(Command.DONE, commandAndRest);
+                        return handleNumberContentCommand(Command.DONE, commandUserInput);
                     case TODO:
-                        return handleContentMetaCommand(Command.TODO, commandAndRest);
+                        return handleContentCommand(Command.TODO, commandUserInput);
                     case DEADLINE:
-                        return handleTimeMetaCommand(Command.DEADLINE, commandAndRest);
+                        return handleTimeCommand(Command.DEADLINE, commandUserInput);
                     case EVENT:
-                        return handleDurationMetaCommand(Command.EVENT, commandAndRest);
+                        return handleDurationCommand(Command.EVENT, commandUserInput);
                     case DELETE:
-                        return handleNumberContentMetaCommand(Command.DELETE, commandAndRest);
+                        return handleNumberContentCommand(Command.DELETE, commandUserInput);
                     case FIND:
-                        return handleContentMetaCommand(Command.FIND, commandAndRest);
+                        return handleContentCommand(Command.FIND, commandUserInput);
                     case HELP:
-                        return handleSimpleMetaCommand(Command.HELP);
+                        return handleSimpleCommand(Command.HELP);
                     default:
                         break;
                 }
@@ -53,104 +57,113 @@ public class CommandParser implements Parser<TypeCommand> {
         throw new InvalidCommandException(command);
     }
 
-    private TypeCommand handleSimpleMetaCommand(Command type) {
-        TypeCommand mc = new TypeCommand();
-        mc.setType(type);
-        return mc;
+    /**
+     * @param type command input
+     * @return type of the command
+     */
+    private TypeCommand handleSimpleCommand(Command type) {
+        TypeCommand command = new TypeCommand();
+        command.setType(type);
+        return command;
     }
 
-    private TypeCommand handleContentMetaCommand(Command type, String[] input) throws DukeException {
-        DescriptionCommand cmc = new DescriptionCommand();
-        cmc.setType(type);
+    /**
+     *
+     * @param type type of a task
+     * @param input user input command
+     * @return command
+     * @throws DukeException if command not specified
+     */
+    private TypeCommand handleContentCommand(Command type, String[] input) throws DukeException {
+        DescriptionCommand command = new DescriptionCommand();
+        command.setType(type);
         try {
-            cmc.setDescription(input[1]);
+            command.setDescription(input[1]);
         } catch (IndexOutOfBoundsException e) {
             switch (type) {
                 case TODO:
-                    throw new EmptyCommandException("Description cannot be null", "Todo");
+                    throw new EmptyCommandException("cannot be null!", "Todo");
                 case FIND:
-                    throw new EmptyCommandException("no query body", "FIND");
+                    throw new EmptyCommandException("cannot be null!", "Find");
                 default:
                     throw new DukeException("unspecified exception");
             }
         }
-        return cmc;
+        return command;
     }
 
-    private TypeCommand handleNumberContentMetaCommand(Command type, String[] input) throws DukeException {
-        DescriptionCommand cmc = new DescriptionCommand();
-        cmc.setType(type);
+    /**
+     *
+     * @param type command type
+     * @param input user input
+     * @return type of the command
+     * @throws DukeException when time not specified for a task
+     */
+    private TypeCommand handleNumberContentCommand(Command type, String[] input) throws DukeException {
+        DescriptionCommand command = new DescriptionCommand();
+        command.setType(type);
         try {
             String idxStr = input[1].trim();
-            //make sure the content is in the correct format
-            int idx = Integer.parseInt(idxStr);
-            cmc.setDescription(idxStr);
+            command.setDescription(idxStr);
         } catch (IndexOutOfBoundsException e) {
             switch (type) {
                 case DELETE:
-                    throw new NoTaskTypeException("task to deletion not specified", "DELETE");
+                    throw new NoTaskTypeException("deletion not specified", "DELETE");
                 case DONE:
-                    throw new NoTaskTypeException("task to be done not specified", "DONE");
+                    throw new NoTaskTypeException("done not specified", "DONE");
                 default:
                     throw new DukeException("unspecified exception");
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Content of the command is not valid. Should be in the form of integer");
+            throw new DukeException("Content is not valid.");
         }
-        return cmc;
+        return command;
     }
 
-    private TypeCommand handleTimeMetaCommand(Command command, String[] input) throws DukeException {
-        TimeCommand tmc = new TimeCommand();
-        tmc.setType(command);
-        String[] splitContent;
-        //set content
+    private TypeCommand handleTimeCommand(Command command, String[] input) throws DukeException {
+        TimeCommand timeCommand = new TimeCommand();
+        timeCommand.setType(command);
+        String[] breakCommand;
         try {
-            String content = input[1].trim();
-            splitContent = content.split(TIME_DELIMITER, 2);
-            tmc.setDescription(splitContent[0]);
-            if (content.isEmpty()) {
+            String description = input[1].trim();
+            breakCommand = description.split(TIME_SPLITTER, 2);
+            timeCommand.setDescription(breakCommand[0]);
+            if (description.isEmpty()) {
                 throw new IndexOutOfBoundsException();
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new EmptyCommandException("Description cannot be null", "Deadline");
+            throw new EmptyCommandException("cannot be null!", "Deadline");
         }
-
-        //set time
         try {
-            LocalDateTime date = new DateParser(splitContent[1]).parse();
-            tmc.setTime(date);
+            LocalDateTime date = new DateParser(breakCommand[1]).parse();
+            timeCommand.setTime(date);
         } catch (IndexOutOfBoundsException e) {
-            throw new NoTimeException("The time cannot be empty", "Duke.Deadline");
+            throw new NoTimeException("The time cannot be empty!", "Deadline");
         }
-        return tmc;
+        return timeCommand;
     }
 
-    private TypeCommand handleDurationMetaCommand(Command command, String[] input) throws DukeException {
-        DurationCommand dmc = new DurationCommand();
-        dmc.setType(command);
+    private TypeCommand handleDurationCommand(Command command, String[] input) throws DukeException {
+        DurationCommand durationCommand = new DurationCommand();
+        durationCommand.setType(command);
         String[] splitInput;
-        //set content
         try {
-            String content = input[1].trim();
-            splitInput = content.split(TIME_DELIMITER, 2);
-            if (content.isEmpty()) {
+            String description = input[1].trim();
+            splitInput = description.split(TIME_SPLITTER, 2);
+            if (description.isEmpty()) {
                 throw new IndexOutOfBoundsException();
             }
-            dmc.setDescription(splitInput[0]);
+            durationCommand.setDescription(splitInput[0]);
         } catch (IndexOutOfBoundsException e) {
-            throw new EmptyCommandException("Description cannot be null", "Event");
+            throw new EmptyCommandException("Description cannot be empty!", "Event");
         }
-
-        //set start and end time
         try {
             Pair<LocalDateTime, LocalDateTime> duration = new DurationParser(splitInput[1]).parse();
-            dmc.setStartTime(duration.getFirst());
-            dmc.setEndTime(duration.getSecond());
+            durationCommand.setStartTime(duration.getFirst());
+            durationCommand.setEndTime(duration.getSecond());
         } catch (IndexOutOfBoundsException e) {
-            throw new NoTimeException("The time cannot be empty", "Event");
+            throw new NoTimeException("The time cannot be null!", "Event");
         }
-
-        return dmc;
+        return durationCommand;
     }
 }

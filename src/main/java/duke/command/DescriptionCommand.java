@@ -6,6 +6,10 @@ package duke.command;
 public class DescriptionCommand extends TypeCommand {
     private String description;
 
+    /**
+     *
+     * @return description of a task
+     */
     public String getDescription() {
         return description;
     }

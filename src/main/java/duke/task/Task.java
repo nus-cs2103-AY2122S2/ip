@@ -49,7 +49,7 @@ public class Task {
         if (this.status) {
             return '\u2705';
         } else {
-            return '\u26cc';
+            return '\u274c';
         }
     }
 }

@@ -1,9 +1,8 @@
 package duke.controller;
 
-import duke.exception.DukeException;
 import duke.ui.Markdown;
-import duke.ui.ValidText;
 import duke.ui.Tag;
+import duke.ui.ValidText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +16,12 @@ public class MarkdownParser implements Parser<List<Markdown>> {
         this.string = string;
     }
 
+    private boolean hasTag(String str) {
+        return str.contains(Tag.START_PATTERN) && str.contains(Tag.END_PATTERN);
+    }
+
     @Override
-    public List<Markdown> parse() throws DukeException {
+    public List<Markdown> parse()  {
         List<Markdown> result = new ArrayList<>();
         String parsedStr = this.string;
         while (hasTag(parsedStr)) {
@@ -40,7 +43,5 @@ public class MarkdownParser implements Parser<List<Markdown>> {
         return result;
     }
 
-    private boolean hasTag(String str) {
-        return str.contains(Tag.START_PATTERN) && str.contains(Tag.END_PATTERN);
-    }
+
 }

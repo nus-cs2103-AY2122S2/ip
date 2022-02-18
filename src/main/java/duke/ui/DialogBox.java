@@ -57,7 +57,6 @@ public class DialogBox extends HBox {
         dialog.setMinHeight(Label.USE_PREF_SIZE);
         dialog.setLineSpacing(2);
         timeStamp.setText(duke.utils.HelperFunction.getTime());
-        //move to fxml
         displayPicture.setRadius(20);
         displayPicture.setFill(new ImagePattern(img));
 

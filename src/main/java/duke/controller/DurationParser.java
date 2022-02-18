@@ -10,31 +10,30 @@ import java.time.LocalTime;
 
 
 public class DurationParser implements Parser<Pair<LocalDateTime, LocalDateTime>> {
-    private static final String DURATION_DELIMITER = "~";
-    private static final String TIME_DELIMITER = ":";
-    private String duration;
+    public static final String DURATION_SYMBOL = "~";
+    public static final String TIME_SYMBOL = ":";
+    public String duration;
 
     public DurationParser(String duration) {
         this.duration = duration;
     }
-
+    private boolean checkTimeFormat(String strTime) {
+        return strTime.matches("^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$");
+    }
     @Override
     public Pair<LocalDateTime, LocalDateTime> parse() throws DukeException {
 
-        String[] splitDuration = duration.split(DURATION_DELIMITER);
+        String[] splitDuration = duration.split(DURATION_SYMBOL);
         try {
             LocalDateTime startTime = new DateParser(splitDuration[0].trim()).parse();
             String endTimeInput = splitDuration[1].trim();
             LocalDateTime endTime;
-
-            //handle if end time only contains time
             if (checkTimeFormat(endTimeInput)) {
-                //it always works, because the startTime is in the standard format
-                String[] splitTime = endTimeInput.split(TIME_DELIMITER);
+                String[] splitTime = endTimeInput.split(TIME_SYMBOL);
                 int hour = Integer.parseInt(splitTime[0]);
                 int minute = Integer.parseInt(splitTime[1]);
                 endTime = startTime.with(LocalTime.of(hour, minute));
-            } else { //when the end date time is specified
+            } else {
                 endTime = new DateParser(endTimeInput).parse();
             }
 
@@ -49,9 +48,4 @@ public class DurationParser implements Parser<Pair<LocalDateTime, LocalDateTime>
     }
 
 
-    private boolean checkTimeFormat(String time) {
-        //solutions below adapted from
-        // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s06.html
-        return time.matches("^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$");
-    }
 }
