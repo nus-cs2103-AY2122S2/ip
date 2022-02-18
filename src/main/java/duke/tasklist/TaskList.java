@@ -1,14 +1,9 @@
 package duke.tasklist;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.storage.Storage;
-import duke.task.Deadlines;
-import duke.task.Events;
 import duke.task.Tasks;
-import duke.task.Todos;
 import duke.ui.Ui;
 
 /**
@@ -77,25 +72,25 @@ public class TaskList {
      * @return returns a boolean value of the success of adding a task
      */
     public String addsTask(Tasks task, Storage storage) {
-        if (storage.hasAppendToDatabase(task.toDatabaseString())){
+        if (storage.hasAppendToDatabase(task.toDatabaseString() + "\n")){
             return Ui.returnAddTaskRes(task.toString(), Boolean.TRUE);
         }
         return Ui.returnAddTaskRes(task.toString(), Boolean.FALSE);
     }
 
     private String listInDataFormat(ArrayList<Tasks> edittedTasksList){
-        StringBuilder tasksToDataFormat = new StringBuilder("");
+        StringBuilder tasksToDataFormat = new StringBuilder();
         for (int i = 0; i < edittedTasksList.size(); i++) {
-            tasksToDataFormat.append(edittedTasksList.get(i).toDatabaseString());
+            tasksToDataFormat.append(edittedTasksList.get(i).toDatabaseString()).append("\n");
         }
         return tasksToDataFormat.toString();
     }
 
     private String listInPrintFormat(ArrayList<Tasks> edittedTasksList){
-        StringBuilder tasksToDataFormat = new StringBuilder("");
+        StringBuilder tasksToDataFormat = new StringBuilder();
         for (int i = 0; i < edittedTasksList.size(); i++) {
             tasksToDataFormat.append("   ").append(i+ONE_BASEDINDEX).append(". ")
-                    .append(edittedTasksList.get(i).toString());
+                    .append(edittedTasksList.get(i).toString()).append("\n");
         }
         return tasksToDataFormat.toString();
     }
@@ -115,7 +110,7 @@ public class TaskList {
             return Ui.returnIndexErrorRes();
         }
 
-        ArrayList<Tasks> newList = new ArrayList<Tasks>(taskList);
+        ArrayList<Tasks> newList = new ArrayList<>(taskList);
         Tasks editTask = newList.get(taskIndexToMark);
         if (taskCompletion) {
             newList.set(taskIndexToMark, editTask.completeTask());
@@ -128,12 +123,13 @@ public class TaskList {
             return Ui.returnEditTaskRes(newList.get(taskIndexToMark).toString(), Boolean.TRUE);
         }
         return Ui.returnEditTaskRes("", Boolean.FALSE);
-        /*if (storage.hasWriteToDatabase(sb1.toString())) {
-            this.taskList.clear();
-            this.taskList.addAll(newList);
-        }*/
     }
 
+    private ArrayList<Tasks> removeTaskFromList(ArrayList<Tasks> taskListToEdit, int taskIndex) {
+        ArrayList<Tasks> duplicateList = new ArrayList<>(taskListToEdit);
+        duplicateList.remove(taskIndex);
+        return duplicateList;
+    }
     /**
      * This method helps to facilitate the deletion of a task. If this is
      * successful in deleting the task, a boolean value of true will be returned. Else,
@@ -143,34 +139,48 @@ public class TaskList {
      * @param storage Storage that facilitate writing of Task into the database
      * @return a boolean value indicative of the success of marking a task
      */
-    public String deletesTask(int taskIndexToDelete, Storage storage) {
+    private String deletesTask(int taskIndexToDelete, ArrayList<Tasks> taskListToEdit, Storage storage) {
         boolean isIndexOutOfBound = taskIndexToDelete > fileContentCounterZeroed();
         if (isIndexOutOfBound) {
-            return Ui.returnIndexErrorRes();
+            return Ui.returnDeleteTaskError(taskIndexToDelete);
         }
 
-        ArrayList<Tasks> newList = new ArrayList<Tasks>(taskList);
-        System.out.println(listInPrintFormat(newList));
-        System.out.println(listInDataFormat(newList));
-        Tasks deletedTask = newList.get(taskIndexToDelete);
-        newList.remove(taskIndexToDelete);
+        ArrayList<Tasks> duplicateList = new ArrayList<>(taskListToEdit);
+        Tasks deletedTask = duplicateList.get(taskIndexToDelete);
+        ArrayList<Tasks> edittedTaskList = removeTaskFromList(duplicateList, taskIndexToDelete);
 
-        System.out.println(listInPrintFormat(newList));
-        System.out.println(listInDataFormat(newList));
-        if (storage.hasWriteToDatabase(listInDataFormat(newList))) {
-            return Ui.returnDeleteTaskRes(deletedTask.toString(), true);
-//          this.taskList.clear();
-//          this.taskList.addAll(newList);
+        if (storage.hasWriteToDatabase(listInDataFormat(edittedTaskList))) {
+            return Ui.returnDeleteTaskRes(deletedTask.toString(), Boolean.TRUE);
         }
         return Ui.returnDeleteTaskRes("", Boolean.FALSE);
+    }
+
+    public String deleteTaskHandler(int[] taskIndicesToDelete, Storage storage) {
+        if (arrayCounter(taskIndicesToDelete) <= 0) {
+            return Ui.returnNoTaskRes();
+        }
+
+        ArrayList<Tasks> duplicateTaskList = new ArrayList<>(taskList);
+        Arrays.sort(taskIndicesToDelete);
+        String collatedStatus = "";
+        if (arrayCounter(taskIndicesToDelete) == 1) {
+            collatedStatus += deletesTask(taskIndicesToDelete[0], duplicateTaskList, storage);
+            return Ui.returnDeleteHandlerRes(collatedStatus);
+        }
+
+        for (int i = arrayCounter(taskIndicesToDelete) - ONE_BASEDINDEX; i>=0; i--) {
+            collatedStatus += deletesTask(taskIndicesToDelete[i], duplicateTaskList, storage);
+            duplicateTaskList = storage.load();
+        }
+        return Ui.returnDeleteHandlerRes(collatedStatus);
     }
 
     public String listsTask() {
         return Ui.returnListTaskRes(listInPrintFormat(taskList));
     }
 
-    private int fileContentCounter() {
-        return taskList.size();
+    private int arrayCounter(int[] array) {
+        return array.length;
     }
 
     private int fileContentCounterZeroed() {

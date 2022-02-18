@@ -25,8 +25,32 @@ public class Parser {
         return Integer.parseInt(input);
     }
 
+    public static int[] parseToIntArray(String[] input) {
+        int[] parsedArray = new int[input.length];
+        if (parsedArray.length < 1) {
+            return parsedArray;
+        }
+
+        for (int i = 0; i < input.length; i++) {
+            parsedArray[i] = Integer.parseInt(input[i].trim());
+        }
+        return parsedArray;
+    }
+
     public static Integer convertBases(Integer input) {
         return input - 1;
+    }
+
+    public static int[] massConvertBases(int[] input) {
+        int[] newBaseArray = new int[input.length];
+        if (input.length < 1) {
+            return newBaseArray;
+        }
+
+        for (int i = 0; i < input.length; i++) {
+            newBaseArray[i] = input[i] - 1;
+        }
+        return newBaseArray;
     }
 
     public static String[] splitString(String input, String condition, Integer limit) {
