@@ -34,7 +34,7 @@ checkstyle {
 }
 
 application {
-    mainClassName = "Jeff"
+    mainClassName = "jeff.main.Launcher"
 }
 
 shadowJar {
