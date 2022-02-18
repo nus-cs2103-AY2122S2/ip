@@ -15,8 +15,13 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    // Images path.
     private static final String PC_PRINCIPAL_IMAGE_FILE = "/image/pcPrincipal.png";
     private static final String CARTMAN_IMAGE_FILE = "/image/cartman.png";
+    private static final String WELCOME_MESSAGE = "Hello bruh! I'm PC Principal! How can i be of service!";
+    // Error messages.
+    private static final String DUKE_NOT_FOUND = "Duke image file not found!";
+    private static final String DUKE_NULL = "Duke is null";
 
     @FXML
     private ScrollPane scrollPane;
@@ -29,7 +34,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private Image pcPrincipalImage;
-    private Image cartmanImage;
+
 
     /**
      * Initialize the main window fxml.
@@ -38,15 +43,17 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         InputStream pcPrincipalInputStream = this.getClass().getResourceAsStream(PC_PRINCIPAL_IMAGE_FILE);
         InputStream cartmanInputStream = this.getClass().getResourceAsStream(CARTMAN_IMAGE_FILE);
-        assert pcPrincipalInputStream != null : "Duke image file not found!";
-        assert cartmanInputStream != null : "User image file not found";
+        assert pcPrincipalInputStream != null : DUKE_NOT_FOUND;
         pcPrincipalImage = new Image(pcPrincipalInputStream);
-        cartmanImage = new Image(cartmanInputStream);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // Create a welcome dialogue when duke starts.
+        dialogContainer.getChildren().add(
+                ResponseDialogBox.getDukeDialog(WELCOME_MESSAGE, pcPrincipalImage)
+        );
     }
 
     public void setDuke(Duke d) {
-        assert d != null : "Duke is null";
+        assert d != null : DUKE_NULL;
         duke = d;
     }
 
@@ -59,8 +66,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.runCommand(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, cartmanImage),
-                DialogBox.getDukeDialog(response, pcPrincipalImage)
+                UserDialogBox.getUserDialog(input),
+                ResponseDialogBox.getDukeDialog(response, pcPrincipalImage)
         );
         userInput.clear();
     }
