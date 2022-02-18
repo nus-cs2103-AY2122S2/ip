@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -50,13 +51,16 @@ public class TaskList {
     public String addDdl(String taskInfo) {
         int i = taskInfo.indexOf(" /by ");
         if (i > 0 && i + 5 < taskInfo.length()) {
-            Deadline t = new Deadline(
-                    taskInfo.substring(0, i).trim(),
-                    LocalDate.parse(taskInfo.substring(i + 5).trim()));
-            tasks.add(t);
-            return addMessage();
+            try {
+                LocalDate time = LocalDate.parse(taskInfo.substring(i + 5).trim());
+                Deadline deadline = new Deadline(taskInfo.substring(0, i).trim(), time);
+                tasks.add(deadline);
+                return addMessage();
+            } catch (DateTimeParseException e) {
+                throw new DukeException("The description of a deadline should be \"<task> /by yyyy-mm-dd\".");
+            }
         } else {
-            throw new DukeException("The description of a deadline should be \"<task> /by <time>\".");
+            throw new DukeException("The description of a deadline should be \"<task> /by yyyy-mm-dd\".");
         }
     }
 
@@ -69,10 +73,10 @@ public class TaskList {
     public String addEvt(String taskInfo) {
         int i = taskInfo.indexOf(" /at ");
         if (i > 0 && i + 5 < taskInfo.length()) {
-            Event t = new Event(
+            Event event = new Event(
                     taskInfo.substring(0, i).trim(),
                     taskInfo.substring(i + 5).trim());
-            tasks.add(t);
+            tasks.add(event);
             return addMessage();
         } else {
             throw new DukeException("The description of an event should be \"<task> /at <time>\".");
