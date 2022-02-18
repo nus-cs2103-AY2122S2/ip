@@ -11,13 +11,13 @@ Luca is a chat bot that helps users manage their tasks. It is optimized for user
 
 ## Features
 ### Adding a todo task: `todo`
-Creates and tracks a todo task.
-Format: `todo DESCRIPTION`
+Creates and tracks a todo task.  
+Format: `todo DESCRIPTION`  
 Example: `todo read Da Vinci Code`
 
 
 ### Adding a deadline task: `deadline`
-Creates and tracks a deadline task.
+Creates and tracks a deadline task.  
 Format: `deadline DESCRIPTION /by yyyy-mm-dd [HHMM]`
 -  input time must be in 24-hour format (e.g `2359`  is 11:59 pm)
 
@@ -26,7 +26,7 @@ Examples:
 - `deadline submit assignment 2022-02-24 2359`
 
 ### Adding a event task: `event`
-Creates and tracks an event task.
+Creates and tracks an event task.  
 Format: `event DESCRIPTION /by yyyy-mm-dd HHHMM HHMM`
 - input time must be in 24-hour format
 - both start and end times are required
@@ -35,19 +35,19 @@ Format: `event DESCRIPTION /by yyyy-mm-dd HHHMM HHMM`
 Example: `event team meeting 2022-02-26 1800 1700`
 
 ### Listing all tasks: `list`
-Lists out all the recorded tasks.
+Lists out all the recorded tasks.  
 Format: `list`
 
 ### Deleting a task: `delete`
-Deletes a task that is being tracked:
-Format: `delete INDEX`
+Deletes a task that is being tracked:  
+Format: `delete INDEX`  
 - Deletes task at a specified `INDEX`
 -  `INDEX` refers to the positive index of the task in the displayed list
 
 Example: `delete 1`
 
 ### Marking a task as done:`mark`
-Marks a specified task as done.
+Marks a specified task as done.  
 Format: `mark INDEX`
 - Marks task at a specified `INDEX` as completed.
 -  `INDEX` refers to the positive index of the task in the displayed list
@@ -55,7 +55,7 @@ Format: `mark INDEX`
 Example: `mark 2`
 
 ### Unmarking a task as done: `unmark`
-Unmarks a specified task as done.
+Unmarks a specified task as done.  
 Format: `mark INDEX`
 - Marks task at a specified `INDEX` as incomplete.
 -  `INDEX` refers to the positive index of the task in the displayed list
@@ -63,7 +63,7 @@ Format: `mark INDEX`
 Example: `unmark 3`
 
 ### Sort list of tasks: `sort`
-Lists sorted deadlines and events either by descending or the ascending order.
+Lists sorted deadlines and events either by descending or the ascending order.  
 Format: `sort [ORDER]`
 - Keywords for order: `ascending`, `descending`, `asc` and `desc`
 - Default order is ascending
