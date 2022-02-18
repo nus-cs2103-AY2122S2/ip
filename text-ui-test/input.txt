@@ -1,0 +1,18 @@
+hello
+hmmm
+list
+todo Finish 2103
+list
+event meet friends /at 2022-01-28
+event meet friends /at 2022-01-28 23:00
+save
+deadline finish 2106 quiz /by 2022-01-29 23:59
+list
+mark 1
+list
+save
+unmark 1
+list
+delete 1
+save
+bye

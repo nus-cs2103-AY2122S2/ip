@@ -1,7 +1,84 @@
-Hello from
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I am Duke_two.
+Your Personal Assistant.
+What can I do for you?
+________________________________
+From Duke_two: 
+	'hello' is an invalid command! Please try again!
+________________________________
+From Duke_two: 
+	'hmmm' is an invalid command! Please try again!
+________________________________
+From Duke_two: 
+	There are no pending tasks!
+________________________________
+From Duke_two: 
+	Added to your tasks: 
+	[T][ ] Finish 2103
+You now have 1 tasks in your list
+________________________________
+From Duke_two: 
+	
+1: [T][ ] Finish 2103
+________________________________
+From Duke_two: 
+	An invalid time has been added. Please use a YYYY-MM-DD HH:MM format.
+________________________________
+From Duke_two: 
+	Added to your tasks: 
+	[E][ ] meet friends  (at: Jan 28 2022, 23:00)
+You now have 2 tasks in your list
+________________________________
+From Duke_two: 
+	Your Tasks has been saved into your device!
+________________________________
+From Duke_two: 
+	Added to your tasks: 
+	[D][ ] finish 2106 quiz  (by: Jan 29 2022, 23:59)
+You now have 3 tasks in your list
+________________________________
+From Duke_two: 
+	
+1: [T][ ] Finish 2103
+2: [E][ ] meet friends  (at: Jan 28 2022, 23:00)
+3: [D][ ] finish 2106 quiz  (by: Jan 29 2022, 23:59)
+________________________________
+From Duke_two: 
+	Nice! I've marked this task as done: 
+	[T][X] Finish 2103
+________________________________
+From Duke_two: 
+	
+1: [T][X] Finish 2103
+2: [E][ ] meet friends  (at: Jan 28 2022, 23:00)
+3: [D][ ] finish 2106 quiz  (by: Jan 29 2022, 23:59)
+________________________________
+From Duke_two: 
+	Your Tasks has been saved into your device!
+________________________________
+From Duke_two: 
+	Alright, I've marked this task as not done yet: 
+	[T][ ] Finish 2103
+________________________________
+From Duke_two: 
+	
+1: [T][ ] Finish 2103
+2: [E][ ] meet friends  (at: Jan 28 2022, 23:00)
+3: [D][ ] finish 2106 quiz  (by: Jan 29 2022, 23:59)
+________________________________
+From Duke_two: 
+	Removed from your tasks: 
+	[T][ ] Finish 2103
+You now have 2 tasks in your list
+________________________________
+From Duke_two: 
+	Your Tasks has been saved into your device!
+________________________________
+From Duke_two: 
+	GoodBye! I hope to see you again!
+________________________________
