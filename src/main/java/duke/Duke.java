@@ -12,11 +12,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * Duke is a bot that helps to keep track of tasks
  */
 public class Duke extends Application {
-
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -25,15 +26,19 @@ public class Duke extends Application {
     private Image dukeWord = new Image(this.getClass().getResourceAsStream("/images/DukeWord.png"));
     private Image dukeLogo = new Image(this.getClass().getResourceAsStream("/images/DukeLogo.png"));
 
+
     /**
      * Main method
      * @param args
      */
     public static void main(String[] args) {
-
-        FileReaderWriter.readFile();
+        Storage storage = new Storage();
+        ArrayList<Task> listOfTask = storage.readFile();
+        for (int i = 0; i < listOfTask.size(); i++) {
+            TaskBank.getBank().add(listOfTask.get(i));
+        }
         Ui.start();
-        FileReaderWriter.writeToFile();
+        storage.writeToFile(TaskBank.getBank());
 
     }
 

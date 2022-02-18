@@ -1,4 +1,3 @@
-
 package duke;
 
 import java.io.File;
@@ -29,8 +28,15 @@ public class Storage {
      */
     public Storage(){}
 
+    /**
+     * <p>Method to Suppress unchecked typecasts. Since the file path has been pre-set in this programme, we can be sure
+     * that there will be no errors when typecasting. </p>
+     * @param obj The object to be typecasted.
+     * @param <T> The type to be casted to.
+     * @return An Object of type T.
+     */
     @SuppressWarnings("unchecked")
-    public static <T> T castToAnything(Object obj) {
+    public <T> T castToAnything(Object obj) {
         return (T) obj;
     }
 
@@ -38,7 +44,7 @@ public class Storage {
      * Loads the users task list from file
      */
     @SuppressWarnings("Unchecked")
-    public void readFile() {
+    public ArrayList<Task> readFile() {
         ArrayList<Task> toDoList = new ArrayList<>();
         try {
             if (folderPath.mkdir()) {
@@ -51,13 +57,13 @@ public class Storage {
                 System.out.println("File is created!");
             } else {
                 System.out.println("File already exists.");
-                FileInputStream reader = new FileInputStream(dataPath);
-                ObjectInputStream listInput = new ObjectInputStream(reader);
                 try {
+                    FileInputStream reader = new FileInputStream(dataPath);
+                    ObjectInputStream listInput = new ObjectInputStream(reader);
                     toDoList = castToAnything(listInput.readObject());
-                    for (int i = 0; i < toDoList.size(); i++) {
-                        TaskBank.getBank().add(toDoList.get(i));
-                    }
+                    // for (int i = 0; i < toDoList.size(); i++) {
+                    //     TaskBank.getBank().add(toDoList.get(i));
+                    // }
                     System.out.println("file read and data transferred");
                     listInput.close();
                     reader.close();
@@ -68,15 +74,16 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return toDoList;
     }
     /**
      * Save the users tasklist to file
      */
-    public void writeToFile() {
+    public void writeToFile(ArrayList<Task> bank) {
         try {
             FileOutputStream writer = new FileOutputStream(dataPath);
             ObjectOutputStream saveList = new ObjectOutputStream(writer);
-            saveList.writeObject(TaskBank.getBank());
+            saveList.writeObject(bank);
             saveList.close();
             System.out.println("saved successfully!");
         } catch (FileNotFoundException e) {
