@@ -132,6 +132,7 @@ Sorts the tasks in Duke according to the following sort order:
 2) `deadline`
 3) `event`
    If the tasks are of the same type, e.g. both are `todo` tasks, then they are sorted alphanumerically based on their description strings.
+   Note that sort returns a new sorted list to be displayed and leaves the original list unchanged.
 
 Example of usage:
 
