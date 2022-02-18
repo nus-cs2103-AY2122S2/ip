@@ -43,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * Recurs the task located in the given index.
+     * Recurs the task located in the given index and sets the task as unmarked.
      * @param index Index where the task that will recur is located in the ArrayList.
      * @return Task that was recurred.
      */

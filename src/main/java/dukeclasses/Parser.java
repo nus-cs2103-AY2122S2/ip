@@ -3,6 +3,7 @@ package dukeclasses;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 /**
  * Represents a Parser that parses user input to make sense of what the user inputs.
@@ -19,7 +20,7 @@ public class Parser {
      */
     public static ParsedCommand parseUserInput(String userCommand, Integer sizeOfTaskList) throws DukeException {
         String[] parsedCommand = userCommand.split(" ", 2);
-        parsedCommand[0] = parsedCommand[0].trim();
+        parsedCommand[0] = parsedCommand[0].toLowerCase().trim();
 
         switch (parsedCommand[0]) {
         case "hi":

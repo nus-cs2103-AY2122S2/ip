@@ -29,11 +29,11 @@ You can create recurring tasks and recur them.
 
 ## Usage
 
+>Note: Commands words are **NOT** case-sensitive.
+
 ### `todo` - Creates and add the todo task into your list.
 
 To create a `ToDo` task:
-
-Note: The command is case-sensitive. Use `todo` so that the command can be processed.
 
 1. type in `todo (argument)` where argument is the task with the description you are creating.
 
@@ -57,8 +57,6 @@ Now you have added the todo task 'homework' to your list which now has a total o
 
 To create a `Deadline` task:
 
-Note: The command is case-sensitive. Use `deadline` so that the command can be processed.
-
 1. type in `deadline (argument) /by (due date)` where argument is the task with the description you are creating and due date is the date you have to complete the task by. `due date` have to be in the form "YYYY-MM-DD" where Y represent the year digit, M represent the month digit and D represent the days digit
 
 2. Hit 'Enter' or click the send button.
@@ -81,8 +79,6 @@ Now you have added the deadline task `gym` with a due date of `Jan 22 2022` to y
 
 To create a `Event` task:
 
-Note: The command is case-sensitive. Use `event` so that the command can be processed.
-
 1. type in 'event (argument) /on (date)' where argument is the task with the description you are creating and date is the date of the event. `date` have to be in the form "YYYY-MM-DD" where Y represent the year digit, M represent the month digit and D represent the days digit
 
 2. Hit 'Enter' or click the send button.
@@ -100,9 +96,8 @@ Now you have 1 tasks in your list.
 ```
 Now you have added the event task `party` that occurs on the date of `Jan 22 2022` to your list which now has a total of 1 task.
 
-### Reccuring events - events that recur in the task list when it is recured using `recur`.
-
-Note: **ONLY** deadline and event tasks can be recurred.
+### Recurring tasks - tasks that occur again in a given period of time.
+>Note: **ONLY** deadline and event tasks can be recurred. 
 
 To add a recurring task:
 
@@ -150,7 +145,7 @@ Noted. I've removed this task:
 ```
 The 1st task in the list (which is a todo task with description `homework` in this case) is now deleted from the list.
 
-### `marking` or `unmarking` - Marks or unmarks the task in the list
+### `mark` or `unmark` - Marks or unmarks the task in the list
 
 To mark a task as done:
 
@@ -185,9 +180,7 @@ Ok! I've marked this task as not done yet:
 
 The 1st task in the list (which is a todo task with description `homework` in this case) is now marked as not completed.
 
-### `Find` - Find the tasks in your list.
-
-Note: The command is case-sensitive. Use `find` so that the command can be processed.
+### `find` - Find the tasks in your list.
 
 To find tasks in  your list: 
 

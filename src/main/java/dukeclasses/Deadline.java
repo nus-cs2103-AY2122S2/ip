@@ -28,7 +28,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Increases the dateline based on the recurring period in RecurPeriod.
+     * Increases the dateline based on the recurring period in RecurPeriod and
+     * sets the task as unmarked.
      */
     public void recur() {
         if (isRecurring) {
