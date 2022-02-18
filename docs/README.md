@@ -20,7 +20,7 @@ faster than traditional GUI apps.
 
 ## Quick Start
 1. Ensure that you have Java 11 or above installed on your Computer
-2. Download the latest `Duke.jar` from [here](https://github.com/sbhbenjamin/ip/releases/tag/A-Jar).
+2. Download the latest `Duke.jar` from [here](https://github.com/sbhbenjamin/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Open the command window in that folder.
 5. Run the command `java -jar Duke.jar` to launch the application.
