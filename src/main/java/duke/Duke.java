@@ -22,6 +22,12 @@ public class Duke {
         this.taskList = this.storage.readFromFile();
     }
 
+    /**
+     * Gets Duke's response when given a command.
+     *
+     * @param fullCommand the full command that the user input.
+     * @return Duke's response in the form of string.
+     */
     public String getResponse(String fullCommand) {
         String response = "";
         try {
