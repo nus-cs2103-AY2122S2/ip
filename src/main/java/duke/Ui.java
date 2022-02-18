@@ -15,8 +15,8 @@ public class Ui {
     private final TaskList taskList = new TaskList(DUKE_DIRECTORY, DUKE_TXTFILE);
     private final Storage storage = new Storage(DUKE_DIRECTORY, DUKE_TXTFILE);
     private boolean isExit = false;
-    private final String separation = "\n******************************\n";
-    private final String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+    private final String separation = "\n__________________________________\n";
+    private final String greeting = "Hello! I'm DukeTime\nWhat can I do for you?";
 
 
     /**
@@ -28,12 +28,20 @@ public class Ui {
      * @throws IOException
      */
     public String welcomeMsg() throws IOException {
-        return separation + greeting + separation + "\nYou past Todos:"
-                + storage.readData(DUKE_TXTFILE) + taskList.writeToArrFromPrevData();
+        return greeting + separation
+                + commandMessage() + taskList.writeToArrFromPrevData();
     }
-    public boolean isExit() {
-        return this.isExit;
+    /**
+     * @return strings of commands to guide user
+     */
+    public String commandMessage() {
+        String todo = "todo: todo <task>";
+        String deadLine = "deadline: deadline <task> /by <date><time>";
+        String event = "event: event <task> /at <date><time>";
+        String others = "others: delete, mark, unmark, find, search, list";
+        return "List of commands: \n" + todo + "\n" + deadLine + "\n" + event + "\n" + others;
     }
+
     /**
      * for user to input command
      * this method will call other methods depending on the user's input

@@ -50,7 +50,7 @@ public class Storage {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
-                message = message + sc.nextLine();
+                message = message + "\n" + sc.nextLine();
             }
         } catch (FileNotFoundException e) {
             return message + "Cannot read data!!!";

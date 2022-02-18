@@ -48,14 +48,8 @@ public class Duke {
 
     }
 
-
     String getResponse(String input) throws IOException {
        String response = "";
-
-       if (isFirstTimeUser) {
-           response = welcomeMsg();
-           isFirstTimeUser = false;
-       }
 
        try {
            response = ui.userCommand(input);

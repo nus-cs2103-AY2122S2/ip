@@ -33,8 +33,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
+    public void setDuke(Duke d) throws IOException {
         duke = d;
+        startUpMessage();
+    }
+    private void startUpMessage() throws IOException {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.welcomeMsg(), dukeImage));
     }
 
     /**

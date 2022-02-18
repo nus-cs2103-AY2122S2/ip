@@ -33,6 +33,9 @@ public class DeadLine extends Task {
             this.time = null;
         }
     }
+    public DeadLine(String description) {
+        super(description);
+    }
 
     @Override
     public String frontDescription() {
@@ -47,9 +50,11 @@ public class DeadLine extends Task {
         if (this.time != null) {
             return frontDescription() + backDescription()
                     + "(by:" + dateTimeFormat(date) + " " + time + ")";
-        } else {
+        } else if (this.date != null) {
             return frontDescription() + backDescription()
                     + "(by:" + dateTimeFormat(date) + ")";
+        } else {
+            return frontDescription() + backDescription();
         }
     }
 

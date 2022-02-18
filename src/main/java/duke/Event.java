@@ -30,7 +30,19 @@ public class Event extends Task {
             this.date = at;
             this.time = null;
         }
+        DateTimeFormatter.ofPattern("MMM dd yyyy");
+
     }
+
+    /**
+     * @param description
+     */
+    public Event (String description) {
+        super(description);
+        this.date = null;
+        this.time = null;
+    }
+
     @Override
     public String frontDescription() {
         return "E | " + "[" + this.getStatusIcon() + "] ";
@@ -46,10 +58,14 @@ public class Event extends Task {
             String messageWithTime = frontDescription()
                     + backDescription() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
             return messageWithTime;
-        } else {
+        } else if (this.date != null) {
             String messageWithoutTime = frontDescription()
                     + backDescription() + "(at:" + dateTimeFormat(date) + ")";
             return messageWithoutTime;
+        } else {
+            String messageWithoutDateTime = frontDescription()
+                    + backDescription();
+            return messageWithoutDateTime;
         }
     }
 

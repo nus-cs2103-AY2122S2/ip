@@ -26,17 +26,9 @@ public class Task {
     public String getStatusIcon() {
         return this.isDone ? "X" : " ";
     }
-
-    /**
-     * mark a task as done
-     * @return a message to verify that task is marked as done
-     */
-    public String markedDone() {
-        this.isDone = true;
-        return this.message();
-
+    public void setDone() {
+         this.isDone = true;
     }
-
     /**
      * mark the task as undone
      * @return a message to verify that task is marked as undone

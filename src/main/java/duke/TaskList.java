@@ -62,7 +62,7 @@ public class TaskList {
                 hasWord = true;
             }
             if (i == listOfInputs.size() - 1 && !hasWord) {
-                response = "No task with the word: " + "[" + keywords + " ] ";
+                response = "No task with the word: " + "[ " + keywords + " ] ";
             }
         }
         return response;
@@ -133,6 +133,7 @@ public class TaskList {
      * @throws IOException
      */
     public String deadLine(String str) throws IOException {
+        String[] output = new String[2];
         String[] temp = str.split("deadline ", 2);
         String[] deadL = temp[1].split("/by ", 2);
         String description = deadL[0];
@@ -163,6 +164,7 @@ public class TaskList {
 
     }
 
+
     /**
      * to delete the task from list and display a message once it is called
      * @param str
@@ -184,17 +186,34 @@ public class TaskList {
         BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
         String line = bufReader.readLine();
         while (line != null) {
-            Task t = new Task(line);
-            listOfInputs.add(t);
+            if (!line.isEmpty()) {
+                String[] str = line.split("]");
+                String description = str[1];
+                String symbol = str[0].substring(0, 1);
+                Boolean isTaskComplete = str[0].contains("X");
+                Task t = recreateTask(symbol, description);
+
+                if (isTaskComplete) {
+                    t.setDone();
+                }
+                listOfInputs.add(t);
+            }
             line = bufReader.readLine();
         }
         bufReader.close();
         return "";
     }
 
-
-
-
-
+    private Task recreateTask (String symbol, String description) {
+        if (symbol.equals("T")) {
+            return new Todos(description);
+        } else if (symbol.equals("E")) {
+            return new Event(description);
+        } else if (symbol.equals("D")) {
+            return new DeadLine(description);
+        } else {
+            return new Task(description);
+        }
+    }
 
 }
