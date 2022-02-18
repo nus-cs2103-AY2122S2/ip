@@ -1,0 +1,25 @@
+hi
+HEllo
+list
+list  
+mark 1
+todo
+todo  
+deadline
+deadline  
+event
+event  
+todo test
+list
+deadline test2
+deadline test2 /by Mon
+list
+mark 3
+mark 2
+event test3
+event test3 at
+event test3 /at Tues 5pm
+list
+unmark 2
+list
+by
