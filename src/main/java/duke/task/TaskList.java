@@ -60,6 +60,7 @@ public class TaskList {
     public String handleMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         Task curr = tasks.get(number - 1);
+        assert curr != null : "Invalid Task that is marked as Done!";
 
         curr.setDone();
         return ResponseFormatter.printFeedbackFooter("Nice! I've marked this task as done:", curr, tasks);
@@ -72,6 +73,7 @@ public class TaskList {
     public String handleUnMark(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
         Task curr = tasks.get(number - 1);
+        assert curr != null : "Invalid Task that is marked as Done!";
 
         curr.setUndone();
         return ResponseFormatter.printFeedbackFooter("OK, I've marked this task as not done yet:", curr, tasks);
@@ -104,7 +106,7 @@ public class TaskList {
         String strippedCommand = originalInput.substring(8);
         Task curr;
         try {
-            curr = new Deadline(" " + strippedCommand.split("/")[0], metaInfo);
+            curr = new Deadline(strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
             return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
                     + "\nPlease try again:");
@@ -121,7 +123,7 @@ public class TaskList {
         String strippedCommand = originalInput.substring(5);
         Task curr;
         try {
-            curr = new Event(" " + strippedCommand.split("/")[0], metaInfo);
+            curr = new Event(strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
             return ResponseFormatter.printMessage("Kindly input Date and Time in dd/mm/yyyy hhmm format!"
                     + "\nPlease try again:");
@@ -146,6 +148,8 @@ public class TaskList {
         }
 
         Task curr = tasks.get(number - 1);
+        assert curr != null : "The task you are trying to delete is invalid!";
+
         tasks.remove(curr);
 
         return ResponseFormatter.printFeedbackFooter("Noted. I've removed this task:", curr, tasks);
