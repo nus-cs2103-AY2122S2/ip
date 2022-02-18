@@ -124,5 +124,5 @@ unmark | `unmark INDEX` | `unmark 2`
 exit | `exit`
 
 ## Credits
-- `Duke` Project Template
-- `Address Book 3` [user guide](https://se-education.org/addressbook-level3/UserGuide.html)
+- [`Duke` Project Template](https://nus-cs2103-ay2122s2.github.io/website/se-book-adapted/projectDuke/index.html)
+- [`Address Book 3` user guide](https://se-education.org/addressbook-level3/UserGuide.html)
