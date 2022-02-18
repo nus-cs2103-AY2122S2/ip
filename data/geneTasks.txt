@@ -1,3 +1,1 @@
-todo / task / 0
-event / hello / 2/12/2222 1900 / 0
 deadline / byebye / 2/12/2222 1901 / 0

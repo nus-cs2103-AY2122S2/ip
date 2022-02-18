@@ -14,7 +14,7 @@ import gene.exception.UnrecognizedCommandException;
 public class Parser {
     private static final String EXITKEY = "bye";
     private static final String LISTKEY = "^list.*$";
-    private static final String DELETEKEY = "delete\\s\\d";
+    private static final String DELETEKEY = "^delete.*$";
     private static final String MARKKEY = "^mark.*$";
     private static final String UNMARKKEY = "^unmark.*$";
     private static final String TODOKEY = "^todo.*$";

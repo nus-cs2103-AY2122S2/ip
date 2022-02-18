@@ -52,8 +52,8 @@ public class DeleteCommand extends Command {
             switch (toDelete) {
             case "location":
                 Location targetLocation = geneLocs.get(index);
-                geneTasks.remove(index); //error if empty
-                geneTaskStorage.deleteLineToFile(index); //error if empty
+                geneLocs.remove(index); //error if empty
+                geneLocationStorage.deleteLineToFile(index); //error if empty
                 return Ui.showLine() + "\n"
                         + "Noted. I've removed this location:\n"
                         + "  " + targetLocation + "\n"

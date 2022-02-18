@@ -149,7 +149,7 @@ Nice! I've marked this task as done:
 -------------------------------------------------------------------------------
 ### `unmark task _` - unmarks a task
 
-Marks an existing task in the list of tasks, _ is the index of the task to mark.
+Unmarks an existing task in the list of tasks, _ is the index of the task to mark.
 
 
 Example of usage:
@@ -167,23 +167,150 @@ OK, I've marked this task as not done yet:
 --------------------------------------------------------
 ```
 -------------------------------------------------------------------------------
-### `mark location _` - unmarks a location
+### `mark location _` - marks a location
 
-Marks an existing task in the list of tasks, _ is the index of the task to mark.
+Marks an existing location in the list of locations, _ is the index of the locations to mark.
 
 
 Example of usage:
 
-`unmark task 0`
+`mark location 0`
 
 Expected outcome:
 
-The first task in the list is unmarked.
+The first location in the list is marked.
 
 ```
 --------------------------------------------------------
-OK, I've marked this task as not done yet:
-  [T][ ]  task
+Nice! I've marked this location as visited:
+  [L][X] Ann Siang Hill: 128598, Park
 --------------------------------------------------------
 ```
 -------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+### `unmark location _` - unmarks a location
+
+Unmarks an existing location in the list of locations, _ is the index of the locations to unmark.
+
+
+Example of usage:
+
+`unmark location 0`
+
+Expected outcome:
+
+The first location in the list is unmarked.
+
+```
+--------------------------------------------------------
+OK, I've marked this location as not visited yet:
+  [L][ ] Ann Siang Hill: 128598, Park
+--------------------------------------------------------
+```
+-------------------------------------------------------------------------------
+### `find ___` - Finds tasks and locations
+
+Finds all tasks and locations containing the given keyword
+
+Example of usage:
+
+`find a`
+
+Expected outcome:
+
+All task and location title containing "a" will be displayed.
+
+```
+--------------------------------------------------------
+Here are the matching tasks in your list:
+1.[T][ ] task
+
+And here are the matching locations:
+1.[L][ ] Ann Siang Hill: 128598, Park
+--------------------------------------------------------
+```
+-------------------------------------------------------------------------------
+### `delete task _` - Deletes a task
+
+Deletes an existing task in the list of tasks, _ is the index of the task to delete.
+
+Example of usage:
+
+`delete task 0`
+
+Expected outcome:
+
+The first task in the list will be deleted
+```
+--------------------------------------------------------
+Noted. I've removed this task:
+  [T][ ] task
+Now you have 2 tasks in the list.
+--------------------------------------------------------
+```
+-------------------------------------------------------------------------------
+### `delete location _` - Deletes a location
+
+Deletes an existing location in the list of locations, _ is the index of the location to delete.
+
+Example of usage:
+
+`delete location 0`
+
+Expected outcome:
+
+The first location in the list will be deleted
+```
+--------------------------------------------------------
+Noted. I've removed this location:
+  [L][ ] Ann Siang Hill
+Now you have 0 locations in the list.
+--------------------------------------------------------
+```
+-------------------------------------------------------------------------------
+### `list tasks` - Lists all existing tasks
+
+Lists all tasks in the list of tasks. If the list is empty, a message will indicate so.
+
+Example of usage:
+
+`list tasks`
+
+Expected outcome:
+
+All existing tasks will be listed
+```
+--------------------------------------------------------
+1.[D][ ] byebye (by: Monday, Dec 02, 2222 19:01 pm)
+--------------------------------------------------------
+```
+-------------------------------------------------------------------------------
+### `list locations` - Lists all existing locations
+
+Lists all locations in the list of locations. If the list is empty, a message will indicate so.
+
+Example of usage:
+
+`list locations`
+
+Expected outcome:
+
+All existing locations will be listed usually, but since the list is empty, a message will indicate so.
+```
+The file and list is empty
+```
+-------------------------------------------------------------------------------
+### `bye` - Exits the program
+
+bye
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+bye
+```
+The file and list is empty
+```

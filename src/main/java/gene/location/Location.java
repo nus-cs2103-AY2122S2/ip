@@ -31,7 +31,7 @@ public class Location {
 
     public Location unmarkLocation() {
         assert this.isMarked = true : "Cannot unmark unmarked locations";
-        if (!this.isMarked) {
+        if (this.isMarked) {
             this.isMarked = false;
         }
 

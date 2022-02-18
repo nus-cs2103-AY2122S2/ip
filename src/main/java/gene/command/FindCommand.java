@@ -61,7 +61,7 @@ public class FindCommand extends Command {
 
         for (int i = 1; i < tempLocs.size() + 1; i++) { //to edit in tasklist
             locList.append(i).append(".");
-            locList.append(geneTasks.get(i - 1));
+            locList.append(geneLocs.get(i - 1));
             locList.append("\n");
         }
 
