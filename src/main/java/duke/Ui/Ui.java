@@ -140,7 +140,8 @@ public class Ui {
 
             Deadline deadline = (Deadline) curr;
             boolean isWithinRange = deadline.getDate().compareTo(dateLimit) <= 0;
-            if (isWithinRange) {
+            boolean isDone = deadline.getIsDone();
+            if (isWithinRange && !isDone) {
                 k++;
                 result.append(String.format("%d.%s", k, curr));
                 if (i != tasks.size()) {
@@ -186,7 +187,7 @@ public class Ui {
         return String.format("Got it. I've added this task:\n  "
                 + "%s\nNow you have %d tasks in the list.", description, totalTask);
     }
-
+    
     /**
      * Print message in Duke application format.
      *

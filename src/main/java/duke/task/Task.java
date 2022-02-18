@@ -42,10 +42,6 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
-    protected boolean getIsDone() {
-        return isDone;
-    }
-
     protected void markAsDone() {
         this.isDone = true;
     }
@@ -56,6 +52,10 @@ public abstract class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
     }
 
     /**
