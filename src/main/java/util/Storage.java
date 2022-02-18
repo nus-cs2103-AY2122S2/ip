@@ -70,6 +70,7 @@ public class Storage {
     private static Task parseTodo(String s) {
         String[] strarr = s.split(" ");
         String task = "";
+        Task t;
         if (s.contains("[X]")) {
             for (int i = 1; i < strarr.length; i++) {
                 task += strarr[i];
@@ -77,6 +78,8 @@ public class Storage {
                     task += " ";
                 }
             }
+            t = new Todo(task);
+            t.markAsDone();
         } else {
             for (int i = 2; i < strarr.length; i++) {
                 task += strarr[i];
@@ -84,9 +87,10 @@ public class Storage {
                     task += " ";
                 }
             }
+            t = new Todo(task);
 
         }
-        return new Todo(task);
+        return t;
     }
 
     private static Task parseTimedEvent(String s) {
