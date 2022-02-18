@@ -59,24 +59,66 @@ public class Storage {
     }
 
     private static Task parseTextFile(String s) {
+        if (s.contains("[T]")) {
+            return parseTodo(s);
+        } else {
+            return parseTimedEvent(s);
+        }
+
+    }
+
+    private static Task parseTodo(String s) {
+        String[] strarr = s.split(" ");
+        String task = "";
+        if (s.contains("[X]")) {
+            for (int i = 1; i < strarr.length; i++) {
+                task += strarr[i];
+                if (i != strarr.length - 1) {
+                    task += " ";
+                }
+            }
+        } else {
+            for (int i = 2; i < strarr.length; i++) {
+                task += strarr[i];
+                if (i != strarr.length - 1) {
+                    task += " ";
+                }
+            }
+
+        }
+        return new Todo(task);
+    }
+
+    private static Task parseTimedEvent(String s) {
         Task t;
         String[] strarr = s.split(" ");
+        String task = "";
+        String date = strarr[strarr.length - 2];
+        String time = strarr[strarr.length - 1];
         if (s.contains("[X]")) {
-            if (s.contains("[T]")) {
-                t = new Todo(strarr[1]);
-            } else if (s.contains("[E]")) {
-                t = new Event(strarr[1], strarr[2] + " " + strarr[3]);
+            for (int i = 1; i < strarr.length - 2; i++) {
+                task += strarr[i];
+                if (i != strarr.length - 3) {
+                    task += " ";
+                }
+            }
+            if (s.contains("[E]")) {
+                t = new Event(task, date + " " + time);
             } else {
-                t = new Deadline(strarr[1], strarr[2] + " " + strarr[3]);
+                t = new Deadline(task, date + " " + time);
             }
             t.markAsDone();
         } else {
-            if (s.contains("[T]")) {
-                t = new Todo(strarr[2]);
-            } else if (s.contains("[E]")) {
-                t = new Event(strarr[2], strarr[3] + " " + strarr[4]);
+            for (int i = 2; i < strarr.length - 2; i++) {
+                task += strarr[i];
+                if (i != strarr.length - 3) {
+                    task += " ";
+                }
+            }
+            if (s.contains("[E]")) {
+                t = new Event(task, date + " " + time);
             } else {
-                t = new Deadline(strarr[2], strarr[3] + " " + strarr[4]);
+                t = new Deadline(task, date + " " + time);
             }
 
         }
@@ -85,7 +127,19 @@ public class Storage {
 
     private static Contact parseContact(String s) {
         String[] strarr = s.split(" ");
-        return new Contact(strarr[0], strarr[1]);
+        String name = "";
+        String contact = "";
+        for (int i = 0; i < strarr.length; i++) {
+            if (i == strarr.length - 1) {
+                contact = strarr[i];
+            } else {
+                name += strarr[i];
+                if (i != strarr.length - 2) {
+                    name += " ";
+                }
+            }
+        }
+        return new Contact(name, contact);
     }
 
     /**

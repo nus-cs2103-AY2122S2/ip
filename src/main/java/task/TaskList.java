@@ -201,9 +201,9 @@ public class TaskList {
         String thirdLine;
 
         if (total == 1) {
-            thirdLine = tab + "Now you have " + total + " task in the list.";
+            thirdLine = "Now you have " + total + " task in the list.";
         } else {
-            thirdLine = tab + "Now you have " + total + " tasks in the list.";
+            thirdLine = "Now you have " + total + " tasks in the list.";
         }
         return firstLine + secondLine + thirdLine;
 
