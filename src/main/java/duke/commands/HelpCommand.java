@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.data.TaskList;
+import duke.data.TasksEditor;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TasksEditor tasksEditor, Ui ui, Storage storage) {
         String msg = AddTodoCommand.MESSAGE_USAGE
                 + "\n" + AddEventCommand.MESSAGE_USAGE
                 + "\n" + AddDeadlineCommand.MESSAGE_USAGE

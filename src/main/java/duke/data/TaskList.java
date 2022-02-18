@@ -89,4 +89,26 @@ public class TaskList {
         }
         return msg;
     }
+
+    public void restore(Memento memento) {
+        this.tasks = memento.getSavedTasks();
+        System.out.println(memento);
+        System.out.println(tasks);
+    }
+
+    public Memento takeSnapshot() {
+        return new Memento(new ArrayList<>(this.tasks));
+    }
+
+    public static class Memento {
+        private final List<Task> tasks;
+
+        private Memento(List<Task> tasks) {
+            this.tasks = tasks;
+        }
+
+        private List<Task> getSavedTasks() {
+            return tasks;
+        }
+    }
 }

@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 import duke.commands.Command;
 import duke.data.TaskList;
+import duke.data.TasksEditor;
 import duke.parser.Parser;
 import duke.ui.Ui;
 import duke.storage.Storage;
@@ -14,7 +15,7 @@ import duke.storage.Storage;
 public class Duke {
 
     private Storage storage;
-    private TaskList tasks;
+    private TasksEditor tasksEditor;
     private Ui ui;
     private Parser parser;
 
@@ -23,10 +24,10 @@ public class Duke {
         storage = new Storage("data/tasks.txt");
         parser = new Parser();
         try {
-            tasks = new TaskList(storage.load());
+            tasksEditor = new TasksEditor(new TaskList(storage.load()));
         } catch (DukeException | IOException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            tasksEditor = new TasksEditor(new TaskList());
         }
     }
 
@@ -39,7 +40,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasksEditor, ui, storage);
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }

@@ -7,18 +7,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddTodoCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.HelpCommand;
-import duke.commands.IncorrectCommand;
-import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.UnmarkCommand;
+import duke.commands.*;
 
 public class Parser {
 
@@ -87,6 +76,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
             
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

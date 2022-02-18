@@ -1,7 +1,7 @@
 package duke.commands;
 
+import duke.data.TasksEditor;
 import duke.data.task.Task;
-import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
@@ -24,8 +24,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task t = tasks.delete(index);
-        return ui.delete(t, tasks.getSize());
+    public String execute(TasksEditor tasksEditor, Ui ui, Storage storage) {
+        Task t = tasksEditor.delete(index);
+        return ui.delete(t, tasksEditor.getSize());
     }
 }

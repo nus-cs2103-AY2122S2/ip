@@ -1,9 +1,9 @@
 package duke.commands;
 
+import duke.data.TasksEditor;
 import duke.data.task.Task;
 import duke.ui.Ui;
 import duke.storage.Storage;
-import duke.data.TaskList;
 import duke.data.task.Event;
 
 import java.time.LocalDate;
@@ -26,9 +26,9 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.add(toAdd);
-        return ui.showAddTask(toAdd, tasks.getSize());
+    public String execute(TasksEditor tasksEditor, Ui ui, Storage storage) {
+        tasksEditor.add(toAdd);
+        return ui.showAddTask(toAdd, tasksEditor.getSize());
     }
 
     @Override
