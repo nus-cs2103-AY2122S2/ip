@@ -7,43 +7,45 @@ It is designed with JavaFX giving Michael a fun and unique Graphic User Interfac
 
 Organising your tasks will never be easier!
 
+`Click on the bullet points in the Features Section to jump to its Usage!`
+
 <hr>
 
 ## Features
 ### Add your Tasks
 
-- `todo`
-- `event`
-- `deadline`
+- [`todo`](#todo---adds-a-todo-task-into-michael)
+- [`event`](#event---adds-an-event-task-into-michael)
+- [`deadline`](#deadline---adds-a-deadline-task-into-michael)
 
 ### List your Tasks
 
-- `list`
+- [`list`](#list---list-out-all-tasks-that-are-saved-to-michael)
 
 ### Find a Task
 
-- `find`
+- [`find`](#find---find-a-task-in-michael)
 
 ### Save all Tasks
 
-- `save`
+- [`save`](#save---save-all-tasks-that-are-added-to-michael)
 
 ### Delete a Task
 
-- `delete`
+- [`delete`](#delete---delete-a-task-in-michael)
 
 ### Mark or Un-mark a Task
 
-- `mark`
-- `unmark`
+- [`mark`](#mark---mark-a-task-in-michael)
+- [`unmark`](#unmark---un-mark-a-task-in-michael)
 
 ### Close Michael
 
-- `bye`
+- [`bye`](#bye---closes-michael)
 
 ### In-Application Manual on how to use Michael
 
-- `help`
+- [`help`](#help---in-application-manual-to-help-navigate)
 <hr>
 
 
