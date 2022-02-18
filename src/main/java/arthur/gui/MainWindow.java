@@ -2,6 +2,7 @@ package arthur.gui;
 
 import arthur.Arthur;
 import arthur.Ui;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,10 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final int TIME_TO_DELAY = 1;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -43,8 +47,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Arthur's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Arthur's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
+     * If bye command given, processes the input and closes the application.
      */
     @FXML
     private void handleUserInput() {
@@ -55,5 +60,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getAurthurDialog(response, arthurImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            // Creates a time delay to allow the bye command to process
+            PauseTransition pause = new PauseTransition(Duration.seconds(TIME_TO_DELAY));
+            pause.setOnFinished(i -> System.exit(0));
+            pause.play();
+        }
     }
 }

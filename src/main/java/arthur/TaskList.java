@@ -75,7 +75,7 @@ public class TaskList {
     public String todo(String e) {
         Todo temp = new Todo(e);
         taskList.add(temp);
-        return "Added a new Task.Todo task: \n" + temp
+        return "Added a new Task. Todo task: \n" + temp
                 + "\n" + this.outstanding();
     }
 
@@ -94,7 +94,7 @@ public class TaskList {
             return "Please add the deadline date";
         }
         taskList.add(temp);
-        return "Added a new Task.Deadline task: \n" + temp
+        return "Added a new Task. Deadline task: \n" + temp
                 + "\n" + this.outstanding();
     }
 
@@ -115,7 +115,7 @@ public class TaskList {
         }
 
         taskList.add(temp);
-        return "Added a new Task.Event task: \n" + temp
+        return "Added a new Task. Event task: \n" + temp
                 + "\n" + this.outstanding();
     }
 

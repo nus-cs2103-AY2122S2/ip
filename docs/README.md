@@ -13,6 +13,7 @@ home folder for Arthur.
 
 ## Features 
 - Listing all tasks: `list`
+- Exiting Arthur: `bye`
 - Deleting a specific task: `delete`
 - Finding a specific task: `find`
 - Marking a task as completed: `mark` 
@@ -30,6 +31,16 @@ Shows a list of all the tasks in Arthur.
 Example of **usage**:
 `list`
 
+
+### `bye`
+Closes and exits the application Arthur.
+
+Example of **usage**:
+`bye`
+
+Expected outcome:
+Arthur displays a bye message and automatically 
+closes the application.
 
 ### `delete`
 

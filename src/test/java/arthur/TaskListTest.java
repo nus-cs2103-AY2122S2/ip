@@ -11,7 +11,7 @@ public class TaskListTest {
     @Test
     public void todo_checkOutput_success() {
         try {
-            assertEquals("Added a new Task.Todo task: \n"
+            assertEquals("Added a new Task. Todo task: \n"
                     + "[T][ ] >> test\n"
                     + "You have 1 tasks in list at the moment.",
                     new TaskList(new Storage()).todo("test"));
@@ -20,7 +20,7 @@ public class TaskListTest {
         }
 
         try {
-            assertEquals("Added a new Task.Todo task: \n"
+            assertEquals("Added a new Task. Todo task: \n"
                             + "[T][ ] >> testing\n"
                             + "You have 1 tasks in list at the moment.",
                     new TaskList(new Storage()).todo("testing"));
@@ -32,7 +32,7 @@ public class TaskListTest {
     @Test
     public void deadLine_checkOutput_success() {
         try {
-            assertEquals("Added a new Task.Deadline task: \n"
+            assertEquals("Added a new Task. Deadline task: \n"
                             + "[D][ ] >> testing (By: 15 Apr 2021)\n"
                             + "You have 1 tasks in list at the moment.",
                     new TaskList(new Storage()).deadline("testing /by 2021-04-15"));
