@@ -1,15 +1,16 @@
 package duke.parser;
 
+import duke.tasks.TaskList;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
+import duke.commands.Find;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.tasks.Task;
-import duke.tasks.TaskList;
 import duke.tasks.ToDos;
 
 /**
@@ -25,6 +26,7 @@ public class Parser {
     public static String MARK_MESSAGE = "Power la Mr Bosssssss, mark alr bro!";
     public static String UNMARK_MESSAGE = "No probs bro, unmarked already!";
 
+    // is this the most updated task arrayList?
     private TaskList tasks;
 
     /**
@@ -50,6 +52,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles all the possible commands from the CLI.
+     * 
+     * @param input from CLI
+     * @return a string value of the command
+     * @throws DukeException
+     * @throws IOException
+     */
     public String scanInput(String input) throws DukeException, IOException {
         String[] command = input.split(" ");
 
@@ -209,6 +219,13 @@ public class Parser {
             System.out.println(" " + beingDeleted);
             System.out.println("Now you have " + tasks.getTasks().size() + " in the list.");
             return "delete";
+        } else if (command[0].equals("find")) {
+            // keyword
+            String keyword = command[1];
+            Find find = new Find();
+            find.findRelevantTasks(keyword, tasks.getTasks());
+
+            return "find";
         } else {
             DukeException e = new DukeException("Tak faham banggg, speak in my language la bayi....");
             System.out.println(e.getMessage());

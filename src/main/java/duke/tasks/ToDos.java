@@ -13,7 +13,6 @@ public class ToDos extends Task {
     /**
      * String version
      */
-    @Override
     public String toString() {
         return "[T]" + "[" + super.getStatusIcon() + "] " + super.getDescription();
     }
