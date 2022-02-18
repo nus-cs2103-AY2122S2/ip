@@ -33,15 +33,12 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException err) {
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.load());
     }
 
     public String getResponse(String inputCommand) {
         Commands c = Parser.parse(inputCommand);
+        tasks = new TaskList(storage.load());
         return c.execute(tasks, ui, storage).toString();
     }
 }

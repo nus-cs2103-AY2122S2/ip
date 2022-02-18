@@ -40,7 +40,7 @@ public class ListCommand extends Commands {
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            return new CommandResult(tasks.returnFileContent());
+            return new CommandResult(tasks.listsTask());
         } catch (Exception err) {
             return new CommandResult(FAILURE_MESSAGE);
         }

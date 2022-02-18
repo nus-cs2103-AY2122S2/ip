@@ -19,7 +19,6 @@ public class AddCommand extends Commands {
     public static final String COMMAND_TODO = "todo";
     public static final String COMMAND_EVENT = "event";
     public static final String COMMAND_DEADLINE = "deadline";
-    public static final String SUCCESS_MESSAGE = "";
     public static final String FAILURE_MESSAGE = "";
 
     private static final boolean IS_EXIT = false;

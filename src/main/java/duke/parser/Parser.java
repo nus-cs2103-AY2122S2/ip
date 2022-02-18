@@ -17,6 +17,21 @@ import duke.command.UnmarkCommand;
  */
 public class Parser {
 
+    public static String trim(String input) {
+        return input.trim();
+    }
+
+    public static Integer parseToInt(String input) {
+        return Integer.parseInt(input);
+    }
+
+    public static Integer convertBases(Integer input) {
+        return input - 1;
+    }
+
+    public static String[] splitString(String input, String condition, Integer limit) {
+        return input.split(condition, limit);
+    }
     /**
      * Returns the command based on the input of the user. If the command is
      * not valid, it returns a <code>HelpCommand</code>, else it returns one
@@ -28,14 +43,13 @@ public class Parser {
      */
     public static Commands parse(String fullCommand) {
         StringBuilder arguments = new StringBuilder("");
-        fullCommand = fullCommand.trim();
-        String commandWord = fullCommand.split(" ", 2)[0].trim();
-        if (fullCommand.split(" ", 2).length > 1) {
-            arguments.append(fullCommand.split(" ", 2)[1].trim());
+        String trimmedCommand = trim(fullCommand);
+        String commandWord = trim(splitString(trimmedCommand, " ", 2)[0]);
+        if (splitString(trimmedCommand, " ", 2).length > 1) {
+            arguments.append(trim(splitString(trimmedCommand, " ", 2)[1]));
         }
 
         switch (commandWord) {
-
         //Fallthrough
         case AddCommand.COMMAND_TODO:
 

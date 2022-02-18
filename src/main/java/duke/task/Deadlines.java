@@ -10,6 +10,16 @@ import java.time.format.DateTimeParseException;
  * <code>"Eat lunch", true, "2012-06-03"</code>
  */
 public class Deadlines extends Tasks {
+    //Printing Format Constants
+    public static final String DATAFORMAT_DEADLINE = "D |";
+    public static final String DATA_COMPLETEDTASK = " X | " ;
+    public static final String DATA_INCOMPLETEDTASK = "   | " ;
+
+    //Database Format Constants
+    public static final String PRINTFORMAT_DEADLINE = "[D]";
+    public static final String PRINT_COMPLETEDTASK = "[X] " ;
+    public static final String PRINT_INCOMPLETEDTASK = "[ ] " ;
+
     private final LocalDate deadline; // Deadline to complete deadline duke.task
 
     /**
@@ -69,8 +79,9 @@ public class Deadlines extends Tasks {
      * @return
      */
     public String toDatabaseString() {
-        return "D | " + (this.getCompletion() ? "X" : " ") + " | "
-                + super.getName() + " | " + deadline + "\n";
+        return DATAFORMAT_DEADLINE + (this.getCompletion() ?
+                DATA_COMPLETEDTASK : DATA_INCOMPLETEDTASK) + super.getName()
+                + " | " + deadline + "\n";
     }
 
     // toString returning duke.task
@@ -80,8 +91,9 @@ public class Deadlines extends Tasks {
      * @return
      */
     public String toString() {
-        return "[D][" + (this.getCompletion() ? "X" : " ") + "] "
-                + super.getName() + " (by: " + deadline + ")";
+        return PRINTFORMAT_DEADLINE + (this.getCompletion() ?
+                PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName()
+                + " (By: " + deadline + ")\n" ;
     }
 
 }

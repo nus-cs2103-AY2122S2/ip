@@ -7,7 +7,7 @@ package duke.task;
  */
 public class Tasks {
     private final String name; // Name of duke.task
-    private boolean hasCompleted; // Completion of duke.task
+    private final boolean hasCompleted; // Completion of duke.task
 
     // Constructor for Task
     /**

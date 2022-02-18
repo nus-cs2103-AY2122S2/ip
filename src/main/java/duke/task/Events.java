@@ -7,6 +7,16 @@ package duke.task;
  * <code>"Eat lunch", true, "9am"</code>
  */
 public class Events extends Tasks {
+    //Printing Format Constants
+    public static final String DATAFORMAT_EVENTS = "E |";
+    public static final String DATACOMPLETED_TASK = " X | " ;
+    public static final String DATAINCOMPLETED_TASK = "   | " ;
+
+    //Database Format Constants
+    public static final String PRINTFORMAT_EVENTS = "[E]";
+    public static final String PRINT_COMPLETEDTASK = "[X] " ;
+    public static final String PRINT_INCOMPLETEDTASK = "[ ] " ;
+
     private final String timing; // Timing of event
 
     /**
@@ -61,8 +71,9 @@ public class Events extends Tasks {
      * @return
      */
     public String toDatabaseString() {
-        return "E | " + (this.getCompletion() ? "X" : " ")
-                + " | " + super.getName() + " | " + timing + "\n";
+        return DATAFORMAT_EVENTS + (this.getCompletion() ?
+                DATACOMPLETED_TASK : DATAINCOMPLETED_TASK) + super.getName()
+                + " | " + timing + "\n";
     }
 
     // toString returning event
@@ -71,7 +82,8 @@ public class Events extends Tasks {
      * @return
      */
     public String toString() {
-        return "[E][" + (this.getCompletion() ? "X" : " ") + "] "
-                + super.getName() + " (at: " + timing + ")";
+        return PRINTFORMAT_EVENTS + (super.getCompletion() ?
+                PRINT_COMPLETEDTASK : PRINT_INCOMPLETEDTASK) + super.getName()
+                + " (At: " + timing + ") "+ "\n" ;
     }
 }

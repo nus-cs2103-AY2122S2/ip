@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -44,11 +45,11 @@ public class UnmarkCommand extends Commands {
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            String trimmedArgument = arguments.trim();
-            return new CommandResult(tasks.marksTask(storage, (
-                        Integer.parseInt(trimmedArgument) - 1), false));
+            String trimmedArgument = Parser.trim(arguments);
+            return new CommandResult(tasks.marksTask(storage,
+                        Parser.convertBases(Parser.parseToInt(trimmedArgument)), false));
         } catch (IndexOutOfBoundsException err) {
-            return new CommandResult(    "Unmarking of tasks unsuccessful due to: "
+            return new CommandResult(    "Pika, unmarking the PokeTask was unsuccessful...\n"
                     + err);
         }
     }
