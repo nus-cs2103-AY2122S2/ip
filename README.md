@@ -11,9 +11,9 @@ try and open it in terminal, and run java -jar Launcher.jar
 
 Todo - Adds a todo Usage: todo **taskname**
 
-Deadline - Adds a deadline Usage: deadline **taskname** /by dd-mm-yyyy
+Deadline - Adds a deadline Usage: deadline **taskname** /by yyyy-mm-dd
 
-Event - Adds an event Usage: event **taskname** /by dd-mm-yyyy
+Event - Adds an event Usage: event **taskname** /by yyyy-mm-dd
 
 Help - Displays help screen Usage: help
 

@@ -3,3 +3,12 @@ T| |todo 3|
 T| |todo lol|
 T| |todo troll|
 D| |deadline lol |by 02-01-2222
+D| |deadline lol |by 21-21-2020
+D| |deadline lol |by 2020-21-21
+D| |deadline lol |by 2020-21-21
+D| |deadline troll |by 21-21-2002
+D| |deadline troll |by 2021-20-20
+D| |deadline troll |by 20-20-2021
+D| |deadline troll |by 20-08-2021
+D| |deadline lol |10 February 2022
+D| |deadline lol |by tmr
