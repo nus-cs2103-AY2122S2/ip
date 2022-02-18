@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -28,7 +30,9 @@ public class Storage {
 
     /** Constructor to create Storage object. */
     public Storage(String filePath) {
-        storageFile = new File(filePath);
+        String currentDir = System.getProperty("user.dir");
+        Path path = Paths.get(currentDir, filePath);
+        storageFile = new File(path.toString());
     }
 
     /**
@@ -37,8 +41,9 @@ public class Storage {
      * @throws FileIoException if unable to create file or folder.
      */
     private void createFile() throws FileIoException {
+
         try {
-            storageFile.getParentFile().mkdirs();
+            storageFile.getParentFile().mkdir();
             storageFile.createNewFile();
         } catch (IOException exception) {
             throw new FileIoException(exception.getMessage());
@@ -109,6 +114,9 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
+            if (!storageFile.exists()) {
+                createFile();
+            }
             BufferedReader bufferedReader = new BufferedReader(new FileReader(storageFile));
             String line;
             String[] tokens;
