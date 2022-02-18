@@ -7,9 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -32,11 +29,6 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Action.greet(), dukeImage));
-        Storage storage = new Storage();
-        ArrayList<Task> listOfTask = storage.readFile();
-        for (int i = 0; i < listOfTask.size(); i++) {
-            TaskBank.getBank().add(listOfTask.get(i));
-        }
     }
 
     public void setDuke(Duke d) {
