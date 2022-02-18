@@ -5,3 +5,10 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke 
+What can I do for you? 
+
+Added the following event E|0|eat|5pm
+Added the following todo
+added: T|0|read book
+added: D|0|jump|5pm
