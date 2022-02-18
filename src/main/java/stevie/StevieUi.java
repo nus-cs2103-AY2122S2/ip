@@ -41,7 +41,7 @@ public class StevieUi {
     }
 
     /**
-     * Close the scanner object.
+     * Closes the scanner object.
      */
     public void terminate() {
         System.out.println("Good bye! Hope to see you again!");
