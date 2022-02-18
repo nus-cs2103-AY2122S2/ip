@@ -2,6 +2,7 @@ package myPackage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Events extends Task {
     private String date;
@@ -12,9 +13,10 @@ public class Events extends Task {
         super(description);
         this.isDone = false;
         try {
-            String[] str = date.split("by ");
-            localDate = LocalDate.parse(str[1]);
-            this.date = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            String[] dateUnformatted = date.split("by ");
+            String[] dateSplit = dateUnformatted[1].split("-");
+            localDate = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[2]));
+            this.date = localDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         } catch (Exception e) {
             System.out.println("not proper date");
             this.date = date;
