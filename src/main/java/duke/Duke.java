@@ -43,13 +43,7 @@ public class Duke {
         }
     }
 
-    /**
-     * Checks if input is "bye"
-     */
-    private boolean isBye(String input) {
 
-        return (input.equals("bye"));
-    }
 
     /**
      * Formats a single line with a new line
@@ -62,27 +56,4 @@ public class Duke {
         return output;
     }
 
-    /**
-     * Formats a single line with the specified number of indentations
-     *
-     * @param input   Input string
-     * @param indents Number of indents to add
-     * @return String with specified number of indents
-     */
-    public static String indent(String input, int indents) {
-        String indent = "";
-        String output = "";
-
-        // Adding the appropriate number of indents
-        for (int i = 0; i < indents; i++) {
-            indent += "\t";
-        }
-
-        // Forming the final string
-        output = indent + input;
-
-        return output;
-
-
-    }
 }
