@@ -35,8 +35,8 @@ public class DukeTest {
 
     @Test
     public void parseMethodCompare() throws DukeException {
-        String userInput = "/by 2018-10-10 1800";
-        LocalDateTime localDateTime = LocalDateTime.of(2018, 10, 10, 18, 0, 0);
+        String userInput = "/by 2018-10-10 1500";
+        LocalDateTime localDateTime = LocalDateTime.of(2018, 10, 10, 15, 0, 0);
         LocalDateTime result = Parser.parseDateTime(userInput, "deadline");
         assertEquals(localDateTime.toString(), result.toString());
     }
