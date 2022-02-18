@@ -52,6 +52,8 @@ public class Parser {
                 return new UnmarkCommand(parseIndex(parsedUserInput[1]));
             case "delete":
                 return new DeleteCommand(parseIndex(parsedUserInput[1]));
+            case "find":
+                return new FindCommand(parsedUserInput[1].trim());
             case "todo":
                 String[] todoParsedArguments = parseArguments(parsedUserInput);
                 String content = todoParsedArguments[0];

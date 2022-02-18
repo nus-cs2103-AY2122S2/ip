@@ -32,6 +32,15 @@ public class Task {
     }
 
     /**
+     * Returns content of the Task.
+     *
+     * @return content of the Task.
+     */
+    public String getContent() {
+        return content;
+    }
+
+    /**
      * Formats Task indicating done tasks with an X followed by content of task.
      *
      * @return Formatted string representation of task.

@@ -26,6 +26,10 @@ public class TaskList {
         return taskList.get(index);
     }
 
+    public String getTaskContent(int index) {
+        return taskList.get(index).getContent();
+    }
+
     /**
      * Adds Task to TaskList.
      *
@@ -89,5 +93,17 @@ public class TaskList {
             dataToWrite.append(task.toSaveData());
         }
         return dataToWrite.toString();
+    }
+
+    @Override
+    public String toString() {
+        if (taskList.size() == 0) {
+            return "Your current task list is empty";
+        }
+        StringBuilder numberedTaskList = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            numberedTaskList.append(String.format("%d. %s \n", i + 1, taskList.get(i)));
+        }
+        return numberedTaskList.toString().trim();
     }
 }
