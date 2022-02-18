@@ -11,7 +11,7 @@ Graphical User Interface (GUI).
 
 1. Make sure you have Java `11` or above installed in your computer.
 
-2. Download the latest `iP.jar` from the [Releases](https://github.com/ckcherry23/ip/releases) page of Heylo's
+2. Download the latest `heylo.jar` from the [Releases](https://github.com/ckcherry23/ip/releases) page of Heylo's
    repository.
 
 3. Double-click the downloaded file to start the app. The GUI similar to this should appear.<br>
