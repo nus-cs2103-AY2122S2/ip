@@ -25,8 +25,7 @@ public class Duke {
         this.parser = new Parser();
 
         try {
-            String response = taskslist.importStorageStrings(storage.importData());
-            ui.print(response);
+            taskslist.importStorageStrings(storage.importData());
         } catch (DukeException e) {
             ui.print(e.getMessage());
         }
