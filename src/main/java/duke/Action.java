@@ -10,7 +10,8 @@ public class Action {
     Action() {}
 
     /**
-     * greets the user
+     * Greets the user
+     * @return greeting
      */
     public static String greet() {
         String logo = "---------------------------------------------------\n"
@@ -18,8 +19,6 @@ public class Action {
                 + "P P P P    A A A    N  N  N    D      D    A A A\n"
                 + "P           A      A    N       N    D D D    A      A\n"
                 + "---------------------------------------------------";
-
-
         String greeting = "Hello! I am PinkPandaBot aka\n" + logo + "\nWelcome to my ChatBot\nTip: use 'help' for help\n";
         System.out.println(greeting);
         return greeting;
