@@ -102,7 +102,7 @@ public class TaskList {
     public String handleDeadline(String originalInput) {
         String metaInfo = originalInput.split("/by")[1];
         String strippedCommand = originalInput.substring(8);
-        Task curr = null;
+        Task curr;
         try {
             curr = new Deadline(" " + strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
@@ -119,7 +119,7 @@ public class TaskList {
     public String handleEvent(String originalInput) {
         String metaInfo = originalInput.split("/at")[1];
         String strippedCommand = originalInput.substring(5);
-        Task curr = null;
+        Task curr;
         try {
             curr = new Event(" " + strippedCommand.split("/")[0], metaInfo);
         } catch (DateTimeParseException ex) {
@@ -135,9 +135,10 @@ public class TaskList {
      */
     public String handleDelete(String[] inputArray) {
         int number = Integer.parseInt(inputArray[1]);
+        boolean isValidIndex = ((number) <= 0) || ((number) > tasks.size());
 
         try {
-            if (((number) <= 0) || ((number) > tasks.size())) {
+            if (isValidIndex) {
                 throw new DukeException("Hey! That item does not exist!");
             }
         } catch (DukeException e) {

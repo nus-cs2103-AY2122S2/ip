@@ -49,7 +49,7 @@ public class Deadline extends Task {
 
 
     /**
-     * @return String string representation of this task to be saved to file
+     * @return String representation of this task to be saved to file
      */
     @Override
     public String getPrintString() {
