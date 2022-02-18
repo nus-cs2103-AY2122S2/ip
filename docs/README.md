@@ -1,5 +1,5 @@
 # User Guide
-**Duke Chatbot** is a desktop application for managing your
+**Chad-Duke** is a desktop application for managing your
 tasks. Even though it provides GUI, the application is optimized
 to be used with CLI (Command Line Interface).
 
@@ -9,9 +9,9 @@ to be used with CLI (Command Line Interface).
 
 
 ## Quick start
-1. Ensure you have Java `11` or above installed in your c
+1. Ensure you have Java `11` or above installed in your
    computer.
-2. Download the latest `Duke.jar` from [here](https://github.com/zunedz/ip/releases/tag/v0.2).
+2. Download the latest `chad_duke.jar` from [here](https://github.com/zunedz/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the
    *home folder* for your Duke.
 4. Double-click the file to start the app. The GUI 
@@ -19,7 +19,7 @@ to be used with CLI (Command Line Interface).
    
 ![Duke GUI](Ui.png)
 
-5. Folder `data` will be created as the local Duke storage in your home folder.
+5. Folder `data` will be created as the local storage in your current directory or in your home folder.
 6. Type the command in the command box and press `Enter/Send` to
    execute it.
 7. Refer to the [Features](#features) below for details of each
@@ -37,8 +37,8 @@ Example:
 Output:
 ```
 Here are the tasks in your list!
-     1. [T][X] buy pens
-     2. [D][ ] submit assignment (by: Sep 18 2021)
+     1. [T][X] eat breakfast
+     2. [D][ ] CS2103T increment (by: Sep 18 2021)
 ```
 
 ### Add a Todo Task
@@ -50,12 +50,12 @@ Format:
 
 Example:
 
-`todo buy pens`
+`todo eat breakfast`
 
 Output:
 ```
 Got it. I've added this task:
-  [T][ ] buy pens
+  [T][ ] eat breakfast
 Now you have 1 tasks in the list.
 ```
 
@@ -68,12 +68,12 @@ Format:
 
 Example:
 
-`deadline submit assignment /by 2021-09-18`
+`deadline CS2103T increment /by 2021-09-18`
 
 Output:
 ```
 Got it. I've added this task:
-  [D][ ] submit assignment (by: Sep 18 2021)
+  [D][ ] CS2103T increment (by: Sep 18 2021)
 Now you have 1 tasks in the list.
 
 ```
@@ -162,6 +162,16 @@ Undo'd, now Here are the tasks in your list!
 1. [E][X] attend workshop (at: Sep 19 2021)
 ```
 
+### Listing available commands
+Show the list of available commands and the format for each command.
+
+Example:
+
+`help`
+
+Output:
+List of all commands.
+
 ### Exiting the application
 Exit Duke Chatbot.
 
@@ -185,4 +195,6 @@ Duke application will be closed.
 |mark    |`mark [index]`<br>e.g., `mark 1`|
 |unmark  |`unmark [index]`<br>e.g., `unmark 1`|
 |undo    |`undo`|
+|help    |`help`|
 |bye     |`bye`|
+
