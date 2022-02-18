@@ -36,6 +36,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // fit all text
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         dialog.setText(text);
         displayPicture.setImage(img);
