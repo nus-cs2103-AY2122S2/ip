@@ -1,3 +1,6 @@
+![Ui png](https://user-images.githubusercontent.com/70706659/154679760-3c8fa8cb-f3cc-4242-9c6b-a3f9c9310ceb.PNG)
+
+
 # Duke
 
 A desktop task management application that has the benefits of a Graphical User Interface (GUI) while being optimized for usage like a Command Line Interface (CLI). This application makes managing your task as easy as counting from 1 to 10.
