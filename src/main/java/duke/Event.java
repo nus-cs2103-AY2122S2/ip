@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.zip.DataFormatException;
 
 /**
  * event class
@@ -18,8 +20,10 @@ public class Event extends Task {
      * @param description
      * @param at
      */
-    public Event (String description, String at) {
+    public Event (String description, String at) throws DukeException {
         super(description);
+        DukeException d = new DukeException();
+
         this.at = at;
         if (at.contains(" ")) {
             String[] dateTimeTemp = at.split(" ");
@@ -79,12 +83,13 @@ public class Event extends Task {
      * @param dateTime
      * @return reformatted date and time
      */
-    public String dateTimeFormat(String dateTime) {
-            assert at.contains("/") : "Input is not a date";
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-            LocalDate d = LocalDate.parse(dateTime, formatter);
 
-            return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    public String dateTimeFormat(String dateTime)  {
+        assert at.contains("/") : "Input is not a date";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate d = LocalDate.parse(dateTime, formatter);
+
+        return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override

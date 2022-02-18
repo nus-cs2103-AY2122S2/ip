@@ -35,7 +35,7 @@ public class Duke {
      * @param filePath
      * @throws FileNotFoundException
      */
-    public Duke (String directory, String filePath) throws FileNotFoundException {
+    public Duke (String directory, String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(directory, filePath);
         Parser parse = new Parser(directory, filePath);

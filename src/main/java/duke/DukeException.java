@@ -1,4 +1,10 @@
 package duke;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -58,6 +64,38 @@ public class DukeException extends Exception {
     }
 
     /**
+     * @param date
+     * @throws DukeException
+     */
+    public void invalidDate (String date) throws DukeException {
+        if (!date.contains("/")) {
+            throw new DukeException("Please format your date as DD/MM/YYYY");
+        } else if (!isValid(date)) {
+            throw new DukeException("Please format your date as DD/MM/YYYY");
+        }
+    }
+
+    /**
+     * @param dateStr
+     * @return whether the date is in a valid format
+     */
+    public boolean isValid(String dateStr) {
+        int noOfSlash = dateStr.length() - dateStr.replaceAll("/", "").length();
+        if (!dateStr.contains("/") || noOfSlash < 2) {
+            return false;
+        }
+        String[] str = dateStr.split("/", 3);
+        int dateLength = str[0].length();
+        int monthLength = str[1].length();
+        int yearLength = str[2].length();
+        if (dateLength == 2 && monthLength == 2 && yearLength == 4) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * check if the event commands input by user is valid
      * @param descrip
      * @throws DukeException
@@ -70,6 +108,16 @@ public class DukeException extends Exception {
             throw new DukeException("Please indicate the time for this event");
         } else if ((descrip.split("/at", 2)[1].equals(""))) {
             throw new DukeException("Please indicate the a time for this event, e.g /at 4pm");
+        }
+    }
+    /**
+     * @param deleteNo
+     * @param list
+     * @throws DukeException
+     */
+    public void invalidDelete (int deleteNo, ArrayList<Task> list) throws DukeException {
+        if (deleteNo > list.size()) {
+            throw new DukeException("You only have " + list.size() + " tasks. Please input a number again.");
         }
     }
 

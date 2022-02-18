@@ -10,8 +10,8 @@ import java.io.IOException;
 
 public class Ui {
 
-    private static final String DUKE_DIRECTORY = "C:\\DukeDirectory";
-    private static final String DUKE_TXTFILE = "C:\\DukeDirectory\\DukeSave.txt";
+    private static final String DUKE_DIRECTORY = "data";
+    private static final String DUKE_TXTFILE = "data/dukeSave.txt";
     private final TaskList taskList = new TaskList(DUKE_DIRECTORY, DUKE_TXTFILE);
     private final Storage storage = new Storage(DUKE_DIRECTORY, DUKE_TXTFILE);
     private boolean isExit = false;

@@ -8,22 +8,26 @@ import java.io.IOException;
  * inherit from Task class
  */
 public class Todos extends Task {
+    private String frontDescription;
+    private String backDescription;
 
     /**
      * @param description
      */
     public Todos(String description) {
         super(description);
-
+        this.backDescription = description;
     }
 
     @Override
     public String frontDescription() {
-        return "T | " + "[" + this.getStatusIcon() + "] ";
+        this.frontDescription = "T | " + "[" + this.getStatusIcon() + "] ";
+        return frontDescription;
     }
+
     @Override
     public String backDescription() {
-        return super.message();
+        return this.backDescription;
     }
     /**
      *

@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 /**
@@ -68,9 +69,9 @@ public class DeadLine extends Task {
      * @param dateTime
      * @return formated date and time
      */
-    public String dateTimeFormat(String dateTime) {
+    public String dateTimeFormat(String dateTime) throws DateTimeParseException {
         assert dateTime.contains("/") : "Input is not a date";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate d = LocalDate.parse(dateTime, formatter);
         return d.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }

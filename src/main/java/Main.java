@@ -14,10 +14,10 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final Duke duke = new Duke("C:\\DukeDirectory", "C:\\DukeDirectory\\DukeSave.txt");
+    private final Duke duke = new Duke("data", "data/dukeSave.txt");
     private final Image appIcon = new Image(this.getClass().getResourceAsStream("/images/appIcon.jpg"));
 
-    public Main() throws FileNotFoundException {
+    public Main() throws IOException {
     }
 
 

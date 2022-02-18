@@ -23,7 +23,7 @@ class TaskListTest {
     }
 
     @Test
-    void event() throws IOException {
+    void event() throws IOException, DukeException {
         TaskList ts = new TaskList("C:\\DukeDirectory", "C:\\DukeDirectory\\DukeSave.txt");
         assertEquals("I have added this task and the event time is:\n"
                 + " E | [ ] party (at:Jan 01 2023 2200)\n"

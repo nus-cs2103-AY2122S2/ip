@@ -1,6 +1,7 @@
 package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * deals with making sense of user command
@@ -23,10 +24,10 @@ public class Parser {
      * check if directory exist
      * @throws FileNotFoundException
      */
-    public void checkDir () throws FileNotFoundException {
+    public void checkDir () {
         File dukeDirectory = new File(directory);
         if (!dukeDirectory.exists()) {
-            throw new FileNotFoundException("Directory is not found! Please create one");
+            dukeDirectory.mkdir();
         }
     }
 
@@ -34,10 +35,10 @@ public class Parser {
      * check if file exist
      * @throws FileNotFoundException
      */
-    public void checkFile() throws FileNotFoundException {
+    public void checkFile() throws IOException {
         File dukeFile = new File (filePath);
         if (!dukeFile.exists()) {
-            throw new FileNotFoundException("File is not found in your directory! Please create one!");
+            dukeFile.createNewFile();
         }
     }
 

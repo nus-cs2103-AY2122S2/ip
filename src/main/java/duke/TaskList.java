@@ -4,7 +4,10 @@ package duke;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.zip.DataFormatException;
 
 /**
  * this class contains the task list
@@ -62,7 +65,7 @@ public class TaskList {
                 hasWord = true;
             }
             if (i == listOfInputs.size() - 1 && !hasWord) {
-                response = "No task with the word: " + "[ " + keywords + " ] ";
+                response = "No task with the word: " + "' " + keywords + " ' ";
             }
         }
         return response;
@@ -138,6 +141,13 @@ public class TaskList {
         String[] deadL = temp[1].split("/by ", 2);
         String description = deadL[0];
         String by = deadL[1];
+        try {
+            DukeException d = new DukeException();
+            d.invalidDate(by);
+        } catch (DukeException e) {
+            System.err.println(e);
+            return "Invalid date format, please rephrase as DD/MM/YYYY";
+        }
         DeadLine deadLineTemp = new DeadLine(description, by);
         listOfInputs.add(deadLineTemp);
         storage.updateData(deadLineTemp.message(), filePath);
@@ -153,8 +163,17 @@ public class TaskList {
      * @return
      * @throws IOException
      */
-    public String event(String str) throws IOException {
+    public String event(String str) throws IOException, DukeException {
+
         String[] event = str.split("/at ", 2);
+        try {
+            DukeException d = new DukeException();
+            d.invalidDate(event[1]);
+        } catch (DukeException e) {
+            System.err.println(e);
+            return "Invalid date format, please rephrase as DD/MM/YYYY";
+        }
+        DukeException d = new DukeException();
         Event eventTemp = new Event(event[0], event[1]);
         listOfInputs.add(eventTemp);
         storage.updateData(eventTemp.message(), filePath);
@@ -172,10 +191,17 @@ public class TaskList {
      */
     public String delete(String str) {
         int currNo = Integer.parseInt(str) - 1;
-        listOfInputs.remove(currNo);
-        Delete deleteTemp = new Delete(listOfInputs.get(currNo).getDescription());
-        String message = deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.";
-        return message;
+        try {
+            DukeException d = new DukeException();
+            d.invalidDelete(currNo, listOfInputs);
+        } catch (IndexOutOfBoundsException | DukeException e) {
+            System.err.println(e);
+            return "You only have " + listOfInputs.size() + " tasks. Please input a number again.";
+        }
+            listOfInputs.remove(currNo);
+            Delete deleteTemp = new Delete(listOfInputs.get(currNo).getDescription());
+            String message = deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.";
+            return message;
     }
 
     /**
@@ -187,7 +213,7 @@ public class TaskList {
         String line = bufReader.readLine();
         while (line != null) {
             if (!line.isEmpty()) {
-                String[] str = line.split("]");
+                String[] str = line.split("] ");
                 String description = str[1];
                 String symbol = str[0].substring(0, 1);
                 Boolean isTaskComplete = str[0].contains("X");
