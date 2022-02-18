@@ -46,6 +46,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
+
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -94,7 +95,9 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
-
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hello Im duke, A task manager, how can I help u?", dukeImg)
+        );
         sendButton.setOnMouseClicked((event) -> {
             try {
                 handleUserInput();
