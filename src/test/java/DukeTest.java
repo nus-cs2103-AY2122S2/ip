@@ -1,5 +1,6 @@
-import Tasks.Deadline;
-import Tasks.ToDo;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.ToDo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,14 @@ public class DukeTest {
         Deadline deadline = new Deadline("assignment 1", localDateTime);
         String expected = "[D][ ] assignment 1 (by: Oct 10 2019 6:30 am)";
         assertEquals(deadline.toString(), expected);
+    }
+
+    @Test
+    public void eventObjectCompare() {
+        LocalDateTime localDateTime = LocalDateTime.of(2019, 10, 10, 6, 30);
+        Event event = new Event("assignment 2", localDateTime);
+        String expected = "[E][ ] assignment 2 (at: Oct 10 2019 6:30 am";
+        assertEquals(event.toString(), expected);
     }
 
     @Test
