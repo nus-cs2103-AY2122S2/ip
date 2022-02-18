@@ -1,0 +1,4 @@
+D |   | return book | Oct 15 2019
+W |   | t | Oct 16 2019 | Oct 17 2019
+T |   | eat lunch
+T |   | eat dinner

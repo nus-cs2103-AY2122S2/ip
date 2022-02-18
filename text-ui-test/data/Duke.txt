@@ -1,0 +1,8 @@
+D | X | return book | Dec 01 2019
+E |   | project meeting | Dec 02 2019
+T |   | borrow book
+D |   | return book | Dec 01 2019
+E |   | project meeting | Dec 02 2019
+T |   | borrow book
+D |   | return book | Dec 01 2019
+E |   | project meeting | Dec 02 2019
