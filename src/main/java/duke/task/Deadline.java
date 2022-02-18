@@ -61,7 +61,6 @@ final class Deadline extends Task {
 
     /**
      * Parses the details containing the event description and due time.
-     * <p>
      * (The details will be encapsulated in a separated class in the future if needed).
      *
      * @param details The string containing the event description and due time.
