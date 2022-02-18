@@ -34,7 +34,6 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
-
         showExceptions true
         exceptionFormat "full"
         showCauses true
@@ -56,7 +55,7 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run {
+run{
     enableAssertions = true
     standardInput = System.in
 }

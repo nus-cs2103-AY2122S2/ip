@@ -23,13 +23,18 @@ public class TaskList {
 
     public String list() {
         String str = "";
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (i >= 1) {
-                str += "\n";
+        if (arrayList.size() == 0) {
+            str += "Task list is empty! Try adding some tasks to begin!";
+            return str;
+        } else {
+            for (int i = 0; i < arrayList.size(); i++) {
+                if (i >= 1) {
+                    str += "\n";
+                }
+                str += (i + 1) + ". " + arrayList.get(i).toString();
             }
-            str += (i + 1) + ". " + arrayList.get(i).toString();
+            return str;
         }
-        return str;
     }
 
     public void mark(int index) {
