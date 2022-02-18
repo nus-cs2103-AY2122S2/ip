@@ -17,15 +17,8 @@ public abstract class Command {
      * @param tasks   task list to make changes on
      * @param storage to handle the saving of data
      * @param ui      to pass a response string for output
+     * @param undoHistory handles the history of the commands executed
      * @return false if Command does not terminate session with Stevie, else true
      */
     public abstract String execute(TaskList tasks, TaskDataHandler storage, StevieUi ui, UndoHistory undoHistory);
-
-    /**
-     * Returns true if command causes program to terminate, else return false.
-     * @return false as command is non-terminating by default
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

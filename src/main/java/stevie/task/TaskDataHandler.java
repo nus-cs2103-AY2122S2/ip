@@ -2,6 +2,7 @@ package stevie.task;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,13 +20,23 @@ import stevie.task.types.TaskType;
  */
 public class TaskDataHandler {
     private final String path;
+    private final String file;
 
     /**
      * Constructor for TaskDataHandler
      * @param path the location where save file is stored
      */
-    public TaskDataHandler(String path) {
+    public TaskDataHandler(String path, String file) {
         this.path = path;
+        this.file = file;
+        init();
+    }
+
+    private void init() {
+        File directory = new File(path);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
     }
 
     /**
@@ -35,7 +46,7 @@ public class TaskDataHandler {
      */
     public void saveTasks(ArrayList<Task> tasks) {
         try {
-            FileWriter fw = new FileWriter(path);
+            FileWriter fw = new FileWriter(path + file);
             BufferedWriter bw = new BufferedWriter(fw);
             for (Task task : tasks) {
                 bw.write(task.generateTaskSaveData());
@@ -56,7 +67,7 @@ public class TaskDataHandler {
      */
     public ArrayList<Task> loadTasks() {
         try {
-            FileReader fr = new FileReader(path);
+            FileReader fr = new FileReader(path + file);
             BufferedReader br = new BufferedReader(fr);
             String line;
             ArrayList<Task> taskList = new ArrayList<>();

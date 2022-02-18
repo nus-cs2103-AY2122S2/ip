@@ -30,6 +30,7 @@ public class AddCommand extends ChangeCommand<Task> {
      * @param tasks   task list to make changes on
      * @param storage to handle the saving of data
      * @param ui      to pass a response string for output
+     * @param undoHistory handles the history of the commands executed
      * @return false to not terminate the session
      */
     @Override
@@ -43,6 +44,11 @@ public class AddCommand extends ChangeCommand<Task> {
         return out;
     }
 
+    /**
+     * Generate undo command for add command. Removes the last task that was
+     * added.
+     * @return an undo command to undo the previous add command
+     */
     public Undo generateUndo() {
         return new UndoAdd();
     }

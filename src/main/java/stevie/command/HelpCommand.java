@@ -5,6 +5,10 @@ import stevie.task.TaskDataHandler;
 import stevie.task.TaskList;
 import stevie.undo.UndoHistory;
 
+/**
+ * HelpCommand issues a help message to inform the user on how to operate with
+ * Stevie chatbot.
+ */
 public class HelpCommand extends Command {
     private static final String helpString = "-\"list\": to display your activities.\n"
             + "-\"bye\": to end our session.\n"
@@ -22,6 +26,7 @@ public class HelpCommand extends Command {
      * @param tasks   task list to make changes on
      * @param storage to handle the saving of data
      * @param ui      to pass a response string for output
+     * @param undoHistory handles the history of the commands executed
      * @return string of instruction
      */
     @Override

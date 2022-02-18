@@ -19,8 +19,8 @@ public class Stevie {
     /**
      * Path to the save file for task list
      */
-    private static final String path = "src" + File.separator + "main"
-            + File.separator + "data" + File.separator + "tasks.txt";
+    private static final String path = "data" + File.separator;
+    private static final String file = "tasks.txt";
 
     /**
      * Task list to store all of user's upcoming tasks
@@ -47,18 +47,9 @@ public class Stevie {
      */
     public Stevie() {
         ui = new StevieUi();
-        storage = new TaskDataHandler(path);
+        storage = new TaskDataHandler(path, file);
         tasks = new TaskList(storage.loadTasks());
         undoHistory = new UndoHistory();
-    }
-
-    /**
-     * Starts CLI for Stevie
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        new Stevie().run();
     }
 
     /**
@@ -77,25 +68,5 @@ public class Stevie {
             out = ex.getMessage();
         }
         return out;
-    }
-
-    /**
-     * Method to start and sustain command-line session with user.
-     */
-    private void run() {
-        ui.greet();
-        boolean isExit = false;
-        String userIn;
-        while (!isExit) {
-            try {
-                userIn = ui.getUserInput();
-                Command command = StevieParser.parse(userIn);
-                command.execute(tasks, storage, ui, undoHistory);
-                isExit = command.isExit();
-            } catch (StevieException ex) {
-                ui.outputMessage(ex.getMessage());
-            }
-        }
-        ui.terminate();
     }
 }

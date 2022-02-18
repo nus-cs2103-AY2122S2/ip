@@ -6,6 +6,10 @@ import stevie.exception.ParserException;
 import stevie.exception.TaskException;
 import stevie.parser.types.Parser;
 
+/**
+ * FindParser takes a raw string and parses it into a FindCommand, that is used
+ * to find tasks in task list that matches with a query string.
+ */
 public class FindParser implements Parser {
     private final String queryString;
     public FindParser(String input) {

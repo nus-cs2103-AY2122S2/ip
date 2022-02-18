@@ -30,6 +30,7 @@ public class FindCommand extends Command {
      * @param tasks   task list to find from
      * @param storage task list data handler
      * @param ui      user interface to print response string
+     * @param undoHistory handles the history of the commands executed
      * @return false to indicate that command does not terminate Stevie
      */
     @Override

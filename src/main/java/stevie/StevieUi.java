@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 /**
  * This class interacts with the user by receiving inputs from the user, as well as, returning the
- * response to the user.
+ * response to the user. This UI is deprecated as users can now use the GUI to interact. However, developers
+ * can opt to use the command line UI in order for a quicker debug process.
  */
 public class StevieUi {
     private Scanner sc;

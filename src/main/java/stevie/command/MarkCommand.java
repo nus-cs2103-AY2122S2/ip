@@ -42,6 +42,7 @@ public class MarkCommand extends ChangeCommand<Integer> {
      * @param tasks   task list to make changes on
      * @param storage to handle the saving of data
      * @param ui      to pass a response string for output
+     * @param undoHistory handles the history of the commands executed
      * @return false to not terminate the session
      */
     @Override
@@ -60,6 +61,11 @@ public class MarkCommand extends ChangeCommand<Integer> {
         return out;
     }
 
+    /**
+     * Generate undo command for the mark/unmark command.
+     * @param idx index of the task that was edited
+     * @return undo command that reverses mark/unmark command
+     */
     public Undo generateUndo(int idx) {
         return new UndoMark(idx, !isDone);
     }

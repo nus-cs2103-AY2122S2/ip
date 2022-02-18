@@ -31,6 +31,7 @@ public class DeleteCommand extends ChangeCommand<Integer> {
      * @param tasks   task list to make changes on
      * @param storage to handle the saving of data
      * @param ui      to pass a response string for output
+     * @param undoHistory handles the history of the commands executed
      * @return false to not terminate the session
      */
     @Override
@@ -49,6 +50,12 @@ public class DeleteCommand extends ChangeCommand<Integer> {
         return out;
     }
 
+    /**
+     * Generate an undo command that is used to reverse this command.
+     * @param idx index at which task is deleted
+     * @param task task that was deleted
+     * @return undo command
+     */
     public Undo generateUndo(int idx, Task task) {
         return new UndoDelete(idx, task);
     }
