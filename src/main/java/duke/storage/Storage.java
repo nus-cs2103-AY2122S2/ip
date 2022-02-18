@@ -18,12 +18,15 @@ import duke.ui.Ui;
 
 /**
  * Represents a storage tool in-charge of reading, writing and appendign to the database.
- * A <code>Storage</code> is further represented by the databasePath that allows and
- * facilitate connection to the database file e.g., <code>"./src/database.txt"</code>.
+ * A Storage is further represented by the databasePath that allows and
+ * facilitate connection to the database file e.g., "./src/database.txt".
  */
 public class Storage {
     private final String databasePath;
 
+    /**
+     * The sole constructor of the Storage class.
+     */
     public Storage() {
         Path dataFolderAbsPath = Paths.get("src/main/java/duke/data");
         boolean hasDirectoryExist = Files.exists(dataFolderAbsPath);
@@ -33,14 +36,16 @@ public class Storage {
 
         Path dataAbsPath = Paths.get("src/main/java/duke/data/DukeDatabase.txt");
         boolean hasDataFileExist = Files.exists(dataAbsPath);
-        if(!hasDataFileExist) {
+        if (!hasDataFileExist) {
             new File(dataAbsPath.toAbsolutePath().toString());
         }
 
         this.databasePath = dataAbsPath.toAbsolutePath().toString();
-        //this.databasePath = "C:/Users/benny/Desktop/Y2S2/CS2103T_Software_Engineer/"+ "Individual_Project/src/main/java/duke/data/DukeDatabase.txt";
     }
 
+    /**
+     * Aid in the creation of a database file in the case where one was not created.
+     */
     public void createDatabaseFile() {
         Path dataFolderAbsPath = Paths.get("src/main/java/duke/data/");
         boolean hasDirectoryExist = Files.exists(dataFolderAbsPath);
@@ -50,11 +55,18 @@ public class Storage {
 
         Path dataAbsPath = Paths.get("src/main/java/duke/data/DukeDatabase.txt");
         boolean hasDataFileExist = Files.exists(dataAbsPath);
-        if(!hasDataFileExist) {
+        if (!hasDataFileExist) {
             new File(dataAbsPath.toString());
         }
     }
 
+    /**
+     * Writes or appends to the database.
+     *
+     * @param textToAppend Text to append or write in the database.
+     * @param isAppendOrWrite Denote whether to write or append to the database.
+     * @throws IOException When the FileWriter has an IOException error.
+     */
     public void writeToDatabase(String textToAppend, boolean isAppendOrWrite) throws IOException {
         FileWriter fw = new FileWriter(databasePath, isAppendOrWrite); // Append instead of rewriting over
         fw.write(textToAppend);
@@ -62,14 +74,13 @@ public class Storage {
     }
 
     /**
-     * Returns a boolean based on whether the database was successfully re-written.
-     * If the method executed successfully, it returns true, else it returns false.
+     * It acts as a handler facilitating the writing to the database.
      *
-     * @param textToAdd Text that will re-write the database.
-     * @return a boolean value indicating the success of writing to the database.
+     * @param textToAdd Text to be written into the database.
+     * @return a boolean value indicating the status of writing to the database.
      */
     public boolean hasWriteToDatabase(String textToAdd) {
-        assert !databasePath.equals(""):"The database file could not be found. Try PokeJournal again later";
+        assert !databasePath.equals("") : "The database file could not be found. Try PokeJournal again later";
         try {
             writeToDatabase(textToAdd, false);
         } catch (IOException err) {
@@ -81,14 +92,13 @@ public class Storage {
     }
 
     /**
-     * Returns a boolean based on whether the database was successfully appended.
-     * If the method executed successfully, it returns true, else it returns false.
+     * It acts as a handler facilitating the appending to the database.
      *
-     * @param textToAppend Text that will re-write the database.
-     * @return a boolean value indicating the success of writing to the database.
+     * @param textToAppend Text to append to the database.
+     * @return a boolean value indicating the status of appending to the database.
      */
     public boolean hasAppendToDatabase(String textToAppend) {
-    assert !databasePath.equals(""):"The database file could not be found. Try PokeJournal again later";
+    assert !databasePath.equals("") : "The database file could not be found. Try PokeJournal again later";
         try {
             writeToDatabase(textToAppend, true);
         } catch (IOException err) {
@@ -100,9 +110,7 @@ public class Storage {
     }
 
     /**
-     * Returns an arraylist of all the <code>Tasks</code> stored within the database.
-     * If the method is successful, it will return an arraylist with <code>Tasks</code>,
-     * else it returns one that is empty.
+     * Return a collection of tasks available in the storage.
      *
      * @return an arraylist with all the Tasks stored in the database.
      */
@@ -137,10 +145,7 @@ public class Storage {
     }
 
     /**
-     * Load all the <code>Tasks</code> from the database using other methods.
-     * Returns an arraylist of all the <code>Tasks</code> stored within the database.
-     * If the method is successful, it will return an arraylist with <code>Tasks</code>,
-     * else it returns one that is empty.
+     * Load all the Tasks from the database into a collection.
      *
      * @return an arraylist with all the Tasks stored in the database.
      */
@@ -151,9 +156,5 @@ public class Storage {
             Ui.showErrorMessage(err, "load");
             return new ArrayList<Tasks>();
         }
-    }
-
-    public String getDatabasePath() {
-        return databasePath;
     }
 }

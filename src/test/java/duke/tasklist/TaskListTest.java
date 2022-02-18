@@ -1,20 +1,14 @@
 package duke.tasklist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.storage.Storage;
 import duke.storage.StorageStub;
-import duke.task.Tasks;
-import duke.task.Todos;
 
-// Format of testing -> WhatIsTested_descriptionOfTestInputs_ExpectedOutcome
-// Testing .assertEquals(Expected, actual)
+/**
+ * A class that is used to test the methods within the TaskList class.
+ */
 public class TaskListTest {
 
     @Test

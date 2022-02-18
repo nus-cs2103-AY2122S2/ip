@@ -7,24 +7,26 @@ import duke.task.Tasks;
 import duke.ui.Ui;
 
 /**
- *
+ * The TaskList class is a class that help facilitate the CRUD function for the PokeTasks. The process is
+ * facilitated with an ArrayList of Tasks loaded from the Storage.
  */
 public class TaskList {
 
-    private static final int ONE_BASEDINDEX= 1;
-    private static final int ZERO_BASEDINDEX= 1;
+    private static final int ONE_BASEDINDEX = 1;
+    private static final int ZERO_BASEDINDEX = 1;
     private final ArrayList<Tasks> taskList;
 
     /**
+     * One of the two constructors available to create a TaskList instance.
      *
-     * @param taskList
+     * @param taskList An array that contains all the tasks.
      */
     public TaskList(ArrayList<Tasks> taskList) {
         this.taskList = new ArrayList<Tasks>(taskList);
     }
 
     /**
-     *
+     * One of the two constructors available to create a TaskList instance.
      */
     public TaskList() {
         this.taskList = new ArrayList<Tasks>();
@@ -51,34 +53,33 @@ public class TaskList {
         }
         return filteredTasks;
     }
-    // Maybe can abstract out the printing portion
+
     /**
+     * A helper that facilitate the querying of tasks that contains a keyword.
      *
-     * @param query
-     * @return
+     * @param query The keyword to query the database of tasks.
+     * @return A String value denoting the tasks containing the query keyword.
      */
     public String queryTasks (String query) {
         ArrayList<Tasks> filteredData = filterDataSet(query);
         return Ui.returnQueriedTaskRes(listInPrintFormat(filteredData));
     }
 
-    // Delete duke.task -> returns duke.task deleted, then returns string to append
     /**
-     * Initiate the main bulk of adding a task from the user input into the database.
-     * If this is successful, it will return a boolean value of True.
+     * Add a task into the database.
      *
      * @param task Task to be added to the database
-     * @param storage Storage that facilitate writing of Task into the database
-     * @return returns a boolean value of the success of adding a task
+     * @param storage Storage of the program.
+     * @return returns a String denoting the status of the program.
      */
     public String addsTask(Tasks task, Storage storage) {
-        if (storage.hasAppendToDatabase(task.toDatabaseString() + "\n")){
+        if (storage.hasAppendToDatabase(task.toDatabaseString() + "\n")) {
             return Ui.returnAddTaskRes(task.toString(), Boolean.TRUE);
         }
         return Ui.returnAddTaskRes(task.toString(), Boolean.FALSE);
     }
 
-    private String listInDataFormat(ArrayList<Tasks> edittedTasksList){
+    private String listInDataFormat(ArrayList<Tasks> edittedTasksList) {
         StringBuilder tasksToDataFormat = new StringBuilder();
         for (int i = 0; i < edittedTasksList.size(); i++) {
             tasksToDataFormat.append(edittedTasksList.get(i).toDatabaseString()).append("\n");
@@ -86,10 +87,10 @@ public class TaskList {
         return tasksToDataFormat.toString();
     }
 
-    private String listInPrintFormat(ArrayList<Tasks> edittedTasksList){
+    private String listInPrintFormat(ArrayList<Tasks> edittedTasksList) {
         StringBuilder tasksToDataFormat = new StringBuilder();
         for (int i = 0; i < edittedTasksList.size(); i++) {
-            tasksToDataFormat.append("   ").append(i+ONE_BASEDINDEX).append(". ")
+            tasksToDataFormat.append("   ").append(i + ONE_BASEDINDEX).append(". ")
                     .append(edittedTasksList.get(i).toString()).append("\n");
         }
         return tasksToDataFormat.toString();
@@ -155,6 +156,13 @@ public class TaskList {
         return Ui.returnDeleteTaskRes("", Boolean.FALSE);
     }
 
+    /**
+     * This is a handler that help facilitate the single or mass deletion of tasks.
+     *
+     * @param taskIndicesToDelete An array of indices that indicate tasks to be deleted.
+     * @param storage Represents the storage of the program.
+     * @return A String representing the status of the completion of the method.
+     */
     public String deleteTaskHandler(int[] taskIndicesToDelete, Storage storage) {
         if (arrayCounter(taskIndicesToDelete) <= 0) {
             return Ui.returnNoTaskRes();
@@ -168,13 +176,18 @@ public class TaskList {
             return Ui.returnDeleteHandlerRes(collatedStatus);
         }
 
-        for (int i = arrayCounter(taskIndicesToDelete) - ONE_BASEDINDEX; i>=0; i--) {
+        for (int i = arrayCounter(taskIndicesToDelete) - ONE_BASEDINDEX; i >= 0; i--) {
             collatedStatus += deletesTask(taskIndicesToDelete[i], duplicateTaskList, storage);
             duplicateTaskList = storage.load();
         }
         return Ui.returnDeleteHandlerRes(collatedStatus);
     }
 
+    /**
+     * A helper that faciltiate the listing of all tasks in the storage.
+     *
+     * @return A String of all the tasks in the storage.
+     */
     public String listsTask() {
         return Ui.returnListTaskRes(listInPrintFormat(taskList));
     }

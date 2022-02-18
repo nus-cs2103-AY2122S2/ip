@@ -5,19 +5,16 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command that prompt user to enter a valid command. A <code>HelpCommand</code> object
+ * Represents a command that prompt user to enter a valid command. A ]HelpCommand object
  * corresponds to a command that prompts and educate the user valid commands of the bot.
  */
 public class HelpCommand extends Commands {
 
-    public static final String COMMAND_WORDS = "help";
     public static final String SUCCESS_MESSAGE = "Pika? Check if you have typed in the wrong command pikapika!";
-    public static final String FAILURE_MESSAGE = "";
     private static final boolean IS_EXIT = false;
 
     /**
-     * Returns the apt exit instruction after the command is executed.
-     * If the program ends after this is executed, true is returned.
+     * Aid in exiting the program if the command calls for it.
      *
      * @return the apt exit instruction.
      */
@@ -27,7 +24,7 @@ public class HelpCommand extends Commands {
     }
 
     /**
-     * Executes a <Code>HelpCommand</Code>. When the command is executed, the user is prompted
+     * Executes a HelpCommand. When the command is executed, the user is prompted
      * to type a valid command, and introduce them to valid commands of the bot.
      *
      * @param tasks An arraylist of tasks reflective of the current state in the database.

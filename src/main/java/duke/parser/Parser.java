@@ -12,19 +12,37 @@ import duke.command.UnmarkCommand;
 
 /**
  * Represents a parser that makes sense of the command provided by the user.
- * A <code>ParserTest</code> corresponds to a parsing tool whose method can be
+ * A ParserTest corresponds to a parsing tool whose method can be
  * used universally to make sense of a user input.
  */
 public class Parser {
 
+    /**
+     * Trim the input of the user.
+     *
+     * @param input Input to be trimmed.
+     * @return Return a trimmed output of the input.
+     */
     public static String trim(String input) {
         return input.trim();
     }
 
+    /**
+     * Parse a String to its Integer counterpart.
+     *
+     * @param input Input to be parsed.
+     * @return The Integer counterpart of the input.
+     */
     public static Integer parseToInt(String input) {
         return Integer.parseInt(input);
     }
 
+    /**
+     * A method that abstract away the method of parsing a string array into an integer array.
+     *
+     * @param input Takes in the String array to be parsed.
+     * @return Returns the Integer array parsed from the String.
+     */
     public static int[] parseToIntArray(String[] input) {
         int[] parsedArray = new int[input.length];
         if (parsedArray.length < 1) {
@@ -37,10 +55,22 @@ public class Parser {
         return parsedArray;
     }
 
+    /**
+     * Convert an input into its zero-based counterpart.
+     *
+     * @param input The integer to be converted to its zero-based counterpart.
+     * @return The zero-based counterpart of the input.
+     */
     public static Integer convertBases(Integer input) {
         return input - 1;
     }
 
+    /**
+     * Convert all the elements in an array into its zero-indexed counterpart.
+     *
+     * @param input An integer array seeking to have its bases converted.
+     * @return The integer array which is now zero-indexed.
+     */
     public static int[] massConvertBases(int[] input) {
         int[] newBaseArray = new int[input.length];
         if (input.length < 1) {
@@ -53,6 +83,14 @@ public class Parser {
         return newBaseArray;
     }
 
+    /**
+     * Split a String.
+     *
+     * @param input The String to be split.
+     * @param condition A String keyword to split the input by.
+     * @param limit The number of maximum elements to be split.
+     * @return A split String array.
+     */
     public static String[] splitString(String input, String condition, Integer limit) {
         return input.split(condition, limit);
     }

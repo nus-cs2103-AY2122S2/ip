@@ -1,19 +1,5 @@
 package duke;
 
-import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
-
-import duke.controller.DialogBox;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import duke.command.Commands;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -30,12 +16,22 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
 
+    /**
+     * Sole constructor for an instance of the class Duke.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Act as a bridge between the business logic of the code and the models. It parses commands from the
+     * User Interface and returns a response based on the execution of the command.
+     *
+     * @param inputCommand Command provided by the user in the text input.
+     * @return A string response resulted from the business logic of the code.
+     */
     public String getResponse(String inputCommand) {
         Commands c = Parser.parse(inputCommand);
         tasks = new TaskList(storage.load());
