@@ -12,29 +12,29 @@ MNSKY is a chatbot that can help you remember and manage your tasks.
 
 3. [Command Usage](#command-usage)
 
-- [hi](#hi---prints-greeting-message)
+    - [hi - Prints greeting message](#hi---prints-greeting-message)
 
-- [list](#list---prints-the-task-list)
+    - [list - Prints the task list](#list---prints-the-task-list)
 
-- [todo](#todo---adds-task-to-the-task-list)
+    - [todo - Adds task to the task list](#todo---adds-task-to-the-task-list)
 
-- [event](#event---adds-event-to-the-task-list)
+    - [event - Adds event to the task list](#event---adds-event-to-the-task-list)
 
-- [deadline](#deadline---adds-deadline-to-the-task-list)
+    - [deadline - Adds deadline to the task list](#deadline---adds-deadline-to-the-task-list)
 
-- [mark](#mark---marks-a-task)
+    - [mark - Marks a task](#mark---marks-a-task)
 
-- [unmark](#unmark---unmarks-a-task)
+    - [unmark - Unmarks a task](#unmark---unmarks-a-task)
 
-- [delete](#delete---deletes-a-task)
+    - [delete - Deletes a task](#delete---deletes-a-task)
 
-- [find](#find---deletes-a-task)
+    - [find - Finds tasks](#find---deletes-a-task)
 
-- [undo](#undo---undoes-a-change-to-the-task-list)
+    - [undo - Undoes a change to the task list](#undo---undoes-a-change-to-the-task-list)
 
-- [redo](#redo---redoes-an-undone-change-to-the-task-list)
+    - [redo - Redoes a change to the task list](#redo---redoes-an-undone-change-to-the-task-list)
 
-- [bye](#bye---shut-down-mnsky)
+    - [bye - Shuts down MNSKY](#bye---shut-down-mnsky)
 
 ## Features 
 
@@ -227,7 +227,7 @@ it has deleted as shown below.
 I can help!
 ```
 
-### `find` - Deletes a task
+### `find` - Finds tasks
 
 Finds and prints all the tasks which has the search term in their name.
 
@@ -269,7 +269,7 @@ state of the task list after undoing, such as in the example below.
 I can help!
 ```
 
-### `redo` - Redoes an undone change to the task list
+### `redo` - Redoes a change to the task list
 
 Redoes the most recent undone change to the task list.
 
@@ -288,7 +288,7 @@ the state of the task list after redoing, such as in the example below.
 I can help!
 ```
 
-### `bye` - Shut down MNSKY
+### `bye` - Shuts down MNSKY
 
 Causes MNSKY to shut itself down. At this point, it will only give
 blank responses.
