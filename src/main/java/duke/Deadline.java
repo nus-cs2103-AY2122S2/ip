@@ -26,7 +26,7 @@ public class Deadline extends Task {
      */
     @Override
     public String saveFormat() {
-        return super.saveFormat() + " ### " + this.time;
+        return super.saveFormat() + " ### " + this.getTime();
     }
 
     /**
@@ -36,6 +36,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + "(by: " + this.date.format(FORMATTER) + ")" + "  " +  this.tag;
+        return super.toString() + "(by: " + this.getDate() + ")" + "  " + this.getTag();
     }
 }

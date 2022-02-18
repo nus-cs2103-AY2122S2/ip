@@ -26,7 +26,7 @@ public class Event extends Task {
      */
     @Override
     public String saveFormat() {
-        return super.saveFormat() + " ### " + this.time;
+        return super.saveFormat() + " ### " + this.getTime();
     }
 
     /**
@@ -36,7 +36,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + "(at: " + this.date.format(FORMATTER) + ")" + "  " +  this.tag;
+        return super.toString() + "(at: " + this.getDate() + ")" + "  " + this.getTag();
     }
 
 }

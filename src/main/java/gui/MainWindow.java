@@ -1,8 +1,8 @@
 package gui;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.Ui;
-import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

@@ -1,11 +1,12 @@
-import duke.Event;
+package test;
 
-import org.testng.annotations.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.testng.annotations.Test;
+
+import duke.Event;
 
 public class EventTest {
-
     @Test
     public void testToString() {
         Event event = new Event("zoom meeting", " 2022-01-22");

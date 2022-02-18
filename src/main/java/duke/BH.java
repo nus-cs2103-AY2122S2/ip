@@ -51,7 +51,7 @@ public class BH {
      * creates a new BH object and start running the program
      */
     public static class Duke {
-        public BH bh;
+        private BH bh;
 
         /**
          * Constructs a Duke

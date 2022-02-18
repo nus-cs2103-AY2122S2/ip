@@ -57,13 +57,13 @@ public class TaskList {
 
     String mark(int index) {
         this.list.get(index).mark();
-        assert(this.list.get(index).isDone);
+        assert(this.list.get(index).isDone());
         return this.list.get(index).toString();
     }
 
     String unMark(int index) {
         this.list.get(index).unMark();
-        assert(!this.list.get(index).isDone);
+        assert(!this.list.get(index).isDone());
         return this.list.get(index).toString();
     }
 

@@ -10,13 +10,14 @@ import java.time.format.DateTimeFormatter;
  * @version 0.0.0
  */
 public class Task {
-    public boolean isDone;
-    public String task;
-    public String type;
-    public String time;
-    public LocalDate date;
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
-    public String tag;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private boolean isDone;
+    private String task;
+    private String type;
+    private String time;
+    private LocalDate date;
+
+    private String tag;
 
     /**
      * Constructor of task
@@ -44,7 +45,7 @@ public class Task {
         this.task = task;
         this.type = type;
         this.time = time;
-        String timeArr[] = time.split(" ");
+        String[] timeArr = time.split(" ");
         this.date = LocalDate.parse(timeArr[1]);
         this.tag = " ";
     }
@@ -78,8 +79,8 @@ public class Task {
      *
      * @return Date of the task
      */
-    LocalDate getDate() {
-        return this.date;
+    String getDate() {
+        return this.date.format(FORMATTER);
     }
 
     /**
@@ -94,6 +95,16 @@ public class Task {
         } else {
             return this.type + " ### 0 ### " + this.task;
         }
+    }
+
+    boolean isDone() {
+        return this.isDone;
+    }
+    String getTime() {
+        return this.time;
+    }
+    String getTag() {
+        return this.tag;
     }
 
     /**
