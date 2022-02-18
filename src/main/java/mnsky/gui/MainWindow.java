@@ -2,7 +2,6 @@ package mnsky.gui;
 
 import java.util.ArrayList;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -17,8 +16,6 @@ import mnsky.core.Mnsky;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private static final int NUM_LINES_IN_BOX = 3;
-
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -71,18 +68,13 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         }
 
-        for (int i = 0; i < responses.size(); i += NUM_LINES_IN_BOX) {
-            StringBuilder response = new StringBuilder();
-            for (int j = i; j < responses.size() && j < i + NUM_LINES_IN_BOX; j++) {
-                if (responses.get(j).equals("bye")) {
-                    Platform.exit();
-                }
-                response.append(responses.get(j));
-                response.append('\n');
-            }
-
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(response.toString(), mnskyImage));
+        StringBuilder final_response = new StringBuilder();
+        for (String response : responses) {
+            final_response.append(response);
+            final_response.append('\n');
         }
+
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(final_response.toString(), mnskyImage));
 
         userInput.clear();
     }
