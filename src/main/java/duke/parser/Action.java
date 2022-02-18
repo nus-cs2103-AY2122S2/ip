@@ -13,4 +13,5 @@ public enum Action {
     EVENT,
     DELETE,
     FIND,
+    HELP
 }

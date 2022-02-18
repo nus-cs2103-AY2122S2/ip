@@ -182,10 +182,43 @@ public class Ui {
         }
     }
 
+    /**
+     * Show all found keywords using find command
+     * @param searchedTaskList filtered task list
+     * @param result the result string
+     * @return
+     */
     private String showAllSearchedKeywords(ArrayList<String> searchedTaskList, String result) {
         for (String s : searchedTaskList) {
             result += s + "\n";
         }
         return result;
     }
+
+    /**
+     * Shows found task using find command
+     * @return a string of message
+     */
+    public String showHelp() {
+        String result = "To get started, try todo <task>\n\n" +
+                "other command:\n" +
+                "list:\nlist all added tasks\n" +
+                "event/deadline <task> by/at <date>:\n" +
+                "add event/deadline task\n\n" +
+                "mark/unmark <number>:\n" +
+                "mark task as done\n\n" +
+                "delete <number>:\n" +
+                "delete a task in list\n\n" +
+                "find <keyword>:\n" +
+                "return all task that has the keyword\n\n" +
+                "bye:\n" +
+                "quit the application\n\n" +
+                "\nDuke automatically save your tasks, \n" +
+                "so when you enter next time, you will see the task"
+                ;
+        return result;
+    }
+
+
+
 }

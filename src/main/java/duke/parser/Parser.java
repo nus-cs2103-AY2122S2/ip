@@ -50,6 +50,9 @@ public class Parser {
             case FIND:
                 command = new FindCommand(input);
                 break;
+            case HELP:
+                command = new HelpCommand(input);
+                break;
             default:
                 command = new InvalidCommand();
             }
