@@ -5,3 +5,34 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+enter a command
+use command 'help' to see list of commands
+task added:
+[T][ ] buy groceries
+you now have 1 tasks
+task added:
+[D][ ] homework  (by: friday)
+you now have 2 tasks
+task added:
+[E][ ] bday party  (at: 4pm)
+you now have 3 tasks
+great job! I've marked this task as done: buy groceries
+1. [T][X] buy groceries
+2. [D][ ] homework  (by: friday)
+3. [E][ ] bday party  (at: 4pm)
+great job! I've marked this task as done: bday party
+1. [T][X] buy groceries
+2. [D][ ] homework  (by: friday)
+3. [E][X] bday party  (at: 4pm)
+Boo! more work to do: buy groceries
+1. [T][ ] buy groceries
+2. [D][ ] homework  (by: friday)
+3. [E][X] bday party  (at: 4pm)
+task removed:
+[E][X] bday party  (at: 4pm)
+you now have 2 tasks
+1. [T][ ] buy groceries
+2. [D][ ] homework  (by: friday)
+great job! I've marked this task as done: homework
+goodbye!
+

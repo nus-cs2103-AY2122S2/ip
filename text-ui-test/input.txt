@@ -1,0 +1,13 @@
+todo buy groceries
+deadline homework /by friday
+event bday party /at 4pm
+mark 1
+list
+mark 3
+list
+unmark 1
+list
+delete 3
+list
+mark 2
+bye
