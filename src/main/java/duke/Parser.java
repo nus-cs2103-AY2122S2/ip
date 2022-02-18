@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+
 /**
  * This class is responsible for parsing user inputs and
  * returns a ParsedAnswer object that contains information that has been parsed by this class.
@@ -63,6 +65,45 @@ public class Parser {
         }
     }
 
+    ParsedAnswer parseUpdate(String inputToParse) {
+        String[] parsedInput = inputToParse.split(" " , 2);
+        String[] parsedContent = parsedInput[1].split(" ", 2);
+        try {
+            int index = Integer.parseInt(parsedContent[0]) - 1;
+            ParsedAnswer pa = new ParsedAnswer("update", index);
+            System.out.println(index);
+            if (Storage.taskList.get(index) instanceof Deadline) {
+                pa.setType("Deadline");
+            } else if (Storage.taskList.get(index) instanceof Event) {
+                pa.setType("Event");
+            } else if (Storage.taskList.get(index) instanceof ToDos) {
+                pa.setType("Todo");
+            }
+
+            String[] parsedDescAndDate = parsedContent[1].split("/date");
+            if (parsedDescAndDate.length == 1) {
+                pa.setDesc(parsedDescAndDate[0]);
+                pa.setDate("");
+                return pa;
+            } else if (parsedDescAndDate.length > 1) {
+                pa.setDesc(parsedDescAndDate[0]);
+                pa.setDate(parsedDescAndDate[1]);
+                return pa;
+            } else {
+                ParsedAnswer pError = new ParsedAnswer("error", -1);
+                pError.setDesc("Format error. Please try again.");
+                return pError;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            ParsedAnswer pa = new ParsedAnswer("error", -1);
+            pa.setDesc("Format error. Please try again.");
+            return pa;
+        }
+
+    }
+
     public ParsedAnswer parse() {
         assertInputNotEmpty();
         String[] parsedString = input.toLowerCase().split(" ", 2);
@@ -116,6 +157,9 @@ public class Parser {
                     pa.setDesc("Please specify what you're searching for.");
                     return pa;
                 }
+
+            case "update":
+                return parseUpdate(input);
 
             default:
                 ParsedAnswer pa = new ParsedAnswer("error", -1);

@@ -25,7 +25,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (parsedAt != null) {
-            String date =  parsedAt.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            String date =  parsedAt.format(DateTimeFormatter.ofPattern("MM dd yyyy"));
             return "[E]" + "[" + this.getStatusIcon() + "] " + description + " (at: " + date + ")";
         } else {
             return "[E]" + "[" + this.getStatusIcon() + "] " + description + " (at: " + at + ")";

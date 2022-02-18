@@ -5,6 +5,7 @@ public class ParsedAnswer {
     private Integer index;
     private String date;
     private String desc;
+    private String type;
 
     ParsedAnswer(String command, Integer index) {
         this.command = command;
@@ -33,5 +34,13 @@ public class ParsedAnswer {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
