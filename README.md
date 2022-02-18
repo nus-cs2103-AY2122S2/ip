@@ -1,4 +1,4 @@
-#Duke
+# Duke
 > The key is not to prioritize what's on your schedule, but to schedule your priorities.
 
 Duke frees your mind of having to remember things you need to do. It's
