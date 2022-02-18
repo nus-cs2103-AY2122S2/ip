@@ -10,9 +10,10 @@ Duke frees your mind of having to remember things you need to do. It's,
 ## Getting Started
 
 1. download it from [here](https://github.com/AinsleyJ/ip/releases/download/v0.1/ip.jar).
-2. double-click it.
-3. add your tasks.
-4. let it manage your tasks for you :smirk:.
+2. move it to the folder that you like it to work at.
+3. double-click it.
+4. add your tasks.
+5. let it manage your tasks for you :smirk:.
 
 ## Features
 
