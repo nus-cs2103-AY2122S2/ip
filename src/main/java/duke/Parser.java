@@ -37,7 +37,11 @@ public class Parser {
 
             case "list":
                 response = tasksList.list();
-                break;
+                return response;
+
+            case "help":
+                response = Constants.HELP;
+                return response;
 
             case "todo":
             case "event":
@@ -51,7 +55,7 @@ public class Parser {
 
             case "find":
                 response = tasksList.findMatchingTasks(Arrays.asList(instruction));
-                break;
+                return response;
 
             case "mark":
                 taskNum = Integer.parseInt(instruction[1]);
@@ -70,7 +74,7 @@ public class Parser {
 
             case "reminder":
                 response = tasksList.getTasksUnder(Arrays.asList(instruction));
-                break;
+                return response;
 
             default:
                 throw new DukeException("Something is wrong!");
