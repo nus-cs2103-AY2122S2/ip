@@ -9,7 +9,7 @@
    3.3. [Marking A Task As Done/Not Done: `mark`, `unmark`](#33-marking-tasks-as-done-or-not-done)\
    3.4. [Deleting A Task: `delete`](#34-deleting-task)\
    3.5. [Finding Tasks: `find`](#35-finding-tasks)\
-   3.6. [Exiting Duke: `bye`](#36-viewing-the-schedule)
+   3.6. [Viewing the schedule: `view`](#36-viewing-the-schedule)
 4. [Usage](#4-usage)
 5. [FAQ](#5-faq)
 
