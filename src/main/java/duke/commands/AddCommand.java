@@ -17,7 +17,7 @@ public class AddCommand extends Command{
     private LocalDateTime datetime;
 
     /**
-     * Constructor for AddCommand
+     * Constructor for AddCommand.
      *
      * @param taskType string representing subclass of Task to add.
      * @param content description of Task to add.

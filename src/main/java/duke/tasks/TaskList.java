@@ -26,6 +26,12 @@ public class TaskList {
         return taskList.get(index);
     }
 
+    /**
+     * Get content of task at given index.
+     *
+     * @param index Index of task to get content.
+     * @return Content of task at given index.
+     */
     public String getTaskContent(int index) {
         return taskList.get(index).getContent();
     }
@@ -95,6 +101,12 @@ public class TaskList {
         return dataToWrite.toString();
     }
 
+    /**
+     * Returns string indicating empty TaskList if empty.
+     * Else return numbered list of task.
+     *
+     * @return String representation of TaskList.
+     */
     @Override
     public String toString() {
         if (taskList.size() == 0) {

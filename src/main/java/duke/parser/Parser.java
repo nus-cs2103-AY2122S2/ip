@@ -22,6 +22,12 @@ public class Parser {
         return LocalDateTime.parse(datetime, datetimePattern);
     }
 
+    /**
+     * Parses date and time from data in savefile.
+     *
+     * @param datetime date and time to be parsed.
+     * @return LocalDateTime object based on given date time.
+     */
     public LocalDateTime parseSaveDateTime(String datetime) {
         DateTimeFormatter datetimePattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(datetime, datetimePattern);
