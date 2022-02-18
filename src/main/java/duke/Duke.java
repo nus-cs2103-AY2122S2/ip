@@ -19,8 +19,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response to the given user input.
+     *
+     * @param input user input.
+     * @return response message to the given user input.
      */
     public String getResponse(String input) {
         return parser.parse(input);
