@@ -13,18 +13,22 @@ Cleese is here to serve you 24/7. He is never rude, always ready and never sleep
 
 ## Usage
 
-### `Keyword` - Describe action
+### `list` - Displays the list of tasks
 
-Describe the action and its outcome.
+Shows the current lists of tasks tracked by Cleese
+
+### `mark` - Marks a task as done
+
+Marks a task with 'X' to show that it has been completed
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`mark [taskNumber]`
 
-Expected outcome:
+### `unmark` - Removes the mark from a task
 
-Description of the outcome.
+Removes the 'X' that marks a task as done to show that it has not yet been completed
 
-```
-expected output
-```
+Example of usage: 
+
+`unmark [taskNumber]`
