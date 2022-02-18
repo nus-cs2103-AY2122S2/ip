@@ -11,7 +11,7 @@
 <!--@@author albertsutz-reused
     inspiration from github.com/zunedz/ip
     with some medium amount of changes-->
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="500.0" style="-fx-background-color: #D3D3D3;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" minHeight="-Infinity" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="500.0" style="-fx-background-color: #D3D3D3;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" maxWidth="320.0" style="-fx-background-color: #606060#606060; -fx-background-radius: 6;" textFill="WHITE" textOverrun="CLIP" wrapText="true">
             <font>
