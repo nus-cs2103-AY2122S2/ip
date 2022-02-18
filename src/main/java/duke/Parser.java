@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.TaskList;
+
 /**
  * Represents a class that validates and interprets user input with a
  * pre-generated list of allowable input formats.
@@ -41,7 +43,7 @@ public class Parser {
      * @return command from input string if input is of a valid format,
      * "" otherwise
      */
-    public static String parse(String input) {
+    public static String parse(String input, TaskList tasklist) throws Exception {
         input = input.trim();
         String command = input.replaceAll(" .*", "");
 
@@ -60,25 +62,24 @@ public class Parser {
         case "undo":
             // Fallthrough
         case "delete":
+            int index = Integer.parseInt(input);
             input = input.replaceAll(".* ", "");
-            if (input.matches("[0-9]+")) {
+            if (input.matches("[0-9]+") &&
+                     index <= tasklist.length() && index >= 1) {
                 return command;
             }
-            System.out.println("You need to specify the task you want to "
+            throw new Exception("You need to specify the task you want to "
                     + firstWord + " by its index :c");
-            return "";
         case "todo":
             if (input.equals("")) {
-                System.out.println("Oops, you need to mention what the "
+                throw new Exception("Oops, you need to mention what the "
                         + "task is :c");
-                return "";
             }
             return command;
         case "deadline":
             if (!input.contains(" by ")) {
-                System.out.println("Oops, you need to format deadline tasks "
+                throw new Exception("Oops, you need to format deadline tasks "
                         + "as \"deadline X by Y\" :c");
-                return "";
             }
             String lastWord = input.substring(input.lastIndexOf(" ") + 1);
             if (lastWord.equals("by")) {
@@ -87,9 +88,8 @@ public class Parser {
             return command;
         case "event":
             if (!input.contains(" at ")) {
-                System.out.println("Oops, you need to format event tasks "
+                throw new Exception("Oops, you need to format event tasks "
                         + "as \"event X at Y\" :c");
-                return "";
             }
             String finalWord = input.substring(input.lastIndexOf(" ") + 1);
             if (finalWord.equals("at")) {
@@ -98,14 +98,12 @@ public class Parser {
             return command;
         case "find":
             if (input.equals("")) {
-                System.out.println("Oops, you need to mention what "
+                throw new Exception("Oops, you need to mention what "
                         + "the keyword is :c");
-                return "";
             }
             if (input.contains(" ")) {
-                System.out.println("Oops, you can only search for "
+                throw new Exception("Oops, you can only search for "
                         + "one keyword at a time :c");
-                return "";
             }
             return command;
         default:

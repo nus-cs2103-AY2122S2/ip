@@ -56,7 +56,6 @@ public class Storage {
         tasks = new ArrayList<>();
         this.filePath = filePath;
         File data = new File(filePath);
-        data.getParentFile().mkdirs();
         //make preceding directories, if any are not found
         ignoreResult(data.getParentFile().mkdirs());
 
@@ -98,6 +97,7 @@ public class Storage {
                         + filePath);
             }
         }
+        System.out.println("start" + tasks);
         fileReader.close();
     }
 
@@ -132,5 +132,6 @@ public class Storage {
             isFirst = false;
         }
         f.close();
+        System.out.println("saved" +tasks);
     }
 }

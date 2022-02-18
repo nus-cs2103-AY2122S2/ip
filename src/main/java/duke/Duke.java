@@ -16,8 +16,106 @@ import duke.task.Todo;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
-    private final static String FILEPATH = "../../../data/tasks.txt";
+    private final Ui ui = new Ui();
+
+    public String doHandler(String command, String input) throws Exception {
+        int i = Integer.parseInt(input.replaceAll("[^0-9]",
+                "")) - 1;
+        tasks.get(i).markComplete();
+        storage.save(tasks);
+        return ui.showCommandMessage(command, tasks);
+    }
+
+    public String undoHandler(String command, String input) throws Exception {
+        int j = Integer.parseInt(input.replaceAll("[^0-9]",
+                "")) - 1;
+        tasks.get(j).markIncomplete();
+        storage.save(tasks);
+        return ui.showCommandMessage(command, tasks);
+    }
+
+    public String deleteHandler(String command, String input) throws Exception {
+        int k = Integer.parseInt(input.replaceAll("[^0-9]",
+                "")) - 1;
+        tasks.remove(k);
+        storage.save(tasks);
+        return ui.showCommandMessage(command, tasks);
+    }
+
+    public String listHandler(String command) {
+        return ui.showCommandMessage(command, tasks);
+    }
+
+    public String todoHandler(String command, String input) throws Exception {
+        Todo t = new Todo(input);
+        tasks.add(t);
+        storage.save(tasks);
+        return ui.showCommandMessage(command, tasks) + "\n" + t;
+    }
+
+    public String findHandler(String command, String input) {
+        ui.showCommandMessage(command, tasks);
+        return tasks.find(input).toString();
+    }
+
+    public String deadlineHandler(String command, String input) throws Exception {
+        String datetime = input.replaceAll(".* by ", "");
+        input = input.replaceAll(" by .*", "");
+        Deadline d = new Deadline(input, datetime);
+        tasks.add(d);
+        storage.save(tasks);
+        return ui.showCommandMessage(command, tasks) + "\n" + d;
+    }
+
+    public String eventHandler(String command, String input) throws Exception {
+        String time = input.replaceAll(".* at ", "");
+        input = input.replaceAll(" at .*", "");
+        Event e = new Event(input, time);
+        tasks.add(e);
+        storage.save(tasks);
+        return ui.showCommandMessage(command, tasks) + "\n" + e;
+    }
+
+    public String byeHandler() {
+        return "EXIT";
+    }
+
+    public String defaultHandler(String command, String input) {
+        return input.equals("") ? Ui.showEmptyMessage() :
+                ui.showCommandMessage(command, tasks);
+    }
+
+    public String getResponse(String input) {
+        try {
+            String command = Parser.parse(input, tasks);
+            input = Parser.handleInput(input);
+
+            switch (command) {
+            case "list":
+                return listHandler(command);
+            case "do":
+                return doHandler(command, input);
+            case "undo":
+                return undoHandler(command, input);
+            case "delete":
+                return deleteHandler(command, input);
+            case "todo":
+                return todoHandler(command, input);
+            case "find":
+                return findHandler(command, input);
+            case "deadline":
+                return deadlineHandler(command, input);
+            case "event":
+                return eventHandler(command, input);
+            case "bye":
+                return byeHandler();
+            default:
+                return defaultHandler(command, input);
+            }
+        } catch (Exception e) {
+            return ui.showError(e.getMessage());
+        }
+    }
 
     /**
      * Constructor for Duke.
@@ -26,111 +124,14 @@ public class Duke {
      * If there is an error with loading Tasks from the specified file, it
      * initializes tasks to bean empty TaskList.
      *
-     * @param filePath path of the storage file from the current directory
      */
     public Duke(String filePath) {
-        ui = new Ui();
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
-            ui.showLoadingError();
+            System.out.println(Ui.showLoadingError());
             tasks = new TaskList();
         }
     }
-
-    /**
-     * Handles the execution and main logic of the Duke program.
-     * It polls for user input continuously, parses user input and
-     * displays appropriate messages until user input is "bye",
-     * upon which it displays a goodbye message and terminates the program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                String command = Parser.parse(input);
-
-                if (command.equals("")) {
-                    ui.showCommandMessage(command, tasks);
-                    continue;
-                }
-                input = Parser.handleInput(input);
-
-                switch (command) {
-                case "list":
-                    ui.showCommandMessage(command, tasks);
-                    break;
-                case "do":
-                    int i = Integer.parseInt(input.replaceAll("[^0-9]",
-                            "")) - 1;
-                    tasks.get(i).markComplete();
-                    ui.showCommandMessage(command, tasks);
-                    break;
-                case "undo":
-                    int j = Integer.parseInt(input.replaceAll("[^0-9]",
-                            "")) - 1;
-                    tasks.get(j).markIncomplete();
-                    ui.showCommandMessage(command, tasks);
-                    break;
-                case "delete":
-                    int k = Integer.parseInt(input.replaceAll("[^0-9]",
-                            "")) - 1;
-                    tasks.remove(k);
-                    ui.showCommandMessage(command, tasks);
-                    break;
-                case "todo":
-                    Todo t = new Todo(input);
-                    tasks.add(t);
-                    ui.showCommandMessage(command, tasks);
-                    System.out.println(t);
-                    break;
-                case "find":
-                    ui.showCommandMessage(command, tasks);
-                    System.out.println(tasks.find(input));
-                    break;
-                case "deadline":
-                    String datetime = input.replaceAll(".* by ", "");
-                    input = input.replaceAll(" by .*", "");
-                    Deadline d = new Deadline(input, datetime);
-                    tasks.add(d);
-                    ui.showCommandMessage(command, tasks);
-                    System.out.println(d);
-                    break;
-                case "event":
-                    String time = input.replaceAll(".* at ", "");
-                    input = input.replaceAll(" at .*", "");
-                    Event e = new Event(input, time);
-                    tasks.add(e);
-                    ui.showCommandMessage(command, tasks);
-                    System.out.println(e);
-                    break;
-                default:
-                    break;
-                }
-
-                if (!command.equals("list") && !command.equals("bye")) {
-                    storage.save(tasks);
-                }
-
-                isExit = command.equals("bye");
-            } catch (Exception e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Main method that starts the program.
-     * It calls a new instance of Duke with a specified file path.
-     *
-     * @param args command-line arguments
-     */
-    public static void main(String[] args) {
-        new Duke(FILEPATH).run();
-    }
-
 }

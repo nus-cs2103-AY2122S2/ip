@@ -1,62 +1,46 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.task.TaskList;
 
+import java.util.Scanner;
 
 /**
  * Represents a UI class that deals with user input and application output.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 0.1
+ * @version 1.0
  */
 public class Ui {
-    private Scanner reader = new Scanner(System.in);
+    private final Scanner reader = new Scanner(System.in);
 
     /**
-     * Displays a welcome message.
+     * Returns a welcome message.
      */
-    public void showWelcome() {
-        System.out.println("Hello, traveller! My name in Paimon.\n"
-                + "How can I help you today?");
-    }
-
-    /**
-     * Displays a goodbye message and closes the associated Scanner.
-     */
-    public void showGoodbye() {
-        System.out.println("Bye, hope to see you again soon!");
-        reader.close();
-    }
-
-    /**
-     * Formats the input line, reads and returns the next line of user input.
-     *
-     * @return user input
-     */
-    public String readInput() {
-        System.out.print("| \r");
-        return reader.nextLine();
+    public static String showWelcome() {
+        return "Hello, traveller! My name in Paimon.\n"
+                + "How can I helping you today?";
     }
 
     /**
      * Displays a generic error message about failed data loading from a file.
      */
-    public void showLoadingError() {
-        System.out.println("Oh no, an error occurred with processing the data "
-                + "file :c");
+    public static String showLoadingError() {
+        return "Oh no, an error occurred with processing the data "
+                + "file :c";
     }
 
     /**
      * Displays a specific error message about some exception in the program.
      *
      * @param s string describing error
+     * @return string describing error
      */
-    public void showError(String s) {
-        System.out.println("Oh no, the following error occurred while running "
-                + "the program:");
-        System.out.println(s);
+    public String showError(String s) {
+        return s;
+    }
+
+    public static String showEmptyMessage() {
+        return "Paimon cannot read minds!";
     }
 
     /**
@@ -66,44 +50,36 @@ public class Ui {
      *
      * @param command string describing command
      * @param tasks current TaskList of tasks
+     * @return response
      */
-    public void showCommandMessage(String command, TaskList tasks) {
+    public String showCommandMessage(String command, TaskList tasks) {
         switch (command) {
         case "list":
-            System.out.println("Hmm... Paimon keeps a clear record in her "
-                    + "diary.");
-            System.out.println(tasks);
-            break;
+            return "Hmm... Paimon keeps a clear record in her "
+                    + "diary.\n" + tasks.toString();
         case "do":
-            //Fallthrough
+            // Fallthrough
         case "undo":
-            System.out.println("Task successfully updated.");
-            break;
+            return "Task successfully updated.";
         case "delete":
-            System.out.println("Noted, the task has been scrubbed off the "
-                    + "list!");
-            System.out.println(tasks);
-            break;
+            return "Noted, the task has been scrubbed off the "
+                    + "list!\n" + tasks.toString();
         case "todo":
-            System.out.println("Got it! I have noted down the following task "
-                    + "in your list.");
-            break;
+            return "Got it! I have noted down the following task "
+                    + "in your list.";
         case "find":
-            System.out.println("Here are the matching tasks in your list:");
-            break;
+            return "Here are the matching tasks in your list:";
         case "deadline":
-            System.out.println("Got it! I have noted down the following task in"
-                    + " your list. \nRemember the deadline!");
-            break;
+            return "Got it! I have noted down the following task in"
+                    + " your list. \nRemember the deadline!";
         case "event":
-            System.out.println("Got it! I have noted down the following task in"
-                    + " your list.\nDo be there on time!");
-            break;
+            return "Got it! I have noted down the following task in"
+                    + " your list.\nDo be there on time!";
         case "bye":
-            showGoodbye();
-            break;
+            reader.close();
+            return "Bye, hope to see you again soon!";
         default:
-            System.out.println("That went over Paimon's head a little...");
+            return "That went over Paimon's head a little...";
         }
     }
 }

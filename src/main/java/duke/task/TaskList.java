@@ -115,4 +115,8 @@ public class TaskList {
 
         return s;
     }
+
+    public int length() {
+        return tasks.size();
+    }
 }
