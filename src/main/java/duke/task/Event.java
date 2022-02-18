@@ -8,7 +8,7 @@ import java.util.HashMap;
 final class Event extends Task {
 
     private static final String TIME_RANGE_FIELD = "time_range";
-    private static final String DELIMITER = " /at/";
+    private static final String DELIMITER = " /at ";
     private static final String TASK_TYPE_ICON = "[E]";
 
     // At this stage, the time range is treated as a string.

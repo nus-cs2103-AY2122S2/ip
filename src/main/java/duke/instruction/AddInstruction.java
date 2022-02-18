@@ -11,9 +11,9 @@ public final class AddInstruction extends Instruction {
 
     private static final String HELP_MESSAGE = "add: adds a task (todo/deadline/event) "
             + "to the task list.\n"
-            + "usage: 1. todo <task_name>"
-            + "       2. deadline <task_name> /by <YYYY-MM-DD>"
-            + "       3. event <task_name> /at <time_in_any_format>";
+            + "usage:\n\t1. todo <task_name>\n"
+            + "\t2. deadline <task_name> /by <YYYY-MM-DD>\n"
+            + "\t3. event <task_name> /at <time_in_any_format>\n";
 
     private final Task task;
 
