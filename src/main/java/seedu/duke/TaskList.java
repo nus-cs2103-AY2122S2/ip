@@ -131,6 +131,25 @@ public class TaskList {
     }
 
     /**
+     *
+     * @param dateTime Date which we want to search for any clashes in the tasks list.
+     * @return True if there are other event tasks in the tasks list that clashes in date, false otherwise.
+     */
+    public boolean findEventClashes(String dateTime) {
+        assert dateTime != null : "TaskList->findClashes: Date to search for task clashes cannot be null.";
+
+        for (Task t : taskList) {
+            if (t instanceof Event) {
+                String eventDate = ((Event) t).getDate();
+                if (eventDate.contains(dateTime.toLowerCase())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Overrides toString() method to print the tasks line by line.
      *
      * @return String of current tasks in the tasks list separated by line breaks.

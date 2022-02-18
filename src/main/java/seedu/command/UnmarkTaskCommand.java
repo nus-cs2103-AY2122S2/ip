@@ -6,27 +6,27 @@ import seedu.exception.DukeException;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 
-public class MarkCommand extends Command {
+public class UnmarkTaskCommand extends Command {
     private final int taskId;
 
-    public MarkCommand(String taskId) {
-        assert taskId != null : "MarkCommand->MarkCommand: Task ID cannot be null.";
+    public UnmarkTaskCommand(String taskId) {
+        assert taskId != null : "UnmarkTaskCommand->UnmarkTaskCommand: Task ID cannot be null.";
 
         this.taskId = Integer.valueOf(taskId);
     }
 
     public String run(TaskList tasksList, Storage storage) throws DukeException {
-        assert tasksList != null : "MarkCommand->run: Tasks list cannot be null.";
-        assert storage != null : "MarkCommand->run: Storage cannot be null.";
+        assert tasksList != null : "UnmarkTaskCommand->run: Tasks list cannot be null.";
+        assert storage != null : "UnmarkTaskCommand->run: Storage cannot be null.";
 
-        tasksList.getTasks(taskId - 1).markDone();
+        tasksList.getTasks(taskId - 1).markUndone();
         try {
             storage.write(tasksList.getTaskList());
         } catch (IOException e) {
             return "Something went wrong: " + e.getMessage();
         }
 
-        String result = "Nice! I've marked this task as done:\n";
+        String result = "OK, I've marked this task as not done yet:\n";
         result += tasksList.getTasks(taskId - 1).toString();
         return result;
     }

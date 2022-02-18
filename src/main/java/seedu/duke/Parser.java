@@ -10,7 +10,6 @@ import seedu.exception.DukeException;
  * of user input.
  */
 public class Parser {
-
     private String inputCommand;
 
     public Parser(String inputCommand) {
@@ -34,19 +33,21 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
-            return new ListCommand();
+            return new ListTasksCommand();
         case "todo":
+            return new AddToDoCommand(commandAction, commandDetails);
         case "event":
+            return new AddEventCommand(commandAction, commandDetails);
         case "deadline":
-            return new AddCommand(commandAction, commandDetails);
+            return new AddDeadlineCommand(commandAction, commandDetails);
         case "mark":
-            return new MarkCommand(commandDetails);
+            return new MarkTaskCommand(commandDetails);
         case "unmark":
-            return new UnmarkCommand(commandDetails);
+            return new UnmarkTaskCommand(commandDetails);
         case "delete":
-            return new DeleteCommand(commandDetails);
+            return new DeleteTaskCommand(commandDetails);
         case "find":
-            return new FindCommand(commandDetails);
+            return new FindTasksCommand(commandDetails);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :(");
         }

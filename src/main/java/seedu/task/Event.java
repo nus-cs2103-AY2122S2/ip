@@ -25,7 +25,7 @@ public class Event extends Task {
     }
 
     /**
-     * Creates an instance of a event object.
+     * Creates an instance of an event object.
      * Sets isDone based on the argument passed in.
      *
      * @param description Description of the event task.
@@ -35,6 +35,15 @@ public class Event extends Task {
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
         this.at = LocalDate.parse(at, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    /**
+     * Retrieves the 'at' field of the event object in a specific format.
+     *
+     * @return Date of the event in the format dd-MM-yyyy.
+     */
+    public String getDate() {
+        return at.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     /**
