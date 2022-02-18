@@ -10,10 +10,15 @@ public class MarkCommand extends Command {
     private final int taskId;
 
     public MarkCommand(String taskId) {
+        assert taskId != null : "MarkCommand->MarkCommand: Task ID cannot be null.";
+
         this.taskId = Integer.valueOf(taskId);
     }
 
     public String run(TaskList tasksList, Storage storage) throws DukeException {
+        assert tasksList != null : "MarkCommand->run: Tasks list cannot be null.";
+        assert storage != null : "MarkCommand->run: Storage cannot be null.";
+
         tasksList.getTasks(taskId - 1).markDone();
         try {
             storage.write(tasksList.getTaskList());

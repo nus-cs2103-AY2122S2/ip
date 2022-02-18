@@ -14,6 +14,8 @@ public class Parser {
     private String inputCommand;
 
     public Parser(String inputCommand) {
+        assert inputCommand != null : "Parser->Parser: Input command string cannot be null.";
+
         this.inputCommand = inputCommand.toLowerCase();
     }
 

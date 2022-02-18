@@ -16,6 +16,8 @@ public class Task {
      * @param description Description of the task.
      */
     public Task(String description) {
+        assert description != null : "ToDo->ToDo: Description for To Do task cannot be null.";
+
         this.description = description;
         this.isDone = false;
     }
@@ -28,6 +30,8 @@ public class Task {
      * @param isDone Boolean value of whether the task is marked or unmarked.
      */
     public Task(String description, boolean isDone) {
+        assert description != null : "ToDo->ToDo: Description for To Do task cannot be null.";
+
         this.description = description;
         this.isDone = isDone;
     }
