@@ -67,7 +67,7 @@ public class DialogBox extends HBox {
      * @return A Duke chatbot dialog containing the chatbot's response to a user's query.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        final var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

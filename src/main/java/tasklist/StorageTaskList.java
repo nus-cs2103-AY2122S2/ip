@@ -141,9 +141,9 @@ public class StorageTaskList implements TaskList {
         this.executeAndSave(tasks -> tasks.remove(id));
     }
 
-    private void executeAndSave(Consumer<List<Task>> execute) throws TaskListException {
+    private void executeAndSave(Consumer<List<Task>> updateTasksExecutor) throws TaskListException {
         try {
-            execute.accept(this.tasks);
+            updateTasksExecutor.accept(this.tasks);
             this.storage.save(this.tasks);
         } catch (IndexOutOfBoundsException ex) {
             throw new TaskNotFoundException();

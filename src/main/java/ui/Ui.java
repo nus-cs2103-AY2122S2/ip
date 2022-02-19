@@ -179,14 +179,15 @@ public class Ui {
     }
 
     private String constructResponse(String content) {
-        final String response =
-                Ui.INDENTATION + " " + content.replaceAll("\n", "\n " + Ui.INDENTATION) + "\n";
+        final String indentedContent = content.replaceAll("\n", "\n " + Ui.INDENTATION);
+        final String response = Ui.INDENTATION + " " + indentedContent + "\n";
+
         if (!this.isFrameEnabled) {
             return response;
         }
 
-        final String divider = Ui.INDENTATION + Ui.DIVIDER + "\n";
-        return divider + response + divider;
+        final String indentedDivider = Ui.INDENTATION + Ui.DIVIDER + "\n";
+        return indentedDivider + response + indentedDivider;
     }
 
     private String constructTaskList(Task[] tasks) {

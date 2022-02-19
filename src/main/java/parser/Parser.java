@@ -18,7 +18,7 @@ import tasks.Event;
 import tasks.Todo;
 
 /**
- * Represents a parser to process the inputs to a chat bot.
+ * Represents a parser to process the inputs to a chatbot.
  */
 public class Parser {
     private static final BotException UNSUPPORTED_COMMAND_EXCEPTION =
@@ -89,12 +89,12 @@ public class Parser {
     }
 
     private Command markAction(String[] args) {
-        final int idToMark = this.parseStringToIndex(args[0]);
+        final int idToMark = this.convertStringToTaskId(args[0]);
         return new MarkCommand(idToMark);
     }
 
     private Command unmarkAction(String[] args) {
-        final int idToUnmark = this.parseStringToIndex(args[0]);
+        final int idToUnmark = this.convertStringToTaskId(args[0]);
         return new UnmarkCommand(idToUnmark);
     }
 
@@ -113,9 +113,9 @@ public class Parser {
         if (description.isEmpty()) {
             throw new BotException("The description of a task cannot be empty.");
         }
-        final LocalDate by = LocalDate.parse(deadlineArgs[1].trim(), Deadline.DATE_INPUT_FORMAT);
+        final LocalDate toCompleteBy = LocalDate.parse(deadlineArgs[1].trim(), Deadline.DATE_INPUT_FORMAT);
 
-        return new AddCommand(new Deadline(description, by));
+        return new AddCommand(new Deadline(description, toCompleteBy));
     }
 
     private Command addEventAction(String[] args) throws BotException {
@@ -125,13 +125,13 @@ public class Parser {
         if (description.isEmpty()) {
             throw new BotException("The description of a task cannot be empty.");
         }
-        final String at = eventArgs[1].trim();
+        final String startsAt = eventArgs[1].trim();
 
-        return new AddCommand(new Event(description, at));
+        return new AddCommand(new Event(description, startsAt));
     }
 
     private Command deleteAction(String[] args) {
-        final int idToDelete = this.parseStringToIndex(args[0]);
+        final int idToDelete = this.convertStringToTaskId(args[0]);
         return new DeleteCommand(idToDelete);
     }
 
@@ -139,7 +139,7 @@ public class Parser {
         return new ExitCommand();
     }
 
-    private int parseStringToIndex(String str) {
+    private int convertStringToTaskId(String str) {
         return Integer.parseInt(str) - 1;
     }
 }
