@@ -65,13 +65,14 @@ public class Duke extends Application {
             String command = input.trim();
 
             if (parser.getType(command).equals("help")) {
-                URI helpUri = new URI("https://github.com/sibinhho99-nus/ip");
+                URI helpUri = new URI("https://github.com/sibinhho99-nus/ip/blob/master/docs/README.md");
                 Desktop d = Desktop.getDesktop();
                 d.browse(helpUri);
 
                 return ("Please see the help page opened for more information!\n");
             } else if (parser.getType(command).equals("bye")) {
-                return ("Bye. Hope to see you again soon!");
+                System.exit(0);
+                return "";
             } else if (parser.getType(command).equals("list")) {
                 return (pastTasks.toString());
             } else if (parser.getType(command).equals("find")) {
@@ -102,7 +103,6 @@ public class Duke extends Application {
                 if (command.length() == 4) {
                     throw new InputMismatchException("The description of a todo cannot be empty.");
                 }
-
 
                 pastTasks.add(parser.parseTodos(command));
                 storage.save();
