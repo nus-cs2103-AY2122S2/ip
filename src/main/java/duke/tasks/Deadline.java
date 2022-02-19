@@ -76,7 +76,7 @@ public class Deadline extends Task {
     public String toFileFormat() {
         Integer i = this.isDone ? 1 : 0;
         String deadlineString = deadline.format(DATE_FORMATTER);
-        String timeString = time.map(localTime -> localTime.format(TIME_FORMATTER)).orElse("");
+        String timeString = time.map(localTime -> " " + localTime.format(TIME_FORMATTER)).orElse("");
         return String.format("D | %d | %s | %s%s\n",
                 i, this.task, deadlineString, timeString);
     }
@@ -123,12 +123,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         String date = this.deadline.format(dateFormatter);
         String time = this.time.map(localTime -> localTime.format(timeFormatter)).orElse("");
-        return String.format("[D]%s %s (by: %s%s)", this.statusString(), this.task, date, time);
+        return String.format("[D]%s %s (by: %s%s)", this.statusString(), this.task, date, " " + time);
     }
 
 }
