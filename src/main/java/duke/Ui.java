@@ -98,7 +98,7 @@ public class Ui {
         sb.append(System.getProperty("line.separator"));
         sb.append(task);
         sb.append(System.getProperty("line.separator"));
-        if (tasks.getSize() == 2) {
+        if (tasks.getSize() == 1) {
             sb.append("Bud!! You only got one task left!");
         } else {
             sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append(" to be exact.");
