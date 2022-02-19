@@ -40,7 +40,7 @@ public class Duke  {
 
     String getResponse(String input) {
         input = input.toLowerCase().trim();
-        assert (!input.equals("")): "Please enter an input.";
+        assert (!input.equals("")): "You need to enter an input.";
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             PrintStream printStream = new PrintStream(outputStream);
