@@ -5,6 +5,10 @@ import duke.tasks.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    private static final String ADD_TASK_SUCCESS_MESSAGE = "Got it. I've added this task:\n  %s\nNow you have %s task(s) in the list";
+    private static final String ADD_TASK_DUPLICATE_FAILURE_MESSAGE =
+            "This task: \n %s\n is a duplicate of some other task in the list!"
+            + "\nDuplicate task not added.";
 
     /** Instantiates an empty task list */
     public TaskList() {
@@ -25,8 +29,12 @@ public class TaskList {
      */
     public String addTask(Task task) {
         assert task != null;
+        if (contains(task)) {
+            return String.format(ADD_TASK_DUPLICATE_FAILURE_MESSAGE, task);
+        }
+        
         tasks.add(task);
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %s task(s) in the list",
+        return String.format(ADD_TASK_SUCCESS_MESSAGE,
                 task, tasks.size());
     }
 
@@ -67,6 +75,17 @@ public class TaskList {
         Task task = tasks.get(itemNumber - 1);
         task.unmarkAsDone();
         return "OK, I've marked this task as not done yet:\n  " + task;
+    }
+
+    /**
+     * Checks if a task exists in the list or not.
+     * 
+     * @param task The task to be checked.
+     * @return boolean indicating whether or not the task exists.
+     */
+    public boolean contains(Task task) {
+        assert task != null;
+        return tasks.contains(task);
     }
 
     /**
