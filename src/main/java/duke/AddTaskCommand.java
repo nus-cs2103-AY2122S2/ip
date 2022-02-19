@@ -3,6 +3,9 @@ package duke;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class that represents a command to add a task.
+ */
 public class AddTaskCommand extends Command {
 
     private String description;

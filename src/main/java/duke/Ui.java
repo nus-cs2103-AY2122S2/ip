@@ -1,7 +1,11 @@
 package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the Ui of Duke with the user.
+ */
 public class Ui {
 
     private final Scanner sc;
@@ -92,8 +96,8 @@ public class Ui {
     public String showError(String type) {
         switch (type) {
         case ("LoadingError"):
-            return "Something went wrong with the loading of the file\n" +
-                    "Try deleting the data/tasks.txt file, but this will wipe all previous tasks stored (if any).";
+            return "Something went wrong with the loading of the file\n"
+                    + "Try deleting the data/tasks.txt file, but this will wipe all previous tasks stored (if any).";
 
         case ("UnknownCommand"):
             return "I'm sorry, but I can't execute this command!";
@@ -102,12 +106,12 @@ public class Ui {
             return "Follow this format:\n" + "todo YOUR_TASK";
 
         case ("DeadlineFormatError"):
-            return "Follow this format:\n" +  "deadline YOUR_TASK /by yyyy-mm-dd TIME\n"
+            return "Follow this format:\n" + "deadline YOUR_TASK /by yyyy-mm-dd TIME\n"
                     + "eg: deadline return book /by 2019-10-15 18:00";
 
         case ("EventFormatError"):
             return "Follow this format:\n" + "event YOUR_TASK /at yyyy-mm-dd TIME\n"
-            + "eg: event project meeting /at 2019-10-15 18:00";
+                    + "eg: event project meeting /at 2019-10-15 18:00";
 
         case ("IOException"):
             return "Something went wrong with the writing to the file";
@@ -126,15 +130,19 @@ public class Ui {
      * @param tasks Tasks that have been loaded from previous execution of Duke.
      */
     public String showTasksLoaded(TaskList tasks) {
-        return "Here are the tasks we loaded up from your previous usage!";
-//        ArrayList<Task> t = tasks.getTaskArr();
-//        if (t.size() == 0) {
-//            showEmptyTask();
-//        }
-//
-//        for (int i = 0; i < t.size(); i++) {
-//            showTask(i + 1, t.get(i));
-//        }
+        ArrayList<Task> t = tasks.getTaskArr();
+        String s = "Here are the tasks we loaded up from your previous usage!\n";
+        if (t.size() == 0) {
+            return s;
+        }
+        for (int i = 0; i < t.size(); i++) {
+            s += showTask(i + 1, t.get(i));
+            if (i == t.size() - 1) {
+                break;
+            }
+            s += '\n';
+        }
+        return s;
     }
 
     /** Prints the exit statement to the user. */

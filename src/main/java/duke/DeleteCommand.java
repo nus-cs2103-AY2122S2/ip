@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Class that represents deleting a task in the form of a command.
+ */
 public class DeleteCommand extends Command {
 
     private int taskToDelete;

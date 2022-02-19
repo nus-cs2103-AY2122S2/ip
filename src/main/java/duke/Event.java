@@ -2,7 +2,9 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * A type of Task that can be characterised as a Event. Contains the description and the time in which the task occurs.
+ */
 public class Event extends Task {
 
     protected LocalDateTime at;

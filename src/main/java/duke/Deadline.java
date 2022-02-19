@@ -2,6 +2,10 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A type of Task that can be characterised as a Deadline. Contains the description and the time in which the task
+ * must be completed.
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime by;

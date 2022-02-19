@@ -1,39 +1,14 @@
 package duke;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-//    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
-//    private Scene scene;
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
-//
+
     /**
      * Constructs an instance of Duke.
      * Sets up UI, Storage, TaskList tagged to instance of Duke.

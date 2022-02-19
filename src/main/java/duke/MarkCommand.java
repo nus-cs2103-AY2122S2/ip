@@ -1,6 +1,9 @@
 package duke;
 import java.io.IOException;
 
+/**
+ * Class that represents marking a task as completed in the form of a command.
+ */
 public class MarkCommand extends Command {
 
     private int taskToMark;

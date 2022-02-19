@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Class that represents finding a task by keyword in the form of a command.
+ */
 public class FindCommand extends Command {
 
     private String keyword;
@@ -19,7 +22,7 @@ public class FindCommand extends Command {
 
         for (int i = 0; i < t.size(); i++) {
             if (tasks.getTask(i).toString().contains(keyword)) {
-                s += ui.showTask(i + 1, tasks.getTask(i));
+                s += ui.showTask(i + 1, tasks.getTask(i)) + ' ';
             }
         }
         return s;

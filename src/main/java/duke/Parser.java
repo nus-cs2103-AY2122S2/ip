@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class that parses user's input to create a Command. Command is used to alter the user's task list.
+ */
 public class Parser {
 
     /**

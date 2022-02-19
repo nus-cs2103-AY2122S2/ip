@@ -6,6 +6,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class which handles automatic storage of tasks in hard drive, as well as loading of tasks from hard drive.
+ */
 public class Storage {
 
     private String filePath;

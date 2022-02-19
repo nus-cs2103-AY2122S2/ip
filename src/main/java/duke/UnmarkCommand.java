@@ -1,6 +1,9 @@
 package duke;
 import java.io.IOException;
 
+/**
+ * Class that represents unmarking a task as completed in the form of a command.
+ */
 public class UnmarkCommand extends Command {
 
     private int taskToUnmark;

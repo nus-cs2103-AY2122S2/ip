@@ -1,6 +1,8 @@
 package duke;
 
-
+/**
+ * Class that represents a Task. Contains the description of the Task and whether it has been completed.
+ */
 public class Task {
 
     protected String description;

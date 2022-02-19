@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * A type of Task that can be characterised as a ToDo. Contains the description of the Task to be Done.
+ */
 public class ToDo extends Task {
 
     /**

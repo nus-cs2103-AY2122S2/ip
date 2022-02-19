@@ -1,6 +1,9 @@
 package duke;
 import java.util.ArrayList;
 
+/**
+ * Class that represents listing all tasks in the form of a command.
+ */
 public class ListCommand extends Command {
 
     /**
