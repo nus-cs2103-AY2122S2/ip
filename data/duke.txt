@@ -1,5 +1,7 @@
-T| |todo 2|
-T| |todo 3|
-T| |todo lol|
-T| |todo troll|
-D| |deadline lol |by 02-01-2222
+T| |todo Dinner with mom |
+D| |deadline homework |Feb 18 2022
+E|ASDASD |event handshake |by wednesday
+D| |deadline troll |Aug 21 2022
+E|ASDASD |event lol |by 2022-20-21
+E|ASDASD |event troll |Aug 21 2021
+E|ASDASD |event lol |by tmr

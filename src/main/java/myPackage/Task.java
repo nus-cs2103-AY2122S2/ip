@@ -17,13 +17,19 @@ public class Task {
     }
 
     public String markAsDone() {
-        this.isDone = true;
         return "";
     }
 
     public String unmarkAsDone() {
-        this.isDone = false;
         return "";
+    }
+
+    public void markCheckBox() {
+        this.isDone = true;
+    }
+
+    public void unmarkCheckBox() {
+        this.isDone = false;
     }
 
     public String getDescription() {

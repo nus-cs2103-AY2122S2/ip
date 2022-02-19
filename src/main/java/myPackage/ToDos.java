@@ -32,7 +32,4 @@ public class ToDos extends Task {
         return String.format("[T][%s] %s%n", this.getStatusIcon(), this.description);
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " ");
-    }
 }
