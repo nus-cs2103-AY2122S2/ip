@@ -1,0 +1,3 @@
+T | 0 | coding everyday
+D | 0 | coding assignment | 2022-02-20 | 2359hrs
+E | 0 | project meeting | 2022-12-31 | 8pm

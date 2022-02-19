@@ -1,0 +1,21 @@
+.bodyBg {
+    -fx-background-image: url("../images/background_image.jpeg");
+    -fx-background-position: center;
+    -fx-background-repeat: repeat;
+    -fx-background-size: auto;
+}
+
+#userInput,
+#sendButton {
+    -fx-background-radius: 10;
+    -fx-border-insets: 2;
+    -fx-font-size: 14;
+}
+
+#sendButton {
+    -fx-background-color: #abdbe3;
+}
+
+#scrollPane {
+    -fx-background-color: #6d8cb0;
+}

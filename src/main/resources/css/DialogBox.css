@@ -1,0 +1,23 @@
+#dialog {
+    -fx-label-padding: 8 16;
+    -fx-background-color: #12191a;
+    -fx-background-insets: 5;
+    -fx-background-radius: 20;
+    -fx-border-width: 1;
+    -fx-border-color: #aaa;
+    -fx-border-radius: 20;
+    -fx-border-insets: 5;
+    -fx-font-family: Verdana;
+    -fx-font-size: 14;
+    -fx-opacity: 0.9;
+    -fx-padding: 5;
+}
+
+.normal-msg {
+    -fx-text-fill: #fbeaea;
+}
+
+.error-msg {
+    -fx-font-weight: bold;
+    -fx-text-fill: red;
+}
