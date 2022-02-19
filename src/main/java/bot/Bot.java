@@ -47,4 +47,17 @@ public class Bot {
             }
         }
     }
+
+    /**
+     * Processes a single chatbot query.
+     *
+     * @param query the instruction for the chatbot to process and respond to.
+     */
+    public void execute(String query) {
+        try {
+            this.parser.parse(query).execute(this.ui, this.taskList);
+        } catch (Exception ex) {
+            ui.showError(ex.getMessage());
+        }
+    }
 }
