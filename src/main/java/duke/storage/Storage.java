@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exceptions.DukeException;
+import duke.parser.Parser;
 import duke.tasks.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,19 +19,6 @@ public class Storage {
 
     private static final Path DATA_PATH = Paths.get("data", "duke.txt");
 
-    private static void initialiseSaveFile() throws DukeException {
-        try {
-            if (Files.notExists(DATA_PATH)) {
-                if(Files.notExists(DATA_PATH.getParent())) {
-                    Files.createDirectory(DATA_PATH.getParent());
-                }
-                Files.createFile(DATA_PATH);
-            }
-        } catch (IOException e) {
-            throw new DukeException("Unable to create a save file");
-        }
-    }
-
     /**
      * Writes TaskList data to save file.
      *
@@ -38,6 +26,7 @@ public class Storage {
      * @throws DukeException If there is an error writing to save file.
      */
     public void saveTasklist(TaskList taskList) throws DukeException {
+        assert taskList != null : "Null tasklist to save";
         initialiseSaveFile();
         String dataToWrite = taskList.toSaveData();
         try {
@@ -58,25 +47,12 @@ public class Storage {
     public static TaskList loadTasklist() throws DukeException{
         initialiseSaveFile();
         String strCurrentLine;
-        Task currentTask = null;
+        Parser parser = new Parser();
         TaskList taskList = new TaskList();
         try {
             BufferedReader saveFilereader = new BufferedReader(new FileReader(DATA_PATH.toString()));
             while ((strCurrentLine = saveFilereader.readLine()) != null) {
-                switch (strCurrentLine.charAt(0)) {
-                case 'T' : {
-                    currentTask = Todo.createFromData(strCurrentLine);
-                    break;
-                }
-                case 'E' : {
-                    currentTask = Event.createFromData(strCurrentLine);
-                    break;
-                }
-                case 'D' : {
-                    currentTask = Deadline.createFromData(strCurrentLine);
-                    break;
-                }
-                }
+                Task currentTask = parser.parseSavedTask(strCurrentLine);
                 taskList.addTask(currentTask);
             }
             saveFilereader.close();
@@ -84,6 +60,19 @@ public class Storage {
             throw new DukeException("Unable to load save file");
         }
         return taskList;
+    }
+
+    private static void initialiseSaveFile() throws DukeException {
+        try {
+            if (Files.notExists(DATA_PATH)) {
+                if(Files.notExists(DATA_PATH.getParent())) {
+                    Files.createDirectory(DATA_PATH.getParent());
+                }
+                Files.createFile(DATA_PATH);
+            }
+        } catch (IOException e) {
+            throw new DukeException("Unable to create a save file");
+        }
     }
 }
 
