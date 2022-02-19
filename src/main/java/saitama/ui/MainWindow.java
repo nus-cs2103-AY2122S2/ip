@@ -2,6 +2,8 @@ package saitama.ui;
 
 import java.util.Objects;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import saitama.Saitama;
 import saitama.exceptions.SaitamaException;
 
@@ -58,17 +61,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        String response = "";
         try {
-            String response = saitama.getResponse(input);
+            response = saitama.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getSaitamaDialog(response, saitamaImage));
         } catch (SaitamaException e) {
-            String response = e.getMessage();
+            response = e.getMessage();
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getSaitamaDialog(response, saitamaExceptionImage));
         }
         userInput.clear();
+        if (response.equals(new Ui().showExit())) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+        }
     }
 }

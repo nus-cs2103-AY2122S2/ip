@@ -5,8 +5,3 @@ D true --rm 2022-02-13 CS2107 Tutorial /by 28/02/2022 09:00
 D false --rw 2022-02-13 cs2011 /by 01/01/1111 10:00
 D false null 2022-02-14 cs2103 /by 20/12/2022 23:00
 T true --rw 2022-02-14 eat
-D false null 2022-02-19 cs /by 20/12/2022 10:00
-D false null 2022-02-19 cs      /by 20/12/2022 10:00
-T true null 2022-02-19       ;
-T false null 2022-02-19       ppp
-T true null 2022-02-19        d

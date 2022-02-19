@@ -19,7 +19,7 @@ SaiTasker is a **desktop app for managing tasks, optimized for use via a Command
    Some example commands you can try:
    * **`todo`**`Learn the basics of SaiTasker` : Adds a `ToDo` type task with description `Learn the basics of SaiTasker` to the task list.
    * **`delete`**`1` : Deletes the 1st task in your task list.
-   * **`bye`** : Says goodbye to Saitama and saves your task list.
+   * **`bye`** : Says goodbye to Saitama.
 
 #### Refer to the [Features](#features) below for details of each command.
 
@@ -123,6 +123,8 @@ Example:
 * `find (WEEKLY)`
   
 ### Exiting the app: `Bye`
+Says goodbye to Saitama and closes the app
+
 Format: `bye`
   
 ## Tags
