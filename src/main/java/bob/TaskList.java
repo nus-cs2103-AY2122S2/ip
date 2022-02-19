@@ -109,4 +109,17 @@ public class TaskList {
         }
         return str + Ui.printLine();
     }
+
+    /**
+     * Returns a string describing the status of the archive command.
+     *
+     * @return A string describing status of archive command.
+     */
+    public void archive() {
+        String folderPath = "./data";
+        String filePath = "./data/bob_archive.txt";
+        Storage archiveStorage = Storage.createStorage(folderPath, filePath);
+        archiveStorage.writeTaskListToFile(this);
+        tasks.clear();
+    }
 }
