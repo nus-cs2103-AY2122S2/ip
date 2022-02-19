@@ -63,6 +63,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns the importance of a task.
+     *
+     * @return The importance of a task.
+     */
+    public TaskPriority getPriority() {
+        return this.priority;
+    }
+
+    /**
      * Adjust the importance of a task.
      *
      * @param priority the importance of a task.
