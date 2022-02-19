@@ -4,7 +4,7 @@ PCPrincipal is a **task storing management system** with marking/unmarking featu
 
 ## Get Started
 
-Download [PCPrincipal.jar](https://github.com/Denniszedead/ip/releases/download/v3.0/duke-v3.0.jar) into your PC and click on it to start PC Principal.
+Download [PCPrincipal.jar](https://github.com/Denniszedead/ip/releases/download/v3.0/PCPrincipal-v3.0.jar) into your PC and click on it to start PC Principal.
 
 Note:
 - There will be a new ``data/duke.txt`` file created where you store PCPrincipal to store all tasks in the task list.
