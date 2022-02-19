@@ -1,6 +1,8 @@
 # User Guide
 > “Why is your list so full of nonsense” – Lily
 
+![Placeholder](Ui.png)
+
 Lily is a CLI-based task manager. It attemps to embody the personality of a character in Duolingo of the same name. She is a disinterested teen with purple hair.
 
 ![Lily from Duolingo](https://c.tenor.com/8WRjkoq7QF0AAAAC/duolingo-lily.gif)
