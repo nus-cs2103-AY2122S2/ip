@@ -18,7 +18,7 @@ Note:
 
 ### ``Help``: Displays all commands
 
-Displays all commands available by PCPrincipal.
+- Displays all commands available by PCPrincipal.
 
 Expected outcome:
 
@@ -26,9 +26,8 @@ Expected outcome:
 
 ### ``Todo <Task name>``: Add a Todo
 
-Adds a new todo with the name `<Task name>` into the task list.
-
-Example:
+- Adds a new todo with the name `<Task name>` into the task list.
+- Example:
 ``Todo Buy Pencil``
 
 Expected outcome:
@@ -37,9 +36,8 @@ Expected outcome:
 
 ### ``Deadline <Task name> /by DD/MM/YYYY HHmm``: Adds a deadline
 
-Adds a new deadline with the name `<Task name>` with the deadline `DD/MM/YYYY HHmm` into the list.
-
-Example: ``deadline IP Task /by 18/2/2022 2359``
+- Adds a new deadline with the name `<Task name>` with the deadline `DD/MM/YYYY HHmm` into the list. 
+- Example: ``deadline IP Task /by 18/2/2022 2359``
 
 Expected outcome:
 
@@ -47,9 +45,8 @@ Expected outcome:
 
 ### ``Event <Task name> /at DD/MM/YYYY HH mm``: Adds an event
 
-Adds a new event with the name `<Task name>` with the event date `DD/MM/YYYY HHmm` into the list.
-
-Example: ``event CS2103 Practical /at 16/4/2022 2359``
+- Adds a new event with the name `<Task name>` with the event date `DD/MM/YYYY HHmm` into the list.
+- Example: ``event CS2103 Practical /at 16/4/2022 2359``
 
 Expected outcome:
 
@@ -57,7 +54,7 @@ Expected outcome:
 
 ### ``List``: Shows all the task
 
-Shows all the tasks in the task list.
+- Shows all the tasks in the task list.
 
 Expected outcome:
 
@@ -65,9 +62,8 @@ Expected outcome:
 
 ### ``Mark <index number>``: Marks tasks
 
-Marks the task in index `index number` of the task list.
-
-Example: ``mark 2``
+- Marks the task in index `index number` of the task list. 
+- Example: ``mark 2``
 
 Initial Outcome:
 
@@ -81,9 +77,8 @@ Expected Outcome:
 
 ### ``Unmark <index number>``: Unmarks tasks
 
-Unmarks the task in index `index number` of the task list.
-
-Example: ``Unmark 2``
+- Unmarks the task in index `index number` of the task list. 
+- Example: ``Unmark 2``
 
 Initial Outcome:
 
@@ -92,13 +87,13 @@ Initial Outcome:
 Expected Outcome:
 
 ![Unmark](image/Unmark.png)
+
 ![List](image/List.png)
 
 ### ``Find <Keyword>``: Finds all tasks with the keyword
 
-Finds all the tasks which contains `keyword`.
-
-Example: ``Find CS2103``
+- Finds all the tasks which contains `keyword`. 
+- Example: ``Find CS2103``
 
 Expected Outcome:
 
@@ -106,13 +101,13 @@ Expected Outcome:
 
 ### ``Deletes <index number>``: Deletes tasks
 
-Deletes the task in index `index number` of the task list.
-
-Example: ``Delete 2``
+- Deletes the task in index `index number` of the task list. 
+- Example: ``Delete 2``
 
 Initial Outcome:
 
 ![List](image/List.png)
+
 ![Delete](image/Delete.png)
 
 Expected Outcome:
