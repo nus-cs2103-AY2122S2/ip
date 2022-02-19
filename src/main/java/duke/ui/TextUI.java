@@ -54,6 +54,7 @@ public class TextUI {
      * @param message Message to be printed.
      */
     public void printMessage(String message) {
+        assert !message.isEmpty() : "No message to print";
         String textBorder = "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
         String textToPrint = "\n" + textBorder + message + "\n" + textBorder + "\n";
         out.print(textToPrint);

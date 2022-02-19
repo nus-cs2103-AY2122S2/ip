@@ -23,6 +23,7 @@ public class TaskList {
      * @return Task at given index.
      */
     public Task getTask(int index) {
+        assert index < taskList.size() && index >= 0 : "TaskList out of bounds";
         return taskList.get(index);
     }
 
@@ -33,6 +34,7 @@ public class TaskList {
      * @return Content of task at given index.
      */
     public String getTaskContent(int index) {
+        assert index < taskList.size() && index >= 0 : "TaskList out of bounds";
         return taskList.get(index).getContent();
     }
 
@@ -52,6 +54,7 @@ public class TaskList {
      * @return Deleted task.
      */
     public Task deleteTask(int indexTaskToDelete) {
+        assert indexTaskToDelete < taskList.size() && indexTaskToDelete >= 0 : "TaskList out of bounds";
         return taskList.remove(indexTaskToDelete);
     }
 
@@ -62,6 +65,7 @@ public class TaskList {
      * @return Marked task
      */
     public Task markTask(int indexTaskToMark) {
+        assert indexTaskToMark < taskList.size() && indexTaskToMark >= 0 : "TaskList out of bounds";
         Task taskToMark = taskList.get(indexTaskToMark);
         taskToMark.markAsDone();
         return taskToMark;
@@ -74,6 +78,7 @@ public class TaskList {
      * @return Unmarked task
      */
     public Task unmarkTask(int indexTaskToUnmark) {
+        assert indexTaskToUnmark < taskList.size() && indexTaskToUnmark >= 0 : "TaskList out of bounds";
         Task taskToUnmark = taskList.get(indexTaskToUnmark);
         taskToUnmark.markAsNotDone();
         return taskToUnmark;
