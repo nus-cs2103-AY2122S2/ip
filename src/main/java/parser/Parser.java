@@ -13,8 +13,10 @@ import commands.ListCommand;
 import commands.MarkCommand;
 import commands.StartCommand;
 import commands.UnmarkCommand;
+import commands.UpdatePriorityCommand;
 import tasks.Deadline;
 import tasks.Event;
+import tasks.TaskPriority;
 import tasks.Todo;
 
 /**
@@ -57,6 +59,12 @@ public class Parser {
             return this.addEventAction(args);
         case DeleteCommand.COMMAND:
             return this.deleteAction(args);
+        case UpdatePriorityCommand.SET_LOW_COMMAND:
+            return this.updatePriorityToLowAction(args);
+        case UpdatePriorityCommand.SET_MEDIUM_COMMAND:
+            return this.updatePriorityToMediumAction(args);
+        case UpdatePriorityCommand.SET_HIGH_COMMAND:
+            return this.updatePriorityToHighAction(args);
         case ExitCommand.COMMAND:
             return this.exitAction(args);
         default:
@@ -133,6 +141,23 @@ public class Parser {
     private Command deleteAction(String[] args) {
         final int idToDelete = this.convertStringToTaskId(args[0]);
         return new DeleteCommand(idToDelete);
+    }
+
+    private Command updatePriorityToLowAction(String[] args) {
+        return this.updatePriorityAction(args, TaskPriority.LOW);
+    }
+
+    private Command updatePriorityToMediumAction(String[] args) {
+        return this.updatePriorityAction(args, TaskPriority.MEDIUM);
+    }
+
+    private Command updatePriorityToHighAction(String[] args) {
+        return this.updatePriorityAction(args, TaskPriority.HIGH);
+    }
+
+    private Command updatePriorityAction(String[] args, TaskPriority newPriority) {
+        final int idToUpdate = this.convertStringToTaskId(args[0]);
+        return new UpdatePriorityCommand(idToUpdate, newPriority);
     }
 
     private Command exitAction(String[] args) {
