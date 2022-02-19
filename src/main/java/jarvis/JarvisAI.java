@@ -29,7 +29,6 @@ public class JarvisAI {
     /**
      * Runs the Duke application.
      */
-
     public String getResponse(String input) {
         return Parser.parse(input, tasks, storage);
     }

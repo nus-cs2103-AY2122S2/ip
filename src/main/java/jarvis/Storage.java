@@ -94,9 +94,8 @@ public class Storage {
             }
         } catch (IOException e) {
             //System.out.println(e.getMessage());
-        } finally {
-            return tasks;
         }
+        return tasks;
     }
 
     /**
