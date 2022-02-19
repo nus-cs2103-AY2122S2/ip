@@ -60,7 +60,6 @@ public class TaskList {
      */
 
     public void remove(int numToDelete) {
-//        Task currTask = this.taskList.get(numToDelete - 1);
         this.taskList.remove(numToDelete - 1);
     }
 }

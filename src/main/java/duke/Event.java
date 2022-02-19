@@ -27,12 +27,6 @@ public class Event extends Task {
         this.time = LocalDateTime.parse(time, format);
     }
 
-//    public Event(String taskName, String time, boolean done) {
-//        super(taskName, done);
-//        DateTimeFormatter format = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
-//        this.time = LocalDateTime.parse(time, format);
-//    }
-
     /**
      * Return a string with the Task type, the isDone status, the Event name, and Date & Time of event
      *

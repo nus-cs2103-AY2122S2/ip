@@ -19,11 +19,6 @@ public class Task {
         this.isDone = false;
     }
 
-//    public Task(String taskName, boolean isDone) {
-//        this.taskName = taskName;
-//        this.isDone = isDone;
-//    }
-
     /**
      * Method to get the isDone status icon of a task
      *
