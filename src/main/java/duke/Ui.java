@@ -96,7 +96,7 @@ public class Ui {
      */
 
     public static void printTodo(String todoString, TaskList taskList) {
-        String temp = "\n" +  "     Got it. I've added this task: \n" + "       [T][ ]" + todoString
+        String temp = "\n" +  "     Got it. I've added this task: \n" + "       [T][ ] " + todoString
                 + "\n" + "     Now you have " + taskList.getSize() + " task(s) in the list.\n";
         System.out.println(temp);
     }
