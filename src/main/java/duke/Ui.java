@@ -6,11 +6,25 @@ package duke;
  */
 public class Ui {
     /**
+     * Greeting message.
+     */
+    public static void welcome() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        //Greetings
+        System.out.println("Greetings! I'm Duke" + "\n" + "What can I do for you today?\n" + logo);
+        System.out.println("What you like to do? Please enter your command: ");
+    }
+
+    /**
      * Goodbye message.
      */
     public static String bye() {
         //goodbye msg
-        String goodbyeMsg = "Sad to see you leave, come back soon!";
-        return goodbyeMsg;
+        return "Sad to see you leave, come back soon!";
     }
 }

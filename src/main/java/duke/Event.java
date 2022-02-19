@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class Event extends Task {
     /**
      * Constructor for Event.
+     * 
      * @param description 
      * @param at the date of the event.
      */
@@ -20,9 +21,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String eventString = "[E]" + this.getStatusIcon() + " "
-                + this.description + " (at: " + Date.toString(this.date) + ")";
-
-        return eventString;
+        return "[E]" + this.getStatusIcon() + " " + this.description + " (at: " + Date.toString(this.date) + ")";
     }
 }

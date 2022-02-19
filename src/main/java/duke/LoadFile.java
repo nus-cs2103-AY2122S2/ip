@@ -15,7 +15,7 @@ public class LoadFile {
     public static boolean hasLoaded = false;
 
     /**
-     * Loads the data stored in the .txt data file into the current iteration of the program.
+     * Method that loads the data stored in the .txt data file into the current iteration of the program.
      * 
      * @return ArrayList<Task> containing the loaded data.
      * @throws FileNotFoundException if the .txt data file cannot be found in the disk.
@@ -53,8 +53,7 @@ public class LoadFile {
 
                 Collections.reverse(list);
             } catch (IOException e) {
-                String errorMsg = "Oops, I wasn't able to load the previously saved list. :(";
-                System.out.println(errorMsg);
+                System.out.println("Oops, I wasn't able to load the previously saved list. :(");
             }
         }
         return list;
