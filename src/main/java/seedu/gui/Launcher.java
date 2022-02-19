@@ -11,7 +11,7 @@ public class Launcher {
     /**
      * The entry point of the application
      *
-     * @param args Not in use
+     * @param args arguments to be used in the application
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);
