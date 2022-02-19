@@ -79,6 +79,10 @@ public class Storage {
             } else {
                 taskToAdd = new Todo(descriptionWithTime);
             }
+
+            if (isDone) {
+                taskToAdd.markAsDone();
+            }
             TaskList.add(taskToAdd);
         }
     }
