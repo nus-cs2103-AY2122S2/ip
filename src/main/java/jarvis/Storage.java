@@ -3,13 +3,10 @@ package jarvis;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
-
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -51,6 +48,8 @@ public class Storage {
                 file.createNewFile();
                 return tasks;
             }
+            assert directory.exists() : "directory should exist";
+            assert file.exists() : "file should exist";
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String type = scanner.next();

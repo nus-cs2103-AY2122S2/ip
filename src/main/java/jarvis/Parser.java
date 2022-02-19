@@ -28,6 +28,7 @@ public class Parser {
                 if (command[1].isEmpty()) {
                     throw new DukeException("Do what, sir?");
                 }
+                assert !command[1].isEmpty() : "user should input the task";
                 Todo task = new Todo(command[1]);
                 storage.create(task);
                 return tasks.add(task);
@@ -40,6 +41,8 @@ public class Parser {
                 if (deadline.length < 2) {
                     throw new DukeException("Invalid deadline task, sir.");
                 }
+                assert !deadline[0].isEmpty() : "user should input the task";
+                assert !deadline[1].isEmpty() : "user should input the due date";
                 LocalDate date = LocalDate.parse(deadline[1]);
                 Deadline task = new Deadline(deadline[0], date);
                 storage.create(task);
@@ -53,6 +56,8 @@ public class Parser {
                 if (event.length < 2) {
                     throw new DukeException("Invalid event task, sir.");
                 }
+                assert !event[0].isEmpty() : "user should input the task";
+                assert !event[1].isEmpty() : "user should input the venue";
                 Event task = new Event(event[0], event[1]);
                 storage.create(task);
                 return tasks.add(task);
@@ -64,9 +69,17 @@ public class Parser {
         case "unmark":
             // Fallthrough
         case "remove":
-            int id = Integer.parseInt(command[1]);
-            storage.update(id, command[0]);
-            return tasks.update(id, command[0]);
+            try {
+                if (command[1].isEmpty()) {
+                    throw new DukeException("Which task, sir?");
+                }
+                assert !command[1].isEmpty() : "user should input the task id";
+                int id = Integer.parseInt(command[1]);
+                storage.update(id, command[0]);
+                return tasks.update(id, command[0]);
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
         case "find":
             return tasks.find(command[1]);
         case "bye":
