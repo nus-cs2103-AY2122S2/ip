@@ -55,7 +55,12 @@ public class ToDo extends Task {
         } catch (Exception e) {
             throw new CorruptedSaveException();
         }
-    }    
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return super.equals(other);
+    }
 
     /**
      * Returns the string representation of a ToDo.

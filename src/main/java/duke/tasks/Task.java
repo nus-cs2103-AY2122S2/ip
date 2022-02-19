@@ -43,5 +43,21 @@ public abstract class Task {
 
     public abstract String toFileFormat();
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof Task) {
+            Task otherTask = (Task) other;
+            
+            return otherTask.isDone == this.isDone
+                && otherTask.task.equals(this.task);
+        } else {
+            return false;
+        }
+    };
+
+    @Override
     public abstract String toString();
 }
