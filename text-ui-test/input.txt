@@ -1,0 +1,12 @@
+todo borrow book
+deadline return book /by Saturday
+event cs2103 lecture /at Tomorrow
+mark 2
+unmark 2
+unmark 5
+list
+deadline   /by a
+event a /at
+delete 2
+list
+bye
