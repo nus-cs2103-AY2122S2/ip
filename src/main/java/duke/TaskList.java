@@ -1,8 +1,12 @@
 package duke;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.zip.DataFormatException;
 
 /**
  * TaskList contains all the types of taskscommands in the application.
@@ -10,19 +14,20 @@ import java.util.Arrays;
 public class TaskList {
     /**
      * Marks a task as done.
-     * 
-     * 
      * @param input
+     * @return
      * @throws DukeException
      */
     public static String mark(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
+        assert arr.get(1) != "": "Task number to be marked must be given.";
         if (arr.get(1) == "") {
             throw new DukeException(
                     "Oops! Which task would you like to mark?"
             );
         }
         int i = Integer.parseInt(arr.get(1));
+        assert i <= Duke.list.size() & i > 0: "Task number should be <= Duke.list.size() & > 0";
         if (i <= Duke.list.size() && i > 0) {
             Task toBeMarked = Duke.list.get(Integer.parseInt(input.substring(5)) - 1);
             return toBeMarked.markAsDone();
@@ -42,12 +47,14 @@ public class TaskList {
      */
     public static String unmark(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
+        assert arr.get(1) != "": "Task number to be unmarked must be given.";
         if (arr.get(1) == "") {
             throw new DukeException(
                     "Oops! Which task would you like to unmark?"
             );
         }
         int i = Integer.parseInt(arr.get(1));
+        assert i <= Duke.list.size() & i > 0: "Task number should be <= Duke.list.size() & > 0";
         if (i <= Duke.list.size() && i > 0) {
             Task toBeMarked = Duke.list.get(Integer.parseInt(input.substring(7)) - 1);
             return toBeMarked.markAsUndone();
@@ -65,24 +72,30 @@ public class TaskList {
      * @throws DukeException
      */
     protected static String deadline(String input) throws DukeException {
-        if (stripDescription(input)[0] == "") {
+        String[] processedInput = stripDescription(input);
+        assert processedInput[0] != "": "Description should not be empty.";
+        if (processedInput[0] == "") {
             throw new DukeException(
                     "Oops, the description of deadline cannot be empty!"
             );
         }
 
-        if (stripDescription(input)[1] == "") {
+        assert processedInput[1] != "": "Date must be provided for deadline.";
+        if (processedInput[1] == "") {
             throw new DukeException("Oops, please tell me when is this due!");
         }
 
-        LocalDate date = LocalDate.parse(stripDescription(input)[1]);
-
-        Task deadline = new Deadline(stripDescription(input)[0], date);
-        String msg = "Got it. I've added this task: \n";
-        Duke.list.add(deadline);
-        msg += deadline + "\n";
-        msg += "Now you have " + Duke.list.size() + " tasks in the list.";
-        return msg;
+        try {
+            LocalDate date = LocalDate.parse(stripDescription(input)[1]);
+            Task deadline = new Deadline(stripDescription(input)[0], date);
+            String msg = "Got it. I've added this task: \n";
+            Duke.list.add(deadline);
+            msg += deadline + "\n";
+            msg += "Now you have " + Duke.list.size() + " tasks in the list.";
+            return msg;
+        } catch (DateTimeParseException e) {
+            return "Please input a vaid date format YYYY-MM-DD";
+        }
     }
 
     /**
@@ -92,12 +105,14 @@ public class TaskList {
      * @throws DukeException
      */
     public static String todo(String input) throws DukeException {
-        if (stripDescription(input)[0] == "") {
+        String[] processedInput = stripDescription(input);
+        assert processedInput[0] != "": "Description cannot be empty.";
+        if (processedInput[0] == "") {
             throw new DukeException(
                 "Oops, the description of todo cannot be empty! Please tell me what you want to do."
             );
         }
-        Task toDo = new Todo(stripDescription(input)[0]);
+        Task toDo = new Todo(processedInput[0]);
         Duke.list.add(toDo);
         String msg = "Got it. I've added this task: \n";
         msg += toDo + "\n";
@@ -113,25 +128,33 @@ public class TaskList {
      * @throws DukeException
      */
     protected static String event(String input) throws DukeException {
-        if (stripDescription(input)[0] == "") {
+        String[] processedInput = stripDescription(input);
+        assert processedInput[0] != "": "Description cannot be empty.";
+        if (processedInput[0] == "") {
             throw new DukeException(
                     "Oops, the description of event cannot be empty!"
             );
         }
 
-        if (stripDescription(input)[1] == "") {
+        assert processedInput[1] != "": "Date must be provided for event.";
+        if (processedInput[1] == "") {
             throw new DukeException(
                     "Oops, please tell me where this will occur!"
             );
         }
 
-        LocalDate date = LocalDate.parse(stripDescription(input)[1]);
-        Task event = new Event(stripDescription(input)[0], date);
-        String msg = "Got it. I've added this task: \n";
-        Duke.list.add(event);
-        msg += event + "\n";
-        msg += "Now you have " + Duke.list.size() + " in the list.";
-        return msg;
+
+        try {
+            LocalDate date = LocalDate.parse(processedInput[1]);
+            Task event = new Event(processedInput[0], date);
+            String msg = "Got it. I've added this task: \n";
+            Duke.list.add(event);
+            msg += event + "\n";
+            msg += "Now you have " + Duke.list.size() + " in the list.";
+            return msg;
+        } catch (DateTimeParseException e) {
+            return "Please input a vaid date format YYYY-MM-DD";
+        }
     }
 
     /**
@@ -142,6 +165,7 @@ public class TaskList {
      */
     protected static String delete(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
+        assert arr.get(1) != "": "Task number must be provided.";
         if (arr.get(1) == "") {
             throw new DukeException(
                     "Oops! Which task would you like to delete?"
@@ -149,6 +173,7 @@ public class TaskList {
         }
 
         int i = Integer.parseInt(arr.get(1));
+        assert i <= Duke.list.size() && i > 0: "Task number should be <= Duke.list.size() & > 0";
         if (i <= Duke.list.size() && i > 0) {
             String msg = "Noted. I've removed this task: \n";
             msg += Duke.list.get(i-1) + "\n";
@@ -170,6 +195,8 @@ public class TaskList {
      */
     protected static String find(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
+        assert arr.get(1) != "": "Keyword should be provided.";
+        assert Duke.list.size() > 0: "Tasklist size should be > 0";
         if (arr.get(1) == "") {
             throw new DukeException("Sorry, please tell me what you want to find!");
         }

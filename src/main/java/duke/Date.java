@@ -10,7 +10,7 @@ public class Date {
     /**
      * Returns the date as a string in the format dd MMM yyyy, eg: 12 Jan 2022.
      * 
-     * @param str the date as a LocalDate object.
+     * @param date the date as a LocalDate object.
      * @return date in String format.
      */
     public static String toString(LocalDate date) {
