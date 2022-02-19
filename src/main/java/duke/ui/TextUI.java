@@ -30,10 +30,6 @@ public class TextUI {
         this(System.in, System.out);
     }
 
-    private boolean shouldIgnore(String rawInputLine) {
-        return rawInputLine.trim().isEmpty();
-    }
-
     /**
      * Gets next line entered by user.
      * Ignores empty lines.
@@ -48,12 +44,17 @@ public class TextUI {
         return currInput;
     }
 
+    private boolean shouldIgnore(String rawInputLine) {
+        return rawInputLine.trim().isEmpty();
+    }
+
     /**
      * Formats the message with borders and prints it.
      *
      * @param message Message to be printed.
      */
     public void printMessage(String message) {
+        assert !message.isEmpty() : "No message to print";
         String textBorder = "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
         String textToPrint = "\n" + textBorder + message + "\n" + textBorder + "\n";
         out.print(textToPrint);
