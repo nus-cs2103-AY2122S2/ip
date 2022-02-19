@@ -1,8 +1,5 @@
 package siri;
 
-import siri.*;
-import java.io.IOException;
-
 public class Siri {
 
     private Storage storage;

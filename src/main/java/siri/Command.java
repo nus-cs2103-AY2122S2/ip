@@ -1,7 +1,5 @@
 package siri;
 
-import java.io.IOException;
-
 //Command.java reused from Brigette Santoso E0564307
 public class Command {
 
