@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 import duke.exceptions.CorruptedSaveException;
 import duke.exceptions.DukeException;
@@ -15,7 +16,7 @@ import duke.exceptions.DukeException;
 public class Deadline extends Task {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private LocalTime time;
+    private Optional<LocalTime> time;
     private LocalDate deadline;
 
     /**
@@ -33,7 +34,8 @@ public class Deadline extends Task {
 
         try {
             deadline = LocalDate.parse(datetime[0], DATE_FORMATTER);
-            time = datetime.length == 1 ? null : LocalTime.parse(datetime[1], TIME_FORMATTER);
+            LocalTime time = datetime.length == 1 ? null : LocalTime.parse(datetime[1], TIME_FORMATTER);
+            this.time = Optional.ofNullable(time);
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date/time format!" 
                     + " Expected date and/or time in the following formats: \n"
@@ -52,7 +54,7 @@ public class Deadline extends Task {
     public Deadline(String task, LocalDate deadline, LocalTime time) {
         super(task);
         this.deadline = deadline;
-        this.time = time;
+        this.time = Optional.ofNullable(time);
     }
 
     /**
@@ -80,7 +82,7 @@ public class Deadline extends Task {
     public String toFileFormat() {
         Integer i = this.isDone ? 1 : 0;
         String deadlineString = deadline.format(DATE_FORMATTER);
-        String timeString = time == null ? "" : " " + time.format(TIME_FORMATTER);
+        String timeString = time.map(localTime -> localTime.format(TIME_FORMATTER)).orElse("");
         return String.format("D | %d | %s | %s%s\n", 
                 i, this.task, deadlineString, timeString);
     }
@@ -106,6 +108,25 @@ public class Deadline extends Task {
 
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) { //short circuit if same instance
+            return true;
+        }
+
+        if (other instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) other;
+
+            return super.equals(otherDeadline)
+                && this.deadline.equals(otherDeadline.deadline)
+                && this.time.equals(otherDeadline.time);
+            
+
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Returns the string representation of a Deadline.
      */
@@ -115,7 +136,7 @@ public class Deadline extends Task {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         String date = this.deadline.format(dateFormatter);
-        String time = this.time == null ? "" : " " + this.time.format(timeFormatter);
+        String time = this.time.map(localTime -> localTime.format(timeFormatter)).orElse("");
         return String.format("[D]%s %s (by: %s%s)", this.statusString(), this.task, date, time);
     }
 
