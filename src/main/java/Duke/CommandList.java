@@ -125,6 +125,10 @@ public class CommandList {
         Task targetTask = list.get((index - 1));
         String output = "";
 
+        if (index > list.size() || index < 1) {
+            return "Invalid index! Please enter a valid index!";
+        }
+
         if (firstWord.equals("mark")) {
             output = targetTask.mark();
         } else {
@@ -146,6 +150,10 @@ public class CommandList {
     public String deleteTask(ArrayList<Task> list, String[] inputs, Storage storage) {
         String secondWord = inputs[1];
         int index = Integer.parseInt(secondWord);
+
+        if (index > list.size() || index < 1) {
+            return "Invalid index! Please enter a valid index!";
+        }
 
         Task targetTask = list.get((index - 1));
         list = targetTask.delete(list, (index - 1));
@@ -314,6 +322,10 @@ public class CommandList {
         String output = "";
         String secondWord = inputs[1];
         int index = Integer.parseInt(secondWord);
+
+        if (index > list.size() || index < 1) {
+            return "Invalid index! Please enter a valid index!";
+        }
 
         Task targetTask = list.get((index - 1));
         String taskType = targetTask.getTaskType();
