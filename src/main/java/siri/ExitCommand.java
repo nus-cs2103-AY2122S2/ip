@@ -1,3 +1,5 @@
+package siri;
+
 //ExitCommand.java reused from Brigette Santoso E0564307
 public class ExitCommand extends Command {
 

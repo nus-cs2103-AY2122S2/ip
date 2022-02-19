@@ -1,3 +1,5 @@
+package siri;
+
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.io.File;
@@ -7,6 +9,7 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 //Storage.java reused and edited from Brigette Santoso E0564307
 public class Storage {
     protected String filePath;
