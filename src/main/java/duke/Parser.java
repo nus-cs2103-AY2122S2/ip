@@ -27,9 +27,11 @@ public class Parser {
         }
     }
 
+
     /**
      * Parses through the user input to process the command called. Starts the main functionalities of Duke.
-     * 
+     * @param input
+     * @return a {@code String} informing user of process
      * @throws DukeException
      * @throws IOException
      */
@@ -96,13 +98,13 @@ public class Parser {
 
         return msg;
     }
-    
-        /**
-         * To print the current list of items.
-         * 
-         * @param arraylist the list containing all the tasks.
-         */
-        private static String printList(ArrayList<Task> arraylist) {
+
+    /**
+     * To print the current list of items.
+     * @param arraylist
+     * @return {@code String} printed list of tasks.
+     */
+    private static String printList(ArrayList<Task> arraylist) {
             String msg = "Here are the tasks in your list: \n";
             for (int i = 0; i < arraylist.size(); i++) {
                 int count = i + 1;

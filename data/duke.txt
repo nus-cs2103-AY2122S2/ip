@@ -1,6 +1,5 @@
-[T][ ] wheog
-[T][ ] wg
-2022-01-04 [E][X] segejw (at: 4 Jan 2022)
-2022-12-12 [E][ ] library (at: 12 Dec 2022)
-2021-12-12 [D][X] wefge (by: 12 Dec 2021)
-2022-12-12 [E][X] wegwe (at: 12 Dec 2022)
+2022-12-12 [D][ ] read book (by: 12 Dec 2022)
+2022-02-21 [D][ ] CS2103T (by: 21 Feb 2022)
+2022-02-20 [E][ ] movie (at: 20 Feb 2022)
+[T][X] read book
+[T][X] work

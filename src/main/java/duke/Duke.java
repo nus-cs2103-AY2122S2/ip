@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,8 +26,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     protected static ArrayList<Task> list;
 
@@ -122,10 +121,10 @@ public class Duke extends Application {
             }
             return Parser.start(input);
         } catch (DukeException e) {
-            e.printStackTrace();
+            return e.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
-        return input;
+        return "";
     }
 }
