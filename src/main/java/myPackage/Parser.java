@@ -9,7 +9,7 @@ import java.util.Scanner;
 import static myPackage.TaskList.listCount;
 
 /**
- * Parser class to parse input from user
+ * Parser class to parse input from user. Parses every command in duke
  */
 public class Parser {
     public static String parseCommand(String inputFromUser) {
