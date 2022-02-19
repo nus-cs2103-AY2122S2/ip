@@ -72,6 +72,8 @@ public class Lily extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Lily");
+            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setLily(new Lily());
 
             // TODO: Make this work
@@ -103,6 +105,15 @@ public class Lily extends Application {
         return this.ui.getOutput();
     }
 
+    /**
+     * Returns Lily's welcome message which is different for new and returning users.
+     *
+     * @return a string of Lily's welcome message.
+     */
+    @FXML
+    public String getWelcome() {
+        return ui.showWelcome(tasks);
+    }
     /**
      * Shows the error to the GUI
      */

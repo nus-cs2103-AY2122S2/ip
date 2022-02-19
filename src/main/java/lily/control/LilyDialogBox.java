@@ -1,8 +1,8 @@
 package lily.control;
 
-
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,20 +14,26 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * This control represents a dialog box consisting of an ImageView to 
  * represent the speaker's face and a label containing text from the speaker.
+ * 
+ * @@author ddx-510 Referenced Dai Tianle for using Region to resize textboxes, and setting colours
  */
-public class DialogBox extends HBox {
+public class LilyDialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private final Image LILY_IMAGE = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/lily.png")));
+
+    private LilyDialogBox(String text) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/LilyDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -36,7 +42,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setImage(LILY_IMAGE);
     }
 
     /**
@@ -46,31 +52,10 @@ public class DialogBox extends HBox {
      * @param img User's profile picture
      * @return a new DialogBox from the User
      */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    /**
-     * Constructs a dialog box for Lily
-     * 
-     * @param text Lily's output
-     * @param img Lily's profile picture
-     * @return a new DialogBox from Lily
-     */
-    public static DialogBox getLilyDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
+    public static LilyDialogBox getDialog(String text) {
+        var db = new LilyDialogBox(text);
+        db.setMinHeight(Region.USE_PREF_SIZE);
+        // db.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-padding: 10;");
         return db;
     }
-
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
-    }
-
 }

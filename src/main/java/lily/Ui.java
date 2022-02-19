@@ -48,31 +48,24 @@ public class Ui {
      * @param tl The task list to be shown to returning users.
      */
     public String showWelcome(TaskList tl) {
-        String logo = LS
-                + "    ██╗     ██╗██╗     ██╗   ██╗" + LS
-                + "    ██║     ██║██║     ╚██╗ ██╔╝" + LS
-                + "    ██║     ██║██║      ╚████╔╝ " + LS
-                + "    ██║     ██║██║       ╚██╔╝  " + LS
-                + "    ███████╗██║███████╗   ██║   " + LS
-                + "    ╚══════╝╚═╝╚══════╝   ╚═╝   " + LS
-                + LS;
-        String welcomeMessage = logo;
+        String welcomeMessage;
 
         if (CAN_LOAD) {
-            welcomeMessage += "sup, welcome back" + LS
+            welcomeMessage = "sup, welcome back" + LS
                     + "here's your list from the last time" + LS
                     + LS
                     + listTasks(tl.getContents()) + LS
                     + LS
                     + "why is it so full of nonsense";
         } else {
-            output = "oh bother, a new one" + LS;
-            welcomeMessage += "hey." + LS
+            welcomeMessage = "oh bother, a new one" + LS 
+                    + LS
+                    + "hey." + LS
                     + "i don't really wanna track your tasks," + LS
                     + "but i guess i have no choice (っ◞‸◟c)" + LS
                     + "need help with something?" + LS
                     + LS
-                    + "Things you can type" + LS
+                    + "Things you can type:" + LS
                     + getCommands();
         }
         return welcomeMessage;
@@ -117,10 +110,8 @@ public class Ui {
      */
     @Deprecated
     public void closeUi() {
-        output = "finally. what took you so long? (´-ω-`)" + LS
-                + LS
-                + "oh, if your list had stuff, i've saved it" + LS
-                + "i'll bring it up when you bug me again. bye";
+        output = "if your list had stuff, i've saved it" + LS
+                + "don't bug me again. bye (´-ω-`)";
     }
 
     /**
