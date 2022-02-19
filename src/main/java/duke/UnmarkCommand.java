@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
      */
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.unmark(number);
-        return ui.showUnmark(tasks.get(number));
+        return ui.showUnmark(tasks.get(number - 1));
     }
 
     /**

@@ -162,7 +162,7 @@ public class Ui {
      */
     public String showUnmark(Task task) {
         return "Bud?? Were you trying to josh me when you marked it earlier? "
-                + "/n" + task;
+                + "\n" + task;
     }
 
     public String showFound(TaskList tasks) {
