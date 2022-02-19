@@ -1,5 +1,9 @@
 # User Guide
 
+Hello I am Duke.
+
+I can keep track of your tasks, deadlines and events for you, and your own personal tasks manager.
+
 ## Features 
 
 ### Feature-ABC
