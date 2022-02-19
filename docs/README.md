@@ -10,6 +10,8 @@ Duke is a desktop application for managing personal tasks. Users can create diff
 3. Run the app by double clicking on `Duke.jar` file
 4. Enter your commands in the text box and hit `Enter` to run them
 
+![](/docs/Ui.png)
+
 # Features 
 
 ### Quick Summary
