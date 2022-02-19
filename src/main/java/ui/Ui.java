@@ -166,6 +166,21 @@ public class Ui {
     }
 
     /**
+     * Provides a response to the output source after a user has successfully changed
+     * the priority of a task.
+     *
+     * @param task the task to change the priority for.
+     */
+    public void showUpdatePriority(Task task) {
+        this.output.println(this.constructUpdatePriorityResponse(task));
+    }
+
+    private String constructUpdatePriorityResponse(Task task) {
+        final String message = "OK, I've changed the priority of this task:\n  " + task;
+        return this.constructResponse(message);
+    }
+
+    /**
      * Writes a given error message to the output source.
      *
      * @param message the description of an error to be conveyed to the user.

@@ -25,8 +25,8 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    private Deadline(String description, LocalDate by, boolean isDone) {
-        super(description, isDone);
+    private Deadline(String description, LocalDate by, boolean isDone, TaskPriority priority) {
+        super(description, isDone, priority);
         this.by = by;
     }
 
@@ -46,7 +46,7 @@ public class Deadline extends Task {
      */
     @Override
     public Deadline clone() {
-        return new Deadline(super.description, this.by, super.isDone);
+        return new Deadline(super.description, this.by, super.isDone, super.priority);
     }
 
     /**

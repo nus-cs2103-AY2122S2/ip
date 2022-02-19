@@ -18,8 +18,8 @@ public class Event extends Task {
         this.at = at;
     }
 
-    private Event(String description, String at, boolean isDone) {
-        super(description, isDone);
+    private Event(String description, String at, boolean isDone, TaskPriority priority) {
+        super(description, isDone, priority);
         this.at = at;
     }
 
@@ -39,7 +39,7 @@ public class Event extends Task {
      */
     @Override
     public Event clone() {
-        return new Event(super.description, this.at, super.isDone);
+        return new Event(super.description, this.at, super.isDone, super.priority);
     }
 
     /**

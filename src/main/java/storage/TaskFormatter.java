@@ -9,6 +9,7 @@ import storage.TaskFormatterException.UnsupportedTaskEncodingException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
+import tasks.TaskPriority;
 import tasks.Todo;
 
 /**
@@ -36,22 +37,23 @@ public class TaskFormatter {
     }
 
     private static String encodeTask(Task task) throws TaskFormatterException {
-        final String statusAndDesc = TaskFormatter
-                .joinWithDivider(task.getIsDone() ? "1" : "0", task.getDescription());
+        final String status = task.getIsDone() ? "1" : "0";
+        final String priority = task.getPriority().toString();
+        final String statusPriorityDesc = TaskFormatter.joinWithDivider(status, priority, task.getDescription());
 
         if (task instanceof Todo) {
-            return TaskFormatter.joinWithDivider("T", statusAndDesc);
+            return TaskFormatter.joinWithDivider("T", statusPriorityDesc);
         }
 
         if (task instanceof Deadline) {
             final Deadline d = (Deadline) task;
-            return TaskFormatter
-                    .joinWithDivider("D", statusAndDesc, d.getBy().format(Deadline.DATE_INPUT_FORMAT));
+            final String dueDate = d.getBy().format(Deadline.DATE_INPUT_FORMAT);
+            return TaskFormatter.joinWithDivider("D", statusPriorityDesc, dueDate);
         }
 
         if (task instanceof Event) {
             final Event e = (Event) task;
-            return TaskFormatter.joinWithDivider("E", statusAndDesc, e.getAt());
+            return TaskFormatter.joinWithDivider("E", statusPriorityDesc, e.getAt());
         }
 
         throw new UnsupportedTaskEncodingException();
@@ -92,29 +94,56 @@ public class TaskFormatter {
 
     private static Task decodeTask(String str) throws TaskFormatterException {
         final String[] tokens = str.split("\\|");
-        if (tokens.length < 3 || (!tokens[1].trim().equals("0") && !tokens[1].trim().equals("1"))) {
+        if (tokens.length < 4) {
             throw new IllegalDecodingInputException();
         }
 
-        Task task;
-        switch (tokens[0].trim()) {
-        case "T":
-            task = new Todo(tokens[2].trim());
-            break;
-        case "D":
-            task = new Deadline(tokens[2].trim(), LocalDate.parse(tokens[3].trim(), Deadline.DATE_INPUT_FORMAT));
-            break;
-        case "E":
-            task = new Event(tokens[2].trim(), tokens[3].trim());
-            break;
-        default:
-            throw new IllegalDecodingInputException();
-        }
+        final Task task = TaskFormatter.parseTaskType(tokens);
 
-        if (tokens[1].trim().equals("1")) {
+        final boolean isDone = TaskFormatter.parseCompletionStatus(tokens[1]);
+        if (isDone) {
             task.markAsDone();
         }
 
+        final TaskPriority p = TaskFormatter.parsePriorityType(tokens[2]);
+        task.setPriority(p);
+
         return task;
+    }
+
+    private static Task parseTaskType(String[] tokens) throws TaskFormatterException {
+        final String command = tokens[0].trim();
+        final String description = tokens[3].trim();
+
+        switch (command) {
+        case "T":
+            return new Todo(description);
+        case "D":
+            final LocalDate dueDate = LocalDate.parse(tokens[4].trim(), Deadline.DATE_INPUT_FORMAT);
+            return new Deadline(description, dueDate);
+        case "E":
+            final String startsAt = tokens[4].trim();
+            return new Event(description, startsAt);
+        default:
+            throw new IllegalDecodingInputException();
+        }
+    }
+
+    private static final boolean parseCompletionStatus(String status) throws TaskFormatterException {
+        if (status.trim().equals("0")) {
+            return false;
+        }
+        if (status.trim().equals("1")) {
+            return true;
+        }
+        throw new IllegalDecodingInputException();
+    }
+
+    private static final TaskPriority parsePriorityType(String priority) throws TaskFormatterException {
+        try {
+            return TaskPriority.parsePriority(priority.trim());
+        } catch (IllegalArgumentException ex) {
+            throw new IllegalDecodingInputException();
+        }
     }
 }
