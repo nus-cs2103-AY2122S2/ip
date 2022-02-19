@@ -28,8 +28,10 @@ public class Storage {
     public void load() throws IOException {
         FileReader fr = new FileReader("storage.txt");
         BufferedReader bufferedReader = new BufferedReader(fr);
-        while (bufferedReader.ready()) {
-            String line = bufferedReader.readLine();
+
+        String line;
+
+        while ((line = bufferedReader.readLine()) != null) {
 
             if (line.split("\\.")[1].charAt(1) == 'D') {
                 boolean isDone = line.charAt(6) == 'X';
