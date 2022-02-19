@@ -53,11 +53,14 @@ public class Bot {
      *
      * @param query the instruction for the chatbot to process and respond to.
      */
-    public void execute(String query) {
+    public boolean execute(String query) {
         try {
-            this.parser.parse(query).execute(this.ui, this.taskList);
+            final Command command = this.parser.parse(query);
+            command.execute(this.ui, this.taskList);
+            return command.isExit();
         } catch (Exception ex) {
             ui.showError(ex.getMessage());
+            return false;
         }
     }
 }
