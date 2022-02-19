@@ -6,6 +6,7 @@ package tasks;
 public abstract class Task {
     protected final String description;
     protected boolean isDone;
+    protected TaskPriority priority;
 
     /**
      * Returns a Task object that contains details of the
@@ -16,11 +17,13 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = TaskPriority.LOW;
     }
 
-    protected Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone, TaskPriority priority) {
         this.description = description;
         this.isDone = isDone;
+        this.priority = priority;
     }
 
     protected String getStatusIcon() {
@@ -60,6 +63,15 @@ public abstract class Task {
     }
 
     /**
+     * Adjust the importance of a task.
+     *
+     * @param priority the importance of a task.
+     */
+    public void setPriority(TaskPriority priority) {
+        this.priority = priority;
+    }
+
+    /**
      * Duplicates the current task.
      *
      * @return A duplicate of the current task.
@@ -74,6 +86,8 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        final String priority = "[" + this.priority + "]";
+        final String completionStatus = "[" + this.getStatusIcon() + "]";
+        return priority + completionStatus + " " + this.description;
     }
 }

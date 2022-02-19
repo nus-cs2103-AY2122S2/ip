@@ -27,7 +27,7 @@ class DeadlineTest {
         final int month = 3;
         final int day = 1;
 
-        final String expected = "[D][ ] " + description + " (by: Mar 01 2022)";
+        final String expected = "[D][LOW][ ] " + description + " (by: Mar 01 2022)";
         final Deadline actual = new Deadline(description, LocalDate.of(year, month, day));
 
         assertEquals(expected, actual.toString());
@@ -40,7 +40,7 @@ class DeadlineTest {
         final int month = 3;
         final int day = 1;
 
-        final String expected = "[D][X] " + description + " (by: Mar 01 2022)";
+        final String expected = "[D][LOW][X] " + description + " (by: Mar 01 2022)";
         final Deadline actual = new Deadline(description, LocalDate.of(year, month, day));
         actual.isDone = true;
 
@@ -51,5 +51,6 @@ class DeadlineTest {
         assertEquals(d1.description, d2.description);
         assertEquals(d1.isDone, d2.isDone);
         assertEquals(d1.getBy(), d2.getBy());
+        assertEquals(d1.priority, d2.priority);
     }
 }

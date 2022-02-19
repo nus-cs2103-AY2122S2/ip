@@ -14,8 +14,8 @@ public class Todo extends Task {
         super(description);
     }
 
-    private Todo(String description, boolean isDone) {
-        super(description, isDone);
+    private Todo(String description, boolean isDone, TaskPriority priority) {
+        super(description, isDone, priority);
     }
 
     /**
@@ -25,7 +25,7 @@ public class Todo extends Task {
      */
     @Override
     public Todo clone() {
-        return new Todo(super.description, super.isDone);
+        return new Todo(super.description, super.isDone, super.priority);
     }
 
     /**
