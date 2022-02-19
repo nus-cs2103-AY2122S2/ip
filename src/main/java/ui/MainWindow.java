@@ -61,11 +61,13 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         final String input = userInput.getText();
         final DukeResponse response = this.duke.processQuery(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response.getMessage(), dukeImage)
         );
         userInput.clear();
+
         if (response.isExit()) {
             final PauseTransition pause = new PauseTransition(Duration.ONE);
             pause.setOnFinished(e -> Platform.exit());
