@@ -13,5 +13,15 @@ src/main/resources/docs/
 *.iml
 bin/
 
+*.class
+
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+/YodaData/
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

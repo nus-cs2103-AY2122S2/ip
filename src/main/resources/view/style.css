@@ -1,0 +1,27 @@
+#userInput {
+    -fx-font-size: 12px;
+    -fx-font-family: Monospace;
+}
+
+#dialogContainer {
+    -fx-background-image: url("/images/bg.png");
+    -fx-background-position: center;
+}
+
+#dialog {
+    -fx-font-size: 12px;
+    -fx-font-family: Monospace;
+    -fx-fill: white;
+    -fx-background-color: #dcf8c6;
+    -fx-padding: 8 12 8 12;
+    -fx-background-radius: 10px;
+}
+
+#sendButton {
+    -fx-font-size: 12px;
+    -fx-font-family: Monospace;
+    -fx-background-image: url("/images/send.png");
+    -fx-width: 76;
+    -fx-height: 41;
+    -fx-cursor: hand;
+}
