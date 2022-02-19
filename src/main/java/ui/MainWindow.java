@@ -3,6 +3,8 @@ package ui;
 import commands.StartCommand;
 import duke.Duke;
 import duke.DukeResponse;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for ui.MainWindow. Provides the layout for the other controls.
@@ -55,5 +58,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response.getMessage(), dukeImage)
         );
         userInput.clear();
+        if (response.isExit()) {
+            final PauseTransition pause = new PauseTransition(Duration.ONE);
+            pause.setOnFinished(e -> Platform.exit());
+            pause.play();
+        }
     }
 }
