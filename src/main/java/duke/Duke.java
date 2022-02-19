@@ -40,6 +40,7 @@ public class Duke {
             try {
                 newFile.createNewFile();
                 storage = new Storage(filename);
+                taskList = storage.getData();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
