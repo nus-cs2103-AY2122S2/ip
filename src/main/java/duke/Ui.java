@@ -8,16 +8,10 @@ public class Ui {
     /**
      * Greeting message.
      */
-    public static void welcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
+    public static String welcome() {
         //Greetings
-        System.out.println("Greetings! I'm Duke" + "\n" + "What can I do for you today?\n" + logo);
-        System.out.println("What you like to do? Please enter your command: ");
+        String msg = "Greetings! I'm Duke" + "\n" + "What can I do for you today?\n";
+        return msg;
     }
 
     /**
