@@ -52,7 +52,6 @@ public class Duke {
     }
 
     private static void run() {
-        assert taskList != null : "TaskList failed to initialize";
         textUI.printWelcomeMessage();
         do {
             String userInputCommand = textUI.getUserCommand();
@@ -69,14 +68,14 @@ public class Duke {
     public static void main(String[] args) {
         initialize();
         run();
+
     }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        assert taskList != null : "TaskList failed to initialize";
+    public static String getResponse(String input) {
         try {
             Command currCommand = parser.parseCommands(input);
             String outputToUser = currCommand.execute();

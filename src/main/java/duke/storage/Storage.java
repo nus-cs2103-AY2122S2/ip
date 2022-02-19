@@ -38,7 +38,6 @@ public class Storage {
      * @throws DukeException If there is an error writing to save file.
      */
     public void saveTasklist(TaskList taskList) throws DukeException {
-        assert taskList != null : "Null tasklist to save";
         initialiseSaveFile();
         String dataToWrite = taskList.toSaveData();
         try {
