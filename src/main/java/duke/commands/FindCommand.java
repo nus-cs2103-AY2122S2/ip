@@ -31,11 +31,9 @@ public class FindCommand extends Command {
                 foundTasks.addTask(taskList.getTask(i));
             }
         }
-
         if (foundTasks.size() == 0) {
             return "Apologies, no task matches what you are looking for";
         }
-
         return String.format("These are the results of my search:\n%s", foundTasks.toString());
     }
 }
