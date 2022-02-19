@@ -143,7 +143,20 @@ public class TaskList {
      * @return True if there is a task with the date dateString, false otherwise.
      */
     public boolean checkDateInTaskList(LocalDateTime date) {
-        boolean hasDate = tasks.stream().anyMatch(task -> task.getDate().equals(date));
+        boolean hasDate = tasks.stream().anyMatch(task -> checkHaveDate(task, date));
         return hasDate;
+    }
+
+    /**
+     * Check if the task has a date. After that, check if it equals to the date given.
+     * @param task The selected task to check if it has a date and is equal to the date given.
+     * @return True if the date match, false if it does not have a date or the date is not equal.
+     */
+    private boolean checkHaveDate(Task task, LocalDateTime date) {
+        if (task.getDate() == null) {
+            return false;
+        } else {
+            return task.getDate().equals(date);
+        }
     }
 }
