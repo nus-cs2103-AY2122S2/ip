@@ -39,31 +39,45 @@ public class Parser {
                 return responseFromDuke;
             }
             case "mark": {
-                if (lenSplit > 1) {
-                    TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).markCheckBoxAs(true);
-                    responseFromDuke = TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).markAsDone();
-                    return responseFromDuke;
+                try {
+                    if (lenSplit > 1) {
+                        TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).markCheckBoxAs(true);
+                        responseFromDuke = TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).markAsDone();
+                        return responseFromDuke;
+                    }
+                    break;
+                } catch (Exception e) {
+                    return "Invalid input, is your index out of bounds?";
                 }
-                break;
+
             }
             case "unmark": {
-                if (lenSplit > 1) {
-                    TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).unmarkCheckBox();
-                    responseFromDuke = TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).unmarkAsDone();
-                    return responseFromDuke;
+                try {
+                    if (lenSplit > 1) {
+                        TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).unmarkCheckBox();
+                        responseFromDuke = TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).unmarkAsDone();
+                        return responseFromDuke;
+                    }
+                    break;
+                } catch (Exception e) {
+                    return "Invalid input, is your index out of bounds?";
                 }
-                break;
             }
             case "delete": {
-                if (lenSplit > 1) {
-                    responseFromDuke = "OK REMOVED\n" + TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).getFullDescription()
-                            + String.format("\nyou now have %d tasks in the list%n", listCount - 1);
-                    TaskList.list.remove(Integer.parseInt(userInputSplit[1]) - 1);
-                    listCount--;
-                    Storage.save();
-                    return responseFromDuke;
+                try {
+                    if (lenSplit > 1) {
+                        responseFromDuke = "OK REMOVED\n" + TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).getFullDescription()
+                                + String.format("\nyou now have %d tasks in the list%n", listCount - 1);
+                        TaskList.list.remove(Integer.parseInt(userInputSplit[1]) - 1);
+                        listCount--;
+                        Storage.save();
+                        return responseFromDuke;
+                    }
+                    break;
+                } catch (Exception e) {
+                    return "Invalid input, is your index out of bounds?";
                 }
-                break;
+
             }
             case "find": {
                 if (lenSplit > 1) {
