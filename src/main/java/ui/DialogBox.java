@@ -48,10 +48,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a user dialog.
+     *
+     * @param text the user's query to the Duke chatbot.
+     * @param img the user's profile image.
+     * @return A user dialog containing a user's query to the Duke chatbot.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a Duke chatbot dialog.
+     *
+     * @param text the Duke chatbot's response to the user.
+     * @param img the Duke chatbot's profile image.
+     * @return A Duke chatbot dialog containing the chatbot's response to a user's query.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

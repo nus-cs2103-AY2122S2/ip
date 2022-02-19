@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * Controller for ui.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -32,11 +32,19 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
 
+    /**
+     * Sets up the main window.
+     */
     @FXML
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Duke chatbot and greets the user.
+     *
+     * @param d the Duke chatbot that the user will interact with.
+     */
     public void setDuke(Duke d) {
         this.duke = d;
         final DukeResponse startResponse = this.duke.processQuery(StartCommand.COMMAND);
@@ -46,7 +54,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends
      * them to the dialog container. Clears the user input after processing.
      */
     @FXML
