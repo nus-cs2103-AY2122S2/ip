@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents the Deadline Task object.
  */
-public class Deadline extends Task {
+public class Deadline extends duke.Task {
 
     /**
      * Initializes the Deadline object
