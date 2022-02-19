@@ -66,9 +66,9 @@ public class Parser {
     }
 
     ParsedAnswer parseUpdate(String inputToParse) {
-        String[] parsedInput = inputToParse.split(" " , 2);
-        String[] parsedContent = parsedInput[1].split(" ", 2);
         try {
+            String[] parsedInput = inputToParse.split(" " , 2);
+            String[] parsedContent = parsedInput[1].split(" ", 2);
             int index = Integer.parseInt(parsedContent[0]) - 1;
             ParsedAnswer pa = new ParsedAnswer("update", index);
             System.out.println(index);
