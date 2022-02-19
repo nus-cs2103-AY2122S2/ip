@@ -22,7 +22,7 @@ public class MarkCommand extends Command {
      */
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.mark(number);
-        return ui.showMark(tasks.get(number));
+        return ui.showMark(tasks.get(number - 1));
     }
 
     /**
