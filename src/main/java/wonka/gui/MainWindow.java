@@ -28,8 +28,8 @@ public class MainWindow extends AnchorPane {
     private Stage stage;
     private Wonka wonka;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image wonkaImage = new Image(this.getClass().getResourceAsStream("/images/wonka.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image wonkaImage = new Image(this.getClass().getResourceAsStream("/images/wonka.png"));
 
     @FXML
     private void initialize() {

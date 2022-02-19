@@ -1,0 +1,5 @@
+.scroll-pane .viewport {
+    -fx-background-image: url("../images/background.gif");
+    -fx-background-size: stretch;
+    -fx-background-position: center;
+}

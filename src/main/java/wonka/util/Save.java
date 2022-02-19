@@ -39,9 +39,7 @@ public class Save {
         try {
             process(this.inputsToBeProcessed);
         } catch (InvalidCommandException e) {
-            System.out.println("\t____________________________________________________________");
             System.out.println("\t Loading from save file caused an error. Please remove and add your tasks again.");
-            System.out.println("\t____________________________________________________________");
         }
     }
 
@@ -55,9 +53,7 @@ public class Save {
             fw.write(textToWrite);
             fw.close();
         } catch (IOException e) {
-            System.out.println("\t____________________________________________________________");
             System.out.println("\t Hmm.. The file cannot be written to. Try changing permissions.");
-            System.out.println("\t____________________________________________________________");
         }
     }
 
@@ -85,10 +81,7 @@ public class Save {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("\t____________________________________________________________");
-            System.out.println("\t☹ Oops! The path you provided does not exist!");
-            System.out.println("\t☹ I have created the file for you!");
-            System.out.println("\t____________________________________________________________");
+            System.out.println("\t Preparing for initial launch, creating new save file.");
             File fileDir = new File("src/main/java/wonka/data");
             fileDir.mkdirs();
             File fileToCreate = new File(fileDir, "wonka.txt");
