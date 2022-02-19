@@ -1,28 +1,30 @@
 package duke;
 
-import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.lang.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Programme which serves as an interactive checklist.
  */
 public class Duke extends Application {
 
-    private duke.Storage storage = new duke.Storage();
+    private duke.Storage storage;
     private duke.TaskList tasks;
     private duke.Ui ui;
-    private duke.Parser parser = new duke.Parser();
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -50,7 +52,6 @@ public class Duke extends Application {
         }
     }
 
-
     /**
      * Initializes Duke.
      *
@@ -58,11 +59,11 @@ public class Duke extends Application {
     public Duke() {
         ui = new duke.Ui();
         try {
-            tasks = new duke.TaskList(storage.load());
-            //tasks = new duke.TaskList();
+            //tasks = new TaskList(storage.load());
+            tasks = new duke.TaskList();
         } catch (Exception e) {
             ui.showLoadingError();
-            tasks = new duke.TaskList(storage.load());
+            tasks = new duke.TaskList();
         }
     }
 
@@ -74,13 +75,92 @@ public class Duke extends Application {
 
         Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNextLine()) {
-            String values = sc.nextLine();
-            tasks = parser.parse(ui, tasks, values);
-            if (values.equals("bye")) {
-                return;
-            }
 
+        while (sc.hasNextLine()) {
+            String value = sc.nextLine();
+            String[] splitStr = value.split("\\s+");
+
+            if (value.equals("bye")) {
+                ui.finalBye();
+                return;
+
+            } else if (value.equals("list")) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(i + 1 + ". " + tasks.get(i));
+                }
+
+            } else if (splitStr[0].equals("mark")) {
+                int index = Integer.parseInt(splitStr[1]);
+                duke.Task task = (duke.Task) tasks.get(index - 1);
+                task.markAsDone();
+                ui.markDone(tasks.get(index - 1));
+
+
+            } else if (splitStr[0].equals("unmark")) {
+                int index = Integer.parseInt(splitStr[1]);
+                duke.Task task = (duke.Task) tasks.get(index - 1);
+                task.unmarkAsDone();
+                ui.unmarkDone(tasks.get(index - 1));
+
+            } else if (splitStr[0].equals("delete")) {
+                int index = Integer.parseInt(splitStr[1]);
+                duke.Task task = (duke.Task) tasks.get(index - 1);
+                tasks.remove(index - 1);
+                ui.removedTask(task, tasks);
+
+            } else if (splitStr[0].equals("find")) {
+                String findString = value.substring(5);
+                duke.TaskList foundTasks = new duke.TaskList();
+                for (int i =0; i<tasks.size(); i++) {
+                    if (tasks.get(i).toString().contains(findString)) {
+                        foundTasks.add(tasks.get(i));
+                    }
+                }
+                ui.findTasks(foundTasks);
+
+            } else if (splitStr[0].equals("todo") || splitStr[0].equals("deadline") || splitStr[0].equals("event")) {
+
+                String[] parts = value.split("/");
+                String description = parts[0];
+                if (parts.length > 1) {
+                    if (parts[1].length() == 13) {
+                        LocalDate d1 = LocalDate.parse(parts[1].substring(3));
+                        parts[1] = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    }
+                    description += "(" + parts[1] + ")";
+                }
+
+                try {
+                    if (splitStr[0].equals("todo")) {
+                        description = description.substring(5);
+                        tasks.add(new duke.ToDo(description));
+                    }
+                } catch (Exception e) {
+                    ui.emptyInput();
+                }
+                try {
+                    if (splitStr[0].equals("deadline")) {
+                        description = description.substring(9);
+                        tasks.add(new duke.Deadline(description));
+                    }
+                } catch (Exception e) {
+                    ui.emptyInput();
+                }
+                try {
+                    if (splitStr[0].equals("event")) {
+                        description = description.substring(6);
+                        tasks.add(new duke.Event(description));
+                    }
+                } catch (Exception e) {
+                    ui.emptyInput();
+                }
+
+                ui.addTask(tasks);
+
+            } else {
+                ui.doNotUnderstand();
+
+            }
             storage.save(tasks);
         }
     }
@@ -171,6 +251,7 @@ public class Duke extends Application {
     }
 
     /**
+     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
@@ -183,22 +264,21 @@ public class Duke extends Application {
         return textToAdd;
     }
     /**
-     *
+     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         dialogContainer.getChildren().addAll(
                 new duke.DialogBox(userInput.getText(), user),
-                new duke.DialogBox(getResponse(userInput.getText()), duke)
+                new duke.DialogBox(getResponse(userInput.getText()),duke)
         );
         userInput.clear();
     }
 
     /**
-     * Interactive echo for the bot to repeat the statement to the user.
-     * @param input Input as typed by the user.
-     * @return String to represent pikachu's echo of the user input.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
         return "Pikachu heard you say: " + input;
