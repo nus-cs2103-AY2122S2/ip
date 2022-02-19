@@ -39,6 +39,7 @@ public class DeleteCommand extends Command {
         try {
             final Optional<Task> taskToRemove = taskList.getById(this.id);
             taskList.remove(this.id);
+            assert taskToRemove.isPresent() : "The task to remove should exist prior to its successful removal";
             ui.showDeleteTask(taskToRemove.get(), taskList.size());
         } catch (TaskNotFoundException ex) {
             ui.showError("Task to remove doesn't exist");

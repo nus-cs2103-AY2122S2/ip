@@ -59,6 +59,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert this.duke != null : "The Duke instance should already be assigned";
         final String input = userInput.getText();
         final DukeResponse response = this.duke.processQuery(input);
 

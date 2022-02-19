@@ -53,6 +53,7 @@ public class Storage {
     public List<Task> load() throws StorageOperationException {
         BufferedReader reader = null;
         try {
+            assert Files.exists(this.path) : "Tasks file should already exist in the filesystem";
             reader = Files.newBufferedReader(this.path);
             final String file = reader.lines().collect(Collectors.joining(System.lineSeparator()));
             return TaskFormatter.decode(file);
@@ -73,6 +74,7 @@ public class Storage {
      */
     public void save(List<? extends Task> tasks) throws StorageOperationException {
         try {
+            assert Files.exists(this.path) : "Tasks file should already exist in the filesystem";
             Files.writeString(this.path, TaskFormatter.encode(tasks));
         } catch (Exception ex) {
             throw new StorageOperationException(ex.getMessage());
