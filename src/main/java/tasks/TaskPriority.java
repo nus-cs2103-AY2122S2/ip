@@ -4,14 +4,39 @@ package tasks;
  * Represents the importance of a task.
  */
 public enum TaskPriority {
-    HIGH("HIGH"),
-    MEDIUM("MEDIUM"),
-    LOW("LOW");
+    LOW(TaskPriority.LOW_PRIORITY_LABEL),
+    MEDIUM(TaskPriority.MEDIUM_PRIORITY_LABEL),
+    HIGH(TaskPriority.HIGH_PRIORITY_LABEL);
 
-    private final String name;
+    private static final String LOW_PRIORITY_LABEL = "LOW";
+    private static final String MEDIUM_PRIORITY_LABEL = "MEDIUM";
+    private static final String HIGH_PRIORITY_LABEL = "HIGH";
 
-    TaskPriority(String name) {
-        this.name = name;
+    private final String label;
+
+    TaskPriority(String label) {
+        this.label = label;
+    }
+
+    /**
+     * Converts a string to a task priority object.
+     * Valid strings include "LOW", "MEDIUM", and "HIGH".
+     *
+     * @param value the string to be converted to a task priority.
+     * @return A task priority object that corresponds to the given value.
+     * @throws IllegalArgumentException If a value with no corresponding task priority is given.
+     */
+    public static TaskPriority parsePriority(String value) throws IllegalArgumentException {
+        switch (value.trim()) {
+        case TaskPriority.LOW_PRIORITY_LABEL:
+            return LOW;
+        case TaskPriority.MEDIUM_PRIORITY_LABEL:
+            return MEDIUM;
+        case TaskPriority.HIGH_PRIORITY_LABEL:
+            return HIGH;
+        default:
+            throw new IllegalArgumentException("Given string cannot be converted to a TaskPriority");
+        }
     }
 
     /**
@@ -21,6 +46,6 @@ public enum TaskPriority {
      */
     @Override
     public String toString() {
-        return this.name;
+        return this.label;
     }
 }
