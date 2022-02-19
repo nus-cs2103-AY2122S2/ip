@@ -6,7 +6,7 @@ package duke.commands;
 public class InvalidCommand extends Command{
 
     /**
-     * Returns String to tell user command is unknown.
+     * returns String to tell user command is unknown.
      *
      * @return Message for completing the command which is displayed to user.
      */
