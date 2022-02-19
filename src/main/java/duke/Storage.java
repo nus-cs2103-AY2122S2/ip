@@ -65,7 +65,6 @@ public class Storage {
         BufferedWriter bw = new BufferedWriter(fw);
 
         bw.write(this.toString());
-        bw.newLine();
         bw.close();
     }
 
