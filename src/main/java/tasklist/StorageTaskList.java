@@ -39,6 +39,7 @@ public class StorageTaskList implements TaskList {
      */
     @Override
     public int size() {
+        assert this.hasLoadedFromStorage : "Tasks should already be cached";
         return this.tasks.size();
     }
 
@@ -52,6 +53,7 @@ public class StorageTaskList implements TaskList {
      */
     @Override
     public Task[] find(String keyword) throws TaskListException {
+        assert this.hasLoadedFromStorage : "Tasks should already be cached";
         return this.tasks
                 .stream()
                 .filter(task -> task.getDescription().contains(keyword))
@@ -71,6 +73,7 @@ public class StorageTaskList implements TaskList {
      */
     @Override
     public Optional<Task> getById(int id) throws TaskListException {
+        assert this.hasLoadedFromStorage : "Tasks should already be cached";
         try {
             return Optional.of(this.tasks.get(id).clone());
         } catch (IndexOutOfBoundsException ex) {
@@ -95,7 +98,7 @@ public class StorageTaskList implements TaskList {
                 throw new TaskListException(ex.getMessage());
             }
         }
-
+        assert this.hasLoadedFromStorage : "Tasks should already be cached";
         return this.tasks.stream().map(Task::clone).toArray(Task[]::new);
     }
 
@@ -108,6 +111,7 @@ public class StorageTaskList implements TaskList {
      */
     @Override
     public void add(Task taskToCreate) throws TaskListException {
+        assert this.hasLoadedFromStorage : "Tasks should already be cached";
         this.executeAndSave(tasks -> tasks.add(taskToCreate.clone()));
     }
 
@@ -121,6 +125,7 @@ public class StorageTaskList implements TaskList {
      */
     @Override
     public void update(int id, Task taskToUpdate) throws TaskListException {
+        assert this.hasLoadedFromStorage : "Tasks should already be cached";
         this.executeAndSave(tasks -> tasks.set(id, taskToUpdate.clone()));
     }
 
@@ -132,6 +137,7 @@ public class StorageTaskList implements TaskList {
      */
     @Override
     public void remove(int id) throws TaskListException {
+        assert this.hasLoadedFromStorage : "Tasks should already be cached";
         this.executeAndSave(tasks -> tasks.remove(id));
     }
 
