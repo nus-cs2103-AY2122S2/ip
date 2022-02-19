@@ -20,7 +20,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        String todoString = "[T]" + this.getStatusIcon() + " " + this.description;
-        return todoString;
+        return "[T]" + this.getStatusIcon() + " " + this.description;
     }
 }

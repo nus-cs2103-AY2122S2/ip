@@ -26,15 +26,12 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private final Image USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image DUKE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     protected static ArrayList<Task> list;
 
-    /**
-     * Function that starts the application.
-     * @param stage
-     */
+
     @Override
     public void start(Stage stage) {
         //Step 1. Formatting the window to look as expected.
@@ -98,6 +95,7 @@ public class Duke extends Application {
     }
 
     /**
+     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -106,16 +104,14 @@ public class Duke extends Application {
         String input = userInput.getText();
         String response = getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, USER),
-                DialogBox.getDukeDialog(response, DUKE)
+                DialogBox.getUserDialog(input, user),
+                DialogBox.getDukeDialog(response, duke)
         );
         userInput.clear();
     }
-
     /**
-     * Gets the user response and processes the input.
-     * @param input
-     * @return a {@code String} narrating the actions taken.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
         try {
