@@ -169,7 +169,7 @@ public class Ui {
         StringBuilder sb = new StringBuilder("Bud, I searched high and low and this is what I found!");
         sb.append(System.getProperty("line.separator"));
         for(int i = 0; i < tasks.getSize(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            sb.append(i + 1).append(". ").append(tasks.get(i));
             sb.append(System.getProperty("line.separator"));
         }
         return sb.toString();
