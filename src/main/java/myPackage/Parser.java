@@ -113,7 +113,7 @@ public class Parser {
                     case "deadline": {
                         try {
                             if (userInputSplit.length < 2 || userInput.split("/").length < 2) {
-                                throw new DukeException("Usage: deadline <Taskname> /by <dd-mm-yyyy>");
+                                throw new DukeException("Usage: deadline <Taskname> /by <yyyy-mm-dd>");
                             }
                         } catch (DukeException e) {
                             return e.toString();
@@ -129,7 +129,7 @@ public class Parser {
                     case "event": {
                         try {
                             if (userInputSplit.length < 2 || userInput.split("/").length < 2) {
-                                throw new DukeException("Usage: event <EventName> /by <dd mm yyyy>");
+                                throw new DukeException("Usage: event <EventName> /by <yyyy-mm-dd>");
                             }
                         } catch (DukeException e) {
                             return e.toString();
