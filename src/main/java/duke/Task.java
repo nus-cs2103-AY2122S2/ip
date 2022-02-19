@@ -44,19 +44,19 @@ public class Task {
     /**
      * Marks task as done and notifies user of the changes.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         isDone = true;
         String message = "Nice! I've marked this task as done:\n" + this.getStatusIcon() + " " + this.description;
-        System.out.println(message);
+        return message;
     }
 
     /**
      * Marks task as undone and notifies user of the changes.
      */
-    public void markAsUndone(){
+    public String markAsUndone(){
         isDone = false;
         String message = "Ok! I've marked this task as not done yet:\n" + this.getStatusIcon() + " "
         + this.description;
-        System.out.println(message);
+        return message;
     }
 }

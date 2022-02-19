@@ -5,8 +5,6 @@ package duke;
  * The UI class contains methods that deals with interactions with the user.
  */
 public class Ui {
-    final static String BANNER = "=======================================================================";
-
     /**
      * Greeting message.
      */
@@ -25,8 +23,8 @@ public class Ui {
     /**
      * Goodbye message.
      */
-    public static void bye() {
+    public static String bye() {
         //goodbye msg
-        System.out.println("Sad to see you leave, come back soon!");
+        return "Sad to see you leave, come back soon!";
     }
 }

@@ -15,7 +15,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    public static void mark(String input) throws DukeException {
+    public static String mark(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
         if (arr.get(1) == "") {
             throw new DukeException(
@@ -25,7 +25,7 @@ public class TaskList {
         int i = Integer.parseInt(arr.get(1));
         if (i <= Duke.list.size() && i > 0) {
             Task toBeMarked = Duke.list.get(Integer.parseInt(input.substring(5)) - 1);
-            toBeMarked.markAsDone();
+            return toBeMarked.markAsDone();
         } else {
             throw new DukeException(
                     "That is not a valid task number!"
@@ -40,7 +40,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    public static void unmark(String input) throws DukeException {
+    public static String unmark(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
         if (arr.get(1) == "") {
             throw new DukeException(
@@ -50,7 +50,7 @@ public class TaskList {
         int i = Integer.parseInt(arr.get(1));
         if (i <= Duke.list.size() && i > 0) {
             Task toBeMarked = Duke.list.get(Integer.parseInt(input.substring(7)) - 1);
-            toBeMarked.markAsUndone();
+            return toBeMarked.markAsUndone();
         } else {
             throw new DukeException(
                     "That is not a valid task number!"
@@ -64,7 +64,7 @@ public class TaskList {
      * @param input user command.
      * @throws DukeException
      */
-    protected static void deadline(String input) throws DukeException {
+    protected static String deadline(String input) throws DukeException {
         if (stripDescription(input)[0] == "") {
             throw new DukeException(
                     "Oops, the description of deadline cannot be empty!"
@@ -78,10 +78,11 @@ public class TaskList {
         LocalDate date = LocalDate.parse(stripDescription(input)[1]);
 
         Task deadline = new Deadline(stripDescription(input)[0], date);
-        System.out.println("Got it. I've added this task:");
+        String msg = "Got it. I've added this task: \n";
         Duke.list.add(deadline);
-        System.out.println(deadline.toString());
-        System.out.println("Now you have " + Duke.list.size() + " tasks in the list.");
+        msg += deadline + "\n";
+        msg += "Now you have " + Duke.list.size() + " tasks in the list.";
+        return msg;
     }
 
     /**
@@ -90,7 +91,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    public static void todo(String input) throws DukeException {
+    public static String todo(String input) throws DukeException {
         if (stripDescription(input)[0] == "") {
             throw new DukeException(
                 "Oops, the description of todo cannot be empty! Please tell me what you want to do."
@@ -98,9 +99,10 @@ public class TaskList {
         }
         Task toDo = new Todo(stripDescription(input)[0]);
         Duke.list.add(toDo);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(toDo.toString());
-        System.out.println("Now you have " + Duke.list.size() + " in the list.");
+        String msg = "Got it. I've added this task: \n";
+        msg += toDo + "\n";
+        msg += "Now you have " + Duke.list.size() + " in the list.";
+        return msg;
     }
 
     /**
@@ -110,7 +112,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    protected static void event(String input) throws DukeException {
+    protected static String event(String input) throws DukeException {
         if (stripDescription(input)[0] == "") {
             throw new DukeException(
                     "Oops, the description of event cannot be empty!"
@@ -125,10 +127,11 @@ public class TaskList {
 
         LocalDate date = LocalDate.parse(stripDescription(input)[1]);
         Task event = new Event(stripDescription(input)[0], date);
-        System.out.println("Got it. I've added this task:");
+        String msg = "Got it. I've added this task: \n";
         Duke.list.add(event);
-        System.out.println(event.toString());
-        System.out.println("Now you have " + Duke.list.size() + " in the list.");
+        msg += event + "\n";
+        msg += "Now you have " + Duke.list.size() + " in the list.";
+        return msg;
     }
 
     /**
@@ -137,7 +140,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    protected static void delete(String input) throws DukeException {
+    protected static String delete(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
         if (arr.get(1) == "") {
             throw new DukeException(
@@ -147,11 +150,11 @@ public class TaskList {
 
         int i = Integer.parseInt(arr.get(1));
         if (i <= Duke.list.size() && i > 0) {
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(Duke.list.get(i-1).toString());
+            String msg = "Noted. I've removed this task: \n";
+            msg += Duke.list.get(i-1) + "\n";
             Duke.list.remove(i - 1);
-            System.out.println("Now you have " + Duke.list.size() + " tasks in the list.");
-
+            msg += "Now you have " + Duke.list.size() + " tasks in the list.";
+            return msg;
         } else {
             throw new DukeException(
                     "That is not a valid task number!"
@@ -165,7 +168,7 @@ public class TaskList {
      * @param input
      * @throws DukeException
      */
-    protected static void find(String input) throws DukeException {
+    protected static String find(String input) throws DukeException {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
         if (arr.get(1) == "") {
             throw new DukeException("Sorry, please tell me what you want to find!");
@@ -181,13 +184,14 @@ public class TaskList {
         }
 
         if (tasksFound.size() < 1) {
-            System.out.println("Sorry! I didn't find anything with \"" + word + "\" in it. :(");
+            return "Sorry! I didn't find anything with \"" + word + "\" in it. :(";
         } else {
-            System.out.println("Here are the matching tasks in your list: ");
+            String msg = "Here are the matching tasks in your list: \n";
             for (int i = 0; i < tasksFound.size(); i++) {
                 int count = i + 1;
-                System.out.println(count + ". " + tasksFound.get(i));
+                msg += count + ". " + tasksFound.get(i) + "\n";
             }
+            return msg;
         }
     }
 
