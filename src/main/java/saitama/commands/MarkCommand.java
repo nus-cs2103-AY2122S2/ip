@@ -15,7 +15,7 @@ public class MarkCommand extends Command {
     /**
      * Initialises the MarkCommand.
      *
-     * @param taskNumber The task number to mark.
+     * @param taskNumber The task number to mark
      */
     public MarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;

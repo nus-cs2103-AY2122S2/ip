@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     /**
      * Initialises the FindCommand.
      *
-     * @param query The String to search in the TaskList.
+     * @param query The String to search in the TaskList
      */
     public FindCommand(String query) {
         this.query = query;

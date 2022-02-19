@@ -50,7 +50,7 @@ public abstract class Task {
     /**
      * Returns the done status of the task.
      *
-     * @return the done status of the task.
+     * @return the done status of the task
      */
     protected String getStatusIcon() {
         String tick = "\u2713";
@@ -61,7 +61,7 @@ public abstract class Task {
     /**
      * Returns the string label of the RecurFrequency tag.
      *
-     * @return The string label of the RecurFrequency tag.
+     * @return The string label of the RecurFrequency tag
      */
     protected String getRecursiveFrequency() {
         if (recurFrequency != null) {
@@ -74,7 +74,7 @@ public abstract class Task {
     /**
      * Returns if the task is recurring.
      *
-     * @return Whether the task is recurring.
+     * @return Whether the task is recurring
      */
     public boolean isRecurring() {
         return recurFrequency != null;
@@ -83,7 +83,7 @@ public abstract class Task {
     /**
      * Checks if the timeframe of a recurring task should be reset.
      *
-     * @return Whether a recurring task should be reset.
+     * @return Whether this task should be reset
      */
     protected boolean shouldReset() {
         if (!isRecurring()) {
@@ -118,14 +118,14 @@ public abstract class Task {
     }
 
     /**
-     * Marks a task as done.
+     * Marks a task as done
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * Marks a task as not done.
+     * Marks a task as not done
      */
     public void markAsUndone() {
         isDone = false;

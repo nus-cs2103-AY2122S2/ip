@@ -27,8 +27,8 @@ public enum RecurFrequency implements Tag {
     /**
      * Gets the RecursiveTag corresponding to the given String tag, if it exists. Otherwise, returns null.
      *
-     * @param tag
-     * @return The RecursiveTag corresponding to the given String tag, if it exists. Otherwise, returns null.
+     * @param tag The String format of the tag
+     * @return The RecursiveTag corresponding to the given String tag, if it exists. Otherwise, returns null
      */
     public static RecurFrequency get(String tag) {
         if (tagMap.containsKey(tag)) {
@@ -41,7 +41,7 @@ public enum RecurFrequency implements Tag {
     /**
      * Returns the string label of the RecurFrequency.
      *
-     * @return the string label of the RecurFrequency.
+     * @return the string label of the RecurFrequency
      */
     @Override
     public String toString() {
@@ -51,7 +51,7 @@ public enum RecurFrequency implements Tag {
     /**
      * Returns the label of the RecursiveTag.
      *
-     * @return The label of the RecursiveTag.
+     * @return The label of the RecursiveTag
      */
     public String getLabel() {
         switch (this) {

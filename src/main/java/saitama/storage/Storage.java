@@ -30,7 +30,7 @@ public class Storage {
     /**
      * Initialises a storage object.
      *
-     * @param filePath A file path to a text file where data will be stored.
+     * @param filePath A file path to a text file where data will be stored
      */
     public Storage(String filePath) {
         assert filePath.endsWith(".txt") : "File path needs to be a .txt file";
@@ -40,7 +40,7 @@ public class Storage {
     /**
      * Loads a task list from the given text file stored in filePath.
      *
-     * @return An array list of tasks.
+     * @return An ArrayList of tasks
      */
     public ArrayList<Task> load() {
         assert filePath.endsWith(".txt") : "File path needs to be a .txt file";
@@ -79,13 +79,13 @@ public class Storage {
     /**
      * Adds a task with the corresponding passed parameters to the given task list.
      *
-     * @param taskList The task list which the task is to be added to.
-     * @param taskType The type of the task to be added.
-     * @param isDone The isDone status of the task to be added.
-     * @param recurFrequency The RecurFrequency of the task.
-     * @param lastResetDate The last reset date of the task.
-     * @param taskArguments The task's arguments.
-     * @throws FileCorruptException if the saved task has an invalid format.
+     * @param taskList The task list which the task is to be added to
+     * @param taskType The type of the task to be added
+     * @param isDone The isDone status of the task to be added
+     * @param recurFrequency The RecurFrequency of the task
+     * @param lastResetDate The last reset date of the task
+     * @param taskArguments The task's arguments
+     * @throws FileCorruptException if the saved task has an invalid format
      */
     private void addTaskToList(ArrayList<Task> taskList, String taskType, boolean isDone, RecurFrequency recurFrequency,
                                LocalDate lastResetDate, String taskArguments) throws FileCorruptException {
@@ -110,12 +110,12 @@ public class Storage {
     /**
      * Creates an event task based on the passed parameters.
      *
-     * @param isDone The isDone status of the task.
-     * @param recurFrequency The recurFrequency of the task.
-     * @param lastResetDate The last reset date of the task.
-     * @param taskArguments The task's arguments.
-     * @return A new event task based on the corresponding passed parameters.
-     * @throws FileCorruptException if the format of the saved event is invalid.
+     * @param isDone The isDone status of the task
+     * @param recurFrequency The RecurFrequency of the task
+     * @param lastResetDate The last reset date of the task
+     * @param taskArguments The task's arguments
+     * @return A new event task based on the corresponding passed parameters
+     * @throws FileCorruptException if the format of the saved event is invalid
      */
     private Task createEventTask(boolean isDone, RecurFrequency recurFrequency,
                                  LocalDate lastResetDate, String taskArguments) throws FileCorruptException {
@@ -134,12 +134,12 @@ public class Storage {
     /**
      * Creates a deadline task based on the passed parameters.
      *
-     * @param isDone The isDone status of the task.
-     * @param recurFrequency The recurFrequency of the task.
-     * @param lastResetDate The last reset date of the task.
-     * @param taskArguments The task's arguments.
-     * @return A new Deadline task based on the corresponding passed parameters.
-     * @throws FileCorruptException if the format of the saved deadline is invalid.
+     * @param isDone The isDone status of the task
+     * @param recurFrequency The RecurFrequency of the task
+     * @param lastResetDate The last reset date of the task
+     * @param taskArguments The task's arguments
+     * @return A new Deadline task based on the corresponding passed parameters
+     * @throws FileCorruptException if the format of the saved deadline is invalid
      */
     private Task createDeadlineTask(boolean isDone, RecurFrequency recurFrequency, LocalDate lastResetDate,
                                     String taskArguments) throws FileCorruptException {
@@ -164,9 +164,9 @@ public class Storage {
     /**
      * Returns the boolean format of the saved isDone.
      *
-     * @param data The isDone status of the task.
-     * @return The boolean format of the isDone status.
-     * @throws FileCorruptException if the saved isDone status is neither "true" nor "false".
+     * @param data The isDone status of the task
+     * @return The boolean format of the isDone status
+     * @throws FileCorruptException if the saved isDone status is neither "true" nor "false"
      */
     private boolean getIsDone(String data) throws FileCorruptException {
         boolean isDone;
@@ -186,7 +186,7 @@ public class Storage {
     /**
      * Saves the current task list to the specified filePath.
      *
-     * @param taskList The task list to be saved.
+     * @param taskList The task list to be saved
      */
     public void save(ArrayList<Task> taskList) {
         assert filePath.endsWith(".txt") : "File path needs to be a .txt file";

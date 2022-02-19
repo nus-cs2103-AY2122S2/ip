@@ -17,7 +17,7 @@ public class TaskList {
     /**
      * Adds a task to the list.
      *
-     * @param task The task to be added.
+     * @param task The Task to be added
      */
     public void add(Task task) {
         taskList.add(task);
@@ -26,7 +26,7 @@ public class TaskList {
     /**
      * Marks the given task number.
      *
-     * @param taskNumber The task number of the task to be marked.
+     * @param taskNumber The task number of the task to be marked
      */
     public void markTask(int taskNumber) {
         assert taskNumber <= numOfTasks() : "Mark task number exceeds the number of tasks in TaskList";
@@ -37,7 +37,7 @@ public class TaskList {
     /**
      * Unmarks the given task number.
      *
-     * @param taskNumber The task number of the task to be unmarked.
+     * @param taskNumber The task number of the task to be unmarked
      */
     public void unmarkTask(int taskNumber) {
         assert taskNumber <= numOfTasks() : "Unmark task number exceeds the number of tasks in TaskList";
@@ -48,7 +48,7 @@ public class TaskList {
     /**
      * Deletes the given task number.
      *
-     * @param taskNumber The task number to be deleted.
+     * @param taskNumber The task number to be deleted
      */
     public void delete(int taskNumber) {
         assert taskNumber <= numOfTasks() : "Delete task number exceeds the number of tasks in TaskList";
@@ -58,8 +58,8 @@ public class TaskList {
     /**
      * Retrieves the given task number.
      *
-     * @param taskNumber The task number ot get.
-     * @return The given task number.
+     * @param taskNumber The task number ot get
+     * @return The given task number
      */
     public Task getTask(int taskNumber) {
         assert taskNumber <= numOfTasks() : "Get task number exceeds the number of tasks in TaskList";
@@ -69,7 +69,7 @@ public class TaskList {
     /**
      * Returns the number of tasks in the task list.
      *
-     * @return The number of tasks in the task list.
+     * @return The number of tasks in the task list
      */
     public int numOfTasks() {
         return taskList.size();
@@ -78,8 +78,8 @@ public class TaskList {
     /**
      * Searches and returns a list of tasks that contains the query.
      *
-     * @param query The String to search for in the task.
-     * @return A list of tasks that matches the query.
+     * @param query The String to search for in the task
+     * @return A list of tasks that matches the query
      */
     public List<Task> search(String query) {
         List<Task> matchingTasks = new ArrayList<>();
@@ -94,7 +94,7 @@ public class TaskList {
     /**
      * Returns the string format of a task list.
      *
-     * @return The string format of a task list.
+     * @return The String format of a task list
      */
     @Override
     public String toString() {
@@ -110,7 +110,7 @@ public class TaskList {
     /**
      * Returns the ArrayList format of a task list.
      *
-     * @return The ArrayList format of a task list.
+     * @return The ArrayList format of a task list
      */
     public ArrayList<Task> toArrayList() {
         @SuppressWarnings("unchecked")

@@ -47,17 +47,18 @@ public class Parser {
     /**
      * Returns a Command object corresponding to the input given by the user.
      *
-     * @param fullCommand The command input given by the user.
-     * @return Command object corresponding to the user input.
-     * @throws InvalidFormatException if command exists but is in invalid format.
-     * @throws EmptyDescriptionException if command exists but no details are given.
-     * @throws InvalidCommandException if command does not exist.
-     * @throws InvalidTaskNumberException if given command takes in a task number but the number does not exist.
+     * @param fullCommand The command input given by the user
+     * @return Command object corresponding to the user input
+     * @throws InvalidFormatException if command exists but is in invalid format
+     * @throws EmptyDescriptionException if command exists but no details are given
+     * @throws InvalidCommandException if command does not exist
+     * @throws InvalidTaskNumberException if given command takes in a task number but the number does not exist
      */
     public static Command parse(String fullCommand) throws InvalidFormatException, EmptyDescriptionException,
             InvalidCommandException, InvalidTaskNumberException, MissingQueryException, InvalidDateTimeException {
 
-        String[] splitCommand = fullCommand.split(" ", 2); //split the command into [command_word, command_arguments]
+        //split the command into [command_word, command_arguments]
+        String[] splitCommand = fullCommand.trim().split(" ", 2);
         splitCommand[0] = splitCommand[0].toUpperCase(); //convert the command word to uppercase
         String command = splitCommand[0];
 
@@ -65,7 +66,7 @@ public class Parser {
         if (splitCommand.length >= 2) { //if command has arguments
             String commandArguments = splitCommand[1];
             tags = getTags(commandArguments); //check for tags
-            splitCommand[1] = removeTags(commandArguments); //modify the string to remove tags
+            splitCommand[1] = removeTagsInString(commandArguments); //modify the string to remove tags
         }
 
         switch (command) {
@@ -95,56 +96,58 @@ public class Parser {
     /**
      * Creates a MarkCommand object that marks the corresponding task number.
      *
-     * @param splitCommand The split command array.
-     * @return A MarkCommand object.
-     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist.
+     * @param splitCommand The split command array
+     * @return A MarkCommand object
+     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist
      */
-    private static Command prepareMark(String[] splitCommand) throws InvalidTaskNumberException {
-        if (splitCommand.length < 2 || !isNumeric(splitCommand[1])) {
-            throw new InvalidTaskNumberException();
-        }
-        int taskNumber = Integer.parseInt(splitCommand[1]);
+    private static MarkCommand prepareMark(String[] splitCommand) throws InvalidTaskNumberException {
+        int taskNumber = getTaskNumber(splitCommand);
         return new MarkCommand(taskNumber);
     }
 
     /**
      * Creates an UnmarkCommand object that unmarks the corresponding task number.
      *
-     * @param splitCommand The split command array.
-     * @return An UnmarkCommand object.
-     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist.
+     * @param splitCommand The split command array
+     * @return An UnmarkCommand object
+     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist
      */
-    private static Command prepareUnmark(String[] splitCommand) throws InvalidTaskNumberException {
-        if (splitCommand.length < 2 || !isNumeric(splitCommand[1])) {
-            throw new InvalidTaskNumberException();
-        }
-        int taskNumber = Integer.parseInt(splitCommand[1]);
+    private static UnmarkCommand prepareUnmark(String[] splitCommand) throws InvalidTaskNumberException {
+        int taskNumber = getTaskNumber(splitCommand);
         return new UnmarkCommand(taskNumber);
     }
 
     /**
      * Creates a DeleteCommand object that deletes the corresponding task number.
      *
-     * @param splitCommand The split command array.
-     * @return A DeleteCommand object.
-     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist.
+     * @param splitCommand The split command array
+     * @return A DeleteCommand object
+     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist
      */
-    private static Command prepareDelete(String[] splitCommand) throws InvalidTaskNumberException {
-        if (splitCommand.length < 2 || !isNumeric(splitCommand[1])) {
+    private static DeleteCommand prepareDelete(String[] splitCommand) throws InvalidTaskNumberException {
+        int taskNumber = getTaskNumber(splitCommand);
+        return new DeleteCommand(taskNumber);
+    }
+
+    private static int getTaskNumber(String[] splitCommand) throws InvalidTaskNumberException {
+        if (splitCommand.length < 2) {
             throw new InvalidTaskNumberException();
         }
-        int taskNumber = Integer.parseInt(splitCommand[1]);
-        return new DeleteCommand(taskNumber);
+        String taskNum = splitCommand[1].trim();
+        if (!isNumeric(taskNum)) {
+            throw new InvalidTaskNumberException();
+        }
+        return Integer.parseInt(taskNum);
     }
 
     /**
      * Creates a FindCommand object that searches for the corresponding query in the task list.
      *
-     * @param splitCommand The split command array.
-     * @return A FindCommand object.
+     * @param splitCommand The split command array
+     * @return A FindCommand object
      */
-    private static Command prepareFind(String[] splitCommand) throws MissingQueryException {
-        if (splitCommand.length < 2) {
+    private static FindCommand prepareFind(String[] splitCommand) throws MissingQueryException {
+        if (splitCommand.length < 2 || splitCommand[1].trim().equals("")) {
             throw new MissingQueryException();
         }
         String query = splitCommand[1].toUpperCase();
@@ -154,13 +157,13 @@ public class Parser {
     /**
      * Creates an AddCommand object that adds the corresponding task to the task list.
      *
-     * @param splitCommand The split command array.
-     * @return An AddCommand object.
-     * @throws InvalidFormatException if command exists but is in the wrong format.
-     * @throws EmptyDescriptionException if no details of the task are given.
-     * @throws InvalidCommandException if command does not exist.
+     * @param splitCommand The split command array
+     * @return An AddCommand object
+     * @throws InvalidFormatException if command exists but is in the wrong format
+     * @throws EmptyDescriptionException if no details of the task are given
+     * @throws InvalidCommandException if command does not exist
      */
-    private static Command prepareAdd(String[] splitCommand, ArrayList<Tag> tags) throws InvalidFormatException,
+    private static AddCommand prepareAdd(String[] splitCommand, ArrayList<Tag> tags) throws InvalidFormatException,
             EmptyDescriptionException, InvalidCommandException, InvalidDateTimeException {
         String taskType = splitCommand[0];
         if (splitCommand.length < 2 || splitCommand[1].trim().equals("")) {
@@ -192,11 +195,11 @@ public class Parser {
     /**
      * Creates an event task given the task arguments and recur frequency of the task.
      *
-     * @param taskArguments The event task's arguments.
-     * @param recurFrequency The RecurFrequency of the task.
-     * @return A new event task based on the task's arguments and recur frequency.
-     * @throws InvalidFormatException if the task argument format is not in the form task name /at location.
-     * @throws EmptyDescriptionException if the description of the task is empty.
+     * @param taskArguments The event task's arguments
+     * @param recurFrequency The RecurFrequency of the task
+     * @return A new event task based on the task's arguments and recur frequency
+     * @throws InvalidFormatException if the task argument format is not in the form task name /at location
+     * @throws EmptyDescriptionException if the description of the task is empty
      */
     private static Task createEventTask(String taskArguments, RecurFrequency recurFrequency)
             throws InvalidFormatException, EmptyDescriptionException {
@@ -222,13 +225,13 @@ public class Parser {
     /**
      * Creates a deadline task given the task arguments and recur frequency of the task.
      *
-     * @param taskArguments The deadline task's arguments.
-     * @param recurFrequency The RecurFrequency of the task.
-     * @return A new deadline task based on the task's arguments and recur frequency.
+     * @param taskArguments The deadline task's arguments
+     * @param recurFrequency The RecurFrequency of the task
+     * @return A new deadline task based on the task's arguments and recur frequency
      * @throws InvalidFormatException if the task argument format is not in the form
-     * task name /by dd/mm/yyyy hh:mm.
-     * @throws EmptyDescriptionException if the description of the task is empty.
-     * @throws InvalidDateTimeException if the specified date or time does not exist.
+     * task name /by dd/mm/yyyy hh:mm
+     * @throws EmptyDescriptionException if the description of the task is empty
+     * @throws InvalidDateTimeException if the specified date or time does not exist
      */
     private static Task createDeadlineTask(String taskArguments, RecurFrequency recurFrequency)
             throws InvalidFormatException, EmptyDescriptionException, InvalidDateTimeException {
@@ -250,8 +253,8 @@ public class Parser {
     /**
      * Returns the first RecurFrequency tag given a list of tags.
      *
-     * @param tags The list of tags.
-     * @return The first RecurFrequency tag in the list.
+     * @param tags The list of tags
+     * @return The first RecurFrequency tag in the list
      */
     private static RecurFrequency getRecurFrequency(ArrayList<Tag> tags) {
         RecurFrequency recurFrequency = null;
@@ -269,8 +272,8 @@ public class Parser {
     /**
      * Returns a list of RecursiveTags given the command arguments.
      *
-     * @param commandArguments The command argument containing all the tags.
-     * @return The list of RecursiveTags found in the command argument.
+     * @param commandArguments The command argument containing all the tags
+     * @return The list of RecursiveTags found in the command argument
      */
     private static ArrayList<Tag> getTags(String commandArguments) {
         ArrayList<Tag> tags = new ArrayList<>();
@@ -289,10 +292,10 @@ public class Parser {
     /**
      * Returns the String command arguments with all tags removed.
      *
-     * @param commandArguments The command argument that needs its tags removed.
-     * @return The command arguments without tags.
+     * @param commandArguments The command argument that needs its tags removed
+     * @return The command arguments without tags
      */
-    private static String removeTags(String commandArguments) {
+    private static String removeTagsInString(String commandArguments) {
         String[] arguments = commandArguments.split(" ");
         String taglessCommandArguments = commandArguments + " ";
         for (String argument : arguments) {
@@ -306,8 +309,8 @@ public class Parser {
     /**
      * Returns whether the string can be converted to integer.
      *
-     * @param string The string to be converted to integer.
-     * @return Whether the string can be converted to integer.
+     * @param string The string to be converted to integer
+     * @return Whether the string can be converted to integer
      */
     private static boolean isNumeric(String string) {
         if (string == null || string.equals("")) {
@@ -325,20 +328,20 @@ public class Parser {
     /**
      * Returns a LocalDate object based on the by parameter.
      *
-     * @param by The deadline in dd/mm/yyyy format.
-     * @return LocalDate object corresponding to the provided date.
-     * @throws InvalidFormatException if the format of by is not dd/mm/yyyy.
+     * @param by The deadline in dd/mm/yyyy format
+     * @return LocalDate object corresponding to the provided date
+     * @throws InvalidFormatException if the format of by is not dd/mm/yyyy
      */
     public static LocalDateTime processDateTime(String by) throws InvalidFormatException, InvalidDateTimeException {
-        String[] dateTime = by.split(" ", 2);
+        String[] dateTime = by.trim().split(" ", 2);
         if (dateTime.length < 2) {
             throw new InvalidFormatException(INVALID_DATE_FORMAT_MESSAGE);
         }
 
         String date = dateTime[0];
         String time = dateTime[1];
-        String[] splitDate = date.split("/");
-        String[] splitTime = time.split(":");
+        String[] splitDate = date.trim().split("/");
+        String[] splitTime = time.trim().split(":");
 
         if (splitDate.length < 3 || splitTime.length < 2) {
             throw new InvalidFormatException(INVALID_DATE_FORMAT_MESSAGE);
@@ -362,9 +365,9 @@ public class Parser {
     /**
      * Returns the LocalDate given a string in DD-MM-YYYY format.
      *
-     * @param date The date to be processed in DD-MM-YYYY format.
-     * @return The LocalDate of the date.
-     * @throws FileCorruptException if the date is invalid.
+     * @param date The date to be processed in DD-MM-YYYY format
+     * @return The LocalDate of the date
+     * @throws FileCorruptException if the date is invalid
      */
     public static LocalDate processDate(String date) throws FileCorruptException {
         try {

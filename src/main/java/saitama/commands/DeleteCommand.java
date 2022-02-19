@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     /**
      * Initialises the DeleteCommand.
      *
-     * @param taskNumber The task number to delete.
+     * @param taskNumber The task number to delete
      */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
