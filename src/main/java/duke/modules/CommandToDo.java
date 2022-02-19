@@ -43,6 +43,7 @@ public class CommandToDo extends Command {
             tasks.add(t);
             output = String.format("task added:\n%s\n", t);
             output += String.format("you now have %d tasks\n", tasks.size());
+            Storage.save(taskList);
         } else {
             output = "duplicate task! check that all your tasks have unique names\n";
         }

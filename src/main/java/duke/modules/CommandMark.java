@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class CommandMark extends Command {
 
     private String commandDescription;
+    private TaskList taskList;
     private ArrayList<Task> tasks;
     String[] descriptionStrings;
 
@@ -15,11 +16,12 @@ public class CommandMark extends Command {
      * Constructor for a CommandMark object.
      *
      * @param commandDescription The whole user input String.
-     * @param tasks The task list associated with this instance of the chatbot.
+     * @param taskList The task list associated with this instance of the chatbot.
      */
-    public CommandMark(String commandDescription, ArrayList<Task> tasks) {
+    public CommandMark(String commandDescription, TaskList taskList) {
         this.commandDescription = commandDescription;
-        this.tasks = tasks;
+        this.taskList = taskList;
+        this.tasks = taskList.getToDoList();
         descriptionStrings = commandDescription.split(" ");
     }
 
@@ -40,6 +42,7 @@ public class CommandMark extends Command {
             Task toMark = tasks.get(itemToMark - 1);
             toMark.mark();
             output = String.format("great job! I've marked this task as done: %s\n", toMark.getName());
+            Storage.save(taskList);
 
         } catch (IndexOutOfBoundsException e) {
             output = "mark description cannot be empty!\n";

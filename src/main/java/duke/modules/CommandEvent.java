@@ -51,6 +51,7 @@ public class CommandEvent extends Command {
                 tasks.add(e);
                 output = String.format("task added:\n%s\n", e);
                 output += String.format("you now have %d tasks\n", tasks.size());
+                Storage.save(taskList);
             } else {
                 output = "duplicate task! check that all your tasks have unique names\n";
             }

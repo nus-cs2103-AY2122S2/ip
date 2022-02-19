@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class CommandDelete extends Command {
     private String commandDescription;
+    private TaskList taskList;
     private ArrayList<Task> tasks;
     private String[] descriptionStrings;
 
@@ -14,11 +15,12 @@ public class CommandDelete extends Command {
      * Constructor for a CommandDelete object.
      *
      * @param commandDescription The whole user input String.
-     * @param tasks The task list associated with this instance of the chatbot.
+     * @param taskList The task list associated with this instance of the chatbot.
      */
-    public CommandDelete(String commandDescription, ArrayList<Task> tasks) {
+    public CommandDelete(String commandDescription, TaskList taskList) {
         this.commandDescription = commandDescription;
-        this.tasks = tasks;
+        this.taskList = taskList;
+        this.tasks = taskList.getToDoList();
         descriptionStrings = commandDescription.split(" ");
     }
 
@@ -39,6 +41,7 @@ public class CommandDelete extends Command {
             tasks.remove(itemToDelete - 1);
             output = String.format("task removed:\n%s\n", toDelete.toString());
             output += String.format("you now have %d tasks\n", tasks.size());
+            Storage.save(taskList);
 
         } catch (IndexOutOfBoundsException e) {
             output = "delete description cannot be empty!\n";

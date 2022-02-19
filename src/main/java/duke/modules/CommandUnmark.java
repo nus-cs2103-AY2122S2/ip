@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class CommandUnmark extends Command {
     private String commandDescription;
+    private TaskList taskList;
     private ArrayList<Task> tasks;
     String[] descriptionStrings;
 
@@ -14,11 +15,12 @@ public class CommandUnmark extends Command {
      * Constructor for a CommandUnmark object.
      *
      * @param commandDescription The whole user input String.
-     * @param tasks The task list associated with this instance of the chatbot.
+     * @param taskList The task list associated with this instance of the chatbot.
      */
-    public CommandUnmark(String commandDescription, ArrayList<Task> tasks) {
+    public CommandUnmark(String commandDescription, TaskList taskList) {
         this.commandDescription = commandDescription;
-        this.tasks = tasks;
+        this.taskList = taskList;
+        this.tasks = taskList.getToDoList();
         descriptionStrings = commandDescription.split(" ");
     }
 
@@ -38,6 +40,7 @@ public class CommandUnmark extends Command {
             Task toUnmark = tasks.get(itemToUnmark - 1);
             toUnmark.unmark();
             output = String.format("Boo! more work to do: %s\n", toUnmark.getName());
+            Storage.save(taskList);
 
         } catch (IndexOutOfBoundsException e) {
             output = ("unmark description cannot be empty!\n");

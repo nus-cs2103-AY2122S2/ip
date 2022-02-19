@@ -43,10 +43,10 @@ public class Parser {
             outputMessage = new CommandHelp().execute();
             break;
         case "unmark":
-            outputMessage = new CommandUnmark(userInput, toDoList).execute();
+            outputMessage = new CommandUnmark(userInput, taskList).execute();
             break;
         case "mark":
-            outputMessage = new CommandMark(userInput, toDoList).execute();
+            outputMessage = new CommandMark(userInput, taskList).execute();
             break;
         case "todo":
             outputMessage = new CommandToDo(userInput, taskList).execute();
@@ -58,7 +58,7 @@ public class Parser {
             outputMessage = new CommandEvent(userInput, taskList).execute();
             break;
         case "delete":
-            outputMessage = new CommandDelete(userInput, toDoList).execute();
+            outputMessage = new CommandDelete(userInput, taskList).execute();
             break;
         case "find":
             outputMessage = new CommandFind(userInput, toDoList).execute();
