@@ -37,9 +37,9 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
-        clip = new Circle(displayPicture.getFitHeight()/2);
-        clip.setCenterX(displayPicture.getX() + displayPicture.getFitWidth()/2);
-        clip.setCenterY(displayPicture.getY() + displayPicture.getFitHeight()/2);
+        clip = new Circle(displayPicture.getFitHeight() / 2);
+        clip.setCenterX(displayPicture.getX() + displayPicture.getFitWidth() / 2);
+        clip.setCenterY(displayPicture.getY() + displayPicture.getFitHeight() / 2);
         displayPicture.setClip(clip);
     }
 
