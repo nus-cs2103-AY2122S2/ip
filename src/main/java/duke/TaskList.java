@@ -5,10 +5,15 @@ import duke.tasks.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    private static final String ADD_TASK_SUCCESS_MESSAGE = "Got it. I've added this task:\n  %s\nNow you have %s task(s) in the list";
-    private static final String ADD_TASK_DUPLICATE_FAILURE_MESSAGE =
+    private static final String ADD_TASK_SUCCESS_MSG = "Got it. I've added this task:\n  %s\nNow you have %s task(s) in the list";
+    private static final String ADD_TASK_DUPLICATE_FAILURE_MSG =
             "This task: \n %s\n is a duplicate of some other task in the list!"
             + "\nDuplicate task not added.";
+    private static final String DELETE_TASK_SUCCESS_MSG = "Noted. I've removed this task:\n  %s\nNow you have %s task(s) in the list";
+    private static final String MARK_TASK_SUCCESS_MSG = "Nice! I've marked this as done:\n  ";
+    private static final String UNMARK_TASK_SUCCESS_MSG = "OK, I've marked this task as not done yet:\n  ";
+    private static final String MATCHING_TASKS_MSG = "Here are the matching tasks in your list:\n";
+    private static final String EMPTY_LIST_WARNING = "There is nothing in the list!";
 
     /** Instantiates an empty task list */
     public TaskList() {
@@ -30,11 +35,11 @@ public class TaskList {
     public String addTask(Task task) {
         assert task != null;
         if (contains(task)) {
-            return String.format(ADD_TASK_DUPLICATE_FAILURE_MESSAGE, task);
+            return String.format(ADD_TASK_DUPLICATE_FAILURE_MSG, task);
         }
         
         tasks.add(task);
-        return String.format(ADD_TASK_SUCCESS_MESSAGE,
+        return String.format(ADD_TASK_SUCCESS_MSG,
                 task, tasks.size());
     }
 
@@ -47,7 +52,7 @@ public class TaskList {
     public String deleteItem(int itemNumber) {
         assert itemNumber <= tasks.size() && itemNumber > 0;
         Task task = tasks.remove(itemNumber - 1);
-        return String.format("Noted. I've removed this task:\n  %s\nNow you have %s task(s) in the list",
+        return String.format(DELETE_TASK_SUCCESS_MSG,
                 task, tasks.size());
     }
 
@@ -61,7 +66,7 @@ public class TaskList {
         assert itemNumber <= tasks.size() && itemNumber > 0;
         Task task = tasks.get(itemNumber - 1);
         task.markAsDone();
-        return "Nice! I've marked this as done:\n  " + task;
+        return MARK_TASK_SUCCESS_MSG + task;
     }
 
     /**
@@ -74,7 +79,7 @@ public class TaskList {
         assert itemNumber <= tasks.size() && itemNumber > 0;
         Task task = tasks.get(itemNumber - 1);
         task.unmarkAsDone();
-        return "OK, I've marked this task as not done yet:\n  " + task;
+        return UNMARK_TASK_SUCCESS_MSG + task;
     }
 
     /**
@@ -132,9 +137,7 @@ public class TaskList {
             }
         }
 
-        String message = "Here are the matching tasks in your list:\n";
-
-        return Ui.mergeMessages(message, matchedTasks.listItems());
+        return Ui.mergeMessages(MATCHING_TASKS_MSG, matchedTasks.listItems());
     }
 
     /**
@@ -145,7 +148,7 @@ public class TaskList {
     public String listItems() {
         StringBuilder sb = new StringBuilder();
         if (tasks.isEmpty()) {
-            sb.append("There is nothing in the list!");
+            sb.append(EMPTY_LIST_WARNING);
         }
         
         for (int i = 1; i <= tasks.size(); i++) {
