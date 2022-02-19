@@ -8,7 +8,7 @@ import java.time.LocalDate;
  */
 public abstract class Task implements Comparable<Task> {
     protected String objective;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructor for Task class where Task is by default uncompleted.
@@ -16,7 +16,7 @@ public abstract class Task implements Comparable<Task> {
      */
     public Task(String objective) {
         this.objective = objective;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -26,21 +26,21 @@ public abstract class Task implements Comparable<Task> {
      */
     public Task(String objective, Boolean done) {
         this.objective = objective;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
      * Task is completed. Mark it with a cross.
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Task is uncompleted. It is unmarked.
      */
     public void unmarked() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -71,7 +71,7 @@ public abstract class Task implements Comparable<Task> {
 
     @Override
     public String toString() {
-        return (done ? "[X]" : "[ ]") + " " + this.objective;
+        return (isDone ? "[X]" : "[ ]") + " " + this.objective;
     }
 
     /**

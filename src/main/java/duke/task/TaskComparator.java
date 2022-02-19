@@ -13,7 +13,7 @@ public enum TaskComparator implements Comparator<Task> {
     MarkComparator {
         @Override
         public int compare(Task t1, Task t2) {
-            return Boolean.compare(t1.done, t2.done);
+            return Boolean.compare(t1.isDone, t2.isDone);
         }
     },
     DateComparator {

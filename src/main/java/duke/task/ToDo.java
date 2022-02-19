@@ -19,14 +19,14 @@ public class ToDo extends Task {
     @Override
     public String serialize() {
         assert this.objective != null;
-        return "T|" + (this.done ? "1|" : "0|") + this.objective + "\n";
+        return "T|" + (this.isDone ? "1|" : "0|") + this.objective + "\n";
     };
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof ToDo) {
             ToDo t = (ToDo) o;
-            return this.objective.equals(t.objective) && (this.done == t.done);
+            return this.objective.equals(t.objective) && (this.isDone == t.isDone);
         } else {
             return false;
         }

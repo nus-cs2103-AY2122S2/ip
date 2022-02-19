@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Load the task stored within hard disk into the Task List.
+     * Loads the task stored within hard disk into the Task List.
      *
      * @return List of Tasks.
      * @throws IOException If there are IO errors.
@@ -57,8 +57,8 @@ public class Storage {
     }
 
     /**
-     * Save the added file to hard disk.
-     * Append the serialized task to the bottom of file in hard disk.
+     * Saves the added file to hard disk. Appends the serialized
+     * task to the bottom of file in hard disk.
      *
      * @param todo Task to be added to the hard disk.
      * @throws IOException If there is error in writing to disk.
@@ -70,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Overwrite the hard disk with state currently in Task List.
+     * Overwrites the hard disk with state currently in Task List.
      *
      * @param todo TaskList to overwrite hard disk with.
      * @throws IOException If there is error in writing to disk.

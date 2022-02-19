@@ -60,7 +60,7 @@ public class DeadLine extends Task {
         if (o instanceof DeadLine) {
             DeadLine e = (DeadLine) o;
             return this.doByDate.equals(e.doByDate) && this.doByTime.equals(e.doByTime)
-                    && this.objective.equals(e.objective) && (this.done == e.done);
+                    && this.objective.equals(e.objective) && (this.isDone == e.isDone);
         } else {
             return false;
         }
@@ -71,7 +71,7 @@ public class DeadLine extends Task {
         assert this.doByDate != null;
         assert this.doByTime != null;
         assert this.objective != null;
-        return "D|" + (this.done ? "1|" : "0|") + this.objective
+        return "D|" + (this.isDone ? "1|" : "0|") + this.objective
                 + "|" + doByDate.toString() + "|" + doByTime.toString() + "\n";
     };
 

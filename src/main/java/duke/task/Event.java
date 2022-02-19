@@ -53,7 +53,7 @@ public class Event extends Task {
             Event e = (Event) o;
             return this.doByDate.equals(e.doByDate)
                     && this.doFromTime.equals(e.doFromTime) && this.doBytime.equals(e.doBytime)
-                    && this.objective.equals(e.objective) && this.done == e.done;
+                    && this.objective.equals(e.objective) && this.isDone == e.isDone;
         } else {
             return false;
         }
@@ -78,7 +78,7 @@ public class Event extends Task {
         assert this.doFromTime != null;
         assert this.doBytime != null;
         assert this.objective != null;
-        return "E|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.doByDate.toString()
+        return "E|" + (this.isDone ? "1|" : "0|") + this.objective + "|" + this.doByDate.toString()
                 + "|" + this.doFromTime.toString() + "|" + this.doBytime.toString() + "\n";
     };
     @Override

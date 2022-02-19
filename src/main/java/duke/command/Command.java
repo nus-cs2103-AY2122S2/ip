@@ -14,7 +14,7 @@ public abstract class Command {
     }
 
     /**
-     * Execute the action of the command.
+     * Executes the action of the command.
      *
      * @param task TaskList stored in Duke.
      * @param storage File storage of Duke.
