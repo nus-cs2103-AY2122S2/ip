@@ -2,7 +2,7 @@
 Duke is a desktop app for managing tasks, deadline and events. It features a stunning Graphical User Interface (GUI). It is themed around the CS2103 module, with the chat assistant being Prof. It will save the states of all tasks upon successful exit and will automatically load all tasks from the previous session.
 
 ## Features 
-**:information_source: Notes about the command format:**
+**Notes about the command format:**
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo NAME`, `NAME` is a custom parameter that the user should supply (e.g. `todo homework`).
 
@@ -10,6 +10,7 @@ Duke is a desktop app for managing tasks, deadline and events. It features a stu
 ### Viewing help
 
 Accessible via a `?` symbol next to the text field. It will spawn a text by Prof explaning all available commands.
+
 <img width="401" alt="Screenshot 2022-02-16 at 11 39 28 PM" src="https://user-images.githubusercontent.com/70692871/154300334-17344713-5436-4686-8d86-8e10548b9c9b.png">
 
 ### Adding a task: `todo`
@@ -108,7 +109,7 @@ Format: `bye`
 
 Duke will save the data automatically upon successful exit. There is no need for any commands.
 
-:exclamation: **DO NOT MODIFY THE SAVE FILE IN ANY WAY.** This will corrupt the data and may cause unforseen consequences upon start of Duke.
+**DO NOT MODIFY THE SAVE FILE IN ANY WAY.** This will corrupt the data and may cause unforseen consequences upon start of Duke.
 
 ## Command summary
 
