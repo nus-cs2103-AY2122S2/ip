@@ -20,6 +20,7 @@ public class Ui {
 
     private final Scanner input;
     private final PrintStream output;
+    private final boolean isFrameEnabled;
 
     /**
      * Returns a UI object that can output a relevant text interface
@@ -27,11 +28,13 @@ public class Ui {
      *
      * @param inputStream is the input source to obtain user commands.
      * @param outputStream is the output source to write text responses.
+     * @param isFrameEnabled determines whether a text response is boxed within a frame.
      * @throws IOException If the input or output stream fails to initialise.
      */
-    public Ui(InputStream inputStream, OutputStream outputStream) throws IOException {
+    public Ui(InputStream inputStream, OutputStream outputStream, boolean isFrameEnabled) throws IOException {
         this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
+        this.isFrameEnabled = isFrameEnabled;
     }
 
     /**
@@ -176,9 +179,13 @@ public class Ui {
     }
 
     private String constructResponse(String content) {
-        final String divider = Ui.INDENTATION + Ui.DIVIDER + "\n";
         final String response =
                 Ui.INDENTATION + " " + content.replaceAll("\n", "\n " + Ui.INDENTATION) + "\n";
+        if (!this.isFrameEnabled) {
+            return response;
+        }
+
+        final String divider = Ui.INDENTATION + Ui.DIVIDER + "\n";
         return divider + response + divider;
     }
 
