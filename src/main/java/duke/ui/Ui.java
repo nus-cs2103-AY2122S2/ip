@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 /**
  * Utility class that deals with common messages and outputs to terminal.

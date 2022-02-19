@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import duke.exceptions.CorruptedSaveException;
+import duke.ui.Ui;
 
 public class Duke {
 
