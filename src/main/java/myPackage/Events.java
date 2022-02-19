@@ -8,6 +8,11 @@ public class Events extends Task {
     private String date;
     private LocalDate localDate;
 
+    /**
+     * constructor for events task
+     * @param description description of event
+     * @param date date formatted yyyy-mm-dd
+     */
     public Events(String description, String date) {
         super(description);
         try {
