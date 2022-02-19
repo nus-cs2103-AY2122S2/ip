@@ -9,11 +9,23 @@ public class FindCommand extends Command {
 
     private String keyword;
 
+    /**
+     * Constructs an instance of Add Task Command.
+     *
+     * @param keyword Keyword to be searched.
+     */
     public FindCommand(String keyword) {
         assert(keyword != null && !keyword.equals(""));
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the instance of Find Command.
+     *
+     * @param tasks Contains the task list.
+     * @param ui Deals with interaction with the user.
+     * @param storage Deals with loading tasks from the file and saving tasks in the file.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> t = tasks.getTaskArr();
@@ -28,6 +40,11 @@ public class FindCommand extends Command {
         return s;
     }
 
+    /**
+     * Checks whether this command is the terminating command to Duke.
+     *
+     * @return False.
+     */
     @Override
     public boolean isEnd() {
         return false;

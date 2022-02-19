@@ -52,8 +52,8 @@ shadowJar {
 }
 
 checkstyle {
-    sourceSets = []
-    //toolVersion = '8.29'
+    //sourceSets = []
+    toolVersion = '8.29'
 }
 
 run{

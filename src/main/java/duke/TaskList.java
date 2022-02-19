@@ -81,6 +81,12 @@ public class TaskList {
         return taskArr.get(num);
     }
 
+    /**
+     * Checks whether a task is already present in Tasklist
+     *
+     * @param toCheck Task to check whether is already in Tasklist.
+     * @return True if task already in list, False otherwise.
+     */
     public boolean checkTaskExist(Task toCheck) {
         for (Task tsk: taskArr) {
             if (tsk.toString().equals(toCheck.toString())) {

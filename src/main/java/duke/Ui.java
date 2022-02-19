@@ -147,7 +147,7 @@ public class Ui {
 
     /** Prints the exit statement to the user. */
     public String sayGoodbye() {
-        return "Bye! I'm sure you'll start talking to a real human now. Haha...";
+        return "Bye! I'm sure you'll start talking to a real human now. Haha... Exiting in 3s";
     }
 
 }
