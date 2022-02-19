@@ -6,7 +6,7 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `duke.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `duke.jar` from [here](https://github.com/sibinhho99-nus/ip/releases/).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -18,15 +18,18 @@ Duke is a **desktop app for managing tasks, optimized for use via a Command Line
 
 1. Refer to the [Features](#features) below for details of each command.
 
-## Features 
+## Features
 
 ### Viewing help: `help`
 
-Opens the User's Guide in default browser.
+Opens User Guide in default browser.
 
 Format: `help`
 
-### Exit the program: `bye`
+Examples:
+* `help`
+
+### Exiting the program: `bye`
 
 Closes Duke.
 
@@ -35,23 +38,26 @@ Format: `bye`
 Examples:
 * `bye`
 
-### List all tasks: `list`
+### Listing all tasks: `list`
 
 Displays all current tasks.
 
-Format: `list'
+Format: `list`
 
-### Find task by keyword: `find`
+Examples:
+* `list`
+
+### Finding task by keyword: `find`
 
 Finds task whose name contains keyword.
 
-Format: `find [KEYWORD]`
+Format: `find KEYWORD`
 
 Examples:
 * `find home`
 * `find school`
 
-### Mark task as done: `mark`
+### Marking task as done: `mark`
 
 Marks specified task as done.
 
@@ -61,7 +67,7 @@ Examples:
 * `mark 1`
 
 
-### Mark task as not done: `unmark`
+### Marking task as not done: `unmark`
 
 Marks specified task as not done.
 
@@ -70,7 +76,7 @@ Format: `unmark INDEX`
 Examples:
 * `unmark 1`
 
-### Add todo task: `todo`
+### Adding todo task: `todo`
 
 Adds a todo task.
 
@@ -79,7 +85,7 @@ Format: `todo NAME`
 Examples:
 * `todo buy book`
 
-### Add deadline task: `deadline`
+### Adding deadline task: `deadline`
 
 Adds a deadline task.
 
@@ -90,7 +96,7 @@ Format: `deadline NAME /by DUE_DATE`
 Examples:
 * `deadline return book /by 2021-12-03`
 
-### Add event task: `event`
+### Adding event task: `event`
 
 Adds an event task.
 
@@ -101,11 +107,9 @@ Format: `event NAME /at DATE`
 Examples:
 * `event project meeting /at 2021-12-03`
 
-### Delete task: `delete`
+### Deleting task: `delete`
 
 Deletes a specified task.
-
-Date must be of form YYYY-MM-DD.
 
 Format: `delete INDEX`
 
