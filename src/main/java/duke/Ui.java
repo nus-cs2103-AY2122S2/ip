@@ -51,13 +51,16 @@ public class Ui {
      */
 
     public static void printList(TaskList taskList) {
-        System.out.println("\n");
-        for (int i = 1; i < taskList.getSize() + 1; i++) {
-            Task curr = taskList.get(i - 1);
-            String toPrint = "     " + i + "." + curr;
-            System.out.println(toPrint);
+        if (taskList.getSize() < 1) {
+            System.out.println("\n" + "     This list is empty! Let's add a task!" + "\n");
         }
-        System.out.println("\n");
+            System.out.println("\n");
+            for (int i = 1; i < taskList.getSize() + 1; i++) {
+                Task curr = taskList.get(i - 1);
+                String toPrint = "     " + i + "." + curr;
+                System.out.println(toPrint);
+            }
+            System.out.println("\n");
     }
 
     /**
@@ -147,9 +150,13 @@ public class Ui {
     }
 
     public static void printFind(StringBuilder listString) {
-        String temp = "\n"+ "     Here are the matching tasks in your list: " + "\n" + "     "
-                + listString + "\n";
-        System.out.println(temp);
+        if (listString.length() == 0) {
+            System.out.println("\n" + "     No task with that keyword! Please try again!" + "\n");
+        } else {
+            String temp = "\n" + "     Here are the matching tasks in your list: " + "\n" + "     "
+                    + listString + "\n";
+            System.out.println(temp);
+        }
     }
 }
 

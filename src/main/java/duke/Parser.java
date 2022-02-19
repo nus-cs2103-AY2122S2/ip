@@ -136,8 +136,8 @@ public class Parser {
             Pattern pattern = Pattern.compile("\\b" + toFind + "\\b");
             StringBuilder listString = new StringBuilder();
             for (int i = 0; i < taskList.getSize(); i++) {
-                Task currentTask = taskList.get(i);
-                Matcher matcher = pattern.matcher(toFind);
+                String currentTask = taskList.get(i).toString();
+                Matcher matcher = pattern.matcher(currentTask);
                 if (matcher.find()) {
                     listString.append(i + 1).append(".").append(currentTask).append("\n").append("     ");
                 }
