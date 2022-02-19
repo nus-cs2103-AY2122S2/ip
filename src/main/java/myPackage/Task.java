@@ -9,11 +9,10 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     public String markAsDone() {
@@ -24,8 +23,8 @@ public class Task {
         return "";
     }
 
-    public void markCheckBox() {
-        this.isDone = true;
+    public void markCheckBoxAs(boolean done) {
+        this.isDone = done;
     }
 
     public void unmarkCheckBox() {
@@ -34,6 +33,7 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+
     }
 
     public String getTaskType() {

@@ -17,10 +17,10 @@ public class Deadlines extends Task {
             localDate = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[2]));
             this.deadline = localDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         } catch (Exception e) {
-            System.out.println("not proper date");
+            //System.out.println("not proper date");
             this.deadline = deadline;
         }
-        System.out.printf("[D][ ] %s (%s)", this.description, this.deadline);
+        //System.out.printf("[D][ ] %s (%s)", this.description, this.deadline);
     }
 
     public String markAsDone() {
@@ -52,6 +52,7 @@ public class Deadlines extends Task {
     public String getTiming() {
         return this.deadline;
     }
+
 
 
 }

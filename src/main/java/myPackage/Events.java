@@ -16,10 +16,8 @@ public class Events extends Task {
             localDate = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[2]));
             this.date = localDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         } catch (Exception e) {
-            System.out.println("not proper date");
             this.date = date;
         }
-        System.out.printf("[E][ ] %s (%s)", this.description, this.date);
     }
 
     public String markAsDone() {

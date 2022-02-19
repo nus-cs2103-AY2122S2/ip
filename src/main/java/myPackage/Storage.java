@@ -20,12 +20,12 @@ public class Storage {
             Files.createDirectories(path);
             File f = new File("data/duke.txt");
             if (!f.createNewFile()) {
-                System.out.println("file created");
+                //System.out.println("file created");
             } else {
-                System.out.println("save file found");
+                //System.out.println("save file found");
             }
         } catch (IOException e) {
-            System.out.println("file not found");
+            //System.out.println("file not found");
         }
     }
 
@@ -50,7 +50,7 @@ public class Storage {
                         break;
                     }
                     default: {
-                        System.out.println("wait your input is wrong");
+                        //System.out.println("wait your input is wrong");
                     }
                 }
             }

@@ -40,7 +40,7 @@ public class Parser {
             }
             case "mark": {
                 if (lenSplit > 1) {
-                    TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).markCheckBox();
+                    TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).markCheckBoxAs(true);
                     responseFromDuke = TaskList.list.get(Integer.parseInt(userInputSplit[1]) - 1).markAsDone();
                     return responseFromDuke;
                 }
