@@ -5,7 +5,7 @@ Duke is a desktop application for managing personal tasks. Users can create diff
 ## Quick Start & Installation
 
 0. Ensure you have installed Java 11 on your computer
-1. Download the latest `Duke.jar` file here
+1. Download the latest `Duke.jar` file [here](https://github.com/cheehongw/ip/releases/tag/A-Release)
 2. Move the `.jar` file into your desired folder
 3. Run the app by double clicking on `Duke.jar` file
 4. Enter your commands in the text box and hit `Enter` to run them
