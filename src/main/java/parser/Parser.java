@@ -11,6 +11,7 @@ import commands.ExitCommand;
 import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
+import commands.StartCommand;
 import commands.UnmarkCommand;
 import tasks.Deadline;
 import tasks.Event;
@@ -38,6 +39,8 @@ public class Parser {
         final String[] args = Arrays.copyOfRange(tokens, 1, tokens.length);
 
         switch (command) {
+        case StartCommand.COMMAND:
+            return this.startAction(args);
         case ListCommand.COMMAND:
             return this.listAction(args);
         case FindCommand.COMMAND:
@@ -59,6 +62,10 @@ public class Parser {
         default:
             throw Parser.UNSUPPORTED_COMMAND_EXCEPTION;
         }
+    }
+
+    private Command startAction(String[] args) {
+        return new StartCommand();
     }
 
     private Command listAction(String[] args) {
