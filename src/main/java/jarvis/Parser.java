@@ -69,6 +69,8 @@ public class Parser {
             return tasks.update(id, command[0]);
         case "find":
             return tasks.find(command[1]);
+        case "bye":
+            return Ui.bye();
         default:
             return Ui.unknownCommand("\"" + input + "\"");
         }

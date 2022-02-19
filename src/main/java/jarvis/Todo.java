@@ -7,7 +7,7 @@ package jarvis;
  * @version 1.0
  * @since 2022-02-05
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Returns a Todo object with a description of the task.
      *

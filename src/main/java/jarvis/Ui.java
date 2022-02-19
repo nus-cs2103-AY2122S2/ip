@@ -25,20 +25,6 @@ public class Ui {
     }
 
     /**
-     * Displays a line to the standard output.
-     */
-    public static String showLine() {
-        return "___________________________________________________________";
-    }
-
-    /**
-     * Displays an error message to the standard output.
-     */
-    public static String showLoadingError() {
-        return "Unable to load file, sir.";
-    }
-
-    /**
      * Displays message to the standard output when user inputs "list" as command.
      */
     public static String list() {

@@ -22,18 +22,6 @@ public class Task {
     }
 
     /**
-     * Returns a Task object with a description of the task and sets the status according to the
-     * isDone boolean argument.
-     *
-     * @param description description of the Task to be done
-     * @param isDone status of the Task
-     */
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-    }
-
-    /**
      * Returns the status of the Task
      *
      * @return status of the Task
