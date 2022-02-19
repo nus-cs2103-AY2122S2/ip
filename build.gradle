@@ -1,20 +1,21 @@
 plugins {
     id 'java'
     id 'application'
-//    id 'checkstyle'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'checkstyle'
+//    id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
-//    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+
 }
 
 repositories {
     mavenCentral()
 }
 
-javafx {
-    version = "11"
-    modules = [ 'javafx.controls', 'javafx.fxml']
-}
+//javafx {
+//    version = "11"
+//    modules = [ 'javafx.controls', 'javafx.fxml']
+//}
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
@@ -51,14 +52,25 @@ test {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = "johnny.Launcher"
 }
 
-//shadowJar {
-//    archiveBaseName = "johnny"
-//    archiveClassifier = null
-//}
+shadowJar {
+    archiveBaseName = "johnny"
+    archiveClassifier = null
+    mainClassName = "johnny.Launcher"
+}
 
+//jar {
+//    manifest {
+//        attributes(
+//                'Main-Class': 'com.mypackage.Launcher'
+//        )
+//    }
+//    from {
+//        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+//}
 //checkstyle {
 //    toolVersion = '8.29'
 //}
