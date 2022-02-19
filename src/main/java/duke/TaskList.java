@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 public class TaskList {
     private static final String ADD_TASK_SUCCESS_MSG =

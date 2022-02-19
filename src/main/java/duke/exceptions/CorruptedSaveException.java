@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-import duke.Ui;
+import duke.ui.Ui;
 
 public class CorruptedSaveException extends DukeException {
     public CorruptedSaveException() {
