@@ -1,1 +1,5 @@
-[T] [X] hi
+[T] [-] hi
+[T] [-] bla
+[T] [-] new task
+[T] [-] hello
+[T] [-] bla
