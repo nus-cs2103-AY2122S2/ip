@@ -1,29 +1,9 @@
-DEADLINE
-false
-deadline 1
-1/1/2022 2359
-*** Next Task ***
 TODO
 false
-1
+Buy Pencil
 *** Next Task ***
-TODO
+EVENT
 false
-2
-*** Next Task ***
-TODO
-false
-3
-*** Next Task ***
-TODO
-false
-4
-*** Next Task ***
-TODO
-false
-4
-*** Next Task ***
-TODO
-false
-5
+CS2103 Practical
+16/4/2022 2359
 *** Next Task ***
