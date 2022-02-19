@@ -5,7 +5,7 @@ import duke.Todo;
 public class TodoTest {
     @Test
     public void toStringTest() {
-        Todo todo = new Todo("Wash clothes");
+        Todo todo = new Todo("Wash Clothes");
 
         assertEquals("[T][ ] Wash Clothes", todo.toString());
     }
