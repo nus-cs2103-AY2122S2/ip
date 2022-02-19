@@ -47,17 +47,17 @@ public class Storage {
                     case "D" : {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
                         // split description and date/time
-                        String[] arrOfStr2 = arrOfStr[4].split("|", 2);
+                        String[] arrOfStr2 = arrOfStr[4].split("\\|", 2);
                         // split within date and time
-                        String[] arrOfStr3 = arrOfStr2[1].split(" ", 4);
+                        String[] arrOfStr3 = arrOfStr2[1].split(" ", 5);
                         // extracting date from data received
-                        LocalDate by = LocalDate.parse(arrOfStr3[0] + " "
-                                + arrOfStr3[1] + " " + arrOfStr3[2], formatter);
-                        tasks.add(new Deadline(arrOfStr2[0], by, arrOfStr3[3], doneOrNot));
+                        LocalDate by = LocalDate.parse(arrOfStr3[1] + " "
+                                + arrOfStr3[2] + " " + arrOfStr3[3], formatter);
+                        tasks.add(new Deadline(arrOfStr2[0], by, arrOfStr3[4], doneOrNot));
                         break;
                     }
                     case "E" : {
-                        String[] arrOfStr2 = arrOfStr[4].split("|", 2);
+                        String[] arrOfStr2 = arrOfStr[4].split("\\|", 2);
                         String at = arrOfStr2[1];
                         tasks.add(new Event(arrOfStr2[0], at, doneOrNot));
                         break;
