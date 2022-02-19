@@ -54,9 +54,14 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if(duke.isByeCommand()) {
+            // @@author garethkoh-reused
+            // Reused from https://stackoverflow.com/questions/21974415
+            // /how-to-close-this-javafx-application-after-showing-a-message-in-a-text-area-elem
+            // with minor modifications.
             new Timer().schedule(new TimerTask() {
                 public void run () { System.exit(0); }
             }, 1500);
+            // @@author
         }
     }
 }
