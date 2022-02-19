@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<!--
+@@author Jeffry Lum
+Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+with minor modifications
+-->
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" scaleShape="false" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" alignment="TOP_LEFT" contentDisplay="TOP" style="-fx-label-padding: 5; -fx-background-color: #89CFF0; -fx-background-radius: 5; -fx-border-width: 1; -fx-border-color: #00008B; -fx-border-radius: 5;" text="Label" wrapText="true" HBox.hgrow="NEVER">
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="8.0" />
+         </padding></Label>
+        <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </HBox.margin></ImageView>
+    </children>
+</fx:root>
