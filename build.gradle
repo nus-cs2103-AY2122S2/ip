@@ -54,11 +54,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-//javafx {
-//    version = "11.0.2"
-//    modules = [ 'javafx.controls', 'javafx.graphics', 'javafx.base', 'javafx.fxml' ]
-//}
-
 checkstyle {
     toolVersion = '8.29'
 }
