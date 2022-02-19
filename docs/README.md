@@ -119,7 +119,7 @@ Action | Format, Examples
 **Add Deadline** | `deadline NAME_OF_TASK /by TIME` e.g., `deadline homework /by 2022-03-05`
 **Add Event** | `event NAME_OF_TASK /at TIME` e.g., `event homework /at 2022-03-05`
 **Delete** | `delete INDEX` e.g., `delete 3`
-**Find** | `find KEYWORD [MORE_KEYWORDS]` e.g., `find James Jake`
+**Find** | `find KEYWORD` e.g., `find homework`
 **List** | `list`
 **Mark** | `mark INDEX` e.g., `mark 3`
 **Unmark** | `unmark INDEX` e.g., `unmark 3`
