@@ -83,6 +83,76 @@ public class Storage {
     }
 
     /**
+     * Set task class type based on type provided from storage
+     *
+     * @param taskName Name/description of task
+     * @param taskLineSplit Array of task details loaded from storage
+     * @return Task with specific type
+     */
+    private Task setTaskType(String taskName, String[] taskLineSplit) {
+        String taskType = taskLineSplit[0];
+        boolean isTodo = taskType.equals("T");
+        boolean isEvent = taskType.equals("E");
+
+        if (isTodo) {
+            // if event starts with T, initialise as TODO
+            return new Todo(taskName);
+
+        } else if (isEvent) {
+            // if event starts with E, initialise as Event
+            String startTimeString = taskLineSplit[taskLineSplit.length - 2];
+            String endTimeString = taskLineSplit[taskLineSplit.length - 1];
+            LocalDateTime startDateTime = Parser.parseDateTime(startTimeString);
+            LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
+
+            return new Event(taskName, startDateTime, endDateTime);
+
+        } else {
+            // otherwise, event must start with D, initialise as Deadline
+            String endTimeString = taskLineSplit[taskLineSplit.length - 1];
+            LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
+            return new Deadline(taskName, endDateTime);
+        }
+    }
+
+    /**
+     * Set tags of loaded task
+     *
+     * @param task Task loaded from storage
+     * @param taskTags Tags of task loaded from storage as a single string
+     * @return Task with updated tags
+     */
+    private Task setTaskTags(Task task, String taskTags) {
+        String[] taskTagSplit = taskTags.split(TAG_SEPARATOR);
+        boolean hasTags = taskTagSplit.length > 0;
+        boolean nonEmptyTag = taskTagSplit[0].length() > 0;
+        if (hasTags && nonEmptyTag) {
+            for (String taskTag: taskTagSplit) {
+                task.addTag(taskTag);
+            }
+        }
+
+        return task;
+    }
+
+    /**
+     * Set completion status of loaded task
+     *
+     * @param task Task loaded from storage
+     * @param isCompleted Task completed status
+     * @return Task with updated completion status
+     */
+    private Task setTaskCompletionStatus(Task task, boolean isCompleted) {
+        if (isCompleted) {
+            task.markAsComplete();
+        } else {
+            task.markAsIncomplete();
+        }
+
+        return task;
+    }
+
+    /**
      * Loads duke data from default file provided
      *
      * @param defaultFile File object of filepath used to store duke data
@@ -95,48 +165,19 @@ public class Storage {
 
         while (f.hasNext()) {
             String[] taskLineSplit = f.nextLine().split(",");
-            String taskType = taskLineSplit[0];
-            boolean isTodo = taskType.equals("T");
-            boolean isEvent = taskType.equals("E");
             boolean isCompleted = Integer.parseInt(taskLineSplit[1]) == 1 ? true : false;
             String taskName = taskLineSplit[2];
             String taskTags = taskLineSplit[3].substring(1, taskLineSplit[3].length() - 1);
             Task storedTask;
 
-            if (isTodo) {
-                // if event starts with T, initialise as TODO
-                storedTask = new Todo(taskName);
-            } else if (isEvent) {
-                // if event starts with E, initialise as Event
-                String startTimeString = taskLineSplit[taskLineSplit.length - 2];
-                String endTimeString = taskLineSplit[taskLineSplit.length - 1];
-                LocalDateTime startDateTime = Parser.parseDateTime(startTimeString);
-                LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
-
-                storedTask = new Event(taskName, startDateTime, endDateTime);
-            } else {
-                // otherwise, event must start with D, initialise as Deadline
-                String endTimeString = taskLineSplit[taskLineSplit.length - 1];
-                LocalDateTime endDateTime = Parser.parseDateTime(endTimeString);
-                storedTask = new Deadline(taskName, endDateTime);
-            }
+            // set task type
+            storedTask = setTaskType(taskName, taskLineSplit);
 
             // set completion status
-            if (isCompleted) {
-                storedTask.markAsComplete();
-            } else {
-                storedTask.markAsIncomplete();
-            }
+            storedTask = setTaskCompletionStatus(storedTask, isCompleted);
 
             // set tags
-            String[] taskTagSplit = taskTags.split(TAG_SEPARATOR);
-            boolean hasTags = taskTagSplit.length > 0;
-            boolean nonEmptyTag = taskTagSplit[0].length() > 0;
-            if (hasTags && nonEmptyTag) {
-                for (String taskTag: taskTagSplit) {
-                    storedTask.addTag(taskTag);
-                }
-            }
+            storedTask = setTaskTags(storedTask, taskTags);
 
             data.add(storedTask);
         }
@@ -168,6 +209,69 @@ public class Storage {
     }
 
     /**
+     * Save task timings to string to be stored
+     *
+     * @param task Task to be saved
+     * @return Returns completion status as a string
+     */
+    private String saveTaskTiming(Task task) {
+        boolean isEvent = task.getEventType().equals(Type.EVENT);
+        boolean isDeadline = task.getEventType().equals(Type.DEADLINE);
+
+        if (isEvent) {
+            // if event, return start and end timings
+            Event event = (Event) task;
+            return event.getStartTimeString() + "," + event.getEndTimeString();
+        } else if (isDeadline) {
+            // if deadline, return end timing
+            Deadline deadline = (Deadline) task;
+            return deadline.getEndTimeString();
+        } else {
+            // otherwise, return nothing since no timing data for other types
+            return "";
+        }
+    }
+
+    /**
+     * Save task completion status to string to be stored
+     *
+     * @param task Task to be saved
+     * @return Returns completion status as a string
+     */
+    private String saveTaskCompletionStatus(Task task) {
+        // set task completion status
+        if (task.getIsDone()) {
+            return "1,";
+        } else {
+            return "0,";
+        }
+    }
+
+    /**
+     * Save task type to string to be stored
+     *
+     * @param task Task to be saved
+     * @return Returns type of task as a string
+     */
+    private String saveTaskType(Task task) {
+        boolean isEvent = task.getEventType().equals(Type.EVENT);
+        boolean isTodo = task.getEventType().equals(Type.TODO);
+        boolean isDeadline = task.getEventType().equals(Type.DEADLINE);
+
+        // set event type
+        if (isEvent) {
+            return "E,";
+        } else if (isTodo) {
+            return "T,";
+        } else if (isDeadline) {
+            return "D,";
+        }
+
+        assert false;
+        return "";
+    }
+
+    /**
      * Overwrite data in "data/list.txt" with current list data
      *
      * @param taskList Arraylist of Tasks data
@@ -179,38 +283,18 @@ public class Storage {
         for (Task task: taskList.getTasks()) {
             String taskText = "";
 
-            boolean isEvent = task.getEventType().equals(Type.EVENT);
-            boolean isTodo = task.getEventType().equals(Type.TODO);
-            boolean isDeadline = task.getEventType().equals(Type.DEADLINE);
-
-            // set event type
-            if (isEvent) {
-                taskText += "E,";
-            } else if (isTodo) {
-                taskText += "T,";
-            } else if (isDeadline) {
-                taskText += "D,";
-            }
+            taskText += saveTaskType(task);
 
             // set task completion status
-            if (task.getIsDone()) {
-                taskText += "1,";
-            } else {
-                taskText += "0,";
-            }
+            taskText += saveTaskCompletionStatus(task);
 
+            // save task description & tags
             taskText += task.getDescription() + "," + storeTags(task.getTags()) + ",";
 
-            // set task name & timing
-            if (isEvent) {
-                Event event = (Event) task;
-                taskText += event.getStartTimeString()
-                        + "," + event.getEndTimeString();
-            } else if (isDeadline) {
-                Deadline deadline = (Deadline) task;
-                taskText += deadline.getEndTimeString();
-            }
+            // set task timing(s)
+            taskText += saveTaskTiming(task);
 
+            // add newline and append task data to total task data
             taskText += "\n";
             dataText += taskText;
         }

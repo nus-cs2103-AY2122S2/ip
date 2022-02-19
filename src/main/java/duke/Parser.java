@@ -101,11 +101,11 @@ public class Parser {
         String[] timingSplit = fullDateString.split("to");
         String[] eventTimings = extractEventDateTimings(timingSplit);
 
-        boolean missingStartEndTimings = eventTimings.length < 2;
+        boolean hasMissingStartEndTimings = eventTimings.length < 2;
 
         // if user input does NOT contain start and end timing
         // in the given format
-        if (missingStartEndTimings) {
+        if (hasMissingStartEndTimings) {
             return Ui.EVENT_INVALID_TIMINGS_ERROR;
         } else {
             return String.join(",", eventTimings);
@@ -114,9 +114,9 @@ public class Parser {
 
     public static String getDeadlineTiming(String text) {
         String[] inputSplit = text.split("/by");
-        boolean missingDeadlineTiming = inputSplit.length < 2;
+        boolean hasMissingDeadlineTiming = inputSplit.length < 2;
 
-        if (missingDeadlineTiming) {
+        if (hasMissingDeadlineTiming) {
             return Ui.DEADLINE_INVALID_TIMINGS_ERROR;
         }
 

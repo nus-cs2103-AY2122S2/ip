@@ -14,7 +14,7 @@ public class Deadline extends Task {
     protected LocalDateTime endTime;
 
     /**
-     * Initialise deadline task with a description (task name)
+     * Initialises deadline task with a description (task name)
      * as well as an end datetime
      *
      * @param description Name of deadline task
@@ -28,7 +28,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return end datetime in LocalDateTime datatype
+     * Returns end datetime in LocalDateTime datatype
      *
      * @return End datetime
      */
@@ -37,7 +37,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return end datetime as a string in the format given
+     * Returns end datetime as a string in the format given
      * in the formatString parameter
      *
      * @param formatString Format of datetime string returned
@@ -48,7 +48,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return end datetime as a string in the format dd/MM/yyyy HHmm
+     * Returns end datetime as a string in the format dd/MM/yyyy HHmm
      *
      * @return End datetime as a string using the default format
      */
@@ -57,7 +57,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return string representation of the deadline task
+     * Returns string representation of the deadline task
      * e.g. [D][X] Sample deadline task (by: 12/12/2022 2100)
      *
      * @return String representation of deadline task:
