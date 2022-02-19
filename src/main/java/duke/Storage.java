@@ -1,5 +1,7 @@
 package duke;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,8 +16,6 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
@@ -26,7 +26,7 @@ public class Storage {
 
     /**
      * Generate a file at the given directory if it does not exist.
-     * 
+     *
      * @param filePath The file to be created.
      * @param dirPath The directory where the file should be.
      * @return The created file.
@@ -42,7 +42,7 @@ public class Storage {
 
     /**
      * Stores the list of tasks in the hard drive.
-     * 
+     *
      * @param taskList The list of tasks to be written.
      * @throws IOException If an I/O error occurs.
      */
@@ -50,7 +50,7 @@ public class Storage {
         String tempFilePath = FILE_PATH + ".new";
         File file = Storage.createFileIfNotExist(tempFilePath, DIR_PATH);
         FileWriter fw = new FileWriter(file, true);
-        
+
         for (Task task : taskList.getTasks()) {
             fw.write(task.toFileFormat());
         }
@@ -61,7 +61,7 @@ public class Storage {
 
     /**
      * Reads and retrieve the contents of the save file in the hard disk.
-     * 
+     *
      * @return The list of tasks stored in the file.
      * @throws CorruptedSaveException If the contents of the file cannot be restored correctly.
      */
@@ -96,6 +96,6 @@ public class Storage {
             }
         }
         return tasks;
-        
+
     }
 }

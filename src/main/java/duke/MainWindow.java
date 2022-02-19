@@ -40,7 +40,7 @@ public class MainWindow extends AnchorPane {
         printDukeOutputBuffer();
     }
 
-    public void printDukeOutputBuffer() {
+    private void printDukeOutputBuffer() {
         while (!duke.isOutputBufferEmpty()) {
             String outputMessage = duke.pollNextResponse();
             dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(outputMessage, dukeImage));

@@ -23,7 +23,7 @@ public class Parser {
 
     /**
      * Instantiate a parser using the saved file.
-     * 
+     *
      * @return Parser resumed from the previous session.
      * @throws CorruptedSaveException if savefile is corrupted.
      */
@@ -35,7 +35,7 @@ public class Parser {
 
     /**
      * Handles user commands and delegates them to their corresponding methods.
-     * 
+     *
      * @param input The text input by the user.
      */
     public String inputHandler(String input) {
@@ -60,7 +60,7 @@ public class Parser {
                 break;
 
             case "todo": //create task operations
-            case "deadline": 
+            case "deadline":
             case "event":
                 Task task = createTask(command, commandDetails);
                 replyMessage = tasks.addTask(task);
@@ -70,7 +70,7 @@ public class Parser {
             case "find":
                 replyMessage = tasks.find(commandDetails);
                 break;
-                
+
             default:
                 replyMessage = Ui.UNKNOWN_COMMAND_MESSAGE;
             }
@@ -85,7 +85,6 @@ public class Parser {
 
     /**
      * Creates a Task based on user-specified parameters.
-     * 
      * @param command The type of task to be created.
      * @param commandDetails The user-specified parameters for different types of tasks.
      * @return A Task.
@@ -109,19 +108,18 @@ public class Parser {
             "Missing details for %s!", command));
         }
 
-        return command.equals("deadline") 
+        return command.equals("deadline")
             ? new Deadline(taskArgs[0], taskArgs[1])
             : new Event(taskArgs[0], taskArgs[1]);
     }
 
     /**
      * Handles index-related operations on tasks.
-     * 
      * @param command The type of operation to be carried out.
      * @param commandDetails The user-specified parameters.
      * @return A success message for the user.
      */
-    private String indexNumberOperation(String command, String commandDetails) throws InvalidItemNumberException{
+    private String indexNumberOperation(String command, String commandDetails) throws InvalidItemNumberException {
         assertValidItemNumber(commandDetails);
         int index = Integer.parseInt(commandDetails);
 
@@ -140,9 +138,7 @@ public class Parser {
 
     /**
      * The action to be taken when a bye command is issued.
-     * 
      * <p> Sets the parser to stop accepting user input. </p>
-     * 
      * @return The bye message.
      */
     private String byeMessage() {
@@ -168,7 +164,7 @@ public class Parser {
         if (str == null) {
             throw new InvalidItemNumberException("Missing item number!");
         }
-        
+
         if (!isNumeric(str)) {
             throw new InvalidItemNumberException(
             "Please specify a numerical value for the item number instead of \"" + str + "\"!");

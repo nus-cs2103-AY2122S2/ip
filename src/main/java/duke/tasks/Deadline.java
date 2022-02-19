@@ -21,9 +21,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline that is marked as not done.
-     * 
      * <p>Accepts a deadlineDate string with pattern "yyyy-MM-dd" or "yyyy-MM-dd HHmm".</p>
-     * 
      * @param task The description of the task.
      * @param deadlineDate The string representation of the deadline.
      * @throws DukeException If deadlineDate does not have the expected pattern.
@@ -37,7 +35,7 @@ public class Deadline extends Task {
             LocalTime time = datetime.length == 1 ? null : LocalTime.parse(datetime[1], TIME_FORMATTER);
             this.time = Optional.ofNullable(time);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid date/time format!" 
+            throw new DukeException("Invalid date/time format!"
                     + " Expected date and/or time in the following formats: \n"
                     + "yyyy-mm-dd | Example: 2022-06-26\n"
                     + "yyyy-mm-dd HHmm | Example: 2022-06-26 2359");
@@ -46,10 +44,9 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline that is marked as not done.
-     * 
      * @param task The description of the task.
-     * @param deadline Represents the date by which the task is due. 
-     * @param time Represents the time (if any) by which the task is due. 
+     * @param deadline Represents the date by which the task is due.
+     * @param time Represents the time (if any) by which the task is due.
      */
     public Deadline(String task, LocalDate deadline, LocalTime time) {
         super(task);
@@ -59,12 +56,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor to create a Deadline instance.
-     * 
-     * <p>This constructor accepts an additional isDone boolean to initialize 
+     * <p>This constructor accepts an additional isDone boolean to initialize
      * a task that has been marked/unmarked as done. </p>
-     * 
      * <p>Accepts a deadlineDate string with pattern "yyyy-MM-dd HHmm" or "yyyy-MM-dd".</p>
-     * 
      * @param task The description of the task.
      * @param isDone Marks the task as done if true.
      * @param deadlineDate The string representation of the deadline.
@@ -83,15 +77,13 @@ public class Deadline extends Task {
         Integer i = this.isDone ? 1 : 0;
         String deadlineString = deadline.format(DATE_FORMATTER);
         String timeString = time.map(localTime -> localTime.format(TIME_FORMATTER)).orElse("");
-        return String.format("D | %d | %s | %s%s\n", 
+        return String.format("D | %d | %s | %s%s\n",
                 i, this.task, deadlineString, timeString);
     }
 
     /**
      * Converts a string from file format to Task.
-     * 
      * <p> The inverse of toFileFormat().</p>
-     * 
      * @param fileString The string to convert.
      * @throws CorruptedSaveException if unable to parse the string correctly
      */
@@ -120,7 +112,6 @@ public class Deadline extends Task {
             return super.equals(otherDeadline)
                 && this.deadline.equals(otherDeadline.deadline)
                 && this.time.equals(otherDeadline.time);
-            
 
         } else {
             return false;

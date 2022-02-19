@@ -50,7 +50,7 @@ public abstract class Task {
         }
         if (other instanceof Task) {
             Task otherTask = (Task) other;
-            
+
             return otherTask.isDone == this.isDone
                 && otherTask.task.equals(this.task);
         } else {
