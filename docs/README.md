@@ -1,5 +1,7 @@
 # User Guide
 
+***
+
 ## About Calcifer
 
 ![](../src/main/resources/images/DaDuke.png)
@@ -8,6 +10,8 @@
 or need to be completed.</p>
 <p><b>Calcifer</b> operates mainly using CLI user commands, but can be started up using a GUI application 
 to provide a more user-friendly design and interface.</p>
+
+***
 
 ## Features
 
@@ -42,7 +46,10 @@ Any existing task can be marked or unmarked based on the task ID.
 
 **Finds** all existing tasks that include the specified search keyword.
 
-## Usage (WIP)
+
+***
+
+## Usage
 
 ### `todo [todo_description]` - Adds a task of type ToDo
 
@@ -169,7 +176,7 @@ This change is written to and saved in the `txtHistory.txt` file.
 
 Example of usage:
 
-`Unmark 2`
+`unmark 2`
 
 Expected outcome:
 
@@ -179,6 +186,32 @@ The task that has been marked as undone is returned and displayed.
 OK, I've marked this task as not done yet:
 [E][] go to movie (at: Feb 21 2022)
 ```
+
+### `find [keyword(s)]` - Find tasks that contain the specified keyword
+
+Finds the tasks that contain the specified keyword(s) in the returned String
+from their `toString()` method.
+The list of tasks found is returned and displayed.
+No modification is made to `taskHistory.txt` file.
+
+Example of usage:
+
+`find at: Feb 21`
+
+Expected outcome:
+
+The task that has been marked as undone is returned and displayed.
+
+**NOTE:** The index in the returned list may not be the task ID for each of the listed tasks.
+Use `List` command to display full list to reference task IDs.
+
+
+```
+Here are the matching tasks in your list:
+1. [E][] go to movie (at: Feb 21 2022)
+```
+
+***
 
 ## Image References
 
