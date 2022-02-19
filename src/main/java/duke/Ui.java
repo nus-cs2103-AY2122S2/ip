@@ -44,11 +44,6 @@ public class Ui {
         System.exit(0);
     }
 
-//    public static void add(String input) {
-//        String temp = "\n" + BLANK_LINE + "added: " + input + "\n" + BLANK_LINE;
-//        System.out.println(temp);
-//    }
-
     /**
      * Prints the current taskList
      *

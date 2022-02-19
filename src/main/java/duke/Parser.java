@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +17,7 @@ public class Parser {
      *
      * @param input Input provided by the user
      * @param taskList Current taskList based on user input
-     * @throws IOException
+     * @throws IOException When input is invalid
      */
 
     public static void parse(String input, TaskList taskList) throws IOException {
