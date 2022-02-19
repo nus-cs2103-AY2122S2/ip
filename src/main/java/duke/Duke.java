@@ -38,11 +38,6 @@ public class Duke {
         initialize();
     }
 
-    public static void main(String[] args) {
-        initialize();
-        run();
-    }
-
     private static void initialize() {
         textUI = new TextUI();
         storage = new Storage();
@@ -69,6 +64,11 @@ public class Duke {
                 textUI.printMessage(e.getMessage());
             }
         } while (ExitCommand.isRunning());
+    }
+    
+    public static void main(String[] args) {
+        initialize();
+        run();
     }
 
     /**

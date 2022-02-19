@@ -30,6 +30,10 @@ public class TextUI {
         this(System.in, System.out);
     }
 
+    private boolean shouldIgnore(String rawInputLine) {
+        return rawInputLine.trim().isEmpty();
+    }
+
     /**
      * Gets next line entered by user.
      * Ignores empty lines.
@@ -42,10 +46,6 @@ public class TextUI {
             currInput = in.nextLine().trim();
         }
         return currInput;
-    }
-
-    private boolean shouldIgnore(String rawInputLine) {
-        return rawInputLine.trim().isEmpty();
     }
 
     /**
