@@ -15,6 +15,7 @@ Duke is a desktop application for managing personal tasks. Users can create diff
 # Features 
 
 ### Quick Summary
+
 Action | Format 
 -------|--------
 __Adding todo__ | `todo TODO_DESCRIPTION`
@@ -27,21 +28,21 @@ __Deleting task__ | `delete INDEX_NUMBER`
 __Finding list of tasks by keyword__ | `find KEYWORD`
 __Exiting the application__ | `bye`
 
-### Adding Tasks
+## Adding Tasks
 There are 3 types of tasks that can be added to the task manager:
 
 - **todo** is a task that has no dates
 - **deadline** is a task that must be completed by the given date (and time)
 - **event** is a task that occurs at the given date (and time)
 
-#### Adding a todo: `todo DESCRIPTION`
+### Adding a todo: `todo DESCRIPTION`
 Creates a new Todo with the specified `DESCRIPTION`
 - **Usage:** `todo DESCRIPTION`
 - Examples:
   - `todo Finish Homework`
   - `todo buy groceries`
 
-#### Adding a deadline: `deadline DESCRIPTION /by DATE [TIME]`
+### Adding a deadline: `deadline DESCRIPTION /by DATE [TIME]`
 Creates a new Deadline with the given `DESCRIPTION`, `DATE` and `TIME (optional)`.
 `TIME` is assumed to be in 24hrs format.
 - **Usage:** 
@@ -53,7 +54,7 @@ Creates a new Deadline with the given `DESCRIPTION`, `DATE` and `TIME (optional)
   - `deadline college application /by 2022-12-01 2359`
 
 
-#### Adding an event: `event DESCRIPTION /at DATE [TIME]`
+### Adding an event: `event DESCRIPTION /at DATE [TIME]`
 Creates a new Event with the given `DESCRIPTION`, `DATE` and `TIME (optional)`.
 `TIME` is assumed to be in 24hrs format.
 - **Usage:**
@@ -64,14 +65,14 @@ Creates a new Event with the given `DESCRIPTION`, `DATE` and `TIME (optional)`.
   - `event Attack on Titan season finale /at 2022-03-06 0000`
   - `event cs1101s midterm test /at 2022-03-06 0900`
 
-### Listing Tasks
+## Listing Tasks
 Displays all the tasks in the list.
 **Usage:** `list`
 - Each task has a __index number__ to identify the task in the list
 - __Index number__ is used to refer to a task in other commands
 
 
-### Marking and Unmarking tasks
+## Marking and Unmarking tasks
 Tasks in the list can be marked as done, or unmarked to set it as undone.
 
 Marked tasks will be labeled with `[X]` and unmarked tasks are labeled with `[]`
@@ -87,7 +88,7 @@ Examples:
 - `unmark 1` - marks the first item as undone
 
 
-### Deleting tasks
+## Deleting tasks
 Tasks in the list can be deleted using the keyword `delete`
 
 **Usage:** `delete INDEX`
@@ -96,7 +97,7 @@ Tasks in the list can be deleted using the keyword `delete`
 Examples:
 - `delete 1`  - deletes the first item
 
-### Finding tasks
+## Finding tasks
 Finds tasks in the tasklist containing the specified keyword.
 
 **Usage:** `find KEYWORD`
@@ -106,11 +107,11 @@ Examples:
 - `find midterm` - returns a list of tasks containing the word `midterm`.
 - `find essay` - returns a list of tasks containing the word `essay`.
 
-### Quitting the application
+## Quitting the application
 **Usage:** `bye`
 - The program will close 1.5 seconds after sending this command.
 
-## Frequently Asked Questions
+# Frequently Asked Questions
 
 **Q: Will the list of tasks be saved?**
 A: Yes, the list will be saved automatically after each command. They will be loaded again when the user launches the application again.
