@@ -1,0 +1,46 @@
+list 2
+list
+read book
+list
+todo
+todo borrow book
+mark 0
+list
+mark x
+list
+mark 1
+list
+unmark 0
+list
+unmark x
+list
+unmark 1
+list
+deadline
+deadline task without /_by
+deadline incomplete without date /by
+deadline wrong date format /by 2022/12/12
+deadline invalid date /by 1111/11/11
+deadline wrong time format /by 2022-12-12 12:10pm
+deadline invalid time /by 2022-12-12 9999
+deadline correct format date only /by 2022-12-12
+deadline correct format date and time /by 2022-12-12 1200
+event
+event task without /_at
+event incomplete without date /at
+event wrong date format /at 2022/12/12
+event invalid date /at 1111/11/11
+event wrong start time format /at 2022-12-12 12:10pm
+event wrong end time format /at 2022-12-12 1200 12:22pm
+event invalid start time /at 2022-12-12 9999
+event invalid end time /at 2022-12-12 1200 1100
+event correct format date only /at 2022-12-12
+event correct format date and start time /at 2022-12-12 1200
+event correct format date and start/end time /at 2022-12-12 1200 1300
+delete 0
+list
+delete x
+list
+delete 1
+list
+bye
