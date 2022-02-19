@@ -1,9 +1,0 @@
-TODO
-false
-Buy Pencil
-*** Next Task ***
-EVENT
-false
-CS2103 Practical
-16/4/2022 2359
-*** Next Task ***
