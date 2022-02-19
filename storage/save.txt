@@ -1,3 +1,7 @@
-D,1,asew ,Mar 1 2019 00:00
-E,0,My CS2103t team meeting ,Sep 25 2020 10:00 ~ Sep 25 2020 12:00
+E,1,My CS2103t team meeting ,Sep 25 2020 10:00 ~ Sep 25 2020 12:00
 T,0,return book,
+T,0,return book,
+D,0,assignment ,Mar 21 2022 23:59
+D,0,assignment ,Mar 21 2022 00:00
+E,0,My CS2103t team meeting ,Sep 25 2020 10:00 ~ Sep 25 2020 12:00
+E,0,team meeting ,Jan 17 2022 10:00 ~ Jan 17 2022 12:00
