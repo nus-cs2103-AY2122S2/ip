@@ -24,8 +24,8 @@ Examples:
 * `todo Preparation for Hackathon`
 
 Examples:
-* `todo CS2103T homework` will result in `[ ][ ] CS2103T homework`
-* `todo Preparation for Hackathon` will result in `[ ][ ] Preparation for Hackathon`
+* `todo CS2103T homework` will result in `[T][ ] CS2103T homework`
+* `todo Preparation for Hackathon` will result in `[T][ ] Preparation for Hackathon`
 
 ### Adding a deadline: `deadline`
 
@@ -116,8 +116,8 @@ Duke will save the data automatically upon successful exit. There is no need for
 Action | Format, Examples
 --------|------------------
 **Add Normal Task** | `todo NAME_OF_TASK`
-**Add Deadline** | `deadline NAME_OF_DEADLINE /by TIME` e.g., `deadline homework /by 2022-03-05`
-**Add Event** | `event NAME_OF_DEADLINE /at TIME` e.g., `event homework /at 2022-03-05`
+**Add Deadline** | `deadline NAME_OF_TASK /by TIME` e.g., `deadline homework /by 2022-03-05`
+**Add Event** | `event NAME_OF_TASK /at TIME` e.g., `event homework /at 2022-03-05`
 **Delete** | `delete INDEX` e.g., `delete 3`
 **Find** | `find KEYWORD [MORE_KEYWORDS]` e.g., `find James Jake`
 **List** | `list`
