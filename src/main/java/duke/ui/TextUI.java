@@ -73,4 +73,13 @@ public class TextUI {
         out.println("How may I assist you?");
         out.print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
     }
+
+    /**
+     * Generates the welcome message upon the start of the application.
+     *
+     * @return String of welcome message.
+     */
+    public String getWelcomeMessage() {
+        return "Greetings from Duke. \nHow may I assist you today?";
+    }
 }
