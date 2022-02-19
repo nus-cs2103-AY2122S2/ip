@@ -70,6 +70,7 @@ public class TaskList {
         if (id > tasks.size()) {
             return Ui.invalidId();
         }
+        assert id <= tasks.size() : "id should be in the range of the task list's size";
         switch (command) {
         case "mark":
             if (tasks.get(id - 1).isDone()) {
