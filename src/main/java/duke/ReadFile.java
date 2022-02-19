@@ -14,20 +14,20 @@ public class ReadFile {
      */
     public static String readFile(ArrayList<Task> list) {
         int n = list.size() - 1;
-        String s = "";
+        String data = "";
 
         while (n >= 0) {
-            String d;
+            String date;
             if (list.get(n) instanceof Todo) {
-                s += list.get(n).toString() + "\n";
+                data += list.get(n).toString() + "\n";
             } else {
-                d = list.get(n).date.toString();
-                s += d + " " + list.get(n).toString() + "\n";
+                date = list.get(n).date.toString();
+                data += date + " " + list.get(n).toString() + "\n";
             }
 
             n -= 1;
         }
 
-        return s;
+        return data;
     }
 }

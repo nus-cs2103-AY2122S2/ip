@@ -21,7 +21,7 @@ public class Task {
     }
 
     /**
-     * Constructor of Tasks that need to store dates.
+     * Constructor of Task that need to store dates.
      * 
      * @param description
      * @param date
@@ -34,7 +34,6 @@ public class Task {
 
     /**
      * Returns the status of a task in string format.
-     * 
      * @return status of task.
      */
     public String getStatusIcon() {
@@ -43,6 +42,7 @@ public class Task {
     
     /**
      * Marks task as done and notifies user of the changes.
+     * @return {@code String} updated state of task.
      */
     public String markAsDone() {
         isDone = true;
@@ -52,6 +52,7 @@ public class Task {
 
     /**
      * Marks task as undone and notifies user of the changes.
+     * @return {@code String} updated state of task.
      */
     public String markAsUndone(){
         isDone = false;

@@ -53,9 +53,9 @@ public class TaskList {
                     "Oops! Which task would you like to unmark?"
             );
         }
-        int i = Integer.parseInt(arr.get(1));
-        assert i <= Duke.list.size() & i > 0: "Task number should be <= Duke.list.size() & > 0";
-        if (i <= Duke.list.size() && i > 0) {
+        int taskNumber = Integer.parseInt(arr.get(1));
+        assert taskNumber <= Duke.list.size() & taskNumber > 0: "Task number should be <= Duke.list.size() & > 0";
+        if (taskNumber <= Duke.list.size() && taskNumber > 0) {
             Task toBeMarked = Duke.list.get(Integer.parseInt(input.substring(7)) - 1);
             return toBeMarked.markAsUndone();
         } else {
@@ -94,7 +94,8 @@ public class TaskList {
             msg += "Now you have " + Duke.list.size() + " tasks in the list.";
             return msg;
         } catch (DateTimeParseException e) {
-            return "Please input a vaid date format YYYY-MM-DD";
+            String errorMsg = "Please input a vaid date format YYYY-MM-DD";
+            return errorMsg;
         }
     }
 
@@ -153,7 +154,8 @@ public class TaskList {
             msg += "Now you have " + Duke.list.size() + " in the list.";
             return msg;
         } catch (DateTimeParseException e) {
-            return "Please input a vaid date format YYYY-MM-DD";
+            String errorMsg = "Please input a vaid date format YYYY-MM-DD";
+            return errorMsg;
         }
     }
 
@@ -172,12 +174,12 @@ public class TaskList {
             );
         }
 
-        int i = Integer.parseInt(arr.get(1));
-        assert i <= Duke.list.size() && i > 0: "Task number should be <= Duke.list.size() & > 0";
-        if (i <= Duke.list.size() && i > 0) {
+        int taskNumber = Integer.parseInt(arr.get(1));
+        assert taskNumber <= Duke.list.size() && taskNumber > 0: "Task number should be <= Duke.list.size() & > 0";
+        if (taskNumber <= Duke.list.size() && taskNumber > 0) {
             String msg = "Noted. I've removed this task: \n";
-            msg += Duke.list.get(i-1) + "\n";
-            Duke.list.remove(i - 1);
+            msg += Duke.list.get(taskNumber-1) + "\n";
+            Duke.list.remove(taskNumber - 1);
             msg += "Now you have " + Duke.list.size() + " tasks in the list.";
             return msg;
         } else {
@@ -234,31 +236,31 @@ public class TaskList {
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(s.split(" ")));
         if (arr.contains("/at")) {
             int i = arr.indexOf("/at");
-            String str1 = String.join(" ", arr.subList(1, i));
-            String str2 = String.join(" ", arr.subList(i + 1, arr.size()));
-            String[] str = new String[2];
+            String description = String.join(" ", arr.subList(1, i));
+            String date = String.join(" ", arr.subList(i + 1, arr.size()));
+            String[] array = new String[2];
 
 
 
-            str[0] = str1;
-            str[1] = str2;
-            return str;
+            array[0] = description;
+            array[1] = date;
+            return array;
         } else if (arr.contains("/by")) {
             int i = arr.indexOf("/by");
-            String str1 = String.join(" ", arr.subList(1, i));
-            String str2 = String.join(" ", arr.subList(i + 1, arr.size()));
-            String[] str = new String[2];
+            String description = String.join(" ", arr.subList(1, i));
+            String date = String.join(" ", arr.subList(i + 1, arr.size()));
+            String[] array = new String[2];
 
-            str[0] = str1;
-            str[1] = str2;
-            return str;
+            array[0] = description;
+            array[1] = date;
+            return array;
         } else {
-            String str1 = String.join(" ", arr.subList(1, arr.size()));
-            String str2 = "";
-            String[] str = new String[2];
-            str[0] = str1;
-            str[1] = str2;
-            return str;
+            String description = String.join(" ", arr.subList(1, arr.size()));
+            String date = "";
+            String[] array = new String[2];
+            array[0] = description;
+            array[1] = date;
+            return array;
         }
 
     }

@@ -20,10 +20,10 @@ public class Parser {
         BYE("bye");
 
 
-        final String command;
+        final String COMMAND;
 
         Commands(String command) {
-            this.command = command;
+            this.COMMAND = command;
         }
     }
 
@@ -37,52 +37,52 @@ public class Parser {
      */
     protected static String start(String input) throws DukeException, IOException {
         //to read user input
-        String msg = "";
+        String msg;
 
         //prints the list of items when user inputs list
-        if (input.equals(Commands.BYE.command)) {
+        if (input.equals(Commands.BYE.COMMAND)) {
             return Ui.bye();
         }
-        else if (input.equals(Commands.LIST.command)) {
+        else if (input.equals(Commands.LIST.COMMAND)) {
             msg = printList(Duke.list);
         }
 
         //marks a task as done if the user inputs a string in format "mark xx"
         //NOTE: currently, inputting "mark" alone results in a task named "mark" to be added to the list of tasks
-        else if (input.length() > 4 && Commands.MARK.command.equals(input.substring(0, 4))) {
+        else if (input.length() > 4 && Commands.MARK.COMMAND.equals(input.substring(0, 4))) {
             msg =  TaskList.mark(input);
         }
 
         //unmarks a task as undone if the user inputs a string in format "unmark xx"
         //NOTE: currently, inputting "unmark" alone results in a task named "unmark" to be added to the list of tasks
-        else if (input.length() > 6 && Commands.UNMARK.command.equals(input.substring(0, 6))) {
+        else if (input.length() > 6 && Commands.UNMARK.COMMAND.equals(input.substring(0, 6))) {
             msg = TaskList.unmark(input);
         }
 
         //adds a task to the list if user inputs "todo xxx"
-        else if (input.length() >= 4 && Commands.TODO.command.equals(input.substring(0, 4))) {
+        else if (input.length() >= 4 && Commands.TODO.COMMAND.equals(input.substring(0, 4))) {
             msg = TaskList.todo(input);
         }
 
         //schedules an event and stores the location of the event in the list in the format
         //"event xxx /at xxx"
-        else if (input.length() >= 5 && Commands.EVENT.command.equals(input.substring(0, 5))) {
+        else if (input.length() >= 5 && Commands.EVENT.COMMAND.equals(input.substring(0, 5))) {
             msg = TaskList.event(input);
         }
 
         //adds a deadline and stores the date/time of the deadline in the list in the format
         //"deadline xxx /by xxx"
-        else if (input.length() >= 8 && Commands.DEADLINE.command.equals(input.substring(0, 8))) {
+        else if (input.length() >= 8 && Commands.DEADLINE.COMMAND.equals(input.substring(0, 8))) {
             msg = TaskList.deadline(input);
         }
 
         //delete a task from the list
-        else if (input.length() >= 6 && Commands.DELETE.command.equals(input.substring(0, 6))) {
+        else if (input.length() >= 6 && Commands.DELETE.COMMAND.equals(input.substring(0, 6))) {
             msg = TaskList.delete(input);
         }
 
         //find a word in the tasks
-        else if (input.length() >= 4 && Commands.FIND.command.equals(input.substring(0, 4))) {
+        else if (input.length() >= 4 && Commands.FIND.COMMAND.equals(input.substring(0, 4))) {
             msg = TaskList.find(input);
         }
 
@@ -100,9 +100,9 @@ public class Parser {
     }
 
     /**
-     * To print the current list of items.
+     * Prints the current list of items.
      * @param arraylist
-     * @return {@code String} printed list of tasks.
+     * @return {@code String} list of tasks.
      */
     private static String printList(ArrayList<Task> arraylist) {
             String msg = "Here are the tasks in your list: \n";
@@ -116,7 +116,7 @@ public class Parser {
 
         
     /**
-     * Save file to the hard disk.
+     * Saves file to the hard disk.
      * 
      * @throws IOException
      */

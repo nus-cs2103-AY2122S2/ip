@@ -27,7 +27,8 @@ public class WriteFile {
             fw.write(s);
             fw.close();
         } catch (IOException e) {
-            System.out.println("Sorry, I was not able to save the changes made to the hard disk... Please try again.");
+            String errorMsg = "Sorry, I was not able to save the changes made to the hard disk... Please try again.";
+            System.out.println(errorMsg);
         }
     }
 }
