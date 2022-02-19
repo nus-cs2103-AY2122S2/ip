@@ -4,6 +4,7 @@ package bob;
  * This class handles all output by the program to the user.
  */
 public class Ui {
+
     /**
      * Greets the user on program startup.
      *
@@ -13,6 +14,41 @@ public class Ui {
         return Ui.printLine()
                 + "Hello! I'm Bob!\n" + "Loading saved entries...\n"
                 + "What can I do for you?\n"
+                + "Type \"command\" to see a list of commands.\n"
+                + Ui.printLine();
+    }
+
+    /**
+     * Returns Ui message for archive command.
+     *
+     * @return Ui message for archive command.
+     */
+    public static String archive() {
+        return Ui.printLine()
+                + "Archived all existing entries! Your list is now empty.\n"
+                + "You can find your archived entries in /data/bob_archive.txt "
+                + "in the directory where Bob is saved.\n"
+                + Ui.printLine();
+    }
+
+    /**
+     * Returns UI message describing all supported commands.
+     *
+     * @return UI message describing all supported commands.
+     */
+    public static String command() {
+        return Ui.printLine()
+                + "Here are all supported commands!\n"
+                + "    1. Todo JOB: adds JOB to list of tasks.\n"
+                + "    2. Event JOB /at TIME: adds an event called JOB happening at TIME to list of tasks.\n"
+                + "    3. Deadline JOB /by TIME: adds a deadline for JOB at TIME to list of tasks.\n"
+                + "    4. List: lists all tasks in the list.\n"
+                + "    5. Delete INTEGER: deletes the entry indexed by INTEGER from the list.\n"
+                + "    6. Mark INTEGER: marks the entry indexed by INTEGER as done.\n"
+                + "    7. Unmark INTEGER: marks the entry indexed by INTEGER as not done.\n"
+                + "    8. Find KEYWORD: returns a list of entries that contains KEYWORD.\n"
+                + "    9. Archive: moves all existing entries to another file and clears the current list.\n"
+                + "    10. Command: returns a list of supported commands with descriptions.\n"
                 + Ui.printLine();
     }
 

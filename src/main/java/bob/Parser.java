@@ -18,7 +18,7 @@ public class Parser {
         assert !userInput.isEmpty();
         assert tasks != null;
         try {
-            String command = userInput.split(" ")[0].strip();
+            String command = userInput.split(" ")[0].strip().toLowerCase();
             boolean tasksIsDiff = false;
 
             switch (command) {
@@ -47,6 +47,13 @@ public class Parser {
                 break;
             case "find":
                 response = find(userInput, tasks);
+                break;
+            case "archive":
+                response = archive(tasks);
+                tasksIsDiff = true;
+                break;
+            case "command":
+                response = getCommands();
                 break;
             default:
                 response = Ui.invalidCommand(command);
@@ -100,5 +107,14 @@ public class Parser {
     private static String find(String userInput, TaskList tasks) {
         String keyword = userInput.split(" ", 2)[1];
         return tasks.find(keyword);
+    }
+
+    private static String getCommands() {
+        return Ui.command();
+    }
+
+    private static String archive(TaskList tasks) {
+        tasks.archive();
+        return Ui.archive();
     }
 }
