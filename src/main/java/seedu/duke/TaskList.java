@@ -41,13 +41,13 @@ public class TaskList {
                 this.taskList.add(new ToDo(taskTodo, taskIsDone));
                 break;
             case 'E':
-                String[] taskEvent = task.substring(7).split(" - at: ");
+                String[] taskEvent = task.substring(7).split(" /at ");
                 dateTime = LocalDate.parse(taskEvent[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
                         .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 this.taskList.add(new Event(taskEvent[0], taskIsDone, dateTime));
                 break;
             case 'D':
-                String[] taskDeadline = task.substring(7).split(" - by: ");
+                String[] taskDeadline = task.substring(7).split(" /by ");
                 dateTime = LocalDate.parse(taskDeadline[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
                         .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 this.taskList.add(new Deadline(taskDeadline[0], taskIsDone, dateTime));
@@ -124,7 +124,7 @@ public class TaskList {
         ArrayList<String> result = new ArrayList<String>();
         for (Task t : taskList) {
             if (t.toString().toLowerCase().contains(keyword.toLowerCase())) {
-                result.add(t.toString());
+                result.add(t.toWrite());
             }
         }
         return new TaskList(result);

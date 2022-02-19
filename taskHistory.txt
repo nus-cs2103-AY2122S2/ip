@@ -1,3 +1,4 @@
-[T][X] clean the house
-[E][ ] attend church - at: Mar 20 2020
-[D][ ] do homework - by: Feb 21 2022
+[T][ ] this
+[T][ ] that
+[D][ ] clean house /by Feb 20 2022
+[D][ ] clean room /by Feb 20 2022
