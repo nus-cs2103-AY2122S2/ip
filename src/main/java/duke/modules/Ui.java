@@ -10,12 +10,8 @@ public class Ui {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";
 
-    private static final String LOGO  = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String INITIALIZATION_MESSAGE = "Hello from\n" + LOGO + "enter a command\n" +
+    private static final String LOGO  = "BEARD MAN\n";
+    private static final String INITIALIZATION_MESSAGE = "Hello I'm\n" + LOGO + "what can I do for you?\n" +
                 "use command 'help' to see list of commands";
 
     public Ui() {
