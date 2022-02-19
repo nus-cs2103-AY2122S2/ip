@@ -9,8 +9,8 @@ public class ExitCommand extends Command {
      * @param ui User interface
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {
-        ui.showExit(storage, tasks);
+    public String execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {
+        return ui.showExit(storage, tasks);
     }
 
     /**

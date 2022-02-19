@@ -20,9 +20,9 @@ public class DeleteCommand extends Command {
      * @param tasks list of tasks
      * @param ui User interface
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.showDelete(tasks.get(number - 1), tasks);
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.delete(number);
+        return ui.showDelete(tasks.get(number - 1), tasks);
     }
 
     /**

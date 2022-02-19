@@ -7,9 +7,9 @@ public class FindCommand extends Command {
         this.word = word;
     }
 
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         TaskList matchingTasks = tasks.find(word);
-        ui.showFound(matchingTasks);
+        return ui.showFound(matchingTasks);
     }
 
     public boolean isExit() {

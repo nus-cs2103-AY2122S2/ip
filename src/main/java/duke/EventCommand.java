@@ -21,9 +21,9 @@ public class EventCommand extends Command {
      * @param tasks list of tasks
      * @param ui User interface
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(event);
-        ui.showEvent(this.event, tasks);
+       return ui.showEvent(this.event, tasks);
     }
 
     /**

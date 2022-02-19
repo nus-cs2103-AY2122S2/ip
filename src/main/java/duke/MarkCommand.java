@@ -20,9 +20,9 @@ public class MarkCommand extends Command {
      * @param tasks list of tasks
      * @param ui User interface
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.mark(number);
-        ui.showMark(tasks.get(number));
+        return ui.showMark(tasks.get(number));
     }
 
     /**

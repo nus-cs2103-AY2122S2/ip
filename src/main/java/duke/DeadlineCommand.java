@@ -24,9 +24,9 @@ public class DeadlineCommand extends Command {
      * @param tasks list of tasks
      * @param ui User interface
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(deadline);
-        ui.showDeadline(this.deadline, tasks);
+        return ui.showDeadline(this.deadline, tasks);
     }
 
     /**

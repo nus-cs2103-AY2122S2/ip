@@ -20,9 +20,9 @@ public class UnmarkCommand extends Command {
      * @param tasks list of tasks
      * @param ui User interface
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.unmark(number);
-        ui.showUnmark(tasks.get(number));
+        return ui.showUnmark(tasks.get(number));
     }
 
     /**

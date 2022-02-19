@@ -8,8 +8,8 @@ public class ListCommand extends Command {
      * @param tasks list of tasks
      * @param ui User interface
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.showTasks(tasks);
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
+        return ui.showTasks(tasks);
     }
 
     /**

@@ -12,7 +12,7 @@ public abstract class Command {
      * @param ui User interface
      * @throws DukeException when an error occurs
      */
-    public abstract void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException;
+    public abstract String execute(Storage storage, TaskList tasks, Ui ui) throws DukeException;
 
     /**
      * Indicative of whether program should continue running

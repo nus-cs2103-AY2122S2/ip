@@ -20,9 +20,9 @@ public class TodoCommand extends Command {
      * @param tasks list of tasks
      * @param ui User interface
      */
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(todo);
-        ui.showTodo(this.todo, tasks);
+        return ui.showTodo(this.todo, tasks);
     }
 
     /**

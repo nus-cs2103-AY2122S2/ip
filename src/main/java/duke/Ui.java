@@ -12,14 +12,6 @@ public class Ui {
     }
 
     /**
-     * shows welcome screen
-     */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
-
-    /**
      * reads text entered by user
      * @return String entered by user
      */
@@ -31,8 +23,8 @@ public class Ui {
     /**
      * Shows loading error
      */
-    public void showLoadingError() {
-        System.out.println("A loading error has occurred.");
+    public String showLoadingError() {
+        return "Yo! My bad bud, but I think something's wrong with my loading mechanism!.";
     }
 
     public void showLine() {
@@ -44,14 +36,18 @@ public class Ui {
      * @param deadline deadline that user adds
      * @param tasks list of tasks
      */
-    public void showDeadline(Deadline deadline, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(deadline);
+    public String showDeadline(Deadline deadline, TaskList tasks) {
+        StringBuilder sb = new StringBuilder("Alright bud, I've taken this " +
+                "deadline down. Make sure you get it done!");
+        sb.append(System.getProperty("line.separator"));
+        sb.append(deadline);
+        sb.append(System.getProperty("line.separator"));
         if (tasks.getSize() == 1) {
-            System.out.println("Now you have " + tasks.getSize() + " task in the list.");
+            sb.append("Bud, you only got one task left!");
         } else {
-            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append("to be exact.");
         }
+        return sb.toString();
     }
 
     /**
@@ -59,14 +55,18 @@ public class Ui {
      * @param event event that user adds
      * @param tasks list of tasks
      */
-    public void showEvent(Event event, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(event);
+    public String showEvent(Event event, TaskList tasks) {
+        StringBuilder sb = new StringBuilder("Bud!! You got a date? Haha alright I've noted" +
+                " this event down.");
+        sb.append(System.getProperty("line.separator"));
+        sb.append(event);
+        sb.append(System.getProperty("line.separator"));
         if (tasks.getSize() == 1) {
-            System.out.println("Now you have " + tasks.getSize() + " task in the list.");
+            sb.append("Bud, you only got one task left!");
         } else {
-            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append("to be exact.");
         }
+        return sb.toString();
     }
 
     /**
@@ -74,14 +74,18 @@ public class Ui {
      * @param todo todo that user adds
      * @param tasks list of tasks
      */
-    public void showTodo(Todo todo, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(todo);
+    public String showTodo(Todo todo, TaskList tasks) {
+        StringBuilder sb = new StringBuilder("Buddy!! The list of things to do" +
+                " remains ever-growing, eh? I've added this for you bud.");
+        sb.append(System.getProperty("line.separator"));
+        sb.append(todo);
+        sb.append(System.getProperty("line.separator"));
         if (tasks.getSize() == 1) {
-            System.out.println("Now you have " + tasks.getSize() + " task in the list.");
+            sb.append("Bud, you only got one task left!");
         } else {
-            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append("to be exact.");
         }
+        return sb.toString();
     }
 
     /**
@@ -89,14 +93,17 @@ public class Ui {
      * @param task task that is to be deleted
      * @param tasks list of tasks
      */
-    public void showDelete(Task task, TaskList tasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
+    public String showDelete(Task task, TaskList tasks) {
+        StringBuilder sb = new StringBuilder("Dayum, bud! Getting rid of the clutter I see!");
+        sb.append(System.getProperty("line.separator"));
+        sb.append(task);
+        sb.append(System.getProperty("line.separator"));
         if (tasks.getSize() == 2) {
-            System.out.println("Now you have " + (tasks.getSize() - 1) + " task in the list.");
+            sb.append("Bud!! You only got one task left!");
         } else {
-            System.out.println("Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
+            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append("to be exact.");
         }
+        return sb.toString();
     }
 
     /**
@@ -105,23 +112,28 @@ public class Ui {
      * @param tasks list of tasks saved
      * @throws DukeException
      */
-    public void showExit(Storage storage, TaskList tasks) throws DukeException {
+    public String showExit(Storage storage, TaskList tasks) throws DukeException {
         storage.save(tasks);
-        System.out.println("Bye. Hope to see you again soon!");
+        return "Alright, bud! I guess I'll see you around alright?" +
+                " Don't be a stranger!";
     }
 
     /**
      * shows tasks in list of tasks
      * @param tasks list of tasks
      */
-    public void showTasks(TaskList tasks) {
+    public String showTasks(TaskList tasks) {
         if(tasks.getSize() == 0) {
-            System.out.println("Now you have 0 tasks in the list.");
+            return "Buddy!! You haven't added any tasks into your list yet you cheeky monkey!";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder("Alrighty bud, Let me help you out " +
+                    "here and list your tasks out for you:");
+            sb.append(System.getProperty("line.separator"));
             for(int i = 0; i < tasks.getSize(); i++) {
-                System.out.println( Integer.toString(i + 1) + "." + tasks.get(i));
+                sb.append( Integer.toString(i + 1) + "." + tasks.get(i));
+                sb.append(System.getProperty("line.separator"));
             }
+            return sb.toString();
         }
     }
 
@@ -129,32 +141,37 @@ public class Ui {
      * shows error that occurs during program execution
      * @param errorMessage error message
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return (errorMessage);
     }
 
     /**
      * Shows user that task has been marked
      * @param task task that is to be marked
+     * @return
      */
-    public void showMark(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public String showMark(Task task) {
+        return "Way to go, bud! We can only go up from here! \n" + task;
+
     }
 
     /**
      * shows user that task has been unmarked
      * @param task task that is to be unmarked
+     * @return
      */
-    public void showUnmark(Task task) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(task);
+    public String showUnmark(Task task) {
+        return "Bud?? Were you trying to josh me when you marked it earlier? "
+                + "/n" + task;
     }
 
-    public void showFound(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list: ");
+    public String showFound(TaskList tasks) {
+        StringBuilder sb = new StringBuilder("Bud, I searched high and low and this is what I found!");
+        sb.append(System.getProperty("line.separator"));
         for(int i = 0; i < tasks.getSize(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
+            sb.append(System.getProperty("line.separator"));
         }
+        return sb.toString();
     }
 }
