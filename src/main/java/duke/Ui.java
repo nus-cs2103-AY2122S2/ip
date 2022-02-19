@@ -45,7 +45,7 @@ public class Ui {
         if (tasks.getSize() == 1) {
             sb.append("Bud, you only got one task left!");
         } else {
-            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append("to be exact.");
+            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append(" to be exact.");
         }
         return sb.toString();
     }
@@ -64,7 +64,7 @@ public class Ui {
         if (tasks.getSize() == 1) {
             sb.append("Bud, you only got one task left!");
         } else {
-            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append("to be exact.");
+            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append(" to be exact.");
         }
         return sb.toString();
     }
@@ -83,7 +83,7 @@ public class Ui {
         if (tasks.getSize() == 1) {
             sb.append("Bud, you only got one task left!");
         } else {
-            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append("to be exact.");
+            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append(" to be exact.");
         }
         return sb.toString();
     }
@@ -101,7 +101,7 @@ public class Ui {
         if (tasks.getSize() == 2) {
             sb.append("Bud!! You only got one task left!");
         } else {
-            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append("to be exact.");
+            sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append(" to be exact.");
         }
         return sb.toString();
     }
