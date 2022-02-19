@@ -47,7 +47,7 @@ public class CommandList {
         } else if (firstWord.equals("update")) { // updates a Task
             output = updateTask(list, inputs, input, storage);
         } else if (input.toLowerCase().equals("clear all")) { // removes all Tasks
-            output = clearAll(list, storage);
+            output = clearAll(storage);
         } else if (firstWord.equals("bye")) { // exits the program
             output = exit();
         } else { // print error message
@@ -284,12 +284,11 @@ public class CommandList {
     /**
      * Removes all Tasks from list.
      *
-     * @param list Arraylist of Tasks to manipulate
      * @param storage Storage object to load/store list of Tasks
      * @return String output stating that all Tasks have been removed
      */
-    public String clearAll(ArrayList<Task> list, Storage storage) {
-        list = new ArrayList<>();
+    public String clearAll(Storage storage) {
+        ArrayList<Task> list = new ArrayList<>();
         storage.store(list);
         return "Noted. All tasks have been cleared!";
     }

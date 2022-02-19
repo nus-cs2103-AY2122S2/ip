@@ -132,6 +132,8 @@ public class Duke extends Application {
      * Gets response from Duke in response to user's input.
      */
     protected String getResponse(String input) {
+        storage = new Storage();
+        list = storage.load();
         String response = commandList.execute(input, list, storage);
         assert response != "" : "Error in getting response";
 
