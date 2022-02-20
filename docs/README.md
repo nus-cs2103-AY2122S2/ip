@@ -11,7 +11,7 @@ If you can type fast, Wonka can increase your task management efficiency up by *
 3. Copy the file to the folder you want to use as the _home folder_ for your Wonka.
 4. Double-click the file to start the app. The GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.
 
-![](/docs/Ui.png)
+![](https://raw.githubusercontent.com/glennljw/ip/master/docs/Ui.png)
 
 ## Features and Usage
 
