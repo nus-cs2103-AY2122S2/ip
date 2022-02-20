@@ -1,6 +1,11 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.*;
+import duke.Deadlines;
+import duke.DukeHistory;
+import duke.DukeUi;
+import duke.Event;
+import duke.Task;
+import duke.ToDos;
 
 public class DeleteCommand extends Commands {
 
@@ -15,18 +20,17 @@ public class DeleteCommand extends Commands {
         try {
             validate();
             return execute();
-        } catch (IndexOutOfBoundsException ex1) {
-            return ui.printInvalidArgumentError();
+        } catch (NumberFormatException | IndexOutOfBoundsException ex1) {
+            return this.getUi().printInvalidArgumentError();
         }
     }
 
     @Override
     public void validate() {
-        this.index = Integer.parseInt(userInput[1]) - 1;
-        if (this.index < 0 || this.index > history.getSize() - 1) {
+        this.index = Integer.parseInt(this.getUserInput()[1]) - 1;
+        if (this.index < 0 || this.index > this.getHistory().getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
-
     }
 
     /**
@@ -38,7 +42,7 @@ public class DeleteCommand extends Commands {
     @Override
     public String execute() {
         StringBuilder description = new StringBuilder();
-        Task temp = history.deleteTask(index);
+        Task temp = this.getHistory().deleteTask(index);
         if (temp instanceof ToDos) {
             ToDos tempToDos = (ToDos) temp;
             description.append(tempToDos.getToDo());
@@ -54,7 +58,7 @@ public class DeleteCommand extends Commands {
         return "_______________________________________________________\n"
                 + "Understood, removing this task now:\n"
                 + "    " + description
-                + "Now you have " + history.getSize() + " tasks in our records.\n"
+                + "Now you have " + this.getHistory().getSize() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
     }
 }

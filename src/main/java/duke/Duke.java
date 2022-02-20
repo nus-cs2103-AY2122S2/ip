@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.MissingFormatArgumentException;
 
 /**
- * Represents the Duke class that serves as the Main program for DukeLCH.
+ * Represents the Duke class that serves to interpret and generate response for DukeLCH.
  */
 public class Duke {
 
+    private DukeContact contact;
     private DukeHistory history;
     private DukeStorage storage;
     private DukeUi ui;
@@ -15,10 +16,10 @@ public class Duke {
 
     /**
      * Constructor for Duke class that takes in a filePath to load data from the users local hard disk.
-     *
      * @param filePath A String representing a given filePath.
      */
     public Duke(String filePath) {
+        contact = new DukeContact();
         history = new DukeHistory();
         storage = new DukeStorage();
         ui = new DukeUi();
@@ -33,11 +34,11 @@ public class Duke {
     }
 
     /**
-     * Method that starts the Duke Main Program.
+     * Method that updates the latest response to a user's command.
      * @return DukeLCH's response.
      */
     public String run(String input) {
-        DukeParser parser = new DukeParser(history, storage, ui);
+        DukeParser parser = new DukeParser(contact, history, storage, ui);
         String[] tokens = input.split("\\s");
         String keyword = tokens[0];
         switch (keyword) {
@@ -79,6 +80,18 @@ public class Duke {
             response = parser.findCommand(tokens);
             break;
         }
+        case "listcontacts": {
+            response = parser.listcontactsCommand(tokens);
+            break;
+        }
+        case "addcontacts": {
+            response = parser.addcontactsCommand(tokens);
+            break;
+        }
+        case "deletecontacts": {
+            response = parser.deletecontactsCommand(tokens);
+            break;
+        }
         default:
             try {
                 throw new MissingFormatArgumentException("invalid keywords");
@@ -92,7 +105,6 @@ public class Duke {
 
     /**
      * Method that gets DukeLCH's response to the user's input.
-     *
      * @return DukeLCH's response.
      */
     public String getResponse() {

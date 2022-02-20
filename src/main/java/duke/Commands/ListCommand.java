@@ -1,4 +1,4 @@
-package duke.Commands;
+package duke.commands;
 
 import duke.DukeHistory;
 import duke.DukeUi;
@@ -23,7 +23,9 @@ public class ListCommand extends Commands {
      * Always returns true. Bye command by default is valid so long as assertion holds in Duke class.
      */
     @Override
-    public void validate() {}
+    public void validate() {
+
+    }
 
     /**
      * Generates a response to "list" command.
@@ -35,6 +37,6 @@ public class ListCommand extends Commands {
         String border = "_______________________________________________________\n";
         return border
                 + "These are your tasks that we have in our records:\n"
-                + history.printAll() + border;
+                + this.getHistory().printAll() + border;
     }
 }

@@ -3,8 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Represents a class that maintains an ArrayList records using a variety of methods, that is created
- * at the beginning of each session of Duke.
+ * Represents DukeLCH's history that can be manipulated using a variety of methods.
  */
 public class DukeHistory {
     private final ArrayList<Task> records = new ArrayList<>(100); // ArrayList of size 100 by default
@@ -15,7 +14,6 @@ public class DukeHistory {
     /**
      * A method that, when called, attempts to initialize a ToDos task using the inputted description and adds it to the
      * ArrayList records.
-     *
      * @param description A String description interpreted by Commands.todo().
      * @return Todo_task.
      */
@@ -28,10 +26,8 @@ public class DukeHistory {
     /**
      * A method that is called only when Duke attempts to load data from a pre-existing duke.txt file in the user's
      * hard drive.
-     *
      * It initializes a ToDos task using the mark and description found and adds it to
      * the current instance of ArrayList records.
-     *
      * @param mark An integer indicating whether the task is done or not.
      * @param description A String representing the description of the task.
      */
@@ -43,7 +39,7 @@ public class DukeHistory {
     /**
      * A method that, when called, attempts to initialize a Deadline task using
      * the inputted description, date and time and adds it to the ArrayList records.
-     *  @param description A String description interpreted by Commands.deadline().
+     * @param description A String description interpreted by Commands.deadline().
      * @param date A String date interpreted by Commands.convertToDukeDate().
      * @param time A String time interpreted by Commands.convertToDukeTime().
      * @return Deadline_task response.
@@ -57,10 +53,8 @@ public class DukeHistory {
     /**
      * A method that is called only when Duke attempts to load data from a pre-existing duke.txt file in the user's
      * hard drive.
-     *
      * It initializes a Deadline task using the mark, description, date and time found and
      * adds it to the current instance of ArrayList records.
-     *
      * @param mark An integer indicating whether the task is done or not
      * @param description A String representing the description of the task.
      * @param date A String representing the date of the task.
@@ -74,7 +68,7 @@ public class DukeHistory {
     /**
      * A method that, when called, attempts to initialize an Event task using
      * the inputted description, date and time and adds it to the ArrayList records.
-     *  @param description A String description interpreted by Commands.event().
+     * @param description A String description interpreted by Commands.event().
      * @param date A String date interpreted by Commands.convertToDukeDate().
      * @param time A String time interpreted by Commands.convertToDukeTime().
      * @return Event_task.
@@ -88,10 +82,8 @@ public class DukeHistory {
     /**
      * A method that is called only when Duke attempts to load data from a pre-existing duke.txt file in the user's
      * hard drive.
-     *
      * It initializes an Event task using the mark, description, date and time found
      * and adds it to the current instance of ArrayList records.
-     *
      * @param mark An integer indicating whether the task is done or not.
      * @param description A String representing the description of the task.
      * @param date A String representing the date of the task.
@@ -105,7 +97,6 @@ public class DukeHistory {
     /**
      * A method that, when called, builds a String containing all the tasks stored
      * in the current instance of ArrayList records.
-     *
      * @return A String containing all the tasks stored in the current instance of ArrayList records.
      */
     public String printAll() {
@@ -114,13 +105,13 @@ public class DukeHistory {
         for (Task nextTask : records) {
             if (nextTask instanceof ToDos) {
                 ToDos temp = (ToDos) nextTask;
-                result.append(count).append(".").append(temp.getToDo());
+                result.append(count).append(". ").append(temp.getToDo());
             } else if (nextTask instanceof Deadlines) {
                 Deadlines temp = (Deadlines) nextTask;
-                result.append(count).append(".").append(temp.getDeadline());
+                result.append(count).append(". ").append(temp.getDeadline());
             } else if (nextTask instanceof Event) {
                 Event temp = (Event) nextTask;
-                result.append(count).append(".").append(temp.getEvent());
+                result.append(count).append(". ").append(temp.getEvent());
             } else {
                 System.out.println("Error occurred while processing " + nextTask.getTask());
             }
@@ -135,7 +126,6 @@ public class DukeHistory {
 
     /**
      * Returns the task corresponding to the inputted entry index.
-     *
      * @param index An integer indicating the desired entry to return.
      * @return A Task stored in the current instance of ArrayList records.
      */
@@ -145,7 +135,6 @@ public class DukeHistory {
 
     /**
      * A method that, when called, deletes the corresponding entry index in ArrayList records.
-     *
      * @param index An integer indicating the desired entry to delete.
      * @return Delete response.
      */
@@ -155,12 +144,10 @@ public class DukeHistory {
     }
 
     /**
-     * A method called when an update request is made for Duke to
-     * update the local duke.txt file with the latest records.
-     *
+     * A method called when an update request is made for Duke to update the local duke.txt file with the
+     * latest records.
      * It will construct a String containing all the tasks in records, appropriately formatted by the getFormattedText()
      * methods of their respective class.
-     *
      * @return A String containing all the properly formatted tasks found in ArrayList records.
      */
     String formatRecords() {
@@ -184,7 +171,6 @@ public class DukeHistory {
 
     /**
      * Returns the size of the current instance of ArrayList records.
-     *
      * @return An integer representing the size of ArrayList records.
      */
     public int getSize() {
@@ -194,9 +180,7 @@ public class DukeHistory {
     /**
      * A method that, when called, looks through all the tasks in the current instance of ArrayList records
      * and find all the tasks whose description contains the inputted phrase.
-     *
      * It then returns a constructed String containing a list of all the identified tasks.
-     *
      * @param phrase A String representing the inputted phrase.
      * @return A String that contains a list of all tasks with the inputted phrase in their description.
      * @throws DukeException If no tasks is found matching the inputted phrase.

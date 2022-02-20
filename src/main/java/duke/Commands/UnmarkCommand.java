@@ -1,6 +1,12 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.*;
+import duke.Deadlines;
+import duke.DukeException;
+import duke.DukeHistory;
+import duke.DukeUi;
+import duke.Event;
+import duke.Task;
+import duke.ToDos;
 
 public class UnmarkCommand extends Commands {
 
@@ -16,16 +22,16 @@ public class UnmarkCommand extends Commands {
             validate();
             return execute();
         } catch (NumberFormatException | IndexOutOfBoundsException ex1) {
-            return ui.printInvalidArgumentError();
+            return this.getUi().printInvalidArgumentError();
         } catch (DukeException ex2) {
-            return ui.printFailedAccess();
+            return this.getUi().printFailedAccess();
         }
     }
 
     @Override
     public void validate() throws IndexOutOfBoundsException {
-        this.index = Integer.parseInt(userInput[1]) - 1;
-        if (this.index < 0 || this.index > history.getSize() - 1) {
+        this.index = Integer.parseInt(this.getUserInput()[1]) - 1;
+        if (this.index < 0 || this.index > this.getHistory().getSize() - 1) {
             throw new IndexOutOfBoundsException();
         }
     }
@@ -38,7 +44,7 @@ public class UnmarkCommand extends Commands {
      */
     @Override
     public String execute() throws DukeException {
-        history.getTask(index).isUnmarked();
+        this.getHistory().getTask(index).isUnmarked();
         StringBuilder tasking = accessHistory();
         return "_______________________________________________________\n"
                 + "A reminder that the following task has not been done:\n"
@@ -47,8 +53,13 @@ public class UnmarkCommand extends Commands {
 
     }
 
+    /**
+     * Method that searches an instance of Duke History for a specific entry and unmarks it.
+     * @return A confirmation response on success or the relevant error response.
+     * @throws DukeException
+     */
     public StringBuilder accessHistory() throws DukeException {
-        Task currTask = history.getTask(this.index);
+        Task currTask = this.getHistory().getTask(this.index);
         if (currTask instanceof ToDos) {
             ToDos temp = (ToDos) currTask;
             return new StringBuilder(temp.getToDo());
