@@ -1,6 +1,6 @@
 # Dooke
 
-This is the chatbot of your dreams. 
+This is the chatbot to take care of everything.
    ```
    Hello from
    

@@ -90,6 +90,9 @@ public class InputHandler {
         case UNKNOWN :
             handleUnknown(outputFormatter);
             break;
+        case HELP :
+            handleHelp(outputFormatter);
+            break;
         default :
             break;
         }
@@ -281,6 +284,25 @@ public class InputHandler {
         } catch (InvalidDeleteIndexException | NoTaskToDeleteException e) {
             outputFormatter.append(e.getMessage());
         }
+    }
+
+    /**
+     * Handles the help command.
+     *
+     * @param outputFormatter The output formatter used to produce desired output.
+     */
+    private void handleHelp(OutputFormatter outputFormatter) {
+        outputFormatter.appendAll("Here's a list of all the commands I can understand:\n\n",
+                "FOR HELP - help \n\n",
+                "ADD TODO - todo <description> \n\n",
+                "ADD DEADLINE - deadline <description> /by <yyyy-mm-dd> \n\n",
+                "ADD EVENT - event <description> /at <yyyy-mm-dd> \n\n",
+                "MARK TASK DONE - mark <task-number-to-be-marked-for-completion> \n\n",
+                "UNMARK TASK DONE - unmark <task-number-to-be-marked-for-pending> \n\n",
+                "DELETE TASK - delete <task-number-to-be-deleted> \n\n",
+                "LIST TASKS - list \n\n",
+                "FIND CONTENT - find <content-to-be-searched-for> \n\n",
+                "EXIT - bye \n\n");
     }
 
     /**

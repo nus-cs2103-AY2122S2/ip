@@ -15,6 +15,7 @@ public class InputIdentifier {
     private static final String TODO_COMMAND = "todo";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
+    private static final String HELP_COMMAND = "help";
     private static final String BYE_COMMAND = "bye";
 
     /**
@@ -42,6 +43,8 @@ public class InputIdentifier {
             return InputType.DELETE;
         } else if (inputData.toLowerCase().trim().equalsIgnoreCase(BYE_COMMAND)) {
             return InputType.BYE;
+        } else if (inputData.toLowerCase().trim().equalsIgnoreCase(HELP_COMMAND)) {
+            return InputType.HELP;
         } else {
             return InputType.UNKNOWN;
         }

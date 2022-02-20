@@ -7,5 +7,5 @@ package dooke.core;
  * @version 0.2
  */
 public enum InputType {
-    LIST, UNKNOWN, MARK, UNMARK, EVENT, DEADLINE, TODO, DELETE, FIND, BYE;
+    LIST, UNKNOWN, MARK, UNMARK, EVENT, DEADLINE, TODO, DELETE, FIND, HELP, BYE;
 }
