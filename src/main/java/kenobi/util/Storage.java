@@ -1,16 +1,14 @@
 package kenobi.util;
 
-import kenobi.task.Deadline;
-import kenobi.task.Event;
+import kenobi.parser.ParseException;
+import kenobi.parser.Parser;
 import kenobi.task.Task;
 import kenobi.task.TaskException;
-import kenobi.task.ToDo;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -19,6 +17,7 @@ import java.util.Scanner;
 public class Storage {
     private boolean isDirty;
     private Path savePath;
+    private String loadMsg;
 
     /**
      * Constructs a new Storage with the specified save path.
@@ -45,28 +44,17 @@ public class Storage {
         try {
             Scanner fileScanner = new Scanner(savePath);
             while (fileScanner.hasNextLine()) {
-                String[] taskString = fileScanner.nextLine().split(",.,");
+                Task nextTask = Parser.parseTask(fileScanner.nextLine());
 
-                Task t;
-                if (taskString[0].equals("T")) {
-                    t = new ToDo(taskString[2]);
-                } else if (taskString[0].equals("D")) {
-                    t = new Deadline(taskString[2], LocalDate.parse(taskString[3]));
-                } else { // "E"
-                    t = new Event(taskString[2], LocalDate.parse(taskString[3]));
-                }
-
-                if (taskString[1].equals("1")) {
-                    t.markAsDone();
-                }
-
-                tasks.add(t);
+                tasks.add(nextTask);
             }
         } catch (IOException e) {
-            System.out.println("WARNING: Kenobi could not load the save files");
+            loadMsg = e.getMessage();
         } catch (TaskException e) {
-            System.out.println("WARNING: The save files may have been corrupted");
+            loadMsg = e.getMessage();
             tasks.clear();
+        } catch (ParseException e) {
+            loadMsg = e.getMessage();
         }
 
         return tasks;
