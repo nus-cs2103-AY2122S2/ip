@@ -235,10 +235,38 @@ public class TaskList {
 
     /**
      * Clears all tasks in taskList.
+     *
+     * @return responding messages.
      */
     public String clear() {
         tasks.clear();
         return "You now have no task listed.";
+    }
+
+    /**
+     * Provides user guide.
+     *
+     * @return responding messages.
+     */
+    public String help() {
+        return "# User Guide\n"
+                + "`list`: Lists all the tasks.\n"
+                + "`todo <description>`: Adds a todo task.\n"
+                + "`deadline <description> /by yyyy-mm-dd`: Adds a task with a deadline.\n"
+                + "`event <description> /at <time>`: Adds a task with a time period.\n"
+                + "`mark <index>`: Marks a task as completed by index.\n"
+                + "`unmark <index>`: Marks a task as uncompleted by index.\n"
+                + "`delete <index>`: Deletes a task by index.\n"
+                + "`find <keyword>`: Finds tasks that match with the keyword given.\n"
+                + "`duplicate`: Finds duplicate tasks.\n"
+                + "`save`: Saves all changes.\n"
+                + "`clear`: Clears all tasks."
+
+                + "* Duke does not save automatically. Please `save` frequently to avoid loss of information.\n"
+                + "* Tasks are listed in the format of\n"
+                + "  `[task type][completed] task description (time)`.\n"
+                + "  - task type: `T` - `todo`; `D` - `deadline`; `E` - `event`.\n"
+                + "  - completed: `X` - completed; ` ` - uncompleted.";
     }
 
     @Override

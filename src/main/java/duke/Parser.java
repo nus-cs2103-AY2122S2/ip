@@ -43,6 +43,8 @@ public class Parser {
                 return taskList.duplicates();
             } else if (command.startsWith("clear")) {
                 return taskList.clear();
+            } else if (command.startsWith("help")) {
+                return taskList.help();
             } else if (command.startsWith("save")) {
                 return storage.writeFrom(taskList);
             } else {
