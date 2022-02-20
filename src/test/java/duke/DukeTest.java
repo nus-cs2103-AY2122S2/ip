@@ -21,8 +21,10 @@ import org.junit.jupiter.api.Test;
 public class DukeTest {
 
     private static DukeStorage dummyStorage = new DukeStorage();
+    private DukeContact dummyContact = new DukeContact();
     private DukeHistory dummyHistory = new DukeHistory();
-    private Commands dummyCmd = new Commands();
+    private DukeUi dummyUi = new DukeUi();
+    private DukeParser dummyParser = new DukeParser(dummyContact, dummyHistory, dummyStorage, dummyUi);
 
     @BeforeAll
     public static void setUp() {
@@ -66,9 +68,11 @@ public class DukeTest {
     @Test
     public void markAndUnMark_editCreatedFile_dataChanged() {
         try {
+            String[] markCall = {"mark", "1"};
+            String[] unmarkCall = {"unmark", "2"};
             dummyStorage.restore(dummyHistory);
-            dummyCmd.mark(0, dummyHistory);
-            dummyCmd.unmark(1, dummyHistory);
+            dummyParser.markCommand(markCall);
+            dummyParser.unmarkCommand(unmarkCall);
             dummyStorage.update(dummyHistory);
             Path dummyFilePath = Paths.get(dummyStorage.getFilePath());
             String entry1 = Files.readAllLines(dummyFilePath).get(0);
