@@ -65,6 +65,8 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
+        assert input != emptyString;
+
         String response = dooke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

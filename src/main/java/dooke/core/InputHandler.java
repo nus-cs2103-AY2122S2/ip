@@ -358,6 +358,7 @@ public class InputHandler {
         File file = new File(filePath);
         boolean hasCreatedDirectory = file.getParentFile().mkdirs();
         boolean hasCreatedFile = file.createNewFile();
+        assert file.exists();
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         writer.flush();
         writer.write(this.taskList.exportFileOutput());
