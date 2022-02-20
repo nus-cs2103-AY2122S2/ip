@@ -3,7 +3,6 @@ package saitama.ui;
 import java.util.Objects;
 
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -76,7 +75,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (response.equals(new Ui().showExit())) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
-            delay.setOnFinished(event -> Platform.exit());
+            delay.setOnFinished(event -> System.exit(0));
             delay.play();
         }
     }
