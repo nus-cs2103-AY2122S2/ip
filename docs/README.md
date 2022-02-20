@@ -40,7 +40,7 @@ Example:
 
 ### Marking a task as incomplete: `unmark`
 Marks a task from the existing task list as incomplete.  
-Format: `unmark TASK_NUMBER`  
+Format: `unmark TASK_NUMBER [MORE_TASK_NUMBERS]`  
 Example: 
 - `unmark 2` marks the 2nd task in the task list as incomplete
 - `unmark 1 2 5` marks the 1st, 2nd and 5th tasks in the task list as incomplete
