@@ -114,7 +114,7 @@ public class DateTimeHandler {
             throw new JukeParseException(DATE_TIME_PARSE_ERROR_MESSAGE);
         }
         try {
-            this.dateTime = LocalDateTime.parse(string, inputFormatter);
+            dateTime = LocalDateTime.parse(string, inputFormatter);
         } catch (DateTimeParseException e) {
             throw new JukeParseException(DATE_TIME_PARSE_ERROR_MESSAGE);
         }

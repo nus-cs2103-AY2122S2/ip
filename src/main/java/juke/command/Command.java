@@ -14,7 +14,7 @@ public abstract class Command {
     /**
      * String key for the first argument in a command.
      */
-    protected static final String DEFAULT_PARAMETER = "";
+    public static final String DEFAULT_PARAMETER = "";
 
     /**
      * Message for the missing default argument exception.
@@ -140,6 +140,15 @@ public abstract class Command {
      */
     protected void setErroneousResult(Exception e) {
         result = Result.error(e);
+    }
+
+    /**
+     * Sets the result to an success with a given message or messages.
+     *
+     * @param messages Messages.
+     */
+    protected void setSuccessfulResult(String... messages) {
+        result = Result.success(messages);
     }
 
     /**

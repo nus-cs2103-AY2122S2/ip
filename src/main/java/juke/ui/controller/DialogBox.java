@@ -17,7 +17,6 @@ import javafx.scene.layout.HBox;
  * Dialog box controller for JavaFX.
  */
 public class DialogBox extends HBox {
-
     @FXML
     private Label text;
     @FXML

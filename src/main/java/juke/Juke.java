@@ -62,6 +62,7 @@ public class Juke extends Application {
     @Override
     public void start(Stage stage) {
         Platform.setImplicitExit(true);
+        INSTANCE.getStorage().loadTasks();
         gui.initializeUiComponents(stage);
     }
 

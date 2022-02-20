@@ -45,7 +45,7 @@ public class Deadline extends TimeTask {
      */
     @Override
     public String toString() {
-        return super.toString() + " (by: " + this.getTime() + ")";
+        return super.toString() + " (by: " + getTime() + ")";
     }
 
     /**

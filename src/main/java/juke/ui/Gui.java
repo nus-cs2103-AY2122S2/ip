@@ -12,7 +12,6 @@ import juke.ui.controller.MainWindow;
  * Manages the graphical user interface using JavaFX.
  */
 public class Gui {
-
     private Scene scene;
     private MainWindow mainWindow;
 
@@ -23,11 +22,11 @@ public class Gui {
      */
     public void initializeUiComponents(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainWindow.fxml"));
-            this.mainWindow = fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
+            mainWindow = fxmlLoader.load();
             fxmlLoader.<MainWindow>getController().setGui(this);
 
-            this.scene = new Scene(mainWindow);
+            scene = new Scene(mainWindow);
 
             stage.setScene(scene);
             stage.show();
@@ -47,11 +46,12 @@ public class Gui {
     }
 
     /**
-     * Prints the message associated with a success, or the error message otherwise.
+     * Returns the message associated with a success, or the error message otherwise.
      *
      * @param result Result of a command execution.
+     * @return Message.
      */
-    public String displayResult(Result result) {
+    public String getResultMessage(Result result) {
         try {
             String[] string = result.getOrThrow();
             return String.join(System.lineSeparator(), string);

@@ -27,32 +27,41 @@ public class MainWindow extends AnchorPane {
 
     private Gui gui;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image jukeImage = new Image(this.getClass().getResourceAsStream("/images/Juke.png"));
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/User.png"));
+    private Image jukeImage = new Image(getClass().getResourceAsStream("/images/Juke.png"));
 
     @FXML
     public void initialize() {
-        this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the GUI instance.
+     *
+     * @param gui GUI Instance.
+     */
     public void setGui(Gui gui) {
         this.gui = gui;
     }
 
     @FXML
     private void handleUserInput() {
-        String input = this.userInput.getText();
-        this.dialogContainer.getChildren().add(
-            DialogBox.getUserDialog(input, this.userImage));
+        String input = userInput.getText();
+        Command cmd = null;
         try {
-            Command cmd = CommandHandler.fetchCommand(input);
-            CommandHandler.execute(cmd);
-            this.dialogContainer.getChildren().add(
-                DialogBox.getJukeDialog(this.gui.displayResult(CommandHandler.fetchResult(cmd)), this.jukeImage));
+            cmd = CommandHandler.fetchCommand(input);
         } catch (JukeInvalidCommandException e) {
-            this.dialogContainer.getChildren().add(
-                DialogBox.getJukeDialog(e.getMessage(), this.jukeImage));
+            dialogContainer.getChildren().add(
+                DialogBox.getJukeDialog(e.getMessage(), jukeImage));
         }
+        CommandHandler.execute(cmd);
+        if (CommandHandler.isCommandNull(cmd)) {
+            return;
+        }
+        dialogContainer.getChildren()
+                .add(DialogBox.getUserDialog(input, userImage));
+        dialogContainer.getChildren()
+                .add(DialogBox.getJukeDialog(gui.getResultMessage(CommandHandler.fetchResult(cmd)), jukeImage));
         this.userInput.clear();
     }
 
@@ -62,7 +71,7 @@ public class MainWindow extends AnchorPane {
      * @param text Message to send.
      */
     public void addJukeDialog(String text) {
-        this.dialogContainer.getChildren().add(
-            DialogBox.getJukeDialog(gui.getResponse(text), this.jukeImage));
+        dialogContainer.getChildren().add(
+            DialogBox.getJukeDialog(gui.getResponse(text), jukeImage));
     }
 }

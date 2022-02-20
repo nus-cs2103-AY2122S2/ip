@@ -37,7 +37,7 @@ public abstract class TimeTask extends Task {
     }
 
     /**
-     * Get the time.
+     * Gets the time.
      *
      * @return Time.
      */
@@ -47,7 +47,7 @@ public abstract class TimeTask extends Task {
     }
 
     /**
-     * Set the time.
+     * Sets the time.
      *
      * @param time Time.
      * @throws JukeParseException Throws if parse error.

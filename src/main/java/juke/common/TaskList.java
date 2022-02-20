@@ -50,13 +50,10 @@ public class TaskList implements Iterable<Task> {
      *
      * @param index Index to remove.
      * @return Task at the index.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
      */
-    public Task remove(int index) {
-        try {
-            return taskList.remove(index);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
+    public Task remove(int index) throws IndexOutOfBoundsException {
+        return taskList.remove(index);
     }
 
     /**
@@ -65,13 +62,10 @@ public class TaskList implements Iterable<Task> {
      *
      * @param index Index to return.
      * @return Task at the index.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
      */
-    public Task get(int index) {
-        try {
-            return taskList.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
+    public Task get(int index) throws IndexOutOfBoundsException {
+        return taskList.get(index);
     }
 
     /**
@@ -105,15 +99,10 @@ public class TaskList implements Iterable<Task> {
      * Returns false if the index is invalid.
      *
      * @param index Index to return.
-     * @return Boolean.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
      */
-    public boolean markTask(int index) {
-        try {
-            taskList.get(index).markAsDone();
-            return true;
-        } catch (IndexOutOfBoundsException e) {
-            return false;
-        }
+    public void markTask(int index) throws IndexOutOfBoundsException {
+        taskList.get(index).markAsDone();
     }
 
     /**
@@ -121,15 +110,10 @@ public class TaskList implements Iterable<Task> {
      * Returns false if the index is invalid.
      *
      * @param index Index to return.
-     * @return Boolean.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
      */
-    public boolean unmarkTask(int index) {
-        try {
-            taskList.get(index).markAsNotDone();
-            return true;
-        } catch (IndexOutOfBoundsException e) {
-            return false;
-        }
+    public void unmarkTask(int index) throws IndexOutOfBoundsException {
+        taskList.get(index).markAsNotDone();
     }
 
     /**

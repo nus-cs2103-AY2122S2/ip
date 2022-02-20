@@ -9,6 +9,8 @@ import juke.task.TaskStatus;
  * Command to mark or unmark a task.
  */
 public class MarkCommand extends Command {
+    private static final String SUCCESS_MESSAGE = "Marked task \'%s\' as done.";
+
     /**
      * The type of status to change the task to.
      */
@@ -31,17 +33,30 @@ public class MarkCommand extends Command {
      */
     @Override
     public Command checkParametersAndArguments() {
-        for (String param : this.paramArgs.keySet()) {
-            if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeInvalidParameterException(param));
-                return this;
-            }
+        if (hasUnnecessaryParameters()) {
+            return this;
         }
         if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeMissingArgumentException(this.status.getCommandName()));
+            setErroneousResult(new JukeMissingArgumentException(status.getCommandName()));
             return this;
         }
         return this;
+    }
+
+    /**
+     * Returns if there are unnecessary parameters.
+     *
+     * @return Boolean result.
+     */
+    private boolean hasUnnecessaryParameters() {
+        for (String param : paramArgs.keySet()) {
+            if (isDefaultParameter(param)) {
+                continue;
+            }
+            setErroneousResult(new JukeInvalidParameterException(param));
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -59,35 +74,39 @@ public class MarkCommand extends Command {
         if (this.isErroneous()) {
             return this;
         }
+        assert isEmpty();
         try {
-            int index = Integer.parseInt(this.getDefaultArgument()) - 1;
-            switch (this.status) {
-            case DONE:
-                if (this.juke.getTaskList().markTask(index)) {
-                    this.result = Result.success(String.format("Marked task \'%s\' as done.",
-                        this.juke.getTaskList().get(index).getDescription()));
-                } else {
-                    this.result = Result.error(new JukeInvalidTaskIndexException());
-                    return this;
-                }
-                break;
-            case NOT_DONE:
-                if (this.juke.getTaskList().unmarkTask(index)) {
-                    this.result = Result.success(String.format("Marked task \'%s\' as done.",
-                        this.juke.getTaskList().get(index).getDescription()));
-                } else {
-                    this.result = Result.error(new JukeInvalidTaskIndexException());
-                    return this;
-                }
-                break;
-            default:
-            }
+            markTask();
         } catch (NumberFormatException e) {
-            this.result = Result.error(e);
+            setErroneousResult(e);
+            return this;
+        } catch (IndexOutOfBoundsException e) {
+            setErroneousResult(new JukeInvalidTaskIndexException());
             return this;
         }
-        this.juke.getStorage().saveTasks();
+        juke.getStorage().saveTasks();
         return this;
+    }
+
+    /**
+     * Marks or unmarks the task as done.
+     *
+     * @throws NumberFormatException Throws if cannot parse to integer.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
+     */
+    private void markTask() throws NumberFormatException, IndexOutOfBoundsException {
+        int index = Integer.parseInt(getDefaultArgument()) - 1;
+        switch (status) {
+        case DONE:
+            juke.getTaskList().markTask(index);
+            break;
+        case NOT_DONE:
+            juke.getTaskList().unmarkTask(index);
+            break;
+        default:
+        }
+        setSuccessfulResult(String.format(SUCCESS_MESSAGE,
+            juke.getTaskList().get(index).getDescription()));
     }
 
     /**

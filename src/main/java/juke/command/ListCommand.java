@@ -16,17 +16,30 @@ public class ListCommand extends Command {
      */
     @Override
     public Command checkParametersAndArguments() {
-        for (String param : this.paramArgs.keySet()) {
-            if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeInvalidParameterException(param));
-                return this;
-            }
+        if (hasUnnecessaryParameters()) {
+            return this;
         }
-        if (this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeException("Default argument not needed."));
+        if (hasDefaultArgument()) {
+            setErroneousResult(new JukeException("Default argument not needed."));
             return this;
         }
         return this;
+    }
+
+    /**
+     * Returns if there are unnecessary parameters.
+     *
+     * @return Boolean result.
+     */
+    private boolean hasUnnecessaryParameters() {
+        for (String param : paramArgs.keySet()) {
+            if (isDefaultParameter(param)) {
+                continue;
+            }
+            setErroneousResult(new JukeInvalidParameterException(param));
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -37,18 +50,19 @@ public class ListCommand extends Command {
      */
     @Override
     public Command execute() {
-        if (this.isSuccessful()) {
+        if (isSuccessful()) {
             return this;
         }
-        this.checkParametersAndArguments();
-        if (this.isErroneous()) {
+        checkParametersAndArguments();
+        if (isErroneous()) {
             return this;
         }
+        assert isEmpty();
         try {
-            String[] strs = this.juke.getTaskList().list();
-            this.result = Result.success(strs);
+            String[] strs = juke.getTaskList().list();
+            setSuccessfulResult(strs);
         } catch (JukeEmptyTaskListException e) {
-            this.result = Result.error(e);
+            setErroneousResult(e);
             return this;
         }
         return this;
