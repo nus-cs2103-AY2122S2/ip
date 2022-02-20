@@ -10,6 +10,7 @@ public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = "Yes Master, I have removed this task:\n" + "\t    %s\n"
             + "\tYou have %d task(s) currently";
+    private static final String EMPTY_MESSAGE = "Sorry Master, the item you chose is not in the list";
 
     private int indexToDelete;
 
@@ -20,7 +21,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute() {
         if (indexToDelete < 0 || indexToDelete >= taskList.getSize()) {
-            return "Sorry Master, the item you chose is not in the list";
+            return EMPTY_MESSAGE;
         }
 
         Task task = taskList.getTask(indexToDelete);

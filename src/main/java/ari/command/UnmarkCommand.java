@@ -7,6 +7,7 @@ public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
     private static final String UNMARK_MESSAGE = "Yes Master, I have marked this task as not done yet:\n    %s";
+    private static final String EMPTY_MESSAGE = "Sorry Master, the item you chose is not in the list";
 
     private int indexToUnmark;
 
@@ -17,7 +18,7 @@ public class UnmarkCommand extends Command {
     @Override
     public String execute() {
         if (indexToUnmark < 0 || indexToUnmark >= taskList.getSize()) {
-            return "Sorry Master, the item you chose is not in the list";
+            return EMPTY_MESSAGE;
         }
 
         taskList.unmarkTask(indexToUnmark);

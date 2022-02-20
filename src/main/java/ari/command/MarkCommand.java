@@ -7,6 +7,7 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     private static final String MARK_MESSAGE = "Yes Master, I have marked this task as done:\n    %s";
+    private static final String EMPTY_MESSAGE = "Sorry Master, the item you chose is not in the list";
 
     private int indexToMark;
 
@@ -17,7 +18,7 @@ public class MarkCommand extends Command {
     @Override
     public String execute() {
         if (indexToMark < 0 || indexToMark >= taskList.getSize()) {
-            return "Sorry Master, the item you chose is not in the list";
+            return EMPTY_MESSAGE;
         }
 
         taskList.markTask(indexToMark);

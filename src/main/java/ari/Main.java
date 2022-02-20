@@ -14,15 +14,19 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Ari ari = new Ari("data/ari.txt");
+    private static final String FILE_PATH = "data/ari.txt";
+    private static final String PROGRAM_NAME = "Ari";
+    private static final String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
+
+    private Ari ari = new Ari(FILE_PATH);
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(MAIN_WINDOW_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setTitle("Ari");
+            stage.setTitle(PROGRAM_NAME);
             stage.setResizable(false);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setAri(ari);
