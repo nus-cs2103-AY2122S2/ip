@@ -28,6 +28,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox
+                .getDukeDialog("_______________________________________________________\n"
+                        + " ____         _           _     ____ _   _ \n"
+                        + "|  _ \\ _   _| | _____   | |  /  ___| | | |\n"
+                        + "| | | |  | | | |/ / _ \\ | | |  |   | |_| |\n"
+                        + "| |_| |  |_| |  <   __/  | |_|  |___|  _  |\n"
+                        + "|____/ \\__,_|_|\\_\\___||___|\\____|_| |_|\n"
+                        + "Hello! I'm DukeLCH\n"
+                        + "How can I be of service?\n" //Simple Greet
+                        + "_______________________________________________________\n", dukeImage));
     }
 
     public void setDuke(Duke d) {
