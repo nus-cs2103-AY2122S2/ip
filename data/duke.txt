@@ -1,5 +1,6 @@
-[T][ ] submit CS2103T ip
-2022-12-12 [D][ ] read book (by: 12 Dec 2022)
-2022-02-21 [D][ ] CS2103T (by: 21 Feb 2022)
-2022-02-20 [E][ ] movie (at: 20 Feb 2022)
+[T][ ] return book
+2022-02-21 [D][ ] submit ip (by: 21 Feb 2022)
+2022-02-28 [E][X] meeting (at: 28 Feb 2022)
+[T][ ] homework
 [T][X] read book
+2022-02-20 [E][X] movie (at: 20 Feb 2022)

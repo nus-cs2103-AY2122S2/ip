@@ -230,15 +230,12 @@ public class TaskList {
      * @throws DukeException
      */
     private static String[] stripDescription(String s) throws DukeException {
-
         ArrayList<String> arr = new ArrayList<>(Arrays.asList(s.split(" ")));
         if (arr.contains("/at")) {
             int i = arr.indexOf("/at");
             String str1 = String.join(" ", arr.subList(1, i));
             String str2 = String.join(" ", arr.subList(i + 1, arr.size()));
             String[] str = new String[2];
-
-
 
             str[0] = str1;
             str[1] = str2;
