@@ -40,7 +40,6 @@ public class Ui {
             String currTask = tasks.get(i).toString();
             System.out.println("     " + (i + 1) + "." + currTask);
         }
-
     }
 
     public void showMarkTask(Task task) {

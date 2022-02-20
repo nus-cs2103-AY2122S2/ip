@@ -1,7 +1,5 @@
 package siri;
 
-import java.io.IOException;
-
 //DeleteCommand.java reused from Brigette Santoso E0564307
 /**
  * Handles the deletion of a task from the list

@@ -24,11 +24,13 @@ public class AddDeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         Task task;
+
         if (date == null) {
             task = new Deadline(description, "D", deadline);
         } else {
             task = new Deadline(description, "D", date);
         }
+
         tasks.addTask(task);
         ui.showAddTask(task, tasks.getTasks());
         storage.save(tasks.getTasks());

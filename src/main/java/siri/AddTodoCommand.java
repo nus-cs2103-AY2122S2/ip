@@ -1,7 +1,5 @@
 package siri;
 
-import java.io.IOException;
-
 //AddTodoCommand.java reused from Brigette Santoso E0564307
 /**
  * Handles the creation and adding of todo tasks into list

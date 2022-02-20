@@ -25,16 +25,11 @@ public class Deadline extends Task {
         this.date = date;
     }
 
-    //reused from Brigette Santoso E0564307 Level-8 source code
-    public Deadline(String description, String initialLetter, LocalDateTime dateTime) {
-        super(description, initialLetter);
-        this.deadline = dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm:ss"));
-        this.dateTime = dateTime;
-    }
-
     @Override
     public String toString() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + this.deadline + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] "
+                + this.description
+                + " (by: " + this.deadline + ")";
     }
 
 }

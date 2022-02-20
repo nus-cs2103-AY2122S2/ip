@@ -23,12 +23,13 @@ public class AddEventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         Task task;
+
         if (date == null) {
             task = new Event(description, "E", eventDate);
-        }
-        else {
+        } else {
             task = new Event(description, "E", date);
         }
+
         tasks.addTask(task);
         ui.showAddTask(task, tasks.getTasks());
         storage.save(tasks.getTasks());

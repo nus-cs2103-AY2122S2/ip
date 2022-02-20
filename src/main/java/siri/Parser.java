@@ -14,7 +14,7 @@ public class Parser {
         int lengthOfFullCommand = fullCommand.length();
         int lengthOfFirstWord = firstWordOfCommand.length();
 
-        if (firstWordOfCommand.length() == 0 || isNotValidCommand(firstWordOfCommand)) {
+        if (firstWordOfCommand.length() == 0 || !isValidCommand(firstWordOfCommand)) {
             throw new InvalidInputException("Please enter a valid task with a description.");
         } else if (lengthOfFirstWord == lengthOfFullCommand) {
             switch (firstWordOfCommand) {
@@ -63,8 +63,7 @@ public class Parser {
     public static boolean isDate(String s) {
         try {
             LocalDate.parse(s);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
         return true;
@@ -85,11 +84,10 @@ public class Parser {
         return command.substring(index, lastIndexOfCommand).trim(); //Extract first word.
     }
 
-    //isNotValidCommand reused from Tan De Shao
-    public static boolean isNotValidCommand(String command) {
-        return (!command.equals("bye") && !command.equals("list")
-                && !command.equals("delete")  && !command.equals("mark") && !command.equals("unmark")
-                && !command.equals("todo") && !command.equals("deadline") && !command.equals("event"));
+    public static boolean isValidCommand(String command) {
+        return (command.equals("bye") || command.equals("list") || command.equals("find")
+                || command.equals("delete") || command.equals("mark") || command.equals("unmark")
+                || command.equals("todo") || command.equals("deadline") || command.equals("event"));
     }
 
 }

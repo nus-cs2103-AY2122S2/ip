@@ -23,34 +23,44 @@ public class Storage {
     public ArrayList<Task> load() throws InvalidInputException {
         try {
             File file = new File(filePath);
+
             if (file.exists()) {
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String taskDetails;
                 ArrayList<Task> tasks = new ArrayList<>();
+
                 while ((taskDetails = br.readLine()) != null) {
                     Task task;
                     String[] taskDetailsArr  = taskDetails.split("\\s\\|\\s");
                     String taskInitials = taskDetailsArr[0];
                     String taskDescription = taskDetailsArr[1];
-                    if (taskInitials.equals("T")) {
+
+                    switch (taskInitials) {
+                    case "T":
                         task = new Todo(taskDescription, taskInitials);
-                    } else if (taskInitials.equals("D")) {
+                        break;
+                    case "D": {
                         String taskDate = taskDetailsArr[2];
                         task = new Deadline(taskDescription, taskInitials, taskDate);
-                    } else if (taskInitials.equals("E")) {
+                        break;
+                    }
+                    case "E": {
                         String taskDate = taskDetailsArr[2];
                         task = new Event(taskDescription, taskInitials, taskDate);
-                    } else {
+                        break;
+                    }
+                    default:
                         throw new InvalidInputException("Please enter a valid task type with description.");
                     }
                     tasks.add(task);
                 }
                 return tasks;
+
             } else {
                 return new ArrayList<Task>();
             }
-        }
-        catch (IOException e) {
+
+        } catch (IOException e) {
             throw new InvalidInputException(e.getMessage());
         }
     }
@@ -60,7 +70,9 @@ public class Storage {
             File file = new File("./data/siri.txt");
             file.getParentFile().mkdirs();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+
             for (Task task: tasks) {
+
                 String taskInitials = task.initialLetter;
                 if (taskInitials.equals("T")) {
                     String taskDescription = task.description;
@@ -79,8 +91,8 @@ public class Storage {
                 }
             }
             bw.close();
-        }
-        catch (IOException e) {
+
+        } catch (IOException e) {
             throw new InvalidInputException(e.getMessage());
         }
     }
