@@ -94,6 +94,7 @@ public class MainWindow extends AnchorPane {
                     ex.printStackTrace();
                 }
                 Platform.exit();
+                System.exit(0);
             }).start();
         }
     }
