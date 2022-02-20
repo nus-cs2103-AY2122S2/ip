@@ -104,3 +104,9 @@ Update both task description and date
 
 Example:
 - `update 3 study for quiz /date 2022-05-01`
+
+### Exit
+Terminates Duke <br/>
+
+Format:
+- `bye`
