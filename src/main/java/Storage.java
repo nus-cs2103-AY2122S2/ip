@@ -30,6 +30,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("An error occurred.");
         }
+
     }
 
     /**
@@ -56,7 +57,7 @@ public class Storage {
     public duke.TaskList load() {
         duke.TaskList tasks = new duke.TaskList();
 
-        try {
+        /*try {
             FileReader fr = new FileReader(this.filePath);
             BufferedReader br = new BufferedReader(fr);
             String currLine;
@@ -90,6 +91,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("An error occurred.");
         }
+         */
         return tasks;
     }
 

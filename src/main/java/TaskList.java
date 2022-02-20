@@ -90,10 +90,12 @@ public class TaskList {
     /**
      * prints all the tasks in the list
      */
-    public void print() {
+    public String print() {
+        String output = "";
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println(i + 1 + ". " + this.taskList.get(i));
+            output += (i + 1 + ". " + this.taskList.get(i)) + System.lineSeparator();
         }
+        return output;
     }
 }
 

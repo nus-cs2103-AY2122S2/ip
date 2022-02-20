@@ -2,7 +2,6 @@ package duke;
 
 import java.util.Objects;
 import java.util.Scanner;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 
 /**
@@ -32,8 +32,10 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/bulbasaur.png")));
-    private Image duke = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/pikachu.png")));
+    private Image user = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/bulbasaur.png")));
+    private Image duke = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/pikachu.png")));
 
     /**
      * Initializes Duke.
@@ -78,7 +80,10 @@ public class Duke extends Application {
 
         while (sc.hasNextLine()) {
             String values = sc.nextLine();
-            tasks = parser.parse(ui, tasks, values);
+            Pair<duke.TaskList, String> pair = parser.parse(ui, tasks, values);
+            tasks = pair.getKey();
+            String output = pair.getValue();
+            System.out.println(output);
             if (values.equals("bye")) {
                 return;
             }
@@ -203,7 +208,16 @@ public class Duke extends Application {
      * @return String to represent pikachu's echo of the user input.
      */
     public String getResponse(String input) {
-        return "Pikachu heard you say: " + input;
+        Pair<duke.TaskList , String> pair = parser.parse(ui, tasks, input);
+        tasks = pair.getKey();
+        String output = pair.getValue();
+        System.out.println(output);
+        if (input.equals("bye")) {
+            return "BYEBYE PIKACHU WILL MISS U";
+        }
+
+        storage.save(tasks);
+        return "Pikachu heard you say: "+input+ System.lineSeparator() + output;
     }
 
 
