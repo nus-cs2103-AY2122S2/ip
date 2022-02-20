@@ -13,7 +13,8 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private static final String APP_PATH = "/test";
+    private static final String APP_TITLE = "Duke";
+    private static final String APP_PATH = "/data";
 
     private final Duke duke;
 
@@ -33,7 +34,7 @@ public class Main extends Application {
             final FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             final AnchorPane ap = fxmlLoader.load();
             final Scene scene = new Scene(ap);
-            stage.setTitle("Duke");
+            stage.setTitle(Main.APP_TITLE);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(this.duke);
             stage.show();
