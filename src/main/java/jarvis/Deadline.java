@@ -24,6 +24,10 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     /**
      * This method is used to format a Deadline object into a String which can then be stored in the text file.
      *
@@ -32,5 +36,27 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D] " + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+    }
+
+    /**
+     * This method is used to compare if two Task objects are equal or not. Two Task objects are equal if
+     * they have the same description and same status.
+     *
+     * @param o The object to compare with
+     * @return boolean This returns true if they are equal and false if they are not.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+        Deadline task = (Deadline) o;
+        boolean sameDescription = task.getDescription().equals(this.getDescription());
+        boolean sameStatus = (task.isDone() == this.isDone());
+        boolean sameDate = (task.getDate().equals(this.getDate()));
+        return sameDescription && sameStatus && sameDate;
     }
 }

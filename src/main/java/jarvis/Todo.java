@@ -26,4 +26,25 @@ public class Todo extends Task {
     public String toString() {
         return "[T] " + super.toString();
     }
+
+    /**
+     * This method is used to compare if two Task objects are equal or not. Two Task objects are equal if
+     * they have the same description and same status.
+     *
+     * @param o The object to compare with
+     * @return boolean This returns true if they are equal and false if they are not.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Todo)) {
+            return false;
+        }
+        Todo task = (Todo) o;
+        boolean sameDescription = task.getDescription().equals(this.getDescription());
+        boolean sameStatus = (task.isDone() == this.isDone());
+        return sameDescription && sameStatus;
+    }
 }
