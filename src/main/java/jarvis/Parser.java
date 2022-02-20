@@ -30,8 +30,7 @@ public class Parser {
                 }
                 assert !command[1].isEmpty() : "user should input the task";
                 Todo task = new Todo(command[1]);
-                storage.create(task);
-                return tasks.add(task);
+                return add(task, tasks, storage);
             } catch (DukeException e) {
                 return e.getMessage();
             }
@@ -45,8 +44,7 @@ public class Parser {
                 assert !deadline[1].isEmpty() : "user should input the due date";
                 LocalDate date = LocalDate.parse(deadline[1]);
                 Deadline task = new Deadline(deadline[0], date);
-                storage.create(task);
-                return tasks.add(task);
+                return add(task, tasks, storage);
             } catch (DukeException e) {
                 return e.getMessage();
             }
@@ -59,8 +57,7 @@ public class Parser {
                 assert !event[0].isEmpty() : "user should input the task";
                 assert !event[1].isEmpty() : "user should input the venue";
                 Event task = new Event(event[0], event[1]);
-                storage.create(task);
-                return tasks.add(task);
+                return add(task, tasks, storage);
             } catch (DukeException e) {
                 return e.getMessage();
             }
@@ -87,5 +84,21 @@ public class Parser {
         default:
             return Ui.unknownCommand("\"" + input + "\"");
         }
+    }
+
+    /**
+     * Checks if the TaskList already contains the Task before adding it.
+     *
+     * @param task New Task to be added
+     * @param tasks a TaskList to store all tasks
+     * @param storage a Storage object which saves and updates a todo list file
+     * @return String J.A.R.V.I.S response to user input
+     */
+    public static String add(Task task, TaskList tasks, Storage storage) {
+        if (tasks.contains(task)) {
+            return Ui.duplicateTask();
+        }
+        storage.create(task);
+        return tasks.add(task);
     }
 }

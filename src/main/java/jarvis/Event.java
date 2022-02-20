@@ -21,6 +21,9 @@ public class Event extends Task {
         this.venue = venue;
     }
 
+    public String getVenue() {
+        return this.venue;
+    }
     /**
      * This method is used to format a Event object into a String which can then be stored in the text file.
      *
@@ -29,5 +32,27 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + venue + ")";
+    }
+
+    /**
+     * This method is used to compare if two Task objects are equal or not. Two Task objects are equal if
+     * they have the same description and same status.
+     *
+     * @param o The object to compare with
+     * @return boolean This returns true if they are equal and false if they are not.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Event)) {
+            return false;
+        }
+        Event task = (Event) o;
+        boolean sameDescription = task.getDescription().equals(this.getDescription());
+        boolean sameStatus = (task.isDone() == this.isDone());
+        boolean sameVenue = (task.getVenue().equals(this.getVenue()));
+        return sameDescription && sameStatus && sameVenue;
     }
 }
