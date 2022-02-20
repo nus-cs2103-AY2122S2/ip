@@ -37,6 +37,12 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Formats the window of the application.
+     *
+     * @param stage The stage of the application.
+     * @param mainLayout The main layout of the application.
+     */
     private void formatWindow(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("Dooke");
         stage.setResizable(false);
