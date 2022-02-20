@@ -77,7 +77,6 @@ public class Parser {
             break;
         default:
             throwInvalidInput();
-            break;
         }
         return confirmationMessage;
     }
@@ -118,7 +117,6 @@ public class Parser {
             break;
         default:
             throwInvalidTypeDeclaration();
-            break;
         }
         return currentTask;
     }
@@ -252,7 +250,6 @@ public class Parser {
                 : description; //remove last whitespace if it exists
         default:
             throwInvalidTypeDeclaration();
-            break;
         }
         assert false : "Runtime should not reach here";
         return null; //should not reach here
@@ -333,7 +330,6 @@ public class Parser {
             break;
         default:
             throwInvalidTypeDeclaration();
-            break;
         }
     }
 
@@ -370,7 +366,6 @@ public class Parser {
             break;
         default:
             throwInvalidTypeDeclaration();
-            break;
         }
     }
 
