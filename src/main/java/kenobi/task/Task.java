@@ -21,7 +21,7 @@ public abstract class Task {
      */
     public Task(String name) throws TaskException {
         if (name.matches("[\\s]*")) {
-            throw new TaskException("Task name cannot be empty");
+            throw new TaskException("Task name cannot be blank");
         }
 
         this.name = name;

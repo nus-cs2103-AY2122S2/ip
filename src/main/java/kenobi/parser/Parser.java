@@ -1,14 +1,6 @@
 package kenobi.parser;
 
-import kenobi.command.AddCommand;
-import kenobi.command.Command;
-import kenobi.command.DeleteCommand;
-import kenobi.command.ExitCommand;
-import kenobi.command.FindCommand;
-import kenobi.command.InvalidCommand;
-import kenobi.command.ListCommand;
-import kenobi.command.MarkCommand;
-import kenobi.command.UnmarkCommand;
+import kenobi.command.*;
 import kenobi.task.Task;
 
 import java.time.LocalDate;
@@ -90,7 +82,7 @@ public class Parser {
             }
 
         default:
-            return new InvalidCommand();
+            throw new ParseException("Your command is invalid");
         }
     }
 
