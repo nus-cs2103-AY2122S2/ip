@@ -13,7 +13,7 @@ public class TaskList {
      * Initializes taskList with empty list.
      */
     public TaskList() {
-        this.taskList = new ArrayList<duke.Task>();
+        this.taskList = new ArrayList<>();
     }
 
     /**
@@ -21,16 +21,17 @@ public class TaskList {
      * through the parser to retrieve data and therefore the tasks.
      * @param taskList string of data from text file.
      */
-    public TaskList(ArrayList<String> taskList) {
+    public TaskList(TaskList taskList) {
+        this.taskList = new ArrayList<duke.Task>();
         for (int i = 0; i < taskList.size(); i++) {
-            this.taskList.add(new duke.Task(taskList.get(i)));
+            this.taskList.add(taskList.get(i));
         }
     }
 
 
     /**
      * Get task at index
-     * @param index
+     * @param index is the position
      * @return Task at index
      */
     public duke.Task get(int index) {
@@ -55,7 +56,7 @@ public class TaskList {
 
     /**
      * Add string into a task which is then added to the List.
-     * @param description
+     * @param description is the text
      */
     public void add(String description) {
         this.taskList.add(new duke.Task(description));
@@ -63,7 +64,7 @@ public class TaskList {
 
     /**
      * Removes the task at specified index
-     * @param index
+     * @param index is the position
      */
     public void remove(int index) {
         this.taskList.remove(index);
@@ -72,7 +73,7 @@ public class TaskList {
 
     /**
      * Marks the task at the specific index as done.
-     * @param index
+     * @param index is the postion
      */
     public void markAsDone(int index) {
         this.taskList.get(index).markAsDone();
@@ -80,10 +81,19 @@ public class TaskList {
 
     /**
      * Marks the task as the specific index as undone.
-     * @param index
+     * @param index is the position
      */
     public void markAsUndone(int index) {
         this.taskList.get(index).unmarkAsDone();
+    }
+
+    /**
+     * prints all the tasks in the list
+     */
+    public void print() {
+        for (int i = 0; i < this.taskList.size(); i++) {
+            System.out.println(i + 1 + ". " + this.taskList.get(i));
+        }
     }
 }
 

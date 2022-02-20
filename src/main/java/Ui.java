@@ -68,7 +68,7 @@ public class Ui {
     public void removedTask(duke.Task task, duke.TaskList tasks) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(task);
-        System.out.println(String.format("Now you have %d tasks in the list.",tasks.size()));
+        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 
     /**
@@ -84,10 +84,10 @@ public class Ui {
     /**
      *
      */
-    public void findTasks(duke.TaskList tasks){
+    public void findTasks(duke.TaskList tasks) {
         System.out.println("____________________________________________________________");
         System.out.println("Here are the matching tasks in your list:");
-        for (int i =0; i<tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             System.out.println(tasks.get(i));
         }
         System.out.println("____________________________________________________________");

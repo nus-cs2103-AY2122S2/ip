@@ -26,6 +26,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Initialize DialogBox
+     * @param text is the string
+     * @param img is the image
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(duke.MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -60,56 +65,3 @@ public class DialogBox extends HBox {
         return db;
     }
 }
-
-
-/**
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-
-public class DialogBox extends HBox {
-
-    private Label text;
-    private ImageView displayPicture;
-
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-    }
-
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-
-    private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
-    }
-
-    public DialogBox getUserDialog() {
-        Label tempText = this.text;
-        ImageView tempDisplayPicture = this.displayPicture;
-        return new DialogBox(tempText, tempDisplayPicture);
-    }
-
-    public DialogBox getDukeDialog() {
-        Label tempText = this.text;
-        ImageView tempDisplayPicture = this.displayPicture;
-        var db = new DialogBox(tempText, tempDisplayPicture);
-        db.flip();
-        return db;
-    }
-}
- */
