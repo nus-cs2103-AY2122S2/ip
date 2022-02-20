@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents the Event Task object.
  */
-public class Event extends Task{
+public class Event extends duke.Task{
 
     /**
      * Initializes the Event object

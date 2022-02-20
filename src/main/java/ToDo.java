@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents the ToDo Task object.
  */
-public class ToDo extends Task{
+public class ToDo extends duke.Task{
 
     /**
      * Initializes the ToDo object
