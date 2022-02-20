@@ -23,6 +23,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add(Main.class.getResource("/css/style.css").toExternalForm());
             String home = System.getProperty("user.home");
             Path directory = Paths.get(home, "Documents", "duke");
             Path filePath = Paths.get(home, "Documents", "duke", "data.txt");

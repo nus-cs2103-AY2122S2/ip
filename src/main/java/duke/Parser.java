@@ -8,6 +8,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DeleteContactCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -48,6 +49,8 @@ public class Parser {
             return parseUnmarkCommand(fullCommand);
         } else if (command.equals("bye")) {
             return parseExitCommand();
+        } else if (command.equals("find")) {
+            return parseFindCommand(fullCommand);
         } else if (command.equals("addContact")) {
             return parseAddContactCommand(fullCommand);
         } else if (command.equals("deleteContact")) {
@@ -143,6 +146,17 @@ public class Parser {
         String dataString = fullCommand.replaceFirst("unmark ", "");
         int taskNumber = Integer.parseInt(dataString);
         return new UnmarkCommand(taskNumber);
+    }
+
+    /**
+     * Parses find command.
+     *
+     * @param fullCommand String to parse.
+     * @return FindCommand instance.
+     */
+    private static Command parseFindCommand(String fullCommand) {
+        String dataString = fullCommand.replaceFirst("find ", "");
+        return new FindCommand(dataString);
     }
 
     /**
