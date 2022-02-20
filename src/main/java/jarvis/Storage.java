@@ -108,8 +108,7 @@ public class Storage {
             FileWriter writer = new FileWriter(file.getPath(), true);
             writer.write(task.toString() + "\n");
             writer.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             //System.out.println(e.getMessage());
         }
     }
