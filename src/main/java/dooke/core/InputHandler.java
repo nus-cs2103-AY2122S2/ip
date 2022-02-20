@@ -31,7 +31,7 @@ import dooke.utilities.OutputFormatter;
  * Handles the input commands.
  *
  * @author s7manth
- * @version 0.2
+ * @version 0.3
  */
 public class InputHandler {
     private TaskList taskList;

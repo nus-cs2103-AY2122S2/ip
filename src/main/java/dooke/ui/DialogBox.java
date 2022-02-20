@@ -28,7 +28,7 @@ import javafx.scene.text.Font;
  * Controller class representing a dialog box consisting of an ImageView to represent the
  * speaker's face and a label containing text from the speaker.
  * @author s7manth
- * @version 0.2
+ * @version 0.3
  */
 public class DialogBox extends HBox {
     private static final Font CHAT_FONT = Font.loadFont(

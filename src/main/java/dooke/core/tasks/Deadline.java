@@ -13,7 +13,7 @@ import dooke.utilities.OutputFormatter;
  * The Deadline class.
  *
  * @author s7manth
- * @version 0.1
+ * @version 0.3
  */
 public class Deadline extends Task {
     protected LocalDate byDate;

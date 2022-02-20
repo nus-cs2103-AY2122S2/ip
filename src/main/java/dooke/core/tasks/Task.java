@@ -8,7 +8,7 @@ import dooke.utilities.OutputFormatter;
  * The Task class.
  *
  * @author s7manth
- * @version 0.1
+ * @version 0.3
  */
 public class Task {
     private static int idCounter = 1;

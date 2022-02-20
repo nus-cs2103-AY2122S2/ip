@@ -11,7 +11,7 @@ import dooke.utilities.OutputFormatter;
  * Class to maintain the list of tasks entered by the user.
  *
  * @author s7manth
- * @version 0.1
+ * @version 0.3
  */
 public class TaskList {
     private ArrayList<Task> taskList;

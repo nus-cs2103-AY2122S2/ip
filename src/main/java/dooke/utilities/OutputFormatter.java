@@ -4,7 +4,7 @@ package dooke.utilities;
  * Custom output formatter class to support bulk string appends.
  *
  * @author s7manth
- * @version 0.1
+ * @version 0.3
  */
 public class OutputFormatter {
     private StringBuilder stringBuilder;

@@ -4,7 +4,7 @@ package dooke.core;
  * Identifier class to determine the input type.
  *
  * @author s7manth
- * @version 0.2
+ * @version 0.3
  */
 public class InputIdentifier {
     private static final String LIST_COMMAND = "list";

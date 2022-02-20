@@ -9,7 +9,7 @@ import dooke.core.IoManager;
  * Dooke CLI Chatbot
  *
  * @author s7manth
- * @version 0.2
+ * @version 0.3
  */
 public class Dooke {
     private IoManager ioManager;

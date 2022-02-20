@@ -7,7 +7,7 @@ import dooke.utilities.OutputFormatter;
  * The ToDo class.
  *
  * @author s7manth
- * @version 0.1
+ * @version 0.3
  */
 public class ToDo extends Task {
 

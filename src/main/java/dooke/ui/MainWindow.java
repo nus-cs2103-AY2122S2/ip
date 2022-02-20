@@ -19,7 +19,7 @@ import javafx.scene.text.Font;
  * Controller for MainWindow.
  * Provides the layout for the other controls.
  * @author s7manth
- * @version 0.2
+ * @version 0.3
  */
 public class MainWindow extends AnchorPane {
     public static final String STYLE_BORDER = "-fx-border-radius: 20; -fx-background-radius: 20";
