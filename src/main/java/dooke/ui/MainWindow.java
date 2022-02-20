@@ -5,12 +5,14 @@ import java.util.Objects;
 import dooke.Dooke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 
 /**
@@ -20,6 +22,11 @@ import javafx.scene.layout.VBox;
  * @version 0.2
  */
 public class MainWindow extends AnchorPane {
+    public static final String STYLE_BORDER = "-fx-border-radius: 20; -fx-background-radius: 20";
+
+    private static final Font CHAT_FONT = Font.loadFont(
+            DialogBox.class.getResource("/fonts/JetBrainsMono-Regular.ttf").toExternalForm(), 12);
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -42,6 +49,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setStyle("-fx-background-color: #FFFFFF;");
+        userInput.setStyle(STYLE_BORDER);
+        userInput.setFont(CHAT_FONT);
+        sendButton.setFont(CHAT_FONT);
+        sendButton.setOnMouseEntered(e -> {
+            sendButton.setCursor(Cursor.HAND);
+        });
+        sendButton.setOnMouseExited(e -> {
+            sendButton.setCursor(Cursor.DEFAULT);
+        });
     }
 
     /**
@@ -50,7 +67,6 @@ public class MainWindow extends AnchorPane {
      */
     public void setDooke(Dooke dooke) {
         this.dooke = dooke;
-        dialogContainer.getChildren().addAll(DialogBox.getDookeDialog(this.dooke.welcome(), dookeImage));
     }
 
     /**

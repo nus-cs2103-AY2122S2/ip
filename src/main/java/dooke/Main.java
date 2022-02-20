@@ -30,10 +30,18 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDooke(dooke);
-            stage.setTitle("Dooke");
+            formatWindow(stage, ap);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void formatWindow(Stage stage, AnchorPane mainLayout) {
+        stage.setTitle("Dooke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+        mainLayout.setPrefSize(400.0, 600.0);
     }
 }
