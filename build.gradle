@@ -50,7 +50,7 @@ test {
 }
 
 application {
-    mainClassName = "ari.Main"
+    mainClassName = "ari.Launcher"
 }
 
 shadowJar {

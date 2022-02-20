@@ -2,6 +2,7 @@ package ari.gui;
 
 import ari.Ari;
 import ari.command.ByeCommand;
+import ari.ui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -31,8 +32,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image ariImage = new Image(this.getClass().getResourceAsStream("/images/ari.png"));
 
+    /**
+     * Initializes MainWindow
+     */
     @FXML
     public void initialize() {
+        dialogContainer.getChildren().add(
+                DialogBox.getAriDialog(Ui.displayWelcomeMessage(), ariImage)
+        );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -57,7 +64,10 @@ public class MainWindow extends AnchorPane {
         // if response is a BYE_MESSAGE, give a bit of delay before closing the window
         if (response.equals(ByeCommand.BYE_MESSAGE)) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished(event -> Platform.exit());
+            delay.setOnFinished(event -> {
+                Platform.exit();
+                System.exit(0);
+            });
             delay.play();
         }
     }

@@ -38,13 +38,17 @@ public class Ui {
     /**
      * Prints welcome message
      */
-    public void displayWelcomeMessage() {
+    public void printWelcomeMessage() {
         printWithTab(LINE_BREAK);
         System.out.println(LOGO);
         printWithTab(WELCOME_MESSAGE);
         printWithTab(WELCOME_QUESTION);
         printWithTab(LINE_BREAK);
         System.out.println();
+    }
+
+    public static String displayWelcomeMessage() {
+        return WELCOME_MESSAGE + "\n" + WELCOME_QUESTION;
     }
 
     /**
