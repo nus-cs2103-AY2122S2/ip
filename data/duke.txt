@@ -1,4 +1,0 @@
-[E] [-] bla (at: bla)
-[D] [-] bla (by: Jun 6 2019)
-[T] [-] bla
-[T] [-] blabla

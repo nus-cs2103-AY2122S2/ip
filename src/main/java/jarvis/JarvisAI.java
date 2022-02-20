@@ -12,7 +12,7 @@ public class JarvisAI {
     private Storage storage;
     private TaskList tasks;
     static final String DIRECTORY_PATH = "./data";
-    static final String FILE_PATH = "./data/duke.txt";
+    static final String FILE_PATH = "./data/jarvis.txt";
 
     /**
      * Returns a Duke object and initializes the Ui, storage and lists of task fields with predefined paths.
