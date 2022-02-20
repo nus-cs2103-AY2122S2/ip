@@ -13,6 +13,7 @@ public class UnmarkCommand extends Command {
      */
     public UnmarkCommand(int index) {
         toUnmarkIndex = index - 1;
+        assert toUnmarkIndex >= 0 : "UnmarkCommand: negative index";
     }
 
     /**
