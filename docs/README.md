@@ -13,7 +13,7 @@ This *data file* could be found in the directory that **Taskmaster** was execute
 ## Loading of tasks
 **Taskmaster** automatically loads the user's tasks from the *data file* located in the
 `/data/Duke.txt` file during the startup.
-![](/docs/assets/load.png)
+![load](/docs/assets/load.png)
 
 ## Create tasks
 The 3 main types of tasks:
@@ -77,7 +77,7 @@ Format:
 ### `deadline` - Adds a new **Deadline** task to the task list
 
 Create a new Deadline task by specifying it's name or description, due date and adds it to the current list of tasks.
-![](/docs/assets/deadline.png)
+![deadline](/docs/assets/deadline.png)
 
 Format:
 
@@ -86,7 +86,7 @@ Format:
 ### `event` - Adds a new **Event** task to the task list
 
 Create a new Event task by specifying it's name or description, time and date of occurrence and adds it to the current list of tasks.
-![](/docs/assets/event.png)
+![event](/docs/assets/event.png)
 Format:
 
 `event <event-description> /at <event-timestamp>`
@@ -103,7 +103,7 @@ Format:
 ### `find` - Displays tasks containing the specified keyword
 
 Displays all tasks that contains the specified keyword *(Case-insensitive)*.
-![](/docs/assets/find.png)
+![find](/docs/assets/find.png)
 Format:
 
 `find <keyword>`
