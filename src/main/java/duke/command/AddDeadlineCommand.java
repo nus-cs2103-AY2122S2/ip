@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
+import duke.DukeException;
 import duke.common.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -38,8 +39,13 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        Task task = new Deadline(title, dueBy);
-        tasks.addTask(task);
-        return TextUi.showExecutionMessage(Messages.MESSAGE_ADD_DEADLINE, task.toString(), tasks.getSize());
+        try {
+            Task task = new Deadline(title, dueBy);
+            tasks.addTask(task);
+            storage.saveAllTasks(tasks);
+            return TextUi.showExecutionMessage(Messages.MESSAGE_ADD_DEADLINE, task.toString(), tasks.getSize());
+        } catch (DukeException e) {
+            return TextUi.showError(e.getMessage());
+        }
     }
 }

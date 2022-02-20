@@ -26,17 +26,20 @@ public class TaskList {
      *
      * @param taskId The id of the targeted task.
      * @param isDone The mark status of the targeted task.
+     * @return The marked task in string.
      * @throws DukeException If the task id is out of the index bound,
      * it throws a DukeException.
      */
-    public void markTask(int taskId, boolean isDone) throws DukeException {
+    public String markTask(int taskId, boolean isDone) throws DukeException {
         assert taskId > 0 : "Task id should be greater than 0";
         try {
+            Task task = tasks.get(taskId);
             if (isDone) {
-                tasks.get(taskId).markAsDone();
+                task.markAsDone();
             } else {
-                tasks.get(taskId).markAsNotDone();
+                task.markAsNotDone();
             }
+            return task.toString();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e.getMessage());
         }
@@ -101,13 +104,16 @@ public class TaskList {
      * Deletes a task object from the task list based on the id supplied.
      *
      * @param taskId The id of the targeted task.
+     * @return The string description of the task.
      * @throws DukeException If the task id is out of the task list index range,
      * it throws a DukeException.
      */
-    public void deleteTask(int taskId) throws DukeException {
+    public String deleteTask(int taskId) throws DukeException {
         try {
             assert taskId > 0 : "Task id should be greater than 0";
+            Task task = tasks.get(taskId);
             tasks.remove(taskId);
+            return task.toString();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(e.getMessage());
         }

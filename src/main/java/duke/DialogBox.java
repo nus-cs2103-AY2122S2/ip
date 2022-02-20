@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * An example of a custom control using FXML.
@@ -20,6 +21,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String DIALOG_XML_PATH = "/view/DialogBox.fxml";
+    private static final String DIALOG_CSS_PATH = "/view/DialogBox.css";
     @FXML
     private Label dialog;
     @FXML
@@ -27,16 +30,19 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(DIALOG_XML_PATH));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        this.setMinHeight(Region.USE_PREF_SIZE);
+        dialog.setAlignment(Pos.CENTER);
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        this.getStylesheets().add(this.getClass().getResource(DIALOG_CSS_PATH).toExternalForm());
     }
 
     /**

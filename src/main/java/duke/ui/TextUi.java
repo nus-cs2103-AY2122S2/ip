@@ -6,11 +6,8 @@ import duke.parser.Parser;
 import duke.task.TaskList;
 
 public class TextUi {
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String LINE_BREAK = "----------------------------------\n";
+    public static final String EMPTY_LINE = "\n";
 
     /**
      * Displays the welcome message.
@@ -19,13 +16,19 @@ public class TextUi {
      */
     public static String showWelcome() {
         return showToUser(
-                LOGO,
                 Messages.MESSAGE_WELCOME,
-                Messages.MESSAGE_PROMPT);
+                LINE_BREAK,
+                Messages.MESSAGE_PROMPT,
+                EMPTY_LINE,
+                Messages.COMMAND_SUMMARY);
     }
 
     public static String showExecutionMessage(String message) {
         return showToUser(message);
+    }
+
+    public static String showExecutionMessage(String message, String taskString) {
+        return showToUser(message, LINE_BREAK, taskString);
     }
 
     /**
@@ -38,7 +41,7 @@ public class TextUi {
      */
     public static String showExecutionMessage(String message, String taskString, int size) {
         String displaySize = String.format("Now you have %s task%s in the list.\n", size, Parser.parseTaskSize(size));
-        return showToUser(message, taskString, displaySize);
+        return showToUser(message, LINE_BREAK, taskString, EMPTY_LINE, displaySize);
     }
 
     public static String showError(String message) {
@@ -55,7 +58,8 @@ public class TextUi {
      */
     public static String showTasks(TaskList tasks) throws DukeException {
         StringBuilder str = new StringBuilder();
-        str.append(Messages.MESSAGE_FIND).append("\n");
+        str.append(Messages.MESSAGE_FIND);
+        str.append(LINE_BREAK);
         for (int i = 0; i < tasks.getSize(); i++) {
             str.append(i + 1).append(". ").append(tasks.getTask(i)).append("\n");
         }

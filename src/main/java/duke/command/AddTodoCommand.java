@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.common.Messages;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -33,8 +34,13 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        Task task = new Todo(title);
-        tasks.addTask(task);
-        return TextUi.showExecutionMessage(Messages.MESSAGE_ADD_TODO, task.toString(), tasks.getSize());
+        try {
+            Task task = new Todo(title);
+            tasks.addTask(task);
+            storage.saveAllTasks(tasks);
+            return TextUi.showExecutionMessage(Messages.MESSAGE_ADD_TODO, task.toString(), tasks.getSize());
+        } catch (DukeException e) {
+            return TextUi.showError(e.getMessage());
+        }
     }
 }

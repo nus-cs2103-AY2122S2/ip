@@ -3,6 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.common.Messages;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.TextUi;
 
@@ -37,14 +38,14 @@ public class MarkTaskCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            tasks.markTask(taskId, isDone);
+            String task = tasks.markTask(taskId, isDone);
             String message;
             if (isDone) {
                 message = Messages.MESSAGE_MARK;
             } else {
                 message = Messages.MESSAGE_UNMARKED;
             }
-            return TextUi.showExecutionMessage(message);
+            return TextUi.showExecutionMessage(message, task);
         } catch (DukeException e) {
             return TextUi.showError(e.getMessage());
         }

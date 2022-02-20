@@ -34,8 +34,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            tasks.deleteTask(taskId);
-            return TextUi.showExecutionMessage(Messages.MESSAGE_DELETE);
+            String task = tasks.deleteTask(taskId);
+            storage.saveAllTasks(tasks);
+            return TextUi.showExecutionMessage(Messages.MESSAGE_DELETE, task);
         } catch (DukeException e) {
             return TextUi.showError(e.getMessage());
         }
