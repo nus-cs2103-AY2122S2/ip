@@ -1,6 +1,6 @@
 # User Guide
 
-Bobby is a desktop app for managing your tasks. Utilize commands to add various types of tasks and Bobby will manage them for you.
+Bobby is a desktop app for managing your tasks. Utilize commands to add, remove and mark various types of tasks and Bobby will remember these tasks for you.
 
 ## Features 
 * Adding a To Do: todo
