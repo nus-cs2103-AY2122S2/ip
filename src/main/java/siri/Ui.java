@@ -64,9 +64,19 @@ public class Ui {
                 + "     Number of task(s) in your list: " + tasks.size() + "\n");
     }
 
+    public void showFind(ArrayList<Task> foundTasks) {
+        System.out.println("     Here are the matching tasks in your list:");
+        int numberOfTasks = foundTasks.size();
+        for (int i = 0; i < numberOfTasks; i++) {
+            String currTask = foundTasks.get(i).toString();
+            System.out.println("     " + (i + 1) + "." + currTask);
+        }
+    }
+
+
     public void showLine() {
-        System.out.println("____________________________________________________________" +
-                "__________________________________");
+        System.out.println("____________________________________________________________"
+               + "__________________________________");
     }
 
     public void showLoadingError(String message) {

@@ -34,6 +34,8 @@ public class Parser {
                 return new UnmarkCommand(Integer.parseInt(restOfCommand));
             case "delete":
                 return new DeleteCommand(Integer.parseInt(restOfCommand));
+            case "find":
+                return new FindCommand(restOfCommand);
             case "todo":
                 return new AddTodoCommand(restOfCommand);
             case "deadline":
