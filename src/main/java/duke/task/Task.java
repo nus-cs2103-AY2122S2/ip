@@ -74,4 +74,11 @@ public abstract class Task {
      */
     public abstract String toString();
 
+    /**
+     * Returns string representation of this class as stored in harddisk.
+     *
+     * @return String representation of this task.
+     */
+    public abstract String toDataString();
+
 }

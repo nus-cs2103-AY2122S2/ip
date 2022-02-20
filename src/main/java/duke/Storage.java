@@ -1,7 +1,9 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,9 +15,11 @@ import duke.task.Todo;
 
 public class Storage {
 
-    private String filePath;
+    private Path directory;
+    private Path filePath;
 
-    public Storage(String filePath) {
+    public Storage(Path directory, Path filePath) {
+        this.directory = directory;
         this.filePath = filePath;
     }
 
@@ -28,10 +32,12 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                throw new DukeException("File not found");
+            File dir = directory.toFile();
+            if (!dir.exists()) {
+                dir.mkdirs();
             }
+            File file = filePath.toFile();
+            file.createNewFile();
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNextLine()) {
                 String taskString = fileScanner.nextLine();
@@ -50,10 +56,27 @@ public class Storage {
                 }
             }
             fileScanner.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("Something went wrong");
         }
         return tasks;
+    }
+
+    /**
+     * Writes task list to file.
+     *
+     * @throws DukeException If couldn't write to file.
+     */
+    public void save(TaskList tasks) throws DukeException {
+        try {
+            File file = filePath.toFile();
+            file.createNewFile();
+            FileWriter myWriter = new FileWriter(file);
+            myWriter.write(tasks.toDataString());
+            myWriter.close();
+        } catch (IOException e) {
+            throw new DukeException("Couldn't write to file");
+        }
     }
 
 }

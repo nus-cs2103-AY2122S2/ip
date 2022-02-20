@@ -1,5 +1,7 @@
 package duke;
 
+import java.nio.file.Path;
+
 import duke.command.Command;
 
 public class Duke {
@@ -14,9 +16,9 @@ public class Duke {
      *
      * @param filePath File path to read task data from.
      */
-    public Duke(String filePath) {
+    public Duke(Path directory, Path filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(directory, filePath);
         contacts = new ContactList();
         try {
             tasks = new TaskList(storage.load());
@@ -24,10 +26,6 @@ public class Duke {
             System.out.println(e.getMessage());
             tasks = new TaskList();
         }
-    }
-
-    public Duke() {
-        this("../data/duke.txt");
     }
 
     /**
@@ -54,12 +52,11 @@ public class Duke {
     /**
      * Creates and runs Duke instance with a specified file path.
      */
-    public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "duke", "data.txt");
-        boolean fileExists = java.nio.file.Files.exists(path);
-        new Duke("data/tasks.txt").run();
-    }
+    // public static void main(String[] args) {
+    //     String home = System.getProperty("user.home");
+    //     Path path = java.nio.file.Paths.get(home, "Documents", "duke", "data.txt");
+    //     new Duke(path).run();
+    // }
 
     /**
      * You should have your own function to generate a response to user input.

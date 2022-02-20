@@ -1,6 +1,8 @@
 package duke;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke;
 
     @Override
     public void start(Stage stage) {
@@ -21,6 +23,10 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            String home = System.getProperty("user.home");
+            Path directory = Paths.get(home, "Documents", "duke");
+            Path filePath = Paths.get(home, "Documents", "duke", "data.txt");
+            duke = new Duke(directory, filePath);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

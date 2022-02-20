@@ -81,4 +81,18 @@ public class TaskList {
         return string;
     }
 
+    /**
+     * Returns string representation of list for storage.
+     *
+     * @return Data of all tasks.
+     */
+    public String toDataString() {
+        String string = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            string += String.format("%s\n", task.toDataString());
+        }
+        return string;
+    }
+
 }

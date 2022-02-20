@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.ContactList;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -32,8 +33,13 @@ public class AddCommand extends Command {
      * @param contacts List of contacts.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage, ContactList contacts) {
-        tasks.addTask(task);
-        return ui.showTaskAdded(task);
+        try {
+            tasks.addTask(task);
+            storage.save(tasks);
+            return ui.showTaskAdded(task);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 
 }

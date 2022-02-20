@@ -41,4 +41,16 @@ public class Deadline extends Task {
                 super.getDescription(),
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
+
+    /**
+     * Returns string representation of a deadline.
+     * @return Deadline as a string
+     */
+    public String toDataString() {
+        return String.format("D,%s,%s,%s",
+                isMarked(),
+                super.getDescription(),
+                date.format(DateTimeFormatter.ofPattern("yyyy-mm-dd")));
+    }
+
 }

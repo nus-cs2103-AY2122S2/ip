@@ -41,4 +41,16 @@ public class Event extends Task {
                 super.getDescription(),
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
+
+    /**
+     * Returns string representation of a event.
+     * @return Event as a string
+     */
+    public String toDataString() {
+        return String.format("E,%s,%s,%s",
+                isMarked(),
+                super.getDescription(),
+                date.format(DateTimeFormatter.ofPattern("yyyy-mm-dd")));
+    }
+
 }

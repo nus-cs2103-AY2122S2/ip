@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.ContactList;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -31,8 +32,13 @@ public class UnmarkCommand extends Command {
      * @param contacts List of contacts.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage, ContactList contacts) {
-        tasks.unmarkTask(taskNumber);
-        return ui.showTaskUnmarked();
+        try {
+            tasks.unmarkTask(taskNumber);
+            storage.save(tasks);
+            return ui.showTaskUnmarked();
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 
 }
