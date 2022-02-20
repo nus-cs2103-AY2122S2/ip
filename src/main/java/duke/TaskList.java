@@ -250,6 +250,7 @@ public class TaskList {
      */
     public String help() {
         return "# User Guide\n"
+                + "`help`: See user guide.\n"
                 + "`list`: Lists all the tasks.\n"
                 + "`todo <description>`: Adds a todo task.\n"
                 + "`deadline <description> /by yyyy-mm-dd`: Adds a task with a deadline.\n"

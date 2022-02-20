@@ -2,6 +2,10 @@
 
 ## Features 
 
+### Feature `help`
+See user guide. 
+- format: `help`
+
 ### Feature `list`
 Lists all the tasks. 
 - format: `list`
