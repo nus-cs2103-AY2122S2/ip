@@ -7,10 +7,7 @@ import juke.exception.JukeMissingArgumentException;
  * Command for echo.
  */
 public class EchoCommand extends Command {
-    /**
-     * String to echo.
-     */
-    private String message;
+    private static final String COMMAND_NAME = "echo";
 
     /**
      * Checks if the parameters and arguments are valid.
@@ -20,17 +17,30 @@ public class EchoCommand extends Command {
      */
     @Override
     public Command checkParametersAndArguments() {
-        for (String param : paramArgs.keySet()) {
-            if (!isDefaultParameter(param)) {
-                result = Result.error(new JukeInvalidParameterException(param));
-                return this;
-            }
+        if (hasUnnecessaryParameters()) {
+            return this;
         }
         if (!hasDefaultArgument()) {
-            result = Result.error(new JukeMissingArgumentException("echo"));
+            setErroneousResult(new JukeMissingArgumentException(COMMAND_NAME));
             return this;
         }
         return this;
+    }
+
+    /**
+     * Returns if there are unnecessary parameters.
+     *
+     * @return Boolean result.
+     */
+    private boolean hasUnnecessaryParameters() {
+        for (String param : paramArgs.keySet()) {
+            if (isDefaultParameter(param)) {
+                continue;
+            }
+            setErroneousResult(new JukeInvalidParameterException(param));
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -48,8 +58,8 @@ public class EchoCommand extends Command {
         if (isErroneous()) {
             return this;
         }
-        this.message = this.getDefaultArgument();
-        this.result = new Result.Success(this.message);
+        assert isEmpty();
+        setSuccessfulResult(getDefaultArgument());
         return this;
     }
 }

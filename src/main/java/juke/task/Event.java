@@ -45,7 +45,7 @@ public class Event extends TimeTask {
      */
     @Override
     public String toString() {
-        return super.toString() + " (at: " + this.getTime() + ")";
+        return super.toString() + " (at: " + getTime() + ")";
     }
 
     /**

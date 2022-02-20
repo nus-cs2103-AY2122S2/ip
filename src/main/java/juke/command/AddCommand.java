@@ -12,6 +12,11 @@ import juke.task.Todo;
  * Command for adding tasks.
  */
 public class AddCommand extends Command {
+    private static final String SUCCESS_MESSAGE = "New %s task added: %s.";
+
+    private static final String EVENT_PARAMETER = "at";
+    private static final String DEADLINE_PARAMETER = "by";
+
     /**
      * Task type of the task to add.
      */
@@ -36,56 +41,14 @@ public class AddCommand extends Command {
      */
     @Override
     public Command checkParametersAndArguments() {
-        switch (type) {
-        case EVENT:
-            assert type.getCommandName() == TaskType.EVENT.getCommandName();
-            if (hasParameter("at")) {
-                if (!hasArgument("at")) {
-                    result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
-                    return this;
-                }
-            } else {
-                result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
-                return this;
-            }
-            break;
-        case DEADLINE:
-            assert type.getCommandName() == TaskType.DEADLINE.getCommandName();
-            if (hasParameter("by")) {
-                if (!hasArgument("by")) {
-                    result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
-                    return this;
-                }
-            } else {
-                result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
-                return this;
-            }
-            break;
-        default:
+        if (isMissingTimeParameter()) {
+            return this;
         }
-        for (String param : paramArgs.keySet()) {
-            if (!isDefaultParameter(param)) {
-                switch (type) {
-                case EVENT:
-                    if (!param.equals("at")) {
-                        result = Result.error(new JukeInvalidParameterException(param));
-                        return this;
-                    }
-                    break;
-                case DEADLINE:
-                    if (!param.equals("by")) {
-                        result = Result.error(new JukeInvalidParameterException(param));
-                        return this;
-                    }
-                    break;
-                default:
-                    result = Result.error(new JukeInvalidParameterException(param));
-                    return this;
-                }
-            }
+        if (hasUnnecessaryParameters()) {
+            return this;
         }
         if (!hasDefaultArgument()) {
-            result = Result.error(new JukeMissingArgumentException(type.getCommandName()));
+            setErroneousResult(new JukeMissingArgumentException(type.getCommandName()));
             return this;
         }
         assert hasDefaultArgument();
@@ -93,8 +56,72 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Returns if time parameters are missing.
+     *
+     * @return Boolean result.
+     */
+    private boolean isMissingTimeParameter() {
+        switch (type) {
+        case EVENT:
+            assert type.getCommandName() == TaskType.EVENT.getCommandName();
+            if (!hasParameter(EVENT_PARAMETER)) {
+                setErroneousResult(new JukeMissingArgumentException(type.getCommandName()));
+                return true;
+            }
+            if (!hasArgument(EVENT_PARAMETER)) {
+                setErroneousResult(new JukeMissingArgumentException(type.getCommandName()));
+                return true;
+            }
+            break;
+        case DEADLINE:
+            assert type.getCommandName() == TaskType.DEADLINE.getCommandName();
+            if (!hasParameter(DEADLINE_PARAMETER)) {
+                setErroneousResult(new JukeMissingArgumentException(type.getCommandName()));
+                return true;
+            }
+            if (!hasArgument(DEADLINE_PARAMETER)) {
+                setErroneousResult(new JukeMissingArgumentException(type.getCommandName()));
+                return true;
+            }
+            break;
+        default:
+        }
+        return false;
+    }
+
+    /**
+     * Returns if there are unnecessary parameters.
+     *
+     * @return Boolean result.
+     */
+    private boolean hasUnnecessaryParameters() {
+        for (String param : paramArgs.keySet()) {
+            if (isDefaultParameter(param)) {
+                continue;
+            }
+            switch (type) {
+            case EVENT:
+                if (!param.equals(EVENT_PARAMETER)) {
+                    setErroneousResult(new JukeInvalidParameterException(param));
+                    return true;
+                }
+                break;
+            case DEADLINE:
+                if (!param.equals(DEADLINE_PARAMETER)) {
+                    setErroneousResult(new JukeInvalidParameterException(param));
+                    return true;
+                }
+                break;
+            default:
+                setErroneousResult(new JukeInvalidParameterException(param));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Tries to execute the command, updating the result.
-     * Adds the task to the task list.
      *
      * @return This command.
      */
@@ -107,30 +134,39 @@ public class AddCommand extends Command {
         if (isErroneous()) {
             return this;
         }
-        assert result instanceof Result.Empty;
+        assert isEmpty();
         try {
-            switch (type) {
-            case TODO:
-                juke.getTaskList().add(new Todo(getDefaultArgument()));
-                break;
-            case EVENT:
-                juke.getTaskList().add(new Event(getDefaultArgument(),
-                        getArgument("at")));
-                break;
-            case DEADLINE:
-                juke.getTaskList().add(new Deadline(getDefaultArgument(),
-                        getArgument("by")));
-                break;
-            default:
-            }
-            result = Result.success(String.format("New %s added: %s.",
-                    type.getCommandName(), getDefaultArgument()));
+            addTaskToList();
         } catch (JukeParseException e) {
-            result = Result.error(e);
+            setErroneousResult(e);
             return this;
         }
         juke.getStorage().saveTasks();
         return this;
+    }
+
+    /**
+     * Adds the task to the list.
+     *
+     * @throws JukeParseException Throws if eror with parsing.
+     */
+    private void addTaskToList() throws JukeParseException {
+        switch (type) {
+        case TODO:
+            juke.getTaskList().add(new Todo(getDefaultArgument()));
+            break;
+        case EVENT:
+            juke.getTaskList().add(new Event(getDefaultArgument(),
+                getArgument(EVENT_PARAMETER)));
+            break;
+        case DEADLINE:
+            juke.getTaskList().add(new Deadline(getDefaultArgument(),
+                getArgument(DEADLINE_PARAMETER)));
+            break;
+        default:
+        }
+        setSuccessfulResult(String.format(SUCCESS_MESSAGE,
+            type.getCommandName(), getDefaultArgument()));
     }
 
     /**

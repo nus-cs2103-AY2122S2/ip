@@ -12,9 +12,14 @@ import juke.exception.JukeInvalidParameterException;
  */
 public abstract class Command {
     /**
-     * Mapping for the first argument in a command.
+     * String key for the first argument in a command.
      */
-    protected static final String DEFAULT_PARAMETER = "";
+    public static final String DEFAULT_PARAMETER = "";
+
+    /**
+     * Message for the missing default argument exception.
+     */
+    private static final String MISSING_DEFAULT_ARGUMENT_MESSAGE = "Missing default argument.";
 
     /**
      * Reference to the Juke instance.
@@ -59,7 +64,7 @@ public abstract class Command {
      * @param param Given parameter.
      * @return Boolean result.
      */
-    public boolean hasParameter(String param) {
+    protected boolean hasParameter(String param) {
         return paramArgs.containsKey(param);
     }
 
@@ -70,7 +75,7 @@ public abstract class Command {
      * @param param Given parameter.
      * @return Boolean result.
      */
-    public boolean hasArgument(String param) {
+    protected boolean hasArgument(String param) {
         if (!paramArgs.containsKey(param)) {
             return false;
         }
@@ -84,16 +89,14 @@ public abstract class Command {
      * @param param Given parameter.
      * @return Argument.
      */
-    public String getArgument(String param) {
-        if (hasParameter(param)) {
-            return paramArgs.get(param).orElseGet(() -> {
-                result = Result.error(new JukeInvalidParameterException(param));
-                return "";
-            });
-        } else {
-            result = Result.error(new JukeInvalidParameterException(param));
+    protected String getArgument(String param) {
+        boolean isMissingArgumentOrParameter = !hasParameter(param) || !hasArgument(param);
+        if (isMissingArgumentOrParameter) {
+            setErroneousResult(new JukeInvalidParameterException(param));
             return "";
         }
+        assert paramArgs.get(param) != null;
+        return paramArgs.get(param).orElse("");
     }
 
     /**
@@ -103,7 +106,7 @@ public abstract class Command {
      * @param param Given parameter.
      * @return Boolean result.
      */
-    public boolean isDefaultParameter(String param) {
+    protected boolean isDefaultParameter(String param) {
         return param.equals(DEFAULT_PARAMETER);
     }
 
@@ -113,7 +116,7 @@ public abstract class Command {
      *
      * @return Boolean result.
      */
-    public boolean hasDefaultArgument() {
+    protected boolean hasDefaultArgument() {
         return hasArgument(DEFAULT_PARAMETER);
     }
 
@@ -123,11 +126,29 @@ public abstract class Command {
      *
      * @return Default argument.
      */
-    public String getDefaultArgument() {
+    protected String getDefaultArgument() {
         return paramArgs.get(DEFAULT_PARAMETER).orElseGet(() -> {
-            result = Result.error(new JukeException("Missing default argument."));
+            setErroneousResult(new JukeException(MISSING_DEFAULT_ARGUMENT_MESSAGE));
             return "";
         });
+    }
+
+    /**
+     * Sets the result to an error with a given exception.
+     *
+     * @param e Exception.
+     */
+    protected void setErroneousResult(Exception e) {
+        result = Result.error(e);
+    }
+
+    /**
+     * Sets the result to an success with a given message or messages.
+     *
+     * @param messages Messages.
+     */
+    protected void setSuccessfulResult(String... messages) {
+        result = Result.success(messages);
     }
 
     /**
@@ -139,10 +160,11 @@ public abstract class Command {
      */
     public Command addParameter(String param, String args) {
         Optional<String> option = Optional.empty();
-        if (args != null && !args.isBlank()) {
+        boolean hasArgument = args != null && !args.isBlank();
+        if (hasArgument) {
             option = Optional.of(args);
         }
-        if (paramArgs.containsKey(param)) {
+        if (hasParameter(param)) {
             paramArgs.replace(param, option);
         } else {
             paramArgs.put(param, option);
@@ -157,7 +179,8 @@ public abstract class Command {
      * @return This command.
      */
     public Command removeParameter(String param) {
-        if (param == null || param.isBlank()) {
+        boolean isDefaultParameter = param == null || param.isBlank();
+        if (isDefaultParameter) {
             paramArgs.replace("", Optional.empty());
         } else {
             paramArgs.remove(param);

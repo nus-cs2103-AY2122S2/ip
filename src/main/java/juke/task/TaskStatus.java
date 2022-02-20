@@ -34,7 +34,7 @@ public enum TaskStatus {
      * @return Command name.
      */
     public String getCommandName() {
-        return this.commandName;
+        return commandName;
     }
 
     /**
@@ -43,6 +43,6 @@ public enum TaskStatus {
      * @return Status icon.
      */
     public String getStatusIcon() {
-        return this.statusIcon;
+        return statusIcon;
     }
 }

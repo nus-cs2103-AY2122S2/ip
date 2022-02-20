@@ -11,6 +11,9 @@ import juke.task.Task;
  * Command to find tasks matching a string.
  */
 public class FindCommand extends Command {
+    private static final String SUCCESS_MESSAGE = "Found task(s):";
+    private static final String COMMAND_NAME = "find";
+
     /**
      * Checks if the parameters and arguments are valid.
      * Requires a string to query.
@@ -19,17 +22,30 @@ public class FindCommand extends Command {
      */
     @Override
     public Command checkParametersAndArguments() {
-        for (String param : this.paramArgs.keySet()) {
-            if (!this.isDefaultParameter(param)) {
-                this.result = Result.error(new JukeInvalidParameterException(param));
-                return this;
-            }
+        if (hasUnnecessaryParameters()) {
+            return this;
         }
         if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeMissingArgumentException("find"));
+            setErroneousResult(new JukeMissingArgumentException(COMMAND_NAME));
             return this;
         }
         return this;
+    }
+
+    /**
+     * Returns if there are unnecessary parameters.
+     *
+     * @return Boolean result.
+     */
+    private boolean hasUnnecessaryParameters() {
+        for (String param : paramArgs.keySet()) {
+            if (isDefaultParameter(param)) {
+                continue;
+            }
+            setErroneousResult(new JukeInvalidParameterException(param));
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -47,16 +63,34 @@ public class FindCommand extends Command {
         if (this.isErroneous()) {
             return this;
         }
-        List<Task> tasks = this.juke.getTaskList().search(this.getDefaultArgument());
-        if (tasks.size() == 0) {
-            this.result = Result.error(new JukeEmptyTaskListException());
+        assert result instanceof Result.Empty;
+        String[] descriptions = null;
+        if (!canFindTask(descriptions)) {
             return this;
         }
-        String[] descriptions = new String[tasks.size()];
-        for (int i = 0; i < tasks.size(); i++) {
-            descriptions[i] = tasks.get(i).toString();
-        }
-        this.result = new Result.Success(descriptions);
+        assert descriptions != null;
+        setSuccessfulResult(descriptions);
         return this;
+    }
+
+    /**
+     * Finds the tasks with a matching string as the query.
+     * Returns if it is possible to find a task.
+     *
+     * @param descriptions Empty string array to fill.
+     * @return Boolean result.
+     */
+    private boolean canFindTask(String[] descriptions) {
+        List<Task> tasks = juke.getTaskList().search(getDefaultArgument());
+        if (tasks.size() == 0) {
+            setErroneousResult(new JukeEmptyTaskListException());
+            return false;
+        }
+        descriptions = new String[tasks.size() + 1];
+        descriptions[0] = SUCCESS_MESSAGE;
+        for (int i = 0; i < tasks.size(); i++) {
+            descriptions[i + 1] = tasks.get(i).toString();
+        }
+        return true;
     }
 }

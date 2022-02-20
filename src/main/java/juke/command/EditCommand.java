@@ -10,6 +10,17 @@ import juke.task.TimeTask;
  * Command for editing tasks.
  */
 public class EditCommand extends Command {
+    private static final String SUCCESS_MESSAGE = "Successfully edited task: %s.";
+    private static final String COMMAND_NAME = "edit";
+
+    private static final String DESCRIPTION_PARAMETER = "d";
+    private static final String TIME_PARAMETER = "t";
+
+    /**
+     * Task to edit.
+     */
+    private Task task;
+
     /**
      * Checks if the parameters and arguments are valid.
      * Requires an integer relating to the index of the task to edit.
@@ -20,22 +31,49 @@ public class EditCommand extends Command {
      */
     @Override
     public Command checkParametersAndArguments() {
-        if (paramArgs.size() == 1) {
-            assert paramArgs.containsKey(DEFAULT_PARAMETER);
-            result = Result.error(new JukeMissingArgumentException("edit"));
-        }
-        for (String param : this.paramArgs.keySet()) {
-            if (!this.isDefaultParameter(param) && !param.equals("d") && !param.equals("t")) {
-                this.result = Result.error(new JukeInvalidParameterException(param));
-                return this;
-            }
-        }
-        if (!this.hasDefaultArgument()) {
-            this.result = Result.error(new JukeMissingArgumentException("edit"));
+        if (isMissingParameters()) {
             return this;
         }
-        assert hasDefaultArgument();
+        if (hasUnnecessaryParameters()) {
+            return this;
+        }
+        if (!hasDefaultArgument()) {
+            setErroneousResult(new JukeMissingArgumentException(COMMAND_NAME));
+            return this;
+        }
         return this;
+    }
+
+    /**
+     * Returns if missing parameters.
+     *
+     * @return Boolean result.
+     */
+    private boolean isMissingParameters() {
+        if (paramArgs.size() == 1) {
+            assert paramArgs.containsKey(DEFAULT_PARAMETER);
+            setErroneousResult(new JukeMissingArgumentException(COMMAND_NAME));
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns if there are unnecessary parameters.
+     *
+     * @return Boolean result.
+     */
+    private boolean hasUnnecessaryParameters() {
+        for (String param : this.paramArgs.keySet()) {
+            if (!isDefaultParameter(param)
+                && !param.equals(DESCRIPTION_PARAMETER)
+                && !param.equals(TIME_PARAMETER)) {
+                setErroneousResult(new JukeInvalidParameterException(param));
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -46,51 +84,72 @@ public class EditCommand extends Command {
      */
     @Override
     public Command execute() {
-        Task task;
-        if (this.isSuccessful()) {
+        if (isSuccessful()) {
             return this;
         }
-        this.checkParametersAndArguments();
-        if (this.isErroneous()) {
+        checkParametersAndArguments();
+        if (isErroneous()) {
             return this;
         }
+        assert isEmpty();
         try {
-            int index = Integer.parseInt(getDefaultArgument()) - 1;
-            task = juke.getTaskList().get(index);
+            getTask();
         } catch (NumberFormatException e) {
-            this.result = Result.error(e);
+            setErroneousResult(e);
             return this;
         }
         assert paramArgs.size() > 1;
         assert task != null;
         String oldDescription = task.getDescription();
-        if (hasParameter("d")) {
-            if (!hasArgument("d")) {
-                result = Result.error(new JukeMissingArgumentException("edit"));
-                return this;
-            }
-            task.setDescription(getArgument("d"));
+        if (!canEditTask()) {
+            return this;
         }
-        if (hasParameter("t")) {
-            if (!(task instanceof TimeTask)) {
-                result = Result.error(new JukeInvalidParameterException("t"));
-                return this;
+        setSuccessfulResult(String.format(SUCCESS_MESSAGE, oldDescription));
+        juke.getStorage().saveTasks();
+        return this;
+    }
+
+    /**
+     * Gets the task at the given index.
+     *
+     * @throws NumberFormatException Throws if cannot parse to integer.
+     */
+    private void getTask() throws NumberFormatException {
+        int index = Integer.parseInt(getDefaultArgument()) - 1;
+        task = juke.getTaskList().get(index);
+    }
+
+    /**
+     * Edits the task at the given index.
+     *
+     * @return Boolean result.
+     */
+    private boolean canEditTask() {
+        if (hasParameter(DESCRIPTION_PARAMETER)) {
+            if (!hasArgument(DESCRIPTION_PARAMETER)) {
+                setErroneousResult(new JukeMissingArgumentException(COMMAND_NAME));
+                return false;
             }
-            if (!hasArgument("t")) {
-                result = Result.error(new JukeMissingArgumentException("edit"));
-                return this;
+            task.setDescription(getArgument(DESCRIPTION_PARAMETER));
+        }
+        if (hasParameter(TIME_PARAMETER)) {
+            if (!(task instanceof TimeTask)) {
+                setErroneousResult(new JukeInvalidParameterException(TIME_PARAMETER));
+                return false;
+            }
+            if (!hasArgument(TIME_PARAMETER)) {
+                setErroneousResult(new JukeMissingArgumentException(COMMAND_NAME));
+                return false;
             }
             assert task instanceof TimeTask;
             try {
                 // Checkstyle error with type-cast brackets
-                ((TimeTask) task).setTime(getArgument("t"));
+                ((TimeTask) task).setTime(getArgument(TIME_PARAMETER));
             } catch (JukeParseException e) {
-                result = Result.error(e);
-                return this;
+                setErroneousResult(e);
+                return false;
             }
         }
-        result = Result.success(String.format("Successfully edited task: %s.", oldDescription));
-        juke.getStorage().saveTasks();
-        return this;
+        return true;
     }
 }

@@ -54,7 +54,8 @@ public class CommandHandler {
         if (cmdSup == null) {
             throw new JukeInvalidCommandException(paramSplit.get(0)[0]);
         }
-        Command cmd = cmdSup.get().addParameter("", paramSplit.remove(0)[1]);
+        Command cmd = cmdSup.get()
+                .addParameter(Command.DEFAULT_PARAMETER, paramSplit.remove(0)[1]);
         for (String[] args : paramSplit) {
             cmd = cmd.addParameter(args[0], args[1]);
         }
@@ -73,6 +74,16 @@ public class CommandHandler {
             return null;
         }
         return command.execute();
+    }
+
+    /**
+     * Returns if the command is null or not.
+     *
+     * @param command Command.
+     * @return Boolean result.
+     */
+    public static boolean isCommandNull(Command command) {
+        return command == null;
     }
 
     /**

@@ -16,17 +16,18 @@ public class TextUi {
             + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String LINE_INDENT = "    ";
     private static final String LOGO = "                                                             _____   \n"
-        + "          _____  ______   _____     ______   _______    _____\\    \\  \n"
-        + "         |\\    \\_\\     \\  \\    \\   |\\     \\  \\      \\  /    / |    | \n"
-        + "         \\ \\     \\\\    |  |    |    \\\\     \\  |     /|/    /  /___/| \n"
-        + "          \\|      ||   |  |    |     \\|     |/     //|    |__ |___|/ \n"
-        + "           |      ||    \\_/   /|      |     |_____// |       \\       \n"
-        + "   ______  |      ||\\         \\|      |     |\\     \\ |     __/ __    \n"
-        + "  /     / /      /|| \\         \\__   /     /|\\|     ||\\    \\  /  \\   \n"
-        + " |      |/______/ | \\ \\_____/\\    \\ /_____/ |/_____/|| \\____\\/    |  \n"
-        + " |\\_____\\      | /   \\ |    |/___/||     | / |    | || |    |____/|  \n"
-        + " | |     |_____|/     \\|____|   | ||_____|/  |____|/  \\|____|   | |  \n"
-        + "  \\|_____|                  |___|/                          |___|/   \n";
+            + "          _____  ______   _____     ______   _______    _____\\    \\  \n"
+            + "         |\\    \\_\\     \\  \\    \\   |\\     \\  \\      \\  /    / |    | \n"
+            + "         \\ \\     \\\\    |  |    |    \\\\     \\  |     /|/    /  /___/| \n"
+            + "          \\|      ||   |  |    |     \\|     |/     //|    |__ |___|/ \n"
+            + "           |      ||    \\_/   /|      |     |_____// |       \\       \n"
+            + "   ______  |      ||\\         \\|      |     |\\     \\ |     __/ __    \n"
+            + "  /     / /      /|| \\         \\__   /     /|\\|     ||\\    \\  /  \\   \n"
+            + " |      |/______/ | \\ \\_____/\\    \\ /_____/ |/_____/|| \\____\\/    |  \n"
+            + " |\\_____\\      | /   \\ |    |/___/||     | / |    | || |    |____/|  \n"
+            + " | |     |_____|/     \\|____|   | ||_____|/  |____|/  \\|____|   | |  \n"
+            + "  \\|_____|                  |___|/                          |___|/   \n";
+    private static final String GREET_MESSAGE = "Greetings Executor!";
 
     private Scanner in;
 
@@ -41,26 +42,26 @@ public class TextUi {
      * Handles the logic of running the main UI loop for Juke CLI.
      */
     public void runUiLoop() {
-        this.printPrefix();
+        printPrefix();
         try {
-            Command cmd = CommandHandler.fetchCommand(this.getInput());
+            Command cmd = CommandHandler.fetchCommand(getInput());
             CommandHandler.execute(cmd);
-            this.displayResult(CommandHandler.fetchResult(cmd));
+            displayResult(CommandHandler.fetchResult(cmd));
         } catch (JukeInvalidCommandException e) {
-            this.formattedPrint(e.getMessage());
+            formattedPrint(e.getMessage());
         }
     }
 
     public String getInput() {
-        return this.in.nextLine();
+        return in.nextLine();
     }
 
     /**
      * Prints the welcome message.
      */
     public void greet() {
-        this.printLogo();
-        this.formattedPrint("Greetings Executor!");
+        printLogo();
+        formattedPrint(GREET_MESSAGE);
     }
 
     /**
@@ -70,6 +71,9 @@ public class TextUi {
         System.out.println(LOGO);
     }
 
+    /**
+     * Prints the line prefix.
+     */
     public void printPrefix() {
         System.out.print(LINE_PREFIX);
     }
@@ -82,9 +86,9 @@ public class TextUi {
     public void displayResult(Result result) {
         try {
             String[] string = result.getOrThrow();
-            this.formattedPrint(string);
+            formattedPrint(string);
         } catch (Exception e) {
-            this.formattedPrint(e.getMessage());
+            formattedPrint(e.getMessage());
         }
     }
 

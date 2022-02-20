@@ -15,14 +15,14 @@ import juke.exception.JukeParseException;
  */
 public class DateTimeHandler {
     /**
-     * Date and time.
+     * For initializing a default time value.
      */
-    private LocalDateTime dateTime;
+    private static final String DEFAULT_TIME = "010102000 0000";
 
     /**
      * List of acceptable date time patterns.
      */
-    private final List<String> dateTimePatterns = List.of(
+    private static final List<String> DATE_TIME_PATTERNS = List.of(
             "dd[[-][/][ ]]MM[[-][/][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "dd[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "d[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
@@ -37,6 +37,16 @@ public class DateTimeHandler {
             "MMM[[-][ ]]d[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "MMMM[[-][ ]]dd[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "MMMM[[-][ ]]d[[-][ ]]uuuu[ HH[[-][:][ ]]mm]");
+
+    /**
+     * Message for date and time parse error.
+     */
+    private static final String DATE_TIME_PARSE_ERROR_MESSAGE = "date and time";
+
+    /**
+     * Date and time.
+     */
+    private LocalDateTime dateTime;
 
     /**
      * Formatter for date time inputs.
@@ -65,7 +75,7 @@ public class DateTimeHandler {
     public DateTimeHandler() {
         initializeFormatters();
         try {
-            dateTime = LocalDateTime.parse("010102000 0000", inputFormatter);
+            dateTime = LocalDateTime.parse(DEFAULT_TIME, inputFormatter);
         } catch (DateTimeParseException e) {
             // Should not reach here
             assert false;
@@ -78,7 +88,7 @@ public class DateTimeHandler {
      * Initializes the date and time formatters.
      */
     private void initializeFormatters() {
-        inputFormatter = dateTimePatterns.stream()
+        inputFormatter = DATE_TIME_PATTERNS.stream()
                 .reduce(new DateTimeFormatterBuilder().parseCaseInsensitive(),
                         // Lambdas seem to create checkstyle errors.
                         (builder, str) -> builder.appendOptional(DateTimeFormatter.ofPattern(str)),
@@ -99,13 +109,14 @@ public class DateTimeHandler {
      */
     private void parse(String string) throws JukeParseException {
         assert inputFormatter != null;
-        if (string == null || string.isEmpty()) {
-            throw new JukeParseException("date and time");
+        boolean isInputEmpty = string == null || string.isEmpty();
+        if (isInputEmpty) {
+            throw new JukeParseException(DATE_TIME_PARSE_ERROR_MESSAGE);
         }
         try {
-            this.dateTime = LocalDateTime.parse(string, inputFormatter);
+            dateTime = LocalDateTime.parse(string, inputFormatter);
         } catch (DateTimeParseException e) {
-            throw new JukeParseException("date and time");
+            throw new JukeParseException(DATE_TIME_PARSE_ERROR_MESSAGE);
         }
     }
 
@@ -115,10 +126,6 @@ public class DateTimeHandler {
      * @return Formatted date and time string.
      */
     public String getDateTime() {
-        String dt = "";
-        if (this.dateTime != null) {
-            dt += String.format("%td %tb %tY %tR", this.dateTime, this.dateTime, this.dateTime, this.dateTime);
-        }
-        return dt;
+        return this.dateTime.format(outputFormatter);
     }
 }

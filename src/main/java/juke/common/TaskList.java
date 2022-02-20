@@ -30,8 +30,8 @@ public class TaskList implements Iterable<Task> {
      * @param tasks Collection of tasks.
      */
     public TaskList(Collection<Task> tasks) {
-        this.taskList = new ArrayList<>();
-        this.taskList.addAll(tasks);
+        taskList = new ArrayList<>();
+        taskList.addAll(tasks);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList implements Iterable<Task> {
      * @return True.
      */
     public boolean add(Task task) {
-        return this.taskList.add(task);
+        return taskList.add(task);
     }
 
     /**
@@ -50,13 +50,10 @@ public class TaskList implements Iterable<Task> {
      *
      * @param index Index to remove.
      * @return Task at the index.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
      */
-    public Task remove(int index) {
-        try {
-            return this.taskList.remove(index);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
+    public Task remove(int index) throws IndexOutOfBoundsException {
+        return taskList.remove(index);
     }
 
     /**
@@ -65,13 +62,10 @@ public class TaskList implements Iterable<Task> {
      *
      * @param index Index to return.
      * @return Task at the index.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
      */
-    public Task get(int index) {
-        try {
-            return this.taskList.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
+    public Task get(int index) throws IndexOutOfBoundsException {
+        return taskList.get(index);
     }
 
     /**
@@ -80,7 +74,7 @@ public class TaskList implements Iterable<Task> {
      * @return Number of tasks.
      */
     public int size() {
-        return this.taskList.size();
+        return taskList.size();
     }
 
     /**
@@ -90,12 +84,12 @@ public class TaskList implements Iterable<Task> {
      * @throws JukeEmptyTaskListException Throws if task list is empty.
      */
     public String[] list() throws JukeEmptyTaskListException {
-        if (this.taskList.size() == 0) {
+        if (taskList.size() == 0) {
             throw new JukeEmptyTaskListException();
         }
-        String[] strs = new String[this.taskList.size()];
-        for (int i = 0; i < this.taskList.size(); i++) {
-            strs[i] = this.taskList.get(i).toString();
+        String[] strs = new String[taskList.size()];
+        for (int i = 0; i < taskList.size(); i++) {
+            strs[i] = taskList.get(i).toString();
         }
         return strs;
     }
@@ -105,15 +99,10 @@ public class TaskList implements Iterable<Task> {
      * Returns false if the index is invalid.
      *
      * @param index Index to return.
-     * @return Boolean.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
      */
-    public boolean markTask(int index) {
-        try {
-            this.taskList.get(index).markAsDone();
-            return true;
-        } catch (IndexOutOfBoundsException e) {
-            return false;
-        }
+    public void markTask(int index) throws IndexOutOfBoundsException {
+        taskList.get(index).markAsDone();
     }
 
     /**
@@ -121,15 +110,10 @@ public class TaskList implements Iterable<Task> {
      * Returns false if the index is invalid.
      *
      * @param index Index to return.
-     * @return Boolean.
+     * @throws IndexOutOfBoundsException Throws if index is out of bounds.
      */
-    public boolean unmarkTask(int index) {
-        try {
-            this.taskList.get(index).markAsNotDone();
-            return true;
-        } catch (IndexOutOfBoundsException e) {
-            return false;
-        }
+    public void unmarkTask(int index) throws IndexOutOfBoundsException {
+        taskList.get(index).markAsNotDone();
     }
 
     /**
@@ -140,7 +124,7 @@ public class TaskList implements Iterable<Task> {
      */
     public List<Task> search(String query) {
         ArrayList<Task> queryList = new ArrayList<>();
-        for (Task task : this.taskList) {
+        for (Task task : taskList) {
             if (task.getDescription().contains(query)) {
                 queryList.add(task);
             }

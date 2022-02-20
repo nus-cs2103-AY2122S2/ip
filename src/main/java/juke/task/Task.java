@@ -35,14 +35,14 @@ public abstract class Task implements Cloneable {
      * Marks the task as done.
      */
     public void markAsDone() {
-        this.status = TaskStatus.DONE;
+        status = TaskStatus.DONE;
     }
 
     /**
      * Marks the task as not done.
      */
     public void markAsNotDone() {
-        this.status = TaskStatus.NOT_DONE;
+        status = TaskStatus.NOT_DONE;
     }
 
     /**
@@ -51,7 +51,16 @@ public abstract class Task implements Cloneable {
      * @return Task status.
      */
     public TaskStatus getStatus() {
-        return this.status;
+        return status;
+    }
+
+    /**
+     * Returns the task type.
+     *
+     * @return Task type.
+     */
+    public TaskType getTaskType() {
+        return type;
     }
 
     /**
@@ -60,7 +69,7 @@ public abstract class Task implements Cloneable {
      * @return Task status icon.
      */
     public String getStatusIcon() {
-        return this.status.getStatusIcon();
+        return status.getStatusIcon();
     }
 
     /**
@@ -71,7 +80,7 @@ public abstract class Task implements Cloneable {
     public String getDescription() {
         assert description != null;
         assert !description.isBlank();
-        return this.description;
+        return description;
     }
 
     /**
@@ -101,7 +110,7 @@ public abstract class Task implements Cloneable {
      */
     @Override
     public String toString() {
-        return this.getTaskIcon() + " " + this.getStatusIcon() + " " + this.getDescription();
+        return getTaskIcon() + " " + getStatusIcon() + " " + getDescription();
     }
 
     /**

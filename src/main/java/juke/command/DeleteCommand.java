@@ -9,6 +9,9 @@ import juke.task.Task;
  * Command for deleting tasks.
  */
 public class DeleteCommand extends Command {
+    private static final String SUCCESS_MESSAGE = "Successfully deleted task: %s.";
+    private static final String COMMAND_NAME = "delete";
+
     /**
      * Checks if the parameters and arguments are valid.
      * Requires an integer relating to the index of the task to delete.
@@ -17,17 +20,30 @@ public class DeleteCommand extends Command {
      */
     @Override
     public Command checkParametersAndArguments() {
-        for (String param : paramArgs.keySet()) {
-            if (!isDefaultParameter(param)) {
-                result = Result.error(new JukeInvalidParameterException(param));
-                return this;
-            }
+        if (hasUnnecessaryParameters()) {
+            return this;
         }
         if (!hasDefaultArgument()) {
-            result = Result.error(new JukeMissingArgumentException("delete"));
+            setErroneousResult(new JukeMissingArgumentException(COMMAND_NAME));
             return this;
         }
         return this;
+    }
+
+    /**
+     * Returns if there are unnecessary parameters.
+     *
+     * @return Boolean result.
+     */
+    private boolean hasUnnecessaryParameters() {
+        for (String param : paramArgs.keySet()) {
+            if (isDefaultParameter(param)) {
+                continue;
+            }
+            setErroneousResult(new JukeInvalidParameterException(param));
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -45,19 +61,28 @@ public class DeleteCommand extends Command {
         if (isErroneous()) {
             return this;
         }
+        assert isEmpty();
         try {
-            int index = Integer.parseInt(getDefaultArgument()) - 1;
-            if (index < 0 || index >= juke.getTaskList().size()) {
-                this.result = Result.error(new JukeInvalidTaskIndexException());
-                return this;
-            }
-            Task task = juke.getTaskList().remove(index);
-            result = Result.success(String.format("Successfully deleted task: %s.", task.getDescription()));
+            deleteTask();
         } catch (NumberFormatException e) {
-            result = Result.error(e);
+            setErroneousResult(e);
+            return this;
+        } catch (IndexOutOfBoundsException e) {
+            setErroneousResult(new JukeInvalidTaskIndexException());
             return this;
         }
         juke.getStorage().saveTasks();
         return this;
+    }
+
+    /**
+     * Delete the task at the given index.
+     *
+     * @throws NumberFormatException Throws if cannot parse to integer.
+     */
+    private void deleteTask() throws NumberFormatException {
+        int index = Integer.parseInt(getDefaultArgument()) - 1;
+        Task task = juke.getTaskList().remove(index);
+        setSuccessfulResult(String.format(SUCCESS_MESSAGE, task.getDescription()));
     }
 }

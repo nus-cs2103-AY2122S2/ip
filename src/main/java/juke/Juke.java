@@ -1,6 +1,7 @@
 package juke;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import juke.command.CommandHandler;
 import juke.common.Storage;
@@ -12,24 +13,45 @@ import juke.ui.TextUi;
  * Entry point for the Juke application.
  */
 public class Juke extends Application {
+    /**
+     * Singleton instance of Juke.
+     */
     private static final Juke INSTANCE = new Juke();
 
     private TaskList taskList;
     private TextUi textUi;
     private Gui gui;
     private Storage storage;
+
+    /**
+     * Boolean to determine whether the program should exit.
+     */
     private boolean hasExited;
 
     /**
      * Constructor that initializes the application.
      */
     public Juke() {
-        taskList = new TaskList();
-        textUi = new TextUi();
-        gui = new Gui();
-        storage = new Storage(this);
-        hasExited = false;
+        initializeFields();
         CommandHandler.registerCommands();
+    }
+
+    /**
+     * Runs the CLI implementation of Juke.
+     *
+     * @param args Run arguments, unused.
+     */
+    public static void main(String[] args) {
+        INSTANCE.run();
+    }
+
+    /**
+     * Returns the singleton instance of Juke.
+     *
+     * @return Juke.
+     */
+    public static Juke getInstance() {
+        return INSTANCE;
     }
 
     /**
@@ -39,18 +61,9 @@ public class Juke extends Application {
      */
     @Override
     public void start(Stage stage) {
+        Platform.setImplicitExit(true);
+        INSTANCE.getStorage().loadTasks();
         gui.initializeUiComponents(stage);
-    }
-
-    /**
-     * Runs Juke CLI.
-     */
-    private void run() {
-        textUi.greet();
-        storage.loadTasks();
-        while (!hasExited) {
-            textUi.runUiLoop();
-        }
     }
 
     /**
@@ -58,6 +71,7 @@ public class Juke extends Application {
      */
     public void exit() {
         hasExited = true;
+        Platform.exit();
     }
 
     /**
@@ -88,20 +102,24 @@ public class Juke extends Application {
     }
 
     /**
-     * Returns the singleton instance of Juke.
-     *
-     * @return Juke.
+     * Runs Juke CLI.
      */
-    public static Juke getInstance() {
-        return INSTANCE;
+    private void run() {
+        textUi.greet();
+        storage.loadTasks();
+        while (!hasExited) {
+            textUi.runUiLoop();
+        }
     }
 
     /**
-     * Runs the CLI implementation of Juke.
-     *
-     * @param args Run arguments, unused.
+     * Initializes the fields for the constructor.
      */
-    public static void main(String[] args) {
-        INSTANCE.run();
+    private void initializeFields() {
+        taskList = new TaskList();
+        textUi = new TextUi();
+        gui = new Gui();
+        storage = new Storage(this);
+        hasExited = false;
     }
 }
