@@ -26,6 +26,7 @@ public class Parser {
         String confirmationMessage = null;
         String currentMessage = getFirstWord(message);
         Task currentTask;
+        int index;
         switch (currentMessage) {
         case "help":
             confirmationMessage = Ui.COMMANDS_lIST;
@@ -38,13 +39,22 @@ public class Parser {
             confirmationMessage = confirmSort(tasks);
             break;
         case "mark":
-            confirmationMessage = changeTaskMarkAndConfirmation(message, ConfirmCodes.MARK, tasks);
+            index = getIndexFromMessage(message);
+            currentTask = tasks.getTaskAtIndex(index);
+            modifyTaskMark(currentTask, ConfirmCodes.MARK);
+            confirmationMessage = confirmMarkChange(currentTask, ConfirmCodes.MARK);
             break;
         case "unmark":
-            confirmationMessage = changeTaskMarkAndConfirmation(message, ConfirmCodes.UNMARK, tasks);
+            index = getIndexFromMessage(message);
+            currentTask = tasks.getTaskAtIndex(index);
+            modifyTaskMark(currentTask, ConfirmCodes.UNMARK);
+            confirmationMessage = confirmMarkChange(currentTask, ConfirmCodes.UNMARK);
             break;
         case "delete":
-            confirmationMessage = deleteTaskAndConfirmation(message, tasks, storage);
+            index = getIndexFromMessage(message);
+            currentTask = tasks.getTaskAtIndex(index);
+            deleteTask(index , tasks, storage);
+            confirmationMessage = confirmTaskDeletion(currentTask, tasks);
             break;
         case "find":
             confirmationMessage = getResultsOfFind(message, tasks);
@@ -52,17 +62,18 @@ public class Parser {
         case "todo":
             currentTask = parseMessageContents(message, TaskTypes.TODO);
             addTask(currentTask, storage, tasks);
-            confirmationMessage = confirmationTaskAddition(currentTask, tasks);
+
+            confirmationMessage = confirmTaskAddition(currentTask, tasks);
             break;
         case "deadline":
             currentTask = parseMessageContents(message, TaskTypes.DEADLINE);
             addTask(currentTask, storage, tasks);
-            confirmationMessage = confirmationTaskAddition(currentTask, tasks);
+            confirmationMessage = confirmTaskAddition(currentTask, tasks);
             break;
         case "event":
             currentTask = parseMessageContents(message, TaskTypes.EVENT);
             addTask(currentTask, storage, tasks);
-            confirmationMessage = confirmationTaskAddition(currentTask, tasks);
+            confirmationMessage = confirmTaskAddition(currentTask, tasks);
             break;
         default:
             throwInvalidInput();
@@ -177,23 +188,27 @@ public class Parser {
         return null; //should not reach here
     }
 
-    private String confirmationTaskAddition(Task task, TaskList tasks) {
+    private String confirmTaskAddition(Task task, TaskList tasks) {
         return "Alright then! I've added the task to your list:" + "\n\t" + task + "\n"
-            + getTaskCountMessage(tasks);
+            + getNumOfTasksMessage(tasks);
     }
 
-    private String deleteTaskMessage(Task task, TaskList tasks) {
+    private String confirmTaskDeletion(Task task, TaskList tasks) {
         return "As you wish. I've removed the task from your list:" + "\n\t" + task
-            + "\nI hope it was nothing important..." + "\n" + getTaskCountMessage(tasks);
+            + "\nI hope it was nothing important..." + "\n" + getNumOfTasksMessage(tasks);
     }
 
-    private String markTaskMessage(Task task) {
-        return "Alright then! I've marked that task as done:" + "\n\t" + task;
+    private String confirmMarkChange(Task task, ConfirmCodes code) throws DukeException {
+        if (code == ConfirmCodes.MARK) {
+            return "Alright then! I've marked that task as done:" + "\n\t" + task;
+        } else if (code == ConfirmCodes.UNMARK) {
+            return "Alright then! I've marked that task as not done:" + "\n\t" + task;
+        } else {
+            throwInvalidInput();
+            return null; //should not reach here
+        }
     }
 
-    private String unmarkTaskMessage(Task task) {
-        return "Alright then! I've marked that task as not done:" + "\n\t" + task;
-    }
     private String confirmSort(TaskList tasks) {
         return "Alright then! I've sorted the tasks accordingly: \n" + tasks;
     }
@@ -268,32 +283,6 @@ public class Parser {
             return "Provided are the tasks currently in your list:\n" + listOfTasks;
         }
     }
-    private String changeTaskMarkAndConfirmation(
-        String message, ConfirmCodes code, TaskList tasks) throws DukeException {
-        int index = getIndexFromMessage(message); //get the index
-        Task currentTask = tasks.getTaskAtIndex(index);
-        switch (code) {
-        case MARK:
-            throwIfMarked(currentTask);
-            currentTask.markDone();
-            return markTaskMessage(currentTask);
-        case UNMARK:
-            throwIfNotMarked(currentTask);
-            currentTask.markUndone();
-            return unmarkTaskMessage(currentTask);
-        default:
-            throwInvalidTypeDeclaration();
-        }
-        assert false : "Runtime should not reach here";
-        return null;
-    }
-
-    private String deleteTaskAndConfirmation(String message, TaskList tasks, Storage storage) throws DukeException {
-        int index = getIndexFromMessage(message);
-        Task currentTask = tasks.removeTask(index);
-        storage.modifyStorage(currentTask, ConfirmCodes.DELETION, tasks);
-        return deleteTaskMessage(currentTask, tasks);
-    }
 
     private String[] getMessageArray(String message, TaskTypes types) throws DukeException {
         if (types == TaskTypes.TODO) {
@@ -326,6 +315,27 @@ public class Parser {
         assert type != null : "Sort type is not supposed to be null";
         tasks.sort(type);
         storage.modifyStorage(null, ConfirmCodes.SORT, tasks);
+    }
+
+    private void modifyTaskMark(
+        Task currentTask, ConfirmCodes code) throws DukeException {
+        switch (code) {
+        case MARK:
+            throwIfMarked(currentTask);
+            currentTask.markDone();
+            break;
+        case UNMARK:
+            throwIfNotMarked(currentTask);
+            currentTask.markUndone();
+            break;
+        default:
+            throwInvalidTypeDeclaration();
+        }
+    }
+
+    private void deleteTask(int index, TaskList tasks, Storage storage) throws DukeException {
+        Task currentTask = tasks.removeTask(index);
+        storage.modifyStorage(currentTask, ConfirmCodes.DELETION, tasks);
     }
 
     private void throwIfWrongFormat(String message, String[] messageArr, TaskTypes type) throws DukeException {
@@ -414,7 +424,7 @@ public class Parser {
         throw new DukeException(DukeException.DID_NOT_UNDERSTAND);
     }
 
-    private String getTaskCountMessage(TaskList tasks) {
+    private String getNumOfTasksMessage(TaskList tasks) {
         return "You currently have " + tasks.getTasksCount() + " task(s) remaining in your list.";
     }
 }
