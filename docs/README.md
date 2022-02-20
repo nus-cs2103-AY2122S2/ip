@@ -16,7 +16,7 @@ Bobby is a desktop app for managing your tasks. Utilize commands to add, remove 
 * Saving the data
 
 
-#### Adding a To Do
+### Adding a To Do
 
 Command: `todo`
 Adds a To Do to the list.
@@ -29,7 +29,7 @@ Examples:
 * todo CS2106 quiz
 
 
-#### Adding a Deadline
+### Adding a Deadline
 
 Command: `deadline`
 Adds a Deadline to the list.
@@ -42,7 +42,7 @@ Examples:
 * deadline CS2103 quiz /by 2022-02-21
 
 
-#### Adding an Event
+### Adding an Event
 
 Command: `event`
 Adds an Event to the list.
@@ -55,7 +55,7 @@ Examples:
 * event Recess week /at 20 February to 27 February
 
 
-#### Listing all tasks
+### Listing all tasks
 
 Command: `list`
 Shows a list of all tasks in the list.
@@ -63,7 +63,7 @@ Shows a list of all tasks in the list.
 Format: `list`
 
 
-####: Marking a task
+###: Marking a task
 
 Command: `mark`
 Marks a task as done with an X.
@@ -75,7 +75,7 @@ Example:
 * mark 4
 
 
-#### Unmarking a task
+### Unmarking a task
 
 Command: `unmark`
 Unmarks a task by removing the X.
@@ -87,7 +87,7 @@ Example:
 * unmark 4
 
 
-#### Finding a task
+### Finding a task
 
 Command: `find`
 Finds a task in the list with a keyword that matches task description.
@@ -100,7 +100,7 @@ Examples:
 * find quiz
 
 
-#### Deleting a task
+### Deleting a task
 
 Command: `delete`
 Deletes a task from the list.
@@ -112,7 +112,7 @@ Example:
 * delete 5
 
 
-#### Undo a change to the list
+### Undo a change to the list
 
 Command: `undo`
 Reverses a change to the list by a previous command.
@@ -120,7 +120,7 @@ Reverses a change to the list by a previous command.
 Format: `undo`
 
 
-#### Exit the program
+### Exit the program
 
 Command: `bye`
 Exits the program.
@@ -128,6 +128,6 @@ Exits the program.
 Format: `bye`
 
 
-#### Saving the data
+### Saving the data
 
 Bobby's data of your list of tasks is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
