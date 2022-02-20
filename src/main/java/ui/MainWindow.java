@@ -32,6 +32,8 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
 
+    private final DialogBox botIsTypingDialog = DialogBox.getDukeDialog(". . .", this.dukeImage);
+
     /**
      * Sets up the main window.
      */
@@ -48,9 +50,8 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         this.duke = d;
         final DukeResponse startResponse = this.duke.processQuery(StartCommand.COMMAND);
-        this.dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(startResponse.getMessage(), dukeImage)
-        );
+        final DialogBox startDialog = DialogBox.getDukeDialog(startResponse.getMessage(), dukeImage);
+        this.dialogContainer.getChildren().add(startDialog);
     }
 
     /**
@@ -60,17 +61,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         assert this.duke != null : "The Duke instance should already be assigned";
-        final String input = userInput.getText();
+        final String input = this.userInput.getText();
         final DukeResponse response = this.duke.processQuery(input);
 
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response.getMessage(), dukeImage)
-        );
+        final DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        dialogContainer.getChildren().addAll(userDialog, this.botIsTypingDialog);
         userInput.clear();
 
+        final PauseTransition botProcessingPause = new PauseTransition(Duration.seconds(0.65));
+        botProcessingPause.setOnFinished(e -> {
+            dialogContainer.getChildren().remove(this.botIsTypingDialog);
+            final DialogBox botResponseDialog = DialogBox.getDukeDialog(response.getMessage(), this.dukeImage);
+            dialogContainer.getChildren().add(botResponseDialog);
+        });
+        botProcessingPause.play();
+
         if (response.isExit()) {
-            final PauseTransition pause = new PauseTransition(Duration.ONE);
+            final PauseTransition pause = new PauseTransition(Duration.seconds(1.4));
             pause.setOnFinished(e -> Platform.exit());
             pause.play();
         }
