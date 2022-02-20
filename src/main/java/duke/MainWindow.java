@@ -74,6 +74,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private static void endDuke() {
-        exit();
+        System.exit(0);
     }
 }
