@@ -1,4 +1,4 @@
-package duke.Commands;
+package duke.commands;
 
 import duke.DukeHistory;
 import duke.DukeUi;
@@ -31,11 +31,11 @@ public class TodoCommand extends Commands {
     @Override
     public String execute() {
         String description = generateDescription();
-        ToDos tempToDo = history.addToDo(description);
+        ToDos tempToDo = this.getHistory().addToDo(description);
         return "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
                 + "    " + tempToDo.getToDo()
-                + "Currently you have " + history.getSize() + " tasks in our records.\n"
+                + "Currently you have " + this.getHistory().getSize() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
     }
 
@@ -47,12 +47,11 @@ public class TodoCommand extends Commands {
      *
      * @return Todo_task response.
      */
-
     public String generateDescription() {
         StringBuilder description = new StringBuilder();
-        for (int i = 1; i < userInput.length; i++) {
-            description.append(userInput[i]);
-            if (i != (userInput.length - 1)) {
+        for (int i = 1; i < this.getUserInput().length; i++) {
+            description.append(this.getUserInput()[i]);
+            if (i != (this.getUserInput().length - 1)) {
                 description.append(" ");
             }
         }

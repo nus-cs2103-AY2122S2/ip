@@ -1,4 +1,4 @@
-package duke.Commands;
+package duke.commands;
 
 import duke.DukeException;
 import duke.DukeHistory;
@@ -16,7 +16,7 @@ public class FindCommand extends Commands {
         try {
             return execute();
         } catch (DukeException ex1) {
-            return ui.printFoundNothing();
+            return this.getUi().printFoundNothing();
         }
     }
 
@@ -36,15 +36,15 @@ public class FindCommand extends Commands {
     @Override
     public String execute() throws DukeException {
         StringBuilder phrase = new StringBuilder();
-        for (int i = 1; i < userInput.length; i++) {
-            phrase.append(userInput[i]);
-            if (i != (userInput.length - 1)) {
+        for (int i = 1; i < this.getUserInput().length; i++) {
+            phrase.append(this.getUserInput()[i]);
+            if (i != (this.getUserInput().length - 1)) {
                 phrase.append(" ");
             }
         }
         String border = "_______________________________________________________\n";
         return border
                 + "Here is what we found:\n"
-                + history.findPhrase(phrase.toString()) + border;
+                + this.getHistory().findPhrase(phrase.toString()) + border;
     }
 }

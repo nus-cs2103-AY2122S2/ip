@@ -1,8 +1,4 @@
-package duke.Commands;
-
-import duke.DukeException;
-import duke.DukeHistory;
-import duke.DukeUi;
+package duke.commands;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -12,17 +8,41 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import duke.DukeContact;
+import duke.DukeException;
+import duke.DukeHistory;
+import duke.DukeUi;
+
 /**
  * Represents a class that contains the logic for all keywords that Duke recognizes.
  */
 public abstract class Commands {
 
-    DukeHistory history;
-    String[] userInput;
-    DukeUi ui;
+    private DukeContact contact;
+    private DukeHistory history;
+    private String[] userInput;
+    private DukeUi ui;
 
+    /**
+     * Default constructor for DukeLCH's task commands.
+     * @param history An instance of DukeHistory.
+     * @param userInput The user's input with the given command.
+     * @param ui An instance of DukeUi.
+     */
     public Commands(DukeHistory history, String[] userInput, DukeUi ui) {
         this.history = history;
+        this.userInput = userInput;
+        this.ui = ui;
+    }
+
+    /**
+     * Default constructor for DukeLCH's contact commands.
+     * @param contact An instance of DukeContact.
+     * @param userInput The user's input with the given command.
+     * @param ui An instance of DukeUi.
+     */
+    public Commands(DukeContact contact, String[] userInput, DukeUi ui) {
+        this.contact = contact;
         this.userInput = userInput;
         this.ui = ui;
     }
@@ -32,8 +52,6 @@ public abstract class Commands {
     public abstract void validate();
 
     public abstract String execute() throws DukeException;
-
-
 
     /**
      * A method that takes in a String, checks it against 2 accepted date formats and converts it into
@@ -89,6 +107,19 @@ public abstract class Commands {
         }
     }
 
+    public DukeUi getUi() {
+        return ui;
+    }
 
+    public String[] getUserInput() {
+        return userInput;
+    }
 
+    public DukeContact getContact() {
+        return contact;
+    }
+
+    public DukeHistory getHistory() {
+        return history;
+    }
 }

@@ -9,7 +9,6 @@ public class Task {
 
     /**
      * Constructor used to instantiate a Task class normally.
-     *
      * @param description A String representing the description of the task.
      */
     public Task(String description) {
@@ -20,7 +19,6 @@ public class Task {
     /**
      * An alternative constructor used to instantiate a Task class when loading from a pre-existing duke.txt file
      * at the start of a new duke session.
-     *
      * @param description A String representing the description of the task.
      * @param mark An integer indicating if the task was done or not.
      */
@@ -31,7 +29,6 @@ public class Task {
 
     /**
      * Returns the String representation of the Task class for users to read.
-     *
      * @return A String representing the Task class for the user.
      */
     public String getTask() {
@@ -44,7 +41,6 @@ public class Task {
 
     /**
      * Returns the description of the Task class.
-     *
      * @return A String representing the description of the Task class.
      */
     public String getDescription() {
@@ -53,7 +49,6 @@ public class Task {
 
     /**
      * Returns the String representation of the mark status of the Task class.
-     *
      * @return A String representing the mark status of the Task class.
      */
     public String getMark() {
@@ -80,7 +75,6 @@ public class Task {
 
     /**
      * Overrides the default toString() method of the Task class.
-     *
      * @return A String representing the description of the Task class.
      */
     @Override

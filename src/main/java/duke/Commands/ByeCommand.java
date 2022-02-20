@@ -1,4 +1,4 @@
-package duke.Commands;
+package duke.commands;
 
 import duke.DukeHistory;
 import duke.DukeUi;
@@ -21,8 +21,6 @@ public class ByeCommand extends Commands {
 
     /**
      * Always returns true. Bye command by default is valid so long as assertion holds in Duke class.
-     *
-     * @return True.
      */
     @Override
     public void validate() {
@@ -31,7 +29,6 @@ public class ByeCommand extends Commands {
 
     /**
      * Generates a response to "bye" command.
-     *
      * @return Response.
      */
     @Override

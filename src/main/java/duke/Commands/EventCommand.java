@@ -1,11 +1,11 @@
-package duke.Commands;
+package duke.commands;
+
+import java.util.MissingFormatArgumentException;
+import java.util.MissingResourceException;
 
 import duke.DukeHistory;
 import duke.DukeUi;
 import duke.Event;
-
-import java.util.MissingFormatArgumentException;
-import java.util.MissingResourceException;
 
 public class EventCommand extends Commands {
 
@@ -22,9 +22,9 @@ public class EventCommand extends Commands {
             validate();
             return execute();
         } catch (MissingFormatArgumentException ex1) {
-            return ui.printMissingLabel(userInput[0]);
+            return this.getUi().printMissingLabel(this.getUserInput()[0]);
         } catch (MissingResourceException ex2) {
-            return ui.printMissingDateTimeArgumentError(userInput[0]);
+            return this.getUi().printMissingDateTimeArgumentError(this.getUserInput()[0]);
         }
     }
 
@@ -46,38 +46,47 @@ public class EventCommand extends Commands {
      */
     @Override
     public String execute() {
-        String date = generateDate(userInput[this.timeStart + 1]);
-        String time = generateTime(userInput[this.timeStart + 2]);
-        Event tempEvent = history.addEvent(description, date, time);
+        String date = generateDate(this.getUserInput()[this.timeStart + 1]);
+        String time = generateTime(this.getUserInput()[this.timeStart + 2]);
+        Event tempEvent = this.getHistory().addEvent(description, date, time);
         return "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
                 + "    " + tempEvent.getEvent()
-                + "Currently you have " + history.getSize() + " tasks in our records.\n"
+                + "Currently you have " + this.getHistory().getSize() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
     }
 
+    /**
+     * Method that generates a description for the Event task and looks for the label in the user input.
+     */
     public void generateDescriptionAndGetLabel() {
         StringBuilder tempDescription = new StringBuilder();
-        for (int i = 1; i < userInput.length; i++) {
-            if (userInput[i].startsWith("/at")) {
+        for (int i = 1; i < this.getUserInput().length; i++) {
+            if (this.getUserInput()[i].startsWith("/at")) {
                 timeStart = i;
                 break;
             } else {
-                tempDescription.append(userInput[i]);
+                tempDescription.append(this.getUserInput()[i]);
             }
             tempDescription.append(" ");
         }
         this.description = tempDescription.toString();
     }
 
+    /**
+     * Method that checks if a label exists.
+     */
     public void checkForLabel() {
         if (this.timeStart == -1) {
             throw new MissingFormatArgumentException("/at");
         }
     }
 
+    /**
+     * Method that checks if a date and/or time field exists.
+     */
     public void checkForDateAndTime() {
-        if (userInput.length - this.timeStart < 3 ) {
+        if (this.getUserInput().length - this.timeStart < 3) {
             throw new MissingResourceException("No date and/or time", "timedate", "key");
         }
     }
@@ -86,6 +95,11 @@ public class EventCommand extends Commands {
         return convertToDukeDate(date);
     }
 
+    /**
+     * Method that splits the start and end time for an Event task before converting them to Duke Time format.
+     * @param time String representation of the time period in which the Event tasks takes place.
+     * @return Converted time format in String representation.
+     */
     public String generateTime(String time) {
         StringBuilder tempTime = new StringBuilder();
         String[] tokens = time.split("-");

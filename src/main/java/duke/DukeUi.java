@@ -11,8 +11,8 @@ public class DukeUi {
     /**
      * A method that prints a load error message.
      */
-    public void printLoadError() {
-        String err = "_______________________________________________________\n"
+    public String printLoadError() {
+        return "_______________________________________________________\n"
                 + "* Load to duke.txt failed *\n"
                 + "Please try again!\n"
                 + "If the problem persists, please contact the administrator!\n"
@@ -72,7 +72,6 @@ public class DukeUi {
 
     /**
      * A method that prints an error message when there is no argument detected for a command that requires arguments.
-     *
      * @param keyword A String representing the specific command used.
      * @return Error message.
      */
@@ -86,7 +85,6 @@ public class DukeUi {
     /**
      * A method that prints an error message when there is no DateTime argument detected or
      * key phrases used to detect DateTime is inputted by the user.
-     *
      * @param keyword A String representing the specific command used.
      * @return Error message.
      */
@@ -115,8 +113,7 @@ public class DukeUi {
     }
 
     /**
-     * -To add javadoc here-
-     *
+     * A method that prints an error message when there is no label detected for Commands that require a label.
      * @param keyword A String representing the specific command used.
      * @return Error message.
      */
@@ -160,7 +157,10 @@ public class DukeUi {
                 + "    6. unmark [#entry]\n"
                 + "    7. delete [#entry]\n"
                 + "    8. update\n"
-                + "    9. bye\n"
+                + "    9. addcontacts [name] [contactNumber]\n"
+                + "   10. listcontacts\n"
+                + "   11. deletecontacts [#entry]\n"
+                + "   12. bye\n"
                 + "_______________________________________________________\n";
     }
 
@@ -175,6 +175,10 @@ public class DukeUi {
                 + "_______________________________________________________\n";
     }
 
+    /**
+     * A method that prints a response if Duke cannot find a task in history when the user tries to edit said task.
+     * @return Error message.
+     */
     public String printFailedAccess() {
         return "_______________________________________________________\n"
                 + "Duke cannot find the task in history.\n"
