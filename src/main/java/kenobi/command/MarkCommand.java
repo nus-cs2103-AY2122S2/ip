@@ -13,6 +13,7 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(int index) {
         toMarkIndex = index - 1;
+        assert toMarkIndex >= 0 : "MarkCommand: negative index";
     }
 
     /**
