@@ -105,14 +105,14 @@ public class IoManager {
     }
 
     /**
-     * Method to display dooke.Dooke's welcome message.
+     * Method to display Dooke's welcome message.
      */
     private void displayWelcomeMessage() {
         display(welcomeMessage);
     }
 
     /**
-     * Initializer method to start dooke.Dooke.
+     * Initializer method to start Dooke.
      */
     public void start() {
         try {

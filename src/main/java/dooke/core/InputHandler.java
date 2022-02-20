@@ -163,6 +163,27 @@ public class InputHandler {
     }
 
     /**
+     * Performs checks to the task parameters and initializes them.
+     *
+     * @param separator The input command in separated form.
+     * @return The string array containing the initialized variables.
+     */
+    private String[] performChecksAndInitialize(String[] separator) {
+        String[] output = new String[2];
+        if (separator.length == 2) {
+            output[0] = separator[1].trim();
+            output[1] = separator[0].trim();
+        } else if (separator.length == 1) {
+            output[0] = "";
+            output[1] = separator[0].trim();
+        } else {
+            output[0] = "";
+            output[1] = "";
+        }
+        return output;
+    }
+
+    /**
      * Handles the deadline command.
      *
      * @param inputData Input command to be handled.
@@ -176,16 +197,10 @@ public class InputHandler {
 
             if (inputSequence.length > 1) {
                 String[] bySeparator = inputSequence[1].split("/by");
-                if (bySeparator.length == 2) {
-                    deadlineBy = bySeparator[1].trim();
-                    description = bySeparator[0].trim();
-                } else if (bySeparator.length == 1) {
-                    deadlineBy = "";
-                    description = bySeparator[0].trim();
-                } else {
-                    deadlineBy = "";
-                    description = "";
-                }
+                String[] output = performChecksAndInitialize(bySeparator);
+                assert output.length == 2;
+                deadlineBy = output[0];
+                description = output[1];
             } else {
                 deadlineBy = "";
                 description = "";
@@ -215,16 +230,10 @@ public class InputHandler {
 
             if (inputSequence.length > 1) {
                 String[] atSeparator = inputSequence[1].split("/at");
-                if (atSeparator.length == 2) {
-                    eventAt = atSeparator[1].trim();
-                    description = atSeparator[0].trim();
-                } else if (atSeparator.length == 1) {
-                    eventAt = "";
-                    description = atSeparator[0].trim();
-                } else {
-                    eventAt = "";
-                    description = "";
-                }
+                String[] output = performChecksAndInitialize(atSeparator);
+                assert output.length == 2;
+                eventAt = output[0];
+                description = output[1];
             } else {
                 eventAt = "";
                 description = "";
