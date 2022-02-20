@@ -13,12 +13,12 @@
 <fx:root alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="dialog" style="-fx-background-color: #f7f7f7; -fx-background-radius: 10; -fx-padding: 10;" text="Label" wrapText="true">
+        <Label fx:id="dialog" style="-fx-background-color: #F7F7F7; -fx-background-radius: 10; -fx-padding: 10;" text="Label" wrapText="true">
          <HBox.margin>
             <Insets left="15.0" />
          </HBox.margin>
          <font>
-            <Font name="Nunito Medium" size="12.0" />
+            <Font fx:id="NUNITO_MEDIUM" name="Nunito Medium" size="13.0" />
          </font></Label>
     </children>
     <padding>

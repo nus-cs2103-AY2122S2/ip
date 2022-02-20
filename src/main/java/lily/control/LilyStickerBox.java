@@ -17,14 +17,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * This control represents a dialog box consisting of an ImageView to 
- * represent the speaker's face and a label containing text from the speaker.
+ * This control represents a dialog box consisting of 
+ * an ImageView to represent a sticker sent by Lily.
  * 
- * @@author ddx-510 Referenced Dai Tianle for using Region to resize textboxes, and setting colours
+ * @@author ddx-510 Referenced Dai Tianle for using Region to resize textboxes.
  */
 public class LilyStickerBox extends HBox {
     @FXML
-    private ImageView displayPicture;
+    private ImageView sticker;
 
     private final Image PARTY_IMAGE = new Image(Objects.requireNonNull(this.getClass()
             .getResourceAsStream("/images/lilyyay.png")));
@@ -45,27 +45,26 @@ public class LilyStickerBox extends HBox {
 
         switch(emotion) {
         case "party":
-            displayPicture.setImage(PARTY_IMAGE);
+            sticker.setImage(PARTY_IMAGE);
             break;
 
         case "clap":
-            displayPicture.setImage(CLAP_IMAGE);
+            sticker.setImage(CLAP_IMAGE);
             break;
 
         case "mock":
-            displayPicture.setImage(MOCK_IMAGE);
+            sticker.setImage(MOCK_IMAGE);
             break;
 
         default:
-            displayPicture.setImage(CLAP_IMAGE);
-            // throw error here
+            System.err.println("Sticker emotion does not exist.");
         }
     }
 
     /**
-     * Constructs a sticker box for the User
+     * Constructs a sticker box for Lily
      * 
-     * @return a new DialogBox from the User
+     * @return a new LilyStickerBox from Lily
      */
     public static LilyStickerBox getSticker(String emotion) {
         var stk = new LilyStickerBox(emotion);

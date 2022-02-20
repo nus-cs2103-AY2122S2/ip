@@ -3,8 +3,6 @@ package lily.control;
 import lily.Lily;
 
 import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,7 +20,9 @@ import lily.LilyException;
 
 /**
  * Provides the layout for the other controls. Controller for MainWindow. 
+ * 
  * @@author HanJiyao Referenced his delay function to show the exit message before quitting.
+ * @@author ddx-510 Referenced Dai Tianle for setting colours
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
 
     private static final int FONT_SIZE = 13;
     private static final int THINK_TIME_MILIS = 330;
-    private static final int STICKER_TIME_MILIS = 1200;
+    private static final int STICKER_TIME_MILIS = 1130;
     private static final int QUIT_TIME_MILIS = 2500;
 
 
@@ -57,38 +57,41 @@ public class MainWindow extends AnchorPane {
         sendButton.setStyle("-fx-background-color: #58cc02; -fx-text-fill: white; ");
     }
 
+    /**
+     * Shows the welcome message and assigns the instance of Lily.
+     * 
+     * @param l Lily which will parse user input and provide a response.
+     */
     public void setLily(Lily l) {
-        // show welcome message
         LilyDialogBox welcomeMessage = LilyDialogBox.getDialog(l.getWelcome());
         think(THINK_TIME_MILIS, (event -> dialogContainer.getChildren().add(welcomeMessage)));
+
         lily = l;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input 
-     * and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing 
+     * Lily's reply. A pause is added before Lily's dialog is added to the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        lily.readCommand(input);
-        String response = lily.getResponse();
-
-        // echo user's command
         dialogContainer.getChildren().add(UserDialogBox.getDialog(input));
+        lily.readCommand(input);
 
-        // display lily's response 
+        String response = lily.getResponse();
         LilyDialogBox respDialog = LilyDialogBox.getDialog(response);
         think(THINK_TIME_MILIS, (event -> dialogContainer.getChildren().add(respDialog)));
 
         userInput.clear();
 
+        // Send stickers based on user's command
         String keyword = (input.split(" "))[0];
+        switch(keyword) {
         /**
          * @@author HanJiyao Referenced his delay function to show the exit message before quitting.
          */
-        switch(keyword) {
         case "bye":
             LilyStickerBox party = LilyStickerBox.getSticker("party");
             think(STICKER_TIME_MILIS, (event -> dialogContainer.getChildren().add(party)));
@@ -116,16 +119,11 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Displays Lily saying the input.
-     *
-     * @param s Input for Lily to say.
+     * Adds a delay before executing a function.
+     * 
+     * @param ms The time in milliseconds that Lily should think for.
+     * @param fn The function to be executed after Lily has finished thinking.
      */
-    @FXML
-    public void display(String s) {
-        dialogContainer.getChildren().add(LilyDialogBox.getDialog(s));
-        userInput.clear();
-    }
-    
     private void think(int ms, EventHandler<ActionEvent> fn) {
         PauseTransition delay = new PauseTransition(Duration.millis(ms));
         delay.setOnFinished(fn);

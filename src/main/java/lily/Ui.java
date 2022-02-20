@@ -105,12 +105,9 @@ public class Ui {
 
     /**
      * Prints the exit message and closes the scanner.
-     * 
-     * @deprecated
      */
-    @Deprecated
     public void closeUi() {
-        output = "if your list had stuff, i've saved it" + LS
+        output = "if your list had stuff, i've saved it." + LS
                 + "don't bug me again. bye (´-ω-`)";
     }
 
@@ -123,7 +120,7 @@ public class Ui {
         if (tl.isEmpty()) {
             output = "there's nothing in the list bro";
         } else {
-            output = "you told me you had to" + LS + listTasks(tl.getContents());
+            output = "you told me you had to:" + LS + listTasks(tl.getContents());
         }
     }
 
@@ -174,7 +171,7 @@ public class Ui {
         output = "hmph. then why did you make me track your" + LS
                 + t + LS
                 + LS
-                + "anyway, now you're left with" + LS
+                + "anyway, now you're left with:" + LS
                 + listTasks(tl.getContents());
     }   
 
