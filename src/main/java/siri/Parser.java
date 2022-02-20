@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 //Parser.java reused and edited from Brigette Santoso E0564307
+/**
+ * Parser is the logic of siri that makes sense of the user inputs
+ */
 public class Parser {
 
     static public Command parse(String fullCommand) throws InvalidInputException {

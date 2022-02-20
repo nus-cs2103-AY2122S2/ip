@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 //Storage.java reused and edited from Brigette Santoso E0564307
+
+/**
+ * Storage handles loading and saving of the user commands into siri.txt.
+ */
 public class Storage {
     protected String filePath;
 

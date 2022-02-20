@@ -3,6 +3,10 @@ package siri;
 import java.time.LocalDate;
 
 //AddDeadLineCommand.java reused from Brigette Santoso E0564307
+
+/**
+ * Handles the creation and adding of deadline tasks into list
+ */
 public class AddDeadlineCommand extends Command {
     protected String description;
     protected String deadline;

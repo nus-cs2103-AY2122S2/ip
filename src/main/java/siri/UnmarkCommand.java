@@ -2,6 +2,9 @@ package siri;
 
 import java.io.IOException;
 
+/**
+ * Handles the unmarking of a single task inside the list
+ */
 public class UnmarkCommand extends Command {
     protected int taskIndex;
 

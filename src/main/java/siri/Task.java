@@ -1,5 +1,8 @@
 package siri;
 
+/**
+ * Represents a task object
+ */
 public class Task {
     String description;
     String initialLetter;

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 //Ui.java reused and edited from Brigette Santoso E0564307
+/**
+ * Ui provides String replies for the user to interact with
+ */
 public class Ui {
     protected Scanner scan;
 

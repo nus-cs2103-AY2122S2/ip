@@ -3,6 +3,9 @@ package siri;
 import java.time.LocalDate;
 
 //AddEventCommand.java reused from Brigette Santoso E0564307
+/**
+ * Handles the creation and adding of event tasks into list
+ */
 public class AddEventCommand extends Command {
     protected String description;
     protected String eventDate;

@@ -3,6 +3,9 @@ package siri;
 import java.util.ArrayList;
 
 //TaskList.java reused and edited from Brigette Santoso E0564307
+/**
+ * Contains the tasklist, and has the operations such as adding/deleting a task to/from the list
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
 
@@ -33,4 +36,5 @@ public class TaskList {
     public void addTask(Task task) {
         tasks.add(task);
     }
+
 }

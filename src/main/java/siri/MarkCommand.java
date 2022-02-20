@@ -3,6 +3,9 @@ package siri;
 import java.io.IOException;
 
 //MarkCommand.java reused from Brigette Santoso E0564307
+/**
+ * Handles the marking of a single task inside the list
+ */
 public class MarkCommand extends Command {
     protected int taskIndex;
 

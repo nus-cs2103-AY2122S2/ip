@@ -1,5 +1,8 @@
 package siri;
 
+/**
+ * Represents a to-do task
+ */
 public class Todo extends Task {
 
     public Todo(String description, String initialLetter) {

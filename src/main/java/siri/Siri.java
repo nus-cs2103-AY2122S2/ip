@@ -1,5 +1,8 @@
 package siri;
 
+/**
+ * Handles the running of the Siri main method and specifies the txt file to load/save list details.
+ * */
 public class Siri {
 
     private Storage storage;
