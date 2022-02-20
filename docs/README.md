@@ -24,10 +24,10 @@ Duke frees your mind of having to remember things you need to do. It's,
 ## Instaling
 All you need to do is,
 
-download it from here.
-double-click it.
-add your tasks.
-let it manage your tasks for you. 😉
+- download it from here.
+- double-click it.
+- add your tasks.
+- let it manage your tasks for you. 😉
 
 ## For the nerds
 
