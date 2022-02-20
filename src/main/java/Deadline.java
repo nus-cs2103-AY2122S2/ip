@@ -13,11 +13,8 @@ public class Deadline extends duke.Task {
         super(description);
     }
 
-    /**
-     * Returns a formatted string representing the Deadline task.
-     * @return String
-     */
-    public String toString() {
-        return String.format("[D][%s] %s", getStatusIcon(), description);
+    public Deadline(String description, String tag) {
+        super(description, tag);
     }
+
 }

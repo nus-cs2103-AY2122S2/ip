@@ -13,11 +13,8 @@ public class ToDo extends duke.Task{
         super(description);
     }
 
-    /**
-     * Returns a formatted string representing the ToDo task.
-     * @return String
-     */
-    public String toString() {
-        return String.format("[T][%s] %s", getStatusIcon(), description);
+    public ToDo(String description, String tag) {
+        super(description, tag);
     }
+
 }

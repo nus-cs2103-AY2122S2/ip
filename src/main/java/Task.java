@@ -5,6 +5,7 @@ package duke;
 public class Task {
     protected String description;
     protected boolean isDone;
+    public String tag;
 
     public static void main(String[] args) {
     }
@@ -17,6 +18,13 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = null;
+    }
+
+    public Task(String description, String tag) {
+        this.description = description;
+        this.isDone = false;
+        this.tag = tag;
     }
 
     /**
@@ -46,6 +54,11 @@ public class Task {
      * @return prints the task in the specified format
      */
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        if (tag != null){
+            return String.format("[%s] %s (%s)", getStatusIcon(), description, tag);
+        } else {
+            return String.format("[%s] %s", getStatusIcon(), description);
+        }
+
     }
 }

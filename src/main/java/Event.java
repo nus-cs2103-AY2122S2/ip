@@ -13,11 +13,13 @@ public class Event extends duke.Task{
         super(description);
     }
 
+    public Event(String description, String tag) {
+        super(description, tag);
+    }
+
     /**
      * Returns a formatted string representing the Event task.
      * @return String
      */
-    public String toString() {
-        return String.format("[E][%s] %s", getStatusIcon(), description);
-    }
+
 }
