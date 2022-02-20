@@ -92,6 +92,9 @@ public class TaskList {
      */
     public String print() {
         String output = "";
+        if (this.taskList.size() == 0 ){
+            return ("The tasklist is empty!!!");
+        }
         for (int i = 0; i < this.taskList.size(); i++) {
             output += (i + 1 + ". " + this.taskList.get(i)) + System.lineSeparator();
         }

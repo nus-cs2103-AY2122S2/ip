@@ -21,7 +21,7 @@ Duke frees your mind of having to remember things you need to do. It's,
 ⚠️ Warning: We are not responsible for the completion of tasks.
 
 
-## Instaling
+## Installing
 All you need to do is,
 
 - download it from here.
