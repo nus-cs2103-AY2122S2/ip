@@ -17,4 +17,13 @@ public class Deadline extends duke.Task {
         super(description, tag);
     }
 
+    public String toString() {
+        if (tag != null){
+            return String.format("[D] [%s] %s (%s)", getStatusIcon(), description, tag);
+        } else {
+            return String.format("[D] [%s] %s", getStatusIcon(), description);
+        }
+
+    }
+
 }

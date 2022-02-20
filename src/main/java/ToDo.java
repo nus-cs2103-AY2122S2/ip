@@ -17,4 +17,13 @@ public class ToDo extends duke.Task{
         super(description, tag);
     }
 
+    public String toString() {
+        if (tag != null){
+            return String.format("[T] [%s] %s (%s)", getStatusIcon(), description, tag);
+        } else {
+            return String.format("[T] [%s] %s", getStatusIcon(), description);
+        }
+
+    }
+
 }

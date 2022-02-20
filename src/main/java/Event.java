@@ -21,5 +21,13 @@ public class Event extends duke.Task{
      * Returns a formatted string representing the Event task.
      * @return String
      */
+    public String toString() {
+        if (tag != null){
+            return String.format("[E] [%s] %s (%s)", getStatusIcon(), description, tag);
+        } else {
+            return String.format("[E] [%s] %s", getStatusIcon(), description);
+        }
+
+    }
 
 }
