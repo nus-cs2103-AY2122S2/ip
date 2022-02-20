@@ -87,6 +87,7 @@ public class Storage {
                     break;
                 default:
                     assert false : "File contains illegal modifications";
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {
