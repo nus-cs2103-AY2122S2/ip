@@ -1,16 +1,24 @@
 package seedu.duke;
 
-import seedu.command.*;
+import seedu.command.AddDeadlineCommand;
+import seedu.command.AddEventCommand;
+import seedu.command.AddToDoCommand;
+import seedu.command.Command;
+import seedu.command.DeleteTaskCommand;
+import seedu.command.ExitCommand;
+import seedu.command.FindTasksCommand;
+import seedu.command.ListTasksCommand;
+import seedu.command.MarkTaskCommand;
+import seedu.command.UnmarkTaskCommand;
+import seedu.command.WelcomeCommand;
 import seedu.exception.DukeException;
 
 /**
- * Contains methods to parse user input to be understood based on the
- * type of command made by user.
- * Provides method to get the length (in terms of words separated by " ")
- * of user input.
+ * Contains methods to parse user input to be understood based on the type of command made by user
+ * and create new Command subclass object instances accordingly.
  */
 public class Parser {
-    private String inputCommand;
+    private final String inputCommand;
 
     public Parser(String inputCommand) {
         assert inputCommand != null : "Parser->Parser: Input command string cannot be null.";
@@ -19,9 +27,11 @@ public class Parser {
     }
 
     /**
-     * Parses the user input to return the first word to determine the type of command.
+     * Parses the user input to return the new command object created with the command details (if
+     * applicable).
      *
-     * @return Returns the first word which is the command type of user input.
+     * @return Returns the new command object created based on the command type determined.
+     * @throws DukeException if command action is not recognisable.
      */
     public Command getCommand() throws DukeException {
         String commandAction = this.getCommandAction();
@@ -53,22 +63,21 @@ public class Parser {
     }
 
     /**
-     * Parses the user input command to retrieve
-     * the command action.
+     * Parses the user input command to retrieve the command action.
      *
-     * @return Returns a String of the command action.
+     * @return A string of the command action.
      */
     public String getCommandAction() {
         return inputCommand.split(" ", 2)[0];
     }
 
     /**
-     * Parses the user input command for a deadline task to retrieve
-     * the description and date.
+     * Parses the user input command to retrieve the details (if applicable).
      *
-     * @return Returns a String of the description.
+     * @return A String of the command details.
+     * @throws DukeException If no details are provided where needed.
      */
-    public String getCommandDetails() throws DukeException{
+    public String getCommandDetails() throws DukeException {
         try {
             String commandDetails = inputCommand.split(" ", 2)[1];
             if (commandDetails.length() == 0) {

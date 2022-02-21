@@ -28,7 +28,11 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
-    @Override
+    /**
+     * Formats the description of the todo task to be written to a file.
+     *
+     * @return String format of todo description.
+     */
     public String toWrite() {
         return "[T]" + super.toString();
     }

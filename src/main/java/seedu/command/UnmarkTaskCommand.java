@@ -2,10 +2,13 @@ package seedu.command;
 
 import java.io.IOException;
 
-import seedu.exception.DukeException;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
+import seedu.exception.DukeException;
 
+/**
+ * Retrieves the task with the stated task ID to mark it as undone (i.e. []).
+ */
 public class UnmarkTaskCommand extends Command {
     private final int taskId;
 
@@ -14,25 +17,31 @@ public class UnmarkTaskCommand extends Command {
         assert taskId.length() > 0 : "UnmarkTaskCommand->UnmarkTaskCommand: Task ID cannot be empty.";
 
         try {
-            this.taskId = Integer.valueOf(taskId);
+            this.taskId = Integer.parseInt(taskId);
         } catch (NumberFormatException e) {
             throw new DukeException("Sorry your task ID is invalid, please try again!");
         }
     }
 
-    public String run(TaskList tasksList, Storage storage) throws DukeException {
-        assert tasksList != null : "UnmarkTaskCommand->run: Tasks list cannot be null.";
+    /**
+     * Executes the unmark task command to unmark the task from the task list as undone.
+     * Writes the modified task list back to the storage location.
+     *
+     * @param taskList Current list of tasks.
+     * @param storage Storage object to write tasks back to.
+     * @return The task that has been marked as undone if successfully run.
+     */
+    public String run(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "UnmarkTaskCommand->run: Tasks list cannot be null.";
         assert storage != null : "UnmarkTaskCommand->run: Storage cannot be null.";
 
-        tasksList.getTasks(taskId - 1).markUndone();
+        taskList.getTasks(taskId - 1).markUndone();
         try {
-            storage.write(tasksList.getTaskList());
+            storage.write(taskList.getTaskList());
         } catch (IOException e) {
             throw new DukeException("Something went wrong when I tried to write your task list back to storage :(");
         }
 
-        String result = "OK, I've marked this task as not done yet:\n";
-        result += tasksList.getTasks(taskId - 1).toString();
-        return result;
+        return "OK, I've marked this task as not done yet:\n" + taskList.getTasks(taskId - 1).toString();
     }
 }

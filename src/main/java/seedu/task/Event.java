@@ -46,7 +46,12 @@ public class Event extends Task {
         return at.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
-    @Override
+
+    /**
+     * Formats the description of the event task to be written to a file.
+     *
+     * @return String format of event description.
+     */
     public String toWrite() {
         return "[E]" + super.toString() + " /at " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }

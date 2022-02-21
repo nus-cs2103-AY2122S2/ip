@@ -1,29 +1,29 @@
 package seedu.duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import seedu.exception.DukeException;
 import seedu.task.Deadline;
 import seedu.task.Event;
 import seedu.task.Task;
 import seedu.task.ToDo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
 /**
- * Contains the current tasks list at any point of time when the chat-bot is running.
- * Provides methods to modify the tasks list (i.e. add, delete tasks) and retrieve
- * information (i.e. size of the tasks list).
+ * Contains the current task list at any point of time when the chatbot is running.
+ * Provides methods to modify the task list (i.e. add, delete) and retrieve task
+ * information (i.e. size of the task list).
  */
 public class TaskList {
-    private ArrayList<Task> taskList = new ArrayList<Task>();
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * Creates an instance of a task list object based on the current
+     * Creates an instance of a TaskList object based on the current
      * existing list of tasks passed in (if not empty).
      *
      * @param taskList Current lists of tasks, each as a string in the array list.
-     * @throws DukeException To catch any errors when creating the tasklist.
+     * @throws DukeException If error is met while creating the task list.
      */
     public TaskList(ArrayList<String> taskList) throws DukeException {
         assert taskList != null : "TaskList->TaskList: Tasks list cannot be null.";
@@ -52,19 +52,23 @@ public class TaskList {
                         .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 this.taskList.add(new Deadline(taskDeadline[0], taskIsDone, dateTime));
                 break;
+            default:
+                throw new DukeException("I was not able to create your task list :(");
             }
         }
     }
 
     /**
-     * Creates an instance of a tasklist object with no existing tasks.
+     * Creates an instance of a TaskList object with no existing tasks.
      */
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<>();
     }
 
     /**
      * Adds a new task to the task list.
+     *
+     * @param t New task to be added.
      */
     public void add(Task t) {
         assert t != null : "TaskList->add: Task to be added cannot be null.";
@@ -73,7 +77,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes an existing task from the task list.
+     * Deletes an existing task from the task list based on the task ID.
+     *
+     * @param taskId Task ID to be deleted.
      */
     public void delete(int taskId) {
         assert taskId < taskList.size() : "TaskList->delete: Task ID to be deleted does not exist.";
@@ -94,7 +100,7 @@ public class TaskList {
     /**
      * Gets and returns the current existing tasks list.
      *
-     * @return Task list as an array list of task objects..
+     * @return Task list as an array list of Task objects.
      */
     public ArrayList<Task> getTaskList() {
         return taskList;
@@ -103,7 +109,8 @@ public class TaskList {
     /**
      * Gets a specific task in the current existing list based on the index.
      *
-     * @return Specific task object in the tasks list.
+     * @param taskId Task ID of task to be retrieved.
+     * @return Specific task object in the task list.
      */
     public Task getTasks(int taskId) {
         assert taskId < taskList.size() : "TaskList->getTasks: Task ID to be retrieved does not exist.";
@@ -113,15 +120,16 @@ public class TaskList {
     }
 
     /**
-     * Finds and returns tasks with the specified keyword as a new task list object.
+     * Finds and returns tasks containing the specified keyword as a new task list object.
      *
      * @param keyword Keyword to be found in the tasks' descriptions.
-     * @return Returns a new task list object with the specified keyword.
+     * @return A new task list object with tasks containing the specified keyword.
+     * @throws DukeException If error is met while creating the TaskList object to be returned.
      */
     public TaskList findTasks(String keyword) throws DukeException {
         assert keyword != null : "TaskList->findTasks: Keyword to search for tasks cannot be null.";
 
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (Task t : taskList) {
             if (t.toString().toLowerCase().contains(keyword.toLowerCase())) {
                 result.add(t.toWrite());
@@ -131,8 +139,9 @@ public class TaskList {
     }
 
     /**
+     * Finds if there are any event clashes with the provided date.
      *
-     * @param dateTime Date which we want to search for any clashes in the tasks list.
+     * @param dateTime Date which we want to search for any clashes in the task list.
      * @return True if there are other event tasks in the tasks list that clashes in date, false otherwise.
      */
     public boolean findEventClashes(String dateTime) {

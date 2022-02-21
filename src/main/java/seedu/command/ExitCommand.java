@@ -2,17 +2,25 @@ package seedu.command;
 
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
-import seedu.exception.DukeException;
 
-import java.io.IOException;
-
+/**
+ * Displays exit message to user when run.
+ */
 public class ExitCommand extends Command {
 
     public ExitCommand() {
     }
 
-    public String run(TaskList tasksList, Storage storage) throws DukeException {
-        assert tasksList != null : "ExitCommand->run: Tasks list cannot be null.";
+    /**
+     * Executes the exit command to return a goodbye message.
+     * Checks that task list and storage passed in are still valid not null.
+     *
+     * @param taskList Current list of tasks.
+     * @param storage Storage object to write tasks back to.
+     * @return Goodbye message to the user.
+     */
+    public String run(TaskList taskList, Storage storage) {
+        assert taskList != null : "ExitCommand->run: Task list cannot be null.";
         assert storage != null : "ExitCommand->run: Storage cannot be null.";
 
         return "Bye. See you later!";

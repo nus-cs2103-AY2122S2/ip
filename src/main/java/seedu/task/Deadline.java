@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
  * Provides to String method to print deadline details in specific format.
  */
 public class Deadline extends Task {
-
     protected LocalDate by;
 
     /**
@@ -37,7 +36,11 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
-    @Override
+    /**
+     * Formats the description of the deadline task to be written to a file.
+     *
+     * @return String format of deadline description.
+     */
     public String toWrite() {
         return "[D]" + super.toString() + " /by " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }

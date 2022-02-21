@@ -11,7 +11,7 @@ import seedu.task.Deadline;
  * Adds task of type Deadline to task list based on details provided by user input.
  */
 public class AddDeadlineCommand extends Command {
-    private Deadline deadlineTask;
+    private final Deadline deadlineTask;
 
     public AddDeadlineCommand(String deadlineDetails) throws DukeException {
         assert deadlineDetails != null : "AddDeadlineCommand->AddDeadlineCommand: "
@@ -34,8 +34,8 @@ public class AddDeadlineCommand extends Command {
      * the modified task list back to the storage.
      *
      * @param taskList Current list of tasks.
-     * @param storage Storage Object to write tasks back to.
-     * @return Display message that task has been added to the list successfully.
+     * @param storage Storage object to write tasks back to.
+     * @return Display message if the task has been added to the list successfully.
      * @throws DukeException  If task list cannot be written back to storage location.
      */
     public String run(TaskList taskList, Storage storage) throws DukeException {
@@ -49,8 +49,7 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException("Something went wrong when I tried to write your task list back to storage :(");
         }
 
-        String result = "Got it. I've added this task:\n" + deadlineTask.toString()
+        return "Got it. I've added this task:\n" + deadlineTask.toString()
                 + "\nNow you have " + taskList.size() + " tasks in the list.";
-        return result;
     }
 }

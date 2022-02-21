@@ -69,6 +69,12 @@ public class Task {
         this.isDone = false;
     }
 
+
+    /**
+     * Formats the description of the task to be written to a file.
+     *
+     * @return String format of task description.
+     */
     public String toWrite() {
         String marked = "[" + (this.getStatusIcon()) + "]";
         String output = marked + " " + this.getDescription();

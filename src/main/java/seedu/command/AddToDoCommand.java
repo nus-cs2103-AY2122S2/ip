@@ -1,49 +1,46 @@
 package seedu.command;
 
+import java.io.IOException;
+
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
 import seedu.exception.DukeException;
 import seedu.task.ToDo;
 
-import java.io.IOException;
-
 /**
- * Adds task to list based on user input.
+ * Adds task of type ToDo to task list based on details provided by user input.
  */
 public class AddToDoCommand extends Command {
-    private ToDo task;
+    private final ToDo toDoTask;
 
     public AddToDoCommand(String taskDetails) {
-        assert taskDetails != null : "AddToDoCommand->AddToDoCommand: Task details cannot be null.";
-        assert taskDetails.length() > 0 : "AddToDoCommand->AddToDoCommand: Task details cannot be empty.";
+        assert taskDetails != null : "AddToDoCommand->AddToDoCommand: To do details cannot be null.";
+        assert taskDetails.length() > 0 : "AddToDoCommand->AddToDoCommand: To do details cannot be empty.";
 
-        this.task = new ToDo(taskDetails);
+        this.toDoTask = new ToDo(taskDetails);
     }
 
     /**
-     * Executes the add command to add a new task to the task list and write
+     * Executes the add command to add a new ToDo task to the task list and write
      * the modified task list back to the storage.
      *
-     * @param tasksList Current list of tasks
-     * @param storage Storage Object to write tasks
-     * @return Output message for GUI.
+     * @param taskList Current list of tasks.
+     * @param storage Storage object to write tasks back to.
+     * @return Display message if the task has been added to the list successfully.
+     * @throws DukeException  If task list cannot be written back to storage location.
      */
-    public String run(TaskList tasksList, Storage storage) throws DukeException {
-        assert tasksList != null : "AddToDoCommand->run: Tasks list cannot be null.";
+    public String run(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "AddToDoCommand->run: Tasks list cannot be null.";
         assert storage != null : "AddToDoCommand->run: Storage cannot be null.";
 
-        tasksList.add(task);
+        taskList.add(toDoTask);
         try {
-            storage.write(tasksList.getTaskList());
+            storage.write(taskList.getTaskList());
         } catch (IOException e) {
             throw new DukeException("Something went wrong when I tried to write your task list back to storage :(");
         }
 
-        String result = "Got it. I've added this task:\n";
-        result += task.toString();
-        result += "\nNow you have ";
-        result += tasksList.size();
-        result += " tasks in the list.";
-        return result;
+        return "Got it. I've added this task:\n" + toDoTask.toString()
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 }
