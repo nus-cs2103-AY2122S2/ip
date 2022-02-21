@@ -174,4 +174,10 @@ public class Ui {
         }
         return sb.toString();
     }
+
+    public String showSnooze(Task task) {
+        return "Buddy, buddy, buddy. It's alright if you need more time bud," +
+                "but let's try to roll up our sleeves and get it done, eh bud?" + "\n" + task;
+
+    }
 }

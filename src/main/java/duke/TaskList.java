@@ -61,4 +61,9 @@ public class TaskList {
         }
         return new TaskList(matchingTasks);
     }
+
+    public void snooze(int number) {
+        Deadline deadline = (Deadline) tasks.get(number - 1);
+        deadline.by = deadline.by.plusDays(1);
+    }
 }

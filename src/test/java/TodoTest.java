@@ -17,7 +17,7 @@ public class TodoTest {
         try {
             Parser.parse("todo");
         } catch(DukeException e) {
-            assertEquals("☹ OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+            assertEquals("Buddy!!! You gotta tell me what it is exactly you want me to add as a to-do!", e.getMessage());
         }
     }
 
