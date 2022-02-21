@@ -121,6 +121,13 @@ public class TaskList {
     }
 
     /**
+     * Returns the number of Tasks in the user's list.
+     */
+    public int getNumberOfTasks() {
+        return tasks.size();
+    }
+
+    /**
      * Returns a list of Tasks with titles that contain the given keyword(s).
      */
     public List<Task> findTask(String searchTerm) {

@@ -40,6 +40,7 @@ public class AddEventCommand extends Command {
             tasks.addEvent(title, at);
             storage.writeTasksFile(tasks.encodeTasks());
             responses.add(new SuccessResponse(getAddTaskSuccessMessage(tasks)));
+            responses.add(new SuccessResponse(getTasksRemainingMessage(tasks)));
         } catch (SparkException e) {
             responses.add(new ErrorResponse(e));
         }
@@ -51,6 +52,10 @@ public class AddEventCommand extends Command {
 
     private String getAddTaskSuccessMessage(TaskList tasks) {
         return String.format("Okay! I've added this task:\n   %s", tasks.getLastAddedTask());
+    }
+
+    private String getTasksRemainingMessage(TaskList tasks) {
+        return String.format("You have %d tasks remaining", tasks.getNumberOfTasks());
     }
 
     private void checkAndWarnUserOfDuplicateTask(List<CommandResponse> responses, boolean isDuplicate) {

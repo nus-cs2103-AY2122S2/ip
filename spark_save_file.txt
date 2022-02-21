@@ -3,3 +3,5 @@ D @@@ false @@@ clean room @@@ 2-20-2022 2357
 E @@@ false @@@ lecture @@@ 2-15-2022 1400
 T @@@ false @@@ buy milk
 D @@@ false @@@ assignment 1 @@@ 2-21-2022 2359
+T @@@ false @@@ buy milk
+E @@@ false @@@ something @@@ 2-22-2022 1800

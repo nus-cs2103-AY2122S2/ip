@@ -15,7 +15,6 @@ import spark.tasks.TaskList;
  */
 public class DeleteTaskCommand extends Command {
     private int index;
-    private String responseMessage;
 
     /**
      * Creates a command with the index of the Task to be deleted.
@@ -34,9 +33,8 @@ public class DeleteTaskCommand extends Command {
         try {
             tasks.deleteTask(index);
             storage.writeTasksFile(tasks.encodeTasks());
-            responseMessage = getDeleteTaskSuccessMessage(tasks);
-
-            responses.add(new SuccessResponse(responseMessage));
+            responses.add(new SuccessResponse(getDeleteTaskSuccessMessage(tasks)));
+            responses.add(new SuccessResponse(getTasksRemainingMessage(tasks)));
         } catch (SparkException e) {
             responses.add(new ErrorResponse(e));
         }
@@ -46,5 +44,9 @@ public class DeleteTaskCommand extends Command {
 
     private String getDeleteTaskSuccessMessage(TaskList tasks) {
         return String.format("Okay! I've removed this task:\n   %s", tasks.getLastDeletedTask());
+    }
+
+    private String getTasksRemainingMessage(TaskList tasks) {
+        return String.format("You have %d tasks remaining", tasks.getNumberOfTasks());
     }
 }
