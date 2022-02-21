@@ -1,1 +1,6 @@
-theme: jekyll-theme-cayman
+# Build settings
+name: Juke
+description: An interactive task management application.
+url: spyobird.github.io/ip
+markdown: GFM
+remote-theme: jekyll/minima
