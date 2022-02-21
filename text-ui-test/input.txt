@@ -1,0 +1,13 @@
+hello
+hello again
+todo ride a horse
+deadline give me a ride /by Sunday
+Event attend the lecture /at Sun 2~4pm
+list
+mark 1
+mark 2
+mark 3
+unmark 2
+list
+bye
+
