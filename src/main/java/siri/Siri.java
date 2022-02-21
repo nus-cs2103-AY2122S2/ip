@@ -27,8 +27,8 @@ public class Siri extends Application {
     private Ui ui;
     private TaskList tasks;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/applefanboy.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/siri.png"));
     private String filePath = "data/siri.txt";
     private boolean isExit = false;
 
