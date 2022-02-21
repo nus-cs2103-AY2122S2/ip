@@ -15,7 +15,7 @@ public class FindCommand extends Command {
      * @param searchStr string to be searched in Task content.
      */
     public FindCommand(String searchStr) {
-        this.searchStr = searchStr;
+        this.searchStr = searchStr.toLowerCase();
     }
 
     /**

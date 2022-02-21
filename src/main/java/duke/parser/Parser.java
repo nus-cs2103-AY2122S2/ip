@@ -9,6 +9,7 @@ import duke.tasks.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Parses user inputs for commands.
@@ -55,8 +56,12 @@ public class Parser {
         }
     }
 
-    private int parseIndex(String strIndex) {
-        return Integer.parseInt(strIndex.trim()) - 1;
+    private int parseIndex(String strIndex) throws DukeInvalidArgumentException {
+        try {
+            return Integer.parseInt(strIndex.trim()) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentException("Please input an integer as index");
+        }
     }
 
     private String[] parseArguments(String[] arguments) throws DukeInvalidArgumentException {
@@ -66,9 +71,13 @@ public class Parser {
         return arguments[1].split(" /([Aa][Tt]|[Bb][Yy]) ", 2);
     }
 
-    private LocalDateTime parseDateTime(String datetime) {
-        DateTimeFormatter datetimePattern = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return LocalDateTime.parse(datetime, datetimePattern);
+    private LocalDateTime parseDateTime(String datetime) throws DukeInvalidArgumentException {
+        try{
+            DateTimeFormatter datetimePattern = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            return LocalDateTime.parse(datetime, datetimePattern);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException("Pardon me. Please input date in the format DD/MM/YYYY HH:MM");
+        }
     }
 
     /**
