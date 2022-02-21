@@ -1,5 +1,3 @@
-# User Guide
-
 ## Features 
 
 1. List - Shows entire list of tasks.
@@ -11,10 +9,15 @@
 4. deadline - Adds a task with a specific deadline.
 
 5. event - Adds and event with a specific reminder for it.
+
 6. mark - Marks the specified event with an 'X'.
+
 7. unmark - Unmarks the specified marked event.
+
 8. find - Shows all tasks that has that specified word.
+
 9. help - Shows all commands & some examples.
+
 10. bye - Ends the conversation with the program. 
 
 ## Usage
