@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" style="-fx-padding: 20; -fx-border-style: solid inside; -fx-border-width: 3.5; -fx-border-insets: 5; -fx-border-radius: 15; -fx-border-color: white; -fx-opacity: 0.9;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" style="-fx-padding: 20; -fx-border-style: solid inside; -fx-border-width: 3.5; -fx-border-insets: 5; -fx-border-radius: 15; -fx-border-color: white; -fx-opacity: 0.9;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" text="Label" textFill="WHITE" wrapText="true">
          <font>
