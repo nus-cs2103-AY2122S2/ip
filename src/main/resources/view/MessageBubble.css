@@ -1,0 +1,10 @@
+.bubble {
+    /* rounded corners */
+    -fx-background-radius: 16 16 16 16;
+    -fx-border-radius: 16 16 16 16;
+    border-radius: 16 16 16 16;
+
+    /* background color */
+    -fx-background-color: lightgray, bg-color;
+    background-color: lightgray, bg-color;
+}

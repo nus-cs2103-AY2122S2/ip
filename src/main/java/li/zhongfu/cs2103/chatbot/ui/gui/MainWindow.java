@@ -52,8 +52,15 @@ public class MainWindow extends BorderPane {
      */
     public void setAndInitDuke(Duke duke) {
         this.duke = duke;
-        List<Node> nodes = dialogContainer.getChildren();
-        handleMessages(nodes, duke.init());
+        handleMessages(duke.init());
+    }
+
+    private void addMessageToDialogContainer(Node node) {
+        if (node instanceof MessageBubble) {
+            MessageBubble bubble = (MessageBubble) node;
+            bubble.bindWidthToProperty(scrollPane.widthProperty().subtract(72));
+        }
+        dialogContainer.getChildren().add(node);
     }
 
     @FXML
@@ -61,9 +68,9 @@ public class MainWindow extends BorderPane {
         String input = userInput.getText();
         userInput.clear();
 
-        List<Node> nodes = dialogContainer.getChildren();
-        nodes.add(new MessageBubble(input, getTimeString(), Color.LIGHTGREEN));
-        handleMessages(nodes, duke.handleInput(input));
+        addMessageToDialogContainer(
+                MessageBubble.create(input, getTimeString(), Color.LIGHTGREEN));
+        handleMessages(duke.handleInput(input));
     }
 
     /**
@@ -72,15 +79,15 @@ public class MainWindow extends BorderPane {
      *
      * If a {@code QuitMessage} is present, then the application only quits 1.5s after processing the message.
      *
-     * @param dialogContainerChildren the {@code List} containing the children of the dialog VBox
      * @param messages the messages to be handled
      */
-    private void handleMessages(List<Node> dialogContainerChildren, List<Message> messages) {
+    private void handleMessages(List<Message> messages) {
         for (Message msg : messages) {
             if (msg instanceof ChatMessage) {
-                dialogContainerChildren.add(new MessageBubble(msg.getMessage(), getTimeString(), Color.LIGHTGRAY));
+                addMessageToDialogContainer(
+                        MessageBubble.create(msg.getMessage(), getTimeString(), Color.LIGHTGRAY));
             } else if (msg instanceof SystemMessage) {
-                dialogContainerChildren.add(new Label(msg.getMessage()));
+                addMessageToDialogContainer(new Label(msg.getMessage()));
             } else if (msg instanceof QuitMessage) {
                 // sleep 1.5s then exit
                 Task<Void> waitThenQuit = new Task<>() {
