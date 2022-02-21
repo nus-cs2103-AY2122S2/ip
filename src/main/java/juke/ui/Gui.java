@@ -14,6 +14,7 @@ import juke.ui.controller.MainWindow;
  * Manages the graphical user interface using JavaFX.
  */
 public class Gui {
+    private static final String STAGE_TITLE = "Juke";
     private static final String GREET_MESSAGE = "Greetings Executor!";
     private static final String RESOURCE_LOCATION = "/view/MainWindow.fxml";
 
@@ -50,6 +51,7 @@ public class Gui {
             mainWindow.setJuke(juke);
 
             stage.setScene(scene);
+            stage.setTitle(STAGE_TITLE);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
