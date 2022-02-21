@@ -98,7 +98,7 @@ public class Ui {
         sb.append(System.getProperty("line.separator"));
         sb.append(task);
         sb.append(System.getProperty("line.separator"));
-        if (tasks.getSize() == 2) {
+        if (tasks.getSize() == 1) {
             sb.append("Bud!! You only got one task left!");
         } else {
             sb.append("Buddy, you got a couple tasks left. ").append(tasks.getSize()).append(" to be exact.");
@@ -148,7 +148,7 @@ public class Ui {
     /**
      * Shows user that task has been marked
      * @param task task that is to be marked
-     * @return
+     * @returnstring as acknowledgement of task marked
      */
     public String showMark(Task task) {
         return "Way to go, bud! We can only go up from here! \n" + task;
@@ -158,18 +158,18 @@ public class Ui {
     /**
      * shows user that task has been unmarked
      * @param task task that is to be unmarked
-     * @return
+     * @return string as acknowledgement of task unmarked
      */
     public String showUnmark(Task task) {
         return "Bud?? Were you trying to josh me when you marked it earlier? "
-                + "/n" + task;
+                + "\n" + task;
     }
 
     public String showFound(TaskList tasks) {
         StringBuilder sb = new StringBuilder("Bud, I searched high and low and this is what I found!");
         sb.append(System.getProperty("line.separator"));
         for(int i = 0; i < tasks.getSize(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            sb.append(i + 1).append(". ").append(tasks.get(i));
             sb.append(System.getProperty("line.separator"));
         }
         return sb.toString();
