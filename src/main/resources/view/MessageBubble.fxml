@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root styleClass="bubble" stylesheets="/view/MessageBubble.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="vBox" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+         <children>
+            <Text fx:id="mainText" boundsType="VISUAL" strokeWidth="0.0" text="Template main text, which is pretty long I guess. Perhaps some wrapping would be nice?">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <HBox>
+               <children>
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Text fx:id="metaText" boundsType="VISUAL" fill="DIMGRAY" text="Text">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="8.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</fx:root>

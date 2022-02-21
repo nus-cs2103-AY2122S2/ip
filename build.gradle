@@ -1,0 +1,53 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'checkstyle'
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'li.zhongfu.cs2103.chatbot.Main'
+    }
+}
+
+checkstyle {
+    toolVersion = '8.29'
+}
+
+dependencies {
+    String javaFxVersion = '11'
+
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.2')
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.2')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName = 'duke'
+    archiveVersion = '0.2'
+    archiveClassifier = 'all'
+}
