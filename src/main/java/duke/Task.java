@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * A class that identifies a task that is required to be completed
+ */
 public class Task {
     protected String type = "GENERAL";
     protected String description;
@@ -10,10 +13,16 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * marks a task as completed/done
+     */
     public void markDone() {
         this.isDone = true;
     }
 
+    /**
+     * marks a task as incomplete/undone
+     */
     public void undo() {
         this.isDone = false;
     }

@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * A subclass of Task class.
+ * Denotes a task that is meant to happen with no specific date or time deadline
+ */
 public class Todo extends Task {
     protected static String type = "TODO";
 

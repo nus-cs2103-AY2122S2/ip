@@ -3,6 +3,10 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A subclass of Task class.
+ * Denotes a task that is meant to be done by a specific day and time
+ */
 public class Deadline extends Task {
     private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
@@ -13,10 +17,18 @@ public class Deadline extends Task {
         this.time = LocalDateTime.parse(time, inputFormatter);
     }
 
+    /**
+     * Outputs the formatted time related to the task
+     * @return a String in  MMM dd yyyy, HH:mm format
+     */
     public String outputTime() {
         return time.format(outputFormatter);
     }
 
+    /**
+     * Outputs the time related to the task in the format that it was initially entered by the user.
+     * @return a String in format: dd/MM/yyyy HHmm
+     */
     public String displayTimeInOriginalFormat() {
         return time.format(inputFormatter);
     }

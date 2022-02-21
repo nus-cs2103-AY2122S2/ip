@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A subclass of Task class.
+ * Denotes a task that is meant to be done during a time duration at a specific day
+ */
 public class Event extends Task {
     private final DateTimeFormatter inputFormatterStart = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private final DateTimeFormatter inputFormatterEnd = DateTimeFormatter.ofPattern("HHmm");
@@ -18,11 +22,19 @@ public class Event extends Task {
         this.endTime = LocalTime.parse(endTime, inputFormatterEnd);
     }
 
+    /**
+     * Outputs the formatted time related to the task
+     * @return a String in format: MMM dd yyyy, HH:mm - HH:mm
+     */
     public String outputTime() {
         return dateAndStartTime.format(outputFormatterStart)
                 + endTime.format(outputFormatterEnd);
     }
 
+    /**
+     * Outputs the time related to the task in the format that it was initially entered by the user.
+     * @return a String in format: dd/MM/yyyy HHmm - HHmm
+     */
     public String displayTimeInOriginalFormat() {
         return dateAndStartTime.format(inputFormatterStart) + " - "
                 + endTime.format(inputFormatterEnd);
