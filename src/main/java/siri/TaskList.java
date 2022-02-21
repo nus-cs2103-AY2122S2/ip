@@ -22,18 +22,22 @@ public class TaskList {
     }
 
     public void markTask(int index) {
+        assert index >= 0 && index <= tasks.size();
         tasks.get(index).markAsDone();
     }
 
     public void unmarkTask(int index) {
+        assert index >= 0 && index <= tasks.size();
         tasks.get(index).markAsNotDone();
     }
 
     public void deleteTask(int index) {
+        assert index >= 0 && index <= tasks.size();
         tasks.remove(index);
     }
 
     public void addTask(Task task) {
+        assert task != null;
         tasks.add(task);
     }
 
