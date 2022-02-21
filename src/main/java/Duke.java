@@ -7,6 +7,7 @@ public class Duke {
         public final static String horizontalLine = "________________________________";
         public final static String byeMsg = "Bye! hope to see you again soon!";
         public final static String listMsg = "Here are a list of your tasks!";
+        public final static String invalidCommandMsg = "I do not understand your command!";
         public final static String addedTaskMsg = "Got it. I've added this task:\n";
         public final static String completedTaskMsg = "Task has been marked as completed.";
         public final static String notCompletedTaskMsg = "Task has been marked as not completed.";
@@ -117,7 +118,7 @@ public class Duke {
                 processMarkingTask(taskStr, taskList, false);
             }
             else {
-                printMessage("I do not understand");
+                printMessage(DukeMessage.invalidCommandMsg);
             }
         }
 
