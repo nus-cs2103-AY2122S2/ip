@@ -1,7 +1,15 @@
 package duke;
 
+/**
+ * Parses commands from users and also commands read from tasks.txt
+ */
 public class Parser {
 
+    /**
+     * Parses commands read from tasks.txt to create appropriate task objects
+     * @param details an array of Strings that contain all the relevant information about the command.
+     * @return currTask, the appropriate Task object for the commands.
+     */
     public static Task parseCommandFromFile(String[] details) {
         details[0] = details[0].trim();
         int status = Integer.parseInt(details[1].trim());
@@ -25,6 +33,13 @@ public class Parser {
         return currTask;
     }
 
+    /**
+     * Parses commands inputted by the user to create appropriate task objects
+     * @param taskType, a String, that indicates which particular Task object needs to be created.
+     * @param instruction contains the description of the task alongside the date and time(situational).
+     * @return taskParsed, the appropriate Task object for the commands.
+     * @throws CustomException
+     */
     public static Task parseCommandFromUser(String taskType, String instruction) throws CustomException {
         Task taskParsed;
         if (taskType.equals("todo")) {
@@ -60,6 +75,11 @@ public class Parser {
         return taskParsed;
     }
 
+    /**
+     * Checks if the command is meant to be understood by the program
+     * @param taskType, a String, that indicates command type
+     * @return boolean.
+     */
     public Boolean isValidCommand(String taskType) {
         return taskType.equals("todo") || taskType.equals("deadline")
                 || taskType.equals("event");
