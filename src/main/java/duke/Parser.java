@@ -23,7 +23,7 @@ public class Parser {
     }
 
     /**
-     * Instantiate a parser using the saved file.
+     * Instantiates a parser using the saved file.
      *
      * @return Parser resumed from the previous session.
      * @throws CorruptedSaveException if savefile is corrupted.
@@ -136,12 +136,6 @@ public class Parser {
         }
     }
 
-
-    /**
-     * The action to be taken when a bye command is issued.
-     * <p> Sets the parser to stop accepting user input. </p>
-     * @return The bye message.
-     */
     private String byeMessage() {
         return Ui.BYE_MESSAGE;
     }

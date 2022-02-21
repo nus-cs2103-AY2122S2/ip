@@ -25,7 +25,7 @@ public class Storage {
     private static final String DIR_PATH = "data/";
 
     /**
-     * Generate a file at the given directory if it does not exist.
+     * Generates a file at the given directory if it does not exist.
      *
      * @param filePath The file to be created.
      * @param dirPath The directory where the file should be.
