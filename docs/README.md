@@ -34,7 +34,23 @@ The data is automatically loaded on startup.
    
 5. The application should run, and you can start managing tasks!
 
-## Usage
+## Command Summary
+
+|Command|Description|
+|---|---|
+|`todo TASK_NAME`|Adds a todo task.|
+|`deadline TASK_NAME -by DATE_TIME`|Adds a deadline task.|
+|`event TASK_NAME -by DATE_TIME`|Adds an event task.|
+|`list`|Lists all tasks.|
+|`mark INDEX`|Marks a task as done.|
+|`unmark INDEX`|Marks a task as not done.|
+|`delete INDEX`|Deletes a task.|
+|`find QUERY`|Searches for tasks.|
+|`clone INDEX`|Duplicates a task.|
+|`edit INDEX [-d TASK_NAME] [-t DATE_TIME]`|Edits a task.|
+|`bye`|Exits Juke.|
+
+## Detailed Usage
 
 ### `todo` - Adds a todo task
 
@@ -52,7 +68,7 @@ Example of usage:
 Creates a deadline task which has a description, and a deadline which is a date and time component.
 See [date and time component](#date-and-time-component) for more information about the date and time component.
 
-Format: `deadline TASK_NAME -by DEADLINE`
+Format: `deadline TASK_NAME -by DATE_TIME`
 
 Example of usage:
 
@@ -64,18 +80,12 @@ Example of usage:
 Creates an event task which has a description, and a start date which is a date and time component.
 See [date and time component](#date-and-time-component).
 
-Format: `event TASK_NAME -at START_DATE`
+Format: `event TASK_NAME -at DATE_TIME`
 
 Example of usage:
 
 - `event Music festival -at 03/03/2022 19:00`
 - `event Car expo -at 06072022 1000`
-
-### `list` - Lists all tasks
-
-Lists all tasks that have been stored in Juke.
-
-Format: `list`
 
 ### `list` - Lists all tasks
 
@@ -127,7 +137,7 @@ Example of usage:
 
 - `delete 2` deletes the second task.
 
-### `find` - Searches for a task
+### `find` - Searches for tasks
 
 Searches for a task using a string query.
 The command will return all tasks that have a matching sequence of
@@ -148,7 +158,7 @@ Found task(s):
 [D] [ ] BUY TICKETS (by: 10 May 2022 23:00)
 ```
 
-### `clone` - Clones a task
+### `clone` - Duplicates a task
 
 Creates a copy of a task at a given index. The task is added to the end of the task list.
 A valid index is a positive integer that starts at 1 and ends at the size of the task list,
@@ -167,7 +177,7 @@ A valid index is a positive integer that starts at 1 and ends at the size of the
 where the value represents its position in the task list.
 The `DATE_TIME` argument follows the date and time formatting. See [date and time component](#date-and-time-component).
 
-Format: `edit INDEX [-d DESCRIPTION] [-t DATE_TIME]`
+Format: `edit INDEX [-d TASK_NAME] [-t DATE_TIME]`
 
 Example of usage:
 
@@ -202,5 +212,7 @@ Below is the table for the formatting of each element:
 
 The entire time component of any date and time is optional.
 If time is not specified, it is defaulted to `0800`.
+
+If `MONTH` is given as either of the two string forms, it can be placed before `DAY`.
 
 The output format of time is always in the form `02 Apr 2022 19:30`.
