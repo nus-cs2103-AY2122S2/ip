@@ -24,11 +24,7 @@ public class DateTimeHandler {
      */
     private static final List<String> DATE_TIME_PATTERNS = List.of(
             "dd[[-][/][ ]]MM[[-][/][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "dd[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "d[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "dd[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "d[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "d[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
+            "d[[-][/][ ]]MM[[-][/][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "dd[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "d[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "dd[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
@@ -98,7 +94,7 @@ public class DateTimeHandler {
                 .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
                 .toFormatter()
                 .withResolverStyle(ResolverStyle.STRICT);
-        outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        outputFormatter = DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm");
     }
 
     /**

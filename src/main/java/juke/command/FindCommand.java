@@ -15,6 +15,11 @@ public class FindCommand extends Command {
     private static final String COMMAND_NAME = "find";
 
     /**
+     * Descriptions of tasks.
+     */
+    private String[] descriptions;
+
+    /**
      * Checks if the parameters and arguments are valid.
      * Requires a string to query.
      *
@@ -64,8 +69,8 @@ public class FindCommand extends Command {
             return this;
         }
         assert result instanceof Result.Empty;
-        String[] descriptions = null;
-        if (!canFindTask(descriptions)) {
+        descriptions = null;
+        if (!canFindTask()) {
             return this;
         }
         assert descriptions != null;
@@ -77,10 +82,9 @@ public class FindCommand extends Command {
      * Finds the tasks with a matching string as the query.
      * Returns if it is possible to find a task.
      *
-     * @param descriptions Empty string array to fill.
      * @return Boolean result.
      */
-    private boolean canFindTask(String[] descriptions) {
+    private boolean canFindTask() {
         List<Task> tasks = juke.getTaskList().search(getDefaultArgument());
         if (tasks.size() == 0) {
             setErroneousResult(new JukeEmptyTaskListException());

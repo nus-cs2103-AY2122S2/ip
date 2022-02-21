@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import juke.Juke;
 import juke.exception.JukeEmptyTaskListException;
@@ -136,7 +137,7 @@ public class TaskList implements Iterable<Task> {
     public List<Task> search(String query) {
         ArrayList<Task> queryList = new ArrayList<>();
         for (Task task : taskList) {
-            if (task.getDescription().contains(query)) {
+            if (task.getDescription().toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
                 queryList.add(task);
             }
         }
