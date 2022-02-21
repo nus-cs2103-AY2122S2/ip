@@ -1,3 +1,7 @@
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +16,8 @@ public class Duke {
         public final static String addedTaskMsg = "Got it. I've added this task:\n";
         public final static String completedTaskMsg = "Task has been marked as completed.";
         public final static String notCompletedTaskMsg = "Task has been marked as not completed.";
+        public final static String expectedDeadline = "deadline <desciption> /by 31-01-2022 1800";
+        public final static String expectedEvent = "event <desciption> /at 31-01-2022 1800_to_31-01-2022 2100";
 
         public static String getCompleteMessage(boolean isCompleted){
             return (isCompleted)?completedTaskMsg:notCompletedTaskMsg;
@@ -31,6 +37,7 @@ public class Duke {
         public final static String delete = "delete";
         public final static String mark = "mark";
         public final static String unmark = "unmark";
+        public final static DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
     }
 
 
@@ -38,6 +45,12 @@ public class Duke {
         System.out.println(DukeMessage.horizontalLine);
         System.out.println(msg);
         System.out.println(DukeMessage.horizontalLine);
+    }
+
+    public static void checkCommandData(String[] taskInfo, int expectedInfoNum) throws DukeInvalidCommandDataInput{
+        if(taskInfo.length != expectedInfoNum){
+            throw new DukeInvalidCommandDataInput();
+        }
     }
 
     public static Task processTodo(String command) {
@@ -52,19 +65,56 @@ public class Duke {
     public static Task processEvent(String command) {
         String taskStr = command.substring(DukeCommand.event.length());
         taskStr = taskStr.trim();
+        // event Ed Sheeran Concert /at 2-12-2019 1800_to_2300
         String[] taskInfo = taskStr.split("/at");
+        try{
+            checkCommandData(taskInfo, 2);
+        }
+        catch(DukeInvalidCommandDataInput e){
+            printMessage(DukeMessage.invalidCommandMsg + "\n" + command);
+            return null;
+        }
         String description = taskInfo[0].trim();
-        String dateStr = taskInfo[1].trim();
-        return new EventTask(description, false, dateStr);
+        String[] fromToDateStr = taskInfo[1].trim().split("_to_"); // 2-12-2019 1800_to_2-12-2019 2300
+        String fromDateStr = fromToDateStr[0].trim();
+        String toDateStr = fromToDateStr[1].trim();
+        LocalDateTime fromDt = null;
+        LocalDateTime toDt = null;
+        try{
+            fromDt = LocalDateTime.parse(fromDateStr, DukeCommand.dtFormat);
+            toDt = LocalDateTime.parse(toDateStr, DukeCommand.dtFormat);
+        }
+        catch(Exception e){
+            printMessage(DukeMessage.invalidCommandMsg + command + "\n" + DukeMessage.expectedEvent);
+            return null;
+        }
+        return new EventTask(description, false, fromDt, toDt);
     }
 
     public static Task processDeadline(String command)  {
+        // deadline return book /by 2-12-2019 1800
         String taskStr = command.substring(DukeCommand.deadline.length());
         taskStr = taskStr.trim();
         String[] taskInfo = taskStr.split("/by");
+        try{
+            checkCommandData(taskInfo, 2);
+        }
+        catch(DukeInvalidCommandDataInput e){
+            printMessage(DukeMessage.invalidCommandMsg + "\n" +command + "\n" + DukeMessage.expectedDeadline);
+            return null;
+        }
         String description = taskInfo[0].trim();
         String dateStr = taskInfo[1].trim();
-        return new DeadlineTask(description,false, dateStr);
+        LocalDateTime dt = null;
+        try{
+            dt = LocalDateTime.parse(dateStr, DukeCommand.dtFormat);
+        }
+        catch(Exception e){
+            printMessage(DukeMessage.invalidCommandMsg + command + "\n" + DukeMessage.expectedDeadline);
+            return null;
+        }
+
+        return new DeadlineTask(description,false, dt);
     }
 
     public static boolean checkIfNumber(String numStr){
