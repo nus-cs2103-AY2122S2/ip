@@ -3,6 +3,7 @@ package li.zhongfu.cs2103.chatbot.ui.gui;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.concurrent.Task;
@@ -13,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -36,6 +39,10 @@ public class MainWindow extends BorderPane {
     private TextField userInput;
     @FXML
     private Button enterButton;
+
+    private List<String> inputHistory = new ArrayList<>();
+    private int inputIndex = -1;
+    private String inputLatest = null;
 
     private Duke duke;
 
@@ -73,9 +80,70 @@ public class MainWindow extends BorderPane {
     }
 
     @FXML
+    private void handleKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.UP) {
+            historyPrev();
+        } else if (event.getCode() == KeyCode.DOWN) {
+            historyNext();
+        } // else do nothing i guess
+    }
+
+    private void userInputSetAndMoveToEnd(String input) {
+        userInput.setText(input);
+        userInput.positionCaret(input.length());
+    }
+
+    // look at next oldest previously-submitted cmd
+    private void historyPrev() {
+        if (inputIndex == 0) { // already showing oldest hist elem; do nothing
+            return;
+        }
+
+        if (inputIndex < 0) { // if inputIndex is -1, then we haven't started seeking through history yet
+            if (inputHistory.isEmpty()) { // if no history, then give up
+                return;
+            }
+            // store current text & index, and display history
+            inputLatest = userInput.getText();
+            inputIndex = inputHistory.size() - 1; // last element
+            userInputSetAndMoveToEnd(inputHistory.get(inputIndex));
+        } else { // inputIndex > 0
+            // decrement inputIndex then show history
+            userInputSetAndMoveToEnd(inputHistory.get(--inputIndex));
+        }
+    }
+
+    // look at next newest previously-submitted cmd
+    private void historyNext() {
+        if (inputIndex < 0) { // we weren't showing history; do nothing
+            return;
+        }
+
+        int lastElem = inputHistory.size() - 1;
+        if (inputIndex >= lastElem) { // already displaying latest history elem
+            // display the latest input (that hasn't been submitted yet, but was previously temporarily stored)
+            inputIndex = -1;
+            // in case we accidentally a bug
+            userInputSetAndMoveToEnd(inputLatest != null ? inputLatest : "");
+            inputLatest = null;
+        } else { // 0 <= inputIndex <= lastElem - 1
+            // increment inputIndex then show history
+            userInputSetAndMoveToEnd(inputHistory.get(++inputIndex));
+        }
+    }
+
+    // when the user submits some new input, so we reset state and add the input to history
+    private void historyAdd(String input) {
+        inputIndex = -1;
+        inputLatest = null;
+        inputHistory.add(input);
+    }
+
+    @FXML
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
         userInput.clear();
+        historyAdd(input);
 
         addMessageToDialogContainer(
                 MessageBubble.create(input, getTimeString(), Color.LIGHTGREEN));

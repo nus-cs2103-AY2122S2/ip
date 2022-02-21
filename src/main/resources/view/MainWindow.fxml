@@ -22,7 +22,7 @@
    <bottom>
       <HBox prefHeight="24.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="userInput" prefHeight="24.0" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="userInput" prefHeight="24.0" HBox.hgrow="ALWAYS" onKeyPressed="#handleKeyPress" />
             <Button fx:id="enterButton" defaultButton="true" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="24.0" text="Enter" />
          </children>
       </HBox>
