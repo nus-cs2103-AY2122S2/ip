@@ -10,9 +10,9 @@ import jarvis.tags.Tag;
 import jarvis.tags.TagList;
 
 public abstract class Task {
-    private static final String TODO = "todo";
-    private static final String DEADLINE = "deadline";
-    private static final String EVENT = "event";
+    public static final String TODO = "todo";
+    public static final String DEADLINE = "deadline";
+    public static final String EVENT = "event";
 
     private final String description;
     private Boolean isDone;
@@ -80,7 +80,7 @@ public abstract class Task {
             break;
 
         default:
-            throw new InvalidTaskException("Invalid command!\nType help to see the list of commands");
+            throw new InvalidTaskException("Invalid task!\nType help to see the list of commands");
         }
         return task;
     }

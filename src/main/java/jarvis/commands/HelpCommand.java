@@ -14,7 +14,7 @@ public class HelpCommand extends Command {
         + "* list task tags - tasktags idx\n"
         + "* tag task - tag idx tagName\n"
         + "* untag task - untag idx tagName\n"
-        + "* quit - bye\n";
+        + "* quit - bye";
 
     /**
      * Function to execute the command and get the result.

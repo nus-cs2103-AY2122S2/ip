@@ -14,6 +14,7 @@ import jarvis.commands.TaskTagsCommand;
 import jarvis.commands.UnmarkCommand;
 import jarvis.commands.UntagCommand;
 import jarvis.exceptions.InvalidCommandException;
+import jarvis.tasks.Task;
 
 public class Parser {
     private static final String QUIT_COMMAND = "bye";
@@ -69,16 +70,20 @@ public class Parser {
             cmd = new TaskTagsCommand(getIdx(argv));
             break;
         case TAG_COMMAND:
-            params = getParams(argv);
+            params = getParams(argv, 2);
             cmd = new TagCommand(Integer.parseInt(params[0]), params[1]);
             break;
         case UNTAG_COMMAND:
-            params = getParams(argv);
+            params = getParams(argv, 2);
             cmd = new UntagCommand(Integer.parseInt(params[0]), params[1]);
             break;
-        default:
+        case Task.TODO:
+        case Task.DEADLINE:
+        case Task.EVENT:
             cmd = new AddCommand(cmdString);
             break;
+        default:
+            throw new InvalidCommandException("Invalid command!\nType help to see the list of commands");
         }
         return cmd;
     }
@@ -148,9 +153,12 @@ public class Parser {
      * @return params
      * @throws InvalidCommandException keyword is invalid
      */
-    public static String[] getParams(String[] argv) throws InvalidCommandException {
+    public static String[] getParams(String[] argv, int argc) throws InvalidCommandException {
         if (argv.length < 2) {
             throw new InvalidCommandException("No params specified");
+        } else if (argv.length - 1 < argc) {
+            throw new InvalidCommandException(
+                String.format("Command requires %d arguments but only %d specified.", argc, argv.length - 1));
         }
 
         return argv[1].split(" ");

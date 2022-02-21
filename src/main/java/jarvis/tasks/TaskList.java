@@ -17,7 +17,7 @@ public class TaskList {
     private final boolean useStorage;
 
     /**
-     * Constructor for DukeList
+     * Constructor for TaskList
      */
     public TaskList(Storage storage) {
         this.storage = storage;
@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor for DukeList that is non-persistent.
+     * Constructor for TaskList that is non-persistent.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.storage = null;
@@ -139,7 +139,7 @@ public class TaskList {
 
         return "Noted. I've removed this task:\n"
                 + String.format("\t%s\n", task)
-                + String.format("Now you have %d Duke.tasks in the list.", this.taskList.size());
+                + String.format("Now you have %d tasks in the list.", this.taskList.size());
     }
 
     /**
@@ -150,6 +150,9 @@ public class TaskList {
      * @throws TagNotFoundException tag not found in the list
      */
     public String tagTask(int taskIdx, String tagName) throws TagNotFoundException {
+        if (taskIdx > taskList.size()) {
+            throw new TagNotFoundException("No such task found");
+        }
         Task task = this.taskList.get(taskIdx - 1);
         if (!tagList.contains(tagName)) {
             tagList.add(tagName);
@@ -219,7 +222,8 @@ public class TaskList {
         } else {
             result = new StringBuilder();
             for (int i = 0; i < size; i++) {
-                result.append(String.format("%d. %s\n", i + 1, this.taskList.get(i)));
+                String eol = i == size - 1 ? "" : "\n";
+                result.append(String.format("%d. %s%s", i + 1, this.taskList.get(i), eol));
             }
         }
 
