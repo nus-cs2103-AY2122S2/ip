@@ -1,9 +1,6 @@
 package duke.gui;
 
 import duke.Duke;
-import duke.command.Parser;
-import duke.command.TaskList;
-import duke.task.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -41,8 +38,6 @@ public class MainWindow extends AnchorPane {
         greet();
         this.duke = d;
         this.gui = gui;
-
-//        TaskList t = Duke.taskList;
     }
 
     private void greet() {

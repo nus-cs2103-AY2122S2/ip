@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * Prints Duke logo
+     * Prints Duke logo.
      *
      */
     public static void printLogo() {

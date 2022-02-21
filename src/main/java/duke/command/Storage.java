@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -28,7 +26,6 @@ public class Storage {
         this.path = Paths.get(strPath);
         this.taskList = taskList;
         try {
-            assert Files.exists(path);
             if (Files.notExists(path)) {
                 Files.createDirectory(path.getParent());
                 Files.createFile(path);
