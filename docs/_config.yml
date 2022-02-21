@@ -1,6 +1,13 @@
 # Build settings
-name: Juke
-description: An interactive task management application.
-url: spyobird.github.io/ip
+title: Juke
+description: 'An interactive task management application. Made by <a href="https://github.com/Spyobird" target="_blank">@Spyobird</a>'
+url: https://spyobird.github.io/ip
+
 markdown: GFM
-remote-theme: jekyll/minima
+remote-theme: poole/hyde
+
+author:
+  name: 'Elliot Lim'
+
+github:
+  repo: https://github.com/Spyobird/ip
