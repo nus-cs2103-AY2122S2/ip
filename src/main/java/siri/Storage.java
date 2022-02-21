@@ -71,8 +71,9 @@ public class Storage {
 
     public void save(ArrayList<Task> tasks) throws InvalidInputException {
         try {
-            File file = new File("./data/siri.txt");
-            //file.getParentFile().mkdirs();
+            //
+            File file = new File(filePath);
+            file.getParentFile().mkdirs();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
             for (Task task: tasks) {
