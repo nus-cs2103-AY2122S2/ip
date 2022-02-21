@@ -1,29 +1,148 @@
 # User Guide
 
+Duke is an organisational tool that helps you **stay clutter free and keep track of your tasks!**
+- [Quick Start](#Quick-Qtart) 
+- [Features](#Features)
+  - [Adding Tasks](#Adding-Tasks)
+    - [Todo](#Todo)
+    - [Deadlines](#Deadline)
+    - [Events](#Events)
+  - [Mark/Unmark](#Mark/Unmark)
+  - [List](#List)
+  - [Delete](#Delete)
+  - [Find](#Find)
+  - [Priority](#Priority)
+  - [Bye](#Bye)
+
+
+## Quick start
+Ensure you have Java 11 or above installed in your Computer.
+
+Download the latest addressbook.jar from [here](insert link here).
+
+Copy the file to the folder you want to use as the home folder for duke.
+
+Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
+
+
 ## Features 
 
-### Feature-ABC
+## Adding Tasks
+Task are split into 3 different types: Todo, Deadline and Event. Adding each one has its unique syntax.
 
-Description of the feature.
 
-### Feature-XYZ
+## Todo `todo`
+Todos are tasks that have no deadline. 
 
-Description of the feature.
+Syntax to add them is:
 
-## Usage
+`todo <Name of task>`
 
-### `Keyword` - Describe action
+>todo Read Book
 
-Describe the action and its outcome.
+## Deadlines `deadline`
 
-Example of usage: 
+Deadlines are tasks that have are supposed to be done by a specific deadline.
 
-`keyword (optional arguments)`
+Syntax to add them is:
 
-Expected outcome:
+`deadline <Name of task> /by YYYY/MM/DD HH:MM`
 
-Description of the outcome.
+>todo Read Book /by 2022/02/21 13:00
 
-```
-expected output
-```
+
+## Events `event`
+
+Events are tasks that have are supposed to be done **at** a specific time.
+
+Syntax to add them is:
+
+`event <Name of task> /at YYYY/MM/DD HH:MM`
+
+>todo Book Club /at 2022/02/21 13:00
+
+## Mark/Unmark
+Marks or Unmarks a task as done.
+
+## Mark `mark`
+Marks a task as done.
+Syntax:
+`mark <index>`
+
+Example:
+>mark 1
+
+## Unmark `unmark`
+
+Syntax:
+`unmark <index>`
+
+Example:
+>unmark 2
+
+
+## List `list`
+Lists down the tasks that the user has added.
+
+Syntax:
+`list`
+
+Example:
+> list
+> 
+> 1. [L][T][ ] Read Book
+> 
+> 2.  [L][E][ ] Bookclub (at: 21 February 2022 13:00)
+
+## Delete `delete`
+Deletes a task from the list
+Syntax:
+`delete <index>`
+
+Example:
+>delete 1
+
+
+## Find `find`
+Finds a task that contains a search term
+Syntax:
+`find <searchterm>`
+
+Example:
+>find book
+
+
+## Priority `priority`
+Tasks have 3 different priority levels: low, medium, high.
+
+Tasks have a default priority of low.
+
+To set priority, use the syntax: `priority <index> <priority>`
+>priority 1 high
+
+## Bye `bye`
+Exits the program.
+
+Syntax: `bye`
+
+##Command Summary
+[todo](#Todo): `todo <task>`
+
+[event](#Events): `event <title> /at YYYY/MM/DD HH:MM`
+
+[deadline](#Deadlines): `deadline <title> /by YYYY/MM/DD HH:MM`
+
+[mark](#Mark/Unmark): `mark <index>`
+
+[unmark](#Mark/Unmark): `unmark <index`
+
+[list](#List): `list`
+
+[delete](#Delete): `delete <index>`
+
+[find](#Find): `find <term>`
+
+[priority](#priority): `priority <index> <priority>`
+
+[bye](#bye): `bye`

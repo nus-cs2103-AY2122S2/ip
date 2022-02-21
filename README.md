@@ -1,24 +1,36 @@
-# Duke project template
+# DUKE
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "Clutter is nothing more than postponed deadlines" ~ Barbara Hemphill ([source](https://nacm.org/pdfs/webinars/clutter-is-postponed-exercise-1031.pdf))
 
-## Setting up in Intellij
+Duke is an organisational tool that helps you stay clutter free and keep track of your tasks!
+It is:
+ - Text-based
+ - Easy to use
+ - ~~Helpful~~ Extremely helpful
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+You can:
+1. Add 3 kinds of tasks - Todo, Dealines, Events
+2. Mark the tasks as done
+3. List them down for easy viewing
+4. Set priorities for your tasks
+4. Delete items once you are done with them 👍
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Examples of code syntax
+To add Events, simply write `event <Name of Event> /at YYYY:MM:DD HH:MM`
+> event Camp /at 2022:08:09 08:00
+To set priority, simply write `priority <index> <priority>`
+Priorities: low, medium, high
+> priority 1 high
+
+
+## List of Features
+ - [x] Add 3 new tasks: Todo. Deadline, Event
+ - [ ] Edit tasks
+ - [ ] Export to calendar
+
+If you Java programmer, you can use it to practice Java too. Here's the main method:
+```java
+public static void main(String[] args) {
+    new Duke().listen();
+}
+```
