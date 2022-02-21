@@ -18,7 +18,7 @@ Duke is an organisational tool that helps you **stay clutter free and keep track
 ## Quick start
 Ensure you have Java 11 or above installed in your Computer.
 
-Download the latest addressbook.jar from [here](insert link here).
+Download the latest addressbook.jar from [here](https://github.com/kuanjr/ip/releases/download/A-Release/duke.jar).
 
 Copy the file to the folder you want to use as the home folder for duke.
 
