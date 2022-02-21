@@ -61,8 +61,10 @@ public class Storage {
 
         // If file does not exist, create new file and return
         if (data.createNewFile()) {
+            assert data.exists() : "file should be created if it does not exist";
             return;
         }
+        assert data.exists() : "file should exist";
 
         Scanner fileReader = new Scanner(data);
         while (fileReader.hasNextLine()) {
@@ -72,23 +74,29 @@ public class Storage {
 
             switch (tmp[0].trim()) {
             case "T":
+                assert tmp.length > 2 : "tmp[2] should exist";
                 Todo t = new Todo(tmp[2].trim());
                 if (isDone) {
                     t.markComplete();
+                    assert t.getStatusIcon().equals("X") : "task should be complete";
                 }
                 tasks.add(t);
                 break;
             case "D":
+                assert tmp.length > 3 : "tmp[2], tmp[3] should exist";
                 Deadline d = new Deadline(tmp[2].trim(), tmp[3].trim());
                 if (isDone) {
                     d.markComplete();
+                    assert d.getStatusIcon().equals("X") : "task should be complete";
                 }
                 tasks.add(d);
                 break;
             case "E":
+                assert tmp.length > 3 : "tmp[2], tmp[3] should exist";
                 Event e = new Event(tmp[2].trim(), tmp[3].trim());
                 if (isDone) {
                     e.markComplete();
+                    assert e.getStatusIcon().equals("X") : "task should be complete";
                 }
                 tasks.add(e);
                 break;
@@ -122,6 +130,7 @@ public class Storage {
      */
     public void save(TaskList tasks) throws IOException {
         File data = new File(filePath);
+        assert data.exists() : "file was not created at start of program";
         FileWriter f;
 
         f = new FileWriter(data, false);
@@ -132,6 +141,6 @@ public class Storage {
             isFirst = false;
         }
         f.close();
-        System.out.println("saved" +tasks);
+        System.out.println("saved" + tasks);
     }
 }

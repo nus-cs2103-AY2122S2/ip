@@ -66,6 +66,7 @@ public class Parser {
             input = input.replaceAll(".* ", "");
             if (input.matches("[0-9]+") &&
                      index <= tasklist.length() && index >= 1) {
+                assert index <= tasklist.length() && index >= 1 : "index not within range";
                 return command;
             }
             throw new Exception("You need to specify the task you want to "

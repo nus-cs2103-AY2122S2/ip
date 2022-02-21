@@ -21,7 +21,9 @@ public class Duke {
     public String doHandler(String command, String input) throws Exception {
         int i = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
+        assert i <= tasks.length() && i >= 1 : "index of item should be within scope of tasklist";
         tasks.get(i).markComplete();
+        assert tasks.get(i).getStatusIcon().equals("X") : "task should be marked done";
         storage.save(tasks);
         return ui.showCommandMessage(command, tasks);
     }
@@ -29,7 +31,9 @@ public class Duke {
     public String undoHandler(String command, String input) throws Exception {
         int j = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
+        assert j <= tasks.length() && j >= 1 : "index of item should be within scope of tasklist";
         tasks.get(j).markIncomplete();
+        assert tasks.get(j).getStatusIcon().equals(" ") : "task should be marked incomplete";
         storage.save(tasks);
         return ui.showCommandMessage(command, tasks);
     }
@@ -37,6 +41,7 @@ public class Duke {
     public String deleteHandler(String command, String input) throws Exception {
         int k = Integer.parseInt(input.replaceAll("[^0-9]",
                 "")) - 1;
+        assert k <= tasks.length() && k >= 1 : "index of item should be within scope of tasklist";
         tasks.remove(k);
         storage.save(tasks);
         return ui.showCommandMessage(command, tasks);
