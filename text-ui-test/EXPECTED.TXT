@@ -1,7 +1,113 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+  _____
+ /     \
+| () () |
+ \  ^  /
+  |||||
+  |||||
 
+Greetings, I'm Taskmaster, I'm super grumpy 24/7
+....................................
+Okay, what do you want?
+
+Quit ordering me around!
+I've added this task to our list:
+    [T][]  borrow book
+Now you have 1 tasks in the list.
+
+Quit ordering me around!
+I've added this task to our list:
+    [D][]  return book  (by: June 6th)
+Now you have 2 tasks in the list.
+
+Quit ordering me around!
+I've added this task to our list:
+    [E][]  project meeting  (at: Aug 6th 2-4pm)
+Now you have 3 tasks in the list.
+
+Quit ordering me around!
+I've added this task to our list:
+    [T][]  sports club
+Now you have 4 tasks in the list.
+
+Quit ordering me around!
+I've added this task to our list:
+    [T][]  borrow book
+Now you have 5 tasks in the list.
+
+Aye! I've marked this task as completed:
+
+    [T][X]  borrow book
+
+Aye! I've marked this task as completed:
+
+    [D][X]  return book  (by: June 6th)
+
+Aye kid! I've marked this task as uncompleted:
+
+    [D][]  return book  (by: June 6th)
+
+Aye kid! I've marked this task as uncompleted:
+
+    [D][]  return book  (by: June 6th)
+
+    
+Here are the tasks in your list:
+    1. [T][X]  borrow book
+    2. [D][]  return book  (by: June 6th)
+    3. [E][]  project meeting  (at: Aug 6th 2-4pm)
+    4. [T][]  sports club
+    5. [T][]  borrow book
+
+
+BRAT ! Your index is out of range! Number has to in the range of the list
+
+What?! Task description cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm
+
+What?! Task description cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm
+
+What?! Task description cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm
+
+
+what?
+What are you on about?
+Type list if you want to know the commands, kid!
+
+
+huh??
+What are you on about?
+Type list if you want to know the commands, kid!
+
+What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3
+
+What? Second input has to be an integer! Eg mark 1, unmark 2
+
+What? Second input has to be an integer! Eg mark 1, unmark 2
+
+Quit fooling around kid!
+Deadline and event tasks require /by and /at to specify the deadline or time of occurrence.
+
+Eg Deadline eat food /by 12pm, event concert /at 8pm
+
+Quit fooling around kid!
+Deadline and event tasks require /by and /at to specify the deadline or time of occurrence.
+
+Eg Deadline eat food /by 12pm, event concert /at 8pm
+
+Quit ordering me around!
+I've added this task to our list:
+    [E][]  hahahaha  (at: 8pm)
+Now you have 6 tasks in the list.
+
+Quit fooling around kid!
+Event tasks require /at specify the time of occurrence.
+music concert /at 8pm
+
+Quit fooling around kid!
+Deadline tasks require /by specify the deadline.
+Eg deadline eat food /by 12pm
+
+Quit fooling around kid!
+Event tasks require /at specify the time of occurrence.
+music concert /at 8pm
+
+See you around kiddo, I'm an angsty dude but deep down i'm a lonely man
