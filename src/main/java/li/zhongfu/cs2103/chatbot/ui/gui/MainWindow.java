@@ -58,7 +58,16 @@ public class MainWindow extends BorderPane {
     private void addMessageToDialogContainer(Node node) {
         if (node instanceof MessageBubble) {
             MessageBubble bubble = (MessageBubble) node;
+            // might want to make it bound to the padding width
             bubble.bindWidthToProperty(scrollPane.widthProperty().subtract(72));
+        } else if (node instanceof Label) {
+            Label label = (Label) node;
+            /*
+             * the -72 offset for MessageBubble was a guess
+             * we pick -40 here because the bubble padding is 16px on each side
+             */
+            label.prefWidthProperty().bind(scrollPane.widthProperty().subtract(40));
+            label.setWrapText(true);
         }
         dialogContainer.getChildren().add(node);
     }
