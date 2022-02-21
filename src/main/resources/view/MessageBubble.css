@@ -7,4 +7,8 @@
     /* background color */
     -fx-background-color: lightgray, bg-color;
     background-color: lightgray, bg-color;
+
+    /* min width for bubbles, so short messages don't look too weird */
+    -fx-min-width: 80px;
+    min-width: 80px;
 }
