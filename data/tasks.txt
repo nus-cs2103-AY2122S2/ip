@@ -1,2 +1,2 @@
 T | 0 | chicken
-D | 0 | pray to god to thank him        | 01 Dec 2022 1800
+D | 0 | pray to god to thank him         | 01 Dec 2022 1800

@@ -49,7 +49,7 @@ public class Deadline extends Task {
             isDoneNumber = 0;
         }
         return "D | " + isDoneNumber + " | " + description +
-                " | " + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " + time + System.lineSeparator();
+                " |" + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " " + time + System.lineSeparator();
     }
 
     /**
