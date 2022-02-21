@@ -41,7 +41,8 @@ public class MainWindow extends AnchorPane {
         greet();
         this.duke = d;
         this.gui = gui;
-        TaskList t = Duke.taskList;
+
+//        TaskList t = Duke.taskList;
     }
 
     private void greet() {
