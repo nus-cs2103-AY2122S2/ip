@@ -1,29 +1,74 @@
 # User Guide
+Koro Task Manager
+
+## Quick Start
+
+1. Ensure you have Java `11` installed in your computer.
+2. Download the latest duke.jar from [here](https://github.com/janald99/ip)
+3. Double-click the file to start the app.
+4. Type the commands in the text box at the bottom and press Enter
+to execute it. e.g typing `help` and pressing Enter will display a detailed guide.
+5. Refer to the Features below for details of each command.
 
 ## Features 
 
-### Feature-ABC
+### Adding a Task
 
-Description of the feature.
+- Adding a Todo task[^1] 
+    - `todo (task description)`
+  
+- Adding a Deadline task[^2]
+    - `deadline (task description) /by`
+      
+- Adding an Event task[^3]
+    - `event (task description) /at (location)`
+    
 
-### Feature-XYZ
+[^1]: *Todo*
+A **task** that you ought to do, without any strict deadlines.
 
-Description of the feature.
+[^2]: *Deadline*
+A **task** with a *deadline*
 
-## Usage
+[^3]: *Event*
+A **task** with a specific *location*.
 
-### `Keyword` - Describe action
+### Deleting a Task
 
-Describe the action and its outcome.
+`delete (task number)`: deletes the task associated with the task number.
 
-Example of usage: 
+### Marking and Unmarking a Task as done
 
-`keyword (optional arguments)`
+- `mark (task number)`: marks a task as *done*, represented by an `[X]`
+- `unmark (task number)`: marks the task as *not done*, represented by a `[ ]`
+    
+### Printing the entire TaskList
 
-Expected outcome:
+`list`: prints the current tasklist.
 
-Description of the outcome.
+### Searching for a Task
+
+`find (keyword)`: displays tasks in the list that contain the given keyword.
+
+### View Help
+
+`help`: a user-friendly manual will be displayed to guide you.
+
 
 ```
-expected output
+Koro Task Manager is a user friendly ...
+Here at the list of commands and what they do:
+...
+...
 ```
+
+## FAQ
+**Q**: How do I save my tasks after updating it?
+
+**A**: Your tasks will automatically be saved in the file. Fret not!
+
+![This is an image](https://janald99.github.io/ip/Ui.png)
+
+
+
+## Enjoy managing your tasks!
