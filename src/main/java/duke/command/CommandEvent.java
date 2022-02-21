@@ -7,6 +7,7 @@ import duke.Response;
 import duke.TaskList;
 
 public class CommandEvent extends Command {
+    private String response;
     private TaskList taskList;
     private LocalDate time;
     private String eventContent;
@@ -21,9 +22,14 @@ public class CommandEvent extends Command {
     }
 
     @Override
-    public String execute() {
+    public void execute() {
         Event newTask = new Event(eventContent, time);
         taskList.addTask(newTask);
-        return Response.RESPONSE_ADDED + "\n" + newTask + "\n";
+        response = Response.RESPONSE_ADDED + "\n" + newTask + "\n";
+    }
+
+    @Override
+    public String getResponse() {
+        return response;
     }
 }

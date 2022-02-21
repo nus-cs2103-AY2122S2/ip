@@ -8,6 +8,7 @@ import duke.TaskList;
  * Encapsulates the delete command.
  */
 public class CommandDelete extends Command {
+    private String response;
     private final TaskList taskList;
     private final int taskNo;
 
@@ -24,11 +25,15 @@ public class CommandDelete extends Command {
 
     /**
      * Deletes The task from the taskList
-     * @return Response message of the user regarding successful deletion.
      */
     @Override
-    public String execute() {
+    public void execute() {
         Task deletee = taskList.deleteTask(taskNo);
-        return Response.RESPONSE_DELETED + "\n" + deletee.toString() + "\n" + Response.taskNo(taskList.size());
+        response = Response.RESPONSE_DELETED + "\n" + deletee.toString() + "\n" + Response.taskNo(taskList.size());
+    }
+
+    @Override
+    public String getResponse() {
+        return response;
     }
 }

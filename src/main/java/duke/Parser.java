@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import duke.command.Command;
+import duke.command.CommandBye;
 import duke.command.CommandDeadline;
 import duke.command.CommandDelete;
 import duke.command.CommandEvent;
@@ -55,14 +56,12 @@ class Parser {
             }
             return new CommandTodo(taskList, todoContent);
         case "deadline":
-            checkArgNumber(words, 2);
             String deadlineContent = extractContent(words, Deadline.contentTimeDivder());
             String[] separateTime = userInput.split(Deadline.contentTimeDivder());
             String dateString = separateTime[1];
             LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
             return new CommandDeadline(taskList, deadlineContent, date);
         case "event":
-            checkArgNumber(words, 2);
             String eventContent = extractContent(words, Event.contentTimeDivder());
             String timeString = userInput.split(Event.contentTimeDivder())[1];
             LocalDate time = LocalDate.parse(timeString, DateTimeFormatter.ISO_DATE);
@@ -87,6 +86,9 @@ class Parser {
             task = taskList.get(taskNo - 1);
             int tagNo = Integer.parseInt(words[2]);
             return new CommandUntag(task, tagNo);
+        case "bye":
+            checkArgNumber(words, 1);
+            return new CommandBye();
         default:
             return new CommandUnclear();
         }

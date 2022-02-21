@@ -22,7 +22,8 @@ class Duke {
         assert this.taskList != null;
         try {
             Command command = Parser.parse(userInput, taskList);
-            String response = command.execute();
+            command.execute();
+            String response = command.getResponse();
             storage.writeData(taskList);
             return response;
         } catch (NumberFormatException e) {

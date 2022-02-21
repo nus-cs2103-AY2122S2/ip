@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Task;
 public class CommandUntag extends Command {
+    private String response;
     private Task task;
     private int tagNumber;
 
@@ -11,8 +12,13 @@ public class CommandUntag extends Command {
     }
 
     @Override
-    public String execute() {
+    public void execute() {
         task.deleteTag(tagNumber);
-        return "deleted Tag " + tagNumber + task.toString();
+        response = "deleted Tag " + tagNumber + task.toString();
+    }
+
+    @Override
+    public String getResponse() {
+        return response;
     }
 }

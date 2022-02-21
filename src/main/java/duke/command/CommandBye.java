@@ -1,31 +1,26 @@
 package duke.command;
 
-import duke.Over;
-import duke.Response;
-
 /**
  * Represents the 'bye' command that shuts off Duke.
  */
 public class CommandBye extends Command {
-    private final Over over;
 
     /**
      * Creates a new CommandBye instance.
-     *
-     * @param over the boolean representation that kills Duke, used in the while loop of main logic.
      */
-    public CommandBye(Over over) {
-        this.over = over;
+    public CommandBye() {
     }
 
     /**
      * Execution of this command.
      */
     @Override
-    public String execute() {
-        assert over != null;
-        String msg = Response.RESPONSE_GOODBYE;
-        over.setOver();
-        return msg;
+    public void execute() {
+        System.exit(0);
+    }
+
+    @Override
+    public String getResponse() {
+        return null;
     }
 }

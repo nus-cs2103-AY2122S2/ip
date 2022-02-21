@@ -2,6 +2,7 @@ package duke.command;
 import duke.Task;
 
 public class CommandTag extends Command {
+    private String response;
     private Task task;
     private String tagMessage;
     public CommandTag(Task task, String tagMessage) {
@@ -10,8 +11,13 @@ public class CommandTag extends Command {
     }
 
     @Override
-    public String execute() {
+    public void execute() {
         task.addTag(tagMessage);
-        return "Added tag:" + task.toString();
+        response = "Added tag:" + task.toString();
+    }
+
+    @Override
+    public String getResponse() {
+        return response;
     }
 }

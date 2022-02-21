@@ -13,7 +13,7 @@ public class CommandDeadline extends Command {
     private final String deadlineContent;
     private final LocalDate date;
     private final TaskList taskList;
-
+    private String response;
 
     /**
      * Contructor for CommandDeadline.
@@ -32,12 +32,16 @@ public class CommandDeadline extends Command {
 
     /**
      * Appends the Deadline task to the taskList and return message that it is successfully added.
-     * @return Message to the user of successful append.
      */
     @Override
-    public String execute() {
+    public void execute() {
         Deadline newTask = new Deadline(deadlineContent, date);
         taskList.addTask(newTask);
-        return Response.RESPONSE_ADDED + "\n" + newTask + "\n" + Response.taskNo(taskList.size());
+        response = Response.RESPONSE_ADDED + "\n" + newTask + "\n" + Response.taskNo(taskList.size());
+    }
+
+    @Override
+    public String getResponse() {
+        return response;
     }
 }

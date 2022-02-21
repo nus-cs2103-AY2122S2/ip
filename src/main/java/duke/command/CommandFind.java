@@ -4,6 +4,7 @@ import duke.Response;
 import duke.TaskList;
 
 public class CommandFind extends Command {
+    private String response;
     private String keyword;
     private TaskList taskList;
 
@@ -15,9 +16,14 @@ public class CommandFind extends Command {
     }
 
     @Override
-    public String execute() {
+    public void execute() {
         System.out.println("CommandFind Executed");
         TaskList searchResult = this.taskList.search(this.keyword);
-        return Response.RESPONSE_SEARCH + "\n" + searchResult.toString();
+        response = Response.RESPONSE_SEARCH + "\n" + searchResult.toString();
+    }
+
+    @Override
+    public String getResponse() {
+        return response;
     }
 }

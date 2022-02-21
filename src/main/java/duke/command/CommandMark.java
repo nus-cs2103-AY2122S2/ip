@@ -3,6 +3,7 @@ package duke.command;
 import duke.TaskList;
 
 public class CommandMark extends Command {
+    private String response;
     private TaskList taskList;
     private int taskNo;
 
@@ -13,8 +14,13 @@ public class CommandMark extends Command {
     }
 
     @Override
-    public String execute() {
+    public void execute() {
         String change = taskList.markFinished(taskNo);
-        return change;
+        response = change;
+    }
+
+    @Override
+    public String getResponse() {
+        return response;
     }
 }
