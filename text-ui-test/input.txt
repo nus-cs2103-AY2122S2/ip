@@ -1,0 +1,15 @@
+deadline finish level-6 /by midnight tonight
+event the weekend /at this Saturday
+todo
+todo eat dinner
+mark 3
+list
+unmark 3
+list
+deadline /by 4pm
+mark 1
+list
+delete 1
+list
+delete 3
+bye
