@@ -29,7 +29,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.show();
-            String css = stage.getClass().getResource("/css/MainWindow.css").toExternalForm();
+            String css = Main.class.getResource("/css/MainWindow.css").toExternalForm();
             scene.getStylesheets().add(css);
         } catch (IOException e) {
             e.printStackTrace();
