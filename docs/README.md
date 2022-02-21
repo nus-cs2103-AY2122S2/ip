@@ -103,7 +103,7 @@ Now you have 2 tasks in the list.
 
 ### Search for tasks by date or description: `find` and `date`.
 Using `find` allows you to search for tasks by their descriptions. <br/>
-Using `date` allows you to search for tasks by their set dates. <br/>
+Using `date` allows you to search for tasks by their set dates. <br/><br/>
 Pretty neat, huh?
 #### Usage
 `find <DESCRIPTION>` <br/>
