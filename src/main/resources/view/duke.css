@@ -1,0 +1,9 @@
+.background {
+-fx-background-color: #0a192f;
+}
+
+.text-bubble {
+    -fx-background-color: #00FFFF;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+}
