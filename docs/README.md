@@ -69,7 +69,7 @@ Format: `event [DESCRIPTION] /at [TIME]`
 Examples:
 
 - `event John's wedding /at 2022-03-12T18:00:00`
-- `event CS2103T finals /at 2022=05-02T12:00:00`
+- `event CS2103T finals /at 2022-05-02T12:00:00`
 
 ### Adding a task with a deadline - `Deadline`
 
