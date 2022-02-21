@@ -2,33 +2,30 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.LinkedList;
 
 /**
  * Represents a collection of tasks.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 0.1
+ * @version 1.0
  */
 public class TaskList {
     private List<Task> tasks;
 
     /**
      * Empty constructor for TaskList.
-     * Initializes the TaskList with an empty linked list.
      */
     public TaskList() {
-        this.tasks = new LinkedList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
-     * Constructor for TaskList.
-     * Initializes TaskList with a given list of Tasks.
+     * Constructor for TaskList specifying a list of Tasks.
      *
-     * @param tasks list of Task objects
+     * @param tasks list of Tasks to be initialized
      */
     public TaskList(List<Task> tasks) {
-        this.tasks = new LinkedList<>();
+        this.tasks = new ArrayList<>();
         this.tasks.addAll(tasks);
     }
 
@@ -68,55 +65,59 @@ public class TaskList {
     /**
      * Appends Task to end of TaskList.
      *
-     * @param t  Task to be added
+     * @param t Task to be added
      */
     public void add(Task t) {
         tasks.add(t);
     }
 
     /**
-     * Searches for occurrences of a given word in tasks.
-     * Returns a list of Tasks that contain it.
+     * Returns matching occurrences of a given word in tasks.
      *
      * @param word keyword to be searched for
      * @return TaskList of the Tasks containing the specified word
      */
     public TaskList find(String word) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).toString().contains(word)) {
-                matchingTasks.add(tasks.get(i));
+
+        for (Task task: tasks) {
+            if (task.toString().contains(word)) {
+                matchingTasks.add(task);
             }
         }
+
         return new TaskList(matchingTasks);
     }
 
     /**
-     * Default toString method that returns a string of all tasks in
-     * TaskList and the number of tasks in TaskList.
+     * Default toString method that returns list of all tasks.
+     * Note: It appends list of tasks with a string denoting the number
+     * of tasks.
      *
      * @return formatted string of all Tasks in TaskList and number of
      * Tasks in TaskList delimited by newlines.
      */
     public String toString() {
-        String s = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            if (!tasks.get(i).isEmpty()) {
-                int index = i + 1;
-                s += "  " + index + ". " + tasks.get(i) + "\n";
-            } else {
-                s += "You have " + i + " tasks on your list.";
-                break;
-            }
-        }
         if (tasks.isEmpty()) {
-            s =  "You now have 0 tasks on your list.";
+            return  "You now have 0 tasks on your list.";
         }
 
-        return s;
-    }
+        StringBuilder str = new StringBuilder();
 
-    public int length() {
-        return tasks.size();
+        for (int i = 0; i < tasks.size(); i++) {
+            int index = i + 1;
+
+            str.append("  ")
+                    .append(index)
+                    .append(". ")
+                    .append(tasks.get(i))
+                    .append("\n");
+        }
+
+        str.append("You have ")
+                .append(tasks.size())
+                .append(" tasks on your list.");
+
+        return str.toString();
     }
 }

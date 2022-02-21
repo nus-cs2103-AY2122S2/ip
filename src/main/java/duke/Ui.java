@@ -2,8 +2,6 @@ package duke;
 
 import duke.task.TaskList;
 
-import java.util.Scanner;
-
 /**
  * Represents a UI class that deals with user input and application output.
  *
@@ -11,10 +9,11 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class Ui {
-    private final Scanner reader = new Scanner(System.in);
 
     /**
      * Returns a welcome message.
+     *
+     * @return welcome message.
      */
     public static String showWelcome() {
         return "Hello, traveller! My name in Paimon.\n"
@@ -22,15 +21,16 @@ public class Ui {
     }
 
     /**
-     * Displays a generic error message about failed data loading from a file.
+     * Returns a generic error message about failed data loading from a file.
+     *
+     * @return error message about data loading errors.
      */
     public static String showLoadingError() {
-        return "Oh no, an error occurred with processing the data "
-                + "file :c";
+        return "An error occurred with processing the data file";
     }
 
     /**
-     * Displays a specific error message about some exception in the program.
+     * Returns a specific error message about some exception in the program.
      *
      * @param s string describing error
      * @return string describing error
@@ -39,47 +39,98 @@ public class Ui {
         return s;
     }
 
+    /**
+     * Returns an error handling message for empty strings.
+     */
     public static String showEmptyMessage() {
         return "Paimon cannot read minds!";
     }
 
     /**
-     * Handles display output for commands.
-     * Displays the associated message with a given command and prints the list
-     * of tasks if necessary.
+     * Returns string of list of tasks and number of tasks.
      *
-     * @param command string describing command
-     * @param tasks current TaskList of tasks
-     * @return response
+     * @param tasks current TaskList
+     * @return formatted string of tasks
      */
-    public String showCommandMessage(String command, TaskList tasks) {
-        switch (command) {
-        case "list":
-            return "Hmm... Paimon keeps a clear record in her "
-                    + "diary.\n" + tasks.toString();
-        case "do":
-            // Fallthrough
-        case "undo":
-            return "Task successfully updated.";
-        case "delete":
-            return "Noted, the task has been scrubbed off the "
-                    + "list!\n" + tasks.toString();
-        case "todo":
-            return "Got it! I have noted down the following task "
-                    + "in your list.";
-        case "find":
-            return "Here are the matching tasks in your list:";
-        case "deadline":
-            return "Got it! I have noted down the following task in"
-                    + " your list. \nRemember the deadline!";
-        case "event":
-            return "Got it! I have noted down the following task in"
-                    + " your list.\nDo be there on time!";
-        case "bye":
-            reader.close();
-            return "Bye, hope to see you again soon!";
-        default:
-            return "That went over Paimon's head a little...";
-        }
+    public static String showListMessage(TaskList tasks) {
+        return "Hmm... Paimon keeps a clear record in her "
+                + "diary.\n" + tasks.toString();
+    }
+
+    /**
+     * Returns generic message for task update.
+     *
+     * @return string stating that task is updated.
+     */
+    public static String showUpdateMessage() {
+        return "Task successfully updated.";
+    }
+
+    /**
+     * Returns task deletion message and resulting list of tasks.
+     *
+     * @param tasks TaskList of tasks
+     * @return string of list of tasks and deletion message.
+     */
+    public static String showDeleteMessage(TaskList tasks) {
+        return "Noted, the task has been scrubbed off the "
+                + "list!\n" + tasks.toString();
+    }
+
+    /**
+     * Returns message for the addition of a Todo.
+     *
+     * @return string stating that a Todo task has been added.
+     */
+    public static String showTodoMessage() {
+        return "Got it! I have noted down the following task "
+                + "in your list.\n";
+    }
+
+    /**
+     * Returns generic message for finding tasks.
+     *
+     * @return string stating that matching tasks are found.
+     */
+    public static String showFindMessage() {
+        return "Here are the matching tasks in your list:\n";
+    }
+
+    /**
+     * Returns message for the addition of a Deadline task.
+     *
+     * @return string stating that a Deadline task has been added.
+     */
+    public static String showDeadlineMessage() {
+        return "Got it! I have noted down the following task in"
+                + " your list. \nRemember the deadline!\n";
+    }
+
+    /**
+     * Returns message for the addition of an Event task.
+     *
+     * @return string stating that an Event task has been added.
+     */
+    public static String showEventMessage() {
+        return "Got it! I have noted down the following task in"
+                + " your list.\nDo be there on time!\n";
+    }
+
+    /**
+     * Returns message for the end of the program.
+     *
+     * @return string to end program.
+     */
+    public static String showByeMessage() {
+        return "Bye, hope to see you again soon!";
+    }
+
+    /**
+     * Returns generic message for indecipherable input.
+     *
+     * @return generic message about unclear input.
+     */
+    public static String showDefaultMessage() {
+        return "That went over Paimon's head a little...";
     }
 }

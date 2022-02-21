@@ -6,26 +6,22 @@ package duke.task;
  * by Event is YYYY/MM/DD (with * ./| being valid separators) and HHMM.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 0.1
+ * @version 1.0
  */
 public class Event extends TaskWithDateTime {
-    private String at;
 
     /**
-     * Constructor for Event.
-     * Initializes the Event with a given description and dateTime string.
+     * Constructor for Event specifying description, dateTime string.
      *
      * @param description description of Event
      * @param at dateTime string associated with Event
      */
     public Event(String description, String at) {
         super(description, at);
-        this.at = at;
     }
 
     /**
-     * Default toString method that returns the description, dateTime
-     * of Event with its completion status and Event marker.
+     * Default toString method that returns formatted Event.
      *
      * @return formatted string of the description, dateTime and completeness
      * status of Event with an Event marker.
@@ -36,7 +32,8 @@ public class Event extends TaskWithDateTime {
     }
 
     /**
-     * Parses contents of Event into a csv-like format delimited by '|'.
+     * Parses contents of Event into a csv-like format.
+     * Delimiter is '|'.
      *
      * @return formatted string of Event, its dateTime, completion status
      * and an Event marker.

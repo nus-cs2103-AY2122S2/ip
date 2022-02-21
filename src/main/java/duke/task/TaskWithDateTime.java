@@ -16,16 +16,15 @@ import java.util.regex.Pattern;
  * by TaskWithDateTime is YYYY/MM/DD (with ./| being valid separators) and HHMM.
  *
  * @author  Elumalai Oviya Dharshini
- * @version 0.1
+ * @version 1.0
  */
 public class TaskWithDateTime extends Task {
     private LocalDate day;
-    private LocalTime timeOfDay;
     private String dateTime;
 
     /**
      * Constructor for TaskWithDateTime.
-     * Initializes the Task with a given description and dateTime.
+     * Specifies description and dateTime.
      *
      * @param description description of task
      * @param dateTime datetime associated with task in string format
@@ -33,51 +32,70 @@ public class TaskWithDateTime extends Task {
     public TaskWithDateTime(String description, String dateTime) {
         super(description);
 
-        String temp = dateTime.trim();
-        this.dateTime = dateTime.trim();
+        dateTime = dateTime.trim();
+        this.dateTime = dateTime;
 
-        // Extract date, if any
+        extractTime(extractDate());
+    }
+
+    /**
+     * Formats date in dateTime correctly (if any).
+     * Dates detected are of the format YYYYMMDD delimited by -|/.
+     * and are changed to MMM d yyyy format.
+     *
+     * @return string with date removed.
+     */
+    public String extractDate(){
         String regexDate = "\\d{4}[-|/.]\\d{2}[-|/.]\\d{2}";
         Matcher m = Pattern.compile(regexDate).matcher(dateTime);
+        String strWithoutDate = dateTime;
+
+        // If specified date format is found
         if (m.find()) {
+            strWithoutDate = strWithoutDate.replace(m.group(0), "");
+
             try {
                 day = LocalDate.parse(m.group(0).replaceAll("[./|]", "-"));
                 dateTime = dateTime.replace(m.group(0),
                         day.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-                this.dateTime = dateTime;
-
-                temp = temp.replace(m.group(0), "");
             } catch (DateTimeException e) {
-                System.out.println("The date specified is invalid and has "
-                        + "automatically been changed to tomorrow.");
-                this.dateTime = dateTime.replace(m.group(0),
+                // Set date to the next day if date is invalid
+                dateTime = dateTime.replace(m.group(0),
                         LocalDate.now().plus(1, ChronoUnit.DAYS).toString());
-                temp = temp.replace(m.group(0), "");
             }
-
         }
 
-        // Extract time, if any
+        return strWithoutDate;
+    }
+
+    /**
+     * Formats time in dateTime correctly (if any).
+     * Time detected is of the format HHMM, and is changed to HH:MM.
+     * Note: input string must not contain any dates or other four
+     * contiguous digits.
+     *
+     * @param str time string associated with task
+     */
+    public void extractTime(String str) {
         String regexTime = "\\d{4}";
-        m = Pattern.compile(regexTime).matcher(temp);
+        Matcher m = Pattern.compile(regexTime).matcher(str);
+
+        // If specified time format is found
         if (m.find()) {
             try {
-                timeOfDay = LocalTime.parse(m.group(0).substring(0, 2)
+                LocalTime timeOfDay = LocalTime.parse(m.group(0).substring(0, 2)
                         + ":" + m.group(0).substring(2));
-                this.dateTime = this.dateTime.replace(m.group(0),
-                        timeOfDay.toString());
+                dateTime = dateTime.replace(m.group(0), timeOfDay.toString());
             } catch (DateTimeException e) {
-                System.out.println("The time specified is invalid and has "
-                        + "automatically been changed to an hour from now.");
-                this.dateTime = this.dateTime.replace(m.group(0),
+                // Set time to an hour from now if time is invalid
+                dateTime = dateTime.replace(m.group(0),
                         LocalTime.now().plus(1, ChronoUnit.HOURS).toString());
             }
         }
     }
 
     /**
-     * Default toString method that returns a formatted string of the
-     * contents of TaskWithDateTime.
+     * Default toString method that returns formatted TaskWithDateTime.
      *
      * @return formatted string of description, dateTime and completion
      * status of the TaskWithDateTime object.
@@ -88,8 +106,8 @@ public class TaskWithDateTime extends Task {
     }
 
     /**
-     * Parses contents of TaskWithDateTime into a csv-like format
-     * delimited by '|'.
+     * Parses contents of TaskWithDateTime into a csv-like format.
+     * Delimiter is '|'.
      *
      * @return formatted string of TaskWithDateTime, its completion
      * status and associated dateTime.
