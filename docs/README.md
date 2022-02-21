@@ -22,12 +22,15 @@ You can download the app [here](https://github.com/B1LLP4RK/ip). Image below sho
     - delete a particular task
 6. `find {keyword}`
     - shows the task containing the keyword, case insensitive
+
 ## development roadmap
 - [x] enable search using a **keyword** (`find` command)
 - [ ] enable changing **task orders**
 - [ ] enable setting **priority** to tasks
 - [ ] enable **priority-based ordering**
+
 ## known issues
 - giving multiple keywords delimited by space for `find` crashes the app (will be fixed soon)
+
 ## patch notes
 - no patch yet
