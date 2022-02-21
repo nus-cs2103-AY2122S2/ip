@@ -11,6 +11,7 @@ import java.io.ObjectInputFilter.FilterInfo;
 import java.io.ObjectInputFilter.Status;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -86,7 +87,7 @@ public class Storage {
      * @param objs a list of Serializable objects to save
      * @throws IOException if there was an error while saving objects
      */
-    public void save(List<? extends Object> objs) throws IOException {
+    public void save(List<? extends Serializable> objs) throws IOException {
         File parent = this.dataFile.getParentFile();
         parent.mkdirs(); // attempt to make all parent dirs, and ignore if already exists
 
@@ -104,7 +105,7 @@ public class Storage {
      * @param objs the objects to save
      * @throws IOException if there was an error while saving objects
      */
-    public void save(Object... objs) throws IOException {
+    public void save(Serializable... objs) throws IOException {
         save(Arrays.asList(objs));
     }
 }
