@@ -1,0 +1,6 @@
+.dialog-box {
+        -fx-background-color: #4fc3f7;
+        -fx-background-radius: 10px;
+        -fx-background-insets: 0 5;
+        -fx-label-padding: 12px;
+}

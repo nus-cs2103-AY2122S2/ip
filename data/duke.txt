@@ -1,6 +1,4 @@
-T|1|return book
-D|1|do this|2000-01-10 10:50
-D|1|homework|2020-01-01 10:45
-T|1|more ip
-D|0|ip|2022-10-13 13:45
 D|0|another ip|2012-03-19 15:36
+D|0|buy basketballs|2010-02-28 10:10
+T|0|cs homework
+T|0|research chatbots
