@@ -29,6 +29,7 @@ A Graphical User Interface (GUI) has also been added which mimics a chatbot you 
 - Parameters to be supplied by the user are in `UPPER_CASE`.
 
   e.g. `todo TASK_NAME`, `TASK_NAME` is a parameter to be supplied such as `todo homework`.
+  
 ---
 ### Adding a task:
 Duke supports 3 types of tasks: `todo`, `deadline` and `event`
