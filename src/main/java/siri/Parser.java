@@ -106,6 +106,7 @@ public class Parser {
         return command.substring(index, lastIndexOfCommand).trim(); //Extract first word.
     }
 
+    //isValidCommand reused and edited from Tan De Shao
     /**
      * Checks if the user input for a recognised command, e.g todo, list, mark
      * @param command User input command
