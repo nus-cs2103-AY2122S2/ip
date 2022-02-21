@@ -1,0 +1,13 @@
+list
+delete 1
+todo aaa
+list
+event bbb /at bbb
+list
+deadline ccc /by ccc
+list
+deadline
+deadline ddd /by
+deadline /by
+deadline /by aaa
+list
