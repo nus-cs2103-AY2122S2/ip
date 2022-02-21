@@ -51,7 +51,6 @@ public class Parser {
             }
         } catch (DukeException e) {
             return e.getMessage();
-//            System.out.println("__________________________________");
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return("This index doesn't exist in list");
         }
@@ -76,7 +75,7 @@ public class Parser {
                 LocalDate date = LocalDate.parse(deadlineList[0].replace("/", "-"));
                 LocalTime time = LocalTime.parse(deadlineList[1]);
                 result.append(taskList.addDeadline(title, date, time));
-            } catch (IndexOutOfBoundsException | DateTimeParseException e){
+            } catch (IndexOutOfBoundsException | DateTimeParseException e) {
                 throw new DukeException("Please tell me the deadline in this format: deadline <Activity> /by YYYY/MM/DD HH:MM");
             }
             break;
@@ -88,7 +87,7 @@ public class Parser {
                 LocalDate date = LocalDate.parse(deadlineList[0].replace("/", "-"));
                 LocalTime time = LocalTime.parse(deadlineList[1]);
                 result.append(taskList.addEvent(title, date, time));
-            } catch (IndexOutOfBoundsException | DateTimeParseException e){
+            } catch (IndexOutOfBoundsException | DateTimeParseException e) {
                 throw new DukeException("Please tell me the deadline in this format: event <Activity> /at YYYY/MM/DD HH:MM");
             }
             break;

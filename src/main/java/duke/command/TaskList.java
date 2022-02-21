@@ -64,12 +64,9 @@ public class TaskList {
      * @throws NumberFormatException     If user gives a string instead of a number
      */
     public String unmarkItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
-        StringBuilder result = new StringBuilder();
         int index = Integer.parseInt(command[1]);
         taskArray.get(index - 1).setUnchecked();
-        result.append("OK, I've marked this task as not done yet:\n");
-        result.append(taskArray.get(index - 1));
-        return String.valueOf(result);
+        return String.valueOf("OK, I've marked this task as not done yet:\n" + taskArray.get(index - 1));
     }
 
     /**
@@ -80,12 +77,10 @@ public class TaskList {
      * @throws NumberFormatException     If user gives a string instead of a number
      */
     public String deleteItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
-        StringBuilder result = new StringBuilder();
         int index = Integer.parseInt(command[1]);
         Task task = taskArray.remove(index - 1);
-        result.append("Noted, I've removed this task from the list: ");
-        result.append(task).append("\n");
-        result.append(String.format("You have %d tasks left\n", taskArray.size()));
+        String result = "Noted, I've removed this task from the list: " + task + "\n";
+        result += String.format("You have %d tasks left\n", taskArray.size());
         return String.valueOf(result);
     }
 
