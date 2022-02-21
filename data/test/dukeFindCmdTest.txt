@@ -1,0 +1,31 @@
+TODO
+false
+CS2106 Task 1
+*** Next Task ***
+TODO
+true
+CS2105 Task 1
+*** Next Task ***
+TODO
+false
+CS2104 Task 1
+*** Next Task ***
+TODO
+false
+CS2103 Task 1
+*** Next Task ***
+DEADLINE
+true
+CS2103 Deadline 1
+10/2/2022 2359
+*** Next Task ***
+EVENT
+true
+CS2103 Exam 1
+1/1/2022 2359
+*** Next Task ***
+EVENT
+false
+CS2106 Exam 1
+1/1/2022 2359
+*** Next Task ***

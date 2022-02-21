@@ -1,0 +1,28 @@
+TODO
+false
+Task 1
+*** Next Task ***
+DEADLINE
+false
+Deadline 1
+1/1/1900 0000
+*** Next Task ***
+EVENT
+false
+Event 1
+1/1/1900 1200
+*** Next Task ***
+TODO
+true
+Task 2
+*** Next Task ***
+DEADLINE
+true
+Deadline 2
+1/1/2022 2359
+*** Next Task ***
+EVENT
+true
+Event 2
+1/1/2022 2359
+*** Next Task ***
