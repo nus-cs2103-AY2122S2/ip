@@ -35,11 +35,13 @@ public class MarkTaskCommand extends Command {
         assert taskList != null : "MarkTaskCommand->run: Task list cannot be null.";
         assert storage != null : "MarkTaskCommand->run: Storage cannot be null.";
 
-        taskList.getTasks(taskId - 1).markDone();
         try {
+            taskList.getTasks(taskId - 1).markDone();
             storage.write(taskList.getTaskList());
         } catch (IOException e) {
             throw new DukeException("Something went wrong when I tried to write your task list back to storage :(");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Sorry your task ID is not valid, please try again! :(");
         }
 
         return "Nice! I've marked this task as done:\n" + taskList.getTasks(taskId - 1).toString();

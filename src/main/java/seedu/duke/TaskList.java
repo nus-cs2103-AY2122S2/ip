@@ -30,27 +30,27 @@ public class TaskList {
 
         for (String task : taskList) {
             String taskType = task.substring(0, 7);
-            boolean taskIsDone = false;
+            boolean isTaskDone = false;
             String dateTime;
             if (taskType.charAt(4) == 'X') {
-                taskIsDone = true;
+                isTaskDone = true;
             }
             switch (taskType.charAt(1)) {
             case 'T':
                 String taskTodo = task.substring(7);
-                this.taskList.add(new ToDo(taskTodo, taskIsDone));
+                this.taskList.add(new ToDo(taskTodo, isTaskDone));
                 break;
             case 'E':
                 String[] taskEvent = task.substring(7).split(" /at ");
                 dateTime = LocalDate.parse(taskEvent[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
                         .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                this.taskList.add(new Event(taskEvent[0], taskIsDone, dateTime));
+                this.taskList.add(new Event(taskEvent[0], isTaskDone, dateTime));
                 break;
             case 'D':
                 String[] taskDeadline = task.substring(7).split(" /by ");
                 dateTime = LocalDate.parse(taskDeadline[1], DateTimeFormatter.ofPattern("MMM dd yyyy"))
                         .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                this.taskList.add(new Deadline(taskDeadline[0], taskIsDone, dateTime));
+                this.taskList.add(new Deadline(taskDeadline[0], isTaskDone, dateTime));
                 break;
             default:
                 throw new DukeException("I was not able to create your task list :(");
@@ -82,9 +82,6 @@ public class TaskList {
      * @param taskId Task ID to be deleted.
      */
     public void delete(int taskId) {
-        assert taskId < taskList.size() : "TaskList->delete: Task ID to be deleted does not exist.";
-        assert taskId >= 0 : "TaskList->delete: Task ID to be deleted is invalid.";
-
         taskList.remove(taskId);
     }
 
@@ -113,9 +110,6 @@ public class TaskList {
      * @return Specific task object in the task list.
      */
     public Task getTasks(int taskId) {
-        assert taskId < taskList.size() : "TaskList->getTasks: Task ID to be retrieved does not exist.";
-        assert taskId >= 0 : "TaskList->getTasks: Task ID to be retrieved is invalid.";
-
         return taskList.get(taskId);
     }
 

@@ -35,11 +35,13 @@ public class UnmarkTaskCommand extends Command {
         assert taskList != null : "UnmarkTaskCommand->run: Tasks list cannot be null.";
         assert storage != null : "UnmarkTaskCommand->run: Storage cannot be null.";
 
-        taskList.getTasks(taskId - 1).markUndone();
         try {
+            taskList.getTasks(taskId - 1).markUndone();
             storage.write(taskList.getTaskList());
         } catch (IOException e) {
             throw new DukeException("Something went wrong when I tried to write your task list back to storage :(");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Sorry your task ID is not valid, please try again! :(");
         }
 
         return "OK, I've marked this task as not done yet:\n" + taskList.getTasks(taskId - 1).toString();

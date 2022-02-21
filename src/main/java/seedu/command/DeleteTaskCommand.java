@@ -35,16 +35,17 @@ public class DeleteTaskCommand extends Command {
         assert taskList != null : "DeleteTaskCommand->run: Task list cannot be null.";
         assert storage != null : "DeleteTaskCommand->run: Storage cannot be null.";
 
-        String result = "Noted. I've removed this task:\n" + taskList.getTasks(taskId - 1).toString();
-
-        taskList.delete(taskId - 1);
-
-        result += "\nNow you have " + taskList.size() + " tasks in the list.";
+        String result = "Noted. I've removed this task:\n";
 
         try {
+            result += taskList.getTasks(taskId - 1).toString();
+            taskList.delete(taskId - 1);
+            result += "\nNow you have " + taskList.size() + " tasks in the list.";
             storage.write(taskList.getTaskList());
         } catch (IOException e) {
             throw new DukeException("Something went wrong when I tried to write your task list back to storage :(");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Sorry your task ID is not valid, please try again! :(");
         }
 
         return result;
