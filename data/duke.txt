@@ -1,0 +1,4 @@
+T|0|buy apple
+T|1|sell pear
+D|0|cry |Something
+E|0|party |Tmr

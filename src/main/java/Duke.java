@@ -1,9 +1,4 @@
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.Buffer;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -22,7 +17,8 @@ import java.util.Scanner;
  */
 public class Duke {
     private static final String LINE_BREAK = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static ArrayList<Task> masterList;
+    private static ArrayList<Task> masterList = new ArrayList<>();
+    ;
     /**
      * Prints line break.
      * @return void
@@ -53,6 +49,74 @@ public class Duke {
         return inputArr[1].split("/")[0]; // split input from slash
     }
 
+    private static final String taskToString(Task task) {
+        String toReturn = "";
+        if (task instanceof ToDos) {
+            toReturn = toReturn + "T|";
+        } else if (task instanceof Deadlines) {
+            toReturn = toReturn + "D|";
+        } else if (task instanceof Events) {
+            toReturn = toReturn + "E|";
+        }
+        if (task.isDone) {
+            toReturn = toReturn + "1|";
+        } else {
+            toReturn = toReturn + "0|";
+        }
+        toReturn = toReturn + task.description;
+        if (task instanceof Deadlines || task instanceof Events) {
+            String[] durationArr = task.toString().split("[:)]");
+            String duration = durationArr[1].split(" ")[1];
+            toReturn = toReturn + "|" + duration;
+        }
+        return toReturn;
+    }
+
+    private static final void saveAllTask(ArrayList<Task> tasks, String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : tasks) {
+            fw.write(taskToString(task));
+            fw.write("\n");
+        }
+        fw.close();
+    }
+
+    public static final Task loadTask(String description) {
+        String[] splitDescription = description.split("\\|");
+        String taskType = splitDescription[0];
+        Task tempTask = new Task("Temp task");
+        switch (taskType) {
+        case "T":
+            Task newToDo = new ToDos(splitDescription[2]);
+            if (splitDescription[1].equals("1")) {
+                newToDo.markAsDone();
+            }
+            tempTask = newToDo;
+            break;
+
+        case "D":
+            Task newDeadline = new Deadlines(splitDescription[2], splitDescription[3]);
+            if (splitDescription[1].equals("1")) {
+                newDeadline.markAsDone();
+            }
+            tempTask = newDeadline;
+            break;
+
+        case "E":
+            Task newEvent = new Events(splitDescription[2], splitDescription[3]);
+            if (splitDescription[1].equals("1")) {
+                newEvent.markAsDone();
+            }
+            tempTask = newEvent;
+            break;
+
+        default:
+            System.out.println("All tasks loaded!");
+
+        }
+        return tempTask;
+    }
+
     public static void main(String[] args) throws Exception, IOException {
         String home =  System.getProperty("user.home"); // base directory
         // following code should give me [HOME_DIRECTORY]/Desktop/iP/data
@@ -60,18 +124,20 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         try {
-            File dataDirectory = new File(path.toString());
             File dukeStore = new File(path + "/duke.txt");
             Scanner fileReader = new Scanner(dukeStore);
+            while (fileReader.hasNextLine()) {
+                masterList.add(loadTask(fileReader.nextLine()));
+            }
         } catch (IOException e) {
             Path filePath = Paths.get("data");
             boolean isDirectoryExists = Files.exists(filePath);
             if (!isDirectoryExists) {
                 new File("data").mkdir();
             }
-            new File(String.valueOf(path)).createNewFile();
-            masterList = new ArrayList<>();
+            new File(path + "/duke.txt").createNewFile();
         }
+
 
 
         String logo = " ____        _        \n"
@@ -94,6 +160,9 @@ public class Duke {
             switch (inputArr[0]) {
             case "bye":
                 ifBye = true;
+                File dukeStore = new File(path + "/duke.txt");
+                dukeStore.delete();
+                saveAllTask(masterList, path + "/duke.txt");
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
 

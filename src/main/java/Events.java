@@ -5,7 +5,7 @@
 
 public class Events extends Task {
 
-    private final String duration;
+    protected final String duration;
 
     public Events(String description, String duration) {
         super(description);
