@@ -24,7 +24,7 @@
 
 #### 1. `list` 
 
-####Expected Outcome: 
+Expected Outcome: 
 ```
 Tasks to do:
 1. [T][] run 2.4km
@@ -33,7 +33,7 @@ Tasks to do:
 
 #### 2. `delete 2`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 Sure, I've removed this task from the list:
    [D][] CS2103T Quiz (by: Friday 2pm)
@@ -43,7 +43,7 @@ Number of task(s) in your list: 1
 
 #### 3. `todo run 10km`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 This task has been added to your list:
    [T][] run 10km
@@ -53,7 +53,7 @@ Number of task(s) in your list: 2
 
 #### 4. `deadline iP /by 2022-02-18`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 This task has been added to your list:
    [D][] iP (by: Feb 18th 2022)
@@ -63,7 +63,7 @@ Number of task(s) in your list: 3
 
 #### 5. `event Jane's Wedding /at Fullerton Hotel`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 This task has been added to your list:
    [E][] Jane's Wedding (at: Fullerton Hotel)
@@ -73,7 +73,7 @@ Number of task(s) in your list: 4
 
 #### 6. `mark 4`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 This task has been marked:
    [E][X] Jane's Wedding (at: Fullerton Hotel)
@@ -81,7 +81,7 @@ This task has been marked:
 
 #### 7. `unmark 4`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 This task has been unmarked:
    [E][] Jane's Wedding (at: Fullerton Hotel)
@@ -89,7 +89,7 @@ This task has been unmarked:
 
 #### 8. `find run`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 Here are the matching tasks in your list:
 1. [T][] run 2.4km
@@ -98,7 +98,7 @@ Here are the matching tasks in your list:
 
 #### 9. `help`
 
-####Expected Outcome:
+Expected Outcome:
 ```
 Commands:
 1. list
