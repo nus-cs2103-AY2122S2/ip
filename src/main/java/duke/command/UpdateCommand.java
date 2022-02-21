@@ -30,8 +30,12 @@ public class UpdateCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.updateTask(number, section, content);
-        ui.showUpdateTask(tasks.getTasks().get(number));
-        storage.save(tasks.getTasks());
+        if (number >= 0 && number < tasks.getTasks().size()) {
+            tasks.updateTask(number, section, content);
+            ui.showUpdateTask(tasks.getTasks().get(number));
+            storage.save(tasks.getTasks());
+        } else {
+            throw new DukeException("Invalid number");
+        }
     }
 }

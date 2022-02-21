@@ -26,9 +26,13 @@ public class DeleteCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = tasks.getTasks().get(number);
-        tasks.deleteTask(number);
-        ui.showDeleteTask(task, tasks.getTasks());
-        storage.save(tasks.getTasks());
+        if (number >= 0 && number < tasks.getTasks().size()) {
+            Task task = tasks.getTasks().get(number);
+            tasks.deleteTask(number);
+            ui.showDeleteTask(task, tasks.getTasks());
+            storage.save(tasks.getTasks());
+        } else {
+            throw new DukeException("Invalid number");
+        }
     }
 }

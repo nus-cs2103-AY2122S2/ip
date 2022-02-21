@@ -25,8 +25,13 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.markTask(number);
-        ui.showMarkTask(tasks.getTasks().get(number));
-        storage.save(tasks.getTasks());
+        if (number >= 0 && number < tasks.getTasks().size()) {
+            tasks.markTask(number);
+            ui.showMarkTask(tasks.getTasks().get(number));
+            storage.save(tasks.getTasks());
+        } else {
+            throw new DukeException("Invalid number");
+        }
+
     }
 }

@@ -25,8 +25,12 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.unmarkTask(number);
-        ui.showUnmarkTask(tasks.getTasks().get(number));
-        storage.save(tasks.getTasks());
+        if (number >= 0 && number < tasks.getTasks().size()) {
+            tasks.unmarkTask(number);
+            ui.showUnmarkTask(tasks.getTasks().get(number));
+            storage.save(tasks.getTasks());
+        } else {
+            throw new DukeException("Invalid number");
+        }
     }
 }
