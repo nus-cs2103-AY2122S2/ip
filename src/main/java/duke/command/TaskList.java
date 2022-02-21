@@ -28,17 +28,15 @@ public class TaskList {
      */
     public String listItem() {
         StringBuilder result;
-//        System.out.println("__________________________________");
         if (taskArray.size() == 0) {
             result = new StringBuilder("No items in the list");
         } else {
             result = new StringBuilder();
             for (int i = 0; i < taskArray.size(); i++) {
-                result.append(String.format("%d. ", i+1)).append(taskArray.get(i)).append("\n");
+                result.append(String.format("%d. ", i + 1)).append(taskArray.get(i)).append("\n");
             }
         }
         return String.valueOf(result);
-//        System.out.println("__________________________________");
     }
 
 
@@ -47,14 +45,14 @@ public class TaskList {
      *
      * @param command Commmand is the input given by the user
      * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
-     * @throws NumberFormatException If user gives a string instead of a number
+     * @throws NumberFormatException     If user gives a string instead of a number
      */
     public String markItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         StringBuilder result = new StringBuilder();
         int index = Integer.parseInt(command[1]);
         taskArray.get(index - 1).setChecked();
         result.append("Nice! I've marked this task as done:\n");
-        result.append(taskArray.get(index-1));
+        result.append(taskArray.get(index - 1));
         return String.valueOf(result);
     }
 
@@ -63,7 +61,7 @@ public class TaskList {
      *
      * @param command Commmand is the input given by the user
      * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
-     * @throws NumberFormatException If user gives a string instead of a number
+     * @throws NumberFormatException     If user gives a string instead of a number
      */
     public String unmarkItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         StringBuilder result = new StringBuilder();
@@ -79,7 +77,7 @@ public class TaskList {
      *
      * @param command Command is the input that the user gives
      * @throws IndexOutOfBoundsException If user gives a number that exceeds the length of the list
-     * @throws NumberFormatException If user gives a string instead of a number
+     * @throws NumberFormatException     If user gives a string instead of a number
      */
     public String deleteItem(String[] command) throws IndexOutOfBoundsException, NumberFormatException {
         StringBuilder result = new StringBuilder();
@@ -117,12 +115,13 @@ public class TaskList {
 
     /**
      * Prints the tasks that contains the search term.
+     *
      * @param term User wants to find tasks with this term
      * @throws DukeException If user gives an empty string as a search term.
      */
     public void findItem(String term) throws DukeException {
         StringBuilder result = new StringBuilder();
-        if (term.isEmpty()){
+        if (term.isEmpty()) {
             throw new DukeException("Tell me what you're searching for");
         }
         System.out.println("__________________________________");
@@ -139,20 +138,5 @@ public class TaskList {
         }
     }
 
-    /**
-     * Returns the list of tasks in a readable format.
-     * @return String Representing the list of tasks
-     */
-    public String writeItem() {
-        StringBuilder list = new StringBuilder();
-        if (taskArray.size() == 0) {
-            list = new StringBuilder("No items in the list");
-        } else {
-            for (int i = 0; i < taskArray.size(); i++) {
-                String line = String.format("%d. " + taskArray.get(i)+ "\n", i + 1);
-                list.append(line);
-            }
-        }
-        return list.toString();
-    }
 }
+

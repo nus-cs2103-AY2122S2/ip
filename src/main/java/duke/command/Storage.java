@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -21,12 +23,12 @@ public class Storage {
      * Constructor of Storage class.
      *
      * @param strPath String representing path to write the tasks to
-     * @param taskList List of tasks
      */
     public Storage(String strPath, TaskList taskList) {
         this.path = Paths.get(strPath);
         this.taskList = taskList;
         try {
+            assert Files.exists(path);
             if (Files.notExists(path)) {
                 Files.createDirectory(path.getParent());
                 Files.createFile(path);
@@ -43,7 +45,7 @@ public class Storage {
      */
     public void write() {
         try {
-            Files.writeString(path, taskList.writeItem());
+            Files.writeString(path, taskList.listItem());
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

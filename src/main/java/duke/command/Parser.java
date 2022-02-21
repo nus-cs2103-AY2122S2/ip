@@ -25,6 +25,7 @@ public class Parser {
      * @return boolean Returns false if user says "bye", returns true otherwise
      */
     public static String parseInput(String input, TaskList taskList) {
+        assert taskList != null;
         String[] inputArray = input.split(" ");
         String[] tempArray = Arrays.copyOfRange(inputArray, 1, inputArray.length);
         String[] command = {inputArray[0], String.join(" ", tempArray)};
@@ -58,6 +59,7 @@ public class Parser {
     }
 
     private static String parseAddItem(String[] command, TaskList taskList) throws DukeException {
+        assert taskList!= null;
         StringBuilder result = new StringBuilder();
         switch (command[0]) {
         case "todo":

@@ -4,6 +4,8 @@ import duke.DukeException;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,7 +13,7 @@ public class TaskListTest {
     @Test
     public void taskListTest() {
         TaskList taskList = new TaskList();
-        assertEquals(taskList.writeItem(), "No items in the list");
+        assertEquals(taskList.listItem(), "No items in the list");
     }
 
     @Test

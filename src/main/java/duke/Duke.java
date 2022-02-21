@@ -12,41 +12,43 @@ import duke.command.Ui;
  *
  */
 public class Duke {
-    public static TaskList taskList = new TaskList();
-    public static Storage storage = new Storage("data/duke.txt", taskList);
+    public TaskList taskList = new TaskList();
+    public Storage storage = new Storage("data/duke.txt", taskList);
+
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        String result = Parser.parseInput(input, Duke.taskList);
+        assert taskList != null;
+        String result = Parser.parseInput(input, this.taskList);
         storage.write();
         return result;
     }
 
 
-    /**
-     * This is the main method of Duke, which calls the listen method.
-     * @param args Unused
-     * @return void
-     */
-    public static void main(String[] args) {
-        taskList = new TaskList();
-        storage =  new Storage("data/duke.txt", taskList);
-        listen();
-    }
-
-    private static void listen() {
-        Ui.printLogo();
-        boolean isRunning = true;
-        while (isRunning) {
-            isRunning = Ui.run(taskList);
-            storage.write();
-        }
-        System.out.println("__________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("__________________________________");
-    }
+//    /**
+//     * This is the main method of Duke, which calls the listen method.
+//     * @param args Unused
+//     * @return void
+//     */
+//    public static void main(String[] args) {
+//        taskList = new TaskList();
+//        storage =  new Storage("data/duke.txt", taskList);
+//        listen();
+//    }
+//
+//    private static void listen() {
+//        Ui.printLogo();
+//        boolean isRunning = true;
+//        while (isRunning) {
+//            isRunning = Ui.run(taskList);
+//            storage.write();
+//        }
+//        System.out.println("__________________________________");
+//        System.out.println("Bye. Hope to see you again soon!");
+//        System.out.println("__________________________________");
+//    }
 
 }
