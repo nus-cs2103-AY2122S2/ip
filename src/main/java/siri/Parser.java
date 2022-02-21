@@ -9,13 +9,14 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
+
     static public Command parse(String fullCommand) throws InvalidInputException {
         String firstWordOfCommand = getFirstWord(fullCommand);
         int lengthOfFullCommand = fullCommand.length();
         int lengthOfFirstWord = firstWordOfCommand.length();
-
         boolean isEmptyString = firstWordOfCommand.length() == 0;
         boolean isSingleWord = lengthOfFirstWord == lengthOfFullCommand;
+
         if (isEmptyString || !isValidCommand(firstWordOfCommand)) {
             throw new InvalidInputException("Please enter a valid task with a description.");
         } else if (isSingleWord) {
@@ -24,6 +25,8 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
+            case "help":
+                return new HelpCommand();
             default:
                 throw new InvalidInputException("The description of this command cannot be empty.");
             }
@@ -64,6 +67,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the input s is in the valid Date format, e.g 2019-10-10
+     * @param s String of a date
+     * @return boolean True or False
+     */
     public static boolean isDate(String s) {
         try {
             LocalDate.parse(s);
@@ -73,6 +81,11 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Returns the first string word in the specified sentence/command
+     * @param command Full user inputted command
+     * @return first word of the user input
+     */
     public static String getFirstWord(String command) {
         int index = command.indexOf(' ');
         if (index > -1) { // Check if there is more than one word.
@@ -82,16 +95,27 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the string after the specified command
+     * @param command User input command
+     * @return remainder of the string command after specified command
+     */
     public static String getRemainingCommand(String command) {
         int index = command.indexOf(' ');
         int lastIndexOfCommand = command.length();
         return command.substring(index, lastIndexOfCommand).trim(); //Extract first word.
     }
 
+    /**
+     * Checks if the user input for a recognised command, e.g todo, list, mark
+     * @param command User input command
+     * @return boolean True or False
+     */
     public static boolean isValidCommand(String command) {
         return (command.equals("bye") || command.equals("list") || command.equals("find")
                 || command.equals("delete") || command.equals("mark") || command.equals("unmark")
-                || command.equals("todo") || command.equals("deadline") || command.equals("event"));
+                || command.equals("todo") || command.equals("deadline") || command.equals("event")
+                || command.equals("help"));
     }
 
 }

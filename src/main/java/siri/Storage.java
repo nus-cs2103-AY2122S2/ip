@@ -14,6 +14,10 @@ import java.util.ArrayList;
  * Storage handles loading and saving of the user commands into siri.txt.
  */
 public class Storage {
+
+    static final int FIRST_INDEX = 0;
+    static final int SECOND_INDEX = 1;
+    static final int THIRD_INDEX = 2;
     protected String filePath;
 
     public Storage(String filePath) {
@@ -32,20 +36,20 @@ public class Storage {
                 while ((taskDetails = br.readLine()) != null) {
                     Task task;
                     String[] taskDetailsArr  = taskDetails.split("\\s\\|\\s");
-                    String taskInitials = taskDetailsArr[0];
-                    String taskDescription = taskDetailsArr[1];
+                    String taskInitials = taskDetailsArr[FIRST_INDEX];
+                    String taskDescription = taskDetailsArr[SECOND_INDEX];
 
                     switch (taskInitials) {
                     case "T":
                         task = new Todo(taskDescription, taskInitials);
                         break;
                     case "D": {
-                        String taskDate = taskDetailsArr[2];
+                        String taskDate = taskDetailsArr[THIRD_INDEX];
                         task = new Deadline(taskDescription, taskInitials, taskDate);
                         break;
                     }
                     case "E": {
-                        String taskDate = taskDetailsArr[2];
+                        String taskDate = taskDetailsArr[THIRD_INDEX];
                         task = new Event(taskDescription, taskInitials, taskDate);
                         break;
                     }
@@ -57,7 +61,7 @@ public class Storage {
                 return tasks;
 
             } else {
-                return new ArrayList<Task>();
+                return new ArrayList<>();
             }
 
         } catch (IOException e) {
@@ -68,7 +72,7 @@ public class Storage {
     public void save(ArrayList<Task> tasks) throws InvalidInputException {
         try {
             File file = new File("./data/siri.txt");
-            file.getParentFile().mkdirs();
+            //file.getParentFile().mkdirs();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
             for (Task task: tasks) {

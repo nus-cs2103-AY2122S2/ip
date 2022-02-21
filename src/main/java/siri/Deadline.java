@@ -1,7 +1,6 @@
 package siri;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 /**
  * Represents the deadline task
@@ -9,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected LocalDate date;
-    protected LocalDateTime dateTime;
     protected String deadline;
 
     public Deadline(String description, String initialLetter, String deadline) {
