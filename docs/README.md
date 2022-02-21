@@ -112,14 +112,14 @@ Format: `bye`
  Action  | Format, Examples 
  ---| ---
  Todo    | `todo TASK_NAME` </br> e.g., `todo return book`
- Deadline| `deadline TASK_NAME /by DD/MM/YYYY HH:MM` <br/> e.g., `deadline submit project /by 22/02/2022 22:22` 
- Event   | `event TASK_NAME /at DD/MM/YYYY HH:MM` <br/> e.g.,  `event volleyball training /at 24/02/2022 21:00`
+ Deadline| `deadline TASK_NAME /by DD/MM/YYYY HH:MM` <br/>  e.g., `deadline submit project /by 22/02/2022 22:22` 
+ Event   | `event TASK_NAME /at DD/MM/YYYY HH:MM` <br/>  e.g.,  `event volleyball training /at 24/02/2022 21:00`
  List    | `list`
  Sort    | `sort`
- Find    | `find KEYWORD` <br/> e.g., `find meeting`
- Mark    | `mark INDEX` <br/> e.g., `mark 4`
- Unmark  | `unmark INDEX` <br/> e.g., `unmark 4`
- Delete  | `delete INDEX` <br/> e.g., `delete 3`
+ Find    | `find KEYWORD` <br/>  e.g., `find meeting`
+ Mark    | `mark INDEX` <br/>  e.g., `mark 4`
+ Unmark  | `unmark INDEX` <br/>  e.g., `unmark 4`
+ Delete  | `delete INDEX` <br/>  e.g., `delete 3`
  Exit    | `bye`
 
 ## References
