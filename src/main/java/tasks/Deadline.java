@@ -22,6 +22,7 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+
     /**
      * Getter to return the time of the deadline.
      * @return String time.

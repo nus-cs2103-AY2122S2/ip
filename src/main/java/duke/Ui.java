@@ -206,6 +206,33 @@ public class Ui {
                     Task taskToBeDeleted = TaskList.getTask(taskIndex - 1);
                     display("  " + taskToBeDeleted);
                     TaskList.delete(taskIndex - 1);
+                } else if (command.equals("snooze")) {
+                    //display(description);
+                    String[] intAndDate = description.split(" ");
+                    //display(intAndDate[2]);
+                    LocalDate date = LocalDate.parse(intAndDate[2]);
+                    String deadlineTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    int taskIndex = Integer.parseInt(intAndDate[1]);
+                    //display(taskIndex);
+                    Task task = TaskList.dukeList.get(taskIndex - 1);
+                    //display(task);
+                    displayLine();
+                    if (task instanceof ToDo){
+
+                        display("This is a ToDo task, it cannot be snoozed :(");
+                    } else if (task instanceof Deadline) {
+                        String taskDescription = task.getDescription();
+                        Deadline deadline = new Deadline(taskDescription, deadlineTime);
+                        TaskList.dukeList.set(taskIndex - 1, deadline);
+                        display("Okay, I have snoozed the task for you");
+                    } else {
+                        String taskDescription = task.getDescription();
+                        Event event = new Event(taskDescription, deadlineTime);
+                        TaskList.dukeList.set(taskIndex - 1, event);
+                        display("Okay, I have snoozed the task for you");
+                    }
+                    displayLine();
+
                 } else {
                     throw new DukeUnknownCommandException();
                 }
