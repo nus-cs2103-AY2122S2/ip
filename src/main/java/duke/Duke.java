@@ -23,6 +23,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Simply outputs the initial Duke logo to indicate running of program
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 
         String logo = " ____        _        \n"
@@ -35,6 +40,11 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Greets and accepts commands from users. Also parses commands to create appropriate objects and call necessary
+     * functions.
+     * @throws IOException
+     */
     public void run() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         ui.greet();

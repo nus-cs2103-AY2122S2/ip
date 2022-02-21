@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * A class that focuses on creating data/tasks.txt on the users hard disk alongside reading from and writing to it.
+ */
 public class Storage {
     private final File f;
 
@@ -12,6 +15,13 @@ public class Storage {
         this.f = new File(filePath);
     }
 
+    /**
+     * Firstly, checks if the data/tasks.txt file already exists on the user's system. If not, it creates the file in
+     * the appropriate location.
+     * It mainly, then, reads the file's data and calls the appropriate parsing functions to add the appropriate task
+     * objects the tasklist manager.
+     * @throws CustomException if the file cannot be created on the user's system
+     */
     public void load() throws CustomException {
         try {
             if (!(f.exists() && !f.isDirectory())) {
@@ -32,6 +42,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Does an initial check for existence of the file. If not, it creates the file in the desired location.
+     * Then writes all the tasks from the Tasklist manager to the file in it's appropriate format
+     */
     public void addToFile() {
         try {
             if (!(f.exists() && !f.isDirectory())) {
