@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -56,20 +57,24 @@ public class Duke {
 
             } else if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
 
-                System.out.println(INDENT+"Got it. I've added this task:");
-                switch (cmd) {
-                    case "todo":
-                        tasks.add(new Todo(tasks.size()+1, input.split(cmd)[1]));
-                        break;
-                    case "deadline":
-                        tasks.add(new Deadline(tasks.size()+1, input.split(cmd)[1]));
-                        break;
-                    case "event":
-                        tasks.add(new Event(tasks.size()+1, input.split(cmd)[1]));
-                        break;
+                try {
+                    switch (cmd) {
+                        case "todo":
+                            tasks.add(new Todo(tasks.size()+1, input.split(cmd)[1]));
+                            break;
+                        case "deadline":
+                            tasks.add(new Deadline(tasks.size()+1, input.split(cmd)[1]));
+                            break;
+                        case "event":
+                            tasks.add(new Event(tasks.size()+1, input.split(cmd)[1]));
+                            break;
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println(INDENT+"Plz input date in a valid date-time format.");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(INDENT+"Plz include a task deadline");
                 }
-                System.out.println(INDENT+"  "+tasks.get(tasks.size()-1));
-                System.out.println(INDENT+"Now you have "+tasks.size()+" tasks in the list.");
+
 
             } else if (cmd.equals("delete")) {
 
