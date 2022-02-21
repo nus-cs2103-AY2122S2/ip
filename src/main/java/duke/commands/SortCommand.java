@@ -22,6 +22,10 @@ public class SortCommand extends Command {
     }
 
     private static String priorityQueueStringFormat(PriorityQueue<? extends Task> pq) {
+        if(pq.isEmpty()) {
+            return "You have no such tasks\n";
+        }
+
         int index = 1;
         StringBuilder numberedPriorityQueue = new StringBuilder();
         while (!pq.isEmpty()) {
