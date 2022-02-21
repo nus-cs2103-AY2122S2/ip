@@ -30,6 +30,8 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
+            case "sort":
+                return new SortCommand();
             case "mark":
                 return new MarkCommand(parseIndex(parsedUserInput[1]));
             case "unmark":

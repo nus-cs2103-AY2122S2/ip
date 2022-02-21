@@ -1,5 +1,9 @@
 package duke.tasks;
 
+import duke.exceptions.DukeUnsupportedOperationException;
+
+import java.time.LocalDateTime;
+
 /**
  * Parent Class of all duke tasks.
  */
@@ -38,6 +42,10 @@ public class Task {
      */
     public String getContent() {
         return content;
+    }
+
+    public LocalDateTime getDate() {
+        return LocalDateTime.MIN;
     }
 
     /**

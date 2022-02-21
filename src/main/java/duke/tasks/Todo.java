@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * Todos are tasks that have no dates involved.
  */
@@ -12,6 +14,11 @@ public class Todo extends Task{
      */
     public Todo(String content) {
         super(content);
+    }
+
+    @Override
+    public LocalDateTime getDate() {
+        return LocalDateTime.MIN;
     }
 
     /**

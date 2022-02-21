@@ -22,6 +22,11 @@ public class Event extends Task {
         this.date = date;
     }
 
+    @Override
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+
     /**
      * Adds Event indicator at the front and the date time to the back of Task string.
      *
