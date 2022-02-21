@@ -4,6 +4,7 @@ import exceptions.DukeInvalidInput;
 import exceptions.DukeInvalidTodo;
 
 import java.io.*;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -43,13 +44,29 @@ public class Duke {
                     Ui.printList(lists, lists.size());
                     break;
                 case "mark":
-                    taskList.mark(textSplit[1], lists);
+                    for(int i = 1; i < textSplit.length; i++) {
+                        taskList.mark(textSplit[i], lists);
+
+                    }
                     break;
                 case "unmark":
-                    taskList.unmark(textSplit[1], lists);
+                    for(int i = 1; i < textSplit.length; i++) {
+                        taskList.unmark(textSplit[i], lists);
+
+                    }
                     break;
                 case "delete" :
-                    taskList.delete(textSplit[1], lists);
+                    ArrayList<Integer> array = new ArrayList<>();
+                    for(int i = 1; i < textSplit.length; i++) {
+                        Integer integer = Integer.parseInt(textSplit[i]);
+                        array.add(integer);
+                    }
+                    Collections.sort(array, Collections.reverseOrder());
+//                    System.out.println(array);
+                    for(int i = 0; i < array.size(); i++) {
+//                        System.out.println(textSplit[i]);
+                        taskList.delete(String.valueOf(array.get(i)), lists);
+                    }
                     break;
                 case "todo":
                     try {
