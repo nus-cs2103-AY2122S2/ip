@@ -1,3 +1,6 @@
-event / 0 / birthday party / 2021-01-23
-deadline / 1 / homework / 2023-01-23
-note / cs2105
+todo / 0 / finish CS2103T Ip
+todo / 0 / finish CS2103T Ip
+event / 0 / Jason's birthday party / 2021-02-22
+event / 0 / Jason's birthday party / 2021-02-22
+deadline / 0 / CS2103T Tp / 2021-04-21
+deadline / 0 / CS2103T Tp / 2021-04-21
