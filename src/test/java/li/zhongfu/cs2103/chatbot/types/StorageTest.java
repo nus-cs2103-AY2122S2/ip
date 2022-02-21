@@ -40,7 +40,7 @@ public class StorageTest {
 
     @Test
     public void saveAndLoad_whitelistedTypes() throws IOException, StorageException {
-        List<? super Task> objects = new ArrayList<>();
+        List<Task> objects = new ArrayList<>();
         objects.add(new Deadline("random deadline", LocalDateTime.now().plusDays(4)));
         objects.add(new Event("random event", LocalDateTime.now().plusMinutes(30)));
         objects.add(new ToDo("hello world"));
@@ -52,7 +52,7 @@ public class StorageTest {
 
     @Test
     public void saveAndLoad_unwhitelistedTypes() throws IOException {
-        List<? super Object> objects = new ArrayList<>();
+        List<Serializable> objects = new ArrayList<>();
         objects.add(new TestClass());
         storage.save(objects);
         assertThrows(StorageException.class, () -> storage.load());
