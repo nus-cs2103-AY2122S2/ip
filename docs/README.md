@@ -191,12 +191,12 @@ Below is the table for the formatting of each element:
 
 |Element|Description|Formats|
 |:---:|---|---|
-|`DAY`|Day of the month.|`02`, `2`|
-|`MONTH`|Month of the year.|`04`, `Apr`, `April`|
+|`DAY`|Day of the month.|`02` (standard), `2`|
+|`MONTH`|Month of the year.|`04` (standard), `Apr`, `April`|
 |`YEAR`|Year.|`2022`|
 |`HOUR`|Hour of the day (24 hr).|`19`|
 |`MINUTE`|Minute of the hour. |`30`|
-|`D_SEPARATOR`|Date separator. Optional.|space, `-`, `/` (`MONTH` is a number)|
+|`D_SEPARATOR`|Date separator. Optional.|space, `-`, `/` (`DAY` and `MONTH` as standard)|
 |`T_SEPARATOR`|Time separator. Optional.|space, `-`, `:`|
 
 The entire time component of any date and time is optional.

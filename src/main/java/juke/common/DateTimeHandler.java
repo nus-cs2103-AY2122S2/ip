@@ -24,7 +24,6 @@ public class DateTimeHandler {
      */
     private static final List<String> DATE_TIME_PATTERNS = List.of(
             "dd[[-][/][ ]]MM[[-][/][ ]]uuuu[ HH[[-][:][ ]]mm]",
-            "d[[-][/][ ]]MM[[-][/][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "dd[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "d[[-][ ]]MMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
             "dd[[-][ ]]MMMM[[-][ ]]uuuu[ HH[[-][:][ ]]mm]",
